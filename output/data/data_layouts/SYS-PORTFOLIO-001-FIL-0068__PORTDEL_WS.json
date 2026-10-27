@@ -1,0 +1,113 @@
+{
+  "id": "PORTDEL",
+  "source_type": "program_ws",
+  "source_file": "src/programs/portfolio/PORTDEL.cbl",
+  "used_by_programs": ["PORTDEL"],
+  "total_fields": 34,
+  "total_bytes": 234,
+  "system_id": "SYS-PORTFOLIO-001",
+  "file_id": "SYS-PORTFOLIO-001-FIL-0068",
+  "path_id": "SYS-PORTFOLIO-001-PATH-0068",
+  "data_run_id": "DRUN-20261024T215053Z-ACC1",
+  "records": [
+    {"type": "copy_expansion", "section": "FILE", "section_id": "SYS-PORTFOLIO-001-FIL-0068-SEC-0003", "fd_name": "PORTFOLIO-FILE", "holder": null, "copybook": "PORTFLIO", "copybook_file_id": "SYS-PORTFOLIO-001-FIL-0009", "line": 42, "include_kind": "COPY", "replacing": null,
+     "layout_file": "data_layouts/SYS-PORTFOLIO-001-FIL-0009__PORTFLIO.json",
+     "records": [
+       {"record_id": "SYS-PORTFOLIO-001-FIL-0009-REC-0001", "name": "PORT-RECORD", "level": 1, "total_bytes": 148, "expanded_from": {"copybook": "PORTFLIO", "copybook_file_id": "SYS-PORTFOLIO-001-FIL-0009", "line": 42, "replacing": null}}
+     ]},
+    {
+      "record_id": "SYS-PORTFOLIO-001-FIL-0068-REC-0001",
+      "section": "FILE", "section_id": "SYS-PORTFOLIO-001-FIL-0068-SEC-0003", "fd_name": "DELETE-FILE",
+      "is_fragment": false, "level": 1, "name": "DELETE-RECORD",
+      "pic": null, "type": "GROUP", "storage_type": "DISPLAY", "bytes": 80, "total_bytes": 80, "inline_bytes": 80,
+      "redefines": null, "occurs": null, "value": null, "line": 45, "end_line": 53,
+      "children": [
+        {"field_id": "SYS-PORTFOLIO-001-FIL-0068-FLD-000001", "path": "DEL-KEY", "level": 5, "name": "DEL-KEY", "pic": null, "type": "GROUP", "bytes": 18, "redefines": null, "occurs": null, "value": null, "line": 46, "children": [
+          {"field_id": "SYS-PORTFOLIO-001-FIL-0068-FLD-000002", "path": "DEL-KEY.DEL-ID", "level": 10, "name": "DEL-ID", "pic": "X(8)", "pic_parsed": {"raw": "X(8)", "normalized_type": "STRING", "length": 8, "decimal_places": 0, "signed": false, "storage_type": "DISPLAY"}, "bytes": 8, "redefines": null, "occurs": null, "value": null, "line": 47, "children": []},
+          {"field_id": "SYS-PORTFOLIO-001-FIL-0068-FLD-000003", "path": "DEL-KEY.DEL-ACCT-NO", "level": 10, "name": "DEL-ACCT-NO", "pic": "X(10)", "pic_parsed": {"raw": "X(10)", "normalized_type": "STRING", "length": 10, "decimal_places": 0, "signed": false, "storage_type": "DISPLAY"}, "bytes": 10, "redefines": null, "occurs": null, "value": null, "line": 48, "children": []}
+        ]},
+        {"field_id": "SYS-PORTFOLIO-001-FIL-0068-FLD-000004", "path": "DEL-REASON-CODE", "level": 5, "name": "DEL-REASON-CODE", "pic": "X(2)", "pic_parsed": {"raw": "X(2)", "normalized_type": "STRING", "length": 2, "decimal_places": 0, "signed": false, "storage_type": "DISPLAY"}, "bytes": 2, "redefines": null, "occurs": null, "value": null, "line": 49, "children": [
+          {"field_id": "SYS-PORTFOLIO-001-FIL-0068-FLD-000005", "path": "DEL-REASON-CODE.DEL-CLOSED", "level": 88, "name": "DEL-CLOSED", "pic": null, "type": "CONDITION", "parent_field": "DEL-REASON-CODE", "value": null, "values_raw": "'01'", "values": ["01"], "line": 50, "children": []},
+          {"field_id": "SYS-PORTFOLIO-001-FIL-0068-FLD-000006", "path": "DEL-REASON-CODE.DEL-TRANSFERRED", "level": 88, "name": "DEL-TRANSFERRED", "pic": null, "type": "CONDITION", "parent_field": "DEL-REASON-CODE", "value": null, "values_raw": "'02'", "values": ["02"], "line": 51, "children": []},
+          {"field_id": "SYS-PORTFOLIO-001-FIL-0068-FLD-000007", "path": "DEL-REASON-CODE.DEL-REQUESTED", "level": 88, "name": "DEL-REQUESTED", "pic": null, "type": "CONDITION", "parent_field": "DEL-REASON-CODE", "value": null, "values_raw": "'03'", "values": ["03"], "line": 52, "children": []}
+        ]},
+        {"field_id": "SYS-PORTFOLIO-001-FIL-0068-FLD-000008", "path": "DEL-FILLER", "level": 5, "name": "DEL-FILLER", "pic": "X(60)", "pic_parsed": {"raw": "X(60)", "normalized_type": "STRING", "length": 60, "decimal_places": 0, "signed": false, "storage_type": "DISPLAY"}, "bytes": 60, "redefines": null, "occurs": null, "value": null, "line": 53, "children": []}
+      ]
+    },
+    {
+      "record_id": "SYS-PORTFOLIO-001-FIL-0068-REC-0002",
+      "section": "FILE", "section_id": "SYS-PORTFOLIO-001-FIL-0068-SEC-0003", "fd_name": "AUDIT-FILE",
+      "is_fragment": false, "level": 1, "name": "AUDIT-RECORD",
+      "pic": null, "type": "GROUP", "storage_type": "DISPLAY", "bytes": 80, "total_bytes": 80, "inline_bytes": 80,
+      "redefines": null, "occurs": null, "value": null, "line": 56, "end_line": 62,
+      "children": [
+        {"field_id": "SYS-PORTFOLIO-001-FIL-0068-FLD-000009", "path": "AUD-TIMESTAMP", "level": 5, "name": "AUD-TIMESTAMP", "pic": "X(26)", "pic_parsed": {"raw": "X(26)", "normalized_type": "STRING", "length": 26, "decimal_places": 0, "signed": false, "storage_type": "DISPLAY"}, "bytes": 26, "redefines": null, "occurs": null, "value": null, "line": 57, "children": []},
+        {"field_id": "SYS-PORTFOLIO-001-FIL-0068-FLD-000010", "path": "AUD-ACTION", "level": 5, "name": "AUD-ACTION", "pic": "X(6)", "pic_parsed": {"raw": "X(6)", "normalized_type": "STRING", "length": 6, "decimal_places": 0, "signed": false, "storage_type": "DISPLAY"}, "bytes": 6, "redefines": null, "occurs": null, "value": null, "line": 58, "children": []},
+        {"field_id": "SYS-PORTFOLIO-001-FIL-0068-FLD-000011", "path": "AUD-KEY", "level": 5, "name": "AUD-KEY", "pic": "X(18)", "pic_parsed": {"raw": "X(18)", "normalized_type": "STRING", "length": 18, "decimal_places": 0, "signed": false, "storage_type": "DISPLAY"}, "bytes": 18, "redefines": null, "occurs": null, "value": null, "line": 59, "children": []},
+        {"field_id": "SYS-PORTFOLIO-001-FIL-0068-FLD-000012", "path": "AUD-REASON", "level": 5, "name": "AUD-REASON", "pic": "X(2)", "pic_parsed": {"raw": "X(2)", "normalized_type": "STRING", "length": 2, "decimal_places": 0, "signed": false, "storage_type": "DISPLAY"}, "bytes": 2, "redefines": null, "occurs": null, "value": null, "line": 60, "children": []},
+        {"field_id": "SYS-PORTFOLIO-001-FIL-0068-FLD-000013", "path": "AUD-STATUS", "level": 5, "name": "AUD-STATUS", "pic": "X(1)", "pic_parsed": {"raw": "X(1)", "normalized_type": "STRING", "length": 1, "decimal_places": 0, "signed": false, "storage_type": "DISPLAY"}, "bytes": 1, "redefines": null, "occurs": null, "value": null, "line": 61, "children": []},
+        {"field_id": "SYS-PORTFOLIO-001-FIL-0068-FLD-000014", "path": "AUD-FILLER", "level": 5, "name": "AUD-FILLER", "pic": "X(27)", "pic_parsed": {"raw": "X(27)", "normalized_type": "STRING", "length": 27, "decimal_places": 0, "signed": false, "storage_type": "DISPLAY"}, "bytes": 27, "redefines": null, "occurs": null, "value": null, "line": 62, "children": []}
+      ]
+    },
+    {
+      "record_id": "SYS-PORTFOLIO-001-FIL-0068-REC-0003",
+      "section": "WORKING-STORAGE", "section_id": "SYS-PORTFOLIO-001-FIL-0068-SEC-0004", "fd_name": null,
+      "is_fragment": false, "level": 1, "name": "WS-CONSTANTS",
+      "pic": null, "type": "GROUP", "storage_type": "DISPLAY", "bytes": 16, "total_bytes": 16, "inline_bytes": 16,
+      "redefines": null, "occurs": null, "value": null, "line": 68, "end_line": 71,
+      "children": [
+        {"field_id": "SYS-PORTFOLIO-001-FIL-0068-FLD-000015", "path": "WS-PROGRAM-NAME", "level": 5, "name": "WS-PROGRAM-NAME", "pic": "X(08)", "pic_parsed": {"raw": "X(08)", "normalized_type": "STRING", "length": 8, "decimal_places": 0, "signed": false, "storage_type": "DISPLAY"}, "bytes": 8, "redefines": null, "occurs": null, "value": "'PORTDEL  '", "line": 69, "children": []},
+        {"field_id": "SYS-PORTFOLIO-001-FIL-0068-FLD-000016", "path": "WS-SUCCESS", "level": 5, "name": "WS-SUCCESS", "pic": "S9(4)", "pic_parsed": {"raw": "S9(4)", "normalized_type": "SIGNED_INTEGER", "length": 4, "decimal_places": 0, "signed": true, "storage_type": "DISPLAY"}, "bytes": 4, "redefines": null, "occurs": null, "value": "+0", "line": 70, "children": []},
+        {"field_id": "SYS-PORTFOLIO-001-FIL-0068-FLD-000017", "path": "WS-ERROR", "level": 5, "name": "WS-ERROR", "pic": "S9(4)", "pic_parsed": {"raw": "S9(4)", "normalized_type": "SIGNED_INTEGER", "length": 4, "decimal_places": 0, "signed": true, "storage_type": "DISPLAY"}, "bytes": 4, "redefines": null, "occurs": null, "value": "+8", "line": 71, "children": []}
+      ]
+    },
+    {
+      "record_id": "SYS-PORTFOLIO-001-FIL-0068-REC-0004",
+      "section": "WORKING-STORAGE", "section_id": "SYS-PORTFOLIO-001-FIL-0068-SEC-0004", "fd_name": null,
+      "is_fragment": false, "level": 1, "name": "WS-SWITCHES",
+      "pic": null, "type": "GROUP", "storage_type": "DISPLAY", "bytes": 7, "total_bytes": 7, "inline_bytes": 7,
+      "redefines": null, "occurs": null, "value": null, "line": 73, "end_line": 88,
+      "children": [
+        {"field_id": "SYS-PORTFOLIO-001-FIL-0068-FLD-000018", "path": "WS-FILE-STATUS", "level": 5, "name": "WS-FILE-STATUS", "pic": "X(02)", "pic_parsed": {"raw": "X(02)", "normalized_type": "STRING", "length": 2, "decimal_places": 0, "signed": false, "storage_type": "DISPLAY"}, "bytes": 2, "redefines": null, "occurs": null, "value": null, "line": 74, "children": [
+          {"field_id": "SYS-PORTFOLIO-001-FIL-0068-FLD-000019", "path": "WS-FILE-STATUS.WS-SUCCESS-STATUS", "level": 88, "name": "WS-SUCCESS-STATUS", "pic": null, "type": "CONDITION", "parent_field": "WS-FILE-STATUS", "value": null, "values_raw": "'00'", "values": ["00"], "line": 75, "children": []},
+          {"field_id": "SYS-PORTFOLIO-001-FIL-0068-FLD-000020", "path": "WS-FILE-STATUS.WS-REC-NOT-FND", "level": 88, "name": "WS-REC-NOT-FND", "pic": null, "type": "CONDITION", "parent_field": "WS-FILE-STATUS", "value": null, "values_raw": "'23'", "values": ["23"], "line": 76, "children": []},
+          {"field_id": "SYS-PORTFOLIO-001-FIL-0068-FLD-000021", "path": "WS-FILE-STATUS.WS-EOF-STATUS", "level": 88, "name": "WS-EOF-STATUS", "pic": null, "type": "CONDITION", "parent_field": "WS-FILE-STATUS", "value": null, "values_raw": "'10'", "values": ["10"], "line": 77, "children": []}
+        ]},
+        {"field_id": "SYS-PORTFOLIO-001-FIL-0068-FLD-000022", "path": "WS-DEL-STATUS", "level": 5, "name": "WS-DEL-STATUS", "pic": "X(02)", "pic_parsed": {"raw": "X(02)", "normalized_type": "STRING", "length": 2, "decimal_places": 0, "signed": false, "storage_type": "DISPLAY"}, "bytes": 2, "redefines": null, "occurs": null, "value": null, "line": 79, "children": [
+          {"field_id": "SYS-PORTFOLIO-001-FIL-0068-FLD-000023", "path": "WS-DEL-STATUS.WS-DEL-SUCCESS", "level": 88, "name": "WS-DEL-SUCCESS", "pic": null, "type": "CONDITION", "parent_field": "WS-DEL-STATUS", "value": null, "values_raw": "'00'", "values": ["00"], "line": 80, "children": []},
+          {"field_id": "SYS-PORTFOLIO-001-FIL-0068-FLD-000024", "path": "WS-DEL-STATUS.WS-DEL-EOF", "level": 88, "name": "WS-DEL-EOF", "pic": null, "type": "CONDITION", "parent_field": "WS-DEL-STATUS", "value": null, "values_raw": "'10'", "values": ["10"], "line": 81, "children": []}
+        ]},
+        {"field_id": "SYS-PORTFOLIO-001-FIL-0068-FLD-000025", "path": "WS-AUD-STATUS", "level": 5, "name": "WS-AUD-STATUS", "pic": "X(02)", "pic_parsed": {"raw": "X(02)", "normalized_type": "STRING", "length": 2, "decimal_places": 0, "signed": false, "storage_type": "DISPLAY"}, "bytes": 2, "redefines": null, "occurs": null, "value": null, "line": 83, "children": [
+          {"field_id": "SYS-PORTFOLIO-001-FIL-0068-FLD-000026", "path": "WS-AUD-STATUS.WS-AUD-SUCCESS", "level": 88, "name": "WS-AUD-SUCCESS", "pic": null, "type": "CONDITION", "parent_field": "WS-AUD-STATUS", "value": null, "values_raw": "'00'", "values": ["00"], "line": 84, "children": []}
+        ]},
+        {"field_id": "SYS-PORTFOLIO-001-FIL-0068-FLD-000027", "path": "WS-END-OF-FILE-SW", "level": 5, "name": "WS-END-OF-FILE-SW", "pic": "X", "pic_parsed": {"raw": "X", "normalized_type": "STRING", "length": 1, "decimal_places": 0, "signed": false, "storage_type": "DISPLAY"}, "bytes": 1, "redefines": null, "occurs": null, "value": "'N'", "line": 86, "children": [
+          {"field_id": "SYS-PORTFOLIO-001-FIL-0068-FLD-000028", "path": "WS-END-OF-FILE-SW.END-OF-FILE", "level": 88, "name": "END-OF-FILE", "pic": null, "type": "CONDITION", "parent_field": "WS-END-OF-FILE-SW", "value": null, "values_raw": "'Y'", "values": ["Y"], "line": 87, "children": []},
+          {"field_id": "SYS-PORTFOLIO-001-FIL-0068-FLD-000029", "path": "WS-END-OF-FILE-SW.NOT-END-OF-FILE", "level": 88, "name": "NOT-END-OF-FILE", "pic": null, "type": "CONDITION", "parent_field": "WS-END-OF-FILE-SW", "value": null, "values_raw": "'N'", "values": ["N"], "line": 88, "children": []}
+        ]}
+      ]
+    },
+    {
+      "record_id": "SYS-PORTFOLIO-001-FIL-0068-REC-0005",
+      "section": "WORKING-STORAGE", "section_id": "SYS-PORTFOLIO-001-FIL-0068-SEC-0004", "fd_name": null,
+      "is_fragment": false, "level": 1, "name": "WS-WORK-AREAS",
+      "pic": null, "type": "GROUP", "storage_type": "DISPLAY", "bytes": 51, "total_bytes": 51, "inline_bytes": 51,
+      "redefines": null, "occurs": null, "value": null, "line": 93, "end_line": 98,
+      "children": [
+        {"field_id": "SYS-PORTFOLIO-001-FIL-0068-FLD-000030", "path": "WS-DELETE-COUNT", "level": 5, "name": "WS-DELETE-COUNT", "pic": "9(7)", "pic_parsed": {"raw": "9(7)", "normalized_type": "INTEGER", "length": 7, "decimal_places": 0, "signed": false, "storage_type": "DISPLAY"}, "bytes": 7, "redefines": null, "occurs": null, "value": "ZERO", "line": 94, "children": []},
+        {"field_id": "SYS-PORTFOLIO-001-FIL-0068-FLD-000031", "path": "WS-ERROR-COUNT", "level": 5, "name": "WS-ERROR-COUNT", "pic": "9(7)", "pic_parsed": {"raw": "9(7)", "normalized_type": "INTEGER", "length": 7, "decimal_places": 0, "signed": false, "storage_type": "DISPLAY"}, "bytes": 7, "redefines": null, "occurs": null, "value": "ZERO", "line": 95, "children": []},
+        {"field_id": "SYS-PORTFOLIO-001-FIL-0068-FLD-000032", "path": "WS-NOT-FND-COUNT", "level": 5, "name": "WS-NOT-FND-COUNT", "pic": "9(7)", "pic_parsed": {"raw": "9(7)", "normalized_type": "INTEGER", "length": 7, "decimal_places": 0, "signed": false, "storage_type": "DISPLAY"}, "bytes": 7, "redefines": null, "occurs": null, "value": "ZERO", "line": 96, "children": []},
+        {"field_id": "SYS-PORTFOLIO-001-FIL-0068-FLD-000033", "path": "WS-RETURN-CODE", "level": 5, "name": "WS-RETURN-CODE", "pic": "S9(4)", "pic_parsed": {"raw": "S9(4)", "normalized_type": "SIGNED_INTEGER", "length": 4, "decimal_places": 0, "signed": true, "storage_type": "DISPLAY"}, "bytes": 4, "redefines": null, "occurs": null, "value": "+0", "line": 97, "children": []},
+        {"field_id": "SYS-PORTFOLIO-001-FIL-0068-FLD-000034", "path": "WS-TIMESTAMP", "level": 5, "name": "WS-TIMESTAMP", "pic": "X(26)", "pic_parsed": {"raw": "X(26)", "normalized_type": "STRING", "length": 26, "decimal_places": 0, "signed": false, "storage_type": "DISPLAY"}, "bytes": 26, "redefines": null, "occurs": null, "value": null, "line": 98, "children": []}
+      ]
+    }
+  ],
+  "copy_expansions": [
+    {"holder_local_id": null, "holder_id": null, "section_id": "SYS-PORTFOLIO-001-FIL-0068-SEC-0003", "copybook": "PORTFLIO", "copybook_file_id": "SYS-PORTFOLIO-001-FIL-0009", "line": 42, "include_kind": "COPY", "replacing": null, "target_record_ids": ["SYS-PORTFOLIO-001-FIL-0009-REC-0001"]}
+  ],
+  "unresolved_copy_stubs": [],
+  "layout_issues": [
+    {"severity": "warning", "type": "misplaced_comment_indicator", "file_id": "SYS-PORTFOLIO-001-FIL-0068", "source_id": "PORTDEL", "line": 1, "message": "Line 1 has '*' as the first non-blank character in column 8 (Area A) instead of the column 7 indicator; skipped as a comment."},
+    {"severity": "info", "type": "section_level_copy_expansion", "file_id": "SYS-PORTFOLIO-001-FIL-0068", "source_id": "PORTDEL", "line": 42, "message": "COPY PORTFLIO (line 42) sits directly under FD PORTFOLIO-FILE with no enclosing 01; EXPANDS_COPY is held by the FILE SECTION (SYS-PORTFOLIO-001-FIL-0068-SEC-0003). Its 148 bytes (PORT-RECORD) count only in the copybook's own record, not in this file's total_bytes."},
+    {"severity": "info", "type": "value_literal_longer_than_pic", "file_id": "SYS-PORTFOLIO-001-FIL-0068", "source_id": "PORTDEL", "line": 69, "message": "WS-PROGRAM-NAME PIC X(08) has VALUE 'PORTDEL  ' (9 characters including two trailing spaces). Literal recorded as written, not evaluated."}
+  ]
+}

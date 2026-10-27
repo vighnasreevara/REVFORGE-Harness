@@ -1,0 +1,395 @@
+{
+"program_summary": {"program_id": "CURSMGR", "file_id": "SYS-PORTFOLIO-001-FIL-0059", "logic_file": "program_logic/SYS-PORTFOLIO-001-FIL-0059__CURSMGR_logic.json", "logic_status": "partial", "paragraphs_translated": 5, "execution_paths": 1, "branches": 4, "loops": 0, "dead_code_confirmed": 0, "goto_annotations": 0, "unresolvable_paths": 2, "unresolved_ids": 3},
+"meta": {"generated_at": "2026-10-26T16:20:27Z", "agent_version": "4_logic@1.0", "logic_run_id": "LRUN-20261026T162027Z-20307", "logic_worker_id": "LWKR-20261026T162027Z-282466101", "run_id_note": "run-local identifiers of this execution, not permanent IDs", "source_artifacts": ["output/parser/parser_artifact.json", "output/parser/raw_structure/SYS-PORTFOLIO-001-FIL-0059__CURSMGR.json", "output/data/data_artifact.json", "output/data/data_layouts/SYS-PORTFOLIO-001-FIL-0059__CURSMGR_WS.json", "output/data/data_layouts/SYS-PORTFOLIO-001-FIL-0017__SQLCA.json"], "neo4j_access": "read-only"},
+"program_id": "CURSMGR",
+"system_id": "SYS-PORTFOLIO-001",
+"file_id": "SYS-PORTFOLIO-001-FIL-0059",
+"path_id": "SYS-PORTFOLIO-001-PATH-0059",
+"relative_path": "src/programs/online/CURSMGR.cbl",
+"parse_run_id": "PRUN-20261025T163852Z-6235",
+"data_run_id": "DRUN-20261025T170230Z-21060",
+"upstream": {
+  "verification": {
+    "verdict": "VALID_PARTIAL",
+    "verdict_reasons": ["Agent 2 parse_status is 'partial' (truncated source: P300-FETCH-DATA, P300-EXIT, P400-CLOSE-CURSOR, P400-EXIT not present)"],
+    "v1": {"raw_structure": "present", "parse_status": "partial", "program_layout": "present", "copybook_layouts": [{"copybook": "SQLCA", "copybook_file_id": "SYS-PORTFOLIO-001-FIL-0017", "layout": "present"}], "unresolved_copy_stubs": 0},
+    "v2_file_identities": {
+      "program_entries": {"require_completed": ["parser", "data"], "entries": ["raw_structure|SYS-PORTFOLIO-001-FIL-0059", "data_layout|SYS-PORTFOLIO-001-FIL-0059"], "result": "batched with CKPRST and POSUPDT program entries: checked 6, ok 6, problems [], duplicates [], consistent true"},
+      "copybook_entries": {"require_completed": ["data"], "entries": ["data_layout|SYS-PORTFOLIO-001-FIL-0017"], "result": "batched with copybooks FIL-0003 and FIL-0012: checked 3, ok 3, problems [], duplicates [], consistent true"},
+      "consistent": true
+    },
+    "v3_structure_identities": {"sections_checked": 2, "paragraphs_checked": 5, "statements_checked": 20, "edges_checked": 4, "registered_edges": 4, "section_problems": [], "paragraph_problems": [], "statement_problems": [], "edge_problems": [], "invalid_registered_edges": [], "registered_not_in_json": {"missing_count": 0}, "duplicate_ids_in_json": [], "consistent": true, "note": "data-division section names were sent as null (raw_structure does not carry them); edges: two per resolved PERFORM_THRU (STMT-000014 -> PAR-0002, PAR-0003; STMT-000016 -> PAR-0004, PAR-0005); the unresolved PERFORM_THRU statements STMT-000015 and STMT-000013 have no relationship"},
+    "v4_data_identities": [
+      {"file_id": "SYS-PORTFOLIO-001-FIL-0059", "layout": "program", "records_checked": 4, "fields_checked": 18, "expansions_checked": 1, "record_problems": [], "field_problems": [], "expansion_problems": [], "copybook_records_in_program": 0, "registered_not_in_json": {"missing_count": 0}, "duplicate_ids_in_json": [], "consistent": true},
+      {"file_id": "SYS-PORTFOLIO-001-FIL-0017", "layout": "copybook SQLCA", "records_checked": 1, "fields_checked": 7, "expansions_checked": 0, "record_problems": [], "field_problems": [], "expansion_problems": [], "copybook_records_in_program": 0, "registered_not_in_json": {"missing_count": 0}, "duplicate_ids_in_json": [], "consistent": true}
+    ]
+  }
+},
+"execution_traces": [
+  {
+    "entry_point": "(UNNAMED)",
+    "entry_point_id": "SYS-PORTFOLIO-001-FIL-0059-PAR-0001",
+    "entry_type": "online_main",
+    "entry_note": "Statements between PROCEDURE DIVISION USING CURSOR-REQUEST-AREA (line 43) and the first paragraph name (line 61); the program ends with EXEC CICS RETURN",
+    "steps": [
+      {"step": 1, "paragraph": "(UNNAMED)", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0059-PAR-0001", "action": "EVALUATE", "target": null, "target_paragraph_id": null, "target_section_id": null, "condition": {"text": "EVALUATE TRUE", "fields": [], "field_ids": []}, "line": 44, "statement_id": "SYS-PORTFOLIO-001-FIL-0059-STMT-000001"},
+      {"step": 2, "paragraph": "(UNNAMED)", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0059-PAR-0001", "action": "PERFORM_THRU", "target": "P100-DECLARE-CURSOR", "thru_end": "P100-EXIT", "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0059-PAR-0002", "thru_end_paragraph_id": "SYS-PORTFOLIO-001-FIL-0059-PAR-0003", "target_section_id": null, "unstructured": true,
+       "condition": {"text": "WHEN CURS-DECLARE", "fields": ["CURS-DECLARE"], "field_ids": [{"name": "CURS-DECLARE", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0059-FLD-000007", "target_kind": "condition", "candidate_ids": []}]},
+       "sub_steps": [{"paragraph": "P100-DECLARE-CURSOR", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0059-PAR-0002"}, {"paragraph": "P100-EXIT", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0059-PAR-0003"}],
+       "line": 46, "statement_id": "SYS-PORTFOLIO-001-FIL-0059-STMT-000014"},
+      {"step": 3, "paragraph": "(UNNAMED)", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0059-PAR-0001", "action": "PERFORM_THRU", "target": "P200-OPEN-CURSOR", "thru_end": "P200-EXIT", "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0059-PAR-0004", "thru_end_paragraph_id": "SYS-PORTFOLIO-001-FIL-0059-PAR-0005", "target_section_id": null, "unstructured": true,
+       "condition": {"text": "WHEN CURS-OPEN", "fields": ["CURS-OPEN"], "field_ids": [{"name": "CURS-OPEN", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0059-FLD-000008", "target_kind": "condition", "candidate_ids": []}]},
+       "sub_steps": [{"paragraph": "P200-OPEN-CURSOR", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0059-PAR-0004"}, {"paragraph": "P200-EXIT", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0059-PAR-0005"}],
+       "line": 49, "statement_id": "SYS-PORTFOLIO-001-FIL-0059-STMT-000016"},
+      {"step": 4, "paragraph": "(UNNAMED)", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0059-PAR-0001", "action": "unresolvable", "perform_type": "PERFORM_THRU", "target": "P300-FETCH-DATA", "thru_end": "P300-EXIT", "target_paragraph_id": null, "thru_end_paragraph_id": null, "target_section_id": null, "unstructured": true,
+       "condition": {"text": "WHEN CURS-FETCH", "fields": ["CURS-FETCH"], "field_ids": [{"name": "CURS-FETCH", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0059-FLD-000009", "target_kind": "condition", "candidate_ids": []}]},
+       "sub_steps": [],
+       "line": 52, "statement_id": "SYS-PORTFOLIO-001-FIL-0059-STMT-000015", "note": "Target paragraphs not present in the source (file truncated at line 91); path cannot be traced"},
+      {"step": 5, "paragraph": "(UNNAMED)", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0059-PAR-0001", "action": "unresolvable", "perform_type": "PERFORM_THRU", "target": "P400-CLOSE-CURSOR", "thru_end": "P400-EXIT", "target_paragraph_id": null, "thru_end_paragraph_id": null, "target_section_id": null, "unstructured": true,
+       "condition": {"text": "WHEN CURS-CLOSE", "fields": ["CURS-CLOSE"], "field_ids": [{"name": "CURS-CLOSE", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0059-FLD-000010", "target_kind": "condition", "candidate_ids": []}]},
+       "sub_steps": [],
+       "line": 55, "statement_id": "SYS-PORTFOLIO-001-FIL-0059-STMT-000013", "note": "Target paragraphs not present in the source (file truncated at line 91); path cannot be traced"},
+      {"step": 6, "paragraph": "(UNNAMED)", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0059-PAR-0001", "action": "CICS_RETURN", "target": null, "target_paragraph_id": null, "target_section_id": null, "condition": null, "line": 59, "statement_id": "SYS-PORTFOLIO-001-FIL-0059-STMT-000002"}
+    ]
+  }
+],
+"branch_map": [
+  {
+    "paragraph": "(UNNAMED)",
+    "paragraph_id": "SYS-PORTFOLIO-001-FIL-0059-PAR-0001",
+    "branches": [
+      {"type": "EVALUATE", "line": 44, "statement_id": "SYS-PORTFOLIO-001-FIL-0059-STMT-000001", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0059-PAR-0001", "subjects": ["TRUE"],
+       "condition_text": "EVALUATE TRUE WHEN CURS-DECLARE / WHEN CURS-OPEN / WHEN CURS-FETCH / WHEN CURS-CLOSE",
+       "condition_fields": ["CURS-DECLARE", "CURS-OPEN", "CURS-FETCH", "CURS-CLOSE"],
+       "condition_field_ids": [
+         {"name": "CURS-DECLARE", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0059-FLD-000007", "target_kind": "condition", "candidate_ids": []},
+         {"name": "CURS-OPEN", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0059-FLD-000008", "target_kind": "condition", "candidate_ids": []},
+         {"name": "CURS-FETCH", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0059-FLD-000009", "target_kind": "condition", "candidate_ids": []},
+         {"name": "CURS-CLOSE", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0059-FLD-000010", "target_kind": "condition", "candidate_ids": []}
+       ],
+       "when_clauses": [
+         {"conditions": ["CURS-DECLARE"], "condition_fields": ["CURS-DECLARE"], "condition_values": "CURS-REQUEST-TYPE = 'D'", "body_line_range": [46, 47], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0059-STMT-000014"]},
+         {"conditions": ["CURS-OPEN"], "condition_fields": ["CURS-OPEN"], "condition_values": "CURS-REQUEST-TYPE = 'O'", "body_line_range": [49, 50], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0059-STMT-000016"]},
+         {"conditions": ["CURS-FETCH"], "condition_fields": ["CURS-FETCH"], "condition_values": "CURS-REQUEST-TYPE = 'F'", "body_line_range": [52, 53], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0059-STMT-000015"]},
+         {"conditions": ["CURS-CLOSE"], "condition_fields": ["CURS-CLOSE"], "condition_values": "CURS-REQUEST-TYPE = 'C'", "body_line_range": [55, 56], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0059-STMT-000013"]}
+       ],
+       "has_when_other": false,
+       "end_evaluate_line": 57,
+       "outcomes": [
+         {"label": "WHEN CURS-DECLARE", "line_range": [46, 47], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0059-STMT-000014"]},
+         {"label": "WHEN CURS-OPEN", "line_range": [49, 50], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0059-STMT-000016"]},
+         {"label": "WHEN CURS-FETCH", "line_range": [52, 53], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0059-STMT-000015"]},
+         {"label": "WHEN CURS-CLOSE", "line_range": [55, 56], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0059-STMT-000013"]},
+         {"label": "NO MATCH (no WHEN OTHER)", "line_range": null, "statement_ids": []}
+       ],
+       "nested_depth": 1}
+    ]
+  },
+  {
+    "paragraph": "P100-DECLARE-CURSOR",
+    "paragraph_id": "SYS-PORTFOLIO-001-FIL-0059-PAR-0002",
+    "branches": [
+      {"type": "IF", "line": 64, "statement_id": "SYS-PORTFOLIO-001-FIL-0059-STMT-000004", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0059-PAR-0002",
+       "condition_text": "USE-ARRAY-FETCH",
+       "condition_fields": ["USE-ARRAY-FETCH"],
+       "condition_field_ids": [{"name": "USE-ARRAY-FETCH", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0059-FLD-000014", "target_kind": "condition", "candidate_ids": []}],
+       "has_else": true, "then_line_range": [65, 65], "else_line_range": [67, 67], "end_if_line": 68, "nested_depth": 1,
+       "outcomes": [
+         {"label": "THEN", "line_range": [65, 65], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0059-STMT-000018"]},
+         {"label": "ELSE", "line_range": [67, 67], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0059-STMT-000017"]}
+       ]},
+      {"type": "IF", "line": 74, "statement_id": "SYS-PORTFOLIO-001-FIL-0059-STMT-000006", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0059-PAR-0002",
+       "condition_text": "SQLCODE NOT = 0",
+       "condition_fields": ["SQLCODE"],
+       "condition_field_ids": [{"name": "SQLCODE", "qualifiers": [], "resolution": "UNRESOLVED", "target_id": null, "target_kind": null, "candidate_ids": []}],
+       "has_else": false, "then_line_range": [75, 75], "else_line_range": null, "end_if_line": 76, "nested_depth": 1,
+       "sqlcode_check": true,
+       "outcomes": [
+         {"label": "THEN", "line_range": [75, 75], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0059-STMT-000019"]}
+       ]}
+    ]
+  },
+  {
+    "paragraph": "P200-OPEN-CURSOR",
+    "paragraph_id": "SYS-PORTFOLIO-001-FIL-0059-PAR-0004",
+    "branches": [
+      {"type": "IF", "line": 86, "statement_id": "SYS-PORTFOLIO-001-FIL-0059-STMT-000011", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0059-PAR-0004",
+       "condition_text": "SQLCODE = 0",
+       "condition_fields": ["SQLCODE"],
+       "condition_field_ids": [{"name": "SQLCODE", "qualifiers": [], "resolution": "UNRESOLVED", "target_id": null, "target_kind": null, "candidate_ids": []}],
+       "has_else": true, "then_line_range": [87, 87], "else_line_range": [89, 89], "end_if_line": 90, "nested_depth": 1,
+       "sqlcode_check": true,
+       "outcomes": [
+         {"label": "THEN", "line_range": [87, 87], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0059-STMT-000021"]},
+         {"label": "ELSE", "line_range": [89, 89], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0059-STMT-000020"]}
+       ]}
+    ]
+  }
+],
+"loops": [],
+"dead_code_confirmed": [],
+"unresolvable_paths": [
+  {"paragraph": "(UNNAMED)", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0059-PAR-0001", "statement_id": "SYS-PORTFOLIO-001-FIL-0059-STMT-000015", "line": 52, "target": "P300-FETCH-DATA THRU P300-EXIT", "reason": "PERFORM target not in CFG: paragraphs P300-FETCH-DATA and P300-EXIT are not present in the source (truncated file)"},
+  {"paragraph": "(UNNAMED)", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0059-PAR-0001", "statement_id": "SYS-PORTFOLIO-001-FIL-0059-STMT-000013", "line": 55, "target": "P400-CLOSE-CURSOR THRU P400-EXIT", "reason": "PERFORM target not in CFG: paragraphs P400-CLOSE-CURSOR and P400-EXIT are not present in the source (truncated file)"}
+],
+"trace_issues": [
+  {"severity": "info", "type": "upstream_issue", "upstream_agent": "2_parser", "upstream_type": "unnamed_paragraph", "lines": [44, 60], "message": "Statements between PROCEDURE DIVISION USING (line 43) and the first paragraph name (line 61) recorded under paragraph (UNNAMED)."},
+  {"severity": "info", "type": "upstream_issue", "upstream_agent": "2_parser", "upstream_type": "truncated_source", "lines": [91], "message": "File ends at line 91 with 'P200-EXIT' and no terminating period or newline. Paragraphs P300-FETCH-DATA, P300-EXIT, P400-CLOSE-CURSOR and P400-EXIT, referenced by PERFORM ... THRU at lines 52 and 55, are not present in the source."},
+  {"severity": "info", "type": "upstream_issue", "upstream_agent": "2_parser", "upstream_type": "paragraph_header_without_period", "lines": [91], "message": "Line 91 'P200-EXIT' starts in Area A (column 8) but has no period. Recorded and registered as paragraph P200-EXIT (no statements) because it is the THRU target of the PERFORM at line 49; flagged for review."},
+  {"severity": "info", "type": "upstream_issue", "upstream_agent": "2_parser", "upstream_type": "perform_thru", "lines": [46, 49, 52, 55], "message": "PERFORM ... THRU obscures control flow (4 occurrences)."},
+  {"severity": "info", "type": "upstream_issue", "upstream_agent": "2_parser", "upstream_type": "unresolved_target", "line": 52, "statement_id": "SYS-PORTFOLIO-001-FIL-0059-STMT-000015", "message": "PERFORM P300-FETCH-DATA THRU P300-EXIT: neither paragraph exists in the source (truncated file). No relationship registered."},
+  {"severity": "info", "type": "upstream_issue", "upstream_agent": "2_parser", "upstream_type": "unresolved_target", "line": 55, "statement_id": "SYS-PORTFOLIO-001-FIL-0059-STMT-000013", "message": "PERFORM P400-CLOSE-CURSOR THRU P400-EXIT: neither paragraph exists in the source (truncated file). No relationship registered."},
+  {"severity": "info", "type": "upstream_issue", "upstream_agent": "3_data", "upstream_type": "copy_level_conflict", "line": 16, "message": "EXEC SQL INCLUDE SQLCA (line 16) sits under 01 WS-DB2-AREA, but the copybook's record SQL-STATUS-CODES is itself level 01."},
+  {"severity": "info", "type": "upstream_issue", "upstream_agent": "3_data", "upstream_type": "sqlca_structure_not_in_copybook", "line": 16, "message": "Copybook SQLCA (SYS-PORTFOLIO-001-FIL-0017) defines only SQL-STATUS-CODES; the precompiler SQLCA items (SQLCODE, SQLSTATE, ...) are not defined in the repository copybook."},
+  {"severity": "info", "type": "upstream_issue", "upstream_agent": "3_data", "upstream_type": "value_clause_in_linkage", "line": 36, "message": "CURS-ARRAY-FETCH in the LINKAGE SECTION carries VALUE 'N' (line 36). Recorded as literal text only."},
+  {"severity": "info", "type": "upstream_issue", "upstream_agent": "3_data", "upstream_type": "upstream_partial", "line": 91, "message": "Agent 2 parse_status is 'partial' (truncated source). The DATA DIVISION (lines 13-42) is complete."},
+  {"severity": "warning", "type": "unstructured_flow", "lines": [46, 49, 52, 55], "message": "Four PERFORM ... THRU statements; each resolved range is recorded as ordered sub-steps and flagged unstructured."},
+  {"severity": "warning", "type": "unresolvable_perform_target", "line": 52, "statement_id": "SYS-PORTFOLIO-001-FIL-0059-STMT-000015", "message": "PERFORM P300-FETCH-DATA THRU P300-EXIT: target not in CFG; recorded as unresolvable step; target IDs null."},
+  {"severity": "warning", "type": "unresolvable_perform_target", "line": 55, "statement_id": "SYS-PORTFOLIO-001-FIL-0059-STMT-000013", "message": "PERFORM P400-CLOSE-CURSOR THRU P400-EXIT: target not in CFG; recorded as unresolvable step; target IDs null."},
+  {"severity": "info", "type": "field_id_unresolved", "name": "SQLCODE", "lines": [74, 75, 86, 89], "message": "SQLCODE is not defined in the program or in copybook SQLCA (precompiler-supplied SQLCA item); resolve-field-references returned UNRESOLVED; target_id null."},
+  {"severity": "info", "type": "no_when_other", "line": 44, "statement_id": "SYS-PORTFOLIO-001-FIL-0059-STMT-000001", "message": "EVALUATE TRUE has no WHEN OTHER: a request type other than D/O/F/C performs no paragraph and goes straight to EXEC CICS RETURN."}
+],
+"field_id_lookups": [
+  {"name": "CURS-DECLARE", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0059-FLD-000007", "target_kind": "condition", "qualified_name": "CURSOR-REQUEST-AREA.CURS-REQUEST-TYPE.CURS-DECLARE", "defined_in": "SYS-PORTFOLIO-001-FIL-0059", "candidate_ids": []},
+  {"name": "CURS-OPEN", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0059-FLD-000008", "target_kind": "condition", "qualified_name": "CURSOR-REQUEST-AREA.CURS-REQUEST-TYPE.CURS-OPEN", "defined_in": "SYS-PORTFOLIO-001-FIL-0059", "candidate_ids": []},
+  {"name": "CURS-FETCH", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0059-FLD-000009", "target_kind": "condition", "qualified_name": "CURSOR-REQUEST-AREA.CURS-REQUEST-TYPE.CURS-FETCH", "defined_in": "SYS-PORTFOLIO-001-FIL-0059", "candidate_ids": []},
+  {"name": "CURS-CLOSE", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0059-FLD-000010", "target_kind": "condition", "qualified_name": "CURSOR-REQUEST-AREA.CURS-REQUEST-TYPE.CURS-CLOSE", "defined_in": "SYS-PORTFOLIO-001-FIL-0059", "candidate_ids": []},
+  {"name": "USE-ARRAY-FETCH", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0059-FLD-000014", "target_kind": "condition", "qualified_name": "CURSOR-REQUEST-AREA.CURS-ARRAY-FETCH.USE-ARRAY-FETCH", "defined_in": "SYS-PORTFOLIO-001-FIL-0059", "candidate_ids": []},
+  {"name": "SQLCODE", "qualifiers": [], "resolution": "UNRESOLVED", "target_id": null, "target_kind": null, "qualified_name": null, "defined_in": null, "candidate_ids": []},
+  {"name": "CURS-RESPONSE-CODE", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0059-FLD-000016", "target_kind": "field", "qualified_name": "CURSOR-REQUEST-AREA.CURS-RESPONSE-CODE", "defined_in": "SYS-PORTFOLIO-001-FIL-0059", "candidate_ids": []},
+  {"name": "WS-MAX-ROWS", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0059-FLD-000004", "target_kind": "field", "qualified_name": "WS-ARRAY-AREA.WS-MAX-ROWS", "defined_in": "SYS-PORTFOLIO-001-FIL-0059", "candidate_ids": []},
+  {"name": "WS-ARRAY-SIZE", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0059-FLD-000005", "target_kind": "field", "qualified_name": "WS-ARRAY-AREA.WS-ARRAY-SIZE", "defined_in": "SYS-PORTFOLIO-001-FIL-0059", "candidate_ids": []},
+  {"name": "CURS-NAME", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0059-FLD-000011", "target_kind": "field", "qualified_name": "CURSOR-REQUEST-AREA.CURS-NAME", "defined_in": "SYS-PORTFOLIO-001-FIL-0059", "candidate_ids": []},
+  {"name": "CURS-STMT", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0059-FLD-000012", "target_kind": "field", "qualified_name": "CURSOR-REQUEST-AREA.CURS-STMT", "defined_in": "SYS-PORTFOLIO-001-FIL-0059", "candidate_ids": []},
+  {"name": "WS-FETCH-COUNT", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0059-FLD-000001", "target_kind": "field", "qualified_name": "WS-CURSOR-STATS.WS-FETCH-COUNT", "defined_in": "SYS-PORTFOLIO-001-FIL-0059", "candidate_ids": []},
+  {"name": "WS-ROWS-FETCHED", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0059-FLD-000002", "target_kind": "field", "qualified_name": "WS-CURSOR-STATS.WS-ROWS-FETCHED", "defined_in": "SYS-PORTFOLIO-001-FIL-0059", "candidate_ids": []}
+],
+"program_narrative": "Program CURSMGR is an online (CICS) program that receives a cursor request in CURSOR-REQUEST-AREA (PROCEDURE DIVISION USING) and dispatches on the request type: 'D' declares a cursor, 'O' opens it, 'F' and 'C' perform fetch and close paragraphs that are not present in the source file. It reads no files; it issues embedded SQL DECLARE CURSOR and OPEN statements whose cursor name and statement text come from the caller's host variables CURS-NAME and CURS-STMT. Declaring sets the working array size to WS-MAX-ROWS when array fetch is requested, otherwise to 1; opening resets the fetch and row counters. After each SQL statement the SQLCODE is copied into CURS-RESPONSE-CODE when it is non-zero (and 0 is set when OPEN succeeds). A request type other than D/O/F/C performs nothing. Every path ends with EXEC CICS RETURN to the caller. The source file is truncated at line 91, so the fetch and close logic cannot be traced.",
+"paragraphs": [
+  {
+    "name": "(UNNAMED)",
+    "paragraph_id": "SYS-PORTFOLIO-001-FIL-0059-PAR-0001",
+    "section": null,
+    "section_id": null,
+    "line_range": [44, 60],
+    "pseudocode": [
+      "-- Entry: request block CURSOR-REQUEST-AREA is passed by the caller (PROCEDURE DIVISION USING, line 43)",
+      "IF cursor_request_type = 'D' THEN  -- CURS-DECLARE (EVALUATE TRUE, first matching WHEN wins)",
+      "  CALL P100-declare-cursor THRU P100-exit  !! PERFORM THRU: runs P100-DECLARE-CURSOR then P100-EXIT in sequence",
+      "ELSE IF cursor_request_type = 'O' THEN  -- CURS-OPEN",
+      "  CALL P200-open-cursor THRU P200-exit  !! PERFORM THRU: runs P200-OPEN-CURSOR then P200-EXIT in sequence",
+      "ELSE IF cursor_request_type = 'F' THEN  -- CURS-FETCH",
+      "  CALL P300-fetch-data THRU P300-exit  !! PERFORM THRU -- UNRESOLVED: neither paragraph exists in the source (file truncated at line 91)",
+      "ELSE IF cursor_request_type = 'C' THEN  -- CURS-CLOSE",
+      "  CALL P400-close-cursor THRU P400-exit  !! PERFORM THRU -- UNRESOLVED: neither paragraph exists in the source (file truncated at line 91)",
+      "END IF  -- no WHEN OTHER: any other request type performs nothing",
+      "CICS RETURN TO caller"
+    ],
+    "pseudocode_statement_ids": [
+      [],
+      ["SYS-PORTFOLIO-001-FIL-0059-STMT-000001"],
+      ["SYS-PORTFOLIO-001-FIL-0059-STMT-000014"],
+      ["SYS-PORTFOLIO-001-FIL-0059-STMT-000001"],
+      ["SYS-PORTFOLIO-001-FIL-0059-STMT-000016"],
+      ["SYS-PORTFOLIO-001-FIL-0059-STMT-000001"],
+      ["SYS-PORTFOLIO-001-FIL-0059-STMT-000015"],
+      ["SYS-PORTFOLIO-001-FIL-0059-STMT-000001"],
+      ["SYS-PORTFOLIO-001-FIL-0059-STMT-000013"],
+      ["SYS-PORTFOLIO-001-FIL-0059-STMT-000001"],
+      ["SYS-PORTFOLIO-001-FIL-0059-STMT-000002"]
+    ],
+    "pseudocode_text": "-- Entry: request block CURSOR-REQUEST-AREA is passed by the caller (PROCEDURE DIVISION USING, line 43)\nIF cursor_request_type = 'D' THEN  -- CURS-DECLARE (EVALUATE TRUE, first matching WHEN wins)\n  CALL P100-declare-cursor THRU P100-exit  !! PERFORM THRU: runs P100-DECLARE-CURSOR then P100-EXIT in sequence\nELSE IF cursor_request_type = 'O' THEN  -- CURS-OPEN\n  CALL P200-open-cursor THRU P200-exit  !! PERFORM THRU: runs P200-OPEN-CURSOR then P200-EXIT in sequence\nELSE IF cursor_request_type = 'F' THEN  -- CURS-FETCH\n  CALL P300-fetch-data THRU P300-exit  !! PERFORM THRU -- UNRESOLVED: neither paragraph exists in the source (file truncated at line 91)\nELSE IF cursor_request_type = 'C' THEN  -- CURS-CLOSE\n  CALL P400-close-cursor THRU P400-exit  !! PERFORM THRU -- UNRESOLVED: neither paragraph exists in the source (file truncated at line 91)\nEND IF  -- no WHEN OTHER: any other request type performs nothing\nCICS RETURN TO caller",
+    "statement_ids": ["SYS-PORTFOLIO-001-FIL-0059-STMT-000001", "SYS-PORTFOLIO-001-FIL-0059-STMT-000014", "SYS-PORTFOLIO-001-FIL-0059-STMT-000016", "SYS-PORTFOLIO-001-FIL-0059-STMT-000015", "SYS-PORTFOLIO-001-FIL-0059-STMT-000013", "SYS-PORTFOLIO-001-FIL-0059-STMT-000002"],
+    "untranslated_statement_ids": [],
+    "field_references": ["CURS-DECLARE", "CURS-OPEN", "CURS-FETCH", "CURS-CLOSE"],
+    "field_reference_ids": [
+      {"name": "CURS-DECLARE", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0059-FLD-000007", "target_kind": "condition", "candidate_ids": []},
+      {"name": "CURS-OPEN", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0059-FLD-000008", "target_kind": "condition", "candidate_ids": []},
+      {"name": "CURS-FETCH", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0059-FLD-000009", "target_kind": "condition", "candidate_ids": []},
+      {"name": "CURS-CLOSE", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0059-FLD-000010", "target_kind": "condition", "candidate_ids": []}
+    ],
+    "calls_made": ["P100-DECLARE-CURSOR", "P200-OPEN-CURSOR", "P300-FETCH-DATA", "P400-CLOSE-CURSOR"],
+    "calls_made_ids": [
+      {"name": "P100-DECLARE-CURSOR", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0059-PAR-0002", "section_id": null, "thru_end": "P100-EXIT", "thru_end_paragraph_id": "SYS-PORTFOLIO-001-FIL-0059-PAR-0003"},
+      {"name": "P200-OPEN-CURSOR", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0059-PAR-0004", "section_id": null, "thru_end": "P200-EXIT", "thru_end_paragraph_id": "SYS-PORTFOLIO-001-FIL-0059-PAR-0005"},
+      {"name": "P300-FETCH-DATA", "paragraph_id": null, "section_id": null, "thru_end": "P300-EXIT", "thru_end_paragraph_id": null},
+      {"name": "P400-CLOSE-CURSOR", "paragraph_id": null, "section_id": null, "thru_end": "P400-EXIT", "thru_end_paragraph_id": null}
+    ],
+    "complexity_score": 5,
+    "has_unresolved_statements": true,
+    "annotations": [
+      {"line": 44, "statement_id": "SYS-PORTFOLIO-001-FIL-0059-STMT-000001", "note": "EVALUATE TRUE over the 88-level conditions of CURS-REQUEST-TYPE: CURS-DECLARE='D', CURS-OPEN='O', CURS-FETCH='F', CURS-CLOSE='C'."},
+      {"line": 46, "statement_id": "SYS-PORTFOLIO-001-FIL-0059-STMT-000014", "note": "PERFORM THRU flagged (unstructured)."},
+      {"line": 49, "statement_id": "SYS-PORTFOLIO-001-FIL-0059-STMT-000016", "note": "PERFORM THRU flagged (unstructured)."},
+      {"line": 52, "statement_id": "SYS-PORTFOLIO-001-FIL-0059-STMT-000015", "note": "PERFORM THRU flagged (unstructured); target range not present in source -- gap, logic unknown."},
+      {"line": 55, "statement_id": "SYS-PORTFOLIO-001-FIL-0059-STMT-000013", "note": "PERFORM THRU flagged (unstructured); target range not present in source -- gap, logic unknown."},
+      {"line": 59, "statement_id": "SYS-PORTFOLIO-001-FIL-0059-STMT-000002", "note": "EXEC CICS RETURN with no TRANSID or COMMAREA: control returns to the invoking program or CICS."}
+    ]
+  },
+  {
+    "name": "P100-DECLARE-CURSOR",
+    "paragraph_id": "SYS-PORTFOLIO-001-FIL-0059-PAR-0002",
+    "section": null,
+    "section_id": null,
+    "line_range": [61, 76],
+    "pseudocode": [
+      "SET cursor_response_code = 0",
+      "IF use_array_fetch THEN  -- USE-ARRAY-FETCH: CURS-ARRAY-FETCH = 'Y'",
+      "  SET ws_array_size = ws_max_rows",
+      "ELSE",
+      "  SET ws_array_size = 1",
+      "END IF",
+      "DECLARE SQL CURSOR [dynamic: cursor_name] FOR statement [dynamic: cursor_stmt]",
+      "-- Cursor name and statement come from host variables :CURS-NAME and :CURS-STMT; see source lines 70-72 for the SQL text. !! REVIEW: cursor and statement known only at runtime",
+      "IF sqlcode != 0 THEN  -- CHECK SQLCODE (SQLCODE is a precompiler SQLCA item, not defined in the repository)",
+      "  SET cursor_response_code = sqlcode",
+      "END IF",
+      "-- Falls through to P100-EXIT (end of the PERFORM THRU range)"
+    ],
+    "pseudocode_statement_ids": [
+      ["SYS-PORTFOLIO-001-FIL-0059-STMT-000003"],
+      ["SYS-PORTFOLIO-001-FIL-0059-STMT-000004"],
+      ["SYS-PORTFOLIO-001-FIL-0059-STMT-000018"],
+      ["SYS-PORTFOLIO-001-FIL-0059-STMT-000004"],
+      ["SYS-PORTFOLIO-001-FIL-0059-STMT-000017"],
+      ["SYS-PORTFOLIO-001-FIL-0059-STMT-000004"],
+      ["SYS-PORTFOLIO-001-FIL-0059-STMT-000005"],
+      [],
+      ["SYS-PORTFOLIO-001-FIL-0059-STMT-000006"],
+      ["SYS-PORTFOLIO-001-FIL-0059-STMT-000019"],
+      ["SYS-PORTFOLIO-001-FIL-0059-STMT-000006"],
+      []
+    ],
+    "pseudocode_text": "SET cursor_response_code = 0\nIF use_array_fetch THEN  -- USE-ARRAY-FETCH: CURS-ARRAY-FETCH = 'Y'\n  SET ws_array_size = ws_max_rows\nELSE\n  SET ws_array_size = 1\nEND IF\nDECLARE SQL CURSOR [dynamic: cursor_name] FOR statement [dynamic: cursor_stmt]\n-- Cursor name and statement come from host variables :CURS-NAME and :CURS-STMT; see source lines 70-72 for the SQL text. !! REVIEW: cursor and statement known only at runtime\nIF sqlcode != 0 THEN  -- CHECK SQLCODE (SQLCODE is a precompiler SQLCA item, not defined in the repository)\n  SET cursor_response_code = sqlcode\nEND IF\n-- Falls through to P100-EXIT (end of the PERFORM THRU range)",
+    "statement_ids": ["SYS-PORTFOLIO-001-FIL-0059-STMT-000003", "SYS-PORTFOLIO-001-FIL-0059-STMT-000004", "SYS-PORTFOLIO-001-FIL-0059-STMT-000018", "SYS-PORTFOLIO-001-FIL-0059-STMT-000017", "SYS-PORTFOLIO-001-FIL-0059-STMT-000005", "SYS-PORTFOLIO-001-FIL-0059-STMT-000006", "SYS-PORTFOLIO-001-FIL-0059-STMT-000019"],
+    "untranslated_statement_ids": [],
+    "field_references": ["CURS-RESPONSE-CODE", "USE-ARRAY-FETCH", "WS-MAX-ROWS", "WS-ARRAY-SIZE", "CURS-NAME", "CURS-STMT", "SQLCODE"],
+    "field_reference_ids": [
+      {"name": "CURS-RESPONSE-CODE", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0059-FLD-000016", "target_kind": "field", "candidate_ids": []},
+      {"name": "USE-ARRAY-FETCH", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0059-FLD-000014", "target_kind": "condition", "candidate_ids": []},
+      {"name": "WS-MAX-ROWS", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0059-FLD-000004", "target_kind": "field", "candidate_ids": []},
+      {"name": "WS-ARRAY-SIZE", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0059-FLD-000005", "target_kind": "field", "candidate_ids": []},
+      {"name": "CURS-NAME", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0059-FLD-000011", "target_kind": "field", "candidate_ids": []},
+      {"name": "CURS-STMT", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0059-FLD-000012", "target_kind": "field", "candidate_ids": []},
+      {"name": "SQLCODE", "qualifiers": [], "resolution": "UNRESOLVED", "target_id": null, "target_kind": null, "candidate_ids": []}
+    ],
+    "calls_made": [],
+    "calls_made_ids": [],
+    "complexity_score": 3,
+    "has_unresolved_statements": false,
+    "annotations": [
+      {"line": 64, "statement_id": "SYS-PORTFOLIO-001-FIL-0059-STMT-000004", "note": "USE-ARRAY-FETCH is the 88-level condition CURS-ARRAY-FETCH = 'Y' (sibling NO-ARRAY-FETCH = 'N')."},
+      {"line": 65, "statement_id": "SYS-PORTFOLIO-001-FIL-0059-STMT-000018", "note": "WS-MAX-ROWS has VALUE 20 in WORKING-STORAGE (line 24); no statement in the source changes it."},
+      {"line": 70, "statement_id": "SYS-PORTFOLIO-001-FIL-0059-STMT-000005", "note": "Embedded SQL DECLARE CURSOR using host variables for the cursor name and statement text, written as in the source.", "ambiguous": true},
+      {"line": 74, "statement_id": "SYS-PORTFOLIO-001-FIL-0059-STMT-000006", "note": "SQLCODE check branch; SQLCODE has no Field ID (not defined in repository copybook SQLCA)."},
+      {"line": 65, "note": "WS-ARRAY-SIZE is assigned at lines 65 and 67 and not referenced by any other statement in the available source."}
+    ]
+  },
+  {
+    "name": "P100-EXIT",
+    "paragraph_id": "SYS-PORTFOLIO-001-FIL-0059-PAR-0003",
+    "section": null,
+    "section_id": null,
+    "line_range": [77, 79],
+    "pseudocode": [
+      "EXIT  -- end of P100 PERFORM THRU range; no-op, control returns to the PERFORM at line 46"
+    ],
+    "pseudocode_statement_ids": [
+      ["SYS-PORTFOLIO-001-FIL-0059-STMT-000007"]
+    ],
+    "pseudocode_text": "EXIT  -- end of P100 PERFORM THRU range; no-op, control returns to the PERFORM at line 46",
+    "statement_ids": ["SYS-PORTFOLIO-001-FIL-0059-STMT-000007"],
+    "untranslated_statement_ids": [],
+    "field_references": [],
+    "field_reference_ids": [],
+    "calls_made": [],
+    "calls_made_ids": [],
+    "complexity_score": 1,
+    "has_unresolved_statements": false,
+    "annotations": []
+  },
+  {
+    "name": "P200-OPEN-CURSOR",
+    "paragraph_id": "SYS-PORTFOLIO-001-FIL-0059-PAR-0004",
+    "section": null,
+    "section_id": null,
+    "line_range": [80, 90],
+    "pseudocode": [
+      "CLEAR ws_fetch_count  -- initialise to zero",
+      "CLEAR ws_rows_fetched  -- initialise to zero",
+      "OPEN SQL cursor [dynamic: cursor_name] and execute its query  !! REVIEW: cursor name known only at runtime",
+      "IF sqlcode = 0 THEN  -- CHECK SQLCODE",
+      "  SET cursor_response_code = 0",
+      "ELSE",
+      "  SET cursor_response_code = sqlcode",
+      "END IF",
+      "-- Falls through to P200-EXIT (end of the PERFORM THRU range)"
+    ],
+    "pseudocode_statement_ids": [
+      ["SYS-PORTFOLIO-001-FIL-0059-STMT-000008"],
+      ["SYS-PORTFOLIO-001-FIL-0059-STMT-000009"],
+      ["SYS-PORTFOLIO-001-FIL-0059-STMT-000010"],
+      ["SYS-PORTFOLIO-001-FIL-0059-STMT-000011"],
+      ["SYS-PORTFOLIO-001-FIL-0059-STMT-000021"],
+      ["SYS-PORTFOLIO-001-FIL-0059-STMT-000011"],
+      ["SYS-PORTFOLIO-001-FIL-0059-STMT-000020"],
+      ["SYS-PORTFOLIO-001-FIL-0059-STMT-000011"],
+      []
+    ],
+    "pseudocode_text": "CLEAR ws_fetch_count  -- initialise to zero\nCLEAR ws_rows_fetched  -- initialise to zero\nOPEN SQL cursor [dynamic: cursor_name] and execute its query  !! REVIEW: cursor name known only at runtime\nIF sqlcode = 0 THEN  -- CHECK SQLCODE\n  SET cursor_response_code = 0\nELSE\n  SET cursor_response_code = sqlcode\nEND IF\n-- Falls through to P200-EXIT (end of the PERFORM THRU range)",
+    "statement_ids": ["SYS-PORTFOLIO-001-FIL-0059-STMT-000008", "SYS-PORTFOLIO-001-FIL-0059-STMT-000009", "SYS-PORTFOLIO-001-FIL-0059-STMT-000010", "SYS-PORTFOLIO-001-FIL-0059-STMT-000011", "SYS-PORTFOLIO-001-FIL-0059-STMT-000021", "SYS-PORTFOLIO-001-FIL-0059-STMT-000020"],
+    "untranslated_statement_ids": [],
+    "field_references": ["WS-FETCH-COUNT", "WS-ROWS-FETCHED", "CURS-NAME", "SQLCODE", "CURS-RESPONSE-CODE"],
+    "field_reference_ids": [
+      {"name": "WS-FETCH-COUNT", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0059-FLD-000001", "target_kind": "field", "candidate_ids": []},
+      {"name": "WS-ROWS-FETCHED", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0059-FLD-000002", "target_kind": "field", "candidate_ids": []},
+      {"name": "CURS-NAME", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0059-FLD-000011", "target_kind": "field", "candidate_ids": []},
+      {"name": "SQLCODE", "qualifiers": [], "resolution": "UNRESOLVED", "target_id": null, "target_kind": null, "candidate_ids": []},
+      {"name": "CURS-RESPONSE-CODE", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0059-FLD-000016", "target_kind": "field", "candidate_ids": []}
+    ],
+    "calls_made": [],
+    "calls_made_ids": [],
+    "complexity_score": 2,
+    "has_unresolved_statements": false,
+    "annotations": [
+      {"line": 84, "statement_id": "SYS-PORTFOLIO-001-FIL-0059-STMT-000010", "note": "Embedded SQL OPEN of a cursor named by host variable :CURS-NAME."},
+      {"line": 86, "statement_id": "SYS-PORTFOLIO-001-FIL-0059-STMT-000011", "note": "SQLCODE check branch; SQLCODE has no Field ID (not defined in repository copybook SQLCA)."}
+    ]
+  },
+  {
+    "name": "P200-EXIT",
+    "paragraph_id": "SYS-PORTFOLIO-001-FIL-0059-PAR-0005",
+    "section": null,
+    "section_id": null,
+    "line_range": [91, 91],
+    "pseudocode": [
+      "-- No statements: the file ends at line 91 with the header 'P200-EXIT' (no period, no EXIT statement). End of the P200 PERFORM THRU range; control returns to the PERFORM at line 49"
+    ],
+    "pseudocode_statement_ids": [
+      []
+    ],
+    "pseudocode_text": "-- No statements: the file ends at line 91 with the header 'P200-EXIT' (no period, no EXIT statement). End of the P200 PERFORM THRU range; control returns to the PERFORM at line 49",
+    "statement_ids": [],
+    "untranslated_statement_ids": [],
+    "field_references": [],
+    "field_reference_ids": [],
+    "calls_made": [],
+    "calls_made_ids": [],
+    "complexity_score": 1,
+    "has_unresolved_statements": false,
+    "annotations": [
+      {"line": 91, "note": "Source truncated here (Agent 2 truncated_source, paragraph_header_without_period); paragraphs after this point are missing.", "ambiguous": true}
+    ]
+  }
+],
+"unresolved_statements": [
+  {"statement_id": "SYS-PORTFOLIO-001-FIL-0059-STMT-000015", "paragraph": "(UNNAMED)", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0059-PAR-0001", "line": 52, "source_text": "PERFORM P300-FETCH-DATA THRU P300-EXIT", "reason": "target paragraphs not present in source; called logic unknown"},
+  {"statement_id": "SYS-PORTFOLIO-001-FIL-0059-STMT-000013", "paragraph": "(UNNAMED)", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0059-PAR-0001", "line": 55, "source_text": "PERFORM P400-CLOSE-CURSOR THRU P400-EXIT", "reason": "target paragraphs not present in source; called logic unknown"}
+],
+"pseudocode_issues": [
+  {"severity": "info", "type": "id_unresolved", "kind": "field", "name": "SQLCODE", "paragraphs": ["P100-DECLARE-CURSOR", "P200-OPEN-CURSOR"], "message": "SQLCODE: resolve-field-references UNRESOLVED; target_id null."},
+  {"severity": "info", "type": "id_unresolved", "kind": "paragraph", "name": "P300-FETCH-DATA", "statement_id": "SYS-PORTFOLIO-001-FIL-0059-STMT-000015", "message": "calls_made target has no Paragraph ID (CFG edge unresolved)."},
+  {"severity": "info", "type": "id_unresolved", "kind": "paragraph", "name": "P400-CLOSE-CURSOR", "statement_id": "SYS-PORTFOLIO-001-FIL-0059-STMT-000013", "message": "calls_made target has no Paragraph ID (CFG edge unresolved)."},
+  {"severity": "info", "type": "dynamic_sql", "lines": [70, 84], "message": "Cursor name and statement text are host variables supplied by the caller; flagged !! REVIEW."}
+]
+}

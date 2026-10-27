@@ -1,0 +1,575 @@
+{
+"program_summary": {"program_id": "DB2ONLN", "file_id": "SYS-PORTFOLIO-001-FIL-0060", "logic_file": "program_logic/SYS-PORTFOLIO-001-FIL-0060__DB2ONLN_logic.json", "logic_status": "partial", "paragraphs_translated": 11, "execution_paths": 1, "branches": 5, "loops": 0, "dead_code_confirmed": 0, "goto_annotations": 0, "unresolvable_paths": 0, "unresolved_ids": 2},
+"program_id": "DB2ONLN",
+"system_id": "SYS-PORTFOLIO-001",
+"file_id": "SYS-PORTFOLIO-001-FIL-0060",
+"path_id": "SYS-PORTFOLIO-001-PATH-0060",
+"relative_path": "src/programs/online/DB2ONLN.cbl",
+"parse_run_id": "PRUN-20261023T023803Z-ACC2",
+"upstream": {
+  "verification": {
+    "verdict": "VALID",
+    "verdict_reasons": ["V2, V3 and V4 consistent; Agent 2 parse_status 'success'; the program layout has no unresolved copy stubs"],
+    "v1": {"raw_structure": "present", "parse_status": "success", "program_layout": "present", "copybook_layouts": [{"copybook": "SQLCA", "copybook_file_id": "SYS-PORTFOLIO-001-FIL-0017", "layout": "present"}, {"copybook": "ERRHND", "copybook_file_id": "SYS-PORTFOLIO-001-FIL-0019", "layout": "present"}], "unresolved_copy_stubs": 0},
+    "v2_file_identities": {
+      "program_entries": {"require_completed": ["parser", "data"], "entries": ["raw_structure|SYS-PORTFOLIO-001-FIL-0060", "data_layout|SYS-PORTFOLIO-001-FIL-0060"], "parse_run_id": "PRUN-20261023T023803Z-ACC2", "data_run_id": "DRUN-20261024T215053Z-ACC1", "result": "batched with the DB2RECV, ERRHNDL, INQHIST and INQONLN program entries: checked 10, ok 10, problems [], duplicates [], consistent true"},
+      "copybook_entries": {"require_completed": ["data"], "entries": ["data_layout|SYS-PORTFOLIO-001-FIL-0017", "data_layout|SYS-PORTFOLIO-001-FIL-0019"], "result": "batched with copybooks FIL-0018 and FIL-0020: checked 4, ok 4, problems [], duplicates [], consistent true"},
+      "consistent": true
+    },
+    "v3_structure_identities": {"sections_checked": 2, "paragraphs_checked": 11, "statements_checked": 38, "edges_checked": 10, "registered_edges": 10, "section_problems": [], "paragraph_problems": [], "statement_problems": [], "edge_problems": [], "invalid_registered_edges": [], "registered_not_in_json": {"missing_count": 0}, "duplicate_ids_in_json": [], "consistent": true, "note": "data-division section names sent as null (raw_structure does not carry them); two relationships per PERFORM_THRU edge (5 edges)"},
+    "v4_data_identities": [
+      {"file_id": "SYS-PORTFOLIO-001-FIL-0060", "layout": "program", "records_checked": 4, "fields_checked": 13, "expansions_checked": 2, "record_problems": [], "field_problems": [], "expansion_problems": [], "copybook_records_in_program": 0, "registered_not_in_json": {"missing_count": 0}, "duplicate_ids_in_json": [], "consistent": true},
+      {"file_id": "SYS-PORTFOLIO-001-FIL-0017", "layout": "copybook SQLCA", "records_checked": 1, "fields_checked": 7, "expansions_checked": 0, "record_problems": [], "field_problems": [], "expansion_problems": [], "copybook_records_in_program": 0, "registered_not_in_json": {"missing_count": 0}, "duplicate_ids_in_json": [], "consistent": true},
+      {"file_id": "SYS-PORTFOLIO-001-FIL-0019", "layout": "copybook ERRHND", "records_checked": 1, "fields_checked": 17, "expansions_checked": 0, "record_problems": [], "field_problems": [], "expansion_problems": [], "copybook_records_in_program": 0, "registered_not_in_json": {"missing_count": 0}, "duplicate_ids_in_json": [], "consistent": true}
+    ]
+  }
+},
+"execution_traces": [
+  {
+    "entry_point": "(UNNAMED)",
+    "entry_point_id": "SYS-PORTFOLIO-001-FIL-0060-PAR-0001",
+    "entry_type": "online_main",
+    "steps": [
+      {"step": 1, "paragraph": "(UNNAMED)", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0060-PAR-0001", "action": "EVALUATE", "target": null, "target_paragraph_id": null, "target_section_id": null,
+       "condition": {"text": "EVALUATE TRUE WHEN DB2-CONNECT / WHEN DB2-DISCONNECT / WHEN DB2-STATUS", "fields": ["DB2-CONNECT", "DB2-DISCONNECT", "DB2-STATUS"], "field_ids": [
+         {"name": "DB2-CONNECT", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0060-FLD-000006", "target_kind": "condition", "candidate_ids": []},
+         {"name": "DB2-DISCONNECT", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0060-FLD-000007", "target_kind": "condition", "candidate_ids": []},
+         {"name": "DB2-STATUS", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0060-FLD-000008", "target_kind": "condition", "candidate_ids": []}]},
+       "line": 40, "statement_id": "SYS-PORTFOLIO-001-FIL-0060-STMT-000001"},
+      {"step": 2, "paragraph": "(UNNAMED)", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0060-PAR-0001", "action": "PERFORM_THRU", "target": "P100-PROCESS-CONNECT", "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0060-PAR-0002", "target_section_id": null, "unstructured": true,
+       "condition": {"text": "WHEN DB2-CONNECT", "fields": ["DB2-CONNECT"], "field_ids": [{"name": "DB2-CONNECT", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0060-FLD-000006", "target_kind": "condition", "candidate_ids": []}]},
+       "sub_steps": [{"paragraph": "P100-PROCESS-CONNECT", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0060-PAR-0002"}, {"paragraph": "P100-EXIT", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0060-PAR-0003"}],
+       "line": 42, "statement_id": "SYS-PORTFOLIO-001-FIL-0060-STMT-000018"},
+      {"step": 3, "paragraph": "P100-PROCESS-CONNECT", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0060-PAR-0002", "action": "IF", "target": null, "target_paragraph_id": null, "target_section_id": null,
+       "condition": {"text": "WS-ACTIVE-CONNECTIONS < WS-MAX-CONNECTIONS", "fields": ["WS-ACTIVE-CONNECTIONS", "WS-MAX-CONNECTIONS"], "field_ids": [
+         {"name": "WS-ACTIVE-CONNECTIONS", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0060-FLD-000002", "target_kind": "field", "candidate_ids": []},
+         {"name": "WS-MAX-CONNECTIONS", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0060-FLD-000004", "target_kind": "field", "candidate_ids": []}]},
+       "line": 55, "statement_id": "SYS-PORTFOLIO-001-FIL-0060-STMT-000003"},
+      {"step": 4, "paragraph": "P100-PROCESS-CONNECT", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0060-PAR-0002", "action": "PERFORM_THRU", "target": "P110-ESTABLISH-CONNECTION", "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0060-PAR-0004", "target_section_id": null, "unstructured": true,
+       "condition": {"text": "THEN of IF WS-ACTIVE-CONNECTIONS < WS-MAX-CONNECTIONS", "fields": ["WS-ACTIVE-CONNECTIONS", "WS-MAX-CONNECTIONS"], "field_ids": [
+         {"name": "WS-ACTIVE-CONNECTIONS", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0060-FLD-000002", "target_kind": "field", "candidate_ids": []},
+         {"name": "WS-MAX-CONNECTIONS", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0060-FLD-000004", "target_kind": "field", "candidate_ids": []}]},
+       "sub_steps": [{"paragraph": "P110-ESTABLISH-CONNECTION", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0060-PAR-0004"}, {"paragraph": "P110-EXIT", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0060-PAR-0005"}],
+       "line": 56, "statement_id": "SYS-PORTFOLIO-001-FIL-0060-STMT-000023"},
+      {"step": 5, "paragraph": "P110-ESTABLISH-CONNECTION", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0060-PAR-0004", "action": "EXEC_SQL", "target": "CONNECT TO POSMVP", "target_paragraph_id": null, "target_section_id": null, "condition": null, "line": 67, "statement_id": "SYS-PORTFOLIO-001-FIL-0060-STMT-000005"},
+      {"step": 6, "paragraph": "P110-ESTABLISH-CONNECTION", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0060-PAR-0004", "action": "IF", "target": null, "target_paragraph_id": null, "target_section_id": null,
+       "condition": {"text": "SQLCODE = 0", "fields": ["SQLCODE"], "field_ids": [{"name": "SQLCODE", "qualifiers": [], "resolution": "UNRESOLVED", "target_id": null, "target_kind": null, "candidate_ids": []}]},
+       "line": 69, "statement_id": "SYS-PORTFOLIO-001-FIL-0060-STMT-000006"},
+      {"step": 7, "paragraph": "P110-ESTABLISH-CONNECTION", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0060-PAR-0004", "action": "PERFORM_THRU", "target": "P120-GENERATE-TOKEN", "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0060-PAR-0006", "target_section_id": null, "unstructured": true,
+       "condition": {"text": "THEN of IF SQLCODE = 0", "fields": ["SQLCODE"], "field_ids": [{"name": "SQLCODE", "qualifiers": [], "resolution": "UNRESOLVED", "target_id": null, "target_kind": null, "candidate_ids": []}]},
+       "sub_steps": [{"paragraph": "P120-GENERATE-TOKEN", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0060-PAR-0006"}, {"paragraph": "P120-EXIT", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0060-PAR-0007"}],
+       "line": 73, "statement_id": "SYS-PORTFOLIO-001-FIL-0060-STMT-000030"},
+      {"step": 8, "paragraph": "(UNNAMED)", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0060-PAR-0001", "action": "PERFORM_THRU", "target": "P200-PROCESS-DISCONNECT", "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0060-PAR-0008", "target_section_id": null, "unstructured": true,
+       "condition": {"text": "WHEN DB2-DISCONNECT", "fields": ["DB2-DISCONNECT"], "field_ids": [{"name": "DB2-DISCONNECT", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0060-FLD-000007", "target_kind": "condition", "candidate_ids": []}]},
+       "sub_steps": [{"paragraph": "P200-PROCESS-DISCONNECT", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0060-PAR-0008"}, {"paragraph": "P200-EXIT", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0060-PAR-0009"}],
+       "line": 45, "statement_id": "SYS-PORTFOLIO-001-FIL-0060-STMT-000019"},
+      {"step": 9, "paragraph": "P200-PROCESS-DISCONNECT", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0060-PAR-0008", "action": "EXEC_SQL", "target": "DISCONNECT", "target_paragraph_id": null, "target_section_id": null, "condition": null, "line": 92, "statement_id": "SYS-PORTFOLIO-001-FIL-0060-STMT-000011"},
+      {"step": 10, "paragraph": "P200-PROCESS-DISCONNECT", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0060-PAR-0008", "action": "IF", "target": null, "target_paragraph_id": null, "target_section_id": null,
+       "condition": {"text": "SQLCODE = 0", "fields": ["SQLCODE"], "field_ids": [{"name": "SQLCODE", "qualifiers": [], "resolution": "UNRESOLVED", "target_id": null, "target_kind": null, "candidate_ids": []}]},
+       "line": 94, "statement_id": "SYS-PORTFOLIO-001-FIL-0060-STMT-000012"},
+      {"step": 11, "paragraph": "(UNNAMED)", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0060-PAR-0001", "action": "PERFORM_THRU", "target": "P300-CHECK-STATUS", "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0060-PAR-0010", "target_section_id": null, "unstructured": true,
+       "condition": {"text": "WHEN DB2-STATUS", "fields": ["DB2-STATUS"], "field_ids": [{"name": "DB2-STATUS", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0060-FLD-000008", "target_kind": "condition", "candidate_ids": []}]},
+       "sub_steps": [{"paragraph": "P300-CHECK-STATUS", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0060-PAR-0010"}, {"paragraph": "P300-EXIT", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0060-PAR-0011"}],
+       "line": 48, "statement_id": "SYS-PORTFOLIO-001-FIL-0060-STMT-000020"},
+      {"step": 12, "paragraph": "P300-CHECK-STATUS", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0060-PAR-0010", "action": "EXEC_SQL", "target": "SELECT CURRENT SERVER INTO :DB2-ERROR-MSG", "target_paragraph_id": null, "target_section_id": null, "condition": null, "line": 106, "statement_id": "SYS-PORTFOLIO-001-FIL-0060-STMT-000014"},
+      {"step": 13, "paragraph": "P300-CHECK-STATUS", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0060-PAR-0010", "action": "IF", "target": null, "target_paragraph_id": null, "target_section_id": null,
+       "condition": {"text": "SQLCODE = 0", "fields": ["SQLCODE"], "field_ids": [{"name": "SQLCODE", "qualifiers": [], "resolution": "UNRESOLVED", "target_id": null, "target_kind": null, "candidate_ids": []}]},
+       "line": 110, "statement_id": "SYS-PORTFOLIO-001-FIL-0060-STMT-000015"},
+      {"step": 14, "paragraph": "(UNNAMED)", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0060-PAR-0001", "action": "CICS_RETURN", "target": null, "target_paragraph_id": null, "target_section_id": null, "condition": null, "line": 52, "statement_id": "SYS-PORTFOLIO-001-FIL-0060-STMT-000002"}
+    ]
+  }
+],
+"branch_map": [
+  {
+    "paragraph": "(UNNAMED)",
+    "paragraph_id": "SYS-PORTFOLIO-001-FIL-0060-PAR-0001",
+    "branches": [
+      {"type": "EVALUATE", "line": 40, "statement_id": "SYS-PORTFOLIO-001-FIL-0060-STMT-000001", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0060-PAR-0001", "subjects": ["TRUE"],
+       "condition_text": "EVALUATE TRUE WHEN DB2-CONNECT / WHEN DB2-DISCONNECT / WHEN DB2-STATUS",
+       "condition_fields": ["DB2-CONNECT", "DB2-DISCONNECT", "DB2-STATUS"],
+       "condition_field_ids": [
+         {"name": "DB2-CONNECT", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0060-FLD-000006", "target_kind": "condition", "candidate_ids": []},
+         {"name": "DB2-DISCONNECT", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0060-FLD-000007", "target_kind": "condition", "candidate_ids": []},
+         {"name": "DB2-STATUS", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0060-FLD-000008", "target_kind": "condition", "candidate_ids": []}
+       ],
+       "when_clauses": [
+         {"conditions": ["DB2-CONNECT"], "condition_fields": ["DB2-CONNECT"], "body_line_range": [42, 43]},
+         {"conditions": ["DB2-DISCONNECT"], "condition_fields": ["DB2-DISCONNECT"], "body_line_range": [45, 46]},
+         {"conditions": ["DB2-STATUS"], "condition_fields": ["DB2-STATUS"], "body_line_range": [48, 49]}
+       ],
+       "end_evaluate_line": 50,
+       "outcomes": [
+         {"label": "WHEN DB2-CONNECT (DB2-REQUEST-TYPE = 'C')", "line_range": [42, 43], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0060-STMT-000018"]},
+         {"label": "WHEN DB2-DISCONNECT (DB2-REQUEST-TYPE = 'D')", "line_range": [45, 46], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0060-STMT-000019"]},
+         {"label": "WHEN DB2-STATUS (DB2-REQUEST-TYPE = 'S')", "line_range": [48, 49], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0060-STMT-000020"]},
+         {"label": "NO MATCH (no WHEN OTHER)", "line_range": null, "statement_ids": []}
+       ],
+       "nested_depth": 1}
+    ]
+  },
+  {
+    "paragraph": "P100-PROCESS-CONNECT",
+    "paragraph_id": "SYS-PORTFOLIO-001-FIL-0060-PAR-0002",
+    "branches": [
+      {"type": "IF", "line": 55, "statement_id": "SYS-PORTFOLIO-001-FIL-0060-STMT-000003", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0060-PAR-0002",
+       "condition_text": "WS-ACTIVE-CONNECTIONS < WS-MAX-CONNECTIONS",
+       "condition_fields": ["WS-ACTIVE-CONNECTIONS", "WS-MAX-CONNECTIONS"],
+       "condition_field_ids": [
+         {"name": "WS-ACTIVE-CONNECTIONS", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0060-FLD-000002", "target_kind": "field", "candidate_ids": []},
+         {"name": "WS-MAX-CONNECTIONS", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0060-FLD-000004", "target_kind": "field", "candidate_ids": []}
+       ],
+       "has_else": true, "then_line_range": [56, 57], "else_line_range": [59, 61], "end_if_line": 62, "nested_depth": 1,
+       "outcomes": [
+         {"label": "THEN", "line_range": [56, 57], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0060-STMT-000023"]},
+         {"label": "ELSE", "line_range": [59, 61], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0060-STMT-000021", "SYS-PORTFOLIO-001-FIL-0060-STMT-000022"]}
+       ]}
+    ]
+  },
+  {
+    "paragraph": "P110-ESTABLISH-CONNECTION",
+    "paragraph_id": "SYS-PORTFOLIO-001-FIL-0060-PAR-0004",
+    "branches": [
+      {"type": "IF", "line": 69, "statement_id": "SYS-PORTFOLIO-001-FIL-0060-STMT-000006", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0060-PAR-0004",
+       "condition_text": "SQLCODE = 0",
+       "condition_fields": ["SQLCODE"],
+       "condition_field_ids": [{"name": "SQLCODE", "qualifiers": [], "resolution": "UNRESOLVED", "target_id": null, "target_kind": null, "candidate_ids": []}],
+       "has_else": true, "then_line_range": [70, 74], "else_line_range": [76, 78], "end_if_line": 79, "nested_depth": 1,       "outcomes": [
+         {"label": "THEN", "line_range": [70, 74], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0060-STMT-000027", "SYS-PORTFOLIO-001-FIL-0060-STMT-000028", "SYS-PORTFOLIO-001-FIL-0060-STMT-000029", "SYS-PORTFOLIO-001-FIL-0060-STMT-000030"]},
+         {"label": "ELSE", "line_range": [76, 78], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0060-STMT-000024", "SYS-PORTFOLIO-001-FIL-0060-STMT-000025", "SYS-PORTFOLIO-001-FIL-0060-STMT-000026"]}
+       ]}
+    ]
+  },
+  {
+    "paragraph": "P200-PROCESS-DISCONNECT",
+    "paragraph_id": "SYS-PORTFOLIO-001-FIL-0060-PAR-0008",
+    "branches": [
+      {"type": "IF", "line": 94, "statement_id": "SYS-PORTFOLIO-001-FIL-0060-STMT-000012", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0060-PAR-0008",
+       "condition_text": "SQLCODE = 0",
+       "condition_fields": ["SQLCODE"],
+       "condition_field_ids": [{"name": "SQLCODE", "qualifiers": [], "resolution": "UNRESOLVED", "target_id": null, "target_kind": null, "candidate_ids": []}],
+       "has_else": true, "then_line_range": [95, 96], "else_line_range": [98, 100], "end_if_line": 101, "nested_depth": 1,       "outcomes": [
+         {"label": "THEN", "line_range": [95, 96], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0060-STMT-000034", "SYS-PORTFOLIO-001-FIL-0060-STMT-000035"]},
+         {"label": "ELSE", "line_range": [98, 100], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0060-STMT-000031", "SYS-PORTFOLIO-001-FIL-0060-STMT-000032", "SYS-PORTFOLIO-001-FIL-0060-STMT-000033"]}
+       ]}
+    ]
+  },
+  {
+    "paragraph": "P300-CHECK-STATUS",
+    "paragraph_id": "SYS-PORTFOLIO-001-FIL-0060-PAR-0010",
+    "branches": [
+      {"type": "IF", "line": 110, "statement_id": "SYS-PORTFOLIO-001-FIL-0060-STMT-000015", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0060-PAR-0010",
+       "condition_text": "SQLCODE = 0",
+       "condition_fields": ["SQLCODE"],
+       "condition_field_ids": [{"name": "SQLCODE", "qualifiers": [], "resolution": "UNRESOLVED", "target_id": null, "target_kind": null, "candidate_ids": []}],
+       "has_else": true, "then_line_range": [111, 111], "else_line_range": [113, 114], "end_if_line": 115, "nested_depth": 1,       "outcomes": [
+         {"label": "THEN", "line_range": [111, 111], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0060-STMT-000038"]},
+         {"label": "ELSE", "line_range": [113, 114], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0060-STMT-000036", "SYS-PORTFOLIO-001-FIL-0060-STMT-000037"]}
+       ]}
+    ]
+  }
+],
+"loops": [],
+"dead_code_confirmed": [],
+"unresolvable_paths": [],
+"trace_issues": [
+  {"severity": "info", "type": "upstream_issue", "upstream_agent": "2_parser", "upstream_type": "unnamed_paragraph", "lines": [40, 53], "message": "Statements between PROCEDURE DIVISION (line 39) and the first paragraph P100-PROCESS-CONNECT (line 54) recorded as paragraph (UNNAMED) in scope PROGRAM."},
+  {"severity": "info", "type": "upstream_issue", "upstream_agent": "2_parser", "upstream_type": "perform_thru", "lines": [42, 45, 48, 56, 73], "message": "Five PERFORM ... THRU statements obscure control flow (cfg_issues)."},
+  {"severity": "info", "type": "upstream_issue", "upstream_agent": "3_data", "upstream_type": "nested_level_01_copy_expansion", "line": 16, "message": "EXEC SQL INCLUDE SQLCA (line 16) sits inside 01 WS-DB2-AREA, but the copybook record SQL-STATUS-CODES is itself level 01."},
+  {"severity": "info", "type": "upstream_issue", "upstream_agent": "3_data", "upstream_type": "nested_level_01_copy_expansion", "line": 25, "message": "COPY ERRHND (line 25) sits inside 01 WS-ERROR-AREA, but the copybook record ERROR-HANDLING is itself level 01."},
+  {"severity": "info", "type": "upstream_issue", "upstream_agent": "3_data", "upstream_type": "unresolved_copy_stub", "file_id": "SYS-PORTFOLIO-001-FIL-0017", "message": "Copybook SQLCA layout: its own EXEC SQL INCLUDE SQLCA (copybook line 6) is a self-include left as an unresolved stub; the precompiler SQLCA structure (SQLCODE, SQLERRMC, ...) is not defined in the repository copybook, only SQL-STATUS-CODES is."},
+  {"severity": "warning", "type": "unstructured_flow", "lines": [42, 45, 48, 56, 73], "message": "Five PERFORM ... THRU statements; each range is recorded as ordered sub-steps and flagged unstructured."},
+  {"severity": "info", "type": "field_id_unresolved", "name": "SQLCODE", "lines": [69, 71, 76, 94, 98, 110, 113], "message": "SQLCODE is not defined in the program or in copybook SQLCA (precompiler-supplied SQLCA item); resolve-field-references returned UNRESOLVED; target_id null."},
+  {"severity": "info", "type": "field_id_unresolved", "name": "SQLERRMC", "lines": [77, 99], "message": "SQLERRMC is not defined in the program or in copybook SQLCA (precompiler-supplied SQLCA item); resolve-field-references returned UNRESOLVED; target_id null."},
+  {"severity": "info", "type": "no_when_other", "line": 40, "statement_id": "SYS-PORTFOLIO-001-FIL-0060-STMT-000001", "message": "EVALUATE TRUE has no WHEN OTHER: a request type other than C/D/S performs no paragraph and goes straight to EXEC CICS RETURN; DB2-RESPONSE-CODE is left as received."}
+],
+"program_narrative": "Program DB2ONLN is an online (CICS) DB2 connection manager that receives a request block DB2-REQUEST-AREA from its caller (PROCEDURE DIVISION USING) and dispatches on the request type. For a connect request ('C') it checks the active-connection counter against the limit WS-MAX-CONNECTIONS (VALUE 100); below the limit it issues SQL CONNECT TO POSMVP, and on SQLCODE 0 increments the counter, returns response code 0 and builds a connection token from the current date and the counter; otherwise it returns -1 with the SQL error code and message, or the message 'Maximum connections reached'. For a disconnect request ('D') it issues SQL DISCONNECT and decrements the counter on success, or returns -1 with the SQL error details. For a status request ('S') it selects CURRENT SERVER into the error-message field and sets the response code from SQLCODE, but then unconditionally overwrites the response code with the active-connection count. Any other request type performs nothing. Every path ends with EXEC CICS RETURN. It reads no files.",
+"paragraphs": [
+  {
+    "name": "(UNNAMED)",
+    "paragraph_id": "SYS-PORTFOLIO-001-FIL-0060-PAR-0001",
+    "section": null,
+    "section_id": null,
+    "line_range": [40, 53],
+    "pseudocode": [
+      "-- Entry: request block DB2-REQUEST-AREA is passed by the caller (PROCEDURE DIVISION USING, line 39)",
+      "IF db2_request_type = 'C' THEN  -- DB2-CONNECT (EVALUATE TRUE, first matching WHEN wins)",
+      "  CALL P100-process-connect THRU P100-exit  !! PERFORM THRU: runs P100-PROCESS-CONNECT then P100-EXIT in sequence",
+      "ELSE IF db2_request_type = 'D' THEN  -- DB2-DISCONNECT",
+      "  CALL P200-process-disconnect THRU P200-exit  !! PERFORM THRU: runs P200-PROCESS-DISCONNECT then P200-EXIT in sequence",
+      "ELSE IF db2_request_type = 'S' THEN  -- DB2-STATUS",
+      "  CALL P300-check-status THRU P300-exit  !! PERFORM THRU: runs P300-CHECK-STATUS then P300-EXIT in sequence",
+      "END IF  -- no WHEN OTHER: any other request type performs nothing",
+      "CICS RETURN TO caller"
+    ],
+    "pseudocode_statement_ids": [
+      [],
+      ["SYS-PORTFOLIO-001-FIL-0060-STMT-000001"],
+      ["SYS-PORTFOLIO-001-FIL-0060-STMT-000018"],
+      ["SYS-PORTFOLIO-001-FIL-0060-STMT-000001"],
+      ["SYS-PORTFOLIO-001-FIL-0060-STMT-000019"],
+      ["SYS-PORTFOLIO-001-FIL-0060-STMT-000001"],
+      ["SYS-PORTFOLIO-001-FIL-0060-STMT-000020"],
+      ["SYS-PORTFOLIO-001-FIL-0060-STMT-000001"],
+      ["SYS-PORTFOLIO-001-FIL-0060-STMT-000002"]
+    ],
+    "pseudocode_text": "-- Entry: request block DB2-REQUEST-AREA is passed by the caller (PROCEDURE DIVISION USING, line 39)\nIF db2_request_type = 'C' THEN  -- DB2-CONNECT (EVALUATE TRUE, first matching WHEN wins)\n  CALL P100-process-connect THRU P100-exit  !! PERFORM THRU: runs P100-PROCESS-CONNECT then P100-EXIT in sequence\nELSE IF db2_request_type = 'D' THEN  -- DB2-DISCONNECT\n  CALL P200-process-disconnect THRU P200-exit  !! PERFORM THRU: runs P200-PROCESS-DISCONNECT then P200-EXIT in sequence\nELSE IF db2_request_type = 'S' THEN  -- DB2-STATUS\n  CALL P300-check-status THRU P300-exit  !! PERFORM THRU: runs P300-CHECK-STATUS then P300-EXIT in sequence\nEND IF  -- no WHEN OTHER: any other request type performs nothing\nCICS RETURN TO caller",
+    "statement_ids": ["SYS-PORTFOLIO-001-FIL-0060-STMT-000001", "SYS-PORTFOLIO-001-FIL-0060-STMT-000018", "SYS-PORTFOLIO-001-FIL-0060-STMT-000019", "SYS-PORTFOLIO-001-FIL-0060-STMT-000020", "SYS-PORTFOLIO-001-FIL-0060-STMT-000002"],
+    "untranslated_statement_ids": [],
+    "field_references": ["DB2-CONNECT", "DB2-DISCONNECT", "DB2-STATUS"],
+    "field_reference_ids": [
+      {"name": "DB2-CONNECT", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0060-FLD-000006", "target_kind": "condition", "candidate_ids": []},
+      {"name": "DB2-DISCONNECT", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0060-FLD-000007", "target_kind": "condition", "candidate_ids": []},
+      {"name": "DB2-STATUS", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0060-FLD-000008", "target_kind": "condition", "candidate_ids": []}
+    ],
+    "calls_made": ["P100-PROCESS-CONNECT", "P200-PROCESS-DISCONNECT", "P300-CHECK-STATUS"],
+    "calls_made_ids": [
+      {"name": "P100-PROCESS-CONNECT", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0060-PAR-0002", "section_id": null},
+      {"name": "P200-PROCESS-DISCONNECT", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0060-PAR-0008", "section_id": null},
+      {"name": "P300-CHECK-STATUS", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0060-PAR-0010", "section_id": null}
+    ],
+    "complexity_score": 4,
+    "has_unresolved_statements": false,
+    "annotations": [
+      {"line": 40, "statement_id": "SYS-PORTFOLIO-001-FIL-0060-STMT-000001", "note": "EVALUATE TRUE over the 88-level conditions of DB2-REQUEST-TYPE: DB2-CONNECT='C', DB2-DISCONNECT='D', DB2-STATUS='S'."},
+      {"line": 42, "statement_id": "SYS-PORTFOLIO-001-FIL-0060-STMT-000018", "note": "PERFORM THRU flagged (unstructured)."},
+      {"line": 45, "statement_id": "SYS-PORTFOLIO-001-FIL-0060-STMT-000019", "note": "PERFORM THRU flagged (unstructured)."},
+      {"line": 48, "statement_id": "SYS-PORTFOLIO-001-FIL-0060-STMT-000020", "note": "PERFORM THRU flagged (unstructured)."},
+      {"line": 52, "statement_id": "SYS-PORTFOLIO-001-FIL-0060-STMT-000002", "note": "EXEC CICS RETURN with no TRANSID or COMMAREA: control returns to the invoking program (callers DB2RECV and INQHIST use EXEC CICS LINK) or to CICS."}
+    ]
+  },
+  {
+    "name": "P100-PROCESS-CONNECT",
+    "paragraph_id": "SYS-PORTFOLIO-001-FIL-0060-PAR-0002",
+    "section": null,
+    "section_id": null,
+    "line_range": [54, 62],
+    "pseudocode": [
+      "IF ws_active_connections < ws_max_connections THEN  -- connection-pool limit check",
+      "  CALL P110-establish-connection THRU P110-exit  !! PERFORM THRU: runs P110-ESTABLISH-CONNECTION then P110-EXIT in sequence",
+      "ELSE",
+      "  SET db2_error_msg = 'Maximum connections reached'",
+      "  SET db2_response_code = -1",
+      "END IF",
+      "-- Falls through to P100-EXIT (end of the PERFORM THRU range)"
+    ],
+    "pseudocode_statement_ids": [
+      ["SYS-PORTFOLIO-001-FIL-0060-STMT-000003"],
+      ["SYS-PORTFOLIO-001-FIL-0060-STMT-000023"],
+      ["SYS-PORTFOLIO-001-FIL-0060-STMT-000003"],
+      ["SYS-PORTFOLIO-001-FIL-0060-STMT-000021"],
+      ["SYS-PORTFOLIO-001-FIL-0060-STMT-000022"],
+      ["SYS-PORTFOLIO-001-FIL-0060-STMT-000003"],
+      []
+    ],
+    "pseudocode_text": "IF ws_active_connections < ws_max_connections THEN  -- connection-pool limit check\n  CALL P110-establish-connection THRU P110-exit  !! PERFORM THRU: runs P110-ESTABLISH-CONNECTION then P110-EXIT in sequence\nELSE\n  SET db2_error_msg = 'Maximum connections reached'\n  SET db2_response_code = -1\nEND IF\n-- Falls through to P100-EXIT (end of the PERFORM THRU range)",
+    "statement_ids": ["SYS-PORTFOLIO-001-FIL-0060-STMT-000003", "SYS-PORTFOLIO-001-FIL-0060-STMT-000023", "SYS-PORTFOLIO-001-FIL-0060-STMT-000021", "SYS-PORTFOLIO-001-FIL-0060-STMT-000022"],
+    "untranslated_statement_ids": [],
+    "field_references": ["WS-ACTIVE-CONNECTIONS", "WS-MAX-CONNECTIONS", "DB2-ERROR-MSG", "DB2-RESPONSE-CODE"],
+    "field_reference_ids": [
+      {"name": "WS-ACTIVE-CONNECTIONS", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0060-FLD-000002", "target_kind": "field", "candidate_ids": []},
+      {"name": "WS-MAX-CONNECTIONS", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0060-FLD-000004", "target_kind": "field", "candidate_ids": []},
+      {"name": "DB2-ERROR-MSG", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0060-FLD-000013", "target_kind": "field", "candidate_ids": []},
+      {"name": "DB2-RESPONSE-CODE", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0060-FLD-000009", "target_kind": "field", "candidate_ids": []}
+    ],
+    "calls_made": ["P110-ESTABLISH-CONNECTION"],
+    "calls_made_ids": [{"name": "P110-ESTABLISH-CONNECTION", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0060-PAR-0004", "section_id": null}],
+    "complexity_score": 1,
+    "has_unresolved_statements": false,
+    "annotations": [
+      {"line": 55, "statement_id": "SYS-PORTFOLIO-001-FIL-0060-STMT-000003", "note": "WS-MAX-CONNECTIONS has VALUE 100 (line 22); WS-ACTIVE-CONNECTIONS has VALUE 0 (line 20). Both are WORKING-STORAGE items; the source shows no mechanism that keeps the counter across CICS tasks.", "ambiguous": true},
+      {"line": 56, "statement_id": "SYS-PORTFOLIO-001-FIL-0060-STMT-000023", "note": "PERFORM THRU flagged (unstructured)."}
+    ]
+  },
+  {
+    "name": "P100-EXIT",
+    "paragraph_id": "SYS-PORTFOLIO-001-FIL-0060-PAR-0003",
+    "section": null,
+    "section_id": null,
+    "line_range": [63, 65],
+    "pseudocode": ["EXIT  -- end of P100 PERFORM THRU range; no-op, control returns to the PERFORM at line 42"],
+    "pseudocode_statement_ids": [["SYS-PORTFOLIO-001-FIL-0060-STMT-000004"]],
+    "pseudocode_text": "EXIT  -- end of P100 PERFORM THRU range; no-op, control returns to the PERFORM at line 42",
+    "statement_ids": ["SYS-PORTFOLIO-001-FIL-0060-STMT-000004"],
+    "untranslated_statement_ids": [],
+    "field_references": [],
+    "field_reference_ids": [],
+    "calls_made": [],
+    "calls_made_ids": [],
+    "complexity_score": 1,
+    "has_unresolved_statements": false,
+    "annotations": []
+  },
+  {
+    "name": "P110-ESTABLISH-CONNECTION",
+    "paragraph_id": "SYS-PORTFOLIO-001-FIL-0060-PAR-0004",
+    "section": null,
+    "section_id": null,
+    "line_range": [66, 79],
+    "pseudocode": [
+      "SQL CONNECT TO database POSMVP",
+      "IF sqlcode = 0 THEN  -- CHECK SQLCODE (SQLCODE is a precompiler SQLCA item, not defined in the repository)",
+      "  INCREMENT ws_active_connections BY 1",
+      "  SET db2_sqlcode = sqlcode",
+      "  SET db2_response_code = 0",
+      "  CALL P120-generate-token THRU P120-exit  !! PERFORM THRU: runs P120-GENERATE-TOKEN then P120-EXIT in sequence",
+      "ELSE",
+      "  SET db2_sqlcode = sqlcode",
+      "  SET db2_error_msg = sqlerrmc  -- SQL error message text from the SQLCA (precompiler item)",
+      "  SET db2_response_code = -1",
+      "END IF",
+      "-- Falls through to P110-EXIT (end of the PERFORM THRU range)"
+    ],
+    "pseudocode_statement_ids": [
+      ["SYS-PORTFOLIO-001-FIL-0060-STMT-000005"],
+      ["SYS-PORTFOLIO-001-FIL-0060-STMT-000006"],
+      ["SYS-PORTFOLIO-001-FIL-0060-STMT-000027"],
+      ["SYS-PORTFOLIO-001-FIL-0060-STMT-000028"],
+      ["SYS-PORTFOLIO-001-FIL-0060-STMT-000029"],
+      ["SYS-PORTFOLIO-001-FIL-0060-STMT-000030"],
+      ["SYS-PORTFOLIO-001-FIL-0060-STMT-000006"],
+      ["SYS-PORTFOLIO-001-FIL-0060-STMT-000024"],
+      ["SYS-PORTFOLIO-001-FIL-0060-STMT-000025"],
+      ["SYS-PORTFOLIO-001-FIL-0060-STMT-000026"],
+      ["SYS-PORTFOLIO-001-FIL-0060-STMT-000006"],
+      []
+    ],
+    "pseudocode_text": "SQL CONNECT TO database POSMVP\nIF sqlcode = 0 THEN  -- CHECK SQLCODE (SQLCODE is a precompiler SQLCA item, not defined in the repository)\n  INCREMENT ws_active_connections BY 1\n  SET db2_sqlcode = sqlcode\n  SET db2_response_code = 0\n  CALL P120-generate-token THRU P120-exit  !! PERFORM THRU: runs P120-GENERATE-TOKEN then P120-EXIT in sequence\nELSE\n  SET db2_sqlcode = sqlcode\n  SET db2_error_msg = sqlerrmc  -- SQL error message text from the SQLCA (precompiler item)\n  SET db2_response_code = -1\nEND IF\n-- Falls through to P110-EXIT (end of the PERFORM THRU range)",
+    "statement_ids": ["SYS-PORTFOLIO-001-FIL-0060-STMT-000005", "SYS-PORTFOLIO-001-FIL-0060-STMT-000006", "SYS-PORTFOLIO-001-FIL-0060-STMT-000027", "SYS-PORTFOLIO-001-FIL-0060-STMT-000028", "SYS-PORTFOLIO-001-FIL-0060-STMT-000029", "SYS-PORTFOLIO-001-FIL-0060-STMT-000030", "SYS-PORTFOLIO-001-FIL-0060-STMT-000024", "SYS-PORTFOLIO-001-FIL-0060-STMT-000025", "SYS-PORTFOLIO-001-FIL-0060-STMT-000026"],
+    "untranslated_statement_ids": [],
+    "field_references": ["SQLCODE", "WS-ACTIVE-CONNECTIONS", "DB2-SQLCODE", "DB2-RESPONSE-CODE", "SQLERRMC", "DB2-ERROR-MSG"],
+    "field_reference_ids": [
+      {"name": "SQLCODE", "qualifiers": [], "resolution": "UNRESOLVED", "target_id": null, "target_kind": null, "candidate_ids": []},
+      {"name": "WS-ACTIVE-CONNECTIONS", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0060-FLD-000002", "target_kind": "field", "candidate_ids": []},
+      {"name": "DB2-SQLCODE", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0060-FLD-000012", "target_kind": "field", "candidate_ids": []},
+      {"name": "DB2-RESPONSE-CODE", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0060-FLD-000009", "target_kind": "field", "candidate_ids": []},
+      {"name": "SQLERRMC", "qualifiers": [], "resolution": "UNRESOLVED", "target_id": null, "target_kind": null, "candidate_ids": []},
+      {"name": "DB2-ERROR-MSG", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0060-FLD-000013", "target_kind": "field", "candidate_ids": []}
+    ],
+    "calls_made": ["P120-GENERATE-TOKEN"],
+    "calls_made_ids": [{"name": "P120-GENERATE-TOKEN", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0060-PAR-0006", "section_id": null}],
+    "complexity_score": 2,
+    "has_unresolved_statements": false,
+    "annotations": [
+      {"line": 67, "statement_id": "SYS-PORTFOLIO-001-FIL-0060-STMT-000005", "note": "Embedded SQL CONNECT to the literal location POSMVP."},
+      {"line": 69, "statement_id": "SYS-PORTFOLIO-001-FIL-0060-STMT-000006", "note": "SQLCODE check branch; SQLCODE and SQLERRMC have no Field ID (not defined in repository copybook SQLCA)."},
+      {"line": 73, "statement_id": "SYS-PORTFOLIO-001-FIL-0060-STMT-000030", "note": "PERFORM THRU flagged (unstructured)."}
+    ]
+  },
+  {
+    "name": "P110-EXIT",
+    "paragraph_id": "SYS-PORTFOLIO-001-FIL-0060-PAR-0005",
+    "section": null,
+    "section_id": null,
+    "line_range": [80, 82],
+    "pseudocode": ["EXIT  -- end of P110 PERFORM THRU range; no-op, control returns to the PERFORM at line 56"],
+    "pseudocode_statement_ids": [["SYS-PORTFOLIO-001-FIL-0060-STMT-000007"]],
+    "pseudocode_text": "EXIT  -- end of P110 PERFORM THRU range; no-op, control returns to the PERFORM at line 56",
+    "statement_ids": ["SYS-PORTFOLIO-001-FIL-0060-STMT-000007"],
+    "untranslated_statement_ids": [],
+    "field_references": [],
+    "field_reference_ids": [],
+    "calls_made": [],
+    "calls_made_ids": [],
+    "complexity_score": 1,
+    "has_unresolved_statements": false,
+    "annotations": []
+  },
+  {
+    "name": "P120-GENERATE-TOKEN",
+    "paragraph_id": "SYS-PORTFOLIO-001-FIL-0060-PAR-0006",
+    "section": null,
+    "section_id": null,
+    "line_range": [83, 87],
+    "pseudocode": [
+      "SET db2_connection_token = CURRENT_DATE_TIME()  -- FUNCTION CURRENT-DATE (21 characters) moved into a 16-character field: only the first 16 characters are kept",
+      "CONCATENATE db2_connection_token + ws_active_connections INTO db2_connection_token  -- COBOL STRING, DELIMITED BY SIZE",
+      "-- !! REVIEW: the receiving field is also the first sending field and is already full, so the appended counter cannot fit; the result of an overlapping STRING is ambiguous",
+      "-- Falls through to P120-EXIT (end of the PERFORM THRU range)"
+    ],
+    "pseudocode_statement_ids": [
+      ["SYS-PORTFOLIO-001-FIL-0060-STMT-000008"],
+      ["SYS-PORTFOLIO-001-FIL-0060-STMT-000009"],
+      [],
+      []
+    ],
+    "pseudocode_text": "SET db2_connection_token = CURRENT_DATE_TIME()  -- FUNCTION CURRENT-DATE (21 characters) moved into a 16-character field: only the first 16 characters are kept\nCONCATENATE db2_connection_token + ws_active_connections INTO db2_connection_token  -- COBOL STRING, DELIMITED BY SIZE\n-- !! REVIEW: the receiving field is also the first sending field and is already full, so the appended counter cannot fit; the result of an overlapping STRING is ambiguous\n-- Falls through to P120-EXIT (end of the PERFORM THRU range)",
+    "statement_ids": ["SYS-PORTFOLIO-001-FIL-0060-STMT-000008", "SYS-PORTFOLIO-001-FIL-0060-STMT-000009"],
+    "untranslated_statement_ids": [],
+    "field_references": ["DB2-CONNECTION-TOKEN", "WS-ACTIVE-CONNECTIONS"],
+    "field_reference_ids": [
+      {"name": "DB2-CONNECTION-TOKEN", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0060-FLD-000010", "target_kind": "field", "candidate_ids": []},
+      {"name": "WS-ACTIVE-CONNECTIONS", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0060-FLD-000002", "target_kind": "field", "candidate_ids": []}
+    ],
+    "calls_made": [],
+    "calls_made_ids": [],
+    "complexity_score": 1,
+    "has_unresolved_statements": false,
+    "annotations": [
+      {"line": 84, "statement_id": "SYS-PORTFOLIO-001-FIL-0060-STMT-000008", "note": "DB2-CONNECTION-TOKEN is PIC X(16) (line 34); FUNCTION CURRENT-DATE returns 21 characters, truncated on the MOVE."},
+      {"line": 85, "statement_id": "SYS-PORTFOLIO-001-FIL-0060-STMT-000009", "note": "STRING with the same item as sender and receiver (lines 85-87), recorded as written. WS-ACTIVE-CONNECTIONS is PIC S9(8) COMP (binary).", "ambiguous": true}
+    ]
+  },
+  {
+    "name": "P120-EXIT",
+    "paragraph_id": "SYS-PORTFOLIO-001-FIL-0060-PAR-0007",
+    "section": null,
+    "section_id": null,
+    "line_range": [88, 90],
+    "pseudocode": ["EXIT  -- end of P120 PERFORM THRU range; no-op, control returns to the PERFORM at line 73"],
+    "pseudocode_statement_ids": [["SYS-PORTFOLIO-001-FIL-0060-STMT-000010"]],
+    "pseudocode_text": "EXIT  -- end of P120 PERFORM THRU range; no-op, control returns to the PERFORM at line 73",
+    "statement_ids": ["SYS-PORTFOLIO-001-FIL-0060-STMT-000010"],
+    "untranslated_statement_ids": [],
+    "field_references": [],
+    "field_reference_ids": [],
+    "calls_made": [],
+    "calls_made_ids": [],
+    "complexity_score": 1,
+    "has_unresolved_statements": false,
+    "annotations": []
+  },
+  {
+    "name": "P200-PROCESS-DISCONNECT",
+    "paragraph_id": "SYS-PORTFOLIO-001-FIL-0060-PAR-0008",
+    "section": null,
+    "section_id": null,
+    "line_range": [91, 101],
+    "pseudocode": [
+      "SQL DISCONNECT the current database connection",
+      "IF sqlcode = 0 THEN  -- CHECK SQLCODE",
+      "  COMPUTE ws_active_connections = ws_active_connections - 1",
+      "  SET db2_response_code = 0",
+      "ELSE",
+      "  SET db2_sqlcode = sqlcode",
+      "  SET db2_error_msg = sqlerrmc  -- SQL error message text from the SQLCA (precompiler item)",
+      "  SET db2_response_code = -1",
+      "END IF",
+      "-- Falls through to P200-EXIT (end of the PERFORM THRU range)"
+    ],
+    "pseudocode_statement_ids": [
+      ["SYS-PORTFOLIO-001-FIL-0060-STMT-000011"],
+      ["SYS-PORTFOLIO-001-FIL-0060-STMT-000012"],
+      ["SYS-PORTFOLIO-001-FIL-0060-STMT-000034"],
+      ["SYS-PORTFOLIO-001-FIL-0060-STMT-000035"],
+      ["SYS-PORTFOLIO-001-FIL-0060-STMT-000012"],
+      ["SYS-PORTFOLIO-001-FIL-0060-STMT-000031"],
+      ["SYS-PORTFOLIO-001-FIL-0060-STMT-000032"],
+      ["SYS-PORTFOLIO-001-FIL-0060-STMT-000033"],
+      ["SYS-PORTFOLIO-001-FIL-0060-STMT-000012"],
+      []
+    ],
+    "pseudocode_text": "SQL DISCONNECT the current database connection\nIF sqlcode = 0 THEN  -- CHECK SQLCODE\n  COMPUTE ws_active_connections = ws_active_connections - 1\n  SET db2_response_code = 0\nELSE\n  SET db2_sqlcode = sqlcode\n  SET db2_error_msg = sqlerrmc  -- SQL error message text from the SQLCA (precompiler item)\n  SET db2_response_code = -1\nEND IF\n-- Falls through to P200-EXIT (end of the PERFORM THRU range)",
+    "statement_ids": ["SYS-PORTFOLIO-001-FIL-0060-STMT-000011", "SYS-PORTFOLIO-001-FIL-0060-STMT-000012", "SYS-PORTFOLIO-001-FIL-0060-STMT-000034", "SYS-PORTFOLIO-001-FIL-0060-STMT-000035", "SYS-PORTFOLIO-001-FIL-0060-STMT-000031", "SYS-PORTFOLIO-001-FIL-0060-STMT-000032", "SYS-PORTFOLIO-001-FIL-0060-STMT-000033"],
+    "untranslated_statement_ids": [],
+    "field_references": ["SQLCODE", "WS-ACTIVE-CONNECTIONS", "DB2-RESPONSE-CODE", "DB2-SQLCODE", "SQLERRMC", "DB2-ERROR-MSG"],
+    "field_reference_ids": [
+      {"name": "SQLCODE", "qualifiers": [], "resolution": "UNRESOLVED", "target_id": null, "target_kind": null, "candidate_ids": []},
+      {"name": "WS-ACTIVE-CONNECTIONS", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0060-FLD-000002", "target_kind": "field", "candidate_ids": []},
+      {"name": "DB2-RESPONSE-CODE", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0060-FLD-000009", "target_kind": "field", "candidate_ids": []},
+      {"name": "DB2-SQLCODE", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0060-FLD-000012", "target_kind": "field", "candidate_ids": []},
+      {"name": "SQLERRMC", "qualifiers": [], "resolution": "UNRESOLVED", "target_id": null, "target_kind": null, "candidate_ids": []},
+      {"name": "DB2-ERROR-MSG", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0060-FLD-000013", "target_kind": "field", "candidate_ids": []}
+    ],
+    "calls_made": [],
+    "calls_made_ids": [],
+    "complexity_score": 2,
+    "has_unresolved_statements": false,
+    "annotations": [
+      {"line": 92, "statement_id": "SYS-PORTFOLIO-001-FIL-0060-STMT-000011", "note": "Embedded SQL DISCONNECT with no operand, written as in the source."},
+      {"line": 94, "statement_id": "SYS-PORTFOLIO-001-FIL-0060-STMT-000012", "note": "SQLCODE check branch; SQLCODE and SQLERRMC have no Field ID."}
+    ]
+  },
+  {
+    "name": "P200-EXIT",
+    "paragraph_id": "SYS-PORTFOLIO-001-FIL-0060-PAR-0009",
+    "section": null,
+    "section_id": null,
+    "line_range": [102, 104],
+    "pseudocode": ["EXIT  -- end of P200 PERFORM THRU range; no-op, control returns to the PERFORM at line 45"],
+    "pseudocode_statement_ids": [["SYS-PORTFOLIO-001-FIL-0060-STMT-000013"]],
+    "pseudocode_text": "EXIT  -- end of P200 PERFORM THRU range; no-op, control returns to the PERFORM at line 45",
+    "statement_ids": ["SYS-PORTFOLIO-001-FIL-0060-STMT-000013"],
+    "untranslated_statement_ids": [],
+    "field_references": [],
+    "field_reference_ids": [],
+    "calls_made": [],
+    "calls_made_ids": [],
+    "complexity_score": 1,
+    "has_unresolved_statements": false,
+    "annotations": []
+  },
+  {
+    "name": "P300-CHECK-STATUS",
+    "paragraph_id": "SYS-PORTFOLIO-001-FIL-0060-PAR-0010",
+    "section": null,
+    "section_id": null,
+    "line_range": [105, 118],
+    "pseudocode": [
+      "SQL SELECT CURRENT SERVER INTO db2_error_msg  -- the name of the connected DB2 server is placed in the error-message field",
+      "IF sqlcode = 0 THEN  -- CHECK SQLCODE",
+      "  SET db2_response_code = 0",
+      "ELSE",
+      "  SET db2_sqlcode = sqlcode",
+      "  SET db2_response_code = -1",
+      "END IF",
+      "SET db2_response_code = ws_active_connections  -- unconditionally overwrites the 0 / -1 result set just above",
+      "-- Falls through to P300-EXIT (end of the PERFORM THRU range)"
+    ],
+    "pseudocode_statement_ids": [
+      ["SYS-PORTFOLIO-001-FIL-0060-STMT-000014"],
+      ["SYS-PORTFOLIO-001-FIL-0060-STMT-000015"],
+      ["SYS-PORTFOLIO-001-FIL-0060-STMT-000038"],
+      ["SYS-PORTFOLIO-001-FIL-0060-STMT-000015"],
+      ["SYS-PORTFOLIO-001-FIL-0060-STMT-000036"],
+      ["SYS-PORTFOLIO-001-FIL-0060-STMT-000037"],
+      ["SYS-PORTFOLIO-001-FIL-0060-STMT-000015"],
+      ["SYS-PORTFOLIO-001-FIL-0060-STMT-000016"],
+      []
+    ],
+    "pseudocode_text": "SQL SELECT CURRENT SERVER INTO db2_error_msg  -- the name of the connected DB2 server is placed in the error-message field\nIF sqlcode = 0 THEN  -- CHECK SQLCODE\n  SET db2_response_code = 0\nELSE\n  SET db2_sqlcode = sqlcode\n  SET db2_response_code = -1\nEND IF\nSET db2_response_code = ws_active_connections  -- unconditionally overwrites the 0 / -1 result set just above\n-- Falls through to P300-EXIT (end of the PERFORM THRU range)",
+    "statement_ids": ["SYS-PORTFOLIO-001-FIL-0060-STMT-000014", "SYS-PORTFOLIO-001-FIL-0060-STMT-000015", "SYS-PORTFOLIO-001-FIL-0060-STMT-000038", "SYS-PORTFOLIO-001-FIL-0060-STMT-000036", "SYS-PORTFOLIO-001-FIL-0060-STMT-000037", "SYS-PORTFOLIO-001-FIL-0060-STMT-000016"],
+    "untranslated_statement_ids": [],
+    "field_references": ["DB2-ERROR-MSG", "SQLCODE", "DB2-RESPONSE-CODE", "DB2-SQLCODE", "WS-ACTIVE-CONNECTIONS"],
+    "field_reference_ids": [
+      {"name": "DB2-ERROR-MSG", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0060-FLD-000013", "target_kind": "field", "candidate_ids": []},
+      {"name": "SQLCODE", "qualifiers": [], "resolution": "UNRESOLVED", "target_id": null, "target_kind": null, "candidate_ids": []},
+      {"name": "DB2-RESPONSE-CODE", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0060-FLD-000009", "target_kind": "field", "candidate_ids": []},
+      {"name": "DB2-SQLCODE", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0060-FLD-000012", "target_kind": "field", "candidate_ids": []},
+      {"name": "WS-ACTIVE-CONNECTIONS", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0060-FLD-000002", "target_kind": "field", "candidate_ids": []}
+    ],
+    "calls_made": [],
+    "calls_made_ids": [],
+    "complexity_score": 2,
+    "has_unresolved_statements": false,
+    "annotations": [
+      {"line": 106, "statement_id": "SYS-PORTFOLIO-001-FIL-0060-STMT-000014", "note": "Embedded SQL SELECT of the special register CURRENT SERVER into host variable :DB2-ERROR-MSG."},
+      {"line": 117, "statement_id": "SYS-PORTFOLIO-001-FIL-0060-STMT-000016", "note": "The MOVE at lines 117-118 runs after the SQLCODE IF on every path, so the caller always receives the active-connection count in DB2-RESPONSE-CODE; the success/failure value set at lines 111 and 114 is lost (DB2-SQLCODE still carries SQLCODE on failure)."}
+    ]
+  },
+  {
+    "name": "P300-EXIT",
+    "paragraph_id": "SYS-PORTFOLIO-001-FIL-0060-PAR-0011",
+    "section": null,
+    "section_id": null,
+    "line_range": [119, 120],
+    "pseudocode": ["EXIT  -- end of P300 PERFORM THRU range; no-op, control returns to the PERFORM at line 48"],
+    "pseudocode_statement_ids": [["SYS-PORTFOLIO-001-FIL-0060-STMT-000017"]],
+    "pseudocode_text": "EXIT  -- end of P300 PERFORM THRU range; no-op, control returns to the PERFORM at line 48",
+    "statement_ids": ["SYS-PORTFOLIO-001-FIL-0060-STMT-000017"],
+    "untranslated_statement_ids": [],
+    "field_references": [],
+    "field_reference_ids": [],
+    "calls_made": [],
+    "calls_made_ids": [],
+    "complexity_score": 1,
+    "has_unresolved_statements": false,
+    "annotations": []
+  }
+],
+"unresolved_statements": [],
+"pseudocode_issues": [
+  {"severity": "info", "type": "id_unresolved", "kind": "field", "name": "SQLCODE", "paragraphs": ["P110-ESTABLISH-CONNECTION", "P200-PROCESS-DISCONNECT", "P300-CHECK-STATUS"], "message": "SQLCODE: resolve-field-references UNRESOLVED; target_id null."},
+  {"severity": "info", "type": "id_unresolved", "kind": "field", "name": "SQLERRMC", "paragraphs": ["P110-ESTABLISH-CONNECTION", "P200-PROCESS-DISCONNECT"], "message": "SQLERRMC: resolve-field-references UNRESOLVED; target_id null."},
+  {"severity": "info", "type": "ambiguous_statement", "line": 85, "statement_id": "SYS-PORTFOLIO-001-FIL-0060-STMT-000009", "message": "STRING DB2-CONNECTION-TOKEN ... INTO DB2-CONNECTION-TOKEN uses the same item as sender and receiver; recorded verbatim in meaning and flagged !! REVIEW."}
+]
+}

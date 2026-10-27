@@ -1,0 +1,727 @@
+{
+"program_summary": {"program_id": "DB2STAT", "file_id": "SYS-PORTFOLIO-001-FIL-0057", "logic_file": "program_logic/SYS-PORTFOLIO-001-FIL-0057__DB2STAT_logic.json", "logic_status": "partial", "paragraphs_translated": 9, "execution_paths": 1, "branches": 6, "loops": 0, "dead_code_confirmed": 0, "goto_annotations": 0, "unresolvable_paths": 0, "unresolved_ids": 1},
+"meta": {"generated_at": "2026-10-26T16:58:46Z", "agent_version": "4_logic@1.0", "source_artifacts": ["output/parser/parser_artifact.json", "output/parser/raw_structure/SYS-PORTFOLIO-001-FIL-0057__DB2STAT.json", "output/data/data_artifact.json", "output/data/data_layouts/SYS-PORTFOLIO-001-FIL-0057__DB2STAT_WS.json", "output/data/data_layouts/SYS-PORTFOLIO-001-FIL-0017__SQLCA.json", "output/data/data_layouts/SYS-PORTFOLIO-001-FIL-0015__DBPROC.json", "output/data/data_layouts/SYS-PORTFOLIO-001-FIL-0007__ERRHAND.json"], "neo4j_access": "read-only"},
+"program_id": "DB2STAT",
+"system_id": "SYS-PORTFOLIO-001",
+"file_id": "SYS-PORTFOLIO-001-FIL-0057",
+"path_id": "SYS-PORTFOLIO-001-PATH-0057",
+"relative_path": "src/programs/common/DB2STAT.cbl",
+"parse_run_id": "PRUN-20261023T023803Z-ACC2",
+"data_run_id": "DRUN-20261024T215053Z-ACC1",
+"upstream": {
+  "verification": {
+    "verdict": "VALID",
+    "verdict_reasons": ["V2, V3 and V4 consistent; Agent 2 parse_status 'success'; copybook layouts SQLCA, DBPROC and ERRHAND present and consistent; no unresolved copy stubs"],
+    "v1": {"raw_structure": "present", "parse_status": "success", "program_layout": "present", "copybook_layouts": [{"copybook": "SQLCA", "copybook_file_id": "SYS-PORTFOLIO-001-FIL-0017", "layout": "present"}, {"copybook": "DBPROC", "copybook_file_id": "SYS-PORTFOLIO-001-FIL-0015", "layout": "present"}, {"copybook": "ERRHAND", "copybook_file_id": "SYS-PORTFOLIO-001-FIL-0007", "layout": "present"}], "unresolved_copy_stubs": 0},
+    "v2_file_identities": {
+      "program_entries": {"require_completed": ["parser", "data"], "entries": ["raw_structure|SYS-PORTFOLIO-001-FIL-0057", "data_layout|SYS-PORTFOLIO-001-FIL-0057"], "result": "batched with DB2ERR, DB2CMT and AUDPROC program entries: checked 8, ok 8, problems [], duplicates [], consistent true"},
+      "copybook_entries": {"require_completed": ["data"], "entries": ["data_layout|SYS-PORTFOLIO-001-FIL-0017", "data_layout|SYS-PORTFOLIO-001-FIL-0015", "data_layout|SYS-PORTFOLIO-001-FIL-0007"], "result": "batched with copybooks FIL-0016 and FIL-0005: checked 5, ok 5, problems [], duplicates [], consistent true"},
+      "consistent": true
+    },
+    "v3_structure_identities": {"sections_checked": 3, "paragraphs_checked": 9, "statements_checked": 66, "edges_checked": 14, "registered_edges": 14, "section_problems": [], "paragraph_problems": [], "statement_problems": [], "edge_problems": [], "invalid_registered_edges": [], "registered_not_in_json": {"missing_count": 0}, "duplicate_ids_in_json": [], "consistent": true, "note": "data-division section names were sent as null (raw_structure does not carry them); one relationship per resolved PERFORM_SIMPLE edge"},
+    "v4_data_identities": [
+      {"file_id": "SYS-PORTFOLIO-001-FIL-0057", "layout": "program", "records_checked": 5, "fields_checked": 25, "expansions_checked": 3, "record_problems": [], "field_problems": [], "expansion_problems": [], "copybook_records_in_program": 0, "registered_not_in_json": {"missing_count": 0}, "duplicate_ids_in_json": [], "consistent": true, "note": "the layout's copy_expansions carry holder_id null with section_id SYS-PORTFOLIO-001-FIL-0057-SEC-0002; that section_id (copied from the same entries) was sent as holder_id, and target_record_ids as expanded_record_ids"},
+      {"file_id": "SYS-PORTFOLIO-001-FIL-0017", "layout": "copybook SQLCA", "records_checked": 1, "fields_checked": 7, "expansions_checked": 0, "record_problems": [], "field_problems": [], "expansion_problems": [], "copybook_records_in_program": 0, "registered_not_in_json": {"missing_count": 0}, "duplicate_ids_in_json": [], "consistent": true, "note": "verified once in this execution"},
+      {"file_id": "SYS-PORTFOLIO-001-FIL-0015", "layout": "copybook DBPROC", "records_checked": 1, "fields_checked": 11, "expansions_checked": 0, "record_problems": [], "field_problems": [], "expansion_problems": [], "copybook_records_in_program": 0, "registered_not_in_json": {"missing_count": 0}, "duplicate_ids_in_json": [], "consistent": true, "note": "verified once in this execution"},
+      {"file_id": "SYS-PORTFOLIO-001-FIL-0007", "layout": "copybook ERRHAND", "records_checked": 5, "fields_checked": 25, "expansions_checked": 0, "record_problems": [], "field_problems": [], "expansion_problems": [], "copybook_records_in_program": 0, "registered_not_in_json": {"missing_count": 0}, "duplicate_ids_in_json": [], "consistent": true, "note": "verified once in this execution"}
+    ]
+  }
+},
+"execution_traces": [
+  {
+    "entry_point": "0000-MAIN",
+    "entry_point_id": "SYS-PORTFOLIO-001-FIL-0057-PAR-0001",
+    "entry_type": "called_subprogram",
+    "entry_note": "PROCEDURE DIVISION USING LS-STAT-REQUEST (line 57); the program ends with GOBACK. Steps are listed depth-first in execution order: steps of a performed paragraph follow the PERFORM step that invokes it.",
+    "steps": [
+      {"step": 1, "paragraph": "0000-MAIN", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0057-PAR-0001", "action": "EVALUATE", "target": null, "target_paragraph_id": null, "target_section_id": null, "condition": {"text": "EVALUATE TRUE", "fields": [], "field_ids": []}, "line": 59, "statement_id": "SYS-PORTFOLIO-001-FIL-0057-STMT-000001"},
+      {"step": 2, "paragraph": "0000-MAIN", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0057-PAR-0001", "action": "PERFORM", "target": "1000-INITIALIZE", "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0057-PAR-0002", "target_section_id": null,
+       "condition": {"text": "WHEN FUNC-INIT", "fields": ["FUNC-INIT"], "field_ids": [{"name": "FUNC-INIT", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0057-FLD-000013", "target_kind": "condition", "candidate_ids": []}]}, "line": 61, "statement_id": "SYS-PORTFOLIO-001-FIL-0057-STMT-000036"},
+      {"step": 3, "paragraph": "1000-INITIALIZE", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0057-PAR-0002", "action": "PERFORM", "target": "1100-CREATE-STATS-TABLE", "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0057-PAR-0003", "target_section_id": null, "condition": null, "line": 84, "statement_id": "SYS-PORTFOLIO-001-FIL-0057-STMT-000008"},
+      {"step": 4, "paragraph": "1100-CREATE-STATS-TABLE", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0057-PAR-0003", "action": "EXEC_SQL", "target": null, "target_paragraph_id": null, "target_section_id": null, "condition": null, "line": 89, "statement_id": "SYS-PORTFOLIO-001-FIL-0057-STMT-000010", "note": "DECLARE GLOBAL TEMPORARY TABLE SESSION.DBSTATS"},
+      {"step": 5, "paragraph": "1100-CREATE-STATS-TABLE", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0057-PAR-0003", "action": "IF", "target": null, "target_paragraph_id": null, "target_section_id": null,
+       "condition": {"text": "SQLCODE NOT = 0 AND SQLCODE NOT = -601", "fields": ["SQLCODE"], "field_ids": [{"name": "SQLCODE", "qualifiers": [], "resolution": "UNRESOLVED", "target_id": null, "target_kind": null, "candidate_ids": []}]}, "line": 105, "statement_id": "SYS-PORTFOLIO-001-FIL-0057-STMT-000011"},
+      {"step": 6, "paragraph": "1100-CREATE-STATS-TABLE", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0057-PAR-0003", "action": "PERFORM", "target": "9000-ERROR-ROUTINE", "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0057-PAR-0009", "target_section_id": null,
+       "condition": {"text": "THEN of SQLCODE NOT = 0 AND SQLCODE NOT = -601", "fields": ["SQLCODE"], "field_ids": [{"name": "SQLCODE", "qualifiers": [], "resolution": "UNRESOLVED", "target_id": null, "target_kind": null, "candidate_ids": []}]}, "line": 107, "statement_id": "SYS-PORTFOLIO-001-FIL-0057-STMT-000042"},
+      {"step": 7, "paragraph": "9000-ERROR-ROUTINE", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0057-PAR-0009", "action": "CALL", "target": "ERRPROC", "target_paragraph_id": null, "target_section_id": null, "condition": null, "line": 227, "statement_id": "SYS-PORTFOLIO-001-FIL-0057-STMT-000034", "note": "static external CALL 'ERRPROC' USING ERR-MESSAGE"},
+      {"step": 8, "paragraph": "1000-INITIALIZE", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0057-PAR-0002", "action": "PERFORM", "target": "1200-INSERT-INITIAL", "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0057-PAR-0004", "target_section_id": null, "condition": null, "line": 85, "statement_id": "SYS-PORTFOLIO-001-FIL-0057-STMT-000009", "note": "performed unconditionally, also after an error in 1100-CREATE-STATS-TABLE"},
+      {"step": 9, "paragraph": "1200-INSERT-INITIAL", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0057-PAR-0004", "action": "EXEC_SQL", "target": null, "target_paragraph_id": null, "target_section_id": null, "condition": null, "line": 112, "statement_id": "SYS-PORTFOLIO-001-FIL-0057-STMT-000012", "note": "INSERT INTO SESSION.DBSTATS"},
+      {"step": 10, "paragraph": "1200-INSERT-INITIAL", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0057-PAR-0004", "action": "IF", "target": null, "target_paragraph_id": null, "target_section_id": null,
+       "condition": {"text": "SQLCODE = 0", "fields": ["SQLCODE"], "field_ids": [{"name": "SQLCODE", "qualifiers": [], "resolution": "UNRESOLVED", "target_id": null, "target_kind": null, "candidate_ids": []}]}, "line": 122, "statement_id": "SYS-PORTFOLIO-001-FIL-0057-STMT-000013"},
+      {"step": 11, "paragraph": "1200-INSERT-INITIAL", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0057-PAR-0004", "action": "PERFORM", "target": "9000-ERROR-ROUTINE", "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0057-PAR-0009", "target_section_id": null,
+       "condition": {"text": "ELSE of SQLCODE = 0", "fields": ["SQLCODE"], "field_ids": [{"name": "SQLCODE", "qualifiers": [], "resolution": "UNRESOLVED", "target_id": null, "target_kind": null, "candidate_ids": []}]}, "line": 126, "statement_id": "SYS-PORTFOLIO-001-FIL-0057-STMT-000044"},
+      {"step": 12, "paragraph": "9000-ERROR-ROUTINE", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0057-PAR-0009", "action": "CALL", "target": "ERRPROC", "target_paragraph_id": null, "target_section_id": null, "condition": null, "line": 227, "statement_id": "SYS-PORTFOLIO-001-FIL-0057-STMT-000034"},
+      {"step": 13, "paragraph": "0000-MAIN", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0057-PAR-0001", "action": "PERFORM", "target": "2000-UPDATE-STATS", "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0057-PAR-0005", "target_section_id": null,
+       "condition": {"text": "WHEN FUNC-UPDT", "fields": ["FUNC-UPDT"], "field_ids": [{"name": "FUNC-UPDT", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0057-FLD-000014", "target_kind": "condition", "candidate_ids": []}]}, "line": 63, "statement_id": "SYS-PORTFOLIO-001-FIL-0057-STMT-000038"},
+      {"step": 14, "paragraph": "2000-UPDATE-STATS", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0057-PAR-0005", "action": "EXEC_SQL", "target": null, "target_paragraph_id": null, "target_section_id": null, "condition": null, "line": 138, "statement_id": "SYS-PORTFOLIO-001-FIL-0057-STMT-000020", "note": "UPDATE SESSION.DBSTATS counters"},
+      {"step": 15, "paragraph": "2000-UPDATE-STATS", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0057-PAR-0005", "action": "IF", "target": null, "target_paragraph_id": null, "target_section_id": null,
+       "condition": {"text": "SQLCODE = 0", "fields": ["SQLCODE"], "field_ids": [{"name": "SQLCODE", "qualifiers": [], "resolution": "UNRESOLVED", "target_id": null, "target_kind": null, "candidate_ids": []}]}, "line": 149, "statement_id": "SYS-PORTFOLIO-001-FIL-0057-STMT-000021"},
+      {"step": 16, "paragraph": "2000-UPDATE-STATS", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0057-PAR-0005", "action": "PERFORM", "target": "9000-ERROR-ROUTINE", "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0057-PAR-0009", "target_section_id": null,
+       "condition": {"text": "ELSE of SQLCODE = 0", "fields": ["SQLCODE"], "field_ids": [{"name": "SQLCODE", "qualifiers": [], "resolution": "UNRESOLVED", "target_id": null, "target_kind": null, "candidate_ids": []}]}, "line": 153, "statement_id": "SYS-PORTFOLIO-001-FIL-0057-STMT-000047"},
+      {"step": 17, "paragraph": "9000-ERROR-ROUTINE", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0057-PAR-0009", "action": "CALL", "target": "ERRPROC", "target_paragraph_id": null, "target_section_id": null, "condition": null, "line": 227, "statement_id": "SYS-PORTFOLIO-001-FIL-0057-STMT-000034"},
+      {"step": 18, "paragraph": "0000-MAIN", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0057-PAR-0001", "action": "PERFORM", "target": "3000-TERMINATE", "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0057-PAR-0006", "target_section_id": null,
+       "condition": {"text": "WHEN FUNC-TERM", "fields": ["FUNC-TERM"], "field_ids": [{"name": "FUNC-TERM", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0057-FLD-000015", "target_kind": "condition", "candidate_ids": []}]}, "line": 65, "statement_id": "SYS-PORTFOLIO-001-FIL-0057-STMT-000037"},
+      {"step": 19, "paragraph": "3000-TERMINATE", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0057-PAR-0006", "action": "PERFORM", "target": "3100-CALC-TIMES", "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0057-PAR-0007", "target_section_id": null, "condition": null, "line": 161, "statement_id": "SYS-PORTFOLIO-001-FIL-0057-STMT-000024"},
+      {"step": 20, "paragraph": "3000-TERMINATE", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0057-PAR-0006", "action": "EXEC_SQL", "target": null, "target_paragraph_id": null, "target_section_id": null, "condition": null, "line": 163, "statement_id": "SYS-PORTFOLIO-001-FIL-0057-STMT-000025", "note": "UPDATE SESSION.DBSTATS end time and times"},
+      {"step": 21, "paragraph": "3000-TERMINATE", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0057-PAR-0006", "action": "IF", "target": null, "target_paragraph_id": null, "target_section_id": null,
+       "condition": {"text": "SQLCODE = 0", "fields": ["SQLCODE"], "field_ids": [{"name": "SQLCODE", "qualifiers": [], "resolution": "UNRESOLVED", "target_id": null, "target_kind": null, "candidate_ids": []}]}, "line": 171, "statement_id": "SYS-PORTFOLIO-001-FIL-0057-STMT-000026"},
+      {"step": 22, "paragraph": "3000-TERMINATE", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0057-PAR-0006", "action": "PERFORM", "target": "4000-DISPLAY-STATS", "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0057-PAR-0008", "target_section_id": null,
+       "condition": {"text": "THEN of SQLCODE = 0", "fields": ["SQLCODE"], "field_ids": [{"name": "SQLCODE", "qualifiers": [], "resolution": "UNRESOLVED", "target_id": null, "target_kind": null, "candidate_ids": []}]}, "line": 173, "statement_id": "SYS-PORTFOLIO-001-FIL-0057-STMT-000052"},
+      {"step": 23, "paragraph": "4000-DISPLAY-STATS", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0057-PAR-0008", "action": "EXEC_SQL", "target": null, "target_paragraph_id": null, "target_section_id": null, "condition": null, "line": 190, "statement_id": "SYS-PORTFOLIO-001-FIL-0057-STMT-000030", "note": "SELECT ... INTO :WS-STATS-RECORD FROM SESSION.DBSTATS"},
+      {"step": 24, "paragraph": "4000-DISPLAY-STATS", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0057-PAR-0008", "action": "IF", "target": null, "target_paragraph_id": null, "target_section_id": null,
+       "condition": {"text": "SQLCODE = 0", "fields": ["SQLCODE"], "field_ids": [{"name": "SQLCODE", "qualifiers": [], "resolution": "UNRESOLVED", "target_id": null, "target_kind": null, "candidate_ids": []}]}, "line": 200, "statement_id": "SYS-PORTFOLIO-001-FIL-0057-STMT-000031"},
+      {"step": 25, "paragraph": "4000-DISPLAY-STATS", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0057-PAR-0008", "action": "PERFORM", "target": "9000-ERROR-ROUTINE", "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0057-PAR-0009", "target_section_id": null,
+       "condition": {"text": "ELSE of SQLCODE = 0", "fields": ["SQLCODE"], "field_ids": [{"name": "SQLCODE", "qualifiers": [], "resolution": "UNRESOLVED", "target_id": null, "target_kind": null, "candidate_ids": []}]}, "line": 220, "statement_id": "SYS-PORTFOLIO-001-FIL-0057-STMT-000054"},
+      {"step": 26, "paragraph": "9000-ERROR-ROUTINE", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0057-PAR-0009", "action": "CALL", "target": "ERRPROC", "target_paragraph_id": null, "target_section_id": null, "condition": null, "line": 227, "statement_id": "SYS-PORTFOLIO-001-FIL-0057-STMT-000034"},
+      {"step": 27, "paragraph": "3000-TERMINATE", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0057-PAR-0006", "action": "PERFORM", "target": "9000-ERROR-ROUTINE", "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0057-PAR-0009", "target_section_id": null,
+       "condition": {"text": "ELSE of SQLCODE = 0", "fields": ["SQLCODE"], "field_ids": [{"name": "SQLCODE", "qualifiers": [], "resolution": "UNRESOLVED", "target_id": null, "target_kind": null, "candidate_ids": []}]}, "line": 176, "statement_id": "SYS-PORTFOLIO-001-FIL-0057-STMT-000050"},
+      {"step": 28, "paragraph": "9000-ERROR-ROUTINE", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0057-PAR-0009", "action": "CALL", "target": "ERRPROC", "target_paragraph_id": null, "target_section_id": null, "condition": null, "line": 227, "statement_id": "SYS-PORTFOLIO-001-FIL-0057-STMT-000034"},
+      {"step": 29, "paragraph": "0000-MAIN", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0057-PAR-0001", "action": "PERFORM", "target": "4000-DISPLAY-STATS", "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0057-PAR-0008", "target_section_id": null,
+       "condition": {"text": "WHEN FUNC-DISP", "fields": ["FUNC-DISP"], "field_ids": [{"name": "FUNC-DISP", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0057-FLD-000016", "target_kind": "condition", "candidate_ids": []}]}, "line": 67, "statement_id": "SYS-PORTFOLIO-001-FIL-0057-STMT-000035", "note": "same paragraph as step 23; its steps (SELECT, IF SQLCODE = 0, PERFORM 9000-ERROR-ROUTINE on failure) repeat"},
+      {"step": 30, "paragraph": "0000-MAIN", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0057-PAR-0001", "action": "PERFORM", "target": "9000-ERROR-ROUTINE", "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0057-PAR-0009", "target_section_id": null,
+       "condition": {"text": "WHEN OTHER", "fields": [], "field_ids": []}, "line": 70, "statement_id": "SYS-PORTFOLIO-001-FIL-0057-STMT-000040"},
+      {"step": 31, "paragraph": "9000-ERROR-ROUTINE", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0057-PAR-0009", "action": "CALL", "target": "ERRPROC", "target_paragraph_id": null, "target_section_id": null, "condition": null, "line": 227, "statement_id": "SYS-PORTFOLIO-001-FIL-0057-STMT-000034"},
+      {"step": 32, "paragraph": "0000-MAIN", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0057-PAR-0001", "action": "GOBACK", "target": null, "target_paragraph_id": null, "target_section_id": null, "condition": null, "line": 73, "statement_id": "SYS-PORTFOLIO-001-FIL-0057-STMT-000002"}
+    ]
+  }
+],
+"branch_map": [
+  {
+    "paragraph": "0000-MAIN",
+    "paragraph_id": "SYS-PORTFOLIO-001-FIL-0057-PAR-0001",
+    "branches": [
+      {"type": "EVALUATE", "line": 59, "statement_id": "SYS-PORTFOLIO-001-FIL-0057-STMT-000001", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0057-PAR-0001", "subjects": ["TRUE"],
+       "condition_text": "EVALUATE TRUE WHEN FUNC-INIT / WHEN FUNC-UPDT / WHEN FUNC-TERM / WHEN FUNC-DISP / WHEN OTHER",
+       "condition_fields": ["FUNC-INIT", "FUNC-UPDT", "FUNC-TERM", "FUNC-DISP"],
+       "condition_field_ids": [
+         {"name": "FUNC-INIT", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0057-FLD-000013", "target_kind": "condition", "candidate_ids": []},
+         {"name": "FUNC-UPDT", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0057-FLD-000014", "target_kind": "condition", "candidate_ids": []},
+         {"name": "FUNC-TERM", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0057-FLD-000015", "target_kind": "condition", "candidate_ids": []},
+         {"name": "FUNC-DISP", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0057-FLD-000016", "target_kind": "condition", "candidate_ids": []}
+       ],
+       "when_clauses": [
+         {"conditions": ["FUNC-INIT"], "condition_fields": ["FUNC-INIT"], "condition_values": "LS-FUNCTION = 'INIT'", "body_line_range": [61, 61], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0057-STMT-000036"]},
+         {"conditions": ["FUNC-UPDT"], "condition_fields": ["FUNC-UPDT"], "condition_values": "LS-FUNCTION = 'UPDT'", "body_line_range": [63, 63], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0057-STMT-000038"]},
+         {"conditions": ["FUNC-TERM"], "condition_fields": ["FUNC-TERM"], "condition_values": "LS-FUNCTION = 'TERM'", "body_line_range": [65, 65], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0057-STMT-000037"]},
+         {"conditions": ["FUNC-DISP"], "condition_fields": ["FUNC-DISP"], "condition_values": "LS-FUNCTION = 'DISP'", "body_line_range": [67, 67], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0057-STMT-000035"]},
+         {"conditions": ["OTHER"], "condition_fields": [], "body_line_range": [69, 70], "is_default": true, "statement_ids": ["SYS-PORTFOLIO-001-FIL-0057-STMT-000039", "SYS-PORTFOLIO-001-FIL-0057-STMT-000040"]}
+       ],
+       "has_when_other": true,
+       "end_evaluate_line": 71,
+       "outcomes": [
+         {"label": "WHEN FUNC-INIT", "line_range": [61, 61], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0057-STMT-000036"]},
+         {"label": "WHEN FUNC-UPDT", "line_range": [63, 63], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0057-STMT-000038"]},
+         {"label": "WHEN FUNC-TERM", "line_range": [65, 65], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0057-STMT-000037"]},
+         {"label": "WHEN FUNC-DISP", "line_range": [67, 67], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0057-STMT-000035"]},
+         {"label": "WHEN OTHER", "line_range": [69, 70], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0057-STMT-000039", "SYS-PORTFOLIO-001-FIL-0057-STMT-000040"]}
+       ],
+       "nested_depth": 1}
+    ]
+  },
+  {
+    "paragraph": "1100-CREATE-STATS-TABLE",
+    "paragraph_id": "SYS-PORTFOLIO-001-FIL-0057-PAR-0003",
+    "branches": [
+      {"type": "IF", "line": 105, "statement_id": "SYS-PORTFOLIO-001-FIL-0057-STMT-000011", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0057-PAR-0003",
+       "condition_text": "SQLCODE NOT = 0 AND SQLCODE NOT = -601",
+       "condition_fields": ["SQLCODE"],
+       "condition_field_ids": [{"name": "SQLCODE", "qualifiers": [], "resolution": "UNRESOLVED", "target_id": null, "target_kind": null, "candidate_ids": []}],
+       "has_else": false, "then_line_range": [106, 107], "else_line_range": null, "end_if_line": 108, "nested_depth": 1,
+       "sqlcode_check": true,
+       "outcomes": [
+         {"label": "THEN", "line_range": [106, 107], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0057-STMT-000041", "SYS-PORTFOLIO-001-FIL-0057-STMT-000042"]}
+       ]}
+    ]
+  },
+  {
+    "paragraph": "1200-INSERT-INITIAL",
+    "paragraph_id": "SYS-PORTFOLIO-001-FIL-0057-PAR-0004",
+    "branches": [
+      {"type": "IF", "line": 122, "statement_id": "SYS-PORTFOLIO-001-FIL-0057-STMT-000013", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0057-PAR-0004",
+       "condition_text": "SQLCODE = 0",
+       "condition_fields": ["SQLCODE"],
+       "condition_field_ids": [{"name": "SQLCODE", "qualifiers": [], "resolution": "UNRESOLVED", "target_id": null, "target_kind": null, "candidate_ids": []}],
+       "has_else": true, "then_line_range": [123, 123], "else_line_range": [125, 126], "end_if_line": 127, "nested_depth": 1,
+       "sqlcode_check": true,
+       "outcomes": [
+         {"label": "THEN", "line_range": [123, 123], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0057-STMT-000045"]},
+         {"label": "ELSE", "line_range": [125, 126], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0057-STMT-000043", "SYS-PORTFOLIO-001-FIL-0057-STMT-000044"]}
+       ]}
+    ]
+  },
+  {
+    "paragraph": "2000-UPDATE-STATS",
+    "paragraph_id": "SYS-PORTFOLIO-001-FIL-0057-PAR-0005",
+    "branches": [
+      {"type": "IF", "line": 149, "statement_id": "SYS-PORTFOLIO-001-FIL-0057-STMT-000021", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0057-PAR-0005",
+       "condition_text": "SQLCODE = 0",
+       "condition_fields": ["SQLCODE"],
+       "condition_field_ids": [{"name": "SQLCODE", "qualifiers": [], "resolution": "UNRESOLVED", "target_id": null, "target_kind": null, "candidate_ids": []}],
+       "has_else": true, "then_line_range": [150, 150], "else_line_range": [152, 153], "end_if_line": 154, "nested_depth": 1,
+       "sqlcode_check": true,
+       "outcomes": [
+         {"label": "THEN", "line_range": [150, 150], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0057-STMT-000048"]},
+         {"label": "ELSE", "line_range": [152, 153], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0057-STMT-000046", "SYS-PORTFOLIO-001-FIL-0057-STMT-000047"]}
+       ]}
+    ]
+  },
+  {
+    "paragraph": "3000-TERMINATE",
+    "paragraph_id": "SYS-PORTFOLIO-001-FIL-0057-PAR-0006",
+    "branches": [
+      {"type": "IF", "line": 171, "statement_id": "SYS-PORTFOLIO-001-FIL-0057-STMT-000026", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0057-PAR-0006",
+       "condition_text": "SQLCODE = 0",
+       "condition_fields": ["SQLCODE"],
+       "condition_field_ids": [{"name": "SQLCODE", "qualifiers": [], "resolution": "UNRESOLVED", "target_id": null, "target_kind": null, "candidate_ids": []}],
+       "has_else": true, "then_line_range": [172, 173], "else_line_range": [175, 176], "end_if_line": 177, "nested_depth": 1,
+       "sqlcode_check": true,
+       "outcomes": [
+         {"label": "THEN", "line_range": [172, 173], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0057-STMT-000051", "SYS-PORTFOLIO-001-FIL-0057-STMT-000052"]},
+         {"label": "ELSE", "line_range": [175, 176], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0057-STMT-000049", "SYS-PORTFOLIO-001-FIL-0057-STMT-000050"]}
+       ]}
+    ]
+  },
+  {
+    "paragraph": "4000-DISPLAY-STATS",
+    "paragraph_id": "SYS-PORTFOLIO-001-FIL-0057-PAR-0008",
+    "branches": [
+      {"type": "IF", "line": 200, "statement_id": "SYS-PORTFOLIO-001-FIL-0057-STMT-000031", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0057-PAR-0008",
+       "condition_text": "SQLCODE = 0",
+       "condition_fields": ["SQLCODE"],
+       "condition_field_ids": [{"name": "SQLCODE", "qualifiers": [], "resolution": "UNRESOLVED", "target_id": null, "target_kind": null, "candidate_ids": []}],
+       "has_else": true, "then_line_range": [201, 217], "else_line_range": [219, 220], "end_if_line": 221, "nested_depth": 1,
+       "sqlcode_check": true,
+       "outcomes": [
+         {"label": "THEN", "line_range": [201, 217], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0057-STMT-000055", "SYS-PORTFOLIO-001-FIL-0057-STMT-000056", "SYS-PORTFOLIO-001-FIL-0057-STMT-000057", "SYS-PORTFOLIO-001-FIL-0057-STMT-000058", "SYS-PORTFOLIO-001-FIL-0057-STMT-000059", "SYS-PORTFOLIO-001-FIL-0057-STMT-000060", "SYS-PORTFOLIO-001-FIL-0057-STMT-000061", "SYS-PORTFOLIO-001-FIL-0057-STMT-000062", "SYS-PORTFOLIO-001-FIL-0057-STMT-000063", "SYS-PORTFOLIO-001-FIL-0057-STMT-000064", "SYS-PORTFOLIO-001-FIL-0057-STMT-000065", "SYS-PORTFOLIO-001-FIL-0057-STMT-000066"]},
+         {"label": "ELSE", "line_range": [219, 220], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0057-STMT-000053", "SYS-PORTFOLIO-001-FIL-0057-STMT-000054"]}
+       ]}
+    ]
+  }
+],
+"loops": [],
+"dead_code_confirmed": [],
+"unresolvable_paths": [],
+"trace_issues": [
+  {"severity": "info", "type": "upstream_issue", "upstream_agent": "2_parser", "upstream_type": "misplaced_comment_indicator", "lines": [1], "message": "Line 1 has '*' in column 8 (Area A) instead of column 7; treated as a comment."},
+  {"severity": "info", "type": "upstream_issue", "upstream_agent": "2_parser", "upstream_type": "level_01_in_area_b", "lines": [18], "message": "01-level entry WS-STATS-RECORD starts in Area B inside the EXEC SQL BEGIN/END DECLARE SECTION block (lines 17-30); recorded as a top-level WORKING-STORAGE entry."},
+  {"severity": "info", "type": "upstream_issue", "upstream_agent": "3_data", "upstream_type": "misplaced_comment_indicator", "line": 1, "message": "Line 1 skipped as a comment (indicator in column 8)."},
+  {"severity": "info", "type": "upstream_issue", "upstream_agent": "3_data", "upstream_type": "sql_declare_section", "line": 17, "message": "01 WS-STATS-RECORD lies inside EXEC SQL BEGIN/END DECLARE SECTION (lines 17-30); registered as an ordinary WORKING-STORAGE record."},
+  {"severity": "info", "type": "upstream_issue", "upstream_agent": "3_data", "upstream_type": "copy_expansion_section_level", "line": 32, "message": "COPY SQLCA (32), COPY DBPROC (33) and COPY ERRHAND (34) sit directly under the WORKING-STORAGE SECTION; linked by EXPANDS_COPY from section SYS-PORTFOLIO-001-FIL-0057-SEC-0002."},
+  {"severity": "info", "type": "upstream_issue", "upstream_agent": "3_data", "upstream_type": "copy_target_is_program", "message": "Programs RPTSTA00 (FIL-0050) and UTLMON00 (FIL-0078) contain COPY DB2STAT; DB2STAT is a program, not a copybook, so those stubs are unresolved in Agent 3. Context only; does not affect this program's trace."},
+  {"severity": "info", "type": "upstream_issue", "upstream_agent": "3_data", "upstream_type": "unresolved_copy_stub", "file_id": "SYS-PORTFOLIO-001-FIL-0017", "message": "Copybook SQLCA defines only SQL-STATUS-CODES; the precompiler SQLCA structure (SQLCODE, ...) is not in the repository. Explains why SQLCODE has no Field ID."},
+  {"severity": "info", "type": "field_id_unresolved", "name": "SQLCODE", "lines": [105, 122, 149, 171, 200], "message": "SQLCODE is not defined in the program or its copybooks (precompiler-supplied SQLCA item); resolve-field-references returned UNRESOLVED; target_id null."},
+  {"severity": "info", "type": "control_flow_note", "line": 85, "statement_id": "SYS-PORTFOLIO-001-FIL-0057-STMT-000009", "message": "1000-INITIALIZE performs 1200-INSERT-INITIAL unconditionally; after a table-creation error (return code 12 set in 9000-ERROR-ROUTINE) a successful insert resets LS-RETURN-CODE to 0."},
+  {"severity": "info", "type": "state_dependency", "lines": [78, 146, 168, 197], "message": "WS-PROGRAM-ID is set only by the INIT function (line 78); the UPDT, TERM and DISP functions use the value left in WORKING-STORAGE by an earlier INIT call of the same run unit. WS-START-TIMESTAMP (used in 3100-CALC-TIMES) likewise comes from INIT."},
+  {"severity": "info", "type": "external_call", "line": 227, "statement_id": "SYS-PORTFOLIO-001-FIL-0057-STMT-000034", "message": "Static CALL 'ERRPROC' USING ERR-MESSAGE; ERRPROC is a separate program (not in this execution's scope); its effect is not traced here."}
+],
+"field_id_lookups": [
+  {"name": "FUNC-INIT", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0057-FLD-000013", "target_kind": "condition", "qualified_name": "LS-STAT-REQUEST.LS-FUNCTION.FUNC-INIT", "defined_in": "SYS-PORTFOLIO-001-FIL-0057", "candidate_ids": []},
+  {"name": "FUNC-UPDT", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0057-FLD-000014", "target_kind": "condition", "qualified_name": "LS-STAT-REQUEST.LS-FUNCTION.FUNC-UPDT", "defined_in": "SYS-PORTFOLIO-001-FIL-0057", "candidate_ids": []},
+  {"name": "FUNC-TERM", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0057-FLD-000015", "target_kind": "condition", "qualified_name": "LS-STAT-REQUEST.LS-FUNCTION.FUNC-TERM", "defined_in": "SYS-PORTFOLIO-001-FIL-0057", "candidate_ids": []},
+  {"name": "FUNC-DISP", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0057-FLD-000016", "target_kind": "condition", "qualified_name": "LS-STAT-REQUEST.LS-FUNCTION.FUNC-DISP", "defined_in": "SYS-PORTFOLIO-001-FIL-0057", "candidate_ids": []},
+  {"name": "SQLCODE", "qualifiers": [], "resolution": "UNRESOLVED", "target_id": null, "target_kind": null, "qualified_name": null, "defined_in": null, "candidate_ids": []},
+  {"name": "ERR-TEXT", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0007-FLD-000017", "target_kind": "field", "qualified_name": "ERR-MESSAGE.ERR-TEXT", "defined_in": "SYS-PORTFOLIO-001-FIL-0007", "candidate_ids": []},
+  {"name": "WS-STATS-RECORD", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0057-REC-0001", "target_kind": "record", "qualified_name": "WS-STATS-RECORD", "defined_in": "SYS-PORTFOLIO-001-FIL-0057", "candidate_ids": []},
+  {"name": "LS-PROGRAM-ID", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0057-FLD-000017", "target_kind": "field", "qualified_name": "LS-STAT-REQUEST.LS-PROGRAM-ID", "defined_in": "SYS-PORTFOLIO-001-FIL-0057", "candidate_ids": []},
+  {"name": "WS-PROGRAM-ID", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0057-FLD-000001", "target_kind": "field", "qualified_name": "WS-STATS-RECORD.WS-PROGRAM-ID", "defined_in": "SYS-PORTFOLIO-001-FIL-0057", "candidate_ids": []},
+  {"name": "WS-CURRENT-TIMESTAMP", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0057-REC-0002", "target_kind": "record", "qualified_name": "WS-CURRENT-TIMESTAMP", "defined_in": "SYS-PORTFOLIO-001-FIL-0057", "candidate_ids": []},
+  {"name": "WS-START-TIME", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0057-FLD-000002", "target_kind": "field", "qualified_name": "WS-STATS-RECORD.WS-START-TIME", "defined_in": "SYS-PORTFOLIO-001-FIL-0057", "candidate_ids": []},
+  {"name": "WS-START-TIMESTAMP", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0057-REC-0003", "target_kind": "record", "qualified_name": "WS-START-TIMESTAMP", "defined_in": "SYS-PORTFOLIO-001-FIL-0057", "candidate_ids": []},
+  {"name": "LS-RETURN-CODE", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0057-FLD-000025", "target_kind": "field", "qualified_name": "LS-STAT-REQUEST.LS-RETURN-CODE", "defined_in": "SYS-PORTFOLIO-001-FIL-0057", "candidate_ids": []},
+  {"name": "LS-ROWS-READ", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0057-FLD-000019", "target_kind": "field", "qualified_name": "LS-STAT-REQUEST.LS-STAT-DATA.LS-ROWS-READ", "defined_in": "SYS-PORTFOLIO-001-FIL-0057", "candidate_ids": []},
+  {"name": "WS-ROWS-READ", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0057-FLD-000004", "target_kind": "field", "qualified_name": "WS-STATS-RECORD.WS-ROWS-READ", "defined_in": "SYS-PORTFOLIO-001-FIL-0057", "candidate_ids": []},
+  {"name": "LS-ROWS-INSRT", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0057-FLD-000020", "target_kind": "field", "qualified_name": "LS-STAT-REQUEST.LS-STAT-DATA.LS-ROWS-INSRT", "defined_in": "SYS-PORTFOLIO-001-FIL-0057", "candidate_ids": []},
+  {"name": "WS-ROWS-INSERTED", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0057-FLD-000005", "target_kind": "field", "qualified_name": "WS-STATS-RECORD.WS-ROWS-INSERTED", "defined_in": "SYS-PORTFOLIO-001-FIL-0057", "candidate_ids": []},
+  {"name": "LS-ROWS-UPDT", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0057-FLD-000021", "target_kind": "field", "qualified_name": "LS-STAT-REQUEST.LS-STAT-DATA.LS-ROWS-UPDT", "defined_in": "SYS-PORTFOLIO-001-FIL-0057", "candidate_ids": []},
+  {"name": "WS-ROWS-UPDATED", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0057-FLD-000006", "target_kind": "field", "qualified_name": "WS-STATS-RECORD.WS-ROWS-UPDATED", "defined_in": "SYS-PORTFOLIO-001-FIL-0057", "candidate_ids": []},
+  {"name": "LS-ROWS-DELT", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0057-FLD-000022", "target_kind": "field", "qualified_name": "LS-STAT-REQUEST.LS-STAT-DATA.LS-ROWS-DELT", "defined_in": "SYS-PORTFOLIO-001-FIL-0057", "candidate_ids": []},
+  {"name": "WS-ROWS-DELETED", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0057-FLD-000007", "target_kind": "field", "qualified_name": "WS-STATS-RECORD.WS-ROWS-DELETED", "defined_in": "SYS-PORTFOLIO-001-FIL-0057", "candidate_ids": []},
+  {"name": "LS-COMMITS", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0057-FLD-000023", "target_kind": "field", "qualified_name": "LS-STAT-REQUEST.LS-STAT-DATA.LS-COMMITS", "defined_in": "SYS-PORTFOLIO-001-FIL-0057", "candidate_ids": []},
+  {"name": "WS-COMMITS", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0057-FLD-000008", "target_kind": "field", "qualified_name": "WS-STATS-RECORD.WS-COMMITS", "defined_in": "SYS-PORTFOLIO-001-FIL-0057", "candidate_ids": []},
+  {"name": "LS-ROLLBACKS", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0057-FLD-000024", "target_kind": "field", "qualified_name": "LS-STAT-REQUEST.LS-STAT-DATA.LS-ROLLBACKS", "defined_in": "SYS-PORTFOLIO-001-FIL-0057", "candidate_ids": []},
+  {"name": "WS-ROLLBACKS", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0057-FLD-000009", "target_kind": "field", "qualified_name": "WS-STATS-RECORD.WS-ROLLBACKS", "defined_in": "SYS-PORTFOLIO-001-FIL-0057", "candidate_ids": []},
+  {"name": "WS-END-TIME", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0057-FLD-000003", "target_kind": "field", "qualified_name": "WS-STATS-RECORD.WS-END-TIME", "defined_in": "SYS-PORTFOLIO-001-FIL-0057", "candidate_ids": []},
+  {"name": "WS-CPU-TIME", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0057-FLD-000010", "target_kind": "field", "qualified_name": "WS-STATS-RECORD.WS-CPU-TIME", "defined_in": "SYS-PORTFOLIO-001-FIL-0057", "candidate_ids": []},
+  {"name": "WS-ELAPSED-TIME", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0057-FLD-000011", "target_kind": "field", "qualified_name": "WS-STATS-RECORD.WS-ELAPSED-TIME", "defined_in": "SYS-PORTFOLIO-001-FIL-0057", "candidate_ids": []},
+  {"name": "WS-FORMATTED-TIME", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0057-REC-0004", "target_kind": "record", "qualified_name": "WS-FORMATTED-TIME", "defined_in": "SYS-PORTFOLIO-001-FIL-0057", "candidate_ids": []},
+  {"name": "ERR-PROGRAM", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0007-FLD-000013", "target_kind": "field", "qualified_name": "ERR-MESSAGE.ERR-PROGRAM", "defined_in": "SYS-PORTFOLIO-001-FIL-0007", "candidate_ids": []},
+  {"name": "ERR-MESSAGE", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0007-REC-0003", "target_kind": "record", "qualified_name": "ERR-MESSAGE", "defined_in": "SYS-PORTFOLIO-001-FIL-0007", "candidate_ids": []}
+],
+"program_narrative": "Program DB2STAT is a called DB2 statistics-collector subroutine that receives LS-STAT-REQUEST (PROCEDURE DIVISION USING) and dispatches on its function code. 'INIT' clears the statistics record, stores the calling program ID and the start timestamp, declares the global temporary table SESSION.DBSTATS (an 'already exists' SQLCODE -601 is tolerated) and inserts an initial row with zero counters. 'UPDT' copies the caller's row counters (read, inserted, updated, deleted, commits, rollbacks) into the row for the program. 'TERM' records the end time, computes an elapsed time from the start and end timestamps and a CPU time estimated as 65% of the elapsed time, updates the row, and on success displays the statistics. 'DISP' selects the row and displays the counters and the formatted CPU and elapsed times on the console. Every SQL failure and any unknown function code set return code 12 and call the external error processor ERRPROC with the common ERR-MESSAGE block; successful steps set return code 0. It reads no files and always ends with GOBACK.",
+"paragraphs": [
+  {
+    "name": "0000-MAIN",
+    "paragraph_id": "SYS-PORTFOLIO-001-FIL-0057-PAR-0001",
+    "section": null,
+    "section_id": null,
+    "line_range": [58, 75],
+    "pseudocode": [
+      "-- Entry: request block LS-STAT-REQUEST is passed by the caller (PROCEDURE DIVISION USING, line 57)",
+      "IF request.function = 'INIT' THEN  -- FUNC-INIT (EVALUATE TRUE, first matching WHEN wins)",
+      "  CALL 1000-initialize",
+      "ELSE IF request.function = 'UPDT' THEN  -- FUNC-UPDT",
+      "  CALL 2000-update-stats",
+      "ELSE IF request.function = 'TERM' THEN  -- FUNC-TERM",
+      "  CALL 3000-terminate",
+      "ELSE IF request.function = 'DISP' THEN  -- FUNC-DISP",
+      "  CALL 4000-display-stats",
+      "ELSE  -- WHEN OTHER: unrecognised function code",
+      "  SET err_text = 'Invalid function code'",
+      "  CALL 9000-error-routine",
+      "END IF",
+      "RETURN to caller  -- GOBACK"
+    ],
+    "pseudocode_statement_ids": [
+      [],
+      ["SYS-PORTFOLIO-001-FIL-0057-STMT-000001"],
+      ["SYS-PORTFOLIO-001-FIL-0057-STMT-000036"],
+      ["SYS-PORTFOLIO-001-FIL-0057-STMT-000001"],
+      ["SYS-PORTFOLIO-001-FIL-0057-STMT-000038"],
+      ["SYS-PORTFOLIO-001-FIL-0057-STMT-000001"],
+      ["SYS-PORTFOLIO-001-FIL-0057-STMT-000037"],
+      ["SYS-PORTFOLIO-001-FIL-0057-STMT-000001"],
+      ["SYS-PORTFOLIO-001-FIL-0057-STMT-000035"],
+      ["SYS-PORTFOLIO-001-FIL-0057-STMT-000001"],
+      ["SYS-PORTFOLIO-001-FIL-0057-STMT-000039"],
+      ["SYS-PORTFOLIO-001-FIL-0057-STMT-000040"],
+      ["SYS-PORTFOLIO-001-FIL-0057-STMT-000001"],
+      ["SYS-PORTFOLIO-001-FIL-0057-STMT-000002"]
+    ],
+    "pseudocode_text": "-- Entry: request block LS-STAT-REQUEST is passed by the caller (PROCEDURE DIVISION USING, line 57)\nIF request.function = 'INIT' THEN  -- FUNC-INIT (EVALUATE TRUE, first matching WHEN wins)\n  CALL 1000-initialize\nELSE IF request.function = 'UPDT' THEN  -- FUNC-UPDT\n  CALL 2000-update-stats\nELSE IF request.function = 'TERM' THEN  -- FUNC-TERM\n  CALL 3000-terminate\nELSE IF request.function = 'DISP' THEN  -- FUNC-DISP\n  CALL 4000-display-stats\nELSE  -- WHEN OTHER: unrecognised function code\n  SET err_text = 'Invalid function code'\n  CALL 9000-error-routine\nEND IF\nRETURN to caller  -- GOBACK",
+    "statement_ids": ["SYS-PORTFOLIO-001-FIL-0057-STMT-000001", "SYS-PORTFOLIO-001-FIL-0057-STMT-000036", "SYS-PORTFOLIO-001-FIL-0057-STMT-000038", "SYS-PORTFOLIO-001-FIL-0057-STMT-000037", "SYS-PORTFOLIO-001-FIL-0057-STMT-000035", "SYS-PORTFOLIO-001-FIL-0057-STMT-000039", "SYS-PORTFOLIO-001-FIL-0057-STMT-000040", "SYS-PORTFOLIO-001-FIL-0057-STMT-000002"],
+    "untranslated_statement_ids": [],
+    "field_references": ["FUNC-INIT", "FUNC-UPDT", "FUNC-TERM", "FUNC-DISP", "ERR-TEXT"],
+    "field_reference_ids": [
+      {"name": "FUNC-INIT", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0057-FLD-000013", "target_kind": "condition", "candidate_ids": []},
+      {"name": "FUNC-UPDT", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0057-FLD-000014", "target_kind": "condition", "candidate_ids": []},
+      {"name": "FUNC-TERM", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0057-FLD-000015", "target_kind": "condition", "candidate_ids": []},
+      {"name": "FUNC-DISP", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0057-FLD-000016", "target_kind": "condition", "candidate_ids": []},
+      {"name": "ERR-TEXT", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0007-FLD-000017", "target_kind": "field", "candidate_ids": []}
+    ],
+    "calls_made": ["1000-INITIALIZE", "2000-UPDATE-STATS", "3000-TERMINATE", "4000-DISPLAY-STATS", "9000-ERROR-ROUTINE"],
+    "calls_made_ids": [
+      {"name": "1000-INITIALIZE", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0057-PAR-0002", "section_id": null},
+      {"name": "2000-UPDATE-STATS", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0057-PAR-0005", "section_id": null},
+      {"name": "3000-TERMINATE", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0057-PAR-0006", "section_id": null},
+      {"name": "4000-DISPLAY-STATS", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0057-PAR-0008", "section_id": null},
+      {"name": "9000-ERROR-ROUTINE", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0057-PAR-0009", "section_id": null}
+    ],
+    "complexity_score": 5,
+    "has_unresolved_statements": false,
+    "annotations": [
+      {"line": 59, "statement_id": "SYS-PORTFOLIO-001-FIL-0057-STMT-000001", "note": "EVALUATE TRUE over the 88-level conditions of LS-FUNCTION: FUNC-INIT='INIT', FUNC-UPDT='UPDT', FUNC-TERM='TERM', FUNC-DISP='DISP'."}
+    ]
+  },
+  {
+    "name": "1000-INITIALIZE",
+    "paragraph_id": "SYS-PORTFOLIO-001-FIL-0057-PAR-0002",
+    "section": null,
+    "section_id": null,
+    "line_range": [76, 87],
+    "pseudocode": [
+      "CLEAR ws_stats_record  -- INITIALIZE: alphanumeric items to spaces, numeric items to zero",
+      "SET stats.program_id = request.program_id",
+      "SET ws_current_timestamp = [runtime: current timestamp]  -- ACCEPT ... FROM TIME STAMP",
+      "SET stats.start_time = ws_current_timestamp",
+      "SET ws_start_timestamp = ws_current_timestamp",
+      "CALL 1100-create-stats-table",
+      "CALL 1200-insert-initial  -- performed even if 1100 reported an error"
+    ],
+    "pseudocode_statement_ids": [
+      ["SYS-PORTFOLIO-001-FIL-0057-STMT-000003"],
+      ["SYS-PORTFOLIO-001-FIL-0057-STMT-000004"],
+      ["SYS-PORTFOLIO-001-FIL-0057-STMT-000005"],
+      ["SYS-PORTFOLIO-001-FIL-0057-STMT-000006"],
+      ["SYS-PORTFOLIO-001-FIL-0057-STMT-000007"],
+      ["SYS-PORTFOLIO-001-FIL-0057-STMT-000008"],
+      ["SYS-PORTFOLIO-001-FIL-0057-STMT-000009"]
+    ],
+    "pseudocode_text": "CLEAR ws_stats_record  -- INITIALIZE: alphanumeric items to spaces, numeric items to zero\nSET stats.program_id = request.program_id\nSET ws_current_timestamp = [runtime: current timestamp]  -- ACCEPT ... FROM TIME STAMP\nSET stats.start_time = ws_current_timestamp\nSET ws_start_timestamp = ws_current_timestamp\nCALL 1100-create-stats-table\nCALL 1200-insert-initial  -- performed even if 1100 reported an error",
+    "statement_ids": ["SYS-PORTFOLIO-001-FIL-0057-STMT-000003", "SYS-PORTFOLIO-001-FIL-0057-STMT-000004", "SYS-PORTFOLIO-001-FIL-0057-STMT-000005", "SYS-PORTFOLIO-001-FIL-0057-STMT-000006", "SYS-PORTFOLIO-001-FIL-0057-STMT-000007", "SYS-PORTFOLIO-001-FIL-0057-STMT-000008", "SYS-PORTFOLIO-001-FIL-0057-STMT-000009"],
+    "untranslated_statement_ids": [],
+    "field_references": ["WS-STATS-RECORD", "LS-PROGRAM-ID", "WS-PROGRAM-ID", "WS-CURRENT-TIMESTAMP", "WS-START-TIME", "WS-START-TIMESTAMP"],
+    "field_reference_ids": [
+      {"name": "WS-STATS-RECORD", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0057-REC-0001", "target_kind": "record", "candidate_ids": []},
+      {"name": "LS-PROGRAM-ID", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0057-FLD-000017", "target_kind": "field", "candidate_ids": []},
+      {"name": "WS-PROGRAM-ID", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0057-FLD-000001", "target_kind": "field", "candidate_ids": []},
+      {"name": "WS-CURRENT-TIMESTAMP", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0057-REC-0002", "target_kind": "record", "candidate_ids": []},
+      {"name": "WS-START-TIME", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0057-FLD-000002", "target_kind": "field", "candidate_ids": []},
+      {"name": "WS-START-TIMESTAMP", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0057-REC-0003", "target_kind": "record", "candidate_ids": []}
+    ],
+    "calls_made": ["1100-CREATE-STATS-TABLE", "1200-INSERT-INITIAL"],
+    "calls_made_ids": [
+      {"name": "1100-CREATE-STATS-TABLE", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0057-PAR-0003", "section_id": null},
+      {"name": "1200-INSERT-INITIAL", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0057-PAR-0004", "section_id": null}
+    ],
+    "complexity_score": 1,
+    "has_unresolved_statements": false,
+    "annotations": [
+      {"line": 80, "statement_id": "SYS-PORTFOLIO-001-FIL-0057-STMT-000005", "note": "ACCEPT ... FROM TIME STAMP is written as in the source; the exact format delivered depends on the compiler/runtime.", "ambiguous": true}
+    ]
+  },
+  {
+    "name": "1100-CREATE-STATS-TABLE",
+    "paragraph_id": "SYS-PORTFOLIO-001-FIL-0057-PAR-0003",
+    "section": null,
+    "section_id": null,
+    "line_range": [88, 110],
+    "pseudocode": [
+      "SQL DECLARE GLOBAL TEMPORARY TABLE SESSION.DBSTATS (program_id, start_time, end_time, rows_read, rows_inserted, rows_updated, rows_deleted, commits, rollbacks, cpu_time, elapsed_time) ON COMMIT PRESERVE ROWS  -- see source lines 89-103 for column types",
+      "IF sqlcode != 0 AND sqlcode != -601 THEN  -- CHECK SQLCODE; -601 (object already exists) is tolerated",
+      "  SET err_text = 'Error creating stats table'",
+      "  CALL 9000-error-routine",
+      "END IF"
+    ],
+    "pseudocode_statement_ids": [
+      ["SYS-PORTFOLIO-001-FIL-0057-STMT-000010"],
+      ["SYS-PORTFOLIO-001-FIL-0057-STMT-000011"],
+      ["SYS-PORTFOLIO-001-FIL-0057-STMT-000041"],
+      ["SYS-PORTFOLIO-001-FIL-0057-STMT-000042"],
+      ["SYS-PORTFOLIO-001-FIL-0057-STMT-000011"]
+    ],
+    "pseudocode_text": "SQL DECLARE GLOBAL TEMPORARY TABLE SESSION.DBSTATS (program_id, start_time, end_time, rows_read, rows_inserted, rows_updated, rows_deleted, commits, rollbacks, cpu_time, elapsed_time) ON COMMIT PRESERVE ROWS  -- see source lines 89-103 for column types\nIF sqlcode != 0 AND sqlcode != -601 THEN  -- CHECK SQLCODE; -601 (object already exists) is tolerated\n  SET err_text = 'Error creating stats table'\n  CALL 9000-error-routine\nEND IF",
+    "statement_ids": ["SYS-PORTFOLIO-001-FIL-0057-STMT-000010", "SYS-PORTFOLIO-001-FIL-0057-STMT-000011", "SYS-PORTFOLIO-001-FIL-0057-STMT-000041", "SYS-PORTFOLIO-001-FIL-0057-STMT-000042"],
+    "untranslated_statement_ids": [],
+    "field_references": ["SQLCODE", "ERR-TEXT"],
+    "field_reference_ids": [
+      {"name": "SQLCODE", "qualifiers": [], "resolution": "UNRESOLVED", "target_id": null, "target_kind": null, "candidate_ids": []},
+      {"name": "ERR-TEXT", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0007-FLD-000017", "target_kind": "field", "candidate_ids": []}
+    ],
+    "calls_made": ["9000-ERROR-ROUTINE"],
+    "calls_made_ids": [
+      {"name": "9000-ERROR-ROUTINE", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0057-PAR-0009", "section_id": null}
+    ],
+    "complexity_score": 2,
+    "has_unresolved_statements": false,
+    "annotations": [
+      {"line": 89, "statement_id": "SYS-PORTFOLIO-001-FIL-0057-STMT-000010", "note": "Embedded SQL DDL: declares a session-scoped temporary table; rows survive COMMIT (ON COMMIT PRESERVE ROWS)."},
+      {"line": 105, "statement_id": "SYS-PORTFOLIO-001-FIL-0057-STMT-000011", "note": "SQLCODE check branch; SQLCODE has no Field ID. The meaning of -601 is DB2 convention, not defined in the repository.", "ambiguous": true}
+    ]
+  },
+  {
+    "name": "1200-INSERT-INITIAL",
+    "paragraph_id": "SYS-PORTFOLIO-001-FIL-0057-PAR-0004",
+    "section": null,
+    "section_id": null,
+    "line_range": [111, 129],
+    "pseudocode": [
+      "SQL INSERT new row INTO table SESSION.DBSTATS (program_id = stats.program_id, start_time = DB2 CURRENT TIMESTAMP, rows_read = 0, rows_inserted = 0, rows_updated = 0, rows_deleted = 0, commits = 0, rollbacks = 0)",
+      "IF sqlcode = 0 THEN  -- CHECK SQLCODE",
+      "  SET request.return_code = 0",
+      "ELSE",
+      "  SET err_text = 'Error initializing stats'",
+      "  CALL 9000-error-routine",
+      "END IF"
+    ],
+    "pseudocode_statement_ids": [
+      ["SYS-PORTFOLIO-001-FIL-0057-STMT-000012"],
+      ["SYS-PORTFOLIO-001-FIL-0057-STMT-000013"],
+      ["SYS-PORTFOLIO-001-FIL-0057-STMT-000045"],
+      ["SYS-PORTFOLIO-001-FIL-0057-STMT-000013"],
+      ["SYS-PORTFOLIO-001-FIL-0057-STMT-000043"],
+      ["SYS-PORTFOLIO-001-FIL-0057-STMT-000044"],
+      ["SYS-PORTFOLIO-001-FIL-0057-STMT-000013"]
+    ],
+    "pseudocode_text": "SQL INSERT new row INTO table SESSION.DBSTATS (program_id = stats.program_id, start_time = DB2 CURRENT TIMESTAMP, rows_read = 0, rows_inserted = 0, rows_updated = 0, rows_deleted = 0, commits = 0, rollbacks = 0)\nIF sqlcode = 0 THEN  -- CHECK SQLCODE\n  SET request.return_code = 0\nELSE\n  SET err_text = 'Error initializing stats'\n  CALL 9000-error-routine\nEND IF",
+    "statement_ids": ["SYS-PORTFOLIO-001-FIL-0057-STMT-000012", "SYS-PORTFOLIO-001-FIL-0057-STMT-000013", "SYS-PORTFOLIO-001-FIL-0057-STMT-000045", "SYS-PORTFOLIO-001-FIL-0057-STMT-000043", "SYS-PORTFOLIO-001-FIL-0057-STMT-000044"],
+    "untranslated_statement_ids": [],
+    "field_references": ["WS-PROGRAM-ID", "SQLCODE", "LS-RETURN-CODE", "ERR-TEXT"],
+    "field_reference_ids": [
+      {"name": "WS-PROGRAM-ID", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0057-FLD-000001", "target_kind": "field", "candidate_ids": []},
+      {"name": "SQLCODE", "qualifiers": [], "resolution": "UNRESOLVED", "target_id": null, "target_kind": null, "candidate_ids": []},
+      {"name": "LS-RETURN-CODE", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0057-FLD-000025", "target_kind": "field", "candidate_ids": []},
+      {"name": "ERR-TEXT", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0007-FLD-000017", "target_kind": "field", "candidate_ids": []}
+    ],
+    "calls_made": ["9000-ERROR-ROUTINE"],
+    "calls_made_ids": [
+      {"name": "9000-ERROR-ROUTINE", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0057-PAR-0009", "section_id": null}
+    ],
+    "complexity_score": 2,
+    "has_unresolved_statements": false,
+    "annotations": [
+      {"line": 118, "statement_id": "SYS-PORTFOLIO-001-FIL-0057-STMT-000012", "note": "START_TIME in the table is DB2 CURRENT TIMESTAMP at insert time, not the program's WS-START-TIME value."}
+    ]
+  },
+  {
+    "name": "2000-UPDATE-STATS",
+    "paragraph_id": "SYS-PORTFOLIO-001-FIL-0057-PAR-0005",
+    "section": null,
+    "section_id": null,
+    "line_range": [130, 156],
+    "pseudocode": [
+      "SET stats.rows_read = request.rows_read",
+      "SET stats.rows_inserted = request.rows_inserted",
+      "SET stats.rows_updated = request.rows_updated",
+      "SET stats.rows_deleted = request.rows_deleted",
+      "SET stats.commits = request.commits",
+      "SET stats.rollbacks = request.rollbacks",
+      "SQL UPDATE table SESSION.DBSTATS SET rows_read, rows_inserted, rows_updated, rows_deleted, commits, rollbacks = the stats values WHERE program_id = stats.program_id",
+      "IF sqlcode = 0 THEN  -- CHECK SQLCODE",
+      "  SET request.return_code = 0",
+      "ELSE",
+      "  SET err_text = 'Error updating stats'",
+      "  CALL 9000-error-routine",
+      "END IF"
+    ],
+    "pseudocode_statement_ids": [
+      ["SYS-PORTFOLIO-001-FIL-0057-STMT-000014"],
+      ["SYS-PORTFOLIO-001-FIL-0057-STMT-000015"],
+      ["SYS-PORTFOLIO-001-FIL-0057-STMT-000016"],
+      ["SYS-PORTFOLIO-001-FIL-0057-STMT-000017"],
+      ["SYS-PORTFOLIO-001-FIL-0057-STMT-000018"],
+      ["SYS-PORTFOLIO-001-FIL-0057-STMT-000019"],
+      ["SYS-PORTFOLIO-001-FIL-0057-STMT-000020"],
+      ["SYS-PORTFOLIO-001-FIL-0057-STMT-000021"],
+      ["SYS-PORTFOLIO-001-FIL-0057-STMT-000048"],
+      ["SYS-PORTFOLIO-001-FIL-0057-STMT-000021"],
+      ["SYS-PORTFOLIO-001-FIL-0057-STMT-000046"],
+      ["SYS-PORTFOLIO-001-FIL-0057-STMT-000047"],
+      ["SYS-PORTFOLIO-001-FIL-0057-STMT-000021"]
+    ],
+    "pseudocode_text": "SET stats.rows_read = request.rows_read\nSET stats.rows_inserted = request.rows_inserted\nSET stats.rows_updated = request.rows_updated\nSET stats.rows_deleted = request.rows_deleted\nSET stats.commits = request.commits\nSET stats.rollbacks = request.rollbacks\nSQL UPDATE table SESSION.DBSTATS SET rows_read, rows_inserted, rows_updated, rows_deleted, commits, rollbacks = the stats values WHERE program_id = stats.program_id\nIF sqlcode = 0 THEN  -- CHECK SQLCODE\n  SET request.return_code = 0\nELSE\n  SET err_text = 'Error updating stats'\n  CALL 9000-error-routine\nEND IF",
+    "statement_ids": ["SYS-PORTFOLIO-001-FIL-0057-STMT-000014", "SYS-PORTFOLIO-001-FIL-0057-STMT-000015", "SYS-PORTFOLIO-001-FIL-0057-STMT-000016", "SYS-PORTFOLIO-001-FIL-0057-STMT-000017", "SYS-PORTFOLIO-001-FIL-0057-STMT-000018", "SYS-PORTFOLIO-001-FIL-0057-STMT-000019", "SYS-PORTFOLIO-001-FIL-0057-STMT-000020", "SYS-PORTFOLIO-001-FIL-0057-STMT-000021", "SYS-PORTFOLIO-001-FIL-0057-STMT-000048", "SYS-PORTFOLIO-001-FIL-0057-STMT-000046", "SYS-PORTFOLIO-001-FIL-0057-STMT-000047"],
+    "untranslated_statement_ids": [],
+    "field_references": ["LS-ROWS-READ", "WS-ROWS-READ", "LS-ROWS-INSRT", "WS-ROWS-INSERTED", "LS-ROWS-UPDT", "WS-ROWS-UPDATED", "LS-ROWS-DELT", "WS-ROWS-DELETED", "LS-COMMITS", "WS-COMMITS", "LS-ROLLBACKS", "WS-ROLLBACKS", "WS-PROGRAM-ID", "SQLCODE", "LS-RETURN-CODE", "ERR-TEXT"],
+    "field_reference_ids": [
+      {"name": "LS-ROWS-READ", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0057-FLD-000019", "target_kind": "field", "candidate_ids": []},
+      {"name": "WS-ROWS-READ", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0057-FLD-000004", "target_kind": "field", "candidate_ids": []},
+      {"name": "LS-ROWS-INSRT", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0057-FLD-000020", "target_kind": "field", "candidate_ids": []},
+      {"name": "WS-ROWS-INSERTED", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0057-FLD-000005", "target_kind": "field", "candidate_ids": []},
+      {"name": "LS-ROWS-UPDT", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0057-FLD-000021", "target_kind": "field", "candidate_ids": []},
+      {"name": "WS-ROWS-UPDATED", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0057-FLD-000006", "target_kind": "field", "candidate_ids": []},
+      {"name": "LS-ROWS-DELT", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0057-FLD-000022", "target_kind": "field", "candidate_ids": []},
+      {"name": "WS-ROWS-DELETED", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0057-FLD-000007", "target_kind": "field", "candidate_ids": []},
+      {"name": "LS-COMMITS", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0057-FLD-000023", "target_kind": "field", "candidate_ids": []},
+      {"name": "WS-COMMITS", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0057-FLD-000008", "target_kind": "field", "candidate_ids": []},
+      {"name": "LS-ROLLBACKS", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0057-FLD-000024", "target_kind": "field", "candidate_ids": []},
+      {"name": "WS-ROLLBACKS", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0057-FLD-000009", "target_kind": "field", "candidate_ids": []},
+      {"name": "WS-PROGRAM-ID", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0057-FLD-000001", "target_kind": "field", "candidate_ids": []},
+      {"name": "SQLCODE", "qualifiers": [], "resolution": "UNRESOLVED", "target_id": null, "target_kind": null, "candidate_ids": []},
+      {"name": "LS-RETURN-CODE", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0057-FLD-000025", "target_kind": "field", "candidate_ids": []},
+      {"name": "ERR-TEXT", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0007-FLD-000017", "target_kind": "field", "candidate_ids": []}
+    ],
+    "calls_made": ["9000-ERROR-ROUTINE"],
+    "calls_made_ids": [
+      {"name": "9000-ERROR-ROUTINE", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0057-PAR-0009", "section_id": null}
+    ],
+    "complexity_score": 2,
+    "has_unresolved_statements": false,
+    "annotations": [
+      {"line": 138, "statement_id": "SYS-PORTFOLIO-001-FIL-0057-STMT-000020", "note": "The counters are replaced with the caller's values (not added to the stored values). WS-PROGRAM-ID comes from an earlier INIT call."}
+    ]
+  },
+  {
+    "name": "3000-TERMINATE",
+    "paragraph_id": "SYS-PORTFOLIO-001-FIL-0057-PAR-0006",
+    "section": null,
+    "section_id": null,
+    "line_range": [157, 179],
+    "pseudocode": [
+      "SET ws_current_timestamp = [runtime: current timestamp]  -- ACCEPT ... FROM TIME STAMP",
+      "SET stats.end_time = ws_current_timestamp",
+      "CALL 3100-calc-times",
+      "SQL UPDATE table SESSION.DBSTATS SET end_time = stats.end_time, cpu_time = stats.cpu_time, elapsed_time = stats.elapsed_time WHERE program_id = stats.program_id",
+      "IF sqlcode = 0 THEN  -- CHECK SQLCODE",
+      "  SET request.return_code = 0",
+      "  CALL 4000-display-stats",
+      "ELSE",
+      "  SET err_text = 'Error finalizing stats'",
+      "  CALL 9000-error-routine",
+      "END IF"
+    ],
+    "pseudocode_statement_ids": [
+      ["SYS-PORTFOLIO-001-FIL-0057-STMT-000022"],
+      ["SYS-PORTFOLIO-001-FIL-0057-STMT-000023"],
+      ["SYS-PORTFOLIO-001-FIL-0057-STMT-000024"],
+      ["SYS-PORTFOLIO-001-FIL-0057-STMT-000025"],
+      ["SYS-PORTFOLIO-001-FIL-0057-STMT-000026"],
+      ["SYS-PORTFOLIO-001-FIL-0057-STMT-000051"],
+      ["SYS-PORTFOLIO-001-FIL-0057-STMT-000052"],
+      ["SYS-PORTFOLIO-001-FIL-0057-STMT-000026"],
+      ["SYS-PORTFOLIO-001-FIL-0057-STMT-000049"],
+      ["SYS-PORTFOLIO-001-FIL-0057-STMT-000050"],
+      ["SYS-PORTFOLIO-001-FIL-0057-STMT-000026"]
+    ],
+    "pseudocode_text": "SET ws_current_timestamp = [runtime: current timestamp]  -- ACCEPT ... FROM TIME STAMP\nSET stats.end_time = ws_current_timestamp\nCALL 3100-calc-times\nSQL UPDATE table SESSION.DBSTATS SET end_time = stats.end_time, cpu_time = stats.cpu_time, elapsed_time = stats.elapsed_time WHERE program_id = stats.program_id\nIF sqlcode = 0 THEN  -- CHECK SQLCODE\n  SET request.return_code = 0\n  CALL 4000-display-stats\nELSE\n  SET err_text = 'Error finalizing stats'\n  CALL 9000-error-routine\nEND IF",
+    "statement_ids": ["SYS-PORTFOLIO-001-FIL-0057-STMT-000022", "SYS-PORTFOLIO-001-FIL-0057-STMT-000023", "SYS-PORTFOLIO-001-FIL-0057-STMT-000024", "SYS-PORTFOLIO-001-FIL-0057-STMT-000025", "SYS-PORTFOLIO-001-FIL-0057-STMT-000026", "SYS-PORTFOLIO-001-FIL-0057-STMT-000051", "SYS-PORTFOLIO-001-FIL-0057-STMT-000052", "SYS-PORTFOLIO-001-FIL-0057-STMT-000049", "SYS-PORTFOLIO-001-FIL-0057-STMT-000050"],
+    "untranslated_statement_ids": [],
+    "field_references": ["WS-CURRENT-TIMESTAMP", "WS-END-TIME", "WS-CPU-TIME", "WS-ELAPSED-TIME", "WS-PROGRAM-ID", "SQLCODE", "LS-RETURN-CODE", "ERR-TEXT"],
+    "field_reference_ids": [
+      {"name": "WS-CURRENT-TIMESTAMP", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0057-REC-0002", "target_kind": "record", "candidate_ids": []},
+      {"name": "WS-END-TIME", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0057-FLD-000003", "target_kind": "field", "candidate_ids": []},
+      {"name": "WS-CPU-TIME", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0057-FLD-000010", "target_kind": "field", "candidate_ids": []},
+      {"name": "WS-ELAPSED-TIME", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0057-FLD-000011", "target_kind": "field", "candidate_ids": []},
+      {"name": "WS-PROGRAM-ID", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0057-FLD-000001", "target_kind": "field", "candidate_ids": []},
+      {"name": "SQLCODE", "qualifiers": [], "resolution": "UNRESOLVED", "target_id": null, "target_kind": null, "candidate_ids": []},
+      {"name": "LS-RETURN-CODE", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0057-FLD-000025", "target_kind": "field", "candidate_ids": []},
+      {"name": "ERR-TEXT", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0007-FLD-000017", "target_kind": "field", "candidate_ids": []}
+    ],
+    "calls_made": ["3100-CALC-TIMES", "4000-DISPLAY-STATS", "9000-ERROR-ROUTINE"],
+    "calls_made_ids": [
+      {"name": "3100-CALC-TIMES", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0057-PAR-0007", "section_id": null},
+      {"name": "4000-DISPLAY-STATS", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0057-PAR-0008", "section_id": null},
+      {"name": "9000-ERROR-ROUTINE", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0057-PAR-0009", "section_id": null}
+    ],
+    "complexity_score": 2,
+    "has_unresolved_statements": false,
+    "annotations": [
+      {"line": 158, "statement_id": "SYS-PORTFOLIO-001-FIL-0057-STMT-000022", "note": "ACCEPT ... FROM TIME STAMP written as in the source; format depends on the compiler/runtime.", "ambiguous": true},
+      {"line": 173, "statement_id": "SYS-PORTFOLIO-001-FIL-0057-STMT-000052", "note": "On success the statistics are displayed; a failure inside 4000-DISPLAY-STATS overrides the return code 0 set at line 172 with 12."}
+    ]
+  },
+  {
+    "name": "3100-CALC-TIMES",
+    "paragraph_id": "SYS-PORTFOLIO-001-FIL-0057-PAR-0007",
+    "section": null,
+    "section_id": null,
+    "line_range": [180, 188],
+    "pseudocode": [
+      "COMPUTE stats.elapsed_time = NUMVAL(first 15 characters of stats.end_time) - NUMVAL(first 15 characters of ws_start_timestamp)  -- NUMVAL converts text to a number",
+      "SET stats.cpu_time = stats.elapsed_time",
+      "COMPUTE stats.cpu_time = stats.cpu_time * 0.65  -- CPU time is estimated as 65% of elapsed time, not measured"
+    ],
+    "pseudocode_statement_ids": [
+      ["SYS-PORTFOLIO-001-FIL-0057-STMT-000027"],
+      ["SYS-PORTFOLIO-001-FIL-0057-STMT-000028"],
+      ["SYS-PORTFOLIO-001-FIL-0057-STMT-000029"]
+    ],
+    "pseudocode_text": "COMPUTE stats.elapsed_time = NUMVAL(first 15 characters of stats.end_time) - NUMVAL(first 15 characters of ws_start_timestamp)  -- NUMVAL converts text to a number\nSET stats.cpu_time = stats.elapsed_time\nCOMPUTE stats.cpu_time = stats.cpu_time * 0.65  -- CPU time is estimated as 65% of elapsed time, not measured",
+    "statement_ids": ["SYS-PORTFOLIO-001-FIL-0057-STMT-000027", "SYS-PORTFOLIO-001-FIL-0057-STMT-000028", "SYS-PORTFOLIO-001-FIL-0057-STMT-000029"],
+    "untranslated_statement_ids": [],
+    "field_references": ["WS-ELAPSED-TIME", "WS-END-TIME", "WS-START-TIMESTAMP", "WS-CPU-TIME"],
+    "field_reference_ids": [
+      {"name": "WS-ELAPSED-TIME", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0057-FLD-000011", "target_kind": "field", "candidate_ids": []},
+      {"name": "WS-END-TIME", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0057-FLD-000003", "target_kind": "field", "candidate_ids": []},
+      {"name": "WS-START-TIMESTAMP", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0057-REC-0003", "target_kind": "record", "candidate_ids": []},
+      {"name": "WS-CPU-TIME", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0057-FLD-000010", "target_kind": "field", "candidate_ids": []}
+    ],
+    "calls_made": [],
+    "calls_made_ids": [],
+    "complexity_score": 1,
+    "has_unresolved_statements": false,
+    "annotations": [
+      {"line": 181, "statement_id": "SYS-PORTFOLIO-001-FIL-0057-STMT-000027", "note": "Written as 'FUNCTION NUMVAL(WS-END-TIME(1:15)) - NUMVAL(WS-START-TIMESTAMP(1:15))': the second NUMVAL has no FUNCTION keyword, and the first 15 characters of a timestamp text may not be a valid NUMVAL argument. The result's validity and units are flagged for SME review.", "ambiguous": true},
+      {"line": 186, "statement_id": "SYS-PORTFOLIO-001-FIL-0057-STMT-000029", "note": "MULTIPLY 0.65 BY WS-CPU-TIME stores the product in WS-CPU-TIME (no GIVING)."}
+    ]
+  },
+  {
+    "name": "4000-DISPLAY-STATS",
+    "paragraph_id": "SYS-PORTFOLIO-001-FIL-0057-PAR-0008",
+    "section": null,
+    "section_id": null,
+    "line_range": [189, 223],
+    "pseudocode": [
+      "SQL SELECT rows_read, rows_inserted, rows_updated, rows_deleted, commits, rollbacks, cpu_time, elapsed_time FROM table SESSION.DBSTATS WHERE program_id = stats.program_id INTO host structure ws_stats_record",
+      "IF sqlcode = 0 THEN  -- CHECK SQLCODE",
+      "  DISPLAY 'DB2 Statistics for ' + stats.program_id  -- console output",
+      "  DISPLAY '  Records Read:    ' + stats.rows_read",
+      "  DISPLAY '  Records Inserted: ' + stats.rows_inserted",
+      "  DISPLAY '  Records Updated:  ' + stats.rows_updated",
+      "  DISPLAY '  Records Deleted:  ' + stats.rows_deleted",
+      "  DISPLAY '  Commits:          ' + stats.commits",
+      "  DISPLAY '  Rollbacks:        ' + stats.rollbacks",
+      "  SET ws_formatted_time = stats.cpu_time  -- edited picture ZZ,ZZ9.99",
+      "  DISPLAY '  CPU Time:         ' + ws_formatted_time + ' seconds'",
+      "  SET ws_formatted_time = stats.elapsed_time",
+      "  DISPLAY '  Elapsed Time:     ' + ws_formatted_time + ' seconds'",
+      "  SET request.return_code = 0",
+      "ELSE",
+      "  SET err_text = 'Error retrieving stats'",
+      "  CALL 9000-error-routine",
+      "END IF"
+    ],
+    "pseudocode_statement_ids": [
+      ["SYS-PORTFOLIO-001-FIL-0057-STMT-000030"],
+      ["SYS-PORTFOLIO-001-FIL-0057-STMT-000031"],
+      ["SYS-PORTFOLIO-001-FIL-0057-STMT-000055"],
+      ["SYS-PORTFOLIO-001-FIL-0057-STMT-000056"],
+      ["SYS-PORTFOLIO-001-FIL-0057-STMT-000057"],
+      ["SYS-PORTFOLIO-001-FIL-0057-STMT-000058"],
+      ["SYS-PORTFOLIO-001-FIL-0057-STMT-000059"],
+      ["SYS-PORTFOLIO-001-FIL-0057-STMT-000060"],
+      ["SYS-PORTFOLIO-001-FIL-0057-STMT-000061"],
+      ["SYS-PORTFOLIO-001-FIL-0057-STMT-000062"],
+      ["SYS-PORTFOLIO-001-FIL-0057-STMT-000063"],
+      ["SYS-PORTFOLIO-001-FIL-0057-STMT-000064"],
+      ["SYS-PORTFOLIO-001-FIL-0057-STMT-000065"],
+      ["SYS-PORTFOLIO-001-FIL-0057-STMT-000066"],
+      ["SYS-PORTFOLIO-001-FIL-0057-STMT-000031"],
+      ["SYS-PORTFOLIO-001-FIL-0057-STMT-000053"],
+      ["SYS-PORTFOLIO-001-FIL-0057-STMT-000054"],
+      ["SYS-PORTFOLIO-001-FIL-0057-STMT-000031"]
+    ],
+    "pseudocode_text": "SQL SELECT rows_read, rows_inserted, rows_updated, rows_deleted, commits, rollbacks, cpu_time, elapsed_time FROM table SESSION.DBSTATS WHERE program_id = stats.program_id INTO host structure ws_stats_record\nIF sqlcode = 0 THEN  -- CHECK SQLCODE\n  DISPLAY 'DB2 Statistics for ' + stats.program_id  -- console output\n  DISPLAY '  Records Read:    ' + stats.rows_read\n  DISPLAY '  Records Inserted: ' + stats.rows_inserted\n  DISPLAY '  Records Updated:  ' + stats.rows_updated\n  DISPLAY '  Records Deleted:  ' + stats.rows_deleted\n  DISPLAY '  Commits:          ' + stats.commits\n  DISPLAY '  Rollbacks:        ' + stats.rollbacks\n  SET ws_formatted_time = stats.cpu_time  -- edited picture ZZ,ZZ9.99\n  DISPLAY '  CPU Time:         ' + ws_formatted_time + ' seconds'\n  SET ws_formatted_time = stats.elapsed_time\n  DISPLAY '  Elapsed Time:     ' + ws_formatted_time + ' seconds'\n  SET request.return_code = 0\nELSE\n  SET err_text = 'Error retrieving stats'\n  CALL 9000-error-routine\nEND IF",
+    "statement_ids": ["SYS-PORTFOLIO-001-FIL-0057-STMT-000030", "SYS-PORTFOLIO-001-FIL-0057-STMT-000031", "SYS-PORTFOLIO-001-FIL-0057-STMT-000055", "SYS-PORTFOLIO-001-FIL-0057-STMT-000056", "SYS-PORTFOLIO-001-FIL-0057-STMT-000057", "SYS-PORTFOLIO-001-FIL-0057-STMT-000058", "SYS-PORTFOLIO-001-FIL-0057-STMT-000059", "SYS-PORTFOLIO-001-FIL-0057-STMT-000060", "SYS-PORTFOLIO-001-FIL-0057-STMT-000061", "SYS-PORTFOLIO-001-FIL-0057-STMT-000062", "SYS-PORTFOLIO-001-FIL-0057-STMT-000063", "SYS-PORTFOLIO-001-FIL-0057-STMT-000064", "SYS-PORTFOLIO-001-FIL-0057-STMT-000065", "SYS-PORTFOLIO-001-FIL-0057-STMT-000066", "SYS-PORTFOLIO-001-FIL-0057-STMT-000053", "SYS-PORTFOLIO-001-FIL-0057-STMT-000054"],
+    "untranslated_statement_ids": [],
+    "field_references": ["WS-STATS-RECORD", "WS-PROGRAM-ID", "SQLCODE", "WS-ROWS-READ", "WS-ROWS-INSERTED", "WS-ROWS-UPDATED", "WS-ROWS-DELETED", "WS-COMMITS", "WS-ROLLBACKS", "WS-CPU-TIME", "WS-FORMATTED-TIME", "WS-ELAPSED-TIME", "LS-RETURN-CODE", "ERR-TEXT"],
+    "field_reference_ids": [
+      {"name": "WS-STATS-RECORD", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0057-REC-0001", "target_kind": "record", "candidate_ids": []},
+      {"name": "WS-PROGRAM-ID", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0057-FLD-000001", "target_kind": "field", "candidate_ids": []},
+      {"name": "SQLCODE", "qualifiers": [], "resolution": "UNRESOLVED", "target_id": null, "target_kind": null, "candidate_ids": []},
+      {"name": "WS-ROWS-READ", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0057-FLD-000004", "target_kind": "field", "candidate_ids": []},
+      {"name": "WS-ROWS-INSERTED", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0057-FLD-000005", "target_kind": "field", "candidate_ids": []},
+      {"name": "WS-ROWS-UPDATED", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0057-FLD-000006", "target_kind": "field", "candidate_ids": []},
+      {"name": "WS-ROWS-DELETED", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0057-FLD-000007", "target_kind": "field", "candidate_ids": []},
+      {"name": "WS-COMMITS", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0057-FLD-000008", "target_kind": "field", "candidate_ids": []},
+      {"name": "WS-ROLLBACKS", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0057-FLD-000009", "target_kind": "field", "candidate_ids": []},
+      {"name": "WS-CPU-TIME", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0057-FLD-000010", "target_kind": "field", "candidate_ids": []},
+      {"name": "WS-FORMATTED-TIME", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0057-REC-0004", "target_kind": "record", "candidate_ids": []},
+      {"name": "WS-ELAPSED-TIME", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0057-FLD-000011", "target_kind": "field", "candidate_ids": []},
+      {"name": "LS-RETURN-CODE", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0057-FLD-000025", "target_kind": "field", "candidate_ids": []},
+      {"name": "ERR-TEXT", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0007-FLD-000017", "target_kind": "field", "candidate_ids": []}
+    ],
+    "calls_made": ["9000-ERROR-ROUTINE"],
+    "calls_made_ids": [
+      {"name": "9000-ERROR-ROUTINE", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0057-PAR-0009", "section_id": null}
+    ],
+    "complexity_score": 2,
+    "has_unresolved_statements": false,
+    "annotations": [
+      {"line": 190, "statement_id": "SYS-PORTFOLIO-001-FIL-0057-STMT-000030", "note": "Eight columns are selected INTO the host structure :WS-STATS-RECORD, whose 11 elementary items start with WS-PROGRAM-ID, WS-START-TIME and WS-END-TIME. Positional host-structure mapping would place ROWS_READ into WS-PROGRAM-ID; how the precompiler resolves the column/host-variable count mismatch is flagged for SME review.", "ambiguous": true},
+      {"line": 209, "statement_id": "SYS-PORTFOLIO-001-FIL-0057-STMT-000062", "note": "WS-FORMATTED-TIME is PIC ZZ,ZZ9.99 (max 99,999.99, unsigned); larger or negative times lose high-order digits or sign."}
+    ]
+  },
+  {
+    "name": "9000-ERROR-ROUTINE",
+    "paragraph_id": "SYS-PORTFOLIO-001-FIL-0057-PAR-0009",
+    "section": null,
+    "section_id": null,
+    "line_range": [224, 228],
+    "pseudocode": [
+      "SET err_program = 'DB2STAT'",
+      "SET request.return_code = 12",
+      "CALL program ERRPROC",
+      "  PASSING: err_message  -- common error block from copybook ERRHAND; subprogram: error processor"
+    ],
+    "pseudocode_statement_ids": [
+      ["SYS-PORTFOLIO-001-FIL-0057-STMT-000032"],
+      ["SYS-PORTFOLIO-001-FIL-0057-STMT-000033"],
+      ["SYS-PORTFOLIO-001-FIL-0057-STMT-000034"],
+      ["SYS-PORTFOLIO-001-FIL-0057-STMT-000034"]
+    ],
+    "pseudocode_text": "SET err_program = 'DB2STAT'\nSET request.return_code = 12\nCALL program ERRPROC\n  PASSING: err_message  -- common error block from copybook ERRHAND; subprogram: error processor",
+    "statement_ids": ["SYS-PORTFOLIO-001-FIL-0057-STMT-000032", "SYS-PORTFOLIO-001-FIL-0057-STMT-000033", "SYS-PORTFOLIO-001-FIL-0057-STMT-000034"],
+    "untranslated_statement_ids": [],
+    "field_references": ["ERR-PROGRAM", "LS-RETURN-CODE", "ERR-MESSAGE"],
+    "field_reference_ids": [
+      {"name": "ERR-PROGRAM", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0007-FLD-000013", "target_kind": "field", "candidate_ids": []},
+      {"name": "LS-RETURN-CODE", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0057-FLD-000025", "target_kind": "field", "candidate_ids": []},
+      {"name": "ERR-MESSAGE", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0007-REC-0003", "target_kind": "record", "candidate_ids": []}
+    ],
+    "calls_made": [],
+    "calls_made_ids": [],
+    "complexity_score": 1,
+    "has_unresolved_statements": false,
+    "annotations": [
+      {"line": 227, "statement_id": "SYS-PORTFOLIO-001-FIL-0057-STMT-000034", "note": "Static CALL to external program ERRPROC (outside this execution's scope); not traced into."}
+    ]
+  }
+],
+"unresolved_statements": [],
+"pseudocode_issues": [
+  {"severity": "info", "type": "id_unresolved", "kind": "field", "name": "SQLCODE", "paragraphs": ["1100-CREATE-STATS-TABLE", "1200-INSERT-INITIAL", "2000-UPDATE-STATS", "3000-TERMINATE", "4000-DISPLAY-STATS"], "message": "SQLCODE: resolve-field-references UNRESOLVED; target_id null."},
+  {"severity": "info", "type": "external_call", "name": "ERRPROC", "statement_id": "SYS-PORTFOLIO-001-FIL-0057-STMT-000034", "message": "Static CALL 'ERRPROC' recorded with its literal target; not traced into."},
+  {"severity": "info", "type": "ambiguous_statement", "line": 181, "statement_id": "SYS-PORTFOLIO-001-FIL-0057-STMT-000027", "message": "COMPUTE with FUNCTION NUMVAL over timestamp substrings; recorded as written and flagged for review."},
+  {"severity": "info", "type": "ambiguous_statement", "line": 190, "statement_id": "SYS-PORTFOLIO-001-FIL-0057-STMT-000030", "message": "SELECT of 8 columns INTO an 11-item host structure; flagged for review."}
+]
+}

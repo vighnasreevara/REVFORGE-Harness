@@ -1,0 +1,162 @@
+{
+"program_summary": {"program_id": "INQPORT", "source_file": "src/programs/online/INQPORT.cbl", "ast_file": "raw_structure/SYS-PORTFOLIO-001-FIL-0065__INQPORT.json", "total_lines": 110, "paragraph_count": 11, "section_count": 2, "has_unstructured_flow": true, "has_alter": false, "dead_code_candidates": 2, "parse_status": "success", "system_id": "SYS-PORTFOLIO-001", "file_id": "SYS-PORTFOLIO-001-FIL-0065", "path_id": "SYS-PORTFOLIO-001-PATH-0065", "file_name": "INQPORT.cbl", "statement_count": 25, "perform_edges": 4, "goto_edges": 0, "control_flow_relationships": 8, "review_required_statements": 0, "uncertain_statements": 0, "parse_run_id": "PRUN-20261023T023803Z-ACC2"},
+"program_id": "INQPORT",
+"source_file": "src/programs/online/INQPORT.cbl",
+"total_lines": 110,
+"system_id": "SYS-PORTFOLIO-001",
+"file_id": "SYS-PORTFOLIO-001-FIL-0065",
+"path_id": "SYS-PORTFOLIO-001-PATH-0065",
+"file_name": "INQPORT.cbl",
+"relative_path": "src/programs/online/INQPORT.cbl",
+"parse_run_id": "PRUN-20261023T023803Z-ACC2",
+"source_format": "fixed",
+"identification_division": {"start_line": 1, "end_line": 9, "program_id": "INQPORT", "author": null, "date_written": null},
+"environment_division": {
+  "start_line": 10, "end_line": 11,
+  "sections": [],
+  "paragraphs": [],
+  "file_control_entries": []
+},
+"data_division": {
+  "start_line": 12, "end_line": 39,
+  "file_section": {"section_id": null, "start_line": null, "entries": []},
+  "working_storage_section": {
+    "section_id": "SYS-PORTFOLIO-001-FIL-0065-SEC-0001",
+    "start_line": 13, "end_line": 35,
+    "entries": [
+      {"level": 1, "name": "WS-COMMAREA", "pic": null, "value": null, "line": 14, "redefines": null, "occurs": null, "contains_copy": true, "children": [
+        {"type": "copy_stub", "copybook": "INQCOM", "library": null, "include_kind": "COPY", "line": 15, "section": "WORKING-STORAGE", "parent_level": "01", "note": "Expanded by Data Agent"}
+      ]},
+      {"level": 1, "name": "WS-POSITION-RECORD", "pic": null, "value": null, "line": 17, "redefines": null, "occurs": null, "contains_copy": true, "children": [
+        {"type": "copy_stub", "copybook": "POSREC", "library": null, "include_kind": "COPY", "line": 18, "section": "WORKING-STORAGE", "parent_level": "01", "note": "Expanded by Data Agent"}
+      ]},
+      {"level": 1, "name": "WS-DB2-POSITION", "pic": null, "value": null, "line": 20, "redefines": null, "occurs": null, "contains_copy": true, "children": [
+        {"type": "copy_stub", "copybook": "SQLPOS", "library": null, "include_kind": "SQL_INCLUDE", "line": 21, "section": "WORKING-STORAGE", "parent_level": "01", "note": "Expanded by Data Agent"}
+      ]},
+      {"level": 1, "name": "WS-FLAGS", "pic": null, "value": null, "line": 23, "redefines": null, "occurs": null, "children": [
+        {"level": 5, "name": "WS-RESPONSE-CODE", "pic": "S9(8) COMP", "value": null, "line": 24, "redefines": null, "occurs": null, "children": []},
+        {"level": 5, "name": "WS-POSITION-FOUND", "pic": "X", "value": "'N'", "line": 25, "redefines": null, "occurs": null, "children": [
+          {"level": 88, "name": "POSITION-EXISTS", "value": "'Y'", "line": 26},
+          {"level": 88, "name": "NO-POSITION", "value": "'N'", "line": 27}
+        ]}
+      ]},
+      {"level": 1, "name": "WS-MAP-FIELDS", "pic": null, "value": null, "line": 29, "redefines": null, "occurs": null, "children": [
+        {"level": 5, "name": "WS-ACCOUNT-LABEL", "pic": "X(10)", "value": "'Account:'", "line": 30, "redefines": null, "occurs": null, "children": []},
+        {"level": 5, "name": "WS-FUND-LABEL", "pic": "X(10)", "value": "'Fund ID:'", "line": 31, "redefines": null, "occurs": null, "children": []},
+        {"level": 5, "name": "WS-UNITS-LABEL", "pic": "X(10)", "value": "'Units:'", "line": 32, "redefines": null, "occurs": null, "children": []},
+        {"level": 5, "name": "WS-COST-LABEL", "pic": "X(15)", "value": "'Cost Basis:'", "line": 33, "redefines": null, "occurs": null, "children": []},
+        {"level": 5, "name": "WS-VALUE-LABEL", "pic": "X(15)", "value": "'Market Value:'", "line": 34, "redefines": null, "occurs": null, "children": []}
+      ]}
+    ]
+  },
+  "linkage_section": {
+    "section_id": "SYS-PORTFOLIO-001-FIL-0065-SEC-0002",
+    "start_line": 36, "end_line": 39,
+    "entries": [
+      {"level": 1, "name": "DFHCOMMAREA", "pic": null, "value": null, "line": 37, "redefines": null, "occurs": null, "section": "LINKAGE", "contains_copy": true, "children": [
+        {"type": "copy_stub", "copybook": "INQCOM", "library": null, "include_kind": "COPY", "line": 38, "section": "LINKAGE", "parent_level": "01", "note": "Expanded by Data Agent"}
+      ]}
+    ]
+  },
+  "sql_declare_sections": []
+},
+"procedure_division": {
+  "start_line": 40, "end_line": 110,
+  "using_parameters": [],
+  "sections": [],
+  "paragraphs": [
+    {"paragraph_id": "SYS-PORTFOLIO-001-FIL-0065-PAR-0001", "name": "(UNNAMED)", "section": null, "section_id": null, "start_line": 41, "end_line": 56, "has_perform": true, "has_goto": false, "has_call": false, "has_stop_run": false, "review_status": "NONE", "statement_ids": ["SYS-PORTFOLIO-001-FIL-0065-STMT-000001", "SYS-PORTFOLIO-001-FIL-0065-STMT-000002", "SYS-PORTFOLIO-001-FIL-0065-STMT-000003", "SYS-PORTFOLIO-001-FIL-0065-STMT-000004"]},
+    {"paragraph_id": "SYS-PORTFOLIO-001-FIL-0065-PAR-0002", "name": "P100-INIT-PROGRAM", "section": null, "section_id": null, "start_line": 57, "end_line": 64, "has_perform": false, "has_goto": false, "has_call": false, "has_stop_run": false, "review_status": "NONE", "statement_ids": ["SYS-PORTFOLIO-001-FIL-0065-STMT-000005", "SYS-PORTFOLIO-001-FIL-0065-STMT-000006", "SYS-PORTFOLIO-001-FIL-0065-STMT-000007"]},
+    {"paragraph_id": "SYS-PORTFOLIO-001-FIL-0065-PAR-0003", "name": "P100-EXIT", "section": null, "section_id": null, "start_line": 65, "end_line": 67, "has_perform": false, "has_goto": false, "has_call": false, "has_stop_run": false, "review_status": "NONE", "statement_ids": ["SYS-PORTFOLIO-001-FIL-0065-STMT-000008"]},
+    {"paragraph_id": "SYS-PORTFOLIO-001-FIL-0065-PAR-0004", "name": "P200-GET-POSITION", "section": null, "section_id": null, "start_line": 68, "end_line": 82, "has_perform": false, "has_goto": false, "has_call": false, "has_stop_run": false, "review_status": "NONE", "statement_ids": ["SYS-PORTFOLIO-001-FIL-0065-STMT-000009", "SYS-PORTFOLIO-001-FIL-0065-STMT-000010", "SYS-PORTFOLIO-001-FIL-0065-STMT-000011"]},
+    {"paragraph_id": "SYS-PORTFOLIO-001-FIL-0065-PAR-0005", "name": "P200-EXIT", "section": null, "section_id": null, "start_line": 83, "end_line": 85, "has_perform": false, "has_goto": false, "has_call": false, "has_stop_run": false, "review_status": "NONE", "statement_ids": ["SYS-PORTFOLIO-001-FIL-0065-STMT-000012"]},
+    {"paragraph_id": "SYS-PORTFOLIO-001-FIL-0065-PAR-0006", "name": "P300-FORMAT-DISPLAY", "section": null, "section_id": null, "start_line": 86, "end_line": 92, "has_perform": false, "has_goto": false, "has_call": false, "has_stop_run": false, "review_status": "NONE", "statement_ids": ["SYS-PORTFOLIO-001-FIL-0065-STMT-000013"]},
+    {"paragraph_id": "SYS-PORTFOLIO-001-FIL-0065-PAR-0007", "name": "P300-EXIT", "section": null, "section_id": null, "start_line": 93, "end_line": 95, "has_perform": false, "has_goto": false, "has_call": false, "has_stop_run": false, "review_status": "NONE", "statement_ids": ["SYS-PORTFOLIO-001-FIL-0065-STMT-000014"]},
+    {"paragraph_id": "SYS-PORTFOLIO-001-FIL-0065-PAR-0008", "name": "P900-NOT-FOUND", "section": null, "section_id": null, "start_line": 96, "end_line": 99, "has_perform": false, "has_goto": false, "has_call": false, "has_stop_run": false, "review_status": "NONE", "statement_ids": ["SYS-PORTFOLIO-001-FIL-0065-STMT-000015", "SYS-PORTFOLIO-001-FIL-0065-STMT-000016"]},
+    {"paragraph_id": "SYS-PORTFOLIO-001-FIL-0065-PAR-0009", "name": "P900-EXIT", "section": null, "section_id": null, "start_line": 100, "end_line": 102, "has_perform": false, "has_goto": false, "has_call": false, "has_stop_run": false, "review_status": "NONE", "statement_ids": ["SYS-PORTFOLIO-001-FIL-0065-STMT-000017"]},
+    {"paragraph_id": "SYS-PORTFOLIO-001-FIL-0065-PAR-0010", "name": "P999-ERROR-ROUTINE", "section": null, "section_id": null, "start_line": 103, "end_line": 108, "has_perform": false, "has_goto": false, "has_call": false, "has_stop_run": false, "review_status": "NONE", "statement_ids": ["SYS-PORTFOLIO-001-FIL-0065-STMT-000018", "SYS-PORTFOLIO-001-FIL-0065-STMT-000019", "SYS-PORTFOLIO-001-FIL-0065-STMT-000020"]},
+    {"paragraph_id": "SYS-PORTFOLIO-001-FIL-0065-PAR-0011", "name": "P999-EXIT", "section": null, "section_id": null, "start_line": 109, "end_line": 110, "has_perform": false, "has_goto": false, "has_call": false, "has_stop_run": false, "review_status": "NONE", "statement_ids": ["SYS-PORTFOLIO-001-FIL-0065-STMT-000021"]}
+  ],
+  "statements": [
+    {"statement_id": "SYS-PORTFOLIO-001-FIL-0065-STMT-000001", "local_id": "L1", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0065-PAR-0001", "paragraph": "(UNNAMED)", "parent_statement_id": null, "branch": null, "depth": 0, "sibling_index": 1, "statement_type": "PERFORM", "source_text": "PERFORM P100-INIT-PROGRAM THRU P100-EXIT", "start_line": 41, "end_line": 42, "extraction_status": "OK", "match": "UNCHANGED", "review_status": "NONE", "review_candidates": []},
+    {"statement_id": "SYS-PORTFOLIO-001-FIL-0065-STMT-000002", "local_id": "L2", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0065-PAR-0001", "paragraph": "(UNNAMED)", "parent_statement_id": null, "branch": null, "depth": 0, "sibling_index": 2, "statement_type": "PERFORM", "source_text": "PERFORM P200-GET-POSITION THRU P200-EXIT", "start_line": 44, "end_line": 45, "extraction_status": "OK", "match": "UNCHANGED", "review_status": "NONE", "review_candidates": []},
+    {"statement_id": "SYS-PORTFOLIO-001-FIL-0065-STMT-000003", "local_id": "L3", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0065-PAR-0001", "paragraph": "(UNNAMED)", "parent_statement_id": null, "branch": null, "depth": 0, "sibling_index": 3, "statement_type": "IF", "source_text": "IF POSITION-EXISTS", "start_line": 47, "end_line": 53, "extraction_status": "OK", "match": "UNCHANGED", "review_status": "NONE", "review_candidates": []},
+    {"statement_id": "SYS-PORTFOLIO-001-FIL-0065-STMT-000023", "local_id": "L4", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0065-PAR-0001", "paragraph": "(UNNAMED)", "parent_statement_id": "SYS-PORTFOLIO-001-FIL-0065-STMT-000003", "branch": "THEN", "depth": 1, "sibling_index": 1, "statement_type": "PERFORM", "source_text": "PERFORM P300-FORMAT-DISPLAY THRU P300-EXIT", "start_line": 48, "end_line": 49, "extraction_status": "OK", "match": "UNCHANGED", "review_status": "NONE", "review_candidates": []},
+    {"statement_id": "SYS-PORTFOLIO-001-FIL-0065-STMT-000022", "local_id": "L5", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0065-PAR-0001", "paragraph": "(UNNAMED)", "parent_statement_id": "SYS-PORTFOLIO-001-FIL-0065-STMT-000003", "branch": "ELSE", "depth": 1, "sibling_index": 1, "statement_type": "PERFORM", "source_text": "PERFORM P900-NOT-FOUND THRU P900-EXIT", "start_line": 51, "end_line": 52, "extraction_status": "OK", "match": "UNCHANGED", "review_status": "NONE", "review_candidates": []},
+    {"statement_id": "SYS-PORTFOLIO-001-FIL-0065-STMT-000004", "local_id": "L6", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0065-PAR-0001", "paragraph": "(UNNAMED)", "parent_statement_id": null, "branch": null, "depth": 0, "sibling_index": 4, "statement_type": "EXEC CICS", "source_text": "EXEC CICS RETURN END-EXEC", "start_line": 55, "end_line": 55, "extraction_status": "OK", "match": "UNCHANGED", "review_status": "NONE", "review_candidates": []},
+    {"statement_id": "SYS-PORTFOLIO-001-FIL-0065-STMT-000005", "local_id": "L7", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0065-PAR-0002", "paragraph": "P100-INIT-PROGRAM", "parent_statement_id": null, "branch": null, "depth": 0, "sibling_index": 1, "statement_type": "MOVE", "source_text": "MOVE LOW-VALUES TO WS-POSITION-RECORD", "start_line": 58, "end_line": 58, "extraction_status": "OK", "match": "UNCHANGED", "review_status": "NONE", "review_candidates": []},
+    {"statement_id": "SYS-PORTFOLIO-001-FIL-0065-STMT-000006", "local_id": "L8", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0065-PAR-0002", "paragraph": "P100-INIT-PROGRAM", "parent_statement_id": null, "branch": null, "depth": 0, "sibling_index": 2, "statement_type": "MOVE", "source_text": "MOVE DFHCOMMAREA TO WS-COMMAREA", "start_line": 59, "end_line": 59, "extraction_status": "OK", "match": "UNCHANGED", "review_status": "NONE", "review_candidates": []},
+    {"statement_id": "SYS-PORTFOLIO-001-FIL-0065-STMT-000007", "local_id": "L9", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0065-PAR-0002", "paragraph": "P100-INIT-PROGRAM", "parent_statement_id": null, "branch": null, "depth": 0, "sibling_index": 3, "statement_type": "EXEC CICS", "source_text": "EXEC CICS HANDLE CONDITION ERROR(P999-ERROR-ROUTINE) NOTFND(P900-NOT-FOUND) END-EXEC", "start_line": 61, "end_line": 64, "extraction_status": "OK", "match": "UNCHANGED", "review_status": "NONE", "review_candidates": []},
+    {"statement_id": "SYS-PORTFOLIO-001-FIL-0065-STMT-000008", "local_id": "L10", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0065-PAR-0003", "paragraph": "P100-EXIT", "parent_statement_id": null, "branch": null, "depth": 0, "sibling_index": 1, "statement_type": "EXIT", "source_text": "EXIT", "start_line": 66, "end_line": 66, "extraction_status": "OK", "match": "UNCHANGED", "review_status": "NONE", "review_candidates": []},
+    {"statement_id": "SYS-PORTFOLIO-001-FIL-0065-STMT-000009", "local_id": "L11", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0065-PAR-0004", "paragraph": "P200-GET-POSITION", "parent_statement_id": null, "branch": null, "depth": 0, "sibling_index": 1, "statement_type": "MOVE", "source_text": "MOVE WS-COMMAREA-ACCOUNT-NO TO POSITION-ACCOUNT OF WS-POSITION-RECORD", "start_line": 69, "end_line": 70, "extraction_status": "OK", "match": "UNCHANGED", "review_status": "NONE", "review_candidates": []},
+    {"statement_id": "SYS-PORTFOLIO-001-FIL-0065-STMT-000010", "local_id": "L12", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0065-PAR-0004", "paragraph": "P200-GET-POSITION", "parent_statement_id": null, "branch": null, "depth": 0, "sibling_index": 2, "statement_type": "EXEC CICS", "source_text": "EXEC CICS READ FILE('POSFILE') INTO(WS-POSITION-RECORD) RIDFLD(POSITION-ACCOUNT OF WS-POSITION-RECORD) RESP(WS-RESPONSE-CODE) END-EXEC", "start_line": 72, "end_line": 76, "extraction_status": "OK", "match": "UNCHANGED", "review_status": "NONE", "review_candidates": []},
+    {"statement_id": "SYS-PORTFOLIO-001-FIL-0065-STMT-000011", "local_id": "L13", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0065-PAR-0004", "paragraph": "P200-GET-POSITION", "parent_statement_id": null, "branch": null, "depth": 0, "sibling_index": 3, "statement_type": "IF", "source_text": "IF WS-RESPONSE-CODE = DFHRESP(NORMAL)", "start_line": 78, "end_line": 82, "extraction_status": "OK", "match": "UNCHANGED", "review_status": "NONE", "review_candidates": []},
+    {"statement_id": "SYS-PORTFOLIO-001-FIL-0065-STMT-000025", "local_id": "L14", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0065-PAR-0004", "paragraph": "P200-GET-POSITION", "parent_statement_id": "SYS-PORTFOLIO-001-FIL-0065-STMT-000011", "branch": "THEN", "depth": 1, "sibling_index": 1, "statement_type": "SET", "source_text": "SET POSITION-EXISTS TO TRUE", "start_line": 79, "end_line": 79, "extraction_status": "OK", "match": "UNCHANGED", "review_status": "NONE", "review_candidates": []},
+    {"statement_id": "SYS-PORTFOLIO-001-FIL-0065-STMT-000024", "local_id": "L15", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0065-PAR-0004", "paragraph": "P200-GET-POSITION", "parent_statement_id": "SYS-PORTFOLIO-001-FIL-0065-STMT-000011", "branch": "ELSE", "depth": 1, "sibling_index": 1, "statement_type": "SET", "source_text": "SET NO-POSITION TO TRUE", "start_line": 81, "end_line": 81, "extraction_status": "OK", "match": "UNCHANGED", "review_status": "NONE", "review_candidates": []},
+    {"statement_id": "SYS-PORTFOLIO-001-FIL-0065-STMT-000012", "local_id": "L16", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0065-PAR-0005", "paragraph": "P200-EXIT", "parent_statement_id": null, "branch": null, "depth": 0, "sibling_index": 1, "statement_type": "EXIT", "source_text": "EXIT", "start_line": 84, "end_line": 84, "extraction_status": "OK", "match": "UNCHANGED", "review_status": "NONE", "review_candidates": []},
+    {"statement_id": "SYS-PORTFOLIO-001-FIL-0065-STMT-000013", "local_id": "L17", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0065-PAR-0006", "paragraph": "P300-FORMAT-DISPLAY", "parent_statement_id": null, "branch": null, "depth": 0, "sibling_index": 1, "statement_type": "EXEC CICS", "source_text": "EXEC CICS SEND MAP('POSMAP') MAPSET('INQSET') FROM(WS-POSITION-RECORD) ERASE RESP(WS-RESPONSE-CODE) END-EXEC", "start_line": 87, "end_line": 92, "extraction_status": "OK", "match": "UNCHANGED", "review_status": "NONE", "review_candidates": []},
+    {"statement_id": "SYS-PORTFOLIO-001-FIL-0065-STMT-000014", "local_id": "L18", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0065-PAR-0007", "paragraph": "P300-EXIT", "parent_statement_id": null, "branch": null, "depth": 0, "sibling_index": 1, "statement_type": "EXIT", "source_text": "EXIT", "start_line": 94, "end_line": 94, "extraction_status": "OK", "match": "UNCHANGED", "review_status": "NONE", "review_candidates": []},
+    {"statement_id": "SYS-PORTFOLIO-001-FIL-0065-STMT-000015", "local_id": "L19", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0065-PAR-0008", "paragraph": "P900-NOT-FOUND", "parent_statement_id": null, "branch": null, "depth": 0, "sibling_index": 1, "statement_type": "MOVE", "source_text": "MOVE 'Position not found for account' TO INQCOM-ERROR-MSG OF WS-COMMAREA", "start_line": 97, "end_line": 98, "extraction_status": "OK", "match": "UNCHANGED", "review_status": "NONE", "review_candidates": []},
+    {"statement_id": "SYS-PORTFOLIO-001-FIL-0065-STMT-000016", "local_id": "L20", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0065-PAR-0008", "paragraph": "P900-NOT-FOUND", "parent_statement_id": null, "branch": null, "depth": 0, "sibling_index": 2, "statement_type": "MOVE", "source_text": "MOVE WS-COMMAREA TO DFHCOMMAREA", "start_line": 99, "end_line": 99, "extraction_status": "OK", "match": "UNCHANGED", "review_status": "NONE", "review_candidates": []},
+    {"statement_id": "SYS-PORTFOLIO-001-FIL-0065-STMT-000017", "local_id": "L21", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0065-PAR-0009", "paragraph": "P900-EXIT", "parent_statement_id": null, "branch": null, "depth": 0, "sibling_index": 1, "statement_type": "EXIT", "source_text": "EXIT", "start_line": 101, "end_line": 101, "extraction_status": "OK", "match": "UNCHANGED", "review_status": "NONE", "review_candidates": []},
+    {"statement_id": "SYS-PORTFOLIO-001-FIL-0065-STMT-000018", "local_id": "L22", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0065-PAR-0010", "paragraph": "P999-ERROR-ROUTINE", "parent_statement_id": null, "branch": null, "depth": 0, "sibling_index": 1, "statement_type": "MOVE", "source_text": "MOVE 'Error accessing position data' TO INQCOM-ERROR-MSG OF WS-COMMAREA", "start_line": 104, "end_line": 105, "extraction_status": "OK", "match": "UNCHANGED", "review_status": "NONE", "review_candidates": []},
+    {"statement_id": "SYS-PORTFOLIO-001-FIL-0065-STMT-000019", "local_id": "L23", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0065-PAR-0010", "paragraph": "P999-ERROR-ROUTINE", "parent_statement_id": null, "branch": null, "depth": 0, "sibling_index": 2, "statement_type": "MOVE", "source_text": "MOVE WS-RESPONSE-CODE TO INQCOM-RESPONSE-CODE OF WS-COMMAREA", "start_line": 106, "end_line": 107, "extraction_status": "OK", "match": "UNCHANGED", "review_status": "NONE", "review_candidates": []},
+    {"statement_id": "SYS-PORTFOLIO-001-FIL-0065-STMT-000020", "local_id": "L24", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0065-PAR-0010", "paragraph": "P999-ERROR-ROUTINE", "parent_statement_id": null, "branch": null, "depth": 0, "sibling_index": 3, "statement_type": "MOVE", "source_text": "MOVE WS-COMMAREA TO DFHCOMMAREA", "start_line": 108, "end_line": 108, "extraction_status": "OK", "match": "UNCHANGED", "review_status": "NONE", "review_candidates": []},
+    {"statement_id": "SYS-PORTFOLIO-001-FIL-0065-STMT-000021", "local_id": "L25", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0065-PAR-0011", "paragraph": "P999-EXIT", "parent_statement_id": null, "branch": null, "depth": 0, "sibling_index": 1, "statement_type": "EXIT", "source_text": "EXIT", "start_line": 110, "end_line": 110, "extraction_status": "OK", "match": "UNCHANGED", "review_status": "NONE", "review_candidates": []}
+  ],
+  "terminal_statements": [
+    {"type": "CICS RETURN", "line": 55, "paragraph": "(UNNAMED)", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0065-PAR-0001", "statement_id": "SYS-PORTFOLIO-001-FIL-0065-STMT-000004"}
+  ]
+},
+"copy_stubs": [
+  {"copybook": "INQCOM", "include_kind": "COPY", "division": "DATA", "section": "WORKING-STORAGE", "line": 15},
+  {"copybook": "POSREC", "include_kind": "COPY", "division": "DATA", "section": "WORKING-STORAGE", "line": 18},
+  {"copybook": "SQLPOS", "include_kind": "SQL_INCLUDE", "division": "DATA", "section": "WORKING-STORAGE", "line": 21},
+  {"copybook": "INQCOM", "include_kind": "COPY", "division": "DATA", "section": "LINKAGE", "line": 38}
+],
+"control_flow_graph": {
+  "entry_points": ["(UNNAMED)"],
+  "entry_point_ids": ["SYS-PORTFOLIO-001-FIL-0065-PAR-0001"],
+  "terminal_nodes": ["(UNNAMED)"],
+  "nodes": [
+    {"id": "(UNNAMED)", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0065-PAR-0001", "type": "paragraph", "section": null, "section_id": null, "start_line": 41, "end_line": 56, "is_entry_point": true, "is_terminal": true, "is_dead_code": false, "unstructured_constructs": ["PERFORM_THRU"]},
+    {"id": "P100-INIT-PROGRAM", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0065-PAR-0002", "type": "paragraph", "section": null, "section_id": null, "start_line": 57, "end_line": 64, "is_entry_point": false, "is_terminal": false, "is_dead_code": false, "unstructured_constructs": []},
+    {"id": "P100-EXIT", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0065-PAR-0003", "type": "paragraph", "section": null, "section_id": null, "start_line": 65, "end_line": 67, "is_entry_point": false, "is_terminal": false, "is_dead_code": false, "unstructured_constructs": []},
+    {"id": "P200-GET-POSITION", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0065-PAR-0004", "type": "paragraph", "section": null, "section_id": null, "start_line": 68, "end_line": 82, "is_entry_point": false, "is_terminal": false, "is_dead_code": false, "unstructured_constructs": []},
+    {"id": "P200-EXIT", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0065-PAR-0005", "type": "paragraph", "section": null, "section_id": null, "start_line": 83, "end_line": 85, "is_entry_point": false, "is_terminal": false, "is_dead_code": false, "unstructured_constructs": []},
+    {"id": "P300-FORMAT-DISPLAY", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0065-PAR-0006", "type": "paragraph", "section": null, "section_id": null, "start_line": 86, "end_line": 92, "is_entry_point": false, "is_terminal": false, "is_dead_code": false, "unstructured_constructs": []},
+    {"id": "P300-EXIT", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0065-PAR-0007", "type": "paragraph", "section": null, "section_id": null, "start_line": 93, "end_line": 95, "is_entry_point": false, "is_terminal": false, "is_dead_code": false, "unstructured_constructs": []},
+    {"id": "P900-NOT-FOUND", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0065-PAR-0008", "type": "paragraph", "section": null, "section_id": null, "start_line": 96, "end_line": 99, "is_entry_point": false, "is_terminal": false, "is_dead_code": false, "unstructured_constructs": []},
+    {"id": "P900-EXIT", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0065-PAR-0009", "type": "paragraph", "section": null, "section_id": null, "start_line": 100, "end_line": 102, "is_entry_point": false, "is_terminal": false, "is_dead_code": false, "unstructured_constructs": []},
+    {"id": "P999-ERROR-ROUTINE", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0065-PAR-0010", "type": "paragraph", "section": null, "section_id": null, "start_line": 103, "end_line": 108, "is_entry_point": false, "is_terminal": false, "is_dead_code": true, "unstructured_constructs": []},
+    {"id": "P999-EXIT", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0065-PAR-0011", "type": "paragraph", "section": null, "section_id": null, "start_line": 109, "end_line": 110, "is_entry_point": false, "is_terminal": false, "is_dead_code": true, "unstructured_constructs": []}
+  ],
+  "edges": [
+    {"from": "(UNNAMED)", "to": "P100-INIT-PROGRAM", "type": "PERFORM_THRU", "resolved": true, "unstructured": true, "source_line": 41, "statement_id": "SYS-PORTFOLIO-001-FIL-0065-STMT-000001", "from_paragraph_id": "SYS-PORTFOLIO-001-FIL-0065-PAR-0001", "to_paragraph_id": "SYS-PORTFOLIO-001-FIL-0065-PAR-0002", "to_section_id": null, "thru_end": "P100-EXIT", "thru_end_paragraph_id": "SYS-PORTFOLIO-001-FIL-0065-PAR-0003", "implicit_thru_range": ["P100-INIT-PROGRAM", "P100-EXIT"], "implicit_thru_range_ids": ["SYS-PORTFOLIO-001-FIL-0065-PAR-0002", "SYS-PORTFOLIO-001-FIL-0065-PAR-0003"]},
+    {"from": "(UNNAMED)", "to": "P200-GET-POSITION", "type": "PERFORM_THRU", "resolved": true, "unstructured": true, "source_line": 44, "statement_id": "SYS-PORTFOLIO-001-FIL-0065-STMT-000002", "from_paragraph_id": "SYS-PORTFOLIO-001-FIL-0065-PAR-0001", "to_paragraph_id": "SYS-PORTFOLIO-001-FIL-0065-PAR-0004", "to_section_id": null, "thru_end": "P200-EXIT", "thru_end_paragraph_id": "SYS-PORTFOLIO-001-FIL-0065-PAR-0005", "implicit_thru_range": ["P200-GET-POSITION", "P200-EXIT"], "implicit_thru_range_ids": ["SYS-PORTFOLIO-001-FIL-0065-PAR-0004", "SYS-PORTFOLIO-001-FIL-0065-PAR-0005"]},
+    {"from": "(UNNAMED)", "to": "P300-FORMAT-DISPLAY", "type": "PERFORM_THRU", "resolved": true, "unstructured": true, "source_line": 48, "statement_id": "SYS-PORTFOLIO-001-FIL-0065-STMT-000023", "from_paragraph_id": "SYS-PORTFOLIO-001-FIL-0065-PAR-0001", "to_paragraph_id": "SYS-PORTFOLIO-001-FIL-0065-PAR-0006", "to_section_id": null, "thru_end": "P300-EXIT", "thru_end_paragraph_id": "SYS-PORTFOLIO-001-FIL-0065-PAR-0007", "implicit_thru_range": ["P300-FORMAT-DISPLAY", "P300-EXIT"], "implicit_thru_range_ids": ["SYS-PORTFOLIO-001-FIL-0065-PAR-0006", "SYS-PORTFOLIO-001-FIL-0065-PAR-0007"]},
+    {"from": "(UNNAMED)", "to": "P900-NOT-FOUND", "type": "PERFORM_THRU", "resolved": true, "unstructured": true, "source_line": 51, "statement_id": "SYS-PORTFOLIO-001-FIL-0065-STMT-000022", "from_paragraph_id": "SYS-PORTFOLIO-001-FIL-0065-PAR-0001", "to_paragraph_id": "SYS-PORTFOLIO-001-FIL-0065-PAR-0008", "to_section_id": null, "thru_end": "P900-EXIT", "thru_end_paragraph_id": "SYS-PORTFOLIO-001-FIL-0065-PAR-0009", "implicit_thru_range": ["P900-NOT-FOUND", "P900-EXIT"], "implicit_thru_range_ids": ["SYS-PORTFOLIO-001-FIL-0065-PAR-0008", "SYS-PORTFOLIO-001-FIL-0065-PAR-0009"]}
+  ],
+  "unstructured_constructs": [
+    {"type": "PERFORM_THRU", "paragraph": "(UNNAMED)", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0065-PAR-0001", "statement_id": "SYS-PORTFOLIO-001-FIL-0065-STMT-000001", "target": "P100-INIT-PROGRAM", "thru_end": "P100-EXIT", "line": 41, "severity": "warning"},
+    {"type": "PERFORM_THRU", "paragraph": "(UNNAMED)", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0065-PAR-0001", "statement_id": "SYS-PORTFOLIO-001-FIL-0065-STMT-000002", "target": "P200-GET-POSITION", "thru_end": "P200-EXIT", "line": 44, "severity": "warning"},
+    {"type": "PERFORM_THRU", "paragraph": "(UNNAMED)", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0065-PAR-0001", "statement_id": "SYS-PORTFOLIO-001-FIL-0065-STMT-000023", "target": "P300-FORMAT-DISPLAY", "thru_end": "P300-EXIT", "line": 48, "severity": "warning"},
+    {"type": "PERFORM_THRU", "paragraph": "(UNNAMED)", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0065-PAR-0001", "statement_id": "SYS-PORTFOLIO-001-FIL-0065-STMT-000022", "target": "P900-NOT-FOUND", "thru_end": "P900-EXIT", "line": 51, "severity": "warning"}
+  ],
+  "dead_code_candidates": [
+    {"paragraph": "P999-ERROR-ROUTINE", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0065-PAR-0010", "severity": "info", "reason": "No incoming PERFORM/GO TO/THRU-range edge and not an entry point"},
+    {"paragraph": "P999-EXIT", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0065-PAR-0011", "severity": "info", "reason": "No incoming PERFORM/GO TO/THRU-range edge and not an entry point"}
+  ],
+  "cfg_issues": [
+    {"severity": "warning", "type": "perform_thru", "statement_id": "SYS-PORTFOLIO-001-FIL-0065-STMT-000001", "line": 41, "message": "PERFORM P100-INIT-PROGRAM THRU P100-EXIT obscures control flow (range of 2 paragraphs)."},
+    {"severity": "warning", "type": "perform_thru", "statement_id": "SYS-PORTFOLIO-001-FIL-0065-STMT-000002", "line": 44, "message": "PERFORM P200-GET-POSITION THRU P200-EXIT obscures control flow (range of 2 paragraphs)."},
+    {"severity": "warning", "type": "perform_thru", "statement_id": "SYS-PORTFOLIO-001-FIL-0065-STMT-000023", "line": 48, "message": "PERFORM P300-FORMAT-DISPLAY THRU P300-EXIT obscures control flow (range of 2 paragraphs)."},
+    {"severity": "warning", "type": "perform_thru", "statement_id": "SYS-PORTFOLIO-001-FIL-0065-STMT-000022", "line": 51, "message": "PERFORM P900-NOT-FOUND THRU P900-EXIT obscures control flow (range of 2 paragraphs)."},
+    {"severity": "info", "type": "cics_handle_condition_reference", "statement_id": "SYS-PORTFOLIO-001-FIL-0065-STMT-000007", "line": 61, "message": "EXEC CICS HANDLE CONDITION names paragraphs P999-ERROR-ROUTINE (ERROR) and P900-NOT-FOUND (NOTFND). This is not a PERFORM/GO TO/ALTER edge, so no CFG edge or relationship was created. P999-ERROR-ROUTINE / P999-EXIT are dead-code candidates under rule 5 only; the Logic Agent should review them."}
+  ]
+},
+"parse_issues": [
+  {"severity": "info", "type": "unnamed_paragraph", "lines": [41, 56], "message": "Statements between PROCEDURE DIVISION (line 40) and the first paragraph P100-INIT-PROGRAM (line 57) are recorded in paragraph (UNNAMED), scope PROGRAM."},
+  {"severity": "info", "type": "sql_include_stub", "lines": [21], "message": "EXEC SQL INCLUDE SQLPOS END-EXEC recorded as a copy stub with include_kind SQL_INCLUDE (inventory reports SQLPOS unresolved)."}
+]
+}

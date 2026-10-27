@@ -1,0 +1,159 @@
+{
+"program_summary": {"program_id": "ERRPROC", "source_file": "src/programs/common/ERRPROC.cbl", "ast_file": "raw_structure/SYS-PORTFOLIO-001-FIL-0058__ERRPROC.json", "total_lines": 107, "paragraph_count": 6, "section_count": 5, "has_unstructured_flow": false, "has_alter": false, "dead_code_candidates": 0, "parse_status": "success", "system_id": "SYS-PORTFOLIO-001", "file_id": "SYS-PORTFOLIO-001-FIL-0058", "path_id": "SYS-PORTFOLIO-001-PATH-0058", "file_name": "ERRPROC.cbl", "statement_count": 33, "perform_edges": 5, "goto_edges": 0, "control_flow_relationships": 5, "review_required_statements": 0, "uncertain_statements": 0, "parse_run_id": "PRUN-20261023T023803Z-ACC2"},
+"program_id": "ERRPROC",
+"source_file": "src/programs/common/ERRPROC.cbl",
+"total_lines": 107,
+"system_id": "SYS-PORTFOLIO-001",
+"file_id": "SYS-PORTFOLIO-001-FIL-0058",
+"path_id": "SYS-PORTFOLIO-001-PATH-0058",
+"file_name": "ERRPROC.cbl",
+"relative_path": "src/programs/common/ERRPROC.cbl",
+"parse_run_id": "PRUN-20261023T023803Z-ACC2",
+"source_format": "fixed",
+"identification_division": {
+  "start_line": 7,
+  "end_line": 9,
+  "program_id": "ERRPROC",
+  "program_id_line": 8,
+  "author": null,
+  "date_written": null,
+  "date_compiled": null
+},
+"environment_division": {
+  "start_line": 10,
+  "end_line": 21,
+  "sections": [
+    {"section_id": "SYS-PORTFOLIO-001-FIL-0058-SEC-0001", "name": "CONFIGURATION", "start_line": 11, "end_line": 14},
+    {"section_id": "SYS-PORTFOLIO-001-FIL-0058-SEC-0002", "name": "INPUT-OUTPUT", "start_line": 15, "end_line": 21}
+  ],
+  "paragraphs": [
+    {"name": "SOURCE-COMPUTER", "section": "CONFIGURATION", "line": 12, "registered": false},
+    {"name": "OBJECT-COMPUTER", "section": "CONFIGURATION", "line": 13, "registered": false},
+    {"name": "FILE-CONTROL", "section": "INPUT-OUTPUT", "line": 16, "registered": false}
+  ],
+  "file_control_entries": [
+    {"select_name": "ERROR-LOG", "assign_to": "ERRLOG", "organization": "SEQUENTIAL", "access_mode": null, "record_key": null, "file_status": "WS-LOG-STATUS", "line": 17, "end_line": 20}
+  ]
+},
+"data_division": {
+  "start_line": 22,
+  "end_line": 46,
+  "sql_declare_sections": [],
+  "file_section": {
+    "section_id": "SYS-PORTFOLIO-001-FIL-0058-SEC-0003",
+    "start_line": 23,
+    "end_line": 29,
+    "entries": [
+      {"type": "FD", "file_name": "ERROR-LOG", "line": 24, "end_line": 29, "recording_mode": "F", "record_contains": null, "block_contains": "0 RECORDS", "note": "01-level record layout (line 27) left to Data Agent"}
+    ]
+  },
+  "working_storage_section": {
+    "section_id": "SYS-PORTFOLIO-001-FIL-0058-SEC-0004",
+    "start_line": 30,
+    "end_line": 36,
+    "entries": [
+      {"type": "copy_stub", "include_kind": "COPY", "copybook": "ERRHAND", "library": null, "line": 31, "section": "WORKING-STORAGE", "parent_level": null, "note": "Expanded by Data Agent"},
+      {"level": 1, "name": "WS-WORK-AREAS", "pic": null, "value": null, "line": 33, "redefines": null, "occurs": null, "children": [
+        {"level": 5, "name": "WS-LOG-STATUS", "pic": "X(2)", "value": null, "line": 34, "redefines": null, "occurs": null, "children": []},
+        {"level": 5, "name": "WS-FORMATTED-TIME", "pic": "X(26)", "value": null, "line": 35, "redefines": null, "occurs": null, "children": []}
+      ]}
+    ]
+  },
+  "local_storage_section": {"section_id": null, "start_line": null, "entries": []},
+  "linkage_section": {
+    "section_id": "SYS-PORTFOLIO-001-FIL-0058-SEC-0005",
+    "start_line": 37,
+    "end_line": 46,
+    "entries": [
+      {"level": 1, "name": "LS-ERROR-REQUEST", "section": "LINKAGE", "pic": null, "value": null, "line": 38, "redefines": null, "occurs": null, "children": [
+        {"level": 5, "name": "LS-PROGRAM-ID", "section": "LINKAGE", "pic": "X(8)", "value": null, "line": 39, "redefines": null, "occurs": null, "children": []},
+        {"level": 5, "name": "LS-CATEGORY", "section": "LINKAGE", "pic": "X(2)", "value": null, "line": 40, "redefines": null, "occurs": null, "children": []},
+        {"level": 5, "name": "LS-ERROR-CODE", "section": "LINKAGE", "pic": "X(4)", "value": null, "line": 41, "redefines": null, "occurs": null, "children": []},
+        {"level": 5, "name": "LS-SEVERITY", "section": "LINKAGE", "pic": "S9(4) COMP", "value": null, "line": 42, "redefines": null, "occurs": null, "children": []},
+        {"level": 5, "name": "LS-ERROR-TEXT", "section": "LINKAGE", "pic": "X(80)", "value": null, "line": 43, "redefines": null, "occurs": null, "children": []},
+        {"level": 5, "name": "LS-ERROR-DETAILS", "section": "LINKAGE", "pic": "X(256)", "value": null, "line": 44, "redefines": null, "occurs": null, "children": []},
+        {"level": 5, "name": "LS-RETURN-CODE", "section": "LINKAGE", "pic": "S9(4) COMP", "value": null, "line": 45, "redefines": null, "occurs": null, "children": []}
+      ]}
+    ]
+  }
+},
+"procedure_division": {
+  "start_line": 47,
+  "end_line": 107,
+  "using_parameters": ["LS-ERROR-REQUEST"],
+  "sections": [],
+  "paragraphs": [
+    {"paragraph_id": "SYS-PORTFOLIO-001-FIL-0058-PAR-0001", "name": "0000-MAIN", "section": null, "section_id": null, "start_line": 48, "end_line": 54, "has_perform": true, "has_goto": false, "has_call": false, "has_stop_run": false, "review_status": "NONE", "statement_ids": ["SYS-PORTFOLIO-001-FIL-0058-STMT-000001", "SYS-PORTFOLIO-001-FIL-0058-STMT-000002", "SYS-PORTFOLIO-001-FIL-0058-STMT-000003", "SYS-PORTFOLIO-001-FIL-0058-STMT-000004"]},
+    {"paragraph_id": "SYS-PORTFOLIO-001-FIL-0058-PAR-0002", "name": "1000-INITIALIZE", "section": null, "section_id": null, "start_line": 55, "end_line": 64, "has_perform": false, "has_goto": false, "has_call": false, "has_stop_run": false, "review_status": "NONE", "statement_ids": ["SYS-PORTFOLIO-001-FIL-0058-STMT-000005", "SYS-PORTFOLIO-001-FIL-0058-STMT-000006", "SYS-PORTFOLIO-001-FIL-0058-STMT-000007", "SYS-PORTFOLIO-001-FIL-0058-STMT-000008"]},
+    {"paragraph_id": "SYS-PORTFOLIO-001-FIL-0058-PAR-0003", "name": "2000-PROCESS-ERROR", "section": null, "section_id": null, "start_line": 65, "end_line": 82, "has_perform": true, "has_goto": false, "has_call": false, "has_stop_run": false, "review_status": "NONE", "statement_ids": ["SYS-PORTFOLIO-001-FIL-0058-STMT-000009", "SYS-PORTFOLIO-001-FIL-0058-STMT-000010", "SYS-PORTFOLIO-001-FIL-0058-STMT-000011", "SYS-PORTFOLIO-001-FIL-0058-STMT-000012", "SYS-PORTFOLIO-001-FIL-0058-STMT-000013", "SYS-PORTFOLIO-001-FIL-0058-STMT-000014", "SYS-PORTFOLIO-001-FIL-0058-STMT-000015", "SYS-PORTFOLIO-001-FIL-0058-STMT-000016", "SYS-PORTFOLIO-001-FIL-0058-STMT-000017", "SYS-PORTFOLIO-001-FIL-0058-STMT-000018"]},
+    {"paragraph_id": "SYS-PORTFOLIO-001-FIL-0058-PAR-0004", "name": "2100-WRITE-LOG", "section": null, "section_id": null, "start_line": 83, "end_line": 92, "has_perform": false, "has_goto": false, "has_call": false, "has_stop_run": false, "review_status": "NONE", "statement_ids": ["SYS-PORTFOLIO-001-FIL-0058-STMT-000019", "SYS-PORTFOLIO-001-FIL-0058-STMT-000020", "SYS-PORTFOLIO-001-FIL-0058-STMT-000021"]},
+    {"paragraph_id": "SYS-PORTFOLIO-001-FIL-0058-PAR-0005", "name": "2200-DISPLAY-ERROR", "section": null, "section_id": null, "start_line": 93, "end_line": 104, "has_perform": false, "has_goto": false, "has_call": false, "has_stop_run": false, "review_status": "NONE", "statement_ids": ["SYS-PORTFOLIO-001-FIL-0058-STMT-000022", "SYS-PORTFOLIO-001-FIL-0058-STMT-000023", "SYS-PORTFOLIO-001-FIL-0058-STMT-000024", "SYS-PORTFOLIO-001-FIL-0058-STMT-000025", "SYS-PORTFOLIO-001-FIL-0058-STMT-000026", "SYS-PORTFOLIO-001-FIL-0058-STMT-000027", "SYS-PORTFOLIO-001-FIL-0058-STMT-000028", "SYS-PORTFOLIO-001-FIL-0058-STMT-000029", "SYS-PORTFOLIO-001-FIL-0058-STMT-000030"]},
+    {"paragraph_id": "SYS-PORTFOLIO-001-FIL-0058-PAR-0006", "name": "3000-TERMINATE", "section": null, "section_id": null, "start_line": 105, "end_line": 107, "has_perform": false, "has_goto": false, "has_call": false, "has_stop_run": false, "review_status": "NONE", "statement_ids": ["SYS-PORTFOLIO-001-FIL-0058-STMT-000031"]}
+  ],
+  "statements": [
+    {"statement_id": "SYS-PORTFOLIO-001-FIL-0058-STMT-000001", "local_id": "L1", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0058-PAR-0001", "paragraph": "0000-MAIN", "parent_statement_id": null, "branch": null, "depth": 0, "sibling_index": 1, "statement_type": "PERFORM", "source_text": "PERFORM 1000-INITIALIZE", "start_line": 49, "end_line": 49, "extraction_status": "OK", "match": "UNCHANGED", "review_status": "NONE", "review_candidates": []},
+    {"statement_id": "SYS-PORTFOLIO-001-FIL-0058-STMT-000002", "local_id": "L2", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0058-PAR-0001", "paragraph": "0000-MAIN", "parent_statement_id": null, "branch": null, "depth": 0, "sibling_index": 2, "statement_type": "PERFORM", "source_text": "PERFORM 2000-PROCESS-ERROR", "start_line": 50, "end_line": 50, "extraction_status": "OK", "match": "UNCHANGED", "review_status": "NONE", "review_candidates": []},
+    {"statement_id": "SYS-PORTFOLIO-001-FIL-0058-STMT-000003", "local_id": "L3", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0058-PAR-0001", "paragraph": "0000-MAIN", "parent_statement_id": null, "branch": null, "depth": 0, "sibling_index": 3, "statement_type": "PERFORM", "source_text": "PERFORM 3000-TERMINATE", "start_line": 51, "end_line": 51, "extraction_status": "OK", "match": "UNCHANGED", "review_status": "NONE", "review_candidates": []},
+    {"statement_id": "SYS-PORTFOLIO-001-FIL-0058-STMT-000004", "local_id": "L4", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0058-PAR-0001", "paragraph": "0000-MAIN", "parent_statement_id": null, "branch": null, "depth": 0, "sibling_index": 4, "statement_type": "GOBACK", "source_text": "GOBACK", "start_line": 52, "end_line": 52, "extraction_status": "OK", "match": "UNCHANGED", "review_status": "NONE", "review_candidates": []},
+    {"statement_id": "SYS-PORTFOLIO-001-FIL-0058-STMT-000005", "local_id": "L5", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0058-PAR-0002", "paragraph": "1000-INITIALIZE", "parent_statement_id": null, "branch": null, "depth": 0, "sibling_index": 1, "statement_type": "INITIALIZE", "source_text": "INITIALIZE WS-WORK-AREAS", "start_line": 56, "end_line": 56, "extraction_status": "OK", "match": "UNCHANGED", "review_status": "NONE", "review_candidates": []},
+    {"statement_id": "SYS-PORTFOLIO-001-FIL-0058-STMT-000006", "local_id": "L6", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0058-PAR-0002", "paragraph": "1000-INITIALIZE", "parent_statement_id": null, "branch": null, "depth": 0, "sibling_index": 2, "statement_type": "ACCEPT", "source_text": "ACCEPT WS-FORMATTED-TIME FROM TIME STAMP", "start_line": 57, "end_line": 57, "extraction_status": "OK", "match": "UNCHANGED", "review_status": "NONE", "review_candidates": []},
+    {"statement_id": "SYS-PORTFOLIO-001-FIL-0058-STMT-000007", "local_id": "L7", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0058-PAR-0002", "paragraph": "1000-INITIALIZE", "parent_statement_id": null, "branch": null, "depth": 0, "sibling_index": 3, "statement_type": "OPEN", "source_text": "OPEN EXTEND ERROR-LOG", "start_line": 59, "end_line": 59, "extraction_status": "OK", "match": "UNCHANGED", "review_status": "NONE", "review_candidates": []},
+    {"statement_id": "SYS-PORTFOLIO-001-FIL-0058-STMT-000008", "local_id": "L8", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0058-PAR-0002", "paragraph": "1000-INITIALIZE", "parent_statement_id": null, "branch": null, "depth": 0, "sibling_index": 4, "statement_type": "IF", "source_text": "IF WS-LOG-STATUS NOT = '00'", "start_line": 60, "end_line": 62, "extraction_status": "OK", "match": "UNCHANGED", "review_status": "NONE", "review_candidates": []},
+    {"statement_id": "SYS-PORTFOLIO-001-FIL-0058-STMT-000032", "local_id": "L9", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0058-PAR-0002", "paragraph": "1000-INITIALIZE", "parent_statement_id": "SYS-PORTFOLIO-001-FIL-0058-STMT-000008", "branch": "THEN", "depth": 1, "sibling_index": 1, "statement_type": "DISPLAY", "source_text": "DISPLAY 'Error opening log file: ' WS-LOG-STATUS", "start_line": 61, "end_line": 61, "extraction_status": "OK", "match": "UNCHANGED", "review_status": "NONE", "review_candidates": []},
+    {"statement_id": "SYS-PORTFOLIO-001-FIL-0058-STMT-000009", "local_id": "L10", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0058-PAR-0003", "paragraph": "2000-PROCESS-ERROR", "parent_statement_id": null, "branch": null, "depth": 0, "sibling_index": 1, "statement_type": "MOVE", "source_text": "MOVE WS-FORMATTED-TIME TO ERR-TIMESTAMP", "start_line": 69, "end_line": 69, "extraction_status": "OK", "match": "UNCHANGED", "review_status": "NONE", "review_candidates": []},
+    {"statement_id": "SYS-PORTFOLIO-001-FIL-0058-STMT-000010", "local_id": "L11", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0058-PAR-0003", "paragraph": "2000-PROCESS-ERROR", "parent_statement_id": null, "branch": null, "depth": 0, "sibling_index": 2, "statement_type": "MOVE", "source_text": "MOVE LS-PROGRAM-ID TO ERR-PROGRAM", "start_line": 70, "end_line": 70, "extraction_status": "OK", "match": "UNCHANGED", "review_status": "NONE", "review_candidates": []},
+    {"statement_id": "SYS-PORTFOLIO-001-FIL-0058-STMT-000011", "local_id": "L12", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0058-PAR-0003", "paragraph": "2000-PROCESS-ERROR", "parent_statement_id": null, "branch": null, "depth": 0, "sibling_index": 3, "statement_type": "MOVE", "source_text": "MOVE LS-CATEGORY TO ERR-CATEGORY", "start_line": 71, "end_line": 71, "extraction_status": "OK", "match": "UNCHANGED", "review_status": "NONE", "review_candidates": []},
+    {"statement_id": "SYS-PORTFOLIO-001-FIL-0058-STMT-000012", "local_id": "L13", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0058-PAR-0003", "paragraph": "2000-PROCESS-ERROR", "parent_statement_id": null, "branch": null, "depth": 0, "sibling_index": 4, "statement_type": "MOVE", "source_text": "MOVE LS-ERROR-CODE TO ERR-CODE", "start_line": 72, "end_line": 72, "extraction_status": "OK", "match": "UNCHANGED", "review_status": "NONE", "review_candidates": []},
+    {"statement_id": "SYS-PORTFOLIO-001-FIL-0058-STMT-000013", "local_id": "L14", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0058-PAR-0003", "paragraph": "2000-PROCESS-ERROR", "parent_statement_id": null, "branch": null, "depth": 0, "sibling_index": 5, "statement_type": "MOVE", "source_text": "MOVE LS-SEVERITY TO ERR-SEVERITY", "start_line": 73, "end_line": 73, "extraction_status": "OK", "match": "UNCHANGED", "review_status": "NONE", "review_candidates": []},
+    {"statement_id": "SYS-PORTFOLIO-001-FIL-0058-STMT-000014", "local_id": "L15", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0058-PAR-0003", "paragraph": "2000-PROCESS-ERROR", "parent_statement_id": null, "branch": null, "depth": 0, "sibling_index": 6, "statement_type": "MOVE", "source_text": "MOVE LS-ERROR-TEXT TO ERR-TEXT", "start_line": 74, "end_line": 74, "extraction_status": "OK", "match": "UNCHANGED", "review_status": "NONE", "review_candidates": []},
+    {"statement_id": "SYS-PORTFOLIO-001-FIL-0058-STMT-000015", "local_id": "L16", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0058-PAR-0003", "paragraph": "2000-PROCESS-ERROR", "parent_statement_id": null, "branch": null, "depth": 0, "sibling_index": 7, "statement_type": "MOVE", "source_text": "MOVE LS-ERROR-DETAILS TO ERR-DETAILS", "start_line": 75, "end_line": 75, "extraction_status": "OK", "match": "UNCHANGED", "review_status": "NONE", "review_candidates": []},
+    {"statement_id": "SYS-PORTFOLIO-001-FIL-0058-STMT-000016", "local_id": "L17", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0058-PAR-0003", "paragraph": "2000-PROCESS-ERROR", "parent_statement_id": null, "branch": null, "depth": 0, "sibling_index": 8, "statement_type": "PERFORM", "source_text": "PERFORM 2100-WRITE-LOG", "start_line": 77, "end_line": 77, "extraction_status": "OK", "match": "UNCHANGED", "review_status": "NONE", "review_candidates": []},
+    {"statement_id": "SYS-PORTFOLIO-001-FIL-0058-STMT-000017", "local_id": "L18", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0058-PAR-0003", "paragraph": "2000-PROCESS-ERROR", "parent_statement_id": null, "branch": null, "depth": 0, "sibling_index": 9, "statement_type": "PERFORM", "source_text": "PERFORM 2200-DISPLAY-ERROR", "start_line": 78, "end_line": 78, "extraction_status": "OK", "match": "UNCHANGED", "review_status": "NONE", "review_candidates": []},
+    {"statement_id": "SYS-PORTFOLIO-001-FIL-0058-STMT-000018", "local_id": "L19", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0058-PAR-0003", "paragraph": "2000-PROCESS-ERROR", "parent_statement_id": null, "branch": null, "depth": 0, "sibling_index": 10, "statement_type": "MOVE", "source_text": "MOVE LS-SEVERITY TO LS-RETURN-CODE", "start_line": 80, "end_line": 80, "extraction_status": "OK", "match": "UNCHANGED", "review_status": "NONE", "review_candidates": []},
+    {"statement_id": "SYS-PORTFOLIO-001-FIL-0058-STMT-000019", "local_id": "L20", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0058-PAR-0004", "paragraph": "2100-WRITE-LOG", "parent_statement_id": null, "branch": null, "depth": 0, "sibling_index": 1, "statement_type": "MOVE", "source_text": "MOVE ERR-MESSAGE TO LOG-DATA", "start_line": 84, "end_line": 84, "extraction_status": "OK", "match": "UNCHANGED", "review_status": "NONE", "review_candidates": []},
+    {"statement_id": "SYS-PORTFOLIO-001-FIL-0058-STMT-000020", "local_id": "L21", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0058-PAR-0004", "paragraph": "2100-WRITE-LOG", "parent_statement_id": null, "branch": null, "depth": 0, "sibling_index": 2, "statement_type": "WRITE", "source_text": "WRITE ERROR-LOG-RECORD", "start_line": 86, "end_line": 86, "extraction_status": "OK", "match": "UNCHANGED", "review_status": "NONE", "review_candidates": []},
+    {"statement_id": "SYS-PORTFOLIO-001-FIL-0058-STMT-000021", "local_id": "L22", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0058-PAR-0004", "paragraph": "2100-WRITE-LOG", "parent_statement_id": null, "branch": null, "depth": 0, "sibling_index": 3, "statement_type": "IF", "source_text": "IF WS-LOG-STATUS NOT = '00'", "start_line": 88, "end_line": 90, "extraction_status": "OK", "match": "UNCHANGED", "review_status": "NONE", "review_candidates": []},
+    {"statement_id": "SYS-PORTFOLIO-001-FIL-0058-STMT-000033", "local_id": "L23", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0058-PAR-0004", "paragraph": "2100-WRITE-LOG", "parent_statement_id": "SYS-PORTFOLIO-001-FIL-0058-STMT-000021", "branch": "THEN", "depth": 1, "sibling_index": 1, "statement_type": "DISPLAY", "source_text": "DISPLAY 'Error writing to log: ' WS-LOG-STATUS", "start_line": 89, "end_line": 89, "extraction_status": "OK", "match": "UNCHANGED", "review_status": "NONE", "review_candidates": []},
+    {"statement_id": "SYS-PORTFOLIO-001-FIL-0058-STMT-000022", "local_id": "L24", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0058-PAR-0005", "paragraph": "2200-DISPLAY-ERROR", "parent_statement_id": null, "branch": null, "depth": 0, "sibling_index": 1, "statement_type": "DISPLAY", "source_text": "DISPLAY '===================================================='", "start_line": 94, "end_line": 94, "extraction_status": "OK", "match": "UNCHANGED", "review_status": "NONE", "review_candidates": []},
+    {"statement_id": "SYS-PORTFOLIO-001-FIL-0058-STMT-000023", "local_id": "L25", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0058-PAR-0005", "paragraph": "2200-DISPLAY-ERROR", "parent_statement_id": null, "branch": null, "depth": 0, "sibling_index": 2, "statement_type": "DISPLAY", "source_text": "DISPLAY 'ERROR DETECTED: ' ERR-TIMESTAMP", "start_line": 95, "end_line": 95, "extraction_status": "OK", "match": "UNCHANGED", "review_status": "NONE", "review_candidates": []},
+    {"statement_id": "SYS-PORTFOLIO-001-FIL-0058-STMT-000024", "local_id": "L26", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0058-PAR-0005", "paragraph": "2200-DISPLAY-ERROR", "parent_statement_id": null, "branch": null, "depth": 0, "sibling_index": 3, "statement_type": "DISPLAY", "source_text": "DISPLAY 'PROGRAM:       ' ERR-PROGRAM", "start_line": 96, "end_line": 96, "extraction_status": "OK", "match": "UNCHANGED", "review_status": "NONE", "review_candidates": []},
+    {"statement_id": "SYS-PORTFOLIO-001-FIL-0058-STMT-000025", "local_id": "L27", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0058-PAR-0005", "paragraph": "2200-DISPLAY-ERROR", "parent_statement_id": null, "branch": null, "depth": 0, "sibling_index": 4, "statement_type": "DISPLAY", "source_text": "DISPLAY 'CATEGORY:      ' ERR-CATEGORY", "start_line": 97, "end_line": 97, "extraction_status": "OK", "match": "UNCHANGED", "review_status": "NONE", "review_candidates": []},
+    {"statement_id": "SYS-PORTFOLIO-001-FIL-0058-STMT-000026", "local_id": "L28", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0058-PAR-0005", "paragraph": "2200-DISPLAY-ERROR", "parent_statement_id": null, "branch": null, "depth": 0, "sibling_index": 5, "statement_type": "DISPLAY", "source_text": "DISPLAY 'CODE:          ' ERR-CODE", "start_line": 98, "end_line": 98, "extraction_status": "OK", "match": "UNCHANGED", "review_status": "NONE", "review_candidates": []},
+    {"statement_id": "SYS-PORTFOLIO-001-FIL-0058-STMT-000027", "local_id": "L29", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0058-PAR-0005", "paragraph": "2200-DISPLAY-ERROR", "parent_statement_id": null, "branch": null, "depth": 0, "sibling_index": 6, "statement_type": "DISPLAY", "source_text": "DISPLAY 'SEVERITY:      ' ERR-SEVERITY", "start_line": 99, "end_line": 99, "extraction_status": "OK", "match": "UNCHANGED", "review_status": "NONE", "review_candidates": []},
+    {"statement_id": "SYS-PORTFOLIO-001-FIL-0058-STMT-000028", "local_id": "L30", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0058-PAR-0005", "paragraph": "2200-DISPLAY-ERROR", "parent_statement_id": null, "branch": null, "depth": 0, "sibling_index": 7, "statement_type": "DISPLAY", "source_text": "DISPLAY 'MESSAGE:       ' ERR-TEXT", "start_line": 100, "end_line": 100, "extraction_status": "OK", "match": "UNCHANGED", "review_status": "NONE", "review_candidates": []},
+    {"statement_id": "SYS-PORTFOLIO-001-FIL-0058-STMT-000029", "local_id": "L31", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0058-PAR-0005", "paragraph": "2200-DISPLAY-ERROR", "parent_statement_id": null, "branch": null, "depth": 0, "sibling_index": 8, "statement_type": "DISPLAY", "source_text": "DISPLAY 'DETAILS:       ' ERR-DETAILS", "start_line": 101, "end_line": 101, "extraction_status": "OK", "match": "UNCHANGED", "review_status": "NONE", "review_candidates": []},
+    {"statement_id": "SYS-PORTFOLIO-001-FIL-0058-STMT-000030", "local_id": "L32", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0058-PAR-0005", "paragraph": "2200-DISPLAY-ERROR", "parent_statement_id": null, "branch": null, "depth": 0, "sibling_index": 9, "statement_type": "DISPLAY", "source_text": "DISPLAY '===================================================='", "start_line": 102, "end_line": 102, "extraction_status": "OK", "match": "UNCHANGED", "review_status": "NONE", "review_candidates": []},
+    {"statement_id": "SYS-PORTFOLIO-001-FIL-0058-STMT-000031", "local_id": "L33", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0058-PAR-0006", "paragraph": "3000-TERMINATE", "parent_statement_id": null, "branch": null, "depth": 0, "sibling_index": 1, "statement_type": "CLOSE", "source_text": "CLOSE ERROR-LOG", "start_line": 106, "end_line": 106, "extraction_status": "OK", "match": "UNCHANGED", "review_status": "NONE", "review_candidates": []}
+  ],
+  "terminal_statements": [
+    {"type": "GOBACK", "line": 52, "paragraph": "0000-MAIN", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0058-PAR-0001", "statement_id": "SYS-PORTFOLIO-001-FIL-0058-STMT-000004"}
+  ]
+},
+"copy_stubs": [
+  {"copybook": "ERRHAND", "include_kind": "COPY", "library": null, "division": "DATA", "section": "WORKING-STORAGE", "line": 31, "parent_level": null}
+],
+"control_flow_graph": {
+  "entry_points": ["0000-MAIN"],
+  "entry_point_ids": ["SYS-PORTFOLIO-001-FIL-0058-PAR-0001"],
+  "terminal_nodes": ["0000-MAIN"],
+  "nodes": [
+    {"id": "0000-MAIN", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0058-PAR-0001", "type": "paragraph", "section": null, "section_id": null, "start_line": 48, "end_line": 54, "is_entry_point": true, "is_terminal": true, "is_dead_code": false, "unstructured_constructs": []},
+    {"id": "1000-INITIALIZE", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0058-PAR-0002", "type": "paragraph", "section": null, "section_id": null, "start_line": 55, "end_line": 64, "is_entry_point": false, "is_terminal": false, "is_dead_code": false, "unstructured_constructs": []},
+    {"id": "2000-PROCESS-ERROR", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0058-PAR-0003", "type": "paragraph", "section": null, "section_id": null, "start_line": 65, "end_line": 82, "is_entry_point": false, "is_terminal": false, "is_dead_code": false, "unstructured_constructs": []},
+    {"id": "2100-WRITE-LOG", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0058-PAR-0004", "type": "paragraph", "section": null, "section_id": null, "start_line": 83, "end_line": 92, "is_entry_point": false, "is_terminal": false, "is_dead_code": false, "unstructured_constructs": []},
+    {"id": "2200-DISPLAY-ERROR", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0058-PAR-0005", "type": "paragraph", "section": null, "section_id": null, "start_line": 93, "end_line": 104, "is_entry_point": false, "is_terminal": false, "is_dead_code": false, "unstructured_constructs": []},
+    {"id": "3000-TERMINATE", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0058-PAR-0006", "type": "paragraph", "section": null, "section_id": null, "start_line": 105, "end_line": 107, "is_entry_point": false, "is_terminal": false, "is_dead_code": false, "unstructured_constructs": []}
+  ],
+  "edges": [
+    {"from": "0000-MAIN", "to": "1000-INITIALIZE", "type": "PERFORM_SIMPLE", "resolved": true, "unstructured": false, "source_line": 49, "statement_id": "SYS-PORTFOLIO-001-FIL-0058-STMT-000001", "from_paragraph_id": "SYS-PORTFOLIO-001-FIL-0058-PAR-0001", "to_paragraph_id": "SYS-PORTFOLIO-001-FIL-0058-PAR-0002", "to_section_id": null},
+    {"from": "0000-MAIN", "to": "2000-PROCESS-ERROR", "type": "PERFORM_SIMPLE", "resolved": true, "unstructured": false, "source_line": 50, "statement_id": "SYS-PORTFOLIO-001-FIL-0058-STMT-000002", "from_paragraph_id": "SYS-PORTFOLIO-001-FIL-0058-PAR-0001", "to_paragraph_id": "SYS-PORTFOLIO-001-FIL-0058-PAR-0003", "to_section_id": null},
+    {"from": "0000-MAIN", "to": "3000-TERMINATE", "type": "PERFORM_SIMPLE", "resolved": true, "unstructured": false, "source_line": 51, "statement_id": "SYS-PORTFOLIO-001-FIL-0058-STMT-000003", "from_paragraph_id": "SYS-PORTFOLIO-001-FIL-0058-PAR-0001", "to_paragraph_id": "SYS-PORTFOLIO-001-FIL-0058-PAR-0006", "to_section_id": null},
+    {"from": "2000-PROCESS-ERROR", "to": "2100-WRITE-LOG", "type": "PERFORM_SIMPLE", "resolved": true, "unstructured": false, "source_line": 77, "statement_id": "SYS-PORTFOLIO-001-FIL-0058-STMT-000016", "from_paragraph_id": "SYS-PORTFOLIO-001-FIL-0058-PAR-0003", "to_paragraph_id": "SYS-PORTFOLIO-001-FIL-0058-PAR-0004", "to_section_id": null},
+    {"from": "2000-PROCESS-ERROR", "to": "2200-DISPLAY-ERROR", "type": "PERFORM_SIMPLE", "resolved": true, "unstructured": false, "source_line": 78, "statement_id": "SYS-PORTFOLIO-001-FIL-0058-STMT-000017", "from_paragraph_id": "SYS-PORTFOLIO-001-FIL-0058-PAR-0003", "to_paragraph_id": "SYS-PORTFOLIO-001-FIL-0058-PAR-0005", "to_section_id": null}
+  ],
+  "unstructured_constructs": [],
+  "dead_code_candidates": [],
+  "cfg_issues": []
+},
+"parse_issues": []
+}

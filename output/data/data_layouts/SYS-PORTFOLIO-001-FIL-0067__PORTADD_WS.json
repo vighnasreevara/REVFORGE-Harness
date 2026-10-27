@@ -1,0 +1,81 @@
+{
+  "id": "PORTADD",
+  "source_type": "program_ws",
+  "source_file": "src/programs/portfolio/PORTADD.cbl",
+  "used_by_programs": ["PORTADD"],
+  "total_fields": 18,
+  "total_bytes": 54,
+  "system_id": "SYS-PORTFOLIO-001",
+  "file_id": "SYS-PORTFOLIO-001-FIL-0067",
+  "path_id": "SYS-PORTFOLIO-001-PATH-0067",
+  "data_run_id": "DRUN-20261024T215053Z-ACC1",
+  "records": [
+    {"type": "copy_expansion", "section": "FILE", "section_id": "SYS-PORTFOLIO-001-FIL-0067-SEC-0003", "holder": null, "fd_name": "PORTFOLIO-FILE", "copybook": "PORTFLIO", "copybook_file_id": "SYS-PORTFOLIO-001-FIL-0009", "line": 37, "include_kind": "COPY", "replacing": null,
+     "layout_file": "data_layouts/SYS-PORTFOLIO-001-FIL-0009__PORTFLIO.json",
+     "records": [
+       {"record_id": "SYS-PORTFOLIO-001-FIL-0009-REC-0001", "name": "PORT-RECORD", "level": 1, "total_bytes": 148, "expanded_from": {"copybook": "PORTFLIO", "copybook_file_id": "SYS-PORTFOLIO-001-FIL-0009", "line": 37, "replacing": null}}
+     ]},
+    {"type": "copy_expansion", "section": "FILE", "section_id": "SYS-PORTFOLIO-001-FIL-0067-SEC-0003", "holder": null, "fd_name": "INPUT-FILE", "copybook": "PORTFLIO", "copybook_file_id": "SYS-PORTFOLIO-001-FIL-0009", "line": 40, "include_kind": "COPY", "replacing": null,
+     "layout_file": "data_layouts/SYS-PORTFOLIO-001-FIL-0009__PORTFLIO.json",
+     "records": [
+       {"record_id": "SYS-PORTFOLIO-001-FIL-0009-REC-0001", "name": "PORT-RECORD", "level": 1, "total_bytes": 148, "expanded_from": {"copybook": "PORTFLIO", "copybook_file_id": "SYS-PORTFOLIO-001-FIL-0009", "line": 40, "replacing": null}}
+     ]},
+    {
+      "record_id": "SYS-PORTFOLIO-001-FIL-0067-REC-0001",
+      "section": "WORKING-STORAGE", "section_id": "SYS-PORTFOLIO-001-FIL-0067-SEC-0004", "fd_name": null,
+      "is_fragment": false, "level": 1, "name": "WS-CONSTANTS",
+      "pic": null, "type": "GROUP", "storage_type": "DISPLAY", "bytes": 16, "total_bytes": 16, "inline_bytes": 16,
+      "redefines": null, "occurs": null, "value": null, "line": 46, "end_line": 49,
+      "children": [
+        {"field_id": "SYS-PORTFOLIO-001-FIL-0067-FLD-000001", "path": "WS-PROGRAM-NAME", "level": 5, "name": "WS-PROGRAM-NAME", "pic": "X(08)", "pic_parsed": {"raw": "X(08)", "normalized_type": "STRING", "length": 8, "decimal_places": 0, "signed": false, "storage_type": "DISPLAY"}, "bytes": 8, "redefines": null, "occurs": null, "value": "'PORTADD  '", "line": 47, "children": []},
+        {"field_id": "SYS-PORTFOLIO-001-FIL-0067-FLD-000002", "path": "WS-SUCCESS", "level": 5, "name": "WS-SUCCESS", "pic": "S9(4)", "pic_parsed": {"raw": "S9(4)", "normalized_type": "SIGNED_INTEGER", "length": 4, "decimal_places": 0, "signed": true, "storage_type": "DISPLAY"}, "bytes": 4, "redefines": null, "occurs": null, "value": "+0", "line": 48, "children": []},
+        {"field_id": "SYS-PORTFOLIO-001-FIL-0067-FLD-000003", "path": "WS-ERROR", "level": 5, "name": "WS-ERROR", "pic": "S9(4)", "pic_parsed": {"raw": "S9(4)", "normalized_type": "SIGNED_INTEGER", "length": 4, "decimal_places": 0, "signed": true, "storage_type": "DISPLAY"}, "bytes": 4, "redefines": null, "occurs": null, "value": "+8", "line": 49, "children": []}
+      ]
+    },
+    {
+      "record_id": "SYS-PORTFOLIO-001-FIL-0067-REC-0002",
+      "section": "WORKING-STORAGE", "section_id": "SYS-PORTFOLIO-001-FIL-0067-SEC-0004", "fd_name": null,
+      "is_fragment": false, "level": 1, "name": "WS-SWITCHES",
+      "pic": null, "type": "GROUP", "storage_type": "DISPLAY", "bytes": 5, "total_bytes": 5, "inline_bytes": 5,
+      "redefines": null, "occurs": null, "value": null, "line": 51, "end_line": 63,
+      "children": [
+        {"field_id": "SYS-PORTFOLIO-001-FIL-0067-FLD-000004", "path": "WS-FILE-STATUS", "level": 5, "name": "WS-FILE-STATUS", "pic": "X(02)", "pic_parsed": {"raw": "X(02)", "normalized_type": "STRING", "length": 2, "decimal_places": 0, "signed": false, "storage_type": "DISPLAY"}, "bytes": 2, "redefines": null, "occurs": null, "value": null, "line": 52, "children": [
+          {"field_id": "SYS-PORTFOLIO-001-FIL-0067-FLD-000005", "path": "WS-FILE-STATUS.WS-SUCCESS-STATUS", "level": 88, "name": "WS-SUCCESS-STATUS", "pic": null, "type": "CONDITION", "parent_field": "WS-FILE-STATUS", "value": null, "values_raw": "'00'", "values": ["00"], "line": 53, "children": []},
+          {"field_id": "SYS-PORTFOLIO-001-FIL-0067-FLD-000006", "path": "WS-FILE-STATUS.WS-DUP-STATUS", "level": 88, "name": "WS-DUP-STATUS", "pic": null, "type": "CONDITION", "parent_field": "WS-FILE-STATUS", "value": null, "values_raw": "'22'", "values": ["22"], "line": 54, "children": []},
+          {"field_id": "SYS-PORTFOLIO-001-FIL-0067-FLD-000007", "path": "WS-FILE-STATUS.WS-EOF-STATUS", "level": 88, "name": "WS-EOF-STATUS", "pic": null, "type": "CONDITION", "parent_field": "WS-FILE-STATUS", "value": null, "values_raw": "'10'", "values": ["10"], "line": 55, "children": []}
+        ]},
+        {"field_id": "SYS-PORTFOLIO-001-FIL-0067-FLD-000008", "path": "WS-INPUT-STATUS", "level": 5, "name": "WS-INPUT-STATUS", "pic": "X(02)", "pic_parsed": {"raw": "X(02)", "normalized_type": "STRING", "length": 2, "decimal_places": 0, "signed": false, "storage_type": "DISPLAY"}, "bytes": 2, "redefines": null, "occurs": null, "value": null, "line": 57, "children": [
+          {"field_id": "SYS-PORTFOLIO-001-FIL-0067-FLD-000009", "path": "WS-INPUT-STATUS.WS-INPUT-SUCCESS", "level": 88, "name": "WS-INPUT-SUCCESS", "pic": null, "type": "CONDITION", "parent_field": "WS-INPUT-STATUS", "value": null, "values_raw": "'00'", "values": ["00"], "line": 58, "children": []},
+          {"field_id": "SYS-PORTFOLIO-001-FIL-0067-FLD-000010", "path": "WS-INPUT-STATUS.WS-INPUT-EOF", "level": 88, "name": "WS-INPUT-EOF", "pic": null, "type": "CONDITION", "parent_field": "WS-INPUT-STATUS", "value": null, "values_raw": "'10'", "values": ["10"], "line": 59, "children": []}
+        ]},
+        {"field_id": "SYS-PORTFOLIO-001-FIL-0067-FLD-000011", "path": "WS-END-OF-FILE-SW", "level": 5, "name": "WS-END-OF-FILE-SW", "pic": "X", "pic_parsed": {"raw": "X", "normalized_type": "STRING", "length": 1, "decimal_places": 0, "signed": false, "storage_type": "DISPLAY"}, "bytes": 1, "redefines": null, "occurs": null, "value": "'N'", "line": 61, "children": [
+          {"field_id": "SYS-PORTFOLIO-001-FIL-0067-FLD-000012", "path": "WS-END-OF-FILE-SW.END-OF-FILE", "level": 88, "name": "END-OF-FILE", "pic": null, "type": "CONDITION", "parent_field": "WS-END-OF-FILE-SW", "value": null, "values_raw": "'Y'", "values": ["Y"], "line": 62, "children": []},
+          {"field_id": "SYS-PORTFOLIO-001-FIL-0067-FLD-000013", "path": "WS-END-OF-FILE-SW.NOT-END-OF-FILE", "level": 88, "name": "NOT-END-OF-FILE", "pic": null, "type": "CONDITION", "parent_field": "WS-END-OF-FILE-SW", "value": null, "values_raw": "'N'", "values": ["N"], "line": 63, "children": []}
+        ]}
+      ]
+    },
+    {
+      "record_id": "SYS-PORTFOLIO-001-FIL-0067-REC-0003",
+      "section": "WORKING-STORAGE", "section_id": "SYS-PORTFOLIO-001-FIL-0067-SEC-0004", "fd_name": null,
+      "is_fragment": false, "level": 1, "name": "WS-WORK-AREAS",
+      "pic": null, "type": "GROUP", "storage_type": "DISPLAY", "bytes": 33, "total_bytes": 33, "inline_bytes": 33,
+      "redefines": null, "occurs": null, "value": null, "line": 68, "end_line": 73,
+      "children": [
+        {"field_id": "SYS-PORTFOLIO-001-FIL-0067-FLD-000014", "path": "WS-ADD-COUNT", "level": 5, "name": "WS-ADD-COUNT", "pic": "9(7)", "pic_parsed": {"raw": "9(7)", "normalized_type": "INTEGER", "length": 7, "decimal_places": 0, "signed": false, "storage_type": "DISPLAY"}, "bytes": 7, "redefines": null, "occurs": null, "value": "ZERO", "line": 69, "children": []},
+        {"field_id": "SYS-PORTFOLIO-001-FIL-0067-FLD-000015", "path": "WS-ERROR-COUNT", "level": 5, "name": "WS-ERROR-COUNT", "pic": "9(7)", "pic_parsed": {"raw": "9(7)", "normalized_type": "INTEGER", "length": 7, "decimal_places": 0, "signed": false, "storage_type": "DISPLAY"}, "bytes": 7, "redefines": null, "occurs": null, "value": "ZERO", "line": 70, "children": []},
+        {"field_id": "SYS-PORTFOLIO-001-FIL-0067-FLD-000016", "path": "WS-DUP-COUNT", "level": 5, "name": "WS-DUP-COUNT", "pic": "9(7)", "pic_parsed": {"raw": "9(7)", "normalized_type": "INTEGER", "length": 7, "decimal_places": 0, "signed": false, "storage_type": "DISPLAY"}, "bytes": 7, "redefines": null, "occurs": null, "value": "ZERO", "line": 71, "children": []},
+        {"field_id": "SYS-PORTFOLIO-001-FIL-0067-FLD-000017", "path": "WS-RETURN-CODE", "level": 5, "name": "WS-RETURN-CODE", "pic": "S9(4)", "pic_parsed": {"raw": "S9(4)", "normalized_type": "SIGNED_INTEGER", "length": 4, "decimal_places": 0, "signed": true, "storage_type": "DISPLAY"}, "bytes": 4, "redefines": null, "occurs": null, "value": "+0", "line": 72, "children": []},
+        {"field_id": "SYS-PORTFOLIO-001-FIL-0067-FLD-000018", "path": "WS-CURRENT-DATE", "level": 5, "name": "WS-CURRENT-DATE", "pic": "9(8)", "pic_parsed": {"raw": "9(8)", "normalized_type": "INTEGER", "length": 8, "decimal_places": 0, "signed": false, "storage_type": "DISPLAY"}, "bytes": 8, "redefines": null, "occurs": null, "value": null, "line": 73, "children": []}
+      ]
+    }
+  ],
+  "copy_expansions": [
+    {"holder_local_id": null, "holder_id": null, "section_id": "SYS-PORTFOLIO-001-FIL-0067-SEC-0003", "copybook": "PORTFLIO", "copybook_file_id": "SYS-PORTFOLIO-001-FIL-0009", "line": 37, "include_kind": "COPY", "replacing": null, "target_record_ids": ["SYS-PORTFOLIO-001-FIL-0009-REC-0001"]},
+    {"holder_local_id": null, "holder_id": null, "section_id": "SYS-PORTFOLIO-001-FIL-0067-SEC-0003", "copybook": "PORTFLIO", "copybook_file_id": "SYS-PORTFOLIO-001-FIL-0009", "line": 40, "include_kind": "COPY", "replacing": null, "target_record_ids": ["SYS-PORTFOLIO-001-FIL-0009-REC-0001"]}
+  ],
+  "layout_issues": [
+    {"severity": "info", "type": "copy_stub_under_fd", "file_id": "SYS-PORTFOLIO-001-FIL-0067", "source_id": "PORTADD", "line": 37, "message": "COPY PORTFLIO (line 37) is the only record source of FD PORTFOLIO-FILE (line 36). Its record PORT-RECORD is linked by EXPANDS_COPY from the FILE section (SYS-PORTFOLIO-001-FIL-0067-SEC-0003) under the copybook's own Record ID; no FILE record is registered for the program."},
+    {"severity": "info", "type": "copy_stub_under_fd", "file_id": "SYS-PORTFOLIO-001-FIL-0067", "source_id": "PORTADD", "line": 40, "message": "COPY PORTFLIO (line 40) is the only record source of FD INPUT-FILE (line 39). Its record PORT-RECORD is linked by EXPANDS_COPY from the FILE section (SYS-PORTFOLIO-001-FIL-0067-SEC-0003) under the copybook's own Record ID; no FILE record is registered for the program."},
+    {"severity": "warning", "type": "duplicate_copy_expansion", "file_id": "SYS-PORTFOLIO-001-FIL-0067", "source_id": "PORTADD", "line": 40, "message": "COPY PORTFLIO is included under two FDs (PORTFOLIO-FILE line 37, INPUT-FILE line 40). Both stubs expand to the same copybook record SYS-PORTFOLIO-001-FIL-0009-REC-0001 (PORT-RECORD); in compiled COBOL the second inclusion declares a second PORT-RECORD with the same data names, which requires qualification by file. Recorded as two EXPANDS_COPY relationships distinguished by line."}
+  ]
+}

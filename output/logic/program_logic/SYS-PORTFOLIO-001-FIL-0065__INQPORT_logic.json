@@ -1,0 +1,456 @@
+{
+"program_summary": {"program_id": "INQPORT", "file_id": "SYS-PORTFOLIO-001-FIL-0065", "logic_file": "program_logic/SYS-PORTFOLIO-001-FIL-0065__INQPORT_logic.json", "logic_status": "partial", "paragraphs_translated": 11, "execution_paths": 1, "branches": 2, "loops": 0, "dead_code_confirmed": 0, "goto_annotations": 0, "unresolvable_paths": 0, "unresolved_ids": 4},
+"program_id": "INQPORT",
+"system_id": "SYS-PORTFOLIO-001",
+"file_id": "SYS-PORTFOLIO-001-FIL-0065",
+"path_id": "SYS-PORTFOLIO-001-PATH-0065",
+"relative_path": "src/programs/online/INQPORT.cbl",
+"parse_run_id": "PRUN-20261023T023803Z-ACC2",
+"upstream": {
+  "verification": {
+    "verified_at": "2026-10-26T23:35:18Z",
+    "verdict": "VALID_PARTIAL",
+    "verdict_reasons": ["V2, V3 and V4 consistent; Agent 2 parse_status 'success'", "Program has an unresolved copy stub: EXEC SQL INCLUDE SQLPOS (line 21, under 01 WS-DB2-POSITION, holder SYS-PORTFOLIO-001-FIL-0065-REC-0003) is not in the copybook registry; WS-DB2-POSITION has no registered fields"],
+    "v1": {"raw_structure": "present", "parse_status": "success", "program_layout": "present", "data_run_id": "DRUN-20261024T215053Z-ACC1", "copybook_layouts": [{"copybook": "INQCOM", "copybook_file_id": "SYS-PORTFOLIO-001-FIL-0020", "layout": "present", "expanded_at_lines": [15, 38]}, {"copybook": "POSREC", "copybook_file_id": "SYS-PORTFOLIO-001-FIL-0011", "layout": "present", "expanded_at_lines": [18]}], "unresolved_copy_stubs": [{"copybook": "SQLPOS", "line": 21, "include_kind": "SQL_INCLUDE", "holder_id": "SYS-PORTFOLIO-001-FIL-0065-REC-0003", "reason": "copybook_not_in_registry"}]},
+    "v2_file_identities": {
+      "program_entries": {"require_completed": ["parser", "data"], "entries": ["raw_structure|SYS-PORTFOLIO-001-FIL-0065", "data_layout|SYS-PORTFOLIO-001-FIL-0065"], "result": "batched with the PRCSEQ00 program entries: checked 4, ok 4, problems [], duplicate_file_ids_in_json [], consistent true"},
+      "copybook_entries": {"require_completed": ["data"], "entries": ["data_layout|SYS-PORTFOLIO-001-FIL-0020", "data_layout|SYS-PORTFOLIO-001-FIL-0011"], "result": "batched with the PRCSEQ00 copybooks FIL-0004, FIL-0002, FIL-0001, FIL-0007: checked 6, ok 6, problems [], duplicate_file_ids_in_json [], consistent true"},
+      "consistent": true
+    },
+    "v3_structure_identities": {"sections_checked": 2, "paragraphs_checked": 11, "statements_checked": 25, "edges_checked": 8, "registered_edges": 8, "section_problems": [], "paragraph_problems": [], "statement_problems": [], "edge_problems": [], "invalid_registered_edges": [], "registered_not_in_json": {"sections": [], "paragraphs": [], "statements": [], "missing_count": 0}, "duplicate_ids_in_json": [], "consistent": true, "note": "data-division section names sent as null (raw_structure does not carry them); edges: two per PERFORM_THRU (target and THRU end) for STMT-000001, -000002, -000023, -000022"},
+    "v4_data_identities": [
+      {"file_id": "SYS-PORTFOLIO-001-FIL-0065", "layout": "program", "file_type": "program", "records_checked": 6, "fields_checked": 9, "expansions_checked": 3, "record_problems": [], "field_problems": [], "expansion_problems": [], "copybook_records_in_program": 0, "registered_not_in_json": {"records": [], "fields": [], "missing_count": 0}, "duplicate_ids_in_json": [], "consistent": true},
+      {"file_id": "SYS-PORTFOLIO-001-FIL-0020", "layout": "copybook INQCOM", "file_type": "copybook", "records_checked": 1, "fields_checked": 8, "expansions_checked": 0, "record_problems": [], "field_problems": [], "expansion_problems": [], "copybook_records_in_program": 0, "registered_not_in_json": {"records": [], "fields": [], "missing_count": 0}, "duplicate_ids_in_json": [], "consistent": true},
+      {"file_id": "SYS-PORTFOLIO-001-FIL-0011", "layout": "copybook POSREC", "file_type": "copybook", "records_checked": 1, "fields_checked": 17, "expansions_checked": 0, "record_problems": [], "field_problems": [], "expansion_problems": [], "copybook_records_in_program": 0, "registered_not_in_json": {"records": [], "fields": [], "missing_count": 0}, "duplicate_ids_in_json": [], "consistent": true}
+    ]
+  }
+},
+"execution_traces": [
+  {
+    "entry_point": "(UNNAMED)",
+    "entry_point_id": "SYS-PORTFOLIO-001-FIL-0065-PAR-0001",
+    "entry_type": "online_main",
+    "steps": [
+      {"step": 1, "paragraph": "(UNNAMED)", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0065-PAR-0001", "action": "PERFORM_THRU", "target": "P100-INIT-PROGRAM", "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0065-PAR-0002", "target_section_id": null, "unstructured": true, "condition": null,
+       "sub_steps": [{"paragraph": "P100-INIT-PROGRAM", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0065-PAR-0002"}, {"paragraph": "P100-EXIT", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0065-PAR-0003"}],
+       "line": 41, "statement_id": "SYS-PORTFOLIO-001-FIL-0065-STMT-000001"},
+      {"step": 2, "paragraph": "P100-INIT-PROGRAM", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0065-PAR-0002", "action": "CICS_HANDLE_CONDITION", "target": "P999-ERROR-ROUTINE", "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0065-PAR-0010", "target_section_id": null, "condition": "ERROR", "unstructured": true, "runtime_conditional": true, "line": 62, "statement_id": "SYS-PORTFOLIO-001-FIL-0065-STMT-000007"},
+      {"step": 3, "paragraph": "P100-INIT-PROGRAM", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0065-PAR-0002", "action": "CICS_HANDLE_CONDITION", "target": "P900-NOT-FOUND", "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0065-PAR-0008", "target_section_id": null, "condition": "NOTFND", "unstructured": true, "runtime_conditional": true, "line": 63, "statement_id": "SYS-PORTFOLIO-001-FIL-0065-STMT-000007"},
+      {"step": 4, "paragraph": "(UNNAMED)", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0065-PAR-0001", "action": "PERFORM_THRU", "target": "P200-GET-POSITION", "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0065-PAR-0004", "target_section_id": null, "unstructured": true, "condition": null,
+       "sub_steps": [{"paragraph": "P200-GET-POSITION", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0065-PAR-0004"}, {"paragraph": "P200-EXIT", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0065-PAR-0005"}],
+       "line": 44, "statement_id": "SYS-PORTFOLIO-001-FIL-0065-STMT-000002"},
+      {"step": 5, "paragraph": "(UNNAMED)", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0065-PAR-0001", "action": "IF", "target": null, "target_paragraph_id": null, "target_section_id": null,
+       "condition": {"text": "POSITION-EXISTS", "fields": ["POSITION-EXISTS"], "field_ids": [{"name": "POSITION-EXISTS", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0065-FLD-000003", "target_kind": "condition", "candidate_ids": []}]},
+       "line": 47, "statement_id": "SYS-PORTFOLIO-001-FIL-0065-STMT-000003"},
+      {"step": 6, "paragraph": "(UNNAMED)", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0065-PAR-0001", "action": "PERFORM_THRU", "target": "P300-FORMAT-DISPLAY", "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0065-PAR-0006", "target_section_id": null, "unstructured": true,
+       "condition": {"text": "THEN branch of IF POSITION-EXISTS", "fields": ["POSITION-EXISTS"], "field_ids": [{"name": "POSITION-EXISTS", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0065-FLD-000003", "target_kind": "condition", "candidate_ids": []}]},
+       "sub_steps": [{"paragraph": "P300-FORMAT-DISPLAY", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0065-PAR-0006"}, {"paragraph": "P300-EXIT", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0065-PAR-0007"}],
+       "line": 48, "statement_id": "SYS-PORTFOLIO-001-FIL-0065-STMT-000023"},
+      {"step": 7, "paragraph": "(UNNAMED)", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0065-PAR-0001", "action": "PERFORM_THRU", "target": "P900-NOT-FOUND", "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0065-PAR-0008", "target_section_id": null, "unstructured": true,
+       "condition": {"text": "ELSE branch of IF POSITION-EXISTS", "fields": ["POSITION-EXISTS"], "field_ids": [{"name": "POSITION-EXISTS", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0065-FLD-000003", "target_kind": "condition", "candidate_ids": []}]},
+       "sub_steps": [{"paragraph": "P900-NOT-FOUND", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0065-PAR-0008"}, {"paragraph": "P900-EXIT", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0065-PAR-0009"}],
+       "line": 51, "statement_id": "SYS-PORTFOLIO-001-FIL-0065-STMT-000022"},
+      {"step": 8, "paragraph": "(UNNAMED)", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0065-PAR-0001", "action": "CICS_RETURN", "target": null, "target_paragraph_id": null, "target_section_id": null, "condition": null, "line": 55, "statement_id": "SYS-PORTFOLIO-001-FIL-0065-STMT-000004"}
+    ]
+  }
+],
+"branch_map": [
+  {
+    "paragraph": "(UNNAMED)",
+    "paragraph_id": "SYS-PORTFOLIO-001-FIL-0065-PAR-0001",
+    "branches": [
+      {"type": "IF", "line": 47, "statement_id": "SYS-PORTFOLIO-001-FIL-0065-STMT-000003", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0065-PAR-0001",
+       "condition_text": "POSITION-EXISTS",
+       "condition_fields": ["POSITION-EXISTS"],
+       "condition_field_ids": [{"name": "POSITION-EXISTS", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0065-FLD-000003", "target_kind": "condition", "candidate_ids": []}],
+       "has_else": true, "then_line_range": [48, 49], "else_line_range": [51, 52], "end_if_line": 53, "nested_depth": 1,
+       "outcomes": [
+         {"label": "THEN", "line_range": [48, 49], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0065-STMT-000023"]},
+         {"label": "ELSE", "line_range": [51, 52], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0065-STMT-000022"]}
+       ]}
+    ]
+  },
+  {
+    "paragraph": "P200-GET-POSITION",
+    "paragraph_id": "SYS-PORTFOLIO-001-FIL-0065-PAR-0004",
+    "branches": [
+      {"type": "IF", "line": 78, "statement_id": "SYS-PORTFOLIO-001-FIL-0065-STMT-000011", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0065-PAR-0004",
+       "condition_text": "WS-RESPONSE-CODE = DFHRESP(NORMAL)",
+       "condition_fields": ["WS-RESPONSE-CODE"],
+       "condition_field_ids": [{"name": "WS-RESPONSE-CODE", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0065-FLD-000001", "target_kind": "field", "candidate_ids": []}],
+       "has_else": true, "then_line_range": [79, 79], "else_line_range": [81, 81], "end_if_line": 82, "nested_depth": 1,
+       "outcomes": [
+         {"label": "THEN", "line_range": [79, 79], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0065-STMT-000025"]},
+         {"label": "ELSE", "line_range": [81, 81], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0065-STMT-000024"]}
+       ]}
+    ]
+  }
+],
+"loops": [],
+"dead_code_confirmed": [],
+"unresolvable_paths": [],
+"trace_issues": [
+  {"severity": "info", "type": "upstream_issue", "upstream_agent": "2_parser", "upstream_type": "unnamed_paragraph", "lines": [41, 56], "message": "Statements between PROCEDURE DIVISION (line 40) and the first paragraph P100-INIT-PROGRAM (line 57) are recorded in paragraph (UNNAMED), scope PROGRAM."},
+  {"severity": "info", "type": "upstream_issue", "upstream_agent": "2_parser", "upstream_type": "sql_include_stub", "lines": [21], "message": "EXEC SQL INCLUDE SQLPOS END-EXEC recorded as a copy stub with include_kind SQL_INCLUDE (inventory reports SQLPOS unresolved)."},
+  {"severity": "info", "type": "upstream_issue", "upstream_agent": "2_parser", "upstream_type": "perform_thru", "lines": [41, 44, 48, 51], "message": "Four PERFORM ... THRU statements, each over a range of 2 paragraphs."},
+  {"severity": "info", "type": "upstream_issue", "upstream_agent": "2_parser", "upstream_type": "cics_handle_condition_reference", "line": 61, "statement_id": "SYS-PORTFOLIO-001-FIL-0065-STMT-000007", "message": "EXEC CICS HANDLE CONDITION names P999-ERROR-ROUTINE (ERROR) and P900-NOT-FOUND (NOTFND); not a PERFORM/GO TO/ALTER edge, so no CFG edge; P999-ERROR-ROUTINE / P999-EXIT flagged as dead-code candidates for Logic Agent review."},
+  {"severity": "info", "type": "upstream_issue", "upstream_agent": "3_data", "upstream_type": "unresolved_copy_stub", "line": 21, "message": "EXEC SQL INCLUDE SQLPOS (inside 01 WS-DB2-POSITION) is not in the copybook registry; no USES_COPYBOOK/EXPANDS_COPY registered; WS-DB2-POSITION has no registered fields and total_bytes 0."},
+  {"severity": "info", "type": "upstream_issue", "upstream_agent": "3_data", "upstream_type": "copybook_level_01_under_record", "line": 15, "message": "COPY INQCOM (lines 15, 38) and COPY POSREC (line 18) are placed under program 01 records (WS-COMMAREA, DFHCOMMAREA, WS-POSITION-RECORD) but define their own 01-level records (INQCOM-AREA, POSITION-RECORD)."},
+  {"severity": "warning", "type": "copy_stub_unresolved", "line": 21, "message": "WS-DB2-POSITION (SYS-PORTFOLIO-001-FIL-0065-REC-0003) has no content from SQLPOS; no procedure statement references it, so no trace step is affected."},
+  {"severity": "warning", "type": "unstructured_flow", "lines": [41, 44, 48, 51], "message": "Four PERFORM ... THRU statements; each range is recorded as ordered sub-steps and flagged unstructured."},
+  {"severity": "warning", "type": "cics_handle_condition", "line": 61, "statement_id": "SYS-PORTFOLIO-001-FIL-0065-STMT-000007", "message": "HANDLE CONDITION ERROR(P999-ERROR-ROUTINE) NOTFND(P900-NOT-FOUND) registers two runtime handlers (implicit transfers of control). Recorded as two CICS_HANDLE_CONDITION steps (steps 2 and 3, unstructured, runtime_conditional); target_paragraph_id copied from the single procedure paragraph with each name (PAR-0010, PAR-0008). The transfer happens only if the condition is raised at run time, so it is not traced as an executed path. No CFG edge or Neo4j relationship was added."},
+  {"severity": "info", "type": "dead_code_dismissed", "paragraph": "P999-ERROR-ROUTINE", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0065-PAR-0010", "message": "No PERFORM, GO TO or THRU reference found in the source (searched 'P999'); the only reference is HANDLE CONDITION ERROR(P999-ERROR-ROUTINE) at line 62, a runtime handler target. Not confirmed as dead code; SME review."},
+  {"severity": "info", "type": "dead_code_dismissed", "paragraph": "P999-EXIT", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0065-PAR-0011", "message": "Reached by fall-through from P999-ERROR-ROUTINE when the CICS ERROR handler fires. Not confirmed as dead code; SME review."},
+  {"severity": "warning", "type": "undeclared_data_name", "line": 69, "statement_id": "SYS-PORTFOLIO-001-FIL-0065-STMT-000009", "message": "WS-COMMAREA-ACCOUNT-NO and POSITION-ACCOUNT (OF WS-POSITION-RECORD) are declared nowhere in INQPORT, INQCOM or POSREC (INQCOM defines INQCOM-ACCOUNT-NO; POSREC defines POS-KEY/POS-PORTFOLIO-ID). The MOVE (line 69) and READ RIDFLD (line 74) are recorded verbatim and flagged ambiguous."},
+  {"severity": "info", "type": "field_id_unresolved", "name": "WS-COMMAREA-ACCOUNT-NO", "qualifiers": [], "line": 69, "message": "resolve-field-references UNRESOLVED (no unresolved_reason); target_id null."},
+  {"severity": "info", "type": "field_id_unresolved", "name": "POSITION-ACCOUNT", "qualifiers": ["WS-POSITION-RECORD"], "lines": [70, 74], "message": "resolve-field-references UNRESOLVED (no unresolved_reason, no candidates); target_id null."},
+  {"severity": "warning", "type": "invalid_qualification", "name": "INQCOM-ERROR-MSG", "qualifiers": ["WS-COMMAREA"], "lines": [98, 105], "unresolved_reason": "QUALIFIER_HOLDS_LEVEL01_COPY", "invalid_qualification_candidates": ["SYS-PORTFOLIO-001-FIL-0020-FLD-000008"], "message": "WS-COMMAREA holds COPY INQCOM, which begins with its own 01 INQCOM-AREA, so INQCOM-ERROR-MSG is not subordinate to WS-COMMAREA and 'OF WS-COMMAREA' is not a valid qualification. Reference stays UNRESOLVED, target_id null; the candidate is evidence for review, not a match."},
+  {"severity": "warning", "type": "invalid_qualification", "name": "INQCOM-RESPONSE-CODE", "qualifiers": ["WS-COMMAREA"], "line": 107, "unresolved_reason": "QUALIFIER_HOLDS_LEVEL01_COPY", "invalid_qualification_candidates": ["SYS-PORTFOLIO-001-FIL-0020-FLD-000007"], "message": "Same as INQCOM-ERROR-MSG: the qualifier WS-COMMAREA holds a copy of a copybook beginning with its own 01. Reference stays UNRESOLVED, target_id null."},
+  {"severity": "info", "type": "unchecked_response", "line": 87, "statement_id": "SYS-PORTFOLIO-001-FIL-0065-STMT-000013", "message": "EXEC CICS SEND MAP stores RESP in WS-RESPONSE-CODE but the value is not tested afterwards."}
+],
+"program_narrative": "Program INQPORT is an online CICS program that answers a portfolio position inquiry. It copies the caller's communication area (DFHCOMMAREA, layout INQCOM) into working storage, registers CICS condition handlers (ERROR to P999-ERROR-ROUTINE, NOTFND to P900-NOT-FOUND), and reads the VSAM file POSFILE into WS-POSITION-RECORD (layout POSREC) by a key taken from an account-number field; both the source and key field names (WS-COMMAREA-ACCOUNT-NO, POSITION-ACCOUNT) are not declared anywhere, so the key mapping is unknown. If the read response is NORMAL, the position is shown on screen map POSMAP of mapset INQSET; otherwise the message 'Position not found for account' is placed in the communication area returned to the caller. The program then returns to CICS. The error routine P999-ERROR-ROUTINE, which sets 'Error accessing position data' and the response code in the communication area, is reachable only through the CICS ERROR handler. The SQL include SQLPOS is unresolved, but no procedure statement uses it.",
+"paragraphs": [
+  {
+    "name": "(UNNAMED)",
+    "paragraph_id": "SYS-PORTFOLIO-001-FIL-0065-PAR-0001",
+    "section": null,
+    "section_id": null,
+    "line_range": [41, 56],
+    "pseudocode": [
+      "-- Online CICS entry point: caller data arrives in DFHCOMMAREA (no PROCEDURE DIVISION USING)",
+      "CALL p100-init-program THRU p100-exit  !! PERFORM THRU: runs P100-INIT-PROGRAM then P100-EXIT",
+      "CALL p200-get-position THRU p200-exit  !! PERFORM THRU: runs P200-GET-POSITION then P200-EXIT",
+      "IF position exists (WS-POSITION-FOUND = 'Y') THEN",
+      "  CALL p300-format-display THRU p300-exit  !! PERFORM THRU",
+      "ELSE",
+      "  CALL p900-not-found THRU p900-exit  !! PERFORM THRU",
+      "END IF",
+      "CICS RETURN TO caller"
+    ],
+    "pseudocode_statement_ids": [
+      [],
+      ["SYS-PORTFOLIO-001-FIL-0065-STMT-000001"],
+      ["SYS-PORTFOLIO-001-FIL-0065-STMT-000002"],
+      ["SYS-PORTFOLIO-001-FIL-0065-STMT-000003"],
+      ["SYS-PORTFOLIO-001-FIL-0065-STMT-000023"],
+      ["SYS-PORTFOLIO-001-FIL-0065-STMT-000003"],
+      ["SYS-PORTFOLIO-001-FIL-0065-STMT-000022"],
+      ["SYS-PORTFOLIO-001-FIL-0065-STMT-000003"],
+      ["SYS-PORTFOLIO-001-FIL-0065-STMT-000004"]
+    ],
+    "pseudocode_text": "-- Online CICS entry point: caller data arrives in DFHCOMMAREA (no PROCEDURE DIVISION USING)\nCALL p100-init-program THRU p100-exit  !! PERFORM THRU: runs P100-INIT-PROGRAM then P100-EXIT\nCALL p200-get-position THRU p200-exit  !! PERFORM THRU: runs P200-GET-POSITION then P200-EXIT\nIF position exists (WS-POSITION-FOUND = 'Y') THEN\n  CALL p300-format-display THRU p300-exit  !! PERFORM THRU\nELSE\n  CALL p900-not-found THRU p900-exit  !! PERFORM THRU\nEND IF\nCICS RETURN TO caller",
+    "statement_ids": ["SYS-PORTFOLIO-001-FIL-0065-STMT-000001", "SYS-PORTFOLIO-001-FIL-0065-STMT-000002", "SYS-PORTFOLIO-001-FIL-0065-STMT-000003", "SYS-PORTFOLIO-001-FIL-0065-STMT-000023", "SYS-PORTFOLIO-001-FIL-0065-STMT-000022", "SYS-PORTFOLIO-001-FIL-0065-STMT-000004"],
+    "untranslated_statement_ids": [],
+    "field_references": ["POSITION-EXISTS"],
+    "field_reference_ids": [
+      {"name": "POSITION-EXISTS", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0065-FLD-000003", "target_kind": "condition", "candidate_ids": []}
+    ],
+    "calls_made": ["P100-INIT-PROGRAM", "P200-GET-POSITION", "P300-FORMAT-DISPLAY", "P900-NOT-FOUND"],
+    "calls_made_ids": [
+      {"name": "P100-INIT-PROGRAM", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0065-PAR-0002", "section_id": null},
+      {"name": "P200-GET-POSITION", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0065-PAR-0004", "section_id": null},
+      {"name": "P300-FORMAT-DISPLAY", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0065-PAR-0006", "section_id": null},
+      {"name": "P900-NOT-FOUND", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0065-PAR-0008", "section_id": null}
+    ],
+    "complexity_score": 2,
+    "has_unresolved_statements": false,
+    "annotations": [
+      {"line": 41, "statement_id": "SYS-PORTFOLIO-001-FIL-0065-STMT-000001", "note": "PERFORM ... THRU (unstructured): each of the four PERFORMs runs a paragraph and its EXIT paragraph (THRU ends P100-EXIT PAR-0003, P200-EXIT PAR-0005, P300-EXIT PAR-0007, P900-EXIT PAR-0009)."},
+      {"line": 47, "statement_id": "SYS-PORTFOLIO-001-FIL-0065-STMT-000003", "note": "POSITION-EXISTS is the 88-level condition WS-POSITION-FOUND = 'Y', set by P200-GET-POSITION."}
+    ]
+  },
+  {
+    "name": "P100-INIT-PROGRAM",
+    "paragraph_id": "SYS-PORTFOLIO-001-FIL-0065-PAR-0002",
+    "section": null,
+    "section_id": null,
+    "line_range": [57, 64],
+    "pseudocode": [
+      "SET ws_position_record = MIN_VALUE  -- MOVE LOW-VALUES: clear the position buffer",
+      "SET ws_commarea = dfhcommarea  -- copy the caller's communication area into working storage",
+      "CICS HANDLE CONDITION: on ERROR transfer control to p999-error-routine; on NOTFND transfer control to p900-not-found",
+      "  !! REVIEW: implicit runtime GO TO registered for later CICS commands without RESP (the READ and SEND MAP use RESP; EXEC CICS RETURN does not); not traced as an executed path"
+    ],
+    "pseudocode_statement_ids": [
+      ["SYS-PORTFOLIO-001-FIL-0065-STMT-000005"],
+      ["SYS-PORTFOLIO-001-FIL-0065-STMT-000006"],
+      ["SYS-PORTFOLIO-001-FIL-0065-STMT-000007"],
+      ["SYS-PORTFOLIO-001-FIL-0065-STMT-000007"]
+    ],
+    "pseudocode_text": "SET ws_position_record = MIN_VALUE  -- MOVE LOW-VALUES: clear the position buffer\nSET ws_commarea = dfhcommarea  -- copy the caller's communication area into working storage\nCICS HANDLE CONDITION: on ERROR transfer control to p999-error-routine; on NOTFND transfer control to p900-not-found\n  !! REVIEW: implicit runtime GO TO registered for later CICS commands without RESP (the READ and SEND MAP use RESP; EXEC CICS RETURN does not); not traced as an executed path",
+    "statement_ids": ["SYS-PORTFOLIO-001-FIL-0065-STMT-000005", "SYS-PORTFOLIO-001-FIL-0065-STMT-000006", "SYS-PORTFOLIO-001-FIL-0065-STMT-000007"],
+    "untranslated_statement_ids": [],
+    "field_references": ["WS-POSITION-RECORD", "DFHCOMMAREA", "WS-COMMAREA"],
+    "field_reference_ids": [
+      {"name": "WS-POSITION-RECORD", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0065-REC-0002", "target_kind": "record", "candidate_ids": []},
+      {"name": "DFHCOMMAREA", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0065-REC-0006", "target_kind": "record", "candidate_ids": []},
+      {"name": "WS-COMMAREA", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0065-REC-0001", "target_kind": "record", "candidate_ids": []}
+    ],
+    "calls_made": [],
+    "calls_made_ids": [],
+    "complexity_score": 1,
+    "has_unresolved_statements": false,
+    "annotations": [
+      {"line": 61, "statement_id": "SYS-PORTFOLIO-001-FIL-0065-STMT-000007", "note": "HANDLE CONDITION names P999-ERROR-ROUTINE (PAR-0010) and P900-NOT-FOUND (PAR-0008) as runtime handlers; recorded as CICS_HANDLE_CONDITION trace steps 2 and 3 (runtime_conditional), not as PERFORMs.", "ambiguous": true}
+    ]
+  },
+  {
+    "name": "P100-EXIT",
+    "paragraph_id": "SYS-PORTFOLIO-001-FIL-0065-PAR-0003",
+    "section": null,
+    "section_id": null,
+    "line_range": [65, 67],
+    "pseudocode": ["EXIT  -- end of the PERFORM THRU range started at line 41; no-op"],
+    "pseudocode_statement_ids": [["SYS-PORTFOLIO-001-FIL-0065-STMT-000008"]],
+    "pseudocode_text": "EXIT  -- end of the PERFORM THRU range started at line 41; no-op",
+    "statement_ids": ["SYS-PORTFOLIO-001-FIL-0065-STMT-000008"],
+    "untranslated_statement_ids": [],
+    "field_references": [],
+    "field_reference_ids": [],
+    "calls_made": [],
+    "calls_made_ids": [],
+    "complexity_score": 1,
+    "has_unresolved_statements": false,
+    "annotations": []
+  },
+  {
+    "name": "P200-GET-POSITION",
+    "paragraph_id": "SYS-PORTFOLIO-001-FIL-0065-PAR-0004",
+    "section": null,
+    "section_id": null,
+    "line_range": [68, 82],
+    "pseudocode": [
+      "SET position_account (POSITION-ACCOUNT OF WS-POSITION-RECORD) = ws_commarea_account_no  -- !! both data names are undeclared (see annotations)",
+      "CICS READ file POSFILE",
+      "  KEY: position_account",
+      "  INTO: ws_position_record",
+      "  RESPONSE CODE → ws_response_code",
+      "IF ws_response_code = NORMAL THEN  -- DFHRESP(NORMAL)",
+      "  SET position exists flag (WS-POSITION-FOUND = 'Y')",
+      "ELSE",
+      "  SET no position flag (WS-POSITION-FOUND = 'N')",
+      "END IF"
+    ],
+    "pseudocode_statement_ids": [
+      ["SYS-PORTFOLIO-001-FIL-0065-STMT-000009"],
+      ["SYS-PORTFOLIO-001-FIL-0065-STMT-000010"],
+      ["SYS-PORTFOLIO-001-FIL-0065-STMT-000010"],
+      ["SYS-PORTFOLIO-001-FIL-0065-STMT-000010"],
+      ["SYS-PORTFOLIO-001-FIL-0065-STMT-000010"],
+      ["SYS-PORTFOLIO-001-FIL-0065-STMT-000011"],
+      ["SYS-PORTFOLIO-001-FIL-0065-STMT-000025"],
+      ["SYS-PORTFOLIO-001-FIL-0065-STMT-000011"],
+      ["SYS-PORTFOLIO-001-FIL-0065-STMT-000024"],
+      ["SYS-PORTFOLIO-001-FIL-0065-STMT-000011"]
+    ],
+    "pseudocode_text": "SET position_account (POSITION-ACCOUNT OF WS-POSITION-RECORD) = ws_commarea_account_no  -- !! both data names are undeclared (see annotations)\nCICS READ file POSFILE\n  KEY: position_account\n  INTO: ws_position_record\n  RESPONSE CODE → ws_response_code\nIF ws_response_code = NORMAL THEN  -- DFHRESP(NORMAL)\n  SET position exists flag (WS-POSITION-FOUND = 'Y')\nELSE\n  SET no position flag (WS-POSITION-FOUND = 'N')\nEND IF",
+    "statement_ids": ["SYS-PORTFOLIO-001-FIL-0065-STMT-000009", "SYS-PORTFOLIO-001-FIL-0065-STMT-000010", "SYS-PORTFOLIO-001-FIL-0065-STMT-000011", "SYS-PORTFOLIO-001-FIL-0065-STMT-000025", "SYS-PORTFOLIO-001-FIL-0065-STMT-000024"],
+    "untranslated_statement_ids": [],
+    "field_references": ["WS-COMMAREA-ACCOUNT-NO", "POSITION-ACCOUNT", "WS-POSITION-RECORD", "WS-RESPONSE-CODE", "POSITION-EXISTS", "NO-POSITION"],
+    "field_reference_ids": [
+      {"name": "WS-COMMAREA-ACCOUNT-NO", "qualifiers": [], "resolution": "UNRESOLVED", "target_id": null, "target_kind": null, "candidate_ids": []},
+      {"name": "POSITION-ACCOUNT", "qualifiers": ["WS-POSITION-RECORD"], "resolution": "UNRESOLVED", "target_id": null, "target_kind": null, "candidate_ids": []},
+      {"name": "WS-POSITION-RECORD", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0065-REC-0002", "target_kind": "record", "candidate_ids": []},
+      {"name": "WS-RESPONSE-CODE", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0065-FLD-000001", "target_kind": "field", "candidate_ids": []},
+      {"name": "POSITION-EXISTS", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0065-FLD-000003", "target_kind": "condition", "candidate_ids": []},
+      {"name": "NO-POSITION", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0065-FLD-000004", "target_kind": "condition", "candidate_ids": []}
+    ],
+    "calls_made": [],
+    "calls_made_ids": [],
+    "complexity_score": 2,
+    "has_unresolved_statements": false,
+    "annotations": [
+      {"line": 69, "statement_id": "SYS-PORTFOLIO-001-FIL-0065-STMT-000009", "note": "Recorded verbatim: 'MOVE WS-COMMAREA-ACCOUNT-NO TO POSITION-ACCOUNT OF WS-POSITION-RECORD'. Neither name is declared in INQPORT, INQCOM or POSREC; the key value read from POSFILE is therefore unknown.", "ambiguous": true},
+      {"line": 72, "statement_id": "SYS-PORTFOLIO-001-FIL-0065-STMT-000010", "note": "CICS READ is a keyed VSAM read via CICS (RIDFLD = record key). RESP(WS-RESPONSE-CODE) captures the outcome instead of raising the HANDLE CONDITION handlers."}
+    ]
+  },
+  {
+    "name": "P200-EXIT",
+    "paragraph_id": "SYS-PORTFOLIO-001-FIL-0065-PAR-0005",
+    "section": null,
+    "section_id": null,
+    "line_range": [83, 85],
+    "pseudocode": ["EXIT  -- end of the PERFORM THRU range started at line 44; no-op"],
+    "pseudocode_statement_ids": [["SYS-PORTFOLIO-001-FIL-0065-STMT-000012"]],
+    "pseudocode_text": "EXIT  -- end of the PERFORM THRU range started at line 44; no-op",
+    "statement_ids": ["SYS-PORTFOLIO-001-FIL-0065-STMT-000012"],
+    "untranslated_statement_ids": [],
+    "field_references": [],
+    "field_reference_ids": [],
+    "calls_made": [],
+    "calls_made_ids": [],
+    "complexity_score": 1,
+    "has_unresolved_statements": false,
+    "annotations": []
+  },
+  {
+    "name": "P300-FORMAT-DISPLAY",
+    "paragraph_id": "SYS-PORTFOLIO-001-FIL-0065-PAR-0006",
+    "section": null,
+    "section_id": null,
+    "line_range": [86, 92],
+    "pseudocode": [
+      "CICS SEND screen map=POSMAP mapset=INQSET FROM ws_position_record TO terminal  -- ERASE: clear the screen first",
+      "  RESPONSE CODE → ws_response_code  -- not tested afterwards"
+    ],
+    "pseudocode_statement_ids": [
+      ["SYS-PORTFOLIO-001-FIL-0065-STMT-000013"],
+      ["SYS-PORTFOLIO-001-FIL-0065-STMT-000013"]
+    ],
+    "pseudocode_text": "CICS SEND screen map=POSMAP mapset=INQSET FROM ws_position_record TO terminal  -- ERASE: clear the screen first\n  RESPONSE CODE → ws_response_code  -- not tested afterwards",
+    "statement_ids": ["SYS-PORTFOLIO-001-FIL-0065-STMT-000013"],
+    "untranslated_statement_ids": [],
+    "field_references": ["WS-POSITION-RECORD", "WS-RESPONSE-CODE"],
+    "field_reference_ids": [
+      {"name": "WS-POSITION-RECORD", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0065-REC-0002", "target_kind": "record", "candidate_ids": []},
+      {"name": "WS-RESPONSE-CODE", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0065-FLD-000001", "target_kind": "field", "candidate_ids": []}
+    ],
+    "calls_made": [],
+    "calls_made_ids": [],
+    "complexity_score": 1,
+    "has_unresolved_statements": false,
+    "annotations": [
+      {"line": 87, "statement_id": "SYS-PORTFOLIO-001-FIL-0065-STMT-000013", "note": "The map is sent directly from the position record buffer; WS-MAP-FIELDS labels are declared but not used by any statement."}
+    ]
+  },
+  {
+    "name": "P300-EXIT",
+    "paragraph_id": "SYS-PORTFOLIO-001-FIL-0065-PAR-0007",
+    "section": null,
+    "section_id": null,
+    "line_range": [93, 95],
+    "pseudocode": ["EXIT  -- end of the PERFORM THRU range started at line 48; no-op"],
+    "pseudocode_statement_ids": [["SYS-PORTFOLIO-001-FIL-0065-STMT-000014"]],
+    "pseudocode_text": "EXIT  -- end of the PERFORM THRU range started at line 48; no-op",
+    "statement_ids": ["SYS-PORTFOLIO-001-FIL-0065-STMT-000014"],
+    "untranslated_statement_ids": [],
+    "field_references": [],
+    "field_reference_ids": [],
+    "calls_made": [],
+    "calls_made_ids": [],
+    "complexity_score": 1,
+    "has_unresolved_statements": false,
+    "annotations": []
+  },
+  {
+    "name": "P900-NOT-FOUND",
+    "paragraph_id": "SYS-PORTFOLIO-001-FIL-0065-PAR-0008",
+    "section": null,
+    "section_id": null,
+    "line_range": [96, 99],
+    "pseudocode": [
+      "SET inqcom_error_msg (of ws_commarea) = 'Position not found for account'  -- !! qualification OF WS-COMMAREA is invalid (see annotations)",
+      "SET dfhcommarea = ws_commarea  -- return the updated communication area to the caller"
+    ],
+    "pseudocode_statement_ids": [
+      ["SYS-PORTFOLIO-001-FIL-0065-STMT-000015"],
+      ["SYS-PORTFOLIO-001-FIL-0065-STMT-000016"]
+    ],
+    "pseudocode_text": "SET inqcom_error_msg (of ws_commarea) = 'Position not found for account'  -- !! qualification OF WS-COMMAREA is invalid (see annotations)\nSET dfhcommarea = ws_commarea  -- return the updated communication area to the caller",
+    "statement_ids": ["SYS-PORTFOLIO-001-FIL-0065-STMT-000015", "SYS-PORTFOLIO-001-FIL-0065-STMT-000016"],
+    "untranslated_statement_ids": [],
+    "field_references": ["INQCOM-ERROR-MSG", "WS-COMMAREA", "DFHCOMMAREA"],
+    "field_reference_ids": [
+      {"name": "INQCOM-ERROR-MSG", "qualifiers": ["WS-COMMAREA"], "resolution": "UNRESOLVED", "target_id": null, "target_kind": null, "candidate_ids": [], "unresolved_reason": "QUALIFIER_HOLDS_LEVEL01_COPY", "invalid_qualification_candidates": ["SYS-PORTFOLIO-001-FIL-0020-FLD-000008"]},
+      {"name": "WS-COMMAREA", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0065-REC-0001", "target_kind": "record", "candidate_ids": []},
+      {"name": "DFHCOMMAREA", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0065-REC-0006", "target_kind": "record", "candidate_ids": []}
+    ],
+    "calls_made": [],
+    "calls_made_ids": [],
+    "complexity_score": 1,
+    "has_unresolved_statements": false,
+    "annotations": [
+      {"line": 96, "note": "Entered by PERFORM P900-NOT-FOUND THRU P900-EXIT (line 51) and also named as the CICS NOTFND handler (line 63)."},
+      {"line": 97, "statement_id": "SYS-PORTFOLIO-001-FIL-0065-STMT-000015", "note": "INQCOM-ERROR-MSG is defined in copybook INQCOM under its own 01 INQCOM-AREA; COPY INQCOM sits under 01 WS-COMMAREA, so 'OF WS-COMMAREA' does not qualify it in valid COBOL. Field ID left null (QUALIFIER_HOLDS_LEVEL01_COPY).", "ambiguous": true}
+    ]
+  },
+  {
+    "name": "P900-EXIT",
+    "paragraph_id": "SYS-PORTFOLIO-001-FIL-0065-PAR-0009",
+    "section": null,
+    "section_id": null,
+    "line_range": [100, 102],
+    "pseudocode": ["EXIT  -- end of the PERFORM THRU range started at line 51; no-op"],
+    "pseudocode_statement_ids": [["SYS-PORTFOLIO-001-FIL-0065-STMT-000017"]],
+    "pseudocode_text": "EXIT  -- end of the PERFORM THRU range started at line 51; no-op",
+    "statement_ids": ["SYS-PORTFOLIO-001-FIL-0065-STMT-000017"],
+    "untranslated_statement_ids": [],
+    "field_references": [],
+    "field_reference_ids": [],
+    "calls_made": [],
+    "calls_made_ids": [],
+    "complexity_score": 1,
+    "has_unresolved_statements": false,
+    "annotations": []
+  },
+  {
+    "name": "P999-ERROR-ROUTINE",
+    "paragraph_id": "SYS-PORTFOLIO-001-FIL-0065-PAR-0010",
+    "section": null,
+    "section_id": null,
+    "line_range": [103, 108],
+    "pseudocode": [
+      "-- Reached only through CICS HANDLE CONDITION ERROR (lines 61-64); no PERFORM or GO TO references this paragraph",
+      "SET inqcom_error_msg (of ws_commarea) = 'Error accessing position data'  -- !! invalid qualification (see annotations)",
+      "SET inqcom_response_code (of ws_commarea) = ws_response_code  -- !! invalid qualification (see annotations)",
+      "SET dfhcommarea = ws_commarea  -- return the updated communication area to the caller",
+      "-- falls through into P999-EXIT"
+    ],
+    "pseudocode_statement_ids": [
+      [],
+      ["SYS-PORTFOLIO-001-FIL-0065-STMT-000018"],
+      ["SYS-PORTFOLIO-001-FIL-0065-STMT-000019"],
+      ["SYS-PORTFOLIO-001-FIL-0065-STMT-000020"],
+      []
+    ],
+    "pseudocode_text": "-- Reached only through CICS HANDLE CONDITION ERROR (lines 61-64); no PERFORM or GO TO references this paragraph\nSET inqcom_error_msg (of ws_commarea) = 'Error accessing position data'  -- !! invalid qualification (see annotations)\nSET inqcom_response_code (of ws_commarea) = ws_response_code  -- !! invalid qualification (see annotations)\nSET dfhcommarea = ws_commarea  -- return the updated communication area to the caller\n-- falls through into P999-EXIT",
+    "statement_ids": ["SYS-PORTFOLIO-001-FIL-0065-STMT-000018", "SYS-PORTFOLIO-001-FIL-0065-STMT-000019", "SYS-PORTFOLIO-001-FIL-0065-STMT-000020"],
+    "untranslated_statement_ids": [],
+    "field_references": ["INQCOM-ERROR-MSG", "INQCOM-RESPONSE-CODE", "WS-RESPONSE-CODE", "WS-COMMAREA", "DFHCOMMAREA"],
+    "field_reference_ids": [
+      {"name": "INQCOM-ERROR-MSG", "qualifiers": ["WS-COMMAREA"], "resolution": "UNRESOLVED", "target_id": null, "target_kind": null, "candidate_ids": [], "unresolved_reason": "QUALIFIER_HOLDS_LEVEL01_COPY", "invalid_qualification_candidates": ["SYS-PORTFOLIO-001-FIL-0020-FLD-000008"]},
+      {"name": "INQCOM-RESPONSE-CODE", "qualifiers": ["WS-COMMAREA"], "resolution": "UNRESOLVED", "target_id": null, "target_kind": null, "candidate_ids": [], "unresolved_reason": "QUALIFIER_HOLDS_LEVEL01_COPY", "invalid_qualification_candidates": ["SYS-PORTFOLIO-001-FIL-0020-FLD-000007"]},
+      {"name": "WS-RESPONSE-CODE", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0065-FLD-000001", "target_kind": "field", "candidate_ids": []},
+      {"name": "WS-COMMAREA", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0065-REC-0001", "target_kind": "record", "candidate_ids": []},
+      {"name": "DFHCOMMAREA", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0065-REC-0006", "target_kind": "record", "candidate_ids": []}
+    ],
+    "calls_made": [],
+    "calls_made_ids": [],
+    "complexity_score": 1,
+    "has_unresolved_statements": false,
+    "annotations": [
+      {"line": 103, "note": "Agent 2 dead-code candidate; dismissed by the Logic Agent because HANDLE CONDITION ERROR(P999-ERROR-ROUTINE) makes it a runtime handler target (trace step 2, target_paragraph_id PAR-0010). Whether it can fire is not statically determinable.", "ambiguous": true},
+      {"line": 104, "statement_id": "SYS-PORTFOLIO-001-FIL-0065-STMT-000018", "note": "INQCOM-ERROR-MSG and INQCOM-RESPONSE-CODE are qualified OF WS-COMMAREA, which holds COPY INQCOM beginning with its own 01; invalid qualification, Field IDs left null (QUALIFIER_HOLDS_LEVEL01_COPY).", "ambiguous": true}
+    ]
+  },
+  {
+    "name": "P999-EXIT",
+    "paragraph_id": "SYS-PORTFOLIO-001-FIL-0065-PAR-0011",
+    "section": null,
+    "section_id": null,
+    "line_range": [109, 110],
+    "pseudocode": ["EXIT  -- last paragraph of the program; no CICS RETURN or GOBACK follows (if reached via the ERROR handler, execution runs off the end of the PROCEDURE DIVISION)"],
+    "pseudocode_statement_ids": [["SYS-PORTFOLIO-001-FIL-0065-STMT-000021"]],
+    "pseudocode_text": "EXIT  -- last paragraph of the program; no CICS RETURN or GOBACK follows (if reached via the ERROR handler, execution runs off the end of the PROCEDURE DIVISION)",
+    "statement_ids": ["SYS-PORTFOLIO-001-FIL-0065-STMT-000021"],
+    "untranslated_statement_ids": [],
+    "field_references": [],
+    "field_reference_ids": [],
+    "calls_made": [],
+    "calls_made_ids": [],
+    "complexity_score": 1,
+    "has_unresolved_statements": false,
+    "annotations": [
+      {"line": 110, "note": "Agent 2 dead-code candidate; dismissed (fall-through successor of P999-ERROR-ROUTINE).", "ambiguous": true}
+    ]
+  }
+],
+"unresolved_statements": [],
+"pseudocode_issues": [
+  {"severity": "info", "type": "id_unresolved", "kind": "field", "name": "WS-COMMAREA-ACCOUNT-NO", "qualifiers": [], "paragraph": "P200-GET-POSITION", "message": "resolve-field-references UNRESOLVED; target_id null."},
+  {"severity": "info", "type": "id_unresolved", "kind": "field", "name": "POSITION-ACCOUNT", "qualifiers": ["WS-POSITION-RECORD"], "paragraph": "P200-GET-POSITION", "message": "resolve-field-references UNRESOLVED; target_id null."},
+  {"severity": "info", "type": "id_unresolved", "kind": "field", "name": "INQCOM-ERROR-MSG", "qualifiers": ["WS-COMMAREA"], "paragraph": "P900-NOT-FOUND, P999-ERROR-ROUTINE", "message": "resolve-field-references UNRESOLVED with unresolved_reason QUALIFIER_HOLDS_LEVEL01_COPY (invalid qualification candidate SYS-PORTFOLIO-001-FIL-0020-FLD-000008); target_id null."},
+  {"severity": "info", "type": "id_unresolved", "kind": "field", "name": "INQCOM-RESPONSE-CODE", "qualifiers": ["WS-COMMAREA"], "paragraph": "P999-ERROR-ROUTINE", "message": "resolve-field-references UNRESOLVED with unresolved_reason QUALIFIER_HOLDS_LEVEL01_COPY (invalid qualification candidate SYS-PORTFOLIO-001-FIL-0020-FLD-000007); target_id null."},
+  {"severity": "info", "type": "cics_command_note", "line": 61, "message": "EXEC CICS HANDLE CONDITION is not in the CICS translation table; recorded as 'CICS HANDLE CONDITION' with its handler targets and flagged !! REVIEW."}
+]
+}

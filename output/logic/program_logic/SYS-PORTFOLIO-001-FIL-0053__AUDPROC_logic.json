@@ -1,0 +1,311 @@
+{
+"program_summary": {"program_id": "AUDPROC", "file_id": "SYS-PORTFOLIO-001-FIL-0053", "logic_file": "program_logic/SYS-PORTFOLIO-001-FIL-0053__AUDPROC_logic.json", "logic_status": "success", "paragraphs_translated": 4, "execution_paths": 1, "branches": 2, "loops": 0, "dead_code_confirmed": 0, "goto_annotations": 0, "unresolvable_paths": 0, "unresolved_ids": 0},
+"meta": {"generated_at": "2026-10-26T16:58:46Z", "agent_version": "4_logic@1.0", "source_artifacts": ["output/parser/parser_artifact.json", "output/parser/raw_structure/SYS-PORTFOLIO-001-FIL-0053__AUDPROC.json", "output/data/data_artifact.json", "output/data/data_layouts/SYS-PORTFOLIO-001-FIL-0053__AUDPROC_WS.json", "output/data/data_layouts/SYS-PORTFOLIO-001-FIL-0005__AUDITLOG.json"], "neo4j_access": "read-only"},
+"program_id": "AUDPROC",
+"system_id": "SYS-PORTFOLIO-001",
+"file_id": "SYS-PORTFOLIO-001-FIL-0053",
+"path_id": "SYS-PORTFOLIO-001-PATH-0053",
+"relative_path": "src/programs/common/AUDPROC.cbl",
+"parse_run_id": "PRUN-20261023T023803Z-ACC2",
+"data_run_id": "DRUN-20261024T215053Z-ACC1",
+"upstream": {
+  "verification": {
+    "verdict": "VALID",
+    "verdict_reasons": ["V2, V3 and V4 consistent; Agent 2 parse_status 'success'; copybook layout AUDITLOG present and consistent; no unresolved copy stubs"],
+    "v1": {"raw_structure": "present", "parse_status": "success", "program_layout": "present", "copybook_layouts": [{"copybook": "AUDITLOG", "copybook_file_id": "SYS-PORTFOLIO-001-FIL-0005", "layout": "present"}], "unresolved_copy_stubs": 0},
+    "v2_file_identities": {
+      "program_entries": {"require_completed": ["parser", "data"], "entries": ["raw_structure|SYS-PORTFOLIO-001-FIL-0053", "data_layout|SYS-PORTFOLIO-001-FIL-0053"], "result": "batched with DB2ERR, DB2STAT and DB2CMT program entries: checked 8, ok 8, problems [], duplicates [], consistent true"},
+      "copybook_entries": {"require_completed": ["data"], "entries": ["data_layout|SYS-PORTFOLIO-001-FIL-0005"], "result": "batched with copybooks FIL-0016, FIL-0017, FIL-0015 and FIL-0007: checked 5, ok 5, problems [], duplicates [], consistent true"},
+      "consistent": true
+    },
+    "v3_structure_identities": {"sections_checked": 5, "paragraphs_checked": 4, "statements_checked": 27, "edges_checked": 4, "registered_edges": 4, "section_problems": [], "paragraph_problems": [], "statement_problems": [], "edge_problems": [], "invalid_registered_edges": [], "registered_not_in_json": {"missing_count": 0}, "duplicate_ids_in_json": [], "consistent": true, "note": "data-division section names were sent as null (raw_structure does not carry them); one relationship per resolved PERFORM_SIMPLE edge"},
+    "v4_data_identities": [
+      {"file_id": "SYS-PORTFOLIO-001-FIL-0053", "layout": "program", "records_checked": 3, "fields_checked": 15, "expansions_checked": 1, "record_problems": [], "field_problems": [], "expansion_problems": [], "copybook_records_in_program": 0, "registered_not_in_json": {"missing_count": 0}, "duplicate_ids_in_json": [], "consistent": true, "note": "the layout's copy_expansions entry carries holder_id null with section_id SYS-PORTFOLIO-001-FIL-0053-SEC-0003 (FILE SECTION); that section_id (copied from the same entry) was sent as holder_id, and target_record_ids as expanded_record_ids"},
+      {"file_id": "SYS-PORTFOLIO-001-FIL-0005", "layout": "copybook AUDITLOG", "records_checked": 1, "fields_checked": 29, "expansions_checked": 0, "record_problems": [], "field_problems": [], "expansion_problems": [], "copybook_records_in_program": 0, "registered_not_in_json": {"missing_count": 0}, "duplicate_ids_in_json": [], "consistent": true}
+    ]
+  }
+},
+"execution_traces": [
+  {
+    "entry_point": "0000-MAIN",
+    "entry_point_id": "SYS-PORTFOLIO-001-FIL-0053-PAR-0001",
+    "entry_type": "called_subprogram",
+    "entry_note": "PROCEDURE DIVISION USING LS-AUDIT-REQUEST (line 51); the program ends with GOBACK (line 56, or line 67 inside 1000-INITIALIZE when the audit file cannot be opened). Steps are listed depth-first in execution order.",
+    "steps": [
+      {"step": 1, "paragraph": "0000-MAIN", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0053-PAR-0001", "action": "PERFORM", "target": "1000-INITIALIZE", "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0053-PAR-0002", "target_section_id": null, "condition": null, "line": 53, "statement_id": "SYS-PORTFOLIO-001-FIL-0053-STMT-000001"},
+      {"step": 2, "paragraph": "1000-INITIALIZE", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0053-PAR-0002", "action": "OPEN", "target": "AUDIT-FILE", "target_paragraph_id": null, "target_section_id": null, "condition": null, "line": 62, "statement_id": "SYS-PORTFOLIO-001-FIL-0053-STMT-000006", "note": "OPEN EXTEND (append)"},
+      {"step": 3, "paragraph": "1000-INITIALIZE", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0053-PAR-0002", "action": "IF", "target": null, "target_paragraph_id": null, "target_section_id": null,
+       "condition": {"text": "WS-FILE-STATUS NOT = '00'", "fields": ["WS-FILE-STATUS"], "field_ids": [{"name": "WS-FILE-STATUS", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0053-REC-0001", "target_kind": "record", "candidate_ids": []}]}, "line": 63, "statement_id": "SYS-PORTFOLIO-001-FIL-0053-STMT-000007"},
+      {"step": 4, "paragraph": "1000-INITIALIZE", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0053-PAR-0002", "action": "PERFORM", "target": "3000-TERMINATE", "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0053-PAR-0004", "target_section_id": null,
+       "condition": {"text": "THEN of WS-FILE-STATUS NOT = '00'", "fields": ["WS-FILE-STATUS"], "field_ids": [{"name": "WS-FILE-STATUS", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0053-REC-0001", "target_kind": "record", "candidate_ids": []}]}, "line": 66, "statement_id": "SYS-PORTFOLIO-001-FIL-0053-STMT-000023"},
+      {"step": 5, "paragraph": "3000-TERMINATE", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0053-PAR-0004", "action": "CLOSE", "target": "AUDIT-FILE", "target_paragraph_id": null, "target_section_id": null, "condition": null, "line": 95, "statement_id": "SYS-PORTFOLIO-001-FIL-0053-STMT-000020"},
+      {"step": 6, "paragraph": "1000-INITIALIZE", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0053-PAR-0002", "action": "GOBACK", "target": null, "target_paragraph_id": null, "target_section_id": null,
+       "condition": {"text": "THEN of WS-FILE-STATUS NOT = '00'", "fields": ["WS-FILE-STATUS"], "field_ids": [{"name": "WS-FILE-STATUS", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0053-REC-0001", "target_kind": "record", "candidate_ids": []}]}, "line": 67, "statement_id": "SYS-PORTFOLIO-001-FIL-0053-STMT-000024", "note": "returns to the caller from inside a performed paragraph; steps 7-12 are not executed on this path"},
+      {"step": 7, "paragraph": "0000-MAIN", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0053-PAR-0001", "action": "PERFORM", "target": "2000-PROCESS-AUDIT", "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0053-PAR-0003", "target_section_id": null, "condition": null, "line": 54, "statement_id": "SYS-PORTFOLIO-001-FIL-0053-STMT-000002"},
+      {"step": 8, "paragraph": "2000-PROCESS-AUDIT", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0053-PAR-0003", "action": "WRITE", "target": "AUDIT-RECORD", "target_paragraph_id": null, "target_section_id": null, "condition": null, "line": 84, "statement_id": "SYS-PORTFOLIO-001-FIL-0053-STMT-000018"},
+      {"step": 9, "paragraph": "2000-PROCESS-AUDIT", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0053-PAR-0003", "action": "IF", "target": null, "target_paragraph_id": null, "target_section_id": null,
+       "condition": {"text": "WS-FILE-STATUS NOT = '00'", "fields": ["WS-FILE-STATUS"], "field_ids": [{"name": "WS-FILE-STATUS", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0053-REC-0001", "target_kind": "record", "candidate_ids": []}]}, "line": 86, "statement_id": "SYS-PORTFOLIO-001-FIL-0053-STMT-000019"},
+      {"step": 10, "paragraph": "0000-MAIN", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0053-PAR-0001", "action": "PERFORM", "target": "3000-TERMINATE", "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0053-PAR-0004", "target_section_id": null, "condition": null, "line": 55, "statement_id": "SYS-PORTFOLIO-001-FIL-0053-STMT-000003"},
+      {"step": 11, "paragraph": "3000-TERMINATE", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0053-PAR-0004", "action": "CLOSE", "target": "AUDIT-FILE", "target_paragraph_id": null, "target_section_id": null, "condition": null, "line": 95, "statement_id": "SYS-PORTFOLIO-001-FIL-0053-STMT-000020"},
+      {"step": 12, "paragraph": "0000-MAIN", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0053-PAR-0001", "action": "GOBACK", "target": null, "target_paragraph_id": null, "target_section_id": null, "condition": null, "line": 56, "statement_id": "SYS-PORTFOLIO-001-FIL-0053-STMT-000004"}
+    ]
+  }
+],
+"branch_map": [
+  {
+    "paragraph": "1000-INITIALIZE",
+    "paragraph_id": "SYS-PORTFOLIO-001-FIL-0053-PAR-0002",
+    "branches": [
+      {"type": "IF", "line": 63, "statement_id": "SYS-PORTFOLIO-001-FIL-0053-STMT-000007", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0053-PAR-0002",
+       "condition_text": "WS-FILE-STATUS NOT = '00'",
+       "condition_fields": ["WS-FILE-STATUS"],
+       "condition_field_ids": [{"name": "WS-FILE-STATUS", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0053-REC-0001", "target_kind": "record", "candidate_ids": []}],
+       "has_else": false, "then_line_range": [64, 67], "else_line_range": null, "end_if_line": 68, "nested_depth": 1,
+       "outcomes": [
+         {"label": "THEN", "line_range": [64, 67], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0053-STMT-000021", "SYS-PORTFOLIO-001-FIL-0053-STMT-000022", "SYS-PORTFOLIO-001-FIL-0053-STMT-000023", "SYS-PORTFOLIO-001-FIL-0053-STMT-000024"]}
+       ]}
+    ]
+  },
+  {
+    "paragraph": "2000-PROCESS-AUDIT",
+    "paragraph_id": "SYS-PORTFOLIO-001-FIL-0053-PAR-0003",
+    "branches": [
+      {"type": "IF", "line": 86, "statement_id": "SYS-PORTFOLIO-001-FIL-0053-STMT-000019", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0053-PAR-0003",
+       "condition_text": "WS-FILE-STATUS NOT = '00'",
+       "condition_fields": ["WS-FILE-STATUS"],
+       "condition_field_ids": [{"name": "WS-FILE-STATUS", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0053-REC-0001", "target_kind": "record", "candidate_ids": []}],
+       "has_else": true, "then_line_range": [87, 88], "else_line_range": [90, 90], "end_if_line": 91, "nested_depth": 1,
+       "outcomes": [
+         {"label": "THEN", "line_range": [87, 88], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0053-STMT-000026", "SYS-PORTFOLIO-001-FIL-0053-STMT-000027"]},
+         {"label": "ELSE", "line_range": [90, 90], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0053-STMT-000025"]}
+       ]}
+    ]
+  }
+],
+"loops": [],
+"dead_code_confirmed": [],
+"unresolvable_paths": [],
+"trace_issues": [
+  {"severity": "info", "type": "upstream_issue", "upstream_agent": "3_data", "upstream_type": "fd_record_from_copybook", "line": 27, "message": "FD AUDIT-FILE (line 24) has no inline 01 record; its record description comes from COPY AUDITLOG (line 27). The copybook record AUDIT-RECORD (SYS-PORTFOLIO-001-FIL-0005-REC-0001) is linked by EXPANDS_COPY from the FILE section SYS-PORTFOLIO-001-FIL-0053-SEC-0003."},
+  {"severity": "warning", "type": "data_flow_note", "lines": [74, 75], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0053-STMT-000009", "SYS-PORTFOLIO-001-FIL-0053-STMT-000010"], "message": "Line 74 moves WS-FORMATTED-TIME into AUD-TIMESTAMP, then line 75 moves the 32-byte group LS-SYSTEM-INFO into the 58-byte group AUD-HEADER, which begins with AUD-TIMESTAMP (AUDITLOG lines 8-13). A group MOVE is an alphanumeric move: the 32 bytes fill the start of AUD-HEADER (over the timestamp) and the rest is space-filled, so the timestamp set at line 74 is overwritten and AUD-SYSTEM-ID .. AUD-TERMINAL do not receive the matching LS- fields. Flagged for SME review.", "ambiguous": true},
+  {"severity": "info", "type": "control_flow_note", "line": 67, "statement_id": "SYS-PORTFOLIO-001-FIL-0053-STMT-000024", "message": "On an OPEN failure 1000-INITIALIZE closes the file (3000-TERMINATE) and executes GOBACK from inside the performed paragraph, returning LS-RETURN-CODE 8 to the caller; 2000-PROCESS-AUDIT is not executed."},
+  {"severity": "info", "type": "control_flow_note", "line": 63, "message": "On the successful OPEN path 1000-INITIALIZE does not set LS-RETURN-CODE; it is set only in 2000-PROCESS-AUDIT (0 or 8)."}
+],
+"field_id_lookups": [
+  {"name": "WS-FILE-STATUS", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0053-REC-0001", "target_kind": "record", "qualified_name": "WS-FILE-STATUS", "defined_in": "SYS-PORTFOLIO-001-FIL-0053", "candidate_ids": []},
+  {"name": "WS-FORMATTED-TIME", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0053-REC-0002", "target_kind": "record", "qualified_name": "WS-FORMATTED-TIME", "defined_in": "SYS-PORTFOLIO-001-FIL-0053", "candidate_ids": []},
+  {"name": "LS-RETURN-CODE", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0053-FLD-000015", "target_kind": "field", "qualified_name": "LS-AUDIT-REQUEST.LS-RETURN-CODE", "defined_in": "SYS-PORTFOLIO-001-FIL-0053", "candidate_ids": []},
+  {"name": "AUDIT-RECORD", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0005-REC-0001", "target_kind": "record", "qualified_name": "AUDIT-RECORD", "defined_in": "SYS-PORTFOLIO-001-FIL-0005", "candidate_ids": []},
+  {"name": "AUD-TIMESTAMP", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0005-FLD-000002", "target_kind": "field", "qualified_name": "AUDIT-RECORD.AUD-HEADER.AUD-TIMESTAMP", "defined_in": "SYS-PORTFOLIO-001-FIL-0005", "candidate_ids": []},
+  {"name": "LS-SYSTEM-INFO", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0053-FLD-000001", "target_kind": "field", "qualified_name": "LS-AUDIT-REQUEST.LS-SYSTEM-INFO", "defined_in": "SYS-PORTFOLIO-001-FIL-0053", "candidate_ids": []},
+  {"name": "AUD-HEADER", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0005-FLD-000001", "target_kind": "field", "qualified_name": "AUDIT-RECORD.AUD-HEADER", "defined_in": "SYS-PORTFOLIO-001-FIL-0005", "candidate_ids": []},
+  {"name": "LS-TYPE", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0053-FLD-000006", "target_kind": "field", "qualified_name": "LS-AUDIT-REQUEST.LS-TYPE", "defined_in": "SYS-PORTFOLIO-001-FIL-0053", "candidate_ids": []},
+  {"name": "AUD-TYPE", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0005-FLD-000007", "target_kind": "field", "qualified_name": "AUDIT-RECORD.AUD-TYPE", "defined_in": "SYS-PORTFOLIO-001-FIL-0005", "candidate_ids": []},
+  {"name": "LS-ACTION", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0053-FLD-000007", "target_kind": "field", "qualified_name": "LS-AUDIT-REQUEST.LS-ACTION", "defined_in": "SYS-PORTFOLIO-001-FIL-0053", "candidate_ids": []},
+  {"name": "AUD-ACTION", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0005-FLD-000011", "target_kind": "field", "qualified_name": "AUDIT-RECORD.AUD-ACTION", "defined_in": "SYS-PORTFOLIO-001-FIL-0005", "candidate_ids": []},
+  {"name": "LS-STATUS", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0053-FLD-000008", "target_kind": "field", "qualified_name": "LS-AUDIT-REQUEST.LS-STATUS", "defined_in": "SYS-PORTFOLIO-001-FIL-0053", "candidate_ids": []},
+  {"name": "AUD-STATUS", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0005-FLD-000020", "target_kind": "field", "qualified_name": "AUDIT-RECORD.AUD-STATUS", "defined_in": "SYS-PORTFOLIO-001-FIL-0005", "candidate_ids": []},
+  {"name": "LS-KEY-INFO", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0053-FLD-000009", "target_kind": "field", "qualified_name": "LS-AUDIT-REQUEST.LS-KEY-INFO", "defined_in": "SYS-PORTFOLIO-001-FIL-0053", "candidate_ids": []},
+  {"name": "AUD-KEY-INFO", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0005-FLD-000024", "target_kind": "field", "qualified_name": "AUDIT-RECORD.AUD-KEY-INFO", "defined_in": "SYS-PORTFOLIO-001-FIL-0005", "candidate_ids": []},
+  {"name": "LS-BEFORE-IMAGE", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0053-FLD-000012", "target_kind": "field", "qualified_name": "LS-AUDIT-REQUEST.LS-BEFORE-IMAGE", "defined_in": "SYS-PORTFOLIO-001-FIL-0053", "candidate_ids": []},
+  {"name": "AUD-BEFORE-IMAGE", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0005-FLD-000027", "target_kind": "field", "qualified_name": "AUDIT-RECORD.AUD-BEFORE-IMAGE", "defined_in": "SYS-PORTFOLIO-001-FIL-0005", "candidate_ids": []},
+  {"name": "LS-AFTER-IMAGE", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0053-FLD-000013", "target_kind": "field", "qualified_name": "LS-AUDIT-REQUEST.LS-AFTER-IMAGE", "defined_in": "SYS-PORTFOLIO-001-FIL-0053", "candidate_ids": []},
+  {"name": "AUD-AFTER-IMAGE", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0005-FLD-000028", "target_kind": "field", "qualified_name": "AUDIT-RECORD.AUD-AFTER-IMAGE", "defined_in": "SYS-PORTFOLIO-001-FIL-0005", "candidate_ids": []},
+  {"name": "LS-MESSAGE", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0053-FLD-000014", "target_kind": "field", "qualified_name": "LS-AUDIT-REQUEST.LS-MESSAGE", "defined_in": "SYS-PORTFOLIO-001-FIL-0053", "candidate_ids": []},
+  {"name": "AUD-MESSAGE", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0005-FLD-000029", "target_kind": "field", "qualified_name": "AUDIT-RECORD.AUD-MESSAGE", "defined_in": "SYS-PORTFOLIO-001-FIL-0005", "candidate_ids": []},
+  {"name": "LS-AUDIT-REQUEST", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0053-REC-0003", "target_kind": "record", "qualified_name": "LS-AUDIT-REQUEST", "defined_in": "SYS-PORTFOLIO-001-FIL-0053", "candidate_ids": []}
+],
+"program_narrative": "Program AUDPROC is a called audit-trail subroutine that receives one audit request LS-AUDIT-REQUEST (PROCEDURE DIVISION USING) and appends it as a record to the sequential audit file AUDIT-FILE (DD AUDFILE). It captures the current timestamp, opens the file in EXTEND (append) mode, builds AUDIT-RECORD from the request (system information, audit type, action, status, portfolio/account key, before and after images, message) and writes it. If the file cannot be opened it displays an error, returns code 8, closes the file and returns to the caller immediately; if the write fails it displays an error and returns 8, otherwise it returns 0. The file is closed before every return. The way the system-information group is moved over the record header overwrites the captured timestamp and is flagged for review.",
+"paragraphs": [
+  {
+    "name": "0000-MAIN",
+    "paragraph_id": "SYS-PORTFOLIO-001-FIL-0053-PAR-0001",
+    "section": null,
+    "section_id": null,
+    "line_range": [52, 58],
+    "pseudocode": [
+      "-- Entry: audit request LS-AUDIT-REQUEST is passed by the caller (PROCEDURE DIVISION USING, line 51)",
+      "CALL 1000-initialize  -- may return to the caller directly if the audit file cannot be opened",
+      "CALL 2000-process-audit",
+      "CALL 3000-terminate",
+      "RETURN to caller  -- GOBACK"
+    ],
+    "pseudocode_statement_ids": [
+      [],
+      ["SYS-PORTFOLIO-001-FIL-0053-STMT-000001"],
+      ["SYS-PORTFOLIO-001-FIL-0053-STMT-000002"],
+      ["SYS-PORTFOLIO-001-FIL-0053-STMT-000003"],
+      ["SYS-PORTFOLIO-001-FIL-0053-STMT-000004"]
+    ],
+    "pseudocode_text": "-- Entry: audit request LS-AUDIT-REQUEST is passed by the caller (PROCEDURE DIVISION USING, line 51)\nCALL 1000-initialize  -- may return to the caller directly if the audit file cannot be opened\nCALL 2000-process-audit\nCALL 3000-terminate\nRETURN to caller  -- GOBACK",
+    "statement_ids": ["SYS-PORTFOLIO-001-FIL-0053-STMT-000001", "SYS-PORTFOLIO-001-FIL-0053-STMT-000002", "SYS-PORTFOLIO-001-FIL-0053-STMT-000003", "SYS-PORTFOLIO-001-FIL-0053-STMT-000004"],
+    "untranslated_statement_ids": [],
+    "field_references": [],
+    "field_reference_ids": [],
+    "calls_made": ["1000-INITIALIZE", "2000-PROCESS-AUDIT", "3000-TERMINATE"],
+    "calls_made_ids": [
+      {"name": "1000-INITIALIZE", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0053-PAR-0002", "section_id": null},
+      {"name": "2000-PROCESS-AUDIT", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0053-PAR-0003", "section_id": null},
+      {"name": "3000-TERMINATE", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0053-PAR-0004", "section_id": null}
+    ],
+    "complexity_score": 1,
+    "has_unresolved_statements": false,
+    "annotations": []
+  },
+  {
+    "name": "1000-INITIALIZE",
+    "paragraph_id": "SYS-PORTFOLIO-001-FIL-0053-PAR-0002",
+    "section": null,
+    "section_id": null,
+    "line_range": [59, 70],
+    "pseudocode": [
+      "SET ws_formatted_time = [runtime: current timestamp]  -- ACCEPT ... FROM TIME STAMP",
+      "OPEN AUDIT-FILE for APPEND  -- OPEN EXTEND: new records are added at the end",
+      "IF ws_file_status != '00' THEN  -- file status check after OPEN",
+      "  DISPLAY 'Error opening audit file: ' + ws_file_status  -- console output",
+      "  SET request.return_code = 8",
+      "  CALL 3000-terminate",
+      "  RETURN to caller  -- GOBACK inside a performed paragraph: the rest of 0000-MAIN is not executed",
+      "END IF"
+    ],
+    "pseudocode_statement_ids": [
+      ["SYS-PORTFOLIO-001-FIL-0053-STMT-000005"],
+      ["SYS-PORTFOLIO-001-FIL-0053-STMT-000006"],
+      ["SYS-PORTFOLIO-001-FIL-0053-STMT-000007"],
+      ["SYS-PORTFOLIO-001-FIL-0053-STMT-000021"],
+      ["SYS-PORTFOLIO-001-FIL-0053-STMT-000022"],
+      ["SYS-PORTFOLIO-001-FIL-0053-STMT-000023"],
+      ["SYS-PORTFOLIO-001-FIL-0053-STMT-000024"],
+      ["SYS-PORTFOLIO-001-FIL-0053-STMT-000007"]
+    ],
+    "pseudocode_text": "SET ws_formatted_time = [runtime: current timestamp]  -- ACCEPT ... FROM TIME STAMP\nOPEN AUDIT-FILE for APPEND  -- OPEN EXTEND: new records are added at the end\nIF ws_file_status != '00' THEN  -- file status check after OPEN\n  DISPLAY 'Error opening audit file: ' + ws_file_status  -- console output\n  SET request.return_code = 8\n  CALL 3000-terminate\n  RETURN to caller  -- GOBACK inside a performed paragraph: the rest of 0000-MAIN is not executed\nEND IF",
+    "statement_ids": ["SYS-PORTFOLIO-001-FIL-0053-STMT-000005", "SYS-PORTFOLIO-001-FIL-0053-STMT-000006", "SYS-PORTFOLIO-001-FIL-0053-STMT-000007", "SYS-PORTFOLIO-001-FIL-0053-STMT-000021", "SYS-PORTFOLIO-001-FIL-0053-STMT-000022", "SYS-PORTFOLIO-001-FIL-0053-STMT-000023", "SYS-PORTFOLIO-001-FIL-0053-STMT-000024"],
+    "untranslated_statement_ids": [],
+    "field_references": ["WS-FORMATTED-TIME", "WS-FILE-STATUS", "LS-RETURN-CODE"],
+    "field_reference_ids": [
+      {"name": "WS-FORMATTED-TIME", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0053-REC-0002", "target_kind": "record", "candidate_ids": []},
+      {"name": "WS-FILE-STATUS", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0053-REC-0001", "target_kind": "record", "candidate_ids": []},
+      {"name": "LS-RETURN-CODE", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0053-FLD-000015", "target_kind": "field", "candidate_ids": []}
+    ],
+    "calls_made": ["3000-TERMINATE"],
+    "calls_made_ids": [
+      {"name": "3000-TERMINATE", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0053-PAR-0004", "section_id": null}
+    ],
+    "complexity_score": 2,
+    "has_unresolved_statements": false,
+    "annotations": [
+      {"line": 60, "statement_id": "SYS-PORTFOLIO-001-FIL-0053-STMT-000005", "note": "ACCEPT ... FROM TIME STAMP is written as in the source; the exact format delivered into the 26-byte WS-FORMATTED-TIME depends on the compiler/runtime.", "ambiguous": true},
+      {"line": 66, "statement_id": "SYS-PORTFOLIO-001-FIL-0053-STMT-000023", "note": "3000-TERMINATE closes AUDIT-FILE although the OPEN just failed."},
+      {"line": 67, "statement_id": "SYS-PORTFOLIO-001-FIL-0053-STMT-000024", "note": "GOBACK inside a performed paragraph ends the program; flagged as an early exit (not a GO TO)."}
+    ]
+  },
+  {
+    "name": "2000-PROCESS-AUDIT",
+    "paragraph_id": "SYS-PORTFOLIO-001-FIL-0053-PAR-0003",
+    "section": null,
+    "section_id": null,
+    "line_range": [71, 93],
+    "pseudocode": [
+      "CLEAR audit_record  -- INITIALIZE: alphanumeric items to spaces",
+      "SET audit.timestamp = ws_formatted_time",
+      "SET audit.header = request.system_info  -- group move over the whole 58-byte header, which starts with audit.timestamp (see annotation)",
+      "SET audit.type = request.type",
+      "SET audit.action = request.action",
+      "SET audit.status = request.status",
+      "SET audit.key_info = request.key_info  -- portfolio ID + account number",
+      "SET audit.before_image = request.before_image",
+      "SET audit.after_image = request.after_image",
+      "SET audit.message = request.message",
+      "WRITE audit_record TO AUDIT-FILE",
+      "IF ws_file_status != '00' THEN  -- file status check after WRITE",
+      "  DISPLAY 'Error writing audit record: ' + ws_file_status  -- console output",
+      "  SET request.return_code = 8",
+      "ELSE",
+      "  SET request.return_code = 0",
+      "END IF"
+    ],
+    "pseudocode_statement_ids": [
+      ["SYS-PORTFOLIO-001-FIL-0053-STMT-000008"],
+      ["SYS-PORTFOLIO-001-FIL-0053-STMT-000009"],
+      ["SYS-PORTFOLIO-001-FIL-0053-STMT-000010"],
+      ["SYS-PORTFOLIO-001-FIL-0053-STMT-000011"],
+      ["SYS-PORTFOLIO-001-FIL-0053-STMT-000012"],
+      ["SYS-PORTFOLIO-001-FIL-0053-STMT-000013"],
+      ["SYS-PORTFOLIO-001-FIL-0053-STMT-000014"],
+      ["SYS-PORTFOLIO-001-FIL-0053-STMT-000015"],
+      ["SYS-PORTFOLIO-001-FIL-0053-STMT-000016"],
+      ["SYS-PORTFOLIO-001-FIL-0053-STMT-000017"],
+      ["SYS-PORTFOLIO-001-FIL-0053-STMT-000018"],
+      ["SYS-PORTFOLIO-001-FIL-0053-STMT-000019"],
+      ["SYS-PORTFOLIO-001-FIL-0053-STMT-000026"],
+      ["SYS-PORTFOLIO-001-FIL-0053-STMT-000027"],
+      ["SYS-PORTFOLIO-001-FIL-0053-STMT-000019"],
+      ["SYS-PORTFOLIO-001-FIL-0053-STMT-000025"],
+      ["SYS-PORTFOLIO-001-FIL-0053-STMT-000019"]
+    ],
+    "pseudocode_text": "CLEAR audit_record  -- INITIALIZE: alphanumeric items to spaces\nSET audit.timestamp = ws_formatted_time\nSET audit.header = request.system_info  -- group move over the whole 58-byte header, which starts with audit.timestamp (see annotation)\nSET audit.type = request.type\nSET audit.action = request.action\nSET audit.status = request.status\nSET audit.key_info = request.key_info  -- portfolio ID + account number\nSET audit.before_image = request.before_image\nSET audit.after_image = request.after_image\nSET audit.message = request.message\nWRITE audit_record TO AUDIT-FILE\nIF ws_file_status != '00' THEN  -- file status check after WRITE\n  DISPLAY 'Error writing audit record: ' + ws_file_status  -- console output\n  SET request.return_code = 8\nELSE\n  SET request.return_code = 0\nEND IF",
+    "statement_ids": ["SYS-PORTFOLIO-001-FIL-0053-STMT-000008", "SYS-PORTFOLIO-001-FIL-0053-STMT-000009", "SYS-PORTFOLIO-001-FIL-0053-STMT-000010", "SYS-PORTFOLIO-001-FIL-0053-STMT-000011", "SYS-PORTFOLIO-001-FIL-0053-STMT-000012", "SYS-PORTFOLIO-001-FIL-0053-STMT-000013", "SYS-PORTFOLIO-001-FIL-0053-STMT-000014", "SYS-PORTFOLIO-001-FIL-0053-STMT-000015", "SYS-PORTFOLIO-001-FIL-0053-STMT-000016", "SYS-PORTFOLIO-001-FIL-0053-STMT-000017", "SYS-PORTFOLIO-001-FIL-0053-STMT-000018", "SYS-PORTFOLIO-001-FIL-0053-STMT-000019", "SYS-PORTFOLIO-001-FIL-0053-STMT-000026", "SYS-PORTFOLIO-001-FIL-0053-STMT-000027", "SYS-PORTFOLIO-001-FIL-0053-STMT-000025"],
+    "untranslated_statement_ids": [],
+    "field_references": ["AUDIT-RECORD", "WS-FORMATTED-TIME", "AUD-TIMESTAMP", "LS-SYSTEM-INFO", "AUD-HEADER", "LS-TYPE", "AUD-TYPE", "LS-ACTION", "AUD-ACTION", "LS-STATUS", "AUD-STATUS", "LS-KEY-INFO", "AUD-KEY-INFO", "LS-BEFORE-IMAGE", "AUD-BEFORE-IMAGE", "LS-AFTER-IMAGE", "AUD-AFTER-IMAGE", "LS-MESSAGE", "AUD-MESSAGE", "WS-FILE-STATUS", "LS-RETURN-CODE"],
+    "field_reference_ids": [
+      {"name": "AUDIT-RECORD", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0005-REC-0001", "target_kind": "record", "candidate_ids": []},
+      {"name": "WS-FORMATTED-TIME", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0053-REC-0002", "target_kind": "record", "candidate_ids": []},
+      {"name": "AUD-TIMESTAMP", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0005-FLD-000002", "target_kind": "field", "candidate_ids": []},
+      {"name": "LS-SYSTEM-INFO", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0053-FLD-000001", "target_kind": "field", "candidate_ids": []},
+      {"name": "AUD-HEADER", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0005-FLD-000001", "target_kind": "field", "candidate_ids": []},
+      {"name": "LS-TYPE", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0053-FLD-000006", "target_kind": "field", "candidate_ids": []},
+      {"name": "AUD-TYPE", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0005-FLD-000007", "target_kind": "field", "candidate_ids": []},
+      {"name": "LS-ACTION", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0053-FLD-000007", "target_kind": "field", "candidate_ids": []},
+      {"name": "AUD-ACTION", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0005-FLD-000011", "target_kind": "field", "candidate_ids": []},
+      {"name": "LS-STATUS", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0053-FLD-000008", "target_kind": "field", "candidate_ids": []},
+      {"name": "AUD-STATUS", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0005-FLD-000020", "target_kind": "field", "candidate_ids": []},
+      {"name": "LS-KEY-INFO", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0053-FLD-000009", "target_kind": "field", "candidate_ids": []},
+      {"name": "AUD-KEY-INFO", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0005-FLD-000024", "target_kind": "field", "candidate_ids": []},
+      {"name": "LS-BEFORE-IMAGE", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0053-FLD-000012", "target_kind": "field", "candidate_ids": []},
+      {"name": "AUD-BEFORE-IMAGE", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0005-FLD-000027", "target_kind": "field", "candidate_ids": []},
+      {"name": "LS-AFTER-IMAGE", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0053-FLD-000013", "target_kind": "field", "candidate_ids": []},
+      {"name": "AUD-AFTER-IMAGE", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0005-FLD-000028", "target_kind": "field", "candidate_ids": []},
+      {"name": "LS-MESSAGE", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0053-FLD-000014", "target_kind": "field", "candidate_ids": []},
+      {"name": "AUD-MESSAGE", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0005-FLD-000029", "target_kind": "field", "candidate_ids": []},
+      {"name": "WS-FILE-STATUS", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0053-REC-0001", "target_kind": "record", "candidate_ids": []},
+      {"name": "LS-RETURN-CODE", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0053-FLD-000015", "target_kind": "field", "candidate_ids": []}
+    ],
+    "calls_made": [],
+    "calls_made_ids": [],
+    "complexity_score": 2,
+    "has_unresolved_statements": false,
+    "annotations": [
+      {"line": 75, "statement_id": "SYS-PORTFOLIO-001-FIL-0053-STMT-000010", "note": "MOVE LS-SYSTEM-INFO (32 bytes: system ID, user ID, program, terminal) TO AUD-HEADER (58 bytes: AUD-TIMESTAMP X(26) followed by the same four 8-byte fields). The group move left-justifies and space-fills, overwriting the timestamp moved at line 74 and misaligning the four header fields. See trace_issues data_flow_note.", "ambiguous": true},
+      {"line": 76, "statement_id": "SYS-PORTFOLIO-001-FIL-0053-STMT-000011", "note": "AUD-TYPE 88-levels: AUD-TRANSACTION='TRAN', AUD-USER-ACTION='USER', AUD-SYSTEM-EVENT='SYST'; AUD-ACTION 88-levels CREATE/UPDATE/DELETE/INQUIRE/LOGIN/LOGOUT/STARTUP/SHUTDOWN; AUD-STATUS 88-levels SUCC/FAIL/WARN. No condition is tested here; the values are copied as received."},
+      {"line": 84, "statement_id": "SYS-PORTFOLIO-001-FIL-0053-STMT-000018", "note": "Sequential WRITE of the FD record AUDIT-RECORD (from copybook AUDITLOG) to AUDIT-FILE (ASSIGN TO AUDFILE)."}
+    ]
+  },
+  {
+    "name": "3000-TERMINATE",
+    "paragraph_id": "SYS-PORTFOLIO-001-FIL-0053-PAR-0004",
+    "section": null,
+    "section_id": null,
+    "line_range": [94, 96],
+    "pseudocode": [
+      "CLOSE AUDIT-FILE"
+    ],
+    "pseudocode_statement_ids": [
+      ["SYS-PORTFOLIO-001-FIL-0053-STMT-000020"]
+    ],
+    "pseudocode_text": "CLOSE AUDIT-FILE",
+    "statement_ids": ["SYS-PORTFOLIO-001-FIL-0053-STMT-000020"],
+    "untranslated_statement_ids": [],
+    "field_references": [],
+    "field_reference_ids": [],
+    "calls_made": [],
+    "calls_made_ids": [],
+    "complexity_score": 1,
+    "has_unresolved_statements": false,
+    "annotations": [
+      {"line": 95, "statement_id": "SYS-PORTFOLIO-001-FIL-0053-STMT-000020", "note": "The CLOSE file status is not checked."}
+    ]
+  }
+],
+"unresolved_statements": [],
+"pseudocode_issues": []
+}

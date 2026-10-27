@@ -1,0 +1,157 @@
+{
+"program_summary": {"program_id": "PORTUPDT", "source_file": "src/programs/portfolio/PORTUPDT.cbl", "ast_file": "raw_structure/SYS-PORTFOLIO-001-FIL-0073__PORTUPDT.json", "total_lines": 160, "paragraph_count": 6, "section_count": 4, "has_unstructured_flow": false, "has_alter": false, "dead_code_candidates": 0, "parse_status": "success", "system_id": "SYS-PORTFOLIO-001", "file_id": "SYS-PORTFOLIO-001-FIL-0073", "path_id": "SYS-PORTFOLIO-001-PATH-0073", "file_name": "PORTUPDT.cbl", "statement_count": 34, "perform_edges": 6, "goto_edges": 0, "control_flow_relationships": 6, "review_required_statements": 0, "uncertain_statements": 0, "parse_run_id": "PRUN-20261023T023803Z-ACC2"},
+"program_id": "PORTUPDT",
+"source_file": "src/programs/portfolio/PORTUPDT.cbl",
+"total_lines": 160,
+"system_id": "SYS-PORTFOLIO-001",
+"file_id": "SYS-PORTFOLIO-001-FIL-0073",
+"path_id": "SYS-PORTFOLIO-001-PATH-0073",
+"file_name": "PORTUPDT.cbl",
+"relative_path": "src/programs/portfolio/PORTUPDT.cbl",
+"parse_run_id": "PRUN-20261023T023803Z-ACC2",
+"source_format": "fixed",
+"identification_division": {"start_line": 12, "end_line": 14, "program_id": "PORTUPDT", "author": null, "date_written": null},
+"environment_division": {
+  "start_line": 15, "end_line": 33,
+  "sections": [
+    {"section_id": "SYS-PORTFOLIO-001-FIL-0073-SEC-0001", "name": "CONFIGURATION", "start_line": 16, "end_line": 19},
+    {"section_id": "SYS-PORTFOLIO-001-FIL-0073-SEC-0002", "name": "INPUT-OUTPUT", "start_line": 20, "end_line": 33}
+  ],
+  "paragraphs": [
+    {"name": "SOURCE-COMPUTER", "section": "CONFIGURATION", "line": 17, "registered": false},
+    {"name": "OBJECT-COMPUTER", "section": "CONFIGURATION", "line": 18, "registered": false},
+    {"name": "FILE-CONTROL", "section": "INPUT-OUTPUT", "line": 21, "registered": false}
+  ],
+  "file_control_entries": [
+    {"select_name": "PORTFOLIO-FILE", "assign_to": "PORTFILE", "line": 22, "end_line": 27, "organization": "INDEXED", "access_mode": "RANDOM", "record_key": "PORT-KEY", "file_status": "WS-FILE-STATUS"},
+    {"select_name": "UPDATE-FILE", "assign_to": "UPDTFILE", "line": 29, "end_line": 32, "organization": "SEQUENTIAL", "access_mode": null, "record_key": null, "file_status": "WS-UPDT-STATUS"}
+  ]
+},
+"data_division": {
+  "start_line": 34, "end_line": 81,
+  "file_section": {
+    "section_id": "SYS-PORTFOLIO-001-FIL-0073-SEC-0003", "start_line": 35, "end_line": 49,
+    "entries": [
+      {"type": "FD", "file_name": "PORTFOLIO-FILE", "line": 36, "end_line": 38, "record_contains": null, "recording_mode": null, "block_contains": null, "copy_stubs": [
+        {"type": "copy_stub", "include_kind": "COPY", "copybook": "PORTFLIO", "library": null, "line": 37, "section": "FILE", "parent_level": null, "note": "Expanded by Data Agent"}
+      ]},
+      {"type": "FD", "file_name": "UPDATE-FILE", "line": 39, "end_line": 49, "record_contains": null, "recording_mode": null, "block_contains": null, "copy_stubs": []}
+    ]
+  },
+  "working_storage_section": {
+    "section_id": "SYS-PORTFOLIO-001-FIL-0073-SEC-0004", "start_line": 50, "end_line": 81,
+    "entries": [
+      {"level": 1, "name": "WS-CONSTANTS", "pic": null, "value": null, "line": 54, "redefines": null, "occurs": null, "children": [
+        {"level": 5, "name": "WS-PROGRAM-NAME", "pic": "X(08)", "value": "'PORTUPDT '", "line": 55},
+        {"level": 5, "name": "WS-SUCCESS", "pic": "S9(4)", "value": "+0", "line": 56},
+        {"level": 5, "name": "WS-ERROR", "pic": "S9(4)", "value": "+8", "line": 57}
+      ]},
+      {"level": 1, "name": "WS-SWITCHES", "pic": null, "value": null, "line": 59, "redefines": null, "occurs": null, "children": [
+        {"level": 5, "name": "WS-FILE-STATUS", "pic": "X(02)", "line": 60, "children": [
+          {"level": 88, "name": "WS-SUCCESS-STATUS", "value": "'00'", "line": 61},
+          {"level": 88, "name": "WS-EOF-STATUS", "value": "'10'", "line": 62},
+          {"level": 88, "name": "WS-REC-NOT-FND", "value": "'23'", "line": 63}
+        ]},
+        {"level": 5, "name": "WS-UPDT-STATUS", "pic": "X(02)", "line": 65, "children": [
+          {"level": 88, "name": "WS-UPDT-SUCCESS", "value": "'00'", "line": 66},
+          {"level": 88, "name": "WS-UPDT-EOF", "value": "'10'", "line": 67}
+        ]},
+        {"level": 5, "name": "WS-END-OF-FILE-SW", "pic": "X", "value": "'N'", "line": 69, "children": [
+          {"level": 88, "name": "END-OF-FILE", "value": "'Y'", "line": 70},
+          {"level": 88, "name": "NOT-END-OF-FILE", "value": "'N'", "line": 71}
+        ]}
+      ]},
+      {"level": 1, "name": "WS-WORK-AREAS", "pic": null, "value": null, "line": 76, "redefines": null, "occurs": null, "children": [
+        {"level": 5, "name": "WS-UPDATE-COUNT", "pic": "9(7)", "value": "ZERO", "line": 77},
+        {"level": 5, "name": "WS-ERROR-COUNT", "pic": "9(7)", "value": "ZERO", "line": 78},
+        {"level": 5, "name": "WS-RETURN-CODE", "pic": "S9(4)", "value": "+0", "line": 79},
+        {"level": 5, "name": "WS-NUMERIC-WORK", "pic": "S9(13)V99", "line": 80}
+      ]}
+    ]
+  },
+  "linkage_section": {"section_id": null, "start_line": null, "entries": []},
+  "sql_declare_sections": []
+},
+"procedure_division": {
+  "start_line": 82, "end_line": 160,
+  "using_parameters": [],
+  "sections": [],
+  "paragraphs": [
+    {"paragraph_id": "SYS-PORTFOLIO-001-FIL-0073-PAR-0001", "name": "0000-MAIN", "section": null, "section_id": null, "start_line": 83, "end_line": 92, "has_perform": true, "has_goto": false, "has_call": false, "has_stop_run": false, "review_status": "NONE", "statement_ids": ["SYS-PORTFOLIO-001-FIL-0073-STMT-000001", "SYS-PORTFOLIO-001-FIL-0073-STMT-000002", "SYS-PORTFOLIO-001-FIL-0073-STMT-000003", "SYS-PORTFOLIO-001-FIL-0073-STMT-000004"]},
+    {"paragraph_id": "SYS-PORTFOLIO-001-FIL-0073-PAR-0002", "name": "1000-INITIALIZE", "section": null, "section_id": null, "start_line": 93, "end_line": 108, "has_perform": true, "has_goto": false, "has_call": false, "has_stop_run": false, "review_status": "NONE", "statement_ids": ["SYS-PORTFOLIO-001-FIL-0073-STMT-000005", "SYS-PORTFOLIO-001-FIL-0073-STMT-000006", "SYS-PORTFOLIO-001-FIL-0073-STMT-000007", "SYS-PORTFOLIO-001-FIL-0073-STMT-000008"]},
+    {"paragraph_id": "SYS-PORTFOLIO-001-FIL-0073-PAR-0003", "name": "2000-PROCESS", "section": null, "section_id": null, "start_line": 109, "end_line": 117, "has_perform": true, "has_goto": false, "has_call": false, "has_stop_run": false, "review_status": "NONE", "statement_ids": ["SYS-PORTFOLIO-001-FIL-0073-STMT-000009"]},
+    {"paragraph_id": "SYS-PORTFOLIO-001-FIL-0073-PAR-0004", "name": "2100-PROCESS-UPDATE", "section": null, "section_id": null, "start_line": 118, "end_line": 130, "has_perform": true, "has_goto": false, "has_call": false, "has_stop_run": false, "review_status": "NONE", "statement_ids": ["SYS-PORTFOLIO-001-FIL-0073-STMT-000010", "SYS-PORTFOLIO-001-FIL-0073-STMT-000011", "SYS-PORTFOLIO-001-FIL-0073-STMT-000012"]},
+    {"paragraph_id": "SYS-PORTFOLIO-001-FIL-0073-PAR-0005", "name": "2200-APPLY-UPDATE", "section": null, "section_id": null, "start_line": 131, "end_line": 151, "has_perform": false, "has_goto": false, "has_call": false, "has_stop_run": false, "review_status": "NONE", "statement_ids": ["SYS-PORTFOLIO-001-FIL-0073-STMT-000013", "SYS-PORTFOLIO-001-FIL-0073-STMT-000014", "SYS-PORTFOLIO-001-FIL-0073-STMT-000015"]},
+    {"paragraph_id": "SYS-PORTFOLIO-001-FIL-0073-PAR-0006", "name": "3000-TERMINATE", "section": null, "section_id": null, "start_line": 152, "end_line": 160, "has_perform": false, "has_goto": false, "has_call": false, "has_stop_run": false, "review_status": "NONE", "statement_ids": ["SYS-PORTFOLIO-001-FIL-0073-STMT-000016", "SYS-PORTFOLIO-001-FIL-0073-STMT-000017", "SYS-PORTFOLIO-001-FIL-0073-STMT-000018", "SYS-PORTFOLIO-001-FIL-0073-STMT-000019"]}
+  ],
+  "statements": [
+    {"statement_id": "SYS-PORTFOLIO-001-FIL-0073-STMT-000001", "local_id": "L1", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0073-PAR-0001", "paragraph": "0000-MAIN", "parent_statement_id": null, "branch": null, "depth": 0, "sibling_index": 1, "statement_type": "PERFORM", "source_text": "PERFORM 1000-INITIALIZE", "start_line": 84, "end_line": 84, "extraction_status": "OK", "match": "UNCHANGED", "review_status": "NONE", "review_candidates": []},
+    {"statement_id": "SYS-PORTFOLIO-001-FIL-0073-STMT-000002", "local_id": "L2", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0073-PAR-0001", "paragraph": "0000-MAIN", "parent_statement_id": null, "branch": null, "depth": 0, "sibling_index": 2, "statement_type": "PERFORM", "source_text": "PERFORM 2000-PROCESS UNTIL END-OF-FILE", "start_line": 86, "end_line": 87, "extraction_status": "OK", "match": "UNCHANGED", "review_status": "NONE", "review_candidates": []},
+    {"statement_id": "SYS-PORTFOLIO-001-FIL-0073-STMT-000003", "local_id": "L3", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0073-PAR-0001", "paragraph": "0000-MAIN", "parent_statement_id": null, "branch": null, "depth": 0, "sibling_index": 3, "statement_type": "PERFORM", "source_text": "PERFORM 3000-TERMINATE", "start_line": 89, "end_line": 89, "extraction_status": "OK", "match": "UNCHANGED", "review_status": "NONE", "review_candidates": []},
+    {"statement_id": "SYS-PORTFOLIO-001-FIL-0073-STMT-000004", "local_id": "L4", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0073-PAR-0001", "paragraph": "0000-MAIN", "parent_statement_id": null, "branch": null, "depth": 0, "sibling_index": 4, "statement_type": "GOBACK", "source_text": "GOBACK", "start_line": 91, "end_line": 91, "extraction_status": "OK", "match": "UNCHANGED", "review_status": "NONE", "review_candidates": []},
+    {"statement_id": "SYS-PORTFOLIO-001-FIL-0073-STMT-000005", "local_id": "L5", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0073-PAR-0002", "paragraph": "1000-INITIALIZE", "parent_statement_id": null, "branch": null, "depth": 0, "sibling_index": 1, "statement_type": "INITIALIZE", "source_text": "INITIALIZE WS-WORK-AREAS", "start_line": 94, "end_line": 94, "extraction_status": "OK", "match": "UNCHANGED", "review_status": "NONE", "review_candidates": []},
+    {"statement_id": "SYS-PORTFOLIO-001-FIL-0073-STMT-000006", "local_id": "L6", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0073-PAR-0002", "paragraph": "1000-INITIALIZE", "parent_statement_id": null, "branch": null, "depth": 0, "sibling_index": 2, "statement_type": "OPEN", "source_text": "OPEN I-O   PORTFOLIO-FILE", "start_line": 96, "end_line": 96, "extraction_status": "OK", "match": "UNCHANGED", "review_status": "NONE", "review_candidates": []},
+    {"statement_id": "SYS-PORTFOLIO-001-FIL-0073-STMT-000007", "local_id": "L7", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0073-PAR-0002", "paragraph": "1000-INITIALIZE", "parent_statement_id": null, "branch": null, "depth": 0, "sibling_index": 3, "statement_type": "OPEN", "source_text": "OPEN INPUT UPDATE-FILE", "start_line": 97, "end_line": 97, "extraction_status": "OK", "match": "UNCHANGED", "review_status": "NONE", "review_candidates": []},
+    {"statement_id": "SYS-PORTFOLIO-001-FIL-0073-STMT-000008", "local_id": "L8", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0073-PAR-0002", "paragraph": "1000-INITIALIZE", "parent_statement_id": null, "branch": null, "depth": 0, "sibling_index": 4, "statement_type": "IF", "source_text": "IF NOT WS-SUCCESS-STATUS OR NOT WS-UPDT-SUCCESS", "start_line": 99, "end_line": 106, "extraction_status": "OK", "match": "UNCHANGED", "review_status": "NONE", "review_candidates": []},
+    {"statement_id": "SYS-PORTFOLIO-001-FIL-0073-STMT-000020", "local_id": "L9", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0073-PAR-0002", "paragraph": "1000-INITIALIZE", "parent_statement_id": "SYS-PORTFOLIO-001-FIL-0073-STMT-000008", "branch": "THEN", "depth": 1, "sibling_index": 1, "statement_type": "DISPLAY", "source_text": "DISPLAY 'Error opening files: ' 'PORT=' WS-FILE-STATUS 'UPDT=' WS-UPDT-STATUS", "start_line": 101, "end_line": 103, "extraction_status": "OK", "match": "UNCHANGED", "review_status": "NONE", "review_candidates": []},
+    {"statement_id": "SYS-PORTFOLIO-001-FIL-0073-STMT-000021", "local_id": "L10", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0073-PAR-0002", "paragraph": "1000-INITIALIZE", "parent_statement_id": "SYS-PORTFOLIO-001-FIL-0073-STMT-000008", "branch": "THEN", "depth": 1, "sibling_index": 2, "statement_type": "MOVE", "source_text": "MOVE WS-ERROR TO WS-RETURN-CODE", "start_line": 104, "end_line": 104, "extraction_status": "OK", "match": "UNCHANGED", "review_status": "NONE", "review_candidates": []},
+    {"statement_id": "SYS-PORTFOLIO-001-FIL-0073-STMT-000022", "local_id": "L11", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0073-PAR-0002", "paragraph": "1000-INITIALIZE", "parent_statement_id": "SYS-PORTFOLIO-001-FIL-0073-STMT-000008", "branch": "THEN", "depth": 1, "sibling_index": 3, "statement_type": "PERFORM", "source_text": "PERFORM 3000-TERMINATE", "start_line": 105, "end_line": 105, "extraction_status": "OK", "match": "UNCHANGED", "review_status": "NONE", "review_candidates": []},
+    {"statement_id": "SYS-PORTFOLIO-001-FIL-0073-STMT-000009", "local_id": "L12", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0073-PAR-0003", "paragraph": "2000-PROCESS", "parent_statement_id": null, "branch": null, "depth": 0, "sibling_index": 1, "statement_type": "READ", "source_text": "READ UPDATE-FILE", "start_line": 110, "end_line": 115, "extraction_status": "OK", "match": "UNCHANGED", "review_status": "NONE", "review_candidates": []},
+    {"statement_id": "SYS-PORTFOLIO-001-FIL-0073-STMT-000023", "local_id": "L13", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0073-PAR-0003", "paragraph": "2000-PROCESS", "parent_statement_id": "SYS-PORTFOLIO-001-FIL-0073-STMT-000009", "branch": "AT END", "depth": 1, "sibling_index": 1, "statement_type": "SET", "source_text": "SET END-OF-FILE TO TRUE", "start_line": 112, "end_line": 112, "extraction_status": "OK", "match": "UNCHANGED", "review_status": "NONE", "review_candidates": []},
+    {"statement_id": "SYS-PORTFOLIO-001-FIL-0073-STMT-000024", "local_id": "L14", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0073-PAR-0003", "paragraph": "2000-PROCESS", "parent_statement_id": "SYS-PORTFOLIO-001-FIL-0073-STMT-000009", "branch": "NOT AT END", "depth": 1, "sibling_index": 1, "statement_type": "PERFORM", "source_text": "PERFORM 2100-PROCESS-UPDATE", "start_line": 114, "end_line": 114, "extraction_status": "OK", "match": "UNCHANGED", "review_status": "NONE", "review_candidates": []},
+    {"statement_id": "SYS-PORTFOLIO-001-FIL-0073-STMT-000010", "local_id": "L15", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0073-PAR-0004", "paragraph": "2100-PROCESS-UPDATE", "parent_statement_id": null, "branch": null, "depth": 0, "sibling_index": 1, "statement_type": "MOVE", "source_text": "MOVE UPDT-KEY TO PORT-KEY", "start_line": 119, "end_line": 119, "extraction_status": "OK", "match": "UNCHANGED", "review_status": "NONE", "review_candidates": []},
+    {"statement_id": "SYS-PORTFOLIO-001-FIL-0073-STMT-000011", "local_id": "L16", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0073-PAR-0004", "paragraph": "2100-PROCESS-UPDATE", "parent_statement_id": null, "branch": null, "depth": 0, "sibling_index": 2, "statement_type": "READ", "source_text": "READ PORTFOLIO-FILE", "start_line": 121, "end_line": 121, "extraction_status": "OK", "match": "UNCHANGED", "review_status": "NONE", "review_candidates": []},
+    {"statement_id": "SYS-PORTFOLIO-001-FIL-0073-STMT-000012", "local_id": "L17", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0073-PAR-0004", "paragraph": "2100-PROCESS-UPDATE", "parent_statement_id": null, "branch": null, "depth": 0, "sibling_index": 3, "statement_type": "IF", "source_text": "IF WS-SUCCESS-STATUS", "start_line": 123, "end_line": 128, "extraction_status": "OK", "match": "UNCHANGED", "review_status": "NONE", "review_candidates": []},
+    {"statement_id": "SYS-PORTFOLIO-001-FIL-0073-STMT-000027", "local_id": "L18", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0073-PAR-0004", "paragraph": "2100-PROCESS-UPDATE", "parent_statement_id": "SYS-PORTFOLIO-001-FIL-0073-STMT-000012", "branch": "THEN", "depth": 1, "sibling_index": 1, "statement_type": "PERFORM", "source_text": "PERFORM 2200-APPLY-UPDATE", "start_line": 124, "end_line": 124, "extraction_status": "OK", "match": "UNCHANGED", "review_status": "NONE", "review_candidates": []},
+    {"statement_id": "SYS-PORTFOLIO-001-FIL-0073-STMT-000025", "local_id": "L19", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0073-PAR-0004", "paragraph": "2100-PROCESS-UPDATE", "parent_statement_id": "SYS-PORTFOLIO-001-FIL-0073-STMT-000012", "branch": "ELSE", "depth": 1, "sibling_index": 1, "statement_type": "ADD", "source_text": "ADD 1 TO WS-ERROR-COUNT", "start_line": 126, "end_line": 126, "extraction_status": "OK", "match": "UNCHANGED", "review_status": "NONE", "review_candidates": []},
+    {"statement_id": "SYS-PORTFOLIO-001-FIL-0073-STMT-000026", "local_id": "L20", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0073-PAR-0004", "paragraph": "2100-PROCESS-UPDATE", "parent_statement_id": "SYS-PORTFOLIO-001-FIL-0073-STMT-000012", "branch": "ELSE", "depth": 1, "sibling_index": 2, "statement_type": "DISPLAY", "source_text": "DISPLAY 'Record not found: ' PORT-KEY", "start_line": 127, "end_line": 127, "extraction_status": "OK", "match": "UNCHANGED", "review_status": "NONE", "review_candidates": []},
+    {"statement_id": "SYS-PORTFOLIO-001-FIL-0073-STMT-000013", "local_id": "L21", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0073-PAR-0005", "paragraph": "2200-APPLY-UPDATE", "parent_statement_id": null, "branch": null, "depth": 0, "sibling_index": 1, "statement_type": "EVALUATE", "source_text": "EVALUATE TRUE", "start_line": 132, "end_line": 140, "extraction_status": "OK", "match": "UNCHANGED", "review_status": "NONE", "review_candidates": []},
+    {"statement_id": "SYS-PORTFOLIO-001-FIL-0073-STMT-000029", "local_id": "L22", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0073-PAR-0005", "paragraph": "2200-APPLY-UPDATE", "parent_statement_id": "SYS-PORTFOLIO-001-FIL-0073-STMT-000013", "branch": "WHEN UPDT-STATUS", "depth": 1, "sibling_index": 1, "statement_type": "MOVE", "source_text": "MOVE UPDT-NEW-VALUE TO PORT-STATUS", "start_line": 134, "end_line": 134, "extraction_status": "OK", "match": "UNCHANGED", "review_status": "NONE", "review_candidates": []},
+    {"statement_id": "SYS-PORTFOLIO-001-FIL-0073-STMT-000028", "local_id": "L23", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0073-PAR-0005", "paragraph": "2200-APPLY-UPDATE", "parent_statement_id": "SYS-PORTFOLIO-001-FIL-0073-STMT-000013", "branch": "WHEN UPDT-NAME", "depth": 1, "sibling_index": 1, "statement_type": "MOVE", "source_text": "MOVE UPDT-NEW-VALUE TO PORT-CLIENT-NAME", "start_line": 136, "end_line": 136, "extraction_status": "OK", "match": "UNCHANGED", "review_status": "NONE", "review_candidates": []},
+    {"statement_id": "SYS-PORTFOLIO-001-FIL-0073-STMT-000030", "local_id": "L24", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0073-PAR-0005", "paragraph": "2200-APPLY-UPDATE", "parent_statement_id": "SYS-PORTFOLIO-001-FIL-0073-STMT-000013", "branch": "WHEN UPDT-VALUE", "depth": 1, "sibling_index": 1, "statement_type": "MOVE", "source_text": "MOVE UPDT-NEW-VALUE TO WS-NUMERIC-WORK", "start_line": 138, "end_line": 138, "extraction_status": "OK", "match": "UNCHANGED", "review_status": "NONE", "review_candidates": []},
+    {"statement_id": "SYS-PORTFOLIO-001-FIL-0073-STMT-000031", "local_id": "L25", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0073-PAR-0005", "paragraph": "2200-APPLY-UPDATE", "parent_statement_id": "SYS-PORTFOLIO-001-FIL-0073-STMT-000013", "branch": "WHEN UPDT-VALUE", "depth": 1, "sibling_index": 2, "statement_type": "MOVE", "source_text": "MOVE WS-NUMERIC-WORK TO PORT-TOTAL-VALUE", "start_line": 139, "end_line": 139, "extraction_status": "OK", "match": "UNCHANGED", "review_status": "NONE", "review_candidates": []},
+    {"statement_id": "SYS-PORTFOLIO-001-FIL-0073-STMT-000014", "local_id": "L26", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0073-PAR-0005", "paragraph": "2200-APPLY-UPDATE", "parent_statement_id": null, "branch": null, "depth": 0, "sibling_index": 2, "statement_type": "REWRITE", "source_text": "REWRITE PORT-RECORD", "start_line": 142, "end_line": 142, "extraction_status": "OK", "match": "UNCHANGED", "review_status": "NONE", "review_candidates": []},
+    {"statement_id": "SYS-PORTFOLIO-001-FIL-0073-STMT-000015", "local_id": "L27", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0073-PAR-0005", "paragraph": "2200-APPLY-UPDATE", "parent_statement_id": null, "branch": null, "depth": 0, "sibling_index": 3, "statement_type": "IF", "source_text": "IF WS-SUCCESS-STATUS", "start_line": 144, "end_line": 149, "extraction_status": "OK", "match": "UNCHANGED", "review_status": "NONE", "review_candidates": []},
+    {"statement_id": "SYS-PORTFOLIO-001-FIL-0073-STMT-000034", "local_id": "L28", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0073-PAR-0005", "paragraph": "2200-APPLY-UPDATE", "parent_statement_id": "SYS-PORTFOLIO-001-FIL-0073-STMT-000015", "branch": "THEN", "depth": 1, "sibling_index": 1, "statement_type": "ADD", "source_text": "ADD 1 TO WS-UPDATE-COUNT", "start_line": 145, "end_line": 145, "extraction_status": "OK", "match": "UNCHANGED", "review_status": "NONE", "review_candidates": []},
+    {"statement_id": "SYS-PORTFOLIO-001-FIL-0073-STMT-000032", "local_id": "L29", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0073-PAR-0005", "paragraph": "2200-APPLY-UPDATE", "parent_statement_id": "SYS-PORTFOLIO-001-FIL-0073-STMT-000015", "branch": "ELSE", "depth": 1, "sibling_index": 1, "statement_type": "ADD", "source_text": "ADD 1 TO WS-ERROR-COUNT", "start_line": 147, "end_line": 147, "extraction_status": "OK", "match": "UNCHANGED", "review_status": "NONE", "review_candidates": []},
+    {"statement_id": "SYS-PORTFOLIO-001-FIL-0073-STMT-000033", "local_id": "L30", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0073-PAR-0005", "paragraph": "2200-APPLY-UPDATE", "parent_statement_id": "SYS-PORTFOLIO-001-FIL-0073-STMT-000015", "branch": "ELSE", "depth": 1, "sibling_index": 2, "statement_type": "DISPLAY", "source_text": "DISPLAY 'Update failed for: ' PORT-KEY", "start_line": 148, "end_line": 148, "extraction_status": "OK", "match": "UNCHANGED", "review_status": "NONE", "review_candidates": []},
+    {"statement_id": "SYS-PORTFOLIO-001-FIL-0073-STMT-000016", "local_id": "L31", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0073-PAR-0006", "paragraph": "3000-TERMINATE", "parent_statement_id": null, "branch": null, "depth": 0, "sibling_index": 1, "statement_type": "CLOSE", "source_text": "CLOSE PORTFOLIO-FILE UPDATE-FILE", "start_line": 153, "end_line": 154, "extraction_status": "OK", "match": "UNCHANGED", "review_status": "NONE", "review_candidates": []},
+    {"statement_id": "SYS-PORTFOLIO-001-FIL-0073-STMT-000017", "local_id": "L32", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0073-PAR-0006", "paragraph": "3000-TERMINATE", "parent_statement_id": null, "branch": null, "depth": 0, "sibling_index": 2, "statement_type": "DISPLAY", "source_text": "DISPLAY 'Updates processed: ' WS-UPDATE-COUNT", "start_line": 156, "end_line": 156, "extraction_status": "OK", "match": "UNCHANGED", "review_status": "NONE", "review_candidates": []},
+    {"statement_id": "SYS-PORTFOLIO-001-FIL-0073-STMT-000018", "local_id": "L33", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0073-PAR-0006", "paragraph": "3000-TERMINATE", "parent_statement_id": null, "branch": null, "depth": 0, "sibling_index": 3, "statement_type": "DISPLAY", "source_text": "DISPLAY 'Errors occurred:  ' WS-ERROR-COUNT", "start_line": 157, "end_line": 157, "extraction_status": "OK", "match": "UNCHANGED", "review_status": "NONE", "review_candidates": []},
+    {"statement_id": "SYS-PORTFOLIO-001-FIL-0073-STMT-000019", "local_id": "L34", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0073-PAR-0006", "paragraph": "3000-TERMINATE", "parent_statement_id": null, "branch": null, "depth": 0, "sibling_index": 4, "statement_type": "MOVE", "source_text": "MOVE WS-RETURN-CODE TO RETURN-CODE", "start_line": 159, "end_line": 159, "extraction_status": "OK", "match": "UNCHANGED", "review_status": "NONE", "review_candidates": []}
+  ],
+  "terminal_statements": [
+    {"type": "GOBACK", "line": 91, "paragraph": "0000-MAIN", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0073-PAR-0001", "statement_id": "SYS-PORTFOLIO-001-FIL-0073-STMT-000004"}
+  ]
+},
+"copy_stubs": [
+  {"copybook": "PORTFLIO", "include_kind": "COPY", "division": "DATA", "section": "FILE", "line": 37}
+],
+"control_flow_graph": {
+  "entry_points": ["0000-MAIN"],
+  "entry_point_ids": ["SYS-PORTFOLIO-001-FIL-0073-PAR-0001"],
+  "terminal_nodes": ["0000-MAIN"],
+  "nodes": [
+    {"id": "0000-MAIN", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0073-PAR-0001", "type": "paragraph", "section": null, "section_id": null, "start_line": 83, "end_line": 92, "is_entry_point": true, "is_terminal": true, "is_dead_code": false, "unstructured_constructs": []},
+    {"id": "1000-INITIALIZE", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0073-PAR-0002", "type": "paragraph", "section": null, "section_id": null, "start_line": 93, "end_line": 108, "is_entry_point": false, "is_terminal": false, "is_dead_code": false, "unstructured_constructs": []},
+    {"id": "2000-PROCESS", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0073-PAR-0003", "type": "paragraph", "section": null, "section_id": null, "start_line": 109, "end_line": 117, "is_entry_point": false, "is_terminal": false, "is_dead_code": false, "unstructured_constructs": []},
+    {"id": "2100-PROCESS-UPDATE", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0073-PAR-0004", "type": "paragraph", "section": null, "section_id": null, "start_line": 118, "end_line": 130, "is_entry_point": false, "is_terminal": false, "is_dead_code": false, "unstructured_constructs": []},
+    {"id": "2200-APPLY-UPDATE", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0073-PAR-0005", "type": "paragraph", "section": null, "section_id": null, "start_line": 131, "end_line": 151, "is_entry_point": false, "is_terminal": false, "is_dead_code": false, "unstructured_constructs": []},
+    {"id": "3000-TERMINATE", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0073-PAR-0006", "type": "paragraph", "section": null, "section_id": null, "start_line": 152, "end_line": 160, "is_entry_point": false, "is_terminal": false, "is_dead_code": false, "unstructured_constructs": []}
+  ],
+  "edges": [
+    {"from": "0000-MAIN", "to": "1000-INITIALIZE", "type": "PERFORM_SIMPLE", "resolved": true, "unstructured": false, "source_line": 84, "statement_id": "SYS-PORTFOLIO-001-FIL-0073-STMT-000001", "from_paragraph_id": "SYS-PORTFOLIO-001-FIL-0073-PAR-0001", "to_paragraph_id": "SYS-PORTFOLIO-001-FIL-0073-PAR-0002", "to_section_id": null},
+    {"from": "0000-MAIN", "to": "2000-PROCESS", "type": "PERFORM_UNTIL", "resolved": true, "unstructured": false, "condition_text": "END-OF-FILE", "source_line": 86, "statement_id": "SYS-PORTFOLIO-001-FIL-0073-STMT-000002", "from_paragraph_id": "SYS-PORTFOLIO-001-FIL-0073-PAR-0001", "to_paragraph_id": "SYS-PORTFOLIO-001-FIL-0073-PAR-0003", "to_section_id": null},
+    {"from": "0000-MAIN", "to": "3000-TERMINATE", "type": "PERFORM_SIMPLE", "resolved": true, "unstructured": false, "source_line": 89, "statement_id": "SYS-PORTFOLIO-001-FIL-0073-STMT-000003", "from_paragraph_id": "SYS-PORTFOLIO-001-FIL-0073-PAR-0001", "to_paragraph_id": "SYS-PORTFOLIO-001-FIL-0073-PAR-0006", "to_section_id": null},
+    {"from": "1000-INITIALIZE", "to": "3000-TERMINATE", "type": "PERFORM_SIMPLE", "resolved": true, "unstructured": false, "source_line": 105, "statement_id": "SYS-PORTFOLIO-001-FIL-0073-STMT-000022", "from_paragraph_id": "SYS-PORTFOLIO-001-FIL-0073-PAR-0002", "to_paragraph_id": "SYS-PORTFOLIO-001-FIL-0073-PAR-0006", "to_section_id": null},
+    {"from": "2000-PROCESS", "to": "2100-PROCESS-UPDATE", "type": "PERFORM_SIMPLE", "resolved": true, "unstructured": false, "source_line": 114, "statement_id": "SYS-PORTFOLIO-001-FIL-0073-STMT-000024", "from_paragraph_id": "SYS-PORTFOLIO-001-FIL-0073-PAR-0003", "to_paragraph_id": "SYS-PORTFOLIO-001-FIL-0073-PAR-0004", "to_section_id": null},
+    {"from": "2100-PROCESS-UPDATE", "to": "2200-APPLY-UPDATE", "type": "PERFORM_SIMPLE", "resolved": true, "unstructured": false, "source_line": 124, "statement_id": "SYS-PORTFOLIO-001-FIL-0073-STMT-000027", "from_paragraph_id": "SYS-PORTFOLIO-001-FIL-0073-PAR-0004", "to_paragraph_id": "SYS-PORTFOLIO-001-FIL-0073-PAR-0005", "to_section_id": null}
+  ],
+  "unstructured_constructs": [],
+  "dead_code_candidates": [],
+  "cfg_issues": []
+},
+"parse_issues": [
+  {"severity": "warning", "type": "misplaced_comment_indicator", "lines": [1], "message": "Line 1 has '*' as the first non-blank character in column 8 (Area A) instead of column 7; treated as a comment"}
+]
+}

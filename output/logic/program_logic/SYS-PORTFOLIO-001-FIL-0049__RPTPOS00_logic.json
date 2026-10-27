@@ -1,0 +1,387 @@
+{
+"program_summary": {"program_id": "RPTPOS00", "file_id": "SYS-PORTFOLIO-001-FIL-0049", "logic_file": "program_logic/SYS-PORTFOLIO-001-FIL-0049__RPTPOS00_logic.json", "logic_status": "partial", "paragraphs_translated": 11, "execution_paths": 1, "branches": 5, "loops": 1, "dead_code_confirmed": 0, "goto_annotations": 0, "unresolvable_paths": 5, "unresolved_ids": 10},
+"program_id": "RPTPOS00",
+"system_id": "SYS-PORTFOLIO-001",
+"file_id": "SYS-PORTFOLIO-001-FIL-0049",
+"path_id": "SYS-PORTFOLIO-001-PATH-0049",
+"relative_path": "src/programs/batch/RPTPOS00.cbl",
+"parse_run_id": "PRUN-20261023T023803Z-ACC2",
+"upstream": {
+  "verification": {
+    "verdict": "VALID_PARTIAL",
+    "verdict_reasons": ["V2, V3 and V4 consistent", "Agent 2 parse_status 'partial' (5 PERFORM targets not declared in the program)"],
+    "v1": {"raw_structure": "present", "parse_status": "partial", "program_layout": "present", "data_run_id": "DRUN-20261024T215053Z-ACC1", "copybook_layouts": [{"copybook": "POSREC", "copybook_file_id": "SYS-PORTFOLIO-001-FIL-0011", "layout": "present", "expanded_at_lines": [35]}, {"copybook": "TRNREC", "copybook_file_id": "SYS-PORTFOLIO-001-FIL-0014", "layout": "present", "expanded_at_lines": [36]}, {"copybook": "RTNCODE", "copybook_file_id": "SYS-PORTFOLIO-001-FIL-0013", "layout": "present", "expanded_at_lines": [44]}, {"copybook": "ERRHAND", "copybook_file_id": "SYS-PORTFOLIO-001-FIL-0007", "layout": "present", "expanded_at_lines": [45]}], "unresolved_copy_stubs": 0},
+    "v2_file_identities": {
+      "program_entries": {"require_completed": ["parser", "data"], "entries": ["raw_structure|SYS-PORTFOLIO-001-FIL-0049", "data_layout|SYS-PORTFOLIO-001-FIL-0049"], "result": "batched with RPTSTA00, RTNANA00 and UTLVAL00 program entries: checked 8, ok 8, problems [], duplicates [], consistent true"},
+      "copybook_entries": {"require_completed": ["data"], "entries": ["data_layout|SYS-PORTFOLIO-001-FIL-0011", "data_layout|SYS-PORTFOLIO-001-FIL-0014", "data_layout|SYS-PORTFOLIO-001-FIL-0013", "data_layout|SYS-PORTFOLIO-001-FIL-0007"], "result": "batched with copybooks FIL-0002 and FIL-0017: checked 6, ok 6, problems [], duplicates [], consistent true"},
+      "consistent": true
+    },
+    "v3_structure_identities": {"sections_checked": 3, "paragraphs_checked": 11, "statements_checked": 46, "edges_checked": 12, "registered_edges": 12, "section_problems": [], "paragraph_problems": [], "statement_problems": [], "edge_problems": [], "invalid_registered_edges": [], "registered_not_in_json": {"missing_count": 0}, "duplicate_ids_in_json": [], "consistent": true, "note": "section names sent: INPUT-OUTPUT for SEC-0001; null for the data-division sections (raw_structure does not carry them). 12 edges = the resolved non-inline CFG edges; the inline PERFORM UNTIL and the 5 unresolved PERFORMs carry no relationship."},
+    "v4_data_identities": [
+      {"file_id": "SYS-PORTFOLIO-001-FIL-0049", "layout": "program", "records_checked": 4, "fields_checked": 23, "expansions_checked": 4, "record_problems": [], "field_problems": [], "expansion_problems": [], "copybook_records_in_program": 0, "registered_not_in_json": {"missing_count": 0}, "duplicate_ids_in_json": [], "consistent": true, "note": "copy_expansions holder_id is null in the layout (section-level COPY); the entry's section_id was sent as holder_id"},
+      {"file_id": "SYS-PORTFOLIO-001-FIL-0011", "layout": "copybook POSREC", "records_checked": 1, "fields_checked": 17, "expansions_checked": 0, "record_problems": [], "field_problems": [], "expansion_problems": [], "copybook_records_in_program": 0, "registered_not_in_json": {"missing_count": 0}, "duplicate_ids_in_json": [], "consistent": true},
+      {"file_id": "SYS-PORTFOLIO-001-FIL-0014", "layout": "copybook TRNREC", "records_checked": 1, "fields_checked": 25, "expansions_checked": 0, "record_problems": [], "field_problems": [], "expansion_problems": [], "copybook_records_in_program": 0, "registered_not_in_json": {"missing_count": 0}, "duplicate_ids_in_json": [], "consistent": true},
+      {"file_id": "SYS-PORTFOLIO-001-FIL-0013", "layout": "copybook RTNCODE", "records_checked": 1, "fields_checked": 28, "expansions_checked": 0, "record_problems": [], "field_problems": [], "expansion_problems": [], "copybook_records_in_program": 0, "registered_not_in_json": {"missing_count": 0}, "duplicate_ids_in_json": [], "consistent": true},
+      {"file_id": "SYS-PORTFOLIO-001-FIL-0007", "layout": "copybook ERRHAND", "records_checked": 5, "fields_checked": 25, "expansions_checked": 0, "record_problems": [], "field_problems": [], "expansion_problems": [], "copybook_records_in_program": 0, "registered_not_in_json": {"missing_count": 0}, "duplicate_ids_in_json": [], "consistent": true}
+    ]
+  }
+},
+"execution_traces": [
+  {
+    "entry_point": "0000-MAIN",
+    "entry_point_id": "SYS-PORTFOLIO-001-FIL-0049-PAR-0001",
+    "entry_type": "batch_main",
+    "steps": [
+      {"step": 1, "paragraph": "0000-MAIN", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0049-PAR-0001", "action": "PERFORM", "target": "1000-INITIALIZE", "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0049-PAR-0002", "target_section_id": null, "condition": null, "line": 79, "statement_id": "SYS-PORTFOLIO-001-FIL-0049-STMT-000001"},
+      {"step": 2, "paragraph": "1000-INITIALIZE", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0049-PAR-0002", "action": "PERFORM", "target": "1100-OPEN-FILES", "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0049-PAR-0003", "target_section_id": null, "condition": null, "line": 85, "statement_id": "SYS-PORTFOLIO-001-FIL-0049-STMT-000005"},
+      {"step": 3, "paragraph": "1100-OPEN-FILES", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0049-PAR-0003", "action": "PERFORM", "target": "9999-ERROR-HANDLER", "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0049-PAR-0011", "target_section_id": null,
+       "condition": {"text": "IF WS-POSITION-STATUS NOT = '00'", "fields": ["WS-POSITION-STATUS"], "field_ids": [{"name": "WS-POSITION-STATUS", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0049-FLD-000001", "target_kind": "field", "candidate_ids": []}]},
+       "line": 93, "statement_id": "SYS-PORTFOLIO-001-FIL-0049-STMT-000038"},
+      {"step": 4, "paragraph": "1100-OPEN-FILES", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0049-PAR-0003", "action": "PERFORM", "target": "9999-ERROR-HANDLER", "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0049-PAR-0011", "target_section_id": null,
+       "condition": {"text": "IF WS-TRAN-STATUS NOT = '00'", "fields": ["WS-TRAN-STATUS"], "field_ids": [{"name": "WS-TRAN-STATUS", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0049-FLD-000002", "target_kind": "field", "candidate_ids": []}]},
+       "line": 100, "statement_id": "SYS-PORTFOLIO-001-FIL-0049-STMT-000040"},
+      {"step": 5, "paragraph": "1100-OPEN-FILES", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0049-PAR-0003", "action": "PERFORM", "target": "9999-ERROR-HANDLER", "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0049-PAR-0011", "target_section_id": null,
+       "condition": {"text": "IF WS-REPORT-STATUS NOT = '00'", "fields": ["WS-REPORT-STATUS"], "field_ids": [{"name": "WS-REPORT-STATUS", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0049-FLD-000003", "target_kind": "field", "candidate_ids": []}]},
+       "line": 107, "statement_id": "SYS-PORTFOLIO-001-FIL-0049-STMT-000042"},
+      {"step": 6, "paragraph": "1000-INITIALIZE", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0049-PAR-0002", "action": "PERFORM", "target": "1200-WRITE-HEADERS", "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0049-PAR-0004", "target_section_id": null, "condition": null, "line": 86, "statement_id": "SYS-PORTFOLIO-001-FIL-0049-STMT-000006"},
+      {"step": 7, "paragraph": "0000-MAIN", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0049-PAR-0001", "action": "PERFORM", "target": "2000-PROCESS-REPORT", "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0049-PAR-0005", "target_section_id": null, "condition": null, "line": 80, "statement_id": "SYS-PORTFOLIO-001-FIL-0049-STMT-000002"},
+      {"step": 8, "paragraph": "2000-PROCESS-REPORT", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0049-PAR-0005", "action": "PERFORM", "target": "2100-READ-POSITIONS", "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0049-PAR-0006", "target_section_id": null, "condition": null, "line": 117, "statement_id": "SYS-PORTFOLIO-001-FIL-0049-STMT-000017"},
+      {"step": 9, "paragraph": "2100-READ-POSITIONS", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0049-PAR-0006", "action": "READ", "target": null, "target_paragraph_id": null, "target_section_id": null, "condition": null, "line": 122, "statement_id": "SYS-PORTFOLIO-001-FIL-0049-STMT-000020"},
+      {"step": 10, "paragraph": "2100-READ-POSITIONS", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0049-PAR-0006", "action": "PERFORM_INLINE", "target": "2100-READ-POSITIONS", "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0049-PAR-0006", "target_section_id": null,
+       "condition": {"text": "END-OF-POSITIONS", "fields": ["END-OF-POSITIONS"], "field_ids": [{"name": "END-OF-POSITIONS", "qualifiers": [], "resolution": "UNRESOLVED", "target_id": null, "target_kind": null, "candidate_ids": []}], "test_time": "BEFORE", "loop_type": "WHILE", "termination_pattern": "FILE_EXHAUSTION_LOOP"},
+       "line": 126, "statement_id": "SYS-PORTFOLIO-001-FIL-0049-STMT-000021", "body_line_range": [127, 130]},
+      {"step": 11, "paragraph": "2100-READ-POSITIONS", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0049-PAR-0006", "action": "PERFORM", "target": "2110-FORMAT-POSITION", "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0049-PAR-0007", "target_section_id": null, "condition": {"text": "inside PERFORM UNTIL END-OF-POSITIONS (line 126), once per position record", "fields": ["END-OF-POSITIONS"], "field_ids": [{"name": "END-OF-POSITIONS", "qualifiers": [], "resolution": "UNRESOLVED", "target_id": null, "target_kind": null, "candidate_ids": []}]}, "line": 127, "statement_id": "SYS-PORTFOLIO-001-FIL-0049-STMT-000044"},
+      {"step": 12, "paragraph": "2000-PROCESS-REPORT", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0049-PAR-0005", "action": "PERFORM", "target": "2200-PROCESS-TRANSACTIONS", "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0049-PAR-0008", "target_section_id": null, "condition": null, "line": 118, "statement_id": "SYS-PORTFOLIO-001-FIL-0049-STMT-000018"},
+      {"step": 13, "paragraph": "2200-PROCESS-TRANSACTIONS", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0049-PAR-0008", "action": "unresolvable","target": "2210-READ-TRANSACTIONS", "target_paragraph_id": null, "target_section_id": null, "condition": null, "line": 144, "statement_id": "SYS-PORTFOLIO-001-FIL-0049-STMT-000028"},
+      {"step": 14, "paragraph": "2200-PROCESS-TRANSACTIONS", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0049-PAR-0008", "action": "unresolvable","target": "2220-SUMMARIZE-ACTIVITY", "target_paragraph_id": null, "target_section_id": null, "condition": null, "line": 145, "statement_id": "SYS-PORTFOLIO-001-FIL-0049-STMT-000029"},
+      {"step": 15, "paragraph": "2000-PROCESS-REPORT", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0049-PAR-0005", "action": "PERFORM", "target": "2300-WRITE-SUMMARY", "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0049-PAR-0009", "target_section_id": null, "condition": null, "line": 119, "statement_id": "SYS-PORTFOLIO-001-FIL-0049-STMT-000019"},
+      {"step": 16, "paragraph": "2300-WRITE-SUMMARY", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0049-PAR-0009", "action": "unresolvable","target": "2310-WRITE-TOTALS", "target_paragraph_id": null, "target_section_id": null, "condition": null, "line": 148, "statement_id": "SYS-PORTFOLIO-001-FIL-0049-STMT-000030"},
+      {"step": 17, "paragraph": "2300-WRITE-SUMMARY", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0049-PAR-0009", "action": "unresolvable","target": "2320-WRITE-EXCEPTIONS", "target_paragraph_id": null, "target_section_id": null, "condition": null, "line": 149, "statement_id": "SYS-PORTFOLIO-001-FIL-0049-STMT-000031"},
+      {"step": 18, "paragraph": "2300-WRITE-SUMMARY", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0049-PAR-0009", "action": "unresolvable","target": "2330-WRITE-METRICS", "target_paragraph_id": null, "target_section_id": null, "condition": null, "line": 150, "statement_id": "SYS-PORTFOLIO-001-FIL-0049-STMT-000032"},
+      {"step": 19, "paragraph": "0000-MAIN", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0049-PAR-0001", "action": "PERFORM", "target": "3000-CLEANUP", "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0049-PAR-0010", "target_section_id": null, "condition": null, "line": 81, "statement_id": "SYS-PORTFOLIO-001-FIL-0049-STMT-000003"},
+      {"step": 20, "paragraph": "0000-MAIN", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0049-PAR-0001", "action": "GOBACK", "target": null, "target_paragraph_id": null, "target_section_id": null, "condition": null, "line": 82, "statement_id": "SYS-PORTFOLIO-001-FIL-0049-STMT-000004"}
+    ]
+  }
+],
+"branch_map": [
+  {
+    "paragraph": "1100-OPEN-FILES",
+    "paragraph_id": "SYS-PORTFOLIO-001-FIL-0049-PAR-0003",
+    "branches": [
+      {"type": "IF", "line": 90, "statement_id": "SYS-PORTFOLIO-001-FIL-0049-STMT-000008", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0049-PAR-0003", "condition_text": "WS-POSITION-STATUS NOT = '00'", "condition_fields": ["WS-POSITION-STATUS"],
+       "condition_field_ids": [{"name": "WS-POSITION-STATUS", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0049-FLD-000001", "target_kind": "field", "candidate_ids": []}],
+       "has_else": false, "then_line_range": [91, 93], "else_line_range": null, "end_if_line": 94, "nested_depth": 1,
+       "outcomes": [{"label": "THEN", "line_range": [91, 93], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0049-STMT-000037", "SYS-PORTFOLIO-001-FIL-0049-STMT-000038"]}, {"label": "ELSE (implicit, continue)", "line_range": null, "statement_ids": []}]},
+      {"type": "IF", "line": 97, "statement_id": "SYS-PORTFOLIO-001-FIL-0049-STMT-000010", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0049-PAR-0003", "condition_text": "WS-TRAN-STATUS NOT = '00'", "condition_fields": ["WS-TRAN-STATUS"],
+       "condition_field_ids": [{"name": "WS-TRAN-STATUS", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0049-FLD-000002", "target_kind": "field", "candidate_ids": []}],
+       "has_else": false, "then_line_range": [98, 100], "else_line_range": null, "end_if_line": 101, "nested_depth": 1,
+       "outcomes": [{"label": "THEN", "line_range": [98, 100], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0049-STMT-000039", "SYS-PORTFOLIO-001-FIL-0049-STMT-000040"]}, {"label": "ELSE (implicit, continue)", "line_range": null, "statement_ids": []}]},
+      {"type": "IF", "line": 104, "statement_id": "SYS-PORTFOLIO-001-FIL-0049-STMT-000012", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0049-PAR-0003", "condition_text": "WS-REPORT-STATUS NOT = '00'", "condition_fields": ["WS-REPORT-STATUS"],
+       "condition_field_ids": [{"name": "WS-REPORT-STATUS", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0049-FLD-000003", "target_kind": "field", "candidate_ids": []}],
+       "has_else": false, "then_line_range": [105, 107], "else_line_range": null, "end_if_line": 108, "nested_depth": 1,
+       "outcomes": [{"label": "THEN", "line_range": [105, 107], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0049-STMT-000041", "SYS-PORTFOLIO-001-FIL-0049-STMT-000042"]}, {"label": "ELSE (implicit, continue)", "line_range": null, "statement_ids": []}]}
+    ]
+  },
+  {
+    "paragraph": "2100-READ-POSITIONS",
+    "paragraph_id": "SYS-PORTFOLIO-001-FIL-0049-PAR-0006",
+    "branches": [
+      {"type": "AT_END", "operation": "READ", "file_name": "POSITION-MASTER", "line": 122, "statement_id": "SYS-PORTFOLIO-001-FIL-0049-STMT-000020", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0049-PAR-0006", "condition_text": "AT END", "condition_fields": [], "condition_field_ids": [], "io_status_field": "WS-POSITION-STATUS",
+       "at_end_line_range": [123, 123], "not_at_end_line_range": null, "nested_depth": 1,
+       "outcomes": [{"label": "AT END", "line_range": [123, 123], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0049-STMT-000043"]}, {"label": "record read (no NOT AT END clause)", "line_range": null, "statement_ids": []}]},
+      {"type": "AT_END", "operation": "READ", "file_name": "POSITION-MASTER", "line": 128, "statement_id": "SYS-PORTFOLIO-001-FIL-0049-STMT-000045", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0049-PAR-0006", "condition_text": "AT END", "condition_fields": [], "condition_field_ids": [], "io_status_field": "WS-POSITION-STATUS",
+       "at_end_line_range": [129, 129], "not_at_end_line_range": null, "nested_depth": 2,
+       "outcomes": [{"label": "AT END", "line_range": [129, 129], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0049-STMT-000046"]}, {"label": "record read (no NOT AT END clause)", "line_range": null, "statement_ids": []}]}
+    ]
+  }
+],
+"loops": [
+  {"paragraph": "2100-READ-POSITIONS", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0049-PAR-0006", "target": "2100-READ-POSITIONS", "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0049-PAR-0006", "type": "PERFORM_INLINE", "statement_id": "SYS-PORTFOLIO-001-FIL-0049-STMT-000021",
+   "condition_text": "UNTIL END-OF-POSITIONS", "condition_fields": ["END-OF-POSITIONS"],
+   "condition_field_ids": [{"name": "END-OF-POSITIONS", "qualifiers": [], "resolution": "UNRESOLVED", "target_id": null, "target_kind": null, "candidate_ids": []}],
+   "test_time": "BEFORE", "loop_type": "WHILE", "termination_pattern": "FILE_EXHAUSTION_LOOP", "line": 126, "body_line_range": [127, 130],
+   "modifying_statement_ids": ["SYS-PORTFOLIO-001-FIL-0049-STMT-000046"]}
+],
+"dead_code_confirmed": [],
+"unresolvable_paths": [
+  {"paragraph": "2200-PROCESS-TRANSACTIONS", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0049-PAR-0008", "statement_id": "SYS-PORTFOLIO-001-FIL-0049-STMT-000028", "line": 144, "target": "2210-READ-TRANSACTIONS", "reason": "PERFORM target not in CFG: no paragraph or section of that name in the program; the PROCEDURE DIVISION has no COPY statements"},
+  {"paragraph": "2200-PROCESS-TRANSACTIONS", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0049-PAR-0008", "statement_id": "SYS-PORTFOLIO-001-FIL-0049-STMT-000029", "line": 145, "target": "2220-SUMMARIZE-ACTIVITY", "reason": "PERFORM target not in CFG: no paragraph or section of that name in the program"},
+  {"paragraph": "2300-WRITE-SUMMARY", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0049-PAR-0009", "statement_id": "SYS-PORTFOLIO-001-FIL-0049-STMT-000030", "line": 148, "target": "2310-WRITE-TOTALS", "reason": "PERFORM target not in CFG: no paragraph or section of that name in the program"},
+  {"paragraph": "2300-WRITE-SUMMARY", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0049-PAR-0009", "statement_id": "SYS-PORTFOLIO-001-FIL-0049-STMT-000031", "line": 149, "target": "2320-WRITE-EXCEPTIONS", "reason": "PERFORM target not in CFG: no paragraph or section of that name in the program"},
+  {"paragraph": "2300-WRITE-SUMMARY", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0049-PAR-0009", "statement_id": "SYS-PORTFOLIO-001-FIL-0049-STMT-000032", "line": 150, "target": "2330-WRITE-METRICS", "reason": "PERFORM target not in CFG: no paragraph or section of that name in the program"}
+],
+"trace_issues": [
+  {"severity": "info", "type": "upstream_issue", "upstream_agent": "2_parser", "upstream_type": "unresolved_target", "lines": [144, 145, 148, 149, 150], "message": "PERFORM targets 2210-READ-TRANSACTIONS, 2220-SUMMARIZE-ACTIVITY, 2310-WRITE-TOTALS, 2320-WRITE-EXCEPTIONS, 2330-WRITE-METRICS are not declared as paragraphs or sections in this file; resolved=false, no relationship registered; parse_status partial."},
+  {"severity": "info", "type": "upstream_issue", "upstream_agent": "2_parser", "upstream_type": "fd_via_copy", "lines": [35, 36], "message": "SELECT POSITION-MASTER and TRANSACTION-HISTORY have no inline FD; the FILE SECTION has COPY POSREC and COPY TRNREC at those positions."},
+  {"severity": "info", "type": "upstream_issue", "upstream_agent": "3_data", "upstream_type": "copy_stub_in_file_section_without_fd", "line": 35, "message": "COPY POSREC (line 35) and COPY TRNREC (line 36) appear directly under the FILE SECTION before any FD; records POSITION-RECORD and TRANSACTION-RECORD are linked by EXPANDS_COPY from section SYS-PORTFOLIO-001-FIL-0049-SEC-0002 with no fd_name."},
+  {"severity": "info", "type": "upstream_issue", "upstream_agent": "3_data", "upstream_type": "copy_expansion_section_level", "line": 44, "message": "COPY RTNCODE (line 44) and COPY ERRHAND (line 45) sit directly under the WORKING-STORAGE SECTION; their 6 records are linked by EXPANDS_COPY from section SYS-PORTFOLIO-001-FIL-0049-SEC-0003."},
+  {"severity": "info", "type": "upstream_issue", "upstream_agent": "3_data", "upstream_type": "edited_picture_sign", "line": 74, "message": "WS-POS-CHANGE-PCT PIC +ZZ9.99 is NUMERIC_EDITED with a '+' sign-editing symbol."},
+  {"severity": "warning", "type": "unresolvable_perform_target", "lines": [144, 145, 148, 149, 150], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0049-STMT-000028", "SYS-PORTFOLIO-001-FIL-0049-STMT-000029", "SYS-PORTFOLIO-001-FIL-0049-STMT-000030", "SYS-PORTFOLIO-001-FIL-0049-STMT-000031", "SYS-PORTFOLIO-001-FIL-0049-STMT-000032"], "message": "5 PERFORM targets not in CFG; recorded as unresolvable steps with null target IDs. A source search finds no paragraph of these names in RPTPOS00 or in any copybook of the repository. The transaction-activity and summary sections of the report cannot be traced."},
+  {"severity": "info", "type": "field_id_unresolved", "name": "END-OF-POSITIONS", "lines": [123, 126, 129], "message": "resolve-field-references UNRESOLVED; condition name not declared in the program or its copybooks; target_id null."},
+  {"severity": "info", "type": "field_id_unresolved", "name": "WS-ERROR-MESSAGE", "lines": [92, 99, 106, 158], "message": "resolve-field-references UNRESOLVED; not declared in the program or in copybooks RTNCODE/ERRHAND (ERRHAND declares ERR-MESSAGE, not WS-ERROR-MESSAGE); target_id null."},
+  {"severity": "info", "type": "field_id_unresolved", "name": "POS-DESCRIPTION", "line": 135, "message": "resolve-field-references UNRESOLVED; not declared in copybook POSREC or the program; target_id null."},
+  {"severity": "info", "type": "field_id_unresolved", "name": "POS-CURRENT-VALUE", "lines": [137, 139], "message": "resolve-field-references UNRESOLVED; not declared in copybook POSREC (which declares POS-MARKET-VALUE and POS-COST-BASIS) or the program; target_id null. No substitute is assumed."},
+  {"severity": "info", "type": "field_id_unresolved", "name": "POS-PREVIOUS-VALUE", "lines": [139, 140], "message": "resolve-field-references UNRESOLVED; not declared in copybook POSREC or the program; target_id null."},
+  {"severity": "warning", "type": "undeclared_condition_name", "line": 126, "statement_id": "SYS-PORTFOLIO-001-FIL-0049-STMT-000021", "message": "The loop condition END-OF-POSITIONS is undeclared; the loop is classified FILE_EXHAUSTION_LOOP from the SET ... TO TRUE statements in the AT END branches, but the data item it sets is unknown."},
+  {"severity": "info", "type": "unchecked_read_status", "lines": [122, 128], "message": "READ POSITION-MASTER has only AT END handling; WS-POSITION-STATUS is not tested after the READs, so I/O errors other than end of file are not handled in the source."},
+  {"severity": "info", "type": "error_path_terminates", "lines": [93, 100, 107, 160], "statement_id": "SYS-PORTFOLIO-001-FIL-0049-STMT-000036", "message": "9999-ERROR-HANDLER ends with GOBACK (line 160): when an OPEN fails, the program displays the message, sets RETURN-CODE 12 and returns to the caller without closing files; the PERFORM never returns to 1100-OPEN-FILES."}
+],
+"program_narrative": "Program RPTPOS00 is a batch program that produces the daily position report. It opens POSITION-MASTER and TRANSACTION-HISTORY for input and REPORT-FILE for output, writes three header lines (a line of asterisks, the title 'DAILY POSITION REPORT' and the system date), and then reads POSITION-MASTER sequentially until end of file. For each position record it moves the portfolio ID, description, quantity and current value into a detail line, computes the percentage change between current and previous value, and writes the detail line. It then performs the transaction-activity and summary steps (2210-READ-TRANSACTIONS, 2220-SUMMARIZE-ACTIVITY, 2310-WRITE-TOTALS, 2320-WRITE-EXCEPTIONS, 2330-WRITE-METRICS), but none of those paragraphs exists in the source, so that part of the logic is unknown; TRANSACTION-HISTORY is opened and closed but never read in the traceable code. Finally it closes all three files and returns. Error conditions handled: a failed OPEN of any file displays an error message, sets return code 12 and ends the program; end of file on POSITION-MASTER ends the detail loop. Several data names used by the logic (END-OF-POSITIONS, WS-ERROR-MESSAGE, POS-DESCRIPTION, POS-CURRENT-VALUE, POS-PREVIOUS-VALUE) are not declared in the program or its copybooks.",
+"paragraphs": [
+  {
+    "name": "0000-MAIN", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0049-PAR-0001", "section": null, "section_id": null, "line_range": [78, 83],
+    "pseudocode": [
+      "-- Main control paragraph: initialise, produce the report, clean up",
+      "CALL 1000-initialize",
+      "CALL 2000-process-report",
+      "CALL 3000-cleanup",
+      "RETURN to caller  -- GOBACK"
+    ],
+    "pseudocode_statement_ids": [[], ["SYS-PORTFOLIO-001-FIL-0049-STMT-000001"], ["SYS-PORTFOLIO-001-FIL-0049-STMT-000002"], ["SYS-PORTFOLIO-001-FIL-0049-STMT-000003"], ["SYS-PORTFOLIO-001-FIL-0049-STMT-000004"]],
+    "pseudocode_text": "-- Main control paragraph: initialise, produce the report, clean up\nCALL 1000-initialize\nCALL 2000-process-report\nCALL 3000-cleanup\nRETURN to caller  -- GOBACK",
+    "statement_ids": ["SYS-PORTFOLIO-001-FIL-0049-STMT-000001", "SYS-PORTFOLIO-001-FIL-0049-STMT-000002", "SYS-PORTFOLIO-001-FIL-0049-STMT-000003", "SYS-PORTFOLIO-001-FIL-0049-STMT-000004"],
+    "untranslated_statement_ids": [],
+    "field_references": [], "field_reference_ids": [],
+    "calls_made": ["1000-INITIALIZE", "2000-PROCESS-REPORT", "3000-CLEANUP"],
+    "calls_made_ids": [{"name": "1000-INITIALIZE", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0049-PAR-0002", "section_id": null}, {"name": "2000-PROCESS-REPORT", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0049-PAR-0005", "section_id": null}, {"name": "3000-CLEANUP", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0049-PAR-0010", "section_id": null}],
+    "complexity_score": 1, "has_unresolved_statements": false, "annotations": []
+  },
+  {
+    "name": "1000-INITIALIZE", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0049-PAR-0002", "section": null, "section_id": null, "line_range": [84, 87],
+    "pseudocode": [
+      "CALL 1100-open-files",
+      "CALL 1200-write-headers"
+    ],
+    "pseudocode_statement_ids": [["SYS-PORTFOLIO-001-FIL-0049-STMT-000005"], ["SYS-PORTFOLIO-001-FIL-0049-STMT-000006"]],
+    "pseudocode_text": "CALL 1100-open-files\nCALL 1200-write-headers",
+    "statement_ids": ["SYS-PORTFOLIO-001-FIL-0049-STMT-000005", "SYS-PORTFOLIO-001-FIL-0049-STMT-000006"],
+    "untranslated_statement_ids": [],
+    "field_references": [], "field_reference_ids": [],
+    "calls_made": ["1100-OPEN-FILES", "1200-WRITE-HEADERS"],
+    "calls_made_ids": [{"name": "1100-OPEN-FILES", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0049-PAR-0003", "section_id": null}, {"name": "1200-WRITE-HEADERS", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0049-PAR-0004", "section_id": null}],
+    "complexity_score": 1, "has_unresolved_statements": false, "annotations": []
+  },
+  {
+    "name": "1100-OPEN-FILES", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0049-PAR-0003", "section": null, "section_id": null, "line_range": [88, 109],
+    "pseudocode": [
+      "OPEN POSITION-MASTER for READ-ONLY",
+      "IF position_status (WS-POSITION-STATUS) != '00' THEN  -- '00' = successful open",
+      "  SET error_message = 'ERROR OPENING POSITION MASTER'",
+      "  CALL 9999-error-handler  -- ends the program (GOBACK)",
+      "END IF",
+      "OPEN TRANSACTION-HISTORY for READ-ONLY",
+      "IF transaction_status (WS-TRAN-STATUS) != '00' THEN",
+      "  SET error_message = 'ERROR OPENING TRANSACTION HISTORY'",
+      "  CALL 9999-error-handler  -- ends the program (GOBACK)",
+      "END IF",
+      "OPEN REPORT-FILE for WRITE (new)",
+      "IF report_status (WS-REPORT-STATUS) != '00' THEN",
+      "  SET error_message = 'ERROR OPENING REPORT FILE'",
+      "  CALL 9999-error-handler  -- ends the program (GOBACK)",
+      "END IF"
+    ],
+    "pseudocode_statement_ids": [["SYS-PORTFOLIO-001-FIL-0049-STMT-000007"], ["SYS-PORTFOLIO-001-FIL-0049-STMT-000008"], ["SYS-PORTFOLIO-001-FIL-0049-STMT-000037"], ["SYS-PORTFOLIO-001-FIL-0049-STMT-000038"], ["SYS-PORTFOLIO-001-FIL-0049-STMT-000008"], ["SYS-PORTFOLIO-001-FIL-0049-STMT-000009"], ["SYS-PORTFOLIO-001-FIL-0049-STMT-000010"], ["SYS-PORTFOLIO-001-FIL-0049-STMT-000039"], ["SYS-PORTFOLIO-001-FIL-0049-STMT-000040"], ["SYS-PORTFOLIO-001-FIL-0049-STMT-000010"], ["SYS-PORTFOLIO-001-FIL-0049-STMT-000011"], ["SYS-PORTFOLIO-001-FIL-0049-STMT-000012"], ["SYS-PORTFOLIO-001-FIL-0049-STMT-000041"], ["SYS-PORTFOLIO-001-FIL-0049-STMT-000042"], ["SYS-PORTFOLIO-001-FIL-0049-STMT-000012"]],
+    "pseudocode_text": "OPEN POSITION-MASTER for READ-ONLY\nIF position_status (WS-POSITION-STATUS) != '00' THEN  -- '00' = successful open\n  SET error_message = 'ERROR OPENING POSITION MASTER'\n  CALL 9999-error-handler  -- ends the program (GOBACK)\nEND IF\nOPEN TRANSACTION-HISTORY for READ-ONLY\nIF transaction_status (WS-TRAN-STATUS) != '00' THEN\n  SET error_message = 'ERROR OPENING TRANSACTION HISTORY'\n  CALL 9999-error-handler  -- ends the program (GOBACK)\nEND IF\nOPEN REPORT-FILE for WRITE (new)\nIF report_status (WS-REPORT-STATUS) != '00' THEN\n  SET error_message = 'ERROR OPENING REPORT FILE'\n  CALL 9999-error-handler  -- ends the program (GOBACK)\nEND IF",
+    "statement_ids": ["SYS-PORTFOLIO-001-FIL-0049-STMT-000007", "SYS-PORTFOLIO-001-FIL-0049-STMT-000008", "SYS-PORTFOLIO-001-FIL-0049-STMT-000037", "SYS-PORTFOLIO-001-FIL-0049-STMT-000038", "SYS-PORTFOLIO-001-FIL-0049-STMT-000009", "SYS-PORTFOLIO-001-FIL-0049-STMT-000010", "SYS-PORTFOLIO-001-FIL-0049-STMT-000039", "SYS-PORTFOLIO-001-FIL-0049-STMT-000040", "SYS-PORTFOLIO-001-FIL-0049-STMT-000011", "SYS-PORTFOLIO-001-FIL-0049-STMT-000012", "SYS-PORTFOLIO-001-FIL-0049-STMT-000041", "SYS-PORTFOLIO-001-FIL-0049-STMT-000042"],
+    "untranslated_statement_ids": [],
+    "field_references": ["WS-POSITION-STATUS", "WS-TRAN-STATUS", "WS-REPORT-STATUS", "WS-ERROR-MESSAGE"],
+    "field_reference_ids": [
+      {"name": "WS-POSITION-STATUS", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0049-FLD-000001", "target_kind": "field", "candidate_ids": []},
+      {"name": "WS-TRAN-STATUS", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0049-FLD-000002", "target_kind": "field", "candidate_ids": []},
+      {"name": "WS-REPORT-STATUS", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0049-FLD-000003", "target_kind": "field", "candidate_ids": []},
+      {"name": "WS-ERROR-MESSAGE", "qualifiers": [], "resolution": "UNRESOLVED", "target_id": null, "target_kind": null, "candidate_ids": []}
+    ],
+    "calls_made": ["9999-ERROR-HANDLER"],
+    "calls_made_ids": [{"name": "9999-ERROR-HANDLER", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0049-PAR-0011", "section_id": null}],
+    "complexity_score": 3, "has_unresolved_statements": false,
+    "annotations": [{"line": 92, "note": "WS-ERROR-MESSAGE is not declared in the program or its copybooks; the receiving field of the error text is unknown (see data dictionary)."}]
+  },
+  {
+    "name": "1200-WRITE-HEADERS", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0049-PAR-0004", "section": null, "section_id": null, "line_range": [110, 115],
+    "pseudocode": [
+      "SET report_date (WS-REPORT-DATE) = system date  -- ACCEPT ... FROM DATE returns the current date (YYMMDD)",
+      "WRITE header_line_1 (WS-HEADER1, a line of '*') to REPORT-FILE via REPORT-RECORD",
+      "WRITE header_line_2 (WS-HEADER2, title 'DAILY POSITION REPORT') to REPORT-FILE",
+      "WRITE header_line_3 (WS-HEADER3, 'REPORT DATE:' + report_date) to REPORT-FILE"
+    ],
+    "pseudocode_statement_ids": [["SYS-PORTFOLIO-001-FIL-0049-STMT-000013"], ["SYS-PORTFOLIO-001-FIL-0049-STMT-000014"], ["SYS-PORTFOLIO-001-FIL-0049-STMT-000015"], ["SYS-PORTFOLIO-001-FIL-0049-STMT-000016"]],
+    "pseudocode_text": "SET report_date (WS-REPORT-DATE) = system date  -- ACCEPT ... FROM DATE returns the current date (YYMMDD)\nWRITE header_line_1 (WS-HEADER1, a line of '*') to REPORT-FILE via REPORT-RECORD\nWRITE header_line_2 (WS-HEADER2, title 'DAILY POSITION REPORT') to REPORT-FILE\nWRITE header_line_3 (WS-HEADER3, 'REPORT DATE:' + report_date) to REPORT-FILE",
+    "statement_ids": ["SYS-PORTFOLIO-001-FIL-0049-STMT-000013", "SYS-PORTFOLIO-001-FIL-0049-STMT-000014", "SYS-PORTFOLIO-001-FIL-0049-STMT-000015", "SYS-PORTFOLIO-001-FIL-0049-STMT-000016"],
+    "untranslated_statement_ids": [],
+    "field_references": ["WS-REPORT-DATE", "REPORT-RECORD", "WS-HEADER1", "WS-HEADER2", "WS-HEADER3"],
+    "field_reference_ids": [
+      {"name": "WS-REPORT-DATE", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0049-FLD-000012", "target_kind": "field", "candidate_ids": []},
+      {"name": "REPORT-RECORD", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0049-REC-0001", "target_kind": "record", "candidate_ids": []},
+      {"name": "WS-HEADER1", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0049-FLD-000004", "target_kind": "field", "candidate_ids": []},
+      {"name": "WS-HEADER2", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0049-FLD-000006", "target_kind": "field", "candidate_ids": []},
+      {"name": "WS-HEADER3", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0049-FLD-000010", "target_kind": "field", "candidate_ids": []}
+    ],
+    "calls_made": [], "calls_made_ids": [],
+    "complexity_score": 3, "has_unresolved_statements": false,
+    "annotations": [{"line": 112, "note": "WRITE REPORT-RECORD FROM x copies x into the 132-byte record REPORT-RECORD and writes it; no WS-REPORT-STATUS check follows the WRITEs."}]
+  },
+  {
+    "name": "2000-PROCESS-REPORT", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0049-PAR-0005", "section": null, "section_id": null, "line_range": [116, 120],
+    "pseudocode": [
+      "CALL 2100-read-positions",
+      "CALL 2200-process-transactions",
+      "CALL 2300-write-summary"
+    ],
+    "pseudocode_statement_ids": [["SYS-PORTFOLIO-001-FIL-0049-STMT-000017"], ["SYS-PORTFOLIO-001-FIL-0049-STMT-000018"], ["SYS-PORTFOLIO-001-FIL-0049-STMT-000019"]],
+    "pseudocode_text": "CALL 2100-read-positions\nCALL 2200-process-transactions\nCALL 2300-write-summary",
+    "statement_ids": ["SYS-PORTFOLIO-001-FIL-0049-STMT-000017", "SYS-PORTFOLIO-001-FIL-0049-STMT-000018", "SYS-PORTFOLIO-001-FIL-0049-STMT-000019"],
+    "untranslated_statement_ids": [],
+    "field_references": [], "field_reference_ids": [],
+    "calls_made": ["2100-READ-POSITIONS", "2200-PROCESS-TRANSACTIONS", "2300-WRITE-SUMMARY"],
+    "calls_made_ids": [{"name": "2100-READ-POSITIONS", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0049-PAR-0006", "section_id": null}, {"name": "2200-PROCESS-TRANSACTIONS", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0049-PAR-0008", "section_id": null}, {"name": "2300-WRITE-SUMMARY", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0049-PAR-0009", "section_id": null}],
+    "complexity_score": 1, "has_unresolved_statements": false, "annotations": []
+  },
+  {
+    "name": "2100-READ-POSITIONS", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0049-PAR-0006", "section": null, "section_id": null, "line_range": [121, 132],
+    "pseudocode": [
+      "READ next record from POSITION-MASTER  -- priming read; no FD for POSITION-MASTER (COPY POSREC precedes any FD), so its record area is not declared",
+      "IF end of file THEN",
+      "  SET end_of_positions = TRUE  -- END-OF-POSITIONS: condition name not declared (see data dictionary)",
+      "END IF",
+      "WHILE NOT end_of_positions DO  -- PERFORM UNTIL END-OF-POSITIONS (inline, test before)",
+      "  CALL 2110-format-position",
+      "  READ next record from POSITION-MASTER",
+      "  IF end of file THEN",
+      "    SET end_of_positions = TRUE",
+      "  END IF",
+      "END WHILE"
+    ],
+    "pseudocode_statement_ids": [["SYS-PORTFOLIO-001-FIL-0049-STMT-000020"], ["SYS-PORTFOLIO-001-FIL-0049-STMT-000020"], ["SYS-PORTFOLIO-001-FIL-0049-STMT-000043"], ["SYS-PORTFOLIO-001-FIL-0049-STMT-000020"], ["SYS-PORTFOLIO-001-FIL-0049-STMT-000021"], ["SYS-PORTFOLIO-001-FIL-0049-STMT-000044"], ["SYS-PORTFOLIO-001-FIL-0049-STMT-000045"], ["SYS-PORTFOLIO-001-FIL-0049-STMT-000045"], ["SYS-PORTFOLIO-001-FIL-0049-STMT-000046"], ["SYS-PORTFOLIO-001-FIL-0049-STMT-000045"], ["SYS-PORTFOLIO-001-FIL-0049-STMT-000021"]],
+    "pseudocode_text": "READ next record from POSITION-MASTER  -- priming read; no FD for POSITION-MASTER (COPY POSREC precedes any FD), so its record area is not declared\nIF end of file THEN\n  SET end_of_positions = TRUE  -- END-OF-POSITIONS: condition name not declared (see data dictionary)\nEND IF\nWHILE NOT end_of_positions DO  -- PERFORM UNTIL END-OF-POSITIONS (inline, test before)\n  CALL 2110-format-position\n  READ next record from POSITION-MASTER\n  IF end of file THEN\n    SET end_of_positions = TRUE\n  END IF\nEND WHILE",
+    "statement_ids": ["SYS-PORTFOLIO-001-FIL-0049-STMT-000020", "SYS-PORTFOLIO-001-FIL-0049-STMT-000043", "SYS-PORTFOLIO-001-FIL-0049-STMT-000021", "SYS-PORTFOLIO-001-FIL-0049-STMT-000044", "SYS-PORTFOLIO-001-FIL-0049-STMT-000045", "SYS-PORTFOLIO-001-FIL-0049-STMT-000046"],
+    "untranslated_statement_ids": [],
+    "field_references": ["END-OF-POSITIONS"],
+    "field_reference_ids": [{"name": "END-OF-POSITIONS", "qualifiers": [], "resolution": "UNRESOLVED", "target_id": null, "target_kind": null, "candidate_ids": []}],
+    "calls_made": ["2110-FORMAT-POSITION"],
+    "calls_made_ids": [{"name": "2110-FORMAT-POSITION", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0049-PAR-0007", "section_id": null}],
+    "complexity_score": 3, "has_unresolved_statements": false,
+    "annotations": [{"line": 126, "statement_id": "SYS-PORTFOLIO-001-FIL-0049-STMT-000021", "note": "Read-ahead loop: the first record is read before the loop, each iteration formats the current record and reads the next. END-OF-POSITIONS is undeclared, so the flag's data item is unknown.", "ambiguous": true}]
+  },
+  {
+    "name": "2110-FORMAT-POSITION", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0049-PAR-0007", "section": null, "section_id": null, "line_range": [133, 142],
+    "pseudocode": [
+      "-- Build and write one detail line for the current position record",
+      "SET detail_portfolio (WS-POS-PORTFOLIO) = portfolio_id (POS-PORTFOLIO-ID)",
+      "SET detail_description (WS-POS-DESCRIPTION) = position_description (POS-DESCRIPTION)  -- POS-DESCRIPTION not declared (see data dictionary)",
+      "SET detail_quantity (WS-POS-QUANTITY) = position_quantity (POS-QUANTITY)  -- edited for display",
+      "SET detail_value (WS-POS-VALUE) = current_value (POS-CURRENT-VALUE)  -- POS-CURRENT-VALUE not declared (see data dictionary)",
+      "COMPUTE detail_change_pct (WS-POS-CHANGE-PCT) = (current_value - previous_value) / previous_value * 100  -- POS-PREVIOUS-VALUE not declared; no divide-by-zero protection",
+      "WRITE detail_line (WS-POSITION-DETAIL) to REPORT-FILE via REPORT-RECORD"
+    ],
+    "pseudocode_statement_ids": [[], ["SYS-PORTFOLIO-001-FIL-0049-STMT-000022"], ["SYS-PORTFOLIO-001-FIL-0049-STMT-000023"], ["SYS-PORTFOLIO-001-FIL-0049-STMT-000024"], ["SYS-PORTFOLIO-001-FIL-0049-STMT-000025"], ["SYS-PORTFOLIO-001-FIL-0049-STMT-000026"], ["SYS-PORTFOLIO-001-FIL-0049-STMT-000027"]],
+    "pseudocode_text": "-- Build and write one detail line for the current position record\nSET detail_portfolio (WS-POS-PORTFOLIO) = portfolio_id (POS-PORTFOLIO-ID)\nSET detail_description (WS-POS-DESCRIPTION) = position_description (POS-DESCRIPTION)  -- POS-DESCRIPTION not declared (see data dictionary)\nSET detail_quantity (WS-POS-QUANTITY) = position_quantity (POS-QUANTITY)  -- edited for display\nSET detail_value (WS-POS-VALUE) = current_value (POS-CURRENT-VALUE)  -- POS-CURRENT-VALUE not declared (see data dictionary)\nCOMPUTE detail_change_pct (WS-POS-CHANGE-PCT) = (current_value - previous_value) / previous_value * 100  -- POS-PREVIOUS-VALUE not declared; no divide-by-zero protection\nWRITE detail_line (WS-POSITION-DETAIL) to REPORT-FILE via REPORT-RECORD",
+    "statement_ids": ["SYS-PORTFOLIO-001-FIL-0049-STMT-000022", "SYS-PORTFOLIO-001-FIL-0049-STMT-000023", "SYS-PORTFOLIO-001-FIL-0049-STMT-000024", "SYS-PORTFOLIO-001-FIL-0049-STMT-000025", "SYS-PORTFOLIO-001-FIL-0049-STMT-000026", "SYS-PORTFOLIO-001-FIL-0049-STMT-000027"],
+    "untranslated_statement_ids": [],
+    "field_references": ["POS-PORTFOLIO-ID", "WS-POS-PORTFOLIO", "POS-DESCRIPTION", "WS-POS-DESCRIPTION", "POS-QUANTITY", "WS-POS-QUANTITY", "POS-CURRENT-VALUE", "WS-POS-VALUE", "WS-POS-CHANGE-PCT", "POS-PREVIOUS-VALUE", "REPORT-RECORD", "WS-POSITION-DETAIL"],
+    "field_reference_ids": [
+      {"name": "POS-PORTFOLIO-ID", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0011-FLD-000002", "target_kind": "field", "candidate_ids": []},
+      {"name": "WS-POS-PORTFOLIO", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0049-FLD-000014", "target_kind": "field", "candidate_ids": []},
+      {"name": "POS-DESCRIPTION", "qualifiers": [], "resolution": "UNRESOLVED", "target_id": null, "target_kind": null, "candidate_ids": []},
+      {"name": "WS-POS-DESCRIPTION", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0049-FLD-000016", "target_kind": "field", "candidate_ids": []},
+      {"name": "POS-QUANTITY", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0011-FLD-000006", "target_kind": "field", "candidate_ids": []},
+      {"name": "WS-POS-QUANTITY", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0049-FLD-000018", "target_kind": "field", "candidate_ids": []},
+      {"name": "POS-CURRENT-VALUE", "qualifiers": [], "resolution": "UNRESOLVED", "target_id": null, "target_kind": null, "candidate_ids": []},
+      {"name": "WS-POS-VALUE", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0049-FLD-000020", "target_kind": "field", "candidate_ids": []},
+      {"name": "WS-POS-CHANGE-PCT", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0049-FLD-000022", "target_kind": "field", "candidate_ids": []},
+      {"name": "POS-PREVIOUS-VALUE", "qualifiers": [], "resolution": "UNRESOLVED", "target_id": null, "target_kind": null, "candidate_ids": []},
+      {"name": "REPORT-RECORD", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0049-REC-0001", "target_kind": "record", "candidate_ids": []},
+      {"name": "WS-POSITION-DETAIL", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0049-REC-0004", "target_kind": "record", "candidate_ids": []}
+    ],
+    "calls_made": [], "calls_made_ids": [],
+    "complexity_score": 1, "has_unresolved_statements": false,
+    "annotations": [
+      {"line": 135, "statement_id": "SYS-PORTFOLIO-001-FIL-0049-STMT-000023", "note": "POS-DESCRIPTION, POS-CURRENT-VALUE and POS-PREVIOUS-VALUE are not declared in POSREC (which declares POS-QUANTITY, POS-COST-BASIS, POS-MARKET-VALUE, POS-CURRENCY, POS-STATUS) or in the program; the source would not compile as written. Recorded verbatim; no substitute field is assumed.", "ambiguous": true},
+      {"line": 138, "statement_id": "SYS-PORTFOLIO-001-FIL-0049-STMT-000026", "note": "COMPUTE has no ROUNDED and no ON SIZE ERROR; a zero previous value would raise a size error that is not handled."}
+    ]
+  },
+  {
+    "name": "2200-PROCESS-TRANSACTIONS", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0049-PAR-0008", "section": null, "section_id": null, "line_range": [143, 146],
+    "pseudocode": [
+      "CALL 2210-read-transactions  !! UNRESOLVED: paragraph not present in source; logic unknown",
+      "CALL 2220-summarize-activity  !! UNRESOLVED: paragraph not present in source; logic unknown"
+    ],
+    "pseudocode_statement_ids": [["SYS-PORTFOLIO-001-FIL-0049-STMT-000028"], ["SYS-PORTFOLIO-001-FIL-0049-STMT-000029"]],
+    "pseudocode_text": "CALL 2210-read-transactions  !! UNRESOLVED: paragraph not present in source; logic unknown\nCALL 2220-summarize-activity  !! UNRESOLVED: paragraph not present in source; logic unknown",
+    "statement_ids": ["SYS-PORTFOLIO-001-FIL-0049-STMT-000028", "SYS-PORTFOLIO-001-FIL-0049-STMT-000029"],
+    "untranslated_statement_ids": [],
+    "field_references": [], "field_reference_ids": [],
+    "calls_made": ["2210-READ-TRANSACTIONS", "2220-SUMMARIZE-ACTIVITY"],
+    "calls_made_ids": [{"name": "2210-READ-TRANSACTIONS", "paragraph_id": null, "section_id": null}, {"name": "2220-SUMMARIZE-ACTIVITY", "paragraph_id": null, "section_id": null}],
+    "complexity_score": 1, "has_unresolved_statements": true,
+    "annotations": [{"line": 144, "note": "Both PERFORM targets are missing from the program; the transaction-activity part of the report cannot be traced (partial pseudocode)."}]
+  },
+  {
+    "name": "2300-WRITE-SUMMARY", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0049-PAR-0009", "section": null, "section_id": null, "line_range": [147, 151],
+    "pseudocode": [
+      "CALL 2310-write-totals  !! UNRESOLVED: paragraph not present in source; logic unknown",
+      "CALL 2320-write-exceptions  !! UNRESOLVED: paragraph not present in source; logic unknown",
+      "CALL 2330-write-metrics  !! UNRESOLVED: paragraph not present in source; logic unknown"
+    ],
+    "pseudocode_statement_ids": [["SYS-PORTFOLIO-001-FIL-0049-STMT-000030"], ["SYS-PORTFOLIO-001-FIL-0049-STMT-000031"], ["SYS-PORTFOLIO-001-FIL-0049-STMT-000032"]],
+    "pseudocode_text": "CALL 2310-write-totals  !! UNRESOLVED: paragraph not present in source; logic unknown\nCALL 2320-write-exceptions  !! UNRESOLVED: paragraph not present in source; logic unknown\nCALL 2330-write-metrics  !! UNRESOLVED: paragraph not present in source; logic unknown",
+    "statement_ids": ["SYS-PORTFOLIO-001-FIL-0049-STMT-000030", "SYS-PORTFOLIO-001-FIL-0049-STMT-000031", "SYS-PORTFOLIO-001-FIL-0049-STMT-000032"],
+    "untranslated_statement_ids": [],
+    "field_references": [], "field_reference_ids": [],
+    "calls_made": ["2310-WRITE-TOTALS", "2320-WRITE-EXCEPTIONS", "2330-WRITE-METRICS"],
+    "calls_made_ids": [{"name": "2310-WRITE-TOTALS", "paragraph_id": null, "section_id": null}, {"name": "2320-WRITE-EXCEPTIONS", "paragraph_id": null, "section_id": null}, {"name": "2330-WRITE-METRICS", "paragraph_id": null, "section_id": null}],
+    "complexity_score": 1, "has_unresolved_statements": true,
+    "annotations": [{"line": 148, "note": "All three PERFORM targets are missing from the program; the totals, exceptions and metrics sections of the report cannot be traced (partial pseudocode)."}]
+  },
+  {
+    "name": "3000-CLEANUP", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0049-PAR-0010", "section": null, "section_id": null, "line_range": [152, 156],
+    "pseudocode": [
+      "CLOSE POSITION-MASTER, TRANSACTION-HISTORY, REPORT-FILE"
+    ],
+    "pseudocode_statement_ids": [["SYS-PORTFOLIO-001-FIL-0049-STMT-000033"]],
+    "pseudocode_text": "CLOSE POSITION-MASTER, TRANSACTION-HISTORY, REPORT-FILE",
+    "statement_ids": ["SYS-PORTFOLIO-001-FIL-0049-STMT-000033"],
+    "untranslated_statement_ids": [],
+    "field_references": [], "field_reference_ids": [],
+    "calls_made": [], "calls_made_ids": [],
+    "complexity_score": 1, "has_unresolved_statements": false, "annotations": []
+  },
+  {
+    "name": "9999-ERROR-HANDLER", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0049-PAR-0011", "section": null, "section_id": null, "line_range": [157, 160],
+    "pseudocode": [
+      "DISPLAY error_message (WS-ERROR-MESSAGE)  -- to the job log / console",
+      "SET RETURN-CODE = 12  -- severe error return code for the job step",
+      "RETURN to caller  -- GOBACK: ends the program; files are not closed"
+    ],
+    "pseudocode_statement_ids": [["SYS-PORTFOLIO-001-FIL-0049-STMT-000034"], ["SYS-PORTFOLIO-001-FIL-0049-STMT-000035"], ["SYS-PORTFOLIO-001-FIL-0049-STMT-000036"]],
+    "pseudocode_text": "DISPLAY error_message (WS-ERROR-MESSAGE)  -- to the job log / console\nSET RETURN-CODE = 12  -- severe error return code for the job step\nRETURN to caller  -- GOBACK: ends the program; files are not closed",
+    "statement_ids": ["SYS-PORTFOLIO-001-FIL-0049-STMT-000034", "SYS-PORTFOLIO-001-FIL-0049-STMT-000035", "SYS-PORTFOLIO-001-FIL-0049-STMT-000036"],
+    "untranslated_statement_ids": [],
+    "field_references": ["WS-ERROR-MESSAGE"],
+    "field_reference_ids": [{"name": "WS-ERROR-MESSAGE", "qualifiers": [], "resolution": "UNRESOLVED", "target_id": null, "target_kind": null, "candidate_ids": []}],
+    "calls_made": [], "calls_made_ids": [],
+    "complexity_score": 1, "has_unresolved_statements": false,
+    "annotations": [{"line": 159, "note": "RETURN-CODE is the COBOL special register passed back to the operating system; not looked up as a data item."}]
+  }
+],
+"unresolved_statements": [
+  {"statement_id": "SYS-PORTFOLIO-001-FIL-0049-STMT-000028", "paragraph": "2200-PROCESS-TRANSACTIONS", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0049-PAR-0008", "line": 144, "source_text": "PERFORM 2210-READ-TRANSACTIONS", "reason": "target paragraph not present in source; called logic unknown"},
+  {"statement_id": "SYS-PORTFOLIO-001-FIL-0049-STMT-000029", "paragraph": "2200-PROCESS-TRANSACTIONS", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0049-PAR-0008", "line": 145, "source_text": "PERFORM 2220-SUMMARIZE-ACTIVITY", "reason": "target paragraph not present in source; called logic unknown"},
+  {"statement_id": "SYS-PORTFOLIO-001-FIL-0049-STMT-000030", "paragraph": "2300-WRITE-SUMMARY", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0049-PAR-0009", "line": 148, "source_text": "PERFORM 2310-WRITE-TOTALS", "reason": "target paragraph not present in source; called logic unknown"},
+  {"statement_id": "SYS-PORTFOLIO-001-FIL-0049-STMT-000031", "paragraph": "2300-WRITE-SUMMARY", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0049-PAR-0009", "line": 149, "source_text": "PERFORM 2320-WRITE-EXCEPTIONS", "reason": "target paragraph not present in source; called logic unknown"},
+  {"statement_id": "SYS-PORTFOLIO-001-FIL-0049-STMT-000032", "paragraph": "2300-WRITE-SUMMARY", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0049-PAR-0009", "line": 150, "source_text": "PERFORM 2330-WRITE-METRICS", "reason": "target paragraph not present in source; called logic unknown"}
+],
+"pseudocode_issues": [
+  {"severity": "info", "type": "id_unresolved", "kind": "field", "name": "WS-ERROR-MESSAGE", "paragraphs": ["1100-OPEN-FILES", "9999-ERROR-HANDLER"], "message": "resolve-field-references UNRESOLVED; target_id null."},
+  {"severity": "info", "type": "id_unresolved", "kind": "field", "name": "END-OF-POSITIONS", "paragraphs": ["2100-READ-POSITIONS"], "message": "resolve-field-references UNRESOLVED; target_id null."},
+  {"severity": "info", "type": "id_unresolved", "kind": "field", "name": "POS-DESCRIPTION", "paragraphs": ["2110-FORMAT-POSITION"], "message": "resolve-field-references UNRESOLVED; target_id null."},
+  {"severity": "info", "type": "id_unresolved", "kind": "field", "name": "POS-CURRENT-VALUE", "paragraphs": ["2110-FORMAT-POSITION"], "message": "resolve-field-references UNRESOLVED; target_id null."},
+  {"severity": "info", "type": "id_unresolved", "kind": "field", "name": "POS-PREVIOUS-VALUE", "paragraphs": ["2110-FORMAT-POSITION"], "message": "resolve-field-references UNRESOLVED; target_id null."},
+  {"severity": "info", "type": "id_unresolved", "kind": "paragraph", "name": "2210-READ-TRANSACTIONS", "statement_id": "SYS-PORTFOLIO-001-FIL-0049-STMT-000028", "message": "calls_made target has no Paragraph ID (CFG edge unresolved)."},
+  {"severity": "info", "type": "id_unresolved", "kind": "paragraph", "name": "2220-SUMMARIZE-ACTIVITY", "statement_id": "SYS-PORTFOLIO-001-FIL-0049-STMT-000029", "message": "calls_made target has no Paragraph ID (CFG edge unresolved)."},
+  {"severity": "info", "type": "id_unresolved", "kind": "paragraph", "name": "2310-WRITE-TOTALS", "statement_id": "SYS-PORTFOLIO-001-FIL-0049-STMT-000030", "message": "calls_made target has no Paragraph ID (CFG edge unresolved)."},
+  {"severity": "info", "type": "id_unresolved", "kind": "paragraph", "name": "2320-WRITE-EXCEPTIONS", "statement_id": "SYS-PORTFOLIO-001-FIL-0049-STMT-000031", "message": "calls_made target has no Paragraph ID (CFG edge unresolved)."},
+  {"severity": "info", "type": "id_unresolved", "kind": "paragraph", "name": "2330-WRITE-METRICS", "statement_id": "SYS-PORTFOLIO-001-FIL-0049-STMT-000032", "message": "calls_made target has no Paragraph ID (CFG edge unresolved)."},
+  {"severity": "info", "type": "condition_not_expressible", "line": 126, "message": "END-OF-POSITIONS has no declaration; used as-is with '-- see data dictionary'."},
+  {"severity": "warning", "type": "possible_divide_by_zero", "line": 138, "statement_id": "SYS-PORTFOLIO-001-FIL-0049-STMT-000026", "message": "COMPUTE divides by POS-PREVIOUS-VALUE with no ON SIZE ERROR clause and no zero test; recorded as written."}
+]
+}

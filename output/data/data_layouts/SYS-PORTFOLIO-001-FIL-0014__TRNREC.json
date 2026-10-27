@@ -1,0 +1,54 @@
+{
+  "id": "TRNREC",
+  "source_type": "copybook",
+  "source_file": "src/copybook/common/TRNREC.cpy",
+  "used_by_programs": ["RPTPOS00", "PORTTRAN", "TSTGEN00", "UTLVAL00"],
+  "total_fields": 25,
+  "total_bytes": 152,
+  "system_id": "SYS-PORTFOLIO-001",
+  "file_id": "SYS-PORTFOLIO-001-FIL-0014",
+  "path_id": "SYS-PORTFOLIO-001-PATH-0014",
+  "data_run_id": "DRUN-20261024T215053Z-ACC1",
+  "records": [
+    {
+      "record_id": "SYS-PORTFOLIO-001-FIL-0014-REC-0001",
+      "section": "COPYBOOK", "is_fragment": false, "level": 1, "name": "TRANSACTION-RECORD",
+      "pic": null, "type": "GROUP", "storage_type": "DISPLAY", "bytes": 152, "total_bytes": 152, "inline_bytes": 152,
+      "redefines": null, "occurs": null, "value": null, "line": 6, "end_line": 31,
+      "children": [
+        {"field_id": "SYS-PORTFOLIO-001-FIL-0014-FLD-000001", "path": "TRN-KEY", "level": 5, "name": "TRN-KEY", "pic": null, "type": "GROUP", "bytes": 28, "redefines": null, "occurs": null, "value": null, "line": 7, "children": [
+          {"field_id": "SYS-PORTFOLIO-001-FIL-0014-FLD-000002", "path": "TRN-KEY.TRN-DATE", "level": 10, "name": "TRN-DATE", "pic": "X(08)", "pic_parsed": {"raw": "X(08)", "normalized_type": "STRING", "length": 8, "decimal_places": 0, "signed": false, "storage_type": "DISPLAY"}, "bytes": 8, "redefines": null, "occurs": null, "value": null, "line": 8, "children": []},
+          {"field_id": "SYS-PORTFOLIO-001-FIL-0014-FLD-000003", "path": "TRN-KEY.TRN-TIME", "level": 10, "name": "TRN-TIME", "pic": "X(06)", "pic_parsed": {"raw": "X(06)", "normalized_type": "STRING", "length": 6, "decimal_places": 0, "signed": false, "storage_type": "DISPLAY"}, "bytes": 6, "redefines": null, "occurs": null, "value": null, "line": 9, "children": []},
+          {"field_id": "SYS-PORTFOLIO-001-FIL-0014-FLD-000004", "path": "TRN-KEY.TRN-PORTFOLIO-ID", "level": 10, "name": "TRN-PORTFOLIO-ID", "pic": "X(08)", "pic_parsed": {"raw": "X(08)", "normalized_type": "STRING", "length": 8, "decimal_places": 0, "signed": false, "storage_type": "DISPLAY"}, "bytes": 8, "redefines": null, "occurs": null, "value": null, "line": 10, "children": []},
+          {"field_id": "SYS-PORTFOLIO-001-FIL-0014-FLD-000005", "path": "TRN-KEY.TRN-SEQUENCE-NO", "level": 10, "name": "TRN-SEQUENCE-NO", "pic": "X(06)", "pic_parsed": {"raw": "X(06)", "normalized_type": "STRING", "length": 6, "decimal_places": 0, "signed": false, "storage_type": "DISPLAY"}, "bytes": 6, "redefines": null, "occurs": null, "value": null, "line": 11, "children": []}
+        ]},
+        {"field_id": "SYS-PORTFOLIO-001-FIL-0014-FLD-000006", "path": "TRN-DATA", "level": 5, "name": "TRN-DATA", "pic": null, "type": "GROUP", "bytes": 40, "redefines": null, "occurs": null, "value": null, "line": 12, "children": [
+          {"field_id": "SYS-PORTFOLIO-001-FIL-0014-FLD-000007", "path": "TRN-DATA.TRN-INVESTMENT-ID", "level": 10, "name": "TRN-INVESTMENT-ID", "pic": "X(10)", "pic_parsed": {"raw": "X(10)", "normalized_type": "STRING", "length": 10, "decimal_places": 0, "signed": false, "storage_type": "DISPLAY"}, "bytes": 10, "redefines": null, "occurs": null, "value": null, "line": 13, "children": []},
+          {"field_id": "SYS-PORTFOLIO-001-FIL-0014-FLD-000008", "path": "TRN-DATA.TRN-TYPE", "level": 10, "name": "TRN-TYPE", "pic": "X(02)", "pic_parsed": {"raw": "X(02)", "normalized_type": "STRING", "length": 2, "decimal_places": 0, "signed": false, "storage_type": "DISPLAY"}, "bytes": 2, "redefines": null, "occurs": null, "value": null, "line": 14, "children": [
+            {"field_id": "SYS-PORTFOLIO-001-FIL-0014-FLD-000009", "path": "TRN-DATA.TRN-TYPE.TRN-TYPE-BUY", "level": 88, "name": "TRN-TYPE-BUY", "pic": null, "type": "CONDITION", "parent_field": "TRN-TYPE", "values": ["BU"], "values_raw": "'BU'", "line": 15, "children": []},
+            {"field_id": "SYS-PORTFOLIO-001-FIL-0014-FLD-000010", "path": "TRN-DATA.TRN-TYPE.TRN-TYPE-SELL", "level": 88, "name": "TRN-TYPE-SELL", "pic": null, "type": "CONDITION", "parent_field": "TRN-TYPE", "values": ["SL"], "values_raw": "'SL'", "line": 16, "children": []},
+            {"field_id": "SYS-PORTFOLIO-001-FIL-0014-FLD-000011", "path": "TRN-DATA.TRN-TYPE.TRN-TYPE-TRANS", "level": 88, "name": "TRN-TYPE-TRANS", "pic": null, "type": "CONDITION", "parent_field": "TRN-TYPE", "values": ["TR"], "values_raw": "'TR'", "line": 17, "children": []},
+            {"field_id": "SYS-PORTFOLIO-001-FIL-0014-FLD-000012", "path": "TRN-DATA.TRN-TYPE.TRN-TYPE-FEE", "level": 88, "name": "TRN-TYPE-FEE", "pic": null, "type": "CONDITION", "parent_field": "TRN-TYPE", "values": ["FE"], "values_raw": "'FE'", "line": 18, "children": []}
+          ]},
+          {"field_id": "SYS-PORTFOLIO-001-FIL-0014-FLD-000013", "path": "TRN-DATA.TRN-QUANTITY", "level": 10, "name": "TRN-QUANTITY", "pic": "S9(11)V9(4) COMP-3", "pic_parsed": {"raw": "S9(11)V9(4) COMP-3", "normalized_type": "SIGNED_DECIMAL", "length": 15, "decimal_places": 4, "signed": true, "storage_type": "PACKED_DECIMAL"}, "bytes": 8, "redefines": null, "occurs": null, "value": null, "line": 19, "children": []},
+          {"field_id": "SYS-PORTFOLIO-001-FIL-0014-FLD-000014", "path": "TRN-DATA.TRN-PRICE", "level": 10, "name": "TRN-PRICE", "pic": "S9(11)V9(4) COMP-3", "pic_parsed": {"raw": "S9(11)V9(4) COMP-3", "normalized_type": "SIGNED_DECIMAL", "length": 15, "decimal_places": 4, "signed": true, "storage_type": "PACKED_DECIMAL"}, "bytes": 8, "redefines": null, "occurs": null, "value": null, "line": 20, "children": []},
+          {"field_id": "SYS-PORTFOLIO-001-FIL-0014-FLD-000015", "path": "TRN-DATA.TRN-AMOUNT", "level": 10, "name": "TRN-AMOUNT", "pic": "S9(13)V9(2) COMP-3", "pic_parsed": {"raw": "S9(13)V9(2) COMP-3", "normalized_type": "SIGNED_DECIMAL", "length": 15, "decimal_places": 2, "signed": true, "storage_type": "PACKED_DECIMAL"}, "bytes": 8, "redefines": null, "occurs": null, "value": null, "line": 21, "children": []},
+          {"field_id": "SYS-PORTFOLIO-001-FIL-0014-FLD-000016", "path": "TRN-DATA.TRN-CURRENCY", "level": 10, "name": "TRN-CURRENCY", "pic": "X(03)", "pic_parsed": {"raw": "X(03)", "normalized_type": "STRING", "length": 3, "decimal_places": 0, "signed": false, "storage_type": "DISPLAY"}, "bytes": 3, "redefines": null, "occurs": null, "value": null, "line": 22, "children": []},
+          {"field_id": "SYS-PORTFOLIO-001-FIL-0014-FLD-000017", "path": "TRN-DATA.TRN-STATUS", "level": 10, "name": "TRN-STATUS", "pic": "X(01)", "pic_parsed": {"raw": "X(01)", "normalized_type": "STRING", "length": 1, "decimal_places": 0, "signed": false, "storage_type": "DISPLAY"}, "bytes": 1, "redefines": null, "occurs": null, "value": null, "line": 23, "children": [
+            {"field_id": "SYS-PORTFOLIO-001-FIL-0014-FLD-000018", "path": "TRN-DATA.TRN-STATUS.TRN-STATUS-PEND", "level": 88, "name": "TRN-STATUS-PEND", "pic": null, "type": "CONDITION", "parent_field": "TRN-STATUS", "values": ["P"], "values_raw": "'P'", "line": 24, "children": []},
+            {"field_id": "SYS-PORTFOLIO-001-FIL-0014-FLD-000019", "path": "TRN-DATA.TRN-STATUS.TRN-STATUS-DONE", "level": 88, "name": "TRN-STATUS-DONE", "pic": null, "type": "CONDITION", "parent_field": "TRN-STATUS", "values": ["D"], "values_raw": "'D'", "line": 25, "children": []},
+            {"field_id": "SYS-PORTFOLIO-001-FIL-0014-FLD-000020", "path": "TRN-DATA.TRN-STATUS.TRN-STATUS-FAIL", "level": 88, "name": "TRN-STATUS-FAIL", "pic": null, "type": "CONDITION", "parent_field": "TRN-STATUS", "values": ["F"], "values_raw": "'F'", "line": 26, "children": []},
+            {"field_id": "SYS-PORTFOLIO-001-FIL-0014-FLD-000021", "path": "TRN-DATA.TRN-STATUS.TRN-STATUS-REV", "level": 88, "name": "TRN-STATUS-REV", "pic": null, "type": "CONDITION", "parent_field": "TRN-STATUS", "values": ["R"], "values_raw": "'R'", "line": 27, "children": []}
+          ]}
+        ]},
+        {"field_id": "SYS-PORTFOLIO-001-FIL-0014-FLD-000022", "path": "TRN-AUDIT", "level": 5, "name": "TRN-AUDIT", "pic": null, "type": "GROUP", "bytes": 34, "redefines": null, "occurs": null, "value": null, "line": 28, "children": [
+          {"field_id": "SYS-PORTFOLIO-001-FIL-0014-FLD-000023", "path": "TRN-AUDIT.TRN-PROCESS-DATE", "level": 10, "name": "TRN-PROCESS-DATE", "pic": "X(26)", "pic_parsed": {"raw": "X(26)", "normalized_type": "STRING", "length": 26, "decimal_places": 0, "signed": false, "storage_type": "DISPLAY"}, "bytes": 26, "redefines": null, "occurs": null, "value": null, "line": 29, "children": []},
+          {"field_id": "SYS-PORTFOLIO-001-FIL-0014-FLD-000024", "path": "TRN-AUDIT.TRN-PROCESS-USER", "level": 10, "name": "TRN-PROCESS-USER", "pic": "X(08)", "pic_parsed": {"raw": "X(08)", "normalized_type": "STRING", "length": 8, "decimal_places": 0, "signed": false, "storage_type": "DISPLAY"}, "bytes": 8, "redefines": null, "occurs": null, "value": null, "line": 30, "children": []}
+        ]},
+        {"field_id": "SYS-PORTFOLIO-001-FIL-0014-FLD-000025", "path": "TRN-FILLER", "level": 5, "name": "TRN-FILLER", "pic": "X(50)", "pic_parsed": {"raw": "X(50)", "normalized_type": "STRING", "length": 50, "decimal_places": 0, "signed": false, "storage_type": "DISPLAY"}, "bytes": 50, "redefines": null, "occurs": null, "value": null, "line": 31, "children": []}
+      ]
+    }
+  ],
+  "copy_expansions": [],
+  "layout_issues": []
+}

@@ -1,0 +1,342 @@
+{
+"program_summary": {"program_id": "ERRPROC", "file_id": "SYS-PORTFOLIO-001-FIL-0058", "logic_file": "program_logic/SYS-PORTFOLIO-001-FIL-0058__ERRPROC_logic.json", "logic_status": "success", "paragraphs_translated": 6, "execution_paths": 1, "branches": 2, "loops": 0, "dead_code_confirmed": 0, "goto_annotations": 0, "unresolvable_paths": 0, "unresolved_ids": 0},
+"meta": {"generated_at": "2026-10-26T16:54:24Z", "agent_version": "4_logic@1.0", "source_artifacts": ["output/parser/parser_artifact.json", "output/parser/raw_structure/SYS-PORTFOLIO-001-FIL-0058__ERRPROC.json", "output/data/data_artifact.json", "output/data/data_layouts/SYS-PORTFOLIO-001-FIL-0058__ERRPROC_WS.json", "output/data/data_layouts/SYS-PORTFOLIO-001-FIL-0007__ERRHAND.json"], "neo4j_access": "read-only"},
+"program_id": "ERRPROC",
+"system_id": "SYS-PORTFOLIO-001",
+"file_id": "SYS-PORTFOLIO-001-FIL-0058",
+"path_id": "SYS-PORTFOLIO-001-PATH-0058",
+"relative_path": "src/programs/common/ERRPROC.cbl",
+"parse_run_id": "PRUN-20261023T023803Z-ACC2",
+"data_run_id": "DRUN-20261024T215053Z-ACC1",
+"upstream": {
+  "verification": {
+    "verdict": "VALID",
+    "verdict_reasons": ["V2, V3, V4 consistent; Agent 2 parse_status 'success'; copybook layout ERRHAND present and consistent; no unresolved copy stubs"],
+    "v1": {"raw_structure": "present", "parse_status": "success", "program_layout": "present", "copybook_layouts": [{"copybook": "ERRHAND", "copybook_file_id": "SYS-PORTFOLIO-001-FIL-0007", "layout": "present", "expanded_at_lines": [31]}], "unresolved_copy_stubs": 0},
+    "v2_file_identities": {
+      "program_entries": {"require_completed": ["parser", "data"], "entries": ["raw_structure|SYS-PORTFOLIO-001-FIL-0058", "data_layout|SYS-PORTFOLIO-001-FIL-0058"], "result": "batched with PORTUPDT, PORTVALD and FILEHNDL program entries: checked 8, ok 8, problems [], duplicates [], consistent true"},
+      "copybook_entries": {"require_completed": ["data"], "entries": ["data_layout|SYS-PORTFOLIO-001-FIL-0007"], "result": "batched with copybooks FIL-0009 and FIL-0010: checked 3, ok 3, problems [], duplicates [], consistent true"},
+      "consistent": true
+    },
+    "v3_structure_identities": {"sections_checked": 5, "paragraphs_checked": 6, "statements_checked": 33, "edges_checked": 5, "registered_edges": 5, "section_problems": [], "paragraph_problems": [], "statement_problems": [], "edge_problems": [], "invalid_registered_edges": [], "registered_not_in_json": {"missing_count": 0}, "duplicate_ids_in_json": [], "consistent": true, "note": "section names sent for SEC-0001 CONFIGURATION and SEC-0002 INPUT-OUTPUT; null for the data-division sections (raw_structure does not carry their names)"},
+    "v4_data_identities": [
+      {"file_id": "SYS-PORTFOLIO-001-FIL-0058", "layout": "program", "records_checked": 3, "fields_checked": 10, "expansions_checked": 1, "record_problems": [], "field_problems": [], "expansion_problems": [], "copybook_records_in_program": 0, "registered_not_in_json": {"missing_count": 0}, "duplicate_ids_in_json": [], "consistent": true, "note": "copy_expansions holder_id is null in the layout (section-level COPY); the entry's section_id SYS-PORTFOLIO-001-FIL-0058-SEC-0004 from the same layout entry was sent as holder_id"},
+      {"file_id": "SYS-PORTFOLIO-001-FIL-0007", "layout": "copybook ERRHAND", "records_checked": 5, "fields_checked": 25, "expansions_checked": 0, "record_problems": [], "field_problems": [], "expansion_problems": [], "copybook_records_in_program": 0, "registered_not_in_json": {"missing_count": 0}, "duplicate_ids_in_json": [], "consistent": true}
+    ]
+  }
+},
+"execution_traces": [
+  {
+    "entry_point": "0000-MAIN",
+    "entry_point_id": "SYS-PORTFOLIO-001-FIL-0058-PAR-0001",
+    "entry_type": "batch_subprogram",
+    "entry_note": "PROCEDURE DIVISION USING LS-ERROR-REQUEST (line 47); the program returns to its caller with GOBACK (line 52). Steps are listed in execution order, following each PERFORM into its target paragraph.",
+    "steps": [
+      {"step": 1, "paragraph": "0000-MAIN", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0058-PAR-0001", "action": "PERFORM", "target": "1000-INITIALIZE", "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0058-PAR-0002", "target_section_id": null, "condition": null, "line": 49, "statement_id": "SYS-PORTFOLIO-001-FIL-0058-STMT-000001"},
+      {"step": 2, "paragraph": "1000-INITIALIZE", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0058-PAR-0002", "action": "IF", "target": null, "target_paragraph_id": null, "target_section_id": null,
+       "condition": {"text": "WS-LOG-STATUS NOT = '00'", "fields": ["WS-LOG-STATUS"], "field_ids": [{"name": "WS-LOG-STATUS", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0058-FLD-000002", "target_kind": "field", "candidate_ids": []}]},
+       "line": 60, "statement_id": "SYS-PORTFOLIO-001-FIL-0058-STMT-000008"},
+      {"step": 3, "paragraph": "0000-MAIN", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0058-PAR-0001", "action": "PERFORM", "target": "2000-PROCESS-ERROR", "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0058-PAR-0003", "target_section_id": null, "condition": null, "line": 50, "statement_id": "SYS-PORTFOLIO-001-FIL-0058-STMT-000002"},
+      {"step": 4, "paragraph": "2000-PROCESS-ERROR", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0058-PAR-0003", "action": "PERFORM", "target": "2100-WRITE-LOG", "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0058-PAR-0004", "target_section_id": null, "condition": null, "line": 77, "statement_id": "SYS-PORTFOLIO-001-FIL-0058-STMT-000016"},
+      {"step": 5, "paragraph": "2100-WRITE-LOG", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0058-PAR-0004", "action": "IF", "target": null, "target_paragraph_id": null, "target_section_id": null,
+       "condition": {"text": "WS-LOG-STATUS NOT = '00'", "fields": ["WS-LOG-STATUS"], "field_ids": [{"name": "WS-LOG-STATUS", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0058-FLD-000002", "target_kind": "field", "candidate_ids": []}]},
+       "line": 88, "statement_id": "SYS-PORTFOLIO-001-FIL-0058-STMT-000021"},
+      {"step": 6, "paragraph": "2000-PROCESS-ERROR", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0058-PAR-0003", "action": "PERFORM", "target": "2200-DISPLAY-ERROR", "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0058-PAR-0005", "target_section_id": null, "condition": null, "line": 78, "statement_id": "SYS-PORTFOLIO-001-FIL-0058-STMT-000017"},
+      {"step": 7, "paragraph": "0000-MAIN", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0058-PAR-0001", "action": "PERFORM", "target": "3000-TERMINATE", "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0058-PAR-0006", "target_section_id": null, "condition": null, "line": 51, "statement_id": "SYS-PORTFOLIO-001-FIL-0058-STMT-000003"},
+      {"step": 8, "paragraph": "0000-MAIN", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0058-PAR-0001", "action": "GOBACK", "target": null, "target_paragraph_id": null, "target_section_id": null, "condition": null, "line": 52, "statement_id": "SYS-PORTFOLIO-001-FIL-0058-STMT-000004"}
+    ]
+  }
+],
+"branch_map": [
+  {
+    "paragraph": "1000-INITIALIZE",
+    "paragraph_id": "SYS-PORTFOLIO-001-FIL-0058-PAR-0002",
+    "branches": [
+      {"type": "IF", "line": 60, "statement_id": "SYS-PORTFOLIO-001-FIL-0058-STMT-000008", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0058-PAR-0002",
+       "condition_text": "WS-LOG-STATUS NOT = '00'", "condition_fields": ["WS-LOG-STATUS"],
+       "condition_field_ids": [{"name": "WS-LOG-STATUS", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0058-FLD-000002", "target_kind": "field", "candidate_ids": []}],
+       "has_else": false, "then_line_range": [61, 61], "else_line_range": null, "end_if_line": 62, "nested_depth": 1,
+       "outcomes": [
+         {"label": "THEN", "line_range": [61, 61], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0058-STMT-000032"]},
+         {"label": "ELSE (implicit, no statements)", "line_range": null, "statement_ids": []}
+       ]}
+    ]
+  },
+  {
+    "paragraph": "2100-WRITE-LOG",
+    "paragraph_id": "SYS-PORTFOLIO-001-FIL-0058-PAR-0004",
+    "branches": [
+      {"type": "IF", "line": 88, "statement_id": "SYS-PORTFOLIO-001-FIL-0058-STMT-000021", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0058-PAR-0004",
+       "condition_text": "WS-LOG-STATUS NOT = '00'", "condition_fields": ["WS-LOG-STATUS"],
+       "condition_field_ids": [{"name": "WS-LOG-STATUS", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0058-FLD-000002", "target_kind": "field", "candidate_ids": []}],
+       "has_else": false, "then_line_range": [89, 89], "else_line_range": null, "end_if_line": 90, "nested_depth": 1,
+       "outcomes": [
+         {"label": "THEN", "line_range": [89, 89], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0058-STMT-000033"]},
+         {"label": "ELSE (implicit, no statements)", "line_range": null, "statement_ids": []}
+       ]}
+    ]
+  }
+],
+"loops": [],
+"dead_code_confirmed": [],
+"unresolvable_paths": [],
+"trace_issues": [
+  {"severity": "info", "type": "upstream_issue", "upstream_agent": "3_data", "upstream_type": "copy_expansion_section_level", "line": 31, "message": "COPY ERRHAND (line 31) sits directly under the WORKING-STORAGE SECTION, outside any 01 record; its 5 records are linked by EXPANDS_COPY from section SYS-PORTFOLIO-001-FIL-0058-SEC-0004."},
+  {"severity": "info", "type": "io_status_not_abortive", "line": 60, "statement_id": "SYS-PORTFOLIO-001-FIL-0058-STMT-000008", "message": "When OPEN EXTEND ERROR-LOG fails, the program only displays the status; 2000-PROCESS-ERROR still runs and WRITE ERROR-LOG-RECORD is attempted on an unopened file."}
+],
+"program_narrative": "Program ERRPROC is a batch subprogram (standard error processing subroutine) that receives an error request LS-ERROR-REQUEST from its caller and returns with GOBACK. It opens the sequential file ERROR-LOG in extend (append) mode, captures a timestamp, and copies the caller's program ID, category, error code, severity, text and details into the ERR-MESSAGE record from copybook ERRHAND. It writes ERR-MESSAGE as one ERROR-LOG record, displays the same error details on the console between separator lines, and sets the caller's LS-RETURN-CODE to the requested severity. There is no loop. Error conditions handled: a non-'00' file status after OPEN or after WRITE is only displayed; processing is not stopped.",
+"paragraphs": [
+  {
+    "name": "0000-MAIN",
+    "paragraph_id": "SYS-PORTFOLIO-001-FIL-0058-PAR-0001",
+    "section": null,
+    "section_id": null,
+    "line_range": [48, 54],
+    "pseudocode": [
+      "-- Entry: caller passes error_request (LS-ERROR-REQUEST) (PROCEDURE DIVISION USING, line 47)",
+      "CALL 1000-initialize",
+      "CALL 2000-process-error",
+      "CALL 3000-terminate",
+      "RETURN to caller  -- GOBACK"
+    ],
+    "pseudocode_statement_ids": [
+      [],
+      ["SYS-PORTFOLIO-001-FIL-0058-STMT-000001"],
+      ["SYS-PORTFOLIO-001-FIL-0058-STMT-000002"],
+      ["SYS-PORTFOLIO-001-FIL-0058-STMT-000003"],
+      ["SYS-PORTFOLIO-001-FIL-0058-STMT-000004"]
+    ],
+    "pseudocode_text": "-- Entry: caller passes error_request (LS-ERROR-REQUEST) (PROCEDURE DIVISION USING, line 47)\nCALL 1000-initialize\nCALL 2000-process-error\nCALL 3000-terminate\nRETURN to caller  -- GOBACK",
+    "statement_ids": ["SYS-PORTFOLIO-001-FIL-0058-STMT-000001", "SYS-PORTFOLIO-001-FIL-0058-STMT-000002", "SYS-PORTFOLIO-001-FIL-0058-STMT-000003", "SYS-PORTFOLIO-001-FIL-0058-STMT-000004"],
+    "untranslated_statement_ids": [],
+    "field_references": ["LS-ERROR-REQUEST"],
+    "field_reference_ids": [
+      {"name": "LS-ERROR-REQUEST", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0058-REC-0003", "target_kind": "record", "candidate_ids": []}
+    ],
+    "calls_made": ["1000-INITIALIZE", "2000-PROCESS-ERROR", "3000-TERMINATE"],
+    "calls_made_ids": [
+      {"name": "1000-INITIALIZE", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0058-PAR-0002", "section_id": null},
+      {"name": "2000-PROCESS-ERROR", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0058-PAR-0003", "section_id": null},
+      {"name": "3000-TERMINATE", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0058-PAR-0006", "section_id": null}
+    ],
+    "complexity_score": 1,
+    "has_unresolved_statements": false,
+    "annotations": []
+  },
+  {
+    "name": "1000-INITIALIZE",
+    "paragraph_id": "SYS-PORTFOLIO-001-FIL-0058-PAR-0002",
+    "section": null,
+    "section_id": null,
+    "line_range": [55, 64],
+    "pseudocode": [
+      "CLEAR work_areas (WS-WORK-AREAS)  -- INITIALIZE: log_status and formatted_time set to spaces",
+      "SET formatted_time (WS-FORMATTED-TIME) = current timestamp  -- ACCEPT ... FROM TIME STAMP",
+      "OPEN ERROR-LOG for APPEND  -- OPEN EXTEND: new records are added after the existing ones",
+      "IF log_status (WS-LOG-STATUS) != '00' THEN",
+      "  DISPLAY 'Error opening log file: ' + log_status",
+      "END IF  -- processing continues even when the open failed"
+    ],
+    "pseudocode_statement_ids": [
+      ["SYS-PORTFOLIO-001-FIL-0058-STMT-000005"],
+      ["SYS-PORTFOLIO-001-FIL-0058-STMT-000006"],
+      ["SYS-PORTFOLIO-001-FIL-0058-STMT-000007"],
+      ["SYS-PORTFOLIO-001-FIL-0058-STMT-000008"],
+      ["SYS-PORTFOLIO-001-FIL-0058-STMT-000032"],
+      ["SYS-PORTFOLIO-001-FIL-0058-STMT-000008"]
+    ],
+    "pseudocode_text": "CLEAR work_areas (WS-WORK-AREAS)  -- INITIALIZE: log_status and formatted_time set to spaces\nSET formatted_time (WS-FORMATTED-TIME) = current timestamp  -- ACCEPT ... FROM TIME STAMP\nOPEN ERROR-LOG for APPEND  -- OPEN EXTEND: new records are added after the existing ones\nIF log_status (WS-LOG-STATUS) != '00' THEN\n  DISPLAY 'Error opening log file: ' + log_status\nEND IF  -- processing continues even when the open failed",
+    "statement_ids": ["SYS-PORTFOLIO-001-FIL-0058-STMT-000005", "SYS-PORTFOLIO-001-FIL-0058-STMT-000006", "SYS-PORTFOLIO-001-FIL-0058-STMT-000007", "SYS-PORTFOLIO-001-FIL-0058-STMT-000008", "SYS-PORTFOLIO-001-FIL-0058-STMT-000032"],
+    "untranslated_statement_ids": [],
+    "field_references": ["WS-WORK-AREAS", "WS-FORMATTED-TIME", "WS-LOG-STATUS"],
+    "field_reference_ids": [
+      {"name": "WS-WORK-AREAS", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0058-REC-0002", "target_kind": "record", "candidate_ids": []},
+      {"name": "WS-FORMATTED-TIME", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0058-FLD-000003", "target_kind": "field", "candidate_ids": []},
+      {"name": "WS-LOG-STATUS", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0058-FLD-000002", "target_kind": "field", "candidate_ids": []}
+    ],
+    "calls_made": [],
+    "calls_made_ids": [],
+    "complexity_score": 2,
+    "has_unresolved_statements": false,
+    "annotations": [
+      {"line": 57, "statement_id": "SYS-PORTFOLIO-001-FIL-0058-STMT-000006", "note": "Recorded verbatim: 'ACCEPT WS-FORMATTED-TIME FROM TIME STAMP'. TIME STAMP is not a standard ACCEPT source (standard forms are DATE, DAY, DAY-OF-WEEK, TIME); the value format put into the 26-character field depends on the compiler/runtime and cannot be determined from the source.", "ambiguous": true},
+      {"line": 60, "statement_id": "SYS-PORTFOLIO-001-FIL-0058-STMT-000008", "note": "A failed OPEN is only reported; the program does not stop or set a return code here."}
+    ]
+  },
+  {
+    "name": "2000-PROCESS-ERROR",
+    "paragraph_id": "SYS-PORTFOLIO-001-FIL-0058-PAR-0003",
+    "section": null,
+    "section_id": null,
+    "line_range": [65, 82],
+    "pseudocode": [
+      "-- Build and write error message (source comment, lines 66-68)",
+      "SET err_timestamp (ERR-TIMESTAMP) = formatted_time  -- 26-character value moved into an 18-byte group: only the first 18 characters are kept",
+      "SET err_program (ERR-PROGRAM) = ls_program_id (LS-PROGRAM-ID)",
+      "SET err_category (ERR-CATEGORY) = ls_category (LS-CATEGORY)",
+      "SET err_code (ERR-CODE) = ls_error_code (LS-ERROR-CODE)",
+      "SET err_severity (ERR-SEVERITY) = ls_severity (LS-SEVERITY)",
+      "SET err_text (ERR-TEXT) = ls_error_text (LS-ERROR-TEXT)",
+      "SET err_details (ERR-DETAILS) = ls_error_details (LS-ERROR-DETAILS)",
+      "CALL 2100-write-log",
+      "CALL 2200-display-error",
+      "SET ls_return_code (LS-RETURN-CODE) = ls_severity  -- the caller's return code is the requested severity"
+    ],
+    "pseudocode_statement_ids": [
+      [],
+      ["SYS-PORTFOLIO-001-FIL-0058-STMT-000009"],
+      ["SYS-PORTFOLIO-001-FIL-0058-STMT-000010"],
+      ["SYS-PORTFOLIO-001-FIL-0058-STMT-000011"],
+      ["SYS-PORTFOLIO-001-FIL-0058-STMT-000012"],
+      ["SYS-PORTFOLIO-001-FIL-0058-STMT-000013"],
+      ["SYS-PORTFOLIO-001-FIL-0058-STMT-000014"],
+      ["SYS-PORTFOLIO-001-FIL-0058-STMT-000015"],
+      ["SYS-PORTFOLIO-001-FIL-0058-STMT-000016"],
+      ["SYS-PORTFOLIO-001-FIL-0058-STMT-000017"],
+      ["SYS-PORTFOLIO-001-FIL-0058-STMT-000018"]
+    ],
+    "pseudocode_text": "-- Build and write error message (source comment, lines 66-68)\nSET err_timestamp (ERR-TIMESTAMP) = formatted_time  -- 26-character value moved into an 18-byte group: only the first 18 characters are kept\nSET err_program (ERR-PROGRAM) = ls_program_id (LS-PROGRAM-ID)\nSET err_category (ERR-CATEGORY) = ls_category (LS-CATEGORY)\nSET err_code (ERR-CODE) = ls_error_code (LS-ERROR-CODE)\nSET err_severity (ERR-SEVERITY) = ls_severity (LS-SEVERITY)\nSET err_text (ERR-TEXT) = ls_error_text (LS-ERROR-TEXT)\nSET err_details (ERR-DETAILS) = ls_error_details (LS-ERROR-DETAILS)\nCALL 2100-write-log\nCALL 2200-display-error\nSET ls_return_code (LS-RETURN-CODE) = ls_severity  -- the caller's return code is the requested severity",
+    "statement_ids": ["SYS-PORTFOLIO-001-FIL-0058-STMT-000009", "SYS-PORTFOLIO-001-FIL-0058-STMT-000010", "SYS-PORTFOLIO-001-FIL-0058-STMT-000011", "SYS-PORTFOLIO-001-FIL-0058-STMT-000012", "SYS-PORTFOLIO-001-FIL-0058-STMT-000013", "SYS-PORTFOLIO-001-FIL-0058-STMT-000014", "SYS-PORTFOLIO-001-FIL-0058-STMT-000015", "SYS-PORTFOLIO-001-FIL-0058-STMT-000016", "SYS-PORTFOLIO-001-FIL-0058-STMT-000017", "SYS-PORTFOLIO-001-FIL-0058-STMT-000018"],
+    "untranslated_statement_ids": [],
+    "field_references": ["WS-FORMATTED-TIME", "ERR-TIMESTAMP", "LS-PROGRAM-ID", "ERR-PROGRAM", "LS-CATEGORY", "ERR-CATEGORY", "LS-ERROR-CODE", "ERR-CODE", "LS-SEVERITY", "ERR-SEVERITY", "LS-ERROR-TEXT", "ERR-TEXT", "LS-ERROR-DETAILS", "ERR-DETAILS", "LS-RETURN-CODE"],
+    "field_reference_ids": [
+      {"name": "WS-FORMATTED-TIME", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0058-FLD-000003", "target_kind": "field", "candidate_ids": []},
+      {"name": "ERR-TIMESTAMP", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0007-FLD-000010", "target_kind": "field", "candidate_ids": []},
+      {"name": "LS-PROGRAM-ID", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0058-FLD-000004", "target_kind": "field", "candidate_ids": []},
+      {"name": "ERR-PROGRAM", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0007-FLD-000013", "target_kind": "field", "candidate_ids": []},
+      {"name": "LS-CATEGORY", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0058-FLD-000005", "target_kind": "field", "candidate_ids": []},
+      {"name": "ERR-CATEGORY", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0007-FLD-000014", "target_kind": "field", "candidate_ids": []},
+      {"name": "LS-ERROR-CODE", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0058-FLD-000006", "target_kind": "field", "candidate_ids": []},
+      {"name": "ERR-CODE", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0007-FLD-000015", "target_kind": "field", "candidate_ids": []},
+      {"name": "LS-SEVERITY", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0058-FLD-000007", "target_kind": "field", "candidate_ids": []},
+      {"name": "ERR-SEVERITY", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0007-FLD-000016", "target_kind": "field", "candidate_ids": []},
+      {"name": "LS-ERROR-TEXT", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0058-FLD-000008", "target_kind": "field", "candidate_ids": []},
+      {"name": "ERR-TEXT", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0007-FLD-000017", "target_kind": "field", "candidate_ids": []},
+      {"name": "LS-ERROR-DETAILS", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0058-FLD-000009", "target_kind": "field", "candidate_ids": []},
+      {"name": "ERR-DETAILS", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0007-FLD-000018", "target_kind": "field", "candidate_ids": []},
+      {"name": "LS-RETURN-CODE", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0058-FLD-000010", "target_kind": "field", "candidate_ids": []}
+    ],
+    "calls_made": ["2100-WRITE-LOG", "2200-DISPLAY-ERROR"],
+    "calls_made_ids": [
+      {"name": "2100-WRITE-LOG", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0058-PAR-0004", "section_id": null},
+      {"name": "2200-DISPLAY-ERROR", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0058-PAR-0005", "section_id": null}
+    ],
+    "complexity_score": 1,
+    "has_unresolved_statements": false,
+    "annotations": [
+      {"line": 69, "statement_id": "SYS-PORTFOLIO-001-FIL-0058-STMT-000009", "note": "WS-FORMATTED-TIME is PIC X(26); ERR-TIMESTAMP is an 18-byte group (ERR-DATE X(10) + ERR-TIME X(8)). A group MOVE is an alphanumeric move, so the value is truncated on the right to 18 characters."},
+      {"line": 73, "statement_id": "SYS-PORTFOLIO-001-FIL-0058-STMT-000013", "note": "LS-SEVERITY and ERR-SEVERITY are both PIC S9(4) COMP (binary)."}
+    ]
+  },
+  {
+    "name": "2100-WRITE-LOG",
+    "paragraph_id": "SYS-PORTFOLIO-001-FIL-0058-PAR-0004",
+    "section": null,
+    "section_id": null,
+    "line_range": [83, 92],
+    "pseudocode": [
+      "SET log_data (LOG-DATA) = err_message (ERR-MESSAGE)  -- 370-byte message record placed in the 400-byte log line, padded with spaces",
+      "WRITE error_log_record (ERROR-LOG-RECORD) to ERROR-LOG",
+      "IF log_status (WS-LOG-STATUS) != '00' THEN",
+      "  DISPLAY 'Error writing to log: ' + log_status",
+      "END IF"
+    ],
+    "pseudocode_statement_ids": [
+      ["SYS-PORTFOLIO-001-FIL-0058-STMT-000019"],
+      ["SYS-PORTFOLIO-001-FIL-0058-STMT-000020"],
+      ["SYS-PORTFOLIO-001-FIL-0058-STMT-000021"],
+      ["SYS-PORTFOLIO-001-FIL-0058-STMT-000033"],
+      ["SYS-PORTFOLIO-001-FIL-0058-STMT-000021"]
+    ],
+    "pseudocode_text": "SET log_data (LOG-DATA) = err_message (ERR-MESSAGE)  -- 370-byte message record placed in the 400-byte log line, padded with spaces\nWRITE error_log_record (ERROR-LOG-RECORD) to ERROR-LOG\nIF log_status (WS-LOG-STATUS) != '00' THEN\n  DISPLAY 'Error writing to log: ' + log_status\nEND IF",
+    "statement_ids": ["SYS-PORTFOLIO-001-FIL-0058-STMT-000019", "SYS-PORTFOLIO-001-FIL-0058-STMT-000020", "SYS-PORTFOLIO-001-FIL-0058-STMT-000021", "SYS-PORTFOLIO-001-FIL-0058-STMT-000033"],
+    "untranslated_statement_ids": [],
+    "field_references": ["ERR-MESSAGE", "LOG-DATA", "ERROR-LOG-RECORD", "WS-LOG-STATUS"],
+    "field_reference_ids": [
+      {"name": "ERR-MESSAGE", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0007-REC-0003", "target_kind": "record", "candidate_ids": []},
+      {"name": "LOG-DATA", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0058-FLD-000001", "target_kind": "field", "candidate_ids": []},
+      {"name": "ERROR-LOG-RECORD", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0058-REC-0001", "target_kind": "record", "candidate_ids": []},
+      {"name": "WS-LOG-STATUS", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0058-FLD-000002", "target_kind": "field", "candidate_ids": []}
+    ],
+    "calls_made": [],
+    "calls_made_ids": [],
+    "complexity_score": 2,
+    "has_unresolved_statements": false,
+    "annotations": [
+      {"line": 86, "statement_id": "SYS-PORTFOLIO-001-FIL-0058-STMT-000020", "note": "Sequential WRITE of the FD record ERROR-LOG-RECORD; the file status in WS-LOG-STATUS is checked right after."}
+    ]
+  },
+  {
+    "name": "2200-DISPLAY-ERROR",
+    "paragraph_id": "SYS-PORTFOLIO-001-FIL-0058-PAR-0005",
+    "section": null,
+    "section_id": null,
+    "line_range": [93, 104],
+    "pseudocode": [
+      "DISPLAY separator line '===================================================='",
+      "DISPLAY 'ERROR DETECTED: ' + err_timestamp",
+      "DISPLAY 'PROGRAM:       ' + err_program",
+      "DISPLAY 'CATEGORY:      ' + err_category",
+      "DISPLAY 'CODE:          ' + err_code",
+      "DISPLAY 'SEVERITY:      ' + err_severity",
+      "DISPLAY 'MESSAGE:       ' + err_text",
+      "DISPLAY 'DETAILS:       ' + err_details",
+      "DISPLAY separator line '===================================================='"
+    ],
+    "pseudocode_statement_ids": [
+      ["SYS-PORTFOLIO-001-FIL-0058-STMT-000022"],
+      ["SYS-PORTFOLIO-001-FIL-0058-STMT-000023"],
+      ["SYS-PORTFOLIO-001-FIL-0058-STMT-000024"],
+      ["SYS-PORTFOLIO-001-FIL-0058-STMT-000025"],
+      ["SYS-PORTFOLIO-001-FIL-0058-STMT-000026"],
+      ["SYS-PORTFOLIO-001-FIL-0058-STMT-000027"],
+      ["SYS-PORTFOLIO-001-FIL-0058-STMT-000028"],
+      ["SYS-PORTFOLIO-001-FIL-0058-STMT-000029"],
+      ["SYS-PORTFOLIO-001-FIL-0058-STMT-000030"]
+    ],
+    "pseudocode_text": "DISPLAY separator line '===================================================='\nDISPLAY 'ERROR DETECTED: ' + err_timestamp\nDISPLAY 'PROGRAM:       ' + err_program\nDISPLAY 'CATEGORY:      ' + err_category\nDISPLAY 'CODE:          ' + err_code\nDISPLAY 'SEVERITY:      ' + err_severity\nDISPLAY 'MESSAGE:       ' + err_text\nDISPLAY 'DETAILS:       ' + err_details\nDISPLAY separator line '===================================================='",
+    "statement_ids": ["SYS-PORTFOLIO-001-FIL-0058-STMT-000022", "SYS-PORTFOLIO-001-FIL-0058-STMT-000023", "SYS-PORTFOLIO-001-FIL-0058-STMT-000024", "SYS-PORTFOLIO-001-FIL-0058-STMT-000025", "SYS-PORTFOLIO-001-FIL-0058-STMT-000026", "SYS-PORTFOLIO-001-FIL-0058-STMT-000027", "SYS-PORTFOLIO-001-FIL-0058-STMT-000028", "SYS-PORTFOLIO-001-FIL-0058-STMT-000029", "SYS-PORTFOLIO-001-FIL-0058-STMT-000030"],
+    "untranslated_statement_ids": [],
+    "field_references": ["ERR-TIMESTAMP", "ERR-PROGRAM", "ERR-CATEGORY", "ERR-CODE", "ERR-SEVERITY", "ERR-TEXT", "ERR-DETAILS"],
+    "field_reference_ids": [
+      {"name": "ERR-TIMESTAMP", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0007-FLD-000010", "target_kind": "field", "candidate_ids": []},
+      {"name": "ERR-PROGRAM", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0007-FLD-000013", "target_kind": "field", "candidate_ids": []},
+      {"name": "ERR-CATEGORY", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0007-FLD-000014", "target_kind": "field", "candidate_ids": []},
+      {"name": "ERR-CODE", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0007-FLD-000015", "target_kind": "field", "candidate_ids": []},
+      {"name": "ERR-SEVERITY", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0007-FLD-000016", "target_kind": "field", "candidate_ids": []},
+      {"name": "ERR-TEXT", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0007-FLD-000017", "target_kind": "field", "candidate_ids": []},
+      {"name": "ERR-DETAILS", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0007-FLD-000018", "target_kind": "field", "candidate_ids": []}
+    ],
+    "calls_made": [],
+    "calls_made_ids": [],
+    "complexity_score": 1,
+    "has_unresolved_statements": false,
+    "annotations": []
+  },
+  {
+    "name": "3000-TERMINATE",
+    "paragraph_id": "SYS-PORTFOLIO-001-FIL-0058-PAR-0006",
+    "section": null,
+    "section_id": null,
+    "line_range": [105, 107],
+    "pseudocode": [
+      "CLOSE ERROR-LOG  -- file status is not checked after CLOSE"
+    ],
+    "pseudocode_statement_ids": [
+      ["SYS-PORTFOLIO-001-FIL-0058-STMT-000031"]
+    ],
+    "pseudocode_text": "CLOSE ERROR-LOG  -- file status is not checked after CLOSE",
+    "statement_ids": ["SYS-PORTFOLIO-001-FIL-0058-STMT-000031"],
+    "untranslated_statement_ids": [],
+    "field_references": [],
+    "field_reference_ids": [],
+    "calls_made": [],
+    "calls_made_ids": [],
+    "complexity_score": 1,
+    "has_unresolved_statements": false,
+    "annotations": []
+  }
+],
+"unresolved_statements": [],
+"pseudocode_issues": []
+}

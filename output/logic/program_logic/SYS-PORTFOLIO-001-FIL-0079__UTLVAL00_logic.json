@@ -1,0 +1,458 @@
+{
+"program_summary": {"program_id": "UTLVAL00", "file_id": "SYS-PORTFOLIO-001-FIL-0079", "logic_file": "program_logic/SYS-PORTFOLIO-001-FIL-0079__UTLVAL00_logic.json", "logic_status": "partial", "paragraphs_translated": 12, "execution_paths": 1, "branches": 6, "loops": 1, "dead_code_confirmed": 0, "goto_annotations": 0, "unresolvable_paths": 8, "unresolved_ids": 9},
+"program_id": "UTLVAL00",
+"system_id": "SYS-PORTFOLIO-001",
+"file_id": "SYS-PORTFOLIO-001-FIL-0079",
+"path_id": "SYS-PORTFOLIO-001-PATH-0079",
+"relative_path": "src/programs/utility/UTLVAL00.cbl",
+"parse_run_id": "PRUN-20261023T023803Z-ACC2",
+"upstream": {
+  "verification": {
+    "verdict": "VALID_PARTIAL",
+    "verdict_reasons": ["V2, V3 and V4 consistent", "Agent 2 parse_status 'partial' (8 PERFORM targets not declared in the program)"],
+    "v1": {"raw_structure": "present", "parse_status": "partial", "program_layout": "present", "data_run_id": "DRUN-20261024T215053Z-ACC1", "copybook_layouts": [{"copybook": "POSREC", "copybook_file_id": "SYS-PORTFOLIO-001-FIL-0011", "layout": "present", "expanded_at_lines": [44]}, {"copybook": "TRNREC", "copybook_file_id": "SYS-PORTFOLIO-001-FIL-0014", "layout": "present", "expanded_at_lines": [45]}, {"copybook": "RTNCODE", "copybook_file_id": "SYS-PORTFOLIO-001-FIL-0013", "layout": "present", "expanded_at_lines": [60]}, {"copybook": "ERRHAND", "copybook_file_id": "SYS-PORTFOLIO-001-FIL-0007", "layout": "present", "expanded_at_lines": [61]}], "unresolved_copy_stubs": 0},
+    "v2_file_identities": {
+      "program_entries": {"require_completed": ["parser", "data"], "entries": ["raw_structure|SYS-PORTFOLIO-001-FIL-0079", "data_layout|SYS-PORTFOLIO-001-FIL-0079"], "result": "batched with RPTPOS00, RPTSTA00 and RTNANA00 program entries: checked 8, ok 8, problems [], duplicates [], consistent true"},
+      "copybook_entries": {"require_completed": ["data"], "entries": ["data_layout|SYS-PORTFOLIO-001-FIL-0011", "data_layout|SYS-PORTFOLIO-001-FIL-0014", "data_layout|SYS-PORTFOLIO-001-FIL-0013", "data_layout|SYS-PORTFOLIO-001-FIL-0007"], "result": "batched with copybooks FIL-0002 and FIL-0017: checked 6, ok 6, problems [], duplicates [], consistent true"},
+      "consistent": true
+    },
+    "v3_structure_identities": {"sections_checked": 4, "paragraphs_checked": 12, "statements_checked": 47, "edges_checked": 15, "registered_edges": 15, "section_problems": [], "paragraph_problems": [], "statement_problems": [], "edge_problems": [], "invalid_registered_edges": [], "registered_not_in_json": {"missing_count": 0}, "duplicate_ids_in_json": [], "consistent": true, "note": "section names sent: CONFIGURATION for SEC-0001, INPUT-OUTPUT for SEC-0002; null for the data-division sections. 15 edges = resolved non-inline CFG edges; the inline PERFORM UNTIL and 8 unresolved PERFORMs carry no relationship."},
+    "v4_data_identities": [
+      {"file_id": "SYS-PORTFOLIO-001-FIL-0079", "layout": "program", "records_checked": 7, "fields_checked": 24, "expansions_checked": 4, "record_problems": [], "field_problems": [], "expansion_problems": [], "copybook_records_in_program": 0, "registered_not_in_json": {"missing_count": 0}, "duplicate_ids_in_json": [], "consistent": true, "note": "copy_expansions holder_id is null in the layout (section-level COPY); the entry's section_id was sent as holder_id"},
+      {"file_id": "SYS-PORTFOLIO-001-FIL-0011", "layout": "copybook POSREC", "records_checked": 1, "fields_checked": 17, "consistent": true, "note": "verified once in this execution (shared with RPTPOS00); no problems"},
+      {"file_id": "SYS-PORTFOLIO-001-FIL-0014", "layout": "copybook TRNREC", "records_checked": 1, "fields_checked": 25, "consistent": true, "note": "verified once in this execution (shared with RPTPOS00); no problems"},
+      {"file_id": "SYS-PORTFOLIO-001-FIL-0013", "layout": "copybook RTNCODE", "records_checked": 1, "fields_checked": 28, "consistent": true, "note": "verified once in this execution (shared with RPTPOS00, RPTSTA00); no problems"},
+      {"file_id": "SYS-PORTFOLIO-001-FIL-0007", "layout": "copybook ERRHAND", "records_checked": 5, "fields_checked": 25, "consistent": true, "note": "verified once in this execution (shared with RPTPOS00, RPTSTA00); no problems"}
+    ]
+  }
+},
+"execution_traces": [
+  {
+    "entry_point": "0000-MAIN",
+    "entry_point_id": "SYS-PORTFOLIO-001-FIL-0079-PAR-0001",
+    "entry_type": "batch_main",
+    "steps": [
+      {"step": 1, "paragraph": "0000-MAIN", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0079-PAR-0001", "action": "PERFORM", "target": "1000-INITIALIZE", "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0079-PAR-0002", "target_section_id": null, "condition": null, "line": 97, "statement_id": "SYS-PORTFOLIO-001-FIL-0079-STMT-000001"},
+      {"step": 2, "paragraph": "1000-INITIALIZE", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0079-PAR-0002", "action": "PERFORM", "target": "1100-OPEN-FILES", "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0079-PAR-0003", "target_section_id": null, "condition": null, "line": 103, "statement_id": "SYS-PORTFOLIO-001-FIL-0079-STMT-000005"},
+      {"step": 3, "paragraph": "1100-OPEN-FILES", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0079-PAR-0003", "action": "PERFORM", "target": "9999-ERROR-HANDLER", "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0079-PAR-0012", "target_section_id": null,
+       "condition": {"text": "IF WS-VAL-STATUS NOT = '00'", "fields": ["WS-VAL-STATUS"], "field_ids": [{"name": "WS-VAL-STATUS", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0079-FLD-000003", "target_kind": "field", "candidate_ids": []}]},
+       "line": 111, "statement_id": "SYS-PORTFOLIO-001-FIL-0079-STMT-000032"},
+      {"step": 4, "paragraph": "1100-OPEN-FILES", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0079-PAR-0003", "action": "PERFORM", "target": "9999-ERROR-HANDLER", "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0079-PAR-0012", "target_section_id": null,
+       "condition": {"text": "IF WS-POS-STATUS NOT = '00'", "fields": ["WS-POS-STATUS"], "field_ids": [{"name": "WS-POS-STATUS", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0079-FLD-000004", "target_kind": "field", "candidate_ids": []}]},
+       "line": 118, "statement_id": "SYS-PORTFOLIO-001-FIL-0079-STMT-000034"},
+      {"step": 5, "paragraph": "1100-OPEN-FILES", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0079-PAR-0003", "action": "PERFORM", "target": "9999-ERROR-HANDLER", "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0079-PAR-0012", "target_section_id": null,
+       "condition": {"text": "IF WS-TRAN-STATUS NOT = '00'", "fields": ["WS-TRAN-STATUS"], "field_ids": [{"name": "WS-TRAN-STATUS", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0079-FLD-000005", "target_kind": "field", "candidate_ids": []}]},
+       "line": 125, "statement_id": "SYS-PORTFOLIO-001-FIL-0079-STMT-000036"},
+      {"step": 6, "paragraph": "1100-OPEN-FILES", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0079-PAR-0003", "action": "PERFORM", "target": "9999-ERROR-HANDLER", "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0079-PAR-0012", "target_section_id": null,
+       "condition": {"text": "IF WS-RPT-STATUS NOT = '00'", "fields": ["WS-RPT-STATUS"], "field_ids": [{"name": "WS-RPT-STATUS", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0079-FLD-000006", "target_kind": "field", "candidate_ids": []}]},
+       "line": 132, "statement_id": "SYS-PORTFOLIO-001-FIL-0079-STMT-000038"},
+      {"step": 7, "paragraph": "1000-INITIALIZE", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0079-PAR-0002", "action": "PERFORM", "target": "1200-INIT-PROCESSING", "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0079-PAR-0004", "target_section_id": null, "condition": null, "line": 104, "statement_id": "SYS-PORTFOLIO-001-FIL-0079-STMT-000006"},
+      {"step": 8, "paragraph": "0000-MAIN", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0079-PAR-0001", "action": "PERFORM", "target": "2000-PROCESS", "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0079-PAR-0005", "target_section_id": null, "condition": null, "line": 98, "statement_id": "SYS-PORTFOLIO-001-FIL-0079-STMT-000002"},
+      {"step": 9, "paragraph": "2000-PROCESS", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0079-PAR-0005", "action": "PERFORM_INLINE", "target": "2000-PROCESS", "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0079-PAR-0005", "target_section_id": null,
+       "condition": {"text": "END-OF-VALIDATION", "fields": ["END-OF-VALIDATION"], "field_ids": [{"name": "END-OF-VALIDATION", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0079-FLD-000012", "target_kind": "condition", "candidate_ids": []}], "test_time": "BEFORE", "loop_type": "WHILE", "termination_pattern": "FILE_EXHAUSTION_LOOP"},
+       "line": 139, "statement_id": "SYS-PORTFOLIO-001-FIL-0079-STMT-000016"},
+      {"step": 10, "paragraph": "2000-PROCESS", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0079-PAR-0005", "action": "PERFORM", "target": "2100-PROCESS-VALIDATION", "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0079-PAR-0006", "target_section_id": null,
+       "condition": {"text": "READ VALIDATION-CONTROL ... NOT AT END (inside PERFORM UNTIL END-OF-VALIDATION)", "fields": ["END-OF-VALIDATION"], "field_ids": [{"name": "END-OF-VALIDATION", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0079-FLD-000012", "target_kind": "condition", "candidate_ids": []}]},
+       "line": 144, "statement_id": "SYS-PORTFOLIO-001-FIL-0079-STMT-000047"},
+      {"step": 11, "paragraph": "2100-PROCESS-VALIDATION", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0079-PAR-0006", "action": "PERFORM", "target": "2200-CHECK-INTEGRITY", "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0079-PAR-0007", "target_section_id": null,
+       "condition": {"text": "EVALUATE VAL-TYPE WHEN WS-INTEGRITY", "fields": ["VAL-TYPE", "WS-INTEGRITY"], "field_ids": [{"name": "VAL-TYPE", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0079-FLD-000001", "target_kind": "field", "candidate_ids": []}, {"name": "WS-INTEGRITY", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0079-FLD-000007", "target_kind": "field", "candidate_ids": []}]},
+       "line": 151, "statement_id": "SYS-PORTFOLIO-001-FIL-0079-STMT-000044"},
+      {"step": 12, "paragraph": "2200-CHECK-INTEGRITY", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0079-PAR-0007", "action": "unresolvable", "target": "2210-CHECK-POSITION-INTEGRITY", "target_paragraph_id": null, "target_section_id": null, "condition": null, "line": 165, "statement_id": "SYS-PORTFOLIO-001-FIL-0079-STMT-000018"},
+      {"step": 13, "paragraph": "2200-CHECK-INTEGRITY", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0079-PAR-0007", "action": "unresolvable", "target": "2220-CHECK-TRANSACTION-INTEGRITY", "target_paragraph_id": null, "target_section_id": null, "condition": null, "line": 166, "statement_id": "SYS-PORTFOLIO-001-FIL-0079-STMT-000019"},
+      {"step": 14, "paragraph": "2100-PROCESS-VALIDATION", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0079-PAR-0006", "action": "PERFORM", "target": "2300-CHECK-XREF", "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0079-PAR-0008", "target_section_id": null,
+       "condition": {"text": "EVALUATE VAL-TYPE WHEN WS-XREF", "fields": ["VAL-TYPE", "WS-XREF"], "field_ids": [{"name": "VAL-TYPE", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0079-FLD-000001", "target_kind": "field", "candidate_ids": []}, {"name": "WS-XREF", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0079-FLD-000008", "target_kind": "field", "candidate_ids": []}]},
+       "line": 153, "statement_id": "SYS-PORTFOLIO-001-FIL-0079-STMT-000045"},
+      {"step": 15, "paragraph": "2300-CHECK-XREF", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0079-PAR-0008", "action": "unresolvable", "target": "2310-CHECK-POSITION-XREF", "target_paragraph_id": null, "target_section_id": null, "condition": null, "line": 169, "statement_id": "SYS-PORTFOLIO-001-FIL-0079-STMT-000020"},
+      {"step": 16, "paragraph": "2300-CHECK-XREF", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0079-PAR-0008", "action": "unresolvable", "target": "2320-CHECK-TRANSACTION-XREF", "target_paragraph_id": null, "target_section_id": null, "condition": null, "line": 170, "statement_id": "SYS-PORTFOLIO-001-FIL-0079-STMT-000021"},
+      {"step": 17, "paragraph": "2100-PROCESS-VALIDATION", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0079-PAR-0006", "action": "PERFORM", "target": "2400-CHECK-FORMAT", "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0079-PAR-0009", "target_section_id": null,
+       "condition": {"text": "EVALUATE VAL-TYPE WHEN WS-FORMAT", "fields": ["VAL-TYPE", "WS-FORMAT"], "field_ids": [{"name": "VAL-TYPE", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0079-FLD-000001", "target_kind": "field", "candidate_ids": []}, {"name": "WS-FORMAT", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0079-FLD-000009", "target_kind": "field", "candidate_ids": []}]},
+       "line": 155, "statement_id": "SYS-PORTFOLIO-001-FIL-0079-STMT-000043"},
+      {"step": 18, "paragraph": "2400-CHECK-FORMAT", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0079-PAR-0009", "action": "unresolvable", "target": "2410-CHECK-POSITION-FORMAT", "target_paragraph_id": null, "target_section_id": null, "condition": null, "line": 173, "statement_id": "SYS-PORTFOLIO-001-FIL-0079-STMT-000022"},
+      {"step": 19, "paragraph": "2400-CHECK-FORMAT", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0079-PAR-0009", "action": "unresolvable", "target": "2420-CHECK-TRANSACTION-FORMAT", "target_paragraph_id": null, "target_section_id": null, "condition": null, "line": 174, "statement_id": "SYS-PORTFOLIO-001-FIL-0079-STMT-000023"},
+      {"step": 20, "paragraph": "2100-PROCESS-VALIDATION", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0079-PAR-0006", "action": "PERFORM", "target": "2500-CHECK-BALANCE", "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0079-PAR-0010", "target_section_id": null,
+       "condition": {"text": "EVALUATE VAL-TYPE WHEN WS-BALANCE", "fields": ["VAL-TYPE", "WS-BALANCE"], "field_ids": [{"name": "VAL-TYPE", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0079-FLD-000001", "target_kind": "field", "candidate_ids": []}, {"name": "WS-BALANCE", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0079-FLD-000010", "target_kind": "field", "candidate_ids": []}]},
+       "line": 157, "statement_id": "SYS-PORTFOLIO-001-FIL-0079-STMT-000042"},
+      {"step": 21, "paragraph": "2500-CHECK-BALANCE", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0079-PAR-0010", "action": "unresolvable", "target": "2510-ACCUMULATE-POSITIONS", "target_paragraph_id": null, "target_section_id": null, "condition": null, "line": 177, "statement_id": "SYS-PORTFOLIO-001-FIL-0079-STMT-000024"},
+      {"step": 22, "paragraph": "2500-CHECK-BALANCE", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0079-PAR-0010", "action": "unresolvable", "target": "2520-VERIFY-BALANCES", "target_paragraph_id": null, "target_section_id": null, "condition": null, "line": 178, "statement_id": "SYS-PORTFOLIO-001-FIL-0079-STMT-000025"},
+      {"step": 23, "paragraph": "2100-PROCESS-VALIDATION", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0079-PAR-0006", "action": "PERFORM", "target": "9999-ERROR-HANDLER", "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0079-PAR-0012", "target_section_id": null,
+       "condition": {"text": "EVALUATE VAL-TYPE WHEN OTHER", "fields": ["VAL-TYPE"], "field_ids": [{"name": "VAL-TYPE", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0079-FLD-000001", "target_kind": "field", "candidate_ids": []}]},
+       "line": 161, "statement_id": "SYS-PORTFOLIO-001-FIL-0079-STMT-000041"},
+      {"step": 24, "paragraph": "0000-MAIN", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0079-PAR-0001", "action": "PERFORM", "target": "3000-CLEANUP", "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0079-PAR-0011", "target_section_id": null, "condition": null, "line": 99, "statement_id": "SYS-PORTFOLIO-001-FIL-0079-STMT-000003"},
+      {"step": 25, "paragraph": "0000-MAIN", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0079-PAR-0001", "action": "GOBACK", "target": null, "target_paragraph_id": null, "target_section_id": null, "condition": null, "line": 100, "statement_id": "SYS-PORTFOLIO-001-FIL-0079-STMT-000004"}
+    ]
+  }
+],
+"branch_map": [
+  {
+    "paragraph": "1100-OPEN-FILES",
+    "paragraph_id": "SYS-PORTFOLIO-001-FIL-0079-PAR-0003",
+    "branches": [
+      {"type": "IF", "line": 108, "statement_id": "SYS-PORTFOLIO-001-FIL-0079-STMT-000008", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0079-PAR-0003", "condition_text": "WS-VAL-STATUS NOT = '00'", "condition_fields": ["WS-VAL-STATUS"],
+       "condition_field_ids": [{"name": "WS-VAL-STATUS", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0079-FLD-000003", "target_kind": "field", "candidate_ids": []}],
+       "has_else": false, "then_line_range": [109, 111], "else_line_range": null, "end_if_line": 112, "nested_depth": 1,
+       "outcomes": [{"label": "THEN", "line_range": [109, 111], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0079-STMT-000031", "SYS-PORTFOLIO-001-FIL-0079-STMT-000032"]}, {"label": "ELSE (implicit, continue)", "line_range": null, "statement_ids": []}]},
+      {"type": "IF", "line": 115, "statement_id": "SYS-PORTFOLIO-001-FIL-0079-STMT-000010", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0079-PAR-0003", "condition_text": "WS-POS-STATUS NOT = '00'", "condition_fields": ["WS-POS-STATUS"],
+       "condition_field_ids": [{"name": "WS-POS-STATUS", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0079-FLD-000004", "target_kind": "field", "candidate_ids": []}],
+       "has_else": false, "then_line_range": [116, 118], "else_line_range": null, "end_if_line": 119, "nested_depth": 1,
+       "outcomes": [{"label": "THEN", "line_range": [116, 118], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0079-STMT-000033", "SYS-PORTFOLIO-001-FIL-0079-STMT-000034"]}, {"label": "ELSE (implicit, continue)", "line_range": null, "statement_ids": []}]},
+      {"type": "IF", "line": 122, "statement_id": "SYS-PORTFOLIO-001-FIL-0079-STMT-000012", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0079-PAR-0003", "condition_text": "WS-TRAN-STATUS NOT = '00'", "condition_fields": ["WS-TRAN-STATUS"],
+       "condition_field_ids": [{"name": "WS-TRAN-STATUS", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0079-FLD-000005", "target_kind": "field", "candidate_ids": []}],
+       "has_else": false, "then_line_range": [123, 125], "else_line_range": null, "end_if_line": 126, "nested_depth": 1,
+       "outcomes": [{"label": "THEN", "line_range": [123, 125], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0079-STMT-000035", "SYS-PORTFOLIO-001-FIL-0079-STMT-000036"]}, {"label": "ELSE (implicit, continue)", "line_range": null, "statement_ids": []}]},
+      {"type": "IF", "line": 129, "statement_id": "SYS-PORTFOLIO-001-FIL-0079-STMT-000014", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0079-PAR-0003", "condition_text": "WS-RPT-STATUS NOT = '00'", "condition_fields": ["WS-RPT-STATUS"],
+       "condition_field_ids": [{"name": "WS-RPT-STATUS", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0079-FLD-000006", "target_kind": "field", "candidate_ids": []}],
+       "has_else": false, "then_line_range": [130, 132], "else_line_range": null, "end_if_line": 133, "nested_depth": 1,
+       "outcomes": [{"label": "THEN", "line_range": [130, 132], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0079-STMT-000037", "SYS-PORTFOLIO-001-FIL-0079-STMT-000038"]}, {"label": "ELSE (implicit, continue)", "line_range": null, "statement_ids": []}]}
+    ]
+  },
+  {
+    "paragraph": "2000-PROCESS",
+    "paragraph_id": "SYS-PORTFOLIO-001-FIL-0079-PAR-0005",
+    "branches": [
+      {"type": "AT_END", "operation": "READ", "file_name": "VALIDATION-CONTROL", "line": 140, "statement_id": "SYS-PORTFOLIO-001-FIL-0079-STMT-000039", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0079-PAR-0005", "condition_text": "AT END / NOT AT END", "condition_fields": [], "condition_field_ids": [], "io_status_field": "WS-VAL-STATUS",
+       "at_end_line_range": [141, 142], "not_at_end_line_range": [143, 144], "nested_depth": 2,
+       "outcomes": [{"label": "AT END", "line_range": [141, 142], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0079-STMT-000046"]}, {"label": "NOT AT END", "line_range": [143, 144], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0079-STMT-000047"]}]}
+    ]
+  },
+  {
+    "paragraph": "2100-PROCESS-VALIDATION",
+    "paragraph_id": "SYS-PORTFOLIO-001-FIL-0079-PAR-0006",
+    "branches": [
+      {"type": "EVALUATE", "line": 149, "statement_id": "SYS-PORTFOLIO-001-FIL-0079-STMT-000017", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0079-PAR-0006", "subjects": ["VAL-TYPE"],
+       "condition_text": "EVALUATE VAL-TYPE WHEN WS-INTEGRITY / WHEN WS-XREF / WHEN WS-FORMAT / WHEN WS-BALANCE / WHEN OTHER",
+       "condition_fields": ["VAL-TYPE", "WS-INTEGRITY", "WS-XREF", "WS-FORMAT", "WS-BALANCE"],
+       "condition_field_ids": [
+         {"name": "VAL-TYPE", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0079-FLD-000001", "target_kind": "field", "candidate_ids": []},
+         {"name": "WS-INTEGRITY", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0079-FLD-000007", "target_kind": "field", "candidate_ids": []},
+         {"name": "WS-XREF", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0079-FLD-000008", "target_kind": "field", "candidate_ids": []},
+         {"name": "WS-FORMAT", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0079-FLD-000009", "target_kind": "field", "candidate_ids": []},
+         {"name": "WS-BALANCE", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0079-FLD-000010", "target_kind": "field", "candidate_ids": []}
+       ],
+       "when_clauses": [
+         {"conditions": ["WS-INTEGRITY"], "condition_fields": ["WS-INTEGRITY"], "body_line_range": [151, 151], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0079-STMT-000044"]},
+         {"conditions": ["WS-XREF"], "condition_fields": ["WS-XREF"], "body_line_range": [153, 153], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0079-STMT-000045"]},
+         {"conditions": ["WS-FORMAT"], "condition_fields": ["WS-FORMAT"], "body_line_range": [155, 155], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0079-STMT-000043"]},
+         {"conditions": ["WS-BALANCE"], "condition_fields": ["WS-BALANCE"], "body_line_range": [157, 157], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0079-STMT-000042"]},
+         {"conditions": ["OTHER"], "condition_fields": [], "body_line_range": [159, 161], "is_default": true, "statement_ids": ["SYS-PORTFOLIO-001-FIL-0079-STMT-000040", "SYS-PORTFOLIO-001-FIL-0079-STMT-000041"]}
+       ],
+       "end_evaluate_line": 162, "nested_depth": 1,
+       "outcomes": [
+         {"label": "WHEN WS-INTEGRITY (VAL-TYPE = 'INTEGRITY')", "line_range": [151, 151], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0079-STMT-000044"]},
+         {"label": "WHEN WS-XREF (VAL-TYPE = 'XREF')", "line_range": [153, 153], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0079-STMT-000045"]},
+         {"label": "WHEN WS-FORMAT (VAL-TYPE = 'FORMAT')", "line_range": [155, 155], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0079-STMT-000043"]},
+         {"label": "WHEN WS-BALANCE (VAL-TYPE = 'BALANCE')", "line_range": [157, 157], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0079-STMT-000042"]},
+         {"label": "WHEN OTHER", "line_range": [159, 161], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0079-STMT-000040", "SYS-PORTFOLIO-001-FIL-0079-STMT-000041"]}
+       ]}
+    ]
+  }
+],
+"loops": [
+  {"paragraph": "2000-PROCESS", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0079-PAR-0005", "target": "2000-PROCESS", "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0079-PAR-0005", "type": "PERFORM_INLINE", "statement_id": "SYS-PORTFOLIO-001-FIL-0079-STMT-000016",
+   "condition_text": "UNTIL END-OF-VALIDATION", "condition_fields": ["END-OF-VALIDATION"],
+   "condition_field_ids": [{"name": "END-OF-VALIDATION", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0079-FLD-000012", "target_kind": "condition", "candidate_ids": []}],
+   "test_time": "BEFORE", "loop_type": "WHILE", "termination_pattern": "FILE_EXHAUSTION_LOOP", "line": 139, "body_line_range": [140, 145],
+   "modifying_statement_ids": ["SYS-PORTFOLIO-001-FIL-0079-STMT-000046"]}
+],
+"dead_code_confirmed": [],
+"unresolvable_paths": [
+  {"paragraph": "2200-CHECK-INTEGRITY", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0079-PAR-0007", "statement_id": "SYS-PORTFOLIO-001-FIL-0079-STMT-000018", "line": 165, "target": "2210-CHECK-POSITION-INTEGRITY", "reason": "PERFORM target not in CFG: no paragraph or section of that name in the program"},
+  {"paragraph": "2200-CHECK-INTEGRITY", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0079-PAR-0007", "statement_id": "SYS-PORTFOLIO-001-FIL-0079-STMT-000019", "line": 166, "target": "2220-CHECK-TRANSACTION-INTEGRITY", "reason": "PERFORM target not in CFG: no paragraph or section of that name in the program"},
+  {"paragraph": "2300-CHECK-XREF", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0079-PAR-0008", "statement_id": "SYS-PORTFOLIO-001-FIL-0079-STMT-000020", "line": 169, "target": "2310-CHECK-POSITION-XREF", "reason": "PERFORM target not in CFG: no paragraph or section of that name in the program"},
+  {"paragraph": "2300-CHECK-XREF", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0079-PAR-0008", "statement_id": "SYS-PORTFOLIO-001-FIL-0079-STMT-000021", "line": 170, "target": "2320-CHECK-TRANSACTION-XREF", "reason": "PERFORM target not in CFG: no paragraph or section of that name in the program"},
+  {"paragraph": "2400-CHECK-FORMAT", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0079-PAR-0009", "statement_id": "SYS-PORTFOLIO-001-FIL-0079-STMT-000022", "line": 173, "target": "2410-CHECK-POSITION-FORMAT", "reason": "PERFORM target not in CFG: no paragraph or section of that name in the program"},
+  {"paragraph": "2400-CHECK-FORMAT", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0079-PAR-0009", "statement_id": "SYS-PORTFOLIO-001-FIL-0079-STMT-000023", "line": 174, "target": "2420-CHECK-TRANSACTION-FORMAT", "reason": "PERFORM target not in CFG: no paragraph or section of that name in the program"},
+  {"paragraph": "2500-CHECK-BALANCE", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0079-PAR-0010", "statement_id": "SYS-PORTFOLIO-001-FIL-0079-STMT-000024", "line": 177, "target": "2510-ACCUMULATE-POSITIONS", "reason": "PERFORM target not in CFG: no paragraph or section of that name in the program"},
+  {"paragraph": "2500-CHECK-BALANCE", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0079-PAR-0010", "statement_id": "SYS-PORTFOLIO-001-FIL-0079-STMT-000025", "line": 178, "target": "2520-VERIFY-BALANCES", "reason": "PERFORM target not in CFG: no paragraph or section of that name in the program"}
+],
+"trace_issues": [
+  {"severity": "info", "type": "upstream_issue", "upstream_agent": "2_parser", "upstream_type": "unresolved_target", "lines": [165, 166, 169, 170, 173, 174, 177, 178], "message": "8 PERFORM targets not found among this program's paragraphs or sections; no relationship registered; parse_status partial."},
+  {"severity": "info", "type": "upstream_issue", "upstream_agent": "2_parser", "upstream_type": "copy_outside_fd", "lines": [44, 45], "message": "COPY POSREC and COPY TRNREC appear in the FILE SECTION before any FD; no inline FD exists for SELECTs POSITION-MASTER and TRANSACTION-HISTORY."},
+  {"severity": "info", "type": "upstream_issue", "upstream_agent": "3_data", "upstream_type": "copy_outside_fd", "line": 44, "message": "Records POSITION-RECORD and TRANSACTION-RECORD are linked by EXPANDS_COPY from FILE section SYS-PORTFOLIO-001-FIL-0079-SEC-0003 with no fd_name."},
+  {"severity": "info", "type": "upstream_issue", "upstream_agent": "3_data", "upstream_type": "select_without_fd", "line": 26, "message": "SELECT POSITION-MASTER and SELECT TRANSACTION-HISTORY have no FD entry; only VALIDATION-CONTROL and ERROR-REPORT have FDs."},
+  {"severity": "info", "type": "upstream_issue", "upstream_agent": "3_data", "upstream_type": "record_key_in_copybook", "line": 29, "message": "RECORD KEY POS-KEY of POSITION-MASTER is declared in copybook POSREC."},
+  {"severity": "info", "type": "upstream_issue", "upstream_agent": "3_data", "upstream_type": "record_key_not_found", "line": 35, "message": "RECORD KEY TRAN-KEY of TRANSACTION-HISTORY is not declared in UTLVAL00 nor in copybook TRNREC."},
+  {"severity": "warning", "type": "unresolvable_perform_target", "lines": [165, 166, 169, 170, 173, 174, 177, 178], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0079-STMT-000018", "SYS-PORTFOLIO-001-FIL-0079-STMT-000019", "SYS-PORTFOLIO-001-FIL-0079-STMT-000020", "SYS-PORTFOLIO-001-FIL-0079-STMT-000021", "SYS-PORTFOLIO-001-FIL-0079-STMT-000022", "SYS-PORTFOLIO-001-FIL-0079-STMT-000023", "SYS-PORTFOLIO-001-FIL-0079-STMT-000024", "SYS-PORTFOLIO-001-FIL-0079-STMT-000025"], "message": "8 PERFORM targets not in CFG; recorded as unresolvable steps with null target IDs. No paragraph of these names exists in UTLVAL00 or in any copybook. The actual integrity, cross-reference, format and balance checks cannot be traced."},
+  {"severity": "info", "type": "field_id_unresolved", "name": "WS-ERROR-MESSAGE", "lines": [110, 117, 124, 131, 160, 189], "message": "resolve-field-references UNRESOLVED; not declared in the program or in copybooks RTNCODE/ERRHAND/POSREC/TRNREC; target_id null."},
+  {"severity": "warning", "type": "error_handler_returns", "line": 186, "statement_id": "SYS-PORTFOLIO-001-FIL-0079-STMT-000030", "message": "9999-ERROR-HANDLER has no GOBACK/STOP RUN: after logging an error it returns to the caller and processing continues. A failed OPEN therefore does not stop the program, and RETURN-CODE is never set."},
+  {"severity": "warning", "type": "write_before_open", "lines": [111, 118, 125, 190], "message": "If VALIDATION-CONTROL, POSITION-MASTER or TRANSACTION-HISTORY fails to open, 9999-ERROR-HANDLER writes ERROR-RECORD before ERROR-REPORT is opened (line 128); if ERROR-REPORT itself fails to open, the handler writes to the unopened file. The WRITE status is not checked."},
+  {"severity": "warning", "type": "loop_termination_risk", "line": 139, "statement_id": "SYS-PORTFOLIO-001-FIL-0079-STMT-000016", "message": "END-OF-VALIDATION is set only by the AT END branch of READ VALIDATION-CONTROL. If the file failed to open (processing continues, see error_handler_returns) or a READ fails with a status other than end of file, neither AT END nor NOT AT END runs and the loop may not terminate. WS-VAL-STATUS is not tested in the loop."},
+  {"severity": "info", "type": "unused_data", "message": "WS-RECORDS-READ, WS-RECORDS-VALID, WS-TOTAL-AMOUNT, WS-CONTROL-TOTAL, WS-ERR-TYPE and WS-ERR-KEY are never set by traceable statements; ERROR-FOUND is set (line 188) but never tested; VAL-PARAMETERS is never used. Their use may be in the missing paragraphs."}
+],
+"program_narrative": "Program UTLVAL00 is a batch data-validation utility driven by a control file. It opens VALIDATION-CONTROL, POSITION-MASTER and TRANSACTION-HISTORY for input and ERROR-REPORT for output, logging an error line for any file that fails to open, and clears its validation totals. It then reads VALIDATION-CONTROL sequentially until end of file; for each control record it selects a validation by VAL-TYPE: 'INTEGRITY' performs position and transaction integrity checks, 'XREF' cross-reference checks, 'FORMAT' format checks and 'BALANCE' position accumulation and balance verification; any other type is logged as 'INVALID VALIDATION TYPE'. The eight check paragraphs that do the actual work (2210-CHECK-POSITION-INTEGRITY through 2520-VERIFY-BALANCES) are not present in the source, so what is validated is unknown, and POSITION-MASTER and TRANSACTION-HISTORY are opened but never read by traceable code. Error handling adds 1 to the error count, sets the error flag and writes the error message to ERROR-REPORT, then returns to the caller; the program never stops on an error. Finally it closes all four files and returns.",
+"paragraphs": [
+  {
+    "name": "0000-MAIN", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0079-PAR-0001", "section": null, "section_id": null, "line_range": [96, 101],
+    "pseudocode": [
+      "-- Main control paragraph: initialise, run the validations listed in the control file, clean up",
+      "CALL 1000-initialize",
+      "CALL 2000-process",
+      "CALL 3000-cleanup",
+      "RETURN to caller  -- GOBACK"
+    ],
+    "pseudocode_statement_ids": [[], ["SYS-PORTFOLIO-001-FIL-0079-STMT-000001"], ["SYS-PORTFOLIO-001-FIL-0079-STMT-000002"], ["SYS-PORTFOLIO-001-FIL-0079-STMT-000003"], ["SYS-PORTFOLIO-001-FIL-0079-STMT-000004"]],
+    "pseudocode_text": "-- Main control paragraph: initialise, run the validations listed in the control file, clean up\nCALL 1000-initialize\nCALL 2000-process\nCALL 3000-cleanup\nRETURN to caller  -- GOBACK",
+    "statement_ids": ["SYS-PORTFOLIO-001-FIL-0079-STMT-000001", "SYS-PORTFOLIO-001-FIL-0079-STMT-000002", "SYS-PORTFOLIO-001-FIL-0079-STMT-000003", "SYS-PORTFOLIO-001-FIL-0079-STMT-000004"],
+    "untranslated_statement_ids": [],
+    "field_references": [], "field_reference_ids": [],
+    "calls_made": ["1000-INITIALIZE", "2000-PROCESS", "3000-CLEANUP"],
+    "calls_made_ids": [{"name": "1000-INITIALIZE", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0079-PAR-0002", "section_id": null}, {"name": "2000-PROCESS", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0079-PAR-0005", "section_id": null}, {"name": "3000-CLEANUP", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0079-PAR-0011", "section_id": null}],
+    "complexity_score": 1, "has_unresolved_statements": false, "annotations": []
+  },
+  {
+    "name": "1000-INITIALIZE", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0079-PAR-0002", "section": null, "section_id": null, "line_range": [102, 105],
+    "pseudocode": [
+      "CALL 1100-open-files",
+      "CALL 1200-init-processing"
+    ],
+    "pseudocode_statement_ids": [["SYS-PORTFOLIO-001-FIL-0079-STMT-000005"], ["SYS-PORTFOLIO-001-FIL-0079-STMT-000006"]],
+    "pseudocode_text": "CALL 1100-open-files\nCALL 1200-init-processing",
+    "statement_ids": ["SYS-PORTFOLIO-001-FIL-0079-STMT-000005", "SYS-PORTFOLIO-001-FIL-0079-STMT-000006"],
+    "untranslated_statement_ids": [],
+    "field_references": [], "field_reference_ids": [],
+    "calls_made": ["1100-OPEN-FILES", "1200-INIT-PROCESSING"],
+    "calls_made_ids": [{"name": "1100-OPEN-FILES", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0079-PAR-0003", "section_id": null}, {"name": "1200-INIT-PROCESSING", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0079-PAR-0004", "section_id": null}],
+    "complexity_score": 1, "has_unresolved_statements": false, "annotations": []
+  },
+  {
+    "name": "1100-OPEN-FILES", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0079-PAR-0003", "section": null, "section_id": null, "line_range": [106, 134],
+    "pseudocode": [
+      "OPEN VALIDATION-CONTROL for READ-ONLY",
+      "IF validation_status (WS-VAL-STATUS) != '00' THEN  -- '00' = successful open",
+      "  SET error_message = 'ERROR OPENING VALIDATION CONTROL'",
+      "  CALL 9999-error-handler  -- logs the error and returns; processing continues",
+      "END IF",
+      "OPEN POSITION-MASTER for READ-ONLY  -- ACCESS MODE DYNAMIC",
+      "IF position_status (WS-POS-STATUS) != '00' THEN",
+      "  SET error_message = 'ERROR OPENING POSITION MASTER'",
+      "  CALL 9999-error-handler",
+      "END IF",
+      "OPEN TRANSACTION-HISTORY for READ-ONLY  -- ACCESS MODE DYNAMIC",
+      "IF transaction_status (WS-TRAN-STATUS) != '00' THEN",
+      "  SET error_message = 'ERROR OPENING TRANSACTION HISTORY'",
+      "  CALL 9999-error-handler",
+      "END IF",
+      "OPEN ERROR-REPORT for WRITE (new)",
+      "IF report_status (WS-RPT-STATUS) != '00' THEN",
+      "  SET error_message = 'ERROR OPENING ERROR REPORT'",
+      "  CALL 9999-error-handler",
+      "END IF"
+    ],
+    "pseudocode_statement_ids": [["SYS-PORTFOLIO-001-FIL-0079-STMT-000007"], ["SYS-PORTFOLIO-001-FIL-0079-STMT-000008"], ["SYS-PORTFOLIO-001-FIL-0079-STMT-000031"], ["SYS-PORTFOLIO-001-FIL-0079-STMT-000032"], ["SYS-PORTFOLIO-001-FIL-0079-STMT-000008"], ["SYS-PORTFOLIO-001-FIL-0079-STMT-000009"], ["SYS-PORTFOLIO-001-FIL-0079-STMT-000010"], ["SYS-PORTFOLIO-001-FIL-0079-STMT-000033"], ["SYS-PORTFOLIO-001-FIL-0079-STMT-000034"], ["SYS-PORTFOLIO-001-FIL-0079-STMT-000010"], ["SYS-PORTFOLIO-001-FIL-0079-STMT-000011"], ["SYS-PORTFOLIO-001-FIL-0079-STMT-000012"], ["SYS-PORTFOLIO-001-FIL-0079-STMT-000035"], ["SYS-PORTFOLIO-001-FIL-0079-STMT-000036"], ["SYS-PORTFOLIO-001-FIL-0079-STMT-000012"], ["SYS-PORTFOLIO-001-FIL-0079-STMT-000013"], ["SYS-PORTFOLIO-001-FIL-0079-STMT-000014"], ["SYS-PORTFOLIO-001-FIL-0079-STMT-000037"], ["SYS-PORTFOLIO-001-FIL-0079-STMT-000038"], ["SYS-PORTFOLIO-001-FIL-0079-STMT-000014"]],
+    "pseudocode_text": "OPEN VALIDATION-CONTROL for READ-ONLY\nIF validation_status (WS-VAL-STATUS) != '00' THEN  -- '00' = successful open\n  SET error_message = 'ERROR OPENING VALIDATION CONTROL'\n  CALL 9999-error-handler  -- logs the error and returns; processing continues\nEND IF\nOPEN POSITION-MASTER for READ-ONLY  -- ACCESS MODE DYNAMIC\nIF position_status (WS-POS-STATUS) != '00' THEN\n  SET error_message = 'ERROR OPENING POSITION MASTER'\n  CALL 9999-error-handler\nEND IF\nOPEN TRANSACTION-HISTORY for READ-ONLY  -- ACCESS MODE DYNAMIC\nIF transaction_status (WS-TRAN-STATUS) != '00' THEN\n  SET error_message = 'ERROR OPENING TRANSACTION HISTORY'\n  CALL 9999-error-handler\nEND IF\nOPEN ERROR-REPORT for WRITE (new)\nIF report_status (WS-RPT-STATUS) != '00' THEN\n  SET error_message = 'ERROR OPENING ERROR REPORT'\n  CALL 9999-error-handler\nEND IF",
+    "statement_ids": ["SYS-PORTFOLIO-001-FIL-0079-STMT-000007", "SYS-PORTFOLIO-001-FIL-0079-STMT-000008", "SYS-PORTFOLIO-001-FIL-0079-STMT-000031", "SYS-PORTFOLIO-001-FIL-0079-STMT-000032", "SYS-PORTFOLIO-001-FIL-0079-STMT-000009", "SYS-PORTFOLIO-001-FIL-0079-STMT-000010", "SYS-PORTFOLIO-001-FIL-0079-STMT-000033", "SYS-PORTFOLIO-001-FIL-0079-STMT-000034", "SYS-PORTFOLIO-001-FIL-0079-STMT-000011", "SYS-PORTFOLIO-001-FIL-0079-STMT-000012", "SYS-PORTFOLIO-001-FIL-0079-STMT-000035", "SYS-PORTFOLIO-001-FIL-0079-STMT-000036", "SYS-PORTFOLIO-001-FIL-0079-STMT-000013", "SYS-PORTFOLIO-001-FIL-0079-STMT-000014", "SYS-PORTFOLIO-001-FIL-0079-STMT-000037", "SYS-PORTFOLIO-001-FIL-0079-STMT-000038"],
+    "untranslated_statement_ids": [],
+    "field_references": ["WS-VAL-STATUS", "WS-POS-STATUS", "WS-TRAN-STATUS", "WS-RPT-STATUS", "WS-ERROR-MESSAGE"],
+    "field_reference_ids": [
+      {"name": "WS-VAL-STATUS", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0079-FLD-000003", "target_kind": "field", "candidate_ids": []},
+      {"name": "WS-POS-STATUS", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0079-FLD-000004", "target_kind": "field", "candidate_ids": []},
+      {"name": "WS-TRAN-STATUS", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0079-FLD-000005", "target_kind": "field", "candidate_ids": []},
+      {"name": "WS-RPT-STATUS", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0079-FLD-000006", "target_kind": "field", "candidate_ids": []},
+      {"name": "WS-ERROR-MESSAGE", "qualifiers": [], "resolution": "UNRESOLVED", "target_id": null, "target_kind": null, "candidate_ids": []}
+    ],
+    "calls_made": ["9999-ERROR-HANDLER"],
+    "calls_made_ids": [{"name": "9999-ERROR-HANDLER", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0079-PAR-0012", "section_id": null}],
+    "complexity_score": 4, "has_unresolved_statements": false,
+    "annotations": [
+      {"line": 111, "note": "9999-ERROR-HANDLER writes to ERROR-REPORT, which is opened only at line 128; errors on the first three OPENs are written to a file that is not yet open."},
+      {"line": 110, "note": "WS-ERROR-MESSAGE is not declared in the program or its copybooks (see data dictionary)."}
+    ]
+  },
+  {
+    "name": "1200-INIT-PROCESSING", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0079-PAR-0004", "section": null, "section_id": null, "line_range": [135, 137],
+    "pseudocode": [
+      "CLEAR validation_totals (WS-VALIDATION-TOTALS)  -- INITIALIZE: records read/valid/error and amount totals set to zero"
+    ],
+    "pseudocode_statement_ids": [["SYS-PORTFOLIO-001-FIL-0079-STMT-000015"]],
+    "pseudocode_text": "CLEAR validation_totals (WS-VALIDATION-TOTALS)  -- INITIALIZE: records read/valid/error and amount totals set to zero",
+    "statement_ids": ["SYS-PORTFOLIO-001-FIL-0079-STMT-000015"],
+    "untranslated_statement_ids": [],
+    "field_references": ["WS-VALIDATION-TOTALS"],
+    "field_reference_ids": [{"name": "WS-VALIDATION-TOTALS", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0079-REC-0006", "target_kind": "record", "candidate_ids": []}],
+    "calls_made": [], "calls_made_ids": [],
+    "complexity_score": 1, "has_unresolved_statements": false,
+    "annotations": [{"line": 136, "note": "Runs after 1100-OPEN-FILES, so any WS-RECORDS-ERROR increments made by the error handler for failed OPENs are reset to zero here."}]
+  },
+  {
+    "name": "2000-PROCESS", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0079-PAR-0005", "section": null, "section_id": null, "line_range": [138, 147],
+    "pseudocode": [
+      "WHILE NOT end_of_validation DO  -- PERFORM UNTIL END-OF-VALIDATION (inline, test before); END-OF-VALIDATION = WS-END-OF-VAL is 'Y'",
+      "  READ next record from VALIDATION-CONTROL into validation_record",
+      "  IF end of file THEN",
+      "    SET end_of_validation = TRUE  -- WS-END-OF-VAL = 'Y'",
+      "  ELSE",
+      "    CALL 2100-process-validation",
+      "  END IF",
+      "END WHILE"
+    ],
+    "pseudocode_statement_ids": [["SYS-PORTFOLIO-001-FIL-0079-STMT-000016"], ["SYS-PORTFOLIO-001-FIL-0079-STMT-000039"], ["SYS-PORTFOLIO-001-FIL-0079-STMT-000039"], ["SYS-PORTFOLIO-001-FIL-0079-STMT-000046"], ["SYS-PORTFOLIO-001-FIL-0079-STMT-000039"], ["SYS-PORTFOLIO-001-FIL-0079-STMT-000047"], ["SYS-PORTFOLIO-001-FIL-0079-STMT-000039"], ["SYS-PORTFOLIO-001-FIL-0079-STMT-000016"]],
+    "pseudocode_text": "WHILE NOT end_of_validation DO  -- PERFORM UNTIL END-OF-VALIDATION (inline, test before); END-OF-VALIDATION = WS-END-OF-VAL is 'Y'\n  READ next record from VALIDATION-CONTROL into validation_record\n  IF end of file THEN\n    SET end_of_validation = TRUE  -- WS-END-OF-VAL = 'Y'\n  ELSE\n    CALL 2100-process-validation\n  END IF\nEND WHILE",
+    "statement_ids": ["SYS-PORTFOLIO-001-FIL-0079-STMT-000016", "SYS-PORTFOLIO-001-FIL-0079-STMT-000039", "SYS-PORTFOLIO-001-FIL-0079-STMT-000046", "SYS-PORTFOLIO-001-FIL-0079-STMT-000047"],
+    "untranslated_statement_ids": [],
+    "field_references": ["END-OF-VALIDATION"],
+    "field_reference_ids": [{"name": "END-OF-VALIDATION", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0079-FLD-000012", "target_kind": "condition", "candidate_ids": []}],
+    "calls_made": ["2100-PROCESS-VALIDATION"],
+    "calls_made_ids": [{"name": "2100-PROCESS-VALIDATION", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0079-PAR-0006", "section_id": null}],
+    "complexity_score": 3, "has_unresolved_statements": false,
+    "annotations": [{"line": 140, "statement_id": "SYS-PORTFOLIO-001-FIL-0079-STMT-000039", "note": "READ VALIDATION-CONTROL (no INTO) fills VALIDATION-RECORD (VAL-TYPE, VAL-PARAMETERS). A READ error other than end of file runs neither branch and the loop continues; see trace_issues loop_termination_risk."}]
+  },
+  {
+    "name": "2100-PROCESS-VALIDATION", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0079-PAR-0006", "section": null, "section_id": null, "line_range": [148, 163],
+    "pseudocode": [
+      "SELECT CASE validation_type (VAL-TYPE)",
+      "  WHEN value of WS-INTEGRITY ('INTEGRITY'):",
+      "    CALL 2200-check-integrity",
+      "  WHEN value of WS-XREF ('XREF'):",
+      "    CALL 2300-check-xref",
+      "  WHEN value of WS-FORMAT ('FORMAT'):",
+      "    CALL 2400-check-format",
+      "  WHEN value of WS-BALANCE ('BALANCE'):",
+      "    CALL 2500-check-balance",
+      "  ELSE:",
+      "    SET error_message = 'INVALID VALIDATION TYPE'",
+      "    CALL 9999-error-handler",
+      "END SELECT"
+    ],
+    "pseudocode_statement_ids": [["SYS-PORTFOLIO-001-FIL-0079-STMT-000017"], ["SYS-PORTFOLIO-001-FIL-0079-STMT-000017"], ["SYS-PORTFOLIO-001-FIL-0079-STMT-000044"], ["SYS-PORTFOLIO-001-FIL-0079-STMT-000017"], ["SYS-PORTFOLIO-001-FIL-0079-STMT-000045"], ["SYS-PORTFOLIO-001-FIL-0079-STMT-000017"], ["SYS-PORTFOLIO-001-FIL-0079-STMT-000043"], ["SYS-PORTFOLIO-001-FIL-0079-STMT-000017"], ["SYS-PORTFOLIO-001-FIL-0079-STMT-000042"], ["SYS-PORTFOLIO-001-FIL-0079-STMT-000017"], ["SYS-PORTFOLIO-001-FIL-0079-STMT-000040"], ["SYS-PORTFOLIO-001-FIL-0079-STMT-000041"], ["SYS-PORTFOLIO-001-FIL-0079-STMT-000017"]],
+    "pseudocode_text": "SELECT CASE validation_type (VAL-TYPE)\n  WHEN value of WS-INTEGRITY ('INTEGRITY'):\n    CALL 2200-check-integrity\n  WHEN value of WS-XREF ('XREF'):\n    CALL 2300-check-xref\n  WHEN value of WS-FORMAT ('FORMAT'):\n    CALL 2400-check-format\n  WHEN value of WS-BALANCE ('BALANCE'):\n    CALL 2500-check-balance\n  ELSE:\n    SET error_message = 'INVALID VALIDATION TYPE'\n    CALL 9999-error-handler\nEND SELECT",
+    "statement_ids": ["SYS-PORTFOLIO-001-FIL-0079-STMT-000017", "SYS-PORTFOLIO-001-FIL-0079-STMT-000044", "SYS-PORTFOLIO-001-FIL-0079-STMT-000045", "SYS-PORTFOLIO-001-FIL-0079-STMT-000043", "SYS-PORTFOLIO-001-FIL-0079-STMT-000042", "SYS-PORTFOLIO-001-FIL-0079-STMT-000040", "SYS-PORTFOLIO-001-FIL-0079-STMT-000041"],
+    "untranslated_statement_ids": [],
+    "field_references": ["VAL-TYPE", "WS-INTEGRITY", "WS-XREF", "WS-FORMAT", "WS-BALANCE", "WS-ERROR-MESSAGE"],
+    "field_reference_ids": [
+      {"name": "VAL-TYPE", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0079-FLD-000001", "target_kind": "field", "candidate_ids": []},
+      {"name": "WS-INTEGRITY", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0079-FLD-000007", "target_kind": "field", "candidate_ids": []},
+      {"name": "WS-XREF", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0079-FLD-000008", "target_kind": "field", "candidate_ids": []},
+      {"name": "WS-FORMAT", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0079-FLD-000009", "target_kind": "field", "candidate_ids": []},
+      {"name": "WS-BALANCE", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0079-FLD-000010", "target_kind": "field", "candidate_ids": []},
+      {"name": "WS-ERROR-MESSAGE", "qualifiers": [], "resolution": "UNRESOLVED", "target_id": null, "target_kind": null, "candidate_ids": []}
+    ],
+    "calls_made": ["2200-CHECK-INTEGRITY", "2300-CHECK-XREF", "2400-CHECK-FORMAT", "2500-CHECK-BALANCE", "9999-ERROR-HANDLER"],
+    "calls_made_ids": [{"name": "2200-CHECK-INTEGRITY", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0079-PAR-0007", "section_id": null}, {"name": "2300-CHECK-XREF", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0079-PAR-0008", "section_id": null}, {"name": "2400-CHECK-FORMAT", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0079-PAR-0009", "section_id": null}, {"name": "2500-CHECK-BALANCE", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0079-PAR-0010", "section_id": null}, {"name": "9999-ERROR-HANDLER", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0079-PAR-0012", "section_id": null}],
+    "complexity_score": 5, "has_unresolved_statements": false,
+    "annotations": [{"line": 149, "statement_id": "SYS-PORTFOLIO-001-FIL-0079-STMT-000017", "note": "The WHEN objects are data items, not literals: VAL-TYPE is compared with the current contents of WS-INTEGRITY, WS-XREF, WS-FORMAT and WS-BALANCE (initial VALUEs 'INTEGRITY', 'XREF', 'FORMAT', 'BALANCE'; no statement changes them)."}]
+  },
+  {
+    "name": "2200-CHECK-INTEGRITY", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0079-PAR-0007", "section": null, "section_id": null, "line_range": [164, 167],
+    "pseudocode": [
+      "CALL 2210-check-position-integrity  !! UNRESOLVED: paragraph not present in source; logic unknown",
+      "CALL 2220-check-transaction-integrity  !! UNRESOLVED: paragraph not present in source; logic unknown"
+    ],
+    "pseudocode_statement_ids": [["SYS-PORTFOLIO-001-FIL-0079-STMT-000018"], ["SYS-PORTFOLIO-001-FIL-0079-STMT-000019"]],
+    "pseudocode_text": "CALL 2210-check-position-integrity  !! UNRESOLVED: paragraph not present in source; logic unknown\nCALL 2220-check-transaction-integrity  !! UNRESOLVED: paragraph not present in source; logic unknown",
+    "statement_ids": ["SYS-PORTFOLIO-001-FIL-0079-STMT-000018", "SYS-PORTFOLIO-001-FIL-0079-STMT-000019"],
+    "untranslated_statement_ids": [],
+    "field_references": [], "field_reference_ids": [],
+    "calls_made": ["2210-CHECK-POSITION-INTEGRITY", "2220-CHECK-TRANSACTION-INTEGRITY"],
+    "calls_made_ids": [{"name": "2210-CHECK-POSITION-INTEGRITY", "paragraph_id": null, "section_id": null}, {"name": "2220-CHECK-TRANSACTION-INTEGRITY", "paragraph_id": null, "section_id": null}],
+    "complexity_score": 1, "has_unresolved_statements": true,
+    "annotations": [{"line": 165, "note": "Integrity check logic missing from source (partial pseudocode)."}]
+  },
+  {
+    "name": "2300-CHECK-XREF", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0079-PAR-0008", "section": null, "section_id": null, "line_range": [168, 171],
+    "pseudocode": [
+      "CALL 2310-check-position-xref  !! UNRESOLVED: paragraph not present in source; logic unknown",
+      "CALL 2320-check-transaction-xref  !! UNRESOLVED: paragraph not present in source; logic unknown"
+    ],
+    "pseudocode_statement_ids": [["SYS-PORTFOLIO-001-FIL-0079-STMT-000020"], ["SYS-PORTFOLIO-001-FIL-0079-STMT-000021"]],
+    "pseudocode_text": "CALL 2310-check-position-xref  !! UNRESOLVED: paragraph not present in source; logic unknown\nCALL 2320-check-transaction-xref  !! UNRESOLVED: paragraph not present in source; logic unknown",
+    "statement_ids": ["SYS-PORTFOLIO-001-FIL-0079-STMT-000020", "SYS-PORTFOLIO-001-FIL-0079-STMT-000021"],
+    "untranslated_statement_ids": [],
+    "field_references": [], "field_reference_ids": [],
+    "calls_made": ["2310-CHECK-POSITION-XREF", "2320-CHECK-TRANSACTION-XREF"],
+    "calls_made_ids": [{"name": "2310-CHECK-POSITION-XREF", "paragraph_id": null, "section_id": null}, {"name": "2320-CHECK-TRANSACTION-XREF", "paragraph_id": null, "section_id": null}],
+    "complexity_score": 1, "has_unresolved_statements": true,
+    "annotations": [{"line": 169, "note": "Cross-reference check logic missing from source (partial pseudocode)."}]
+  },
+  {
+    "name": "2400-CHECK-FORMAT", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0079-PAR-0009", "section": null, "section_id": null, "line_range": [172, 175],
+    "pseudocode": [
+      "CALL 2410-check-position-format  !! UNRESOLVED: paragraph not present in source; logic unknown",
+      "CALL 2420-check-transaction-format  !! UNRESOLVED: paragraph not present in source; logic unknown"
+    ],
+    "pseudocode_statement_ids": [["SYS-PORTFOLIO-001-FIL-0079-STMT-000022"], ["SYS-PORTFOLIO-001-FIL-0079-STMT-000023"]],
+    "pseudocode_text": "CALL 2410-check-position-format  !! UNRESOLVED: paragraph not present in source; logic unknown\nCALL 2420-check-transaction-format  !! UNRESOLVED: paragraph not present in source; logic unknown",
+    "statement_ids": ["SYS-PORTFOLIO-001-FIL-0079-STMT-000022", "SYS-PORTFOLIO-001-FIL-0079-STMT-000023"],
+    "untranslated_statement_ids": [],
+    "field_references": [], "field_reference_ids": [],
+    "calls_made": ["2410-CHECK-POSITION-FORMAT", "2420-CHECK-TRANSACTION-FORMAT"],
+    "calls_made_ids": [{"name": "2410-CHECK-POSITION-FORMAT", "paragraph_id": null, "section_id": null}, {"name": "2420-CHECK-TRANSACTION-FORMAT", "paragraph_id": null, "section_id": null}],
+    "complexity_score": 1, "has_unresolved_statements": true,
+    "annotations": [{"line": 173, "note": "Format check logic missing from source (partial pseudocode)."}]
+  },
+  {
+    "name": "2500-CHECK-BALANCE", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0079-PAR-0010", "section": null, "section_id": null, "line_range": [176, 179],
+    "pseudocode": [
+      "CALL 2510-accumulate-positions  !! UNRESOLVED: paragraph not present in source; logic unknown",
+      "CALL 2520-verify-balances  !! UNRESOLVED: paragraph not present in source; logic unknown"
+    ],
+    "pseudocode_statement_ids": [["SYS-PORTFOLIO-001-FIL-0079-STMT-000024"], ["SYS-PORTFOLIO-001-FIL-0079-STMT-000025"]],
+    "pseudocode_text": "CALL 2510-accumulate-positions  !! UNRESOLVED: paragraph not present in source; logic unknown\nCALL 2520-verify-balances  !! UNRESOLVED: paragraph not present in source; logic unknown",
+    "statement_ids": ["SYS-PORTFOLIO-001-FIL-0079-STMT-000024", "SYS-PORTFOLIO-001-FIL-0079-STMT-000025"],
+    "untranslated_statement_ids": [],
+    "field_references": [], "field_reference_ids": [],
+    "calls_made": ["2510-ACCUMULATE-POSITIONS", "2520-VERIFY-BALANCES"],
+    "calls_made_ids": [{"name": "2510-ACCUMULATE-POSITIONS", "paragraph_id": null, "section_id": null}, {"name": "2520-VERIFY-BALANCES", "paragraph_id": null, "section_id": null}],
+    "complexity_score": 1, "has_unresolved_statements": true,
+    "annotations": [{"line": 177, "note": "Balance accumulation and verification logic missing from source (partial pseudocode)."}]
+  },
+  {
+    "name": "3000-CLEANUP", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0079-PAR-0011", "section": null, "section_id": null, "line_range": [180, 185],
+    "pseudocode": [
+      "CLOSE VALIDATION-CONTROL, POSITION-MASTER, TRANSACTION-HISTORY, ERROR-REPORT"
+    ],
+    "pseudocode_statement_ids": [["SYS-PORTFOLIO-001-FIL-0079-STMT-000026"]],
+    "pseudocode_text": "CLOSE VALIDATION-CONTROL, POSITION-MASTER, TRANSACTION-HISTORY, ERROR-REPORT",
+    "statement_ids": ["SYS-PORTFOLIO-001-FIL-0079-STMT-000026"],
+    "untranslated_statement_ids": [],
+    "field_references": [], "field_reference_ids": [],
+    "calls_made": [], "calls_made_ids": [],
+    "complexity_score": 1, "has_unresolved_statements": false, "annotations": []
+  },
+  {
+    "name": "9999-ERROR-HANDLER", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0079-PAR-0012", "section": null, "section_id": null, "line_range": [186, 190],
+    "pseudocode": [
+      "INCREMENT records_in_error (WS-RECORDS-ERROR) BY 1",
+      "SET error_found = TRUE  -- WS-ERROR-FOUND = 'Y'",
+      "SET error_description (WS-ERR-DESC) = error_message (WS-ERROR-MESSAGE)",
+      "WRITE error_line (WS-ERROR-LINE) to ERROR-REPORT via ERROR-RECORD",
+      "-- end of paragraph: no GOBACK, control returns to the PERFORM that called it"
+    ],
+    "pseudocode_statement_ids": [["SYS-PORTFOLIO-001-FIL-0079-STMT-000027"], ["SYS-PORTFOLIO-001-FIL-0079-STMT-000028"], ["SYS-PORTFOLIO-001-FIL-0079-STMT-000029"], ["SYS-PORTFOLIO-001-FIL-0079-STMT-000030"], []],
+    "pseudocode_text": "INCREMENT records_in_error (WS-RECORDS-ERROR) BY 1\nSET error_found = TRUE  -- WS-ERROR-FOUND = 'Y'\nSET error_description (WS-ERR-DESC) = error_message (WS-ERROR-MESSAGE)\nWRITE error_line (WS-ERROR-LINE) to ERROR-REPORT via ERROR-RECORD\n-- end of paragraph: no GOBACK, control returns to the PERFORM that called it",
+    "statement_ids": ["SYS-PORTFOLIO-001-FIL-0079-STMT-000027", "SYS-PORTFOLIO-001-FIL-0079-STMT-000028", "SYS-PORTFOLIO-001-FIL-0079-STMT-000029", "SYS-PORTFOLIO-001-FIL-0079-STMT-000030"],
+    "untranslated_statement_ids": [],
+    "field_references": ["WS-RECORDS-ERROR", "ERROR-FOUND", "WS-ERROR-MESSAGE", "WS-ERR-DESC", "ERROR-RECORD", "WS-ERROR-LINE"],
+    "field_reference_ids": [
+      {"name": "WS-RECORDS-ERROR", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0079-FLD-000017", "target_kind": "field", "candidate_ids": []},
+      {"name": "ERROR-FOUND", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0079-FLD-000014", "target_kind": "condition", "candidate_ids": []},
+      {"name": "WS-ERROR-MESSAGE", "qualifiers": [], "resolution": "UNRESOLVED", "target_id": null, "target_kind": null, "candidate_ids": []},
+      {"name": "WS-ERR-DESC", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0079-FLD-000024", "target_kind": "field", "candidate_ids": []},
+      {"name": "ERROR-RECORD", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0079-REC-0002", "target_kind": "record", "candidate_ids": []},
+      {"name": "WS-ERROR-LINE", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0079-REC-0007", "target_kind": "record", "candidate_ids": []}
+    ],
+    "calls_made": [], "calls_made_ids": [],
+    "complexity_score": 2, "has_unresolved_statements": false,
+    "annotations": [{"line": 190, "statement_id": "SYS-PORTFOLIO-001-FIL-0079-STMT-000030", "note": "WS-ERR-TYPE and WS-ERR-KEY in the error line are never set (they keep their initial contents); the WRITE status (WS-RPT-STATUS) is not checked. The paragraph is also the last in the program, so it ends where the source ends."}]
+  }
+],
+"unresolved_statements": [
+  {"statement_id": "SYS-PORTFOLIO-001-FIL-0079-STMT-000018", "paragraph": "2200-CHECK-INTEGRITY", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0079-PAR-0007", "line": 165, "source_text": "PERFORM 2210-CHECK-POSITION-INTEGRITY", "reason": "target paragraph not present in source; called logic unknown"},
+  {"statement_id": "SYS-PORTFOLIO-001-FIL-0079-STMT-000019", "paragraph": "2200-CHECK-INTEGRITY", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0079-PAR-0007", "line": 166, "source_text": "PERFORM 2220-CHECK-TRANSACTION-INTEGRITY", "reason": "target paragraph not present in source; called logic unknown"},
+  {"statement_id": "SYS-PORTFOLIO-001-FIL-0079-STMT-000020", "paragraph": "2300-CHECK-XREF", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0079-PAR-0008", "line": 169, "source_text": "PERFORM 2310-CHECK-POSITION-XREF", "reason": "target paragraph not present in source; called logic unknown"},
+  {"statement_id": "SYS-PORTFOLIO-001-FIL-0079-STMT-000021", "paragraph": "2300-CHECK-XREF", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0079-PAR-0008", "line": 170, "source_text": "PERFORM 2320-CHECK-TRANSACTION-XREF", "reason": "target paragraph not present in source; called logic unknown"},
+  {"statement_id": "SYS-PORTFOLIO-001-FIL-0079-STMT-000022", "paragraph": "2400-CHECK-FORMAT", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0079-PAR-0009", "line": 173, "source_text": "PERFORM 2410-CHECK-POSITION-FORMAT", "reason": "target paragraph not present in source; called logic unknown"},
+  {"statement_id": "SYS-PORTFOLIO-001-FIL-0079-STMT-000023", "paragraph": "2400-CHECK-FORMAT", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0079-PAR-0009", "line": 174, "source_text": "PERFORM 2420-CHECK-TRANSACTION-FORMAT", "reason": "target paragraph not present in source; called logic unknown"},
+  {"statement_id": "SYS-PORTFOLIO-001-FIL-0079-STMT-000024", "paragraph": "2500-CHECK-BALANCE", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0079-PAR-0010", "line": 177, "source_text": "PERFORM 2510-ACCUMULATE-POSITIONS", "reason": "target paragraph not present in source; called logic unknown"},
+  {"statement_id": "SYS-PORTFOLIO-001-FIL-0079-STMT-000025", "paragraph": "2500-CHECK-BALANCE", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0079-PAR-0010", "line": 178, "source_text": "PERFORM 2520-VERIFY-BALANCES", "reason": "target paragraph not present in source; called logic unknown"}
+],
+"pseudocode_issues": [
+  {"severity": "info", "type": "id_unresolved", "kind": "field", "name": "WS-ERROR-MESSAGE", "paragraphs": ["1100-OPEN-FILES", "2100-PROCESS-VALIDATION", "9999-ERROR-HANDLER"], "message": "resolve-field-references UNRESOLVED; target_id null."},
+  {"severity": "info", "type": "id_unresolved", "kind": "paragraph", "name": "2210-CHECK-POSITION-INTEGRITY", "statement_id": "SYS-PORTFOLIO-001-FIL-0079-STMT-000018", "message": "calls_made target has no Paragraph ID (CFG edge unresolved)."},
+  {"severity": "info", "type": "id_unresolved", "kind": "paragraph", "name": "2220-CHECK-TRANSACTION-INTEGRITY", "statement_id": "SYS-PORTFOLIO-001-FIL-0079-STMT-000019", "message": "calls_made target has no Paragraph ID (CFG edge unresolved)."},
+  {"severity": "info", "type": "id_unresolved", "kind": "paragraph", "name": "2310-CHECK-POSITION-XREF", "statement_id": "SYS-PORTFOLIO-001-FIL-0079-STMT-000020", "message": "calls_made target has no Paragraph ID (CFG edge unresolved)."},
+  {"severity": "info", "type": "id_unresolved", "kind": "paragraph", "name": "2320-CHECK-TRANSACTION-XREF", "statement_id": "SYS-PORTFOLIO-001-FIL-0079-STMT-000021", "message": "calls_made target has no Paragraph ID (CFG edge unresolved)."},
+  {"severity": "info", "type": "id_unresolved", "kind": "paragraph", "name": "2410-CHECK-POSITION-FORMAT", "statement_id": "SYS-PORTFOLIO-001-FIL-0079-STMT-000022", "message": "calls_made target has no Paragraph ID (CFG edge unresolved)."},
+  {"severity": "info", "type": "id_unresolved", "kind": "paragraph", "name": "2420-CHECK-TRANSACTION-FORMAT", "statement_id": "SYS-PORTFOLIO-001-FIL-0079-STMT-000023", "message": "calls_made target has no Paragraph ID (CFG edge unresolved)."},
+  {"severity": "info", "type": "id_unresolved", "kind": "paragraph", "name": "2510-ACCUMULATE-POSITIONS", "statement_id": "SYS-PORTFOLIO-001-FIL-0079-STMT-000024", "message": "calls_made target has no Paragraph ID (CFG edge unresolved)."},
+  {"severity": "info", "type": "id_unresolved", "kind": "paragraph", "name": "2520-VERIFY-BALANCES", "statement_id": "SYS-PORTFOLIO-001-FIL-0079-STMT-000025", "message": "calls_made target has no Paragraph ID (CFG edge unresolved)."}
+]
+}

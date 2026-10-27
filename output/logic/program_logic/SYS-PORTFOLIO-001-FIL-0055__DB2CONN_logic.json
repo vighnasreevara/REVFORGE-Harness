@@ -1,0 +1,497 @@
+{
+"program_summary": {"program_id": "DB2CONN", "file_id": "SYS-PORTFOLIO-001-FIL-0055", "logic_file": "program_logic/SYS-PORTFOLIO-001-FIL-0055__DB2CONN_logic.json", "logic_status": "partial", "paragraphs_translated": 6, "execution_paths": 1, "branches": 7, "loops": 1, "dead_code_confirmed": 0, "goto_annotations": 0, "unresolvable_paths": 0, "unresolved_ids": 1},
+"program_id": "DB2CONN",
+"system_id": "SYS-PORTFOLIO-001",
+"file_id": "SYS-PORTFOLIO-001-FIL-0055",
+"path_id": "SYS-PORTFOLIO-001-PATH-0055",
+"relative_path": "src/programs/common/DB2CONN.cbl",
+"parse_run_id": "PRUN-20261023T023803Z-ACC2",
+"upstream": {
+  "verification": {
+    "verdict": "VALID",
+    "verdict_reasons": ["V2, V3 and V4 consistent; Agent 2 parse_status 'success'; all copybook layouts (SQLCA, DBPROC, ERRHAND) present and consistent; no unresolved copy stubs in the program"],
+    "v1": {"raw_structure": "present", "parse_status": "success", "program_layout": "present", "program_layout_data_run_id": "DRUN-20261024T215053Z-ACC1",
+           "copybook_layouts": [
+             {"copybook": "SQLCA", "copybook_file_id": "SYS-PORTFOLIO-001-FIL-0017", "layout": "present", "expanded_at_lines": [22]},
+             {"copybook": "DBPROC", "copybook_file_id": "SYS-PORTFOLIO-001-FIL-0015", "layout": "present", "expanded_at_lines": [23]},
+             {"copybook": "ERRHAND", "copybook_file_id": "SYS-PORTFOLIO-001-FIL-0007", "layout": "present", "expanded_at_lines": [24]}],
+           "unresolved_copy_stubs": 0},
+    "v2_file_identities": {
+      "program_entries": {"require_completed": ["parser", "data"], "entries": ["raw_structure|SYS-PORTFOLIO-001-FIL-0055", "data_layout|SYS-PORTFOLIO-001-FIL-0055"], "result": "batched with the RPTAUD00, RTNCDE00, DB2HNDL and ERRHANDL program entries: checked 10, ok 10, problems [], duplicates [], consistent true"},
+      "copybook_entries": {"require_completed": ["data"], "entries": ["data_layout|SYS-PORTFOLIO-001-FIL-0017", "data_layout|SYS-PORTFOLIO-001-FIL-0015", "data_layout|SYS-PORTFOLIO-001-FIL-0007"], "result": "batched with copybooks FIL-0005 and FIL-0013: checked 5, ok 5, problems [], duplicates [], consistent true"},
+      "consistent": true
+    },
+    "v3_structure_identities": {"sections_checked": 3, "paragraphs_checked": 6, "statements_checked": 46, "edges_checked": 5, "registered_edges": 5, "section_problems": [], "paragraph_problems": [], "statement_problems": [], "edge_problems": [], "invalid_registered_edges": [], "registered_not_in_json": {"missing_count": 0}, "duplicate_ids_in_json": [], "consistent": true, "note": "section names sent: CONFIGURATION for SEC-0001; null for the WORKING-STORAGE and LINKAGE sections (raw_structure does not carry their names). No edge sent for the PERFORM_INLINE at line 69."},
+    "v4_data_identities": [
+      {"file_id": "SYS-PORTFOLIO-001-FIL-0055", "layout": "program", "records_checked": 6, "fields_checked": 12, "expansions_checked": 3, "record_problems": [], "field_problems": [], "expansion_problems": [], "copybook_records_in_program": 0, "registered_not_in_json": {"missing_count": 0}, "duplicate_ids_in_json": [], "consistent": true, "note": "copy_expansions have holder_id null in the layout (COPY directly in WORKING-STORAGE); sent with holder_id = the layout's section_id SYS-PORTFOLIO-001-FIL-0055-SEC-0002"},
+      {"file_id": "SYS-PORTFOLIO-001-FIL-0017", "layout": "copybook SQLCA", "records_checked": 1, "fields_checked": 7, "expansions_checked": 0, "record_problems": [], "field_problems": [], "expansion_problems": [], "copybook_records_in_program": 0, "registered_not_in_json": {"missing_count": 0}, "duplicate_ids_in_json": [], "consistent": true},
+      {"file_id": "SYS-PORTFOLIO-001-FIL-0015", "layout": "copybook DBPROC", "records_checked": 1, "fields_checked": 11, "expansions_checked": 0, "record_problems": [], "field_problems": [], "expansion_problems": [], "copybook_records_in_program": 0, "registered_not_in_json": {"missing_count": 0}, "duplicate_ids_in_json": [], "consistent": true},
+      {"file_id": "SYS-PORTFOLIO-001-FIL-0007", "layout": "copybook ERRHAND", "records_checked": 5, "fields_checked": 25, "expansions_checked": 0, "record_problems": [], "field_problems": [], "expansion_problems": [], "copybook_records_in_program": 0, "registered_not_in_json": {"missing_count": 0}, "duplicate_ids_in_json": [], "consistent": true}
+    ]
+  }
+},
+"execution_traces": [
+  {
+    "entry_point": "0000-MAIN",
+    "entry_point_id": "SYS-PORTFOLIO-001-FIL-0055-PAR-0001",
+    "entry_type": "batch_subprogram",
+    "steps": [
+      {"step": 1, "paragraph": "0000-MAIN", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0055-PAR-0001", "action": "EVALUATE", "target": null, "target_paragraph_id": null, "target_section_id": null, "condition": {"text": "EVALUATE TRUE", "fields": [], "field_ids": []}, "line": 48, "statement_id": "SYS-PORTFOLIO-001-FIL-0055-STMT-000001"},
+      {"step": 2, "paragraph": "0000-MAIN", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0055-PAR-0001", "action": "PERFORM", "target": "1000-CONNECT", "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0055-PAR-0002", "target_section_id": null,
+       "condition": {"text": "WHEN FUNC-CONN", "fields": ["FUNC-CONN"], "field_ids": [{"name": "FUNC-CONN", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0055-FLD-000004", "target_kind": "condition", "candidate_ids": []}]}, "line": 50, "statement_id": "SYS-PORTFOLIO-001-FIL-0055-STMT-000017"},
+      {"step": 3, "paragraph": "1000-CONNECT", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0055-PAR-0002", "action": "PERFORM_INLINE", "target": "1000-CONNECT", "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0055-PAR-0002", "target_section_id": null,
+       "condition": {"text": "WS-CONNECTED OR WS-RETRY-COUNT >= WS-MAX-RETRIES", "fields": ["WS-CONNECTED", "WS-RETRY-COUNT", "WS-MAX-RETRIES"],
+                     "field_ids": [{"name": "WS-CONNECTED", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0055-FLD-000001", "target_kind": "condition", "candidate_ids": []}, {"name": "WS-RETRY-COUNT", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0055-REC-0004", "target_kind": "record", "candidate_ids": []}, {"name": "WS-MAX-RETRIES", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0055-REC-0005", "target_kind": "record", "candidate_ids": []}],
+                     "test_time": "BEFORE", "loop_type": "WHILE", "termination_pattern": "CONDITIONAL_TERMINATION_LOOP"}, "line": 69, "statement_id": "SYS-PORTFOLIO-001-FIL-0055-STMT-000007"},
+      {"step": 4, "paragraph": "1000-CONNECT", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0055-PAR-0002", "action": "PERFORM", "target": "1100-HANDLE-CONN-ERROR", "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0055-PAR-0003", "target_section_id": null,
+       "condition": {"text": "ELSE of IF SQLCODE = 0 (CONNECT failed)", "fields": ["SQLCODE"], "field_ids": [{"name": "SQLCODE", "qualifiers": [], "resolution": "UNRESOLVED", "target_id": null, "target_kind": null, "candidate_ids": []}]}, "line": 81, "statement_id": "SYS-PORTFOLIO-001-FIL-0055-STMT-000038"},
+      {"step": 5, "paragraph": "1000-CONNECT", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0055-PAR-0002", "action": "CALL", "target": "DELAY", "target_paragraph_id": null, "target_section_id": null,
+       "condition": {"text": "WS-RETRY-COUNT < WS-MAX-RETRIES AND NOT WS-CONNECTED", "fields": ["WS-RETRY-COUNT", "WS-MAX-RETRIES", "WS-CONNECTED"], "field_ids": [{"name": "WS-RETRY-COUNT", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0055-REC-0004", "target_kind": "record", "candidate_ids": []}, {"name": "WS-MAX-RETRIES", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0055-REC-0005", "target_kind": "record", "candidate_ids": []}, {"name": "WS-CONNECTED", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0055-FLD-000001", "target_kind": "condition", "candidate_ids": []}]}, "line": 86, "statement_id": "SYS-PORTFOLIO-001-FIL-0055-STMT-000041"},
+      {"step": 6, "paragraph": "0000-MAIN", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0055-PAR-0001", "action": "PERFORM", "target": "2000-DISCONNECT", "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0055-PAR-0004", "target_section_id": null,
+       "condition": {"text": "WHEN FUNC-DISC", "fields": ["FUNC-DISC"], "field_ids": [{"name": "FUNC-DISC", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0055-FLD-000005", "target_kind": "condition", "candidate_ids": []}]}, "line": 52, "statement_id": "SYS-PORTFOLIO-001-FIL-0055-STMT-000018"},
+      {"step": 7, "paragraph": "0000-MAIN", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0055-PAR-0001", "action": "PERFORM", "target": "3000-CHECK-STATUS", "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0055-PAR-0005", "target_section_id": null,
+       "condition": {"text": "WHEN FUNC-STAT", "fields": ["FUNC-STAT"], "field_ids": [{"name": "FUNC-STAT", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0055-FLD-000006", "target_kind": "condition", "candidate_ids": []}]}, "line": 54, "statement_id": "SYS-PORTFOLIO-001-FIL-0055-STMT-000019"},
+      {"step": 8, "paragraph": "0000-MAIN", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0055-PAR-0001", "action": "PERFORM", "target": "9000-ERROR-ROUTINE", "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0055-PAR-0006", "target_section_id": null,
+       "condition": {"text": "WHEN OTHER", "fields": [], "field_ids": []}, "line": 57, "statement_id": "SYS-PORTFOLIO-001-FIL-0055-STMT-000021"},
+      {"step": 9, "paragraph": "9000-ERROR-ROUTINE", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0055-PAR-0006", "action": "CALL", "target": "ERRPROC", "target_paragraph_id": null, "target_section_id": null, "condition": null, "line": 153, "statement_id": "SYS-PORTFOLIO-001-FIL-0055-STMT-000016"},
+      {"step": 10, "paragraph": "0000-MAIN", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0055-PAR-0001", "action": "GOBACK", "target": null, "target_paragraph_id": null, "target_section_id": null, "condition": null, "line": 60, "statement_id": "SYS-PORTFOLIO-001-FIL-0055-STMT-000002"}
+    ]
+  }
+],
+"branch_map": [
+  {
+    "paragraph": "0000-MAIN", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0055-PAR-0001",
+    "branches": [
+      {"type": "EVALUATE", "line": 48, "statement_id": "SYS-PORTFOLIO-001-FIL-0055-STMT-000001", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0055-PAR-0001", "subjects": ["TRUE"],
+       "condition_text": "EVALUATE TRUE WHEN FUNC-CONN / WHEN FUNC-DISC / WHEN FUNC-STAT / WHEN OTHER",
+       "condition_fields": ["FUNC-CONN", "FUNC-DISC", "FUNC-STAT"],
+       "condition_field_ids": [
+         {"name": "FUNC-CONN", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0055-FLD-000004", "target_kind": "condition", "candidate_ids": []},
+         {"name": "FUNC-DISC", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0055-FLD-000005", "target_kind": "condition", "candidate_ids": []},
+         {"name": "FUNC-STAT", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0055-FLD-000006", "target_kind": "condition", "candidate_ids": []}],
+       "when_clauses": [
+         {"conditions": ["FUNC-CONN"], "condition_fields": ["FUNC-CONN"], "body_line_range": [50, 50], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0055-STMT-000017"]},
+         {"conditions": ["FUNC-DISC"], "condition_fields": ["FUNC-DISC"], "body_line_range": [52, 52], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0055-STMT-000018"]},
+         {"conditions": ["FUNC-STAT"], "condition_fields": ["FUNC-STAT"], "body_line_range": [54, 54], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0055-STMT-000019"]},
+         {"conditions": ["OTHER"], "condition_fields": [], "body_line_range": [56, 57], "is_default": true, "statement_ids": ["SYS-PORTFOLIO-001-FIL-0055-STMT-000020", "SYS-PORTFOLIO-001-FIL-0055-STMT-000021"]}],
+       "end_evaluate_line": 58,
+       "outcomes": [
+         {"label": "WHEN FUNC-CONN (LS-FUNCTION = 'CONN')", "line_range": [50, 50], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0055-STMT-000017"]},
+         {"label": "WHEN FUNC-DISC (LS-FUNCTION = 'DISC')", "line_range": [52, 52], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0055-STMT-000018"]},
+         {"label": "WHEN FUNC-STAT (LS-FUNCTION = 'STAT')", "line_range": [54, 54], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0055-STMT-000019"]},
+         {"label": "WHEN OTHER", "line_range": [56, 57], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0055-STMT-000020", "SYS-PORTFOLIO-001-FIL-0055-STMT-000021"]}],
+       "nested_depth": 1}
+    ]
+  },
+  {
+    "paragraph": "1000-CONNECT", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0055-PAR-0002",
+    "branches": [
+      {"type": "IF", "line": 76, "statement_id": "SYS-PORTFOLIO-001-FIL-0055-STMT-000023", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0055-PAR-0002",
+       "condition_text": "SQLCODE = 0", "condition_fields": ["SQLCODE"],
+       "condition_field_ids": [{"name": "SQLCODE", "qualifiers": [], "resolution": "UNRESOLVED", "target_id": null, "target_kind": null, "candidate_ids": []}],
+       "has_else": true, "then_line_range": [77, 78], "else_line_range": [80, 81], "end_if_line": 82, "nested_depth": 1,
+       "outcomes": [
+         {"label": "THEN", "line_range": [77, 78], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0055-STMT-000039", "SYS-PORTFOLIO-001-FIL-0055-STMT-000040"]},
+         {"label": "ELSE", "line_range": [80, 81], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0055-STMT-000037", "SYS-PORTFOLIO-001-FIL-0055-STMT-000038"]}]},
+      {"type": "IF", "line": 84, "statement_id": "SYS-PORTFOLIO-001-FIL-0055-STMT-000024", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0055-PAR-0002",
+       "condition_text": "WS-RETRY-COUNT < WS-MAX-RETRIES AND NOT WS-CONNECTED", "condition_fields": ["WS-RETRY-COUNT", "WS-MAX-RETRIES", "WS-CONNECTED"],
+       "condition_field_ids": [
+         {"name": "WS-RETRY-COUNT", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0055-REC-0004", "target_kind": "record", "candidate_ids": []},
+         {"name": "WS-MAX-RETRIES", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0055-REC-0005", "target_kind": "record", "candidate_ids": []},
+         {"name": "WS-CONNECTED", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0055-FLD-000001", "target_kind": "condition", "candidate_ids": []}],
+       "has_else": false, "then_line_range": [86, 86], "else_line_range": null, "end_if_line": 87, "nested_depth": 1,
+       "outcomes": [
+         {"label": "THEN", "line_range": [86, 86], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0055-STMT-000041"]},
+         {"label": "NOT TAKEN (no ELSE)", "line_range": null, "statement_ids": []}]}
+    ]
+  },
+  {
+    "paragraph": "1100-HANDLE-CONN-ERROR", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0055-PAR-0003",
+    "branches": [
+      {"type": "EVALUATE", "line": 94, "statement_id": "SYS-PORTFOLIO-001-FIL-0055-STMT-000009", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0055-PAR-0003", "subjects": ["SQLCODE"],
+       "condition_text": "EVALUATE SQLCODE WHEN -30081 / WHEN -99999 / WHEN OTHER", "condition_fields": ["SQLCODE"],
+       "condition_field_ids": [{"name": "SQLCODE", "qualifiers": [], "resolution": "UNRESOLVED", "target_id": null, "target_kind": null, "candidate_ids": []}],
+       "when_clauses": [
+         {"conditions": ["SQLCODE = -30081"], "condition_fields": ["SQLCODE"], "body_line_range": [96, 97], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0055-STMT-000025"]},
+         {"conditions": ["SQLCODE = -99999"], "condition_fields": ["SQLCODE"], "body_line_range": [99, 100], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0055-STMT-000026"]},
+         {"conditions": ["OTHER"], "condition_fields": [], "body_line_range": [102, 103], "is_default": true, "statement_ids": ["SYS-PORTFOLIO-001-FIL-0055-STMT-000027"]}],
+       "end_evaluate_line": 104,
+       "outcomes": [
+         {"label": "WHEN -30081", "line_range": [96, 97], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0055-STMT-000025"]},
+         {"label": "WHEN -99999", "line_range": [99, 100], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0055-STMT-000026"]},
+         {"label": "WHEN OTHER", "line_range": [102, 103], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0055-STMT-000027"]}],
+       "nested_depth": 1}
+    ]
+  },
+  {
+    "paragraph": "2000-DISCONNECT", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0055-PAR-0004",
+    "branches": [
+      {"type": "IF", "line": 110, "statement_id": "SYS-PORTFOLIO-001-FIL-0055-STMT-000011", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0055-PAR-0004",
+       "condition_text": "WS-CONNECTED", "condition_fields": ["WS-CONNECTED"],
+       "condition_field_ids": [{"name": "WS-CONNECTED", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0055-FLD-000001", "target_kind": "condition", "candidate_ids": []}],
+       "has_else": false, "then_line_range": [111, 127], "else_line_range": null, "end_if_line": 128, "nested_depth": 1,
+       "outcomes": [
+         {"label": "THEN", "line_range": [111, 127], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0055-STMT-000028", "SYS-PORTFOLIO-001-FIL-0055-STMT-000029", "SYS-PORTFOLIO-001-FIL-0055-STMT-000030"]},
+         {"label": "NOT TAKEN (no ELSE)", "line_range": null, "statement_ids": []}]},
+      {"type": "IF", "line": 119, "statement_id": "SYS-PORTFOLIO-001-FIL-0055-STMT-000030", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0055-PAR-0004",
+       "condition_text": "SQLCODE = 0", "condition_fields": ["SQLCODE"],
+       "condition_field_ids": [{"name": "SQLCODE", "qualifiers": [], "resolution": "UNRESOLVED", "target_id": null, "target_kind": null, "candidate_ids": []}],
+       "has_else": true, "then_line_range": [120, 121], "else_line_range": [123, 126], "end_if_line": 127, "nested_depth": 2,
+       "outcomes": [
+         {"label": "THEN", "line_range": [120, 121], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0055-STMT-000045", "SYS-PORTFOLIO-001-FIL-0055-STMT-000046"]},
+         {"label": "ELSE", "line_range": [123, 126], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0055-STMT-000042", "SYS-PORTFOLIO-001-FIL-0055-STMT-000043", "SYS-PORTFOLIO-001-FIL-0055-STMT-000044"]}]}
+    ]
+  },
+  {
+    "paragraph": "3000-CHECK-STATUS", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0055-PAR-0005",
+    "branches": [
+      {"type": "IF", "line": 138, "statement_id": "SYS-PORTFOLIO-001-FIL-0055-STMT-000013", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0055-PAR-0005",
+       "condition_text": "SQLCODE = 0", "condition_fields": ["SQLCODE"],
+       "condition_field_ids": [{"name": "SQLCODE", "qualifiers": [], "resolution": "UNRESOLVED", "target_id": null, "target_kind": null, "candidate_ids": []}],
+       "has_else": true, "then_line_range": [139, 140], "else_line_range": [142, 146], "end_if_line": 147, "nested_depth": 1,
+       "outcomes": [
+         {"label": "THEN", "line_range": [139, 140], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0055-STMT-000035", "SYS-PORTFOLIO-001-FIL-0055-STMT-000036"]},
+         {"label": "ELSE", "line_range": [142, 146], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0055-STMT-000031", "SYS-PORTFOLIO-001-FIL-0055-STMT-000032", "SYS-PORTFOLIO-001-FIL-0055-STMT-000033", "SYS-PORTFOLIO-001-FIL-0055-STMT-000034"]}]}
+    ]
+  }
+],
+"loops": [
+  {"paragraph": "1000-CONNECT", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0055-PAR-0002", "target": "1000-CONNECT", "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0055-PAR-0002", "type": "PERFORM_INLINE",
+   "statement_id": "SYS-PORTFOLIO-001-FIL-0055-STMT-000007", "line": 69, "body_line_range": [72, 87], "end_perform_line": 88,
+   "condition_text": "WS-CONNECTED OR WS-RETRY-COUNT >= WS-MAX-RETRIES", "test_time": "BEFORE", "loop_type": "WHILE",
+   "condition_fields": ["WS-CONNECTED", "WS-RETRY-COUNT", "WS-MAX-RETRIES"],
+   "condition_field_ids": [
+     {"name": "WS-CONNECTED", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0055-FLD-000001", "target_kind": "condition", "candidate_ids": []},
+     {"name": "WS-RETRY-COUNT", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0055-REC-0004", "target_kind": "record", "candidate_ids": []},
+     {"name": "WS-MAX-RETRIES", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0055-REC-0005", "target_kind": "record", "candidate_ids": []}],
+   "termination_pattern": "CONDITIONAL_TERMINATION_LOOP",
+   "modifying_statement_ids": ["SYS-PORTFOLIO-001-FIL-0055-STMT-000039", "SYS-PORTFOLIO-001-FIL-0055-STMT-000037"]}
+],
+"dead_code_confirmed": [],
+"unresolvable_paths": [],
+"trace_issues": [
+  {"severity": "info", "type": "upstream_issue", "upstream_agent": "2_parser", "upstream_type": "misplaced_comment_indicator", "lines": [1, 6], "message": "Lines whose first non-blank character in columns 8-72 is '*' (column 8) were treated as comments."},
+  {"severity": "info", "type": "upstream_issue", "upstream_agent": "2_parser", "upstream_type": "level_01_in_area_b", "lines": [18, 19], "message": "01-level entries WS-DB-NAME and WS-PLAN-NAME inside the EXEC SQL DECLARE SECTION start in column 12 (Area B); recorded as-is."},
+  {"severity": "info", "type": "upstream_issue", "upstream_agent": "3_data", "upstream_type": "misplaced_comment_indicator", "line": 1, "message": "Line 1 has '*' as the first non-blank character in columns 8-72 (column 8); skipped as a comment."},
+  {"severity": "info", "type": "upstream_issue", "upstream_agent": "3_data", "upstream_type": "level_01_in_area_b", "line": 18, "message": "01 WS-DB-NAME (line 18) and 01 WS-PLAN-NAME (line 19) start in column 12 (Area B), inside EXEC SQL BEGIN/END DECLARE SECTION (lines 17-20); registered as WORKING-STORAGE records."},
+  {"severity": "info", "type": "upstream_issue", "upstream_agent": "3_data", "upstream_type": "unresolved_copy_stub", "file_id": "SYS-PORTFOLIO-001-FIL-0017", "message": "Copybook SQLCA (copied at line 22) defines only SQL-STATUS-CODES; its EXEC SQL INCLUDE SQLCA self-include is unresolved, so the precompiler SQLCA structure (SQLCODE, SQLSTATE, SQLERRMC, ...) is not defined in any registered layout. This explains why SQLCODE has no Field ID."},
+  {"severity": "info", "type": "field_id_unresolved", "name": "SQLCODE", "lines": [76, 92, 94, 119, 123, 138, 143], "message": "resolve-field-references UNRESOLVED; SQLCODE is supplied by the DB2 precompiler SQLCA and is not registered in the program or its copybooks; target_id null."},
+  {"severity": "info", "type": "external_call", "line": 86, "statement_id": "SYS-PORTFOLIO-001-FIL-0055-STMT-000041", "message": "Static CALL 'DELAY' USING DB2-RETRY-WAIT: external program, not part of this program's CFG; its behaviour is not traced here."},
+  {"severity": "info", "type": "external_call", "line": 153, "statement_id": "SYS-PORTFOLIO-001-FIL-0055-STMT-000016", "message": "Static CALL 'ERRPROC' USING ERR-MESSAGE: external program (PROGRAM-ID ERRPROC in the system inventory); its logic is in its own logic file when traced."},
+  {"severity": "info", "type": "loop_termination", "line": 69, "statement_id": "SYS-PORTFOLIO-001-FIL-0055-STMT-000007", "message": "The connect loop ends when SET WS-CONNECTED TO TRUE runs (line 77, CONNECT returned SQLCODE 0) or when ADD 1 TO WS-RETRY-COUNT (line 80, CONNECT failed) brings the count to WS-MAX-RETRIES (VALUE 3, not modified by any statement). Both modifications depend on the CONNECT result, so the body runs at most WS-MAX-RETRIES times."},
+  {"severity": "info", "type": "trace_order_note", "message": "Execution trace steps inside performed paragraphs are listed depth-first after the PERFORM that reaches them; only one WHEN branch of the EVALUATE at line 48 runs per call."}
+],
+"program_narrative": "Program DB2CONN is a DB2 connection manager subprogram. The caller passes a request area (LS-DB2-REQUEST) holding a 4-character function code, a database name, a plan name, a return code and error information, and the program returns with GOBACK. Function 'CONN' connects to the requested database, retrying up to WS-MAX-RETRIES (initial value 3) times and calling the external program DELAY with DB2-RETRY-WAIT between failed attempts; each failure records the SQLCODE and an error message and sets return code 12. Function 'DISC' commits the work and resets the connection when the program believes it is connected, returning 0 on success or 8 with the SQLCODE and an error message on failure. Function 'STAT' probes the connection by selecting CURRENT SERVER and returns 0 when active or 4 with an error message when not. Any other function code sets error text 'Invalid function code', return code 12 and calls the external error program ERRPROC with ERR-MESSAGE. The plan name is moved to WS-PLAN-NAME but not used by any SQL statement; SQLCODE comes from the DB2 precompiler and has no registered Field ID.",
+"paragraphs": [
+  {
+    "name": "0000-MAIN", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0055-PAR-0001", "section": null, "section_id": null, "line_range": [47, 62],
+    "pseudocode": [
+      "-- Entry: caller passes db2_request (LS-DB2-REQUEST: function code, database name, plan name, return code, error info) (PROCEDURE DIVISION USING, line 46)",
+      "SELECT CASE requested_function (LS-FUNCTION)",
+      "  WHEN 'CONN' (FUNC-CONN):",
+      "    CALL 1000-connect",
+      "  WHEN 'DISC' (FUNC-DISC):",
+      "    CALL 2000-disconnect",
+      "  WHEN 'STAT' (FUNC-STAT):",
+      "    CALL 3000-check-status",
+      "  ELSE:",
+      "    SET error_text (ERR-TEXT) = 'Invalid function code'",
+      "    CALL 9000-error-routine",
+      "END SELECT",
+      "RETURN to caller  -- GOBACK"
+    ],
+    "pseudocode_statement_ids": [
+      [],
+      ["SYS-PORTFOLIO-001-FIL-0055-STMT-000001"],
+      ["SYS-PORTFOLIO-001-FIL-0055-STMT-000001"],
+      ["SYS-PORTFOLIO-001-FIL-0055-STMT-000017"],
+      ["SYS-PORTFOLIO-001-FIL-0055-STMT-000001"],
+      ["SYS-PORTFOLIO-001-FIL-0055-STMT-000018"],
+      ["SYS-PORTFOLIO-001-FIL-0055-STMT-000001"],
+      ["SYS-PORTFOLIO-001-FIL-0055-STMT-000019"],
+      ["SYS-PORTFOLIO-001-FIL-0055-STMT-000001"],
+      ["SYS-PORTFOLIO-001-FIL-0055-STMT-000020"],
+      ["SYS-PORTFOLIO-001-FIL-0055-STMT-000021"],
+      ["SYS-PORTFOLIO-001-FIL-0055-STMT-000001"],
+      ["SYS-PORTFOLIO-001-FIL-0055-STMT-000002"]
+    ],
+    "pseudocode_text": "-- Entry: caller passes db2_request (LS-DB2-REQUEST: function code, database name, plan name, return code, error info) (PROCEDURE DIVISION USING, line 46)\nSELECT CASE requested_function (LS-FUNCTION)\n  WHEN 'CONN' (FUNC-CONN):\n    CALL 1000-connect\n  WHEN 'DISC' (FUNC-DISC):\n    CALL 2000-disconnect\n  WHEN 'STAT' (FUNC-STAT):\n    CALL 3000-check-status\n  ELSE:\n    SET error_text (ERR-TEXT) = 'Invalid function code'\n    CALL 9000-error-routine\nEND SELECT\nRETURN to caller  -- GOBACK",
+    "statement_ids": ["SYS-PORTFOLIO-001-FIL-0055-STMT-000001", "SYS-PORTFOLIO-001-FIL-0055-STMT-000017", "SYS-PORTFOLIO-001-FIL-0055-STMT-000018", "SYS-PORTFOLIO-001-FIL-0055-STMT-000019", "SYS-PORTFOLIO-001-FIL-0055-STMT-000020", "SYS-PORTFOLIO-001-FIL-0055-STMT-000021", "SYS-PORTFOLIO-001-FIL-0055-STMT-000002"],
+    "untranslated_statement_ids": [],
+    "field_references": ["LS-DB2-REQUEST", "FUNC-CONN", "FUNC-DISC", "FUNC-STAT", "ERR-TEXT"],
+    "field_reference_ids": [
+      {"name": "LS-DB2-REQUEST", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0055-REC-0006", "target_kind": "record", "candidate_ids": []},
+      {"name": "FUNC-CONN", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0055-FLD-000004", "target_kind": "condition", "candidate_ids": []},
+      {"name": "FUNC-DISC", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0055-FLD-000005", "target_kind": "condition", "candidate_ids": []},
+      {"name": "FUNC-STAT", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0055-FLD-000006", "target_kind": "condition", "candidate_ids": []},
+      {"name": "ERR-TEXT", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0007-FLD-000017", "target_kind": "field", "candidate_ids": []}
+    ],
+    "calls_made": ["1000-CONNECT", "2000-DISCONNECT", "3000-CHECK-STATUS", "9000-ERROR-ROUTINE"],
+    "calls_made_ids": [
+      {"name": "1000-CONNECT", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0055-PAR-0002", "section_id": null},
+      {"name": "2000-DISCONNECT", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0055-PAR-0004", "section_id": null},
+      {"name": "3000-CHECK-STATUS", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0055-PAR-0005", "section_id": null},
+      {"name": "9000-ERROR-ROUTINE", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0055-PAR-0006", "section_id": null}
+    ],
+    "complexity_score": 4,
+    "has_unresolved_statements": false,
+    "annotations": [
+      {"line": 48, "statement_id": "SYS-PORTFOLIO-001-FIL-0055-STMT-000001", "note": "EVALUATE TRUE with 88-level condition names on LS-FUNCTION: FUNC-CONN = 'CONN', FUNC-DISC = 'DISC', FUNC-STAT = 'STAT'. The first true WHEN runs."},
+      {"line": 56, "statement_id": "SYS-PORTFOLIO-001-FIL-0055-STMT-000020", "note": "ERR-TEXT is a field of record ERR-MESSAGE from copybook ERRHAND (SYS-PORTFOLIO-001-FIL-0007-FLD-000017)."}
+    ]
+  },
+  {
+    "name": "1000-CONNECT", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0055-PAR-0002", "section": null, "section_id": null, "line_range": [63, 90],
+    "pseudocode": [
+      "SET connection_state = 'N'  -- SET WS-DISCONNECTED TO TRUE: mark as not connected",
+      "CLEAR retry_count (WS-RETRY-COUNT)  -- initialise to zero",
+      "SET ws_db_name = request_db_name (LS-DB-NAME)",
+      "SET ws_plan_name = request_plan_name (LS-PLAN-NAME)",
+      "WHILE NOT (connected (WS-CONNECTED) OR retry_count >= max_retries (WS-MAX-RETRIES)) DO  -- PERFORM UNTIL, condition tested before each pass",
+      "  SQL CONNECT TO database :ws_db_name",
+      "  IF SQLCODE = 0 THEN  -- CHECK SQLCODE",
+      "    SET connection_state = 'Y'  -- SET WS-CONNECTED TO TRUE",
+      "    SET return_code (LS-RETURN-CODE) = 0",
+      "  ELSE",
+      "    INCREMENT retry_count BY 1",
+      "    CALL 1100-handle-conn-error",
+      "  END IF",
+      "  IF retry_count < max_retries AND NOT connected THEN",
+      "    CALL program DELAY",
+      "      PASSING: db2_retry_wait (DB2-RETRY-WAIT, copybook DBPROC)",
+      "      -- external subprogram: wait before the next connection attempt (behaviour not traced here)",
+      "  END IF",
+      "END WHILE"
+    ],
+    "pseudocode_statement_ids": [
+      ["SYS-PORTFOLIO-001-FIL-0055-STMT-000003"],
+      ["SYS-PORTFOLIO-001-FIL-0055-STMT-000004"],
+      ["SYS-PORTFOLIO-001-FIL-0055-STMT-000005"],
+      ["SYS-PORTFOLIO-001-FIL-0055-STMT-000006"],
+      ["SYS-PORTFOLIO-001-FIL-0055-STMT-000007"],
+      ["SYS-PORTFOLIO-001-FIL-0055-STMT-000022"],
+      ["SYS-PORTFOLIO-001-FIL-0055-STMT-000023"],
+      ["SYS-PORTFOLIO-001-FIL-0055-STMT-000039"],
+      ["SYS-PORTFOLIO-001-FIL-0055-STMT-000040"],
+      ["SYS-PORTFOLIO-001-FIL-0055-STMT-000023"],
+      ["SYS-PORTFOLIO-001-FIL-0055-STMT-000037"],
+      ["SYS-PORTFOLIO-001-FIL-0055-STMT-000038"],
+      ["SYS-PORTFOLIO-001-FIL-0055-STMT-000023"],
+      ["SYS-PORTFOLIO-001-FIL-0055-STMT-000024"],
+      ["SYS-PORTFOLIO-001-FIL-0055-STMT-000041"],
+      ["SYS-PORTFOLIO-001-FIL-0055-STMT-000041"],
+      [],
+      ["SYS-PORTFOLIO-001-FIL-0055-STMT-000024"],
+      ["SYS-PORTFOLIO-001-FIL-0055-STMT-000007"]
+    ],
+    "pseudocode_text": "SET connection_state = 'N'  -- SET WS-DISCONNECTED TO TRUE: mark as not connected\nCLEAR retry_count (WS-RETRY-COUNT)  -- initialise to zero\nSET ws_db_name = request_db_name (LS-DB-NAME)\nSET ws_plan_name = request_plan_name (LS-PLAN-NAME)\nWHILE NOT (connected (WS-CONNECTED) OR retry_count >= max_retries (WS-MAX-RETRIES)) DO  -- PERFORM UNTIL, condition tested before each pass\n  SQL CONNECT TO database :ws_db_name\n  IF SQLCODE = 0 THEN  -- CHECK SQLCODE\n    SET connection_state = 'Y'  -- SET WS-CONNECTED TO TRUE\n    SET return_code (LS-RETURN-CODE) = 0\n  ELSE\n    INCREMENT retry_count BY 1\n    CALL 1100-handle-conn-error\n  END IF\n  IF retry_count < max_retries AND NOT connected THEN\n    CALL program DELAY\n      PASSING: db2_retry_wait (DB2-RETRY-WAIT, copybook DBPROC)\n      -- external subprogram: wait before the next connection attempt (behaviour not traced here)\n  END IF\nEND WHILE",
+    "statement_ids": ["SYS-PORTFOLIO-001-FIL-0055-STMT-000003", "SYS-PORTFOLIO-001-FIL-0055-STMT-000004", "SYS-PORTFOLIO-001-FIL-0055-STMT-000005", "SYS-PORTFOLIO-001-FIL-0055-STMT-000006", "SYS-PORTFOLIO-001-FIL-0055-STMT-000007", "SYS-PORTFOLIO-001-FIL-0055-STMT-000022", "SYS-PORTFOLIO-001-FIL-0055-STMT-000023", "SYS-PORTFOLIO-001-FIL-0055-STMT-000039", "SYS-PORTFOLIO-001-FIL-0055-STMT-000040", "SYS-PORTFOLIO-001-FIL-0055-STMT-000037", "SYS-PORTFOLIO-001-FIL-0055-STMT-000038", "SYS-PORTFOLIO-001-FIL-0055-STMT-000024", "SYS-PORTFOLIO-001-FIL-0055-STMT-000041"],
+    "untranslated_statement_ids": [],
+    "field_references": ["WS-DISCONNECTED", "WS-RETRY-COUNT", "LS-DB-NAME", "WS-DB-NAME", "LS-PLAN-NAME", "WS-PLAN-NAME", "WS-CONNECTED", "WS-MAX-RETRIES", "SQLCODE", "LS-RETURN-CODE", "DB2-RETRY-WAIT"],
+    "field_reference_ids": [
+      {"name": "WS-DISCONNECTED", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0055-FLD-000002", "target_kind": "condition", "candidate_ids": []},
+      {"name": "WS-RETRY-COUNT", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0055-REC-0004", "target_kind": "record", "candidate_ids": []},
+      {"name": "LS-DB-NAME", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0055-FLD-000007", "target_kind": "field", "candidate_ids": []},
+      {"name": "WS-DB-NAME", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0055-REC-0001", "target_kind": "record", "candidate_ids": []},
+      {"name": "LS-PLAN-NAME", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0055-FLD-000008", "target_kind": "field", "candidate_ids": []},
+      {"name": "WS-PLAN-NAME", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0055-REC-0002", "target_kind": "record", "candidate_ids": []},
+      {"name": "WS-CONNECTED", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0055-FLD-000001", "target_kind": "condition", "candidate_ids": []},
+      {"name": "WS-MAX-RETRIES", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0055-REC-0005", "target_kind": "record", "candidate_ids": []},
+      {"name": "SQLCODE", "qualifiers": [], "resolution": "UNRESOLVED", "target_id": null, "target_kind": null, "candidate_ids": []},
+      {"name": "LS-RETURN-CODE", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0055-FLD-000009", "target_kind": "field", "candidate_ids": []},
+      {"name": "DB2-RETRY-WAIT", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0015-FLD-000011", "target_kind": "field", "candidate_ids": []}
+    ],
+    "calls_made": ["1100-HANDLE-CONN-ERROR", "DELAY"],
+    "calls_made_ids": [
+      {"name": "1100-HANDLE-CONN-ERROR", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0055-PAR-0003", "section_id": null},
+      {"name": "DELAY", "paragraph_id": null, "section_id": null}
+    ],
+    "complexity_score": 5,
+    "has_unresolved_statements": false,
+    "annotations": [
+      {"line": 69, "statement_id": "SYS-PORTFOLIO-001-FIL-0055-STMT-000007", "note": "Inline PERFORM UNTIL (lines 69-88). WS-MAX-RETRIES has initial VALUE 3 and is never changed, so at most 3 CONNECT attempts are made."},
+      {"line": 67, "statement_id": "SYS-PORTFOLIO-001-FIL-0055-STMT-000006", "note": "WS-PLAN-NAME is set from the request but not referenced by any SQL statement in this program."},
+      {"line": 86, "statement_id": "SYS-PORTFOLIO-001-FIL-0055-STMT-000041", "note": "DELAY is a static external CALL, not a paragraph; calls_made_ids keeps null IDs for it. DB2-RETRY-WAIT has initial VALUE 100 in copybook DBPROC."},
+      {"line": 81, "statement_id": "SYS-PORTFOLIO-001-FIL-0055-STMT-000038", "note": "Each failed attempt sets LS-RETURN-CODE to 12 and an error message (1100-HANDLE-CONN-ERROR). After the last failed attempt the loop ends with those values; the caller sees return code 12."}
+    ]
+  },
+  {
+    "name": "1100-HANDLE-CONN-ERROR", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0055-PAR-0003", "section": null, "section_id": null, "line_range": [91, 108],
+    "pseudocode": [
+      "SET error_sqlcode (LS-SQLCODE) = SQLCODE",
+      "SELECT CASE SQLCODE",
+      "  WHEN -30081:",
+      "    SET error_message (LS-ERROR-MSG) = 'Maximum connections exceeded'",
+      "  WHEN -99999:",
+      "    SET error_message = 'Network error connecting to DB2'",
+      "  ELSE:",
+      "    SET error_message = 'General DB2 connection error'",
+      "END SELECT",
+      "SET return_code (LS-RETURN-CODE) = 12"
+    ],
+    "pseudocode_statement_ids": [
+      ["SYS-PORTFOLIO-001-FIL-0055-STMT-000008"],
+      ["SYS-PORTFOLIO-001-FIL-0055-STMT-000009"],
+      ["SYS-PORTFOLIO-001-FIL-0055-STMT-000009"],
+      ["SYS-PORTFOLIO-001-FIL-0055-STMT-000025"],
+      ["SYS-PORTFOLIO-001-FIL-0055-STMT-000009"],
+      ["SYS-PORTFOLIO-001-FIL-0055-STMT-000026"],
+      ["SYS-PORTFOLIO-001-FIL-0055-STMT-000009"],
+      ["SYS-PORTFOLIO-001-FIL-0055-STMT-000027"],
+      ["SYS-PORTFOLIO-001-FIL-0055-STMT-000009"],
+      ["SYS-PORTFOLIO-001-FIL-0055-STMT-000010"]
+    ],
+    "pseudocode_text": "SET error_sqlcode (LS-SQLCODE) = SQLCODE\nSELECT CASE SQLCODE\n  WHEN -30081:\n    SET error_message (LS-ERROR-MSG) = 'Maximum connections exceeded'\n  WHEN -99999:\n    SET error_message = 'Network error connecting to DB2'\n  ELSE:\n    SET error_message = 'General DB2 connection error'\nEND SELECT\nSET return_code (LS-RETURN-CODE) = 12",
+    "statement_ids": ["SYS-PORTFOLIO-001-FIL-0055-STMT-000008", "SYS-PORTFOLIO-001-FIL-0055-STMT-000009", "SYS-PORTFOLIO-001-FIL-0055-STMT-000025", "SYS-PORTFOLIO-001-FIL-0055-STMT-000026", "SYS-PORTFOLIO-001-FIL-0055-STMT-000027", "SYS-PORTFOLIO-001-FIL-0055-STMT-000010"],
+    "untranslated_statement_ids": [],
+    "field_references": ["SQLCODE", "LS-SQLCODE", "LS-ERROR-MSG", "LS-RETURN-CODE"],
+    "field_reference_ids": [
+      {"name": "SQLCODE", "qualifiers": [], "resolution": "UNRESOLVED", "target_id": null, "target_kind": null, "candidate_ids": []},
+      {"name": "LS-SQLCODE", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0055-FLD-000011", "target_kind": "field", "candidate_ids": []},
+      {"name": "LS-ERROR-MSG", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0055-FLD-000012", "target_kind": "field", "candidate_ids": []},
+      {"name": "LS-RETURN-CODE", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0055-FLD-000009", "target_kind": "field", "candidate_ids": []}
+    ],
+    "calls_made": [],
+    "calls_made_ids": [],
+    "complexity_score": 3,
+    "has_unresolved_statements": false,
+    "annotations": []
+  },
+  {
+    "name": "2000-DISCONNECT", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0055-PAR-0004", "section": null, "section_id": null, "line_range": [109, 130],
+    "pseudocode": [
+      "IF connected (WS-CONNECTED) THEN",
+      "  SQL COMMIT WORK  -- commit the current unit of work",
+      "  SQL CONNECT RESET  -- disconnect from DB2",
+      "  IF SQLCODE = 0 THEN  -- CHECK SQLCODE (of the CONNECT RESET; the COMMIT result is not checked)",
+      "    SET connection_state = 'N'  -- SET WS-DISCONNECTED TO TRUE",
+      "    SET return_code (LS-RETURN-CODE) = 0",
+      "  ELSE",
+      "    SET error_sqlcode (LS-SQLCODE) = SQLCODE",
+      "    SET error_message (LS-ERROR-MSG) = 'Error disconnecting from DB2'",
+      "    SET return_code = 8",
+      "  END IF",
+      "END IF  -- not connected: nothing is done and LS-RETURN-CODE is left as passed by the caller"
+    ],
+    "pseudocode_statement_ids": [
+      ["SYS-PORTFOLIO-001-FIL-0055-STMT-000011"],
+      ["SYS-PORTFOLIO-001-FIL-0055-STMT-000028"],
+      ["SYS-PORTFOLIO-001-FIL-0055-STMT-000029"],
+      ["SYS-PORTFOLIO-001-FIL-0055-STMT-000030"],
+      ["SYS-PORTFOLIO-001-FIL-0055-STMT-000045"],
+      ["SYS-PORTFOLIO-001-FIL-0055-STMT-000046"],
+      ["SYS-PORTFOLIO-001-FIL-0055-STMT-000030"],
+      ["SYS-PORTFOLIO-001-FIL-0055-STMT-000042"],
+      ["SYS-PORTFOLIO-001-FIL-0055-STMT-000043"],
+      ["SYS-PORTFOLIO-001-FIL-0055-STMT-000044"],
+      ["SYS-PORTFOLIO-001-FIL-0055-STMT-000030"],
+      ["SYS-PORTFOLIO-001-FIL-0055-STMT-000011"]
+    ],
+    "pseudocode_text": "IF connected (WS-CONNECTED) THEN\n  SQL COMMIT WORK  -- commit the current unit of work\n  SQL CONNECT RESET  -- disconnect from DB2\n  IF SQLCODE = 0 THEN  -- CHECK SQLCODE (of the CONNECT RESET; the COMMIT result is not checked)\n    SET connection_state = 'N'  -- SET WS-DISCONNECTED TO TRUE\n    SET return_code (LS-RETURN-CODE) = 0\n  ELSE\n    SET error_sqlcode (LS-SQLCODE) = SQLCODE\n    SET error_message (LS-ERROR-MSG) = 'Error disconnecting from DB2'\n    SET return_code = 8\n  END IF\nEND IF  -- not connected: nothing is done and LS-RETURN-CODE is left as passed by the caller",
+    "statement_ids": ["SYS-PORTFOLIO-001-FIL-0055-STMT-000011", "SYS-PORTFOLIO-001-FIL-0055-STMT-000028", "SYS-PORTFOLIO-001-FIL-0055-STMT-000029", "SYS-PORTFOLIO-001-FIL-0055-STMT-000030", "SYS-PORTFOLIO-001-FIL-0055-STMT-000045", "SYS-PORTFOLIO-001-FIL-0055-STMT-000046", "SYS-PORTFOLIO-001-FIL-0055-STMT-000042", "SYS-PORTFOLIO-001-FIL-0055-STMT-000043", "SYS-PORTFOLIO-001-FIL-0055-STMT-000044"],
+    "untranslated_statement_ids": [],
+    "field_references": ["WS-CONNECTED", "SQLCODE", "WS-DISCONNECTED", "LS-RETURN-CODE", "LS-SQLCODE", "LS-ERROR-MSG"],
+    "field_reference_ids": [
+      {"name": "WS-CONNECTED", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0055-FLD-000001", "target_kind": "condition", "candidate_ids": []},
+      {"name": "SQLCODE", "qualifiers": [], "resolution": "UNRESOLVED", "target_id": null, "target_kind": null, "candidate_ids": []},
+      {"name": "WS-DISCONNECTED", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0055-FLD-000002", "target_kind": "condition", "candidate_ids": []},
+      {"name": "LS-RETURN-CODE", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0055-FLD-000009", "target_kind": "field", "candidate_ids": []},
+      {"name": "LS-SQLCODE", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0055-FLD-000011", "target_kind": "field", "candidate_ids": []},
+      {"name": "LS-ERROR-MSG", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0055-FLD-000012", "target_kind": "field", "candidate_ids": []}
+    ],
+    "calls_made": [],
+    "calls_made_ids": [],
+    "complexity_score": 6,
+    "has_unresolved_statements": false,
+    "annotations": [
+      {"line": 110, "statement_id": "SYS-PORTFOLIO-001-FIL-0055-STMT-000011", "note": "WS-CONNECTION-STATE is a WORKING-STORAGE item with no VALUE clause; it is set only by earlier calls (CONN or STAT) in the same run unit. Whether it holds 'Y' on a DISC call depends on the caller's call sequence."}
+    ]
+  },
+  {
+    "name": "3000-CHECK-STATUS", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0055-PAR-0005", "section": null, "section_id": null, "line_range": [131, 149],
+    "pseudocode": [
+      "SQL SELECT CURRENT SERVER FROM SYSIBM.SYSDUMMY1 INTO :ws_db_name  -- probe whether a DB2 connection is active",
+      "IF SQLCODE = 0 THEN  -- CHECK SQLCODE",
+      "  SET connection_state = 'Y'  -- SET WS-CONNECTED TO TRUE",
+      "  SET return_code (LS-RETURN-CODE) = 0",
+      "ELSE",
+      "  SET connection_state = 'N'  -- SET WS-DISCONNECTED TO TRUE",
+      "  SET error_sqlcode (LS-SQLCODE) = SQLCODE",
+      "  SET error_message (LS-ERROR-MSG) = 'DB2 connection not active'",
+      "  SET return_code = 4",
+      "END IF"
+    ],
+    "pseudocode_statement_ids": [
+      ["SYS-PORTFOLIO-001-FIL-0055-STMT-000012"],
+      ["SYS-PORTFOLIO-001-FIL-0055-STMT-000013"],
+      ["SYS-PORTFOLIO-001-FIL-0055-STMT-000035"],
+      ["SYS-PORTFOLIO-001-FIL-0055-STMT-000036"],
+      ["SYS-PORTFOLIO-001-FIL-0055-STMT-000013"],
+      ["SYS-PORTFOLIO-001-FIL-0055-STMT-000031"],
+      ["SYS-PORTFOLIO-001-FIL-0055-STMT-000032"],
+      ["SYS-PORTFOLIO-001-FIL-0055-STMT-000033"],
+      ["SYS-PORTFOLIO-001-FIL-0055-STMT-000034"],
+      ["SYS-PORTFOLIO-001-FIL-0055-STMT-000013"]
+    ],
+    "pseudocode_text": "SQL SELECT CURRENT SERVER FROM SYSIBM.SYSDUMMY1 INTO :ws_db_name  -- probe whether a DB2 connection is active\nIF SQLCODE = 0 THEN  -- CHECK SQLCODE\n  SET connection_state = 'Y'  -- SET WS-CONNECTED TO TRUE\n  SET return_code (LS-RETURN-CODE) = 0\nELSE\n  SET connection_state = 'N'  -- SET WS-DISCONNECTED TO TRUE\n  SET error_sqlcode (LS-SQLCODE) = SQLCODE\n  SET error_message (LS-ERROR-MSG) = 'DB2 connection not active'\n  SET return_code = 4\nEND IF",
+    "statement_ids": ["SYS-PORTFOLIO-001-FIL-0055-STMT-000012", "SYS-PORTFOLIO-001-FIL-0055-STMT-000013", "SYS-PORTFOLIO-001-FIL-0055-STMT-000035", "SYS-PORTFOLIO-001-FIL-0055-STMT-000036", "SYS-PORTFOLIO-001-FIL-0055-STMT-000031", "SYS-PORTFOLIO-001-FIL-0055-STMT-000032", "SYS-PORTFOLIO-001-FIL-0055-STMT-000033", "SYS-PORTFOLIO-001-FIL-0055-STMT-000034"],
+    "untranslated_statement_ids": [],
+    "field_references": ["WS-DB-NAME", "SQLCODE", "WS-CONNECTED", "WS-DISCONNECTED", "LS-RETURN-CODE", "LS-SQLCODE", "LS-ERROR-MSG"],
+    "field_reference_ids": [
+      {"name": "WS-DB-NAME", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0055-REC-0001", "target_kind": "record", "candidate_ids": []},
+      {"name": "SQLCODE", "qualifiers": [], "resolution": "UNRESOLVED", "target_id": null, "target_kind": null, "candidate_ids": []},
+      {"name": "WS-CONNECTED", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0055-FLD-000001", "target_kind": "condition", "candidate_ids": []},
+      {"name": "WS-DISCONNECTED", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0055-FLD-000002", "target_kind": "condition", "candidate_ids": []},
+      {"name": "LS-RETURN-CODE", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0055-FLD-000009", "target_kind": "field", "candidate_ids": []},
+      {"name": "LS-SQLCODE", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0055-FLD-000011", "target_kind": "field", "candidate_ids": []},
+      {"name": "LS-ERROR-MSG", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0055-FLD-000012", "target_kind": "field", "candidate_ids": []}
+    ],
+    "calls_made": [],
+    "calls_made_ids": [],
+    "complexity_score": 2,
+    "has_unresolved_statements": false,
+    "annotations": [
+      {"line": 132, "statement_id": "SYS-PORTFOLIO-001-FIL-0055-STMT-000012", "note": "The SELECT overwrites WS-DB-NAME with the current server name."}
+    ]
+  },
+  {
+    "name": "9000-ERROR-ROUTINE", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0055-PAR-0006", "section": null, "section_id": null, "line_range": [150, 154],
+    "pseudocode": [
+      "SET error_program (ERR-PROGRAM) = 'DB2CONN'",
+      "SET return_code (LS-RETURN-CODE) = 12",
+      "CALL program ERRPROC",
+      "  PASSING: error_message_record (ERR-MESSAGE, copybook ERRHAND)"
+    ],
+    "pseudocode_statement_ids": [
+      ["SYS-PORTFOLIO-001-FIL-0055-STMT-000014"],
+      ["SYS-PORTFOLIO-001-FIL-0055-STMT-000015"],
+      ["SYS-PORTFOLIO-001-FIL-0055-STMT-000016"],
+      ["SYS-PORTFOLIO-001-FIL-0055-STMT-000016"]
+    ],
+    "pseudocode_text": "SET error_program (ERR-PROGRAM) = 'DB2CONN'\nSET return_code (LS-RETURN-CODE) = 12\nCALL program ERRPROC\n  PASSING: error_message_record (ERR-MESSAGE, copybook ERRHAND)",
+    "statement_ids": ["SYS-PORTFOLIO-001-FIL-0055-STMT-000014", "SYS-PORTFOLIO-001-FIL-0055-STMT-000015", "SYS-PORTFOLIO-001-FIL-0055-STMT-000016"],
+    "untranslated_statement_ids": [],
+    "field_references": ["ERR-PROGRAM", "LS-RETURN-CODE", "ERR-MESSAGE"],
+    "field_reference_ids": [
+      {"name": "ERR-PROGRAM", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0007-FLD-000013", "target_kind": "field", "candidate_ids": []},
+      {"name": "LS-RETURN-CODE", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0055-FLD-000009", "target_kind": "field", "candidate_ids": []},
+      {"name": "ERR-MESSAGE", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0007-REC-0003", "target_kind": "record", "candidate_ids": []}
+    ],
+    "calls_made": ["ERRPROC"],
+    "calls_made_ids": [
+      {"name": "ERRPROC", "paragraph_id": null, "section_id": null}
+    ],
+    "complexity_score": 1,
+    "has_unresolved_statements": false,
+    "annotations": [
+      {"line": 153, "statement_id": "SYS-PORTFOLIO-001-FIL-0055-STMT-000016", "note": "Static CALL to the external error program ERRPROC; it is a program, not a paragraph, so calls_made_ids keeps null IDs."}
+    ]
+  }
+],
+"unresolved_statements": [],
+"pseudocode_issues": [
+  {"severity": "info", "type": "id_unresolved", "kind": "field", "name": "SQLCODE", "paragraphs": ["1000-CONNECT", "1100-HANDLE-CONN-ERROR", "2000-DISCONNECT", "3000-CHECK-STATUS"], "message": "resolve-field-references UNRESOLVED; DB2 precompiler SQLCA field, not in a registered layout; target_id null."},
+  {"severity": "info", "type": "id_unresolved", "kind": "program", "name": "DELAY", "paragraph": "1000-CONNECT", "message": "External static CALL target, not a paragraph; calls_made_ids paragraph_id and section_id null."},
+  {"severity": "info", "type": "id_unresolved", "kind": "program", "name": "ERRPROC", "paragraph": "9000-ERROR-ROUTINE", "message": "External static CALL target, not a paragraph; calls_made_ids paragraph_id and section_id null."}
+]
+}

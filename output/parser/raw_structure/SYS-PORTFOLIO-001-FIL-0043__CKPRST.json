@@ -1,0 +1,125 @@
+{
+"program_summary": {"program_id": "CKPRST", "source_file": "src/programs/batch/CKPRST.cbl", "ast_file": "raw_structure/SYS-PORTFOLIO-001-FIL-0043__CKPRST.json", "total_lines": 57, "paragraph_count": 5, "section_count": 4, "has_unstructured_flow": false, "has_alter": false, "dead_code_candidates": 0, "parse_status": "success", "system_id": "SYS-PORTFOLIO-001", "file_id": "SYS-PORTFOLIO-001-FIL-0043", "path_id": "SYS-PORTFOLIO-001-PATH-0043", "file_name": "CKPRST.cbl", "statement_count": 6, "perform_edges": 4, "goto_edges": 0, "control_flow_relationships": 4, "review_required_statements": 0, "uncertain_statements": 0, "parse_run_id": "PRUN-20261025T163852Z-6235"},
+  "program_id": "CKPRST",
+  "source_file": "src/programs/batch/CKPRST.cbl",
+  "total_lines": 57,
+  "system_id": "SYS-PORTFOLIO-001",
+  "file_id": "SYS-PORTFOLIO-001-FIL-0043",
+  "path_id": "SYS-PORTFOLIO-001-PATH-0043",
+  "file_name": "CKPRST.cbl",
+  "relative_path": "src/programs/batch/CKPRST.cbl",
+  "parse_run_id": "PRUN-20261025T163852Z-6235",
+  "source_format": "fixed",
+  "identification_division": {
+    "start_line": 1,
+    "end_line": 3,
+    "program_id": "CKPRST",
+    "author": null,
+    "date_written": null,
+    "date_compiled": null
+  },
+  "environment_division": {
+    "start_line": 4,
+    "end_line": 13,
+    "sections": [
+      { "section_id": "SYS-PORTFOLIO-001-FIL-0043-SEC-0001", "division": "ENVIRONMENT", "name": "INPUT-OUTPUT", "start_line": 5, "end_line": 13 }
+    ],
+    "paragraphs": [
+      { "name": "FILE-CONTROL", "section": "INPUT-OUTPUT", "line": 6, "registered": false }
+    ],
+    "file_control_entries": [
+      { "select_name": "CHECKPOINT-FILE", "assign_to": "CKPTFILE", "organization": "INDEXED", "access_mode": "DYNAMIC", "record_key": "CKR-KEY", "file_status": "WS-FILE-STATUS", "line": 7, "end_line": 12 }
+    ]
+  },
+  "data_division": {
+    "start_line": 14,
+    "end_line": 25,
+    "sql_declare_sections": [],
+    "file_section": {
+      "section_id": "SYS-PORTFOLIO-001-FIL-0043-SEC-0002",
+      "start_line": 15,
+      "end_line": 18,
+      "entries": [
+        { "type": "FD", "file_name": "CHECKPOINT-FILE", "line": 16, "end_line": 18, "record_contains": null, "recording_mode": null, "block_contains": null },
+        { "type": "copy_stub", "include_kind": "COPY", "copybook": "CKPRST", "library": null, "line": 17, "section": "FILE", "parent_level": "FD", "parent_fd": "CHECKPOINT-FILE", "note": "Expanded by Data Agent" }
+      ]
+    },
+    "working_storage_section": {
+      "section_id": "SYS-PORTFOLIO-001-FIL-0043-SEC-0003",
+      "start_line": 19,
+      "end_line": 21,
+      "entries": [
+        { "level": 1, "name": "WS-FILE-STATUS", "pic": "X(2)", "value": null, "line": 20, "redefines": null, "occurs": null, "children": [] }
+      ]
+    },
+    "local_storage_section": { "section_id": null, "start_line": null, "entries": [] },
+    "linkage_section": {
+      "section_id": "SYS-PORTFOLIO-001-FIL-0043-SEC-0004",
+      "start_line": 22,
+      "end_line": 25,
+      "entries": [
+        { "type": "copy_stub", "include_kind": "COPY", "copybook": "CKPRST", "library": null, "line": 23, "section": "LINKAGE", "parent_level": null, "note": "Expanded by Data Agent" },
+        { "type": "copy_stub", "include_kind": "COPY", "copybook": "RETHND", "library": null, "line": 24, "section": "LINKAGE", "parent_level": null, "note": "Expanded by Data Agent" }
+      ]
+    }
+  },
+  "procedure_division": {
+    "start_line": 26,
+    "end_line": 57,
+    "using_parameters": ["CHECKPOINT-CONTROL", "RETURN-STATUS"],
+    "sections": [],
+    "paragraphs": [
+      { "paragraph_id": "SYS-PORTFOLIO-001-FIL-0043-PAR-0001", "name": "(UNNAMED)", "section": null, "section_id": null, "start_line": 27, "end_line": 42, "has_perform": true, "has_goto": false, "has_call": false, "has_stop_run": false, "review_status": "NONE", "statement_ids": ["SYS-PORTFOLIO-001-FIL-0043-STMT-000001", "SYS-PORTFOLIO-001-FIL-0043-STMT-000002"] },
+      { "paragraph_id": "SYS-PORTFOLIO-001-FIL-0043-PAR-0002", "name": "PROC-INIT", "section": null, "section_id": null, "start_line": 43, "end_line": 46, "has_perform": false, "has_goto": false, "has_call": false, "has_stop_run": false, "review_status": "NONE", "statement_ids": [] },
+      { "paragraph_id": "SYS-PORTFOLIO-001-FIL-0043-PAR-0003", "name": "PROC-TAKE-CHECKPOINT", "section": null, "section_id": null, "start_line": 47, "end_line": 50, "has_perform": false, "has_goto": false, "has_call": false, "has_stop_run": false, "review_status": "NONE", "statement_ids": [] },
+      { "paragraph_id": "SYS-PORTFOLIO-001-FIL-0043-PAR-0004", "name": "PROC-COMMIT-CHECKPOINT", "section": null, "section_id": null, "start_line": 51, "end_line": 54, "has_perform": false, "has_goto": false, "has_call": false, "has_stop_run": false, "review_status": "NONE", "statement_ids": [] },
+      { "paragraph_id": "SYS-PORTFOLIO-001-FIL-0043-PAR-0005", "name": "PROC-RESTART", "section": null, "section_id": null, "start_line": 55, "end_line": 57, "has_perform": false, "has_goto": false, "has_call": false, "has_stop_run": false, "review_status": "NONE", "statement_ids": [] }
+    ],
+    "statements": [
+      { "statement_id": "SYS-PORTFOLIO-001-FIL-0043-STMT-000001", "local_id": "L1", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0043-PAR-0001", "paragraph": "(UNNAMED)", "parent_statement_id": null, "branch": null, "depth": 0, "sibling_index": 1, "statement_type": "EVALUATE", "source_text": "EVALUATE TRUE", "start_line": 29, "end_line": 38, "extraction_status": "OK", "match": "UNCHANGED", "review_status": "NONE", "review_candidates": [] },
+      { "statement_id": "SYS-PORTFOLIO-001-FIL-0043-STMT-000008", "local_id": "L2", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0043-PAR-0001", "paragraph": "(UNNAMED)", "parent_statement_id": "SYS-PORTFOLIO-001-FIL-0043-STMT-000001", "branch": "WHEN ENTRY-POINT-INIT", "depth": 1, "sibling_index": 1, "statement_type": "PERFORM", "source_text": "PERFORM PROC-INIT", "start_line": 31, "end_line": 31, "extraction_status": "OK", "match": "UNCHANGED", "review_status": "NONE", "review_candidates": [] },
+      { "statement_id": "SYS-PORTFOLIO-001-FIL-0043-STMT-000010", "local_id": "L3", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0043-PAR-0001", "paragraph": "(UNNAMED)", "parent_statement_id": "SYS-PORTFOLIO-001-FIL-0043-STMT-000001", "branch": "WHEN ENTRY-POINT-TAKE", "depth": 1, "sibling_index": 1, "statement_type": "PERFORM", "source_text": "PERFORM PROC-TAKE-CHECKPOINT", "start_line": 33, "end_line": 33, "extraction_status": "OK", "match": "UNCHANGED", "review_status": "NONE", "review_candidates": [] },
+      { "statement_id": "SYS-PORTFOLIO-001-FIL-0043-STMT-000007", "local_id": "L4", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0043-PAR-0001", "paragraph": "(UNNAMED)", "parent_statement_id": "SYS-PORTFOLIO-001-FIL-0043-STMT-000001", "branch": "WHEN ENTRY-POINT-COMMIT", "depth": 1, "sibling_index": 1, "statement_type": "PERFORM", "source_text": "PERFORM PROC-COMMIT-CHECKPOINT", "start_line": 35, "end_line": 35, "extraction_status": "OK", "match": "UNCHANGED", "review_status": "NONE", "review_candidates": [] },
+      { "statement_id": "SYS-PORTFOLIO-001-FIL-0043-STMT-000009", "local_id": "L5", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0043-PAR-0001", "paragraph": "(UNNAMED)", "parent_statement_id": "SYS-PORTFOLIO-001-FIL-0043-STMT-000001", "branch": "WHEN ENTRY-POINT-RESTART", "depth": 1, "sibling_index": 1, "statement_type": "PERFORM", "source_text": "PERFORM PROC-RESTART", "start_line": 37, "end_line": 37, "extraction_status": "OK", "match": "UNCHANGED", "review_status": "NONE", "review_candidates": [] },
+      { "statement_id": "SYS-PORTFOLIO-001-FIL-0043-STMT-000002", "local_id": "L6", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0043-PAR-0001", "paragraph": "(UNNAMED)", "parent_statement_id": null, "branch": null, "depth": 0, "sibling_index": 2, "statement_type": "GOBACK", "source_text": "GOBACK", "start_line": 40, "end_line": 40, "extraction_status": "OK", "match": "UNCHANGED", "review_status": "NONE", "review_candidates": [] }
+    ],
+    "terminal_statements": [
+      { "type": "GOBACK", "line": 40, "paragraph": "(UNNAMED)", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0043-PAR-0001", "statement_id": "SYS-PORTFOLIO-001-FIL-0043-STMT-000002" }
+    ]
+  },
+  "copy_stubs": [
+    { "copybook": "CKPRST", "include_kind": "COPY", "division": "DATA", "section": "FILE", "line": 17 },
+    { "copybook": "CKPRST", "include_kind": "COPY", "division": "DATA", "section": "LINKAGE", "line": 23 },
+    { "copybook": "RETHND", "include_kind": "COPY", "division": "DATA", "section": "LINKAGE", "line": 24 }
+  ],
+  "control_flow_graph": {
+    "entry_points": ["(UNNAMED)"],
+    "entry_point_ids": ["SYS-PORTFOLIO-001-FIL-0043-PAR-0001"],
+    "terminal_nodes": ["(UNNAMED)"],
+    "nodes": [
+      { "id": "(UNNAMED)", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0043-PAR-0001", "type": "paragraph", "section": null, "section_id": null, "start_line": 27, "end_line": 42, "is_entry_point": true, "is_terminal": true, "is_dead_code": false, "unstructured_constructs": [] },
+      { "id": "PROC-INIT", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0043-PAR-0002", "type": "paragraph", "section": null, "section_id": null, "start_line": 43, "end_line": 46, "is_entry_point": false, "is_terminal": false, "is_dead_code": false, "unstructured_constructs": [] },
+      { "id": "PROC-TAKE-CHECKPOINT", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0043-PAR-0003", "type": "paragraph", "section": null, "section_id": null, "start_line": 47, "end_line": 50, "is_entry_point": false, "is_terminal": false, "is_dead_code": false, "unstructured_constructs": [] },
+      { "id": "PROC-COMMIT-CHECKPOINT", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0043-PAR-0004", "type": "paragraph", "section": null, "section_id": null, "start_line": 51, "end_line": 54, "is_entry_point": false, "is_terminal": false, "is_dead_code": false, "unstructured_constructs": [] },
+      { "id": "PROC-RESTART", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0043-PAR-0005", "type": "paragraph", "section": null, "section_id": null, "start_line": 55, "end_line": 57, "is_entry_point": false, "is_terminal": false, "is_dead_code": false, "unstructured_constructs": [] }
+    ],
+    "edges": [
+      { "from": "(UNNAMED)", "to": "PROC-INIT", "type": "PERFORM_SIMPLE", "resolved": true, "unstructured": false, "source_line": 31, "statement_id": "SYS-PORTFOLIO-001-FIL-0043-STMT-000008", "from_paragraph_id": "SYS-PORTFOLIO-001-FIL-0043-PAR-0001", "to_paragraph_id": "SYS-PORTFOLIO-001-FIL-0043-PAR-0002", "to_section_id": null },
+      { "from": "(UNNAMED)", "to": "PROC-TAKE-CHECKPOINT", "type": "PERFORM_SIMPLE", "resolved": true, "unstructured": false, "source_line": 33, "statement_id": "SYS-PORTFOLIO-001-FIL-0043-STMT-000010", "from_paragraph_id": "SYS-PORTFOLIO-001-FIL-0043-PAR-0001", "to_paragraph_id": "SYS-PORTFOLIO-001-FIL-0043-PAR-0003", "to_section_id": null },
+      { "from": "(UNNAMED)", "to": "PROC-COMMIT-CHECKPOINT", "type": "PERFORM_SIMPLE", "resolved": true, "unstructured": false, "source_line": 35, "statement_id": "SYS-PORTFOLIO-001-FIL-0043-STMT-000007", "from_paragraph_id": "SYS-PORTFOLIO-001-FIL-0043-PAR-0001", "to_paragraph_id": "SYS-PORTFOLIO-001-FIL-0043-PAR-0004", "to_section_id": null },
+      { "from": "(UNNAMED)", "to": "PROC-RESTART", "type": "PERFORM_SIMPLE", "resolved": true, "unstructured": false, "source_line": 37, "statement_id": "SYS-PORTFOLIO-001-FIL-0043-STMT-000009", "from_paragraph_id": "SYS-PORTFOLIO-001-FIL-0043-PAR-0001", "to_paragraph_id": "SYS-PORTFOLIO-001-FIL-0043-PAR-0005", "to_section_id": null }
+    ],
+    "unstructured_constructs": [],
+    "dead_code_candidates": [],
+    "cfg_issues": []
+  },
+  "statement_match_counts": {"NEW": 0, "UNCHANGED": 6, "MATCHED_BY_TEXT": 0, "MATCHED_BY_ORDER": 0, "MODIFIED": 0, "NEW_REVIEW_REQUIRED": 0},
+  "registry_verification": {"file_id": "SYS-PORTFOLIO-001-FIL-0043", "active_run_id": null, "run_completed": true, "statements": 10, "active_statements": 6, "review_required_statements": 0, "paragraphs": 5, "active_paragraphs": 5, "sections": 4, "active_sections": 4, "control_flow_relationships": 4, "statement_counter": 10, "paragraph_counter": 5, "section_counter": 4, "consistent": true},
+  "structure_verification": {"file_id": "SYS-PORTFOLIO-001-FIL-0043", "sections_checked": 4, "paragraphs_checked": 5, "statements_checked": 6, "edges_checked": 4, "registered_edges": 4, "missing_count": 0, "problems": 0, "consistent": true},
+  "parse_issues": [
+    { "severity": "info", "type": "upstream_issue", "upstream_type": "name_collision", "paths": ["src/programs/batch/CKPRST.cbl", "src/copybook/batch/CKPRST.cpy"], "message": "Agent 1: Program ID CKPRST and copybook ID CKPRST share the same name; program CKPRST COPYs copybook CKPRST. Each file keeps its own File ID (copybook SYS-PORTFOLIO-001-FIL-0003). COPY CKPRST stubs at lines 17 and 23 refer to the copybook." },
+    { "severity": "info", "type": "unnamed_paragraph", "lines": [27, 42], "message": "Statements between PROCEDURE DIVISION (line 26, USING continued on line 27) and the first paragraph PROC-INIT (line 43) are recorded in paragraph (UNNAMED), scope PROGRAM" },
+    { "severity": "warning", "type": "misplaced_comment_indicator", "lines": [44, 48, 52, 56], "message": "Lines whose first non-blank character in columns 8-72 is '*' (starting in column 12); treated as comments, not statements" },
+    { "severity": "info", "type": "empty_paragraph", "paragraphs": ["PROC-INIT", "PROC-TAKE-CHECKPOINT", "PROC-COMMIT-CHECKPOINT", "PROC-RESTART"], "message": "Paragraphs contain only a comment line and a separator period; no executable statements" }
+  ]
+}

@@ -1,0 +1,361 @@
+{
+"program_summary": {"program_id": "RTNANA00", "file_id": "SYS-PORTFOLIO-001-FIL-0051", "logic_file": "program_logic/SYS-PORTFOLIO-001-FIL-0051__RTNANA00_logic.json", "logic_status": "partial", "paragraphs_translated": 13, "execution_paths": 1, "branches": 2, "loops": 1, "dead_code_confirmed": 0, "goto_annotations": 0, "unresolvable_paths": 0, "unresolved_ids": 1},
+"program_id": "RTNANA00",
+"system_id": "SYS-PORTFOLIO-001",
+"file_id": "SYS-PORTFOLIO-001-FIL-0051",
+"path_id": "SYS-PORTFOLIO-001-PATH-0051",
+"relative_path": "src/programs/batch/RTNANA00.cbl",
+"parse_run_id": "PRUN-20261023T023803Z-ACC2",
+"upstream": {
+  "verification": {
+    "verdict": "VALID",
+    "verdict_reasons": ["V2, V3 and V4 consistent; Agent 2 parse_status 'success'; the only copybook layout (SQLCA) present and consistent; no unresolved copy stubs in the program"],
+    "v1": {"raw_structure": "present", "parse_status": "success", "program_layout": "present", "data_run_id": "DRUN-20261024T215053Z-ACC1", "copybook_layouts": [{"copybook": "SQLCA", "copybook_file_id": "SYS-PORTFOLIO-001-FIL-0017", "layout": "present", "expanded_at_lines": [32]}], "unresolved_copy_stubs": 0},
+    "v2_file_identities": {
+      "program_entries": {"require_completed": ["parser", "data"], "entries": ["raw_structure|SYS-PORTFOLIO-001-FIL-0051", "data_layout|SYS-PORTFOLIO-001-FIL-0051"], "result": "batched with RPTPOS00, RPTSTA00 and UTLVAL00 program entries: checked 8, ok 8, problems [], duplicates [], consistent true"},
+      "copybook_entries": {"require_completed": ["data"], "entries": ["data_layout|SYS-PORTFOLIO-001-FIL-0017"], "result": "batched with copybooks FIL-0011, FIL-0014, FIL-0013, FIL-0007 and FIL-0002: checked 6, ok 6, problems [], duplicates [], consistent true"},
+      "consistent": true
+    },
+    "v3_structure_identities": {"sections_checked": 3, "paragraphs_checked": 13, "statements_checked": 49, "edges_checked": 12, "registered_edges": 12, "section_problems": [], "paragraph_problems": [], "statement_problems": [], "edge_problems": [], "invalid_registered_edges": [], "registered_not_in_json": {"missing_count": 0}, "duplicate_ids_in_json": [], "consistent": true, "note": "section names sent: INPUT-OUTPUT for SEC-0001; null for the data-division sections. 12 edges = 6 PERFORM ... THRU statements x 2 (target and THRU end)."},
+    "v4_data_identities": [
+      {"file_id": "SYS-PORTFOLIO-001-FIL-0051", "layout": "program", "records_checked": 6, "fields_checked": 56, "expansions_checked": 1, "record_problems": [], "field_problems": [], "expansion_problems": [], "copybook_records_in_program": 0, "registered_not_in_json": {"missing_count": 0}, "duplicate_ids_in_json": [], "consistent": true},
+      {"file_id": "SYS-PORTFOLIO-001-FIL-0017", "layout": "copybook SQLCA", "records_checked": 1, "fields_checked": 7, "expansions_checked": 0, "record_problems": [], "field_problems": [], "expansion_problems": [], "copybook_records_in_program": 0, "registered_not_in_json": {"missing_count": 0}, "duplicate_ids_in_json": [], "consistent": true}
+    ]
+  }
+},
+"execution_traces": [
+  {
+    "entry_point": "(UNNAMED)",
+    "entry_point_id": "SYS-PORTFOLIO-001-FIL-0051-PAR-0001",
+    "entry_type": "batch_main",
+    "steps": [
+      {"step": 1, "paragraph": "(UNNAMED)", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0051-PAR-0001", "action": "PERFORM_THRU", "target": "P100-INIT-PROGRAM", "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0051-PAR-0002", "target_section_id": null, "unstructured": true,
+       "implicit_thru_range": ["P100-INIT-PROGRAM", "P100-EXIT"], "implicit_thru_range_ids": ["SYS-PORTFOLIO-001-FIL-0051-PAR-0002", "SYS-PORTFOLIO-001-FIL-0051-PAR-0003"], "condition": null, "line": 97, "statement_id": "SYS-PORTFOLIO-001-FIL-0051-STMT-000001"},
+      {"step": 2, "paragraph": "P100-INIT-PROGRAM", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0051-PAR-0002", "action": "GOBACK", "target": null, "target_paragraph_id": null, "target_section_id": null,
+       "condition": {"text": "IF WS-REPORT-STATUS NOT = '00'", "fields": ["WS-REPORT-STATUS"], "field_ids": [{"name": "WS-REPORT-STATUS", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0051-FLD-000001", "target_kind": "field", "candidate_ids": []}]},
+       "line": 118, "statement_id": "SYS-PORTFOLIO-001-FIL-0051-STMT-000043"},
+      {"step": 3, "paragraph": "(UNNAMED)", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0051-PAR-0001", "action": "PERFORM_THRU", "target": "P200-PROCESS-ANALYSIS", "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0051-PAR-0004", "target_section_id": null, "unstructured": true,
+       "implicit_thru_range": ["P200-PROCESS-ANALYSIS", "P200-EXIT"], "implicit_thru_range_ids": ["SYS-PORTFOLIO-001-FIL-0051-PAR-0004", "SYS-PORTFOLIO-001-FIL-0051-PAR-0005"], "condition": null, "line": 100, "statement_id": "SYS-PORTFOLIO-001-FIL-0051-STMT-000002"},
+      {"step": 4, "paragraph": "P200-PROCESS-ANALYSIS", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0051-PAR-0004", "action": "EXEC_SQL", "target": null, "target_paragraph_id": null, "target_section_id": null, "condition": null, "line": 139, "statement_id": "SYS-PORTFOLIO-001-FIL-0051-STMT-000012"},
+      {"step": 5, "paragraph": "P200-PROCESS-ANALYSIS", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0051-PAR-0004", "action": "PERFORM_THRU", "target": "P210-WRITE-HEADERS", "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0051-PAR-0006", "target_section_id": null, "unstructured": true,
+       "implicit_thru_range": ["P210-WRITE-HEADERS", "P210-EXIT"], "implicit_thru_range_ids": ["SYS-PORTFOLIO-001-FIL-0051-PAR-0006", "SYS-PORTFOLIO-001-FIL-0051-PAR-0007"], "condition": null, "line": 141, "statement_id": "SYS-PORTFOLIO-001-FIL-0051-STMT-000013"},
+      {"step": 6, "paragraph": "P200-PROCESS-ANALYSIS", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0051-PAR-0004", "action": "PERFORM_UNTIL", "target": "P220-PROCESS-DETAIL", "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0051-PAR-0008", "target_section_id": null, "unstructured": true,
+       "implicit_thru_range": ["P220-PROCESS-DETAIL", "P220-EXIT"], "implicit_thru_range_ids": ["SYS-PORTFOLIO-001-FIL-0051-PAR-0008", "SYS-PORTFOLIO-001-FIL-0051-PAR-0009"],
+       "condition": {"text": "SQLCODE = 100", "fields": ["SQLCODE"], "field_ids": [{"name": "SQLCODE", "qualifiers": [], "resolution": "UNRESOLVED", "target_id": null, "target_kind": null, "candidate_ids": []}], "test_time": "BEFORE", "loop_type": "WHILE", "termination_pattern": "EXTERNAL_TERMINATION_LOOP"},
+       "line": 144, "statement_id": "SYS-PORTFOLIO-001-FIL-0051-STMT-000014"},
+      {"step": 7, "paragraph": "(UNNAMED)", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0051-PAR-0001", "action": "PERFORM_THRU", "target": "P300-GENERATE-REPORT", "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0051-PAR-0010", "target_section_id": null, "unstructured": true,
+       "implicit_thru_range": ["P300-GENERATE-REPORT", "P300-EXIT"], "implicit_thru_range_ids": ["SYS-PORTFOLIO-001-FIL-0051-PAR-0010", "SYS-PORTFOLIO-001-FIL-0051-PAR-0011"], "condition": null, "line": 103, "statement_id": "SYS-PORTFOLIO-001-FIL-0051-STMT-000003"},
+      {"step": 8, "paragraph": "(UNNAMED)", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0051-PAR-0001", "action": "PERFORM_THRU", "target": "P900-CLOSE-FILES", "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0051-PAR-0012", "target_section_id": null, "unstructured": true,
+       "implicit_thru_range": ["P900-CLOSE-FILES", "P900-EXIT"], "implicit_thru_range_ids": ["SYS-PORTFOLIO-001-FIL-0051-PAR-0012", "SYS-PORTFOLIO-001-FIL-0051-PAR-0013"], "condition": null, "line": 106, "statement_id": "SYS-PORTFOLIO-001-FIL-0051-STMT-000004"},
+      {"step": 9, "paragraph": "(UNNAMED)", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0051-PAR-0001", "action": "GOBACK", "target": null, "target_paragraph_id": null, "target_section_id": null, "condition": null, "line": 109, "statement_id": "SYS-PORTFOLIO-001-FIL-0051-STMT-000005"}
+    ]
+  }
+],
+"branch_map": [
+  {
+    "paragraph": "P100-INIT-PROGRAM",
+    "paragraph_id": "SYS-PORTFOLIO-001-FIL-0051-PAR-0002",
+    "branches": [
+      {"type": "IF", "line": 115, "statement_id": "SYS-PORTFOLIO-001-FIL-0051-STMT-000008", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0051-PAR-0002", "condition_text": "WS-REPORT-STATUS NOT = '00'", "condition_fields": ["WS-REPORT-STATUS"],
+       "condition_field_ids": [{"name": "WS-REPORT-STATUS", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0051-FLD-000001", "target_kind": "field", "candidate_ids": []}],
+       "has_else": false, "then_line_range": [116, 118], "else_line_range": null, "end_if_line": 119, "nested_depth": 1,
+       "outcomes": [{"label": "THEN", "line_range": [116, 118], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0051-STMT-000041", "SYS-PORTFOLIO-001-FIL-0051-STMT-000042", "SYS-PORTFOLIO-001-FIL-0051-STMT-000043"]}, {"label": "ELSE (implicit, continue)", "line_range": null, "statement_ids": []}]}
+    ]
+  },
+  {
+    "paragraph": "P220-PROCESS-DETAIL",
+    "paragraph_id": "SYS-PORTFOLIO-001-FIL-0051-PAR-0008",
+    "branches": [
+      {"type": "IF", "line": 180, "statement_id": "SYS-PORTFOLIO-001-FIL-0051-STMT-000027", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0051-PAR-0008", "condition_text": "SQLCODE = 0", "condition_fields": ["SQLCODE"],
+       "condition_field_ids": [{"name": "SQLCODE", "qualifiers": [], "resolution": "UNRESOLVED", "target_id": null, "target_kind": null, "candidate_ids": []}],
+       "has_else": false, "then_line_range": [181, 187], "else_line_range": null, "end_if_line": 188, "nested_depth": 1,
+       "outcomes": [{"label": "THEN", "line_range": [181, 187], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0051-STMT-000044", "SYS-PORTFOLIO-001-FIL-0051-STMT-000045", "SYS-PORTFOLIO-001-FIL-0051-STMT-000046", "SYS-PORTFOLIO-001-FIL-0051-STMT-000047", "SYS-PORTFOLIO-001-FIL-0051-STMT-000048", "SYS-PORTFOLIO-001-FIL-0051-STMT-000049"]}, {"label": "ELSE (implicit, no action)", "line_range": null, "statement_ids": []}]}
+    ]
+  }
+],
+"loops": [
+  {"paragraph": "P200-PROCESS-ANALYSIS", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0051-PAR-0004", "target": "P220-PROCESS-DETAIL", "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0051-PAR-0008", "type": "PERFORM_UNTIL", "statement_id": "SYS-PORTFOLIO-001-FIL-0051-STMT-000014", "unstructured": true,
+   "implicit_thru_range": ["P220-PROCESS-DETAIL", "P220-EXIT"], "implicit_thru_range_ids": ["SYS-PORTFOLIO-001-FIL-0051-PAR-0008", "SYS-PORTFOLIO-001-FIL-0051-PAR-0009"],
+   "condition_text": "UNTIL SQLCODE = 100", "condition_fields": ["SQLCODE"],
+   "condition_field_ids": [{"name": "SQLCODE", "qualifiers": [], "resolution": "UNRESOLVED", "target_id": null, "target_kind": null, "candidate_ids": []}],
+   "test_time": "BEFORE", "loop_type": "WHILE", "termination_pattern": "EXTERNAL_TERMINATION_LOOP", "line": 144,
+   "modifying_statement_ids": ["SYS-PORTFOLIO-001-FIL-0051-STMT-000026"]}
+],
+"dead_code_confirmed": [],
+"unresolvable_paths": [],
+"trace_issues": [
+  {"severity": "info", "type": "upstream_issue", "upstream_agent": "2_parser", "upstream_type": "unnamed_paragraph", "lines": [97, 110], "message": "Statements between PROCEDURE DIVISION (line 96) and the first paragraph P100-INIT-PROGRAM (line 111) are recorded in paragraph (UNNAMED)."},
+  {"severity": "info", "type": "upstream_issue", "upstream_agent": "2_parser", "upstream_type": "perform_thru", "lines": [97, 100, 103, 106, 141, 144], "message": "6 PERFORM ... THRU statements obscure control flow; each range is a work paragraph followed by its EXIT paragraph."},
+  {"severity": "info", "type": "upstream_issue", "upstream_agent": "3_data", "upstream_type": "copybook_01_under_program_01", "line": 32, "message": "EXEC SQL INCLUDE SQLCA is the only content of 01 WS-DB2-AREA; EXPANDS_COPY links WS-DB2-AREA (SYS-PORTFOLIO-001-FIL-0051-REC-0003) to SYS-PORTFOLIO-001-FIL-0017-REC-0001."},
+  {"severity": "warning", "type": "perform_thru", "lines": [97, 100, 103, 106, 141, 144], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0051-STMT-000001", "SYS-PORTFOLIO-001-FIL-0051-STMT-000002", "SYS-PORTFOLIO-001-FIL-0051-STMT-000003", "SYS-PORTFOLIO-001-FIL-0051-STMT-000004", "SYS-PORTFOLIO-001-FIL-0051-STMT-000013", "SYS-PORTFOLIO-001-FIL-0051-STMT-000014"], "message": "PERFORM ... THRU flagged unstructured; each range contains the named paragraph and its EXIT paragraph only, and no GO TO jumps to the EXIT paragraphs, so control simply falls through each range."},
+  {"severity": "info", "type": "field_id_unresolved", "name": "SQLCODE", "lines": [146, 180], "message": "SQLCODE is not defined in the program or in copybook SQLCA (the repository SQLCA declares only SQL-STATUS-CODES; the precompiler SQLCA structure is not present); resolve-field-references UNRESOLVED; target_id null."},
+  {"severity": "warning", "type": "loop_termination_risk", "line": 144, "statement_id": "SYS-PORTFOLIO-001-FIL-0051-STMT-000014", "message": "The detail loop ends only when SQLCODE = 100 (no more rows). Any other non-zero SQLCODE from the FETCH skips the IF SQLCODE = 0 branch and the loop repeats the FETCH; there is no exit for SQL errors in the source."},
+  {"severity": "info", "type": "unchecked_sqlcode", "lines": [126, 139, 148], "message": "SQLCODE is not checked after DECLARE, OPEN or CLOSE of cursor PRGCUR. A negative SQLCODE after OPEN would reach the FETCH loop."},
+  {"severity": "info", "type": "goback_mid_paragraph", "line": 118, "statement_id": "SYS-PORTFOLIO-001-FIL-0051-STMT-000043", "message": "GOBACK inside the IF of P100-INIT-PROGRAM ends the program (RETURN-CODE 12) while the PERFORM ... THRU at line 97 is active; the remaining steps are not executed."}
+],
+"program_narrative": "Program RTNANA00 is a batch DB2 program that produces the return code analysis report. It captures the current date and time, opens REPORT-FILE for output (ending with return code 12 if the open fails) and clears its counters. It declares and opens SQL cursor PRGCUR, which selects from table RTNCODES, grouped and ordered by PROGRAM_ID, the total row count and the counts of status codes 'S', 'W', 'E' and 'F' per program. After writing the report headers (title, report date and time, column headings), it fetches the cursor rows until SQLCODE = 100; for each successful fetch it writes a detail line (program, total, success, warning, error, severe) and adds the counts to running totals. It then closes the cursor, writes a TOTALS line with the accumulated counts between separator lines, closes the report file and returns. Error conditions handled: a failed OPEN of the report file; SQL errors are not checked (a non-zero SQLCODE other than 100 during FETCH would keep the loop running).",
+"paragraphs": [
+  {
+    "name": "(UNNAMED)", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0051-PAR-0001", "section": null, "section_id": null, "line_range": [97, 110],
+    "pseudocode": [
+      "-- Main control (statements before the first paragraph name)",
+      "CALL p100-init-program THRU p100-exit  !! PERFORM THRU: executes P100-INIT-PROGRAM then P100-EXIT",
+      "CALL p200-process-analysis THRU p200-exit  !! PERFORM THRU",
+      "CALL p300-generate-report THRU p300-exit  !! PERFORM THRU",
+      "CALL p900-close-files THRU p900-exit  !! PERFORM THRU",
+      "RETURN to caller  -- GOBACK"
+    ],
+    "pseudocode_statement_ids": [[], ["SYS-PORTFOLIO-001-FIL-0051-STMT-000001"], ["SYS-PORTFOLIO-001-FIL-0051-STMT-000002"], ["SYS-PORTFOLIO-001-FIL-0051-STMT-000003"], ["SYS-PORTFOLIO-001-FIL-0051-STMT-000004"], ["SYS-PORTFOLIO-001-FIL-0051-STMT-000005"]],
+    "pseudocode_text": "-- Main control (statements before the first paragraph name)\nCALL p100-init-program THRU p100-exit  !! PERFORM THRU: executes P100-INIT-PROGRAM then P100-EXIT\nCALL p200-process-analysis THRU p200-exit  !! PERFORM THRU\nCALL p300-generate-report THRU p300-exit  !! PERFORM THRU\nCALL p900-close-files THRU p900-exit  !! PERFORM THRU\nRETURN to caller  -- GOBACK",
+    "statement_ids": ["SYS-PORTFOLIO-001-FIL-0051-STMT-000001", "SYS-PORTFOLIO-001-FIL-0051-STMT-000002", "SYS-PORTFOLIO-001-FIL-0051-STMT-000003", "SYS-PORTFOLIO-001-FIL-0051-STMT-000004", "SYS-PORTFOLIO-001-FIL-0051-STMT-000005"],
+    "untranslated_statement_ids": [],
+    "field_references": [], "field_reference_ids": [],
+    "calls_made": ["P100-INIT-PROGRAM", "P200-PROCESS-ANALYSIS", "P300-GENERATE-REPORT", "P900-CLOSE-FILES"],
+    "calls_made_ids": [{"name": "P100-INIT-PROGRAM", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0051-PAR-0002", "section_id": null}, {"name": "P200-PROCESS-ANALYSIS", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0051-PAR-0004", "section_id": null}, {"name": "P300-GENERATE-REPORT", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0051-PAR-0010", "section_id": null}, {"name": "P900-CLOSE-FILES", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0051-PAR-0012", "section_id": null}],
+    "complexity_score": 1, "has_unresolved_statements": false,
+    "annotations": [{"line": 97, "statement_id": "SYS-PORTFOLIO-001-FIL-0051-STMT-000001", "note": "PERFORM ... THRU ranges: P100-INIT-PROGRAM..P100-EXIT, P200-PROCESS-ANALYSIS..P200-EXIT, P300-GENERATE-REPORT..P300-EXIT, P900-CLOSE-FILES..P900-EXIT; each EXIT paragraph contains only EXIT."}]
+  },
+  {
+    "name": "P100-INIT-PROGRAM", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0051-PAR-0002", "section": null, "section_id": null, "line_range": [111, 121],
+    "pseudocode": [
+      "SET current_date_time (WS-CURRENT-DATE-DATA) = FUNCTION CURRENT-DATE  -- YYYYMMDD + HHMMSShh",
+      "OPEN REPORT-FILE for WRITE (new)",
+      "IF report_status (WS-REPORT-STATUS) != '00' THEN",
+      "  DISPLAY 'Error opening report file: ' + report_status",
+      "  SET RETURN-CODE = 12",
+      "  RETURN to caller  -- GOBACK: ends the program",
+      "END IF",
+      "CLEAR analysis_area (WS-ANALYSIS-AREA)  -- INITIALIZE: times to spaces, counters to zero"
+    ],
+    "pseudocode_statement_ids": [["SYS-PORTFOLIO-001-FIL-0051-STMT-000006"], ["SYS-PORTFOLIO-001-FIL-0051-STMT-000007"], ["SYS-PORTFOLIO-001-FIL-0051-STMT-000008"], ["SYS-PORTFOLIO-001-FIL-0051-STMT-000041"], ["SYS-PORTFOLIO-001-FIL-0051-STMT-000042"], ["SYS-PORTFOLIO-001-FIL-0051-STMT-000043"], ["SYS-PORTFOLIO-001-FIL-0051-STMT-000008"], ["SYS-PORTFOLIO-001-FIL-0051-STMT-000009"]],
+    "pseudocode_text": "SET current_date_time (WS-CURRENT-DATE-DATA) = FUNCTION CURRENT-DATE  -- YYYYMMDD + HHMMSShh\nOPEN REPORT-FILE for WRITE (new)\nIF report_status (WS-REPORT-STATUS) != '00' THEN\n  DISPLAY 'Error opening report file: ' + report_status\n  SET RETURN-CODE = 12\n  RETURN to caller  -- GOBACK: ends the program\nEND IF\nCLEAR analysis_area (WS-ANALYSIS-AREA)  -- INITIALIZE: times to spaces, counters to zero",
+    "statement_ids": ["SYS-PORTFOLIO-001-FIL-0051-STMT-000006", "SYS-PORTFOLIO-001-FIL-0051-STMT-000007", "SYS-PORTFOLIO-001-FIL-0051-STMT-000008", "SYS-PORTFOLIO-001-FIL-0051-STMT-000041", "SYS-PORTFOLIO-001-FIL-0051-STMT-000042", "SYS-PORTFOLIO-001-FIL-0051-STMT-000043", "SYS-PORTFOLIO-001-FIL-0051-STMT-000009"],
+    "untranslated_statement_ids": [],
+    "field_references": ["WS-CURRENT-DATE-DATA", "WS-REPORT-STATUS", "WS-ANALYSIS-AREA"],
+    "field_reference_ids": [
+      {"name": "WS-CURRENT-DATE-DATA", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0051-REC-0004", "target_kind": "record", "candidate_ids": []},
+      {"name": "WS-REPORT-STATUS", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0051-FLD-000001", "target_kind": "field", "candidate_ids": []},
+      {"name": "WS-ANALYSIS-AREA", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0051-REC-0005", "target_kind": "record", "candidate_ids": []}
+    ],
+    "calls_made": [], "calls_made_ids": [],
+    "complexity_score": 2, "has_unresolved_statements": false,
+    "annotations": [
+      {"line": 112, "statement_id": "SYS-PORTFOLIO-001-FIL-0051-STMT-000006", "note": "FUNCTION CURRENT-DATE returns 21 characters; the 16-byte receiving group WS-CURRENT-DATE-DATA keeps date (8) and time HHMMSShh (8); the GMT offset is truncated."},
+      {"line": 118, "statement_id": "SYS-PORTFOLIO-001-FIL-0051-STMT-000043", "note": "GOBACK inside the IF ends the program mid-paragraph; recorded as a terminating branch."}
+    ]
+  },
+  {
+    "name": "P100-EXIT", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0051-PAR-0003", "section": null, "section_id": null, "line_range": [122, 124],
+    "pseudocode": ["EXIT  -- end of PERFORM THRU range P100-INIT-PROGRAM..P100-EXIT (no-op)"],
+    "pseudocode_statement_ids": [["SYS-PORTFOLIO-001-FIL-0051-STMT-000010"]],
+    "pseudocode_text": "EXIT  -- end of PERFORM THRU range P100-INIT-PROGRAM..P100-EXIT (no-op)",
+    "statement_ids": ["SYS-PORTFOLIO-001-FIL-0051-STMT-000010"],
+    "untranslated_statement_ids": [],
+    "field_references": [], "field_reference_ids": [], "calls_made": [], "calls_made_ids": [],
+    "complexity_score": 1, "has_unresolved_statements": false, "annotations": []
+  },
+  {
+    "name": "P200-PROCESS-ANALYSIS", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0051-PAR-0004", "section": null, "section_id": null, "line_range": [125, 148],
+    "pseudocode": [
+      "DECLARE SQL CURSOR prgcur FOR",
+      "  SQL SELECT program_id, COUNT(*) AS total, COUNT(status_code = 'S'), COUNT(status_code = 'W'), COUNT(status_code = 'E'), COUNT(status_code = 'F')",
+      "  FROM: RTNCODES table  GROUP BY program_id  ORDER BY program_id  -- see source lines 126-137 for full SQL",
+      "OPEN cursor prgcur and execute query  -- SQLCODE not checked",
+      "CALL p210-write-headers THRU p210-exit  !! PERFORM THRU",
+      "WHILE sqlcode != 100 DO  -- PERFORM ... THRU ... UNTIL SQLCODE = 100 (test before); 100 = no more rows",
+      "  CALL p220-process-detail THRU p220-exit  !! PERFORM THRU",
+      "END WHILE",
+      "CLOSE cursor prgcur  -- SQLCODE not checked"
+    ],
+    "pseudocode_statement_ids": [["SYS-PORTFOLIO-001-FIL-0051-STMT-000011"], ["SYS-PORTFOLIO-001-FIL-0051-STMT-000011"], ["SYS-PORTFOLIO-001-FIL-0051-STMT-000011"], ["SYS-PORTFOLIO-001-FIL-0051-STMT-000012"], ["SYS-PORTFOLIO-001-FIL-0051-STMT-000013"], ["SYS-PORTFOLIO-001-FIL-0051-STMT-000014"], ["SYS-PORTFOLIO-001-FIL-0051-STMT-000014"], ["SYS-PORTFOLIO-001-FIL-0051-STMT-000014"], ["SYS-PORTFOLIO-001-FIL-0051-STMT-000015"]],
+    "pseudocode_text": "DECLARE SQL CURSOR prgcur FOR\n  SQL SELECT program_id, COUNT(*) AS total, COUNT(status_code = 'S'), COUNT(status_code = 'W'), COUNT(status_code = 'E'), COUNT(status_code = 'F')\n  FROM: RTNCODES table  GROUP BY program_id  ORDER BY program_id  -- see source lines 126-137 for full SQL\nOPEN cursor prgcur and execute query  -- SQLCODE not checked\nCALL p210-write-headers THRU p210-exit  !! PERFORM THRU\nWHILE sqlcode != 100 DO  -- PERFORM ... THRU ... UNTIL SQLCODE = 100 (test before); 100 = no more rows\n  CALL p220-process-detail THRU p220-exit  !! PERFORM THRU\nEND WHILE\nCLOSE cursor prgcur  -- SQLCODE not checked",
+    "statement_ids": ["SYS-PORTFOLIO-001-FIL-0051-STMT-000011", "SYS-PORTFOLIO-001-FIL-0051-STMT-000012", "SYS-PORTFOLIO-001-FIL-0051-STMT-000013", "SYS-PORTFOLIO-001-FIL-0051-STMT-000014", "SYS-PORTFOLIO-001-FIL-0051-STMT-000015"],
+    "untranslated_statement_ids": [],
+    "field_references": ["SQLCODE"],
+    "field_reference_ids": [{"name": "SQLCODE", "qualifiers": [], "resolution": "UNRESOLVED", "target_id": null, "target_kind": null, "candidate_ids": []}],
+    "calls_made": ["P210-WRITE-HEADERS", "P220-PROCESS-DETAIL"],
+    "calls_made_ids": [{"name": "P210-WRITE-HEADERS", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0051-PAR-0006", "section_id": null}, {"name": "P220-PROCESS-DETAIL", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0051-PAR-0008", "section_id": null}],
+    "complexity_score": 4, "has_unresolved_statements": false,
+    "annotations": [
+      {"line": 144, "statement_id": "SYS-PORTFOLIO-001-FIL-0051-STMT-000014", "note": "Loop terminates only on SQLCODE = 100; an SQL error during FETCH would repeat indefinitely (no error exit in source)."},
+      {"line": 144, "statement_id": "SYS-PORTFOLIO-001-FIL-0051-STMT-000014", "note": "SQLCODE is tested before the first FETCH; its value then comes from the preceding OPEN CURSOR."}
+    ]
+  },
+  {
+    "name": "P200-EXIT", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0051-PAR-0005", "section": null, "section_id": null, "line_range": [149, 151],
+    "pseudocode": ["EXIT  -- end of PERFORM THRU range P200-PROCESS-ANALYSIS..P200-EXIT (no-op)"],
+    "pseudocode_statement_ids": [["SYS-PORTFOLIO-001-FIL-0051-STMT-000016"]],
+    "pseudocode_text": "EXIT  -- end of PERFORM THRU range P200-PROCESS-ANALYSIS..P200-EXIT (no-op)",
+    "statement_ids": ["SYS-PORTFOLIO-001-FIL-0051-STMT-000016"],
+    "untranslated_statement_ids": [],
+    "field_references": [], "field_reference_ids": [], "calls_made": [], "calls_made_ids": [],
+    "complexity_score": 1, "has_unresolved_statements": false, "annotations": []
+  },
+  {
+    "name": "P210-WRITE-HEADERS", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0051-PAR-0006", "section": null, "section_id": null, "line_range": [152, 165],
+    "pseudocode": [
+      "WRITE separator_line (WS-HEADER1, a line of '-') to REPORT-FILE via REPORT-RECORD",
+      "WRITE title_line (WS-HEADER2, 'Return Code Analysis Report') to REPORT-FILE",
+      "SET report_date (WS-RPT-DATE) = current_date (WS-CURRENT-DATE)  -- YYYYMMDD",
+      "CONCATENATE current_hour + ':' + current_minute + ':' + current_second INTO report_time (WS-RPT-TIME)  -- COBOL STRING DELIMITED BY SIZE",
+      "WRITE date_time_line (WS-HEADER3, 'Report Date:' / 'Report Time:') to REPORT-FILE",
+      "WRITE separator_line (WS-HEADER1) to REPORT-FILE",
+      "WRITE column_heading_line (WS-DETAIL-HDR: Program, Total, Success, Warning, Error, Severe) to REPORT-FILE",
+      "WRITE separator_line (WS-HEADER1) to REPORT-FILE"
+    ],
+    "pseudocode_statement_ids": [["SYS-PORTFOLIO-001-FIL-0051-STMT-000017"], ["SYS-PORTFOLIO-001-FIL-0051-STMT-000018"], ["SYS-PORTFOLIO-001-FIL-0051-STMT-000019"], ["SYS-PORTFOLIO-001-FIL-0051-STMT-000020"], ["SYS-PORTFOLIO-001-FIL-0051-STMT-000021"], ["SYS-PORTFOLIO-001-FIL-0051-STMT-000022"], ["SYS-PORTFOLIO-001-FIL-0051-STMT-000023"], ["SYS-PORTFOLIO-001-FIL-0051-STMT-000024"]],
+    "pseudocode_text": "WRITE separator_line (WS-HEADER1, a line of '-') to REPORT-FILE via REPORT-RECORD\nWRITE title_line (WS-HEADER2, 'Return Code Analysis Report') to REPORT-FILE\nSET report_date (WS-RPT-DATE) = current_date (WS-CURRENT-DATE)  -- YYYYMMDD\nCONCATENATE current_hour + ':' + current_minute + ':' + current_second INTO report_time (WS-RPT-TIME)  -- COBOL STRING DELIMITED BY SIZE\nWRITE date_time_line (WS-HEADER3, 'Report Date:' / 'Report Time:') to REPORT-FILE\nWRITE separator_line (WS-HEADER1) to REPORT-FILE\nWRITE column_heading_line (WS-DETAIL-HDR: Program, Total, Success, Warning, Error, Severe) to REPORT-FILE\nWRITE separator_line (WS-HEADER1) to REPORT-FILE",
+    "statement_ids": ["SYS-PORTFOLIO-001-FIL-0051-STMT-000017", "SYS-PORTFOLIO-001-FIL-0051-STMT-000018", "SYS-PORTFOLIO-001-FIL-0051-STMT-000019", "SYS-PORTFOLIO-001-FIL-0051-STMT-000020", "SYS-PORTFOLIO-001-FIL-0051-STMT-000021", "SYS-PORTFOLIO-001-FIL-0051-STMT-000022", "SYS-PORTFOLIO-001-FIL-0051-STMT-000023", "SYS-PORTFOLIO-001-FIL-0051-STMT-000024"],
+    "untranslated_statement_ids": [],
+    "field_references": ["REPORT-RECORD", "WS-HEADER1", "WS-HEADER2", "WS-CURRENT-DATE", "WS-RPT-DATE", "WS-CURRENT-HOUR", "WS-CURRENT-MINUTE", "WS-CURRENT-SECOND", "WS-RPT-TIME", "WS-HEADER3", "WS-DETAIL-HDR"],
+    "field_reference_ids": [
+      {"name": "REPORT-RECORD", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0051-REC-0001", "target_kind": "record", "candidate_ids": []},
+      {"name": "WS-HEADER1", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0051-FLD-000018", "target_kind": "field", "candidate_ids": []},
+      {"name": "WS-HEADER2", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0051-FLD-000020", "target_kind": "field", "candidate_ids": []},
+      {"name": "WS-CURRENT-DATE", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0051-FLD-000002", "target_kind": "field", "candidate_ids": []},
+      {"name": "WS-RPT-DATE", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0051-FLD-000026", "target_kind": "field", "candidate_ids": []},
+      {"name": "WS-CURRENT-HOUR", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0051-FLD-000007", "target_kind": "field", "candidate_ids": []},
+      {"name": "WS-CURRENT-MINUTE", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0051-FLD-000008", "target_kind": "field", "candidate_ids": []},
+      {"name": "WS-CURRENT-SECOND", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0051-FLD-000009", "target_kind": "field", "candidate_ids": []},
+      {"name": "WS-RPT-TIME", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0051-FLD-000029", "target_kind": "field", "candidate_ids": []},
+      {"name": "WS-HEADER3", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0051-FLD-000024", "target_kind": "field", "candidate_ids": []},
+      {"name": "WS-DETAIL-HDR", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0051-FLD-000031", "target_kind": "field", "candidate_ids": []}
+    ],
+    "calls_made": [], "calls_made_ids": [],
+    "complexity_score": 6, "has_unresolved_statements": false, "annotations": []
+  },
+  {
+    "name": "P210-EXIT", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0051-PAR-0007", "section": null, "section_id": null, "line_range": [166, 168],
+    "pseudocode": ["EXIT  -- end of PERFORM THRU range P210-WRITE-HEADERS..P210-EXIT (no-op)"],
+    "pseudocode_statement_ids": [["SYS-PORTFOLIO-001-FIL-0051-STMT-000025"]],
+    "pseudocode_text": "EXIT  -- end of PERFORM THRU range P210-WRITE-HEADERS..P210-EXIT (no-op)",
+    "statement_ids": ["SYS-PORTFOLIO-001-FIL-0051-STMT-000025"],
+    "untranslated_statement_ids": [],
+    "field_references": [], "field_reference_ids": [], "calls_made": [], "calls_made_ids": [],
+    "complexity_score": 1, "has_unresolved_statements": false, "annotations": []
+  },
+  {
+    "name": "P220-PROCESS-DETAIL", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0051-PAR-0008", "section": null, "section_id": null, "line_range": [169, 188],
+    "pseudocode": [
+      "SQL FETCH next row from cursor prgcur INTO dtl_program, dtl_total, dtl_success, dtl_warning, dtl_error, dtl_severe  -- host variables WS-DTL-*",
+      "IF sqlcode = 0 THEN  -- row fetched successfully",
+      "  WRITE detail_line (WS-DETAIL-LINE) to REPORT-FILE via REPORT-RECORD",
+      "  COMPUTE program_count = program_count + dtl_total",
+      "  COMPUTE success_count = success_count + dtl_success",
+      "  COMPUTE warning_count = warning_count + dtl_warning",
+      "  COMPUTE error_count = error_count + dtl_error",
+      "  COMPUTE severe_count = severe_count + dtl_severe",
+      "END IF  -- any other SQLCODE: nothing is done"
+    ],
+    "pseudocode_statement_ids": [["SYS-PORTFOLIO-001-FIL-0051-STMT-000026"], ["SYS-PORTFOLIO-001-FIL-0051-STMT-000027"], ["SYS-PORTFOLIO-001-FIL-0051-STMT-000044"], ["SYS-PORTFOLIO-001-FIL-0051-STMT-000045"], ["SYS-PORTFOLIO-001-FIL-0051-STMT-000046"], ["SYS-PORTFOLIO-001-FIL-0051-STMT-000047"], ["SYS-PORTFOLIO-001-FIL-0051-STMT-000048"], ["SYS-PORTFOLIO-001-FIL-0051-STMT-000049"], ["SYS-PORTFOLIO-001-FIL-0051-STMT-000027"]],
+    "pseudocode_text": "SQL FETCH next row from cursor prgcur INTO dtl_program, dtl_total, dtl_success, dtl_warning, dtl_error, dtl_severe  -- host variables WS-DTL-*\nIF sqlcode = 0 THEN  -- row fetched successfully\n  WRITE detail_line (WS-DETAIL-LINE) to REPORT-FILE via REPORT-RECORD\n  COMPUTE program_count = program_count + dtl_total\n  COMPUTE success_count = success_count + dtl_success\n  COMPUTE warning_count = warning_count + dtl_warning\n  COMPUTE error_count = error_count + dtl_error\n  COMPUTE severe_count = severe_count + dtl_severe\nEND IF  -- any other SQLCODE: nothing is done",
+    "statement_ids": ["SYS-PORTFOLIO-001-FIL-0051-STMT-000026", "SYS-PORTFOLIO-001-FIL-0051-STMT-000027", "SYS-PORTFOLIO-001-FIL-0051-STMT-000044", "SYS-PORTFOLIO-001-FIL-0051-STMT-000045", "SYS-PORTFOLIO-001-FIL-0051-STMT-000046", "SYS-PORTFOLIO-001-FIL-0051-STMT-000047", "SYS-PORTFOLIO-001-FIL-0051-STMT-000048", "SYS-PORTFOLIO-001-FIL-0051-STMT-000049"],
+    "untranslated_statement_ids": [],
+    "field_references": ["WS-DTL-PROGRAM", "WS-DTL-TOTAL", "WS-DTL-SUCCESS", "WS-DTL-WARNING", "WS-DTL-ERROR", "WS-DTL-SEVERE", "SQLCODE", "REPORT-RECORD", "WS-DETAIL-LINE", "WS-PROGRAM-COUNT", "WS-SUCCESS-COUNT", "WS-WARNING-COUNT", "WS-ERROR-COUNT", "WS-SEVERE-COUNT"],
+    "field_reference_ids": [
+      {"name": "WS-DTL-PROGRAM", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0051-FLD-000045", "target_kind": "field", "candidate_ids": []},
+      {"name": "WS-DTL-TOTAL", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0051-FLD-000047", "target_kind": "field", "candidate_ids": []},
+      {"name": "WS-DTL-SUCCESS", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0051-FLD-000049", "target_kind": "field", "candidate_ids": []},
+      {"name": "WS-DTL-WARNING", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0051-FLD-000051", "target_kind": "field", "candidate_ids": []},
+      {"name": "WS-DTL-ERROR", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0051-FLD-000053", "target_kind": "field", "candidate_ids": []},
+      {"name": "WS-DTL-SEVERE", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0051-FLD-000055", "target_kind": "field", "candidate_ids": []},
+      {"name": "SQLCODE", "qualifiers": [], "resolution": "UNRESOLVED", "target_id": null, "target_kind": null, "candidate_ids": []},
+      {"name": "REPORT-RECORD", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0051-REC-0001", "target_kind": "record", "candidate_ids": []},
+      {"name": "WS-DETAIL-LINE", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0051-FLD-000044", "target_kind": "field", "candidate_ids": []},
+      {"name": "WS-PROGRAM-COUNT", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0051-FLD-000013", "target_kind": "field", "candidate_ids": []},
+      {"name": "WS-SUCCESS-COUNT", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0051-FLD-000016", "target_kind": "field", "candidate_ids": []},
+      {"name": "WS-WARNING-COUNT", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0051-FLD-000015", "target_kind": "field", "candidate_ids": []},
+      {"name": "WS-ERROR-COUNT", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0051-FLD-000014", "target_kind": "field", "candidate_ids": []},
+      {"name": "WS-SEVERE-COUNT", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0051-FLD-000017", "target_kind": "field", "candidate_ids": []}
+    ],
+    "calls_made": [], "calls_made_ids": [],
+    "complexity_score": 3, "has_unresolved_statements": false,
+    "annotations": [
+      {"line": 172, "statement_id": "SYS-PORTFOLIO-001-FIL-0051-STMT-000026", "note": "The FETCH host variables WS-DTL-TOTAL, -SUCCESS, -WARNING, -ERROR and -SEVERE are numeric-edited (PIC ZZZ,ZZ9) display fields, and the ADD statements use them as operands. Recorded as written; how the precompiler and compiler treat edited host variables and edited ADD operands cannot be determined from the source.", "ambiguous": true},
+      {"line": 180, "statement_id": "SYS-PORTFOLIO-001-FIL-0051-STMT-000027", "note": "SQLCODE comes from the precompiler SQLCA, which is not declared in the repository SQLCA copybook (see data dictionary)."}
+    ]
+  },
+  {
+    "name": "P220-EXIT", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0051-PAR-0009", "section": null, "section_id": null, "line_range": [189, 191],
+    "pseudocode": ["EXIT  -- end of PERFORM THRU range P220-PROCESS-DETAIL..P220-EXIT (no-op)"],
+    "pseudocode_statement_ids": [["SYS-PORTFOLIO-001-FIL-0051-STMT-000028"]],
+    "pseudocode_text": "EXIT  -- end of PERFORM THRU range P220-PROCESS-DETAIL..P220-EXIT (no-op)",
+    "statement_ids": ["SYS-PORTFOLIO-001-FIL-0051-STMT-000028"],
+    "untranslated_statement_ids": [],
+    "field_references": [], "field_reference_ids": [], "calls_made": [], "calls_made_ids": [],
+    "complexity_score": 1, "has_unresolved_statements": false, "annotations": []
+  },
+  {
+    "name": "P300-GENERATE-REPORT", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0051-PAR-0010", "section": null, "section_id": null, "line_range": [192, 203],
+    "pseudocode": [
+      "WRITE separator_line (WS-HEADER1) to REPORT-FILE via REPORT-RECORD",
+      "SET dtl_program (WS-DTL-PROGRAM) = 'TOTALS'",
+      "SET dtl_total (WS-DTL-TOTAL) = program_count (WS-PROGRAM-COUNT)",
+      "SET dtl_success (WS-DTL-SUCCESS) = success_count (WS-SUCCESS-COUNT)",
+      "SET dtl_warning (WS-DTL-WARNING) = warning_count (WS-WARNING-COUNT)",
+      "SET dtl_error (WS-DTL-ERROR) = error_count (WS-ERROR-COUNT)",
+      "SET dtl_severe (WS-DTL-SEVERE) = severe_count (WS-SEVERE-COUNT)",
+      "WRITE totals_line (WS-DETAIL-LINE) to REPORT-FILE",
+      "WRITE separator_line (WS-HEADER1) to REPORT-FILE"
+    ],
+    "pseudocode_statement_ids": [["SYS-PORTFOLIO-001-FIL-0051-STMT-000029"], ["SYS-PORTFOLIO-001-FIL-0051-STMT-000030"], ["SYS-PORTFOLIO-001-FIL-0051-STMT-000031"], ["SYS-PORTFOLIO-001-FIL-0051-STMT-000032"], ["SYS-PORTFOLIO-001-FIL-0051-STMT-000033"], ["SYS-PORTFOLIO-001-FIL-0051-STMT-000034"], ["SYS-PORTFOLIO-001-FIL-0051-STMT-000035"], ["SYS-PORTFOLIO-001-FIL-0051-STMT-000036"], ["SYS-PORTFOLIO-001-FIL-0051-STMT-000037"]],
+    "pseudocode_text": "WRITE separator_line (WS-HEADER1) to REPORT-FILE via REPORT-RECORD\nSET dtl_program (WS-DTL-PROGRAM) = 'TOTALS'\nSET dtl_total (WS-DTL-TOTAL) = program_count (WS-PROGRAM-COUNT)\nSET dtl_success (WS-DTL-SUCCESS) = success_count (WS-SUCCESS-COUNT)\nSET dtl_warning (WS-DTL-WARNING) = warning_count (WS-WARNING-COUNT)\nSET dtl_error (WS-DTL-ERROR) = error_count (WS-ERROR-COUNT)\nSET dtl_severe (WS-DTL-SEVERE) = severe_count (WS-SEVERE-COUNT)\nWRITE totals_line (WS-DETAIL-LINE) to REPORT-FILE\nWRITE separator_line (WS-HEADER1) to REPORT-FILE",
+    "statement_ids": ["SYS-PORTFOLIO-001-FIL-0051-STMT-000029", "SYS-PORTFOLIO-001-FIL-0051-STMT-000030", "SYS-PORTFOLIO-001-FIL-0051-STMT-000031", "SYS-PORTFOLIO-001-FIL-0051-STMT-000032", "SYS-PORTFOLIO-001-FIL-0051-STMT-000033", "SYS-PORTFOLIO-001-FIL-0051-STMT-000034", "SYS-PORTFOLIO-001-FIL-0051-STMT-000035", "SYS-PORTFOLIO-001-FIL-0051-STMT-000036", "SYS-PORTFOLIO-001-FIL-0051-STMT-000037"],
+    "untranslated_statement_ids": [],
+    "field_references": ["REPORT-RECORD", "WS-HEADER1", "WS-DTL-PROGRAM", "WS-PROGRAM-COUNT", "WS-DTL-TOTAL", "WS-SUCCESS-COUNT", "WS-DTL-SUCCESS", "WS-WARNING-COUNT", "WS-DTL-WARNING", "WS-ERROR-COUNT", "WS-DTL-ERROR", "WS-SEVERE-COUNT", "WS-DTL-SEVERE", "WS-DETAIL-LINE"],
+    "field_reference_ids": [
+      {"name": "REPORT-RECORD", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0051-REC-0001", "target_kind": "record", "candidate_ids": []},
+      {"name": "WS-HEADER1", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0051-FLD-000018", "target_kind": "field", "candidate_ids": []},
+      {"name": "WS-DTL-PROGRAM", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0051-FLD-000045", "target_kind": "field", "candidate_ids": []},
+      {"name": "WS-PROGRAM-COUNT", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0051-FLD-000013", "target_kind": "field", "candidate_ids": []},
+      {"name": "WS-DTL-TOTAL", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0051-FLD-000047", "target_kind": "field", "candidate_ids": []},
+      {"name": "WS-SUCCESS-COUNT", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0051-FLD-000016", "target_kind": "field", "candidate_ids": []},
+      {"name": "WS-DTL-SUCCESS", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0051-FLD-000049", "target_kind": "field", "candidate_ids": []},
+      {"name": "WS-WARNING-COUNT", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0051-FLD-000015", "target_kind": "field", "candidate_ids": []},
+      {"name": "WS-DTL-WARNING", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0051-FLD-000051", "target_kind": "field", "candidate_ids": []},
+      {"name": "WS-ERROR-COUNT", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0051-FLD-000014", "target_kind": "field", "candidate_ids": []},
+      {"name": "WS-DTL-ERROR", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0051-FLD-000053", "target_kind": "field", "candidate_ids": []},
+      {"name": "WS-SEVERE-COUNT", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0051-FLD-000017", "target_kind": "field", "candidate_ids": []},
+      {"name": "WS-DTL-SEVERE", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0051-FLD-000055", "target_kind": "field", "candidate_ids": []},
+      {"name": "WS-DETAIL-LINE", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0051-FLD-000044", "target_kind": "field", "candidate_ids": []}
+    ],
+    "calls_made": [], "calls_made_ids": [],
+    "complexity_score": 3, "has_unresolved_statements": false, "annotations": []
+  },
+  {
+    "name": "P300-EXIT", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0051-PAR-0011", "section": null, "section_id": null, "line_range": [204, 206],
+    "pseudocode": ["EXIT  -- end of PERFORM THRU range P300-GENERATE-REPORT..P300-EXIT (no-op)"],
+    "pseudocode_statement_ids": [["SYS-PORTFOLIO-001-FIL-0051-STMT-000038"]],
+    "pseudocode_text": "EXIT  -- end of PERFORM THRU range P300-GENERATE-REPORT..P300-EXIT (no-op)",
+    "statement_ids": ["SYS-PORTFOLIO-001-FIL-0051-STMT-000038"],
+    "untranslated_statement_ids": [],
+    "field_references": [], "field_reference_ids": [], "calls_made": [], "calls_made_ids": [],
+    "complexity_score": 1, "has_unresolved_statements": false, "annotations": []
+  },
+  {
+    "name": "P900-CLOSE-FILES", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0051-PAR-0012", "section": null, "section_id": null, "line_range": [207, 208],
+    "pseudocode": ["CLOSE REPORT-FILE"],
+    "pseudocode_statement_ids": [["SYS-PORTFOLIO-001-FIL-0051-STMT-000039"]],
+    "pseudocode_text": "CLOSE REPORT-FILE",
+    "statement_ids": ["SYS-PORTFOLIO-001-FIL-0051-STMT-000039"],
+    "untranslated_statement_ids": [],
+    "field_references": [], "field_reference_ids": [], "calls_made": [], "calls_made_ids": [],
+    "complexity_score": 1, "has_unresolved_statements": false, "annotations": []
+  },
+  {
+    "name": "P900-EXIT", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0051-PAR-0013", "section": null, "section_id": null, "line_range": [209, 210],
+    "pseudocode": ["EXIT  -- end of PERFORM THRU range P900-CLOSE-FILES..P900-EXIT (no-op)"],
+    "pseudocode_statement_ids": [["SYS-PORTFOLIO-001-FIL-0051-STMT-000040"]],
+    "pseudocode_text": "EXIT  -- end of PERFORM THRU range P900-CLOSE-FILES..P900-EXIT (no-op)",
+    "statement_ids": ["SYS-PORTFOLIO-001-FIL-0051-STMT-000040"],
+    "untranslated_statement_ids": [],
+    "field_references": [], "field_reference_ids": [], "calls_made": [], "calls_made_ids": [],
+    "complexity_score": 1, "has_unresolved_statements": false, "annotations": []
+  }
+],
+"unresolved_statements": [],
+"pseudocode_issues": [
+  {"severity": "info", "type": "id_unresolved", "kind": "field", "name": "SQLCODE", "paragraphs": ["P200-PROCESS-ANALYSIS", "P220-PROCESS-DETAIL"], "message": "resolve-field-references UNRESOLVED; target_id null."},
+  {"severity": "info", "type": "sql_summarised", "line": 126, "statement_id": "SYS-PORTFOLIO-001-FIL-0051-STMT-000011", "message": "DECLARE CURSOR with GROUP BY and conditional COUNTs summarised; see source lines 126-137 for full SQL."}
+]
+}

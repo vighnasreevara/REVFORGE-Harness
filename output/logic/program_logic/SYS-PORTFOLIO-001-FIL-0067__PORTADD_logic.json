@@ -1,0 +1,396 @@
+{
+"program_summary": {"program_id": "PORTADD", "file_id": "SYS-PORTFOLIO-001-FIL-0067", "logic_file": "program_logic/SYS-PORTFOLIO-001-FIL-0067__PORTADD_logic.json", "logic_status": "success", "paragraphs_translated": 5, "execution_paths": 1, "branches": 4, "loops": 1, "dead_code_confirmed": 0, "goto_annotations": 0, "unresolvable_paths": 0, "unresolved_ids": 0},
+"program_id": "PORTADD",
+"system_id": "SYS-PORTFOLIO-001",
+"file_id": "SYS-PORTFOLIO-001-FIL-0067",
+"path_id": "SYS-PORTFOLIO-001-PATH-0067",
+"relative_path": "src/programs/portfolio/PORTADD.cbl",
+"parse_run_id": "PRUN-20261023T023803Z-ACC2",
+"upstream": {
+  "verification": {
+    "verdict": "VALID",
+    "verdict_reasons": ["V2, V3 and V4 consistent; Agent 2 parse_status 'success'; copybook layout PORTFLIO present and consistent; no unresolved copy stubs"],
+    "v1": {"raw_structure": "present", "parse_status": "success", "program_layout": "present", "data_run_id": "DRUN-20261024T215053Z-ACC1", "copybook_layouts": [{"copybook": "PORTFLIO", "copybook_file_id": "SYS-PORTFOLIO-001-FIL-0009", "layout": "present", "expanded_at_lines": [37, 40]}], "unresolved_copy_stubs": []},
+    "v2_file_identities": {
+      "program_entries": {"require_completed": ["parser", "data"], "entries": ["raw_structure|SYS-PORTFOLIO-001-FIL-0067", "data_layout|SYS-PORTFOLIO-001-FIL-0067"], "result": "batched with the INQPORT, SECMGR, PORTDEL, PORTREAD and PORTTEST program entries: checked 12, ok 12, problems [], duplicate_file_ids_in_json [], consistent true"},
+      "copybook_entries": {"require_completed": ["data"], "entries": ["data_layout|SYS-PORTFOLIO-001-FIL-0009"], "result": "batched with copybooks FIL-0020, FIL-0011, FIL-0017, FIL-0019, FIL-0007: checked 6, ok 6, problems [], duplicate_file_ids_in_json [], consistent true"},
+      "consistent": true
+    },
+    "v3_structure_identities": {"sections_checked": 4, "paragraphs_checked": 5, "statements_checked": 33, "edges_checked": 5, "registered_edges": 5, "section_problems": [], "paragraph_problems": [], "statement_problems": [], "edge_problems": [], "invalid_registered_edges": [], "registered_not_in_json": {"sections": [], "paragraphs": [], "statements": [], "missing_count": 0}, "duplicate_ids_in_json": [], "consistent": true, "note": "section names sent: CONFIGURATION (SEC-0001), INPUT-OUTPUT (SEC-0002); null for the data-division sections SEC-0003 and SEC-0004"},
+    "v4_data_identities": [
+      {"file_id": "SYS-PORTFOLIO-001-FIL-0067", "layout": "program", "records_checked": 3, "fields_checked": 18, "expansions_checked": 2, "record_problems": [], "field_problems": [], "expansion_problems": [], "copybook_records_in_program": 0, "registered_not_in_json": {"records": [], "fields": [], "missing_count": 0}, "duplicate_ids_in_json": [], "consistent": true, "note": "copy_expansions held by FILE section SYS-PORTFOLIO-001-FIL-0067-SEC-0003 (lines 37 and 40)"},
+      {"file_id": "SYS-PORTFOLIO-001-FIL-0009", "layout": "copybook PORTFLIO", "records_checked": 1, "fields_checked": 23, "expansions_checked": 0, "record_problems": [], "field_problems": [], "expansion_problems": [], "copybook_records_in_program": 0, "registered_not_in_json": {"records": [], "fields": [], "missing_count": 0}, "duplicate_ids_in_json": [], "consistent": true}
+    ]
+  }
+},
+"execution_traces": [
+  {
+    "entry_point": "0000-MAIN",
+    "entry_point_id": "SYS-PORTFOLIO-001-FIL-0067-PAR-0001",
+    "entry_type": "batch_main",
+    "steps": [
+      {"step": 1, "paragraph": "0000-MAIN", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0067-PAR-0001", "action": "PERFORM", "target": "1000-INITIALIZE", "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0067-PAR-0002", "target_section_id": null, "condition": null, "line": 77, "statement_id": "SYS-PORTFOLIO-001-FIL-0067-STMT-000001"},
+      {"step": 2, "paragraph": "1000-INITIALIZE", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0067-PAR-0002", "action": "IF", "target": null, "target_paragraph_id": null, "target_section_id": null,
+       "condition": {"text": "NOT WS-SUCCESS-STATUS OR NOT WS-INPUT-SUCCESS", "fields": ["WS-SUCCESS-STATUS", "WS-INPUT-SUCCESS"], "field_ids": [
+         {"name": "WS-SUCCESS-STATUS", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0067-FLD-000005", "target_kind": "condition", "candidate_ids": []},
+         {"name": "WS-INPUT-SUCCESS", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0067-FLD-000009", "target_kind": "condition", "candidate_ids": []}]},
+       "line": 94, "statement_id": "SYS-PORTFOLIO-001-FIL-0067-STMT-000009"},
+      {"step": 3, "paragraph": "1000-INITIALIZE", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0067-PAR-0002", "action": "PERFORM", "target": "3000-TERMINATE", "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0067-PAR-0005", "target_section_id": null,
+       "condition": {"text": "THEN branch of IF NOT WS-SUCCESS-STATUS OR NOT WS-INPUT-SUCCESS (file open failed)", "fields": ["WS-SUCCESS-STATUS", "WS-INPUT-SUCCESS"], "field_ids": [
+         {"name": "WS-SUCCESS-STATUS", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0067-FLD-000005", "target_kind": "condition", "candidate_ids": []},
+         {"name": "WS-INPUT-SUCCESS", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0067-FLD-000009", "target_kind": "condition", "candidate_ids": []}]},
+       "line": 100, "statement_id": "SYS-PORTFOLIO-001-FIL-0067-STMT-000023", "note": "After 3000-TERMINATE returns, control goes back to 0000-MAIN, which continues with the read loop (step 4); the program does not stop on open failure."},
+      {"step": 4, "paragraph": "0000-MAIN", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0067-PAR-0001", "action": "PERFORM_UNTIL", "target": "2000-PROCESS", "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0067-PAR-0003", "target_section_id": null,
+       "condition": {"text": "END-OF-FILE", "fields": ["END-OF-FILE"], "field_ids": [{"name": "END-OF-FILE", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0067-FLD-000012", "target_kind": "condition", "candidate_ids": []}], "test_time": "BEFORE", "loop_type": "WHILE", "termination_pattern": "FILE_EXHAUSTION_LOOP"},
+       "line": 79, "statement_id": "SYS-PORTFOLIO-001-FIL-0067-STMT-000002"},
+      {"step": 5, "paragraph": "2000-PROCESS", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0067-PAR-0003", "action": "READ", "target": null, "target_paragraph_id": null, "target_section_id": null,
+       "condition": {"text": "READ INPUT-FILE INTO PORT-RECORD AT END / NOT AT END", "fields": [], "field_ids": []},
+       "line": 105, "statement_id": "SYS-PORTFOLIO-001-FIL-0067-STMT-000010"},
+      {"step": 6, "paragraph": "2000-PROCESS", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0067-PAR-0003", "action": "PERFORM", "target": "2100-VALIDATE-AND-ADD", "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0067-PAR-0004", "target_section_id": null,
+       "condition": {"text": "NOT AT END (a record was read)", "fields": [], "field_ids": []},
+       "line": 109, "statement_id": "SYS-PORTFOLIO-001-FIL-0067-STMT-000025"},
+      {"step": 7, "paragraph": "0000-MAIN", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0067-PAR-0001", "action": "PERFORM", "target": "3000-TERMINATE", "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0067-PAR-0005", "target_section_id": null, "condition": null, "line": 82, "statement_id": "SYS-PORTFOLIO-001-FIL-0067-STMT-000003"},
+      {"step": 8, "paragraph": "0000-MAIN", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0067-PAR-0001", "action": "GOBACK", "target": null, "target_paragraph_id": null, "target_section_id": null, "condition": null, "line": 84, "statement_id": "SYS-PORTFOLIO-001-FIL-0067-STMT-000004"}
+    ]
+  }
+],
+"branch_map": [
+  {
+    "paragraph": "1000-INITIALIZE",
+    "paragraph_id": "SYS-PORTFOLIO-001-FIL-0067-PAR-0002",
+    "branches": [
+      {"type": "IF", "line": 94, "statement_id": "SYS-PORTFOLIO-001-FIL-0067-STMT-000009", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0067-PAR-0002",
+       "condition_text": "NOT WS-SUCCESS-STATUS OR NOT WS-INPUT-SUCCESS",
+       "condition_fields": ["WS-SUCCESS-STATUS", "WS-INPUT-SUCCESS"],
+       "condition_field_ids": [
+         {"name": "WS-SUCCESS-STATUS", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0067-FLD-000005", "target_kind": "condition", "candidate_ids": []},
+         {"name": "WS-INPUT-SUCCESS", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0067-FLD-000009", "target_kind": "condition", "candidate_ids": []}
+       ],
+       "has_else": false, "then_line_range": [96, 100], "else_line_range": null, "end_if_line": 101, "nested_depth": 1,
+       "outcomes": [
+         {"label": "THEN", "line_range": [96, 100], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0067-STMT-000021", "SYS-PORTFOLIO-001-FIL-0067-STMT-000022", "SYS-PORTFOLIO-001-FIL-0067-STMT-000023"]}
+       ]}
+    ]
+  },
+  {
+    "paragraph": "2000-PROCESS",
+    "paragraph_id": "SYS-PORTFOLIO-001-FIL-0067-PAR-0003",
+    "branches": [
+      {"type": "AT_END", "operation": "READ", "file_name": "INPUT-FILE", "line": 105, "statement_id": "SYS-PORTFOLIO-001-FIL-0067-STMT-000010", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0067-PAR-0003",
+       "condition_text": "READ INPUT-FILE INTO PORT-RECORD AT END / NOT AT END", "condition_fields": [], "condition_field_ids": [], "io_status_field": "WS-INPUT-STATUS",
+       "at_end_line_range": [107, 107], "not_at_end_line_range": [109, 109], "nested_depth": 1,
+       "outcomes": [
+         {"label": "AT END", "line_range": [107, 107], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0067-STMT-000024"]},
+         {"label": "NOT AT END", "line_range": [109, 109], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0067-STMT-000025"]}
+       ]}
+    ]
+  },
+  {
+    "paragraph": "2100-VALIDATE-AND-ADD",
+    "paragraph_id": "SYS-PORTFOLIO-001-FIL-0067-PAR-0004",
+    "branches": [
+      {"type": "IF", "line": 114, "statement_id": "SYS-PORTFOLIO-001-FIL-0067-STMT-000011", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0067-PAR-0004",
+       "condition_text": "PORT-ID EQUAL SPACES OR PORT-CLIENT-NAME EQUAL SPACES OR PORT-STATUS NOT EQUAL 'A'",
+       "condition_fields": ["PORT-ID", "PORT-CLIENT-NAME", "PORT-STATUS"],
+       "condition_field_ids": [
+         {"name": "PORT-ID", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0009-FLD-000002", "target_kind": "field", "candidate_ids": []},
+         {"name": "PORT-CLIENT-NAME", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0009-FLD-000005", "target_kind": "field", "candidate_ids": []},
+         {"name": "PORT-STATUS", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0009-FLD-000013", "target_kind": "field", "candidate_ids": []}
+       ],
+       "has_else": false, "then_line_range": [117, 119], "else_line_range": null, "end_if_line": 120, "nested_depth": 1,
+       "outcomes": [
+         {"label": "THEN", "line_range": [117, 119], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0067-STMT-000026", "SYS-PORTFOLIO-001-FIL-0067-STMT-000027", "SYS-PORTFOLIO-001-FIL-0067-STMT-000028"]}
+       ]},
+      {"type": "EVALUATE", "line": 127, "statement_id": "SYS-PORTFOLIO-001-FIL-0067-STMT-000015", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0067-PAR-0004", "subjects": ["TRUE"],
+       "condition_text": "EVALUATE TRUE WHEN WS-SUCCESS-STATUS / WHEN WS-DUP-STATUS / WHEN OTHER",
+       "condition_fields": ["WS-SUCCESS-STATUS", "WS-DUP-STATUS"],
+       "condition_field_ids": [
+         {"name": "WS-SUCCESS-STATUS", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0067-FLD-000005", "target_kind": "condition", "candidate_ids": []},
+         {"name": "WS-DUP-STATUS", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0067-FLD-000006", "target_kind": "condition", "candidate_ids": []}
+       ],
+       "when_clauses": [
+         {"conditions": ["WS-SUCCESS-STATUS"], "condition_fields": ["WS-SUCCESS-STATUS"], "condition_values": "WS-FILE-STATUS = '00'", "body_line_range": [129, 129], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0067-STMT-000033"]},
+         {"conditions": ["WS-DUP-STATUS"], "condition_fields": ["WS-DUP-STATUS"], "condition_values": "WS-FILE-STATUS = '22'", "body_line_range": [131, 132], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0067-STMT-000031", "SYS-PORTFOLIO-001-FIL-0067-STMT-000032"]},
+         {"conditions": ["OTHER"], "condition_fields": [], "body_line_range": [134, 135], "is_default": true, "statement_ids": ["SYS-PORTFOLIO-001-FIL-0067-STMT-000029", "SYS-PORTFOLIO-001-FIL-0067-STMT-000030"]}
+       ],
+       "has_when_other": true,
+       "end_evaluate_line": 136,
+       "outcomes": [
+         {"label": "WHEN WS-SUCCESS-STATUS", "line_range": [129, 129], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0067-STMT-000033"]},
+         {"label": "WHEN WS-DUP-STATUS", "line_range": [131, 132], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0067-STMT-000031", "SYS-PORTFOLIO-001-FIL-0067-STMT-000032"]},
+         {"label": "WHEN OTHER", "line_range": [134, 135], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0067-STMT-000029", "SYS-PORTFOLIO-001-FIL-0067-STMT-000030"]}
+       ],
+       "nested_depth": 1}
+    ]
+  }
+],
+"loops": [
+  {"paragraph": "0000-MAIN", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0067-PAR-0001", "target": "2000-PROCESS", "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0067-PAR-0003", "type": "PERFORM_UNTIL", "statement_id": "SYS-PORTFOLIO-001-FIL-0067-STMT-000002",
+   "condition_text": "END-OF-FILE", "condition_fields": ["END-OF-FILE"],
+   "condition_field_ids": [{"name": "END-OF-FILE", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0067-FLD-000012", "target_kind": "condition", "candidate_ids": []}],
+   "test_time": "BEFORE", "loop_type": "WHILE", "termination_pattern": "FILE_EXHAUSTION_LOOP",
+   "modifying_statement_ids": ["SYS-PORTFOLIO-001-FIL-0067-STMT-000024"],
+   "line": 79}
+],
+"dead_code_confirmed": [],
+"unresolvable_paths": [],
+"trace_issues": [
+  {"severity": "info", "type": "upstream_issue", "upstream_agent": "2_parser", "upstream_type": "misplaced_comment_indicator", "lines": [1], "message": "Line 1 has '*' in column 8 (Area A) with a blank indicator column 7; treated as a comment."},
+  {"severity": "info", "type": "upstream_issue", "upstream_agent": "3_data", "upstream_type": "copy_stub_under_fd", "lines": [37, 40], "message": "COPY PORTFLIO is the only record source of FD PORTFOLIO-FILE (line 36) and FD INPUT-FILE (line 39); PORT-RECORD is linked by EXPANDS_COPY from the FILE section (SYS-PORTFOLIO-001-FIL-0067-SEC-0003) under the copybook's Record ID."},
+  {"severity": "info", "type": "upstream_issue", "upstream_agent": "3_data", "upstream_type": "duplicate_copy_expansion", "line": 40, "message": "COPY PORTFLIO is included under two FDs; both expand to SYS-PORTFOLIO-001-FIL-0009-REC-0001 (PORT-RECORD). In compiled COBOL this declares two PORT-RECORDs with the same data names, which requires qualification by file."},
+  {"severity": "warning", "type": "ambiguous_record_reference", "lines": [105, 114, 122, 125], "message": "PORT-RECORD and its fields (PORT-ID, PORT-CLIENT-NAME, PORT-STATUS, PORT-CREATE-DATE, PORT-LAST-MAINT) are used without OF PORTFOLIO-FILE / OF INPUT-FILE qualification while two FD copies exist. The registry holds one copybook record, so the lookups resolve to the single copybook IDs; which file buffer is meant (READ INTO vs WRITE) is recorded as written and flagged for SME review."},
+  {"severity": "warning", "type": "loop_termination_risk", "line": 79, "statement_id": "SYS-PORTFOLIO-001-FIL-0067-STMT-000002", "message": "END-OF-FILE is set only on READ AT END (line 107). If the files failed to open, 1000-INITIALIZE performs 3000-TERMINATE (closing the files) and returns; 0000-MAIN then enters the read loop on a closed file, where neither AT END nor NOT AT END fires. The loop termination in that path cannot be confirmed statically."},
+  {"severity": "info", "type": "double_terminate", "lines": [100, 82], "message": "On the open-failure path 3000-TERMINATE runs twice (line 100 and line 82); WS-RETURN-CODE remains 8 because nothing resets it."},
+  {"severity": "info", "type": "exit_paragraph", "line": 119, "statement_id": "SYS-PORTFOLIO-001-FIL-0067-STMT-000028", "message": "EXIT PARAGRAPH ends 2100-VALIDATE-AND-ADD early for an invalid record (structured early exit, not a GO TO)."}
+],
+"program_narrative": "Program PORTADD is a batch program that adds new portfolio records. It opens the indexed PORTFOLIO-FILE for update and the sequential INPUT-FILE for reading, captures today's date, and reads INPUT-FILE record by record into PORT-RECORD until end of file. Each record is validated: a blank portfolio ID, a blank client name or a status other than 'A' (active) is counted as an error and skipped. Valid records receive today's date as creation and last-maintenance date and are written to PORTFOLIO-FILE; the file status then classifies the write as added ('00'), duplicate key ('22') or other write error. At the end the files are closed, the added, duplicate and error counts are displayed, and WS-RETURN-CODE (8 if the files could not be opened, otherwise 0) is passed back as the program return code. Error conditions handled: open failure, invalid input data, duplicate key and other write errors.",
+"paragraphs": [
+  {
+    "name": "0000-MAIN",
+    "paragraph_id": "SYS-PORTFOLIO-001-FIL-0067-PAR-0001",
+    "section": null,
+    "section_id": null,
+    "line_range": [76, 85],
+    "pseudocode": [
+      "-- Main control paragraph: initialise, process all input records, terminate",
+      "CALL 1000-initialize",
+      "WHILE NOT end_of_file DO  -- PERFORM UNTIL END-OF-FILE (tested before each iteration)",
+      "  CALL 2000-process",
+      "END WHILE",
+      "CALL 3000-terminate",
+      "RETURN to caller  -- GOBACK"
+    ],
+    "pseudocode_statement_ids": [
+      [],
+      ["SYS-PORTFOLIO-001-FIL-0067-STMT-000001"],
+      ["SYS-PORTFOLIO-001-FIL-0067-STMT-000002"],
+      ["SYS-PORTFOLIO-001-FIL-0067-STMT-000002"],
+      ["SYS-PORTFOLIO-001-FIL-0067-STMT-000002"],
+      ["SYS-PORTFOLIO-001-FIL-0067-STMT-000003"],
+      ["SYS-PORTFOLIO-001-FIL-0067-STMT-000004"]
+    ],
+    "pseudocode_text": "-- Main control paragraph: initialise, process all input records, terminate\nCALL 1000-initialize\nWHILE NOT end_of_file DO  -- PERFORM UNTIL END-OF-FILE (tested before each iteration)\n  CALL 2000-process\nEND WHILE\nCALL 3000-terminate\nRETURN to caller  -- GOBACK",
+    "statement_ids": ["SYS-PORTFOLIO-001-FIL-0067-STMT-000001", "SYS-PORTFOLIO-001-FIL-0067-STMT-000002", "SYS-PORTFOLIO-001-FIL-0067-STMT-000003", "SYS-PORTFOLIO-001-FIL-0067-STMT-000004"],
+    "untranslated_statement_ids": [],
+    "field_references": ["END-OF-FILE"],
+    "field_reference_ids": [
+      {"name": "END-OF-FILE", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0067-FLD-000012", "target_kind": "condition", "candidate_ids": []}
+    ],
+    "calls_made": ["1000-INITIALIZE", "2000-PROCESS", "3000-TERMINATE"],
+    "calls_made_ids": [
+      {"name": "1000-INITIALIZE", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0067-PAR-0002", "section_id": null},
+      {"name": "2000-PROCESS", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0067-PAR-0003", "section_id": null},
+      {"name": "3000-TERMINATE", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0067-PAR-0005", "section_id": null}
+    ],
+    "complexity_score": 1,
+    "has_unresolved_statements": false,
+    "annotations": [
+      {"line": 79, "statement_id": "SYS-PORTFOLIO-001-FIL-0067-STMT-000002", "note": "END-OF-FILE is the 88-level condition WS-END-OF-FILE-SW = 'Y', set by READ AT END in 2000-PROCESS."}
+    ]
+  },
+  {
+    "name": "1000-INITIALIZE",
+    "paragraph_id": "SYS-PORTFOLIO-001-FIL-0067-PAR-0002",
+    "section": null,
+    "section_id": null,
+    "line_range": [86, 103],
+    "pseudocode": [
+      "CLEAR ws_work_areas  -- INITIALIZE: counters to zero, alphanumerics to spaces",
+      "SET ws_current_date = TODAY('YYYYMMDD')  -- ACCEPT FROM DATE YYYYMMDD",
+      "OPEN PORTFOLIO-FILE for READ-WRITE  -- status in WS-FILE-STATUS",
+      "OPEN INPUT-FILE for READ-ONLY  -- status in WS-INPUT-STATUS",
+      "IF portfolio file status != '00' OR input file status != '00' THEN",
+      "  DISPLAY 'Error opening files: ' 'PORT=' ws_file_status 'INPT=' ws_input_status",
+      "  SET ws_return_code = ws_error  -- 8",
+      "  CALL 3000-terminate  -- closes the files; control then returns here and to 0000-MAIN",
+      "END IF"
+    ],
+    "pseudocode_statement_ids": [
+      ["SYS-PORTFOLIO-001-FIL-0067-STMT-000005"],
+      ["SYS-PORTFOLIO-001-FIL-0067-STMT-000006"],
+      ["SYS-PORTFOLIO-001-FIL-0067-STMT-000007"],
+      ["SYS-PORTFOLIO-001-FIL-0067-STMT-000008"],
+      ["SYS-PORTFOLIO-001-FIL-0067-STMT-000009"],
+      ["SYS-PORTFOLIO-001-FIL-0067-STMT-000021"],
+      ["SYS-PORTFOLIO-001-FIL-0067-STMT-000022"],
+      ["SYS-PORTFOLIO-001-FIL-0067-STMT-000023"],
+      ["SYS-PORTFOLIO-001-FIL-0067-STMT-000009"]
+    ],
+    "pseudocode_text": "CLEAR ws_work_areas  -- INITIALIZE: counters to zero, alphanumerics to spaces\nSET ws_current_date = TODAY('YYYYMMDD')  -- ACCEPT FROM DATE YYYYMMDD\nOPEN PORTFOLIO-FILE for READ-WRITE  -- status in WS-FILE-STATUS\nOPEN INPUT-FILE for READ-ONLY  -- status in WS-INPUT-STATUS\nIF portfolio file status != '00' OR input file status != '00' THEN\n  DISPLAY 'Error opening files: ' 'PORT=' ws_file_status 'INPT=' ws_input_status\n  SET ws_return_code = ws_error  -- 8\n  CALL 3000-terminate  -- closes the files; control then returns here and to 0000-MAIN\nEND IF",
+    "statement_ids": ["SYS-PORTFOLIO-001-FIL-0067-STMT-000005", "SYS-PORTFOLIO-001-FIL-0067-STMT-000006", "SYS-PORTFOLIO-001-FIL-0067-STMT-000007", "SYS-PORTFOLIO-001-FIL-0067-STMT-000008", "SYS-PORTFOLIO-001-FIL-0067-STMT-000009", "SYS-PORTFOLIO-001-FIL-0067-STMT-000021", "SYS-PORTFOLIO-001-FIL-0067-STMT-000022", "SYS-PORTFOLIO-001-FIL-0067-STMT-000023"],
+    "untranslated_statement_ids": [],
+    "field_references": ["WS-WORK-AREAS", "WS-CURRENT-DATE", "WS-SUCCESS-STATUS", "WS-INPUT-SUCCESS", "WS-FILE-STATUS", "WS-INPUT-STATUS", "WS-ERROR", "WS-RETURN-CODE"],
+    "field_reference_ids": [
+      {"name": "WS-WORK-AREAS", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0067-REC-0003", "target_kind": "record", "candidate_ids": []},
+      {"name": "WS-CURRENT-DATE", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0067-FLD-000018", "target_kind": "field", "candidate_ids": []},
+      {"name": "WS-SUCCESS-STATUS", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0067-FLD-000005", "target_kind": "condition", "candidate_ids": []},
+      {"name": "WS-INPUT-SUCCESS", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0067-FLD-000009", "target_kind": "condition", "candidate_ids": []},
+      {"name": "WS-FILE-STATUS", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0067-FLD-000004", "target_kind": "field", "candidate_ids": []},
+      {"name": "WS-INPUT-STATUS", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0067-FLD-000008", "target_kind": "field", "candidate_ids": []},
+      {"name": "WS-ERROR", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0067-FLD-000003", "target_kind": "field", "candidate_ids": []},
+      {"name": "WS-RETURN-CODE", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0067-FLD-000017", "target_kind": "field", "candidate_ids": []}
+    ],
+    "calls_made": ["3000-TERMINATE"],
+    "calls_made_ids": [
+      {"name": "3000-TERMINATE", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0067-PAR-0005", "section_id": null}
+    ],
+    "complexity_score": 3,
+    "has_unresolved_statements": false,
+    "annotations": [
+      {"line": 87, "statement_id": "SYS-PORTFOLIO-001-FIL-0067-STMT-000005", "note": "INITIALIZE WS-WORK-AREAS also clears WS-RETURN-CODE and WS-CURRENT-DATE (both are in WS-WORK-AREAS)."},
+      {"line": 100, "statement_id": "SYS-PORTFOLIO-001-FIL-0067-STMT-000023", "note": "The open-failure path does not stop the program: 0000-MAIN continues into the read loop after this paragraph returns."}
+    ]
+  },
+  {
+    "name": "2000-PROCESS",
+    "paragraph_id": "SYS-PORTFOLIO-001-FIL-0067-PAR-0003",
+    "section": null,
+    "section_id": null,
+    "line_range": [104, 112],
+    "pseudocode": [
+      "READ next record from INPUT-FILE into port_record",
+      "IF end of file THEN",
+      "  SET end_of_file = TRUE  -- WS-END-OF-FILE-SW = 'Y'",
+      "ELSE",
+      "  CALL 2100-validate-and-add",
+      "END IF"
+    ],
+    "pseudocode_statement_ids": [
+      ["SYS-PORTFOLIO-001-FIL-0067-STMT-000010"],
+      ["SYS-PORTFOLIO-001-FIL-0067-STMT-000010"],
+      ["SYS-PORTFOLIO-001-FIL-0067-STMT-000024"],
+      ["SYS-PORTFOLIO-001-FIL-0067-STMT-000010"],
+      ["SYS-PORTFOLIO-001-FIL-0067-STMT-000025"],
+      ["SYS-PORTFOLIO-001-FIL-0067-STMT-000010"]
+    ],
+    "pseudocode_text": "READ next record from INPUT-FILE into port_record\nIF end of file THEN\n  SET end_of_file = TRUE  -- WS-END-OF-FILE-SW = 'Y'\nELSE\n  CALL 2100-validate-and-add\nEND IF",
+    "statement_ids": ["SYS-PORTFOLIO-001-FIL-0067-STMT-000010", "SYS-PORTFOLIO-001-FIL-0067-STMT-000024", "SYS-PORTFOLIO-001-FIL-0067-STMT-000025"],
+    "untranslated_statement_ids": [],
+    "field_references": ["PORT-RECORD", "END-OF-FILE"],
+    "field_reference_ids": [
+      {"name": "PORT-RECORD", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0009-REC-0001", "target_kind": "record", "candidate_ids": []},
+      {"name": "END-OF-FILE", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0067-FLD-000012", "target_kind": "condition", "candidate_ids": []}
+    ],
+    "calls_made": ["2100-VALIDATE-AND-ADD"],
+    "calls_made_ids": [
+      {"name": "2100-VALIDATE-AND-ADD", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0067-PAR-0004", "section_id": null}
+    ],
+    "complexity_score": 2,
+    "has_unresolved_statements": false,
+    "annotations": [
+      {"line": 105, "statement_id": "SYS-PORTFOLIO-001-FIL-0067-STMT-000010", "note": "READ ... INTO PORT-RECORD: PORT-RECORD is declared under both FDs (COPY PORTFLIO at lines 37 and 40); the target buffer is unqualified.", "ambiguous": true}
+    ]
+  },
+  {
+    "name": "2100-VALIDATE-AND-ADD",
+    "paragraph_id": "SYS-PORTFOLIO-001-FIL-0067-PAR-0004",
+    "section": null,
+    "section_id": null,
+    "line_range": [113, 138],
+    "pseudocode": [
+      "IF port_id is blank OR port_client_name is blank OR port_status != 'A' THEN  -- 'A' = active portfolio",
+      "  INCREMENT ws_error_count BY 1",
+      "  DISPLAY 'Invalid record data: ' port_id",
+      "  EXIT current paragraph  -- EXIT PARAGRAPH: skip the rest of 2100-VALIDATE-AND-ADD",
+      "END IF",
+      "SET port_create_date = ws_current_date",
+      "SET port_last_maint = ws_current_date",
+      "WRITE port_record to PORTFOLIO-FILE  -- no INVALID KEY clause; outcome checked through WS-FILE-STATUS",
+      "IF write status = '00' (WS-SUCCESS-STATUS) THEN",
+      "  INCREMENT ws_add_count BY 1",
+      "ELSE IF write status = '22' (WS-DUP-STATUS, duplicate key) THEN",
+      "  INCREMENT ws_dup_count BY 1",
+      "  DISPLAY 'Duplicate record: ' port_id",
+      "ELSE",
+      "  INCREMENT ws_error_count BY 1",
+      "  DISPLAY 'Write error for: ' port_id",
+      "END IF"
+    ],
+    "pseudocode_statement_ids": [
+      ["SYS-PORTFOLIO-001-FIL-0067-STMT-000011"],
+      ["SYS-PORTFOLIO-001-FIL-0067-STMT-000026"],
+      ["SYS-PORTFOLIO-001-FIL-0067-STMT-000027"],
+      ["SYS-PORTFOLIO-001-FIL-0067-STMT-000028"],
+      ["SYS-PORTFOLIO-001-FIL-0067-STMT-000011"],
+      ["SYS-PORTFOLIO-001-FIL-0067-STMT-000012"],
+      ["SYS-PORTFOLIO-001-FIL-0067-STMT-000013"],
+      ["SYS-PORTFOLIO-001-FIL-0067-STMT-000014"],
+      ["SYS-PORTFOLIO-001-FIL-0067-STMT-000015"],
+      ["SYS-PORTFOLIO-001-FIL-0067-STMT-000033"],
+      ["SYS-PORTFOLIO-001-FIL-0067-STMT-000015"],
+      ["SYS-PORTFOLIO-001-FIL-0067-STMT-000031"],
+      ["SYS-PORTFOLIO-001-FIL-0067-STMT-000032"],
+      ["SYS-PORTFOLIO-001-FIL-0067-STMT-000015"],
+      ["SYS-PORTFOLIO-001-FIL-0067-STMT-000029"],
+      ["SYS-PORTFOLIO-001-FIL-0067-STMT-000030"],
+      ["SYS-PORTFOLIO-001-FIL-0067-STMT-000015"]
+    ],
+    "pseudocode_text": "IF port_id is blank OR port_client_name is blank OR port_status != 'A' THEN  -- 'A' = active portfolio\n  INCREMENT ws_error_count BY 1\n  DISPLAY 'Invalid record data: ' port_id\n  EXIT current paragraph  -- EXIT PARAGRAPH: skip the rest of 2100-VALIDATE-AND-ADD\nEND IF\nSET port_create_date = ws_current_date\nSET port_last_maint = ws_current_date\nWRITE port_record to PORTFOLIO-FILE  -- no INVALID KEY clause; outcome checked through WS-FILE-STATUS\nIF write status = '00' (WS-SUCCESS-STATUS) THEN\n  INCREMENT ws_add_count BY 1\nELSE IF write status = '22' (WS-DUP-STATUS, duplicate key) THEN\n  INCREMENT ws_dup_count BY 1\n  DISPLAY 'Duplicate record: ' port_id\nELSE\n  INCREMENT ws_error_count BY 1\n  DISPLAY 'Write error for: ' port_id\nEND IF",
+    "statement_ids": ["SYS-PORTFOLIO-001-FIL-0067-STMT-000011", "SYS-PORTFOLIO-001-FIL-0067-STMT-000026", "SYS-PORTFOLIO-001-FIL-0067-STMT-000027", "SYS-PORTFOLIO-001-FIL-0067-STMT-000028", "SYS-PORTFOLIO-001-FIL-0067-STMT-000012", "SYS-PORTFOLIO-001-FIL-0067-STMT-000013", "SYS-PORTFOLIO-001-FIL-0067-STMT-000014", "SYS-PORTFOLIO-001-FIL-0067-STMT-000015", "SYS-PORTFOLIO-001-FIL-0067-STMT-000033", "SYS-PORTFOLIO-001-FIL-0067-STMT-000031", "SYS-PORTFOLIO-001-FIL-0067-STMT-000032", "SYS-PORTFOLIO-001-FIL-0067-STMT-000029", "SYS-PORTFOLIO-001-FIL-0067-STMT-000030"],
+    "untranslated_statement_ids": [],
+    "field_references": ["PORT-ID", "PORT-CLIENT-NAME", "PORT-STATUS", "WS-ERROR-COUNT", "WS-CURRENT-DATE", "PORT-CREATE-DATE", "PORT-LAST-MAINT", "PORT-RECORD", "WS-SUCCESS-STATUS", "WS-DUP-STATUS", "WS-ADD-COUNT", "WS-DUP-COUNT"],
+    "field_reference_ids": [
+      {"name": "PORT-ID", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0009-FLD-000002", "target_kind": "field", "candidate_ids": []},
+      {"name": "PORT-CLIENT-NAME", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0009-FLD-000005", "target_kind": "field", "candidate_ids": []},
+      {"name": "PORT-STATUS", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0009-FLD-000013", "target_kind": "field", "candidate_ids": []},
+      {"name": "WS-ERROR-COUNT", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0067-FLD-000015", "target_kind": "field", "candidate_ids": []},
+      {"name": "WS-CURRENT-DATE", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0067-FLD-000018", "target_kind": "field", "candidate_ids": []},
+      {"name": "PORT-CREATE-DATE", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0009-FLD-000011", "target_kind": "field", "candidate_ids": []},
+      {"name": "PORT-LAST-MAINT", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0009-FLD-000012", "target_kind": "field", "candidate_ids": []},
+      {"name": "PORT-RECORD", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0009-REC-0001", "target_kind": "record", "candidate_ids": []},
+      {"name": "WS-SUCCESS-STATUS", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0067-FLD-000005", "target_kind": "condition", "candidate_ids": []},
+      {"name": "WS-DUP-STATUS", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0067-FLD-000006", "target_kind": "condition", "candidate_ids": []},
+      {"name": "WS-ADD-COUNT", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0067-FLD-000014", "target_kind": "field", "candidate_ids": []},
+      {"name": "WS-DUP-COUNT", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0067-FLD-000016", "target_kind": "field", "candidate_ids": []}
+    ],
+    "calls_made": [],
+    "calls_made_ids": [],
+    "complexity_score": 5,
+    "has_unresolved_statements": false,
+    "annotations": [
+      {"line": 125, "statement_id": "SYS-PORTFOLIO-001-FIL-0067-STMT-000014", "note": "WRITE PORT-RECORD: unqualified record name declared under both FDs; the intent appears to be PORTFOLIO-FILE (the only file opened for output), recorded as written.", "ambiguous": true},
+      {"line": 127, "statement_id": "SYS-PORTFOLIO-001-FIL-0067-STMT-000015", "note": "WS-SUCCESS-STATUS ('00') and WS-DUP-STATUS ('22') are 88-levels of WS-FILE-STATUS, the FILE STATUS of PORTFOLIO-FILE."}
+    ]
+  },
+  {
+    "name": "3000-TERMINATE",
+    "paragraph_id": "SYS-PORTFOLIO-001-FIL-0067-PAR-0005",
+    "section": null,
+    "section_id": null,
+    "line_range": [139, 148],
+    "pseudocode": [
+      "CLOSE PORTFOLIO-FILE, INPUT-FILE",
+      "DISPLAY 'Records added:    ' ws_add_count",
+      "DISPLAY 'Duplicate records:' ws_dup_count",
+      "DISPLAY 'Errors occurred:  ' ws_error_count",
+      "SET program return code = ws_return_code  -- MOVE to special register RETURN-CODE"
+    ],
+    "pseudocode_statement_ids": [
+      ["SYS-PORTFOLIO-001-FIL-0067-STMT-000016"],
+      ["SYS-PORTFOLIO-001-FIL-0067-STMT-000017"],
+      ["SYS-PORTFOLIO-001-FIL-0067-STMT-000018"],
+      ["SYS-PORTFOLIO-001-FIL-0067-STMT-000019"],
+      ["SYS-PORTFOLIO-001-FIL-0067-STMT-000020"]
+    ],
+    "pseudocode_text": "CLOSE PORTFOLIO-FILE, INPUT-FILE\nDISPLAY 'Records added:    ' ws_add_count\nDISPLAY 'Duplicate records:' ws_dup_count\nDISPLAY 'Errors occurred:  ' ws_error_count\nSET program return code = ws_return_code  -- MOVE to special register RETURN-CODE",
+    "statement_ids": ["SYS-PORTFOLIO-001-FIL-0067-STMT-000016", "SYS-PORTFOLIO-001-FIL-0067-STMT-000017", "SYS-PORTFOLIO-001-FIL-0067-STMT-000018", "SYS-PORTFOLIO-001-FIL-0067-STMT-000019", "SYS-PORTFOLIO-001-FIL-0067-STMT-000020"],
+    "untranslated_statement_ids": [],
+    "field_references": ["WS-ADD-COUNT", "WS-DUP-COUNT", "WS-ERROR-COUNT", "WS-RETURN-CODE"],
+    "field_reference_ids": [
+      {"name": "WS-ADD-COUNT", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0067-FLD-000014", "target_kind": "field", "candidate_ids": []},
+      {"name": "WS-DUP-COUNT", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0067-FLD-000016", "target_kind": "field", "candidate_ids": []},
+      {"name": "WS-ERROR-COUNT", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0067-FLD-000015", "target_kind": "field", "candidate_ids": []},
+      {"name": "WS-RETURN-CODE", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0067-FLD-000017", "target_kind": "field", "candidate_ids": []}
+    ],
+    "calls_made": [],
+    "calls_made_ids": [],
+    "complexity_score": 1,
+    "has_unresolved_statements": false,
+    "annotations": [
+      {"line": 147, "statement_id": "SYS-PORTFOLIO-001-FIL-0067-STMT-000020", "note": "RETURN-CODE is a COBOL special register (not a data item); not looked up."}
+    ]
+  }
+],
+"unresolved_statements": [],
+"pseudocode_issues": []
+}

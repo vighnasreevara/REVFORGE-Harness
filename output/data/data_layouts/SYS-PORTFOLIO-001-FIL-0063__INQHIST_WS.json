@@ -1,0 +1,137 @@
+{
+  "id": "INQHIST",
+  "source_type": "program_ws",
+  "source_file": "src/programs/online/INQHIST.cbl",
+  "used_by_programs": ["INQHIST"],
+  "total_fields": 35,
+  "total_bytes": 4045,
+  "system_id": "SYS-PORTFOLIO-001",
+  "file_id": "SYS-PORTFOLIO-001-FIL-0063",
+  "path_id": "SYS-PORTFOLIO-001-PATH-0063",
+  "data_run_id": "DRUN-20261025T135019Z-17276",
+  "records": [
+    {
+      "record_id": "SYS-PORTFOLIO-001-FIL-0063-REC-0001", "record_key": "REC-INQHIST_WS-WS-COMMAREA",
+      "section": "WORKING-STORAGE", "section_id": "SYS-PORTFOLIO-001-FIL-0063-SEC-0001", "fd_name": null,
+      "is_fragment": false, "level": 1, "name": "WS-COMMAREA", "pic": null, "type": "GROUP", "storage_type": "DISPLAY",
+      "bytes": 98, "total_bytes": 98, "inline_bytes": 0, "redefines": null, "occurs": null, "value": null, "line": 14, "end_line": 15,
+      "children": [
+        {"type": "copy_expansion", "copybook": "INQCOM", "copybook_file_id": "SYS-PORTFOLIO-001-FIL-0020", "line": 15, "include_kind": "COPY", "replacing": null,
+         "expanded_from": {"copybook": "INQCOM", "copybook_file_id": "SYS-PORTFOLIO-001-FIL-0020", "line": 15, "replacing": null},
+         "records": [{"record_id": "SYS-PORTFOLIO-001-FIL-0020-REC-0001", "name": "INQCOM-AREA", "total_bytes": 98, "layout_file": "data_layouts/SYS-PORTFOLIO-001-FIL-0020__INQCOM.json"}]}
+      ]
+    },
+    {
+      "record_id": "SYS-PORTFOLIO-001-FIL-0063-REC-0002", "record_key": "REC-INQHIST_WS-WS-DB2-AREA",
+      "section": "WORKING-STORAGE", "section_id": "SYS-PORTFOLIO-001-FIL-0063-SEC-0001", "fd_name": null,
+      "is_fragment": false, "level": 1, "name": "WS-DB2-AREA", "pic": null, "type": "GROUP", "storage_type": "DISPLAY",
+      "bytes": 35, "total_bytes": 35, "inline_bytes": 0, "redefines": null, "occurs": null, "value": null, "line": 17, "end_line": 18,
+      "children": [
+        {"type": "copy_expansion", "copybook": "SQLCA", "copybook_file_id": "SYS-PORTFOLIO-001-FIL-0017", "line": 18, "include_kind": "SQL_INCLUDE", "replacing": null,
+         "expanded_from": {"copybook": "SQLCA", "copybook_file_id": "SYS-PORTFOLIO-001-FIL-0017", "line": 18, "replacing": null},
+         "records": [{"record_id": "SYS-PORTFOLIO-001-FIL-0017-REC-0001", "name": "SQL-STATUS-CODES", "total_bytes": 35, "layout_file": "data_layouts/SYS-PORTFOLIO-001-FIL-0017__SQLCA.json"}]}
+      ]
+    },
+    {
+      "record_id": "SYS-PORTFOLIO-001-FIL-0063-REC-0003", "record_key": "REC-INQHIST_WS-WS-HISTORY-TABLE",
+      "section": "WORKING-STORAGE", "section_id": "SYS-PORTFOLIO-001-FIL-0063-SEC-0001", "fd_name": null,
+      "is_fragment": false, "level": 1, "name": "WS-HISTORY-TABLE", "pic": null, "type": "GROUP", "storage_type": "DISPLAY",
+      "bytes": 320, "total_bytes": 320, "inline_bytes": 320, "redefines": null, "occurs": null, "value": null, "line": 20, "end_line": 26,
+      "children": [
+        {"field_id": "SYS-PORTFOLIO-001-FIL-0063-FLD-000001", "path": "WS-HISTORY-ENTRY", "level": 5, "name": "WS-HISTORY-ENTRY", "pic": null, "type": "GROUP", "bytes": 32, "redefines": null, "occurs": {"min": 10, "max": 10, "variable_length": false, "depending_on": null, "indexed_by": [], "keys": []}, "value": null, "line": 21, "children": [
+          {"field_id": "SYS-PORTFOLIO-001-FIL-0063-FLD-000002", "path": "WS-HISTORY-ENTRY.WS-TRANS-DATE", "level": 10, "name": "WS-TRANS-DATE", "pic": "X(10)", "pic_parsed": {"raw": "X(10)", "normalized_type": "STRING", "length": 10, "decimal_places": 0, "signed": false, "storage_type": "DISPLAY"}, "bytes": 10, "redefines": null, "occurs": null, "value": null, "line": 22, "children": []},
+          {"field_id": "SYS-PORTFOLIO-001-FIL-0063-FLD-000003", "path": "WS-HISTORY-ENTRY.WS-TRANS-TYPE", "level": 10, "name": "WS-TRANS-TYPE", "pic": "X(4)", "pic_parsed": {"raw": "X(4)", "normalized_type": "STRING", "length": 4, "decimal_places": 0, "signed": false, "storage_type": "DISPLAY"}, "bytes": 4, "redefines": null, "occurs": null, "value": null, "line": 23, "children": []},
+          {"field_id": "SYS-PORTFOLIO-001-FIL-0063-FLD-000004", "path": "WS-HISTORY-ENTRY.WS-TRANS-UNITS", "level": 10, "name": "WS-TRANS-UNITS", "pic": "S9(9)V99 COMP-3", "pic_parsed": {"raw": "S9(9)V99 COMP-3", "normalized_type": "SIGNED_DECIMAL", "length": 11, "decimal_places": 2, "signed": true, "storage_type": "PACKED_DECIMAL"}, "bytes": 6, "redefines": null, "occurs": null, "value": null, "line": 24, "children": []},
+          {"field_id": "SYS-PORTFOLIO-001-FIL-0063-FLD-000005", "path": "WS-HISTORY-ENTRY.WS-TRANS-PRICE", "level": 10, "name": "WS-TRANS-PRICE", "pic": "S9(9)V99 COMP-3", "pic_parsed": {"raw": "S9(9)V99 COMP-3", "normalized_type": "SIGNED_DECIMAL", "length": 11, "decimal_places": 2, "signed": true, "storage_type": "PACKED_DECIMAL"}, "bytes": 6, "redefines": null, "occurs": null, "value": null, "line": 25, "children": []},
+          {"field_id": "SYS-PORTFOLIO-001-FIL-0063-FLD-000006", "path": "WS-HISTORY-ENTRY.WS-TRANS-AMOUNT", "level": 10, "name": "WS-TRANS-AMOUNT", "pic": "S9(9)V99 COMP-3", "pic_parsed": {"raw": "S9(9)V99 COMP-3", "normalized_type": "SIGNED_DECIMAL", "length": 11, "decimal_places": 2, "signed": true, "storage_type": "PACKED_DECIMAL"}, "bytes": 6, "redefines": null, "occurs": null, "value": null, "line": 26, "children": []}
+        ]}
+      ]
+    },
+    {
+      "record_id": "SYS-PORTFOLIO-001-FIL-0063-REC-0004", "record_key": "REC-INQHIST_WS-WS-FLAGS",
+      "section": "WORKING-STORAGE", "section_id": "SYS-PORTFOLIO-001-FIL-0063-SEC-0001", "fd_name": null,
+      "is_fragment": false, "level": 1, "name": "WS-FLAGS", "pic": null, "type": "GROUP", "storage_type": "DISPLAY",
+      "bytes": 7, "total_bytes": 7, "inline_bytes": 7, "redefines": null, "occurs": null, "value": null, "line": 28, "end_line": 33,
+      "children": [
+        {"field_id": "SYS-PORTFOLIO-001-FIL-0063-FLD-000007", "path": "WS-RESPONSE-CODE", "level": 5, "name": "WS-RESPONSE-CODE", "pic": "S9(8) COMP", "pic_parsed": {"raw": "S9(8) COMP", "normalized_type": "SIGNED_INTEGER", "length": 8, "decimal_places": 0, "signed": true, "storage_type": "BINARY"}, "bytes": 4, "redefines": null, "occurs": null, "value": null, "line": 29, "children": []},
+        {"field_id": "SYS-PORTFOLIO-001-FIL-0063-FLD-000008", "path": "WS-MORE-HISTORY", "level": 5, "name": "WS-MORE-HISTORY", "pic": "X", "pic_parsed": {"raw": "X", "normalized_type": "STRING", "length": 1, "decimal_places": 0, "signed": false, "storage_type": "DISPLAY"}, "bytes": 1, "redefines": null, "occurs": null, "value": "'N'", "line": 30, "children": [
+          {"field_id": "SYS-PORTFOLIO-001-FIL-0063-FLD-000009", "path": "WS-MORE-HISTORY.MORE-ROWS", "level": 88, "name": "MORE-ROWS", "pic": null, "type": "CONDITION", "parent_field": "WS-MORE-HISTORY", "values_raw": "'Y'", "values": ["Y"], "line": 31, "children": []},
+          {"field_id": "SYS-PORTFOLIO-001-FIL-0063-FLD-000010", "path": "WS-MORE-HISTORY.NO-MORE-ROWS", "level": 88, "name": "NO-MORE-ROWS", "pic": null, "type": "CONDITION", "parent_field": "WS-MORE-HISTORY", "values_raw": "'N'", "values": ["N"], "line": 32, "children": []}
+        ]},
+        {"field_id": "SYS-PORTFOLIO-001-FIL-0063-FLD-000011", "path": "WS-ROW-COUNT", "level": 5, "name": "WS-ROW-COUNT", "pic": "S9(4) COMP", "pic_parsed": {"raw": "S9(4) COMP", "normalized_type": "SIGNED_INTEGER", "length": 4, "decimal_places": 0, "signed": true, "storage_type": "BINARY"}, "bytes": 2, "redefines": null, "occurs": null, "value": null, "line": 33, "children": []}
+      ]
+    },
+    {
+      "record_id": "SYS-PORTFOLIO-001-FIL-0063-REC-0005", "record_key": "REC-INQHIST_WS-WS-DB2-REQUEST",
+      "section": "WORKING-STORAGE", "section_id": "SYS-PORTFOLIO-001-FIL-0063-SEC-0001", "fd_name": null,
+      "is_fragment": false, "level": 1, "name": "WS-DB2-REQUEST", "pic": null, "type": "GROUP", "storage_type": "DISPLAY",
+      "bytes": 105, "total_bytes": 105, "inline_bytes": 105, "redefines": null, "occurs": null, "value": null, "line": 35, "end_line": 41,
+      "children": [
+        {"field_id": "SYS-PORTFOLIO-001-FIL-0063-FLD-000012", "path": "DB2-REQUEST-TYPE", "level": 5, "name": "DB2-REQUEST-TYPE", "pic": "X", "pic_parsed": {"raw": "X", "normalized_type": "STRING", "length": 1, "decimal_places": 0, "signed": false, "storage_type": "DISPLAY"}, "bytes": 1, "redefines": null, "occurs": null, "value": null, "line": 36, "children": []},
+        {"field_id": "SYS-PORTFOLIO-001-FIL-0063-FLD-000013", "path": "DB2-RESPONSE-CODE", "level": 5, "name": "DB2-RESPONSE-CODE", "pic": "S9(8) COMP", "pic_parsed": {"raw": "S9(8) COMP", "normalized_type": "SIGNED_INTEGER", "length": 8, "decimal_places": 0, "signed": true, "storage_type": "BINARY"}, "bytes": 4, "redefines": null, "occurs": null, "value": null, "line": 37, "children": []},
+        {"field_id": "SYS-PORTFOLIO-001-FIL-0063-FLD-000014", "path": "DB2-CONNECTION-TOKEN", "level": 5, "name": "DB2-CONNECTION-TOKEN", "pic": "X(16)", "pic_parsed": {"raw": "X(16)", "normalized_type": "STRING", "length": 16, "decimal_places": 0, "signed": false, "storage_type": "DISPLAY"}, "bytes": 16, "redefines": null, "occurs": null, "value": null, "line": 38, "children": []},
+        {"field_id": "SYS-PORTFOLIO-001-FIL-0063-FLD-000015", "path": "DB2-ERROR-INFO", "level": 5, "name": "DB2-ERROR-INFO", "pic": null, "type": "GROUP", "bytes": 84, "redefines": null, "occurs": null, "value": null, "line": 39, "children": [
+          {"field_id": "SYS-PORTFOLIO-001-FIL-0063-FLD-000016", "path": "DB2-ERROR-INFO.DB2-SQLCODE", "level": 10, "name": "DB2-SQLCODE", "pic": "S9(9) COMP", "pic_parsed": {"raw": "S9(9) COMP", "normalized_type": "SIGNED_INTEGER", "length": 9, "decimal_places": 0, "signed": true, "storage_type": "BINARY"}, "bytes": 4, "redefines": null, "occurs": null, "value": null, "line": 40, "children": []},
+          {"field_id": "SYS-PORTFOLIO-001-FIL-0063-FLD-000017", "path": "DB2-ERROR-INFO.DB2-ERROR-MSG", "level": 10, "name": "DB2-ERROR-MSG", "pic": "X(80)", "pic_parsed": {"raw": "X(80)", "normalized_type": "STRING", "length": 80, "decimal_places": 0, "signed": false, "storage_type": "DISPLAY"}, "bytes": 80, "redefines": null, "occurs": null, "value": null, "line": 41, "children": []}
+        ]}
+      ]
+    },
+    {
+      "record_id": "SYS-PORTFOLIO-001-FIL-0063-REC-0006", "record_key": "REC-INQHIST_WS-WS-CURSOR-REQUEST",
+      "section": "WORKING-STORAGE", "section_id": "SYS-PORTFOLIO-001-FIL-0063-SEC-0001", "fd_name": null,
+      "is_fragment": false, "level": 1, "name": "WS-CURSOR-REQUEST", "pic": null, "type": "GROUP", "storage_type": "DISPLAY",
+      "bytes": 3266, "total_bytes": 3266, "inline_bytes": 3266, "redefines": null, "occurs": null, "value": null, "line": 43, "end_line": 50,
+      "children": [
+        {"field_id": "SYS-PORTFOLIO-001-FIL-0063-FLD-000018", "path": "CURS-REQUEST-TYPE", "level": 5, "name": "CURS-REQUEST-TYPE", "pic": "X", "pic_parsed": {"raw": "X", "normalized_type": "STRING", "length": 1, "decimal_places": 0, "signed": false, "storage_type": "DISPLAY"}, "bytes": 1, "redefines": null, "occurs": null, "value": null, "line": 44, "children": []},
+        {"field_id": "SYS-PORTFOLIO-001-FIL-0063-FLD-000019", "path": "CURS-NAME", "level": 5, "name": "CURS-NAME", "pic": "X(18)", "pic_parsed": {"raw": "X(18)", "normalized_type": "STRING", "length": 18, "decimal_places": 0, "signed": false, "storage_type": "DISPLAY"}, "bytes": 18, "redefines": null, "occurs": null, "value": "'HISTORY_CURSOR'", "line": 45, "children": []},
+        {"field_id": "SYS-PORTFOLIO-001-FIL-0063-FLD-000020", "path": "CURS-STMT", "level": 5, "name": "CURS-STMT", "pic": "X(240)", "pic_parsed": {"raw": "X(240)", "normalized_type": "STRING", "length": 240, "decimal_places": 0, "signed": false, "storage_type": "DISPLAY"}, "bytes": 240, "redefines": null, "occurs": null, "value": null, "line": 46, "children": []},
+        {"field_id": "SYS-PORTFOLIO-001-FIL-0063-FLD-000021", "path": "CURS-ARRAY-FETCH", "level": 5, "name": "CURS-ARRAY-FETCH", "pic": "X", "pic_parsed": {"raw": "X", "normalized_type": "STRING", "length": 1, "decimal_places": 0, "signed": false, "storage_type": "DISPLAY"}, "bytes": 1, "redefines": null, "occurs": null, "value": "'Y'", "line": 47, "children": []},
+        {"field_id": "SYS-PORTFOLIO-001-FIL-0063-FLD-000022", "path": "CURS-RESPONSE-CODE", "level": 5, "name": "CURS-RESPONSE-CODE", "pic": "S9(8) COMP", "pic_parsed": {"raw": "S9(8) COMP", "normalized_type": "SIGNED_INTEGER", "length": 8, "decimal_places": 0, "signed": true, "storage_type": "BINARY"}, "bytes": 4, "redefines": null, "occurs": null, "value": null, "line": 48, "children": []},
+        {"field_id": "SYS-PORTFOLIO-001-FIL-0063-FLD-000023", "path": "CURS-DATA-AREA", "level": 5, "name": "CURS-DATA-AREA", "pic": "X(3000)", "pic_parsed": {"raw": "X(3000)", "normalized_type": "STRING", "length": 3000, "decimal_places": 0, "signed": false, "storage_type": "DISPLAY"}, "bytes": 3000, "redefines": null, "occurs": null, "value": null, "line": 49, "children": []},
+        {"field_id": "SYS-PORTFOLIO-001-FIL-0063-FLD-000024", "path": "CURS-DATA-LENGTH", "level": 5, "name": "CURS-DATA-LENGTH", "pic": "S9(4) COMP", "pic_parsed": {"raw": "S9(4) COMP", "normalized_type": "SIGNED_INTEGER", "length": 4, "decimal_places": 0, "signed": true, "storage_type": "BINARY"}, "bytes": 2, "redefines": null, "occurs": null, "value": null, "line": 50, "children": []}
+      ]
+    },
+    {
+      "record_id": "SYS-PORTFOLIO-001-FIL-0063-REC-0007", "record_key": "REC-INQHIST_WS-WS-RECOVERY-REQUEST",
+      "section": "WORKING-STORAGE", "section_id": "SYS-PORTFOLIO-001-FIL-0063-SEC-0001", "fd_name": null,
+      "is_fragment": false, "level": 1, "name": "WS-RECOVERY-REQUEST", "pic": null, "type": "GROUP", "storage_type": "DISPLAY",
+      "bytes": 116, "total_bytes": 116, "inline_bytes": 116, "redefines": null, "occurs": null, "value": null, "line": 52, "end_line": 63,
+      "children": [
+        {"field_id": "SYS-PORTFOLIO-001-FIL-0063-FLD-000025", "path": "RECV-REQUEST-TYPE", "level": 5, "name": "RECV-REQUEST-TYPE", "pic": "X", "pic_parsed": {"raw": "X", "normalized_type": "STRING", "length": 1, "decimal_places": 0, "signed": false, "storage_type": "DISPLAY"}, "bytes": 1, "redefines": null, "occurs": null, "value": null, "line": 53, "children": []},
+        {"field_id": "SYS-PORTFOLIO-001-FIL-0063-FLD-000026", "path": "RECV-RESPONSE-CODE", "level": 5, "name": "RECV-RESPONSE-CODE", "pic": "S9(8) COMP", "pic_parsed": {"raw": "S9(8) COMP", "normalized_type": "SIGNED_INTEGER", "length": 8, "decimal_places": 0, "signed": true, "storage_type": "BINARY"}, "bytes": 4, "redefines": null, "occurs": null, "value": null, "line": 54, "children": []},
+        {"field_id": "SYS-PORTFOLIO-001-FIL-0063-FLD-000027", "path": "RECV-SQLCODE", "level": 5, "name": "RECV-SQLCODE", "pic": "S9(9) COMP", "pic_parsed": {"raw": "S9(9) COMP", "normalized_type": "SIGNED_INTEGER", "length": 9, "decimal_places": 0, "signed": true, "storage_type": "BINARY"}, "bytes": 4, "redefines": null, "occurs": null, "value": null, "line": 55, "children": []},
+        {"field_id": "SYS-PORTFOLIO-001-FIL-0063-FLD-000028", "path": "RECV-ERROR-INFO", "level": 5, "name": "RECV-ERROR-INFO", "pic": null, "type": "GROUP", "bytes": 106, "redefines": null, "occurs": null, "value": null, "line": 56, "children": [
+          {"field_id": "SYS-PORTFOLIO-001-FIL-0063-FLD-000029", "path": "RECV-ERROR-INFO.RECV-PROGRAM", "level": 10, "name": "RECV-PROGRAM", "pic": "X(8)", "pic_parsed": {"raw": "X(8)", "normalized_type": "STRING", "length": 8, "decimal_places": 0, "signed": false, "storage_type": "DISPLAY"}, "bytes": 8, "redefines": null, "occurs": null, "value": null, "line": 57, "children": []},
+          {"field_id": "SYS-PORTFOLIO-001-FIL-0063-FLD-000030", "path": "RECV-ERROR-INFO.RECV-CURSOR", "level": 10, "name": "RECV-CURSOR", "pic": "X(18)", "pic_parsed": {"raw": "X(18)", "normalized_type": "STRING", "length": 18, "decimal_places": 0, "signed": false, "storage_type": "DISPLAY"}, "bytes": 18, "redefines": null, "occurs": null, "value": null, "line": 58, "children": []},
+          {"field_id": "SYS-PORTFOLIO-001-FIL-0063-FLD-000031", "path": "RECV-ERROR-INFO.RECV-MESSAGE", "level": 10, "name": "RECV-MESSAGE", "pic": "X(80)", "pic_parsed": {"raw": "X(80)", "normalized_type": "STRING", "length": 80, "decimal_places": 0, "signed": false, "storage_type": "DISPLAY"}, "bytes": 80, "redefines": null, "occurs": null, "value": null, "line": 59, "children": []}
+        ]},
+        {"field_id": "SYS-PORTFOLIO-001-FIL-0063-FLD-000032", "path": "RECV-STATUS", "level": 5, "name": "RECV-STATUS", "pic": "X", "pic_parsed": {"raw": "X", "normalized_type": "STRING", "length": 1, "decimal_places": 0, "signed": false, "storage_type": "DISPLAY"}, "bytes": 1, "redefines": null, "occurs": null, "value": null, "line": 60, "children": [
+          {"field_id": "SYS-PORTFOLIO-001-FIL-0063-FLD-000033", "path": "RECV-STATUS.RECV-SUCCESS", "level": 88, "name": "RECV-SUCCESS", "pic": null, "type": "CONDITION", "parent_field": "RECV-STATUS", "values_raw": "'S'", "values": ["S"], "line": 61, "children": []},
+          {"field_id": "SYS-PORTFOLIO-001-FIL-0063-FLD-000034", "path": "RECV-STATUS.RECV-FAILED", "level": 88, "name": "RECV-FAILED", "pic": null, "type": "CONDITION", "parent_field": "RECV-STATUS", "values_raw": "'F'", "values": ["F"], "line": 62, "children": []},
+          {"field_id": "SYS-PORTFOLIO-001-FIL-0063-FLD-000035", "path": "RECV-STATUS.RECV-RETRY", "level": 88, "name": "RECV-RETRY", "pic": null, "type": "CONDITION", "parent_field": "RECV-STATUS", "values_raw": "'R'", "values": ["R"], "line": 63, "children": []}
+        ]}
+      ]
+    },
+    {
+      "record_id": "SYS-PORTFOLIO-001-FIL-0063-REC-0008", "record_key": "REC-INQHIST_WS-DFHCOMMAREA",
+      "section": "LINKAGE", "section_id": "SYS-PORTFOLIO-001-FIL-0063-SEC-0002", "fd_name": null,
+      "is_fragment": false, "level": 1, "name": "DFHCOMMAREA", "pic": null, "type": "GROUP", "storage_type": "DISPLAY",
+      "bytes": 98, "total_bytes": 98, "inline_bytes": 0, "redefines": null, "occurs": null, "value": null, "line": 66, "end_line": 67,
+      "children": [
+        {"type": "copy_expansion", "copybook": "INQCOM", "copybook_file_id": "SYS-PORTFOLIO-001-FIL-0020", "line": 67, "include_kind": "COPY", "replacing": null,
+         "expanded_from": {"copybook": "INQCOM", "copybook_file_id": "SYS-PORTFOLIO-001-FIL-0020", "line": 67, "replacing": null},
+         "records": [{"record_id": "SYS-PORTFOLIO-001-FIL-0020-REC-0001", "name": "INQCOM-AREA", "total_bytes": 98, "layout_file": "data_layouts/SYS-PORTFOLIO-001-FIL-0020__INQCOM.json"}]}
+      ]
+    }
+  ],
+  "copy_expansions": [
+    {"holder_id": "SYS-PORTFOLIO-001-FIL-0063-REC-0001", "holder_kind": "record", "section": "WORKING-STORAGE", "copybook": "INQCOM", "copybook_file_id": "SYS-PORTFOLIO-001-FIL-0020", "line": 15, "include_kind": "COPY", "replacing": null, "expanded_record_ids": ["SYS-PORTFOLIO-001-FIL-0020-REC-0001"], "resolved": true},
+    {"holder_id": "SYS-PORTFOLIO-001-FIL-0063-REC-0002", "holder_kind": "record", "section": "WORKING-STORAGE", "copybook": "SQLCA", "copybook_file_id": "SYS-PORTFOLIO-001-FIL-0017", "line": 18, "include_kind": "SQL_INCLUDE", "replacing": null, "expanded_record_ids": ["SYS-PORTFOLIO-001-FIL-0017-REC-0001"], "resolved": true},
+    {"holder_id": "SYS-PORTFOLIO-001-FIL-0063-REC-0008", "holder_kind": "record", "section": "LINKAGE", "copybook": "INQCOM", "copybook_file_id": "SYS-PORTFOLIO-001-FIL-0020", "line": 67, "include_kind": "COPY", "replacing": null, "expanded_record_ids": ["SYS-PORTFOLIO-001-FIL-0020-REC-0001"], "resolved": true}
+  ],
+  "layout_issues": [
+    {"severity": "warning", "type": "level_01_copy_under_01", "file_id": "SYS-PORTFOLIO-001-FIL-0063", "source_id": "INQHIST", "line": 15, "message": "COPY INQCOM (line 15, under 01 WS-COMMAREA), EXEC SQL INCLUDE SQLCA (line 18, under 01 WS-DB2-AREA) and COPY INQCOM (line 67, under 01 DFHCOMMAREA) each insert a level-01 record (INQCOM-AREA, SQL-STATUS-CODES) directly below a program 01 with no subordinate items of its own. As written, the copybook 01 begins a new record and the enclosing 01 has no subordinate entries. Registered as EXPANDS_COPY from the enclosing program record (best-effort parent assignment, as Agent 2 records the stub under the 01); the holder records' total_bytes (98, 35, 98) are the expanded copybook sizes and inline_bytes is 0."},
+    {"severity": "info", "type": "copybook_expanded_twice", "file_id": "SYS-PORTFOLIO-001-FIL-0063", "source_id": "INQHIST", "line": 67, "message": "Copybook INQCOM is expanded twice (WORKING-STORAGE line 15 and LINKAGE line 67) with no REPLACING, so record INQCOM-AREA and its field names are declared in both sections. Both expansions point to the single copybook record SYS-PORTFOLIO-001-FIL-0020-REC-0001."},
+    {"severity": "info", "type": "sql_include_resolved", "file_id": "SYS-PORTFOLIO-001-FIL-0063", "source_id": "INQHIST", "line": 18, "message": "EXEC SQL INCLUDE SQLCA END-EXEC (line 18) is recorded as a copy stub of include_kind SQL_INCLUDE and resolved to copybook SQLCA (src/copybook/db2/SQLCA.cpy, SYS-PORTFOLIO-001-FIL-0017) from the inventory copybook_registry; its registered record is SQL-STATUS-CODES."}
+  ]
+}

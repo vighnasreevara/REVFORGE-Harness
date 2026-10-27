@@ -1,0 +1,274 @@
+{
+"program_summary": {"program_id": "CKPRST", "file_id": "SYS-PORTFOLIO-001-FIL-0043", "logic_file": "program_logic/SYS-PORTFOLIO-001-FIL-0043__CKPRST_logic.json", "logic_status": "partial", "paragraphs_translated": 5, "execution_paths": 1, "branches": 1, "loops": 0, "dead_code_confirmed": 0, "goto_annotations": 0, "unresolvable_paths": 0, "unresolved_ids": 4},
+"meta": {"generated_at": "2026-10-26T16:20:27Z", "agent_version": "4_logic@1.0", "logic_run_id": "LRUN-20261026T162027Z-20307", "logic_worker_id": "LWKR-20261026T162027Z-282466101", "run_id_note": "run-local identifiers of this execution, not permanent IDs", "source_artifacts": ["output/parser/parser_artifact.json", "output/parser/raw_structure/SYS-PORTFOLIO-001-FIL-0043__CKPRST.json", "output/data/data_artifact.json", "output/data/data_layouts/SYS-PORTFOLIO-001-FIL-0043__CKPRST_WS.json", "output/data/data_layouts/SYS-PORTFOLIO-001-FIL-0003__CKPRST.json", "output/data/data_layouts/SYS-PORTFOLIO-001-FIL-0012__RETHND.json"], "neo4j_access": "read-only"},
+"program_id": "CKPRST",
+"system_id": "SYS-PORTFOLIO-001",
+"file_id": "SYS-PORTFOLIO-001-FIL-0043",
+"path_id": "SYS-PORTFOLIO-001-PATH-0043",
+"relative_path": "src/programs/batch/CKPRST.cbl",
+"parse_run_id": "PRUN-20261025T163852Z-6235",
+"data_run_id": "DRUN-20261025T170230Z-21060",
+"upstream": {
+  "verification": {
+    "verdict": "VALID",
+    "verdict_reasons": ["V2, V3, V4 consistent; Agent 2 parse_status 'success'; all copybook layouts present and consistent; no unresolved copy stubs"],
+    "v1": {"raw_structure": "present", "parse_status": "success", "program_layout": "present", "copybook_layouts": [{"copybook": "CKPRST", "copybook_file_id": "SYS-PORTFOLIO-001-FIL-0003", "layout": "present", "expanded_at_lines": [17, 23]}, {"copybook": "RETHND", "copybook_file_id": "SYS-PORTFOLIO-001-FIL-0012", "layout": "present", "expanded_at_lines": [24]}], "unresolved_copy_stubs": 0},
+    "v2_file_identities": {
+      "program_entries": {"require_completed": ["parser", "data"], "entries": ["raw_structure|SYS-PORTFOLIO-001-FIL-0043", "data_layout|SYS-PORTFOLIO-001-FIL-0043"], "result": "batched with CURSMGR and POSUPDT program entries: checked 6, ok 6, problems [], duplicates [], consistent true"},
+      "copybook_entries": {"require_completed": ["data"], "entries": ["data_layout|SYS-PORTFOLIO-001-FIL-0003", "data_layout|SYS-PORTFOLIO-001-FIL-0012"], "result": "batched with copybook FIL-0017: checked 3, ok 3, problems [], duplicates [], consistent true"},
+      "consistent": true
+    },
+    "v3_structure_identities": {"sections_checked": 4, "paragraphs_checked": 5, "statements_checked": 6, "edges_checked": 4, "registered_edges": 4, "section_problems": [], "paragraph_problems": [], "statement_problems": [], "edge_problems": [], "invalid_registered_edges": [], "registered_not_in_json": {"missing_count": 0}, "duplicate_ids_in_json": [], "consistent": true, "note": "section names sent: INPUT-OUTPUT for SEC-0001; null for the data-division sections (raw_structure does not carry them)"},
+    "v4_data_identities": [
+      {"file_id": "SYS-PORTFOLIO-001-FIL-0043", "layout": "program", "records_checked": 1, "fields_checked": 0, "expansions_checked": 3, "record_problems": [], "field_problems": [], "expansion_problems": [], "copybook_records_in_program": 0, "registered_not_in_json": {"missing_count": 0}, "duplicate_ids_in_json": [], "consistent": true},
+      {"file_id": "SYS-PORTFOLIO-001-FIL-0003", "layout": "copybook CKPRST", "records_checked": 2, "fields_checked": 41, "expansions_checked": 0, "record_problems": [], "field_problems": [], "expansion_problems": [], "copybook_records_in_program": 0, "registered_not_in_json": {"missing_count": 0}, "duplicate_ids_in_json": [], "consistent": true},
+      {"file_id": "SYS-PORTFOLIO-001-FIL-0012", "layout": "copybook RETHND", "records_checked": 2, "fields_checked": 44, "expansions_checked": 0, "record_problems": [], "field_problems": [], "expansion_problems": [], "copybook_records_in_program": 0, "registered_not_in_json": {"missing_count": 0}, "duplicate_ids_in_json": [], "consistent": true}
+    ]
+  }
+},
+"execution_traces": [
+  {
+    "entry_point": "(UNNAMED)",
+    "entry_point_id": "SYS-PORTFOLIO-001-FIL-0043-PAR-0001",
+    "entry_type": "batch_subprogram",
+    "entry_note": "Statements after PROCEDURE DIVISION USING CHECKPOINT-CONTROL RETURN-STATUS (lines 26-27) and before PROC-INIT (line 43); the program ends with GOBACK",
+    "steps": [
+      {"step": 1, "paragraph": "(UNNAMED)", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0043-PAR-0001", "action": "EVALUATE", "target": null, "target_paragraph_id": null, "target_section_id": null, "condition": {"text": "EVALUATE TRUE", "fields": [], "field_ids": []}, "line": 29, "statement_id": "SYS-PORTFOLIO-001-FIL-0043-STMT-000001"},
+      {"step": 2, "paragraph": "(UNNAMED)", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0043-PAR-0001", "action": "PERFORM", "target": "PROC-INIT", "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0043-PAR-0002", "target_section_id": null,
+       "condition": {"text": "WHEN ENTRY-POINT-INIT", "fields": ["ENTRY-POINT-INIT"], "field_ids": [{"name": "ENTRY-POINT-INIT", "qualifiers": [], "resolution": "UNRESOLVED", "target_id": null, "target_kind": null, "candidate_ids": []}]},
+       "line": 31, "statement_id": "SYS-PORTFOLIO-001-FIL-0043-STMT-000008"},
+      {"step": 3, "paragraph": "(UNNAMED)", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0043-PAR-0001", "action": "PERFORM", "target": "PROC-TAKE-CHECKPOINT", "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0043-PAR-0003", "target_section_id": null,
+       "condition": {"text": "WHEN ENTRY-POINT-TAKE", "fields": ["ENTRY-POINT-TAKE"], "field_ids": [{"name": "ENTRY-POINT-TAKE", "qualifiers": [], "resolution": "UNRESOLVED", "target_id": null, "target_kind": null, "candidate_ids": []}]},
+       "line": 33, "statement_id": "SYS-PORTFOLIO-001-FIL-0043-STMT-000010"},
+      {"step": 4, "paragraph": "(UNNAMED)", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0043-PAR-0001", "action": "PERFORM", "target": "PROC-COMMIT-CHECKPOINT", "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0043-PAR-0004", "target_section_id": null,
+       "condition": {"text": "WHEN ENTRY-POINT-COMMIT", "fields": ["ENTRY-POINT-COMMIT"], "field_ids": [{"name": "ENTRY-POINT-COMMIT", "qualifiers": [], "resolution": "UNRESOLVED", "target_id": null, "target_kind": null, "candidate_ids": []}]},
+       "line": 35, "statement_id": "SYS-PORTFOLIO-001-FIL-0043-STMT-000007"},
+      {"step": 5, "paragraph": "(UNNAMED)", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0043-PAR-0001", "action": "PERFORM", "target": "PROC-RESTART", "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0043-PAR-0005", "target_section_id": null,
+       "condition": {"text": "WHEN ENTRY-POINT-RESTART", "fields": ["ENTRY-POINT-RESTART"], "field_ids": [{"name": "ENTRY-POINT-RESTART", "qualifiers": [], "resolution": "UNRESOLVED", "target_id": null, "target_kind": null, "candidate_ids": []}]},
+       "line": 37, "statement_id": "SYS-PORTFOLIO-001-FIL-0043-STMT-000009"},
+      {"step": 6, "paragraph": "(UNNAMED)", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0043-PAR-0001", "action": "GOBACK", "target": null, "target_paragraph_id": null, "target_section_id": null, "condition": null, "line": 40, "statement_id": "SYS-PORTFOLIO-001-FIL-0043-STMT-000002"}
+    ]
+  }
+],
+"branch_map": [
+  {
+    "paragraph": "(UNNAMED)",
+    "paragraph_id": "SYS-PORTFOLIO-001-FIL-0043-PAR-0001",
+    "branches": [
+      {"type": "EVALUATE", "line": 29, "statement_id": "SYS-PORTFOLIO-001-FIL-0043-STMT-000001", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0043-PAR-0001", "subjects": ["TRUE"],
+       "condition_text": "EVALUATE TRUE WHEN ENTRY-POINT-INIT / WHEN ENTRY-POINT-TAKE / WHEN ENTRY-POINT-COMMIT / WHEN ENTRY-POINT-RESTART",
+       "condition_fields": ["ENTRY-POINT-INIT", "ENTRY-POINT-TAKE", "ENTRY-POINT-COMMIT", "ENTRY-POINT-RESTART"],
+       "condition_field_ids": [
+         {"name": "ENTRY-POINT-INIT", "qualifiers": [], "resolution": "UNRESOLVED", "target_id": null, "target_kind": null, "candidate_ids": []},
+         {"name": "ENTRY-POINT-TAKE", "qualifiers": [], "resolution": "UNRESOLVED", "target_id": null, "target_kind": null, "candidate_ids": []},
+         {"name": "ENTRY-POINT-COMMIT", "qualifiers": [], "resolution": "UNRESOLVED", "target_id": null, "target_kind": null, "candidate_ids": []},
+         {"name": "ENTRY-POINT-RESTART", "qualifiers": [], "resolution": "UNRESOLVED", "target_id": null, "target_kind": null, "candidate_ids": []}
+       ],
+       "ambiguous": true,
+       "ambiguity_note": "The four WHEN condition names are not declared in the program or in copybooks CKPRST and RETHND, and appear nowhere else in the repository source; the data item they test and its values are unknown.",
+       "when_clauses": [
+         {"conditions": ["ENTRY-POINT-INIT"], "condition_fields": ["ENTRY-POINT-INIT"], "body_line_range": [31, 31], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0043-STMT-000008"]},
+         {"conditions": ["ENTRY-POINT-TAKE"], "condition_fields": ["ENTRY-POINT-TAKE"], "body_line_range": [33, 33], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0043-STMT-000010"]},
+         {"conditions": ["ENTRY-POINT-COMMIT"], "condition_fields": ["ENTRY-POINT-COMMIT"], "body_line_range": [35, 35], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0043-STMT-000007"]},
+         {"conditions": ["ENTRY-POINT-RESTART"], "condition_fields": ["ENTRY-POINT-RESTART"], "body_line_range": [37, 37], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0043-STMT-000009"]}
+       ],
+       "has_when_other": false,
+       "end_evaluate_line": 38,
+       "outcomes": [
+         {"label": "WHEN ENTRY-POINT-INIT", "line_range": [31, 31], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0043-STMT-000008"]},
+         {"label": "WHEN ENTRY-POINT-TAKE", "line_range": [33, 33], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0043-STMT-000010"]},
+         {"label": "WHEN ENTRY-POINT-COMMIT", "line_range": [35, 35], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0043-STMT-000007"]},
+         {"label": "WHEN ENTRY-POINT-RESTART", "line_range": [37, 37], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0043-STMT-000009"]},
+         {"label": "NO MATCH (no WHEN OTHER)", "line_range": null, "statement_ids": []}
+       ],
+       "nested_depth": 1}
+    ]
+  }
+],
+"loops": [],
+"dead_code_confirmed": [],
+"unresolvable_paths": [],
+"trace_issues": [
+  {"severity": "info", "type": "upstream_issue", "upstream_agent": "2_parser", "upstream_type": "name_collision", "message": "Agent 1: Program ID CKPRST and copybook ID CKPRST share the same name; program CKPRST COPYs copybook CKPRST (SYS-PORTFOLIO-001-FIL-0003) at lines 17 and 23."},
+  {"severity": "info", "type": "upstream_issue", "upstream_agent": "2_parser", "upstream_type": "unnamed_paragraph", "lines": [27, 42], "message": "Statements between PROCEDURE DIVISION (line 26, USING continued on line 27) and the first paragraph PROC-INIT (line 43) are recorded in paragraph (UNNAMED)."},
+  {"severity": "info", "type": "upstream_issue", "upstream_agent": "2_parser", "upstream_type": "misplaced_comment_indicator", "lines": [44, 48, 52, 56], "message": "Lines whose first non-blank character in columns 8-72 is '*' (starting in column 12); treated as comments, not statements."},
+  {"severity": "info", "type": "upstream_issue", "upstream_agent": "2_parser", "upstream_type": "empty_paragraph", "paragraphs": ["PROC-INIT", "PROC-TAKE-CHECKPOINT", "PROC-COMMIT-CHECKPOINT", "PROC-RESTART"], "message": "Paragraphs contain only a comment line and a separator period; no executable statements."},
+  {"severity": "info", "type": "upstream_issue", "upstream_agent": "3_data", "upstream_type": "copy_stub_under_fd", "line": 17, "message": "COPY CKPRST is the only record source of FD CHECKPOINT-FILE; records CHECKPOINT-CONTROL and CHECKPOINT-RECORD linked from the FILE section under the copybook's Record IDs."},
+  {"severity": "info", "type": "upstream_issue", "upstream_agent": "3_data", "upstream_type": "copybook_expanded_twice", "line": 23, "message": "COPY CKPRST is included in the FILE SECTION (line 17) and the LINKAGE SECTION (line 23); both expansions target records SYS-PORTFOLIO-001-FIL-0003-REC-0001 and -REC-0002."},
+  {"severity": "info", "type": "field_id_unresolved", "name": "ENTRY-POINT-INIT", "line": 30, "message": "resolve-field-references UNRESOLVED; not declared in the program or its copybooks; target_id null."},
+  {"severity": "info", "type": "field_id_unresolved", "name": "ENTRY-POINT-TAKE", "line": 32, "message": "resolve-field-references UNRESOLVED; not declared in the program or its copybooks; target_id null."},
+  {"severity": "info", "type": "field_id_unresolved", "name": "ENTRY-POINT-COMMIT", "line": 34, "message": "resolve-field-references UNRESOLVED; not declared in the program or its copybooks; target_id null."},
+  {"severity": "info", "type": "field_id_unresolved", "name": "ENTRY-POINT-RESTART", "line": 36, "message": "resolve-field-references UNRESOLVED; not declared in the program or its copybooks; target_id null."},
+  {"severity": "warning", "type": "undeclared_condition_names", "line": 29, "statement_id": "SYS-PORTFOLIO-001-FIL-0043-STMT-000001", "message": "EVALUATE TRUE tests four condition names that are declared nowhere in the repository; which request selects which paragraph cannot be determined statically. Recorded verbatim, flagged ambiguous."},
+  {"severity": "info", "type": "no_when_other", "line": 29, "statement_id": "SYS-PORTFOLIO-001-FIL-0043-STMT-000001", "message": "EVALUATE TRUE has no WHEN OTHER: if no condition is true, no paragraph is performed and the program goes straight to GOBACK."}
+],
+"field_id_lookups": [
+  {"name": "ENTRY-POINT-INIT", "qualifiers": [], "resolution": "UNRESOLVED", "target_id": null, "target_kind": null, "qualified_name": null, "defined_in": null, "candidate_ids": []},
+  {"name": "ENTRY-POINT-TAKE", "qualifiers": [], "resolution": "UNRESOLVED", "target_id": null, "target_kind": null, "qualified_name": null, "defined_in": null, "candidate_ids": []},
+  {"name": "ENTRY-POINT-COMMIT", "qualifiers": [], "resolution": "UNRESOLVED", "target_id": null, "target_kind": null, "qualified_name": null, "defined_in": null, "candidate_ids": []},
+  {"name": "ENTRY-POINT-RESTART", "qualifiers": [], "resolution": "UNRESOLVED", "target_id": null, "target_kind": null, "qualified_name": null, "defined_in": null, "candidate_ids": []},
+  {"name": "CHECKPOINT-CONTROL", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0003-REC-0001", "target_kind": "record", "qualified_name": "CHECKPOINT-CONTROL", "defined_in": "SYS-PORTFOLIO-001-FIL-0003", "candidate_ids": []},
+  {"name": "RETURN-STATUS", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0012-FLD-000001", "target_kind": "field", "qualified_name": "RETURN-HANDLING.RETURN-STATUS", "defined_in": "SYS-PORTFOLIO-001-FIL-0012", "candidate_ids": []}
+],
+"program_narrative": "Program CKPRST is a batch subprogram that receives CHECKPOINT-CONTROL and RETURN-STATUS from its caller (PROCEDURE DIVISION USING) and returns with GOBACK. Its only logic is an EVALUATE TRUE that performs one of four paragraphs, PROC-INIT, PROC-TAKE-CHECKPOINT, PROC-COMMIT-CHECKPOINT or PROC-RESTART, selected by the condition names ENTRY-POINT-INIT, ENTRY-POINT-TAKE, ENTRY-POINT-COMMIT and ENTRY-POINT-RESTART; these condition names are not declared anywhere in the repository, so the selecting data item is unknown. All four paragraphs contain only a comment-like line and a period, so they execute no statements. The program declares the indexed file CHECKPOINT-FILE (FILE STATUS WS-FILE-STATUS), but no statement opens, reads or writes it. No error conditions are handled in the source.",
+"paragraphs": [
+  {
+    "name": "(UNNAMED)",
+    "paragraph_id": "SYS-PORTFOLIO-001-FIL-0043-PAR-0001",
+    "section": null,
+    "section_id": null,
+    "line_range": [27, 42],
+    "pseudocode": [
+      "-- Entry: caller passes checkpoint_control (CHECKPOINT-CONTROL) and return_status (RETURN-STATUS) (PROCEDURE DIVISION USING, lines 26-27)",
+      "IF entry_point_init THEN  -- ENTRY-POINT-INIT: condition name not declared in the repository (see data dictionary)",
+      "  CALL proc-init",
+      "ELSE IF entry_point_take THEN  -- ENTRY-POINT-TAKE: not declared",
+      "  CALL proc-take-checkpoint",
+      "ELSE IF entry_point_commit THEN  -- ENTRY-POINT-COMMIT: not declared",
+      "  CALL proc-commit-checkpoint",
+      "ELSE IF entry_point_restart THEN  -- ENTRY-POINT-RESTART: not declared",
+      "  CALL proc-restart",
+      "END IF  -- no WHEN OTHER: if no condition is true, nothing is performed",
+      "RETURN to caller  -- GOBACK"
+    ],
+    "pseudocode_statement_ids": [
+      [],
+      ["SYS-PORTFOLIO-001-FIL-0043-STMT-000001"],
+      ["SYS-PORTFOLIO-001-FIL-0043-STMT-000008"],
+      ["SYS-PORTFOLIO-001-FIL-0043-STMT-000001"],
+      ["SYS-PORTFOLIO-001-FIL-0043-STMT-000010"],
+      ["SYS-PORTFOLIO-001-FIL-0043-STMT-000001"],
+      ["SYS-PORTFOLIO-001-FIL-0043-STMT-000007"],
+      ["SYS-PORTFOLIO-001-FIL-0043-STMT-000001"],
+      ["SYS-PORTFOLIO-001-FIL-0043-STMT-000009"],
+      ["SYS-PORTFOLIO-001-FIL-0043-STMT-000001"],
+      ["SYS-PORTFOLIO-001-FIL-0043-STMT-000002"]
+    ],
+    "pseudocode_text": "-- Entry: caller passes checkpoint_control (CHECKPOINT-CONTROL) and return_status (RETURN-STATUS) (PROCEDURE DIVISION USING, lines 26-27)\nIF entry_point_init THEN  -- ENTRY-POINT-INIT: condition name not declared in the repository (see data dictionary)\n  CALL proc-init\nELSE IF entry_point_take THEN  -- ENTRY-POINT-TAKE: not declared\n  CALL proc-take-checkpoint\nELSE IF entry_point_commit THEN  -- ENTRY-POINT-COMMIT: not declared\n  CALL proc-commit-checkpoint\nELSE IF entry_point_restart THEN  -- ENTRY-POINT-RESTART: not declared\n  CALL proc-restart\nEND IF  -- no WHEN OTHER: if no condition is true, nothing is performed\nRETURN to caller  -- GOBACK",
+    "statement_ids": ["SYS-PORTFOLIO-001-FIL-0043-STMT-000001", "SYS-PORTFOLIO-001-FIL-0043-STMT-000008", "SYS-PORTFOLIO-001-FIL-0043-STMT-000010", "SYS-PORTFOLIO-001-FIL-0043-STMT-000007", "SYS-PORTFOLIO-001-FIL-0043-STMT-000009", "SYS-PORTFOLIO-001-FIL-0043-STMT-000002"],
+    "untranslated_statement_ids": [],
+    "field_references": ["CHECKPOINT-CONTROL", "RETURN-STATUS", "ENTRY-POINT-INIT", "ENTRY-POINT-TAKE", "ENTRY-POINT-COMMIT", "ENTRY-POINT-RESTART"],
+    "field_reference_ids": [
+      {"name": "CHECKPOINT-CONTROL", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0003-REC-0001", "target_kind": "record", "candidate_ids": []},
+      {"name": "RETURN-STATUS", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0012-FLD-000001", "target_kind": "field", "candidate_ids": []},
+      {"name": "ENTRY-POINT-INIT", "qualifiers": [], "resolution": "UNRESOLVED", "target_id": null, "target_kind": null, "candidate_ids": []},
+      {"name": "ENTRY-POINT-TAKE", "qualifiers": [], "resolution": "UNRESOLVED", "target_id": null, "target_kind": null, "candidate_ids": []},
+      {"name": "ENTRY-POINT-COMMIT", "qualifiers": [], "resolution": "UNRESOLVED", "target_id": null, "target_kind": null, "candidate_ids": []},
+      {"name": "ENTRY-POINT-RESTART", "qualifiers": [], "resolution": "UNRESOLVED", "target_id": null, "target_kind": null, "candidate_ids": []}
+    ],
+    "calls_made": ["PROC-INIT", "PROC-TAKE-CHECKPOINT", "PROC-COMMIT-CHECKPOINT", "PROC-RESTART"],
+    "calls_made_ids": [
+      {"name": "PROC-INIT", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0043-PAR-0002", "section_id": null},
+      {"name": "PROC-TAKE-CHECKPOINT", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0043-PAR-0003", "section_id": null},
+      {"name": "PROC-COMMIT-CHECKPOINT", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0043-PAR-0004", "section_id": null},
+      {"name": "PROC-RESTART", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0043-PAR-0005", "section_id": null}
+    ],
+    "complexity_score": 4,
+    "has_unresolved_statements": false,
+    "annotations": [
+      {"line": 29, "statement_id": "SYS-PORTFOLIO-001-FIL-0043-STMT-000001", "note": "EVALUATE TRUE: the first WHEN whose condition is true is executed. The four condition names are undeclared, so the conditions cannot be expressed in terms of data values.", "ambiguous": true},
+      {"line": 26, "note": "CHECKPOINT-CONTROL is record SYS-PORTFOLIO-001-FIL-0003-REC-0001 (copybook CKPRST, expanded in FILE and LINKAGE sections); RETURN-STATUS is group field SYS-PORTFOLIO-001-FIL-0012-FLD-000001 inside RETURN-HANDLING (copybook RETHND). Neither is referenced by any procedure statement."}
+    ]
+  },
+  {
+    "name": "PROC-INIT",
+    "paragraph_id": "SYS-PORTFOLIO-001-FIL-0043-PAR-0002",
+    "section": null,
+    "section_id": null,
+    "line_range": [43, 46],
+    "pseudocode": [
+      "-- No executable statements. Line 44 reads '* Initialize checkpoint processing' with '*' in column 12 (Area B); Agent 2 treated it as a comment. Control returns to the PERFORM at line 31"
+    ],
+    "pseudocode_statement_ids": [[]],
+    "pseudocode_text": "-- No executable statements. Line 44 reads '* Initialize checkpoint processing' with '*' in column 12 (Area B); Agent 2 treated it as a comment. Control returns to the PERFORM at line 31",
+    "statement_ids": [],
+    "untranslated_statement_ids": [],
+    "field_references": [],
+    "field_reference_ids": [],
+    "calls_made": [],
+    "calls_made_ids": [],
+    "complexity_score": 1,
+    "has_unresolved_statements": false,
+    "annotations": [
+      {"line": 44, "note": "Text recorded verbatim: '* Initialize checkpoint processing'. A '*' outside column 7 is not a standard fixed-format comment indicator; treated as a comment by Agent 2.", "ambiguous": true}
+    ]
+  },
+  {
+    "name": "PROC-TAKE-CHECKPOINT",
+    "paragraph_id": "SYS-PORTFOLIO-001-FIL-0043-PAR-0003",
+    "section": null,
+    "section_id": null,
+    "line_range": [47, 50],
+    "pseudocode": [
+      "-- No executable statements. Line 48 reads '* Take a checkpoint' with '*' in column 12 (Area B); Agent 2 treated it as a comment. Control returns to the PERFORM at line 33"
+    ],
+    "pseudocode_statement_ids": [[]],
+    "pseudocode_text": "-- No executable statements. Line 48 reads '* Take a checkpoint' with '*' in column 12 (Area B); Agent 2 treated it as a comment. Control returns to the PERFORM at line 33",
+    "statement_ids": [],
+    "untranslated_statement_ids": [],
+    "field_references": [],
+    "field_reference_ids": [],
+    "calls_made": [],
+    "calls_made_ids": [],
+    "complexity_score": 1,
+    "has_unresolved_statements": false,
+    "annotations": [
+      {"line": 48, "note": "Text recorded verbatim: '* Take a checkpoint'. A '*' outside column 7 is not a standard fixed-format comment indicator; treated as a comment by Agent 2.", "ambiguous": true}
+    ]
+  },
+  {
+    "name": "PROC-COMMIT-CHECKPOINT",
+    "paragraph_id": "SYS-PORTFOLIO-001-FIL-0043-PAR-0004",
+    "section": null,
+    "section_id": null,
+    "line_range": [51, 54],
+    "pseudocode": [
+      "-- No executable statements. Line 52 reads '* Commit checkpoint' with '*' in column 12 (Area B); Agent 2 treated it as a comment. Control returns to the PERFORM at line 35"
+    ],
+    "pseudocode_statement_ids": [[]],
+    "pseudocode_text": "-- No executable statements. Line 52 reads '* Commit checkpoint' with '*' in column 12 (Area B); Agent 2 treated it as a comment. Control returns to the PERFORM at line 35",
+    "statement_ids": [],
+    "untranslated_statement_ids": [],
+    "field_references": [],
+    "field_reference_ids": [],
+    "calls_made": [],
+    "calls_made_ids": [],
+    "complexity_score": 1,
+    "has_unresolved_statements": false,
+    "annotations": [
+      {"line": 52, "note": "Text recorded verbatim: '* Commit checkpoint'. A '*' outside column 7 is not a standard fixed-format comment indicator; treated as a comment by Agent 2.", "ambiguous": true}
+    ]
+  },
+  {
+    "name": "PROC-RESTART",
+    "paragraph_id": "SYS-PORTFOLIO-001-FIL-0043-PAR-0005",
+    "section": null,
+    "section_id": null,
+    "line_range": [55, 57],
+    "pseudocode": [
+      "-- No executable statements. Line 56 reads '* Handle restart processing' with '*' in column 12 (Area B); Agent 2 treated it as a comment. Control returns to the PERFORM at line 37"
+    ],
+    "pseudocode_statement_ids": [[]],
+    "pseudocode_text": "-- No executable statements. Line 56 reads '* Handle restart processing' with '*' in column 12 (Area B); Agent 2 treated it as a comment. Control returns to the PERFORM at line 37",
+    "statement_ids": [],
+    "untranslated_statement_ids": [],
+    "field_references": [],
+    "field_reference_ids": [],
+    "calls_made": [],
+    "calls_made_ids": [],
+    "complexity_score": 1,
+    "has_unresolved_statements": false,
+    "annotations": [
+      {"line": 56, "note": "Text recorded verbatim: '* Handle restart processing'. A '*' outside column 7 is not a standard fixed-format comment indicator; treated as a comment by Agent 2.", "ambiguous": true}
+    ]
+  }
+],
+"unresolved_statements": [],
+"pseudocode_issues": [
+  {"severity": "info", "type": "id_unresolved", "kind": "field", "name": "ENTRY-POINT-INIT", "paragraph": "(UNNAMED)", "message": "resolve-field-references UNRESOLVED; target_id null."},
+  {"severity": "info", "type": "id_unresolved", "kind": "field", "name": "ENTRY-POINT-TAKE", "paragraph": "(UNNAMED)", "message": "resolve-field-references UNRESOLVED; target_id null."},
+  {"severity": "info", "type": "id_unresolved", "kind": "field", "name": "ENTRY-POINT-COMMIT", "paragraph": "(UNNAMED)", "message": "resolve-field-references UNRESOLVED; target_id null."},
+  {"severity": "info", "type": "id_unresolved", "kind": "field", "name": "ENTRY-POINT-RESTART", "paragraph": "(UNNAMED)", "message": "resolve-field-references UNRESOLVED; target_id null."},
+  {"severity": "info", "type": "condition_not_expressible", "line": 29, "message": "88-level-style condition names ENTRY-POINT-* have no declaration; used as-is with '-- see data dictionary'."}
+]
+}

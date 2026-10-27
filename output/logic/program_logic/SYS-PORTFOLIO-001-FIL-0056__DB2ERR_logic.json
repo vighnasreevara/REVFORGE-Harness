@@ -1,0 +1,694 @@
+{
+"program_summary": {"program_id": "DB2ERR", "file_id": "SYS-PORTFOLIO-001-FIL-0056", "logic_file": "program_logic/SYS-PORTFOLIO-001-FIL-0056__DB2ERR_logic.json", "logic_status": "partial", "paragraphs_translated": 7, "execution_paths": 1, "branches": 7, "loops": 0, "dead_code_confirmed": 0, "goto_annotations": 0, "unresolvable_paths": 0, "unresolved_ids": 1},
+"meta": {"generated_at": "2026-10-26T16:58:46Z", "agent_version": "4_logic@1.0", "source_artifacts": ["output/parser/parser_artifact.json", "output/parser/raw_structure/SYS-PORTFOLIO-001-FIL-0056__DB2ERR.json", "output/data/data_artifact.json", "output/data/data_layouts/SYS-PORTFOLIO-001-FIL-0056__DB2ERR_WS.json", "output/data/data_layouts/SYS-PORTFOLIO-001-FIL-0016__DBTBLS.json", "output/data/data_layouts/SYS-PORTFOLIO-001-FIL-0017__SQLCA.json", "output/data/data_layouts/SYS-PORTFOLIO-001-FIL-0015__DBPROC.json", "output/data/data_layouts/SYS-PORTFOLIO-001-FIL-0007__ERRHAND.json"], "neo4j_access": "read-only"},
+"program_id": "DB2ERR",
+"system_id": "SYS-PORTFOLIO-001",
+"file_id": "SYS-PORTFOLIO-001-FIL-0056",
+"path_id": "SYS-PORTFOLIO-001-PATH-0056",
+"relative_path": "src/programs/common/DB2ERR.cbl",
+"parse_run_id": "PRUN-20261023T023803Z-ACC2",
+"data_run_id": "DRUN-20261025T135019Z-17276",
+"upstream": {
+  "verification": {
+    "verdict": "VALID",
+    "verdict_reasons": ["V2, V3 and V4 consistent; Agent 2 parse_status 'success'; all four copybook layouts present and consistent; no unresolved copy stubs"],
+    "v1": {"raw_structure": "present", "parse_status": "success", "program_layout": "present", "copybook_layouts": [{"copybook": "DBTBLS", "copybook_file_id": "SYS-PORTFOLIO-001-FIL-0016", "layout": "present"}, {"copybook": "SQLCA", "copybook_file_id": "SYS-PORTFOLIO-001-FIL-0017", "layout": "present"}, {"copybook": "DBPROC", "copybook_file_id": "SYS-PORTFOLIO-001-FIL-0015", "layout": "present"}, {"copybook": "ERRHAND", "copybook_file_id": "SYS-PORTFOLIO-001-FIL-0007", "layout": "present"}], "unresolved_copy_stubs": 0},
+    "v2_file_identities": {
+      "program_entries": {"require_completed": ["parser", "data"], "entries": ["raw_structure|SYS-PORTFOLIO-001-FIL-0056", "data_layout|SYS-PORTFOLIO-001-FIL-0056"], "result": "batched with DB2STAT, DB2CMT and AUDPROC program entries: checked 8, ok 8, problems [], duplicates [], consistent true"},
+      "copybook_entries": {"require_completed": ["data"], "entries": ["data_layout|SYS-PORTFOLIO-001-FIL-0016", "data_layout|SYS-PORTFOLIO-001-FIL-0017", "data_layout|SYS-PORTFOLIO-001-FIL-0015", "data_layout|SYS-PORTFOLIO-001-FIL-0007"], "result": "batched with copybook FIL-0005: checked 5, ok 5, problems [], duplicates [], consistent true"},
+      "consistent": true
+    },
+    "v3_structure_identities": {"sections_checked": 3, "paragraphs_checked": 7, "statements_checked": 63, "edges_checked": 7, "registered_edges": 7, "section_problems": [], "paragraph_problems": [], "statement_problems": [], "edge_problems": [], "invalid_registered_edges": [], "registered_not_in_json": {"missing_count": 0}, "duplicate_ids_in_json": [], "consistent": true, "note": "data-division section names were sent as null (raw_structure does not carry them); one relationship per resolved PERFORM_SIMPLE edge"},
+    "v4_data_identities": [
+      {"file_id": "SYS-PORTFOLIO-001-FIL-0056", "layout": "program", "records_checked": 5, "fields_checked": 19, "expansions_checked": 4, "record_problems": [], "field_problems": [], "expansion_problems": [], "copybook_records_in_program": 0, "registered_not_in_json": {"missing_count": 0}, "duplicate_ids_in_json": [], "consistent": true},
+      {"file_id": "SYS-PORTFOLIO-001-FIL-0016", "layout": "copybook DBTBLS", "records_checked": 2, "fields_checked": 35, "expansions_checked": 0, "record_problems": [], "field_problems": [], "expansion_problems": [], "copybook_records_in_program": 0, "registered_not_in_json": {"missing_count": 0}, "duplicate_ids_in_json": [], "consistent": true},
+      {"file_id": "SYS-PORTFOLIO-001-FIL-0017", "layout": "copybook SQLCA", "records_checked": 1, "fields_checked": 7, "expansions_checked": 0, "record_problems": [], "field_problems": [], "expansion_problems": [], "copybook_records_in_program": 0, "registered_not_in_json": {"missing_count": 0}, "duplicate_ids_in_json": [], "consistent": true},
+      {"file_id": "SYS-PORTFOLIO-001-FIL-0015", "layout": "copybook DBPROC", "records_checked": 1, "fields_checked": 11, "expansions_checked": 0, "record_problems": [], "field_problems": [], "expansion_problems": [], "copybook_records_in_program": 0, "registered_not_in_json": {"missing_count": 0}, "duplicate_ids_in_json": [], "consistent": true},
+      {"file_id": "SYS-PORTFOLIO-001-FIL-0007", "layout": "copybook ERRHAND", "records_checked": 5, "fields_checked": 25, "expansions_checked": 0, "record_problems": [], "field_problems": [], "expansion_problems": [], "copybook_records_in_program": 0, "registered_not_in_json": {"missing_count": 0}, "duplicate_ids_in_json": [], "consistent": true}
+    ]
+  }
+},
+"execution_traces": [
+  {
+    "entry_point": "0000-MAIN",
+    "entry_point_id": "SYS-PORTFOLIO-001-FIL-0056-PAR-0001",
+    "entry_type": "called_subprogram",
+    "entry_note": "PROCEDURE DIVISION USING LS-ERROR-REQUEST (line 55); the program ends with GOBACK. Steps are listed depth-first in execution order: steps of a performed paragraph follow the PERFORM step that invokes it.",
+    "steps": [
+      {"step": 1, "paragraph": "0000-MAIN", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0056-PAR-0001", "action": "EVALUATE", "target": null, "target_paragraph_id": null, "target_section_id": null, "condition": {"text": "EVALUATE TRUE", "fields": [], "field_ids": []}, "line": 57, "statement_id": "SYS-PORTFOLIO-001-FIL-0056-STMT-000001"},
+      {"step": 2, "paragraph": "0000-MAIN", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0056-PAR-0001", "action": "PERFORM", "target": "1000-LOG-ERROR", "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0056-PAR-0002", "target_section_id": null,
+       "condition": {"text": "WHEN FUNC-LOG", "fields": ["FUNC-LOG"], "field_ids": [{"name": "FUNC-LOG", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0056-FLD-000007", "target_kind": "condition", "candidate_ids": []}]}, "line": 59, "statement_id": "SYS-PORTFOLIO-001-FIL-0056-STMT-000027"},
+      {"step": 3, "paragraph": "1000-LOG-ERROR", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0056-PAR-0002", "action": "PERFORM", "target": "1100-SET-SEVERITY", "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0056-PAR-0003", "target_section_id": null, "condition": null, "line": 81, "statement_id": "SYS-PORTFOLIO-001-FIL-0056-STMT-000008"},
+      {"step": 4, "paragraph": "1100-SET-SEVERITY", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0056-PAR-0003", "action": "EVALUATE", "target": null, "target_paragraph_id": null, "target_section_id": null,
+       "condition": {"text": "EVALUATE LS-SQLCODE", "fields": ["LS-SQLCODE"], "field_ids": [{"name": "LS-SQLCODE", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0056-FLD-000012", "target_kind": "field", "candidate_ids": []}]}, "line": 101, "statement_id": "SYS-PORTFOLIO-001-FIL-0056-STMT-000017"},
+      {"step": 5, "paragraph": "1000-LOG-ERROR", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0056-PAR-0002", "action": "PERFORM", "target": "1200-INSERT-ERROR", "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0056-PAR-0004", "target_section_id": null, "condition": null, "line": 97, "statement_id": "SYS-PORTFOLIO-001-FIL-0056-STMT-000016"},
+      {"step": 6, "paragraph": "1200-INSERT-ERROR", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0056-PAR-0004", "action": "EXEC_SQL", "target": null, "target_paragraph_id": null, "target_section_id": null, "condition": null, "line": 127, "statement_id": "SYS-PORTFOLIO-001-FIL-0056-STMT-000018", "note": "INSERT INTO ERRLOG VALUES (:WS-ERRLOG-REC)"},
+      {"step": 7, "paragraph": "1200-INSERT-ERROR", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0056-PAR-0004", "action": "IF", "target": null, "target_paragraph_id": null, "target_section_id": null,
+       "condition": {"text": "SQLCODE = 0", "fields": ["SQLCODE"], "field_ids": [{"name": "SQLCODE", "qualifiers": [], "resolution": "UNRESOLVED", "target_id": null, "target_kind": null, "candidate_ids": []}]}, "line": 132, "statement_id": "SYS-PORTFOLIO-001-FIL-0056-STMT-000019"},
+      {"step": 8, "paragraph": "1200-INSERT-ERROR", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0056-PAR-0004", "action": "PERFORM", "target": "9000-ERROR-ROUTINE", "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0056-PAR-0007", "target_section_id": null,
+       "condition": {"text": "ELSE of SQLCODE = 0", "fields": ["SQLCODE"], "field_ids": [{"name": "SQLCODE", "qualifiers": [], "resolution": "UNRESOLVED", "target_id": null, "target_kind": null, "candidate_ids": []}]}, "line": 136, "statement_id": "SYS-PORTFOLIO-001-FIL-0056-STMT-000041"},
+      {"step": 9, "paragraph": "9000-ERROR-ROUTINE", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0056-PAR-0007", "action": "CALL", "target": "ERRPROC", "target_paragraph_id": null, "target_section_id": null, "condition": null, "line": 199, "statement_id": "SYS-PORTFOLIO-001-FIL-0056-STMT-000025", "note": "static external CALL 'ERRPROC' USING ERR-MESSAGE; called program logic is outside this program"},
+      {"step": 10, "paragraph": "0000-MAIN", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0056-PAR-0001", "action": "PERFORM", "target": "2000-DIAGNOSE-ERROR", "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0056-PAR-0005", "target_section_id": null,
+       "condition": {"text": "WHEN FUNC-DIAG", "fields": ["FUNC-DIAG"], "field_ids": [{"name": "FUNC-DIAG", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0056-FLD-000008", "target_kind": "condition", "candidate_ids": []}]}, "line": 61, "statement_id": "SYS-PORTFOLIO-001-FIL-0056-STMT-000026"},
+      {"step": 11, "paragraph": "2000-DIAGNOSE-ERROR", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0056-PAR-0005", "action": "EVALUATE", "target": null, "target_paragraph_id": null, "target_section_id": null,
+       "condition": {"text": "EVALUATE LS-SQLCODE", "fields": ["LS-SQLCODE"], "field_ids": [{"name": "LS-SQLCODE", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0056-FLD-000012", "target_kind": "field", "candidate_ids": []}]}, "line": 141, "statement_id": "SYS-PORTFOLIO-001-FIL-0056-STMT-000020"},
+      {"step": 12, "paragraph": "0000-MAIN", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0056-PAR-0001", "action": "PERFORM", "target": "3000-RETRIEVE-ERROR", "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0056-PAR-0006", "target_section_id": null,
+       "condition": {"text": "WHEN FUNC-RETR", "fields": ["FUNC-RETR"], "field_ids": [{"name": "FUNC-RETR", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0056-FLD-000009", "target_kind": "condition", "candidate_ids": []}]}, "line": 63, "statement_id": "SYS-PORTFOLIO-001-FIL-0056-STMT-000028"},
+      {"step": 13, "paragraph": "3000-RETRIEVE-ERROR", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0056-PAR-0006", "action": "EXEC_SQL", "target": null, "target_paragraph_id": null, "target_section_id": null, "condition": null, "line": 172, "statement_id": "SYS-PORTFOLIO-001-FIL-0056-STMT-000021", "note": "SELECT ... FROM ERRLOG (latest row for the program)"},
+      {"step": 14, "paragraph": "3000-RETRIEVE-ERROR", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0056-PAR-0006", "action": "IF", "target": null, "target_paragraph_id": null, "target_section_id": null,
+       "condition": {"text": "SQLCODE = 0", "fields": ["SQLCODE"], "field_ids": [{"name": "SQLCODE", "qualifiers": [], "resolution": "UNRESOLVED", "target_id": null, "target_kind": null, "candidate_ids": []}]}, "line": 187, "statement_id": "SYS-PORTFOLIO-001-FIL-0056-STMT-000022"},
+      {"step": 15, "paragraph": "0000-MAIN", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0056-PAR-0001", "action": "PERFORM", "target": "9000-ERROR-ROUTINE", "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0056-PAR-0007", "target_section_id": null,
+       "condition": {"text": "WHEN OTHER", "fields": [], "field_ids": []}, "line": 66, "statement_id": "SYS-PORTFOLIO-001-FIL-0056-STMT-000030"},
+      {"step": 16, "paragraph": "9000-ERROR-ROUTINE", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0056-PAR-0007", "action": "CALL", "target": "ERRPROC", "target_paragraph_id": null, "target_section_id": null, "condition": null, "line": 199, "statement_id": "SYS-PORTFOLIO-001-FIL-0056-STMT-000025", "note": "static external CALL 'ERRPROC' USING ERR-MESSAGE"},
+      {"step": 17, "paragraph": "0000-MAIN", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0056-PAR-0001", "action": "GOBACK", "target": null, "target_paragraph_id": null, "target_section_id": null, "condition": null, "line": 69, "statement_id": "SYS-PORTFOLIO-001-FIL-0056-STMT-000002"}
+    ]
+  }
+],
+"branch_map": [
+  {
+    "paragraph": "0000-MAIN",
+    "paragraph_id": "SYS-PORTFOLIO-001-FIL-0056-PAR-0001",
+    "branches": [
+      {"type": "EVALUATE", "line": 57, "statement_id": "SYS-PORTFOLIO-001-FIL-0056-STMT-000001", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0056-PAR-0001", "subjects": ["TRUE"],
+       "condition_text": "EVALUATE TRUE WHEN FUNC-LOG / WHEN FUNC-DIAG / WHEN FUNC-RETR / WHEN OTHER",
+       "condition_fields": ["FUNC-LOG", "FUNC-DIAG", "FUNC-RETR"],
+       "condition_field_ids": [
+         {"name": "FUNC-LOG", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0056-FLD-000007", "target_kind": "condition", "candidate_ids": []},
+         {"name": "FUNC-DIAG", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0056-FLD-000008", "target_kind": "condition", "candidate_ids": []},
+         {"name": "FUNC-RETR", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0056-FLD-000009", "target_kind": "condition", "candidate_ids": []}
+       ],
+       "when_clauses": [
+         {"conditions": ["FUNC-LOG"], "condition_fields": ["FUNC-LOG"], "condition_values": "LS-FUNCTION = 'LOG '", "body_line_range": [59, 59], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0056-STMT-000027"]},
+         {"conditions": ["FUNC-DIAG"], "condition_fields": ["FUNC-DIAG"], "condition_values": "LS-FUNCTION = 'DIAG'", "body_line_range": [61, 61], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0056-STMT-000026"]},
+         {"conditions": ["FUNC-RETR"], "condition_fields": ["FUNC-RETR"], "condition_values": "LS-FUNCTION = 'RETR'", "body_line_range": [63, 63], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0056-STMT-000028"]},
+         {"conditions": ["OTHER"], "condition_fields": [], "body_line_range": [65, 66], "is_default": true, "statement_ids": ["SYS-PORTFOLIO-001-FIL-0056-STMT-000029", "SYS-PORTFOLIO-001-FIL-0056-STMT-000030"]}
+       ],
+       "has_when_other": true,
+       "end_evaluate_line": 67,
+       "outcomes": [
+         {"label": "WHEN FUNC-LOG", "line_range": [59, 59], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0056-STMT-000027"]},
+         {"label": "WHEN FUNC-DIAG", "line_range": [61, 61], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0056-STMT-000026"]},
+         {"label": "WHEN FUNC-RETR", "line_range": [63, 63], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0056-STMT-000028"]},
+         {"label": "WHEN OTHER", "line_range": [65, 66], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0056-STMT-000029", "SYS-PORTFOLIO-001-FIL-0056-STMT-000030"]}
+       ],
+       "nested_depth": 1}
+    ]
+  },
+  {
+    "paragraph": "1100-SET-SEVERITY",
+    "paragraph_id": "SYS-PORTFOLIO-001-FIL-0056-PAR-0003",
+    "branches": [
+      {"type": "EVALUATE", "line": 101, "statement_id": "SYS-PORTFOLIO-001-FIL-0056-STMT-000017", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0056-PAR-0003", "subjects": ["LS-SQLCODE"],
+       "condition_text": "EVALUATE LS-SQLCODE WHEN WS-DEADLOCK WHEN WS-TIMEOUT / WHEN WS-CONNECTION-ERROR / WHEN WS-DUP-KEY / WHEN WS-NOT-FOUND / WHEN OTHER",
+       "condition_fields": ["LS-SQLCODE", "WS-DEADLOCK", "WS-TIMEOUT", "WS-CONNECTION-ERROR", "WS-DUP-KEY", "WS-NOT-FOUND"],
+       "condition_field_ids": [
+         {"name": "LS-SQLCODE", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0056-FLD-000012", "target_kind": "field", "candidate_ids": []},
+         {"name": "WS-DEADLOCK", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0056-FLD-000001", "target_kind": "field", "candidate_ids": []},
+         {"name": "WS-TIMEOUT", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0056-FLD-000002", "target_kind": "field", "candidate_ids": []},
+         {"name": "WS-CONNECTION-ERROR", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0056-FLD-000003", "target_kind": "field", "candidate_ids": []},
+         {"name": "WS-DUP-KEY", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0056-FLD-000004", "target_kind": "field", "candidate_ids": []},
+         {"name": "WS-NOT-FOUND", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0056-FLD-000005", "target_kind": "field", "candidate_ids": []}
+       ],
+       "when_clauses": [
+         {"conditions": ["WS-DEADLOCK", "WS-TIMEOUT"], "condition_fields": ["WS-DEADLOCK", "WS-TIMEOUT"], "condition_values": "LS-SQLCODE = -911 (WS-DEADLOCK VALUE) or -913 (WS-TIMEOUT VALUE); two WHEN phrases share one body", "body_line_range": [104, 105], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0056-STMT-000034", "SYS-PORTFOLIO-001-FIL-0056-STMT-000035"]},
+         {"conditions": ["WS-CONNECTION-ERROR"], "condition_fields": ["WS-CONNECTION-ERROR"], "condition_values": "LS-SQLCODE = -30081 (VALUE)", "body_line_range": [107, 108], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0056-STMT-000032", "SYS-PORTFOLIO-001-FIL-0056-STMT-000033"]},
+         {"conditions": ["WS-DUP-KEY"], "condition_fields": ["WS-DUP-KEY"], "condition_values": "LS-SQLCODE = -803 (VALUE)", "body_line_range": [110, 111], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0056-STMT-000036", "SYS-PORTFOLIO-001-FIL-0056-STMT-000037"]},
+         {"conditions": ["WS-NOT-FOUND"], "condition_fields": ["WS-NOT-FOUND"], "condition_values": "LS-SQLCODE = +100 (VALUE)", "body_line_range": [113, 114], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0056-STMT-000038", "SYS-PORTFOLIO-001-FIL-0056-STMT-000039"]},
+         {"conditions": ["OTHER"], "condition_fields": [], "body_line_range": [116, 122], "is_default": true, "statement_ids": ["SYS-PORTFOLIO-001-FIL-0056-STMT-000031"]}
+       ],
+       "has_when_other": true,
+       "end_evaluate_line": 123,
+       "outcomes": [
+         {"label": "WHEN WS-DEADLOCK / WHEN WS-TIMEOUT", "line_range": [104, 105], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0056-STMT-000034", "SYS-PORTFOLIO-001-FIL-0056-STMT-000035"]},
+         {"label": "WHEN WS-CONNECTION-ERROR", "line_range": [107, 108], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0056-STMT-000032", "SYS-PORTFOLIO-001-FIL-0056-STMT-000033"]},
+         {"label": "WHEN WS-DUP-KEY", "line_range": [110, 111], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0056-STMT-000036", "SYS-PORTFOLIO-001-FIL-0056-STMT-000037"]},
+         {"label": "WHEN WS-NOT-FOUND", "line_range": [113, 114], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0056-STMT-000038", "SYS-PORTFOLIO-001-FIL-0056-STMT-000039"]},
+         {"label": "WHEN OTHER", "line_range": [116, 122], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0056-STMT-000031"]}
+       ],
+       "nested_depth": 1},
+      {"type": "IF", "line": 116, "statement_id": "SYS-PORTFOLIO-001-FIL-0056-STMT-000031", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0056-PAR-0003",
+       "condition_text": "LS-SQLCODE < 0",
+       "condition_fields": ["LS-SQLCODE"],
+       "condition_field_ids": [{"name": "LS-SQLCODE", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0056-FLD-000012", "target_kind": "field", "candidate_ids": []}],
+       "has_else": true, "then_line_range": [117, 118], "else_line_range": [120, 121], "end_if_line": 122, "nested_depth": 2,
+       "outcomes": [
+         {"label": "THEN", "line_range": [117, 118], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0056-STMT-000058", "SYS-PORTFOLIO-001-FIL-0056-STMT-000059"]},
+         {"label": "ELSE", "line_range": [120, 121], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0056-STMT-000056", "SYS-PORTFOLIO-001-FIL-0056-STMT-000057"]}
+       ]}
+    ]
+  },
+  {
+    "paragraph": "1200-INSERT-ERROR",
+    "paragraph_id": "SYS-PORTFOLIO-001-FIL-0056-PAR-0004",
+    "branches": [
+      {"type": "IF", "line": 132, "statement_id": "SYS-PORTFOLIO-001-FIL-0056-STMT-000019", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0056-PAR-0004",
+       "condition_text": "SQLCODE = 0",
+       "condition_fields": ["SQLCODE"],
+       "condition_field_ids": [{"name": "SQLCODE", "qualifiers": [], "resolution": "UNRESOLVED", "target_id": null, "target_kind": null, "candidate_ids": []}],
+       "has_else": true, "then_line_range": [133, 133], "else_line_range": [135, 136], "end_if_line": 137, "nested_depth": 1,
+       "sqlcode_check": true,
+       "outcomes": [
+         {"label": "THEN", "line_range": [133, 133], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0056-STMT-000042"]},
+         {"label": "ELSE", "line_range": [135, 136], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0056-STMT-000040", "SYS-PORTFOLIO-001-FIL-0056-STMT-000041"]}
+       ]}
+    ]
+  },
+  {
+    "paragraph": "2000-DIAGNOSE-ERROR",
+    "paragraph_id": "SYS-PORTFOLIO-001-FIL-0056-PAR-0005",
+    "branches": [
+      {"type": "EVALUATE", "line": 141, "statement_id": "SYS-PORTFOLIO-001-FIL-0056-STMT-000020", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0056-PAR-0005", "subjects": ["LS-SQLCODE"],
+       "condition_text": "EVALUATE LS-SQLCODE WHEN WS-DEADLOCK / WHEN WS-TIMEOUT / WHEN WS-CONNECTION-ERROR / WHEN WS-DUP-KEY / WHEN OTHER",
+       "condition_fields": ["LS-SQLCODE", "WS-DEADLOCK", "WS-TIMEOUT", "WS-CONNECTION-ERROR", "WS-DUP-KEY"],
+       "condition_field_ids": [
+         {"name": "LS-SQLCODE", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0056-FLD-000012", "target_kind": "field", "candidate_ids": []},
+         {"name": "WS-DEADLOCK", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0056-FLD-000001", "target_kind": "field", "candidate_ids": []},
+         {"name": "WS-TIMEOUT", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0056-FLD-000002", "target_kind": "field", "candidate_ids": []},
+         {"name": "WS-CONNECTION-ERROR", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0056-FLD-000003", "target_kind": "field", "candidate_ids": []},
+         {"name": "WS-DUP-KEY", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0056-FLD-000004", "target_kind": "field", "candidate_ids": []}
+       ],
+       "when_clauses": [
+         {"conditions": ["WS-DEADLOCK"], "condition_fields": ["WS-DEADLOCK"], "condition_values": "LS-SQLCODE = -911 (VALUE)", "body_line_range": [143, 145], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0056-STMT-000046", "SYS-PORTFOLIO-001-FIL-0056-STMT-000047"]},
+         {"conditions": ["WS-TIMEOUT"], "condition_fields": ["WS-TIMEOUT"], "condition_values": "LS-SQLCODE = -913 (VALUE)", "body_line_range": [147, 149], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0056-STMT-000050", "SYS-PORTFOLIO-001-FIL-0056-STMT-000051"]},
+         {"conditions": ["WS-CONNECTION-ERROR"], "condition_fields": ["WS-CONNECTION-ERROR"], "condition_values": "LS-SQLCODE = -30081 (VALUE)", "body_line_range": [151, 153], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0056-STMT-000044", "SYS-PORTFOLIO-001-FIL-0056-STMT-000045"]},
+         {"conditions": ["WS-DUP-KEY"], "condition_fields": ["WS-DUP-KEY"], "condition_values": "LS-SQLCODE = -803 (VALUE)", "body_line_range": [155, 157], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0056-STMT-000048", "SYS-PORTFOLIO-001-FIL-0056-STMT-000049"]},
+         {"conditions": ["OTHER"], "condition_fields": [], "body_line_range": [159, 167], "is_default": true, "statement_ids": ["SYS-PORTFOLIO-001-FIL-0056-STMT-000043"]}
+       ],
+       "has_when_other": true,
+       "end_evaluate_line": 168,
+       "outcomes": [
+         {"label": "WHEN WS-DEADLOCK", "line_range": [143, 145], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0056-STMT-000046", "SYS-PORTFOLIO-001-FIL-0056-STMT-000047"]},
+         {"label": "WHEN WS-TIMEOUT", "line_range": [147, 149], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0056-STMT-000050", "SYS-PORTFOLIO-001-FIL-0056-STMT-000051"]},
+         {"label": "WHEN WS-CONNECTION-ERROR", "line_range": [151, 153], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0056-STMT-000044", "SYS-PORTFOLIO-001-FIL-0056-STMT-000045"]},
+         {"label": "WHEN WS-DUP-KEY", "line_range": [155, 157], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0056-STMT-000048", "SYS-PORTFOLIO-001-FIL-0056-STMT-000049"]},
+         {"label": "WHEN OTHER", "line_range": [159, 167], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0056-STMT-000043"]}
+       ],
+       "nested_depth": 1},
+      {"type": "IF", "line": 159, "statement_id": "SYS-PORTFOLIO-001-FIL-0056-STMT-000043", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0056-PAR-0005",
+       "condition_text": "LS-SQLCODE < 0",
+       "condition_fields": ["LS-SQLCODE"],
+       "condition_field_ids": [{"name": "LS-SQLCODE", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0056-FLD-000012", "target_kind": "field", "candidate_ids": []}],
+       "has_else": true, "then_line_range": [160, 162], "else_line_range": [164, 166], "end_if_line": 167, "nested_depth": 2,
+       "outcomes": [
+         {"label": "THEN", "line_range": [160, 162], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0056-STMT-000062", "SYS-PORTFOLIO-001-FIL-0056-STMT-000063"]},
+         {"label": "ELSE", "line_range": [164, 166], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0056-STMT-000060", "SYS-PORTFOLIO-001-FIL-0056-STMT-000061"]}
+       ]}
+    ]
+  },
+  {
+    "paragraph": "3000-RETRIEVE-ERROR",
+    "paragraph_id": "SYS-PORTFOLIO-001-FIL-0056-PAR-0006",
+    "branches": [
+      {"type": "IF", "line": 187, "statement_id": "SYS-PORTFOLIO-001-FIL-0056-STMT-000022", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0056-PAR-0006",
+       "condition_text": "SQLCODE = 0",
+       "condition_fields": ["SQLCODE"],
+       "condition_field_ids": [{"name": "SQLCODE", "qualifiers": [], "resolution": "UNRESOLVED", "target_id": null, "target_kind": null, "candidate_ids": []}],
+       "has_else": true, "then_line_range": [188, 189], "else_line_range": [191, 192], "end_if_line": 193, "nested_depth": 1,
+       "sqlcode_check": true,
+       "outcomes": [
+         {"label": "THEN", "line_range": [188, 189], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0056-STMT-000054", "SYS-PORTFOLIO-001-FIL-0056-STMT-000055"]},
+         {"label": "ELSE", "line_range": [191, 192], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0056-STMT-000052", "SYS-PORTFOLIO-001-FIL-0056-STMT-000053"]}
+       ]}
+    ]
+  }
+],
+"loops": [],
+"dead_code_confirmed": [],
+"unresolvable_paths": [],
+"trace_issues": [
+  {"severity": "info", "type": "upstream_issue", "upstream_agent": "2_parser", "upstream_type": "area_b_level_01_entry", "line": 18, "message": "01-level entry WS-ERRLOG-REC (and the COPY statements at lines 19, 24, 25, 26 and the EXEC SQL DECLARE SECTION lines 17/22) begin in Area B; recorded as found."},
+  {"severity": "info", "type": "upstream_issue", "upstream_agent": "2_parser", "upstream_type": "copy_replacing", "line": 19, "message": "COPY DBTBLS uses a REPLACING clause (lines 19-21); recorded verbatim in the stub, not expanded."},
+  {"severity": "info", "type": "upstream_issue", "upstream_agent": "3_data", "upstream_type": "copy_level_conflict", "line": 19, "message": "COPY DBTBLS (lines 19-21) sits under 01 WS-ERRLOG-REC, but the copybook records POSHIST-RECORD and ERRLOG-RECORD are themselves level 01; registered as EXPANDS_COPY from SYS-PORTFOLIO-001-FIL-0056-REC-0001."},
+  {"severity": "info", "type": "upstream_issue", "upstream_agent": "3_data", "upstream_type": "replacing_duplicate_name", "line": 19, "message": "COPY DBTBLS REPLACING ==ERRLOG-RECORD== BY ==WS-ERRLOG-REC== gives the copybook record the same name as the enclosing 01 at line 18; the registry keeps the copybook identity SYS-PORTFOLIO-001-FIL-0016-REC-0002."},
+  {"severity": "info", "type": "upstream_issue", "upstream_agent": "3_data", "upstream_type": "sql_declare_section", "line": 17, "message": "EXEC SQL BEGIN/END DECLARE SECTION (lines 17-22) encloses 01 WS-ERRLOG-REC and COPY DBTBLS; host variables recorded as ordinary WORKING-STORAGE items."},
+  {"severity": "info", "type": "upstream_issue", "upstream_agent": "3_data", "upstream_type": "copy_stub_at_section_level", "line": 24, "message": "COPY SQLCA (24), COPY DBPROC (25) and COPY ERRHAND (26) sit directly under the WORKING-STORAGE SECTION; linked by EXPANDS_COPY from section SYS-PORTFOLIO-001-FIL-0056-SEC-0002."},
+  {"severity": "info", "type": "upstream_issue", "upstream_agent": "3_data", "upstream_type": "procedure_code_in_copybook", "line": 25, "message": "Copybook DBPROC also contains procedure code (CALL 'ERRPROC' at DBPROC line 56); only its data record DB2-ERROR-HANDLING is expanded. No DBPROC paragraph is performed by DB2ERR."},
+  {"severity": "info", "type": "upstream_issue", "upstream_agent": "3_data", "upstream_type": "unresolved_copy_stub", "file_id": "SYS-PORTFOLIO-001-FIL-0017", "message": "Copybook SQLCA defines only SQL-STATUS-CODES; the precompiler SQLCA structure (SQLCODE, SQLSTATE, ...) is not defined in the repository copybook. Explains why SQLCODE has no Field ID."},
+  {"severity": "info", "type": "field_id_unresolved", "name": "SQLCODE", "lines": [132, 187], "message": "SQLCODE is not defined in the program or its copybooks (precompiler-supplied SQLCA item); resolve-field-references returned UNRESOLVED; target_id null."},
+  {"severity": "info", "type": "ambiguous_name", "name": "WS-ERRLOG-REC", "lines": [73, 129], "message": "After COPY DBTBLS REPLACING, two 01 items carry the name WS-ERRLOG-REC (the enclosing 01 at line 18 and the renamed copybook record ERRLOG-RECORD). resolve-field-references returned RESOLVED to the program record SYS-PORTFOLIO-001-FIL-0056-REC-0001 (registry names differ); which item INITIALIZE (line 73) and the host variable :WS-ERRLOG-REC (line 129) address at compile time is flagged for SME review.", "ambiguous": true},
+  {"severity": "info", "type": "external_call", "line": 199, "statement_id": "SYS-PORTFOLIO-001-FIL-0056-STMT-000025", "message": "Static CALL 'ERRPROC' USING ERR-MESSAGE; ERRPROC is a separate program (not in this execution's scope); its effect is not traced here."}
+],
+"field_id_lookups": [
+  {"name": "FUNC-LOG", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0056-FLD-000007", "target_kind": "condition", "qualified_name": "LS-ERROR-REQUEST.LS-FUNCTION.FUNC-LOG", "defined_in": "SYS-PORTFOLIO-001-FIL-0056", "candidate_ids": []},
+  {"name": "FUNC-DIAG", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0056-FLD-000008", "target_kind": "condition", "qualified_name": "LS-ERROR-REQUEST.LS-FUNCTION.FUNC-DIAG", "defined_in": "SYS-PORTFOLIO-001-FIL-0056", "candidate_ids": []},
+  {"name": "FUNC-RETR", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0056-FLD-000009", "target_kind": "condition", "qualified_name": "LS-ERROR-REQUEST.LS-FUNCTION.FUNC-RETR", "defined_in": "SYS-PORTFOLIO-001-FIL-0056", "candidate_ids": []},
+  {"name": "LS-SQLCODE", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0056-FLD-000012", "target_kind": "field", "qualified_name": "LS-ERROR-REQUEST.LS-ERROR-INFO.LS-SQLCODE", "defined_in": "SYS-PORTFOLIO-001-FIL-0056", "candidate_ids": []},
+  {"name": "WS-DEADLOCK", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0056-FLD-000001", "target_kind": "field", "qualified_name": "WS-ERROR-CATEGORIES.WS-DEADLOCK", "defined_in": "SYS-PORTFOLIO-001-FIL-0056", "candidate_ids": []},
+  {"name": "WS-TIMEOUT", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0056-FLD-000002", "target_kind": "field", "qualified_name": "WS-ERROR-CATEGORIES.WS-TIMEOUT", "defined_in": "SYS-PORTFOLIO-001-FIL-0056", "candidate_ids": []},
+  {"name": "WS-CONNECTION-ERROR", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0056-FLD-000003", "target_kind": "field", "qualified_name": "WS-ERROR-CATEGORIES.WS-CONNECTION-ERROR", "defined_in": "SYS-PORTFOLIO-001-FIL-0056", "candidate_ids": []},
+  {"name": "WS-DUP-KEY", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0056-FLD-000004", "target_kind": "field", "qualified_name": "WS-ERROR-CATEGORIES.WS-DUP-KEY", "defined_in": "SYS-PORTFOLIO-001-FIL-0056", "candidate_ids": []},
+  {"name": "WS-NOT-FOUND", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0056-FLD-000005", "target_kind": "field", "qualified_name": "WS-ERROR-CATEGORIES.WS-NOT-FOUND", "defined_in": "SYS-PORTFOLIO-001-FIL-0056", "candidate_ids": []},
+  {"name": "SQLCODE", "qualifiers": [], "resolution": "UNRESOLVED", "target_id": null, "target_kind": null, "qualified_name": null, "defined_in": null, "candidate_ids": []},
+  {"name": "ERR-TEXT", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0007-FLD-000017", "target_kind": "field", "qualified_name": "ERR-MESSAGE.ERR-TEXT", "defined_in": "SYS-PORTFOLIO-001-FIL-0007", "candidate_ids": []},
+  {"name": "WS-ERRLOG-REC", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0056-REC-0001", "target_kind": "record", "qualified_name": "WS-ERRLOG-REC", "defined_in": "SYS-PORTFOLIO-001-FIL-0056", "candidate_ids": []},
+  {"name": "WS-CURRENT-TIMESTAMP", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0056-REC-0002", "target_kind": "record", "qualified_name": "WS-CURRENT-TIMESTAMP", "defined_in": "SYS-PORTFOLIO-001-FIL-0056", "candidate_ids": []},
+  {"name": "EL-ERROR-TIMESTAMP", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0016-FLD-000019", "target_kind": "field", "qualified_name": "ERRLOG-RECORD.EL-ERROR-TIMESTAMP", "defined_in": "SYS-PORTFOLIO-001-FIL-0016", "candidate_ids": []},
+  {"name": "LS-PROGRAM-ID", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0056-FLD-000010", "target_kind": "field", "qualified_name": "LS-ERROR-REQUEST.LS-PROGRAM-ID", "defined_in": "SYS-PORTFOLIO-001-FIL-0056", "candidate_ids": []},
+  {"name": "EL-PROGRAM-ID", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0016-FLD-000020", "target_kind": "field", "qualified_name": "ERRLOG-RECORD.EL-PROGRAM-ID", "defined_in": "SYS-PORTFOLIO-001-FIL-0016", "candidate_ids": []},
+  {"name": "EL-ERROR-TYPE", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0016-FLD-000021", "target_kind": "field", "qualified_name": "ERRLOG-RECORD.EL-ERROR-TYPE", "defined_in": "SYS-PORTFOLIO-001-FIL-0016", "candidate_ids": []},
+  {"name": "WS-FORMATTED-SQLCODE", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0056-REC-0003", "target_kind": "record", "qualified_name": "WS-FORMATTED-SQLCODE", "defined_in": "SYS-PORTFOLIO-001-FIL-0056", "candidate_ids": []},
+  {"name": "LS-SQLSTATE", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0056-FLD-000013", "target_kind": "field", "qualified_name": "LS-ERROR-REQUEST.LS-ERROR-INFO.LS-SQLSTATE", "defined_in": "SYS-PORTFOLIO-001-FIL-0056", "candidate_ids": []},
+  {"name": "EL-ERROR-CODE", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0016-FLD-000030", "target_kind": "field", "qualified_name": "ERRLOG-RECORD.EL-ERROR-CODE", "defined_in": "SYS-PORTFOLIO-001-FIL-0016", "candidate_ids": []},
+  {"name": "LS-ERROR-TEXT", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0056-FLD-000014", "target_kind": "field", "qualified_name": "LS-ERROR-REQUEST.LS-ERROR-INFO.LS-ERROR-TEXT", "defined_in": "SYS-PORTFOLIO-001-FIL-0056", "candidate_ids": []},
+  {"name": "EL-ERROR-MESSAGE", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0016-FLD-000031", "target_kind": "field", "qualified_name": "ERRLOG-RECORD.EL-ERROR-MESSAGE", "defined_in": "SYS-PORTFOLIO-001-FIL-0016", "candidate_ids": []},
+  {"name": "EL-PROCESS-DATE", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0016-FLD-000032", "target_kind": "field", "qualified_name": "ERRLOG-RECORD.EL-PROCESS-DATE", "defined_in": "SYS-PORTFOLIO-001-FIL-0016", "candidate_ids": []},
+  {"name": "EL-PROCESS-TIME", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0016-FLD-000033", "target_kind": "field", "qualified_name": "ERRLOG-RECORD.EL-PROCESS-TIME", "defined_in": "SYS-PORTFOLIO-001-FIL-0016", "candidate_ids": []},
+  {"name": "EL-USER-ID", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0016-FLD-000034", "target_kind": "field", "qualified_name": "ERRLOG-RECORD.EL-USER-ID", "defined_in": "SYS-PORTFOLIO-001-FIL-0016", "candidate_ids": []},
+  {"name": "LS-ADDITIONAL-INFO", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0056-FLD-000015", "target_kind": "field", "qualified_name": "LS-ERROR-REQUEST.LS-ADDITIONAL-INFO", "defined_in": "SYS-PORTFOLIO-001-FIL-0056", "candidate_ids": []},
+  {"name": "EL-ADDITIONAL-INFO", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0016-FLD-000035", "target_kind": "field", "qualified_name": "ERRLOG-RECORD.EL-ADDITIONAL-INFO", "defined_in": "SYS-PORTFOLIO-001-FIL-0016", "candidate_ids": []},
+  {"name": "EL-ERROR-SEVERITY", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0016-FLD-000025", "target_kind": "field", "qualified_name": "ERRLOG-RECORD.EL-ERROR-SEVERITY", "defined_in": "SYS-PORTFOLIO-001-FIL-0016", "candidate_ids": []},
+  {"name": "LS-SHOULD-RETRY", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0056-FLD-000018", "target_kind": "condition", "qualified_name": "LS-ERROR-REQUEST.LS-RETRY-FLAG.LS-SHOULD-RETRY", "defined_in": "SYS-PORTFOLIO-001-FIL-0056", "candidate_ids": []},
+  {"name": "LS-NO-RETRY", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0056-FLD-000019", "target_kind": "condition", "qualified_name": "LS-ERROR-REQUEST.LS-RETRY-FLAG.LS-NO-RETRY", "defined_in": "SYS-PORTFOLIO-001-FIL-0056", "candidate_ids": []},
+  {"name": "LS-RETURN-CODE", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0056-FLD-000016", "target_kind": "field", "qualified_name": "LS-ERROR-REQUEST.LS-RETURN-CODE", "defined_in": "SYS-PORTFOLIO-001-FIL-0056", "candidate_ids": []},
+  {"name": "ERR-PROGRAM", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0007-FLD-000013", "target_kind": "field", "qualified_name": "ERR-MESSAGE.ERR-PROGRAM", "defined_in": "SYS-PORTFOLIO-001-FIL-0007", "candidate_ids": []},
+  {"name": "ERR-MESSAGE", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0007-REC-0003", "target_kind": "record", "qualified_name": "ERR-MESSAGE", "defined_in": "SYS-PORTFOLIO-001-FIL-0007", "candidate_ids": []},
+  {"name": "LS-ERROR-REQUEST", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0056-REC-0005", "target_kind": "record", "qualified_name": "LS-ERROR-REQUEST", "defined_in": "SYS-PORTFOLIO-001-FIL-0056", "candidate_ids": []}
+],
+"program_narrative": "Program DB2ERR is a called DB2 error-handling subroutine that receives a request block LS-ERROR-REQUEST (PROCEDURE DIVISION USING) and dispatches on its function code. 'LOG ' builds an error-log row (timestamp, calling program ID, error type 'D', severity derived from the SQLCODE, a text 'SQLCODE: ... STATE: ...', the caller's error text, process date/time and additional info) and inserts it into the DB2 table ERRLOG; the severity step also sets the caller's retry flag to 'Y' for deadlock (-911) or timeout (-913) and 'N' otherwise. 'DIAG' returns a diagnostic message and return code for the SQLCODE (deadlock/timeout 4, connection error -30081 12, duplicate key -803 8, other negative 12, other non-negative 4). 'RETR' selects the latest ERRLOG row for the given program ID and returns its message and severity, or 'No error history found' with return code 4. Any other function code, and a failed ERRLOG insert, set return code 12 and call the external error processor ERRPROC with the common ERR-MESSAGE block. It reads no files and always ends with GOBACK.",
+"paragraphs": [
+  {
+    "name": "0000-MAIN",
+    "paragraph_id": "SYS-PORTFOLIO-001-FIL-0056-PAR-0001",
+    "section": null,
+    "section_id": null,
+    "line_range": [56, 71],
+    "pseudocode": [
+      "-- Entry: request block LS-ERROR-REQUEST is passed by the caller (PROCEDURE DIVISION USING, line 55)",
+      "IF request.function = 'LOG ' THEN  -- FUNC-LOG (EVALUATE TRUE, first matching WHEN wins)",
+      "  CALL 1000-log-error",
+      "ELSE IF request.function = 'DIAG' THEN  -- FUNC-DIAG",
+      "  CALL 2000-diagnose-error",
+      "ELSE IF request.function = 'RETR' THEN  -- FUNC-RETR",
+      "  CALL 3000-retrieve-error",
+      "ELSE  -- WHEN OTHER: unrecognised function code",
+      "  SET err_text = 'Invalid function code'",
+      "  CALL 9000-error-routine",
+      "END IF",
+      "RETURN to caller  -- GOBACK"
+    ],
+    "pseudocode_statement_ids": [
+      [],
+      ["SYS-PORTFOLIO-001-FIL-0056-STMT-000001"],
+      ["SYS-PORTFOLIO-001-FIL-0056-STMT-000027"],
+      ["SYS-PORTFOLIO-001-FIL-0056-STMT-000001"],
+      ["SYS-PORTFOLIO-001-FIL-0056-STMT-000026"],
+      ["SYS-PORTFOLIO-001-FIL-0056-STMT-000001"],
+      ["SYS-PORTFOLIO-001-FIL-0056-STMT-000028"],
+      ["SYS-PORTFOLIO-001-FIL-0056-STMT-000001"],
+      ["SYS-PORTFOLIO-001-FIL-0056-STMT-000029"],
+      ["SYS-PORTFOLIO-001-FIL-0056-STMT-000030"],
+      ["SYS-PORTFOLIO-001-FIL-0056-STMT-000001"],
+      ["SYS-PORTFOLIO-001-FIL-0056-STMT-000002"]
+    ],
+    "pseudocode_text": "-- Entry: request block LS-ERROR-REQUEST is passed by the caller (PROCEDURE DIVISION USING, line 55)\nIF request.function = 'LOG ' THEN  -- FUNC-LOG (EVALUATE TRUE, first matching WHEN wins)\n  CALL 1000-log-error\nELSE IF request.function = 'DIAG' THEN  -- FUNC-DIAG\n  CALL 2000-diagnose-error\nELSE IF request.function = 'RETR' THEN  -- FUNC-RETR\n  CALL 3000-retrieve-error\nELSE  -- WHEN OTHER: unrecognised function code\n  SET err_text = 'Invalid function code'\n  CALL 9000-error-routine\nEND IF\nRETURN to caller  -- GOBACK",
+    "statement_ids": ["SYS-PORTFOLIO-001-FIL-0056-STMT-000001", "SYS-PORTFOLIO-001-FIL-0056-STMT-000027", "SYS-PORTFOLIO-001-FIL-0056-STMT-000026", "SYS-PORTFOLIO-001-FIL-0056-STMT-000028", "SYS-PORTFOLIO-001-FIL-0056-STMT-000029", "SYS-PORTFOLIO-001-FIL-0056-STMT-000030", "SYS-PORTFOLIO-001-FIL-0056-STMT-000002"],
+    "untranslated_statement_ids": [],
+    "field_references": ["FUNC-LOG", "FUNC-DIAG", "FUNC-RETR", "ERR-TEXT"],
+    "field_reference_ids": [
+      {"name": "FUNC-LOG", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0056-FLD-000007", "target_kind": "condition", "candidate_ids": []},
+      {"name": "FUNC-DIAG", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0056-FLD-000008", "target_kind": "condition", "candidate_ids": []},
+      {"name": "FUNC-RETR", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0056-FLD-000009", "target_kind": "condition", "candidate_ids": []},
+      {"name": "ERR-TEXT", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0007-FLD-000017", "target_kind": "field", "candidate_ids": []}
+    ],
+    "calls_made": ["1000-LOG-ERROR", "2000-DIAGNOSE-ERROR", "3000-RETRIEVE-ERROR", "9000-ERROR-ROUTINE"],
+    "calls_made_ids": [
+      {"name": "1000-LOG-ERROR", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0056-PAR-0002", "section_id": null},
+      {"name": "2000-DIAGNOSE-ERROR", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0056-PAR-0005", "section_id": null},
+      {"name": "3000-RETRIEVE-ERROR", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0056-PAR-0006", "section_id": null},
+      {"name": "9000-ERROR-ROUTINE", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0056-PAR-0007", "section_id": null}
+    ],
+    "complexity_score": 4,
+    "has_unresolved_statements": false,
+    "annotations": [
+      {"line": 57, "statement_id": "SYS-PORTFOLIO-001-FIL-0056-STMT-000001", "note": "EVALUATE TRUE over the 88-level conditions of LS-FUNCTION: FUNC-LOG='LOG ', FUNC-DIAG='DIAG', FUNC-RETR='RETR'."},
+      {"line": 65, "statement_id": "SYS-PORTFOLIO-001-FIL-0056-STMT-000029", "note": "ERR-TEXT belongs to ERR-MESSAGE from copybook ERRHAND (SYS-PORTFOLIO-001-FIL-0007-REC-0003), which is the block passed to ERRPROC in 9000-ERROR-ROUTINE."}
+    ]
+  },
+  {
+    "name": "1000-LOG-ERROR",
+    "paragraph_id": "SYS-PORTFOLIO-001-FIL-0056-PAR-0002",
+    "section": null,
+    "section_id": null,
+    "line_range": [72, 99],
+    "pseudocode": [
+      "CLEAR ws_errlog_record  -- INITIALIZE: alphanumeric items to spaces, numeric items to zero",
+      "SET ws_current_timestamp = [runtime: current timestamp]  -- ACCEPT ... FROM TIME STAMP",
+      "SET errlog.error_timestamp = ws_current_timestamp",
+      "SET errlog.program_id = request.program_id",
+      "SET errlog.error_type = 'D'  -- 'D' is the 88-level EL-TYPE-DATA",
+      "CALL 1100-set-severity",
+      "SET ws_formatted_sqlcode = request.sqlcode  -- edited numeric picture -Z(8)9 (sign, zero-suppressed digits)",
+      "CONCATENATE 'SQLCODE: ' + ws_formatted_sqlcode + ' STATE: ' + request.sqlstate INTO errlog.error_code  -- COBOL STRING DELIMITED BY SIZE: whole fields are joined",
+      "SET errlog.error_message = request.error_text",
+      "SET errlog.process_date = [runtime: FUNCTION CURRENT-DATE characters 1-10]",
+      "SET errlog.process_time = [runtime: FUNCTION CURRENT-DATE characters 12-19]",
+      "CLEAR errlog.user_id  -- initialise to spaces",
+      "SET errlog.additional_info = request.additional_info",
+      "CALL 1200-insert-error"
+    ],
+    "pseudocode_statement_ids": [
+      ["SYS-PORTFOLIO-001-FIL-0056-STMT-000003"],
+      ["SYS-PORTFOLIO-001-FIL-0056-STMT-000004"],
+      ["SYS-PORTFOLIO-001-FIL-0056-STMT-000005"],
+      ["SYS-PORTFOLIO-001-FIL-0056-STMT-000006"],
+      ["SYS-PORTFOLIO-001-FIL-0056-STMT-000007"],
+      ["SYS-PORTFOLIO-001-FIL-0056-STMT-000008"],
+      ["SYS-PORTFOLIO-001-FIL-0056-STMT-000009"],
+      ["SYS-PORTFOLIO-001-FIL-0056-STMT-000010"],
+      ["SYS-PORTFOLIO-001-FIL-0056-STMT-000011"],
+      ["SYS-PORTFOLIO-001-FIL-0056-STMT-000012"],
+      ["SYS-PORTFOLIO-001-FIL-0056-STMT-000013"],
+      ["SYS-PORTFOLIO-001-FIL-0056-STMT-000014"],
+      ["SYS-PORTFOLIO-001-FIL-0056-STMT-000015"],
+      ["SYS-PORTFOLIO-001-FIL-0056-STMT-000016"]
+    ],
+    "pseudocode_text": "CLEAR ws_errlog_record  -- INITIALIZE: alphanumeric items to spaces, numeric items to zero\nSET ws_current_timestamp = [runtime: current timestamp]  -- ACCEPT ... FROM TIME STAMP\nSET errlog.error_timestamp = ws_current_timestamp\nSET errlog.program_id = request.program_id\nSET errlog.error_type = 'D'  -- 'D' is the 88-level EL-TYPE-DATA\nCALL 1100-set-severity\nSET ws_formatted_sqlcode = request.sqlcode  -- edited numeric picture -Z(8)9 (sign, zero-suppressed digits)\nCONCATENATE 'SQLCODE: ' + ws_formatted_sqlcode + ' STATE: ' + request.sqlstate INTO errlog.error_code  -- COBOL STRING DELIMITED BY SIZE: whole fields are joined\nSET errlog.error_message = request.error_text\nSET errlog.process_date = [runtime: FUNCTION CURRENT-DATE characters 1-10]\nSET errlog.process_time = [runtime: FUNCTION CURRENT-DATE characters 12-19]\nCLEAR errlog.user_id  -- initialise to spaces\nSET errlog.additional_info = request.additional_info\nCALL 1200-insert-error",
+    "statement_ids": ["SYS-PORTFOLIO-001-FIL-0056-STMT-000003", "SYS-PORTFOLIO-001-FIL-0056-STMT-000004", "SYS-PORTFOLIO-001-FIL-0056-STMT-000005", "SYS-PORTFOLIO-001-FIL-0056-STMT-000006", "SYS-PORTFOLIO-001-FIL-0056-STMT-000007", "SYS-PORTFOLIO-001-FIL-0056-STMT-000008", "SYS-PORTFOLIO-001-FIL-0056-STMT-000009", "SYS-PORTFOLIO-001-FIL-0056-STMT-000010", "SYS-PORTFOLIO-001-FIL-0056-STMT-000011", "SYS-PORTFOLIO-001-FIL-0056-STMT-000012", "SYS-PORTFOLIO-001-FIL-0056-STMT-000013", "SYS-PORTFOLIO-001-FIL-0056-STMT-000014", "SYS-PORTFOLIO-001-FIL-0056-STMT-000015", "SYS-PORTFOLIO-001-FIL-0056-STMT-000016"],
+    "untranslated_statement_ids": [],
+    "field_references": ["WS-ERRLOG-REC", "WS-CURRENT-TIMESTAMP", "EL-ERROR-TIMESTAMP", "LS-PROGRAM-ID", "EL-PROGRAM-ID", "EL-ERROR-TYPE", "LS-SQLCODE", "WS-FORMATTED-SQLCODE", "LS-SQLSTATE", "EL-ERROR-CODE", "LS-ERROR-TEXT", "EL-ERROR-MESSAGE", "EL-PROCESS-DATE", "EL-PROCESS-TIME", "EL-USER-ID", "LS-ADDITIONAL-INFO", "EL-ADDITIONAL-INFO"],
+    "field_reference_ids": [
+      {"name": "WS-ERRLOG-REC", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0056-REC-0001", "target_kind": "record", "candidate_ids": []},
+      {"name": "WS-CURRENT-TIMESTAMP", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0056-REC-0002", "target_kind": "record", "candidate_ids": []},
+      {"name": "EL-ERROR-TIMESTAMP", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0016-FLD-000019", "target_kind": "field", "candidate_ids": []},
+      {"name": "LS-PROGRAM-ID", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0056-FLD-000010", "target_kind": "field", "candidate_ids": []},
+      {"name": "EL-PROGRAM-ID", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0016-FLD-000020", "target_kind": "field", "candidate_ids": []},
+      {"name": "EL-ERROR-TYPE", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0016-FLD-000021", "target_kind": "field", "candidate_ids": []},
+      {"name": "LS-SQLCODE", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0056-FLD-000012", "target_kind": "field", "candidate_ids": []},
+      {"name": "WS-FORMATTED-SQLCODE", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0056-REC-0003", "target_kind": "record", "candidate_ids": []},
+      {"name": "LS-SQLSTATE", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0056-FLD-000013", "target_kind": "field", "candidate_ids": []},
+      {"name": "EL-ERROR-CODE", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0016-FLD-000030", "target_kind": "field", "candidate_ids": []},
+      {"name": "LS-ERROR-TEXT", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0056-FLD-000014", "target_kind": "field", "candidate_ids": []},
+      {"name": "EL-ERROR-MESSAGE", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0016-FLD-000031", "target_kind": "field", "candidate_ids": []},
+      {"name": "EL-PROCESS-DATE", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0016-FLD-000032", "target_kind": "field", "candidate_ids": []},
+      {"name": "EL-PROCESS-TIME", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0016-FLD-000033", "target_kind": "field", "candidate_ids": []},
+      {"name": "EL-USER-ID", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0016-FLD-000034", "target_kind": "field", "candidate_ids": []},
+      {"name": "LS-ADDITIONAL-INFO", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0056-FLD-000015", "target_kind": "field", "candidate_ids": []},
+      {"name": "EL-ADDITIONAL-INFO", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0016-FLD-000035", "target_kind": "field", "candidate_ids": []}
+    ],
+    "calls_made": ["1100-SET-SEVERITY", "1200-INSERT-ERROR"],
+    "calls_made_ids": [
+      {"name": "1100-SET-SEVERITY", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0056-PAR-0003", "section_id": null},
+      {"name": "1200-INSERT-ERROR", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0056-PAR-0004", "section_id": null}
+    ],
+    "complexity_score": 1,
+    "has_unresolved_statements": false,
+    "annotations": [
+      {"line": 73, "statement_id": "SYS-PORTFOLIO-001-FIL-0056-STMT-000003", "note": "INITIALIZE WS-ERRLOG-REC: the name is shared by the enclosing 01 and the REPLACING-renamed copybook record (see trace_issues ambiguous_name); which item is cleared is flagged for SME review.", "ambiguous": true},
+      {"line": 75, "statement_id": "SYS-PORTFOLIO-001-FIL-0056-STMT-000004", "note": "ACCEPT ... FROM TIME STAMP is written as in the source; the exact format delivered depends on the compiler/runtime.", "ambiguous": true},
+      {"line": 84, "statement_id": "SYS-PORTFOLIO-001-FIL-0056-STMT-000010", "note": "EL-ERROR-CODE is PIC X(8) (DBTBLS line 45) while the STRING sources total more than 8 characters ('SQLCODE: ' alone is 9); STRING stops when the receiving field is full and the statement has no ON OVERFLOW phrase, so only the first 8 characters are stored."},
+      {"line": 90, "statement_id": "SYS-PORTFOLIO-001-FIL-0056-STMT-000012", "note": "Reference modification FUNCTION CURRENT-DATE(1:10) and (12:8) as written; the meaning of the extracted characters depends on the CURRENT-DATE layout and is flagged for review.", "ambiguous": true},
+      {"line": 79, "statement_id": "SYS-PORTFOLIO-001-FIL-0056-STMT-000007", "note": "EL-ERROR-TYPE 88-levels: EL-TYPE-SYSTEM='S', EL-TYPE-APP='A', EL-TYPE-DATA='D'."}
+    ]
+  },
+  {
+    "name": "1100-SET-SEVERITY",
+    "paragraph_id": "SYS-PORTFOLIO-001-FIL-0056-PAR-0003",
+    "section": null,
+    "section_id": null,
+    "line_range": [100, 125],
+    "pseudocode": [
+      "SELECT CASE request.sqlcode  -- EVALUATE LS-SQLCODE against the WS-ERROR-CATEGORIES constants",
+      "  WHEN -911 (deadlock, WS-DEADLOCK), -913 (timeout, WS-TIMEOUT):",
+      "    SET errlog.error_severity = 2  -- EL-SEV-WARN",
+      "    SET request.retry_flag = 'Y'  -- LS-SHOULD-RETRY: caller may retry",
+      "  WHEN -30081 (connection error, WS-CONNECTION-ERROR):",
+      "    SET errlog.error_severity = 4  -- EL-SEV-SEVERE",
+      "    SET request.retry_flag = 'N'  -- LS-NO-RETRY",
+      "  WHEN -803 (duplicate key, WS-DUP-KEY):",
+      "    SET errlog.error_severity = 1  -- EL-SEV-INFO",
+      "    SET request.retry_flag = 'N'  -- LS-NO-RETRY",
+      "  WHEN +100 (not found, WS-NOT-FOUND):",
+      "    SET errlog.error_severity = 1  -- EL-SEV-INFO",
+      "    SET request.retry_flag = 'N'  -- LS-NO-RETRY",
+      "  ELSE:",
+      "    IF request.sqlcode < 0 THEN",
+      "      SET errlog.error_severity = 3  -- EL-SEV-ERROR",
+      "      SET request.retry_flag = 'N'  -- LS-NO-RETRY",
+      "    ELSE",
+      "      SET errlog.error_severity = 1  -- EL-SEV-INFO",
+      "      SET request.retry_flag = 'N'  -- LS-NO-RETRY",
+      "    END IF",
+      "END SELECT"
+    ],
+    "pseudocode_statement_ids": [
+      ["SYS-PORTFOLIO-001-FIL-0056-STMT-000017"],
+      ["SYS-PORTFOLIO-001-FIL-0056-STMT-000017"],
+      ["SYS-PORTFOLIO-001-FIL-0056-STMT-000034"],
+      ["SYS-PORTFOLIO-001-FIL-0056-STMT-000035"],
+      ["SYS-PORTFOLIO-001-FIL-0056-STMT-000017"],
+      ["SYS-PORTFOLIO-001-FIL-0056-STMT-000032"],
+      ["SYS-PORTFOLIO-001-FIL-0056-STMT-000033"],
+      ["SYS-PORTFOLIO-001-FIL-0056-STMT-000017"],
+      ["SYS-PORTFOLIO-001-FIL-0056-STMT-000036"],
+      ["SYS-PORTFOLIO-001-FIL-0056-STMT-000037"],
+      ["SYS-PORTFOLIO-001-FIL-0056-STMT-000017"],
+      ["SYS-PORTFOLIO-001-FIL-0056-STMT-000038"],
+      ["SYS-PORTFOLIO-001-FIL-0056-STMT-000039"],
+      ["SYS-PORTFOLIO-001-FIL-0056-STMT-000017"],
+      ["SYS-PORTFOLIO-001-FIL-0056-STMT-000031"],
+      ["SYS-PORTFOLIO-001-FIL-0056-STMT-000058"],
+      ["SYS-PORTFOLIO-001-FIL-0056-STMT-000059"],
+      ["SYS-PORTFOLIO-001-FIL-0056-STMT-000031"],
+      ["SYS-PORTFOLIO-001-FIL-0056-STMT-000056"],
+      ["SYS-PORTFOLIO-001-FIL-0056-STMT-000057"],
+      ["SYS-PORTFOLIO-001-FIL-0056-STMT-000031"],
+      ["SYS-PORTFOLIO-001-FIL-0056-STMT-000017"]
+    ],
+    "pseudocode_text": "SELECT CASE request.sqlcode  -- EVALUATE LS-SQLCODE against the WS-ERROR-CATEGORIES constants\n  WHEN -911 (deadlock, WS-DEADLOCK), -913 (timeout, WS-TIMEOUT):\n    SET errlog.error_severity = 2  -- EL-SEV-WARN\n    SET request.retry_flag = 'Y'  -- LS-SHOULD-RETRY: caller may retry\n  WHEN -30081 (connection error, WS-CONNECTION-ERROR):\n    SET errlog.error_severity = 4  -- EL-SEV-SEVERE\n    SET request.retry_flag = 'N'  -- LS-NO-RETRY\n  WHEN -803 (duplicate key, WS-DUP-KEY):\n    SET errlog.error_severity = 1  -- EL-SEV-INFO\n    SET request.retry_flag = 'N'  -- LS-NO-RETRY\n  WHEN +100 (not found, WS-NOT-FOUND):\n    SET errlog.error_severity = 1  -- EL-SEV-INFO\n    SET request.retry_flag = 'N'  -- LS-NO-RETRY\n  ELSE:\n    IF request.sqlcode < 0 THEN\n      SET errlog.error_severity = 3  -- EL-SEV-ERROR\n      SET request.retry_flag = 'N'  -- LS-NO-RETRY\n    ELSE\n      SET errlog.error_severity = 1  -- EL-SEV-INFO\n      SET request.retry_flag = 'N'  -- LS-NO-RETRY\n    END IF\nEND SELECT",
+    "statement_ids": ["SYS-PORTFOLIO-001-FIL-0056-STMT-000017", "SYS-PORTFOLIO-001-FIL-0056-STMT-000034", "SYS-PORTFOLIO-001-FIL-0056-STMT-000035", "SYS-PORTFOLIO-001-FIL-0056-STMT-000032", "SYS-PORTFOLIO-001-FIL-0056-STMT-000033", "SYS-PORTFOLIO-001-FIL-0056-STMT-000036", "SYS-PORTFOLIO-001-FIL-0056-STMT-000037", "SYS-PORTFOLIO-001-FIL-0056-STMT-000038", "SYS-PORTFOLIO-001-FIL-0056-STMT-000039", "SYS-PORTFOLIO-001-FIL-0056-STMT-000031", "SYS-PORTFOLIO-001-FIL-0056-STMT-000058", "SYS-PORTFOLIO-001-FIL-0056-STMT-000059", "SYS-PORTFOLIO-001-FIL-0056-STMT-000056", "SYS-PORTFOLIO-001-FIL-0056-STMT-000057"],
+    "untranslated_statement_ids": [],
+    "field_references": ["LS-SQLCODE", "WS-DEADLOCK", "WS-TIMEOUT", "WS-CONNECTION-ERROR", "WS-DUP-KEY", "WS-NOT-FOUND", "EL-ERROR-SEVERITY", "LS-SHOULD-RETRY", "LS-NO-RETRY"],
+    "field_reference_ids": [
+      {"name": "LS-SQLCODE", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0056-FLD-000012", "target_kind": "field", "candidate_ids": []},
+      {"name": "WS-DEADLOCK", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0056-FLD-000001", "target_kind": "field", "candidate_ids": []},
+      {"name": "WS-TIMEOUT", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0056-FLD-000002", "target_kind": "field", "candidate_ids": []},
+      {"name": "WS-CONNECTION-ERROR", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0056-FLD-000003", "target_kind": "field", "candidate_ids": []},
+      {"name": "WS-DUP-KEY", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0056-FLD-000004", "target_kind": "field", "candidate_ids": []},
+      {"name": "WS-NOT-FOUND", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0056-FLD-000005", "target_kind": "field", "candidate_ids": []},
+      {"name": "EL-ERROR-SEVERITY", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0016-FLD-000025", "target_kind": "field", "candidate_ids": []},
+      {"name": "LS-SHOULD-RETRY", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0056-FLD-000018", "target_kind": "condition", "candidate_ids": []},
+      {"name": "LS-NO-RETRY", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0056-FLD-000019", "target_kind": "condition", "candidate_ids": []}
+    ],
+    "calls_made": [],
+    "calls_made_ids": [],
+    "complexity_score": 8,
+    "has_unresolved_statements": false,
+    "annotations": [
+      {"line": 101, "statement_id": "SYS-PORTFOLIO-001-FIL-0056-STMT-000017", "note": "The WHEN objects are WORKING-STORAGE constants with VALUE clauses (WS-DEADLOCK -911, WS-TIMEOUT -913, WS-CONNECTION-ERROR -30081, WS-DUP-KEY -803, WS-NOT-FOUND +100); no statement in the program changes them."},
+      {"line": 102, "statement_id": "SYS-PORTFOLIO-001-FIL-0056-STMT-000017", "note": "WHEN WS-DEADLOCK immediately followed by WHEN WS-TIMEOUT: both values share the same body (lines 104-105)."},
+      {"line": 104, "statement_id": "SYS-PORTFOLIO-001-FIL-0056-STMT-000034", "note": "EL-ERROR-SEVERITY 88-levels: EL-SEV-INFO=1, EL-SEV-WARN=2, EL-SEV-ERROR=3, EL-SEV-SEVERE=4."}
+    ]
+  },
+  {
+    "name": "1200-INSERT-ERROR",
+    "paragraph_id": "SYS-PORTFOLIO-001-FIL-0056-PAR-0004",
+    "section": null,
+    "section_id": null,
+    "line_range": [126, 139],
+    "pseudocode": [
+      "SQL INSERT new row INTO table ERRLOG VALUES (host structure ws_errlog_record)",
+      "IF sqlcode = 0 THEN  -- CHECK SQLCODE (SQLCODE is a precompiler SQLCA item, not defined in the repository)",
+      "  SET request.return_code = 0",
+      "ELSE",
+      "  SET err_text = 'Error logging to ERRLOG'",
+      "  CALL 9000-error-routine",
+      "END IF"
+    ],
+    "pseudocode_statement_ids": [
+      ["SYS-PORTFOLIO-001-FIL-0056-STMT-000018"],
+      ["SYS-PORTFOLIO-001-FIL-0056-STMT-000019"],
+      ["SYS-PORTFOLIO-001-FIL-0056-STMT-000042"],
+      ["SYS-PORTFOLIO-001-FIL-0056-STMT-000019"],
+      ["SYS-PORTFOLIO-001-FIL-0056-STMT-000040"],
+      ["SYS-PORTFOLIO-001-FIL-0056-STMT-000041"],
+      ["SYS-PORTFOLIO-001-FIL-0056-STMT-000019"]
+    ],
+    "pseudocode_text": "SQL INSERT new row INTO table ERRLOG VALUES (host structure ws_errlog_record)\nIF sqlcode = 0 THEN  -- CHECK SQLCODE (SQLCODE is a precompiler SQLCA item, not defined in the repository)\n  SET request.return_code = 0\nELSE\n  SET err_text = 'Error logging to ERRLOG'\n  CALL 9000-error-routine\nEND IF",
+    "statement_ids": ["SYS-PORTFOLIO-001-FIL-0056-STMT-000018", "SYS-PORTFOLIO-001-FIL-0056-STMT-000019", "SYS-PORTFOLIO-001-FIL-0056-STMT-000042", "SYS-PORTFOLIO-001-FIL-0056-STMT-000040", "SYS-PORTFOLIO-001-FIL-0056-STMT-000041"],
+    "untranslated_statement_ids": [],
+    "field_references": ["WS-ERRLOG-REC", "SQLCODE", "LS-RETURN-CODE", "ERR-TEXT"],
+    "field_reference_ids": [
+      {"name": "WS-ERRLOG-REC", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0056-REC-0001", "target_kind": "record", "candidate_ids": []},
+      {"name": "SQLCODE", "qualifiers": [], "resolution": "UNRESOLVED", "target_id": null, "target_kind": null, "candidate_ids": []},
+      {"name": "LS-RETURN-CODE", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0056-FLD-000016", "target_kind": "field", "candidate_ids": []},
+      {"name": "ERR-TEXT", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0007-FLD-000017", "target_kind": "field", "candidate_ids": []}
+    ],
+    "calls_made": ["9000-ERROR-ROUTINE"],
+    "calls_made_ids": [
+      {"name": "9000-ERROR-ROUTINE", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0056-PAR-0007", "section_id": null}
+    ],
+    "complexity_score": 2,
+    "has_unresolved_statements": false,
+    "annotations": [
+      {"line": 127, "statement_id": "SYS-PORTFOLIO-001-FIL-0056-STMT-000018", "note": "Embedded SQL INSERT with a host structure :WS-ERRLOG-REC and no column list; the column mapping depends on the ERRLOG table definition, which is not in the repository. The host name is shared by two 01 items after COPY REPLACING (see trace_issues).", "ambiguous": true},
+      {"line": 132, "statement_id": "SYS-PORTFOLIO-001-FIL-0056-STMT-000019", "note": "SQLCODE check branch; SQLCODE has no Field ID."}
+    ]
+  },
+  {
+    "name": "2000-DIAGNOSE-ERROR",
+    "paragraph_id": "SYS-PORTFOLIO-001-FIL-0056-PAR-0005",
+    "section": null,
+    "section_id": null,
+    "line_range": [140, 170],
+    "pseudocode": [
+      "SELECT CASE request.sqlcode",
+      "  WHEN -911 (deadlock, WS-DEADLOCK):",
+      "    SET request.error_text = 'Deadlock detected - retry transaction'",
+      "    SET request.return_code = 4",
+      "  WHEN -913 (timeout, WS-TIMEOUT):",
+      "    SET request.error_text = 'Timeout occurred - retry transaction'",
+      "    SET request.return_code = 4",
+      "  WHEN -30081 (connection error, WS-CONNECTION-ERROR):",
+      "    SET request.error_text = 'DB2 connection error - check availability'",
+      "    SET request.return_code = 12",
+      "  WHEN -803 (duplicate key, WS-DUP-KEY):",
+      "    SET request.error_text = 'Duplicate key violation'",
+      "    SET request.return_code = 8",
+      "  ELSE:  -- also reached for +100 (not found): this EVALUATE has no WHEN WS-NOT-FOUND",
+      "    IF request.sqlcode < 0 THEN",
+      "      SET request.error_text = 'Unhandled DB2 error'",
+      "      SET request.return_code = 12",
+      "    ELSE",
+      "      SET request.error_text = 'DB2 warning condition'",
+      "      SET request.return_code = 4",
+      "    END IF",
+      "END SELECT"
+    ],
+    "pseudocode_statement_ids": [
+      ["SYS-PORTFOLIO-001-FIL-0056-STMT-000020"],
+      ["SYS-PORTFOLIO-001-FIL-0056-STMT-000020"],
+      ["SYS-PORTFOLIO-001-FIL-0056-STMT-000046"],
+      ["SYS-PORTFOLIO-001-FIL-0056-STMT-000047"],
+      ["SYS-PORTFOLIO-001-FIL-0056-STMT-000020"],
+      ["SYS-PORTFOLIO-001-FIL-0056-STMT-000050"],
+      ["SYS-PORTFOLIO-001-FIL-0056-STMT-000051"],
+      ["SYS-PORTFOLIO-001-FIL-0056-STMT-000020"],
+      ["SYS-PORTFOLIO-001-FIL-0056-STMT-000044"],
+      ["SYS-PORTFOLIO-001-FIL-0056-STMT-000045"],
+      ["SYS-PORTFOLIO-001-FIL-0056-STMT-000020"],
+      ["SYS-PORTFOLIO-001-FIL-0056-STMT-000048"],
+      ["SYS-PORTFOLIO-001-FIL-0056-STMT-000049"],
+      ["SYS-PORTFOLIO-001-FIL-0056-STMT-000020"],
+      ["SYS-PORTFOLIO-001-FIL-0056-STMT-000043"],
+      ["SYS-PORTFOLIO-001-FIL-0056-STMT-000062"],
+      ["SYS-PORTFOLIO-001-FIL-0056-STMT-000063"],
+      ["SYS-PORTFOLIO-001-FIL-0056-STMT-000043"],
+      ["SYS-PORTFOLIO-001-FIL-0056-STMT-000060"],
+      ["SYS-PORTFOLIO-001-FIL-0056-STMT-000061"],
+      ["SYS-PORTFOLIO-001-FIL-0056-STMT-000043"],
+      ["SYS-PORTFOLIO-001-FIL-0056-STMT-000020"]
+    ],
+    "pseudocode_text": "SELECT CASE request.sqlcode\n  WHEN -911 (deadlock, WS-DEADLOCK):\n    SET request.error_text = 'Deadlock detected - retry transaction'\n    SET request.return_code = 4\n  WHEN -913 (timeout, WS-TIMEOUT):\n    SET request.error_text = 'Timeout occurred - retry transaction'\n    SET request.return_code = 4\n  WHEN -30081 (connection error, WS-CONNECTION-ERROR):\n    SET request.error_text = 'DB2 connection error - check availability'\n    SET request.return_code = 12\n  WHEN -803 (duplicate key, WS-DUP-KEY):\n    SET request.error_text = 'Duplicate key violation'\n    SET request.return_code = 8\n  ELSE:  -- also reached for +100 (not found): this EVALUATE has no WHEN WS-NOT-FOUND\n    IF request.sqlcode < 0 THEN\n      SET request.error_text = 'Unhandled DB2 error'\n      SET request.return_code = 12\n    ELSE\n      SET request.error_text = 'DB2 warning condition'\n      SET request.return_code = 4\n    END IF\nEND SELECT",
+    "statement_ids": ["SYS-PORTFOLIO-001-FIL-0056-STMT-000020", "SYS-PORTFOLIO-001-FIL-0056-STMT-000046", "SYS-PORTFOLIO-001-FIL-0056-STMT-000047", "SYS-PORTFOLIO-001-FIL-0056-STMT-000050", "SYS-PORTFOLIO-001-FIL-0056-STMT-000051", "SYS-PORTFOLIO-001-FIL-0056-STMT-000044", "SYS-PORTFOLIO-001-FIL-0056-STMT-000045", "SYS-PORTFOLIO-001-FIL-0056-STMT-000048", "SYS-PORTFOLIO-001-FIL-0056-STMT-000049", "SYS-PORTFOLIO-001-FIL-0056-STMT-000043", "SYS-PORTFOLIO-001-FIL-0056-STMT-000062", "SYS-PORTFOLIO-001-FIL-0056-STMT-000063", "SYS-PORTFOLIO-001-FIL-0056-STMT-000060", "SYS-PORTFOLIO-001-FIL-0056-STMT-000061"],
+    "untranslated_statement_ids": [],
+    "field_references": ["LS-SQLCODE", "WS-DEADLOCK", "WS-TIMEOUT", "WS-CONNECTION-ERROR", "WS-DUP-KEY", "LS-ERROR-TEXT", "LS-RETURN-CODE"],
+    "field_reference_ids": [
+      {"name": "LS-SQLCODE", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0056-FLD-000012", "target_kind": "field", "candidate_ids": []},
+      {"name": "WS-DEADLOCK", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0056-FLD-000001", "target_kind": "field", "candidate_ids": []},
+      {"name": "WS-TIMEOUT", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0056-FLD-000002", "target_kind": "field", "candidate_ids": []},
+      {"name": "WS-CONNECTION-ERROR", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0056-FLD-000003", "target_kind": "field", "candidate_ids": []},
+      {"name": "WS-DUP-KEY", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0056-FLD-000004", "target_kind": "field", "candidate_ids": []},
+      {"name": "LS-ERROR-TEXT", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0056-FLD-000014", "target_kind": "field", "candidate_ids": []},
+      {"name": "LS-RETURN-CODE", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0056-FLD-000016", "target_kind": "field", "candidate_ids": []}
+    ],
+    "calls_made": [],
+    "calls_made_ids": [],
+    "complexity_score": 8,
+    "has_unresolved_statements": false,
+    "annotations": [
+      {"line": 141, "statement_id": "SYS-PORTFOLIO-001-FIL-0056-STMT-000020", "note": "Unlike 1100-SET-SEVERITY, this EVALUATE has no WHEN WS-NOT-FOUND; SQLCODE +100 is handled by WHEN OTHER and, being non-negative, yields 'DB2 warning condition' with return code 4."},
+      {"line": 141, "note": "The DIAG function does not change the retry flag LS-RETRY-FLAG; only the LOG path (1100-SET-SEVERITY) sets it."}
+    ]
+  },
+  {
+    "name": "3000-RETRIEVE-ERROR",
+    "paragraph_id": "SYS-PORTFOLIO-001-FIL-0056-PAR-0006",
+    "section": null,
+    "section_id": null,
+    "line_range": [171, 195],
+    "pseudocode": [
+      "SQL SELECT error_message, error_severity, additional_info FROM table ERRLOG WHERE program_id = request.program_id AND error_timestamp = (latest error_timestamp in ERRLOG for that program_id) INTO errlog.error_message, errlog.error_severity, errlog.additional_info  -- subquery; see source lines 172-185 for full SQL",
+      "IF sqlcode = 0 THEN  -- CHECK SQLCODE",
+      "  SET request.error_text = errlog.error_message",
+      "  SET request.return_code = errlog.error_severity",
+      "ELSE",
+      "  SET request.error_text = 'No error history found'",
+      "  SET request.return_code = 4",
+      "END IF"
+    ],
+    "pseudocode_statement_ids": [
+      ["SYS-PORTFOLIO-001-FIL-0056-STMT-000021"],
+      ["SYS-PORTFOLIO-001-FIL-0056-STMT-000022"],
+      ["SYS-PORTFOLIO-001-FIL-0056-STMT-000054"],
+      ["SYS-PORTFOLIO-001-FIL-0056-STMT-000055"],
+      ["SYS-PORTFOLIO-001-FIL-0056-STMT-000022"],
+      ["SYS-PORTFOLIO-001-FIL-0056-STMT-000052"],
+      ["SYS-PORTFOLIO-001-FIL-0056-STMT-000053"],
+      ["SYS-PORTFOLIO-001-FIL-0056-STMT-000022"]
+    ],
+    "pseudocode_text": "SQL SELECT error_message, error_severity, additional_info FROM table ERRLOG WHERE program_id = request.program_id AND error_timestamp = (latest error_timestamp in ERRLOG for that program_id) INTO errlog.error_message, errlog.error_severity, errlog.additional_info  -- subquery; see source lines 172-185 for full SQL\nIF sqlcode = 0 THEN  -- CHECK SQLCODE\n  SET request.error_text = errlog.error_message\n  SET request.return_code = errlog.error_severity\nELSE\n  SET request.error_text = 'No error history found'\n  SET request.return_code = 4\nEND IF",
+    "statement_ids": ["SYS-PORTFOLIO-001-FIL-0056-STMT-000021", "SYS-PORTFOLIO-001-FIL-0056-STMT-000022", "SYS-PORTFOLIO-001-FIL-0056-STMT-000054", "SYS-PORTFOLIO-001-FIL-0056-STMT-000055", "SYS-PORTFOLIO-001-FIL-0056-STMT-000052", "SYS-PORTFOLIO-001-FIL-0056-STMT-000053"],
+    "untranslated_statement_ids": [],
+    "field_references": ["EL-ERROR-MESSAGE", "EL-ERROR-SEVERITY", "EL-ADDITIONAL-INFO", "LS-PROGRAM-ID", "SQLCODE", "LS-ERROR-TEXT", "LS-RETURN-CODE"],
+    "field_reference_ids": [
+      {"name": "EL-ERROR-MESSAGE", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0016-FLD-000031", "target_kind": "field", "candidate_ids": []},
+      {"name": "EL-ERROR-SEVERITY", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0016-FLD-000025", "target_kind": "field", "candidate_ids": []},
+      {"name": "EL-ADDITIONAL-INFO", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0016-FLD-000035", "target_kind": "field", "candidate_ids": []},
+      {"name": "LS-PROGRAM-ID", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0056-FLD-000010", "target_kind": "field", "candidate_ids": []},
+      {"name": "SQLCODE", "qualifiers": [], "resolution": "UNRESOLVED", "target_id": null, "target_kind": null, "candidate_ids": []},
+      {"name": "LS-ERROR-TEXT", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0056-FLD-000014", "target_kind": "field", "candidate_ids": []},
+      {"name": "LS-RETURN-CODE", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0056-FLD-000016", "target_kind": "field", "candidate_ids": []}
+    ],
+    "calls_made": [],
+    "calls_made_ids": [],
+    "complexity_score": 2,
+    "has_unresolved_statements": false,
+    "annotations": [
+      {"line": 172, "statement_id": "SYS-PORTFOLIO-001-FIL-0056-STMT-000021", "note": "SQL with a correlated MAX(ERROR_TIMESTAMP) subquery, summarised; see source lines 172-185."},
+      {"line": 188, "statement_id": "SYS-PORTFOLIO-001-FIL-0056-STMT-000054", "note": "EL-ERROR-MESSAGE is PIC X(200) and LS-ERROR-TEXT is PIC X(80): only the first 80 characters are returned to the caller."},
+      {"line": 187, "statement_id": "SYS-PORTFOLIO-001-FIL-0056-STMT-000022", "note": "Any non-zero SQLCODE (not found, or any SQL error) is reported as 'No error history found' with return code 4."}
+    ]
+  },
+  {
+    "name": "9000-ERROR-ROUTINE",
+    "paragraph_id": "SYS-PORTFOLIO-001-FIL-0056-PAR-0007",
+    "section": null,
+    "section_id": null,
+    "line_range": [196, 200],
+    "pseudocode": [
+      "SET err_program = 'DB2ERR'",
+      "SET request.return_code = 12",
+      "CALL program ERRPROC",
+      "  PASSING: err_message  -- common error block from copybook ERRHAND (ERR-PROGRAM, ERR-TEXT, ...); subprogram: error processor"
+    ],
+    "pseudocode_statement_ids": [
+      ["SYS-PORTFOLIO-001-FIL-0056-STMT-000023"],
+      ["SYS-PORTFOLIO-001-FIL-0056-STMT-000024"],
+      ["SYS-PORTFOLIO-001-FIL-0056-STMT-000025"],
+      ["SYS-PORTFOLIO-001-FIL-0056-STMT-000025"]
+    ],
+    "pseudocode_text": "SET err_program = 'DB2ERR'\nSET request.return_code = 12\nCALL program ERRPROC\n  PASSING: err_message  -- common error block from copybook ERRHAND (ERR-PROGRAM, ERR-TEXT, ...); subprogram: error processor",
+    "statement_ids": ["SYS-PORTFOLIO-001-FIL-0056-STMT-000023", "SYS-PORTFOLIO-001-FIL-0056-STMT-000024", "SYS-PORTFOLIO-001-FIL-0056-STMT-000025"],
+    "untranslated_statement_ids": [],
+    "field_references": ["ERR-PROGRAM", "LS-RETURN-CODE", "ERR-MESSAGE"],
+    "field_reference_ids": [
+      {"name": "ERR-PROGRAM", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0007-FLD-000013", "target_kind": "field", "candidate_ids": []},
+      {"name": "LS-RETURN-CODE", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0056-FLD-000016", "target_kind": "field", "candidate_ids": []},
+      {"name": "ERR-MESSAGE", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0007-REC-0003", "target_kind": "record", "candidate_ids": []}
+    ],
+    "calls_made": [],
+    "calls_made_ids": [],
+    "complexity_score": 1,
+    "has_unresolved_statements": false,
+    "annotations": [
+      {"line": 199, "statement_id": "SYS-PORTFOLIO-001-FIL-0056-STMT-000025", "note": "Static CALL to external program ERRPROC (outside this execution's scope); its processing is not traced here. Control returns to the statement after the PERFORM that invoked 9000-ERROR-ROUTINE."}
+    ]
+  }
+],
+"unresolved_statements": [],
+"pseudocode_issues": [
+  {"severity": "info", "type": "id_unresolved", "kind": "field", "name": "SQLCODE", "paragraphs": ["1200-INSERT-ERROR", "3000-RETRIEVE-ERROR"], "message": "SQLCODE: resolve-field-references UNRESOLVED; target_id null."},
+  {"severity": "info", "type": "external_call", "name": "ERRPROC", "statement_id": "SYS-PORTFOLIO-001-FIL-0056-STMT-000025", "message": "Static CALL 'ERRPROC' recorded with its literal target; not traced into."},
+  {"severity": "info", "type": "complex_sql", "line": 172, "statement_id": "SYS-PORTFOLIO-001-FIL-0056-STMT-000021", "message": "SELECT with subquery summarised; see source lines 172-185."}
+]
+}

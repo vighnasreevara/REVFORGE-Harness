@@ -1,0 +1,490 @@
+{
+"program_summary": {"program_id": "DB2HNDL", "file_id": "SYS-PORTFOLIO-001-FIL-0080", "logic_file": "program_logic/SYS-PORTFOLIO-001-FIL-0080__DB2HNDL_logic.json", "logic_status": "partial", "paragraphs_translated": 11, "execution_paths": 1, "branches": 3, "loops": 1, "dead_code_confirmed": 0, "goto_annotations": 0, "unresolvable_paths": 1, "unresolved_ids": 3},
+"program_id": "DB2HNDL",
+"system_id": "SYS-PORTFOLIO-001",
+"file_id": "SYS-PORTFOLIO-001-FIL-0080",
+"path_id": "SYS-PORTFOLIO-001-PATH-0080",
+"relative_path": "src/templates/database/db2-handling.cbl",
+"parse_run_id": "PRUN-20261023T023803Z-ACC2",
+"upstream": {
+  "verification": {
+    "verdict": "VALID_PARTIAL",
+    "verdict_reasons": ["V2, V3 and V4 consistent", "Agent 2 parse_status 'partial': PERFORM target 2310-PROCESS-CURSOR-ROW (line 174) is not declared in the program; traced as an unresolvable path, not filled"],
+    "v1": {"raw_structure": "present", "parse_status": "partial", "program_layout": "present", "program_layout_data_run_id": "DRUN-20261024T215053Z-ACC1",
+           "copybook_layouts": [{"copybook": "SQLCA", "copybook_file_id": "SYS-PORTFOLIO-001-FIL-0017", "layout": "present", "expanded_at_lines": [18]}],
+           "unresolved_copy_stubs": 0},
+    "v2_file_identities": {
+      "program_entries": {"require_completed": ["parser", "data"], "entries": ["raw_structure|SYS-PORTFOLIO-001-FIL-0080", "data_layout|SYS-PORTFOLIO-001-FIL-0080"], "result": "batched with the RPTAUD00, RTNCDE00, DB2CONN and ERRHANDL program entries: checked 10, ok 10, problems [], duplicates [], consistent true"},
+      "copybook_entries": {"require_completed": ["data"], "entries": ["data_layout|SYS-PORTFOLIO-001-FIL-0017"], "result": "batched with copybooks FIL-0005, FIL-0007, FIL-0013 and FIL-0015: checked 5, ok 5, problems [], duplicates [], consistent true"},
+      "consistent": true
+    },
+    "v3_structure_identities": {"sections_checked": 2, "paragraphs_checked": 11, "statements_checked": 42, "edges_checked": 15, "registered_edges": 15, "section_problems": [], "paragraph_problems": [], "statement_problems": [], "edge_problems": [], "invalid_registered_edges": [], "registered_not_in_json": {"missing_count": 0}, "duplicate_ids_in_json": [], "consistent": true, "note": "section names sent: CONFIGURATION for SEC-0001; null for WORKING-STORAGE. No edge sent for the PERFORM_INLINE at line 165 or for the unresolved PERFORM 2310-PROCESS-CURSOR-ROW (line 174)."},
+    "v4_data_identities": [
+      {"file_id": "SYS-PORTFOLIO-001-FIL-0080", "layout": "program", "records_checked": 3, "fields_checked": 16, "expansions_checked": 1, "record_problems": [], "field_problems": [], "expansion_problems": [], "copybook_records_in_program": 0, "registered_not_in_json": {"missing_count": 0}, "duplicate_ids_in_json": [], "consistent": true, "note": "copy_expansions holder_id is null in the layout (EXEC SQL INCLUDE directly in WORKING-STORAGE); sent with holder_id = the layout's section_id SYS-PORTFOLIO-001-FIL-0080-SEC-0002"},
+      {"file_id": "SYS-PORTFOLIO-001-FIL-0017", "layout": "copybook SQLCA", "records_checked": 1, "fields_checked": 7, "expansions_checked": 0, "record_problems": [], "field_problems": [], "expansion_problems": [], "copybook_records_in_program": 0, "registered_not_in_json": {"missing_count": 0}, "duplicate_ids_in_json": [], "consistent": true}
+    ]
+  }
+},
+"execution_traces": [
+  {
+    "entry_point": "0000-MAIN",
+    "entry_point_id": "SYS-PORTFOLIO-001-FIL-0080-PAR-0001",
+    "entry_type": "batch_main",
+    "steps": [
+      {"step": 1, "paragraph": "0000-MAIN", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0080-PAR-0001", "action": "PERFORM", "target": "1000-INITIALIZE", "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0080-PAR-0002", "target_section_id": null, "condition": null, "line": 67, "statement_id": "SYS-PORTFOLIO-001-FIL-0080-STMT-000001"},
+      {"step": 2, "paragraph": "1000-INITIALIZE", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0080-PAR-0002", "action": "PERFORM", "target": "9000-CHECK-SQL-STATUS", "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0080-PAR-0010", "target_section_id": null, "condition": null, "line": 83, "statement_id": "SYS-PORTFOLIO-001-FIL-0080-STMT-000007"},
+      {"step": 3, "paragraph": "9000-CHECK-SQL-STATUS", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0080-PAR-0010", "action": "PERFORM", "target": "9100-ROLLBACK", "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0080-PAR-0011", "target_section_id": null,
+       "condition": {"text": "SQLCODE NOT = 0 AND SQLCODE < 0", "fields": ["SQLCODE"], "field_ids": [{"name": "SQLCODE", "qualifiers": [], "resolution": "UNRESOLVED", "target_id": null, "target_kind": null, "candidate_ids": []}]}, "line": 231, "statement_id": "SYS-PORTFOLIO-001-FIL-0080-STMT-000039"},
+      {"step": 4, "paragraph": "9000-CHECK-SQL-STATUS", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0080-PAR-0010", "action": "PERFORM", "target": "3000-TERMINATE", "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0080-PAR-0009", "target_section_id": null,
+       "condition": {"text": "SQLCODE NOT = 0 AND SQLCODE < 0", "fields": ["SQLCODE"], "field_ids": [{"name": "SQLCODE", "qualifiers": [], "resolution": "UNRESOLVED", "target_id": null, "target_kind": null, "candidate_ids": []}]}, "line": 233, "statement_id": "SYS-PORTFOLIO-001-FIL-0080-STMT-000041"},
+      {"step": 5, "paragraph": "9000-CHECK-SQL-STATUS", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0080-PAR-0010", "action": "GOBACK", "target": null, "target_paragraph_id": null, "target_section_id": null,
+       "condition": {"text": "SQLCODE NOT = 0 AND SQLCODE < 0", "fields": ["SQLCODE"], "field_ids": [{"name": "SQLCODE", "qualifiers": [], "resolution": "UNRESOLVED", "target_id": null, "target_kind": null, "candidate_ids": []}]}, "line": 234, "statement_id": "SYS-PORTFOLIO-001-FIL-0080-STMT-000042"},
+      {"step": 6, "paragraph": "0000-MAIN", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0080-PAR-0001", "action": "PERFORM", "target": "2000-PROCESS", "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0080-PAR-0003", "target_section_id": null, "condition": null, "line": 68, "statement_id": "SYS-PORTFOLIO-001-FIL-0080-STMT-000002"},
+      {"step": 7, "paragraph": "2000-PROCESS", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0080-PAR-0003", "action": "PERFORM", "target": "2100-INSERT-EXAMPLE", "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0080-PAR-0004", "target_section_id": null, "condition": null, "line": 90, "statement_id": "SYS-PORTFOLIO-001-FIL-0080-STMT-000008"},
+      {"step": 8, "paragraph": "2100-INSERT-EXAMPLE", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0080-PAR-0004", "action": "PERFORM", "target": "9000-CHECK-SQL-STATUS", "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0080-PAR-0010", "target_section_id": null, "condition": null, "line": 120, "statement_id": "SYS-PORTFOLIO-001-FIL-0080-STMT-000017"},
+      {"step": 9, "paragraph": "2000-PROCESS", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0080-PAR-0003", "action": "PERFORM", "target": "2200-SELECT-EXAMPLE", "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0080-PAR-0005", "target_section_id": null, "condition": null, "line": 91, "statement_id": "SYS-PORTFOLIO-001-FIL-0080-STMT-000009"},
+      {"step": 10, "paragraph": "2200-SELECT-EXAMPLE", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0080-PAR-0005", "action": "PERFORM", "target": "9000-CHECK-SQL-STATUS", "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0080-PAR-0010", "target_section_id": null, "condition": null, "line": 144, "statement_id": "SYS-PORTFOLIO-001-FIL-0080-STMT-000019"},
+      {"step": 11, "paragraph": "2000-PROCESS", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0080-PAR-0003", "action": "PERFORM", "target": "2300-CURSOR-EXAMPLE", "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0080-PAR-0006", "target_section_id": null, "condition": null, "line": 92, "statement_id": "SYS-PORTFOLIO-001-FIL-0080-STMT-000010"},
+      {"step": 12, "paragraph": "2300-CURSOR-EXAMPLE", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0080-PAR-0006", "action": "PERFORM_INLINE", "target": "2300-CURSOR-EXAMPLE", "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0080-PAR-0006", "target_section_id": null,
+       "condition": {"text": "SQLCODE = +100", "fields": ["SQLCODE"], "field_ids": [{"name": "SQLCODE", "qualifiers": [], "resolution": "UNRESOLVED", "target_id": null, "target_kind": null, "candidate_ids": []}], "test_time": "BEFORE", "loop_type": "WHILE", "termination_pattern": "FILE_EXHAUSTION_LOOP"}, "line": 165, "statement_id": "SYS-PORTFOLIO-001-FIL-0080-STMT-000022"},
+      {"step": 13, "paragraph": "2300-CURSOR-EXAMPLE", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0080-PAR-0006", "action": "unresolvable", "target": "2310-PROCESS-CURSOR-ROW", "target_paragraph_id": null, "target_section_id": null,
+       "condition": {"text": "SQLCODE = +0", "fields": ["SQLCODE"], "field_ids": [{"name": "SQLCODE", "qualifiers": [], "resolution": "UNRESOLVED", "target_id": null, "target_kind": null, "candidate_ids": []}]}, "line": 174, "statement_id": "SYS-PORTFOLIO-001-FIL-0080-STMT-000038"},
+      {"step": 14, "paragraph": "2000-PROCESS", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0080-PAR-0003", "action": "PERFORM", "target": "2400-UPDATE-EXAMPLE", "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0080-PAR-0007", "target_section_id": null, "condition": null, "line": 93, "statement_id": "SYS-PORTFOLIO-001-FIL-0080-STMT-000011"},
+      {"step": 15, "paragraph": "2400-UPDATE-EXAMPLE", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0080-PAR-0007", "action": "PERFORM", "target": "9000-CHECK-SQL-STATUS", "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0080-PAR-0010", "target_section_id": null, "condition": null, "line": 194, "statement_id": "SYS-PORTFOLIO-001-FIL-0080-STMT-000025"},
+      {"step": 16, "paragraph": "2000-PROCESS", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0080-PAR-0003", "action": "PERFORM", "target": "2500-DELETE-EXAMPLE", "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0080-PAR-0008", "target_section_id": null, "condition": null, "line": 94, "statement_id": "SYS-PORTFOLIO-001-FIL-0080-STMT-000012"},
+      {"step": 17, "paragraph": "2500-DELETE-EXAMPLE", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0080-PAR-0008", "action": "PERFORM", "target": "9000-CHECK-SQL-STATUS", "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0080-PAR-0010", "target_section_id": null, "condition": null, "line": 206, "statement_id": "SYS-PORTFOLIO-001-FIL-0080-STMT-000027"},
+      {"step": 18, "paragraph": "0000-MAIN", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0080-PAR-0001", "action": "PERFORM", "target": "3000-TERMINATE", "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0080-PAR-0009", "target_section_id": null, "condition": null, "line": 69, "statement_id": "SYS-PORTFOLIO-001-FIL-0080-STMT-000003"},
+      {"step": 19, "paragraph": "0000-MAIN", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0080-PAR-0001", "action": "GOBACK", "target": null, "target_paragraph_id": null, "target_section_id": null, "condition": null, "line": 70, "statement_id": "SYS-PORTFOLIO-001-FIL-0080-STMT-000004"}
+    ]
+  }
+],
+"branch_map": [
+  {
+    "paragraph": "2300-CURSOR-EXAMPLE", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0080-PAR-0006",
+    "branches": [
+      {"type": "IF", "line": 173, "statement_id": "SYS-PORTFOLIO-001-FIL-0080-STMT-000033", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0080-PAR-0006",
+       "condition_text": "SQLCODE = +0", "condition_fields": ["SQLCODE"],
+       "condition_field_ids": [{"name": "SQLCODE", "qualifiers": [], "resolution": "UNRESOLVED", "target_id": null, "target_kind": null, "candidate_ids": []}],
+       "has_else": false, "then_line_range": [174, 174], "else_line_range": null, "end_if_line": 175, "nested_depth": 1,
+       "outcomes": [
+         {"label": "THEN", "line_range": [174, 174], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0080-STMT-000038"]},
+         {"label": "NOT TAKEN (no ELSE)", "line_range": null, "statement_ids": []}]}
+    ]
+  },
+  {
+    "paragraph": "9000-CHECK-SQL-STATUS", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0080-PAR-0010",
+    "branches": [
+      {"type": "IF", "line": 226, "statement_id": "SYS-PORTFOLIO-001-FIL-0080-STMT-000030", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0080-PAR-0010",
+       "condition_text": "SQLCODE NOT = 0", "condition_fields": ["SQLCODE"],
+       "condition_field_ids": [{"name": "SQLCODE", "qualifiers": [], "resolution": "UNRESOLVED", "target_id": null, "target_kind": null, "candidate_ids": []}],
+       "has_else": false, "then_line_range": [227, 235], "else_line_range": null, "end_if_line": 236, "nested_depth": 1,
+       "outcomes": [
+         {"label": "THEN", "line_range": [227, 235], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0080-STMT-000034", "SYS-PORTFOLIO-001-FIL-0080-STMT-000035", "SYS-PORTFOLIO-001-FIL-0080-STMT-000036", "SYS-PORTFOLIO-001-FIL-0080-STMT-000037"]},
+         {"label": "NOT TAKEN (no ELSE)", "line_range": null, "statement_ids": []}]},
+      {"type": "IF", "line": 230, "statement_id": "SYS-PORTFOLIO-001-FIL-0080-STMT-000037", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0080-PAR-0010",
+       "condition_text": "SQLCODE < 0", "condition_fields": ["SQLCODE"],
+       "condition_field_ids": [{"name": "SQLCODE", "qualifiers": [], "resolution": "UNRESOLVED", "target_id": null, "target_kind": null, "candidate_ids": []}],
+       "has_else": false, "then_line_range": [231, 234], "else_line_range": null, "end_if_line": 235, "nested_depth": 2,
+       "outcomes": [
+         {"label": "THEN", "line_range": [231, 234], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0080-STMT-000039", "SYS-PORTFOLIO-001-FIL-0080-STMT-000040", "SYS-PORTFOLIO-001-FIL-0080-STMT-000041", "SYS-PORTFOLIO-001-FIL-0080-STMT-000042"]},
+         {"label": "NOT TAKEN (no ELSE)", "line_range": null, "statement_ids": []}]}
+    ]
+  }
+],
+"loops": [
+  {"paragraph": "2300-CURSOR-EXAMPLE", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0080-PAR-0006", "target": "2300-CURSOR-EXAMPLE", "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0080-PAR-0006", "type": "PERFORM_INLINE",
+   "statement_id": "SYS-PORTFOLIO-001-FIL-0080-STMT-000022", "line": 165, "body_line_range": [166, 175], "end_perform_line": 176,
+   "condition_text": "SQLCODE = +100", "test_time": "BEFORE", "loop_type": "WHILE",
+   "condition_fields": ["SQLCODE"],
+   "condition_field_ids": [{"name": "SQLCODE", "qualifiers": [], "resolution": "UNRESOLVED", "target_id": null, "target_kind": null, "candidate_ids": []}],
+   "termination_pattern": "FILE_EXHAUSTION_LOOP",
+   "modifying_statement_ids": ["SYS-PORTFOLIO-001-FIL-0080-STMT-000032"]}
+],
+"dead_code_confirmed": [],
+"unresolvable_paths": [
+  {"statement_id": "SYS-PORTFOLIO-001-FIL-0080-STMT-000038", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0080-PAR-0006", "target": "2310-PROCESS-CURSOR-ROW"}
+],
+"trace_issues": [
+  {"severity": "info", "type": "upstream_issue", "upstream_agent": "2_parser", "upstream_type": "misplaced_comment_indicator", "lines": [1], "message": "Line 1 has '*' in column 8 (column 7 blank); treated as a comment."},
+  {"severity": "info", "type": "upstream_issue", "upstream_agent": "2_parser", "upstream_type": "exec_sql_in_data_division", "lines": [18, 23, 30], "message": "EXEC SQL INCLUDE SQLCA (line 18) recorded as SQL_INCLUDE copy stub; EXEC SQL DECLARE PORTFOLIO TABLE (lines 23-30) recorded as a declare-table stub; no BEGIN/END DECLARE SECTION."},
+  {"severity": "info", "type": "upstream_issue", "upstream_agent": "2_parser", "upstream_type": "unresolved_perform_targets", "targets": ["2310-PROCESS-CURSOR-ROW"], "message": "1 PERFORM target is not declared in this program; parse_status partial."},
+  {"severity": "info", "type": "upstream_issue", "upstream_agent": "2_parser", "upstream_type": "template_source", "message": "Source is under src/templates; file db2-handling.cbl, PROGRAM-ID DB2HNDL."},
+  {"severity": "info", "type": "upstream_issue", "upstream_agent": "3_data", "upstream_type": "misplaced_comment_indicator", "line": 1, "message": "Line 1 has '*' in column 8 instead of column 7; skipped as a comment."},
+  {"severity": "info", "type": "upstream_issue", "upstream_agent": "3_data", "upstream_type": "exec_sql_declare_table", "line": 23, "message": "EXEC SQL DECLARE PORTFOLIO TABLE (lines 23-30) is a DB2 declaration, not a COBOL data item; not registered."},
+  {"severity": "info", "type": "upstream_issue", "upstream_agent": "3_data", "upstream_type": "value_exceeds_pic_length", "line": 58, "message": "FILLER_0058 (WS-DB2-ERROR-MSG.FILLER#1) PIC X(20) has VALUE 'DB2 ERROR - SQLCODE: ' (21 characters); recorded as literal text only."},
+  {"severity": "info", "type": "upstream_issue", "upstream_agent": "3_data", "upstream_type": "unresolved_copy_stub", "file_id": "SYS-PORTFOLIO-001-FIL-0017", "message": "Copybook SQLCA defines only SQL-STATUS-CODES; the precompiler SQLCA structure (SQLCODE, SQLERRMC, ...) is not in any registered layout. This explains why SQLCODE and SQLERRMC have no Field ID."},
+  {"severity": "warning", "type": "unresolvable_perform_target", "line": 174, "statement_id": "SYS-PORTFOLIO-001-FIL-0080-STMT-000038", "message": "PERFORM 2310-PROCESS-CURSOR-ROW: target not in the CFG; recorded as an unresolvable step. The per-row processing of the cursor loop is unknown."},
+  {"severity": "info", "type": "field_id_unresolved", "name": "SQLCODE", "lines": [165, 173, 226, 227, 230], "message": "resolve-field-references UNRESOLVED; precompiler SQLCA field; target_id null."},
+  {"severity": "info", "type": "field_id_unresolved", "name": "SQLERRMC", "lines": [228], "message": "resolve-field-references UNRESOLVED; precompiler SQLCA field; target_id null."},
+  {"severity": "warning", "type": "loop_termination", "line": 165, "statement_id": "SYS-PORTFOLIO-001-FIL-0080-STMT-000022", "message": "The cursor loop ends only when SQLCODE = +100 (no more rows), set by the FETCH at line 166. The condition is first tested with the SQLCODE left by OPEN PORTFOLIO_CURSOR. A negative SQLCODE from FETCH is not checked inside the loop (9000-CHECK-SQL-STATUS is not performed in 2300), so a persistent FETCH error would repeat the loop without ending it."},
+  {"severity": "info", "type": "early_termination_path", "line": 230, "statement_id": "SYS-PORTFOLIO-001-FIL-0080-STMT-000037", "message": "When SQLCODE < 0 after any checked SQL statement, 9000-CHECK-SQL-STATUS rolls back, sets RETURN-CODE 8, performs 3000-TERMINATE (COMMIT WORK and CONNECT RESET) and ends the program with GOBACK at line 234; the remaining steps of the trace are not executed. Steps 3-5 are listed once under the first PERFORM 9000-CHECK-SQL-STATUS; every later PERFORM of 9000 (steps 8, 10, 15, 17) can take the same path."},
+  {"severity": "info", "type": "special_register", "lines": [232], "message": "RETURN-CODE is the COBOL special register; not looked up."}
+],
+"program_narrative": "Program DB2HNDL is a batch DB2 template program that demonstrates standard embedded-SQL operations against the PORTFOLIO table. It clears its host variables and null indicators, connects to database 'sample', then runs example operations in fixed order: insert portfolio 'PORT00001' named 'TEST PORTFOLIO' with the current date and timestamp, total value 0 and status 'A'; select that portfolio's columns into host variables; open a cursor over all portfolios with status 'A' and fetch rows until no more rows remain, performing 2310-PROCESS-CURSOR-ROW for each row fetched (that paragraph is not present in the source, so per-row processing is unknown); set the portfolio's status to 'I'; and delete it. Each operation except the cursor is followed by a common SQL check that displays the SQLCODE and error text on any non-zero SQLCODE and, for a negative SQLCODE, rolls back, sets return code 8, commits and disconnects, and ends the program. On normal completion the program commits the work and resets the connection.",
+"paragraphs": [
+  {
+    "name": "0000-MAIN", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0080-PAR-0001", "section": null, "section_id": null, "line_range": [66, 71],
+    "pseudocode": [
+      "-- Main control paragraph",
+      "CALL 1000-initialize",
+      "CALL 2000-process",
+      "CALL 3000-terminate",
+      "RETURN to caller (or terminate if main program)  -- GOBACK"
+    ],
+    "pseudocode_statement_ids": [
+      [],
+      ["SYS-PORTFOLIO-001-FIL-0080-STMT-000001"],
+      ["SYS-PORTFOLIO-001-FIL-0080-STMT-000002"],
+      ["SYS-PORTFOLIO-001-FIL-0080-STMT-000003"],
+      ["SYS-PORTFOLIO-001-FIL-0080-STMT-000004"]
+    ],
+    "pseudocode_text": "-- Main control paragraph\nCALL 1000-initialize\nCALL 2000-process\nCALL 3000-terminate\nRETURN to caller (or terminate if main program)  -- GOBACK",
+    "statement_ids": ["SYS-PORTFOLIO-001-FIL-0080-STMT-000001", "SYS-PORTFOLIO-001-FIL-0080-STMT-000002", "SYS-PORTFOLIO-001-FIL-0080-STMT-000003", "SYS-PORTFOLIO-001-FIL-0080-STMT-000004"],
+    "untranslated_statement_ids": [],
+    "field_references": [], "field_reference_ids": [],
+    "calls_made": ["1000-INITIALIZE", "2000-PROCESS", "3000-TERMINATE"],
+    "calls_made_ids": [
+      {"name": "1000-INITIALIZE", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0080-PAR-0002", "section_id": null},
+      {"name": "2000-PROCESS", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0080-PAR-0003", "section_id": null},
+      {"name": "3000-TERMINATE", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0080-PAR-0009", "section_id": null}
+    ],
+    "complexity_score": 1, "has_unresolved_statements": false, "annotations": []
+  },
+  {
+    "name": "1000-INITIALIZE", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0080-PAR-0002", "section": null, "section_id": null, "line_range": [72, 85],
+    "pseudocode": [
+      "-- Connect to DB2 and initialize work areas",
+      "CLEAR portfolio_host_variables (HV-PORTFOLIO) and null_indicators (HV-NULL-INDS)  -- INITIALIZE",
+      "SQL CONNECT TO database 'sample'",
+      "CALL 9000-check-sql-status  -- CHECK SQLCODE"
+    ],
+    "pseudocode_statement_ids": [
+      [],
+      ["SYS-PORTFOLIO-001-FIL-0080-STMT-000005"],
+      ["SYS-PORTFOLIO-001-FIL-0080-STMT-000006"],
+      ["SYS-PORTFOLIO-001-FIL-0080-STMT-000007"]
+    ],
+    "pseudocode_text": "-- Connect to DB2 and initialize work areas\nCLEAR portfolio_host_variables (HV-PORTFOLIO) and null_indicators (HV-NULL-INDS)  -- INITIALIZE\nSQL CONNECT TO database 'sample'\nCALL 9000-check-sql-status  -- CHECK SQLCODE",
+    "statement_ids": ["SYS-PORTFOLIO-001-FIL-0080-STMT-000005", "SYS-PORTFOLIO-001-FIL-0080-STMT-000006", "SYS-PORTFOLIO-001-FIL-0080-STMT-000007"],
+    "untranslated_statement_ids": [],
+    "field_references": ["HV-PORTFOLIO", "HV-NULL-INDS"],
+    "field_reference_ids": [
+      {"name": "HV-PORTFOLIO", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0080-REC-0001", "target_kind": "record", "candidate_ids": []},
+      {"name": "HV-NULL-INDS", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0080-REC-0002", "target_kind": "record", "candidate_ids": []}
+    ],
+    "calls_made": ["9000-CHECK-SQL-STATUS"],
+    "calls_made_ids": [{"name": "9000-CHECK-SQL-STATUS", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0080-PAR-0010", "section_id": null}],
+    "complexity_score": 1, "has_unresolved_statements": false,
+    "annotations": [
+      {"line": 80, "statement_id": "SYS-PORTFOLIO-001-FIL-0080-STMT-000006", "note": "CONNECT TO sample: 'sample' is written as a name in the SQL text (no host variable); recorded verbatim."}
+    ]
+  },
+  {
+    "name": "2000-PROCESS", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0080-PAR-0003", "section": null, "section_id": null, "line_range": [86, 96],
+    "pseudocode": [
+      "-- Example DB2 operations (template): each runs once, in order",
+      "CALL 2100-insert-example",
+      "CALL 2200-select-example",
+      "CALL 2300-cursor-example",
+      "CALL 2400-update-example",
+      "CALL 2500-delete-example"
+    ],
+    "pseudocode_statement_ids": [
+      [],
+      ["SYS-PORTFOLIO-001-FIL-0080-STMT-000008"],
+      ["SYS-PORTFOLIO-001-FIL-0080-STMT-000009"],
+      ["SYS-PORTFOLIO-001-FIL-0080-STMT-000010"],
+      ["SYS-PORTFOLIO-001-FIL-0080-STMT-000011"],
+      ["SYS-PORTFOLIO-001-FIL-0080-STMT-000012"]
+    ],
+    "pseudocode_text": "-- Example DB2 operations (template): each runs once, in order\nCALL 2100-insert-example\nCALL 2200-select-example\nCALL 2300-cursor-example\nCALL 2400-update-example\nCALL 2500-delete-example",
+    "statement_ids": ["SYS-PORTFOLIO-001-FIL-0080-STMT-000008", "SYS-PORTFOLIO-001-FIL-0080-STMT-000009", "SYS-PORTFOLIO-001-FIL-0080-STMT-000010", "SYS-PORTFOLIO-001-FIL-0080-STMT-000011", "SYS-PORTFOLIO-001-FIL-0080-STMT-000012"],
+    "untranslated_statement_ids": [],
+    "field_references": [], "field_reference_ids": [],
+    "calls_made": ["2100-INSERT-EXAMPLE", "2200-SELECT-EXAMPLE", "2300-CURSOR-EXAMPLE", "2400-UPDATE-EXAMPLE", "2500-DELETE-EXAMPLE"],
+    "calls_made_ids": [
+      {"name": "2100-INSERT-EXAMPLE", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0080-PAR-0004", "section_id": null},
+      {"name": "2200-SELECT-EXAMPLE", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0080-PAR-0005", "section_id": null},
+      {"name": "2300-CURSOR-EXAMPLE", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0080-PAR-0006", "section_id": null},
+      {"name": "2400-UPDATE-EXAMPLE", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0080-PAR-0007", "section_id": null},
+      {"name": "2500-DELETE-EXAMPLE", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0080-PAR-0008", "section_id": null}
+    ],
+    "complexity_score": 1, "has_unresolved_statements": false, "annotations": []
+  },
+  {
+    "name": "2100-INSERT-EXAMPLE", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0080-PAR-0004", "section": null, "section_id": null, "line_range": [97, 122],
+    "pseudocode": [
+      "-- Example INSERT operation",
+      "SET portfolio_id (HV-PORTFOLIO-ID) = 'PORT00001'",
+      "SET portfolio_name (HV-PORTFOLIO-NAME) = 'TEST PORTFOLIO'",
+      "CLEAR null indicators NI-PORTFOLIO-ID and NI-PORTFOLIO-NAME  -- initialise to zero (column values are not null)",
+      "SQL INSERT new row INTO PORTFOLIO",
+      "  COLUMNS: PORTFOLIO_ID, PORTFOLIO_NAME, CREATION_DATE, LAST_UPDATE_TS, TOTAL_VALUE, STATUS",
+      "  VALUES: portfolio_id, portfolio_name, CURRENT DATE, CURRENT TIMESTAMP, 0, 'A'",
+      "CALL 9000-check-sql-status  -- CHECK SQLCODE"
+    ],
+    "pseudocode_statement_ids": [
+      [],
+      ["SYS-PORTFOLIO-001-FIL-0080-STMT-000013"],
+      ["SYS-PORTFOLIO-001-FIL-0080-STMT-000014"],
+      ["SYS-PORTFOLIO-001-FIL-0080-STMT-000015"],
+      ["SYS-PORTFOLIO-001-FIL-0080-STMT-000016"],
+      ["SYS-PORTFOLIO-001-FIL-0080-STMT-000016"],
+      ["SYS-PORTFOLIO-001-FIL-0080-STMT-000016"],
+      ["SYS-PORTFOLIO-001-FIL-0080-STMT-000017"]
+    ],
+    "pseudocode_text": "-- Example INSERT operation\nSET portfolio_id (HV-PORTFOLIO-ID) = 'PORT00001'\nSET portfolio_name (HV-PORTFOLIO-NAME) = 'TEST PORTFOLIO'\nCLEAR null indicators NI-PORTFOLIO-ID and NI-PORTFOLIO-NAME  -- initialise to zero (column values are not null)\nSQL INSERT new row INTO PORTFOLIO\n  COLUMNS: PORTFOLIO_ID, PORTFOLIO_NAME, CREATION_DATE, LAST_UPDATE_TS, TOTAL_VALUE, STATUS\n  VALUES: portfolio_id, portfolio_name, CURRENT DATE, CURRENT TIMESTAMP, 0, 'A'\nCALL 9000-check-sql-status  -- CHECK SQLCODE",
+    "statement_ids": ["SYS-PORTFOLIO-001-FIL-0080-STMT-000013", "SYS-PORTFOLIO-001-FIL-0080-STMT-000014", "SYS-PORTFOLIO-001-FIL-0080-STMT-000015", "SYS-PORTFOLIO-001-FIL-0080-STMT-000016", "SYS-PORTFOLIO-001-FIL-0080-STMT-000017"],
+    "untranslated_statement_ids": [],
+    "field_references": ["HV-PORTFOLIO-ID", "HV-PORTFOLIO-NAME", "NI-PORTFOLIO-ID", "NI-PORTFOLIO-NAME"],
+    "field_reference_ids": [
+      {"name": "HV-PORTFOLIO-ID", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0080-FLD-000001", "target_kind": "field", "candidate_ids": []},
+      {"name": "HV-PORTFOLIO-NAME", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0080-FLD-000002", "target_kind": "field", "candidate_ids": []},
+      {"name": "NI-PORTFOLIO-ID", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0080-FLD-000007", "target_kind": "field", "candidate_ids": []},
+      {"name": "NI-PORTFOLIO-NAME", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0080-FLD-000008", "target_kind": "field", "candidate_ids": []}
+    ],
+    "calls_made": ["9000-CHECK-SQL-STATUS"],
+    "calls_made_ids": [{"name": "9000-CHECK-SQL-STATUS", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0080-PAR-0010", "section_id": null}],
+    "complexity_score": 1, "has_unresolved_statements": false,
+    "annotations": [
+      {"line": 101, "statement_id": "SYS-PORTFOLIO-001-FIL-0080-STMT-000013", "note": "Literal values 'PORT00001' and 'TEST PORTFOLIO' are hard-coded example data in the template source."}
+    ]
+  },
+  {
+    "name": "2200-SELECT-EXAMPLE", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0080-PAR-0005", "section": null, "section_id": null, "line_range": [123, 146],
+    "pseudocode": [
+      "-- Example SELECT operation",
+      "SQL SELECT PORTFOLIO_ID, PORTFOLIO_NAME, CREATION_DATE, LAST_UPDATE_TS, TOTAL_VALUE, STATUS",
+      "  FROM: PORTFOLIO table",
+      "  WHERE: PORTFOLIO_ID = portfolio_id (HV-PORTFOLIO-ID)",
+      "  INTO: HV-PORTFOLIO-ID, HV-PORTFOLIO-NAME, HV-CREATION-DATE, HV-LAST-UPDATE-TS, HV-TOTAL-VALUE, HV-STATUS (each with its NI-* null indicator)",
+      "CALL 9000-check-sql-status  -- CHECK SQLCODE"
+    ],
+    "pseudocode_statement_ids": [
+      [],
+      ["SYS-PORTFOLIO-001-FIL-0080-STMT-000018"],
+      ["SYS-PORTFOLIO-001-FIL-0080-STMT-000018"],
+      ["SYS-PORTFOLIO-001-FIL-0080-STMT-000018"],
+      ["SYS-PORTFOLIO-001-FIL-0080-STMT-000018"],
+      ["SYS-PORTFOLIO-001-FIL-0080-STMT-000019"]
+    ],
+    "pseudocode_text": "-- Example SELECT operation\nSQL SELECT PORTFOLIO_ID, PORTFOLIO_NAME, CREATION_DATE, LAST_UPDATE_TS, TOTAL_VALUE, STATUS\n  FROM: PORTFOLIO table\n  WHERE: PORTFOLIO_ID = portfolio_id (HV-PORTFOLIO-ID)\n  INTO: HV-PORTFOLIO-ID, HV-PORTFOLIO-NAME, HV-CREATION-DATE, HV-LAST-UPDATE-TS, HV-TOTAL-VALUE, HV-STATUS (each with its NI-* null indicator)\nCALL 9000-check-sql-status  -- CHECK SQLCODE",
+    "statement_ids": ["SYS-PORTFOLIO-001-FIL-0080-STMT-000018", "SYS-PORTFOLIO-001-FIL-0080-STMT-000019"],
+    "untranslated_statement_ids": [],
+    "field_references": ["HV-PORTFOLIO-ID", "NI-PORTFOLIO-ID", "HV-PORTFOLIO-NAME", "NI-PORTFOLIO-NAME", "HV-CREATION-DATE", "NI-CREATION-DATE", "HV-LAST-UPDATE-TS", "NI-LAST-UPDATE-TS", "HV-TOTAL-VALUE", "NI-TOTAL-VALUE", "HV-STATUS", "NI-STATUS"],
+    "field_reference_ids": [
+      {"name": "HV-PORTFOLIO-ID", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0080-FLD-000001", "target_kind": "field", "candidate_ids": []},
+      {"name": "NI-PORTFOLIO-ID", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0080-FLD-000007", "target_kind": "field", "candidate_ids": []},
+      {"name": "HV-PORTFOLIO-NAME", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0080-FLD-000002", "target_kind": "field", "candidate_ids": []},
+      {"name": "NI-PORTFOLIO-NAME", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0080-FLD-000008", "target_kind": "field", "candidate_ids": []},
+      {"name": "HV-CREATION-DATE", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0080-FLD-000003", "target_kind": "field", "candidate_ids": []},
+      {"name": "NI-CREATION-DATE", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0080-FLD-000009", "target_kind": "field", "candidate_ids": []},
+      {"name": "HV-LAST-UPDATE-TS", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0080-FLD-000004", "target_kind": "field", "candidate_ids": []},
+      {"name": "NI-LAST-UPDATE-TS", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0080-FLD-000010", "target_kind": "field", "candidate_ids": []},
+      {"name": "HV-TOTAL-VALUE", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0080-FLD-000005", "target_kind": "field", "candidate_ids": []},
+      {"name": "NI-TOTAL-VALUE", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0080-FLD-000011", "target_kind": "field", "candidate_ids": []},
+      {"name": "HV-STATUS", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0080-FLD-000006", "target_kind": "field", "candidate_ids": []},
+      {"name": "NI-STATUS", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0080-FLD-000012", "target_kind": "field", "candidate_ids": []}
+    ],
+    "calls_made": ["9000-CHECK-SQL-STATUS"],
+    "calls_made_ids": [{"name": "9000-CHECK-SQL-STATUS", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0080-PAR-0010", "section_id": null}],
+    "complexity_score": 1, "has_unresolved_statements": false, "annotations": []
+  },
+  {
+    "name": "2300-CURSOR-EXAMPLE", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0080-PAR-0006", "section": null, "section_id": null, "line_range": [147, 182],
+    "pseudocode": [
+      "-- Example cursor operations",
+      "DECLARE SQL CURSOR portfolio_cursor FOR SELECT PORTFOLIO_ID, PORTFOLIO_NAME, STATUS FROM PORTFOLIO WHERE STATUS = 'A' (read only)",
+      "OPEN cursor portfolio_cursor and execute query",
+      "WHILE SQLCODE != +100 DO  -- PERFORM UNTIL SQLCODE = +100 (no more rows); tested before each pass",
+      "  SQL FETCH next row from portfolio_cursor INTO HV-PORTFOLIO-ID, HV-PORTFOLIO-NAME, HV-STATUS (with null indicators)",
+      "  IF SQLCODE = 0 THEN  -- CHECK SQLCODE: row fetched",
+      "    CALL 2310-process-cursor-row  !! UNRESOLVED: paragraph 2310-PROCESS-CURSOR-ROW is not defined in this program",
+      "  END IF",
+      "END WHILE",
+      "CLOSE cursor portfolio_cursor"
+    ],
+    "pseudocode_statement_ids": [
+      [],
+      ["SYS-PORTFOLIO-001-FIL-0080-STMT-000020"],
+      ["SYS-PORTFOLIO-001-FIL-0080-STMT-000021"],
+      ["SYS-PORTFOLIO-001-FIL-0080-STMT-000022"],
+      ["SYS-PORTFOLIO-001-FIL-0080-STMT-000032"],
+      ["SYS-PORTFOLIO-001-FIL-0080-STMT-000033"],
+      ["SYS-PORTFOLIO-001-FIL-0080-STMT-000038"],
+      ["SYS-PORTFOLIO-001-FIL-0080-STMT-000033"],
+      ["SYS-PORTFOLIO-001-FIL-0080-STMT-000022"],
+      ["SYS-PORTFOLIO-001-FIL-0080-STMT-000023"]
+    ],
+    "pseudocode_text": "-- Example cursor operations\nDECLARE SQL CURSOR portfolio_cursor FOR SELECT PORTFOLIO_ID, PORTFOLIO_NAME, STATUS FROM PORTFOLIO WHERE STATUS = 'A' (read only)\nOPEN cursor portfolio_cursor and execute query\nWHILE SQLCODE != +100 DO  -- PERFORM UNTIL SQLCODE = +100 (no more rows); tested before each pass\n  SQL FETCH next row from portfolio_cursor INTO HV-PORTFOLIO-ID, HV-PORTFOLIO-NAME, HV-STATUS (with null indicators)\n  IF SQLCODE = 0 THEN  -- CHECK SQLCODE: row fetched\n    CALL 2310-process-cursor-row  !! UNRESOLVED: paragraph 2310-PROCESS-CURSOR-ROW is not defined in this program\n  END IF\nEND WHILE\nCLOSE cursor portfolio_cursor",
+    "statement_ids": ["SYS-PORTFOLIO-001-FIL-0080-STMT-000020", "SYS-PORTFOLIO-001-FIL-0080-STMT-000021", "SYS-PORTFOLIO-001-FIL-0080-STMT-000022", "SYS-PORTFOLIO-001-FIL-0080-STMT-000032", "SYS-PORTFOLIO-001-FIL-0080-STMT-000033", "SYS-PORTFOLIO-001-FIL-0080-STMT-000038", "SYS-PORTFOLIO-001-FIL-0080-STMT-000023"],
+    "untranslated_statement_ids": [],
+    "field_references": ["SQLCODE", "HV-PORTFOLIO-ID", "NI-PORTFOLIO-ID", "HV-PORTFOLIO-NAME", "NI-PORTFOLIO-NAME", "HV-STATUS", "NI-STATUS"],
+    "field_reference_ids": [
+      {"name": "SQLCODE", "qualifiers": [], "resolution": "UNRESOLVED", "target_id": null, "target_kind": null, "candidate_ids": []},
+      {"name": "HV-PORTFOLIO-ID", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0080-FLD-000001", "target_kind": "field", "candidate_ids": []},
+      {"name": "NI-PORTFOLIO-ID", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0080-FLD-000007", "target_kind": "field", "candidate_ids": []},
+      {"name": "HV-PORTFOLIO-NAME", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0080-FLD-000002", "target_kind": "field", "candidate_ids": []},
+      {"name": "NI-PORTFOLIO-NAME", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0080-FLD-000008", "target_kind": "field", "candidate_ids": []},
+      {"name": "HV-STATUS", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0080-FLD-000006", "target_kind": "field", "candidate_ids": []},
+      {"name": "NI-STATUS", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0080-FLD-000012", "target_kind": "field", "candidate_ids": []}
+    ],
+    "calls_made": ["2310-PROCESS-CURSOR-ROW"],
+    "calls_made_ids": [{"name": "2310-PROCESS-CURSOR-ROW", "paragraph_id": null, "section_id": null}],
+    "complexity_score": 5, "has_unresolved_statements": true,
+    "annotations": [
+      {"line": 174, "statement_id": "SYS-PORTFOLIO-001-FIL-0080-STMT-000038", "note": "PERFORM target 2310-PROCESS-CURSOR-ROW does not exist in the source; what is done with each fetched row cannot be traced. Gap reported, not filled."},
+      {"line": 165, "statement_id": "SYS-PORTFOLIO-001-FIL-0080-STMT-000022", "note": "No SQL error check inside the loop or after CLOSE; 9000-CHECK-SQL-STATUS is not performed in this paragraph."},
+      {"line": 151, "statement_id": "SYS-PORTFOLIO-001-FIL-0080-STMT-000020", "note": "DECLARE CURSOR is a declaration, not an executable statement; the query runs at OPEN."}
+    ]
+  },
+  {
+    "name": "2400-UPDATE-EXAMPLE", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0080-PAR-0007", "section": null, "section_id": null, "line_range": [183, 196],
+    "pseudocode": [
+      "-- Example UPDATE operation",
+      "SQL UPDATE PORTFOLIO SET STATUS = 'I', LAST_UPDATE_TS = CURRENT TIMESTAMP WHERE PORTFOLIO_ID = portfolio_id (HV-PORTFOLIO-ID)",
+      "CALL 9000-check-sql-status  -- CHECK SQLCODE"
+    ],
+    "pseudocode_statement_ids": [
+      [],
+      ["SYS-PORTFOLIO-001-FIL-0080-STMT-000024"],
+      ["SYS-PORTFOLIO-001-FIL-0080-STMT-000025"]
+    ],
+    "pseudocode_text": "-- Example UPDATE operation\nSQL UPDATE PORTFOLIO SET STATUS = 'I', LAST_UPDATE_TS = CURRENT TIMESTAMP WHERE PORTFOLIO_ID = portfolio_id (HV-PORTFOLIO-ID)\nCALL 9000-check-sql-status  -- CHECK SQLCODE",
+    "statement_ids": ["SYS-PORTFOLIO-001-FIL-0080-STMT-000024", "SYS-PORTFOLIO-001-FIL-0080-STMT-000025"],
+    "untranslated_statement_ids": [],
+    "field_references": ["HV-PORTFOLIO-ID"],
+    "field_reference_ids": [
+      {"name": "HV-PORTFOLIO-ID", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0080-FLD-000001", "target_kind": "field", "candidate_ids": []}
+    ],
+    "calls_made": ["9000-CHECK-SQL-STATUS"],
+    "calls_made_ids": [{"name": "9000-CHECK-SQL-STATUS", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0080-PAR-0010", "section_id": null}],
+    "complexity_score": 1, "has_unresolved_statements": false,
+    "annotations": [
+      {"line": 187, "statement_id": "SYS-PORTFOLIO-001-FIL-0080-STMT-000024", "note": "HV-PORTFOLIO-ID holds whatever the last FETCH of 2300-CURSOR-EXAMPLE (or the SELECT of 2200) left in it; the updated row depends on runtime data."}
+    ]
+  },
+  {
+    "name": "2500-DELETE-EXAMPLE", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0080-PAR-0008", "section": null, "section_id": null, "line_range": [197, 208],
+    "pseudocode": [
+      "-- Example DELETE operation",
+      "SQL DELETE from PORTFOLIO WHERE PORTFOLIO_ID = portfolio_id (HV-PORTFOLIO-ID)",
+      "CALL 9000-check-sql-status  -- CHECK SQLCODE"
+    ],
+    "pseudocode_statement_ids": [
+      [],
+      ["SYS-PORTFOLIO-001-FIL-0080-STMT-000026"],
+      ["SYS-PORTFOLIO-001-FIL-0080-STMT-000027"]
+    ],
+    "pseudocode_text": "-- Example DELETE operation\nSQL DELETE from PORTFOLIO WHERE PORTFOLIO_ID = portfolio_id (HV-PORTFOLIO-ID)\nCALL 9000-check-sql-status  -- CHECK SQLCODE",
+    "statement_ids": ["SYS-PORTFOLIO-001-FIL-0080-STMT-000026", "SYS-PORTFOLIO-001-FIL-0080-STMT-000027"],
+    "untranslated_statement_ids": [],
+    "field_references": ["HV-PORTFOLIO-ID"],
+    "field_reference_ids": [
+      {"name": "HV-PORTFOLIO-ID", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0080-FLD-000001", "target_kind": "field", "candidate_ids": []}
+    ],
+    "calls_made": ["9000-CHECK-SQL-STATUS"],
+    "calls_made_ids": [{"name": "9000-CHECK-SQL-STATUS", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0080-PAR-0010", "section_id": null}],
+    "complexity_score": 1, "has_unresolved_statements": false, "annotations": []
+  },
+  {
+    "name": "3000-TERMINATE", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0080-PAR-0009", "section": null, "section_id": null, "line_range": [209, 221],
+    "pseudocode": [
+      "-- Disconnect from DB2 and cleanup",
+      "SQL COMMIT WORK  -- commit the unit of work",
+      "SQL CONNECT RESET  -- disconnect from DB2"
+    ],
+    "pseudocode_statement_ids": [
+      [],
+      ["SYS-PORTFOLIO-001-FIL-0080-STMT-000028"],
+      ["SYS-PORTFOLIO-001-FIL-0080-STMT-000029"]
+    ],
+    "pseudocode_text": "-- Disconnect from DB2 and cleanup\nSQL COMMIT WORK  -- commit the unit of work\nSQL CONNECT RESET  -- disconnect from DB2",
+    "statement_ids": ["SYS-PORTFOLIO-001-FIL-0080-STMT-000028", "SYS-PORTFOLIO-001-FIL-0080-STMT-000029"],
+    "untranslated_statement_ids": [],
+    "field_references": [], "field_reference_ids": [],
+    "calls_made": [], "calls_made_ids": [],
+    "complexity_score": 2, "has_unresolved_statements": false,
+    "annotations": [
+      {"line": 213, "statement_id": "SYS-PORTFOLIO-001-FIL-0080-STMT-000028", "note": "SQLCODE of COMMIT and CONNECT RESET is not checked. Also performed from 9000-CHECK-SQL-STATUS after a ROLLBACK on a negative SQLCODE."}
+    ]
+  },
+  {
+    "name": "9000-CHECK-SQL-STATUS", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0080-PAR-0010", "section": null, "section_id": null, "line_range": [222, 238],
+    "pseudocode": [
+      "-- SQL error checking",
+      "IF SQLCODE != 0 THEN",
+      "  SET sqlcode_display (WS-SQLCODE-DISP) = SQLCODE  -- edited PIC -999",
+      "  SET sql_error_text (WS-SQLERRM) = SQLERRMC  -- DB2 error message tokens",
+      "  DISPLAY error_message_line (WS-DB2-ERROR-MSG)  -- 'DB2 ERROR - SQLCODE: ' + code + ', SQLERRM: ' + text",
+      "  IF SQLCODE < 0 THEN  -- error (positive codes are warnings: displayed only)",
+      "    CALL 9100-rollback",
+      "    SET RETURN-CODE = 8",
+      "    CALL 3000-terminate",
+      "    RETURN to caller (or terminate if main program)  -- GOBACK: ends the program here",
+      "  END IF",
+      "END IF"
+    ],
+    "pseudocode_statement_ids": [
+      [],
+      ["SYS-PORTFOLIO-001-FIL-0080-STMT-000030"],
+      ["SYS-PORTFOLIO-001-FIL-0080-STMT-000034"],
+      ["SYS-PORTFOLIO-001-FIL-0080-STMT-000035"],
+      ["SYS-PORTFOLIO-001-FIL-0080-STMT-000036"],
+      ["SYS-PORTFOLIO-001-FIL-0080-STMT-000037"],
+      ["SYS-PORTFOLIO-001-FIL-0080-STMT-000039"],
+      ["SYS-PORTFOLIO-001-FIL-0080-STMT-000040"],
+      ["SYS-PORTFOLIO-001-FIL-0080-STMT-000041"],
+      ["SYS-PORTFOLIO-001-FIL-0080-STMT-000042"],
+      ["SYS-PORTFOLIO-001-FIL-0080-STMT-000037"],
+      ["SYS-PORTFOLIO-001-FIL-0080-STMT-000030"]
+    ],
+    "pseudocode_text": "-- SQL error checking\nIF SQLCODE != 0 THEN\n  SET sqlcode_display (WS-SQLCODE-DISP) = SQLCODE  -- edited PIC -999\n  SET sql_error_text (WS-SQLERRM) = SQLERRMC  -- DB2 error message tokens\n  DISPLAY error_message_line (WS-DB2-ERROR-MSG)  -- 'DB2 ERROR - SQLCODE: ' + code + ', SQLERRM: ' + text\n  IF SQLCODE < 0 THEN  -- error (positive codes are warnings: displayed only)\n    CALL 9100-rollback\n    SET RETURN-CODE = 8\n    CALL 3000-terminate\n    RETURN to caller (or terminate if main program)  -- GOBACK: ends the program here\n  END IF\nEND IF",
+    "statement_ids": ["SYS-PORTFOLIO-001-FIL-0080-STMT-000030", "SYS-PORTFOLIO-001-FIL-0080-STMT-000034", "SYS-PORTFOLIO-001-FIL-0080-STMT-000035", "SYS-PORTFOLIO-001-FIL-0080-STMT-000036", "SYS-PORTFOLIO-001-FIL-0080-STMT-000037", "SYS-PORTFOLIO-001-FIL-0080-STMT-000039", "SYS-PORTFOLIO-001-FIL-0080-STMT-000040", "SYS-PORTFOLIO-001-FIL-0080-STMT-000041", "SYS-PORTFOLIO-001-FIL-0080-STMT-000042"],
+    "untranslated_statement_ids": [],
+    "field_references": ["SQLCODE", "WS-SQLCODE-DISP", "SQLERRMC", "WS-SQLERRM", "WS-DB2-ERROR-MSG"],
+    "field_reference_ids": [
+      {"name": "SQLCODE", "qualifiers": [], "resolution": "UNRESOLVED", "target_id": null, "target_kind": null, "candidate_ids": []},
+      {"name": "WS-SQLCODE-DISP", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0080-FLD-000014", "target_kind": "field", "candidate_ids": []},
+      {"name": "SQLERRMC", "qualifiers": [], "resolution": "UNRESOLVED", "target_id": null, "target_kind": null, "candidate_ids": []},
+      {"name": "WS-SQLERRM", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0080-FLD-000016", "target_kind": "field", "candidate_ids": []},
+      {"name": "WS-DB2-ERROR-MSG", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0080-REC-0003", "target_kind": "record", "candidate_ids": []}
+    ],
+    "calls_made": ["9100-ROLLBACK", "3000-TERMINATE"],
+    "calls_made_ids": [
+      {"name": "9100-ROLLBACK", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0080-PAR-0011", "section_id": null},
+      {"name": "3000-TERMINATE", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0080-PAR-0009", "section_id": null}
+    ],
+    "complexity_score": 4, "has_unresolved_statements": false,
+    "annotations": [
+      {"line": 227, "statement_id": "SYS-PORTFOLIO-001-FIL-0080-STMT-000034", "note": "WS-SQLCODE-DISP is PIC -999 (sign and 3 digits); SQLCODE values with more than 3 digits (for example -30081) are truncated to their low-order 3 digits in the displayed message."},
+      {"line": 234, "statement_id": "SYS-PORTFOLIO-001-FIL-0080-STMT-000042", "note": "GOBACK inside a performed paragraph ends the program; control does not return to the PERFORM."}
+    ]
+  },
+  {
+    "name": "9100-ROLLBACK", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0080-PAR-0011", "section": null, "section_id": null, "line_range": [239, 246],
+    "pseudocode": [
+      "-- Rollback DB2 changes",
+      "SQL ROLLBACK WORK  -- undo uncommitted changes"
+    ],
+    "pseudocode_statement_ids": [
+      [],
+      ["SYS-PORTFOLIO-001-FIL-0080-STMT-000031"]
+    ],
+    "pseudocode_text": "-- Rollback DB2 changes\nSQL ROLLBACK WORK  -- undo uncommitted changes",
+    "statement_ids": ["SYS-PORTFOLIO-001-FIL-0080-STMT-000031"],
+    "untranslated_statement_ids": [],
+    "field_references": [], "field_reference_ids": [],
+    "calls_made": [], "calls_made_ids": [],
+    "complexity_score": 1, "has_unresolved_statements": false, "annotations": []
+  }
+],
+"unresolved_statements": [
+  {"statement_id": "SYS-PORTFOLIO-001-FIL-0080-STMT-000038", "paragraph": "2300-CURSOR-EXAMPLE", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0080-PAR-0006", "line": 174, "source_text": "PERFORM 2310-PROCESS-CURSOR-ROW", "reason": "PERFORM target not defined in the program; translated as a call with an !! UNRESOLVED flag"}
+],
+"pseudocode_issues": [
+  {"severity": "info", "type": "id_unresolved", "kind": "paragraph", "name": "2310-PROCESS-CURSOR-ROW", "paragraph": "2300-CURSOR-EXAMPLE", "message": "PERFORM target not in the CFG; calls_made_ids paragraph_id and section_id null."},
+  {"severity": "info", "type": "id_unresolved", "kind": "field", "name": "SQLCODE", "paragraphs": ["2300-CURSOR-EXAMPLE", "9000-CHECK-SQL-STATUS"], "message": "resolve-field-references UNRESOLVED; precompiler SQLCA field; target_id null."},
+  {"severity": "info", "type": "id_unresolved", "kind": "field", "name": "SQLERRMC", "paragraph": "9000-CHECK-SQL-STATUS", "message": "resolve-field-references UNRESOLVED; precompiler SQLCA field; target_id null."}
+]
+}

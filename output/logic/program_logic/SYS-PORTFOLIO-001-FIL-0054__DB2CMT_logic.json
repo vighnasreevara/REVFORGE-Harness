@@ -1,0 +1,705 @@
+{
+"program_summary": {"program_id": "DB2CMT", "file_id": "SYS-PORTFOLIO-001-FIL-0054", "logic_file": "program_logic/SYS-PORTFOLIO-001-FIL-0054__DB2CMT_logic.json", "logic_status": "partial", "paragraphs_translated": 10, "execution_paths": 1, "branches": 6, "loops": 0, "dead_code_confirmed": 0, "goto_annotations": 0, "unresolvable_paths": 0, "unresolved_ids": 1},
+"meta": {"generated_at": "2026-10-26T16:58:46Z", "agent_version": "4_logic@1.0", "source_artifacts": ["output/parser/parser_artifact.json", "output/parser/raw_structure/SYS-PORTFOLIO-001-FIL-0054__DB2CMT.json", "output/data/data_artifact.json", "output/data/data_layouts/SYS-PORTFOLIO-001-FIL-0054__DB2CMT_WS.json", "output/data/data_layouts/SYS-PORTFOLIO-001-FIL-0017__SQLCA.json", "output/data/data_layouts/SYS-PORTFOLIO-001-FIL-0015__DBPROC.json", "output/data/data_layouts/SYS-PORTFOLIO-001-FIL-0007__ERRHAND.json", "output/logic/program_logic/SYS-PORTFOLIO-001-FIL-0056__DB2ERR_logic.json"], "neo4j_access": "read-only"},
+"program_id": "DB2CMT",
+"system_id": "SYS-PORTFOLIO-001",
+"file_id": "SYS-PORTFOLIO-001-FIL-0054",
+"path_id": "SYS-PORTFOLIO-001-PATH-0054",
+"relative_path": "src/programs/common/DB2CMT.cbl",
+"parse_run_id": "PRUN-20261023T023803Z-ACC2",
+"data_run_id": "DRUN-20261024T215053Z-ACC1",
+"upstream": {
+  "verification": {
+    "verdict": "VALID",
+    "verdict_reasons": ["V2, V3 and V4 consistent; Agent 2 parse_status 'success'; copybook layouts SQLCA, DBPROC and ERRHAND present and consistent; no unresolved copy stubs"],
+    "v1": {"raw_structure": "present", "parse_status": "success", "program_layout": "present", "copybook_layouts": [{"copybook": "SQLCA", "copybook_file_id": "SYS-PORTFOLIO-001-FIL-0017", "layout": "present"}, {"copybook": "DBPROC", "copybook_file_id": "SYS-PORTFOLIO-001-FIL-0015", "layout": "present"}, {"copybook": "ERRHAND", "copybook_file_id": "SYS-PORTFOLIO-001-FIL-0007", "layout": "present"}], "unresolved_copy_stubs": 0},
+    "v2_file_identities": {
+      "program_entries": {"require_completed": ["parser", "data"], "entries": ["raw_structure|SYS-PORTFOLIO-001-FIL-0054", "data_layout|SYS-PORTFOLIO-001-FIL-0054"], "result": "batched with DB2ERR, DB2STAT and AUDPROC program entries: checked 8, ok 8, problems [], duplicates [], consistent true"},
+      "copybook_entries": {"require_completed": ["data"], "entries": ["data_layout|SYS-PORTFOLIO-001-FIL-0017", "data_layout|SYS-PORTFOLIO-001-FIL-0015", "data_layout|SYS-PORTFOLIO-001-FIL-0007"], "result": "batched with copybooks FIL-0016 and FIL-0005: checked 5, ok 5, problems [], duplicates [], consistent true"},
+      "consistent": true
+    },
+    "v3_structure_identities": {"sections_checked": 3, "paragraphs_checked": 10, "statements_checked": 56, "edges_checked": 12, "registered_edges": 12, "section_problems": [], "paragraph_problems": [], "statement_problems": [], "edge_problems": [], "invalid_registered_edges": [], "registered_not_in_json": {"missing_count": 0}, "duplicate_ids_in_json": [], "consistent": true, "note": "data-division section names were sent as null (raw_structure does not carry them); one relationship per resolved PERFORM_SIMPLE edge"},
+    "v4_data_identities": [
+      {"file_id": "SYS-PORTFOLIO-001-FIL-0054", "layout": "program", "records_checked": 4, "fields_checked": 20, "expansions_checked": 3, "record_problems": [], "field_problems": [], "expansion_problems": [], "copybook_records_in_program": 0, "registered_not_in_json": {"missing_count": 0}, "duplicate_ids_in_json": [], "consistent": true, "note": "the layout's copy_expansions carry holder_id null with section_id SYS-PORTFOLIO-001-FIL-0054-SEC-0002; that section_id (copied from the same entries) was sent as holder_id, and target_record_ids as expanded_record_ids"},
+      {"file_id": "SYS-PORTFOLIO-001-FIL-0017", "layout": "copybook SQLCA", "records_checked": 1, "fields_checked": 7, "expansions_checked": 0, "record_problems": [], "field_problems": [], "expansion_problems": [], "copybook_records_in_program": 0, "registered_not_in_json": {"missing_count": 0}, "duplicate_ids_in_json": [], "consistent": true, "note": "verified once in this execution"},
+      {"file_id": "SYS-PORTFOLIO-001-FIL-0015", "layout": "copybook DBPROC", "records_checked": 1, "fields_checked": 11, "expansions_checked": 0, "record_problems": [], "field_problems": [], "expansion_problems": [], "copybook_records_in_program": 0, "registered_not_in_json": {"missing_count": 0}, "duplicate_ids_in_json": [], "consistent": true, "note": "verified once in this execution"},
+      {"file_id": "SYS-PORTFOLIO-001-FIL-0007", "layout": "copybook ERRHAND", "records_checked": 5, "fields_checked": 25, "expansions_checked": 0, "record_problems": [], "field_problems": [], "expansion_problems": [], "copybook_records_in_program": 0, "registered_not_in_json": {"missing_count": 0}, "duplicate_ids_in_json": [], "consistent": true, "note": "verified once in this execution"}
+    ]
+  }
+},
+"execution_traces": [
+  {
+    "entry_point": "0000-MAIN",
+    "entry_point_id": "SYS-PORTFOLIO-001-FIL-0054-PAR-0001",
+    "entry_type": "called_subprogram",
+    "entry_note": "PROCEDURE DIVISION USING LS-COMMIT-REQUEST (line 52); the program ends with GOBACK. Steps are listed depth-first in execution order: steps of a performed paragraph follow the PERFORM step that invokes it.",
+    "steps": [
+      {"step": 1, "paragraph": "0000-MAIN", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0054-PAR-0001", "action": "EVALUATE", "target": null, "target_paragraph_id": null, "target_section_id": null, "condition": {"text": "EVALUATE TRUE", "fields": [], "field_ids": []}, "line": 54, "statement_id": "SYS-PORTFOLIO-001-FIL-0054-STMT-000001"},
+      {"step": 2, "paragraph": "0000-MAIN", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0054-PAR-0001", "action": "PERFORM", "target": "1000-INITIALIZE", "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0054-PAR-0002", "target_section_id": null,
+       "condition": {"text": "WHEN FUNC-INIT", "fields": ["FUNC-INIT"], "field_ids": [{"name": "FUNC-INIT", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0054-FLD-000005", "target_kind": "condition", "candidate_ids": []}]}, "line": 56, "statement_id": "SYS-PORTFOLIO-001-FIL-0054-STMT-000025"},
+      {"step": 3, "paragraph": "0000-MAIN", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0054-PAR-0001", "action": "PERFORM", "target": "2000-COMMIT", "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0054-PAR-0003", "target_section_id": null,
+       "condition": {"text": "WHEN FUNC-CMIT", "fields": ["FUNC-CMIT"], "field_ids": [{"name": "FUNC-CMIT", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0054-FLD-000006", "target_kind": "condition", "candidate_ids": []}]}, "line": 58, "statement_id": "SYS-PORTFOLIO-001-FIL-0054-STMT-000024"},
+      {"step": 4, "paragraph": "2000-COMMIT", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0054-PAR-0003", "action": "IF", "target": null, "target_paragraph_id": null, "target_section_id": null,
+       "condition": {"text": "LS-RECORDS-PROC >= LS-COMMIT-FREQ OR LS-FORCE-COMMIT", "fields": ["LS-RECORDS-PROC", "LS-COMMIT-FREQ", "LS-FORCE-COMMIT"], "field_ids": [{"name": "LS-RECORDS-PROC", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0054-FLD-000013", "target_kind": "field", "candidate_ids": []}, {"name": "LS-COMMIT-FREQ", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0054-FLD-000014", "target_kind": "field", "candidate_ids": []}, {"name": "LS-FORCE-COMMIT", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0054-FLD-000016", "target_kind": "condition", "candidate_ids": []}]}, "line": 81, "statement_id": "SYS-PORTFOLIO-001-FIL-0054-STMT-000005"},
+      {"step": 5, "paragraph": "2000-COMMIT", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0054-PAR-0003", "action": "PERFORM", "target": "2100-ISSUE-COMMIT", "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0054-PAR-0004", "target_section_id": null,
+       "condition": {"text": "THEN of LS-RECORDS-PROC >= LS-COMMIT-FREQ OR LS-FORCE-COMMIT", "fields": ["LS-RECORDS-PROC", "LS-COMMIT-FREQ", "LS-FORCE-COMMIT"], "field_ids": [{"name": "LS-RECORDS-PROC", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0054-FLD-000013", "target_kind": "field", "candidate_ids": []}, {"name": "LS-COMMIT-FREQ", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0054-FLD-000014", "target_kind": "field", "candidate_ids": []}, {"name": "LS-FORCE-COMMIT", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0054-FLD-000016", "target_kind": "condition", "candidate_ids": []}]}, "line": 83, "statement_id": "SYS-PORTFOLIO-001-FIL-0054-STMT-000032"},
+      {"step": 6, "paragraph": "2100-ISSUE-COMMIT", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0054-PAR-0004", "action": "EXEC_SQL", "target": null, "target_paragraph_id": null, "target_section_id": null, "condition": null, "line": 88, "statement_id": "SYS-PORTFOLIO-001-FIL-0054-STMT-000006", "note": "COMMIT WORK"},
+      {"step": 7, "paragraph": "2100-ISSUE-COMMIT", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0054-PAR-0004", "action": "IF", "target": null, "target_paragraph_id": null, "target_section_id": null,
+       "condition": {"text": "SQLCODE = 0", "fields": ["SQLCODE"], "field_ids": [{"name": "SQLCODE", "qualifiers": [], "resolution": "UNRESOLVED", "target_id": null, "target_kind": null, "candidate_ids": []}]}, "line": 92, "statement_id": "SYS-PORTFOLIO-001-FIL-0054-STMT-000007"},
+      {"step": 8, "paragraph": "2100-ISSUE-COMMIT", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0054-PAR-0004", "action": "PERFORM", "target": "9100-LOG-ERROR", "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0054-PAR-0010", "target_section_id": null,
+       "condition": {"text": "ELSE of SQLCODE = 0", "fields": ["SQLCODE"], "field_ids": [{"name": "SQLCODE", "qualifiers": [], "resolution": "UNRESOLVED", "target_id": null, "target_kind": null, "candidate_ids": []}]}, "line": 99, "statement_id": "SYS-PORTFOLIO-001-FIL-0054-STMT-000036"},
+      {"step": 9, "paragraph": "9100-LOG-ERROR", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0054-PAR-0010", "action": "CALL", "target": "DB2ERR", "target_paragraph_id": null, "target_section_id": null, "condition": null, "line": 169, "statement_id": "SYS-PORTFOLIO-001-FIL-0054-STMT-000023", "note": "static CALL 'DB2ERR' USING LS-ERROR-INFO; callee logic in program_logic/SYS-PORTFOLIO-001-FIL-0056__DB2ERR_logic.json; parameter layout mismatch flagged in trace_issues"},
+      {"step": 10, "paragraph": "0000-MAIN", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0054-PAR-0001", "action": "PERFORM", "target": "3000-ROLLBACK", "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0054-PAR-0005", "target_section_id": null,
+       "condition": {"text": "WHEN FUNC-RBACK", "fields": ["FUNC-RBACK"], "field_ids": [{"name": "FUNC-RBACK", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0054-FLD-000007", "target_kind": "condition", "candidate_ids": []}]}, "line": 60, "statement_id": "SYS-PORTFOLIO-001-FIL-0054-STMT-000026"},
+      {"step": 11, "paragraph": "3000-ROLLBACK", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0054-PAR-0005", "action": "EXEC_SQL", "target": null, "target_paragraph_id": null, "target_section_id": null, "condition": null, "line": 104, "statement_id": "SYS-PORTFOLIO-001-FIL-0054-STMT-000008", "note": "ROLLBACK WORK"},
+      {"step": 12, "paragraph": "3000-ROLLBACK", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0054-PAR-0005", "action": "IF", "target": null, "target_paragraph_id": null, "target_section_id": null,
+       "condition": {"text": "SQLCODE = 0", "fields": ["SQLCODE"], "field_ids": [{"name": "SQLCODE", "qualifiers": [], "resolution": "UNRESOLVED", "target_id": null, "target_kind": null, "candidate_ids": []}]}, "line": 108, "statement_id": "SYS-PORTFOLIO-001-FIL-0054-STMT-000009"},
+      {"step": 13, "paragraph": "3000-ROLLBACK", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0054-PAR-0005", "action": "PERFORM", "target": "9100-LOG-ERROR", "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0054-PAR-0010", "target_section_id": null,
+       "condition": {"text": "ELSE of SQLCODE = 0", "fields": ["SQLCODE"], "field_ids": [{"name": "SQLCODE", "qualifiers": [], "resolution": "UNRESOLVED", "target_id": null, "target_kind": null, "candidate_ids": []}]}, "line": 115, "statement_id": "SYS-PORTFOLIO-001-FIL-0054-STMT-000042"},
+      {"step": 14, "paragraph": "9100-LOG-ERROR", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0054-PAR-0010", "action": "CALL", "target": "DB2ERR", "target_paragraph_id": null, "target_section_id": null, "condition": null, "line": 169, "statement_id": "SYS-PORTFOLIO-001-FIL-0054-STMT-000023"},
+      {"step": 15, "paragraph": "0000-MAIN", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0054-PAR-0001", "action": "PERFORM", "target": "4000-SAVEPOINT", "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0054-PAR-0006", "target_section_id": null,
+       "condition": {"text": "WHEN FUNC-SAVE", "fields": ["FUNC-SAVE"], "field_ids": [{"name": "FUNC-SAVE", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0054-FLD-000008", "target_kind": "condition", "candidate_ids": []}]}, "line": 62, "statement_id": "SYS-PORTFOLIO-001-FIL-0054-STMT-000028"},
+      {"step": 16, "paragraph": "4000-SAVEPOINT", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0054-PAR-0006", "action": "EXEC_SQL", "target": null, "target_paragraph_id": null, "target_section_id": null, "condition": null, "line": 122, "statement_id": "SYS-PORTFOLIO-001-FIL-0054-STMT-000011", "note": "SAVEPOINT :WS-SAVEPOINT-ID ON ROLLBACK RETAIN CURSORS"},
+      {"step": 17, "paragraph": "4000-SAVEPOINT", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0054-PAR-0006", "action": "IF", "target": null, "target_paragraph_id": null, "target_section_id": null,
+       "condition": {"text": "SQLCODE = 0", "fields": ["SQLCODE"], "field_ids": [{"name": "SQLCODE", "qualifiers": [], "resolution": "UNRESOLVED", "target_id": null, "target_kind": null, "candidate_ids": []}]}, "line": 126, "statement_id": "SYS-PORTFOLIO-001-FIL-0054-STMT-000012"},
+      {"step": 18, "paragraph": "4000-SAVEPOINT", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0054-PAR-0006", "action": "PERFORM", "target": "9100-LOG-ERROR", "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0054-PAR-0010", "target_section_id": null,
+       "condition": {"text": "ELSE of SQLCODE = 0", "fields": ["SQLCODE"], "field_ids": [{"name": "SQLCODE", "qualifiers": [], "resolution": "UNRESOLVED", "target_id": null, "target_kind": null, "candidate_ids": []}]}, "line": 133, "statement_id": "SYS-PORTFOLIO-001-FIL-0054-STMT-000048"},
+      {"step": 19, "paragraph": "9100-LOG-ERROR", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0054-PAR-0010", "action": "CALL", "target": "DB2ERR", "target_paragraph_id": null, "target_section_id": null, "condition": null, "line": 169, "statement_id": "SYS-PORTFOLIO-001-FIL-0054-STMT-000023"},
+      {"step": 20, "paragraph": "0000-MAIN", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0054-PAR-0001", "action": "PERFORM", "target": "5000-RESTORE", "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0054-PAR-0007", "target_section_id": null,
+       "condition": {"text": "WHEN FUNC-REST", "fields": ["FUNC-REST"], "field_ids": [{"name": "FUNC-REST", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0054-FLD-000009", "target_kind": "condition", "candidate_ids": []}]}, "line": 64, "statement_id": "SYS-PORTFOLIO-001-FIL-0054-STMT-000027"},
+      {"step": 21, "paragraph": "5000-RESTORE", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0054-PAR-0007", "action": "EXEC_SQL", "target": null, "target_paragraph_id": null, "target_section_id": null, "condition": null, "line": 140, "statement_id": "SYS-PORTFOLIO-001-FIL-0054-STMT-000014", "note": "ROLLBACK TO SAVEPOINT :WS-SAVEPOINT-ID"},
+      {"step": 22, "paragraph": "5000-RESTORE", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0054-PAR-0007", "action": "IF", "target": null, "target_paragraph_id": null, "target_section_id": null,
+       "condition": {"text": "SQLCODE = 0", "fields": ["SQLCODE"], "field_ids": [{"name": "SQLCODE", "qualifiers": [], "resolution": "UNRESOLVED", "target_id": null, "target_kind": null, "candidate_ids": []}]}, "line": 144, "statement_id": "SYS-PORTFOLIO-001-FIL-0054-STMT-000015"},
+      {"step": 23, "paragraph": "5000-RESTORE", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0054-PAR-0007", "action": "PERFORM", "target": "9100-LOG-ERROR", "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0054-PAR-0010", "target_section_id": null,
+       "condition": {"text": "ELSE of SQLCODE = 0", "fields": ["SQLCODE"], "field_ids": [{"name": "SQLCODE", "qualifiers": [], "resolution": "UNRESOLVED", "target_id": null, "target_kind": null, "candidate_ids": []}]}, "line": 151, "statement_id": "SYS-PORTFOLIO-001-FIL-0054-STMT-000054"},
+      {"step": 24, "paragraph": "9100-LOG-ERROR", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0054-PAR-0010", "action": "CALL", "target": "DB2ERR", "target_paragraph_id": null, "target_section_id": null, "condition": null, "line": 169, "statement_id": "SYS-PORTFOLIO-001-FIL-0054-STMT-000023"},
+      {"step": 25, "paragraph": "0000-MAIN", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0054-PAR-0001", "action": "PERFORM", "target": "6000-STATISTICS", "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0054-PAR-0008", "target_section_id": null,
+       "condition": {"text": "WHEN FUNC-STAT", "fields": ["FUNC-STAT"], "field_ids": [{"name": "FUNC-STAT", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0054-FLD-000010", "target_kind": "condition", "candidate_ids": []}]}, "line": 66, "statement_id": "SYS-PORTFOLIO-001-FIL-0054-STMT-000029"},
+      {"step": 26, "paragraph": "0000-MAIN", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0054-PAR-0001", "action": "PERFORM", "target": "9000-ERROR-ROUTINE", "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0054-PAR-0009", "target_section_id": null,
+       "condition": {"text": "WHEN OTHER", "fields": [], "field_ids": []}, "line": 69, "statement_id": "SYS-PORTFOLIO-001-FIL-0054-STMT-000031"},
+      {"step": 27, "paragraph": "9000-ERROR-ROUTINE", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0054-PAR-0009", "action": "CALL", "target": "ERRPROC", "target_paragraph_id": null, "target_section_id": null, "condition": null, "line": 165, "statement_id": "SYS-PORTFOLIO-001-FIL-0054-STMT-000022", "note": "static external CALL 'ERRPROC' USING ERR-MESSAGE"},
+      {"step": 28, "paragraph": "0000-MAIN", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0054-PAR-0001", "action": "GOBACK", "target": null, "target_paragraph_id": null, "target_section_id": null, "condition": null, "line": 72, "statement_id": "SYS-PORTFOLIO-001-FIL-0054-STMT-000002"}
+    ]
+  }
+],
+"branch_map": [
+  {
+    "paragraph": "0000-MAIN",
+    "paragraph_id": "SYS-PORTFOLIO-001-FIL-0054-PAR-0001",
+    "branches": [
+      {"type": "EVALUATE", "line": 54, "statement_id": "SYS-PORTFOLIO-001-FIL-0054-STMT-000001", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0054-PAR-0001", "subjects": ["TRUE"],
+       "condition_text": "EVALUATE TRUE WHEN FUNC-INIT / WHEN FUNC-CMIT / WHEN FUNC-RBACK / WHEN FUNC-SAVE / WHEN FUNC-REST / WHEN FUNC-STAT / WHEN OTHER",
+       "condition_fields": ["FUNC-INIT", "FUNC-CMIT", "FUNC-RBACK", "FUNC-SAVE", "FUNC-REST", "FUNC-STAT"],
+       "condition_field_ids": [
+         {"name": "FUNC-INIT", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0054-FLD-000005", "target_kind": "condition", "candidate_ids": []},
+         {"name": "FUNC-CMIT", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0054-FLD-000006", "target_kind": "condition", "candidate_ids": []},
+         {"name": "FUNC-RBACK", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0054-FLD-000007", "target_kind": "condition", "candidate_ids": []},
+         {"name": "FUNC-SAVE", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0054-FLD-000008", "target_kind": "condition", "candidate_ids": []},
+         {"name": "FUNC-REST", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0054-FLD-000009", "target_kind": "condition", "candidate_ids": []},
+         {"name": "FUNC-STAT", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0054-FLD-000010", "target_kind": "condition", "candidate_ids": []}
+       ],
+       "when_clauses": [
+         {"conditions": ["FUNC-INIT"], "condition_fields": ["FUNC-INIT"], "condition_values": "LS-FUNCTION = 'INIT'", "body_line_range": [56, 56], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0054-STMT-000025"]},
+         {"conditions": ["FUNC-CMIT"], "condition_fields": ["FUNC-CMIT"], "condition_values": "LS-FUNCTION = 'CMIT'", "body_line_range": [58, 58], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0054-STMT-000024"]},
+         {"conditions": ["FUNC-RBACK"], "condition_fields": ["FUNC-RBACK"], "condition_values": "LS-FUNCTION = 'RBAK'", "body_line_range": [60, 60], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0054-STMT-000026"]},
+         {"conditions": ["FUNC-SAVE"], "condition_fields": ["FUNC-SAVE"], "condition_values": "LS-FUNCTION = 'SAVE'", "body_line_range": [62, 62], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0054-STMT-000028"]},
+         {"conditions": ["FUNC-REST"], "condition_fields": ["FUNC-REST"], "condition_values": "LS-FUNCTION = 'REST'", "body_line_range": [64, 64], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0054-STMT-000027"]},
+         {"conditions": ["FUNC-STAT"], "condition_fields": ["FUNC-STAT"], "condition_values": "LS-FUNCTION = 'STAT'", "body_line_range": [66, 66], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0054-STMT-000029"]},
+         {"conditions": ["OTHER"], "condition_fields": [], "body_line_range": [68, 69], "is_default": true, "statement_ids": ["SYS-PORTFOLIO-001-FIL-0054-STMT-000030", "SYS-PORTFOLIO-001-FIL-0054-STMT-000031"]}
+       ],
+       "has_when_other": true,
+       "end_evaluate_line": 70,
+       "outcomes": [
+         {"label": "WHEN FUNC-INIT", "line_range": [56, 56], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0054-STMT-000025"]},
+         {"label": "WHEN FUNC-CMIT", "line_range": [58, 58], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0054-STMT-000024"]},
+         {"label": "WHEN FUNC-RBACK", "line_range": [60, 60], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0054-STMT-000026"]},
+         {"label": "WHEN FUNC-SAVE", "line_range": [62, 62], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0054-STMT-000028"]},
+         {"label": "WHEN FUNC-REST", "line_range": [64, 64], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0054-STMT-000027"]},
+         {"label": "WHEN FUNC-STAT", "line_range": [66, 66], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0054-STMT-000029"]},
+         {"label": "WHEN OTHER", "line_range": [68, 69], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0054-STMT-000030", "SYS-PORTFOLIO-001-FIL-0054-STMT-000031"]}
+       ],
+       "nested_depth": 1}
+    ]
+  },
+  {
+    "paragraph": "2000-COMMIT",
+    "paragraph_id": "SYS-PORTFOLIO-001-FIL-0054-PAR-0003",
+    "branches": [
+      {"type": "IF", "line": 81, "statement_id": "SYS-PORTFOLIO-001-FIL-0054-STMT-000005", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0054-PAR-0003",
+       "condition_text": "LS-RECORDS-PROC >= LS-COMMIT-FREQ OR LS-FORCE-COMMIT",
+       "condition_fields": ["LS-RECORDS-PROC", "LS-COMMIT-FREQ", "LS-FORCE-COMMIT"],
+       "condition_field_ids": [
+         {"name": "LS-RECORDS-PROC", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0054-FLD-000013", "target_kind": "field", "candidate_ids": []},
+         {"name": "LS-COMMIT-FREQ", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0054-FLD-000014", "target_kind": "field", "candidate_ids": []},
+         {"name": "LS-FORCE-COMMIT", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0054-FLD-000016", "target_kind": "condition", "candidate_ids": []}
+       ],
+       "has_else": false, "then_line_range": [83, 83], "else_line_range": null, "end_if_line": 84, "nested_depth": 1,
+       "outcomes": [
+         {"label": "THEN", "line_range": [83, 83], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0054-STMT-000032"]}
+       ]}
+    ]
+  },
+  {
+    "paragraph": "2100-ISSUE-COMMIT",
+    "paragraph_id": "SYS-PORTFOLIO-001-FIL-0054-PAR-0004",
+    "branches": [
+      {"type": "IF", "line": 92, "statement_id": "SYS-PORTFOLIO-001-FIL-0054-STMT-000007", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0054-PAR-0004",
+       "condition_text": "SQLCODE = 0",
+       "condition_fields": ["SQLCODE"],
+       "condition_field_ids": [{"name": "SQLCODE", "qualifiers": [], "resolution": "UNRESOLVED", "target_id": null, "target_kind": null, "candidate_ids": []}],
+       "has_else": true, "then_line_range": [93, 94], "else_line_range": [96, 99], "end_if_line": 100, "nested_depth": 1,
+       "sqlcode_check": true,
+       "outcomes": [
+         {"label": "THEN", "line_range": [93, 94], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0054-STMT-000037", "SYS-PORTFOLIO-001-FIL-0054-STMT-000038"]},
+         {"label": "ELSE", "line_range": [96, 99], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0054-STMT-000033", "SYS-PORTFOLIO-001-FIL-0054-STMT-000034", "SYS-PORTFOLIO-001-FIL-0054-STMT-000035", "SYS-PORTFOLIO-001-FIL-0054-STMT-000036"]}
+       ]}
+    ]
+  },
+  {
+    "paragraph": "3000-ROLLBACK",
+    "paragraph_id": "SYS-PORTFOLIO-001-FIL-0054-PAR-0005",
+    "branches": [
+      {"type": "IF", "line": 108, "statement_id": "SYS-PORTFOLIO-001-FIL-0054-STMT-000009", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0054-PAR-0005",
+       "condition_text": "SQLCODE = 0",
+       "condition_fields": ["SQLCODE"],
+       "condition_field_ids": [{"name": "SQLCODE", "qualifiers": [], "resolution": "UNRESOLVED", "target_id": null, "target_kind": null, "candidate_ids": []}],
+       "has_else": true, "then_line_range": [109, 110], "else_line_range": [112, 115], "end_if_line": 116, "nested_depth": 1,
+       "sqlcode_check": true,
+       "outcomes": [
+         {"label": "THEN", "line_range": [109, 110], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0054-STMT-000043", "SYS-PORTFOLIO-001-FIL-0054-STMT-000044"]},
+         {"label": "ELSE", "line_range": [112, 115], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0054-STMT-000039", "SYS-PORTFOLIO-001-FIL-0054-STMT-000040", "SYS-PORTFOLIO-001-FIL-0054-STMT-000041", "SYS-PORTFOLIO-001-FIL-0054-STMT-000042"]}
+       ]}
+    ]
+  },
+  {
+    "paragraph": "4000-SAVEPOINT",
+    "paragraph_id": "SYS-PORTFOLIO-001-FIL-0054-PAR-0006",
+    "branches": [
+      {"type": "IF", "line": 126, "statement_id": "SYS-PORTFOLIO-001-FIL-0054-STMT-000012", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0054-PAR-0006",
+       "condition_text": "SQLCODE = 0",
+       "condition_fields": ["SQLCODE"],
+       "condition_field_ids": [{"name": "SQLCODE", "qualifiers": [], "resolution": "UNRESOLVED", "target_id": null, "target_kind": null, "candidate_ids": []}],
+       "has_else": true, "then_line_range": [127, 128], "else_line_range": [130, 133], "end_if_line": 134, "nested_depth": 1,
+       "sqlcode_check": true,
+       "outcomes": [
+         {"label": "THEN", "line_range": [127, 128], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0054-STMT-000049", "SYS-PORTFOLIO-001-FIL-0054-STMT-000050"]},
+         {"label": "ELSE", "line_range": [130, 133], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0054-STMT-000045", "SYS-PORTFOLIO-001-FIL-0054-STMT-000046", "SYS-PORTFOLIO-001-FIL-0054-STMT-000047", "SYS-PORTFOLIO-001-FIL-0054-STMT-000048"]}
+       ]}
+    ]
+  },
+  {
+    "paragraph": "5000-RESTORE",
+    "paragraph_id": "SYS-PORTFOLIO-001-FIL-0054-PAR-0007",
+    "branches": [
+      {"type": "IF", "line": 144, "statement_id": "SYS-PORTFOLIO-001-FIL-0054-STMT-000015", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0054-PAR-0007",
+       "condition_text": "SQLCODE = 0",
+       "condition_fields": ["SQLCODE"],
+       "condition_field_ids": [{"name": "SQLCODE", "qualifiers": [], "resolution": "UNRESOLVED", "target_id": null, "target_kind": null, "candidate_ids": []}],
+       "has_else": true, "then_line_range": [145, 146], "else_line_range": [148, 151], "end_if_line": 152, "nested_depth": 1,
+       "sqlcode_check": true,
+       "outcomes": [
+         {"label": "THEN", "line_range": [145, 146], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0054-STMT-000055", "SYS-PORTFOLIO-001-FIL-0054-STMT-000056"]},
+         {"label": "ELSE", "line_range": [148, 151], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0054-STMT-000051", "SYS-PORTFOLIO-001-FIL-0054-STMT-000052", "SYS-PORTFOLIO-001-FIL-0054-STMT-000053", "SYS-PORTFOLIO-001-FIL-0054-STMT-000054"]}
+       ]}
+    ]
+  }
+],
+"loops": [],
+"dead_code_confirmed": [],
+"unresolvable_paths": [],
+"trace_issues": [
+  {"severity": "info", "type": "upstream_issue", "upstream_agent": "2_parser", "upstream_type": "misplaced_comment_indicator", "lines": [1], "message": "Line 1 has '*' in column 8 (Area A) instead of column 7; treated as a comment."},
+  {"severity": "info", "type": "upstream_issue", "upstream_agent": "2_parser", "upstream_type": "level_01_in_area_b", "lines": [18], "message": "01-level entry WS-SAVEPOINT-ID starts in Area B inside the EXEC SQL BEGIN/END DECLARE SECTION; recorded as a top-level WORKING-STORAGE entry."},
+  {"severity": "info", "type": "upstream_issue", "upstream_agent": "3_data", "upstream_type": "misplaced_comment_indicator", "line": 1, "message": "Line 1 skipped as a comment (indicator in column 8)."},
+  {"severity": "info", "type": "upstream_issue", "upstream_agent": "3_data", "upstream_type": "level_01_in_area_b", "line": 18, "message": "01-level WS-SAVEPOINT-ID inside EXEC SQL BEGIN/END DECLARE SECTION (lines 17-19) registered as a top-level WORKING-STORAGE record."},
+  {"severity": "info", "type": "upstream_issue", "upstream_agent": "3_data", "upstream_type": "section_level_copy_expansion", "line": 21, "message": "COPY SQLCA (21), COPY DBPROC (22) and COPY ERRHAND (23) sit directly under WORKING-STORAGE; EXPANDS_COPY is held by section SYS-PORTFOLIO-001-FIL-0054-SEC-0002."},
+  {"severity": "info", "type": "upstream_issue", "upstream_agent": "3_data", "upstream_type": "unresolved_copy_stub", "file_id": "SYS-PORTFOLIO-001-FIL-0017", "message": "Copybook SQLCA defines only SQL-STATUS-CODES; the precompiler SQLCA structure (SQLCODE, ...) is not in the repository. Explains why SQLCODE has no Field ID."},
+  {"severity": "info", "type": "field_id_unresolved", "name": "SQLCODE", "lines": [92, 96, 108, 112, 126, 130, 144, 148], "message": "SQLCODE is not defined in the program or its copybooks (precompiler-supplied SQLCA item); resolve-field-references returned UNRESOLVED; target_id null."},
+  {"severity": "warning", "type": "call_interface_mismatch", "line": 169, "statement_id": "SYS-PORTFOLIO-001-FIL-0054-STMT-000023", "message": "CALL 'DB2ERR' USING LS-ERROR-INFO passes an 84-byte group (LS-SQLCODE S9(9) COMP + LS-ERROR-MSG X(80)), but DB2ERR's PROCEDURE DIVISION USING LS-ERROR-REQUEST (SYS-PORTFOLIO-001-FIL-0056-REC-0005, 204 bytes) starts with the 4-byte function code LS-FUNCTION. DB2ERR would read the binary SQLCODE bytes as its function code; its logic (see SYS-PORTFOLIO-001-FIL-0056__DB2ERR_logic.json) takes WHEN OTHER for any value other than 'LOG ', 'DIAG', 'RETR'. Flagged for SME review; the effect is not asserted.", "ambiguous": true},
+  {"severity": "info", "type": "unused_item", "name": "WS-CURRENT-TIMESTAMP", "line": 30, "message": "WS-CURRENT-TIMESTAMP is declared but not referenced by any procedure statement."},
+  {"severity": "info", "type": "external_call", "line": 165, "statement_id": "SYS-PORTFOLIO-001-FIL-0054-STMT-000022", "message": "Static CALL 'ERRPROC' USING ERR-MESSAGE; ERRPROC is a separate program (not in this execution's scope); its effect is not traced here."}
+],
+"field_id_lookups": [
+  {"name": "FUNC-INIT", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0054-FLD-000005", "target_kind": "condition", "qualified_name": "LS-COMMIT-REQUEST.LS-FUNCTION.FUNC-INIT", "defined_in": "SYS-PORTFOLIO-001-FIL-0054", "candidate_ids": []},
+  {"name": "FUNC-CMIT", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0054-FLD-000006", "target_kind": "condition", "qualified_name": "LS-COMMIT-REQUEST.LS-FUNCTION.FUNC-CMIT", "defined_in": "SYS-PORTFOLIO-001-FIL-0054", "candidate_ids": []},
+  {"name": "FUNC-RBACK", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0054-FLD-000007", "target_kind": "condition", "qualified_name": "LS-COMMIT-REQUEST.LS-FUNCTION.FUNC-RBACK", "defined_in": "SYS-PORTFOLIO-001-FIL-0054", "candidate_ids": []},
+  {"name": "FUNC-SAVE", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0054-FLD-000008", "target_kind": "condition", "qualified_name": "LS-COMMIT-REQUEST.LS-FUNCTION.FUNC-SAVE", "defined_in": "SYS-PORTFOLIO-001-FIL-0054", "candidate_ids": []},
+  {"name": "FUNC-REST", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0054-FLD-000009", "target_kind": "condition", "qualified_name": "LS-COMMIT-REQUEST.LS-FUNCTION.FUNC-REST", "defined_in": "SYS-PORTFOLIO-001-FIL-0054", "candidate_ids": []},
+  {"name": "FUNC-STAT", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0054-FLD-000010", "target_kind": "condition", "qualified_name": "LS-COMMIT-REQUEST.LS-FUNCTION.FUNC-STAT", "defined_in": "SYS-PORTFOLIO-001-FIL-0054", "candidate_ids": []},
+  {"name": "LS-RECORDS-PROC", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0054-FLD-000013", "target_kind": "field", "qualified_name": "LS-COMMIT-REQUEST.LS-COMMIT-PARMS.LS-RECORDS-PROC", "defined_in": "SYS-PORTFOLIO-001-FIL-0054", "candidate_ids": []},
+  {"name": "LS-COMMIT-FREQ", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0054-FLD-000014", "target_kind": "field", "qualified_name": "LS-COMMIT-REQUEST.LS-COMMIT-PARMS.LS-COMMIT-FREQ", "defined_in": "SYS-PORTFOLIO-001-FIL-0054", "candidate_ids": []},
+  {"name": "LS-FORCE-COMMIT", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0054-FLD-000016", "target_kind": "condition", "qualified_name": "LS-COMMIT-REQUEST.LS-COMMIT-PARMS.LS-FORCE-FLAG.LS-FORCE-COMMIT", "defined_in": "SYS-PORTFOLIO-001-FIL-0054", "candidate_ids": []},
+  {"name": "SQLCODE", "qualifiers": [], "resolution": "UNRESOLVED", "target_id": null, "target_kind": null, "qualified_name": null, "defined_in": null, "candidate_ids": []},
+  {"name": "ERR-TEXT", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0007-FLD-000017", "target_kind": "field", "qualified_name": "ERR-MESSAGE.ERR-TEXT", "defined_in": "SYS-PORTFOLIO-001-FIL-0007", "candidate_ids": []},
+  {"name": "WS-COMMIT-STATS", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0054-REC-0002", "target_kind": "record", "qualified_name": "WS-COMMIT-STATS", "defined_in": "SYS-PORTFOLIO-001-FIL-0054", "candidate_ids": []},
+  {"name": "LS-RETURN-CODE", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0054-FLD-000017", "target_kind": "field", "qualified_name": "LS-COMMIT-REQUEST.LS-RETURN-CODE", "defined_in": "SYS-PORTFOLIO-001-FIL-0054", "candidate_ids": []},
+  {"name": "WS-COMMIT-COUNT", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0054-FLD-000001", "target_kind": "field", "qualified_name": "WS-COMMIT-STATS.WS-COMMIT-COUNT", "defined_in": "SYS-PORTFOLIO-001-FIL-0054", "candidate_ids": []},
+  {"name": "LS-SQLCODE", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0054-FLD-000019", "target_kind": "field", "qualified_name": "LS-COMMIT-REQUEST.LS-ERROR-INFO.LS-SQLCODE", "defined_in": "SYS-PORTFOLIO-001-FIL-0054", "candidate_ids": []},
+  {"name": "LS-ERROR-MSG", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0054-FLD-000020", "target_kind": "field", "qualified_name": "LS-COMMIT-REQUEST.LS-ERROR-INFO.LS-ERROR-MSG", "defined_in": "SYS-PORTFOLIO-001-FIL-0054", "candidate_ids": []},
+  {"name": "WS-ROLLBACK-COUNT", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0054-FLD-000002", "target_kind": "field", "qualified_name": "WS-COMMIT-STATS.WS-ROLLBACK-COUNT", "defined_in": "SYS-PORTFOLIO-001-FIL-0054", "candidate_ids": []},
+  {"name": "LS-SAVEPOINT-NAME", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0054-FLD-000011", "target_kind": "field", "qualified_name": "LS-COMMIT-REQUEST.LS-SAVEPOINT-NAME", "defined_in": "SYS-PORTFOLIO-001-FIL-0054", "candidate_ids": []},
+  {"name": "WS-SAVEPOINT-ID", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0054-REC-0001", "target_kind": "record", "qualified_name": "WS-SAVEPOINT-ID", "defined_in": "SYS-PORTFOLIO-001-FIL-0054", "candidate_ids": []},
+  {"name": "WS-SAVEPOINT-COUNT", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0054-FLD-000003", "target_kind": "field", "qualified_name": "WS-COMMIT-STATS.WS-SAVEPOINT-COUNT", "defined_in": "SYS-PORTFOLIO-001-FIL-0054", "candidate_ids": []},
+  {"name": "ERR-PROGRAM", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0007-FLD-000013", "target_kind": "field", "qualified_name": "ERR-MESSAGE.ERR-PROGRAM", "defined_in": "SYS-PORTFOLIO-001-FIL-0007", "candidate_ids": []},
+  {"name": "ERR-MESSAGE", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0007-REC-0003", "target_kind": "record", "qualified_name": "ERR-MESSAGE", "defined_in": "SYS-PORTFOLIO-001-FIL-0007", "candidate_ids": []},
+  {"name": "LS-ERROR-INFO", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0054-FLD-000018", "target_kind": "field", "qualified_name": "LS-COMMIT-REQUEST.LS-ERROR-INFO", "defined_in": "SYS-PORTFOLIO-001-FIL-0054", "candidate_ids": []}
+],
+"program_narrative": "Program DB2CMT is a called DB2 commit-controller subroutine that receives LS-COMMIT-REQUEST (PROCEDURE DIVISION USING) and dispatches on its function code. 'INIT' resets the commit, rollback and savepoint counters and returns 0. 'CMIT' issues COMMIT WORK only when the caller's processed-record count has reached the commit frequency or the force flag is 'Y'; otherwise it does nothing. 'RBAK' issues ROLLBACK WORK, 'SAVE' creates a DB2 savepoint named by the caller (retaining cursors) and 'REST' rolls back to that savepoint; each successful SQL operation increments its counter (rollback-to-savepoint counts as a rollback) and returns 0. Each failed SQL operation copies the SQLCODE and a message into the caller's error area, returns 8 and calls DB2ERR with that error area (a parameter layout that does not match DB2ERR's request block; flagged for review). 'STAT' displays the three counters on the console. Any other function code returns 12 and calls the external error processor ERRPROC. It reads no files and always ends with GOBACK.",
+"paragraphs": [
+  {
+    "name": "0000-MAIN",
+    "paragraph_id": "SYS-PORTFOLIO-001-FIL-0054-PAR-0001",
+    "section": null,
+    "section_id": null,
+    "line_range": [53, 74],
+    "pseudocode": [
+      "-- Entry: request block LS-COMMIT-REQUEST is passed by the caller (PROCEDURE DIVISION USING, line 52)",
+      "IF request.function = 'INIT' THEN  -- FUNC-INIT (EVALUATE TRUE, first matching WHEN wins)",
+      "  CALL 1000-initialize",
+      "ELSE IF request.function = 'CMIT' THEN  -- FUNC-CMIT",
+      "  CALL 2000-commit",
+      "ELSE IF request.function = 'RBAK' THEN  -- FUNC-RBACK",
+      "  CALL 3000-rollback",
+      "ELSE IF request.function = 'SAVE' THEN  -- FUNC-SAVE",
+      "  CALL 4000-savepoint",
+      "ELSE IF request.function = 'REST' THEN  -- FUNC-REST",
+      "  CALL 5000-restore",
+      "ELSE IF request.function = 'STAT' THEN  -- FUNC-STAT",
+      "  CALL 6000-statistics",
+      "ELSE  -- WHEN OTHER: unrecognised function code",
+      "  SET err_text = 'Invalid function code'",
+      "  CALL 9000-error-routine",
+      "END IF",
+      "RETURN to caller  -- GOBACK"
+    ],
+    "pseudocode_statement_ids": [
+      [],
+      ["SYS-PORTFOLIO-001-FIL-0054-STMT-000001"],
+      ["SYS-PORTFOLIO-001-FIL-0054-STMT-000025"],
+      ["SYS-PORTFOLIO-001-FIL-0054-STMT-000001"],
+      ["SYS-PORTFOLIO-001-FIL-0054-STMT-000024"],
+      ["SYS-PORTFOLIO-001-FIL-0054-STMT-000001"],
+      ["SYS-PORTFOLIO-001-FIL-0054-STMT-000026"],
+      ["SYS-PORTFOLIO-001-FIL-0054-STMT-000001"],
+      ["SYS-PORTFOLIO-001-FIL-0054-STMT-000028"],
+      ["SYS-PORTFOLIO-001-FIL-0054-STMT-000001"],
+      ["SYS-PORTFOLIO-001-FIL-0054-STMT-000027"],
+      ["SYS-PORTFOLIO-001-FIL-0054-STMT-000001"],
+      ["SYS-PORTFOLIO-001-FIL-0054-STMT-000029"],
+      ["SYS-PORTFOLIO-001-FIL-0054-STMT-000001"],
+      ["SYS-PORTFOLIO-001-FIL-0054-STMT-000030"],
+      ["SYS-PORTFOLIO-001-FIL-0054-STMT-000031"],
+      ["SYS-PORTFOLIO-001-FIL-0054-STMT-000001"],
+      ["SYS-PORTFOLIO-001-FIL-0054-STMT-000002"]
+    ],
+    "pseudocode_text": "-- Entry: request block LS-COMMIT-REQUEST is passed by the caller (PROCEDURE DIVISION USING, line 52)\nIF request.function = 'INIT' THEN  -- FUNC-INIT (EVALUATE TRUE, first matching WHEN wins)\n  CALL 1000-initialize\nELSE IF request.function = 'CMIT' THEN  -- FUNC-CMIT\n  CALL 2000-commit\nELSE IF request.function = 'RBAK' THEN  -- FUNC-RBACK\n  CALL 3000-rollback\nELSE IF request.function = 'SAVE' THEN  -- FUNC-SAVE\n  CALL 4000-savepoint\nELSE IF request.function = 'REST' THEN  -- FUNC-REST\n  CALL 5000-restore\nELSE IF request.function = 'STAT' THEN  -- FUNC-STAT\n  CALL 6000-statistics\nELSE  -- WHEN OTHER: unrecognised function code\n  SET err_text = 'Invalid function code'\n  CALL 9000-error-routine\nEND IF\nRETURN to caller  -- GOBACK",
+    "statement_ids": ["SYS-PORTFOLIO-001-FIL-0054-STMT-000001", "SYS-PORTFOLIO-001-FIL-0054-STMT-000025", "SYS-PORTFOLIO-001-FIL-0054-STMT-000024", "SYS-PORTFOLIO-001-FIL-0054-STMT-000026", "SYS-PORTFOLIO-001-FIL-0054-STMT-000028", "SYS-PORTFOLIO-001-FIL-0054-STMT-000027", "SYS-PORTFOLIO-001-FIL-0054-STMT-000029", "SYS-PORTFOLIO-001-FIL-0054-STMT-000030", "SYS-PORTFOLIO-001-FIL-0054-STMT-000031", "SYS-PORTFOLIO-001-FIL-0054-STMT-000002"],
+    "untranslated_statement_ids": [],
+    "field_references": ["FUNC-INIT", "FUNC-CMIT", "FUNC-RBACK", "FUNC-SAVE", "FUNC-REST", "FUNC-STAT", "ERR-TEXT"],
+    "field_reference_ids": [
+      {"name": "FUNC-INIT", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0054-FLD-000005", "target_kind": "condition", "candidate_ids": []},
+      {"name": "FUNC-CMIT", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0054-FLD-000006", "target_kind": "condition", "candidate_ids": []},
+      {"name": "FUNC-RBACK", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0054-FLD-000007", "target_kind": "condition", "candidate_ids": []},
+      {"name": "FUNC-SAVE", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0054-FLD-000008", "target_kind": "condition", "candidate_ids": []},
+      {"name": "FUNC-REST", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0054-FLD-000009", "target_kind": "condition", "candidate_ids": []},
+      {"name": "FUNC-STAT", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0054-FLD-000010", "target_kind": "condition", "candidate_ids": []},
+      {"name": "ERR-TEXT", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0007-FLD-000017", "target_kind": "field", "candidate_ids": []}
+    ],
+    "calls_made": ["1000-INITIALIZE", "2000-COMMIT", "3000-ROLLBACK", "4000-SAVEPOINT", "5000-RESTORE", "6000-STATISTICS", "9000-ERROR-ROUTINE"],
+    "calls_made_ids": [
+      {"name": "1000-INITIALIZE", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0054-PAR-0002", "section_id": null},
+      {"name": "2000-COMMIT", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0054-PAR-0003", "section_id": null},
+      {"name": "3000-ROLLBACK", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0054-PAR-0005", "section_id": null},
+      {"name": "4000-SAVEPOINT", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0054-PAR-0006", "section_id": null},
+      {"name": "5000-RESTORE", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0054-PAR-0007", "section_id": null},
+      {"name": "6000-STATISTICS", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0054-PAR-0008", "section_id": null},
+      {"name": "9000-ERROR-ROUTINE", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0054-PAR-0009", "section_id": null}
+    ],
+    "complexity_score": 7,
+    "has_unresolved_statements": false,
+    "annotations": [
+      {"line": 54, "statement_id": "SYS-PORTFOLIO-001-FIL-0054-STMT-000001", "note": "EVALUATE TRUE over the 88-level conditions of LS-FUNCTION: FUNC-INIT='INIT', FUNC-CMIT='CMIT', FUNC-RBACK='RBAK', FUNC-SAVE='SAVE', FUNC-REST='REST', FUNC-STAT='STAT'."}
+    ]
+  },
+  {
+    "name": "1000-INITIALIZE",
+    "paragraph_id": "SYS-PORTFOLIO-001-FIL-0054-PAR-0002",
+    "section": null,
+    "section_id": null,
+    "line_range": [75, 79],
+    "pseudocode": [
+      "CLEAR ws_commit_stats  -- INITIALIZE: commit, rollback and savepoint counters set to zero",
+      "SET request.return_code = 0"
+    ],
+    "pseudocode_statement_ids": [
+      ["SYS-PORTFOLIO-001-FIL-0054-STMT-000003"],
+      ["SYS-PORTFOLIO-001-FIL-0054-STMT-000004"]
+    ],
+    "pseudocode_text": "CLEAR ws_commit_stats  -- INITIALIZE: commit, rollback and savepoint counters set to zero\nSET request.return_code = 0",
+    "statement_ids": ["SYS-PORTFOLIO-001-FIL-0054-STMT-000003", "SYS-PORTFOLIO-001-FIL-0054-STMT-000004"],
+    "untranslated_statement_ids": [],
+    "field_references": ["WS-COMMIT-STATS", "LS-RETURN-CODE"],
+    "field_reference_ids": [
+      {"name": "WS-COMMIT-STATS", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0054-REC-0002", "target_kind": "record", "candidate_ids": []},
+      {"name": "LS-RETURN-CODE", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0054-FLD-000017", "target_kind": "field", "candidate_ids": []}
+    ],
+    "calls_made": [],
+    "calls_made_ids": [],
+    "complexity_score": 1,
+    "has_unresolved_statements": false,
+    "annotations": []
+  },
+  {
+    "name": "2000-COMMIT",
+    "paragraph_id": "SYS-PORTFOLIO-001-FIL-0054-PAR-0003",
+    "section": null,
+    "section_id": null,
+    "line_range": [80, 86],
+    "pseudocode": [
+      "IF request.records_processed >= request.commit_frequency OR request.force_flag = 'Y' THEN  -- LS-FORCE-COMMIT",
+      "  CALL 2100-issue-commit",
+      "END IF  -- no ELSE: below the threshold nothing is done and the return code is not set"
+    ],
+    "pseudocode_statement_ids": [
+      ["SYS-PORTFOLIO-001-FIL-0054-STMT-000005"],
+      ["SYS-PORTFOLIO-001-FIL-0054-STMT-000032"],
+      ["SYS-PORTFOLIO-001-FIL-0054-STMT-000005"]
+    ],
+    "pseudocode_text": "IF request.records_processed >= request.commit_frequency OR request.force_flag = 'Y' THEN  -- LS-FORCE-COMMIT\n  CALL 2100-issue-commit\nEND IF  -- no ELSE: below the threshold nothing is done and the return code is not set",
+    "statement_ids": ["SYS-PORTFOLIO-001-FIL-0054-STMT-000005", "SYS-PORTFOLIO-001-FIL-0054-STMT-000032"],
+    "untranslated_statement_ids": [],
+    "field_references": ["LS-RECORDS-PROC", "LS-COMMIT-FREQ", "LS-FORCE-COMMIT"],
+    "field_reference_ids": [
+      {"name": "LS-RECORDS-PROC", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0054-FLD-000013", "target_kind": "field", "candidate_ids": []},
+      {"name": "LS-COMMIT-FREQ", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0054-FLD-000014", "target_kind": "field", "candidate_ids": []},
+      {"name": "LS-FORCE-COMMIT", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0054-FLD-000016", "target_kind": "condition", "candidate_ids": []}
+    ],
+    "calls_made": ["2100-ISSUE-COMMIT"],
+    "calls_made_ids": [
+      {"name": "2100-ISSUE-COMMIT", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0054-PAR-0004", "section_id": null}
+    ],
+    "complexity_score": 1,
+    "has_unresolved_statements": false,
+    "annotations": [
+      {"line": 81, "statement_id": "SYS-PORTFOLIO-001-FIL-0054-STMT-000005", "note": "LS-FORCE-COMMIT is the 88-level LS-FORCE-FLAG = 'Y'. The counter LS-RECORDS-PROC is not reset by this program; the caller manages it."}
+    ]
+  },
+  {
+    "name": "2100-ISSUE-COMMIT",
+    "paragraph_id": "SYS-PORTFOLIO-001-FIL-0054-PAR-0004",
+    "section": null,
+    "section_id": null,
+    "line_range": [87, 102],
+    "pseudocode": [
+      "SQL COMMIT WORK  -- make all database changes of the unit of work permanent",
+      "IF sqlcode = 0 THEN  -- CHECK SQLCODE",
+      "  INCREMENT ws_commit_count BY 1",
+      "  SET request.return_code = 0",
+      "ELSE",
+      "  SET request.sqlcode = sqlcode",
+      "  SET request.error_msg = 'Commit failed'",
+      "  SET request.return_code = 8",
+      "  CALL 9100-log-error",
+      "END IF"
+    ],
+    "pseudocode_statement_ids": [
+      ["SYS-PORTFOLIO-001-FIL-0054-STMT-000006"],
+      ["SYS-PORTFOLIO-001-FIL-0054-STMT-000007"],
+      ["SYS-PORTFOLIO-001-FIL-0054-STMT-000037"],
+      ["SYS-PORTFOLIO-001-FIL-0054-STMT-000038"],
+      ["SYS-PORTFOLIO-001-FIL-0054-STMT-000007"],
+      ["SYS-PORTFOLIO-001-FIL-0054-STMT-000033"],
+      ["SYS-PORTFOLIO-001-FIL-0054-STMT-000034"],
+      ["SYS-PORTFOLIO-001-FIL-0054-STMT-000035"],
+      ["SYS-PORTFOLIO-001-FIL-0054-STMT-000036"],
+      ["SYS-PORTFOLIO-001-FIL-0054-STMT-000007"]
+    ],
+    "pseudocode_text": "SQL COMMIT WORK  -- make all database changes of the unit of work permanent\nIF sqlcode = 0 THEN  -- CHECK SQLCODE\n  INCREMENT ws_commit_count BY 1\n  SET request.return_code = 0\nELSE\n  SET request.sqlcode = sqlcode\n  SET request.error_msg = 'Commit failed'\n  SET request.return_code = 8\n  CALL 9100-log-error\nEND IF",
+    "statement_ids": ["SYS-PORTFOLIO-001-FIL-0054-STMT-000006", "SYS-PORTFOLIO-001-FIL-0054-STMT-000007", "SYS-PORTFOLIO-001-FIL-0054-STMT-000037", "SYS-PORTFOLIO-001-FIL-0054-STMT-000038", "SYS-PORTFOLIO-001-FIL-0054-STMT-000033", "SYS-PORTFOLIO-001-FIL-0054-STMT-000034", "SYS-PORTFOLIO-001-FIL-0054-STMT-000035", "SYS-PORTFOLIO-001-FIL-0054-STMT-000036"],
+    "untranslated_statement_ids": [],
+    "field_references": ["SQLCODE", "WS-COMMIT-COUNT", "LS-RETURN-CODE", "LS-SQLCODE", "LS-ERROR-MSG"],
+    "field_reference_ids": [
+      {"name": "SQLCODE", "qualifiers": [], "resolution": "UNRESOLVED", "target_id": null, "target_kind": null, "candidate_ids": []},
+      {"name": "WS-COMMIT-COUNT", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0054-FLD-000001", "target_kind": "field", "candidate_ids": []},
+      {"name": "LS-RETURN-CODE", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0054-FLD-000017", "target_kind": "field", "candidate_ids": []},
+      {"name": "LS-SQLCODE", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0054-FLD-000019", "target_kind": "field", "candidate_ids": []},
+      {"name": "LS-ERROR-MSG", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0054-FLD-000020", "target_kind": "field", "candidate_ids": []}
+    ],
+    "calls_made": ["9100-LOG-ERROR"],
+    "calls_made_ids": [
+      {"name": "9100-LOG-ERROR", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0054-PAR-0010", "section_id": null}
+    ],
+    "complexity_score": 2,
+    "has_unresolved_statements": false,
+    "annotations": [
+      {"line": 92, "statement_id": "SYS-PORTFOLIO-001-FIL-0054-STMT-000007", "note": "SQLCODE check branch; SQLCODE has no Field ID."}
+    ]
+  },
+  {
+    "name": "3000-ROLLBACK",
+    "paragraph_id": "SYS-PORTFOLIO-001-FIL-0054-PAR-0005",
+    "section": null,
+    "section_id": null,
+    "line_range": [103, 118],
+    "pseudocode": [
+      "SQL ROLLBACK WORK  -- undo all database changes of the unit of work",
+      "IF sqlcode = 0 THEN  -- CHECK SQLCODE",
+      "  INCREMENT ws_rollback_count BY 1",
+      "  SET request.return_code = 0",
+      "ELSE",
+      "  SET request.sqlcode = sqlcode",
+      "  SET request.error_msg = 'Rollback failed'",
+      "  SET request.return_code = 8",
+      "  CALL 9100-log-error",
+      "END IF"
+    ],
+    "pseudocode_statement_ids": [
+      ["SYS-PORTFOLIO-001-FIL-0054-STMT-000008"],
+      ["SYS-PORTFOLIO-001-FIL-0054-STMT-000009"],
+      ["SYS-PORTFOLIO-001-FIL-0054-STMT-000043"],
+      ["SYS-PORTFOLIO-001-FIL-0054-STMT-000044"],
+      ["SYS-PORTFOLIO-001-FIL-0054-STMT-000009"],
+      ["SYS-PORTFOLIO-001-FIL-0054-STMT-000039"],
+      ["SYS-PORTFOLIO-001-FIL-0054-STMT-000040"],
+      ["SYS-PORTFOLIO-001-FIL-0054-STMT-000041"],
+      ["SYS-PORTFOLIO-001-FIL-0054-STMT-000042"],
+      ["SYS-PORTFOLIO-001-FIL-0054-STMT-000009"]
+    ],
+    "pseudocode_text": "SQL ROLLBACK WORK  -- undo all database changes of the unit of work\nIF sqlcode = 0 THEN  -- CHECK SQLCODE\n  INCREMENT ws_rollback_count BY 1\n  SET request.return_code = 0\nELSE\n  SET request.sqlcode = sqlcode\n  SET request.error_msg = 'Rollback failed'\n  SET request.return_code = 8\n  CALL 9100-log-error\nEND IF",
+    "statement_ids": ["SYS-PORTFOLIO-001-FIL-0054-STMT-000008", "SYS-PORTFOLIO-001-FIL-0054-STMT-000009", "SYS-PORTFOLIO-001-FIL-0054-STMT-000043", "SYS-PORTFOLIO-001-FIL-0054-STMT-000044", "SYS-PORTFOLIO-001-FIL-0054-STMT-000039", "SYS-PORTFOLIO-001-FIL-0054-STMT-000040", "SYS-PORTFOLIO-001-FIL-0054-STMT-000041", "SYS-PORTFOLIO-001-FIL-0054-STMT-000042"],
+    "untranslated_statement_ids": [],
+    "field_references": ["SQLCODE", "WS-ROLLBACK-COUNT", "LS-RETURN-CODE", "LS-SQLCODE", "LS-ERROR-MSG"],
+    "field_reference_ids": [
+      {"name": "SQLCODE", "qualifiers": [], "resolution": "UNRESOLVED", "target_id": null, "target_kind": null, "candidate_ids": []},
+      {"name": "WS-ROLLBACK-COUNT", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0054-FLD-000002", "target_kind": "field", "candidate_ids": []},
+      {"name": "LS-RETURN-CODE", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0054-FLD-000017", "target_kind": "field", "candidate_ids": []},
+      {"name": "LS-SQLCODE", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0054-FLD-000019", "target_kind": "field", "candidate_ids": []},
+      {"name": "LS-ERROR-MSG", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0054-FLD-000020", "target_kind": "field", "candidate_ids": []}
+    ],
+    "calls_made": ["9100-LOG-ERROR"],
+    "calls_made_ids": [
+      {"name": "9100-LOG-ERROR", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0054-PAR-0010", "section_id": null}
+    ],
+    "complexity_score": 2,
+    "has_unresolved_statements": false,
+    "annotations": [
+      {"line": 108, "statement_id": "SYS-PORTFOLIO-001-FIL-0054-STMT-000009", "note": "SQLCODE check branch; SQLCODE has no Field ID."}
+    ]
+  },
+  {
+    "name": "4000-SAVEPOINT",
+    "paragraph_id": "SYS-PORTFOLIO-001-FIL-0054-PAR-0006",
+    "section": null,
+    "section_id": null,
+    "line_range": [119, 136],
+    "pseudocode": [
+      "SET ws_savepoint_id = request.savepoint_name",
+      "SQL SAVEPOINT [dynamic: ws_savepoint_id] ON ROLLBACK RETAIN CURSORS  -- mark a point the unit of work can later be rolled back to; open cursors are kept",
+      "IF sqlcode = 0 THEN  -- CHECK SQLCODE",
+      "  INCREMENT ws_savepoint_count BY 1",
+      "  SET request.return_code = 0",
+      "ELSE",
+      "  SET request.sqlcode = sqlcode",
+      "  SET request.error_msg = 'Savepoint creation failed'",
+      "  SET request.return_code = 8",
+      "  CALL 9100-log-error",
+      "END IF"
+    ],
+    "pseudocode_statement_ids": [
+      ["SYS-PORTFOLIO-001-FIL-0054-STMT-000010"],
+      ["SYS-PORTFOLIO-001-FIL-0054-STMT-000011"],
+      ["SYS-PORTFOLIO-001-FIL-0054-STMT-000012"],
+      ["SYS-PORTFOLIO-001-FIL-0054-STMT-000049"],
+      ["SYS-PORTFOLIO-001-FIL-0054-STMT-000050"],
+      ["SYS-PORTFOLIO-001-FIL-0054-STMT-000012"],
+      ["SYS-PORTFOLIO-001-FIL-0054-STMT-000045"],
+      ["SYS-PORTFOLIO-001-FIL-0054-STMT-000046"],
+      ["SYS-PORTFOLIO-001-FIL-0054-STMT-000047"],
+      ["SYS-PORTFOLIO-001-FIL-0054-STMT-000048"],
+      ["SYS-PORTFOLIO-001-FIL-0054-STMT-000012"]
+    ],
+    "pseudocode_text": "SET ws_savepoint_id = request.savepoint_name\nSQL SAVEPOINT [dynamic: ws_savepoint_id] ON ROLLBACK RETAIN CURSORS  -- mark a point the unit of work can later be rolled back to; open cursors are kept\nIF sqlcode = 0 THEN  -- CHECK SQLCODE\n  INCREMENT ws_savepoint_count BY 1\n  SET request.return_code = 0\nELSE\n  SET request.sqlcode = sqlcode\n  SET request.error_msg = 'Savepoint creation failed'\n  SET request.return_code = 8\n  CALL 9100-log-error\nEND IF",
+    "statement_ids": ["SYS-PORTFOLIO-001-FIL-0054-STMT-000010", "SYS-PORTFOLIO-001-FIL-0054-STMT-000011", "SYS-PORTFOLIO-001-FIL-0054-STMT-000012", "SYS-PORTFOLIO-001-FIL-0054-STMT-000049", "SYS-PORTFOLIO-001-FIL-0054-STMT-000050", "SYS-PORTFOLIO-001-FIL-0054-STMT-000045", "SYS-PORTFOLIO-001-FIL-0054-STMT-000046", "SYS-PORTFOLIO-001-FIL-0054-STMT-000047", "SYS-PORTFOLIO-001-FIL-0054-STMT-000048"],
+    "untranslated_statement_ids": [],
+    "field_references": ["LS-SAVEPOINT-NAME", "WS-SAVEPOINT-ID", "SQLCODE", "WS-SAVEPOINT-COUNT", "LS-RETURN-CODE", "LS-SQLCODE", "LS-ERROR-MSG"],
+    "field_reference_ids": [
+      {"name": "LS-SAVEPOINT-NAME", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0054-FLD-000011", "target_kind": "field", "candidate_ids": []},
+      {"name": "WS-SAVEPOINT-ID", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0054-REC-0001", "target_kind": "record", "candidate_ids": []},
+      {"name": "SQLCODE", "qualifiers": [], "resolution": "UNRESOLVED", "target_id": null, "target_kind": null, "candidate_ids": []},
+      {"name": "WS-SAVEPOINT-COUNT", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0054-FLD-000003", "target_kind": "field", "candidate_ids": []},
+      {"name": "LS-RETURN-CODE", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0054-FLD-000017", "target_kind": "field", "candidate_ids": []},
+      {"name": "LS-SQLCODE", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0054-FLD-000019", "target_kind": "field", "candidate_ids": []},
+      {"name": "LS-ERROR-MSG", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0054-FLD-000020", "target_kind": "field", "candidate_ids": []}
+    ],
+    "calls_made": ["9100-LOG-ERROR"],
+    "calls_made_ids": [
+      {"name": "9100-LOG-ERROR", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0054-PAR-0010", "section_id": null}
+    ],
+    "complexity_score": 2,
+    "has_unresolved_statements": false,
+    "annotations": [
+      {"line": 123, "statement_id": "SYS-PORTFOLIO-001-FIL-0054-STMT-000011", "note": "SAVEPOINT with a host-variable name (:WS-SAVEPOINT-ID), written as in the source; the savepoint name is supplied by the caller at runtime. !! REVIEW: DB2 normally expects a savepoint identifier rather than a host variable here.", "ambiguous": true}
+    ]
+  },
+  {
+    "name": "5000-RESTORE",
+    "paragraph_id": "SYS-PORTFOLIO-001-FIL-0054-PAR-0007",
+    "section": null,
+    "section_id": null,
+    "line_range": [137, 154],
+    "pseudocode": [
+      "SET ws_savepoint_id = request.savepoint_name",
+      "SQL ROLLBACK TO SAVEPOINT [dynamic: ws_savepoint_id]  -- undo database changes made after that savepoint",
+      "IF sqlcode = 0 THEN  -- CHECK SQLCODE",
+      "  INCREMENT ws_rollback_count BY 1  -- a savepoint restore is counted as a rollback",
+      "  SET request.return_code = 0",
+      "ELSE",
+      "  SET request.sqlcode = sqlcode",
+      "  SET request.error_msg = 'Savepoint restore failed'",
+      "  SET request.return_code = 8",
+      "  CALL 9100-log-error",
+      "END IF"
+    ],
+    "pseudocode_statement_ids": [
+      ["SYS-PORTFOLIO-001-FIL-0054-STMT-000013"],
+      ["SYS-PORTFOLIO-001-FIL-0054-STMT-000014"],
+      ["SYS-PORTFOLIO-001-FIL-0054-STMT-000015"],
+      ["SYS-PORTFOLIO-001-FIL-0054-STMT-000055"],
+      ["SYS-PORTFOLIO-001-FIL-0054-STMT-000056"],
+      ["SYS-PORTFOLIO-001-FIL-0054-STMT-000015"],
+      ["SYS-PORTFOLIO-001-FIL-0054-STMT-000051"],
+      ["SYS-PORTFOLIO-001-FIL-0054-STMT-000052"],
+      ["SYS-PORTFOLIO-001-FIL-0054-STMT-000053"],
+      ["SYS-PORTFOLIO-001-FIL-0054-STMT-000054"],
+      ["SYS-PORTFOLIO-001-FIL-0054-STMT-000015"]
+    ],
+    "pseudocode_text": "SET ws_savepoint_id = request.savepoint_name\nSQL ROLLBACK TO SAVEPOINT [dynamic: ws_savepoint_id]  -- undo database changes made after that savepoint\nIF sqlcode = 0 THEN  -- CHECK SQLCODE\n  INCREMENT ws_rollback_count BY 1  -- a savepoint restore is counted as a rollback\n  SET request.return_code = 0\nELSE\n  SET request.sqlcode = sqlcode\n  SET request.error_msg = 'Savepoint restore failed'\n  SET request.return_code = 8\n  CALL 9100-log-error\nEND IF",
+    "statement_ids": ["SYS-PORTFOLIO-001-FIL-0054-STMT-000013", "SYS-PORTFOLIO-001-FIL-0054-STMT-000014", "SYS-PORTFOLIO-001-FIL-0054-STMT-000015", "SYS-PORTFOLIO-001-FIL-0054-STMT-000055", "SYS-PORTFOLIO-001-FIL-0054-STMT-000056", "SYS-PORTFOLIO-001-FIL-0054-STMT-000051", "SYS-PORTFOLIO-001-FIL-0054-STMT-000052", "SYS-PORTFOLIO-001-FIL-0054-STMT-000053", "SYS-PORTFOLIO-001-FIL-0054-STMT-000054"],
+    "untranslated_statement_ids": [],
+    "field_references": ["LS-SAVEPOINT-NAME", "WS-SAVEPOINT-ID", "SQLCODE", "WS-ROLLBACK-COUNT", "LS-RETURN-CODE", "LS-SQLCODE", "LS-ERROR-MSG"],
+    "field_reference_ids": [
+      {"name": "LS-SAVEPOINT-NAME", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0054-FLD-000011", "target_kind": "field", "candidate_ids": []},
+      {"name": "WS-SAVEPOINT-ID", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0054-REC-0001", "target_kind": "record", "candidate_ids": []},
+      {"name": "SQLCODE", "qualifiers": [], "resolution": "UNRESOLVED", "target_id": null, "target_kind": null, "candidate_ids": []},
+      {"name": "WS-ROLLBACK-COUNT", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0054-FLD-000002", "target_kind": "field", "candidate_ids": []},
+      {"name": "LS-RETURN-CODE", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0054-FLD-000017", "target_kind": "field", "candidate_ids": []},
+      {"name": "LS-SQLCODE", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0054-FLD-000019", "target_kind": "field", "candidate_ids": []},
+      {"name": "LS-ERROR-MSG", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0054-FLD-000020", "target_kind": "field", "candidate_ids": []}
+    ],
+    "calls_made": ["9100-LOG-ERROR"],
+    "calls_made_ids": [
+      {"name": "9100-LOG-ERROR", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0054-PAR-0010", "section_id": null}
+    ],
+    "complexity_score": 2,
+    "has_unresolved_statements": false,
+    "annotations": [
+      {"line": 141, "statement_id": "SYS-PORTFOLIO-001-FIL-0054-STMT-000014", "note": "ROLLBACK TO SAVEPOINT with a host-variable name, written as in the source. !! REVIEW: savepoint named at runtime.", "ambiguous": true}
+    ]
+  },
+  {
+    "name": "6000-STATISTICS",
+    "paragraph_id": "SYS-PORTFOLIO-001-FIL-0054-PAR-0008",
+    "section": null,
+    "section_id": null,
+    "line_range": [155, 161],
+    "pseudocode": [
+      "DISPLAY 'DB2 Commit Controller Statistics:'  -- console output",
+      "DISPLAY '  Commits:    ' + ws_commit_count",
+      "DISPLAY '  Rollbacks:  ' + ws_rollback_count",
+      "DISPLAY '  Savepoints: ' + ws_savepoint_count"
+    ],
+    "pseudocode_statement_ids": [
+      ["SYS-PORTFOLIO-001-FIL-0054-STMT-000016"],
+      ["SYS-PORTFOLIO-001-FIL-0054-STMT-000017"],
+      ["SYS-PORTFOLIO-001-FIL-0054-STMT-000018"],
+      ["SYS-PORTFOLIO-001-FIL-0054-STMT-000019"]
+    ],
+    "pseudocode_text": "DISPLAY 'DB2 Commit Controller Statistics:'  -- console output\nDISPLAY '  Commits:    ' + ws_commit_count\nDISPLAY '  Rollbacks:  ' + ws_rollback_count\nDISPLAY '  Savepoints: ' + ws_savepoint_count",
+    "statement_ids": ["SYS-PORTFOLIO-001-FIL-0054-STMT-000016", "SYS-PORTFOLIO-001-FIL-0054-STMT-000017", "SYS-PORTFOLIO-001-FIL-0054-STMT-000018", "SYS-PORTFOLIO-001-FIL-0054-STMT-000019"],
+    "untranslated_statement_ids": [],
+    "field_references": ["WS-COMMIT-COUNT", "WS-ROLLBACK-COUNT", "WS-SAVEPOINT-COUNT"],
+    "field_reference_ids": [
+      {"name": "WS-COMMIT-COUNT", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0054-FLD-000001", "target_kind": "field", "candidate_ids": []},
+      {"name": "WS-ROLLBACK-COUNT", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0054-FLD-000002", "target_kind": "field", "candidate_ids": []},
+      {"name": "WS-SAVEPOINT-COUNT", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0054-FLD-000003", "target_kind": "field", "candidate_ids": []}
+    ],
+    "calls_made": [],
+    "calls_made_ids": [],
+    "complexity_score": 1,
+    "has_unresolved_statements": false,
+    "annotations": [
+      {"line": 156, "note": "The STAT function does not set LS-RETURN-CODE."}
+    ]
+  },
+  {
+    "name": "9000-ERROR-ROUTINE",
+    "paragraph_id": "SYS-PORTFOLIO-001-FIL-0054-PAR-0009",
+    "section": null,
+    "section_id": null,
+    "line_range": [162, 167],
+    "pseudocode": [
+      "SET err_program = 'DB2CMT'",
+      "SET request.return_code = 12",
+      "CALL program ERRPROC",
+      "  PASSING: err_message  -- common error block from copybook ERRHAND; subprogram: error processor"
+    ],
+    "pseudocode_statement_ids": [
+      ["SYS-PORTFOLIO-001-FIL-0054-STMT-000020"],
+      ["SYS-PORTFOLIO-001-FIL-0054-STMT-000021"],
+      ["SYS-PORTFOLIO-001-FIL-0054-STMT-000022"],
+      ["SYS-PORTFOLIO-001-FIL-0054-STMT-000022"]
+    ],
+    "pseudocode_text": "SET err_program = 'DB2CMT'\nSET request.return_code = 12\nCALL program ERRPROC\n  PASSING: err_message  -- common error block from copybook ERRHAND; subprogram: error processor",
+    "statement_ids": ["SYS-PORTFOLIO-001-FIL-0054-STMT-000020", "SYS-PORTFOLIO-001-FIL-0054-STMT-000021", "SYS-PORTFOLIO-001-FIL-0054-STMT-000022"],
+    "untranslated_statement_ids": [],
+    "field_references": ["ERR-PROGRAM", "LS-RETURN-CODE", "ERR-MESSAGE"],
+    "field_reference_ids": [
+      {"name": "ERR-PROGRAM", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0007-FLD-000013", "target_kind": "field", "candidate_ids": []},
+      {"name": "LS-RETURN-CODE", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0054-FLD-000017", "target_kind": "field", "candidate_ids": []},
+      {"name": "ERR-MESSAGE", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0007-REC-0003", "target_kind": "record", "candidate_ids": []}
+    ],
+    "calls_made": [],
+    "calls_made_ids": [],
+    "complexity_score": 1,
+    "has_unresolved_statements": false,
+    "annotations": [
+      {"line": 165, "statement_id": "SYS-PORTFOLIO-001-FIL-0054-STMT-000022", "note": "Static CALL to external program ERRPROC (outside this execution's scope); not traced into."}
+    ]
+  },
+  {
+    "name": "9100-LOG-ERROR",
+    "paragraph_id": "SYS-PORTFOLIO-001-FIL-0054-PAR-0010",
+    "section": null,
+    "section_id": null,
+    "line_range": [168, 170],
+    "pseudocode": [
+      "CALL program DB2ERR",
+      "  PASSING: request.error_info (sqlcode + error_msg)  -- subprogram: DB2 error handler (see DB2ERR logic file)  !! REVIEW: parameter layout does not match DB2ERR's request block (function code first)"
+    ],
+    "pseudocode_statement_ids": [
+      ["SYS-PORTFOLIO-001-FIL-0054-STMT-000023"],
+      ["SYS-PORTFOLIO-001-FIL-0054-STMT-000023"]
+    ],
+    "pseudocode_text": "CALL program DB2ERR\n  PASSING: request.error_info (sqlcode + error_msg)  -- subprogram: DB2 error handler (see DB2ERR logic file)  !! REVIEW: parameter layout does not match DB2ERR's request block (function code first)",
+    "statement_ids": ["SYS-PORTFOLIO-001-FIL-0054-STMT-000023"],
+    "untranslated_statement_ids": [],
+    "field_references": ["LS-ERROR-INFO"],
+    "field_reference_ids": [
+      {"name": "LS-ERROR-INFO", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0054-FLD-000018", "target_kind": "field", "candidate_ids": []}
+    ],
+    "calls_made": [],
+    "calls_made_ids": [],
+    "complexity_score": 1,
+    "has_unresolved_statements": false,
+    "annotations": [
+      {"line": 169, "statement_id": "SYS-PORTFOLIO-001-FIL-0054-STMT-000023", "note": "Callee DB2ERR (SYS-PORTFOLIO-001-FIL-0056) dispatches on a 4-byte function code at the start of its parameter; here the first 4 bytes are the binary LS-SQLCODE. See trace_issues call_interface_mismatch.", "ambiguous": true}
+    ]
+  }
+],
+"unresolved_statements": [],
+"pseudocode_issues": [
+  {"severity": "info", "type": "id_unresolved", "kind": "field", "name": "SQLCODE", "paragraphs": ["2100-ISSUE-COMMIT", "3000-ROLLBACK", "4000-SAVEPOINT", "5000-RESTORE"], "message": "SQLCODE: resolve-field-references UNRESOLVED; target_id null."},
+  {"severity": "info", "type": "external_call", "name": "ERRPROC", "statement_id": "SYS-PORTFOLIO-001-FIL-0054-STMT-000022", "message": "Static CALL 'ERRPROC' recorded with its literal target; not traced into."},
+  {"severity": "warning", "type": "call_interface_mismatch", "name": "DB2ERR", "statement_id": "SYS-PORTFOLIO-001-FIL-0054-STMT-000023", "message": "CALL 'DB2ERR' USING LS-ERROR-INFO: parameter layout differs from DB2ERR's LS-ERROR-REQUEST; flagged !! REVIEW."}
+]
+}

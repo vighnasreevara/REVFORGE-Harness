@@ -1,0 +1,749 @@
+{
+"program_summary": {"program_id": "RCVPRC00", "file_id": "SYS-PORTFOLIO-001-FIL-0047", "logic_file": "program_logic/SYS-PORTFOLIO-001-FIL-0047__RCVPRC00_logic.json", "logic_status": "success", "paragraphs_translated": 18, "execution_paths": 1, "branches": 22, "loops": 2, "dead_code_confirmed": 0, "goto_annotations": 0, "unresolvable_paths": 0, "unresolved_ids": 0},
+  "program_id": "RCVPRC00",
+  "system_id": "SYS-PORTFOLIO-001",
+  "file_id": "SYS-PORTFOLIO-001-FIL-0047",
+  "path_id": "SYS-PORTFOLIO-001-PATH-0047",
+  "relative_path": "src/programs/batch/RCVPRC00.cbl",
+  "parse_run_id": "PRUN-20261023T023803Z-ACC2",
+  "upstream": {
+    "verification": {
+      "verified_at": "2026-10-26T17:01:33Z",
+      "verdict": "VALID",
+      "parse_status": "success",
+      "v2_file_identities": {
+        "program_entries": {"checked": 2, "ok": 2, "problems": [], "duplicate_file_ids_in_json": [], "consistent": true, "require_completed": ["parser", "data"], "sources": ["raw_structure", "data_layout"]},
+        "copybook_entries": {"checked": 4, "ok": 4, "problems": [], "duplicate_file_ids_in_json": [], "consistent": true, "require_completed": ["data"], "file_ids": ["SYS-PORTFOLIO-001-FIL-0002", "SYS-PORTFOLIO-001-FIL-0004", "SYS-PORTFOLIO-001-FIL-0001", "SYS-PORTFOLIO-001-FIL-0007"]}
+      },
+      "v3_structure_identities": {"sections_checked": 5, "paragraphs_checked": 18, "statements_checked": 105, "edges_checked": 32, "registered_edges": 32, "section_problems": [], "paragraph_problems": [], "statement_problems": [], "edge_problems": [], "invalid_registered_edges": [], "registered_not_in_json": {"missing_count": 0}, "duplicate_ids_in_json": [], "consistent": true},
+      "v4_data_identities": {
+        "program_layout": {"file_id": "SYS-PORTFOLIO-001-FIL-0047", "file_type": "program", "records_checked": 3, "fields_checked": 20, "expansions_checked": 4, "record_problems": [], "field_problems": [], "expansion_problems": [], "copybook_records_in_program": 0, "registered_not_in_json": {"missing_count": 0}, "consistent": true},
+        "copybook_layouts": [
+          {"file_id": "SYS-PORTFOLIO-001-FIL-0002", "copybook": "BCHCTL", "records_checked": 1, "fields_checked": 30, "consistent": true},
+          {"file_id": "SYS-PORTFOLIO-001-FIL-0004", "copybook": "PRCSEQ", "records_checked": 2, "fields_checked": 64, "consistent": true},
+          {"file_id": "SYS-PORTFOLIO-001-FIL-0001", "copybook": "BCHCON", "records_checked": 1, "fields_checked": 40, "consistent": true},
+          {"file_id": "SYS-PORTFOLIO-001-FIL-0007", "copybook": "ERRHAND", "records_checked": 5, "fields_checked": 25, "consistent": true}
+        ]
+      },
+      "notes": ["The program layout copy_expansions carry holder_id null and the enclosing section_id; the section_id was sent as holder_id for V4 (the verification query matches section holders by section_id). All four expansions matched.", "The four copybook layouts were verified once in this execution (V4) and are shared with PRCSEQ00."]
+    }
+  },
+  "execution_traces": [
+    {
+      "entry_point": "0000-MAIN",
+      "entry_point_id": "SYS-PORTFOLIO-001-FIL-0047-PAR-0001",
+      "entry_type": "batch_subprogram",
+      "steps": [
+        {"step": 1, "paragraph": "0000-MAIN", "action": "PERFORM", "target": "1000-INITIALIZE-RECOVERY", "condition": {"text": "WHEN FUNC-INIT", "fields": ["FUNC-INIT"], "field_ids": [{"name": "FUNC-INIT", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0047-FLD-000013", "target_kind": "condition", "candidate_ids": []}]}, "line": 74, "statement_id": "SYS-PORTFOLIO-001-FIL-0047-STMT-000054", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0047-PAR-0001", "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0047-PAR-0002", "target_section_id": null},
+        {"step": 2, "paragraph": "1000-INITIALIZE-RECOVERY", "action": "PERFORM", "target": "1100-OPEN-FILES", "condition": null, "line": 89, "statement_id": "SYS-PORTFOLIO-001-FIL-0047-STMT-000004", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0047-PAR-0002", "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0047-PAR-0006", "target_section_id": null},
+        {"step": 3, "paragraph": "1100-OPEN-FILES", "action": "PERFORM", "target": "9000-ERROR-ROUTINE", "condition": {"text": "WS-BCT-STATUS NOT = '00'", "fields": ["WS-BCT-STATUS"], "field_ids": [{"name": "WS-BCT-STATUS", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0047-FLD-000001", "target_kind": "field", "candidate_ids": []}]}, "line": 122, "statement_id": "SYS-PORTFOLIO-001-FIL-0047-STMT-000063", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0047-PAR-0006", "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0047-PAR-0005", "target_section_id": null},
+        {"step": 4, "paragraph": "9000-ERROR-ROUTINE", "action": "CALL", "target": "ERRPROC", "condition": null, "line": 113, "statement_id": "SYS-PORTFOLIO-001-FIL-0047-STMT-000012", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0047-PAR-0005", "target_paragraph_id": null, "target_section_id": null},
+        {"step": 5, "paragraph": "1100-OPEN-FILES", "action": "PERFORM", "target": "9000-ERROR-ROUTINE", "condition": {"text": "WS-PSR-STATUS NOT = '00'", "fields": ["WS-PSR-STATUS"], "field_ids": [{"name": "WS-PSR-STATUS", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0047-FLD-000002", "target_kind": "field", "candidate_ids": []}]}, "line": 128, "statement_id": "SYS-PORTFOLIO-001-FIL-0047-STMT-000065", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0047-PAR-0006", "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0047-PAR-0005", "target_section_id": null},
+        {"step": 6, "paragraph": "1000-INITIALIZE-RECOVERY", "action": "PERFORM", "target": "1200-VALIDATE-REQUEST", "condition": null, "line": 90, "statement_id": "SYS-PORTFOLIO-001-FIL-0047-STMT-000005", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0047-PAR-0002", "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0047-PAR-0007", "target_section_id": null},
+        {"step": 7, "paragraph": "1200-VALIDATE-REQUEST", "action": "PERFORM", "target": "9000-ERROR-ROUTINE", "condition": {"text": "LS-PROCESS-DATE = SPACES", "fields": ["LS-PROCESS-DATE"], "field_ids": [{"name": "LS-PROCESS-DATE", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0047-FLD-000016", "target_kind": "field", "candidate_ids": []}]}, "line": 135, "statement_id": "SYS-PORTFOLIO-001-FIL-0047-STMT-000067", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0047-PAR-0007", "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0047-PAR-0005", "target_section_id": null},
+        {"step": 8, "paragraph": "1200-VALIDATE-REQUEST", "action": "PERFORM", "target": "9000-ERROR-ROUTINE", "condition": {"text": "EVALUATE LS-RECOVERY-TYPE WHEN OTHER (not 'P', 'S' or 'A')", "fields": ["LS-RECOVERY-TYPE"], "field_ids": [{"name": "LS-RECOVERY-TYPE", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0047-FLD-000018", "target_kind": "field", "candidate_ids": []}]}, "line": 145, "statement_id": "SYS-PORTFOLIO-001-FIL-0047-STMT-000070", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0047-PAR-0007", "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0047-PAR-0005", "target_section_id": null},
+        {"step": 9, "paragraph": "1000-INITIALIZE-RECOVERY", "action": "PERFORM", "target": "1300-SET-RECOVERY-MODE", "condition": null, "line": 91, "statement_id": "SYS-PORTFOLIO-001-FIL-0047-STMT-000006", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0047-PAR-0002", "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0047-PAR-0008", "target_section_id": null},
+        {"step": 10, "paragraph": "1300-SET-RECOVERY-MODE", "action": "PERFORM", "target": "9000-ERROR-ROUTINE", "condition": {"text": "WS-RECOVER-PROCESS AND LS-PROCESS-ID = SPACES", "fields": ["WS-RECOVER-PROCESS", "LS-PROCESS-ID"], "field_ids": [{"name": "WS-RECOVER-PROCESS", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0047-FLD-000005", "target_kind": "condition", "candidate_ids": []}, {"name": "LS-PROCESS-ID", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0047-FLD-000017", "target_kind": "field", "candidate_ids": []}]}, "line": 155, "statement_id": "SYS-PORTFOLIO-001-FIL-0047-STMT-000072", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0047-PAR-0008", "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0047-PAR-0005", "target_section_id": null},
+        {"step": 11, "paragraph": "0000-MAIN", "action": "PERFORM", "target": "2000-PROCESS-RECOVERY", "condition": {"text": "WHEN FUNC-RECV", "fields": ["FUNC-RECV"], "field_ids": [{"name": "FUNC-RECV", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0047-FLD-000014", "target_kind": "condition", "candidate_ids": []}]}, "line": 76, "statement_id": "SYS-PORTFOLIO-001-FIL-0047-STMT-000055", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0047-PAR-0001", "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0047-PAR-0003", "target_section_id": null},
+        {"step": 12, "paragraph": "2000-PROCESS-RECOVERY", "action": "PERFORM", "target": "2100-RECOVER-PROCESS", "condition": {"text": "WS-RECOVERY-MODE = 'P'", "fields": ["WS-RECOVERY-MODE"], "field_ids": [{"name": "WS-RECOVERY-MODE", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0047-FLD-000004", "target_kind": "field", "candidate_ids": []}]}, "line": 97, "statement_id": "SYS-PORTFOLIO-001-FIL-0047-STMT-000060", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0047-PAR-0003", "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0047-PAR-0009", "target_section_id": null},
+        {"step": 13, "paragraph": "2100-RECOVER-PROCESS", "action": "PERFORM", "target": "9000-ERROR-ROUTINE", "condition": {"text": "READ BATCH-CONTROL-FILE INVALID KEY", "fields": ["WS-BCT-STATUS"], "field_ids": [{"name": "WS-BCT-STATUS", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0047-FLD-000001", "target_kind": "field", "candidate_ids": []}]}, "line": 166, "statement_id": "SYS-PORTFOLIO-001-FIL-0047-STMT-000074", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0047-PAR-0009", "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0047-PAR-0005", "target_section_id": null},
+        {"step": 14, "paragraph": "2100-RECOVER-PROCESS", "action": "PERFORM", "target": "2110-DETERMINE-ACTION", "condition": null, "line": 169, "statement_id": "SYS-PORTFOLIO-001-FIL-0047-STMT-000024", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0047-PAR-0009", "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0047-PAR-0010", "target_section_id": null},
+        {"step": 15, "paragraph": "2110-DETERMINE-ACTION", "action": "PERFORM", "target": "9000-ERROR-ROUTINE", "condition": {"text": "READ PROCESS-SEQ-FILE INVALID KEY", "fields": ["WS-PSR-STATUS"], "field_ids": [{"name": "WS-PSR-STATUS", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0047-FLD-000002", "target_kind": "field", "candidate_ids": []}]}, "line": 179, "statement_id": "SYS-PORTFOLIO-001-FIL-0047-STMT-000076", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0047-PAR-0010", "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0047-PAR-0005", "target_section_id": null},
+        {"step": 16, "paragraph": "2100-RECOVER-PROCESS", "action": "PERFORM", "target": "2120-EXECUTE-RECOVERY", "condition": null, "line": 170, "statement_id": "SYS-PORTFOLIO-001-FIL-0047-STMT-000025", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0047-PAR-0009", "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0047-PAR-0011", "target_section_id": null},
+        {"step": 17, "paragraph": "2120-EXECUTE-RECOVERY", "action": "PERFORM", "target": "2121-RESTART-PROCESS", "condition": {"text": "WHEN WS-ACTION-RESTART", "fields": ["WS-ACTION-RESTART"], "field_ids": [{"name": "WS-ACTION-RESTART", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0047-FLD-000009", "target_kind": "condition", "candidate_ids": []}]}, "line": 196, "statement_id": "SYS-PORTFOLIO-001-FIL-0047-STMT-000080", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0047-PAR-0011", "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0047-PAR-0012", "target_section_id": null},
+        {"step": 18, "paragraph": "2121-RESTART-PROCESS", "action": "PERFORM", "target": "9000-ERROR-ROUTINE", "condition": {"text": "REWRITE BATCH-CONTROL-RECORD INVALID KEY", "fields": ["WS-BCT-STATUS"], "field_ids": [{"name": "WS-BCT-STATUS", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0047-FLD-000001", "target_kind": "field", "candidate_ids": []}]}, "line": 213, "statement_id": "SYS-PORTFOLIO-001-FIL-0047-STMT-000083", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0047-PAR-0012", "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0047-PAR-0005", "target_section_id": null},
+        {"step": 19, "paragraph": "2120-EXECUTE-RECOVERY", "action": "PERFORM", "target": "2122-BYPASS-PROCESS", "condition": {"text": "WHEN WS-ACTION-BYPASS", "fields": ["WS-ACTION-BYPASS"], "field_ids": [{"name": "WS-ACTION-BYPASS", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0047-FLD-000010", "target_kind": "condition", "candidate_ids": []}]}, "line": 198, "statement_id": "SYS-PORTFOLIO-001-FIL-0047-STMT-000079", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0047-PAR-0011", "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0047-PAR-0013", "target_section_id": null},
+        {"step": 20, "paragraph": "2122-BYPASS-PROCESS", "action": "PERFORM", "target": "9000-ERROR-ROUTINE", "condition": {"text": "REWRITE BATCH-CONTROL-RECORD INVALID KEY", "fields": ["WS-BCT-STATUS"], "field_ids": [{"name": "WS-BCT-STATUS", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0047-FLD-000001", "target_kind": "field", "candidate_ids": []}]}, "line": 225, "statement_id": "SYS-PORTFOLIO-001-FIL-0047-STMT-000085", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0047-PAR-0013", "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0047-PAR-0005", "target_section_id": null},
+        {"step": 21, "paragraph": "2120-EXECUTE-RECOVERY", "action": "PERFORM", "target": "2123-TERMINATE-PROCESS", "condition": {"text": "WHEN WS-ACTION-TERMINATE", "fields": ["WS-ACTION-TERMINATE"], "field_ids": [{"name": "WS-ACTION-TERMINATE", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0047-FLD-000011", "target_kind": "condition", "candidate_ids": []}]}, "line": 200, "statement_id": "SYS-PORTFOLIO-001-FIL-0047-STMT-000081", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0047-PAR-0011", "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0047-PAR-0014", "target_section_id": null},
+        {"step": 22, "paragraph": "2123-TERMINATE-PROCESS", "action": "PERFORM", "target": "9000-ERROR-ROUTINE", "condition": {"text": "REWRITE BATCH-CONTROL-RECORD INVALID KEY", "fields": ["WS-BCT-STATUS"], "field_ids": [{"name": "WS-BCT-STATUS", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0047-FLD-000001", "target_kind": "field", "candidate_ids": []}]}, "line": 237, "statement_id": "SYS-PORTFOLIO-001-FIL-0047-STMT-000087", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0047-PAR-0014", "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0047-PAR-0005", "target_section_id": null},
+        {"step": 23, "paragraph": "2000-PROCESS-RECOVERY", "action": "PERFORM", "target": "2200-RECOVER-SEQUENCE", "condition": {"text": "WS-RECOVERY-MODE = 'S'", "fields": ["WS-RECOVERY-MODE"], "field_ids": [{"name": "WS-RECOVERY-MODE", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0047-FLD-000004", "target_kind": "field", "candidate_ids": []}]}, "line": 99, "statement_id": "SYS-PORTFOLIO-001-FIL-0047-STMT-000061", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0047-PAR-0003", "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0047-PAR-0015", "target_section_id": null},
+        {"step": 24, "paragraph": "2200-RECOVER-SEQUENCE", "action": "PERFORM", "target": "9000-ERROR-ROUTINE", "condition": {"text": "START BATCH-CONTROL-FILE INVALID KEY", "fields": ["WS-BCT-STATUS"], "field_ids": [{"name": "WS-BCT-STATUS", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0047-FLD-000001", "target_kind": "field", "candidate_ids": []}]}, "line": 248, "statement_id": "SYS-PORTFOLIO-001-FIL-0047-STMT-000089", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0047-PAR-0015", "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0047-PAR-0005", "target_section_id": null},
+        {"step": 25, "paragraph": "2200-RECOVER-SEQUENCE", "action": "PERFORM_UNTIL", "target": "2200-RECOVER-SEQUENCE", "condition": {"text": "WS-BCT-STATUS = '10'", "fields": ["WS-BCT-STATUS"], "field_ids": [{"name": "WS-BCT-STATUS", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0047-FLD-000001", "target_kind": "field", "candidate_ids": []}], "test_time": "BEFORE", "loop_type": "WHILE", "termination_pattern": "FILE_EXHAUSTION_LOOP"}, "line": 251, "statement_id": "SYS-PORTFOLIO-001-FIL-0047-STMT-000046", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0047-PAR-0015", "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0047-PAR-0015", "target_section_id": null},
+        {"step": 26, "paragraph": "2200-RECOVER-SEQUENCE", "action": "PERFORM", "target": "2100-RECOVER-PROCESS", "condition": {"text": "NOT AT END and BCT-PROCESS-DATE = LS-PROCESS-DATE", "fields": ["BCT-PROCESS-DATE", "LS-PROCESS-DATE"], "field_ids": [{"name": "BCT-PROCESS-DATE", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0002-FLD-000003", "target_kind": "field", "candidate_ids": []}, {"name": "LS-PROCESS-DATE", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0047-FLD-000016", "target_kind": "field", "candidate_ids": []}]}, "line": 257, "statement_id": "SYS-PORTFOLIO-001-FIL-0047-STMT-000105", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0047-PAR-0015", "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0047-PAR-0009", "target_section_id": null},
+        {"step": 27, "paragraph": "2000-PROCESS-RECOVERY", "action": "PERFORM", "target": "2300-RECOVER-ALL", "condition": {"text": "WS-RECOVERY-MODE = 'A'", "fields": ["WS-RECOVERY-MODE"], "field_ids": [{"name": "WS-RECOVERY-MODE", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0047-FLD-000004", "target_kind": "field", "candidate_ids": []}]}, "line": 101, "statement_id": "SYS-PORTFOLIO-001-FIL-0047-STMT-000059", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0047-PAR-0003", "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0047-PAR-0016", "target_section_id": null},
+        {"step": 28, "paragraph": "2300-RECOVER-ALL", "action": "PERFORM", "target": "9000-ERROR-ROUTINE", "condition": {"text": "START BATCH-CONTROL-FILE INVALID KEY", "fields": ["WS-BCT-STATUS"], "field_ids": [{"name": "WS-BCT-STATUS", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0047-FLD-000001", "target_kind": "field", "candidate_ids": []}]}, "line": 269, "statement_id": "SYS-PORTFOLIO-001-FIL-0047-STMT-000092", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0047-PAR-0016", "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0047-PAR-0005", "target_section_id": null},
+        {"step": 29, "paragraph": "2300-RECOVER-ALL", "action": "PERFORM_UNTIL", "target": "2300-RECOVER-ALL", "condition": {"text": "WS-BCT-STATUS = '10'", "fields": ["WS-BCT-STATUS"], "field_ids": [{"name": "WS-BCT-STATUS", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0047-FLD-000001", "target_kind": "field", "candidate_ids": []}], "test_time": "BEFORE", "loop_type": "WHILE", "termination_pattern": "FILE_EXHAUSTION_LOOP"}, "line": 272, "statement_id": "SYS-PORTFOLIO-001-FIL-0047-STMT-000049", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0047-PAR-0016", "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0047-PAR-0016", "target_section_id": null},
+        {"step": 30, "paragraph": "2300-RECOVER-ALL", "action": "PERFORM", "target": "2100-RECOVER-PROCESS", "condition": {"text": "NOT AT END", "fields": ["WS-BCT-STATUS"], "field_ids": [{"name": "WS-BCT-STATUS", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0047-FLD-000001", "target_kind": "field", "candidate_ids": []}]}, "line": 278, "statement_id": "SYS-PORTFOLIO-001-FIL-0047-STMT-000104", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0047-PAR-0016", "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0047-PAR-0009", "target_section_id": null},
+        {"step": 31, "paragraph": "0000-MAIN", "action": "PERFORM", "target": "3000-TERMINATE-RECOVERY", "condition": {"text": "WHEN FUNC-TERM", "fields": ["FUNC-TERM"], "field_ids": [{"name": "FUNC-TERM", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0047-FLD-000015", "target_kind": "condition", "candidate_ids": []}]}, "line": 78, "statement_id": "SYS-PORTFOLIO-001-FIL-0047-STMT-000056", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0047-PAR-0001", "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0047-PAR-0004", "target_section_id": null},
+        {"step": 32, "paragraph": "3000-TERMINATE-RECOVERY", "action": "PERFORM", "target": "3100-UPDATE-FINAL-STATUS", "condition": null, "line": 106, "statement_id": "SYS-PORTFOLIO-001-FIL-0047-STMT-000008", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0047-PAR-0004", "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0047-PAR-0017", "target_section_id": null},
+        {"step": 33, "paragraph": "3100-UPDATE-FINAL-STATUS", "action": "CALL", "target": "ERRPROC", "condition": null, "line": 290, "statement_id": "SYS-PORTFOLIO-001-FIL-0047-STMT-000051", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0047-PAR-0017", "target_paragraph_id": null, "target_section_id": null},
+        {"step": 34, "paragraph": "3000-TERMINATE-RECOVERY", "action": "PERFORM", "target": "3200-CLOSE-FILES", "condition": null, "line": 107, "statement_id": "SYS-PORTFOLIO-001-FIL-0047-STMT-000009", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0047-PAR-0004", "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0047-PAR-0018", "target_section_id": null},
+        {"step": 35, "paragraph": "3200-CLOSE-FILES", "action": "PERFORM", "target": "9000-ERROR-ROUTINE", "condition": {"text": "WS-BCT-STATUS NOT = '00' OR WS-PSR-STATUS NOT = '00'", "fields": ["WS-BCT-STATUS", "WS-PSR-STATUS"], "field_ids": [{"name": "WS-BCT-STATUS", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0047-FLD-000001", "target_kind": "field", "candidate_ids": []}, {"name": "WS-PSR-STATUS", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0047-FLD-000002", "target_kind": "field", "candidate_ids": []}]}, "line": 300, "statement_id": "SYS-PORTFOLIO-001-FIL-0047-STMT-000097", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0047-PAR-0018", "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0047-PAR-0005", "target_section_id": null},
+        {"step": 36, "paragraph": "0000-MAIN", "action": "PERFORM", "target": "9000-ERROR-ROUTINE", "condition": {"text": "WHEN OTHER", "fields": [], "field_ids": []}, "line": 81, "statement_id": "SYS-PORTFOLIO-001-FIL-0047-STMT-000058", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0047-PAR-0001", "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0047-PAR-0005", "target_section_id": null},
+        {"step": 37, "paragraph": "0000-MAIN", "action": "GOBACK", "target": null, "condition": null, "line": 85, "statement_id": "SYS-PORTFOLIO-001-FIL-0047-STMT-000003", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0047-PAR-0001", "target_paragraph_id": null, "target_section_id": null}
+      ]
+    }
+  ],
+  "branch_map": [
+    {"paragraph": "0000-MAIN", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0047-PAR-0001", "branches": [
+      {"type": "EVALUATE", "line": 72, "statement_id": "SYS-PORTFOLIO-001-FIL-0047-STMT-000001", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0047-PAR-0001", "subjects": ["TRUE"], "condition_fields": ["FUNC-INIT", "FUNC-RECV", "FUNC-TERM"],
+       "condition_field_ids": [{"name": "FUNC-INIT", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0047-FLD-000013", "target_kind": "condition", "candidate_ids": []}, {"name": "FUNC-RECV", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0047-FLD-000014", "target_kind": "condition", "candidate_ids": []}, {"name": "FUNC-TERM", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0047-FLD-000015", "target_kind": "condition", "candidate_ids": []}],
+       "when_clauses": [
+         {"conditions": ["FUNC-INIT"], "condition_fields": ["FUNC-INIT"], "body_line_range": [74, 74], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0047-STMT-000054"]},
+         {"conditions": ["FUNC-RECV"], "condition_fields": ["FUNC-RECV"], "body_line_range": [76, 76], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0047-STMT-000055"]},
+         {"conditions": ["FUNC-TERM"], "condition_fields": ["FUNC-TERM"], "body_line_range": [78, 78], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0047-STMT-000056"]},
+         {"conditions": ["OTHER"], "condition_fields": [], "body_line_range": [80, 81], "is_default": true, "statement_ids": ["SYS-PORTFOLIO-001-FIL-0047-STMT-000057", "SYS-PORTFOLIO-001-FIL-0047-STMT-000058"]}
+       ], "end_evaluate_line": 82, "nested_depth": 1}
+    ]},
+    {"paragraph": "2000-PROCESS-RECOVERY", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0047-PAR-0003", "branches": [
+      {"type": "EVALUATE", "line": 95, "statement_id": "SYS-PORTFOLIO-001-FIL-0047-STMT-000007", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0047-PAR-0003", "subjects": ["WS-RECOVERY-MODE"], "condition_fields": ["WS-RECOVERY-MODE"],
+       "condition_field_ids": [{"name": "WS-RECOVERY-MODE", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0047-FLD-000004", "target_kind": "field", "candidate_ids": []}],
+       "when_clauses": [
+         {"conditions": ["'P'"], "condition_fields": ["WS-RECOVERY-MODE"], "body_line_range": [97, 97], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0047-STMT-000060"]},
+         {"conditions": ["'S'"], "condition_fields": ["WS-RECOVERY-MODE"], "body_line_range": [99, 99], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0047-STMT-000061"]},
+         {"conditions": ["'A'"], "condition_fields": ["WS-RECOVERY-MODE"], "body_line_range": [101, 101], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0047-STMT-000059"]}
+       ], "end_evaluate_line": 102, "nested_depth": 1}
+    ]},
+    {"paragraph": "1100-OPEN-FILES", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0047-PAR-0006", "branches": [
+      {"type": "IF", "line": 120, "statement_id": "SYS-PORTFOLIO-001-FIL-0047-STMT-000014", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0047-PAR-0006", "condition_text": "WS-BCT-STATUS NOT = '00'", "condition_fields": ["WS-BCT-STATUS"], "condition_field_ids": [{"name": "WS-BCT-STATUS", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0047-FLD-000001", "target_kind": "field", "candidate_ids": []}], "has_else": false, "then_line_range": [121, 122], "else_line_range": null, "end_if_line": 123, "nested_depth": 1,
+       "outcomes": [{"label": "THEN", "line_range": [121, 122], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0047-STMT-000062", "SYS-PORTFOLIO-001-FIL-0047-STMT-000063"]}]},
+      {"type": "IF", "line": 126, "statement_id": "SYS-PORTFOLIO-001-FIL-0047-STMT-000016", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0047-PAR-0006", "condition_text": "WS-PSR-STATUS NOT = '00'", "condition_fields": ["WS-PSR-STATUS"], "condition_field_ids": [{"name": "WS-PSR-STATUS", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0047-FLD-000002", "target_kind": "field", "candidate_ids": []}], "has_else": false, "then_line_range": [127, 128], "else_line_range": null, "end_if_line": 129, "nested_depth": 1,
+       "outcomes": [{"label": "THEN", "line_range": [127, 128], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0047-STMT-000064", "SYS-PORTFOLIO-001-FIL-0047-STMT-000065"]}]}
+    ]},
+    {"paragraph": "1200-VALIDATE-REQUEST", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0047-PAR-0007", "branches": [
+      {"type": "IF", "line": 133, "statement_id": "SYS-PORTFOLIO-001-FIL-0047-STMT-000017", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0047-PAR-0007", "condition_text": "LS-PROCESS-DATE = SPACES", "condition_fields": ["LS-PROCESS-DATE"], "condition_field_ids": [{"name": "LS-PROCESS-DATE", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0047-FLD-000016", "target_kind": "field", "candidate_ids": []}], "has_else": false, "then_line_range": [134, 135], "else_line_range": null, "end_if_line": 136, "nested_depth": 1,
+       "outcomes": [{"label": "THEN", "line_range": [134, 135], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0047-STMT-000066", "SYS-PORTFOLIO-001-FIL-0047-STMT-000067"]}]},
+      {"type": "EVALUATE", "line": 138, "statement_id": "SYS-PORTFOLIO-001-FIL-0047-STMT-000018", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0047-PAR-0007", "subjects": ["LS-RECOVERY-TYPE"], "condition_fields": ["LS-RECOVERY-TYPE"],
+       "condition_field_ids": [{"name": "LS-RECOVERY-TYPE", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0047-FLD-000018", "target_kind": "field", "candidate_ids": []}],
+       "when_clauses": [
+         {"conditions": ["'P'", "'S'", "'A'"], "condition_fields": ["LS-RECOVERY-TYPE"], "body_line_range": [142, 142], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0047-STMT-000068"]},
+         {"conditions": ["OTHER"], "condition_fields": [], "body_line_range": [144, 145], "is_default": true, "statement_ids": ["SYS-PORTFOLIO-001-FIL-0047-STMT-000069", "SYS-PORTFOLIO-001-FIL-0047-STMT-000070"]}
+       ], "end_evaluate_line": 146, "nested_depth": 1}
+    ]},
+    {"paragraph": "1300-SET-RECOVERY-MODE", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0047-PAR-0008", "branches": [
+      {"type": "IF", "line": 152, "statement_id": "SYS-PORTFOLIO-001-FIL-0047-STMT-000020", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0047-PAR-0008", "condition_text": "WS-RECOVER-PROCESS AND LS-PROCESS-ID = SPACES", "condition_fields": ["WS-RECOVER-PROCESS", "LS-PROCESS-ID"], "condition_field_ids": [{"name": "WS-RECOVER-PROCESS", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0047-FLD-000005", "target_kind": "condition", "candidate_ids": []}, {"name": "LS-PROCESS-ID", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0047-FLD-000017", "target_kind": "field", "candidate_ids": []}], "has_else": false, "then_line_range": [153, 155], "else_line_range": null, "end_if_line": 156, "nested_depth": 1,
+       "outcomes": [{"label": "THEN", "line_range": [153, 155], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0047-STMT-000071", "SYS-PORTFOLIO-001-FIL-0047-STMT-000072"]}]}
+    ]},
+    {"paragraph": "2100-RECOVER-PROCESS", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0047-PAR-0009", "branches": [
+      {"type": "INVALID_KEY", "operation": "READ", "file_name": "BATCH-CONTROL-FILE", "line": 163, "statement_id": "SYS-PORTFOLIO-001-FIL-0047-STMT-000023", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0047-PAR-0009", "invalid_key_line_range": [164, 166], "not_invalid_key_line_range": null, "condition_fields": ["WS-BCT-STATUS"], "condition_field_ids": [{"name": "WS-BCT-STATUS", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0047-FLD-000001", "target_kind": "field", "candidate_ids": []}], "io_status_field": "WS-BCT-STATUS",
+       "outcomes": [{"label": "INVALID KEY", "line_range": [164, 166], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0047-STMT-000073", "SYS-PORTFOLIO-001-FIL-0047-STMT-000074"]}]}
+    ]},
+    {"paragraph": "2110-DETERMINE-ACTION", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0047-PAR-0010", "branches": [
+      {"type": "INVALID_KEY", "operation": "READ", "file_name": "PROCESS-SEQ-FILE", "line": 176, "statement_id": "SYS-PORTFOLIO-001-FIL-0047-STMT-000027", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0047-PAR-0010", "invalid_key_line_range": [177, 179], "not_invalid_key_line_range": null, "condition_fields": ["WS-PSR-STATUS"], "condition_field_ids": [{"name": "WS-PSR-STATUS", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0047-FLD-000002", "target_kind": "field", "candidate_ids": []}], "io_status_field": "WS-PSR-STATUS",
+       "outcomes": [{"label": "INVALID KEY", "line_range": [177, 179], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0047-STMT-000075", "SYS-PORTFOLIO-001-FIL-0047-STMT-000076"]}]},
+      {"type": "IF", "line": 182, "statement_id": "SYS-PORTFOLIO-001-FIL-0047-STMT-000028", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0047-PAR-0010", "condition_text": "PSR-RESTARTABLE", "condition_fields": ["PSR-RESTARTABLE"], "condition_field_ids": [{"name": "PSR-RESTARTABLE", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0004-FLD-000031", "target_kind": "condition", "candidate_ids": []}], "has_else": true, "then_line_range": [183, 183], "else_line_range": [185, 189], "end_if_line": 190, "nested_depth": 1,
+       "outcomes": [{"label": "THEN", "line_range": [183, 183], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0047-STMT-000078"]}, {"label": "ELSE", "line_range": [185, 189], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0047-STMT-000077"]}]},
+      {"type": "IF", "line": 185, "statement_id": "SYS-PORTFOLIO-001-FIL-0047-STMT-000077", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0047-PAR-0010", "condition_text": "BCT-RESTART-COUNT > BCT-MAX-RESTARTS", "condition_fields": ["BCT-RESTART-COUNT", "BCT-MAX-RESTARTS"], "condition_field_ids": [{"name": "BCT-RESTART-COUNT", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0002-FLD-000027", "target_kind": "field", "candidate_ids": []}, {"name": "BCT-MAX-RESTARTS", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0001-FLD-000015", "target_kind": "field", "candidate_ids": []}], "has_else": true, "then_line_range": [186, 186], "else_line_range": [188, 188], "end_if_line": 189, "nested_depth": 2,
+       "outcomes": [{"label": "THEN", "line_range": [186, 186], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0047-STMT-000099"]}, {"label": "ELSE", "line_range": [188, 188], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0047-STMT-000098"]}]}
+    ]},
+    {"paragraph": "2120-EXECUTE-RECOVERY", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0047-PAR-0011", "branches": [
+      {"type": "EVALUATE", "line": 194, "statement_id": "SYS-PORTFOLIO-001-FIL-0047-STMT-000029", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0047-PAR-0011", "subjects": ["TRUE"], "condition_fields": ["WS-ACTION-RESTART", "WS-ACTION-BYPASS", "WS-ACTION-TERMINATE"],
+       "condition_field_ids": [{"name": "WS-ACTION-RESTART", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0047-FLD-000009", "target_kind": "condition", "candidate_ids": []}, {"name": "WS-ACTION-BYPASS", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0047-FLD-000010", "target_kind": "condition", "candidate_ids": []}, {"name": "WS-ACTION-TERMINATE", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0047-FLD-000011", "target_kind": "condition", "candidate_ids": []}],
+       "when_clauses": [
+         {"conditions": ["WS-ACTION-RESTART"], "condition_fields": ["WS-ACTION-RESTART"], "body_line_range": [196, 196], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0047-STMT-000080"]},
+         {"conditions": ["WS-ACTION-BYPASS"], "condition_fields": ["WS-ACTION-BYPASS"], "body_line_range": [198, 198], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0047-STMT-000079"]},
+         {"conditions": ["WS-ACTION-TERMINATE"], "condition_fields": ["WS-ACTION-TERMINATE"], "body_line_range": [200, 200], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0047-STMT-000081"]}
+       ], "end_evaluate_line": 201, "nested_depth": 1}
+    ]},
+    {"paragraph": "2121-RESTART-PROCESS", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0047-PAR-0012", "branches": [
+      {"type": "INVALID_KEY", "operation": "REWRITE", "file_name": "BATCH-CONTROL-FILE", "line": 210, "statement_id": "SYS-PORTFOLIO-001-FIL-0047-STMT-000034", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0047-PAR-0012", "invalid_key_line_range": [211, 213], "not_invalid_key_line_range": null, "condition_fields": ["WS-BCT-STATUS"], "condition_field_ids": [{"name": "WS-BCT-STATUS", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0047-FLD-000001", "target_kind": "field", "candidate_ids": []}], "io_status_field": "WS-BCT-STATUS",
+       "outcomes": [{"label": "INVALID KEY", "line_range": [211, 213], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0047-STMT-000082", "SYS-PORTFOLIO-001-FIL-0047-STMT-000083"]}]}
+    ]},
+    {"paragraph": "2122-BYPASS-PROCESS", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0047-PAR-0013", "branches": [
+      {"type": "INVALID_KEY", "operation": "REWRITE", "file_name": "BATCH-CONTROL-FILE", "line": 222, "statement_id": "SYS-PORTFOLIO-001-FIL-0047-STMT-000038", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0047-PAR-0013", "invalid_key_line_range": [223, 225], "not_invalid_key_line_range": null, "condition_fields": ["WS-BCT-STATUS"], "condition_field_ids": [{"name": "WS-BCT-STATUS", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0047-FLD-000001", "target_kind": "field", "candidate_ids": []}], "io_status_field": "WS-BCT-STATUS",
+       "outcomes": [{"label": "INVALID KEY", "line_range": [223, 225], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0047-STMT-000084", "SYS-PORTFOLIO-001-FIL-0047-STMT-000085"]}]}
+    ]},
+    {"paragraph": "2123-TERMINATE-PROCESS", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0047-PAR-0014", "branches": [
+      {"type": "INVALID_KEY", "operation": "REWRITE", "file_name": "BATCH-CONTROL-FILE", "line": 234, "statement_id": "SYS-PORTFOLIO-001-FIL-0047-STMT-000042", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0047-PAR-0014", "invalid_key_line_range": [235, 237], "not_invalid_key_line_range": null, "condition_fields": ["WS-BCT-STATUS"], "condition_field_ids": [{"name": "WS-BCT-STATUS", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0047-FLD-000001", "target_kind": "field", "candidate_ids": []}], "io_status_field": "WS-BCT-STATUS",
+       "outcomes": [{"label": "INVALID KEY", "line_range": [235, 237], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0047-STMT-000086", "SYS-PORTFOLIO-001-FIL-0047-STMT-000087"]}]}
+    ]},
+    {"paragraph": "2200-RECOVER-SEQUENCE", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0047-PAR-0015", "branches": [
+      {"type": "INVALID_KEY", "operation": "START", "file_name": "BATCH-CONTROL-FILE", "line": 245, "statement_id": "SYS-PORTFOLIO-001-FIL-0047-STMT-000045", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0047-PAR-0015", "invalid_key_line_range": [246, 248], "not_invalid_key_line_range": null, "condition_fields": ["WS-BCT-STATUS"], "condition_field_ids": [{"name": "WS-BCT-STATUS", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0047-FLD-000001", "target_kind": "field", "candidate_ids": []}], "io_status_field": "WS-BCT-STATUS",
+       "outcomes": [{"label": "INVALID KEY", "line_range": [246, 248], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0047-STMT-000088", "SYS-PORTFOLIO-001-FIL-0047-STMT-000089"]}]},
+      {"type": "AT_END", "operation": "READ", "file_name": "BATCH-CONTROL-FILE", "line": 252, "statement_id": "SYS-PORTFOLIO-001-FIL-0047-STMT-000090", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0047-PAR-0015", "at_end_line_range": [253, 254], "not_at_end_line_range": [255, 258], "condition_fields": ["WS-BCT-STATUS"], "condition_field_ids": [{"name": "WS-BCT-STATUS", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0047-FLD-000001", "target_kind": "field", "candidate_ids": []}], "io_status_field": "WS-BCT-STATUS",
+       "outcomes": [{"label": "AT END", "line_range": [253, 254], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0047-STMT-000100"]}, {"label": "NOT AT END", "line_range": [255, 258], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0047-STMT-000101"]}]},
+      {"type": "IF", "line": 256, "statement_id": "SYS-PORTFOLIO-001-FIL-0047-STMT-000101", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0047-PAR-0015", "condition_text": "BCT-PROCESS-DATE = LS-PROCESS-DATE", "condition_fields": ["BCT-PROCESS-DATE", "LS-PROCESS-DATE"], "condition_field_ids": [{"name": "BCT-PROCESS-DATE", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0002-FLD-000003", "target_kind": "field", "candidate_ids": []}, {"name": "LS-PROCESS-DATE", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0047-FLD-000016", "target_kind": "field", "candidate_ids": []}], "has_else": false, "then_line_range": [257, 257], "else_line_range": null, "end_if_line": 258, "nested_depth": 1,
+       "outcomes": [{"label": "THEN", "line_range": [257, 257], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0047-STMT-000105"]}]}
+    ]},
+    {"paragraph": "2300-RECOVER-ALL", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0047-PAR-0016", "branches": [
+      {"type": "INVALID_KEY", "operation": "START", "file_name": "BATCH-CONTROL-FILE", "line": 266, "statement_id": "SYS-PORTFOLIO-001-FIL-0047-STMT-000048", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0047-PAR-0016", "invalid_key_line_range": [267, 269], "not_invalid_key_line_range": null, "condition_fields": ["WS-BCT-STATUS"], "condition_field_ids": [{"name": "WS-BCT-STATUS", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0047-FLD-000001", "target_kind": "field", "candidate_ids": []}], "io_status_field": "WS-BCT-STATUS",
+       "outcomes": [{"label": "INVALID KEY", "line_range": [267, 269], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0047-STMT-000091", "SYS-PORTFOLIO-001-FIL-0047-STMT-000092"]}]},
+      {"type": "AT_END", "operation": "READ", "file_name": "BATCH-CONTROL-FILE", "line": 273, "statement_id": "SYS-PORTFOLIO-001-FIL-0047-STMT-000093", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0047-PAR-0016", "at_end_line_range": [274, 275], "not_at_end_line_range": [276, 278], "condition_fields": ["WS-BCT-STATUS"], "condition_field_ids": [{"name": "WS-BCT-STATUS", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0047-FLD-000001", "target_kind": "field", "candidate_ids": []}], "io_status_field": "WS-BCT-STATUS",
+       "outcomes": [{"label": "AT END", "line_range": [274, 275], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0047-STMT-000102"]}, {"label": "NOT AT END", "line_range": [276, 278], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0047-STMT-000103", "SYS-PORTFOLIO-001-FIL-0047-STMT-000104"]}]}
+    ]},
+    {"paragraph": "3100-UPDATE-FINAL-STATUS", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0047-PAR-0017", "branches": [
+      {"type": "IF", "line": 284, "statement_id": "SYS-PORTFOLIO-001-FIL-0047-STMT-000050", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0047-PAR-0017", "condition_text": "LS-RETURN-CODE = ZERO", "condition_fields": ["LS-RETURN-CODE"], "condition_field_ids": [{"name": "LS-RETURN-CODE", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0047-FLD-000020", "target_kind": "field", "candidate_ids": []}], "has_else": true, "then_line_range": [285, 285], "else_line_range": [287, 287], "end_if_line": 288, "nested_depth": 1,
+       "outcomes": [{"label": "THEN", "line_range": [285, 285], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0047-STMT-000095"]}, {"label": "ELSE", "line_range": [287, 287], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0047-STMT-000094"]}]}
+    ]},
+    {"paragraph": "3200-CLOSE-FILES", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0047-PAR-0018", "branches": [
+      {"type": "IF", "line": 297, "statement_id": "SYS-PORTFOLIO-001-FIL-0047-STMT-000053", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0047-PAR-0018", "condition_text": "WS-BCT-STATUS NOT = '00' OR WS-PSR-STATUS NOT = '00'", "condition_fields": ["WS-BCT-STATUS", "WS-PSR-STATUS"], "condition_field_ids": [{"name": "WS-BCT-STATUS", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0047-FLD-000001", "target_kind": "field", "candidate_ids": []}, {"name": "WS-PSR-STATUS", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0047-FLD-000002", "target_kind": "field", "candidate_ids": []}], "has_else": false, "then_line_range": [299, 300], "else_line_range": null, "end_if_line": 301, "nested_depth": 1,
+       "outcomes": [{"label": "THEN", "line_range": [299, 300], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0047-STMT-000096", "SYS-PORTFOLIO-001-FIL-0047-STMT-000097"]}]}
+    ]}
+  ],
+  "loops": [
+    {"paragraph": "2200-RECOVER-SEQUENCE", "target": "2200-RECOVER-SEQUENCE", "type": "PERFORM_UNTIL", "condition_text": "UNTIL WS-BCT-STATUS = '10'", "condition_fields": ["WS-BCT-STATUS"], "termination_pattern": "FILE_EXHAUSTION_LOOP", "line": 251, "body_line_range": [252, 259],
+     "statement_id": "SYS-PORTFOLIO-001-FIL-0047-STMT-000046", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0047-PAR-0015", "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0047-PAR-0015",
+     "condition_field_ids": [{"name": "WS-BCT-STATUS", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0047-FLD-000001", "target_kind": "field", "candidate_ids": []}],
+     "modifying_statement_ids": ["SYS-PORTFOLIO-001-FIL-0047-STMT-000090", "SYS-PORTFOLIO-001-FIL-0047-STMT-000100", "SYS-PORTFOLIO-001-FIL-0047-STMT-000023", "SYS-PORTFOLIO-001-FIL-0047-STMT-000034", "SYS-PORTFOLIO-001-FIL-0047-STMT-000038", "SYS-PORTFOLIO-001-FIL-0047-STMT-000042"]},
+    {"paragraph": "2300-RECOVER-ALL", "target": "2300-RECOVER-ALL", "type": "PERFORM_UNTIL", "condition_text": "UNTIL WS-BCT-STATUS = '10'", "condition_fields": ["WS-BCT-STATUS"], "termination_pattern": "FILE_EXHAUSTION_LOOP", "line": 272, "body_line_range": [273, 279],
+     "statement_id": "SYS-PORTFOLIO-001-FIL-0047-STMT-000049", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0047-PAR-0016", "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0047-PAR-0016",
+     "condition_field_ids": [{"name": "WS-BCT-STATUS", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0047-FLD-000001", "target_kind": "field", "candidate_ids": []}],
+     "modifying_statement_ids": ["SYS-PORTFOLIO-001-FIL-0047-STMT-000093", "SYS-PORTFOLIO-001-FIL-0047-STMT-000102", "SYS-PORTFOLIO-001-FIL-0047-STMT-000023", "SYS-PORTFOLIO-001-FIL-0047-STMT-000034", "SYS-PORTFOLIO-001-FIL-0047-STMT-000038", "SYS-PORTFOLIO-001-FIL-0047-STMT-000042"]}
+  ],
+  "dead_code_confirmed": [],
+  "unresolvable_paths": [],
+  "trace_issues": [
+    {"severity": "info", "type": "upstream_issue", "upstream_agent": "2_parser", "upstream_type": "misplaced_comment_indicator", "lines": [1], "message": "Agent 2: line 1 has '*' in column 8; treated as a comment, not program text."},
+    {"severity": "info", "type": "upstream_issue", "upstream_agent": "3_data", "upstream_type": "fd_record_from_copybook", "lines": [34, 37], "message": "Agent 3: FD BATCH-CONTROL-FILE and FD PROCESS-SEQ-FILE records come from COPY BCHCTL and COPY PRCSEQ; PRCSEQ supplies PROCESS-SEQUENCE-RECORD and STANDARD-SEQUENCES."},
+    {"severity": "info", "type": "upstream_issue", "upstream_agent": "3_data", "upstream_type": "value_exceeds_pic_length", "file_id": "SYS-PORTFOLIO-001-FIL-0001", "lines": [47], "message": "Agent 3 (copybook BCHCON): BCT-EMERGENCY PIC X(8) has VALUE 'EMERGENCY' (9 characters). The field is not referenced by RCVPRC00."},
+    {"severity": "warning", "type": "nested_io_in_sequential_scan", "lines": [251, 272], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0047-STMT-000046", "SYS-PORTFOLIO-001-FIL-0047-STMT-000049", "SYS-PORTFOLIO-001-FIL-0047-STMT-000023", "SYS-PORTFOLIO-001-FIL-0047-STMT-000034", "SYS-PORTFOLIO-001-FIL-0047-STMT-000038", "SYS-PORTFOLIO-001-FIL-0047-STMT-000042"], "message": "Both READ NEXT loops on BATCH-CONTROL-FILE perform 2100-RECOVER-PROCESS, which issues a keyed READ (line 163) and a REWRITE (lines 210/222/234) on the same file. These statements also set WS-BCT-STATUS (the loop condition field) and, with ACCESS MODE DYNAMIC, the keyed READ changes the position used by the next READ NEXT. Loop progress and termination therefore depend on the keys read inside 2100. !! REVIEW"},
+    {"severity": "info", "type": "loop_exit_dependency", "lines": [251, 272], "message": "Each loop ends only when WS-BCT-STATUS = '10'; a READ NEXT that fails with another status takes neither AT END nor NOT AT END and the loop repeats."},
+    {"severity": "info", "type": "state_across_calls", "lines": [150, 95], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0047-STMT-000019", "SYS-PORTFOLIO-001-FIL-0047-STMT-000007"], "message": "WS-RECOVERY-MODE is set during the INIT call (1300-SET-RECOVERY-MODE) and tested during the RECV call (2000-PROCESS-RECOVERY); the RECV path relies on WORKING-STORAGE keeping its value between calls. EVALUATE WS-RECOVERY-MODE has no WHEN OTHER: any other value does nothing."},
+    {"severity": "info", "type": "external_call", "lines": [113, 290], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0047-STMT-000012", "SYS-PORTFOLIO-001-FIL-0047-STMT-000051"], "message": "Static CALL 'ERRPROC' USING ERR-MESSAGE in 9000-ERROR-ROUTINE and 3100-UPDATE-FINAL-STATUS; external program, not traced into."}
+  ],
+  "program_narrative": "RCVPRC00 is a batch subprogram (PROCEDURE DIVISION USING LS-RECOVERY-REQUEST, ends with GOBACK) that recovers batch processes recorded in BATCH-CONTROL-FILE. The caller selects one function per call: INIT opens BATCH-CONTROL-FILE (I-O) and PROCESS-SEQ-FILE (input), validates that a processing date is present and that the recovery type is 'P' (one process), 'S' (all processes of the date) or 'A' (all processes), and stores the recovery mode, requiring a process ID for process recovery. RECV runs the selected recovery: for one process it reads the control record and the process definition, then restarts the process when its definition is restartable (status READY, restart count plus one, attempt timestamp), terminates it when the restart count exceeds BCT-MAX-RESTARTS (status ERROR, return code BCT-RC-ERROR), or bypasses it otherwise (status DONE, return code BCT-RC-WARNING), and rewrites the control record; sequence and all-process recovery scan the control file from the start and apply the same process recovery to each record read (sequence mode only for records of the processing date). TERM logs a completion message through ERRPROC ('Recovery completed successfully' when the return code is zero, otherwise 'Recovery completed with errors') and closes both files. Error conditions handled: invalid function code, missing date, invalid recovery type, missing process ID, open and close failures, READ/START/REWRITE invalid keys; each performs 9000-ERROR-ROUTINE, which sets BCT-RC-ERROR and calls ERRPROC, after which processing continues.",
+  "paragraphs": [
+    {"name": "0000-MAIN", "section": null, "line_range": [71, 87],
+     "pseudocode": [
+       "-- Entry point: dispatch on the function code passed by the caller in LS-RECOVERY-REQUEST",
+       "SELECT CASE function_code (LS-FUNCTION)",
+       "  WHEN 'INIT' (FUNC-INIT):",
+       "    CALL 1000-initialize-recovery",
+       "  WHEN 'RECV' (FUNC-RECV):",
+       "    CALL 2000-process-recovery",
+       "  WHEN 'TERM' (FUNC-TERM):",
+       "    CALL 3000-terminate-recovery",
+       "  ELSE:",
+       "    SET error_text = 'Invalid function code'",
+       "    CALL 9000-error-routine",
+       "END SELECT",
+       "SET RETURN-CODE = ls_return_code  -- RETURN-CODE special register: program return code seen by the caller",
+       "RETURN to caller  -- GOBACK"
+     ],
+     "pseudocode_text": "-- Entry point: dispatch on the function code passed by the caller in LS-RECOVERY-REQUEST\nSELECT CASE function_code (LS-FUNCTION)\n  WHEN 'INIT' (FUNC-INIT):\n    CALL 1000-initialize-recovery\n  WHEN 'RECV' (FUNC-RECV):\n    CALL 2000-process-recovery\n  WHEN 'TERM' (FUNC-TERM):\n    CALL 3000-terminate-recovery\n  ELSE:\n    SET error_text = 'Invalid function code'\n    CALL 9000-error-routine\nEND SELECT\nSET RETURN-CODE = ls_return_code  -- RETURN-CODE special register: program return code seen by the caller\nRETURN to caller  -- GOBACK",
+     "field_references": ["FUNC-INIT", "FUNC-RECV", "FUNC-TERM", "ERR-TEXT", "LS-RETURN-CODE"],
+     "calls_made": ["1000-INITIALIZE-RECOVERY", "2000-PROCESS-RECOVERY", "3000-TERMINATE-RECOVERY", "9000-ERROR-ROUTINE"],
+     "complexity_score": 4, "has_unresolved_statements": false,
+     "annotations": [{"line": 84, "statement_id": "SYS-PORTFOLIO-001-FIL-0047-STMT-000002", "note": "RETURN-CODE is a COBOL special register, not a data item; it is not looked up in the field registry."}],
+     "paragraph_id": "SYS-PORTFOLIO-001-FIL-0047-PAR-0001", "section_id": null,
+     "statement_ids": ["SYS-PORTFOLIO-001-FIL-0047-STMT-000001", "SYS-PORTFOLIO-001-FIL-0047-STMT-000054", "SYS-PORTFOLIO-001-FIL-0047-STMT-000055", "SYS-PORTFOLIO-001-FIL-0047-STMT-000056", "SYS-PORTFOLIO-001-FIL-0047-STMT-000057", "SYS-PORTFOLIO-001-FIL-0047-STMT-000058", "SYS-PORTFOLIO-001-FIL-0047-STMT-000002", "SYS-PORTFOLIO-001-FIL-0047-STMT-000003"],
+     "pseudocode_statement_ids": [[], ["SYS-PORTFOLIO-001-FIL-0047-STMT-000001"], ["SYS-PORTFOLIO-001-FIL-0047-STMT-000001"], ["SYS-PORTFOLIO-001-FIL-0047-STMT-000054"], ["SYS-PORTFOLIO-001-FIL-0047-STMT-000001"], ["SYS-PORTFOLIO-001-FIL-0047-STMT-000055"], ["SYS-PORTFOLIO-001-FIL-0047-STMT-000001"], ["SYS-PORTFOLIO-001-FIL-0047-STMT-000056"], ["SYS-PORTFOLIO-001-FIL-0047-STMT-000001"], ["SYS-PORTFOLIO-001-FIL-0047-STMT-000057"], ["SYS-PORTFOLIO-001-FIL-0047-STMT-000058"], ["SYS-PORTFOLIO-001-FIL-0047-STMT-000001"], ["SYS-PORTFOLIO-001-FIL-0047-STMT-000002"], ["SYS-PORTFOLIO-001-FIL-0047-STMT-000003"]],
+     "untranslated_statement_ids": [],
+     "field_reference_ids": [
+       {"name": "FUNC-INIT", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0047-FLD-000013", "target_kind": "condition", "candidate_ids": []},
+       {"name": "FUNC-RECV", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0047-FLD-000014", "target_kind": "condition", "candidate_ids": []},
+       {"name": "FUNC-TERM", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0047-FLD-000015", "target_kind": "condition", "candidate_ids": []},
+       {"name": "ERR-TEXT", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0007-FLD-000017", "target_kind": "field", "candidate_ids": []},
+       {"name": "LS-RETURN-CODE", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0047-FLD-000020", "target_kind": "field", "candidate_ids": []}
+     ],
+     "calls_made_ids": [
+       {"name": "1000-INITIALIZE-RECOVERY", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0047-PAR-0002", "section_id": null},
+       {"name": "2000-PROCESS-RECOVERY", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0047-PAR-0003", "section_id": null},
+       {"name": "3000-TERMINATE-RECOVERY", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0047-PAR-0004", "section_id": null},
+       {"name": "9000-ERROR-ROUTINE", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0047-PAR-0005", "section_id": null}
+     ]},
+    {"name": "1000-INITIALIZE-RECOVERY", "section": null, "line_range": [88, 93],
+     "pseudocode": [
+       "-- INIT function: open files, validate the request, set the recovery mode",
+       "CALL 1100-open-files",
+       "CALL 1200-validate-request",
+       "CALL 1300-set-recovery-mode"
+     ],
+     "pseudocode_text": "-- INIT function: open files, validate the request, set the recovery mode\nCALL 1100-open-files\nCALL 1200-validate-request\nCALL 1300-set-recovery-mode",
+     "field_references": [],
+     "calls_made": ["1100-OPEN-FILES", "1200-VALIDATE-REQUEST", "1300-SET-RECOVERY-MODE"],
+     "complexity_score": 1, "has_unresolved_statements": false, "annotations": [],
+     "paragraph_id": "SYS-PORTFOLIO-001-FIL-0047-PAR-0002", "section_id": null,
+     "statement_ids": ["SYS-PORTFOLIO-001-FIL-0047-STMT-000004", "SYS-PORTFOLIO-001-FIL-0047-STMT-000005", "SYS-PORTFOLIO-001-FIL-0047-STMT-000006"],
+     "pseudocode_statement_ids": [[], ["SYS-PORTFOLIO-001-FIL-0047-STMT-000004"], ["SYS-PORTFOLIO-001-FIL-0047-STMT-000005"], ["SYS-PORTFOLIO-001-FIL-0047-STMT-000006"]],
+     "untranslated_statement_ids": [],
+     "field_reference_ids": [],
+     "calls_made_ids": [
+       {"name": "1100-OPEN-FILES", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0047-PAR-0006", "section_id": null},
+       {"name": "1200-VALIDATE-REQUEST", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0047-PAR-0007", "section_id": null},
+       {"name": "1300-SET-RECOVERY-MODE", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0047-PAR-0008", "section_id": null}
+     ]},
+    {"name": "2000-PROCESS-RECOVERY", "section": null, "line_range": [94, 104],
+     "pseudocode": [
+       "-- RECV function: run the recovery selected at INIT time",
+       "SELECT CASE recovery_mode (WS-RECOVERY-MODE)",
+       "  WHEN 'P':  -- single process",
+       "    CALL 2100-recover-process",
+       "  WHEN 'S':  -- all processes of the processing date",
+       "    CALL 2200-recover-sequence",
+       "  WHEN 'A':  -- all processes",
+       "    CALL 2300-recover-all",
+       "END SELECT  -- no WHEN OTHER: any other mode does nothing"
+     ],
+     "pseudocode_text": "-- RECV function: run the recovery selected at INIT time\nSELECT CASE recovery_mode (WS-RECOVERY-MODE)\n  WHEN 'P':  -- single process\n    CALL 2100-recover-process\n  WHEN 'S':  -- all processes of the processing date\n    CALL 2200-recover-sequence\n  WHEN 'A':  -- all processes\n    CALL 2300-recover-all\nEND SELECT  -- no WHEN OTHER: any other mode does nothing",
+     "field_references": ["WS-RECOVERY-MODE"],
+     "calls_made": ["2100-RECOVER-PROCESS", "2200-RECOVER-SEQUENCE", "2300-RECOVER-ALL"],
+     "complexity_score": 3, "has_unresolved_statements": false,
+     "annotations": [{"line": 95, "statement_id": "SYS-PORTFOLIO-001-FIL-0047-STMT-000007", "note": "WS-RECOVERY-MODE is set only in 1300-SET-RECOVERY-MODE during the INIT call; this RECV path relies on WORKING-STORAGE keeping the value between calls."}],
+     "paragraph_id": "SYS-PORTFOLIO-001-FIL-0047-PAR-0003", "section_id": null,
+     "statement_ids": ["SYS-PORTFOLIO-001-FIL-0047-STMT-000007", "SYS-PORTFOLIO-001-FIL-0047-STMT-000060", "SYS-PORTFOLIO-001-FIL-0047-STMT-000061", "SYS-PORTFOLIO-001-FIL-0047-STMT-000059"],
+     "pseudocode_statement_ids": [[], ["SYS-PORTFOLIO-001-FIL-0047-STMT-000007"], ["SYS-PORTFOLIO-001-FIL-0047-STMT-000007"], ["SYS-PORTFOLIO-001-FIL-0047-STMT-000060"], ["SYS-PORTFOLIO-001-FIL-0047-STMT-000007"], ["SYS-PORTFOLIO-001-FIL-0047-STMT-000061"], ["SYS-PORTFOLIO-001-FIL-0047-STMT-000007"], ["SYS-PORTFOLIO-001-FIL-0047-STMT-000059"], ["SYS-PORTFOLIO-001-FIL-0047-STMT-000007"]],
+     "untranslated_statement_ids": [],
+     "field_reference_ids": [{"name": "WS-RECOVERY-MODE", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0047-FLD-000004", "target_kind": "field", "candidate_ids": []}],
+     "calls_made_ids": [
+       {"name": "2100-RECOVER-PROCESS", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0047-PAR-0009", "section_id": null},
+       {"name": "2200-RECOVER-SEQUENCE", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0047-PAR-0015", "section_id": null},
+       {"name": "2300-RECOVER-ALL", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0047-PAR-0016", "section_id": null}
+     ]},
+    {"name": "3000-TERMINATE-RECOVERY", "section": null, "line_range": [105, 109],
+     "pseudocode": [
+       "-- TERM function: log the final status, then close the files",
+       "CALL 3100-update-final-status",
+       "CALL 3200-close-files"
+     ],
+     "pseudocode_text": "-- TERM function: log the final status, then close the files\nCALL 3100-update-final-status\nCALL 3200-close-files",
+     "field_references": [],
+     "calls_made": ["3100-UPDATE-FINAL-STATUS", "3200-CLOSE-FILES"],
+     "complexity_score": 1, "has_unresolved_statements": false, "annotations": [],
+     "paragraph_id": "SYS-PORTFOLIO-001-FIL-0047-PAR-0004", "section_id": null,
+     "statement_ids": ["SYS-PORTFOLIO-001-FIL-0047-STMT-000008", "SYS-PORTFOLIO-001-FIL-0047-STMT-000009"],
+     "pseudocode_statement_ids": [[], ["SYS-PORTFOLIO-001-FIL-0047-STMT-000008"], ["SYS-PORTFOLIO-001-FIL-0047-STMT-000009"]],
+     "untranslated_statement_ids": [],
+     "field_reference_ids": [],
+     "calls_made_ids": [
+       {"name": "3100-UPDATE-FINAL-STATUS", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0047-PAR-0017", "section_id": null},
+       {"name": "3200-CLOSE-FILES", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0047-PAR-0018", "section_id": null}
+     ]},
+    {"name": "9000-ERROR-ROUTINE", "section": null, "line_range": [110, 117],
+     "pseudocode": [
+       "-- Common error handler: identify the program, set the error return code, log the error",
+       "SET err_program = 'RCVPRC00'",
+       "SET ls_return_code = BCT-RC-ERROR  -- error threshold constant from copybook BCHCON (VALUE +8)",
+       "CALL program ERRPROC",
+       "  PASSING: err_message (ERR-MESSAGE record from copybook ERRHAND)"
+     ],
+     "pseudocode_text": "-- Common error handler: identify the program, set the error return code, log the error\nSET err_program = 'RCVPRC00'\nSET ls_return_code = BCT-RC-ERROR  -- error threshold constant from copybook BCHCON (VALUE +8)\nCALL program ERRPROC\n  PASSING: err_message (ERR-MESSAGE record from copybook ERRHAND)",
+     "field_references": ["ERR-PROGRAM", "BCT-RC-ERROR", "LS-RETURN-CODE", "ERR-MESSAGE"],
+     "calls_made": [],
+     "complexity_score": 1, "has_unresolved_statements": false,
+     "annotations": [{"line": 113, "statement_id": "SYS-PORTFOLIO-001-FIL-0047-STMT-000012", "note": "Static CALL to external program ERRPROC (not traced into). The routine has no STOP RUN or GOBACK: control returns to the performing paragraph and processing continues after every error."}],
+     "paragraph_id": "SYS-PORTFOLIO-001-FIL-0047-PAR-0005", "section_id": null,
+     "statement_ids": ["SYS-PORTFOLIO-001-FIL-0047-STMT-000010", "SYS-PORTFOLIO-001-FIL-0047-STMT-000011", "SYS-PORTFOLIO-001-FIL-0047-STMT-000012"],
+     "pseudocode_statement_ids": [[], ["SYS-PORTFOLIO-001-FIL-0047-STMT-000010"], ["SYS-PORTFOLIO-001-FIL-0047-STMT-000011"], ["SYS-PORTFOLIO-001-FIL-0047-STMT-000012"], ["SYS-PORTFOLIO-001-FIL-0047-STMT-000012"]],
+     "untranslated_statement_ids": [],
+     "field_reference_ids": [
+       {"name": "ERR-PROGRAM", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0007-FLD-000013", "target_kind": "field", "candidate_ids": []},
+       {"name": "BCT-RC-ERROR", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0001-FLD-000010", "target_kind": "field", "candidate_ids": []},
+       {"name": "LS-RETURN-CODE", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0047-FLD-000020", "target_kind": "field", "candidate_ids": []},
+       {"name": "ERR-MESSAGE", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0007-REC-0003", "target_kind": "record", "candidate_ids": []}
+     ],
+     "calls_made_ids": []},
+    {"name": "1100-OPEN-FILES", "section": null, "line_range": [118, 131],
+     "pseudocode": [
+       "OPEN BATCH-CONTROL-FILE for READ-WRITE",
+       "IF bct_file_status != '00' THEN",
+       "  SET error_text = 'Error opening control file'",
+       "  CALL 9000-error-routine",
+       "END IF",
+       "OPEN PROCESS-SEQ-FILE for READ-ONLY",
+       "IF psr_file_status != '00' THEN",
+       "  SET error_text = 'Error opening sequence file'",
+       "  CALL 9000-error-routine",
+       "END IF"
+     ],
+     "pseudocode_text": "OPEN BATCH-CONTROL-FILE for READ-WRITE\nIF bct_file_status != '00' THEN\n  SET error_text = 'Error opening control file'\n  CALL 9000-error-routine\nEND IF\nOPEN PROCESS-SEQ-FILE for READ-ONLY\nIF psr_file_status != '00' THEN\n  SET error_text = 'Error opening sequence file'\n  CALL 9000-error-routine\nEND IF",
+     "field_references": ["WS-BCT-STATUS", "WS-PSR-STATUS", "ERR-TEXT"],
+     "calls_made": ["9000-ERROR-ROUTINE"],
+     "complexity_score": 2, "has_unresolved_statements": false, "annotations": [],
+     "paragraph_id": "SYS-PORTFOLIO-001-FIL-0047-PAR-0006", "section_id": null,
+     "statement_ids": ["SYS-PORTFOLIO-001-FIL-0047-STMT-000013", "SYS-PORTFOLIO-001-FIL-0047-STMT-000014", "SYS-PORTFOLIO-001-FIL-0047-STMT-000062", "SYS-PORTFOLIO-001-FIL-0047-STMT-000063", "SYS-PORTFOLIO-001-FIL-0047-STMT-000015", "SYS-PORTFOLIO-001-FIL-0047-STMT-000016", "SYS-PORTFOLIO-001-FIL-0047-STMT-000064", "SYS-PORTFOLIO-001-FIL-0047-STMT-000065"],
+     "pseudocode_statement_ids": [["SYS-PORTFOLIO-001-FIL-0047-STMT-000013"], ["SYS-PORTFOLIO-001-FIL-0047-STMT-000014"], ["SYS-PORTFOLIO-001-FIL-0047-STMT-000062"], ["SYS-PORTFOLIO-001-FIL-0047-STMT-000063"], ["SYS-PORTFOLIO-001-FIL-0047-STMT-000014"], ["SYS-PORTFOLIO-001-FIL-0047-STMT-000015"], ["SYS-PORTFOLIO-001-FIL-0047-STMT-000016"], ["SYS-PORTFOLIO-001-FIL-0047-STMT-000064"], ["SYS-PORTFOLIO-001-FIL-0047-STMT-000065"], ["SYS-PORTFOLIO-001-FIL-0047-STMT-000016"]],
+     "untranslated_statement_ids": [],
+     "field_reference_ids": [
+       {"name": "WS-BCT-STATUS", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0047-FLD-000001", "target_kind": "field", "candidate_ids": []},
+       {"name": "WS-PSR-STATUS", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0047-FLD-000002", "target_kind": "field", "candidate_ids": []},
+       {"name": "ERR-TEXT", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0007-FLD-000017", "target_kind": "field", "candidate_ids": []}
+     ],
+     "calls_made_ids": [{"name": "9000-ERROR-ROUTINE", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0047-PAR-0005", "section_id": null}]},
+    {"name": "1200-VALIDATE-REQUEST", "section": null, "line_range": [132, 148],
+     "pseudocode": [
+       "-- Validate the recovery request",
+       "IF ls_process_date is blank (SPACES) THEN",
+       "  SET error_text = 'Process date required'",
+       "  CALL 9000-error-routine",
+       "END IF",
+       "SELECT CASE recovery_type (LS-RECOVERY-TYPE)",
+       "  WHEN 'P', 'S', 'A':",
+       "    -- valid type: do nothing (CONTINUE)",
+       "  ELSE:",
+       "    SET error_text = 'Invalid recovery type'",
+       "    CALL 9000-error-routine",
+       "END SELECT"
+     ],
+     "pseudocode_text": "-- Validate the recovery request\nIF ls_process_date is blank (SPACES) THEN\n  SET error_text = 'Process date required'\n  CALL 9000-error-routine\nEND IF\nSELECT CASE recovery_type (LS-RECOVERY-TYPE)\n  WHEN 'P', 'S', 'A':\n    -- valid type: do nothing (CONTINUE)\n  ELSE:\n    SET error_text = 'Invalid recovery type'\n    CALL 9000-error-routine\nEND SELECT",
+     "field_references": ["LS-PROCESS-DATE", "ERR-TEXT", "LS-RECOVERY-TYPE"],
+     "calls_made": ["9000-ERROR-ROUTINE"],
+     "complexity_score": 3, "has_unresolved_statements": false,
+     "annotations": [{"line": 138, "statement_id": "SYS-PORTFOLIO-001-FIL-0047-STMT-000018", "note": "Validation errors do not stop INIT; 1300-SET-RECOVERY-MODE still runs with the invalid value."}],
+     "paragraph_id": "SYS-PORTFOLIO-001-FIL-0047-PAR-0007", "section_id": null,
+     "statement_ids": ["SYS-PORTFOLIO-001-FIL-0047-STMT-000017", "SYS-PORTFOLIO-001-FIL-0047-STMT-000066", "SYS-PORTFOLIO-001-FIL-0047-STMT-000067", "SYS-PORTFOLIO-001-FIL-0047-STMT-000018", "SYS-PORTFOLIO-001-FIL-0047-STMT-000068", "SYS-PORTFOLIO-001-FIL-0047-STMT-000069", "SYS-PORTFOLIO-001-FIL-0047-STMT-000070"],
+     "pseudocode_statement_ids": [[], ["SYS-PORTFOLIO-001-FIL-0047-STMT-000017"], ["SYS-PORTFOLIO-001-FIL-0047-STMT-000066"], ["SYS-PORTFOLIO-001-FIL-0047-STMT-000067"], ["SYS-PORTFOLIO-001-FIL-0047-STMT-000017"], ["SYS-PORTFOLIO-001-FIL-0047-STMT-000018"], ["SYS-PORTFOLIO-001-FIL-0047-STMT-000018"], ["SYS-PORTFOLIO-001-FIL-0047-STMT-000068"], ["SYS-PORTFOLIO-001-FIL-0047-STMT-000018"], ["SYS-PORTFOLIO-001-FIL-0047-STMT-000069"], ["SYS-PORTFOLIO-001-FIL-0047-STMT-000070"], ["SYS-PORTFOLIO-001-FIL-0047-STMT-000018"]],
+     "untranslated_statement_ids": [],
+     "field_reference_ids": [
+       {"name": "LS-PROCESS-DATE", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0047-FLD-000016", "target_kind": "field", "candidate_ids": []},
+       {"name": "ERR-TEXT", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0007-FLD-000017", "target_kind": "field", "candidate_ids": []},
+       {"name": "LS-RECOVERY-TYPE", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0047-FLD-000018", "target_kind": "field", "candidate_ids": []}
+     ],
+     "calls_made_ids": [{"name": "9000-ERROR-ROUTINE", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0047-PAR-0005", "section_id": null}]},
+    {"name": "1300-SET-RECOVERY-MODE", "section": null, "line_range": [149, 158],
+     "pseudocode": [
+       "SET recovery_mode = ls_recovery_type",
+       "IF recovery_mode is single process ('P', WS-RECOVER-PROCESS) AND ls_process_id is blank THEN",
+       "  SET error_text = 'Process ID required for process recovery'",
+       "  CALL 9000-error-routine",
+       "END IF"
+     ],
+     "pseudocode_text": "SET recovery_mode = ls_recovery_type\nIF recovery_mode is single process ('P', WS-RECOVER-PROCESS) AND ls_process_id is blank THEN\n  SET error_text = 'Process ID required for process recovery'\n  CALL 9000-error-routine\nEND IF",
+     "field_references": ["LS-RECOVERY-TYPE", "WS-RECOVERY-MODE", "WS-RECOVER-PROCESS", "LS-PROCESS-ID", "ERR-TEXT"],
+     "calls_made": ["9000-ERROR-ROUTINE"],
+     "complexity_score": 1, "has_unresolved_statements": false, "annotations": [],
+     "paragraph_id": "SYS-PORTFOLIO-001-FIL-0047-PAR-0008", "section_id": null,
+     "statement_ids": ["SYS-PORTFOLIO-001-FIL-0047-STMT-000019", "SYS-PORTFOLIO-001-FIL-0047-STMT-000020", "SYS-PORTFOLIO-001-FIL-0047-STMT-000071", "SYS-PORTFOLIO-001-FIL-0047-STMT-000072"],
+     "pseudocode_statement_ids": [["SYS-PORTFOLIO-001-FIL-0047-STMT-000019"], ["SYS-PORTFOLIO-001-FIL-0047-STMT-000020"], ["SYS-PORTFOLIO-001-FIL-0047-STMT-000071"], ["SYS-PORTFOLIO-001-FIL-0047-STMT-000072"], ["SYS-PORTFOLIO-001-FIL-0047-STMT-000020"]],
+     "untranslated_statement_ids": [],
+     "field_reference_ids": [
+       {"name": "LS-RECOVERY-TYPE", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0047-FLD-000018", "target_kind": "field", "candidate_ids": []},
+       {"name": "WS-RECOVERY-MODE", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0047-FLD-000004", "target_kind": "field", "candidate_ids": []},
+       {"name": "WS-RECOVER-PROCESS", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0047-FLD-000005", "target_kind": "condition", "candidate_ids": []},
+       {"name": "LS-PROCESS-ID", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0047-FLD-000017", "target_kind": "field", "candidate_ids": []},
+       {"name": "ERR-TEXT", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0007-FLD-000017", "target_kind": "field", "candidate_ids": []}
+     ],
+     "calls_made_ids": [{"name": "9000-ERROR-ROUTINE", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0047-PAR-0005", "section_id": null}]},
+    {"name": "2100-RECOVER-PROCESS", "section": null, "line_range": [159, 172],
+     "pseudocode": [
+       "-- Recover one process: read its control record, decide the action, apply it",
+       "SET bct_job_name = ls_process_id",
+       "SET bct_process_date = ls_process_date",
+       "READ record from BATCH-CONTROL-FILE where key = bct_key",
+       "IF record not found (INVALID KEY) THEN",
+       "  SET error_text = 'Process record not found'",
+       "  CALL 9000-error-routine",
+       "END IF",
+       "CALL 2110-determine-action",
+       "CALL 2120-execute-recovery"
+     ],
+     "pseudocode_text": "-- Recover one process: read its control record, decide the action, apply it\nSET bct_job_name = ls_process_id\nSET bct_process_date = ls_process_date\nREAD record from BATCH-CONTROL-FILE where key = bct_key\nIF record not found (INVALID KEY) THEN\n  SET error_text = 'Process record not found'\n  CALL 9000-error-routine\nEND IF\nCALL 2110-determine-action\nCALL 2120-execute-recovery",
+     "field_references": ["LS-PROCESS-ID", "BCT-JOB-NAME", "LS-PROCESS-DATE", "BCT-PROCESS-DATE", "ERR-TEXT"],
+     "calls_made": ["9000-ERROR-ROUTINE", "2110-DETERMINE-ACTION", "2120-EXECUTE-RECOVERY"],
+     "complexity_score": 1, "has_unresolved_statements": false,
+     "annotations": [
+       {"line": 163, "statement_id": "SYS-PORTFOLIO-001-FIL-0047-STMT-000023", "note": "BCT-KEY is BCT-JOB-NAME + BCT-PROCESS-DATE + BCT-SEQUENCE-NO (copybook BCHCTL); BCT-SEQUENCE-NO is not set before the keyed READ."},
+       {"line": 166, "statement_id": "SYS-PORTFOLIO-001-FIL-0047-STMT-000074", "note": "After INVALID KEY the paragraph still determines and executes a recovery action (including a REWRITE) on the record area contents."}
+     ],
+     "paragraph_id": "SYS-PORTFOLIO-001-FIL-0047-PAR-0009", "section_id": null,
+     "statement_ids": ["SYS-PORTFOLIO-001-FIL-0047-STMT-000021", "SYS-PORTFOLIO-001-FIL-0047-STMT-000022", "SYS-PORTFOLIO-001-FIL-0047-STMT-000023", "SYS-PORTFOLIO-001-FIL-0047-STMT-000073", "SYS-PORTFOLIO-001-FIL-0047-STMT-000074", "SYS-PORTFOLIO-001-FIL-0047-STMT-000024", "SYS-PORTFOLIO-001-FIL-0047-STMT-000025"],
+     "pseudocode_statement_ids": [[], ["SYS-PORTFOLIO-001-FIL-0047-STMT-000021"], ["SYS-PORTFOLIO-001-FIL-0047-STMT-000022"], ["SYS-PORTFOLIO-001-FIL-0047-STMT-000023"], ["SYS-PORTFOLIO-001-FIL-0047-STMT-000023"], ["SYS-PORTFOLIO-001-FIL-0047-STMT-000073"], ["SYS-PORTFOLIO-001-FIL-0047-STMT-000074"], ["SYS-PORTFOLIO-001-FIL-0047-STMT-000023"], ["SYS-PORTFOLIO-001-FIL-0047-STMT-000024"], ["SYS-PORTFOLIO-001-FIL-0047-STMT-000025"]],
+     "untranslated_statement_ids": [],
+     "field_reference_ids": [
+       {"name": "LS-PROCESS-ID", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0047-FLD-000017", "target_kind": "field", "candidate_ids": []},
+       {"name": "BCT-JOB-NAME", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0002-FLD-000002", "target_kind": "field", "candidate_ids": []},
+       {"name": "LS-PROCESS-DATE", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0047-FLD-000016", "target_kind": "field", "candidate_ids": []},
+       {"name": "BCT-PROCESS-DATE", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0002-FLD-000003", "target_kind": "field", "candidate_ids": []},
+       {"name": "ERR-TEXT", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0007-FLD-000017", "target_kind": "field", "candidate_ids": []}
+     ],
+     "calls_made_ids": [
+       {"name": "9000-ERROR-ROUTINE", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0047-PAR-0005", "section_id": null},
+       {"name": "2110-DETERMINE-ACTION", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0047-PAR-0010", "section_id": null},
+       {"name": "2120-EXECUTE-RECOVERY", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0047-PAR-0011", "section_id": null}
+     ]},
+    {"name": "2110-DETERMINE-ACTION", "section": null, "line_range": [173, 192],
+     "pseudocode": [
+       "-- Decide restart, terminate or bypass from the process definition and restart count",
+       "SET psr_process_id = ls_process_id",
+       "READ record from PROCESS-SEQ-FILE where key = psr_key (psr_process_id + psr_version)",
+       "IF record not found (INVALID KEY) THEN",
+       "  SET error_text = 'Process definition not found'",
+       "  CALL 9000-error-routine",
+       "END IF",
+       "IF process is restartable (psr_restart = 'Y', PSR-RESTARTABLE) THEN",
+       "  SET recovery_action = RESTART ('R')  -- SET WS-ACTION-RESTART TO TRUE",
+       "ELSE IF bct_restart_count > BCT-MAX-RESTARTS (constant 3) THEN",
+       "  SET recovery_action = TERMINATE ('T')  -- SET WS-ACTION-TERMINATE TO TRUE",
+       "ELSE",
+       "  SET recovery_action = BYPASS ('B')  -- SET WS-ACTION-BYPASS TO TRUE",
+       "END IF"
+     ],
+     "pseudocode_text": "-- Decide restart, terminate or bypass from the process definition and restart count\nSET psr_process_id = ls_process_id\nREAD record from PROCESS-SEQ-FILE where key = psr_key (psr_process_id + psr_version)\nIF record not found (INVALID KEY) THEN\n  SET error_text = 'Process definition not found'\n  CALL 9000-error-routine\nEND IF\nIF process is restartable (psr_restart = 'Y', PSR-RESTARTABLE) THEN\n  SET recovery_action = RESTART ('R')  -- SET WS-ACTION-RESTART TO TRUE\nELSE IF bct_restart_count > BCT-MAX-RESTARTS (constant 3) THEN\n  SET recovery_action = TERMINATE ('T')  -- SET WS-ACTION-TERMINATE TO TRUE\nELSE\n  SET recovery_action = BYPASS ('B')  -- SET WS-ACTION-BYPASS TO TRUE\nEND IF",
+     "field_references": ["LS-PROCESS-ID", "PSR-PROCESS-ID", "ERR-TEXT", "PSR-RESTARTABLE", "WS-ACTION-RESTART", "BCT-RESTART-COUNT", "BCT-MAX-RESTARTS", "WS-ACTION-TERMINATE", "WS-ACTION-BYPASS"],
+     "calls_made": ["9000-ERROR-ROUTINE"],
+     "complexity_score": 5, "has_unresolved_statements": false,
+     "annotations": [
+       {"line": 176, "statement_id": "SYS-PORTFOLIO-001-FIL-0047-STMT-000027", "note": "Only PSR-PROCESS-ID is set before the keyed READ; PSR-VERSION (second part of PSR-KEY) keeps whatever value the record area holds."},
+       {"line": 182, "statement_id": "SYS-PORTFOLIO-001-FIL-0047-STMT-000028", "note": "88-level PSR-RESTARTABLE is true when PSR-RESTART = 'Y' (copybook PRCSEQ). A restartable process is always restarted; the restart limit is only checked for non-restartable processes. BCT-MAX-RESTARTS has VALUE 3 in copybook BCHCON."}
+     ],
+     "paragraph_id": "SYS-PORTFOLIO-001-FIL-0047-PAR-0010", "section_id": null,
+     "statement_ids": ["SYS-PORTFOLIO-001-FIL-0047-STMT-000026", "SYS-PORTFOLIO-001-FIL-0047-STMT-000027", "SYS-PORTFOLIO-001-FIL-0047-STMT-000075", "SYS-PORTFOLIO-001-FIL-0047-STMT-000076", "SYS-PORTFOLIO-001-FIL-0047-STMT-000028", "SYS-PORTFOLIO-001-FIL-0047-STMT-000078", "SYS-PORTFOLIO-001-FIL-0047-STMT-000077", "SYS-PORTFOLIO-001-FIL-0047-STMT-000099", "SYS-PORTFOLIO-001-FIL-0047-STMT-000098"],
+     "pseudocode_statement_ids": [[], ["SYS-PORTFOLIO-001-FIL-0047-STMT-000026"], ["SYS-PORTFOLIO-001-FIL-0047-STMT-000027"], ["SYS-PORTFOLIO-001-FIL-0047-STMT-000027"], ["SYS-PORTFOLIO-001-FIL-0047-STMT-000075"], ["SYS-PORTFOLIO-001-FIL-0047-STMT-000076"], ["SYS-PORTFOLIO-001-FIL-0047-STMT-000027"], ["SYS-PORTFOLIO-001-FIL-0047-STMT-000028"], ["SYS-PORTFOLIO-001-FIL-0047-STMT-000078"], ["SYS-PORTFOLIO-001-FIL-0047-STMT-000028", "SYS-PORTFOLIO-001-FIL-0047-STMT-000077"], ["SYS-PORTFOLIO-001-FIL-0047-STMT-000099"], ["SYS-PORTFOLIO-001-FIL-0047-STMT-000077"], ["SYS-PORTFOLIO-001-FIL-0047-STMT-000098"], ["SYS-PORTFOLIO-001-FIL-0047-STMT-000028", "SYS-PORTFOLIO-001-FIL-0047-STMT-000077"]],
+     "untranslated_statement_ids": [],
+     "field_reference_ids": [
+       {"name": "LS-PROCESS-ID", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0047-FLD-000017", "target_kind": "field", "candidate_ids": []},
+       {"name": "PSR-PROCESS-ID", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0004-FLD-000002", "target_kind": "field", "candidate_ids": []},
+       {"name": "ERR-TEXT", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0007-FLD-000017", "target_kind": "field", "candidate_ids": []},
+       {"name": "PSR-RESTARTABLE", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0004-FLD-000031", "target_kind": "condition", "candidate_ids": []},
+       {"name": "WS-ACTION-RESTART", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0047-FLD-000009", "target_kind": "condition", "candidate_ids": []},
+       {"name": "BCT-RESTART-COUNT", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0002-FLD-000027", "target_kind": "field", "candidate_ids": []},
+       {"name": "BCT-MAX-RESTARTS", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0001-FLD-000015", "target_kind": "field", "candidate_ids": []},
+       {"name": "WS-ACTION-TERMINATE", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0047-FLD-000011", "target_kind": "condition", "candidate_ids": []},
+       {"name": "WS-ACTION-BYPASS", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0047-FLD-000010", "target_kind": "condition", "candidate_ids": []}
+     ],
+     "calls_made_ids": [{"name": "9000-ERROR-ROUTINE", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0047-PAR-0005", "section_id": null}]},
+    {"name": "2120-EXECUTE-RECOVERY", "section": null, "line_range": [193, 203],
+     "pseudocode": [
+       "-- Apply the chosen recovery action",
+       "IF recovery_action = RESTART THEN  -- EVALUATE TRUE WHEN WS-ACTION-RESTART",
+       "  CALL 2121-restart-process",
+       "ELSE IF recovery_action = BYPASS THEN",
+       "  CALL 2122-bypass-process",
+       "ELSE IF recovery_action = TERMINATE THEN",
+       "  CALL 2123-terminate-process",
+       "END IF  -- no WHEN OTHER"
+     ],
+     "pseudocode_text": "-- Apply the chosen recovery action\nIF recovery_action = RESTART THEN  -- EVALUATE TRUE WHEN WS-ACTION-RESTART\n  CALL 2121-restart-process\nELSE IF recovery_action = BYPASS THEN\n  CALL 2122-bypass-process\nELSE IF recovery_action = TERMINATE THEN\n  CALL 2123-terminate-process\nEND IF  -- no WHEN OTHER",
+     "field_references": ["WS-ACTION-RESTART", "WS-ACTION-BYPASS", "WS-ACTION-TERMINATE"],
+     "calls_made": ["2121-RESTART-PROCESS", "2122-BYPASS-PROCESS", "2123-TERMINATE-PROCESS"],
+     "complexity_score": 3, "has_unresolved_statements": false, "annotations": [],
+     "paragraph_id": "SYS-PORTFOLIO-001-FIL-0047-PAR-0011", "section_id": null,
+     "statement_ids": ["SYS-PORTFOLIO-001-FIL-0047-STMT-000029", "SYS-PORTFOLIO-001-FIL-0047-STMT-000080", "SYS-PORTFOLIO-001-FIL-0047-STMT-000079", "SYS-PORTFOLIO-001-FIL-0047-STMT-000081"],
+     "pseudocode_statement_ids": [[], ["SYS-PORTFOLIO-001-FIL-0047-STMT-000029"], ["SYS-PORTFOLIO-001-FIL-0047-STMT-000080"], ["SYS-PORTFOLIO-001-FIL-0047-STMT-000029"], ["SYS-PORTFOLIO-001-FIL-0047-STMT-000079"], ["SYS-PORTFOLIO-001-FIL-0047-STMT-000029"], ["SYS-PORTFOLIO-001-FIL-0047-STMT-000081"], ["SYS-PORTFOLIO-001-FIL-0047-STMT-000029"]],
+     "untranslated_statement_ids": [],
+     "field_reference_ids": [
+       {"name": "WS-ACTION-RESTART", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0047-FLD-000009", "target_kind": "condition", "candidate_ids": []},
+       {"name": "WS-ACTION-BYPASS", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0047-FLD-000010", "target_kind": "condition", "candidate_ids": []},
+       {"name": "WS-ACTION-TERMINATE", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0047-FLD-000011", "target_kind": "condition", "candidate_ids": []}
+     ],
+     "calls_made_ids": [
+       {"name": "2121-RESTART-PROCESS", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0047-PAR-0012", "section_id": null},
+       {"name": "2122-BYPASS-PROCESS", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0047-PAR-0013", "section_id": null},
+       {"name": "2123-TERMINATE-PROCESS", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0047-PAR-0014", "section_id": null}
+     ]},
+    {"name": "2121-RESTART-PROCESS", "section": null, "line_range": [204, 216],
+     "pseudocode": [
+       "-- Restart: put the process back to READY and count the restart",
+       "SET bct_status = BCT-STAT-READY  -- constant 'R'",
+       "INCREMENT bct_restart_count BY 1",
+       "SET current_time = system timestamp  -- ACCEPT WS-CURRENT-TIME FROM TIME STAMP (see annotation)",
+       "SET bct_attempt_ts = current_time",
+       "UPDATE existing batch_control_record in BATCH-CONTROL-FILE  -- REWRITE",
+       "IF rewrite error (INVALID KEY) THEN",
+       "  SET error_text = 'Error updating control record'",
+       "  CALL 9000-error-routine",
+       "END IF"
+     ],
+     "pseudocode_text": "-- Restart: put the process back to READY and count the restart\nSET bct_status = BCT-STAT-READY  -- constant 'R'\nINCREMENT bct_restart_count BY 1\nSET current_time = system timestamp  -- ACCEPT WS-CURRENT-TIME FROM TIME STAMP (see annotation)\nSET bct_attempt_ts = current_time\nUPDATE existing batch_control_record in BATCH-CONTROL-FILE  -- REWRITE\nIF rewrite error (INVALID KEY) THEN\n  SET error_text = 'Error updating control record'\n  CALL 9000-error-routine\nEND IF",
+     "field_references": ["BCT-STAT-READY", "BCT-STATUS", "BCT-RESTART-COUNT", "WS-CURRENT-TIME", "BCT-ATTEMPT-TS", "BATCH-CONTROL-RECORD", "ERR-TEXT"],
+     "calls_made": ["9000-ERROR-ROUTINE"],
+     "complexity_score": 1, "has_unresolved_statements": false,
+     "annotations": [{"line": 207, "statement_id": "SYS-PORTFOLIO-001-FIL-0047-STMT-000032", "note": "Recorded verbatim: 'ACCEPT WS-CURRENT-TIME FROM TIME STAMP'. TIME STAMP is not a standard ACCEPT source (DATE, DAY, DAY-OF-WEEK, TIME); its exact content depends on the compiler. !! REVIEW", "ambiguous": true}],
+     "paragraph_id": "SYS-PORTFOLIO-001-FIL-0047-PAR-0012", "section_id": null,
+     "statement_ids": ["SYS-PORTFOLIO-001-FIL-0047-STMT-000030", "SYS-PORTFOLIO-001-FIL-0047-STMT-000031", "SYS-PORTFOLIO-001-FIL-0047-STMT-000032", "SYS-PORTFOLIO-001-FIL-0047-STMT-000033", "SYS-PORTFOLIO-001-FIL-0047-STMT-000034", "SYS-PORTFOLIO-001-FIL-0047-STMT-000082", "SYS-PORTFOLIO-001-FIL-0047-STMT-000083"],
+     "pseudocode_statement_ids": [[], ["SYS-PORTFOLIO-001-FIL-0047-STMT-000030"], ["SYS-PORTFOLIO-001-FIL-0047-STMT-000031"], ["SYS-PORTFOLIO-001-FIL-0047-STMT-000032"], ["SYS-PORTFOLIO-001-FIL-0047-STMT-000033"], ["SYS-PORTFOLIO-001-FIL-0047-STMT-000034"], ["SYS-PORTFOLIO-001-FIL-0047-STMT-000034"], ["SYS-PORTFOLIO-001-FIL-0047-STMT-000082"], ["SYS-PORTFOLIO-001-FIL-0047-STMT-000083"], ["SYS-PORTFOLIO-001-FIL-0047-STMT-000034"]],
+     "untranslated_statement_ids": [],
+     "field_reference_ids": [
+       {"name": "BCT-STAT-READY", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0001-FLD-000002", "target_kind": "field", "candidate_ids": []},
+       {"name": "BCT-STATUS", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0002-FLD-000006", "target_kind": "field", "candidate_ids": []},
+       {"name": "BCT-RESTART-COUNT", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0002-FLD-000027", "target_kind": "field", "candidate_ids": []},
+       {"name": "WS-CURRENT-TIME", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0047-FLD-000003", "target_kind": "field", "candidate_ids": []},
+       {"name": "BCT-ATTEMPT-TS", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0002-FLD-000028", "target_kind": "field", "candidate_ids": []},
+       {"name": "BATCH-CONTROL-RECORD", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0002-REC-0001", "target_kind": "record", "candidate_ids": []},
+       {"name": "ERR-TEXT", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0007-FLD-000017", "target_kind": "field", "candidate_ids": []}
+     ],
+     "calls_made_ids": [{"name": "9000-ERROR-ROUTINE", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0047-PAR-0005", "section_id": null}]},
+    {"name": "2122-BYPASS-PROCESS", "section": null, "line_range": [217, 228],
+     "pseudocode": [
+       "-- Bypass: mark the process DONE with a warning return code",
+       "SET bct_status = BCT-STAT-DONE  -- constant 'D'",
+       "SET bct_return_code = BCT-RC-WARNING  -- constant +4",
+       "SET bct_error_desc = 'Process bypassed by recovery'",
+       "UPDATE existing batch_control_record in BATCH-CONTROL-FILE  -- REWRITE",
+       "IF rewrite error (INVALID KEY) THEN",
+       "  SET error_text = 'Error updating control record'",
+       "  CALL 9000-error-routine",
+       "END IF"
+     ],
+     "pseudocode_text": "-- Bypass: mark the process DONE with a warning return code\nSET bct_status = BCT-STAT-DONE  -- constant 'D'\nSET bct_return_code = BCT-RC-WARNING  -- constant +4\nSET bct_error_desc = 'Process bypassed by recovery'\nUPDATE existing batch_control_record in BATCH-CONTROL-FILE  -- REWRITE\nIF rewrite error (INVALID KEY) THEN\n  SET error_text = 'Error updating control record'\n  CALL 9000-error-routine\nEND IF",
+     "field_references": ["BCT-STAT-DONE", "BCT-STATUS", "BCT-RC-WARNING", "BCT-RETURN-CODE", "BCT-ERROR-DESC", "BATCH-CONTROL-RECORD", "ERR-TEXT"],
+     "calls_made": ["9000-ERROR-ROUTINE"],
+     "complexity_score": 1, "has_unresolved_statements": false, "annotations": [],
+     "paragraph_id": "SYS-PORTFOLIO-001-FIL-0047-PAR-0013", "section_id": null,
+     "statement_ids": ["SYS-PORTFOLIO-001-FIL-0047-STMT-000035", "SYS-PORTFOLIO-001-FIL-0047-STMT-000036", "SYS-PORTFOLIO-001-FIL-0047-STMT-000037", "SYS-PORTFOLIO-001-FIL-0047-STMT-000038", "SYS-PORTFOLIO-001-FIL-0047-STMT-000084", "SYS-PORTFOLIO-001-FIL-0047-STMT-000085"],
+     "pseudocode_statement_ids": [[], ["SYS-PORTFOLIO-001-FIL-0047-STMT-000035"], ["SYS-PORTFOLIO-001-FIL-0047-STMT-000036"], ["SYS-PORTFOLIO-001-FIL-0047-STMT-000037"], ["SYS-PORTFOLIO-001-FIL-0047-STMT-000038"], ["SYS-PORTFOLIO-001-FIL-0047-STMT-000038"], ["SYS-PORTFOLIO-001-FIL-0047-STMT-000084"], ["SYS-PORTFOLIO-001-FIL-0047-STMT-000085"], ["SYS-PORTFOLIO-001-FIL-0047-STMT-000038"]],
+     "untranslated_statement_ids": [],
+     "field_reference_ids": [
+       {"name": "BCT-STAT-DONE", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0001-FLD-000005", "target_kind": "field", "candidate_ids": []},
+       {"name": "BCT-STATUS", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0002-FLD-000006", "target_kind": "field", "candidate_ids": []},
+       {"name": "BCT-RC-WARNING", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0001-FLD-000009", "target_kind": "field", "candidate_ids": []},
+       {"name": "BCT-RETURN-CODE", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0002-FLD-000024", "target_kind": "field", "candidate_ids": []},
+       {"name": "BCT-ERROR-DESC", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0002-FLD-000025", "target_kind": "field", "candidate_ids": []},
+       {"name": "BATCH-CONTROL-RECORD", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0002-REC-0001", "target_kind": "record", "candidate_ids": []},
+       {"name": "ERR-TEXT", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0007-FLD-000017", "target_kind": "field", "candidate_ids": []}
+     ],
+     "calls_made_ids": [{"name": "9000-ERROR-ROUTINE", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0047-PAR-0005", "section_id": null}]},
+    {"name": "2123-TERMINATE-PROCESS", "section": null, "line_range": [229, 240],
+     "pseudocode": [
+       "-- Terminate: mark the process in ERROR with an error return code",
+       "SET bct_status = BCT-STAT-ERROR  -- constant 'E'",
+       "SET bct_return_code = BCT-RC-ERROR  -- constant +8",
+       "SET bct_error_desc = 'Process terminated by recovery'",
+       "UPDATE existing batch_control_record in BATCH-CONTROL-FILE  -- REWRITE",
+       "IF rewrite error (INVALID KEY) THEN",
+       "  SET error_text = 'Error updating control record'",
+       "  CALL 9000-error-routine",
+       "END IF"
+     ],
+     "pseudocode_text": "-- Terminate: mark the process in ERROR with an error return code\nSET bct_status = BCT-STAT-ERROR  -- constant 'E'\nSET bct_return_code = BCT-RC-ERROR  -- constant +8\nSET bct_error_desc = 'Process terminated by recovery'\nUPDATE existing batch_control_record in BATCH-CONTROL-FILE  -- REWRITE\nIF rewrite error (INVALID KEY) THEN\n  SET error_text = 'Error updating control record'\n  CALL 9000-error-routine\nEND IF",
+     "field_references": ["BCT-STAT-ERROR", "BCT-STATUS", "BCT-RC-ERROR", "BCT-RETURN-CODE", "BCT-ERROR-DESC", "BATCH-CONTROL-RECORD", "ERR-TEXT"],
+     "calls_made": ["9000-ERROR-ROUTINE"],
+     "complexity_score": 1, "has_unresolved_statements": false, "annotations": [],
+     "paragraph_id": "SYS-PORTFOLIO-001-FIL-0047-PAR-0014", "section_id": null,
+     "statement_ids": ["SYS-PORTFOLIO-001-FIL-0047-STMT-000039", "SYS-PORTFOLIO-001-FIL-0047-STMT-000040", "SYS-PORTFOLIO-001-FIL-0047-STMT-000041", "SYS-PORTFOLIO-001-FIL-0047-STMT-000042", "SYS-PORTFOLIO-001-FIL-0047-STMT-000086", "SYS-PORTFOLIO-001-FIL-0047-STMT-000087"],
+     "pseudocode_statement_ids": [[], ["SYS-PORTFOLIO-001-FIL-0047-STMT-000039"], ["SYS-PORTFOLIO-001-FIL-0047-STMT-000040"], ["SYS-PORTFOLIO-001-FIL-0047-STMT-000041"], ["SYS-PORTFOLIO-001-FIL-0047-STMT-000042"], ["SYS-PORTFOLIO-001-FIL-0047-STMT-000042"], ["SYS-PORTFOLIO-001-FIL-0047-STMT-000086"], ["SYS-PORTFOLIO-001-FIL-0047-STMT-000087"], ["SYS-PORTFOLIO-001-FIL-0047-STMT-000042"]],
+     "untranslated_statement_ids": [],
+     "field_reference_ids": [
+       {"name": "BCT-STAT-ERROR", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0001-FLD-000006", "target_kind": "field", "candidate_ids": []},
+       {"name": "BCT-STATUS", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0002-FLD-000006", "target_kind": "field", "candidate_ids": []},
+       {"name": "BCT-RC-ERROR", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0001-FLD-000010", "target_kind": "field", "candidate_ids": []},
+       {"name": "BCT-RETURN-CODE", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0002-FLD-000024", "target_kind": "field", "candidate_ids": []},
+       {"name": "BCT-ERROR-DESC", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0002-FLD-000025", "target_kind": "field", "candidate_ids": []},
+       {"name": "BATCH-CONTROL-RECORD", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0002-REC-0001", "target_kind": "record", "candidate_ids": []},
+       {"name": "ERR-TEXT", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0007-FLD-000017", "target_kind": "field", "candidate_ids": []}
+     ],
+     "calls_made_ids": [{"name": "9000-ERROR-ROUTINE", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0047-PAR-0005", "section_id": null}]},
+    {"name": "2200-RECOVER-SEQUENCE", "section": null, "line_range": [241, 262],
+     "pseudocode": [
+       "-- Recover every control record of the processing date",
+       "SET bct_process_date = ls_process_date",
+       "SET bct_job_name = MIN_VALUE  -- LOW-VALUES",
+       "POSITION BATCH-CONTROL-FILE at the first record with key > bct_key  -- COBOL START",
+       "IF no record with such a key (INVALID KEY) THEN",
+       "  SET error_text = 'No processes found for date'",
+       "  CALL 9000-error-routine",
+       "END IF",
+       "WHILE bct_file_status != '10' DO",
+       "  READ next record from BATCH-CONTROL-FILE",
+       "  IF end of file THEN",
+       "    SET bct_file_status = '10'",
+       "  ELSE",
+       "    IF bct_process_date = ls_process_date THEN",
+       "      CALL 2100-recover-process",
+       "    END IF",
+       "  END IF",
+       "END WHILE"
+     ],
+     "pseudocode_text": "-- Recover every control record of the processing date\nSET bct_process_date = ls_process_date\nSET bct_job_name = MIN_VALUE  -- LOW-VALUES\nPOSITION BATCH-CONTROL-FILE at the first record with key > bct_key  -- COBOL START\nIF no record with such a key (INVALID KEY) THEN\n  SET error_text = 'No processes found for date'\n  CALL 9000-error-routine\nEND IF\nWHILE bct_file_status != '10' DO\n  READ next record from BATCH-CONTROL-FILE\n  IF end of file THEN\n    SET bct_file_status = '10'\n  ELSE\n    IF bct_process_date = ls_process_date THEN\n      CALL 2100-recover-process\n    END IF\n  END IF\nEND WHILE",
+     "field_references": ["LS-PROCESS-DATE", "BCT-PROCESS-DATE", "BCT-JOB-NAME", "BCT-KEY", "ERR-TEXT", "WS-BCT-STATUS"],
+     "calls_made": ["9000-ERROR-ROUTINE", "2100-RECOVER-PROCESS"],
+     "complexity_score": 4, "has_unresolved_statements": false,
+     "annotations": [
+       {"line": 245, "statement_id": "SYS-PORTFOLIO-001-FIL-0047-STMT-000045", "note": "BCT-KEY starts with BCT-JOB-NAME (set to LOW-VALUES), so the START positions at the beginning of the file, not at the processing date; the date filter is applied per record at line 256. BCT-SEQUENCE-NO is not set before the START."},
+       {"line": 257, "statement_id": "SYS-PORTFOLIO-001-FIL-0047-STMT-000105", "note": "2100-RECOVER-PROCESS uses LS-PROCESS-ID (not the job name of the record just read): every matching record triggers recovery of the process ID supplied by the caller. It also issues a keyed READ and a REWRITE on BATCH-CONTROL-FILE inside this READ NEXT loop (see trace_issues nested_io_in_sequential_scan). !! REVIEW"}
+     ],
+     "paragraph_id": "SYS-PORTFOLIO-001-FIL-0047-PAR-0015", "section_id": null,
+     "statement_ids": ["SYS-PORTFOLIO-001-FIL-0047-STMT-000043", "SYS-PORTFOLIO-001-FIL-0047-STMT-000044", "SYS-PORTFOLIO-001-FIL-0047-STMT-000045", "SYS-PORTFOLIO-001-FIL-0047-STMT-000088", "SYS-PORTFOLIO-001-FIL-0047-STMT-000089", "SYS-PORTFOLIO-001-FIL-0047-STMT-000046", "SYS-PORTFOLIO-001-FIL-0047-STMT-000090", "SYS-PORTFOLIO-001-FIL-0047-STMT-000100", "SYS-PORTFOLIO-001-FIL-0047-STMT-000101", "SYS-PORTFOLIO-001-FIL-0047-STMT-000105"],
+     "pseudocode_statement_ids": [[], ["SYS-PORTFOLIO-001-FIL-0047-STMT-000043"], ["SYS-PORTFOLIO-001-FIL-0047-STMT-000044"], ["SYS-PORTFOLIO-001-FIL-0047-STMT-000045"], ["SYS-PORTFOLIO-001-FIL-0047-STMT-000045"], ["SYS-PORTFOLIO-001-FIL-0047-STMT-000088"], ["SYS-PORTFOLIO-001-FIL-0047-STMT-000089"], ["SYS-PORTFOLIO-001-FIL-0047-STMT-000045"], ["SYS-PORTFOLIO-001-FIL-0047-STMT-000046"], ["SYS-PORTFOLIO-001-FIL-0047-STMT-000090"], ["SYS-PORTFOLIO-001-FIL-0047-STMT-000090"], ["SYS-PORTFOLIO-001-FIL-0047-STMT-000100"], ["SYS-PORTFOLIO-001-FIL-0047-STMT-000090"], ["SYS-PORTFOLIO-001-FIL-0047-STMT-000101"], ["SYS-PORTFOLIO-001-FIL-0047-STMT-000105"], ["SYS-PORTFOLIO-001-FIL-0047-STMT-000101"], ["SYS-PORTFOLIO-001-FIL-0047-STMT-000090"], ["SYS-PORTFOLIO-001-FIL-0047-STMT-000046"]],
+     "untranslated_statement_ids": [],
+     "field_reference_ids": [
+       {"name": "LS-PROCESS-DATE", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0047-FLD-000016", "target_kind": "field", "candidate_ids": []},
+       {"name": "BCT-PROCESS-DATE", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0002-FLD-000003", "target_kind": "field", "candidate_ids": []},
+       {"name": "BCT-JOB-NAME", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0002-FLD-000002", "target_kind": "field", "candidate_ids": []},
+       {"name": "BCT-KEY", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0002-FLD-000001", "target_kind": "field", "candidate_ids": []},
+       {"name": "ERR-TEXT", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0007-FLD-000017", "target_kind": "field", "candidate_ids": []},
+       {"name": "WS-BCT-STATUS", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0047-FLD-000001", "target_kind": "field", "candidate_ids": []}
+     ],
+     "calls_made_ids": [
+       {"name": "9000-ERROR-ROUTINE", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0047-PAR-0005", "section_id": null},
+       {"name": "2100-RECOVER-PROCESS", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0047-PAR-0009", "section_id": null}
+     ]},
+    {"name": "2300-RECOVER-ALL", "section": null, "line_range": [263, 282],
+     "pseudocode": [
+       "-- Recover every control record in the file",
+       "SET bct_key = MIN_VALUE  -- LOW-VALUES",
+       "POSITION BATCH-CONTROL-FILE at the first record with key > bct_key  -- COBOL START",
+       "IF no record with such a key (INVALID KEY) THEN",
+       "  SET error_text = 'No processes found'",
+       "  CALL 9000-error-routine",
+       "END IF",
+       "WHILE bct_file_status != '10' DO",
+       "  READ next record from BATCH-CONTROL-FILE",
+       "  IF end of file THEN",
+       "    SET bct_file_status = '10'",
+       "  ELSE",
+       "    SET ls_process_id = bct_job_name  -- recover the job of the record just read",
+       "    CALL 2100-recover-process",
+       "  END IF",
+       "END WHILE"
+     ],
+     "pseudocode_text": "-- Recover every control record in the file\nSET bct_key = MIN_VALUE  -- LOW-VALUES\nPOSITION BATCH-CONTROL-FILE at the first record with key > bct_key  -- COBOL START\nIF no record with such a key (INVALID KEY) THEN\n  SET error_text = 'No processes found'\n  CALL 9000-error-routine\nEND IF\nWHILE bct_file_status != '10' DO\n  READ next record from BATCH-CONTROL-FILE\n  IF end of file THEN\n    SET bct_file_status = '10'\n  ELSE\n    SET ls_process_id = bct_job_name  -- recover the job of the record just read\n    CALL 2100-recover-process\n  END IF\nEND WHILE",
+     "field_references": ["BCT-KEY", "ERR-TEXT", "WS-BCT-STATUS", "BCT-JOB-NAME", "LS-PROCESS-ID"],
+     "calls_made": ["9000-ERROR-ROUTINE", "2100-RECOVER-PROCESS"],
+     "complexity_score": 3, "has_unresolved_statements": false,
+     "annotations": [
+       {"line": 277, "statement_id": "SYS-PORTFOLIO-001-FIL-0047-STMT-000103", "note": "LS-PROCESS-ID is a LINKAGE field: the caller's process ID is overwritten with each job name read."},
+       {"line": 278, "statement_id": "SYS-PORTFOLIO-001-FIL-0047-STMT-000104", "note": "2100-RECOVER-PROCESS reads the control record with key job name + LS-PROCESS-DATE (the caller's date, not the date of the record just read) and rewrites it inside this READ NEXT loop (see trace_issues nested_io_in_sequential_scan). !! REVIEW"}
+     ],
+     "paragraph_id": "SYS-PORTFOLIO-001-FIL-0047-PAR-0016", "section_id": null,
+     "statement_ids": ["SYS-PORTFOLIO-001-FIL-0047-STMT-000047", "SYS-PORTFOLIO-001-FIL-0047-STMT-000048", "SYS-PORTFOLIO-001-FIL-0047-STMT-000091", "SYS-PORTFOLIO-001-FIL-0047-STMT-000092", "SYS-PORTFOLIO-001-FIL-0047-STMT-000049", "SYS-PORTFOLIO-001-FIL-0047-STMT-000093", "SYS-PORTFOLIO-001-FIL-0047-STMT-000102", "SYS-PORTFOLIO-001-FIL-0047-STMT-000103", "SYS-PORTFOLIO-001-FIL-0047-STMT-000104"],
+     "pseudocode_statement_ids": [[], ["SYS-PORTFOLIO-001-FIL-0047-STMT-000047"], ["SYS-PORTFOLIO-001-FIL-0047-STMT-000048"], ["SYS-PORTFOLIO-001-FIL-0047-STMT-000048"], ["SYS-PORTFOLIO-001-FIL-0047-STMT-000091"], ["SYS-PORTFOLIO-001-FIL-0047-STMT-000092"], ["SYS-PORTFOLIO-001-FIL-0047-STMT-000048"], ["SYS-PORTFOLIO-001-FIL-0047-STMT-000049"], ["SYS-PORTFOLIO-001-FIL-0047-STMT-000093"], ["SYS-PORTFOLIO-001-FIL-0047-STMT-000093"], ["SYS-PORTFOLIO-001-FIL-0047-STMT-000102"], ["SYS-PORTFOLIO-001-FIL-0047-STMT-000093"], ["SYS-PORTFOLIO-001-FIL-0047-STMT-000103"], ["SYS-PORTFOLIO-001-FIL-0047-STMT-000104"], ["SYS-PORTFOLIO-001-FIL-0047-STMT-000093"], ["SYS-PORTFOLIO-001-FIL-0047-STMT-000049"]],
+     "untranslated_statement_ids": [],
+     "field_reference_ids": [
+       {"name": "BCT-KEY", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0002-FLD-000001", "target_kind": "field", "candidate_ids": []},
+       {"name": "ERR-TEXT", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0007-FLD-000017", "target_kind": "field", "candidate_ids": []},
+       {"name": "WS-BCT-STATUS", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0047-FLD-000001", "target_kind": "field", "candidate_ids": []},
+       {"name": "BCT-JOB-NAME", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0002-FLD-000002", "target_kind": "field", "candidate_ids": []},
+       {"name": "LS-PROCESS-ID", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0047-FLD-000017", "target_kind": "field", "candidate_ids": []}
+     ],
+     "calls_made_ids": [
+       {"name": "9000-ERROR-ROUTINE", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0047-PAR-0005", "section_id": null},
+       {"name": "2100-RECOVER-PROCESS", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0047-PAR-0009", "section_id": null}
+     ]},
+    {"name": "3100-UPDATE-FINAL-STATUS", "section": null, "line_range": [283, 292],
+     "pseudocode": [
+       "-- Log the overall recovery result",
+       "IF ls_return_code = 0 THEN",
+       "  SET error_text = 'Recovery completed successfully'",
+       "ELSE",
+       "  SET error_text = 'Recovery completed with errors'",
+       "END IF",
+       "CALL program ERRPROC",
+       "  PASSING: err_message (ERR-MESSAGE record from copybook ERRHAND)"
+     ],
+     "pseudocode_text": "-- Log the overall recovery result\nIF ls_return_code = 0 THEN\n  SET error_text = 'Recovery completed successfully'\nELSE\n  SET error_text = 'Recovery completed with errors'\nEND IF\nCALL program ERRPROC\n  PASSING: err_message (ERR-MESSAGE record from copybook ERRHAND)",
+     "field_references": ["LS-RETURN-CODE", "ERR-TEXT", "ERR-MESSAGE"],
+     "calls_made": [],
+     "complexity_score": 2, "has_unresolved_statements": false,
+     "annotations": [
+       {"line": 284, "statement_id": "SYS-PORTFOLIO-001-FIL-0047-STMT-000050", "note": "RCVPRC00 never sets LS-RETURN-CODE to zero; the test relies on the value supplied by the caller or set to BCT-RC-ERROR by 9000-ERROR-ROUTINE in this call."},
+       {"line": 290, "statement_id": "SYS-PORTFOLIO-001-FIL-0047-STMT-000051", "note": "Static CALL to external program ERRPROC (not traced into); ERR-PROGRAM is set only by 9000-ERROR-ROUTINE, so it may hold a value from an earlier error or none."}
+     ],
+     "paragraph_id": "SYS-PORTFOLIO-001-FIL-0047-PAR-0017", "section_id": null,
+     "statement_ids": ["SYS-PORTFOLIO-001-FIL-0047-STMT-000050", "SYS-PORTFOLIO-001-FIL-0047-STMT-000095", "SYS-PORTFOLIO-001-FIL-0047-STMT-000094", "SYS-PORTFOLIO-001-FIL-0047-STMT-000051"],
+     "pseudocode_statement_ids": [[], ["SYS-PORTFOLIO-001-FIL-0047-STMT-000050"], ["SYS-PORTFOLIO-001-FIL-0047-STMT-000095"], ["SYS-PORTFOLIO-001-FIL-0047-STMT-000050"], ["SYS-PORTFOLIO-001-FIL-0047-STMT-000094"], ["SYS-PORTFOLIO-001-FIL-0047-STMT-000050"], ["SYS-PORTFOLIO-001-FIL-0047-STMT-000051"], ["SYS-PORTFOLIO-001-FIL-0047-STMT-000051"]],
+     "untranslated_statement_ids": [],
+     "field_reference_ids": [
+       {"name": "LS-RETURN-CODE", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0047-FLD-000020", "target_kind": "field", "candidate_ids": []},
+       {"name": "ERR-TEXT", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0007-FLD-000017", "target_kind": "field", "candidate_ids": []},
+       {"name": "ERR-MESSAGE", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0007-REC-0003", "target_kind": "record", "candidate_ids": []}
+     ],
+     "calls_made_ids": []},
+    {"name": "3200-CLOSE-FILES", "section": null, "line_range": [293, 302],
+     "pseudocode": [
+       "CLOSE BATCH-CONTROL-FILE and PROCESS-SEQ-FILE",
+       "IF bct_file_status != '00' OR psr_file_status != '00' THEN",
+       "  SET error_text = 'Error closing files'",
+       "  CALL 9000-error-routine",
+       "END IF"
+     ],
+     "pseudocode_text": "CLOSE BATCH-CONTROL-FILE and PROCESS-SEQ-FILE\nIF bct_file_status != '00' OR psr_file_status != '00' THEN\n  SET error_text = 'Error closing files'\n  CALL 9000-error-routine\nEND IF",
+     "field_references": ["WS-BCT-STATUS", "WS-PSR-STATUS", "ERR-TEXT"],
+     "calls_made": ["9000-ERROR-ROUTINE"],
+     "complexity_score": 1, "has_unresolved_statements": false, "annotations": [],
+     "paragraph_id": "SYS-PORTFOLIO-001-FIL-0047-PAR-0018", "section_id": null,
+     "statement_ids": ["SYS-PORTFOLIO-001-FIL-0047-STMT-000052", "SYS-PORTFOLIO-001-FIL-0047-STMT-000053", "SYS-PORTFOLIO-001-FIL-0047-STMT-000096", "SYS-PORTFOLIO-001-FIL-0047-STMT-000097"],
+     "pseudocode_statement_ids": [["SYS-PORTFOLIO-001-FIL-0047-STMT-000052"], ["SYS-PORTFOLIO-001-FIL-0047-STMT-000053"], ["SYS-PORTFOLIO-001-FIL-0047-STMT-000096"], ["SYS-PORTFOLIO-001-FIL-0047-STMT-000097"], ["SYS-PORTFOLIO-001-FIL-0047-STMT-000053"]],
+     "untranslated_statement_ids": [],
+     "field_reference_ids": [
+       {"name": "WS-BCT-STATUS", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0047-FLD-000001", "target_kind": "field", "candidate_ids": []},
+       {"name": "WS-PSR-STATUS", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0047-FLD-000002", "target_kind": "field", "candidate_ids": []},
+       {"name": "ERR-TEXT", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0007-FLD-000017", "target_kind": "field", "candidate_ids": []}
+     ],
+     "calls_made_ids": [{"name": "9000-ERROR-ROUTINE", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0047-PAR-0005", "section_id": null}]}
+  ],
+  "unresolved_statements": [],
+  "pseudocode_issues": [
+    {"severity": "info", "type": "ambiguous_statement", "line": 207, "statement_id": "SYS-PORTFOLIO-001-FIL-0047-STMT-000032", "message": "ACCEPT WS-CURRENT-TIME FROM TIME STAMP recorded verbatim and flagged ambiguous: non-standard ACCEPT source."}
+  ]
+}

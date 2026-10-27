@@ -1,0 +1,512 @@
+{
+"program_summary": {"program_id": "PORTDEL", "file_id": "SYS-PORTFOLIO-001-FIL-0068", "logic_file": "program_logic/SYS-PORTFOLIO-001-FIL-0068__PORTDEL_logic.json", "logic_status": "success", "paragraphs_translated": 7, "execution_paths": 1, "branches": 5, "loops": 1, "dead_code_confirmed": 0, "goto_annotations": 0, "unresolvable_paths": 0, "unresolved_ids": 0},
+"program_id": "PORTDEL",
+"system_id": "SYS-PORTFOLIO-001",
+"file_id": "SYS-PORTFOLIO-001-FIL-0068",
+"path_id": "SYS-PORTFOLIO-001-PATH-0068",
+"relative_path": "src/programs/portfolio/PORTDEL.cbl",
+"parse_run_id": "PRUN-20261023T023803Z-ACC2",
+"upstream": {
+  "verification": {
+    "verdict": "VALID",
+    "verdict_reasons": ["V2, V3 and V4 consistent; Agent 2 parse_status 'success'; copybook layout PORTFLIO present and consistent; no unresolved copy stubs"],
+    "v1": {"raw_structure": "present", "parse_status": "success", "program_layout": "present", "data_run_id": "DRUN-20261024T215053Z-ACC1", "copybook_layouts": [{"copybook": "PORTFLIO", "copybook_file_id": "SYS-PORTFOLIO-001-FIL-0009", "layout": "present", "expanded_at_lines": [42]}], "unresolved_copy_stubs": []},
+    "v2_file_identities": {
+      "program_entries": {"require_completed": ["parser", "data"], "entries": ["raw_structure|SYS-PORTFOLIO-001-FIL-0068", "data_layout|SYS-PORTFOLIO-001-FIL-0068"], "result": "batched with the INQPORT, SECMGR, PORTADD, PORTREAD and PORTTEST program entries: checked 12, ok 12, problems [], duplicate_file_ids_in_json [], consistent true"},
+      "copybook_entries": {"require_completed": ["data"], "entries": ["data_layout|SYS-PORTFOLIO-001-FIL-0009"], "result": "batched with copybooks FIL-0020, FIL-0011, FIL-0017, FIL-0019, FIL-0007: checked 6, ok 6, problems [], duplicate_file_ids_in_json [], consistent true"},
+      "consistent": true
+    },
+    "v3_structure_identities": {"sections_checked": 4, "paragraphs_checked": 7, "statements_checked": 43, "edges_checked": 7, "registered_edges": 7, "section_problems": [], "paragraph_problems": [], "statement_problems": [], "edge_problems": [], "invalid_registered_edges": [], "registered_not_in_json": {"sections": [], "paragraphs": [], "statements": [], "missing_count": 0}, "duplicate_ids_in_json": [], "consistent": true, "note": "section names sent: CONFIGURATION (SEC-0001), INPUT-OUTPUT (SEC-0002); null for the data-division sections SEC-0003 and SEC-0004"},
+    "v4_data_identities": [
+      {"file_id": "SYS-PORTFOLIO-001-FIL-0068", "layout": "program", "records_checked": 5, "fields_checked": 34, "expansions_checked": 1, "record_problems": [], "field_problems": [], "expansion_problems": [], "copybook_records_in_program": 0, "registered_not_in_json": {"records": [], "fields": [], "missing_count": 0}, "duplicate_ids_in_json": [], "consistent": true, "note": "copy_expansion held by FILE section SYS-PORTFOLIO-001-FIL-0068-SEC-0003 (line 42)"},
+      {"file_id": "SYS-PORTFOLIO-001-FIL-0009", "layout": "copybook PORTFLIO", "records_checked": 1, "fields_checked": 23, "expansions_checked": 0, "record_problems": [], "field_problems": [], "expansion_problems": [], "copybook_records_in_program": 0, "registered_not_in_json": {"records": [], "fields": [], "missing_count": 0}, "duplicate_ids_in_json": [], "consistent": true}
+    ]
+  }
+},
+"execution_traces": [
+  {
+    "entry_point": "0000-MAIN",
+    "entry_point_id": "SYS-PORTFOLIO-001-FIL-0068-PAR-0001",
+    "entry_type": "batch_main",
+    "steps": [
+      {"step": 1, "paragraph": "0000-MAIN", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0068-PAR-0001", "action": "PERFORM", "target": "1000-INITIALIZE", "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0068-PAR-0002", "target_section_id": null, "condition": null, "line": 102, "statement_id": "SYS-PORTFOLIO-001-FIL-0068-STMT-000001"},
+      {"step": 2, "paragraph": "1000-INITIALIZE", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0068-PAR-0002", "action": "IF", "target": null, "target_paragraph_id": null, "target_section_id": null,
+       "condition": {"text": "NOT WS-SUCCESS-STATUS OR NOT WS-DEL-SUCCESS OR NOT WS-AUD-SUCCESS", "fields": ["WS-SUCCESS-STATUS", "WS-DEL-SUCCESS", "WS-AUD-SUCCESS"], "field_ids": [
+         {"name": "WS-SUCCESS-STATUS", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0068-FLD-000019", "target_kind": "condition", "candidate_ids": []},
+         {"name": "WS-DEL-SUCCESS", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0068-FLD-000023", "target_kind": "condition", "candidate_ids": []},
+         {"name": "WS-AUD-SUCCESS", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0068-FLD-000026", "target_kind": "condition", "candidate_ids": []}]},
+       "line": 118, "statement_id": "SYS-PORTFOLIO-001-FIL-0068-STMT-000009"},
+      {"step": 3, "paragraph": "1000-INITIALIZE", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0068-PAR-0002", "action": "PERFORM", "target": "3000-TERMINATE", "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0068-PAR-0007", "target_section_id": null,
+       "condition": {"text": "THEN branch of IF NOT WS-SUCCESS-STATUS OR NOT WS-DEL-SUCCESS OR NOT WS-AUD-SUCCESS (file open failed)", "fields": ["WS-SUCCESS-STATUS", "WS-DEL-SUCCESS", "WS-AUD-SUCCESS"], "field_ids": [
+         {"name": "WS-SUCCESS-STATUS", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0068-FLD-000019", "target_kind": "condition", "candidate_ids": []},
+         {"name": "WS-DEL-SUCCESS", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0068-FLD-000023", "target_kind": "condition", "candidate_ids": []},
+         {"name": "WS-AUD-SUCCESS", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0068-FLD-000026", "target_kind": "condition", "candidate_ids": []}]},
+       "line": 126, "statement_id": "SYS-PORTFOLIO-001-FIL-0068-STMT-000031", "note": "After 3000-TERMINATE returns, control goes back to 0000-MAIN, which continues with the read loop (step 4)."},
+      {"step": 4, "paragraph": "0000-MAIN", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0068-PAR-0001", "action": "PERFORM_UNTIL", "target": "2000-PROCESS", "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0068-PAR-0003", "target_section_id": null,
+       "condition": {"text": "END-OF-FILE", "fields": ["END-OF-FILE"], "field_ids": [{"name": "END-OF-FILE", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0068-FLD-000028", "target_kind": "condition", "candidate_ids": []}], "test_time": "BEFORE", "loop_type": "WHILE", "termination_pattern": "FILE_EXHAUSTION_LOOP"},
+       "line": 104, "statement_id": "SYS-PORTFOLIO-001-FIL-0068-STMT-000002"},
+      {"step": 5, "paragraph": "2000-PROCESS", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0068-PAR-0003", "action": "READ", "target": null, "target_paragraph_id": null, "target_section_id": null,
+       "condition": {"text": "READ DELETE-FILE AT END / NOT AT END", "fields": [], "field_ids": []},
+       "line": 131, "statement_id": "SYS-PORTFOLIO-001-FIL-0068-STMT-000010"},
+      {"step": 6, "paragraph": "2000-PROCESS", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0068-PAR-0003", "action": "PERFORM", "target": "2100-PROCESS-DELETE", "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0068-PAR-0004", "target_section_id": null,
+       "condition": {"text": "NOT AT END (a deletion request was read)", "fields": [], "field_ids": []},
+       "line": 135, "statement_id": "SYS-PORTFOLIO-001-FIL-0068-STMT-000033"},
+      {"step": 7, "paragraph": "2100-PROCESS-DELETE", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0068-PAR-0004", "action": "READ", "target": null, "target_paragraph_id": null, "target_section_id": null, "condition": null, "line": 142, "statement_id": "SYS-PORTFOLIO-001-FIL-0068-STMT-000012", "note": "Keyed (random) READ of PORTFOLIO-FILE by PORT-KEY; no INVALID KEY clause, the outcome is tested through WS-FILE-STATUS."},
+      {"step": 8, "paragraph": "2100-PROCESS-DELETE", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0068-PAR-0004", "action": "EVALUATE", "target": null, "target_paragraph_id": null, "target_section_id": null, "condition": {"text": "EVALUATE TRUE", "fields": [], "field_ids": []}, "line": 144, "statement_id": "SYS-PORTFOLIO-001-FIL-0068-STMT-000013"},
+      {"step": 9, "paragraph": "2100-PROCESS-DELETE", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0068-PAR-0004", "action": "PERFORM", "target": "2200-DELETE-RECORD", "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0068-PAR-0005", "target_section_id": null,
+       "condition": {"text": "WHEN WS-SUCCESS-STATUS", "fields": ["WS-SUCCESS-STATUS"], "field_ids": [{"name": "WS-SUCCESS-STATUS", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0068-FLD-000019", "target_kind": "condition", "candidate_ids": []}]},
+       "line": 146, "statement_id": "SYS-PORTFOLIO-001-FIL-0068-STMT-000038"},
+      {"step": 10, "paragraph": "2200-DELETE-RECORD", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0068-PAR-0005", "action": "DELETE", "target": null, "target_paragraph_id": null, "target_section_id": null, "condition": null, "line": 157, "statement_id": "SYS-PORTFOLIO-001-FIL-0068-STMT-000014"},
+      {"step": 11, "paragraph": "2200-DELETE-RECORD", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0068-PAR-0005", "action": "IF", "target": null, "target_paragraph_id": null, "target_section_id": null,
+       "condition": {"text": "WS-SUCCESS-STATUS", "fields": ["WS-SUCCESS-STATUS"], "field_ids": [{"name": "WS-SUCCESS-STATUS", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0068-FLD-000019", "target_kind": "condition", "candidate_ids": []}]},
+       "line": 159, "statement_id": "SYS-PORTFOLIO-001-FIL-0068-STMT-000015"},
+      {"step": 12, "paragraph": "2200-DELETE-RECORD", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0068-PAR-0005", "action": "PERFORM", "target": "2300-WRITE-AUDIT", "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0068-PAR-0006", "target_section_id": null,
+       "condition": {"text": "THEN branch of IF WS-SUCCESS-STATUS (delete succeeded)", "fields": ["WS-SUCCESS-STATUS"], "field_ids": [{"name": "WS-SUCCESS-STATUS", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0068-FLD-000019", "target_kind": "condition", "candidate_ids": []}]},
+       "line": 161, "statement_id": "SYS-PORTFOLIO-001-FIL-0068-STMT-000042"},
+      {"step": 13, "paragraph": "0000-MAIN", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0068-PAR-0001", "action": "PERFORM", "target": "3000-TERMINATE", "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0068-PAR-0007", "target_section_id": null, "condition": null, "line": 107, "statement_id": "SYS-PORTFOLIO-001-FIL-0068-STMT-000003"},
+      {"step": 14, "paragraph": "0000-MAIN", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0068-PAR-0001", "action": "GOBACK", "target": null, "target_paragraph_id": null, "target_section_id": null, "condition": null, "line": 109, "statement_id": "SYS-PORTFOLIO-001-FIL-0068-STMT-000004"}
+    ]
+  }
+],
+"branch_map": [
+  {
+    "paragraph": "1000-INITIALIZE",
+    "paragraph_id": "SYS-PORTFOLIO-001-FIL-0068-PAR-0002",
+    "branches": [
+      {"type": "IF", "line": 118, "statement_id": "SYS-PORTFOLIO-001-FIL-0068-STMT-000009", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0068-PAR-0002",
+       "condition_text": "NOT WS-SUCCESS-STATUS OR NOT WS-DEL-SUCCESS OR NOT WS-AUD-SUCCESS",
+       "condition_fields": ["WS-SUCCESS-STATUS", "WS-DEL-SUCCESS", "WS-AUD-SUCCESS"],
+       "condition_field_ids": [
+         {"name": "WS-SUCCESS-STATUS", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0068-FLD-000019", "target_kind": "condition", "candidate_ids": []},
+         {"name": "WS-DEL-SUCCESS", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0068-FLD-000023", "target_kind": "condition", "candidate_ids": []},
+         {"name": "WS-AUD-SUCCESS", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0068-FLD-000026", "target_kind": "condition", "candidate_ids": []}
+       ],
+       "has_else": false, "then_line_range": [121, 126], "else_line_range": null, "end_if_line": 127, "nested_depth": 1,
+       "outcomes": [
+         {"label": "THEN", "line_range": [121, 126], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0068-STMT-000029", "SYS-PORTFOLIO-001-FIL-0068-STMT-000030", "SYS-PORTFOLIO-001-FIL-0068-STMT-000031"]}
+       ]}
+    ]
+  },
+  {
+    "paragraph": "2000-PROCESS",
+    "paragraph_id": "SYS-PORTFOLIO-001-FIL-0068-PAR-0003",
+    "branches": [
+      {"type": "AT_END", "operation": "READ", "file_name": "DELETE-FILE", "line": 131, "statement_id": "SYS-PORTFOLIO-001-FIL-0068-STMT-000010", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0068-PAR-0003",
+       "condition_text": "READ DELETE-FILE AT END / NOT AT END", "condition_fields": [], "condition_field_ids": [], "io_status_field": "WS-DEL-STATUS",
+       "at_end_line_range": [133, 133], "not_at_end_line_range": [135, 135], "nested_depth": 1,
+       "outcomes": [
+         {"label": "AT END", "line_range": [133, 133], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0068-STMT-000032"]},
+         {"label": "NOT AT END", "line_range": [135, 135], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0068-STMT-000033"]}
+       ]}
+    ]
+  },
+  {
+    "paragraph": "2100-PROCESS-DELETE",
+    "paragraph_id": "SYS-PORTFOLIO-001-FIL-0068-PAR-0004",
+    "branches": [
+      {"type": "EVALUATE", "line": 144, "statement_id": "SYS-PORTFOLIO-001-FIL-0068-STMT-000013", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0068-PAR-0004", "subjects": ["TRUE"],
+       "condition_text": "EVALUATE TRUE WHEN WS-SUCCESS-STATUS / WHEN WS-REC-NOT-FND / WHEN OTHER",
+       "condition_fields": ["WS-SUCCESS-STATUS", "WS-REC-NOT-FND"],
+       "condition_field_ids": [
+         {"name": "WS-SUCCESS-STATUS", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0068-FLD-000019", "target_kind": "condition", "candidate_ids": []},
+         {"name": "WS-REC-NOT-FND", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0068-FLD-000020", "target_kind": "condition", "candidate_ids": []}
+       ],
+       "when_clauses": [
+         {"conditions": ["WS-SUCCESS-STATUS"], "condition_fields": ["WS-SUCCESS-STATUS"], "condition_values": "WS-FILE-STATUS = '00'", "body_line_range": [146, 146], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0068-STMT-000038"]},
+         {"conditions": ["WS-REC-NOT-FND"], "condition_fields": ["WS-REC-NOT-FND"], "condition_values": "WS-FILE-STATUS = '23'", "body_line_range": [148, 149], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0068-STMT-000036", "SYS-PORTFOLIO-001-FIL-0068-STMT-000037"]},
+         {"conditions": ["OTHER"], "condition_fields": [], "body_line_range": [151, 152], "is_default": true, "statement_ids": ["SYS-PORTFOLIO-001-FIL-0068-STMT-000034", "SYS-PORTFOLIO-001-FIL-0068-STMT-000035"]}
+       ],
+       "has_when_other": true,
+       "end_evaluate_line": 153,
+       "outcomes": [
+         {"label": "WHEN WS-SUCCESS-STATUS", "line_range": [146, 146], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0068-STMT-000038"]},
+         {"label": "WHEN WS-REC-NOT-FND", "line_range": [148, 149], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0068-STMT-000036", "SYS-PORTFOLIO-001-FIL-0068-STMT-000037"]},
+         {"label": "WHEN OTHER", "line_range": [151, 152], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0068-STMT-000034", "SYS-PORTFOLIO-001-FIL-0068-STMT-000035"]}
+       ],
+       "nested_depth": 1}
+    ]
+  },
+  {
+    "paragraph": "2200-DELETE-RECORD",
+    "paragraph_id": "SYS-PORTFOLIO-001-FIL-0068-PAR-0005",
+    "branches": [
+      {"type": "IF", "line": 159, "statement_id": "SYS-PORTFOLIO-001-FIL-0068-STMT-000015", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0068-PAR-0005",
+       "condition_text": "WS-SUCCESS-STATUS",
+       "condition_fields": ["WS-SUCCESS-STATUS"],
+       "condition_field_ids": [{"name": "WS-SUCCESS-STATUS", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0068-FLD-000019", "target_kind": "condition", "candidate_ids": []}],
+       "has_else": true, "then_line_range": [160, 161], "else_line_range": [163, 164], "end_if_line": 165, "nested_depth": 1,
+       "outcomes": [
+         {"label": "THEN", "line_range": [160, 161], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0068-STMT-000041", "SYS-PORTFOLIO-001-FIL-0068-STMT-000042"]},
+         {"label": "ELSE", "line_range": [163, 164], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0068-STMT-000039", "SYS-PORTFOLIO-001-FIL-0068-STMT-000040"]}
+       ]}
+    ]
+  },
+  {
+    "paragraph": "2300-WRITE-AUDIT",
+    "paragraph_id": "SYS-PORTFOLIO-001-FIL-0068-PAR-0006",
+    "branches": [
+      {"type": "IF", "line": 179, "statement_id": "SYS-PORTFOLIO-001-FIL-0068-STMT-000023", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0068-PAR-0006",
+       "condition_text": "NOT WS-AUD-SUCCESS",
+       "condition_fields": ["WS-AUD-SUCCESS"],
+       "condition_field_ids": [{"name": "WS-AUD-SUCCESS", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0068-FLD-000026", "target_kind": "condition", "candidate_ids": []}],
+       "has_else": false, "then_line_range": [180, 180], "else_line_range": null, "end_if_line": 181, "nested_depth": 1,
+       "outcomes": [
+         {"label": "THEN", "line_range": [180, 180], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0068-STMT-000043"]}
+       ]}
+    ]
+  }
+],
+"loops": [
+  {"paragraph": "0000-MAIN", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0068-PAR-0001", "target": "2000-PROCESS", "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0068-PAR-0003", "type": "PERFORM_UNTIL", "statement_id": "SYS-PORTFOLIO-001-FIL-0068-STMT-000002",
+   "condition_text": "END-OF-FILE", "condition_fields": ["END-OF-FILE"],
+   "condition_field_ids": [{"name": "END-OF-FILE", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0068-FLD-000028", "target_kind": "condition", "candidate_ids": []}],
+   "test_time": "BEFORE", "loop_type": "WHILE", "termination_pattern": "FILE_EXHAUSTION_LOOP",
+   "modifying_statement_ids": ["SYS-PORTFOLIO-001-FIL-0068-STMT-000032"],
+   "line": 104}
+],
+"dead_code_confirmed": [],
+"unresolvable_paths": [],
+"trace_issues": [
+  {"severity": "info", "type": "upstream_issue", "upstream_agent": "2_parser", "upstream_type": "misplaced_comment_indicator", "lines": [1], "message": "Line 1 has '*' as the first non-blank character in column 8 (Area A) instead of the column 7 indicator; treated as a comment."},
+  {"severity": "info", "type": "upstream_issue", "upstream_agent": "3_data", "upstream_type": "section_level_copy_expansion", "line": 42, "message": "COPY PORTFLIO (line 42) sits directly under FD PORTFOLIO-FILE with no enclosing 01; EXPANDS_COPY is held by the FILE SECTION (SYS-PORTFOLIO-001-FIL-0068-SEC-0003)."},
+  {"severity": "info", "type": "upstream_issue", "upstream_agent": "3_data", "upstream_type": "value_literal_longer_than_pic", "line": 69, "message": "WS-PROGRAM-NAME PIC X(08) has VALUE 'PORTDEL  ' (9 characters). Literal recorded as written; WS-PROGRAM-NAME is not referenced by any procedure statement."},
+  {"severity": "warning", "type": "loop_termination_risk", "line": 104, "statement_id": "SYS-PORTFOLIO-001-FIL-0068-STMT-000002", "message": "END-OF-FILE is set only on READ DELETE-FILE AT END (line 133). If any file failed to open, 1000-INITIALIZE performs 3000-TERMINATE (closing the files) and returns; 0000-MAIN then enters the read loop on a closed file, where neither AT END nor NOT AT END fires. The loop termination in that path cannot be confirmed statically."},
+  {"severity": "info", "type": "double_terminate", "lines": [126, 107], "message": "On the open-failure path 3000-TERMINATE runs twice (line 126 and line 107)."},
+  {"severity": "warning", "type": "ambiguous_statement", "line": 169, "statement_id": "SYS-PORTFOLIO-001-FIL-0068-STMT-000016", "message": "'ACCEPT WS-TIMESTAMP FROM TIME STAMP' is recorded verbatim: 'TIME STAMP' is not a standard ACCEPT FROM mnemonic (standard forms are DATE, DAY, DAY-OF-WEEK, TIME). The exact timestamp format written to AUD-TIMESTAMP is unknown; flagged ambiguous."},
+  {"severity": "info", "type": "no_invalid_key", "lines": [142, 157], "message": "The keyed READ and the DELETE of PORTFOLIO-FILE have no INVALID KEY clause; outcomes are tested through WS-FILE-STATUS (EVALUATE at line 144, IF at line 159)."}
+],
+"program_narrative": "Program PORTDEL is a batch program that deletes portfolio records on request. It opens the indexed PORTFOLIO-FILE for update, the sequential DELETE-FILE of deletion requests for input and the sequential AUDIT-FILE for output, then reads deletion requests until end of file. For each request it moves the request key (portfolio ID and account number) into the portfolio key and reads the portfolio record: if found it deletes it, counts the deletion and writes an audit record (timestamp, action 'DELETE', key, reason code and the portfolio's status); a not-found status ('23') is counted and reported, and any other read status is counted as an error. A failed delete is counted as an error, and a failed audit write is reported. At the end the files are closed, the deleted, not-found and error counts are displayed, and WS-RETURN-CODE (8 if the files could not be opened, otherwise 0) is passed back as the program return code.",
+"paragraphs": [
+  {
+    "name": "0000-MAIN",
+    "paragraph_id": "SYS-PORTFOLIO-001-FIL-0068-PAR-0001",
+    "section": null,
+    "section_id": null,
+    "line_range": [101, 110],
+    "pseudocode": [
+      "-- Main control paragraph: initialise, process all deletion requests, terminate",
+      "CALL 1000-initialize",
+      "WHILE NOT end_of_file DO  -- PERFORM UNTIL END-OF-FILE (tested before each iteration)",
+      "  CALL 2000-process",
+      "END WHILE",
+      "CALL 3000-terminate",
+      "RETURN to caller  -- GOBACK"
+    ],
+    "pseudocode_statement_ids": [
+      [],
+      ["SYS-PORTFOLIO-001-FIL-0068-STMT-000001"],
+      ["SYS-PORTFOLIO-001-FIL-0068-STMT-000002"],
+      ["SYS-PORTFOLIO-001-FIL-0068-STMT-000002"],
+      ["SYS-PORTFOLIO-001-FIL-0068-STMT-000002"],
+      ["SYS-PORTFOLIO-001-FIL-0068-STMT-000003"],
+      ["SYS-PORTFOLIO-001-FIL-0068-STMT-000004"]
+    ],
+    "pseudocode_text": "-- Main control paragraph: initialise, process all deletion requests, terminate\nCALL 1000-initialize\nWHILE NOT end_of_file DO  -- PERFORM UNTIL END-OF-FILE (tested before each iteration)\n  CALL 2000-process\nEND WHILE\nCALL 3000-terminate\nRETURN to caller  -- GOBACK",
+    "statement_ids": ["SYS-PORTFOLIO-001-FIL-0068-STMT-000001", "SYS-PORTFOLIO-001-FIL-0068-STMT-000002", "SYS-PORTFOLIO-001-FIL-0068-STMT-000003", "SYS-PORTFOLIO-001-FIL-0068-STMT-000004"],
+    "untranslated_statement_ids": [],
+    "field_references": ["END-OF-FILE"],
+    "field_reference_ids": [
+      {"name": "END-OF-FILE", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0068-FLD-000028", "target_kind": "condition", "candidate_ids": []}
+    ],
+    "calls_made": ["1000-INITIALIZE", "2000-PROCESS", "3000-TERMINATE"],
+    "calls_made_ids": [
+      {"name": "1000-INITIALIZE", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0068-PAR-0002", "section_id": null},
+      {"name": "2000-PROCESS", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0068-PAR-0003", "section_id": null},
+      {"name": "3000-TERMINATE", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0068-PAR-0007", "section_id": null}
+    ],
+    "complexity_score": 1,
+    "has_unresolved_statements": false,
+    "annotations": [
+      {"line": 104, "statement_id": "SYS-PORTFOLIO-001-FIL-0068-STMT-000002", "note": "END-OF-FILE is the 88-level condition WS-END-OF-FILE-SW = 'Y', set by READ DELETE-FILE AT END in 2000-PROCESS."}
+    ]
+  },
+  {
+    "name": "1000-INITIALIZE",
+    "paragraph_id": "SYS-PORTFOLIO-001-FIL-0068-PAR-0002",
+    "section": null,
+    "section_id": null,
+    "line_range": [111, 129],
+    "pseudocode": [
+      "CLEAR ws_work_areas  -- INITIALIZE: counters to zero, alphanumerics to spaces",
+      "OPEN PORTFOLIO-FILE for READ-WRITE  -- status in WS-FILE-STATUS",
+      "OPEN DELETE-FILE for READ-ONLY  -- status in WS-DEL-STATUS",
+      "OPEN AUDIT-FILE for WRITE (new)  -- status in WS-AUD-STATUS",
+      "IF portfolio status != '00' OR delete-file status != '00' OR audit-file status != '00' THEN",
+      "  DISPLAY 'Error opening files: ' 'PORT=' ws_file_status 'DEL=' ws_del_status 'AUD=' ws_aud_status",
+      "  SET ws_return_code = ws_error  -- 8",
+      "  CALL 3000-terminate  -- closes the files; control then returns here and to 0000-MAIN",
+      "END IF"
+    ],
+    "pseudocode_statement_ids": [
+      ["SYS-PORTFOLIO-001-FIL-0068-STMT-000005"],
+      ["SYS-PORTFOLIO-001-FIL-0068-STMT-000006"],
+      ["SYS-PORTFOLIO-001-FIL-0068-STMT-000007"],
+      ["SYS-PORTFOLIO-001-FIL-0068-STMT-000008"],
+      ["SYS-PORTFOLIO-001-FIL-0068-STMT-000009"],
+      ["SYS-PORTFOLIO-001-FIL-0068-STMT-000029"],
+      ["SYS-PORTFOLIO-001-FIL-0068-STMT-000030"],
+      ["SYS-PORTFOLIO-001-FIL-0068-STMT-000031"],
+      ["SYS-PORTFOLIO-001-FIL-0068-STMT-000009"]
+    ],
+    "pseudocode_text": "CLEAR ws_work_areas  -- INITIALIZE: counters to zero, alphanumerics to spaces\nOPEN PORTFOLIO-FILE for READ-WRITE  -- status in WS-FILE-STATUS\nOPEN DELETE-FILE for READ-ONLY  -- status in WS-DEL-STATUS\nOPEN AUDIT-FILE for WRITE (new)  -- status in WS-AUD-STATUS\nIF portfolio status != '00' OR delete-file status != '00' OR audit-file status != '00' THEN\n  DISPLAY 'Error opening files: ' 'PORT=' ws_file_status 'DEL=' ws_del_status 'AUD=' ws_aud_status\n  SET ws_return_code = ws_error  -- 8\n  CALL 3000-terminate  -- closes the files; control then returns here and to 0000-MAIN\nEND IF",
+    "statement_ids": ["SYS-PORTFOLIO-001-FIL-0068-STMT-000005", "SYS-PORTFOLIO-001-FIL-0068-STMT-000006", "SYS-PORTFOLIO-001-FIL-0068-STMT-000007", "SYS-PORTFOLIO-001-FIL-0068-STMT-000008", "SYS-PORTFOLIO-001-FIL-0068-STMT-000009", "SYS-PORTFOLIO-001-FIL-0068-STMT-000029", "SYS-PORTFOLIO-001-FIL-0068-STMT-000030", "SYS-PORTFOLIO-001-FIL-0068-STMT-000031"],
+    "untranslated_statement_ids": [],
+    "field_references": ["WS-WORK-AREAS", "WS-SUCCESS-STATUS", "WS-DEL-SUCCESS", "WS-AUD-SUCCESS", "WS-FILE-STATUS", "WS-DEL-STATUS", "WS-AUD-STATUS", "WS-ERROR", "WS-RETURN-CODE"],
+    "field_reference_ids": [
+      {"name": "WS-WORK-AREAS", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0068-REC-0005", "target_kind": "record", "candidate_ids": []},
+      {"name": "WS-SUCCESS-STATUS", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0068-FLD-000019", "target_kind": "condition", "candidate_ids": []},
+      {"name": "WS-DEL-SUCCESS", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0068-FLD-000023", "target_kind": "condition", "candidate_ids": []},
+      {"name": "WS-AUD-SUCCESS", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0068-FLD-000026", "target_kind": "condition", "candidate_ids": []},
+      {"name": "WS-FILE-STATUS", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0068-FLD-000018", "target_kind": "field", "candidate_ids": []},
+      {"name": "WS-DEL-STATUS", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0068-FLD-000022", "target_kind": "field", "candidate_ids": []},
+      {"name": "WS-AUD-STATUS", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0068-FLD-000025", "target_kind": "field", "candidate_ids": []},
+      {"name": "WS-ERROR", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0068-FLD-000017", "target_kind": "field", "candidate_ids": []},
+      {"name": "WS-RETURN-CODE", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0068-FLD-000033", "target_kind": "field", "candidate_ids": []}
+    ],
+    "calls_made": ["3000-TERMINATE"],
+    "calls_made_ids": [
+      {"name": "3000-TERMINATE", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0068-PAR-0007", "section_id": null}
+    ],
+    "complexity_score": 4,
+    "has_unresolved_statements": false,
+    "annotations": [
+      {"line": 126, "statement_id": "SYS-PORTFOLIO-001-FIL-0068-STMT-000031", "note": "The open-failure path does not stop the program: 0000-MAIN continues into the read loop after this paragraph returns."}
+    ]
+  },
+  {
+    "name": "2000-PROCESS",
+    "paragraph_id": "SYS-PORTFOLIO-001-FIL-0068-PAR-0003",
+    "section": null,
+    "section_id": null,
+    "line_range": [130, 138],
+    "pseudocode": [
+      "READ next record from DELETE-FILE into delete_record",
+      "IF end of file THEN",
+      "  SET end_of_file = TRUE  -- WS-END-OF-FILE-SW = 'Y'",
+      "ELSE",
+      "  CALL 2100-process-delete",
+      "END IF"
+    ],
+    "pseudocode_statement_ids": [
+      ["SYS-PORTFOLIO-001-FIL-0068-STMT-000010"],
+      ["SYS-PORTFOLIO-001-FIL-0068-STMT-000010"],
+      ["SYS-PORTFOLIO-001-FIL-0068-STMT-000032"],
+      ["SYS-PORTFOLIO-001-FIL-0068-STMT-000010"],
+      ["SYS-PORTFOLIO-001-FIL-0068-STMT-000033"],
+      ["SYS-PORTFOLIO-001-FIL-0068-STMT-000010"]
+    ],
+    "pseudocode_text": "READ next record from DELETE-FILE into delete_record\nIF end of file THEN\n  SET end_of_file = TRUE  -- WS-END-OF-FILE-SW = 'Y'\nELSE\n  CALL 2100-process-delete\nEND IF",
+    "statement_ids": ["SYS-PORTFOLIO-001-FIL-0068-STMT-000010", "SYS-PORTFOLIO-001-FIL-0068-STMT-000032", "SYS-PORTFOLIO-001-FIL-0068-STMT-000033"],
+    "untranslated_statement_ids": [],
+    "field_references": ["DELETE-RECORD", "END-OF-FILE"],
+    "field_reference_ids": [
+      {"name": "DELETE-RECORD", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0068-REC-0001", "target_kind": "record", "candidate_ids": []},
+      {"name": "END-OF-FILE", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0068-FLD-000028", "target_kind": "condition", "candidate_ids": []}
+    ],
+    "calls_made": ["2100-PROCESS-DELETE"],
+    "calls_made_ids": [
+      {"name": "2100-PROCESS-DELETE", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0068-PAR-0004", "section_id": null}
+    ],
+    "complexity_score": 2,
+    "has_unresolved_statements": false,
+    "annotations": [
+      {"line": 131, "statement_id": "SYS-PORTFOLIO-001-FIL-0068-STMT-000010", "note": "READ DELETE-FILE (no INTO) fills the FD record DELETE-RECORD (SYS-PORTFOLIO-001-FIL-0068-REC-0001)."}
+    ]
+  },
+  {
+    "name": "2100-PROCESS-DELETE",
+    "paragraph_id": "SYS-PORTFOLIO-001-FIL-0068-PAR-0004",
+    "section": null,
+    "section_id": null,
+    "line_range": [139, 155],
+    "pseudocode": [
+      "SET port_key = del_key  -- portfolio ID + account number from the deletion request",
+      "READ record from PORTFOLIO-FILE where key = port_key  -- no INVALID KEY clause; outcome in WS-FILE-STATUS",
+      "IF read status = '00' (WS-SUCCESS-STATUS) THEN",
+      "  CALL 2200-delete-record",
+      "ELSE IF read status = '23' (WS-REC-NOT-FND, record not found) THEN",
+      "  INCREMENT ws_not_fnd_count BY 1",
+      "  DISPLAY 'Record not found: ' port_key",
+      "ELSE",
+      "  INCREMENT ws_error_count BY 1",
+      "  DISPLAY 'Read error for: ' port_key",
+      "END IF"
+    ],
+    "pseudocode_statement_ids": [
+      ["SYS-PORTFOLIO-001-FIL-0068-STMT-000011"],
+      ["SYS-PORTFOLIO-001-FIL-0068-STMT-000012"],
+      ["SYS-PORTFOLIO-001-FIL-0068-STMT-000013"],
+      ["SYS-PORTFOLIO-001-FIL-0068-STMT-000038"],
+      ["SYS-PORTFOLIO-001-FIL-0068-STMT-000013"],
+      ["SYS-PORTFOLIO-001-FIL-0068-STMT-000036"],
+      ["SYS-PORTFOLIO-001-FIL-0068-STMT-000037"],
+      ["SYS-PORTFOLIO-001-FIL-0068-STMT-000013"],
+      ["SYS-PORTFOLIO-001-FIL-0068-STMT-000034"],
+      ["SYS-PORTFOLIO-001-FIL-0068-STMT-000035"],
+      ["SYS-PORTFOLIO-001-FIL-0068-STMT-000013"]
+    ],
+    "pseudocode_text": "SET port_key = del_key  -- portfolio ID + account number from the deletion request\nREAD record from PORTFOLIO-FILE where key = port_key  -- no INVALID KEY clause; outcome in WS-FILE-STATUS\nIF read status = '00' (WS-SUCCESS-STATUS) THEN\n  CALL 2200-delete-record\nELSE IF read status = '23' (WS-REC-NOT-FND, record not found) THEN\n  INCREMENT ws_not_fnd_count BY 1\n  DISPLAY 'Record not found: ' port_key\nELSE\n  INCREMENT ws_error_count BY 1\n  DISPLAY 'Read error for: ' port_key\nEND IF",
+    "statement_ids": ["SYS-PORTFOLIO-001-FIL-0068-STMT-000011", "SYS-PORTFOLIO-001-FIL-0068-STMT-000012", "SYS-PORTFOLIO-001-FIL-0068-STMT-000013", "SYS-PORTFOLIO-001-FIL-0068-STMT-000038", "SYS-PORTFOLIO-001-FIL-0068-STMT-000036", "SYS-PORTFOLIO-001-FIL-0068-STMT-000037", "SYS-PORTFOLIO-001-FIL-0068-STMT-000034", "SYS-PORTFOLIO-001-FIL-0068-STMT-000035"],
+    "untranslated_statement_ids": [],
+    "field_references": ["DEL-KEY", "PORT-KEY", "WS-SUCCESS-STATUS", "WS-REC-NOT-FND", "WS-NOT-FND-COUNT", "WS-ERROR-COUNT"],
+    "field_reference_ids": [
+      {"name": "DEL-KEY", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0068-FLD-000001", "target_kind": "field", "candidate_ids": []},
+      {"name": "PORT-KEY", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0009-FLD-000001", "target_kind": "field", "candidate_ids": []},
+      {"name": "WS-SUCCESS-STATUS", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0068-FLD-000019", "target_kind": "condition", "candidate_ids": []},
+      {"name": "WS-REC-NOT-FND", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0068-FLD-000020", "target_kind": "condition", "candidate_ids": []},
+      {"name": "WS-NOT-FND-COUNT", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0068-FLD-000032", "target_kind": "field", "candidate_ids": []},
+      {"name": "WS-ERROR-COUNT", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0068-FLD-000031", "target_kind": "field", "candidate_ids": []}
+    ],
+    "calls_made": ["2200-DELETE-RECORD"],
+    "calls_made_ids": [
+      {"name": "2200-DELETE-RECORD", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0068-PAR-0005", "section_id": null}
+    ],
+    "complexity_score": 4,
+    "has_unresolved_statements": false,
+    "annotations": [
+      {"line": 140, "statement_id": "SYS-PORTFOLIO-001-FIL-0068-STMT-000011", "note": "DEL-KEY (DEL-ID X(8) + DEL-ACCT-NO X(10)) and PORT-KEY (PORT-ID X(8) + PORT-ACCOUNT-NO X(10)) are both 18-byte groups; the group MOVE copies the request key into the portfolio record key."},
+      {"line": 142, "statement_id": "SYS-PORTFOLIO-001-FIL-0068-STMT-000012", "note": "PORTFOLIO-FILE is INDEXED with ACCESS MODE RANDOM and RECORD KEY PORT-KEY, so READ is a keyed read."}
+    ]
+  },
+  {
+    "name": "2200-DELETE-RECORD",
+    "paragraph_id": "SYS-PORTFOLIO-001-FIL-0068-PAR-0005",
+    "section": null,
+    "section_id": null,
+    "line_range": [156, 167],
+    "pseudocode": [
+      "DELETE current record from PORTFOLIO-FILE  -- no INVALID KEY clause; outcome in WS-FILE-STATUS",
+      "IF delete status = '00' (WS-SUCCESS-STATUS) THEN",
+      "  INCREMENT ws_delete_count BY 1",
+      "  CALL 2300-write-audit",
+      "ELSE",
+      "  INCREMENT ws_error_count BY 1",
+      "  DISPLAY 'Delete failed for: ' port_key",
+      "END IF"
+    ],
+    "pseudocode_statement_ids": [
+      ["SYS-PORTFOLIO-001-FIL-0068-STMT-000014"],
+      ["SYS-PORTFOLIO-001-FIL-0068-STMT-000015"],
+      ["SYS-PORTFOLIO-001-FIL-0068-STMT-000041"],
+      ["SYS-PORTFOLIO-001-FIL-0068-STMT-000042"],
+      ["SYS-PORTFOLIO-001-FIL-0068-STMT-000015"],
+      ["SYS-PORTFOLIO-001-FIL-0068-STMT-000039"],
+      ["SYS-PORTFOLIO-001-FIL-0068-STMT-000040"],
+      ["SYS-PORTFOLIO-001-FIL-0068-STMT-000015"]
+    ],
+    "pseudocode_text": "DELETE current record from PORTFOLIO-FILE  -- no INVALID KEY clause; outcome in WS-FILE-STATUS\nIF delete status = '00' (WS-SUCCESS-STATUS) THEN\n  INCREMENT ws_delete_count BY 1\n  CALL 2300-write-audit\nELSE\n  INCREMENT ws_error_count BY 1\n  DISPLAY 'Delete failed for: ' port_key\nEND IF",
+    "statement_ids": ["SYS-PORTFOLIO-001-FIL-0068-STMT-000014", "SYS-PORTFOLIO-001-FIL-0068-STMT-000015", "SYS-PORTFOLIO-001-FIL-0068-STMT-000041", "SYS-PORTFOLIO-001-FIL-0068-STMT-000042", "SYS-PORTFOLIO-001-FIL-0068-STMT-000039", "SYS-PORTFOLIO-001-FIL-0068-STMT-000040"],
+    "untranslated_statement_ids": [],
+    "field_references": ["WS-SUCCESS-STATUS", "WS-DELETE-COUNT", "WS-ERROR-COUNT", "PORT-KEY"],
+    "field_reference_ids": [
+      {"name": "WS-SUCCESS-STATUS", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0068-FLD-000019", "target_kind": "condition", "candidate_ids": []},
+      {"name": "WS-DELETE-COUNT", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0068-FLD-000030", "target_kind": "field", "candidate_ids": []},
+      {"name": "WS-ERROR-COUNT", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0068-FLD-000031", "target_kind": "field", "candidate_ids": []},
+      {"name": "PORT-KEY", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0009-FLD-000001", "target_kind": "field", "candidate_ids": []}
+    ],
+    "calls_made": ["2300-WRITE-AUDIT"],
+    "calls_made_ids": [
+      {"name": "2300-WRITE-AUDIT", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0068-PAR-0006", "section_id": null}
+    ],
+    "complexity_score": 2,
+    "has_unresolved_statements": false,
+    "annotations": []
+  },
+  {
+    "name": "2300-WRITE-AUDIT",
+    "paragraph_id": "SYS-PORTFOLIO-001-FIL-0068-PAR-0006",
+    "section": null,
+    "section_id": null,
+    "line_range": [168, 183],
+    "pseudocode": [
+      "SET ws_timestamp = current time stamp  -- 'ACCEPT ... FROM TIME STAMP' recorded verbatim (non-standard form; see annotations)",
+      "SET aud_timestamp = ws_timestamp",
+      "SET aud_action = 'DELETE'",
+      "SET aud_key = port_key",
+      "SET aud_reason = del_reason_code  -- 01 closed, 02 transferred, 03 requested",
+      "SET aud_status = port_status  -- status of the deleted portfolio",
+      "WRITE audit_record to AUDIT-FILE",
+      "IF audit-file status != '00' (NOT WS-AUD-SUCCESS) THEN",
+      "  DISPLAY 'Audit write failed for: ' port_key",
+      "END IF"
+    ],
+    "pseudocode_statement_ids": [
+      ["SYS-PORTFOLIO-001-FIL-0068-STMT-000016"],
+      ["SYS-PORTFOLIO-001-FIL-0068-STMT-000017"],
+      ["SYS-PORTFOLIO-001-FIL-0068-STMT-000018"],
+      ["SYS-PORTFOLIO-001-FIL-0068-STMT-000019"],
+      ["SYS-PORTFOLIO-001-FIL-0068-STMT-000020"],
+      ["SYS-PORTFOLIO-001-FIL-0068-STMT-000021"],
+      ["SYS-PORTFOLIO-001-FIL-0068-STMT-000022"],
+      ["SYS-PORTFOLIO-001-FIL-0068-STMT-000023"],
+      ["SYS-PORTFOLIO-001-FIL-0068-STMT-000043"],
+      ["SYS-PORTFOLIO-001-FIL-0068-STMT-000023"]
+    ],
+    "pseudocode_text": "SET ws_timestamp = current time stamp  -- 'ACCEPT ... FROM TIME STAMP' recorded verbatim (non-standard form; see annotations)\nSET aud_timestamp = ws_timestamp\nSET aud_action = 'DELETE'\nSET aud_key = port_key\nSET aud_reason = del_reason_code  -- 01 closed, 02 transferred, 03 requested\nSET aud_status = port_status  -- status of the deleted portfolio\nWRITE audit_record to AUDIT-FILE\nIF audit-file status != '00' (NOT WS-AUD-SUCCESS) THEN\n  DISPLAY 'Audit write failed for: ' port_key\nEND IF",
+    "statement_ids": ["SYS-PORTFOLIO-001-FIL-0068-STMT-000016", "SYS-PORTFOLIO-001-FIL-0068-STMT-000017", "SYS-PORTFOLIO-001-FIL-0068-STMT-000018", "SYS-PORTFOLIO-001-FIL-0068-STMT-000019", "SYS-PORTFOLIO-001-FIL-0068-STMT-000020", "SYS-PORTFOLIO-001-FIL-0068-STMT-000021", "SYS-PORTFOLIO-001-FIL-0068-STMT-000022", "SYS-PORTFOLIO-001-FIL-0068-STMT-000023", "SYS-PORTFOLIO-001-FIL-0068-STMT-000043"],
+    "untranslated_statement_ids": [],
+    "field_references": ["WS-TIMESTAMP", "AUD-TIMESTAMP", "AUD-ACTION", "PORT-KEY", "AUD-KEY", "DEL-REASON-CODE", "AUD-REASON", "PORT-STATUS", "AUD-STATUS", "AUDIT-RECORD", "WS-AUD-SUCCESS"],
+    "field_reference_ids": [
+      {"name": "WS-TIMESTAMP", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0068-FLD-000034", "target_kind": "field", "candidate_ids": []},
+      {"name": "AUD-TIMESTAMP", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0068-FLD-000009", "target_kind": "field", "candidate_ids": []},
+      {"name": "AUD-ACTION", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0068-FLD-000010", "target_kind": "field", "candidate_ids": []},
+      {"name": "PORT-KEY", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0009-FLD-000001", "target_kind": "field", "candidate_ids": []},
+      {"name": "AUD-KEY", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0068-FLD-000011", "target_kind": "field", "candidate_ids": []},
+      {"name": "DEL-REASON-CODE", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0068-FLD-000004", "target_kind": "field", "candidate_ids": []},
+      {"name": "AUD-REASON", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0068-FLD-000012", "target_kind": "field", "candidate_ids": []},
+      {"name": "PORT-STATUS", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0009-FLD-000013", "target_kind": "field", "candidate_ids": []},
+      {"name": "AUD-STATUS", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0068-FLD-000013", "target_kind": "field", "candidate_ids": []},
+      {"name": "AUDIT-RECORD", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0068-REC-0002", "target_kind": "record", "candidate_ids": []},
+      {"name": "WS-AUD-SUCCESS", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0068-FLD-000026", "target_kind": "condition", "candidate_ids": []}
+    ],
+    "calls_made": [],
+    "calls_made_ids": [],
+    "complexity_score": 2,
+    "has_unresolved_statements": false,
+    "annotations": [
+      {"line": 169, "statement_id": "SYS-PORTFOLIO-001-FIL-0068-STMT-000016", "note": "Recorded verbatim: 'ACCEPT WS-TIMESTAMP FROM TIME STAMP'. 'TIME STAMP' is not a standard ACCEPT source; the resulting value format is unknown.", "ambiguous": true},
+      {"line": 175, "statement_id": "SYS-PORTFOLIO-001-FIL-0068-STMT-000021", "note": "PORT-STATUS is taken from the portfolio record read before the DELETE (record area still holds the deleted record's data)."}
+    ]
+  },
+  {
+    "name": "3000-TERMINATE",
+    "paragraph_id": "SYS-PORTFOLIO-001-FIL-0068-PAR-0007",
+    "section": null,
+    "section_id": null,
+    "line_range": [184, 194],
+    "pseudocode": [
+      "CLOSE PORTFOLIO-FILE, DELETE-FILE, AUDIT-FILE",
+      "DISPLAY 'Records deleted:  ' ws_delete_count",
+      "DISPLAY 'Records not found:' ws_not_fnd_count",
+      "DISPLAY 'Errors occurred:  ' ws_error_count",
+      "SET program return code = ws_return_code  -- MOVE to special register RETURN-CODE"
+    ],
+    "pseudocode_statement_ids": [
+      ["SYS-PORTFOLIO-001-FIL-0068-STMT-000024"],
+      ["SYS-PORTFOLIO-001-FIL-0068-STMT-000025"],
+      ["SYS-PORTFOLIO-001-FIL-0068-STMT-000026"],
+      ["SYS-PORTFOLIO-001-FIL-0068-STMT-000027"],
+      ["SYS-PORTFOLIO-001-FIL-0068-STMT-000028"]
+    ],
+    "pseudocode_text": "CLOSE PORTFOLIO-FILE, DELETE-FILE, AUDIT-FILE\nDISPLAY 'Records deleted:  ' ws_delete_count\nDISPLAY 'Records not found:' ws_not_fnd_count\nDISPLAY 'Errors occurred:  ' ws_error_count\nSET program return code = ws_return_code  -- MOVE to special register RETURN-CODE",
+    "statement_ids": ["SYS-PORTFOLIO-001-FIL-0068-STMT-000024", "SYS-PORTFOLIO-001-FIL-0068-STMT-000025", "SYS-PORTFOLIO-001-FIL-0068-STMT-000026", "SYS-PORTFOLIO-001-FIL-0068-STMT-000027", "SYS-PORTFOLIO-001-FIL-0068-STMT-000028"],
+    "untranslated_statement_ids": [],
+    "field_references": ["WS-DELETE-COUNT", "WS-NOT-FND-COUNT", "WS-ERROR-COUNT", "WS-RETURN-CODE"],
+    "field_reference_ids": [
+      {"name": "WS-DELETE-COUNT", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0068-FLD-000030", "target_kind": "field", "candidate_ids": []},
+      {"name": "WS-NOT-FND-COUNT", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0068-FLD-000032", "target_kind": "field", "candidate_ids": []},
+      {"name": "WS-ERROR-COUNT", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0068-FLD-000031", "target_kind": "field", "candidate_ids": []},
+      {"name": "WS-RETURN-CODE", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0068-FLD-000033", "target_kind": "field", "candidate_ids": []}
+    ],
+    "calls_made": [],
+    "calls_made_ids": [],
+    "complexity_score": 1,
+    "has_unresolved_statements": false,
+    "annotations": [
+      {"line": 193, "statement_id": "SYS-PORTFOLIO-001-FIL-0068-STMT-000028", "note": "RETURN-CODE is a COBOL special register (not a data item); not looked up."}
+    ]
+  }
+],
+"unresolved_statements": [],
+"pseudocode_issues": []
+}

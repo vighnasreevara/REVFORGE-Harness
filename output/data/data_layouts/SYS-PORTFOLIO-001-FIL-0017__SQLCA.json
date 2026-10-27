@@ -1,0 +1,36 @@
+{
+  "id": "SQLCA",
+  "source_type": "copybook",
+  "source_file": "src/copybook/db2/SQLCA.cpy",
+  "used_by_programs": ["HISTLD00", "DB2CMT", "DB2CONN", "DB2ERR", "DB2STAT", "RTNANA00", "RTNCDE00", "CURSMGR", "DB2ONLN", "DB2RECV", "ERRHNDL", "INQHIST", "SECMGR", "DB2HNDL"],
+  "total_fields": 7,
+  "total_bytes": 35,
+  "system_id": "SYS-PORTFOLIO-001",
+  "file_id": "SYS-PORTFOLIO-001-FIL-0017",
+  "path_id": "SYS-PORTFOLIO-001-PATH-0017",
+  "data_run_id": "DRUN-20261024T215053Z-ACC1",
+  "records": [
+    {
+      "record_id": "SYS-PORTFOLIO-001-FIL-0017-REC-0001",
+      "section": "COPYBOOK", "is_fragment": false, "level": 1, "name": "SQL-STATUS-CODES",
+      "pic": null, "type": "GROUP", "storage_type": "DISPLAY", "bytes": 35, "total_bytes": 35, "inline_bytes": 35,
+      "redefines": null, "occurs": null, "value": null, "line": 8, "end_line": 15,
+      "children": [
+        {"field_id": "SYS-PORTFOLIO-001-FIL-0017-FLD-000001", "path": "SQL-SUCCESS", "level": 5, "name": "SQL-SUCCESS", "pic": "X(5)", "pic_parsed": {"raw": "X(5)", "normalized_type": "STRING", "length": 5, "decimal_places": 0, "signed": false, "storage_type": "DISPLAY"}, "bytes": 5, "redefines": null, "occurs": null, "value": "'00000'", "line": 9, "children": []},
+        {"field_id": "SYS-PORTFOLIO-001-FIL-0017-FLD-000002", "path": "SQL-NOT-FOUND", "level": 5, "name": "SQL-NOT-FOUND", "pic": "X(5)", "pic_parsed": {"raw": "X(5)", "normalized_type": "STRING", "length": 5, "decimal_places": 0, "signed": false, "storage_type": "DISPLAY"}, "bytes": 5, "redefines": null, "occurs": null, "value": "'02000'", "line": 10, "children": []},
+        {"field_id": "SYS-PORTFOLIO-001-FIL-0017-FLD-000003", "path": "SQL-DUP-KEY", "level": 5, "name": "SQL-DUP-KEY", "pic": "X(5)", "pic_parsed": {"raw": "X(5)", "normalized_type": "STRING", "length": 5, "decimal_places": 0, "signed": false, "storage_type": "DISPLAY"}, "bytes": 5, "redefines": null, "occurs": null, "value": "'23505'", "line": 11, "children": []},
+        {"field_id": "SYS-PORTFOLIO-001-FIL-0017-FLD-000004", "path": "SQL-DEADLOCK", "level": 5, "name": "SQL-DEADLOCK", "pic": "X(5)", "pic_parsed": {"raw": "X(5)", "normalized_type": "STRING", "length": 5, "decimal_places": 0, "signed": false, "storage_type": "DISPLAY"}, "bytes": 5, "redefines": null, "occurs": null, "value": "'40001'", "line": 12, "children": []},
+        {"field_id": "SYS-PORTFOLIO-001-FIL-0017-FLD-000005", "path": "SQL-TIMEOUT", "level": 5, "name": "SQL-TIMEOUT", "pic": "X(5)", "pic_parsed": {"raw": "X(5)", "normalized_type": "STRING", "length": 5, "decimal_places": 0, "signed": false, "storage_type": "DISPLAY"}, "bytes": 5, "redefines": null, "occurs": null, "value": "'40003'", "line": 13, "children": []},
+        {"field_id": "SYS-PORTFOLIO-001-FIL-0017-FLD-000006", "path": "SQL-CONNECTION-ERROR", "level": 5, "name": "SQL-CONNECTION-ERROR", "pic": "X(5)", "pic_parsed": {"raw": "X(5)", "normalized_type": "STRING", "length": 5, "decimal_places": 0, "signed": false, "storage_type": "DISPLAY"}, "bytes": 5, "redefines": null, "occurs": null, "value": "'08001'", "line": 14, "children": []},
+        {"field_id": "SYS-PORTFOLIO-001-FIL-0017-FLD-000007", "path": "SQL-DB-ERROR", "level": 5, "name": "SQL-DB-ERROR", "pic": "X(5)", "pic_parsed": {"raw": "X(5)", "normalized_type": "STRING", "length": 5, "decimal_places": 0, "signed": false, "storage_type": "DISPLAY"}, "bytes": 5, "redefines": null, "occurs": null, "value": "'58004'", "line": 15, "children": []}
+      ]
+    }
+  ],
+  "copy_expansions": [],
+  "unresolved_copy_stubs": [
+    {"copybook": "SQLCA", "include_kind": "SQL_INCLUDE", "line": 6, "replacing": null, "reason": "self_include: the copybook includes itself; not registered as USES_COPYBOOK/EXPANDS_COPY"}
+  ],
+  "layout_issues": [
+    {"severity": "warning", "type": "unresolved_copy_stub", "file_id": "SYS-PORTFOLIO-001-FIL-0017", "source_id": "SQLCA", "line": 6, "message": "EXEC SQL INCLUDE SQLCA END-EXEC (line 6) names this copybook itself (inventory issue self_include). Registering it would create a USES_COPYBOOK self-reference, so it was not registered and is left as an unresolved stub. The precompiler SQLCA structure (SQLCODE, SQLSTATE, ...) is not defined in this file; only SQL-STATUS-CODES is."}
+  ]
+}

@@ -1,0 +1,629 @@
+{
+"program_summary": {"program_id": "INQHIST", "file_id": "SYS-PORTFOLIO-001-FIL-0063", "logic_file": "program_logic/SYS-PORTFOLIO-001-FIL-0063__INQHIST_logic.json", "logic_status": "partial", "paragraphs_translated": 13, "execution_paths": 1, "branches": 5, "loops": 0, "dead_code_confirmed": 0, "goto_annotations": 0, "unresolvable_paths": 1, "unresolved_ids": 4},
+"program_id": "INQHIST",
+"system_id": "SYS-PORTFOLIO-001",
+"file_id": "SYS-PORTFOLIO-001-FIL-0063",
+"path_id": "SYS-PORTFOLIO-001-PATH-0063",
+"relative_path": "src/programs/online/INQHIST.cbl",
+"parse_run_id": "PRUN-20261023T023803Z-ACC2",
+"upstream": {
+  "verification": {
+    "verified_at": "2026-10-26T23:30:44Z",
+    "verdict": "VALID",
+    "verdict_reasons": ["V2, V3 and V4 consistent for the program and both copybook layouts (INQCOM, SQLCA); Agent 2 parse_status 'success'; the program layout lists no unresolved copy stubs (all three copy expansions resolved)"],
+    "v1": {"raw_structure": "present", "parse_status": "success", "program_layout": "present", "copybook_layouts": [{"copybook": "INQCOM", "copybook_file_id": "SYS-PORTFOLIO-001-FIL-0020", "layout": "present", "expansions": [15, 67]}, {"copybook": "SQLCA", "copybook_file_id": "SYS-PORTFOLIO-001-FIL-0017", "layout": "present", "expansions": [18]}], "unresolved_copy_stubs": 0},
+    "v2_file_identities": {
+      "program_entries": {"require_completed": ["parser", "data"], "entries": ["raw_structure|SYS-PORTFOLIO-001-FIL-0063", "data_layout|SYS-PORTFOLIO-001-FIL-0063"], "parse_run_id": "PRUN-20261023T023803Z-ACC2", "data_run_id": "DRUN-20261025T135019Z-17276", "result": "batched with the DB2RECV program entries: checked 4, ok 4, problems [], duplicates [], consistent true"},
+      "copybook_entries": {"require_completed": ["data"], "entries": ["data_layout|SYS-PORTFOLIO-001-FIL-0020", "data_layout|SYS-PORTFOLIO-001-FIL-0017"], "result": "batched with copybooks FIL-0018 and FIL-0019 (DB2RECV): checked 4, ok 4, problems [], duplicates [], consistent true"},
+      "consistent": true
+    },
+    "v3_structure_identities": {"sections_checked": 2, "paragraphs_checked": 13, "statements_checked": 44, "edges_checked": 14, "registered_edges": 14, "section_problems": [], "paragraph_problems": [], "statement_problems": [], "edge_problems": [], "invalid_registered_edges": [], "registered_not_in_json": {"sections": [], "paragraphs": [], "statements": [], "missing_count": 0}, "duplicate_ids_in_json": [], "consistent": true, "note": "data-division section names sent as null (raw_structure carries no name for them); two relationships per PERFORM_THRU edge (7 edges, including the recursive self-edge at line 114); EXEC CICS HANDLE CONDITION has no registered relationship"},
+    "v4_data_identities": [
+      {"file_id": "SYS-PORTFOLIO-001-FIL-0063", "layout": "program", "file_type": "program", "records_checked": 8, "fields_checked": 35, "expansions_checked": 3, "record_problems": [], "field_problems": [], "expansion_problems": [], "copybook_records_in_program": 0, "registered_not_in_json": {"records": [], "fields": [], "missing_count": 0}, "duplicate_ids_in_json": [], "consistent": true},
+      {"file_id": "SYS-PORTFOLIO-001-FIL-0020", "layout": "copybook INQCOM", "file_type": "copybook", "records_checked": 1, "fields_checked": 8, "expansions_checked": 0, "record_problems": [], "field_problems": [], "expansion_problems": [], "copybook_records_in_program": 0, "registered_not_in_json": {"records": [], "fields": [], "missing_count": 0}, "duplicate_ids_in_json": [], "consistent": true, "note": "checked once in this execution although expanded twice (lines 15 and 67)"},
+      {"file_id": "SYS-PORTFOLIO-001-FIL-0017", "layout": "copybook SQLCA", "file_type": "copybook", "records_checked": 1, "fields_checked": 7, "expansions_checked": 0, "record_problems": [], "field_problems": [], "expansion_problems": [], "copybook_records_in_program": 0, "registered_not_in_json": {"records": [], "fields": [], "missing_count": 0}, "duplicate_ids_in_json": [], "consistent": true, "note": "checked once in this execution (shared with DB2RECV)"}
+    ]
+  }
+},
+"execution_traces": [
+  {
+    "entry_point": "(UNNAMED)",
+    "entry_point_id": "SYS-PORTFOLIO-001-FIL-0063-PAR-0001",
+    "entry_type": "online_main",
+    "steps": [
+      {"step": 1, "paragraph": "(UNNAMED)", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0063-PAR-0001", "action": "PERFORM_THRU", "target": "P100-INIT-PROGRAM", "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0063-PAR-0002", "target_section_id": null, "unstructured": true, "condition": null,
+       "sub_steps": [{"paragraph": "P100-INIT-PROGRAM", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0063-PAR-0002"}, {"paragraph": "P100-EXIT", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0063-PAR-0003"}],
+       "line": 70, "statement_id": "SYS-PORTFOLIO-001-FIL-0063-STMT-000001"},
+      {"step": 2, "paragraph": "P100-INIT-PROGRAM", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0063-PAR-0002", "action": "CICS_HANDLE_CONDITION", "condition": "ERROR", "target": "P999-ERROR-ROUTINE", "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0063-PAR-0012", "target_section_id": null, "unstructured": true, "runtime_conditional": true,
+       "line": 86, "statement_id": "SYS-PORTFOLIO-001-FIL-0063-STMT-000008"},
+      {"step": 3, "paragraph": "P100-INIT-PROGRAM", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0063-PAR-0002", "action": "PERFORM_THRU", "target": "P150-DB2-CONNECT", "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0063-PAR-0004", "target_section_id": null, "unstructured": true, "condition": null,
+       "sub_steps": [{"paragraph": "P150-DB2-CONNECT", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0063-PAR-0004"}, {"paragraph": "P150-EXIT", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0063-PAR-0005"}],
+       "line": 90, "statement_id": "SYS-PORTFOLIO-001-FIL-0063-STMT-000009"},
+      {"step": 4, "paragraph": "P150-DB2-CONNECT", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0063-PAR-0004", "action": "CICS_LINK", "target": "DB2ONLN", "target_paragraph_id": null, "target_section_id": null, "condition": null, "line": 98, "statement_id": "SYS-PORTFOLIO-001-FIL-0063-STMT-000012"},
+      {"step": 5, "paragraph": "P150-DB2-CONNECT", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0063-PAR-0004", "action": "IF", "target": null, "target_paragraph_id": null, "target_section_id": null,
+       "condition": {"text": "DB2-RESPONSE-CODE NOT = 0", "fields": ["DB2-RESPONSE-CODE"], "field_ids": [{"name": "DB2-RESPONSE-CODE", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0063-FLD-000013", "target_kind": "field", "candidate_ids": []}]},
+       "line": 103, "statement_id": "SYS-PORTFOLIO-001-FIL-0063-STMT-000013"},
+      {"step": 6, "paragraph": "P150-DB2-CONNECT", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0063-PAR-0004", "action": "CICS_LINK", "target": "DB2RECV", "target_paragraph_id": null, "target_section_id": null,
+       "condition": {"text": "THEN of IF DB2-RESPONSE-CODE NOT = 0", "fields": ["DB2-RESPONSE-CODE"], "field_ids": [{"name": "DB2-RESPONSE-CODE", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0063-FLD-000013", "target_kind": "field", "candidate_ids": []}]},
+       "line": 108, "statement_id": "SYS-PORTFOLIO-001-FIL-0063-STMT-000035"},
+      {"step": 7, "paragraph": "P150-DB2-CONNECT", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0063-PAR-0004", "action": "IF", "target": null, "target_paragraph_id": null, "target_section_id": null,
+       "condition": {"text": "RECV-SUCCESS", "fields": ["RECV-SUCCESS"], "field_ids": [{"name": "RECV-SUCCESS", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0063-FLD-000033", "target_kind": "condition", "candidate_ids": []}]},
+       "line": 113, "statement_id": "SYS-PORTFOLIO-001-FIL-0063-STMT-000036"},
+      {"step": 8, "paragraph": "P150-DB2-CONNECT", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0063-PAR-0004", "action": "PERFORM_THRU", "target": "P150-DB2-CONNECT", "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0063-PAR-0004", "target_section_id": null, "unstructured": true, "recursive": true,
+       "condition": {"text": "THEN of IF RECV-SUCCESS (recursive: the range performs itself; tracing of this path stopped)", "fields": ["RECV-SUCCESS"], "field_ids": [{"name": "RECV-SUCCESS", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0063-FLD-000033", "target_kind": "condition", "candidate_ids": []}]},
+       "sub_steps": [{"paragraph": "P150-DB2-CONNECT", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0063-PAR-0004"}, {"paragraph": "P150-EXIT", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0063-PAR-0005"}],
+       "line": 114, "statement_id": "SYS-PORTFOLIO-001-FIL-0063-STMT-000043"},
+      {"step": 9, "paragraph": "P150-DB2-CONNECT", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0063-PAR-0004", "action": "PERFORM_THRU", "target": "P999-ERROR-ROUTINE", "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0063-PAR-0012", "target_section_id": null, "unstructured": true,
+       "condition": {"text": "ELSE of IF RECV-SUCCESS", "fields": ["RECV-SUCCESS"], "field_ids": [{"name": "RECV-SUCCESS", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0063-FLD-000033", "target_kind": "condition", "candidate_ids": []}]},
+       "sub_steps": [{"paragraph": "P999-ERROR-ROUTINE", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0063-PAR-0012"}, {"paragraph": "P999-EXIT", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0063-PAR-0013"}],
+       "line": 119, "statement_id": "SYS-PORTFOLIO-001-FIL-0063-STMT-000042"},
+      {"step": 10, "paragraph": "(UNNAMED)", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0063-PAR-0001", "action": "PERFORM_THRU", "target": "P200-GET-HISTORY", "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0063-PAR-0006", "target_section_id": null, "unstructured": true, "condition": null,
+       "sub_steps": [{"paragraph": "P200-GET-HISTORY", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0063-PAR-0006"}, {"paragraph": "P200-EXIT", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0063-PAR-0007"}],
+       "line": 73, "statement_id": "SYS-PORTFOLIO-001-FIL-0063-STMT-000002"},
+      {"step": 11, "paragraph": "P200-GET-HISTORY", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0063-PAR-0006", "action": "CICS_LINK", "target": "CURSMGR", "target_paragraph_id": null, "target_section_id": null, "condition": null, "line": 138, "statement_id": "SYS-PORTFOLIO-001-FIL-0063-STMT-000018"},
+      {"step": 12, "paragraph": "P200-GET-HISTORY", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0063-PAR-0006", "action": "IF", "target": null, "target_paragraph_id": null, "target_section_id": null,
+       "condition": {"text": "CURS-RESPONSE-CODE = 0", "fields": ["CURS-RESPONSE-CODE"], "field_ids": [{"name": "CURS-RESPONSE-CODE", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0063-FLD-000022", "target_kind": "field", "candidate_ids": []}]},
+       "line": 143, "statement_id": "SYS-PORTFOLIO-001-FIL-0063-STMT-000019"},
+      {"step": 13, "paragraph": "P200-GET-HISTORY", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0063-PAR-0006", "action": "CICS_LINK", "target": "CURSMGR", "target_paragraph_id": null, "target_section_id": null,
+       "condition": {"text": "THEN of IF CURS-RESPONSE-CODE = 0 (line 143)", "fields": ["CURS-RESPONSE-CODE"], "field_ids": [{"name": "CURS-RESPONSE-CODE", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0063-FLD-000022", "target_kind": "field", "candidate_ids": []}]},
+       "line": 145, "statement_id": "SYS-PORTFOLIO-001-FIL-0063-STMT-000038"},
+      {"step": 14, "paragraph": "P200-GET-HISTORY", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0063-PAR-0006", "action": "IF", "target": null, "target_paragraph_id": null, "target_section_id": null,
+       "condition": {"text": "CURS-RESPONSE-CODE = 0", "fields": ["CURS-RESPONSE-CODE"], "field_ids": [{"name": "CURS-RESPONSE-CODE", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0063-FLD-000022", "target_kind": "field", "candidate_ids": []}]},
+       "line": 150, "statement_id": "SYS-PORTFOLIO-001-FIL-0063-STMT-000039"},
+      {"step": 15, "paragraph": "P200-GET-HISTORY", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0063-PAR-0006", "action": "PERFORM_THRU", "target": "P250-FETCH-HISTORY", "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0063-PAR-0008", "target_section_id": null, "unstructured": true,
+       "condition": {"text": "THEN of IF CURS-RESPONSE-CODE = 0 (line 150)", "fields": ["CURS-RESPONSE-CODE"], "field_ids": [{"name": "CURS-RESPONSE-CODE", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0063-FLD-000022", "target_kind": "field", "candidate_ids": []}]},
+       "sub_steps": [{"paragraph": "P250-FETCH-HISTORY", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0063-PAR-0008"}, {"paragraph": "P250-EXIT", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0063-PAR-0009"}],
+       "line": 151, "statement_id": "SYS-PORTFOLIO-001-FIL-0063-STMT-000044"},
+      {"step": 16, "paragraph": "P250-FETCH-HISTORY", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0063-PAR-0008", "action": "CICS_LINK", "target": "CURSMGR", "target_paragraph_id": null, "target_section_id": null, "condition": null, "line": 166, "statement_id": "SYS-PORTFOLIO-001-FIL-0063-STMT-000024"},
+      {"step": 17, "paragraph": "P250-FETCH-HISTORY", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0063-PAR-0008", "action": "IF", "target": null, "target_paragraph_id": null, "target_section_id": null,
+       "condition": {"text": "CURS-RESPONSE-CODE >= 0", "fields": ["CURS-RESPONSE-CODE"], "field_ids": [{"name": "CURS-RESPONSE-CODE", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0063-FLD-000022", "target_kind": "field", "candidate_ids": []}]},
+       "line": 171, "statement_id": "SYS-PORTFOLIO-001-FIL-0063-STMT-000025"},
+      {"step": 18, "paragraph": "P200-GET-HISTORY", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0063-PAR-0006", "action": "CICS_LINK", "target": "CURSMGR", "target_paragraph_id": null, "target_section_id": null, "condition": null, "line": 157, "statement_id": "SYS-PORTFOLIO-001-FIL-0063-STMT-000021"},
+      {"step": 19, "paragraph": "(UNNAMED)", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0063-PAR-0001", "action": "PERFORM_THRU", "target": "P300-FORMAT-DISPLAY", "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0063-PAR-0010", "target_section_id": null, "unstructured": true, "condition": null,
+       "sub_steps": [{"paragraph": "P300-FORMAT-DISPLAY", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0063-PAR-0010"}, {"paragraph": "P300-EXIT", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0063-PAR-0011"}],
+       "line": 76, "statement_id": "SYS-PORTFOLIO-001-FIL-0063-STMT-000003"},
+      {"step": 20, "paragraph": "P300-FORMAT-DISPLAY", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0063-PAR-0010", "action": "CICS_SEND_MAP", "target": "HISMAP", "target_paragraph_id": null, "target_section_id": null, "condition": null, "line": 178, "statement_id": "SYS-PORTFOLIO-001-FIL-0063-STMT-000027"},
+      {"step": 21, "paragraph": "(UNNAMED)", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0063-PAR-0001", "action": "CICS_RETURN", "target": null, "target_paragraph_id": null, "target_section_id": null, "condition": null, "line": 79, "statement_id": "SYS-PORTFOLIO-001-FIL-0063-STMT-000004"}
+    ]
+  }
+],
+"branch_map": [
+  {
+    "paragraph": "P150-DB2-CONNECT",
+    "paragraph_id": "SYS-PORTFOLIO-001-FIL-0063-PAR-0004",
+    "branches": [
+      {"type": "IF", "line": 103, "statement_id": "SYS-PORTFOLIO-001-FIL-0063-STMT-000013", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0063-PAR-0004",
+       "condition_text": "DB2-RESPONSE-CODE NOT = 0",
+       "condition_fields": ["DB2-RESPONSE-CODE"],
+       "condition_field_ids": [{"name": "DB2-RESPONSE-CODE", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0063-FLD-000013", "target_kind": "field", "candidate_ids": []}],
+       "has_else": false, "then_line_range": [104, 121], "else_line_range": null, "end_if_line": 122, "nested_depth": 1,
+       "outcomes": [
+         {"label": "THEN", "line_range": [104, 121], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0063-STMT-000032", "SYS-PORTFOLIO-001-FIL-0063-STMT-000033", "SYS-PORTFOLIO-001-FIL-0063-STMT-000034", "SYS-PORTFOLIO-001-FIL-0063-STMT-000035", "SYS-PORTFOLIO-001-FIL-0063-STMT-000036"]}
+       ]},
+      {"type": "IF", "line": 113, "statement_id": "SYS-PORTFOLIO-001-FIL-0063-STMT-000036", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0063-PAR-0004",
+       "condition_text": "RECV-SUCCESS",
+       "condition_fields": ["RECV-SUCCESS"],
+       "condition_field_ids": [{"name": "RECV-SUCCESS", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0063-FLD-000033", "target_kind": "condition", "candidate_ids": []}],
+       "has_else": true, "then_line_range": [114, 115], "else_line_range": [117, 120], "end_if_line": 121, "nested_depth": 2,
+       "outcomes": [
+         {"label": "THEN", "line_range": [114, 115], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0063-STMT-000043"]},
+         {"label": "ELSE", "line_range": [117, 120], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0063-STMT-000041", "SYS-PORTFOLIO-001-FIL-0063-STMT-000042"]}
+       ]}
+    ]
+  },
+  {
+    "paragraph": "P200-GET-HISTORY",
+    "paragraph_id": "SYS-PORTFOLIO-001-FIL-0063-PAR-0006",
+    "branches": [
+      {"type": "IF", "line": 143, "statement_id": "SYS-PORTFOLIO-001-FIL-0063-STMT-000019", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0063-PAR-0006",
+       "condition_text": "CURS-RESPONSE-CODE = 0",
+       "condition_fields": ["CURS-RESPONSE-CODE"],
+       "condition_field_ids": [{"name": "CURS-RESPONSE-CODE", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0063-FLD-000022", "target_kind": "field", "candidate_ids": []}],
+       "has_else": false, "then_line_range": [144, 153], "else_line_range": null, "end_if_line": 154, "nested_depth": 1,
+       "outcomes": [
+         {"label": "THEN", "line_range": [144, 153], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0063-STMT-000037", "SYS-PORTFOLIO-001-FIL-0063-STMT-000038", "SYS-PORTFOLIO-001-FIL-0063-STMT-000039"]}
+       ]},
+      {"type": "IF", "line": 150, "statement_id": "SYS-PORTFOLIO-001-FIL-0063-STMT-000039", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0063-PAR-0006",
+       "condition_text": "CURS-RESPONSE-CODE = 0",
+       "condition_fields": ["CURS-RESPONSE-CODE"],
+       "condition_field_ids": [{"name": "CURS-RESPONSE-CODE", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0063-FLD-000022", "target_kind": "field", "candidate_ids": []}],
+       "has_else": false, "then_line_range": [151, 152], "else_line_range": null, "end_if_line": 153, "nested_depth": 2,
+       "outcomes": [
+         {"label": "THEN", "line_range": [151, 152], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0063-STMT-000044"]}
+       ]}
+    ]
+  },
+  {
+    "paragraph": "P250-FETCH-HISTORY",
+    "paragraph_id": "SYS-PORTFOLIO-001-FIL-0063-PAR-0008",
+    "branches": [
+      {"type": "IF", "line": 171, "statement_id": "SYS-PORTFOLIO-001-FIL-0063-STMT-000025", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0063-PAR-0008",
+       "condition_text": "CURS-RESPONSE-CODE >= 0",
+       "condition_fields": ["CURS-RESPONSE-CODE"],
+       "condition_field_ids": [{"name": "CURS-RESPONSE-CODE", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0063-FLD-000022", "target_kind": "field", "candidate_ids": []}],
+       "has_else": false, "then_line_range": [172, 172], "else_line_range": null, "end_if_line": 173, "nested_depth": 1,
+       "outcomes": [
+         {"label": "THEN", "line_range": [172, 172], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0063-STMT-000040"]}
+       ]}
+    ]
+  }
+],
+"loops": [],
+"dead_code_confirmed": [],
+"unresolvable_paths": [
+  {"paragraph": "P150-DB2-CONNECT", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0063-PAR-0004", "statement_id": "SYS-PORTFOLIO-001-FIL-0063-STMT-000043", "line": 114, "target": "P150-DB2-CONNECT THRU P150-EXIT", "reason": "Circular PERFORM chain: P150-DB2-CONNECT performs its own range when RECV-SUCCESS; the recursion depth depends on run-time results of DB2ONLN and DB2RECV, so tracing of this path was stopped."}
+],
+"trace_issues": [
+  {"severity": "info", "type": "upstream_issue", "upstream_agent": "2_parser", "upstream_type": "unnamed_paragraph", "lines": [70, 80], "message": "Statements between PROCEDURE DIVISION (line 69) and the first paragraph P100-INIT-PROGRAM (line 81) are assigned to paragraph (UNNAMED) in scope PROGRAM."},
+  {"severity": "info", "type": "upstream_issue", "upstream_agent": "2_parser", "upstream_type": "empty_environment_division", "lines": [10, 11], "message": "ENVIRONMENT DIVISION has no sections or paragraphs."},
+  {"severity": "info", "type": "upstream_issue", "upstream_agent": "2_parser", "upstream_type": "perform_thru", "lines": [70, 73, 76, 90, 114, 119, 151], "message": "7 PERFORM ... THRU statements obscure control flow (cfg_issues)."},
+  {"severity": "info", "type": "upstream_issue", "upstream_agent": "2_parser", "upstream_type": "recursive_perform", "line": 114, "statement_id": "SYS-PORTFOLIO-001-FIL-0063-STMT-000043", "message": "P150-DB2-CONNECT performs its own range from inside that range; recorded as a self-edge."},
+  {"severity": "info", "type": "upstream_issue", "upstream_agent": "2_parser", "upstream_type": "cics_handle_condition_target", "lines": [86, 88], "statement_id": "SYS-PORTFOLIO-001-FIL-0063-STMT-000008", "message": "EXEC CICS HANDLE CONDITION ERROR(P999-ERROR-ROUTINE) names a paragraph as a condition handler; no CFG edge or relationship registered; for Logic Agent review."},
+  {"severity": "info", "type": "upstream_issue", "upstream_agent": "2_parser", "upstream_type": "exit_statements", "lines": [93, 127, 162, 175, 186, 193], "message": "EXIT statements are paragraph exits (no transfer); no edges created."},
+  {"severity": "info", "type": "upstream_issue", "upstream_agent": "3_data", "upstream_type": "level_01_copy_under_01", "lines": [15, 18, 67], "message": "COPY INQCOM (line 15, under WS-COMMAREA), EXEC SQL INCLUDE SQLCA (line 18, under WS-DB2-AREA) and COPY INQCOM (line 67, under DFHCOMMAREA) each insert a level-01 record below a program 01 with no subordinate items."},
+  {"severity": "info", "type": "upstream_issue", "upstream_agent": "3_data", "upstream_type": "copybook_expanded_twice", "line": 67, "message": "Copybook INQCOM is expanded twice (WORKING-STORAGE line 15 and LINKAGE line 67) with no REPLACING, so INQCOM-* names are declared in both sections."},
+  {"severity": "info", "type": "upstream_issue", "upstream_agent": "3_data", "upstream_type": "sql_include_resolved", "line": 18, "message": "EXEC SQL INCLUDE SQLCA resolved to copybook SQLCA (SYS-PORTFOLIO-001-FIL-0017), whose registered record is SQL-STATUS-CODES."},
+  {"severity": "info", "type": "upstream_issue", "upstream_agent": "3_data", "upstream_type": "unresolved_copy_stub", "file_id": "SYS-PORTFOLIO-001-FIL-0017", "message": "Copybook SQLCA layout: self-include stub left unresolved; the precompiler SQLCA items (SQLCODE, ...) are not defined in the repository copybook."},
+  {"severity": "error", "type": "circular_perform", "line": 114, "statement_id": "SYS-PORTFOLIO-001-FIL-0063-STMT-000043", "message": "Recursive PERFORM P150-DB2-CONNECT THRU P150-EXIT inside P150-DB2-CONNECT; cycle recorded (step 8) and tracing of that path stopped. The source has no recursion limit."},
+  {"severity": "warning", "type": "unstructured_flow", "lines": [70, 73, 76, 90, 114, 119, 151], "message": "Seven PERFORM ... THRU statements; each range is recorded as ordered sub-steps and flagged unstructured."},
+  {"severity": "warning", "type": "cics_handle_condition", "line": 86, "statement_id": "SYS-PORTFOLIO-001-FIL-0063-STMT-000008", "message": "EXEC CICS HANDLE CONDITION ERROR(P999-ERROR-ROUTINE) registers a handler only (step 2, CICS_HANDLE_CONDITION, unstructured, runtime_conditional). If a later CICS command raises ERROR, control transfers to P999-ERROR-ROUTINE without a return point; that transfer is not traced as an executed path. target_paragraph_id copied from the single procedure paragraph named P999-ERROR-ROUTINE; no CFG edge or Neo4j relationship added."},
+  {"severity": "warning", "type": "invalid_qualification", "name": "INQCOM-ERROR-MSG", "qualifiers": ["WS-COMMAREA"], "invalid_qualification_candidates": ["SYS-PORTFOLIO-001-FIL-0020-FLD-000008"], "line": 117, "statement_id": "SYS-PORTFOLIO-001-FIL-0063-STMT-000041", "message": "INQCOM-ERROR-MSG OF WS-COMMAREA: resolve-field-references returned UNRESOLVED with unresolved_reason QUALIFIER_HOLDS_LEVEL01_COPY. WS-COMMAREA holds COPY INQCOM, whose record INQCOM-AREA begins with its own 01, so the field is not subordinate to the qualifier. target_id null; the candidate is evidence for review, not a match."},
+  {"severity": "warning", "type": "invalid_qualification", "name": "INQCOM-RESPONSE-CODE", "qualifiers": ["WS-COMMAREA"], "invalid_qualification_candidates": ["SYS-PORTFOLIO-001-FIL-0020-FLD-000007"], "line": 189, "statement_id": "SYS-PORTFOLIO-001-FIL-0063-STMT-000029", "message": "INQCOM-RESPONSE-CODE OF WS-COMMAREA: UNRESOLVED, unresolved_reason QUALIFIER_HOLDS_LEVEL01_COPY (same cause); target_id null."},
+  {"severity": "info", "type": "field_id_unresolved", "name": "WS-DB2-TOKEN", "qualifiers": [], "line": 124, "statement_id": "SYS-PORTFOLIO-001-FIL-0063-STMT-000014", "message": "WS-DB2-TOKEN is not declared in the program or its copybooks; resolve-field-references returned UNRESOLVED with no unresolved_reason; target_id null."},
+  {"severity": "info", "type": "field_id_unresolved", "name": "SQLCODE", "qualifiers": [], "line": 189, "statement_id": "SYS-PORTFOLIO-001-FIL-0063-STMT-000029", "message": "SQLCODE is not defined in the program or in copybook SQLCA (precompiler-supplied SQLCA item); resolve-field-references returned UNRESOLVED with no unresolved_reason; target_id null."}
+],
+"program_narrative": "Program INQHIST is an online (CICS) transaction-history inquiry handler. It copies the inquiry COMMAREA (INQCOM layout) into working storage, resets its row counter and more-rows flag, and registers P999-ERROR-ROUTINE as the handler for the CICS ERROR condition. It then LINKs to DB2ONLN with a connect request; when DB2ONLN returns a non-zero response it LINKs to the recovery manager DB2RECV with a connection-recovery request and, if recovery succeeds, repeats the connect paragraph recursively, otherwise copies DB2RECV's message into the COMMAREA copy and performs the error routine, which stores SQLCODE as the response code and copies the working COMMAREA back to DFHCOMMAREA. Next it builds the history SQL text (POSHIST rows ordered by date descending) and drives the cursor manager CURSMGR through declare, open, fetch and close requests, moving the fetched data area into a 10-entry history table when the fetch response is not negative. Finally it sends map HISMAP of mapset INQSET from the history table and ends with EXEC CICS RETURN. The error routine does not stop processing: after it, history retrieval and display still run.",
+"paragraphs": [
+  {
+    "name": "(UNNAMED)",
+    "paragraph_id": "SYS-PORTFOLIO-001-FIL-0063-PAR-0001",
+    "section": null,
+    "section_id": null,
+    "line_range": [70, 80],
+    "pseudocode": [
+      "-- Main control: initialise, get history, display it, return",
+      "CALL P100-init-program THRU P100-exit  !! PERFORM THRU: runs P100-INIT-PROGRAM then P100-EXIT in sequence",
+      "CALL P200-get-history THRU P200-exit  !! PERFORM THRU: runs P200-GET-HISTORY then P200-EXIT in sequence",
+      "CALL P300-format-display THRU P300-exit  !! PERFORM THRU: runs P300-FORMAT-DISPLAY then P300-EXIT in sequence",
+      "CICS RETURN TO caller"
+    ],
+    "pseudocode_statement_ids": [
+      [],
+      ["SYS-PORTFOLIO-001-FIL-0063-STMT-000001"],
+      ["SYS-PORTFOLIO-001-FIL-0063-STMT-000002"],
+      ["SYS-PORTFOLIO-001-FIL-0063-STMT-000003"],
+      ["SYS-PORTFOLIO-001-FIL-0063-STMT-000004"]
+    ],
+    "pseudocode_text": "-- Main control: initialise, get history, display it, return\nCALL P100-init-program THRU P100-exit  !! PERFORM THRU: runs P100-INIT-PROGRAM then P100-EXIT in sequence\nCALL P200-get-history THRU P200-exit  !! PERFORM THRU: runs P200-GET-HISTORY then P200-EXIT in sequence\nCALL P300-format-display THRU P300-exit  !! PERFORM THRU: runs P300-FORMAT-DISPLAY then P300-EXIT in sequence\nCICS RETURN TO caller",
+    "statement_ids": ["SYS-PORTFOLIO-001-FIL-0063-STMT-000001", "SYS-PORTFOLIO-001-FIL-0063-STMT-000002", "SYS-PORTFOLIO-001-FIL-0063-STMT-000003", "SYS-PORTFOLIO-001-FIL-0063-STMT-000004"],
+    "untranslated_statement_ids": [],
+    "field_references": [],
+    "field_reference_ids": [],
+    "calls_made": ["P100-INIT-PROGRAM", "P200-GET-HISTORY", "P300-FORMAT-DISPLAY"],
+    "calls_made_ids": [
+      {"name": "P100-INIT-PROGRAM", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0063-PAR-0002", "section_id": null},
+      {"name": "P200-GET-HISTORY", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0063-PAR-0006", "section_id": null},
+      {"name": "P300-FORMAT-DISPLAY", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0063-PAR-0010", "section_id": null}
+    ],
+    "complexity_score": 1,
+    "has_unresolved_statements": false,
+    "annotations": [
+      {"line": 70, "statement_id": "SYS-PORTFOLIO-001-FIL-0063-STMT-000001", "note": "PERFORM THRU flagged (unstructured); the same applies to lines 73 and 76."},
+      {"line": 79, "statement_id": "SYS-PORTFOLIO-001-FIL-0063-STMT-000004", "note": "EXEC CICS RETURN with no TRANSID or COMMAREA: control returns to the invoking program or CICS."}
+    ]
+  },
+  {
+    "name": "P100-INIT-PROGRAM",
+    "paragraph_id": "SYS-PORTFOLIO-001-FIL-0063-PAR-0002",
+    "section": null,
+    "section_id": null,
+    "line_range": [81, 91],
+    "pseudocode": [
+      "SET ws_commarea = dfhcommarea  -- copy the caller's inquiry COMMAREA (INQCOM layout) into working storage",
+      "CLEAR ws_row_count  -- initialise to zero",
+      "SET ws_more_history = 'N'  -- SET NO-MORE-ROWS TO TRUE",
+      "CICS HANDLE CONDITION ERROR -> P999-error-routine  !! REGISTERS a run-time handler only: if a later CICS command raises ERROR, control jumps to P999-ERROR-ROUTINE (GO TO-like, no return point); not traced as an executed path",
+      "CALL P150-db2-connect THRU P150-exit  !! PERFORM THRU: runs P150-DB2-CONNECT then P150-EXIT in sequence"
+    ],
+    "pseudocode_statement_ids": [
+      ["SYS-PORTFOLIO-001-FIL-0063-STMT-000005"],
+      ["SYS-PORTFOLIO-001-FIL-0063-STMT-000006"],
+      ["SYS-PORTFOLIO-001-FIL-0063-STMT-000007"],
+      ["SYS-PORTFOLIO-001-FIL-0063-STMT-000008"],
+      ["SYS-PORTFOLIO-001-FIL-0063-STMT-000009"]
+    ],
+    "pseudocode_text": "SET ws_commarea = dfhcommarea  -- copy the caller's inquiry COMMAREA (INQCOM layout) into working storage\nCLEAR ws_row_count  -- initialise to zero\nSET ws_more_history = 'N'  -- SET NO-MORE-ROWS TO TRUE\nCICS HANDLE CONDITION ERROR -> P999-error-routine  !! REGISTERS a run-time handler only: if a later CICS command raises ERROR, control jumps to P999-ERROR-ROUTINE (GO TO-like, no return point); not traced as an executed path\nCALL P150-db2-connect THRU P150-exit  !! PERFORM THRU: runs P150-DB2-CONNECT then P150-EXIT in sequence",
+    "statement_ids": ["SYS-PORTFOLIO-001-FIL-0063-STMT-000005", "SYS-PORTFOLIO-001-FIL-0063-STMT-000006", "SYS-PORTFOLIO-001-FIL-0063-STMT-000007", "SYS-PORTFOLIO-001-FIL-0063-STMT-000008", "SYS-PORTFOLIO-001-FIL-0063-STMT-000009"],
+    "untranslated_statement_ids": [],
+    "field_references": ["DFHCOMMAREA", "WS-COMMAREA", "WS-ROW-COUNT", "NO-MORE-ROWS"],
+    "field_reference_ids": [
+      {"name": "DFHCOMMAREA", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0063-REC-0008", "target_kind": "record", "candidate_ids": []},
+      {"name": "WS-COMMAREA", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0063-REC-0001", "target_kind": "record", "candidate_ids": []},
+      {"name": "WS-ROW-COUNT", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0063-FLD-000011", "target_kind": "field", "candidate_ids": []},
+      {"name": "NO-MORE-ROWS", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0063-FLD-000010", "target_kind": "condition", "candidate_ids": []}
+    ],
+    "calls_made": ["P150-DB2-CONNECT"],
+    "calls_made_ids": [
+      {"name": "P150-DB2-CONNECT", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0063-PAR-0004", "section_id": null}
+    ],
+    "complexity_score": 3,
+    "has_unresolved_statements": false,
+    "annotations": [
+      {"line": 82, "statement_id": "SYS-PORTFOLIO-001-FIL-0063-STMT-000005", "note": "MOVE DFHCOMMAREA TO WS-COMMAREA without an EIBCALEN check; both are 98-byte INQCOM-AREA expansions."},
+      {"line": 86, "statement_id": "SYS-PORTFOLIO-001-FIL-0063-STMT-000008", "note": "EXEC CICS HANDLE CONDITION ERROR(P999-ERROR-ROUTINE): recorded as step CICS_HANDLE_CONDITION (unstructured, runtime_conditional) with target_paragraph_id SYS-PORTFOLIO-001-FIL-0063-PAR-0012; Agent 2 registered no control-flow relationship for it."},
+      {"line": 84, "statement_id": "SYS-PORTFOLIO-001-FIL-0063-STMT-000007", "note": "WS-MORE-HISTORY (MORE-ROWS / NO-MORE-ROWS) and WS-ROW-COUNT are initialised here but not referenced anywhere else in the procedure division."}
+    ]
+  },
+  {
+    "name": "P100-EXIT",
+    "paragraph_id": "SYS-PORTFOLIO-001-FIL-0063-PAR-0003",
+    "section": null,
+    "section_id": null,
+    "line_range": [92, 94],
+    "pseudocode": ["EXIT  -- end of P100 PERFORM THRU range; no-op, control returns to the PERFORM at line 70"],
+    "pseudocode_statement_ids": [["SYS-PORTFOLIO-001-FIL-0063-STMT-000010"]],
+    "pseudocode_text": "EXIT  -- end of P100 PERFORM THRU range; no-op, control returns to the PERFORM at line 70",
+    "statement_ids": ["SYS-PORTFOLIO-001-FIL-0063-STMT-000010"],
+    "untranslated_statement_ids": [],
+    "field_references": [],
+    "field_reference_ids": [],
+    "calls_made": [],
+    "calls_made_ids": [],
+    "complexity_score": 1,
+    "has_unresolved_statements": false,
+    "annotations": []
+  },
+  {
+    "name": "P150-DB2-CONNECT",
+    "paragraph_id": "SYS-PORTFOLIO-001-FIL-0063-PAR-0004",
+    "section": null,
+    "section_id": null,
+    "line_range": [95, 125],
+    "pseudocode": [
+      "SET db2_request_type = 'C'  -- connect request",
+      "CICS CALL program=DB2ONLN PASSING commarea ws_db2_request (length of ws_db2_request)  -- EXEC CICS LINK: DB2ONLN runs and returns here",
+      "-- DB2ONLN (see its logic file): for request 'C' it connects to POSMVP when fewer than WS-MAX-CONNECTIONS are active and returns response code 0 with a connection token; otherwise it returns -1",
+      "IF db2_response_code != 0 THEN  -- connect failed",
+      "  SET recv_request_type = 'C'  -- ask for connection recovery",
+      "  SET recv_program = 'INQHIST'",
+      "  SET recv_sqlcode = db2_sqlcode",
+      "  CICS CALL program=DB2RECV PASSING commarea ws_recovery_request (length of ws_recovery_request)  -- EXEC CICS LINK: DB2RECV runs and returns here",
+      "  -- DB2RECV (see its logic file): for request 'C' makes up to 3 reconnect attempts through DB2ONLN and sets recovery status 'S' (success) or 'F' (failed, response -1)",
+      "  IF recovery_status = 'S' THEN  -- RECV-SUCCESS",
+      "    CALL P150-db2-connect THRU P150-exit  !! PERFORM THRU and RECURSIVE: performs the range it is in; number of passes depends on run-time results (see unresolvable_paths)",
+      "  ELSE",
+      "    SET inqcom_error_msg OF ws_commarea = recv_message",
+      "    CALL P999-error-routine THRU P999-exit  !! PERFORM THRU: runs P999-ERROR-ROUTINE then P999-EXIT in sequence",
+      "  END IF",
+      "END IF",
+      "SET ws_db2_token = db2_connection_token  !! WS-DB2-TOKEN is not declared in the program or its copybooks",
+      "-- Falls through to P150-EXIT (end of the PERFORM THRU range)"
+    ],
+    "pseudocode_statement_ids": [
+      ["SYS-PORTFOLIO-001-FIL-0063-STMT-000011"],
+      ["SYS-PORTFOLIO-001-FIL-0063-STMT-000012"],
+      [],
+      ["SYS-PORTFOLIO-001-FIL-0063-STMT-000013"],
+      ["SYS-PORTFOLIO-001-FIL-0063-STMT-000032"],
+      ["SYS-PORTFOLIO-001-FIL-0063-STMT-000033"],
+      ["SYS-PORTFOLIO-001-FIL-0063-STMT-000034"],
+      ["SYS-PORTFOLIO-001-FIL-0063-STMT-000035"],
+      [],
+      ["SYS-PORTFOLIO-001-FIL-0063-STMT-000036"],
+      ["SYS-PORTFOLIO-001-FIL-0063-STMT-000043"],
+      ["SYS-PORTFOLIO-001-FIL-0063-STMT-000036"],
+      ["SYS-PORTFOLIO-001-FIL-0063-STMT-000041"],
+      ["SYS-PORTFOLIO-001-FIL-0063-STMT-000042"],
+      ["SYS-PORTFOLIO-001-FIL-0063-STMT-000036"],
+      ["SYS-PORTFOLIO-001-FIL-0063-STMT-000013"],
+      ["SYS-PORTFOLIO-001-FIL-0063-STMT-000014"],
+      []
+    ],
+    "pseudocode_text": "SET db2_request_type = 'C'  -- connect request\nCICS CALL program=DB2ONLN PASSING commarea ws_db2_request (length of ws_db2_request)  -- EXEC CICS LINK: DB2ONLN runs and returns here\n-- DB2ONLN (see its logic file): for request 'C' it connects to POSMVP when fewer than WS-MAX-CONNECTIONS are active and returns response code 0 with a connection token; otherwise it returns -1\nIF db2_response_code != 0 THEN  -- connect failed\n  SET recv_request_type = 'C'  -- ask for connection recovery\n  SET recv_program = 'INQHIST'\n  SET recv_sqlcode = db2_sqlcode\n  CICS CALL program=DB2RECV PASSING commarea ws_recovery_request (length of ws_recovery_request)  -- EXEC CICS LINK: DB2RECV runs and returns here\n  -- DB2RECV (see its logic file): for request 'C' makes up to 3 reconnect attempts through DB2ONLN and sets recovery status 'S' (success) or 'F' (failed, response -1)\n  IF recovery_status = 'S' THEN  -- RECV-SUCCESS\n    CALL P150-db2-connect THRU P150-exit  !! PERFORM THRU and RECURSIVE: performs the range it is in; number of passes depends on run-time results (see unresolvable_paths)\n  ELSE\n    SET inqcom_error_msg OF ws_commarea = recv_message\n    CALL P999-error-routine THRU P999-exit  !! PERFORM THRU: runs P999-ERROR-ROUTINE then P999-EXIT in sequence\n  END IF\nEND IF\nSET ws_db2_token = db2_connection_token  !! WS-DB2-TOKEN is not declared in the program or its copybooks\n-- Falls through to P150-EXIT (end of the PERFORM THRU range)",
+    "statement_ids": ["SYS-PORTFOLIO-001-FIL-0063-STMT-000011", "SYS-PORTFOLIO-001-FIL-0063-STMT-000012", "SYS-PORTFOLIO-001-FIL-0063-STMT-000013", "SYS-PORTFOLIO-001-FIL-0063-STMT-000032", "SYS-PORTFOLIO-001-FIL-0063-STMT-000033", "SYS-PORTFOLIO-001-FIL-0063-STMT-000034", "SYS-PORTFOLIO-001-FIL-0063-STMT-000035", "SYS-PORTFOLIO-001-FIL-0063-STMT-000036", "SYS-PORTFOLIO-001-FIL-0063-STMT-000043", "SYS-PORTFOLIO-001-FIL-0063-STMT-000041", "SYS-PORTFOLIO-001-FIL-0063-STMT-000042", "SYS-PORTFOLIO-001-FIL-0063-STMT-000014"],
+    "untranslated_statement_ids": [],
+    "field_references": ["DB2-REQUEST-TYPE", "WS-DB2-REQUEST", "DB2-RESPONSE-CODE", "RECV-REQUEST-TYPE", "RECV-PROGRAM", "DB2-SQLCODE", "RECV-SQLCODE", "WS-RECOVERY-REQUEST", "RECV-SUCCESS", "RECV-MESSAGE", "INQCOM-ERROR-MSG", "DB2-CONNECTION-TOKEN", "WS-DB2-TOKEN"],
+    "field_reference_ids": [
+      {"name": "DB2-REQUEST-TYPE", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0063-FLD-000012", "target_kind": "field", "candidate_ids": []},
+      {"name": "WS-DB2-REQUEST", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0063-REC-0005", "target_kind": "record", "candidate_ids": []},
+      {"name": "DB2-RESPONSE-CODE", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0063-FLD-000013", "target_kind": "field", "candidate_ids": []},
+      {"name": "RECV-REQUEST-TYPE", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0063-FLD-000025", "target_kind": "field", "candidate_ids": []},
+      {"name": "RECV-PROGRAM", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0063-FLD-000029", "target_kind": "field", "candidate_ids": []},
+      {"name": "DB2-SQLCODE", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0063-FLD-000016", "target_kind": "field", "candidate_ids": []},
+      {"name": "RECV-SQLCODE", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0063-FLD-000027", "target_kind": "field", "candidate_ids": []},
+      {"name": "WS-RECOVERY-REQUEST", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0063-REC-0007", "target_kind": "record", "candidate_ids": []},
+      {"name": "RECV-SUCCESS", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0063-FLD-000033", "target_kind": "condition", "candidate_ids": []},
+      {"name": "RECV-MESSAGE", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0063-FLD-000031", "target_kind": "field", "candidate_ids": []},
+      {"name": "INQCOM-ERROR-MSG", "qualifiers": ["WS-COMMAREA"], "resolution": "UNRESOLVED", "target_id": null, "target_kind": null, "candidate_ids": [], "unresolved_reason": "QUALIFIER_HOLDS_LEVEL01_COPY", "invalid_qualification_candidates": ["SYS-PORTFOLIO-001-FIL-0020-FLD-000008"]},
+      {"name": "DB2-CONNECTION-TOKEN", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0063-FLD-000014", "target_kind": "field", "candidate_ids": []},
+      {"name": "WS-DB2-TOKEN", "qualifiers": [], "resolution": "UNRESOLVED", "target_id": null, "target_kind": null, "candidate_ids": []}
+    ],
+    "calls_made": ["P150-DB2-CONNECT", "P999-ERROR-ROUTINE"],
+    "calls_made_ids": [
+      {"name": "P150-DB2-CONNECT", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0063-PAR-0004", "section_id": null},
+      {"name": "P999-ERROR-ROUTINE", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0063-PAR-0012", "section_id": null}
+    ],
+    "complexity_score": 5,
+    "has_unresolved_statements": true,
+    "annotations": [
+      {"line": 98, "statement_id": "SYS-PORTFOLIO-001-FIL-0063-STMT-000012", "note": "Static EXEC CICS LINK to DB2ONLN with COMMAREA WS-DB2-REQUEST (inline 105-byte layout matching copybook DB2REQ field names; not a COPY here)."},
+      {"line": 108, "statement_id": "SYS-PORTFOLIO-001-FIL-0063-STMT-000035", "note": "Static EXEC CICS LINK to DB2RECV with COMMAREA WS-RECOVERY-REQUEST (116 bytes, same layout as DB2RECV's RECOVERY-REQUEST-AREA but without the RECV-REQUEST-TYPE 88-levels)."},
+      {"line": 114, "statement_id": "SYS-PORTFOLIO-001-FIL-0063-STMT-000043", "note": "Recursive PERFORM P150-DB2-CONNECT THRU P150-EXIT from inside P150-DB2-CONNECT; COBOL does not define recursive PERFORM of an active range; flagged for SME review.", "ambiguous": true},
+      {"line": 117, "statement_id": "SYS-PORTFOLIO-001-FIL-0063-STMT-000041", "note": "INQCOM-ERROR-MSG OF WS-COMMAREA: no Field ID (unresolved_reason QUALIFIER_HOLDS_LEVEL01_COPY; candidate SYS-PORTFOLIO-001-FIL-0020-FLD-000008 is evidence only)."},
+      {"line": 119, "statement_id": "SYS-PORTFOLIO-001-FIL-0063-STMT-000042", "note": "After the error routine, control returns here and continues at line 124 and then with P200 and P300: the error path does not end the transaction."},
+      {"line": 124, "statement_id": "SYS-PORTFOLIO-001-FIL-0063-STMT-000014", "note": "MOVE DB2-CONNECTION-TOKEN TO WS-DB2-TOKEN: the receiving item is not declared; recorded as written and listed in unresolved_statements.", "ambiguous": true}
+    ]
+  },
+  {
+    "name": "P150-EXIT",
+    "paragraph_id": "SYS-PORTFOLIO-001-FIL-0063-PAR-0005",
+    "section": null,
+    "section_id": null,
+    "line_range": [126, 128],
+    "pseudocode": ["EXIT  -- end of P150 PERFORM THRU range; no-op, control returns to the PERFORM that started the range (line 90, or line 114 for a recursive pass)"],
+    "pseudocode_statement_ids": [["SYS-PORTFOLIO-001-FIL-0063-STMT-000015"]],
+    "pseudocode_text": "EXIT  -- end of P150 PERFORM THRU range; no-op, control returns to the PERFORM that started the range (line 90, or line 114 for a recursive pass)",
+    "statement_ids": ["SYS-PORTFOLIO-001-FIL-0063-STMT-000015"],
+    "untranslated_statement_ids": [],
+    "field_references": [],
+    "field_reference_ids": [],
+    "calls_made": [],
+    "calls_made_ids": [],
+    "complexity_score": 1,
+    "has_unresolved_statements": false,
+    "annotations": []
+  },
+  {
+    "name": "P200-GET-HISTORY",
+    "paragraph_id": "SYS-PORTFOLIO-001-FIL-0063-PAR-0006",
+    "section": null,
+    "section_id": null,
+    "line_range": [129, 160],
+    "pseudocode": [
+      "SET curs_stmt = 'SELECT TRANS_DATE, TRANS_TYPE, TRANS_UNITS, TRANS_PRICE, TRANS_AMOUNT FROM POSHIST WHERE ACCOUNT_NO = ? ORDER BY TRANS_DATE DESC'  -- literal pieces joined with the & concatenation operator",
+      "SET curs_request_type = 'D'  -- declare cursor",
+      "CICS CALL program=CURSMGR PASSING commarea ws_cursor_request (length of ws_cursor_request)  -- EXEC CICS LINK: CURSMGR declares cursor CURS-NAME ('HISTORY_CURSOR') for CURS-STMT",
+      "IF curs_response_code = 0 THEN",
+      "  SET curs_request_type = 'O'  -- open cursor",
+      "  CICS CALL program=CURSMGR PASSING commarea ws_cursor_request (length of ws_cursor_request)",
+      "  IF curs_response_code = 0 THEN",
+      "    CALL P250-fetch-history THRU P250-exit  !! PERFORM THRU: runs P250-FETCH-HISTORY then P250-EXIT in sequence",
+      "  END IF",
+      "END IF",
+      "SET curs_request_type = 'C'  -- close cursor (always, even when declare or open failed)",
+      "CICS CALL program=CURSMGR PASSING commarea ws_cursor_request (length of ws_cursor_request)",
+      "-- Falls through to P200-EXIT (end of the PERFORM THRU range)"
+    ],
+    "pseudocode_statement_ids": [
+      ["SYS-PORTFOLIO-001-FIL-0063-STMT-000016"],
+      ["SYS-PORTFOLIO-001-FIL-0063-STMT-000017"],
+      ["SYS-PORTFOLIO-001-FIL-0063-STMT-000018"],
+      ["SYS-PORTFOLIO-001-FIL-0063-STMT-000019"],
+      ["SYS-PORTFOLIO-001-FIL-0063-STMT-000037"],
+      ["SYS-PORTFOLIO-001-FIL-0063-STMT-000038"],
+      ["SYS-PORTFOLIO-001-FIL-0063-STMT-000039"],
+      ["SYS-PORTFOLIO-001-FIL-0063-STMT-000044"],
+      ["SYS-PORTFOLIO-001-FIL-0063-STMT-000039"],
+      ["SYS-PORTFOLIO-001-FIL-0063-STMT-000019"],
+      ["SYS-PORTFOLIO-001-FIL-0063-STMT-000020"],
+      ["SYS-PORTFOLIO-001-FIL-0063-STMT-000021"],
+      []
+    ],
+    "pseudocode_text": "SET curs_stmt = 'SELECT TRANS_DATE, TRANS_TYPE, TRANS_UNITS, TRANS_PRICE, TRANS_AMOUNT FROM POSHIST WHERE ACCOUNT_NO = ? ORDER BY TRANS_DATE DESC'  -- literal pieces joined with the & concatenation operator\nSET curs_request_type = 'D'  -- declare cursor\nCICS CALL program=CURSMGR PASSING commarea ws_cursor_request (length of ws_cursor_request)  -- EXEC CICS LINK: CURSMGR declares cursor CURS-NAME ('HISTORY_CURSOR') for CURS-STMT\nIF curs_response_code = 0 THEN\n  SET curs_request_type = 'O'  -- open cursor\n  CICS CALL program=CURSMGR PASSING commarea ws_cursor_request (length of ws_cursor_request)\n  IF curs_response_code = 0 THEN\n    CALL P250-fetch-history THRU P250-exit  !! PERFORM THRU: runs P250-FETCH-HISTORY then P250-EXIT in sequence\n  END IF\nEND IF\nSET curs_request_type = 'C'  -- close cursor (always, even when declare or open failed)\nCICS CALL program=CURSMGR PASSING commarea ws_cursor_request (length of ws_cursor_request)\n-- Falls through to P200-EXIT (end of the PERFORM THRU range)",
+    "statement_ids": ["SYS-PORTFOLIO-001-FIL-0063-STMT-000016", "SYS-PORTFOLIO-001-FIL-0063-STMT-000017", "SYS-PORTFOLIO-001-FIL-0063-STMT-000018", "SYS-PORTFOLIO-001-FIL-0063-STMT-000019", "SYS-PORTFOLIO-001-FIL-0063-STMT-000037", "SYS-PORTFOLIO-001-FIL-0063-STMT-000038", "SYS-PORTFOLIO-001-FIL-0063-STMT-000039", "SYS-PORTFOLIO-001-FIL-0063-STMT-000044", "SYS-PORTFOLIO-001-FIL-0063-STMT-000020", "SYS-PORTFOLIO-001-FIL-0063-STMT-000021"],
+    "untranslated_statement_ids": [],
+    "field_references": ["CURS-STMT", "CURS-REQUEST-TYPE", "WS-CURSOR-REQUEST", "CURS-RESPONSE-CODE"],
+    "field_reference_ids": [
+      {"name": "CURS-STMT", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0063-FLD-000020", "target_kind": "field", "candidate_ids": []},
+      {"name": "CURS-REQUEST-TYPE", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0063-FLD-000018", "target_kind": "field", "candidate_ids": []},
+      {"name": "WS-CURSOR-REQUEST", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0063-REC-0006", "target_kind": "record", "candidate_ids": []},
+      {"name": "CURS-RESPONSE-CODE", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0063-FLD-000022", "target_kind": "field", "candidate_ids": []}
+    ],
+    "calls_made": ["P250-FETCH-HISTORY"],
+    "calls_made_ids": [
+      {"name": "P250-FETCH-HISTORY", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0063-PAR-0008", "section_id": null}
+    ],
+    "complexity_score": 6,
+    "has_unresolved_statements": false,
+    "annotations": [
+      {"line": 130, "statement_id": "SYS-PORTFOLIO-001-FIL-0063-STMT-000016", "note": "The SQL text has a parameter marker (ACCOUNT_NO = ?), but no account number is placed in WS-CURSOR-REQUEST; how the marker is bound is not shown in INQHIST.", "ambiguous": true},
+      {"line": 138, "statement_id": "SYS-PORTFOLIO-001-FIL-0063-STMT-000018", "note": "Static EXEC CICS LINK to CURSMGR (literal name); the same COMMAREA is passed at lines 145, 157 and 166 with request types D, O, C and F."},
+      {"line": 157, "statement_id": "SYS-PORTFOLIO-001-FIL-0063-STMT-000021", "note": "CURSMGR's logic file reports that its fetch and close paragraphs are not present in its source (file truncated), so the effect of requests 'F' and 'C' cannot be traced."}
+    ]
+  },
+  {
+    "name": "P200-EXIT",
+    "paragraph_id": "SYS-PORTFOLIO-001-FIL-0063-PAR-0007",
+    "section": null,
+    "section_id": null,
+    "line_range": [161, 163],
+    "pseudocode": ["EXIT  -- end of P200 PERFORM THRU range; no-op, control returns to the PERFORM at line 73"],
+    "pseudocode_statement_ids": [["SYS-PORTFOLIO-001-FIL-0063-STMT-000022"]],
+    "pseudocode_text": "EXIT  -- end of P200 PERFORM THRU range; no-op, control returns to the PERFORM at line 73",
+    "statement_ids": ["SYS-PORTFOLIO-001-FIL-0063-STMT-000022"],
+    "untranslated_statement_ids": [],
+    "field_references": [],
+    "field_reference_ids": [],
+    "calls_made": [],
+    "calls_made_ids": [],
+    "complexity_score": 1,
+    "has_unresolved_statements": false,
+    "annotations": []
+  },
+  {
+    "name": "P250-FETCH-HISTORY",
+    "paragraph_id": "SYS-PORTFOLIO-001-FIL-0063-PAR-0008",
+    "section": null,
+    "section_id": null,
+    "line_range": [164, 173],
+    "pseudocode": [
+      "SET curs_request_type = 'F'  -- fetch rows",
+      "CICS CALL program=CURSMGR PASSING commarea ws_cursor_request (length of ws_cursor_request)",
+      "IF curs_response_code >= 0 THEN  -- fetch did not fail",
+      "  SET ws_history_table = curs_data_area  -- group move: first 320 bytes of the 3000-byte data area fill the 10-entry history table",
+      "END IF",
+      "-- Falls through to P250-EXIT (end of the PERFORM THRU range)"
+    ],
+    "pseudocode_statement_ids": [
+      ["SYS-PORTFOLIO-001-FIL-0063-STMT-000023"],
+      ["SYS-PORTFOLIO-001-FIL-0063-STMT-000024"],
+      ["SYS-PORTFOLIO-001-FIL-0063-STMT-000025"],
+      ["SYS-PORTFOLIO-001-FIL-0063-STMT-000040"],
+      ["SYS-PORTFOLIO-001-FIL-0063-STMT-000025"],
+      []
+    ],
+    "pseudocode_text": "SET curs_request_type = 'F'  -- fetch rows\nCICS CALL program=CURSMGR PASSING commarea ws_cursor_request (length of ws_cursor_request)\nIF curs_response_code >= 0 THEN  -- fetch did not fail\n  SET ws_history_table = curs_data_area  -- group move: first 320 bytes of the 3000-byte data area fill the 10-entry history table\nEND IF\n-- Falls through to P250-EXIT (end of the PERFORM THRU range)",
+    "statement_ids": ["SYS-PORTFOLIO-001-FIL-0063-STMT-000023", "SYS-PORTFOLIO-001-FIL-0063-STMT-000024", "SYS-PORTFOLIO-001-FIL-0063-STMT-000025", "SYS-PORTFOLIO-001-FIL-0063-STMT-000040"],
+    "untranslated_statement_ids": [],
+    "field_references": ["CURS-REQUEST-TYPE", "WS-CURSOR-REQUEST", "CURS-RESPONSE-CODE", "CURS-DATA-AREA", "WS-HISTORY-TABLE"],
+    "field_reference_ids": [
+      {"name": "CURS-REQUEST-TYPE", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0063-FLD-000018", "target_kind": "field", "candidate_ids": []},
+      {"name": "WS-CURSOR-REQUEST", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0063-REC-0006", "target_kind": "record", "candidate_ids": []},
+      {"name": "CURS-RESPONSE-CODE", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0063-FLD-000022", "target_kind": "field", "candidate_ids": []},
+      {"name": "CURS-DATA-AREA", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0063-FLD-000023", "target_kind": "field", "candidate_ids": []},
+      {"name": "WS-HISTORY-TABLE", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0063-REC-0003", "target_kind": "record", "candidate_ids": []}
+    ],
+    "calls_made": [],
+    "calls_made_ids": [],
+    "complexity_score": 2,
+    "has_unresolved_statements": false,
+    "annotations": [
+      {"line": 166, "statement_id": "SYS-PORTFOLIO-001-FIL-0063-STMT-000024", "note": "A single fetch request; there is no loop over further rows, and WS-MORE-HISTORY / WS-ROW-COUNT are not updated."},
+      {"line": 172, "statement_id": "SYS-PORTFOLIO-001-FIL-0063-STMT-000040", "note": "Group MOVE from a 3000-byte field to a 320-byte group record; the receiving record is filled from the leftmost 320 bytes."}
+    ]
+  },
+  {
+    "name": "P250-EXIT",
+    "paragraph_id": "SYS-PORTFOLIO-001-FIL-0063-PAR-0009",
+    "section": null,
+    "section_id": null,
+    "line_range": [174, 176],
+    "pseudocode": ["EXIT  -- end of P250 PERFORM THRU range; no-op, control returns to the PERFORM at line 151"],
+    "pseudocode_statement_ids": [["SYS-PORTFOLIO-001-FIL-0063-STMT-000026"]],
+    "pseudocode_text": "EXIT  -- end of P250 PERFORM THRU range; no-op, control returns to the PERFORM at line 151",
+    "statement_ids": ["SYS-PORTFOLIO-001-FIL-0063-STMT-000026"],
+    "untranslated_statement_ids": [],
+    "field_references": [],
+    "field_reference_ids": [],
+    "calls_made": [],
+    "calls_made_ids": [],
+    "complexity_score": 1,
+    "has_unresolved_statements": false,
+    "annotations": []
+  },
+  {
+    "name": "P300-FORMAT-DISPLAY",
+    "paragraph_id": "SYS-PORTFOLIO-001-FIL-0063-PAR-0010",
+    "section": null,
+    "section_id": null,
+    "line_range": [177, 184],
+    "pseudocode": [
+      "CICS SEND screen map=HISMAP mapset=INQSET FROM ws_history_table (length of ws_history_table) TO terminal, ERASE screen first",
+      "  RESPONSE CODE -> ws_response_code  -- not tested afterwards"
+    ],
+    "pseudocode_statement_ids": [
+      ["SYS-PORTFOLIO-001-FIL-0063-STMT-000027"],
+      ["SYS-PORTFOLIO-001-FIL-0063-STMT-000027"]
+    ],
+    "pseudocode_text": "CICS SEND screen map=HISMAP mapset=INQSET FROM ws_history_table (length of ws_history_table) TO terminal, ERASE screen first\n  RESPONSE CODE -> ws_response_code  -- not tested afterwards",
+    "statement_ids": ["SYS-PORTFOLIO-001-FIL-0063-STMT-000027"],
+    "untranslated_statement_ids": [],
+    "field_references": ["WS-HISTORY-TABLE", "WS-RESPONSE-CODE"],
+    "field_reference_ids": [
+      {"name": "WS-HISTORY-TABLE", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0063-REC-0003", "target_kind": "record", "candidate_ids": []},
+      {"name": "WS-RESPONSE-CODE", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0063-FLD-000007", "target_kind": "field", "candidate_ids": []}
+    ],
+    "calls_made": [],
+    "calls_made_ids": [],
+    "complexity_score": 1,
+    "has_unresolved_statements": false,
+    "annotations": [
+      {"line": 178, "statement_id": "SYS-PORTFOLIO-001-FIL-0063-STMT-000027", "note": "RESP(WS-RESPONSE-CODE) means a SEND MAP failure does not raise the ERROR condition registered at line 86; the response is stored but never checked."}
+    ]
+  },
+  {
+    "name": "P300-EXIT",
+    "paragraph_id": "SYS-PORTFOLIO-001-FIL-0063-PAR-0011",
+    "section": null,
+    "section_id": null,
+    "line_range": [185, 187],
+    "pseudocode": ["EXIT  -- end of P300 PERFORM THRU range; no-op, control returns to the PERFORM at line 76"],
+    "pseudocode_statement_ids": [["SYS-PORTFOLIO-001-FIL-0063-STMT-000028"]],
+    "pseudocode_text": "EXIT  -- end of P300 PERFORM THRU range; no-op, control returns to the PERFORM at line 76",
+    "statement_ids": ["SYS-PORTFOLIO-001-FIL-0063-STMT-000028"],
+    "untranslated_statement_ids": [],
+    "field_references": [],
+    "field_reference_ids": [],
+    "calls_made": [],
+    "calls_made_ids": [],
+    "complexity_score": 1,
+    "has_unresolved_statements": false,
+    "annotations": []
+  },
+  {
+    "name": "P999-ERROR-ROUTINE",
+    "paragraph_id": "SYS-PORTFOLIO-001-FIL-0063-PAR-0012",
+    "section": null,
+    "section_id": null,
+    "line_range": [188, 191],
+    "pseudocode": [
+      "-- Reached by PERFORM P999-ERROR-ROUTINE THRU P999-EXIT (line 119) or, at run time, by the CICS ERROR handler registered at line 86",
+      "SET inqcom_response_code OF ws_commarea = sqlcode  -- SQLCODE of the last SQL statement (none is issued in INQHIST itself)",
+      "SET dfhcommarea = ws_commarea  -- return the updated inquiry block to the caller's COMMAREA"
+    ],
+    "pseudocode_statement_ids": [
+      [],
+      ["SYS-PORTFOLIO-001-FIL-0063-STMT-000029"],
+      ["SYS-PORTFOLIO-001-FIL-0063-STMT-000030"]
+    ],
+    "pseudocode_text": "-- Reached by PERFORM P999-ERROR-ROUTINE THRU P999-EXIT (line 119) or, at run time, by the CICS ERROR handler registered at line 86\nSET inqcom_response_code OF ws_commarea = sqlcode  -- SQLCODE of the last SQL statement (none is issued in INQHIST itself)\nSET dfhcommarea = ws_commarea  -- return the updated inquiry block to the caller's COMMAREA",
+    "statement_ids": ["SYS-PORTFOLIO-001-FIL-0063-STMT-000029", "SYS-PORTFOLIO-001-FIL-0063-STMT-000030"],
+    "untranslated_statement_ids": [],
+    "field_references": ["SQLCODE", "INQCOM-RESPONSE-CODE", "WS-COMMAREA", "DFHCOMMAREA"],
+    "field_reference_ids": [
+      {"name": "SQLCODE", "qualifiers": [], "resolution": "UNRESOLVED", "target_id": null, "target_kind": null, "candidate_ids": []},
+      {"name": "INQCOM-RESPONSE-CODE", "qualifiers": ["WS-COMMAREA"], "resolution": "UNRESOLVED", "target_id": null, "target_kind": null, "candidate_ids": [], "unresolved_reason": "QUALIFIER_HOLDS_LEVEL01_COPY", "invalid_qualification_candidates": ["SYS-PORTFOLIO-001-FIL-0020-FLD-000007"]},
+      {"name": "WS-COMMAREA", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0063-REC-0001", "target_kind": "record", "candidate_ids": []},
+      {"name": "DFHCOMMAREA", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0063-REC-0008", "target_kind": "record", "candidate_ids": []}
+    ],
+    "calls_made": [],
+    "calls_made_ids": [],
+    "complexity_score": 1,
+    "has_unresolved_statements": false,
+    "annotations": [
+      {"line": 188, "note": "P999-ERROR-ROUTINE is also the target of EXEC CICS HANDLE CONDITION ERROR (line 86, statement SYS-PORTFOLIO-001-FIL-0063-STMT-000008). When entered through the handler there is no PERFORM to return to: after P999-EXIT control would fall off the end of the procedure division; that run-time path is not traced.", "ambiguous": true},
+      {"line": 189, "statement_id": "SYS-PORTFOLIO-001-FIL-0063-STMT-000029", "note": "SQLCODE has no Field ID (precompiler SQLCA item, not in copybook SQLCA); INQCOM-RESPONSE-CODE OF WS-COMMAREA has no Field ID (unresolved_reason QUALIFIER_HOLDS_LEVEL01_COPY)."}
+    ]
+  },
+  {
+    "name": "P999-EXIT",
+    "paragraph_id": "SYS-PORTFOLIO-001-FIL-0063-PAR-0013",
+    "section": null,
+    "section_id": null,
+    "line_range": [192, 193],
+    "pseudocode": ["EXIT  -- end of P999 PERFORM THRU range; no-op, control returns to the PERFORM at line 119"],
+    "pseudocode_statement_ids": [["SYS-PORTFOLIO-001-FIL-0063-STMT-000031"]],
+    "pseudocode_text": "EXIT  -- end of P999 PERFORM THRU range; no-op, control returns to the PERFORM at line 119",
+    "statement_ids": ["SYS-PORTFOLIO-001-FIL-0063-STMT-000031"],
+    "untranslated_statement_ids": [],
+    "field_references": [],
+    "field_reference_ids": [],
+    "calls_made": [],
+    "calls_made_ids": [],
+    "complexity_score": 1,
+    "has_unresolved_statements": false,
+    "annotations": []
+  }
+],
+"unresolved_statements": [
+  {"statement_id": "SYS-PORTFOLIO-001-FIL-0063-STMT-000043", "paragraph": "P150-DB2-CONNECT", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0063-PAR-0004", "line": 114, "source_text": "PERFORM P150-DB2-CONNECT THRU P150-EXIT", "reason": "recursive PERFORM of the enclosing range; number of passes depends on run-time results; path not traced further"},
+  {"statement_id": "SYS-PORTFOLIO-001-FIL-0063-STMT-000014", "paragraph": "P150-DB2-CONNECT", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0063-PAR-0004", "line": 124, "source_text": "MOVE DB2-CONNECTION-TOKEN TO WS-DB2-TOKEN", "reason": "receiving item WS-DB2-TOKEN is not declared in the program or its copybooks"}
+],
+"pseudocode_issues": [
+  {"severity": "info", "type": "id_unresolved", "kind": "field", "name": "INQCOM-ERROR-MSG", "qualifiers": ["WS-COMMAREA"], "unresolved_reason": "QUALIFIER_HOLDS_LEVEL01_COPY", "invalid_qualification_candidates": ["SYS-PORTFOLIO-001-FIL-0020-FLD-000008"], "paragraphs": ["P150-DB2-CONNECT"], "message": "Qualified reference UNRESOLVED (qualifier holds a level-01 COPY); target_id null."},
+  {"severity": "info", "type": "id_unresolved", "kind": "field", "name": "INQCOM-RESPONSE-CODE", "qualifiers": ["WS-COMMAREA"], "unresolved_reason": "QUALIFIER_HOLDS_LEVEL01_COPY", "invalid_qualification_candidates": ["SYS-PORTFOLIO-001-FIL-0020-FLD-000007"], "paragraphs": ["P999-ERROR-ROUTINE"], "message": "Qualified reference UNRESOLVED (qualifier holds a level-01 COPY); target_id null."},
+  {"severity": "info", "type": "id_unresolved", "kind": "field", "name": "WS-DB2-TOKEN", "qualifiers": [], "paragraphs": ["P150-DB2-CONNECT"], "message": "WS-DB2-TOKEN: resolve-field-references UNRESOLVED (not declared); target_id null."},
+  {"severity": "info", "type": "id_unresolved", "kind": "field", "name": "SQLCODE", "qualifiers": [], "paragraphs": ["P999-ERROR-ROUTINE"], "message": "SQLCODE: resolve-field-references UNRESOLVED; target_id null."},
+  {"severity": "warning", "type": "unresolved_statement", "line": 124, "statement_id": "SYS-PORTFOLIO-001-FIL-0063-STMT-000014", "message": "MOVE to undeclared WS-DB2-TOKEN translated as written and flagged; see unresolved_statements."}
+]
+}

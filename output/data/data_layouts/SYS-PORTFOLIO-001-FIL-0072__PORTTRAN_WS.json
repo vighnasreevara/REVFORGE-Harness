@@ -1,0 +1,93 @@
+{
+  "id": "PORTTRAN",
+  "source_type": "program_ws",
+  "source_file": "src/programs/portfolio/PORTTRAN.cbl",
+  "used_by_programs": ["PORTTRAN"],
+  "total_fields": 7,
+  "total_bytes": 17,
+  "system_id": "SYS-PORTFOLIO-001",
+  "file_id": "SYS-PORTFOLIO-001-FIL-0072",
+  "path_id": "SYS-PORTFOLIO-001-PATH-0072",
+  "data_run_id": "DRUN-20261025T135019Z-17276",
+  "records": [
+    {
+      "type": "copy_expansion", "section": "FILE", "fd_name": "TRANSACTION-FILE", "section_id": "SYS-PORTFOLIO-001-FIL-0072-SEC-0003",
+      "copybook": "TRNREC", "copybook_file_id": "SYS-PORTFOLIO-001-FIL-0014", "line": 35, "include_kind": "COPY", "replacing": null,
+      "expanded_from": {"copybook": "TRNREC", "copybook_file_id": "SYS-PORTFOLIO-001-FIL-0014", "line": 35, "replacing": null},
+      "records": [
+        {"record_id": "SYS-PORTFOLIO-001-FIL-0014-REC-0001", "name": "TRANSACTION-RECORD", "total_bytes": 152, "layout_file": "data_layouts/SYS-PORTFOLIO-001-FIL-0014__TRNREC.json"}
+      ]
+    },
+    {
+      "type": "unresolved_copy_stub", "section": "FILE", "fd_name": "PORTFOLIO-FILE", "section_id": "SYS-PORTFOLIO-001-FIL-0072-SEC-0003",
+      "copybook": "PORTREC", "copybook_file_id": null, "line": 40, "include_kind": "COPY", "replacing": null, "records": []
+    },
+    {
+      "type": "copy_expansion", "section": "WORKING-STORAGE", "section_id": "SYS-PORTFOLIO-001-FIL-0072-SEC-0004",
+      "copybook": "ERRHAND", "copybook_file_id": "SYS-PORTFOLIO-001-FIL-0007", "line": 43, "include_kind": "COPY", "replacing": null,
+      "expanded_from": {"copybook": "ERRHAND", "copybook_file_id": "SYS-PORTFOLIO-001-FIL-0007", "line": 43, "replacing": null},
+      "records": [
+        {"record_id": "SYS-PORTFOLIO-001-FIL-0007-REC-0001", "name": "ERR-CATEGORIES", "total_bytes": 8, "layout_file": "data_layouts/SYS-PORTFOLIO-001-FIL-0007__ERRHAND.json"},
+        {"record_id": "SYS-PORTFOLIO-001-FIL-0007-REC-0002", "name": "ERR-RETURN-CODES", "total_bytes": 10, "layout_file": "data_layouts/SYS-PORTFOLIO-001-FIL-0007__ERRHAND.json"},
+        {"record_id": "SYS-PORTFOLIO-001-FIL-0007-REC-0003", "name": "ERR-MESSAGE", "total_bytes": 370, "layout_file": "data_layouts/SYS-PORTFOLIO-001-FIL-0007__ERRHAND.json"},
+        {"record_id": "SYS-PORTFOLIO-001-FIL-0007-REC-0004", "name": "ERR-VSAM-STATUSES", "total_bytes": 8, "layout_file": "data_layouts/SYS-PORTFOLIO-001-FIL-0007__ERRHAND.json"},
+        {"record_id": "SYS-PORTFOLIO-001-FIL-0007-REC-0005", "name": "ERR-VSAM-MSGS", "total_bytes": 240, "layout_file": "data_layouts/SYS-PORTFOLIO-001-FIL-0007__ERRHAND.json"}
+      ]
+    },
+    {
+      "type": "copy_expansion", "section": "WORKING-STORAGE", "section_id": "SYS-PORTFOLIO-001-FIL-0072-SEC-0004",
+      "copybook": "AUDITLOG", "copybook_file_id": "SYS-PORTFOLIO-001-FIL-0005", "line": 44, "include_kind": "COPY", "replacing": null,
+      "expanded_from": {"copybook": "AUDITLOG", "copybook_file_id": "SYS-PORTFOLIO-001-FIL-0005", "line": 44, "replacing": null},
+      "records": [
+        {"record_id": "SYS-PORTFOLIO-001-FIL-0005-REC-0001", "name": "AUDIT-RECORD", "total_bytes": 392, "layout_file": "data_layouts/SYS-PORTFOLIO-001-FIL-0005__AUDITLOG.json"}
+      ]
+    },
+    {
+      "record_id": "SYS-PORTFOLIO-001-FIL-0072-REC-0001", "record_key": "REC-PORTTRAN_WS-WS-FILE-STATUS",
+      "section": "WORKING-STORAGE", "section_id": "SYS-PORTFOLIO-001-FIL-0072-SEC-0004", "fd_name": null,
+      "is_fragment": false, "level": 1, "name": "WS-FILE-STATUS", "pic": null, "type": "GROUP", "storage_type": "DISPLAY",
+      "bytes": 4, "total_bytes": 4, "inline_bytes": 4, "redefines": null, "occurs": null, "value": null, "line": 46, "end_line": 48,
+      "children": [
+        {"field_id": "SYS-PORTFOLIO-001-FIL-0072-FLD-000001", "path": "WS-TRAN-STATUS", "level": 5, "name": "WS-TRAN-STATUS", "pic": "X(2)", "pic_parsed": {"raw": "X(2)", "normalized_type": "STRING", "length": 2, "decimal_places": 0, "signed": false, "storage_type": "DISPLAY"}, "bytes": 2, "redefines": null, "occurs": null, "value": null, "line": 47, "children": []},
+        {"field_id": "SYS-PORTFOLIO-001-FIL-0072-FLD-000002", "path": "WS-PORT-STATUS", "level": 5, "name": "WS-PORT-STATUS", "pic": "X(2)", "pic_parsed": {"raw": "X(2)", "normalized_type": "STRING", "length": 2, "decimal_places": 0, "signed": false, "storage_type": "DISPLAY"}, "bytes": 2, "redefines": null, "occurs": null, "value": null, "line": 48, "children": []}
+      ]
+    },
+    {
+      "record_id": "SYS-PORTFOLIO-001-FIL-0072-REC-0002", "record_key": "REC-PORTTRAN_WS-WS-COUNTERS",
+      "section": "WORKING-STORAGE", "section_id": "SYS-PORTFOLIO-001-FIL-0072-SEC-0004", "fd_name": null,
+      "is_fragment": false, "level": 1, "name": "WS-COUNTERS", "pic": null, "type": "GROUP", "storage_type": "DISPLAY",
+      "bytes": 12, "total_bytes": 12, "inline_bytes": 12, "redefines": null, "occurs": null, "value": null, "line": 50, "end_line": 53,
+      "children": [
+        {"field_id": "SYS-PORTFOLIO-001-FIL-0072-FLD-000003", "path": "WS-READ-COUNT", "level": 5, "name": "WS-READ-COUNT", "pic": "9(8) COMP", "pic_parsed": {"raw": "9(8) COMP", "normalized_type": "INTEGER", "length": 8, "decimal_places": 0, "signed": false, "storage_type": "BINARY"}, "bytes": 4, "redefines": null, "occurs": null, "value": null, "line": 51, "children": []},
+        {"field_id": "SYS-PORTFOLIO-001-FIL-0072-FLD-000004", "path": "WS-PROCESS-COUNT", "level": 5, "name": "WS-PROCESS-COUNT", "pic": "9(8) COMP", "pic_parsed": {"raw": "9(8) COMP", "normalized_type": "INTEGER", "length": 8, "decimal_places": 0, "signed": false, "storage_type": "BINARY"}, "bytes": 4, "redefines": null, "occurs": null, "value": null, "line": 52, "children": []},
+        {"field_id": "SYS-PORTFOLIO-001-FIL-0072-FLD-000005", "path": "WS-ERROR-COUNT", "level": 5, "name": "WS-ERROR-COUNT", "pic": "9(8) COMP", "pic_parsed": {"raw": "9(8) COMP", "normalized_type": "INTEGER", "length": 8, "decimal_places": 0, "signed": false, "storage_type": "BINARY"}, "bytes": 4, "redefines": null, "occurs": null, "value": null, "line": 53, "children": []}
+      ]
+    },
+    {
+      "record_id": "SYS-PORTFOLIO-001-FIL-0072-REC-0003", "record_key": "REC-PORTTRAN_WS-WS-EOF-FLAG",
+      "section": "WORKING-STORAGE", "section_id": "SYS-PORTFOLIO-001-FIL-0072-SEC-0004", "fd_name": null,
+      "is_fragment": false, "level": 1, "name": "WS-EOF-FLAG",
+      "pic": "X(1)", "pic_parsed": {"raw": "X(1)", "normalized_type": "STRING", "length": 1, "decimal_places": 0, "signed": false, "storage_type": "DISPLAY"},
+      "type": "ELEMENTARY", "storage_type": "DISPLAY", "bytes": 1, "total_bytes": 1, "inline_bytes": 1,
+      "redefines": null, "occurs": null, "value": null, "line": 55, "end_line": 57,
+      "children": [
+        {"field_id": "SYS-PORTFOLIO-001-FIL-0072-FLD-000006", "path": "END-OF-FILE", "level": 88, "name": "END-OF-FILE", "pic": null, "type": "CONDITION", "parent_field": "WS-EOF-FLAG", "values_raw": "'Y'", "values": ["Y"], "line": 56, "children": []},
+        {"field_id": "SYS-PORTFOLIO-001-FIL-0072-FLD-000007", "path": "MORE-RECORDS", "level": 88, "name": "MORE-RECORDS", "pic": null, "type": "CONDITION", "parent_field": "WS-EOF-FLAG", "values_raw": "'N'", "values": ["N"], "line": 57, "children": []}
+      ]
+    }
+  ],
+  "copy_expansions": [
+    {"holder_id": "SYS-PORTFOLIO-001-FIL-0072-SEC-0003", "holder_kind": "section", "section": "FILE", "copybook": "TRNREC", "copybook_file_id": "SYS-PORTFOLIO-001-FIL-0014", "line": 35, "include_kind": "COPY", "replacing": null, "expanded_record_ids": ["SYS-PORTFOLIO-001-FIL-0014-REC-0001"], "resolved": true},
+    {"holder_id": "SYS-PORTFOLIO-001-FIL-0072-SEC-0004", "holder_kind": "section", "section": "WORKING-STORAGE", "copybook": "ERRHAND", "copybook_file_id": "SYS-PORTFOLIO-001-FIL-0007", "line": 43, "include_kind": "COPY", "replacing": null, "expanded_record_ids": ["SYS-PORTFOLIO-001-FIL-0007-REC-0001", "SYS-PORTFOLIO-001-FIL-0007-REC-0002", "SYS-PORTFOLIO-001-FIL-0007-REC-0003", "SYS-PORTFOLIO-001-FIL-0007-REC-0004", "SYS-PORTFOLIO-001-FIL-0007-REC-0005"], "resolved": true},
+    {"holder_id": "SYS-PORTFOLIO-001-FIL-0072-SEC-0004", "holder_kind": "section", "section": "WORKING-STORAGE", "copybook": "AUDITLOG", "copybook_file_id": "SYS-PORTFOLIO-001-FIL-0005", "line": 44, "include_kind": "COPY", "replacing": null, "expanded_record_ids": ["SYS-PORTFOLIO-001-FIL-0005-REC-0001"], "resolved": true}
+  ],
+  "unresolved_copy_stubs": [
+    {"copybook": "PORTREC", "line": 40, "section": "FILE", "fd_name": "PORTFOLIO-FILE", "include_kind": "COPY", "reason": "copybook not in inventory copybook_registry"}
+  ],
+  "layout_issues": [
+    {"severity": "warning", "type": "unresolved_copy_stub", "file_id": "SYS-PORTFOLIO-001-FIL-0072", "source_id": "PORTTRAN", "line": 40, "message": "COPY PORTREC (line 40, under FD PORTFOLIO-FILE) names a copybook that is not in the inventory copybook_registry. Left as an unresolved stub; no USES_COPYBOOK or EXPANDS_COPY registered. FD PORTFOLIO-FILE therefore has no record layout."},
+    {"severity": "info", "type": "fd_record_from_copybook", "file_id": "SYS-PORTFOLIO-001-FIL-0072", "source_id": "PORTTRAN", "line": 35, "message": "FD TRANSACTION-FILE (line 32) has no inline 01; its record comes from COPY TRNREC (line 35), whose 01 TRANSACTION-RECORD (SYS-PORTFOLIO-001-FIL-0014-REC-0001, 152 bytes) is linked by EXPANDS_COPY from the FILE section (SYS-PORTFOLIO-001-FIL-0072-SEC-0003). It is not registered as a FILE record of this program and does not count in this file's total_bytes."},
+    {"severity": "warning", "type": "undefined_record_key", "file_id": "SYS-PORTFOLIO-001-FIL-0072", "source_id": "PORTTRAN", "line": 27, "message": "RECORD KEY PORT-ID (SELECT PORTFOLIO-FILE, line 27) is not declared in the program or in the expanded copybooks TRNREC, ERRHAND, AUDITLOG; it would come from the unresolved copybook PORTREC."},
+    {"severity": "info", "type": "copy_stub_at_section_level", "file_id": "SYS-PORTFOLIO-001-FIL-0072", "source_id": "PORTTRAN", "line": 43, "message": "COPY ERRHAND (line 43) and COPY AUDITLOG (line 44) sit directly under the WORKING-STORAGE SECTION with no enclosing 01. Linked by EXPANDS_COPY from section SYS-PORTFOLIO-001-FIL-0072-SEC-0004; their bytes (8+10+370+8+240; 392) count only in the copybooks' own records, not in this file's total_bytes."}
+  ]
+}

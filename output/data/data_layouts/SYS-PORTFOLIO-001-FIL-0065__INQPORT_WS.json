@@ -1,0 +1,109 @@
+{
+  "id": "INQPORT",
+  "source_type": "program_ws",
+  "source_file": "src/programs/online/INQPORT.cbl",
+  "used_by_programs": ["INQPORT"],
+  "total_fields": 9,
+  "total_bytes": 399,
+  "system_id": "SYS-PORTFOLIO-001",
+  "file_id": "SYS-PORTFOLIO-001-FIL-0065",
+  "path_id": "SYS-PORTFOLIO-001-PATH-0065",
+  "data_run_id": "DRUN-20261024T215053Z-ACC1",
+  "records": [
+    {
+      "record_id": "SYS-PORTFOLIO-001-FIL-0065-REC-0001",
+      "section": "WORKING-STORAGE", "section_id": "SYS-PORTFOLIO-001-FIL-0065-SEC-0001", "fd_name": null,
+      "is_fragment": false, "level": 1, "name": "WS-COMMAREA",
+      "pic": null, "type": "GROUP", "storage_type": "DISPLAY", "bytes": 98, "total_bytes": 98, "inline_bytes": 0,
+      "redefines": null, "occurs": null, "value": null, "line": 14, "end_line": 15,
+      "children": [
+        {"type": "copy_expansion", "holder": "SYS-PORTFOLIO-001-FIL-0065-REC-0001", "copybook": "INQCOM", "copybook_file_id": "SYS-PORTFOLIO-001-FIL-0020", "line": 15, "include_kind": "COPY", "replacing": null,
+         "layout_file": "data_layouts/SYS-PORTFOLIO-001-FIL-0020__INQCOM.json",
+         "records": [
+           {"record_id": "SYS-PORTFOLIO-001-FIL-0020-REC-0001", "name": "INQCOM-AREA", "level": 1, "total_bytes": 98, "expanded_from": {"copybook": "INQCOM", "copybook_file_id": "SYS-PORTFOLIO-001-FIL-0020", "line": 15, "replacing": null}}
+         ]}
+      ]
+    },
+    {
+      "record_id": "SYS-PORTFOLIO-001-FIL-0065-REC-0002",
+      "section": "WORKING-STORAGE", "section_id": "SYS-PORTFOLIO-001-FIL-0065-SEC-0001", "fd_name": null,
+      "is_fragment": false, "level": 1, "name": "WS-POSITION-RECORD",
+      "pic": null, "type": "GROUP", "storage_type": "DISPLAY", "bytes": 138, "total_bytes": 138, "inline_bytes": 0,
+      "redefines": null, "occurs": null, "value": null, "line": 17, "end_line": 18,
+      "children": [
+        {"type": "copy_expansion", "holder": "SYS-PORTFOLIO-001-FIL-0065-REC-0002", "copybook": "POSREC", "copybook_file_id": "SYS-PORTFOLIO-001-FIL-0011", "line": 18, "include_kind": "COPY", "replacing": null,
+         "layout_file": "data_layouts/SYS-PORTFOLIO-001-FIL-0011__POSREC.json",
+         "records": [
+           {"record_id": "SYS-PORTFOLIO-001-FIL-0011-REC-0001", "name": "POSITION-RECORD", "level": 1, "total_bytes": 138, "expanded_from": {"copybook": "POSREC", "copybook_file_id": "SYS-PORTFOLIO-001-FIL-0011", "line": 18, "replacing": null}}
+         ]}
+      ]
+    },
+    {
+      "record_id": "SYS-PORTFOLIO-001-FIL-0065-REC-0003",
+      "section": "WORKING-STORAGE", "section_id": "SYS-PORTFOLIO-001-FIL-0065-SEC-0001", "fd_name": null,
+      "is_fragment": false, "level": 1, "name": "WS-DB2-POSITION",
+      "pic": null, "type": "GROUP", "storage_type": "DISPLAY", "bytes": 0, "total_bytes": 0, "inline_bytes": 0,
+      "redefines": null, "occurs": null, "value": null, "line": 20, "end_line": 21,
+      "children": [
+        {"type": "copy_expansion", "holder": "SYS-PORTFOLIO-001-FIL-0065-REC-0003", "copybook": "SQLPOS", "copybook_file_id": null, "line": 21, "include_kind": "SQL_INCLUDE", "replacing": null,
+         "resolved": false, "unresolved_reason": "copybook_not_in_registry",
+         "layout_file": null,
+         "records": []}
+      ]
+    },
+    {
+      "record_id": "SYS-PORTFOLIO-001-FIL-0065-REC-0004",
+      "section": "WORKING-STORAGE", "section_id": "SYS-PORTFOLIO-001-FIL-0065-SEC-0001", "fd_name": null,
+      "is_fragment": false, "level": 1, "name": "WS-FLAGS",
+      "pic": null, "type": "GROUP", "storage_type": "DISPLAY", "bytes": 5, "total_bytes": 5, "inline_bytes": 5,
+      "redefines": null, "occurs": null, "value": null, "line": 23, "end_line": 27,
+      "children": [
+        {"field_id": "SYS-PORTFOLIO-001-FIL-0065-FLD-000001", "path": "WS-RESPONSE-CODE", "level": 5, "name": "WS-RESPONSE-CODE", "pic": "S9(8) COMP", "pic_parsed": {"raw": "S9(8) COMP", "normalized_type": "SIGNED_INTEGER", "length": 8, "decimal_places": 0, "signed": true, "storage_type": "BINARY"}, "bytes": 4, "redefines": null, "occurs": null, "value": null, "line": 24, "children": []},
+        {"field_id": "SYS-PORTFOLIO-001-FIL-0065-FLD-000002", "path": "WS-POSITION-FOUND", "level": 5, "name": "WS-POSITION-FOUND", "pic": "X", "pic_parsed": {"raw": "X", "normalized_type": "STRING", "length": 1, "decimal_places": 0, "signed": false, "storage_type": "DISPLAY"}, "bytes": 1, "redefines": null, "occurs": null, "value": "'N'", "line": 25, "children": [
+          {"field_id": "SYS-PORTFOLIO-001-FIL-0065-FLD-000003", "path": "WS-POSITION-FOUND.POSITION-EXISTS", "level": 88, "name": "POSITION-EXISTS", "pic": null, "type": "CONDITION", "parent_field": "WS-POSITION-FOUND", "value": null, "values_raw": "'Y'", "values": ["Y"], "line": 26, "children": []},
+          {"field_id": "SYS-PORTFOLIO-001-FIL-0065-FLD-000004", "path": "WS-POSITION-FOUND.NO-POSITION", "level": 88, "name": "NO-POSITION", "pic": null, "type": "CONDITION", "parent_field": "WS-POSITION-FOUND", "value": null, "values_raw": "'N'", "values": ["N"], "line": 27, "children": []}
+        ]}
+      ]
+    },
+    {
+      "record_id": "SYS-PORTFOLIO-001-FIL-0065-REC-0005",
+      "section": "WORKING-STORAGE", "section_id": "SYS-PORTFOLIO-001-FIL-0065-SEC-0001", "fd_name": null,
+      "is_fragment": false, "level": 1, "name": "WS-MAP-FIELDS",
+      "pic": null, "type": "GROUP", "storage_type": "DISPLAY", "bytes": 60, "total_bytes": 60, "inline_bytes": 60,
+      "redefines": null, "occurs": null, "value": null, "line": 29, "end_line": 34,
+      "children": [
+        {"field_id": "SYS-PORTFOLIO-001-FIL-0065-FLD-000005", "path": "WS-ACCOUNT-LABEL", "level": 5, "name": "WS-ACCOUNT-LABEL", "pic": "X(10)", "pic_parsed": {"raw": "X(10)", "normalized_type": "STRING", "length": 10, "decimal_places": 0, "signed": false, "storage_type": "DISPLAY"}, "bytes": 10, "redefines": null, "occurs": null, "value": "'Account:'", "line": 30, "children": []},
+        {"field_id": "SYS-PORTFOLIO-001-FIL-0065-FLD-000006", "path": "WS-FUND-LABEL", "level": 5, "name": "WS-FUND-LABEL", "pic": "X(10)", "pic_parsed": {"raw": "X(10)", "normalized_type": "STRING", "length": 10, "decimal_places": 0, "signed": false, "storage_type": "DISPLAY"}, "bytes": 10, "redefines": null, "occurs": null, "value": "'Fund ID:'", "line": 31, "children": []},
+        {"field_id": "SYS-PORTFOLIO-001-FIL-0065-FLD-000007", "path": "WS-UNITS-LABEL", "level": 5, "name": "WS-UNITS-LABEL", "pic": "X(10)", "pic_parsed": {"raw": "X(10)", "normalized_type": "STRING", "length": 10, "decimal_places": 0, "signed": false, "storage_type": "DISPLAY"}, "bytes": 10, "redefines": null, "occurs": null, "value": "'Units:'", "line": 32, "children": []},
+        {"field_id": "SYS-PORTFOLIO-001-FIL-0065-FLD-000008", "path": "WS-COST-LABEL", "level": 5, "name": "WS-COST-LABEL", "pic": "X(15)", "pic_parsed": {"raw": "X(15)", "normalized_type": "STRING", "length": 15, "decimal_places": 0, "signed": false, "storage_type": "DISPLAY"}, "bytes": 15, "redefines": null, "occurs": null, "value": "'Cost Basis:'", "line": 33, "children": []},
+        {"field_id": "SYS-PORTFOLIO-001-FIL-0065-FLD-000009", "path": "WS-VALUE-LABEL", "level": 5, "name": "WS-VALUE-LABEL", "pic": "X(15)", "pic_parsed": {"raw": "X(15)", "normalized_type": "STRING", "length": 15, "decimal_places": 0, "signed": false, "storage_type": "DISPLAY"}, "bytes": 15, "redefines": null, "occurs": null, "value": "'Market Value:'", "line": 34, "children": []}
+      ]
+    },
+    {
+      "record_id": "SYS-PORTFOLIO-001-FIL-0065-REC-0006",
+      "section": "LINKAGE", "section_id": "SYS-PORTFOLIO-001-FIL-0065-SEC-0002", "fd_name": null,
+      "is_fragment": false, "level": 1, "name": "DFHCOMMAREA",
+      "pic": null, "type": "GROUP", "storage_type": "DISPLAY", "bytes": 98, "total_bytes": 98, "inline_bytes": 0,
+      "redefines": null, "occurs": null, "value": null, "line": 37, "end_line": 38,
+      "children": [
+        {"type": "copy_expansion", "holder": "SYS-PORTFOLIO-001-FIL-0065-REC-0006", "copybook": "INQCOM", "copybook_file_id": "SYS-PORTFOLIO-001-FIL-0020", "line": 38, "include_kind": "COPY", "replacing": null,
+         "layout_file": "data_layouts/SYS-PORTFOLIO-001-FIL-0020__INQCOM.json",
+         "records": [
+           {"record_id": "SYS-PORTFOLIO-001-FIL-0020-REC-0001", "name": "INQCOM-AREA", "level": 1, "total_bytes": 98, "expanded_from": {"copybook": "INQCOM", "copybook_file_id": "SYS-PORTFOLIO-001-FIL-0020", "line": 38, "replacing": null}}
+         ]}
+      ]
+    }
+  ],
+  "copy_expansions": [
+    {"holder_local_id": "R1", "holder_id": "SYS-PORTFOLIO-001-FIL-0065-REC-0001", "section_id": null, "copybook": "INQCOM", "copybook_file_id": "SYS-PORTFOLIO-001-FIL-0020", "line": 15, "include_kind": "COPY", "replacing": null, "target_record_ids": ["SYS-PORTFOLIO-001-FIL-0020-REC-0001"]},
+    {"holder_local_id": "R2", "holder_id": "SYS-PORTFOLIO-001-FIL-0065-REC-0002", "section_id": null, "copybook": "POSREC", "copybook_file_id": "SYS-PORTFOLIO-001-FIL-0011", "line": 18, "include_kind": "COPY", "replacing": null, "target_record_ids": ["SYS-PORTFOLIO-001-FIL-0011-REC-0001"]},
+    {"holder_local_id": "R6", "holder_id": "SYS-PORTFOLIO-001-FIL-0065-REC-0006", "section_id": null, "copybook": "INQCOM", "copybook_file_id": "SYS-PORTFOLIO-001-FIL-0020", "line": 38, "include_kind": "COPY", "replacing": null, "target_record_ids": ["SYS-PORTFOLIO-001-FIL-0020-REC-0001"]}
+  ],
+  "unresolved_copy_stubs": [
+    {"copybook": "SQLPOS", "line": 21, "section": "WORKING-STORAGE", "section_id": "SYS-PORTFOLIO-001-FIL-0065-SEC-0001", "holder_id": "SYS-PORTFOLIO-001-FIL-0065-REC-0003", "include_kind": "SQL_INCLUDE", "reason": "copybook_not_in_registry"}
+  ],
+  "layout_issues": [
+    {"severity": "warning", "type": "unresolved_copy_stub", "file_id": "SYS-PORTFOLIO-001-FIL-0065", "source_id": "INQPORT", "line": 21, "message": "EXEC SQL INCLUDE SQLPOS END-EXEC (line 21, inside 01 WS-DB2-POSITION) names SQLPOS, which is not in the inventory copybook_registry (inventory unresolved_reference). Left as an unresolved stub; no USES_COPYBOOK or EXPANDS_COPY registered. WS-DB2-POSITION therefore has no registered fields and total_bytes 0."},
+    {"severity": "info", "type": "copybook_level_01_under_record", "file_id": "SYS-PORTFOLIO-001-FIL-0065", "source_id": "INQPORT", "line": 15, "message": "COPY INQCOM (lines 15 and 38) and COPY POSREC (line 18) are placed under program 01 records (WS-COMMAREA, DFHCOMMAREA, WS-POSITION-RECORD) but the copybooks define their own 01-level records (INQCOM-AREA, POSITION-RECORD). Recorded as found; the holder record's total_bytes includes the copybook record's total_bytes, its inline_bytes is 0."}
+  ]
+}
