@@ -5,463 +5,265 @@
 "file_id": "SYS-PORTFOLIO-001-FIL-0066",
 "path_id": "SYS-PORTFOLIO-001-PATH-0066",
 "relative_path": "src/programs/online/SECMGR.cbl",
-"parse_run_id": "PRUN-20261023T023803Z-ACC2",
+"source_file": "src/programs/online/SECMGR.cbl",
+"parse_run_id": "PRUN-20261027T155247Z-2626",
+"data_run_id": "DRUN-20261027T162831Z-1330",
+"generated_at": "2026-10-27T21:27:22Z",
+"agent_version": "4_logic@1.0",
+"source_artifacts": {"parser_artifact": "output/parser/parser_artifact.json", "data_artifact": "output/data/data_artifact.json", "raw_structure": "output/parser/raw_structure/SYS-PORTFOLIO-001-FIL-0066__SECMGR.json", "data_layouts": ["output/data/data_layouts/SYS-PORTFOLIO-001-FIL-0066__SECMGR_WS.json", "output/data/data_layouts/SYS-PORTFOLIO-001-FIL-0017__SQLCA.json", "output/data/data_layouts/SYS-PORTFOLIO-001-FIL-0019__ERRHND.json"]},
 "upstream": {
+  "parse_status": "success",
   "verification": {
     "verdict": "VALID",
-    "verdict_reasons": ["V2, V3 and V4 consistent; Agent 2 parse_status 'success'; both copybook layouts present and consistent; the program has no unresolved copy stubs (the self-include stub inside copybook SQLCA belongs to the copybook layout, not to this program)"],
-    "v1": {"raw_structure": "present", "parse_status": "success", "program_layout": "present", "data_run_id": "DRUN-20261024T215053Z-ACC1", "copybook_layouts": [{"copybook": "SQLCA", "copybook_file_id": "SYS-PORTFOLIO-001-FIL-0017", "layout": "present", "expanded_at_lines": [16]}, {"copybook": "ERRHND", "copybook_file_id": "SYS-PORTFOLIO-001-FIL-0019", "layout": "present", "expanded_at_lines": [27]}], "unresolved_copy_stubs": []},
-    "v2_file_identities": {
-      "program_entries": {"require_completed": ["parser", "data"], "entries": ["raw_structure|SYS-PORTFOLIO-001-FIL-0066", "data_layout|SYS-PORTFOLIO-001-FIL-0066"], "result": "batched with the INQPORT, PORTADD, PORTDEL, PORTREAD and PORTTEST program entries: checked 12, ok 12, problems [], duplicate_file_ids_in_json [], consistent true"},
-      "copybook_entries": {"require_completed": ["data"], "entries": ["data_layout|SYS-PORTFOLIO-001-FIL-0017", "data_layout|SYS-PORTFOLIO-001-FIL-0019"], "result": "batched with copybooks FIL-0020, FIL-0011, FIL-0009, FIL-0007: checked 6, ok 6, problems [], duplicate_file_ids_in_json [], consistent true"},
-      "consistent": true
-    },
-    "v3_structure_identities": {"sections_checked": 2, "paragraphs_checked": 7, "statements_checked": 33, "edges_checked": 6, "registered_edges": 6, "section_problems": [], "paragraph_problems": [], "statement_problems": [], "edge_problems": [], "invalid_registered_edges": [], "registered_not_in_json": {"sections": [], "paragraphs": [], "statements": [], "missing_count": 0}, "duplicate_ids_in_json": [], "consistent": true, "note": "data-division section names sent as null; edges: two per PERFORM_THRU (target and THRU end) for STMT-000018, -000017, -000016"},
-    "v4_data_identities": [
-      {"file_id": "SYS-PORTFOLIO-001-FIL-0066", "layout": "program", "records_checked": 4, "fields_checked": 15, "expansions_checked": 2, "record_problems": [], "field_problems": [], "expansion_problems": [], "copybook_records_in_program": 0, "registered_not_in_json": {"records": [], "fields": [], "missing_count": 0}, "duplicate_ids_in_json": [], "consistent": true},
-      {"file_id": "SYS-PORTFOLIO-001-FIL-0017", "layout": "copybook SQLCA", "records_checked": 1, "fields_checked": 7, "expansions_checked": 0, "record_problems": [], "field_problems": [], "expansion_problems": [], "copybook_records_in_program": 0, "registered_not_in_json": {"records": [], "fields": [], "missing_count": 0}, "duplicate_ids_in_json": [], "consistent": true},
-      {"file_id": "SYS-PORTFOLIO-001-FIL-0019", "layout": "copybook ERRHND", "records_checked": 1, "fields_checked": 17, "expansions_checked": 0, "record_problems": [], "field_problems": [], "expansion_problems": [], "copybook_records_in_program": 0, "registered_not_in_json": {"records": [], "fields": [], "missing_count": 0}, "duplicate_ids_in_json": [], "consistent": true}
-    ]
+    "v2_file_identities": {"program_entries": {"checked": 8, "ok": 8, "problems": [], "consistent": true, "require_completed": ["parser", "data"], "note": "batched call covering RTNCDE00, DB2ONLN, SECMGR, PORTVALD raw_structure + data_layout entries"}, "copybook_entries": {"checked": 4, "ok": 4, "problems": [], "consistent": true, "require_completed": ["data"], "file_ids": ["SYS-PORTFOLIO-001-FIL-0013", "SYS-PORTFOLIO-001-FIL-0017", "SYS-PORTFOLIO-001-FIL-0019", "SYS-PORTFOLIO-001-FIL-0010"]}},
+    "v3_structure_identities": {"sections_checked": 2, "paragraphs_checked": 7, "statements_checked": 33, "edges_checked": 6, "registered_edges": 6, "problems": [], "registered_not_in_json_missing_count": 0, "duplicate_ids_in_json": [], "consistent": true},
+    "v4_data_identities": {
+      "program_layout": {"file_id": "SYS-PORTFOLIO-001-FIL-0066", "records_checked": 4, "fields_checked": 15, "expansions_checked": 2, "problems": [], "registered_not_in_json_missing_count": 0, "consistent": true},
+      "copybook_layouts": [
+        {"file_id": "SYS-PORTFOLIO-001-FIL-0017", "copybook": "SQLCA", "records_checked": 1, "fields_checked": 7, "problems": [], "consistent": true},
+        {"file_id": "SYS-PORTFOLIO-001-FIL-0019", "copybook": "ERRHND", "records_checked": 1, "fields_checked": 17, "problems": [], "consistent": true}
+      ]
+    }
   }
 },
+"entry_points": [{"paragraph": "(UNNAMED)", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0066-PAR-0001", "entry_type": "online_subprogram", "using_parameters": ["SECURITY-REQUEST-AREA"]}],
 "execution_traces": [
   {
     "entry_point": "(UNNAMED)",
     "entry_point_id": "SYS-PORTFOLIO-001-FIL-0066-PAR-0001",
     "entry_type": "online_subprogram",
     "steps": [
-      {"step": 1, "paragraph": "(UNNAMED)", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0066-PAR-0001", "action": "EVALUATE", "target": null, "target_paragraph_id": null, "target_section_id": null, "condition": {"text": "EVALUATE TRUE", "fields": [], "field_ids": []}, "line": 42, "statement_id": "SYS-PORTFOLIO-001-FIL-0066-STMT-000001"},
-      {"step": 2, "paragraph": "(UNNAMED)", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0066-PAR-0001", "action": "PERFORM_THRU", "target": "P100-VALIDATE-USER", "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0066-PAR-0002", "target_section_id": null, "unstructured": true,
-       "condition": {"text": "WHEN SEC-VALIDATE", "fields": ["SEC-VALIDATE"], "field_ids": [{"name": "SEC-VALIDATE", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0066-FLD-000008", "target_kind": "condition", "candidate_ids": []}]},
-       "sub_steps": [{"paragraph": "P100-VALIDATE-USER", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0066-PAR-0002"}, {"paragraph": "P100-EXIT", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0066-PAR-0003"}],
-       "line": 44, "statement_id": "SYS-PORTFOLIO-001-FIL-0066-STMT-000018"},
-      {"step": 3, "paragraph": "(UNNAMED)", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0066-PAR-0001", "action": "PERFORM_THRU", "target": "P200-CHECK-AUTH", "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0066-PAR-0004", "target_section_id": null, "unstructured": true,
-       "condition": {"text": "WHEN SEC-AUTHORIZE", "fields": ["SEC-AUTHORIZE"], "field_ids": [{"name": "SEC-AUTHORIZE", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0066-FLD-000009", "target_kind": "condition", "candidate_ids": []}]},
-       "sub_steps": [{"paragraph": "P200-CHECK-AUTH", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0066-PAR-0004"}, {"paragraph": "P200-EXIT", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0066-PAR-0005"}],
-       "line": 47, "statement_id": "SYS-PORTFOLIO-001-FIL-0066-STMT-000017"},
-      {"step": 4, "paragraph": "(UNNAMED)", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0066-PAR-0001", "action": "PERFORM_THRU", "target": "P300-LOG-ACCESS", "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0066-PAR-0006", "target_section_id": null, "unstructured": true,
-       "condition": {"text": "WHEN SEC-AUDIT", "fields": ["SEC-AUDIT"], "field_ids": [{"name": "SEC-AUDIT", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0066-FLD-000010", "target_kind": "condition", "candidate_ids": []}]},
-       "sub_steps": [{"paragraph": "P300-LOG-ACCESS", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0066-PAR-0006"}, {"paragraph": "P300-EXIT", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0066-PAR-0007"}],
-       "line": 50, "statement_id": "SYS-PORTFOLIO-001-FIL-0066-STMT-000016"},
+      {"step": 1, "paragraph": "(UNNAMED)", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0066-PAR-0001", "action": "EVALUATE", "target": null, "target_paragraph_id": null, "target_section_id": null, "condition": {"text": "EVALUATE TRUE (dispatch on SEC-REQUEST-TYPE 88-levels; no WHEN OTHER)", "fields": ["SEC-VALIDATE", "SEC-AUTHORIZE", "SEC-AUDIT"], "field_ids": ["SYS-PORTFOLIO-001-FIL-0066-FLD-000008", "SYS-PORTFOLIO-001-FIL-0066-FLD-000009", "SYS-PORTFOLIO-001-FIL-0066-FLD-000010"]}, "line": 42, "statement_id": "SYS-PORTFOLIO-001-FIL-0066-STMT-000001"},
+      {"step": 2, "paragraph": "(UNNAMED)", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0066-PAR-0001", "action": "PERFORM_THRU", "target": "P100-VALIDATE-USER", "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0066-PAR-0002", "target_section_id": null, "thru_end": "P100-EXIT", "thru_end_paragraph_id": "SYS-PORTFOLIO-001-FIL-0066-PAR-0003", "unstructured": true, "condition": {"text": "WHEN SEC-VALIDATE", "fields": ["SEC-VALIDATE"], "field_ids": ["SYS-PORTFOLIO-001-FIL-0066-FLD-000008"]}, "line": 44, "statement_id": "SYS-PORTFOLIO-001-FIL-0066-STMT-000018", "sub_steps": [{"paragraph": "P100-VALIDATE-USER", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0066-PAR-0002"}, {"paragraph": "P100-EXIT", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0066-PAR-0003"}]},
+      {"step": 3, "paragraph": "(UNNAMED)", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0066-PAR-0001", "action": "PERFORM_THRU", "target": "P200-CHECK-AUTH", "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0066-PAR-0004", "target_section_id": null, "thru_end": "P200-EXIT", "thru_end_paragraph_id": "SYS-PORTFOLIO-001-FIL-0066-PAR-0005", "unstructured": true, "condition": {"text": "WHEN SEC-AUTHORIZE", "fields": ["SEC-AUTHORIZE"], "field_ids": ["SYS-PORTFOLIO-001-FIL-0066-FLD-000009"]}, "line": 47, "statement_id": "SYS-PORTFOLIO-001-FIL-0066-STMT-000017", "sub_steps": [{"paragraph": "P200-CHECK-AUTH", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0066-PAR-0004"}, {"paragraph": "P200-EXIT", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0066-PAR-0005"}]},
+      {"step": 4, "paragraph": "(UNNAMED)", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0066-PAR-0001", "action": "PERFORM_THRU", "target": "P300-LOG-ACCESS", "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0066-PAR-0006", "target_section_id": null, "thru_end": "P300-EXIT", "thru_end_paragraph_id": "SYS-PORTFOLIO-001-FIL-0066-PAR-0007", "unstructured": true, "condition": {"text": "WHEN SEC-AUDIT", "fields": ["SEC-AUDIT"], "field_ids": ["SYS-PORTFOLIO-001-FIL-0066-FLD-000010"]}, "line": 50, "statement_id": "SYS-PORTFOLIO-001-FIL-0066-STMT-000016", "sub_steps": [{"paragraph": "P300-LOG-ACCESS", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0066-PAR-0006"}, {"paragraph": "P300-EXIT", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0066-PAR-0007"}]},
       {"step": 5, "paragraph": "(UNNAMED)", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0066-PAR-0001", "action": "CICS_RETURN", "target": null, "target_paragraph_id": null, "target_section_id": null, "condition": null, "line": 54, "statement_id": "SYS-PORTFOLIO-001-FIL-0066-STMT-000002"}
-    ]
+    ],
+    "path_summary": "Invoked with SECURITY-REQUEST-AREA (commarea/linkage). EVALUATE TRUE selects at most one PERFORM ... THRU range by request type (V validate user, A authorise, L audit log); any other request type performs nothing. Control returns to CICS / the caller with EXEC CICS RETURN."
   }
 ],
 "branch_map": [
-  {
-    "paragraph": "(UNNAMED)",
-    "paragraph_id": "SYS-PORTFOLIO-001-FIL-0066-PAR-0001",
-    "branches": [
-      {"type": "EVALUATE", "line": 42, "statement_id": "SYS-PORTFOLIO-001-FIL-0066-STMT-000001", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0066-PAR-0001", "subjects": ["TRUE"],
-       "condition_text": "EVALUATE TRUE WHEN SEC-VALIDATE / WHEN SEC-AUTHORIZE / WHEN SEC-AUDIT",
-       "condition_fields": ["SEC-VALIDATE", "SEC-AUTHORIZE", "SEC-AUDIT"],
-       "condition_field_ids": [
-         {"name": "SEC-VALIDATE", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0066-FLD-000008", "target_kind": "condition", "candidate_ids": []},
-         {"name": "SEC-AUTHORIZE", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0066-FLD-000009", "target_kind": "condition", "candidate_ids": []},
-         {"name": "SEC-AUDIT", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0066-FLD-000010", "target_kind": "condition", "candidate_ids": []}
-       ],
-       "when_clauses": [
-         {"conditions": ["SEC-VALIDATE"], "condition_fields": ["SEC-VALIDATE"], "condition_values": "SEC-REQUEST-TYPE = 'V'", "body_line_range": [44, 45], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0066-STMT-000018"]},
-         {"conditions": ["SEC-AUTHORIZE"], "condition_fields": ["SEC-AUTHORIZE"], "condition_values": "SEC-REQUEST-TYPE = 'A'", "body_line_range": [47, 48], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0066-STMT-000017"]},
-         {"conditions": ["SEC-AUDIT"], "condition_fields": ["SEC-AUDIT"], "condition_values": "SEC-REQUEST-TYPE = 'L'", "body_line_range": [50, 51], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0066-STMT-000016"]}
-       ],
-       "has_when_other": false,
-       "end_evaluate_line": 52,
-       "outcomes": [
-         {"label": "WHEN SEC-VALIDATE", "line_range": [44, 45], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0066-STMT-000018"]},
-         {"label": "WHEN SEC-AUTHORIZE", "line_range": [47, 48], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0066-STMT-000017"]},
-         {"label": "WHEN SEC-AUDIT", "line_range": [50, 51], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0066-STMT-000016"]},
-         {"label": "NO MATCH (no WHEN OTHER)", "line_range": null, "statement_ids": []}
-       ],
-       "nested_depth": 1}
-    ]
-  },
-  {
-    "paragraph": "P100-VALIDATE-USER",
-    "paragraph_id": "SYS-PORTFOLIO-001-FIL-0066-PAR-0002",
-    "branches": [
-      {"type": "IF", "line": 62, "statement_id": "SYS-PORTFOLIO-001-FIL-0066-STMT-000004", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0066-PAR-0002",
-       "condition_text": "SEC-RESPONSE-CODE = DFHRESP(NORMAL)",
-       "condition_fields": ["SEC-RESPONSE-CODE"],
-       "condition_field_ids": [{"name": "SEC-RESPONSE-CODE", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0066-FLD-000014", "target_kind": "field", "candidate_ids": []}],
-       "has_else": true, "then_line_range": [63, 69], "else_line_range": [71, 73], "end_if_line": 74, "nested_depth": 1,
-       "outcomes": [
-         {"label": "THEN", "line_range": [63, 69], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0066-STMT-000021"]},
-         {"label": "ELSE", "line_range": [71, 73], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0066-STMT-000019", "SYS-PORTFOLIO-001-FIL-0066-STMT-000020"]}
-       ]},
-      {"type": "IF", "line": 63, "statement_id": "SYS-PORTFOLIO-001-FIL-0066-STMT-000021", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0066-PAR-0002",
-       "condition_text": "SEC-USER-ID = WS-USER-ID",
-       "condition_fields": ["SEC-USER-ID", "WS-USER-ID"],
-       "condition_field_ids": [
-         {"name": "SEC-USER-ID", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0066-FLD-000011", "target_kind": "field", "candidate_ids": []},
-         {"name": "WS-USER-ID", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0066-FLD-000001", "target_kind": "field", "candidate_ids": []}
-       ],
-       "has_else": true, "then_line_range": [64, 64], "else_line_range": [66, 68], "end_if_line": 69, "nested_depth": 2,
-       "outcomes": [
-         {"label": "THEN", "line_range": [64, 64], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0066-STMT-000030"]},
-         {"label": "ELSE", "line_range": [66, 68], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0066-STMT-000028", "SYS-PORTFOLIO-001-FIL-0066-STMT-000029"]}
-       ]}
-    ]
-  },
-  {
-    "paragraph": "P200-CHECK-AUTH",
-    "paragraph_id": "SYS-PORTFOLIO-001-FIL-0066-PAR-0004",
-    "branches": [
-      {"type": "EVALUATE", "line": 88, "statement_id": "SYS-PORTFOLIO-001-FIL-0066-STMT-000007", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0066-PAR-0004", "subjects": ["SQLCODE"],
-       "condition_text": "EVALUATE SQLCODE WHEN 0 / WHEN OTHER",
-       "condition_fields": ["SQLCODE"],
-       "condition_field_ids": [{"name": "SQLCODE", "qualifiers": [], "resolution": "UNRESOLVED", "target_id": null, "target_kind": null, "candidate_ids": []}],
-       "sqlcode_check": true,
-       "when_clauses": [
-         {"conditions": ["SQLCODE = 0"], "condition_fields": ["SQLCODE"], "body_line_range": [90, 96], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0066-STMT-000022"]},
-         {"conditions": ["OTHER"], "condition_fields": [], "body_line_range": [98, 100], "is_default": true, "statement_ids": ["SYS-PORTFOLIO-001-FIL-0066-STMT-000023", "SYS-PORTFOLIO-001-FIL-0066-STMT-000024"]}
-       ],
-       "has_when_other": true,
-       "end_evaluate_line": 101,
-       "outcomes": [
-         {"label": "WHEN 0", "line_range": [90, 96], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0066-STMT-000022"]},
-         {"label": "WHEN OTHER", "line_range": [98, 100], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0066-STMT-000023", "SYS-PORTFOLIO-001-FIL-0066-STMT-000024"]}
-       ],
-       "nested_depth": 1},
-      {"type": "IF", "line": 90, "statement_id": "SYS-PORTFOLIO-001-FIL-0066-STMT-000022", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0066-PAR-0004",
-       "condition_text": "WS-DB2-AREA > 0",
-       "condition_fields": ["WS-DB2-AREA"],
-       "condition_field_ids": [{"name": "WS-DB2-AREA", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0066-REC-0001", "target_kind": "record", "candidate_ids": []}],
-       "ambiguous": true,
-       "ambiguity_note": "WS-DB2-AREA is an 01 group whose only content is the copybook record SQL-STATUS-CODES (35 bytes of SQLSTATE constants); it receives SELECT COUNT(*) as a host variable and is compared with 0. The effective numeric comparison cannot be determined from the declarations.",
-       "has_else": true, "then_line_range": [91, 91], "else_line_range": [93, 95], "end_if_line": 96, "nested_depth": 2,
-       "outcomes": [
-         {"label": "THEN", "line_range": [91, 91], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0066-STMT-000033"]},
-         {"label": "ELSE", "line_range": [93, 95], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0066-STMT-000031", "SYS-PORTFOLIO-001-FIL-0066-STMT-000032"]}
-       ]}
-    ]
-  },
-  {
-    "paragraph": "P300-LOG-ACCESS",
-    "paragraph_id": "SYS-PORTFOLIO-001-FIL-0066-PAR-0006",
-    "branches": [
-      {"type": "IF", "line": 127, "statement_id": "SYS-PORTFOLIO-001-FIL-0066-STMT-000014", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0066-PAR-0006",
-       "condition_text": "SQLCODE = 0",
-       "condition_fields": ["SQLCODE"],
-       "condition_field_ids": [{"name": "SQLCODE", "qualifiers": [], "resolution": "UNRESOLVED", "target_id": null, "target_kind": null, "candidate_ids": []}],
-       "sqlcode_check": true,
-       "has_else": true, "then_line_range": [128, 128], "else_line_range": [130, 132], "end_if_line": 133, "nested_depth": 1,
-       "outcomes": [
-         {"label": "THEN", "line_range": [128, 128], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0066-STMT-000027"]},
-         {"label": "ELSE", "line_range": [130, 132], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0066-STMT-000025", "SYS-PORTFOLIO-001-FIL-0066-STMT-000026"]}
-       ]}
-    ]
-  }
+  {"paragraph": "(UNNAMED)", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0066-PAR-0001", "branches": [
+    {"type": "EVALUATE", "line": 42, "end_evaluate_line": 52, "statement_id": "SYS-PORTFOLIO-001-FIL-0066-STMT-000001", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0066-PAR-0001", "subjects": ["TRUE"], "nested_depth": 0,
+     "condition_fields": ["SEC-VALIDATE", "SEC-AUTHORIZE", "SEC-AUDIT"],
+     "condition_field_ids": [
+       {"name": "SEC-VALIDATE", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0066-FLD-000008", "target_kind": "condition", "candidate_ids": []},
+       {"name": "SEC-AUTHORIZE", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0066-FLD-000009", "target_kind": "condition", "candidate_ids": []},
+       {"name": "SEC-AUDIT", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0066-FLD-000010", "target_kind": "condition", "candidate_ids": []}],
+     "when_clauses": [
+       {"conditions": ["SEC-VALIDATE"], "condition_fields": ["SEC-VALIDATE"], "meaning": "SEC-REQUEST-TYPE = 'V'", "body_line_range": [44, 45], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0066-STMT-000018"]},
+       {"conditions": ["SEC-AUTHORIZE"], "condition_fields": ["SEC-AUTHORIZE"], "meaning": "SEC-REQUEST-TYPE = 'A'", "body_line_range": [47, 48], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0066-STMT-000017"]},
+       {"conditions": ["SEC-AUDIT"], "condition_fields": ["SEC-AUDIT"], "meaning": "SEC-REQUEST-TYPE = 'L'", "body_line_range": [50, 51], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0066-STMT-000016"]}],
+     "has_default": false}
+  ]},
+  {"paragraph": "P100-VALIDATE-USER", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0066-PAR-0002", "branches": [
+    {"type": "IF", "line": 62, "end_if_line": 74, "statement_id": "SYS-PORTFOLIO-001-FIL-0066-STMT-000004", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0066-PAR-0002", "condition_text": "SEC-RESPONSE-CODE = DFHRESP(NORMAL)", "condition_fields": ["SEC-RESPONSE-CODE"],
+     "condition_field_ids": [{"name": "SEC-RESPONSE-CODE", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0066-FLD-000014", "target_kind": "field", "candidate_ids": []}],
+     "check_kind": "CICS_RESP_CHECK", "has_else": true, "nested_depth": 0, "then_line_range": [63, 69], "else_line_range": [71, 73],
+     "outcomes": [{"label": "THEN", "line_range": [63, 69], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0066-STMT-000021"]}, {"label": "ELSE", "line_range": [71, 73], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0066-STMT-000019", "SYS-PORTFOLIO-001-FIL-0066-STMT-000020"]}]},
+    {"type": "IF", "line": 63, "end_if_line": 69, "statement_id": "SYS-PORTFOLIO-001-FIL-0066-STMT-000021", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0066-PAR-0002", "parent_statement_id": "SYS-PORTFOLIO-001-FIL-0066-STMT-000004", "condition_text": "SEC-USER-ID = WS-USER-ID", "condition_fields": ["SEC-USER-ID", "WS-USER-ID"],
+     "condition_field_ids": [
+       {"name": "SEC-USER-ID", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0066-FLD-000011", "target_kind": "field", "candidate_ids": []},
+       {"name": "WS-USER-ID", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0066-FLD-000001", "target_kind": "field", "candidate_ids": []}],
+     "has_else": true, "nested_depth": 1, "then_line_range": [64, 64], "else_line_range": [66, 68],
+     "outcomes": [{"label": "THEN", "line_range": [64, 64], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0066-STMT-000030"]}, {"label": "ELSE", "line_range": [66, 68], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0066-STMT-000028", "SYS-PORTFOLIO-001-FIL-0066-STMT-000029"]}]}
+  ]},
+  {"paragraph": "P200-CHECK-AUTH", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0066-PAR-0004", "branches": [
+    {"type": "EVALUATE", "line": 88, "end_evaluate_line": 101, "statement_id": "SYS-PORTFOLIO-001-FIL-0066-STMT-000007", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0066-PAR-0004", "subjects": ["SQLCODE"], "nested_depth": 0, "check_kind": "SQLCODE_CHECK",
+     "condition_fields": ["SQLCODE"],
+     "condition_field_ids": [{"name": "SQLCODE", "qualifiers": [], "resolution": "UNRESOLVED", "target_id": null, "target_kind": null, "candidate_ids": []}],
+     "when_clauses": [
+       {"conditions": ["0"], "condition_fields": ["SQLCODE"], "body_line_range": [90, 96], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0066-STMT-000022"]},
+       {"conditions": ["OTHER"], "condition_fields": [], "body_line_range": [98, 100], "is_default": true, "statement_ids": ["SYS-PORTFOLIO-001-FIL-0066-STMT-000023", "SYS-PORTFOLIO-001-FIL-0066-STMT-000024"]}],
+     "has_default": true},
+    {"type": "IF", "line": 90, "end_if_line": 96, "statement_id": "SYS-PORTFOLIO-001-FIL-0066-STMT-000022", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0066-PAR-0004", "parent_statement_id": "SYS-PORTFOLIO-001-FIL-0066-STMT-000007", "condition_text": "WS-DB2-AREA > 0", "condition_fields": ["WS-DB2-AREA"],
+     "condition_field_ids": [{"name": "WS-DB2-AREA", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0066-REC-0001", "target_kind": "record", "candidate_ids": []}],
+     "has_else": true, "nested_depth": 1, "review": true, "then_line_range": [91, 91], "else_line_range": [93, 95],
+     "outcomes": [{"label": "THEN", "line_range": [91, 91], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0066-STMT-000033"]}, {"label": "ELSE", "line_range": [93, 95], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0066-STMT-000031", "SYS-PORTFOLIO-001-FIL-0066-STMT-000032"]}]}
+  ]},
+  {"paragraph": "P300-LOG-ACCESS", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0066-PAR-0006", "branches": [
+    {"type": "IF", "line": 127, "end_if_line": 133, "statement_id": "SYS-PORTFOLIO-001-FIL-0066-STMT-000014", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0066-PAR-0006", "condition_text": "SQLCODE = 0", "condition_fields": ["SQLCODE"],
+     "condition_field_ids": [{"name": "SQLCODE", "qualifiers": [], "resolution": "UNRESOLVED", "target_id": null, "target_kind": null, "candidate_ids": []}],
+     "check_kind": "SQLCODE_CHECK", "has_else": true, "nested_depth": 0, "then_line_range": [128, 128], "else_line_range": [130, 132],
+     "outcomes": [{"label": "THEN", "line_range": [128, 128], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0066-STMT-000027"]}, {"label": "ELSE", "line_range": [130, 132], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0066-STMT-000025", "SYS-PORTFOLIO-001-FIL-0066-STMT-000026"]}]}
+  ]}
 ],
 "loops": [],
 "dead_code_confirmed": [],
+"dead_code_dismissed": [],
 "unresolvable_paths": [],
 "trace_issues": [
-  {"severity": "info", "type": "upstream_issue", "upstream_agent": "2_parser", "upstream_type": "unnamed_paragraph", "lines": [42, 55], "message": "Statements between PROCEDURE DIVISION USING (line 41) and the first paragraph name (line 56) recorded under paragraph (UNNAMED)."},
-  {"severity": "info", "type": "upstream_issue", "upstream_agent": "2_parser", "upstream_type": "perform_thru", "lines": [44, 47, 50], "message": "PERFORM ... THRU obscures control flow (3 occurrences)."},
-  {"severity": "info", "type": "upstream_issue", "upstream_agent": "3_data", "upstream_type": "copy_level_conflict", "line": 16, "message": "EXEC SQL INCLUDE SQLCA (line 16) sits under 01 WS-DB2-AREA and COPY ERRHND (line 27) under 01 WS-ERROR-AREA, but the copybook records SQL-STATUS-CODES and ERROR-HANDLING are themselves level 01; registered as EXPANDS_COPY from the enclosing 01 records."},
-  {"severity": "info", "type": "upstream_issue", "upstream_agent": "3_data", "upstream_type": "sqlca_structure_not_in_copybook", "line": 16, "message": "Copybook SQLCA (SYS-PORTFOLIO-001-FIL-0017) defines only SQL-STATUS-CODES; the precompiler SQLCA items (SQLCODE, SQLSTATE, ...) are not defined in the repository copybook."},
-  {"severity": "info", "type": "upstream_issue", "upstream_agent": "3_data", "upstream_type": "unresolved_copy_stub", "file_id": "SYS-PORTFOLIO-001-FIL-0017", "line": 6, "message": "Copybook SQLCA contains EXEC SQL INCLUDE SQLCA (self-include), left unresolved by Agent 3; it does not affect this program's own layout."},
-  {"severity": "warning", "type": "unstructured_flow", "lines": [44, 47, 50], "message": "Three PERFORM ... THRU statements; each range is recorded as ordered sub-steps and flagged unstructured."},
-  {"severity": "info", "type": "field_id_unresolved", "name": "SQLCODE", "lines": [88, 127], "message": "SQLCODE is not defined in the program or in copybook SQLCA (precompiler-supplied SQLCA item); resolve-field-references UNRESOLVED; target_id null."},
-  {"severity": "info", "type": "no_when_other", "line": 42, "statement_id": "SYS-PORTFOLIO-001-FIL-0066-STMT-000001", "message": "EVALUATE TRUE has no WHEN OTHER: a request type other than V/A/L performs nothing and returns with SEC-RESPONSE-CODE and SEC-ERROR-INFO unchanged."},
-  {"severity": "warning", "type": "ambiguous_host_variable", "line": 81, "statement_id": "SYS-PORTFOLIO-001-FIL-0066-STMT-000006", "message": "SELECT COUNT(*) INTO :WS-DB2-AREA uses the 01 group that holds the SQLCA copybook content as the host variable, and line 90 compares it with 0. Recorded verbatim and flagged ambiguous."},
-  {"severity": "info", "type": "unused_data", "line": 26, "message": "WS-ERROR-AREA (COPY ERRHND) is not referenced by any procedure statement."}
+  {"severity": "info", "type": "upstream_issue", "upstream_agent": "2_parser", "upstream_type": "unnamed_paragraph", "message": "Statements between PROCEDURE DIVISION and the first named paragraph recorded in paragraph '(UNNAMED)' (lines 42-55)"},
+  {"severity": "info", "type": "upstream_issue", "upstream_agent": "2_parser", "upstream_type": "perform_thru", "message": "3 PERFORM ... THRU statements obscure control flow (lines 44, 47, 50)"},
+  {"severity": "info", "type": "upstream_issue", "upstream_agent": "3_data", "upstream_type": "copy_stub_holder_from_source", "message": "SQLCA stub (line 16) and ERRHND stub (line 27) listed by Agent 2 as section-level siblings; Agent 3 assigned holders WS-DB2-AREA (REC-0001) and WS-ERROR-AREA (REC-0003) from the source"},
+  {"severity": "info", "type": "upstream_issue", "upstream_agent": "3_data", "upstream_type": "circular_copy", "message": "Copybook SQLCA contains 'EXEC SQL INCLUDE SQLCA' (self-inclusion); expansion uses the registered SQLCA records only. The registered SQLCA record (SQL-STATUS-CODES) does not define SQLCODE"},
+  {"severity": "warning", "type": "perform_thru_flagged", "statement_ids": ["SYS-PORTFOLIO-001-FIL-0066-STMT-000018", "SYS-PORTFOLIO-001-FIL-0066-STMT-000017", "SYS-PORTFOLIO-001-FIL-0066-STMT-000016"], "lines": [44, 47, 50], "message": "PERFORM ... THRU ranges are unstructured; each range is a body paragraph followed by an EXIT-only paragraph"},
+  {"severity": "info", "type": "field_id_unresolved", "name": "SQLCODE", "statement_ids": ["SYS-PORTFOLIO-001-FIL-0066-STMT-000007", "SYS-PORTFOLIO-001-FIL-0066-STMT-000014"], "message": "SQLCODE did not resolve to a registered Field ID (UNRESOLVED); it is the DB2 SQLCA return code supplied at precompile time, not defined in the registered SQLCA.cpy"},
+  {"severity": "warning", "type": "logic_review", "statement_id": "SYS-PORTFOLIO-001-FIL-0066-STMT-000006", "line": 79, "message": "SELECT COUNT(*) INTO :WS-DB2-AREA uses the 01 group that holds the SQLCA copy (35 bytes) as the host variable, and line 90 tests 'WS-DB2-AREA > 0' on that group (a group comparison is alphanumeric). The count is written over the SQL status-code constants. Recorded verbatim and flagged for SME review"},
+  {"severity": "info", "type": "evaluate_without_other", "statement_id": "SYS-PORTFOLIO-001-FIL-0066-STMT-000001", "line": 42, "message": "Dispatcher EVALUATE TRUE has no WHEN OTHER: an unrecognised SEC-REQUEST-TYPE performs nothing and SEC-RESPONSE-CODE is left unchanged"},
+  {"severity": "info", "type": "cics_no_resp", "statement_id": "SYS-PORTFOLIO-001-FIL-0066-STMT-000010", "line": 108, "message": "EXEC CICS ASSIGN in P300-LOG-ACCESS has no RESP option; its outcome is not checked in the program (default CICS condition handling applies)"}
 ],
-"program_narrative": "Program SECMGR is an online CICS security subprogram that receives a SECURITY-REQUEST-AREA (PROCEDURE DIVISION USING) and returns to CICS. The request type selects one of three services: 'V' validates the user by obtaining the CICS signed-on user ID and comparing it with SEC-USER-ID; 'A' checks authorization by counting rows in DB2 table AUTHFILE for the user, resource and access type; 'L' writes an audit row (timestamp, user, terminal, transaction, program, access type) into DB2 table AUDITLOG. Each service reports its result in SEC-RESPONSE-CODE: 0 for success, 8 for a business rejection ('User validation failed', 'Access denied') and 12 for a technical failure ('Unable to obtain user credentials', 'Authorization check failed', 'Audit logging failed'), with the text in SEC-ERROR-INFO. Any other request type does nothing. The authorization count is fetched into the group WS-DB2-AREA, whose numeric meaning is ambiguous, and SQLCODE comes from the precompiler SQLCA, which is not defined in the repository copybook.",
+"program_narrative": "Program SECMGR is an online (CICS) security service invoked with SECURITY-REQUEST-AREA that performs one of three security functions per call. For a validate request (V) it obtains the signed-on CICS user ID with EXEC CICS ASSIGN and confirms it matches SEC-USER-ID. For an authorise request (A) it counts matching rows in DB2 table AUTHFILE for the user, resource and access type and grants access when the count is above zero. For an audit request (L) it collects the user, terminal and transaction IDs from CICS and inserts an access record into DB2 table AUDITLOG. Results are returned in SEC-RESPONSE-CODE (0 success, 8 validation failed or access denied, 12 technical failure) with a message in SEC-ERROR-INFO, and the program ends with EXEC CICS RETURN. Error conditions handled: CICS ASSIGN failure (12), user mismatch (8), SQL failure on the authorisation query (12), no authorisation row (8), and audit insert failure (12); an unrecognised request type performs nothing.",
 "paragraphs": [
-  {
-    "name": "(UNNAMED)",
-    "paragraph_id": "SYS-PORTFOLIO-001-FIL-0066-PAR-0001",
-    "section": null,
-    "section_id": null,
-    "line_range": [42, 55],
-    "pseudocode": [
-      "-- Entry: caller passes security_request_area (SECURITY-REQUEST-AREA) (PROCEDURE DIVISION USING, line 41)",
-      "IF request type is validate (SEC-REQUEST-TYPE = 'V') THEN",
-      "  CALL p100-validate-user THRU p100-exit  !! PERFORM THRU",
-      "ELSE IF request type is authorize (SEC-REQUEST-TYPE = 'A') THEN",
-      "  CALL p200-check-auth THRU p200-exit  !! PERFORM THRU",
-      "ELSE IF request type is audit log (SEC-REQUEST-TYPE = 'L') THEN",
-      "  CALL p300-log-access THRU p300-exit  !! PERFORM THRU",
-      "END IF  -- no WHEN OTHER: any other request type does nothing",
-      "CICS RETURN TO caller"
-    ],
-    "pseudocode_statement_ids": [
-      [],
-      ["SYS-PORTFOLIO-001-FIL-0066-STMT-000001"],
-      ["SYS-PORTFOLIO-001-FIL-0066-STMT-000018"],
-      ["SYS-PORTFOLIO-001-FIL-0066-STMT-000001"],
-      ["SYS-PORTFOLIO-001-FIL-0066-STMT-000017"],
-      ["SYS-PORTFOLIO-001-FIL-0066-STMT-000001"],
-      ["SYS-PORTFOLIO-001-FIL-0066-STMT-000016"],
-      ["SYS-PORTFOLIO-001-FIL-0066-STMT-000001"],
-      ["SYS-PORTFOLIO-001-FIL-0066-STMT-000002"]
-    ],
-    "pseudocode_text": "-- Entry: caller passes security_request_area (SECURITY-REQUEST-AREA) (PROCEDURE DIVISION USING, line 41)\nIF request type is validate (SEC-REQUEST-TYPE = 'V') THEN\n  CALL p100-validate-user THRU p100-exit  !! PERFORM THRU\nELSE IF request type is authorize (SEC-REQUEST-TYPE = 'A') THEN\n  CALL p200-check-auth THRU p200-exit  !! PERFORM THRU\nELSE IF request type is audit log (SEC-REQUEST-TYPE = 'L') THEN\n  CALL p300-log-access THRU p300-exit  !! PERFORM THRU\nEND IF  -- no WHEN OTHER: any other request type does nothing\nCICS RETURN TO caller",
-    "statement_ids": ["SYS-PORTFOLIO-001-FIL-0066-STMT-000001", "SYS-PORTFOLIO-001-FIL-0066-STMT-000018", "SYS-PORTFOLIO-001-FIL-0066-STMT-000017", "SYS-PORTFOLIO-001-FIL-0066-STMT-000016", "SYS-PORTFOLIO-001-FIL-0066-STMT-000002"],
-    "untranslated_statement_ids": [],
-    "field_references": ["SECURITY-REQUEST-AREA", "SEC-VALIDATE", "SEC-AUTHORIZE", "SEC-AUDIT"],
-    "field_reference_ids": [
-      {"name": "SECURITY-REQUEST-AREA", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0066-REC-0004", "target_kind": "record", "candidate_ids": []},
-      {"name": "SEC-VALIDATE", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0066-FLD-000008", "target_kind": "condition", "candidate_ids": []},
-      {"name": "SEC-AUTHORIZE", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0066-FLD-000009", "target_kind": "condition", "candidate_ids": []},
-      {"name": "SEC-AUDIT", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0066-FLD-000010", "target_kind": "condition", "candidate_ids": []}
-    ],
-    "calls_made": ["P100-VALIDATE-USER", "P200-CHECK-AUTH", "P300-LOG-ACCESS"],
-    "calls_made_ids": [
-      {"name": "P100-VALIDATE-USER", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0066-PAR-0002", "section_id": null},
-      {"name": "P200-CHECK-AUTH", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0066-PAR-0004", "section_id": null},
-      {"name": "P300-LOG-ACCESS", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0066-PAR-0006", "section_id": null}
-    ],
-    "complexity_score": 4,
-    "has_unresolved_statements": false,
-    "annotations": [
-      {"line": 42, "statement_id": "SYS-PORTFOLIO-001-FIL-0066-STMT-000001", "note": "EVALUATE TRUE: the first WHEN whose 88-level condition is true runs; SEC-VALIDATE/SEC-AUTHORIZE/SEC-AUDIT test SEC-REQUEST-TYPE for 'V'/'A'/'L'."},
-      {"line": 44, "note": "PERFORM ... THRU (unstructured): THRU ends P100-EXIT (PAR-0003), P200-EXIT (PAR-0005), P300-EXIT (PAR-0007)."}
-    ]
-  },
-  {
-    "name": "P100-VALIDATE-USER",
-    "paragraph_id": "SYS-PORTFOLIO-001-FIL-0066-PAR-0002",
-    "section": null,
-    "section_id": null,
-    "line_range": [56, 74],
-    "pseudocode": [
-      "CICS ASSIGN USERID → ws_user_id  -- obtain the signed-on CICS user ID",
-      "  RESPONSE CODE → sec_response_code",
-      "IF sec_response_code = NORMAL THEN  -- DFHRESP(NORMAL)",
-      "  IF sec_user_id = ws_user_id THEN  -- requested user matches the signed-on user",
-      "    SET sec_response_code = 0",
-      "  ELSE",
-      "    SET sec_error_info = 'User validation failed'",
-      "    SET sec_response_code = 8",
-      "  END IF",
-      "ELSE",
-      "  SET sec_error_info = 'Unable to obtain user credentials'",
-      "  SET sec_response_code = 12",
-      "END IF"
-    ],
-    "pseudocode_statement_ids": [
-      ["SYS-PORTFOLIO-001-FIL-0066-STMT-000003"],
-      ["SYS-PORTFOLIO-001-FIL-0066-STMT-000003"],
-      ["SYS-PORTFOLIO-001-FIL-0066-STMT-000004"],
-      ["SYS-PORTFOLIO-001-FIL-0066-STMT-000021"],
-      ["SYS-PORTFOLIO-001-FIL-0066-STMT-000030"],
-      ["SYS-PORTFOLIO-001-FIL-0066-STMT-000021"],
-      ["SYS-PORTFOLIO-001-FIL-0066-STMT-000028"],
-      ["SYS-PORTFOLIO-001-FIL-0066-STMT-000029"],
-      ["SYS-PORTFOLIO-001-FIL-0066-STMT-000021"],
-      ["SYS-PORTFOLIO-001-FIL-0066-STMT-000004"],
-      ["SYS-PORTFOLIO-001-FIL-0066-STMT-000019"],
-      ["SYS-PORTFOLIO-001-FIL-0066-STMT-000020"],
-      ["SYS-PORTFOLIO-001-FIL-0066-STMT-000004"]
-    ],
-    "pseudocode_text": "CICS ASSIGN USERID → ws_user_id  -- obtain the signed-on CICS user ID\n  RESPONSE CODE → sec_response_code\nIF sec_response_code = NORMAL THEN  -- DFHRESP(NORMAL)\n  IF sec_user_id = ws_user_id THEN  -- requested user matches the signed-on user\n    SET sec_response_code = 0\n  ELSE\n    SET sec_error_info = 'User validation failed'\n    SET sec_response_code = 8\n  END IF\nELSE\n  SET sec_error_info = 'Unable to obtain user credentials'\n  SET sec_response_code = 12\nEND IF",
-    "statement_ids": ["SYS-PORTFOLIO-001-FIL-0066-STMT-000003", "SYS-PORTFOLIO-001-FIL-0066-STMT-000004", "SYS-PORTFOLIO-001-FIL-0066-STMT-000021", "SYS-PORTFOLIO-001-FIL-0066-STMT-000030", "SYS-PORTFOLIO-001-FIL-0066-STMT-000028", "SYS-PORTFOLIO-001-FIL-0066-STMT-000029", "SYS-PORTFOLIO-001-FIL-0066-STMT-000019", "SYS-PORTFOLIO-001-FIL-0066-STMT-000020"],
-    "untranslated_statement_ids": [],
-    "field_references": ["WS-USER-ID", "SEC-RESPONSE-CODE", "SEC-USER-ID", "SEC-ERROR-INFO"],
-    "field_reference_ids": [
-      {"name": "WS-USER-ID", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0066-FLD-000001", "target_kind": "field", "candidate_ids": []},
-      {"name": "SEC-RESPONSE-CODE", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0066-FLD-000014", "target_kind": "field", "candidate_ids": []},
-      {"name": "SEC-USER-ID", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0066-FLD-000011", "target_kind": "field", "candidate_ids": []},
-      {"name": "SEC-ERROR-INFO", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0066-FLD-000015", "target_kind": "field", "candidate_ids": []}
-    ],
-    "calls_made": [],
-    "calls_made_ids": [],
-    "complexity_score": 5,
-    "has_unresolved_statements": false,
-    "annotations": [
-      {"line": 57, "statement_id": "SYS-PORTFOLIO-001-FIL-0066-STMT-000003", "note": "CICS ASSIGN USERID returns the user ID of the signed-on terminal user; RESP is stored directly in the caller's SEC-RESPONSE-CODE and then overwritten with 0, 8 or 12."}
-    ]
-  },
-  {
-    "name": "P100-EXIT",
-    "paragraph_id": "SYS-PORTFOLIO-001-FIL-0066-PAR-0003",
-    "section": null,
-    "section_id": null,
-    "line_range": [75, 77],
-    "pseudocode": ["EXIT  -- end of the PERFORM THRU range started at line 44; no-op"],
-    "pseudocode_statement_ids": [["SYS-PORTFOLIO-001-FIL-0066-STMT-000005"]],
-    "pseudocode_text": "EXIT  -- end of the PERFORM THRU range started at line 44; no-op",
-    "statement_ids": ["SYS-PORTFOLIO-001-FIL-0066-STMT-000005"],
-    "untranslated_statement_ids": [],
-    "field_references": [],
-    "field_reference_ids": [],
-    "calls_made": [],
-    "calls_made_ids": [],
-    "complexity_score": 1,
-    "has_unresolved_statements": false,
-    "annotations": []
-  },
-  {
-    "name": "P200-CHECK-AUTH",
-    "paragraph_id": "SYS-PORTFOLIO-001-FIL-0066-PAR-0004",
-    "section": null,
-    "section_id": null,
-    "line_range": [78, 101],
-    "pseudocode": [
-      "SQL SELECT COUNT(*)",
-      "  FROM: AUTHFILE table",
-      "  WHERE: USER_ID = sec_user_id AND RESOURCE = sec_resource_name AND ACCESS_TYPE = sec_access_type",
-      "  INTO: ws_db2_area  -- !! group item used as host variable (see annotations)",
-      "CHECK SQLCODE",
-      "IF sqlcode = 0 THEN",
-      "  IF ws_db2_area > 0 THEN  -- at least one matching authorization row",
-      "    SET sec_response_code = 0",
-      "  ELSE",
-      "    SET sec_error_info = 'Access denied'",
-      "    SET sec_response_code = 8",
-      "  END IF",
-      "ELSE",
-      "  SET sec_error_info = 'Authorization check failed'",
-      "  SET sec_response_code = 12",
-      "END IF"
-    ],
-    "pseudocode_statement_ids": [
-      ["SYS-PORTFOLIO-001-FIL-0066-STMT-000006"],
-      ["SYS-PORTFOLIO-001-FIL-0066-STMT-000006"],
-      ["SYS-PORTFOLIO-001-FIL-0066-STMT-000006"],
-      ["SYS-PORTFOLIO-001-FIL-0066-STMT-000006"],
-      ["SYS-PORTFOLIO-001-FIL-0066-STMT-000007"],
-      ["SYS-PORTFOLIO-001-FIL-0066-STMT-000007"],
-      ["SYS-PORTFOLIO-001-FIL-0066-STMT-000022"],
-      ["SYS-PORTFOLIO-001-FIL-0066-STMT-000033"],
-      ["SYS-PORTFOLIO-001-FIL-0066-STMT-000022"],
-      ["SYS-PORTFOLIO-001-FIL-0066-STMT-000031"],
-      ["SYS-PORTFOLIO-001-FIL-0066-STMT-000032"],
-      ["SYS-PORTFOLIO-001-FIL-0066-STMT-000022"],
-      ["SYS-PORTFOLIO-001-FIL-0066-STMT-000007"],
-      ["SYS-PORTFOLIO-001-FIL-0066-STMT-000023"],
-      ["SYS-PORTFOLIO-001-FIL-0066-STMT-000024"],
-      ["SYS-PORTFOLIO-001-FIL-0066-STMT-000007"]
-    ],
-    "pseudocode_text": "SQL SELECT COUNT(*)\n  FROM: AUTHFILE table\n  WHERE: USER_ID = sec_user_id AND RESOURCE = sec_resource_name AND ACCESS_TYPE = sec_access_type\n  INTO: ws_db2_area  -- !! group item used as host variable (see annotations)\nCHECK SQLCODE\nIF sqlcode = 0 THEN\n  IF ws_db2_area > 0 THEN  -- at least one matching authorization row\n    SET sec_response_code = 0\n  ELSE\n    SET sec_error_info = 'Access denied'\n    SET sec_response_code = 8\n  END IF\nELSE\n  SET sec_error_info = 'Authorization check failed'\n  SET sec_response_code = 12\nEND IF",
-    "statement_ids": ["SYS-PORTFOLIO-001-FIL-0066-STMT-000006", "SYS-PORTFOLIO-001-FIL-0066-STMT-000007", "SYS-PORTFOLIO-001-FIL-0066-STMT-000022", "SYS-PORTFOLIO-001-FIL-0066-STMT-000033", "SYS-PORTFOLIO-001-FIL-0066-STMT-000031", "SYS-PORTFOLIO-001-FIL-0066-STMT-000032", "SYS-PORTFOLIO-001-FIL-0066-STMT-000023", "SYS-PORTFOLIO-001-FIL-0066-STMT-000024"],
-    "untranslated_statement_ids": [],
-    "field_references": ["WS-DB2-AREA", "SEC-USER-ID", "SEC-RESOURCE-NAME", "SEC-ACCESS-TYPE", "SQLCODE", "SEC-RESPONSE-CODE", "SEC-ERROR-INFO"],
-    "field_reference_ids": [
-      {"name": "WS-DB2-AREA", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0066-REC-0001", "target_kind": "record", "candidate_ids": []},
-      {"name": "SEC-USER-ID", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0066-FLD-000011", "target_kind": "field", "candidate_ids": []},
-      {"name": "SEC-RESOURCE-NAME", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0066-FLD-000012", "target_kind": "field", "candidate_ids": []},
-      {"name": "SEC-ACCESS-TYPE", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0066-FLD-000013", "target_kind": "field", "candidate_ids": []},
-      {"name": "SQLCODE", "qualifiers": [], "resolution": "UNRESOLVED", "target_id": null, "target_kind": null, "candidate_ids": []},
-      {"name": "SEC-RESPONSE-CODE", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0066-FLD-000014", "target_kind": "field", "candidate_ids": []},
-      {"name": "SEC-ERROR-INFO", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0066-FLD-000015", "target_kind": "field", "candidate_ids": []}
-    ],
-    "calls_made": [],
-    "calls_made_ids": [],
-    "complexity_score": 6,
-    "has_unresolved_statements": false,
-    "annotations": [
-      {"line": 79, "statement_id": "SYS-PORTFOLIO-001-FIL-0066-STMT-000006", "note": "Host variable :WS-DB2-AREA is the 01 group holding the SQLCA copybook content (SQL-STATUS-CODES); its use as a COUNT(*) target and in 'WS-DB2-AREA > 0' is recorded verbatim.", "ambiguous": true},
-      {"line": 88, "statement_id": "SYS-PORTFOLIO-001-FIL-0066-STMT-000007", "note": "EVALUATE SQLCODE: WHEN 0 = query succeeded; WHEN OTHER = any SQL error or warning (including +100 not found)."}
-    ]
-  },
-  {
-    "name": "P200-EXIT",
-    "paragraph_id": "SYS-PORTFOLIO-001-FIL-0066-PAR-0005",
-    "section": null,
-    "section_id": null,
-    "line_range": [102, 104],
-    "pseudocode": ["EXIT  -- end of the PERFORM THRU range started at line 47; no-op"],
-    "pseudocode_statement_ids": [["SYS-PORTFOLIO-001-FIL-0066-STMT-000008"]],
-    "pseudocode_text": "EXIT  -- end of the PERFORM THRU range started at line 47; no-op",
-    "statement_ids": ["SYS-PORTFOLIO-001-FIL-0066-STMT-000008"],
-    "untranslated_statement_ids": [],
-    "field_references": [],
-    "field_reference_ids": [],
-    "calls_made": [],
-    "calls_made_ids": [],
-    "complexity_score": 1,
-    "has_unresolved_statements": false,
-    "annotations": []
-  },
-  {
-    "name": "P300-LOG-ACCESS",
-    "paragraph_id": "SYS-PORTFOLIO-001-FIL-0066-PAR-0006",
-    "section": null,
-    "section_id": null,
-    "line_range": [105, 133],
-    "pseudocode": [
-      "SET ws_timestamp = CURRENT_DATE_TIME()  -- FUNCTION CURRENT-DATE",
-      "CICS ASSIGN USERID → ws_user_id, TERMID → ws_terminal_id, TRANSID → ws_transaction_id  -- no RESP option",
-      "SET ws_program_name = sec_resource_name",
-      "SET ws_access_type = sec_access_type",
-      "SQL INSERT new row INTO AUDITLOG table",
-      "  (TIMESTAMP, USER_ID, TERMINAL_ID, TRANS_ID, PROGRAM, ACCESS_TYPE) = (ws_timestamp, ws_user_id, ws_terminal_id, ws_transaction_id, ws_program_name, ws_access_type)",
-      "CHECK SQLCODE",
-      "IF sqlcode = 0 THEN",
-      "  SET sec_response_code = 0",
-      "ELSE",
-      "  SET sec_error_info = 'Audit logging failed'",
-      "  SET sec_response_code = 12",
-      "END IF"
-    ],
-    "pseudocode_statement_ids": [
-      ["SYS-PORTFOLIO-001-FIL-0066-STMT-000009"],
-      ["SYS-PORTFOLIO-001-FIL-0066-STMT-000010"],
-      ["SYS-PORTFOLIO-001-FIL-0066-STMT-000011"],
-      ["SYS-PORTFOLIO-001-FIL-0066-STMT-000012"],
-      ["SYS-PORTFOLIO-001-FIL-0066-STMT-000013"],
-      ["SYS-PORTFOLIO-001-FIL-0066-STMT-000013"],
-      ["SYS-PORTFOLIO-001-FIL-0066-STMT-000014"],
-      ["SYS-PORTFOLIO-001-FIL-0066-STMT-000014"],
-      ["SYS-PORTFOLIO-001-FIL-0066-STMT-000027"],
-      ["SYS-PORTFOLIO-001-FIL-0066-STMT-000014"],
-      ["SYS-PORTFOLIO-001-FIL-0066-STMT-000025"],
-      ["SYS-PORTFOLIO-001-FIL-0066-STMT-000026"],
-      ["SYS-PORTFOLIO-001-FIL-0066-STMT-000014"]
-    ],
-    "pseudocode_text": "SET ws_timestamp = CURRENT_DATE_TIME()  -- FUNCTION CURRENT-DATE\nCICS ASSIGN USERID → ws_user_id, TERMID → ws_terminal_id, TRANSID → ws_transaction_id  -- no RESP option\nSET ws_program_name = sec_resource_name\nSET ws_access_type = sec_access_type\nSQL INSERT new row INTO AUDITLOG table\n  (TIMESTAMP, USER_ID, TERMINAL_ID, TRANS_ID, PROGRAM, ACCESS_TYPE) = (ws_timestamp, ws_user_id, ws_terminal_id, ws_transaction_id, ws_program_name, ws_access_type)\nCHECK SQLCODE\nIF sqlcode = 0 THEN\n  SET sec_response_code = 0\nELSE\n  SET sec_error_info = 'Audit logging failed'\n  SET sec_response_code = 12\nEND IF",
-    "statement_ids": ["SYS-PORTFOLIO-001-FIL-0066-STMT-000009", "SYS-PORTFOLIO-001-FIL-0066-STMT-000010", "SYS-PORTFOLIO-001-FIL-0066-STMT-000011", "SYS-PORTFOLIO-001-FIL-0066-STMT-000012", "SYS-PORTFOLIO-001-FIL-0066-STMT-000013", "SYS-PORTFOLIO-001-FIL-0066-STMT-000014", "SYS-PORTFOLIO-001-FIL-0066-STMT-000027", "SYS-PORTFOLIO-001-FIL-0066-STMT-000025", "SYS-PORTFOLIO-001-FIL-0066-STMT-000026"],
-    "untranslated_statement_ids": [],
-    "field_references": ["WS-TIMESTAMP", "WS-USER-ID", "WS-TERMINAL-ID", "WS-TRANSACTION-ID", "SEC-RESOURCE-NAME", "WS-PROGRAM-NAME", "SEC-ACCESS-TYPE", "WS-ACCESS-TYPE", "SQLCODE", "SEC-RESPONSE-CODE", "SEC-ERROR-INFO"],
-    "field_reference_ids": [
-      {"name": "WS-TIMESTAMP", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0066-FLD-000006", "target_kind": "field", "candidate_ids": []},
-      {"name": "WS-USER-ID", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0066-FLD-000001", "target_kind": "field", "candidate_ids": []},
-      {"name": "WS-TERMINAL-ID", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0066-FLD-000002", "target_kind": "field", "candidate_ids": []},
-      {"name": "WS-TRANSACTION-ID", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0066-FLD-000003", "target_kind": "field", "candidate_ids": []},
-      {"name": "SEC-RESOURCE-NAME", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0066-FLD-000012", "target_kind": "field", "candidate_ids": []},
-      {"name": "WS-PROGRAM-NAME", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0066-FLD-000004", "target_kind": "field", "candidate_ids": []},
-      {"name": "SEC-ACCESS-TYPE", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0066-FLD-000013", "target_kind": "field", "candidate_ids": []},
-      {"name": "WS-ACCESS-TYPE", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0066-FLD-000005", "target_kind": "field", "candidate_ids": []},
-      {"name": "SQLCODE", "qualifiers": [], "resolution": "UNRESOLVED", "target_id": null, "target_kind": null, "candidate_ids": []},
-      {"name": "SEC-RESPONSE-CODE", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0066-FLD-000014", "target_kind": "field", "candidate_ids": []},
-      {"name": "SEC-ERROR-INFO", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0066-FLD-000015", "target_kind": "field", "candidate_ids": []}
-    ],
-    "calls_made": [],
-    "calls_made_ids": [],
-    "complexity_score": 3,
-    "has_unresolved_statements": false,
-    "annotations": [
-      {"line": 106, "statement_id": "SYS-PORTFOLIO-001-FIL-0066-STMT-000009", "note": "FUNCTION CURRENT-DATE returns a 21-character date/time string; WS-TIMESTAMP is PIC X(26), so the value is left-justified and space-padded."},
-      {"line": 114, "statement_id": "SYS-PORTFOLIO-001-FIL-0066-STMT-000011", "note": "The resource name requested by the caller is logged in the PROGRAM column."}
-    ]
-  },
-  {
-    "name": "P300-EXIT",
-    "paragraph_id": "SYS-PORTFOLIO-001-FIL-0066-PAR-0007",
-    "section": null,
-    "section_id": null,
-    "line_range": [134, 135],
-    "pseudocode": ["EXIT  -- end of the PERFORM THRU range started at line 50; no-op"],
-    "pseudocode_statement_ids": [["SYS-PORTFOLIO-001-FIL-0066-STMT-000015"]],
-    "pseudocode_text": "EXIT  -- end of the PERFORM THRU range started at line 50; no-op",
-    "statement_ids": ["SYS-PORTFOLIO-001-FIL-0066-STMT-000015"],
-    "untranslated_statement_ids": [],
-    "field_references": [],
-    "field_reference_ids": [],
-    "calls_made": [],
-    "calls_made_ids": [],
-    "complexity_score": 1,
-    "has_unresolved_statements": false,
-    "annotations": []
-  }
+  {"name": "(UNNAMED)", "section": null, "paragraph_id": "SYS-PORTFOLIO-001-FIL-0066-PAR-0001", "section_id": null, "line_range": [42, 55],
+   "statement_ids": ["SYS-PORTFOLIO-001-FIL-0066-STMT-000001", "SYS-PORTFOLIO-001-FIL-0066-STMT-000018", "SYS-PORTFOLIO-001-FIL-0066-STMT-000017", "SYS-PORTFOLIO-001-FIL-0066-STMT-000016", "SYS-PORTFOLIO-001-FIL-0066-STMT-000002"],
+   "pseudocode": [
+     "-- Entry point: dispatch on the security request type supplied in SECURITY-REQUEST-AREA",
+     "IF request is Validate user (SEC-VALIDATE: SEC-REQUEST-TYPE = 'V') THEN",
+     "  CALL P100-validate-user THRU P100-exit  !! PERFORM THRU: runs paragraph range P100-VALIDATE-USER .. P100-EXIT",
+     "ELSE IF request is Authorise (SEC-AUTHORIZE: SEC-REQUEST-TYPE = 'A') THEN",
+     "  CALL P200-check-auth THRU P200-exit  !! PERFORM THRU: runs paragraph range P200-CHECK-AUTH .. P200-EXIT",
+     "ELSE IF request is Audit log (SEC-AUDIT: SEC-REQUEST-TYPE = 'L') THEN",
+     "  CALL P300-log-access THRU P300-exit  !! PERFORM THRU: runs paragraph range P300-LOG-ACCESS .. P300-EXIT",
+     "END IF  -- no WHEN OTHER: any other request type performs nothing",
+     "CICS RETURN TO caller  -- EXEC CICS RETURN"
+   ],
+   "pseudocode_statement_ids": [[], ["SYS-PORTFOLIO-001-FIL-0066-STMT-000001"], ["SYS-PORTFOLIO-001-FIL-0066-STMT-000018"], ["SYS-PORTFOLIO-001-FIL-0066-STMT-000001"], ["SYS-PORTFOLIO-001-FIL-0066-STMT-000017"], ["SYS-PORTFOLIO-001-FIL-0066-STMT-000001"], ["SYS-PORTFOLIO-001-FIL-0066-STMT-000016"], ["SYS-PORTFOLIO-001-FIL-0066-STMT-000001"], ["SYS-PORTFOLIO-001-FIL-0066-STMT-000002"]],
+   "pseudocode_text": "-- Entry point: dispatch on the security request type\nIF request is Validate user (SEC-VALIDATE) THEN\n  CALL P100-validate-user THRU P100-exit  !! PERFORM THRU\nELSE IF request is Authorise (SEC-AUTHORIZE) THEN\n  CALL P200-check-auth THRU P200-exit  !! PERFORM THRU\nELSE IF request is Audit log (SEC-AUDIT) THEN\n  CALL P300-log-access THRU P300-exit  !! PERFORM THRU\nEND IF\nCICS RETURN TO caller",
+   "untranslated_statement_ids": [],
+   "field_references": ["SEC-VALIDATE", "SEC-AUTHORIZE", "SEC-AUDIT"],
+   "field_reference_ids": [
+     {"name": "SEC-VALIDATE", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0066-FLD-000008", "target_kind": "condition", "candidate_ids": []},
+     {"name": "SEC-AUTHORIZE", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0066-FLD-000009", "target_kind": "condition", "candidate_ids": []},
+     {"name": "SEC-AUDIT", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0066-FLD-000010", "target_kind": "condition", "candidate_ids": []}],
+   "calls_made": ["P100-VALIDATE-USER", "P200-CHECK-AUTH", "P300-LOG-ACCESS"],
+   "calls_made_ids": [
+     {"name": "P100-VALIDATE-USER", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0066-PAR-0002", "section_id": null, "thru_end": "P100-EXIT", "thru_end_paragraph_id": "SYS-PORTFOLIO-001-FIL-0066-PAR-0003"},
+     {"name": "P200-CHECK-AUTH", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0066-PAR-0004", "section_id": null, "thru_end": "P200-EXIT", "thru_end_paragraph_id": "SYS-PORTFOLIO-001-FIL-0066-PAR-0005"},
+     {"name": "P300-LOG-ACCESS", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0066-PAR-0006", "section_id": null, "thru_end": "P300-EXIT", "thru_end_paragraph_id": "SYS-PORTFOLIO-001-FIL-0066-PAR-0007"}],
+   "complexity_score": 4, "has_unresolved_statements": false,
+   "annotations": [{"line": 44, "statement_id": "SYS-PORTFOLIO-001-FIL-0066-STMT-000018", "note": "PERFORM THRU flagged (unstructured); lines 47 and 50 use the same pattern"}, {"line": 54, "statement_id": "SYS-PORTFOLIO-001-FIL-0066-STMT-000002", "note": "EXEC CICS RETURN without TRANSID: returns control to the invoking program or to CICS"}]},
+  {"name": "P100-VALIDATE-USER", "section": null, "paragraph_id": "SYS-PORTFOLIO-001-FIL-0066-PAR-0002", "section_id": null, "line_range": [56, 74],
+   "statement_ids": ["SYS-PORTFOLIO-001-FIL-0066-STMT-000003", "SYS-PORTFOLIO-001-FIL-0066-STMT-000004", "SYS-PORTFOLIO-001-FIL-0066-STMT-000021", "SYS-PORTFOLIO-001-FIL-0066-STMT-000030", "SYS-PORTFOLIO-001-FIL-0066-STMT-000028", "SYS-PORTFOLIO-001-FIL-0066-STMT-000029", "SYS-PORTFOLIO-001-FIL-0066-STMT-000019", "SYS-PORTFOLIO-001-FIL-0066-STMT-000020"],
+   "pseudocode": [
+     "-- Confirm that the requesting user is the user signed on to CICS",
+     "CICS ASSIGN: get signed-on user ID INTO ws_user_id (WS-USER-ID)",
+     "  RESPONSE CODE -> response_code (SEC-RESPONSE-CODE)",
+     "IF response_code = NORMAL (DFHRESP(NORMAL)) THEN",
+     "  IF requested user (SEC-USER-ID) = signed-on user (WS-USER-ID) THEN",
+     "    SET response_code (SEC-RESPONSE-CODE) = 0  -- user validated",
+     "  ELSE",
+     "    SET error_info (SEC-ERROR-INFO) = 'User validation failed'",
+     "    SET response_code (SEC-RESPONSE-CODE) = 8",
+     "  END IF",
+     "ELSE",
+     "  SET error_info (SEC-ERROR-INFO) = 'Unable to obtain user credentials'",
+     "  SET response_code (SEC-RESPONSE-CODE) = 12",
+     "END IF"
+   ],
+   "pseudocode_statement_ids": [[], ["SYS-PORTFOLIO-001-FIL-0066-STMT-000003"], ["SYS-PORTFOLIO-001-FIL-0066-STMT-000003"], ["SYS-PORTFOLIO-001-FIL-0066-STMT-000004"], ["SYS-PORTFOLIO-001-FIL-0066-STMT-000021"], ["SYS-PORTFOLIO-001-FIL-0066-STMT-000030"], ["SYS-PORTFOLIO-001-FIL-0066-STMT-000021"], ["SYS-PORTFOLIO-001-FIL-0066-STMT-000028"], ["SYS-PORTFOLIO-001-FIL-0066-STMT-000029"], ["SYS-PORTFOLIO-001-FIL-0066-STMT-000021"], ["SYS-PORTFOLIO-001-FIL-0066-STMT-000004"], ["SYS-PORTFOLIO-001-FIL-0066-STMT-000019"], ["SYS-PORTFOLIO-001-FIL-0066-STMT-000020"], ["SYS-PORTFOLIO-001-FIL-0066-STMT-000004"]],
+   "pseudocode_text": "-- Confirm that the requesting user is the user signed on to CICS\nCICS ASSIGN: get signed-on user ID INTO WS-USER-ID\n  RESPONSE CODE -> SEC-RESPONSE-CODE\nIF SEC-RESPONSE-CODE = NORMAL THEN\n  IF SEC-USER-ID = WS-USER-ID THEN\n    SET SEC-RESPONSE-CODE = 0\n  ELSE\n    SET SEC-ERROR-INFO = 'User validation failed'\n    SET SEC-RESPONSE-CODE = 8\n  END IF\nELSE\n  SET SEC-ERROR-INFO = 'Unable to obtain user credentials'\n  SET SEC-RESPONSE-CODE = 12\nEND IF",
+   "untranslated_statement_ids": [],
+   "field_references": ["WS-USER-ID", "SEC-RESPONSE-CODE", "SEC-USER-ID", "SEC-ERROR-INFO"],
+   "field_reference_ids": [
+     {"name": "WS-USER-ID", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0066-FLD-000001", "target_kind": "field", "candidate_ids": []},
+     {"name": "SEC-RESPONSE-CODE", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0066-FLD-000014", "target_kind": "field", "candidate_ids": []},
+     {"name": "SEC-USER-ID", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0066-FLD-000011", "target_kind": "field", "candidate_ids": []},
+     {"name": "SEC-ERROR-INFO", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0066-FLD-000015", "target_kind": "field", "candidate_ids": []}],
+   "calls_made": [], "calls_made_ids": [],
+   "complexity_score": 4, "has_unresolved_statements": false,
+   "annotations": [{"line": 57, "statement_id": "SYS-PORTFOLIO-001-FIL-0066-STMT-000003", "note": "CICS RESP value is written into the caller's SEC-RESPONSE-CODE and then overwritten by the program's own 0 / 8 / 12 result"}]},
+  {"name": "P100-EXIT", "section": null, "paragraph_id": "SYS-PORTFOLIO-001-FIL-0066-PAR-0003", "section_id": null, "line_range": [75, 77],
+   "statement_ids": ["SYS-PORTFOLIO-001-FIL-0066-STMT-000005"],
+   "pseudocode": ["EXIT paragraph  -- end point of the PERFORM P100-VALIDATE-USER THRU P100-EXIT range (no-op)"],
+   "pseudocode_statement_ids": [["SYS-PORTFOLIO-001-FIL-0066-STMT-000005"]],
+   "pseudocode_text": "EXIT paragraph  -- end point of the PERFORM THRU range (no-op)",
+   "untranslated_statement_ids": [], "field_references": [], "field_reference_ids": [], "calls_made": [], "calls_made_ids": [],
+   "complexity_score": 1, "has_unresolved_statements": false, "annotations": []},
+  {"name": "P200-CHECK-AUTH", "section": null, "paragraph_id": "SYS-PORTFOLIO-001-FIL-0066-PAR-0004", "section_id": null, "line_range": [78, 101],
+   "statement_ids": ["SYS-PORTFOLIO-001-FIL-0066-STMT-000006", "SYS-PORTFOLIO-001-FIL-0066-STMT-000007", "SYS-PORTFOLIO-001-FIL-0066-STMT-000022", "SYS-PORTFOLIO-001-FIL-0066-STMT-000033", "SYS-PORTFOLIO-001-FIL-0066-STMT-000031", "SYS-PORTFOLIO-001-FIL-0066-STMT-000032", "SYS-PORTFOLIO-001-FIL-0066-STMT-000023", "SYS-PORTFOLIO-001-FIL-0066-STMT-000024"],
+   "pseudocode": [
+     "-- Check DB2 authorisation table for the user / resource / access type",
+     "SQL SELECT COUNT(*)",
+     "  FROM: AUTHFILE table",
+     "  WHERE: USER_ID = requested user (SEC-USER-ID) AND RESOURCE = resource name (SEC-RESOURCE-NAME) AND ACCESS_TYPE = access type (SEC-ACCESS-TYPE)",
+     "  INTO: WS-DB2-AREA  !! REVIEW: host variable is the 01 group holding the SQLCA copy",
+     "CHECK SQLCODE for errors",
+     "SELECT CASE SQLCODE",
+     "  WHEN 0:",
+     "    IF authorisation count (WS-DB2-AREA) > 0 THEN",
+     "      SET response_code (SEC-RESPONSE-CODE) = 0  -- access granted",
+     "    ELSE",
+     "      SET error_info (SEC-ERROR-INFO) = 'Access denied'",
+     "      SET response_code (SEC-RESPONSE-CODE) = 8",
+     "    END IF",
+     "  ELSE:",
+     "    SET error_info (SEC-ERROR-INFO) = 'Authorization check failed'",
+     "    SET response_code (SEC-RESPONSE-CODE) = 12",
+     "END SELECT"
+   ],
+   "pseudocode_statement_ids": [[], ["SYS-PORTFOLIO-001-FIL-0066-STMT-000006"], ["SYS-PORTFOLIO-001-FIL-0066-STMT-000006"], ["SYS-PORTFOLIO-001-FIL-0066-STMT-000006"], ["SYS-PORTFOLIO-001-FIL-0066-STMT-000006"], ["SYS-PORTFOLIO-001-FIL-0066-STMT-000007"], ["SYS-PORTFOLIO-001-FIL-0066-STMT-000007"], ["SYS-PORTFOLIO-001-FIL-0066-STMT-000007"], ["SYS-PORTFOLIO-001-FIL-0066-STMT-000022"], ["SYS-PORTFOLIO-001-FIL-0066-STMT-000033"], ["SYS-PORTFOLIO-001-FIL-0066-STMT-000022"], ["SYS-PORTFOLIO-001-FIL-0066-STMT-000031"], ["SYS-PORTFOLIO-001-FIL-0066-STMT-000032"], ["SYS-PORTFOLIO-001-FIL-0066-STMT-000022"], ["SYS-PORTFOLIO-001-FIL-0066-STMT-000007"], ["SYS-PORTFOLIO-001-FIL-0066-STMT-000023"], ["SYS-PORTFOLIO-001-FIL-0066-STMT-000024"], ["SYS-PORTFOLIO-001-FIL-0066-STMT-000007"]],
+   "pseudocode_text": "-- Check DB2 authorisation table for the user / resource / access type\nSQL SELECT COUNT(*) FROM AUTHFILE WHERE USER_ID = SEC-USER-ID AND RESOURCE = SEC-RESOURCE-NAME AND ACCESS_TYPE = SEC-ACCESS-TYPE INTO WS-DB2-AREA\nCHECK SQLCODE for errors\nSELECT CASE SQLCODE\n  WHEN 0:\n    IF WS-DB2-AREA > 0 THEN\n      SET SEC-RESPONSE-CODE = 0\n    ELSE\n      SET SEC-ERROR-INFO = 'Access denied'\n      SET SEC-RESPONSE-CODE = 8\n    END IF\n  ELSE:\n    SET SEC-ERROR-INFO = 'Authorization check failed'\n    SET SEC-RESPONSE-CODE = 12\nEND SELECT",
+   "untranslated_statement_ids": [],
+   "field_references": ["WS-DB2-AREA", "SEC-USER-ID", "SEC-RESOURCE-NAME", "SEC-ACCESS-TYPE", "SQLCODE", "SEC-RESPONSE-CODE", "SEC-ERROR-INFO"],
+   "field_reference_ids": [
+     {"name": "WS-DB2-AREA", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0066-REC-0001", "target_kind": "record", "candidate_ids": []},
+     {"name": "SEC-USER-ID", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0066-FLD-000011", "target_kind": "field", "candidate_ids": []},
+     {"name": "SEC-RESOURCE-NAME", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0066-FLD-000012", "target_kind": "field", "candidate_ids": []},
+     {"name": "SEC-ACCESS-TYPE", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0066-FLD-000013", "target_kind": "field", "candidate_ids": []},
+     {"name": "SQLCODE", "qualifiers": [], "resolution": "UNRESOLVED", "target_id": null, "target_kind": null, "candidate_ids": []},
+     {"name": "SEC-RESPONSE-CODE", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0066-FLD-000014", "target_kind": "field", "candidate_ids": []},
+     {"name": "SEC-ERROR-INFO", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0066-FLD-000015", "target_kind": "field", "candidate_ids": []}],
+   "calls_made": [], "calls_made_ids": [],
+   "complexity_score": 5, "has_unresolved_statements": false,
+   "annotations": [{"line": 79, "statement_id": "SYS-PORTFOLIO-001-FIL-0066-STMT-000006", "note": "!! REVIEW: COUNT(*) is read into the WS-DB2-AREA group (which holds the SQLCA copy) and tested with 'WS-DB2-AREA > 0' at line 90 (see trace_issues)"}]},
+  {"name": "P200-EXIT", "section": null, "paragraph_id": "SYS-PORTFOLIO-001-FIL-0066-PAR-0005", "section_id": null, "line_range": [102, 104],
+   "statement_ids": ["SYS-PORTFOLIO-001-FIL-0066-STMT-000008"],
+   "pseudocode": ["EXIT paragraph  -- end point of the PERFORM P200-CHECK-AUTH THRU P200-EXIT range (no-op)"],
+   "pseudocode_statement_ids": [["SYS-PORTFOLIO-001-FIL-0066-STMT-000008"]],
+   "pseudocode_text": "EXIT paragraph  -- end point of the PERFORM THRU range (no-op)",
+   "untranslated_statement_ids": [], "field_references": [], "field_reference_ids": [], "calls_made": [], "calls_made_ids": [],
+   "complexity_score": 1, "has_unresolved_statements": false, "annotations": []},
+  {"name": "P300-LOG-ACCESS", "section": null, "paragraph_id": "SYS-PORTFOLIO-001-FIL-0066-PAR-0006", "section_id": null, "line_range": [105, 133],
+   "statement_ids": ["SYS-PORTFOLIO-001-FIL-0066-STMT-000009", "SYS-PORTFOLIO-001-FIL-0066-STMT-000010", "SYS-PORTFOLIO-001-FIL-0066-STMT-000011", "SYS-PORTFOLIO-001-FIL-0066-STMT-000012", "SYS-PORTFOLIO-001-FIL-0066-STMT-000013", "SYS-PORTFOLIO-001-FIL-0066-STMT-000014", "SYS-PORTFOLIO-001-FIL-0066-STMT-000027", "SYS-PORTFOLIO-001-FIL-0066-STMT-000025", "SYS-PORTFOLIO-001-FIL-0066-STMT-000026"],
+   "pseudocode": [
+     "-- Write a security audit record for this access to DB2 table AUDITLOG",
+     "SET timestamp (WS-TIMESTAMP) = FUNCTION CURRENT-DATE  -- runtime value: system date and time",
+     "CICS ASSIGN: get user ID INTO WS-USER-ID, terminal ID INTO WS-TERMINAL-ID, transaction ID INTO WS-TRANSACTION-ID  -- no RESP option",
+     "SET program_name (WS-PROGRAM-NAME) = resource name (SEC-RESOURCE-NAME)",
+     "SET access_type (WS-ACCESS-TYPE) = requested access type (SEC-ACCESS-TYPE)",
+     "SQL INSERT new row INTO AUDITLOG table",
+     "  COLUMNS: TIMESTAMP, USER_ID, TERMINAL_ID, TRANS_ID, PROGRAM, ACCESS_TYPE",
+     "  VALUES: WS-TIMESTAMP, WS-USER-ID, WS-TERMINAL-ID, WS-TRANSACTION-ID, WS-PROGRAM-NAME, WS-ACCESS-TYPE",
+     "CHECK SQLCODE for errors",
+     "IF SQLCODE = 0 THEN",
+     "  SET response_code (SEC-RESPONSE-CODE) = 0  -- audit row written",
+     "ELSE",
+     "  SET error_info (SEC-ERROR-INFO) = 'Audit logging failed'",
+     "  SET response_code (SEC-RESPONSE-CODE) = 12",
+     "END IF"
+   ],
+   "pseudocode_statement_ids": [[], ["SYS-PORTFOLIO-001-FIL-0066-STMT-000009"], ["SYS-PORTFOLIO-001-FIL-0066-STMT-000010"], ["SYS-PORTFOLIO-001-FIL-0066-STMT-000011"], ["SYS-PORTFOLIO-001-FIL-0066-STMT-000012"], ["SYS-PORTFOLIO-001-FIL-0066-STMT-000013"], ["SYS-PORTFOLIO-001-FIL-0066-STMT-000013"], ["SYS-PORTFOLIO-001-FIL-0066-STMT-000013"], ["SYS-PORTFOLIO-001-FIL-0066-STMT-000014"], ["SYS-PORTFOLIO-001-FIL-0066-STMT-000014"], ["SYS-PORTFOLIO-001-FIL-0066-STMT-000027"], ["SYS-PORTFOLIO-001-FIL-0066-STMT-000014"], ["SYS-PORTFOLIO-001-FIL-0066-STMT-000025"], ["SYS-PORTFOLIO-001-FIL-0066-STMT-000026"], ["SYS-PORTFOLIO-001-FIL-0066-STMT-000014"]],
+   "pseudocode_text": "-- Write a security audit record for this access to DB2 table AUDITLOG\nSET WS-TIMESTAMP = FUNCTION CURRENT-DATE\nCICS ASSIGN: user ID, terminal ID, transaction ID\nSET WS-PROGRAM-NAME = SEC-RESOURCE-NAME\nSET WS-ACCESS-TYPE = SEC-ACCESS-TYPE\nSQL INSERT new row INTO AUDITLOG table\n  COLUMNS: TIMESTAMP, USER_ID, TERMINAL_ID, TRANS_ID, PROGRAM, ACCESS_TYPE\n  VALUES: WS-TIMESTAMP, WS-USER-ID, WS-TERMINAL-ID, WS-TRANSACTION-ID, WS-PROGRAM-NAME, WS-ACCESS-TYPE\nCHECK SQLCODE for errors\nIF SQLCODE = 0 THEN\n  SET SEC-RESPONSE-CODE = 0\nELSE\n  SET SEC-ERROR-INFO = 'Audit logging failed'\n  SET SEC-RESPONSE-CODE = 12\nEND IF",
+   "untranslated_statement_ids": [],
+   "field_references": ["WS-TIMESTAMP", "WS-USER-ID", "WS-TERMINAL-ID", "WS-TRANSACTION-ID", "SEC-RESOURCE-NAME", "WS-PROGRAM-NAME", "SEC-ACCESS-TYPE", "WS-ACCESS-TYPE", "SQLCODE", "SEC-RESPONSE-CODE", "SEC-ERROR-INFO"],
+   "field_reference_ids": [
+     {"name": "WS-TIMESTAMP", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0066-FLD-000006", "target_kind": "field", "candidate_ids": []},
+     {"name": "WS-USER-ID", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0066-FLD-000001", "target_kind": "field", "candidate_ids": []},
+     {"name": "WS-TERMINAL-ID", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0066-FLD-000002", "target_kind": "field", "candidate_ids": []},
+     {"name": "WS-TRANSACTION-ID", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0066-FLD-000003", "target_kind": "field", "candidate_ids": []},
+     {"name": "SEC-RESOURCE-NAME", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0066-FLD-000012", "target_kind": "field", "candidate_ids": []},
+     {"name": "WS-PROGRAM-NAME", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0066-FLD-000004", "target_kind": "field", "candidate_ids": []},
+     {"name": "SEC-ACCESS-TYPE", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0066-FLD-000013", "target_kind": "field", "candidate_ids": []},
+     {"name": "WS-ACCESS-TYPE", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0066-FLD-000005", "target_kind": "field", "candidate_ids": []},
+     {"name": "SQLCODE", "qualifiers": [], "resolution": "UNRESOLVED", "target_id": null, "target_kind": null, "candidate_ids": []},
+     {"name": "SEC-RESPONSE-CODE", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0066-FLD-000014", "target_kind": "field", "candidate_ids": []},
+     {"name": "SEC-ERROR-INFO", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0066-FLD-000015", "target_kind": "field", "candidate_ids": []}],
+   "calls_made": [], "calls_made_ids": [],
+   "complexity_score": 3, "has_unresolved_statements": false,
+   "annotations": [{"line": 106, "statement_id": "SYS-PORTFOLIO-001-FIL-0066-STMT-000009", "note": "WS-TIMESTAMP is X(26); FUNCTION CURRENT-DATE returns 21 characters, so the field is padded with 5 trailing spaces"}]},
+  {"name": "P300-EXIT", "section": null, "paragraph_id": "SYS-PORTFOLIO-001-FIL-0066-PAR-0007", "section_id": null, "line_range": [134, 135],
+   "statement_ids": ["SYS-PORTFOLIO-001-FIL-0066-STMT-000015"],
+   "pseudocode": ["EXIT paragraph  -- end point of the PERFORM P300-LOG-ACCESS THRU P300-EXIT range (no-op)"],
+   "pseudocode_statement_ids": [["SYS-PORTFOLIO-001-FIL-0066-STMT-000015"]],
+   "pseudocode_text": "EXIT paragraph  -- end point of the PERFORM THRU range (no-op)",
+   "untranslated_statement_ids": [], "field_references": [], "field_reference_ids": [], "calls_made": [], "calls_made_ids": [],
+   "complexity_score": 1, "has_unresolved_statements": false, "annotations": []}
 ],
 "unresolved_statements": [],
 "pseudocode_issues": [
-  {"severity": "info", "type": "id_unresolved", "kind": "field", "name": "SQLCODE", "paragraph": "P200-CHECK-AUTH, P300-LOG-ACCESS", "message": "resolve-field-references UNRESOLVED; target_id null."},
-  {"severity": "info", "type": "cics_command_note", "lines": [57, 108], "message": "EXEC CICS ASSIGN is not in the CICS translation table; recorded as 'CICS ASSIGN' with its options."}
-]
+  {"severity": "info", "type": "id_unresolved", "name": "SQLCODE", "paragraph_ids": ["SYS-PORTFOLIO-001-FIL-0066-PAR-0004", "SYS-PORTFOLIO-001-FIL-0066-PAR-0006"], "message": "Field reference SQLCODE has no registered Field ID; field_reference_ids entry kept with target_id null"},
+  {"severity": "info", "type": "cics_condition_name_not_looked_up", "name": "DFHRESP(NORMAL)", "statement_id": "SYS-PORTFOLIO-001-FIL-0066-STMT-000004", "message": "DFHRESP(NORMAL) is a CICS translator built-in constant, not a data item; not looked up"}
+],
+"id_resolution_summary": {"statements_unresolved": 0, "fields_unresolved": 1, "fields_ambiguous": 0, "paragraph_targets_unresolved": 0, "unresolved_field_names": ["SQLCODE"]}
 }

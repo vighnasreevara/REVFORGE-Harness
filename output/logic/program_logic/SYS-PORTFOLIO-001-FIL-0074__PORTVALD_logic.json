@@ -1,465 +1,271 @@
 {
 "program_summary": {"program_id": "PORTVALD", "file_id": "SYS-PORTFOLIO-001-FIL-0074", "logic_file": "program_logic/SYS-PORTFOLIO-001-FIL-0074__PORTVALD_logic.json", "logic_status": "success", "paragraphs_translated": 5, "execution_paths": 1, "branches": 6, "loops": 0, "dead_code_confirmed": 0, "goto_annotations": 0, "unresolvable_paths": 0, "unresolved_ids": 0},
-"meta": {"generated_at": "2026-10-26T16:54:24Z", "agent_version": "4_logic@1.0", "source_artifacts": ["output/parser/parser_artifact.json", "output/parser/raw_structure/SYS-PORTFOLIO-001-FIL-0074__PORTVALD.json", "output/data/data_artifact.json", "output/data/data_layouts/SYS-PORTFOLIO-001-FIL-0074__PORTVALD_WS.json", "output/data/data_layouts/SYS-PORTFOLIO-001-FIL-0010__PORTVAL.json"], "neo4j_access": "read-only"},
 "program_id": "PORTVALD",
 "system_id": "SYS-PORTFOLIO-001",
 "file_id": "SYS-PORTFOLIO-001-FIL-0074",
 "path_id": "SYS-PORTFOLIO-001-PATH-0074",
 "relative_path": "src/programs/portfolio/PORTVALD.cbl",
-"parse_run_id": "PRUN-20261023T023803Z-ACC2",
-"data_run_id": "DRUN-20261024T215053Z-ACC1",
+"source_file": "src/programs/portfolio/PORTVALD.cbl",
+"parse_run_id": "PRUN-20261027T155247Z-2626",
+"data_run_id": "DRUN-20261027T162831Z-1330",
+"generated_at": "2026-10-27T21:27:22Z",
+"agent_version": "4_logic@1.0",
+"source_artifacts": {"parser_artifact": "output/parser/parser_artifact.json", "data_artifact": "output/data/data_artifact.json", "raw_structure": "output/parser/raw_structure/SYS-PORTFOLIO-001-FIL-0074__PORTVALD.json", "data_layouts": ["output/data/data_layouts/SYS-PORTFOLIO-001-FIL-0074__PORTVALD_WS.json", "output/data/data_layouts/SYS-PORTFOLIO-001-FIL-0010__PORTVAL.json"]},
 "upstream": {
+  "parse_status": "success",
   "verification": {
     "verdict": "VALID",
-    "verdict_reasons": ["V2, V3, V4 consistent; Agent 2 parse_status 'success'; copybook layout PORTVAL present and consistent; no unresolved copy stubs"],
-    "v1": {"raw_structure": "present", "parse_status": "success", "program_layout": "present", "copybook_layouts": [{"copybook": "PORTVAL", "copybook_file_id": "SYS-PORTFOLIO-001-FIL-0010", "layout": "present", "expanded_at_lines": [18]}], "unresolved_copy_stubs": 0},
-    "v2_file_identities": {
-      "program_entries": {"require_completed": ["parser", "data"], "entries": ["raw_structure|SYS-PORTFOLIO-001-FIL-0074", "data_layout|SYS-PORTFOLIO-001-FIL-0074"], "result": "batched with ERRPROC, PORTUPDT and FILEHNDL program entries: checked 8, ok 8, problems [], duplicates [], consistent true"},
-      "copybook_entries": {"require_completed": ["data"], "entries": ["data_layout|SYS-PORTFOLIO-001-FIL-0010"], "result": "batched with copybooks FIL-0007 and FIL-0009: checked 3, ok 3, problems [], duplicates [], consistent true"},
-      "consistent": true
-    },
-    "v3_structure_identities": {"sections_checked": 3, "paragraphs_checked": 5, "statements_checked": 39, "edges_checked": 4, "registered_edges": 4, "section_problems": [], "paragraph_problems": [], "statement_problems": [], "edge_problems": [], "invalid_registered_edges": [], "registered_not_in_json": {"missing_count": 0}, "duplicate_ids_in_json": [], "consistent": true, "note": "section name sent for SEC-0001 CONFIGURATION; null for the data-division sections (raw_structure does not carry their names)"},
-    "v4_data_identities": [
-      {"file_id": "SYS-PORTFOLIO-001-FIL-0074", "layout": "program", "records_checked": 1, "fields_checked": 8, "expansions_checked": 1, "record_problems": [], "field_problems": [], "expansion_problems": [], "copybook_records_in_program": 0, "registered_not_in_json": {"missing_count": 0}, "duplicate_ids_in_json": [], "consistent": true, "note": "copy_expansions holder_id is null in the layout (section-level COPY); the entry's section_id SYS-PORTFOLIO-001-FIL-0074-SEC-0002 from the same layout entry was sent as holder_id"},
-      {"file_id": "SYS-PORTFOLIO-001-FIL-0010", "layout": "copybook PORTVAL", "records_checked": 4, "fields_checked": 16, "expansions_checked": 0, "record_problems": [], "field_problems": [], "expansion_problems": [], "copybook_records_in_program": 0, "registered_not_in_json": {"missing_count": 0}, "duplicate_ids_in_json": [], "consistent": true}
-    ]
+    "v2_file_identities": {"program_entries": {"checked": 8, "ok": 8, "problems": [], "consistent": true, "require_completed": ["parser", "data"], "note": "batched call covering RTNCDE00, DB2ONLN, SECMGR, PORTVALD raw_structure + data_layout entries"}, "copybook_entries": {"checked": 4, "ok": 4, "problems": [], "consistent": true, "require_completed": ["data"], "file_ids": ["SYS-PORTFOLIO-001-FIL-0013", "SYS-PORTFOLIO-001-FIL-0017", "SYS-PORTFOLIO-001-FIL-0019", "SYS-PORTFOLIO-001-FIL-0010"]}},
+    "v3_structure_identities": {"sections_checked": 3, "paragraphs_checked": 5, "statements_checked": 39, "edges_checked": 4, "registered_edges": 4, "problems": [], "registered_not_in_json_missing_count": 0, "duplicate_ids_in_json": [], "consistent": true},
+    "v4_data_identities": {
+      "program_layout": {"file_id": "SYS-PORTFOLIO-001-FIL-0074", "records_checked": 1, "fields_checked": 8, "expansions_checked": 1, "problems": [], "registered_not_in_json_missing_count": 0, "consistent": true},
+      "copybook_layouts": [
+        {"file_id": "SYS-PORTFOLIO-001-FIL-0010", "copybook": "PORTVAL", "records_checked": 4, "fields_checked": 16, "problems": [], "consistent": true}
+      ]
+    }
   }
 },
+"entry_points": [{"paragraph": "0000-MAIN", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0074-PAR-0001", "entry_type": "subprogram_call", "using_parameters": ["LS-VALIDATION-REQUEST"]}],
 "execution_traces": [
   {
     "entry_point": "0000-MAIN",
     "entry_point_id": "SYS-PORTFOLIO-001-FIL-0074-PAR-0001",
-    "entry_type": "batch_subprogram",
-    "entry_note": "PROCEDURE DIVISION USING LS-VALIDATION-REQUEST (line 31); returns with GOBACK (line 49). Exactly one of the four PERFORMs (or the WHEN OTHER branch) runs per call; steps follow each PERFORM into its target paragraph.",
+    "entry_type": "subprogram_call",
     "steps": [
-      {"step": 1, "paragraph": "0000-MAIN", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0074-PAR-0001", "action": "EVALUATE", "target": null, "target_paragraph_id": null, "target_section_id": null, "condition": {"text": "EVALUATE TRUE", "fields": [], "field_ids": []}, "line": 35, "statement_id": "SYS-PORTFOLIO-001-FIL-0074-STMT-000002"},
-      {"step": 2, "paragraph": "0000-MAIN", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0074-PAR-0001", "action": "PERFORM", "target": "1000-VALIDATE-ID", "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0074-PAR-0002", "target_section_id": null,
-       "condition": {"text": "WHEN LS-VAL-ID", "fields": ["LS-VAL-ID"], "field_ids": [{"name": "LS-VAL-ID", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0074-FLD-000002", "target_kind": "condition", "candidate_ids": []}]},
-       "line": 37, "statement_id": "SYS-PORTFOLIO-001-FIL-0074-STMT-000021"},
-      {"step": 3, "paragraph": "1000-VALIDATE-ID", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0074-PAR-0002", "action": "IF", "target": null, "target_paragraph_id": null, "target_section_id": null,
-       "condition": {"text": "LS-INPUT-VALUE(1:4) NOT = VAL-ID-PREFIX", "fields": ["LS-INPUT-VALUE", "VAL-ID-PREFIX"], "field_ids": [{"name": "LS-INPUT-VALUE", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0074-FLD-000006", "target_kind": "field", "candidate_ids": []}, {"name": "VAL-ID-PREFIX", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0010-FLD-000012", "target_kind": "field", "candidate_ids": []}]},
-       "line": 56, "statement_id": "SYS-PORTFOLIO-001-FIL-0074-STMT-000004"},
-      {"step": 4, "paragraph": "1000-VALIDATE-ID", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0074-PAR-0002", "action": "IF", "target": null, "target_paragraph_id": null, "target_section_id": null,
-       "condition": {"text": "VAL-NUMERIC-CHECK IS NOT NUMERIC", "fields": ["VAL-NUMERIC-CHECK"], "field_ids": [{"name": "VAL-NUMERIC-CHECK", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0010-FLD-000013", "target_kind": "field", "candidate_ids": []}]},
-       "line": 63, "statement_id": "SYS-PORTFOLIO-001-FIL-0074-STMT-000006"},
-      {"step": 5, "paragraph": "0000-MAIN", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0074-PAR-0001", "action": "PERFORM", "target": "2000-VALIDATE-ACCOUNT", "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0074-PAR-0003", "target_section_id": null,
-       "condition": {"text": "WHEN LS-VAL-ACCT", "fields": ["LS-VAL-ACCT"], "field_ids": [{"name": "LS-VAL-ACCT", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0074-FLD-000003", "target_kind": "condition", "candidate_ids": []}]},
-       "line": 39, "statement_id": "SYS-PORTFOLIO-001-FIL-0074-STMT-000019"},
-      {"step": 6, "paragraph": "2000-VALIDATE-ACCOUNT", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0074-PAR-0003", "action": "IF", "target": null, "target_paragraph_id": null, "target_section_id": null,
-       "condition": {"text": "LS-INPUT-VALUE IS NOT NUMERIC OR LS-INPUT-VALUE = ZEROS", "fields": ["LS-INPUT-VALUE"], "field_ids": [{"name": "LS-INPUT-VALUE", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0074-FLD-000006", "target_kind": "field", "candidate_ids": []}]},
-       "line": 77, "statement_id": "SYS-PORTFOLIO-001-FIL-0074-STMT-000009"},
-      {"step": 7, "paragraph": "0000-MAIN", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0074-PAR-0001", "action": "PERFORM", "target": "3000-VALIDATE-TYPE", "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0074-PAR-0004", "target_section_id": null,
-       "condition": {"text": "WHEN LS-VAL-TYPE", "fields": ["LS-VAL-TYPE"], "field_ids": [{"name": "LS-VAL-TYPE", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0074-FLD-000004", "target_kind": "condition", "candidate_ids": []}]},
-       "line": 41, "statement_id": "SYS-PORTFOLIO-001-FIL-0074-STMT-000022"},
-      {"step": 8, "paragraph": "3000-VALIDATE-TYPE", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0074-PAR-0004", "action": "IF", "target": null, "target_paragraph_id": null, "target_section_id": null,
-       "condition": {"text": "LS-INPUT-VALUE NOT = 'STK' AND NOT = 'BND' AND NOT = 'MMF' AND NOT = 'ETF'", "fields": ["LS-INPUT-VALUE"], "field_ids": [{"name": "LS-INPUT-VALUE", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0074-FLD-000006", "target_kind": "field", "candidate_ids": []}]},
-       "line": 92, "statement_id": "SYS-PORTFOLIO-001-FIL-0074-STMT-000012"},
-      {"step": 9, "paragraph": "0000-MAIN", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0074-PAR-0001", "action": "PERFORM", "target": "4000-VALIDATE-AMOUNT", "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0074-PAR-0005", "target_section_id": null,
-       "condition": {"text": "WHEN LS-VAL-AMT", "fields": ["LS-VAL-AMT"], "field_ids": [{"name": "LS-VAL-AMT", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0074-FLD-000005", "target_kind": "condition", "candidate_ids": []}]},
-       "line": 43, "statement_id": "SYS-PORTFOLIO-001-FIL-0074-STMT-000020"},
-      {"step": 10, "paragraph": "4000-VALIDATE-AMOUNT", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0074-PAR-0005", "action": "IF", "target": null, "target_paragraph_id": null, "target_section_id": null,
-       "condition": {"text": "VAL-TEMP-NUM < VAL-MIN-AMOUNT OR VAL-TEMP-NUM > VAL-MAX-AMOUNT", "fields": ["VAL-TEMP-NUM", "VAL-MIN-AMOUNT", "VAL-MAX-AMOUNT"], "field_ids": [{"name": "VAL-TEMP-NUM", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0010-FLD-000014", "target_kind": "field", "candidate_ids": []}, {"name": "VAL-MIN-AMOUNT", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0010-FLD-000010", "target_kind": "field", "candidate_ids": []}, {"name": "VAL-MAX-AMOUNT", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0010-FLD-000011", "target_kind": "field", "candidate_ids": []}]},
-       "line": 111, "statement_id": "SYS-PORTFOLIO-001-FIL-0074-STMT-000016"},
-      {"step": 11, "paragraph": "0000-MAIN", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0074-PAR-0001", "action": "GOBACK", "target": null, "target_paragraph_id": null, "target_section_id": null, "condition": null, "line": 49, "statement_id": "SYS-PORTFOLIO-001-FIL-0074-STMT-000003"}
-    ]
+      {"step": 1, "paragraph": "0000-MAIN", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0074-PAR-0001", "action": "INITIALIZE", "target": "VAL-WORK-AREAS", "target_paragraph_id": null, "target_section_id": null, "condition": null, "line": 33, "statement_id": "SYS-PORTFOLIO-001-FIL-0074-STMT-000001"},
+      {"step": 2, "paragraph": "0000-MAIN", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0074-PAR-0001", "action": "EVALUATE", "target": null, "target_paragraph_id": null, "target_section_id": null, "condition": {"text": "EVALUATE TRUE (dispatch on LS-VALIDATE-TYPE 88-levels; WHEN OTHER rejects)", "fields": ["LS-VAL-ID", "LS-VAL-ACCT", "LS-VAL-TYPE", "LS-VAL-AMT"], "field_ids": ["SYS-PORTFOLIO-001-FIL-0074-FLD-000002", "SYS-PORTFOLIO-001-FIL-0074-FLD-000003", "SYS-PORTFOLIO-001-FIL-0074-FLD-000004", "SYS-PORTFOLIO-001-FIL-0074-FLD-000005"]}, "line": 35, "statement_id": "SYS-PORTFOLIO-001-FIL-0074-STMT-000002"},
+      {"step": 3, "paragraph": "0000-MAIN", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0074-PAR-0001", "action": "PERFORM", "target": "1000-VALIDATE-ID", "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0074-PAR-0002", "target_section_id": null, "condition": {"text": "WHEN LS-VAL-ID", "fields": ["LS-VAL-ID"], "field_ids": ["SYS-PORTFOLIO-001-FIL-0074-FLD-000002"]}, "line": 37, "statement_id": "SYS-PORTFOLIO-001-FIL-0074-STMT-000021"},
+      {"step": 4, "paragraph": "0000-MAIN", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0074-PAR-0001", "action": "PERFORM", "target": "2000-VALIDATE-ACCOUNT", "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0074-PAR-0003", "target_section_id": null, "condition": {"text": "WHEN LS-VAL-ACCT", "fields": ["LS-VAL-ACCT"], "field_ids": ["SYS-PORTFOLIO-001-FIL-0074-FLD-000003"]}, "line": 39, "statement_id": "SYS-PORTFOLIO-001-FIL-0074-STMT-000019"},
+      {"step": 5, "paragraph": "0000-MAIN", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0074-PAR-0001", "action": "PERFORM", "target": "3000-VALIDATE-TYPE", "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0074-PAR-0004", "target_section_id": null, "condition": {"text": "WHEN LS-VAL-TYPE", "fields": ["LS-VAL-TYPE"], "field_ids": ["SYS-PORTFOLIO-001-FIL-0074-FLD-000004"]}, "line": 41, "statement_id": "SYS-PORTFOLIO-001-FIL-0074-STMT-000022"},
+      {"step": 6, "paragraph": "0000-MAIN", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0074-PAR-0001", "action": "PERFORM", "target": "4000-VALIDATE-AMOUNT", "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0074-PAR-0005", "target_section_id": null, "condition": {"text": "WHEN LS-VAL-AMT", "fields": ["LS-VAL-AMT"], "field_ids": ["SYS-PORTFOLIO-001-FIL-0074-FLD-000005"]}, "line": 43, "statement_id": "SYS-PORTFOLIO-001-FIL-0074-STMT-000020"},
+      {"step": 7, "paragraph": "0000-MAIN", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0074-PAR-0001", "action": "MOVE", "target": null, "target_paragraph_id": null, "target_section_id": null, "condition": {"text": "WHEN OTHER", "fields": [], "field_ids": []}, "line": 45, "statement_id": "SYS-PORTFOLIO-001-FIL-0074-STMT-000023", "note": "WHEN OTHER: LS-RETURN-CODE = VAL-INVALID-ID, LS-ERROR-MSG = 'Invalid validation type' (lines 45-46)"},
+      {"step": 8, "paragraph": "0000-MAIN", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0074-PAR-0001", "action": "GOBACK", "target": null, "target_paragraph_id": null, "target_section_id": null, "condition": null, "line": 49, "statement_id": "SYS-PORTFOLIO-001-FIL-0074-STMT-000003"}
+    ],
+    "path_summary": "Called with LS-VALIDATION-REQUEST. Work areas are initialised, then exactly one of four validation paragraphs runs according to LS-VALIDATE-TYPE (I/A/T/M); any other type is rejected with return code VAL-INVALID-ID. Each validation paragraph sets LS-RETURN-CODE and LS-ERROR-MSG and may leave early with EXIT PARAGRAPH. Control returns to the caller with GOBACK."
   }
 ],
 "branch_map": [
-  {
-    "paragraph": "0000-MAIN",
-    "paragraph_id": "SYS-PORTFOLIO-001-FIL-0074-PAR-0001",
-    "branches": [
-      {"type": "EVALUATE", "line": 35, "statement_id": "SYS-PORTFOLIO-001-FIL-0074-STMT-000002", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0074-PAR-0001", "subjects": ["TRUE"],
-       "condition_text": "EVALUATE TRUE WHEN LS-VAL-ID / WHEN LS-VAL-ACCT / WHEN LS-VAL-TYPE / WHEN LS-VAL-AMT / WHEN OTHER",
-       "condition_fields": ["LS-VAL-ID", "LS-VAL-ACCT", "LS-VAL-TYPE", "LS-VAL-AMT"],
-       "condition_field_ids": [
-         {"name": "LS-VAL-ID", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0074-FLD-000002", "target_kind": "condition", "candidate_ids": []},
-         {"name": "LS-VAL-ACCT", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0074-FLD-000003", "target_kind": "condition", "candidate_ids": []},
-         {"name": "LS-VAL-TYPE", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0074-FLD-000004", "target_kind": "condition", "candidate_ids": []},
-         {"name": "LS-VAL-AMT", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0074-FLD-000005", "target_kind": "condition", "candidate_ids": []}
-       ],
-       "when_clauses": [
-         {"conditions": ["LS-VAL-ID"], "condition_fields": ["LS-VAL-ID"], "body_line_range": [37, 37], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0074-STMT-000021"]},
-         {"conditions": ["LS-VAL-ACCT"], "condition_fields": ["LS-VAL-ACCT"], "body_line_range": [39, 39], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0074-STMT-000019"]},
-         {"conditions": ["LS-VAL-TYPE"], "condition_fields": ["LS-VAL-TYPE"], "body_line_range": [41, 41], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0074-STMT-000022"]},
-         {"conditions": ["LS-VAL-AMT"], "condition_fields": ["LS-VAL-AMT"], "body_line_range": [43, 43], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0074-STMT-000020"]},
-         {"conditions": ["OTHER"], "condition_fields": [], "body_line_range": [45, 46], "is_default": true, "statement_ids": ["SYS-PORTFOLIO-001-FIL-0074-STMT-000023", "SYS-PORTFOLIO-001-FIL-0074-STMT-000024"]}
-       ],
-       "has_when_other": true,
-       "end_evaluate_line": 47,
-       "outcomes": [
-         {"label": "WHEN LS-VAL-ID (LS-VALIDATE-TYPE = 'I')", "line_range": [37, 37], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0074-STMT-000021"]},
-         {"label": "WHEN LS-VAL-ACCT (LS-VALIDATE-TYPE = 'A')", "line_range": [39, 39], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0074-STMT-000019"]},
-         {"label": "WHEN LS-VAL-TYPE (LS-VALIDATE-TYPE = 'T')", "line_range": [41, 41], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0074-STMT-000022"]},
-         {"label": "WHEN LS-VAL-AMT (LS-VALIDATE-TYPE = 'M')", "line_range": [43, 43], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0074-STMT-000020"]},
-         {"label": "WHEN OTHER", "line_range": [45, 46], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0074-STMT-000023", "SYS-PORTFOLIO-001-FIL-0074-STMT-000024"]}
-       ],
-       "nested_depth": 1}
-    ]
-  },
-  {
-    "paragraph": "1000-VALIDATE-ID",
-    "paragraph_id": "SYS-PORTFOLIO-001-FIL-0074-PAR-0002",
-    "branches": [
-      {"type": "IF", "line": 56, "statement_id": "SYS-PORTFOLIO-001-FIL-0074-STMT-000004", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0074-PAR-0002",
-       "condition_text": "LS-INPUT-VALUE(1:4) NOT = VAL-ID-PREFIX", "condition_fields": ["LS-INPUT-VALUE", "VAL-ID-PREFIX"],
-       "condition_field_ids": [
-         {"name": "LS-INPUT-VALUE", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0074-FLD-000006", "target_kind": "field", "candidate_ids": []},
-         {"name": "VAL-ID-PREFIX", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0010-FLD-000012", "target_kind": "field", "candidate_ids": []}
-       ],
-       "has_else": false, "then_line_range": [57, 59], "else_line_range": null, "end_if_line": 60, "nested_depth": 1,
-       "outcomes": [
-         {"label": "THEN (prefix is not 'PORT': invalid ID, EXIT PARAGRAPH)", "line_range": [57, 59], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0074-STMT-000025", "SYS-PORTFOLIO-001-FIL-0074-STMT-000026", "SYS-PORTFOLIO-001-FIL-0074-STMT-000027"]},
-         {"label": "ELSE (implicit: continue at line 62)", "line_range": null, "statement_ids": []}
-       ]},
-      {"type": "IF", "line": 63, "statement_id": "SYS-PORTFOLIO-001-FIL-0074-STMT-000006", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0074-PAR-0002",
-       "condition_text": "VAL-NUMERIC-CHECK IS NOT NUMERIC", "condition_fields": ["VAL-NUMERIC-CHECK"],
-       "condition_field_ids": [
-         {"name": "VAL-NUMERIC-CHECK", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0010-FLD-000013", "target_kind": "field", "candidate_ids": []}
-       ],
-       "has_else": false, "then_line_range": [64, 66], "else_line_range": null, "end_if_line": 67, "nested_depth": 1,
-       "outcomes": [
-         {"label": "THEN (digits 5-8 not numeric: invalid ID, EXIT PARAGRAPH)", "line_range": [64, 66], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0074-STMT-000028", "SYS-PORTFOLIO-001-FIL-0074-STMT-000029", "SYS-PORTFOLIO-001-FIL-0074-STMT-000030"]},
-         {"label": "ELSE (implicit: continue at line 69, success)", "line_range": null, "statement_ids": []}
-       ]}
-    ]
-  },
-  {
-    "paragraph": "2000-VALIDATE-ACCOUNT",
-    "paragraph_id": "SYS-PORTFOLIO-001-FIL-0074-PAR-0003",
-    "branches": [
-      {"type": "IF", "line": 77, "statement_id": "SYS-PORTFOLIO-001-FIL-0074-STMT-000009", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0074-PAR-0003",
-       "condition_text": "LS-INPUT-VALUE IS NOT NUMERIC OR LS-INPUT-VALUE = ZEROS", "condition_fields": ["LS-INPUT-VALUE"],
-       "condition_field_ids": [
-         {"name": "LS-INPUT-VALUE", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0074-FLD-000006", "target_kind": "field", "candidate_ids": []}
-       ],
-       "has_else": false, "then_line_range": [79, 81], "else_line_range": null, "end_if_line": 82, "nested_depth": 1,
-       "outcomes": [
-         {"label": "THEN (invalid account, EXIT PARAGRAPH)", "line_range": [79, 81], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0074-STMT-000031", "SYS-PORTFOLIO-001-FIL-0074-STMT-000032", "SYS-PORTFOLIO-001-FIL-0074-STMT-000033"]},
-         {"label": "ELSE (implicit: continue at line 84, success)", "line_range": null, "statement_ids": []}
-       ]}
-    ]
-  },
-  {
-    "paragraph": "3000-VALIDATE-TYPE",
-    "paragraph_id": "SYS-PORTFOLIO-001-FIL-0074-PAR-0004",
-    "branches": [
-      {"type": "IF", "line": 92, "statement_id": "SYS-PORTFOLIO-001-FIL-0074-STMT-000012", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0074-PAR-0004",
-       "condition_text": "LS-INPUT-VALUE NOT = 'STK' AND NOT = 'BND' AND NOT = 'MMF' AND NOT = 'ETF'", "condition_fields": ["LS-INPUT-VALUE"],
-       "condition_field_ids": [
-         {"name": "LS-INPUT-VALUE", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0074-FLD-000006", "target_kind": "field", "candidate_ids": []}
-       ],
-       "has_else": false, "then_line_range": [96, 98], "else_line_range": null, "end_if_line": 99, "nested_depth": 1,
-       "outcomes": [
-         {"label": "THEN (not one of STK/BND/MMF/ETF: invalid type, EXIT PARAGRAPH)", "line_range": [96, 98], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0074-STMT-000034", "SYS-PORTFOLIO-001-FIL-0074-STMT-000035", "SYS-PORTFOLIO-001-FIL-0074-STMT-000036"]},
-         {"label": "ELSE (implicit: continue at line 101, success)", "line_range": null, "statement_ids": []}
-       ]}
-    ]
-  },
-  {
-    "paragraph": "4000-VALIDATE-AMOUNT",
-    "paragraph_id": "SYS-PORTFOLIO-001-FIL-0074-PAR-0005",
-    "branches": [
-      {"type": "IF", "line": 111, "statement_id": "SYS-PORTFOLIO-001-FIL-0074-STMT-000016", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0074-PAR-0005",
-       "condition_text": "VAL-TEMP-NUM < VAL-MIN-AMOUNT OR VAL-TEMP-NUM > VAL-MAX-AMOUNT", "condition_fields": ["VAL-TEMP-NUM", "VAL-MIN-AMOUNT", "VAL-MAX-AMOUNT"],
-       "condition_field_ids": [
-         {"name": "VAL-TEMP-NUM", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0010-FLD-000014", "target_kind": "field", "candidate_ids": []},
-         {"name": "VAL-MIN-AMOUNT", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0010-FLD-000010", "target_kind": "field", "candidate_ids": []},
-         {"name": "VAL-MAX-AMOUNT", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0010-FLD-000011", "target_kind": "field", "candidate_ids": []}
-       ],
-       "has_else": false, "then_line_range": [113, 115], "else_line_range": null, "end_if_line": 116, "nested_depth": 1,
-       "outcomes": [
-         {"label": "THEN (amount out of range, EXIT PARAGRAPH)", "line_range": [113, 115], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0074-STMT-000037", "SYS-PORTFOLIO-001-FIL-0074-STMT-000038", "SYS-PORTFOLIO-001-FIL-0074-STMT-000039"]},
-         {"label": "ELSE (implicit: continue at line 118, success)", "line_range": null, "statement_ids": []}
-       ]}
-    ]
-  }
+  {"paragraph": "0000-MAIN", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0074-PAR-0001", "branches": [
+    {"type": "EVALUATE", "line": 35, "end_evaluate_line": 47, "statement_id": "SYS-PORTFOLIO-001-FIL-0074-STMT-000002", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0074-PAR-0001", "subjects": ["TRUE"], "nested_depth": 0,
+     "condition_fields": ["LS-VAL-ID", "LS-VAL-ACCT", "LS-VAL-TYPE", "LS-VAL-AMT"],
+     "condition_field_ids": [
+       {"name": "LS-VAL-ID", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0074-FLD-000002", "target_kind": "condition", "candidate_ids": []},
+       {"name": "LS-VAL-ACCT", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0074-FLD-000003", "target_kind": "condition", "candidate_ids": []},
+       {"name": "LS-VAL-TYPE", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0074-FLD-000004", "target_kind": "condition", "candidate_ids": []},
+       {"name": "LS-VAL-AMT", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0074-FLD-000005", "target_kind": "condition", "candidate_ids": []}],
+     "when_clauses": [
+       {"conditions": ["LS-VAL-ID"], "condition_fields": ["LS-VAL-ID"], "meaning": "LS-VALIDATE-TYPE = 'I'", "body_line_range": [37, 37], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0074-STMT-000021"]},
+       {"conditions": ["LS-VAL-ACCT"], "condition_fields": ["LS-VAL-ACCT"], "meaning": "LS-VALIDATE-TYPE = 'A'", "body_line_range": [39, 39], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0074-STMT-000019"]},
+       {"conditions": ["LS-VAL-TYPE"], "condition_fields": ["LS-VAL-TYPE"], "meaning": "LS-VALIDATE-TYPE = 'T'", "body_line_range": [41, 41], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0074-STMT-000022"]},
+       {"conditions": ["LS-VAL-AMT"], "condition_fields": ["LS-VAL-AMT"], "meaning": "LS-VALIDATE-TYPE = 'M'", "body_line_range": [43, 43], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0074-STMT-000020"]},
+       {"conditions": ["OTHER"], "condition_fields": [], "body_line_range": [45, 46], "is_default": true, "statement_ids": ["SYS-PORTFOLIO-001-FIL-0074-STMT-000023", "SYS-PORTFOLIO-001-FIL-0074-STMT-000024"]}],
+     "has_default": true}
+  ]},
+  {"paragraph": "1000-VALIDATE-ID", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0074-PAR-0002", "branches": [
+    {"type": "IF", "line": 56, "end_if_line": 60, "statement_id": "SYS-PORTFOLIO-001-FIL-0074-STMT-000004", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0074-PAR-0002", "condition_text": "LS-INPUT-VALUE(1:4) NOT = VAL-ID-PREFIX", "condition_fields": ["LS-INPUT-VALUE", "VAL-ID-PREFIX"],
+     "condition_field_ids": [
+       {"name": "LS-INPUT-VALUE", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0074-FLD-000006", "target_kind": "field", "candidate_ids": []},
+       {"name": "VAL-ID-PREFIX", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0010-FLD-000012", "target_kind": "field", "candidate_ids": []}],
+     "reference_modification": "LS-INPUT-VALUE(1:4)", "has_else": false, "nested_depth": 0, "then_line_range": [57, 59], "else_line_range": null, "early_exit": true,
+     "outcomes": [{"label": "THEN", "line_range": [57, 59], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0074-STMT-000025", "SYS-PORTFOLIO-001-FIL-0074-STMT-000026", "SYS-PORTFOLIO-001-FIL-0074-STMT-000027"]}]},
+    {"type": "IF", "line": 63, "end_if_line": 67, "statement_id": "SYS-PORTFOLIO-001-FIL-0074-STMT-000006", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0074-PAR-0002", "condition_text": "VAL-NUMERIC-CHECK IS NOT NUMERIC", "condition_fields": ["VAL-NUMERIC-CHECK"],
+     "condition_field_ids": [{"name": "VAL-NUMERIC-CHECK", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0010-FLD-000013", "target_kind": "field", "candidate_ids": []}],
+     "has_else": false, "nested_depth": 0, "then_line_range": [64, 66], "else_line_range": null, "early_exit": true, "review": true,
+     "outcomes": [{"label": "THEN", "line_range": [64, 66], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0074-STMT-000028", "SYS-PORTFOLIO-001-FIL-0074-STMT-000029", "SYS-PORTFOLIO-001-FIL-0074-STMT-000030"]}]}
+  ]},
+  {"paragraph": "2000-VALIDATE-ACCOUNT", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0074-PAR-0003", "branches": [
+    {"type": "IF", "line": 77, "end_if_line": 82, "statement_id": "SYS-PORTFOLIO-001-FIL-0074-STMT-000009", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0074-PAR-0003", "condition_text": "LS-INPUT-VALUE IS NOT NUMERIC OR LS-INPUT-VALUE = ZEROS", "condition_fields": ["LS-INPUT-VALUE"],
+     "condition_field_ids": [{"name": "LS-INPUT-VALUE", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0074-FLD-000006", "target_kind": "field", "candidate_ids": []}],
+     "has_else": false, "nested_depth": 0, "then_line_range": [79, 81], "else_line_range": null, "early_exit": true, "review": true,
+     "outcomes": [{"label": "THEN", "line_range": [79, 81], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0074-STMT-000031", "SYS-PORTFOLIO-001-FIL-0074-STMT-000032", "SYS-PORTFOLIO-001-FIL-0074-STMT-000033"]}]}
+  ]},
+  {"paragraph": "3000-VALIDATE-TYPE", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0074-PAR-0004", "branches": [
+    {"type": "IF", "line": 92, "end_if_line": 99, "statement_id": "SYS-PORTFOLIO-001-FIL-0074-STMT-000012", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0074-PAR-0004", "condition_text": "LS-INPUT-VALUE NOT = 'STK' AND NOT = 'BND' AND NOT = 'MMF' AND NOT = 'ETF'", "expanded_condition": "LS-INPUT-VALUE NOT = 'STK' AND LS-INPUT-VALUE NOT = 'BND' AND LS-INPUT-VALUE NOT = 'MMF' AND LS-INPUT-VALUE NOT = 'ETF'", "condition_fields": ["LS-INPUT-VALUE"],
+     "condition_field_ids": [{"name": "LS-INPUT-VALUE", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0074-FLD-000006", "target_kind": "field", "candidate_ids": []}],
+     "has_else": false, "nested_depth": 0, "then_line_range": [96, 98], "else_line_range": null, "early_exit": true,
+     "outcomes": [{"label": "THEN", "line_range": [96, 98], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0074-STMT-000034", "SYS-PORTFOLIO-001-FIL-0074-STMT-000035", "SYS-PORTFOLIO-001-FIL-0074-STMT-000036"]}]}
+  ]},
+  {"paragraph": "4000-VALIDATE-AMOUNT", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0074-PAR-0005", "branches": [
+    {"type": "IF", "line": 111, "end_if_line": 116, "statement_id": "SYS-PORTFOLIO-001-FIL-0074-STMT-000016", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0074-PAR-0005", "condition_text": "VAL-TEMP-NUM < VAL-MIN-AMOUNT OR VAL-TEMP-NUM > VAL-MAX-AMOUNT", "condition_fields": ["VAL-TEMP-NUM", "VAL-MIN-AMOUNT", "VAL-MAX-AMOUNT"],
+     "condition_field_ids": [
+       {"name": "VAL-TEMP-NUM", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0010-FLD-000014", "target_kind": "field", "candidate_ids": []},
+       {"name": "VAL-MIN-AMOUNT", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0010-FLD-000010", "target_kind": "field", "candidate_ids": []},
+       {"name": "VAL-MAX-AMOUNT", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0010-FLD-000011", "target_kind": "field", "candidate_ids": []}],
+     "has_else": false, "nested_depth": 0, "then_line_range": [113, 115], "else_line_range": null, "early_exit": true, "review": true,
+     "outcomes": [{"label": "THEN", "line_range": [113, 115], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0074-STMT-000037", "SYS-PORTFOLIO-001-FIL-0074-STMT-000038", "SYS-PORTFOLIO-001-FIL-0074-STMT-000039"]}]}
+  ]}
 ],
 "loops": [],
 "dead_code_confirmed": [],
+"dead_code_dismissed": [],
 "unresolvable_paths": [],
 "trace_issues": [
-  {"severity": "info", "type": "upstream_issue", "upstream_agent": "3_data", "upstream_type": "copy_stub_under_section", "line": 18, "message": "COPY PORTVAL (line 18) sits directly under the WORKING-STORAGE SECTION with no enclosing 01; its 4 records are linked by EXPANDS_COPY from section SYS-PORTFOLIO-001-FIL-0074-SEC-0002."},
-  {"severity": "info", "type": "early_paragraph_exit", "lines": [59, 66, 81, 98, 115], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0074-STMT-000027", "SYS-PORTFOLIO-001-FIL-0074-STMT-000030", "SYS-PORTFOLIO-001-FIL-0074-STMT-000033", "SYS-PORTFOLIO-001-FIL-0074-STMT-000036", "SYS-PORTFOLIO-001-FIL-0074-STMT-000039"], "message": "EXIT PARAGRAPH inside each validation IF ends the performed paragraph early and returns control to the PERFORM in 0000-MAIN; it is a structured exit, not a GO TO."},
-  {"severity": "warning", "type": "condition_always_true_as_written", "line": 63, "statement_id": "SYS-PORTFOLIO-001-FIL-0074-STMT-000006", "message": "Line 62 moves 4 characters (LS-INPUT-VALUE(5:4)) into VAL-NUMERIC-CHECK PIC X(10), which pads the remaining 6 positions with spaces; the NUMERIC class test on the whole X(10) field is then false for any input, so IS NOT NUMERIC is always true and 1000-VALIDATE-ID can never return VAL-SUCCESS. Recorded as written for SME review."},
-  {"severity": "warning", "type": "condition_never_true_as_written", "line": 111, "statement_id": "SYS-PORTFOLIO-001-FIL-0074-STMT-000016", "message": "VAL-TEMP-NUM is PIC S9(13)V99, whose value range is exactly VAL-MIN-AMOUNT (-9999999999999.99) to VAL-MAX-AMOUNT (+9999999999999.99); the out-of-range test can never be true, so 4000-VALIDATE-AMOUNT always returns VAL-SUCCESS. Recorded as written for SME review."}
+  {"severity": "info", "type": "upstream_issue", "upstream_agent": "3_data", "upstream_type": "copy_expanded_at_section_level", "message": "COPY PORTVAL sits directly under WORKING-STORAGE (no enclosing 01); EXPANDS_COPY holder is section SYS-PORTFOLIO-001-FIL-0074-SEC-0002"},
+  {"severity": "info", "type": "exit_paragraph_early_exit", "statement_ids": ["SYS-PORTFOLIO-001-FIL-0074-STMT-000027", "SYS-PORTFOLIO-001-FIL-0074-STMT-000030", "SYS-PORTFOLIO-001-FIL-0074-STMT-000033", "SYS-PORTFOLIO-001-FIL-0074-STMT-000036", "SYS-PORTFOLIO-001-FIL-0074-STMT-000039"], "lines": [59, 66, 81, 98, 115], "message": "EXIT PARAGRAPH ends the performed paragraph early and returns to 0000-MAIN; structured early return, not a GO TO"},
+  {"severity": "warning", "type": "logic_review", "statement_id": "SYS-PORTFOLIO-001-FIL-0074-STMT-000006", "line": 63, "message": "VAL-NUMERIC-CHECK is PIC X(10) but receives only 4 characters (LS-INPUT-VALUE(5:4)); the MOVE pads 6 trailing spaces, and a NUMERIC class test fails on spaces. As written, the IF at line 63 is true for every input, so 1000-VALIDATE-ID cannot return VAL-SUCCESS. Flagged for SME review; not corrected"},
+  {"severity": "warning", "type": "logic_review", "statement_id": "SYS-PORTFOLIO-001-FIL-0074-STMT-000009", "line": 77, "message": "The comment says an account number is 10 numeric digits, but the NUMERIC test is applied to the whole 50-character LS-INPUT-VALUE; a 10-digit value followed by spaces is NOT NUMERIC and is rejected. Flagged for SME review"},
+  {"severity": "info", "type": "logic_review", "statement_id": "SYS-PORTFOLIO-001-FIL-0074-STMT-000015", "line": 109, "message": "MOVE of alphanumeric LS-INPUT-VALUE (X(50)) to numeric VAL-TEMP-NUM (S9(13)V99); the result for non-digit content is compiler-dependent. VAL-MIN-AMOUNT / VAL-MAX-AMOUNT equal the full range of the S9(13)V99 picture, so the range test at line 111 cannot be true for a valid numeric value"}
 ],
-"program_narrative": "Program PORTVALD is a batch subprogram (portfolio validation subroutine) that receives LS-VALIDATION-REQUEST from its caller, validates one data element and returns with GOBACK. It uses no files. The validation type LS-VALIDATE-TYPE selects one check: 'I' portfolio ID (must start with 'PORT' followed by 4 numeric characters), 'A' account number (must be numeric and not zero), 'T' investment type (must be STK, BND, MMF or ETF), or 'M' amount (must lie between VAL-MIN-AMOUNT and VAL-MAX-AMOUNT). Each check sets LS-RETURN-CODE to VAL-SUCCESS (0) with a blank LS-ERROR-MSG, or to an error code (1 invalid ID, 2 invalid account, 3 invalid type, 4 invalid amount) with the matching message from copybook PORTVAL. An unknown validation type returns code 1 with 'Invalid validation type'. As written, the ID check can never succeed (the digits are tested in a space-padded 10-character field) and the amount range check can never fail; both are flagged for SME review.",
+"program_narrative": "Program PORTVALD is a called validation subroutine (PROCEDURE DIVISION USING LS-VALIDATION-REQUEST) that checks one portfolio data element per call. The caller sets LS-VALIDATE-TYPE and LS-INPUT-VALUE; the program validates a portfolio ID (I: must start with 'PORT' followed by numeric digits), an account number (A: numeric and not zero), an investment type (T: one of STK, BND, MMF, ETF) or an amount (M: within the VAL-MIN-AMOUNT..VAL-MAX-AMOUNT range). It uses no files or tables; constants, messages and work areas come from copybook PORTVAL. The result is returned in LS-RETURN-CODE (VAL-SUCCESS 0, or VAL-INVALID-ID/ACCT/TYPE/AMT 1-4) with an error message in LS-ERROR-MSG. Error conditions handled: an unknown validation type returns VAL-INVALID-ID with 'Invalid validation type'; each failed check returns its specific code and message and leaves the paragraph early. Static review notes: the portfolio-ID numeric check and the account-number numeric check are flagged in trace_issues because, as written, they reject values that the comments describe as valid.",
 "paragraphs": [
-  {
-    "name": "0000-MAIN",
-    "paragraph_id": "SYS-PORTFOLIO-001-FIL-0074-PAR-0001",
-    "section": null,
-    "section_id": null,
-    "line_range": [32, 51],
-    "pseudocode": [
-      "-- Entry: caller passes validation_request (LS-VALIDATION-REQUEST) (PROCEDURE DIVISION USING, line 31)",
-      "CLEAR validation work areas (VAL-WORK-AREAS)  -- INITIALIZE: alphanumeric items to spaces, numeric items to zero",
-      "IF validate_type = 'I' THEN  -- LS-VAL-ID: validate a portfolio ID",
-      "  CALL 1000-validate-id",
-      "ELSE IF validate_type = 'A' THEN  -- LS-VAL-ACCT: validate an account number",
-      "  CALL 2000-validate-account",
-      "ELSE IF validate_type = 'T' THEN  -- LS-VAL-TYPE: validate an investment type",
-      "  CALL 3000-validate-type",
-      "ELSE IF validate_type = 'M' THEN  -- LS-VAL-AMT: validate an amount",
-      "  CALL 4000-validate-amount",
-      "ELSE",
-      "  SET return_code (LS-RETURN-CODE) = VAL-INVALID-ID (+1)",
-      "  SET error_msg (LS-ERROR-MSG) = 'Invalid validation type'",
-      "END IF",
-      "RETURN to caller  -- GOBACK"
-    ],
-    "pseudocode_statement_ids": [
-      [],
-      ["SYS-PORTFOLIO-001-FIL-0074-STMT-000001"],
-      ["SYS-PORTFOLIO-001-FIL-0074-STMT-000002"],
-      ["SYS-PORTFOLIO-001-FIL-0074-STMT-000021"],
-      ["SYS-PORTFOLIO-001-FIL-0074-STMT-000002"],
-      ["SYS-PORTFOLIO-001-FIL-0074-STMT-000019"],
-      ["SYS-PORTFOLIO-001-FIL-0074-STMT-000002"],
-      ["SYS-PORTFOLIO-001-FIL-0074-STMT-000022"],
-      ["SYS-PORTFOLIO-001-FIL-0074-STMT-000002"],
-      ["SYS-PORTFOLIO-001-FIL-0074-STMT-000020"],
-      ["SYS-PORTFOLIO-001-FIL-0074-STMT-000002"],
-      ["SYS-PORTFOLIO-001-FIL-0074-STMT-000023"],
-      ["SYS-PORTFOLIO-001-FIL-0074-STMT-000024"],
-      ["SYS-PORTFOLIO-001-FIL-0074-STMT-000002"],
-      ["SYS-PORTFOLIO-001-FIL-0074-STMT-000003"]
-    ],
-    "pseudocode_text": "-- Entry: caller passes validation_request (LS-VALIDATION-REQUEST) (PROCEDURE DIVISION USING, line 31)\nCLEAR validation work areas (VAL-WORK-AREAS)  -- INITIALIZE: alphanumeric items to spaces, numeric items to zero\nIF validate_type = 'I' THEN  -- LS-VAL-ID: validate a portfolio ID\n  CALL 1000-validate-id\nELSE IF validate_type = 'A' THEN  -- LS-VAL-ACCT: validate an account number\n  CALL 2000-validate-account\nELSE IF validate_type = 'T' THEN  -- LS-VAL-TYPE: validate an investment type\n  CALL 3000-validate-type\nELSE IF validate_type = 'M' THEN  -- LS-VAL-AMT: validate an amount\n  CALL 4000-validate-amount\nELSE\n  SET return_code (LS-RETURN-CODE) = VAL-INVALID-ID (+1)\n  SET error_msg (LS-ERROR-MSG) = 'Invalid validation type'\nEND IF\nRETURN to caller  -- GOBACK",
-    "statement_ids": ["SYS-PORTFOLIO-001-FIL-0074-STMT-000001", "SYS-PORTFOLIO-001-FIL-0074-STMT-000002", "SYS-PORTFOLIO-001-FIL-0074-STMT-000021", "SYS-PORTFOLIO-001-FIL-0074-STMT-000019", "SYS-PORTFOLIO-001-FIL-0074-STMT-000022", "SYS-PORTFOLIO-001-FIL-0074-STMT-000020", "SYS-PORTFOLIO-001-FIL-0074-STMT-000023", "SYS-PORTFOLIO-001-FIL-0074-STMT-000024", "SYS-PORTFOLIO-001-FIL-0074-STMT-000003"],
-    "untranslated_statement_ids": [],
-    "field_references": ["LS-VALIDATION-REQUEST", "VAL-WORK-AREAS", "LS-VALIDATE-TYPE", "LS-VAL-ID", "LS-VAL-ACCT", "LS-VAL-TYPE", "LS-VAL-AMT", "VAL-INVALID-ID", "LS-RETURN-CODE", "LS-ERROR-MSG"],
-    "field_reference_ids": [
-      {"name": "LS-VALIDATION-REQUEST", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0074-REC-0001", "target_kind": "record", "candidate_ids": []},
-      {"name": "VAL-WORK-AREAS", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0010-REC-0004", "target_kind": "record", "candidate_ids": []},
-      {"name": "LS-VALIDATE-TYPE", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0074-FLD-000001", "target_kind": "field", "candidate_ids": []},
-      {"name": "LS-VAL-ID", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0074-FLD-000002", "target_kind": "condition", "candidate_ids": []},
-      {"name": "LS-VAL-ACCT", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0074-FLD-000003", "target_kind": "condition", "candidate_ids": []},
-      {"name": "LS-VAL-TYPE", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0074-FLD-000004", "target_kind": "condition", "candidate_ids": []},
-      {"name": "LS-VAL-AMT", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0074-FLD-000005", "target_kind": "condition", "candidate_ids": []},
-      {"name": "VAL-INVALID-ID", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0010-FLD-000002", "target_kind": "field", "candidate_ids": []},
-      {"name": "LS-RETURN-CODE", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0074-FLD-000007", "target_kind": "field", "candidate_ids": []},
-      {"name": "LS-ERROR-MSG", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0074-FLD-000008", "target_kind": "field", "candidate_ids": []}
-    ],
-    "calls_made": ["1000-VALIDATE-ID", "2000-VALIDATE-ACCOUNT", "3000-VALIDATE-TYPE", "4000-VALIDATE-AMOUNT"],
-    "calls_made_ids": [
-      {"name": "1000-VALIDATE-ID", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0074-PAR-0002", "section_id": null},
-      {"name": "2000-VALIDATE-ACCOUNT", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0074-PAR-0003", "section_id": null},
-      {"name": "3000-VALIDATE-TYPE", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0074-PAR-0004", "section_id": null},
-      {"name": "4000-VALIDATE-AMOUNT", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0074-PAR-0005", "section_id": null}
-    ],
-    "complexity_score": 5,
-    "has_unresolved_statements": false,
-    "annotations": [
-      {"line": 45, "statement_id": "SYS-PORTFOLIO-001-FIL-0074-STMT-000023", "note": "An unknown validation type returns VAL-INVALID-ID (+1), the same code as an invalid portfolio ID; the caller can only tell the cases apart by LS-ERROR-MSG."}
-    ]
-  },
-  {
-    "name": "1000-VALIDATE-ID",
-    "paragraph_id": "SYS-PORTFOLIO-001-FIL-0074-PAR-0002",
-    "section": null,
-    "section_id": null,
-    "line_range": [52, 72],
-    "pseudocode": [
-      "-- Portfolio ID must start with 'PORT' and have 4 numeric digits (source comment, lines 53-55)",
-      "IF input_value characters 1-4 != id_prefix (VAL-ID-PREFIX = 'PORT') THEN",
-      "  SET return_code = VAL-INVALID-ID (+1)",
-      "  SET error_msg = VAL-ERR-ID ('Invalid Portfolio ID format')",
-      "  EXIT paragraph  -- EXIT PARAGRAPH: return to the caller of 1000-validate-id",
-      "END IF",
-      "SET numeric_check (VAL-NUMERIC-CHECK) = input_value characters 5-8  -- 4 characters into a 10-character field: right-padded with 6 spaces",
-      "IF numeric_check is not all digits THEN  -- NUMERIC class test on all 10 characters",
-      "  SET return_code = VAL-INVALID-ID (+1)",
-      "  SET error_msg = VAL-ERR-ID ('Invalid Portfolio ID format')",
-      "  EXIT paragraph",
-      "END IF",
-      "SET return_code = VAL-SUCCESS (+0)",
-      "CLEAR error_msg  -- spaces"
-    ],
-    "pseudocode_statement_ids": [
-      [],
-      ["SYS-PORTFOLIO-001-FIL-0074-STMT-000004"],
-      ["SYS-PORTFOLIO-001-FIL-0074-STMT-000025"],
-      ["SYS-PORTFOLIO-001-FIL-0074-STMT-000026"],
-      ["SYS-PORTFOLIO-001-FIL-0074-STMT-000027"],
-      ["SYS-PORTFOLIO-001-FIL-0074-STMT-000004"],
-      ["SYS-PORTFOLIO-001-FIL-0074-STMT-000005"],
-      ["SYS-PORTFOLIO-001-FIL-0074-STMT-000006"],
-      ["SYS-PORTFOLIO-001-FIL-0074-STMT-000028"],
-      ["SYS-PORTFOLIO-001-FIL-0074-STMT-000029"],
-      ["SYS-PORTFOLIO-001-FIL-0074-STMT-000030"],
-      ["SYS-PORTFOLIO-001-FIL-0074-STMT-000006"],
-      ["SYS-PORTFOLIO-001-FIL-0074-STMT-000007"],
-      ["SYS-PORTFOLIO-001-FIL-0074-STMT-000008"]
-    ],
-    "pseudocode_text": "-- Portfolio ID must start with 'PORT' and have 4 numeric digits (source comment, lines 53-55)\nIF input_value characters 1-4 != id_prefix (VAL-ID-PREFIX = 'PORT') THEN\n  SET return_code = VAL-INVALID-ID (+1)\n  SET error_msg = VAL-ERR-ID ('Invalid Portfolio ID format')\n  EXIT paragraph  -- EXIT PARAGRAPH: return to the caller of 1000-validate-id\nEND IF\nSET numeric_check (VAL-NUMERIC-CHECK) = input_value characters 5-8  -- 4 characters into a 10-character field: right-padded with 6 spaces\nIF numeric_check is not all digits THEN  -- NUMERIC class test on all 10 characters\n  SET return_code = VAL-INVALID-ID (+1)\n  SET error_msg = VAL-ERR-ID ('Invalid Portfolio ID format')\n  EXIT paragraph\nEND IF\nSET return_code = VAL-SUCCESS (+0)\nCLEAR error_msg  -- spaces",
-    "statement_ids": ["SYS-PORTFOLIO-001-FIL-0074-STMT-000004", "SYS-PORTFOLIO-001-FIL-0074-STMT-000025", "SYS-PORTFOLIO-001-FIL-0074-STMT-000026", "SYS-PORTFOLIO-001-FIL-0074-STMT-000027", "SYS-PORTFOLIO-001-FIL-0074-STMT-000005", "SYS-PORTFOLIO-001-FIL-0074-STMT-000006", "SYS-PORTFOLIO-001-FIL-0074-STMT-000028", "SYS-PORTFOLIO-001-FIL-0074-STMT-000029", "SYS-PORTFOLIO-001-FIL-0074-STMT-000030", "SYS-PORTFOLIO-001-FIL-0074-STMT-000007", "SYS-PORTFOLIO-001-FIL-0074-STMT-000008"],
-    "untranslated_statement_ids": [],
-    "field_references": ["LS-INPUT-VALUE", "VAL-ID-PREFIX", "VAL-INVALID-ID", "LS-RETURN-CODE", "VAL-ERR-ID", "LS-ERROR-MSG", "VAL-NUMERIC-CHECK", "VAL-SUCCESS"],
-    "field_reference_ids": [
-      {"name": "LS-INPUT-VALUE", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0074-FLD-000006", "target_kind": "field", "candidate_ids": []},
-      {"name": "VAL-ID-PREFIX", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0010-FLD-000012", "target_kind": "field", "candidate_ids": []},
-      {"name": "VAL-INVALID-ID", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0010-FLD-000002", "target_kind": "field", "candidate_ids": []},
-      {"name": "LS-RETURN-CODE", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0074-FLD-000007", "target_kind": "field", "candidate_ids": []},
-      {"name": "VAL-ERR-ID", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0010-FLD-000006", "target_kind": "field", "candidate_ids": []},
-      {"name": "LS-ERROR-MSG", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0074-FLD-000008", "target_kind": "field", "candidate_ids": []},
-      {"name": "VAL-NUMERIC-CHECK", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0010-FLD-000013", "target_kind": "field", "candidate_ids": []},
-      {"name": "VAL-SUCCESS", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0010-FLD-000001", "target_kind": "field", "candidate_ids": []}
-    ],
-    "calls_made": [],
-    "calls_made_ids": [],
-    "complexity_score": 2,
-    "has_unresolved_statements": false,
-    "annotations": [
-      {"line": 62, "statement_id": "SYS-PORTFOLIO-001-FIL-0074-STMT-000005", "note": "VAL-NUMERIC-CHECK is PIC X(10); the 4-character reference-modified source leaves positions 5-10 as spaces, so the NUMERIC test at line 63 cannot be satisfied and the paragraph always ends with VAL-INVALID-ID as written. See trace_issues."}
-    ]
-  },
-  {
-    "name": "2000-VALIDATE-ACCOUNT",
-    "paragraph_id": "SYS-PORTFOLIO-001-FIL-0074-PAR-0003",
-    "section": null,
-    "section_id": null,
-    "line_range": [73, 87],
-    "pseudocode": [
-      "-- Account number must be 10 numeric digits (source comment, lines 74-76)",
-      "IF input_value is not all digits OR input_value = zeros THEN  -- tests the whole 50-character LS-INPUT-VALUE",
-      "  SET return_code = VAL-INVALID-ACCT (+2)",
-      "  SET error_msg = VAL-ERR-ACCT ('Invalid Account Number format')",
-      "  EXIT paragraph  -- EXIT PARAGRAPH",
-      "END IF",
-      "SET return_code = VAL-SUCCESS (+0)",
-      "CLEAR error_msg  -- spaces"
-    ],
-    "pseudocode_statement_ids": [
-      [],
-      ["SYS-PORTFOLIO-001-FIL-0074-STMT-000009"],
-      ["SYS-PORTFOLIO-001-FIL-0074-STMT-000031"],
-      ["SYS-PORTFOLIO-001-FIL-0074-STMT-000032"],
-      ["SYS-PORTFOLIO-001-FIL-0074-STMT-000033"],
-      ["SYS-PORTFOLIO-001-FIL-0074-STMT-000009"],
-      ["SYS-PORTFOLIO-001-FIL-0074-STMT-000010"],
-      ["SYS-PORTFOLIO-001-FIL-0074-STMT-000011"]
-    ],
-    "pseudocode_text": "-- Account number must be 10 numeric digits (source comment, lines 74-76)\nIF input_value is not all digits OR input_value = zeros THEN  -- tests the whole 50-character LS-INPUT-VALUE\n  SET return_code = VAL-INVALID-ACCT (+2)\n  SET error_msg = VAL-ERR-ACCT ('Invalid Account Number format')\n  EXIT paragraph  -- EXIT PARAGRAPH\nEND IF\nSET return_code = VAL-SUCCESS (+0)\nCLEAR error_msg  -- spaces",
-    "statement_ids": ["SYS-PORTFOLIO-001-FIL-0074-STMT-000009", "SYS-PORTFOLIO-001-FIL-0074-STMT-000031", "SYS-PORTFOLIO-001-FIL-0074-STMT-000032", "SYS-PORTFOLIO-001-FIL-0074-STMT-000033", "SYS-PORTFOLIO-001-FIL-0074-STMT-000010", "SYS-PORTFOLIO-001-FIL-0074-STMT-000011"],
-    "untranslated_statement_ids": [],
-    "field_references": ["LS-INPUT-VALUE", "VAL-INVALID-ACCT", "LS-RETURN-CODE", "VAL-ERR-ACCT", "LS-ERROR-MSG", "VAL-SUCCESS"],
-    "field_reference_ids": [
-      {"name": "LS-INPUT-VALUE", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0074-FLD-000006", "target_kind": "field", "candidate_ids": []},
-      {"name": "VAL-INVALID-ACCT", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0010-FLD-000003", "target_kind": "field", "candidate_ids": []},
-      {"name": "LS-RETURN-CODE", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0074-FLD-000007", "target_kind": "field", "candidate_ids": []},
-      {"name": "VAL-ERR-ACCT", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0010-FLD-000007", "target_kind": "field", "candidate_ids": []},
-      {"name": "LS-ERROR-MSG", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0074-FLD-000008", "target_kind": "field", "candidate_ids": []},
-      {"name": "VAL-SUCCESS", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0010-FLD-000001", "target_kind": "field", "candidate_ids": []}
-    ],
-    "calls_made": [],
-    "calls_made_ids": [],
-    "complexity_score": 1,
-    "has_unresolved_statements": false,
-    "annotations": [
-      {"line": 77, "statement_id": "SYS-PORTFOLIO-001-FIL-0074-STMT-000009", "note": "The comment says 10 digits, but the NUMERIC test applies to all 50 characters of LS-INPUT-VALUE PIC X(50): a value passes only if all 50 positions are digits. Whether callers pass a 50-digit value cannot be determined from this program.", "ambiguous": true}
-    ]
-  },
-  {
-    "name": "3000-VALIDATE-TYPE",
-    "paragraph_id": "SYS-PORTFOLIO-001-FIL-0074-PAR-0004",
-    "section": null,
-    "section_id": null,
-    "line_range": [88, 104],
-    "pseudocode": [
-      "-- Investment type must be valid value (source comment, lines 89-91)",
-      "IF input_value != 'STK' AND input_value != 'BND' AND input_value != 'MMF' AND input_value != 'ETF' THEN  -- abbreviated condition expanded",
-      "  SET return_code = VAL-INVALID-TYPE (+3)",
-      "  SET error_msg = VAL-ERR-TYPE ('Invalid Investment Type')",
-      "  EXIT paragraph  -- EXIT PARAGRAPH",
-      "END IF",
-      "SET return_code = VAL-SUCCESS (+0)",
-      "CLEAR error_msg  -- spaces"
-    ],
-    "pseudocode_statement_ids": [
-      [],
-      ["SYS-PORTFOLIO-001-FIL-0074-STMT-000012"],
-      ["SYS-PORTFOLIO-001-FIL-0074-STMT-000034"],
-      ["SYS-PORTFOLIO-001-FIL-0074-STMT-000035"],
-      ["SYS-PORTFOLIO-001-FIL-0074-STMT-000036"],
-      ["SYS-PORTFOLIO-001-FIL-0074-STMT-000012"],
-      ["SYS-PORTFOLIO-001-FIL-0074-STMT-000013"],
-      ["SYS-PORTFOLIO-001-FIL-0074-STMT-000014"]
-    ],
-    "pseudocode_text": "-- Investment type must be valid value (source comment, lines 89-91)\nIF input_value != 'STK' AND input_value != 'BND' AND input_value != 'MMF' AND input_value != 'ETF' THEN  -- abbreviated condition expanded\n  SET return_code = VAL-INVALID-TYPE (+3)\n  SET error_msg = VAL-ERR-TYPE ('Invalid Investment Type')\n  EXIT paragraph  -- EXIT PARAGRAPH\nEND IF\nSET return_code = VAL-SUCCESS (+0)\nCLEAR error_msg  -- spaces",
-    "statement_ids": ["SYS-PORTFOLIO-001-FIL-0074-STMT-000012", "SYS-PORTFOLIO-001-FIL-0074-STMT-000034", "SYS-PORTFOLIO-001-FIL-0074-STMT-000035", "SYS-PORTFOLIO-001-FIL-0074-STMT-000036", "SYS-PORTFOLIO-001-FIL-0074-STMT-000013", "SYS-PORTFOLIO-001-FIL-0074-STMT-000014"],
-    "untranslated_statement_ids": [],
-    "field_references": ["LS-INPUT-VALUE", "VAL-INVALID-TYPE", "LS-RETURN-CODE", "VAL-ERR-TYPE", "LS-ERROR-MSG", "VAL-SUCCESS"],
-    "field_reference_ids": [
-      {"name": "LS-INPUT-VALUE", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0074-FLD-000006", "target_kind": "field", "candidate_ids": []},
-      {"name": "VAL-INVALID-TYPE", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0010-FLD-000004", "target_kind": "field", "candidate_ids": []},
-      {"name": "LS-RETURN-CODE", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0074-FLD-000007", "target_kind": "field", "candidate_ids": []},
-      {"name": "VAL-ERR-TYPE", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0010-FLD-000008", "target_kind": "field", "candidate_ids": []},
-      {"name": "LS-ERROR-MSG", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0074-FLD-000008", "target_kind": "field", "candidate_ids": []},
-      {"name": "VAL-SUCCESS", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0010-FLD-000001", "target_kind": "field", "candidate_ids": []}
-    ],
-    "calls_made": [],
-    "calls_made_ids": [],
-    "complexity_score": 1,
-    "has_unresolved_statements": false,
-    "annotations": [
-      {"line": 92, "statement_id": "SYS-PORTFOLIO-001-FIL-0074-STMT-000012", "note": "COBOL abbreviated combined relation: the subject LS-INPUT-VALUE is implied in each 'AND NOT = ...'. The 3-character literals are compared against the 50-character field padded with spaces."}
-    ]
-  },
-  {
-    "name": "4000-VALIDATE-AMOUNT",
-    "paragraph_id": "SYS-PORTFOLIO-001-FIL-0074-PAR-0005",
-    "section": null,
-    "section_id": null,
-    "line_range": [105, 120],
-    "pseudocode": [
-      "-- Amount must be within valid range (source comment, lines 106-108)",
-      "SET temp_num (VAL-TEMP-NUM) = input_value  -- alphanumeric X(50) moved to numeric S9(13)V99",
-      "IF temp_num < min_amount (VAL-MIN-AMOUNT = -9999999999999.99) OR temp_num > max_amount (VAL-MAX-AMOUNT = +9999999999999.99) THEN",
-      "  SET return_code = VAL-INVALID-AMT (+4)",
-      "  SET error_msg = VAL-ERR-AMT ('Amount outside valid range')",
-      "  EXIT paragraph  -- EXIT PARAGRAPH",
-      "END IF",
-      "SET return_code = VAL-SUCCESS (+0)",
-      "CLEAR error_msg  -- spaces"
-    ],
-    "pseudocode_statement_ids": [
-      [],
-      ["SYS-PORTFOLIO-001-FIL-0074-STMT-000015"],
-      ["SYS-PORTFOLIO-001-FIL-0074-STMT-000016"],
-      ["SYS-PORTFOLIO-001-FIL-0074-STMT-000037"],
-      ["SYS-PORTFOLIO-001-FIL-0074-STMT-000038"],
-      ["SYS-PORTFOLIO-001-FIL-0074-STMT-000039"],
-      ["SYS-PORTFOLIO-001-FIL-0074-STMT-000016"],
-      ["SYS-PORTFOLIO-001-FIL-0074-STMT-000017"],
-      ["SYS-PORTFOLIO-001-FIL-0074-STMT-000018"]
-    ],
-    "pseudocode_text": "-- Amount must be within valid range (source comment, lines 106-108)\nSET temp_num (VAL-TEMP-NUM) = input_value  -- alphanumeric X(50) moved to numeric S9(13)V99\nIF temp_num < min_amount (VAL-MIN-AMOUNT = -9999999999999.99) OR temp_num > max_amount (VAL-MAX-AMOUNT = +9999999999999.99) THEN\n  SET return_code = VAL-INVALID-AMT (+4)\n  SET error_msg = VAL-ERR-AMT ('Amount outside valid range')\n  EXIT paragraph  -- EXIT PARAGRAPH\nEND IF\nSET return_code = VAL-SUCCESS (+0)\nCLEAR error_msg  -- spaces",
-    "statement_ids": ["SYS-PORTFOLIO-001-FIL-0074-STMT-000015", "SYS-PORTFOLIO-001-FIL-0074-STMT-000016", "SYS-PORTFOLIO-001-FIL-0074-STMT-000037", "SYS-PORTFOLIO-001-FIL-0074-STMT-000038", "SYS-PORTFOLIO-001-FIL-0074-STMT-000039", "SYS-PORTFOLIO-001-FIL-0074-STMT-000017", "SYS-PORTFOLIO-001-FIL-0074-STMT-000018"],
-    "untranslated_statement_ids": [],
-    "field_references": ["LS-INPUT-VALUE", "VAL-TEMP-NUM", "VAL-MIN-AMOUNT", "VAL-MAX-AMOUNT", "VAL-INVALID-AMT", "LS-RETURN-CODE", "VAL-ERR-AMT", "LS-ERROR-MSG", "VAL-SUCCESS"],
-    "field_reference_ids": [
-      {"name": "LS-INPUT-VALUE", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0074-FLD-000006", "target_kind": "field", "candidate_ids": []},
-      {"name": "VAL-TEMP-NUM", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0010-FLD-000014", "target_kind": "field", "candidate_ids": []},
-      {"name": "VAL-MIN-AMOUNT", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0010-FLD-000010", "target_kind": "field", "candidate_ids": []},
-      {"name": "VAL-MAX-AMOUNT", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0010-FLD-000011", "target_kind": "field", "candidate_ids": []},
-      {"name": "VAL-INVALID-AMT", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0010-FLD-000005", "target_kind": "field", "candidate_ids": []},
-      {"name": "LS-RETURN-CODE", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0074-FLD-000007", "target_kind": "field", "candidate_ids": []},
-      {"name": "VAL-ERR-AMT", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0010-FLD-000009", "target_kind": "field", "candidate_ids": []},
-      {"name": "LS-ERROR-MSG", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0074-FLD-000008", "target_kind": "field", "candidate_ids": []},
-      {"name": "VAL-SUCCESS", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0010-FLD-000001", "target_kind": "field", "candidate_ids": []}
-    ],
-    "calls_made": [],
-    "calls_made_ids": [],
-    "complexity_score": 1,
-    "has_unresolved_statements": false,
-    "annotations": [
-      {"line": 109, "statement_id": "SYS-PORTFOLIO-001-FIL-0074-STMT-000015", "note": "MOVE of an alphanumeric item (X(50)) to a numeric display item (S9(13)V99) treats the source as an unsigned integer; a decimal point, sign or non-digit characters in LS-INPUT-VALUE are not interpreted, and the resulting value is compiler-dependent.", "ambiguous": true},
-      {"line": 111, "statement_id": "SYS-PORTFOLIO-001-FIL-0074-STMT-000016", "note": "The PIC S9(13)V99 range of VAL-TEMP-NUM equals the VAL-MIN-AMOUNT..VAL-MAX-AMOUNT range, so the THEN branch is unreachable as written. See trace_issues."}
-    ]
-  }
+  {"name": "0000-MAIN", "section": null, "paragraph_id": "SYS-PORTFOLIO-001-FIL-0074-PAR-0001", "section_id": null, "line_range": [32, 51],
+   "statement_ids": ["SYS-PORTFOLIO-001-FIL-0074-STMT-000001", "SYS-PORTFOLIO-001-FIL-0074-STMT-000002", "SYS-PORTFOLIO-001-FIL-0074-STMT-000021", "SYS-PORTFOLIO-001-FIL-0074-STMT-000019", "SYS-PORTFOLIO-001-FIL-0074-STMT-000022", "SYS-PORTFOLIO-001-FIL-0074-STMT-000020", "SYS-PORTFOLIO-001-FIL-0074-STMT-000023", "SYS-PORTFOLIO-001-FIL-0074-STMT-000024", "SYS-PORTFOLIO-001-FIL-0074-STMT-000003"],
+   "pseudocode": [
+     "-- Main control: validate one data element according to the requested validation type",
+     "INITIALIZE work_areas (VAL-WORK-AREAS)  -- numeric subfields to zero, alphanumeric to spaces",
+     "IF validation type is Portfolio ID (LS-VAL-ID: LS-VALIDATE-TYPE = 'I') THEN",
+     "  CALL 1000-validate-id",
+     "ELSE IF validation type is Account (LS-VAL-ACCT: 'A') THEN",
+     "  CALL 2000-validate-account",
+     "ELSE IF validation type is Investment type (LS-VAL-TYPE: 'T') THEN",
+     "  CALL 3000-validate-type",
+     "ELSE IF validation type is Amount (LS-VAL-AMT: 'M') THEN",
+     "  CALL 4000-validate-amount",
+     "ELSE",
+     "  SET return_code (LS-RETURN-CODE) = VAL-INVALID-ID  -- constant +1",
+     "  SET error_message (LS-ERROR-MSG) = 'Invalid validation type'",
+     "END IF",
+     "RETURN to caller  -- GOBACK"
+   ],
+   "pseudocode_statement_ids": [[], ["SYS-PORTFOLIO-001-FIL-0074-STMT-000001"], ["SYS-PORTFOLIO-001-FIL-0074-STMT-000002"], ["SYS-PORTFOLIO-001-FIL-0074-STMT-000021"], ["SYS-PORTFOLIO-001-FIL-0074-STMT-000002"], ["SYS-PORTFOLIO-001-FIL-0074-STMT-000019"], ["SYS-PORTFOLIO-001-FIL-0074-STMT-000002"], ["SYS-PORTFOLIO-001-FIL-0074-STMT-000022"], ["SYS-PORTFOLIO-001-FIL-0074-STMT-000002"], ["SYS-PORTFOLIO-001-FIL-0074-STMT-000020"], ["SYS-PORTFOLIO-001-FIL-0074-STMT-000002"], ["SYS-PORTFOLIO-001-FIL-0074-STMT-000023"], ["SYS-PORTFOLIO-001-FIL-0074-STMT-000024"], ["SYS-PORTFOLIO-001-FIL-0074-STMT-000002"], ["SYS-PORTFOLIO-001-FIL-0074-STMT-000003"]],
+   "pseudocode_text": "-- Main control: validate one data element according to the requested validation type\nINITIALIZE work_areas (VAL-WORK-AREAS)\nIF validation type is Portfolio ID (LS-VAL-ID) THEN\n  CALL 1000-validate-id\nELSE IF validation type is Account (LS-VAL-ACCT) THEN\n  CALL 2000-validate-account\nELSE IF validation type is Investment type (LS-VAL-TYPE) THEN\n  CALL 3000-validate-type\nELSE IF validation type is Amount (LS-VAL-AMT) THEN\n  CALL 4000-validate-amount\nELSE\n  SET return_code (LS-RETURN-CODE) = VAL-INVALID-ID\n  SET error_message (LS-ERROR-MSG) = 'Invalid validation type'\nEND IF\nRETURN to caller  -- GOBACK",
+   "untranslated_statement_ids": [],
+   "field_references": ["VAL-WORK-AREAS", "LS-VAL-ID", "LS-VAL-ACCT", "LS-VAL-TYPE", "LS-VAL-AMT", "VAL-INVALID-ID", "LS-RETURN-CODE", "LS-ERROR-MSG"],
+   "field_reference_ids": [
+     {"name": "VAL-WORK-AREAS", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0010-REC-0004", "target_kind": "record", "candidate_ids": []},
+     {"name": "LS-VAL-ID", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0074-FLD-000002", "target_kind": "condition", "candidate_ids": []},
+     {"name": "LS-VAL-ACCT", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0074-FLD-000003", "target_kind": "condition", "candidate_ids": []},
+     {"name": "LS-VAL-TYPE", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0074-FLD-000004", "target_kind": "condition", "candidate_ids": []},
+     {"name": "LS-VAL-AMT", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0074-FLD-000005", "target_kind": "condition", "candidate_ids": []},
+     {"name": "VAL-INVALID-ID", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0010-FLD-000002", "target_kind": "field", "candidate_ids": []},
+     {"name": "LS-RETURN-CODE", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0074-FLD-000007", "target_kind": "field", "candidate_ids": []},
+     {"name": "LS-ERROR-MSG", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0074-FLD-000008", "target_kind": "field", "candidate_ids": []}],
+   "calls_made": ["1000-VALIDATE-ID", "2000-VALIDATE-ACCOUNT", "3000-VALIDATE-TYPE", "4000-VALIDATE-AMOUNT"],
+   "calls_made_ids": [
+     {"name": "1000-VALIDATE-ID", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0074-PAR-0002", "section_id": null},
+     {"name": "2000-VALIDATE-ACCOUNT", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0074-PAR-0003", "section_id": null},
+     {"name": "3000-VALIDATE-TYPE", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0074-PAR-0004", "section_id": null},
+     {"name": "4000-VALIDATE-AMOUNT", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0074-PAR-0005", "section_id": null}],
+   "complexity_score": 5, "has_unresolved_statements": false,
+   "annotations": [{"line": 35, "statement_id": "SYS-PORTFOLIO-001-FIL-0074-STMT-000002", "note": "EVALUATE TRUE translated as IF / ELSE IF chain over the LS-VALIDATE-TYPE 88-level conditions"}]},
+  {"name": "1000-VALIDATE-ID", "section": null, "paragraph_id": "SYS-PORTFOLIO-001-FIL-0074-PAR-0002", "section_id": null, "line_range": [52, 72],
+   "statement_ids": ["SYS-PORTFOLIO-001-FIL-0074-STMT-000004", "SYS-PORTFOLIO-001-FIL-0074-STMT-000025", "SYS-PORTFOLIO-001-FIL-0074-STMT-000026", "SYS-PORTFOLIO-001-FIL-0074-STMT-000027", "SYS-PORTFOLIO-001-FIL-0074-STMT-000005", "SYS-PORTFOLIO-001-FIL-0074-STMT-000006", "SYS-PORTFOLIO-001-FIL-0074-STMT-000028", "SYS-PORTFOLIO-001-FIL-0074-STMT-000029", "SYS-PORTFOLIO-001-FIL-0074-STMT-000030", "SYS-PORTFOLIO-001-FIL-0074-STMT-000007", "SYS-PORTFOLIO-001-FIL-0074-STMT-000008"],
+   "pseudocode": [
+     "-- Portfolio ID must start with 'PORT' and have 4 numeric digits (source comment)",
+     "IF first 4 characters of input_value (LS-INPUT-VALUE(1:4)) != id_prefix (VAL-ID-PREFIX, 'PORT') THEN",
+     "  SET return_code (LS-RETURN-CODE) = VAL-INVALID-ID  -- constant +1",
+     "  SET error_message (LS-ERROR-MSG) = VAL-ERR-ID  -- 'Invalid Portfolio ID format'",
+     "  EXIT paragraph early  -- EXIT PARAGRAPH: return to caller paragraph",
+     "END IF",
+     "SET numeric_check (VAL-NUMERIC-CHECK) = characters 5-8 of input_value (LS-INPUT-VALUE(5:4))  -- receiving field is X(10): padded with 6 spaces",
+     "IF numeric_check is not all digits (VAL-NUMERIC-CHECK IS NOT NUMERIC) THEN",
+     "  SET return_code (LS-RETURN-CODE) = VAL-INVALID-ID",
+     "  SET error_message (LS-ERROR-MSG) = VAL-ERR-ID",
+     "  EXIT paragraph early  -- EXIT PARAGRAPH",
+     "END IF",
+     "SET return_code (LS-RETURN-CODE) = VAL-SUCCESS  -- constant +0",
+     "CLEAR error_message (LS-ERROR-MSG)  -- initialise to spaces"
+   ],
+   "pseudocode_statement_ids": [[], ["SYS-PORTFOLIO-001-FIL-0074-STMT-000004"], ["SYS-PORTFOLIO-001-FIL-0074-STMT-000025"], ["SYS-PORTFOLIO-001-FIL-0074-STMT-000026"], ["SYS-PORTFOLIO-001-FIL-0074-STMT-000027"], ["SYS-PORTFOLIO-001-FIL-0074-STMT-000004"], ["SYS-PORTFOLIO-001-FIL-0074-STMT-000005"], ["SYS-PORTFOLIO-001-FIL-0074-STMT-000006"], ["SYS-PORTFOLIO-001-FIL-0074-STMT-000028"], ["SYS-PORTFOLIO-001-FIL-0074-STMT-000029"], ["SYS-PORTFOLIO-001-FIL-0074-STMT-000030"], ["SYS-PORTFOLIO-001-FIL-0074-STMT-000006"], ["SYS-PORTFOLIO-001-FIL-0074-STMT-000007"], ["SYS-PORTFOLIO-001-FIL-0074-STMT-000008"]],
+   "pseudocode_text": "-- Portfolio ID must start with 'PORT' and have 4 numeric digits (source comment)\nIF LS-INPUT-VALUE(1:4) != VAL-ID-PREFIX THEN\n  SET return_code = VAL-INVALID-ID\n  SET error_message = VAL-ERR-ID\n  EXIT paragraph early\nEND IF\nSET numeric_check (VAL-NUMERIC-CHECK) = LS-INPUT-VALUE(5:4)\nIF VAL-NUMERIC-CHECK IS NOT NUMERIC THEN\n  SET return_code = VAL-INVALID-ID\n  SET error_message = VAL-ERR-ID\n  EXIT paragraph early\nEND IF\nSET return_code = VAL-SUCCESS\nCLEAR error_message",
+   "untranslated_statement_ids": [],
+   "field_references": ["LS-INPUT-VALUE", "VAL-ID-PREFIX", "VAL-INVALID-ID", "LS-RETURN-CODE", "VAL-ERR-ID", "LS-ERROR-MSG", "VAL-NUMERIC-CHECK", "VAL-SUCCESS"],
+   "field_reference_ids": [
+     {"name": "LS-INPUT-VALUE", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0074-FLD-000006", "target_kind": "field", "candidate_ids": []},
+     {"name": "VAL-ID-PREFIX", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0010-FLD-000012", "target_kind": "field", "candidate_ids": []},
+     {"name": "VAL-INVALID-ID", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0010-FLD-000002", "target_kind": "field", "candidate_ids": []},
+     {"name": "LS-RETURN-CODE", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0074-FLD-000007", "target_kind": "field", "candidate_ids": []},
+     {"name": "VAL-ERR-ID", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0010-FLD-000006", "target_kind": "field", "candidate_ids": []},
+     {"name": "LS-ERROR-MSG", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0074-FLD-000008", "target_kind": "field", "candidate_ids": []},
+     {"name": "VAL-NUMERIC-CHECK", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0010-FLD-000013", "target_kind": "field", "candidate_ids": []},
+     {"name": "VAL-SUCCESS", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0010-FLD-000001", "target_kind": "field", "candidate_ids": []}],
+   "calls_made": [], "calls_made_ids": [],
+   "complexity_score": 2, "has_unresolved_statements": false,
+   "annotations": [{"line": 63, "statement_id": "SYS-PORTFOLIO-001-FIL-0074-STMT-000006", "note": "!! REVIEW: 4 characters moved into X(10) leave 6 trailing spaces, so IS NOT NUMERIC is true for every input; the success path at lines 69-70 is unreachable as written (see trace_issues)"}]},
+  {"name": "2000-VALIDATE-ACCOUNT", "section": null, "paragraph_id": "SYS-PORTFOLIO-001-FIL-0074-PAR-0003", "section_id": null, "line_range": [73, 87],
+   "statement_ids": ["SYS-PORTFOLIO-001-FIL-0074-STMT-000009", "SYS-PORTFOLIO-001-FIL-0074-STMT-000031", "SYS-PORTFOLIO-001-FIL-0074-STMT-000032", "SYS-PORTFOLIO-001-FIL-0074-STMT-000033", "SYS-PORTFOLIO-001-FIL-0074-STMT-000010", "SYS-PORTFOLIO-001-FIL-0074-STMT-000011"],
+   "pseudocode": [
+     "-- Account number must be 10 numeric digits (source comment)",
+     "IF input_value (LS-INPUT-VALUE) is not all digits OR input_value = all zeros THEN",
+     "  SET return_code (LS-RETURN-CODE) = VAL-INVALID-ACCT  -- constant +2",
+     "  SET error_message (LS-ERROR-MSG) = VAL-ERR-ACCT  -- 'Invalid Account Number format'",
+     "  EXIT paragraph early  -- EXIT PARAGRAPH",
+     "END IF",
+     "SET return_code (LS-RETURN-CODE) = VAL-SUCCESS",
+     "CLEAR error_message (LS-ERROR-MSG)"
+   ],
+   "pseudocode_statement_ids": [[], ["SYS-PORTFOLIO-001-FIL-0074-STMT-000009"], ["SYS-PORTFOLIO-001-FIL-0074-STMT-000031"], ["SYS-PORTFOLIO-001-FIL-0074-STMT-000032"], ["SYS-PORTFOLIO-001-FIL-0074-STMT-000033"], ["SYS-PORTFOLIO-001-FIL-0074-STMT-000009"], ["SYS-PORTFOLIO-001-FIL-0074-STMT-000010"], ["SYS-PORTFOLIO-001-FIL-0074-STMT-000011"]],
+   "pseudocode_text": "-- Account number must be 10 numeric digits (source comment)\nIF LS-INPUT-VALUE is not all digits OR LS-INPUT-VALUE = all zeros THEN\n  SET return_code = VAL-INVALID-ACCT\n  SET error_message = VAL-ERR-ACCT\n  EXIT paragraph early\nEND IF\nSET return_code = VAL-SUCCESS\nCLEAR error_message",
+   "untranslated_statement_ids": [],
+   "field_references": ["LS-INPUT-VALUE", "VAL-INVALID-ACCT", "LS-RETURN-CODE", "VAL-ERR-ACCT", "LS-ERROR-MSG", "VAL-SUCCESS"],
+   "field_reference_ids": [
+     {"name": "LS-INPUT-VALUE", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0074-FLD-000006", "target_kind": "field", "candidate_ids": []},
+     {"name": "VAL-INVALID-ACCT", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0010-FLD-000003", "target_kind": "field", "candidate_ids": []},
+     {"name": "LS-RETURN-CODE", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0074-FLD-000007", "target_kind": "field", "candidate_ids": []},
+     {"name": "VAL-ERR-ACCT", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0010-FLD-000007", "target_kind": "field", "candidate_ids": []},
+     {"name": "LS-ERROR-MSG", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0074-FLD-000008", "target_kind": "field", "candidate_ids": []},
+     {"name": "VAL-SUCCESS", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0010-FLD-000001", "target_kind": "field", "candidate_ids": []}],
+   "calls_made": [], "calls_made_ids": [],
+   "complexity_score": 1, "has_unresolved_statements": false,
+   "annotations": [{"line": 77, "statement_id": "SYS-PORTFOLIO-001-FIL-0074-STMT-000009", "note": "!! REVIEW: NUMERIC test covers all 50 characters of LS-INPUT-VALUE; a 10-digit account number followed by spaces is rejected (see trace_issues)"}]},
+  {"name": "3000-VALIDATE-TYPE", "section": null, "paragraph_id": "SYS-PORTFOLIO-001-FIL-0074-PAR-0004", "section_id": null, "line_range": [88, 104],
+   "statement_ids": ["SYS-PORTFOLIO-001-FIL-0074-STMT-000012", "SYS-PORTFOLIO-001-FIL-0074-STMT-000034", "SYS-PORTFOLIO-001-FIL-0074-STMT-000035", "SYS-PORTFOLIO-001-FIL-0074-STMT-000036", "SYS-PORTFOLIO-001-FIL-0074-STMT-000013", "SYS-PORTFOLIO-001-FIL-0074-STMT-000014"],
+   "pseudocode": [
+     "-- Investment type must be a valid value (source comment)",
+     "IF input_value != 'STK' AND input_value != 'BND' AND input_value != 'MMF' AND input_value != 'ETF' THEN  -- abbreviated COBOL condition expanded",
+     "  SET return_code (LS-RETURN-CODE) = VAL-INVALID-TYPE  -- constant +3",
+     "  SET error_message (LS-ERROR-MSG) = VAL-ERR-TYPE  -- 'Invalid Investment Type'",
+     "  EXIT paragraph early  -- EXIT PARAGRAPH",
+     "END IF",
+     "SET return_code (LS-RETURN-CODE) = VAL-SUCCESS",
+     "CLEAR error_message (LS-ERROR-MSG)"
+   ],
+   "pseudocode_statement_ids": [[], ["SYS-PORTFOLIO-001-FIL-0074-STMT-000012"], ["SYS-PORTFOLIO-001-FIL-0074-STMT-000034"], ["SYS-PORTFOLIO-001-FIL-0074-STMT-000035"], ["SYS-PORTFOLIO-001-FIL-0074-STMT-000036"], ["SYS-PORTFOLIO-001-FIL-0074-STMT-000012"], ["SYS-PORTFOLIO-001-FIL-0074-STMT-000013"], ["SYS-PORTFOLIO-001-FIL-0074-STMT-000014"]],
+   "pseudocode_text": "-- Investment type must be a valid value (source comment)\nIF input_value NOT IN ('STK', 'BND', 'MMF', 'ETF') THEN\n  SET return_code = VAL-INVALID-TYPE\n  SET error_message = VAL-ERR-TYPE\n  EXIT paragraph early\nEND IF\nSET return_code = VAL-SUCCESS\nCLEAR error_message",
+   "untranslated_statement_ids": [],
+   "field_references": ["LS-INPUT-VALUE", "VAL-INVALID-TYPE", "LS-RETURN-CODE", "VAL-ERR-TYPE", "LS-ERROR-MSG", "VAL-SUCCESS"],
+   "field_reference_ids": [
+     {"name": "LS-INPUT-VALUE", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0074-FLD-000006", "target_kind": "field", "candidate_ids": []},
+     {"name": "VAL-INVALID-TYPE", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0010-FLD-000004", "target_kind": "field", "candidate_ids": []},
+     {"name": "LS-RETURN-CODE", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0074-FLD-000007", "target_kind": "field", "candidate_ids": []},
+     {"name": "VAL-ERR-TYPE", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0010-FLD-000008", "target_kind": "field", "candidate_ids": []},
+     {"name": "LS-ERROR-MSG", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0074-FLD-000008", "target_kind": "field", "candidate_ids": []},
+     {"name": "VAL-SUCCESS", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0010-FLD-000001", "target_kind": "field", "candidate_ids": []}],
+   "calls_made": [], "calls_made_ids": [],
+   "complexity_score": 1, "has_unresolved_statements": false,
+   "annotations": [{"line": 92, "statement_id": "SYS-PORTFOLIO-001-FIL-0074-STMT-000012", "note": "Comparison of X(50) with a 3-character literal pads the literal with spaces: the value must be exactly the code followed by spaces"}]},
+  {"name": "4000-VALIDATE-AMOUNT", "section": null, "paragraph_id": "SYS-PORTFOLIO-001-FIL-0074-PAR-0005", "section_id": null, "line_range": [105, 120],
+   "statement_ids": ["SYS-PORTFOLIO-001-FIL-0074-STMT-000015", "SYS-PORTFOLIO-001-FIL-0074-STMT-000016", "SYS-PORTFOLIO-001-FIL-0074-STMT-000037", "SYS-PORTFOLIO-001-FIL-0074-STMT-000038", "SYS-PORTFOLIO-001-FIL-0074-STMT-000039", "SYS-PORTFOLIO-001-FIL-0074-STMT-000017", "SYS-PORTFOLIO-001-FIL-0074-STMT-000018"],
+   "pseudocode": [
+     "-- Amount must be within valid range (source comment)",
+     "SET temp_amount (VAL-TEMP-NUM) = input_value (LS-INPUT-VALUE)  -- alphanumeric X(50) moved to numeric S9(13)V99",
+     "IF temp_amount < min_amount (VAL-MIN-AMOUNT, -9999999999999.99) OR temp_amount > max_amount (VAL-MAX-AMOUNT, +9999999999999.99) THEN",
+     "  SET return_code (LS-RETURN-CODE) = VAL-INVALID-AMT  -- constant +4",
+     "  SET error_message (LS-ERROR-MSG) = VAL-ERR-AMT  -- 'Amount outside valid range'",
+     "  EXIT paragraph early  -- EXIT PARAGRAPH",
+     "END IF",
+     "SET return_code (LS-RETURN-CODE) = VAL-SUCCESS",
+     "CLEAR error_message (LS-ERROR-MSG)"
+   ],
+   "pseudocode_statement_ids": [[], ["SYS-PORTFOLIO-001-FIL-0074-STMT-000015"], ["SYS-PORTFOLIO-001-FIL-0074-STMT-000016"], ["SYS-PORTFOLIO-001-FIL-0074-STMT-000037"], ["SYS-PORTFOLIO-001-FIL-0074-STMT-000038"], ["SYS-PORTFOLIO-001-FIL-0074-STMT-000039"], ["SYS-PORTFOLIO-001-FIL-0074-STMT-000016"], ["SYS-PORTFOLIO-001-FIL-0074-STMT-000017"], ["SYS-PORTFOLIO-001-FIL-0074-STMT-000018"]],
+   "pseudocode_text": "-- Amount must be within valid range (source comment)\nSET temp_amount (VAL-TEMP-NUM) = LS-INPUT-VALUE\nIF temp_amount < VAL-MIN-AMOUNT OR temp_amount > VAL-MAX-AMOUNT THEN\n  SET return_code = VAL-INVALID-AMT\n  SET error_message = VAL-ERR-AMT\n  EXIT paragraph early\nEND IF\nSET return_code = VAL-SUCCESS\nCLEAR error_message",
+   "untranslated_statement_ids": [],
+   "field_references": ["LS-INPUT-VALUE", "VAL-TEMP-NUM", "VAL-MIN-AMOUNT", "VAL-MAX-AMOUNT", "VAL-INVALID-AMT", "LS-RETURN-CODE", "VAL-ERR-AMT", "LS-ERROR-MSG", "VAL-SUCCESS"],
+   "field_reference_ids": [
+     {"name": "LS-INPUT-VALUE", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0074-FLD-000006", "target_kind": "field", "candidate_ids": []},
+     {"name": "VAL-TEMP-NUM", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0010-FLD-000014", "target_kind": "field", "candidate_ids": []},
+     {"name": "VAL-MIN-AMOUNT", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0010-FLD-000010", "target_kind": "field", "candidate_ids": []},
+     {"name": "VAL-MAX-AMOUNT", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0010-FLD-000011", "target_kind": "field", "candidate_ids": []},
+     {"name": "VAL-INVALID-AMT", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0010-FLD-000005", "target_kind": "field", "candidate_ids": []},
+     {"name": "LS-RETURN-CODE", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0074-FLD-000007", "target_kind": "field", "candidate_ids": []},
+     {"name": "VAL-ERR-AMT", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0010-FLD-000009", "target_kind": "field", "candidate_ids": []},
+     {"name": "LS-ERROR-MSG", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0074-FLD-000008", "target_kind": "field", "candidate_ids": []},
+     {"name": "VAL-SUCCESS", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0010-FLD-000001", "target_kind": "field", "candidate_ids": []}],
+   "calls_made": [], "calls_made_ids": [],
+   "complexity_score": 1, "has_unresolved_statements": false,
+   "annotations": [{"line": 109, "statement_id": "SYS-PORTFOLIO-001-FIL-0074-STMT-000015", "note": "!! REVIEW: alphanumeric-to-numeric MOVE; result for non-digit content is compiler-dependent, and the range limits equal the picture's full range (see trace_issues)"}]}
 ],
 "unresolved_statements": [],
-"pseudocode_issues": []
+"pseudocode_issues": [],
+"id_resolution_summary": {"statements_unresolved": 0, "fields_unresolved": 0, "fields_ambiguous": 0, "paragraph_targets_unresolved": 0, "unresolved_field_names": []}
 }

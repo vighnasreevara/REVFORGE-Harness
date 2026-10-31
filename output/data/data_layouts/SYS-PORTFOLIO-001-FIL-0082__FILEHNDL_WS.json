@@ -1,5 +1,6 @@
 {
-  "id": "FILEHNDL",
+  "id": "FILEHNDL_WS",
+  "program_id": "FILEHNDL",
   "source_type": "program_ws",
   "source_file": "src/templates/program/file-handling.cbl",
   "used_by_programs": ["FILEHNDL"],
@@ -8,12 +9,12 @@
   "system_id": "SYS-PORTFOLIO-001",
   "file_id": "SYS-PORTFOLIO-001-FIL-0082",
   "path_id": "SYS-PORTFOLIO-001-PATH-0082",
-  "data_run_id": "DRUN-20261024T215053Z-ACC1",
+  "data_run_id": "DRUN-20261027T162831Z-1330",
+  "parse_run_id": "PRUN-20261027T155247Z-2626",
   "records": [
     {
       "record_id": "SYS-PORTFOLIO-001-FIL-0082-REC-0001",
-      "section": "FILE", "section_id": "SYS-PORTFOLIO-001-FIL-0082-SEC-0003", "fd_name": "VSAM-FILE",
-      "is_fragment": false, "level": 1, "name": "VSAM-RECORD",
+      "section": "FILE", "section_id": "SYS-PORTFOLIO-001-FIL-0082-SEC-0003", "fd_name": "VSAM-FILE", "is_fragment": false, "level": 1, "name": "VSAM-RECORD",
       "pic": null, "type": "GROUP", "storage_type": "DISPLAY", "bytes": 100, "total_bytes": 100, "inline_bytes": 100,
       "redefines": null, "occurs": null, "value": null, "line": 50, "end_line": 52,
       "children": [
@@ -23,50 +24,42 @@
     },
     {
       "record_id": "SYS-PORTFOLIO-001-FIL-0082-REC-0002",
-      "section": "FILE", "section_id": "SYS-PORTFOLIO-001-FIL-0082-SEC-0003", "fd_name": "INPUT-FILE",
-      "is_fragment": false, "level": 1, "name": "INPUT-RECORD",
-      "pic": "X(80)", "type": "STRING",
-      "pic_parsed": {"raw": "X(80)", "normalized_type": "STRING", "length": 80, "decimal_places": 0, "signed": false, "storage_type": "DISPLAY"},
-      "storage_type": "DISPLAY", "bytes": 80, "total_bytes": 80, "inline_bytes": 80,
-      "redefines": null, "occurs": null, "value": null, "line": 60, "end_line": 60,
-      "children": []
+      "section": "FILE", "section_id": "SYS-PORTFOLIO-001-FIL-0082-SEC-0003", "fd_name": "INPUT-FILE", "is_fragment": false, "level": 1, "name": "INPUT-RECORD",
+      "pic": "X(80)", "pic_parsed": {"raw": "X(80)", "normalized_type": "STRING", "length": 80, "decimal_places": 0, "signed": false, "storage_type": "DISPLAY"},
+      "type": "STRING", "storage_type": "DISPLAY", "bytes": 80, "total_bytes": 80, "inline_bytes": 80,
+      "redefines": null, "occurs": null, "value": null, "line": 60, "end_line": 60, "children": []
     },
     {
       "record_id": "SYS-PORTFOLIO-001-FIL-0082-REC-0003",
-      "section": "FILE", "section_id": "SYS-PORTFOLIO-001-FIL-0082-SEC-0003", "fd_name": "OUTPUT-FILE",
-      "is_fragment": false, "level": 1, "name": "OUTPUT-RECORD",
-      "pic": "X(80)", "type": "STRING",
-      "pic_parsed": {"raw": "X(80)", "normalized_type": "STRING", "length": 80, "decimal_places": 0, "signed": false, "storage_type": "DISPLAY"},
-      "storage_type": "DISPLAY", "bytes": 80, "total_bytes": 80, "inline_bytes": 80,
-      "redefines": null, "occurs": null, "value": null, "line": 65, "end_line": 65,
-      "children": []
+      "section": "FILE", "section_id": "SYS-PORTFOLIO-001-FIL-0082-SEC-0003", "fd_name": "OUTPUT-FILE", "is_fragment": false, "level": 1, "name": "OUTPUT-RECORD",
+      "pic": "X(80)", "pic_parsed": {"raw": "X(80)", "normalized_type": "STRING", "length": 80, "decimal_places": 0, "signed": false, "storage_type": "DISPLAY"},
+      "type": "STRING", "storage_type": "DISPLAY", "bytes": 80, "total_bytes": 80, "inline_bytes": 80,
+      "redefines": null, "occurs": null, "value": null, "line": 65, "end_line": 65, "children": []
     },
     {
       "record_id": "SYS-PORTFOLIO-001-FIL-0082-REC-0004",
-      "section": "WORKING-STORAGE", "section_id": "SYS-PORTFOLIO-001-FIL-0082-SEC-0004", "fd_name": null,
-      "is_fragment": false, "level": 1, "name": "WS-FILE-STATUS",
+      "section": "WORKING-STORAGE", "section_id": "SYS-PORTFOLIO-001-FIL-0082-SEC-0004", "fd_name": null, "is_fragment": false, "level": 1, "name": "WS-FILE-STATUS",
       "pic": null, "type": "GROUP", "storage_type": "DISPLAY", "bytes": 6, "total_bytes": 6, "inline_bytes": 6,
       "redefines": null, "occurs": null, "value": null, "line": 71, "end_line": 81,
       "children": [
         {"field_id": "SYS-PORTFOLIO-001-FIL-0082-FLD-000003", "path": "WS-VSAM-STATUS", "level": 5, "name": "WS-VSAM-STATUS", "pic": "X(2)", "pic_parsed": {"raw": "X(2)", "normalized_type": "STRING", "length": 2, "decimal_places": 0, "signed": false, "storage_type": "DISPLAY"}, "bytes": 2, "redefines": null, "occurs": null, "value": null, "line": 72, "children": [
-          {"field_id": "SYS-PORTFOLIO-001-FIL-0082-FLD-000004", "path": "WS-VSAM-STATUS.VSAM-SUCCESS", "level": 88, "name": "VSAM-SUCCESS", "pic": null, "type": "CONDITION", "parent_field": "WS-VSAM-STATUS", "value": null, "values_raw": "'00'", "values": ["00"], "line": 73, "children": []},
-          {"field_id": "SYS-PORTFOLIO-001-FIL-0082-FLD-000005", "path": "WS-VSAM-STATUS.VSAM-EOF", "level": 88, "name": "VSAM-EOF", "pic": null, "type": "CONDITION", "parent_field": "WS-VSAM-STATUS", "value": null, "values_raw": "'10'", "values": ["10"], "line": 74, "children": []},
-          {"field_id": "SYS-PORTFOLIO-001-FIL-0082-FLD-000006", "path": "WS-VSAM-STATUS.VSAM-DUP-KEY", "level": 88, "name": "VSAM-DUP-KEY", "pic": null, "type": "CONDITION", "parent_field": "WS-VSAM-STATUS", "value": null, "values_raw": "'22'", "values": ["22"], "line": 75, "children": []},
-          {"field_id": "SYS-PORTFOLIO-001-FIL-0082-FLD-000007", "path": "WS-VSAM-STATUS.VSAM-NOT-FOUND", "level": 88, "name": "VSAM-NOT-FOUND", "pic": null, "type": "CONDITION", "parent_field": "WS-VSAM-STATUS", "value": null, "values_raw": "'23'", "values": ["23"], "line": 76, "children": []}
+          {"field_id": "SYS-PORTFOLIO-001-FIL-0082-FLD-000004", "path": "WS-VSAM-STATUS.VSAM-SUCCESS", "level": 88, "name": "VSAM-SUCCESS", "pic": null, "type": "CONDITION", "is_condition": true, "parent_field": "WS-VSAM-STATUS", "value": null, "values_raw": "'00'", "values": ["00"], "line": 73, "children": []},
+          {"field_id": "SYS-PORTFOLIO-001-FIL-0082-FLD-000005", "path": "WS-VSAM-STATUS.VSAM-EOF", "level": 88, "name": "VSAM-EOF", "pic": null, "type": "CONDITION", "is_condition": true, "parent_field": "WS-VSAM-STATUS", "value": null, "values_raw": "'10'", "values": ["10"], "line": 74, "children": []},
+          {"field_id": "SYS-PORTFOLIO-001-FIL-0082-FLD-000006", "path": "WS-VSAM-STATUS.VSAM-DUP-KEY", "level": 88, "name": "VSAM-DUP-KEY", "pic": null, "type": "CONDITION", "is_condition": true, "parent_field": "WS-VSAM-STATUS", "value": null, "values_raw": "'22'", "values": ["22"], "line": 75, "children": []},
+          {"field_id": "SYS-PORTFOLIO-001-FIL-0082-FLD-000007", "path": "WS-VSAM-STATUS.VSAM-NOT-FOUND", "level": 88, "name": "VSAM-NOT-FOUND", "pic": null, "type": "CONDITION", "is_condition": true, "parent_field": "WS-VSAM-STATUS", "value": null, "values_raw": "'23'", "values": ["23"], "line": 76, "children": []}
         ]},
         {"field_id": "SYS-PORTFOLIO-001-FIL-0082-FLD-000008", "path": "WS-INPUT-STATUS", "level": 5, "name": "WS-INPUT-STATUS", "pic": "X(2)", "pic_parsed": {"raw": "X(2)", "normalized_type": "STRING", "length": 2, "decimal_places": 0, "signed": false, "storage_type": "DISPLAY"}, "bytes": 2, "redefines": null, "occurs": null, "value": null, "line": 77, "children": [
-          {"field_id": "SYS-PORTFOLIO-001-FIL-0082-FLD-000009", "path": "WS-INPUT-STATUS.INPUT-SUCCESS", "level": 88, "name": "INPUT-SUCCESS", "pic": null, "type": "CONDITION", "parent_field": "WS-INPUT-STATUS", "value": null, "values_raw": "'00'", "values": ["00"], "line": 78, "children": []},
-          {"field_id": "SYS-PORTFOLIO-001-FIL-0082-FLD-000010", "path": "WS-INPUT-STATUS.INPUT-EOF", "level": 88, "name": "INPUT-EOF", "pic": null, "type": "CONDITION", "parent_field": "WS-INPUT-STATUS", "value": null, "values_raw": "'10'", "values": ["10"], "line": 79, "children": []}
+          {"field_id": "SYS-PORTFOLIO-001-FIL-0082-FLD-000009", "path": "WS-INPUT-STATUS.INPUT-SUCCESS", "level": 88, "name": "INPUT-SUCCESS", "pic": null, "type": "CONDITION", "is_condition": true, "parent_field": "WS-INPUT-STATUS", "value": null, "values_raw": "'00'", "values": ["00"], "line": 78, "children": []},
+          {"field_id": "SYS-PORTFOLIO-001-FIL-0082-FLD-000010", "path": "WS-INPUT-STATUS.INPUT-EOF", "level": 88, "name": "INPUT-EOF", "pic": null, "type": "CONDITION", "is_condition": true, "parent_field": "WS-INPUT-STATUS", "value": null, "values_raw": "'10'", "values": ["10"], "line": 79, "children": []}
         ]},
         {"field_id": "SYS-PORTFOLIO-001-FIL-0082-FLD-000011", "path": "WS-OUTPUT-STATUS", "level": 5, "name": "WS-OUTPUT-STATUS", "pic": "X(2)", "pic_parsed": {"raw": "X(2)", "normalized_type": "STRING", "length": 2, "decimal_places": 0, "signed": false, "storage_type": "DISPLAY"}, "bytes": 2, "redefines": null, "occurs": null, "value": null, "line": 80, "children": [
-          {"field_id": "SYS-PORTFOLIO-001-FIL-0082-FLD-000012", "path": "WS-OUTPUT-STATUS.OUTPUT-SUCCESS", "level": 88, "name": "OUTPUT-SUCCESS", "pic": null, "type": "CONDITION", "parent_field": "WS-OUTPUT-STATUS", "value": null, "values_raw": "'00'", "values": ["00"], "line": 81, "children": []}
+          {"field_id": "SYS-PORTFOLIO-001-FIL-0082-FLD-000012", "path": "WS-OUTPUT-STATUS.OUTPUT-SUCCESS", "level": 88, "name": "OUTPUT-SUCCESS", "pic": null, "type": "CONDITION", "is_condition": true, "parent_field": "WS-OUTPUT-STATUS", "value": null, "values_raw": "'00'", "values": ["00"], "line": 81, "children": []}
         ]}
       ]
     },
     {
       "record_id": "SYS-PORTFOLIO-001-FIL-0082-REC-0005",
-      "section": "WORKING-STORAGE", "section_id": "SYS-PORTFOLIO-001-FIL-0082-SEC-0004", "fd_name": null,
-      "is_fragment": false, "level": 1, "name": "WS-VSAM-WORK-AREAS",
+      "section": "WORKING-STORAGE", "section_id": "SYS-PORTFOLIO-001-FIL-0082-SEC-0004", "fd_name": null, "is_fragment": false, "level": 1, "name": "WS-VSAM-WORK-AREAS",
       "pic": null, "type": "GROUP", "storage_type": "DISPLAY", "bytes": 10, "total_bytes": 10, "inline_bytes": 10,
       "redefines": null, "occurs": null, "value": null, "line": 86, "end_line": 87,
       "children": [
@@ -75,7 +68,9 @@
     }
   ],
   "copy_expansions": [],
+  "unresolved_copy_stubs": [],
   "layout_issues": [
-    {"severity": "warning", "type": "misplaced_comment_indicator", "file_id": "SYS-PORTFOLIO-001-FIL-0082", "source_id": "FILEHNDL", "line": 1, "message": "Line 1 has '*' in column 8 instead of column 7 (first non-blank character in columns 8-72 is '*'). Skipped as a comment."}
+    {"severity": "info", "type": "upstream_partial", "line": null, "message": "Agent 2 parse_status 'partial' (PROCEDURE DIVISION targets unresolved); DATA DIVISION processed normally"},
+    {"severity": "info", "type": "upstream_issue", "line": null, "message": "Agent 1: No outgoing references found (no COPY statements; no copy stubs to expand)"}
   ]
 }

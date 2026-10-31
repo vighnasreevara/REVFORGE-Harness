@@ -1,464 +1,435 @@
 {
 "program_summary": {"program_id": "UTLMNT00", "file_id": "SYS-PORTFOLIO-001-FIL-0077", "logic_file": "program_logic/SYS-PORTFOLIO-001-FIL-0077__UTLMNT00_logic.json", "logic_status": "partial", "paragraphs_translated": 12, "execution_paths": 1, "branches": 6, "loops": 1, "dead_code_confirmed": 0, "goto_annotations": 0, "unresolvable_paths": 11, "unresolved_ids": 12},
 "program_id": "UTLMNT00",
+"generated_at": "2026-10-27T21:23:03Z",
+"agent_version": "4_logic@1.0",
 "system_id": "SYS-PORTFOLIO-001",
 "file_id": "SYS-PORTFOLIO-001-FIL-0077",
 "path_id": "SYS-PORTFOLIO-001-PATH-0077",
 "relative_path": "src/programs/utility/UTLMNT00.cbl",
-"parse_run_id": "PRUN-20261023T023803Z-ACC2",
+"parse_run_id": "PRUN-20261027T155247Z-2626",
+"data_run_id": "DRUN-20261027T162831Z-1330",
+"source_artifacts": {"raw_structure": "output/parser/raw_structure/SYS-PORTFOLIO-001-FIL-0077__UTLMNT00.json", "data_layout": "output/data/data_layouts/SYS-PORTFOLIO-001-FIL-0077__UTLMNT00_WS.json", "copybook_layouts": ["output/data/data_layouts/SYS-PORTFOLIO-001-FIL-0013__RTNCODE.json", "output/data/data_layouts/SYS-PORTFOLIO-001-FIL-0007__ERRHAND.json"]},
 "upstream": {
+  "parse_status": "partial",
   "verification": {
     "verdict": "VALID_PARTIAL",
-    "verdict_reasons": ["V2, V3 and V4 consistent", "Agent 2 parse_status 'partial': 11 PERFORM targets are not declared in the program (no relationship registered)", "copybook layouts RTNCODE and ERRHAND present and consistent; no unresolved copy stubs"],
-    "v1": {"raw_structure": "present", "parse_status": "partial", "program_layout": "present (data_run_id DRUN-20261024T215053Z-ACC1)", "copybook_layouts": [
-      {"copybook": "RTNCODE", "copybook_file_id": "SYS-PORTFOLIO-001-FIL-0013", "layout": "present", "expanded_at_lines": [56]},
-      {"copybook": "ERRHAND", "copybook_file_id": "SYS-PORTFOLIO-001-FIL-0007", "layout": "present", "expanded_at_lines": [57]}], "unresolved_copy_stubs": 0},
-    "v2_file_identities": {
-      "program_entries": {"require_completed": ["parser", "data"], "entries": ["raw_structure|SYS-PORTFOLIO-001-FIL-0077", "data_layout|SYS-PORTFOLIO-001-FIL-0077"], "result": "batched with TSTGEN00, TSTVAL00 and UTLMON00 program entries: checked 8, ok 8, problems [], duplicates [], consistent true"},
-      "copybook_entries": {"require_completed": ["data"], "entries": ["data_layout|SYS-PORTFOLIO-001-FIL-0007", "data_layout|SYS-PORTFOLIO-001-FIL-0013"], "result": "batched with copybooks FIL-0009 and FIL-0014: checked 4, ok 4, problems [], duplicates [], consistent true"},
-      "consistent": true
+    "verdict_reason": "V2, V3 and V4 consistent; Agent 2 parse_status is 'partial' (11 PERFORM targets have no paragraph in the program)",
+    "V2_file_identities": {
+      "program_entries": {"checked": 2, "ok": 2, "problems": [], "duplicate_file_ids_in_json": [], "require_completed": ["parser", "data"], "consistent": true, "note": "raw_structure header and program layout; checked in one batched call with the other programs of this run (8 entries, all OK)"},
+      "copybook_entries": {"checked": 2, "ok": 2, "problems": [], "file_ids": ["SYS-PORTFOLIO-001-FIL-0013", "SYS-PORTFOLIO-001-FIL-0007"], "require_completed": ["data"], "consistent": true}
     },
-    "v3_structure_identities": {"sections_checked": 4, "paragraphs_checked": 12, "statements_checked": 51, "edges_checked": 14, "registered_edges": 14, "section_problems": [], "paragraph_problems": [], "statement_problems": [], "edge_problems": [], "invalid_registered_edges": [], "registered_not_in_json": {"missing_count": 0}, "duplicate_ids_in_json": [], "consistent": true, "note": "section names sent for SEC-0001 CONFIGURATION and SEC-0002 INPUT-OUTPUT; null for the FILE and WORKING-STORAGE sections. No edges sent for the PERFORM_INLINE edge or the 11 unresolved PERFORM targets."},
-    "v4_data_identities": [
-      {"file_id": "SYS-PORTFOLIO-001-FIL-0077", "layout": "program", "records_checked": 8, "fields_checked": 20, "expansions_checked": 2, "record_problems": [], "field_problems": [], "expansion_problems": [], "copybook_records_in_program": 0, "registered_not_in_json": {"missing_count": 0}, "duplicate_ids_in_json": [], "consistent": true, "note": "the layout's copy_expansions carry holder_id null with section_id SYS-PORTFOLIO-001-FIL-0077-SEC-0004 (section-level COPY); that section_id was sent as holder_id"},
-      {"file_id": "SYS-PORTFOLIO-001-FIL-0013", "layout": "copybook RTNCODE", "records_checked": 1, "fields_checked": 28, "expansions_checked": 0, "record_problems": [], "field_problems": [], "expansion_problems": [], "copybook_records_in_program": 0, "registered_not_in_json": {"missing_count": 0}, "duplicate_ids_in_json": [], "consistent": true},
-      {"file_id": "SYS-PORTFOLIO-001-FIL-0007", "layout": "copybook ERRHAND", "records_checked": 5, "fields_checked": 25, "expansions_checked": 0, "record_problems": [], "field_problems": [], "expansion_problems": [], "copybook_records_in_program": 0, "registered_not_in_json": {"missing_count": 0}, "duplicate_ids_in_json": [], "consistent": true}
-    ]
+    "V3_structure_identities": {"sections_checked": 4, "paragraphs_checked": 12, "statements_checked": 51, "edges_checked": 14, "registered_edges": 14, "section_problems": [], "paragraph_problems": [], "statement_problems": [], "edge_problems": [], "invalid_registered_edges": [], "registered_not_in_json": {"missing_count": 0}, "duplicate_ids_in_json": [], "consistent": true},
+    "V4_data_identities": {
+      "program_layout": {"file_id": "SYS-PORTFOLIO-001-FIL-0077", "records_checked": 8, "fields_checked": 20, "expansions_checked": 2, "record_problems": [], "field_problems": [], "expansion_problems": [], "copybook_records_in_program": 0, "registered_not_in_json": {"missing_count": 0}, "duplicate_ids_in_json": [], "consistent": true},
+      "copybook_layouts": [
+        {"file_id": "SYS-PORTFOLIO-001-FIL-0013", "copybook": "RTNCODE", "records_checked": 1, "fields_checked": 28, "expansions_checked": 0, "record_problems": [], "field_problems": [], "expansion_problems": [], "registered_not_in_json": {"missing_count": 0}, "consistent": true, "note": "verified once in this run (shared with RPTPOS00)"},
+        {"file_id": "SYS-PORTFOLIO-001-FIL-0007", "copybook": "ERRHAND", "records_checked": 5, "fields_checked": 25, "expansions_checked": 0, "record_problems": [], "field_problems": [], "expansion_problems": [], "registered_not_in_json": {"missing_count": 0}, "consistent": true, "note": "verified once in this run (shared with DB2CMT and RPTPOS00)"}
+      ]
+    }
   }
 },
+"unresolved_id_breakdown": {"statements": 0, "fields_unresolved": 1, "fields_ambiguous": 0, "paragraph_targets": 11, "names": ["WS-ERROR-MESSAGE"], "paragraph_target_names": ["2210-OPEN-VSAM", "2220-ARCHIVE-RECORDS", "2230-CLOSE-VSAM", "2310-ANALYZE-SPACE", "2320-DELETE-OLD", "2330-UPDATE-CATALOG", "2410-EXPORT-DATA", "2420-DELETE-DEFINE", "2430-IMPORT-DATA", "2510-COLLECT-STATS", "2520-GENERATE-REPORT"]},
 "execution_traces": [
   {
     "entry_point": "0000-MAIN",
     "entry_point_id": "SYS-PORTFOLIO-001-FIL-0077-PAR-0001",
     "entry_type": "batch_main",
+    "entry_note": "PROCEDURE DIVISION without USING; first paragraph; ends with GOBACK",
     "steps": [
-      {"step": 1, "paragraph": "0000-MAIN", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0077-PAR-0001", "action": "PERFORM", "target": "1000-INITIALIZE", "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0077-PAR-0002", "target_section_id": null, "condition": null, "line": 88, "statement_id": "SYS-PORTFOLIO-001-FIL-0077-STMT-000001"},
-      {"step": 2, "paragraph": "1000-INITIALIZE", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0077-PAR-0002", "action": "PERFORM", "target": "1100-OPEN-FILES", "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0077-PAR-0003", "target_section_id": null, "condition": null, "line": 94, "statement_id": "SYS-PORTFOLIO-001-FIL-0077-STMT-000005"},
-      {"step": 3, "paragraph": "1100-OPEN-FILES", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0077-PAR-0003", "action": "PERFORM", "target": "9999-ERROR-HANDLER", "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0077-PAR-0012", "target_section_id": null,
-       "condition": {"text": "WS-CTL-STATUS NOT = '00'", "fields": ["WS-CTL-STATUS"], "field_ids": [{"name": "WS-CTL-STATUS", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0077-FLD-000004", "target_kind": "field", "candidate_ids": []}]}, "line": 102, "statement_id": "SYS-PORTFOLIO-001-FIL-0077-STMT-000036"},
-      {"step": 4, "paragraph": "9999-ERROR-HANDLER", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0077-PAR-0012", "action": "GOBACK", "target": null, "target_paragraph_id": null, "target_section_id": null,
-       "condition": {"text": "WS-ERROR-COUNT > 100", "fields": ["WS-ERROR-COUNT"], "field_ids": [{"name": "WS-ERROR-COUNT", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0077-FLD-000017", "target_kind": "field", "candidate_ids": []}]}, "line": 181, "statement_id": "SYS-PORTFOLIO-001-FIL-0077-STMT-000049"},
-      {"step": 5, "paragraph": "1100-OPEN-FILES", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0077-PAR-0003", "action": "PERFORM", "target": "9999-ERROR-HANDLER", "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0077-PAR-0012", "target_section_id": null,
-       "condition": {"text": "WS-ARCH-STATUS NOT = '00'", "fields": ["WS-ARCH-STATUS"], "field_ids": [{"name": "WS-ARCH-STATUS", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0077-FLD-000005", "target_kind": "field", "candidate_ids": []}]}, "line": 109, "statement_id": "SYS-PORTFOLIO-001-FIL-0077-STMT-000038"},
-      {"step": 6, "paragraph": "1100-OPEN-FILES", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0077-PAR-0003", "action": "PERFORM", "target": "9999-ERROR-HANDLER", "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0077-PAR-0012", "target_section_id": null,
-       "condition": {"text": "WS-REPORT-STATUS NOT = '00'", "fields": ["WS-REPORT-STATUS"], "field_ids": [{"name": "WS-REPORT-STATUS", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0077-FLD-000006", "target_kind": "field", "candidate_ids": []}]}, "line": 116, "statement_id": "SYS-PORTFOLIO-001-FIL-0077-STMT-000040"},
-      {"step": 7, "paragraph": "1000-INITIALIZE", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0077-PAR-0002", "action": "PERFORM", "target": "1200-INIT-PROCESSING", "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0077-PAR-0004", "target_section_id": null, "condition": null, "line": 95, "statement_id": "SYS-PORTFOLIO-001-FIL-0077-STMT-000006"},
-      {"step": 8, "paragraph": "0000-MAIN", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0077-PAR-0001", "action": "PERFORM", "target": "2000-PROCESS", "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0077-PAR-0005", "target_section_id": null, "condition": null, "line": 89, "statement_id": "SYS-PORTFOLIO-001-FIL-0077-STMT-000002"},
-      {"step": 9, "paragraph": "2000-PROCESS", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0077-PAR-0005", "action": "PERFORM_INLINE", "target": null, "target_paragraph_id": null, "target_section_id": null,
-       "condition": {"text": "UNTIL END-OF-CONTROL", "fields": ["END-OF-CONTROL"], "field_ids": [{"name": "END-OF-CONTROL", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0077-FLD-000008", "target_kind": "condition", "candidate_ids": []}], "test_time": "BEFORE", "loop_type": "WHILE", "termination_pattern": "FILE_EXHAUSTION_LOOP"}, "line": 123, "statement_id": "SYS-PORTFOLIO-001-FIL-0077-STMT-000014"},
-      {"step": 10, "paragraph": "2000-PROCESS", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0077-PAR-0005", "action": "PERFORM", "target": "2100-PROCESS-FUNCTION", "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0077-PAR-0006", "target_section_id": null,
-       "condition": {"text": "READ CONTROL-FILE NOT AT END", "fields": [], "field_ids": []}, "line": 128, "statement_id": "SYS-PORTFOLIO-001-FIL-0077-STMT-000051"},
-      {"step": 11, "paragraph": "2100-PROCESS-FUNCTION", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0077-PAR-0006", "action": "PERFORM", "target": "2200-ARCHIVE-PROCESS", "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0077-PAR-0007", "target_section_id": null,
-       "condition": {"text": "EVALUATE CTL-FUNCTION WHEN WS-ARCHIVE", "fields": ["CTL-FUNCTION", "WS-ARCHIVE"], "field_ids": [{"name": "CTL-FUNCTION", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0077-FLD-000001", "target_kind": "field", "candidate_ids": []}, {"name": "WS-ARCHIVE", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0077-FLD-000011", "target_kind": "field", "candidate_ids": []}]}, "line": 135, "statement_id": "SYS-PORTFOLIO-001-FIL-0077-STMT-000045"},
-      {"step": 12, "paragraph": "2200-ARCHIVE-PROCESS", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0077-PAR-0007", "action": "unresolvable", "target": "2210-OPEN-VSAM", "target_paragraph_id": null, "target_section_id": null, "condition": null, "line": 150, "statement_id": "SYS-PORTFOLIO-001-FIL-0077-STMT-000017"},
-      {"step": 13, "paragraph": "2200-ARCHIVE-PROCESS", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0077-PAR-0007", "action": "unresolvable", "target": "2220-ARCHIVE-RECORDS", "target_paragraph_id": null, "target_section_id": null, "condition": null, "line": 151, "statement_id": "SYS-PORTFOLIO-001-FIL-0077-STMT-000018"},
-      {"step": 14, "paragraph": "2200-ARCHIVE-PROCESS", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0077-PAR-0007", "action": "unresolvable", "target": "2230-CLOSE-VSAM", "target_paragraph_id": null, "target_section_id": null, "condition": null, "line": 152, "statement_id": "SYS-PORTFOLIO-001-FIL-0077-STMT-000019"},
-      {"step": 15, "paragraph": "2100-PROCESS-FUNCTION", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0077-PAR-0006", "action": "PERFORM", "target": "2300-CLEANUP-PROCESS", "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0077-PAR-0008", "target_section_id": null,
-       "condition": {"text": "EVALUATE CTL-FUNCTION WHEN WS-CLEANUP", "fields": ["CTL-FUNCTION", "WS-CLEANUP"], "field_ids": [{"name": "CTL-FUNCTION", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0077-FLD-000001", "target_kind": "field", "candidate_ids": []}, {"name": "WS-CLEANUP", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0077-FLD-000012", "target_kind": "field", "candidate_ids": []}]}, "line": 137, "statement_id": "SYS-PORTFOLIO-001-FIL-0077-STMT-000046"},
-      {"step": 16, "paragraph": "2300-CLEANUP-PROCESS", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0077-PAR-0008", "action": "unresolvable", "target": "2310-ANALYZE-SPACE", "target_paragraph_id": null, "target_section_id": null, "condition": null, "line": 156, "statement_id": "SYS-PORTFOLIO-001-FIL-0077-STMT-000021"},
-      {"step": 17, "paragraph": "2300-CLEANUP-PROCESS", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0077-PAR-0008", "action": "unresolvable", "target": "2320-DELETE-OLD", "target_paragraph_id": null, "target_section_id": null, "condition": null, "line": 157, "statement_id": "SYS-PORTFOLIO-001-FIL-0077-STMT-000022"},
-      {"step": 18, "paragraph": "2300-CLEANUP-PROCESS", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0077-PAR-0008", "action": "unresolvable", "target": "2330-UPDATE-CATALOG", "target_paragraph_id": null, "target_section_id": null, "condition": null, "line": 158, "statement_id": "SYS-PORTFOLIO-001-FIL-0077-STMT-000023"},
-      {"step": 19, "paragraph": "2100-PROCESS-FUNCTION", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0077-PAR-0006", "action": "PERFORM", "target": "2400-REORG-PROCESS", "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0077-PAR-0009", "target_section_id": null,
-       "condition": {"text": "EVALUATE CTL-FUNCTION WHEN WS-REORG", "fields": ["CTL-FUNCTION", "WS-REORG"], "field_ids": [{"name": "CTL-FUNCTION", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0077-FLD-000001", "target_kind": "field", "candidate_ids": []}, {"name": "WS-REORG", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0077-FLD-000013", "target_kind": "field", "candidate_ids": []}]}, "line": 139, "statement_id": "SYS-PORTFOLIO-001-FIL-0077-STMT-000047"},
-      {"step": 20, "paragraph": "2400-REORG-PROCESS", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0077-PAR-0009", "action": "unresolvable", "target": "2410-EXPORT-DATA", "target_paragraph_id": null, "target_section_id": null, "condition": null, "line": 162, "statement_id": "SYS-PORTFOLIO-001-FIL-0077-STMT-000025"},
-      {"step": 21, "paragraph": "2400-REORG-PROCESS", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0077-PAR-0009", "action": "unresolvable", "target": "2420-DELETE-DEFINE", "target_paragraph_id": null, "target_section_id": null, "condition": null, "line": 163, "statement_id": "SYS-PORTFOLIO-001-FIL-0077-STMT-000026"},
-      {"step": 22, "paragraph": "2400-REORG-PROCESS", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0077-PAR-0009", "action": "unresolvable", "target": "2430-IMPORT-DATA", "target_paragraph_id": null, "target_section_id": null, "condition": null, "line": 164, "statement_id": "SYS-PORTFOLIO-001-FIL-0077-STMT-000027"},
-      {"step": 23, "paragraph": "2100-PROCESS-FUNCTION", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0077-PAR-0006", "action": "PERFORM", "target": "2500-ANALYZE-PROCESS", "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0077-PAR-0010", "target_section_id": null,
-       "condition": {"text": "EVALUATE CTL-FUNCTION WHEN WS-ANALYZE", "fields": ["CTL-FUNCTION", "WS-ANALYZE"], "field_ids": [{"name": "CTL-FUNCTION", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0077-FLD-000001", "target_kind": "field", "candidate_ids": []}, {"name": "WS-ANALYZE", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0077-FLD-000014", "target_kind": "field", "candidate_ids": []}]}, "line": 141, "statement_id": "SYS-PORTFOLIO-001-FIL-0077-STMT-000044"},
-      {"step": 24, "paragraph": "2500-ANALYZE-PROCESS", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0077-PAR-0010", "action": "unresolvable", "target": "2510-COLLECT-STATS", "target_paragraph_id": null, "target_section_id": null, "condition": null, "line": 168, "statement_id": "SYS-PORTFOLIO-001-FIL-0077-STMT-000029"},
-      {"step": 25, "paragraph": "2500-ANALYZE-PROCESS", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0077-PAR-0010", "action": "unresolvable", "target": "2520-GENERATE-REPORT", "target_paragraph_id": null, "target_section_id": null, "condition": null, "line": 169, "statement_id": "SYS-PORTFOLIO-001-FIL-0077-STMT-000030"},
-      {"step": 26, "paragraph": "2100-PROCESS-FUNCTION", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0077-PAR-0006", "action": "PERFORM", "target": "9999-ERROR-HANDLER", "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0077-PAR-0012", "target_section_id": null,
-       "condition": {"text": "EVALUATE CTL-FUNCTION WHEN OTHER", "fields": ["CTL-FUNCTION"], "field_ids": [{"name": "CTL-FUNCTION", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0077-FLD-000001", "target_kind": "field", "candidate_ids": []}]}, "line": 145, "statement_id": "SYS-PORTFOLIO-001-FIL-0077-STMT-000043"},
-      {"step": 27, "paragraph": "0000-MAIN", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0077-PAR-0001", "action": "PERFORM", "target": "3000-CLEANUP", "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0077-PAR-0011", "target_section_id": null, "condition": null, "line": 90, "statement_id": "SYS-PORTFOLIO-001-FIL-0077-STMT-000003"},
-      {"step": 28, "paragraph": "0000-MAIN", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0077-PAR-0001", "action": "GOBACK", "target": null, "target_paragraph_id": null, "target_section_id": null, "condition": null, "line": 91, "statement_id": "SYS-PORTFOLIO-001-FIL-0077-STMT-000004"}
+      {"step": 1, "paragraph": "0000-MAIN", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0077-PAR-0001", "action": "PERFORM", "target": "1000-INITIALIZE", "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0077-PAR-0002", "target_section_id": null, "call_depth": 1, "condition": null, "line": 88, "statement_id": "SYS-PORTFOLIO-001-FIL-0077-STMT-000001"},
+      {"step": 2, "paragraph": "1000-INITIALIZE", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0077-PAR-0002", "action": "PERFORM", "target": "1100-OPEN-FILES", "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0077-PAR-0003", "target_section_id": null, "call_depth": 2, "condition": null, "line": 94, "statement_id": "SYS-PORTFOLIO-001-FIL-0077-STMT-000005"},
+      {"step": 3, "paragraph": "1100-OPEN-FILES", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0077-PAR-0003", "action": "PERFORM", "target": "9999-ERROR-HANDLER", "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0077-PAR-0012", "target_section_id": null, "call_depth": 3, "condition": {"text": "WS-CTL-STATUS NOT = '00'", "fields": ["WS-CTL-STATUS"], "field_ids": [{"name": "WS-CTL-STATUS", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0077-FLD-000004", "target_kind": "field", "candidate_ids": []}], "branch_statement_id": "SYS-PORTFOLIO-001-FIL-0077-STMT-000008"}, "line": 102, "statement_id": "SYS-PORTFOLIO-001-FIL-0077-STMT-000036", "note": "9999-ERROR-HANDLER returns to the caller unless WS-ERROR-COUNT > 100"},
+      {"step": 4, "paragraph": "9999-ERROR-HANDLER", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0077-PAR-0012", "action": "GOBACK", "target": null, "target_paragraph_id": null, "target_section_id": null, "call_depth": 4, "condition": {"text": "WS-ERROR-COUNT > 100", "fields": ["WS-ERROR-COUNT"], "field_ids": [{"name": "WS-ERROR-COUNT", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0077-FLD-000017", "target_kind": "field", "candidate_ids": []}], "branch_statement_id": "SYS-PORTFOLIO-001-FIL-0077-STMT-000034"}, "line": 181, "statement_id": "SYS-PORTFOLIO-001-FIL-0077-STMT-000049"},
+      {"step": 5, "paragraph": "1100-OPEN-FILES", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0077-PAR-0003", "action": "PERFORM", "target": "9999-ERROR-HANDLER", "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0077-PAR-0012", "target_section_id": null, "call_depth": 3, "condition": {"text": "WS-ARCH-STATUS NOT = '00'", "fields": ["WS-ARCH-STATUS"], "field_ids": [{"name": "WS-ARCH-STATUS", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0077-FLD-000005", "target_kind": "field", "candidate_ids": []}], "branch_statement_id": "SYS-PORTFOLIO-001-FIL-0077-STMT-000010"}, "line": 109, "statement_id": "SYS-PORTFOLIO-001-FIL-0077-STMT-000038"},
+      {"step": 6, "paragraph": "1100-OPEN-FILES", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0077-PAR-0003", "action": "PERFORM", "target": "9999-ERROR-HANDLER", "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0077-PAR-0012", "target_section_id": null, "call_depth": 3, "condition": {"text": "WS-REPORT-STATUS NOT = '00'", "fields": ["WS-REPORT-STATUS"], "field_ids": [{"name": "WS-REPORT-STATUS", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0077-FLD-000006", "target_kind": "field", "candidate_ids": []}], "branch_statement_id": "SYS-PORTFOLIO-001-FIL-0077-STMT-000012"}, "line": 116, "statement_id": "SYS-PORTFOLIO-001-FIL-0077-STMT-000040"},
+      {"step": 7, "paragraph": "1000-INITIALIZE", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0077-PAR-0002", "action": "PERFORM", "target": "1200-INIT-PROCESSING", "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0077-PAR-0004", "target_section_id": null, "call_depth": 2, "condition": null, "line": 95, "statement_id": "SYS-PORTFOLIO-001-FIL-0077-STMT-000006"},
+      {"step": 8, "paragraph": "0000-MAIN", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0077-PAR-0001", "action": "PERFORM", "target": "2000-PROCESS", "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0077-PAR-0005", "target_section_id": null, "call_depth": 1, "condition": null, "line": 89, "statement_id": "SYS-PORTFOLIO-001-FIL-0077-STMT-000002"},
+      {"step": 9, "paragraph": "2000-PROCESS", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0077-PAR-0005", "action": "PERFORM_INLINE", "target": "2000-PROCESS", "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0077-PAR-0005", "target_section_id": null, "call_depth": 2, "condition": {"text": "END-OF-CONTROL", "fields": ["END-OF-CONTROL"], "field_ids": [{"name": "END-OF-CONTROL", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0077-FLD-000008", "target_kind": "condition", "candidate_ids": []}], "test_time": "BEFORE", "loop_type": "WHILE", "termination_pattern": "FILE_EXHAUSTION_LOOP"}, "line": 123, "body_line_range": [124, 129], "statement_id": "SYS-PORTFOLIO-001-FIL-0077-STMT-000014"},
+      {"step": 10, "paragraph": "2000-PROCESS", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0077-PAR-0005", "action": "READ", "target": "CONTROL-FILE", "target_paragraph_id": null, "target_section_id": null, "call_depth": 3, "condition": {"text": "loop body of PERFORM UNTIL END-OF-CONTROL", "fields": ["END-OF-CONTROL"], "field_ids": [{"name": "END-OF-CONTROL", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0077-FLD-000008", "target_kind": "condition", "candidate_ids": []}], "branch_statement_id": "SYS-PORTFOLIO-001-FIL-0077-STMT-000014"}, "line": 124, "statement_id": "SYS-PORTFOLIO-001-FIL-0077-STMT-000041"},
+      {"step": 11, "paragraph": "2000-PROCESS", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0077-PAR-0005", "action": "PERFORM", "target": "2100-PROCESS-FUNCTION", "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0077-PAR-0006", "target_section_id": null, "call_depth": 3, "condition": {"text": "NOT AT END of READ CONTROL-FILE", "fields": [], "field_ids": [], "branch_statement_id": "SYS-PORTFOLIO-001-FIL-0077-STMT-000041"}, "line": 128, "statement_id": "SYS-PORTFOLIO-001-FIL-0077-STMT-000051"},
+      {"step": 12, "paragraph": "2100-PROCESS-FUNCTION", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0077-PAR-0006", "action": "PERFORM", "target": "2200-ARCHIVE-PROCESS", "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0077-PAR-0007", "target_section_id": null, "call_depth": 4, "condition": {"text": "CTL-FUNCTION = WS-ARCHIVE", "fields": ["CTL-FUNCTION", "WS-ARCHIVE"], "field_ids": [{"name": "CTL-FUNCTION", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0077-FLD-000001", "target_kind": "field", "candidate_ids": []}, {"name": "WS-ARCHIVE", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0077-FLD-000011", "target_kind": "field", "candidate_ids": []}], "branch_statement_id": "SYS-PORTFOLIO-001-FIL-0077-STMT-000015"}, "line": 135, "statement_id": "SYS-PORTFOLIO-001-FIL-0077-STMT-000045"},
+      {"step": 13, "paragraph": "2200-ARCHIVE-PROCESS", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0077-PAR-0007", "action": "PERFORM", "target": "2210-OPEN-VSAM", "target_paragraph_id": null, "target_section_id": null, "call_depth": 5, "condition": null, "line": 150, "statement_id": "SYS-PORTFOLIO-001-FIL-0077-STMT-000017", "unresolvable": true},
+      {"step": 14, "paragraph": "2200-ARCHIVE-PROCESS", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0077-PAR-0007", "action": "PERFORM", "target": "2220-ARCHIVE-RECORDS", "target_paragraph_id": null, "target_section_id": null, "call_depth": 5, "condition": null, "line": 151, "statement_id": "SYS-PORTFOLIO-001-FIL-0077-STMT-000018", "unresolvable": true},
+      {"step": 15, "paragraph": "2200-ARCHIVE-PROCESS", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0077-PAR-0007", "action": "PERFORM", "target": "2230-CLOSE-VSAM", "target_paragraph_id": null, "target_section_id": null, "call_depth": 5, "condition": null, "line": 152, "statement_id": "SYS-PORTFOLIO-001-FIL-0077-STMT-000019", "unresolvable": true},
+      {"step": 16, "paragraph": "2100-PROCESS-FUNCTION", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0077-PAR-0006", "action": "PERFORM", "target": "2300-CLEANUP-PROCESS", "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0077-PAR-0008", "target_section_id": null, "call_depth": 4, "condition": {"text": "CTL-FUNCTION = WS-CLEANUP", "fields": ["CTL-FUNCTION", "WS-CLEANUP"], "field_ids": [{"name": "CTL-FUNCTION", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0077-FLD-000001", "target_kind": "field", "candidate_ids": []}, {"name": "WS-CLEANUP", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0077-FLD-000012", "target_kind": "field", "candidate_ids": []}], "branch_statement_id": "SYS-PORTFOLIO-001-FIL-0077-STMT-000015"}, "line": 137, "statement_id": "SYS-PORTFOLIO-001-FIL-0077-STMT-000046"},
+      {"step": 17, "paragraph": "2300-CLEANUP-PROCESS", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0077-PAR-0008", "action": "PERFORM", "target": "2310-ANALYZE-SPACE", "target_paragraph_id": null, "target_section_id": null, "call_depth": 5, "condition": null, "line": 156, "statement_id": "SYS-PORTFOLIO-001-FIL-0077-STMT-000021", "unresolvable": true},
+      {"step": 18, "paragraph": "2300-CLEANUP-PROCESS", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0077-PAR-0008", "action": "PERFORM", "target": "2320-DELETE-OLD", "target_paragraph_id": null, "target_section_id": null, "call_depth": 5, "condition": null, "line": 157, "statement_id": "SYS-PORTFOLIO-001-FIL-0077-STMT-000022", "unresolvable": true},
+      {"step": 19, "paragraph": "2300-CLEANUP-PROCESS", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0077-PAR-0008", "action": "PERFORM", "target": "2330-UPDATE-CATALOG", "target_paragraph_id": null, "target_section_id": null, "call_depth": 5, "condition": null, "line": 158, "statement_id": "SYS-PORTFOLIO-001-FIL-0077-STMT-000023", "unresolvable": true},
+      {"step": 20, "paragraph": "2100-PROCESS-FUNCTION", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0077-PAR-0006", "action": "PERFORM", "target": "2400-REORG-PROCESS", "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0077-PAR-0009", "target_section_id": null, "call_depth": 4, "condition": {"text": "CTL-FUNCTION = WS-REORG", "fields": ["CTL-FUNCTION", "WS-REORG"], "field_ids": [{"name": "CTL-FUNCTION", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0077-FLD-000001", "target_kind": "field", "candidate_ids": []}, {"name": "WS-REORG", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0077-FLD-000013", "target_kind": "field", "candidate_ids": []}], "branch_statement_id": "SYS-PORTFOLIO-001-FIL-0077-STMT-000015"}, "line": 139, "statement_id": "SYS-PORTFOLIO-001-FIL-0077-STMT-000047"},
+      {"step": 21, "paragraph": "2400-REORG-PROCESS", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0077-PAR-0009", "action": "PERFORM", "target": "2410-EXPORT-DATA", "target_paragraph_id": null, "target_section_id": null, "call_depth": 5, "condition": null, "line": 162, "statement_id": "SYS-PORTFOLIO-001-FIL-0077-STMT-000025", "unresolvable": true},
+      {"step": 22, "paragraph": "2400-REORG-PROCESS", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0077-PAR-0009", "action": "PERFORM", "target": "2420-DELETE-DEFINE", "target_paragraph_id": null, "target_section_id": null, "call_depth": 5, "condition": null, "line": 163, "statement_id": "SYS-PORTFOLIO-001-FIL-0077-STMT-000026", "unresolvable": true},
+      {"step": 23, "paragraph": "2400-REORG-PROCESS", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0077-PAR-0009", "action": "PERFORM", "target": "2430-IMPORT-DATA", "target_paragraph_id": null, "target_section_id": null, "call_depth": 5, "condition": null, "line": 164, "statement_id": "SYS-PORTFOLIO-001-FIL-0077-STMT-000027", "unresolvable": true},
+      {"step": 24, "paragraph": "2100-PROCESS-FUNCTION", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0077-PAR-0006", "action": "PERFORM", "target": "2500-ANALYZE-PROCESS", "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0077-PAR-0010", "target_section_id": null, "call_depth": 4, "condition": {"text": "CTL-FUNCTION = WS-ANALYZE", "fields": ["CTL-FUNCTION", "WS-ANALYZE"], "field_ids": [{"name": "CTL-FUNCTION", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0077-FLD-000001", "target_kind": "field", "candidate_ids": []}, {"name": "WS-ANALYZE", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0077-FLD-000014", "target_kind": "field", "candidate_ids": []}], "branch_statement_id": "SYS-PORTFOLIO-001-FIL-0077-STMT-000015"}, "line": 141, "statement_id": "SYS-PORTFOLIO-001-FIL-0077-STMT-000044"},
+      {"step": 25, "paragraph": "2500-ANALYZE-PROCESS", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0077-PAR-0010", "action": "PERFORM", "target": "2510-COLLECT-STATS", "target_paragraph_id": null, "target_section_id": null, "call_depth": 5, "condition": null, "line": 168, "statement_id": "SYS-PORTFOLIO-001-FIL-0077-STMT-000029", "unresolvable": true},
+      {"step": 26, "paragraph": "2500-ANALYZE-PROCESS", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0077-PAR-0010", "action": "PERFORM", "target": "2520-GENERATE-REPORT", "target_paragraph_id": null, "target_section_id": null, "call_depth": 5, "condition": null, "line": 169, "statement_id": "SYS-PORTFOLIO-001-FIL-0077-STMT-000030", "unresolvable": true},
+      {"step": 27, "paragraph": "2100-PROCESS-FUNCTION", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0077-PAR-0006", "action": "PERFORM", "target": "9999-ERROR-HANDLER", "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0077-PAR-0012", "target_section_id": null, "call_depth": 4, "condition": {"text": "WHEN OTHER (CTL-FUNCTION not equal to any WS-FUNCTIONS value)", "fields": ["CTL-FUNCTION"], "field_ids": [{"name": "CTL-FUNCTION", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0077-FLD-000001", "target_kind": "field", "candidate_ids": []}], "branch_statement_id": "SYS-PORTFOLIO-001-FIL-0077-STMT-000015"}, "line": 145, "statement_id": "SYS-PORTFOLIO-001-FIL-0077-STMT-000043"},
+      {"step": 28, "paragraph": "0000-MAIN", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0077-PAR-0001", "action": "PERFORM", "target": "3000-CLEANUP", "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0077-PAR-0011", "target_section_id": null, "call_depth": 1, "condition": null, "line": 90, "statement_id": "SYS-PORTFOLIO-001-FIL-0077-STMT-000003"},
+      {"step": 29, "paragraph": "0000-MAIN", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0077-PAR-0001", "action": "GOBACK", "target": null, "target_paragraph_id": null, "target_section_id": null, "call_depth": 0, "condition": null, "line": 91, "statement_id": "SYS-PORTFOLIO-001-FIL-0077-STMT-000004"}
+    ],
+    "path_summaries": [
+      {"path": "NORMAL", "condition": "files open successfully", "sequence": ["0000-MAIN", "1000-INITIALIZE", "1100-OPEN-FILES", "1200-INIT-PROCESSING", "2000-PROCESS (loop over CONTROL-FILE; 2100-PROCESS-FUNCTION per record)", "3000-CLEANUP", "GOBACK"], "outcome": "each control record dispatched by CTL-FUNCTION; the work of every function lives in paragraphs that are not in the source"},
+      {"path": "ARCHIVE", "condition": "CTL-FUNCTION = WS-ARCHIVE ('ARCHIVE')", "sequence": ["2100-PROCESS-FUNCTION", "2200-ARCHIVE-PROCESS", "2210-OPEN-VSAM (unresolved)", "2220-ARCHIVE-RECORDS (unresolved)", "2230-CLOSE-VSAM (unresolved)"], "outcome": "WS-VSAM-NAME set from CTL-FILE-NAME; rest not traceable"},
+      {"path": "CLEANUP", "condition": "CTL-FUNCTION = WS-CLEANUP ('CLEANUP')", "sequence": ["2100-PROCESS-FUNCTION", "2300-CLEANUP-PROCESS", "2310-ANALYZE-SPACE (unresolved)", "2320-DELETE-OLD (unresolved)", "2330-UPDATE-CATALOG (unresolved)"], "outcome": "WS-VSAM-NAME set from CTL-FILE-NAME; rest not traceable"},
+      {"path": "REORG", "condition": "CTL-FUNCTION = WS-REORG ('REORG')", "sequence": ["2100-PROCESS-FUNCTION", "2400-REORG-PROCESS", "2410-EXPORT-DATA (unresolved)", "2420-DELETE-DEFINE (unresolved)", "2430-IMPORT-DATA (unresolved)"], "outcome": "WS-VSAM-NAME set from CTL-FILE-NAME; rest not traceable"},
+      {"path": "ANALYZE", "condition": "CTL-FUNCTION = WS-ANALYZE ('ANALYZE')", "sequence": ["2100-PROCESS-FUNCTION", "2500-ANALYZE-PROCESS", "2510-COLLECT-STATS (unresolved)", "2520-GENERATE-REPORT (unresolved)"], "outcome": "WS-VSAM-NAME set from CTL-FILE-NAME; rest not traceable"},
+      {"path": "INVALID_FUNCTION", "condition": "WHEN OTHER", "sequence": ["2100-PROCESS-FUNCTION", "9999-ERROR-HANDLER"], "outcome": "error counted and displayed on the console; processing continues with the next record unless more than 100 errors"},
+      {"path": "ERROR_LIMIT", "condition": "WS-ERROR-COUNT > 100 inside 9999-ERROR-HANDLER", "sequence": ["9999-ERROR-HANDLER", "GOBACK"], "outcome": "RETURN-CODE = 12, program ends without 3000-CLEANUP"}
     ]
   }
 ],
 "branch_map": [
-  {
-    "paragraph": "1100-OPEN-FILES",
-    "paragraph_id": "SYS-PORTFOLIO-001-FIL-0077-PAR-0003",
-    "branches": [
-      {"type": "IF", "line": 99, "statement_id": "SYS-PORTFOLIO-001-FIL-0077-STMT-000008", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0077-PAR-0003", "condition_text": "WS-CTL-STATUS NOT = '00'", "condition_fields": ["WS-CTL-STATUS"],
-       "condition_field_ids": [{"name": "WS-CTL-STATUS", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0077-FLD-000004", "target_kind": "field", "candidate_ids": []}],
-       "has_else": false, "then_line_range": [100, 102], "else_line_range": null, "end_if_line": 103, "nested_depth": 1,
-       "outcomes": [{"label": "THEN", "line_range": [100, 102], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0077-STMT-000035", "SYS-PORTFOLIO-001-FIL-0077-STMT-000036"]}, {"label": "ELSE (implicit, no statements)", "line_range": null, "statement_ids": []}]},
-      {"type": "IF", "line": 106, "statement_id": "SYS-PORTFOLIO-001-FIL-0077-STMT-000010", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0077-PAR-0003", "condition_text": "WS-ARCH-STATUS NOT = '00'", "condition_fields": ["WS-ARCH-STATUS"],
-       "condition_field_ids": [{"name": "WS-ARCH-STATUS", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0077-FLD-000005", "target_kind": "field", "candidate_ids": []}],
-       "has_else": false, "then_line_range": [107, 109], "else_line_range": null, "end_if_line": 110, "nested_depth": 1,
-       "outcomes": [{"label": "THEN", "line_range": [107, 109], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0077-STMT-000037", "SYS-PORTFOLIO-001-FIL-0077-STMT-000038"]}, {"label": "ELSE (implicit, no statements)", "line_range": null, "statement_ids": []}]},
-      {"type": "IF", "line": 113, "statement_id": "SYS-PORTFOLIO-001-FIL-0077-STMT-000012", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0077-PAR-0003", "condition_text": "WS-REPORT-STATUS NOT = '00'", "condition_fields": ["WS-REPORT-STATUS"],
-       "condition_field_ids": [{"name": "WS-REPORT-STATUS", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0077-FLD-000006", "target_kind": "field", "candidate_ids": []}],
-       "has_else": false, "then_line_range": [114, 116], "else_line_range": null, "end_if_line": 117, "nested_depth": 1,
-       "outcomes": [{"label": "THEN", "line_range": [114, 116], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0077-STMT-000039", "SYS-PORTFOLIO-001-FIL-0077-STMT-000040"]}, {"label": "ELSE (implicit, no statements)", "line_range": null, "statement_ids": []}]}
-    ]
-  },
-  {
-    "paragraph": "2000-PROCESS",
-    "paragraph_id": "SYS-PORTFOLIO-001-FIL-0077-PAR-0005",
-    "branches": [
-      {"type": "AT_END", "operation": "READ", "file_name": "CONTROL-FILE", "line": 124, "statement_id": "SYS-PORTFOLIO-001-FIL-0077-STMT-000041", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0077-PAR-0005",
-       "condition_text": "READ CONTROL-FILE AT END / NOT AT END", "condition_fields": [], "condition_field_ids": [],
-       "at_end_line_range": [125, 126], "not_at_end_line_range": [127, 128], "io_status_field": "WS-CTL-STATUS", "nested_depth": 1,
-       "outcomes": [{"label": "AT END", "line_range": [125, 126], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0077-STMT-000050"]}, {"label": "NOT AT END", "line_range": [127, 128], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0077-STMT-000051"]}]}
-    ]
-  },
-  {
-    "paragraph": "2100-PROCESS-FUNCTION",
-    "paragraph_id": "SYS-PORTFOLIO-001-FIL-0077-PAR-0006",
-    "branches": [
-      {"type": "EVALUATE", "line": 133, "statement_id": "SYS-PORTFOLIO-001-FIL-0077-STMT-000015", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0077-PAR-0006", "subjects": ["CTL-FUNCTION"],
-       "condition_text": "EVALUATE CTL-FUNCTION WHEN WS-ARCHIVE / WHEN WS-CLEANUP / WHEN WS-REORG / WHEN WS-ANALYZE / WHEN OTHER",
-       "condition_fields": ["CTL-FUNCTION", "WS-ARCHIVE", "WS-CLEANUP", "WS-REORG", "WS-ANALYZE"],
-       "condition_field_ids": [
-         {"name": "CTL-FUNCTION", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0077-FLD-000001", "target_kind": "field", "candidate_ids": []},
-         {"name": "WS-ARCHIVE", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0077-FLD-000011", "target_kind": "field", "candidate_ids": []},
-         {"name": "WS-CLEANUP", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0077-FLD-000012", "target_kind": "field", "candidate_ids": []},
-         {"name": "WS-REORG", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0077-FLD-000013", "target_kind": "field", "candidate_ids": []},
-         {"name": "WS-ANALYZE", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0077-FLD-000014", "target_kind": "field", "candidate_ids": []}
-       ],
-       "when_clauses": [
-         {"conditions": ["CTL-FUNCTION = WS-ARCHIVE"], "condition_fields": ["CTL-FUNCTION", "WS-ARCHIVE"], "body_line_range": [135, 135], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0077-STMT-000045"]},
-         {"conditions": ["CTL-FUNCTION = WS-CLEANUP"], "condition_fields": ["CTL-FUNCTION", "WS-CLEANUP"], "body_line_range": [137, 137], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0077-STMT-000046"]},
-         {"conditions": ["CTL-FUNCTION = WS-REORG"], "condition_fields": ["CTL-FUNCTION", "WS-REORG"], "body_line_range": [139, 139], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0077-STMT-000047"]},
-         {"conditions": ["CTL-FUNCTION = WS-ANALYZE"], "condition_fields": ["CTL-FUNCTION", "WS-ANALYZE"], "body_line_range": [141, 141], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0077-STMT-000044"]},
-         {"conditions": ["OTHER"], "condition_fields": [], "body_line_range": [143, 145], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0077-STMT-000042", "SYS-PORTFOLIO-001-FIL-0077-STMT-000043"], "is_default": true}
-       ],
-       "end_evaluate_line": 146, "nested_depth": 1,
-       "outcomes": [
-         {"label": "WHEN WS-ARCHIVE", "line_range": [135, 135], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0077-STMT-000045"]},
-         {"label": "WHEN WS-CLEANUP", "line_range": [137, 137], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0077-STMT-000046"]},
-         {"label": "WHEN WS-REORG", "line_range": [139, 139], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0077-STMT-000047"]},
-         {"label": "WHEN WS-ANALYZE", "line_range": [141, 141], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0077-STMT-000044"]},
-         {"label": "WHEN OTHER", "line_range": [143, 145], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0077-STMT-000042", "SYS-PORTFOLIO-001-FIL-0077-STMT-000043"]}
-       ]}
-    ]
-  },
-  {
-    "paragraph": "9999-ERROR-HANDLER",
-    "paragraph_id": "SYS-PORTFOLIO-001-FIL-0077-PAR-0012",
-    "branches": [
-      {"type": "IF", "line": 179, "statement_id": "SYS-PORTFOLIO-001-FIL-0077-STMT-000034", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0077-PAR-0012", "condition_text": "WS-ERROR-COUNT > 100", "condition_fields": ["WS-ERROR-COUNT"],
-       "condition_field_ids": [{"name": "WS-ERROR-COUNT", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0077-FLD-000017", "target_kind": "field", "candidate_ids": []}],
-       "has_else": false, "then_line_range": [180, 181], "else_line_range": null, "end_if_line": 182, "nested_depth": 1,
-       "outcomes": [{"label": "THEN", "line_range": [180, 181], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0077-STMT-000048", "SYS-PORTFOLIO-001-FIL-0077-STMT-000049"]}, {"label": "ELSE (implicit, no statements)", "line_range": null, "statement_ids": []}]}
-    ]
-  }
+  {"paragraph": "1100-OPEN-FILES", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0077-PAR-0003", "branches": [
+    {"type": "IF", "line": 99, "statement_id": "SYS-PORTFOLIO-001-FIL-0077-STMT-000008", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0077-PAR-0003", "condition_text": "WS-CTL-STATUS NOT = '00'", "condition_fields": ["WS-CTL-STATUS"],
+     "condition_field_ids": [{"name": "WS-CTL-STATUS", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0077-FLD-000004", "target_kind": "field", "candidate_ids": []}],
+     "has_else": false, "then_line_range": [100, 102], "else_line_range": null, "end_if_line": 103, "nested_depth": 1, "io_status_check": {"file_name": "CONTROL-FILE", "operation": "OPEN"},
+     "outcomes": [{"label": "THEN", "line_range": [100, 102], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0077-STMT-000035", "SYS-PORTFOLIO-001-FIL-0077-STMT-000036"]}]},
+    {"type": "IF", "line": 106, "statement_id": "SYS-PORTFOLIO-001-FIL-0077-STMT-000010", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0077-PAR-0003", "condition_text": "WS-ARCH-STATUS NOT = '00'", "condition_fields": ["WS-ARCH-STATUS"],
+     "condition_field_ids": [{"name": "WS-ARCH-STATUS", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0077-FLD-000005", "target_kind": "field", "candidate_ids": []}],
+     "has_else": false, "then_line_range": [107, 109], "else_line_range": null, "end_if_line": 110, "nested_depth": 1, "io_status_check": {"file_name": "ARCHIVE-FILE", "operation": "OPEN"},
+     "outcomes": [{"label": "THEN", "line_range": [107, 109], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0077-STMT-000037", "SYS-PORTFOLIO-001-FIL-0077-STMT-000038"]}]},
+    {"type": "IF", "line": 113, "statement_id": "SYS-PORTFOLIO-001-FIL-0077-STMT-000012", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0077-PAR-0003", "condition_text": "WS-REPORT-STATUS NOT = '00'", "condition_fields": ["WS-REPORT-STATUS"],
+     "condition_field_ids": [{"name": "WS-REPORT-STATUS", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0077-FLD-000006", "target_kind": "field", "candidate_ids": []}],
+     "has_else": false, "then_line_range": [114, 116], "else_line_range": null, "end_if_line": 117, "nested_depth": 1, "io_status_check": {"file_name": "REPORT-FILE", "operation": "OPEN"},
+     "outcomes": [{"label": "THEN", "line_range": [114, 116], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0077-STMT-000039", "SYS-PORTFOLIO-001-FIL-0077-STMT-000040"]}]}
+  ]},
+  {"paragraph": "2000-PROCESS", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0077-PAR-0005", "branches": [
+    {"type": "AT_END", "operation": "READ", "file_name": "CONTROL-FILE", "line": 124, "statement_id": "SYS-PORTFOLIO-001-FIL-0077-STMT-000041", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0077-PAR-0005", "condition_text": "AT END / NOT AT END", "at_end_line_range": [126, 126], "not_at_end_line_range": [128, 128], "end_read_line": 129, "condition_fields": ["CONTROL-FILE"], "condition_field_ids": [], "io_status_field": "WS-CTL-STATUS", "nested_depth": 2, "inside_loop_statement_id": "SYS-PORTFOLIO-001-FIL-0077-STMT-000014",
+     "outcomes": [{"label": "AT END", "line_range": [126, 126], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0077-STMT-000050"]}, {"label": "NOT AT END", "line_range": [128, 128], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0077-STMT-000051"]}]}
+  ]},
+  {"paragraph": "2100-PROCESS-FUNCTION", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0077-PAR-0006", "branches": [
+    {"type": "EVALUATE", "line": 133, "statement_id": "SYS-PORTFOLIO-001-FIL-0077-STMT-000015", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0077-PAR-0006", "subjects": ["CTL-FUNCTION"], "condition_text": "EVALUATE CTL-FUNCTION", "condition_fields": ["CTL-FUNCTION", "WS-ARCHIVE", "WS-CLEANUP", "WS-REORG", "WS-ANALYZE"],
+     "condition_field_ids": [
+       {"name": "CTL-FUNCTION", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0077-FLD-000001", "target_kind": "field", "candidate_ids": []},
+       {"name": "WS-ARCHIVE", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0077-FLD-000011", "target_kind": "field", "candidate_ids": []},
+       {"name": "WS-CLEANUP", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0077-FLD-000012", "target_kind": "field", "candidate_ids": []},
+       {"name": "WS-REORG", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0077-FLD-000013", "target_kind": "field", "candidate_ids": []},
+       {"name": "WS-ANALYZE", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0077-FLD-000014", "target_kind": "field", "candidate_ids": []}],
+     "when_clauses": [
+       {"conditions": ["WS-ARCHIVE"], "condition_fields": ["WS-ARCHIVE"], "values_meaning": "VALUE 'ARCHIVE'", "body_line_range": [135, 135], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0077-STMT-000045"]},
+       {"conditions": ["WS-CLEANUP"], "condition_fields": ["WS-CLEANUP"], "values_meaning": "VALUE 'CLEANUP'", "body_line_range": [137, 137], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0077-STMT-000046"]},
+       {"conditions": ["WS-REORG"], "condition_fields": ["WS-REORG"], "values_meaning": "VALUE 'REORG'", "body_line_range": [139, 139], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0077-STMT-000047"]},
+       {"conditions": ["WS-ANALYZE"], "condition_fields": ["WS-ANALYZE"], "values_meaning": "VALUE 'ANALYZE'", "body_line_range": [141, 141], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0077-STMT-000044"]},
+       {"conditions": ["OTHER"], "condition_fields": [], "body_line_range": [143, 145], "is_default": true, "statement_ids": ["SYS-PORTFOLIO-001-FIL-0077-STMT-000042", "SYS-PORTFOLIO-001-FIL-0077-STMT-000043"]}],
+     "end_evaluate_line": 146, "nested_depth": 1}
+  ]},
+  {"paragraph": "9999-ERROR-HANDLER", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0077-PAR-0012", "branches": [
+    {"type": "IF", "line": 179, "statement_id": "SYS-PORTFOLIO-001-FIL-0077-STMT-000034", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0077-PAR-0012", "condition_text": "WS-ERROR-COUNT > 100", "condition_fields": ["WS-ERROR-COUNT"],
+     "condition_field_ids": [{"name": "WS-ERROR-COUNT", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0077-FLD-000017", "target_kind": "field", "candidate_ids": []}],
+     "has_else": false, "then_line_range": [180, 181], "else_line_range": null, "end_if_line": 182, "end_if_note": "IF is closed by the period at line 182 (no END-IF)", "nested_depth": 1,
+     "outcomes": [{"label": "THEN", "line_range": [180, 181], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0077-STMT-000048", "SYS-PORTFOLIO-001-FIL-0077-STMT-000049"]}]}
+  ]}
 ],
 "loops": [
-  {"paragraph": "2000-PROCESS", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0077-PAR-0005", "target": "2000-PROCESS", "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0077-PAR-0005", "type": "PERFORM_INLINE", "line": 123, "statement_id": "SYS-PORTFOLIO-001-FIL-0077-STMT-000014",
-   "condition_text": "UNTIL END-OF-CONTROL", "test_time": "BEFORE", "loop_type": "WHILE", "body_line_range": [124, 129], "end_perform_line": 130,
-   "condition_fields": ["END-OF-CONTROL"], "condition_field_ids": [{"name": "END-OF-CONTROL", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0077-FLD-000008", "target_kind": "condition", "candidate_ids": []}],
-   "termination_pattern": "FILE_EXHAUSTION_LOOP", "modifying_statement_ids": ["SYS-PORTFOLIO-001-FIL-0077-STMT-000050"]}
+  {"paragraph": "2000-PROCESS", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0077-PAR-0005", "target": "2000-PROCESS", "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0077-PAR-0005", "type": "PERFORM_INLINE", "line": 123, "statement_id": "SYS-PORTFOLIO-001-FIL-0077-STMT-000014", "condition_text": "END-OF-CONTROL", "condition_fields": ["END-OF-CONTROL"],
+   "condition_field_ids": [{"name": "END-OF-CONTROL", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0077-FLD-000008", "target_kind": "condition", "candidate_ids": []}],
+   "condition_meaning": "WS-END-OF-CTL = 'Y' (initial VALUE 'N')",
+   "test_time": "BEFORE", "loop_type": "WHILE", "body_line_range": [124, 129], "end_perform_line": 130, "termination_pattern": "FILE_EXHAUSTION_LOOP", "termination_note": "END-OF-CONTROL is set TRUE by the AT END clause of READ CONTROL-FILE (line 126)",
+   "modifying_statement_ids": ["SYS-PORTFOLIO-001-FIL-0077-STMT-000050"]}
 ],
 "dead_code_confirmed": [],
 "unresolvable_paths": [
-  {"paragraph": "2200-ARCHIVE-PROCESS", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0077-PAR-0007", "statement_id": "SYS-PORTFOLIO-001-FIL-0077-STMT-000017", "line": 150, "target": "2210-OPEN-VSAM", "reason": "PERFORM target not declared as a paragraph or section in this program (Agent 2 resolved=false; no relationship registered)"},
-  {"paragraph": "2200-ARCHIVE-PROCESS", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0077-PAR-0007", "statement_id": "SYS-PORTFOLIO-001-FIL-0077-STMT-000018", "line": 151, "target": "2220-ARCHIVE-RECORDS", "reason": "PERFORM target not declared as a paragraph or section in this program (Agent 2 resolved=false; no relationship registered)"},
-  {"paragraph": "2200-ARCHIVE-PROCESS", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0077-PAR-0007", "statement_id": "SYS-PORTFOLIO-001-FIL-0077-STMT-000019", "line": 152, "target": "2230-CLOSE-VSAM", "reason": "PERFORM target not declared as a paragraph or section in this program (Agent 2 resolved=false; no relationship registered)"},
-  {"paragraph": "2300-CLEANUP-PROCESS", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0077-PAR-0008", "statement_id": "SYS-PORTFOLIO-001-FIL-0077-STMT-000021", "line": 156, "target": "2310-ANALYZE-SPACE", "reason": "PERFORM target not declared as a paragraph or section in this program (Agent 2 resolved=false; no relationship registered)"},
-  {"paragraph": "2300-CLEANUP-PROCESS", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0077-PAR-0008", "statement_id": "SYS-PORTFOLIO-001-FIL-0077-STMT-000022", "line": 157, "target": "2320-DELETE-OLD", "reason": "PERFORM target not declared as a paragraph or section in this program (Agent 2 resolved=false; no relationship registered)"},
-  {"paragraph": "2300-CLEANUP-PROCESS", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0077-PAR-0008", "statement_id": "SYS-PORTFOLIO-001-FIL-0077-STMT-000023", "line": 158, "target": "2330-UPDATE-CATALOG", "reason": "PERFORM target not declared as a paragraph or section in this program (Agent 2 resolved=false; no relationship registered)"},
-  {"paragraph": "2400-REORG-PROCESS", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0077-PAR-0009", "statement_id": "SYS-PORTFOLIO-001-FIL-0077-STMT-000025", "line": 162, "target": "2410-EXPORT-DATA", "reason": "PERFORM target not declared as a paragraph or section in this program (Agent 2 resolved=false; no relationship registered)"},
-  {"paragraph": "2400-REORG-PROCESS", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0077-PAR-0009", "statement_id": "SYS-PORTFOLIO-001-FIL-0077-STMT-000026", "line": 163, "target": "2420-DELETE-DEFINE", "reason": "PERFORM target not declared as a paragraph or section in this program (Agent 2 resolved=false; no relationship registered)"},
-  {"paragraph": "2400-REORG-PROCESS", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0077-PAR-0009", "statement_id": "SYS-PORTFOLIO-001-FIL-0077-STMT-000027", "line": 164, "target": "2430-IMPORT-DATA", "reason": "PERFORM target not declared as a paragraph or section in this program (Agent 2 resolved=false; no relationship registered)"},
-  {"paragraph": "2500-ANALYZE-PROCESS", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0077-PAR-0010", "statement_id": "SYS-PORTFOLIO-001-FIL-0077-STMT-000029", "line": 168, "target": "2510-COLLECT-STATS", "reason": "PERFORM target not declared as a paragraph or section in this program (Agent 2 resolved=false; no relationship registered)"},
-  {"paragraph": "2500-ANALYZE-PROCESS", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0077-PAR-0010", "statement_id": "SYS-PORTFOLIO-001-FIL-0077-STMT-000030", "line": 169, "target": "2520-GENERATE-REPORT", "reason": "PERFORM target not declared as a paragraph or section in this program (Agent 2 resolved=false; no relationship registered)"}
+  {"paragraph": "2200-ARCHIVE-PROCESS", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0077-PAR-0007", "statement_id": "SYS-PORTFOLIO-001-FIL-0077-STMT-000017", "target": "2210-OPEN-VSAM", "line": 150, "reason": "PERFORM target not found among the program's paragraphs or sections (Agent 2 cfg_issues unresolved_target); no relationship registered"},
+  {"paragraph": "2200-ARCHIVE-PROCESS", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0077-PAR-0007", "statement_id": "SYS-PORTFOLIO-001-FIL-0077-STMT-000018", "target": "2220-ARCHIVE-RECORDS", "line": 151, "reason": "PERFORM target not found among the program's paragraphs or sections (Agent 2 cfg_issues unresolved_target); no relationship registered"},
+  {"paragraph": "2200-ARCHIVE-PROCESS", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0077-PAR-0007", "statement_id": "SYS-PORTFOLIO-001-FIL-0077-STMT-000019", "target": "2230-CLOSE-VSAM", "line": 152, "reason": "PERFORM target not found among the program's paragraphs or sections (Agent 2 cfg_issues unresolved_target); no relationship registered"},
+  {"paragraph": "2300-CLEANUP-PROCESS", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0077-PAR-0008", "statement_id": "SYS-PORTFOLIO-001-FIL-0077-STMT-000021", "target": "2310-ANALYZE-SPACE", "line": 156, "reason": "PERFORM target not found among the program's paragraphs or sections (Agent 2 cfg_issues unresolved_target); no relationship registered"},
+  {"paragraph": "2300-CLEANUP-PROCESS", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0077-PAR-0008", "statement_id": "SYS-PORTFOLIO-001-FIL-0077-STMT-000022", "target": "2320-DELETE-OLD", "line": 157, "reason": "PERFORM target not found among the program's paragraphs or sections (Agent 2 cfg_issues unresolved_target); no relationship registered"},
+  {"paragraph": "2300-CLEANUP-PROCESS", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0077-PAR-0008", "statement_id": "SYS-PORTFOLIO-001-FIL-0077-STMT-000023", "target": "2330-UPDATE-CATALOG", "line": 158, "reason": "PERFORM target not found among the program's paragraphs or sections (Agent 2 cfg_issues unresolved_target); no relationship registered"},
+  {"paragraph": "2400-REORG-PROCESS", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0077-PAR-0009", "statement_id": "SYS-PORTFOLIO-001-FIL-0077-STMT-000025", "target": "2410-EXPORT-DATA", "line": 162, "reason": "PERFORM target not found among the program's paragraphs or sections (Agent 2 cfg_issues unresolved_target); no relationship registered"},
+  {"paragraph": "2400-REORG-PROCESS", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0077-PAR-0009", "statement_id": "SYS-PORTFOLIO-001-FIL-0077-STMT-000026", "target": "2420-DELETE-DEFINE", "line": 163, "reason": "PERFORM target not found among the program's paragraphs or sections (Agent 2 cfg_issues unresolved_target); no relationship registered"},
+  {"paragraph": "2400-REORG-PROCESS", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0077-PAR-0009", "statement_id": "SYS-PORTFOLIO-001-FIL-0077-STMT-000027", "target": "2430-IMPORT-DATA", "line": 164, "reason": "PERFORM target not found among the program's paragraphs or sections (Agent 2 cfg_issues unresolved_target); no relationship registered"},
+  {"paragraph": "2500-ANALYZE-PROCESS", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0077-PAR-0010", "statement_id": "SYS-PORTFOLIO-001-FIL-0077-STMT-000029", "target": "2510-COLLECT-STATS", "line": 168, "reason": "PERFORM target not found among the program's paragraphs or sections (Agent 2 cfg_issues unresolved_target); no relationship registered"},
+  {"paragraph": "2500-ANALYZE-PROCESS", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0077-PAR-0010", "statement_id": "SYS-PORTFOLIO-001-FIL-0077-STMT-000030", "target": "2520-GENERATE-REPORT", "line": 169, "reason": "PERFORM target not found among the program's paragraphs or sections (Agent 2 cfg_issues unresolved_target); no relationship registered"}
 ],
 "trace_issues": [
-  {"severity": "info", "type": "upstream_issue", "upstream_agent": "2_parser", "upstream_type": "unresolved_target", "lines": [150, 151, 152, 156, 157, 158, 162, 163, 164, 168, 169], "message": "11 PERFORM targets are not declared as paragraphs or sections in this file (no COPY in the PROCEDURE DIVISION); no relationships registered; parse_status partial."},
-  {"severity": "info", "type": "upstream_issue", "upstream_agent": "3_data", "upstream_type": "copy_stub_at_section_level", "lines": [56, 57], "message": "COPY RTNCODE and COPY ERRHAND sit directly under WORKING-STORAGE; linked by EXPANDS_COPY from section SYS-PORTFOLIO-001-FIL-0077-SEC-0004."},
-  {"severity": "warning", "type": "unresolvable_perform_target", "lines": [150, 151, 152, 156, 157, 158, 162, 163, 164, 168, 169], "message": "11 PERFORM targets are not in the CFG; recorded as 'unresolvable' steps with null target IDs. The actual archive, cleanup, reorganisation and analysis work cannot be traced."},
-  {"severity": "info", "type": "field_id_unresolved", "name": "WS-ERROR-MESSAGE", "lines": [101, 108, 115, 144, 178], "message": "resolve-field-references UNRESOLVED: WS-ERROR-MESSAGE is not declared in the program or in copybooks RTNCODE, ERRHAND; target_id null."},
-  {"severity": "info", "type": "trace_expansion", "message": "The execution trace is depth-first; 9999-ERROR-HANDLER is expanded at its first PERFORM (step 4) and not repeated at later PERFORMs (steps 5, 6, 26). 1200-INIT-PROCESSING and 3000-CLEANUP contain no control-transfer statements."},
-  {"severity": "info", "type": "error_handler_returns", "line": 179, "statement_id": "SYS-PORTFOLIO-001-FIL-0077-STMT-000034", "message": "9999-ERROR-HANDLER ends the program (RETURN-CODE 12, GOBACK) only when WS-ERROR-COUNT > 100; otherwise control returns and processing continues, including after a failed OPEN."},
-  {"severity": "info", "type": "unused_data", "lines": [67, 77, 78, 83, 84], "message": "WS-FUNCTION-FLAG / VALID-FUNCTION, WS-RECORDS-READ, WS-RECORDS-WRITTEN, WS-VSAM-FUNCTION and WS-VSAM-STATUS are not referenced by any statement in the program (other than INITIALIZE WS-COUNTERS); they may be used by the unresolved paragraphs. ARCHIVE-FILE and REPORT-FILE are opened and closed but never written by a statement in the program."}
+  {"severity": "info", "type": "upstream_issue", "upstream_agent": "2_parser", "upstream_type": "unresolved_perform_targets", "message": "11 PERFORM targets have no paragraph in this program (lines 150-169)"},
+  {"severity": "info", "type": "upstream_issue", "upstream_agent": "3_data", "upstream_type": "upstream_partial", "message": "Agent 2 parse_status is 'partial'; DATA DIVISION processed normally"},
+  {"severity": "info", "type": "upstream_issue", "upstream_agent": "3_data", "upstream_type": "copy_expansion_without_record", "message": "COPY RTNCODE (56) and COPY ERRHAND (57) are expanded directly under WORKING-STORAGE; EXPANDS_COPY is held by SYS-PORTFOLIO-001-FIL-0077-SEC-0004"},
+  {"severity": "warning", "type": "unresolvable_perform", "statement_ids": ["SYS-PORTFOLIO-001-FIL-0077-STMT-000017", "SYS-PORTFOLIO-001-FIL-0077-STMT-000018", "SYS-PORTFOLIO-001-FIL-0077-STMT-000019", "SYS-PORTFOLIO-001-FIL-0077-STMT-000021", "SYS-PORTFOLIO-001-FIL-0077-STMT-000022", "SYS-PORTFOLIO-001-FIL-0077-STMT-000023", "SYS-PORTFOLIO-001-FIL-0077-STMT-000025", "SYS-PORTFOLIO-001-FIL-0077-STMT-000026", "SYS-PORTFOLIO-001-FIL-0077-STMT-000027", "SYS-PORTFOLIO-001-FIL-0077-STMT-000029", "SYS-PORTFOLIO-001-FIL-0077-STMT-000030"], "message": "11 PERFORM targets are not in the CFG; recorded as unresolvable steps (see unresolvable_paths). All four maintenance functions delegate their work to these missing paragraphs"},
+  {"severity": "info", "type": "field_id_unresolved", "name": "WS-ERROR-MESSAGE", "lines": [101, 108, 115, 144, 178], "message": "Not declared in the program or its copybooks; target_id null"},
+  {"severity": "info", "type": "error_handler_returns", "paragraph": "9999-ERROR-HANDLER", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0077-PAR-0012", "message": "9999-ERROR-HANDLER ends the program only when WS-ERROR-COUNT > 100; otherwise it returns to the performer, so a failed OPEN does not stop processing. WS-COUNTERS (including WS-ERROR-COUNT) is INITIALIZEd in 1200-INIT-PROCESSING after the opens. Recorded as found"}
 ],
-"program_narrative": "Program UTLMNT00 is a batch file-maintenance utility that ends with GOBACK. It opens the control file CONTROL-FILE for input and the output files ARCHIVE-FILE and REPORT-FILE, and clears its counters. The main loop reads CONTROL-FILE until end of file and, for each control record, selects a maintenance function by CTL-FUNCTION: 'ARCHIVE', 'CLEANUP', 'REORG' or 'ANALYZE'. Each function copies the target data-set name CTL-FILE-NAME into WS-VSAM-NAME and then performs three or two step paragraphs (open/archive/close, analyse space/delete old/update catalog, export/delete-define/import, collect statistics/generate report); none of these 11 step paragraphs is present in the program, so the actual maintenance work cannot be traced. Error conditions handled: a failed OPEN of any of the three files and an unrecognised function code; each displays WS-ERROR-MESSAGE (not declared in the program or its copybooks), counts the error and continues, and the program stops with return code 12 only after more than 100 errors.",
+"program_narrative": "Program UTLMNT00 is a batch file-maintenance utility driven by a control file. It opens CONTROL-FILE for input and ARCHIVE-FILE and REPORT-FILE for output, resets its counters, then reads CONTROL-FILE sequentially until end of file. For each control record it dispatches on CTL-FUNCTION: ARCHIVE, CLEANUP, REORG or ANALYZE each copy CTL-FILE-NAME into WS-VSAM-NAME and then perform two or three step paragraphs (open/archive/close, analyse-space/delete-old/update-catalog, export/delete-define/import, collect-stats/generate-report) that are not present in the source, so the actual maintenance work cannot be traced. Any other function code, and any failed OPEN, is reported through 9999-ERROR-HANDLER, which counts the error, displays the message on the console and stops the program with return code 12 only after more than 100 errors. At the end the three files are closed.",
 "paragraphs": [
-  {
-    "name": "0000-MAIN", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0077-PAR-0001", "section": null, "section_id": null, "line_range": [87, 92],
-    "pseudocode": [
-      "-- Main control: initialise, process every control record, clean up",
-      "CALL 1000-initialize",
-      "CALL 2000-process",
-      "CALL 3000-cleanup",
-      "RETURN to caller (or terminate if main program)  -- GOBACK"
-    ],
-    "pseudocode_statement_ids": [[], ["SYS-PORTFOLIO-001-FIL-0077-STMT-000001"], ["SYS-PORTFOLIO-001-FIL-0077-STMT-000002"], ["SYS-PORTFOLIO-001-FIL-0077-STMT-000003"], ["SYS-PORTFOLIO-001-FIL-0077-STMT-000004"]],
-    "pseudocode_text": "-- Main control: initialise, process every control record, clean up\nCALL 1000-initialize\nCALL 2000-process\nCALL 3000-cleanup\nRETURN to caller (or terminate if main program)  -- GOBACK",
-    "statement_ids": ["SYS-PORTFOLIO-001-FIL-0077-STMT-000001", "SYS-PORTFOLIO-001-FIL-0077-STMT-000002", "SYS-PORTFOLIO-001-FIL-0077-STMT-000003", "SYS-PORTFOLIO-001-FIL-0077-STMT-000004"],
-    "untranslated_statement_ids": [],
-    "field_references": [], "field_reference_ids": [],
-    "calls_made": ["1000-INITIALIZE", "2000-PROCESS", "3000-CLEANUP"],
-    "calls_made_ids": [{"name": "1000-INITIALIZE", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0077-PAR-0002", "section_id": null}, {"name": "2000-PROCESS", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0077-PAR-0005", "section_id": null}, {"name": "3000-CLEANUP", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0077-PAR-0011", "section_id": null}],
-    "complexity_score": 1, "has_unresolved_statements": false, "annotations": []
-  },
-  {
-    "name": "1000-INITIALIZE", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0077-PAR-0002", "section": null, "section_id": null, "line_range": [93, 96],
-    "pseudocode": [
-      "CALL 1100-open-files",
-      "CALL 1200-init-processing"
-    ],
-    "pseudocode_statement_ids": [["SYS-PORTFOLIO-001-FIL-0077-STMT-000005"], ["SYS-PORTFOLIO-001-FIL-0077-STMT-000006"]],
-    "pseudocode_text": "CALL 1100-open-files\nCALL 1200-init-processing",
-    "statement_ids": ["SYS-PORTFOLIO-001-FIL-0077-STMT-000005", "SYS-PORTFOLIO-001-FIL-0077-STMT-000006"],
-    "untranslated_statement_ids": [],
-    "field_references": [], "field_reference_ids": [],
-    "calls_made": ["1100-OPEN-FILES", "1200-INIT-PROCESSING"],
-    "calls_made_ids": [{"name": "1100-OPEN-FILES", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0077-PAR-0003", "section_id": null}, {"name": "1200-INIT-PROCESSING", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0077-PAR-0004", "section_id": null}],
-    "complexity_score": 1, "has_unresolved_statements": false, "annotations": []
-  },
-  {
-    "name": "1100-OPEN-FILES", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0077-PAR-0003", "section": null, "section_id": null, "line_range": [97, 118],
-    "pseudocode": [
-      "OPEN CONTROL-FILE for READ-ONLY",
-      "IF ws_ctl_status != '00' THEN  -- file status of CONTROL-FILE",
-      "  SET ws_error_message = 'ERROR OPENING CONTROL FILE'",
-      "  CALL 9999-error-handler",
-      "END IF",
-      "OPEN ARCHIVE-FILE for WRITE (new)",
-      "IF ws_arch_status != '00' THEN  -- file status of ARCHIVE-FILE",
-      "  SET ws_error_message = 'ERROR OPENING ARCHIVE FILE'",
-      "  CALL 9999-error-handler",
-      "END IF",
-      "OPEN REPORT-FILE for WRITE (new)",
-      "IF ws_report_status != '00' THEN  -- file status of REPORT-FILE",
-      "  SET ws_error_message = 'ERROR OPENING REPORT FILE'",
-      "  CALL 9999-error-handler",
-      "END IF",
-      "-- After a failed OPEN processing continues unless the error handler ends the program (more than 100 errors)"
-    ],
-    "pseudocode_statement_ids": [
-      ["SYS-PORTFOLIO-001-FIL-0077-STMT-000007"], ["SYS-PORTFOLIO-001-FIL-0077-STMT-000008"], ["SYS-PORTFOLIO-001-FIL-0077-STMT-000035"], ["SYS-PORTFOLIO-001-FIL-0077-STMT-000036"], ["SYS-PORTFOLIO-001-FIL-0077-STMT-000008"],
-      ["SYS-PORTFOLIO-001-FIL-0077-STMT-000009"], ["SYS-PORTFOLIO-001-FIL-0077-STMT-000010"], ["SYS-PORTFOLIO-001-FIL-0077-STMT-000037"], ["SYS-PORTFOLIO-001-FIL-0077-STMT-000038"], ["SYS-PORTFOLIO-001-FIL-0077-STMT-000010"],
-      ["SYS-PORTFOLIO-001-FIL-0077-STMT-000011"], ["SYS-PORTFOLIO-001-FIL-0077-STMT-000012"], ["SYS-PORTFOLIO-001-FIL-0077-STMT-000039"], ["SYS-PORTFOLIO-001-FIL-0077-STMT-000040"], ["SYS-PORTFOLIO-001-FIL-0077-STMT-000012"],
-      []
-    ],
-    "pseudocode_text": "OPEN CONTROL-FILE for READ-ONLY\nIF ws_ctl_status != '00' THEN  -- file status of CONTROL-FILE\n  SET ws_error_message = 'ERROR OPENING CONTROL FILE'\n  CALL 9999-error-handler\nEND IF\nOPEN ARCHIVE-FILE for WRITE (new)\nIF ws_arch_status != '00' THEN  -- file status of ARCHIVE-FILE\n  SET ws_error_message = 'ERROR OPENING ARCHIVE FILE'\n  CALL 9999-error-handler\nEND IF\nOPEN REPORT-FILE for WRITE (new)\nIF ws_report_status != '00' THEN  -- file status of REPORT-FILE\n  SET ws_error_message = 'ERROR OPENING REPORT FILE'\n  CALL 9999-error-handler\nEND IF\n-- After a failed OPEN processing continues unless the error handler ends the program (more than 100 errors)",
-    "statement_ids": ["SYS-PORTFOLIO-001-FIL-0077-STMT-000007", "SYS-PORTFOLIO-001-FIL-0077-STMT-000008", "SYS-PORTFOLIO-001-FIL-0077-STMT-000035", "SYS-PORTFOLIO-001-FIL-0077-STMT-000036", "SYS-PORTFOLIO-001-FIL-0077-STMT-000009", "SYS-PORTFOLIO-001-FIL-0077-STMT-000010", "SYS-PORTFOLIO-001-FIL-0077-STMT-000037", "SYS-PORTFOLIO-001-FIL-0077-STMT-000038", "SYS-PORTFOLIO-001-FIL-0077-STMT-000011", "SYS-PORTFOLIO-001-FIL-0077-STMT-000012", "SYS-PORTFOLIO-001-FIL-0077-STMT-000039", "SYS-PORTFOLIO-001-FIL-0077-STMT-000040"],
-    "untranslated_statement_ids": [],
-    "field_references": ["WS-CTL-STATUS", "WS-ERROR-MESSAGE", "WS-ARCH-STATUS", "WS-REPORT-STATUS"],
-    "field_reference_ids": [
-      {"name": "WS-CTL-STATUS", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0077-FLD-000004", "target_kind": "field", "candidate_ids": []},
-      {"name": "WS-ERROR-MESSAGE", "qualifiers": [], "resolution": "UNRESOLVED", "target_id": null, "target_kind": null, "candidate_ids": []},
-      {"name": "WS-ARCH-STATUS", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0077-FLD-000005", "target_kind": "field", "candidate_ids": []},
-      {"name": "WS-REPORT-STATUS", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0077-FLD-000006", "target_kind": "field", "candidate_ids": []}
-    ],
-    "calls_made": ["9999-ERROR-HANDLER"],
-    "calls_made_ids": [{"name": "9999-ERROR-HANDLER", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0077-PAR-0012", "section_id": null}],
-    "complexity_score": 3, "has_unresolved_statements": false,
-    "annotations": [{"line": 101, "statement_id": "SYS-PORTFOLIO-001-FIL-0077-STMT-000035", "note": "WS-ERROR-MESSAGE is the target of the MOVEs but is not declared in the program or its copybooks; its length and type are unknown."}]
-  },
-  {
-    "name": "1200-INIT-PROCESSING", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0077-PAR-0004", "section": null, "section_id": null, "line_range": [119, 121],
-    "pseudocode": [
-      "CLEAR ws_counters  -- INITIALIZE: records read, records written and error count set to zero"
-    ],
-    "pseudocode_statement_ids": [["SYS-PORTFOLIO-001-FIL-0077-STMT-000013"]],
-    "pseudocode_text": "CLEAR ws_counters  -- INITIALIZE: records read, records written and error count set to zero",
-    "statement_ids": ["SYS-PORTFOLIO-001-FIL-0077-STMT-000013"],
-    "untranslated_statement_ids": [],
-    "field_references": ["WS-COUNTERS"],
-    "field_reference_ids": [{"name": "WS-COUNTERS", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0077-REC-0007", "target_kind": "record", "candidate_ids": []}],
-    "calls_made": [], "calls_made_ids": [],
-    "complexity_score": 1, "has_unresolved_statements": false,
-    "annotations": [{"line": 120, "statement_id": "SYS-PORTFOLIO-001-FIL-0077-STMT-000013", "note": "1200-INIT-PROCESSING runs after 1100-OPEN-FILES, so any error counted by 9999-ERROR-HANDLER during the OPENs is reset to zero here."}]
-  },
-  {
-    "name": "2000-PROCESS", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0077-PAR-0005", "section": null, "section_id": null, "line_range": [122, 131],
-    "pseudocode": [
-      "-- Main loop: one iteration per control record",
-      "WHILE NOT end_of_control DO  -- PERFORM UNTIL END-OF-CONTROL (tested before each iteration); END-OF-CONTROL is true when WS-END-OF-CTL = 'Y'",
-      "  READ next record from CONTROL-FILE into control_record",
-      "  IF end of file THEN",
-      "    SET end_of_control = TRUE  -- WS-END-OF-CTL = 'Y'",
-      "  ELSE",
-      "    CALL 2100-process-function",
-      "  END IF",
-      "END WHILE"
-    ],
-    "pseudocode_statement_ids": [[], ["SYS-PORTFOLIO-001-FIL-0077-STMT-000014"], ["SYS-PORTFOLIO-001-FIL-0077-STMT-000041"], ["SYS-PORTFOLIO-001-FIL-0077-STMT-000041"], ["SYS-PORTFOLIO-001-FIL-0077-STMT-000050"], ["SYS-PORTFOLIO-001-FIL-0077-STMT-000041"], ["SYS-PORTFOLIO-001-FIL-0077-STMT-000051"], ["SYS-PORTFOLIO-001-FIL-0077-STMT-000041"], ["SYS-PORTFOLIO-001-FIL-0077-STMT-000014"]],
-    "pseudocode_text": "-- Main loop: one iteration per control record\nWHILE NOT end_of_control DO  -- PERFORM UNTIL END-OF-CONTROL (tested before each iteration); END-OF-CONTROL is true when WS-END-OF-CTL = 'Y'\n  READ next record from CONTROL-FILE into control_record\n  IF end of file THEN\n    SET end_of_control = TRUE  -- WS-END-OF-CTL = 'Y'\n  ELSE\n    CALL 2100-process-function\n  END IF\nEND WHILE",
-    "statement_ids": ["SYS-PORTFOLIO-001-FIL-0077-STMT-000014", "SYS-PORTFOLIO-001-FIL-0077-STMT-000041", "SYS-PORTFOLIO-001-FIL-0077-STMT-000050", "SYS-PORTFOLIO-001-FIL-0077-STMT-000051"],
-    "untranslated_statement_ids": [],
-    "field_references": ["END-OF-CONTROL"],
-    "field_reference_ids": [{"name": "END-OF-CONTROL", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0077-FLD-000008", "target_kind": "condition", "candidate_ids": []}],
-    "calls_made": ["2100-PROCESS-FUNCTION"],
-    "calls_made_ids": [{"name": "2100-PROCESS-FUNCTION", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0077-PAR-0006", "section_id": null}],
-    "complexity_score": 3, "has_unresolved_statements": false, "annotations": []
-  },
-  {
-    "name": "2100-PROCESS-FUNCTION", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0077-PAR-0006", "section": null, "section_id": null, "line_range": [132, 147],
-    "pseudocode": [
-      "SELECT CASE ctl_function  -- maintenance function from the control record",
-      "  WHEN ws_archive:  -- WS-ARCHIVE, VALUE 'ARCHIVE'",
-      "    CALL 2200-archive-process",
-      "  WHEN ws_cleanup:  -- WS-CLEANUP, VALUE 'CLEANUP'",
-      "    CALL 2300-cleanup-process",
-      "  WHEN ws_reorg:  -- WS-REORG, VALUE 'REORG'",
-      "    CALL 2400-reorg-process",
-      "  WHEN ws_analyze:  -- WS-ANALYZE, VALUE 'ANALYZE'",
-      "    CALL 2500-analyze-process",
-      "  ELSE:",
-      "    -- Unrecognised function code",
-      "    SET ws_error_message = 'INVALID FUNCTION SPECIFIED'",
-      "    CALL 9999-error-handler",
-      "END SELECT"
-    ],
-    "pseudocode_statement_ids": [["SYS-PORTFOLIO-001-FIL-0077-STMT-000015"], ["SYS-PORTFOLIO-001-FIL-0077-STMT-000015"], ["SYS-PORTFOLIO-001-FIL-0077-STMT-000045"], ["SYS-PORTFOLIO-001-FIL-0077-STMT-000015"], ["SYS-PORTFOLIO-001-FIL-0077-STMT-000046"], ["SYS-PORTFOLIO-001-FIL-0077-STMT-000015"], ["SYS-PORTFOLIO-001-FIL-0077-STMT-000047"], ["SYS-PORTFOLIO-001-FIL-0077-STMT-000015"], ["SYS-PORTFOLIO-001-FIL-0077-STMT-000044"], ["SYS-PORTFOLIO-001-FIL-0077-STMT-000015"], [], ["SYS-PORTFOLIO-001-FIL-0077-STMT-000042"], ["SYS-PORTFOLIO-001-FIL-0077-STMT-000043"], ["SYS-PORTFOLIO-001-FIL-0077-STMT-000015"]],
-    "pseudocode_text": "SELECT CASE ctl_function  -- maintenance function from the control record\n  WHEN ws_archive:  -- WS-ARCHIVE, VALUE 'ARCHIVE'\n    CALL 2200-archive-process\n  WHEN ws_cleanup:  -- WS-CLEANUP, VALUE 'CLEANUP'\n    CALL 2300-cleanup-process\n  WHEN ws_reorg:  -- WS-REORG, VALUE 'REORG'\n    CALL 2400-reorg-process\n  WHEN ws_analyze:  -- WS-ANALYZE, VALUE 'ANALYZE'\n    CALL 2500-analyze-process\n  ELSE:\n    -- Unrecognised function code\n    SET ws_error_message = 'INVALID FUNCTION SPECIFIED'\n    CALL 9999-error-handler\nEND SELECT",
-    "statement_ids": ["SYS-PORTFOLIO-001-FIL-0077-STMT-000015", "SYS-PORTFOLIO-001-FIL-0077-STMT-000045", "SYS-PORTFOLIO-001-FIL-0077-STMT-000046", "SYS-PORTFOLIO-001-FIL-0077-STMT-000047", "SYS-PORTFOLIO-001-FIL-0077-STMT-000044", "SYS-PORTFOLIO-001-FIL-0077-STMT-000042", "SYS-PORTFOLIO-001-FIL-0077-STMT-000043"],
-    "untranslated_statement_ids": [],
-    "field_references": ["CTL-FUNCTION", "WS-ARCHIVE", "WS-CLEANUP", "WS-REORG", "WS-ANALYZE", "WS-ERROR-MESSAGE"],
-    "field_reference_ids": [
-      {"name": "CTL-FUNCTION", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0077-FLD-000001", "target_kind": "field", "candidate_ids": []},
-      {"name": "WS-ARCHIVE", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0077-FLD-000011", "target_kind": "field", "candidate_ids": []},
-      {"name": "WS-CLEANUP", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0077-FLD-000012", "target_kind": "field", "candidate_ids": []},
-      {"name": "WS-REORG", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0077-FLD-000013", "target_kind": "field", "candidate_ids": []},
-      {"name": "WS-ANALYZE", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0077-FLD-000014", "target_kind": "field", "candidate_ids": []},
-      {"name": "WS-ERROR-MESSAGE", "qualifiers": [], "resolution": "UNRESOLVED", "target_id": null, "target_kind": null, "candidate_ids": []}
-    ],
-    "calls_made": ["2200-ARCHIVE-PROCESS", "2300-CLEANUP-PROCESS", "2400-REORG-PROCESS", "2500-ANALYZE-PROCESS", "9999-ERROR-HANDLER"],
-    "calls_made_ids": [{"name": "2200-ARCHIVE-PROCESS", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0077-PAR-0007", "section_id": null}, {"name": "2300-CLEANUP-PROCESS", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0077-PAR-0008", "section_id": null}, {"name": "2400-REORG-PROCESS", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0077-PAR-0009", "section_id": null}, {"name": "2500-ANALYZE-PROCESS", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0077-PAR-0010", "section_id": null}, {"name": "9999-ERROR-HANDLER", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0077-PAR-0012", "section_id": null}],
-    "complexity_score": 5, "has_unresolved_statements": false,
-    "annotations": [{"line": 133, "statement_id": "SYS-PORTFOLIO-001-FIL-0077-STMT-000015", "note": "The WHEN values are data items compared by content; their VALUE clauses are 'ARCHIVE', 'CLEANUP', 'REORG' and 'ANALYZE' and no statement in the program changes them. WS-FUNCTION-FLAG / VALID-FUNCTION is never set."}]
-  },
-  {
-    "name": "2200-ARCHIVE-PROCESS", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0077-PAR-0007", "section": null, "section_id": null, "line_range": [148, 153],
-    "pseudocode": [
-      "SET ws_vsam_name = ctl_file_name  -- data set to archive, from the control record",
-      "CALL 2210-open-vsam  !! UNRESOLVED: paragraph not declared in this program; logic unknown",
-      "CALL 2220-archive-records  !! UNRESOLVED: paragraph not declared in this program; logic unknown",
-      "CALL 2230-close-vsam  !! UNRESOLVED: paragraph not declared in this program; logic unknown"
-    ],
-    "pseudocode_statement_ids": [["SYS-PORTFOLIO-001-FIL-0077-STMT-000016"], ["SYS-PORTFOLIO-001-FIL-0077-STMT-000017"], ["SYS-PORTFOLIO-001-FIL-0077-STMT-000018"], ["SYS-PORTFOLIO-001-FIL-0077-STMT-000019"]],
-    "pseudocode_text": "SET ws_vsam_name = ctl_file_name  -- data set to archive, from the control record\nCALL 2210-open-vsam  !! UNRESOLVED: paragraph not declared in this program; logic unknown\nCALL 2220-archive-records  !! UNRESOLVED: paragraph not declared in this program; logic unknown\nCALL 2230-close-vsam  !! UNRESOLVED: paragraph not declared in this program; logic unknown",
-    "statement_ids": ["SYS-PORTFOLIO-001-FIL-0077-STMT-000016", "SYS-PORTFOLIO-001-FIL-0077-STMT-000017", "SYS-PORTFOLIO-001-FIL-0077-STMT-000018", "SYS-PORTFOLIO-001-FIL-0077-STMT-000019"],
-    "untranslated_statement_ids": [],
-    "field_references": ["CTL-FILE-NAME", "WS-VSAM-NAME"],
-    "field_reference_ids": [
-      {"name": "CTL-FILE-NAME", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0077-FLD-000002", "target_kind": "field", "candidate_ids": []},
-      {"name": "WS-VSAM-NAME", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0077-FLD-000018", "target_kind": "field", "candidate_ids": []}
-    ],
-    "calls_made": ["2210-OPEN-VSAM", "2220-ARCHIVE-RECORDS", "2230-CLOSE-VSAM"],
-    "calls_made_ids": [{"name": "2210-OPEN-VSAM", "paragraph_id": null, "section_id": null}, {"name": "2220-ARCHIVE-RECORDS", "paragraph_id": null, "section_id": null}, {"name": "2230-CLOSE-VSAM", "paragraph_id": null, "section_id": null}],
-    "complexity_score": 1, "has_unresolved_statements": true, "annotations": []
-  },
-  {
-    "name": "2300-CLEANUP-PROCESS", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0077-PAR-0008", "section": null, "section_id": null, "line_range": [154, 159],
-    "pseudocode": [
-      "SET ws_vsam_name = ctl_file_name  -- data set to clean up, from the control record",
-      "CALL 2310-analyze-space  !! UNRESOLVED: paragraph not declared in this program; logic unknown",
-      "CALL 2320-delete-old  !! UNRESOLVED: paragraph not declared in this program; logic unknown",
-      "CALL 2330-update-catalog  !! UNRESOLVED: paragraph not declared in this program; logic unknown"
-    ],
-    "pseudocode_statement_ids": [["SYS-PORTFOLIO-001-FIL-0077-STMT-000020"], ["SYS-PORTFOLIO-001-FIL-0077-STMT-000021"], ["SYS-PORTFOLIO-001-FIL-0077-STMT-000022"], ["SYS-PORTFOLIO-001-FIL-0077-STMT-000023"]],
-    "pseudocode_text": "SET ws_vsam_name = ctl_file_name  -- data set to clean up, from the control record\nCALL 2310-analyze-space  !! UNRESOLVED: paragraph not declared in this program; logic unknown\nCALL 2320-delete-old  !! UNRESOLVED: paragraph not declared in this program; logic unknown\nCALL 2330-update-catalog  !! UNRESOLVED: paragraph not declared in this program; logic unknown",
-    "statement_ids": ["SYS-PORTFOLIO-001-FIL-0077-STMT-000020", "SYS-PORTFOLIO-001-FIL-0077-STMT-000021", "SYS-PORTFOLIO-001-FIL-0077-STMT-000022", "SYS-PORTFOLIO-001-FIL-0077-STMT-000023"],
-    "untranslated_statement_ids": [],
-    "field_references": ["CTL-FILE-NAME", "WS-VSAM-NAME"],
-    "field_reference_ids": [
-      {"name": "CTL-FILE-NAME", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0077-FLD-000002", "target_kind": "field", "candidate_ids": []},
-      {"name": "WS-VSAM-NAME", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0077-FLD-000018", "target_kind": "field", "candidate_ids": []}
-    ],
-    "calls_made": ["2310-ANALYZE-SPACE", "2320-DELETE-OLD", "2330-UPDATE-CATALOG"],
-    "calls_made_ids": [{"name": "2310-ANALYZE-SPACE", "paragraph_id": null, "section_id": null}, {"name": "2320-DELETE-OLD", "paragraph_id": null, "section_id": null}, {"name": "2330-UPDATE-CATALOG", "paragraph_id": null, "section_id": null}],
-    "complexity_score": 1, "has_unresolved_statements": true, "annotations": []
-  },
-  {
-    "name": "2400-REORG-PROCESS", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0077-PAR-0009", "section": null, "section_id": null, "line_range": [160, 165],
-    "pseudocode": [
-      "SET ws_vsam_name = ctl_file_name  -- data set to reorganise, from the control record",
-      "CALL 2410-export-data  !! UNRESOLVED: paragraph not declared in this program; logic unknown",
-      "CALL 2420-delete-define  !! UNRESOLVED: paragraph not declared in this program; logic unknown",
-      "CALL 2430-import-data  !! UNRESOLVED: paragraph not declared in this program; logic unknown"
-    ],
-    "pseudocode_statement_ids": [["SYS-PORTFOLIO-001-FIL-0077-STMT-000024"], ["SYS-PORTFOLIO-001-FIL-0077-STMT-000025"], ["SYS-PORTFOLIO-001-FIL-0077-STMT-000026"], ["SYS-PORTFOLIO-001-FIL-0077-STMT-000027"]],
-    "pseudocode_text": "SET ws_vsam_name = ctl_file_name  -- data set to reorganise, from the control record\nCALL 2410-export-data  !! UNRESOLVED: paragraph not declared in this program; logic unknown\nCALL 2420-delete-define  !! UNRESOLVED: paragraph not declared in this program; logic unknown\nCALL 2430-import-data  !! UNRESOLVED: paragraph not declared in this program; logic unknown",
-    "statement_ids": ["SYS-PORTFOLIO-001-FIL-0077-STMT-000024", "SYS-PORTFOLIO-001-FIL-0077-STMT-000025", "SYS-PORTFOLIO-001-FIL-0077-STMT-000026", "SYS-PORTFOLIO-001-FIL-0077-STMT-000027"],
-    "untranslated_statement_ids": [],
-    "field_references": ["CTL-FILE-NAME", "WS-VSAM-NAME"],
-    "field_reference_ids": [
-      {"name": "CTL-FILE-NAME", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0077-FLD-000002", "target_kind": "field", "candidate_ids": []},
-      {"name": "WS-VSAM-NAME", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0077-FLD-000018", "target_kind": "field", "candidate_ids": []}
-    ],
-    "calls_made": ["2410-EXPORT-DATA", "2420-DELETE-DEFINE", "2430-IMPORT-DATA"],
-    "calls_made_ids": [{"name": "2410-EXPORT-DATA", "paragraph_id": null, "section_id": null}, {"name": "2420-DELETE-DEFINE", "paragraph_id": null, "section_id": null}, {"name": "2430-IMPORT-DATA", "paragraph_id": null, "section_id": null}],
-    "complexity_score": 1, "has_unresolved_statements": true, "annotations": []
-  },
-  {
-    "name": "2500-ANALYZE-PROCESS", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0077-PAR-0010", "section": null, "section_id": null, "line_range": [166, 170],
-    "pseudocode": [
-      "SET ws_vsam_name = ctl_file_name  -- data set to analyse, from the control record",
-      "CALL 2510-collect-stats  !! UNRESOLVED: paragraph not declared in this program; logic unknown",
-      "CALL 2520-generate-report  !! UNRESOLVED: paragraph not declared in this program; logic unknown"
-    ],
-    "pseudocode_statement_ids": [["SYS-PORTFOLIO-001-FIL-0077-STMT-000028"], ["SYS-PORTFOLIO-001-FIL-0077-STMT-000029"], ["SYS-PORTFOLIO-001-FIL-0077-STMT-000030"]],
-    "pseudocode_text": "SET ws_vsam_name = ctl_file_name  -- data set to analyse, from the control record\nCALL 2510-collect-stats  !! UNRESOLVED: paragraph not declared in this program; logic unknown\nCALL 2520-generate-report  !! UNRESOLVED: paragraph not declared in this program; logic unknown",
-    "statement_ids": ["SYS-PORTFOLIO-001-FIL-0077-STMT-000028", "SYS-PORTFOLIO-001-FIL-0077-STMT-000029", "SYS-PORTFOLIO-001-FIL-0077-STMT-000030"],
-    "untranslated_statement_ids": [],
-    "field_references": ["CTL-FILE-NAME", "WS-VSAM-NAME"],
-    "field_reference_ids": [
-      {"name": "CTL-FILE-NAME", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0077-FLD-000002", "target_kind": "field", "candidate_ids": []},
-      {"name": "WS-VSAM-NAME", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0077-FLD-000018", "target_kind": "field", "candidate_ids": []}
-    ],
-    "calls_made": ["2510-COLLECT-STATS", "2520-GENERATE-REPORT"],
-    "calls_made_ids": [{"name": "2510-COLLECT-STATS", "paragraph_id": null, "section_id": null}, {"name": "2520-GENERATE-REPORT", "paragraph_id": null, "section_id": null}],
-    "complexity_score": 1, "has_unresolved_statements": true, "annotations": []
-  },
-  {
-    "name": "3000-CLEANUP", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0077-PAR-0011", "section": null, "section_id": null, "line_range": [171, 175],
-    "pseudocode": [
-      "CLOSE CONTROL-FILE, ARCHIVE-FILE, REPORT-FILE"
-    ],
-    "pseudocode_statement_ids": [["SYS-PORTFOLIO-001-FIL-0077-STMT-000031"]],
-    "pseudocode_text": "CLOSE CONTROL-FILE, ARCHIVE-FILE, REPORT-FILE",
-    "statement_ids": ["SYS-PORTFOLIO-001-FIL-0077-STMT-000031"],
-    "untranslated_statement_ids": [],
-    "field_references": [], "field_reference_ids": [],
-    "calls_made": [], "calls_made_ids": [],
-    "complexity_score": 1, "has_unresolved_statements": false, "annotations": []
-  },
-  {
-    "name": "9999-ERROR-HANDLER", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0077-PAR-0012", "section": null, "section_id": null, "line_range": [176, 182],
-    "pseudocode": [
-      "INCREMENT ws_error_count BY 1",
-      "DISPLAY ws_error_message ON console  -- CONS is the CONSOLE mnemonic (SPECIAL-NAMES)",
-      "IF ws_error_count > 100 THEN",
-      "  SET RETURN-CODE = 12  -- special register: program return code",
-      "  RETURN to caller (or terminate if main program)  -- GOBACK",
-      "END IF",
-      "-- With 100 or fewer errors control returns to the performing statement and processing continues"
-    ],
-    "pseudocode_statement_ids": [["SYS-PORTFOLIO-001-FIL-0077-STMT-000032"], ["SYS-PORTFOLIO-001-FIL-0077-STMT-000033"], ["SYS-PORTFOLIO-001-FIL-0077-STMT-000034"], ["SYS-PORTFOLIO-001-FIL-0077-STMT-000048"], ["SYS-PORTFOLIO-001-FIL-0077-STMT-000049"], ["SYS-PORTFOLIO-001-FIL-0077-STMT-000034"], []],
-    "pseudocode_text": "INCREMENT ws_error_count BY 1\nDISPLAY ws_error_message ON console  -- CONS is the CONSOLE mnemonic (SPECIAL-NAMES)\nIF ws_error_count > 100 THEN\n  SET RETURN-CODE = 12  -- special register: program return code\n  RETURN to caller (or terminate if main program)  -- GOBACK\nEND IF\n-- With 100 or fewer errors control returns to the performing statement and processing continues",
-    "statement_ids": ["SYS-PORTFOLIO-001-FIL-0077-STMT-000032", "SYS-PORTFOLIO-001-FIL-0077-STMT-000033", "SYS-PORTFOLIO-001-FIL-0077-STMT-000034", "SYS-PORTFOLIO-001-FIL-0077-STMT-000048", "SYS-PORTFOLIO-001-FIL-0077-STMT-000049"],
-    "untranslated_statement_ids": [],
-    "field_references": ["WS-ERROR-COUNT", "WS-ERROR-MESSAGE"],
-    "field_reference_ids": [
-      {"name": "WS-ERROR-COUNT", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0077-FLD-000017", "target_kind": "field", "candidate_ids": []},
-      {"name": "WS-ERROR-MESSAGE", "qualifiers": [], "resolution": "UNRESOLVED", "target_id": null, "target_kind": null, "candidate_ids": []}
-    ],
-    "calls_made": [], "calls_made_ids": [],
-    "complexity_score": 1, "has_unresolved_statements": false, "annotations": []
-  }
+  {"name": "0000-MAIN", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0077-PAR-0001", "section": null, "section_id": null, "line_range": [87, 92],
+   "statement_ids": ["SYS-PORTFOLIO-001-FIL-0077-STMT-000001", "SYS-PORTFOLIO-001-FIL-0077-STMT-000002", "SYS-PORTFOLIO-001-FIL-0077-STMT-000003", "SYS-PORTFOLIO-001-FIL-0077-STMT-000004"],
+   "pseudocode": [
+     "-- Main control: initialise, process all control records, clean up",
+     "CALL 1000-initialize",
+     "CALL 2000-process",
+     "CALL 3000-cleanup",
+     "RETURN to caller (or terminate if main program)  -- GOBACK"
+   ],
+   "pseudocode_statement_ids": [[], ["SYS-PORTFOLIO-001-FIL-0077-STMT-000001"], ["SYS-PORTFOLIO-001-FIL-0077-STMT-000002"], ["SYS-PORTFOLIO-001-FIL-0077-STMT-000003"], ["SYS-PORTFOLIO-001-FIL-0077-STMT-000004"]],
+   "pseudocode_text": "-- Main control: initialise, process all control records, clean up\nCALL 1000-initialize\nCALL 2000-process\nCALL 3000-cleanup\nRETURN to caller (or terminate if main program)  -- GOBACK",
+   "untranslated_statement_ids": [],
+   "field_references": [], "field_reference_ids": [],
+   "calls_made": ["1000-INITIALIZE", "2000-PROCESS", "3000-CLEANUP"],
+   "calls_made_ids": [
+     {"name": "1000-INITIALIZE", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0077-PAR-0002", "section_id": null},
+     {"name": "2000-PROCESS", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0077-PAR-0005", "section_id": null},
+     {"name": "3000-CLEANUP", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0077-PAR-0011", "section_id": null}],
+   "complexity_score": 1, "has_unresolved_statements": false, "annotations": []},
+  {"name": "1000-INITIALIZE", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0077-PAR-0002", "section": null, "section_id": null, "line_range": [93, 96],
+   "statement_ids": ["SYS-PORTFOLIO-001-FIL-0077-STMT-000005", "SYS-PORTFOLIO-001-FIL-0077-STMT-000006"],
+   "pseudocode": [
+     "-- Open files, then reset counters",
+     "CALL 1100-open-files",
+     "CALL 1200-init-processing"
+   ],
+   "pseudocode_statement_ids": [[], ["SYS-PORTFOLIO-001-FIL-0077-STMT-000005"], ["SYS-PORTFOLIO-001-FIL-0077-STMT-000006"]],
+   "pseudocode_text": "-- Open files, then reset counters\nCALL 1100-open-files\nCALL 1200-init-processing",
+   "untranslated_statement_ids": [],
+   "field_references": [], "field_reference_ids": [],
+   "calls_made": ["1100-OPEN-FILES", "1200-INIT-PROCESSING"],
+   "calls_made_ids": [
+     {"name": "1100-OPEN-FILES", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0077-PAR-0003", "section_id": null},
+     {"name": "1200-INIT-PROCESSING", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0077-PAR-0004", "section_id": null}],
+   "complexity_score": 1, "has_unresolved_statements": false, "annotations": []},
+  {"name": "1100-OPEN-FILES", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0077-PAR-0003", "section": null, "section_id": null, "line_range": [97, 118],
+   "statement_ids": ["SYS-PORTFOLIO-001-FIL-0077-STMT-000007", "SYS-PORTFOLIO-001-FIL-0077-STMT-000008", "SYS-PORTFOLIO-001-FIL-0077-STMT-000035", "SYS-PORTFOLIO-001-FIL-0077-STMT-000036", "SYS-PORTFOLIO-001-FIL-0077-STMT-000009", "SYS-PORTFOLIO-001-FIL-0077-STMT-000010", "SYS-PORTFOLIO-001-FIL-0077-STMT-000037", "SYS-PORTFOLIO-001-FIL-0077-STMT-000038", "SYS-PORTFOLIO-001-FIL-0077-STMT-000011", "SYS-PORTFOLIO-001-FIL-0077-STMT-000012", "SYS-PORTFOLIO-001-FIL-0077-STMT-000039", "SYS-PORTFOLIO-001-FIL-0077-STMT-000040"],
+   "pseudocode": [
+     "-- Open the three files; each failure is reported but does not stop the run (see 9999-error-handler)",
+     "OPEN CONTROL-FILE for READ-ONLY",
+     "IF ws_ctl_status != '00' THEN  -- file status other than 'successful'",
+     "  SET ws_error_message = 'ERROR OPENING CONTROL FILE'",
+     "  CALL 9999-error-handler",
+     "END IF",
+     "OPEN ARCHIVE-FILE for WRITE (new)",
+     "IF ws_arch_status != '00' THEN",
+     "  SET ws_error_message = 'ERROR OPENING ARCHIVE FILE'",
+     "  CALL 9999-error-handler",
+     "END IF",
+     "OPEN REPORT-FILE for WRITE (new)",
+     "IF ws_report_status != '00' THEN",
+     "  SET ws_error_message = 'ERROR OPENING REPORT FILE'",
+     "  CALL 9999-error-handler",
+     "END IF"
+   ],
+   "pseudocode_statement_ids": [[], ["SYS-PORTFOLIO-001-FIL-0077-STMT-000007"], ["SYS-PORTFOLIO-001-FIL-0077-STMT-000008"], ["SYS-PORTFOLIO-001-FIL-0077-STMT-000035"], ["SYS-PORTFOLIO-001-FIL-0077-STMT-000036"], ["SYS-PORTFOLIO-001-FIL-0077-STMT-000008"], ["SYS-PORTFOLIO-001-FIL-0077-STMT-000009"], ["SYS-PORTFOLIO-001-FIL-0077-STMT-000010"], ["SYS-PORTFOLIO-001-FIL-0077-STMT-000037"], ["SYS-PORTFOLIO-001-FIL-0077-STMT-000038"], ["SYS-PORTFOLIO-001-FIL-0077-STMT-000010"], ["SYS-PORTFOLIO-001-FIL-0077-STMT-000011"], ["SYS-PORTFOLIO-001-FIL-0077-STMT-000012"], ["SYS-PORTFOLIO-001-FIL-0077-STMT-000039"], ["SYS-PORTFOLIO-001-FIL-0077-STMT-000040"], ["SYS-PORTFOLIO-001-FIL-0077-STMT-000012"]],
+   "pseudocode_text": "-- Open the three files; each failure is reported but does not stop the run (see 9999-error-handler)\nOPEN CONTROL-FILE for READ-ONLY\nIF ws_ctl_status != '00' THEN  -- file status other than 'successful'\n  SET ws_error_message = 'ERROR OPENING CONTROL FILE'\n  CALL 9999-error-handler\nEND IF\nOPEN ARCHIVE-FILE for WRITE (new)\nIF ws_arch_status != '00' THEN\n  SET ws_error_message = 'ERROR OPENING ARCHIVE FILE'\n  CALL 9999-error-handler\nEND IF\nOPEN REPORT-FILE for WRITE (new)\nIF ws_report_status != '00' THEN\n  SET ws_error_message = 'ERROR OPENING REPORT FILE'\n  CALL 9999-error-handler\nEND IF",
+   "untranslated_statement_ids": [],
+   "field_references": ["WS-CTL-STATUS", "WS-ARCH-STATUS", "WS-REPORT-STATUS", "WS-ERROR-MESSAGE"],
+   "field_reference_ids": [
+     {"name": "WS-CTL-STATUS", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0077-FLD-000004", "target_kind": "field", "candidate_ids": []},
+     {"name": "WS-ARCH-STATUS", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0077-FLD-000005", "target_kind": "field", "candidate_ids": []},
+     {"name": "WS-REPORT-STATUS", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0077-FLD-000006", "target_kind": "field", "candidate_ids": []},
+     {"name": "WS-ERROR-MESSAGE", "qualifiers": [], "resolution": "UNRESOLVED", "target_id": null, "target_kind": null, "candidate_ids": []}],
+   "calls_made": ["9999-ERROR-HANDLER"],
+   "calls_made_ids": [{"name": "9999-ERROR-HANDLER", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0077-PAR-0012", "section_id": null}],
+   "complexity_score": 6, "has_unresolved_statements": false,
+   "annotations": [{"line": 101, "statement_id": "SYS-PORTFOLIO-001-FIL-0077-STMT-000035", "note": "WS-ERROR-MESSAGE is not declared in the program or its copybooks (no Field ID)"}]},
+  {"name": "1200-INIT-PROCESSING", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0077-PAR-0004", "section": null, "section_id": null, "line_range": [119, 121],
+   "statement_ids": ["SYS-PORTFOLIO-001-FIL-0077-STMT-000013"],
+   "pseudocode": [
+     "CLEAR ws_counters  -- INITIALIZE: records read, records written and error count set to zero"
+   ],
+   "pseudocode_statement_ids": [["SYS-PORTFOLIO-001-FIL-0077-STMT-000013"]],
+   "pseudocode_text": "CLEAR ws_counters  -- INITIALIZE: records read, records written and error count set to zero",
+   "untranslated_statement_ids": [],
+   "field_references": ["WS-COUNTERS"],
+   "field_reference_ids": [{"name": "WS-COUNTERS", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0077-REC-0007", "target_kind": "record", "candidate_ids": []}],
+   "calls_made": [], "calls_made_ids": [],
+   "complexity_score": 1, "has_unresolved_statements": false,
+   "annotations": [{"line": 120, "statement_id": "SYS-PORTFOLIO-001-FIL-0077-STMT-000013", "note": "Runs after 1100-OPEN-FILES, so errors counted during the opens are reset here"}]},
+  {"name": "2000-PROCESS", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0077-PAR-0005", "section": null, "section_id": null, "line_range": [122, 131],
+   "statement_ids": ["SYS-PORTFOLIO-001-FIL-0077-STMT-000014", "SYS-PORTFOLIO-001-FIL-0077-STMT-000041", "SYS-PORTFOLIO-001-FIL-0077-STMT-000050", "SYS-PORTFOLIO-001-FIL-0077-STMT-000051"],
+   "pseudocode": [
+     "-- Process every control record",
+     "WHILE NOT end_of_control DO  -- PERFORM UNTIL END-OF-CONTROL (test before); END-OF-CONTROL means WS-END-OF-CTL = 'Y'",
+     "  READ next record from CONTROL-FILE",
+     "  IF end of file THEN",
+     "    SET end_of_control = TRUE",
+     "  ELSE",
+     "    CALL 2100-process-function",
+     "  END IF",
+     "END WHILE"
+   ],
+   "pseudocode_statement_ids": [[], ["SYS-PORTFOLIO-001-FIL-0077-STMT-000014"], ["SYS-PORTFOLIO-001-FIL-0077-STMT-000041"], ["SYS-PORTFOLIO-001-FIL-0077-STMT-000041"], ["SYS-PORTFOLIO-001-FIL-0077-STMT-000050"], ["SYS-PORTFOLIO-001-FIL-0077-STMT-000041"], ["SYS-PORTFOLIO-001-FIL-0077-STMT-000051"], ["SYS-PORTFOLIO-001-FIL-0077-STMT-000041"], ["SYS-PORTFOLIO-001-FIL-0077-STMT-000014"]],
+   "pseudocode_text": "-- Process every control record\nWHILE NOT end_of_control DO  -- PERFORM UNTIL END-OF-CONTROL (test before); END-OF-CONTROL means WS-END-OF-CTL = 'Y'\n  READ next record from CONTROL-FILE\n  IF end of file THEN\n    SET end_of_control = TRUE\n  ELSE\n    CALL 2100-process-function\n  END IF\nEND WHILE",
+   "untranslated_statement_ids": [],
+   "field_references": ["END-OF-CONTROL"],
+   "field_reference_ids": [{"name": "END-OF-CONTROL", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0077-FLD-000008", "target_kind": "condition", "candidate_ids": []}],
+   "calls_made": ["2100-PROCESS-FUNCTION"],
+   "calls_made_ids": [{"name": "2100-PROCESS-FUNCTION", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0077-PAR-0006", "section_id": null}],
+   "complexity_score": 3, "has_unresolved_statements": false,
+   "annotations": [{"line": 124, "statement_id": "SYS-PORTFOLIO-001-FIL-0077-STMT-000041", "note": "READ without INTO: CTL-FUNCTION and CTL-FILE-NAME are taken from CONTROL-RECORD, the FD record of CONTROL-FILE; WS-RECORDS-READ is not incremented"}]},
+  {"name": "2100-PROCESS-FUNCTION", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0077-PAR-0006", "section": null, "section_id": null, "line_range": [132, 147],
+   "statement_ids": ["SYS-PORTFOLIO-001-FIL-0077-STMT-000015", "SYS-PORTFOLIO-001-FIL-0077-STMT-000045", "SYS-PORTFOLIO-001-FIL-0077-STMT-000046", "SYS-PORTFOLIO-001-FIL-0077-STMT-000047", "SYS-PORTFOLIO-001-FIL-0077-STMT-000044", "SYS-PORTFOLIO-001-FIL-0077-STMT-000042", "SYS-PORTFOLIO-001-FIL-0077-STMT-000043"],
+   "pseudocode": [
+     "-- Dispatch one control record by its function code",
+     "SELECT CASE ctl_function",
+     "  WHEN ws_archive:  -- 'ARCHIVE'",
+     "    CALL 2200-archive-process",
+     "  WHEN ws_cleanup:  -- 'CLEANUP'",
+     "    CALL 2300-cleanup-process",
+     "  WHEN ws_reorg:  -- 'REORG'",
+     "    CALL 2400-reorg-process",
+     "  WHEN ws_analyze:  -- 'ANALYZE'",
+     "    CALL 2500-analyze-process",
+     "  ELSE:",
+     "    SET ws_error_message = 'INVALID FUNCTION SPECIFIED'",
+     "    CALL 9999-error-handler",
+     "END SELECT"
+   ],
+   "pseudocode_statement_ids": [[], ["SYS-PORTFOLIO-001-FIL-0077-STMT-000015"], ["SYS-PORTFOLIO-001-FIL-0077-STMT-000015"], ["SYS-PORTFOLIO-001-FIL-0077-STMT-000045"], ["SYS-PORTFOLIO-001-FIL-0077-STMT-000015"], ["SYS-PORTFOLIO-001-FIL-0077-STMT-000046"], ["SYS-PORTFOLIO-001-FIL-0077-STMT-000015"], ["SYS-PORTFOLIO-001-FIL-0077-STMT-000047"], ["SYS-PORTFOLIO-001-FIL-0077-STMT-000015"], ["SYS-PORTFOLIO-001-FIL-0077-STMT-000044"], ["SYS-PORTFOLIO-001-FIL-0077-STMT-000015"], ["SYS-PORTFOLIO-001-FIL-0077-STMT-000042"], ["SYS-PORTFOLIO-001-FIL-0077-STMT-000043"], ["SYS-PORTFOLIO-001-FIL-0077-STMT-000015"]],
+   "pseudocode_text": "-- Dispatch one control record by its function code\nSELECT CASE ctl_function\n  WHEN ws_archive:  -- 'ARCHIVE'\n    CALL 2200-archive-process\n  WHEN ws_cleanup:  -- 'CLEANUP'\n    CALL 2300-cleanup-process\n  WHEN ws_reorg:  -- 'REORG'\n    CALL 2400-reorg-process\n  WHEN ws_analyze:  -- 'ANALYZE'\n    CALL 2500-analyze-process\n  ELSE:\n    SET ws_error_message = 'INVALID FUNCTION SPECIFIED'\n    CALL 9999-error-handler\nEND SELECT",
+   "untranslated_statement_ids": [],
+   "field_references": ["CTL-FUNCTION", "WS-ARCHIVE", "WS-CLEANUP", "WS-REORG", "WS-ANALYZE", "WS-ERROR-MESSAGE"],
+   "field_reference_ids": [
+     {"name": "CTL-FUNCTION", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0077-FLD-000001", "target_kind": "field", "candidate_ids": []},
+     {"name": "WS-ARCHIVE", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0077-FLD-000011", "target_kind": "field", "candidate_ids": []},
+     {"name": "WS-CLEANUP", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0077-FLD-000012", "target_kind": "field", "candidate_ids": []},
+     {"name": "WS-REORG", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0077-FLD-000013", "target_kind": "field", "candidate_ids": []},
+     {"name": "WS-ANALYZE", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0077-FLD-000014", "target_kind": "field", "candidate_ids": []},
+     {"name": "WS-ERROR-MESSAGE", "qualifiers": [], "resolution": "UNRESOLVED", "target_id": null, "target_kind": null, "candidate_ids": []}],
+   "calls_made": ["2200-ARCHIVE-PROCESS", "2300-CLEANUP-PROCESS", "2400-REORG-PROCESS", "2500-ANALYZE-PROCESS", "9999-ERROR-HANDLER"],
+   "calls_made_ids": [
+     {"name": "2200-ARCHIVE-PROCESS", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0077-PAR-0007", "section_id": null},
+     {"name": "2300-CLEANUP-PROCESS", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0077-PAR-0008", "section_id": null},
+     {"name": "2400-REORG-PROCESS", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0077-PAR-0009", "section_id": null},
+     {"name": "2500-ANALYZE-PROCESS", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0077-PAR-0010", "section_id": null},
+     {"name": "9999-ERROR-HANDLER", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0077-PAR-0012", "section_id": null}],
+   "complexity_score": 5, "has_unresolved_statements": false,
+   "annotations": [{"line": 134, "statement_id": "SYS-PORTFOLIO-001-FIL-0077-STMT-000015", "note": "WHEN objects are data items (WS-FUNCTIONS constants with VALUEs 'ARCHIVE', 'CLEANUP', 'REORG', 'ANALYZE'), compared with CTL-FUNCTION PIC X(8)"}]},
+  {"name": "2200-ARCHIVE-PROCESS", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0077-PAR-0007", "section": null, "section_id": null, "line_range": [148, 153],
+   "statement_ids": ["SYS-PORTFOLIO-001-FIL-0077-STMT-000016", "SYS-PORTFOLIO-001-FIL-0077-STMT-000017", "SYS-PORTFOLIO-001-FIL-0077-STMT-000018", "SYS-PORTFOLIO-001-FIL-0077-STMT-000019"],
+   "pseudocode": [
+     "-- ARCHIVE function (partial: the three step paragraphs are missing from the source)",
+     "SET ws_vsam_name = ctl_file_name",
+     "CALL 2210-open-vsam  !! UNRESOLVED: paragraph not found in program",
+     "CALL 2220-archive-records  !! UNRESOLVED: paragraph not found in program",
+     "CALL 2230-close-vsam  !! UNRESOLVED: paragraph not found in program"
+   ],
+   "pseudocode_statement_ids": [[], ["SYS-PORTFOLIO-001-FIL-0077-STMT-000016"], ["SYS-PORTFOLIO-001-FIL-0077-STMT-000017"], ["SYS-PORTFOLIO-001-FIL-0077-STMT-000018"], ["SYS-PORTFOLIO-001-FIL-0077-STMT-000019"]],
+   "pseudocode_text": "-- ARCHIVE function (partial: the three step paragraphs are missing from the source)\nSET ws_vsam_name = ctl_file_name\nCALL 2210-open-vsam  !! UNRESOLVED: paragraph not found in program\nCALL 2220-archive-records  !! UNRESOLVED: paragraph not found in program\nCALL 2230-close-vsam  !! UNRESOLVED: paragraph not found in program",
+   "untranslated_statement_ids": [],
+   "field_references": ["CTL-FILE-NAME", "WS-VSAM-NAME"],
+   "field_reference_ids": [
+     {"name": "CTL-FILE-NAME", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0077-FLD-000002", "target_kind": "field", "candidate_ids": []},
+     {"name": "WS-VSAM-NAME", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0077-FLD-000018", "target_kind": "field", "candidate_ids": []}],
+   "calls_made": ["2210-OPEN-VSAM", "2220-ARCHIVE-RECORDS", "2230-CLOSE-VSAM"],
+   "calls_made_ids": [
+     {"name": "2210-OPEN-VSAM", "paragraph_id": null, "section_id": null},
+     {"name": "2220-ARCHIVE-RECORDS", "paragraph_id": null, "section_id": null},
+     {"name": "2230-CLOSE-VSAM", "paragraph_id": null, "section_id": null}],
+   "complexity_score": 1, "has_unresolved_statements": true,
+   "annotations": [{"line": 150, "statement_id": "SYS-PORTFOLIO-001-FIL-0077-STMT-000017", "note": "Gap: the logic of these steps is not in the source; nothing is inferred"}]},
+  {"name": "2300-CLEANUP-PROCESS", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0077-PAR-0008", "section": null, "section_id": null, "line_range": [154, 159],
+   "statement_ids": ["SYS-PORTFOLIO-001-FIL-0077-STMT-000020", "SYS-PORTFOLIO-001-FIL-0077-STMT-000021", "SYS-PORTFOLIO-001-FIL-0077-STMT-000022", "SYS-PORTFOLIO-001-FIL-0077-STMT-000023"],
+   "pseudocode": [
+     "-- CLEANUP function (partial: the three step paragraphs are missing from the source)",
+     "SET ws_vsam_name = ctl_file_name",
+     "CALL 2310-analyze-space  !! UNRESOLVED: paragraph not found in program",
+     "CALL 2320-delete-old  !! UNRESOLVED: paragraph not found in program",
+     "CALL 2330-update-catalog  !! UNRESOLVED: paragraph not found in program"
+   ],
+   "pseudocode_statement_ids": [[], ["SYS-PORTFOLIO-001-FIL-0077-STMT-000020"], ["SYS-PORTFOLIO-001-FIL-0077-STMT-000021"], ["SYS-PORTFOLIO-001-FIL-0077-STMT-000022"], ["SYS-PORTFOLIO-001-FIL-0077-STMT-000023"]],
+   "pseudocode_text": "-- CLEANUP function (partial: the three step paragraphs are missing from the source)\nSET ws_vsam_name = ctl_file_name\nCALL 2310-analyze-space  !! UNRESOLVED: paragraph not found in program\nCALL 2320-delete-old  !! UNRESOLVED: paragraph not found in program\nCALL 2330-update-catalog  !! UNRESOLVED: paragraph not found in program",
+   "untranslated_statement_ids": [],
+   "field_references": ["CTL-FILE-NAME", "WS-VSAM-NAME"],
+   "field_reference_ids": [
+     {"name": "CTL-FILE-NAME", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0077-FLD-000002", "target_kind": "field", "candidate_ids": []},
+     {"name": "WS-VSAM-NAME", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0077-FLD-000018", "target_kind": "field", "candidate_ids": []}],
+   "calls_made": ["2310-ANALYZE-SPACE", "2320-DELETE-OLD", "2330-UPDATE-CATALOG"],
+   "calls_made_ids": [
+     {"name": "2310-ANALYZE-SPACE", "paragraph_id": null, "section_id": null},
+     {"name": "2320-DELETE-OLD", "paragraph_id": null, "section_id": null},
+     {"name": "2330-UPDATE-CATALOG", "paragraph_id": null, "section_id": null}],
+   "complexity_score": 1, "has_unresolved_statements": true,
+   "annotations": [{"line": 156, "statement_id": "SYS-PORTFOLIO-001-FIL-0077-STMT-000021", "note": "Gap: the logic of these steps is not in the source; nothing is inferred"}]},
+  {"name": "2400-REORG-PROCESS", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0077-PAR-0009", "section": null, "section_id": null, "line_range": [160, 165],
+   "statement_ids": ["SYS-PORTFOLIO-001-FIL-0077-STMT-000024", "SYS-PORTFOLIO-001-FIL-0077-STMT-000025", "SYS-PORTFOLIO-001-FIL-0077-STMT-000026", "SYS-PORTFOLIO-001-FIL-0077-STMT-000027"],
+   "pseudocode": [
+     "-- REORG function (partial: the three step paragraphs are missing from the source)",
+     "SET ws_vsam_name = ctl_file_name",
+     "CALL 2410-export-data  !! UNRESOLVED: paragraph not found in program",
+     "CALL 2420-delete-define  !! UNRESOLVED: paragraph not found in program",
+     "CALL 2430-import-data  !! UNRESOLVED: paragraph not found in program"
+   ],
+   "pseudocode_statement_ids": [[], ["SYS-PORTFOLIO-001-FIL-0077-STMT-000024"], ["SYS-PORTFOLIO-001-FIL-0077-STMT-000025"], ["SYS-PORTFOLIO-001-FIL-0077-STMT-000026"], ["SYS-PORTFOLIO-001-FIL-0077-STMT-000027"]],
+   "pseudocode_text": "-- REORG function (partial: the three step paragraphs are missing from the source)\nSET ws_vsam_name = ctl_file_name\nCALL 2410-export-data  !! UNRESOLVED: paragraph not found in program\nCALL 2420-delete-define  !! UNRESOLVED: paragraph not found in program\nCALL 2430-import-data  !! UNRESOLVED: paragraph not found in program",
+   "untranslated_statement_ids": [],
+   "field_references": ["CTL-FILE-NAME", "WS-VSAM-NAME"],
+   "field_reference_ids": [
+     {"name": "CTL-FILE-NAME", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0077-FLD-000002", "target_kind": "field", "candidate_ids": []},
+     {"name": "WS-VSAM-NAME", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0077-FLD-000018", "target_kind": "field", "candidate_ids": []}],
+   "calls_made": ["2410-EXPORT-DATA", "2420-DELETE-DEFINE", "2430-IMPORT-DATA"],
+   "calls_made_ids": [
+     {"name": "2410-EXPORT-DATA", "paragraph_id": null, "section_id": null},
+     {"name": "2420-DELETE-DEFINE", "paragraph_id": null, "section_id": null},
+     {"name": "2430-IMPORT-DATA", "paragraph_id": null, "section_id": null}],
+   "complexity_score": 1, "has_unresolved_statements": true,
+   "annotations": [{"line": 162, "statement_id": "SYS-PORTFOLIO-001-FIL-0077-STMT-000025", "note": "Gap: the logic of these steps is not in the source; nothing is inferred"}]},
+  {"name": "2500-ANALYZE-PROCESS", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0077-PAR-0010", "section": null, "section_id": null, "line_range": [166, 170],
+   "statement_ids": ["SYS-PORTFOLIO-001-FIL-0077-STMT-000028", "SYS-PORTFOLIO-001-FIL-0077-STMT-000029", "SYS-PORTFOLIO-001-FIL-0077-STMT-000030"],
+   "pseudocode": [
+     "-- ANALYZE function (partial: the two step paragraphs are missing from the source)",
+     "SET ws_vsam_name = ctl_file_name",
+     "CALL 2510-collect-stats  !! UNRESOLVED: paragraph not found in program",
+     "CALL 2520-generate-report  !! UNRESOLVED: paragraph not found in program"
+   ],
+   "pseudocode_statement_ids": [[], ["SYS-PORTFOLIO-001-FIL-0077-STMT-000028"], ["SYS-PORTFOLIO-001-FIL-0077-STMT-000029"], ["SYS-PORTFOLIO-001-FIL-0077-STMT-000030"]],
+   "pseudocode_text": "-- ANALYZE function (partial: the two step paragraphs are missing from the source)\nSET ws_vsam_name = ctl_file_name\nCALL 2510-collect-stats  !! UNRESOLVED: paragraph not found in program\nCALL 2520-generate-report  !! UNRESOLVED: paragraph not found in program",
+   "untranslated_statement_ids": [],
+   "field_references": ["CTL-FILE-NAME", "WS-VSAM-NAME"],
+   "field_reference_ids": [
+     {"name": "CTL-FILE-NAME", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0077-FLD-000002", "target_kind": "field", "candidate_ids": []},
+     {"name": "WS-VSAM-NAME", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0077-FLD-000018", "target_kind": "field", "candidate_ids": []}],
+   "calls_made": ["2510-COLLECT-STATS", "2520-GENERATE-REPORT"],
+   "calls_made_ids": [
+     {"name": "2510-COLLECT-STATS", "paragraph_id": null, "section_id": null},
+     {"name": "2520-GENERATE-REPORT", "paragraph_id": null, "section_id": null}],
+   "complexity_score": 1, "has_unresolved_statements": true,
+   "annotations": [{"line": 168, "statement_id": "SYS-PORTFOLIO-001-FIL-0077-STMT-000029", "note": "Gap: the logic of these steps is not in the source; nothing is inferred"}]},
+  {"name": "3000-CLEANUP", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0077-PAR-0011", "section": null, "section_id": null, "line_range": [171, 175],
+   "statement_ids": ["SYS-PORTFOLIO-001-FIL-0077-STMT-000031"],
+   "pseudocode": [
+     "-- Close all files",
+     "CLOSE CONTROL-FILE, ARCHIVE-FILE, REPORT-FILE"
+   ],
+   "pseudocode_statement_ids": [[], ["SYS-PORTFOLIO-001-FIL-0077-STMT-000031"]],
+   "pseudocode_text": "-- Close all files\nCLOSE CONTROL-FILE, ARCHIVE-FILE, REPORT-FILE",
+   "untranslated_statement_ids": [],
+   "field_references": [], "field_reference_ids": [],
+   "calls_made": [], "calls_made_ids": [],
+   "complexity_score": 1, "has_unresolved_statements": false, "annotations": []},
+  {"name": "9999-ERROR-HANDLER", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0077-PAR-0012", "section": null, "section_id": null, "line_range": [176, 182],
+   "statement_ids": ["SYS-PORTFOLIO-001-FIL-0077-STMT-000032", "SYS-PORTFOLIO-001-FIL-0077-STMT-000033", "SYS-PORTFOLIO-001-FIL-0077-STMT-000034", "SYS-PORTFOLIO-001-FIL-0077-STMT-000048", "SYS-PORTFOLIO-001-FIL-0077-STMT-000049"],
+   "pseudocode": [
+     "-- Count and report an error; stop only after more than 100 errors",
+     "INCREMENT ws_error_count BY 1",
+     "DISPLAY ws_error_message ON CONSOLE  -- UPON CONS (SPECIAL-NAMES: CONSOLE IS CONS)",
+     "IF ws_error_count > 100 THEN",
+     "  SET return_code = 12  -- RETURN-CODE special register (job step condition code)",
+     "  RETURN to caller (or terminate if main program)  -- GOBACK: files are not closed on this path",
+     "END IF"
+   ],
+   "pseudocode_statement_ids": [[], ["SYS-PORTFOLIO-001-FIL-0077-STMT-000032"], ["SYS-PORTFOLIO-001-FIL-0077-STMT-000033"], ["SYS-PORTFOLIO-001-FIL-0077-STMT-000034"], ["SYS-PORTFOLIO-001-FIL-0077-STMT-000048"], ["SYS-PORTFOLIO-001-FIL-0077-STMT-000049"], ["SYS-PORTFOLIO-001-FIL-0077-STMT-000034"]],
+   "pseudocode_text": "-- Count and report an error; stop only after more than 100 errors\nINCREMENT ws_error_count BY 1\nDISPLAY ws_error_message ON CONSOLE  -- UPON CONS (SPECIAL-NAMES: CONSOLE IS CONS)\nIF ws_error_count > 100 THEN\n  SET return_code = 12  -- RETURN-CODE special register (job step condition code)\n  RETURN to caller (or terminate if main program)  -- GOBACK: files are not closed on this path\nEND IF",
+   "untranslated_statement_ids": [],
+   "field_references": ["WS-ERROR-COUNT", "WS-ERROR-MESSAGE"],
+   "field_reference_ids": [
+     {"name": "WS-ERROR-COUNT", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0077-FLD-000017", "target_kind": "field", "candidate_ids": []},
+     {"name": "WS-ERROR-MESSAGE", "qualifiers": [], "resolution": "UNRESOLVED", "target_id": null, "target_kind": null, "candidate_ids": []}],
+   "calls_made": [], "calls_made_ids": [],
+   "complexity_score": 1, "has_unresolved_statements": false, "annotations": []}
 ],
 "unresolved_statements": [
-  {"statement_id": "SYS-PORTFOLIO-001-FIL-0077-STMT-000017", "paragraph": "2200-ARCHIVE-PROCESS", "line": 150, "source_text": "PERFORM 2210-OPEN-VSAM", "reason": "PERFORM target not declared in the program"},
-  {"statement_id": "SYS-PORTFOLIO-001-FIL-0077-STMT-000018", "paragraph": "2200-ARCHIVE-PROCESS", "line": 151, "source_text": "PERFORM 2220-ARCHIVE-RECORDS", "reason": "PERFORM target not declared in the program"},
-  {"statement_id": "SYS-PORTFOLIO-001-FIL-0077-STMT-000019", "paragraph": "2200-ARCHIVE-PROCESS", "line": 152, "source_text": "PERFORM 2230-CLOSE-VSAM", "reason": "PERFORM target not declared in the program"},
-  {"statement_id": "SYS-PORTFOLIO-001-FIL-0077-STMT-000021", "paragraph": "2300-CLEANUP-PROCESS", "line": 156, "source_text": "PERFORM 2310-ANALYZE-SPACE", "reason": "PERFORM target not declared in the program"},
-  {"statement_id": "SYS-PORTFOLIO-001-FIL-0077-STMT-000022", "paragraph": "2300-CLEANUP-PROCESS", "line": 157, "source_text": "PERFORM 2320-DELETE-OLD", "reason": "PERFORM target not declared in the program"},
-  {"statement_id": "SYS-PORTFOLIO-001-FIL-0077-STMT-000023", "paragraph": "2300-CLEANUP-PROCESS", "line": 158, "source_text": "PERFORM 2330-UPDATE-CATALOG", "reason": "PERFORM target not declared in the program"},
-  {"statement_id": "SYS-PORTFOLIO-001-FIL-0077-STMT-000025", "paragraph": "2400-REORG-PROCESS", "line": 162, "source_text": "PERFORM 2410-EXPORT-DATA", "reason": "PERFORM target not declared in the program"},
-  {"statement_id": "SYS-PORTFOLIO-001-FIL-0077-STMT-000026", "paragraph": "2400-REORG-PROCESS", "line": 163, "source_text": "PERFORM 2420-DELETE-DEFINE", "reason": "PERFORM target not declared in the program"},
-  {"statement_id": "SYS-PORTFOLIO-001-FIL-0077-STMT-000027", "paragraph": "2400-REORG-PROCESS", "line": 164, "source_text": "PERFORM 2430-IMPORT-DATA", "reason": "PERFORM target not declared in the program"},
-  {"statement_id": "SYS-PORTFOLIO-001-FIL-0077-STMT-000029", "paragraph": "2500-ANALYZE-PROCESS", "line": 168, "source_text": "PERFORM 2510-COLLECT-STATS", "reason": "PERFORM target not declared in the program"},
-  {"statement_id": "SYS-PORTFOLIO-001-FIL-0077-STMT-000030", "paragraph": "2500-ANALYZE-PROCESS", "line": 169, "source_text": "PERFORM 2520-GENERATE-REPORT", "reason": "PERFORM target not declared in the program"}
+  {"statement_id": "SYS-PORTFOLIO-001-FIL-0077-STMT-000017", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0077-PAR-0007", "line": 150, "source_text": "PERFORM 2210-OPEN-VSAM", "reason": "PERFORM target paragraph not present in the program"},
+  {"statement_id": "SYS-PORTFOLIO-001-FIL-0077-STMT-000018", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0077-PAR-0007", "line": 151, "source_text": "PERFORM 2220-ARCHIVE-RECORDS", "reason": "PERFORM target paragraph not present in the program"},
+  {"statement_id": "SYS-PORTFOLIO-001-FIL-0077-STMT-000019", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0077-PAR-0007", "line": 152, "source_text": "PERFORM 2230-CLOSE-VSAM", "reason": "PERFORM target paragraph not present in the program"},
+  {"statement_id": "SYS-PORTFOLIO-001-FIL-0077-STMT-000021", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0077-PAR-0008", "line": 156, "source_text": "PERFORM 2310-ANALYZE-SPACE", "reason": "PERFORM target paragraph not present in the program"},
+  {"statement_id": "SYS-PORTFOLIO-001-FIL-0077-STMT-000022", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0077-PAR-0008", "line": 157, "source_text": "PERFORM 2320-DELETE-OLD", "reason": "PERFORM target paragraph not present in the program"},
+  {"statement_id": "SYS-PORTFOLIO-001-FIL-0077-STMT-000023", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0077-PAR-0008", "line": 158, "source_text": "PERFORM 2330-UPDATE-CATALOG", "reason": "PERFORM target paragraph not present in the program"},
+  {"statement_id": "SYS-PORTFOLIO-001-FIL-0077-STMT-000025", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0077-PAR-0009", "line": 162, "source_text": "PERFORM 2410-EXPORT-DATA", "reason": "PERFORM target paragraph not present in the program"},
+  {"statement_id": "SYS-PORTFOLIO-001-FIL-0077-STMT-000026", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0077-PAR-0009", "line": 163, "source_text": "PERFORM 2420-DELETE-DEFINE", "reason": "PERFORM target paragraph not present in the program"},
+  {"statement_id": "SYS-PORTFOLIO-001-FIL-0077-STMT-000027", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0077-PAR-0009", "line": 164, "source_text": "PERFORM 2430-IMPORT-DATA", "reason": "PERFORM target paragraph not present in the program"},
+  {"statement_id": "SYS-PORTFOLIO-001-FIL-0077-STMT-000029", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0077-PAR-0010", "line": 168, "source_text": "PERFORM 2510-COLLECT-STATS", "reason": "PERFORM target paragraph not present in the program"},
+  {"statement_id": "SYS-PORTFOLIO-001-FIL-0077-STMT-000030", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0077-PAR-0010", "line": 169, "source_text": "PERFORM 2520-GENERATE-REPORT", "reason": "PERFORM target paragraph not present in the program"}
 ],
 "pseudocode_issues": [
-  {"severity": "info", "type": "id_unresolved", "kind": "field", "name": "WS-ERROR-MESSAGE", "paragraphs": ["1100-OPEN-FILES", "2100-PROCESS-FUNCTION", "9999-ERROR-HANDLER"], "message": "resolve-field-references UNRESOLVED; target_id null. Name used as-is in pseudocode."},
-  {"severity": "info", "type": "id_unresolved", "kind": "paragraph", "names": ["2210-OPEN-VSAM", "2220-ARCHIVE-RECORDS", "2230-CLOSE-VSAM", "2310-ANALYZE-SPACE", "2320-DELETE-OLD", "2330-UPDATE-CATALOG", "2410-EXPORT-DATA", "2420-DELETE-DEFINE", "2430-IMPORT-DATA", "2510-COLLECT-STATS", "2520-GENERATE-REPORT"], "message": "PERFORM targets not declared in the program; calls_made_ids paragraph_id null; pseudocode marked !! UNRESOLVED."}
+  {"severity": "info", "type": "id_unresolved", "kind": "paragraph_target", "names": ["2210-OPEN-VSAM", "2220-ARCHIVE-RECORDS", "2230-CLOSE-VSAM", "2310-ANALYZE-SPACE", "2320-DELETE-OLD", "2330-UPDATE-CATALOG", "2410-EXPORT-DATA", "2420-DELETE-DEFINE", "2430-IMPORT-DATA", "2510-COLLECT-STATS", "2520-GENERATE-REPORT"], "message": "calls_made entries with paragraph_id null (targets not in the program)"},
+  {"severity": "info", "type": "id_unresolved", "kind": "field", "names": ["WS-ERROR-MESSAGE"], "message": "Field reference with no registered Field ID (UNRESOLVED); used by name only"}
 ]
 }

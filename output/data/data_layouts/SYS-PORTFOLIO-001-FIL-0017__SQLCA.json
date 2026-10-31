@@ -2,18 +2,30 @@
   "id": "SQLCA",
   "source_type": "copybook",
   "source_file": "src/copybook/db2/SQLCA.cpy",
-  "used_by_programs": ["HISTLD00", "DB2CMT", "DB2CONN", "DB2ERR", "DB2STAT", "RTNANA00", "RTNCDE00", "CURSMGR", "DB2ONLN", "DB2RECV", "ERRHNDL", "INQHIST", "SECMGR", "DB2HNDL"],
+  "used_by_programs": ["CURSMGR", "DB2CMT", "DB2CONN", "DB2ERR", "DB2HNDL", "DB2ONLN", "DB2RECV", "DB2STAT", "ERRHNDL", "HISTLD00", "INQHIST", "RTNANA00", "RTNCDE00", "SECMGR"],
   "total_fields": 7,
   "total_bytes": 35,
   "system_id": "SYS-PORTFOLIO-001",
   "file_id": "SYS-PORTFOLIO-001-FIL-0017",
   "path_id": "SYS-PORTFOLIO-001-PATH-0017",
-  "data_run_id": "DRUN-20261024T215053Z-ACC1",
+  "data_run_id": "DRUN-20261027T162831Z-1330",
   "records": [
+    {
+      "type": "copy_stub",
+      "status": "unresolved",
+      "include_kind": "SQL_INCLUDE",
+      "copybook": "SQLCA",
+      "copybook_file_id": null,
+      "line": 6,
+      "raw": "EXEC SQL INCLUDE SQLCA END-EXEC.",
+      "reason": "self_inclusion",
+      "records": []
+    },
     {
       "record_id": "SYS-PORTFOLIO-001-FIL-0017-REC-0001",
       "section": "COPYBOOK", "is_fragment": false, "level": 1, "name": "SQL-STATUS-CODES",
-      "pic": null, "type": "GROUP", "storage_type": "DISPLAY", "bytes": 35, "total_bytes": 35, "inline_bytes": 35,
+      "pic": null, "type": "GROUP", "storage_type": "DISPLAY",
+      "bytes": 35, "total_bytes": 35, "inline_bytes": 35,
       "redefines": null, "occurs": null, "value": null, "line": 8, "end_line": 15,
       "children": [
         {"field_id": "SYS-PORTFOLIO-001-FIL-0017-FLD-000001", "path": "SQL-SUCCESS", "level": 5, "name": "SQL-SUCCESS", "pic": "X(5)", "pic_parsed": {"raw": "X(5)", "normalized_type": "STRING", "length": 5, "decimal_places": 0, "signed": false, "storage_type": "DISPLAY"}, "bytes": 5, "redefines": null, "occurs": null, "value": "'00000'", "line": 9, "children": []},
@@ -28,9 +40,10 @@
   ],
   "copy_expansions": [],
   "unresolved_copy_stubs": [
-    {"copybook": "SQLCA", "include_kind": "SQL_INCLUDE", "line": 6, "replacing": null, "reason": "self_include: the copybook includes itself; not registered as USES_COPYBOOK/EXPANDS_COPY"}
+    {"copybook": "SQLCA", "include_kind": "SQL_INCLUDE", "line": 6, "holder": null, "reason": "self_inclusion", "registered": false}
   ],
   "layout_issues": [
-    {"severity": "warning", "type": "unresolved_copy_stub", "file_id": "SYS-PORTFOLIO-001-FIL-0017", "source_id": "SQLCA", "line": 6, "message": "EXEC SQL INCLUDE SQLCA END-EXEC (line 6) names this copybook itself (inventory issue self_include). Registering it would create a USES_COPYBOOK self-reference, so it was not registered and is left as an unresolved stub. The precompiler SQLCA structure (SQLCODE, SQLSTATE, ...) is not defined in this file; only SQL-STATUS-CODES is."}
+    {"severity": "info", "type": "upstream_issue", "upstream_type": "circular_copy", "file_id": "SYS-PORTFOLIO-001-FIL-0017", "source_id": "SQLCA", "line": 6, "message": "Agent 1 (error): Circular COPY chain detected: copybook SQLCA contains 'EXEC SQL INCLUDE SQLCA' (self-inclusion); not recursed"},
+    {"severity": "warning", "type": "unresolved_copy_stub", "file_id": "SYS-PORTFOLIO-001-FIL-0017", "source_id": "SQLCA", "line": 6, "message": "EXEC SQL INCLUDE SQLCA (include_kind SQL_INCLUDE) names this copybook itself; recorded as an unresolved stub, not expanded and not registered as a copy expansion (no USES_COPYBOOK self-link)"}
   ]
 }

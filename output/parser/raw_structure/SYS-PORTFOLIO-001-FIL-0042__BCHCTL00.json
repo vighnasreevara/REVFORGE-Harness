@@ -1,207 +1,117 @@
 {
-"program_summary": {"program_id": "BCHCTL00", "source_file": "src/programs/batch/BCHCTL00.cbl", "ast_file": "raw_structure/SYS-PORTFOLIO-001-FIL-0042__BCHCTL00.json", "total_lines": 127, "paragraph_count": 6, "section_count": 5, "has_unstructured_flow": false, "has_alter": false, "dead_code_candidates": 0, "parse_status": "partial", "system_id": "SYS-PORTFOLIO-001", "file_id": "SYS-PORTFOLIO-001-FIL-0042", "path_id": "SYS-PORTFOLIO-001-PATH-0042", "file_name": "BCHCTL00.cbl", "statement_count": 30, "perform_edges": 16, "goto_edges": 0, "control_flow_relationships": 5, "review_required_statements": 0, "uncertain_statements": 0, "parse_run_id": "PRUN-20261023T023803Z-ACC2"},
-  "program_id": "BCHCTL00",
-  "source_file": "src/programs/batch/BCHCTL00.cbl",
-  "total_lines": 127,
-  "system_id": "SYS-PORTFOLIO-001",
-  "file_id": "SYS-PORTFOLIO-001-FIL-0042",
-  "path_id": "SYS-PORTFOLIO-001-PATH-0042",
-  "file_name": "BCHCTL00.cbl",
-  "relative_path": "src/programs/batch/BCHCTL00.cbl",
-  "parse_run_id": "PRUN-20261023T023803Z-ACC2",
-  "source_format": "fixed",
-  "identification_division": {
-    "start_line": 7,
-    "end_line": 9,
-    "program_id": "BCHCTL00",
-    "author": null,
-    "date_written": null,
-    "date_compiled": null
-  },
-  "environment_division": {
-    "start_line": 10,
-    "end_line": 23,
-    "sections": [
-      {"section_id": "SYS-PORTFOLIO-001-FIL-0042-SEC-0001", "name": "CONFIGURATION", "start_line": 11, "end_line": 14},
-      {"section_id": "SYS-PORTFOLIO-001-FIL-0042-SEC-0002", "name": "INPUT-OUTPUT", "start_line": 15, "end_line": 23}
-    ],
-    "paragraphs": [
-      {"name": "SOURCE-COMPUTER", "section": "CONFIGURATION", "line": 12, "registered": false},
-      {"name": "OBJECT-COMPUTER", "section": "CONFIGURATION", "line": 13, "registered": false},
-      {"name": "FILE-CONTROL", "section": "INPUT-OUTPUT", "line": 16, "registered": false}
-    ],
-    "file_control_entries": [
-      {"select_name": "BATCH-CONTROL-FILE", "assign_to": "BCHCTL", "organization": "INDEXED", "access_mode": "DYNAMIC", "record_key": "BCT-KEY", "file_status": "WS-BCT-STATUS", "line": 17, "end_line": 22}
-    ]
-  },
-  "data_division": {
-    "start_line": 24,
-    "end_line": 58,
-    "file_section": {
-      "section_id": "SYS-PORTFOLIO-001-FIL-0042-SEC-0003",
-      "start_line": 25,
-      "end_line": 28,
-      "entries": [
-        {"type": "FD", "file_name": "BATCH-CONTROL-FILE", "line": 26, "end_line": 28, "record_contains": null, "recording_mode": null, "block_contains": null,
-         "children": [
-           {"type": "copy_stub", "copybook": "BCHCTL", "library": null, "include_kind": "COPY", "line": 27, "section": "FILE", "parent_level": "FD", "note": "Expanded by Data Agent"}
-         ]}
-      ]
-    },
-    "working_storage_section": {
-      "section_id": "SYS-PORTFOLIO-001-FIL-0042-SEC-0004",
-      "start_line": 29,
-      "end_line": 46,
-      "entries": [
-        {"type": "copy_stub", "copybook": "BCHCON", "library": null, "include_kind": "COPY", "line": 30, "section": "WORKING-STORAGE", "parent_level": null, "note": "Expanded by Data Agent"},
-        {"type": "copy_stub", "copybook": "ERRHAND", "library": null, "include_kind": "COPY", "line": 31, "section": "WORKING-STORAGE", "parent_level": null, "note": "Expanded by Data Agent"},
-        {"level": 1, "name": "WS-FILE-STATUS", "pic": null, "value": null, "line": 33, "redefines": null, "occurs": null, "children": [
-          {"level": 5, "name": "WS-BCT-STATUS", "pic": "X(2)", "value": null, "line": 34, "redefines": null, "occurs": null, "children": []}
-        ]},
-        {"level": 1, "name": "WS-WORK-AREAS", "pic": null, "value": null, "line": 36, "redefines": null, "occurs": null, "children": [
-          {"level": 5, "name": "WS-CURRENT-TIME", "pic": "X(26)", "value": null, "line": 37, "redefines": null, "occurs": null, "children": []},
-          {"level": 5, "name": "WS-PREREQ-MET", "pic": "X(1)", "value": null, "line": 38, "redefines": null, "occurs": null, "children": [
-            {"level": 88, "name": "PREREQS-SATISFIED", "value": "'Y'", "line": 39},
-            {"level": 88, "name": "PREREQS-PENDING", "value": "'N'", "line": 40}
-          ]},
-          {"level": 5, "name": "WS-PROCESS-MODE", "pic": "X(1)", "value": null, "line": 41, "redefines": null, "occurs": null, "children": [
-            {"level": 88, "name": "MODE-INITIALIZE", "value": "'I'", "line": 42},
-            {"level": 88, "name": "MODE-CHECK-PREREQ", "value": "'C'", "line": 43},
-            {"level": 88, "name": "MODE-UPDATE-STATUS", "value": "'U'", "line": 44},
-            {"level": 88, "name": "MODE-FINALIZE", "value": "'F'", "line": 45}
-          ]}
-        ]}
-      ]
-    },
-    "linkage_section": {
-      "section_id": "SYS-PORTFOLIO-001-FIL-0042-SEC-0005",
-      "start_line": 47,
-      "end_line": 58,
-      "entries": [
-        {"level": 1, "name": "LS-CONTROL-REQUEST", "section": "LINKAGE", "pic": null, "value": null, "line": 48, "redefines": null, "occurs": null, "children": [
-          {"level": 5, "name": "LS-FUNCTION", "section": "LINKAGE", "pic": "X(4)", "value": null, "line": 49, "redefines": null, "occurs": null, "children": [
-            {"level": 88, "name": "FUNC-INIT", "section": "LINKAGE", "value": "'INIT'", "line": 50},
-            {"level": 88, "name": "FUNC-CHEK", "section": "LINKAGE", "value": "'CHEK'", "line": 51},
-            {"level": 88, "name": "FUNC-UPDT", "section": "LINKAGE", "value": "'UPDT'", "line": 52},
-            {"level": 88, "name": "FUNC-TERM", "section": "LINKAGE", "value": "'TERM'", "line": 53}
-          ]},
-          {"level": 5, "name": "LS-JOB-NAME", "section": "LINKAGE", "pic": "X(8)", "value": null, "line": 54, "redefines": null, "occurs": null, "children": []},
-          {"level": 5, "name": "LS-PROCESS-DATE", "section": "LINKAGE", "pic": "X(8)", "value": null, "line": 55, "redefines": null, "occurs": null, "children": []},
-          {"level": 5, "name": "LS-SEQUENCE-NO", "section": "LINKAGE", "pic": "9(4)", "value": null, "line": 56, "redefines": null, "occurs": null, "children": []},
-          {"level": 5, "name": "LS-RETURN-CODE", "section": "LINKAGE", "pic": "S9(4) COMP", "value": null, "line": 57, "redefines": null, "occurs": null, "children": []}
-        ]}
-      ]
-    },
-    "sql_declare_sections": []
-  },
-  "procedure_division": {
-    "start_line": 59,
-    "end_line": 127,
-    "using_parameters": ["LS-CONTROL-REQUEST"],
-    "sections": [],
-    "paragraphs": [
-      {"paragraph_id": "SYS-PORTFOLIO-001-FIL-0042-PAR-0001", "name": "0000-MAIN", "section": null, "section_id": null, "start_line": 60, "end_line": 82, "has_perform": true, "has_goto": false, "has_call": false, "has_stop_run": false, "review_status": "NONE",
-       "statement_ids": ["SYS-PORTFOLIO-001-FIL-0042-STMT-000001", "SYS-PORTFOLIO-001-FIL-0042-STMT-000002", "SYS-PORTFOLIO-001-FIL-0042-STMT-000003"]},
-      {"paragraph_id": "SYS-PORTFOLIO-001-FIL-0042-PAR-0002", "name": "1000-PROCESS-INITIALIZE", "section": null, "section_id": null, "start_line": 83, "end_line": 89, "has_perform": true, "has_goto": false, "has_call": false, "has_stop_run": false, "review_status": "NONE",
-       "statement_ids": ["SYS-PORTFOLIO-001-FIL-0042-STMT-000004", "SYS-PORTFOLIO-001-FIL-0042-STMT-000005", "SYS-PORTFOLIO-001-FIL-0042-STMT-000006", "SYS-PORTFOLIO-001-FIL-0042-STMT-000007"]},
-      {"paragraph_id": "SYS-PORTFOLIO-001-FIL-0042-PAR-0003", "name": "2000-CHECK-PREREQUISITES", "section": null, "section_id": null, "start_line": 90, "end_line": 99, "has_perform": true, "has_goto": false, "has_call": false, "has_stop_run": false, "review_status": "NONE",
-       "statement_ids": ["SYS-PORTFOLIO-001-FIL-0042-STMT-000008", "SYS-PORTFOLIO-001-FIL-0042-STMT-000009", "SYS-PORTFOLIO-001-FIL-0042-STMT-000010"]},
-      {"paragraph_id": "SYS-PORTFOLIO-001-FIL-0042-PAR-0004", "name": "3000-UPDATE-STATUS", "section": null, "section_id": null, "start_line": 100, "end_line": 105, "has_perform": true, "has_goto": false, "has_call": false, "has_stop_run": false, "review_status": "NONE",
-       "statement_ids": ["SYS-PORTFOLIO-001-FIL-0042-STMT-000011", "SYS-PORTFOLIO-001-FIL-0042-STMT-000012", "SYS-PORTFOLIO-001-FIL-0042-STMT-000013"]},
-      {"paragraph_id": "SYS-PORTFOLIO-001-FIL-0042-PAR-0005", "name": "4000-PROCESS-TERMINATE", "section": null, "section_id": null, "start_line": 106, "end_line": 110, "has_perform": true, "has_goto": false, "has_call": false, "has_stop_run": false, "review_status": "NONE",
-       "statement_ids": ["SYS-PORTFOLIO-001-FIL-0042-STMT-000014", "SYS-PORTFOLIO-001-FIL-0042-STMT-000015"]},
-      {"paragraph_id": "SYS-PORTFOLIO-001-FIL-0042-PAR-0006", "name": "9000-ERROR-ROUTINE", "section": null, "section_id": null, "start_line": 111, "end_line": 127, "has_perform": false, "has_goto": false, "has_call": true, "has_stop_run": false, "review_status": "NONE",
-       "statement_ids": ["SYS-PORTFOLIO-001-FIL-0042-STMT-000016", "SYS-PORTFOLIO-001-FIL-0042-STMT-000017", "SYS-PORTFOLIO-001-FIL-0042-STMT-000018"]}
-    ],
-    "statements": [
-      {"statement_id": "SYS-PORTFOLIO-001-FIL-0042-STMT-000001", "local_id": "L1", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0042-PAR-0001", "paragraph": "0000-MAIN", "parent_statement_id": null, "branch": null, "depth": 0, "sibling_index": 1, "statement_type": "EVALUATE", "source_text": "EVALUATE TRUE", "start_line": 61, "end_line": 77, "extraction_status": "OK", "match": "UNCHANGED", "review_status": "NONE", "review_candidates": []},
-      {"statement_id": "SYS-PORTFOLIO-001-FIL-0042-STMT-000021", "local_id": "L2", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0042-PAR-0001", "paragraph": "0000-MAIN", "parent_statement_id": "SYS-PORTFOLIO-001-FIL-0042-STMT-000001", "branch": "WHEN FUNC-INIT", "depth": 1, "sibling_index": 1, "statement_type": "SET", "source_text": "SET MODE-INITIALIZE TO TRUE", "start_line": 63, "end_line": 63, "extraction_status": "OK", "match": "UNCHANGED", "review_status": "NONE", "review_candidates": []},
-      {"statement_id": "SYS-PORTFOLIO-001-FIL-0042-STMT-000022", "local_id": "L3", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0042-PAR-0001", "paragraph": "0000-MAIN", "parent_statement_id": "SYS-PORTFOLIO-001-FIL-0042-STMT-000001", "branch": "WHEN FUNC-INIT", "depth": 1, "sibling_index": 2, "statement_type": "PERFORM", "source_text": "PERFORM 1000-PROCESS-INITIALIZE", "start_line": 64, "end_line": 64, "extraction_status": "OK", "match": "UNCHANGED", "review_status": "NONE", "review_candidates": []},
-      {"statement_id": "SYS-PORTFOLIO-001-FIL-0042-STMT-000019", "local_id": "L4", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0042-PAR-0001", "paragraph": "0000-MAIN", "parent_statement_id": "SYS-PORTFOLIO-001-FIL-0042-STMT-000001", "branch": "WHEN FUNC-CHEK", "depth": 1, "sibling_index": 1, "statement_type": "SET", "source_text": "SET MODE-CHECK-PREREQ TO TRUE", "start_line": 66, "end_line": 66, "extraction_status": "OK", "match": "UNCHANGED", "review_status": "NONE", "review_candidates": []},
-      {"statement_id": "SYS-PORTFOLIO-001-FIL-0042-STMT-000020", "local_id": "L5", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0042-PAR-0001", "paragraph": "0000-MAIN", "parent_statement_id": "SYS-PORTFOLIO-001-FIL-0042-STMT-000001", "branch": "WHEN FUNC-CHEK", "depth": 1, "sibling_index": 2, "statement_type": "PERFORM", "source_text": "PERFORM 2000-CHECK-PREREQUISITES", "start_line": 67, "end_line": 67, "extraction_status": "OK", "match": "UNCHANGED", "review_status": "NONE", "review_candidates": []},
-      {"statement_id": "SYS-PORTFOLIO-001-FIL-0042-STMT-000025", "local_id": "L6", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0042-PAR-0001", "paragraph": "0000-MAIN", "parent_statement_id": "SYS-PORTFOLIO-001-FIL-0042-STMT-000001", "branch": "WHEN FUNC-UPDT", "depth": 1, "sibling_index": 1, "statement_type": "SET", "source_text": "SET MODE-UPDATE-STATUS TO TRUE", "start_line": 69, "end_line": 69, "extraction_status": "OK", "match": "UNCHANGED", "review_status": "NONE", "review_candidates": []},
-      {"statement_id": "SYS-PORTFOLIO-001-FIL-0042-STMT-000026", "local_id": "L7", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0042-PAR-0001", "paragraph": "0000-MAIN", "parent_statement_id": "SYS-PORTFOLIO-001-FIL-0042-STMT-000001", "branch": "WHEN FUNC-UPDT", "depth": 1, "sibling_index": 2, "statement_type": "PERFORM", "source_text": "PERFORM 3000-UPDATE-STATUS", "start_line": 70, "end_line": 70, "extraction_status": "OK", "match": "UNCHANGED", "review_status": "NONE", "review_candidates": []},
-      {"statement_id": "SYS-PORTFOLIO-001-FIL-0042-STMT-000023", "local_id": "L8", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0042-PAR-0001", "paragraph": "0000-MAIN", "parent_statement_id": "SYS-PORTFOLIO-001-FIL-0042-STMT-000001", "branch": "WHEN FUNC-TERM", "depth": 1, "sibling_index": 1, "statement_type": "SET", "source_text": "SET MODE-FINALIZE TO TRUE", "start_line": 72, "end_line": 72, "extraction_status": "OK", "match": "UNCHANGED", "review_status": "NONE", "review_candidates": []},
-      {"statement_id": "SYS-PORTFOLIO-001-FIL-0042-STMT-000024", "local_id": "L9", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0042-PAR-0001", "paragraph": "0000-MAIN", "parent_statement_id": "SYS-PORTFOLIO-001-FIL-0042-STMT-000001", "branch": "WHEN FUNC-TERM", "depth": 1, "sibling_index": 2, "statement_type": "PERFORM", "source_text": "PERFORM 4000-PROCESS-TERMINATE", "start_line": 73, "end_line": 73, "extraction_status": "OK", "match": "UNCHANGED", "review_status": "NONE", "review_candidates": []},
-      {"statement_id": "SYS-PORTFOLIO-001-FIL-0042-STMT-000027", "local_id": "L10", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0042-PAR-0001", "paragraph": "0000-MAIN", "parent_statement_id": "SYS-PORTFOLIO-001-FIL-0042-STMT-000001", "branch": "WHEN OTHER", "depth": 1, "sibling_index": 1, "statement_type": "MOVE", "source_text": "MOVE 'Invalid function code' TO ERR-TEXT", "start_line": 75, "end_line": 75, "extraction_status": "OK", "match": "UNCHANGED", "review_status": "NONE", "review_candidates": []},
-      {"statement_id": "SYS-PORTFOLIO-001-FIL-0042-STMT-000028", "local_id": "L11", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0042-PAR-0001", "paragraph": "0000-MAIN", "parent_statement_id": "SYS-PORTFOLIO-001-FIL-0042-STMT-000001", "branch": "WHEN OTHER", "depth": 1, "sibling_index": 2, "statement_type": "PERFORM", "source_text": "PERFORM 9000-ERROR-ROUTINE", "start_line": 76, "end_line": 76, "extraction_status": "OK", "match": "UNCHANGED", "review_status": "NONE", "review_candidates": []},
-      {"statement_id": "SYS-PORTFOLIO-001-FIL-0042-STMT-000002", "local_id": "L12", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0042-PAR-0001", "paragraph": "0000-MAIN", "parent_statement_id": null, "branch": null, "depth": 0, "sibling_index": 2, "statement_type": "MOVE", "source_text": "MOVE LS-RETURN-CODE TO RETURN-CODE", "start_line": 79, "end_line": 79, "extraction_status": "OK", "match": "UNCHANGED", "review_status": "NONE", "review_candidates": []},
-      {"statement_id": "SYS-PORTFOLIO-001-FIL-0042-STMT-000003", "local_id": "L13", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0042-PAR-0001", "paragraph": "0000-MAIN", "parent_statement_id": null, "branch": null, "depth": 0, "sibling_index": 3, "statement_type": "GOBACK", "source_text": "GOBACK", "start_line": 80, "end_line": 80, "extraction_status": "OK", "match": "UNCHANGED", "review_status": "NONE", "review_candidates": []},
-      {"statement_id": "SYS-PORTFOLIO-001-FIL-0042-STMT-000004", "local_id": "L14", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0042-PAR-0002", "paragraph": "1000-PROCESS-INITIALIZE", "parent_statement_id": null, "branch": null, "depth": 0, "sibling_index": 1, "statement_type": "PERFORM", "source_text": "PERFORM 1100-OPEN-FILES", "start_line": 84, "end_line": 84, "extraction_status": "OK", "match": "UNCHANGED", "review_status": "NONE", "review_candidates": []},
-      {"statement_id": "SYS-PORTFOLIO-001-FIL-0042-STMT-000005", "local_id": "L15", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0042-PAR-0002", "paragraph": "1000-PROCESS-INITIALIZE", "parent_statement_id": null, "branch": null, "depth": 0, "sibling_index": 2, "statement_type": "PERFORM", "source_text": "PERFORM 1200-READ-CONTROL-RECORD", "start_line": 85, "end_line": 85, "extraction_status": "OK", "match": "UNCHANGED", "review_status": "NONE", "review_candidates": []},
-      {"statement_id": "SYS-PORTFOLIO-001-FIL-0042-STMT-000006", "local_id": "L16", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0042-PAR-0002", "paragraph": "1000-PROCESS-INITIALIZE", "parent_statement_id": null, "branch": null, "depth": 0, "sibling_index": 3, "statement_type": "PERFORM", "source_text": "PERFORM 1300-VALIDATE-PROCESS", "start_line": 86, "end_line": 86, "extraction_status": "OK", "match": "UNCHANGED", "review_status": "NONE", "review_candidates": []},
-      {"statement_id": "SYS-PORTFOLIO-001-FIL-0042-STMT-000007", "local_id": "L17", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0042-PAR-0002", "paragraph": "1000-PROCESS-INITIALIZE", "parent_statement_id": null, "branch": null, "depth": 0, "sibling_index": 4, "statement_type": "PERFORM", "source_text": "PERFORM 1400-UPDATE-START-STATUS", "start_line": 87, "end_line": 87, "extraction_status": "OK", "match": "UNCHANGED", "review_status": "NONE", "review_candidates": []},
-      {"statement_id": "SYS-PORTFOLIO-001-FIL-0042-STMT-000008", "local_id": "L18", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0042-PAR-0003", "paragraph": "2000-CHECK-PREREQUISITES", "parent_statement_id": null, "branch": null, "depth": 0, "sibling_index": 1, "statement_type": "PERFORM", "source_text": "PERFORM 2100-READ-CONTROL-RECORD", "start_line": 91, "end_line": 91, "extraction_status": "OK", "match": "UNCHANGED", "review_status": "NONE", "review_candidates": []},
-      {"statement_id": "SYS-PORTFOLIO-001-FIL-0042-STMT-000009", "local_id": "L19", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0042-PAR-0003", "paragraph": "2000-CHECK-PREREQUISITES", "parent_statement_id": null, "branch": null, "depth": 0, "sibling_index": 2, "statement_type": "PERFORM", "source_text": "PERFORM 2200-CHECK-DEPENDENCIES", "start_line": 92, "end_line": 92, "extraction_status": "OK", "match": "UNCHANGED", "review_status": "NONE", "review_candidates": []},
-      {"statement_id": "SYS-PORTFOLIO-001-FIL-0042-STMT-000010", "local_id": "L20", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0042-PAR-0003", "paragraph": "2000-CHECK-PREREQUISITES", "parent_statement_id": null, "branch": null, "depth": 0, "sibling_index": 3, "statement_type": "IF", "source_text": "IF PREREQS-SATISFIED", "start_line": 93, "end_line": 97, "extraction_status": "OK", "match": "UNCHANGED", "review_status": "NONE", "review_candidates": []},
-      {"statement_id": "SYS-PORTFOLIO-001-FIL-0042-STMT-000030", "local_id": "L21", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0042-PAR-0003", "paragraph": "2000-CHECK-PREREQUISITES", "parent_statement_id": "SYS-PORTFOLIO-001-FIL-0042-STMT-000010", "branch": "THEN", "depth": 1, "sibling_index": 1, "statement_type": "MOVE", "source_text": "MOVE BCT-RC-SUCCESS TO LS-RETURN-CODE", "start_line": 94, "end_line": 94, "extraction_status": "OK", "match": "UNCHANGED", "review_status": "NONE", "review_candidates": []},
-      {"statement_id": "SYS-PORTFOLIO-001-FIL-0042-STMT-000029", "local_id": "L22", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0042-PAR-0003", "paragraph": "2000-CHECK-PREREQUISITES", "parent_statement_id": "SYS-PORTFOLIO-001-FIL-0042-STMT-000010", "branch": "ELSE", "depth": 1, "sibling_index": 1, "statement_type": "MOVE", "source_text": "MOVE BCT-RC-WARNING TO LS-RETURN-CODE", "start_line": 96, "end_line": 96, "extraction_status": "OK", "match": "UNCHANGED", "review_status": "NONE", "review_candidates": []},
-      {"statement_id": "SYS-PORTFOLIO-001-FIL-0042-STMT-000011", "local_id": "L23", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0042-PAR-0004", "paragraph": "3000-UPDATE-STATUS", "parent_statement_id": null, "branch": null, "depth": 0, "sibling_index": 1, "statement_type": "PERFORM", "source_text": "PERFORM 3100-READ-CONTROL-RECORD", "start_line": 101, "end_line": 101, "extraction_status": "OK", "match": "UNCHANGED", "review_status": "NONE", "review_candidates": []},
-      {"statement_id": "SYS-PORTFOLIO-001-FIL-0042-STMT-000012", "local_id": "L24", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0042-PAR-0004", "paragraph": "3000-UPDATE-STATUS", "parent_statement_id": null, "branch": null, "depth": 0, "sibling_index": 2, "statement_type": "PERFORM", "source_text": "PERFORM 3200-UPDATE-PROCESS-STATUS", "start_line": 102, "end_line": 102, "extraction_status": "OK", "match": "UNCHANGED", "review_status": "NONE", "review_candidates": []},
-      {"statement_id": "SYS-PORTFOLIO-001-FIL-0042-STMT-000013", "local_id": "L25", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0042-PAR-0004", "paragraph": "3000-UPDATE-STATUS", "parent_statement_id": null, "branch": null, "depth": 0, "sibling_index": 3, "statement_type": "PERFORM", "source_text": "PERFORM 3300-WRITE-CONTROL-RECORD", "start_line": 103, "end_line": 103, "extraction_status": "OK", "match": "UNCHANGED", "review_status": "NONE", "review_candidates": []},
-      {"statement_id": "SYS-PORTFOLIO-001-FIL-0042-STMT-000014", "local_id": "L26", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0042-PAR-0005", "paragraph": "4000-PROCESS-TERMINATE", "parent_statement_id": null, "branch": null, "depth": 0, "sibling_index": 1, "statement_type": "PERFORM", "source_text": "PERFORM 4100-UPDATE-COMPLETION", "start_line": 107, "end_line": 107, "extraction_status": "OK", "match": "UNCHANGED", "review_status": "NONE", "review_candidates": []},
-      {"statement_id": "SYS-PORTFOLIO-001-FIL-0042-STMT-000015", "local_id": "L27", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0042-PAR-0005", "paragraph": "4000-PROCESS-TERMINATE", "parent_statement_id": null, "branch": null, "depth": 0, "sibling_index": 2, "statement_type": "PERFORM", "source_text": "PERFORM 4200-CLOSE-FILES", "start_line": 108, "end_line": 108, "extraction_status": "OK", "match": "UNCHANGED", "review_status": "NONE", "review_candidates": []},
-      {"statement_id": "SYS-PORTFOLIO-001-FIL-0042-STMT-000016", "local_id": "L28", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0042-PAR-0006", "paragraph": "9000-ERROR-ROUTINE", "parent_statement_id": null, "branch": null, "depth": 0, "sibling_index": 1, "statement_type": "MOVE", "source_text": "MOVE 'BCHCTL00' TO ERR-PROGRAM", "start_line": 112, "end_line": 112, "extraction_status": "OK", "match": "UNCHANGED", "review_status": "NONE", "review_candidates": []},
-      {"statement_id": "SYS-PORTFOLIO-001-FIL-0042-STMT-000017", "local_id": "L29", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0042-PAR-0006", "paragraph": "9000-ERROR-ROUTINE", "parent_statement_id": null, "branch": null, "depth": 0, "sibling_index": 2, "statement_type": "MOVE", "source_text": "MOVE BCT-RC-ERROR TO LS-RETURN-CODE", "start_line": 113, "end_line": 113, "extraction_status": "OK", "match": "UNCHANGED", "review_status": "NONE", "review_candidates": []},
-      {"statement_id": "SYS-PORTFOLIO-001-FIL-0042-STMT-000018", "local_id": "L30", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0042-PAR-0006", "paragraph": "9000-ERROR-ROUTINE", "parent_statement_id": null, "branch": null, "depth": 0, "sibling_index": 3, "statement_type": "CALL", "source_text": "CALL 'ERRPROC' USING ERR-MESSAGE", "start_line": 114, "end_line": 114, "extraction_status": "OK", "match": "UNCHANGED", "review_status": "NONE", "review_candidates": []}
-    ],
-    "terminal_statements": [
-      {"type": "GOBACK", "line": 80, "paragraph": "0000-MAIN", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0042-PAR-0001", "statement_id": "SYS-PORTFOLIO-001-FIL-0042-STMT-000003"}
-    ]
-  },
-  "copy_stubs": [
-    {"copybook": "BCHCTL", "include_kind": "COPY", "division": "DATA", "section": "FILE", "line": 27},
-    {"copybook": "BCHCON", "include_kind": "COPY", "division": "DATA", "section": "WORKING-STORAGE", "line": 30},
-    {"copybook": "ERRHAND", "include_kind": "COPY", "division": "DATA", "section": "WORKING-STORAGE", "line": 31}
-  ],
-  "parse_issues": [
-    {"severity": "warning", "type": "misplaced_comment_indicator", "lines": [1], "message": "Line 1 has '*' in column 8 (first non-blank character of the program-text area); treated as a comment, not program text"},
-    {"severity": "info", "type": "commented_out_paragraph_list", "lines": [116, 127], "message": "Comment block lists paragraph names 'to be implemented' (1100-OPEN-FILES ... 4200-CLOSE-FILES); these paragraphs are not present in the source"}
-  ],
-  "control_flow_graph": {
-    "entry_points": ["0000-MAIN"],
-    "entry_point_ids": ["SYS-PORTFOLIO-001-FIL-0042-PAR-0001"],
-    "terminal_nodes": ["0000-MAIN"],
-    "nodes": [
-      {"id": "0000-MAIN", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0042-PAR-0001", "type": "paragraph", "section": null, "section_id": null, "start_line": 60, "end_line": 82, "is_entry_point": true, "is_terminal": true, "is_dead_code": false, "unstructured_constructs": []},
-      {"id": "1000-PROCESS-INITIALIZE", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0042-PAR-0002", "type": "paragraph", "section": null, "section_id": null, "start_line": 83, "end_line": 89, "is_entry_point": false, "is_terminal": false, "is_dead_code": false, "unstructured_constructs": []},
-      {"id": "2000-CHECK-PREREQUISITES", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0042-PAR-0003", "type": "paragraph", "section": null, "section_id": null, "start_line": 90, "end_line": 99, "is_entry_point": false, "is_terminal": false, "is_dead_code": false, "unstructured_constructs": []},
-      {"id": "3000-UPDATE-STATUS", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0042-PAR-0004", "type": "paragraph", "section": null, "section_id": null, "start_line": 100, "end_line": 105, "is_entry_point": false, "is_terminal": false, "is_dead_code": false, "unstructured_constructs": []},
-      {"id": "4000-PROCESS-TERMINATE", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0042-PAR-0005", "type": "paragraph", "section": null, "section_id": null, "start_line": 106, "end_line": 110, "is_entry_point": false, "is_terminal": false, "is_dead_code": false, "unstructured_constructs": []},
-      {"id": "9000-ERROR-ROUTINE", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0042-PAR-0006", "type": "paragraph", "section": null, "section_id": null, "start_line": 111, "end_line": 127, "is_entry_point": false, "is_terminal": false, "is_dead_code": false, "unstructured_constructs": []}
-    ],
-    "edges": [
-      {"from": "0000-MAIN", "to": "1000-PROCESS-INITIALIZE", "type": "PERFORM_SIMPLE", "resolved": true, "unstructured": false, "source_line": 64, "statement_id": "SYS-PORTFOLIO-001-FIL-0042-STMT-000022", "from_paragraph_id": "SYS-PORTFOLIO-001-FIL-0042-PAR-0001", "to_paragraph_id": "SYS-PORTFOLIO-001-FIL-0042-PAR-0002", "to_section_id": null},
-      {"from": "0000-MAIN", "to": "2000-CHECK-PREREQUISITES", "type": "PERFORM_SIMPLE", "resolved": true, "unstructured": false, "source_line": 67, "statement_id": "SYS-PORTFOLIO-001-FIL-0042-STMT-000020", "from_paragraph_id": "SYS-PORTFOLIO-001-FIL-0042-PAR-0001", "to_paragraph_id": "SYS-PORTFOLIO-001-FIL-0042-PAR-0003", "to_section_id": null},
-      {"from": "0000-MAIN", "to": "3000-UPDATE-STATUS", "type": "PERFORM_SIMPLE", "resolved": true, "unstructured": false, "source_line": 70, "statement_id": "SYS-PORTFOLIO-001-FIL-0042-STMT-000026", "from_paragraph_id": "SYS-PORTFOLIO-001-FIL-0042-PAR-0001", "to_paragraph_id": "SYS-PORTFOLIO-001-FIL-0042-PAR-0004", "to_section_id": null},
-      {"from": "0000-MAIN", "to": "4000-PROCESS-TERMINATE", "type": "PERFORM_SIMPLE", "resolved": true, "unstructured": false, "source_line": 73, "statement_id": "SYS-PORTFOLIO-001-FIL-0042-STMT-000024", "from_paragraph_id": "SYS-PORTFOLIO-001-FIL-0042-PAR-0001", "to_paragraph_id": "SYS-PORTFOLIO-001-FIL-0042-PAR-0005", "to_section_id": null},
-      {"from": "0000-MAIN", "to": "9000-ERROR-ROUTINE", "type": "PERFORM_SIMPLE", "resolved": true, "unstructured": false, "source_line": 76, "statement_id": "SYS-PORTFOLIO-001-FIL-0042-STMT-000028", "from_paragraph_id": "SYS-PORTFOLIO-001-FIL-0042-PAR-0001", "to_paragraph_id": "SYS-PORTFOLIO-001-FIL-0042-PAR-0006", "to_section_id": null},
-      {"from": "1000-PROCESS-INITIALIZE", "to": "1100-OPEN-FILES", "type": "PERFORM_SIMPLE", "resolved": false, "unstructured": false, "source_line": 84, "statement_id": "SYS-PORTFOLIO-001-FIL-0042-STMT-000004", "from_paragraph_id": "SYS-PORTFOLIO-001-FIL-0042-PAR-0002", "to_paragraph_id": null, "to_section_id": null},
-      {"from": "1000-PROCESS-INITIALIZE", "to": "1200-READ-CONTROL-RECORD", "type": "PERFORM_SIMPLE", "resolved": false, "unstructured": false, "source_line": 85, "statement_id": "SYS-PORTFOLIO-001-FIL-0042-STMT-000005", "from_paragraph_id": "SYS-PORTFOLIO-001-FIL-0042-PAR-0002", "to_paragraph_id": null, "to_section_id": null},
-      {"from": "1000-PROCESS-INITIALIZE", "to": "1300-VALIDATE-PROCESS", "type": "PERFORM_SIMPLE", "resolved": false, "unstructured": false, "source_line": 86, "statement_id": "SYS-PORTFOLIO-001-FIL-0042-STMT-000006", "from_paragraph_id": "SYS-PORTFOLIO-001-FIL-0042-PAR-0002", "to_paragraph_id": null, "to_section_id": null},
-      {"from": "1000-PROCESS-INITIALIZE", "to": "1400-UPDATE-START-STATUS", "type": "PERFORM_SIMPLE", "resolved": false, "unstructured": false, "source_line": 87, "statement_id": "SYS-PORTFOLIO-001-FIL-0042-STMT-000007", "from_paragraph_id": "SYS-PORTFOLIO-001-FIL-0042-PAR-0002", "to_paragraph_id": null, "to_section_id": null},
-      {"from": "2000-CHECK-PREREQUISITES", "to": "2100-READ-CONTROL-RECORD", "type": "PERFORM_SIMPLE", "resolved": false, "unstructured": false, "source_line": 91, "statement_id": "SYS-PORTFOLIO-001-FIL-0042-STMT-000008", "from_paragraph_id": "SYS-PORTFOLIO-001-FIL-0042-PAR-0003", "to_paragraph_id": null, "to_section_id": null},
-      {"from": "2000-CHECK-PREREQUISITES", "to": "2200-CHECK-DEPENDENCIES", "type": "PERFORM_SIMPLE", "resolved": false, "unstructured": false, "source_line": 92, "statement_id": "SYS-PORTFOLIO-001-FIL-0042-STMT-000009", "from_paragraph_id": "SYS-PORTFOLIO-001-FIL-0042-PAR-0003", "to_paragraph_id": null, "to_section_id": null},
-      {"from": "3000-UPDATE-STATUS", "to": "3100-READ-CONTROL-RECORD", "type": "PERFORM_SIMPLE", "resolved": false, "unstructured": false, "source_line": 101, "statement_id": "SYS-PORTFOLIO-001-FIL-0042-STMT-000011", "from_paragraph_id": "SYS-PORTFOLIO-001-FIL-0042-PAR-0004", "to_paragraph_id": null, "to_section_id": null},
-      {"from": "3000-UPDATE-STATUS", "to": "3200-UPDATE-PROCESS-STATUS", "type": "PERFORM_SIMPLE", "resolved": false, "unstructured": false, "source_line": 102, "statement_id": "SYS-PORTFOLIO-001-FIL-0042-STMT-000012", "from_paragraph_id": "SYS-PORTFOLIO-001-FIL-0042-PAR-0004", "to_paragraph_id": null, "to_section_id": null},
-      {"from": "3000-UPDATE-STATUS", "to": "3300-WRITE-CONTROL-RECORD", "type": "PERFORM_SIMPLE", "resolved": false, "unstructured": false, "source_line": 103, "statement_id": "SYS-PORTFOLIO-001-FIL-0042-STMT-000013", "from_paragraph_id": "SYS-PORTFOLIO-001-FIL-0042-PAR-0004", "to_paragraph_id": null, "to_section_id": null},
-      {"from": "4000-PROCESS-TERMINATE", "to": "4100-UPDATE-COMPLETION", "type": "PERFORM_SIMPLE", "resolved": false, "unstructured": false, "source_line": 107, "statement_id": "SYS-PORTFOLIO-001-FIL-0042-STMT-000014", "from_paragraph_id": "SYS-PORTFOLIO-001-FIL-0042-PAR-0005", "to_paragraph_id": null, "to_section_id": null},
-      {"from": "4000-PROCESS-TERMINATE", "to": "4200-CLOSE-FILES", "type": "PERFORM_SIMPLE", "resolved": false, "unstructured": false, "source_line": 108, "statement_id": "SYS-PORTFOLIO-001-FIL-0042-STMT-000015", "from_paragraph_id": "SYS-PORTFOLIO-001-FIL-0042-PAR-0005", "to_paragraph_id": null, "to_section_id": null}
-    ],
-    "unstructured_constructs": [],
-    "dead_code_candidates": [],
-    "cfg_issues": [
-      {"severity": "warning", "type": "unresolved_target", "target": "1100-OPEN-FILES", "source_line": 84, "statement_id": "SYS-PORTFOLIO-001-FIL-0042-STMT-000004", "message": "PERFORM target not found among paragraphs or sections (named only in a comment block, lines 116-127)"},
-      {"severity": "warning", "type": "unresolved_target", "target": "1200-READ-CONTROL-RECORD", "source_line": 85, "statement_id": "SYS-PORTFOLIO-001-FIL-0042-STMT-000005", "message": "PERFORM target not found among paragraphs or sections"},
-      {"severity": "warning", "type": "unresolved_target", "target": "1300-VALIDATE-PROCESS", "source_line": 86, "statement_id": "SYS-PORTFOLIO-001-FIL-0042-STMT-000006", "message": "PERFORM target not found among paragraphs or sections"},
-      {"severity": "warning", "type": "unresolved_target", "target": "1400-UPDATE-START-STATUS", "source_line": 87, "statement_id": "SYS-PORTFOLIO-001-FIL-0042-STMT-000007", "message": "PERFORM target not found among paragraphs or sections"},
-      {"severity": "warning", "type": "unresolved_target", "target": "2100-READ-CONTROL-RECORD", "source_line": 91, "statement_id": "SYS-PORTFOLIO-001-FIL-0042-STMT-000008", "message": "PERFORM target not found among paragraphs or sections (also not listed in the comment block)"},
-      {"severity": "warning", "type": "unresolved_target", "target": "2200-CHECK-DEPENDENCIES", "source_line": 92, "statement_id": "SYS-PORTFOLIO-001-FIL-0042-STMT-000009", "message": "PERFORM target not found among paragraphs or sections"},
-      {"severity": "warning", "type": "unresolved_target", "target": "3100-READ-CONTROL-RECORD", "source_line": 101, "statement_id": "SYS-PORTFOLIO-001-FIL-0042-STMT-000011", "message": "PERFORM target not found among paragraphs or sections (also not listed in the comment block)"},
-      {"severity": "warning", "type": "unresolved_target", "target": "3200-UPDATE-PROCESS-STATUS", "source_line": 102, "statement_id": "SYS-PORTFOLIO-001-FIL-0042-STMT-000012", "message": "PERFORM target not found among paragraphs or sections"},
-      {"severity": "warning", "type": "unresolved_target", "target": "3300-WRITE-CONTROL-RECORD", "source_line": 103, "statement_id": "SYS-PORTFOLIO-001-FIL-0042-STMT-000013", "message": "PERFORM target not found among paragraphs or sections"},
-      {"severity": "warning", "type": "unresolved_target", "target": "4100-UPDATE-COMPLETION", "source_line": 107, "statement_id": "SYS-PORTFOLIO-001-FIL-0042-STMT-000014", "message": "PERFORM target not found among paragraphs or sections"},
-      {"severity": "warning", "type": "unresolved_target", "target": "4200-CLOSE-FILES", "source_line": 108, "statement_id": "SYS-PORTFOLIO-001-FIL-0042-STMT-000015", "message": "PERFORM target not found among paragraphs or sections"}
-    ]
-  }
+"program_summary": {"program_id":"BCHCTL00","source_file":"src/programs/batch/BCHCTL00.cbl","ast_file":"raw_structure/SYS-PORTFOLIO-001-FIL-0042__BCHCTL00.json","total_lines":127,"paragraph_count":6,"section_count":5,"has_unstructured_flow":false,"has_alter":false,"dead_code_candidates":0,"parse_status":"partial","system_id":"SYS-PORTFOLIO-001","file_id":"SYS-PORTFOLIO-001-FIL-0042","path_id":"SYS-PORTFOLIO-001-PATH-0042","file_name":"BCHCTL00.cbl","statement_count":30,"perform_edges":16,"goto_edges":0,"control_flow_relationships":5,"review_required_statements":0,"uncertain_statements":0,"parse_run_id":"PRUN-20261027T155247Z-2626"},
+"program_id":"BCHCTL00","source_file":"src/programs/batch/BCHCTL00.cbl","total_lines":127,"system_id":"SYS-PORTFOLIO-001","file_id":"SYS-PORTFOLIO-001-FIL-0042","path_id":"SYS-PORTFOLIO-001-PATH-0042","file_name":"BCHCTL00.cbl","relative_path":"src/programs/batch/BCHCTL00.cbl","parse_run_id":"PRUN-20261027T155247Z-2626","source_format":"fixed",
+"identification_division":{"start_line":7,"end_line":9,"program_id":"BCHCTL00","author":null,"date_written":null},
+"environment_division":{"start_line":10,"end_line":23,"sections":[
+{"section_id":"SYS-PORTFOLIO-001-FIL-0042-SEC-0001","name":"CONFIGURATION","start_line":11,"end_line":14},
+{"section_id":"SYS-PORTFOLIO-001-FIL-0042-SEC-0002","name":"INPUT-OUTPUT","start_line":15,"end_line":23}],
+"paragraphs":[{"name":"SOURCE-COMPUTER","line":12,"registered":false},{"name":"OBJECT-COMPUTER","line":13,"registered":false},{"name":"FILE-CONTROL","line":16,"registered":false}],
+"file_control_entries":[{"select_name":"BATCH-CONTROL-FILE","assign_to":"BCHCTL","organization":"INDEXED","access_mode":"DYNAMIC","record_key":"BCT-KEY","file_status":"WS-BCT-STATUS","line":17,"end_line":22}]},
+"data_division":{"start_line":24,"end_line":58,
+"file_section":{"section_id":"SYS-PORTFOLIO-001-FIL-0042-SEC-0003","start_line":25,"end_line":28,"entries":[
+{"type":"FD","file_name":"BATCH-CONTROL-FILE","line":26,"end_line":28,"record_contains":null,"recording_mode":null,"block_contains":null},
+{"type":"copy_stub","copybook":"BCHCTL","library":null,"include_kind":"COPY","line":27,"section":"FILE","parent_level":"FD","note":"Expanded by Data Agent"}]},
+"working_storage_section":{"section_id":"SYS-PORTFOLIO-001-FIL-0042-SEC-0004","start_line":29,"end_line":46,"entries":[
+{"type":"copy_stub","copybook":"BCHCON","library":null,"include_kind":"COPY","line":30,"section":"WORKING-STORAGE","parent_level":null,"note":"Expanded by Data Agent"},
+{"type":"copy_stub","copybook":"ERRHAND","library":null,"include_kind":"COPY","line":31,"section":"WORKING-STORAGE","parent_level":null,"note":"Expanded by Data Agent"},
+{"level":1,"name":"WS-FILE-STATUS","pic":null,"value":null,"line":33,"redefines":null,"occurs":null,"children":[
+{"level":5,"name":"WS-BCT-STATUS","pic":"X(2)","value":null,"line":34,"redefines":null,"occurs":null,"children":[]}]},
+{"level":1,"name":"WS-WORK-AREAS","pic":null,"value":null,"line":36,"redefines":null,"occurs":null,"children":[
+{"level":5,"name":"WS-CURRENT-TIME","pic":"X(26)","value":null,"line":37,"redefines":null,"occurs":null,"children":[]},
+{"level":5,"name":"WS-PREREQ-MET","pic":"X(1)","value":null,"line":38,"redefines":null,"occurs":null,"children":[
+{"level":88,"name":"PREREQS-SATISFIED","pic":null,"value":"'Y'","line":39},
+{"level":88,"name":"PREREQS-PENDING","pic":null,"value":"'N'","line":40}]},
+{"level":5,"name":"WS-PROCESS-MODE","pic":"X(1)","value":null,"line":41,"redefines":null,"occurs":null,"children":[
+{"level":88,"name":"MODE-INITIALIZE","pic":null,"value":"'I'","line":42},
+{"level":88,"name":"MODE-CHECK-PREREQ","pic":null,"value":"'C'","line":43},
+{"level":88,"name":"MODE-UPDATE-STATUS","pic":null,"value":"'U'","line":44},
+{"level":88,"name":"MODE-FINALIZE","pic":null,"value":"'F'","line":45}]}]}]},
+"linkage_section":{"section_id":"SYS-PORTFOLIO-001-FIL-0042-SEC-0005","start_line":47,"end_line":58,"entries":[
+{"level":1,"name":"LS-CONTROL-REQUEST","pic":null,"value":null,"line":48,"redefines":null,"occurs":null,"section":"LINKAGE","children":[
+{"level":5,"name":"LS-FUNCTION","pic":"X(4)","value":null,"line":49,"redefines":null,"occurs":null,"section":"LINKAGE","children":[
+{"level":88,"name":"FUNC-INIT","pic":null,"value":"'INIT'","line":50},
+{"level":88,"name":"FUNC-CHEK","pic":null,"value":"'CHEK'","line":51},
+{"level":88,"name":"FUNC-UPDT","pic":null,"value":"'UPDT'","line":52},
+{"level":88,"name":"FUNC-TERM","pic":null,"value":"'TERM'","line":53}]},
+{"level":5,"name":"LS-JOB-NAME","pic":"X(8)","value":null,"line":54,"redefines":null,"occurs":null,"section":"LINKAGE","children":[]},
+{"level":5,"name":"LS-PROCESS-DATE","pic":"X(8)","value":null,"line":55,"redefines":null,"occurs":null,"section":"LINKAGE","children":[]},
+{"level":5,"name":"LS-SEQUENCE-NO","pic":"9(4)","value":null,"line":56,"redefines":null,"occurs":null,"section":"LINKAGE","children":[]},
+{"level":5,"name":"LS-RETURN-CODE","pic":"S9(4) COMP","value":null,"line":57,"redefines":null,"occurs":null,"section":"LINKAGE","children":[]}]}]},
+"sql_declare_sections":[]},
+"procedure_division":{"start_line":59,"end_line":127,"using_parameters":["LS-CONTROL-REQUEST"],"sections":[],
+"paragraphs":[
+{"paragraph_id":"SYS-PORTFOLIO-001-FIL-0042-PAR-0001","name":"0000-MAIN","section":null,"section_id":null,"start_line":60,"end_line":82,"has_perform":true,"has_goto":false,"has_call":false,"has_stop_run":false,"review_status":"NONE","statement_ids":["SYS-PORTFOLIO-001-FIL-0042-STMT-000001","SYS-PORTFOLIO-001-FIL-0042-STMT-000002","SYS-PORTFOLIO-001-FIL-0042-STMT-000003"]},
+{"paragraph_id":"SYS-PORTFOLIO-001-FIL-0042-PAR-0002","name":"1000-PROCESS-INITIALIZE","section":null,"section_id":null,"start_line":83,"end_line":89,"has_perform":true,"has_goto":false,"has_call":false,"has_stop_run":false,"review_status":"NONE","statement_ids":["SYS-PORTFOLIO-001-FIL-0042-STMT-000004","SYS-PORTFOLIO-001-FIL-0042-STMT-000005","SYS-PORTFOLIO-001-FIL-0042-STMT-000006","SYS-PORTFOLIO-001-FIL-0042-STMT-000007"]},
+{"paragraph_id":"SYS-PORTFOLIO-001-FIL-0042-PAR-0003","name":"2000-CHECK-PREREQUISITES","section":null,"section_id":null,"start_line":90,"end_line":99,"has_perform":true,"has_goto":false,"has_call":false,"has_stop_run":false,"review_status":"NONE","statement_ids":["SYS-PORTFOLIO-001-FIL-0042-STMT-000008","SYS-PORTFOLIO-001-FIL-0042-STMT-000009","SYS-PORTFOLIO-001-FIL-0042-STMT-000010"]},
+{"paragraph_id":"SYS-PORTFOLIO-001-FIL-0042-PAR-0004","name":"3000-UPDATE-STATUS","section":null,"section_id":null,"start_line":100,"end_line":105,"has_perform":true,"has_goto":false,"has_call":false,"has_stop_run":false,"review_status":"NONE","statement_ids":["SYS-PORTFOLIO-001-FIL-0042-STMT-000011","SYS-PORTFOLIO-001-FIL-0042-STMT-000012","SYS-PORTFOLIO-001-FIL-0042-STMT-000013"]},
+{"paragraph_id":"SYS-PORTFOLIO-001-FIL-0042-PAR-0005","name":"4000-PROCESS-TERMINATE","section":null,"section_id":null,"start_line":106,"end_line":110,"has_perform":true,"has_goto":false,"has_call":false,"has_stop_run":false,"review_status":"NONE","statement_ids":["SYS-PORTFOLIO-001-FIL-0042-STMT-000014","SYS-PORTFOLIO-001-FIL-0042-STMT-000015"]},
+{"paragraph_id":"SYS-PORTFOLIO-001-FIL-0042-PAR-0006","name":"9000-ERROR-ROUTINE","section":null,"section_id":null,"start_line":111,"end_line":127,"has_perform":false,"has_goto":false,"has_call":true,"has_stop_run":false,"review_status":"NONE","statement_ids":["SYS-PORTFOLIO-001-FIL-0042-STMT-000016","SYS-PORTFOLIO-001-FIL-0042-STMT-000017","SYS-PORTFOLIO-001-FIL-0042-STMT-000018"]}],
+"statements":[
+{"statement_id":"SYS-PORTFOLIO-001-FIL-0042-STMT-000001","local_id":"L1","paragraph_id":"SYS-PORTFOLIO-001-FIL-0042-PAR-0001","paragraph":"0000-MAIN","parent_statement_id":null,"branch":null,"depth":0,"sibling_index":1,"statement_type":"EVALUATE","source_text":"EVALUATE TRUE","start_line":61,"end_line":77,"extraction_status":"OK","match":"UNCHANGED","review_status":"NONE","review_candidates":[]},
+{"statement_id":"SYS-PORTFOLIO-001-FIL-0042-STMT-000021","local_id":"L2","paragraph_id":"SYS-PORTFOLIO-001-FIL-0042-PAR-0001","paragraph":"0000-MAIN","parent_statement_id":"SYS-PORTFOLIO-001-FIL-0042-STMT-000001","branch":"WHEN FUNC-INIT","depth":1,"sibling_index":1,"statement_type":"SET","source_text":"SET MODE-INITIALIZE TO TRUE","start_line":63,"end_line":63,"extraction_status":"OK","match":"UNCHANGED","review_status":"NONE","review_candidates":[]},
+{"statement_id":"SYS-PORTFOLIO-001-FIL-0042-STMT-000022","local_id":"L3","paragraph_id":"SYS-PORTFOLIO-001-FIL-0042-PAR-0001","paragraph":"0000-MAIN","parent_statement_id":"SYS-PORTFOLIO-001-FIL-0042-STMT-000001","branch":"WHEN FUNC-INIT","depth":1,"sibling_index":2,"statement_type":"PERFORM","source_text":"PERFORM 1000-PROCESS-INITIALIZE","start_line":64,"end_line":64,"extraction_status":"OK","match":"UNCHANGED","review_status":"NONE","review_candidates":[]},
+{"statement_id":"SYS-PORTFOLIO-001-FIL-0042-STMT-000019","local_id":"L4","paragraph_id":"SYS-PORTFOLIO-001-FIL-0042-PAR-0001","paragraph":"0000-MAIN","parent_statement_id":"SYS-PORTFOLIO-001-FIL-0042-STMT-000001","branch":"WHEN FUNC-CHEK","depth":1,"sibling_index":1,"statement_type":"SET","source_text":"SET MODE-CHECK-PREREQ TO TRUE","start_line":66,"end_line":66,"extraction_status":"OK","match":"UNCHANGED","review_status":"NONE","review_candidates":[]},
+{"statement_id":"SYS-PORTFOLIO-001-FIL-0042-STMT-000020","local_id":"L5","paragraph_id":"SYS-PORTFOLIO-001-FIL-0042-PAR-0001","paragraph":"0000-MAIN","parent_statement_id":"SYS-PORTFOLIO-001-FIL-0042-STMT-000001","branch":"WHEN FUNC-CHEK","depth":1,"sibling_index":2,"statement_type":"PERFORM","source_text":"PERFORM 2000-CHECK-PREREQUISITES","start_line":67,"end_line":67,"extraction_status":"OK","match":"UNCHANGED","review_status":"NONE","review_candidates":[]},
+{"statement_id":"SYS-PORTFOLIO-001-FIL-0042-STMT-000025","local_id":"L6","paragraph_id":"SYS-PORTFOLIO-001-FIL-0042-PAR-0001","paragraph":"0000-MAIN","parent_statement_id":"SYS-PORTFOLIO-001-FIL-0042-STMT-000001","branch":"WHEN FUNC-UPDT","depth":1,"sibling_index":1,"statement_type":"SET","source_text":"SET MODE-UPDATE-STATUS TO TRUE","start_line":69,"end_line":69,"extraction_status":"OK","match":"UNCHANGED","review_status":"NONE","review_candidates":[]},
+{"statement_id":"SYS-PORTFOLIO-001-FIL-0042-STMT-000026","local_id":"L7","paragraph_id":"SYS-PORTFOLIO-001-FIL-0042-PAR-0001","paragraph":"0000-MAIN","parent_statement_id":"SYS-PORTFOLIO-001-FIL-0042-STMT-000001","branch":"WHEN FUNC-UPDT","depth":1,"sibling_index":2,"statement_type":"PERFORM","source_text":"PERFORM 3000-UPDATE-STATUS","start_line":70,"end_line":70,"extraction_status":"OK","match":"UNCHANGED","review_status":"NONE","review_candidates":[]},
+{"statement_id":"SYS-PORTFOLIO-001-FIL-0042-STMT-000023","local_id":"L8","paragraph_id":"SYS-PORTFOLIO-001-FIL-0042-PAR-0001","paragraph":"0000-MAIN","parent_statement_id":"SYS-PORTFOLIO-001-FIL-0042-STMT-000001","branch":"WHEN FUNC-TERM","depth":1,"sibling_index":1,"statement_type":"SET","source_text":"SET MODE-FINALIZE TO TRUE","start_line":72,"end_line":72,"extraction_status":"OK","match":"UNCHANGED","review_status":"NONE","review_candidates":[]},
+{"statement_id":"SYS-PORTFOLIO-001-FIL-0042-STMT-000024","local_id":"L9","paragraph_id":"SYS-PORTFOLIO-001-FIL-0042-PAR-0001","paragraph":"0000-MAIN","parent_statement_id":"SYS-PORTFOLIO-001-FIL-0042-STMT-000001","branch":"WHEN FUNC-TERM","depth":1,"sibling_index":2,"statement_type":"PERFORM","source_text":"PERFORM 4000-PROCESS-TERMINATE","start_line":73,"end_line":73,"extraction_status":"OK","match":"UNCHANGED","review_status":"NONE","review_candidates":[]},
+{"statement_id":"SYS-PORTFOLIO-001-FIL-0042-STMT-000027","local_id":"L10","paragraph_id":"SYS-PORTFOLIO-001-FIL-0042-PAR-0001","paragraph":"0000-MAIN","parent_statement_id":"SYS-PORTFOLIO-001-FIL-0042-STMT-000001","branch":"WHEN OTHER","depth":1,"sibling_index":1,"statement_type":"MOVE","source_text":"MOVE 'Invalid function code' TO ERR-TEXT","start_line":75,"end_line":75,"extraction_status":"OK","match":"UNCHANGED","review_status":"NONE","review_candidates":[]},
+{"statement_id":"SYS-PORTFOLIO-001-FIL-0042-STMT-000028","local_id":"L11","paragraph_id":"SYS-PORTFOLIO-001-FIL-0042-PAR-0001","paragraph":"0000-MAIN","parent_statement_id":"SYS-PORTFOLIO-001-FIL-0042-STMT-000001","branch":"WHEN OTHER","depth":1,"sibling_index":2,"statement_type":"PERFORM","source_text":"PERFORM 9000-ERROR-ROUTINE","start_line":76,"end_line":76,"extraction_status":"OK","match":"UNCHANGED","review_status":"NONE","review_candidates":[]},
+{"statement_id":"SYS-PORTFOLIO-001-FIL-0042-STMT-000002","local_id":"L12","paragraph_id":"SYS-PORTFOLIO-001-FIL-0042-PAR-0001","paragraph":"0000-MAIN","parent_statement_id":null,"branch":null,"depth":0,"sibling_index":2,"statement_type":"MOVE","source_text":"MOVE LS-RETURN-CODE TO RETURN-CODE","start_line":79,"end_line":79,"extraction_status":"OK","match":"UNCHANGED","review_status":"NONE","review_candidates":[]},
+{"statement_id":"SYS-PORTFOLIO-001-FIL-0042-STMT-000003","local_id":"L13","paragraph_id":"SYS-PORTFOLIO-001-FIL-0042-PAR-0001","paragraph":"0000-MAIN","parent_statement_id":null,"branch":null,"depth":0,"sibling_index":3,"statement_type":"GOBACK","source_text":"GOBACK","start_line":80,"end_line":80,"extraction_status":"OK","match":"UNCHANGED","review_status":"NONE","review_candidates":[]},
+{"statement_id":"SYS-PORTFOLIO-001-FIL-0042-STMT-000004","local_id":"L14","paragraph_id":"SYS-PORTFOLIO-001-FIL-0042-PAR-0002","paragraph":"1000-PROCESS-INITIALIZE","parent_statement_id":null,"branch":null,"depth":0,"sibling_index":1,"statement_type":"PERFORM","source_text":"PERFORM 1100-OPEN-FILES","start_line":84,"end_line":84,"extraction_status":"OK","match":"UNCHANGED","review_status":"NONE","review_candidates":[]},
+{"statement_id":"SYS-PORTFOLIO-001-FIL-0042-STMT-000005","local_id":"L15","paragraph_id":"SYS-PORTFOLIO-001-FIL-0042-PAR-0002","paragraph":"1000-PROCESS-INITIALIZE","parent_statement_id":null,"branch":null,"depth":0,"sibling_index":2,"statement_type":"PERFORM","source_text":"PERFORM 1200-READ-CONTROL-RECORD","start_line":85,"end_line":85,"extraction_status":"OK","match":"UNCHANGED","review_status":"NONE","review_candidates":[]},
+{"statement_id":"SYS-PORTFOLIO-001-FIL-0042-STMT-000006","local_id":"L16","paragraph_id":"SYS-PORTFOLIO-001-FIL-0042-PAR-0002","paragraph":"1000-PROCESS-INITIALIZE","parent_statement_id":null,"branch":null,"depth":0,"sibling_index":3,"statement_type":"PERFORM","source_text":"PERFORM 1300-VALIDATE-PROCESS","start_line":86,"end_line":86,"extraction_status":"OK","match":"UNCHANGED","review_status":"NONE","review_candidates":[]},
+{"statement_id":"SYS-PORTFOLIO-001-FIL-0042-STMT-000007","local_id":"L17","paragraph_id":"SYS-PORTFOLIO-001-FIL-0042-PAR-0002","paragraph":"1000-PROCESS-INITIALIZE","parent_statement_id":null,"branch":null,"depth":0,"sibling_index":4,"statement_type":"PERFORM","source_text":"PERFORM 1400-UPDATE-START-STATUS","start_line":87,"end_line":87,"extraction_status":"OK","match":"UNCHANGED","review_status":"NONE","review_candidates":[]},
+{"statement_id":"SYS-PORTFOLIO-001-FIL-0042-STMT-000008","local_id":"L18","paragraph_id":"SYS-PORTFOLIO-001-FIL-0042-PAR-0003","paragraph":"2000-CHECK-PREREQUISITES","parent_statement_id":null,"branch":null,"depth":0,"sibling_index":1,"statement_type":"PERFORM","source_text":"PERFORM 2100-READ-CONTROL-RECORD","start_line":91,"end_line":91,"extraction_status":"OK","match":"UNCHANGED","review_status":"NONE","review_candidates":[]},
+{"statement_id":"SYS-PORTFOLIO-001-FIL-0042-STMT-000009","local_id":"L19","paragraph_id":"SYS-PORTFOLIO-001-FIL-0042-PAR-0003","paragraph":"2000-CHECK-PREREQUISITES","parent_statement_id":null,"branch":null,"depth":0,"sibling_index":2,"statement_type":"PERFORM","source_text":"PERFORM 2200-CHECK-DEPENDENCIES","start_line":92,"end_line":92,"extraction_status":"OK","match":"UNCHANGED","review_status":"NONE","review_candidates":[]},
+{"statement_id":"SYS-PORTFOLIO-001-FIL-0042-STMT-000010","local_id":"L20","paragraph_id":"SYS-PORTFOLIO-001-FIL-0042-PAR-0003","paragraph":"2000-CHECK-PREREQUISITES","parent_statement_id":null,"branch":null,"depth":0,"sibling_index":3,"statement_type":"IF","source_text":"IF PREREQS-SATISFIED","start_line":93,"end_line":97,"extraction_status":"OK","match":"UNCHANGED","review_status":"NONE","review_candidates":[]},
+{"statement_id":"SYS-PORTFOLIO-001-FIL-0042-STMT-000030","local_id":"L21","paragraph_id":"SYS-PORTFOLIO-001-FIL-0042-PAR-0003","paragraph":"2000-CHECK-PREREQUISITES","parent_statement_id":"SYS-PORTFOLIO-001-FIL-0042-STMT-000010","branch":"THEN","depth":1,"sibling_index":1,"statement_type":"MOVE","source_text":"MOVE BCT-RC-SUCCESS TO LS-RETURN-CODE","start_line":94,"end_line":94,"extraction_status":"OK","match":"UNCHANGED","review_status":"NONE","review_candidates":[]},
+{"statement_id":"SYS-PORTFOLIO-001-FIL-0042-STMT-000029","local_id":"L22","paragraph_id":"SYS-PORTFOLIO-001-FIL-0042-PAR-0003","paragraph":"2000-CHECK-PREREQUISITES","parent_statement_id":"SYS-PORTFOLIO-001-FIL-0042-STMT-000010","branch":"ELSE","depth":1,"sibling_index":1,"statement_type":"MOVE","source_text":"MOVE BCT-RC-WARNING TO LS-RETURN-CODE","start_line":96,"end_line":96,"extraction_status":"OK","match":"UNCHANGED","review_status":"NONE","review_candidates":[]},
+{"statement_id":"SYS-PORTFOLIO-001-FIL-0042-STMT-000011","local_id":"L23","paragraph_id":"SYS-PORTFOLIO-001-FIL-0042-PAR-0004","paragraph":"3000-UPDATE-STATUS","parent_statement_id":null,"branch":null,"depth":0,"sibling_index":1,"statement_type":"PERFORM","source_text":"PERFORM 3100-READ-CONTROL-RECORD","start_line":101,"end_line":101,"extraction_status":"OK","match":"UNCHANGED","review_status":"NONE","review_candidates":[]},
+{"statement_id":"SYS-PORTFOLIO-001-FIL-0042-STMT-000012","local_id":"L24","paragraph_id":"SYS-PORTFOLIO-001-FIL-0042-PAR-0004","paragraph":"3000-UPDATE-STATUS","parent_statement_id":null,"branch":null,"depth":0,"sibling_index":2,"statement_type":"PERFORM","source_text":"PERFORM 3200-UPDATE-PROCESS-STATUS","start_line":102,"end_line":102,"extraction_status":"OK","match":"UNCHANGED","review_status":"NONE","review_candidates":[]},
+{"statement_id":"SYS-PORTFOLIO-001-FIL-0042-STMT-000013","local_id":"L25","paragraph_id":"SYS-PORTFOLIO-001-FIL-0042-PAR-0004","paragraph":"3000-UPDATE-STATUS","parent_statement_id":null,"branch":null,"depth":0,"sibling_index":3,"statement_type":"PERFORM","source_text":"PERFORM 3300-WRITE-CONTROL-RECORD","start_line":103,"end_line":103,"extraction_status":"OK","match":"UNCHANGED","review_status":"NONE","review_candidates":[]},
+{"statement_id":"SYS-PORTFOLIO-001-FIL-0042-STMT-000014","local_id":"L26","paragraph_id":"SYS-PORTFOLIO-001-FIL-0042-PAR-0005","paragraph":"4000-PROCESS-TERMINATE","parent_statement_id":null,"branch":null,"depth":0,"sibling_index":1,"statement_type":"PERFORM","source_text":"PERFORM 4100-UPDATE-COMPLETION","start_line":107,"end_line":107,"extraction_status":"OK","match":"UNCHANGED","review_status":"NONE","review_candidates":[]},
+{"statement_id":"SYS-PORTFOLIO-001-FIL-0042-STMT-000015","local_id":"L27","paragraph_id":"SYS-PORTFOLIO-001-FIL-0042-PAR-0005","paragraph":"4000-PROCESS-TERMINATE","parent_statement_id":null,"branch":null,"depth":0,"sibling_index":2,"statement_type":"PERFORM","source_text":"PERFORM 4200-CLOSE-FILES","start_line":108,"end_line":108,"extraction_status":"OK","match":"UNCHANGED","review_status":"NONE","review_candidates":[]},
+{"statement_id":"SYS-PORTFOLIO-001-FIL-0042-STMT-000016","local_id":"L28","paragraph_id":"SYS-PORTFOLIO-001-FIL-0042-PAR-0006","paragraph":"9000-ERROR-ROUTINE","parent_statement_id":null,"branch":null,"depth":0,"sibling_index":1,"statement_type":"MOVE","source_text":"MOVE 'BCHCTL00' TO ERR-PROGRAM","start_line":112,"end_line":112,"extraction_status":"OK","match":"UNCHANGED","review_status":"NONE","review_candidates":[]},
+{"statement_id":"SYS-PORTFOLIO-001-FIL-0042-STMT-000017","local_id":"L29","paragraph_id":"SYS-PORTFOLIO-001-FIL-0042-PAR-0006","paragraph":"9000-ERROR-ROUTINE","parent_statement_id":null,"branch":null,"depth":0,"sibling_index":2,"statement_type":"MOVE","source_text":"MOVE BCT-RC-ERROR TO LS-RETURN-CODE","start_line":113,"end_line":113,"extraction_status":"OK","match":"UNCHANGED","review_status":"NONE","review_candidates":[]},
+{"statement_id":"SYS-PORTFOLIO-001-FIL-0042-STMT-000018","local_id":"L30","paragraph_id":"SYS-PORTFOLIO-001-FIL-0042-PAR-0006","paragraph":"9000-ERROR-ROUTINE","parent_statement_id":null,"branch":null,"depth":0,"sibling_index":3,"statement_type":"CALL","source_text":"CALL 'ERRPROC' USING ERR-MESSAGE","start_line":114,"end_line":114,"extraction_status":"OK","match":"UNCHANGED","review_status":"NONE","review_candidates":[]}],
+"terminal_statements":[{"type":"GOBACK","line":80,"paragraph":"0000-MAIN","paragraph_id":"SYS-PORTFOLIO-001-FIL-0042-PAR-0001","statement_id":"SYS-PORTFOLIO-001-FIL-0042-STMT-000003"}]},
+"copy_stubs":[
+{"copybook":"BCHCTL","include_kind":"COPY","division":"DATA","section":"FILE","line":27},
+{"copybook":"BCHCON","include_kind":"COPY","division":"DATA","section":"WORKING-STORAGE","line":30},
+{"copybook":"ERRHAND","include_kind":"COPY","division":"DATA","section":"WORKING-STORAGE","line":31}],
+"control_flow_graph":{"entry_points":["0000-MAIN"],"entry_point_ids":["SYS-PORTFOLIO-001-FIL-0042-PAR-0001"],"terminal_nodes":["0000-MAIN"],
+"nodes":[
+{"id":"0000-MAIN","paragraph_id":"SYS-PORTFOLIO-001-FIL-0042-PAR-0001","type":"paragraph","section":null,"section_id":null,"start_line":60,"end_line":82,"is_entry_point":true,"is_terminal":true,"is_dead_code":false,"unstructured_constructs":[]},
+{"id":"1000-PROCESS-INITIALIZE","paragraph_id":"SYS-PORTFOLIO-001-FIL-0042-PAR-0002","type":"paragraph","section":null,"section_id":null,"start_line":83,"end_line":89,"is_entry_point":false,"is_terminal":false,"is_dead_code":false,"unstructured_constructs":[]},
+{"id":"2000-CHECK-PREREQUISITES","paragraph_id":"SYS-PORTFOLIO-001-FIL-0042-PAR-0003","type":"paragraph","section":null,"section_id":null,"start_line":90,"end_line":99,"is_entry_point":false,"is_terminal":false,"is_dead_code":false,"unstructured_constructs":[]},
+{"id":"3000-UPDATE-STATUS","paragraph_id":"SYS-PORTFOLIO-001-FIL-0042-PAR-0004","type":"paragraph","section":null,"section_id":null,"start_line":100,"end_line":105,"is_entry_point":false,"is_terminal":false,"is_dead_code":false,"unstructured_constructs":[]},
+{"id":"4000-PROCESS-TERMINATE","paragraph_id":"SYS-PORTFOLIO-001-FIL-0042-PAR-0005","type":"paragraph","section":null,"section_id":null,"start_line":106,"end_line":110,"is_entry_point":false,"is_terminal":false,"is_dead_code":false,"unstructured_constructs":[]},
+{"id":"9000-ERROR-ROUTINE","paragraph_id":"SYS-PORTFOLIO-001-FIL-0042-PAR-0006","type":"paragraph","section":null,"section_id":null,"start_line":111,"end_line":127,"is_entry_point":false,"is_terminal":false,"is_dead_code":false,"unstructured_constructs":[]}],
+"edges":[
+{"from":"0000-MAIN","to":"1000-PROCESS-INITIALIZE","type":"PERFORM_SIMPLE","resolved":true,"unstructured":false,"source_line":64,"statement_id":"SYS-PORTFOLIO-001-FIL-0042-STMT-000022","from_paragraph_id":"SYS-PORTFOLIO-001-FIL-0042-PAR-0001","to_paragraph_id":"SYS-PORTFOLIO-001-FIL-0042-PAR-0002","to_section_id":null},
+{"from":"0000-MAIN","to":"2000-CHECK-PREREQUISITES","type":"PERFORM_SIMPLE","resolved":true,"unstructured":false,"source_line":67,"statement_id":"SYS-PORTFOLIO-001-FIL-0042-STMT-000020","from_paragraph_id":"SYS-PORTFOLIO-001-FIL-0042-PAR-0001","to_paragraph_id":"SYS-PORTFOLIO-001-FIL-0042-PAR-0003","to_section_id":null},
+{"from":"0000-MAIN","to":"3000-UPDATE-STATUS","type":"PERFORM_SIMPLE","resolved":true,"unstructured":false,"source_line":70,"statement_id":"SYS-PORTFOLIO-001-FIL-0042-STMT-000026","from_paragraph_id":"SYS-PORTFOLIO-001-FIL-0042-PAR-0001","to_paragraph_id":"SYS-PORTFOLIO-001-FIL-0042-PAR-0004","to_section_id":null},
+{"from":"0000-MAIN","to":"4000-PROCESS-TERMINATE","type":"PERFORM_SIMPLE","resolved":true,"unstructured":false,"source_line":73,"statement_id":"SYS-PORTFOLIO-001-FIL-0042-STMT-000024","from_paragraph_id":"SYS-PORTFOLIO-001-FIL-0042-PAR-0001","to_paragraph_id":"SYS-PORTFOLIO-001-FIL-0042-PAR-0005","to_section_id":null},
+{"from":"0000-MAIN","to":"9000-ERROR-ROUTINE","type":"PERFORM_SIMPLE","resolved":true,"unstructured":false,"source_line":76,"statement_id":"SYS-PORTFOLIO-001-FIL-0042-STMT-000028","from_paragraph_id":"SYS-PORTFOLIO-001-FIL-0042-PAR-0001","to_paragraph_id":"SYS-PORTFOLIO-001-FIL-0042-PAR-0006","to_section_id":null},
+{"from":"1000-PROCESS-INITIALIZE","to":"1100-OPEN-FILES","type":"PERFORM_SIMPLE","resolved":false,"unstructured":false,"source_line":84,"statement_id":"SYS-PORTFOLIO-001-FIL-0042-STMT-000004","from_paragraph_id":"SYS-PORTFOLIO-001-FIL-0042-PAR-0002","to_paragraph_id":null,"to_section_id":null},
+{"from":"1000-PROCESS-INITIALIZE","to":"1200-READ-CONTROL-RECORD","type":"PERFORM_SIMPLE","resolved":false,"unstructured":false,"source_line":85,"statement_id":"SYS-PORTFOLIO-001-FIL-0042-STMT-000005","from_paragraph_id":"SYS-PORTFOLIO-001-FIL-0042-PAR-0002","to_paragraph_id":null,"to_section_id":null},
+{"from":"1000-PROCESS-INITIALIZE","to":"1300-VALIDATE-PROCESS","type":"PERFORM_SIMPLE","resolved":false,"unstructured":false,"source_line":86,"statement_id":"SYS-PORTFOLIO-001-FIL-0042-STMT-000006","from_paragraph_id":"SYS-PORTFOLIO-001-FIL-0042-PAR-0002","to_paragraph_id":null,"to_section_id":null},
+{"from":"1000-PROCESS-INITIALIZE","to":"1400-UPDATE-START-STATUS","type":"PERFORM_SIMPLE","resolved":false,"unstructured":false,"source_line":87,"statement_id":"SYS-PORTFOLIO-001-FIL-0042-STMT-000007","from_paragraph_id":"SYS-PORTFOLIO-001-FIL-0042-PAR-0002","to_paragraph_id":null,"to_section_id":null},
+{"from":"2000-CHECK-PREREQUISITES","to":"2100-READ-CONTROL-RECORD","type":"PERFORM_SIMPLE","resolved":false,"unstructured":false,"source_line":91,"statement_id":"SYS-PORTFOLIO-001-FIL-0042-STMT-000008","from_paragraph_id":"SYS-PORTFOLIO-001-FIL-0042-PAR-0003","to_paragraph_id":null,"to_section_id":null},
+{"from":"2000-CHECK-PREREQUISITES","to":"2200-CHECK-DEPENDENCIES","type":"PERFORM_SIMPLE","resolved":false,"unstructured":false,"source_line":92,"statement_id":"SYS-PORTFOLIO-001-FIL-0042-STMT-000009","from_paragraph_id":"SYS-PORTFOLIO-001-FIL-0042-PAR-0003","to_paragraph_id":null,"to_section_id":null},
+{"from":"3000-UPDATE-STATUS","to":"3100-READ-CONTROL-RECORD","type":"PERFORM_SIMPLE","resolved":false,"unstructured":false,"source_line":101,"statement_id":"SYS-PORTFOLIO-001-FIL-0042-STMT-000011","from_paragraph_id":"SYS-PORTFOLIO-001-FIL-0042-PAR-0004","to_paragraph_id":null,"to_section_id":null},
+{"from":"3000-UPDATE-STATUS","to":"3200-UPDATE-PROCESS-STATUS","type":"PERFORM_SIMPLE","resolved":false,"unstructured":false,"source_line":102,"statement_id":"SYS-PORTFOLIO-001-FIL-0042-STMT-000012","from_paragraph_id":"SYS-PORTFOLIO-001-FIL-0042-PAR-0004","to_paragraph_id":null,"to_section_id":null},
+{"from":"3000-UPDATE-STATUS","to":"3300-WRITE-CONTROL-RECORD","type":"PERFORM_SIMPLE","resolved":false,"unstructured":false,"source_line":103,"statement_id":"SYS-PORTFOLIO-001-FIL-0042-STMT-000013","from_paragraph_id":"SYS-PORTFOLIO-001-FIL-0042-PAR-0004","to_paragraph_id":null,"to_section_id":null},
+{"from":"4000-PROCESS-TERMINATE","to":"4100-UPDATE-COMPLETION","type":"PERFORM_SIMPLE","resolved":false,"unstructured":false,"source_line":107,"statement_id":"SYS-PORTFOLIO-001-FIL-0042-STMT-000014","from_paragraph_id":"SYS-PORTFOLIO-001-FIL-0042-PAR-0005","to_paragraph_id":null,"to_section_id":null},
+{"from":"4000-PROCESS-TERMINATE","to":"4200-CLOSE-FILES","type":"PERFORM_SIMPLE","resolved":false,"unstructured":false,"source_line":108,"statement_id":"SYS-PORTFOLIO-001-FIL-0042-STMT-000015","from_paragraph_id":"SYS-PORTFOLIO-001-FIL-0042-PAR-0005","to_paragraph_id":null,"to_section_id":null}],
+"unstructured_constructs":[],"dead_code_candidates":[],
+"cfg_issues":[
+{"severity":"warning","type":"unresolved_target","message":"11 PERFORM targets not defined in the program (1100-OPEN-FILES, 1200-READ-CONTROL-RECORD, 1300-VALIDATE-PROCESS, 1400-UPDATE-START-STATUS, 2100-READ-CONTROL-RECORD, 2200-CHECK-DEPENDENCIES, 3100-READ-CONTROL-RECORD, 3200-UPDATE-PROCESS-STATUS, 3300-WRITE-CONTROL-RECORD, 4100-UPDATE-COMPLETION, 4200-CLOSE-FILES); trailing comment block (lines 116-127) lists most of them as 'to be implemented'; no relationships registered"}]},
+"parse_issues":[
+{"severity":"warning","type":"misplaced_comment_indicator","message":"Comment indicator '*' in column 8 (not column 7) treated as a comment, not program text","lines":[1]},
+{"severity":"info","type":"unresolved_perform_targets","message":"11 PERFORM statements name paragraphs that do not exist in the file; edges recorded with resolved=false"},
+{"severity":"info","type":"external_call","line":114,"message":"CALL 'ERRPROC' is an inter-program call; no intra-program control-flow edge"}]
 }

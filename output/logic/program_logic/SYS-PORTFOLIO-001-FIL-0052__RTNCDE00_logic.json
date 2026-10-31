@@ -5,490 +5,328 @@
 "file_id": "SYS-PORTFOLIO-001-FIL-0052",
 "path_id": "SYS-PORTFOLIO-001-PATH-0052",
 "relative_path": "src/programs/batch/RTNCDE00.cbl",
-"parse_run_id": "PRUN-20261025T163852Z-6235",
+"source_file": "src/programs/batch/RTNCDE00.cbl",
+"parse_run_id": "PRUN-20261027T155247Z-2626",
+"data_run_id": "DRUN-20261027T162831Z-1330",
+"generated_at": "2026-10-27T21:27:22Z",
+"agent_version": "4_logic@1.0",
+"source_artifacts": {"parser_artifact": "output/parser/parser_artifact.json", "data_artifact": "output/data/data_artifact.json", "raw_structure": "output/parser/raw_structure/SYS-PORTFOLIO-001-FIL-0052__RTNCDE00.json", "data_layouts": ["output/data/data_layouts/SYS-PORTFOLIO-001-FIL-0052__RTNCDE00_WS.json", "output/data/data_layouts/SYS-PORTFOLIO-001-FIL-0013__RTNCODE.json", "output/data/data_layouts/SYS-PORTFOLIO-001-FIL-0017__SQLCA.json"]},
 "upstream": {
+  "parse_status": "success",
   "verification": {
     "verdict": "VALID",
-    "verdict_reasons": ["V2, V3 and V4 consistent; Agent 2 parse_status 'success'; copybook layouts SQLCA and RTNCODE present and consistent; no unresolved copy stubs in the program"],
-    "v1": {"raw_structure": "present", "parse_status": "success", "program_layout": "present", "program_layout_data_run_id": "DRUN-20261025T170230Z-21060",
-           "copybook_layouts": [
-             {"copybook": "SQLCA", "copybook_file_id": "SYS-PORTFOLIO-001-FIL-0017", "layout": "present", "expanded_at_lines": [26]},
-             {"copybook": "RTNCODE", "copybook_file_id": "SYS-PORTFOLIO-001-FIL-0013", "layout": "present", "expanded_at_lines": [30]}],
-           "unresolved_copy_stubs": 0},
-    "v2_file_identities": {
-      "program_entries": {"require_completed": ["parser", "data"], "entries": ["raw_structure|SYS-PORTFOLIO-001-FIL-0052", "data_layout|SYS-PORTFOLIO-001-FIL-0052"], "result": "batched with the RPTAUD00, DB2CONN, DB2HNDL and ERRHANDL program entries: checked 10, ok 10, problems [], duplicates [], consistent true"},
-      "copybook_entries": {"require_completed": ["data"], "entries": ["data_layout|SYS-PORTFOLIO-001-FIL-0017", "data_layout|SYS-PORTFOLIO-001-FIL-0013"], "result": "batched with copybooks FIL-0005, FIL-0007 and FIL-0015: checked 5, ok 5, problems [], duplicates [], consistent true"},
-      "consistent": true
-    },
-    "v3_structure_identities": {"sections_checked": 2, "paragraphs_checked": 11, "statements_checked": 40, "edges_checked": 10, "registered_edges": 10, "section_problems": [], "paragraph_problems": [], "statement_problems": [], "edge_problems": [], "invalid_registered_edges": [], "registered_not_in_json": {"missing_count": 0}, "duplicate_ids_in_json": [], "consistent": true, "note": "two edges per PERFORM ... THRU (start and THRU end paragraph); section names sent as null (raw_structure does not carry them)"},
-    "v4_data_identities": [
-      {"file_id": "SYS-PORTFOLIO-001-FIL-0052", "layout": "program", "records_checked": 3, "fields_checked": 8, "expansions_checked": 2, "record_problems": [], "field_problems": [], "expansion_problems": [], "copybook_records_in_program": 0, "registered_not_in_json": {"missing_count": 0}, "duplicate_ids_in_json": [], "consistent": true},
-      {"file_id": "SYS-PORTFOLIO-001-FIL-0017", "layout": "copybook SQLCA", "records_checked": 1, "fields_checked": 7, "expansions_checked": 0, "record_problems": [], "field_problems": [], "expansion_problems": [], "copybook_records_in_program": 0, "registered_not_in_json": {"missing_count": 0}, "duplicate_ids_in_json": [], "consistent": true},
-      {"file_id": "SYS-PORTFOLIO-001-FIL-0013", "layout": "copybook RTNCODE", "records_checked": 1, "fields_checked": 28, "expansions_checked": 0, "record_problems": [], "field_problems": [], "expansion_problems": [], "copybook_records_in_program": 0, "registered_not_in_json": {"missing_count": 0}, "duplicate_ids_in_json": [], "consistent": true}
-    ]
+    "v2_file_identities": {"program_entries": {"checked": 8, "ok": 8, "problems": [], "consistent": true, "require_completed": ["parser", "data"], "note": "batched call covering RTNCDE00, DB2ONLN, SECMGR, PORTVALD raw_structure + data_layout entries"}, "copybook_entries": {"checked": 4, "ok": 4, "problems": [], "consistent": true, "require_completed": ["data"], "file_ids": ["SYS-PORTFOLIO-001-FIL-0013", "SYS-PORTFOLIO-001-FIL-0017", "SYS-PORTFOLIO-001-FIL-0019", "SYS-PORTFOLIO-001-FIL-0010"]}},
+    "v3_structure_identities": {"sections_checked": 2, "paragraphs_checked": 11, "statements_checked": 40, "edges_checked": 10, "registered_edges": 10, "problems": [], "registered_not_in_json_missing_count": 0, "duplicate_ids_in_json": [], "consistent": true},
+    "v4_data_identities": {
+      "program_layout": {"file_id": "SYS-PORTFOLIO-001-FIL-0052", "records_checked": 3, "fields_checked": 8, "expansions_checked": 2, "problems": [], "registered_not_in_json_missing_count": 0, "consistent": true},
+      "copybook_layouts": [
+        {"file_id": "SYS-PORTFOLIO-001-FIL-0013", "copybook": "RTNCODE", "records_checked": 1, "fields_checked": 28, "problems": [], "consistent": true},
+        {"file_id": "SYS-PORTFOLIO-001-FIL-0017", "copybook": "SQLCA", "records_checked": 1, "fields_checked": 7, "problems": [], "consistent": true}
+      ]
+    }
   }
 },
+"entry_points": [{"paragraph": "(UNNAMED)", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0052-PAR-0001", "entry_type": "subprogram_call", "using_parameters": ["RC-REQUEST-AREA"]}],
 "execution_traces": [
   {
     "entry_point": "(UNNAMED)",
     "entry_point_id": "SYS-PORTFOLIO-001-FIL-0052-PAR-0001",
-    "entry_type": "batch_subprogram",
+    "entry_type": "subprogram_call",
     "steps": [
-      {"step": 1, "paragraph": "(UNNAMED)", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0052-PAR-0001", "action": "EVALUATE", "target": null, "target_paragraph_id": null, "target_section_id": null, "condition": {"text": "EVALUATE TRUE", "fields": [], "field_ids": []}, "line": 33, "statement_id": "SYS-PORTFOLIO-001-FIL-0052-STMT-000001"},
-      {"step": 2, "paragraph": "(UNNAMED)", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0052-PAR-0001", "action": "PERFORM_THRU", "target": "P100-INIT-RETURN-CODES", "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0052-PAR-0002", "target_section_id": null,
-       "unstructured": true, "thru_range": ["P100-INIT-RETURN-CODES", "P100-EXIT"], "thru_range_ids": ["SYS-PORTFOLIO-001-FIL-0052-PAR-0002", "SYS-PORTFOLIO-001-FIL-0052-PAR-0003"],
-       "condition": {"text": "WHEN RC-INITIALIZE", "fields": ["RC-INITIALIZE"], "field_ids": [{"name": "RC-INITIALIZE", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0013-FLD-000002", "target_kind": "condition", "candidate_ids": []}]}, "line": 35, "statement_id": "SYS-PORTFOLIO-001-FIL-0052-STMT-000029"},
-      {"step": 3, "paragraph": "(UNNAMED)", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0052-PAR-0001", "action": "PERFORM_THRU", "target": "P200-SET-RETURN-CODE", "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0052-PAR-0004", "target_section_id": null,
-       "unstructured": true, "thru_range": ["P200-SET-RETURN-CODE", "P200-EXIT"], "thru_range_ids": ["SYS-PORTFOLIO-001-FIL-0052-PAR-0004", "SYS-PORTFOLIO-001-FIL-0052-PAR-0005"],
-       "condition": {"text": "WHEN RC-SET-CODE", "fields": ["RC-SET-CODE"], "field_ids": [{"name": "RC-SET-CODE", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0013-FLD-000003", "target_kind": "condition", "candidate_ids": []}]}, "line": 38, "statement_id": "SYS-PORTFOLIO-001-FIL-0052-STMT-000031"},
-      {"step": 4, "paragraph": "(UNNAMED)", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0052-PAR-0001", "action": "PERFORM_THRU", "target": "P300-GET-RETURN-CODE", "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0052-PAR-0006", "target_section_id": null,
-       "unstructured": true, "thru_range": ["P300-GET-RETURN-CODE", "P300-EXIT"], "thru_range_ids": ["SYS-PORTFOLIO-001-FIL-0052-PAR-0006", "SYS-PORTFOLIO-001-FIL-0052-PAR-0007"],
-       "condition": {"text": "WHEN RC-GET-CODE", "fields": ["RC-GET-CODE"], "field_ids": [{"name": "RC-GET-CODE", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0013-FLD-000004", "target_kind": "condition", "candidate_ids": []}]}, "line": 41, "statement_id": "SYS-PORTFOLIO-001-FIL-0052-STMT-000028"},
-      {"step": 5, "paragraph": "(UNNAMED)", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0052-PAR-0001", "action": "PERFORM_THRU", "target": "P400-LOG-RETURN-CODE", "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0052-PAR-0008", "target_section_id": null,
-       "unstructured": true, "thru_range": ["P400-LOG-RETURN-CODE", "P400-EXIT"], "thru_range_ids": ["SYS-PORTFOLIO-001-FIL-0052-PAR-0008", "SYS-PORTFOLIO-001-FIL-0052-PAR-0009"],
-       "condition": {"text": "WHEN RC-LOG-CODE", "fields": ["RC-LOG-CODE"], "field_ids": [{"name": "RC-LOG-CODE", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0013-FLD-000005", "target_kind": "condition", "candidate_ids": []}]}, "line": 44, "statement_id": "SYS-PORTFOLIO-001-FIL-0052-STMT-000030"},
-      {"step": 6, "paragraph": "(UNNAMED)", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0052-PAR-0001", "action": "PERFORM_THRU", "target": "P500-ANALYZE-CODES", "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0052-PAR-0010", "target_section_id": null,
-       "unstructured": true, "thru_range": ["P500-ANALYZE-CODES", "P500-EXIT"], "thru_range_ids": ["SYS-PORTFOLIO-001-FIL-0052-PAR-0010", "SYS-PORTFOLIO-001-FIL-0052-PAR-0011"],
-       "condition": {"text": "WHEN RC-ANALYZE", "fields": ["RC-ANALYZE"], "field_ids": [{"name": "RC-ANALYZE", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0013-FLD-000006", "target_kind": "condition", "candidate_ids": []}]}, "line": 47, "statement_id": "SYS-PORTFOLIO-001-FIL-0052-STMT-000027"},
+      {"step": 1, "paragraph": "(UNNAMED)", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0052-PAR-0001", "action": "EVALUATE", "target": null, "target_paragraph_id": null, "target_section_id": null, "condition": {"text": "EVALUATE TRUE (dispatch on RC-REQUEST-TYPE 88-levels; no WHEN OTHER)", "fields": ["RC-INITIALIZE", "RC-SET-CODE", "RC-GET-CODE", "RC-LOG-CODE", "RC-ANALYZE"], "field_ids": ["SYS-PORTFOLIO-001-FIL-0013-FLD-000002", "SYS-PORTFOLIO-001-FIL-0013-FLD-000003", "SYS-PORTFOLIO-001-FIL-0013-FLD-000004", "SYS-PORTFOLIO-001-FIL-0013-FLD-000005", "SYS-PORTFOLIO-001-FIL-0013-FLD-000006"]}, "line": 33, "statement_id": "SYS-PORTFOLIO-001-FIL-0052-STMT-000001"},
+      {"step": 2, "paragraph": "(UNNAMED)", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0052-PAR-0001", "action": "PERFORM_THRU", "target": "P100-INIT-RETURN-CODES", "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0052-PAR-0002", "target_section_id": null, "thru_end": "P100-EXIT", "thru_end_paragraph_id": "SYS-PORTFOLIO-001-FIL-0052-PAR-0003", "unstructured": true, "condition": {"text": "WHEN RC-INITIALIZE", "fields": ["RC-INITIALIZE"], "field_ids": ["SYS-PORTFOLIO-001-FIL-0013-FLD-000002"]}, "line": 35, "statement_id": "SYS-PORTFOLIO-001-FIL-0052-STMT-000029", "sub_steps": [{"paragraph": "P100-INIT-RETURN-CODES", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0052-PAR-0002"}, {"paragraph": "P100-EXIT", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0052-PAR-0003"}]},
+      {"step": 3, "paragraph": "(UNNAMED)", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0052-PAR-0001", "action": "PERFORM_THRU", "target": "P200-SET-RETURN-CODE", "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0052-PAR-0004", "target_section_id": null, "thru_end": "P200-EXIT", "thru_end_paragraph_id": "SYS-PORTFOLIO-001-FIL-0052-PAR-0005", "unstructured": true, "condition": {"text": "WHEN RC-SET-CODE", "fields": ["RC-SET-CODE"], "field_ids": ["SYS-PORTFOLIO-001-FIL-0013-FLD-000003"]}, "line": 38, "statement_id": "SYS-PORTFOLIO-001-FIL-0052-STMT-000031", "sub_steps": [{"paragraph": "P200-SET-RETURN-CODE", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0052-PAR-0004"}, {"paragraph": "P200-EXIT", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0052-PAR-0005"}]},
+      {"step": 4, "paragraph": "(UNNAMED)", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0052-PAR-0001", "action": "PERFORM_THRU", "target": "P300-GET-RETURN-CODE", "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0052-PAR-0006", "target_section_id": null, "thru_end": "P300-EXIT", "thru_end_paragraph_id": "SYS-PORTFOLIO-001-FIL-0052-PAR-0007", "unstructured": true, "condition": {"text": "WHEN RC-GET-CODE", "fields": ["RC-GET-CODE"], "field_ids": ["SYS-PORTFOLIO-001-FIL-0013-FLD-000004"]}, "line": 41, "statement_id": "SYS-PORTFOLIO-001-FIL-0052-STMT-000028", "sub_steps": [{"paragraph": "P300-GET-RETURN-CODE", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0052-PAR-0006"}, {"paragraph": "P300-EXIT", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0052-PAR-0007"}]},
+      {"step": 5, "paragraph": "(UNNAMED)", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0052-PAR-0001", "action": "PERFORM_THRU", "target": "P400-LOG-RETURN-CODE", "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0052-PAR-0008", "target_section_id": null, "thru_end": "P400-EXIT", "thru_end_paragraph_id": "SYS-PORTFOLIO-001-FIL-0052-PAR-0009", "unstructured": true, "condition": {"text": "WHEN RC-LOG-CODE", "fields": ["RC-LOG-CODE"], "field_ids": ["SYS-PORTFOLIO-001-FIL-0013-FLD-000005"]}, "line": 44, "statement_id": "SYS-PORTFOLIO-001-FIL-0052-STMT-000030", "sub_steps": [{"paragraph": "P400-LOG-RETURN-CODE", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0052-PAR-0008"}, {"paragraph": "P400-EXIT", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0052-PAR-0009"}]},
+      {"step": 6, "paragraph": "(UNNAMED)", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0052-PAR-0001", "action": "PERFORM_THRU", "target": "P500-ANALYZE-CODES", "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0052-PAR-0010", "target_section_id": null, "thru_end": "P500-EXIT", "thru_end_paragraph_id": "SYS-PORTFOLIO-001-FIL-0052-PAR-0011", "unstructured": true, "condition": {"text": "WHEN RC-ANALYZE", "fields": ["RC-ANALYZE"], "field_ids": ["SYS-PORTFOLIO-001-FIL-0013-FLD-000006"]}, "line": 47, "statement_id": "SYS-PORTFOLIO-001-FIL-0052-STMT-000027", "sub_steps": [{"paragraph": "P500-ANALYZE-CODES", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0052-PAR-0010"}, {"paragraph": "P500-EXIT", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0052-PAR-0011"}]},
       {"step": 7, "paragraph": "(UNNAMED)", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0052-PAR-0001", "action": "GOBACK", "target": null, "target_paragraph_id": null, "target_section_id": null, "condition": null, "line": 51, "statement_id": "SYS-PORTFOLIO-001-FIL-0052-STMT-000002"}
-    ]
+    ],
+    "path_summary": "Called with RC-REQUEST-AREA. EVALUATE TRUE selects at most one PERFORM ... THRU range by request type (I/S/G/L/A); any other request type falls through with no action. Control then returns to the caller with GOBACK."
   }
 ],
 "branch_map": [
-  {
-    "paragraph": "(UNNAMED)", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0052-PAR-0001",
-    "branches": [
-      {"type": "EVALUATE", "line": 33, "statement_id": "SYS-PORTFOLIO-001-FIL-0052-STMT-000001", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0052-PAR-0001", "subjects": ["TRUE"],
-       "condition_text": "EVALUATE TRUE WHEN RC-INITIALIZE / WHEN RC-SET-CODE / WHEN RC-GET-CODE / WHEN RC-LOG-CODE / WHEN RC-ANALYZE",
-       "condition_fields": ["RC-INITIALIZE", "RC-SET-CODE", "RC-GET-CODE", "RC-LOG-CODE", "RC-ANALYZE"],
-       "condition_field_ids": [
-         {"name": "RC-INITIALIZE", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0013-FLD-000002", "target_kind": "condition", "candidate_ids": []},
-         {"name": "RC-SET-CODE", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0013-FLD-000003", "target_kind": "condition", "candidate_ids": []},
-         {"name": "RC-GET-CODE", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0013-FLD-000004", "target_kind": "condition", "candidate_ids": []},
-         {"name": "RC-LOG-CODE", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0013-FLD-000005", "target_kind": "condition", "candidate_ids": []},
-         {"name": "RC-ANALYZE", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0013-FLD-000006", "target_kind": "condition", "candidate_ids": []}],
-       "when_clauses": [
-         {"conditions": ["RC-INITIALIZE"], "condition_fields": ["RC-INITIALIZE"], "body_line_range": [35, 36], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0052-STMT-000029"]},
-         {"conditions": ["RC-SET-CODE"], "condition_fields": ["RC-SET-CODE"], "body_line_range": [38, 39], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0052-STMT-000031"]},
-         {"conditions": ["RC-GET-CODE"], "condition_fields": ["RC-GET-CODE"], "body_line_range": [41, 42], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0052-STMT-000028"]},
-         {"conditions": ["RC-LOG-CODE"], "condition_fields": ["RC-LOG-CODE"], "body_line_range": [44, 45], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0052-STMT-000030"]},
-         {"conditions": ["RC-ANALYZE"], "condition_fields": ["RC-ANALYZE"], "body_line_range": [47, 48], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0052-STMT-000027"]}],
-       "end_evaluate_line": 49,
-       "outcomes": [
-         {"label": "WHEN RC-INITIALIZE (RC-REQUEST-TYPE = 'I')", "line_range": [35, 36], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0052-STMT-000029"]},
-         {"label": "WHEN RC-SET-CODE (RC-REQUEST-TYPE = 'S')", "line_range": [38, 39], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0052-STMT-000031"]},
-         {"label": "WHEN RC-GET-CODE (RC-REQUEST-TYPE = 'G')", "line_range": [41, 42], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0052-STMT-000028"]},
-         {"label": "WHEN RC-LOG-CODE (RC-REQUEST-TYPE = 'L')", "line_range": [44, 45], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0052-STMT-000030"]},
-         {"label": "WHEN RC-ANALYZE (RC-REQUEST-TYPE = 'A')", "line_range": [47, 48], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0052-STMT-000027"]},
-         {"label": "NO MATCH (no WHEN OTHER)", "line_range": null, "statement_ids": []}],
-       "nested_depth": 1}
-    ]
-  },
-  {
-    "paragraph": "P200-SET-RETURN-CODE", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0052-PAR-0004",
-    "branches": [
-      {"type": "IF", "line": 64, "statement_id": "SYS-PORTFOLIO-001-FIL-0052-STMT-000010", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0052-PAR-0004",
-       "condition_text": "RC-NEW-CODE > RC-HIGHEST-CODE", "condition_fields": ["RC-NEW-CODE", "RC-HIGHEST-CODE"],
-       "condition_field_ids": [
-         {"name": "RC-NEW-CODE", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0013-FLD-000011", "target_kind": "field", "candidate_ids": []},
-         {"name": "RC-HIGHEST-CODE", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0013-FLD-000010", "target_kind": "field", "candidate_ids": []}],
-       "has_else": false, "then_line_range": [65, 65], "else_line_range": null, "end_if_line": 66, "nested_depth": 1,
-       "outcomes": [
-         {"label": "THEN", "line_range": [65, 65], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0052-STMT-000032"]},
-         {"label": "NOT TAKEN (no ELSE)", "line_range": null, "statement_ids": []}]},
-      {"type": "EVALUATE", "line": 70, "statement_id": "SYS-PORTFOLIO-001-FIL-0052-STMT-000012", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0052-PAR-0004", "subjects": ["RC-NEW-CODE"],
-       "condition_text": "EVALUATE RC-NEW-CODE WHEN 0 / WHEN 1 THRU 4 / WHEN 5 THRU 8 / WHEN OTHER", "condition_fields": ["RC-NEW-CODE"],
-       "condition_field_ids": [{"name": "RC-NEW-CODE", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0013-FLD-000011", "target_kind": "field", "candidate_ids": []}],
-       "when_clauses": [
-         {"conditions": ["RC-NEW-CODE = 0"], "condition_fields": ["RC-NEW-CODE"], "body_line_range": [72, 72], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0052-STMT-000033"]},
-         {"conditions": ["RC-NEW-CODE 1 THRU 4"], "condition_fields": ["RC-NEW-CODE"], "body_line_range": [74, 74], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0052-STMT-000034"]},
-         {"conditions": ["RC-NEW-CODE 5 THRU 8"], "condition_fields": ["RC-NEW-CODE"], "body_line_range": [76, 76], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0052-STMT-000035"]},
-         {"conditions": ["OTHER"], "condition_fields": [], "body_line_range": [78, 78], "is_default": true, "statement_ids": ["SYS-PORTFOLIO-001-FIL-0052-STMT-000036"]}],
-       "end_evaluate_line": 79,
-       "outcomes": [
-         {"label": "WHEN 0", "line_range": [72, 72], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0052-STMT-000033"]},
-         {"label": "WHEN 1 THRU 4", "line_range": [74, 74], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0052-STMT-000034"]},
-         {"label": "WHEN 5 THRU 8", "line_range": [76, 76], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0052-STMT-000035"]},
-         {"label": "WHEN OTHER", "line_range": [78, 78], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0052-STMT-000036"]}],
-       "nested_depth": 1}
-    ]
-  },
-  {
-    "paragraph": "P400-LOG-RETURN-CODE", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0052-PAR-0008",
-    "branches": [
-      {"type": "IF", "line": 113, "statement_id": "SYS-PORTFOLIO-001-FIL-0052-STMT-000022", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0052-PAR-0008",
-       "condition_text": "SQLCODE = 0", "condition_fields": ["SQLCODE"],
-       "condition_field_ids": [{"name": "SQLCODE", "qualifiers": [], "resolution": "UNRESOLVED", "target_id": null, "target_kind": null, "candidate_ids": []}],
-       "has_else": true, "then_line_range": [114, 114], "else_line_range": [116, 116], "end_if_line": 117, "nested_depth": 1,
-       "outcomes": [
-         {"label": "THEN", "line_range": [114, 114], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0052-STMT-000038"]},
-         {"label": "ELSE", "line_range": [116, 116], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0052-STMT-000037"]}]}
-    ]
-  },
-  {
-    "paragraph": "P500-ANALYZE-CODES", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0052-PAR-0010",
-    "branches": [
-      {"type": "IF", "line": 135, "statement_id": "SYS-PORTFOLIO-001-FIL-0052-STMT-000025", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0052-PAR-0010",
-       "condition_text": "SQLCODE = 0", "condition_fields": ["SQLCODE"],
-       "condition_field_ids": [{"name": "SQLCODE", "qualifiers": [], "resolution": "UNRESOLVED", "target_id": null, "target_kind": null, "candidate_ids": []}],
-       "has_else": true, "then_line_range": [136, 136], "else_line_range": [138, 138], "end_if_line": 139, "nested_depth": 1,
-       "outcomes": [
-         {"label": "THEN", "line_range": [136, 136], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0052-STMT-000040"]},
-         {"label": "ELSE", "line_range": [138, 138], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0052-STMT-000039"]}]}
-    ]
-  }
+  {"paragraph": "(UNNAMED)", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0052-PAR-0001", "branches": [
+    {"type": "EVALUATE", "line": 33, "end_evaluate_line": 49, "statement_id": "SYS-PORTFOLIO-001-FIL-0052-STMT-000001", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0052-PAR-0001", "subjects": ["TRUE"], "nested_depth": 0,
+     "condition_fields": ["RC-INITIALIZE", "RC-SET-CODE", "RC-GET-CODE", "RC-LOG-CODE", "RC-ANALYZE"],
+     "condition_field_ids": [
+       {"name": "RC-INITIALIZE", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0013-FLD-000002", "target_kind": "condition", "candidate_ids": []},
+       {"name": "RC-SET-CODE", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0013-FLD-000003", "target_kind": "condition", "candidate_ids": []},
+       {"name": "RC-GET-CODE", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0013-FLD-000004", "target_kind": "condition", "candidate_ids": []},
+       {"name": "RC-LOG-CODE", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0013-FLD-000005", "target_kind": "condition", "candidate_ids": []},
+       {"name": "RC-ANALYZE", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0013-FLD-000006", "target_kind": "condition", "candidate_ids": []}],
+     "when_clauses": [
+       {"conditions": ["RC-INITIALIZE"], "condition_fields": ["RC-INITIALIZE"], "meaning": "RC-REQUEST-TYPE = 'I'", "body_line_range": [35, 36], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0052-STMT-000029"]},
+       {"conditions": ["RC-SET-CODE"], "condition_fields": ["RC-SET-CODE"], "meaning": "RC-REQUEST-TYPE = 'S'", "body_line_range": [38, 39], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0052-STMT-000031"]},
+       {"conditions": ["RC-GET-CODE"], "condition_fields": ["RC-GET-CODE"], "meaning": "RC-REQUEST-TYPE = 'G'", "body_line_range": [41, 42], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0052-STMT-000028"]},
+       {"conditions": ["RC-LOG-CODE"], "condition_fields": ["RC-LOG-CODE"], "meaning": "RC-REQUEST-TYPE = 'L'", "body_line_range": [44, 45], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0052-STMT-000030"]},
+       {"conditions": ["RC-ANALYZE"], "condition_fields": ["RC-ANALYZE"], "meaning": "RC-REQUEST-TYPE = 'A'", "body_line_range": [47, 48], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0052-STMT-000027"]}],
+     "has_default": false}
+  ]},
+  {"paragraph": "P200-SET-RETURN-CODE", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0052-PAR-0004", "branches": [
+    {"type": "IF", "line": 64, "end_if_line": 66, "statement_id": "SYS-PORTFOLIO-001-FIL-0052-STMT-000010", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0052-PAR-0004", "condition_text": "RC-NEW-CODE > RC-HIGHEST-CODE", "condition_fields": ["RC-NEW-CODE", "RC-HIGHEST-CODE"],
+     "condition_field_ids": [
+       {"name": "RC-NEW-CODE", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0013-FLD-000011", "target_kind": "field", "candidate_ids": []},
+       {"name": "RC-HIGHEST-CODE", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0013-FLD-000010", "target_kind": "field", "candidate_ids": []}],
+     "has_else": false, "nested_depth": 0, "then_line_range": [65, 65], "else_line_range": null,
+     "outcomes": [{"label": "THEN", "line_range": [65, 65], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0052-STMT-000032"]}]},
+    {"type": "EVALUATE", "line": 70, "end_evaluate_line": 79, "statement_id": "SYS-PORTFOLIO-001-FIL-0052-STMT-000012", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0052-PAR-0004", "subjects": ["RC-NEW-CODE"], "nested_depth": 0,
+     "condition_fields": ["RC-NEW-CODE"],
+     "condition_field_ids": [{"name": "RC-NEW-CODE", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0013-FLD-000011", "target_kind": "field", "candidate_ids": []}],
+     "when_clauses": [
+       {"conditions": ["0"], "condition_fields": ["RC-NEW-CODE"], "body_line_range": [72, 72], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0052-STMT-000033"]},
+       {"conditions": ["1 THRU 4"], "condition_fields": ["RC-NEW-CODE"], "body_line_range": [74, 74], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0052-STMT-000034"]},
+       {"conditions": ["5 THRU 8"], "condition_fields": ["RC-NEW-CODE"], "body_line_range": [76, 76], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0052-STMT-000035"]},
+       {"conditions": ["OTHER"], "condition_fields": [], "body_line_range": [78, 78], "is_default": true, "statement_ids": ["SYS-PORTFOLIO-001-FIL-0052-STMT-000036"]}],
+     "has_default": true}
+  ]},
+  {"paragraph": "P400-LOG-RETURN-CODE", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0052-PAR-0008", "branches": [
+    {"type": "IF", "line": 113, "end_if_line": 117, "statement_id": "SYS-PORTFOLIO-001-FIL-0052-STMT-000022", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0052-PAR-0008", "condition_text": "SQLCODE = 0", "condition_fields": ["SQLCODE"],
+     "condition_field_ids": [{"name": "SQLCODE", "qualifiers": [], "resolution": "UNRESOLVED", "target_id": null, "target_kind": null, "candidate_ids": []}],
+     "check_kind": "SQLCODE_CHECK", "has_else": true, "nested_depth": 0, "then_line_range": [114, 114], "else_line_range": [116, 116],
+     "outcomes": [{"label": "THEN", "line_range": [114, 114], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0052-STMT-000038"]}, {"label": "ELSE", "line_range": [116, 116], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0052-STMT-000037"]}]}
+  ]},
+  {"paragraph": "P500-ANALYZE-CODES", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0052-PAR-0010", "branches": [
+    {"type": "IF", "line": 135, "end_if_line": 139, "statement_id": "SYS-PORTFOLIO-001-FIL-0052-STMT-000025", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0052-PAR-0010", "condition_text": "SQLCODE = 0", "condition_fields": ["SQLCODE"],
+     "condition_field_ids": [{"name": "SQLCODE", "qualifiers": [], "resolution": "UNRESOLVED", "target_id": null, "target_kind": null, "candidate_ids": []}],
+     "check_kind": "SQLCODE_CHECK", "has_else": true, "nested_depth": 0, "then_line_range": [136, 136], "else_line_range": [138, 138],
+     "outcomes": [{"label": "THEN", "line_range": [136, 136], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0052-STMT-000040"]}, {"label": "ELSE", "line_range": [138, 138], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0052-STMT-000039"]}]}
+  ]}
 ],
 "loops": [],
 "dead_code_confirmed": [],
+"dead_code_dismissed": [],
 "unresolvable_paths": [],
 "trace_issues": [
-  {"severity": "info", "type": "upstream_issue", "upstream_agent": "2_parser", "upstream_type": "unnamed_paragraph", "lines": [33, 52], "message": "Statements between PROCEDURE DIVISION (line 32) and the first named paragraph P100-INIT-RETURN-CODES (line 53) are recorded in paragraph (UNNAMED)."},
-  {"severity": "info", "type": "upstream_issue", "upstream_agent": "2_parser", "upstream_type": "no_environment_sections", "line": 11, "message": "ENVIRONMENT DIVISION is present but declares no sections."},
-  {"severity": "info", "type": "upstream_issue", "upstream_agent": "2_parser", "upstream_type": "perform_thru", "lines": [35, 38, 41, 44, 47], "message": "Five PERFORM ... THRU statements (cfg_issues) obscure control flow."},
-  {"severity": "info", "type": "upstream_issue", "upstream_agent": "3_data", "upstream_type": "copybook_level_01_under_01", "line": 26, "message": "EXEC SQL INCLUDE SQLCA under 01 WS-DB2-AREA and COPY RTNCODE under 01 RC-REQUEST-AREA bring in level-01 records (SQL-STATUS-CODES, RETURN-CODE-AREA); the holding 01 records have no subordinate items of their own."},
-  {"severity": "info", "type": "upstream_issue", "upstream_agent": "3_data", "upstream_type": "unresolved_copy_stub", "file_id": "SYS-PORTFOLIO-001-FIL-0017", "message": "Copybook SQLCA defines only SQL-STATUS-CODES; the precompiler SQLCA structure (SQLCODE, ...) is not in any registered layout. This explains why SQLCODE has no Field ID."},
-  {"severity": "warning", "type": "perform_thru", "lines": [35, 38, 41, 44, 47], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0052-STMT-000029", "SYS-PORTFOLIO-001-FIL-0052-STMT-000031", "SYS-PORTFOLIO-001-FIL-0052-STMT-000028", "SYS-PORTFOLIO-001-FIL-0052-STMT-000030", "SYS-PORTFOLIO-001-FIL-0052-STMT-000027"], "message": "Each PERFORM X THRU X-EXIT executes paragraph X and then the following EXIT-only paragraph; flagged unstructured. No GO TO targets the EXIT paragraphs, so the effective range is the two paragraphs in source order."},
-  {"severity": "info", "type": "field_id_unresolved", "name": "SQLCODE", "lines": [113, 135], "message": "resolve-field-references UNRESOLVED; SQLCODE is supplied by the DB2 precompiler SQLCA and is not registered; target_id null."},
-  {"severity": "info", "type": "no_when_other", "line": 33, "statement_id": "SYS-PORTFOLIO-001-FIL-0052-STMT-000001", "message": "EVALUATE TRUE has no WHEN OTHER: if RC-REQUEST-TYPE holds none of 'I', 'S', 'G', 'L', 'A', nothing is performed, RC-RESPONSE-CODE is left unchanged and the program returns."}
+  {"severity": "info", "type": "upstream_issue", "upstream_agent": "2_parser", "upstream_type": "unnamed_paragraph", "message": "Statements between PROCEDURE DIVISION and the first named paragraph recorded in paragraph '(UNNAMED)' (lines 33-52)"},
+  {"severity": "info", "type": "upstream_issue", "upstream_agent": "2_parser", "upstream_type": "perform_thru", "message": "5 PERFORM ... THRU statements obscure control flow (lines 35, 38, 41, 44, 47)"},
+  {"severity": "info", "type": "upstream_issue", "upstream_agent": "3_data", "upstream_type": "sql_include_expanded", "message": "EXEC SQL INCLUDE SQLCA inside 01 WS-DB2-AREA expanded to SQLCA.cpy record SYS-PORTFOLIO-001-FIL-0017-REC-0001"},
+  {"severity": "info", "type": "upstream_issue", "upstream_agent": "3_data", "upstream_type": "copybook_01_nested_under_program_01", "message": "Expanded copybook records at lines 26 and 30 are level-01 records placed inside program 01 groups (WS-DB2-AREA, RC-REQUEST-AREA)"},
+  {"severity": "info", "type": "upstream_issue", "upstream_agent": "3_data", "upstream_type": "unresolved_copy_stub", "file_id": "SYS-PORTFOLIO-001-FIL-0017", "message": "SQLCA.cpy contains 'EXEC SQL INCLUDE SQLCA' (self-inclusion); recorded by Agent 3 as an unresolved stub in the copybook. The registered SQLCA record (SQL-STATUS-CODES) does not define SQLCODE"},
+  {"severity": "warning", "type": "perform_thru_flagged", "statement_ids": ["SYS-PORTFOLIO-001-FIL-0052-STMT-000029", "SYS-PORTFOLIO-001-FIL-0052-STMT-000031", "SYS-PORTFOLIO-001-FIL-0052-STMT-000028", "SYS-PORTFOLIO-001-FIL-0052-STMT-000030", "SYS-PORTFOLIO-001-FIL-0052-STMT-000027"], "lines": [35, 38, 41, 44, 47], "message": "PERFORM ... THRU ranges are unstructured; each range is a body paragraph followed by an EXIT-only paragraph, so the effective flow equals a simple PERFORM of the body paragraph"},
+  {"severity": "info", "type": "field_id_unresolved", "name": "SQLCODE", "statement_ids": ["SYS-PORTFOLIO-001-FIL-0052-STMT-000022", "SYS-PORTFOLIO-001-FIL-0052-STMT-000025"], "message": "SQLCODE did not resolve to a registered Field ID (resolve-field-references returned UNRESOLVED); it is the DB2 SQLCA return code supplied at precompile time, not defined in the registered SQLCA.cpy"},
+  {"severity": "info", "type": "evaluate_without_other", "statement_id": "SYS-PORTFOLIO-001-FIL-0052-STMT-000001", "line": 33, "message": "Dispatcher EVALUATE TRUE has no WHEN OTHER: an unrecognised RC-REQUEST-TYPE performs nothing and RC-RESPONSE-CODE is left unchanged"}
 ],
-"program_narrative": "Program RTNCDE00 is a standard return-code handler subprogram. The caller passes RC-REQUEST-AREA, which holds the RETURN-CODE-AREA record of copybook RTNCODE, and the program returns with GOBACK. The request type selects one function: 'I' initialises the codes area (current and highest code 0, status success, response 0); 'S' records a new code, keeps the highest code seen, and classifies the code as success (0), warning (1-4), error (5-8) or severe (any other value); 'G' copies the current code, highest code and status to the return data; 'L' inserts a row with the current timestamp, program ID, codes, status and message into DB2 table RTNCODES; 'A' selects the count, maximum and minimum return code from RTNCODES for the program between a start and end time. Both SQL functions set response code 0 when SQLCODE is 0 and 8 otherwise; the other functions set response code 0. An unrecognised request type does nothing. All calls to the five function paragraphs use PERFORM ... THRU an EXIT-only paragraph.",
+"program_narrative": "Program RTNCDE00 is a called subprogram (PROCEDURE DIVISION USING RC-REQUEST-AREA, laid out by copybook RTNCODE) that provides a standard return-code service to other programs. The caller sets RC-REQUEST-TYPE and the program dispatches to one of five operations: initialise the return-code area (I), record a new return code (S), return the current and highest codes (G), log the current code to DB2 table RTNCODES (L), or summarise logged codes for a program and time window (A). Recording a code keeps the highest code seen and classifies the new code as success (0), warning (1-4), error (5-8) or severe (any other value). The program reads and writes only the caller's linkage area and the DB2 table RTNCODES (one INSERT, one aggregate SELECT); there are no files and no loops. Error conditions handled: a failed INSERT or SELECT (SQLCODE not 0) sets RC-RESPONSE-CODE to 8; an unrecognised request type performs nothing.",
 "paragraphs": [
-  {
-    "name": "(UNNAMED)", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0052-PAR-0001", "section": null, "section_id": null, "line_range": [33, 52],
-    "pseudocode": [
-      "-- Entry: caller passes return_code_request (RC-REQUEST-AREA = RETURN-CODE-AREA from copybook RTNCODE) (PROCEDURE DIVISION USING, line 32)",
-      "IF request_type = 'I' (RC-INITIALIZE) THEN",
-      "  CALL p100-init-return-codes THRU p100-exit  !! PERFORM THRU: runs P100-INIT-RETURN-CODES then P100-EXIT",
-      "ELSE IF request_type = 'S' (RC-SET-CODE) THEN",
-      "  CALL p200-set-return-code THRU p200-exit  !! PERFORM THRU",
-      "ELSE IF request_type = 'G' (RC-GET-CODE) THEN",
-      "  CALL p300-get-return-code THRU p300-exit  !! PERFORM THRU",
-      "ELSE IF request_type = 'L' (RC-LOG-CODE) THEN",
-      "  CALL p400-log-return-code THRU p400-exit  !! PERFORM THRU",
-      "ELSE IF request_type = 'A' (RC-ANALYZE) THEN",
-      "  CALL p500-analyze-codes THRU p500-exit  !! PERFORM THRU",
-      "END IF  -- no WHEN OTHER: an unknown request type does nothing",
-      "RETURN to caller  -- GOBACK"
-    ],
-    "pseudocode_statement_ids": [
-      [],
-      ["SYS-PORTFOLIO-001-FIL-0052-STMT-000001"],
-      ["SYS-PORTFOLIO-001-FIL-0052-STMT-000029"],
-      ["SYS-PORTFOLIO-001-FIL-0052-STMT-000001"],
-      ["SYS-PORTFOLIO-001-FIL-0052-STMT-000031"],
-      ["SYS-PORTFOLIO-001-FIL-0052-STMT-000001"],
-      ["SYS-PORTFOLIO-001-FIL-0052-STMT-000028"],
-      ["SYS-PORTFOLIO-001-FIL-0052-STMT-000001"],
-      ["SYS-PORTFOLIO-001-FIL-0052-STMT-000030"],
-      ["SYS-PORTFOLIO-001-FIL-0052-STMT-000001"],
-      ["SYS-PORTFOLIO-001-FIL-0052-STMT-000027"],
-      ["SYS-PORTFOLIO-001-FIL-0052-STMT-000001"],
-      ["SYS-PORTFOLIO-001-FIL-0052-STMT-000002"]
-    ],
-    "pseudocode_text": "-- Entry: caller passes return_code_request (RC-REQUEST-AREA = RETURN-CODE-AREA from copybook RTNCODE) (PROCEDURE DIVISION USING, line 32)\nIF request_type = 'I' (RC-INITIALIZE) THEN\n  CALL p100-init-return-codes THRU p100-exit  !! PERFORM THRU: runs P100-INIT-RETURN-CODES then P100-EXIT\nELSE IF request_type = 'S' (RC-SET-CODE) THEN\n  CALL p200-set-return-code THRU p200-exit  !! PERFORM THRU\nELSE IF request_type = 'G' (RC-GET-CODE) THEN\n  CALL p300-get-return-code THRU p300-exit  !! PERFORM THRU\nELSE IF request_type = 'L' (RC-LOG-CODE) THEN\n  CALL p400-log-return-code THRU p400-exit  !! PERFORM THRU\nELSE IF request_type = 'A' (RC-ANALYZE) THEN\n  CALL p500-analyze-codes THRU p500-exit  !! PERFORM THRU\nEND IF  -- no WHEN OTHER: an unknown request type does nothing\nRETURN to caller  -- GOBACK",
-    "statement_ids": ["SYS-PORTFOLIO-001-FIL-0052-STMT-000001", "SYS-PORTFOLIO-001-FIL-0052-STMT-000029", "SYS-PORTFOLIO-001-FIL-0052-STMT-000031", "SYS-PORTFOLIO-001-FIL-0052-STMT-000028", "SYS-PORTFOLIO-001-FIL-0052-STMT-000030", "SYS-PORTFOLIO-001-FIL-0052-STMT-000027", "SYS-PORTFOLIO-001-FIL-0052-STMT-000002"],
-    "untranslated_statement_ids": [],
-    "field_references": ["RC-REQUEST-AREA", "RC-INITIALIZE", "RC-SET-CODE", "RC-GET-CODE", "RC-LOG-CODE", "RC-ANALYZE"],
-    "field_reference_ids": [
-      {"name": "RC-REQUEST-AREA", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0052-REC-0003", "target_kind": "record", "candidate_ids": []},
-      {"name": "RC-INITIALIZE", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0013-FLD-000002", "target_kind": "condition", "candidate_ids": []},
-      {"name": "RC-SET-CODE", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0013-FLD-000003", "target_kind": "condition", "candidate_ids": []},
-      {"name": "RC-GET-CODE", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0013-FLD-000004", "target_kind": "condition", "candidate_ids": []},
-      {"name": "RC-LOG-CODE", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0013-FLD-000005", "target_kind": "condition", "candidate_ids": []},
-      {"name": "RC-ANALYZE", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0013-FLD-000006", "target_kind": "condition", "candidate_ids": []}
-    ],
-    "calls_made": ["P100-INIT-RETURN-CODES", "P100-EXIT", "P200-SET-RETURN-CODE", "P200-EXIT", "P300-GET-RETURN-CODE", "P300-EXIT", "P400-LOG-RETURN-CODE", "P400-EXIT", "P500-ANALYZE-CODES", "P500-EXIT"],
-    "calls_made_ids": [
-      {"name": "P100-INIT-RETURN-CODES", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0052-PAR-0002", "section_id": null},
-      {"name": "P100-EXIT", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0052-PAR-0003", "section_id": null},
-      {"name": "P200-SET-RETURN-CODE", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0052-PAR-0004", "section_id": null},
-      {"name": "P200-EXIT", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0052-PAR-0005", "section_id": null},
-      {"name": "P300-GET-RETURN-CODE", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0052-PAR-0006", "section_id": null},
-      {"name": "P300-EXIT", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0052-PAR-0007", "section_id": null},
-      {"name": "P400-LOG-RETURN-CODE", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0052-PAR-0008", "section_id": null},
-      {"name": "P400-EXIT", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0052-PAR-0009", "section_id": null},
-      {"name": "P500-ANALYZE-CODES", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0052-PAR-0010", "section_id": null},
-      {"name": "P500-EXIT", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0052-PAR-0011", "section_id": null}
-    ],
-    "complexity_score": 5,
-    "has_unresolved_statements": false,
-    "annotations": [
-      {"line": 33, "statement_id": "SYS-PORTFOLIO-001-FIL-0052-STMT-000001", "note": "EVALUATE TRUE on the 88-level names of RC-REQUEST-TYPE (copybook RTNCODE): RC-INITIALIZE 'I', RC-SET-CODE 'S', RC-GET-CODE 'G', RC-LOG-CODE 'L', RC-ANALYZE 'A'."},
-      {"line": 35, "statement_id": "SYS-PORTFOLIO-001-FIL-0052-STMT-000029", "note": "PERFORM ... THRU (unstructured) flagged on all five WHEN branches; calls_made lists both the start and the THRU end paragraph."}
-    ]
-  },
-  {
-    "name": "P100-INIT-RETURN-CODES", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0052-PAR-0002", "section": null, "section_id": null, "line_range": [53, 59],
-    "pseudocode": [
-      "CLEAR codes_area (RC-CODES-AREA)  -- INITIALIZE: numeric items to zero, alphanumeric items to spaces",
-      "CLEAR program_id (RC-PROGRAM-ID)  -- initialise to spaces",
-      "SET current_code (RC-CURRENT-CODE) = 0",
-      "SET highest_code (RC-HIGHEST-CODE) = 0",
-      "SET status = 'S'  -- SET RC-STATUS-SUCCESS TO TRUE",
-      "SET response_code (RC-RESPONSE-CODE) = 0"
-    ],
-    "pseudocode_statement_ids": [
-      ["SYS-PORTFOLIO-001-FIL-0052-STMT-000003"],
-      ["SYS-PORTFOLIO-001-FIL-0052-STMT-000004"],
-      ["SYS-PORTFOLIO-001-FIL-0052-STMT-000005"],
-      ["SYS-PORTFOLIO-001-FIL-0052-STMT-000006"],
-      ["SYS-PORTFOLIO-001-FIL-0052-STMT-000007"],
-      ["SYS-PORTFOLIO-001-FIL-0052-STMT-000008"]
-    ],
-    "pseudocode_text": "CLEAR codes_area (RC-CODES-AREA)  -- INITIALIZE: numeric items to zero, alphanumeric items to spaces\nCLEAR program_id (RC-PROGRAM-ID)  -- initialise to spaces\nSET current_code (RC-CURRENT-CODE) = 0\nSET highest_code (RC-HIGHEST-CODE) = 0\nSET status = 'S'  -- SET RC-STATUS-SUCCESS TO TRUE\nSET response_code (RC-RESPONSE-CODE) = 0",
-    "statement_ids": ["SYS-PORTFOLIO-001-FIL-0052-STMT-000003", "SYS-PORTFOLIO-001-FIL-0052-STMT-000004", "SYS-PORTFOLIO-001-FIL-0052-STMT-000005", "SYS-PORTFOLIO-001-FIL-0052-STMT-000006", "SYS-PORTFOLIO-001-FIL-0052-STMT-000007", "SYS-PORTFOLIO-001-FIL-0052-STMT-000008"],
-    "untranslated_statement_ids": [],
-    "field_references": ["RC-CODES-AREA", "RC-PROGRAM-ID", "RC-CURRENT-CODE", "RC-HIGHEST-CODE", "RC-STATUS-SUCCESS", "RC-RESPONSE-CODE"],
-    "field_reference_ids": [
-      {"name": "RC-CODES-AREA", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0013-FLD-000008", "target_kind": "field", "candidate_ids": []},
-      {"name": "RC-PROGRAM-ID", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0013-FLD-000007", "target_kind": "field", "candidate_ids": []},
-      {"name": "RC-CURRENT-CODE", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0013-FLD-000009", "target_kind": "field", "candidate_ids": []},
-      {"name": "RC-HIGHEST-CODE", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0013-FLD-000010", "target_kind": "field", "candidate_ids": []},
-      {"name": "RC-STATUS-SUCCESS", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0013-FLD-000013", "target_kind": "condition", "candidate_ids": []},
-      {"name": "RC-RESPONSE-CODE", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0013-FLD-000018", "target_kind": "field", "candidate_ids": []}
-    ],
-    "calls_made": [],
-    "calls_made_ids": [],
-    "complexity_score": 1,
-    "has_unresolved_statements": false,
-    "annotations": [
-      {"line": 55, "statement_id": "SYS-PORTFOLIO-001-FIL-0052-STMT-000004", "note": "MOVE SPACES TO RC-PROGRAM-ID clears the program ID supplied by the caller."}
-    ]
-  },
-  {
-    "name": "P100-EXIT", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0052-PAR-0003", "section": null, "section_id": null, "line_range": [60, 62],
-    "pseudocode": ["EXIT paragraph  -- end of PERFORM P100-INIT-RETURN-CODES THRU P100-EXIT range; returns to the caller of the range"],
-    "pseudocode_statement_ids": [["SYS-PORTFOLIO-001-FIL-0052-STMT-000009"]],
-    "pseudocode_text": "EXIT paragraph  -- end of PERFORM P100-INIT-RETURN-CODES THRU P100-EXIT range; returns to the caller of the range",
-    "statement_ids": ["SYS-PORTFOLIO-001-FIL-0052-STMT-000009"],
-    "untranslated_statement_ids": [],
-    "field_references": [], "field_reference_ids": [], "calls_made": [], "calls_made_ids": [],
-    "complexity_score": 1, "has_unresolved_statements": false, "annotations": []
-  },
-  {
-    "name": "P200-SET-RETURN-CODE", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0052-PAR-0004", "section": null, "section_id": null, "line_range": [63, 81],
-    "pseudocode": [
-      "IF new_code (RC-NEW-CODE) > highest_code (RC-HIGHEST-CODE) THEN",
-      "  SET highest_code = new_code",
-      "END IF",
-      "SET current_code (RC-CURRENT-CODE) = new_code",
-      "SELECT CASE new_code",
-      "  WHEN 0:",
-      "    SET status = 'S'  -- RC-STATUS-SUCCESS",
-      "  WHEN 1 THRU 4:",
-      "    SET status = 'W'  -- RC-STATUS-WARNING",
-      "  WHEN 5 THRU 8:",
-      "    SET status = 'E'  -- RC-STATUS-ERROR",
-      "  ELSE:",
-      "    SET status = 'F'  -- RC-STATUS-SEVERE (any other value, including negative codes and codes above 8)",
-      "END SELECT",
-      "SET response_code (RC-RESPONSE-CODE) = 0"
-    ],
-    "pseudocode_statement_ids": [
-      ["SYS-PORTFOLIO-001-FIL-0052-STMT-000010"],
-      ["SYS-PORTFOLIO-001-FIL-0052-STMT-000032"],
-      ["SYS-PORTFOLIO-001-FIL-0052-STMT-000010"],
-      ["SYS-PORTFOLIO-001-FIL-0052-STMT-000011"],
-      ["SYS-PORTFOLIO-001-FIL-0052-STMT-000012"],
-      ["SYS-PORTFOLIO-001-FIL-0052-STMT-000012"],
-      ["SYS-PORTFOLIO-001-FIL-0052-STMT-000033"],
-      ["SYS-PORTFOLIO-001-FIL-0052-STMT-000012"],
-      ["SYS-PORTFOLIO-001-FIL-0052-STMT-000034"],
-      ["SYS-PORTFOLIO-001-FIL-0052-STMT-000012"],
-      ["SYS-PORTFOLIO-001-FIL-0052-STMT-000035"],
-      ["SYS-PORTFOLIO-001-FIL-0052-STMT-000012"],
-      ["SYS-PORTFOLIO-001-FIL-0052-STMT-000036"],
-      ["SYS-PORTFOLIO-001-FIL-0052-STMT-000012"],
-      ["SYS-PORTFOLIO-001-FIL-0052-STMT-000013"]
-    ],
-    "pseudocode_text": "IF new_code (RC-NEW-CODE) > highest_code (RC-HIGHEST-CODE) THEN\n  SET highest_code = new_code\nEND IF\nSET current_code (RC-CURRENT-CODE) = new_code\nSELECT CASE new_code\n  WHEN 0:\n    SET status = 'S'  -- RC-STATUS-SUCCESS\n  WHEN 1 THRU 4:\n    SET status = 'W'  -- RC-STATUS-WARNING\n  WHEN 5 THRU 8:\n    SET status = 'E'  -- RC-STATUS-ERROR\n  ELSE:\n    SET status = 'F'  -- RC-STATUS-SEVERE (any other value, including negative codes and codes above 8)\nEND SELECT\nSET response_code (RC-RESPONSE-CODE) = 0",
-    "statement_ids": ["SYS-PORTFOLIO-001-FIL-0052-STMT-000010", "SYS-PORTFOLIO-001-FIL-0052-STMT-000032", "SYS-PORTFOLIO-001-FIL-0052-STMT-000011", "SYS-PORTFOLIO-001-FIL-0052-STMT-000012", "SYS-PORTFOLIO-001-FIL-0052-STMT-000033", "SYS-PORTFOLIO-001-FIL-0052-STMT-000034", "SYS-PORTFOLIO-001-FIL-0052-STMT-000035", "SYS-PORTFOLIO-001-FIL-0052-STMT-000036", "SYS-PORTFOLIO-001-FIL-0052-STMT-000013"],
-    "untranslated_statement_ids": [],
-    "field_references": ["RC-NEW-CODE", "RC-HIGHEST-CODE", "RC-CURRENT-CODE", "RC-STATUS-SUCCESS", "RC-STATUS-WARNING", "RC-STATUS-ERROR", "RC-STATUS-SEVERE", "RC-RESPONSE-CODE"],
-    "field_reference_ids": [
-      {"name": "RC-NEW-CODE", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0013-FLD-000011", "target_kind": "field", "candidate_ids": []},
-      {"name": "RC-HIGHEST-CODE", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0013-FLD-000010", "target_kind": "field", "candidate_ids": []},
-      {"name": "RC-CURRENT-CODE", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0013-FLD-000009", "target_kind": "field", "candidate_ids": []},
-      {"name": "RC-STATUS-SUCCESS", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0013-FLD-000013", "target_kind": "condition", "candidate_ids": []},
-      {"name": "RC-STATUS-WARNING", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0013-FLD-000014", "target_kind": "condition", "candidate_ids": []},
-      {"name": "RC-STATUS-ERROR", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0013-FLD-000015", "target_kind": "condition", "candidate_ids": []},
-      {"name": "RC-STATUS-SEVERE", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0013-FLD-000016", "target_kind": "condition", "candidate_ids": []},
-      {"name": "RC-RESPONSE-CODE", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0013-FLD-000018", "target_kind": "field", "candidate_ids": []}
-    ],
-    "calls_made": [],
-    "calls_made_ids": [],
-    "complexity_score": 5,
-    "has_unresolved_statements": false,
-    "annotations": [
-      {"line": 70, "statement_id": "SYS-PORTFOLIO-001-FIL-0052-STMT-000012", "note": "RC-STATUS 88-level values (copybook RTNCODE): RC-STATUS-SUCCESS 'S', RC-STATUS-WARNING 'W', RC-STATUS-ERROR 'E', RC-STATUS-SEVERE 'F'."}
-    ]
-  },
-  {
-    "name": "P200-EXIT", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0052-PAR-0005", "section": null, "section_id": null, "line_range": [82, 84],
-    "pseudocode": ["EXIT paragraph  -- end of PERFORM P200-SET-RETURN-CODE THRU P200-EXIT range"],
-    "pseudocode_statement_ids": [["SYS-PORTFOLIO-001-FIL-0052-STMT-000014"]],
-    "pseudocode_text": "EXIT paragraph  -- end of PERFORM P200-SET-RETURN-CODE THRU P200-EXIT range",
-    "statement_ids": ["SYS-PORTFOLIO-001-FIL-0052-STMT-000014"],
-    "untranslated_statement_ids": [],
-    "field_references": [], "field_reference_ids": [], "calls_made": [], "calls_made_ids": [],
-    "complexity_score": 1, "has_unresolved_statements": false, "annotations": []
-  },
-  {
-    "name": "P300-GET-RETURN-CODE", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0052-PAR-0006", "section": null, "section_id": null, "line_range": [85, 89],
-    "pseudocode": [
-      "SET return_value (RC-RETURN-VALUE) = current_code (RC-CURRENT-CODE)",
-      "SET highest_return (RC-HIGHEST-RETURN) = highest_code (RC-HIGHEST-CODE)",
-      "SET return_status (RC-RETURN-STATUS) = status (RC-STATUS)",
-      "SET response_code (RC-RESPONSE-CODE) = 0"
-    ],
-    "pseudocode_statement_ids": [
-      ["SYS-PORTFOLIO-001-FIL-0052-STMT-000015"],
-      ["SYS-PORTFOLIO-001-FIL-0052-STMT-000016"],
-      ["SYS-PORTFOLIO-001-FIL-0052-STMT-000017"],
-      ["SYS-PORTFOLIO-001-FIL-0052-STMT-000018"]
-    ],
-    "pseudocode_text": "SET return_value (RC-RETURN-VALUE) = current_code (RC-CURRENT-CODE)\nSET highest_return (RC-HIGHEST-RETURN) = highest_code (RC-HIGHEST-CODE)\nSET return_status (RC-RETURN-STATUS) = status (RC-STATUS)\nSET response_code (RC-RESPONSE-CODE) = 0",
-    "statement_ids": ["SYS-PORTFOLIO-001-FIL-0052-STMT-000015", "SYS-PORTFOLIO-001-FIL-0052-STMT-000016", "SYS-PORTFOLIO-001-FIL-0052-STMT-000017", "SYS-PORTFOLIO-001-FIL-0052-STMT-000018"],
-    "untranslated_statement_ids": [],
-    "field_references": ["RC-CURRENT-CODE", "RC-RETURN-VALUE", "RC-HIGHEST-CODE", "RC-HIGHEST-RETURN", "RC-STATUS", "RC-RETURN-STATUS", "RC-RESPONSE-CODE"],
-    "field_reference_ids": [
-      {"name": "RC-CURRENT-CODE", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0013-FLD-000009", "target_kind": "field", "candidate_ids": []},
-      {"name": "RC-RETURN-VALUE", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0013-FLD-000026", "target_kind": "field", "candidate_ids": []},
-      {"name": "RC-HIGHEST-CODE", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0013-FLD-000010", "target_kind": "field", "candidate_ids": []},
-      {"name": "RC-HIGHEST-RETURN", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0013-FLD-000027", "target_kind": "field", "candidate_ids": []},
-      {"name": "RC-STATUS", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0013-FLD-000012", "target_kind": "field", "candidate_ids": []},
-      {"name": "RC-RETURN-STATUS", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0013-FLD-000028", "target_kind": "field", "candidate_ids": []},
-      {"name": "RC-RESPONSE-CODE", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0013-FLD-000018", "target_kind": "field", "candidate_ids": []}
-    ],
-    "calls_made": [],
-    "calls_made_ids": [],
-    "complexity_score": 1,
-    "has_unresolved_statements": false,
-    "annotations": []
-  },
-  {
-    "name": "P300-EXIT", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0052-PAR-0007", "section": null, "section_id": null, "line_range": [90, 92],
-    "pseudocode": ["EXIT paragraph  -- end of PERFORM P300-GET-RETURN-CODE THRU P300-EXIT range"],
-    "pseudocode_statement_ids": [["SYS-PORTFOLIO-001-FIL-0052-STMT-000019"]],
-    "pseudocode_text": "EXIT paragraph  -- end of PERFORM P300-GET-RETURN-CODE THRU P300-EXIT range",
-    "statement_ids": ["SYS-PORTFOLIO-001-FIL-0052-STMT-000019"],
-    "untranslated_statement_ids": [],
-    "field_references": [], "field_reference_ids": [], "calls_made": [], "calls_made_ids": [],
-    "complexity_score": 1, "has_unresolved_statements": false, "annotations": []
-  },
-  {
-    "name": "P400-LOG-RETURN-CODE", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0052-PAR-0008", "section": null, "section_id": null, "line_range": [93, 117],
-    "pseudocode": [
-      "SET current_time (WS-CURRENT-TIME) = CURRENT-DATE  -- FUNCTION CURRENT-DATE: system date and time (YYYYMMDDhhmmsshh into the 16-byte group)",
-      "SQL INSERT new row INTO RTNCODES",
-      "  COLUMNS: TIMESTAMP, PROGRAM_ID, RETURN_CODE, HIGHEST_CODE, STATUS_CODE, MESSAGE_TEXT",
-      "  VALUES: current_time, program_id (RC-PROGRAM-ID), current_code (RC-CURRENT-CODE), highest_code (RC-HIGHEST-CODE), status (RC-STATUS), message (RC-MESSAGE)",
-      "IF SQLCODE = 0 THEN  -- CHECK SQLCODE",
-      "  SET response_code (RC-RESPONSE-CODE) = 0",
-      "ELSE",
-      "  SET response_code = 8",
-      "END IF"
-    ],
-    "pseudocode_statement_ids": [
-      ["SYS-PORTFOLIO-001-FIL-0052-STMT-000020"],
-      ["SYS-PORTFOLIO-001-FIL-0052-STMT-000021"],
-      ["SYS-PORTFOLIO-001-FIL-0052-STMT-000021"],
-      ["SYS-PORTFOLIO-001-FIL-0052-STMT-000021"],
-      ["SYS-PORTFOLIO-001-FIL-0052-STMT-000022"],
-      ["SYS-PORTFOLIO-001-FIL-0052-STMT-000038"],
-      ["SYS-PORTFOLIO-001-FIL-0052-STMT-000022"],
-      ["SYS-PORTFOLIO-001-FIL-0052-STMT-000037"],
-      ["SYS-PORTFOLIO-001-FIL-0052-STMT-000022"]
-    ],
-    "pseudocode_text": "SET current_time (WS-CURRENT-TIME) = CURRENT-DATE  -- FUNCTION CURRENT-DATE: system date and time (YYYYMMDDhhmmsshh into the 16-byte group)\nSQL INSERT new row INTO RTNCODES\n  COLUMNS: TIMESTAMP, PROGRAM_ID, RETURN_CODE, HIGHEST_CODE, STATUS_CODE, MESSAGE_TEXT\n  VALUES: current_time, program_id (RC-PROGRAM-ID), current_code (RC-CURRENT-CODE), highest_code (RC-HIGHEST-CODE), status (RC-STATUS), message (RC-MESSAGE)\nIF SQLCODE = 0 THEN  -- CHECK SQLCODE\n  SET response_code (RC-RESPONSE-CODE) = 0\nELSE\n  SET response_code = 8\nEND IF",
-    "statement_ids": ["SYS-PORTFOLIO-001-FIL-0052-STMT-000020", "SYS-PORTFOLIO-001-FIL-0052-STMT-000021", "SYS-PORTFOLIO-001-FIL-0052-STMT-000022", "SYS-PORTFOLIO-001-FIL-0052-STMT-000038", "SYS-PORTFOLIO-001-FIL-0052-STMT-000037"],
-    "untranslated_statement_ids": [],
-    "field_references": ["WS-CURRENT-TIME", "RC-PROGRAM-ID", "RC-CURRENT-CODE", "RC-HIGHEST-CODE", "RC-STATUS", "RC-MESSAGE", "SQLCODE", "RC-RESPONSE-CODE"],
-    "field_reference_ids": [
-      {"name": "WS-CURRENT-TIME", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0052-REC-0001", "target_kind": "record", "candidate_ids": []},
-      {"name": "RC-PROGRAM-ID", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0013-FLD-000007", "target_kind": "field", "candidate_ids": []},
-      {"name": "RC-CURRENT-CODE", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0013-FLD-000009", "target_kind": "field", "candidate_ids": []},
-      {"name": "RC-HIGHEST-CODE", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0013-FLD-000010", "target_kind": "field", "candidate_ids": []},
-      {"name": "RC-STATUS", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0013-FLD-000012", "target_kind": "field", "candidate_ids": []},
-      {"name": "RC-MESSAGE", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0013-FLD-000017", "target_kind": "field", "candidate_ids": []},
-      {"name": "SQLCODE", "qualifiers": [], "resolution": "UNRESOLVED", "target_id": null, "target_kind": null, "candidate_ids": []},
-      {"name": "RC-RESPONSE-CODE", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0013-FLD-000018", "target_kind": "field", "candidate_ids": []}
-    ],
-    "calls_made": [],
-    "calls_made_ids": [],
-    "complexity_score": 2,
-    "has_unresolved_statements": false,
-    "annotations": [
-      {"line": 94, "statement_id": "SYS-PORTFOLIO-001-FIL-0052-STMT-000020", "note": "FUNCTION CURRENT-DATE returns 21 characters; WS-CURRENT-TIME is 16 bytes, so the GMT offset is truncated. The 16-character value is used as the TIMESTAMP host variable."}
-    ]
-  },
-  {
-    "name": "P400-EXIT", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0052-PAR-0009", "section": null, "section_id": null, "line_range": [118, 120],
-    "pseudocode": ["EXIT paragraph  -- end of PERFORM P400-LOG-RETURN-CODE THRU P400-EXIT range"],
-    "pseudocode_statement_ids": [["SYS-PORTFOLIO-001-FIL-0052-STMT-000023"]],
-    "pseudocode_text": "EXIT paragraph  -- end of PERFORM P400-LOG-RETURN-CODE THRU P400-EXIT range",
-    "statement_ids": ["SYS-PORTFOLIO-001-FIL-0052-STMT-000023"],
-    "untranslated_statement_ids": [],
-    "field_references": [], "field_reference_ids": [], "calls_made": [], "calls_made_ids": [],
-    "complexity_score": 1, "has_unresolved_statements": false, "annotations": []
-  },
-  {
-    "name": "P500-ANALYZE-CODES", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0052-PAR-0010", "section": null, "section_id": null, "line_range": [121, 139],
-    "pseudocode": [
-      "SQL SELECT COUNT(*), MAX(RETURN_CODE), MIN(RETURN_CODE)",
-      "  FROM: RTNCODES table",
-      "  WHERE: PROGRAM_ID = program_id (RC-PROGRAM-ID) AND TIMESTAMP between start_time (RC-START-TIME) and end_time (RC-END-TIME) inclusive",
-      "  INTO: total_codes (RC-TOTAL-CODES), max_code (RC-MAX-CODE), min_code (RC-MIN-CODE)",
-      "IF SQLCODE = 0 THEN  -- CHECK SQLCODE",
-      "  SET response_code (RC-RESPONSE-CODE) = 0",
-      "ELSE",
-      "  SET response_code = 8",
-      "END IF"
-    ],
-    "pseudocode_statement_ids": [
-      ["SYS-PORTFOLIO-001-FIL-0052-STMT-000024"],
-      ["SYS-PORTFOLIO-001-FIL-0052-STMT-000024"],
-      ["SYS-PORTFOLIO-001-FIL-0052-STMT-000024"],
-      ["SYS-PORTFOLIO-001-FIL-0052-STMT-000024"],
-      ["SYS-PORTFOLIO-001-FIL-0052-STMT-000025"],
-      ["SYS-PORTFOLIO-001-FIL-0052-STMT-000040"],
-      ["SYS-PORTFOLIO-001-FIL-0052-STMT-000025"],
-      ["SYS-PORTFOLIO-001-FIL-0052-STMT-000039"],
-      ["SYS-PORTFOLIO-001-FIL-0052-STMT-000025"]
-    ],
-    "pseudocode_text": "SQL SELECT COUNT(*), MAX(RETURN_CODE), MIN(RETURN_CODE)\n  FROM: RTNCODES table\n  WHERE: PROGRAM_ID = program_id (RC-PROGRAM-ID) AND TIMESTAMP between start_time (RC-START-TIME) and end_time (RC-END-TIME) inclusive\n  INTO: total_codes (RC-TOTAL-CODES), max_code (RC-MAX-CODE), min_code (RC-MIN-CODE)\nIF SQLCODE = 0 THEN  -- CHECK SQLCODE\n  SET response_code (RC-RESPONSE-CODE) = 0\nELSE\n  SET response_code = 8\nEND IF",
-    "statement_ids": ["SYS-PORTFOLIO-001-FIL-0052-STMT-000024", "SYS-PORTFOLIO-001-FIL-0052-STMT-000025", "SYS-PORTFOLIO-001-FIL-0052-STMT-000040", "SYS-PORTFOLIO-001-FIL-0052-STMT-000039"],
-    "untranslated_statement_ids": [],
-    "field_references": ["RC-TOTAL-CODES", "RC-MAX-CODE", "RC-MIN-CODE", "RC-PROGRAM-ID", "RC-START-TIME", "RC-END-TIME", "SQLCODE", "RC-RESPONSE-CODE"],
-    "field_reference_ids": [
-      {"name": "RC-TOTAL-CODES", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0013-FLD-000022", "target_kind": "field", "candidate_ids": []},
-      {"name": "RC-MAX-CODE", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0013-FLD-000023", "target_kind": "field", "candidate_ids": []},
-      {"name": "RC-MIN-CODE", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0013-FLD-000024", "target_kind": "field", "candidate_ids": []},
-      {"name": "RC-PROGRAM-ID", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0013-FLD-000007", "target_kind": "field", "candidate_ids": []},
-      {"name": "RC-START-TIME", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0013-FLD-000020", "target_kind": "field", "candidate_ids": []},
-      {"name": "RC-END-TIME", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0013-FLD-000021", "target_kind": "field", "candidate_ids": []},
-      {"name": "SQLCODE", "qualifiers": [], "resolution": "UNRESOLVED", "target_id": null, "target_kind": null, "candidate_ids": []},
-      {"name": "RC-RESPONSE-CODE", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0013-FLD-000018", "target_kind": "field", "candidate_ids": []}
-    ],
-    "calls_made": [],
-    "calls_made_ids": [],
-    "complexity_score": 2,
-    "has_unresolved_statements": false,
-    "annotations": []
-  },
-  {
-    "name": "P500-EXIT", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0052-PAR-0011", "section": null, "section_id": null, "line_range": [140, 141],
-    "pseudocode": ["EXIT paragraph  -- end of PERFORM P500-ANALYZE-CODES THRU P500-EXIT range"],
-    "pseudocode_statement_ids": [["SYS-PORTFOLIO-001-FIL-0052-STMT-000026"]],
-    "pseudocode_text": "EXIT paragraph  -- end of PERFORM P500-ANALYZE-CODES THRU P500-EXIT range",
-    "statement_ids": ["SYS-PORTFOLIO-001-FIL-0052-STMT-000026"],
-    "untranslated_statement_ids": [],
-    "field_references": [], "field_reference_ids": [], "calls_made": [], "calls_made_ids": [],
-    "complexity_score": 1, "has_unresolved_statements": false, "annotations": []
-  }
+  {"name": "(UNNAMED)", "section": null, "paragraph_id": "SYS-PORTFOLIO-001-FIL-0052-PAR-0001", "section_id": null, "line_range": [33, 52],
+   "statement_ids": ["SYS-PORTFOLIO-001-FIL-0052-STMT-000001", "SYS-PORTFOLIO-001-FIL-0052-STMT-000029", "SYS-PORTFOLIO-001-FIL-0052-STMT-000031", "SYS-PORTFOLIO-001-FIL-0052-STMT-000028", "SYS-PORTFOLIO-001-FIL-0052-STMT-000030", "SYS-PORTFOLIO-001-FIL-0052-STMT-000027", "SYS-PORTFOLIO-001-FIL-0052-STMT-000002"],
+   "pseudocode": [
+     "-- Entry point: dispatch on the request type supplied by the caller in RC-REQUEST-AREA",
+     "IF request is Initialize (RC-INITIALIZE: RC-REQUEST-TYPE = 'I') THEN",
+     "  CALL P100-init-return-codes THRU P100-exit  !! PERFORM THRU: runs paragraph range P100-INIT-RETURN-CODES .. P100-EXIT",
+     "ELSE IF request is Set code (RC-SET-CODE: RC-REQUEST-TYPE = 'S') THEN",
+     "  CALL P200-set-return-code THRU P200-exit  !! PERFORM THRU: runs paragraph range P200-SET-RETURN-CODE .. P200-EXIT",
+     "ELSE IF request is Get code (RC-GET-CODE: RC-REQUEST-TYPE = 'G') THEN",
+     "  CALL P300-get-return-code THRU P300-exit  !! PERFORM THRU: runs paragraph range P300-GET-RETURN-CODE .. P300-EXIT",
+     "ELSE IF request is Log code (RC-LOG-CODE: RC-REQUEST-TYPE = 'L') THEN",
+     "  CALL P400-log-return-code THRU P400-exit  !! PERFORM THRU: runs paragraph range P400-LOG-RETURN-CODE .. P400-EXIT",
+     "ELSE IF request is Analyze (RC-ANALYZE: RC-REQUEST-TYPE = 'A') THEN",
+     "  CALL P500-analyze-codes THRU P500-exit  !! PERFORM THRU: runs paragraph range P500-ANALYZE-CODES .. P500-EXIT",
+     "END IF  -- no WHEN OTHER: any other request type performs nothing",
+     "RETURN to caller  -- GOBACK"
+   ],
+   "pseudocode_statement_ids": [[], ["SYS-PORTFOLIO-001-FIL-0052-STMT-000001"], ["SYS-PORTFOLIO-001-FIL-0052-STMT-000029"], ["SYS-PORTFOLIO-001-FIL-0052-STMT-000001"], ["SYS-PORTFOLIO-001-FIL-0052-STMT-000031"], ["SYS-PORTFOLIO-001-FIL-0052-STMT-000001"], ["SYS-PORTFOLIO-001-FIL-0052-STMT-000028"], ["SYS-PORTFOLIO-001-FIL-0052-STMT-000001"], ["SYS-PORTFOLIO-001-FIL-0052-STMT-000030"], ["SYS-PORTFOLIO-001-FIL-0052-STMT-000001"], ["SYS-PORTFOLIO-001-FIL-0052-STMT-000027"], ["SYS-PORTFOLIO-001-FIL-0052-STMT-000001"], ["SYS-PORTFOLIO-001-FIL-0052-STMT-000002"]],
+   "pseudocode_text": "-- Entry point: dispatch on the request type supplied by the caller in RC-REQUEST-AREA\nIF request is Initialize (RC-INITIALIZE: RC-REQUEST-TYPE = 'I') THEN\n  CALL P100-init-return-codes THRU P100-exit  !! PERFORM THRU\nELSE IF request is Set code (RC-SET-CODE: RC-REQUEST-TYPE = 'S') THEN\n  CALL P200-set-return-code THRU P200-exit  !! PERFORM THRU\nELSE IF request is Get code (RC-GET-CODE: RC-REQUEST-TYPE = 'G') THEN\n  CALL P300-get-return-code THRU P300-exit  !! PERFORM THRU\nELSE IF request is Log code (RC-LOG-CODE: RC-REQUEST-TYPE = 'L') THEN\n  CALL P400-log-return-code THRU P400-exit  !! PERFORM THRU\nELSE IF request is Analyze (RC-ANALYZE: RC-REQUEST-TYPE = 'A') THEN\n  CALL P500-analyze-codes THRU P500-exit  !! PERFORM THRU\nEND IF  -- no WHEN OTHER\nRETURN to caller  -- GOBACK",
+   "untranslated_statement_ids": [],
+   "field_references": ["RC-INITIALIZE", "RC-SET-CODE", "RC-GET-CODE", "RC-LOG-CODE", "RC-ANALYZE"],
+   "field_reference_ids": [
+     {"name": "RC-INITIALIZE", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0013-FLD-000002", "target_kind": "condition", "candidate_ids": []},
+     {"name": "RC-SET-CODE", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0013-FLD-000003", "target_kind": "condition", "candidate_ids": []},
+     {"name": "RC-GET-CODE", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0013-FLD-000004", "target_kind": "condition", "candidate_ids": []},
+     {"name": "RC-LOG-CODE", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0013-FLD-000005", "target_kind": "condition", "candidate_ids": []},
+     {"name": "RC-ANALYZE", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0013-FLD-000006", "target_kind": "condition", "candidate_ids": []}],
+   "calls_made": ["P100-INIT-RETURN-CODES", "P200-SET-RETURN-CODE", "P300-GET-RETURN-CODE", "P400-LOG-RETURN-CODE", "P500-ANALYZE-CODES"],
+   "calls_made_ids": [
+     {"name": "P100-INIT-RETURN-CODES", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0052-PAR-0002", "section_id": null, "thru_end": "P100-EXIT", "thru_end_paragraph_id": "SYS-PORTFOLIO-001-FIL-0052-PAR-0003"},
+     {"name": "P200-SET-RETURN-CODE", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0052-PAR-0004", "section_id": null, "thru_end": "P200-EXIT", "thru_end_paragraph_id": "SYS-PORTFOLIO-001-FIL-0052-PAR-0005"},
+     {"name": "P300-GET-RETURN-CODE", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0052-PAR-0006", "section_id": null, "thru_end": "P300-EXIT", "thru_end_paragraph_id": "SYS-PORTFOLIO-001-FIL-0052-PAR-0007"},
+     {"name": "P400-LOG-RETURN-CODE", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0052-PAR-0008", "section_id": null, "thru_end": "P400-EXIT", "thru_end_paragraph_id": "SYS-PORTFOLIO-001-FIL-0052-PAR-0009"},
+     {"name": "P500-ANALYZE-CODES", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0052-PAR-0010", "section_id": null, "thru_end": "P500-EXIT", "thru_end_paragraph_id": "SYS-PORTFOLIO-001-FIL-0052-PAR-0011"}],
+   "complexity_score": 5, "has_unresolved_statements": false,
+   "annotations": [{"line": 35, "statement_id": "SYS-PORTFOLIO-001-FIL-0052-STMT-000029", "note": "PERFORM THRU flagged (unstructured); lines 38, 41, 44, 47 use the same pattern"}, {"line": 33, "statement_id": "SYS-PORTFOLIO-001-FIL-0052-STMT-000001", "note": "EVALUATE TRUE translated as IF / ELSE IF chain over the RC-REQUEST-TYPE 88-level conditions"}]},
+  {"name": "P100-INIT-RETURN-CODES", "section": null, "paragraph_id": "SYS-PORTFOLIO-001-FIL-0052-PAR-0002", "section_id": null, "line_range": [53, 59],
+   "statement_ids": ["SYS-PORTFOLIO-001-FIL-0052-STMT-000003", "SYS-PORTFOLIO-001-FIL-0052-STMT-000004", "SYS-PORTFOLIO-001-FIL-0052-STMT-000005", "SYS-PORTFOLIO-001-FIL-0052-STMT-000006", "SYS-PORTFOLIO-001-FIL-0052-STMT-000007", "SYS-PORTFOLIO-001-FIL-0052-STMT-000008"],
+   "pseudocode": [
+     "-- Reset the return-code state held in the caller's area",
+     "INITIALIZE codes_area (RC-CODES-AREA)  -- COBOL INITIALIZE: numeric subfields to zero, alphanumeric subfields to spaces",
+     "CLEAR program_id (RC-PROGRAM-ID)  -- initialise to spaces",
+     "SET current_code (RC-CURRENT-CODE) = 0",
+     "SET highest_code (RC-HIGHEST-CODE) = 0",
+     "SET status = SUCCESS  -- SET RC-STATUS-SUCCESS TO TRUE: RC-STATUS = 'S'",
+     "SET response_code (RC-RESPONSE-CODE) = 0"
+   ],
+   "pseudocode_statement_ids": [[], ["SYS-PORTFOLIO-001-FIL-0052-STMT-000003"], ["SYS-PORTFOLIO-001-FIL-0052-STMT-000004"], ["SYS-PORTFOLIO-001-FIL-0052-STMT-000005"], ["SYS-PORTFOLIO-001-FIL-0052-STMT-000006"], ["SYS-PORTFOLIO-001-FIL-0052-STMT-000007"], ["SYS-PORTFOLIO-001-FIL-0052-STMT-000008"]],
+   "pseudocode_text": "-- Reset the return-code state held in the caller's area\nINITIALIZE codes_area (RC-CODES-AREA)\nCLEAR program_id (RC-PROGRAM-ID)\nSET current_code (RC-CURRENT-CODE) = 0\nSET highest_code (RC-HIGHEST-CODE) = 0\nSET status = SUCCESS\nSET response_code (RC-RESPONSE-CODE) = 0",
+   "untranslated_statement_ids": [],
+   "field_references": ["RC-CODES-AREA", "RC-PROGRAM-ID", "RC-CURRENT-CODE", "RC-HIGHEST-CODE", "RC-STATUS-SUCCESS", "RC-RESPONSE-CODE"],
+   "field_reference_ids": [
+     {"name": "RC-CODES-AREA", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0013-FLD-000008", "target_kind": "field", "candidate_ids": []},
+     {"name": "RC-PROGRAM-ID", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0013-FLD-000007", "target_kind": "field", "candidate_ids": []},
+     {"name": "RC-CURRENT-CODE", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0013-FLD-000009", "target_kind": "field", "candidate_ids": []},
+     {"name": "RC-HIGHEST-CODE", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0013-FLD-000010", "target_kind": "field", "candidate_ids": []},
+     {"name": "RC-STATUS-SUCCESS", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0013-FLD-000013", "target_kind": "condition", "candidate_ids": []},
+     {"name": "RC-RESPONSE-CODE", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0013-FLD-000018", "target_kind": "field", "candidate_ids": []}],
+   "calls_made": [], "calls_made_ids": [],
+   "complexity_score": 1, "has_unresolved_statements": false,
+   "annotations": [{"line": 54, "statement_id": "SYS-PORTFOLIO-001-FIL-0052-STMT-000003", "note": "INITIALIZE RC-CODES-AREA already zeroes RC-CURRENT-CODE and RC-HIGHEST-CODE and blanks RC-STATUS; the explicit MOVEs and SET that follow restate or override those values"}]},
+  {"name": "P100-EXIT", "section": null, "paragraph_id": "SYS-PORTFOLIO-001-FIL-0052-PAR-0003", "section_id": null, "line_range": [60, 62],
+   "statement_ids": ["SYS-PORTFOLIO-001-FIL-0052-STMT-000009"],
+   "pseudocode": ["EXIT paragraph  -- end point of the PERFORM P100-INIT-RETURN-CODES THRU P100-EXIT range (no-op)"],
+   "pseudocode_statement_ids": [["SYS-PORTFOLIO-001-FIL-0052-STMT-000009"]],
+   "pseudocode_text": "EXIT paragraph  -- end point of the PERFORM THRU range (no-op)",
+   "untranslated_statement_ids": [], "field_references": [], "field_reference_ids": [], "calls_made": [], "calls_made_ids": [],
+   "complexity_score": 1, "has_unresolved_statements": false, "annotations": []},
+  {"name": "P200-SET-RETURN-CODE", "section": null, "paragraph_id": "SYS-PORTFOLIO-001-FIL-0052-PAR-0004", "section_id": null, "line_range": [63, 81],
+   "statement_ids": ["SYS-PORTFOLIO-001-FIL-0052-STMT-000010", "SYS-PORTFOLIO-001-FIL-0052-STMT-000032", "SYS-PORTFOLIO-001-FIL-0052-STMT-000011", "SYS-PORTFOLIO-001-FIL-0052-STMT-000012", "SYS-PORTFOLIO-001-FIL-0052-STMT-000033", "SYS-PORTFOLIO-001-FIL-0052-STMT-000034", "SYS-PORTFOLIO-001-FIL-0052-STMT-000035", "SYS-PORTFOLIO-001-FIL-0052-STMT-000036", "SYS-PORTFOLIO-001-FIL-0052-STMT-000013"],
+   "pseudocode": [
+     "-- Record a new return code supplied by the caller and classify its severity",
+     "IF new_code (RC-NEW-CODE) > highest_code (RC-HIGHEST-CODE) THEN",
+     "  SET highest_code = new_code  -- keep the highest code seen so far",
+     "END IF",
+     "SET current_code (RC-CURRENT-CODE) = new_code",
+     "SELECT CASE new_code (RC-NEW-CODE)",
+     "  WHEN 0:",
+     "    SET status = SUCCESS  -- RC-STATUS = 'S'",
+     "  WHEN 1 THRU 4:",
+     "    SET status = WARNING  -- RC-STATUS = 'W'",
+     "  WHEN 5 THRU 8:",
+     "    SET status = ERROR  -- RC-STATUS = 'E'",
+     "  ELSE:",
+     "    SET status = SEVERE  -- RC-STATUS = 'F'; any other value, including negative codes and codes above 8",
+     "END SELECT",
+     "SET response_code (RC-RESPONSE-CODE) = 0"
+   ],
+   "pseudocode_statement_ids": [[], ["SYS-PORTFOLIO-001-FIL-0052-STMT-000010"], ["SYS-PORTFOLIO-001-FIL-0052-STMT-000032"], ["SYS-PORTFOLIO-001-FIL-0052-STMT-000010"], ["SYS-PORTFOLIO-001-FIL-0052-STMT-000011"], ["SYS-PORTFOLIO-001-FIL-0052-STMT-000012"], ["SYS-PORTFOLIO-001-FIL-0052-STMT-000012"], ["SYS-PORTFOLIO-001-FIL-0052-STMT-000033"], ["SYS-PORTFOLIO-001-FIL-0052-STMT-000012"], ["SYS-PORTFOLIO-001-FIL-0052-STMT-000034"], ["SYS-PORTFOLIO-001-FIL-0052-STMT-000012"], ["SYS-PORTFOLIO-001-FIL-0052-STMT-000035"], ["SYS-PORTFOLIO-001-FIL-0052-STMT-000012"], ["SYS-PORTFOLIO-001-FIL-0052-STMT-000036"], ["SYS-PORTFOLIO-001-FIL-0052-STMT-000012"], ["SYS-PORTFOLIO-001-FIL-0052-STMT-000013"]],
+   "pseudocode_text": "-- Record a new return code supplied by the caller and classify its severity\nIF new_code (RC-NEW-CODE) > highest_code (RC-HIGHEST-CODE) THEN\n  SET highest_code = new_code\nEND IF\nSET current_code (RC-CURRENT-CODE) = new_code\nSELECT CASE new_code (RC-NEW-CODE)\n  WHEN 0:\n    SET status = SUCCESS\n  WHEN 1 THRU 4:\n    SET status = WARNING\n  WHEN 5 THRU 8:\n    SET status = ERROR\n  ELSE:\n    SET status = SEVERE\nEND SELECT\nSET response_code (RC-RESPONSE-CODE) = 0",
+   "untranslated_statement_ids": [],
+   "field_references": ["RC-NEW-CODE", "RC-HIGHEST-CODE", "RC-CURRENT-CODE", "RC-STATUS-SUCCESS", "RC-STATUS-WARNING", "RC-STATUS-ERROR", "RC-STATUS-SEVERE", "RC-RESPONSE-CODE"],
+   "field_reference_ids": [
+     {"name": "RC-NEW-CODE", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0013-FLD-000011", "target_kind": "field", "candidate_ids": []},
+     {"name": "RC-HIGHEST-CODE", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0013-FLD-000010", "target_kind": "field", "candidate_ids": []},
+     {"name": "RC-CURRENT-CODE", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0013-FLD-000009", "target_kind": "field", "candidate_ids": []},
+     {"name": "RC-STATUS-SUCCESS", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0013-FLD-000013", "target_kind": "condition", "candidate_ids": []},
+     {"name": "RC-STATUS-WARNING", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0013-FLD-000014", "target_kind": "condition", "candidate_ids": []},
+     {"name": "RC-STATUS-ERROR", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0013-FLD-000015", "target_kind": "condition", "candidate_ids": []},
+     {"name": "RC-STATUS-SEVERE", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0013-FLD-000016", "target_kind": "condition", "candidate_ids": []},
+     {"name": "RC-RESPONSE-CODE", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0013-FLD-000018", "target_kind": "field", "candidate_ids": []}],
+   "calls_made": [], "calls_made_ids": [],
+   "complexity_score": 5, "has_unresolved_statements": false, "annotations": []},
+  {"name": "P200-EXIT", "section": null, "paragraph_id": "SYS-PORTFOLIO-001-FIL-0052-PAR-0005", "section_id": null, "line_range": [82, 84],
+   "statement_ids": ["SYS-PORTFOLIO-001-FIL-0052-STMT-000014"],
+   "pseudocode": ["EXIT paragraph  -- end point of the PERFORM P200-SET-RETURN-CODE THRU P200-EXIT range (no-op)"],
+   "pseudocode_statement_ids": [["SYS-PORTFOLIO-001-FIL-0052-STMT-000014"]],
+   "pseudocode_text": "EXIT paragraph  -- end point of the PERFORM THRU range (no-op)",
+   "untranslated_statement_ids": [], "field_references": [], "field_reference_ids": [], "calls_made": [], "calls_made_ids": [],
+   "complexity_score": 1, "has_unresolved_statements": false, "annotations": []},
+  {"name": "P300-GET-RETURN-CODE", "section": null, "paragraph_id": "SYS-PORTFOLIO-001-FIL-0052-PAR-0006", "section_id": null, "line_range": [85, 89],
+   "statement_ids": ["SYS-PORTFOLIO-001-FIL-0052-STMT-000015", "SYS-PORTFOLIO-001-FIL-0052-STMT-000016", "SYS-PORTFOLIO-001-FIL-0052-STMT-000017", "SYS-PORTFOLIO-001-FIL-0052-STMT-000018"],
+   "pseudocode": [
+     "-- Copy the current state into the return-data fields for the caller",
+     "SET return_value (RC-RETURN-VALUE) = current_code (RC-CURRENT-CODE)",
+     "SET highest_return (RC-HIGHEST-RETURN) = highest_code (RC-HIGHEST-CODE)",
+     "SET return_status (RC-RETURN-STATUS) = status (RC-STATUS)",
+     "SET response_code (RC-RESPONSE-CODE) = 0"
+   ],
+   "pseudocode_statement_ids": [[], ["SYS-PORTFOLIO-001-FIL-0052-STMT-000015"], ["SYS-PORTFOLIO-001-FIL-0052-STMT-000016"], ["SYS-PORTFOLIO-001-FIL-0052-STMT-000017"], ["SYS-PORTFOLIO-001-FIL-0052-STMT-000018"]],
+   "pseudocode_text": "-- Copy the current state into the return-data fields for the caller\nSET return_value (RC-RETURN-VALUE) = current_code (RC-CURRENT-CODE)\nSET highest_return (RC-HIGHEST-RETURN) = highest_code (RC-HIGHEST-CODE)\nSET return_status (RC-RETURN-STATUS) = status (RC-STATUS)\nSET response_code (RC-RESPONSE-CODE) = 0",
+   "untranslated_statement_ids": [],
+   "field_references": ["RC-CURRENT-CODE", "RC-RETURN-VALUE", "RC-HIGHEST-CODE", "RC-HIGHEST-RETURN", "RC-STATUS", "RC-RETURN-STATUS", "RC-RESPONSE-CODE"],
+   "field_reference_ids": [
+     {"name": "RC-CURRENT-CODE", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0013-FLD-000009", "target_kind": "field", "candidate_ids": []},
+     {"name": "RC-RETURN-VALUE", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0013-FLD-000026", "target_kind": "field", "candidate_ids": []},
+     {"name": "RC-HIGHEST-CODE", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0013-FLD-000010", "target_kind": "field", "candidate_ids": []},
+     {"name": "RC-HIGHEST-RETURN", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0013-FLD-000027", "target_kind": "field", "candidate_ids": []},
+     {"name": "RC-STATUS", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0013-FLD-000012", "target_kind": "field", "candidate_ids": []},
+     {"name": "RC-RETURN-STATUS", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0013-FLD-000028", "target_kind": "field", "candidate_ids": []},
+     {"name": "RC-RESPONSE-CODE", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0013-FLD-000018", "target_kind": "field", "candidate_ids": []}],
+   "calls_made": [], "calls_made_ids": [],
+   "complexity_score": 1, "has_unresolved_statements": false, "annotations": []},
+  {"name": "P300-EXIT", "section": null, "paragraph_id": "SYS-PORTFOLIO-001-FIL-0052-PAR-0007", "section_id": null, "line_range": [90, 92],
+   "statement_ids": ["SYS-PORTFOLIO-001-FIL-0052-STMT-000019"],
+   "pseudocode": ["EXIT paragraph  -- end point of the PERFORM P300-GET-RETURN-CODE THRU P300-EXIT range (no-op)"],
+   "pseudocode_statement_ids": [["SYS-PORTFOLIO-001-FIL-0052-STMT-000019"]],
+   "pseudocode_text": "EXIT paragraph  -- end point of the PERFORM THRU range (no-op)",
+   "untranslated_statement_ids": [], "field_references": [], "field_reference_ids": [], "calls_made": [], "calls_made_ids": [],
+   "complexity_score": 1, "has_unresolved_statements": false, "annotations": []},
+  {"name": "P400-LOG-RETURN-CODE", "section": null, "paragraph_id": "SYS-PORTFOLIO-001-FIL-0052-PAR-0008", "section_id": null, "line_range": [93, 117],
+   "statement_ids": ["SYS-PORTFOLIO-001-FIL-0052-STMT-000020", "SYS-PORTFOLIO-001-FIL-0052-STMT-000021", "SYS-PORTFOLIO-001-FIL-0052-STMT-000022", "SYS-PORTFOLIO-001-FIL-0052-STMT-000038", "SYS-PORTFOLIO-001-FIL-0052-STMT-000037"],
+   "pseudocode": [
+     "-- Write an audit row for the current return code to DB2 table RTNCODES",
+     "SET current_time (WS-CURRENT-TIME) = FUNCTION CURRENT-DATE  -- runtime value: system date and time",
+     "SQL INSERT new row INTO RTNCODES table",
+     "  COLUMNS: TIMESTAMP, PROGRAM_ID, RETURN_CODE, HIGHEST_CODE, STATUS_CODE, MESSAGE_TEXT",
+     "  VALUES: current_time (WS-CURRENT-TIME), program_id (RC-PROGRAM-ID), current_code (RC-CURRENT-CODE), highest_code (RC-HIGHEST-CODE), status (RC-STATUS), message (RC-MESSAGE)",
+     "CHECK SQLCODE for errors",
+     "IF SQLCODE = 0 THEN",
+     "  SET response_code (RC-RESPONSE-CODE) = 0  -- row inserted",
+     "ELSE",
+     "  SET response_code (RC-RESPONSE-CODE) = 8  -- insert failed",
+     "END IF"
+   ],
+   "pseudocode_statement_ids": [[], ["SYS-PORTFOLIO-001-FIL-0052-STMT-000020"], ["SYS-PORTFOLIO-001-FIL-0052-STMT-000021"], ["SYS-PORTFOLIO-001-FIL-0052-STMT-000021"], ["SYS-PORTFOLIO-001-FIL-0052-STMT-000021"], ["SYS-PORTFOLIO-001-FIL-0052-STMT-000022"], ["SYS-PORTFOLIO-001-FIL-0052-STMT-000022"], ["SYS-PORTFOLIO-001-FIL-0052-STMT-000038"], ["SYS-PORTFOLIO-001-FIL-0052-STMT-000022"], ["SYS-PORTFOLIO-001-FIL-0052-STMT-000037"], ["SYS-PORTFOLIO-001-FIL-0052-STMT-000022"]],
+   "pseudocode_text": "-- Write an audit row for the current return code to DB2 table RTNCODES\nSET current_time (WS-CURRENT-TIME) = FUNCTION CURRENT-DATE\nSQL INSERT new row INTO RTNCODES table\n  COLUMNS: TIMESTAMP, PROGRAM_ID, RETURN_CODE, HIGHEST_CODE, STATUS_CODE, MESSAGE_TEXT\n  VALUES: current_time, program_id, current_code, highest_code, status, message\nCHECK SQLCODE for errors\nIF SQLCODE = 0 THEN\n  SET response_code (RC-RESPONSE-CODE) = 0\nELSE\n  SET response_code (RC-RESPONSE-CODE) = 8\nEND IF",
+   "untranslated_statement_ids": [],
+   "field_references": ["WS-CURRENT-TIME", "RC-PROGRAM-ID", "RC-CURRENT-CODE", "RC-HIGHEST-CODE", "RC-STATUS", "RC-MESSAGE", "SQLCODE", "RC-RESPONSE-CODE"],
+   "field_reference_ids": [
+     {"name": "WS-CURRENT-TIME", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0052-REC-0001", "target_kind": "record", "candidate_ids": []},
+     {"name": "RC-PROGRAM-ID", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0013-FLD-000007", "target_kind": "field", "candidate_ids": []},
+     {"name": "RC-CURRENT-CODE", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0013-FLD-000009", "target_kind": "field", "candidate_ids": []},
+     {"name": "RC-HIGHEST-CODE", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0013-FLD-000010", "target_kind": "field", "candidate_ids": []},
+     {"name": "RC-STATUS", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0013-FLD-000012", "target_kind": "field", "candidate_ids": []},
+     {"name": "RC-MESSAGE", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0013-FLD-000017", "target_kind": "field", "candidate_ids": []},
+     {"name": "SQLCODE", "qualifiers": [], "resolution": "UNRESOLVED", "target_id": null, "target_kind": null, "candidate_ids": []},
+     {"name": "RC-RESPONSE-CODE", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0013-FLD-000018", "target_kind": "field", "candidate_ids": []}],
+   "calls_made": [], "calls_made_ids": [],
+   "complexity_score": 2, "has_unresolved_statements": false,
+   "annotations": [{"line": 94, "statement_id": "SYS-PORTFOLIO-001-FIL-0052-STMT-000020", "note": "WS-CURRENT-TIME is a 16-byte group (date 8, hours, minutes, seconds, hundredths); FUNCTION CURRENT-DATE returns 21 characters, so the GMT offset is truncated by the MOVE"}, {"line": 96, "statement_id": "SYS-PORTFOLIO-001-FIL-0052-STMT-000021", "note": "Host variable :WS-CURRENT-TIME (16-character group) is inserted into column TIMESTAMP; column type is not visible in the source"}]},
+  {"name": "P400-EXIT", "section": null, "paragraph_id": "SYS-PORTFOLIO-001-FIL-0052-PAR-0009", "section_id": null, "line_range": [118, 120],
+   "statement_ids": ["SYS-PORTFOLIO-001-FIL-0052-STMT-000023"],
+   "pseudocode": ["EXIT paragraph  -- end point of the PERFORM P400-LOG-RETURN-CODE THRU P400-EXIT range (no-op)"],
+   "pseudocode_statement_ids": [["SYS-PORTFOLIO-001-FIL-0052-STMT-000023"]],
+   "pseudocode_text": "EXIT paragraph  -- end point of the PERFORM THRU range (no-op)",
+   "untranslated_statement_ids": [], "field_references": [], "field_reference_ids": [], "calls_made": [], "calls_made_ids": [],
+   "complexity_score": 1, "has_unresolved_statements": false, "annotations": []},
+  {"name": "P500-ANALYZE-CODES", "section": null, "paragraph_id": "SYS-PORTFOLIO-001-FIL-0052-PAR-0010", "section_id": null, "line_range": [121, 139],
+   "statement_ids": ["SYS-PORTFOLIO-001-FIL-0052-STMT-000024", "SYS-PORTFOLIO-001-FIL-0052-STMT-000025", "SYS-PORTFOLIO-001-FIL-0052-STMT-000040", "SYS-PORTFOLIO-001-FIL-0052-STMT-000039"],
+   "pseudocode": [
+     "-- Summarise the logged return codes of one program within a time window",
+     "SQL SELECT COUNT(*), MAX(RETURN_CODE), MIN(RETURN_CODE)",
+     "  FROM: RTNCODES table",
+     "  WHERE: PROGRAM_ID = program_id (RC-PROGRAM-ID) AND TIMESTAMP >= start_time (RC-START-TIME) AND TIMESTAMP <= end_time (RC-END-TIME)",
+     "  INTO: total_codes (RC-TOTAL-CODES), max_code (RC-MAX-CODE), min_code (RC-MIN-CODE)",
+     "CHECK SQLCODE for errors",
+     "IF SQLCODE = 0 THEN",
+     "  SET response_code (RC-RESPONSE-CODE) = 0",
+     "ELSE",
+     "  SET response_code (RC-RESPONSE-CODE) = 8  -- query failed",
+     "END IF"
+   ],
+   "pseudocode_statement_ids": [[], ["SYS-PORTFOLIO-001-FIL-0052-STMT-000024"], ["SYS-PORTFOLIO-001-FIL-0052-STMT-000024"], ["SYS-PORTFOLIO-001-FIL-0052-STMT-000024"], ["SYS-PORTFOLIO-001-FIL-0052-STMT-000024"], ["SYS-PORTFOLIO-001-FIL-0052-STMT-000025"], ["SYS-PORTFOLIO-001-FIL-0052-STMT-000025"], ["SYS-PORTFOLIO-001-FIL-0052-STMT-000040"], ["SYS-PORTFOLIO-001-FIL-0052-STMT-000025"], ["SYS-PORTFOLIO-001-FIL-0052-STMT-000039"], ["SYS-PORTFOLIO-001-FIL-0052-STMT-000025"]],
+   "pseudocode_text": "-- Summarise the logged return codes of one program within a time window\nSQL SELECT COUNT(*), MAX(RETURN_CODE), MIN(RETURN_CODE)\n  FROM: RTNCODES table\n  WHERE: PROGRAM_ID = program_id AND TIMESTAMP between start_time and end_time\n  INTO: total_codes, max_code, min_code\nCHECK SQLCODE for errors\nIF SQLCODE = 0 THEN\n  SET response_code (RC-RESPONSE-CODE) = 0\nELSE\n  SET response_code (RC-RESPONSE-CODE) = 8\nEND IF",
+   "untranslated_statement_ids": [],
+   "field_references": ["RC-TOTAL-CODES", "RC-MAX-CODE", "RC-MIN-CODE", "RC-PROGRAM-ID", "RC-START-TIME", "RC-END-TIME", "SQLCODE", "RC-RESPONSE-CODE"],
+   "field_reference_ids": [
+     {"name": "RC-TOTAL-CODES", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0013-FLD-000022", "target_kind": "field", "candidate_ids": []},
+     {"name": "RC-MAX-CODE", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0013-FLD-000023", "target_kind": "field", "candidate_ids": []},
+     {"name": "RC-MIN-CODE", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0013-FLD-000024", "target_kind": "field", "candidate_ids": []},
+     {"name": "RC-PROGRAM-ID", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0013-FLD-000007", "target_kind": "field", "candidate_ids": []},
+     {"name": "RC-START-TIME", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0013-FLD-000020", "target_kind": "field", "candidate_ids": []},
+     {"name": "RC-END-TIME", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0013-FLD-000021", "target_kind": "field", "candidate_ids": []},
+     {"name": "SQLCODE", "qualifiers": [], "resolution": "UNRESOLVED", "target_id": null, "target_kind": null, "candidate_ids": []},
+     {"name": "RC-RESPONSE-CODE", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0013-FLD-000018", "target_kind": "field", "candidate_ids": []}],
+   "calls_made": [], "calls_made_ids": [],
+   "complexity_score": 2, "has_unresolved_statements": false, "annotations": []},
+  {"name": "P500-EXIT", "section": null, "paragraph_id": "SYS-PORTFOLIO-001-FIL-0052-PAR-0011", "section_id": null, "line_range": [140, 141],
+   "statement_ids": ["SYS-PORTFOLIO-001-FIL-0052-STMT-000026"],
+   "pseudocode": ["EXIT paragraph  -- end point of the PERFORM P500-ANALYZE-CODES THRU P500-EXIT range (no-op)"],
+   "pseudocode_statement_ids": [["SYS-PORTFOLIO-001-FIL-0052-STMT-000026"]],
+   "pseudocode_text": "EXIT paragraph  -- end point of the PERFORM THRU range (no-op)",
+   "untranslated_statement_ids": [], "field_references": [], "field_reference_ids": [], "calls_made": [], "calls_made_ids": [],
+   "complexity_score": 1, "has_unresolved_statements": false, "annotations": []}
 ],
 "unresolved_statements": [],
 "pseudocode_issues": [
-  {"severity": "info", "type": "id_unresolved", "kind": "field", "name": "SQLCODE", "paragraphs": ["P400-LOG-RETURN-CODE", "P500-ANALYZE-CODES"], "message": "resolve-field-references UNRESOLVED; DB2 precompiler SQLCA field, not in a registered layout; target_id null."}
-]
+  {"severity": "info", "type": "id_unresolved", "name": "SQLCODE", "paragraph_ids": ["SYS-PORTFOLIO-001-FIL-0052-PAR-0008", "SYS-PORTFOLIO-001-FIL-0052-PAR-0010"], "message": "Field reference SQLCODE has no registered Field ID; field_reference_ids entry kept with target_id null"}
+],
+"id_resolution_summary": {"statements_unresolved": 0, "fields_unresolved": 1, "fields_ambiguous": 0, "paragraph_targets_unresolved": 0, "unresolved_field_names": ["SQLCODE"]}
 }

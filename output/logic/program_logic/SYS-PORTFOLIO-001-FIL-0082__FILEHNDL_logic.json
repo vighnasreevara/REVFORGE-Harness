@@ -1,27 +1,30 @@
 {
 "program_summary": {"program_id": "FILEHNDL", "file_id": "SYS-PORTFOLIO-001-FIL-0082", "logic_file": "program_logic/SYS-PORTFOLIO-001-FIL-0082__FILEHNDL_logic.json", "logic_status": "partial", "paragraphs_translated": 10, "execution_paths": 1, "branches": 7, "loops": 0, "dead_code_confirmed": 3, "goto_annotations": 0, "unresolvable_paths": 2, "unresolved_ids": 2},
-"meta": {"generated_at": "2026-10-26T16:54:24Z", "agent_version": "4_logic@1.0", "source_artifacts": ["output/parser/parser_artifact.json", "output/parser/raw_structure/SYS-PORTFOLIO-001-FIL-0082__FILEHNDL.json", "output/data/data_artifact.json", "output/data/data_layouts/SYS-PORTFOLIO-001-FIL-0082__FILEHNDL_WS.json"], "neo4j_access": "read-only"},
 "program_id": "FILEHNDL",
+"generated_at": "2026-10-27T21:26:23Z",
+"agent_version": "4_logic@1.0",
 "system_id": "SYS-PORTFOLIO-001",
 "file_id": "SYS-PORTFOLIO-001-FIL-0082",
 "path_id": "SYS-PORTFOLIO-001-PATH-0082",
 "relative_path": "src/templates/program/file-handling.cbl",
-"parse_run_id": "PRUN-20261023T023803Z-ACC2",
-"data_run_id": "DRUN-20261024T215053Z-ACC1",
+"parse_run_id": "PRUN-20261027T155247Z-2626",
+"data_run_id": "DRUN-20261027T162831Z-1330",
+"source_artifacts": {"raw_structure": "output/parser/raw_structure/SYS-PORTFOLIO-001-FIL-0082__FILEHNDL.json", "data_layout": "output/data/data_layouts/SYS-PORTFOLIO-001-FIL-0082__FILEHNDL_WS.json", "copybook_layouts": []},
+"unresolved_id_counts": {"statements": 0, "fields_unresolved": 0, "fields_ambiguous": 0, "paragraph_targets": 2},
 "upstream": {
+  "parse_status": "partial",
   "verification": {
     "verdict": "VALID_PARTIAL",
-    "verdict_reasons": ["V2, V3, V4 consistent", "Agent 2 parse_status 'partial': PERFORM targets 2110-PROCESS-VSAM-RECORD and 2310-PROCESS-INPUT-RECORD are not declared in the program (no control-flow relationship registered); traced as present, gaps reported, not filled"],
-    "v1": {"raw_structure": "present", "parse_status": "partial", "program_layout": "present", "copybook_layouts": [], "unresolved_copy_stubs": 0},
-    "v2_file_identities": {
-      "program_entries": {"require_completed": ["parser", "data"], "entries": ["raw_structure|SYS-PORTFOLIO-001-FIL-0082", "data_layout|SYS-PORTFOLIO-001-FIL-0082"], "result": "batched with ERRPROC, PORTUPDT and PORTVALD program entries: checked 8, ok 8, problems [], duplicates [], consistent true"},
-      "copybook_entries": {"require_completed": ["data"], "entries": [], "result": "no copybook layouts used (program has no COPY statements)"},
-      "consistent": true
+    "verdict_reason": "V2, V3 and V4 consistent; Agent 2 parse_status 'partial' (2 PERFORM targets not defined in the program)",
+    "V2_file_identities": {
+      "program_entries": {"checked": 2, "ok": 2, "problems": [], "duplicate_file_ids_in_json": [], "require_completed": ["parser", "data"], "consistent": true},
+      "copybook_entries": {"checked": 0, "ok": 0, "problems": [], "file_ids": [], "require_completed": ["data"], "consistent": true, "note": "program has no COPY statements"}
     },
-    "v3_structure_identities": {"sections_checked": 4, "paragraphs_checked": 10, "statements_checked": 35, "edges_checked": 12, "registered_edges": 12, "section_problems": [], "paragraph_problems": [], "statement_problems": [], "edge_problems": [], "invalid_registered_edges": [], "registered_not_in_json": {"missing_count": 0}, "duplicate_ids_in_json": [], "consistent": true, "note": "12 relationships sent (one per resolved CFG edge); the 2 unresolved PERFORM edges (STMT-000029, STMT-000032) have no target and no registered relationship. Section names sent for SEC-0001 CONFIGURATION and SEC-0002 INPUT-OUTPUT; null for the data-division sections"},
-    "v4_data_identities": [
-      {"file_id": "SYS-PORTFOLIO-001-FIL-0082", "layout": "program", "records_checked": 5, "fields_checked": 13, "expansions_checked": 0, "record_problems": [], "field_problems": [], "expansion_problems": [], "copybook_records_in_program": 0, "registered_not_in_json": {"missing_count": 0}, "duplicate_ids_in_json": [], "consistent": true}
-    ]
+    "V3_structure_identities": {"sections_checked": 4, "paragraphs_checked": 10, "statements_checked": 35, "edges_checked": 12, "registered_edges": 12, "section_problems": [], "paragraph_problems": [], "statement_problems": [], "edge_problems": [], "invalid_registered_edges": [], "registered_not_in_json": {"missing_count": 0}, "duplicate_ids_in_json": [], "consistent": true},
+    "V4_data_identities": {
+      "program_layout": {"file_id": "SYS-PORTFOLIO-001-FIL-0082", "records_checked": 5, "fields_checked": 13, "expansions_checked": 0, "record_problems": [], "field_problems": [], "expansion_problems": [], "copybook_records_in_program": 0, "registered_not_in_json": {"missing_count": 0}, "duplicate_ids_in_json": [], "consistent": true},
+      "copybook_layouts": []
+    }
   }
 },
 "execution_traces": [
@@ -29,173 +32,126 @@
     "entry_point": "0000-MAIN",
     "entry_point_id": "SYS-PORTFOLIO-001-FIL-0082-PAR-0001",
     "entry_type": "batch_main",
-    "entry_note": "PROCEDURE DIVISION without USING (line 89); the normal path ends with GOBACK (line 94). Steps follow each PERFORM into its target. Steps 4-12 are the conditional error routines inside 9000-CHECK-FILE-STATUS; 9100-VSAM-ERROR and 9200-SEQ-ERROR end the run with GOBACK. The recursive PERFORM of 3000-TERMINATE from the error routines is recorded once and not traced further (see trace_issues perform_cycle).",
+    "entry_note": "PROCEDURE DIVISION without USING; first paragraph. Ends with GOBACK (acts as STOP RUN when run as a main program). Template source under src/templates/",
     "steps": [
-      {"step": 1, "paragraph": "0000-MAIN", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0082-PAR-0001", "action": "PERFORM", "target": "1000-INITIALIZE", "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0082-PAR-0002", "target_section_id": null, "condition": null, "line": 91, "statement_id": "SYS-PORTFOLIO-001-FIL-0082-STMT-000001"},
-      {"step": 2, "paragraph": "1000-INITIALIZE", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0082-PAR-0002", "action": "PERFORM", "target": "9000-CHECK-FILE-STATUS", "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0082-PAR-0008", "target_section_id": null, "condition": null, "line": 106, "statement_id": "SYS-PORTFOLIO-001-FIL-0082-STMT-000009"},
-      {"step": 3, "paragraph": "9000-CHECK-FILE-STATUS", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0082-PAR-0008", "action": "IF", "target": null, "target_paragraph_id": null, "target_section_id": null,
-       "condition": {"text": "NOT VSAM-SUCCESS AND NOT VSAM-EOF", "fields": ["VSAM-SUCCESS", "VSAM-EOF"], "field_ids": [{"name": "VSAM-SUCCESS", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0082-FLD-000004", "target_kind": "condition", "candidate_ids": []}, {"name": "VSAM-EOF", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0082-FLD-000005", "target_kind": "condition", "candidate_ids": []}]},
-       "line": 163, "statement_id": "SYS-PORTFOLIO-001-FIL-0082-STMT-000017"},
-      {"step": 4, "paragraph": "9000-CHECK-FILE-STATUS", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0082-PAR-0008", "action": "PERFORM", "target": "9100-VSAM-ERROR", "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0082-PAR-0009", "target_section_id": null,
-       "condition": {"text": "THEN branch of IF NOT VSAM-SUCCESS AND NOT VSAM-EOF (line 163)", "fields": ["VSAM-SUCCESS", "VSAM-EOF"], "field_ids": [{"name": "VSAM-SUCCESS", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0082-FLD-000004", "target_kind": "condition", "candidate_ids": []}, {"name": "VSAM-EOF", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0082-FLD-000005", "target_kind": "condition", "candidate_ids": []}]},
-       "line": 164, "statement_id": "SYS-PORTFOLIO-001-FIL-0082-STMT-000033"},
-      {"step": 5, "paragraph": "9100-VSAM-ERROR", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0082-PAR-0009", "action": "PERFORM", "target": "3000-TERMINATE", "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0082-PAR-0007", "target_section_id": null, "condition": null, "line": 179, "statement_id": "SYS-PORTFOLIO-001-FIL-0082-STMT-000022"},
-      {"step": 6, "paragraph": "9100-VSAM-ERROR", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0082-PAR-0009", "action": "GOBACK", "target": null, "target_paragraph_id": null, "target_section_id": null, "condition": null, "line": 180, "statement_id": "SYS-PORTFOLIO-001-FIL-0082-STMT-000023"},
-      {"step": 7, "paragraph": "9000-CHECK-FILE-STATUS", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0082-PAR-0008", "action": "IF", "target": null, "target_paragraph_id": null, "target_section_id": null,
-       "condition": {"text": "NOT INPUT-SUCCESS AND NOT INPUT-EOF", "fields": ["INPUT-SUCCESS", "INPUT-EOF"], "field_ids": [{"name": "INPUT-SUCCESS", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0082-FLD-000009", "target_kind": "condition", "candidate_ids": []}, {"name": "INPUT-EOF", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0082-FLD-000010", "target_kind": "condition", "candidate_ids": []}]},
-       "line": 167, "statement_id": "SYS-PORTFOLIO-001-FIL-0082-STMT-000018"},
-      {"step": 8, "paragraph": "9000-CHECK-FILE-STATUS", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0082-PAR-0008", "action": "PERFORM", "target": "9200-SEQ-ERROR", "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0082-PAR-0010", "target_section_id": null,
-       "condition": {"text": "THEN branch of IF NOT INPUT-SUCCESS AND NOT INPUT-EOF (line 167)", "fields": ["INPUT-SUCCESS", "INPUT-EOF"], "field_ids": [{"name": "INPUT-SUCCESS", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0082-FLD-000009", "target_kind": "condition", "candidate_ids": []}, {"name": "INPUT-EOF", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0082-FLD-000010", "target_kind": "condition", "candidate_ids": []}]},
-       "line": 168, "statement_id": "SYS-PORTFOLIO-001-FIL-0082-STMT-000034"},
-      {"step": 9, "paragraph": "9200-SEQ-ERROR", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0082-PAR-0010", "action": "PERFORM", "target": "3000-TERMINATE", "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0082-PAR-0007", "target_section_id": null, "condition": null, "line": 187, "statement_id": "SYS-PORTFOLIO-001-FIL-0082-STMT-000026"},
-      {"step": 10, "paragraph": "9200-SEQ-ERROR", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0082-PAR-0010", "action": "GOBACK", "target": null, "target_paragraph_id": null, "target_section_id": null, "condition": null, "line": 188, "statement_id": "SYS-PORTFOLIO-001-FIL-0082-STMT-000027"},
-      {"step": 11, "paragraph": "9000-CHECK-FILE-STATUS", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0082-PAR-0008", "action": "IF", "target": null, "target_paragraph_id": null, "target_section_id": null,
-       "condition": {"text": "NOT OUTPUT-SUCCESS", "fields": ["OUTPUT-SUCCESS"], "field_ids": [{"name": "OUTPUT-SUCCESS", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0082-FLD-000012", "target_kind": "condition", "candidate_ids": []}]},
-       "line": 171, "statement_id": "SYS-PORTFOLIO-001-FIL-0082-STMT-000019"},
-      {"step": 12, "paragraph": "9000-CHECK-FILE-STATUS", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0082-PAR-0008", "action": "PERFORM", "target": "9200-SEQ-ERROR", "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0082-PAR-0010", "target_section_id": null,
-       "condition": {"text": "THEN branch of IF NOT OUTPUT-SUCCESS (line 171)", "fields": ["OUTPUT-SUCCESS"], "field_ids": [{"name": "OUTPUT-SUCCESS", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0082-FLD-000012", "target_kind": "condition", "candidate_ids": []}]},
-       "line": 172, "statement_id": "SYS-PORTFOLIO-001-FIL-0082-STMT-000035"},
-      {"step": 13, "paragraph": "0000-MAIN", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0082-PAR-0001", "action": "PERFORM", "target": "2000-PROCESS", "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0082-PAR-0003", "target_section_id": null, "condition": null, "line": 92, "statement_id": "SYS-PORTFOLIO-001-FIL-0082-STMT-000002"},
-      {"step": 14, "paragraph": "0000-MAIN", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0082-PAR-0001", "action": "PERFORM", "target": "3000-TERMINATE", "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0082-PAR-0007", "target_section_id": null, "condition": null, "line": 93, "statement_id": "SYS-PORTFOLIO-001-FIL-0082-STMT-000003"},
-      {"step": 15, "paragraph": "3000-TERMINATE", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0082-PAR-0007", "action": "PERFORM", "target": "9000-CHECK-FILE-STATUS", "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0082-PAR-0008", "target_section_id": null, "condition": null, "line": 156, "statement_id": "SYS-PORTFOLIO-001-FIL-0082-STMT-000016"},
-      {"step": 16, "paragraph": "0000-MAIN", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0082-PAR-0001", "action": "GOBACK", "target": null, "target_paragraph_id": null, "target_section_id": null, "condition": null, "line": 94, "statement_id": "SYS-PORTFOLIO-001-FIL-0082-STMT-000004"}
-    ]
+      {"step": 1, "call_depth": 0, "paragraph": "0000-MAIN", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0082-PAR-0001", "action": "PERFORM", "target": "1000-INITIALIZE", "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0082-PAR-0002", "target_section_id": null, "condition": null, "line": 91, "statement_id": "SYS-PORTFOLIO-001-FIL-0082-STMT-000001"},
+      {"step": 2, "call_depth": 1, "paragraph": "1000-INITIALIZE", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0082-PAR-0002", "action": "OPEN", "target": "VSAM-FILE (INPUT)", "target_paragraph_id": null, "target_section_id": null, "condition": null, "line": 102, "statement_id": "SYS-PORTFOLIO-001-FIL-0082-STMT-000006"},
+      {"step": 3, "call_depth": 1, "paragraph": "1000-INITIALIZE", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0082-PAR-0002", "action": "OPEN", "target": "INPUT-FILE (INPUT)", "target_paragraph_id": null, "target_section_id": null, "condition": null, "line": 103, "statement_id": "SYS-PORTFOLIO-001-FIL-0082-STMT-000007"},
+      {"step": 4, "call_depth": 1, "paragraph": "1000-INITIALIZE", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0082-PAR-0002", "action": "OPEN", "target": "OUTPUT-FILE (OUTPUT)", "target_paragraph_id": null, "target_section_id": null, "condition": null, "line": 104, "statement_id": "SYS-PORTFOLIO-001-FIL-0082-STMT-000008"},
+      {"step": 5, "call_depth": 1, "paragraph": "1000-INITIALIZE", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0082-PAR-0002", "action": "PERFORM", "target": "9000-CHECK-FILE-STATUS", "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0082-PAR-0008", "target_section_id": null, "condition": null, "line": 106, "statement_id": "SYS-PORTFOLIO-001-FIL-0082-STMT-000009"},
+      {"step": 6, "call_depth": 2, "paragraph": "9000-CHECK-FILE-STATUS", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0082-PAR-0008", "action": "PERFORM", "target": "9100-VSAM-ERROR", "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0082-PAR-0009", "target_section_id": null, "condition": {"text": "NOT VSAM-SUCCESS AND NOT VSAM-EOF", "fields": ["VSAM-SUCCESS", "VSAM-EOF"], "field_ids": [{"name": "VSAM-SUCCESS", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0082-FLD-000004", "target_kind": "condition", "candidate_ids": []}, {"name": "VSAM-EOF", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0082-FLD-000005", "target_kind": "condition", "candidate_ids": []}], "branch_statement_id": "SYS-PORTFOLIO-001-FIL-0082-STMT-000017"}, "line": 164, "statement_id": "SYS-PORTFOLIO-001-FIL-0082-STMT-000033"},
+      {"step": 7, "call_depth": 3, "paragraph": "9100-VSAM-ERROR", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0082-PAR-0009", "action": "PERFORM", "target": "3000-TERMINATE", "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0082-PAR-0007", "target_section_id": null, "condition": null, "line": 179, "statement_id": "SYS-PORTFOLIO-001-FIL-0082-STMT-000022"},
+      {"step": 8, "call_depth": 4, "paragraph": "3000-TERMINATE", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0082-PAR-0007", "action": "CLOSE", "target": "VSAM-FILE, INPUT-FILE, OUTPUT-FILE", "target_paragraph_id": null, "target_section_id": null, "condition": null, "line": 152, "statement_id": "SYS-PORTFOLIO-001-FIL-0082-STMT-000015"},
+      {"step": 9, "call_depth": 4, "paragraph": "3000-TERMINATE", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0082-PAR-0007", "action": "PERFORM", "target": "9000-CHECK-FILE-STATUS", "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0082-PAR-0008", "target_section_id": null, "condition": null, "line": 156, "statement_id": "SYS-PORTFOLIO-001-FIL-0082-STMT-000016", "recursive_perform": true, "cycle": ["9000-CHECK-FILE-STATUS", "9100-VSAM-ERROR", "3000-TERMINATE", "9000-CHECK-FILE-STATUS"], "note": "9000-CHECK-FILE-STATUS is still active (step 5); recursive PERFORM - tracing of this path stopped"},
+      {"step": 10, "call_depth": 3, "paragraph": "9100-VSAM-ERROR", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0082-PAR-0009", "action": "GOBACK", "target": null, "target_paragraph_id": null, "target_section_id": null, "condition": null, "line": 180, "statement_id": "SYS-PORTFOLIO-001-FIL-0082-STMT-000023", "note": "terminates the program with RETURN-CODE 8"},
+      {"step": 11, "call_depth": 2, "paragraph": "9000-CHECK-FILE-STATUS", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0082-PAR-0008", "action": "PERFORM", "target": "9200-SEQ-ERROR", "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0082-PAR-0010", "target_section_id": null, "condition": {"text": "NOT INPUT-SUCCESS AND NOT INPUT-EOF", "fields": ["INPUT-SUCCESS", "INPUT-EOF"], "field_ids": [{"name": "INPUT-SUCCESS", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0082-FLD-000009", "target_kind": "condition", "candidate_ids": []}, {"name": "INPUT-EOF", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0082-FLD-000010", "target_kind": "condition", "candidate_ids": []}], "branch_statement_id": "SYS-PORTFOLIO-001-FIL-0082-STMT-000018"}, "line": 168, "statement_id": "SYS-PORTFOLIO-001-FIL-0082-STMT-000034"},
+      {"step": 12, "call_depth": 3, "paragraph": "9200-SEQ-ERROR", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0082-PAR-0010", "action": "PERFORM", "target": "3000-TERMINATE", "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0082-PAR-0007", "target_section_id": null, "condition": null, "line": 187, "statement_id": "SYS-PORTFOLIO-001-FIL-0082-STMT-000026", "note": "3000-TERMINATE performs 9000-CHECK-FILE-STATUS (still active) - same recursive cycle via 9200-SEQ-ERROR; tracing of this path stopped"},
+      {"step": 13, "call_depth": 3, "paragraph": "9200-SEQ-ERROR", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0082-PAR-0010", "action": "GOBACK", "target": null, "target_paragraph_id": null, "target_section_id": null, "condition": null, "line": 188, "statement_id": "SYS-PORTFOLIO-001-FIL-0082-STMT-000027", "note": "terminates the program with RETURN-CODE 8"},
+      {"step": 14, "call_depth": 2, "paragraph": "9000-CHECK-FILE-STATUS", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0082-PAR-0008", "action": "PERFORM", "target": "9200-SEQ-ERROR", "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0082-PAR-0010", "target_section_id": null, "condition": {"text": "NOT OUTPUT-SUCCESS", "fields": ["OUTPUT-SUCCESS"], "field_ids": [{"name": "OUTPUT-SUCCESS", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0082-FLD-000012", "target_kind": "condition", "candidate_ids": []}], "branch_statement_id": "SYS-PORTFOLIO-001-FIL-0082-STMT-000019"}, "line": 172, "statement_id": "SYS-PORTFOLIO-001-FIL-0082-STMT-000035", "note": "9200-SEQ-ERROR path as in steps 12-13"},
+      {"step": 15, "call_depth": 0, "paragraph": "0000-MAIN", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0082-PAR-0001", "action": "PERFORM", "target": "2000-PROCESS", "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0082-PAR-0003", "target_section_id": null, "condition": null, "line": 92, "statement_id": "SYS-PORTFOLIO-001-FIL-0082-STMT-000002", "note": "2000-PROCESS has no statements (comment lines only); returns immediately"},
+      {"step": 16, "call_depth": 0, "paragraph": "0000-MAIN", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0082-PAR-0001", "action": "PERFORM", "target": "3000-TERMINATE", "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0082-PAR-0007", "target_section_id": null, "condition": null, "line": 93, "statement_id": "SYS-PORTFOLIO-001-FIL-0082-STMT-000003"},
+      {"step": 17, "call_depth": 1, "paragraph": "3000-TERMINATE", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0082-PAR-0007", "action": "CLOSE", "target": "VSAM-FILE, INPUT-FILE, OUTPUT-FILE", "target_paragraph_id": null, "target_section_id": null, "condition": null, "line": 152, "statement_id": "SYS-PORTFOLIO-001-FIL-0082-STMT-000015"},
+      {"step": 18, "call_depth": 1, "paragraph": "3000-TERMINATE", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0082-PAR-0007", "action": "PERFORM", "target": "9000-CHECK-FILE-STATUS", "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0082-PAR-0008", "target_section_id": null, "condition": null, "line": 156, "statement_id": "SYS-PORTFOLIO-001-FIL-0082-STMT-000016"},
+      {"step": 19, "call_depth": 2, "paragraph": "9000-CHECK-FILE-STATUS", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0082-PAR-0008", "action": "PERFORM", "target": "9100-VSAM-ERROR", "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0082-PAR-0009", "target_section_id": null, "condition": {"text": "NOT VSAM-SUCCESS AND NOT VSAM-EOF", "fields": ["VSAM-SUCCESS", "VSAM-EOF"], "field_ids": [{"name": "VSAM-SUCCESS", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0082-FLD-000004", "target_kind": "condition", "candidate_ids": []}, {"name": "VSAM-EOF", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0082-FLD-000005", "target_kind": "condition", "candidate_ids": []}], "branch_statement_id": "SYS-PORTFOLIO-001-FIL-0082-STMT-000017"}, "line": 164, "statement_id": "SYS-PORTFOLIO-001-FIL-0082-STMT-000033"},
+      {"step": 20, "call_depth": 3, "paragraph": "9100-VSAM-ERROR", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0082-PAR-0009", "action": "PERFORM", "target": "3000-TERMINATE", "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0082-PAR-0007", "target_section_id": null, "condition": null, "line": 179, "statement_id": "SYS-PORTFOLIO-001-FIL-0082-STMT-000022", "recursive_perform": true, "cycle": ["3000-TERMINATE", "9000-CHECK-FILE-STATUS", "9100-VSAM-ERROR", "3000-TERMINATE"], "note": "3000-TERMINATE is still active (step 16); recursive PERFORM - tracing of this path stopped"},
+      {"step": 21, "call_depth": 3, "paragraph": "9100-VSAM-ERROR", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0082-PAR-0009", "action": "GOBACK", "target": null, "target_paragraph_id": null, "target_section_id": null, "condition": null, "line": 180, "statement_id": "SYS-PORTFOLIO-001-FIL-0082-STMT-000023"},
+      {"step": 22, "call_depth": 2, "paragraph": "9000-CHECK-FILE-STATUS", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0082-PAR-0008", "action": "PERFORM", "target": "9200-SEQ-ERROR", "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0082-PAR-0010", "target_section_id": null, "condition": {"text": "NOT INPUT-SUCCESS AND NOT INPUT-EOF", "fields": ["INPUT-SUCCESS", "INPUT-EOF"], "field_ids": [{"name": "INPUT-SUCCESS", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0082-FLD-000009", "target_kind": "condition", "candidate_ids": []}, {"name": "INPUT-EOF", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0082-FLD-000010", "target_kind": "condition", "candidate_ids": []}], "branch_statement_id": "SYS-PORTFOLIO-001-FIL-0082-STMT-000018"}, "line": 168, "statement_id": "SYS-PORTFOLIO-001-FIL-0082-STMT-000034"},
+      {"step": 23, "call_depth": 3, "paragraph": "9200-SEQ-ERROR", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0082-PAR-0010", "action": "PERFORM", "target": "3000-TERMINATE", "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0082-PAR-0007", "target_section_id": null, "condition": null, "line": 187, "statement_id": "SYS-PORTFOLIO-001-FIL-0082-STMT-000026", "recursive_perform": true, "cycle": ["3000-TERMINATE", "9000-CHECK-FILE-STATUS", "9200-SEQ-ERROR", "3000-TERMINATE"], "note": "3000-TERMINATE is still active (step 16); recursive PERFORM - tracing of this path stopped"},
+      {"step": 24, "call_depth": 3, "paragraph": "9200-SEQ-ERROR", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0082-PAR-0010", "action": "GOBACK", "target": null, "target_paragraph_id": null, "target_section_id": null, "condition": null, "line": 188, "statement_id": "SYS-PORTFOLIO-001-FIL-0082-STMT-000027"},
+      {"step": 25, "call_depth": 2, "paragraph": "9000-CHECK-FILE-STATUS", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0082-PAR-0008", "action": "PERFORM", "target": "9200-SEQ-ERROR", "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0082-PAR-0010", "target_section_id": null, "condition": {"text": "NOT OUTPUT-SUCCESS", "fields": ["OUTPUT-SUCCESS"], "field_ids": [{"name": "OUTPUT-SUCCESS", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0082-FLD-000012", "target_kind": "condition", "candidate_ids": []}], "branch_statement_id": "SYS-PORTFOLIO-001-FIL-0082-STMT-000019"}, "line": 172, "statement_id": "SYS-PORTFOLIO-001-FIL-0082-STMT-000035", "note": "9200-SEQ-ERROR path as in steps 23-24"},
+      {"step": 26, "call_depth": 0, "paragraph": "0000-MAIN", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0082-PAR-0001", "action": "GOBACK", "target": null, "target_paragraph_id": null, "target_section_id": null, "condition": null, "line": 94, "statement_id": "SYS-PORTFOLIO-001-FIL-0082-STMT-000004"}
+    ],
+    "path_summary": "0000-MAIN -> 1000-INITIALIZE (OPEN 3 files -> 9000-CHECK-FILE-STATUS) -> 2000-PROCESS (empty) -> 3000-TERMINATE (CLOSE 3 files -> 9000-CHECK-FILE-STATUS) -> GOBACK. On a bad file status 9000 performs 9100-VSAM-ERROR or 9200-SEQ-ERROR, which set RETURN-CODE 8, PERFORM 3000-TERMINATE (a recursive PERFORM, because 9000 or 3000 is still active) and GOBACK. The example paragraphs 2100-READ-VSAM, 2200-WRITE-VSAM and 2300-READ-SEQUENTIAL are never performed."
   }
 ],
 "branch_map": [
   {
     "paragraph": "2100-READ-VSAM",
     "paragraph_id": "SYS-PORTFOLIO-001-FIL-0082-PAR-0004",
+    "in_dead_code": true,
     "branches": [
-      {"type": "INVALID_KEY", "operation": "READ", "file_name": "VSAM-FILE", "line": 116, "statement_id": "SYS-PORTFOLIO-001-FIL-0082-STMT-000011", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0082-PAR-0004",
-       "condition_text": "READ VSAM-FILE KEY IS VSAM-RECORD-KEY INVALID KEY ...", "condition_fields": ["VSAM-RECORD-KEY"],
-       "condition_field_ids": [{"name": "VSAM-RECORD-KEY", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0082-FLD-000001", "target_kind": "field", "candidate_ids": []}],
-       "invalid_key_line_range": [118, 118], "end_read_line": 119, "io_status_field": "WS-VSAM-STATUS",
-       "outcomes": [
-         {"label": "INVALID KEY", "line_range": [118, 118], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0082-STMT-000028"]},
-         {"label": "key found (implicit, no NOT INVALID KEY phrase)", "line_range": null, "statement_ids": []}
-       ]},
-      {"type": "IF", "line": 121, "statement_id": "SYS-PORTFOLIO-001-FIL-0082-STMT-000012", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0082-PAR-0004",
-       "condition_text": "VSAM-SUCCESS", "condition_fields": ["VSAM-SUCCESS"],
-       "condition_field_ids": [{"name": "VSAM-SUCCESS", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0082-FLD-000004", "target_kind": "condition", "candidate_ids": []}],
-       "has_else": false, "then_line_range": [122, 122], "else_line_range": null, "end_if_line": 123, "nested_depth": 1,
-       "outcomes": [
-         {"label": "THEN (PERFORM 2110-PROCESS-VSAM-RECORD: unresolved target)", "line_range": [122, 122], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0082-STMT-000029"]},
-         {"label": "ELSE (implicit, no statements)", "line_range": null, "statement_ids": []}
-       ]}
+      {"type": "INVALID_KEY", "operation": "READ", "file_name": "VSAM-FILE", "line": 116, "statement_id": "SYS-PORTFOLIO-001-FIL-0082-STMT-000011", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0082-PAR-0004", "condition_text": "INVALID KEY (READ VSAM-FILE KEY IS VSAM-RECORD-KEY)", "condition_fields": ["VSAM-FILE"], "condition_field_ids": [], "condition_fields_note": "VSAM-FILE is a file name (not a data item) and is not looked up", "invalid_key_line_range": [117, 118], "io_status_field": "WS-VSAM-STATUS", "io_status_field_id": "SYS-PORTFOLIO-001-FIL-0082-FLD-000003", "nested_depth": 1, "outcomes": [{"label": "INVALID KEY", "line_range": [117, 118], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0082-STMT-000028"], "effect": "PERFORM 9100-VSAM-ERROR"}]},
+      {"type": "IF", "line": 121, "statement_id": "SYS-PORTFOLIO-001-FIL-0082-STMT-000012", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0082-PAR-0004", "condition_text": "VSAM-SUCCESS", "condition_meaning": "WS-VSAM-STATUS = '00'", "condition_fields": ["VSAM-SUCCESS"], "condition_field_ids": [{"name": "VSAM-SUCCESS", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0082-FLD-000004", "target_kind": "condition", "candidate_ids": []}], "has_else": false, "then_line_range": [122, 122], "else_line_range": null, "end_if_line": 123, "nested_depth": 1, "outcomes": [{"label": "THEN", "line_range": [122, 122], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0082-STMT-000029"], "effect": "PERFORM 2110-PROCESS-VSAM-RECORD (target not defined in the program)"}]}
     ]
   },
   {
     "paragraph": "2200-WRITE-VSAM",
     "paragraph_id": "SYS-PORTFOLIO-001-FIL-0082-PAR-0005",
+    "in_dead_code": true,
     "branches": [
-      {"type": "INVALID_KEY", "operation": "WRITE", "file_name": "VSAM-FILE", "line": 130, "statement_id": "SYS-PORTFOLIO-001-FIL-0082-STMT-000013", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0082-PAR-0005",
-       "condition_text": "WRITE VSAM-RECORD INVALID KEY ...", "condition_fields": [], "condition_field_ids": [],
-       "invalid_key_line_range": [132, 132], "end_write_line": 133, "io_status_field": "WS-VSAM-STATUS",
-       "outcomes": [
-         {"label": "INVALID KEY", "line_range": [132, 132], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0082-STMT-000030"]},
-         {"label": "written (implicit, no NOT INVALID KEY phrase)", "line_range": null, "statement_ids": []}
-       ]}
+      {"type": "INVALID_KEY", "operation": "WRITE", "file_name": "VSAM-FILE", "line": 130, "statement_id": "SYS-PORTFOLIO-001-FIL-0082-STMT-000013", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0082-PAR-0005", "condition_text": "INVALID KEY (WRITE VSAM-RECORD)", "condition_fields": ["VSAM-FILE"], "condition_field_ids": [], "condition_fields_note": "VSAM-FILE is a file name (not a data item) and is not looked up", "invalid_key_line_range": [131, 132], "io_status_field": "WS-VSAM-STATUS", "io_status_field_id": "SYS-PORTFOLIO-001-FIL-0082-FLD-000003", "nested_depth": 1, "outcomes": [{"label": "INVALID KEY", "line_range": [131, 132], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0082-STMT-000030"], "effect": "PERFORM 9100-VSAM-ERROR"}]}
     ]
   },
   {
     "paragraph": "2300-READ-SEQUENTIAL",
     "paragraph_id": "SYS-PORTFOLIO-001-FIL-0082-PAR-0006",
+    "in_dead_code": true,
     "branches": [
-      {"type": "AT_END", "operation": "READ", "file_name": "INPUT-FILE", "line": 140, "statement_id": "SYS-PORTFOLIO-001-FIL-0082-STMT-000014", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0082-PAR-0006",
-       "condition_text": "READ INPUT-FILE AT END ... NOT AT END ...", "condition_fields": [], "condition_field_ids": [],
-       "at_end_line_range": [142, 142], "not_at_end_line_range": [144, 144], "end_read_line": 145, "io_status_field": "WS-INPUT-STATUS",
-       "outcomes": [
-         {"label": "AT END", "line_range": [142, 142], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0082-STMT-000031"]},
-         {"label": "NOT AT END (PERFORM 2310-PROCESS-INPUT-RECORD: unresolved target)", "line_range": [144, 144], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0082-STMT-000032"]}
-       ]}
+      {"type": "AT_END", "operation": "READ", "file_name": "INPUT-FILE", "line": 140, "statement_id": "SYS-PORTFOLIO-001-FIL-0082-STMT-000014", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0082-PAR-0006", "condition_text": "AT END / NOT AT END (READ INPUT-FILE)", "condition_fields": ["INPUT-FILE"], "condition_field_ids": [], "condition_fields_note": "INPUT-FILE is a file name (not a data item) and is not looked up", "at_end_line_range": [141, 142], "not_at_end_line_range": [143, 144], "io_status_field": "WS-INPUT-STATUS", "io_status_field_id": "SYS-PORTFOLIO-001-FIL-0082-FLD-000008", "nested_depth": 1, "outcomes": [{"label": "AT END", "line_range": [141, 142], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0082-STMT-000031"], "effect": "SET INPUT-EOF TO TRUE"}, {"label": "NOT AT END", "line_range": [143, 144], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0082-STMT-000032"], "effect": "PERFORM 2310-PROCESS-INPUT-RECORD (target not defined in the program)"}]}
     ]
   },
   {
     "paragraph": "9000-CHECK-FILE-STATUS",
     "paragraph_id": "SYS-PORTFOLIO-001-FIL-0082-PAR-0008",
     "branches": [
-      {"type": "IF", "line": 163, "statement_id": "SYS-PORTFOLIO-001-FIL-0082-STMT-000017", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0082-PAR-0008",
-       "condition_text": "NOT VSAM-SUCCESS AND NOT VSAM-EOF", "condition_fields": ["VSAM-SUCCESS", "VSAM-EOF"],
-       "condition_field_ids": [
-         {"name": "VSAM-SUCCESS", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0082-FLD-000004", "target_kind": "condition", "candidate_ids": []},
-         {"name": "VSAM-EOF", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0082-FLD-000005", "target_kind": "condition", "candidate_ids": []}
-       ],
-       "has_else": false, "then_line_range": [164, 164], "else_line_range": null, "end_if_line": 165, "nested_depth": 1,
-       "outcomes": [
-         {"label": "THEN (VSAM status not '00'/'10')", "line_range": [164, 164], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0082-STMT-000033"]},
-         {"label": "ELSE (implicit, no statements)", "line_range": null, "statement_ids": []}
-       ]},
-      {"type": "IF", "line": 167, "statement_id": "SYS-PORTFOLIO-001-FIL-0082-STMT-000018", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0082-PAR-0008",
-       "condition_text": "NOT INPUT-SUCCESS AND NOT INPUT-EOF", "condition_fields": ["INPUT-SUCCESS", "INPUT-EOF"],
-       "condition_field_ids": [
-         {"name": "INPUT-SUCCESS", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0082-FLD-000009", "target_kind": "condition", "candidate_ids": []},
-         {"name": "INPUT-EOF", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0082-FLD-000010", "target_kind": "condition", "candidate_ids": []}
-       ],
-       "has_else": false, "then_line_range": [168, 168], "else_line_range": null, "end_if_line": 169, "nested_depth": 1,
-       "outcomes": [
-         {"label": "THEN (input status not '00'/'10')", "line_range": [168, 168], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0082-STMT-000034"]},
-         {"label": "ELSE (implicit, no statements)", "line_range": null, "statement_ids": []}
-       ]},
-      {"type": "IF", "line": 171, "statement_id": "SYS-PORTFOLIO-001-FIL-0082-STMT-000019", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0082-PAR-0008",
-       "condition_text": "NOT OUTPUT-SUCCESS", "condition_fields": ["OUTPUT-SUCCESS"],
-       "condition_field_ids": [
-         {"name": "OUTPUT-SUCCESS", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0082-FLD-000012", "target_kind": "condition", "candidate_ids": []}
-       ],
-       "has_else": false, "then_line_range": [172, 172], "else_line_range": null, "end_if_line": 173, "nested_depth": 1,
-       "outcomes": [
-         {"label": "THEN (output status not '00')", "line_range": [172, 172], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0082-STMT-000035"]},
-         {"label": "ELSE (implicit, no statements)", "line_range": null, "statement_ids": []}
-       ]}
+      {"type": "IF", "line": 163, "statement_id": "SYS-PORTFOLIO-001-FIL-0082-STMT-000017", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0082-PAR-0008", "condition_text": "NOT VSAM-SUCCESS AND NOT VSAM-EOF", "condition_meaning": "WS-VSAM-STATUS is neither '00' nor '10'", "condition_fields": ["VSAM-SUCCESS", "VSAM-EOF"], "condition_field_ids": [{"name": "VSAM-SUCCESS", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0082-FLD-000004", "target_kind": "condition", "candidate_ids": []}, {"name": "VSAM-EOF", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0082-FLD-000005", "target_kind": "condition", "candidate_ids": []}], "has_else": false, "then_line_range": [164, 164], "else_line_range": null, "end_if_line": 165, "nested_depth": 1, "outcomes": [{"label": "THEN", "line_range": [164, 164], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0082-STMT-000033"], "effect": "PERFORM 9100-VSAM-ERROR (does not return: ends with GOBACK)"}]},
+      {"type": "IF", "line": 167, "statement_id": "SYS-PORTFOLIO-001-FIL-0082-STMT-000018", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0082-PAR-0008", "condition_text": "NOT INPUT-SUCCESS AND NOT INPUT-EOF", "condition_meaning": "WS-INPUT-STATUS is neither '00' nor '10'", "condition_fields": ["INPUT-SUCCESS", "INPUT-EOF"], "condition_field_ids": [{"name": "INPUT-SUCCESS", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0082-FLD-000009", "target_kind": "condition", "candidate_ids": []}, {"name": "INPUT-EOF", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0082-FLD-000010", "target_kind": "condition", "candidate_ids": []}], "has_else": false, "then_line_range": [168, 168], "else_line_range": null, "end_if_line": 169, "nested_depth": 1, "outcomes": [{"label": "THEN", "line_range": [168, 168], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0082-STMT-000034"], "effect": "PERFORM 9200-SEQ-ERROR (does not return: ends with GOBACK)"}]},
+      {"type": "IF", "line": 171, "statement_id": "SYS-PORTFOLIO-001-FIL-0082-STMT-000019", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0082-PAR-0008", "condition_text": "NOT OUTPUT-SUCCESS", "condition_meaning": "WS-OUTPUT-STATUS is not '00'", "condition_fields": ["OUTPUT-SUCCESS"], "condition_field_ids": [{"name": "OUTPUT-SUCCESS", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0082-FLD-000012", "target_kind": "condition", "candidate_ids": []}], "has_else": false, "then_line_range": [172, 172], "else_line_range": null, "end_if_line": 173, "nested_depth": 1, "outcomes": [{"label": "THEN", "line_range": [172, 172], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0082-STMT-000035"], "effect": "PERFORM 9200-SEQ-ERROR (does not return: ends with GOBACK)"}]}
     ]
   }
 ],
 "loops": [],
 "dead_code_confirmed": [
-  {"paragraph": "2100-READ-VSAM", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0082-PAR-0004"},
-  {"paragraph": "2200-WRITE-VSAM", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0082-PAR-0005"},
-  {"paragraph": "2300-READ-SEQUENTIAL", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0082-PAR-0006"}
+  {"paragraph": "2100-READ-VSAM", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0082-PAR-0004", "evidence": "No PERFORM, GO TO or THRU reference to 2100-READ-VSAM in the source; not reached by fall-through (0000-MAIN ends with GOBACK and PERFORM 2000-PROCESS covers only lines 109-112)"},
+  {"paragraph": "2200-WRITE-VSAM", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0082-PAR-0005", "evidence": "No PERFORM, GO TO or THRU reference to 2200-WRITE-VSAM in the source"},
+  {"paragraph": "2300-READ-SEQUENTIAL", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0082-PAR-0006", "evidence": "No PERFORM, GO TO or THRU reference to 2300-READ-SEQUENTIAL in the source"}
 ],
 "unresolvable_paths": [
-  {"paragraph": "2100-READ-VSAM", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0082-PAR-0004", "statement_id": "SYS-PORTFOLIO-001-FIL-0082-STMT-000029", "target": "2110-PROCESS-VSAM-RECORD", "line": 122, "action": "PERFORM", "reason": "PERFORM target not declared in the program (Agent 2 cfg_issues unresolved_target); inside confirmed dead code"},
-  {"paragraph": "2300-READ-SEQUENTIAL", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0082-PAR-0006", "statement_id": "SYS-PORTFOLIO-001-FIL-0082-STMT-000032", "target": "2310-PROCESS-INPUT-RECORD", "line": 144, "action": "PERFORM", "reason": "PERFORM target not declared in the program (Agent 2 cfg_issues unresolved_target); inside confirmed dead code"}
+  {"statement_id": "SYS-PORTFOLIO-001-FIL-0082-STMT-000029", "paragraph": "2100-READ-VSAM", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0082-PAR-0004", "target": "2110-PROCESS-VSAM-RECORD", "target_paragraph_id": null, "line": 122, "reason": "PERFORM target not defined in the program (Agent 2 CFG edge resolved=false); the calling paragraph is confirmed dead code"},
+  {"statement_id": "SYS-PORTFOLIO-001-FIL-0082-STMT-000032", "paragraph": "2300-READ-SEQUENTIAL", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0082-PAR-0006", "target": "2310-PROCESS-INPUT-RECORD", "target_paragraph_id": null, "line": 144, "reason": "PERFORM target not defined in the program (Agent 2 CFG edge resolved=false); the calling paragraph is confirmed dead code"}
 ],
 "trace_issues": [
-  {"severity": "info", "type": "upstream_issue", "upstream_agent": "2_parser", "upstream_type": "misplaced_comment_indicator", "lines": [1], "message": "Line 1 has '*' in column 8 (column 7 blank); treated as a comment."},
-  {"severity": "info", "type": "upstream_issue", "upstream_agent": "2_parser", "upstream_type": "empty_paragraph", "paragraphs": ["2000-PROCESS"], "message": "Paragraph 2000-PROCESS (lines 109-112) contains only comment lines."},
-  {"severity": "info", "type": "upstream_issue", "upstream_agent": "2_parser", "upstream_type": "unresolved_perform_targets", "targets": ["2110-PROCESS-VSAM-RECORD", "2310-PROCESS-INPUT-RECORD"], "message": "2 PERFORM targets are not declared in this program; parse_status partial."},
-  {"severity": "info", "type": "upstream_issue", "upstream_agent": "2_parser", "upstream_type": "template_source", "message": "Source is under src/templates (template program)."},
-  {"severity": "info", "type": "upstream_issue", "upstream_agent": "2_parser", "upstream_type": "perform_cycle", "paragraphs": ["3000-TERMINATE", "9000-CHECK-FILE-STATUS", "9100-VSAM-ERROR", "9200-SEQ-ERROR"], "message": "Structural PERFORM cycle recorded by Agent 2 for Logic Agent review."},
-  {"severity": "info", "type": "upstream_issue", "upstream_agent": "3_data", "upstream_type": "misplaced_comment_indicator", "line": 1, "message": "Line 1 skipped as a comment by the Data Agent."},
-  {"severity": "warning", "type": "unresolvable_perform_target", "line": 122, "statement_id": "SYS-PORTFOLIO-001-FIL-0082-STMT-000029", "target": "2110-PROCESS-VSAM-RECORD", "message": "PERFORM target not in CFG; recorded as unresolvable step, target_paragraph_id null."},
-  {"severity": "warning", "type": "unresolvable_perform_target", "line": 144, "statement_id": "SYS-PORTFOLIO-001-FIL-0082-STMT-000032", "target": "2310-PROCESS-INPUT-RECORD", "message": "PERFORM target not in CFG; recorded as unresolvable step, target_paragraph_id null."},
-  {"severity": "error", "type": "perform_cycle", "statement_ids": ["SYS-PORTFOLIO-001-FIL-0082-STMT-000016", "SYS-PORTFOLIO-001-FIL-0082-STMT-000033", "SYS-PORTFOLIO-001-FIL-0082-STMT-000034", "SYS-PORTFOLIO-001-FIL-0082-STMT-000035", "SYS-PORTFOLIO-001-FIL-0082-STMT-000022", "SYS-PORTFOLIO-001-FIL-0082-STMT-000026"], "cycle": ["3000-TERMINATE", "9000-CHECK-FILE-STATUS", "9100-VSAM-ERROR | 9200-SEQ-ERROR", "3000-TERMINATE"], "message": "Circular PERFORM chain: 3000-TERMINATE (line 156) performs 9000-CHECK-FILE-STATUS, whose error branches perform 9100-VSAM-ERROR / 9200-SEQ-ERROR, which perform 3000-TERMINATE again (lines 179, 187) while it is still active. A recursive PERFORM has undefined behaviour in COBOL; if a CLOSE fails, the second CLOSE of already-closed files fails again and the chain can repeat. Tracing of this path stopped at the recursive PERFORM."},
-  {"severity": "info", "type": "dead_code_confirmed", "paragraphs": ["2100-READ-VSAM", "2200-WRITE-VSAM", "2300-READ-SEQUENTIAL"], "message": "Searched the source for PERFORM / GO TO / THRU references to each name: none. PERFORM 2000-PROCESS covers only lines 109-112 and does not fall through into 2100-READ-VSAM; 0000-MAIN ends with GOBACK. Dead code confirmed (template examples)."},
-  {"severity": "info", "type": "status_check_after_close", "line": 156, "statement_id": "SYS-PORTFOLIO-001-FIL-0082-STMT-000016", "message": "9000-CHECK-FILE-STATUS is reused after CLOSE; the 88-levels VSAM-EOF / INPUT-EOF are also accepted there."}
+  {"severity": "error", "type": "circular_perform", "cycle": ["3000-TERMINATE", "9000-CHECK-FILE-STATUS", "9100-VSAM-ERROR", "3000-TERMINATE"], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0082-STMT-000016", "SYS-PORTFOLIO-001-FIL-0082-STMT-000033", "SYS-PORTFOLIO-001-FIL-0082-STMT-000022"], "message": "Recursive PERFORM: 9100-VSAM-ERROR performs 3000-TERMINATE, which performs 9000-CHECK-FILE-STATUS, which can perform 9100-VSAM-ERROR again. Recursive PERFORM of an active paragraph is undefined in standard COBOL; if a CLOSE fails the files are already closed on re-entry and the cycle may not terminate. Tracing stopped at the recursive call"},
+  {"severity": "error", "type": "circular_perform", "cycle": ["3000-TERMINATE", "9000-CHECK-FILE-STATUS", "9200-SEQ-ERROR", "3000-TERMINATE"], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0082-STMT-000016", "SYS-PORTFOLIO-001-FIL-0082-STMT-000034", "SYS-PORTFOLIO-001-FIL-0082-STMT-000035", "SYS-PORTFOLIO-001-FIL-0082-STMT-000026"], "message": "Same recursive PERFORM cycle through 9200-SEQ-ERROR (performed from lines 168 and 172). Tracing stopped at the recursive call"},
+  {"severity": "warning", "type": "unresolvable_perform", "statement_id": "SYS-PORTFOLIO-001-FIL-0082-STMT-000029", "line": 122, "target": "2110-PROCESS-VSAM-RECORD", "message": "PERFORM target not in CFG; recorded as unresolvable step"},
+  {"severity": "warning", "type": "unresolvable_perform", "statement_id": "SYS-PORTFOLIO-001-FIL-0082-STMT-000032", "line": 144, "target": "2310-PROCESS-INPUT-RECORD", "message": "PERFORM target not in CFG; recorded as unresolvable step"},
+  {"severity": "info", "type": "upstream_issue", "upstream_agent": "2_parser", "upstream_type": "unresolved_target", "message": "PERFORM targets 2110-PROCESS-VSAM-RECORD (line 122) and 2310-PROCESS-INPUT-RECORD (line 144) not found in the program; no relationship registered"},
+  {"severity": "info", "type": "upstream_issue", "upstream_agent": "2_parser", "upstream_type": "empty_paragraph", "message": "Paragraph 2000-PROCESS (lines 109-112) contains only comment lines and no statements; it is the target of PERFORM 2000-PROCESS (line 92)"},
+  {"severity": "info", "type": "upstream_issue", "upstream_agent": "2_parser", "upstream_type": "perform_cycle", "message": "PERFORM cycle in the paragraph graph: 3000-TERMINATE -> 9000-CHECK-FILE-STATUS -> 9100-VSAM-ERROR / 9200-SEQ-ERROR -> 3000-TERMINATE"},
+  {"severity": "info", "type": "upstream_issue", "upstream_agent": "2_parser", "upstream_type": "misplaced_comment_indicator", "lines": [1], "message": "Comment indicator '*' in column 8 (not column 7) treated as a comment"},
+  {"severity": "info", "type": "upstream_issue", "upstream_agent": "2_parser", "upstream_type": "template_source", "message": "File is under src/templates/ and declares PROGRAM-ID FILEHNDL; structure recorded as found"},
+  {"severity": "info", "type": "upstream_issue", "upstream_agent": "1_inventory", "upstream_type": "no_outgoing_references", "message": "Agent 1: No outgoing references found (no COPY, no CALL)"},
+  {"severity": "info", "type": "upstream_issue", "upstream_agent": "3_data", "upstream_type": "upstream_partial", "message": "Agent 2 parse_status 'partial' (PROCEDURE DIVISION targets unresolved); DATA DIVISION processed normally"},
+  {"severity": "info", "type": "no_goto_or_alter", "message": "No GO TO, ALTER or PERFORM THRU in this program"}
 ],
-"program_narrative": "Program FILEHNDL is a batch template program (source under src/templates) that shows VSAM and sequential file handling. On the reachable path it opens the indexed VSAM-FILE and the sequential INPUT-FILE for input and OUTPUT-FILE for output, checks the three file statuses, performs 2000-PROCESS (which contains no statements), closes the three files, checks the statuses again and returns with GOBACK. It therefore reads and writes no records. The example paragraphs 2100-READ-VSAM (keyed READ with INVALID KEY), 2200-WRITE-VSAM (WRITE with INVALID KEY) and 2300-READ-SEQUENTIAL (READ with AT END) are never performed (confirmed dead code) and call two paragraphs that do not exist (2110-PROCESS-VSAM-RECORD, 2310-PROCESS-INPUT-RECORD). Error conditions handled: any unexpected file status displays the status, sets RETURN-CODE to 8, performs 3000-TERMINATE and ends the run with GOBACK; this creates a recursive PERFORM cycle through 3000-TERMINATE that is flagged for SME review.",
+"field_id_lookup": [
+  {"name": "VSAM-SUCCESS", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0082-FLD-000004", "target_kind": "condition", "qualified_name": "WS-FILE-STATUS.WS-VSAM-STATUS.VSAM-SUCCESS", "defined_in": "SYS-PORTFOLIO-001-FIL-0082", "candidate_ids": []},
+  {"name": "VSAM-EOF", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0082-FLD-000005", "target_kind": "condition", "qualified_name": "WS-FILE-STATUS.WS-VSAM-STATUS.VSAM-EOF", "defined_in": "SYS-PORTFOLIO-001-FIL-0082", "candidate_ids": []},
+  {"name": "INPUT-SUCCESS", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0082-FLD-000009", "target_kind": "condition", "qualified_name": "WS-FILE-STATUS.WS-INPUT-STATUS.INPUT-SUCCESS", "defined_in": "SYS-PORTFOLIO-001-FIL-0082", "candidate_ids": []},
+  {"name": "INPUT-EOF", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0082-FLD-000010", "target_kind": "condition", "qualified_name": "WS-FILE-STATUS.WS-INPUT-STATUS.INPUT-EOF", "defined_in": "SYS-PORTFOLIO-001-FIL-0082", "candidate_ids": []},
+  {"name": "OUTPUT-SUCCESS", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0082-FLD-000012", "target_kind": "condition", "qualified_name": "WS-FILE-STATUS.WS-OUTPUT-STATUS.OUTPUT-SUCCESS", "defined_in": "SYS-PORTFOLIO-001-FIL-0082", "candidate_ids": []},
+  {"name": "WS-VSAM-STATUS", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0082-FLD-000003", "target_kind": "field", "qualified_name": "WS-FILE-STATUS.WS-VSAM-STATUS", "defined_in": "SYS-PORTFOLIO-001-FIL-0082", "candidate_ids": []},
+  {"name": "WS-INPUT-STATUS", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0082-FLD-000008", "target_kind": "field", "qualified_name": "WS-FILE-STATUS.WS-INPUT-STATUS", "defined_in": "SYS-PORTFOLIO-001-FIL-0082", "candidate_ids": []},
+  {"name": "WS-OUTPUT-STATUS", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0082-FLD-000011", "target_kind": "field", "qualified_name": "WS-FILE-STATUS.WS-OUTPUT-STATUS", "defined_in": "SYS-PORTFOLIO-001-FIL-0082", "candidate_ids": []},
+  {"name": "WS-FILE-STATUS", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0082-REC-0004", "target_kind": "record", "qualified_name": "WS-FILE-STATUS", "defined_in": "SYS-PORTFOLIO-001-FIL-0082", "candidate_ids": []},
+  {"name": "VSAM-RECORD-KEY", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0082-FLD-000001", "target_kind": "field", "qualified_name": "VSAM-RECORD.VSAM-RECORD-KEY", "defined_in": "SYS-PORTFOLIO-001-FIL-0082", "candidate_ids": []},
+  {"name": "VSAM-RECORD", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0082-REC-0001", "target_kind": "record", "qualified_name": "VSAM-RECORD", "defined_in": "SYS-PORTFOLIO-001-FIL-0082", "candidate_ids": []},
+  {"name": "INPUT-RECORD", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0082-REC-0002", "target_kind": "record", "qualified_name": "INPUT-RECORD", "defined_in": "SYS-PORTFOLIO-001-FIL-0082", "candidate_ids": []},
+  {"name": "OUTPUT-RECORD", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0082-REC-0003", "target_kind": "record", "qualified_name": "OUTPUT-RECORD", "defined_in": "SYS-PORTFOLIO-001-FIL-0082", "candidate_ids": []}
+],
+"program_narrative": "FILEHNDL is a batch file-handling template program (source under src/templates/program) that shows the standard open, process, close and file-status checking pattern for one indexed VSAM file and two sequential files. It opens VSAM-FILE (indexed, dynamic access, key VSAM-RECORD-KEY) and INPUT-FILE for input and OUTPUT-FILE for output, checks all three file statuses, performs an empty processing paragraph (2000-PROCESS), closes the files, checks the statuses again and returns with GOBACK. A VSAM status other than '00'/'10', an input status other than '00'/'10', or an output status other than '00' sends control to an error paragraph that displays the status, sets RETURN-CODE 8, performs 3000-TERMINATE again (a recursive PERFORM) and ends the program with GOBACK. The example paragraphs for a keyed VSAM read, a VSAM write and a sequential read are never performed (confirmed dead code) and themselves perform two paragraphs that do not exist in the program.",
 "paragraphs": [
   {
-    "name": "0000-MAIN",
-    "paragraph_id": "SYS-PORTFOLIO-001-FIL-0082-PAR-0001",
-    "section": null,
-    "section_id": null,
-    "line_range": [90, 95],
+    "name": "0000-MAIN", "section": null, "paragraph_id": "SYS-PORTFOLIO-001-FIL-0082-PAR-0001", "section_id": null, "line_range": [90, 95],
     "pseudocode": [
-      "-- Template main control: open files, process, close files",
+      "-- Main control: open, process, close",
       "CALL 1000-initialize",
-      "CALL 2000-process  -- 2000-PROCESS has no executable statements",
+      "CALL 2000-process  -- empty paragraph, returns immediately",
       "CALL 3000-terminate",
-      "RETURN to caller  -- GOBACK"
+      "RETURN to caller (or terminate if main program)  -- GOBACK"
     ],
-    "pseudocode_statement_ids": [
-      [],
-      ["SYS-PORTFOLIO-001-FIL-0082-STMT-000001"],
-      ["SYS-PORTFOLIO-001-FIL-0082-STMT-000002"],
-      ["SYS-PORTFOLIO-001-FIL-0082-STMT-000003"],
-      ["SYS-PORTFOLIO-001-FIL-0082-STMT-000004"]
-    ],
-    "pseudocode_text": "-- Template main control: open files, process, close files\nCALL 1000-initialize\nCALL 2000-process  -- 2000-PROCESS has no executable statements\nCALL 3000-terminate\nRETURN to caller  -- GOBACK",
+    "pseudocode_statement_ids": [[], ["SYS-PORTFOLIO-001-FIL-0082-STMT-000001"], ["SYS-PORTFOLIO-001-FIL-0082-STMT-000002"], ["SYS-PORTFOLIO-001-FIL-0082-STMT-000003"], ["SYS-PORTFOLIO-001-FIL-0082-STMT-000004"]],
+    "pseudocode_text": "-- Main control: open, process, close\nCALL 1000-initialize\nCALL 2000-process  -- empty paragraph, returns immediately\nCALL 3000-terminate\nRETURN to caller (or terminate if main program)  -- GOBACK",
     "statement_ids": ["SYS-PORTFOLIO-001-FIL-0082-STMT-000001", "SYS-PORTFOLIO-001-FIL-0082-STMT-000002", "SYS-PORTFOLIO-001-FIL-0082-STMT-000003", "SYS-PORTFOLIO-001-FIL-0082-STMT-000004"],
     "untranslated_statement_ids": [],
     "field_references": [],
@@ -211,53 +167,34 @@
     "annotations": []
   },
   {
-    "name": "1000-INITIALIZE",
-    "paragraph_id": "SYS-PORTFOLIO-001-FIL-0082-PAR-0002",
-    "section": null,
-    "section_id": null,
-    "line_range": [96, 108],
+    "name": "1000-INITIALIZE", "section": null, "paragraph_id": "SYS-PORTFOLIO-001-FIL-0082-PAR-0002", "section_id": null, "line_range": [96, 108],
     "pseudocode": [
-      "-- Open files and initialize work areas (source comment, lines 97-99)",
-      "CLEAR file status fields (WS-FILE-STATUS)  -- INITIALIZE: the three status codes set to spaces",
-      "OPEN VSAM-FILE for READ-ONLY  -- indexed (KSDS), dynamic access by VSAM-RECORD-KEY",
+      "-- Open files and initialise work areas",
+      "CLEAR ws_file_status  -- INITIALIZE: all three status codes to spaces",
+      "OPEN VSAM-FILE for READ-ONLY  -- indexed file, dynamic access",
       "OPEN INPUT-FILE for READ-ONLY",
       "OPEN OUTPUT-FILE for WRITE (new)",
       "CALL 9000-check-file-status"
     ],
-    "pseudocode_statement_ids": [
-      [],
-      ["SYS-PORTFOLIO-001-FIL-0082-STMT-000005"],
-      ["SYS-PORTFOLIO-001-FIL-0082-STMT-000006"],
-      ["SYS-PORTFOLIO-001-FIL-0082-STMT-000007"],
-      ["SYS-PORTFOLIO-001-FIL-0082-STMT-000008"],
-      ["SYS-PORTFOLIO-001-FIL-0082-STMT-000009"]
-    ],
-    "pseudocode_text": "-- Open files and initialize work areas (source comment, lines 97-99)\nCLEAR file status fields (WS-FILE-STATUS)  -- INITIALIZE: the three status codes set to spaces\nOPEN VSAM-FILE for READ-ONLY  -- indexed (KSDS), dynamic access by VSAM-RECORD-KEY\nOPEN INPUT-FILE for READ-ONLY\nOPEN OUTPUT-FILE for WRITE (new)\nCALL 9000-check-file-status",
+    "pseudocode_statement_ids": [[], ["SYS-PORTFOLIO-001-FIL-0082-STMT-000005"], ["SYS-PORTFOLIO-001-FIL-0082-STMT-000006"], ["SYS-PORTFOLIO-001-FIL-0082-STMT-000007"], ["SYS-PORTFOLIO-001-FIL-0082-STMT-000008"], ["SYS-PORTFOLIO-001-FIL-0082-STMT-000009"]],
+    "pseudocode_text": "-- Open files and initialise work areas\nCLEAR ws_file_status  -- INITIALIZE: all three status codes to spaces\nOPEN VSAM-FILE for READ-ONLY  -- indexed file, dynamic access\nOPEN INPUT-FILE for READ-ONLY\nOPEN OUTPUT-FILE for WRITE (new)\nCALL 9000-check-file-status",
     "statement_ids": ["SYS-PORTFOLIO-001-FIL-0082-STMT-000005", "SYS-PORTFOLIO-001-FIL-0082-STMT-000006", "SYS-PORTFOLIO-001-FIL-0082-STMT-000007", "SYS-PORTFOLIO-001-FIL-0082-STMT-000008", "SYS-PORTFOLIO-001-FIL-0082-STMT-000009"],
     "untranslated_statement_ids": [],
     "field_references": ["WS-FILE-STATUS"],
-    "field_reference_ids": [
-      {"name": "WS-FILE-STATUS", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0082-REC-0004", "target_kind": "record", "candidate_ids": []}
-    ],
+    "field_reference_ids": [{"name": "WS-FILE-STATUS", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0082-REC-0004", "target_kind": "record", "candidate_ids": []}],
     "calls_made": ["9000-CHECK-FILE-STATUS"],
-    "calls_made_ids": [
-      {"name": "9000-CHECK-FILE-STATUS", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0082-PAR-0008", "section_id": null}
-    ],
+    "calls_made_ids": [{"name": "9000-CHECK-FILE-STATUS", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0082-PAR-0008", "section_id": null}],
     "complexity_score": 3,
     "has_unresolved_statements": false,
-    "annotations": []
+    "annotations": [{"line": 106, "statement_id": "SYS-PORTFOLIO-001-FIL-0082-STMT-000009", "note": "The three OPENs are checked together after the last OPEN; each status field (FILE STATUS clauses at lines 18-41) holds the result of its own file's OPEN"}]
   },
   {
-    "name": "2000-PROCESS",
-    "paragraph_id": "SYS-PORTFOLIO-001-FIL-0082-PAR-0003",
-    "section": null,
-    "section_id": null,
-    "line_range": [109, 112],
+    "name": "2000-PROCESS", "section": null, "paragraph_id": "SYS-PORTFOLIO-001-FIL-0082-PAR-0003", "section_id": null, "line_range": [109, 112],
     "pseudocode": [
-      "-- No executable statements: lines 110-112 are comments ('Example VSAM READ operation'). PERFORM 2000-PROCESS returns immediately; control does not fall into 2100-READ-VSAM"
+      "-- Empty paragraph: lines 110-112 are comments only ('Example VSAM READ operation'); performing it does nothing"
     ],
     "pseudocode_statement_ids": [[]],
-    "pseudocode_text": "-- No executable statements: lines 110-112 are comments ('Example VSAM READ operation'). PERFORM 2000-PROCESS returns immediately; control does not fall into 2100-READ-VSAM",
+    "pseudocode_text": "-- Empty paragraph: lines 110-112 are comments only ('Example VSAM READ operation'); performing it does nothing",
     "statement_ids": [],
     "untranslated_statement_ids": [],
     "field_references": [],
@@ -266,39 +203,23 @@
     "calls_made_ids": [],
     "complexity_score": 1,
     "has_unresolved_statements": false,
-    "annotations": [
-      {"line": 109, "note": "Placeholder processing paragraph of a template; the program performs no record processing."}
-    ]
+    "annotations": [{"line": 109, "note": "PERFORM 2000-PROCESS runs only this paragraph (up to the next paragraph header at line 113); the following example paragraph 2100-READ-VSAM is not executed"}]
   },
   {
-    "name": "2100-READ-VSAM",
-    "paragraph_id": "SYS-PORTFOLIO-001-FIL-0082-PAR-0004",
-    "section": null,
-    "section_id": null,
-    "line_range": [113, 128],
+    "name": "2100-READ-VSAM", "section": null, "paragraph_id": "SYS-PORTFOLIO-001-FIL-0082-PAR-0004", "section_id": null, "line_range": [113, 128],
     "pseudocode": [
-      "-- DEAD CODE: no PERFORM or GO TO reaches this paragraph (template example of a VSAM READ)",
-      "SET vsam_record_key (VSAM-RECORD-KEY) = MIN_VALUE  -- MOVE LOW-VALUES",
+      "-- DEAD CODE (never performed): example keyed VSAM read",
+      "SET vsam_record_key = MIN_VALUE  -- MOVE LOW-VALUES",
       "READ record from VSAM-FILE where key = vsam_record_key",
-      "IF record not found THEN  -- INVALID KEY",
+      "IF record not found (INVALID KEY) THEN",
       "  CALL 9100-vsam-error",
       "END IF",
-      "IF vsam_status = '00' THEN  -- VSAM-SUCCESS",
-      "  CALL 2110-process-vsam-record  !! UNRESOLVED: paragraph 2110-PROCESS-VSAM-RECORD is not defined in this program",
+      "IF VSAM status is '00' (VSAM-SUCCESS) THEN",
+      "  CALL 2110-process-vsam-record  !! UNRESOLVED: paragraph not defined in this program",
       "END IF"
     ],
-    "pseudocode_statement_ids": [
-      [],
-      ["SYS-PORTFOLIO-001-FIL-0082-STMT-000010"],
-      ["SYS-PORTFOLIO-001-FIL-0082-STMT-000011"],
-      ["SYS-PORTFOLIO-001-FIL-0082-STMT-000011"],
-      ["SYS-PORTFOLIO-001-FIL-0082-STMT-000028"],
-      ["SYS-PORTFOLIO-001-FIL-0082-STMT-000011"],
-      ["SYS-PORTFOLIO-001-FIL-0082-STMT-000012"],
-      ["SYS-PORTFOLIO-001-FIL-0082-STMT-000029"],
-      ["SYS-PORTFOLIO-001-FIL-0082-STMT-000012"]
-    ],
-    "pseudocode_text": "-- DEAD CODE: no PERFORM or GO TO reaches this paragraph (template example of a VSAM READ)\nSET vsam_record_key (VSAM-RECORD-KEY) = MIN_VALUE  -- MOVE LOW-VALUES\nREAD record from VSAM-FILE where key = vsam_record_key\nIF record not found THEN  -- INVALID KEY\n  CALL 9100-vsam-error\nEND IF\nIF vsam_status = '00' THEN  -- VSAM-SUCCESS\n  CALL 2110-process-vsam-record  !! UNRESOLVED: paragraph 2110-PROCESS-VSAM-RECORD is not defined in this program\nEND IF",
+    "pseudocode_statement_ids": [[], ["SYS-PORTFOLIO-001-FIL-0082-STMT-000010"], ["SYS-PORTFOLIO-001-FIL-0082-STMT-000011"], ["SYS-PORTFOLIO-001-FIL-0082-STMT-000011"], ["SYS-PORTFOLIO-001-FIL-0082-STMT-000028"], ["SYS-PORTFOLIO-001-FIL-0082-STMT-000011"], ["SYS-PORTFOLIO-001-FIL-0082-STMT-000012"], ["SYS-PORTFOLIO-001-FIL-0082-STMT-000029"], ["SYS-PORTFOLIO-001-FIL-0082-STMT-000012"]],
+    "pseudocode_text": "-- DEAD CODE (never performed): example keyed VSAM read\nSET vsam_record_key = MIN_VALUE  -- MOVE LOW-VALUES\nREAD record from VSAM-FILE where key = vsam_record_key\nIF record not found (INVALID KEY) THEN\n  CALL 9100-vsam-error\nEND IF\nIF VSAM status is '00' (VSAM-SUCCESS) THEN\n  CALL 2110-process-vsam-record  !! UNRESOLVED: paragraph not defined in this program\nEND IF",
     "statement_ids": ["SYS-PORTFOLIO-001-FIL-0082-STMT-000010", "SYS-PORTFOLIO-001-FIL-0082-STMT-000011", "SYS-PORTFOLIO-001-FIL-0082-STMT-000028", "SYS-PORTFOLIO-001-FIL-0082-STMT-000012", "SYS-PORTFOLIO-001-FIL-0082-STMT-000029"],
     "untranslated_statement_ids": [],
     "field_references": ["VSAM-RECORD-KEY", "VSAM-SUCCESS"],
@@ -314,150 +235,95 @@
     "complexity_score": 3,
     "has_unresolved_statements": true,
     "annotations": [
-      {"line": 113, "note": "Confirmed dead code: the paragraph name appears in no PERFORM, GO TO or THRU phrase."},
-      {"line": 122, "statement_id": "SYS-PORTFOLIO-001-FIL-0082-STMT-000029", "note": "Target 2110-PROCESS-VSAM-RECORD does not exist in the program (and not in any COPY, the program has none). Gap reported, not filled."}
+      {"line": 113, "note": "Confirmed dead code: no PERFORM, GO TO or THRU reaches this paragraph"},
+      {"line": 122, "statement_id": "SYS-PORTFOLIO-001-FIL-0082-STMT-000029", "note": "PERFORM 2110-PROCESS-VSAM-RECORD names a paragraph that is not defined in this source; the record-processing logic is absent (template placeholder)"}
     ]
   },
   {
-    "name": "2200-WRITE-VSAM",
-    "paragraph_id": "SYS-PORTFOLIO-001-FIL-0082-PAR-0005",
-    "section": null,
-    "section_id": null,
-    "line_range": [129, 138],
+    "name": "2200-WRITE-VSAM", "section": null, "paragraph_id": "SYS-PORTFOLIO-001-FIL-0082-PAR-0005", "section_id": null, "line_range": [129, 138],
     "pseudocode": [
-      "-- DEAD CODE: no PERFORM or GO TO reaches this paragraph (template example of a VSAM WRITE)",
-      "WRITE vsam_record (VSAM-RECORD) to VSAM-FILE",
-      "IF write error (duplicate or invalid key) THEN  -- INVALID KEY",
+      "-- DEAD CODE (never performed): example VSAM write",
+      "WRITE vsam_record to VSAM-FILE",
+      "IF write error (duplicate key or invalid key) THEN",
       "  CALL 9100-vsam-error",
       "END IF"
     ],
-    "pseudocode_statement_ids": [
-      [],
-      ["SYS-PORTFOLIO-001-FIL-0082-STMT-000013"],
-      ["SYS-PORTFOLIO-001-FIL-0082-STMT-000013"],
-      ["SYS-PORTFOLIO-001-FIL-0082-STMT-000030"],
-      ["SYS-PORTFOLIO-001-FIL-0082-STMT-000013"]
-    ],
-    "pseudocode_text": "-- DEAD CODE: no PERFORM or GO TO reaches this paragraph (template example of a VSAM WRITE)\nWRITE vsam_record (VSAM-RECORD) to VSAM-FILE\nIF write error (duplicate or invalid key) THEN  -- INVALID KEY\n  CALL 9100-vsam-error\nEND IF",
+    "pseudocode_statement_ids": [[], ["SYS-PORTFOLIO-001-FIL-0082-STMT-000013"], ["SYS-PORTFOLIO-001-FIL-0082-STMT-000013"], ["SYS-PORTFOLIO-001-FIL-0082-STMT-000030"], ["SYS-PORTFOLIO-001-FIL-0082-STMT-000013"]],
+    "pseudocode_text": "-- DEAD CODE (never performed): example VSAM write\nWRITE vsam_record to VSAM-FILE\nIF write error (duplicate key or invalid key) THEN\n  CALL 9100-vsam-error\nEND IF",
     "statement_ids": ["SYS-PORTFOLIO-001-FIL-0082-STMT-000013", "SYS-PORTFOLIO-001-FIL-0082-STMT-000030"],
     "untranslated_statement_ids": [],
     "field_references": ["VSAM-RECORD"],
-    "field_reference_ids": [
-      {"name": "VSAM-RECORD", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0082-REC-0001", "target_kind": "record", "candidate_ids": []}
-    ],
+    "field_reference_ids": [{"name": "VSAM-RECORD", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0082-REC-0001", "target_kind": "record", "candidate_ids": []}],
     "calls_made": ["9100-VSAM-ERROR"],
-    "calls_made_ids": [
-      {"name": "9100-VSAM-ERROR", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0082-PAR-0009", "section_id": null}
-    ],
+    "calls_made_ids": [{"name": "9100-VSAM-ERROR", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0082-PAR-0009", "section_id": null}],
     "complexity_score": 2,
     "has_unresolved_statements": false,
     "annotations": [
-      {"line": 129, "note": "Confirmed dead code. Note: 1000-INITIALIZE opens VSAM-FILE INPUT only, so a WRITE would fail even if the paragraph were performed."}
+      {"line": 129, "note": "Confirmed dead code: no PERFORM, GO TO or THRU reaches this paragraph"},
+      {"line": 130, "statement_id": "SYS-PORTFOLIO-001-FIL-0082-STMT-000013", "note": "VSAM-FILE is opened INPUT in 1000-INITIALIZE (line 102); a WRITE would be rejected by the file system if this paragraph were reached"}
     ]
   },
   {
-    "name": "2300-READ-SEQUENTIAL",
-    "paragraph_id": "SYS-PORTFOLIO-001-FIL-0082-PAR-0006",
-    "section": null,
-    "section_id": null,
-    "line_range": [139, 147],
+    "name": "2300-READ-SEQUENTIAL", "section": null, "paragraph_id": "SYS-PORTFOLIO-001-FIL-0082-PAR-0006", "section_id": null, "line_range": [139, 147],
     "pseudocode": [
-      "-- DEAD CODE: no PERFORM or GO TO reaches this paragraph (template example of a sequential READ)",
-      "READ next record from INPUT-FILE into input_record (INPUT-RECORD)",
+      "-- DEAD CODE (never performed): example sequential read",
+      "READ next record from INPUT-FILE",
       "IF end of file THEN",
-      "  SET input_eof = TRUE  -- INPUT-EOF: WS-INPUT-STATUS = '10'",
-      "ELSE  -- NOT AT END",
-      "  CALL 2310-process-input-record  !! UNRESOLVED: paragraph 2310-PROCESS-INPUT-RECORD is not defined in this program",
+      "  SET input status = '10'  -- SET INPUT-EOF TO TRUE",
+      "ELSE",
+      "  CALL 2310-process-input-record  !! UNRESOLVED: paragraph not defined in this program",
       "END IF"
     ],
-    "pseudocode_statement_ids": [
-      [],
-      ["SYS-PORTFOLIO-001-FIL-0082-STMT-000014"],
-      ["SYS-PORTFOLIO-001-FIL-0082-STMT-000014"],
-      ["SYS-PORTFOLIO-001-FIL-0082-STMT-000031"],
-      ["SYS-PORTFOLIO-001-FIL-0082-STMT-000014"],
-      ["SYS-PORTFOLIO-001-FIL-0082-STMT-000032"],
-      ["SYS-PORTFOLIO-001-FIL-0082-STMT-000014"]
-    ],
-    "pseudocode_text": "-- DEAD CODE: no PERFORM or GO TO reaches this paragraph (template example of a sequential READ)\nREAD next record from INPUT-FILE into input_record (INPUT-RECORD)\nIF end of file THEN\n  SET input_eof = TRUE  -- INPUT-EOF: WS-INPUT-STATUS = '10'\nELSE  -- NOT AT END\n  CALL 2310-process-input-record  !! UNRESOLVED: paragraph 2310-PROCESS-INPUT-RECORD is not defined in this program\nEND IF",
+    "pseudocode_statement_ids": [[], ["SYS-PORTFOLIO-001-FIL-0082-STMT-000014"], ["SYS-PORTFOLIO-001-FIL-0082-STMT-000014"], ["SYS-PORTFOLIO-001-FIL-0082-STMT-000031"], ["SYS-PORTFOLIO-001-FIL-0082-STMT-000014"], ["SYS-PORTFOLIO-001-FIL-0082-STMT-000032"], ["SYS-PORTFOLIO-001-FIL-0082-STMT-000014"]],
+    "pseudocode_text": "-- DEAD CODE (never performed): example sequential read\nREAD next record from INPUT-FILE\nIF end of file THEN\n  SET input status = '10'  -- SET INPUT-EOF TO TRUE\nELSE\n  CALL 2310-process-input-record  !! UNRESOLVED: paragraph not defined in this program\nEND IF",
     "statement_ids": ["SYS-PORTFOLIO-001-FIL-0082-STMT-000014", "SYS-PORTFOLIO-001-FIL-0082-STMT-000031", "SYS-PORTFOLIO-001-FIL-0082-STMT-000032"],
     "untranslated_statement_ids": [],
-    "field_references": ["INPUT-RECORD", "INPUT-EOF"],
-    "field_reference_ids": [
-      {"name": "INPUT-RECORD", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0082-REC-0002", "target_kind": "record", "candidate_ids": []},
-      {"name": "INPUT-EOF", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0082-FLD-000010", "target_kind": "condition", "candidate_ids": []}
-    ],
+    "field_references": ["INPUT-EOF"],
+    "field_reference_ids": [{"name": "INPUT-EOF", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0082-FLD-000010", "target_kind": "condition", "candidate_ids": []}],
     "calls_made": ["2310-PROCESS-INPUT-RECORD"],
-    "calls_made_ids": [
-      {"name": "2310-PROCESS-INPUT-RECORD", "paragraph_id": null, "section_id": null}
-    ],
+    "calls_made_ids": [{"name": "2310-PROCESS-INPUT-RECORD", "paragraph_id": null, "section_id": null}],
     "complexity_score": 2,
     "has_unresolved_statements": true,
     "annotations": [
-      {"line": 139, "note": "Confirmed dead code: the paragraph name appears in no PERFORM, GO TO or THRU phrase."},
-      {"line": 144, "statement_id": "SYS-PORTFOLIO-001-FIL-0082-STMT-000032", "note": "Target 2310-PROCESS-INPUT-RECORD does not exist in the program. Gap reported, not filled."}
+      {"line": 139, "note": "Confirmed dead code: no PERFORM, GO TO or THRU reaches this paragraph"},
+      {"line": 144, "statement_id": "SYS-PORTFOLIO-001-FIL-0082-STMT-000032", "note": "PERFORM 2310-PROCESS-INPUT-RECORD names a paragraph that is not defined in this source (template placeholder)"}
     ]
   },
   {
-    "name": "3000-TERMINATE",
-    "paragraph_id": "SYS-PORTFOLIO-001-FIL-0082-PAR-0007",
-    "section": null,
-    "section_id": null,
-    "line_range": [148, 161],
+    "name": "3000-TERMINATE", "section": null, "paragraph_id": "SYS-PORTFOLIO-001-FIL-0082-PAR-0007", "section_id": null, "line_range": [148, 161],
     "pseudocode": [
-      "-- Close files and perform cleanup (source comment, lines 149-151)",
+      "-- Close files and check the close status",
       "CLOSE VSAM-FILE, INPUT-FILE, OUTPUT-FILE",
-      "CALL 9000-check-file-status  !! REVIEW: recursive PERFORM cycle 3000-terminate -> 9000-check-file-status -> 9100-vsam-error / 9200-seq-error -> 3000-terminate"
+      "CALL 9000-check-file-status  !! REVIEW: recursive PERFORM when 3000-terminate is entered from 9100-vsam-error / 9200-seq-error"
     ],
-    "pseudocode_statement_ids": [
-      [],
-      ["SYS-PORTFOLIO-001-FIL-0082-STMT-000015"],
-      ["SYS-PORTFOLIO-001-FIL-0082-STMT-000016"]
-    ],
-    "pseudocode_text": "-- Close files and perform cleanup (source comment, lines 149-151)\nCLOSE VSAM-FILE, INPUT-FILE, OUTPUT-FILE\nCALL 9000-check-file-status  !! REVIEW: recursive PERFORM cycle 3000-terminate -> 9000-check-file-status -> 9100-vsam-error / 9200-seq-error -> 3000-terminate",
+    "pseudocode_statement_ids": [[], ["SYS-PORTFOLIO-001-FIL-0082-STMT-000015"], ["SYS-PORTFOLIO-001-FIL-0082-STMT-000016"]],
+    "pseudocode_text": "-- Close files and check the close status\nCLOSE VSAM-FILE, INPUT-FILE, OUTPUT-FILE\nCALL 9000-check-file-status  !! REVIEW: recursive PERFORM when 3000-terminate is entered from 9100-vsam-error / 9200-seq-error",
     "statement_ids": ["SYS-PORTFOLIO-001-FIL-0082-STMT-000015", "SYS-PORTFOLIO-001-FIL-0082-STMT-000016"],
     "untranslated_statement_ids": [],
     "field_references": [],
     "field_reference_ids": [],
     "calls_made": ["9000-CHECK-FILE-STATUS"],
-    "calls_made_ids": [
-      {"name": "9000-CHECK-FILE-STATUS", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0082-PAR-0008", "section_id": null}
-    ],
-    "complexity_score": 2,
+    "calls_made_ids": [{"name": "9000-CHECK-FILE-STATUS", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0082-PAR-0008", "section_id": null}],
+    "complexity_score": 1,
     "has_unresolved_statements": false,
-    "annotations": [
-      {"line": 156, "statement_id": "SYS-PORTFOLIO-001-FIL-0082-STMT-000016", "note": "See trace_issues perform_cycle (error): recursive PERFORM is undefined behaviour in COBOL."}
-    ]
+    "annotations": [{"line": 156, "statement_id": "SYS-PORTFOLIO-001-FIL-0082-STMT-000016", "note": "Part of the PERFORM cycle 3000-TERMINATE -> 9000-CHECK-FILE-STATUS -> 9100-VSAM-ERROR / 9200-SEQ-ERROR -> 3000-TERMINATE (see trace_issues)"}]
   },
   {
-    "name": "9000-CHECK-FILE-STATUS",
-    "paragraph_id": "SYS-PORTFOLIO-001-FIL-0082-PAR-0008",
-    "section": null,
-    "section_id": null,
-    "line_range": [162, 175],
+    "name": "9000-CHECK-FILE-STATUS", "section": null, "paragraph_id": "SYS-PORTFOLIO-001-FIL-0082-PAR-0008", "section_id": null, "line_range": [162, 175],
     "pseudocode": [
-      "IF vsam_status NOT IN ('00', '10') THEN  -- NOT VSAM-SUCCESS AND NOT VSAM-EOF",
-      "  CALL 9100-vsam-error",
+      "-- Check the status of all three files after an OPEN or CLOSE",
+      "IF VSAM status is neither '00' (success) nor '10' (end of file) THEN",
+      "  CALL 9100-vsam-error  -- does not return (ends with GOBACK)",
       "END IF",
-      "IF input_status NOT IN ('00', '10') THEN  -- NOT INPUT-SUCCESS AND NOT INPUT-EOF",
-      "  CALL 9200-seq-error",
+      "IF input status is neither '00' (success) nor '10' (end of file) THEN",
+      "  CALL 9200-seq-error  -- does not return (ends with GOBACK)",
       "END IF",
-      "IF output_status != '00' THEN  -- NOT OUTPUT-SUCCESS",
-      "  CALL 9200-seq-error",
+      "IF output status is not '00' (success) THEN",
+      "  CALL 9200-seq-error  -- does not return (ends with GOBACK)",
       "END IF"
     ],
-    "pseudocode_statement_ids": [
-      ["SYS-PORTFOLIO-001-FIL-0082-STMT-000017"],
-      ["SYS-PORTFOLIO-001-FIL-0082-STMT-000033"],
-      ["SYS-PORTFOLIO-001-FIL-0082-STMT-000017"],
-      ["SYS-PORTFOLIO-001-FIL-0082-STMT-000018"],
-      ["SYS-PORTFOLIO-001-FIL-0082-STMT-000034"],
-      ["SYS-PORTFOLIO-001-FIL-0082-STMT-000018"],
-      ["SYS-PORTFOLIO-001-FIL-0082-STMT-000019"],
-      ["SYS-PORTFOLIO-001-FIL-0082-STMT-000035"],
-      ["SYS-PORTFOLIO-001-FIL-0082-STMT-000019"]
-    ],
-    "pseudocode_text": "IF vsam_status NOT IN ('00', '10') THEN  -- NOT VSAM-SUCCESS AND NOT VSAM-EOF\n  CALL 9100-vsam-error\nEND IF\nIF input_status NOT IN ('00', '10') THEN  -- NOT INPUT-SUCCESS AND NOT INPUT-EOF\n  CALL 9200-seq-error\nEND IF\nIF output_status != '00' THEN  -- NOT OUTPUT-SUCCESS\n  CALL 9200-seq-error\nEND IF",
+    "pseudocode_statement_ids": [[], ["SYS-PORTFOLIO-001-FIL-0082-STMT-000017"], ["SYS-PORTFOLIO-001-FIL-0082-STMT-000033"], ["SYS-PORTFOLIO-001-FIL-0082-STMT-000017"], ["SYS-PORTFOLIO-001-FIL-0082-STMT-000018"], ["SYS-PORTFOLIO-001-FIL-0082-STMT-000034"], ["SYS-PORTFOLIO-001-FIL-0082-STMT-000018"], ["SYS-PORTFOLIO-001-FIL-0082-STMT-000019"], ["SYS-PORTFOLIO-001-FIL-0082-STMT-000035"], ["SYS-PORTFOLIO-001-FIL-0082-STMT-000019"]],
+    "pseudocode_text": "-- Check the status of all three files after an OPEN or CLOSE\nIF VSAM status is neither '00' (success) nor '10' (end of file) THEN\n  CALL 9100-vsam-error  -- does not return (ends with GOBACK)\nEND IF\nIF input status is neither '00' (success) nor '10' (end of file) THEN\n  CALL 9200-seq-error  -- does not return (ends with GOBACK)\nEND IF\nIF output status is not '00' (success) THEN\n  CALL 9200-seq-error  -- does not return (ends with GOBACK)\nEND IF",
     "statement_ids": ["SYS-PORTFOLIO-001-FIL-0082-STMT-000017", "SYS-PORTFOLIO-001-FIL-0082-STMT-000033", "SYS-PORTFOLIO-001-FIL-0082-STMT-000018", "SYS-PORTFOLIO-001-FIL-0082-STMT-000034", "SYS-PORTFOLIO-001-FIL-0082-STMT-000019", "SYS-PORTFOLIO-001-FIL-0082-STMT-000035"],
     "untranslated_statement_ids": [],
     "field_references": ["VSAM-SUCCESS", "VSAM-EOF", "INPUT-SUCCESS", "INPUT-EOF", "OUTPUT-SUCCESS"],
@@ -475,64 +341,40 @@
     ],
     "complexity_score": 3,
     "has_unresolved_statements": false,
-    "annotations": [
-      {"line": 171, "statement_id": "SYS-PORTFOLIO-001-FIL-0082-STMT-000019", "note": "9200-SEQ-ERROR is performed from two separate checks (input status, line 168; output status, line 172)."}
-    ]
+    "annotations": []
   },
   {
-    "name": "9100-VSAM-ERROR",
-    "paragraph_id": "SYS-PORTFOLIO-001-FIL-0082-PAR-0009",
-    "section": null,
-    "section_id": null,
-    "line_range": [176, 182],
+    "name": "9100-VSAM-ERROR", "section": null, "paragraph_id": "SYS-PORTFOLIO-001-FIL-0082-PAR-0009", "section_id": null, "line_range": [176, 182],
     "pseudocode": [
-      "DISPLAY 'VSAM ERROR - FILE STATUS: ' + vsam_status (WS-VSAM-STATUS)",
-      "SET program completion code (RETURN-CODE special register) = 8",
-      "CALL 3000-terminate  !! REVIEW: recursive PERFORM (3000-terminate may already be active)",
-      "RETURN to caller  -- GOBACK: ends the run from inside the error routine"
+      "-- VSAM error handler: report, close down and end the program",
+      "DISPLAY 'VSAM ERROR - FILE STATUS: ' + ws_vsam_status",
+      "SET RETURN-CODE = 8  -- job step return code (special register)",
+      "CALL 3000-terminate  !! REVIEW: recursive PERFORM (3000-terminate or 9000-check-file-status is still active)",
+      "RETURN to caller (or terminate if main program)  -- GOBACK"
     ],
-    "pseudocode_statement_ids": [
-      ["SYS-PORTFOLIO-001-FIL-0082-STMT-000020"],
-      ["SYS-PORTFOLIO-001-FIL-0082-STMT-000021"],
-      ["SYS-PORTFOLIO-001-FIL-0082-STMT-000022"],
-      ["SYS-PORTFOLIO-001-FIL-0082-STMT-000023"]
-    ],
-    "pseudocode_text": "DISPLAY 'VSAM ERROR - FILE STATUS: ' + vsam_status (WS-VSAM-STATUS)\nSET program completion code (RETURN-CODE special register) = 8\nCALL 3000-terminate  !! REVIEW: recursive PERFORM (3000-terminate may already be active)\nRETURN to caller  -- GOBACK: ends the run from inside the error routine",
+    "pseudocode_statement_ids": [[], ["SYS-PORTFOLIO-001-FIL-0082-STMT-000020"], ["SYS-PORTFOLIO-001-FIL-0082-STMT-000021"], ["SYS-PORTFOLIO-001-FIL-0082-STMT-000022"], ["SYS-PORTFOLIO-001-FIL-0082-STMT-000023"]],
+    "pseudocode_text": "-- VSAM error handler: report, close down and end the program\nDISPLAY 'VSAM ERROR - FILE STATUS: ' + ws_vsam_status\nSET RETURN-CODE = 8  -- job step return code (special register)\nCALL 3000-terminate  !! REVIEW: recursive PERFORM (3000-terminate or 9000-check-file-status is still active)\nRETURN to caller (or terminate if main program)  -- GOBACK",
     "statement_ids": ["SYS-PORTFOLIO-001-FIL-0082-STMT-000020", "SYS-PORTFOLIO-001-FIL-0082-STMT-000021", "SYS-PORTFOLIO-001-FIL-0082-STMT-000022", "SYS-PORTFOLIO-001-FIL-0082-STMT-000023"],
     "untranslated_statement_ids": [],
     "field_references": ["WS-VSAM-STATUS"],
-    "field_reference_ids": [
-      {"name": "WS-VSAM-STATUS", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0082-FLD-000003", "target_kind": "field", "candidate_ids": []}
-    ],
+    "field_reference_ids": [{"name": "WS-VSAM-STATUS", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0082-FLD-000003", "target_kind": "field", "candidate_ids": []}],
     "calls_made": ["3000-TERMINATE"],
-    "calls_made_ids": [
-      {"name": "3000-TERMINATE", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0082-PAR-0007", "section_id": null}
-    ],
+    "calls_made_ids": [{"name": "3000-TERMINATE", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0082-PAR-0007", "section_id": null}],
     "complexity_score": 1,
     "has_unresolved_statements": false,
-    "annotations": [
-      {"line": 178, "statement_id": "SYS-PORTFOLIO-001-FIL-0082-STMT-000021", "note": "RETURN-CODE is a compiler special register (not looked up as a data item)."}
-    ]
+    "annotations": [{"line": 178, "statement_id": "SYS-PORTFOLIO-001-FIL-0082-STMT-000021", "note": "RETURN-CODE is a special register, not a declared data item; it is not looked up"}]
   },
   {
-    "name": "9200-SEQ-ERROR",
-    "paragraph_id": "SYS-PORTFOLIO-001-FIL-0082-PAR-0010",
-    "section": null,
-    "section_id": null,
-    "line_range": [183, 189],
+    "name": "9200-SEQ-ERROR", "section": null, "paragraph_id": "SYS-PORTFOLIO-001-FIL-0082-PAR-0010", "section_id": null, "line_range": [183, 189],
     "pseudocode": [
-      "DISPLAY 'SEQUENTIAL FILE ERROR - STATUS: ' + input_status (WS-INPUT-STATUS) + ' ' + output_status (WS-OUTPUT-STATUS)",
-      "SET program completion code (RETURN-CODE special register) = 8",
-      "CALL 3000-terminate  !! REVIEW: recursive PERFORM (3000-terminate may already be active)",
-      "RETURN to caller  -- GOBACK: ends the run from inside the error routine"
+      "-- Sequential file error handler: report, close down and end the program",
+      "DISPLAY 'SEQUENTIAL FILE ERROR - STATUS: ' + ws_input_status + ' ' + ws_output_status",
+      "SET RETURN-CODE = 8  -- job step return code (special register)",
+      "CALL 3000-terminate  !! REVIEW: recursive PERFORM (3000-terminate or 9000-check-file-status is still active)",
+      "RETURN to caller (or terminate if main program)  -- GOBACK"
     ],
-    "pseudocode_statement_ids": [
-      ["SYS-PORTFOLIO-001-FIL-0082-STMT-000024"],
-      ["SYS-PORTFOLIO-001-FIL-0082-STMT-000025"],
-      ["SYS-PORTFOLIO-001-FIL-0082-STMT-000026"],
-      ["SYS-PORTFOLIO-001-FIL-0082-STMT-000027"]
-    ],
-    "pseudocode_text": "DISPLAY 'SEQUENTIAL FILE ERROR - STATUS: ' + input_status (WS-INPUT-STATUS) + ' ' + output_status (WS-OUTPUT-STATUS)\nSET program completion code (RETURN-CODE special register) = 8\nCALL 3000-terminate  !! REVIEW: recursive PERFORM (3000-terminate may already be active)\nRETURN to caller  -- GOBACK: ends the run from inside the error routine",
+    "pseudocode_statement_ids": [[], ["SYS-PORTFOLIO-001-FIL-0082-STMT-000024"], ["SYS-PORTFOLIO-001-FIL-0082-STMT-000025"], ["SYS-PORTFOLIO-001-FIL-0082-STMT-000026"], ["SYS-PORTFOLIO-001-FIL-0082-STMT-000027"]],
+    "pseudocode_text": "-- Sequential file error handler: report, close down and end the program\nDISPLAY 'SEQUENTIAL FILE ERROR - STATUS: ' + ws_input_status + ' ' + ws_output_status\nSET RETURN-CODE = 8  -- job step return code (special register)\nCALL 3000-terminate  !! REVIEW: recursive PERFORM (3000-terminate or 9000-check-file-status is still active)\nRETURN to caller (or terminate if main program)  -- GOBACK",
     "statement_ids": ["SYS-PORTFOLIO-001-FIL-0082-STMT-000024", "SYS-PORTFOLIO-001-FIL-0082-STMT-000025", "SYS-PORTFOLIO-001-FIL-0082-STMT-000026", "SYS-PORTFOLIO-001-FIL-0082-STMT-000027"],
     "untranslated_statement_ids": [],
     "field_references": ["WS-INPUT-STATUS", "WS-OUTPUT-STATUS"],
@@ -541,20 +383,18 @@
       {"name": "WS-OUTPUT-STATUS", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0082-FLD-000011", "target_kind": "field", "candidate_ids": []}
     ],
     "calls_made": ["3000-TERMINATE"],
-    "calls_made_ids": [
-      {"name": "3000-TERMINATE", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0082-PAR-0007", "section_id": null}
-    ],
+    "calls_made_ids": [{"name": "3000-TERMINATE", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0082-PAR-0007", "section_id": null}],
     "complexity_score": 1,
     "has_unresolved_statements": false,
     "annotations": []
   }
 ],
 "unresolved_statements": [
-  {"statement_id": "SYS-PORTFOLIO-001-FIL-0082-STMT-000029", "paragraph": "2100-READ-VSAM", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0082-PAR-0004", "line": 122, "source_text": "PERFORM 2110-PROCESS-VSAM-RECORD", "reason": "PERFORM target paragraph not declared in the program"},
-  {"statement_id": "SYS-PORTFOLIO-001-FIL-0082-STMT-000032", "paragraph": "2300-READ-SEQUENTIAL", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0082-PAR-0006", "line": 144, "source_text": "PERFORM 2310-PROCESS-INPUT-RECORD", "reason": "PERFORM target paragraph not declared in the program"}
+  {"statement_id": "SYS-PORTFOLIO-001-FIL-0082-STMT-000029", "paragraph": "2100-READ-VSAM", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0082-PAR-0004", "line": 122, "verbatim": "PERFORM 2110-PROCESS-VSAM-RECORD", "reason": "PERFORM target not defined in the program; translated with an !! UNRESOLVED marker"},
+  {"statement_id": "SYS-PORTFOLIO-001-FIL-0082-STMT-000032", "paragraph": "2300-READ-SEQUENTIAL", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0082-PAR-0006", "line": 144, "verbatim": "PERFORM 2310-PROCESS-INPUT-RECORD", "reason": "PERFORM target not defined in the program; translated with an !! UNRESOLVED marker"}
 ],
 "pseudocode_issues": [
-  {"severity": "info", "type": "id_unresolved", "kind": "paragraph", "name": "2110-PROCESS-VSAM-RECORD", "paragraph": "2100-READ-VSAM", "statement_id": "SYS-PORTFOLIO-001-FIL-0082-STMT-000029", "message": "calls_made target has no Agent 2 paragraph; paragraph_id null."},
-  {"severity": "info", "type": "id_unresolved", "kind": "paragraph", "name": "2310-PROCESS-INPUT-RECORD", "paragraph": "2300-READ-SEQUENTIAL", "statement_id": "SYS-PORTFOLIO-001-FIL-0082-STMT-000032", "message": "calls_made target has no Agent 2 paragraph; paragraph_id null."}
+  {"severity": "info", "type": "id_unresolved", "name": "2110-PROCESS-VSAM-RECORD", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0082-PAR-0004", "statement_id": "SYS-PORTFOLIO-001-FIL-0082-STMT-000029", "message": "calls_made target has no paragraph in this program; paragraph_id null"},
+  {"severity": "info", "type": "id_unresolved", "name": "2310-PROCESS-INPUT-RECORD", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0082-PAR-0006", "statement_id": "SYS-PORTFOLIO-001-FIL-0082-STMT-000032", "message": "calls_made target has no paragraph in this program; paragraph_id null"}
 ]
 }

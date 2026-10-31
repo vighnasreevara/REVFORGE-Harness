@@ -1,407 +1,330 @@
 {
 "program_summary": {"program_id": "RPTAUD00", "file_id": "SYS-PORTFOLIO-001-FIL-0048", "logic_file": "program_logic/SYS-PORTFOLIO-001-FIL-0048__RPTAUD00_logic.json", "logic_status": "partial", "paragraphs_translated": 10, "execution_paths": 1, "branches": 3, "loops": 0, "dead_code_confirmed": 0, "goto_annotations": 0, "unresolvable_paths": 7, "unresolved_ids": 8},
 "program_id": "RPTAUD00",
+"generated_at": "2026-10-27T21:22:38Z",
+"agent_version": "4_logic@1.0",
 "system_id": "SYS-PORTFOLIO-001",
 "file_id": "SYS-PORTFOLIO-001-FIL-0048",
 "path_id": "SYS-PORTFOLIO-001-PATH-0048",
 "relative_path": "src/programs/batch/RPTAUD00.cbl",
-"parse_run_id": "PRUN-20261023T023803Z-ACC2",
+"parse_run_id": "PRUN-20261027T155247Z-2626",
+"data_run_id": "DRUN-20261027T162831Z-1330",
+"source_artifacts": {"raw_structure": "output/parser/raw_structure/SYS-PORTFOLIO-001-FIL-0048__RPTAUD00.json", "data_layout": "output/data/data_layouts/SYS-PORTFOLIO-001-FIL-0048__RPTAUD00_WS.json", "copybook_layouts": ["output/data/data_layouts/SYS-PORTFOLIO-001-FIL-0005__AUDITLOG.json", "output/data/data_layouts/SYS-PORTFOLIO-001-FIL-0007__ERRHAND.json", "output/data/data_layouts/SYS-PORTFOLIO-001-FIL-0013__RTNCODE.json"]},
 "upstream": {
+  "parse_status": "partial",
   "verification": {
     "verdict": "VALID_PARTIAL",
-    "verdict_reasons": ["V2, V3 and V4 consistent", "Agent 2 parse_status 'partial': 7 PERFORM targets (2110-READ-AUDIT-RECORDS, 2120-SUMMARIZE-AUDIT, 2210-READ-ERROR-RECORDS, 2220-SUMMARIZE-ERRORS, 2310-WRITE-AUDIT-SUMMARY, 2320-WRITE-ERROR-SUMMARY, 2330-WRITE-CONTROL-SUMMARY) are not declared in the program; traced as unresolvable paths, not filled"],
-    "v1": {"raw_structure": "present", "parse_status": "partial", "program_layout": "present", "program_layout_data_run_id": "DRUN-20261024T215053Z-ACC1",
-           "copybook_layouts": [
-             {"copybook": "AUDITLOG", "copybook_file_id": "SYS-PORTFOLIO-001-FIL-0005", "layout": "present", "expanded_at_lines": [35]},
-             {"copybook": "ERRHAND", "copybook_file_id": "SYS-PORTFOLIO-001-FIL-0007", "layout": "present", "expanded_at_lines": [36]},
-             {"copybook": "RTNCODE", "copybook_file_id": "SYS-PORTFOLIO-001-FIL-0013", "layout": "present", "expanded_at_lines": [44]}],
-           "unresolved_copy_stubs": 0},
-    "v2_file_identities": {
-      "program_entries": {"require_completed": ["parser", "data"], "entries": ["raw_structure|SYS-PORTFOLIO-001-FIL-0048", "data_layout|SYS-PORTFOLIO-001-FIL-0048"], "result": "batched with the RTNCDE00, DB2CONN, DB2HNDL and ERRHANDL program entries: checked 10, ok 10, problems [], duplicates [], consistent true"},
-      "copybook_entries": {"require_completed": ["data"], "entries": ["data_layout|SYS-PORTFOLIO-001-FIL-0005", "data_layout|SYS-PORTFOLIO-001-FIL-0007", "data_layout|SYS-PORTFOLIO-001-FIL-0013"], "result": "batched with copybooks FIL-0015 and FIL-0017: checked 5, ok 5, problems [], duplicates [], consistent true"},
-      "consistent": true
+    "verdict_reason": "V2, V3 and V4 consistent; Agent 2 parse_status 'partial' (7 PERFORM statements name paragraphs that do not exist in the file). The gaps are reported as unresolvable paths and are not filled",
+    "V2_file_identities": {
+      "program_entries": {"checked": 2, "ok": 2, "problems": [], "duplicate_file_ids_in_json": [], "require_completed": ["parser", "data"], "consistent": true},
+      "copybook_entries": {"checked": 3, "ok": 3, "problems": [], "file_ids": ["SYS-PORTFOLIO-001-FIL-0005", "SYS-PORTFOLIO-001-FIL-0007", "SYS-PORTFOLIO-001-FIL-0013"], "require_completed": ["data"], "consistent": true}
     },
-    "v3_structure_identities": {"sections_checked": 3, "paragraphs_checked": 10, "statements_checked": 36, "edges_checked": 11, "registered_edges": 11, "section_problems": [], "paragraph_problems": [], "statement_problems": [], "edge_problems": [], "invalid_registered_edges": [], "registered_not_in_json": {"missing_count": 0}, "duplicate_ids_in_json": [], "consistent": true, "note": "section names sent: INPUT-OUTPUT for SEC-0001; null for FILE and WORKING-STORAGE. No edges sent for the 7 unresolved PERFORM targets (lines 127-137)."},
-    "v4_data_identities": [
-      {"file_id": "SYS-PORTFOLIO-001-FIL-0048", "layout": "program", "records_checked": 5, "fields_checked": 27, "expansions_checked": 3, "record_problems": [], "field_problems": [], "expansion_problems": [], "copybook_records_in_program": 0, "registered_not_in_json": {"missing_count": 0}, "duplicate_ids_in_json": [], "consistent": true, "note": "copy_expansions holder_id is null in the layout (COPY directly in FILE / WORKING-STORAGE); sent with holder_id = the layout's section_id (SEC-0002, SEC-0003)"},
-      {"file_id": "SYS-PORTFOLIO-001-FIL-0005", "layout": "copybook AUDITLOG", "records_checked": 1, "fields_checked": 29, "expansions_checked": 0, "record_problems": [], "field_problems": [], "expansion_problems": [], "copybook_records_in_program": 0, "registered_not_in_json": {"missing_count": 0}, "duplicate_ids_in_json": [], "consistent": true},
-      {"file_id": "SYS-PORTFOLIO-001-FIL-0007", "layout": "copybook ERRHAND", "records_checked": 5, "fields_checked": 25, "expansions_checked": 0, "record_problems": [], "field_problems": [], "expansion_problems": [], "copybook_records_in_program": 0, "registered_not_in_json": {"missing_count": 0}, "duplicate_ids_in_json": [], "consistent": true},
-      {"file_id": "SYS-PORTFOLIO-001-FIL-0013", "layout": "copybook RTNCODE", "records_checked": 1, "fields_checked": 28, "expansions_checked": 0, "record_problems": [], "field_problems": [], "expansion_problems": [], "copybook_records_in_program": 0, "registered_not_in_json": {"missing_count": 0}, "duplicate_ids_in_json": [], "consistent": true}
-    ]
+    "V3_structure_identities": {"sections_checked": 3, "paragraphs_checked": 10, "statements_checked": 36, "edges_checked": 11, "registered_edges": 11, "section_problems": [], "paragraph_problems": [], "statement_problems": [], "edge_problems": [], "invalid_registered_edges": [], "registered_not_in_json": {"missing_count": 0}, "duplicate_ids_in_json": [], "consistent": true, "note": "the 7 unresolved PERFORM edges have no registered relationship and are not sent (section-mapper rule: one entry per resolved target)"},
+    "V4_data_identities": {
+      "program_layout": {"file_id": "SYS-PORTFOLIO-001-FIL-0048", "records_checked": 5, "fields_checked": 27, "expansions_checked": 3, "record_problems": [], "field_problems": [], "expansion_problems": [], "copybook_records_in_program": 0, "registered_not_in_json": {"missing_count": 0}, "duplicate_ids_in_json": [], "consistent": true},
+      "copybook_layouts": [
+        {"file_id": "SYS-PORTFOLIO-001-FIL-0005", "copybook": "AUDITLOG", "records_checked": 1, "fields_checked": 29, "expansions_checked": 0, "record_problems": [], "field_problems": [], "expansion_problems": [], "registered_not_in_json": {"missing_count": 0}, "consistent": true},
+        {"file_id": "SYS-PORTFOLIO-001-FIL-0007", "copybook": "ERRHAND", "records_checked": 5, "fields_checked": 25, "expansions_checked": 0, "record_problems": [], "field_problems": [], "expansion_problems": [], "registered_not_in_json": {"missing_count": 0}, "consistent": true, "note": "verified once in this execution (shared with DB2CONN)"},
+        {"file_id": "SYS-PORTFOLIO-001-FIL-0013", "copybook": "RTNCODE", "records_checked": 1, "fields_checked": 28, "expansions_checked": 0, "record_problems": [], "field_problems": [], "expansion_problems": [], "registered_not_in_json": {"missing_count": 0}, "consistent": true}
+      ]
+    }
   }
 },
+"id_resolution_summary": {"statements_unresolved": 0, "fields_unresolved": 1, "fields_ambiguous": 0, "paragraph_targets_unresolved": 7, "unresolved_field_names": ["WS-ERROR-MESSAGE"], "ambiguous_field_names": [], "unresolved_paragraph_targets": ["2110-READ-AUDIT-RECORDS", "2120-SUMMARIZE-AUDIT", "2210-READ-ERROR-RECORDS", "2220-SUMMARIZE-ERRORS", "2310-WRITE-AUDIT-SUMMARY", "2320-WRITE-ERROR-SUMMARY", "2330-WRITE-CONTROL-SUMMARY"]},
 "execution_traces": [
   {
     "entry_point": "0000-MAIN",
     "entry_point_id": "SYS-PORTFOLIO-001-FIL-0048-PAR-0001",
     "entry_type": "batch_main",
+    "entry_note": "Batch report program without USING parameters; ends with GOBACK in 0000-MAIN, or with GOBACK inside 9999-ERROR-HANDLER on an OPEN failure",
     "steps": [
-      {"step": 1, "paragraph": "0000-MAIN", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0048-PAR-0001", "action": "PERFORM", "target": "1000-INITIALIZE", "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0048-PAR-0002", "target_section_id": null, "condition": null, "line": 84, "statement_id": "SYS-PORTFOLIO-001-FIL-0048-STMT-000001"},
-      {"step": 2, "paragraph": "1000-INITIALIZE", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0048-PAR-0002", "action": "PERFORM", "target": "1100-OPEN-FILES", "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0048-PAR-0003", "target_section_id": null, "condition": null, "line": 90, "statement_id": "SYS-PORTFOLIO-001-FIL-0048-STMT-000005"},
-      {"step": 3, "paragraph": "1100-OPEN-FILES", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0048-PAR-0003", "action": "PERFORM", "target": "9999-ERROR-HANDLER", "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0048-PAR-0010", "target_section_id": null,
-       "condition": {"text": "WS-AUDIT-STATUS NOT = '00'", "fields": ["WS-AUDIT-STATUS"], "field_ids": [{"name": "WS-AUDIT-STATUS", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0048-FLD-000001", "target_kind": "field", "candidate_ids": []}]}, "line": 98, "statement_id": "SYS-PORTFOLIO-001-FIL-0048-STMT-000032"},
-      {"step": 4, "paragraph": "1100-OPEN-FILES", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0048-PAR-0003", "action": "PERFORM", "target": "9999-ERROR-HANDLER", "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0048-PAR-0010", "target_section_id": null,
-       "condition": {"text": "WS-ERROR-STATUS NOT = '00'", "fields": ["WS-ERROR-STATUS"], "field_ids": [{"name": "WS-ERROR-STATUS", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0048-FLD-000002", "target_kind": "field", "candidate_ids": []}]}, "line": 105, "statement_id": "SYS-PORTFOLIO-001-FIL-0048-STMT-000034"},
-      {"step": 5, "paragraph": "1100-OPEN-FILES", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0048-PAR-0003", "action": "PERFORM", "target": "9999-ERROR-HANDLER", "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0048-PAR-0010", "target_section_id": null,
-       "condition": {"text": "WS-REPORT-STATUS NOT = '00'", "fields": ["WS-REPORT-STATUS"], "field_ids": [{"name": "WS-REPORT-STATUS", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0048-FLD-000003", "target_kind": "field", "candidate_ids": []}]}, "line": 112, "statement_id": "SYS-PORTFOLIO-001-FIL-0048-STMT-000036"},
-      {"step": 6, "paragraph": "9999-ERROR-HANDLER", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0048-PAR-0010", "action": "GOBACK", "target": null, "target_paragraph_id": null, "target_section_id": null, "condition": null, "line": 147, "statement_id": "SYS-PORTFOLIO-001-FIL-0048-STMT-000030"},
-      {"step": 7, "paragraph": "1000-INITIALIZE", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0048-PAR-0002", "action": "PERFORM", "target": "1200-WRITE-HEADERS", "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0048-PAR-0004", "target_section_id": null, "condition": null, "line": 91, "statement_id": "SYS-PORTFOLIO-001-FIL-0048-STMT-000006"},
-      {"step": 8, "paragraph": "0000-MAIN", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0048-PAR-0001", "action": "PERFORM", "target": "2000-PROCESS-REPORT", "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0048-PAR-0005", "target_section_id": null, "condition": null, "line": 85, "statement_id": "SYS-PORTFOLIO-001-FIL-0048-STMT-000002"},
-      {"step": 9, "paragraph": "2000-PROCESS-REPORT", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0048-PAR-0005", "action": "PERFORM", "target": "2100-PROCESS-AUDIT-TRAIL", "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0048-PAR-0006", "target_section_id": null, "condition": null, "line": 122, "statement_id": "SYS-PORTFOLIO-001-FIL-0048-STMT-000017"},
-      {"step": 10, "paragraph": "2100-PROCESS-AUDIT-TRAIL", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0048-PAR-0006", "action": "unresolvable", "target": "2110-READ-AUDIT-RECORDS", "target_paragraph_id": null, "target_section_id": null, "condition": null, "line": 127, "statement_id": "SYS-PORTFOLIO-001-FIL-0048-STMT-000020"},
-      {"step": 11, "paragraph": "2100-PROCESS-AUDIT-TRAIL", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0048-PAR-0006", "action": "unresolvable", "target": "2120-SUMMARIZE-AUDIT", "target_paragraph_id": null, "target_section_id": null, "condition": null, "line": 128, "statement_id": "SYS-PORTFOLIO-001-FIL-0048-STMT-000021"},
-      {"step": 12, "paragraph": "2000-PROCESS-REPORT", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0048-PAR-0005", "action": "PERFORM", "target": "2200-PROCESS-ERROR-LOG", "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0048-PAR-0007", "target_section_id": null, "condition": null, "line": 123, "statement_id": "SYS-PORTFOLIO-001-FIL-0048-STMT-000018"},
-      {"step": 13, "paragraph": "2200-PROCESS-ERROR-LOG", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0048-PAR-0007", "action": "unresolvable", "target": "2210-READ-ERROR-RECORDS", "target_paragraph_id": null, "target_section_id": null, "condition": null, "line": 131, "statement_id": "SYS-PORTFOLIO-001-FIL-0048-STMT-000022"},
-      {"step": 14, "paragraph": "2200-PROCESS-ERROR-LOG", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0048-PAR-0007", "action": "unresolvable", "target": "2220-SUMMARIZE-ERRORS", "target_paragraph_id": null, "target_section_id": null, "condition": null, "line": 132, "statement_id": "SYS-PORTFOLIO-001-FIL-0048-STMT-000023"},
-      {"step": 15, "paragraph": "2000-PROCESS-REPORT", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0048-PAR-0005", "action": "PERFORM", "target": "2300-WRITE-SUMMARY", "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0048-PAR-0008", "target_section_id": null, "condition": null, "line": 124, "statement_id": "SYS-PORTFOLIO-001-FIL-0048-STMT-000019"},
-      {"step": 16, "paragraph": "2300-WRITE-SUMMARY", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0048-PAR-0008", "action": "unresolvable", "target": "2310-WRITE-AUDIT-SUMMARY", "target_paragraph_id": null, "target_section_id": null, "condition": null, "line": 135, "statement_id": "SYS-PORTFOLIO-001-FIL-0048-STMT-000024"},
-      {"step": 17, "paragraph": "2300-WRITE-SUMMARY", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0048-PAR-0008", "action": "unresolvable", "target": "2320-WRITE-ERROR-SUMMARY", "target_paragraph_id": null, "target_section_id": null, "condition": null, "line": 136, "statement_id": "SYS-PORTFOLIO-001-FIL-0048-STMT-000025"},
-      {"step": 18, "paragraph": "2300-WRITE-SUMMARY", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0048-PAR-0008", "action": "unresolvable", "target": "2330-WRITE-CONTROL-SUMMARY", "target_paragraph_id": null, "target_section_id": null, "condition": null, "line": 137, "statement_id": "SYS-PORTFOLIO-001-FIL-0048-STMT-000026"},
-      {"step": 19, "paragraph": "0000-MAIN", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0048-PAR-0001", "action": "PERFORM", "target": "3000-CLEANUP", "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0048-PAR-0009", "target_section_id": null, "condition": null, "line": 86, "statement_id": "SYS-PORTFOLIO-001-FIL-0048-STMT-000003"},
-      {"step": 20, "paragraph": "0000-MAIN", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0048-PAR-0001", "action": "GOBACK", "target": null, "target_paragraph_id": null, "target_section_id": null, "condition": null, "line": 87, "statement_id": "SYS-PORTFOLIO-001-FIL-0048-STMT-000004"}
+      {"step": 1, "call_depth": 0, "paragraph": "0000-MAIN", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0048-PAR-0001", "action": "PERFORM", "target": "1000-INITIALIZE", "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0048-PAR-0002", "target_section_id": null, "condition": null, "line": 84, "statement_id": "SYS-PORTFOLIO-001-FIL-0048-STMT-000001"},
+      {"step": 2, "call_depth": 1, "paragraph": "1000-INITIALIZE", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0048-PAR-0002", "action": "PERFORM", "target": "1100-OPEN-FILES", "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0048-PAR-0003", "target_section_id": null, "condition": null, "line": 90, "statement_id": "SYS-PORTFOLIO-001-FIL-0048-STMT-000005"},
+      {"step": 3, "call_depth": 2, "paragraph": "1100-OPEN-FILES", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0048-PAR-0003", "action": "PERFORM", "target": "9999-ERROR-HANDLER", "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0048-PAR-0010", "target_section_id": null, "condition": {"text": "WS-AUDIT-STATUS NOT = '00'", "branch": "THEN of IF (line 95)", "fields": ["WS-AUDIT-STATUS"], "field_ids": [{"name": "WS-AUDIT-STATUS", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0048-FLD-000001", "target_kind": "field", "candidate_ids": []}]}, "line": 98, "statement_id": "SYS-PORTFOLIO-001-FIL-0048-STMT-000032"},
+      {"step": 4, "call_depth": 3, "paragraph": "9999-ERROR-HANDLER", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0048-PAR-0010", "action": "GOBACK", "target": null, "target_paragraph_id": null, "target_section_id": null, "condition": null, "line": 147, "statement_id": "SYS-PORTFOLIO-001-FIL-0048-STMT-000030", "note": "GOBACK inside a performed paragraph ends the program (RETURN-CODE 12); applies to each of the three PERFORM 9999-ERROR-HANDLER calls. Files opened earlier are not closed"},
+      {"step": 5, "call_depth": 2, "paragraph": "1100-OPEN-FILES", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0048-PAR-0003", "action": "PERFORM", "target": "9999-ERROR-HANDLER", "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0048-PAR-0010", "target_section_id": null, "condition": {"text": "WS-ERROR-STATUS NOT = '00'", "branch": "THEN of IF (line 102)", "fields": ["WS-ERROR-STATUS"], "field_ids": [{"name": "WS-ERROR-STATUS", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0048-FLD-000002", "target_kind": "field", "candidate_ids": []}]}, "line": 105, "statement_id": "SYS-PORTFOLIO-001-FIL-0048-STMT-000034"},
+      {"step": 6, "call_depth": 2, "paragraph": "1100-OPEN-FILES", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0048-PAR-0003", "action": "PERFORM", "target": "9999-ERROR-HANDLER", "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0048-PAR-0010", "target_section_id": null, "condition": {"text": "WS-REPORT-STATUS NOT = '00'", "branch": "THEN of IF (line 109)", "fields": ["WS-REPORT-STATUS"], "field_ids": [{"name": "WS-REPORT-STATUS", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0048-FLD-000003", "target_kind": "field", "candidate_ids": []}]}, "line": 112, "statement_id": "SYS-PORTFOLIO-001-FIL-0048-STMT-000036"},
+      {"step": 7, "call_depth": 1, "paragraph": "1000-INITIALIZE", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0048-PAR-0002", "action": "PERFORM", "target": "1200-WRITE-HEADERS", "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0048-PAR-0004", "target_section_id": null, "condition": null, "line": 91, "statement_id": "SYS-PORTFOLIO-001-FIL-0048-STMT-000006"},
+      {"step": 8, "call_depth": 0, "paragraph": "0000-MAIN", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0048-PAR-0001", "action": "PERFORM", "target": "2000-PROCESS-REPORT", "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0048-PAR-0005", "target_section_id": null, "condition": null, "line": 85, "statement_id": "SYS-PORTFOLIO-001-FIL-0048-STMT-000002"},
+      {"step": 9, "call_depth": 1, "paragraph": "2000-PROCESS-REPORT", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0048-PAR-0005", "action": "PERFORM", "target": "2100-PROCESS-AUDIT-TRAIL", "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0048-PAR-0006", "target_section_id": null, "condition": null, "line": 122, "statement_id": "SYS-PORTFOLIO-001-FIL-0048-STMT-000017"},
+      {"step": 10, "call_depth": 2, "paragraph": "2100-PROCESS-AUDIT-TRAIL", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0048-PAR-0006", "action": "PERFORM", "target": "2110-READ-AUDIT-RECORDS", "target_paragraph_id": null, "target_section_id": null, "unresolvable": true, "condition": null, "line": 127, "statement_id": "SYS-PORTFOLIO-001-FIL-0048-STMT-000020"},
+      {"step": 11, "call_depth": 2, "paragraph": "2100-PROCESS-AUDIT-TRAIL", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0048-PAR-0006", "action": "PERFORM", "target": "2120-SUMMARIZE-AUDIT", "target_paragraph_id": null, "target_section_id": null, "unresolvable": true, "condition": null, "line": 128, "statement_id": "SYS-PORTFOLIO-001-FIL-0048-STMT-000021"},
+      {"step": 12, "call_depth": 1, "paragraph": "2000-PROCESS-REPORT", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0048-PAR-0005", "action": "PERFORM", "target": "2200-PROCESS-ERROR-LOG", "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0048-PAR-0007", "target_section_id": null, "condition": null, "line": 123, "statement_id": "SYS-PORTFOLIO-001-FIL-0048-STMT-000018"},
+      {"step": 13, "call_depth": 2, "paragraph": "2200-PROCESS-ERROR-LOG", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0048-PAR-0007", "action": "PERFORM", "target": "2210-READ-ERROR-RECORDS", "target_paragraph_id": null, "target_section_id": null, "unresolvable": true, "condition": null, "line": 131, "statement_id": "SYS-PORTFOLIO-001-FIL-0048-STMT-000022"},
+      {"step": 14, "call_depth": 2, "paragraph": "2200-PROCESS-ERROR-LOG", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0048-PAR-0007", "action": "PERFORM", "target": "2220-SUMMARIZE-ERRORS", "target_paragraph_id": null, "target_section_id": null, "unresolvable": true, "condition": null, "line": 132, "statement_id": "SYS-PORTFOLIO-001-FIL-0048-STMT-000023"},
+      {"step": 15, "call_depth": 1, "paragraph": "2000-PROCESS-REPORT", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0048-PAR-0005", "action": "PERFORM", "target": "2300-WRITE-SUMMARY", "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0048-PAR-0008", "target_section_id": null, "condition": null, "line": 124, "statement_id": "SYS-PORTFOLIO-001-FIL-0048-STMT-000019"},
+      {"step": 16, "call_depth": 2, "paragraph": "2300-WRITE-SUMMARY", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0048-PAR-0008", "action": "PERFORM", "target": "2310-WRITE-AUDIT-SUMMARY", "target_paragraph_id": null, "target_section_id": null, "unresolvable": true, "condition": null, "line": 135, "statement_id": "SYS-PORTFOLIO-001-FIL-0048-STMT-000024"},
+      {"step": 17, "call_depth": 2, "paragraph": "2300-WRITE-SUMMARY", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0048-PAR-0008", "action": "PERFORM", "target": "2320-WRITE-ERROR-SUMMARY", "target_paragraph_id": null, "target_section_id": null, "unresolvable": true, "condition": null, "line": 136, "statement_id": "SYS-PORTFOLIO-001-FIL-0048-STMT-000025"},
+      {"step": 18, "call_depth": 2, "paragraph": "2300-WRITE-SUMMARY", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0048-PAR-0008", "action": "PERFORM", "target": "2330-WRITE-CONTROL-SUMMARY", "target_paragraph_id": null, "target_section_id": null, "unresolvable": true, "condition": null, "line": 137, "statement_id": "SYS-PORTFOLIO-001-FIL-0048-STMT-000026"},
+      {"step": 19, "call_depth": 0, "paragraph": "0000-MAIN", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0048-PAR-0001", "action": "PERFORM", "target": "3000-CLEANUP", "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0048-PAR-0009", "target_section_id": null, "condition": null, "line": 86, "statement_id": "SYS-PORTFOLIO-001-FIL-0048-STMT-000003"},
+      {"step": 20, "call_depth": 0, "paragraph": "0000-MAIN", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0048-PAR-0001", "action": "GOBACK", "target": null, "target_paragraph_id": null, "target_section_id": null, "condition": null, "line": 87, "statement_id": "SYS-PORTFOLIO-001-FIL-0048-STMT-000004"}
+    ],
+    "path_summaries": [
+      {"path": "NORMAL_RUN", "condition": "all three files open with status '00'", "sequence": ["0000-MAIN", "1000-INITIALIZE (1100-OPEN-FILES, 1200-WRITE-HEADERS)", "2000-PROCESS-REPORT (2100-PROCESS-AUDIT-TRAIL, 2200-PROCESS-ERROR-LOG, 2300-WRITE-SUMMARY - their seven sub-paragraphs are missing from the source)", "3000-CLEANUP", "GOBACK"], "outcome": "Report headers written to REPORT-FILE; the audit, error and summary sections cannot be traced because their paragraphs do not exist", "partial": true},
+      {"path": "OPEN_FAILURE", "condition": "WS-AUDIT-STATUS, WS-ERROR-STATUS or WS-REPORT-STATUS not '00' after the corresponding OPEN", "sequence": ["0000-MAIN", "1000-INITIALIZE", "1100-OPEN-FILES", "9999-ERROR-HANDLER (DISPLAY message, RETURN-CODE 12, GOBACK)"], "outcome": "Program ends with RETURN-CODE 12"}
     ]
   }
 ],
 "branch_map": [
-  {
-    "paragraph": "1100-OPEN-FILES", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0048-PAR-0003",
-    "branches": [
-      {"type": "IF", "line": 95, "statement_id": "SYS-PORTFOLIO-001-FIL-0048-STMT-000008", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0048-PAR-0003",
-       "condition_text": "WS-AUDIT-STATUS NOT = '00'", "condition_fields": ["WS-AUDIT-STATUS"],
-       "condition_field_ids": [{"name": "WS-AUDIT-STATUS", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0048-FLD-000001", "target_kind": "field", "candidate_ids": []}],
-       "has_else": false, "then_line_range": [96, 98], "else_line_range": null, "end_if_line": 99, "nested_depth": 1,
-       "outcomes": [
-         {"label": "THEN", "line_range": [96, 98], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0048-STMT-000031", "SYS-PORTFOLIO-001-FIL-0048-STMT-000032"]},
-         {"label": "NOT TAKEN (no ELSE)", "line_range": null, "statement_ids": []}]},
-      {"type": "IF", "line": 102, "statement_id": "SYS-PORTFOLIO-001-FIL-0048-STMT-000010", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0048-PAR-0003",
-       "condition_text": "WS-ERROR-STATUS NOT = '00'", "condition_fields": ["WS-ERROR-STATUS"],
-       "condition_field_ids": [{"name": "WS-ERROR-STATUS", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0048-FLD-000002", "target_kind": "field", "candidate_ids": []}],
-       "has_else": false, "then_line_range": [103, 105], "else_line_range": null, "end_if_line": 106, "nested_depth": 1,
-       "outcomes": [
-         {"label": "THEN", "line_range": [103, 105], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0048-STMT-000033", "SYS-PORTFOLIO-001-FIL-0048-STMT-000034"]},
-         {"label": "NOT TAKEN (no ELSE)", "line_range": null, "statement_ids": []}]},
-      {"type": "IF", "line": 109, "statement_id": "SYS-PORTFOLIO-001-FIL-0048-STMT-000012", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0048-PAR-0003",
-       "condition_text": "WS-REPORT-STATUS NOT = '00'", "condition_fields": ["WS-REPORT-STATUS"],
-       "condition_field_ids": [{"name": "WS-REPORT-STATUS", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0048-FLD-000003", "target_kind": "field", "candidate_ids": []}],
-       "has_else": false, "then_line_range": [110, 112], "else_line_range": null, "end_if_line": 113, "nested_depth": 1,
-       "outcomes": [
-         {"label": "THEN", "line_range": [110, 112], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0048-STMT-000035", "SYS-PORTFOLIO-001-FIL-0048-STMT-000036"]},
-         {"label": "NOT TAKEN (no ELSE)", "line_range": null, "statement_ids": []}]}
-    ]
-  }
+  {"paragraph": "1100-OPEN-FILES", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0048-PAR-0003", "branches": [
+    {"type": "IF", "line": 95, "statement_id": "SYS-PORTFOLIO-001-FIL-0048-STMT-000008", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0048-PAR-0003", "condition_text": "WS-AUDIT-STATUS NOT = '00'", "condition_fields": ["WS-AUDIT-STATUS"], "condition_field_ids": [{"name": "WS-AUDIT-STATUS", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0048-FLD-000001", "target_kind": "field", "candidate_ids": []}], "has_else": false, "nested_depth": 1, "outcomes": [
+      {"label": "THEN", "line_range": [96, 98], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0048-STMT-000031", "SYS-PORTFOLIO-001-FIL-0048-STMT-000032"]}
+    ], "end_if_line": 99},
+    {"type": "IF", "line": 102, "statement_id": "SYS-PORTFOLIO-001-FIL-0048-STMT-000010", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0048-PAR-0003", "condition_text": "WS-ERROR-STATUS NOT = '00'", "condition_fields": ["WS-ERROR-STATUS"], "condition_field_ids": [{"name": "WS-ERROR-STATUS", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0048-FLD-000002", "target_kind": "field", "candidate_ids": []}], "has_else": false, "nested_depth": 1, "outcomes": [
+      {"label": "THEN", "line_range": [103, 105], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0048-STMT-000033", "SYS-PORTFOLIO-001-FIL-0048-STMT-000034"]}
+    ], "end_if_line": 106},
+    {"type": "IF", "line": 109, "statement_id": "SYS-PORTFOLIO-001-FIL-0048-STMT-000012", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0048-PAR-0003", "condition_text": "WS-REPORT-STATUS NOT = '00'", "condition_fields": ["WS-REPORT-STATUS"], "condition_field_ids": [{"name": "WS-REPORT-STATUS", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0048-FLD-000003", "target_kind": "field", "candidate_ids": []}], "has_else": false, "nested_depth": 1, "outcomes": [
+      {"label": "THEN", "line_range": [110, 112], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0048-STMT-000035", "SYS-PORTFOLIO-001-FIL-0048-STMT-000036"]}
+    ], "end_if_line": 113}
+  ]}
 ],
 "loops": [],
 "dead_code_confirmed": [],
 "unresolvable_paths": [
-  {"statement_id": "SYS-PORTFOLIO-001-FIL-0048-STMT-000020", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0048-PAR-0006", "target": "2110-READ-AUDIT-RECORDS"},
-  {"statement_id": "SYS-PORTFOLIO-001-FIL-0048-STMT-000021", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0048-PAR-0006", "target": "2120-SUMMARIZE-AUDIT"},
-  {"statement_id": "SYS-PORTFOLIO-001-FIL-0048-STMT-000022", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0048-PAR-0007", "target": "2210-READ-ERROR-RECORDS"},
-  {"statement_id": "SYS-PORTFOLIO-001-FIL-0048-STMT-000023", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0048-PAR-0007", "target": "2220-SUMMARIZE-ERRORS"},
-  {"statement_id": "SYS-PORTFOLIO-001-FIL-0048-STMT-000024", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0048-PAR-0008", "target": "2310-WRITE-AUDIT-SUMMARY"},
-  {"statement_id": "SYS-PORTFOLIO-001-FIL-0048-STMT-000025", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0048-PAR-0008", "target": "2320-WRITE-ERROR-SUMMARY"},
-  {"statement_id": "SYS-PORTFOLIO-001-FIL-0048-STMT-000026", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0048-PAR-0008", "target": "2330-WRITE-CONTROL-SUMMARY"}
+  {"paragraph": "2100-PROCESS-AUDIT-TRAIL", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0048-PAR-0006", "statement_id": "SYS-PORTFOLIO-001-FIL-0048-STMT-000020", "target": "2110-READ-AUDIT-RECORDS", "line": 127, "reason": "PERFORM target paragraph does not exist in the program (Agent 2 unresolved_target)"},
+  {"paragraph": "2100-PROCESS-AUDIT-TRAIL", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0048-PAR-0006", "statement_id": "SYS-PORTFOLIO-001-FIL-0048-STMT-000021", "target": "2120-SUMMARIZE-AUDIT", "line": 128, "reason": "PERFORM target paragraph does not exist in the program (Agent 2 unresolved_target)"},
+  {"paragraph": "2200-PROCESS-ERROR-LOG", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0048-PAR-0007", "statement_id": "SYS-PORTFOLIO-001-FIL-0048-STMT-000022", "target": "2210-READ-ERROR-RECORDS", "line": 131, "reason": "PERFORM target paragraph does not exist in the program (Agent 2 unresolved_target)"},
+  {"paragraph": "2200-PROCESS-ERROR-LOG", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0048-PAR-0007", "statement_id": "SYS-PORTFOLIO-001-FIL-0048-STMT-000023", "target": "2220-SUMMARIZE-ERRORS", "line": 132, "reason": "PERFORM target paragraph does not exist in the program (Agent 2 unresolved_target)"},
+  {"paragraph": "2300-WRITE-SUMMARY", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0048-PAR-0008", "statement_id": "SYS-PORTFOLIO-001-FIL-0048-STMT-000024", "target": "2310-WRITE-AUDIT-SUMMARY", "line": 135, "reason": "PERFORM target paragraph does not exist in the program (Agent 2 unresolved_target)"},
+  {"paragraph": "2300-WRITE-SUMMARY", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0048-PAR-0008", "statement_id": "SYS-PORTFOLIO-001-FIL-0048-STMT-000025", "target": "2320-WRITE-ERROR-SUMMARY", "line": 136, "reason": "PERFORM target paragraph does not exist in the program (Agent 2 unresolved_target)"},
+  {"paragraph": "2300-WRITE-SUMMARY", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0048-PAR-0008", "statement_id": "SYS-PORTFOLIO-001-FIL-0048-STMT-000026", "target": "2330-WRITE-CONTROL-SUMMARY", "line": 137, "reason": "PERFORM target paragraph does not exist in the program (Agent 2 unresolved_target)"}
 ],
 "trace_issues": [
-  {"severity": "info", "type": "upstream_issue", "upstream_agent": "2_parser", "upstream_type": "unresolved_perform_targets", "targets": ["2110-READ-AUDIT-RECORDS", "2120-SUMMARIZE-AUDIT", "2210-READ-ERROR-RECORDS", "2220-SUMMARIZE-ERRORS", "2310-WRITE-AUDIT-SUMMARY", "2320-WRITE-ERROR-SUMMARY", "2330-WRITE-CONTROL-SUMMARY"], "message": "7 PERFORM targets are not declared in this program; parse_status partial."},
-  {"severity": "info", "type": "upstream_issue", "upstream_agent": "2_parser", "upstream_type": "fd_in_copybook", "lines": [35, 36], "message": "COPY AUDITLOG and COPY ERRHAND appear in the FILE SECTION before any FD; FDs for AUDIT-FILE and ERROR-FILE are not declared inline."},
-  {"severity": "info", "type": "upstream_issue", "upstream_agent": "3_data", "upstream_type": "copy_stub_without_fd", "line": 35, "message": "Neither AUDITLOG nor ERRHAND contains an FD, so SELECT AUDIT-FILE (line 17) and SELECT ERROR-FILE (line 23) have no FD/record; the copybook records are linked from the FILE section, not as FILE records."},
-  {"severity": "info", "type": "upstream_issue", "upstream_agent": "3_data", "upstream_type": "undefined_record_key", "line": 20, "message": "RECORD KEY AUD-KEY (SELECT AUDIT-FILE) and RECORD KEY ERR-KEY (SELECT ERROR-FILE) are not declared in the program or in copybooks AUDITLOG, ERRHAND, RTNCODE."},
-  {"severity": "info", "type": "upstream_issue", "upstream_agent": "3_data", "upstream_type": "value_clause_in_file_section", "line": 36, "message": "ERRHAND is copied into the FILE SECTION; its VALUE clauses are recorded as literal text only."},
-  {"severity": "warning", "type": "unresolvable_perform_target", "lines": [127, 128, 131, 132, 135, 136, 137], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0048-STMT-000020", "SYS-PORTFOLIO-001-FIL-0048-STMT-000021", "SYS-PORTFOLIO-001-FIL-0048-STMT-000022", "SYS-PORTFOLIO-001-FIL-0048-STMT-000023", "SYS-PORTFOLIO-001-FIL-0048-STMT-000024", "SYS-PORTFOLIO-001-FIL-0048-STMT-000025", "SYS-PORTFOLIO-001-FIL-0048-STMT-000026"], "message": "All seven PERFORM targets of 2100, 2200 and 2300 are missing from the source (and from every other source file under src/); the reading of the audit and error files and all summary output cannot be traced. Recorded as unresolvable steps."},
-  {"severity": "info", "type": "field_id_unresolved", "name": "WS-ERROR-MESSAGE", "lines": [97, 104, 111, 145], "message": "resolve-field-references UNRESOLVED; WS-ERROR-MESSAGE is not declared in RPTAUD00 or its copybooks; target_id null."},
-  {"severity": "warning", "type": "undeclared_data_item", "lines": [97, 104, 111, 145], "ambiguous": true, "message": "MOVE ... TO WS-ERROR-MESSAGE and DISPLAY WS-ERROR-MESSAGE reference an item that is declared nowhere in the program; recorded verbatim."},
-  {"severity": "warning", "type": "file_without_fd", "lines": [94, 101, 140], "ambiguous": true, "message": "OPEN INPUT AUDIT-FILE, OPEN INPUT ERROR-FILE and CLOSE of both files reference files that have SELECT entries but no FD in the source (Agent 3 copy_stub_without_fd); recorded verbatim. REPORT-FILE has FD at line 38 and record REPORT-RECORD."},
-  {"severity": "info", "type": "early_termination_path", "line": 147, "statement_id": "SYS-PORTFOLIO-001-FIL-0048-STMT-000030", "message": "Any failed OPEN performs 9999-ERROR-HANDLER, which displays the message, sets RETURN-CODE 12 and ends the program with GOBACK; later OPENs, headers, processing and cleanup are not executed (files already opened are not closed by the program)."},
-  {"severity": "info", "type": "special_register", "lines": [116, 146], "message": "RETURN-CODE (special register) and DATE (ACCEPT FROM DATE) are not looked up."}
+  {"severity": "info", "type": "upstream_issue", "upstream_agent": "2_parser", "upstream_type": "unresolved_perform_targets", "message": "Agent 2 (info): 7 PERFORM statements name paragraphs that do not exist in the file; edges recorded with resolved=false (cfg_issues unresolved_target, warning)"},
+  {"severity": "info", "type": "upstream_issue", "upstream_agent": "3_data", "upstream_type": "copy_in_file_section", "line": 35, "message": "Agent 3: COPY AUDITLOG (35) and COPY ERRHAND (36) appear in the FILE SECTION with no FD entry before them; expanded under the FILE SECTION as written"},
+  {"severity": "info", "type": "upstream_issue", "upstream_agent": "3_data", "upstream_type": "copy_expansion_without_record", "line": 35, "message": "Agent 3: AUDITLOG and ERRHAND are expanded directly under the FILE SECTION and RTNCODE (44) under WORKING-STORAGE; EXPANDS_COPY is held by the sections"},
+  {"severity": "warning", "type": "unresolvable_perform", "count": 7, "message": "PERFORM targets 2110-READ-AUDIT-RECORDS, 2120-SUMMARIZE-AUDIT, 2210-READ-ERROR-RECORDS, 2220-SUMMARIZE-ERRORS, 2310-WRITE-AUDIT-SUMMARY, 2320-WRITE-ERROR-SUMMARY and 2330-WRITE-CONTROL-SUMMARY are not in the CFG; recorded as unresolvable steps with null target IDs. No audit or error records are read anywhere in the present source"},
+  {"severity": "info", "type": "field_id_unresolved", "name": "WS-ERROR-MESSAGE", "lines": [97, 104, 111, 145], "message": "WS-ERROR-MESSAGE is not declared in the program or in its expanded copybooks (AUDITLOG, ERRHAND, RTNCODE); target_id kept null"},
+  {"severity": "info", "type": "files_without_fd", "lines": [17, 23], "message": "AUDIT-FILE and ERROR-FILE are SELECTed (record keys AUD-KEY and ERR-KEY) but have no FD entry in the FILE SECTION; only REPORT-FILE has an FD"},
+  {"severity": "warning", "type": "goback_in_performed_paragraph", "line": 147, "statement_id": "SYS-PORTFOLIO-001-FIL-0048-STMT-000030", "message": "9999-ERROR-HANDLER ends the program with GOBACK from inside a PERFORM; files already opened are not closed and 3000-CLEANUP is not run"}
 ],
-"program_narrative": "Program RPTAUD00 is a batch audit report generator. It opens the indexed audit file (AUDIT-FILE, DD AUDITLOG) and error file (ERROR-FILE, DD ERRLOG) for input and the sequential report file (REPORT-FILE, DD RPTFILE) for output; if any open returns a file status other than '00' it displays an error message, sets return code 12 and ends. It then writes three header lines to the report: a line of asterisks, the title 'SYSTEM AUDIT REPORT' and 'REPORT DATE:' with the system date. The audit-trail processing (read and summarise audit records), error-log processing (read and summarise error records) and summary writing (audit, error and control summaries) are delegated to seven paragraphs that are not present in the source, so the report body cannot be traced. Finally it closes the three files and returns. The error-message field WS-ERROR-MESSAGE and the FDs for AUDIT-FILE and ERROR-FILE are not declared in the source.",
+"field_id_lookup": [
+  {"name": "WS-AUDIT-STATUS", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0048-FLD-000001", "target_kind": "field", "qualified_name": "WS-FILE-STATUS.WS-AUDIT-STATUS", "defined_in": "SYS-PORTFOLIO-001-FIL-0048", "candidate_ids": []},
+  {"name": "WS-ERROR-STATUS", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0048-FLD-000002", "target_kind": "field", "qualified_name": "WS-FILE-STATUS.WS-ERROR-STATUS", "defined_in": "SYS-PORTFOLIO-001-FIL-0048", "candidate_ids": []},
+  {"name": "WS-REPORT-STATUS", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0048-FLD-000003", "target_kind": "field", "qualified_name": "WS-FILE-STATUS.WS-REPORT-STATUS", "defined_in": "SYS-PORTFOLIO-001-FIL-0048", "candidate_ids": []},
+  {"name": "WS-ERROR-MESSAGE", "qualifiers": [], "resolution": "UNRESOLVED", "target_id": null, "target_kind": null, "qualified_name": null, "defined_in": null, "candidate_ids": []},
+  {"name": "WS-REPORT-DATE", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0048-FLD-000012", "target_kind": "field", "qualified_name": "WS-REPORT-HEADERS.WS-HEADER3.WS-REPORT-DATE", "defined_in": "SYS-PORTFOLIO-001-FIL-0048", "candidate_ids": []},
+  {"name": "REPORT-RECORD", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0048-REC-0001", "target_kind": "record", "qualified_name": "REPORT-RECORD", "defined_in": "SYS-PORTFOLIO-001-FIL-0048", "candidate_ids": []},
+  {"name": "WS-HEADER1", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0048-FLD-000004", "target_kind": "field", "qualified_name": "WS-REPORT-HEADERS.WS-HEADER1", "defined_in": "SYS-PORTFOLIO-001-FIL-0048", "candidate_ids": []},
+  {"name": "WS-HEADER2", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0048-FLD-000006", "target_kind": "field", "qualified_name": "WS-REPORT-HEADERS.WS-HEADER2", "defined_in": "SYS-PORTFOLIO-001-FIL-0048", "candidate_ids": []},
+  {"name": "WS-HEADER3", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0048-FLD-000010", "target_kind": "field", "qualified_name": "WS-REPORT-HEADERS.WS-HEADER3", "defined_in": "SYS-PORTFOLIO-001-FIL-0048", "candidate_ids": []}
+],
+"program_narrative": "RPTAUD00 is a batch audit report generator intended to produce a system audit report from the audit trail file and the error log. It opens the indexed AUDIT-FILE and ERROR-FILE for reading and the sequential REPORT-FILE for output; if any of the three files fails to open it displays an error message and ends with return code 12. It then writes the report heading lines (a line of asterisks, the title 'SYSTEM AUDIT REPORT' and the report date). The report body is organised in three steps - audit trail processing, error log processing and summary writing - but the seven paragraphs that would read the audit and error records and write the audit, error and control summaries are not present in the source, so that part of the logic cannot be traced and is reported as unresolvable. Finally it closes the three files and returns. Error conditions handled: open failure of any of the three files.",
 "paragraphs": [
-  {
-    "name": "0000-MAIN", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0048-PAR-0001", "section": null, "section_id": null, "line_range": [83, 88],
-    "pseudocode": [
-      "-- Main control paragraph",
-      "CALL 1000-initialize",
-      "CALL 2000-process-report",
-      "CALL 3000-cleanup",
-      "RETURN to caller (or terminate if main program)  -- GOBACK"
-    ],
-    "pseudocode_statement_ids": [
-      [],
-      ["SYS-PORTFOLIO-001-FIL-0048-STMT-000001"],
-      ["SYS-PORTFOLIO-001-FIL-0048-STMT-000002"],
-      ["SYS-PORTFOLIO-001-FIL-0048-STMT-000003"],
-      ["SYS-PORTFOLIO-001-FIL-0048-STMT-000004"]
-    ],
-    "pseudocode_text": "-- Main control paragraph\nCALL 1000-initialize\nCALL 2000-process-report\nCALL 3000-cleanup\nRETURN to caller (or terminate if main program)  -- GOBACK",
-    "statement_ids": ["SYS-PORTFOLIO-001-FIL-0048-STMT-000001", "SYS-PORTFOLIO-001-FIL-0048-STMT-000002", "SYS-PORTFOLIO-001-FIL-0048-STMT-000003", "SYS-PORTFOLIO-001-FIL-0048-STMT-000004"],
-    "untranslated_statement_ids": [],
-    "field_references": [], "field_reference_ids": [],
-    "calls_made": ["1000-INITIALIZE", "2000-PROCESS-REPORT", "3000-CLEANUP"],
-    "calls_made_ids": [
-      {"name": "1000-INITIALIZE", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0048-PAR-0002", "section_id": null},
-      {"name": "2000-PROCESS-REPORT", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0048-PAR-0005", "section_id": null},
-      {"name": "3000-CLEANUP", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0048-PAR-0009", "section_id": null}
-    ],
-    "complexity_score": 1, "has_unresolved_statements": false, "annotations": []
-  },
-  {
-    "name": "1000-INITIALIZE", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0048-PAR-0002", "section": null, "section_id": null, "line_range": [89, 92],
-    "pseudocode": [
-      "CALL 1100-open-files",
-      "CALL 1200-write-headers"
-    ],
-    "pseudocode_statement_ids": [
-      ["SYS-PORTFOLIO-001-FIL-0048-STMT-000005"],
-      ["SYS-PORTFOLIO-001-FIL-0048-STMT-000006"]
-    ],
-    "pseudocode_text": "CALL 1100-open-files\nCALL 1200-write-headers",
-    "statement_ids": ["SYS-PORTFOLIO-001-FIL-0048-STMT-000005", "SYS-PORTFOLIO-001-FIL-0048-STMT-000006"],
-    "untranslated_statement_ids": [],
-    "field_references": [], "field_reference_ids": [],
-    "calls_made": ["1100-OPEN-FILES", "1200-WRITE-HEADERS"],
-    "calls_made_ids": [
-      {"name": "1100-OPEN-FILES", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0048-PAR-0003", "section_id": null},
-      {"name": "1200-WRITE-HEADERS", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0048-PAR-0004", "section_id": null}
-    ],
-    "complexity_score": 1, "has_unresolved_statements": false, "annotations": []
-  },
-  {
-    "name": "1100-OPEN-FILES", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0048-PAR-0003", "section": null, "section_id": null, "line_range": [93, 114],
-    "pseudocode": [
-      "OPEN AUDIT-FILE for READ-ONLY  -- indexed, sequential access; FILE STATUS -> WS-AUDIT-STATUS",
-      "IF audit_file_status (WS-AUDIT-STATUS) != '00' THEN",
-      "  SET error_message (WS-ERROR-MESSAGE) = 'ERROR OPENING AUDIT FILE'",
-      "  CALL 9999-error-handler  -- ends the program",
-      "END IF",
-      "OPEN ERROR-FILE for READ-ONLY  -- indexed, sequential access; FILE STATUS -> WS-ERROR-STATUS",
-      "IF error_file_status (WS-ERROR-STATUS) != '00' THEN",
-      "  SET error_message = 'ERROR OPENING ERROR FILE'",
-      "  CALL 9999-error-handler  -- ends the program",
-      "END IF",
-      "OPEN REPORT-FILE for WRITE (new)  -- sequential; FILE STATUS -> WS-REPORT-STATUS",
-      "IF report_file_status (WS-REPORT-STATUS) != '00' THEN",
-      "  SET error_message = 'ERROR OPENING REPORT FILE'",
-      "  CALL 9999-error-handler  -- ends the program",
-      "END IF"
-    ],
-    "pseudocode_statement_ids": [
-      ["SYS-PORTFOLIO-001-FIL-0048-STMT-000007"],
-      ["SYS-PORTFOLIO-001-FIL-0048-STMT-000008"],
-      ["SYS-PORTFOLIO-001-FIL-0048-STMT-000031"],
-      ["SYS-PORTFOLIO-001-FIL-0048-STMT-000032"],
-      ["SYS-PORTFOLIO-001-FIL-0048-STMT-000008"],
-      ["SYS-PORTFOLIO-001-FIL-0048-STMT-000009"],
-      ["SYS-PORTFOLIO-001-FIL-0048-STMT-000010"],
-      ["SYS-PORTFOLIO-001-FIL-0048-STMT-000033"],
-      ["SYS-PORTFOLIO-001-FIL-0048-STMT-000034"],
-      ["SYS-PORTFOLIO-001-FIL-0048-STMT-000010"],
-      ["SYS-PORTFOLIO-001-FIL-0048-STMT-000011"],
-      ["SYS-PORTFOLIO-001-FIL-0048-STMT-000012"],
-      ["SYS-PORTFOLIO-001-FIL-0048-STMT-000035"],
-      ["SYS-PORTFOLIO-001-FIL-0048-STMT-000036"],
-      ["SYS-PORTFOLIO-001-FIL-0048-STMT-000012"]
-    ],
-    "pseudocode_text": "OPEN AUDIT-FILE for READ-ONLY  -- indexed, sequential access; FILE STATUS -> WS-AUDIT-STATUS\nIF audit_file_status (WS-AUDIT-STATUS) != '00' THEN\n  SET error_message (WS-ERROR-MESSAGE) = 'ERROR OPENING AUDIT FILE'\n  CALL 9999-error-handler  -- ends the program\nEND IF\nOPEN ERROR-FILE for READ-ONLY  -- indexed, sequential access; FILE STATUS -> WS-ERROR-STATUS\nIF error_file_status (WS-ERROR-STATUS) != '00' THEN\n  SET error_message = 'ERROR OPENING ERROR FILE'\n  CALL 9999-error-handler  -- ends the program\nEND IF\nOPEN REPORT-FILE for WRITE (new)  -- sequential; FILE STATUS -> WS-REPORT-STATUS\nIF report_file_status (WS-REPORT-STATUS) != '00' THEN\n  SET error_message = 'ERROR OPENING REPORT FILE'\n  CALL 9999-error-handler  -- ends the program\nEND IF",
-    "statement_ids": ["SYS-PORTFOLIO-001-FIL-0048-STMT-000007", "SYS-PORTFOLIO-001-FIL-0048-STMT-000008", "SYS-PORTFOLIO-001-FIL-0048-STMT-000031", "SYS-PORTFOLIO-001-FIL-0048-STMT-000032", "SYS-PORTFOLIO-001-FIL-0048-STMT-000009", "SYS-PORTFOLIO-001-FIL-0048-STMT-000010", "SYS-PORTFOLIO-001-FIL-0048-STMT-000033", "SYS-PORTFOLIO-001-FIL-0048-STMT-000034", "SYS-PORTFOLIO-001-FIL-0048-STMT-000011", "SYS-PORTFOLIO-001-FIL-0048-STMT-000012", "SYS-PORTFOLIO-001-FIL-0048-STMT-000035", "SYS-PORTFOLIO-001-FIL-0048-STMT-000036"],
-    "untranslated_statement_ids": [],
-    "field_references": ["WS-AUDIT-STATUS", "WS-ERROR-MESSAGE", "WS-ERROR-STATUS", "WS-REPORT-STATUS"],
-    "field_reference_ids": [
-      {"name": "WS-AUDIT-STATUS", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0048-FLD-000001", "target_kind": "field", "candidate_ids": []},
-      {"name": "WS-ERROR-MESSAGE", "qualifiers": [], "resolution": "UNRESOLVED", "target_id": null, "target_kind": null, "candidate_ids": []},
-      {"name": "WS-ERROR-STATUS", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0048-FLD-000002", "target_kind": "field", "candidate_ids": []},
-      {"name": "WS-REPORT-STATUS", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0048-FLD-000003", "target_kind": "field", "candidate_ids": []}
-    ],
-    "calls_made": ["9999-ERROR-HANDLER"],
-    "calls_made_ids": [{"name": "9999-ERROR-HANDLER", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0048-PAR-0010", "section_id": null}],
-    "complexity_score": 6, "has_unresolved_statements": false,
-    "annotations": [
-      {"line": 94, "statement_id": "SYS-PORTFOLIO-001-FIL-0048-STMT-000007", "note": "AUDIT-FILE and ERROR-FILE have SELECT entries (lines 17, 23) but no FD in the source; recorded verbatim.", "ambiguous": true},
-      {"line": 96, "statement_id": "SYS-PORTFOLIO-001-FIL-0048-STMT-000031", "note": "WS-ERROR-MESSAGE is not declared in the program or its copybooks.", "ambiguous": true}
-    ]
-  },
-  {
-    "name": "1200-WRITE-HEADERS", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0048-PAR-0004", "section": null, "section_id": null, "line_range": [115, 120],
-    "pseudocode": [
-      "SET report_date (WS-REPORT-DATE) = system date  -- ACCEPT FROM DATE (YYMMDD)",
-      "WRITE report_line (REPORT-RECORD) FROM header_line_1 (WS-HEADER1) TO REPORT-FILE  -- 132 asterisks",
-      "WRITE report_line FROM header_line_2 (WS-HEADER2) TO REPORT-FILE  -- title 'SYSTEM AUDIT REPORT'",
-      "WRITE report_line FROM header_line_3 (WS-HEADER3) TO REPORT-FILE  -- 'REPORT DATE:' + report_date"
-    ],
-    "pseudocode_statement_ids": [
-      ["SYS-PORTFOLIO-001-FIL-0048-STMT-000013"],
-      ["SYS-PORTFOLIO-001-FIL-0048-STMT-000014"],
-      ["SYS-PORTFOLIO-001-FIL-0048-STMT-000015"],
-      ["SYS-PORTFOLIO-001-FIL-0048-STMT-000016"]
-    ],
-    "pseudocode_text": "SET report_date (WS-REPORT-DATE) = system date  -- ACCEPT FROM DATE (YYMMDD)\nWRITE report_line (REPORT-RECORD) FROM header_line_1 (WS-HEADER1) TO REPORT-FILE  -- 132 asterisks\nWRITE report_line FROM header_line_2 (WS-HEADER2) TO REPORT-FILE  -- title 'SYSTEM AUDIT REPORT'\nWRITE report_line FROM header_line_3 (WS-HEADER3) TO REPORT-FILE  -- 'REPORT DATE:' + report_date",
-    "statement_ids": ["SYS-PORTFOLIO-001-FIL-0048-STMT-000013", "SYS-PORTFOLIO-001-FIL-0048-STMT-000014", "SYS-PORTFOLIO-001-FIL-0048-STMT-000015", "SYS-PORTFOLIO-001-FIL-0048-STMT-000016"],
-    "untranslated_statement_ids": [],
-    "field_references": ["WS-REPORT-DATE", "REPORT-RECORD", "WS-HEADER1", "WS-HEADER2", "WS-HEADER3"],
-    "field_reference_ids": [
-      {"name": "WS-REPORT-DATE", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0048-FLD-000012", "target_kind": "field", "candidate_ids": []},
-      {"name": "REPORT-RECORD", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0048-REC-0001", "target_kind": "record", "candidate_ids": []},
-      {"name": "WS-HEADER1", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0048-FLD-000004", "target_kind": "field", "candidate_ids": []},
-      {"name": "WS-HEADER2", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0048-FLD-000006", "target_kind": "field", "candidate_ids": []},
-      {"name": "WS-HEADER3", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0048-FLD-000010", "target_kind": "field", "candidate_ids": []}
-    ],
-    "calls_made": [], "calls_made_ids": [],
-    "complexity_score": 3, "has_unresolved_statements": false,
-    "annotations": [
-      {"line": 116, "statement_id": "SYS-PORTFOLIO-001-FIL-0048-STMT-000013", "note": "ACCEPT ... FROM DATE returns a 6-digit YYMMDD value into the 10-character WS-REPORT-DATE (left-justified, space-filled)."},
-      {"line": 117, "statement_id": "SYS-PORTFOLIO-001-FIL-0048-STMT-000014", "note": "The WRITE statements have no status check; WS-REPORT-STATUS is not tested after them."}
-    ]
-  },
-  {
-    "name": "2000-PROCESS-REPORT", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0048-PAR-0005", "section": null, "section_id": null, "line_range": [121, 125],
-    "pseudocode": [
-      "CALL 2100-process-audit-trail",
-      "CALL 2200-process-error-log",
-      "CALL 2300-write-summary"
-    ],
-    "pseudocode_statement_ids": [
-      ["SYS-PORTFOLIO-001-FIL-0048-STMT-000017"],
-      ["SYS-PORTFOLIO-001-FIL-0048-STMT-000018"],
-      ["SYS-PORTFOLIO-001-FIL-0048-STMT-000019"]
-    ],
-    "pseudocode_text": "CALL 2100-process-audit-trail\nCALL 2200-process-error-log\nCALL 2300-write-summary",
-    "statement_ids": ["SYS-PORTFOLIO-001-FIL-0048-STMT-000017", "SYS-PORTFOLIO-001-FIL-0048-STMT-000018", "SYS-PORTFOLIO-001-FIL-0048-STMT-000019"],
-    "untranslated_statement_ids": [],
-    "field_references": [], "field_reference_ids": [],
-    "calls_made": ["2100-PROCESS-AUDIT-TRAIL", "2200-PROCESS-ERROR-LOG", "2300-WRITE-SUMMARY"],
-    "calls_made_ids": [
-      {"name": "2100-PROCESS-AUDIT-TRAIL", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0048-PAR-0006", "section_id": null},
-      {"name": "2200-PROCESS-ERROR-LOG", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0048-PAR-0007", "section_id": null},
-      {"name": "2300-WRITE-SUMMARY", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0048-PAR-0008", "section_id": null}
-    ],
-    "complexity_score": 1, "has_unresolved_statements": false, "annotations": []
-  },
-  {
-    "name": "2100-PROCESS-AUDIT-TRAIL", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0048-PAR-0006", "section": null, "section_id": null, "line_range": [126, 129],
-    "pseudocode": [
-      "CALL 2110-read-audit-records  !! UNRESOLVED: paragraph not defined in this program",
-      "CALL 2120-summarize-audit  !! UNRESOLVED: paragraph not defined in this program"
-    ],
-    "pseudocode_statement_ids": [
-      ["SYS-PORTFOLIO-001-FIL-0048-STMT-000020"],
-      ["SYS-PORTFOLIO-001-FIL-0048-STMT-000021"]
-    ],
-    "pseudocode_text": "CALL 2110-read-audit-records  !! UNRESOLVED: paragraph not defined in this program\nCALL 2120-summarize-audit  !! UNRESOLVED: paragraph not defined in this program",
-    "statement_ids": ["SYS-PORTFOLIO-001-FIL-0048-STMT-000020", "SYS-PORTFOLIO-001-FIL-0048-STMT-000021"],
-    "untranslated_statement_ids": [],
-    "field_references": [], "field_reference_ids": [],
-    "calls_made": ["2110-READ-AUDIT-RECORDS", "2120-SUMMARIZE-AUDIT"],
-    "calls_made_ids": [
-      {"name": "2110-READ-AUDIT-RECORDS", "paragraph_id": null, "section_id": null},
-      {"name": "2120-SUMMARIZE-AUDIT", "paragraph_id": null, "section_id": null}
-    ],
-    "complexity_score": 1, "has_unresolved_statements": true,
-    "annotations": [
-      {"line": 127, "statement_id": "SYS-PORTFOLIO-001-FIL-0048-STMT-000020", "note": "Both PERFORM targets are missing from the source; the audit-trail logic cannot be traced. Gap reported, not filled."}
-    ]
-  },
-  {
-    "name": "2200-PROCESS-ERROR-LOG", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0048-PAR-0007", "section": null, "section_id": null, "line_range": [130, 133],
-    "pseudocode": [
-      "CALL 2210-read-error-records  !! UNRESOLVED: paragraph not defined in this program",
-      "CALL 2220-summarize-errors  !! UNRESOLVED: paragraph not defined in this program"
-    ],
-    "pseudocode_statement_ids": [
-      ["SYS-PORTFOLIO-001-FIL-0048-STMT-000022"],
-      ["SYS-PORTFOLIO-001-FIL-0048-STMT-000023"]
-    ],
-    "pseudocode_text": "CALL 2210-read-error-records  !! UNRESOLVED: paragraph not defined in this program\nCALL 2220-summarize-errors  !! UNRESOLVED: paragraph not defined in this program",
-    "statement_ids": ["SYS-PORTFOLIO-001-FIL-0048-STMT-000022", "SYS-PORTFOLIO-001-FIL-0048-STMT-000023"],
-    "untranslated_statement_ids": [],
-    "field_references": [], "field_reference_ids": [],
-    "calls_made": ["2210-READ-ERROR-RECORDS", "2220-SUMMARIZE-ERRORS"],
-    "calls_made_ids": [
-      {"name": "2210-READ-ERROR-RECORDS", "paragraph_id": null, "section_id": null},
-      {"name": "2220-SUMMARIZE-ERRORS", "paragraph_id": null, "section_id": null}
-    ],
-    "complexity_score": 1, "has_unresolved_statements": true,
-    "annotations": [
-      {"line": 131, "statement_id": "SYS-PORTFOLIO-001-FIL-0048-STMT-000022", "note": "Both PERFORM targets are missing from the source; the error-log logic cannot be traced. Gap reported, not filled."}
-    ]
-  },
-  {
-    "name": "2300-WRITE-SUMMARY", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0048-PAR-0008", "section": null, "section_id": null, "line_range": [134, 138],
-    "pseudocode": [
-      "CALL 2310-write-audit-summary  !! UNRESOLVED: paragraph not defined in this program",
-      "CALL 2320-write-error-summary  !! UNRESOLVED: paragraph not defined in this program",
-      "CALL 2330-write-control-summary  !! UNRESOLVED: paragraph not defined in this program"
-    ],
-    "pseudocode_statement_ids": [
-      ["SYS-PORTFOLIO-001-FIL-0048-STMT-000024"],
-      ["SYS-PORTFOLIO-001-FIL-0048-STMT-000025"],
-      ["SYS-PORTFOLIO-001-FIL-0048-STMT-000026"]
-    ],
-    "pseudocode_text": "CALL 2310-write-audit-summary  !! UNRESOLVED: paragraph not defined in this program\nCALL 2320-write-error-summary  !! UNRESOLVED: paragraph not defined in this program\nCALL 2330-write-control-summary  !! UNRESOLVED: paragraph not defined in this program",
-    "statement_ids": ["SYS-PORTFOLIO-001-FIL-0048-STMT-000024", "SYS-PORTFOLIO-001-FIL-0048-STMT-000025", "SYS-PORTFOLIO-001-FIL-0048-STMT-000026"],
-    "untranslated_statement_ids": [],
-    "field_references": [], "field_reference_ids": [],
-    "calls_made": ["2310-WRITE-AUDIT-SUMMARY", "2320-WRITE-ERROR-SUMMARY", "2330-WRITE-CONTROL-SUMMARY"],
-    "calls_made_ids": [
-      {"name": "2310-WRITE-AUDIT-SUMMARY", "paragraph_id": null, "section_id": null},
-      {"name": "2320-WRITE-ERROR-SUMMARY", "paragraph_id": null, "section_id": null},
-      {"name": "2330-WRITE-CONTROL-SUMMARY", "paragraph_id": null, "section_id": null}
-    ],
-    "complexity_score": 1, "has_unresolved_statements": true,
-    "annotations": [
-      {"line": 135, "statement_id": "SYS-PORTFOLIO-001-FIL-0048-STMT-000024", "note": "All three PERFORM targets are missing from the source; the summary output cannot be traced. Gap reported, not filled."}
-    ]
-  },
-  {
-    "name": "3000-CLEANUP", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0048-PAR-0009", "section": null, "section_id": null, "line_range": [139, 143],
-    "pseudocode": [
-      "CLOSE AUDIT-FILE, ERROR-FILE, REPORT-FILE  -- no status check after CLOSE"
-    ],
-    "pseudocode_statement_ids": [
-      ["SYS-PORTFOLIO-001-FIL-0048-STMT-000027"]
-    ],
-    "pseudocode_text": "CLOSE AUDIT-FILE, ERROR-FILE, REPORT-FILE  -- no status check after CLOSE",
-    "statement_ids": ["SYS-PORTFOLIO-001-FIL-0048-STMT-000027"],
-    "untranslated_statement_ids": [],
-    "field_references": [], "field_reference_ids": [],
-    "calls_made": [], "calls_made_ids": [],
-    "complexity_score": 1, "has_unresolved_statements": false, "annotations": []
-  },
-  {
-    "name": "9999-ERROR-HANDLER", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0048-PAR-0010", "section": null, "section_id": null, "line_range": [144, 147],
-    "pseudocode": [
-      "DISPLAY error_message (WS-ERROR-MESSAGE)  -- write to console/job log",
-      "SET RETURN-CODE = 12",
-      "RETURN to caller (or terminate if main program)  -- GOBACK: ends the program here"
-    ],
-    "pseudocode_statement_ids": [
-      ["SYS-PORTFOLIO-001-FIL-0048-STMT-000028"],
-      ["SYS-PORTFOLIO-001-FIL-0048-STMT-000029"],
-      ["SYS-PORTFOLIO-001-FIL-0048-STMT-000030"]
-    ],
-    "pseudocode_text": "DISPLAY error_message (WS-ERROR-MESSAGE)  -- write to console/job log\nSET RETURN-CODE = 12\nRETURN to caller (or terminate if main program)  -- GOBACK: ends the program here",
-    "statement_ids": ["SYS-PORTFOLIO-001-FIL-0048-STMT-000028", "SYS-PORTFOLIO-001-FIL-0048-STMT-000029", "SYS-PORTFOLIO-001-FIL-0048-STMT-000030"],
-    "untranslated_statement_ids": [],
-    "field_references": ["WS-ERROR-MESSAGE"],
-    "field_reference_ids": [
-      {"name": "WS-ERROR-MESSAGE", "qualifiers": [], "resolution": "UNRESOLVED", "target_id": null, "target_kind": null, "candidate_ids": []}
-    ],
-    "calls_made": [], "calls_made_ids": [],
-    "complexity_score": 1, "has_unresolved_statements": false,
-    "annotations": [
-      {"line": 147, "statement_id": "SYS-PORTFOLIO-001-FIL-0048-STMT-000030", "note": "GOBACK inside a performed paragraph ends the program; control does not return to 1100-OPEN-FILES."}
-    ]
-  }
+  {"name": "0000-MAIN", "section": null, "paragraph_id": "SYS-PORTFOLIO-001-FIL-0048-PAR-0001", "section_id": null, "line_range": [83, 88],
+   "pseudocode": [
+     "-- Main control: initialise, produce the report, clean up",
+     "CALL 1000-initialize",
+     "CALL 2000-process-report",
+     "CALL 3000-cleanup",
+     "RETURN to caller (or terminate if main program)  -- GOBACK"
+   ],
+   "pseudocode_statement_ids": [[], ["SYS-PORTFOLIO-001-FIL-0048-STMT-000001"], ["SYS-PORTFOLIO-001-FIL-0048-STMT-000002"], ["SYS-PORTFOLIO-001-FIL-0048-STMT-000003"], ["SYS-PORTFOLIO-001-FIL-0048-STMT-000004"]],
+   "pseudocode_text": "-- Main control: initialise, produce the report, clean up\nCALL 1000-initialize\nCALL 2000-process-report\nCALL 3000-cleanup\nRETURN to caller (or terminate if main program)  -- GOBACK",
+   "statement_ids": ["SYS-PORTFOLIO-001-FIL-0048-STMT-000001", "SYS-PORTFOLIO-001-FIL-0048-STMT-000002", "SYS-PORTFOLIO-001-FIL-0048-STMT-000003", "SYS-PORTFOLIO-001-FIL-0048-STMT-000004"],
+   "untranslated_statement_ids": [],
+   "field_references": [], "field_reference_ids": [],
+   "calls_made": ["1000-INITIALIZE", "2000-PROCESS-REPORT", "3000-CLEANUP"],
+   "calls_made_ids": [
+     {"name": "1000-INITIALIZE", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0048-PAR-0002", "section_id": null},
+     {"name": "2000-PROCESS-REPORT", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0048-PAR-0005", "section_id": null},
+     {"name": "3000-CLEANUP", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0048-PAR-0009", "section_id": null}
+   ],
+   "external_calls": [],
+   "complexity_score": 1, "has_unresolved_statements": false, "annotations": []},
+  {"name": "1000-INITIALIZE", "section": null, "paragraph_id": "SYS-PORTFOLIO-001-FIL-0048-PAR-0002", "section_id": null, "line_range": [89, 92],
+   "pseudocode": [
+     "-- Open the files and write the report headings",
+     "CALL 1100-open-files",
+     "CALL 1200-write-headers"
+   ],
+   "pseudocode_statement_ids": [[], ["SYS-PORTFOLIO-001-FIL-0048-STMT-000005"], ["SYS-PORTFOLIO-001-FIL-0048-STMT-000006"]],
+   "pseudocode_text": "-- Open the files and write the report headings\nCALL 1100-open-files\nCALL 1200-write-headers",
+   "statement_ids": ["SYS-PORTFOLIO-001-FIL-0048-STMT-000005", "SYS-PORTFOLIO-001-FIL-0048-STMT-000006"],
+   "untranslated_statement_ids": [],
+   "field_references": [], "field_reference_ids": [],
+   "calls_made": ["1100-OPEN-FILES", "1200-WRITE-HEADERS"],
+   "calls_made_ids": [
+     {"name": "1100-OPEN-FILES", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0048-PAR-0003", "section_id": null},
+     {"name": "1200-WRITE-HEADERS", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0048-PAR-0004", "section_id": null}
+   ],
+   "external_calls": [],
+   "complexity_score": 1, "has_unresolved_statements": false, "annotations": []},
+  {"name": "1100-OPEN-FILES", "section": null, "paragraph_id": "SYS-PORTFOLIO-001-FIL-0048-PAR-0003", "section_id": null, "line_range": [93, 114],
+   "pseudocode": [
+     "-- Open the three files; any failure ends the program",
+     "OPEN AUDIT-FILE for READ-ONLY",
+     "IF audit file status != '00' THEN",
+     "  SET ws_error_message = 'ERROR OPENING AUDIT FILE'",
+     "  CALL 9999-error-handler  -- does not return: ends the program",
+     "END IF",
+     "OPEN ERROR-FILE for READ-ONLY",
+     "IF error file status != '00' THEN",
+     "  SET ws_error_message = 'ERROR OPENING ERROR FILE'",
+     "  CALL 9999-error-handler  -- does not return: ends the program",
+     "END IF",
+     "OPEN REPORT-FILE for WRITE (new)",
+     "IF report file status != '00' THEN",
+     "  SET ws_error_message = 'ERROR OPENING REPORT FILE'",
+     "  CALL 9999-error-handler  -- does not return: ends the program",
+     "END IF"
+   ],
+   "pseudocode_statement_ids": [[], ["SYS-PORTFOLIO-001-FIL-0048-STMT-000007"], ["SYS-PORTFOLIO-001-FIL-0048-STMT-000008"], ["SYS-PORTFOLIO-001-FIL-0048-STMT-000031"], ["SYS-PORTFOLIO-001-FIL-0048-STMT-000032"], ["SYS-PORTFOLIO-001-FIL-0048-STMT-000008"], ["SYS-PORTFOLIO-001-FIL-0048-STMT-000009"], ["SYS-PORTFOLIO-001-FIL-0048-STMT-000010"], ["SYS-PORTFOLIO-001-FIL-0048-STMT-000033"], ["SYS-PORTFOLIO-001-FIL-0048-STMT-000034"], ["SYS-PORTFOLIO-001-FIL-0048-STMT-000010"], ["SYS-PORTFOLIO-001-FIL-0048-STMT-000011"], ["SYS-PORTFOLIO-001-FIL-0048-STMT-000012"], ["SYS-PORTFOLIO-001-FIL-0048-STMT-000035"], ["SYS-PORTFOLIO-001-FIL-0048-STMT-000036"], ["SYS-PORTFOLIO-001-FIL-0048-STMT-000012"]],
+   "pseudocode_text": "-- Open the three files; any failure ends the program\nOPEN AUDIT-FILE for READ-ONLY\nIF audit file status != '00' THEN\n  SET ws_error_message = 'ERROR OPENING AUDIT FILE'\n  CALL 9999-error-handler  -- does not return: ends the program\nEND IF\nOPEN ERROR-FILE for READ-ONLY\nIF error file status != '00' THEN\n  SET ws_error_message = 'ERROR OPENING ERROR FILE'\n  CALL 9999-error-handler  -- does not return: ends the program\nEND IF\nOPEN REPORT-FILE for WRITE (new)\nIF report file status != '00' THEN\n  SET ws_error_message = 'ERROR OPENING REPORT FILE'\n  CALL 9999-error-handler  -- does not return: ends the program\nEND IF",
+   "statement_ids": ["SYS-PORTFOLIO-001-FIL-0048-STMT-000007", "SYS-PORTFOLIO-001-FIL-0048-STMT-000008", "SYS-PORTFOLIO-001-FIL-0048-STMT-000031", "SYS-PORTFOLIO-001-FIL-0048-STMT-000032", "SYS-PORTFOLIO-001-FIL-0048-STMT-000009", "SYS-PORTFOLIO-001-FIL-0048-STMT-000010", "SYS-PORTFOLIO-001-FIL-0048-STMT-000033", "SYS-PORTFOLIO-001-FIL-0048-STMT-000034", "SYS-PORTFOLIO-001-FIL-0048-STMT-000011", "SYS-PORTFOLIO-001-FIL-0048-STMT-000012", "SYS-PORTFOLIO-001-FIL-0048-STMT-000035", "SYS-PORTFOLIO-001-FIL-0048-STMT-000036"],
+   "untranslated_statement_ids": [],
+   "field_references": ["WS-AUDIT-STATUS", "WS-ERROR-MESSAGE", "WS-ERROR-STATUS", "WS-REPORT-STATUS"],
+   "field_reference_ids": [
+     {"name": "WS-AUDIT-STATUS", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0048-FLD-000001", "target_kind": "field", "candidate_ids": []},
+     {"name": "WS-ERROR-MESSAGE", "qualifiers": [], "resolution": "UNRESOLVED", "target_id": null, "target_kind": null, "candidate_ids": []},
+     {"name": "WS-ERROR-STATUS", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0048-FLD-000002", "target_kind": "field", "candidate_ids": []},
+     {"name": "WS-REPORT-STATUS", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0048-FLD-000003", "target_kind": "field", "candidate_ids": []}
+   ],
+   "calls_made": ["9999-ERROR-HANDLER"],
+   "calls_made_ids": [{"name": "9999-ERROR-HANDLER", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0048-PAR-0010", "section_id": null}],
+   "external_calls": [],
+   "complexity_score": 6, "has_unresolved_statements": false,
+   "annotations": [{"line": 96, "statement_id": "SYS-PORTFOLIO-001-FIL-0048-STMT-000031", "note": "WS-ERROR-MESSAGE is not declared in the data layouts; see trace_issues field_id_unresolved"}]},
+  {"name": "1200-WRITE-HEADERS", "section": null, "paragraph_id": "SYS-PORTFOLIO-001-FIL-0048-PAR-0004", "section_id": null, "line_range": [115, 120],
+   "pseudocode": [
+     "-- Write the three report heading lines",
+     "SET ws_report_date = today's date  -- ACCEPT FROM DATE (system date, YYMMDD form, into a 10-character field)",
+     "WRITE report_record FROM ws_header1 to REPORT-FILE  -- line of asterisks",
+     "WRITE report_record FROM ws_header2 to REPORT-FILE  -- title 'SYSTEM AUDIT REPORT'",
+     "WRITE report_record FROM ws_header3 to REPORT-FILE  -- 'REPORT DATE:' and the date"
+   ],
+   "pseudocode_statement_ids": [[], ["SYS-PORTFOLIO-001-FIL-0048-STMT-000013"], ["SYS-PORTFOLIO-001-FIL-0048-STMT-000014"], ["SYS-PORTFOLIO-001-FIL-0048-STMT-000015"], ["SYS-PORTFOLIO-001-FIL-0048-STMT-000016"]],
+   "pseudocode_text": "-- Write the three report heading lines\nSET ws_report_date = today's date  -- ACCEPT FROM DATE (system date, YYMMDD form, into a 10-character field)\nWRITE report_record FROM ws_header1 to REPORT-FILE  -- line of asterisks\nWRITE report_record FROM ws_header2 to REPORT-FILE  -- title 'SYSTEM AUDIT REPORT'\nWRITE report_record FROM ws_header3 to REPORT-FILE  -- 'REPORT DATE:' and the date",
+   "statement_ids": ["SYS-PORTFOLIO-001-FIL-0048-STMT-000013", "SYS-PORTFOLIO-001-FIL-0048-STMT-000014", "SYS-PORTFOLIO-001-FIL-0048-STMT-000015", "SYS-PORTFOLIO-001-FIL-0048-STMT-000016"],
+   "untranslated_statement_ids": [],
+   "field_references": ["WS-REPORT-DATE", "REPORT-RECORD", "WS-HEADER1", "WS-HEADER2", "WS-HEADER3"],
+   "field_reference_ids": [
+     {"name": "WS-REPORT-DATE", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0048-FLD-000012", "target_kind": "field", "candidate_ids": []},
+     {"name": "REPORT-RECORD", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0048-REC-0001", "target_kind": "record", "candidate_ids": []},
+     {"name": "WS-HEADER1", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0048-FLD-000004", "target_kind": "field", "candidate_ids": []},
+     {"name": "WS-HEADER2", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0048-FLD-000006", "target_kind": "field", "candidate_ids": []},
+     {"name": "WS-HEADER3", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0048-FLD-000010", "target_kind": "field", "candidate_ids": []}
+   ],
+   "calls_made": [], "calls_made_ids": [], "external_calls": [],
+   "complexity_score": 3, "has_unresolved_statements": false,
+   "annotations": [{"line": 117, "statement_id": "SYS-PORTFOLIO-001-FIL-0048-STMT-000014", "note": "No file status check after the WRITE statements"}]},
+  {"name": "2000-PROCESS-REPORT", "section": null, "paragraph_id": "SYS-PORTFOLIO-001-FIL-0048-PAR-0005", "section_id": null, "line_range": [121, 125],
+   "pseudocode": [
+     "-- Produce the report body in three stages",
+     "CALL 2100-process-audit-trail",
+     "CALL 2200-process-error-log",
+     "CALL 2300-write-summary"
+   ],
+   "pseudocode_statement_ids": [[], ["SYS-PORTFOLIO-001-FIL-0048-STMT-000017"], ["SYS-PORTFOLIO-001-FIL-0048-STMT-000018"], ["SYS-PORTFOLIO-001-FIL-0048-STMT-000019"]],
+   "pseudocode_text": "-- Produce the report body in three stages\nCALL 2100-process-audit-trail\nCALL 2200-process-error-log\nCALL 2300-write-summary",
+   "statement_ids": ["SYS-PORTFOLIO-001-FIL-0048-STMT-000017", "SYS-PORTFOLIO-001-FIL-0048-STMT-000018", "SYS-PORTFOLIO-001-FIL-0048-STMT-000019"],
+   "untranslated_statement_ids": [],
+   "field_references": [], "field_reference_ids": [],
+   "calls_made": ["2100-PROCESS-AUDIT-TRAIL", "2200-PROCESS-ERROR-LOG", "2300-WRITE-SUMMARY"],
+   "calls_made_ids": [
+     {"name": "2100-PROCESS-AUDIT-TRAIL", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0048-PAR-0006", "section_id": null},
+     {"name": "2200-PROCESS-ERROR-LOG", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0048-PAR-0007", "section_id": null},
+     {"name": "2300-WRITE-SUMMARY", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0048-PAR-0008", "section_id": null}
+   ],
+   "external_calls": [],
+   "complexity_score": 1, "has_unresolved_statements": false, "annotations": []},
+  {"name": "2100-PROCESS-AUDIT-TRAIL", "section": null, "paragraph_id": "SYS-PORTFOLIO-001-FIL-0048-PAR-0006", "section_id": null, "line_range": [126, 129],
+   "pseudocode": [
+     "-- Audit trail section of the report",
+     "CALL 2110-read-audit-records  !! UNRESOLVED: paragraph not present in the source - logic unknown",
+     "CALL 2120-summarize-audit  !! UNRESOLVED: paragraph not present in the source - logic unknown"
+   ],
+   "pseudocode_statement_ids": [[], ["SYS-PORTFOLIO-001-FIL-0048-STMT-000020"], ["SYS-PORTFOLIO-001-FIL-0048-STMT-000021"]],
+   "pseudocode_text": "-- Audit trail section of the report\nCALL 2110-read-audit-records  !! UNRESOLVED: paragraph not present in the source - logic unknown\nCALL 2120-summarize-audit  !! UNRESOLVED: paragraph not present in the source - logic unknown",
+   "statement_ids": ["SYS-PORTFOLIO-001-FIL-0048-STMT-000020", "SYS-PORTFOLIO-001-FIL-0048-STMT-000021"],
+   "untranslated_statement_ids": [],
+   "field_references": [], "field_reference_ids": [],
+   "calls_made": ["2110-READ-AUDIT-RECORDS", "2120-SUMMARIZE-AUDIT"],
+   "calls_made_ids": [
+     {"name": "2110-READ-AUDIT-RECORDS", "paragraph_id": null, "section_id": null},
+     {"name": "2120-SUMMARIZE-AUDIT", "paragraph_id": null, "section_id": null}
+   ],
+   "external_calls": [],
+   "complexity_score": 1, "has_unresolved_statements": true,
+   "annotations": [{"line": 127, "statement_id": "SYS-PORTFOLIO-001-FIL-0048-STMT-000020", "note": "Gap: the PERFORM targets are missing, so how the audit trail is read and summarised cannot be traced"}]},
+  {"name": "2200-PROCESS-ERROR-LOG", "section": null, "paragraph_id": "SYS-PORTFOLIO-001-FIL-0048-PAR-0007", "section_id": null, "line_range": [130, 133],
+   "pseudocode": [
+     "-- Error log section of the report",
+     "CALL 2210-read-error-records  !! UNRESOLVED: paragraph not present in the source - logic unknown",
+     "CALL 2220-summarize-errors  !! UNRESOLVED: paragraph not present in the source - logic unknown"
+   ],
+   "pseudocode_statement_ids": [[], ["SYS-PORTFOLIO-001-FIL-0048-STMT-000022"], ["SYS-PORTFOLIO-001-FIL-0048-STMT-000023"]],
+   "pseudocode_text": "-- Error log section of the report\nCALL 2210-read-error-records  !! UNRESOLVED: paragraph not present in the source - logic unknown\nCALL 2220-summarize-errors  !! UNRESOLVED: paragraph not present in the source - logic unknown",
+   "statement_ids": ["SYS-PORTFOLIO-001-FIL-0048-STMT-000022", "SYS-PORTFOLIO-001-FIL-0048-STMT-000023"],
+   "untranslated_statement_ids": [],
+   "field_references": [], "field_reference_ids": [],
+   "calls_made": ["2210-READ-ERROR-RECORDS", "2220-SUMMARIZE-ERRORS"],
+   "calls_made_ids": [
+     {"name": "2210-READ-ERROR-RECORDS", "paragraph_id": null, "section_id": null},
+     {"name": "2220-SUMMARIZE-ERRORS", "paragraph_id": null, "section_id": null}
+   ],
+   "external_calls": [],
+   "complexity_score": 1, "has_unresolved_statements": true,
+   "annotations": [{"line": 131, "statement_id": "SYS-PORTFOLIO-001-FIL-0048-STMT-000022", "note": "Gap: the PERFORM targets are missing, so how the error log is read and summarised cannot be traced"}]},
+  {"name": "2300-WRITE-SUMMARY", "section": null, "paragraph_id": "SYS-PORTFOLIO-001-FIL-0048-PAR-0008", "section_id": null, "line_range": [134, 138],
+   "pseudocode": [
+     "-- Summary section of the report",
+     "CALL 2310-write-audit-summary  !! UNRESOLVED: paragraph not present in the source - logic unknown",
+     "CALL 2320-write-error-summary  !! UNRESOLVED: paragraph not present in the source - logic unknown",
+     "CALL 2330-write-control-summary  !! UNRESOLVED: paragraph not present in the source - logic unknown"
+   ],
+   "pseudocode_statement_ids": [[], ["SYS-PORTFOLIO-001-FIL-0048-STMT-000024"], ["SYS-PORTFOLIO-001-FIL-0048-STMT-000025"], ["SYS-PORTFOLIO-001-FIL-0048-STMT-000026"]],
+   "pseudocode_text": "-- Summary section of the report\nCALL 2310-write-audit-summary  !! UNRESOLVED: paragraph not present in the source - logic unknown\nCALL 2320-write-error-summary  !! UNRESOLVED: paragraph not present in the source - logic unknown\nCALL 2330-write-control-summary  !! UNRESOLVED: paragraph not present in the source - logic unknown",
+   "statement_ids": ["SYS-PORTFOLIO-001-FIL-0048-STMT-000024", "SYS-PORTFOLIO-001-FIL-0048-STMT-000025", "SYS-PORTFOLIO-001-FIL-0048-STMT-000026"],
+   "untranslated_statement_ids": [],
+   "field_references": [], "field_reference_ids": [],
+   "calls_made": ["2310-WRITE-AUDIT-SUMMARY", "2320-WRITE-ERROR-SUMMARY", "2330-WRITE-CONTROL-SUMMARY"],
+   "calls_made_ids": [
+     {"name": "2310-WRITE-AUDIT-SUMMARY", "paragraph_id": null, "section_id": null},
+     {"name": "2320-WRITE-ERROR-SUMMARY", "paragraph_id": null, "section_id": null},
+     {"name": "2330-WRITE-CONTROL-SUMMARY", "paragraph_id": null, "section_id": null}
+   ],
+   "external_calls": [],
+   "complexity_score": 1, "has_unresolved_statements": true,
+   "annotations": [{"line": 135, "statement_id": "SYS-PORTFOLIO-001-FIL-0048-STMT-000024", "note": "Gap: the PERFORM targets are missing, so the summary lines written to the report cannot be traced"}]},
+  {"name": "3000-CLEANUP", "section": null, "paragraph_id": "SYS-PORTFOLIO-001-FIL-0048-PAR-0009", "section_id": null, "line_range": [139, 143],
+   "pseudocode": [
+     "CLOSE AUDIT-FILE, ERROR-FILE, REPORT-FILE"
+   ],
+   "pseudocode_statement_ids": [["SYS-PORTFOLIO-001-FIL-0048-STMT-000027"]],
+   "pseudocode_text": "CLOSE AUDIT-FILE, ERROR-FILE, REPORT-FILE",
+   "statement_ids": ["SYS-PORTFOLIO-001-FIL-0048-STMT-000027"],
+   "untranslated_statement_ids": [],
+   "field_references": [], "field_reference_ids": [], "calls_made": [], "calls_made_ids": [], "external_calls": [],
+   "complexity_score": 1, "has_unresolved_statements": false, "annotations": []},
+  {"name": "9999-ERROR-HANDLER", "section": null, "paragraph_id": "SYS-PORTFOLIO-001-FIL-0048-PAR-0010", "section_id": null, "line_range": [144, 147],
+   "pseudocode": [
+     "-- Fatal error: report and end the program",
+     "DISPLAY ws_error_message",
+     "SET RETURN-CODE = 12  -- special register passed back to the operating system",
+     "RETURN to caller (or terminate if main program)  -- GOBACK from inside a performed paragraph: the program ends here"
+   ],
+   "pseudocode_statement_ids": [[], ["SYS-PORTFOLIO-001-FIL-0048-STMT-000028"], ["SYS-PORTFOLIO-001-FIL-0048-STMT-000029"], ["SYS-PORTFOLIO-001-FIL-0048-STMT-000030"]],
+   "pseudocode_text": "-- Fatal error: report and end the program\nDISPLAY ws_error_message\nSET RETURN-CODE = 12  -- special register passed back to the operating system\nRETURN to caller (or terminate if main program)  -- GOBACK from inside a performed paragraph: the program ends here",
+   "statement_ids": ["SYS-PORTFOLIO-001-FIL-0048-STMT-000028", "SYS-PORTFOLIO-001-FIL-0048-STMT-000029", "SYS-PORTFOLIO-001-FIL-0048-STMT-000030"],
+   "untranslated_statement_ids": [],
+   "field_references": ["WS-ERROR-MESSAGE"],
+   "field_reference_ids": [{"name": "WS-ERROR-MESSAGE", "qualifiers": [], "resolution": "UNRESOLVED", "target_id": null, "target_kind": null, "candidate_ids": []}],
+   "calls_made": [], "calls_made_ids": [], "external_calls": [],
+   "complexity_score": 1, "has_unresolved_statements": false,
+   "annotations": [{"line": 147, "statement_id": "SYS-PORTFOLIO-001-FIL-0048-STMT-000030", "note": "Open files are not closed before GOBACK"}]}
 ],
 "unresolved_statements": [
-  {"statement_id": "SYS-PORTFOLIO-001-FIL-0048-STMT-000020", "paragraph": "2100-PROCESS-AUDIT-TRAIL", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0048-PAR-0006", "line": 127, "source_text": "PERFORM 2110-READ-AUDIT-RECORDS", "reason": "PERFORM target not defined in the program"},
-  {"statement_id": "SYS-PORTFOLIO-001-FIL-0048-STMT-000021", "paragraph": "2100-PROCESS-AUDIT-TRAIL", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0048-PAR-0006", "line": 128, "source_text": "PERFORM 2120-SUMMARIZE-AUDIT", "reason": "PERFORM target not defined in the program"},
-  {"statement_id": "SYS-PORTFOLIO-001-FIL-0048-STMT-000022", "paragraph": "2200-PROCESS-ERROR-LOG", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0048-PAR-0007", "line": 131, "source_text": "PERFORM 2210-READ-ERROR-RECORDS", "reason": "PERFORM target not defined in the program"},
-  {"statement_id": "SYS-PORTFOLIO-001-FIL-0048-STMT-000023", "paragraph": "2200-PROCESS-ERROR-LOG", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0048-PAR-0007", "line": 132, "source_text": "PERFORM 2220-SUMMARIZE-ERRORS", "reason": "PERFORM target not defined in the program"},
-  {"statement_id": "SYS-PORTFOLIO-001-FIL-0048-STMT-000024", "paragraph": "2300-WRITE-SUMMARY", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0048-PAR-0008", "line": 135, "source_text": "PERFORM 2310-WRITE-AUDIT-SUMMARY", "reason": "PERFORM target not defined in the program"},
-  {"statement_id": "SYS-PORTFOLIO-001-FIL-0048-STMT-000025", "paragraph": "2300-WRITE-SUMMARY", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0048-PAR-0008", "line": 136, "source_text": "PERFORM 2320-WRITE-ERROR-SUMMARY", "reason": "PERFORM target not defined in the program"},
-  {"statement_id": "SYS-PORTFOLIO-001-FIL-0048-STMT-000026", "paragraph": "2300-WRITE-SUMMARY", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0048-PAR-0008", "line": 137, "source_text": "PERFORM 2330-WRITE-CONTROL-SUMMARY", "reason": "PERFORM target not defined in the program"}
+  {"statement_id": "SYS-PORTFOLIO-001-FIL-0048-STMT-000020", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0048-PAR-0006", "line": 127, "source_text": "PERFORM 2110-READ-AUDIT-RECORDS", "reason": "target paragraph not present in the source"},
+  {"statement_id": "SYS-PORTFOLIO-001-FIL-0048-STMT-000021", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0048-PAR-0006", "line": 128, "source_text": "PERFORM 2120-SUMMARIZE-AUDIT", "reason": "target paragraph not present in the source"},
+  {"statement_id": "SYS-PORTFOLIO-001-FIL-0048-STMT-000022", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0048-PAR-0007", "line": 131, "source_text": "PERFORM 2210-READ-ERROR-RECORDS", "reason": "target paragraph not present in the source"},
+  {"statement_id": "SYS-PORTFOLIO-001-FIL-0048-STMT-000023", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0048-PAR-0007", "line": 132, "source_text": "PERFORM 2220-SUMMARIZE-ERRORS", "reason": "target paragraph not present in the source"},
+  {"statement_id": "SYS-PORTFOLIO-001-FIL-0048-STMT-000024", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0048-PAR-0008", "line": 135, "source_text": "PERFORM 2310-WRITE-AUDIT-SUMMARY", "reason": "target paragraph not present in the source"},
+  {"statement_id": "SYS-PORTFOLIO-001-FIL-0048-STMT-000025", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0048-PAR-0008", "line": 136, "source_text": "PERFORM 2320-WRITE-ERROR-SUMMARY", "reason": "target paragraph not present in the source"},
+  {"statement_id": "SYS-PORTFOLIO-001-FIL-0048-STMT-000026", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0048-PAR-0008", "line": 137, "source_text": "PERFORM 2330-WRITE-CONTROL-SUMMARY", "reason": "target paragraph not present in the source"}
 ],
 "pseudocode_issues": [
-  {"severity": "info", "type": "id_unresolved", "kind": "paragraph", "names": ["2110-READ-AUDIT-RECORDS", "2120-SUMMARIZE-AUDIT", "2210-READ-ERROR-RECORDS", "2220-SUMMARIZE-ERRORS", "2310-WRITE-AUDIT-SUMMARY", "2320-WRITE-ERROR-SUMMARY", "2330-WRITE-CONTROL-SUMMARY"], "message": "PERFORM targets not in the CFG; calls_made_ids paragraph_id and section_id null."},
-  {"severity": "info", "type": "id_unresolved", "kind": "field", "name": "WS-ERROR-MESSAGE", "paragraphs": ["1100-OPEN-FILES", "9999-ERROR-HANDLER"], "message": "resolve-field-references UNRESOLVED; not declared in the program or its copybooks; target_id null."}
+  {"severity": "info", "type": "id_unresolved", "name": "WS-ERROR-MESSAGE", "paragraphs": ["1100-OPEN-FILES", "9999-ERROR-HANDLER"], "message": "Field not declared in the program or its copybooks; used by name"},
+  {"severity": "info", "type": "id_unresolved", "kind": "paragraph_target", "names": ["2110-READ-AUDIT-RECORDS", "2120-SUMMARIZE-AUDIT", "2210-READ-ERROR-RECORDS", "2220-SUMMARIZE-ERRORS", "2310-WRITE-AUDIT-SUMMARY", "2320-WRITE-ERROR-SUMMARY", "2330-WRITE-CONTROL-SUMMARY"], "message": "calls_made_ids paragraph_id null: targets not in the program"}
 ]
 }

@@ -1,158 +1,98 @@
 {
-  "program_summary": {"program_id": "CURSMGR", "source_file": "src/programs/online/CURSMGR.cbl", "ast_file": "raw_structure/SYS-PORTFOLIO-001-FIL-0059__CURSMGR.json", "total_lines": 91, "paragraph_count": 5, "section_count": 2, "has_unstructured_flow": true, "has_alter": false, "dead_code_candidates": 0, "parse_status": "partial", "system_id": "SYS-PORTFOLIO-001", "file_id": "SYS-PORTFOLIO-001-FIL-0059", "path_id": "SYS-PORTFOLIO-001-PATH-0059", "file_name": "CURSMGR.cbl", "statement_count": 20, "perform_edges": 4, "goto_edges": 0, "control_flow_relationships": 4, "review_required_statements": 0, "uncertain_statements": 0, "parse_run_id": "PRUN-20261025T163852Z-6235"},
-  "program_id": "CURSMGR",
-  "source_file": "src/programs/online/CURSMGR.cbl",
-  "total_lines": 91,
-  "system_id": "SYS-PORTFOLIO-001",
-  "file_id": "SYS-PORTFOLIO-001-FIL-0059",
-  "path_id": "SYS-PORTFOLIO-001-PATH-0059",
-  "file_name": "CURSMGR.cbl",
-  "relative_path": "src/programs/online/CURSMGR.cbl",
-  "parse_run_id": "PRUN-20261025T163852Z-6235",
-  "source_format": "fixed",
-  "identification_division": {
-    "start_line": 1,
-    "end_line": 10,
-    "program_id": "CURSMGR",
-    "author": null,
-    "date_written": null
-  },
-  "environment_division": {
-    "start_line": 11,
-    "end_line": 12,
-    "sections": [],
-    "file_control_entries": []
-  },
-  "data_division": {
-    "start_line": 13,
-    "end_line": 42,
-    "sql_declare_sections": [],
-    "file_section": {
-      "section_id": null,
-      "start_line": null,
-      "entries": []
-    },
-    "working_storage_section": {
-      "section_id": "SYS-PORTFOLIO-001-FIL-0059-SEC-0001",
-      "start_line": 14,
-      "end_line": 26,
-      "entries": [
-        {"level": 1, "name": "WS-DB2-AREA", "pic": null, "value": null, "line": 15, "redefines": null, "occurs": null, "children": [
-          {"type": "copy_stub", "copybook": "SQLCA", "library": null, "include_kind": "SQL_INCLUDE", "line": 16, "section": "WORKING-STORAGE", "parent_level": "01", "note": "Expanded by Data Agent"}
-        ]},
-        {"level": 1, "name": "WS-CURSOR-STATS", "pic": null, "value": null, "line": 18, "redefines": null, "occurs": null, "children": [
-          {"level": 5, "name": "WS-FETCH-COUNT", "pic": "S9(8) COMP", "value": "0", "line": 19, "redefines": null, "occurs": null, "children": []},
-          {"level": 5, "name": "WS-ROWS-FETCHED", "pic": "S9(8) COMP", "value": "0", "line": 20, "redefines": null, "occurs": null, "children": []},
-          {"level": 5, "name": "WS-FETCH-TIME", "pic": "S9(8) COMP", "value": "0", "line": 21, "redefines": null, "occurs": null, "children": []}
-        ]},
-        {"level": 1, "name": "WS-ARRAY-AREA", "pic": null, "value": null, "line": 23, "redefines": null, "occurs": null, "children": [
-          {"level": 5, "name": "WS-MAX-ROWS", "pic": "S9(4) COMP", "value": "20", "line": 24, "redefines": null, "occurs": null, "children": []},
-          {"level": 5, "name": "WS-ARRAY-SIZE", "pic": "S9(4) COMP", "value": "0", "line": 25, "redefines": null, "occurs": null, "children": []}
-        ]}
-      ]
-    },
-    "linkage_section": {
-      "section_id": "SYS-PORTFOLIO-001-FIL-0059-SEC-0002",
-      "start_line": 27,
-      "end_line": 42,
-      "entries": [
-        {"level": 1, "name": "CURSOR-REQUEST-AREA", "pic": null, "value": null, "line": 28, "redefines": null, "occurs": null, "section": "LINKAGE", "children": [
-          {"level": 5, "name": "CURS-REQUEST-TYPE", "pic": "X", "value": null, "line": 29, "redefines": null, "occurs": null, "section": "LINKAGE", "children": [
-            {"level": 88, "name": "CURS-DECLARE", "pic": null, "value": "'D'", "line": 30, "section": "LINKAGE", "children": []},
-            {"level": 88, "name": "CURS-OPEN", "pic": null, "value": "'O'", "line": 31, "section": "LINKAGE", "children": []},
-            {"level": 88, "name": "CURS-FETCH", "pic": null, "value": "'F'", "line": 32, "section": "LINKAGE", "children": []},
-            {"level": 88, "name": "CURS-CLOSE", "pic": null, "value": "'C'", "line": 33, "section": "LINKAGE", "children": []}
-          ]},
-          {"level": 5, "name": "CURS-NAME", "pic": "X(18)", "value": null, "line": 34, "redefines": null, "occurs": null, "section": "LINKAGE", "children": []},
-          {"level": 5, "name": "CURS-STMT", "pic": "X(240)", "value": null, "line": 35, "redefines": null, "occurs": null, "section": "LINKAGE", "children": []},
-          {"level": 5, "name": "CURS-ARRAY-FETCH", "pic": "X", "value": "'N'", "line": 36, "redefines": null, "occurs": null, "section": "LINKAGE", "children": [
-            {"level": 88, "name": "USE-ARRAY-FETCH", "pic": null, "value": "'Y'", "line": 37, "section": "LINKAGE", "children": []},
-            {"level": 88, "name": "NO-ARRAY-FETCH", "pic": null, "value": "'N'", "line": 38, "section": "LINKAGE", "children": []}
-          ]},
-          {"level": 5, "name": "CURS-RESPONSE-CODE", "pic": "S9(8) COMP", "value": null, "line": 39, "redefines": null, "occurs": null, "section": "LINKAGE", "children": []},
-          {"level": 5, "name": "CURS-DATA-AREA", "pic": "X(3000)", "value": null, "line": 40, "redefines": null, "occurs": null, "section": "LINKAGE", "children": []},
-          {"level": 5, "name": "CURS-DATA-LENGTH", "pic": "S9(4) COMP", "value": null, "line": 41, "redefines": null, "occurs": null, "section": "LINKAGE", "children": []}
-        ]}
-      ]
-    }
-  },
-  "procedure_division": {
-    "start_line": 43,
-    "end_line": 91,
-    "using_parameters": ["CURSOR-REQUEST-AREA"],
-    "sections": [],
-    "paragraphs": [
-      {"paragraph_id": "SYS-PORTFOLIO-001-FIL-0059-PAR-0001", "name": "(UNNAMED)", "section": null, "section_id": null, "start_line": 44, "end_line": 60, "has_perform": true, "has_goto": false, "has_call": false, "has_stop_run": false, "review_status": "NONE", "statement_ids": ["SYS-PORTFOLIO-001-FIL-0059-STMT-000001", "SYS-PORTFOLIO-001-FIL-0059-STMT-000002"]},
-      {"paragraph_id": "SYS-PORTFOLIO-001-FIL-0059-PAR-0002", "name": "P100-DECLARE-CURSOR", "section": null, "section_id": null, "start_line": 61, "end_line": 76, "has_perform": false, "has_goto": false, "has_call": false, "has_stop_run": false, "review_status": "NONE", "statement_ids": ["SYS-PORTFOLIO-001-FIL-0059-STMT-000003", "SYS-PORTFOLIO-001-FIL-0059-STMT-000004", "SYS-PORTFOLIO-001-FIL-0059-STMT-000005", "SYS-PORTFOLIO-001-FIL-0059-STMT-000006"]},
-      {"paragraph_id": "SYS-PORTFOLIO-001-FIL-0059-PAR-0003", "name": "P100-EXIT", "section": null, "section_id": null, "start_line": 77, "end_line": 79, "has_perform": false, "has_goto": false, "has_call": false, "has_stop_run": false, "review_status": "NONE", "statement_ids": ["SYS-PORTFOLIO-001-FIL-0059-STMT-000007"]},
-      {"paragraph_id": "SYS-PORTFOLIO-001-FIL-0059-PAR-0004", "name": "P200-OPEN-CURSOR", "section": null, "section_id": null, "start_line": 80, "end_line": 90, "has_perform": false, "has_goto": false, "has_call": false, "has_stop_run": false, "review_status": "NONE", "statement_ids": ["SYS-PORTFOLIO-001-FIL-0059-STMT-000008", "SYS-PORTFOLIO-001-FIL-0059-STMT-000009", "SYS-PORTFOLIO-001-FIL-0059-STMT-000010", "SYS-PORTFOLIO-001-FIL-0059-STMT-000011"]},
-      {"paragraph_id": "SYS-PORTFOLIO-001-FIL-0059-PAR-0005", "name": "P200-EXIT", "section": null, "section_id": null, "start_line": 91, "end_line": 91, "has_perform": false, "has_goto": false, "has_call": false, "has_stop_run": false, "review_status": "NONE", "statement_ids": []}
-    ],
-    "statements": [
-      {"statement_id": "SYS-PORTFOLIO-001-FIL-0059-STMT-000001", "local_id": "L1", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0059-PAR-0001", "paragraph": "(UNNAMED)", "parent_statement_id": null, "branch": null, "depth": 0, "sibling_index": 1, "statement_type": "EVALUATE", "source_text": "EVALUATE TRUE", "start_line": 44, "end_line": 57, "extraction_status": "OK", "match": "UNCHANGED", "review_status": "NONE", "review_candidates": []},
-      {"statement_id": "SYS-PORTFOLIO-001-FIL-0059-STMT-000014", "local_id": "L2", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0059-PAR-0001", "paragraph": "(UNNAMED)", "parent_statement_id": "SYS-PORTFOLIO-001-FIL-0059-STMT-000001", "branch": "WHEN CURS-DECLARE", "depth": 1, "sibling_index": 1, "statement_type": "PERFORM", "source_text": "PERFORM P100-DECLARE-CURSOR THRU P100-EXIT", "start_line": 46, "end_line": 47, "extraction_status": "OK", "match": "UNCHANGED", "review_status": "NONE", "review_candidates": []},
-      {"statement_id": "SYS-PORTFOLIO-001-FIL-0059-STMT-000016", "local_id": "L3", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0059-PAR-0001", "paragraph": "(UNNAMED)", "parent_statement_id": "SYS-PORTFOLIO-001-FIL-0059-STMT-000001", "branch": "WHEN CURS-OPEN", "depth": 1, "sibling_index": 1, "statement_type": "PERFORM", "source_text": "PERFORM P200-OPEN-CURSOR THRU P200-EXIT", "start_line": 49, "end_line": 50, "extraction_status": "OK", "match": "UNCHANGED", "review_status": "NONE", "review_candidates": []},
-      {"statement_id": "SYS-PORTFOLIO-001-FIL-0059-STMT-000015", "local_id": "L4", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0059-PAR-0001", "paragraph": "(UNNAMED)", "parent_statement_id": "SYS-PORTFOLIO-001-FIL-0059-STMT-000001", "branch": "WHEN CURS-FETCH", "depth": 1, "sibling_index": 1, "statement_type": "PERFORM", "source_text": "PERFORM P300-FETCH-DATA THRU P300-EXIT", "start_line": 52, "end_line": 53, "extraction_status": "OK", "match": "UNCHANGED", "review_status": "NONE", "review_candidates": []},
-      {"statement_id": "SYS-PORTFOLIO-001-FIL-0059-STMT-000013", "local_id": "L5", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0059-PAR-0001", "paragraph": "(UNNAMED)", "parent_statement_id": "SYS-PORTFOLIO-001-FIL-0059-STMT-000001", "branch": "WHEN CURS-CLOSE", "depth": 1, "sibling_index": 1, "statement_type": "PERFORM", "source_text": "PERFORM P400-CLOSE-CURSOR THRU P400-EXIT", "start_line": 55, "end_line": 56, "extraction_status": "OK", "match": "UNCHANGED", "review_status": "NONE", "review_candidates": []},
-      {"statement_id": "SYS-PORTFOLIO-001-FIL-0059-STMT-000002", "local_id": "L6", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0059-PAR-0001", "paragraph": "(UNNAMED)", "parent_statement_id": null, "branch": null, "depth": 0, "sibling_index": 2, "statement_type": "EXEC CICS", "source_text": "EXEC CICS RETURN END-EXEC", "start_line": 59, "end_line": 59, "extraction_status": "OK", "match": "UNCHANGED", "review_status": "NONE", "review_candidates": []},
-      {"statement_id": "SYS-PORTFOLIO-001-FIL-0059-STMT-000003", "local_id": "L7", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0059-PAR-0002", "paragraph": "P100-DECLARE-CURSOR", "parent_statement_id": null, "branch": null, "depth": 0, "sibling_index": 1, "statement_type": "MOVE", "source_text": "MOVE 0 TO CURS-RESPONSE-CODE", "start_line": 62, "end_line": 62, "extraction_status": "OK", "match": "UNCHANGED", "review_status": "NONE", "review_candidates": []},
-      {"statement_id": "SYS-PORTFOLIO-001-FIL-0059-STMT-000004", "local_id": "L8", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0059-PAR-0002", "paragraph": "P100-DECLARE-CURSOR", "parent_statement_id": null, "branch": null, "depth": 0, "sibling_index": 2, "statement_type": "IF", "source_text": "IF USE-ARRAY-FETCH", "start_line": 64, "end_line": 68, "extraction_status": "OK", "match": "UNCHANGED", "review_status": "NONE", "review_candidates": []},
-      {"statement_id": "SYS-PORTFOLIO-001-FIL-0059-STMT-000018", "local_id": "L9", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0059-PAR-0002", "paragraph": "P100-DECLARE-CURSOR", "parent_statement_id": "SYS-PORTFOLIO-001-FIL-0059-STMT-000004", "branch": "THEN", "depth": 1, "sibling_index": 1, "statement_type": "MOVE", "source_text": "MOVE WS-MAX-ROWS TO WS-ARRAY-SIZE", "start_line": 65, "end_line": 65, "extraction_status": "OK", "match": "UNCHANGED", "review_status": "NONE", "review_candidates": []},
-      {"statement_id": "SYS-PORTFOLIO-001-FIL-0059-STMT-000017", "local_id": "L10", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0059-PAR-0002", "paragraph": "P100-DECLARE-CURSOR", "parent_statement_id": "SYS-PORTFOLIO-001-FIL-0059-STMT-000004", "branch": "ELSE", "depth": 1, "sibling_index": 1, "statement_type": "MOVE", "source_text": "MOVE 1 TO WS-ARRAY-SIZE", "start_line": 67, "end_line": 67, "extraction_status": "OK", "match": "UNCHANGED", "review_status": "NONE", "review_candidates": []},
-      {"statement_id": "SYS-PORTFOLIO-001-FIL-0059-STMT-000005", "local_id": "L11", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0059-PAR-0002", "paragraph": "P100-DECLARE-CURSOR", "parent_statement_id": null, "branch": null, "depth": 0, "sibling_index": 3, "statement_type": "EXEC SQL", "source_text": "EXEC SQL DECLARE :CURS-NAME CURSOR FOR :CURS-STMT END-EXEC", "start_line": 70, "end_line": 72, "extraction_status": "OK", "match": "UNCHANGED", "review_status": "NONE", "review_candidates": []},
-      {"statement_id": "SYS-PORTFOLIO-001-FIL-0059-STMT-000006", "local_id": "L12", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0059-PAR-0002", "paragraph": "P100-DECLARE-CURSOR", "parent_statement_id": null, "branch": null, "depth": 0, "sibling_index": 4, "statement_type": "IF", "source_text": "IF SQLCODE NOT = 0", "start_line": 74, "end_line": 76, "extraction_status": "OK", "match": "UNCHANGED", "review_status": "NONE", "review_candidates": []},
-      {"statement_id": "SYS-PORTFOLIO-001-FIL-0059-STMT-000019", "local_id": "L13", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0059-PAR-0002", "paragraph": "P100-DECLARE-CURSOR", "parent_statement_id": "SYS-PORTFOLIO-001-FIL-0059-STMT-000006", "branch": "THEN", "depth": 1, "sibling_index": 1, "statement_type": "MOVE", "source_text": "MOVE SQLCODE TO CURS-RESPONSE-CODE", "start_line": 75, "end_line": 75, "extraction_status": "OK", "match": "UNCHANGED", "review_status": "NONE", "review_candidates": []},
-      {"statement_id": "SYS-PORTFOLIO-001-FIL-0059-STMT-000007", "local_id": "L14", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0059-PAR-0003", "paragraph": "P100-EXIT", "parent_statement_id": null, "branch": null, "depth": 0, "sibling_index": 1, "statement_type": "EXIT", "source_text": "EXIT", "start_line": 78, "end_line": 78, "extraction_status": "OK", "match": "UNCHANGED", "review_status": "NONE", "review_candidates": []},
-      {"statement_id": "SYS-PORTFOLIO-001-FIL-0059-STMT-000008", "local_id": "L15", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0059-PAR-0004", "paragraph": "P200-OPEN-CURSOR", "parent_statement_id": null, "branch": null, "depth": 0, "sibling_index": 1, "statement_type": "MOVE", "source_text": "MOVE 0 TO WS-FETCH-COUNT", "start_line": 81, "end_line": 81, "extraction_status": "OK", "match": "UNCHANGED", "review_status": "NONE", "review_candidates": []},
-      {"statement_id": "SYS-PORTFOLIO-001-FIL-0059-STMT-000009", "local_id": "L16", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0059-PAR-0004", "paragraph": "P200-OPEN-CURSOR", "parent_statement_id": null, "branch": null, "depth": 0, "sibling_index": 2, "statement_type": "MOVE", "source_text": "MOVE 0 TO WS-ROWS-FETCHED", "start_line": 82, "end_line": 82, "extraction_status": "OK", "match": "UNCHANGED", "review_status": "NONE", "review_candidates": []},
-      {"statement_id": "SYS-PORTFOLIO-001-FIL-0059-STMT-000010", "local_id": "L17", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0059-PAR-0004", "paragraph": "P200-OPEN-CURSOR", "parent_statement_id": null, "branch": null, "depth": 0, "sibling_index": 3, "statement_type": "EXEC SQL", "source_text": "EXEC SQL OPEN :CURS-NAME END-EXEC", "start_line": 84, "end_line": 84, "extraction_status": "OK", "match": "UNCHANGED", "review_status": "NONE", "review_candidates": []},
-      {"statement_id": "SYS-PORTFOLIO-001-FIL-0059-STMT-000011", "local_id": "L18", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0059-PAR-0004", "paragraph": "P200-OPEN-CURSOR", "parent_statement_id": null, "branch": null, "depth": 0, "sibling_index": 4, "statement_type": "IF", "source_text": "IF SQLCODE = 0", "start_line": 86, "end_line": 90, "extraction_status": "OK", "match": "UNCHANGED", "review_status": "NONE", "review_candidates": []},
-      {"statement_id": "SYS-PORTFOLIO-001-FIL-0059-STMT-000021", "local_id": "L19", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0059-PAR-0004", "paragraph": "P200-OPEN-CURSOR", "parent_statement_id": "SYS-PORTFOLIO-001-FIL-0059-STMT-000011", "branch": "THEN", "depth": 1, "sibling_index": 1, "statement_type": "MOVE", "source_text": "MOVE 0 TO CURS-RESPONSE-CODE", "start_line": 87, "end_line": 87, "extraction_status": "OK", "match": "UNCHANGED", "review_status": "NONE", "review_candidates": []},
-      {"statement_id": "SYS-PORTFOLIO-001-FIL-0059-STMT-000020", "local_id": "L20", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0059-PAR-0004", "paragraph": "P200-OPEN-CURSOR", "parent_statement_id": "SYS-PORTFOLIO-001-FIL-0059-STMT-000011", "branch": "ELSE", "depth": 1, "sibling_index": 1, "statement_type": "MOVE", "source_text": "MOVE SQLCODE TO CURS-RESPONSE-CODE", "start_line": 89, "end_line": 89, "extraction_status": "OK", "match": "UNCHANGED", "review_status": "NONE", "review_candidates": []}
-    ],
-    "terminal_statements": [
-      {"type": "CICS RETURN", "line": 59, "paragraph": "(UNNAMED)", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0059-PAR-0001", "statement_id": "SYS-PORTFOLIO-001-FIL-0059-STMT-000002"}
-    ]
-  },
-  "copy_stubs": [
-    {"copybook": "SQLCA", "include_kind": "SQL_INCLUDE", "division": "DATA", "section": "WORKING-STORAGE", "line": 16}
-  ],
-  "statement_match_counts": {"NEW": 0, "UNCHANGED": 20, "MATCHED_BY_TEXT": 0, "MATCHED_BY_ORDER": 0, "MODIFIED": 0, "NEW_REVIEW_REQUIRED": 0},
-  "registry_verification": {"file_id": "SYS-PORTFOLIO-001-FIL-0059", "active_run_id": null, "run_completed": true, "statements": 21, "active_statements": 20, "review_required_statements": 0, "paragraphs": 5, "active_paragraphs": 5, "sections": 2, "active_sections": 2, "control_flow_relationships": 4, "statement_counter": 21, "paragraph_counter": 5, "section_counter": 2, "consistent": true},
-  "structure_verification": {"file_id": "SYS-PORTFOLIO-001-FIL-0059", "sections_checked": 2, "paragraphs_checked": 5, "statements_checked": 20, "edges_checked": 4, "registered_edges": 4, "missing_count": 0, "problems": 0, "consistent": true},
-  "parse_issues": [
-    {"severity": "info", "code": "unnamed_paragraph", "lines": [44, 60], "message": "Statements between PROCEDURE DIVISION USING (line 43) and the first paragraph name (line 61) recorded under paragraph (UNNAMED)."},
-    {"severity": "warning", "code": "truncated_source", "lines": [91], "message": "File ends at line 91 with 'P200-EXIT' and no terminating period or newline. Paragraphs P300-FETCH-DATA, P300-EXIT, P400-CLOSE-CURSOR and P400-EXIT, referenced by PERFORM ... THRU at lines 52 and 55, are not present in the source."},
-    {"severity": "warning", "code": "paragraph_header_without_period", "lines": [91], "message": "Line 91 'P200-EXIT' starts in Area A (column 8) but has no period. Recorded and registered as paragraph P200-EXIT (no statements) because it is the THRU target of the PERFORM at line 49; flagged for review."}
-  ],
-  "control_flow_graph": {
-    "entry_points": ["(UNNAMED)"],
-    "entry_point_ids": ["SYS-PORTFOLIO-001-FIL-0059-PAR-0001"],
-    "terminal_nodes": ["(UNNAMED)"],
-    "nodes": [
-      {"id": "(UNNAMED)", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0059-PAR-0001", "type": "paragraph", "section": null, "section_id": null, "start_line": 44, "end_line": 60, "is_entry_point": true, "is_terminal": true, "is_dead_code": false, "unstructured_constructs": ["PERFORM_THRU"]},
-      {"id": "P100-DECLARE-CURSOR", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0059-PAR-0002", "type": "paragraph", "section": null, "section_id": null, "start_line": 61, "end_line": 76, "is_entry_point": false, "is_terminal": false, "is_dead_code": false, "unstructured_constructs": []},
-      {"id": "P100-EXIT", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0059-PAR-0003", "type": "paragraph", "section": null, "section_id": null, "start_line": 77, "end_line": 79, "is_entry_point": false, "is_terminal": false, "is_dead_code": false, "unstructured_constructs": []},
-      {"id": "P200-OPEN-CURSOR", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0059-PAR-0004", "type": "paragraph", "section": null, "section_id": null, "start_line": 80, "end_line": 90, "is_entry_point": false, "is_terminal": false, "is_dead_code": false, "unstructured_constructs": []},
-      {"id": "P200-EXIT", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0059-PAR-0005", "type": "paragraph", "section": null, "section_id": null, "start_line": 91, "end_line": 91, "is_entry_point": false, "is_terminal": false, "is_dead_code": false, "unstructured_constructs": []}
-    ],
-    "edges": [
-      {"from": "(UNNAMED)", "to": "P100-DECLARE-CURSOR", "type": "PERFORM_THRU", "resolved": true, "unstructured": true, "thru_end": "P100-EXIT", "thru_end_paragraph_id": "SYS-PORTFOLIO-001-FIL-0059-PAR-0003", "implicit_thru_range": ["P100-DECLARE-CURSOR", "P100-EXIT"], "implicit_thru_range_ids": ["SYS-PORTFOLIO-001-FIL-0059-PAR-0002", "SYS-PORTFOLIO-001-FIL-0059-PAR-0003"], "source_line": 46, "statement_id": "SYS-PORTFOLIO-001-FIL-0059-STMT-000014", "from_paragraph_id": "SYS-PORTFOLIO-001-FIL-0059-PAR-0001", "to_paragraph_id": "SYS-PORTFOLIO-001-FIL-0059-PAR-0002", "to_section_id": null},
-      {"from": "(UNNAMED)", "to": "P200-OPEN-CURSOR", "type": "PERFORM_THRU", "resolved": true, "unstructured": true, "thru_end": "P200-EXIT", "thru_end_paragraph_id": "SYS-PORTFOLIO-001-FIL-0059-PAR-0005", "implicit_thru_range": ["P200-OPEN-CURSOR", "P200-EXIT"], "implicit_thru_range_ids": ["SYS-PORTFOLIO-001-FIL-0059-PAR-0004", "SYS-PORTFOLIO-001-FIL-0059-PAR-0005"], "source_line": 49, "statement_id": "SYS-PORTFOLIO-001-FIL-0059-STMT-000016", "from_paragraph_id": "SYS-PORTFOLIO-001-FIL-0059-PAR-0001", "to_paragraph_id": "SYS-PORTFOLIO-001-FIL-0059-PAR-0004", "to_section_id": null},
-      {"from": "(UNNAMED)", "to": "P300-FETCH-DATA", "type": "PERFORM_THRU", "resolved": false, "unstructured": true, "thru_end": "P300-EXIT", "thru_end_paragraph_id": null, "implicit_thru_range": null, "implicit_thru_range_ids": null, "source_line": 52, "statement_id": "SYS-PORTFOLIO-001-FIL-0059-STMT-000015", "from_paragraph_id": "SYS-PORTFOLIO-001-FIL-0059-PAR-0001", "to_paragraph_id": null, "to_section_id": null},
-      {"from": "(UNNAMED)", "to": "P400-CLOSE-CURSOR", "type": "PERFORM_THRU", "resolved": false, "unstructured": true, "thru_end": "P400-EXIT", "thru_end_paragraph_id": null, "implicit_thru_range": null, "implicit_thru_range_ids": null, "source_line": 55, "statement_id": "SYS-PORTFOLIO-001-FIL-0059-STMT-000013", "from_paragraph_id": "SYS-PORTFOLIO-001-FIL-0059-PAR-0001", "to_paragraph_id": null, "to_section_id": null}
-    ],
-    "unstructured_constructs": [
-      {"type": "PERFORM_THRU", "paragraph": "(UNNAMED)", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0059-PAR-0001", "statement_id": "SYS-PORTFOLIO-001-FIL-0059-STMT-000014", "target": "P100-DECLARE-CURSOR", "thru_end": "P100-EXIT", "line": 46, "severity": "warning"},
-      {"type": "PERFORM_THRU", "paragraph": "(UNNAMED)", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0059-PAR-0001", "statement_id": "SYS-PORTFOLIO-001-FIL-0059-STMT-000016", "target": "P200-OPEN-CURSOR", "thru_end": "P200-EXIT", "line": 49, "severity": "warning"},
-      {"type": "PERFORM_THRU", "paragraph": "(UNNAMED)", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0059-PAR-0001", "statement_id": "SYS-PORTFOLIO-001-FIL-0059-STMT-000015", "target": "P300-FETCH-DATA", "thru_end": "P300-EXIT", "line": 52, "severity": "warning"},
-      {"type": "PERFORM_THRU", "paragraph": "(UNNAMED)", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0059-PAR-0001", "statement_id": "SYS-PORTFOLIO-001-FIL-0059-STMT-000013", "target": "P400-CLOSE-CURSOR", "thru_end": "P400-EXIT", "line": 55, "severity": "warning"}
-    ],
-    "dead_code_candidates": [],
-    "cfg_issues": [
-      {"severity": "warning", "code": "perform_thru", "lines": [46, 49, 52, 55], "message": "PERFORM ... THRU obscures control flow (4 occurrences)."},
-      {"severity": "warning", "code": "unresolved_target", "line": 52, "statement_id": "SYS-PORTFOLIO-001-FIL-0059-STMT-000015", "message": "PERFORM P300-FETCH-DATA THRU P300-EXIT: neither paragraph exists in the source (truncated file). No relationship registered."},
-      {"severity": "warning", "code": "unresolved_target", "line": 55, "statement_id": "SYS-PORTFOLIO-001-FIL-0059-STMT-000013", "message": "PERFORM P400-CLOSE-CURSOR THRU P400-EXIT: neither paragraph exists in the source (truncated file). No relationship registered."}
-    ]
-  }
+"program_summary": {"program_id":"CURSMGR","source_file":"src/programs/online/CURSMGR.cbl","ast_file":"raw_structure/SYS-PORTFOLIO-001-FIL-0059__CURSMGR.json","total_lines":91,"paragraph_count":5,"section_count":2,"has_unstructured_flow":true,"has_alter":false,"dead_code_candidates":0,"parse_status":"partial","system_id":"SYS-PORTFOLIO-001","file_id":"SYS-PORTFOLIO-001-FIL-0059","path_id":"SYS-PORTFOLIO-001-PATH-0059","file_name":"CURSMGR.cbl","statement_count":20,"perform_edges":4,"goto_edges":0,"control_flow_relationships":4,"review_required_statements":0,"uncertain_statements":0,"parse_run_id":"PRUN-20261027T155247Z-2626"},
+"program_id":"CURSMGR","source_file":"src/programs/online/CURSMGR.cbl","total_lines":91,"system_id":"SYS-PORTFOLIO-001","file_id":"SYS-PORTFOLIO-001-FIL-0059","path_id":"SYS-PORTFOLIO-001-PATH-0059","file_name":"CURSMGR.cbl","relative_path":"src/programs/online/CURSMGR.cbl","parse_run_id":"PRUN-20261027T155247Z-2626","source_format":"fixed",
+"identification_division":{"start_line":1,"end_line":10,"program_id":"CURSMGR","author":null,"date_written":null},
+"environment_division":{"start_line":11,"end_line":12,"sections":[],"file_control_entries":[]},
+"data_division":{"start_line":13,"end_line":42,
+"file_section":{"section_id":null,"start_line":null,"entries":[]},
+"working_storage_section":{"section_id":"SYS-PORTFOLIO-001-FIL-0059-SEC-0001","start_line":14,"end_line":26,"entries":[
+{"level":1,"name":"WS-DB2-AREA","pic":null,"value":null,"line":15,"redefines":null,"occurs":null,"children":[
+{"type":"copy_stub","copybook":"SQLCA","library":null,"include_kind":"SQL_INCLUDE","line":16,"section":"WORKING-STORAGE","parent_level":"01","note":"Expanded by Data Agent"}]},
+{"level":1,"name":"WS-CURSOR-STATS","pic":null,"value":null,"line":18,"redefines":null,"occurs":null,"children":[
+{"level":5,"name":"WS-FETCH-COUNT","pic":"S9(8) COMP","value":"0","line":19,"redefines":null,"occurs":null,"children":[]},
+{"level":5,"name":"WS-ROWS-FETCHED","pic":"S9(8) COMP","value":"0","line":20,"redefines":null,"occurs":null,"children":[]},
+{"level":5,"name":"WS-FETCH-TIME","pic":"S9(8) COMP","value":"0","line":21,"redefines":null,"occurs":null,"children":[]}]},
+{"level":1,"name":"WS-ARRAY-AREA","pic":null,"value":null,"line":23,"redefines":null,"occurs":null,"children":[
+{"level":5,"name":"WS-MAX-ROWS","pic":"S9(4) COMP","value":"20","line":24,"redefines":null,"occurs":null,"children":[]},
+{"level":5,"name":"WS-ARRAY-SIZE","pic":"S9(4) COMP","value":"0","line":25,"redefines":null,"occurs":null,"children":[]}]}]},
+"linkage_section":{"section_id":"SYS-PORTFOLIO-001-FIL-0059-SEC-0002","start_line":27,"end_line":42,"entries":[
+{"level":1,"name":"CURSOR-REQUEST-AREA","pic":null,"value":null,"line":28,"section":"LINKAGE","redefines":null,"occurs":null,"children":[
+{"level":5,"name":"CURS-REQUEST-TYPE","pic":"X","value":null,"line":29,"section":"LINKAGE","children":[
+{"level":88,"name":"CURS-DECLARE","pic":null,"value":"'D'","line":30},
+{"level":88,"name":"CURS-OPEN","pic":null,"value":"'O'","line":31},
+{"level":88,"name":"CURS-FETCH","pic":null,"value":"'F'","line":32},
+{"level":88,"name":"CURS-CLOSE","pic":null,"value":"'C'","line":33}]},
+{"level":5,"name":"CURS-NAME","pic":"X(18)","value":null,"line":34,"section":"LINKAGE","children":[]},
+{"level":5,"name":"CURS-STMT","pic":"X(240)","value":null,"line":35,"section":"LINKAGE","children":[]},
+{"level":5,"name":"CURS-ARRAY-FETCH","pic":"X","value":"'N'","line":36,"section":"LINKAGE","children":[
+{"level":88,"name":"USE-ARRAY-FETCH","pic":null,"value":"'Y'","line":37},
+{"level":88,"name":"NO-ARRAY-FETCH","pic":null,"value":"'N'","line":38}]},
+{"level":5,"name":"CURS-RESPONSE-CODE","pic":"S9(8) COMP","value":null,"line":39,"section":"LINKAGE","children":[]},
+{"level":5,"name":"CURS-DATA-AREA","pic":"X(3000)","value":null,"line":40,"section":"LINKAGE","children":[]},
+{"level":5,"name":"CURS-DATA-LENGTH","pic":"S9(4) COMP","value":null,"line":41,"section":"LINKAGE","children":[]}]}]},
+"sql_declare_sections":[]},
+"procedure_division":{"start_line":43,"end_line":91,"using_parameters":["CURSOR-REQUEST-AREA"],"sections":[],
+"paragraphs":[
+{"paragraph_id":"SYS-PORTFOLIO-001-FIL-0059-PAR-0001","name":"(UNNAMED)","section":null,"section_id":null,"start_line":44,"end_line":60,"has_perform":true,"has_goto":false,"has_call":false,"has_stop_run":false,"review_status":"NONE","statement_ids":["SYS-PORTFOLIO-001-FIL-0059-STMT-000001","SYS-PORTFOLIO-001-FIL-0059-STMT-000002"]},
+{"paragraph_id":"SYS-PORTFOLIO-001-FIL-0059-PAR-0002","name":"P100-DECLARE-CURSOR","section":null,"section_id":null,"start_line":61,"end_line":76,"has_perform":false,"has_goto":false,"has_call":false,"has_stop_run":false,"review_status":"NONE","statement_ids":["SYS-PORTFOLIO-001-FIL-0059-STMT-000003","SYS-PORTFOLIO-001-FIL-0059-STMT-000004","SYS-PORTFOLIO-001-FIL-0059-STMT-000005","SYS-PORTFOLIO-001-FIL-0059-STMT-000006"]},
+{"paragraph_id":"SYS-PORTFOLIO-001-FIL-0059-PAR-0003","name":"P100-EXIT","section":null,"section_id":null,"start_line":77,"end_line":79,"has_perform":false,"has_goto":false,"has_call":false,"has_stop_run":false,"review_status":"NONE","statement_ids":["SYS-PORTFOLIO-001-FIL-0059-STMT-000007"]},
+{"paragraph_id":"SYS-PORTFOLIO-001-FIL-0059-PAR-0004","name":"P200-OPEN-CURSOR","section":null,"section_id":null,"start_line":80,"end_line":90,"has_perform":false,"has_goto":false,"has_call":false,"has_stop_run":false,"review_status":"NONE","statement_ids":["SYS-PORTFOLIO-001-FIL-0059-STMT-000008","SYS-PORTFOLIO-001-FIL-0059-STMT-000009","SYS-PORTFOLIO-001-FIL-0059-STMT-000010","SYS-PORTFOLIO-001-FIL-0059-STMT-000011"]},
+{"paragraph_id":"SYS-PORTFOLIO-001-FIL-0059-PAR-0005","name":"P200-EXIT","section":null,"section_id":null,"start_line":91,"end_line":91,"has_perform":false,"has_goto":false,"has_call":false,"has_stop_run":false,"review_status":"NONE","statement_ids":[]}],
+"statements":[
+{"statement_id":"SYS-PORTFOLIO-001-FIL-0059-STMT-000001","local_id":"L1","paragraph_id":"SYS-PORTFOLIO-001-FIL-0059-PAR-0001","paragraph":"(UNNAMED)","parent_statement_id":null,"branch":null,"depth":0,"sibling_index":1,"statement_type":"EVALUATE","source_text":"EVALUATE TRUE","start_line":44,"end_line":57,"extraction_status":"OK","match":"UNCHANGED","review_status":"NONE","review_candidates":[]},
+{"statement_id":"SYS-PORTFOLIO-001-FIL-0059-STMT-000014","local_id":"L2","paragraph_id":"SYS-PORTFOLIO-001-FIL-0059-PAR-0001","paragraph":"(UNNAMED)","parent_statement_id":"SYS-PORTFOLIO-001-FIL-0059-STMT-000001","branch":"WHEN CURS-DECLARE","depth":1,"sibling_index":1,"statement_type":"PERFORM","source_text":"PERFORM P100-DECLARE-CURSOR THRU P100-EXIT","start_line":46,"end_line":47,"extraction_status":"OK","match":"UNCHANGED","review_status":"NONE","review_candidates":[]},
+{"statement_id":"SYS-PORTFOLIO-001-FIL-0059-STMT-000016","local_id":"L3","paragraph_id":"SYS-PORTFOLIO-001-FIL-0059-PAR-0001","paragraph":"(UNNAMED)","parent_statement_id":"SYS-PORTFOLIO-001-FIL-0059-STMT-000001","branch":"WHEN CURS-OPEN","depth":1,"sibling_index":1,"statement_type":"PERFORM","source_text":"PERFORM P200-OPEN-CURSOR THRU P200-EXIT","start_line":49,"end_line":50,"extraction_status":"OK","match":"UNCHANGED","review_status":"NONE","review_candidates":[]},
+{"statement_id":"SYS-PORTFOLIO-001-FIL-0059-STMT-000015","local_id":"L4","paragraph_id":"SYS-PORTFOLIO-001-FIL-0059-PAR-0001","paragraph":"(UNNAMED)","parent_statement_id":"SYS-PORTFOLIO-001-FIL-0059-STMT-000001","branch":"WHEN CURS-FETCH","depth":1,"sibling_index":1,"statement_type":"PERFORM","source_text":"PERFORM P300-FETCH-DATA THRU P300-EXIT","start_line":52,"end_line":53,"extraction_status":"OK","match":"UNCHANGED","review_status":"NONE","review_candidates":[]},
+{"statement_id":"SYS-PORTFOLIO-001-FIL-0059-STMT-000013","local_id":"L5","paragraph_id":"SYS-PORTFOLIO-001-FIL-0059-PAR-0001","paragraph":"(UNNAMED)","parent_statement_id":"SYS-PORTFOLIO-001-FIL-0059-STMT-000001","branch":"WHEN CURS-CLOSE","depth":1,"sibling_index":1,"statement_type":"PERFORM","source_text":"PERFORM P400-CLOSE-CURSOR THRU P400-EXIT","start_line":55,"end_line":56,"extraction_status":"OK","match":"UNCHANGED","review_status":"NONE","review_candidates":[]},
+{"statement_id":"SYS-PORTFOLIO-001-FIL-0059-STMT-000002","local_id":"L6","paragraph_id":"SYS-PORTFOLIO-001-FIL-0059-PAR-0001","paragraph":"(UNNAMED)","parent_statement_id":null,"branch":null,"depth":0,"sibling_index":2,"statement_type":"EXEC CICS","source_text":"EXEC CICS RETURN END-EXEC","start_line":59,"end_line":59,"extraction_status":"OK","match":"UNCHANGED","review_status":"NONE","review_candidates":[]},
+{"statement_id":"SYS-PORTFOLIO-001-FIL-0059-STMT-000003","local_id":"L7","paragraph_id":"SYS-PORTFOLIO-001-FIL-0059-PAR-0002","paragraph":"P100-DECLARE-CURSOR","parent_statement_id":null,"branch":null,"depth":0,"sibling_index":1,"statement_type":"MOVE","source_text":"MOVE 0 TO CURS-RESPONSE-CODE","start_line":62,"end_line":62,"extraction_status":"OK","match":"UNCHANGED","review_status":"NONE","review_candidates":[]},
+{"statement_id":"SYS-PORTFOLIO-001-FIL-0059-STMT-000004","local_id":"L8","paragraph_id":"SYS-PORTFOLIO-001-FIL-0059-PAR-0002","paragraph":"P100-DECLARE-CURSOR","parent_statement_id":null,"branch":null,"depth":0,"sibling_index":2,"statement_type":"IF","source_text":"IF USE-ARRAY-FETCH","start_line":64,"end_line":68,"extraction_status":"OK","match":"UNCHANGED","review_status":"NONE","review_candidates":[]},
+{"statement_id":"SYS-PORTFOLIO-001-FIL-0059-STMT-000018","local_id":"L9","paragraph_id":"SYS-PORTFOLIO-001-FIL-0059-PAR-0002","paragraph":"P100-DECLARE-CURSOR","parent_statement_id":"SYS-PORTFOLIO-001-FIL-0059-STMT-000004","branch":"THEN","depth":1,"sibling_index":1,"statement_type":"MOVE","source_text":"MOVE WS-MAX-ROWS TO WS-ARRAY-SIZE","start_line":65,"end_line":65,"extraction_status":"OK","match":"UNCHANGED","review_status":"NONE","review_candidates":[]},
+{"statement_id":"SYS-PORTFOLIO-001-FIL-0059-STMT-000017","local_id":"L10","paragraph_id":"SYS-PORTFOLIO-001-FIL-0059-PAR-0002","paragraph":"P100-DECLARE-CURSOR","parent_statement_id":"SYS-PORTFOLIO-001-FIL-0059-STMT-000004","branch":"ELSE","depth":1,"sibling_index":1,"statement_type":"MOVE","source_text":"MOVE 1 TO WS-ARRAY-SIZE","start_line":67,"end_line":67,"extraction_status":"OK","match":"UNCHANGED","review_status":"NONE","review_candidates":[]},
+{"statement_id":"SYS-PORTFOLIO-001-FIL-0059-STMT-000005","local_id":"L11","paragraph_id":"SYS-PORTFOLIO-001-FIL-0059-PAR-0002","paragraph":"P100-DECLARE-CURSOR","parent_statement_id":null,"branch":null,"depth":0,"sibling_index":3,"statement_type":"EXEC SQL","source_text":"EXEC SQL DECLARE :CURS-NAME CURSOR FOR :CURS-STMT END-EXEC","start_line":70,"end_line":72,"extraction_status":"OK","match":"UNCHANGED","review_status":"NONE","review_candidates":[]},
+{"statement_id":"SYS-PORTFOLIO-001-FIL-0059-STMT-000006","local_id":"L12","paragraph_id":"SYS-PORTFOLIO-001-FIL-0059-PAR-0002","paragraph":"P100-DECLARE-CURSOR","parent_statement_id":null,"branch":null,"depth":0,"sibling_index":4,"statement_type":"IF","source_text":"IF SQLCODE NOT = 0","start_line":74,"end_line":76,"extraction_status":"OK","match":"UNCHANGED","review_status":"NONE","review_candidates":[]},
+{"statement_id":"SYS-PORTFOLIO-001-FIL-0059-STMT-000019","local_id":"L13","paragraph_id":"SYS-PORTFOLIO-001-FIL-0059-PAR-0002","paragraph":"P100-DECLARE-CURSOR","parent_statement_id":"SYS-PORTFOLIO-001-FIL-0059-STMT-000006","branch":"THEN","depth":1,"sibling_index":1,"statement_type":"MOVE","source_text":"MOVE SQLCODE TO CURS-RESPONSE-CODE","start_line":75,"end_line":75,"extraction_status":"OK","match":"UNCHANGED","review_status":"NONE","review_candidates":[]},
+{"statement_id":"SYS-PORTFOLIO-001-FIL-0059-STMT-000007","local_id":"L14","paragraph_id":"SYS-PORTFOLIO-001-FIL-0059-PAR-0003","paragraph":"P100-EXIT","parent_statement_id":null,"branch":null,"depth":0,"sibling_index":1,"statement_type":"EXIT","source_text":"EXIT","start_line":78,"end_line":78,"extraction_status":"OK","match":"UNCHANGED","review_status":"NONE","review_candidates":[]},
+{"statement_id":"SYS-PORTFOLIO-001-FIL-0059-STMT-000008","local_id":"L15","paragraph_id":"SYS-PORTFOLIO-001-FIL-0059-PAR-0004","paragraph":"P200-OPEN-CURSOR","parent_statement_id":null,"branch":null,"depth":0,"sibling_index":1,"statement_type":"MOVE","source_text":"MOVE 0 TO WS-FETCH-COUNT","start_line":81,"end_line":81,"extraction_status":"OK","match":"UNCHANGED","review_status":"NONE","review_candidates":[]},
+{"statement_id":"SYS-PORTFOLIO-001-FIL-0059-STMT-000009","local_id":"L16","paragraph_id":"SYS-PORTFOLIO-001-FIL-0059-PAR-0004","paragraph":"P200-OPEN-CURSOR","parent_statement_id":null,"branch":null,"depth":0,"sibling_index":2,"statement_type":"MOVE","source_text":"MOVE 0 TO WS-ROWS-FETCHED","start_line":82,"end_line":82,"extraction_status":"OK","match":"UNCHANGED","review_status":"NONE","review_candidates":[]},
+{"statement_id":"SYS-PORTFOLIO-001-FIL-0059-STMT-000010","local_id":"L17","paragraph_id":"SYS-PORTFOLIO-001-FIL-0059-PAR-0004","paragraph":"P200-OPEN-CURSOR","parent_statement_id":null,"branch":null,"depth":0,"sibling_index":3,"statement_type":"EXEC SQL","source_text":"EXEC SQL OPEN :CURS-NAME END-EXEC","start_line":84,"end_line":84,"extraction_status":"OK","match":"UNCHANGED","review_status":"NONE","review_candidates":[]},
+{"statement_id":"SYS-PORTFOLIO-001-FIL-0059-STMT-000011","local_id":"L18","paragraph_id":"SYS-PORTFOLIO-001-FIL-0059-PAR-0004","paragraph":"P200-OPEN-CURSOR","parent_statement_id":null,"branch":null,"depth":0,"sibling_index":4,"statement_type":"IF","source_text":"IF SQLCODE = 0","start_line":86,"end_line":90,"extraction_status":"OK","match":"UNCHANGED","review_status":"NONE","review_candidates":[]},
+{"statement_id":"SYS-PORTFOLIO-001-FIL-0059-STMT-000021","local_id":"L19","paragraph_id":"SYS-PORTFOLIO-001-FIL-0059-PAR-0004","paragraph":"P200-OPEN-CURSOR","parent_statement_id":"SYS-PORTFOLIO-001-FIL-0059-STMT-000011","branch":"THEN","depth":1,"sibling_index":1,"statement_type":"MOVE","source_text":"MOVE 0 TO CURS-RESPONSE-CODE","start_line":87,"end_line":87,"extraction_status":"OK","match":"UNCHANGED","review_status":"NONE","review_candidates":[]},
+{"statement_id":"SYS-PORTFOLIO-001-FIL-0059-STMT-000020","local_id":"L20","paragraph_id":"SYS-PORTFOLIO-001-FIL-0059-PAR-0004","paragraph":"P200-OPEN-CURSOR","parent_statement_id":"SYS-PORTFOLIO-001-FIL-0059-STMT-000011","branch":"ELSE","depth":1,"sibling_index":1,"statement_type":"MOVE","source_text":"MOVE SQLCODE TO CURS-RESPONSE-CODE","start_line":89,"end_line":89,"extraction_status":"OK","match":"UNCHANGED","review_status":"NONE","review_candidates":[]}],
+"terminal_statements":[
+{"type":"CICS RETURN","line":59,"paragraph":"(UNNAMED)","paragraph_id":"SYS-PORTFOLIO-001-FIL-0059-PAR-0001","statement_id":"SYS-PORTFOLIO-001-FIL-0059-STMT-000002"}]},
+"copy_stubs":[
+{"copybook":"SQLCA","include_kind":"SQL_INCLUDE","division":"DATA","section":"WORKING-STORAGE","line":16}],
+"control_flow_graph":{
+"entry_points":["(UNNAMED)"],
+"entry_point_ids":["SYS-PORTFOLIO-001-FIL-0059-PAR-0001"],
+"terminal_nodes":["(UNNAMED)"],
+"nodes":[
+{"id":"(UNNAMED)","paragraph_id":"SYS-PORTFOLIO-001-FIL-0059-PAR-0001","type":"paragraph","section":null,"section_id":null,"start_line":44,"end_line":60,"is_entry_point":true,"is_terminal":true,"is_dead_code":false,"unstructured_constructs":["PERFORM_THRU"]},
+{"id":"P100-DECLARE-CURSOR","paragraph_id":"SYS-PORTFOLIO-001-FIL-0059-PAR-0002","type":"paragraph","section":null,"section_id":null,"start_line":61,"end_line":76,"is_entry_point":false,"is_terminal":false,"is_dead_code":false,"unstructured_constructs":[]},
+{"id":"P100-EXIT","paragraph_id":"SYS-PORTFOLIO-001-FIL-0059-PAR-0003","type":"paragraph","section":null,"section_id":null,"start_line":77,"end_line":79,"is_entry_point":false,"is_terminal":false,"is_dead_code":false,"unstructured_constructs":[]},
+{"id":"P200-OPEN-CURSOR","paragraph_id":"SYS-PORTFOLIO-001-FIL-0059-PAR-0004","type":"paragraph","section":null,"section_id":null,"start_line":80,"end_line":90,"is_entry_point":false,"is_terminal":false,"is_dead_code":false,"unstructured_constructs":[]},
+{"id":"P200-EXIT","paragraph_id":"SYS-PORTFOLIO-001-FIL-0059-PAR-0005","type":"paragraph","section":null,"section_id":null,"start_line":91,"end_line":91,"is_entry_point":false,"is_terminal":false,"is_dead_code":false,"unstructured_constructs":[]}],
+"edges":[
+{"from":"(UNNAMED)","to":"P100-DECLARE-CURSOR","type":"PERFORM_THRU","resolved":true,"unstructured":true,"thru_end":"P100-EXIT","thru_end_paragraph_id":"SYS-PORTFOLIO-001-FIL-0059-PAR-0003","implicit_thru_range":["P100-DECLARE-CURSOR","P100-EXIT"],"implicit_thru_range_ids":["SYS-PORTFOLIO-001-FIL-0059-PAR-0002","SYS-PORTFOLIO-001-FIL-0059-PAR-0003"],"source_line":46,"statement_id":"SYS-PORTFOLIO-001-FIL-0059-STMT-000014","from_paragraph_id":"SYS-PORTFOLIO-001-FIL-0059-PAR-0001","to_paragraph_id":"SYS-PORTFOLIO-001-FIL-0059-PAR-0002","to_section_id":null},
+{"from":"(UNNAMED)","to":"P200-OPEN-CURSOR","type":"PERFORM_THRU","resolved":true,"unstructured":true,"thru_end":"P200-EXIT","thru_end_paragraph_id":"SYS-PORTFOLIO-001-FIL-0059-PAR-0005","implicit_thru_range":["P200-OPEN-CURSOR","P200-EXIT"],"implicit_thru_range_ids":["SYS-PORTFOLIO-001-FIL-0059-PAR-0004","SYS-PORTFOLIO-001-FIL-0059-PAR-0005"],"source_line":49,"statement_id":"SYS-PORTFOLIO-001-FIL-0059-STMT-000016","from_paragraph_id":"SYS-PORTFOLIO-001-FIL-0059-PAR-0001","to_paragraph_id":"SYS-PORTFOLIO-001-FIL-0059-PAR-0004","to_section_id":null},
+{"from":"(UNNAMED)","to":"P300-FETCH-DATA","type":"PERFORM_THRU","resolved":false,"unstructured":true,"thru_end":"P300-EXIT","thru_end_paragraph_id":null,"implicit_thru_range":null,"implicit_thru_range_ids":null,"source_line":52,"statement_id":"SYS-PORTFOLIO-001-FIL-0059-STMT-000015","from_paragraph_id":"SYS-PORTFOLIO-001-FIL-0059-PAR-0001","to_paragraph_id":null,"to_section_id":null},
+{"from":"(UNNAMED)","to":"P400-CLOSE-CURSOR","type":"PERFORM_THRU","resolved":false,"unstructured":true,"thru_end":"P400-EXIT","thru_end_paragraph_id":null,"implicit_thru_range":null,"implicit_thru_range_ids":null,"source_line":55,"statement_id":"SYS-PORTFOLIO-001-FIL-0059-STMT-000013","from_paragraph_id":"SYS-PORTFOLIO-001-FIL-0059-PAR-0001","to_paragraph_id":null,"to_section_id":null}],
+"unstructured_constructs":[
+{"type":"PERFORM_THRU","paragraph":"(UNNAMED)","paragraph_id":"SYS-PORTFOLIO-001-FIL-0059-PAR-0001","statement_id":"SYS-PORTFOLIO-001-FIL-0059-STMT-000014","target":"P100-DECLARE-CURSOR","thru_end":"P100-EXIT","line":46,"severity":"warning"},
+{"type":"PERFORM_THRU","paragraph":"(UNNAMED)","paragraph_id":"SYS-PORTFOLIO-001-FIL-0059-PAR-0001","statement_id":"SYS-PORTFOLIO-001-FIL-0059-STMT-000016","target":"P200-OPEN-CURSOR","thru_end":"P200-EXIT","line":49,"severity":"warning"},
+{"type":"PERFORM_THRU","paragraph":"(UNNAMED)","paragraph_id":"SYS-PORTFOLIO-001-FIL-0059-PAR-0001","statement_id":"SYS-PORTFOLIO-001-FIL-0059-STMT-000015","target":"P300-FETCH-DATA","thru_end":"P300-EXIT","line":52,"severity":"warning"},
+{"type":"PERFORM_THRU","paragraph":"(UNNAMED)","paragraph_id":"SYS-PORTFOLIO-001-FIL-0059-PAR-0001","statement_id":"SYS-PORTFOLIO-001-FIL-0059-STMT-000013","target":"P400-CLOSE-CURSOR","thru_end":"P400-EXIT","line":55,"severity":"warning"}],
+"dead_code_candidates":[],
+"cfg_issues":[
+{"severity":"warning","type":"perform_thru","statement_id":"SYS-PORTFOLIO-001-FIL-0059-STMT-000014","line":46,"message":"PERFORM P100-DECLARE-CURSOR THRU P100-EXIT obscures control flow"},
+{"severity":"warning","type":"perform_thru","statement_id":"SYS-PORTFOLIO-001-FIL-0059-STMT-000016","line":49,"message":"PERFORM P200-OPEN-CURSOR THRU P200-EXIT obscures control flow"},
+{"severity":"warning","type":"perform_thru","statement_id":"SYS-PORTFOLIO-001-FIL-0059-STMT-000015","line":52,"message":"PERFORM P300-FETCH-DATA THRU P300-EXIT obscures control flow"},
+{"severity":"warning","type":"perform_thru","statement_id":"SYS-PORTFOLIO-001-FIL-0059-STMT-000013","line":55,"message":"PERFORM P400-CLOSE-CURSOR THRU P400-EXIT obscures control flow"},
+{"severity":"warning","type":"unresolved_target","statement_id":"SYS-PORTFOLIO-001-FIL-0059-STMT-000015","line":52,"target":"P300-FETCH-DATA","thru_end":"P300-EXIT","message":"Targets P300-FETCH-DATA and P300-EXIT are not declared in this file (source ends at line 91); no relationship registered"},
+{"severity":"warning","type":"unresolved_target","statement_id":"SYS-PORTFOLIO-001-FIL-0059-STMT-000013","line":55,"target":"P400-CLOSE-CURSOR","thru_end":"P400-EXIT","message":"Targets P400-CLOSE-CURSOR and P400-EXIT are not declared in this file (source ends at line 91); no relationship registered"}]},
+"parse_issues":[
+{"severity":"info","type":"unnamed_paragraph","lines":"44-60","message":"Statements between PROCEDURE DIVISION and the first paragraph name recorded as (UNNAMED)"},
+{"severity":"warning","type":"paragraph_header_without_period","line":91,"paragraph":"P200-EXIT","message":"Lone name P200-EXIT in Area A without a period at end of file; recorded as paragraph header"},
+{"severity":"warning","type":"truncated_source","line":91,"message":"Source appears truncated after line 91: P200-EXIT has no body and paragraphs P300-FETCH-DATA, P300-EXIT, P400-CLOSE-CURSOR, P400-EXIT referenced by PERFORM THRU are not present"}]
 }

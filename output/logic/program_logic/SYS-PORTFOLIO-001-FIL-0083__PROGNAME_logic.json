@@ -5,22 +5,21 @@
 "file_id": "SYS-PORTFOLIO-001-FIL-0083",
 "path_id": "SYS-PORTFOLIO-001-PATH-0083",
 "relative_path": "src/templates/program/standard-program.cbl",
-"parse_run_id": "PRUN-20261023T023803Z-ACC2",
+"file_name": "standard-program.cbl",
+"parse_run_id": "PRUN-20261027T155247Z-2626",
+"data_run_id": "DRUN-20261027T162831Z-1330",
+"generated_at": "2026-10-27T21:36:00Z",
+"agent_version": "4_logic@1.0",
 "upstream": {
+  "parse_status": "success",
+  "ast_file": "raw_structure/SYS-PORTFOLIO-001-FIL-0083__PROGNAME.json",
+  "data_layout": "data_layouts/SYS-PORTFOLIO-001-FIL-0083__PROGNAME_WS.json",
+  "copybook_layouts": [],
   "verification": {
     "verdict": "VALID",
-    "verdict_reasons": ["V2, V3, V4 consistent; Agent 2 parse_status 'success'; no copybooks expanded; no copy stubs"],
-    "checked_at": "2026-10-26T16:53:40Z",
-    "v1": {"raw_structure": "present", "parse_status": "success", "program_layout": "present", "copybook_layouts": [], "unresolved_copy_stubs": 0},
-    "v2_file_identities": {
-      "program_entries": {"require_completed": ["parser", "data"], "entries": ["raw_structure|SYS-PORTFOLIO-001-FIL-0083", "data_layout|SYS-PORTFOLIO-001-FIL-0083"], "data_run_id": "DRUN-20261024T215053Z-ACC1", "result": "batched with BCHCTL00, HISTLD00 and PORTMSTR program entries: checked 8, ok 8, problems [], duplicates [], consistent true"},
-      "copybook_entries": {"require_completed": ["data"], "entries": [], "result": "no copybook layouts used"},
-      "consistent": true
-    },
-    "v3_structure_identities": {"sections_checked": 5, "paragraphs_checked": 5, "statements_checked": 8, "edges_checked": 3, "registered_edges": 3, "section_problems": [], "paragraph_problems": [], "statement_problems": [], "edge_problems": [], "invalid_registered_edges": [], "registered_not_in_json": {"sections": [], "paragraphs": [], "statements": [], "missing_count": 0}, "duplicate_ids_in_json": [], "consistent": true, "note": "section names sent for SEC-0001 CONFIGURATION and SEC-0002 INPUT-OUTPUT; null for the data-division sections SEC-0003..SEC-0005 (raw_structure does not carry their names)"},
-    "v4_data_identities": [
-      {"file_id": "SYS-PORTFOLIO-001-FIL-0083", "layout": "program", "file_type": "program", "records_checked": 3, "fields_checked": 7, "expansions_checked": 0, "record_problems": [], "field_problems": [], "expansion_problems": [], "copybook_records_in_program": 0, "registered_not_in_json": {"records": [], "fields": [], "missing_count": 0}, "duplicate_ids_in_json": [], "consistent": true}
-    ]
+    "v2_file_identities": {"require_completed": ["parser", "data"], "entries": ["raw_structure", "data_layout"], "checked": 2, "ok": 2, "problems": [], "consistent": true, "note": "checked in one batched call with the other programs of this run (12 entries, 12 OK)"},
+    "v3_structure_identities": {"sections_checked": 5, "paragraphs_checked": 5, "statements_checked": 8, "edges_checked": 3, "registered_edges": 3, "problems": [], "invalid_registered_edges": [], "registered_not_in_json": {"missing_count": 0}, "duplicate_ids_in_json": [], "consistent": true},
+    "v4_data_identities": {"program_layout": {"file_id": "SYS-PORTFOLIO-001-FIL-0083", "records_checked": 3, "fields_checked": 7, "expansions_checked": 0, "problems": [], "registered_not_in_json": {"missing_count": 0}, "consistent": true}, "copybook_layouts": []}
   }
 },
 "execution_traces": [
@@ -28,183 +27,127 @@
     "entry_point": "0000-MAIN",
     "entry_point_id": "SYS-PORTFOLIO-001-FIL-0083-PAR-0001",
     "entry_type": "batch_main",
-    "entry_note": "PROCEDURE DIVISION has no USING clause; the program ends with GOBACK (returns to caller, or terminates if run as main program)",
     "steps": [
-      {"step": 1, "paragraph": "0000-MAIN", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0083-PAR-0001", "action": "PERFORM", "target": "1000-INITIALIZE", "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0083-PAR-0002", "target_section_id": null, "condition": null, "line": 54, "statement_id": "SYS-PORTFOLIO-001-FIL-0083-STMT-000001"},
-      {"step": 2, "paragraph": "0000-MAIN", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0083-PAR-0001", "action": "PERFORM_UNTIL", "target": "2000-PROCESS", "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0083-PAR-0003", "target_section_id": null,
-       "condition": {"text": "END-OF-FILE", "fields": ["END-OF-FILE"], "field_ids": [{"name": "END-OF-FILE", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0083-FLD-000005", "target_kind": "condition", "candidate_ids": []}], "test_time": "BEFORE", "loop_type": "WHILE", "termination_pattern": "SINGLE_PASS_LOOP"},
-       "line": 56, "statement_id": "SYS-PORTFOLIO-001-FIL-0083-STMT-000002"},
-      {"step": 3, "paragraph": "0000-MAIN", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0083-PAR-0001", "action": "PERFORM", "target": "3000-TERMINATE", "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0083-PAR-0004", "target_section_id": null, "condition": null, "line": 59, "statement_id": "SYS-PORTFOLIO-001-FIL-0083-STMT-000003"},
-      {"step": 4, "paragraph": "0000-MAIN", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0083-PAR-0001", "action": "GOBACK", "target": null, "target_paragraph_id": null, "target_section_id": null, "condition": null, "line": 61, "statement_id": "SYS-PORTFOLIO-001-FIL-0083-STMT-000004"}
+      {"step": 1, "depth": 0, "paragraph": "0000-MAIN", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0083-PAR-0001", "action": "PERFORM", "target": "1000-INITIALIZE", "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0083-PAR-0002", "target_section_id": null, "condition": null, "line": 54, "statement_id": "SYS-PORTFOLIO-001-FIL-0083-STMT-000001"},
+      {"step": 2, "depth": 0, "paragraph": "0000-MAIN", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0083-PAR-0001", "action": "PERFORM_UNTIL", "target": "2000-PROCESS", "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0083-PAR-0003", "target_section_id": null, "condition": {"text": "END-OF-FILE", "fields": ["END-OF-FILE"], "field_ids": [{"name": "END-OF-FILE", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0083-FLD-000005", "target_kind": "condition", "candidate_ids": []}], "test_time": "BEFORE", "loop_type": "WHILE", "termination_pattern": "CONDITIONAL_TERMINATION_LOOP"}, "line": 56, "statement_id": "SYS-PORTFOLIO-001-FIL-0083-STMT-000002"},
+      {"step": 3, "depth": 1, "paragraph": "2000-PROCESS", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0083-PAR-0003", "action": "SET_CONDITION", "target": "END-OF-FILE", "target_paragraph_id": null, "target_section_id": null, "condition": null, "line": 75, "statement_id": "SYS-PORTFOLIO-001-FIL-0083-STMT-000006", "note": "loop-termination flag set unconditionally inside the loop body"},
+      {"step": 4, "depth": 0, "paragraph": "0000-MAIN", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0083-PAR-0001", "action": "PERFORM", "target": "3000-TERMINATE", "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0083-PAR-0004", "target_section_id": null, "condition": null, "line": 59, "statement_id": "SYS-PORTFOLIO-001-FIL-0083-STMT-000003"},
+      {"step": 5, "depth": 0, "paragraph": "0000-MAIN", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0083-PAR-0001", "action": "GOBACK", "target": null, "target_paragraph_id": null, "target_section_id": null, "condition": null, "line": 61, "statement_id": "SYS-PORTFOLIO-001-FIL-0083-STMT-000004"}
     ]
   }
+],
+"execution_paths": [
+  {"path_id_local": "P1", "entry_point": "0000-MAIN", "entry_point_id": "SYS-PORTFOLIO-001-FIL-0083-PAR-0001", "summary": "Initialise work areas, run 2000-PROCESS once (it sets END-OF-FILE on the first pass), set RETURN-CODE from WS-RETURN-CODE, GOBACK.", "paragraph_sequence": ["0000-MAIN", "1000-INITIALIZE", "2000-PROCESS", "3000-TERMINATE"], "paragraph_ids": ["SYS-PORTFOLIO-001-FIL-0083-PAR-0001", "SYS-PORTFOLIO-001-FIL-0083-PAR-0002", "SYS-PORTFOLIO-001-FIL-0083-PAR-0003", "SYS-PORTFOLIO-001-FIL-0083-PAR-0004"], "conditions": [], "terminal": "GOBACK", "terminal_statement_id": "SYS-PORTFOLIO-001-FIL-0083-STMT-000004"}
 ],
 "branch_map": [],
 "loops": [
-  {"paragraph": "0000-MAIN", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0083-PAR-0001", "target": "2000-PROCESS", "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0083-PAR-0003", "type": "PERFORM_UNTIL", "condition_fields": ["END-OF-FILE"],
-   "condition_field_ids": [{"name": "END-OF-FILE", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0083-FLD-000005", "target_kind": "condition", "candidate_ids": []}],
-   "termination_pattern": "SINGLE_PASS_LOOP",
-   "modifying_statement_ids": ["SYS-PORTFOLIO-001-FIL-0083-STMT-000006"],
-   "line": 56, "statement_id": "SYS-PORTFOLIO-001-FIL-0083-STMT-000002"}
+  {"paragraph": "0000-MAIN", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0083-PAR-0001", "target": "2000-PROCESS", "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0083-PAR-0003", "type": "PERFORM_UNTIL", "condition_text": "END-OF-FILE", "condition_fields": ["END-OF-FILE"], "condition_field_ids": [{"name": "END-OF-FILE", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0083-FLD-000005", "target_kind": "condition", "candidate_ids": []}], "test_time": "BEFORE", "termination_pattern": "CONDITIONAL_TERMINATION_LOOP", "termination_note": "END-OF-FILE (88 on WS-END-OF-FILE-SW, VALUE 'Y'; switch initial VALUE 'N') is set TRUE unconditionally by SET END-OF-FILE TO TRUE in 2000-PROCESS line 75, so the body runs exactly once. Template placeholder - no file read drives the loop.", "modifying_statement_ids": ["SYS-PORTFOLIO-001-FIL-0083-STMT-000006"], "line": 56, "statement_id": "SYS-PORTFOLIO-001-FIL-0083-STMT-000002"}
 ],
 "dead_code_confirmed": [
-  {"paragraph": "9000-HANDLE-ERROR", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0083-PAR-0005"}
+  {"paragraph": "9000-HANDLE-ERROR", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0083-PAR-0005", "evidence": "No PERFORM, GO TO or THRU reference to 9000-HANDLE-ERROR anywhere in the source (searched); not an entry point."}
 ],
 "unresolvable_paths": [],
 "trace_issues": [
-  {"severity": "info", "type": "upstream_issue", "upstream_agent": "2_parser", "upstream_type": "inline_comment_removed", "lines": [20, 24, 47, 74, 88], "message": "Lines whose program text is only an inline '*>' comment (Area B); removed before analysis."},
-  {"severity": "info", "type": "upstream_issue", "upstream_agent": "2_parser", "upstream_type": "template_source", "message": "File is a program template under src/templates (PROGRAM-ID PROGNAME); parsed as-is."},
-  {"severity": "info", "type": "upstream_issue", "upstream_agent": "2_parser", "upstream_type": "empty_data_sections", "message": "FILE SECTION (lines 23-25) and LINKAGE SECTION (lines 46-48) contain no data entries."},
-  {"severity": "info", "type": "upstream_issue", "upstream_agent": "2_parser", "upstream_type": "dead_code_candidate", "paragraph": "9000-HANDLE-ERROR", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0083-PAR-0005", "message": "Paragraph has no incoming control-flow edge (confirmed by this trace)."},
-  {"severity": "info", "type": "upstream_issue", "upstream_agent": "3_data", "upstream_type": "misplaced_comment_indicator", "line": 20, "message": "Lines 20, 24 and 47 start with '*>' in column 12; skipped as comments."},
-  {"severity": "info", "type": "upstream_issue", "upstream_agent": "3_data", "upstream_type": "empty_data_section", "line": 23, "message": "FILE SECTION and LINKAGE SECTION contain no data entries; FILE-CONTROL has no SELECT entries."},
-  {"severity": "info", "type": "upstream_issue", "upstream_agent": "3_data", "upstream_type": "value_literal_longer_than_pic", "line": 31, "message": "WS-PROGRAM-NAME PIC X(08) has VALUE 'PROGNAME ' (9 characters). Literal recorded as written."},
-  {"severity": "info", "type": "dead_code_confirmed", "paragraph": "9000-HANDLE-ERROR", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0083-PAR-0005", "message": "Source search for PERFORM / GO TO / THRU 9000-HANDLE-ERROR finds only the paragraph header at line 87; the paragraph is last in the program and is not reached by fall-through (control returns from 3000-TERMINATE to the PERFORM at line 59)."},
-  {"severity": "info", "type": "loop_pattern_not_in_catalogue", "line": 56, "statement_id": "SYS-PORTFOLIO-001-FIL-0083-STMT-000002", "message": "PERFORM 2000-PROCESS UNTIL END-OF-FILE: the termination flag is set unconditionally by the only statement of the body (SET END-OF-FILE TO TRUE, line 75). None of FILE_EXHAUSTION / COUNTED / EXTERNAL_TERMINATION / POTENTIAL_INFINITE / CONDITIONAL_TERMINATION applies; recorded as SINGLE_PASS_LOOP. The template comment at line 74 says main processing logic is still to be added."}
+  {"severity": "info", "type": "upstream_issue", "upstream_agent": "1_inventory", "upstream_type": "no_outgoing_references", "message": "Agent 1: No outgoing references found - normal for templates"},
+  {"severity": "info", "type": "upstream_issue", "upstream_agent": "2_parser", "upstream_type": "template_source", "message": "Agent 2: File is a program template (src/templates); placeholder comments only, structure recorded as found"},
+  {"severity": "info", "type": "upstream_issue", "upstream_agent": "2_parser", "upstream_type": "inline_comment_lines", "message": "Agent 2: lines 20, 24, 47, 74, 88 contain only '*>' inline comments and were not parsed"},
+  {"severity": "info", "type": "upstream_issue", "upstream_agent": "3_data", "upstream_type": "empty_section", "message": "Agent 3: FILE SECTION (line 23) and LINKAGE SECTION (line 46) contain no data entries"},
+  {"severity": "info", "type": "dead_code_confirmed", "paragraph": "9000-HANDLE-ERROR", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0083-PAR-0005", "message": "Parser dead-code candidate confirmed by source search: no PERFORM/GO TO/THRU reference"},
+  {"severity": "info", "type": "single_iteration_loop", "statement_id": "SYS-PORTFOLIO-001-FIL-0083-STMT-000002", "message": "PERFORM 2000-PROCESS UNTIL END-OF-FILE executes once: the body sets END-OF-FILE unconditionally"}
 ],
-"program_narrative": "Program PROGNAME is a batch program template (src/templates/program/standard-program.cbl) with no files, no linkage parameters and no business logic yet. It clears its work area (WS-WORK-AREAS), then performs the processing paragraph 2000-PROCESS until the END-OF-FILE switch is set; because 2000-PROCESS only sets END-OF-FILE to true (a placeholder comment marks where processing logic would go), the loop body runs exactly once. It then copies WS-RETURN-CODE (initially 0) into the RETURN-CODE special register and returns with GOBACK. The error paragraph 9000-HANDLE-ERROR, which would set the return code to WS-ERROR (8), is never performed and is confirmed dead code. No error conditions are handled at run time.",
+"program_narrative": "Program PROGNAME is a program template (src/templates/program/standard-program.cbl), not a business program. It defines the standard skeleton: 0000-MAIN initialises the work areas, repeats 2000-PROCESS until the END-OF-FILE switch is set, runs 3000-TERMINATE and returns to the caller. In the template, 2000-PROCESS only sets END-OF-FILE, so the processing loop runs exactly once; no files, tables or external programs are used. 3000-TERMINATE passes WS-RETURN-CODE (initially 0) back as the program return code. The error routine 9000-HANDLE-ERROR (which would set the return code to 8) is never invoked and is confirmed dead code.",
 "paragraphs": [
   {
-    "name": "0000-MAIN",
-    "paragraph_id": "SYS-PORTFOLIO-001-FIL-0083-PAR-0001",
-    "section": null,
-    "section_id": null,
-    "line_range": [53, 65],
+    "name": "0000-MAIN", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0083-PAR-0001", "section": null, "section_id": null, "line_range": [53, 65],
+    "statement_ids": ["SYS-PORTFOLIO-001-FIL-0083-STMT-000001", "SYS-PORTFOLIO-001-FIL-0083-STMT-000002", "SYS-PORTFOLIO-001-FIL-0083-STMT-000003", "SYS-PORTFOLIO-001-FIL-0083-STMT-000004"],
     "pseudocode": [
-      "-- Main control paragraph: initialise, process, terminate",
+      "-- Main control paragraph: initialise, process until end-of-file, terminate",
       "CALL 1000-initialize",
-      "WHILE NOT end_of_file DO  -- END-OF-FILE: WS-END-OF-FILE-SW = 'Y'; tested before each iteration",
+      "WHILE NOT end_of_file DO  -- PERFORM ... UNTIL END-OF-FILE (condition tested before each pass); END-OF-FILE is true when ws_end_of_file_sw = 'Y'",
       "  CALL 2000-process",
       "END WHILE",
       "CALL 3000-terminate",
-      "RETURN to caller (or terminate if main program)  -- GOBACK"
+      "RETURN to caller  -- GOBACK"
     ],
-    "pseudocode_statement_ids": [
-      [],
-      ["SYS-PORTFOLIO-001-FIL-0083-STMT-000001"],
-      ["SYS-PORTFOLIO-001-FIL-0083-STMT-000002"],
-      ["SYS-PORTFOLIO-001-FIL-0083-STMT-000002"],
-      ["SYS-PORTFOLIO-001-FIL-0083-STMT-000002"],
-      ["SYS-PORTFOLIO-001-FIL-0083-STMT-000003"],
-      ["SYS-PORTFOLIO-001-FIL-0083-STMT-000004"]
-    ],
-    "pseudocode_text": "-- Main control paragraph: initialise, process, terminate\nCALL 1000-initialize\nWHILE NOT end_of_file DO  -- END-OF-FILE: WS-END-OF-FILE-SW = 'Y'; tested before each iteration\n  CALL 2000-process\nEND WHILE\nCALL 3000-terminate\nRETURN to caller (or terminate if main program)  -- GOBACK",
-    "statement_ids": ["SYS-PORTFOLIO-001-FIL-0083-STMT-000001", "SYS-PORTFOLIO-001-FIL-0083-STMT-000002", "SYS-PORTFOLIO-001-FIL-0083-STMT-000003", "SYS-PORTFOLIO-001-FIL-0083-STMT-000004"],
+    "pseudocode_statement_ids": [[], ["SYS-PORTFOLIO-001-FIL-0083-STMT-000001"], ["SYS-PORTFOLIO-001-FIL-0083-STMT-000002"], ["SYS-PORTFOLIO-001-FIL-0083-STMT-000002"], ["SYS-PORTFOLIO-001-FIL-0083-STMT-000002"], ["SYS-PORTFOLIO-001-FIL-0083-STMT-000003"], ["SYS-PORTFOLIO-001-FIL-0083-STMT-000004"]],
+    "pseudocode_text": "-- Main control paragraph: initialise, process until end-of-file, terminate\nCALL 1000-initialize\nWHILE NOT end_of_file DO  -- PERFORM ... UNTIL END-OF-FILE (condition tested before each pass); END-OF-FILE is true when ws_end_of_file_sw = 'Y'\n  CALL 2000-process\nEND WHILE\nCALL 3000-terminate\nRETURN to caller  -- GOBACK",
     "untranslated_statement_ids": [],
     "field_references": ["END-OF-FILE"],
-    "field_reference_ids": [
-      {"name": "END-OF-FILE", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0083-FLD-000005", "target_kind": "condition", "candidate_ids": []}
-    ],
+    "field_reference_ids": [{"name": "END-OF-FILE", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0083-FLD-000005", "target_kind": "condition", "candidate_ids": []}],
     "calls_made": ["1000-INITIALIZE", "2000-PROCESS", "3000-TERMINATE"],
-    "calls_made_ids": [
-      {"name": "1000-INITIALIZE", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0083-PAR-0002", "section_id": null},
-      {"name": "2000-PROCESS", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0083-PAR-0003", "section_id": null},
-      {"name": "3000-TERMINATE", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0083-PAR-0004", "section_id": null}
-    ],
-    "complexity_score": 1,
-    "has_unresolved_statements": false,
-    "annotations": [
-      {"line": 56, "statement_id": "SYS-PORTFOLIO-001-FIL-0083-STMT-000002", "note": "PERFORM ... UNTIL tests the condition before each execution (default TEST BEFORE). Because 2000-PROCESS sets END-OF-FILE unconditionally, the loop body runs once."}
-    ]
+    "calls_made_ids": [{"name": "1000-INITIALIZE", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0083-PAR-0002", "section_id": null}, {"name": "2000-PROCESS", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0083-PAR-0003", "section_id": null}, {"name": "3000-TERMINATE", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0083-PAR-0004", "section_id": null}],
+    "complexity_score": 1, "has_unresolved_statements": false, "annotations": []
   },
   {
-    "name": "1000-INITIALIZE",
-    "paragraph_id": "SYS-PORTFOLIO-001-FIL-0083-PAR-0002",
-    "section": null,
-    "section_id": null,
-    "line_range": [66, 72],
-    "pseudocode": [
-      "CLEAR ws_work_areas  -- INITIALIZE: numeric fields set to zero (WS-RETURN-CODE = 0)"
-    ],
-    "pseudocode_statement_ids": [["SYS-PORTFOLIO-001-FIL-0083-STMT-000005"]],
-    "pseudocode_text": "CLEAR ws_work_areas  -- INITIALIZE: numeric fields set to zero (WS-RETURN-CODE = 0)",
+    "name": "1000-INITIALIZE", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0083-PAR-0002", "section": null, "section_id": null, "line_range": [66, 72],
     "statement_ids": ["SYS-PORTFOLIO-001-FIL-0083-STMT-000005"],
+    "pseudocode": [
+      "-- Initialisation",
+      "RESET ws_work_areas to default values  -- COBOL INITIALIZE: numeric items set to zero, alphanumeric to spaces (ws_return_code = 0)"
+    ],
+    "pseudocode_statement_ids": [[], ["SYS-PORTFOLIO-001-FIL-0083-STMT-000005"]],
+    "pseudocode_text": "-- Initialisation\nRESET ws_work_areas to default values  -- COBOL INITIALIZE: numeric items set to zero, alphanumeric to spaces (ws_return_code = 0)",
     "untranslated_statement_ids": [],
     "field_references": ["WS-WORK-AREAS"],
-    "field_reference_ids": [
-      {"name": "WS-WORK-AREAS", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0083-REC-0003", "target_kind": "record", "candidate_ids": []}
-    ],
-    "calls_made": [],
-    "calls_made_ids": [],
-    "complexity_score": 1,
-    "has_unresolved_statements": false,
-    "annotations": []
+    "field_reference_ids": [{"name": "WS-WORK-AREAS", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0083-REC-0003", "target_kind": "record", "candidate_ids": []}],
+    "calls_made": [], "calls_made_ids": [],
+    "complexity_score": 1, "has_unresolved_statements": false, "annotations": []
   },
   {
-    "name": "2000-PROCESS",
-    "paragraph_id": "SYS-PORTFOLIO-001-FIL-0083-PAR-0003",
-    "section": null,
-    "section_id": null,
-    "line_range": [73, 80],
+    "name": "2000-PROCESS", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0083-PAR-0003", "section": null, "section_id": null, "line_range": [73, 80],
+    "statement_ids": ["SYS-PORTFOLIO-001-FIL-0083-STMT-000006"],
     "pseudocode": [
-      "-- Placeholder: template comment at line 74 says main processing logic will go here",
-      "SET end_of_file = TRUE  -- WS-END-OF-FILE-SW = 'Y'; ends the loop in 0000-MAIN"
+      "-- Main processing (template placeholder: no business logic present)",
+      "SET end_of_file = TRUE  -- SET 88-level: ws_end_of_file_sw = 'Y'; ends the main loop after this pass"
     ],
     "pseudocode_statement_ids": [[], ["SYS-PORTFOLIO-001-FIL-0083-STMT-000006"]],
-    "pseudocode_text": "-- Placeholder: template comment at line 74 says main processing logic will go here\nSET end_of_file = TRUE  -- WS-END-OF-FILE-SW = 'Y'; ends the loop in 0000-MAIN",
-    "statement_ids": ["SYS-PORTFOLIO-001-FIL-0083-STMT-000006"],
+    "pseudocode_text": "-- Main processing (template placeholder: no business logic present)\nSET end_of_file = TRUE  -- SET 88-level: ws_end_of_file_sw = 'Y'; ends the main loop after this pass",
     "untranslated_statement_ids": [],
     "field_references": ["END-OF-FILE"],
-    "field_reference_ids": [
-      {"name": "END-OF-FILE", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0083-FLD-000005", "target_kind": "condition", "candidate_ids": []}
-    ],
-    "calls_made": [],
-    "calls_made_ids": [],
-    "complexity_score": 1,
-    "has_unresolved_statements": false,
-    "annotations": []
+    "field_reference_ids": [{"name": "END-OF-FILE", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0083-FLD-000005", "target_kind": "condition", "candidate_ids": []}],
+    "calls_made": [], "calls_made_ids": [],
+    "complexity_score": 1, "has_unresolved_statements": false,
+    "annotations": [{"line": 74, "note": "Line 74 is an inline '*>' comment placeholder ('Main processing logic will go here'); not parsed by Agent 2"}]
   },
   {
-    "name": "3000-TERMINATE",
-    "paragraph_id": "SYS-PORTFOLIO-001-FIL-0083-PAR-0004",
-    "section": null,
-    "section_id": null,
-    "line_range": [81, 86],
-    "pseudocode": [
-      "SET program_return_code = ws_return_code  -- RETURN-CODE special register, passed back to the caller / job step"
-    ],
-    "pseudocode_statement_ids": [["SYS-PORTFOLIO-001-FIL-0083-STMT-000007"]],
-    "pseudocode_text": "SET program_return_code = ws_return_code  -- RETURN-CODE special register, passed back to the caller / job step",
+    "name": "3000-TERMINATE", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0083-PAR-0004", "section": null, "section_id": null, "line_range": [81, 86],
     "statement_ids": ["SYS-PORTFOLIO-001-FIL-0083-STMT-000007"],
+    "pseudocode": [
+      "-- Termination",
+      "SET program_return_code = ws_return_code  -- RETURN-CODE is the COBOL special register returned to the caller / job step"
+    ],
+    "pseudocode_statement_ids": [[], ["SYS-PORTFOLIO-001-FIL-0083-STMT-000007"]],
+    "pseudocode_text": "-- Termination\nSET program_return_code = ws_return_code  -- RETURN-CODE is the COBOL special register returned to the caller / job step",
     "untranslated_statement_ids": [],
     "field_references": ["WS-RETURN-CODE"],
-    "field_reference_ids": [
-      {"name": "WS-RETURN-CODE", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0083-FLD-000007", "target_kind": "field", "candidate_ids": []}
-    ],
-    "calls_made": [],
-    "calls_made_ids": [],
-    "complexity_score": 1,
-    "has_unresolved_statements": false,
-    "annotations": [
-      {"line": 82, "statement_id": "SYS-PORTFOLIO-001-FIL-0083-STMT-000007", "note": "RETURN-CODE is a COBOL special register, not a data item; it is not looked up in the field registry."}
-    ]
+    "field_reference_ids": [{"name": "WS-RETURN-CODE", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0083-FLD-000007", "target_kind": "field", "candidate_ids": []}],
+    "calls_made": [], "calls_made_ids": [],
+    "complexity_score": 1, "has_unresolved_statements": false,
+    "annotations": [{"line": 82, "statement_id": "SYS-PORTFOLIO-001-FIL-0083-STMT-000007", "note": "RETURN-CODE is a special register, not a data item; it is not looked up for a Field ID"}]
   },
   {
-    "name": "9000-HANDLE-ERROR",
-    "paragraph_id": "SYS-PORTFOLIO-001-FIL-0083-PAR-0005",
-    "section": null,
-    "section_id": null,
-    "line_range": [87, 90],
+    "name": "9000-HANDLE-ERROR", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0083-PAR-0005", "section": null, "section_id": null, "line_range": [87, 90],
+    "statement_ids": ["SYS-PORTFOLIO-001-FIL-0083-STMT-000008"],
     "pseudocode": [
-      "-- DEAD CODE: never performed (confirmed); placeholder comment at line 88 says error handling logic will go here",
-      "SET ws_return_code = ws_error  -- WS-ERROR = +8"
+      "-- Error handling (DEAD CODE: never performed)",
+      "SET ws_return_code = ws_error  -- ws_error is the constant +8"
     ],
     "pseudocode_statement_ids": [[], ["SYS-PORTFOLIO-001-FIL-0083-STMT-000008"]],
-    "pseudocode_text": "-- DEAD CODE: never performed (confirmed); placeholder comment at line 88 says error handling logic will go here\nSET ws_return_code = ws_error  -- WS-ERROR = +8",
-    "statement_ids": ["SYS-PORTFOLIO-001-FIL-0083-STMT-000008"],
+    "pseudocode_text": "-- Error handling (DEAD CODE: never performed)\nSET ws_return_code = ws_error  -- ws_error is the constant +8",
     "untranslated_statement_ids": [],
     "field_references": ["WS-ERROR", "WS-RETURN-CODE"],
-    "field_reference_ids": [
-      {"name": "WS-ERROR", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0083-FLD-000003", "target_kind": "field", "candidate_ids": []},
-      {"name": "WS-RETURN-CODE", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0083-FLD-000007", "target_kind": "field", "candidate_ids": []}
-    ],
-    "calls_made": [],
-    "calls_made_ids": [],
-    "complexity_score": 1,
-    "has_unresolved_statements": false,
-    "annotations": []
+    "field_reference_ids": [{"name": "WS-ERROR", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0083-FLD-000003", "target_kind": "field", "candidate_ids": []}, {"name": "WS-RETURN-CODE", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0083-FLD-000007", "target_kind": "field", "candidate_ids": []}],
+    "calls_made": [], "calls_made_ids": [],
+    "complexity_score": 1, "has_unresolved_statements": false,
+    "annotations": [{"line": 87, "note": "Confirmed dead code: no PERFORM, GO TO or THRU reference in the program"}]
   }
 ],
 "unresolved_statements": [],
-"pseudocode_issues": []
+"pseudocode_issues": [],
+"field_id_lookup": [
+  {"name": "WS-WORK-AREAS", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0083-REC-0003", "target_kind": "record", "candidate_ids": []},
+  {"name": "END-OF-FILE", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0083-FLD-000005", "target_kind": "condition", "candidate_ids": []},
+  {"name": "WS-RETURN-CODE", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0083-FLD-000007", "target_kind": "field", "candidate_ids": []},
+  {"name": "WS-ERROR", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0083-FLD-000003", "target_kind": "field", "candidate_ids": []}
+]
 }

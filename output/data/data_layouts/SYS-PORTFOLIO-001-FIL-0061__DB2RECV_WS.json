@@ -1,6 +1,7 @@
 {
-  "id": "DB2RECV",
+  "id": "DB2RECV_WS",
   "source_type": "program_ws",
+  "program_id": "DB2RECV",
   "source_file": "src/programs/online/DB2RECV.cbl",
   "used_by_programs": ["DB2RECV"],
   "total_fields": 18,
@@ -8,28 +9,68 @@
   "system_id": "SYS-PORTFOLIO-001",
   "file_id": "SYS-PORTFOLIO-001-FIL-0061",
   "path_id": "SYS-PORTFOLIO-001-PATH-0061",
-  "data_run_id": "DRUN-20261024T215053Z-ACC1",
+  "data_run_id": "DRUN-20261027T162831Z-1330",
+  "parse_run_id": "PRUN-20261027T155247Z-2626",
+  "upstream_parse_status": "success",
+  "sections": [
+    {"name": "WORKING-STORAGE", "section_id": "SYS-PORTFOLIO-001-FIL-0061-SEC-0001", "start_line": 14},
+    {"name": "LINKAGE", "section_id": "SYS-PORTFOLIO-001-FIL-0061-SEC-0002", "start_line": 30}
+  ],
   "records": [
     {
       "record_id": "SYS-PORTFOLIO-001-FIL-0061-REC-0001",
-      "section": "WORKING-STORAGE", "section_id": "SYS-PORTFOLIO-001-FIL-0061-SEC-0001", "fd_name": null,
-      "is_fragment": false, "level": 1, "name": "WS-DB2-AREA",
-      "pic": null, "type": "GROUP", "storage_type": "DISPLAY", "bytes": 35, "total_bytes": 35, "inline_bytes": 0,
-      "redefines": null, "occurs": null, "value": null, "line": 15, "end_line": 16,
+      "section": "WORKING-STORAGE",
+      "section_id": "SYS-PORTFOLIO-001-FIL-0061-SEC-0001",
+      "fd_name": null,
+      "is_fragment": false,
+      "level": 1,
+      "name": "WS-DB2-AREA",
+      "pic": null,
+      "type": "GROUP",
+      "storage_type": "DISPLAY",
+      "bytes": 35,
+      "total_bytes": 35,
+      "inline_bytes": 0,
+      "redefines": null,
+      "occurs": null,
+      "value": null,
+      "line": 15,
+      "end_line": 16,
       "children": [
-        {"type": "copy_expansion", "section": "WORKING-STORAGE", "section_id": "SYS-PORTFOLIO-001-FIL-0061-SEC-0001", "holder": "SYS-PORTFOLIO-001-FIL-0061-REC-0001", "copybook": "SQLCA", "copybook_file_id": "SYS-PORTFOLIO-001-FIL-0017", "line": 16, "include_kind": "SQL_INCLUDE", "replacing": null,
-         "layout_file": "data_layouts/SYS-PORTFOLIO-001-FIL-0017__SQLCA.json",
-         "records": [
-           {"record_id": "SYS-PORTFOLIO-001-FIL-0017-REC-0001", "name": "SQL-STATUS-CODES", "level": 1, "total_bytes": 35, "expanded_from": {"copybook": "SQLCA", "copybook_file_id": "SYS-PORTFOLIO-001-FIL-0017", "line": 16, "replacing": null}}
-         ]}
+        {
+          "type": "copy_expansion",
+          "holder_id": "SYS-PORTFOLIO-001-FIL-0061-REC-0001",
+          "copybook": "SQLCA",
+          "copybook_file_id": "SYS-PORTFOLIO-001-FIL-0017",
+          "include_kind": "SQL_INCLUDE",
+          "line": 16,
+          "replacing": null,
+          "expanded_from": {"copybook": "SQLCA", "copybook_file_id": "SYS-PORTFOLIO-001-FIL-0017", "line": 16, "replacing": null},
+          "records": [
+            {"record_id": "SYS-PORTFOLIO-001-FIL-0017-REC-0001", "name": "SQL-STATUS-CODES", "total_bytes": 35, "layout_file": "data_layouts/SYS-PORTFOLIO-001-FIL-0017__SQLCA.json"}
+          ]
+        }
       ]
     },
     {
       "record_id": "SYS-PORTFOLIO-001-FIL-0061-REC-0002",
-      "section": "WORKING-STORAGE", "section_id": "SYS-PORTFOLIO-001-FIL-0061-SEC-0001", "fd_name": null,
-      "is_fragment": false, "level": 1, "name": "WS-RECOVERY-STATS",
-      "pic": null, "type": "GROUP", "storage_type": "DISPLAY", "bytes": 12, "total_bytes": 12, "inline_bytes": 12,
-      "redefines": null, "occurs": null, "value": null, "line": 18, "end_line": 22,
+      "section": "WORKING-STORAGE",
+      "section_id": "SYS-PORTFOLIO-001-FIL-0061-SEC-0001",
+      "fd_name": null,
+      "is_fragment": false,
+      "level": 1,
+      "name": "WS-RECOVERY-STATS",
+      "pic": null,
+      "type": "GROUP",
+      "storage_type": "DISPLAY",
+      "bytes": 12,
+      "total_bytes": 12,
+      "inline_bytes": 12,
+      "redefines": null,
+      "occurs": null,
+      "value": null,
+      "line": 18,
+      "end_line": 22,
       "children": [
         {"field_id": "SYS-PORTFOLIO-001-FIL-0061-FLD-000001", "path": "WS-RETRY-COUNT", "level": 5, "name": "WS-RETRY-COUNT", "pic": "S9(4) COMP", "pic_parsed": {"raw": "S9(4) COMP", "normalized_type": "SIGNED_INTEGER", "length": 4, "decimal_places": 0, "signed": true, "storage_type": "BINARY"}, "bytes": 2, "redefines": null, "occurs": null, "value": "0", "line": 19, "children": []},
         {"field_id": "SYS-PORTFOLIO-001-FIL-0061-FLD-000002", "path": "WS-MAX-RETRIES", "level": 5, "name": "WS-MAX-RETRIES", "pic": "S9(4) COMP", "pic_parsed": {"raw": "S9(4) COMP", "normalized_type": "SIGNED_INTEGER", "length": 4, "decimal_places": 0, "signed": true, "storage_type": "BINARY"}, "bytes": 2, "redefines": null, "occurs": null, "value": "3", "line": 20, "children": []},
@@ -39,68 +80,124 @@
     },
     {
       "record_id": "SYS-PORTFOLIO-001-FIL-0061-REC-0003",
-      "section": "WORKING-STORAGE", "section_id": "SYS-PORTFOLIO-001-FIL-0061-SEC-0001", "fd_name": null,
-      "is_fragment": false, "level": 1, "name": "WS-ERROR-AREA",
-      "pic": null, "type": "GROUP", "storage_type": "DISPLAY", "bytes": 174, "total_bytes": 174, "inline_bytes": 0,
-      "redefines": null, "occurs": null, "value": null, "line": 24, "end_line": 25,
+      "section": "WORKING-STORAGE",
+      "section_id": "SYS-PORTFOLIO-001-FIL-0061-SEC-0001",
+      "fd_name": null,
+      "is_fragment": false,
+      "level": 1,
+      "name": "WS-ERROR-AREA",
+      "pic": null,
+      "type": "GROUP",
+      "storage_type": "DISPLAY",
+      "bytes": 174,
+      "total_bytes": 174,
+      "inline_bytes": 0,
+      "redefines": null,
+      "occurs": null,
+      "value": null,
+      "line": 24,
+      "end_line": 25,
       "children": [
-        {"type": "copy_expansion", "section": "WORKING-STORAGE", "section_id": "SYS-PORTFOLIO-001-FIL-0061-SEC-0001", "holder": "SYS-PORTFOLIO-001-FIL-0061-REC-0003", "copybook": "ERRHND", "copybook_file_id": "SYS-PORTFOLIO-001-FIL-0019", "line": 25, "include_kind": "COPY", "replacing": null,
-         "layout_file": "data_layouts/SYS-PORTFOLIO-001-FIL-0019__ERRHND.json",
-         "records": [
-           {"record_id": "SYS-PORTFOLIO-001-FIL-0019-REC-0001", "name": "ERROR-HANDLING", "level": 1, "total_bytes": 174, "expanded_from": {"copybook": "ERRHND", "copybook_file_id": "SYS-PORTFOLIO-001-FIL-0019", "line": 25, "replacing": null}}
-         ]}
+        {
+          "type": "copy_expansion",
+          "holder_id": "SYS-PORTFOLIO-001-FIL-0061-REC-0003",
+          "copybook": "ERRHND",
+          "copybook_file_id": "SYS-PORTFOLIO-001-FIL-0019",
+          "include_kind": "COPY",
+          "line": 25,
+          "replacing": null,
+          "expanded_from": {"copybook": "ERRHND", "copybook_file_id": "SYS-PORTFOLIO-001-FIL-0019", "line": 25, "replacing": null},
+          "records": [
+            {"record_id": "SYS-PORTFOLIO-001-FIL-0019-REC-0001", "name": "ERROR-HANDLING", "total_bytes": 174, "layout_file": "data_layouts/SYS-PORTFOLIO-001-FIL-0019__ERRHND.json"}
+          ]
+        }
       ]
     },
     {
       "record_id": "SYS-PORTFOLIO-001-FIL-0061-REC-0004",
-      "section": "WORKING-STORAGE", "section_id": "SYS-PORTFOLIO-001-FIL-0061-SEC-0001", "fd_name": null,
-      "is_fragment": false, "level": 1, "name": "WS-DB2-REQUEST",
-      "pic": null, "type": "GROUP", "storage_type": "DISPLAY", "bytes": 105, "total_bytes": 105, "inline_bytes": 0,
-      "redefines": null, "occurs": null, "value": null, "line": 27, "end_line": 28,
+      "section": "WORKING-STORAGE",
+      "section_id": "SYS-PORTFOLIO-001-FIL-0061-SEC-0001",
+      "fd_name": null,
+      "is_fragment": false,
+      "level": 1,
+      "name": "WS-DB2-REQUEST",
+      "pic": null,
+      "type": "GROUP",
+      "storage_type": "DISPLAY",
+      "bytes": 105,
+      "total_bytes": 105,
+      "inline_bytes": 0,
+      "redefines": null,
+      "occurs": null,
+      "value": null,
+      "line": 27,
+      "end_line": 28,
       "children": [
-        {"type": "copy_expansion", "section": "WORKING-STORAGE", "section_id": "SYS-PORTFOLIO-001-FIL-0061-SEC-0001", "holder": "SYS-PORTFOLIO-001-FIL-0061-REC-0004", "copybook": "DB2REQ", "copybook_file_id": "SYS-PORTFOLIO-001-FIL-0018", "line": 28, "include_kind": "COPY", "replacing": null,
-         "layout_file": "data_layouts/SYS-PORTFOLIO-001-FIL-0018__DB2REQ.json",
-         "records": [
-           {"record_id": "SYS-PORTFOLIO-001-FIL-0018-REC-0001", "name": "DB2-REQUEST-AREA", "level": 1, "total_bytes": 105, "expanded_from": {"copybook": "DB2REQ", "copybook_file_id": "SYS-PORTFOLIO-001-FIL-0018", "line": 28, "replacing": null}}
-         ]}
+        {
+          "type": "copy_expansion",
+          "holder_id": "SYS-PORTFOLIO-001-FIL-0061-REC-0004",
+          "copybook": "DB2REQ",
+          "copybook_file_id": "SYS-PORTFOLIO-001-FIL-0018",
+          "include_kind": "COPY",
+          "line": 28,
+          "replacing": null,
+          "expanded_from": {"copybook": "DB2REQ", "copybook_file_id": "SYS-PORTFOLIO-001-FIL-0018", "line": 28, "replacing": null},
+          "records": [
+            {"record_id": "SYS-PORTFOLIO-001-FIL-0018-REC-0001", "name": "DB2-REQUEST-AREA", "total_bytes": 105, "layout_file": "data_layouts/SYS-PORTFOLIO-001-FIL-0018__DB2REQ.json"}
+          ]
+        }
       ]
     },
     {
       "record_id": "SYS-PORTFOLIO-001-FIL-0061-REC-0005",
-      "section": "LINKAGE", "section_id": "SYS-PORTFOLIO-001-FIL-0061-SEC-0002", "fd_name": null,
-      "is_fragment": false, "level": 1, "name": "RECOVERY-REQUEST-AREA",
-      "pic": null, "type": "GROUP", "storage_type": "DISPLAY", "bytes": 116, "total_bytes": 116, "inline_bytes": 116,
-      "redefines": null, "occurs": null, "value": null, "line": 31, "end_line": 45,
+      "section": "LINKAGE",
+      "section_id": "SYS-PORTFOLIO-001-FIL-0061-SEC-0002",
+      "fd_name": null,
+      "is_fragment": false,
+      "level": 1,
+      "name": "RECOVERY-REQUEST-AREA",
+      "pic": null,
+      "type": "GROUP",
+      "storage_type": "DISPLAY",
+      "bytes": 116,
+      "total_bytes": 116,
+      "inline_bytes": 116,
+      "redefines": null,
+      "occurs": null,
+      "value": null,
+      "line": 31,
+      "end_line": 45,
       "children": [
         {"field_id": "SYS-PORTFOLIO-001-FIL-0061-FLD-000005", "path": "RECV-REQUEST-TYPE", "level": 5, "name": "RECV-REQUEST-TYPE", "pic": "X", "pic_parsed": {"raw": "X", "normalized_type": "STRING", "length": 1, "decimal_places": 0, "signed": false, "storage_type": "DISPLAY"}, "bytes": 1, "redefines": null, "occurs": null, "value": null, "line": 32, "children": [
-          {"field_id": "SYS-PORTFOLIO-001-FIL-0061-FLD-000006", "path": "RECV-REQUEST-TYPE.RECV-CONNECTION", "level": 88, "name": "RECV-CONNECTION", "pic": null, "type": "CONDITION", "parent_field": "RECV-REQUEST-TYPE", "value": null, "values_raw": "'C'", "values": ["C"], "line": 33, "children": []},
-          {"field_id": "SYS-PORTFOLIO-001-FIL-0061-FLD-000007", "path": "RECV-REQUEST-TYPE.RECV-TRANSACTION", "level": 88, "name": "RECV-TRANSACTION", "pic": null, "type": "CONDITION", "parent_field": "RECV-REQUEST-TYPE", "value": null, "values_raw": "'T'", "values": ["T"], "line": 34, "children": []},
-          {"field_id": "SYS-PORTFOLIO-001-FIL-0061-FLD-000008", "path": "RECV-REQUEST-TYPE.RECV-CURSOR", "level": 88, "name": "RECV-CURSOR", "pic": null, "type": "CONDITION", "parent_field": "RECV-REQUEST-TYPE", "value": null, "values_raw": "'R'", "values": ["R"], "line": 35, "children": []}
+          {"field_id": "SYS-PORTFOLIO-001-FIL-0061-FLD-000006", "path": "RECV-REQUEST-TYPE.RECV-CONNECTION", "level": 88, "name": "RECV-CONNECTION", "pic": null, "type": "CONDITION", "is_condition": true, "parent_field": "RECV-REQUEST-TYPE", "value": null, "values_raw": "'C'", "values": ["C"], "line": 33, "children": []},
+          {"field_id": "SYS-PORTFOLIO-001-FIL-0061-FLD-000007", "path": "RECV-REQUEST-TYPE.RECV-TRANSACTION", "level": 88, "name": "RECV-TRANSACTION", "pic": null, "type": "CONDITION", "is_condition": true, "parent_field": "RECV-REQUEST-TYPE", "value": null, "values_raw": "'T'", "values": ["T"], "line": 34, "children": []},
+          {"field_id": "SYS-PORTFOLIO-001-FIL-0061-FLD-000008", "path": "RECV-REQUEST-TYPE.RECV-CURSOR", "level": 88, "name": "RECV-CURSOR", "pic": null, "type": "CONDITION", "is_condition": true, "parent_field": "RECV-REQUEST-TYPE", "value": null, "values_raw": "'R'", "values": ["R"], "line": 35, "children": []}
         ]},
         {"field_id": "SYS-PORTFOLIO-001-FIL-0061-FLD-000009", "path": "RECV-RESPONSE-CODE", "level": 5, "name": "RECV-RESPONSE-CODE", "pic": "S9(8) COMP", "pic_parsed": {"raw": "S9(8) COMP", "normalized_type": "SIGNED_INTEGER", "length": 8, "decimal_places": 0, "signed": true, "storage_type": "BINARY"}, "bytes": 4, "redefines": null, "occurs": null, "value": null, "line": 36, "children": []},
         {"field_id": "SYS-PORTFOLIO-001-FIL-0061-FLD-000010", "path": "RECV-SQLCODE", "level": 5, "name": "RECV-SQLCODE", "pic": "S9(9) COMP", "pic_parsed": {"raw": "S9(9) COMP", "normalized_type": "SIGNED_INTEGER", "length": 9, "decimal_places": 0, "signed": true, "storage_type": "BINARY"}, "bytes": 4, "redefines": null, "occurs": null, "value": null, "line": 37, "children": []},
-        {"field_id": "SYS-PORTFOLIO-001-FIL-0061-FLD-000011", "path": "RECV-ERROR-INFO", "level": 5, "name": "RECV-ERROR-INFO", "pic": null, "type": "GROUP", "bytes": 106, "redefines": null, "occurs": null, "value": null, "line": 38, "end_line": 41, "children": [
+        {"field_id": "SYS-PORTFOLIO-001-FIL-0061-FLD-000011", "path": "RECV-ERROR-INFO", "level": 5, "name": "RECV-ERROR-INFO", "pic": null, "type": "GROUP", "bytes": 106, "redefines": null, "occurs": null, "value": null, "line": 38, "children": [
           {"field_id": "SYS-PORTFOLIO-001-FIL-0061-FLD-000012", "path": "RECV-ERROR-INFO.RECV-PROGRAM", "level": 10, "name": "RECV-PROGRAM", "pic": "X(8)", "pic_parsed": {"raw": "X(8)", "normalized_type": "STRING", "length": 8, "decimal_places": 0, "signed": false, "storage_type": "DISPLAY"}, "bytes": 8, "redefines": null, "occurs": null, "value": null, "line": 39, "children": []},
           {"field_id": "SYS-PORTFOLIO-001-FIL-0061-FLD-000013", "path": "RECV-ERROR-INFO.RECV-CURSOR", "level": 10, "name": "RECV-CURSOR", "pic": "X(18)", "pic_parsed": {"raw": "X(18)", "normalized_type": "STRING", "length": 18, "decimal_places": 0, "signed": false, "storage_type": "DISPLAY"}, "bytes": 18, "redefines": null, "occurs": null, "value": null, "line": 40, "children": []},
           {"field_id": "SYS-PORTFOLIO-001-FIL-0061-FLD-000014", "path": "RECV-ERROR-INFO.RECV-MESSAGE", "level": 10, "name": "RECV-MESSAGE", "pic": "X(80)", "pic_parsed": {"raw": "X(80)", "normalized_type": "STRING", "length": 80, "decimal_places": 0, "signed": false, "storage_type": "DISPLAY"}, "bytes": 80, "redefines": null, "occurs": null, "value": null, "line": 41, "children": []}
         ]},
         {"field_id": "SYS-PORTFOLIO-001-FIL-0061-FLD-000015", "path": "RECV-STATUS", "level": 5, "name": "RECV-STATUS", "pic": "X", "pic_parsed": {"raw": "X", "normalized_type": "STRING", "length": 1, "decimal_places": 0, "signed": false, "storage_type": "DISPLAY"}, "bytes": 1, "redefines": null, "occurs": null, "value": null, "line": 42, "children": [
-          {"field_id": "SYS-PORTFOLIO-001-FIL-0061-FLD-000016", "path": "RECV-STATUS.RECV-SUCCESS", "level": 88, "name": "RECV-SUCCESS", "pic": null, "type": "CONDITION", "parent_field": "RECV-STATUS", "value": null, "values_raw": "'S'", "values": ["S"], "line": 43, "children": []},
-          {"field_id": "SYS-PORTFOLIO-001-FIL-0061-FLD-000017", "path": "RECV-STATUS.RECV-FAILED", "level": 88, "name": "RECV-FAILED", "pic": null, "type": "CONDITION", "parent_field": "RECV-STATUS", "value": null, "values_raw": "'F'", "values": ["F"], "line": 44, "children": []},
-          {"field_id": "SYS-PORTFOLIO-001-FIL-0061-FLD-000018", "path": "RECV-STATUS.RECV-RETRY", "level": 88, "name": "RECV-RETRY", "pic": null, "type": "CONDITION", "parent_field": "RECV-STATUS", "value": null, "values_raw": "'R'", "values": ["R"], "line": 45, "children": []}
+          {"field_id": "SYS-PORTFOLIO-001-FIL-0061-FLD-000016", "path": "RECV-STATUS.RECV-SUCCESS", "level": 88, "name": "RECV-SUCCESS", "pic": null, "type": "CONDITION", "is_condition": true, "parent_field": "RECV-STATUS", "value": null, "values_raw": "'S'", "values": ["S"], "line": 43, "children": []},
+          {"field_id": "SYS-PORTFOLIO-001-FIL-0061-FLD-000017", "path": "RECV-STATUS.RECV-FAILED", "level": 88, "name": "RECV-FAILED", "pic": null, "type": "CONDITION", "is_condition": true, "parent_field": "RECV-STATUS", "value": null, "values_raw": "'F'", "values": ["F"], "line": 44, "children": []},
+          {"field_id": "SYS-PORTFOLIO-001-FIL-0061-FLD-000018", "path": "RECV-STATUS.RECV-RETRY", "level": 88, "name": "RECV-RETRY", "pic": null, "type": "CONDITION", "is_condition": true, "parent_field": "RECV-STATUS", "value": null, "values_raw": "'R'", "values": ["R"], "line": 45, "children": []}
         ]}
       ]
     }
   ],
   "copy_expansions": [
-    {"holder_local_id": "R1", "holder_id": "SYS-PORTFOLIO-001-FIL-0061-REC-0001", "section_id": null, "copybook": "SQLCA", "copybook_file_id": "SYS-PORTFOLIO-001-FIL-0017", "line": 16, "include_kind": "SQL_INCLUDE", "replacing": null, "target_record_ids": ["SYS-PORTFOLIO-001-FIL-0017-REC-0001"]},
-    {"holder_local_id": "R3", "holder_id": "SYS-PORTFOLIO-001-FIL-0061-REC-0003", "section_id": null, "copybook": "ERRHND", "copybook_file_id": "SYS-PORTFOLIO-001-FIL-0019", "line": 25, "include_kind": "COPY", "replacing": null, "target_record_ids": ["SYS-PORTFOLIO-001-FIL-0019-REC-0001"]},
-    {"holder_local_id": "R4", "holder_id": "SYS-PORTFOLIO-001-FIL-0061-REC-0004", "section_id": null, "copybook": "DB2REQ", "copybook_file_id": "SYS-PORTFOLIO-001-FIL-0018", "line": 28, "include_kind": "COPY", "replacing": null, "target_record_ids": ["SYS-PORTFOLIO-001-FIL-0018-REC-0001"]}
+    {"holder_id": "SYS-PORTFOLIO-001-FIL-0061-REC-0001", "holder_kind": "record", "copybook": "SQLCA", "copybook_file_id": "SYS-PORTFOLIO-001-FIL-0017", "include_kind": "SQL_INCLUDE", "line": 16, "replacing": null, "expanded_record_ids": ["SYS-PORTFOLIO-001-FIL-0017-REC-0001"], "resolved": true},
+    {"holder_id": "SYS-PORTFOLIO-001-FIL-0061-REC-0003", "holder_kind": "record", "copybook": "ERRHND", "copybook_file_id": "SYS-PORTFOLIO-001-FIL-0019", "include_kind": "COPY", "line": 25, "replacing": null, "expanded_record_ids": ["SYS-PORTFOLIO-001-FIL-0019-REC-0001"], "resolved": true},
+    {"holder_id": "SYS-PORTFOLIO-001-FIL-0061-REC-0004", "holder_kind": "record", "copybook": "DB2REQ", "copybook_file_id": "SYS-PORTFOLIO-001-FIL-0018", "include_kind": "COPY", "line": 28, "replacing": null, "expanded_record_ids": ["SYS-PORTFOLIO-001-FIL-0018-REC-0001"], "resolved": true}
   ],
+  "registry_verification": {"verify_data_integrity": true, "verify_data_identities": true, "records_checked": 5, "fields_checked": 18, "expansions_checked": 3},
   "layout_issues": [
-    {"severity": "warning", "type": "copy_level_conflict", "file_id": "SYS-PORTFOLIO-001-FIL-0061", "source_id": "DB2RECV", "line": 16, "message": "EXEC SQL INCLUDE SQLCA (line 16) sits under 01 WS-DB2-AREA (line 15), but SQLCA's top-level record SQL-STATUS-CODES is itself level 01, so WS-DB2-AREA has no subordinate items of its own. Registered as Agent 2 places it: EXPANDS_COPY from WS-DB2-AREA (inline_bytes 0, total_bytes 35 = the copybook record's size)."},
-    {"severity": "warning", "type": "copy_level_conflict", "file_id": "SYS-PORTFOLIO-001-FIL-0061", "source_id": "DB2RECV", "line": 25, "message": "COPY ERRHND (line 25) sits under 01 WS-ERROR-AREA (line 24), but ERRHND's top-level record ERROR-HANDLING is itself level 01, so WS-ERROR-AREA has no subordinate items of its own. Registered as Agent 2 places it: EXPANDS_COPY from WS-ERROR-AREA (inline_bytes 0, total_bytes 174 = the copybook record's size)."},
-    {"severity": "warning", "type": "copy_level_conflict", "file_id": "SYS-PORTFOLIO-001-FIL-0061", "source_id": "DB2RECV", "line": 28, "message": "COPY DB2REQ (line 28) sits under 01 WS-DB2-REQUEST (line 27), but DB2REQ's top-level record DB2-REQUEST-AREA is itself level 01, so WS-DB2-REQUEST has no subordinate items of its own. Registered as Agent 2 places it: EXPANDS_COPY from WS-DB2-REQUEST (inline_bytes 0, total_bytes 105 = the copybook record's size)."},
-    {"severity": "warning", "type": "duplicate_data_name", "file_id": "SYS-PORTFOLIO-001-FIL-0061", "source_id": "DB2RECV", "line": 35, "message": "RECV-CURSOR is declared twice in RECOVERY-REQUEST-AREA: as an 88-level under RECV-REQUEST-TYPE (line 35, path RECV-REQUEST-TYPE.RECV-CURSOR) and as a 10-level PIC X(18) under RECV-ERROR-INFO (line 40, path RECV-ERROR-INFO.RECV-CURSOR). Paths are distinct, so both have their own Field IDs; references require qualification."}
+    {"severity": "info", "type": "upstream_parse_status", "file_id": "SYS-PORTFOLIO-001-FIL-0061", "source_id": "DB2RECV_WS", "line": null, "message": "Agent 2 parse_status 'success'; DATA DIVISION taken from raw_structure and completed from source lines 13-46"},
+    {"severity": "info", "type": "sql_include_expanded", "file_id": "SYS-PORTFOLIO-001-FIL-0061", "source_id": "DB2RECV_WS", "line": 16, "message": "EXEC SQL INCLUDE SQLCA END-EXEC inside 01 WS-DB2-AREA recorded as copy stub include_kind SQL_INCLUDE and expanded to SQLCA.cpy record SYS-PORTFOLIO-001-FIL-0017-REC-0001"},
+    {"severity": "info", "type": "copybook_01_nested_under_program_01", "file_id": "SYS-PORTFOLIO-001-FIL-0061", "source_id": "DB2RECV_WS", "line": 16, "message": "Expanded copybook records at lines 16, 25 and 28 are level-01 records placed inside program 01 groups (WS-DB2-AREA, WS-ERROR-AREA, WS-DB2-REQUEST); record total_bytes include the expanded copybook record sizes, inline_bytes are 0"},
+    {"severity": "warning", "type": "duplicate_data_name", "file_id": "SYS-PORTFOLIO-001-FIL-0061", "source_id": "DB2RECV_WS", "line": 40, "message": "Data name RECV-CURSOR is declared twice in record RECOVERY-REQUEST-AREA: 88-level under RECV-REQUEST-TYPE (line 35, SYS-PORTFOLIO-001-FIL-0061-FLD-000008) and 10-level under RECV-ERROR-INFO (line 40, SYS-PORTFOLIO-001-FIL-0061-FLD-000013); paths are distinct, references need qualification"}
   ]
 }

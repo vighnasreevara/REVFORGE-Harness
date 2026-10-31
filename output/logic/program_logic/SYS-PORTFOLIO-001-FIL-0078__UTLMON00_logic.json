@@ -1,30 +1,33 @@
 {
-"program_summary": {"program_id": "UTLMON00", "file_id": "SYS-PORTFOLIO-001-FIL-0078", "logic_file": "program_logic/SYS-PORTFOLIO-001-FIL-0078__UTLMON00_logic.json", "logic_status": "partial", "paragraphs_translated": 12, "execution_paths": 1, "branches": 6, "loops": 2, "dead_code_confirmed": 0, "goto_annotations": 0, "unresolvable_paths": 13, "unresolved_ids": 14},
+"program_summary": {"program_id": "UTLMON00", "file_id": "SYS-PORTFOLIO-001-FIL-0078", "logic_file": "program_logic/SYS-PORTFOLIO-001-FIL-0078__UTLMON00_logic.json", "logic_status": "partial", "paragraphs_translated": 12, "execution_paths": 1, "branches": 6, "loops": 2, "dead_code_confirmed": 0, "goto_annotations": 0, "unresolvable_paths": 14, "unresolved_ids": 14},
 "program_id": "UTLMON00",
+"generated_at": "2026-10-27T21:29:47Z",
+"agent_version": "4_logic@1.0",
 "system_id": "SYS-PORTFOLIO-001",
 "file_id": "SYS-PORTFOLIO-001-FIL-0078",
 "path_id": "SYS-PORTFOLIO-001-PATH-0078",
 "relative_path": "src/programs/utility/UTLMON00.cbl",
-"parse_run_id": "PRUN-20261023T023803Z-ACC2",
+"parse_run_id": "PRUN-20261027T155247Z-2626",
+"data_run_id": "DRUN-20261027T162831Z-1330",
+"source_artifacts": {"raw_structure": "output/parser/raw_structure/SYS-PORTFOLIO-001-FIL-0078__UTLMON00.json", "data_layout": "output/data/data_layouts/SYS-PORTFOLIO-001-FIL-0078__UTLMON00_WS.json", "copybook_layouts": ["output/data/data_layouts/SYS-PORTFOLIO-001-FIL-0013__RTNCODE.json", "output/data/data_layouts/SYS-PORTFOLIO-001-FIL-0007__ERRHAND.json"]},
 "upstream": {
+  "parse_status": "partial",
   "verification": {
     "verdict": "VALID_PARTIAL",
-    "verdict_reasons": ["V2, V3 and V4 consistent", "Agent 2 parse_status 'partial': 13 PERFORM targets are not declared in the program (no relationship registered)", "unresolved copy stub: COPY DB2STAT (line 43, FILE SECTION) names a program, not a copybook (Agent 3 copy_target_is_program); no layout exists for it", "copybook layouts RTNCODE and ERRHAND present and consistent"],
-    "v1": {"raw_structure": "present", "parse_status": "partial", "program_layout": "present (data_run_id DRUN-20261024T215053Z-ACC1)", "copybook_layouts": [
-      {"copybook": "DB2STAT", "copybook_file_id": null, "layout": "none (unresolved copy stub, reason copy_target_is_program)", "expanded_at_lines": []},
-      {"copybook": "RTNCODE", "copybook_file_id": "SYS-PORTFOLIO-001-FIL-0013", "layout": "present", "expanded_at_lines": [75]},
-      {"copybook": "ERRHAND", "copybook_file_id": "SYS-PORTFOLIO-001-FIL-0007", "layout": "present", "expanded_at_lines": [76]}], "unresolved_copy_stubs": 1},
-    "v2_file_identities": {
-      "program_entries": {"require_completed": ["parser", "data"], "entries": ["raw_structure|SYS-PORTFOLIO-001-FIL-0078", "data_layout|SYS-PORTFOLIO-001-FIL-0078"], "result": "batched with TSTGEN00, TSTVAL00 and UTLMNT00 program entries: checked 8, ok 8, problems [], duplicates [], consistent true"},
-      "copybook_entries": {"require_completed": ["data"], "entries": ["data_layout|SYS-PORTFOLIO-001-FIL-0007", "data_layout|SYS-PORTFOLIO-001-FIL-0013"], "result": "batched with copybooks FIL-0009 and FIL-0014: checked 4, ok 4, problems [], duplicates [], consistent true"},
-      "consistent": true
+    "verdict_reason": "V2, V3 and V4 consistent for the program and both resolved copybook layouts (RTNCODE, ERRHAND), but Agent 2 parse_status is 'partial' (13 PERFORM targets not declared) and the program has an unresolved copy stub: COPY DB2STAT (line 43, FILE SECTION) names a program, not a copybook, so the DB2-STATS record layout does not exist upstream.",
+    "V2_file_identities": {
+      "program_entries": {"checked": 2, "ok": 2, "problems": [], "duplicate_file_ids_in_json": [], "require_completed": ["parser", "data"], "consistent": true, "note": "checked in one batched call with the program entries of ERRHANDL, PORTTEST and TSTGEN00 (8 entries, 8 OK)"},
+      "copybook_entries": {"checked": 2, "ok": 2, "problems": [], "file_ids": ["SYS-PORTFOLIO-001-FIL-0013", "SYS-PORTFOLIO-001-FIL-0007"], "require_completed": ["data"], "consistent": true}
     },
-    "v3_structure_identities": {"sections_checked": 4, "paragraphs_checked": 12, "statements_checked": 52, "edges_checked": 15, "registered_edges": 15, "section_problems": [], "paragraph_problems": [], "statement_problems": [], "edge_problems": [], "invalid_registered_edges": [], "registered_not_in_json": {"missing_count": 0}, "duplicate_ids_in_json": [], "consistent": true, "note": "section names sent for SEC-0001 CONFIGURATION and SEC-0002 INPUT-OUTPUT; null for the FILE and WORKING-STORAGE sections. No edges sent for the PERFORM_INLINE edge or the 13 unresolved PERFORM targets."},
-    "v4_data_identities": [
-      {"file_id": "SYS-PORTFOLIO-001-FIL-0078", "layout": "program", "records_checked": 10, "fields_checked": 49, "expansions_checked": 2, "record_problems": [], "field_problems": [], "expansion_problems": [], "copybook_records_in_program": 0, "registered_not_in_json": {"missing_count": 0}, "duplicate_ids_in_json": [], "consistent": true, "note": "the layout's copy_expansions carry holder_id null with section_id SYS-PORTFOLIO-001-FIL-0078-SEC-0004 (section-level COPY); that section_id was sent as holder_id. The unresolved COPY DB2STAT has no expansion entry and was not sent."},
-      {"file_id": "SYS-PORTFOLIO-001-FIL-0013", "layout": "copybook RTNCODE", "records_checked": 1, "fields_checked": 28, "expansions_checked": 0, "record_problems": [], "field_problems": [], "expansion_problems": [], "copybook_records_in_program": 0, "registered_not_in_json": {"missing_count": 0}, "duplicate_ids_in_json": [], "consistent": true},
-      {"file_id": "SYS-PORTFOLIO-001-FIL-0007", "layout": "copybook ERRHAND", "records_checked": 5, "fields_checked": 25, "expansions_checked": 0, "record_problems": [], "field_problems": [], "expansion_problems": [], "copybook_records_in_program": 0, "registered_not_in_json": {"missing_count": 0}, "duplicate_ids_in_json": [], "consistent": true}
-    ]
+    "V3_structure_identities": {"sections_checked": 4, "paragraphs_checked": 12, "statements_checked": 52, "edges_checked": 15, "registered_edges": 15, "section_problems": [], "paragraph_problems": [], "statement_problems": [], "edge_problems": [], "invalid_registered_edges": [], "registered_not_in_json": {"missing_count": 0}, "duplicate_ids_in_json": [], "consistent": true, "note": "edges = the 15 resolved PERFORM/PERFORM_UNTIL edges; the PERFORM_INLINE edge and the 13 unresolved PERFORM targets have no registered relationship"},
+    "V4_data_identities": {
+      "program_layout": {"file_id": "SYS-PORTFOLIO-001-FIL-0078", "records_checked": 10, "fields_checked": 49, "expansions_checked": 2, "record_problems": [], "field_problems": [], "expansion_problems": [], "copybook_records_in_program": 0, "registered_not_in_json": {"missing_count": 0}, "duplicate_ids_in_json": [], "consistent": true},
+      "copybook_layouts": [
+        {"file_id": "SYS-PORTFOLIO-001-FIL-0013", "copybook": "RTNCODE", "records_checked": 1, "fields_checked": 28, "expansions_checked": 0, "record_problems": [], "field_problems": [], "expansion_problems": [], "registered_not_in_json": {"missing_count": 0}, "consistent": true, "note": "verified once in this execution (also used by TSTGEN00)"},
+        {"file_id": "SYS-PORTFOLIO-001-FIL-0007", "copybook": "ERRHAND", "records_checked": 5, "fields_checked": 25, "expansions_checked": 0, "record_problems": [], "field_problems": [], "expansion_problems": [], "registered_not_in_json": {"missing_count": 0}, "consistent": true, "note": "verified once in this execution (also used by PORTTEST, TSTGEN00)"}
+      ],
+      "unresolved_copy_stubs": [{"copybook": "DB2STAT", "line": 43, "section": "FILE", "section_id": "SYS-PORTFOLIO-001-FIL-0078-SEC-0003", "reason": "copy_target_is_program", "registered": false}]
+    }
   }
 },
 "execution_traces": [
@@ -32,49 +35,42 @@
     "entry_point": "0000-MAIN",
     "entry_point_id": "SYS-PORTFOLIO-001-FIL-0078-PAR-0001",
     "entry_type": "batch_main",
+    "entry_note": "First paragraph of a PROCEDURE DIVISION without USING; ends with GOBACK.",
     "steps": [
-      {"step": 1, "paragraph": "0000-MAIN", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0078-PAR-0001", "action": "PERFORM", "target": "1000-INITIALIZE", "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0078-PAR-0002", "target_section_id": null, "condition": null, "line": 129, "statement_id": "SYS-PORTFOLIO-001-FIL-0078-STMT-000001"},
-      {"step": 2, "paragraph": "1000-INITIALIZE", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0078-PAR-0002", "action": "PERFORM", "target": "1100-OPEN-FILES", "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0078-PAR-0003", "target_section_id": null, "condition": null, "line": 135, "statement_id": "SYS-PORTFOLIO-001-FIL-0078-STMT-000005"},
-      {"step": 3, "paragraph": "1100-OPEN-FILES", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0078-PAR-0003", "action": "PERFORM", "target": "9999-ERROR-HANDLER", "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0078-PAR-0012", "target_section_id": null,
-       "condition": {"text": "WS-CFG-STATUS NOT = '00'", "fields": ["WS-CFG-STATUS"], "field_ids": [{"name": "WS-CFG-STATUS", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0078-FLD-000015", "target_kind": "field", "candidate_ids": []}]}, "line": 144, "statement_id": "SYS-PORTFOLIO-001-FIL-0078-STMT-000041"},
-      {"step": 4, "paragraph": "9999-ERROR-HANDLER", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0078-PAR-0012", "action": "GOBACK", "target": null, "target_paragraph_id": null, "target_section_id": null, "condition": null, "line": 221, "statement_id": "SYS-PORTFOLIO-001-FIL-0078-STMT-000039"},
-      {"step": 5, "paragraph": "1100-OPEN-FILES", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0078-PAR-0003", "action": "PERFORM", "target": "9999-ERROR-HANDLER", "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0078-PAR-0012", "target_section_id": null,
-       "condition": {"text": "WS-LOG-STATUS NOT = '00'", "fields": ["WS-LOG-STATUS"], "field_ids": [{"name": "WS-LOG-STATUS", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0078-FLD-000016", "target_kind": "field", "candidate_ids": []}]}, "line": 151, "statement_id": "SYS-PORTFOLIO-001-FIL-0078-STMT-000043"},
-      {"step": 6, "paragraph": "1100-OPEN-FILES", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0078-PAR-0003", "action": "PERFORM", "target": "9999-ERROR-HANDLER", "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0078-PAR-0012", "target_section_id": null,
-       "condition": {"text": "WS-ALERT-STATUS NOT = '00'", "fields": ["WS-ALERT-STATUS"], "field_ids": [{"name": "WS-ALERT-STATUS", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0078-FLD-000017", "target_kind": "field", "candidate_ids": []}]}, "line": 158, "statement_id": "SYS-PORTFOLIO-001-FIL-0078-STMT-000045"},
-      {"step": 7, "paragraph": "1100-OPEN-FILES", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0078-PAR-0003", "action": "PERFORM", "target": "9999-ERROR-HANDLER", "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0078-PAR-0012", "target_section_id": null,
-       "condition": {"text": "WS-DB2-STATUS NOT = '00'", "fields": ["WS-DB2-STATUS"], "field_ids": [{"name": "WS-DB2-STATUS", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0078-FLD-000018", "target_kind": "field", "candidate_ids": []}]}, "line": 165, "statement_id": "SYS-PORTFOLIO-001-FIL-0078-STMT-000047"},
-      {"step": 8, "paragraph": "1000-INITIALIZE", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0078-PAR-0002", "action": "PERFORM", "target": "1200-INIT-PROCESSING", "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0078-PAR-0004", "target_section_id": null, "condition": null, "line": 136, "statement_id": "SYS-PORTFOLIO-001-FIL-0078-STMT-000006"},
-      {"step": 9, "paragraph": "1000-INITIALIZE", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0078-PAR-0002", "action": "PERFORM", "target": "1300-READ-CONFIG", "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0078-PAR-0005", "target_section_id": null, "condition": null, "line": 137, "statement_id": "SYS-PORTFOLIO-001-FIL-0078-STMT-000007"},
-      {"step": 10, "paragraph": "1300-READ-CONFIG", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0078-PAR-0005", "action": "PERFORM_INLINE", "target": null, "target_paragraph_id": null, "target_section_id": null,
-       "condition": {"text": "UNTIL END-OF-CONFIG", "fields": ["END-OF-CONFIG"], "field_ids": [{"name": "END-OF-CONFIG", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0078-FLD-000031", "target_kind": "condition", "candidate_ids": []}], "test_time": "BEFORE", "loop_type": "WHILE", "termination_pattern": "FILE_EXHAUSTION_LOOP"}, "line": 172, "statement_id": "SYS-PORTFOLIO-001-FIL-0078-STMT-000017"},
-      {"step": 11, "paragraph": "1300-READ-CONFIG", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0078-PAR-0005", "action": "unresolvable", "target": "1310-STORE-CONFIG", "target_paragraph_id": null, "target_section_id": null,
-       "condition": {"text": "READ MONITOR-CONFIG NOT AT END", "fields": [], "field_ids": []}, "line": 177, "statement_id": "SYS-PORTFOLIO-001-FIL-0078-STMT-000052"},
-      {"step": 12, "paragraph": "0000-MAIN", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0078-PAR-0001", "action": "PERFORM_UNTIL", "target": "2000-PROCESS", "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0078-PAR-0006", "target_section_id": null,
-       "condition": {"text": "WS-HOUR = 23", "fields": ["WS-HOUR"], "field_ids": [{"name": "WS-HOUR", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0078-FLD-000046", "target_kind": "field", "candidate_ids": []}], "test_time": "BEFORE", "loop_type": "WHILE", "termination_pattern": "POTENTIAL_INFINITE_LOOP"}, "line": 130, "statement_id": "SYS-PORTFOLIO-001-FIL-0078-STMT-000002"},
-      {"step": 13, "paragraph": "2000-PROCESS", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0078-PAR-0006", "action": "PERFORM", "target": "2100-COLLECT-METRICS", "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0078-PAR-0007", "target_section_id": null, "condition": null, "line": 182, "statement_id": "SYS-PORTFOLIO-001-FIL-0078-STMT-000018"},
-      {"step": 14, "paragraph": "2100-COLLECT-METRICS", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0078-PAR-0007", "action": "unresolvable", "target": "2110-GET-CPU-METRICS", "target_paragraph_id": null, "target_section_id": null, "condition": null, "line": 190, "statement_id": "SYS-PORTFOLIO-001-FIL-0078-STMT-000024"},
-      {"step": 15, "paragraph": "2100-COLLECT-METRICS", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0078-PAR-0007", "action": "unresolvable", "target": "2120-GET-MEMORY-METRICS", "target_paragraph_id": null, "target_section_id": null, "condition": null, "line": 191, "statement_id": "SYS-PORTFOLIO-001-FIL-0078-STMT-000025"},
-      {"step": 16, "paragraph": "2100-COLLECT-METRICS", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0078-PAR-0007", "action": "unresolvable", "target": "2130-GET-DASD-METRICS", "target_paragraph_id": null, "target_section_id": null, "condition": null, "line": 192, "statement_id": "SYS-PORTFOLIO-001-FIL-0078-STMT-000026"},
-      {"step": 17, "paragraph": "2100-COLLECT-METRICS", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0078-PAR-0007", "action": "unresolvable", "target": "2140-GET-DB2-METRICS", "target_paragraph_id": null, "target_section_id": null, "condition": null, "line": 193, "statement_id": "SYS-PORTFOLIO-001-FIL-0078-STMT-000027"},
-      {"step": 18, "paragraph": "2000-PROCESS", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0078-PAR-0006", "action": "PERFORM", "target": "2200-CHECK-THRESHOLDS", "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0078-PAR-0008", "target_section_id": null, "condition": null, "line": 183, "statement_id": "SYS-PORTFOLIO-001-FIL-0078-STMT-000019"},
-      {"step": 19, "paragraph": "2200-CHECK-THRESHOLDS", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0078-PAR-0008", "action": "unresolvable", "target": "2210-CHECK-UTILIZATION", "target_paragraph_id": null, "target_section_id": null, "condition": null, "line": 196, "statement_id": "SYS-PORTFOLIO-001-FIL-0078-STMT-000028"},
-      {"step": 20, "paragraph": "2200-CHECK-THRESHOLDS", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0078-PAR-0008", "action": "unresolvable", "target": "2220-CHECK-RESPONSE", "target_paragraph_id": null, "target_section_id": null, "condition": null, "line": 197, "statement_id": "SYS-PORTFOLIO-001-FIL-0078-STMT-000029"},
-      {"step": 21, "paragraph": "2200-CHECK-THRESHOLDS", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0078-PAR-0008", "action": "unresolvable", "target": "2230-CHECK-QUEUES", "target_paragraph_id": null, "target_section_id": null, "condition": null, "line": 198, "statement_id": "SYS-PORTFOLIO-001-FIL-0078-STMT-000030"},
-      {"step": 22, "paragraph": "2200-CHECK-THRESHOLDS", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0078-PAR-0008", "action": "unresolvable", "target": "2240-CHECK-ERRORS", "target_paragraph_id": null, "target_section_id": null, "condition": null, "line": 199, "statement_id": "SYS-PORTFOLIO-001-FIL-0078-STMT-000031"},
-      {"step": 23, "paragraph": "2000-PROCESS", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0078-PAR-0006", "action": "PERFORM", "target": "2300-LOG-STATUS", "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0078-PAR-0009", "target_section_id": null, "condition": null, "line": 184, "statement_id": "SYS-PORTFOLIO-001-FIL-0078-STMT-000020"},
-      {"step": 24, "paragraph": "2300-LOG-STATUS", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0078-PAR-0009", "action": "unresolvable", "target": "2310-LOG-RESOURCES", "target_paragraph_id": null, "target_section_id": null, "condition": null, "line": 203, "statement_id": "SYS-PORTFOLIO-001-FIL-0078-STMT-000033"},
-      {"step": 25, "paragraph": "2300-LOG-STATUS", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0078-PAR-0009", "action": "unresolvable", "target": "2320-LOG-PERFORMANCE", "target_paragraph_id": null, "target_section_id": null, "condition": null, "line": 204, "statement_id": "SYS-PORTFOLIO-001-FIL-0078-STMT-000034"},
-      {"step": 26, "paragraph": "2000-PROCESS", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0078-PAR-0006", "action": "PERFORM", "target": "2400-GENERATE-ALERTS", "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0078-PAR-0010", "target_section_id": null, "condition": null, "line": 185, "statement_id": "SYS-PORTFOLIO-001-FIL-0078-STMT-000021"},
-      {"step": 27, "paragraph": "2400-GENERATE-ALERTS", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0078-PAR-0010", "action": "unresolvable", "target": "2410-FORMAT-ALERT", "target_paragraph_id": null, "target_section_id": null,
-       "condition": {"text": "THRESHOLD-MET", "fields": ["THRESHOLD-MET"], "field_ids": [{"name": "THRESHOLD-MET", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0078-FLD-000033", "target_kind": "condition", "candidate_ids": []}]}, "line": 208, "statement_id": "SYS-PORTFOLIO-001-FIL-0078-STMT-000049"},
-      {"step": 28, "paragraph": "2400-GENERATE-ALERTS", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0078-PAR-0010", "action": "unresolvable", "target": "2420-WRITE-ALERT", "target_paragraph_id": null, "target_section_id": null,
-       "condition": {"text": "THRESHOLD-MET", "fields": ["THRESHOLD-MET"], "field_ids": [{"name": "THRESHOLD-MET", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0078-FLD-000033", "target_kind": "condition", "candidate_ids": []}]}, "line": 209, "statement_id": "SYS-PORTFOLIO-001-FIL-0078-STMT-000050"},
-      {"step": 29, "paragraph": "2000-PROCESS", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0078-PAR-0006", "action": "CALL", "target": "ILBOABN0", "target_paragraph_id": null, "target_section_id": null, "call_type": "STATIC_CALL", "condition": null, "line": 186, "statement_id": "SYS-PORTFOLIO-001-FIL-0078-STMT-000022"},
-      {"step": 30, "paragraph": "2000-PROCESS", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0078-PAR-0006", "action": "PERFORM", "target": "1200-INIT-PROCESSING", "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0078-PAR-0004", "target_section_id": null, "condition": null, "line": 187, "statement_id": "SYS-PORTFOLIO-001-FIL-0078-STMT-000023"},
-      {"step": 31, "paragraph": "0000-MAIN", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0078-PAR-0001", "action": "PERFORM", "target": "3000-CLEANUP", "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0078-PAR-0011", "target_section_id": null, "condition": null, "line": 131, "statement_id": "SYS-PORTFOLIO-001-FIL-0078-STMT-000003"},
-      {"step": 32, "paragraph": "0000-MAIN", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0078-PAR-0001", "action": "GOBACK", "target": null, "target_paragraph_id": null, "target_section_id": null, "condition": null, "line": 132, "statement_id": "SYS-PORTFOLIO-001-FIL-0078-STMT-000004"}
-    ]
+      {"step": 1, "call_depth": 0, "paragraph": "0000-MAIN", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0078-PAR-0001", "action": "PERFORM", "target": "1000-INITIALIZE", "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0078-PAR-0002", "target_section_id": null, "condition": null, "line": 129, "statement_id": "SYS-PORTFOLIO-001-FIL-0078-STMT-000001"},
+      {"step": 2, "call_depth": 1, "paragraph": "1000-INITIALIZE", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0078-PAR-0002", "action": "PERFORM", "target": "1100-OPEN-FILES", "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0078-PAR-0003", "target_section_id": null, "condition": null, "line": 135, "statement_id": "SYS-PORTFOLIO-001-FIL-0078-STMT-000005"},
+      {"step": 3, "call_depth": 2, "paragraph": "1100-OPEN-FILES", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0078-PAR-0003", "action": "PERFORM", "target": "9999-ERROR-HANDLER", "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0078-PAR-0012", "target_section_id": null, "condition": {"text": "WS-CFG-STATUS NOT = '00'", "fields": ["WS-CFG-STATUS"], "field_ids": [{"name": "WS-CFG-STATUS", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0078-FLD-000015", "target_kind": "field", "candidate_ids": []}], "branch_statement_id": "SYS-PORTFOLIO-001-FIL-0078-STMT-000009"}, "line": 144, "statement_id": "SYS-PORTFOLIO-001-FIL-0078-STMT-000041"},
+      {"step": 4, "call_depth": 3, "paragraph": "9999-ERROR-HANDLER", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0078-PAR-0012", "action": "GOBACK", "target": null, "target_paragraph_id": null, "target_section_id": null, "condition": null, "line": 221, "statement_id": "SYS-PORTFOLIO-001-FIL-0078-STMT-000039", "note": "Shown once; applies to every expansion of 9999-ERROR-HANDLER. The handler always sets RETURN-CODE 12 and ends the program, so the first failed OPEN stops the run (files are not closed)."},
+      {"step": 5, "call_depth": 2, "paragraph": "1100-OPEN-FILES", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0078-PAR-0003", "action": "PERFORM", "target": "9999-ERROR-HANDLER", "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0078-PAR-0012", "target_section_id": null, "condition": {"text": "WS-LOG-STATUS NOT = '00'", "fields": ["WS-LOG-STATUS"], "field_ids": [{"name": "WS-LOG-STATUS", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0078-FLD-000016", "target_kind": "field", "candidate_ids": []}], "branch_statement_id": "SYS-PORTFOLIO-001-FIL-0078-STMT-000011"}, "line": 151, "statement_id": "SYS-PORTFOLIO-001-FIL-0078-STMT-000043", "expansion": "same callee body as step 3"},
+      {"step": 6, "call_depth": 2, "paragraph": "1100-OPEN-FILES", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0078-PAR-0003", "action": "PERFORM", "target": "9999-ERROR-HANDLER", "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0078-PAR-0012", "target_section_id": null, "condition": {"text": "WS-ALERT-STATUS NOT = '00'", "fields": ["WS-ALERT-STATUS"], "field_ids": [{"name": "WS-ALERT-STATUS", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0078-FLD-000017", "target_kind": "field", "candidate_ids": []}], "branch_statement_id": "SYS-PORTFOLIO-001-FIL-0078-STMT-000013"}, "line": 158, "statement_id": "SYS-PORTFOLIO-001-FIL-0078-STMT-000045", "expansion": "same callee body as step 3"},
+      {"step": 7, "call_depth": 2, "paragraph": "1100-OPEN-FILES", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0078-PAR-0003", "action": "PERFORM", "target": "9999-ERROR-HANDLER", "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0078-PAR-0012", "target_section_id": null, "condition": {"text": "WS-DB2-STATUS NOT = '00'", "fields": ["WS-DB2-STATUS"], "field_ids": [{"name": "WS-DB2-STATUS", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0078-FLD-000018", "target_kind": "field", "candidate_ids": []}], "branch_statement_id": "SYS-PORTFOLIO-001-FIL-0078-STMT-000015"}, "line": 165, "statement_id": "SYS-PORTFOLIO-001-FIL-0078-STMT-000047", "expansion": "same callee body as step 3"},
+      {"step": 8, "call_depth": 1, "paragraph": "1000-INITIALIZE", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0078-PAR-0002", "action": "PERFORM", "target": "1200-INIT-PROCESSING", "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0078-PAR-0004", "target_section_id": null, "condition": null, "line": 136, "statement_id": "SYS-PORTFOLIO-001-FIL-0078-STMT-000006"},
+      {"step": 9, "call_depth": 1, "paragraph": "1000-INITIALIZE", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0078-PAR-0002", "action": "PERFORM", "target": "1300-READ-CONFIG", "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0078-PAR-0005", "target_section_id": null, "condition": null, "line": 137, "statement_id": "SYS-PORTFOLIO-001-FIL-0078-STMT-000007"},
+      {"step": 10, "call_depth": 2, "paragraph": "1300-READ-CONFIG", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0078-PAR-0005", "action": "PERFORM_INLINE", "target": null, "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0078-PAR-0005", "target_section_id": null, "condition": {"text": "END-OF-CONFIG", "fields": ["END-OF-CONFIG"], "field_ids": [{"name": "END-OF-CONFIG", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0078-FLD-000031", "target_kind": "condition", "candidate_ids": []}], "test_time": "BEFORE", "loop_type": "WHILE", "termination_pattern": "FILE_EXHAUSTION_LOOP"}, "body_line_range": [173, 178], "line": 172, "statement_id": "SYS-PORTFOLIO-001-FIL-0078-STMT-000017"},
+      {"step": 11, "call_depth": 3, "paragraph": "1300-READ-CONFIG", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0078-PAR-0005", "action": "PERFORM", "target": "1310-STORE-CONFIG", "target_paragraph_id": null, "target_section_id": null, "condition": {"text": "NOT AT END (READ MONITOR-CONFIG returned a record)", "fields": [], "field_ids": [], "branch_statement_id": "SYS-PORTFOLIO-001-FIL-0078-STMT-000048"}, "line": 177, "statement_id": "SYS-PORTFOLIO-001-FIL-0078-STMT-000052", "unresolvable": true, "note": "Target paragraph not declared in this program (Agent 2 unresolved_target)"},
+      {"step": 12, "call_depth": 0, "paragraph": "0000-MAIN", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0078-PAR-0001", "action": "PERFORM_UNTIL", "target": "2000-PROCESS", "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0078-PAR-0006", "target_section_id": null, "condition": {"text": "WS-HOUR = 23", "fields": ["WS-HOUR"], "field_ids": [{"name": "WS-HOUR", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0078-FLD-000046", "target_kind": "field", "candidate_ids": []}], "test_time": "BEFORE", "loop_type": "WHILE", "termination_pattern": "EXTERNAL_TERMINATION_LOOP"}, "line": 130, "statement_id": "SYS-PORTFOLIO-001-FIL-0078-STMT-000002", "note": "Monitoring cycle repeated until the hour field reads 23; the field is refreshed only by ACCEPT WS-TIMESTAMP FROM TIME in 1200-INIT-PROCESSING (see loops[0].termination_note)."},
+      {"step": 13, "call_depth": 1, "paragraph": "2000-PROCESS", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0078-PAR-0006", "action": "PERFORM", "target": "2100-COLLECT-METRICS", "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0078-PAR-0007", "target_section_id": null, "condition": null, "line": 182, "statement_id": "SYS-PORTFOLIO-001-FIL-0078-STMT-000018"},
+      {"step": 14, "call_depth": 2, "paragraph": "2100-COLLECT-METRICS", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0078-PAR-0007", "action": "PERFORM", "target": "2110-GET-CPU-METRICS", "target_paragraph_id": null, "target_section_id": null, "condition": null, "line": 190, "statement_id": "SYS-PORTFOLIO-001-FIL-0078-STMT-000024", "unresolvable": true, "note": "Target paragraph not declared in this program"},
+      {"step": 15, "call_depth": 2, "paragraph": "2100-COLLECT-METRICS", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0078-PAR-0007", "action": "PERFORM", "target": "2120-GET-MEMORY-METRICS", "target_paragraph_id": null, "target_section_id": null, "condition": null, "line": 191, "statement_id": "SYS-PORTFOLIO-001-FIL-0078-STMT-000025", "unresolvable": true, "note": "Target paragraph not declared in this program"},
+      {"step": 16, "call_depth": 2, "paragraph": "2100-COLLECT-METRICS", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0078-PAR-0007", "action": "PERFORM", "target": "2130-GET-DASD-METRICS", "target_paragraph_id": null, "target_section_id": null, "condition": null, "line": 192, "statement_id": "SYS-PORTFOLIO-001-FIL-0078-STMT-000026", "unresolvable": true, "note": "Target paragraph not declared in this program"},
+      {"step": 17, "call_depth": 2, "paragraph": "2100-COLLECT-METRICS", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0078-PAR-0007", "action": "PERFORM", "target": "2140-GET-DB2-METRICS", "target_paragraph_id": null, "target_section_id": null, "condition": null, "line": 193, "statement_id": "SYS-PORTFOLIO-001-FIL-0078-STMT-000027", "unresolvable": true, "note": "Target paragraph not declared in this program"},
+      {"step": 18, "call_depth": 1, "paragraph": "2000-PROCESS", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0078-PAR-0006", "action": "PERFORM", "target": "2200-CHECK-THRESHOLDS", "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0078-PAR-0008", "target_section_id": null, "condition": null, "line": 183, "statement_id": "SYS-PORTFOLIO-001-FIL-0078-STMT-000019"},
+      {"step": 19, "call_depth": 2, "paragraph": "2200-CHECK-THRESHOLDS", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0078-PAR-0008", "action": "PERFORM", "target": "2210-CHECK-UTILIZATION", "target_paragraph_id": null, "target_section_id": null, "condition": null, "line": 196, "statement_id": "SYS-PORTFOLIO-001-FIL-0078-STMT-000028", "unresolvable": true, "note": "Target paragraph not declared in this program"},
+      {"step": 20, "call_depth": 2, "paragraph": "2200-CHECK-THRESHOLDS", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0078-PAR-0008", "action": "PERFORM", "target": "2220-CHECK-RESPONSE", "target_paragraph_id": null, "target_section_id": null, "condition": null, "line": 197, "statement_id": "SYS-PORTFOLIO-001-FIL-0078-STMT-000029", "unresolvable": true, "note": "Target paragraph not declared in this program"},
+      {"step": 21, "call_depth": 2, "paragraph": "2200-CHECK-THRESHOLDS", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0078-PAR-0008", "action": "PERFORM", "target": "2230-CHECK-QUEUES", "target_paragraph_id": null, "target_section_id": null, "condition": null, "line": 198, "statement_id": "SYS-PORTFOLIO-001-FIL-0078-STMT-000030", "unresolvable": true, "note": "Target paragraph not declared in this program"},
+      {"step": 22, "call_depth": 2, "paragraph": "2200-CHECK-THRESHOLDS", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0078-PAR-0008", "action": "PERFORM", "target": "2240-CHECK-ERRORS", "target_paragraph_id": null, "target_section_id": null, "condition": null, "line": 199, "statement_id": "SYS-PORTFOLIO-001-FIL-0078-STMT-000031", "unresolvable": true, "note": "Target paragraph not declared in this program"},
+      {"step": 23, "call_depth": 1, "paragraph": "2000-PROCESS", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0078-PAR-0006", "action": "PERFORM", "target": "2300-LOG-STATUS", "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0078-PAR-0009", "target_section_id": null, "condition": null, "line": 184, "statement_id": "SYS-PORTFOLIO-001-FIL-0078-STMT-000020"},
+      {"step": 24, "call_depth": 2, "paragraph": "2300-LOG-STATUS", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0078-PAR-0009", "action": "PERFORM", "target": "2310-LOG-RESOURCES", "target_paragraph_id": null, "target_section_id": null, "condition": null, "line": 203, "statement_id": "SYS-PORTFOLIO-001-FIL-0078-STMT-000033", "unresolvable": true, "note": "Target paragraph not declared in this program"},
+      {"step": 25, "call_depth": 2, "paragraph": "2300-LOG-STATUS", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0078-PAR-0009", "action": "PERFORM", "target": "2320-LOG-PERFORMANCE", "target_paragraph_id": null, "target_section_id": null, "condition": null, "line": 204, "statement_id": "SYS-PORTFOLIO-001-FIL-0078-STMT-000034", "unresolvable": true, "note": "Target paragraph not declared in this program"},
+      {"step": 26, "call_depth": 1, "paragraph": "2000-PROCESS", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0078-PAR-0006", "action": "PERFORM", "target": "2400-GENERATE-ALERTS", "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0078-PAR-0010", "target_section_id": null, "condition": null, "line": 185, "statement_id": "SYS-PORTFOLIO-001-FIL-0078-STMT-000021"},
+      {"step": 27, "call_depth": 2, "paragraph": "2400-GENERATE-ALERTS", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0078-PAR-0010", "action": "PERFORM", "target": "2410-FORMAT-ALERT", "target_paragraph_id": null, "target_section_id": null, "condition": {"text": "THRESHOLD-MET", "fields": ["THRESHOLD-MET"], "field_ids": [{"name": "THRESHOLD-MET", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0078-FLD-000033", "target_kind": "condition", "candidate_ids": []}], "branch_statement_id": "SYS-PORTFOLIO-001-FIL-0078-STMT-000035"}, "line": 208, "statement_id": "SYS-PORTFOLIO-001-FIL-0078-STMT-000049", "unresolvable": true, "note": "Target paragraph not declared in this program"},
+      {"step": 28, "call_depth": 2, "paragraph": "2400-GENERATE-ALERTS", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0078-PAR-0010", "action": "PERFORM", "target": "2420-WRITE-ALERT", "target_paragraph_id": null, "target_section_id": null, "condition": {"text": "THRESHOLD-MET", "fields": ["THRESHOLD-MET"], "field_ids": [{"name": "THRESHOLD-MET", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0078-FLD-000033", "target_kind": "condition", "candidate_ids": []}], "branch_statement_id": "SYS-PORTFOLIO-001-FIL-0078-STMT-000035"}, "line": 209, "statement_id": "SYS-PORTFOLIO-001-FIL-0078-STMT-000050", "unresolvable": true, "note": "Target paragraph not declared in this program"},
+      {"step": 29, "call_depth": 1, "paragraph": "2000-PROCESS", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0078-PAR-0006", "action": "CALL", "target": "ILBOABN0", "call_type": "STATIC_CALL", "target_paragraph_id": null, "target_section_id": null, "target_program_file_id": null, "condition": null, "line": 186, "statement_id": "SYS-PORTFOLIO-001-FIL-0078-STMT-000022", "unresolvable": true, "runtime_conditional": true, "note": "CALL 'ILBOABN0' USING WS-MINUTE. System runtime routine not in the file registry (Agent 1 unresolved_reference); its effect, including whether control returns, cannot be traced from this repository."},
+      {"step": 30, "call_depth": 1, "paragraph": "2000-PROCESS", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0078-PAR-0006", "action": "PERFORM", "target": "1200-INIT-PROCESSING", "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0078-PAR-0004", "target_section_id": null, "condition": null, "line": 187, "statement_id": "SYS-PORTFOLIO-001-FIL-0078-STMT-000023", "note": "Refreshes WS-TIMESTAMP, the source of the loop condition field WS-HOUR"},
+      {"step": 31, "call_depth": 0, "paragraph": "0000-MAIN", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0078-PAR-0001", "action": "PERFORM", "target": "3000-CLEANUP", "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0078-PAR-0011", "target_section_id": null, "condition": null, "line": 131, "statement_id": "SYS-PORTFOLIO-001-FIL-0078-STMT-000003"},
+      {"step": 32, "call_depth": 0, "paragraph": "0000-MAIN", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0078-PAR-0001", "action": "GOBACK", "target": null, "target_paragraph_id": null, "target_section_id": null, "condition": null, "line": 132, "statement_id": "SYS-PORTFOLIO-001-FIL-0078-STMT-000004"}
+    ],
+    "path_summary": "0000-MAIN -> 1000-INITIALIZE (1100-OPEN-FILES opens MONITOR-CONFIG, MONITOR-LOG, ALERT-FILE and DB2-STATS; any failed open -> 9999-ERROR-HANDLER, which ends the program with RETURN-CODE 12; 1200-INIT-PROCESSING reads the system time; 1300-READ-CONFIG reads all configuration records, storing each via the undeclared 1310-STORE-CONFIG) -> repeat 2000-PROCESS until WS-HOUR = 23 (collect metrics, check thresholds, log status, generate alerts if THRESHOLD-MET, CALL 'ILBOABN0' with WS-MINUTE, refresh the time) -> 3000-CLEANUP (close files) -> GOBACK. All 13 detail paragraphs (1310, 2110-2140, 2210-2240, 2310, 2320, 2410, 2420) are not in the program and cannot be traced."
   }
 ],
 "branch_map": [
@@ -82,115 +78,120 @@
     "paragraph": "1100-OPEN-FILES",
     "paragraph_id": "SYS-PORTFOLIO-001-FIL-0078-PAR-0003",
     "branches": [
-      {"type": "IF", "line": 141, "statement_id": "SYS-PORTFOLIO-001-FIL-0078-STMT-000009", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0078-PAR-0003", "condition_text": "WS-CFG-STATUS NOT = '00'", "condition_fields": ["WS-CFG-STATUS"],
-       "condition_field_ids": [{"name": "WS-CFG-STATUS", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0078-FLD-000015", "target_kind": "field", "candidate_ids": []}],
-       "has_else": false, "then_line_range": [142, 144], "else_line_range": null, "end_if_line": 145, "nested_depth": 1,
-       "outcomes": [{"label": "THEN", "line_range": [142, 144], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0078-STMT-000040", "SYS-PORTFOLIO-001-FIL-0078-STMT-000041"]}, {"label": "ELSE (implicit, no statements)", "line_range": null, "statement_ids": []}]},
-      {"type": "IF", "line": 148, "statement_id": "SYS-PORTFOLIO-001-FIL-0078-STMT-000011", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0078-PAR-0003", "condition_text": "WS-LOG-STATUS NOT = '00'", "condition_fields": ["WS-LOG-STATUS"],
-       "condition_field_ids": [{"name": "WS-LOG-STATUS", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0078-FLD-000016", "target_kind": "field", "candidate_ids": []}],
-       "has_else": false, "then_line_range": [149, 151], "else_line_range": null, "end_if_line": 152, "nested_depth": 1,
-       "outcomes": [{"label": "THEN", "line_range": [149, 151], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0078-STMT-000042", "SYS-PORTFOLIO-001-FIL-0078-STMT-000043"]}, {"label": "ELSE (implicit, no statements)", "line_range": null, "statement_ids": []}]},
-      {"type": "IF", "line": 155, "statement_id": "SYS-PORTFOLIO-001-FIL-0078-STMT-000013", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0078-PAR-0003", "condition_text": "WS-ALERT-STATUS NOT = '00'", "condition_fields": ["WS-ALERT-STATUS"],
-       "condition_field_ids": [{"name": "WS-ALERT-STATUS", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0078-FLD-000017", "target_kind": "field", "candidate_ids": []}],
-       "has_else": false, "then_line_range": [156, 158], "else_line_range": null, "end_if_line": 159, "nested_depth": 1,
-       "outcomes": [{"label": "THEN", "line_range": [156, 158], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0078-STMT-000044", "SYS-PORTFOLIO-001-FIL-0078-STMT-000045"]}, {"label": "ELSE (implicit, no statements)", "line_range": null, "statement_ids": []}]},
-      {"type": "IF", "line": 162, "statement_id": "SYS-PORTFOLIO-001-FIL-0078-STMT-000015", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0078-PAR-0003", "condition_text": "WS-DB2-STATUS NOT = '00'", "condition_fields": ["WS-DB2-STATUS"],
-       "condition_field_ids": [{"name": "WS-DB2-STATUS", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0078-FLD-000018", "target_kind": "field", "candidate_ids": []}],
-       "has_else": false, "then_line_range": [163, 165], "else_line_range": null, "end_if_line": 166, "nested_depth": 1,
-       "outcomes": [{"label": "THEN", "line_range": [163, 165], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0078-STMT-000046", "SYS-PORTFOLIO-001-FIL-0078-STMT-000047"]}, {"label": "ELSE (implicit, no statements)", "line_range": null, "statement_ids": []}]}
+      {"type": "IF", "line": 141, "statement_id": "SYS-PORTFOLIO-001-FIL-0078-STMT-000009", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0078-PAR-0003", "condition_text": "WS-CFG-STATUS NOT = '00'", "condition_fields": ["WS-CFG-STATUS"], "condition_field_ids": [{"name": "WS-CFG-STATUS", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0078-FLD-000015", "target_kind": "field", "candidate_ids": []}], "has_else": false, "then_line_range": [142, 144], "else_line_range": null, "end_if_line": 145, "nested_depth": 1,
+       "io_context": {"operation": "OPEN INPUT", "file_name": "MONITOR-CONFIG", "io_status_field": "WS-CFG-STATUS", "open_statement_id": "SYS-PORTFOLIO-001-FIL-0078-STMT-000008"},
+       "outcomes": [{"label": "THEN", "line_range": [142, 144], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0078-STMT-000040", "SYS-PORTFOLIO-001-FIL-0078-STMT-000041"]}]},
+      {"type": "IF", "line": 148, "statement_id": "SYS-PORTFOLIO-001-FIL-0078-STMT-000011", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0078-PAR-0003", "condition_text": "WS-LOG-STATUS NOT = '00'", "condition_fields": ["WS-LOG-STATUS"], "condition_field_ids": [{"name": "WS-LOG-STATUS", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0078-FLD-000016", "target_kind": "field", "candidate_ids": []}], "has_else": false, "then_line_range": [149, 151], "else_line_range": null, "end_if_line": 152, "nested_depth": 1,
+       "io_context": {"operation": "OPEN OUTPUT", "file_name": "MONITOR-LOG", "io_status_field": "WS-LOG-STATUS", "open_statement_id": "SYS-PORTFOLIO-001-FIL-0078-STMT-000010"},
+       "outcomes": [{"label": "THEN", "line_range": [149, 151], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0078-STMT-000042", "SYS-PORTFOLIO-001-FIL-0078-STMT-000043"]}]},
+      {"type": "IF", "line": 155, "statement_id": "SYS-PORTFOLIO-001-FIL-0078-STMT-000013", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0078-PAR-0003", "condition_text": "WS-ALERT-STATUS NOT = '00'", "condition_fields": ["WS-ALERT-STATUS"], "condition_field_ids": [{"name": "WS-ALERT-STATUS", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0078-FLD-000017", "target_kind": "field", "candidate_ids": []}], "has_else": false, "then_line_range": [156, 158], "else_line_range": null, "end_if_line": 159, "nested_depth": 1,
+       "io_context": {"operation": "OPEN OUTPUT", "file_name": "ALERT-FILE", "io_status_field": "WS-ALERT-STATUS", "open_statement_id": "SYS-PORTFOLIO-001-FIL-0078-STMT-000012"},
+       "outcomes": [{"label": "THEN", "line_range": [156, 158], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0078-STMT-000044", "SYS-PORTFOLIO-001-FIL-0078-STMT-000045"]}]},
+      {"type": "IF", "line": 162, "statement_id": "SYS-PORTFOLIO-001-FIL-0078-STMT-000015", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0078-PAR-0003", "condition_text": "WS-DB2-STATUS NOT = '00'", "condition_fields": ["WS-DB2-STATUS"], "condition_field_ids": [{"name": "WS-DB2-STATUS", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0078-FLD-000018", "target_kind": "field", "candidate_ids": []}], "has_else": false, "then_line_range": [163, 165], "else_line_range": null, "end_if_line": 166, "nested_depth": 1,
+       "io_context": {"operation": "OPEN INPUT", "file_name": "DB2-STATS", "io_status_field": "WS-DB2-STATUS", "open_statement_id": "SYS-PORTFOLIO-001-FIL-0078-STMT-000014", "note": "DB2-STATS (INDEXED, RECORD KEY STAT-KEY) has no FD in this source; its record layout was expected from the unresolved COPY DB2STAT"},
+       "outcomes": [{"label": "THEN", "line_range": [163, 165], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0078-STMT-000046", "SYS-PORTFOLIO-001-FIL-0078-STMT-000047"]}]}
     ]
   },
   {
     "paragraph": "1300-READ-CONFIG",
     "paragraph_id": "SYS-PORTFOLIO-001-FIL-0078-PAR-0005",
     "branches": [
-      {"type": "AT_END", "operation": "READ", "file_name": "MONITOR-CONFIG", "line": 173, "statement_id": "SYS-PORTFOLIO-001-FIL-0078-STMT-000048", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0078-PAR-0005",
-       "condition_text": "READ MONITOR-CONFIG AT END / NOT AT END", "condition_fields": [], "condition_field_ids": [],
-       "at_end_line_range": [174, 175], "not_at_end_line_range": [176, 177], "io_status_field": "WS-CFG-STATUS", "nested_depth": 1,
-       "outcomes": [{"label": "AT END", "line_range": [174, 175], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0078-STMT-000051"]}, {"label": "NOT AT END", "line_range": [176, 177], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0078-STMT-000052"]}]}
+      {"type": "AT_END", "operation": "READ", "file_name": "MONITOR-CONFIG", "line": 173, "statement_id": "SYS-PORTFOLIO-001-FIL-0078-STMT-000048", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0078-PAR-0005", "condition_text": "AT END / NOT AT END", "condition_fields": [], "condition_field_ids": [], "io_status_field": "WS-CFG-STATUS", "at_end_line_range": [175, 175], "not_at_end_line_range": [177, 177], "end_read_line": 178, "nested_depth": 1,
+       "outcomes": [{"label": "AT END", "line_range": [175, 175], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0078-STMT-000051"]}, {"label": "NOT AT END", "line_range": [177, 177], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0078-STMT-000052"]}]}
     ]
   },
   {
     "paragraph": "2400-GENERATE-ALERTS",
     "paragraph_id": "SYS-PORTFOLIO-001-FIL-0078-PAR-0010",
     "branches": [
-      {"type": "IF", "line": 207, "statement_id": "SYS-PORTFOLIO-001-FIL-0078-STMT-000035", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0078-PAR-0010", "condition_text": "THRESHOLD-MET", "condition_fields": ["THRESHOLD-MET"],
-       "condition_field_ids": [{"name": "THRESHOLD-MET", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0078-FLD-000033", "target_kind": "condition", "candidate_ids": []}],
-       "has_else": false, "then_line_range": [208, 209], "else_line_range": null, "end_if_line": 210, "nested_depth": 1,
-       "outcomes": [{"label": "THEN", "line_range": [208, 209], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0078-STMT-000049", "SYS-PORTFOLIO-001-FIL-0078-STMT-000050"]}, {"label": "ELSE (implicit, no statements)", "line_range": null, "statement_ids": []}]}
+      {"type": "IF", "line": 207, "statement_id": "SYS-PORTFOLIO-001-FIL-0078-STMT-000035", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0078-PAR-0010", "condition_text": "THRESHOLD-MET", "condition_fields": ["THRESHOLD-MET"], "condition_field_ids": [{"name": "THRESHOLD-MET", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0078-FLD-000033", "target_kind": "condition", "candidate_ids": []}], "condition_meaning": "WS-THRESHOLD-MET = 'Y'", "has_else": false, "then_line_range": [208, 209], "else_line_range": null, "end_if_line": 210, "nested_depth": 1,
+       "outcomes": [{"label": "THEN", "line_range": [208, 209], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0078-STMT-000049", "SYS-PORTFOLIO-001-FIL-0078-STMT-000050"]}]}
     ]
   }
 ],
 "loops": [
   {"paragraph": "0000-MAIN", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0078-PAR-0001", "target": "2000-PROCESS", "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0078-PAR-0006", "type": "PERFORM_UNTIL", "line": 130, "statement_id": "SYS-PORTFOLIO-001-FIL-0078-STMT-000002",
    "condition_text": "WS-HOUR = 23", "test_time": "BEFORE", "loop_type": "WHILE",
-   "condition_fields": ["WS-HOUR"], "condition_field_ids": [{"name": "WS-HOUR", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0078-FLD-000046", "target_kind": "field", "candidate_ids": []}],
-   "termination_pattern": "POTENTIAL_INFINITE_LOOP", "modifying_statement_ids": ["SYS-PORTFOLIO-001-FIL-0078-STMT-000016"], "ambiguous": true,
-   "ambiguity_note": "WS-HOUR (WS-TIMESTAMP.WS-TIME.WS-HOUR, bytes 9-10 of the 16-byte group WS-TIMESTAMP) is changed only by ACCEPT WS-TIMESTAMP FROM TIME (line 169, performed at line 136 and at the end of each iteration, line 187). TIME supplies 8 digits HHMMSShh; received by a group item it is placed left-justified in WS-DATE (bytes 1-8) and WS-TIME is space-filled, so WS-HOUR would never equal 23. Whether the unresolved paragraphs or the external CALL 'ILBOABN0' change WS-HOUR or end the program cannot be determined. Termination flagged for SME review."},
-  {"paragraph": "1300-READ-CONFIG", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0078-PAR-0005", "target": "1300-READ-CONFIG", "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0078-PAR-0005", "type": "PERFORM_INLINE", "line": 172, "statement_id": "SYS-PORTFOLIO-001-FIL-0078-STMT-000017",
+   "condition_fields": ["WS-HOUR"],
+   "condition_field_ids": [{"name": "WS-HOUR", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0078-FLD-000046", "target_kind": "field", "candidate_ids": []}],
+   "termination_pattern": "EXTERNAL_TERMINATION_LOOP",
+   "modifying_statement_ids": ["SYS-PORTFOLIO-001-FIL-0078-STMT-000016"],
+   "termination_note": "WS-HOUR (WS-TIMESTAMP.WS-TIME.WS-HOUR) is changed only by ACCEPT WS-TIMESTAMP FROM TIME (line 169, 1200-INIT-PROCESSING), performed before the loop and at the end of each 2000-PROCESS pass, so the loop ends on the system clock. By the data layout, WS-TIMESTAMP is a 16-byte group whose first 8 bytes are WS-DATE; an 8-digit TIME value received into the group would fill WS-DATE rather than WS-TIME. If so, WS-HOUR would never be 23 and the loop would not end. Flagged for SME review (ambiguous)."},
+  {"paragraph": "1300-READ-CONFIG", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0078-PAR-0005", "target": null, "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0078-PAR-0005", "type": "PERFORM_INLINE", "line": 172, "statement_id": "SYS-PORTFOLIO-001-FIL-0078-STMT-000017",
    "condition_text": "UNTIL END-OF-CONFIG", "test_time": "BEFORE", "loop_type": "WHILE", "body_line_range": [173, 178], "end_perform_line": 179,
-   "condition_fields": ["END-OF-CONFIG"], "condition_field_ids": [{"name": "END-OF-CONFIG", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0078-FLD-000031", "target_kind": "condition", "candidate_ids": []}],
-   "termination_pattern": "FILE_EXHAUSTION_LOOP", "modifying_statement_ids": ["SYS-PORTFOLIO-001-FIL-0078-STMT-000051"]}
+   "condition_fields": ["END-OF-CONFIG"],
+   "condition_field_ids": [{"name": "END-OF-CONFIG", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0078-FLD-000031", "target_kind": "condition", "candidate_ids": []}],
+   "termination_pattern": "FILE_EXHAUSTION_LOOP",
+   "modifying_statement_ids": ["SYS-PORTFOLIO-001-FIL-0078-STMT-000051"],
+   "termination_note": "END-OF-CONFIG (88 on WS-END-OF-CONFIG, VALUE 'N') is set by SET END-OF-CONFIG TO TRUE in the AT END branch of READ MONITOR-CONFIG (line 175)."}
 ],
 "dead_code_confirmed": [],
 "unresolvable_paths": [
-  {"paragraph": "1300-READ-CONFIG", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0078-PAR-0005", "statement_id": "SYS-PORTFOLIO-001-FIL-0078-STMT-000052", "line": 177, "target": "1310-STORE-CONFIG", "reason": "PERFORM target not declared as a paragraph or section in this program (Agent 2 resolved=false; no relationship registered)"},
-  {"paragraph": "2100-COLLECT-METRICS", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0078-PAR-0007", "statement_id": "SYS-PORTFOLIO-001-FIL-0078-STMT-000024", "line": 190, "target": "2110-GET-CPU-METRICS", "reason": "PERFORM target not declared as a paragraph or section in this program (Agent 2 resolved=false; no relationship registered)"},
-  {"paragraph": "2100-COLLECT-METRICS", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0078-PAR-0007", "statement_id": "SYS-PORTFOLIO-001-FIL-0078-STMT-000025", "line": 191, "target": "2120-GET-MEMORY-METRICS", "reason": "PERFORM target not declared as a paragraph or section in this program (Agent 2 resolved=false; no relationship registered)"},
-  {"paragraph": "2100-COLLECT-METRICS", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0078-PAR-0007", "statement_id": "SYS-PORTFOLIO-001-FIL-0078-STMT-000026", "line": 192, "target": "2130-GET-DASD-METRICS", "reason": "PERFORM target not declared as a paragraph or section in this program (Agent 2 resolved=false; no relationship registered)"},
-  {"paragraph": "2100-COLLECT-METRICS", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0078-PAR-0007", "statement_id": "SYS-PORTFOLIO-001-FIL-0078-STMT-000027", "line": 193, "target": "2140-GET-DB2-METRICS", "reason": "PERFORM target not declared as a paragraph or section in this program (Agent 2 resolved=false; no relationship registered)"},
-  {"paragraph": "2200-CHECK-THRESHOLDS", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0078-PAR-0008", "statement_id": "SYS-PORTFOLIO-001-FIL-0078-STMT-000028", "line": 196, "target": "2210-CHECK-UTILIZATION", "reason": "PERFORM target not declared as a paragraph or section in this program (Agent 2 resolved=false; no relationship registered)"},
-  {"paragraph": "2200-CHECK-THRESHOLDS", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0078-PAR-0008", "statement_id": "SYS-PORTFOLIO-001-FIL-0078-STMT-000029", "line": 197, "target": "2220-CHECK-RESPONSE", "reason": "PERFORM target not declared as a paragraph or section in this program (Agent 2 resolved=false; no relationship registered)"},
-  {"paragraph": "2200-CHECK-THRESHOLDS", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0078-PAR-0008", "statement_id": "SYS-PORTFOLIO-001-FIL-0078-STMT-000030", "line": 198, "target": "2230-CHECK-QUEUES", "reason": "PERFORM target not declared as a paragraph or section in this program (Agent 2 resolved=false; no relationship registered)"},
-  {"paragraph": "2200-CHECK-THRESHOLDS", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0078-PAR-0008", "statement_id": "SYS-PORTFOLIO-001-FIL-0078-STMT-000031", "line": 199, "target": "2240-CHECK-ERRORS", "reason": "PERFORM target not declared as a paragraph or section in this program (Agent 2 resolved=false; no relationship registered)"},
-  {"paragraph": "2300-LOG-STATUS", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0078-PAR-0009", "statement_id": "SYS-PORTFOLIO-001-FIL-0078-STMT-000033", "line": 203, "target": "2310-LOG-RESOURCES", "reason": "PERFORM target not declared as a paragraph or section in this program (Agent 2 resolved=false; no relationship registered)"},
-  {"paragraph": "2300-LOG-STATUS", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0078-PAR-0009", "statement_id": "SYS-PORTFOLIO-001-FIL-0078-STMT-000034", "line": 204, "target": "2320-LOG-PERFORMANCE", "reason": "PERFORM target not declared as a paragraph or section in this program (Agent 2 resolved=false; no relationship registered)"},
-  {"paragraph": "2400-GENERATE-ALERTS", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0078-PAR-0010", "statement_id": "SYS-PORTFOLIO-001-FIL-0078-STMT-000049", "line": 208, "target": "2410-FORMAT-ALERT", "reason": "PERFORM target not declared as a paragraph or section in this program (Agent 2 resolved=false; no relationship registered)"},
-  {"paragraph": "2400-GENERATE-ALERTS", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0078-PAR-0010", "statement_id": "SYS-PORTFOLIO-001-FIL-0078-STMT-000050", "line": 209, "target": "2420-WRITE-ALERT", "reason": "PERFORM target not declared as a paragraph or section in this program (Agent 2 resolved=false; no relationship registered)"}
+  {"statement_id": "SYS-PORTFOLIO-001-FIL-0078-STMT-000052", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0078-PAR-0005", "paragraph": "1300-READ-CONFIG", "target": "1310-STORE-CONFIG", "line": 177, "kind": "perform_target_not_declared"},
+  {"statement_id": "SYS-PORTFOLIO-001-FIL-0078-STMT-000024", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0078-PAR-0007", "paragraph": "2100-COLLECT-METRICS", "target": "2110-GET-CPU-METRICS", "line": 190, "kind": "perform_target_not_declared"},
+  {"statement_id": "SYS-PORTFOLIO-001-FIL-0078-STMT-000025", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0078-PAR-0007", "paragraph": "2100-COLLECT-METRICS", "target": "2120-GET-MEMORY-METRICS", "line": 191, "kind": "perform_target_not_declared"},
+  {"statement_id": "SYS-PORTFOLIO-001-FIL-0078-STMT-000026", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0078-PAR-0007", "paragraph": "2100-COLLECT-METRICS", "target": "2130-GET-DASD-METRICS", "line": 192, "kind": "perform_target_not_declared"},
+  {"statement_id": "SYS-PORTFOLIO-001-FIL-0078-STMT-000027", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0078-PAR-0007", "paragraph": "2100-COLLECT-METRICS", "target": "2140-GET-DB2-METRICS", "line": 193, "kind": "perform_target_not_declared"},
+  {"statement_id": "SYS-PORTFOLIO-001-FIL-0078-STMT-000028", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0078-PAR-0008", "paragraph": "2200-CHECK-THRESHOLDS", "target": "2210-CHECK-UTILIZATION", "line": 196, "kind": "perform_target_not_declared"},
+  {"statement_id": "SYS-PORTFOLIO-001-FIL-0078-STMT-000029", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0078-PAR-0008", "paragraph": "2200-CHECK-THRESHOLDS", "target": "2220-CHECK-RESPONSE", "line": 197, "kind": "perform_target_not_declared"},
+  {"statement_id": "SYS-PORTFOLIO-001-FIL-0078-STMT-000030", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0078-PAR-0008", "paragraph": "2200-CHECK-THRESHOLDS", "target": "2230-CHECK-QUEUES", "line": 198, "kind": "perform_target_not_declared"},
+  {"statement_id": "SYS-PORTFOLIO-001-FIL-0078-STMT-000031", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0078-PAR-0008", "paragraph": "2200-CHECK-THRESHOLDS", "target": "2240-CHECK-ERRORS", "line": 199, "kind": "perform_target_not_declared"},
+  {"statement_id": "SYS-PORTFOLIO-001-FIL-0078-STMT-000033", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0078-PAR-0009", "paragraph": "2300-LOG-STATUS", "target": "2310-LOG-RESOURCES", "line": 203, "kind": "perform_target_not_declared"},
+  {"statement_id": "SYS-PORTFOLIO-001-FIL-0078-STMT-000034", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0078-PAR-0009", "paragraph": "2300-LOG-STATUS", "target": "2320-LOG-PERFORMANCE", "line": 204, "kind": "perform_target_not_declared"},
+  {"statement_id": "SYS-PORTFOLIO-001-FIL-0078-STMT-000049", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0078-PAR-0010", "paragraph": "2400-GENERATE-ALERTS", "target": "2410-FORMAT-ALERT", "line": 208, "kind": "perform_target_not_declared"},
+  {"statement_id": "SYS-PORTFOLIO-001-FIL-0078-STMT-000050", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0078-PAR-0010", "paragraph": "2400-GENERATE-ALERTS", "target": "2420-WRITE-ALERT", "line": 209, "kind": "perform_target_not_declared"},
+  {"statement_id": "SYS-PORTFOLIO-001-FIL-0078-STMT-000022", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0078-PAR-0006", "paragraph": "2000-PROCESS", "target": "ILBOABN0", "line": 186, "kind": "external_call_not_in_registry", "reason": "Static CALL to a system runtime routine that is not in the file registry; callee logic and its effect on control flow cannot be traced."}
 ],
 "trace_issues": [
-  {"severity": "info", "type": "upstream_issue", "upstream_agent": "2_parser", "upstream_type": "copy_before_fd", "line": 43, "message": "COPY DB2STAT appears in the FILE SECTION before the first FD; recorded as a stub (DB2STAT matches a program file, not a copybook)."},
-  {"severity": "info", "type": "upstream_issue", "upstream_agent": "2_parser", "upstream_type": "select_without_fd", "line": 35, "message": "SELECT DB2-STATS has no FD in this source file; its FD may be supplied by COPY DB2STAT (not expanded)."},
-  {"severity": "info", "type": "upstream_issue", "upstream_agent": "2_parser", "upstream_type": "unresolved_perform_targets", "lines": [177, 190, 191, 192, 193, 196, 197, 198, 199, 203, 204, 208, 209], "message": "13 PERFORM targets have no matching paragraph in this file; parse_status set to partial."},
-  {"severity": "info", "type": "upstream_issue", "upstream_agent": "3_data", "upstream_type": "copy_target_is_program", "line": 43, "message": "COPY DB2STAT: DB2STAT is not in copybook_registry (it is the program src/programs/common/DB2STAT.cbl, SYS-PORTFOLIO-001-FIL-0057); unresolved copy stub, no USES_COPYBOOK or EXPANDS_COPY registered."},
-  {"severity": "info", "type": "upstream_issue", "upstream_agent": "3_data", "upstream_type": "copy_stub_without_fd", "line": 43, "message": "SELECT DB2-STATS (line 35) has no FD/record in this program."},
-  {"severity": "info", "type": "upstream_issue", "upstream_agent": "3_data", "upstream_type": "undefined_record_key", "line": 38, "message": "RECORD KEY STAT-KEY is not declared in the program or in the expanded copybooks RTNCODE, ERRHAND."},
-  {"severity": "info", "type": "upstream_issue", "upstream_agent": "3_data", "upstream_type": "copy_stub_at_section_level", "lines": [75, 76], "message": "COPY RTNCODE and COPY ERRHAND sit directly under WORKING-STORAGE; linked by EXPANDS_COPY from section SYS-PORTFOLIO-001-FIL-0078-SEC-0004."},
-  {"severity": "warning", "type": "unresolved_copy_stub", "line": 43, "message": "COPY DB2STAT cannot be expanded; the record layout of DB2-STATS (including STAT-KEY) is unknown. No procedure statement references DB2-STATS data items, only OPEN and CLOSE of the file."},
-  {"severity": "warning", "type": "unresolvable_perform_target", "lines": [177, 190, 191, 192, 193, 196, 197, 198, 199, 203, 204, 208, 209], "message": "13 PERFORM targets are not in the CFG; recorded as 'unresolvable' steps with null target IDs. Configuration storage, metric collection, threshold checks, status logging and alert formatting/writing cannot be traced."},
-  {"severity": "warning", "type": "potential_infinite_loop", "line": 130, "statement_id": "SYS-PORTFOLIO-001-FIL-0078-STMT-000002", "message": "PERFORM 2000-PROCESS UNTIL WS-HOUR = 23: the only statement that changes WS-HOUR is ACCEPT WS-TIMESTAMP FROM TIME (line 169), which fills WS-DATE and leaves WS-TIME (and WS-HOUR) space-filled; the condition may never become true. Classified POTENTIAL_INFINITE_LOOP, flagged ambiguous for SME review."},
-  {"severity": "warning", "type": "external_call_not_in_repository", "line": 186, "statement_id": "SYS-PORTFOLIO-001-FIL-0078-STMT-000022", "message": "CALL 'ILBOABN0' USING WS-MINUTE is a static CALL to a program that is not in the repository or the registry; its effect (return, or ending the run) cannot be traced. Flagged for SME review."},
-  {"severity": "info", "type": "field_id_unresolved", "name": "WS-ERROR-MESSAGE", "lines": [143, 150, 157, 164, 219], "message": "resolve-field-references UNRESOLVED: WS-ERROR-MESSAGE is not declared in the program or in copybooks RTNCODE, ERRHAND; target_id null."},
-  {"severity": "info", "type": "trace_expansion", "message": "The execution trace is depth-first; 9999-ERROR-HANDLER is expanded at its first PERFORM (step 4) and not repeated at later PERFORMs (steps 5, 6, 7). 1200-INIT-PROCESSING (ACCEPT only) and 3000-CLEANUP contain no control-transfer statements. The body of the loop at step 12 is steps 13-30."},
-  {"severity": "info", "type": "error_handler_terminates", "line": 221, "statement_id": "SYS-PORTFOLIO-001-FIL-0078-STMT-000039", "message": "9999-ERROR-HANDLER always ends the program (RETURN-CODE 12, GOBACK) at the first error; 3000-CLEANUP is not performed on that path."},
-  {"severity": "info", "type": "flag_never_set", "line": 207, "statement_id": "SYS-PORTFOLIO-001-FIL-0078-STMT-000035", "message": "THRESHOLD-MET (WS-THRESHOLD-MET = 'Y') is tested at line 207 but no statement in the program sets it; it may be set by the unresolved threshold-check paragraphs 2210-2240."}
+  {"severity": "info", "type": "upstream_issue", "upstream_agent": "2_parser", "upstream_type": "upstream_issue/unresolved_reference", "line": 43, "message": "Agent 1 unresolved_reference: COPY target 'DB2STAT' not found in copybook registry - no DB2STAT copybook exists; the name matches program src/programs/common/DB2STAT.cbl. Recorded as a copy stub only"},
+  {"severity": "info", "type": "upstream_issue", "upstream_agent": "2_parser", "upstream_type": "upstream_issue/unresolved_reference", "line": 186, "statement_id": "SYS-PORTFOLIO-001-FIL-0078-STMT-000022", "message": "Agent 1 unresolved_reference: CALL target 'ILBOABN0' not found in file registry - may be external or in load library (system runtime routine)"},
+  {"severity": "info", "type": "upstream_issue", "upstream_agent": "2_parser", "upstream_type": "select_without_fd", "lines": [35, 43], "message": "SELECT DB2-STATS (line 35) has no FD in this source file; the only other FILE SECTION content is the unexpanded COPY DB2STAT at line 43"},
+  {"severity": "info", "type": "upstream_issue", "upstream_agent": "2_parser", "upstream_type": "unresolved_targets", "lines": [177, 190, 191, 192, 193, 196, 197, 198, 199, 203, 204, 208, 209], "message": "13 PERFORM targets are not declared as paragraphs or sections in this program; recorded unresolved, no relationships registered (see control_flow_graph.cfg_issues)"},
+  {"severity": "info", "type": "upstream_issue", "upstream_agent": "3_data", "upstream_type": "copy_target_is_program", "line": 43, "message": "COPY DB2STAT: no DB2STAT copybook in the inventory copybook_registry; the name matches program src/programs/common/DB2STAT.cbl. Left as an unresolved stub; no USES_COPYBOOK/EXPANDS_COPY registered"},
+  {"severity": "info", "type": "upstream_issue", "upstream_agent": "3_data", "upstream_type": "copy_without_enclosing_record", "line": 75, "message": "COPY RTNCODE sits directly under WORKING-STORAGE; EXPANDS_COPY holder is the WORKING-STORAGE section"},
+  {"severity": "info", "type": "upstream_issue", "upstream_agent": "3_data", "upstream_type": "copy_without_enclosing_record", "line": 76, "message": "COPY ERRHAND sits directly under WORKING-STORAGE; EXPANDS_COPY holder is the WORKING-STORAGE section"},
+  {"severity": "warning", "type": "copy_stub_unresolved", "line": 43, "message": "COPY DB2STAT is unresolved (VALID_PARTIAL): the DB2-STATS record (including RECORD KEY STAT-KEY) has no layout and no IDs. No statement in the PROCEDURE DIVISION present here references its fields; only OPEN/CLOSE of the file are traced."},
+  {"severity": "warning", "type": "unresolvable_perform_target", "lines": [177, 190, 191, 192, 193, 196, 197, 198, 199, 203, 204, 208, 209], "message": "13 PERFORM targets (1310-STORE-CONFIG, 2110-GET-CPU-METRICS, 2120-GET-MEMORY-METRICS, 2130-GET-DASD-METRICS, 2140-GET-DB2-METRICS, 2210-CHECK-UTILIZATION, 2220-CHECK-RESPONSE, 2230-CHECK-QUEUES, 2240-CHECK-ERRORS, 2310-LOG-RESOURCES, 2320-LOG-PERFORMANCE, 2410-FORMAT-ALERT, 2420-WRITE-ALERT) are not in the CFG; recorded as unresolvable steps with target_paragraph_id null."},
+  {"severity": "warning", "type": "external_call_unresolved", "line": 186, "statement_id": "SYS-PORTFOLIO-001-FIL-0078-STMT-000022", "message": "CALL 'ILBOABN0' USING WS-MINUTE targets a system runtime routine with no registered source; its effect on this cycle (return or termination) is not traced."},
+  {"severity": "warning", "type": "loop_termination_review", "line": 130, "statement_id": "SYS-PORTFOLIO-001-FIL-0078-STMT-000002", "ambiguous": true, "message": "Loop condition WS-HOUR = 23 depends on ACCEPT WS-TIMESTAMP FROM TIME into a group whose first 8 bytes are WS-DATE; WS-HOUR may never receive the hour value. SME review."},
+  {"severity": "info", "type": "condition_never_set_in_present_code", "line": 207, "statement_id": "SYS-PORTFOLIO-001-FIL-0078-STMT-000035", "message": "THRESHOLD-MET (WS-THRESHOLD-MET VALUE 'N') is not set by any statement present in this program; it can only become true inside the undeclared threshold-check paragraphs."},
+  {"severity": "info", "type": "field_id_unresolved", "name": "WS-ERROR-MESSAGE", "lines": [143, 150, 157, 164, 219], "message": "WS-ERROR-MESSAGE is not declared in UTLMON00 or in the copybooks it uses (RTNCODE, ERRHAND); target_id null."}
 ],
-"program_narrative": "Program UTLMON00 is a batch system-monitoring program that ends with GOBACK. It opens the configuration file MONITOR-CONFIG and the indexed file DB2-STATS for input and the output files MONITOR-LOG and ALERT-FILE, captures the time of day into WS-TIMESTAMP and reads every configuration record, passing each to 1310-STORE-CONFIG (not present in the program). The main loop repeats 2000-PROCESS until WS-HOUR = 23: each iteration collects CPU, memory, DASD and DB2 metrics, checks utilisation, response, queue and error thresholds, logs status (copying WS-TIMESTAMP to LOG-TIMESTAMP), generates alerts when THRESHOLD-MET is true, calls the external program ILBOABN0 with WS-MINUTE and captures the time again. All 13 step paragraphs and ILBOABN0 are outside the program, so the monitoring work cannot be traced, and as written the loop condition may never become true. Error conditions handled: a failed OPEN of any of the four files; the error handler displays WS-ERROR-MESSAGE (not declared in the program or its copybooks), sets return code 12 and ends the program immediately.",
+"field_id_lookup": {
+  "query": "resolve-field-references",
+  "names_looked_up": 11, "resolved": 10, "unresolved": 1, "ambiguous": 0,
+  "unresolved_names": ["WS-ERROR-MESSAGE"], "ambiguous_names": [],
+  "not_looked_up": [{"name": "MONITOR-CONFIG", "reason": "file name"}, {"name": "MONITOR-LOG", "reason": "file name"}, {"name": "ALERT-FILE", "reason": "file name"}, {"name": "DB2-STATS", "reason": "file name"}, {"name": "RETURN-CODE", "reason": "special register"}, {"name": "TIME", "reason": "special register (ACCEPT FROM)"}, {"name": "CONS", "reason": "mnemonic name (SPECIAL-NAMES CONSOLE IS CONS)"}]
+},
+"unresolved_ids_breakdown": {"statements": 0, "fields_unresolved": 1, "fields_ambiguous": 0, "paragraph_targets": 13, "total": 14},
+"program_narrative": "UTLMON00 is a batch system-monitoring utility. It opens the monitor configuration file MONITOR-CONFIG and the DB2 statistics file DB2-STATS for input and the files MONITOR-LOG and ALERT-FILE for output; any failed open is displayed on the console and ends the run with RETURN-CODE 12. It reads the system time into WS-TIMESTAMP and loads every configuration record (resource type, threshold type and value, alert level and action) through 1310-STORE-CONFIG. It then repeats a monitoring cycle until the hour field reads 23: collect CPU, memory, DASD and DB2 metrics, check utilisation, response, queue and error thresholds, log the timestamp and resource/performance values to MONITOR-LOG, format and write an alert when a threshold is met, call the runtime routine ILBOABN0 with the current minute, and refresh the time. Finally it closes all four files. Almost all detail logic (13 performed paragraphs) and the DB2-STATS record layout (COPY DB2STAT) are missing from the source, so metric collection, threshold rules, log content and alert content cannot be described. Error conditions handled: file open failures (fatal).",
 "paragraphs": [
   {
-    "name": "0000-MAIN", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0078-PAR-0001", "section": null, "section_id": null, "line_range": [128, 133],
+    "name": "0000-MAIN", "section": null, "section_id": null, "paragraph_id": "SYS-PORTFOLIO-001-FIL-0078-PAR-0001", "line_range": [128, 133],
     "pseudocode": [
-      "-- Main control: initialise, run the monitoring cycle until hour 23, clean up",
+      "-- Main control paragraph: initialise, run monitoring cycles until hour 23, clean up",
       "CALL 1000-initialize",
-      "WHILE ws_hour != 23 DO  -- PERFORM 2000-PROCESS UNTIL WS-HOUR = 23 (tested before each iteration)",
+      "WHILE hour != 23 DO  -- PERFORM UNTIL WS-HOUR = 23 (test before)",
       "  CALL 2000-process",
-      "END WHILE  -- !! REVIEW: WS-HOUR is never filled by ACCEPT WS-TIMESTAMP FROM TIME; the loop may never end",
+      "END WHILE",
       "CALL 3000-cleanup",
-      "RETURN to caller (or terminate if main program)  -- GOBACK"
+      "RETURN to caller (or terminate if main program)"
     ],
     "pseudocode_statement_ids": [[], ["SYS-PORTFOLIO-001-FIL-0078-STMT-000001"], ["SYS-PORTFOLIO-001-FIL-0078-STMT-000002"], ["SYS-PORTFOLIO-001-FIL-0078-STMT-000002"], ["SYS-PORTFOLIO-001-FIL-0078-STMT-000002"], ["SYS-PORTFOLIO-001-FIL-0078-STMT-000003"], ["SYS-PORTFOLIO-001-FIL-0078-STMT-000004"]],
-    "pseudocode_text": "-- Main control: initialise, run the monitoring cycle until hour 23, clean up\nCALL 1000-initialize\nWHILE ws_hour != 23 DO  -- PERFORM 2000-PROCESS UNTIL WS-HOUR = 23 (tested before each iteration)\n  CALL 2000-process\nEND WHILE  -- !! REVIEW: WS-HOUR is never filled by ACCEPT WS-TIMESTAMP FROM TIME; the loop may never end\nCALL 3000-cleanup\nRETURN to caller (or terminate if main program)  -- GOBACK",
+    "pseudocode_text": "-- Main control paragraph: initialise, run monitoring cycles until hour 23, clean up\nCALL 1000-initialize\nWHILE hour != 23 DO  -- PERFORM UNTIL WS-HOUR = 23 (test before)\n  CALL 2000-process\nEND WHILE\nCALL 3000-cleanup\nRETURN to caller (or terminate if main program)",
     "statement_ids": ["SYS-PORTFOLIO-001-FIL-0078-STMT-000001", "SYS-PORTFOLIO-001-FIL-0078-STMT-000002", "SYS-PORTFOLIO-001-FIL-0078-STMT-000003", "SYS-PORTFOLIO-001-FIL-0078-STMT-000004"],
     "untranslated_statement_ids": [],
     "field_references": ["WS-HOUR"],
-    "field_reference_ids": [{"name": "WS-HOUR", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0078-FLD-000046", "target_kind": "field", "candidate_ids": []}],
+    "field_reference_ids": [
+      {"name": "WS-HOUR", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0078-FLD-000046", "target_kind": "field", "candidate_ids": []}
+    ],
     "calls_made": ["1000-INITIALIZE", "2000-PROCESS", "3000-CLEANUP"],
     "calls_made_ids": [{"name": "1000-INITIALIZE", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0078-PAR-0002", "section_id": null}, {"name": "2000-PROCESS", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0078-PAR-0006", "section_id": null}, {"name": "3000-CLEANUP", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0078-PAR-0011", "section_id": null}],
     "complexity_score": 1, "has_unresolved_statements": false,
-    "annotations": [{"line": 130, "statement_id": "SYS-PORTFOLIO-001-FIL-0078-STMT-000002", "note": "Loop termination depends on WS-HOUR, which only ACCEPT WS-TIMESTAMP FROM TIME changes; see loops[0] ambiguity_note.", "ambiguous": true}]
+    "annotations": [{"line": 130, "statement_id": "SYS-PORTFOLIO-001-FIL-0078-STMT-000002", "note": "Loop termination depends on the system clock via WS-HOUR; see loops[0].termination_note for the layout concern.", "ambiguous": true}]
   },
   {
-    "name": "1000-INITIALIZE", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0078-PAR-0002", "section": null, "section_id": null, "line_range": [134, 138],
+    "name": "1000-INITIALIZE", "section": null, "section_id": null, "paragraph_id": "SYS-PORTFOLIO-001-FIL-0078-PAR-0002", "line_range": [134, 138],
     "pseudocode": [
       "CALL 1100-open-files",
       "CALL 1200-init-processing",
@@ -206,36 +207,32 @@
     "complexity_score": 1, "has_unresolved_statements": false, "annotations": []
   },
   {
-    "name": "1100-OPEN-FILES", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0078-PAR-0003", "section": null, "section_id": null, "line_range": [139, 167],
+    "name": "1100-OPEN-FILES", "section": null, "section_id": null, "paragraph_id": "SYS-PORTFOLIO-001-FIL-0078-PAR-0003", "line_range": [139, 167],
     "pseudocode": [
+      "-- Open the four files; any failure is fatal (9999-error-handler ends the program)",
       "OPEN MONITOR-CONFIG for READ-ONLY",
-      "IF ws_cfg_status != '00' THEN  -- file status of MONITOR-CONFIG",
-      "  SET ws_error_message = 'ERROR OPENING CONFIG FILE'",
-      "  CALL 9999-error-handler  -- ends the program",
+      "IF config_file_status != '00' THEN",
+      "  SET error_message = 'ERROR OPENING CONFIG FILE'",
+      "  CALL 9999-error-handler",
       "END IF",
       "OPEN MONITOR-LOG for WRITE (new)",
-      "IF ws_log_status != '00' THEN  -- file status of MONITOR-LOG",
-      "  SET ws_error_message = 'ERROR OPENING MONITOR LOG'",
-      "  CALL 9999-error-handler  -- ends the program",
+      "IF log_file_status != '00' THEN",
+      "  SET error_message = 'ERROR OPENING MONITOR LOG'",
+      "  CALL 9999-error-handler",
       "END IF",
       "OPEN ALERT-FILE for WRITE (new)",
-      "IF ws_alert_status != '00' THEN  -- file status of ALERT-FILE",
-      "  SET ws_error_message = 'ERROR OPENING ALERT FILE'",
-      "  CALL 9999-error-handler  -- ends the program",
+      "IF alert_file_status != '00' THEN",
+      "  SET error_message = 'ERROR OPENING ALERT FILE'",
+      "  CALL 9999-error-handler",
       "END IF",
-      "OPEN DB2-STATS for READ-ONLY  -- indexed file; FD not in this source (COPY DB2STAT unresolved)",
-      "IF ws_db2_status != '00' THEN  -- file status of DB2-STATS",
-      "  SET ws_error_message = 'ERROR OPENING DB2 STATS'",
-      "  CALL 9999-error-handler  -- ends the program",
+      "OPEN DB2-STATS for READ-ONLY  -- indexed file, dynamic access, key STAT-KEY",
+      "IF db2_stats_file_status != '00' THEN",
+      "  SET error_message = 'ERROR OPENING DB2 STATS'",
+      "  CALL 9999-error-handler",
       "END IF"
     ],
-    "pseudocode_statement_ids": [
-      ["SYS-PORTFOLIO-001-FIL-0078-STMT-000008"], ["SYS-PORTFOLIO-001-FIL-0078-STMT-000009"], ["SYS-PORTFOLIO-001-FIL-0078-STMT-000040"], ["SYS-PORTFOLIO-001-FIL-0078-STMT-000041"], ["SYS-PORTFOLIO-001-FIL-0078-STMT-000009"],
-      ["SYS-PORTFOLIO-001-FIL-0078-STMT-000010"], ["SYS-PORTFOLIO-001-FIL-0078-STMT-000011"], ["SYS-PORTFOLIO-001-FIL-0078-STMT-000042"], ["SYS-PORTFOLIO-001-FIL-0078-STMT-000043"], ["SYS-PORTFOLIO-001-FIL-0078-STMT-000011"],
-      ["SYS-PORTFOLIO-001-FIL-0078-STMT-000012"], ["SYS-PORTFOLIO-001-FIL-0078-STMT-000013"], ["SYS-PORTFOLIO-001-FIL-0078-STMT-000044"], ["SYS-PORTFOLIO-001-FIL-0078-STMT-000045"], ["SYS-PORTFOLIO-001-FIL-0078-STMT-000013"],
-      ["SYS-PORTFOLIO-001-FIL-0078-STMT-000014"], ["SYS-PORTFOLIO-001-FIL-0078-STMT-000015"], ["SYS-PORTFOLIO-001-FIL-0078-STMT-000046"], ["SYS-PORTFOLIO-001-FIL-0078-STMT-000047"], ["SYS-PORTFOLIO-001-FIL-0078-STMT-000015"]
-    ],
-    "pseudocode_text": "OPEN MONITOR-CONFIG for READ-ONLY\nIF ws_cfg_status != '00' THEN  -- file status of MONITOR-CONFIG\n  SET ws_error_message = 'ERROR OPENING CONFIG FILE'\n  CALL 9999-error-handler  -- ends the program\nEND IF\nOPEN MONITOR-LOG for WRITE (new)\nIF ws_log_status != '00' THEN  -- file status of MONITOR-LOG\n  SET ws_error_message = 'ERROR OPENING MONITOR LOG'\n  CALL 9999-error-handler  -- ends the program\nEND IF\nOPEN ALERT-FILE for WRITE (new)\nIF ws_alert_status != '00' THEN  -- file status of ALERT-FILE\n  SET ws_error_message = 'ERROR OPENING ALERT FILE'\n  CALL 9999-error-handler  -- ends the program\nEND IF\nOPEN DB2-STATS for READ-ONLY  -- indexed file; FD not in this source (COPY DB2STAT unresolved)\nIF ws_db2_status != '00' THEN  -- file status of DB2-STATS\n  SET ws_error_message = 'ERROR OPENING DB2 STATS'\n  CALL 9999-error-handler  -- ends the program\nEND IF",
+    "pseudocode_statement_ids": [[], ["SYS-PORTFOLIO-001-FIL-0078-STMT-000008"], ["SYS-PORTFOLIO-001-FIL-0078-STMT-000009"], ["SYS-PORTFOLIO-001-FIL-0078-STMT-000040"], ["SYS-PORTFOLIO-001-FIL-0078-STMT-000041"], ["SYS-PORTFOLIO-001-FIL-0078-STMT-000009"], ["SYS-PORTFOLIO-001-FIL-0078-STMT-000010"], ["SYS-PORTFOLIO-001-FIL-0078-STMT-000011"], ["SYS-PORTFOLIO-001-FIL-0078-STMT-000042"], ["SYS-PORTFOLIO-001-FIL-0078-STMT-000043"], ["SYS-PORTFOLIO-001-FIL-0078-STMT-000011"], ["SYS-PORTFOLIO-001-FIL-0078-STMT-000012"], ["SYS-PORTFOLIO-001-FIL-0078-STMT-000013"], ["SYS-PORTFOLIO-001-FIL-0078-STMT-000044"], ["SYS-PORTFOLIO-001-FIL-0078-STMT-000045"], ["SYS-PORTFOLIO-001-FIL-0078-STMT-000013"], ["SYS-PORTFOLIO-001-FIL-0078-STMT-000014"], ["SYS-PORTFOLIO-001-FIL-0078-STMT-000015"], ["SYS-PORTFOLIO-001-FIL-0078-STMT-000046"], ["SYS-PORTFOLIO-001-FIL-0078-STMT-000047"], ["SYS-PORTFOLIO-001-FIL-0078-STMT-000015"]],
+    "pseudocode_text": "-- Open the four files; any failure is fatal (9999-error-handler ends the program)\nOPEN MONITOR-CONFIG for READ-ONLY\nIF config_file_status != '00' THEN\n  SET error_message = 'ERROR OPENING CONFIG FILE'\n  CALL 9999-error-handler\nEND IF\nOPEN MONITOR-LOG for WRITE (new)\nIF log_file_status != '00' THEN\n  SET error_message = 'ERROR OPENING MONITOR LOG'\n  CALL 9999-error-handler\nEND IF\nOPEN ALERT-FILE for WRITE (new)\nIF alert_file_status != '00' THEN\n  SET error_message = 'ERROR OPENING ALERT FILE'\n  CALL 9999-error-handler\nEND IF\nOPEN DB2-STATS for READ-ONLY  -- indexed file, dynamic access, key STAT-KEY\nIF db2_stats_file_status != '00' THEN\n  SET error_message = 'ERROR OPENING DB2 STATS'\n  CALL 9999-error-handler\nEND IF",
     "statement_ids": ["SYS-PORTFOLIO-001-FIL-0078-STMT-000008", "SYS-PORTFOLIO-001-FIL-0078-STMT-000009", "SYS-PORTFOLIO-001-FIL-0078-STMT-000040", "SYS-PORTFOLIO-001-FIL-0078-STMT-000041", "SYS-PORTFOLIO-001-FIL-0078-STMT-000010", "SYS-PORTFOLIO-001-FIL-0078-STMT-000011", "SYS-PORTFOLIO-001-FIL-0078-STMT-000042", "SYS-PORTFOLIO-001-FIL-0078-STMT-000043", "SYS-PORTFOLIO-001-FIL-0078-STMT-000012", "SYS-PORTFOLIO-001-FIL-0078-STMT-000013", "SYS-PORTFOLIO-001-FIL-0078-STMT-000044", "SYS-PORTFOLIO-001-FIL-0078-STMT-000045", "SYS-PORTFOLIO-001-FIL-0078-STMT-000014", "SYS-PORTFOLIO-001-FIL-0078-STMT-000015", "SYS-PORTFOLIO-001-FIL-0078-STMT-000046", "SYS-PORTFOLIO-001-FIL-0078-STMT-000047"],
     "untranslated_statement_ids": [],
     "field_references": ["WS-CFG-STATUS", "WS-ERROR-MESSAGE", "WS-LOG-STATUS", "WS-ALERT-STATUS", "WS-DB2-STATUS"],
@@ -248,48 +245,56 @@
     ],
     "calls_made": ["9999-ERROR-HANDLER"],
     "calls_made_ids": [{"name": "9999-ERROR-HANDLER", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0078-PAR-0012", "section_id": null}],
-    "complexity_score": 4, "has_unresolved_statements": false,
-    "annotations": [{"line": 143, "statement_id": "SYS-PORTFOLIO-001-FIL-0078-STMT-000040", "note": "WS-ERROR-MESSAGE is the target of the MOVEs but is not declared in the program or its copybooks; its length and type are unknown."}]
+    "complexity_score": 8, "has_unresolved_statements": false,
+    "annotations": [
+      {"line": 142, "statement_id": "SYS-PORTFOLIO-001-FIL-0078-STMT-000040", "note": "WS-ERROR-MESSAGE is not declared in this program or its copybooks; field ID null."},
+      {"line": 161, "statement_id": "SYS-PORTFOLIO-001-FIL-0078-STMT-000014", "note": "DB2-STATS has no FD in this source; its record layout was expected from the unresolved COPY DB2STAT (line 43)."}
+    ]
   },
   {
-    "name": "1200-INIT-PROCESSING", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0078-PAR-0004", "section": null, "section_id": null, "line_range": [168, 170],
+    "name": "1200-INIT-PROCESSING", "section": null, "section_id": null, "paragraph_id": "SYS-PORTFOLIO-001-FIL-0078-PAR-0004", "line_range": [168, 170],
     "pseudocode": [
-      "SET ws_timestamp = current time of day  -- ACCEPT FROM TIME supplies HHMMSShh (8 digits); WS-TIMESTAMP is a 16-byte group (WS-DATE + WS-TIME), so the digits land in WS-DATE and WS-TIME is space-filled"
+      "SET timestamp = system time (HHMMSShh)  -- ACCEPT WS-TIMESTAMP FROM TIME; WS-TIMESTAMP is a group (WS-DATE then WS-TIME)"
     ],
     "pseudocode_statement_ids": [["SYS-PORTFOLIO-001-FIL-0078-STMT-000016"]],
-    "pseudocode_text": "SET ws_timestamp = current time of day  -- ACCEPT FROM TIME supplies HHMMSShh (8 digits); WS-TIMESTAMP is a 16-byte group (WS-DATE + WS-TIME), so the digits land in WS-DATE and WS-TIME is space-filled",
+    "pseudocode_text": "SET timestamp = system time (HHMMSShh)  -- ACCEPT WS-TIMESTAMP FROM TIME; WS-TIMESTAMP is a group (WS-DATE then WS-TIME)",
     "statement_ids": ["SYS-PORTFOLIO-001-FIL-0078-STMT-000016"],
     "untranslated_statement_ids": [],
     "field_references": ["WS-TIMESTAMP"],
-    "field_reference_ids": [{"name": "WS-TIMESTAMP", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0078-REC-0010", "target_kind": "record", "candidate_ids": []}],
+    "field_reference_ids": [
+      {"name": "WS-TIMESTAMP", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0078-REC-0010", "target_kind": "record", "candidate_ids": []}
+    ],
     "calls_made": [], "calls_made_ids": [],
     "complexity_score": 1, "has_unresolved_statements": false,
-    "annotations": [{"line": 169, "statement_id": "SYS-PORTFOLIO-001-FIL-0078-STMT-000016", "note": "Performed at initialisation (line 136) and at the end of every 2000-PROCESS iteration (line 187)."}]
+    "annotations": [{"line": 169, "statement_id": "SYS-PORTFOLIO-001-FIL-0078-STMT-000016", "note": "The receiving item is the 16-byte group WS-TIMESTAMP; WS-DATE occupies its first 8 bytes and WS-TIME (with WS-HOUR) the last 8. Which subfields receive the time value is flagged for SME review.", "ambiguous": true}]
   },
   {
-    "name": "1300-READ-CONFIG", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0078-PAR-0005", "section": null, "section_id": null, "line_range": [171, 180],
+    "name": "1300-READ-CONFIG", "section": null, "section_id": null, "paragraph_id": "SYS-PORTFOLIO-001-FIL-0078-PAR-0005", "line_range": [171, 180],
     "pseudocode": [
-      "WHILE NOT end_of_config DO  -- PERFORM UNTIL END-OF-CONFIG (tested before each iteration); END-OF-CONFIG is true when WS-END-OF-CONFIG = 'Y'",
+      "-- Load all monitoring configuration records",
+      "WHILE NOT end_of_config DO  -- PERFORM UNTIL END-OF-CONFIG (inline, test before)",
       "  READ next record from MONITOR-CONFIG into config_record",
       "  IF end of file THEN",
       "    SET end_of_config = TRUE  -- WS-END-OF-CONFIG = 'Y'",
       "  ELSE",
-      "    CALL 1310-store-config  !! UNRESOLVED: paragraph not declared in this program; logic unknown",
+      "    CALL 1310-store-config  !! UNRESOLVED: paragraph not declared in this program",
       "  END IF",
       "END WHILE"
     ],
-    "pseudocode_statement_ids": [["SYS-PORTFOLIO-001-FIL-0078-STMT-000017"], ["SYS-PORTFOLIO-001-FIL-0078-STMT-000048"], ["SYS-PORTFOLIO-001-FIL-0078-STMT-000048"], ["SYS-PORTFOLIO-001-FIL-0078-STMT-000051"], ["SYS-PORTFOLIO-001-FIL-0078-STMT-000048"], ["SYS-PORTFOLIO-001-FIL-0078-STMT-000052"], ["SYS-PORTFOLIO-001-FIL-0078-STMT-000048"], ["SYS-PORTFOLIO-001-FIL-0078-STMT-000017"]],
-    "pseudocode_text": "WHILE NOT end_of_config DO  -- PERFORM UNTIL END-OF-CONFIG (tested before each iteration); END-OF-CONFIG is true when WS-END-OF-CONFIG = 'Y'\n  READ next record from MONITOR-CONFIG into config_record\n  IF end of file THEN\n    SET end_of_config = TRUE  -- WS-END-OF-CONFIG = 'Y'\n  ELSE\n    CALL 1310-store-config  !! UNRESOLVED: paragraph not declared in this program; logic unknown\n  END IF\nEND WHILE",
+    "pseudocode_statement_ids": [[], ["SYS-PORTFOLIO-001-FIL-0078-STMT-000017"], ["SYS-PORTFOLIO-001-FIL-0078-STMT-000048"], ["SYS-PORTFOLIO-001-FIL-0078-STMT-000048"], ["SYS-PORTFOLIO-001-FIL-0078-STMT-000051"], ["SYS-PORTFOLIO-001-FIL-0078-STMT-000048"], ["SYS-PORTFOLIO-001-FIL-0078-STMT-000052"], ["SYS-PORTFOLIO-001-FIL-0078-STMT-000048"], ["SYS-PORTFOLIO-001-FIL-0078-STMT-000017"]],
+    "pseudocode_text": "-- Load all monitoring configuration records\nWHILE NOT end_of_config DO  -- PERFORM UNTIL END-OF-CONFIG (inline, test before)\n  READ next record from MONITOR-CONFIG into config_record\n  IF end of file THEN\n    SET end_of_config = TRUE  -- WS-END-OF-CONFIG = 'Y'\n  ELSE\n    CALL 1310-store-config  !! UNRESOLVED: paragraph not declared in this program\n  END IF\nEND WHILE",
     "statement_ids": ["SYS-PORTFOLIO-001-FIL-0078-STMT-000017", "SYS-PORTFOLIO-001-FIL-0078-STMT-000048", "SYS-PORTFOLIO-001-FIL-0078-STMT-000051", "SYS-PORTFOLIO-001-FIL-0078-STMT-000052"],
     "untranslated_statement_ids": [],
     "field_references": ["END-OF-CONFIG"],
-    "field_reference_ids": [{"name": "END-OF-CONFIG", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0078-FLD-000031", "target_kind": "condition", "candidate_ids": []}],
+    "field_reference_ids": [
+      {"name": "END-OF-CONFIG", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0078-FLD-000031", "target_kind": "condition", "candidate_ids": []}
+    ],
     "calls_made": ["1310-STORE-CONFIG"],
     "calls_made_ids": [{"name": "1310-STORE-CONFIG", "paragraph_id": null, "section_id": null}],
     "complexity_score": 3, "has_unresolved_statements": true, "annotations": []
   },
   {
-    "name": "2000-PROCESS", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0078-PAR-0006", "section": null, "section_id": null, "line_range": [181, 188],
+    "name": "2000-PROCESS", "section": null, "section_id": null, "paragraph_id": "SYS-PORTFOLIO-001-FIL-0078-PAR-0006", "line_range": [181, 188],
     "pseudocode": [
       "-- One monitoring cycle",
       "CALL 2100-collect-metrics",
@@ -297,31 +302,36 @@
       "CALL 2300-log-status",
       "CALL 2400-generate-alerts",
       "CALL program ILBOABN0",
-      "  PASSING: ws_minute",
-      "  !! REVIEW: external program not in the repository; effect unknown (it may not return)",
-      "CALL 1200-init-processing  -- capture the time of day again"
+      "  PASSING: minute",
+      "  -- system runtime routine (not in the file registry; callee logic not available)",
+      "  !! REVIEW: external routine; its effect, including whether control returns, cannot be determined from this source",
+      "CALL 1200-init-processing  -- refresh the timestamp used by the loop condition"
     ],
-    "pseudocode_statement_ids": [[], ["SYS-PORTFOLIO-001-FIL-0078-STMT-000018"], ["SYS-PORTFOLIO-001-FIL-0078-STMT-000019"], ["SYS-PORTFOLIO-001-FIL-0078-STMT-000020"], ["SYS-PORTFOLIO-001-FIL-0078-STMT-000021"], ["SYS-PORTFOLIO-001-FIL-0078-STMT-000022"], ["SYS-PORTFOLIO-001-FIL-0078-STMT-000022"], ["SYS-PORTFOLIO-001-FIL-0078-STMT-000022"], ["SYS-PORTFOLIO-001-FIL-0078-STMT-000023"]],
-    "pseudocode_text": "-- One monitoring cycle\nCALL 2100-collect-metrics\nCALL 2200-check-thresholds\nCALL 2300-log-status\nCALL 2400-generate-alerts\nCALL program ILBOABN0\n  PASSING: ws_minute\n  !! REVIEW: external program not in the repository; effect unknown (it may not return)\nCALL 1200-init-processing  -- capture the time of day again",
+    "pseudocode_statement_ids": [[], ["SYS-PORTFOLIO-001-FIL-0078-STMT-000018"], ["SYS-PORTFOLIO-001-FIL-0078-STMT-000019"], ["SYS-PORTFOLIO-001-FIL-0078-STMT-000020"], ["SYS-PORTFOLIO-001-FIL-0078-STMT-000021"], ["SYS-PORTFOLIO-001-FIL-0078-STMT-000022"], ["SYS-PORTFOLIO-001-FIL-0078-STMT-000022"], [], [], ["SYS-PORTFOLIO-001-FIL-0078-STMT-000023"]],
+    "pseudocode_text": "-- One monitoring cycle\nCALL 2100-collect-metrics\nCALL 2200-check-thresholds\nCALL 2300-log-status\nCALL 2400-generate-alerts\nCALL program ILBOABN0\n  PASSING: minute\n  -- system runtime routine (not in the file registry; callee logic not available)\n  !! REVIEW: external routine; its effect, including whether control returns, cannot be determined from this source\nCALL 1200-init-processing  -- refresh the timestamp used by the loop condition",
     "statement_ids": ["SYS-PORTFOLIO-001-FIL-0078-STMT-000018", "SYS-PORTFOLIO-001-FIL-0078-STMT-000019", "SYS-PORTFOLIO-001-FIL-0078-STMT-000020", "SYS-PORTFOLIO-001-FIL-0078-STMT-000021", "SYS-PORTFOLIO-001-FIL-0078-STMT-000022", "SYS-PORTFOLIO-001-FIL-0078-STMT-000023"],
     "untranslated_statement_ids": [],
     "field_references": ["WS-MINUTE"],
-    "field_reference_ids": [{"name": "WS-MINUTE", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0078-FLD-000047", "target_kind": "field", "candidate_ids": []}],
+    "field_reference_ids": [
+      {"name": "WS-MINUTE", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0078-FLD-000047", "target_kind": "field", "candidate_ids": []}
+    ],
     "calls_made": ["2100-COLLECT-METRICS", "2200-CHECK-THRESHOLDS", "2300-LOG-STATUS", "2400-GENERATE-ALERTS", "1200-INIT-PROCESSING"],
     "calls_made_ids": [{"name": "2100-COLLECT-METRICS", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0078-PAR-0007", "section_id": null}, {"name": "2200-CHECK-THRESHOLDS", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0078-PAR-0008", "section_id": null}, {"name": "2300-LOG-STATUS", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0078-PAR-0009", "section_id": null}, {"name": "2400-GENERATE-ALERTS", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0078-PAR-0010", "section_id": null}, {"name": "1200-INIT-PROCESSING", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0078-PAR-0004", "section_id": null}],
-    "complexity_score": 1, "has_unresolved_statements": true,
-    "annotations": [{"line": 186, "statement_id": "SYS-PORTFOLIO-001-FIL-0078-STMT-000022", "note": "Static CALL with literal 'ILBOABN0'; the program is not in the repository or the Neo4j registry. WS-MINUTE (PIC 9(2), in WS-TIME) is space-filled by the ACCEPT in 1200-INIT-PROCESSING. Recorded verbatim for SME review.", "ambiguous": true}]
+    "external_calls": [{"name": "ILBOABN0", "call_type": "STATIC_CALL", "line": 186, "statement_id": "SYS-PORTFOLIO-001-FIL-0078-STMT-000022", "target_program_file_id": null, "resolved": false, "note": "System runtime routine; not in the file registry"}],
+    "complexity_score": 1, "has_unresolved_statements": false,
+    "annotations": [{"line": 186, "statement_id": "SYS-PORTFOLIO-001-FIL-0078-STMT-000022", "note": "Static CALL with a literal program name, passing WS-MINUTE PIC 9(2) by reference."}]
   },
   {
-    "name": "2100-COLLECT-METRICS", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0078-PAR-0007", "section": null, "section_id": null, "line_range": [189, 194],
+    "name": "2100-COLLECT-METRICS", "section": null, "section_id": null, "paragraph_id": "SYS-PORTFOLIO-001-FIL-0078-PAR-0007", "line_range": [189, 194],
     "pseudocode": [
-      "CALL 2110-get-cpu-metrics  !! UNRESOLVED: paragraph not declared in this program; logic unknown",
-      "CALL 2120-get-memory-metrics  !! UNRESOLVED: paragraph not declared in this program; logic unknown",
-      "CALL 2130-get-dasd-metrics  !! UNRESOLVED: paragraph not declared in this program; logic unknown",
-      "CALL 2140-get-db2-metrics  !! UNRESOLVED: paragraph not declared in this program; logic unknown"
+      "-- Collect resource metrics (detail paragraphs missing from source)",
+      "CALL 2110-get-cpu-metrics  !! UNRESOLVED: paragraph not declared in this program",
+      "CALL 2120-get-memory-metrics  !! UNRESOLVED: paragraph not declared in this program",
+      "CALL 2130-get-dasd-metrics  !! UNRESOLVED: paragraph not declared in this program",
+      "CALL 2140-get-db2-metrics  !! UNRESOLVED: paragraph not declared in this program"
     ],
-    "pseudocode_statement_ids": [["SYS-PORTFOLIO-001-FIL-0078-STMT-000024"], ["SYS-PORTFOLIO-001-FIL-0078-STMT-000025"], ["SYS-PORTFOLIO-001-FIL-0078-STMT-000026"], ["SYS-PORTFOLIO-001-FIL-0078-STMT-000027"]],
-    "pseudocode_text": "CALL 2110-get-cpu-metrics  !! UNRESOLVED: paragraph not declared in this program; logic unknown\nCALL 2120-get-memory-metrics  !! UNRESOLVED: paragraph not declared in this program; logic unknown\nCALL 2130-get-dasd-metrics  !! UNRESOLVED: paragraph not declared in this program; logic unknown\nCALL 2140-get-db2-metrics  !! UNRESOLVED: paragraph not declared in this program; logic unknown",
+    "pseudocode_statement_ids": [[], ["SYS-PORTFOLIO-001-FIL-0078-STMT-000024"], ["SYS-PORTFOLIO-001-FIL-0078-STMT-000025"], ["SYS-PORTFOLIO-001-FIL-0078-STMT-000026"], ["SYS-PORTFOLIO-001-FIL-0078-STMT-000027"]],
+    "pseudocode_text": "-- Collect resource metrics (detail paragraphs missing from source)\nCALL 2110-get-cpu-metrics  !! UNRESOLVED: paragraph not declared in this program\nCALL 2120-get-memory-metrics  !! UNRESOLVED: paragraph not declared in this program\nCALL 2130-get-dasd-metrics  !! UNRESOLVED: paragraph not declared in this program\nCALL 2140-get-db2-metrics  !! UNRESOLVED: paragraph not declared in this program",
     "statement_ids": ["SYS-PORTFOLIO-001-FIL-0078-STMT-000024", "SYS-PORTFOLIO-001-FIL-0078-STMT-000025", "SYS-PORTFOLIO-001-FIL-0078-STMT-000026", "SYS-PORTFOLIO-001-FIL-0078-STMT-000027"],
     "untranslated_statement_ids": [],
     "field_references": [], "field_reference_ids": [],
@@ -330,15 +340,16 @@
     "complexity_score": 1, "has_unresolved_statements": true, "annotations": []
   },
   {
-    "name": "2200-CHECK-THRESHOLDS", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0078-PAR-0008", "section": null, "section_id": null, "line_range": [195, 200],
+    "name": "2200-CHECK-THRESHOLDS", "section": null, "section_id": null, "paragraph_id": "SYS-PORTFOLIO-001-FIL-0078-PAR-0008", "line_range": [195, 200],
     "pseudocode": [
-      "CALL 2210-check-utilization  !! UNRESOLVED: paragraph not declared in this program; logic unknown",
-      "CALL 2220-check-response  !! UNRESOLVED: paragraph not declared in this program; logic unknown",
-      "CALL 2230-check-queues  !! UNRESOLVED: paragraph not declared in this program; logic unknown",
-      "CALL 2240-check-errors  !! UNRESOLVED: paragraph not declared in this program; logic unknown"
+      "-- Check thresholds (detail paragraphs missing from source)",
+      "CALL 2210-check-utilization  !! UNRESOLVED: paragraph not declared in this program",
+      "CALL 2220-check-response  !! UNRESOLVED: paragraph not declared in this program",
+      "CALL 2230-check-queues  !! UNRESOLVED: paragraph not declared in this program",
+      "CALL 2240-check-errors  !! UNRESOLVED: paragraph not declared in this program"
     ],
-    "pseudocode_statement_ids": [["SYS-PORTFOLIO-001-FIL-0078-STMT-000028"], ["SYS-PORTFOLIO-001-FIL-0078-STMT-000029"], ["SYS-PORTFOLIO-001-FIL-0078-STMT-000030"], ["SYS-PORTFOLIO-001-FIL-0078-STMT-000031"]],
-    "pseudocode_text": "CALL 2210-check-utilization  !! UNRESOLVED: paragraph not declared in this program; logic unknown\nCALL 2220-check-response  !! UNRESOLVED: paragraph not declared in this program; logic unknown\nCALL 2230-check-queues  !! UNRESOLVED: paragraph not declared in this program; logic unknown\nCALL 2240-check-errors  !! UNRESOLVED: paragraph not declared in this program; logic unknown",
+    "pseudocode_statement_ids": [[], ["SYS-PORTFOLIO-001-FIL-0078-STMT-000028"], ["SYS-PORTFOLIO-001-FIL-0078-STMT-000029"], ["SYS-PORTFOLIO-001-FIL-0078-STMT-000030"], ["SYS-PORTFOLIO-001-FIL-0078-STMT-000031"]],
+    "pseudocode_text": "-- Check thresholds (detail paragraphs missing from source)\nCALL 2210-check-utilization  !! UNRESOLVED: paragraph not declared in this program\nCALL 2220-check-response  !! UNRESOLVED: paragraph not declared in this program\nCALL 2230-check-queues  !! UNRESOLVED: paragraph not declared in this program\nCALL 2240-check-errors  !! UNRESOLVED: paragraph not declared in this program",
     "statement_ids": ["SYS-PORTFOLIO-001-FIL-0078-STMT-000028", "SYS-PORTFOLIO-001-FIL-0078-STMT-000029", "SYS-PORTFOLIO-001-FIL-0078-STMT-000030", "SYS-PORTFOLIO-001-FIL-0078-STMT-000031"],
     "untranslated_statement_ids": [],
     "field_references": [], "field_reference_ids": [],
@@ -347,14 +358,15 @@
     "complexity_score": 1, "has_unresolved_statements": true, "annotations": []
   },
   {
-    "name": "2300-LOG-STATUS", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0078-PAR-0009", "section": null, "section_id": null, "line_range": [201, 205],
+    "name": "2300-LOG-STATUS", "section": null, "section_id": null, "paragraph_id": "SYS-PORTFOLIO-001-FIL-0078-PAR-0009", "line_range": [201, 205],
     "pseudocode": [
-      "SET log_timestamp = ws_timestamp  -- 16-byte group into X(26); remaining 10 positions filled with spaces",
-      "CALL 2310-log-resources  !! UNRESOLVED: paragraph not declared in this program; logic unknown",
-      "CALL 2320-log-performance  !! UNRESOLVED: paragraph not declared in this program; logic unknown"
+      "-- Log the cycle status",
+      "SET log_timestamp = timestamp  -- 16-byte group moved to a 26-character field",
+      "CALL 2310-log-resources  !! UNRESOLVED: paragraph not declared in this program",
+      "CALL 2320-log-performance  !! UNRESOLVED: paragraph not declared in this program"
     ],
-    "pseudocode_statement_ids": [["SYS-PORTFOLIO-001-FIL-0078-STMT-000032"], ["SYS-PORTFOLIO-001-FIL-0078-STMT-000033"], ["SYS-PORTFOLIO-001-FIL-0078-STMT-000034"]],
-    "pseudocode_text": "SET log_timestamp = ws_timestamp  -- 16-byte group into X(26); remaining 10 positions filled with spaces\nCALL 2310-log-resources  !! UNRESOLVED: paragraph not declared in this program; logic unknown\nCALL 2320-log-performance  !! UNRESOLVED: paragraph not declared in this program; logic unknown",
+    "pseudocode_statement_ids": [[], ["SYS-PORTFOLIO-001-FIL-0078-STMT-000032"], ["SYS-PORTFOLIO-001-FIL-0078-STMT-000033"], ["SYS-PORTFOLIO-001-FIL-0078-STMT-000034"]],
+    "pseudocode_text": "-- Log the cycle status\nSET log_timestamp = timestamp  -- 16-byte group moved to a 26-character field\nCALL 2310-log-resources  !! UNRESOLVED: paragraph not declared in this program\nCALL 2320-log-performance  !! UNRESOLVED: paragraph not declared in this program",
     "statement_ids": ["SYS-PORTFOLIO-001-FIL-0078-STMT-000032", "SYS-PORTFOLIO-001-FIL-0078-STMT-000033", "SYS-PORTFOLIO-001-FIL-0078-STMT-000034"],
     "untranslated_statement_ids": [],
     "field_references": ["WS-TIMESTAMP", "LOG-TIMESTAMP"],
@@ -364,28 +376,33 @@
     ],
     "calls_made": ["2310-LOG-RESOURCES", "2320-LOG-PERFORMANCE"],
     "calls_made_ids": [{"name": "2310-LOG-RESOURCES", "paragraph_id": null, "section_id": null}, {"name": "2320-LOG-PERFORMANCE", "paragraph_id": null, "section_id": null}],
-    "complexity_score": 1, "has_unresolved_statements": true, "annotations": []
+    "complexity_score": 1, "has_unresolved_statements": true,
+    "annotations": [{"line": 202, "statement_id": "SYS-PORTFOLIO-001-FIL-0078-STMT-000032", "note": "No WRITE of LOG-RECORD is present in this program; writing the log record, if any, happens in the undeclared 2310/2320 paragraphs."}]
   },
   {
-    "name": "2400-GENERATE-ALERTS", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0078-PAR-0010", "section": null, "section_id": null, "line_range": [206, 211],
+    "name": "2400-GENERATE-ALERTS", "section": null, "section_id": null, "paragraph_id": "SYS-PORTFOLIO-001-FIL-0078-PAR-0010", "line_range": [206, 211],
     "pseudocode": [
-      "IF threshold_met THEN  -- THRESHOLD-MET is true when WS-THRESHOLD-MET = 'Y'; not set by any statement in this program",
-      "  CALL 2410-format-alert  !! UNRESOLVED: paragraph not declared in this program; logic unknown",
-      "  CALL 2420-write-alert  !! UNRESOLVED: paragraph not declared in this program; logic unknown",
+      "-- Raise an alert when a threshold was met",
+      "IF threshold_met THEN  -- THRESHOLD-MET: WS-THRESHOLD-MET = 'Y'",
+      "  CALL 2410-format-alert  !! UNRESOLVED: paragraph not declared in this program",
+      "  CALL 2420-write-alert  !! UNRESOLVED: paragraph not declared in this program",
       "END IF"
     ],
-    "pseudocode_statement_ids": [["SYS-PORTFOLIO-001-FIL-0078-STMT-000035"], ["SYS-PORTFOLIO-001-FIL-0078-STMT-000049"], ["SYS-PORTFOLIO-001-FIL-0078-STMT-000050"], ["SYS-PORTFOLIO-001-FIL-0078-STMT-000035"]],
-    "pseudocode_text": "IF threshold_met THEN  -- THRESHOLD-MET is true when WS-THRESHOLD-MET = 'Y'; not set by any statement in this program\n  CALL 2410-format-alert  !! UNRESOLVED: paragraph not declared in this program; logic unknown\n  CALL 2420-write-alert  !! UNRESOLVED: paragraph not declared in this program; logic unknown\nEND IF",
+    "pseudocode_statement_ids": [[], ["SYS-PORTFOLIO-001-FIL-0078-STMT-000035"], ["SYS-PORTFOLIO-001-FIL-0078-STMT-000049"], ["SYS-PORTFOLIO-001-FIL-0078-STMT-000050"], ["SYS-PORTFOLIO-001-FIL-0078-STMT-000035"]],
+    "pseudocode_text": "-- Raise an alert when a threshold was met\nIF threshold_met THEN  -- THRESHOLD-MET: WS-THRESHOLD-MET = 'Y'\n  CALL 2410-format-alert  !! UNRESOLVED: paragraph not declared in this program\n  CALL 2420-write-alert  !! UNRESOLVED: paragraph not declared in this program\nEND IF",
     "statement_ids": ["SYS-PORTFOLIO-001-FIL-0078-STMT-000035", "SYS-PORTFOLIO-001-FIL-0078-STMT-000049", "SYS-PORTFOLIO-001-FIL-0078-STMT-000050"],
     "untranslated_statement_ids": [],
     "field_references": ["THRESHOLD-MET"],
-    "field_reference_ids": [{"name": "THRESHOLD-MET", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0078-FLD-000033", "target_kind": "condition", "candidate_ids": []}],
+    "field_reference_ids": [
+      {"name": "THRESHOLD-MET", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0078-FLD-000033", "target_kind": "condition", "candidate_ids": []}
+    ],
     "calls_made": ["2410-FORMAT-ALERT", "2420-WRITE-ALERT"],
     "calls_made_ids": [{"name": "2410-FORMAT-ALERT", "paragraph_id": null, "section_id": null}, {"name": "2420-WRITE-ALERT", "paragraph_id": null, "section_id": null}],
-    "complexity_score": 1, "has_unresolved_statements": true, "annotations": []
+    "complexity_score": 1, "has_unresolved_statements": true,
+    "annotations": [{"line": 207, "statement_id": "SYS-PORTFOLIO-001-FIL-0078-STMT-000035", "note": "WS-THRESHOLD-MET starts as 'N' and is not set by any statement in this source."}]
   },
   {
-    "name": "3000-CLEANUP", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0078-PAR-0011", "section": null, "section_id": null, "line_range": [212, 217],
+    "name": "3000-CLEANUP", "section": null, "section_id": null, "paragraph_id": "SYS-PORTFOLIO-001-FIL-0078-PAR-0011", "line_range": [212, 217],
     "pseudocode": [
       "CLOSE MONITOR-CONFIG, MONITOR-LOG, ALERT-FILE, DB2-STATS"
     ],
@@ -398,41 +415,43 @@
     "complexity_score": 1, "has_unresolved_statements": false, "annotations": []
   },
   {
-    "name": "9999-ERROR-HANDLER", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0078-PAR-0012", "section": null, "section_id": null, "line_range": [218, 221],
+    "name": "9999-ERROR-HANDLER", "section": null, "section_id": null, "paragraph_id": "SYS-PORTFOLIO-001-FIL-0078-PAR-0012", "line_range": [218, 221],
     "pseudocode": [
-      "DISPLAY ws_error_message ON console  -- CONS is the CONSOLE mnemonic (SPECIAL-NAMES)",
-      "SET RETURN-CODE = 12  -- special register: program return code",
-      "RETURN to caller (or terminate if main program)  -- GOBACK: always ends the program on the first error; files are not closed"
+      "-- Fatal error: report and end the program",
+      "DISPLAY error_message ON console",
+      "SET RETURN-CODE = 12",
+      "RETURN to caller (or terminate if main program)  -- files are not closed on this path"
     ],
-    "pseudocode_statement_ids": [["SYS-PORTFOLIO-001-FIL-0078-STMT-000037"], ["SYS-PORTFOLIO-001-FIL-0078-STMT-000038"], ["SYS-PORTFOLIO-001-FIL-0078-STMT-000039"]],
-    "pseudocode_text": "DISPLAY ws_error_message ON console  -- CONS is the CONSOLE mnemonic (SPECIAL-NAMES)\nSET RETURN-CODE = 12  -- special register: program return code\nRETURN to caller (or terminate if main program)  -- GOBACK: always ends the program on the first error; files are not closed",
+    "pseudocode_statement_ids": [[], ["SYS-PORTFOLIO-001-FIL-0078-STMT-000037"], ["SYS-PORTFOLIO-001-FIL-0078-STMT-000038"], ["SYS-PORTFOLIO-001-FIL-0078-STMT-000039"]],
+    "pseudocode_text": "-- Fatal error: report and end the program\nDISPLAY error_message ON console\nSET RETURN-CODE = 12\nRETURN to caller (or terminate if main program)  -- files are not closed on this path",
     "statement_ids": ["SYS-PORTFOLIO-001-FIL-0078-STMT-000037", "SYS-PORTFOLIO-001-FIL-0078-STMT-000038", "SYS-PORTFOLIO-001-FIL-0078-STMT-000039"],
     "untranslated_statement_ids": [],
     "field_references": ["WS-ERROR-MESSAGE"],
-    "field_reference_ids": [{"name": "WS-ERROR-MESSAGE", "qualifiers": [], "resolution": "UNRESOLVED", "target_id": null, "target_kind": null, "candidate_ids": []}],
+    "field_reference_ids": [
+      {"name": "WS-ERROR-MESSAGE", "qualifiers": [], "resolution": "UNRESOLVED", "target_id": null, "target_kind": null, "candidate_ids": []}
+    ],
     "calls_made": [], "calls_made_ids": [],
     "complexity_score": 1, "has_unresolved_statements": false, "annotations": []
   }
 ],
 "unresolved_statements": [
-  {"statement_id": "SYS-PORTFOLIO-001-FIL-0078-STMT-000052", "paragraph": "1300-READ-CONFIG", "line": 177, "source_text": "PERFORM 1310-STORE-CONFIG", "reason": "PERFORM target not declared in the program"},
-  {"statement_id": "SYS-PORTFOLIO-001-FIL-0078-STMT-000022", "paragraph": "2000-PROCESS", "line": 186, "source_text": "CALL 'ILBOABN0' USING WS-MINUTE", "reason": "static CALL to a program not in the repository; effect unknown"},
-  {"statement_id": "SYS-PORTFOLIO-001-FIL-0078-STMT-000024", "paragraph": "2100-COLLECT-METRICS", "line": 190, "source_text": "PERFORM 2110-GET-CPU-METRICS", "reason": "PERFORM target not declared in the program"},
-  {"statement_id": "SYS-PORTFOLIO-001-FIL-0078-STMT-000025", "paragraph": "2100-COLLECT-METRICS", "line": 191, "source_text": "PERFORM 2120-GET-MEMORY-METRICS", "reason": "PERFORM target not declared in the program"},
-  {"statement_id": "SYS-PORTFOLIO-001-FIL-0078-STMT-000026", "paragraph": "2100-COLLECT-METRICS", "line": 192, "source_text": "PERFORM 2130-GET-DASD-METRICS", "reason": "PERFORM target not declared in the program"},
-  {"statement_id": "SYS-PORTFOLIO-001-FIL-0078-STMT-000027", "paragraph": "2100-COLLECT-METRICS", "line": 193, "source_text": "PERFORM 2140-GET-DB2-METRICS", "reason": "PERFORM target not declared in the program"},
-  {"statement_id": "SYS-PORTFOLIO-001-FIL-0078-STMT-000028", "paragraph": "2200-CHECK-THRESHOLDS", "line": 196, "source_text": "PERFORM 2210-CHECK-UTILIZATION", "reason": "PERFORM target not declared in the program"},
-  {"statement_id": "SYS-PORTFOLIO-001-FIL-0078-STMT-000029", "paragraph": "2200-CHECK-THRESHOLDS", "line": 197, "source_text": "PERFORM 2220-CHECK-RESPONSE", "reason": "PERFORM target not declared in the program"},
-  {"statement_id": "SYS-PORTFOLIO-001-FIL-0078-STMT-000030", "paragraph": "2200-CHECK-THRESHOLDS", "line": 198, "source_text": "PERFORM 2230-CHECK-QUEUES", "reason": "PERFORM target not declared in the program"},
-  {"statement_id": "SYS-PORTFOLIO-001-FIL-0078-STMT-000031", "paragraph": "2200-CHECK-THRESHOLDS", "line": 199, "source_text": "PERFORM 2240-CHECK-ERRORS", "reason": "PERFORM target not declared in the program"},
-  {"statement_id": "SYS-PORTFOLIO-001-FIL-0078-STMT-000033", "paragraph": "2300-LOG-STATUS", "line": 203, "source_text": "PERFORM 2310-LOG-RESOURCES", "reason": "PERFORM target not declared in the program"},
-  {"statement_id": "SYS-PORTFOLIO-001-FIL-0078-STMT-000034", "paragraph": "2300-LOG-STATUS", "line": 204, "source_text": "PERFORM 2320-LOG-PERFORMANCE", "reason": "PERFORM target not declared in the program"},
-  {"statement_id": "SYS-PORTFOLIO-001-FIL-0078-STMT-000049", "paragraph": "2400-GENERATE-ALERTS", "line": 208, "source_text": "PERFORM 2410-FORMAT-ALERT", "reason": "PERFORM target not declared in the program"},
-  {"statement_id": "SYS-PORTFOLIO-001-FIL-0078-STMT-000050", "paragraph": "2400-GENERATE-ALERTS", "line": 209, "source_text": "PERFORM 2420-WRITE-ALERT", "reason": "PERFORM target not declared in the program"}
+  {"statement_id": "SYS-PORTFOLIO-001-FIL-0078-STMT-000052", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0078-PAR-0005", "line": 177, "source_text": "PERFORM 1310-STORE-CONFIG", "reason": "perform_target_not_declared"},
+  {"statement_id": "SYS-PORTFOLIO-001-FIL-0078-STMT-000024", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0078-PAR-0007", "line": 190, "source_text": "PERFORM 2110-GET-CPU-METRICS", "reason": "perform_target_not_declared"},
+  {"statement_id": "SYS-PORTFOLIO-001-FIL-0078-STMT-000025", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0078-PAR-0007", "line": 191, "source_text": "PERFORM 2120-GET-MEMORY-METRICS", "reason": "perform_target_not_declared"},
+  {"statement_id": "SYS-PORTFOLIO-001-FIL-0078-STMT-000026", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0078-PAR-0007", "line": 192, "source_text": "PERFORM 2130-GET-DASD-METRICS", "reason": "perform_target_not_declared"},
+  {"statement_id": "SYS-PORTFOLIO-001-FIL-0078-STMT-000027", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0078-PAR-0007", "line": 193, "source_text": "PERFORM 2140-GET-DB2-METRICS", "reason": "perform_target_not_declared"},
+  {"statement_id": "SYS-PORTFOLIO-001-FIL-0078-STMT-000028", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0078-PAR-0008", "line": 196, "source_text": "PERFORM 2210-CHECK-UTILIZATION", "reason": "perform_target_not_declared"},
+  {"statement_id": "SYS-PORTFOLIO-001-FIL-0078-STMT-000029", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0078-PAR-0008", "line": 197, "source_text": "PERFORM 2220-CHECK-RESPONSE", "reason": "perform_target_not_declared"},
+  {"statement_id": "SYS-PORTFOLIO-001-FIL-0078-STMT-000030", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0078-PAR-0008", "line": 198, "source_text": "PERFORM 2230-CHECK-QUEUES", "reason": "perform_target_not_declared"},
+  {"statement_id": "SYS-PORTFOLIO-001-FIL-0078-STMT-000031", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0078-PAR-0008", "line": 199, "source_text": "PERFORM 2240-CHECK-ERRORS", "reason": "perform_target_not_declared"},
+  {"statement_id": "SYS-PORTFOLIO-001-FIL-0078-STMT-000033", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0078-PAR-0009", "line": 203, "source_text": "PERFORM 2310-LOG-RESOURCES", "reason": "perform_target_not_declared"},
+  {"statement_id": "SYS-PORTFOLIO-001-FIL-0078-STMT-000034", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0078-PAR-0009", "line": 204, "source_text": "PERFORM 2320-LOG-PERFORMANCE", "reason": "perform_target_not_declared"},
+  {"statement_id": "SYS-PORTFOLIO-001-FIL-0078-STMT-000049", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0078-PAR-0010", "line": 208, "source_text": "PERFORM 2410-FORMAT-ALERT", "reason": "perform_target_not_declared"},
+  {"statement_id": "SYS-PORTFOLIO-001-FIL-0078-STMT-000050", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0078-PAR-0010", "line": 209, "source_text": "PERFORM 2420-WRITE-ALERT", "reason": "perform_target_not_declared"}
 ],
 "pseudocode_issues": [
-  {"severity": "info", "type": "id_unresolved", "kind": "field", "name": "WS-ERROR-MESSAGE", "paragraphs": ["1100-OPEN-FILES", "9999-ERROR-HANDLER"], "message": "resolve-field-references UNRESOLVED; target_id null. Name used as-is in pseudocode."},
-  {"severity": "info", "type": "id_unresolved", "kind": "paragraph", "names": ["1310-STORE-CONFIG", "2110-GET-CPU-METRICS", "2120-GET-MEMORY-METRICS", "2130-GET-DASD-METRICS", "2140-GET-DB2-METRICS", "2210-CHECK-UTILIZATION", "2220-CHECK-RESPONSE", "2230-CHECK-QUEUES", "2240-CHECK-ERRORS", "2310-LOG-RESOURCES", "2320-LOG-PERFORMANCE", "2410-FORMAT-ALERT", "2420-WRITE-ALERT"], "message": "PERFORM targets not declared in the program; calls_made_ids paragraph_id null; pseudocode marked !! UNRESOLVED."},
-  {"severity": "info", "type": "external_call", "line": 186, "statement_id": "SYS-PORTFOLIO-001-FIL-0078-STMT-000022", "message": "CALL 'ILBOABN0' is not a paragraph and has no permanent ID in the registry; translated as CALL program with !! REVIEW."}
+  {"severity": "info", "type": "id_unresolved", "kind": "paragraph_target", "count": 13, "names": ["1310-STORE-CONFIG", "2110-GET-CPU-METRICS", "2120-GET-MEMORY-METRICS", "2130-GET-DASD-METRICS", "2140-GET-DB2-METRICS", "2210-CHECK-UTILIZATION", "2220-CHECK-RESPONSE", "2230-CHECK-QUEUES", "2240-CHECK-ERRORS", "2310-LOG-RESOURCES", "2320-LOG-PERFORMANCE", "2410-FORMAT-ALERT", "2420-WRITE-ALERT"], "message": "calls_made_ids paragraph_id null: targets are not declared in this program."},
+  {"severity": "info", "type": "id_unresolved", "kind": "field", "name": "WS-ERROR-MESSAGE", "resolution": "UNRESOLVED", "message": "Name used in pseudocode as error_message; no Field ID."},
+  {"severity": "info", "type": "external_call_placeholder", "line": 186, "statement_id": "SYS-PORTFOLIO-001-FIL-0078-STMT-000022", "message": "CALL 'ILBOABN0' translated as an external program call flagged !! REVIEW; callee not in the registry."}
 ]
 }

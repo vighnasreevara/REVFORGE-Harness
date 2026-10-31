@@ -1,42 +1,38 @@
 {
 "program_summary": {"program_id": "HISTLD00", "file_id": "SYS-PORTFOLIO-001-FIL-0044", "logic_file": "program_logic/SYS-PORTFOLIO-001-FIL-0044__HISTLD00_logic.json", "logic_status": "partial", "paragraphs_translated": 16, "execution_paths": 1, "branches": 9, "loops": 1, "dead_code_confirmed": 0, "goto_annotations": 0, "unresolvable_paths": 3, "unresolved_ids": 19},
 "program_id": "HISTLD00",
+"generated_at": "2026-10-27T21:26:23Z",
+"agent_version": "4_logic@1.0",
 "system_id": "SYS-PORTFOLIO-001",
 "file_id": "SYS-PORTFOLIO-001-FIL-0044",
 "path_id": "SYS-PORTFOLIO-001-PATH-0044",
 "relative_path": "src/programs/batch/HISTLD00.cbl",
-"parse_run_id": "PRUN-20261023T023803Z-ACC2",
+"parse_run_id": "PRUN-20261027T155247Z-2626",
+"data_run_id": "DRUN-20261027T162831Z-1330",
+"source_artifacts": {"raw_structure": "output/parser/raw_structure/SYS-PORTFOLIO-001-FIL-0044__HISTLD00.json", "data_layout": "output/data/data_layouts/SYS-PORTFOLIO-001-FIL-0044__HISTLD00_WS.json", "copybook_layouts": ["output/data/data_layouts/SYS-PORTFOLIO-001-FIL-0008__HISTREC.json", "output/data/data_layouts/SYS-PORTFOLIO-001-FIL-0002__BCHCTL.json", "output/data/data_layouts/SYS-PORTFOLIO-001-FIL-0016__DBTBLS.json", "output/data/data_layouts/SYS-PORTFOLIO-001-FIL-0017__SQLCA.json", "output/data/data_layouts/SYS-PORTFOLIO-001-FIL-0015__DBPROC.json", "output/data/data_layouts/SYS-PORTFOLIO-001-FIL-0007__ERRHAND.json", "output/data/data_layouts/SYS-PORTFOLIO-001-FIL-0001__BCHCON.json"]},
+"unresolved_id_counts": {"statements": 0, "fields_unresolved": 16, "fields_ambiguous": 0, "paragraph_targets": 3},
 "upstream": {
+  "parse_status": "partial",
   "verification": {
     "verdict": "VALID_PARTIAL",
-    "verdict_reasons": ["V2, V3, V4 consistent for the program and its seven copybook layouts", "Agent 2 parse_status 'partial': PERFORM targets CONNECT-TO-DB2, DB2-ERROR-ROUTINE and DISCONNECT-FROM-DB2 are not paragraphs of this program"],
-    "v1": {"raw_structure": "present", "parse_status": "partial", "program_layout": "present",
-           "copybook_layouts": [
-             {"copybook": "HISTREC", "copybook_file_id": "SYS-PORTFOLIO-001-FIL-0008", "layout": "present", "expanded_at_lines": [34]},
-             {"copybook": "BCHCTL", "copybook_file_id": "SYS-PORTFOLIO-001-FIL-0002", "layout": "present", "expanded_at_lines": [37]},
-             {"copybook": "DBTBLS", "copybook_file_id": "SYS-PORTFOLIO-001-FIL-0016", "layout": "present", "expanded_at_lines": [41]},
-             {"copybook": "SQLCA", "copybook_file_id": "SYS-PORTFOLIO-001-FIL-0017", "layout": "present", "expanded_at_lines": [44]},
-             {"copybook": "DBPROC", "copybook_file_id": "SYS-PORTFOLIO-001-FIL-0015", "layout": "present", "expanded_at_lines": [45]},
-             {"copybook": "ERRHAND", "copybook_file_id": "SYS-PORTFOLIO-001-FIL-0007", "layout": "present", "expanded_at_lines": [46]},
-             {"copybook": "BCHCON", "copybook_file_id": "SYS-PORTFOLIO-001-FIL-0001", "layout": "present", "expanded_at_lines": [47]}
-           ],
-           "unresolved_copy_stubs": 0},
-    "v2_file_identities": {
-      "program_entries": {"require_completed": ["parser", "data"], "entries": ["raw_structure|SYS-PORTFOLIO-001-FIL-0044", "data_layout|SYS-PORTFOLIO-001-FIL-0044"], "data_run_id": "DRUN-20261024T215053Z-ACC1", "result": "batched with BCHCTL00, PORTMSTR and PROGNAME program entries: checked 8, ok 8, problems [], duplicates [], consistent true"},
-      "copybook_entries": {"require_completed": ["data"], "entries": ["data_layout|SYS-PORTFOLIO-001-FIL-0001", "data_layout|SYS-PORTFOLIO-001-FIL-0002", "data_layout|SYS-PORTFOLIO-001-FIL-0007", "data_layout|SYS-PORTFOLIO-001-FIL-0008", "data_layout|SYS-PORTFOLIO-001-FIL-0015", "data_layout|SYS-PORTFOLIO-001-FIL-0016", "data_layout|SYS-PORTFOLIO-001-FIL-0017"], "result": "checked 7, ok 7, problems [], duplicates [], consistent true"},
-      "consistent": true
+    "verdict_reason": "V2, V3 and V4 consistent; Agent 2 parse_status 'partial' (3 PERFORM targets not defined in the program)",
+    "V2_file_identities": {
+      "program_entries": {"checked": 2, "ok": 2, "problems": [], "duplicate_file_ids_in_json": [], "require_completed": ["parser", "data"], "consistent": true},
+      "copybook_entries": {"checked": 7, "ok": 7, "problems": [], "file_ids": ["SYS-PORTFOLIO-001-FIL-0008", "SYS-PORTFOLIO-001-FIL-0002", "SYS-PORTFOLIO-001-FIL-0016", "SYS-PORTFOLIO-001-FIL-0017", "SYS-PORTFOLIO-001-FIL-0015", "SYS-PORTFOLIO-001-FIL-0007", "SYS-PORTFOLIO-001-FIL-0001"], "require_completed": ["data"], "consistent": true}
     },
-    "v3_structure_identities": {"sections_checked": 4, "paragraphs_checked": 16, "statements_checked": 77, "edges_checked": 19, "registered_edges": 19, "section_problems": [], "paragraph_problems": [], "statement_problems": [], "edge_problems": [], "invalid_registered_edges": [], "registered_not_in_json": {"sections": [], "paragraphs": [], "statements": [], "missing_count": 0}, "duplicate_ids_in_json": [], "consistent": true, "note": "no LINKAGE SECTION (section_id null in raw_structure, not sent); edges sent only for the 19 resolved CFG edges"},
-    "v4_data_identities": [
-      {"file_id": "SYS-PORTFOLIO-001-FIL-0044", "layout": "program", "file_type": "program", "records_checked": 4, "fields_checked": 9, "expansions_checked": 7, "record_problems": [], "field_problems": [], "expansion_problems": [], "copybook_records_in_program": 0, "registered_not_in_json": {"records": [], "fields": [], "missing_count": 0}, "duplicate_ids_in_json": [], "consistent": true, "note": "copy_expansions holder_id sent as the expansion's section_id (holder_id null in the layout: section-level COPY)"},
-      {"file_id": "SYS-PORTFOLIO-001-FIL-0008", "layout": "copybook HISTREC", "file_type": "copybook", "records_checked": 1, "fields_checked": 21, "expansions_checked": 0, "record_problems": [], "field_problems": [], "expansion_problems": [], "copybook_records_in_program": 0, "registered_not_in_json": {"records": [], "fields": [], "missing_count": 0}, "duplicate_ids_in_json": [], "consistent": true},
-      {"file_id": "SYS-PORTFOLIO-001-FIL-0002", "layout": "copybook BCHCTL", "file_type": "copybook", "records_checked": 1, "fields_checked": 30, "expansions_checked": 0, "record_problems": [], "field_problems": [], "expansion_problems": [], "copybook_records_in_program": 0, "registered_not_in_json": {"records": [], "fields": [], "missing_count": 0}, "duplicate_ids_in_json": [], "consistent": true, "note": "verified once in this execution (shared with BCHCTL00)"},
-      {"file_id": "SYS-PORTFOLIO-001-FIL-0016", "layout": "copybook DBTBLS", "file_type": "copybook", "records_checked": 2, "fields_checked": 35, "expansions_checked": 0, "record_problems": [], "field_problems": [], "expansion_problems": [], "copybook_records_in_program": 0, "registered_not_in_json": {"records": [], "fields": [], "missing_count": 0}, "duplicate_ids_in_json": [], "consistent": true},
-      {"file_id": "SYS-PORTFOLIO-001-FIL-0017", "layout": "copybook SQLCA", "file_type": "copybook", "records_checked": 1, "fields_checked": 7, "expansions_checked": 0, "record_problems": [], "field_problems": [], "expansion_problems": [], "copybook_records_in_program": 0, "registered_not_in_json": {"records": [], "fields": [], "missing_count": 0}, "duplicate_ids_in_json": [], "consistent": true},
-      {"file_id": "SYS-PORTFOLIO-001-FIL-0015", "layout": "copybook DBPROC", "file_type": "copybook", "records_checked": 1, "fields_checked": 11, "expansions_checked": 0, "record_problems": [], "field_problems": [], "expansion_problems": [], "copybook_records_in_program": 0, "registered_not_in_json": {"records": [], "fields": [], "missing_count": 0}, "duplicate_ids_in_json": [], "consistent": true},
-      {"file_id": "SYS-PORTFOLIO-001-FIL-0007", "layout": "copybook ERRHAND", "file_type": "copybook", "records_checked": 5, "fields_checked": 25, "expansions_checked": 0, "record_problems": [], "field_problems": [], "expansion_problems": [], "copybook_records_in_program": 0, "registered_not_in_json": {"records": [], "fields": [], "missing_count": 0}, "duplicate_ids_in_json": [], "consistent": true, "note": "verified once in this execution (shared with BCHCTL00)"},
-      {"file_id": "SYS-PORTFOLIO-001-FIL-0001", "layout": "copybook BCHCON", "file_type": "copybook", "records_checked": 1, "fields_checked": 40, "expansions_checked": 0, "record_problems": [], "field_problems": [], "expansion_problems": [], "copybook_records_in_program": 0, "registered_not_in_json": {"records": [], "fields": [], "missing_count": 0}, "duplicate_ids_in_json": [], "consistent": true, "note": "verified once in this execution (shared with BCHCTL00)"}
-    ]
+    "V3_structure_identities": {"sections_checked": 4, "paragraphs_checked": 16, "statements_checked": 77, "edges_checked": 19, "registered_edges": 19, "section_problems": [], "paragraph_problems": [], "statement_problems": [], "edge_problems": [], "invalid_registered_edges": [], "registered_not_in_json": {"missing_count": 0}, "duplicate_ids_in_json": [], "consistent": true},
+    "V4_data_identities": {
+      "program_layout": {"file_id": "SYS-PORTFOLIO-001-FIL-0044", "records_checked": 4, "fields_checked": 9, "expansions_checked": 7, "record_problems": [], "field_problems": [], "expansion_problems": [], "copybook_records_in_program": 0, "registered_not_in_json": {"missing_count": 0}, "duplicate_ids_in_json": [], "consistent": true},
+      "copybook_layouts": [
+        {"file_id": "SYS-PORTFOLIO-001-FIL-0008", "copybook": "HISTREC", "records_checked": 1, "fields_checked": 21, "expansions_checked": 0, "record_problems": [], "field_problems": [], "expansion_problems": [], "registered_not_in_json": {"missing_count": 0}, "consistent": true},
+        {"file_id": "SYS-PORTFOLIO-001-FIL-0002", "copybook": "BCHCTL", "records_checked": 1, "fields_checked": 30, "expansions_checked": 0, "record_problems": [], "field_problems": [], "expansion_problems": [], "registered_not_in_json": {"missing_count": 0}, "consistent": true},
+        {"file_id": "SYS-PORTFOLIO-001-FIL-0016", "copybook": "DBTBLS", "records_checked": 2, "fields_checked": 35, "expansions_checked": 0, "record_problems": [], "field_problems": [], "expansion_problems": [], "registered_not_in_json": {"missing_count": 0}, "consistent": true},
+        {"file_id": "SYS-PORTFOLIO-001-FIL-0017", "copybook": "SQLCA", "records_checked": 1, "fields_checked": 7, "expansions_checked": 0, "record_problems": [], "field_problems": [], "expansion_problems": [], "registered_not_in_json": {"missing_count": 0}, "consistent": true},
+        {"file_id": "SYS-PORTFOLIO-001-FIL-0015", "copybook": "DBPROC", "records_checked": 1, "fields_checked": 11, "expansions_checked": 0, "record_problems": [], "field_problems": [], "expansion_problems": [], "registered_not_in_json": {"missing_count": 0}, "consistent": true},
+        {"file_id": "SYS-PORTFOLIO-001-FIL-0007", "copybook": "ERRHAND", "records_checked": 5, "fields_checked": 25, "expansions_checked": 0, "record_problems": [], "field_problems": [], "expansion_problems": [], "registered_not_in_json": {"missing_count": 0}, "consistent": true},
+        {"file_id": "SYS-PORTFOLIO-001-FIL-0001", "copybook": "BCHCON", "records_checked": 1, "fields_checked": 40, "expansions_checked": 0, "record_problems": [], "field_problems": [], "expansion_problems": [], "registered_not_in_json": {"missing_count": 0}, "consistent": true}
+      ]
+    }
   }
 },
 "execution_traces": [
@@ -44,51 +40,45 @@
     "entry_point": "0000-MAIN",
     "entry_point_id": "SYS-PORTFOLIO-001-FIL-0044-PAR-0001",
     "entry_type": "batch_main",
-    "entry_note": "PROCEDURE DIVISION without USING; batch load program ending with GOBACK. Steps are listed depth-first; a performed paragraph is expanded at its first occurrence only.",
+    "entry_note": "PROCEDURE DIVISION without USING; first paragraph. Ends with MOVE WS-ERROR-COUNT TO RETURN-CODE and GOBACK",
     "steps": [
-      {"step": 1, "paragraph": "0000-MAIN", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0044-PAR-0001", "action": "PERFORM", "target": "1000-INITIALIZE", "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0044-PAR-0002", "target_section_id": null, "condition": null, "line": 68, "statement_id": "SYS-PORTFOLIO-001-FIL-0044-STMT-000001"},
-      {"step": 2, "paragraph": "1000-INITIALIZE", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0044-PAR-0002", "action": "PERFORM", "target": "1100-OPEN-FILES", "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0044-PAR-0005", "target_section_id": null, "condition": null, "line": 81, "statement_id": "SYS-PORTFOLIO-001-FIL-0044-STMT-000006"},
-      {"step": 3, "paragraph": "1100-OPEN-FILES", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0044-PAR-0005", "action": "PERFORM", "target": "9000-ERROR-ROUTINE", "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0044-PAR-0016", "target_section_id": null,
-       "condition": {"text": "IF WS-TH-STATUS NOT = '00' (after OPEN INPUT TRANSACTION-HISTORY)", "fields": ["WS-TH-STATUS"], "field_ids": [{"name": "WS-TH-STATUS", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0044-FLD-000001", "target_kind": "field", "candidate_ids": []}]},
-       "line": 106, "statement_id": "SYS-PORTFOLIO-001-FIL-0044-STMT-000061"},
-      {"step": 4, "paragraph": "9000-ERROR-ROUTINE", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0044-PAR-0016", "action": "CALL", "target": "ERRPROC", "target_paragraph_id": null, "target_section_id": null, "condition": null, "line": 228, "statement_id": "SYS-PORTFOLIO-001-FIL-0044-STMT-000056"},
-      {"step": 5, "paragraph": "1100-OPEN-FILES", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0044-PAR-0005", "action": "PERFORM", "target": "9000-ERROR-ROUTINE", "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0044-PAR-0016", "target_section_id": null,
-       "condition": {"text": "IF WS-BCT-STATUS NOT = '00' (after OPEN I-O BATCH-CONTROL-FILE)", "fields": ["WS-BCT-STATUS"], "field_ids": [{"name": "WS-BCT-STATUS", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0044-FLD-000002", "target_kind": "field", "candidate_ids": []}]},
-       "line": 112, "statement_id": "SYS-PORTFOLIO-001-FIL-0044-STMT-000063"},
-      {"step": 6, "paragraph": "1000-INITIALIZE", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0044-PAR-0002", "action": "PERFORM", "target": "1200-CONNECT-DB2", "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0044-PAR-0006", "target_section_id": null, "condition": null, "line": 82, "statement_id": "SYS-PORTFOLIO-001-FIL-0044-STMT-000007"},
-      {"step": 7, "paragraph": "1200-CONNECT-DB2", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0044-PAR-0006", "action": "unresolvable", "perform_type": "PERFORM_SIMPLE", "target": "CONNECT-TO-DB2", "target_paragraph_id": null, "target_section_id": null, "condition": null, "line": 117, "statement_id": "SYS-PORTFOLIO-001-FIL-0044-STMT-000019"},
-      {"step": 8, "paragraph": "1000-INITIALIZE", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0044-PAR-0002", "action": "PERFORM", "target": "1300-INIT-CHECKPOINTS", "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0044-PAR-0007", "target_section_id": null, "condition": null, "line": 83, "statement_id": "SYS-PORTFOLIO-001-FIL-0044-STMT-000008"},
-      {"step": 9, "paragraph": "1300-INIT-CHECKPOINTS", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0044-PAR-0007", "action": "PERFORM", "target": "9000-ERROR-ROUTINE", "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0044-PAR-0016", "target_section_id": null,
-       "condition": {"text": "READ BATCH-CONTROL-FILE INVALID KEY (no record with key BCT-KEY)", "fields": ["BCT-KEY"], "field_ids": [{"name": "BCT-KEY", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0002-FLD-000001", "target_kind": "field", "candidate_ids": []}]},
-       "line": 127, "statement_id": "SYS-PORTFOLIO-001-FIL-0044-STMT-000065"},
-      {"step": 10, "paragraph": "0000-MAIN", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0044-PAR-0001", "action": "PERFORM_UNTIL", "target": "2000-PROCESS", "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0044-PAR-0003", "target_section_id": null,
-       "condition": {"text": "END-OF-FILE OR WS-ERROR-COUNT > 100", "fields": ["END-OF-FILE", "WS-ERROR-COUNT"], "field_ids": [{"name": "END-OF-FILE", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0044-FLD-000008", "target_kind": "condition", "candidate_ids": []}, {"name": "WS-ERROR-COUNT", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0044-FLD-000005", "target_kind": "field", "candidate_ids": []}], "test_time": "BEFORE", "loop_type": "WHILE", "termination_pattern": "FILE_EXHAUSTION_LOOP"},
-       "line": 70, "statement_id": "SYS-PORTFOLIO-001-FIL-0044-STMT-000002"},
-      {"step": 11, "paragraph": "2000-PROCESS", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0044-PAR-0003", "action": "PERFORM", "target": "2100-READ-HISTORY", "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0044-PAR-0008", "target_section_id": null, "condition": null, "line": 87, "statement_id": "SYS-PORTFOLIO-001-FIL-0044-STMT-000009"},
-      {"step": 12, "paragraph": "2000-PROCESS", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0044-PAR-0003", "action": "PERFORM", "target": "2200-LOAD-TO-DB2", "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0044-PAR-0009", "target_section_id": null,
-       "condition": {"text": "IF MORE-RECORDS", "fields": ["MORE-RECORDS"], "field_ids": [{"name": "MORE-RECORDS", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0044-FLD-000009", "target_kind": "condition", "candidate_ids": []}]},
-       "line": 90, "statement_id": "SYS-PORTFOLIO-001-FIL-0044-STMT-000058"},
-      {"step": 13, "paragraph": "2200-LOAD-TO-DB2", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0044-PAR-0009", "action": "unresolvable", "perform_type": "PERFORM_SIMPLE", "target": "DB2-ERROR-ROUTINE", "target_paragraph_id": null, "target_section_id": null,
-       "condition": {"text": "IF SQLCODE = 0 ... ELSE IF SQLCODE = -803 ... ELSE (any other SQLCODE after INSERT)", "fields": ["SQLCODE"], "field_ids": [{"name": "SQLCODE", "qualifiers": [], "resolution": "UNRESOLVED", "target_id": null, "target_kind": null, "candidate_ids": []}]},
-       "line": 172, "statement_id": "SYS-PORTFOLIO-001-FIL-0044-STMT-000076"},
-      {"step": 14, "paragraph": "2000-PROCESS", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0044-PAR-0003", "action": "PERFORM", "target": "2300-CHECK-COMMIT", "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0044-PAR-0010", "target_section_id": null,
-       "condition": {"text": "IF MORE-RECORDS", "fields": ["MORE-RECORDS"], "field_ids": [{"name": "MORE-RECORDS", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0044-FLD-000009", "target_kind": "condition", "candidate_ids": []}]},
-       "line": 91, "statement_id": "SYS-PORTFOLIO-001-FIL-0044-STMT-000059"},
-      {"step": 15, "paragraph": "2300-CHECK-COMMIT", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0044-PAR-0010", "action": "PERFORM", "target": "2310-UPDATE-CHECKPOINT", "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0044-PAR-0011", "target_section_id": null,
-       "condition": {"text": "IF WS-COMMIT-COUNT >= WS-COMMIT-THRESHOLD", "fields": ["WS-COMMIT-COUNT", "WS-COMMIT-THRESHOLD"], "field_ids": [{"name": "WS-COMMIT-COUNT", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0044-FLD-000006", "target_kind": "field", "candidate_ids": []}, {"name": "WS-COMMIT-THRESHOLD", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0044-REC-0003", "target_kind": "record", "candidate_ids": []}]},
-       "line": 187, "statement_id": "SYS-PORTFOLIO-001-FIL-0044-STMT-000072"},
-      {"step": 16, "paragraph": "2310-UPDATE-CHECKPOINT", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0044-PAR-0011", "action": "PERFORM", "target": "9000-ERROR-ROUTINE", "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0044-PAR-0016", "target_section_id": null,
-       "condition": {"text": "REWRITE BATCH-CONTROL-RECORD INVALID KEY", "fields": ["BATCH-CONTROL-RECORD"], "field_ids": [{"name": "BATCH-CONTROL-RECORD", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0002-REC-0001", "target_kind": "record", "candidate_ids": []}]},
-       "line": 198, "statement_id": "SYS-PORTFOLIO-001-FIL-0044-STMT-000074"},
-      {"step": 17, "paragraph": "0000-MAIN", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0044-PAR-0001", "action": "PERFORM", "target": "3000-TERMINATE", "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0044-PAR-0004", "target_section_id": null, "condition": null, "line": 74, "statement_id": "SYS-PORTFOLIO-001-FIL-0044-STMT-000003"},
-      {"step": 18, "paragraph": "3000-TERMINATE", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0044-PAR-0004", "action": "PERFORM", "target": "3100-FINAL-COMMIT", "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0044-PAR-0012", "target_section_id": null, "condition": null, "line": 96, "statement_id": "SYS-PORTFOLIO-001-FIL-0044-STMT-000011"},
-      {"step": 19, "paragraph": "3100-FINAL-COMMIT", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0044-PAR-0012", "action": "PERFORM", "target": "2310-UPDATE-CHECKPOINT", "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0044-PAR-0011", "target_section_id": null, "condition": null, "line": 207, "statement_id": "SYS-PORTFOLIO-001-FIL-0044-STMT-000048"},
-      {"step": 20, "paragraph": "3000-TERMINATE", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0044-PAR-0004", "action": "PERFORM", "target": "3200-CLOSE-FILES", "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0044-PAR-0013", "target_section_id": null, "condition": null, "line": 97, "statement_id": "SYS-PORTFOLIO-001-FIL-0044-STMT-000012"},
-      {"step": 21, "paragraph": "3000-TERMINATE", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0044-PAR-0004", "action": "PERFORM", "target": "3300-DISCONNECT-DB2", "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0044-PAR-0014", "target_section_id": null, "condition": null, "line": 98, "statement_id": "SYS-PORTFOLIO-001-FIL-0044-STMT-000013"},
-      {"step": 22, "paragraph": "3300-DISCONNECT-DB2", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0044-PAR-0014", "action": "unresolvable", "perform_type": "PERFORM_SIMPLE", "target": "DISCONNECT-FROM-DB2", "target_paragraph_id": null, "target_section_id": null, "condition": null, "line": 216, "statement_id": "SYS-PORTFOLIO-001-FIL-0044-STMT-000050"},
-      {"step": 23, "paragraph": "3000-TERMINATE", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0044-PAR-0004", "action": "PERFORM", "target": "3400-DISPLAY-STATS", "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0044-PAR-0015", "target_section_id": null, "condition": null, "line": 99, "statement_id": "SYS-PORTFOLIO-001-FIL-0044-STMT-000014"},
-      {"step": 24, "paragraph": "0000-MAIN", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0044-PAR-0001", "action": "GOBACK", "target": null, "target_paragraph_id": null, "target_section_id": null, "condition": null, "line": 77, "statement_id": "SYS-PORTFOLIO-001-FIL-0044-STMT-000005"}
-    ]
+      {"step": 1, "call_depth": 0, "paragraph": "0000-MAIN", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0044-PAR-0001", "action": "PERFORM", "target": "1000-INITIALIZE", "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0044-PAR-0002", "target_section_id": null, "condition": null, "line": 68, "statement_id": "SYS-PORTFOLIO-001-FIL-0044-STMT-000001"},
+      {"step": 2, "call_depth": 1, "paragraph": "1000-INITIALIZE", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0044-PAR-0002", "action": "PERFORM", "target": "1100-OPEN-FILES", "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0044-PAR-0005", "target_section_id": null, "condition": null, "line": 81, "statement_id": "SYS-PORTFOLIO-001-FIL-0044-STMT-000006"},
+      {"step": 3, "call_depth": 2, "paragraph": "1100-OPEN-FILES", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0044-PAR-0005", "action": "OPEN", "target": "TRANSACTION-HISTORY (INPUT)", "target_paragraph_id": null, "target_section_id": null, "condition": null, "line": 103, "statement_id": "SYS-PORTFOLIO-001-FIL-0044-STMT-000015"},
+      {"step": 4, "call_depth": 2, "paragraph": "1100-OPEN-FILES", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0044-PAR-0005", "action": "PERFORM", "target": "9000-ERROR-ROUTINE", "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0044-PAR-0016", "target_section_id": null, "condition": {"text": "WS-TH-STATUS NOT = '00'", "fields": ["WS-TH-STATUS"], "field_ids": [{"name": "WS-TH-STATUS", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0044-FLD-000001", "target_kind": "field", "candidate_ids": []}], "branch_statement_id": "SYS-PORTFOLIO-001-FIL-0044-STMT-000016"}, "line": 106, "statement_id": "SYS-PORTFOLIO-001-FIL-0044-STMT-000061"},
+      {"step": 5, "call_depth": 3, "paragraph": "9000-ERROR-ROUTINE", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0044-PAR-0016", "action": "CALL", "target": "ERRPROC", "target_paragraph_id": null, "target_section_id": null, "condition": null, "line": 228, "statement_id": "SYS-PORTFOLIO-001-FIL-0044-STMT-000056", "call_type": "STATIC_CALL", "note": "Inter-program call to the common error processor ERRPROC, passing ERR-MESSAGE"},
+      {"step": 6, "call_depth": 3, "paragraph": "9000-ERROR-ROUTINE", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0044-PAR-0016", "action": "EXEC_SQL", "target": "ROLLBACK WORK", "target_paragraph_id": null, "target_section_id": null, "condition": null, "line": 230, "statement_id": "SYS-PORTFOLIO-001-FIL-0044-STMT-000057", "note": "9000-ERROR-ROUTINE returns to its caller; processing continues"},
+      {"step": 7, "call_depth": 2, "paragraph": "1100-OPEN-FILES", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0044-PAR-0005", "action": "OPEN", "target": "BATCH-CONTROL-FILE (I-O)", "target_paragraph_id": null, "target_section_id": null, "condition": null, "line": 109, "statement_id": "SYS-PORTFOLIO-001-FIL-0044-STMT-000017"},
+      {"step": 8, "call_depth": 2, "paragraph": "1100-OPEN-FILES", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0044-PAR-0005", "action": "PERFORM", "target": "9000-ERROR-ROUTINE", "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0044-PAR-0016", "target_section_id": null, "condition": {"text": "WS-BCT-STATUS NOT = '00'", "fields": ["WS-BCT-STATUS"], "field_ids": [{"name": "WS-BCT-STATUS", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0044-FLD-000002", "target_kind": "field", "candidate_ids": []}], "branch_statement_id": "SYS-PORTFOLIO-001-FIL-0044-STMT-000018"}, "line": 112, "statement_id": "SYS-PORTFOLIO-001-FIL-0044-STMT-000063", "note": "9000-ERROR-ROUTINE steps as in 5-6"},
+      {"step": 9, "call_depth": 1, "paragraph": "1000-INITIALIZE", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0044-PAR-0002", "action": "PERFORM", "target": "1200-CONNECT-DB2", "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0044-PAR-0006", "target_section_id": null, "condition": null, "line": 82, "statement_id": "SYS-PORTFOLIO-001-FIL-0044-STMT-000007"},
+      {"step": 10, "call_depth": 2, "paragraph": "1200-CONNECT-DB2", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0044-PAR-0006", "action": "PERFORM", "target": "CONNECT-TO-DB2", "target_paragraph_id": null, "target_section_id": null, "condition": null, "line": 117, "statement_id": "SYS-PORTFOLIO-001-FIL-0044-STMT-000019", "unresolvable": true, "note": "PERFORM target not defined in the program (see unresolvable_paths)"},
+      {"step": 11, "call_depth": 1, "paragraph": "1000-INITIALIZE", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0044-PAR-0002", "action": "PERFORM", "target": "1300-INIT-CHECKPOINTS", "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0044-PAR-0007", "target_section_id": null, "condition": null, "line": 83, "statement_id": "SYS-PORTFOLIO-001-FIL-0044-STMT-000008"},
+      {"step": 12, "call_depth": 2, "paragraph": "1300-INIT-CHECKPOINTS", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0044-PAR-0007", "action": "READ", "target": "BATCH-CONTROL-FILE (keyed by BCT-KEY)", "target_paragraph_id": null, "target_section_id": null, "condition": null, "line": 124, "statement_id": "SYS-PORTFOLIO-001-FIL-0044-STMT-000022"},
+      {"step": 13, "call_depth": 2, "paragraph": "1300-INIT-CHECKPOINTS", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0044-PAR-0007", "action": "PERFORM", "target": "9000-ERROR-ROUTINE", "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0044-PAR-0016", "target_section_id": null, "condition": {"text": "INVALID KEY (READ BATCH-CONTROL-FILE)", "fields": [], "field_ids": [], "branch_statement_id": "SYS-PORTFOLIO-001-FIL-0044-STMT-000022"}, "line": 127, "statement_id": "SYS-PORTFOLIO-001-FIL-0044-STMT-000065"},
+      {"step": 14, "call_depth": 2, "paragraph": "1300-INIT-CHECKPOINTS", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0044-PAR-0007", "action": "REWRITE", "target": "BATCH-CONTROL-RECORD", "target_paragraph_id": null, "target_section_id": null, "condition": null, "line": 131, "statement_id": "SYS-PORTFOLIO-001-FIL-0044-STMT-000024"},
+      {"step": 15, "call_depth": 0, "paragraph": "0000-MAIN", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0044-PAR-0001", "action": "PERFORM_UNTIL", "target": "2000-PROCESS", "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0044-PAR-0003", "target_section_id": null, "condition": {"text": "END-OF-FILE OR WS-ERROR-COUNT > 100", "fields": ["END-OF-FILE", "WS-ERROR-COUNT"], "field_ids": [{"name": "END-OF-FILE", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0044-FLD-000008", "target_kind": "condition", "candidate_ids": []}, {"name": "WS-ERROR-COUNT", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0044-FLD-000005", "target_kind": "field", "candidate_ids": []}], "test_time": "BEFORE", "loop_type": "WHILE", "termination_pattern": "FILE_EXHAUSTION_LOOP"}, "line": 70, "statement_id": "SYS-PORTFOLIO-001-FIL-0044-STMT-000002"},
+      {"step": 16, "call_depth": 1, "paragraph": "2000-PROCESS", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0044-PAR-0003", "action": "PERFORM", "target": "2100-READ-HISTORY", "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0044-PAR-0008", "target_section_id": null, "condition": null, "line": 87, "statement_id": "SYS-PORTFOLIO-001-FIL-0044-STMT-000009"},
+      {"step": 17, "call_depth": 2, "paragraph": "2100-READ-HISTORY", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0044-PAR-0008", "action": "READ", "target": "TRANSACTION-HISTORY (sequential)", "target_paragraph_id": null, "target_section_id": null, "condition": null, "line": 135, "statement_id": "SYS-PORTFOLIO-001-FIL-0044-STMT-000025"},
+      {"step": 18, "call_depth": 1, "paragraph": "2000-PROCESS", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0044-PAR-0003", "action": "PERFORM", "target": "2200-LOAD-TO-DB2", "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0044-PAR-0009", "target_section_id": null, "condition": {"text": "MORE-RECORDS", "fields": ["MORE-RECORDS"], "field_ids": [{"name": "MORE-RECORDS", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0044-FLD-000009", "target_kind": "condition", "candidate_ids": []}], "branch_statement_id": "SYS-PORTFOLIO-001-FIL-0044-STMT-000010"}, "line": 90, "statement_id": "SYS-PORTFOLIO-001-FIL-0044-STMT-000058"},
+      {"step": 19, "call_depth": 2, "paragraph": "2200-LOAD-TO-DB2", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0044-PAR-0009", "action": "EXEC_SQL", "target": "INSERT INTO POSHIST", "target_paragraph_id": null, "target_section_id": null, "condition": null, "line": 160, "statement_id": "SYS-PORTFOLIO-001-FIL-0044-STMT-000040"},
+      {"step": 20, "call_depth": 2, "paragraph": "2200-LOAD-TO-DB2", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0044-PAR-0009", "action": "PERFORM", "target": "DB2-ERROR-ROUTINE", "target_paragraph_id": null, "target_section_id": null, "condition": {"text": "NOT (SQLCODE = 0) AND NOT (SQLCODE = -803)", "fields": ["SQLCODE"], "field_ids": [{"name": "SQLCODE", "qualifiers": [], "resolution": "UNRESOLVED", "target_id": null, "target_kind": null, "candidate_ids": []}], "branch_statement_id": "SYS-PORTFOLIO-001-FIL-0044-STMT-000068"}, "line": 172, "statement_id": "SYS-PORTFOLIO-001-FIL-0044-STMT-000076", "unresolvable": true, "note": "PERFORM target not defined in the program (see unresolvable_paths)"},
+      {"step": 21, "call_depth": 1, "paragraph": "2000-PROCESS", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0044-PAR-0003", "action": "PERFORM", "target": "2300-CHECK-COMMIT", "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0044-PAR-0010", "target_section_id": null, "condition": {"text": "MORE-RECORDS", "fields": ["MORE-RECORDS"], "field_ids": [{"name": "MORE-RECORDS", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0044-FLD-000009", "target_kind": "condition", "candidate_ids": []}], "branch_statement_id": "SYS-PORTFOLIO-001-FIL-0044-STMT-000010"}, "line": 91, "statement_id": "SYS-PORTFOLIO-001-FIL-0044-STMT-000059"},
+      {"step": 22, "call_depth": 2, "paragraph": "2300-CHECK-COMMIT", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0044-PAR-0010", "action": "EXEC_SQL", "target": "COMMIT WORK", "target_paragraph_id": null, "target_section_id": null, "condition": {"text": "WS-COMMIT-COUNT >= WS-COMMIT-THRESHOLD", "fields": ["WS-COMMIT-COUNT", "WS-COMMIT-THRESHOLD"], "field_ids": [{"name": "WS-COMMIT-COUNT", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0044-FLD-000006", "target_kind": "field", "candidate_ids": []}, {"name": "WS-COMMIT-THRESHOLD", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0044-REC-0003", "target_kind": "record", "candidate_ids": []}], "branch_statement_id": "SYS-PORTFOLIO-001-FIL-0044-STMT-000043"}, "line": 181, "statement_id": "SYS-PORTFOLIO-001-FIL-0044-STMT-000070"},
+      {"step": 23, "call_depth": 2, "paragraph": "2300-CHECK-COMMIT", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0044-PAR-0010", "action": "PERFORM", "target": "2310-UPDATE-CHECKPOINT", "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0044-PAR-0011", "target_section_id": null, "condition": {"text": "WS-COMMIT-COUNT >= WS-COMMIT-THRESHOLD", "fields": ["WS-COMMIT-COUNT", "WS-COMMIT-THRESHOLD"], "field_ids": [{"name": "WS-COMMIT-COUNT", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0044-FLD-000006", "target_kind": "field", "candidate_ids": []}, {"name": "WS-COMMIT-THRESHOLD", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0044-REC-0003", "target_kind": "record", "candidate_ids": []}], "branch_statement_id": "SYS-PORTFOLIO-001-FIL-0044-STMT-000043"}, "line": 187, "statement_id": "SYS-PORTFOLIO-001-FIL-0044-STMT-000072"},
+      {"step": 24, "call_depth": 3, "paragraph": "2310-UPDATE-CHECKPOINT", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0044-PAR-0011", "action": "REWRITE", "target": "BATCH-CONTROL-RECORD", "target_paragraph_id": null, "target_section_id": null, "condition": null, "line": 195, "statement_id": "SYS-PORTFOLIO-001-FIL-0044-STMT-000046"},
+      {"step": 25, "call_depth": 3, "paragraph": "2310-UPDATE-CHECKPOINT", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0044-PAR-0011", "action": "PERFORM", "target": "9000-ERROR-ROUTINE", "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0044-PAR-0016", "target_section_id": null, "condition": {"text": "INVALID KEY (REWRITE BATCH-CONTROL-RECORD)", "fields": [], "field_ids": [], "branch_statement_id": "SYS-PORTFOLIO-001-FIL-0044-STMT-000046"}, "line": 198, "statement_id": "SYS-PORTFOLIO-001-FIL-0044-STMT-000074"},
+      {"step": 26, "call_depth": 0, "paragraph": "0000-MAIN", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0044-PAR-0001", "action": "PERFORM", "target": "3000-TERMINATE", "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0044-PAR-0004", "target_section_id": null, "condition": null, "line": 74, "statement_id": "SYS-PORTFOLIO-001-FIL-0044-STMT-000003"},
+      {"step": 27, "call_depth": 1, "paragraph": "3000-TERMINATE", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0044-PAR-0004", "action": "PERFORM", "target": "3100-FINAL-COMMIT", "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0044-PAR-0012", "target_section_id": null, "condition": null, "line": 96, "statement_id": "SYS-PORTFOLIO-001-FIL-0044-STMT-000011"},
+      {"step": 28, "call_depth": 2, "paragraph": "3100-FINAL-COMMIT", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0044-PAR-0012", "action": "EXEC_SQL", "target": "COMMIT WORK", "target_paragraph_id": null, "target_section_id": null, "condition": null, "line": 203, "statement_id": "SYS-PORTFOLIO-001-FIL-0044-STMT-000047"},
+      {"step": 29, "call_depth": 2, "paragraph": "3100-FINAL-COMMIT", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0044-PAR-0012", "action": "PERFORM", "target": "2310-UPDATE-CHECKPOINT", "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0044-PAR-0011", "target_section_id": null, "condition": null, "line": 207, "statement_id": "SYS-PORTFOLIO-001-FIL-0044-STMT-000048", "note": "2310-UPDATE-CHECKPOINT steps as in 24-25"},
+      {"step": 30, "call_depth": 1, "paragraph": "3000-TERMINATE", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0044-PAR-0004", "action": "PERFORM", "target": "3200-CLOSE-FILES", "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0044-PAR-0013", "target_section_id": null, "condition": null, "line": 97, "statement_id": "SYS-PORTFOLIO-001-FIL-0044-STMT-000012"},
+      {"step": 31, "call_depth": 2, "paragraph": "3200-CLOSE-FILES", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0044-PAR-0013", "action": "CLOSE", "target": "TRANSACTION-HISTORY, BATCH-CONTROL-FILE", "target_paragraph_id": null, "target_section_id": null, "condition": null, "line": 211, "statement_id": "SYS-PORTFOLIO-001-FIL-0044-STMT-000049"},
+      {"step": 32, "call_depth": 1, "paragraph": "3000-TERMINATE", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0044-PAR-0004", "action": "PERFORM", "target": "3300-DISCONNECT-DB2", "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0044-PAR-0014", "target_section_id": null, "condition": null, "line": 98, "statement_id": "SYS-PORTFOLIO-001-FIL-0044-STMT-000013"},
+      {"step": 33, "call_depth": 2, "paragraph": "3300-DISCONNECT-DB2", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0044-PAR-0014", "action": "PERFORM", "target": "DISCONNECT-FROM-DB2", "target_paragraph_id": null, "target_section_id": null, "condition": null, "line": 216, "statement_id": "SYS-PORTFOLIO-001-FIL-0044-STMT-000050", "unresolvable": true, "note": "PERFORM target not defined in the program (see unresolvable_paths)"},
+      {"step": 34, "call_depth": 1, "paragraph": "3000-TERMINATE", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0044-PAR-0004", "action": "PERFORM", "target": "3400-DISPLAY-STATS", "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0044-PAR-0015", "target_section_id": null, "condition": null, "line": 99, "statement_id": "SYS-PORTFOLIO-001-FIL-0044-STMT-000014"},
+      {"step": 35, "call_depth": 0, "paragraph": "0000-MAIN", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0044-PAR-0001", "action": "GOBACK", "target": null, "target_paragraph_id": null, "target_section_id": null, "condition": null, "line": 77, "statement_id": "SYS-PORTFOLIO-001-FIL-0044-STMT-000005", "note": "RETURN-CODE was set to WS-ERROR-COUNT at line 76"}
+    ],
+    "path_summary": "0000-MAIN -> 1000-INITIALIZE (1100-OPEN-FILES, 1200-CONNECT-DB2 -> [unresolved] CONNECT-TO-DB2, 1300-INIT-CHECKPOINTS: read and mark the HISTLD00 control record active) -> loop 2000-PROCESS until END-OF-FILE or WS-ERROR-COUNT > 100 (2100-READ-HISTORY; if a record was read: 2200-LOAD-TO-DB2 inserts it into POSHIST, 2300-CHECK-COMMIT commits and checkpoints every WS-COMMIT-THRESHOLD records) -> 3000-TERMINATE (final commit and checkpoint, close files, [unresolved] DISCONNECT-FROM-DB2, display statistics) -> RETURN-CODE = WS-ERROR-COUNT -> GOBACK. 9000-ERROR-ROUTINE calls ERRPROC, rolls back and returns, so processing continues after every error it handles."
   }
 ],
 "branch_map": [
@@ -96,185 +86,143 @@
     "paragraph": "2000-PROCESS",
     "paragraph_id": "SYS-PORTFOLIO-001-FIL-0044-PAR-0003",
     "branches": [
-      {"type": "IF", "line": 89, "statement_id": "SYS-PORTFOLIO-001-FIL-0044-STMT-000010", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0044-PAR-0003",
-       "condition_text": "MORE-RECORDS", "condition_fields": ["MORE-RECORDS"],
-       "condition_field_ids": [{"name": "MORE-RECORDS", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0044-FLD-000009", "target_kind": "condition", "candidate_ids": []}],
-       "has_else": false, "then_line_range": [90, 91], "else_line_range": null, "end_if_line": 92, "nested_depth": 1,
-       "outcomes": [
-         {"label": "THEN", "line_range": [90, 91], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0044-STMT-000058", "SYS-PORTFOLIO-001-FIL-0044-STMT-000059"]},
-         {"label": "ELSE (implicit, no statements)", "line_range": null, "statement_ids": []}
-       ]}
+      {"type": "IF", "line": 89, "statement_id": "SYS-PORTFOLIO-001-FIL-0044-STMT-000010", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0044-PAR-0003", "condition_text": "MORE-RECORDS", "condition_meaning": "WS-END-OF-FILE-SW = 'N' (the last READ returned a record)", "condition_fields": ["MORE-RECORDS"], "condition_field_ids": [{"name": "MORE-RECORDS", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0044-FLD-000009", "target_kind": "condition", "candidate_ids": []}], "has_else": false, "then_line_range": [90, 91], "else_line_range": null, "end_if_line": 92, "nested_depth": 1, "outcomes": [{"label": "THEN", "line_range": [90, 91], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0044-STMT-000058", "SYS-PORTFOLIO-001-FIL-0044-STMT-000059"], "effect": "load the record to DB2 and check the commit interval"}]}
     ]
   },
   {
     "paragraph": "1100-OPEN-FILES",
     "paragraph_id": "SYS-PORTFOLIO-001-FIL-0044-PAR-0005",
     "branches": [
-      {"type": "IF", "line": 104, "statement_id": "SYS-PORTFOLIO-001-FIL-0044-STMT-000016", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0044-PAR-0005",
-       "condition_text": "WS-TH-STATUS NOT = '00'", "condition_fields": ["WS-TH-STATUS"],
-       "condition_field_ids": [{"name": "WS-TH-STATUS", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0044-FLD-000001", "target_kind": "field", "candidate_ids": []}],
-       "has_else": false, "then_line_range": [105, 106], "else_line_range": null, "end_if_line": 107, "nested_depth": 1,
-       "outcomes": [
-         {"label": "THEN", "line_range": [105, 106], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0044-STMT-000060", "SYS-PORTFOLIO-001-FIL-0044-STMT-000061"]},
-         {"label": "ELSE (implicit, no statements)", "line_range": null, "statement_ids": []}
-       ]},
-      {"type": "IF", "line": 110, "statement_id": "SYS-PORTFOLIO-001-FIL-0044-STMT-000018", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0044-PAR-0005",
-       "condition_text": "WS-BCT-STATUS NOT = '00'", "condition_fields": ["WS-BCT-STATUS"],
-       "condition_field_ids": [{"name": "WS-BCT-STATUS", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0044-FLD-000002", "target_kind": "field", "candidate_ids": []}],
-       "has_else": false, "then_line_range": [111, 112], "else_line_range": null, "end_if_line": 113, "nested_depth": 1,
-       "outcomes": [
-         {"label": "THEN", "line_range": [111, 112], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0044-STMT-000062", "SYS-PORTFOLIO-001-FIL-0044-STMT-000063"]},
-         {"label": "ELSE (implicit, no statements)", "line_range": null, "statement_ids": []}
-       ]}
+      {"type": "IF", "line": 104, "statement_id": "SYS-PORTFOLIO-001-FIL-0044-STMT-000016", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0044-PAR-0005", "condition_text": "WS-TH-STATUS NOT = '00'", "condition_fields": ["WS-TH-STATUS"], "condition_field_ids": [{"name": "WS-TH-STATUS", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0044-FLD-000001", "target_kind": "field", "candidate_ids": []}], "has_else": false, "then_line_range": [105, 106], "else_line_range": null, "end_if_line": 107, "nested_depth": 1, "outcomes": [{"label": "THEN", "line_range": [105, 106], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0044-STMT-000060", "SYS-PORTFOLIO-001-FIL-0044-STMT-000061"], "effect": "ERR-TEXT = 'Error opening history file'; PERFORM 9000-ERROR-ROUTINE (returns; processing continues)"}], "io_context": "File status of OPEN INPUT TRANSACTION-HISTORY (FILE STATUS IS WS-TH-STATUS, line 22)"},
+      {"type": "IF", "line": 110, "statement_id": "SYS-PORTFOLIO-001-FIL-0044-STMT-000018", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0044-PAR-0005", "condition_text": "WS-BCT-STATUS NOT = '00'", "condition_fields": ["WS-BCT-STATUS"], "condition_field_ids": [{"name": "WS-BCT-STATUS", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0044-FLD-000002", "target_kind": "field", "candidate_ids": []}], "has_else": false, "then_line_range": [111, 112], "else_line_range": null, "end_if_line": 113, "nested_depth": 1, "outcomes": [{"label": "THEN", "line_range": [111, 112], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0044-STMT-000062", "SYS-PORTFOLIO-001-FIL-0044-STMT-000063"], "effect": "ERR-TEXT = 'Error opening control file'; PERFORM 9000-ERROR-ROUTINE (returns; processing continues)"}], "io_context": "File status of OPEN I-O BATCH-CONTROL-FILE (FILE STATUS IS WS-BCT-STATUS, line 29)"}
     ]
   },
   {
     "paragraph": "1300-INIT-CHECKPOINTS",
     "paragraph_id": "SYS-PORTFOLIO-001-FIL-0044-PAR-0007",
     "branches": [
-      {"type": "INVALID_KEY", "operation": "READ", "file_name": "BATCH-CONTROL-FILE", "line": 124, "statement_id": "SYS-PORTFOLIO-001-FIL-0044-STMT-000022", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0044-PAR-0007",
-       "condition_text": "READ BATCH-CONTROL-FILE INVALID KEY", "condition_fields": ["BCT-KEY"],
-       "condition_field_ids": [{"name": "BCT-KEY", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0002-FLD-000001", "target_kind": "field", "candidate_ids": []}],
-       "io_status_field": "WS-BCT-STATUS", "invalid_key_line_range": [126, 127], "not_invalid_key_line_range": null, "end_line": 128, "nested_depth": 1,
-       "outcomes": [
-         {"label": "INVALID KEY", "line_range": [126, 127], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0044-STMT-000064", "SYS-PORTFOLIO-001-FIL-0044-STMT-000065"]},
-         {"label": "record found (no NOT INVALID KEY clause)", "line_range": null, "statement_ids": []}
-       ]}
+      {"type": "INVALID_KEY", "operation": "READ", "file_name": "BATCH-CONTROL-FILE", "line": 124, "statement_id": "SYS-PORTFOLIO-001-FIL-0044-STMT-000022", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0044-PAR-0007", "condition_text": "INVALID KEY (READ BATCH-CONTROL-FILE, key BCT-KEY)", "condition_fields": ["BATCH-CONTROL-FILE"], "condition_field_ids": [], "condition_fields_note": "BATCH-CONTROL-FILE is a file name (not a data item) and is not looked up", "invalid_key_line_range": [125, 127], "io_status_field": "WS-BCT-STATUS", "io_status_field_id": "SYS-PORTFOLIO-001-FIL-0044-FLD-000002", "nested_depth": 1, "outcomes": [{"label": "INVALID KEY", "line_range": [125, 127], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0044-STMT-000064", "SYS-PORTFOLIO-001-FIL-0044-STMT-000065"], "effect": "ERR-TEXT = 'Control record not found'; PERFORM 9000-ERROR-ROUTINE; then the REWRITE at line 131 still runs"}]}
     ]
   },
   {
     "paragraph": "2100-READ-HISTORY",
     "paragraph_id": "SYS-PORTFOLIO-001-FIL-0044-PAR-0008",
     "branches": [
-      {"type": "AT_END", "operation": "READ", "file_name": "TRANSACTION-HISTORY", "line": 135, "statement_id": "SYS-PORTFOLIO-001-FIL-0044-STMT-000025", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0044-PAR-0008",
-       "condition_text": "READ TRANSACTION-HISTORY AT END / NOT AT END", "condition_fields": [],
-       "condition_field_ids": [],
-       "at_end_line_range": [137, 137], "not_at_end_line_range": [139, 139], "io_status_field": "WS-TH-STATUS", "end_line": 140, "nested_depth": 1,
-       "outcomes": [
-         {"label": "AT END", "line_range": [137, 137], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0044-STMT-000066"]},
-         {"label": "NOT AT END", "line_range": [139, 139], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0044-STMT-000067"]}
-       ]}
+      {"type": "AT_END", "operation": "READ", "file_name": "TRANSACTION-HISTORY", "line": 135, "statement_id": "SYS-PORTFOLIO-001-FIL-0044-STMT-000025", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0044-PAR-0008", "condition_text": "AT END / NOT AT END (READ TRANSACTION-HISTORY)", "condition_fields": ["TRANSACTION-HISTORY"], "condition_field_ids": [], "condition_fields_note": "TRANSACTION-HISTORY is a file name (not a data item) and is not looked up", "at_end_line_range": [136, 137], "not_at_end_line_range": [138, 139], "io_status_field": "WS-TH-STATUS", "io_status_field_id": "SYS-PORTFOLIO-001-FIL-0044-FLD-000001", "nested_depth": 1, "outcomes": [{"label": "AT END", "line_range": [136, 137], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0044-STMT-000066"], "effect": "SET END-OF-FILE TO TRUE (ends the main loop)"}, {"label": "NOT AT END", "line_range": [138, 139], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0044-STMT-000067"], "effect": "ADD 1 TO WS-RECORDS-READ"}]}
     ]
   },
   {
     "paragraph": "2200-LOAD-TO-DB2",
     "paragraph_id": "SYS-PORTFOLIO-001-FIL-0044-PAR-0009",
     "branches": [
-      {"type": "IF", "line": 165, "statement_id": "SYS-PORTFOLIO-001-FIL-0044-STMT-000041", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0044-PAR-0009",
-       "condition_text": "SQLCODE = 0", "condition_fields": ["SQLCODE"],
-       "condition_field_ids": [{"name": "SQLCODE", "qualifiers": [], "resolution": "UNRESOLVED", "target_id": null, "target_kind": null, "candidate_ids": []}],
-       "has_else": true, "then_line_range": [166, 166], "else_line_range": [168, 173], "end_if_line": 174, "nested_depth": 1,
-       "outcomes": [
-         {"label": "THEN", "line_range": [166, 166], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0044-STMT-000069"]},
-         {"label": "ELSE", "line_range": [168, 173], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0044-STMT-000068"]}
-       ]},
-      {"type": "IF", "line": 168, "statement_id": "SYS-PORTFOLIO-001-FIL-0044-STMT-000068", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0044-PAR-0009",
-       "condition_text": "SQLCODE = -803", "condition_fields": ["SQLCODE"],
-       "condition_field_ids": [{"name": "SQLCODE", "qualifiers": [], "resolution": "UNRESOLVED", "target_id": null, "target_kind": null, "candidate_ids": []}],
-       "has_else": true, "then_line_range": [169, 169], "else_line_range": [171, 172], "end_if_line": 173, "nested_depth": 2,
-       "outcomes": [
-         {"label": "THEN", "line_range": [169, 169], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0044-STMT-000077"]},
-         {"label": "ELSE", "line_range": [171, 172], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0044-STMT-000075", "SYS-PORTFOLIO-001-FIL-0044-STMT-000076"]}
-       ]}
+      {"type": "IF", "line": 165, "statement_id": "SYS-PORTFOLIO-001-FIL-0044-STMT-000041", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0044-PAR-0009", "condition_text": "SQLCODE = 0", "condition_fields": ["SQLCODE"], "condition_field_ids": [{"name": "SQLCODE", "qualifiers": [], "resolution": "UNRESOLVED", "target_id": null, "target_kind": null, "candidate_ids": []}], "has_else": true, "then_line_range": [166, 166], "else_line_range": [168, 173], "end_if_line": 174, "nested_depth": 1, "outcomes": [{"label": "THEN", "line_range": [166, 166], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0044-STMT-000069"], "effect": "ADD 1 TO WS-RECORDS-WRITTEN"}, {"label": "ELSE", "line_range": [168, 173], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0044-STMT-000068"], "effect": "nested IF on SQLCODE = -803"}], "io_context": "SQLCODE check after EXEC SQL INSERT INTO POSHIST (line 160)"},
+      {"type": "IF", "line": 168, "statement_id": "SYS-PORTFOLIO-001-FIL-0044-STMT-000068", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0044-PAR-0009", "condition_text": "SQLCODE = -803", "condition_meaning": "duplicate key on INSERT", "condition_fields": ["SQLCODE"], "condition_field_ids": [{"name": "SQLCODE", "qualifiers": [], "resolution": "UNRESOLVED", "target_id": null, "target_kind": null, "candidate_ids": []}], "has_else": true, "then_line_range": [169, 169], "else_line_range": [171, 172], "end_if_line": 173, "nested_depth": 2, "parent_branch_statement_id": "SYS-PORTFOLIO-001-FIL-0044-STMT-000041", "outcomes": [{"label": "THEN", "line_range": [169, 169], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0044-STMT-000077"], "effect": "CONTINUE - duplicate silently ignored (not counted as written or as an error)"}, {"label": "ELSE", "line_range": [171, 172], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0044-STMT-000075", "SYS-PORTFOLIO-001-FIL-0044-STMT-000076"], "effect": "ADD 1 TO WS-ERROR-COUNT; PERFORM DB2-ERROR-ROUTINE (unresolved)"}]}
     ]
   },
   {
     "paragraph": "2300-CHECK-COMMIT",
     "paragraph_id": "SYS-PORTFOLIO-001-FIL-0044-PAR-0010",
     "branches": [
-      {"type": "IF", "line": 180, "statement_id": "SYS-PORTFOLIO-001-FIL-0044-STMT-000043", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0044-PAR-0010",
-       "condition_text": "WS-COMMIT-COUNT >= WS-COMMIT-THRESHOLD", "condition_fields": ["WS-COMMIT-COUNT", "WS-COMMIT-THRESHOLD"],
-       "condition_field_ids": [
-         {"name": "WS-COMMIT-COUNT", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0044-FLD-000006", "target_kind": "field", "candidate_ids": []},
-         {"name": "WS-COMMIT-THRESHOLD", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0044-REC-0003", "target_kind": "record", "candidate_ids": []}
-       ],
-       "has_else": false, "then_line_range": [181, 187], "else_line_range": null, "end_if_line": 188, "nested_depth": 1,
-       "outcomes": [
-         {"label": "THEN", "line_range": [181, 187], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0044-STMT-000070", "SYS-PORTFOLIO-001-FIL-0044-STMT-000071", "SYS-PORTFOLIO-001-FIL-0044-STMT-000072"]},
-         {"label": "ELSE (implicit, no statements)", "line_range": null, "statement_ids": []}
-       ]}
+      {"type": "IF", "line": 180, "statement_id": "SYS-PORTFOLIO-001-FIL-0044-STMT-000043", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0044-PAR-0010", "condition_text": "WS-COMMIT-COUNT >= WS-COMMIT-THRESHOLD", "condition_meaning": "WS-COMMIT-THRESHOLD has VALUE 1000 and is never modified", "condition_fields": ["WS-COMMIT-COUNT", "WS-COMMIT-THRESHOLD"], "condition_field_ids": [{"name": "WS-COMMIT-COUNT", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0044-FLD-000006", "target_kind": "field", "candidate_ids": []}, {"name": "WS-COMMIT-THRESHOLD", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0044-REC-0003", "target_kind": "record", "candidate_ids": []}], "has_else": false, "then_line_range": [181, 187], "else_line_range": null, "end_if_line": 188, "nested_depth": 1, "outcomes": [{"label": "THEN", "line_range": [181, 187], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0044-STMT-000070", "SYS-PORTFOLIO-001-FIL-0044-STMT-000071", "SYS-PORTFOLIO-001-FIL-0044-STMT-000072"], "effect": "COMMIT WORK; reset WS-COMMIT-COUNT; PERFORM 2310-UPDATE-CHECKPOINT"}]}
     ]
   },
   {
     "paragraph": "2310-UPDATE-CHECKPOINT",
     "paragraph_id": "SYS-PORTFOLIO-001-FIL-0044-PAR-0011",
     "branches": [
-      {"type": "INVALID_KEY", "operation": "REWRITE", "file_name": "BATCH-CONTROL-FILE", "line": 195, "statement_id": "SYS-PORTFOLIO-001-FIL-0044-STMT-000046", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0044-PAR-0011",
-       "condition_text": "REWRITE BATCH-CONTROL-RECORD INVALID KEY", "condition_fields": ["BATCH-CONTROL-RECORD"],
-       "condition_field_ids": [{"name": "BATCH-CONTROL-RECORD", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0002-REC-0001", "target_kind": "record", "candidate_ids": []}],
-       "io_status_field": "WS-BCT-STATUS", "invalid_key_line_range": [197, 198], "not_invalid_key_line_range": null, "end_line": 199, "nested_depth": 1,
-       "outcomes": [
-         {"label": "INVALID KEY", "line_range": [197, 198], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0044-STMT-000073", "SYS-PORTFOLIO-001-FIL-0044-STMT-000074"]},
-         {"label": "rewrite succeeded (no NOT INVALID KEY clause)", "line_range": null, "statement_ids": []}
-       ]}
+      {"type": "INVALID_KEY", "operation": "REWRITE", "file_name": "BATCH-CONTROL-FILE", "line": 195, "statement_id": "SYS-PORTFOLIO-001-FIL-0044-STMT-000046", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0044-PAR-0011", "condition_text": "INVALID KEY (REWRITE BATCH-CONTROL-RECORD)", "condition_fields": ["BATCH-CONTROL-FILE"], "condition_field_ids": [], "condition_fields_note": "BATCH-CONTROL-FILE is a file name (not a data item) and is not looked up", "invalid_key_line_range": [196, 198], "io_status_field": "WS-BCT-STATUS", "io_status_field_id": "SYS-PORTFOLIO-001-FIL-0044-FLD-000002", "nested_depth": 1, "outcomes": [{"label": "INVALID KEY", "line_range": [196, 198], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0044-STMT-000073", "SYS-PORTFOLIO-001-FIL-0044-STMT-000074"], "effect": "ERR-TEXT = 'Error updating checkpoint'; PERFORM 9000-ERROR-ROUTINE"}]}
     ]
   }
 ],
 "loops": [
-  {"paragraph": "0000-MAIN", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0044-PAR-0001", "target": "2000-PROCESS", "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0044-PAR-0003", "type": "PERFORM_UNTIL",
-   "condition_fields": ["END-OF-FILE", "WS-ERROR-COUNT"],
-   "condition_field_ids": [
-     {"name": "END-OF-FILE", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0044-FLD-000008", "target_kind": "condition", "candidate_ids": []},
-     {"name": "WS-ERROR-COUNT", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0044-FLD-000005", "target_kind": "field", "candidate_ids": []}
-   ],
-   "termination_pattern": "FILE_EXHAUSTION_LOOP",
-   "modifying_statement_ids": ["SYS-PORTFOLIO-001-FIL-0044-STMT-000066", "SYS-PORTFOLIO-001-FIL-0044-STMT-000075"],
-   "line": 70, "statement_id": "SYS-PORTFOLIO-001-FIL-0044-STMT-000002"}
+  {"paragraph": "0000-MAIN", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0044-PAR-0001", "target": "2000-PROCESS", "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0044-PAR-0003", "type": "PERFORM_UNTIL", "line": 70, "statement_id": "SYS-PORTFOLIO-001-FIL-0044-STMT-000002", "condition_text": "END-OF-FILE OR WS-ERROR-COUNT > 100", "condition_fields": ["END-OF-FILE", "WS-ERROR-COUNT"], "condition_field_ids": [{"name": "END-OF-FILE", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0044-FLD-000008", "target_kind": "condition", "candidate_ids": []}, {"name": "WS-ERROR-COUNT", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0044-FLD-000005", "target_kind": "field", "candidate_ids": []}], "test_time": "BEFORE", "loop_type": "WHILE", "termination_pattern": "FILE_EXHAUSTION_LOOP", "secondary_termination": "WS-ERROR-COUNT incremented by ADD 1 at line 171 (DB2 insert error other than -803); loop also stops after more than 100 such errors", "modifying_statement_ids": ["SYS-PORTFOLIO-001-FIL-0044-STMT-000066", "SYS-PORTFOLIO-001-FIL-0044-STMT-000075"], "modifying_statements": [{"statement_id": "SYS-PORTFOLIO-001-FIL-0044-STMT-000066", "line": 137, "text": "SET END-OF-FILE TO TRUE (READ AT END)"}, {"statement_id": "SYS-PORTFOLIO-001-FIL-0044-STMT-000075", "line": 171, "text": "ADD 1 TO WS-ERROR-COUNT"}]}
 ],
 "dead_code_confirmed": [],
 "unresolvable_paths": [
-  {"paragraph": "1200-CONNECT-DB2", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0044-PAR-0006", "statement_id": "SYS-PORTFOLIO-001-FIL-0044-STMT-000019", "line": 117, "target": "CONNECT-TO-DB2", "reason": "PERFORM target not in CFG: not a paragraph or section of HISTLD00. Agent 3 reports paragraphs with this name inside copybook DBPROC (lines 26-63), but COPY DBPROC is in WORKING-STORAGE (line 45), so no procedure paragraph is registered for this program."},
-  {"paragraph": "2200-LOAD-TO-DB2", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0044-PAR-0009", "statement_id": "SYS-PORTFOLIO-001-FIL-0044-STMT-000076", "line": 172, "target": "DB2-ERROR-ROUTINE", "reason": "PERFORM target not in CFG: not a paragraph or section of HISTLD00 (name appears in copybook DBPROC procedure code per Agent 3; not registered for this program)."},
-  {"paragraph": "3300-DISCONNECT-DB2", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0044-PAR-0014", "statement_id": "SYS-PORTFOLIO-001-FIL-0044-STMT-000050", "line": 216, "target": "DISCONNECT-FROM-DB2", "reason": "PERFORM target not in CFG: not a paragraph or section of HISTLD00 (name appears in copybook DBPROC procedure code per Agent 3; not registered for this program)."}
+  {"statement_id": "SYS-PORTFOLIO-001-FIL-0044-STMT-000019", "paragraph": "1200-CONNECT-DB2", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0044-PAR-0006", "target": "CONNECT-TO-DB2", "target_paragraph_id": null, "line": 117, "reason": "PERFORM target not defined in the program (Agent 2 CFG edge resolved=false). Agent 3 reports that copybook DBPROC (FIL-0015) contains procedure code with a paragraph of this name (lines 26-63), but COPY DBPROC is placed in WORKING-STORAGE (line 45), not in the PROCEDURE DIVISION; not traced"},
+  {"statement_id": "SYS-PORTFOLIO-001-FIL-0044-STMT-000076", "paragraph": "2200-LOAD-TO-DB2", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0044-PAR-0009", "target": "DB2-ERROR-ROUTINE", "target_paragraph_id": null, "line": 172, "reason": "PERFORM target not defined in the program; same DBPROC situation as CONNECT-TO-DB2"},
+  {"statement_id": "SYS-PORTFOLIO-001-FIL-0044-STMT-000050", "paragraph": "3300-DISCONNECT-DB2", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0044-PAR-0014", "target": "DISCONNECT-FROM-DB2", "target_paragraph_id": null, "line": 216, "reason": "PERFORM target not defined in the program; same DBPROC situation as CONNECT-TO-DB2"}
 ],
 "trace_issues": [
-  {"severity": "info", "type": "upstream_issue", "upstream_agent": "2_parser", "upstream_type": "misplaced_comment_indicator", "lines": [1, 6], "message": "Lines with '*' in column 8 treated as comments."},
-  {"severity": "info", "type": "upstream_issue", "upstream_agent": "2_parser", "upstream_type": "unresolved_target", "message": "PERFORM CONNECT-TO-DB2 (line 117), DB2-ERROR-ROUTINE (line 172) and DISCONNECT-FROM-DB2 (line 216): targets not found among this program's paragraphs or sections; may be in a COPYed member (DBPROC, line 45) or external. No relationship registered."},
-  {"severity": "info", "type": "upstream_issue", "upstream_agent": "3_data", "upstream_type": "fd_record_from_copybook", "line": 34, "message": "FD TRANSACTION-HISTORY record is HISTORY-RECORD from COPY HISTREC (SYS-PORTFOLIO-001-FIL-0008-REC-0001)."},
-  {"severity": "info", "type": "upstream_issue", "upstream_agent": "3_data", "upstream_type": "record_key_not_found", "line": 21, "message": "RECORD KEY TH-KEY of SELECT TRANSACTION-HISTORY is not declared in HISTLD00 nor in HISTREC; no data item named TH-KEY in any copybook."},
-  {"severity": "info", "type": "upstream_issue", "upstream_agent": "3_data", "upstream_type": "fd_record_from_copybook", "line": 37, "message": "FD BATCH-CONTROL-FILE record is BATCH-CONTROL-RECORD from COPY BCHCTL (SYS-PORTFOLIO-001-FIL-0002-REC-0001); RECORD KEY BCT-KEY declared in BCHCTL."},
-  {"severity": "info", "type": "upstream_issue", "upstream_agent": "3_data", "upstream_type": "copy_in_sql_declare_section", "line": 41, "message": "COPY DBTBLS is inside EXEC SQL BEGIN/END DECLARE SECTION (lines 40-42); expanded as a normal COPY."},
-  {"severity": "info", "type": "upstream_issue", "upstream_agent": "3_data", "upstream_type": "procedure_code_in_copybook", "line": 45, "message": "Copybook DBPROC contains procedure code (paragraphs CONNECT-TO-DB2, DISCONNECT-FROM-DB2, DB2-ERROR-ROUTINE, CHECK-SQL-STATUS, copybook lines 26-63); not parsed as data. Explains the three unresolved PERFORM targets; their logic is not filled in here."},
-  {"severity": "info", "type": "upstream_issue", "upstream_agent": "3_data", "upstream_type": "unresolved_copy_stub", "line": 44, "message": "Copybook SQLCA self-includes (EXEC SQL INCLUDE SQLCA); the precompiler SQLCA (SQLCODE, SQLSTATE) is not defined in the repository, so SQLCODE is unresolved."},
-  {"severity": "warning", "type": "unresolvable_perform_target", "statement_ids": ["SYS-PORTFOLIO-001-FIL-0044-STMT-000019", "SYS-PORTFOLIO-001-FIL-0044-STMT-000076", "SYS-PORTFOLIO-001-FIL-0044-STMT-000050"], "message": "3 PERFORM targets not in the CFG; recorded as unresolvable steps with null target IDs (DB2 connect, DB2 error handling, DB2 disconnect)."},
-  {"severity": "info", "type": "field_id_unresolved", "names": ["SQLCODE"], "lines": [165, 168], "message": "resolve-field-references UNRESOLVED; SQLCODE is a precompiler-supplied SQLCA item; target_id null."},
-  {"severity": "info", "type": "field_id_unresolved", "names": ["TH-ACCOUNT-NO", "TH-PORTFOLIO-ID", "TH-TRANS-DATE", "TH-TRANS-TIME", "TH-TRANS-TYPE", "TH-SECURITY-ID", "TH-QUANTITY", "TH-PRICE", "TH-AMOUNT", "TH-FEES", "TH-TOTAL-AMOUNT", "TH-COST-BASIS", "TH-GAIN-LOSS"], "lines": [146, 158], "message": "resolve-field-references UNRESOLVED: no TH-* items exist; the TRANSACTION-HISTORY record (HISTREC) defines HIST-* fields only. target_id null."},
-  {"severity": "info", "type": "field_id_unresolved", "names": ["BCT-RECORDS-READ", "BCT-RECORDS-WRITTEN"], "lines": [192, 193], "message": "resolve-field-references UNRESOLVED: not present in BATCH-CONTROL-RECORD (copybook BCHCTL); target_id null."},
-  {"severity": "warning", "type": "undeclared_data_names", "paragraph": "2200-LOAD-TO-DB2", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0044-PAR-0009", "lines": [146, 158], "message": "The 13 source fields of the history-to-DB2 mapping (TH-*) are not declared; which bytes of HISTORY-RECORD are loaded cannot be determined. Statements recorded verbatim and flagged ambiguous."},
-  {"severity": "warning", "type": "error_does_not_stop_processing", "statement_id": "SYS-PORTFOLIO-001-FIL-0044-STMT-000055", "message": "9000-ERROR-ROUTINE calls ERRPROC and issues ROLLBACK WORK but returns to its caller; open failures (lines 104-113), a missing control record (line 125) and checkpoint rewrite failures (line 196) do not end the run. After READ INVALID KEY in 1300-INIT-CHECKPOINTS the REWRITE at line 131 is still executed and its status is not checked."},
-  {"severity": "info", "type": "silent_duplicate_skip", "line": 168, "statement_id": "SYS-PORTFOLIO-001-FIL-0044-STMT-000068", "message": "SQLCODE -803 (duplicate key on INSERT) is ignored with CONTINUE: the row is neither counted as written nor as an error."},
-  {"severity": "info", "type": "loop_termination", "line": 70, "statement_id": "SYS-PORTFOLIO-001-FIL-0044-STMT-000002", "message": "Loop ends when READ ... AT END sets END-OF-FILE (STMT-000066, FILE_EXHAUSTION_LOOP) or when WS-ERROR-COUNT exceeds 100; WS-ERROR-COUNT is incremented only for INSERT failures other than -803 (STMT-000075)."},
-  {"severity": "info", "type": "external_call", "line": 228, "statement_id": "SYS-PORTFOLIO-001-FIL-0044-STMT-000056", "target": "ERRPROC", "message": "Static CALL 'ERRPROC' USING ERR-MESSAGE (inventory program src/programs/common/ERRPROC.cbl); its logic is not traced here."}
+  {"severity": "warning", "type": "unresolvable_perform", "statement_ids": ["SYS-PORTFOLIO-001-FIL-0044-STMT-000019", "SYS-PORTFOLIO-001-FIL-0044-STMT-000076", "SYS-PORTFOLIO-001-FIL-0044-STMT-000050"], "message": "PERFORM targets CONNECT-TO-DB2 (line 117), DB2-ERROR-ROUTINE (line 172) and DISCONNECT-FROM-DB2 (line 216) are not in the CFG; recorded as unresolvable steps. The DB2 connect, DB2 error handling and disconnect logic is therefore not traced"},
+  {"severity": "warning", "type": "undeclared_data_names", "names": ["TH-ACCOUNT-NO", "TH-PORTFOLIO-ID", "TH-TRANS-DATE", "TH-TRANS-TIME", "TH-TRANS-TYPE", "TH-SECURITY-ID", "TH-QUANTITY", "TH-PRICE", "TH-AMOUNT", "TH-FEES", "TH-TOTAL-AMOUNT", "TH-COST-BASIS", "TH-GAIN-LOSS"], "lines": [146, 158], "message": "2200-LOAD-TO-DB2 moves TH-* fields that are not declared anywhere in the program or its copybooks. The FD TRANSACTION-HISTORY record comes from COPY HISTREC, whose fields are named HIST-* (HISTORY-RECORD); the SELECT also names RECORD KEY TH-KEY, which is likewise undeclared. Field IDs are null; the source of these values cannot be determined statically"},
+  {"severity": "warning", "type": "undeclared_data_names", "names": ["BCT-RECORDS-READ", "BCT-RECORDS-WRITTEN"], "lines": [192, 193], "message": "2310-UPDATE-CHECKPOINT moves counters to BCT-RECORDS-READ and BCT-RECORDS-WRITTEN, which are not declared in BATCH-CONTROL-RECORD (copybook BCHCTL) or elsewhere. Field IDs are null"},
+  {"severity": "info", "type": "field_id_unresolved", "name": "SQLCODE", "lines": [165, 168], "message": "SQLCODE has no ACTIVE data item in this program or its copybooks (the project SQLCA.cpy declares only SQL-STATUS-CODES). target_id null"},
+  {"severity": "info", "type": "error_routine_returns", "paragraph": "9000-ERROR-ROUTINE", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0044-PAR-0016", "message": "9000-ERROR-ROUTINE calls ERRPROC and issues ROLLBACK WORK but does not stop the program; after an OPEN failure, a missing control record or a failed checkpoint REWRITE, execution continues with the next statement of the caller"},
+  {"severity": "info", "type": "upstream_issue", "upstream_agent": "2_parser", "upstream_type": "unresolved_target", "message": "PERFORM targets CONNECT-TO-DB2, DB2-ERROR-ROUTINE and DISCONNECT-FROM-DB2 not found in the program; may come from COPY DBPROC (line 45); no relationships registered"},
+  {"severity": "info", "type": "upstream_issue", "upstream_agent": "2_parser", "upstream_type": "external_call", "line": 228, "message": "CALL 'ERRPROC' is an inter-program call; no intra-program control-flow edge"},
+  {"severity": "info", "type": "upstream_issue", "upstream_agent": "2_parser", "upstream_type": "misplaced_comment_indicator", "lines": [1], "message": "Comment indicator '*' in column 8 (not column 7) treated as a comment"},
+  {"severity": "info", "type": "upstream_issue", "upstream_agent": "3_data", "upstream_type": "upstream_partial", "message": "Agent 2 parse_status 'partial' (PROCEDURE DIVISION targets unresolved); DATA DIVISION processed normally"},
+  {"severity": "info", "type": "upstream_issue", "upstream_agent": "3_data", "upstream_type": "procedure_code_in_copybook", "file_id": "SYS-PORTFOLIO-001-FIL-0015", "message": "DBPROC.cpy lines 26-63 contain procedure code (paragraphs CONNECT-TO-DB2, DISCONNECT-FROM-DB2, DB2-ERROR-ROUTINE, CHECK-SQL-STATUS); not a data layout, skipped by Agent 3"},
+  {"severity": "info", "type": "upstream_issue", "upstream_agent": "3_data", "upstream_type": "duplicate_record_name", "record_ids": ["SYS-PORTFOLIO-001-FIL-0044-REC-0002", "SYS-PORTFOLIO-001-FIL-0072-REC-0002", "SYS-PORTFOLIO-001-FIL-0075-REC-0008", "SYS-PORTFOLIO-001-FIL-0077-REC-0007"], "message": "Record name WS-COUNTERS is declared in 4 sources; this program's counters resolve to SYS-PORTFOLIO-001-FIL-0044-REC-0002"},
+  {"severity": "info", "type": "upstream_issue", "upstream_agent": "3_data", "upstream_type": "unresolved_copy_stub", "file_id": "SYS-PORTFOLIO-001-FIL-0017", "message": "Copybook SQLCA contains EXEC SQL INCLUDE SQLCA (self-inclusion), recorded as an unresolved stub"},
+  {"severity": "info", "type": "no_goto_or_alter", "message": "No GO TO, ALTER or PERFORM THRU in this program"}
 ],
-"program_narrative": "Program HISTLD00 is a batch program that loads transaction history records into the DB2 table POSHIST. It opens the indexed file TRANSACTION-HISTORY for sequential input and the batch control file BATCH-CONTROL-FILE for update, connects to DB2 (through CONNECT-TO-DB2, which is not part of this program), reads the job's control record (key job name 'HISTLD00') and marks it active. The main loop reads history records one by one until end of file or until more than 100 load errors; for each record it copies 13 transaction fields into POSHIST-RECORD and inserts a row, counting rows written and errors, and silently skipping duplicate-key rows (SQLCODE -803). Every 1000 records it commits the DB2 work, resets the commit counter and rewrites the control record with the read/written counts as a checkpoint. At the end it commits, writes a final checkpoint, closes both files, disconnects from DB2, displays the read/written/error counts and returns the error count as the program return code. Error conditions handled: file open failures, missing control record, checkpoint rewrite failure (all via 9000-ERROR-ROUTINE, which calls ERRPROC and rolls back DB2 work but does not stop the run) and INSERT failures (via DB2-ERROR-ROUTINE, not traceable here). The source field names of the history mapping (TH-*) and the checkpoint counters are not declared, so those data movements cannot be fully traced.",
+"field_id_lookup": [
+  {"name": "END-OF-FILE", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0044-FLD-000008", "target_kind": "condition", "qualified_name": "WS-SWITCHES.WS-END-OF-FILE-SW.END-OF-FILE", "defined_in": "SYS-PORTFOLIO-001-FIL-0044", "candidate_ids": []},
+  {"name": "MORE-RECORDS", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0044-FLD-000009", "target_kind": "condition", "qualified_name": "WS-SWITCHES.WS-END-OF-FILE-SW.MORE-RECORDS", "defined_in": "SYS-PORTFOLIO-001-FIL-0044", "candidate_ids": []},
+  {"name": "WS-ERROR-COUNT", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0044-FLD-000005", "target_kind": "field", "qualified_name": "WS-COUNTERS.WS-ERROR-COUNT", "defined_in": "SYS-PORTFOLIO-001-FIL-0044", "candidate_ids": []},
+  {"name": "WS-TH-STATUS", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0044-FLD-000001", "target_kind": "field", "qualified_name": "WS-FILE-STATUS.WS-TH-STATUS", "defined_in": "SYS-PORTFOLIO-001-FIL-0044", "candidate_ids": []},
+  {"name": "WS-BCT-STATUS", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0044-FLD-000002", "target_kind": "field", "qualified_name": "WS-FILE-STATUS.WS-BCT-STATUS", "defined_in": "SYS-PORTFOLIO-001-FIL-0044", "candidate_ids": []},
+  {"name": "SQLCODE", "qualifiers": [], "resolution": "UNRESOLVED", "target_id": null, "target_kind": null, "qualified_name": null, "defined_in": null, "candidate_ids": []},
+  {"name": "WS-COMMIT-COUNT", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0044-FLD-000006", "target_kind": "field", "qualified_name": "WS-COUNTERS.WS-COMMIT-COUNT", "defined_in": "SYS-PORTFOLIO-001-FIL-0044", "candidate_ids": []},
+  {"name": "WS-COMMIT-THRESHOLD", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0044-REC-0003", "target_kind": "record", "qualified_name": "WS-COMMIT-THRESHOLD", "defined_in": "SYS-PORTFOLIO-001-FIL-0044", "candidate_ids": []},
+  {"name": "ERR-TEXT", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0007-FLD-000017", "target_kind": "field", "qualified_name": "ERR-MESSAGE.ERR-TEXT", "defined_in": "SYS-PORTFOLIO-001-FIL-0007", "candidate_ids": []},
+  {"name": "BCT-KEY", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0002-FLD-000001", "target_kind": "field", "qualified_name": "BATCH-CONTROL-RECORD.BCT-KEY", "defined_in": "SYS-PORTFOLIO-001-FIL-0002", "candidate_ids": []},
+  {"name": "BCT-JOB-NAME", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0002-FLD-000002", "target_kind": "field", "qualified_name": "BATCH-CONTROL-RECORD.BCT-KEY.BCT-JOB-NAME", "defined_in": "SYS-PORTFOLIO-001-FIL-0002", "candidate_ids": []},
+  {"name": "BCT-STAT-ACTIVE", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0001-FLD-000003", "target_kind": "field", "qualified_name": "BATCH-CONTROL-CONSTANTS.BCT-STAT-VALUES.BCT-STAT-ACTIVE", "defined_in": "SYS-PORTFOLIO-001-FIL-0001", "candidate_ids": []},
+  {"name": "BCT-STATUS", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0002-FLD-000006", "target_kind": "field", "qualified_name": "BATCH-CONTROL-RECORD.BCT-DATA.BCT-STATUS", "defined_in": "SYS-PORTFOLIO-001-FIL-0002", "candidate_ids": []},
+  {"name": "BATCH-CONTROL-RECORD", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0002-REC-0001", "target_kind": "record", "qualified_name": "BATCH-CONTROL-RECORD", "defined_in": "SYS-PORTFOLIO-001-FIL-0002", "candidate_ids": []},
+  {"name": "WS-RECORDS-READ", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0044-FLD-000003", "target_kind": "field", "qualified_name": "WS-COUNTERS.WS-RECORDS-READ", "defined_in": "SYS-PORTFOLIO-001-FIL-0044", "candidate_ids": []},
+  {"name": "WS-RECORDS-WRITTEN", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0044-FLD-000004", "target_kind": "field", "qualified_name": "WS-COUNTERS.WS-RECORDS-WRITTEN", "defined_in": "SYS-PORTFOLIO-001-FIL-0044", "candidate_ids": []},
+  {"name": "POSHIST-RECORD", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0016-REC-0001", "target_kind": "record", "qualified_name": "POSHIST-RECORD", "defined_in": "SYS-PORTFOLIO-001-FIL-0016", "candidate_ids": []},
+  {"name": "TH-ACCOUNT-NO", "qualifiers": [], "resolution": "UNRESOLVED", "target_id": null, "target_kind": null, "qualified_name": null, "defined_in": null, "candidate_ids": []},
+  {"name": "TH-PORTFOLIO-ID", "qualifiers": [], "resolution": "UNRESOLVED", "target_id": null, "target_kind": null, "qualified_name": null, "defined_in": null, "candidate_ids": []},
+  {"name": "TH-TRANS-DATE", "qualifiers": [], "resolution": "UNRESOLVED", "target_id": null, "target_kind": null, "qualified_name": null, "defined_in": null, "candidate_ids": []},
+  {"name": "TH-TRANS-TIME", "qualifiers": [], "resolution": "UNRESOLVED", "target_id": null, "target_kind": null, "qualified_name": null, "defined_in": null, "candidate_ids": []},
+  {"name": "TH-TRANS-TYPE", "qualifiers": [], "resolution": "UNRESOLVED", "target_id": null, "target_kind": null, "qualified_name": null, "defined_in": null, "candidate_ids": []},
+  {"name": "TH-SECURITY-ID", "qualifiers": [], "resolution": "UNRESOLVED", "target_id": null, "target_kind": null, "qualified_name": null, "defined_in": null, "candidate_ids": []},
+  {"name": "TH-QUANTITY", "qualifiers": [], "resolution": "UNRESOLVED", "target_id": null, "target_kind": null, "qualified_name": null, "defined_in": null, "candidate_ids": []},
+  {"name": "TH-PRICE", "qualifiers": [], "resolution": "UNRESOLVED", "target_id": null, "target_kind": null, "qualified_name": null, "defined_in": null, "candidate_ids": []},
+  {"name": "TH-AMOUNT", "qualifiers": [], "resolution": "UNRESOLVED", "target_id": null, "target_kind": null, "qualified_name": null, "defined_in": null, "candidate_ids": []},
+  {"name": "TH-FEES", "qualifiers": [], "resolution": "UNRESOLVED", "target_id": null, "target_kind": null, "qualified_name": null, "defined_in": null, "candidate_ids": []},
+  {"name": "TH-TOTAL-AMOUNT", "qualifiers": [], "resolution": "UNRESOLVED", "target_id": null, "target_kind": null, "qualified_name": null, "defined_in": null, "candidate_ids": []},
+  {"name": "TH-COST-BASIS", "qualifiers": [], "resolution": "UNRESOLVED", "target_id": null, "target_kind": null, "qualified_name": null, "defined_in": null, "candidate_ids": []},
+  {"name": "TH-GAIN-LOSS", "qualifiers": [], "resolution": "UNRESOLVED", "target_id": null, "target_kind": null, "qualified_name": null, "defined_in": null, "candidate_ids": []},
+  {"name": "PH-ACCOUNT-NO", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0016-FLD-000001", "target_kind": "field", "qualified_name": "POSHIST-RECORD.PH-ACCOUNT-NO", "defined_in": "SYS-PORTFOLIO-001-FIL-0016", "candidate_ids": []},
+  {"name": "PH-PORTFOLIO-ID", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0016-FLD-000002", "target_kind": "field", "qualified_name": "POSHIST-RECORD.PH-PORTFOLIO-ID", "defined_in": "SYS-PORTFOLIO-001-FIL-0016", "candidate_ids": []},
+  {"name": "PH-TRANS-DATE", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0016-FLD-000003", "target_kind": "field", "qualified_name": "POSHIST-RECORD.PH-TRANS-DATE", "defined_in": "SYS-PORTFOLIO-001-FIL-0016", "candidate_ids": []},
+  {"name": "PH-TRANS-TIME", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0016-FLD-000004", "target_kind": "field", "qualified_name": "POSHIST-RECORD.PH-TRANS-TIME", "defined_in": "SYS-PORTFOLIO-001-FIL-0016", "candidate_ids": []},
+  {"name": "PH-TRANS-TYPE", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0016-FLD-000005", "target_kind": "field", "qualified_name": "POSHIST-RECORD.PH-TRANS-TYPE", "defined_in": "SYS-PORTFOLIO-001-FIL-0016", "candidate_ids": []},
+  {"name": "PH-SECURITY-ID", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0016-FLD-000006", "target_kind": "field", "qualified_name": "POSHIST-RECORD.PH-SECURITY-ID", "defined_in": "SYS-PORTFOLIO-001-FIL-0016", "candidate_ids": []},
+  {"name": "PH-QUANTITY", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0016-FLD-000007", "target_kind": "field", "qualified_name": "POSHIST-RECORD.PH-QUANTITY", "defined_in": "SYS-PORTFOLIO-001-FIL-0016", "candidate_ids": []},
+  {"name": "PH-PRICE", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0016-FLD-000008", "target_kind": "field", "qualified_name": "POSHIST-RECORD.PH-PRICE", "defined_in": "SYS-PORTFOLIO-001-FIL-0016", "candidate_ids": []},
+  {"name": "PH-AMOUNT", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0016-FLD-000009", "target_kind": "field", "qualified_name": "POSHIST-RECORD.PH-AMOUNT", "defined_in": "SYS-PORTFOLIO-001-FIL-0016", "candidate_ids": []},
+  {"name": "PH-FEES", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0016-FLD-000010", "target_kind": "field", "qualified_name": "POSHIST-RECORD.PH-FEES", "defined_in": "SYS-PORTFOLIO-001-FIL-0016", "candidate_ids": []},
+  {"name": "PH-TOTAL-AMOUNT", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0016-FLD-000011", "target_kind": "field", "qualified_name": "POSHIST-RECORD.PH-TOTAL-AMOUNT", "defined_in": "SYS-PORTFOLIO-001-FIL-0016", "candidate_ids": []},
+  {"name": "PH-COST-BASIS", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0016-FLD-000012", "target_kind": "field", "qualified_name": "POSHIST-RECORD.PH-COST-BASIS", "defined_in": "SYS-PORTFOLIO-001-FIL-0016", "candidate_ids": []},
+  {"name": "PH-GAIN-LOSS", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0016-FLD-000013", "target_kind": "field", "qualified_name": "POSHIST-RECORD.PH-GAIN-LOSS", "defined_in": "SYS-PORTFOLIO-001-FIL-0016", "candidate_ids": []},
+  {"name": "BCT-RECORDS-READ", "qualifiers": [], "resolution": "UNRESOLVED", "target_id": null, "target_kind": null, "qualified_name": null, "defined_in": null, "candidate_ids": []},
+  {"name": "BCT-RECORDS-WRITTEN", "qualifiers": [], "resolution": "UNRESOLVED", "target_id": null, "target_kind": null, "qualified_name": null, "defined_in": null, "candidate_ids": []},
+  {"name": "ERR-PROGRAM", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0007-FLD-000013", "target_kind": "field", "qualified_name": "ERR-MESSAGE.ERR-PROGRAM", "defined_in": "SYS-PORTFOLIO-001-FIL-0007", "candidate_ids": []},
+  {"name": "ERR-MESSAGE", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0007-REC-0003", "target_kind": "record", "qualified_name": "ERR-MESSAGE", "defined_in": "SYS-PORTFOLIO-001-FIL-0007", "candidate_ids": []}
+],
+"program_narrative": "HISTLD00 is a batch program that loads transaction-history records from the indexed file TRANSACTION-HISTORY into the DB2 table POSHIST. It opens the history file for input and the batch-control file for update, connects to DB2 (through a paragraph that is not defined in this source), reads the HISTLD00 batch-control record and marks it active. The main loop reads history records sequentially until end of file or until more than 100 DB2 insert errors have occurred; each record read is copied field by field into the POSHIST-RECORD host structure and inserted into POSHIST, where a successful insert is counted, a duplicate key (SQLCODE -803) is silently skipped and any other SQL error is counted and passed to a DB2 error routine that is not defined in this source. Every WS-COMMIT-THRESHOLD (1000) loaded records the program commits and rewrites the batch-control checkpoint; at the end it commits, checkpoints, closes the files, disconnects from DB2 (undefined paragraph), displays read/written/error counts and returns the error count as RETURN-CODE. File-open errors, a missing control record and checkpoint rewrite failures go to 9000-ERROR-ROUTINE, which calls ERRPROC and rolls back but lets processing continue. The source fields moved into POSHIST (TH-*) and two checkpoint counters (BCT-RECORDS-READ/WRITTEN) are not declared in the program or its copybooks.",
 "paragraphs": [
   {
-    "name": "0000-MAIN",
-    "paragraph_id": "SYS-PORTFOLIO-001-FIL-0044-PAR-0001",
-    "section": null,
-    "section_id": null,
-    "line_range": [67, 79],
+    "name": "0000-MAIN", "section": null, "paragraph_id": "SYS-PORTFOLIO-001-FIL-0044-PAR-0001", "section_id": null, "line_range": [67, 79],
     "pseudocode": [
       "-- Main control: initialise, load all history records, terminate",
       "CALL 1000-initialize",
-      "WHILE NOT end_of_file AND ws_error_count <= 100 DO  -- PERFORM UNTIL END-OF-FILE OR WS-ERROR-COUNT > 100 (tested before each pass)",
+      "WHILE NOT (end of history file (END-OF-FILE) OR ws_error_count > 100) DO",
       "  CALL 2000-process",
       "END WHILE",
       "CALL 3000-terminate",
-      "SET program_return_code = ws_error_count  -- RETURN-CODE special register",
+      "SET RETURN-CODE = ws_error_count  -- job step return code = number of DB2 insert errors",
       "RETURN to caller (or terminate if main program)  -- GOBACK"
     ],
-    "pseudocode_statement_ids": [
-      [],
-      ["SYS-PORTFOLIO-001-FIL-0044-STMT-000001"],
-      ["SYS-PORTFOLIO-001-FIL-0044-STMT-000002"],
-      ["SYS-PORTFOLIO-001-FIL-0044-STMT-000002"],
-      ["SYS-PORTFOLIO-001-FIL-0044-STMT-000002"],
-      ["SYS-PORTFOLIO-001-FIL-0044-STMT-000003"],
-      ["SYS-PORTFOLIO-001-FIL-0044-STMT-000004"],
-      ["SYS-PORTFOLIO-001-FIL-0044-STMT-000005"]
-    ],
-    "pseudocode_text": "-- Main control: initialise, load all history records, terminate\nCALL 1000-initialize\nWHILE NOT end_of_file AND ws_error_count <= 100 DO  -- PERFORM UNTIL END-OF-FILE OR WS-ERROR-COUNT > 100 (tested before each pass)\n  CALL 2000-process\nEND WHILE\nCALL 3000-terminate\nSET program_return_code = ws_error_count  -- RETURN-CODE special register\nRETURN to caller (or terminate if main program)  -- GOBACK",
+    "pseudocode_statement_ids": [[], ["SYS-PORTFOLIO-001-FIL-0044-STMT-000001"], ["SYS-PORTFOLIO-001-FIL-0044-STMT-000002"], ["SYS-PORTFOLIO-001-FIL-0044-STMT-000002"], ["SYS-PORTFOLIO-001-FIL-0044-STMT-000002"], ["SYS-PORTFOLIO-001-FIL-0044-STMT-000003"], ["SYS-PORTFOLIO-001-FIL-0044-STMT-000004"], ["SYS-PORTFOLIO-001-FIL-0044-STMT-000005"]],
+    "pseudocode_text": "-- Main control: initialise, load all history records, terminate\nCALL 1000-initialize\nWHILE NOT (end of history file (END-OF-FILE) OR ws_error_count > 100) DO\n  CALL 2000-process\nEND WHILE\nCALL 3000-terminate\nSET RETURN-CODE = ws_error_count  -- job step return code = number of DB2 insert errors\nRETURN to caller (or terminate if main program)  -- GOBACK",
     "statement_ids": ["SYS-PORTFOLIO-001-FIL-0044-STMT-000001", "SYS-PORTFOLIO-001-FIL-0044-STMT-000002", "SYS-PORTFOLIO-001-FIL-0044-STMT-000003", "SYS-PORTFOLIO-001-FIL-0044-STMT-000004", "SYS-PORTFOLIO-001-FIL-0044-STMT-000005"],
     "untranslated_statement_ids": [],
     "field_references": ["END-OF-FILE", "WS-ERROR-COUNT"],
@@ -290,27 +238,18 @@
     ],
     "complexity_score": 1,
     "has_unresolved_statements": false,
-    "annotations": [
-      {"line": 70, "statement_id": "SYS-PORTFOLIO-001-FIL-0044-STMT-000002", "note": "END-OF-FILE is the 88-level of WS-END-OF-FILE-SW (VALUE 'Y'); the switch starts as 'N' (MORE-RECORDS)."}
-    ]
+    "annotations": [{"line": 70, "statement_id": "SYS-PORTFOLIO-001-FIL-0044-STMT-000002", "note": "PERFORM ... UNTIL tests the condition before each iteration (WHILE loop). END-OF-FILE is set by READ AT END in 2100-READ-HISTORY; WS-ERROR-COUNT by 2200-LOAD-TO-DB2"}]
   },
   {
-    "name": "1000-INITIALIZE",
-    "paragraph_id": "SYS-PORTFOLIO-001-FIL-0044-PAR-0002",
-    "section": null,
-    "section_id": null,
-    "line_range": [80, 85],
+    "name": "1000-INITIALIZE", "section": null, "paragraph_id": "SYS-PORTFOLIO-001-FIL-0044-PAR-0002", "section_id": null, "line_range": [80, 85],
     "pseudocode": [
+      "-- Start-up: files, DB2 connection, checkpoint record",
       "CALL 1100-open-files",
       "CALL 1200-connect-db2",
       "CALL 1300-init-checkpoints"
     ],
-    "pseudocode_statement_ids": [
-      ["SYS-PORTFOLIO-001-FIL-0044-STMT-000006"],
-      ["SYS-PORTFOLIO-001-FIL-0044-STMT-000007"],
-      ["SYS-PORTFOLIO-001-FIL-0044-STMT-000008"]
-    ],
-    "pseudocode_text": "CALL 1100-open-files\nCALL 1200-connect-db2\nCALL 1300-init-checkpoints",
+    "pseudocode_statement_ids": [[], ["SYS-PORTFOLIO-001-FIL-0044-STMT-000006"], ["SYS-PORTFOLIO-001-FIL-0044-STMT-000007"], ["SYS-PORTFOLIO-001-FIL-0044-STMT-000008"]],
+    "pseudocode_text": "-- Start-up: files, DB2 connection, checkpoint record\nCALL 1100-open-files\nCALL 1200-connect-db2\nCALL 1300-init-checkpoints",
     "statement_ids": ["SYS-PORTFOLIO-001-FIL-0044-STMT-000006", "SYS-PORTFOLIO-001-FIL-0044-STMT-000007", "SYS-PORTFOLIO-001-FIL-0044-STMT-000008"],
     "untranslated_statement_ids": [],
     "field_references": [],
@@ -326,34 +265,21 @@
     "annotations": []
   },
   {
-    "name": "2000-PROCESS",
-    "paragraph_id": "SYS-PORTFOLIO-001-FIL-0044-PAR-0003",
-    "section": null,
-    "section_id": null,
-    "line_range": [86, 94],
+    "name": "2000-PROCESS", "section": null, "paragraph_id": "SYS-PORTFOLIO-001-FIL-0044-PAR-0003", "section_id": null, "line_range": [86, 94],
     "pseudocode": [
-      "-- One loop pass: read the next history record and, if one was read, load it and check the commit interval",
+      "-- One loop iteration: read a history record and load it",
       "CALL 2100-read-history",
-      "IF more_records THEN  -- MORE-RECORDS: ws_end_of_file_sw = 'N'",
+      "IF a record was read (MORE-RECORDS: end-of-file switch = 'N') THEN",
       "  CALL 2200-load-to-db2",
       "  CALL 2300-check-commit",
       "END IF"
     ],
-    "pseudocode_statement_ids": [
-      [],
-      ["SYS-PORTFOLIO-001-FIL-0044-STMT-000009"],
-      ["SYS-PORTFOLIO-001-FIL-0044-STMT-000010"],
-      ["SYS-PORTFOLIO-001-FIL-0044-STMT-000058"],
-      ["SYS-PORTFOLIO-001-FIL-0044-STMT-000059"],
-      ["SYS-PORTFOLIO-001-FIL-0044-STMT-000010"]
-    ],
-    "pseudocode_text": "-- One loop pass: read the next history record and, if one was read, load it and check the commit interval\nCALL 2100-read-history\nIF more_records THEN  -- MORE-RECORDS: ws_end_of_file_sw = 'N'\n  CALL 2200-load-to-db2\n  CALL 2300-check-commit\nEND IF",
+    "pseudocode_statement_ids": [[], ["SYS-PORTFOLIO-001-FIL-0044-STMT-000009"], ["SYS-PORTFOLIO-001-FIL-0044-STMT-000010"], ["SYS-PORTFOLIO-001-FIL-0044-STMT-000058"], ["SYS-PORTFOLIO-001-FIL-0044-STMT-000059"], ["SYS-PORTFOLIO-001-FIL-0044-STMT-000010"]],
+    "pseudocode_text": "-- One loop iteration: read a history record and load it\nCALL 2100-read-history\nIF a record was read (MORE-RECORDS: end-of-file switch = 'N') THEN\n  CALL 2200-load-to-db2\n  CALL 2300-check-commit\nEND IF",
     "statement_ids": ["SYS-PORTFOLIO-001-FIL-0044-STMT-000009", "SYS-PORTFOLIO-001-FIL-0044-STMT-000010", "SYS-PORTFOLIO-001-FIL-0044-STMT-000058", "SYS-PORTFOLIO-001-FIL-0044-STMT-000059"],
     "untranslated_statement_ids": [],
     "field_references": ["MORE-RECORDS"],
-    "field_reference_ids": [
-      {"name": "MORE-RECORDS", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0044-FLD-000009", "target_kind": "condition", "candidate_ids": []}
-    ],
+    "field_reference_ids": [{"name": "MORE-RECORDS", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0044-FLD-000009", "target_kind": "condition", "candidate_ids": []}],
     "calls_made": ["2100-READ-HISTORY", "2200-LOAD-TO-DB2", "2300-CHECK-COMMIT"],
     "calls_made_ids": [
       {"name": "2100-READ-HISTORY", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0044-PAR-0008", "section_id": null},
@@ -362,27 +288,19 @@
     ],
     "complexity_score": 1,
     "has_unresolved_statements": false,
-    "annotations": []
+    "annotations": [{"line": 91, "statement_id": "SYS-PORTFOLIO-001-FIL-0044-STMT-000059", "note": "2300-CHECK-COMMIT is performed for every record read, so the commit interval counts records read (including duplicates and failed inserts), not records written"}]
   },
   {
-    "name": "3000-TERMINATE",
-    "paragraph_id": "SYS-PORTFOLIO-001-FIL-0044-PAR-0004",
-    "section": null,
-    "section_id": null,
-    "line_range": [95, 101],
+    "name": "3000-TERMINATE", "section": null, "paragraph_id": "SYS-PORTFOLIO-001-FIL-0044-PAR-0004", "section_id": null, "line_range": [95, 101],
     "pseudocode": [
+      "-- Shut-down: commit, close, disconnect, report",
       "CALL 3100-final-commit",
       "CALL 3200-close-files",
       "CALL 3300-disconnect-db2",
       "CALL 3400-display-stats"
     ],
-    "pseudocode_statement_ids": [
-      ["SYS-PORTFOLIO-001-FIL-0044-STMT-000011"],
-      ["SYS-PORTFOLIO-001-FIL-0044-STMT-000012"],
-      ["SYS-PORTFOLIO-001-FIL-0044-STMT-000013"],
-      ["SYS-PORTFOLIO-001-FIL-0044-STMT-000014"]
-    ],
-    "pseudocode_text": "CALL 3100-final-commit\nCALL 3200-close-files\nCALL 3300-disconnect-db2\nCALL 3400-display-stats",
+    "pseudocode_statement_ids": [[], ["SYS-PORTFOLIO-001-FIL-0044-STMT-000011"], ["SYS-PORTFOLIO-001-FIL-0044-STMT-000012"], ["SYS-PORTFOLIO-001-FIL-0044-STMT-000013"], ["SYS-PORTFOLIO-001-FIL-0044-STMT-000014"]],
+    "pseudocode_text": "-- Shut-down: commit, close, disconnect, report\nCALL 3100-final-commit\nCALL 3200-close-files\nCALL 3300-disconnect-db2\nCALL 3400-display-stats",
     "statement_ids": ["SYS-PORTFOLIO-001-FIL-0044-STMT-000011", "SYS-PORTFOLIO-001-FIL-0044-STMT-000012", "SYS-PORTFOLIO-001-FIL-0044-STMT-000013", "SYS-PORTFOLIO-001-FIL-0044-STMT-000014"],
     "untranslated_statement_ids": [],
     "field_references": [],
@@ -396,39 +314,25 @@
     ],
     "complexity_score": 1,
     "has_unresolved_statements": false,
-    "annotations": []
+    "annotations": [{"line": 96, "statement_id": "SYS-PORTFOLIO-001-FIL-0044-STMT-000011", "note": "The final COMMIT runs even when the loop ended because WS-ERROR-COUNT exceeded 100"}]
   },
   {
-    "name": "1100-OPEN-FILES",
-    "paragraph_id": "SYS-PORTFOLIO-001-FIL-0044-PAR-0005",
-    "section": null,
-    "section_id": null,
-    "line_range": [102, 115],
+    "name": "1100-OPEN-FILES", "section": null, "paragraph_id": "SYS-PORTFOLIO-001-FIL-0044-PAR-0005", "section_id": null, "line_range": [102, 115],
     "pseudocode": [
-      "OPEN TRANSACTION-HISTORY for READ-ONLY  -- indexed, sequential access; status in ws_th_status",
-      "IF ws_th_status != '00' THEN",
+      "-- Open the history file (input) and the batch-control file (update)",
+      "OPEN TRANSACTION-HISTORY for READ-ONLY",
+      "IF history file status ws_th_status != '00' THEN",
       "  SET err_text = 'Error opening history file'",
-      "  CALL 9000-error-routine  -- reports the error and returns; processing continues",
+      "  CALL 9000-error-routine  -- returns; processing continues",
       "END IF",
-      "OPEN BATCH-CONTROL-FILE for READ-WRITE  -- indexed, dynamic access; status in ws_bct_status",
-      "IF ws_bct_status != '00' THEN",
+      "OPEN BATCH-CONTROL-FILE for READ-WRITE",
+      "IF control file status ws_bct_status != '00' THEN",
       "  SET err_text = 'Error opening control file'",
-      "  CALL 9000-error-routine  -- reports the error and returns; processing continues",
+      "  CALL 9000-error-routine  -- returns; processing continues",
       "END IF"
     ],
-    "pseudocode_statement_ids": [
-      ["SYS-PORTFOLIO-001-FIL-0044-STMT-000015"],
-      ["SYS-PORTFOLIO-001-FIL-0044-STMT-000016"],
-      ["SYS-PORTFOLIO-001-FIL-0044-STMT-000060"],
-      ["SYS-PORTFOLIO-001-FIL-0044-STMT-000061"],
-      ["SYS-PORTFOLIO-001-FIL-0044-STMT-000016"],
-      ["SYS-PORTFOLIO-001-FIL-0044-STMT-000017"],
-      ["SYS-PORTFOLIO-001-FIL-0044-STMT-000018"],
-      ["SYS-PORTFOLIO-001-FIL-0044-STMT-000062"],
-      ["SYS-PORTFOLIO-001-FIL-0044-STMT-000063"],
-      ["SYS-PORTFOLIO-001-FIL-0044-STMT-000018"]
-    ],
-    "pseudocode_text": "OPEN TRANSACTION-HISTORY for READ-ONLY  -- indexed, sequential access; status in ws_th_status\nIF ws_th_status != '00' THEN\n  SET err_text = 'Error opening history file'\n  CALL 9000-error-routine  -- reports the error and returns; processing continues\nEND IF\nOPEN BATCH-CONTROL-FILE for READ-WRITE  -- indexed, dynamic access; status in ws_bct_status\nIF ws_bct_status != '00' THEN\n  SET err_text = 'Error opening control file'\n  CALL 9000-error-routine  -- reports the error and returns; processing continues\nEND IF",
+    "pseudocode_statement_ids": [[], ["SYS-PORTFOLIO-001-FIL-0044-STMT-000015"], ["SYS-PORTFOLIO-001-FIL-0044-STMT-000016"], ["SYS-PORTFOLIO-001-FIL-0044-STMT-000060"], ["SYS-PORTFOLIO-001-FIL-0044-STMT-000061"], ["SYS-PORTFOLIO-001-FIL-0044-STMT-000016"], ["SYS-PORTFOLIO-001-FIL-0044-STMT-000017"], ["SYS-PORTFOLIO-001-FIL-0044-STMT-000018"], ["SYS-PORTFOLIO-001-FIL-0044-STMT-000062"], ["SYS-PORTFOLIO-001-FIL-0044-STMT-000063"], ["SYS-PORTFOLIO-001-FIL-0044-STMT-000018"]],
+    "pseudocode_text": "-- Open the history file (input) and the batch-control file (update)\nOPEN TRANSACTION-HISTORY for READ-ONLY\nIF history file status ws_th_status != '00' THEN\n  SET err_text = 'Error opening history file'\n  CALL 9000-error-routine  -- returns; processing continues\nEND IF\nOPEN BATCH-CONTROL-FILE for READ-WRITE\nIF control file status ws_bct_status != '00' THEN\n  SET err_text = 'Error opening control file'\n  CALL 9000-error-routine  -- returns; processing continues\nEND IF",
     "statement_ids": ["SYS-PORTFOLIO-001-FIL-0044-STMT-000015", "SYS-PORTFOLIO-001-FIL-0044-STMT-000016", "SYS-PORTFOLIO-001-FIL-0044-STMT-000060", "SYS-PORTFOLIO-001-FIL-0044-STMT-000061", "SYS-PORTFOLIO-001-FIL-0044-STMT-000017", "SYS-PORTFOLIO-001-FIL-0044-STMT-000018", "SYS-PORTFOLIO-001-FIL-0044-STMT-000062", "SYS-PORTFOLIO-001-FIL-0044-STMT-000063"],
     "untranslated_statement_ids": [],
     "field_references": ["WS-TH-STATUS", "WS-BCT-STATUS", "ERR-TEXT"],
@@ -438,67 +342,45 @@
       {"name": "ERR-TEXT", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0007-FLD-000017", "target_kind": "field", "candidate_ids": []}
     ],
     "calls_made": ["9000-ERROR-ROUTINE"],
-    "calls_made_ids": [
-      {"name": "9000-ERROR-ROUTINE", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0044-PAR-0016", "section_id": null}
-    ],
+    "calls_made_ids": [{"name": "9000-ERROR-ROUTINE", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0044-PAR-0016", "section_id": null}],
     "complexity_score": 4,
     "has_unresolved_statements": false,
     "annotations": []
   },
   {
-    "name": "1200-CONNECT-DB2",
-    "paragraph_id": "SYS-PORTFOLIO-001-FIL-0044-PAR-0006",
-    "section": null,
-    "section_id": null,
-    "line_range": [116, 119],
+    "name": "1200-CONNECT-DB2", "section": null, "paragraph_id": "SYS-PORTFOLIO-001-FIL-0044-PAR-0006", "section_id": null, "line_range": [116, 119],
     "pseudocode": [
-      "CALL connect-to-db2  !! UNRESOLVED: not a paragraph of HISTLD00 (procedure code of copybook DBPROC per Agent 3); DB2 connection logic not traced"
+      "-- Connect to DB2",
+      "CALL connect-to-db2  !! UNRESOLVED: paragraph not defined in this program (DBPROC copybook names a paragraph CONNECT-TO-DB2, but COPY DBPROC is in WORKING-STORAGE)"
     ],
-    "pseudocode_statement_ids": [["SYS-PORTFOLIO-001-FIL-0044-STMT-000019"]],
-    "pseudocode_text": "CALL connect-to-db2  !! UNRESOLVED: not a paragraph of HISTLD00 (procedure code of copybook DBPROC per Agent 3); DB2 connection logic not traced",
+    "pseudocode_statement_ids": [[], ["SYS-PORTFOLIO-001-FIL-0044-STMT-000019"]],
+    "pseudocode_text": "-- Connect to DB2\nCALL connect-to-db2  !! UNRESOLVED: paragraph not defined in this program (DBPROC copybook names a paragraph CONNECT-TO-DB2, but COPY DBPROC is in WORKING-STORAGE)",
     "statement_ids": ["SYS-PORTFOLIO-001-FIL-0044-STMT-000019"],
     "untranslated_statement_ids": [],
     "field_references": [],
     "field_reference_ids": [],
     "calls_made": ["CONNECT-TO-DB2"],
-    "calls_made_ids": [
-      {"name": "CONNECT-TO-DB2", "paragraph_id": null, "section_id": null}
-    ],
+    "calls_made_ids": [{"name": "CONNECT-TO-DB2", "paragraph_id": null, "section_id": null}],
     "complexity_score": 1,
     "has_unresolved_statements": true,
-    "annotations": []
+    "annotations": [{"line": 117, "statement_id": "SYS-PORTFOLIO-001-FIL-0044-STMT-000019", "note": "-- body defined in copybook DBPROC (procedure code, lines 26-63 per Agent 3); not part of this program's PROCEDURE DIVISION as written. Flagged for the Data Agent / SME"}]
   },
   {
-    "name": "1300-INIT-CHECKPOINTS",
-    "paragraph_id": "SYS-PORTFOLIO-001-FIL-0044-PAR-0007",
-    "section": null,
-    "section_id": null,
-    "line_range": [120, 133],
+    "name": "1300-INIT-CHECKPOINTS", "section": null, "paragraph_id": "SYS-PORTFOLIO-001-FIL-0044-PAR-0007", "section_id": null, "line_range": [120, 133],
     "pseudocode": [
-      "-- Read this job's control record and mark it active",
-      "CLEAR bct_key  -- spaces: job name, process date and sequence number",
+      "-- Read this job's batch-control record and mark it active",
+      "CLEAR bct_key  -- spaces",
       "SET bct_job_name = 'HISTLD00'",
-      "READ record from BATCH-CONTROL-FILE where key = bct_key  -- random read (dynamic access, no NEXT)",
-      "IF record not found THEN  -- INVALID KEY",
+      "READ record from BATCH-CONTROL-FILE where key = bct_key",
+      "IF record not found (INVALID KEY) THEN",
       "  SET err_text = 'Control record not found'",
-      "  CALL 9000-error-routine  -- reports and returns; processing continues",
+      "  CALL 9000-error-routine  -- returns; processing continues",
       "END IF",
-      "SET bct_status = bct_stat_active  -- 'A' (active)",
-      "UPDATE existing batch_control_record in BATCH-CONTROL-FILE  -- REWRITE; no INVALID KEY clause, status not checked"
+      "SET bct_status = bct_stat_active  -- 'A' (active), from BCHCON constants",
+      "UPDATE existing batch_control_record in BATCH-CONTROL-FILE  -- REWRITE, no INVALID KEY clause"
     ],
-    "pseudocode_statement_ids": [
-      [],
-      ["SYS-PORTFOLIO-001-FIL-0044-STMT-000020"],
-      ["SYS-PORTFOLIO-001-FIL-0044-STMT-000021"],
-      ["SYS-PORTFOLIO-001-FIL-0044-STMT-000022"],
-      ["SYS-PORTFOLIO-001-FIL-0044-STMT-000022"],
-      ["SYS-PORTFOLIO-001-FIL-0044-STMT-000064"],
-      ["SYS-PORTFOLIO-001-FIL-0044-STMT-000065"],
-      ["SYS-PORTFOLIO-001-FIL-0044-STMT-000022"],
-      ["SYS-PORTFOLIO-001-FIL-0044-STMT-000023"],
-      ["SYS-PORTFOLIO-001-FIL-0044-STMT-000024"]
-    ],
-    "pseudocode_text": "-- Read this job's control record and mark it active\nCLEAR bct_key  -- spaces: job name, process date and sequence number\nSET bct_job_name = 'HISTLD00'\nREAD record from BATCH-CONTROL-FILE where key = bct_key  -- random read (dynamic access, no NEXT)\nIF record not found THEN  -- INVALID KEY\n  SET err_text = 'Control record not found'\n  CALL 9000-error-routine  -- reports and returns; processing continues\nEND IF\nSET bct_status = bct_stat_active  -- 'A' (active)\nUPDATE existing batch_control_record in BATCH-CONTROL-FILE  -- REWRITE; no INVALID KEY clause, status not checked",
+    "pseudocode_statement_ids": [[], ["SYS-PORTFOLIO-001-FIL-0044-STMT-000020"], ["SYS-PORTFOLIO-001-FIL-0044-STMT-000021"], ["SYS-PORTFOLIO-001-FIL-0044-STMT-000022"], ["SYS-PORTFOLIO-001-FIL-0044-STMT-000022"], ["SYS-PORTFOLIO-001-FIL-0044-STMT-000064"], ["SYS-PORTFOLIO-001-FIL-0044-STMT-000065"], ["SYS-PORTFOLIO-001-FIL-0044-STMT-000022"], ["SYS-PORTFOLIO-001-FIL-0044-STMT-000023"], ["SYS-PORTFOLIO-001-FIL-0044-STMT-000024"]],
+    "pseudocode_text": "-- Read this job's batch-control record and mark it active\nCLEAR bct_key  -- spaces\nSET bct_job_name = 'HISTLD00'\nREAD record from BATCH-CONTROL-FILE where key = bct_key\nIF record not found (INVALID KEY) THEN\n  SET err_text = 'Control record not found'\n  CALL 9000-error-routine  -- returns; processing continues\nEND IF\nSET bct_status = bct_stat_active  -- 'A' (active), from BCHCON constants\nUPDATE existing batch_control_record in BATCH-CONTROL-FILE  -- REWRITE, no INVALID KEY clause",
     "statement_ids": ["SYS-PORTFOLIO-001-FIL-0044-STMT-000020", "SYS-PORTFOLIO-001-FIL-0044-STMT-000021", "SYS-PORTFOLIO-001-FIL-0044-STMT-000022", "SYS-PORTFOLIO-001-FIL-0044-STMT-000064", "SYS-PORTFOLIO-001-FIL-0044-STMT-000065", "SYS-PORTFOLIO-001-FIL-0044-STMT-000023", "SYS-PORTFOLIO-001-FIL-0044-STMT-000024"],
     "untranslated_statement_ids": [],
     "field_references": ["BCT-KEY", "BCT-JOB-NAME", "ERR-TEXT", "BCT-STAT-ACTIVE", "BCT-STATUS", "BATCH-CONTROL-RECORD"],
@@ -511,39 +393,27 @@
       {"name": "BATCH-CONTROL-RECORD", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0002-REC-0001", "target_kind": "record", "candidate_ids": []}
     ],
     "calls_made": ["9000-ERROR-ROUTINE"],
-    "calls_made_ids": [
-      {"name": "9000-ERROR-ROUTINE", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0044-PAR-0016", "section_id": null}
-    ],
+    "calls_made_ids": [{"name": "9000-ERROR-ROUTINE", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0044-PAR-0016", "section_id": null}],
     "complexity_score": 3,
     "has_unresolved_statements": false,
     "annotations": [
-      {"line": 121, "statement_id": "SYS-PORTFOLIO-001-FIL-0044-STMT-000020", "note": "BCT-KEY is a 20-byte group (BCT-JOB-NAME X(8), BCT-PROCESS-DATE X(8), BCT-SEQUENCE-NO 9(4)); the lookup key is 'HISTLD00' followed by 12 spaces."},
-      {"line": 131, "statement_id": "SYS-PORTFOLIO-001-FIL-0044-STMT-000024", "note": "The REWRITE runs even when the READ took the INVALID KEY branch."}
+      {"line": 124, "statement_id": "SYS-PORTFOLIO-001-FIL-0044-STMT-000022", "note": "BATCH-CONTROL-FILE has ACCESS MODE DYNAMIC, so READ without NEXT is a keyed (random) read on BCT-KEY = job name 'HISTLD00' with process date and sequence number set to spaces"},
+      {"line": 131, "statement_id": "SYS-PORTFOLIO-001-FIL-0044-STMT-000024", "note": "The REWRITE runs even if the READ failed (INVALID KEY path returns from 9000-ERROR-ROUTINE); its outcome is not checked"}
     ]
   },
   {
-    "name": "2100-READ-HISTORY",
-    "paragraph_id": "SYS-PORTFOLIO-001-FIL-0044-PAR-0008",
-    "section": null,
-    "section_id": null,
-    "line_range": [134, 142],
+    "name": "2100-READ-HISTORY", "section": null, "paragraph_id": "SYS-PORTFOLIO-001-FIL-0044-PAR-0008", "section_id": null, "line_range": [134, 142],
     "pseudocode": [
-      "READ next record from TRANSACTION-HISTORY  -- sequential read into its record area history_record",
+      "-- Read the next history record",
+      "READ next record from TRANSACTION-HISTORY",
       "IF end of file THEN",
-      "  SET end_of_file = TRUE  -- ws_end_of_file_sw = 'Y'",
+      "  SET end-of-file switch = 'Y'  -- SET END-OF-FILE TO TRUE",
       "ELSE",
       "  INCREMENT ws_records_read BY 1",
       "END IF"
     ],
-    "pseudocode_statement_ids": [
-      ["SYS-PORTFOLIO-001-FIL-0044-STMT-000025"],
-      ["SYS-PORTFOLIO-001-FIL-0044-STMT-000025"],
-      ["SYS-PORTFOLIO-001-FIL-0044-STMT-000066"],
-      ["SYS-PORTFOLIO-001-FIL-0044-STMT-000025"],
-      ["SYS-PORTFOLIO-001-FIL-0044-STMT-000067"],
-      ["SYS-PORTFOLIO-001-FIL-0044-STMT-000025"]
-    ],
-    "pseudocode_text": "READ next record from TRANSACTION-HISTORY  -- sequential read into its record area history_record\nIF end of file THEN\n  SET end_of_file = TRUE  -- ws_end_of_file_sw = 'Y'\nELSE\n  INCREMENT ws_records_read BY 1\nEND IF",
+    "pseudocode_statement_ids": [[], ["SYS-PORTFOLIO-001-FIL-0044-STMT-000025"], ["SYS-PORTFOLIO-001-FIL-0044-STMT-000025"], ["SYS-PORTFOLIO-001-FIL-0044-STMT-000066"], ["SYS-PORTFOLIO-001-FIL-0044-STMT-000025"], ["SYS-PORTFOLIO-001-FIL-0044-STMT-000067"], ["SYS-PORTFOLIO-001-FIL-0044-STMT-000025"]],
+    "pseudocode_text": "-- Read the next history record\nREAD next record from TRANSACTION-HISTORY\nIF end of file THEN\n  SET end-of-file switch = 'Y'  -- SET END-OF-FILE TO TRUE\nELSE\n  INCREMENT ws_records_read BY 1\nEND IF",
     "statement_ids": ["SYS-PORTFOLIO-001-FIL-0044-STMT-000025", "SYS-PORTFOLIO-001-FIL-0044-STMT-000066", "SYS-PORTFOLIO-001-FIL-0044-STMT-000067"],
     "untranslated_statement_ids": [],
     "field_references": ["END-OF-FILE", "WS-RECORDS-READ"],
@@ -555,73 +425,38 @@
     "calls_made_ids": [],
     "complexity_score": 2,
     "has_unresolved_statements": false,
-    "annotations": [
-      {"line": 135, "statement_id": "SYS-PORTFOLIO-001-FIL-0044-STMT-000025", "note": "The record area is HISTORY-RECORD (copybook HISTREC, SYS-PORTFOLIO-001-FIL-0008-REC-0001); the READ has no INTO clause."}
-    ]
+    "annotations": [{"line": 135, "statement_id": "SYS-PORTFOLIO-001-FIL-0044-STMT-000025", "note": "The record lands in the FD buffer HISTORY-RECORD (copybook HISTREC); no file-status check after the READ other than AT END"}]
   },
   {
-    "name": "2200-LOAD-TO-DB2",
-    "paragraph_id": "SYS-PORTFOLIO-001-FIL-0044-PAR-0009",
-    "section": null,
-    "section_id": null,
-    "line_range": [143, 176],
+    "name": "2200-LOAD-TO-DB2", "section": null, "paragraph_id": "SYS-PORTFOLIO-001-FIL-0044-PAR-0009", "section_id": null, "line_range": [143, 176],
     "pseudocode": [
-      "-- Map one history record to a POSHIST row and insert it",
-      "CLEAR poshist_record  -- INITIALIZE: alphanumeric fields to spaces, numeric fields to zero",
-      "SET ph_account_no = th_account_no  -- TH-* source fields are not declared anywhere (see data dictionary)",
-      "SET ph_portfolio_id = th_portfolio_id",
-      "SET ph_trans_date = th_trans_date",
-      "SET ph_trans_time = th_trans_time",
-      "SET ph_trans_type = th_trans_type",
-      "SET ph_security_id = th_security_id",
-      "SET ph_quantity = th_quantity",
-      "SET ph_price = th_price",
-      "SET ph_amount = th_amount",
-      "SET ph_fees = th_fees",
-      "SET ph_total_amount = th_total_amount",
-      "SET ph_cost_basis = th_cost_basis",
-      "SET ph_gain_loss = th_gain_loss",
-      "SQL INSERT new row INTO POSHIST table",
-      "  VALUES: host structure poshist_record",
-      "CHECK SQLCODE",
-      "IF sqlcode = 0 THEN  -- insert succeeded",
+      "-- Copy the history record into the POSHIST host structure and insert it into DB2",
+      "CLEAR poshist_record  -- INITIALIZE: alphanumeric items to spaces, numeric items to zero",
+      "SET ph_account_no = th_account_no  !! UNRESOLVED source field (not declared)",
+      "SET ph_portfolio_id = th_portfolio_id  !! UNRESOLVED source field",
+      "SET ph_trans_date = th_trans_date  !! UNRESOLVED source field",
+      "SET ph_trans_time = th_trans_time  !! UNRESOLVED source field",
+      "SET ph_trans_type = th_trans_type  !! UNRESOLVED source field",
+      "SET ph_security_id = th_security_id  !! UNRESOLVED source field",
+      "SET ph_quantity = th_quantity  !! UNRESOLVED source field",
+      "SET ph_price = th_price  !! UNRESOLVED source field",
+      "SET ph_amount = th_amount  !! UNRESOLVED source field",
+      "SET ph_fees = th_fees  !! UNRESOLVED source field",
+      "SET ph_total_amount = th_total_amount  !! UNRESOLVED source field",
+      "SET ph_cost_basis = th_cost_basis  !! UNRESOLVED source field",
+      "SET ph_gain_loss = th_gain_loss  !! UNRESOLVED source field",
+      "SQL INSERT new row INTO POSHIST table VALUES (host structure poshist_record)",
+      "IF sqlcode = 0 THEN  -- CHECK SQLCODE: insert succeeded",
       "  INCREMENT ws_records_written BY 1",
-      "ELSE IF sqlcode = -803 THEN  -- duplicate key: row already in POSHIST",
-      "  -- CONTINUE: no action; the row is skipped and not counted",
+      "ELSE IF sqlcode = -803 THEN  -- duplicate key",
+      "  -- CONTINUE: duplicate row silently skipped (not counted)",
       "ELSE",
       "  INCREMENT ws_error_count BY 1",
-      "  CALL db2-error-routine  !! UNRESOLVED: not a paragraph of HISTLD00 (procedure code of copybook DBPROC per Agent 3)",
+      "  CALL db2-error-routine  !! UNRESOLVED: paragraph not defined in this program",
       "END IF"
     ],
-    "pseudocode_statement_ids": [
-      [],
-      ["SYS-PORTFOLIO-001-FIL-0044-STMT-000026"],
-      ["SYS-PORTFOLIO-001-FIL-0044-STMT-000027"],
-      ["SYS-PORTFOLIO-001-FIL-0044-STMT-000028"],
-      ["SYS-PORTFOLIO-001-FIL-0044-STMT-000029"],
-      ["SYS-PORTFOLIO-001-FIL-0044-STMT-000030"],
-      ["SYS-PORTFOLIO-001-FIL-0044-STMT-000031"],
-      ["SYS-PORTFOLIO-001-FIL-0044-STMT-000032"],
-      ["SYS-PORTFOLIO-001-FIL-0044-STMT-000033"],
-      ["SYS-PORTFOLIO-001-FIL-0044-STMT-000034"],
-      ["SYS-PORTFOLIO-001-FIL-0044-STMT-000035"],
-      ["SYS-PORTFOLIO-001-FIL-0044-STMT-000036"],
-      ["SYS-PORTFOLIO-001-FIL-0044-STMT-000037"],
-      ["SYS-PORTFOLIO-001-FIL-0044-STMT-000038"],
-      ["SYS-PORTFOLIO-001-FIL-0044-STMT-000039"],
-      ["SYS-PORTFOLIO-001-FIL-0044-STMT-000040"],
-      ["SYS-PORTFOLIO-001-FIL-0044-STMT-000040"],
-      ["SYS-PORTFOLIO-001-FIL-0044-STMT-000040"],
-      ["SYS-PORTFOLIO-001-FIL-0044-STMT-000041"],
-      ["SYS-PORTFOLIO-001-FIL-0044-STMT-000069"],
-      ["SYS-PORTFOLIO-001-FIL-0044-STMT-000041", "SYS-PORTFOLIO-001-FIL-0044-STMT-000068"],
-      ["SYS-PORTFOLIO-001-FIL-0044-STMT-000077"],
-      ["SYS-PORTFOLIO-001-FIL-0044-STMT-000068"],
-      ["SYS-PORTFOLIO-001-FIL-0044-STMT-000075"],
-      ["SYS-PORTFOLIO-001-FIL-0044-STMT-000076"],
-      ["SYS-PORTFOLIO-001-FIL-0044-STMT-000041", "SYS-PORTFOLIO-001-FIL-0044-STMT-000068"]
-    ],
-    "pseudocode_text": "-- Map one history record to a POSHIST row and insert it\nCLEAR poshist_record  -- INITIALIZE: alphanumeric fields to spaces, numeric fields to zero\nSET ph_account_no = th_account_no  -- TH-* source fields are not declared anywhere (see data dictionary)\nSET ph_portfolio_id = th_portfolio_id\nSET ph_trans_date = th_trans_date\nSET ph_trans_time = th_trans_time\nSET ph_trans_type = th_trans_type\nSET ph_security_id = th_security_id\nSET ph_quantity = th_quantity\nSET ph_price = th_price\nSET ph_amount = th_amount\nSET ph_fees = th_fees\nSET ph_total_amount = th_total_amount\nSET ph_cost_basis = th_cost_basis\nSET ph_gain_loss = th_gain_loss\nSQL INSERT new row INTO POSHIST table\n  VALUES: host structure poshist_record\nCHECK SQLCODE\nIF sqlcode = 0 THEN  -- insert succeeded\n  INCREMENT ws_records_written BY 1\nELSE IF sqlcode = -803 THEN  -- duplicate key: row already in POSHIST\n  -- CONTINUE: no action; the row is skipped and not counted\nELSE\n  INCREMENT ws_error_count BY 1\n  CALL db2-error-routine  !! UNRESOLVED: not a paragraph of HISTLD00 (procedure code of copybook DBPROC per Agent 3)\nEND IF",
+    "pseudocode_statement_ids": [[], ["SYS-PORTFOLIO-001-FIL-0044-STMT-000026"], ["SYS-PORTFOLIO-001-FIL-0044-STMT-000027"], ["SYS-PORTFOLIO-001-FIL-0044-STMT-000028"], ["SYS-PORTFOLIO-001-FIL-0044-STMT-000029"], ["SYS-PORTFOLIO-001-FIL-0044-STMT-000030"], ["SYS-PORTFOLIO-001-FIL-0044-STMT-000031"], ["SYS-PORTFOLIO-001-FIL-0044-STMT-000032"], ["SYS-PORTFOLIO-001-FIL-0044-STMT-000033"], ["SYS-PORTFOLIO-001-FIL-0044-STMT-000034"], ["SYS-PORTFOLIO-001-FIL-0044-STMT-000035"], ["SYS-PORTFOLIO-001-FIL-0044-STMT-000036"], ["SYS-PORTFOLIO-001-FIL-0044-STMT-000037"], ["SYS-PORTFOLIO-001-FIL-0044-STMT-000038"], ["SYS-PORTFOLIO-001-FIL-0044-STMT-000039"], ["SYS-PORTFOLIO-001-FIL-0044-STMT-000040"], ["SYS-PORTFOLIO-001-FIL-0044-STMT-000041"], ["SYS-PORTFOLIO-001-FIL-0044-STMT-000069"], ["SYS-PORTFOLIO-001-FIL-0044-STMT-000068"], ["SYS-PORTFOLIO-001-FIL-0044-STMT-000077"], ["SYS-PORTFOLIO-001-FIL-0044-STMT-000068"], ["SYS-PORTFOLIO-001-FIL-0044-STMT-000075"], ["SYS-PORTFOLIO-001-FIL-0044-STMT-000076"], ["SYS-PORTFOLIO-001-FIL-0044-STMT-000041", "SYS-PORTFOLIO-001-FIL-0044-STMT-000068"]],
+    "pseudocode_text": "-- Copy the history record into the POSHIST host structure and insert it into DB2\nCLEAR poshist_record  -- INITIALIZE: alphanumeric items to spaces, numeric items to zero\nSET ph_account_no = th_account_no  !! UNRESOLVED source field (not declared)\nSET ph_portfolio_id = th_portfolio_id  !! UNRESOLVED source field\nSET ph_trans_date = th_trans_date  !! UNRESOLVED source field\nSET ph_trans_time = th_trans_time  !! UNRESOLVED source field\nSET ph_trans_type = th_trans_type  !! UNRESOLVED source field\nSET ph_security_id = th_security_id  !! UNRESOLVED source field\nSET ph_quantity = th_quantity  !! UNRESOLVED source field\nSET ph_price = th_price  !! UNRESOLVED source field\nSET ph_amount = th_amount  !! UNRESOLVED source field\nSET ph_fees = th_fees  !! UNRESOLVED source field\nSET ph_total_amount = th_total_amount  !! UNRESOLVED source field\nSET ph_cost_basis = th_cost_basis  !! UNRESOLVED source field\nSET ph_gain_loss = th_gain_loss  !! UNRESOLVED source field\nSQL INSERT new row INTO POSHIST table VALUES (host structure poshist_record)\nIF sqlcode = 0 THEN  -- CHECK SQLCODE: insert succeeded\n  INCREMENT ws_records_written BY 1\nELSE IF sqlcode = -803 THEN  -- duplicate key\n  -- CONTINUE: duplicate row silently skipped (not counted)\nELSE\n  INCREMENT ws_error_count BY 1\n  CALL db2-error-routine  !! UNRESOLVED: paragraph not defined in this program\nEND IF",
     "statement_ids": ["SYS-PORTFOLIO-001-FIL-0044-STMT-000026", "SYS-PORTFOLIO-001-FIL-0044-STMT-000027", "SYS-PORTFOLIO-001-FIL-0044-STMT-000028", "SYS-PORTFOLIO-001-FIL-0044-STMT-000029", "SYS-PORTFOLIO-001-FIL-0044-STMT-000030", "SYS-PORTFOLIO-001-FIL-0044-STMT-000031", "SYS-PORTFOLIO-001-FIL-0044-STMT-000032", "SYS-PORTFOLIO-001-FIL-0044-STMT-000033", "SYS-PORTFOLIO-001-FIL-0044-STMT-000034", "SYS-PORTFOLIO-001-FIL-0044-STMT-000035", "SYS-PORTFOLIO-001-FIL-0044-STMT-000036", "SYS-PORTFOLIO-001-FIL-0044-STMT-000037", "SYS-PORTFOLIO-001-FIL-0044-STMT-000038", "SYS-PORTFOLIO-001-FIL-0044-STMT-000039", "SYS-PORTFOLIO-001-FIL-0044-STMT-000040", "SYS-PORTFOLIO-001-FIL-0044-STMT-000041", "SYS-PORTFOLIO-001-FIL-0044-STMT-000069", "SYS-PORTFOLIO-001-FIL-0044-STMT-000068", "SYS-PORTFOLIO-001-FIL-0044-STMT-000077", "SYS-PORTFOLIO-001-FIL-0044-STMT-000075", "SYS-PORTFOLIO-001-FIL-0044-STMT-000076"],
     "untranslated_statement_ids": [],
     "field_references": ["POSHIST-RECORD", "TH-ACCOUNT-NO", "PH-ACCOUNT-NO", "TH-PORTFOLIO-ID", "PH-PORTFOLIO-ID", "TH-TRANS-DATE", "PH-TRANS-DATE", "TH-TRANS-TIME", "PH-TRANS-TIME", "TH-TRANS-TYPE", "PH-TRANS-TYPE", "TH-SECURITY-ID", "PH-SECURITY-ID", "TH-QUANTITY", "PH-QUANTITY", "TH-PRICE", "PH-PRICE", "TH-AMOUNT", "PH-AMOUNT", "TH-FEES", "PH-FEES", "TH-TOTAL-AMOUNT", "PH-TOTAL-AMOUNT", "TH-COST-BASIS", "PH-COST-BASIS", "TH-GAIN-LOSS", "PH-GAIN-LOSS", "SQLCODE", "WS-RECORDS-WRITTEN", "WS-ERROR-COUNT"],
@@ -658,39 +493,28 @@
       {"name": "WS-ERROR-COUNT", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0044-FLD-000005", "target_kind": "field", "candidate_ids": []}
     ],
     "calls_made": ["DB2-ERROR-ROUTINE"],
-    "calls_made_ids": [
-      {"name": "DB2-ERROR-ROUTINE", "paragraph_id": null, "section_id": null}
-    ],
-    "complexity_score": 4,
+    "calls_made_ids": [{"name": "DB2-ERROR-ROUTINE", "paragraph_id": null, "section_id": null}],
+    "complexity_score": 5,
     "has_unresolved_statements": true,
     "annotations": [
-      {"line": 146, "statement_id": "SYS-PORTFOLIO-001-FIL-0044-STMT-000027", "note": "TH-ACCOUNT-NO ... TH-GAIN-LOSS (lines 146-158) are not declared in the program or any copybook; the FD record of TRANSACTION-HISTORY is HISTORY-RECORD with HIST-* fields. Which history data populates the row is unknown.", "ambiguous": true},
-      {"line": 160, "statement_id": "SYS-PORTFOLIO-001-FIL-0044-STMT-000040", "note": "Embedded SQL: INSERT INTO POSHIST VALUES (:POSHIST-RECORD) uses the whole host structure from copybook DBTBLS (SYS-PORTFOLIO-001-FIL-0016-REC-0001) as the value list."}
+      {"line": 146, "statement_id": "SYS-PORTFOLIO-001-FIL-0044-STMT-000027", "note": "TH-* source names are not declared; the FD record from COPY HISTREC uses HIST-* names (e.g. HIST-PORTFOLIO-ID, HIST-DATE). The values loaded into POSHIST cannot be determined statically"},
+      {"line": 159, "note": "PH-PROCESS-DATE, PH-PROCESS-TIME, PH-PROGRAM-ID, PH-USER-ID and PH-AUDIT-TIMESTAMP are not set and keep their INITIALIZE values (spaces) in the inserted row"},
+      {"line": 172, "statement_id": "SYS-PORTFOLIO-001-FIL-0044-STMT-000076", "note": "-- body defined in copybook DBPROC (DB2-ERROR-ROUTINE, per Agent 3) but not part of this PROCEDURE DIVISION; flagged for the Data Agent / SME"}
     ]
   },
   {
-    "name": "2300-CHECK-COMMIT",
-    "paragraph_id": "SYS-PORTFOLIO-001-FIL-0044-PAR-0010",
-    "section": null,
-    "section_id": null,
-    "line_range": [177, 190],
+    "name": "2300-CHECK-COMMIT", "section": null, "paragraph_id": "SYS-PORTFOLIO-001-FIL-0044-PAR-0010", "section_id": null, "line_range": [177, 190],
     "pseudocode": [
+      "-- Commit every WS-COMMIT-THRESHOLD records and checkpoint progress",
       "INCREMENT ws_commit_count BY 1",
-      "IF ws_commit_count >= ws_commit_threshold THEN  -- WS-COMMIT-THRESHOLD = 1000",
-      "  SQL COMMIT WORK  -- make the inserted rows permanent",
-      "  CLEAR ws_commit_count  -- set to 0",
+      "IF ws_commit_count >= ws_commit_threshold (1000) THEN",
+      "  SQL COMMIT WORK  -- make all inserts since the last commit permanent",
+      "  CLEAR ws_commit_count  -- set to zero",
       "  CALL 2310-update-checkpoint",
       "END IF"
     ],
-    "pseudocode_statement_ids": [
-      ["SYS-PORTFOLIO-001-FIL-0044-STMT-000042"],
-      ["SYS-PORTFOLIO-001-FIL-0044-STMT-000043"],
-      ["SYS-PORTFOLIO-001-FIL-0044-STMT-000070"],
-      ["SYS-PORTFOLIO-001-FIL-0044-STMT-000071"],
-      ["SYS-PORTFOLIO-001-FIL-0044-STMT-000072"],
-      ["SYS-PORTFOLIO-001-FIL-0044-STMT-000043"]
-    ],
-    "pseudocode_text": "INCREMENT ws_commit_count BY 1\nIF ws_commit_count >= ws_commit_threshold THEN  -- WS-COMMIT-THRESHOLD = 1000\n  SQL COMMIT WORK  -- make the inserted rows permanent\n  CLEAR ws_commit_count  -- set to 0\n  CALL 2310-update-checkpoint\nEND IF",
+    "pseudocode_statement_ids": [[], ["SYS-PORTFOLIO-001-FIL-0044-STMT-000042"], ["SYS-PORTFOLIO-001-FIL-0044-STMT-000043"], ["SYS-PORTFOLIO-001-FIL-0044-STMT-000070"], ["SYS-PORTFOLIO-001-FIL-0044-STMT-000071"], ["SYS-PORTFOLIO-001-FIL-0044-STMT-000072"], ["SYS-PORTFOLIO-001-FIL-0044-STMT-000043"]],
+    "pseudocode_text": "-- Commit every WS-COMMIT-THRESHOLD records and checkpoint progress\nINCREMENT ws_commit_count BY 1\nIF ws_commit_count >= ws_commit_threshold (1000) THEN\n  SQL COMMIT WORK  -- make all inserts since the last commit permanent\n  CLEAR ws_commit_count  -- set to zero\n  CALL 2310-update-checkpoint\nEND IF",
     "statement_ids": ["SYS-PORTFOLIO-001-FIL-0044-STMT-000042", "SYS-PORTFOLIO-001-FIL-0044-STMT-000043", "SYS-PORTFOLIO-001-FIL-0044-STMT-000070", "SYS-PORTFOLIO-001-FIL-0044-STMT-000071", "SYS-PORTFOLIO-001-FIL-0044-STMT-000072"],
     "untranslated_statement_ids": [],
     "field_references": ["WS-COMMIT-COUNT", "WS-COMMIT-THRESHOLD"],
@@ -699,42 +523,25 @@
       {"name": "WS-COMMIT-THRESHOLD", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0044-REC-0003", "target_kind": "record", "candidate_ids": []}
     ],
     "calls_made": ["2310-UPDATE-CHECKPOINT"],
-    "calls_made_ids": [
-      {"name": "2310-UPDATE-CHECKPOINT", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0044-PAR-0011", "section_id": null}
-    ],
+    "calls_made_ids": [{"name": "2310-UPDATE-CHECKPOINT", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0044-PAR-0011", "section_id": null}],
     "complexity_score": 2,
     "has_unresolved_statements": false,
-    "annotations": [
-      {"line": 181, "statement_id": "SYS-PORTFOLIO-001-FIL-0044-STMT-000070", "note": "The SQLCODE of COMMIT WORK is not checked."}
-    ]
+    "annotations": [{"line": 181, "statement_id": "SYS-PORTFOLIO-001-FIL-0044-STMT-000070", "note": "SQLCODE is not checked after COMMIT WORK"}]
   },
   {
-    "name": "2310-UPDATE-CHECKPOINT",
-    "paragraph_id": "SYS-PORTFOLIO-001-FIL-0044-PAR-0011",
-    "section": null,
-    "section_id": null,
-    "line_range": [191, 201],
+    "name": "2310-UPDATE-CHECKPOINT", "section": null, "paragraph_id": "SYS-PORTFOLIO-001-FIL-0044-PAR-0011", "section_id": null, "line_range": [191, 201],
     "pseudocode": [
-      "-- Save progress counts in the control record (checkpoint)",
-      "SET bct_records_read = ws_records_read  -- BCT-RECORDS-READ is not declared in BATCH-CONTROL-RECORD (see data dictionary)",
-      "SET bct_records_written = ws_records_written  -- BCT-RECORDS-WRITTEN is not declared",
-      "UPDATE existing batch_control_record in BATCH-CONTROL-FILE  -- REWRITE",
-      "IF rewrite fails (record key not found) THEN  -- INVALID KEY",
+      "-- Record progress counters in the batch-control record",
+      "SET bct_records_read = ws_records_read  !! UNRESOLVED target field (not declared in BATCH-CONTROL-RECORD)",
+      "SET bct_records_written = ws_records_written  !! UNRESOLVED target field (not declared in BATCH-CONTROL-RECORD)",
+      "UPDATE existing batch_control_record in BATCH-CONTROL-FILE",
+      "IF update error (INVALID KEY) THEN",
       "  SET err_text = 'Error updating checkpoint'",
-      "  CALL 9000-error-routine",
+      "  CALL 9000-error-routine  -- returns; processing continues",
       "END IF"
     ],
-    "pseudocode_statement_ids": [
-      [],
-      ["SYS-PORTFOLIO-001-FIL-0044-STMT-000044"],
-      ["SYS-PORTFOLIO-001-FIL-0044-STMT-000045"],
-      ["SYS-PORTFOLIO-001-FIL-0044-STMT-000046"],
-      ["SYS-PORTFOLIO-001-FIL-0044-STMT-000046"],
-      ["SYS-PORTFOLIO-001-FIL-0044-STMT-000073"],
-      ["SYS-PORTFOLIO-001-FIL-0044-STMT-000074"],
-      ["SYS-PORTFOLIO-001-FIL-0044-STMT-000046"]
-    ],
-    "pseudocode_text": "-- Save progress counts in the control record (checkpoint)\nSET bct_records_read = ws_records_read  -- BCT-RECORDS-READ is not declared in BATCH-CONTROL-RECORD (see data dictionary)\nSET bct_records_written = ws_records_written  -- BCT-RECORDS-WRITTEN is not declared\nUPDATE existing batch_control_record in BATCH-CONTROL-FILE  -- REWRITE\nIF rewrite fails (record key not found) THEN  -- INVALID KEY\n  SET err_text = 'Error updating checkpoint'\n  CALL 9000-error-routine\nEND IF",
+    "pseudocode_statement_ids": [[], ["SYS-PORTFOLIO-001-FIL-0044-STMT-000044"], ["SYS-PORTFOLIO-001-FIL-0044-STMT-000045"], ["SYS-PORTFOLIO-001-FIL-0044-STMT-000046"], ["SYS-PORTFOLIO-001-FIL-0044-STMT-000046"], ["SYS-PORTFOLIO-001-FIL-0044-STMT-000073"], ["SYS-PORTFOLIO-001-FIL-0044-STMT-000074"], ["SYS-PORTFOLIO-001-FIL-0044-STMT-000046"]],
+    "pseudocode_text": "-- Record progress counters in the batch-control record\nSET bct_records_read = ws_records_read  !! UNRESOLVED target field (not declared in BATCH-CONTROL-RECORD)\nSET bct_records_written = ws_records_written  !! UNRESOLVED target field (not declared in BATCH-CONTROL-RECORD)\nUPDATE existing batch_control_record in BATCH-CONTROL-FILE\nIF update error (INVALID KEY) THEN\n  SET err_text = 'Error updating checkpoint'\n  CALL 9000-error-routine  -- returns; processing continues\nEND IF",
     "statement_ids": ["SYS-PORTFOLIO-001-FIL-0044-STMT-000044", "SYS-PORTFOLIO-001-FIL-0044-STMT-000045", "SYS-PORTFOLIO-001-FIL-0044-STMT-000046", "SYS-PORTFOLIO-001-FIL-0044-STMT-000073", "SYS-PORTFOLIO-001-FIL-0044-STMT-000074"],
     "untranslated_statement_ids": [],
     "field_references": ["WS-RECORDS-READ", "BCT-RECORDS-READ", "WS-RECORDS-WRITTEN", "BCT-RECORDS-WRITTEN", "BATCH-CONTROL-RECORD", "ERR-TEXT"],
@@ -747,57 +554,38 @@
       {"name": "ERR-TEXT", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0007-FLD-000017", "target_kind": "field", "candidate_ids": []}
     ],
     "calls_made": ["9000-ERROR-ROUTINE"],
-    "calls_made_ids": [
-      {"name": "9000-ERROR-ROUTINE", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0044-PAR-0016", "section_id": null}
-    ],
+    "calls_made_ids": [{"name": "9000-ERROR-ROUTINE", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0044-PAR-0016", "section_id": null}],
     "complexity_score": 2,
-    "has_unresolved_statements": true,
-    "annotations": [
-      {"line": 192, "statement_id": "SYS-PORTFOLIO-001-FIL-0044-STMT-000044", "note": "BCHCTL defines no BCT-RECORDS-READ / BCT-RECORDS-WRITTEN; where the counts are stored in the control record is unknown.", "ambiguous": true}
-    ]
+    "has_unresolved_statements": false,
+    "annotations": [{"line": 195, "statement_id": "SYS-PORTFOLIO-001-FIL-0044-STMT-000046", "note": "REWRITE replaces the record last read in 1300-INIT-CHECKPOINTS (key BCT-KEY); performed from 2300-CHECK-COMMIT and from 3100-FINAL-COMMIT"}]
   },
   {
-    "name": "3100-FINAL-COMMIT",
-    "paragraph_id": "SYS-PORTFOLIO-001-FIL-0044-PAR-0012",
-    "section": null,
-    "section_id": null,
-    "line_range": [202, 209],
+    "name": "3100-FINAL-COMMIT", "section": null, "paragraph_id": "SYS-PORTFOLIO-001-FIL-0044-PAR-0012", "section_id": null, "line_range": [202, 209],
     "pseudocode": [
-      "SQL COMMIT WORK  -- commit the last partial batch of inserts",
-      "CALL 2310-update-checkpoint  -- final checkpoint with the end-of-run counts"
+      "-- Commit the remaining inserts and write a final checkpoint",
+      "SQL COMMIT WORK",
+      "CALL 2310-update-checkpoint"
     ],
-    "pseudocode_statement_ids": [
-      ["SYS-PORTFOLIO-001-FIL-0044-STMT-000047"],
-      ["SYS-PORTFOLIO-001-FIL-0044-STMT-000048"]
-    ],
-    "pseudocode_text": "SQL COMMIT WORK  -- commit the last partial batch of inserts\nCALL 2310-update-checkpoint  -- final checkpoint with the end-of-run counts",
+    "pseudocode_statement_ids": [[], ["SYS-PORTFOLIO-001-FIL-0044-STMT-000047"], ["SYS-PORTFOLIO-001-FIL-0044-STMT-000048"]],
+    "pseudocode_text": "-- Commit the remaining inserts and write a final checkpoint\nSQL COMMIT WORK\nCALL 2310-update-checkpoint",
     "statement_ids": ["SYS-PORTFOLIO-001-FIL-0044-STMT-000047", "SYS-PORTFOLIO-001-FIL-0044-STMT-000048"],
     "untranslated_statement_ids": [],
     "field_references": [],
     "field_reference_ids": [],
     "calls_made": ["2310-UPDATE-CHECKPOINT"],
-    "calls_made_ids": [
-      {"name": "2310-UPDATE-CHECKPOINT", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0044-PAR-0011", "section_id": null}
-    ],
+    "calls_made_ids": [{"name": "2310-UPDATE-CHECKPOINT", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0044-PAR-0011", "section_id": null}],
     "complexity_score": 1,
     "has_unresolved_statements": false,
-    "annotations": []
+    "annotations": [{"line": 203, "statement_id": "SYS-PORTFOLIO-001-FIL-0044-STMT-000047", "note": "SQLCODE is not checked after COMMIT WORK; the batch-control status is not changed from active at the end of the run"}]
   },
   {
-    "name": "3200-CLOSE-FILES",
-    "paragraph_id": "SYS-PORTFOLIO-001-FIL-0044-PAR-0013",
-    "section": null,
-    "section_id": null,
-    "line_range": [210, 214],
+    "name": "3200-CLOSE-FILES", "section": null, "paragraph_id": "SYS-PORTFOLIO-001-FIL-0044-PAR-0013", "section_id": null, "line_range": [210, 214],
     "pseudocode": [
-      "CLOSE TRANSACTION-HISTORY",
-      "CLOSE BATCH-CONTROL-FILE"
+      "-- Close both files",
+      "CLOSE TRANSACTION-HISTORY, BATCH-CONTROL-FILE"
     ],
-    "pseudocode_statement_ids": [
-      ["SYS-PORTFOLIO-001-FIL-0044-STMT-000049"],
-      ["SYS-PORTFOLIO-001-FIL-0044-STMT-000049"]
-    ],
-    "pseudocode_text": "CLOSE TRANSACTION-HISTORY\nCLOSE BATCH-CONTROL-FILE",
+    "pseudocode_statement_ids": [[], ["SYS-PORTFOLIO-001-FIL-0044-STMT-000049"]],
+    "pseudocode_text": "-- Close both files\nCLOSE TRANSACTION-HISTORY, BATCH-CONTROL-FILE",
     "statement_ids": ["SYS-PORTFOLIO-001-FIL-0044-STMT-000049"],
     "untranslated_statement_ids": [],
     "field_references": [],
@@ -809,47 +597,34 @@
     "annotations": []
   },
   {
-    "name": "3300-DISCONNECT-DB2",
-    "paragraph_id": "SYS-PORTFOLIO-001-FIL-0044-PAR-0014",
-    "section": null,
-    "section_id": null,
-    "line_range": [215, 218],
+    "name": "3300-DISCONNECT-DB2", "section": null, "paragraph_id": "SYS-PORTFOLIO-001-FIL-0044-PAR-0014", "section_id": null, "line_range": [215, 218],
     "pseudocode": [
-      "CALL disconnect-from-db2  !! UNRESOLVED: not a paragraph of HISTLD00 (procedure code of copybook DBPROC per Agent 3); DB2 disconnect logic not traced"
+      "-- Disconnect from DB2",
+      "CALL disconnect-from-db2  !! UNRESOLVED: paragraph not defined in this program"
     ],
-    "pseudocode_statement_ids": [["SYS-PORTFOLIO-001-FIL-0044-STMT-000050"]],
-    "pseudocode_text": "CALL disconnect-from-db2  !! UNRESOLVED: not a paragraph of HISTLD00 (procedure code of copybook DBPROC per Agent 3); DB2 disconnect logic not traced",
+    "pseudocode_statement_ids": [[], ["SYS-PORTFOLIO-001-FIL-0044-STMT-000050"]],
+    "pseudocode_text": "-- Disconnect from DB2\nCALL disconnect-from-db2  !! UNRESOLVED: paragraph not defined in this program",
     "statement_ids": ["SYS-PORTFOLIO-001-FIL-0044-STMT-000050"],
     "untranslated_statement_ids": [],
     "field_references": [],
     "field_reference_ids": [],
     "calls_made": ["DISCONNECT-FROM-DB2"],
-    "calls_made_ids": [
-      {"name": "DISCONNECT-FROM-DB2", "paragraph_id": null, "section_id": null}
-    ],
+    "calls_made_ids": [{"name": "DISCONNECT-FROM-DB2", "paragraph_id": null, "section_id": null}],
     "complexity_score": 1,
     "has_unresolved_statements": true,
-    "annotations": []
+    "annotations": [{"line": 216, "statement_id": "SYS-PORTFOLIO-001-FIL-0044-STMT-000050", "note": "-- body defined in copybook DBPROC (DISCONNECT-FROM-DB2, per Agent 3) but not part of this PROCEDURE DIVISION; flagged for the Data Agent / SME"}]
   },
   {
-    "name": "3400-DISPLAY-STATS",
-    "paragraph_id": "SYS-PORTFOLIO-001-FIL-0044-PAR-0015",
-    "section": null,
-    "section_id": null,
-    "line_range": [219, 225],
+    "name": "3400-DISPLAY-STATS", "section": null, "paragraph_id": "SYS-PORTFOLIO-001-FIL-0044-PAR-0015", "section_id": null, "line_range": [219, 225],
     "pseudocode": [
-      "DISPLAY 'HISTLD00 Processing Statistics:'  -- written to the job log / console",
+      "-- Print run statistics to the job log",
+      "DISPLAY 'HISTLD00 Processing Statistics:'",
       "DISPLAY '  Records Read:    ' + ws_records_read",
       "DISPLAY '  Records Written: ' + ws_records_written",
       "DISPLAY '  Errors:         ' + ws_error_count"
     ],
-    "pseudocode_statement_ids": [
-      ["SYS-PORTFOLIO-001-FIL-0044-STMT-000051"],
-      ["SYS-PORTFOLIO-001-FIL-0044-STMT-000052"],
-      ["SYS-PORTFOLIO-001-FIL-0044-STMT-000053"],
-      ["SYS-PORTFOLIO-001-FIL-0044-STMT-000054"]
-    ],
-    "pseudocode_text": "DISPLAY 'HISTLD00 Processing Statistics:'  -- written to the job log / console\nDISPLAY '  Records Read:    ' + ws_records_read\nDISPLAY '  Records Written: ' + ws_records_written\nDISPLAY '  Errors:         ' + ws_error_count",
+    "pseudocode_statement_ids": [[], ["SYS-PORTFOLIO-001-FIL-0044-STMT-000051"], ["SYS-PORTFOLIO-001-FIL-0044-STMT-000052"], ["SYS-PORTFOLIO-001-FIL-0044-STMT-000053"], ["SYS-PORTFOLIO-001-FIL-0044-STMT-000054"]],
+    "pseudocode_text": "-- Print run statistics to the job log\nDISPLAY 'HISTLD00 Processing Statistics:'\nDISPLAY '  Records Read:    ' + ws_records_read\nDISPLAY '  Records Written: ' + ws_records_written\nDISPLAY '  Errors:         ' + ws_error_count",
     "statement_ids": ["SYS-PORTFOLIO-001-FIL-0044-STMT-000051", "SYS-PORTFOLIO-001-FIL-0044-STMT-000052", "SYS-PORTFOLIO-001-FIL-0044-STMT-000053", "SYS-PORTFOLIO-001-FIL-0044-STMT-000054"],
     "untranslated_statement_ids": [],
     "field_references": ["WS-RECORDS-READ", "WS-RECORDS-WRITTEN", "WS-ERROR-COUNT"],
@@ -862,29 +637,21 @@
     "calls_made_ids": [],
     "complexity_score": 1,
     "has_unresolved_statements": false,
-    "annotations": []
+    "annotations": [{"line": 220, "note": "Duplicates skipped on SQLCODE -803 are counted in Records Read but in neither Records Written nor Errors"}]
   },
   {
-    "name": "9000-ERROR-ROUTINE",
-    "paragraph_id": "SYS-PORTFOLIO-001-FIL-0044-PAR-0016",
-    "section": null,
-    "section_id": null,
-    "line_range": [226, 233],
+    "name": "9000-ERROR-ROUTINE", "section": null, "paragraph_id": "SYS-PORTFOLIO-001-FIL-0044-PAR-0016", "section_id": null, "line_range": [226, 233],
     "pseudocode": [
-      "-- Report an error and roll back uncommitted DB2 work; control returns to the performing paragraph",
+      "-- Report the error through the common error processor and undo uncommitted DB2 work",
       "SET err_program = 'HISTLD00'",
       "CALL program ERRPROC",
-      "  PASSING: err_message  -- common error-handling subprogram",
-      "SQL ROLLBACK WORK  -- undo DB2 changes since the last commit"
+      "  PASSING: err_message",
+      "  -- Subprogram: common error processor (see ERRPROC logic file)",
+      "SQL ROLLBACK WORK  -- discard all inserts since the last commit",
+      "-- returns to the caller; the program does not stop here"
     ],
-    "pseudocode_statement_ids": [
-      [],
-      ["SYS-PORTFOLIO-001-FIL-0044-STMT-000055"],
-      ["SYS-PORTFOLIO-001-FIL-0044-STMT-000056"],
-      ["SYS-PORTFOLIO-001-FIL-0044-STMT-000056"],
-      ["SYS-PORTFOLIO-001-FIL-0044-STMT-000057"]
-    ],
-    "pseudocode_text": "-- Report an error and roll back uncommitted DB2 work; control returns to the performing paragraph\nSET err_program = 'HISTLD00'\nCALL program ERRPROC\n  PASSING: err_message  -- common error-handling subprogram\nSQL ROLLBACK WORK  -- undo DB2 changes since the last commit",
+    "pseudocode_statement_ids": [[], ["SYS-PORTFOLIO-001-FIL-0044-STMT-000055"], ["SYS-PORTFOLIO-001-FIL-0044-STMT-000056"], ["SYS-PORTFOLIO-001-FIL-0044-STMT-000056"], [], ["SYS-PORTFOLIO-001-FIL-0044-STMT-000057"], []],
+    "pseudocode_text": "-- Report the error through the common error processor and undo uncommitted DB2 work\nSET err_program = 'HISTLD00'\nCALL program ERRPROC\n  PASSING: err_message\n  -- Subprogram: common error processor (see ERRPROC logic file)\nSQL ROLLBACK WORK  -- discard all inserts since the last commit\n-- returns to the caller; the program does not stop here",
     "statement_ids": ["SYS-PORTFOLIO-001-FIL-0044-STMT-000055", "SYS-PORTFOLIO-001-FIL-0044-STMT-000056", "SYS-PORTFOLIO-001-FIL-0044-STMT-000057"],
     "untranslated_statement_ids": [],
     "field_references": ["ERR-PROGRAM", "ERR-MESSAGE"],
@@ -892,38 +659,20 @@
       {"name": "ERR-PROGRAM", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0007-FLD-000013", "target_kind": "field", "candidate_ids": []},
       {"name": "ERR-MESSAGE", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0007-REC-0003", "target_kind": "record", "candidate_ids": []}
     ],
-    "calls_made": [],
-    "calls_made_ids": [],
+    "calls_made": ["ERRPROC"],
+    "calls_made_ids": [{"name": "ERRPROC", "paragraph_id": null, "section_id": null, "call_type": "STATIC_CALL", "note": "inter-program call; not a paragraph target"}],
     "complexity_score": 2,
     "has_unresolved_statements": false,
-    "annotations": [
-      {"line": 228, "statement_id": "SYS-PORTFOLIO-001-FIL-0044-STMT-000056", "note": "Static CALL to program ERRPROC (inventory program src/programs/common/ERRPROC.cbl); not a paragraph call, so not listed in calls_made."},
-      {"line": 230, "statement_id": "SYS-PORTFOLIO-001-FIL-0044-STMT-000057", "note": "The routine does not stop the run; the SQLCODE of ROLLBACK is not checked."}
-    ]
+    "annotations": [{"line": 228, "statement_id": "SYS-PORTFOLIO-001-FIL-0044-STMT-000056", "note": "Only ERR-PROGRAM and ERR-TEXT (set by the caller) are filled; ERR-CATEGORY, ERR-CODE, ERR-SEVERITY and ERR-DETAILS keep whatever values they already hold"}]
   }
 ],
 "unresolved_statements": [
-  {"statement_id": "SYS-PORTFOLIO-001-FIL-0044-STMT-000019", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0044-PAR-0006", "line": 117, "source_text": "PERFORM CONNECT-TO-DB2", "reason": "PERFORM target is not a paragraph of this program"},
-  {"statement_id": "SYS-PORTFOLIO-001-FIL-0044-STMT-000076", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0044-PAR-0009", "line": 172, "source_text": "PERFORM DB2-ERROR-ROUTINE", "reason": "PERFORM target is not a paragraph of this program"},
-  {"statement_id": "SYS-PORTFOLIO-001-FIL-0044-STMT-000050", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0044-PAR-0014", "line": 216, "source_text": "PERFORM DISCONNECT-FROM-DB2", "reason": "PERFORM target is not a paragraph of this program"},
-  {"statement_id": "SYS-PORTFOLIO-001-FIL-0044-STMT-000027", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0044-PAR-0009", "line": 146, "source_text": "MOVE TH-ACCOUNT-NO    TO PH-ACCOUNT-NO", "reason": "undeclared source field", "ambiguous": true},
-  {"statement_id": "SYS-PORTFOLIO-001-FIL-0044-STMT-000028", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0044-PAR-0009", "line": 147, "source_text": "MOVE TH-PORTFOLIO-ID  TO PH-PORTFOLIO-ID", "reason": "undeclared source field", "ambiguous": true},
-  {"statement_id": "SYS-PORTFOLIO-001-FIL-0044-STMT-000029", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0044-PAR-0009", "line": 148, "source_text": "MOVE TH-TRANS-DATE    TO PH-TRANS-DATE", "reason": "undeclared source field", "ambiguous": true},
-  {"statement_id": "SYS-PORTFOLIO-001-FIL-0044-STMT-000030", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0044-PAR-0009", "line": 149, "source_text": "MOVE TH-TRANS-TIME    TO PH-TRANS-TIME", "reason": "undeclared source field", "ambiguous": true},
-  {"statement_id": "SYS-PORTFOLIO-001-FIL-0044-STMT-000031", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0044-PAR-0009", "line": 150, "source_text": "MOVE TH-TRANS-TYPE    TO PH-TRANS-TYPE", "reason": "undeclared source field", "ambiguous": true},
-  {"statement_id": "SYS-PORTFOLIO-001-FIL-0044-STMT-000032", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0044-PAR-0009", "line": 151, "source_text": "MOVE TH-SECURITY-ID   TO PH-SECURITY-ID", "reason": "undeclared source field", "ambiguous": true},
-  {"statement_id": "SYS-PORTFOLIO-001-FIL-0044-STMT-000033", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0044-PAR-0009", "line": 152, "source_text": "MOVE TH-QUANTITY      TO PH-QUANTITY", "reason": "undeclared source field", "ambiguous": true},
-  {"statement_id": "SYS-PORTFOLIO-001-FIL-0044-STMT-000034", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0044-PAR-0009", "line": 153, "source_text": "MOVE TH-PRICE         TO PH-PRICE", "reason": "undeclared source field", "ambiguous": true},
-  {"statement_id": "SYS-PORTFOLIO-001-FIL-0044-STMT-000035", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0044-PAR-0009", "line": 154, "source_text": "MOVE TH-AMOUNT        TO PH-AMOUNT", "reason": "undeclared source field", "ambiguous": true},
-  {"statement_id": "SYS-PORTFOLIO-001-FIL-0044-STMT-000036", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0044-PAR-0009", "line": 155, "source_text": "MOVE TH-FEES          TO PH-FEES", "reason": "undeclared source field", "ambiguous": true},
-  {"statement_id": "SYS-PORTFOLIO-001-FIL-0044-STMT-000037", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0044-PAR-0009", "line": 156, "source_text": "MOVE TH-TOTAL-AMOUNT  TO PH-TOTAL-AMOUNT", "reason": "undeclared source field", "ambiguous": true},
-  {"statement_id": "SYS-PORTFOLIO-001-FIL-0044-STMT-000038", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0044-PAR-0009", "line": 157, "source_text": "MOVE TH-COST-BASIS    TO PH-COST-BASIS", "reason": "undeclared source field", "ambiguous": true},
-  {"statement_id": "SYS-PORTFOLIO-001-FIL-0044-STMT-000039", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0044-PAR-0009", "line": 158, "source_text": "MOVE TH-GAIN-LOSS     TO PH-GAIN-LOSS", "reason": "undeclared source field", "ambiguous": true},
-  {"statement_id": "SYS-PORTFOLIO-001-FIL-0044-STMT-000044", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0044-PAR-0011", "line": 192, "source_text": "MOVE WS-RECORDS-READ TO BCT-RECORDS-READ", "reason": "undeclared target field", "ambiguous": true},
-  {"statement_id": "SYS-PORTFOLIO-001-FIL-0044-STMT-000045", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0044-PAR-0011", "line": 193, "source_text": "MOVE WS-RECORDS-WRITTEN TO BCT-RECORDS-WRITTEN", "reason": "undeclared target field", "ambiguous": true}
+  {"statement_id": "SYS-PORTFOLIO-001-FIL-0044-STMT-000019", "paragraph": "1200-CONNECT-DB2", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0044-PAR-0006", "line": 117, "verbatim": "PERFORM CONNECT-TO-DB2", "reason": "PERFORM target not defined in the program; translated with an !! UNRESOLVED marker"},
+  {"statement_id": "SYS-PORTFOLIO-001-FIL-0044-STMT-000076", "paragraph": "2200-LOAD-TO-DB2", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0044-PAR-0009", "line": 172, "verbatim": "PERFORM DB2-ERROR-ROUTINE", "reason": "PERFORM target not defined in the program; translated with an !! UNRESOLVED marker"},
+  {"statement_id": "SYS-PORTFOLIO-001-FIL-0044-STMT-000050", "paragraph": "3300-DISCONNECT-DB2", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0044-PAR-0014", "line": 216, "verbatim": "PERFORM DISCONNECT-FROM-DB2", "reason": "PERFORM target not defined in the program; translated with an !! UNRESOLVED marker"}
 ],
 "pseudocode_issues": [
-  {"severity": "info", "type": "id_unresolved", "kind": "field", "names": ["SQLCODE", "TH-ACCOUNT-NO", "TH-PORTFOLIO-ID", "TH-TRANS-DATE", "TH-TRANS-TIME", "TH-TRANS-TYPE", "TH-SECURITY-ID", "TH-QUANTITY", "TH-PRICE", "TH-AMOUNT", "TH-FEES", "TH-TOTAL-AMOUNT", "TH-COST-BASIS", "TH-GAIN-LOSS", "BCT-RECORDS-READ", "BCT-RECORDS-WRITTEN"], "message": "resolve-field-references UNRESOLVED for 16 names; target_id null; names used as-is in pseudocode."},
-  {"severity": "info", "type": "id_unresolved", "kind": "paragraph", "names": ["CONNECT-TO-DB2", "DB2-ERROR-ROUTINE", "DISCONNECT-FROM-DB2"], "message": "calls_made targets with no CFG target: paragraph_id and section_id null; pseudocode marked !! UNRESOLVED."}
+  {"severity": "info", "type": "id_unresolved", "names": ["CONNECT-TO-DB2", "DB2-ERROR-ROUTINE", "DISCONNECT-FROM-DB2"], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0044-STMT-000019", "SYS-PORTFOLIO-001-FIL-0044-STMT-000076", "SYS-PORTFOLIO-001-FIL-0044-STMT-000050"], "message": "calls_made targets have no paragraph in this program; paragraph_id null"},
+  {"severity": "info", "type": "id_unresolved", "names": ["TH-ACCOUNT-NO", "TH-PORTFOLIO-ID", "TH-TRANS-DATE", "TH-TRANS-TIME", "TH-TRANS-TYPE", "TH-SECURITY-ID", "TH-QUANTITY", "TH-PRICE", "TH-AMOUNT", "TH-FEES", "TH-TOTAL-AMOUNT", "TH-COST-BASIS", "TH-GAIN-LOSS", "BCT-RECORDS-READ", "BCT-RECORDS-WRITTEN", "SQLCODE"], "message": "Field references with no registered data item (lookup UNRESOLVED); field_reference_ids target_id null. Names used as-is in pseudocode"}
 ]
 }

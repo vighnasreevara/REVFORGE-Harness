@@ -1,6 +1,7 @@
 {
-  "id": "DB2ONLN",
+  "id": "DB2ONLN_WS",
   "source_type": "program_ws",
+  "program_id": "DB2ONLN",
   "source_file": "src/programs/online/DB2ONLN.cbl",
   "used_by_programs": ["DB2ONLN"],
   "total_fields": 13,
@@ -8,28 +9,68 @@
   "system_id": "SYS-PORTFOLIO-001",
   "file_id": "SYS-PORTFOLIO-001-FIL-0060",
   "path_id": "SYS-PORTFOLIO-001-PATH-0060",
-  "data_run_id": "DRUN-20261024T215053Z-ACC1",
+  "data_run_id": "DRUN-20261027T162831Z-1330",
+  "parse_run_id": "PRUN-20261027T155247Z-2626",
+  "upstream_parse_status": "success",
+  "sections": [
+    {"name": "WORKING-STORAGE", "section_id": "SYS-PORTFOLIO-001-FIL-0060-SEC-0001", "start_line": 14},
+    {"name": "LINKAGE", "section_id": "SYS-PORTFOLIO-001-FIL-0060-SEC-0002", "start_line": 27}
+  ],
   "records": [
     {
       "record_id": "SYS-PORTFOLIO-001-FIL-0060-REC-0001",
-      "section": "WORKING-STORAGE", "section_id": "SYS-PORTFOLIO-001-FIL-0060-SEC-0001", "fd_name": null,
-      "is_fragment": false, "level": 1, "name": "WS-DB2-AREA",
-      "pic": null, "type": "GROUP", "storage_type": "DISPLAY", "bytes": 35, "total_bytes": 35, "inline_bytes": 0,
-      "redefines": null, "occurs": null, "value": null, "line": 15, "end_line": 16,
+      "section": "WORKING-STORAGE",
+      "section_id": "SYS-PORTFOLIO-001-FIL-0060-SEC-0001",
+      "fd_name": null,
+      "is_fragment": false,
+      "level": 1,
+      "name": "WS-DB2-AREA",
+      "pic": null,
+      "type": "GROUP",
+      "storage_type": "DISPLAY",
+      "bytes": 35,
+      "total_bytes": 35,
+      "inline_bytes": 0,
+      "redefines": null,
+      "occurs": null,
+      "value": null,
+      "line": 15,
+      "end_line": 16,
       "children": [
-        {"type": "copy_expansion", "section": "WORKING-STORAGE", "section_id": "SYS-PORTFOLIO-001-FIL-0060-SEC-0001", "holder": "SYS-PORTFOLIO-001-FIL-0060-REC-0001", "copybook": "SQLCA", "copybook_file_id": "SYS-PORTFOLIO-001-FIL-0017", "line": 16, "include_kind": "SQL_INCLUDE", "replacing": null,
-         "layout_file": "data_layouts/SYS-PORTFOLIO-001-FIL-0017__SQLCA.json",
-         "records": [
-           {"record_id": "SYS-PORTFOLIO-001-FIL-0017-REC-0001", "name": "SQL-STATUS-CODES", "level": 1, "total_bytes": 35, "expanded_from": {"copybook": "SQLCA", "copybook_file_id": "SYS-PORTFOLIO-001-FIL-0017", "line": 16, "replacing": null}}
-         ]}
+        {
+          "type": "copy_expansion",
+          "holder_id": "SYS-PORTFOLIO-001-FIL-0060-REC-0001",
+          "copybook": "SQLCA",
+          "copybook_file_id": "SYS-PORTFOLIO-001-FIL-0017",
+          "include_kind": "SQL_INCLUDE",
+          "line": 16,
+          "replacing": null,
+          "expanded_from": {"copybook": "SQLCA", "copybook_file_id": "SYS-PORTFOLIO-001-FIL-0017", "line": 16, "replacing": null},
+          "records": [
+            {"record_id": "SYS-PORTFOLIO-001-FIL-0017-REC-0001", "name": "SQL-STATUS-CODES", "total_bytes": 35, "layout_file": "SYS-PORTFOLIO-001-FIL-0017__SQLCA.json"}
+          ]
+        }
       ]
     },
     {
       "record_id": "SYS-PORTFOLIO-001-FIL-0060-REC-0002",
-      "section": "WORKING-STORAGE", "section_id": "SYS-PORTFOLIO-001-FIL-0060-SEC-0001", "fd_name": null,
-      "is_fragment": false, "level": 1, "name": "WS-POOL-STATS",
-      "pic": null, "type": "GROUP", "storage_type": "DISPLAY", "bytes": 16, "total_bytes": 16, "inline_bytes": 16,
-      "redefines": null, "occurs": null, "value": null, "line": 18, "end_line": 22,
+      "section": "WORKING-STORAGE",
+      "section_id": "SYS-PORTFOLIO-001-FIL-0060-SEC-0001",
+      "fd_name": null,
+      "is_fragment": false,
+      "level": 1,
+      "name": "WS-POOL-STATS",
+      "pic": null,
+      "type": "GROUP",
+      "storage_type": "DISPLAY",
+      "bytes": 16,
+      "total_bytes": 16,
+      "inline_bytes": 16,
+      "redefines": null,
+      "occurs": null,
+      "value": null,
+      "line": 18,
+      "end_line": 22,
       "children": [
         {"field_id": "SYS-PORTFOLIO-001-FIL-0060-FLD-000001", "path": "WS-TOTAL-CONNECTIONS", "level": 5, "name": "WS-TOTAL-CONNECTIONS", "pic": "S9(8) COMP", "pic_parsed": {"raw": "S9(8) COMP", "normalized_type": "SIGNED_INTEGER", "length": 8, "decimal_places": 0, "signed": true, "storage_type": "BINARY"}, "bytes": 4, "redefines": null, "occurs": null, "value": "0", "line": 19, "children": []},
         {"field_id": "SYS-PORTFOLIO-001-FIL-0060-FLD-000002", "path": "WS-ACTIVE-CONNECTIONS", "level": 5, "name": "WS-ACTIVE-CONNECTIONS", "pic": "S9(8) COMP", "pic_parsed": {"raw": "S9(8) COMP", "normalized_type": "SIGNED_INTEGER", "length": 8, "decimal_places": 0, "signed": true, "storage_type": "BINARY"}, "bytes": 4, "redefines": null, "occurs": null, "value": "0", "line": 20, "children": []},
@@ -39,29 +80,63 @@
     },
     {
       "record_id": "SYS-PORTFOLIO-001-FIL-0060-REC-0003",
-      "section": "WORKING-STORAGE", "section_id": "SYS-PORTFOLIO-001-FIL-0060-SEC-0001", "fd_name": null,
-      "is_fragment": false, "level": 1, "name": "WS-ERROR-AREA",
-      "pic": null, "type": "GROUP", "storage_type": "DISPLAY", "bytes": 174, "total_bytes": 174, "inline_bytes": 0,
-      "redefines": null, "occurs": null, "value": null, "line": 24, "end_line": 25,
+      "section": "WORKING-STORAGE",
+      "section_id": "SYS-PORTFOLIO-001-FIL-0060-SEC-0001",
+      "fd_name": null,
+      "is_fragment": false,
+      "level": 1,
+      "name": "WS-ERROR-AREA",
+      "pic": null,
+      "type": "GROUP",
+      "storage_type": "DISPLAY",
+      "bytes": 174,
+      "total_bytes": 174,
+      "inline_bytes": 0,
+      "redefines": null,
+      "occurs": null,
+      "value": null,
+      "line": 24,
+      "end_line": 25,
       "children": [
-        {"type": "copy_expansion", "section": "WORKING-STORAGE", "section_id": "SYS-PORTFOLIO-001-FIL-0060-SEC-0001", "holder": "SYS-PORTFOLIO-001-FIL-0060-REC-0003", "copybook": "ERRHND", "copybook_file_id": "SYS-PORTFOLIO-001-FIL-0019", "line": 25, "include_kind": "COPY", "replacing": null,
-         "layout_file": "data_layouts/SYS-PORTFOLIO-001-FIL-0019__ERRHND.json",
-         "records": [
-           {"record_id": "SYS-PORTFOLIO-001-FIL-0019-REC-0001", "name": "ERROR-HANDLING", "level": 1, "total_bytes": 174, "expanded_from": {"copybook": "ERRHND", "copybook_file_id": "SYS-PORTFOLIO-001-FIL-0019", "line": 25, "replacing": null}}
-         ]}
+        {
+          "type": "copy_expansion",
+          "holder_id": "SYS-PORTFOLIO-001-FIL-0060-REC-0003",
+          "copybook": "ERRHND",
+          "copybook_file_id": "SYS-PORTFOLIO-001-FIL-0019",
+          "include_kind": "COPY",
+          "line": 25,
+          "replacing": null,
+          "expanded_from": {"copybook": "ERRHND", "copybook_file_id": "SYS-PORTFOLIO-001-FIL-0019", "line": 25, "replacing": null},
+          "records": [
+            {"record_id": "SYS-PORTFOLIO-001-FIL-0019-REC-0001", "name": "ERROR-HANDLING", "total_bytes": 174, "layout_file": "SYS-PORTFOLIO-001-FIL-0019__ERRHND.json"}
+          ]
+        }
       ]
     },
     {
       "record_id": "SYS-PORTFOLIO-001-FIL-0060-REC-0004",
-      "section": "LINKAGE", "section_id": "SYS-PORTFOLIO-001-FIL-0060-SEC-0002", "fd_name": null,
-      "is_fragment": false, "level": 1, "name": "DB2-REQUEST-AREA",
-      "pic": null, "type": "GROUP", "storage_type": "DISPLAY", "bytes": 105, "total_bytes": 105, "inline_bytes": 105,
-      "redefines": null, "occurs": null, "value": null, "line": 28, "end_line": 37,
+      "section": "LINKAGE",
+      "section_id": "SYS-PORTFOLIO-001-FIL-0060-SEC-0002",
+      "fd_name": null,
+      "is_fragment": false,
+      "level": 1,
+      "name": "DB2-REQUEST-AREA",
+      "pic": null,
+      "type": "GROUP",
+      "storage_type": "DISPLAY",
+      "bytes": 105,
+      "total_bytes": 105,
+      "inline_bytes": 105,
+      "redefines": null,
+      "occurs": null,
+      "value": null,
+      "line": 28,
+      "end_line": 37,
       "children": [
         {"field_id": "SYS-PORTFOLIO-001-FIL-0060-FLD-000005", "path": "DB2-REQUEST-TYPE", "level": 5, "name": "DB2-REQUEST-TYPE", "pic": "X", "pic_parsed": {"raw": "X", "normalized_type": "STRING", "length": 1, "decimal_places": 0, "signed": false, "storage_type": "DISPLAY"}, "bytes": 1, "redefines": null, "occurs": null, "value": null, "line": 29, "children": [
-          {"field_id": "SYS-PORTFOLIO-001-FIL-0060-FLD-000006", "path": "DB2-REQUEST-TYPE.DB2-CONNECT", "level": 88, "name": "DB2-CONNECT", "pic": null, "type": "CONDITION", "parent_field": "DB2-REQUEST-TYPE", "value": null, "values_raw": "'C'", "values": ["C"], "line": 30, "children": []},
-          {"field_id": "SYS-PORTFOLIO-001-FIL-0060-FLD-000007", "path": "DB2-REQUEST-TYPE.DB2-DISCONNECT", "level": 88, "name": "DB2-DISCONNECT", "pic": null, "type": "CONDITION", "parent_field": "DB2-REQUEST-TYPE", "value": null, "values_raw": "'D'", "values": ["D"], "line": 31, "children": []},
-          {"field_id": "SYS-PORTFOLIO-001-FIL-0060-FLD-000008", "path": "DB2-REQUEST-TYPE.DB2-STATUS", "level": 88, "name": "DB2-STATUS", "pic": null, "type": "CONDITION", "parent_field": "DB2-REQUEST-TYPE", "value": null, "values_raw": "'S'", "values": ["S"], "line": 32, "children": []}
+          {"field_id": "SYS-PORTFOLIO-001-FIL-0060-FLD-000006", "path": "DB2-REQUEST-TYPE.DB2-CONNECT", "level": 88, "name": "DB2-CONNECT", "pic": null, "type": "CONDITION", "is_condition": true, "parent_field": "DB2-REQUEST-TYPE", "value": null, "values_raw": "'C'", "values": ["C"], "line": 30, "children": []},
+          {"field_id": "SYS-PORTFOLIO-001-FIL-0060-FLD-000007", "path": "DB2-REQUEST-TYPE.DB2-DISCONNECT", "level": 88, "name": "DB2-DISCONNECT", "pic": null, "type": "CONDITION", "is_condition": true, "parent_field": "DB2-REQUEST-TYPE", "value": null, "values_raw": "'D'", "values": ["D"], "line": 31, "children": []},
+          {"field_id": "SYS-PORTFOLIO-001-FIL-0060-FLD-000008", "path": "DB2-REQUEST-TYPE.DB2-STATUS", "level": 88, "name": "DB2-STATUS", "pic": null, "type": "CONDITION", "is_condition": true, "parent_field": "DB2-REQUEST-TYPE", "value": null, "values_raw": "'S'", "values": ["S"], "line": 32, "children": []}
         ]},
         {"field_id": "SYS-PORTFOLIO-001-FIL-0060-FLD-000009", "path": "DB2-RESPONSE-CODE", "level": 5, "name": "DB2-RESPONSE-CODE", "pic": "S9(8) COMP", "pic_parsed": {"raw": "S9(8) COMP", "normalized_type": "SIGNED_INTEGER", "length": 8, "decimal_places": 0, "signed": true, "storage_type": "BINARY"}, "bytes": 4, "redefines": null, "occurs": null, "value": null, "line": 33, "children": []},
         {"field_id": "SYS-PORTFOLIO-001-FIL-0060-FLD-000010", "path": "DB2-CONNECTION-TOKEN", "level": 5, "name": "DB2-CONNECTION-TOKEN", "pic": "X(16)", "pic_parsed": {"raw": "X(16)", "normalized_type": "STRING", "length": 16, "decimal_places": 0, "signed": false, "storage_type": "DISPLAY"}, "bytes": 16, "redefines": null, "occurs": null, "value": null, "line": 34, "children": []},
@@ -73,11 +148,14 @@
     }
   ],
   "copy_expansions": [
-    {"holder_local_id": "R1", "holder_id": "SYS-PORTFOLIO-001-FIL-0060-REC-0001", "section_id": null, "copybook": "SQLCA", "copybook_file_id": "SYS-PORTFOLIO-001-FIL-0017", "line": 16, "include_kind": "SQL_INCLUDE", "replacing": null, "target_record_ids": ["SYS-PORTFOLIO-001-FIL-0017-REC-0001"]},
-    {"holder_local_id": "R3", "holder_id": "SYS-PORTFOLIO-001-FIL-0060-REC-0003", "section_id": null, "copybook": "ERRHND", "copybook_file_id": "SYS-PORTFOLIO-001-FIL-0019", "line": 25, "include_kind": "COPY", "replacing": null, "target_record_ids": ["SYS-PORTFOLIO-001-FIL-0019-REC-0001"]}
+    {"line": 16, "copybook": "SQLCA", "copybook_file_id": "SYS-PORTFOLIO-001-FIL-0017", "include_kind": "SQL_INCLUDE", "replacing": null, "holder_id": "SYS-PORTFOLIO-001-FIL-0060-REC-0001", "holder_type": "record", "resolved": true, "expanded_record_ids": ["SYS-PORTFOLIO-001-FIL-0017-REC-0001"]},
+    {"line": 25, "copybook": "ERRHND", "copybook_file_id": "SYS-PORTFOLIO-001-FIL-0019", "include_kind": "COPY", "replacing": null, "holder_id": "SYS-PORTFOLIO-001-FIL-0060-REC-0003", "holder_type": "record", "resolved": true, "expanded_record_ids": ["SYS-PORTFOLIO-001-FIL-0019-REC-0001"]}
   ],
+  "unresolved_copy_stubs": [],
+  "registry_verification": {"verify_data_integrity": true, "verify_data_identities": true, "records_checked": 4, "fields_checked": 13, "expansions_checked": 2},
   "layout_issues": [
-    {"severity": "warning", "type": "nested_level_01_copy_expansion", "file_id": "SYS-PORTFOLIO-001-FIL-0060", "source_id": "DB2ONLN", "line": 16, "message": "EXEC SQL INCLUDE SQLCA (line 16) sits inside 01 WS-DB2-AREA (line 15), but the copybook's record SQL-STATUS-CODES is itself a level-01 entry. Linked by EXPANDS_COPY from WS-DB2-AREA (SYS-PORTFOLIO-001-FIL-0060-REC-0001); its 35 bytes are counted in WS-DB2-AREA total_bytes, which has no own fields (inline_bytes 0)."},
-    {"severity": "warning", "type": "nested_level_01_copy_expansion", "file_id": "SYS-PORTFOLIO-001-FIL-0060", "source_id": "DB2ONLN", "line": 25, "message": "COPY ERRHND (line 25) sits inside 01 WS-ERROR-AREA (line 24), but the copybook's record ERROR-HANDLING is itself a level-01 entry. Linked by EXPANDS_COPY from WS-ERROR-AREA (SYS-PORTFOLIO-001-FIL-0060-REC-0003); its 174 bytes are counted in WS-ERROR-AREA total_bytes, which has no own fields (inline_bytes 0)."}
+    {"severity": "info", "type": "upstream_parse_status", "file_id": "SYS-PORTFOLIO-001-FIL-0060", "source_id": "DB2ONLN_WS", "line": null, "message": "Agent 2 parse_status 'success'; DATA DIVISION taken from raw_structure and completed from source lines 13-38"},
+    {"severity": "info", "type": "sql_include_expanded", "file_id": "SYS-PORTFOLIO-001-FIL-0060", "source_id": "DB2ONLN_WS", "line": 16, "message": "EXEC SQL INCLUDE SQLCA END-EXEC inside 01 WS-DB2-AREA recorded as copy stub include_kind SQL_INCLUDE and expanded to SQLCA.cpy record SYS-PORTFOLIO-001-FIL-0017-REC-0001"},
+    {"severity": "info", "type": "copybook_01_nested_under_program_01", "file_id": "SYS-PORTFOLIO-001-FIL-0060", "source_id": "DB2ONLN_WS", "line": 16, "message": "Expanded copybook records at lines 16 and 25 are level-01 records placed inside program 01 groups (WS-DB2-AREA, WS-ERROR-AREA); record total_bytes include the expanded copybook record sizes, inline_bytes are 0"}
   ]
 }

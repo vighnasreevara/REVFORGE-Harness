@@ -1,6 +1,7 @@
 {
-  "id": "DB2HNDL",
+  "id": "DB2HNDL_WS",
   "source_type": "program_ws",
+  "program_id": "DB2HNDL",
   "source_file": "src/templates/database/db2-handling.cbl",
   "used_by_programs": ["DB2HNDL"],
   "total_fields": 16,
@@ -8,19 +9,56 @@
   "system_id": "SYS-PORTFOLIO-001",
   "file_id": "SYS-PORTFOLIO-001-FIL-0080",
   "path_id": "SYS-PORTFOLIO-001-PATH-0080",
-  "data_run_id": "DRUN-20261024T215053Z-ACC1",
+  "data_run_id": "DRUN-20261027T162831Z-1330",
+  "parse_run_id": "PRUN-20261027T155247Z-2626",
+  "upstream_parse_status": "partial",
+  "sections": [
+    {"name": "WORKING-STORAGE", "section_id": "SYS-PORTFOLIO-001-FIL-0080-SEC-0002", "start_line": 14}
+  ],
   "records": [
-    {"type": "copy_expansion", "section": "WORKING-STORAGE", "section_id": "SYS-PORTFOLIO-001-FIL-0080-SEC-0002", "holder": null, "copybook": "SQLCA", "copybook_file_id": "SYS-PORTFOLIO-001-FIL-0017", "line": 18, "include_kind": "SQL_INCLUDE", "replacing": null,
-     "layout_file": "data_layouts/SYS-PORTFOLIO-001-FIL-0017__SQLCA.json",
-     "records": [
-       {"record_id": "SYS-PORTFOLIO-001-FIL-0017-REC-0001", "name": "SQL-STATUS-CODES", "level": 1, "total_bytes": 35, "expanded_from": {"copybook": "SQLCA", "copybook_file_id": "SYS-PORTFOLIO-001-FIL-0017", "line": 18, "replacing": null}}
-     ]},
+    {
+      "type": "copy_expansion",
+      "copybook": "SQLCA",
+      "copybook_file_id": "SYS-PORTFOLIO-001-FIL-0017",
+      "line": 18,
+      "replacing": null,
+      "include_kind": "SQL_INCLUDE",
+      "section": "WORKING-STORAGE",
+      "section_id": "SYS-PORTFOLIO-001-FIL-0080-SEC-0002",
+      "fd_name": null,
+      "holder_id": "SYS-PORTFOLIO-001-FIL-0080-SEC-0002",
+      "expanded_from": {"copybook": "SQLCA", "copybook_file_id": "SYS-PORTFOLIO-001-FIL-0017", "line": 18, "replacing": null},
+      "records": [
+        {"record_id": "SYS-PORTFOLIO-001-FIL-0017-REC-0001", "name": "SQL-STATUS-CODES", "total_bytes": 35, "layout_file": "SYS-PORTFOLIO-001-FIL-0017__SQLCA.json"}
+      ]
+    },
+    {
+      "type": "exec_sql",
+      "sql_kind": "DECLARE TABLE",
+      "table": "PORTFOLIO",
+      "line": 23,
+      "end_line": 30,
+      "note": "EXEC SQL DECLARE ... TABLE block; DB2 declaration, not a COBOL data item; not registered"
+    },
     {
       "record_id": "SYS-PORTFOLIO-001-FIL-0080-REC-0001",
-      "section": "WORKING-STORAGE", "section_id": "SYS-PORTFOLIO-001-FIL-0080-SEC-0002", "fd_name": null,
-      "is_fragment": false, "level": 1, "name": "HV-PORTFOLIO",
-      "pic": null, "type": "GROUP", "storage_type": "DISPLAY", "bytes": 105, "total_bytes": 105, "inline_bytes": 105,
-      "redefines": null, "occurs": null, "value": null, "line": 35, "end_line": 41,
+      "section": "WORKING-STORAGE",
+      "section_id": "SYS-PORTFOLIO-001-FIL-0080-SEC-0002",
+      "fd_name": null,
+      "is_fragment": false,
+      "level": 1,
+      "name": "HV-PORTFOLIO",
+      "pic": null,
+      "type": "GROUP",
+      "storage_type": "DISPLAY",
+      "bytes": 105,
+      "total_bytes": 105,
+      "inline_bytes": 105,
+      "redefines": null,
+      "occurs": null,
+      "value": null,
+      "line": 35,
+      "end_line": 41,
       "children": [
         {"field_id": "SYS-PORTFOLIO-001-FIL-0080-FLD-000001", "path": "HV-PORTFOLIO-ID", "level": 5, "name": "HV-PORTFOLIO-ID", "pic": "X(10)", "pic_parsed": {"raw": "X(10)", "normalized_type": "STRING", "length": 10, "decimal_places": 0, "signed": false, "storage_type": "DISPLAY"}, "bytes": 10, "redefines": null, "occurs": null, "value": null, "line": 36, "children": []},
         {"field_id": "SYS-PORTFOLIO-001-FIL-0080-FLD-000002", "path": "HV-PORTFOLIO-NAME", "level": 5, "name": "HV-PORTFOLIO-NAME", "pic": "X(50)", "pic_parsed": {"raw": "X(50)", "normalized_type": "STRING", "length": 50, "decimal_places": 0, "signed": false, "storage_type": "DISPLAY"}, "bytes": 50, "redefines": null, "occurs": null, "value": null, "line": 37, "children": []},
@@ -32,10 +70,23 @@
     },
     {
       "record_id": "SYS-PORTFOLIO-001-FIL-0080-REC-0002",
-      "section": "WORKING-STORAGE", "section_id": "SYS-PORTFOLIO-001-FIL-0080-SEC-0002", "fd_name": null,
-      "is_fragment": false, "level": 1, "name": "HV-NULL-INDS",
-      "pic": null, "type": "GROUP", "storage_type": "DISPLAY", "bytes": 12, "total_bytes": 12, "inline_bytes": 12,
-      "redefines": null, "occurs": null, "value": null, "line": 46, "end_line": 52,
+      "section": "WORKING-STORAGE",
+      "section_id": "SYS-PORTFOLIO-001-FIL-0080-SEC-0002",
+      "fd_name": null,
+      "is_fragment": false,
+      "level": 1,
+      "name": "HV-NULL-INDS",
+      "pic": null,
+      "type": "GROUP",
+      "storage_type": "DISPLAY",
+      "bytes": 12,
+      "total_bytes": 12,
+      "inline_bytes": 12,
+      "redefines": null,
+      "occurs": null,
+      "value": null,
+      "line": 46,
+      "end_line": 52,
       "children": [
         {"field_id": "SYS-PORTFOLIO-001-FIL-0080-FLD-000007", "path": "NI-PORTFOLIO-ID", "level": 5, "name": "NI-PORTFOLIO-ID", "pic": "S9(4) COMP", "pic_parsed": {"raw": "S9(4) COMP", "normalized_type": "SIGNED_INTEGER", "length": 4, "decimal_places": 0, "signed": true, "storage_type": "BINARY"}, "bytes": 2, "redefines": null, "occurs": null, "value": null, "line": 47, "children": []},
         {"field_id": "SYS-PORTFOLIO-001-FIL-0080-FLD-000008", "path": "NI-PORTFOLIO-NAME", "level": 5, "name": "NI-PORTFOLIO-NAME", "pic": "S9(4) COMP", "pic_parsed": {"raw": "S9(4) COMP", "normalized_type": "SIGNED_INTEGER", "length": 4, "decimal_places": 0, "signed": true, "storage_type": "BINARY"}, "bytes": 2, "redefines": null, "occurs": null, "value": null, "line": 48, "children": []},
@@ -47,24 +98,40 @@
     },
     {
       "record_id": "SYS-PORTFOLIO-001-FIL-0080-REC-0003",
-      "section": "WORKING-STORAGE", "section_id": "SYS-PORTFOLIO-001-FIL-0080-SEC-0002", "fd_name": null,
-      "is_fragment": false, "level": 1, "name": "WS-DB2-ERROR-MSG",
-      "pic": null, "type": "GROUP", "storage_type": "DISPLAY", "bytes": 114, "total_bytes": 114, "inline_bytes": 114,
-      "redefines": null, "occurs": null, "value": null, "line": 57, "end_line": 63,
+      "section": "WORKING-STORAGE",
+      "section_id": "SYS-PORTFOLIO-001-FIL-0080-SEC-0002",
+      "fd_name": null,
+      "is_fragment": false,
+      "level": 1,
+      "name": "WS-DB2-ERROR-MSG",
+      "pic": null,
+      "type": "GROUP",
+      "storage_type": "DISPLAY",
+      "bytes": 114,
+      "total_bytes": 114,
+      "inline_bytes": 114,
+      "redefines": null,
+      "occurs": null,
+      "value": null,
+      "line": 57,
+      "end_line": 63,
       "children": [
-        {"field_id": "SYS-PORTFOLIO-001-FIL-0080-FLD-000013", "path": "FILLER#1", "filler_key": "FILLER_0058", "level": 5, "name": "FILLER_0058", "pic": "X(20)", "pic_parsed": {"raw": "X(20)", "normalized_type": "STRING", "length": 20, "decimal_places": 0, "signed": false, "storage_type": "DISPLAY"}, "is_filler": true, "bytes": 20, "redefines": null, "occurs": null, "value": "'DB2 ERROR - SQLCODE: '", "line": 58, "end_line": 59, "children": []},
+        {"field_id": "SYS-PORTFOLIO-001-FIL-0080-FLD-000013", "path": "FILLER#1", "filler_key": "FILLER_0058", "is_filler": true, "level": 5, "name": "FILLER_0058", "pic": "X(20)", "pic_parsed": {"raw": "X(20)", "normalized_type": "STRING", "length": 20, "decimal_places": 0, "signed": false, "storage_type": "DISPLAY"}, "bytes": 20, "redefines": null, "occurs": null, "value": "'DB2 ERROR - SQLCODE: '", "line": 58, "end_line": 59, "children": []},
         {"field_id": "SYS-PORTFOLIO-001-FIL-0080-FLD-000014", "path": "WS-SQLCODE-DISP", "level": 5, "name": "WS-SQLCODE-DISP", "pic": "-999", "pic_parsed": {"raw": "-999", "normalized_type": "NUMERIC_EDITED", "length": 4, "decimal_places": 0, "signed": false, "storage_type": "DISPLAY"}, "bytes": 4, "redefines": null, "occurs": null, "value": null, "line": 60, "children": []},
-        {"field_id": "SYS-PORTFOLIO-001-FIL-0080-FLD-000015", "path": "FILLER#2", "filler_key": "FILLER_0061", "level": 5, "name": "FILLER_0061", "pic": "X(20)", "pic_parsed": {"raw": "X(20)", "normalized_type": "STRING", "length": 20, "decimal_places": 0, "signed": false, "storage_type": "DISPLAY"}, "is_filler": true, "bytes": 20, "redefines": null, "occurs": null, "value": "', SQLERRM: '", "line": 61, "end_line": 62, "children": []},
+        {"field_id": "SYS-PORTFOLIO-001-FIL-0080-FLD-000015", "path": "FILLER#2", "filler_key": "FILLER_0061", "is_filler": true, "level": 5, "name": "FILLER_0061", "pic": "X(20)", "pic_parsed": {"raw": "X(20)", "normalized_type": "STRING", "length": 20, "decimal_places": 0, "signed": false, "storage_type": "DISPLAY"}, "bytes": 20, "redefines": null, "occurs": null, "value": "', SQLERRM: '", "line": 61, "end_line": 62, "children": []},
         {"field_id": "SYS-PORTFOLIO-001-FIL-0080-FLD-000016", "path": "WS-SQLERRM", "level": 5, "name": "WS-SQLERRM", "pic": "X(70)", "pic_parsed": {"raw": "X(70)", "normalized_type": "STRING", "length": 70, "decimal_places": 0, "signed": false, "storage_type": "DISPLAY"}, "bytes": 70, "redefines": null, "occurs": null, "value": null, "line": 63, "children": []}
       ]
     }
   ],
   "copy_expansions": [
-    {"holder_local_id": null, "holder_id": null, "section_id": "SYS-PORTFOLIO-001-FIL-0080-SEC-0002", "copybook": "SQLCA", "copybook_file_id": "SYS-PORTFOLIO-001-FIL-0017", "line": 18, "include_kind": "SQL_INCLUDE", "replacing": null, "target_record_ids": ["SYS-PORTFOLIO-001-FIL-0017-REC-0001"]}
+    {"line": 18, "copybook": "SQLCA", "copybook_file_id": "SYS-PORTFOLIO-001-FIL-0017", "include_kind": "SQL_INCLUDE", "replacing": null, "holder_id": "SYS-PORTFOLIO-001-FIL-0080-SEC-0002", "holder_type": "section", "resolved": true, "expanded_record_ids": ["SYS-PORTFOLIO-001-FIL-0017-REC-0001"]}
   ],
+  "unresolved_copy_stubs": [],
+  "registry_verification": {"verify_data_integrity": true, "verify_data_identities": true, "records_checked": 3, "fields_checked": 16, "expansions_checked": 1},
   "layout_issues": [
-    {"severity": "warning", "type": "misplaced_comment_indicator", "file_id": "SYS-PORTFOLIO-001-FIL-0080", "source_id": "DB2HNDL", "line": 1, "message": "Line 1 has '*' in column 8 instead of column 7 (first non-blank character in columns 8-72 is '*'). Skipped as a comment."},
-    {"severity": "info", "type": "exec_sql_declare_table", "file_id": "SYS-PORTFOLIO-001-FIL-0080", "source_id": "DB2HNDL", "line": 23, "message": "EXEC SQL DECLARE PORTFOLIO TABLE ... END-EXEC (lines 23-30) in WORKING-STORAGE is a DB2 declaration, not a COBOL data item. Not registered."},
-    {"severity": "warning", "type": "value_exceeds_pic_length", "file_id": "SYS-PORTFOLIO-001-FIL-0080", "source_id": "DB2HNDL", "line": 58, "message": "FILLER_0058 (WS-DB2-ERROR-MSG.FILLER#1) PIC X(20) has VALUE 'DB2 ERROR - SQLCODE: ' (21 characters, lines 58-59). Recorded as literal text only."}
+    {"severity": "info", "type": "upstream_partial", "file_id": "SYS-PORTFOLIO-001-FIL-0080", "source_id": "DB2HNDL_WS", "line": null, "message": "Agent 2 parse_status is 'partial' (unresolved PERFORM target 2310-PROCESS-CURSOR-ROW at line 174 in PROCEDURE DIVISION); DATA DIVISION processed normally"},
+    {"severity": "warning", "type": "misplaced_comment_indicator", "file_id": "SYS-PORTFOLIO-001-FIL-0080", "source_id": "DB2HNDL_WS", "line": 1, "message": "First non-blank character in columns 8-72 is '*' (column 7 is blank); line skipped as a comment"},
+    {"severity": "info", "type": "sql_declare_table_skipped", "file_id": "SYS-PORTFOLIO-001-FIL-0080", "source_id": "DB2HNDL_WS", "line": 23, "message": "EXEC SQL DECLARE PORTFOLIO TABLE block (lines 23-30) is a DB2 declaration, not a COBOL data item; not registered"},
+    {"severity": "info", "type": "value_literal_exceeds_pic_length", "file_id": "SYS-PORTFOLIO-001-FIL-0080", "source_id": "DB2HNDL_WS", "line": 58, "message": "FILLER_0058 PIC X(20) has VALUE literal 'DB2 ERROR - SQLCODE: ' of 21 characters; literal recorded as written, not evaluated"}
   ]
 }

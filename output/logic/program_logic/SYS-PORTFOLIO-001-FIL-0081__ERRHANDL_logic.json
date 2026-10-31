@@ -1,25 +1,30 @@
 {
-"program_summary": {"program_id": "ERRHANDL", "file_id": "SYS-PORTFOLIO-001-FIL-0081", "logic_file": "program_logic/SYS-PORTFOLIO-001-FIL-0081__ERRHANDL_logic.json", "logic_status": "success", "paragraphs_translated": 11, "execution_paths": 1, "branches": 3, "loops": 0, "dead_code_confirmed": 0, "goto_annotations": 0, "unresolvable_paths": 0, "unresolved_ids": 0},
+"program_summary": {"program_id": "ERRHANDL", "file_id": "SYS-PORTFOLIO-001-FIL-0081", "logic_file": "program_logic/SYS-PORTFOLIO-001-FIL-0081__ERRHANDL_logic.json", "logic_status": "partial", "paragraphs_translated": 11, "execution_paths": 1, "branches": 3, "loops": 0, "dead_code_confirmed": 0, "goto_annotations": 0, "unresolvable_paths": 1, "unresolved_ids": 0},
 "program_id": "ERRHANDL",
+"generated_at": "2026-10-27T21:29:47Z",
+"agent_version": "4_logic@1.0",
 "system_id": "SYS-PORTFOLIO-001",
 "file_id": "SYS-PORTFOLIO-001-FIL-0081",
 "path_id": "SYS-PORTFOLIO-001-PATH-0081",
 "relative_path": "src/templates/error/error-handling.cbl",
-"parse_run_id": "PRUN-20261023T023803Z-ACC2",
+"parse_run_id": "PRUN-20261027T155247Z-2626",
+"data_run_id": "DRUN-20261027T162831Z-1330",
+"source_artifacts": {"raw_structure": "output/parser/raw_structure/SYS-PORTFOLIO-001-FIL-0081__ERRHANDL.json", "data_layout": "output/data/data_layouts/SYS-PORTFOLIO-001-FIL-0081__ERRHANDL_WS.json", "copybook_layouts": []},
 "upstream": {
+  "parse_status": "success",
   "verification": {
     "verdict": "VALID",
-    "verdict_reasons": ["V2, V3 and V4 consistent; Agent 2 parse_status 'success'; the program uses no copybooks"],
-    "v1": {"raw_structure": "present", "parse_status": "success", "program_layout": "present", "program_layout_data_run_id": "DRUN-20261024T215053Z-ACC1", "copybook_layouts": [], "unresolved_copy_stubs": 0},
-    "v2_file_identities": {
-      "program_entries": {"require_completed": ["parser", "data"], "entries": ["raw_structure|SYS-PORTFOLIO-001-FIL-0081", "data_layout|SYS-PORTFOLIO-001-FIL-0081"], "result": "batched with the RPTAUD00, RTNCDE00, DB2CONN and DB2HNDL program entries: checked 10, ok 10, problems [], duplicates [], consistent true"},
-      "copybook_entries": {"require_completed": ["data"], "entries": [], "result": "no copybook layouts used by this program"},
-      "consistent": true
+    "verdict_reason": "V2, V3 and V4 consistent; Agent 2 parse_status success; program has no COPY stubs.",
+    "V2_file_identities": {
+      "program_entries": {"checked": 2, "ok": 2, "problems": [], "duplicate_file_ids_in_json": [], "require_completed": ["parser", "data"], "consistent": true, "note": "checked in one batched call with the program entries of PORTTEST, TSTGEN00 and UTLMON00 (8 entries, 8 OK)"},
+      "copybook_entries": {"checked": 0, "ok": 0, "problems": [], "file_ids": [], "require_completed": ["data"], "consistent": true, "note": "no copybook layouts used"}
     },
-    "v3_structure_identities": {"sections_checked": 2, "paragraphs_checked": 11, "statements_checked": 46, "edges_checked": 13, "registered_edges": 13, "section_problems": [], "paragraph_problems": [], "statement_problems": [], "edge_problems": [], "invalid_registered_edges": [], "registered_not_in_json": {"missing_count": 0}, "duplicate_ids_in_json": [], "consistent": true, "note": "section names sent: CONFIGURATION for SEC-0001; null for WORKING-STORAGE (raw_structure does not carry it)"},
-    "v4_data_identities": [
-      {"file_id": "SYS-PORTFOLIO-001-FIL-0081", "layout": "program", "records_checked": 5, "fields_checked": 26, "expansions_checked": 0, "record_problems": [], "field_problems": [], "expansion_problems": [], "copybook_records_in_program": 0, "registered_not_in_json": {"missing_count": 0}, "duplicate_ids_in_json": [], "consistent": true}
-    ]
+    "V3_structure_identities": {"sections_checked": 2, "paragraphs_checked": 11, "statements_checked": 46, "edges_checked": 13, "registered_edges": 13, "section_problems": [], "paragraph_problems": [], "statement_problems": [], "edge_problems": [], "invalid_registered_edges": [], "registered_not_in_json": {"missing_count": 0}, "duplicate_ids_in_json": [], "consistent": true},
+    "V4_data_identities": {
+      "program_layout": {"file_id": "SYS-PORTFOLIO-001-FIL-0081", "records_checked": 5, "fields_checked": 26, "expansions_checked": 0, "record_problems": [], "field_problems": [], "expansion_problems": [], "copybook_records_in_program": 0, "registered_not_in_json": {"missing_count": 0}, "duplicate_ids_in_json": [], "consistent": true},
+      "copybook_layouts": [],
+      "unresolved_copy_stubs": []
+    }
   }
 },
 "execution_traces": [
@@ -27,105 +32,87 @@
     "entry_point": "0000-MAIN",
     "entry_point_id": "SYS-PORTFOLIO-001-FIL-0081-PAR-0001",
     "entry_type": "batch_main",
+    "entry_note": "First paragraph of a PROCEDURE DIVISION without USING; ends with GOBACK. The file is a template (src/templates/error) demonstrating error-handling patterns.",
     "steps": [
-      {"step": 1, "paragraph": "0000-MAIN", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0081-PAR-0001", "action": "PERFORM", "target": "1000-INITIALIZE", "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0081-PAR-0002", "target_section_id": null, "condition": null, "line": 68, "statement_id": "SYS-PORTFOLIO-001-FIL-0081-STMT-000001"},
-      {"step": 2, "paragraph": "0000-MAIN", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0081-PAR-0001", "action": "PERFORM", "target": "2000-PROCESS", "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0081-PAR-0003", "target_section_id": null, "condition": null, "line": 69, "statement_id": "SYS-PORTFOLIO-001-FIL-0081-STMT-000002"},
-      {"step": 3, "paragraph": "2000-PROCESS", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0081-PAR-0003", "action": "PERFORM", "target": "8010-HANDLE-WARNING", "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0081-PAR-0006", "target_section_id": null, "condition": null, "line": 86, "statement_id": "SYS-PORTFOLIO-001-FIL-0081-STMT-000008"},
-      {"step": 4, "paragraph": "8010-HANDLE-WARNING", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0081-PAR-0006", "action": "PERFORM", "target": "8100-LOG-ERROR", "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0081-PAR-0010", "target_section_id": null, "condition": null, "line": 132, "statement_id": "SYS-PORTFOLIO-001-FIL-0081-STMT-000018"},
-      {"step": 5, "paragraph": "2000-PROCESS", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0081-PAR-0003", "action": "PERFORM", "target": "8020-HANDLE-ERROR", "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0081-PAR-0007", "target_section_id": null, "condition": null, "line": 89, "statement_id": "SYS-PORTFOLIO-001-FIL-0081-STMT-000009"},
-      {"step": 6, "paragraph": "8020-HANDLE-ERROR", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0081-PAR-0007", "action": "PERFORM", "target": "8100-LOG-ERROR", "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0081-PAR-0010", "target_section_id": null, "condition": null, "line": 144, "statement_id": "SYS-PORTFOLIO-001-FIL-0081-STMT-000024"},
-      {"step": 7, "paragraph": "2000-PROCESS", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0081-PAR-0003", "action": "PERFORM", "target": "8030-HANDLE-SEVERE", "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0081-PAR-0008", "target_section_id": null, "condition": null, "line": 92, "statement_id": "SYS-PORTFOLIO-001-FIL-0081-STMT-000010"},
-      {"step": 8, "paragraph": "8030-HANDLE-SEVERE", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0081-PAR-0008", "action": "PERFORM", "target": "8100-LOG-ERROR", "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0081-PAR-0010", "target_section_id": null, "condition": null, "line": 156, "statement_id": "SYS-PORTFOLIO-001-FIL-0081-STMT-000030"},
-      {"step": 9, "paragraph": "2000-PROCESS", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0081-PAR-0003", "action": "PERFORM", "target": "8040-HANDLE-ABEND", "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0081-PAR-0009", "target_section_id": null, "condition": null, "line": 95, "statement_id": "SYS-PORTFOLIO-001-FIL-0081-STMT-000011"},
-      {"step": 10, "paragraph": "8040-HANDLE-ABEND", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0081-PAR-0009", "action": "PERFORM", "target": "8100-LOG-ERROR", "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0081-PAR-0010", "target_section_id": null, "condition": null, "line": 168, "statement_id": "SYS-PORTFOLIO-001-FIL-0081-STMT-000035"},
-      {"step": 11, "paragraph": "8040-HANDLE-ABEND", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0081-PAR-0009", "action": "PERFORM", "target": "8500-INITIATE-ABEND", "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0081-PAR-0011", "target_section_id": null, "condition": null, "line": 169, "statement_id": "SYS-PORTFOLIO-001-FIL-0081-STMT-000036"},
-      {"step": 12, "paragraph": "8500-INITIATE-ABEND", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0081-PAR-0011", "action": "CALL", "target": "CEE3ABD", "target_paragraph_id": null, "target_section_id": null, "condition": null, "line": 186, "statement_id": "SYS-PORTFOLIO-001-FIL-0081-STMT-000040"},
-      {"step": 13, "paragraph": "0000-MAIN", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0081-PAR-0001", "action": "PERFORM", "target": "3000-TERMINATE", "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0081-PAR-0004", "target_section_id": null, "condition": null, "line": 70, "statement_id": "SYS-PORTFOLIO-001-FIL-0081-STMT-000003"},
-      {"step": 14, "paragraph": "3000-TERMINATE", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0081-PAR-0004", "action": "PERFORM", "target": "8000-CHECK-FINAL-STATUS", "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0081-PAR-0005", "target_section_id": null, "condition": null, "line": 99, "statement_id": "SYS-PORTFOLIO-001-FIL-0081-STMT-000012"},
-      {"step": 15, "paragraph": "0000-MAIN", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0081-PAR-0001", "action": "GOBACK", "target": null, "target_paragraph_id": null, "target_section_id": null, "condition": null, "line": 71, "statement_id": "SYS-PORTFOLIO-001-FIL-0081-STMT-000004"}
-    ]
+      {"step": 1, "call_depth": 0, "paragraph": "0000-MAIN", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0081-PAR-0001", "action": "PERFORM", "target": "1000-INITIALIZE", "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0081-PAR-0002", "target_section_id": null, "condition": null, "line": 68, "statement_id": "SYS-PORTFOLIO-001-FIL-0081-STMT-000001"},
+      {"step": 2, "call_depth": 0, "paragraph": "0000-MAIN", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0081-PAR-0001", "action": "PERFORM", "target": "2000-PROCESS", "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0081-PAR-0003", "target_section_id": null, "condition": null, "line": 69, "statement_id": "SYS-PORTFOLIO-001-FIL-0081-STMT-000002"},
+      {"step": 3, "call_depth": 1, "paragraph": "2000-PROCESS", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0081-PAR-0003", "action": "PERFORM", "target": "8010-HANDLE-WARNING", "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0081-PAR-0006", "target_section_id": null, "condition": null, "line": 86, "statement_id": "SYS-PORTFOLIO-001-FIL-0081-STMT-000008"},
+      {"step": 4, "call_depth": 2, "paragraph": "8010-HANDLE-WARNING", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0081-PAR-0006", "action": "PERFORM", "target": "8100-LOG-ERROR", "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0081-PAR-0010", "target_section_id": null, "condition": null, "line": 132, "statement_id": "SYS-PORTFOLIO-001-FIL-0081-STMT-000018"},
+      {"step": 5, "call_depth": 1, "paragraph": "2000-PROCESS", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0081-PAR-0003", "action": "PERFORM", "target": "8020-HANDLE-ERROR", "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0081-PAR-0007", "target_section_id": null, "condition": null, "line": 89, "statement_id": "SYS-PORTFOLIO-001-FIL-0081-STMT-000009"},
+      {"step": 6, "call_depth": 2, "paragraph": "8020-HANDLE-ERROR", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0081-PAR-0007", "action": "PERFORM", "target": "8100-LOG-ERROR", "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0081-PAR-0010", "target_section_id": null, "condition": null, "line": 144, "statement_id": "SYS-PORTFOLIO-001-FIL-0081-STMT-000024", "expansion": "same callee body as step 4"},
+      {"step": 7, "call_depth": 1, "paragraph": "2000-PROCESS", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0081-PAR-0003", "action": "PERFORM", "target": "8030-HANDLE-SEVERE", "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0081-PAR-0008", "target_section_id": null, "condition": null, "line": 92, "statement_id": "SYS-PORTFOLIO-001-FIL-0081-STMT-000010"},
+      {"step": 8, "call_depth": 2, "paragraph": "8030-HANDLE-SEVERE", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0081-PAR-0008", "action": "PERFORM", "target": "8100-LOG-ERROR", "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0081-PAR-0010", "target_section_id": null, "condition": null, "line": 156, "statement_id": "SYS-PORTFOLIO-001-FIL-0081-STMT-000030", "expansion": "same callee body as step 4"},
+      {"step": 9, "call_depth": 1, "paragraph": "2000-PROCESS", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0081-PAR-0003", "action": "PERFORM", "target": "8040-HANDLE-ABEND", "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0081-PAR-0009", "target_section_id": null, "condition": null, "line": 95, "statement_id": "SYS-PORTFOLIO-001-FIL-0081-STMT-000011"},
+      {"step": 10, "call_depth": 2, "paragraph": "8040-HANDLE-ABEND", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0081-PAR-0009", "action": "PERFORM", "target": "8100-LOG-ERROR", "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0081-PAR-0010", "target_section_id": null, "condition": null, "line": 168, "statement_id": "SYS-PORTFOLIO-001-FIL-0081-STMT-000035", "expansion": "same callee body as step 4"},
+      {"step": 11, "call_depth": 2, "paragraph": "8040-HANDLE-ABEND", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0081-PAR-0009", "action": "PERFORM", "target": "8500-INITIATE-ABEND", "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0081-PAR-0011", "target_section_id": null, "condition": null, "line": 169, "statement_id": "SYS-PORTFOLIO-001-FIL-0081-STMT-000036"},
+      {"step": 12, "call_depth": 3, "paragraph": "8500-INITIATE-ABEND", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0081-PAR-0011", "action": "CALL", "target": "CEE3ABD", "call_type": "STATIC_CALL", "target_paragraph_id": null, "target_section_id": null, "target_program_file_id": null, "condition": null, "line": 186, "statement_id": "SYS-PORTFOLIO-001-FIL-0081-STMT-000040", "unresolvable": true, "runtime_conditional": true, "note": "CALL 'CEE3ABD' USING RC-CRITICAL, 3. Language Environment abend service; not in the file registry (Agent 1 unresolved_reference), so no callee logic is available. Whether control returns to this program after the call cannot be determined from this source; steps 13-15 are statically next but may not execute at run time."},
+      {"step": 13, "call_depth": 0, "paragraph": "0000-MAIN", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0081-PAR-0001", "action": "PERFORM", "target": "3000-TERMINATE", "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0081-PAR-0004", "target_section_id": null, "condition": null, "line": 70, "statement_id": "SYS-PORTFOLIO-001-FIL-0081-STMT-000003"},
+      {"step": 14, "call_depth": 1, "paragraph": "3000-TERMINATE", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0081-PAR-0004", "action": "PERFORM", "target": "8000-CHECK-FINAL-STATUS", "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0081-PAR-0005", "target_section_id": null, "condition": null, "line": 99, "statement_id": "SYS-PORTFOLIO-001-FIL-0081-STMT-000012"},
+      {"step": 15, "call_depth": 0, "paragraph": "0000-MAIN", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0081-PAR-0001", "action": "GOBACK", "target": null, "target_paragraph_id": null, "target_section_id": null, "condition": null, "line": 71, "statement_id": "SYS-PORTFOLIO-001-FIL-0081-STMT-000004"}
+    ],
+    "path_summary": "0000-MAIN -> 1000-INITIALIZE (reset flags and counters) -> 2000-PROCESS, which unconditionally runs the four demonstration handlers in order: 8010-HANDLE-WARNING, 8020-HANDLE-ERROR, 8030-HANDLE-SEVERE (each counts the error, sets severity/number/text and performs 8100-LOG-ERROR) and 8040-HANDLE-ABEND (logs, then 8500-INITIATE-ABEND -> CALL 'CEE3ABD') -> 3000-TERMINATE -> 8000-CHECK-FINAL-STATUS (return code from counters) -> GOBACK. The path after the CEE3ABD call depends on the external routine and is flagged unresolvable."
   }
 ],
 "branch_map": [
   {
-    "paragraph": "8000-CHECK-FINAL-STATUS", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0081-PAR-0005",
+    "paragraph": "8000-CHECK-FINAL-STATUS",
+    "paragraph_id": "SYS-PORTFOLIO-001-FIL-0081-PAR-0005",
     "branches": [
-      {"type": "IF", "line": 109, "statement_id": "SYS-PORTFOLIO-001-FIL-0081-STMT-000013", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0081-PAR-0005",
-       "condition_text": "WS-SEVERE-COUNT > ZERO", "condition_fields": ["WS-SEVERE-COUNT"],
-       "condition_field_ids": [{"name": "WS-SEVERE-COUNT", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0081-FLD-000020", "target_kind": "field", "candidate_ids": []}],
-       "has_else": true, "then_line_range": [110, 110], "else_line_range": [112, 120], "end_if_line": 121, "nested_depth": 1,
-       "outcomes": [
-         {"label": "THEN", "line_range": [110, 110], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0081-STMT-000042"]},
-         {"label": "ELSE", "line_range": [112, 120], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0081-STMT-000041"]}]},
-      {"type": "IF", "line": 112, "statement_id": "SYS-PORTFOLIO-001-FIL-0081-STMT-000041", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0081-PAR-0005",
-       "condition_text": "WS-ERROR-COUNT > ZERO", "condition_fields": ["WS-ERROR-COUNT"],
-       "condition_field_ids": [{"name": "WS-ERROR-COUNT", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0081-FLD-000019", "target_kind": "field", "candidate_ids": []}],
-       "has_else": true, "then_line_range": [113, 113], "else_line_range": [115, 119], "end_if_line": 120, "nested_depth": 2,
-       "outcomes": [
-         {"label": "THEN", "line_range": [113, 113], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0081-STMT-000044"]},
-         {"label": "ELSE", "line_range": [115, 119], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0081-STMT-000043"]}]},
-      {"type": "IF", "line": 115, "statement_id": "SYS-PORTFOLIO-001-FIL-0081-STMT-000043", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0081-PAR-0005",
-       "condition_text": "WS-WARNING-COUNT > ZERO", "condition_fields": ["WS-WARNING-COUNT"],
-       "condition_field_ids": [{"name": "WS-WARNING-COUNT", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0081-FLD-000018", "target_kind": "field", "candidate_ids": []}],
-       "has_else": true, "then_line_range": [116, 116], "else_line_range": [118, 118], "end_if_line": 119, "nested_depth": 3,
-       "outcomes": [
-         {"label": "THEN", "line_range": [116, 116], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0081-STMT-000046"]},
-         {"label": "ELSE", "line_range": [118, 118], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0081-STMT-000045"]}]}
+      {"type": "IF", "line": 109, "statement_id": "SYS-PORTFOLIO-001-FIL-0081-STMT-000013", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0081-PAR-0005", "condition_text": "WS-SEVERE-COUNT > ZERO", "condition_fields": ["WS-SEVERE-COUNT"], "condition_field_ids": [{"name": "WS-SEVERE-COUNT", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0081-FLD-000020", "target_kind": "field", "candidate_ids": []}], "has_else": true, "then_line_range": [110, 110], "else_line_range": [112, 120], "end_if_line": 121, "nested_depth": 1,
+       "outcomes": [{"label": "THEN", "line_range": [110, 110], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0081-STMT-000042"]}, {"label": "ELSE", "line_range": [112, 120], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0081-STMT-000041"]}]},
+      {"type": "IF", "line": 112, "statement_id": "SYS-PORTFOLIO-001-FIL-0081-STMT-000041", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0081-PAR-0005", "condition_text": "WS-ERROR-COUNT > ZERO", "condition_fields": ["WS-ERROR-COUNT"], "condition_field_ids": [{"name": "WS-ERROR-COUNT", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0081-FLD-000019", "target_kind": "field", "candidate_ids": []}], "has_else": true, "then_line_range": [113, 113], "else_line_range": [115, 119], "end_if_line": 120, "nested_depth": 2,
+       "outcomes": [{"label": "THEN", "line_range": [113, 113], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0081-STMT-000044"]}, {"label": "ELSE", "line_range": [115, 119], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0081-STMT-000043"]}]},
+      {"type": "IF", "line": 115, "statement_id": "SYS-PORTFOLIO-001-FIL-0081-STMT-000043", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0081-PAR-0005", "condition_text": "WS-WARNING-COUNT > ZERO", "condition_fields": ["WS-WARNING-COUNT"], "condition_field_ids": [{"name": "WS-WARNING-COUNT", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0081-FLD-000018", "target_kind": "field", "candidate_ids": []}], "has_else": true, "then_line_range": [116, 116], "else_line_range": [118, 118], "end_if_line": 119, "nested_depth": 3,
+       "outcomes": [{"label": "THEN", "line_range": [116, 116], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0081-STMT-000046"]}, {"label": "ELSE", "line_range": [118, 118], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0081-STMT-000045"]}]}
     ]
   }
 ],
 "loops": [],
 "dead_code_confirmed": [],
-"unresolvable_paths": [],
-"trace_issues": [
-  {"severity": "info", "type": "external_call", "line": 186, "statement_id": "SYS-PORTFOLIO-001-FIL-0081-STMT-000040", "message": "Static CALL 'CEE3ABD' USING RC-CRITICAL, 3: external Language Environment abend service, not a program of this system; not traced. The second argument is the numeric literal 3, recorded verbatim."},
-  {"severity": "warning", "type": "abend_reaches_terminate", "line": 169, "statement_id": "SYS-PORTFOLIO-001-FIL-0081-STMT-000036", "ambiguous": true, "message": "2000-PROCESS performs 8040-HANDLE-ABEND unconditionally, and 8040 performs 8500-INITIATE-ABEND, which calls CEE3ABD. If CEE3ABD abends the run unit as its name indicates, steps 13-15 (3000-TERMINATE, 8000-CHECK-FINAL-STATUS, GOBACK) are not reached. The static trace lists them in source order; whether they run depends on the external service's behaviour."},
-  {"severity": "info", "type": "template_program", "message": "Source is under src/templates/error; 2000-PROCESS is commented as 'Example error handling scenarios' and performs every handler once in fixed order, with no condition."},
-  {"severity": "info", "type": "special_register", "lines": [110, 113, 116, 118], "message": "RETURN-CODE is the COBOL special register; not looked up in the field registry."}
+"unresolvable_paths": [
+  {"statement_id": "SYS-PORTFOLIO-001-FIL-0081-STMT-000040", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0081-PAR-0011", "paragraph": "8500-INITIATE-ABEND", "target": "CEE3ABD", "line": 186, "kind": "external_call_not_in_registry", "reason": "Static CALL to the Language Environment service CEE3ABD, which is not in the file registry; its effect on control flow (return or abnormal termination) cannot be traced from this repository."}
 ],
-"program_narrative": "Program ERRHANDL is a batch template that demonstrates the standard error-handling pattern; it has no inputs or outputs other than console DISPLAY messages and the RETURN-CODE special register. After clearing its error flags and counters, it runs four example handlers in fixed order: a warning (count 1, message 'INVALID INPUT PARAMETER RECEIVED'), an error (count 1, flag set, message 'REQUIRED FIELD IS MISSING'), a severe error (count 1, flag set, message 'FILE OPERATION FAILED') and an abend (severity CRITICAL, number 999). Each handler fills the error prefix, number, severity and text and displays them through the common logging routine 8100-LOG-ERROR. The abend handler then displays 'ABNORMAL TERMINATION INITIATED' and calls the Language Environment service CEE3ABD with RC-CRITICAL (16), which is expected to end the run abnormally. If control did return, 8000-CHECK-FINAL-STATUS would set RETURN-CODE to the highest severity counted: 12 for severe, 8 for error, 4 for warning, otherwise 0.",
+"trace_issues": [
+  {"severity": "info", "type": "upstream_issue", "upstream_agent": "2_parser", "upstream_type": "upstream_issue/unresolved_reference", "line": 186, "statement_id": "SYS-PORTFOLIO-001-FIL-0081-STMT-000040", "message": "Agent 1 unresolved_reference (carried by Agent 2): CALL target 'CEE3ABD' not found in file registry - may be external or in load library (Language Environment service)"},
+  {"severity": "info", "type": "upstream_issue", "upstream_agent": "3_data", "upstream_type": "no_copy_stubs", "line": null, "message": "Program has no COPY or SQL INCLUDE stubs; all records are inline WORKING-STORAGE definitions"},
+  {"severity": "warning", "type": "external_call_unresolved", "line": 186, "statement_id": "SYS-PORTFOLIO-001-FIL-0081-STMT-000040", "message": "CALL 'CEE3ABD' targets an external routine with no registered source; the trace records the call and stops interpreting its effect. Steps after it (3000-TERMINATE, GOBACK) are statically reachable but runtime-dependent."},
+  {"severity": "info", "type": "unconditional_demo_sequence", "line": 86, "paragraph_id": "SYS-PORTFOLIO-001-FIL-0081-PAR-0003", "message": "2000-PROCESS performs all four handlers unconditionally (source comments call them 'Example' scenarios), so in a straight run every counter becomes 1 and the abend path is always taken."}
+],
+"field_id_lookup": {
+  "query": "resolve-field-references",
+  "names_looked_up": 21, "resolved": 21, "unresolved": 0, "ambiguous": 0,
+  "not_looked_up": [{"name": "RETURN-CODE", "reason": "special register"}, {"name": "ZERO", "reason": "figurative constant"}]
+},
+"program_narrative": "ERRHANDL is a batch template program (src/templates/error/error-handling.cbl) that demonstrates a standard error-handling pattern. It uses no files and no copybooks; all data is in WORKING-STORAGE (return-code constants, an error message buffer, error flags, error counters and three message texts). After resetting its flags and counters it runs, unconditionally and in order, a warning, an error, a severe-error and an abend scenario; each one counts the event, sets a severity, number and message text and logs them to the console through 8100-LOG-ERROR. The abend scenario finishes by calling the Language Environment service CEE3ABD with RC-CRITICAL, which requests abnormal termination. If control comes back, 8000-CHECK-FINAL-STATUS sets the program return code to 12, 8, 4 or 0 according to the highest error level counted (severe, error, warning, none). Error conditions handled: warning, error, severe error and unrecoverable error (abend).",
 "paragraphs": [
   {
-    "name": "0000-MAIN", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0081-PAR-0001", "section": null, "section_id": null, "line_range": [67, 72],
+    "name": "0000-MAIN", "section": null, "section_id": null, "paragraph_id": "SYS-PORTFOLIO-001-FIL-0081-PAR-0001", "line_range": [67, 72],
     "pseudocode": [
-      "-- Main control paragraph",
+      "-- Main control paragraph: initialise, run the error-handling scenarios, set the final return code",
       "CALL 1000-initialize",
       "CALL 2000-process",
       "CALL 3000-terminate",
-      "RETURN to caller (or terminate if main program)  -- GOBACK"
+      "RETURN to caller (or terminate if main program)"
     ],
-    "pseudocode_statement_ids": [
-      [],
-      ["SYS-PORTFOLIO-001-FIL-0081-STMT-000001"],
-      ["SYS-PORTFOLIO-001-FIL-0081-STMT-000002"],
-      ["SYS-PORTFOLIO-001-FIL-0081-STMT-000003"],
-      ["SYS-PORTFOLIO-001-FIL-0081-STMT-000004"]
-    ],
-    "pseudocode_text": "-- Main control paragraph\nCALL 1000-initialize\nCALL 2000-process\nCALL 3000-terminate\nRETURN to caller (or terminate if main program)  -- GOBACK",
+    "pseudocode_statement_ids": [[], ["SYS-PORTFOLIO-001-FIL-0081-STMT-000001"], ["SYS-PORTFOLIO-001-FIL-0081-STMT-000002"], ["SYS-PORTFOLIO-001-FIL-0081-STMT-000003"], ["SYS-PORTFOLIO-001-FIL-0081-STMT-000004"]],
+    "pseudocode_text": "-- Main control paragraph: initialise, run the error-handling scenarios, set the final return code\nCALL 1000-initialize\nCALL 2000-process\nCALL 3000-terminate\nRETURN to caller (or terminate if main program)",
     "statement_ids": ["SYS-PORTFOLIO-001-FIL-0081-STMT-000001", "SYS-PORTFOLIO-001-FIL-0081-STMT-000002", "SYS-PORTFOLIO-001-FIL-0081-STMT-000003", "SYS-PORTFOLIO-001-FIL-0081-STMT-000004"],
     "untranslated_statement_ids": [],
     "field_references": [], "field_reference_ids": [],
     "calls_made": ["1000-INITIALIZE", "2000-PROCESS", "3000-TERMINATE"],
-    "calls_made_ids": [
-      {"name": "1000-INITIALIZE", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0081-PAR-0002", "section_id": null},
-      {"name": "2000-PROCESS", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0081-PAR-0003", "section_id": null},
-      {"name": "3000-TERMINATE", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0081-PAR-0004", "section_id": null}
-    ],
+    "calls_made_ids": [{"name": "1000-INITIALIZE", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0081-PAR-0002", "section_id": null}, {"name": "2000-PROCESS", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0081-PAR-0003", "section_id": null}, {"name": "3000-TERMINATE", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0081-PAR-0004", "section_id": null}],
     "complexity_score": 1, "has_unresolved_statements": false, "annotations": []
   },
   {
-    "name": "1000-INITIALIZE", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0081-PAR-0002", "section": null, "section_id": null, "line_range": [73, 79],
+    "name": "1000-INITIALIZE", "section": null, "section_id": null, "paragraph_id": "SYS-PORTFOLIO-001-FIL-0081-PAR-0002", "line_range": [73, 79],
     "pseudocode": [
-      "CLEAR error_flags (WS-ERROR-FLAGS) and error_counts (WS-ERROR-COUNTS)  -- INITIALIZE: alphanumeric flags to spaces, counters to zero",
-      "SET processing_error = 'N'  -- SET NO-ERROR TO TRUE",
-      "SET abend_flag = 'N'  -- SET NO-ABEND TO TRUE"
+      "-- Reset error flags and error counters",
+      "RESET error_flags and error_counts  -- COBOL INITIALIZE: alphanumeric items to spaces, numeric items to zero",
+      "SET processing_error = 'N'  -- NO-ERROR: no error has occurred yet",
+      "SET abend_flag = 'N'  -- NO-ABEND: no abend requested"
     ],
-    "pseudocode_statement_ids": [
-      ["SYS-PORTFOLIO-001-FIL-0081-STMT-000005"],
-      ["SYS-PORTFOLIO-001-FIL-0081-STMT-000006"],
-      ["SYS-PORTFOLIO-001-FIL-0081-STMT-000007"]
-    ],
-    "pseudocode_text": "CLEAR error_flags (WS-ERROR-FLAGS) and error_counts (WS-ERROR-COUNTS)  -- INITIALIZE: alphanumeric flags to spaces, counters to zero\nSET processing_error = 'N'  -- SET NO-ERROR TO TRUE\nSET abend_flag = 'N'  -- SET NO-ABEND TO TRUE",
+    "pseudocode_statement_ids": [[], ["SYS-PORTFOLIO-001-FIL-0081-STMT-000005"], ["SYS-PORTFOLIO-001-FIL-0081-STMT-000006"], ["SYS-PORTFOLIO-001-FIL-0081-STMT-000007"]],
+    "pseudocode_text": "-- Reset error flags and error counters\nRESET error_flags and error_counts  -- COBOL INITIALIZE: alphanumeric items to spaces, numeric items to zero\nSET processing_error = 'N'  -- NO-ERROR: no error has occurred yet\nSET abend_flag = 'N'  -- NO-ABEND: no abend requested",
     "statement_ids": ["SYS-PORTFOLIO-001-FIL-0081-STMT-000005", "SYS-PORTFOLIO-001-FIL-0081-STMT-000006", "SYS-PORTFOLIO-001-FIL-0081-STMT-000007"],
     "untranslated_statement_ids": [],
     "field_references": ["WS-ERROR-FLAGS", "WS-ERROR-COUNTS", "NO-ERROR", "NO-ABEND"],
@@ -136,45 +123,34 @@
       {"name": "NO-ABEND", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0081-FLD-000017", "target_kind": "condition", "candidate_ids": []}
     ],
     "calls_made": [], "calls_made_ids": [],
-    "complexity_score": 1, "has_unresolved_statements": false, "annotations": []
+    "complexity_score": 1, "has_unresolved_statements": false,
+    "annotations": [{"line": 74, "statement_id": "SYS-PORTFOLIO-001-FIL-0081-STMT-000005", "note": "INITIALIZE sets the flag bytes to spaces, so neither 88-level of a flag is true until the SET statements that follow."}]
   },
   {
-    "name": "2000-PROCESS", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0081-PAR-0003", "section": null, "section_id": null, "line_range": [80, 97],
+    "name": "2000-PROCESS", "section": null, "section_id": null, "paragraph_id": "SYS-PORTFOLIO-001-FIL-0081-PAR-0003", "line_range": [80, 97],
     "pseudocode": [
-      "-- Example error handling scenarios (template): every handler runs once, unconditionally",
+      "-- Demonstration sequence: runs every error-handling routine once, with no conditions (source comments label them 'Example' scenarios)",
       "CALL 8010-handle-warning",
       "CALL 8020-handle-error",
       "CALL 8030-handle-severe",
-      "CALL 8040-handle-abend  -- ends with an abend request (see 8500-INITIATE-ABEND)"
+      "CALL 8040-handle-abend  -- ends by requesting abnormal termination (see 8500-initiate-abend)"
     ],
-    "pseudocode_statement_ids": [
-      [],
-      ["SYS-PORTFOLIO-001-FIL-0081-STMT-000008"],
-      ["SYS-PORTFOLIO-001-FIL-0081-STMT-000009"],
-      ["SYS-PORTFOLIO-001-FIL-0081-STMT-000010"],
-      ["SYS-PORTFOLIO-001-FIL-0081-STMT-000011"]
-    ],
-    "pseudocode_text": "-- Example error handling scenarios (template): every handler runs once, unconditionally\nCALL 8010-handle-warning\nCALL 8020-handle-error\nCALL 8030-handle-severe\nCALL 8040-handle-abend  -- ends with an abend request (see 8500-INITIATE-ABEND)",
+    "pseudocode_statement_ids": [[], ["SYS-PORTFOLIO-001-FIL-0081-STMT-000008"], ["SYS-PORTFOLIO-001-FIL-0081-STMT-000009"], ["SYS-PORTFOLIO-001-FIL-0081-STMT-000010"], ["SYS-PORTFOLIO-001-FIL-0081-STMT-000011"]],
+    "pseudocode_text": "-- Demonstration sequence: runs every error-handling routine once, with no conditions (source comments label them 'Example' scenarios)\nCALL 8010-handle-warning\nCALL 8020-handle-error\nCALL 8030-handle-severe\nCALL 8040-handle-abend  -- ends by requesting abnormal termination (see 8500-initiate-abend)",
     "statement_ids": ["SYS-PORTFOLIO-001-FIL-0081-STMT-000008", "SYS-PORTFOLIO-001-FIL-0081-STMT-000009", "SYS-PORTFOLIO-001-FIL-0081-STMT-000010", "SYS-PORTFOLIO-001-FIL-0081-STMT-000011"],
     "untranslated_statement_ids": [],
     "field_references": [], "field_reference_ids": [],
     "calls_made": ["8010-HANDLE-WARNING", "8020-HANDLE-ERROR", "8030-HANDLE-SEVERE", "8040-HANDLE-ABEND"],
-    "calls_made_ids": [
-      {"name": "8010-HANDLE-WARNING", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0081-PAR-0006", "section_id": null},
-      {"name": "8020-HANDLE-ERROR", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0081-PAR-0007", "section_id": null},
-      {"name": "8030-HANDLE-SEVERE", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0081-PAR-0008", "section_id": null},
-      {"name": "8040-HANDLE-ABEND", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0081-PAR-0009", "section_id": null}
-    ],
-    "complexity_score": 1, "has_unresolved_statements": false,
-    "annotations": [
-      {"line": 81, "note": "Comment lines 81-94 label each PERFORM as an example scenario (warning, error, severe error, abend condition)."}
-    ]
+    "calls_made_ids": [{"name": "8010-HANDLE-WARNING", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0081-PAR-0006", "section_id": null}, {"name": "8020-HANDLE-ERROR", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0081-PAR-0007", "section_id": null}, {"name": "8030-HANDLE-SEVERE", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0081-PAR-0008", "section_id": null}, {"name": "8040-HANDLE-ABEND", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0081-PAR-0009", "section_id": null}],
+    "complexity_score": 1, "has_unresolved_statements": false, "annotations": []
   },
   {
-    "name": "3000-TERMINATE", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0081-PAR-0004", "section": null, "section_id": null, "line_range": [98, 104],
-    "pseudocode": ["CALL 8000-check-final-status"],
+    "name": "3000-TERMINATE", "section": null, "section_id": null, "paragraph_id": "SYS-PORTFOLIO-001-FIL-0081-PAR-0004", "line_range": [98, 104],
+    "pseudocode": [
+      "CALL 8000-check-final-status  -- set the program return code from the error counters"
+    ],
     "pseudocode_statement_ids": [["SYS-PORTFOLIO-001-FIL-0081-STMT-000012"]],
-    "pseudocode_text": "CALL 8000-check-final-status",
+    "pseudocode_text": "CALL 8000-check-final-status  -- set the program return code from the error counters",
     "statement_ids": ["SYS-PORTFOLIO-001-FIL-0081-STMT-000012"],
     "untranslated_statement_ids": [],
     "field_references": [], "field_reference_ids": [],
@@ -183,32 +159,21 @@
     "complexity_score": 1, "has_unresolved_statements": false, "annotations": []
   },
   {
-    "name": "8000-CHECK-FINAL-STATUS", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0081-PAR-0005", "section": null, "section_id": null, "line_range": [105, 123],
+    "name": "8000-CHECK-FINAL-STATUS", "section": null, "section_id": null, "paragraph_id": "SYS-PORTFOLIO-001-FIL-0081-PAR-0005", "line_range": [105, 123],
     "pseudocode": [
-      "-- Determine final return code based on error counts",
-      "IF severe_count (WS-SEVERE-COUNT) > 0 THEN",
-      "  SET RETURN-CODE = rc_severe (RC-SEVERE, VALUE +12)",
-      "ELSE IF error_count (WS-ERROR-COUNT) > 0 THEN",
-      "  SET RETURN-CODE = rc_error (RC-ERROR, VALUE +8)",
-      "ELSE IF warning_count (WS-WARNING-COUNT) > 0 THEN",
-      "  SET RETURN-CODE = rc_warning (RC-WARNING, VALUE +4)",
+      "-- Set the program return code from the highest error level counted",
+      "IF severe_count > 0 THEN",
+      "  SET RETURN-CODE = rc_severe  -- constant, VALUE +12",
+      "ELSE IF error_count > 0 THEN",
+      "  SET RETURN-CODE = rc_error  -- constant, VALUE +8",
+      "ELSE IF warning_count > 0 THEN",
+      "  SET RETURN-CODE = rc_warning  -- constant, VALUE +4",
       "ELSE",
-      "  SET RETURN-CODE = rc_success (RC-SUCCESS, VALUE +0)",
+      "  SET RETURN-CODE = rc_success  -- constant, VALUE +0",
       "END IF"
     ],
-    "pseudocode_statement_ids": [
-      [],
-      ["SYS-PORTFOLIO-001-FIL-0081-STMT-000013"],
-      ["SYS-PORTFOLIO-001-FIL-0081-STMT-000042"],
-      ["SYS-PORTFOLIO-001-FIL-0081-STMT-000041"],
-      ["SYS-PORTFOLIO-001-FIL-0081-STMT-000044"],
-      ["SYS-PORTFOLIO-001-FIL-0081-STMT-000043"],
-      ["SYS-PORTFOLIO-001-FIL-0081-STMT-000046"],
-      ["SYS-PORTFOLIO-001-FIL-0081-STMT-000043"],
-      ["SYS-PORTFOLIO-001-FIL-0081-STMT-000045"],
-      ["SYS-PORTFOLIO-001-FIL-0081-STMT-000013", "SYS-PORTFOLIO-001-FIL-0081-STMT-000041", "SYS-PORTFOLIO-001-FIL-0081-STMT-000043"]
-    ],
-    "pseudocode_text": "-- Determine final return code based on error counts\nIF severe_count (WS-SEVERE-COUNT) > 0 THEN\n  SET RETURN-CODE = rc_severe (RC-SEVERE, VALUE +12)\nELSE IF error_count (WS-ERROR-COUNT) > 0 THEN\n  SET RETURN-CODE = rc_error (RC-ERROR, VALUE +8)\nELSE IF warning_count (WS-WARNING-COUNT) > 0 THEN\n  SET RETURN-CODE = rc_warning (RC-WARNING, VALUE +4)\nELSE\n  SET RETURN-CODE = rc_success (RC-SUCCESS, VALUE +0)\nEND IF",
+    "pseudocode_statement_ids": [[], ["SYS-PORTFOLIO-001-FIL-0081-STMT-000013"], ["SYS-PORTFOLIO-001-FIL-0081-STMT-000042"], ["SYS-PORTFOLIO-001-FIL-0081-STMT-000041"], ["SYS-PORTFOLIO-001-FIL-0081-STMT-000044"], ["SYS-PORTFOLIO-001-FIL-0081-STMT-000043"], ["SYS-PORTFOLIO-001-FIL-0081-STMT-000046"], ["SYS-PORTFOLIO-001-FIL-0081-STMT-000043"], ["SYS-PORTFOLIO-001-FIL-0081-STMT-000045"], ["SYS-PORTFOLIO-001-FIL-0081-STMT-000013"]],
+    "pseudocode_text": "-- Set the program return code from the highest error level counted\nIF severe_count > 0 THEN\n  SET RETURN-CODE = rc_severe  -- constant, VALUE +12\nELSE IF error_count > 0 THEN\n  SET RETURN-CODE = rc_error  -- constant, VALUE +8\nELSE IF warning_count > 0 THEN\n  SET RETURN-CODE = rc_warning  -- constant, VALUE +4\nELSE\n  SET RETURN-CODE = rc_success  -- constant, VALUE +0\nEND IF",
     "statement_ids": ["SYS-PORTFOLIO-001-FIL-0081-STMT-000013", "SYS-PORTFOLIO-001-FIL-0081-STMT-000042", "SYS-PORTFOLIO-001-FIL-0081-STMT-000041", "SYS-PORTFOLIO-001-FIL-0081-STMT-000044", "SYS-PORTFOLIO-001-FIL-0081-STMT-000043", "SYS-PORTFOLIO-001-FIL-0081-STMT-000046", "SYS-PORTFOLIO-001-FIL-0081-STMT-000045"],
     "untranslated_statement_ids": [],
     "field_references": ["WS-SEVERE-COUNT", "RC-SEVERE", "WS-ERROR-COUNT", "RC-ERROR", "WS-WARNING-COUNT", "RC-WARNING", "RC-SUCCESS"],
@@ -223,29 +188,20 @@
     ],
     "calls_made": [], "calls_made_ids": [],
     "complexity_score": 7, "has_unresolved_statements": false,
-    "annotations": [
-      {"line": 109, "statement_id": "SYS-PORTFOLIO-001-FIL-0081-STMT-000013", "note": "Three nested IF/ELSE levels (depth 3) flattened to an ELSE IF chain; the most severe non-zero counter wins."}
-    ]
+    "annotations": [{"line": 110, "statement_id": "SYS-PORTFOLIO-001-FIL-0081-STMT-000042", "note": "RETURN-CODE is the COBOL special register passed back to the caller or operating system; it is not a data item in the program."}]
   },
   {
-    "name": "8010-HANDLE-WARNING", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0081-PAR-0006", "section": null, "section_id": null, "line_range": [124, 134],
+    "name": "8010-HANDLE-WARNING", "section": null, "section_id": null, "paragraph_id": "SYS-PORTFOLIO-001-FIL-0081-PAR-0006", "line_range": [124, 134],
     "pseudocode": [
       "-- Warning handling pattern",
-      "INCREMENT warning_count (WS-WARNING-COUNT) BY 1",
-      "SET error_severity (WS-ERROR-SEVERITY) = 'WARNING'",
-      "SET error_number (WS-ERROR-NUMBER) = 1",
-      "SET error_text (WS-ERROR-TEXT) = message ERR-001  -- 'INVALID INPUT PARAMETER RECEIVED'",
+      "INCREMENT warning_count BY 1",
+      "SET error_severity = 'WARNING'",
+      "SET error_number = 1",
+      "SET error_text = err_001  -- message text 'INVALID INPUT PARAMETER RECEIVED'",
       "CALL 8100-log-error"
     ],
-    "pseudocode_statement_ids": [
-      [],
-      ["SYS-PORTFOLIO-001-FIL-0081-STMT-000014"],
-      ["SYS-PORTFOLIO-001-FIL-0081-STMT-000015"],
-      ["SYS-PORTFOLIO-001-FIL-0081-STMT-000016"],
-      ["SYS-PORTFOLIO-001-FIL-0081-STMT-000017"],
-      ["SYS-PORTFOLIO-001-FIL-0081-STMT-000018"]
-    ],
-    "pseudocode_text": "-- Warning handling pattern\nINCREMENT warning_count (WS-WARNING-COUNT) BY 1\nSET error_severity (WS-ERROR-SEVERITY) = 'WARNING'\nSET error_number (WS-ERROR-NUMBER) = 1\nSET error_text (WS-ERROR-TEXT) = message ERR-001  -- 'INVALID INPUT PARAMETER RECEIVED'\nCALL 8100-log-error",
+    "pseudocode_statement_ids": [[], ["SYS-PORTFOLIO-001-FIL-0081-STMT-000014"], ["SYS-PORTFOLIO-001-FIL-0081-STMT-000015"], ["SYS-PORTFOLIO-001-FIL-0081-STMT-000016"], ["SYS-PORTFOLIO-001-FIL-0081-STMT-000017"], ["SYS-PORTFOLIO-001-FIL-0081-STMT-000018"]],
+    "pseudocode_text": "-- Warning handling pattern\nINCREMENT warning_count BY 1\nSET error_severity = 'WARNING'\nSET error_number = 1\nSET error_text = err_001  -- message text 'INVALID INPUT PARAMETER RECEIVED'\nCALL 8100-log-error",
     "statement_ids": ["SYS-PORTFOLIO-001-FIL-0081-STMT-000014", "SYS-PORTFOLIO-001-FIL-0081-STMT-000015", "SYS-PORTFOLIO-001-FIL-0081-STMT-000016", "SYS-PORTFOLIO-001-FIL-0081-STMT-000017", "SYS-PORTFOLIO-001-FIL-0081-STMT-000018"],
     "untranslated_statement_ids": [],
     "field_references": ["WS-WARNING-COUNT", "WS-ERROR-SEVERITY", "WS-ERROR-NUMBER", "ERR-001", "WS-ERROR-TEXT"],
@@ -258,32 +214,21 @@
     ],
     "calls_made": ["8100-LOG-ERROR"],
     "calls_made_ids": [{"name": "8100-LOG-ERROR", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0081-PAR-0010", "section_id": null}],
-    "complexity_score": 1, "has_unresolved_statements": false,
-    "annotations": [
-      {"line": 128, "statement_id": "SYS-PORTFOLIO-001-FIL-0081-STMT-000014", "note": "Unlike 8020 and 8030, the warning handler does not set ERROR-OCCURRED."}
-    ]
+    "complexity_score": 1, "has_unresolved_statements": false, "annotations": []
   },
   {
-    "name": "8020-HANDLE-ERROR", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0081-PAR-0007", "section": null, "section_id": null, "line_range": [135, 146],
+    "name": "8020-HANDLE-ERROR", "section": null, "section_id": null, "paragraph_id": "SYS-PORTFOLIO-001-FIL-0081-PAR-0007", "line_range": [135, 146],
     "pseudocode": [
       "-- Error handling pattern",
-      "INCREMENT error_count (WS-ERROR-COUNT) BY 1",
-      "SET processing_error = 'Y'  -- SET ERROR-OCCURRED TO TRUE",
-      "SET error_severity (WS-ERROR-SEVERITY) = 'ERROR'",
-      "SET error_number (WS-ERROR-NUMBER) = 2",
-      "SET error_text (WS-ERROR-TEXT) = message ERR-002  -- 'REQUIRED FIELD IS MISSING'",
+      "INCREMENT error_count BY 1",
+      "SET processing_error = 'Y'  -- ERROR-OCCURRED: an error has occurred",
+      "SET error_severity = 'ERROR'",
+      "SET error_number = 2",
+      "SET error_text = err_002  -- message text 'REQUIRED FIELD IS MISSING'",
       "CALL 8100-log-error"
     ],
-    "pseudocode_statement_ids": [
-      [],
-      ["SYS-PORTFOLIO-001-FIL-0081-STMT-000019"],
-      ["SYS-PORTFOLIO-001-FIL-0081-STMT-000020"],
-      ["SYS-PORTFOLIO-001-FIL-0081-STMT-000021"],
-      ["SYS-PORTFOLIO-001-FIL-0081-STMT-000022"],
-      ["SYS-PORTFOLIO-001-FIL-0081-STMT-000023"],
-      ["SYS-PORTFOLIO-001-FIL-0081-STMT-000024"]
-    ],
-    "pseudocode_text": "-- Error handling pattern\nINCREMENT error_count (WS-ERROR-COUNT) BY 1\nSET processing_error = 'Y'  -- SET ERROR-OCCURRED TO TRUE\nSET error_severity (WS-ERROR-SEVERITY) = 'ERROR'\nSET error_number (WS-ERROR-NUMBER) = 2\nSET error_text (WS-ERROR-TEXT) = message ERR-002  -- 'REQUIRED FIELD IS MISSING'\nCALL 8100-log-error",
+    "pseudocode_statement_ids": [[], ["SYS-PORTFOLIO-001-FIL-0081-STMT-000019"], ["SYS-PORTFOLIO-001-FIL-0081-STMT-000020"], ["SYS-PORTFOLIO-001-FIL-0081-STMT-000021"], ["SYS-PORTFOLIO-001-FIL-0081-STMT-000022"], ["SYS-PORTFOLIO-001-FIL-0081-STMT-000023"], ["SYS-PORTFOLIO-001-FIL-0081-STMT-000024"]],
+    "pseudocode_text": "-- Error handling pattern\nINCREMENT error_count BY 1\nSET processing_error = 'Y'  -- ERROR-OCCURRED: an error has occurred\nSET error_severity = 'ERROR'\nSET error_number = 2\nSET error_text = err_002  -- message text 'REQUIRED FIELD IS MISSING'\nCALL 8100-log-error",
     "statement_ids": ["SYS-PORTFOLIO-001-FIL-0081-STMT-000019", "SYS-PORTFOLIO-001-FIL-0081-STMT-000020", "SYS-PORTFOLIO-001-FIL-0081-STMT-000021", "SYS-PORTFOLIO-001-FIL-0081-STMT-000022", "SYS-PORTFOLIO-001-FIL-0081-STMT-000023", "SYS-PORTFOLIO-001-FIL-0081-STMT-000024"],
     "untranslated_statement_ids": [],
     "field_references": ["WS-ERROR-COUNT", "ERROR-OCCURRED", "WS-ERROR-SEVERITY", "WS-ERROR-NUMBER", "ERR-002", "WS-ERROR-TEXT"],
@@ -300,26 +245,18 @@
     "complexity_score": 1, "has_unresolved_statements": false, "annotations": []
   },
   {
-    "name": "8030-HANDLE-SEVERE", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0081-PAR-0008", "section": null, "section_id": null, "line_range": [147, 158],
+    "name": "8030-HANDLE-SEVERE", "section": null, "section_id": null, "paragraph_id": "SYS-PORTFOLIO-001-FIL-0081-PAR-0008", "line_range": [147, 158],
     "pseudocode": [
       "-- Severe error handling pattern",
-      "INCREMENT severe_count (WS-SEVERE-COUNT) BY 1",
-      "SET processing_error = 'Y'  -- SET ERROR-OCCURRED TO TRUE",
-      "SET error_severity (WS-ERROR-SEVERITY) = 'SEVERE'",
-      "SET error_number (WS-ERROR-NUMBER) = 3",
-      "SET error_text (WS-ERROR-TEXT) = message ERR-003  -- 'FILE OPERATION FAILED'",
+      "INCREMENT severe_count BY 1",
+      "SET processing_error = 'Y'  -- ERROR-OCCURRED: an error has occurred",
+      "SET error_severity = 'SEVERE'",
+      "SET error_number = 3",
+      "SET error_text = err_003  -- message text 'FILE OPERATION FAILED'",
       "CALL 8100-log-error"
     ],
-    "pseudocode_statement_ids": [
-      [],
-      ["SYS-PORTFOLIO-001-FIL-0081-STMT-000025"],
-      ["SYS-PORTFOLIO-001-FIL-0081-STMT-000026"],
-      ["SYS-PORTFOLIO-001-FIL-0081-STMT-000027"],
-      ["SYS-PORTFOLIO-001-FIL-0081-STMT-000028"],
-      ["SYS-PORTFOLIO-001-FIL-0081-STMT-000029"],
-      ["SYS-PORTFOLIO-001-FIL-0081-STMT-000030"]
-    ],
-    "pseudocode_text": "-- Severe error handling pattern\nINCREMENT severe_count (WS-SEVERE-COUNT) BY 1\nSET processing_error = 'Y'  -- SET ERROR-OCCURRED TO TRUE\nSET error_severity (WS-ERROR-SEVERITY) = 'SEVERE'\nSET error_number (WS-ERROR-NUMBER) = 3\nSET error_text (WS-ERROR-TEXT) = message ERR-003  -- 'FILE OPERATION FAILED'\nCALL 8100-log-error",
+    "pseudocode_statement_ids": [[], ["SYS-PORTFOLIO-001-FIL-0081-STMT-000025"], ["SYS-PORTFOLIO-001-FIL-0081-STMT-000026"], ["SYS-PORTFOLIO-001-FIL-0081-STMT-000027"], ["SYS-PORTFOLIO-001-FIL-0081-STMT-000028"], ["SYS-PORTFOLIO-001-FIL-0081-STMT-000029"], ["SYS-PORTFOLIO-001-FIL-0081-STMT-000030"]],
+    "pseudocode_text": "-- Severe error handling pattern\nINCREMENT severe_count BY 1\nSET processing_error = 'Y'  -- ERROR-OCCURRED: an error has occurred\nSET error_severity = 'SEVERE'\nSET error_number = 3\nSET error_text = err_003  -- message text 'FILE OPERATION FAILED'\nCALL 8100-log-error",
     "statement_ids": ["SYS-PORTFOLIO-001-FIL-0081-STMT-000025", "SYS-PORTFOLIO-001-FIL-0081-STMT-000026", "SYS-PORTFOLIO-001-FIL-0081-STMT-000027", "SYS-PORTFOLIO-001-FIL-0081-STMT-000028", "SYS-PORTFOLIO-001-FIL-0081-STMT-000029", "SYS-PORTFOLIO-001-FIL-0081-STMT-000030"],
     "untranslated_statement_ids": [],
     "field_references": ["WS-SEVERE-COUNT", "ERROR-OCCURRED", "WS-ERROR-SEVERITY", "WS-ERROR-NUMBER", "ERR-003", "WS-ERROR-TEXT"],
@@ -336,26 +273,18 @@
     "complexity_score": 1, "has_unresolved_statements": false, "annotations": []
   },
   {
-    "name": "8040-HANDLE-ABEND", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0081-PAR-0009", "section": null, "section_id": null, "line_range": [159, 171],
+    "name": "8040-HANDLE-ABEND", "section": null, "section_id": null, "paragraph_id": "SYS-PORTFOLIO-001-FIL-0081-PAR-0009", "line_range": [159, 171],
     "pseudocode": [
       "-- Abend handling pattern",
-      "SET abend_flag = 'Y'  -- SET PERFORM-ABEND TO TRUE",
-      "SET error_severity (WS-ERROR-SEVERITY) = 'CRITICAL'",
-      "SET error_number (WS-ERROR-NUMBER) = 999",
-      "SET error_text (WS-ERROR-TEXT) = 'UNRECOVERABLE ERROR - INITIATING ABEND'",
+      "SET abend_flag = 'Y'  -- PERFORM-ABEND: an abend is requested",
+      "SET error_severity = 'CRITICAL'",
+      "SET error_number = 999",
+      "SET error_text = 'UNRECOVERABLE ERROR - INITIATING ABEND'",
       "CALL 8100-log-error",
       "CALL 8500-initiate-abend"
     ],
-    "pseudocode_statement_ids": [
-      [],
-      ["SYS-PORTFOLIO-001-FIL-0081-STMT-000031"],
-      ["SYS-PORTFOLIO-001-FIL-0081-STMT-000032"],
-      ["SYS-PORTFOLIO-001-FIL-0081-STMT-000033"],
-      ["SYS-PORTFOLIO-001-FIL-0081-STMT-000034"],
-      ["SYS-PORTFOLIO-001-FIL-0081-STMT-000035"],
-      ["SYS-PORTFOLIO-001-FIL-0081-STMT-000036"]
-    ],
-    "pseudocode_text": "-- Abend handling pattern\nSET abend_flag = 'Y'  -- SET PERFORM-ABEND TO TRUE\nSET error_severity (WS-ERROR-SEVERITY) = 'CRITICAL'\nSET error_number (WS-ERROR-NUMBER) = 999\nSET error_text (WS-ERROR-TEXT) = 'UNRECOVERABLE ERROR - INITIATING ABEND'\nCALL 8100-log-error\nCALL 8500-initiate-abend",
+    "pseudocode_statement_ids": [[], ["SYS-PORTFOLIO-001-FIL-0081-STMT-000031"], ["SYS-PORTFOLIO-001-FIL-0081-STMT-000032"], ["SYS-PORTFOLIO-001-FIL-0081-STMT-000033"], ["SYS-PORTFOLIO-001-FIL-0081-STMT-000034"], ["SYS-PORTFOLIO-001-FIL-0081-STMT-000035"], ["SYS-PORTFOLIO-001-FIL-0081-STMT-000036"]],
+    "pseudocode_text": "-- Abend handling pattern\nSET abend_flag = 'Y'  -- PERFORM-ABEND: an abend is requested\nSET error_severity = 'CRITICAL'\nSET error_number = 999\nSET error_text = 'UNRECOVERABLE ERROR - INITIATING ABEND'\nCALL 8100-log-error\nCALL 8500-initiate-abend",
     "statement_ids": ["SYS-PORTFOLIO-001-FIL-0081-STMT-000031", "SYS-PORTFOLIO-001-FIL-0081-STMT-000032", "SYS-PORTFOLIO-001-FIL-0081-STMT-000033", "SYS-PORTFOLIO-001-FIL-0081-STMT-000034", "SYS-PORTFOLIO-001-FIL-0081-STMT-000035", "SYS-PORTFOLIO-001-FIL-0081-STMT-000036"],
     "untranslated_statement_ids": [],
     "field_references": ["PERFORM-ABEND", "WS-ERROR-SEVERITY", "WS-ERROR-NUMBER", "WS-ERROR-TEXT"],
@@ -366,28 +295,18 @@
       {"name": "WS-ERROR-TEXT", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0081-FLD-000009", "target_kind": "field", "candidate_ids": []}
     ],
     "calls_made": ["8100-LOG-ERROR", "8500-INITIATE-ABEND"],
-    "calls_made_ids": [
-      {"name": "8100-LOG-ERROR", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0081-PAR-0010", "section_id": null},
-      {"name": "8500-INITIATE-ABEND", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0081-PAR-0011", "section_id": null}
-    ],
-    "complexity_score": 1, "has_unresolved_statements": false,
-    "annotations": [
-      {"line": 163, "statement_id": "SYS-PORTFOLIO-001-FIL-0081-STMT-000031", "note": "The abend handler does not increment any counter; WS-ABEND-FLAG is set but never tested in this program."}
-    ]
+    "calls_made_ids": [{"name": "8100-LOG-ERROR", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0081-PAR-0010", "section_id": null}, {"name": "8500-INITIATE-ABEND", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0081-PAR-0011", "section_id": null}],
+    "complexity_score": 1, "has_unresolved_statements": false, "annotations": []
   },
   {
-    "name": "8100-LOG-ERROR", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0081-PAR-0010", "section": null, "section_id": null, "line_range": [172, 180],
+    "name": "8100-LOG-ERROR", "section": null, "section_id": null, "paragraph_id": "SYS-PORTFOLIO-001-FIL-0081-PAR-0010", "line_range": [172, 180],
     "pseudocode": [
-      "-- Common error logging routine",
-      "DISPLAY error_prefix (WS-ERROR-PREFIX, VALUE 'ERH') + '-' + error_number (WS-ERROR-NUMBER) + ': ' + error_severity (WS-ERROR-SEVERITY)  -- write to console/job log",
-      "DISPLAY error_text (WS-ERROR-TEXT)"
+      "-- Common error logging routine (console output)",
+      "DISPLAY error_prefix + '-' + error_number + ': ' + error_severity",
+      "DISPLAY error_text"
     ],
-    "pseudocode_statement_ids": [
-      [],
-      ["SYS-PORTFOLIO-001-FIL-0081-STMT-000037"],
-      ["SYS-PORTFOLIO-001-FIL-0081-STMT-000038"]
-    ],
-    "pseudocode_text": "-- Common error logging routine\nDISPLAY error_prefix (WS-ERROR-PREFIX, VALUE 'ERH') + '-' + error_number (WS-ERROR-NUMBER) + ': ' + error_severity (WS-ERROR-SEVERITY)  -- write to console/job log\nDISPLAY error_text (WS-ERROR-TEXT)",
+    "pseudocode_statement_ids": [[], ["SYS-PORTFOLIO-001-FIL-0081-STMT-000037"], ["SYS-PORTFOLIO-001-FIL-0081-STMT-000038"]],
+    "pseudocode_text": "-- Common error logging routine (console output)\nDISPLAY error_prefix + '-' + error_number + ': ' + error_severity\nDISPLAY error_text",
     "statement_ids": ["SYS-PORTFOLIO-001-FIL-0081-STMT-000037", "SYS-PORTFOLIO-001-FIL-0081-STMT-000038"],
     "untranslated_statement_ids": [],
     "field_references": ["WS-ERROR-PREFIX", "WS-ERROR-NUMBER", "WS-ERROR-SEVERITY", "WS-ERROR-TEXT"],
@@ -401,38 +320,31 @@
     "complexity_score": 1, "has_unresolved_statements": false, "annotations": []
   },
   {
-    "name": "8500-INITIATE-ABEND", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0081-PAR-0011", "section": null, "section_id": null, "line_range": [181, 187],
+    "name": "8500-INITIATE-ABEND", "section": null, "section_id": null, "paragraph_id": "SYS-PORTFOLIO-001-FIL-0081-PAR-0011", "line_range": [181, 187],
     "pseudocode": [
       "-- Controlled abend routine",
       "DISPLAY 'ABNORMAL TERMINATION INITIATED'",
       "CALL program CEE3ABD",
-      "  PASSING: rc_critical (RC-CRITICAL, VALUE +16), literal 3",
-      "  -- external Language Environment abend service; expected to terminate the run abnormally (not traced)"
+      "  PASSING: rc_critical, literal 3",
+      "  -- Language Environment abend service (not in the file registry; callee logic not available)",
+      "  !! REVIEW: external routine; whether control returns to this program after the call cannot be determined from this source"
     ],
-    "pseudocode_statement_ids": [
-      [],
-      ["SYS-PORTFOLIO-001-FIL-0081-STMT-000039"],
-      ["SYS-PORTFOLIO-001-FIL-0081-STMT-000040"],
-      ["SYS-PORTFOLIO-001-FIL-0081-STMT-000040"],
-      []
-    ],
-    "pseudocode_text": "-- Controlled abend routine\nDISPLAY 'ABNORMAL TERMINATION INITIATED'\nCALL program CEE3ABD\n  PASSING: rc_critical (RC-CRITICAL, VALUE +16), literal 3\n  -- external Language Environment abend service; expected to terminate the run abnormally (not traced)",
+    "pseudocode_statement_ids": [[], ["SYS-PORTFOLIO-001-FIL-0081-STMT-000039"], ["SYS-PORTFOLIO-001-FIL-0081-STMT-000040"], ["SYS-PORTFOLIO-001-FIL-0081-STMT-000040"], [], []],
+    "pseudocode_text": "-- Controlled abend routine\nDISPLAY 'ABNORMAL TERMINATION INITIATED'\nCALL program CEE3ABD\n  PASSING: rc_critical, literal 3\n  -- Language Environment abend service (not in the file registry; callee logic not available)\n  !! REVIEW: external routine; whether control returns to this program after the call cannot be determined from this source",
     "statement_ids": ["SYS-PORTFOLIO-001-FIL-0081-STMT-000039", "SYS-PORTFOLIO-001-FIL-0081-STMT-000040"],
     "untranslated_statement_ids": [],
     "field_references": ["RC-CRITICAL"],
     "field_reference_ids": [
       {"name": "RC-CRITICAL", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0081-FLD-000005", "target_kind": "field", "candidate_ids": []}
     ],
-    "calls_made": ["CEE3ABD"],
-    "calls_made_ids": [{"name": "CEE3ABD", "paragraph_id": null, "section_id": null}],
+    "calls_made": [], "calls_made_ids": [],
+    "external_calls": [{"name": "CEE3ABD", "call_type": "STATIC_CALL", "line": 186, "statement_id": "SYS-PORTFOLIO-001-FIL-0081-STMT-000040", "target_program_file_id": null, "resolved": false, "note": "Language Environment service; not in the file registry"}],
     "complexity_score": 1, "has_unresolved_statements": false,
-    "annotations": [
-      {"line": 186, "statement_id": "SYS-PORTFOLIO-001-FIL-0081-STMT-000040", "note": "CEE3ABD is an external service program, not a paragraph; calls_made_ids keeps null IDs. Whether control returns after the call is outside the static source.", "ambiguous": true}
-    ]
+    "annotations": [{"line": 186, "statement_id": "SYS-PORTFOLIO-001-FIL-0081-STMT-000040", "note": "Static CALL with a literal program name; the second argument is the numeric literal 3, passed as written."}]
   }
 ],
 "unresolved_statements": [],
 "pseudocode_issues": [
-  {"severity": "info", "type": "id_unresolved", "kind": "program", "name": "CEE3ABD", "paragraph": "8500-INITIATE-ABEND", "message": "External static CALL target, not a paragraph; calls_made_ids paragraph_id and section_id null."}
+  {"severity": "info", "type": "external_call_placeholder", "line": 186, "statement_id": "SYS-PORTFOLIO-001-FIL-0081-STMT-000040", "message": "CALL 'CEE3ABD' translated as an external program call flagged !! REVIEW; callee not in the registry."}
 ]
 }

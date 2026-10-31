@@ -1,27 +1,26 @@
 {
 "program_summary": {"program_id": "POSUPDT", "file_id": "SYS-PORTFOLIO-001-FIL-0045", "logic_file": "program_logic/SYS-PORTFOLIO-001-FIL-0045__POSUPDT_logic.json", "logic_status": "empty", "paragraphs_translated": 0, "execution_paths": 0, "branches": 0, "loops": 0, "dead_code_confirmed": 0, "goto_annotations": 0, "unresolvable_paths": 0, "unresolved_ids": 0},
-"meta": {"generated_at": "2026-10-26T16:20:27Z", "agent_version": "4_logic@1.0", "logic_run_id": "LRUN-20261026T162027Z-20307", "logic_worker_id": "LWKR-20261026T162027Z-282466101", "run_id_note": "run-local identifiers of this execution, not permanent IDs", "source_artifacts": ["output/parser/parser_artifact.json", "output/parser/raw_structure/SYS-PORTFOLIO-001-FIL-0045__POSUPDT.json", "output/data/data_artifact.json", "output/data/data_layouts/SYS-PORTFOLIO-001-FIL-0045__POSUPDT_WS.json"], "neo4j_access": "read-only"},
 "program_id": "POSUPDT",
 "system_id": "SYS-PORTFOLIO-001",
 "file_id": "SYS-PORTFOLIO-001-FIL-0045",
 "path_id": "SYS-PORTFOLIO-001-PATH-0045",
 "relative_path": "src/programs/batch/POSUPDT.cbl",
-"parse_run_id": "PRUN-20261025T163852Z-6235",
-"data_run_id": "DRUN-20261025T170230Z-21060",
+"file_name": "POSUPDT.cbl",
+"parse_run_id": "PRUN-20261027T155247Z-2626",
+"data_run_id": "DRUN-20261027T162831Z-1330",
+"generated_at": "2026-10-27T21:36:00Z",
+"agent_version": "4_logic@1.0",
 "upstream": {
+  "parse_status": "empty",
+  "ast_file": "raw_structure/SYS-PORTFOLIO-001-FIL-0045__POSUPDT.json",
+  "data_layout": "data_layouts/SYS-PORTFOLIO-001-FIL-0045__POSUPDT_WS.json",
+  "copybook_layouts": [],
   "verification": {
     "verdict": "VALID_PARTIAL",
-    "verdict_reasons": ["Agent 2 parse_status is 'empty': source file is 1 byte (whitespace only); no divisions, no PROCEDURE DIVISION"],
-    "v1": {"raw_structure": "present", "parse_status": "empty", "program_layout": "present", "copybook_layouts": [], "unresolved_copy_stubs": 0},
-    "v2_file_identities": {
-      "program_entries": {"require_completed": ["parser", "data"], "entries": ["raw_structure|SYS-PORTFOLIO-001-FIL-0045", "data_layout|SYS-PORTFOLIO-001-FIL-0045"], "result": "batched with CURSMGR and CKPRST program entries: checked 6, ok 6, problems [], duplicates [], consistent true"},
-      "copybook_entries": {"require_completed": ["data"], "entries": [], "result": "no copybook layouts used; no call needed for this program"},
-      "consistent": true
-    },
-    "v3_structure_identities": {"sections_checked": 0, "paragraphs_checked": 0, "statements_checked": 0, "edges_checked": 0, "registered_edges": 0, "section_problems": [], "paragraph_problems": [], "statement_problems": [], "edge_problems": [], "invalid_registered_edges": [], "registered_not_in_json": {"missing_count": 0}, "duplicate_ids_in_json": [], "consistent": true},
-    "v4_data_identities": [
-      {"file_id": "SYS-PORTFOLIO-001-FIL-0045", "layout": "program", "records_checked": 0, "fields_checked": 0, "expansions_checked": 0, "record_problems": [], "field_problems": [], "expansion_problems": [], "copybook_records_in_program": 0, "registered_not_in_json": {"missing_count": 0}, "duplicate_ids_in_json": [], "consistent": true}
-    ]
+    "verdict_reason": "All identity checks consistent; Agent 2 parse_status is 'empty' (source file is 1 byte, no PROCEDURE DIVISION). Nothing to trace; no gaps were filled.",
+    "v2_file_identities": {"require_completed": ["parser", "data"], "entries": ["raw_structure", "data_layout"], "checked": 2, "ok": 2, "problems": [], "consistent": true, "note": "checked in one batched call with the other programs of this run (12 entries, 12 OK)"},
+    "v3_structure_identities": {"sections_checked": 0, "paragraphs_checked": 0, "statements_checked": 0, "edges_checked": 0, "registered_edges": 0, "problems": [], "registered_not_in_json": {"missing_count": 0}, "consistent": true},
+    "v4_data_identities": {"program_layout": {"file_id": "SYS-PORTFOLIO-001-FIL-0045", "records_checked": 0, "fields_checked": 0, "expansions_checked": 0, "problems": [], "registered_not_in_json": {"missing_count": 0}, "consistent": true}, "copybook_layouts": []}
   }
 },
 "execution_traces": [],
@@ -30,16 +29,18 @@
 "dead_code_confirmed": [],
 "unresolvable_paths": [],
 "trace_issues": [
-  {"severity": "info", "type": "upstream_issue", "upstream_agent": "2_parser", "upstream_type": "missing_program_id", "message": "Agent 1: PROGRAM-ID not found - using filename as fallback ID POSUPDT (file is 1 byte, contains only whitespace). program_id kept from the inventory."},
-  {"severity": "info", "type": "upstream_issue", "upstream_agent": "2_parser", "upstream_type": "no_outgoing_references", "message": "Agent 1: File has no outgoing references."},
-  {"severity": "info", "type": "upstream_issue", "upstream_agent": "2_parser", "upstream_type": "empty_or_incomplete_source", "message": "Source file is 1 byte (a single blank, no line terminator): no divisions, no PROGRAM-ID and no PROCEDURE DIVISION. Nothing registered."},
-  {"severity": "info", "type": "upstream_issue", "upstream_agent": "2_parser", "upstream_type": "division_not_detected", "message": "None of the IDENTIFICATION, ENVIRONMENT, DATA or PROCEDURE DIVISION headers were found."},
-  {"severity": "info", "type": "upstream_issue", "upstream_agent": "3_data", "upstream_type": "empty_source", "message": "Source file is 1 byte (whitespace only); no records or fields registered."},
-  {"severity": "warning", "type": "no_procedure_division", "message": "No PROCEDURE DIVISION and no entry point: nothing to trace. Source confirmed 1 byte (wc -c)."}
+  {"severity": "info", "type": "upstream_issue", "upstream_agent": "1_inventory", "upstream_type": "missing_program_id", "message": "Agent 1: PROGRAM-ID not found (file is 1 byte, effectively empty) - using filename as fallback ID"},
+  {"severity": "info", "type": "upstream_issue", "upstream_agent": "1_inventory", "upstream_type": "no_outgoing_references", "message": "Agent 1: No outgoing references found (file is effectively empty)"},
+  {"severity": "info", "type": "upstream_issue", "upstream_agent": "2_parser", "upstream_type": "empty_or_incomplete_source", "message": "Agent 2: File is 1 byte (a single blank character); no divisions, sections, paragraphs or statements found"},
+  {"severity": "info", "type": "upstream_issue", "upstream_agent": "2_parser", "upstream_type": "program_id_mismatch", "message": "Agent 2: No PROGRAM-ID in source; inventory value POSUPDT (from file name fallback) kept"},
+  {"severity": "info", "type": "upstream_issue", "upstream_agent": "3_data", "upstream_type": "upstream_parse_status", "message": "Agent 3: parse_status 'empty'; no DATA DIVISION, no records registered"},
+  {"severity": "info", "type": "no_procedure_division", "message": "No PROCEDURE DIVISION in source; no entry points, execution traces, branches or loops exist. logic_status 'empty'."}
 ],
-"field_id_lookups": [],
-"program_narrative": "POSUPDT has no logic: its source file src/programs/batch/POSUPDT.cbl is 1 byte of whitespace, with no PROGRAM-ID, no divisions and no PROCEDURE DIVISION. No execution path, branch, data access or error handling can be described. The program name is a filename fallback from the inventory.",
+"program_narrative": "Program POSUPDT has no executable content: its source file src/programs/batch/POSUPDT.cbl is 1 byte (a single blank). It has no IDENTIFICATION, DATA or PROCEDURE DIVISION, so no business logic can be described. The program name suggests a position-update routine, but nothing in the source supports any statement about its behaviour; SME review is needed to locate the real source.",
 "paragraphs": [],
 "unresolved_statements": [],
-"pseudocode_issues": []
+"pseudocode_issues": [
+  {"severity": "info", "type": "empty_program", "message": "No paragraphs to translate (source file is effectively empty)."}
+],
+"field_id_lookup": []
 }

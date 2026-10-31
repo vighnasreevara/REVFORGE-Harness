@@ -16,8 +16,8 @@ REVFORGE turns a legacy COBOL codebase into a traceable Business Requirements Do
 | 2 | `2_parser_c` | cobol-ast-parser, section-mapper | `output/parser/`. Registers Section, Paragraph and Statement IDs and the control-flow edges. |
 | 3 | `3_data_c` | record-layout-parser, data-dictionary-builder | `output/data/`. Registers Record and Field IDs, copybook expansion and REDEFINES. |
 | 4 | `4_logic_c` | control-flow-tracer, pseudocode-generator | `output/logic/`. Execution traces, branches, loops and pseudocode. Reuses IDs (read-only). |
-| 5 | `5_rules_c` | condition-classifier, rule-tagger | `output/rules/`. 143 classified business rules with confidence and SME flags. |
-| 6 | `6_diagram_c` | component-mapper, sequence-builder | `output/diagram/`. 60 Mermaid diagrams plus a source-ID index. |
+| 5 | `5_rules_c` | condition-classifier, rule-tagger | `output/rules/`. 154 classified business rules with confidence and SME flags. |
+| 6 | `6_diagram_c` | component-mapper, sequence-builder | `output/diagram/`. 65 Mermaid diagrams plus a source-ID index. |
 | 7 | `7_synthesis_c` | gap-detector, section-assembler | `output/final_report/`. Gaps register and BRD. |
 
 The agent definitions are in `.claude/agents/` and the skills in `.claude/skills/`.
@@ -37,12 +37,15 @@ The agent definitions are in `.claude/agents/` and the skills in `.claude/skills
 |---|---|
 | Programs / copybooks / JCL jobs | 42 / 25 / 15 |
 | Records / fields / 88-level conditions | 231 / 1,009 / 259 |
-| Business rules | 143: 45 confirmed, 17 inferred, 81 uncertain |
-| Gaps | 322: 6 critical, 154 high, 79 medium, 83 low |
-| Mermaid diagrams | 60 (structural lint passed; visual rendering still to be verified) |
-| Permanent IDs cited in the BRD | 2,822, all verified against Neo4j |
+| Paragraphs / statements | 402 / 1,936 |
+| Business rules | 154: 36 confirmed, 25 high, 79 medium, 14 low confidence; 50 flagged for SME review |
+| Gaps | 217: 6 critical, 86 high, 50 medium, 75 low |
+| Mermaid diagrams | 65: 15 component, 3 ERD, 2 sequence, 45 process flow (structural check passed; visual rendering still to be verified) |
+| Permanent IDs verified against Neo4j | 873 cited in the BRD; 1,568 in the diagram index; none invalid |
 
-Acceptance status (`docs/revforge_reverse_engineering_acceptance.md`):
+These results come from a full clean re-run of all seven agents on Claude Opus 5.5 (October 2026). The re-run reused every permanent ID; the Neo4j registry was unchanged (4,957 nodes, 5,929 relationships).
+
+Acceptance status from the previous run (`docs/revforge_reverse_engineering_acceptance.md`; its figures describe the earlier output, not this re-run):
 - Reverse engineering is **complete**.
 - Full forward engineering is **not ready**.
 - A **limited pilot** (PORTADD + PORTREAD) is conditionally ready.

@@ -1,72 +1,63 @@
 {
 "program_summary": {"program_id": "BCHCTL00", "file_id": "SYS-PORTFOLIO-001-FIL-0042", "logic_file": "program_logic/SYS-PORTFOLIO-001-FIL-0042__BCHCTL00_logic.json", "logic_status": "partial", "paragraphs_translated": 6, "execution_paths": 1, "branches": 2, "loops": 0, "dead_code_confirmed": 0, "goto_annotations": 0, "unresolvable_paths": 11, "unresolved_ids": 11},
 "program_id": "BCHCTL00",
+"generated_at": "2026-10-27T21:26:23Z",
+"agent_version": "4_logic@1.0",
 "system_id": "SYS-PORTFOLIO-001",
 "file_id": "SYS-PORTFOLIO-001-FIL-0042",
 "path_id": "SYS-PORTFOLIO-001-PATH-0042",
 "relative_path": "src/programs/batch/BCHCTL00.cbl",
-"parse_run_id": "PRUN-20261023T023803Z-ACC2",
+"parse_run_id": "PRUN-20261027T155247Z-2626",
+"data_run_id": "DRUN-20261027T162831Z-1330",
+"source_artifacts": {"raw_structure": "output/parser/raw_structure/SYS-PORTFOLIO-001-FIL-0042__BCHCTL00.json", "data_layout": "output/data/data_layouts/SYS-PORTFOLIO-001-FIL-0042__BCHCTL00_WS.json", "copybook_layouts": ["output/data/data_layouts/SYS-PORTFOLIO-001-FIL-0002__BCHCTL.json", "output/data/data_layouts/SYS-PORTFOLIO-001-FIL-0001__BCHCON.json", "output/data/data_layouts/SYS-PORTFOLIO-001-FIL-0007__ERRHAND.json"]},
+"unresolved_id_counts": {"statements": 0, "fields_unresolved": 0, "fields_ambiguous": 0, "paragraph_targets": 11},
 "upstream": {
+  "parse_status": "partial",
   "verification": {
     "verdict": "VALID_PARTIAL",
-    "verdict_reasons": ["V2, V3, V4 consistent for the program and its three copybook layouts", "Agent 2 parse_status 'partial': 11 PERFORM targets are not present in the source (named only in a trailing comment block)"],
-    "v1": {"raw_structure": "present", "parse_status": "partial", "program_layout": "present",
-           "copybook_layouts": [
-             {"copybook": "BCHCTL", "copybook_file_id": "SYS-PORTFOLIO-001-FIL-0002", "layout": "present", "expanded_at_lines": [27]},
-             {"copybook": "BCHCON", "copybook_file_id": "SYS-PORTFOLIO-001-FIL-0001", "layout": "present", "expanded_at_lines": [30]},
-             {"copybook": "ERRHAND", "copybook_file_id": "SYS-PORTFOLIO-001-FIL-0007", "layout": "present", "expanded_at_lines": [31]}
-           ],
-           "unresolved_copy_stubs": 0},
-    "v2_file_identities": {
-      "program_entries": {"require_completed": ["parser", "data"], "entries": ["raw_structure|SYS-PORTFOLIO-001-FIL-0042", "data_layout|SYS-PORTFOLIO-001-FIL-0042"], "data_run_id": "DRUN-20261024T215053Z-ACC1", "result": "batched with HISTLD00, PORTMSTR and PROGNAME program entries: checked 8, ok 8, problems [], duplicates [], consistent true"},
-      "copybook_entries": {"require_completed": ["data"], "entries": ["data_layout|SYS-PORTFOLIO-001-FIL-0001", "data_layout|SYS-PORTFOLIO-001-FIL-0002", "data_layout|SYS-PORTFOLIO-001-FIL-0007"], "result": "batched with the HISTLD00 copybooks FIL-0008, FIL-0015, FIL-0016, FIL-0017: checked 7, ok 7, problems [], duplicates [], consistent true"},
-      "consistent": true
+    "verdict_reason": "V2, V3 and V4 consistent; Agent 2 parse_status 'partial' (11 PERFORM targets not defined in the program)",
+    "V2_file_identities": {
+      "program_entries": {"checked": 2, "ok": 2, "problems": [], "duplicate_file_ids_in_json": [], "require_completed": ["parser", "data"], "consistent": true},
+      "copybook_entries": {"checked": 3, "ok": 3, "problems": [], "file_ids": ["SYS-PORTFOLIO-001-FIL-0002", "SYS-PORTFOLIO-001-FIL-0001", "SYS-PORTFOLIO-001-FIL-0007"], "require_completed": ["data"], "consistent": true}
     },
-    "v3_structure_identities": {"sections_checked": 5, "paragraphs_checked": 6, "statements_checked": 30, "edges_checked": 5, "registered_edges": 5, "section_problems": [], "paragraph_problems": [], "statement_problems": [], "edge_problems": [], "invalid_registered_edges": [], "registered_not_in_json": {"sections": [], "paragraphs": [], "statements": [], "missing_count": 0}, "duplicate_ids_in_json": [], "consistent": true, "note": "edges sent only for the 5 resolved CFG edges; the 11 unresolved PERFORM edges have no target and no registered relationship. Section names sent for SEC-0001/SEC-0002 only."},
-    "v4_data_identities": [
-      {"file_id": "SYS-PORTFOLIO-001-FIL-0042", "layout": "program", "file_type": "program", "records_checked": 3, "fields_checked": 19, "expansions_checked": 3, "record_problems": [], "field_problems": [], "expansion_problems": [], "copybook_records_in_program": 0, "registered_not_in_json": {"records": [], "fields": [], "missing_count": 0}, "duplicate_ids_in_json": [], "consistent": true, "note": "copy_expansions holder_id sent as the expansion's section_id (holder_id null in the layout: section-level COPY)"},
-      {"file_id": "SYS-PORTFOLIO-001-FIL-0001", "layout": "copybook BCHCON", "file_type": "copybook", "records_checked": 1, "fields_checked": 40, "expansions_checked": 0, "record_problems": [], "field_problems": [], "expansion_problems": [], "copybook_records_in_program": 0, "registered_not_in_json": {"records": [], "fields": [], "missing_count": 0}, "duplicate_ids_in_json": [], "consistent": true},
-      {"file_id": "SYS-PORTFOLIO-001-FIL-0002", "layout": "copybook BCHCTL", "file_type": "copybook", "records_checked": 1, "fields_checked": 30, "expansions_checked": 0, "record_problems": [], "field_problems": [], "expansion_problems": [], "copybook_records_in_program": 0, "registered_not_in_json": {"records": [], "fields": [], "missing_count": 0}, "duplicate_ids_in_json": [], "consistent": true},
-      {"file_id": "SYS-PORTFOLIO-001-FIL-0007", "layout": "copybook ERRHAND", "file_type": "copybook", "records_checked": 5, "fields_checked": 25, "expansions_checked": 0, "record_problems": [], "field_problems": [], "expansion_problems": [], "copybook_records_in_program": 0, "registered_not_in_json": {"records": [], "fields": [], "missing_count": 0}, "duplicate_ids_in_json": [], "consistent": true}
-    ]
+    "V3_structure_identities": {"sections_checked": 5, "paragraphs_checked": 6, "statements_checked": 30, "edges_checked": 5, "registered_edges": 5, "section_problems": [], "paragraph_problems": [], "statement_problems": [], "edge_problems": [], "invalid_registered_edges": [], "registered_not_in_json": {"missing_count": 0}, "duplicate_ids_in_json": [], "consistent": true},
+    "V4_data_identities": {
+      "program_layout": {"file_id": "SYS-PORTFOLIO-001-FIL-0042", "records_checked": 3, "fields_checked": 19, "expansions_checked": 3, "record_problems": [], "field_problems": [], "expansion_problems": [], "copybook_records_in_program": 0, "registered_not_in_json": {"missing_count": 0}, "duplicate_ids_in_json": [], "consistent": true},
+      "copybook_layouts": [
+        {"file_id": "SYS-PORTFOLIO-001-FIL-0002", "copybook": "BCHCTL", "records_checked": 1, "fields_checked": 30, "expansions_checked": 0, "record_problems": [], "field_problems": [], "expansion_problems": [], "registered_not_in_json": {"missing_count": 0}, "consistent": true},
+        {"file_id": "SYS-PORTFOLIO-001-FIL-0001", "copybook": "BCHCON", "records_checked": 1, "fields_checked": 40, "expansions_checked": 0, "record_problems": [], "field_problems": [], "expansion_problems": [], "registered_not_in_json": {"missing_count": 0}, "consistent": true},
+        {"file_id": "SYS-PORTFOLIO-001-FIL-0007", "copybook": "ERRHAND", "records_checked": 5, "fields_checked": 25, "expansions_checked": 0, "record_problems": [], "field_problems": [], "expansion_problems": [], "registered_not_in_json": {"missing_count": 0}, "consistent": true}
+      ]
+    }
   }
 },
 "execution_traces": [
   {
     "entry_point": "0000-MAIN",
     "entry_point_id": "SYS-PORTFOLIO-001-FIL-0042-PAR-0001",
-    "entry_type": "batch_subprogram",
-    "entry_note": "PROCEDURE DIVISION USING LS-CONTROL-REQUEST (line 59): called batch-control subprogram; the caller passes a 4-character function code (INIT/CHEK/UPDT/TERM), job name, process date, sequence number and a return code. Exactly one WHEN branch runs per call; the program ends with GOBACK. Steps are listed depth-first.",
+    "entry_type": "called_subprogram",
+    "entry_note": "PROCEDURE DIVISION USING LS-CONTROL-REQUEST; dispatches on LS-FUNCTION, copies LS-RETURN-CODE to RETURN-CODE and returns with GOBACK",
     "steps": [
-      {"step": 1, "paragraph": "0000-MAIN", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0042-PAR-0001", "action": "PERFORM", "target": "1000-PROCESS-INITIALIZE", "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0042-PAR-0002", "target_section_id": null,
-       "condition": {"text": "EVALUATE TRUE WHEN FUNC-INIT", "fields": ["FUNC-INIT"], "field_ids": [{"name": "FUNC-INIT", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0042-FLD-000012", "target_kind": "condition", "candidate_ids": []}]},
-       "line": 64, "statement_id": "SYS-PORTFOLIO-001-FIL-0042-STMT-000022"},
-      {"step": 2, "paragraph": "1000-PROCESS-INITIALIZE", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0042-PAR-0002", "action": "unresolvable", "perform_type": "PERFORM_SIMPLE", "target": "1100-OPEN-FILES", "target_paragraph_id": null, "target_section_id": null, "condition": null, "line": 84, "statement_id": "SYS-PORTFOLIO-001-FIL-0042-STMT-000004"},
-      {"step": 3, "paragraph": "1000-PROCESS-INITIALIZE", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0042-PAR-0002", "action": "unresolvable", "perform_type": "PERFORM_SIMPLE", "target": "1200-READ-CONTROL-RECORD", "target_paragraph_id": null, "target_section_id": null, "condition": null, "line": 85, "statement_id": "SYS-PORTFOLIO-001-FIL-0042-STMT-000005"},
-      {"step": 4, "paragraph": "1000-PROCESS-INITIALIZE", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0042-PAR-0002", "action": "unresolvable", "perform_type": "PERFORM_SIMPLE", "target": "1300-VALIDATE-PROCESS", "target_paragraph_id": null, "target_section_id": null, "condition": null, "line": 86, "statement_id": "SYS-PORTFOLIO-001-FIL-0042-STMT-000006"},
-      {"step": 5, "paragraph": "1000-PROCESS-INITIALIZE", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0042-PAR-0002", "action": "unresolvable", "perform_type": "PERFORM_SIMPLE", "target": "1400-UPDATE-START-STATUS", "target_paragraph_id": null, "target_section_id": null, "condition": null, "line": 87, "statement_id": "SYS-PORTFOLIO-001-FIL-0042-STMT-000007"},
-      {"step": 6, "paragraph": "0000-MAIN", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0042-PAR-0001", "action": "PERFORM", "target": "2000-CHECK-PREREQUISITES", "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0042-PAR-0003", "target_section_id": null,
-       "condition": {"text": "EVALUATE TRUE WHEN FUNC-CHEK", "fields": ["FUNC-CHEK"], "field_ids": [{"name": "FUNC-CHEK", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0042-FLD-000013", "target_kind": "condition", "candidate_ids": []}]},
-       "line": 67, "statement_id": "SYS-PORTFOLIO-001-FIL-0042-STMT-000020"},
-      {"step": 7, "paragraph": "2000-CHECK-PREREQUISITES", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0042-PAR-0003", "action": "unresolvable", "perform_type": "PERFORM_SIMPLE", "target": "2100-READ-CONTROL-RECORD", "target_paragraph_id": null, "target_section_id": null, "condition": null, "line": 91, "statement_id": "SYS-PORTFOLIO-001-FIL-0042-STMT-000008"},
-      {"step": 8, "paragraph": "2000-CHECK-PREREQUISITES", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0042-PAR-0003", "action": "unresolvable", "perform_type": "PERFORM_SIMPLE", "target": "2200-CHECK-DEPENDENCIES", "target_paragraph_id": null, "target_section_id": null, "condition": null, "line": 92, "statement_id": "SYS-PORTFOLIO-001-FIL-0042-STMT-000009"},
-      {"step": 9, "paragraph": "0000-MAIN", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0042-PAR-0001", "action": "PERFORM", "target": "3000-UPDATE-STATUS", "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0042-PAR-0004", "target_section_id": null,
-       "condition": {"text": "EVALUATE TRUE WHEN FUNC-UPDT", "fields": ["FUNC-UPDT"], "field_ids": [{"name": "FUNC-UPDT", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0042-FLD-000014", "target_kind": "condition", "candidate_ids": []}]},
-       "line": 70, "statement_id": "SYS-PORTFOLIO-001-FIL-0042-STMT-000026"},
-      {"step": 10, "paragraph": "3000-UPDATE-STATUS", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0042-PAR-0004", "action": "unresolvable", "perform_type": "PERFORM_SIMPLE", "target": "3100-READ-CONTROL-RECORD", "target_paragraph_id": null, "target_section_id": null, "condition": null, "line": 101, "statement_id": "SYS-PORTFOLIO-001-FIL-0042-STMT-000011"},
-      {"step": 11, "paragraph": "3000-UPDATE-STATUS", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0042-PAR-0004", "action": "unresolvable", "perform_type": "PERFORM_SIMPLE", "target": "3200-UPDATE-PROCESS-STATUS", "target_paragraph_id": null, "target_section_id": null, "condition": null, "line": 102, "statement_id": "SYS-PORTFOLIO-001-FIL-0042-STMT-000012"},
-      {"step": 12, "paragraph": "3000-UPDATE-STATUS", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0042-PAR-0004", "action": "unresolvable", "perform_type": "PERFORM_SIMPLE", "target": "3300-WRITE-CONTROL-RECORD", "target_paragraph_id": null, "target_section_id": null, "condition": null, "line": 103, "statement_id": "SYS-PORTFOLIO-001-FIL-0042-STMT-000013"},
-      {"step": 13, "paragraph": "0000-MAIN", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0042-PAR-0001", "action": "PERFORM", "target": "4000-PROCESS-TERMINATE", "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0042-PAR-0005", "target_section_id": null,
-       "condition": {"text": "EVALUATE TRUE WHEN FUNC-TERM", "fields": ["FUNC-TERM"], "field_ids": [{"name": "FUNC-TERM", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0042-FLD-000015", "target_kind": "condition", "candidate_ids": []}]},
-       "line": 73, "statement_id": "SYS-PORTFOLIO-001-FIL-0042-STMT-000024"},
-      {"step": 14, "paragraph": "4000-PROCESS-TERMINATE", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0042-PAR-0005", "action": "unresolvable", "perform_type": "PERFORM_SIMPLE", "target": "4100-UPDATE-COMPLETION", "target_paragraph_id": null, "target_section_id": null, "condition": null, "line": 107, "statement_id": "SYS-PORTFOLIO-001-FIL-0042-STMT-000014"},
-      {"step": 15, "paragraph": "4000-PROCESS-TERMINATE", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0042-PAR-0005", "action": "unresolvable", "perform_type": "PERFORM_SIMPLE", "target": "4200-CLOSE-FILES", "target_paragraph_id": null, "target_section_id": null, "condition": null, "line": 108, "statement_id": "SYS-PORTFOLIO-001-FIL-0042-STMT-000015"},
-      {"step": 16, "paragraph": "0000-MAIN", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0042-PAR-0001", "action": "PERFORM", "target": "9000-ERROR-ROUTINE", "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0042-PAR-0006", "target_section_id": null,
-       "condition": {"text": "EVALUATE TRUE WHEN OTHER (no function condition true)", "fields": ["FUNC-INIT", "FUNC-CHEK", "FUNC-UPDT", "FUNC-TERM"], "field_ids": [{"name": "FUNC-INIT", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0042-FLD-000012", "target_kind": "condition", "candidate_ids": []}, {"name": "FUNC-CHEK", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0042-FLD-000013", "target_kind": "condition", "candidate_ids": []}, {"name": "FUNC-UPDT", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0042-FLD-000014", "target_kind": "condition", "candidate_ids": []}, {"name": "FUNC-TERM", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0042-FLD-000015", "target_kind": "condition", "candidate_ids": []}]},
-       "line": 76, "statement_id": "SYS-PORTFOLIO-001-FIL-0042-STMT-000028"},
-      {"step": 17, "paragraph": "9000-ERROR-ROUTINE", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0042-PAR-0006", "action": "CALL", "target": "ERRPROC", "target_paragraph_id": null, "target_section_id": null, "condition": null, "line": 114, "statement_id": "SYS-PORTFOLIO-001-FIL-0042-STMT-000018"},
-      {"step": 18, "paragraph": "0000-MAIN", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0042-PAR-0001", "action": "GOBACK", "target": null, "target_paragraph_id": null, "target_section_id": null, "condition": null, "line": 80, "statement_id": "SYS-PORTFOLIO-001-FIL-0042-STMT-000003"}
-    ]
+      {"step": 1, "call_depth": 0, "paragraph": "0000-MAIN", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0042-PAR-0001", "action": "PERFORM", "target": "1000-PROCESS-INITIALIZE", "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0042-PAR-0002", "target_section_id": null, "condition": {"text": "WHEN FUNC-INIT (EVALUATE TRUE, line 61)", "fields": ["FUNC-INIT"], "field_ids": [{"name": "FUNC-INIT", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0042-FLD-000012", "target_kind": "condition", "candidate_ids": []}], "branch_statement_id": "SYS-PORTFOLIO-001-FIL-0042-STMT-000001"}, "line": 64, "statement_id": "SYS-PORTFOLIO-001-FIL-0042-STMT-000022"},
+      {"step": 2, "call_depth": 1, "paragraph": "1000-PROCESS-INITIALIZE", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0042-PAR-0002", "action": "PERFORM", "target": "1100-OPEN-FILES", "target_paragraph_id": null, "target_section_id": null, "condition": null, "line": 84, "statement_id": "SYS-PORTFOLIO-001-FIL-0042-STMT-000004", "unresolvable": true},
+      {"step": 3, "call_depth": 1, "paragraph": "1000-PROCESS-INITIALIZE", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0042-PAR-0002", "action": "PERFORM", "target": "1200-READ-CONTROL-RECORD", "target_paragraph_id": null, "target_section_id": null, "condition": null, "line": 85, "statement_id": "SYS-PORTFOLIO-001-FIL-0042-STMT-000005", "unresolvable": true},
+      {"step": 4, "call_depth": 1, "paragraph": "1000-PROCESS-INITIALIZE", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0042-PAR-0002", "action": "PERFORM", "target": "1300-VALIDATE-PROCESS", "target_paragraph_id": null, "target_section_id": null, "condition": null, "line": 86, "statement_id": "SYS-PORTFOLIO-001-FIL-0042-STMT-000006", "unresolvable": true},
+      {"step": 5, "call_depth": 1, "paragraph": "1000-PROCESS-INITIALIZE", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0042-PAR-0002", "action": "PERFORM", "target": "1400-UPDATE-START-STATUS", "target_paragraph_id": null, "target_section_id": null, "condition": null, "line": 87, "statement_id": "SYS-PORTFOLIO-001-FIL-0042-STMT-000007", "unresolvable": true},
+      {"step": 6, "call_depth": 0, "paragraph": "0000-MAIN", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0042-PAR-0001", "action": "PERFORM", "target": "2000-CHECK-PREREQUISITES", "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0042-PAR-0003", "target_section_id": null, "condition": {"text": "WHEN FUNC-CHEK (EVALUATE TRUE, line 61)", "fields": ["FUNC-CHEK"], "field_ids": [{"name": "FUNC-CHEK", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0042-FLD-000013", "target_kind": "condition", "candidate_ids": []}], "branch_statement_id": "SYS-PORTFOLIO-001-FIL-0042-STMT-000001"}, "line": 67, "statement_id": "SYS-PORTFOLIO-001-FIL-0042-STMT-000020"},
+      {"step": 7, "call_depth": 1, "paragraph": "2000-CHECK-PREREQUISITES", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0042-PAR-0003", "action": "PERFORM", "target": "2100-READ-CONTROL-RECORD", "target_paragraph_id": null, "target_section_id": null, "condition": null, "line": 91, "statement_id": "SYS-PORTFOLIO-001-FIL-0042-STMT-000008", "unresolvable": true},
+      {"step": 8, "call_depth": 1, "paragraph": "2000-CHECK-PREREQUISITES", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0042-PAR-0003", "action": "PERFORM", "target": "2200-CHECK-DEPENDENCIES", "target_paragraph_id": null, "target_section_id": null, "condition": null, "line": 92, "statement_id": "SYS-PORTFOLIO-001-FIL-0042-STMT-000009", "unresolvable": true},
+      {"step": 9, "call_depth": 0, "paragraph": "0000-MAIN", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0042-PAR-0001", "action": "PERFORM", "target": "3000-UPDATE-STATUS", "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0042-PAR-0004", "target_section_id": null, "condition": {"text": "WHEN FUNC-UPDT (EVALUATE TRUE, line 61)", "fields": ["FUNC-UPDT"], "field_ids": [{"name": "FUNC-UPDT", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0042-FLD-000014", "target_kind": "condition", "candidate_ids": []}], "branch_statement_id": "SYS-PORTFOLIO-001-FIL-0042-STMT-000001"}, "line": 70, "statement_id": "SYS-PORTFOLIO-001-FIL-0042-STMT-000026"},
+      {"step": 10, "call_depth": 1, "paragraph": "3000-UPDATE-STATUS", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0042-PAR-0004", "action": "PERFORM", "target": "3100-READ-CONTROL-RECORD", "target_paragraph_id": null, "target_section_id": null, "condition": null, "line": 101, "statement_id": "SYS-PORTFOLIO-001-FIL-0042-STMT-000011", "unresolvable": true},
+      {"step": 11, "call_depth": 1, "paragraph": "3000-UPDATE-STATUS", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0042-PAR-0004", "action": "PERFORM", "target": "3200-UPDATE-PROCESS-STATUS", "target_paragraph_id": null, "target_section_id": null, "condition": null, "line": 102, "statement_id": "SYS-PORTFOLIO-001-FIL-0042-STMT-000012", "unresolvable": true},
+      {"step": 12, "call_depth": 1, "paragraph": "3000-UPDATE-STATUS", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0042-PAR-0004", "action": "PERFORM", "target": "3300-WRITE-CONTROL-RECORD", "target_paragraph_id": null, "target_section_id": null, "condition": null, "line": 103, "statement_id": "SYS-PORTFOLIO-001-FIL-0042-STMT-000013", "unresolvable": true},
+      {"step": 13, "call_depth": 0, "paragraph": "0000-MAIN", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0042-PAR-0001", "action": "PERFORM", "target": "4000-PROCESS-TERMINATE", "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0042-PAR-0005", "target_section_id": null, "condition": {"text": "WHEN FUNC-TERM (EVALUATE TRUE, line 61)", "fields": ["FUNC-TERM"], "field_ids": [{"name": "FUNC-TERM", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0042-FLD-000015", "target_kind": "condition", "candidate_ids": []}], "branch_statement_id": "SYS-PORTFOLIO-001-FIL-0042-STMT-000001"}, "line": 73, "statement_id": "SYS-PORTFOLIO-001-FIL-0042-STMT-000024"},
+      {"step": 14, "call_depth": 1, "paragraph": "4000-PROCESS-TERMINATE", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0042-PAR-0005", "action": "PERFORM", "target": "4100-UPDATE-COMPLETION", "target_paragraph_id": null, "target_section_id": null, "condition": null, "line": 107, "statement_id": "SYS-PORTFOLIO-001-FIL-0042-STMT-000014", "unresolvable": true},
+      {"step": 15, "call_depth": 1, "paragraph": "4000-PROCESS-TERMINATE", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0042-PAR-0005", "action": "PERFORM", "target": "4200-CLOSE-FILES", "target_paragraph_id": null, "target_section_id": null, "condition": null, "line": 108, "statement_id": "SYS-PORTFOLIO-001-FIL-0042-STMT-000015", "unresolvable": true},
+      {"step": 16, "call_depth": 0, "paragraph": "0000-MAIN", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0042-PAR-0001", "action": "PERFORM", "target": "9000-ERROR-ROUTINE", "target_paragraph_id": "SYS-PORTFOLIO-001-FIL-0042-PAR-0006", "target_section_id": null, "condition": {"text": "WHEN OTHER (EVALUATE TRUE, line 61)", "fields": [], "field_ids": [], "branch_statement_id": "SYS-PORTFOLIO-001-FIL-0042-STMT-000001"}, "line": 76, "statement_id": "SYS-PORTFOLIO-001-FIL-0042-STMT-000028"},
+      {"step": 17, "call_depth": 1, "paragraph": "9000-ERROR-ROUTINE", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0042-PAR-0006", "action": "CALL", "target": "ERRPROC", "target_paragraph_id": null, "target_section_id": null, "condition": null, "line": 114, "statement_id": "SYS-PORTFOLIO-001-FIL-0042-STMT-000018", "call_type": "STATIC_CALL", "note": "Inter-program call to the common error processor ERRPROC, passing ERR-MESSAGE"},
+      {"step": 18, "call_depth": 0, "paragraph": "0000-MAIN", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0042-PAR-0001", "action": "GOBACK", "target": null, "target_paragraph_id": null, "target_section_id": null, "condition": null, "line": 80, "statement_id": "SYS-PORTFOLIO-001-FIL-0042-STMT-000003", "note": "RETURN-CODE was set from LS-RETURN-CODE at line 79"}
+    ],
+    "path_summary": "0000-MAIN dispatches on LS-FUNCTION: 'INIT' -> 1000-PROCESS-INITIALIZE; 'CHEK' -> 2000-CHECK-PREREQUISITES (return code success or warning from WS-PREREQ-MET); 'UPDT' -> 3000-UPDATE-STATUS; 'TERM' -> 4000-PROCESS-TERMINATE; other -> 9000-ERROR-ROUTINE (return code error, CALL ERRPROC); then RETURN-CODE = LS-RETURN-CODE and GOBACK. All 11 detail paragraphs performed by 1000-, 2000-, 3000- and 4000- are not defined in the source, so none of the file I/O on BATCH-CONTROL-FILE can be traced."
   }
 ],
 "branch_map": [
@@ -74,128 +65,95 @@
     "paragraph": "0000-MAIN",
     "paragraph_id": "SYS-PORTFOLIO-001-FIL-0042-PAR-0001",
     "branches": [
-      {"type": "EVALUATE", "line": 61, "statement_id": "SYS-PORTFOLIO-001-FIL-0042-STMT-000001", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0042-PAR-0001", "subjects": ["TRUE"],
-       "condition_text": "EVALUATE TRUE WHEN FUNC-INIT / WHEN FUNC-CHEK / WHEN FUNC-UPDT / WHEN FUNC-TERM / WHEN OTHER",
-       "condition_fields": ["FUNC-INIT", "FUNC-CHEK", "FUNC-UPDT", "FUNC-TERM"],
-       "condition_field_ids": [
-         {"name": "FUNC-INIT", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0042-FLD-000012", "target_kind": "condition", "candidate_ids": []},
-         {"name": "FUNC-CHEK", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0042-FLD-000013", "target_kind": "condition", "candidate_ids": []},
-         {"name": "FUNC-UPDT", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0042-FLD-000014", "target_kind": "condition", "candidate_ids": []},
-         {"name": "FUNC-TERM", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0042-FLD-000015", "target_kind": "condition", "candidate_ids": []}
-       ],
-       "when_clauses": [
-         {"conditions": ["FUNC-INIT"], "condition_fields": ["FUNC-INIT"], "body_line_range": [63, 64], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0042-STMT-000021", "SYS-PORTFOLIO-001-FIL-0042-STMT-000022"]},
-         {"conditions": ["FUNC-CHEK"], "condition_fields": ["FUNC-CHEK"], "body_line_range": [66, 67], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0042-STMT-000019", "SYS-PORTFOLIO-001-FIL-0042-STMT-000020"]},
-         {"conditions": ["FUNC-UPDT"], "condition_fields": ["FUNC-UPDT"], "body_line_range": [69, 70], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0042-STMT-000025", "SYS-PORTFOLIO-001-FIL-0042-STMT-000026"]},
-         {"conditions": ["FUNC-TERM"], "condition_fields": ["FUNC-TERM"], "body_line_range": [72, 73], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0042-STMT-000023", "SYS-PORTFOLIO-001-FIL-0042-STMT-000024"]},
-         {"conditions": ["OTHER"], "condition_fields": [], "body_line_range": [75, 76], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0042-STMT-000027", "SYS-PORTFOLIO-001-FIL-0042-STMT-000028"], "is_default": true}
-       ],
-       "end_evaluate_line": 77,
-       "outcomes": [
-         {"label": "WHEN FUNC-INIT (LS-FUNCTION = 'INIT')", "line_range": [63, 64], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0042-STMT-000021", "SYS-PORTFOLIO-001-FIL-0042-STMT-000022"]},
-         {"label": "WHEN FUNC-CHEK (LS-FUNCTION = 'CHEK')", "line_range": [66, 67], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0042-STMT-000019", "SYS-PORTFOLIO-001-FIL-0042-STMT-000020"]},
-         {"label": "WHEN FUNC-UPDT (LS-FUNCTION = 'UPDT')", "line_range": [69, 70], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0042-STMT-000025", "SYS-PORTFOLIO-001-FIL-0042-STMT-000026"]},
-         {"label": "WHEN FUNC-TERM (LS-FUNCTION = 'TERM')", "line_range": [72, 73], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0042-STMT-000023", "SYS-PORTFOLIO-001-FIL-0042-STMT-000024"]},
-         {"label": "WHEN OTHER", "line_range": [75, 76], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0042-STMT-000027", "SYS-PORTFOLIO-001-FIL-0042-STMT-000028"]}
-       ],
-       "nested_depth": 1}
+      {"type": "EVALUATE", "line": 61, "statement_id": "SYS-PORTFOLIO-001-FIL-0042-STMT-000001", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0042-PAR-0001", "subjects": ["TRUE"], "condition_text": "EVALUATE TRUE", "condition_fields": ["FUNC-INIT", "FUNC-CHEK", "FUNC-UPDT", "FUNC-TERM"], "condition_field_ids": [{"name": "FUNC-INIT", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0042-FLD-000012", "target_kind": "condition", "candidate_ids": []}, {"name": "FUNC-CHEK", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0042-FLD-000013", "target_kind": "condition", "candidate_ids": []}, {"name": "FUNC-UPDT", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0042-FLD-000014", "target_kind": "condition", "candidate_ids": []}, {"name": "FUNC-TERM", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0042-FLD-000015", "target_kind": "condition", "candidate_ids": []}], "when_clauses": [
+        {"conditions": ["FUNC-INIT"], "condition_meaning": "LS-FUNCTION = 'INIT'", "condition_fields": ["FUNC-INIT"], "body_line_range": [63, 64], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0042-STMT-000021", "SYS-PORTFOLIO-001-FIL-0042-STMT-000022"], "effect": "process mode 'I'; PERFORM 1000-PROCESS-INITIALIZE"},
+        {"conditions": ["FUNC-CHEK"], "condition_meaning": "LS-FUNCTION = 'CHEK'", "condition_fields": ["FUNC-CHEK"], "body_line_range": [66, 67], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0042-STMT-000019", "SYS-PORTFOLIO-001-FIL-0042-STMT-000020"], "effect": "process mode 'C'; PERFORM 2000-CHECK-PREREQUISITES"},
+        {"conditions": ["FUNC-UPDT"], "condition_meaning": "LS-FUNCTION = 'UPDT'", "condition_fields": ["FUNC-UPDT"], "body_line_range": [69, 70], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0042-STMT-000025", "SYS-PORTFOLIO-001-FIL-0042-STMT-000026"], "effect": "process mode 'U'; PERFORM 3000-UPDATE-STATUS"},
+        {"conditions": ["FUNC-TERM"], "condition_meaning": "LS-FUNCTION = 'TERM'", "condition_fields": ["FUNC-TERM"], "body_line_range": [72, 73], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0042-STMT-000023", "SYS-PORTFOLIO-001-FIL-0042-STMT-000024"], "effect": "process mode 'F'; PERFORM 4000-PROCESS-TERMINATE"},
+        {"conditions": ["OTHER"], "condition_fields": [], "body_line_range": [75, 76], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0042-STMT-000027", "SYS-PORTFOLIO-001-FIL-0042-STMT-000028"], "is_default": true, "effect": "ERR-TEXT = 'Invalid function code'; PERFORM 9000-ERROR-ROUTINE"}
+      ], "end_evaluate_line": 77, "nested_depth": 1}
     ]
   },
   {
     "paragraph": "2000-CHECK-PREREQUISITES",
     "paragraph_id": "SYS-PORTFOLIO-001-FIL-0042-PAR-0003",
     "branches": [
-      {"type": "IF", "line": 93, "statement_id": "SYS-PORTFOLIO-001-FIL-0042-STMT-000010", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0042-PAR-0003",
-       "condition_text": "PREREQS-SATISFIED", "condition_fields": ["PREREQS-SATISFIED"],
-       "condition_field_ids": [{"name": "PREREQS-SATISFIED", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0042-FLD-000004", "target_kind": "condition", "candidate_ids": []}],
-       "ambiguous": true,
-       "ambiguity_note": "WS-PREREQ-MET (parent of PREREQS-SATISFIED) has no VALUE clause and no statement in the source sets it; it would presumably be set by the missing paragraphs 2100-READ-CONTROL-RECORD / 2200-CHECK-DEPENDENCIES. The value tested at run time cannot be determined statically.",
-       "has_else": true, "then_line_range": [94, 94], "else_line_range": [96, 96], "end_if_line": 97, "nested_depth": 1,
-       "outcomes": [
-         {"label": "THEN", "line_range": [94, 94], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0042-STMT-000030"]},
-         {"label": "ELSE", "line_range": [96, 96], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0042-STMT-000029"]}
-       ]}
+      {"type": "IF", "line": 93, "statement_id": "SYS-PORTFOLIO-001-FIL-0042-STMT-000010", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0042-PAR-0003", "condition_text": "PREREQS-SATISFIED", "condition_meaning": "WS-PREREQ-MET = 'Y'", "condition_fields": ["PREREQS-SATISFIED"], "condition_field_ids": [{"name": "PREREQS-SATISFIED", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0042-FLD-000004", "target_kind": "condition", "candidate_ids": []}], "has_else": true, "then_line_range": [94, 94], "else_line_range": [96, 96], "end_if_line": 97, "nested_depth": 1, "outcomes": [{"label": "THEN", "line_range": [94, 94], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0042-STMT-000030"], "effect": "LS-RETURN-CODE = BCT-RC-SUCCESS (+0)"}, {"label": "ELSE", "line_range": [96, 96], "statement_ids": ["SYS-PORTFOLIO-001-FIL-0042-STMT-000029"], "effect": "LS-RETURN-CODE = BCT-RC-WARNING (+4)"}], "data_context": "WS-PREREQ-MET has no VALUE clause and is not set by any statement in this source; it would be set by the undefined 2200-CHECK-DEPENDENCIES"}
     ]
   }
 ],
 "loops": [],
 "dead_code_confirmed": [],
 "unresolvable_paths": [
-  {"paragraph": "1000-PROCESS-INITIALIZE", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0042-PAR-0002", "statement_id": "SYS-PORTFOLIO-001-FIL-0042-STMT-000004", "line": 84, "target": "1100-OPEN-FILES", "reason": "PERFORM target not in CFG: paragraph not present in the source (listed only in the comment block, lines 116-127)"},
-  {"paragraph": "1000-PROCESS-INITIALIZE", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0042-PAR-0002", "statement_id": "SYS-PORTFOLIO-001-FIL-0042-STMT-000005", "line": 85, "target": "1200-READ-CONTROL-RECORD", "reason": "PERFORM target not in CFG: paragraph not present in the source (listed only in the comment block)"},
-  {"paragraph": "1000-PROCESS-INITIALIZE", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0042-PAR-0002", "statement_id": "SYS-PORTFOLIO-001-FIL-0042-STMT-000006", "line": 86, "target": "1300-VALIDATE-PROCESS", "reason": "PERFORM target not in CFG: paragraph not present in the source (listed only in the comment block)"},
-  {"paragraph": "1000-PROCESS-INITIALIZE", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0042-PAR-0002", "statement_id": "SYS-PORTFOLIO-001-FIL-0042-STMT-000007", "line": 87, "target": "1400-UPDATE-START-STATUS", "reason": "PERFORM target not in CFG: paragraph not present in the source (listed only in the comment block)"},
-  {"paragraph": "2000-CHECK-PREREQUISITES", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0042-PAR-0003", "statement_id": "SYS-PORTFOLIO-001-FIL-0042-STMT-000008", "line": 91, "target": "2100-READ-CONTROL-RECORD", "reason": "PERFORM target not in CFG: paragraph not present in the source and not listed in the comment block"},
-  {"paragraph": "2000-CHECK-PREREQUISITES", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0042-PAR-0003", "statement_id": "SYS-PORTFOLIO-001-FIL-0042-STMT-000009", "line": 92, "target": "2200-CHECK-DEPENDENCIES", "reason": "PERFORM target not in CFG: paragraph not present in the source (listed only in the comment block)"},
-  {"paragraph": "3000-UPDATE-STATUS", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0042-PAR-0004", "statement_id": "SYS-PORTFOLIO-001-FIL-0042-STMT-000011", "line": 101, "target": "3100-READ-CONTROL-RECORD", "reason": "PERFORM target not in CFG: paragraph not present in the source and not listed in the comment block"},
-  {"paragraph": "3000-UPDATE-STATUS", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0042-PAR-0004", "statement_id": "SYS-PORTFOLIO-001-FIL-0042-STMT-000012", "line": 102, "target": "3200-UPDATE-PROCESS-STATUS", "reason": "PERFORM target not in CFG: paragraph not present in the source (listed only in the comment block)"},
-  {"paragraph": "3000-UPDATE-STATUS", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0042-PAR-0004", "statement_id": "SYS-PORTFOLIO-001-FIL-0042-STMT-000013", "line": 103, "target": "3300-WRITE-CONTROL-RECORD", "reason": "PERFORM target not in CFG: paragraph not present in the source (listed only in the comment block)"},
-  {"paragraph": "4000-PROCESS-TERMINATE", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0042-PAR-0005", "statement_id": "SYS-PORTFOLIO-001-FIL-0042-STMT-000014", "line": 107, "target": "4100-UPDATE-COMPLETION", "reason": "PERFORM target not in CFG: paragraph not present in the source (listed only in the comment block)"},
-  {"paragraph": "4000-PROCESS-TERMINATE", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0042-PAR-0005", "statement_id": "SYS-PORTFOLIO-001-FIL-0042-STMT-000015", "line": 108, "target": "4200-CLOSE-FILES", "reason": "PERFORM target not in CFG: paragraph not present in the source (listed only in the comment block)"}
+  {"statement_id": "SYS-PORTFOLIO-001-FIL-0042-STMT-000004", "paragraph": "1000-PROCESS-INITIALIZE", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0042-PAR-0002", "target": "1100-OPEN-FILES", "target_paragraph_id": null, "line": 84, "reason": "PERFORM target not defined in the program; listed in the 'to be implemented' comment block (lines 116-127)"},
+  {"statement_id": "SYS-PORTFOLIO-001-FIL-0042-STMT-000005", "paragraph": "1000-PROCESS-INITIALIZE", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0042-PAR-0002", "target": "1200-READ-CONTROL-RECORD", "target_paragraph_id": null, "line": 85, "reason": "PERFORM target not defined in the program; listed in the 'to be implemented' comment block"},
+  {"statement_id": "SYS-PORTFOLIO-001-FIL-0042-STMT-000006", "paragraph": "1000-PROCESS-INITIALIZE", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0042-PAR-0002", "target": "1300-VALIDATE-PROCESS", "target_paragraph_id": null, "line": 86, "reason": "PERFORM target not defined in the program; listed in the 'to be implemented' comment block"},
+  {"statement_id": "SYS-PORTFOLIO-001-FIL-0042-STMT-000007", "paragraph": "1000-PROCESS-INITIALIZE", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0042-PAR-0002", "target": "1400-UPDATE-START-STATUS", "target_paragraph_id": null, "line": 87, "reason": "PERFORM target not defined in the program; listed in the 'to be implemented' comment block"},
+  {"statement_id": "SYS-PORTFOLIO-001-FIL-0042-STMT-000008", "paragraph": "2000-CHECK-PREREQUISITES", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0042-PAR-0003", "target": "2100-READ-CONTROL-RECORD", "target_paragraph_id": null, "line": 91, "reason": "PERFORM target not defined in the program; not listed in the 'to be implemented' comment block"},
+  {"statement_id": "SYS-PORTFOLIO-001-FIL-0042-STMT-000009", "paragraph": "2000-CHECK-PREREQUISITES", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0042-PAR-0003", "target": "2200-CHECK-DEPENDENCIES", "target_paragraph_id": null, "line": 92, "reason": "PERFORM target not defined in the program; listed in the 'to be implemented' comment block"},
+  {"statement_id": "SYS-PORTFOLIO-001-FIL-0042-STMT-000011", "paragraph": "3000-UPDATE-STATUS", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0042-PAR-0004", "target": "3100-READ-CONTROL-RECORD", "target_paragraph_id": null, "line": 101, "reason": "PERFORM target not defined in the program; not listed in the 'to be implemented' comment block"},
+  {"statement_id": "SYS-PORTFOLIO-001-FIL-0042-STMT-000012", "paragraph": "3000-UPDATE-STATUS", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0042-PAR-0004", "target": "3200-UPDATE-PROCESS-STATUS", "target_paragraph_id": null, "line": 102, "reason": "PERFORM target not defined in the program; listed in the 'to be implemented' comment block"},
+  {"statement_id": "SYS-PORTFOLIO-001-FIL-0042-STMT-000013", "paragraph": "3000-UPDATE-STATUS", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0042-PAR-0004", "target": "3300-WRITE-CONTROL-RECORD", "target_paragraph_id": null, "line": 103, "reason": "PERFORM target not defined in the program; listed in the 'to be implemented' comment block"},
+  {"statement_id": "SYS-PORTFOLIO-001-FIL-0042-STMT-000014", "paragraph": "4000-PROCESS-TERMINATE", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0042-PAR-0005", "target": "4100-UPDATE-COMPLETION", "target_paragraph_id": null, "line": 107, "reason": "PERFORM target not defined in the program; listed in the 'to be implemented' comment block"},
+  {"statement_id": "SYS-PORTFOLIO-001-FIL-0042-STMT-000015", "paragraph": "4000-PROCESS-TERMINATE", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0042-PAR-0005", "target": "4200-CLOSE-FILES", "target_paragraph_id": null, "line": 108, "reason": "PERFORM target not defined in the program; listed in the 'to be implemented' comment block"}
 ],
 "trace_issues": [
-  {"severity": "info", "type": "upstream_issue", "upstream_agent": "2_parser", "upstream_type": "misplaced_comment_indicator", "lines": [1], "message": "Line 1 has '*' in column 8; treated as a comment."},
-  {"severity": "info", "type": "upstream_issue", "upstream_agent": "2_parser", "upstream_type": "commented_out_paragraph_list", "lines": [116, 127], "message": "Comment block lists paragraph names 'to be implemented' (1100-OPEN-FILES ... 4200-CLOSE-FILES); these paragraphs are not present in the source."},
-  {"severity": "info", "type": "upstream_issue", "upstream_agent": "2_parser", "upstream_type": "unresolved_target", "message": "11 PERFORM targets not found among paragraphs or sections (cfg_issues, lines 84-108); no relationships registered."},
-  {"severity": "info", "type": "upstream_issue", "upstream_agent": "3_data", "upstream_type": "misplaced_comment_indicator", "line": 1, "message": "Line 1 skipped as a comment."},
-  {"severity": "info", "type": "upstream_issue", "upstream_agent": "3_data", "upstream_type": "fd_record_from_copybook", "line": 27, "message": "FD BATCH-CONTROL-FILE has no inline 01 record; its record is BATCH-CONTROL-RECORD from COPY BCHCTL (SYS-PORTFOLIO-001-FIL-0002-REC-0001). RECORD KEY BCT-KEY is declared in BCHCTL."},
-  {"severity": "warning", "type": "unresolvable_perform_target", "statement_ids": ["SYS-PORTFOLIO-001-FIL-0042-STMT-000004", "SYS-PORTFOLIO-001-FIL-0042-STMT-000005", "SYS-PORTFOLIO-001-FIL-0042-STMT-000006", "SYS-PORTFOLIO-001-FIL-0042-STMT-000007", "SYS-PORTFOLIO-001-FIL-0042-STMT-000008", "SYS-PORTFOLIO-001-FIL-0042-STMT-000009", "SYS-PORTFOLIO-001-FIL-0042-STMT-000011", "SYS-PORTFOLIO-001-FIL-0042-STMT-000012", "SYS-PORTFOLIO-001-FIL-0042-STMT-000013", "SYS-PORTFOLIO-001-FIL-0042-STMT-000014", "SYS-PORTFOLIO-001-FIL-0042-STMT-000015"], "message": "11 PERFORM targets are not in the CFG; recorded as unresolvable steps with null target IDs. The work of paragraphs 1000, 2000, 3000 and 4000 (open/read/validate/update/write/close of BATCH-CONTROL-FILE) is therefore unknown; the source as delivered would not compile."},
-  {"severity": "warning", "type": "condition_never_set", "line": 93, "statement_id": "SYS-PORTFOLIO-001-FIL-0042-STMT-000010", "message": "IF PREREQS-SATISFIED tests WS-PREREQ-MET, which has no VALUE clause and is not set by any statement present in the source."},
-  {"severity": "info", "type": "unused_value", "message": "WS-PROCESS-MODE is set (MODE-INITIALIZE / MODE-CHECK-PREREQ / MODE-UPDATE-STATUS / MODE-FINALIZE) in each WHEN branch but is not tested by any statement present in the source; BATCH-CONTROL-FILE is never opened, read, written or closed by statements present in the source."},
-  {"severity": "info", "type": "return_code_not_set", "line": 79, "statement_id": "SYS-PORTFOLIO-001-FIL-0042-STMT-000002", "message": "LS-RETURN-CODE is set only in 2000-CHECK-PREREQUISITES and 9000-ERROR-ROUTINE; on the INIT, UPDT and TERM paths the value moved to RETURN-CODE is whatever the caller passed (or what the missing paragraphs set)."},
-  {"severity": "info", "type": "external_call", "line": 114, "statement_id": "SYS-PORTFOLIO-001-FIL-0042-STMT-000018", "target": "ERRPROC", "message": "Static CALL 'ERRPROC' USING ERR-MESSAGE (inventory program src/programs/common/ERRPROC.cbl); its logic is not traced here."}
+  {"severity": "warning", "type": "unresolvable_perform", "statement_ids": ["SYS-PORTFOLIO-001-FIL-0042-STMT-000004", "SYS-PORTFOLIO-001-FIL-0042-STMT-000005", "SYS-PORTFOLIO-001-FIL-0042-STMT-000006", "SYS-PORTFOLIO-001-FIL-0042-STMT-000007", "SYS-PORTFOLIO-001-FIL-0042-STMT-000008", "SYS-PORTFOLIO-001-FIL-0042-STMT-000009", "SYS-PORTFOLIO-001-FIL-0042-STMT-000011", "SYS-PORTFOLIO-001-FIL-0042-STMT-000012", "SYS-PORTFOLIO-001-FIL-0042-STMT-000013", "SYS-PORTFOLIO-001-FIL-0042-STMT-000014", "SYS-PORTFOLIO-001-FIL-0042-STMT-000015"], "message": "11 PERFORM targets are not in the CFG; recorded as unresolvable steps. The source ends with a comment block 'Detailed procedures to be implemented' (lines 116-127) listing 9 of them; 2100-READ-CONTROL-RECORD and 3100-READ-CONTROL-RECORD are not listed. No OPEN, READ, WRITE, REWRITE or CLOSE of BATCH-CONTROL-FILE exists in the source"},
+  {"severity": "info", "type": "uninitialised_condition_field", "name": "WS-PREREQ-MET", "field_id": "SYS-PORTFOLIO-001-FIL-0042-FLD-000003", "line": 93, "message": "The IF PREREQS-SATISFIED test at line 93 reads WS-PREREQ-MET, which has no VALUE clause and is not set by any statement in this source; its value depends on the undefined paragraphs"},
+  {"severity": "info", "type": "return_code_not_set", "message": "For functions 'INIT', 'UPDT' and 'TERM' no statement in this source sets LS-RETURN-CODE, so line 79 copies whatever the caller passed in (or what the undefined paragraphs set) to RETURN-CODE"},
+  {"severity": "info", "type": "upstream_issue", "upstream_agent": "2_parser", "upstream_type": "unresolved_target", "message": "11 PERFORM targets not defined in the program; no relationships registered"},
+  {"severity": "info", "type": "upstream_issue", "upstream_agent": "2_parser", "upstream_type": "external_call", "line": 114, "message": "CALL 'ERRPROC' is an inter-program call; no intra-program control-flow edge"},
+  {"severity": "info", "type": "upstream_issue", "upstream_agent": "2_parser", "upstream_type": "misplaced_comment_indicator", "lines": [1], "message": "Comment indicator '*' in column 8 (not column 7) treated as a comment"},
+  {"severity": "info", "type": "upstream_issue", "upstream_agent": "3_data", "upstream_type": "copy_without_enclosing_record", "line": 27, "message": "COPY BCHCTL sits directly under FD BATCH-CONTROL-FILE with no enclosing 01; COPY BCHCON and ERRHAND (lines 30-31) sit directly under WORKING-STORAGE"},
+  {"severity": "info", "type": "no_goto_or_alter", "message": "No GO TO, ALTER or PERFORM THRU in this program"}
 ],
-"program_narrative": "Program BCHCTL00 is a batch control subprogram (incomplete in the delivered source) that is called with LS-CONTROL-REQUEST: a function code, job name, process date, sequence number and return code. It selects one action from the function code: INIT runs the initialisation sequence (open files, read control record, validate process, update start status), CHEK checks prerequisites, UPDT updates the process status in the control record, and TERM records completion and closes files; each action also sets an internal process-mode switch. All eleven worker paragraphs that would perform the file I/O on the indexed BATCH-CONTROL-FILE are missing from the source (listed only in a 'to be implemented' comment), so the actual reads and writes cannot be traced. The prerequisite check returns BCT-RC-SUCCESS (0) when prerequisites are satisfied and BCT-RC-WARNING (4) otherwise, but nothing in the present source sets the prerequisite flag. Error condition handled: an unknown function code sets the error text 'Invalid function code', return code BCT-RC-ERROR (8) and calls ERRPROC with ERR-MESSAGE. The program always copies LS-RETURN-CODE to RETURN-CODE and returns with GOBACK.",
+"field_id_lookup": [
+  {"name": "FUNC-INIT", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0042-FLD-000012", "target_kind": "condition", "qualified_name": "LS-CONTROL-REQUEST.LS-FUNCTION.FUNC-INIT", "defined_in": "SYS-PORTFOLIO-001-FIL-0042", "candidate_ids": []},
+  {"name": "FUNC-CHEK", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0042-FLD-000013", "target_kind": "condition", "qualified_name": "LS-CONTROL-REQUEST.LS-FUNCTION.FUNC-CHEK", "defined_in": "SYS-PORTFOLIO-001-FIL-0042", "candidate_ids": []},
+  {"name": "FUNC-UPDT", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0042-FLD-000014", "target_kind": "condition", "qualified_name": "LS-CONTROL-REQUEST.LS-FUNCTION.FUNC-UPDT", "defined_in": "SYS-PORTFOLIO-001-FIL-0042", "candidate_ids": []},
+  {"name": "FUNC-TERM", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0042-FLD-000015", "target_kind": "condition", "qualified_name": "LS-CONTROL-REQUEST.LS-FUNCTION.FUNC-TERM", "defined_in": "SYS-PORTFOLIO-001-FIL-0042", "candidate_ids": []},
+  {"name": "PREREQS-SATISFIED", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0042-FLD-000004", "target_kind": "condition", "qualified_name": "WS-WORK-AREAS.WS-PREREQ-MET.PREREQS-SATISFIED", "defined_in": "SYS-PORTFOLIO-001-FIL-0042", "candidate_ids": []},
+  {"name": "MODE-INITIALIZE", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0042-FLD-000007", "target_kind": "condition", "qualified_name": "WS-WORK-AREAS.WS-PROCESS-MODE.MODE-INITIALIZE", "defined_in": "SYS-PORTFOLIO-001-FIL-0042", "candidate_ids": []},
+  {"name": "MODE-CHECK-PREREQ", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0042-FLD-000008", "target_kind": "condition", "qualified_name": "WS-WORK-AREAS.WS-PROCESS-MODE.MODE-CHECK-PREREQ", "defined_in": "SYS-PORTFOLIO-001-FIL-0042", "candidate_ids": []},
+  {"name": "MODE-UPDATE-STATUS", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0042-FLD-000009", "target_kind": "condition", "qualified_name": "WS-WORK-AREAS.WS-PROCESS-MODE.MODE-UPDATE-STATUS", "defined_in": "SYS-PORTFOLIO-001-FIL-0042", "candidate_ids": []},
+  {"name": "MODE-FINALIZE", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0042-FLD-000010", "target_kind": "condition", "qualified_name": "WS-WORK-AREAS.WS-PROCESS-MODE.MODE-FINALIZE", "defined_in": "SYS-PORTFOLIO-001-FIL-0042", "candidate_ids": []},
+  {"name": "ERR-TEXT", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0007-FLD-000017", "target_kind": "field", "qualified_name": "ERR-MESSAGE.ERR-TEXT", "defined_in": "SYS-PORTFOLIO-001-FIL-0007", "candidate_ids": []},
+  {"name": "LS-RETURN-CODE", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0042-FLD-000019", "target_kind": "field", "qualified_name": "LS-CONTROL-REQUEST.LS-RETURN-CODE", "defined_in": "SYS-PORTFOLIO-001-FIL-0042", "candidate_ids": []},
+  {"name": "BCT-RC-SUCCESS", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0001-FLD-000008", "target_kind": "field", "qualified_name": "BATCH-CONTROL-CONSTANTS.BCT-RC-THRESHOLDS.BCT-RC-SUCCESS", "defined_in": "SYS-PORTFOLIO-001-FIL-0001", "candidate_ids": []},
+  {"name": "BCT-RC-WARNING", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0001-FLD-000009", "target_kind": "field", "qualified_name": "BATCH-CONTROL-CONSTANTS.BCT-RC-THRESHOLDS.BCT-RC-WARNING", "defined_in": "SYS-PORTFOLIO-001-FIL-0001", "candidate_ids": []},
+  {"name": "BCT-RC-ERROR", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0001-FLD-000010", "target_kind": "field", "qualified_name": "BATCH-CONTROL-CONSTANTS.BCT-RC-THRESHOLDS.BCT-RC-ERROR", "defined_in": "SYS-PORTFOLIO-001-FIL-0001", "candidate_ids": []},
+  {"name": "ERR-PROGRAM", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0007-FLD-000013", "target_kind": "field", "qualified_name": "ERR-MESSAGE.ERR-PROGRAM", "defined_in": "SYS-PORTFOLIO-001-FIL-0007", "candidate_ids": []},
+  {"name": "ERR-MESSAGE", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0007-REC-0003", "target_kind": "record", "qualified_name": "ERR-MESSAGE", "defined_in": "SYS-PORTFOLIO-001-FIL-0007", "candidate_ids": []},
+  {"name": "WS-PREREQ-MET", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0042-FLD-000003", "target_kind": "field", "qualified_name": "WS-WORK-AREAS.WS-PREREQ-MET", "defined_in": "SYS-PORTFOLIO-001-FIL-0042", "candidate_ids": []},
+  {"name": "LS-FUNCTION", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0042-FLD-000011", "target_kind": "field", "qualified_name": "LS-CONTROL-REQUEST.LS-FUNCTION", "defined_in": "SYS-PORTFOLIO-001-FIL-0042", "candidate_ids": []}
+],
+"program_narrative": "BCHCTL00 is a called batch-control subprogram (PROCEDURE DIVISION USING LS-CONTROL-REQUEST) that is meant to manage a job's record in the indexed BATCH-CONTROL-FILE (layout from copybook BCHCTL, keyed by BCT-KEY). The caller selects one of four functions in LS-FUNCTION: 'INIT' (open files, read and validate the control record, mark the job started), 'CHEK' (read the control record and check its dependencies, returning BCT-RC-SUCCESS 0 when prerequisites are satisfied and BCT-RC-WARNING 4 otherwise), 'UPDT' (read, update and write the control record) and 'TERM' (record completion and close files). Each function first sets an internal process-mode flag; an unrecognised function sets ERR-TEXT, returns BCT-RC-ERROR 8 and calls the common error processor ERRPROC. In every case the program then copies LS-RETURN-CODE to RETURN-CODE and returns with GOBACK. All 11 detail paragraphs that would perform the file work are not present in the source (a trailing comment marks most of them 'to be implemented'), so only the dispatch and return-code logic can be traced.",
 "paragraphs": [
   {
-    "name": "0000-MAIN",
-    "paragraph_id": "SYS-PORTFOLIO-001-FIL-0042-PAR-0001",
-    "section": null,
-    "section_id": null,
-    "line_range": [60, 82],
+    "name": "0000-MAIN", "section": null, "paragraph_id": "SYS-PORTFOLIO-001-FIL-0042-PAR-0001", "section_id": null, "line_range": [60, 82],
     "pseudocode": [
-      "-- Main control: dispatch on the caller's function code, then return",
-      "IF func_init THEN  -- FUNC-INIT: ls_function = 'INIT'",
-      "  SET mode_initialize = TRUE  -- ws_process_mode = 'I'",
+      "-- Main dispatcher: route the caller's batch-control request by function code LS-FUNCTION",
+      "IF function code is 'INIT' (FUNC-INIT) THEN",
+      "  SET process mode = 'I'  -- MODE-INITIALIZE",
       "  CALL 1000-process-initialize",
-      "ELSE IF func_chek THEN  -- FUNC-CHEK: ls_function = 'CHEK'",
-      "  SET mode_check_prereq = TRUE  -- ws_process_mode = 'C'",
+      "ELSE IF function code is 'CHEK' (FUNC-CHEK) THEN",
+      "  SET process mode = 'C'  -- MODE-CHECK-PREREQ",
       "  CALL 2000-check-prerequisites",
-      "ELSE IF func_updt THEN  -- FUNC-UPDT: ls_function = 'UPDT'",
-      "  SET mode_update_status = TRUE  -- ws_process_mode = 'U'",
+      "ELSE IF function code is 'UPDT' (FUNC-UPDT) THEN",
+      "  SET process mode = 'U'  -- MODE-UPDATE-STATUS",
       "  CALL 3000-update-status",
-      "ELSE IF func_term THEN  -- FUNC-TERM: ls_function = 'TERM'",
-      "  SET mode_finalize = TRUE  -- ws_process_mode = 'F'",
+      "ELSE IF function code is 'TERM' (FUNC-TERM) THEN",
+      "  SET process mode = 'F'  -- MODE-FINALIZE",
       "  CALL 4000-process-terminate",
       "ELSE",
       "  SET err_text = 'Invalid function code'",
       "  CALL 9000-error-routine",
       "END IF",
-      "SET program_return_code = ls_return_code  -- RETURN-CODE special register",
+      "SET RETURN-CODE = ls_return_code  -- job step / caller return code (special register)",
       "RETURN to caller  -- GOBACK"
     ],
-    "pseudocode_statement_ids": [
-      [],
-      ["SYS-PORTFOLIO-001-FIL-0042-STMT-000001"],
-      ["SYS-PORTFOLIO-001-FIL-0042-STMT-000021"],
-      ["SYS-PORTFOLIO-001-FIL-0042-STMT-000022"],
-      ["SYS-PORTFOLIO-001-FIL-0042-STMT-000001"],
-      ["SYS-PORTFOLIO-001-FIL-0042-STMT-000019"],
-      ["SYS-PORTFOLIO-001-FIL-0042-STMT-000020"],
-      ["SYS-PORTFOLIO-001-FIL-0042-STMT-000001"],
-      ["SYS-PORTFOLIO-001-FIL-0042-STMT-000025"],
-      ["SYS-PORTFOLIO-001-FIL-0042-STMT-000026"],
-      ["SYS-PORTFOLIO-001-FIL-0042-STMT-000001"],
-      ["SYS-PORTFOLIO-001-FIL-0042-STMT-000023"],
-      ["SYS-PORTFOLIO-001-FIL-0042-STMT-000024"],
-      ["SYS-PORTFOLIO-001-FIL-0042-STMT-000001"],
-      ["SYS-PORTFOLIO-001-FIL-0042-STMT-000027"],
-      ["SYS-PORTFOLIO-001-FIL-0042-STMT-000028"],
-      ["SYS-PORTFOLIO-001-FIL-0042-STMT-000001"],
-      ["SYS-PORTFOLIO-001-FIL-0042-STMT-000002"],
-      ["SYS-PORTFOLIO-001-FIL-0042-STMT-000003"]
-    ],
-    "pseudocode_text": "-- Main control: dispatch on the caller's function code, then return\nIF func_init THEN  -- FUNC-INIT: ls_function = 'INIT'\n  SET mode_initialize = TRUE  -- ws_process_mode = 'I'\n  CALL 1000-process-initialize\nELSE IF func_chek THEN  -- FUNC-CHEK: ls_function = 'CHEK'\n  SET mode_check_prereq = TRUE  -- ws_process_mode = 'C'\n  CALL 2000-check-prerequisites\nELSE IF func_updt THEN  -- FUNC-UPDT: ls_function = 'UPDT'\n  SET mode_update_status = TRUE  -- ws_process_mode = 'U'\n  CALL 3000-update-status\nELSE IF func_term THEN  -- FUNC-TERM: ls_function = 'TERM'\n  SET mode_finalize = TRUE  -- ws_process_mode = 'F'\n  CALL 4000-process-terminate\nELSE\n  SET err_text = 'Invalid function code'\n  CALL 9000-error-routine\nEND IF\nSET program_return_code = ls_return_code  -- RETURN-CODE special register\nRETURN to caller  -- GOBACK",
+    "pseudocode_statement_ids": [[], ["SYS-PORTFOLIO-001-FIL-0042-STMT-000001"], ["SYS-PORTFOLIO-001-FIL-0042-STMT-000021"], ["SYS-PORTFOLIO-001-FIL-0042-STMT-000022"], ["SYS-PORTFOLIO-001-FIL-0042-STMT-000001"], ["SYS-PORTFOLIO-001-FIL-0042-STMT-000019"], ["SYS-PORTFOLIO-001-FIL-0042-STMT-000020"], ["SYS-PORTFOLIO-001-FIL-0042-STMT-000001"], ["SYS-PORTFOLIO-001-FIL-0042-STMT-000025"], ["SYS-PORTFOLIO-001-FIL-0042-STMT-000026"], ["SYS-PORTFOLIO-001-FIL-0042-STMT-000001"], ["SYS-PORTFOLIO-001-FIL-0042-STMT-000023"], ["SYS-PORTFOLIO-001-FIL-0042-STMT-000024"], ["SYS-PORTFOLIO-001-FIL-0042-STMT-000001"], ["SYS-PORTFOLIO-001-FIL-0042-STMT-000027"], ["SYS-PORTFOLIO-001-FIL-0042-STMT-000028"], ["SYS-PORTFOLIO-001-FIL-0042-STMT-000001"], ["SYS-PORTFOLIO-001-FIL-0042-STMT-000002"], ["SYS-PORTFOLIO-001-FIL-0042-STMT-000003"]],
+    "pseudocode_text": "-- Main dispatcher: route the caller's batch-control request by function code LS-FUNCTION\nIF function code is 'INIT' (FUNC-INIT) THEN\n  SET process mode = 'I'  -- MODE-INITIALIZE\n  CALL 1000-process-initialize\nELSE IF function code is 'CHEK' (FUNC-CHEK) THEN\n  SET process mode = 'C'  -- MODE-CHECK-PREREQ\n  CALL 2000-check-prerequisites\nELSE IF function code is 'UPDT' (FUNC-UPDT) THEN\n  SET process mode = 'U'  -- MODE-UPDATE-STATUS\n  CALL 3000-update-status\nELSE IF function code is 'TERM' (FUNC-TERM) THEN\n  SET process mode = 'F'  -- MODE-FINALIZE\n  CALL 4000-process-terminate\nELSE\n  SET err_text = 'Invalid function code'\n  CALL 9000-error-routine\nEND IF\nSET RETURN-CODE = ls_return_code  -- job step / caller return code (special register)\nRETURN to caller  -- GOBACK",
     "statement_ids": ["SYS-PORTFOLIO-001-FIL-0042-STMT-000001", "SYS-PORTFOLIO-001-FIL-0042-STMT-000021", "SYS-PORTFOLIO-001-FIL-0042-STMT-000022", "SYS-PORTFOLIO-001-FIL-0042-STMT-000019", "SYS-PORTFOLIO-001-FIL-0042-STMT-000020", "SYS-PORTFOLIO-001-FIL-0042-STMT-000025", "SYS-PORTFOLIO-001-FIL-0042-STMT-000026", "SYS-PORTFOLIO-001-FIL-0042-STMT-000023", "SYS-PORTFOLIO-001-FIL-0042-STMT-000024", "SYS-PORTFOLIO-001-FIL-0042-STMT-000027", "SYS-PORTFOLIO-001-FIL-0042-STMT-000028", "SYS-PORTFOLIO-001-FIL-0042-STMT-000002", "SYS-PORTFOLIO-001-FIL-0042-STMT-000003"],
     "untranslated_statement_ids": [],
     "field_references": ["FUNC-INIT", "FUNC-CHEK", "FUNC-UPDT", "FUNC-TERM", "MODE-INITIALIZE", "MODE-CHECK-PREREQ", "MODE-UPDATE-STATUS", "MODE-FINALIZE", "ERR-TEXT", "LS-RETURN-CODE"],
@@ -222,31 +180,21 @@
     "complexity_score": 5,
     "has_unresolved_statements": false,
     "annotations": [
-      {"line": 61, "statement_id": "SYS-PORTFOLIO-001-FIL-0042-STMT-000001", "note": "EVALUATE TRUE: the first WHEN whose 88-level condition on LS-FUNCTION is true is executed."},
-      {"line": 75, "statement_id": "SYS-PORTFOLIO-001-FIL-0042-STMT-000027", "note": "ERR-TEXT is a field of record ERR-MESSAGE from copybook ERRHAND (SYS-PORTFOLIO-001-FIL-0007)."}
+      {"line": 61, "statement_id": "SYS-PORTFOLIO-001-FIL-0042-STMT-000001", "note": "EVALUATE TRUE over the 88-level names of LS-FUNCTION, translated as an IF / ELSE IF chain. WS-PROCESS-MODE is set in every branch but never tested in this source"},
+      {"line": 79, "statement_id": "SYS-PORTFOLIO-001-FIL-0042-STMT-000002", "note": "RETURN-CODE is a special register, not a declared data item; it is not looked up"}
     ]
   },
   {
-    "name": "1000-PROCESS-INITIALIZE",
-    "paragraph_id": "SYS-PORTFOLIO-001-FIL-0042-PAR-0002",
-    "section": null,
-    "section_id": null,
-    "line_range": [83, 89],
+    "name": "1000-PROCESS-INITIALIZE", "section": null, "paragraph_id": "SYS-PORTFOLIO-001-FIL-0042-PAR-0002", "section_id": null, "line_range": [83, 89],
     "pseudocode": [
-      "-- Initialisation sequence; all four performed paragraphs are missing from the source",
-      "CALL 1100-open-files  !! UNRESOLVED: paragraph not present in the source",
-      "CALL 1200-read-control-record  !! UNRESOLVED: paragraph not present in the source",
-      "CALL 1300-validate-process  !! UNRESOLVED: paragraph not present in the source",
-      "CALL 1400-update-start-status  !! UNRESOLVED: paragraph not present in the source"
+      "-- Start a job: open files, read and validate the control record, record the start",
+      "CALL 1100-open-files  !! UNRESOLVED: paragraph not defined in this program",
+      "CALL 1200-read-control-record  !! UNRESOLVED: paragraph not defined in this program",
+      "CALL 1300-validate-process  !! UNRESOLVED: paragraph not defined in this program",
+      "CALL 1400-update-start-status  !! UNRESOLVED: paragraph not defined in this program"
     ],
-    "pseudocode_statement_ids": [
-      [],
-      ["SYS-PORTFOLIO-001-FIL-0042-STMT-000004"],
-      ["SYS-PORTFOLIO-001-FIL-0042-STMT-000005"],
-      ["SYS-PORTFOLIO-001-FIL-0042-STMT-000006"],
-      ["SYS-PORTFOLIO-001-FIL-0042-STMT-000007"]
-    ],
-    "pseudocode_text": "-- Initialisation sequence; all four performed paragraphs are missing from the source\nCALL 1100-open-files  !! UNRESOLVED: paragraph not present in the source\nCALL 1200-read-control-record  !! UNRESOLVED: paragraph not present in the source\nCALL 1300-validate-process  !! UNRESOLVED: paragraph not present in the source\nCALL 1400-update-start-status  !! UNRESOLVED: paragraph not present in the source",
+    "pseudocode_statement_ids": [[], ["SYS-PORTFOLIO-001-FIL-0042-STMT-000004"], ["SYS-PORTFOLIO-001-FIL-0042-STMT-000005"], ["SYS-PORTFOLIO-001-FIL-0042-STMT-000006"], ["SYS-PORTFOLIO-001-FIL-0042-STMT-000007"]],
+    "pseudocode_text": "-- Start a job: open files, read and validate the control record, record the start\nCALL 1100-open-files  !! UNRESOLVED: paragraph not defined in this program\nCALL 1200-read-control-record  !! UNRESOLVED: paragraph not defined in this program\nCALL 1300-validate-process  !! UNRESOLVED: paragraph not defined in this program\nCALL 1400-update-start-status  !! UNRESOLVED: paragraph not defined in this program",
     "statement_ids": ["SYS-PORTFOLIO-001-FIL-0042-STMT-000004", "SYS-PORTFOLIO-001-FIL-0042-STMT-000005", "SYS-PORTFOLIO-001-FIL-0042-STMT-000006", "SYS-PORTFOLIO-001-FIL-0042-STMT-000007"],
     "untranslated_statement_ids": [],
     "field_references": [],
@@ -260,45 +208,30 @@
     ],
     "complexity_score": 1,
     "has_unresolved_statements": true,
-    "annotations": [
-      {"line": 84, "note": "Gap: the performed paragraphs are named only in the comment block at lines 116-127 ('Detailed procedures to be implemented'); their logic is unknown and is not filled in."}
-    ]
+    "annotations": [{"line": 83, "note": "Intent inferred only from the paragraph names; the bodies are absent (comment 'Detailed procedures to be implemented', lines 116-127)"}]
   },
   {
-    "name": "2000-CHECK-PREREQUISITES",
-    "paragraph_id": "SYS-PORTFOLIO-001-FIL-0042-PAR-0003",
-    "section": null,
-    "section_id": null,
-    "line_range": [90, 99],
+    "name": "2000-CHECK-PREREQUISITES", "section": null, "paragraph_id": "SYS-PORTFOLIO-001-FIL-0042-PAR-0003", "section_id": null, "line_range": [90, 99],
     "pseudocode": [
-      "-- Check whether the job's prerequisites are met and return 0 or 4",
-      "CALL 2100-read-control-record  !! UNRESOLVED: paragraph not present in the source",
-      "CALL 2200-check-dependencies  !! UNRESOLVED: paragraph not present in the source",
-      "IF prereqs_satisfied THEN  -- PREREQS-SATISFIED: ws_prereq_met = 'Y' (flag not set by any statement present)",
+      "-- Check whether this job's prerequisite jobs have completed",
+      "CALL 2100-read-control-record  !! UNRESOLVED: paragraph not defined in this program",
+      "CALL 2200-check-dependencies  !! UNRESOLVED: paragraph not defined in this program",
+      "IF prerequisites are satisfied (PREREQS-SATISFIED: ws_prereq_met = 'Y') THEN",
       "  SET ls_return_code = bct_rc_success  -- 0",
       "ELSE",
-      "  SET ls_return_code = bct_rc_warning  -- 4",
+      "  SET ls_return_code = bct_rc_warning  -- 4: prerequisites still pending",
       "END IF"
     ],
-    "pseudocode_statement_ids": [
-      [],
-      ["SYS-PORTFOLIO-001-FIL-0042-STMT-000008"],
-      ["SYS-PORTFOLIO-001-FIL-0042-STMT-000009"],
-      ["SYS-PORTFOLIO-001-FIL-0042-STMT-000010"],
-      ["SYS-PORTFOLIO-001-FIL-0042-STMT-000030"],
-      ["SYS-PORTFOLIO-001-FIL-0042-STMT-000010"],
-      ["SYS-PORTFOLIO-001-FIL-0042-STMT-000029"],
-      ["SYS-PORTFOLIO-001-FIL-0042-STMT-000010"]
-    ],
-    "pseudocode_text": "-- Check whether the job's prerequisites are met and return 0 or 4\nCALL 2100-read-control-record  !! UNRESOLVED: paragraph not present in the source\nCALL 2200-check-dependencies  !! UNRESOLVED: paragraph not present in the source\nIF prereqs_satisfied THEN  -- PREREQS-SATISFIED: ws_prereq_met = 'Y' (flag not set by any statement present)\n  SET ls_return_code = bct_rc_success  -- 0\nELSE\n  SET ls_return_code = bct_rc_warning  -- 4\nEND IF",
+    "pseudocode_statement_ids": [[], ["SYS-PORTFOLIO-001-FIL-0042-STMT-000008"], ["SYS-PORTFOLIO-001-FIL-0042-STMT-000009"], ["SYS-PORTFOLIO-001-FIL-0042-STMT-000010"], ["SYS-PORTFOLIO-001-FIL-0042-STMT-000030"], ["SYS-PORTFOLIO-001-FIL-0042-STMT-000010"], ["SYS-PORTFOLIO-001-FIL-0042-STMT-000029"], ["SYS-PORTFOLIO-001-FIL-0042-STMT-000010"]],
+    "pseudocode_text": "-- Check whether this job's prerequisite jobs have completed\nCALL 2100-read-control-record  !! UNRESOLVED: paragraph not defined in this program\nCALL 2200-check-dependencies  !! UNRESOLVED: paragraph not defined in this program\nIF prerequisites are satisfied (PREREQS-SATISFIED: ws_prereq_met = 'Y') THEN\n  SET ls_return_code = bct_rc_success  -- 0\nELSE\n  SET ls_return_code = bct_rc_warning  -- 4: prerequisites still pending\nEND IF",
     "statement_ids": ["SYS-PORTFOLIO-001-FIL-0042-STMT-000008", "SYS-PORTFOLIO-001-FIL-0042-STMT-000009", "SYS-PORTFOLIO-001-FIL-0042-STMT-000010", "SYS-PORTFOLIO-001-FIL-0042-STMT-000030", "SYS-PORTFOLIO-001-FIL-0042-STMT-000029"],
     "untranslated_statement_ids": [],
-    "field_references": ["PREREQS-SATISFIED", "BCT-RC-SUCCESS", "BCT-RC-WARNING", "LS-RETURN-CODE"],
+    "field_references": ["PREREQS-SATISFIED", "LS-RETURN-CODE", "BCT-RC-SUCCESS", "BCT-RC-WARNING"],
     "field_reference_ids": [
       {"name": "PREREQS-SATISFIED", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0042-FLD-000004", "target_kind": "condition", "candidate_ids": []},
+      {"name": "LS-RETURN-CODE", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0042-FLD-000019", "target_kind": "field", "candidate_ids": []},
       {"name": "BCT-RC-SUCCESS", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0001-FLD-000008", "target_kind": "field", "candidate_ids": []},
-      {"name": "BCT-RC-WARNING", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0001-FLD-000009", "target_kind": "field", "candidate_ids": []},
-      {"name": "LS-RETURN-CODE", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0042-FLD-000019", "target_kind": "field", "candidate_ids": []}
+      {"name": "BCT-RC-WARNING", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0001-FLD-000009", "target_kind": "field", "candidate_ids": []}
     ],
     "calls_made": ["2100-READ-CONTROL-RECORD", "2200-CHECK-DEPENDENCIES"],
     "calls_made_ids": [
@@ -307,30 +240,18 @@
     ],
     "complexity_score": 1,
     "has_unresolved_statements": true,
-    "annotations": [
-      {"line": 93, "statement_id": "SYS-PORTFOLIO-001-FIL-0042-STMT-000010", "note": "WS-PREREQ-MET has no VALUE clause; its run-time value is unknown statically.", "ambiguous": true},
-      {"line": 94, "statement_id": "SYS-PORTFOLIO-001-FIL-0042-STMT-000030", "note": "BCT-RC-SUCCESS (+0) and BCT-RC-WARNING (+4) are constants from copybook BCHCON (SYS-PORTFOLIO-001-FIL-0001)."}
-    ]
+    "annotations": [{"line": 93, "statement_id": "SYS-PORTFOLIO-001-FIL-0042-STMT-000010", "note": "WS-PREREQ-MET has no VALUE clause and is not set anywhere in this source; the outcome depends on the undefined 2200-CHECK-DEPENDENCIES. BCT-RC-SUCCESS and BCT-RC-WARNING are BCHCON constants (VALUE +0 and +4)"}]
   },
   {
-    "name": "3000-UPDATE-STATUS",
-    "paragraph_id": "SYS-PORTFOLIO-001-FIL-0042-PAR-0004",
-    "section": null,
-    "section_id": null,
-    "line_range": [100, 105],
+    "name": "3000-UPDATE-STATUS", "section": null, "paragraph_id": "SYS-PORTFOLIO-001-FIL-0042-PAR-0004", "section_id": null, "line_range": [100, 105],
     "pseudocode": [
-      "-- Update the process status in the control record; all three performed paragraphs are missing from the source",
-      "CALL 3100-read-control-record  !! UNRESOLVED: paragraph not present in the source",
-      "CALL 3200-update-process-status  !! UNRESOLVED: paragraph not present in the source",
-      "CALL 3300-write-control-record  !! UNRESOLVED: paragraph not present in the source"
+      "-- Update the job's processing status in the control record",
+      "CALL 3100-read-control-record  !! UNRESOLVED: paragraph not defined in this program",
+      "CALL 3200-update-process-status  !! UNRESOLVED: paragraph not defined in this program",
+      "CALL 3300-write-control-record  !! UNRESOLVED: paragraph not defined in this program"
     ],
-    "pseudocode_statement_ids": [
-      [],
-      ["SYS-PORTFOLIO-001-FIL-0042-STMT-000011"],
-      ["SYS-PORTFOLIO-001-FIL-0042-STMT-000012"],
-      ["SYS-PORTFOLIO-001-FIL-0042-STMT-000013"]
-    ],
-    "pseudocode_text": "-- Update the process status in the control record; all three performed paragraphs are missing from the source\nCALL 3100-read-control-record  !! UNRESOLVED: paragraph not present in the source\nCALL 3200-update-process-status  !! UNRESOLVED: paragraph not present in the source\nCALL 3300-write-control-record  !! UNRESOLVED: paragraph not present in the source",
+    "pseudocode_statement_ids": [[], ["SYS-PORTFOLIO-001-FIL-0042-STMT-000011"], ["SYS-PORTFOLIO-001-FIL-0042-STMT-000012"], ["SYS-PORTFOLIO-001-FIL-0042-STMT-000013"]],
+    "pseudocode_text": "-- Update the job's processing status in the control record\nCALL 3100-read-control-record  !! UNRESOLVED: paragraph not defined in this program\nCALL 3200-update-process-status  !! UNRESOLVED: paragraph not defined in this program\nCALL 3300-write-control-record  !! UNRESOLVED: paragraph not defined in this program",
     "statement_ids": ["SYS-PORTFOLIO-001-FIL-0042-STMT-000011", "SYS-PORTFOLIO-001-FIL-0042-STMT-000012", "SYS-PORTFOLIO-001-FIL-0042-STMT-000013"],
     "untranslated_statement_ids": [],
     "field_references": [],
@@ -346,22 +267,14 @@
     "annotations": []
   },
   {
-    "name": "4000-PROCESS-TERMINATE",
-    "paragraph_id": "SYS-PORTFOLIO-001-FIL-0042-PAR-0005",
-    "section": null,
-    "section_id": null,
-    "line_range": [106, 110],
+    "name": "4000-PROCESS-TERMINATE", "section": null, "paragraph_id": "SYS-PORTFOLIO-001-FIL-0042-PAR-0005", "section_id": null, "line_range": [106, 110],
     "pseudocode": [
-      "-- Record completion and close files; both performed paragraphs are missing from the source",
-      "CALL 4100-update-completion  !! UNRESOLVED: paragraph not present in the source",
-      "CALL 4200-close-files  !! UNRESOLVED: paragraph not present in the source"
+      "-- Finish a job: record completion and close files",
+      "CALL 4100-update-completion  !! UNRESOLVED: paragraph not defined in this program",
+      "CALL 4200-close-files  !! UNRESOLVED: paragraph not defined in this program"
     ],
-    "pseudocode_statement_ids": [
-      [],
-      ["SYS-PORTFOLIO-001-FIL-0042-STMT-000014"],
-      ["SYS-PORTFOLIO-001-FIL-0042-STMT-000015"]
-    ],
-    "pseudocode_text": "-- Record completion and close files; both performed paragraphs are missing from the source\nCALL 4100-update-completion  !! UNRESOLVED: paragraph not present in the source\nCALL 4200-close-files  !! UNRESOLVED: paragraph not present in the source",
+    "pseudocode_statement_ids": [[], ["SYS-PORTFOLIO-001-FIL-0042-STMT-000014"], ["SYS-PORTFOLIO-001-FIL-0042-STMT-000015"]],
+    "pseudocode_text": "-- Finish a job: record completion and close files\nCALL 4100-update-completion  !! UNRESOLVED: paragraph not defined in this program\nCALL 4200-close-files  !! UNRESOLVED: paragraph not defined in this program",
     "statement_ids": ["SYS-PORTFOLIO-001-FIL-0042-STMT-000014", "SYS-PORTFOLIO-001-FIL-0042-STMT-000015"],
     "untranslated_statement_ids": [],
     "field_references": [],
@@ -376,59 +289,47 @@
     "annotations": []
   },
   {
-    "name": "9000-ERROR-ROUTINE",
-    "paragraph_id": "SYS-PORTFOLIO-001-FIL-0042-PAR-0006",
-    "section": null,
-    "section_id": null,
-    "line_range": [111, 127],
+    "name": "9000-ERROR-ROUTINE", "section": null, "paragraph_id": "SYS-PORTFOLIO-001-FIL-0042-PAR-0006", "section_id": null, "line_range": [111, 127],
     "pseudocode": [
-      "-- Report an error through the common error program and return error code 8",
+      "-- Report an invalid request through the common error processor",
       "SET err_program = 'BCHCTL00'",
       "SET ls_return_code = bct_rc_error  -- 8",
       "CALL program ERRPROC",
-      "  PASSING: err_message  -- common error-handling subprogram (error text, program, category ...)"
+      "  PASSING: err_message",
+      "  -- Subprogram: common error processor (see ERRPROC logic file)"
     ],
-    "pseudocode_statement_ids": [
-      [],
-      ["SYS-PORTFOLIO-001-FIL-0042-STMT-000016"],
-      ["SYS-PORTFOLIO-001-FIL-0042-STMT-000017"],
-      ["SYS-PORTFOLIO-001-FIL-0042-STMT-000018"],
-      ["SYS-PORTFOLIO-001-FIL-0042-STMT-000018"]
-    ],
-    "pseudocode_text": "-- Report an error through the common error program and return error code 8\nSET err_program = 'BCHCTL00'\nSET ls_return_code = bct_rc_error  -- 8\nCALL program ERRPROC\n  PASSING: err_message  -- common error-handling subprogram (error text, program, category ...)",
+    "pseudocode_statement_ids": [[], ["SYS-PORTFOLIO-001-FIL-0042-STMT-000016"], ["SYS-PORTFOLIO-001-FIL-0042-STMT-000017"], ["SYS-PORTFOLIO-001-FIL-0042-STMT-000018"], ["SYS-PORTFOLIO-001-FIL-0042-STMT-000018"], []],
+    "pseudocode_text": "-- Report an invalid request through the common error processor\nSET err_program = 'BCHCTL00'\nSET ls_return_code = bct_rc_error  -- 8\nCALL program ERRPROC\n  PASSING: err_message\n  -- Subprogram: common error processor (see ERRPROC logic file)",
     "statement_ids": ["SYS-PORTFOLIO-001-FIL-0042-STMT-000016", "SYS-PORTFOLIO-001-FIL-0042-STMT-000017", "SYS-PORTFOLIO-001-FIL-0042-STMT-000018"],
     "untranslated_statement_ids": [],
-    "field_references": ["ERR-PROGRAM", "BCT-RC-ERROR", "LS-RETURN-CODE", "ERR-MESSAGE"],
+    "field_references": ["ERR-PROGRAM", "LS-RETURN-CODE", "BCT-RC-ERROR", "ERR-MESSAGE"],
     "field_reference_ids": [
       {"name": "ERR-PROGRAM", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0007-FLD-000013", "target_kind": "field", "candidate_ids": []},
-      {"name": "BCT-RC-ERROR", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0001-FLD-000010", "target_kind": "field", "candidate_ids": []},
       {"name": "LS-RETURN-CODE", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0042-FLD-000019", "target_kind": "field", "candidate_ids": []},
+      {"name": "BCT-RC-ERROR", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0001-FLD-000010", "target_kind": "field", "candidate_ids": []},
       {"name": "ERR-MESSAGE", "qualifiers": [], "resolution": "RESOLVED", "target_id": "SYS-PORTFOLIO-001-FIL-0007-REC-0003", "target_kind": "record", "candidate_ids": []}
     ],
-    "calls_made": [],
-    "calls_made_ids": [],
+    "calls_made": ["ERRPROC"],
+    "calls_made_ids": [{"name": "ERRPROC", "paragraph_id": null, "section_id": null, "call_type": "STATIC_CALL", "note": "inter-program call; not a paragraph target"}],
     "complexity_score": 1,
     "has_unresolved_statements": false,
-    "annotations": [
-      {"line": 114, "statement_id": "SYS-PORTFOLIO-001-FIL-0042-STMT-000018", "note": "Static CALL to program ERRPROC (inventory program src/programs/common/ERRPROC.cbl); not a paragraph call, so not listed in calls_made. Control returns to 0000-MAIN after the call."},
-      {"line": 116, "note": "Lines 116-127 are a comment block listing paragraphs 'to be implemented'; they contain no statements."}
-    ]
+    "annotations": [{"line": 116, "note": "Lines 116-127 after this paragraph are a comment block listing the detail paragraphs still to be implemented"}]
   }
 ],
 "unresolved_statements": [
-  {"statement_id": "SYS-PORTFOLIO-001-FIL-0042-STMT-000004", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0042-PAR-0002", "line": 84, "source_text": "PERFORM 1100-OPEN-FILES", "reason": "PERFORM target paragraph not present in the source"},
-  {"statement_id": "SYS-PORTFOLIO-001-FIL-0042-STMT-000005", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0042-PAR-0002", "line": 85, "source_text": "PERFORM 1200-READ-CONTROL-RECORD", "reason": "PERFORM target paragraph not present in the source"},
-  {"statement_id": "SYS-PORTFOLIO-001-FIL-0042-STMT-000006", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0042-PAR-0002", "line": 86, "source_text": "PERFORM 1300-VALIDATE-PROCESS", "reason": "PERFORM target paragraph not present in the source"},
-  {"statement_id": "SYS-PORTFOLIO-001-FIL-0042-STMT-000007", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0042-PAR-0002", "line": 87, "source_text": "PERFORM 1400-UPDATE-START-STATUS", "reason": "PERFORM target paragraph not present in the source"},
-  {"statement_id": "SYS-PORTFOLIO-001-FIL-0042-STMT-000008", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0042-PAR-0003", "line": 91, "source_text": "PERFORM 2100-READ-CONTROL-RECORD", "reason": "PERFORM target paragraph not present in the source"},
-  {"statement_id": "SYS-PORTFOLIO-001-FIL-0042-STMT-000009", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0042-PAR-0003", "line": 92, "source_text": "PERFORM 2200-CHECK-DEPENDENCIES", "reason": "PERFORM target paragraph not present in the source"},
-  {"statement_id": "SYS-PORTFOLIO-001-FIL-0042-STMT-000011", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0042-PAR-0004", "line": 101, "source_text": "PERFORM 3100-READ-CONTROL-RECORD", "reason": "PERFORM target paragraph not present in the source"},
-  {"statement_id": "SYS-PORTFOLIO-001-FIL-0042-STMT-000012", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0042-PAR-0004", "line": 102, "source_text": "PERFORM 3200-UPDATE-PROCESS-STATUS", "reason": "PERFORM target paragraph not present in the source"},
-  {"statement_id": "SYS-PORTFOLIO-001-FIL-0042-STMT-000013", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0042-PAR-0004", "line": 103, "source_text": "PERFORM 3300-WRITE-CONTROL-RECORD", "reason": "PERFORM target paragraph not present in the source"},
-  {"statement_id": "SYS-PORTFOLIO-001-FIL-0042-STMT-000014", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0042-PAR-0005", "line": 107, "source_text": "PERFORM 4100-UPDATE-COMPLETION", "reason": "PERFORM target paragraph not present in the source"},
-  {"statement_id": "SYS-PORTFOLIO-001-FIL-0042-STMT-000015", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0042-PAR-0005", "line": 108, "source_text": "PERFORM 4200-CLOSE-FILES", "reason": "PERFORM target paragraph not present in the source"}
+  {"statement_id": "SYS-PORTFOLIO-001-FIL-0042-STMT-000004", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0042-PAR-0002", "line": 84, "verbatim": "PERFORM 1100-OPEN-FILES", "reason": "PERFORM target not defined in the program"},
+  {"statement_id": "SYS-PORTFOLIO-001-FIL-0042-STMT-000005", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0042-PAR-0002", "line": 85, "verbatim": "PERFORM 1200-READ-CONTROL-RECORD", "reason": "PERFORM target not defined in the program"},
+  {"statement_id": "SYS-PORTFOLIO-001-FIL-0042-STMT-000006", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0042-PAR-0002", "line": 86, "verbatim": "PERFORM 1300-VALIDATE-PROCESS", "reason": "PERFORM target not defined in the program"},
+  {"statement_id": "SYS-PORTFOLIO-001-FIL-0042-STMT-000007", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0042-PAR-0002", "line": 87, "verbatim": "PERFORM 1400-UPDATE-START-STATUS", "reason": "PERFORM target not defined in the program"},
+  {"statement_id": "SYS-PORTFOLIO-001-FIL-0042-STMT-000008", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0042-PAR-0003", "line": 91, "verbatim": "PERFORM 2100-READ-CONTROL-RECORD", "reason": "PERFORM target not defined in the program"},
+  {"statement_id": "SYS-PORTFOLIO-001-FIL-0042-STMT-000009", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0042-PAR-0003", "line": 92, "verbatim": "PERFORM 2200-CHECK-DEPENDENCIES", "reason": "PERFORM target not defined in the program"},
+  {"statement_id": "SYS-PORTFOLIO-001-FIL-0042-STMT-000011", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0042-PAR-0004", "line": 101, "verbatim": "PERFORM 3100-READ-CONTROL-RECORD", "reason": "PERFORM target not defined in the program"},
+  {"statement_id": "SYS-PORTFOLIO-001-FIL-0042-STMT-000012", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0042-PAR-0004", "line": 102, "verbatim": "PERFORM 3200-UPDATE-PROCESS-STATUS", "reason": "PERFORM target not defined in the program"},
+  {"statement_id": "SYS-PORTFOLIO-001-FIL-0042-STMT-000013", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0042-PAR-0004", "line": 103, "verbatim": "PERFORM 3300-WRITE-CONTROL-RECORD", "reason": "PERFORM target not defined in the program"},
+  {"statement_id": "SYS-PORTFOLIO-001-FIL-0042-STMT-000014", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0042-PAR-0005", "line": 107, "verbatim": "PERFORM 4100-UPDATE-COMPLETION", "reason": "PERFORM target not defined in the program"},
+  {"statement_id": "SYS-PORTFOLIO-001-FIL-0042-STMT-000015", "paragraph_id": "SYS-PORTFOLIO-001-FIL-0042-PAR-0005", "line": 108, "verbatim": "PERFORM 4200-CLOSE-FILES", "reason": "PERFORM target not defined in the program"}
 ],
 "pseudocode_issues": [
-  {"severity": "info", "type": "id_unresolved", "kind": "paragraph", "names": ["1100-OPEN-FILES", "1200-READ-CONTROL-RECORD", "1300-VALIDATE-PROCESS", "1400-UPDATE-START-STATUS", "2100-READ-CONTROL-RECORD", "2200-CHECK-DEPENDENCIES", "3100-READ-CONTROL-RECORD", "3200-UPDATE-PROCESS-STATUS", "3300-WRITE-CONTROL-RECORD", "4100-UPDATE-COMPLETION", "4200-CLOSE-FILES"], "message": "calls_made targets with no CFG target: paragraph_id and section_id null; partial pseudocode written with !! UNRESOLVED markers."}
+  {"severity": "info", "type": "id_unresolved", "names": ["1100-OPEN-FILES", "1200-READ-CONTROL-RECORD", "1300-VALIDATE-PROCESS", "1400-UPDATE-START-STATUS", "2100-READ-CONTROL-RECORD", "2200-CHECK-DEPENDENCIES", "3100-READ-CONTROL-RECORD", "3200-UPDATE-PROCESS-STATUS", "3300-WRITE-CONTROL-RECORD", "4100-UPDATE-COMPLETION", "4200-CLOSE-FILES"], "message": "calls_made targets have no paragraph in this program; paragraph_id null"}
 ]
 }
