@@ -338,7 +338,7 @@ the REVFORGE artifacts actually use.
 | `dead_code_confirmed[]` | logic file `dead_code_confirmed[]` |
 | `pseudocode_issues[]` | logic file `pseudocode_issues[]`; entries of type `id_unresolved` are classified with the data-reference types below |
 | `issues[]` (data) | `data_artifact.issues[]` by `type` |
-| `business_rules[]` | all 143 entries of `rules_artifact.business_rules` |
+| `business_rules[]` | all entries of `rules_artifact.business_rules` |
 | Diagrams | `diagrams_artifact.json`: `truncated`, `incomplete`, `incomplete_reason`, `limitations`, `issues[]` |
 
 **Additional gap types** (for findings the reference harness catalogue has no type for;
@@ -357,7 +357,7 @@ same output fields):
 | `DIAGRAM_RENDER_UNVERIFIED` | medium | One gap for all diagrams: structural lint passed, visual rendering not verified |
 | `DIAGRAM_INCOMPLETE` | low | A diagram with `incomplete: true`; cross-reference the gap that causes it |
 | `PRECOMPILER_PROVIDED` | low | `SQLCODE` / `SQLERRMC` and other DB2 precompiler items with no Field ID (standard meaning, not defined in the repository) |
-| `RULE_NOT_DIAGRAMMED` | low | Rules that no diagram annotates (BR-099 to BR-125); the rules themselves are in the catalogue |
+| `RULE_NOT_DIAGRAMMED` | low | Rules that no diagram annotates (checked against every diagram's `rule_annotations`); the rules themselves are in the catalogue |
 
 **Deduplication by root cause.** One gap per root cause, with every
 affected element listed:

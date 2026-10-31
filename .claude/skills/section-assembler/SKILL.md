@@ -688,9 +688,8 @@ and every rule with `requires_sme_review: true` shows its
 *Uncertain* rule is described as an extracted candidate requiring
 validation, never as a verified requirement.
 
-**All 143 rules.** Chapter 5 lists every rule in `rules_artifact.business_rules`
-under its rule set, including the 30 copybook-level rules (BR-099 to
-BR-128). Rule text (name, description, condition, outcomes, notes) is taken
+**All rules.** Chapter 5 lists every rule in `rules_artifact.business_rules`
+under its rule set, including the copybook-level rules. Rule text (name, description, condition, outcomes, notes) is taken
 from the artifact without adding behaviour. Section 5.3 adds a second table
 by File ID (`rules_by_file_id`), so that copybook-level rules are listed
 with their copybook.

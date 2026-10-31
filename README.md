@@ -43,12 +43,9 @@ The agent definitions are in `.claude/agents/` and the skills in `.claude/skills
 | Mermaid diagrams | 65: 15 component, 3 ERD, 2 sequence, 45 process flow (structural check passed; visual rendering still to be verified) |
 | Permanent IDs verified against Neo4j | 873 cited in the BRD; 1,568 in the diagram index; none invalid |
 
-These results come from a full clean re-run of all seven agents on Claude Opus 5.5 (October 2026). The re-run reused every permanent ID; the Neo4j registry was unchanged (4,957 nodes, 5,929 relationships).
+These results come from a full clean run of all seven agents on Claude Opus 5.5 (October 2026). Every permanent ID was reused, and the Neo4j registry holds 4,957 nodes and 5,929 relationships.
 
-Acceptance status from the previous run (`docs/revforge_reverse_engineering_acceptance.md`; its figures describe the earlier output, not this re-run):
-- Reverse engineering is **complete**.
-- Full forward engineering is **not ready**.
-- A **limited pilot** (PORTADD + PORTREAD) is conditionally ready.
+Reverse engineering is complete. The 6 critical gaps in `output/final_report/gaps_register.md` (for example the empty POSUPDT source and missing copybooks) must be resolved by a subject-matter expert before any forward engineering.
 
 ---
 
@@ -58,7 +55,7 @@ Acceptance status from the previous run (`docs/revforge_reverse_engineering_acce
 .claude/agents/        Agent definitions (1–7)
 .claude/skills/        Skill definitions used by the agents
 output/                Generated artifacts (inventory, parser, data, logic, rules, diagram, final_report)
-docs/                  Design notes, audits and acceptance review
+docs/                  Design notes for the permanent-ID enhancements (Agents 1–3)
 licenses/              Third-party license texts
 LICENSE                MIT License (this project)
 THIRD_PARTY_NOTICES.md Attribution for derived files

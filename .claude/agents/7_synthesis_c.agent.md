@@ -51,8 +51,8 @@ document.
 
 REVFORGE: each program's logic file is found through
 `logic_artifact.programs[].logic_file` (relative to the logic artifact's
-directory). The Agent 6 quality audit (`docs/agent6_quality_audit.md`) is
-an additional read-only input for the diagram corrections listed below.
+directory). The diagram corrections listed below are standing rules for
+how Agent 6 output is used in the BRD.
 
 ---
 
@@ -89,18 +89,18 @@ query `verify-diagram-source-ids` defined in `.claude/agents/6_diagram_c.agent.m
 (same parameters, batches of at most 500). `consistent` must be `true`; an ID
 that comes back bad is removed from the output and logged, never repaired.
 
-**Agent 6 audit corrections** (from `docs/agent6_quality_audit.md`):
+**Diagram corrections:**
 1. Rule placement in diagrams is read from `rule_annotations[].placement`;
    `rules_annotated` is not used as a placement count.
-2. All 143 business rules come from `rules_artifact.json`, not from the
-   diagrams. The 30 copybook-level rules BR-099 to BR-128 (27 of them,
-   BR-099 to BR-125, appear in no diagram) are taken from
-   `rules_artifact.rules_by_file_id` / `business_rules`.
+2. All business rules come from `rules_artifact.json`, not from the
+   diagrams. Rules that no diagram annotates (for example copybook-level
+   value-domain rules) are taken from `rules_artifact.business_rules`
+   (and `rules_by_file_id` where present).
 3. Incomplete diagrams are described from their `limitations` /
    `incomplete_reason`; detail omitted from a diagram for display reasons is
    a display limitation, not missing business logic.
-4. Mermaid structural lint passed for all 60 files, but visual rendering has
-   not been verified; the BRD says so wherever diagrams are embedded.
+4. The Mermaid files pass a structural check only; visual rendering has
+   not been verified, and the BRD says so wherever diagrams are embedded.
 5. The unresolved INQPORT `EXEC SQL INCLUDE SQLPOS` is a source gap.
 
 **Confirmed, inferred and uncertain.** Every BRD finding is labelled:
