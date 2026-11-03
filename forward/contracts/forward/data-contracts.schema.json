@@ -1,0 +1,96 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://revforge.local/contracts/forward/data-contracts.schema.json",
+  "title": "COBOL record data contracts and field mappings (F2, fe-copybook-layout-contract)",
+  "allOf": [{ "$ref": "forward-common.schema.json#/definitions/header" }],
+  "type": "object",
+  "required": ["contract", "encoding_assumption", "records", "verification_findings"],
+  "definitions": {
+    "field": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["field_id", "field_name", "level", "cobol_category", "pic", "usage", "signed", "digits", "decimals", "byte_length", "offset", "offset_basis", "occurs", "redefines_field_id", "java_type", "java_type_rationale", "evidence_status"],
+      "properties": {
+        "field_id": { "anyOf": [{ "$ref": "../common.schema.json#/definitions/fieldId" }, { "type": "null" }] },
+        "field_name": { "type": "string" },
+        "level": { "type": "integer", "minimum": 1, "maximum": 88 },
+        "cobol_category": { "enum": ["alphanumeric", "numeric_display", "numeric_binary", "numeric_packed", "numeric_edited", "group", "condition", "unknown"] },
+        "pic": { "type": ["string", "null"] },
+        "usage": { "enum": ["DISPLAY", "BINARY", "COMP", "COMP-3", "COMP-5", "PACKED_DECIMAL", "GROUP", "CONDITION", "UNKNOWN"] },
+        "signed": { "type": ["boolean", "null"] },
+        "digits": { "type": ["integer", "null"], "minimum": 0 },
+        "decimals": { "type": ["integer", "null"], "minimum": 0 },
+        "byte_length": { "type": ["integer", "null"], "minimum": 0 },
+        "offset": { "type": ["integer", "null"], "minimum": 0 },
+        "offset_basis": { "enum": ["computed_from_reverse_layout", "verified_from_source", "unresolved"] },
+        "occurs": { "type": ["integer", "null"], "minimum": 1 },
+        "redefines_field_id": { "anyOf": [{ "$ref": "../common.schema.json#/definitions/fieldId" }, { "type": "null" }] },
+        "condition_names": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["name", "field_id", "values"],
+            "properties": {
+              "name": { "type": "string" },
+              "field_id": { "anyOf": [{ "$ref": "../common.schema.json#/definitions/fieldId" }, { "type": "null" }] },
+              "values": { "type": "array", "items": { "type": "string" } }
+            }
+          }
+        },
+        "default_value": { "type": ["string", "null"] },
+        "java_type": { "enum": ["String", "byte[]", "int", "long", "BigDecimal", "BigInteger", "Group", "Condition", null] },
+        "java_type_rationale": { "type": "string", "minLength": 3 },
+        "evidence_status": { "$ref": "forward-common.schema.json#/definitions/evidenceStatus" },
+        "unresolved_reason": { "type": "string" }
+      }
+    }
+  },
+  "properties": {
+    "contract": { "const": "forward/data-contracts" },
+    "encoding_assumption": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["encoding", "evidence_status", "rationale"],
+      "properties": {
+        "encoding": { "type": "string" },
+        "evidence_status": { "$ref": "forward-common.schema.json#/definitions/evidenceStatus" },
+        "rationale": { "type": "string" }
+      }
+    },
+    "records": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["record_id", "record_name", "owner", "total_bytes", "length_evidence_status", "fields", "evidence_status"],
+        "properties": {
+          "record_id": { "anyOf": [{ "$ref": "../common.schema.json#/definitions/recordId" }, { "type": "null" }] },
+          "record_name": { "type": "string" },
+          "owner": { "$ref": "forward-common.schema.json#/definitions/unit" },
+          "total_bytes": { "type": ["integer", "null"], "minimum": 0 },
+          "length_evidence_status": { "$ref": "forward-common.schema.json#/definitions/evidenceStatus" },
+          "fields": { "type": "array", "items": { "$ref": "#/definitions/field" } },
+          "test_vectors": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": ["field_id", "cobol_value", "java_value", "basis"],
+              "properties": {
+                "field_id": { "$ref": "../common.schema.json#/definitions/fieldId" },
+                "cobol_value": { "type": "string" },
+                "cobol_bytes_hex": { "type": ["string", "null"], "pattern": "^([0-9A-F]{2})*$" },
+                "java_value": { "type": "string" },
+                "basis": { "type": "string", "minLength": 3 }
+              }
+            }
+          },
+          "evidence_status": { "$ref": "forward-common.schema.json#/definitions/evidenceStatus" },
+          "notes": { "type": "string" }
+        }
+      }
+    },
+    "verification_findings": { "type": "array", "items": { "$ref": "forward-common.schema.json#/definitions/finding" } }
+  }
+}

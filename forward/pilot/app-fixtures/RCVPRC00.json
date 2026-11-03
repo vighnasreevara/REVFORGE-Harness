@@ -1,0 +1,722 @@
+{
+ "program": "RCVPRC00",
+ "provenance": "Written by a scenario-author agent (F6 independent fixture design) on 2026-11-02 from the COBOL source src/programs/batch/RCVPRC00.cbl and its copybooks (src/copybook/batch/BCHCTL.cpy, src/copybook/batch/PRCSEQ.cpy, src/copybook/batch/BCHCON.cpy, src/copybook/common/ERRHAND.cpy) under references/udara-legacy-modernization-harness, the fixture README, and only the gaps/inspection arrays of forward/generated/java/RCVPRC00/pilot-result.json. No generated Java, source map or execution result was read or run. Scenarios R07, R08, R09, R10 were added on 2026-11-03 (business-rule coverage extension) by an F6 scenario-author agent from the same COBOL source, copybooks, README and gaps array only; no generated Java, source map or test result was read or run. Scenarios V01.. were added on 2026-11-03 (partly-covered rule extension) by an F6 scenario-author agent from the same COBOL source, copybooks, README and gaps array only; no generated Java, source map or test result was read or run.",
+ "scenarios": [
+  {
+   "id": "R01",
+   "title": "INIT, valid process recovery request: both files open (status 00), date present, type 'P' accepted, process ID present; no error routine runs, files are not changed, LS-RETURN-CODE returned unchanged",
+   "cobol_lines": [
+    72,
+    73,
+    74,
+    84,
+    85,
+    89,
+    90,
+    91,
+    119,
+    120,
+    125,
+    126,
+    133,
+    138,
+    139,
+    142,
+    150,
+    152
+   ],
+   "kind": "call",
+   "set": {
+    "LS-FUNCTION": "INIT",
+    "LS-PROCESS-DATE": "20240101",
+    "LS-PROCESS-ID": "30000001",
+    "LS-RECOVERY-TYPE": "P",
+    "LS-RECOVERY-PARM": "",
+    "LS-RETURN-CODE": "0"
+   },
+   "datasets": {
+    "BCHCTL": {
+     "records": [
+      "30000001202401010001A"
+     ]
+    },
+    "PRCSEQ": {
+     "records": [
+      "3000000101FIRST PRC PROCESS             PRC"
+     ]
+    }
+   },
+   "expect": {
+    "outcome": "GOBACK",
+    "items": {
+     "LS-RETURN-CODE": "0"
+    },
+    "datasets": {
+     "BCHCTL": [
+      "30000001202401010001A"
+     ],
+     "PRCSEQ": [
+      "3000000101FIRST PRC PROCESS             PRC"
+     ]
+    }
+   }
+  },
+  {
+   "id": "R02",
+   "title": "INIT, recovery type 'A' with a blank process ID is valid: the process-ID check applies only to WS-RECOVER-PROCESS",
+   "cobol_lines": [
+    138,
+    141,
+    142,
+    150,
+    152,
+    84,
+    85
+   ],
+   "kind": "call",
+   "set": {
+    "LS-FUNCTION": "INIT",
+    "LS-PROCESS-DATE": "20240101",
+    "LS-PROCESS-ID": "",
+    "LS-RECOVERY-TYPE": "A",
+    "LS-RECOVERY-PARM": "",
+    "LS-RETURN-CODE": "0"
+   },
+   "datasets": {
+    "BCHCTL": {
+     "records": [
+      "30000001202401010001A"
+     ]
+    },
+    "PRCSEQ": {
+     "records": [
+      "3000000101FIRST PRC PROCESS             PRC"
+     ]
+    }
+   },
+   "expect": {
+    "outcome": "GOBACK",
+    "items": {
+     "LS-RETURN-CODE": "0"
+    }
+   }
+  },
+  {
+   "id": "R03",
+   "title": "INIT, blank process date: 'Process date required' -> 9000-ERROR-ROUTINE sets LS-RETURN-CODE +8 and CALLs ERRPROC (not registered)",
+   "cobol_lines": [
+    133,
+    134,
+    135,
+    111,
+    112,
+    113
+   ],
+   "kind": "call",
+   "set": {
+    "LS-FUNCTION": "INIT",
+    "LS-PROCESS-DATE": "",
+    "LS-PROCESS-ID": "30000001",
+    "LS-RECOVERY-TYPE": "P",
+    "LS-RECOVERY-PARM": "",
+    "LS-RETURN-CODE": "0"
+   },
+   "datasets": {
+    "BCHCTL": {
+     "records": [
+      "30000001202401010001A"
+     ]
+    },
+    "PRCSEQ": {
+     "records": [
+      "3000000101FIRST PRC PROCESS             PRC"
+     ]
+    }
+   },
+   "expect": {
+    "outcome": "BLOCKED RUNTIME-CALL-UNAVAILABLE"
+   }
+  },
+  {
+   "id": "R04",
+   "title": "INIT, recovery type 'X' is not P/S/A: WHEN OTHER -> 'Invalid recovery type' -> CALL ERRPROC (not registered)",
+   "cobol_lines": [
+    138,
+    143,
+    144,
+    145,
+    113
+   ],
+   "kind": "call",
+   "set": {
+    "LS-FUNCTION": "INIT",
+    "LS-PROCESS-DATE": "20240101",
+    "LS-PROCESS-ID": "30000001",
+    "LS-RECOVERY-TYPE": "X",
+    "LS-RECOVERY-PARM": "",
+    "LS-RETURN-CODE": "0"
+   },
+   "datasets": {
+    "BCHCTL": {
+     "records": [
+      "30000001202401010001A"
+     ]
+    },
+    "PRCSEQ": {
+     "records": [
+      "3000000101FIRST PRC PROCESS             PRC"
+     ]
+    }
+   },
+   "expect": {
+    "outcome": "BLOCKED RUNTIME-CALL-UNAVAILABLE"
+   }
+  },
+  {
+   "id": "R05",
+   "title": "RECV in a fresh run unit: WS-RECOVERY-MODE has no VALUE (LOW-VALUES) and is set only by INIT, so no WHEN matches; nothing is read or written and LS-RETURN-CODE is returned unchanged (the TIME STAMP gap at line 207 is unreachable in a single call)",
+   "cobol_lines": [
+    75,
+    76,
+    95,
+    96,
+    98,
+    100,
+    102,
+    84,
+    85
+   ],
+   "kind": "call",
+   "set": {
+    "LS-FUNCTION": "RECV",
+    "LS-PROCESS-DATE": "20240101",
+    "LS-PROCESS-ID": "30000001",
+    "LS-RECOVERY-TYPE": "P",
+    "LS-RECOVERY-PARM": "",
+    "LS-RETURN-CODE": "0"
+   },
+   "expect": {
+    "outcome": "GOBACK",
+    "items": {
+     "LS-RETURN-CODE": "0"
+    }
+   }
+  },
+  {
+   "id": "R06",
+   "title": "TERM: 3100-UPDATE-FINAL-STATUS moves 'Recovery completed successfully' (LS-RETURN-CODE = 0) and CALLs ERRPROC unconditionally (not registered)",
+   "cobol_lines": [
+    77,
+    78,
+    106,
+    284,
+    285,
+    290
+   ],
+   "kind": "call",
+   "set": {
+    "LS-FUNCTION": "TERM",
+    "LS-PROCESS-DATE": "20240101",
+    "LS-PROCESS-ID": "30000001",
+    "LS-RECOVERY-TYPE": "P",
+    "LS-RECOVERY-PARM": "",
+    "LS-RETURN-CODE": "0"
+   },
+   "expect": {
+    "outcome": "BLOCKED RUNTIME-CALL-UNAVAILABLE"
+   }
+  },
+  {
+   "id": "R07",
+   "title": "BR-031, BR-028, BR-029, BR-030 sequence recovery: CALL INIT type 'S'; RECV for date 20240101 and process 'JOBA': 2200 STARTs after LOW-VALUES+date, READ NEXT returns JOBA/20240101 (line 256 true -> 2100 re-READs JOBA+20240101+0001), then PROCESS-SEQ-FILE key 'JOBA'+PSR-VERSION (LOW-VALUES, never set) finds the 'N' definition: line 182 false, restart count 0 > 3 false at line 185 -> BYPASS; line 194 dispatches 2122: status 'D', BCT-RETURN-CODE +4, 'Process bypassed by recovery', REWRITE; next READ NEXT returns JOBB/20240102 (line 256 false); end of file; LS-RETURN-CODE unchanged",
+   "cobol_lines": [
+    72,
+    73,
+    74,
+    75,
+    76,
+    84,
+    85,
+    89,
+    90,
+    91,
+    95,
+    98,
+    99,
+    119,
+    120,
+    125,
+    126,
+    133,
+    138,
+    140,
+    141,
+    142,
+    150,
+    152,
+    160,
+    161,
+    163,
+    169,
+    170,
+    174,
+    176,
+    182,
+    184,
+    185,
+    187,
+    188,
+    194,
+    197,
+    198,
+    218,
+    219,
+    220,
+    222,
+    242,
+    243,
+    245,
+    251,
+    252,
+    253,
+    254,
+    255,
+    256,
+    257
+   ],
+   "kind": "call",
+   "calls": [
+    {
+     "set": {
+      "LS-FUNCTION": "INIT",
+      "LS-PROCESS-DATE": "20240101",
+      "LS-PROCESS-ID": "",
+      "LS-RECOVERY-TYPE": "S",
+      "LS-RECOVERY-PARM": "",
+      "LS-RETURN-CODE": "0"
+     }
+    }
+   ],
+   "set": {
+    "LS-FUNCTION": "RECV",
+    "LS-PROCESS-DATE": "20240101",
+    "LS-PROCESS-ID": "JOBA",
+    "LS-RECOVERY-TYPE": "S",
+    "LS-RECOVERY-PARM": "",
+    "LS-RETURN-CODE": "0"
+   },
+   "datasets": {
+    "BCHCTL": {
+     "records": [
+      "JOBA    202401010001A                                \u0000\u0000        0000\u0000\u0000        0000\u0000\u0000        0000\u0000\u0000        0000\u0000\u0000        0000\u0000\u0000        0000\u0000\u0000        0000\u0000\u0000        0000\u0000\u0000        0000\u0000\u0000        0000\u0000\u0000\u0000\u0000                                                                                \u0000\u0000                                                                                                      ",
+      "JOBB    202401020001A                                \u0000\u0000        0000\u0000\u0000        0000\u0000\u0000        0000\u0000\u0000        0000\u0000\u0000        0000\u0000\u0000        0000\u0000\u0000        0000\u0000\u0000        0000\u0000\u0000        0000\u0000\u0000        0000\u0000\u0000\u0000\u0000                                                                                \u0000\u0000                                                                                                      "
+     ]
+    },
+    "PRCSEQ": {
+     "records": [
+      "JOBA    \u0000\u0000RECOVERY TEST PROCESS         PRCD00000000\u0000\u0000        H\u0000\u0000        H\u0000\u0000        H\u0000\u0000        H\u0000\u0000        H\u0000\u0000        H\u0000\u0000        H\u0000\u0000        H\u0000\u0000        H\u0000\u0000        H\u0000\u0000PGM00001                                                  \u0000\u0000NYYYYYNNNN                                                          \u0000\u0000                                                                                      "
+     ]
+    }
+   },
+   "expect": {
+    "outcome": "GOBACK",
+    "return_code": 0,
+    "items": {
+     "LS-RETURN-CODE": "0",
+     "WS-RECOVERY-MODE": "S",
+     "WS-ACTION-BYPASS": true
+    },
+    "datasets": {
+     "BCHCTL": [
+      "JOBA    202401010001D                                \u0000\u0000        0000\u0000\u0000        0000\u0000\u0000        0000\u0000\u0000        0000\u0000\u0000        0000\u0000\u0000        0000\u0000\u0000        0000\u0000\u0000        0000\u0000\u0000        0000\u0000\u0000        0000\u0000\u0000\u0000\u0004Process bypassed by recovery                                                    \u0000\u0000",
+      "JOBB    202401020001A                                \u0000\u0000        0000\u0000\u0000        0000\u0000\u0000        0000\u0000\u0000        0000\u0000\u0000        0000\u0000\u0000        0000\u0000\u0000        0000\u0000\u0000        0000\u0000\u0000        0000\u0000\u0000        0000\u0000\u0000\u0000\u0000                                                                                \u0000\u0000"
+     ]
+    }
+   }
+  },
+  {
+   "id": "R08",
+   "title": "BR-029, BR-030 restart limit exceeded: CALL INIT type 'A'; RECV: 2300 STARTs after LOW-VALUES, READ NEXT returns JOBC (LS-PROCESS-ID := 'JOBC'), 2100 re-READs it, the definition is not restartable ('N'), BCT-RESTART-COUNT 4 > BCT-MAX-RESTARTS 3 at line 185 -> TERMINATE; 2123: status 'E', BCT-RETURN-CODE +8, 'Process terminated by recovery', REWRITE; end of file; LS-RETURN-CODE unchanged (0)",
+   "cobol_lines": [
+    72,
+    73,
+    74,
+    75,
+    76,
+    84,
+    85,
+    89,
+    90,
+    91,
+    95,
+    100,
+    101,
+    119,
+    120,
+    125,
+    126,
+    133,
+    138,
+    140,
+    141,
+    142,
+    150,
+    152,
+    160,
+    161,
+    163,
+    169,
+    170,
+    174,
+    176,
+    182,
+    184,
+    185,
+    186,
+    194,
+    199,
+    200,
+    230,
+    231,
+    232,
+    234,
+    264,
+    266,
+    272,
+    273,
+    274,
+    275,
+    276,
+    277,
+    278
+   ],
+   "kind": "call",
+   "calls": [
+    {
+     "set": {
+      "LS-FUNCTION": "INIT",
+      "LS-PROCESS-DATE": "20240101",
+      "LS-PROCESS-ID": "",
+      "LS-RECOVERY-TYPE": "A",
+      "LS-RECOVERY-PARM": "",
+      "LS-RETURN-CODE": "0"
+     }
+    }
+   ],
+   "set": {
+    "LS-FUNCTION": "RECV",
+    "LS-PROCESS-DATE": "20240101",
+    "LS-PROCESS-ID": "",
+    "LS-RECOVERY-TYPE": "A",
+    "LS-RECOVERY-PARM": "",
+    "LS-RETURN-CODE": "0"
+   },
+   "datasets": {
+    "BCHCTL": {
+     "records": [
+      "JOBC    202401010001A                                \u0000\u0000        0000\u0000\u0000        0000\u0000\u0000        0000\u0000\u0000        0000\u0000\u0000        0000\u0000\u0000        0000\u0000\u0000        0000\u0000\u0000        0000\u0000\u0000        0000\u0000\u0000        0000\u0000\u0000\u0000\u0000                                                                                \u0000\u0004                                                                                                      "
+     ]
+    },
+    "PRCSEQ": {
+     "records": [
+      "JOBC    \u0000\u0000RECOVERY TEST PROCESS         PRCD00000000\u0000\u0000        H\u0000\u0000        H\u0000\u0000        H\u0000\u0000        H\u0000\u0000        H\u0000\u0000        H\u0000\u0000        H\u0000\u0000        H\u0000\u0000        H\u0000\u0000        H\u0000\u0000PGM00001                                                  \u0000\u0000NYYYYYNNNN                                                          \u0000\u0000                                                                                      "
+     ]
+    }
+   },
+   "expect": {
+    "outcome": "GOBACK",
+    "return_code": 0,
+    "items": {
+     "LS-RETURN-CODE": "0",
+     "LS-PROCESS-ID": "JOBC",
+     "WS-ACTION-TERMINATE": true
+    },
+    "datasets": {
+     "BCHCTL": [
+      "JOBC    202401010001E                                \u0000\u0000        0000\u0000\u0000        0000\u0000\u0000        0000\u0000\u0000        0000\u0000\u0000        0000\u0000\u0000        0000\u0000\u0000        0000\u0000\u0000        0000\u0000\u0000        0000\u0000\u0000        0000\u0000\u0000\u0000\bProcess terminated by recovery                                                  \u0000\u0004"
+     ]
+    }
+   }
+  },
+  {
+   "id": "R09",
+   "title": "BR-029 boundary: as R08 but BCT-RESTART-COUNT is exactly 3 (= BCT-MAX-RESTARTS), so line 185 (> 3) is false -> BYPASS: status 'D', BCT-RETURN-CODE +4, 'Process bypassed by recovery', restart count unchanged",
+   "cobol_lines": [
+    72,
+    73,
+    74,
+    75,
+    76,
+    84,
+    85,
+    89,
+    90,
+    91,
+    95,
+    100,
+    101,
+    119,
+    120,
+    125,
+    126,
+    133,
+    138,
+    140,
+    141,
+    142,
+    150,
+    152,
+    160,
+    161,
+    163,
+    169,
+    170,
+    174,
+    176,
+    182,
+    184,
+    185,
+    187,
+    188,
+    194,
+    197,
+    198,
+    218,
+    219,
+    220,
+    222,
+    264,
+    266,
+    272,
+    273,
+    276,
+    277,
+    278
+   ],
+   "kind": "call",
+   "calls": [
+    {
+     "set": {
+      "LS-FUNCTION": "INIT",
+      "LS-PROCESS-DATE": "20240101",
+      "LS-PROCESS-ID": "",
+      "LS-RECOVERY-TYPE": "A",
+      "LS-RECOVERY-PARM": "",
+      "LS-RETURN-CODE": "0"
+     }
+    }
+   ],
+   "set": {
+    "LS-FUNCTION": "RECV",
+    "LS-PROCESS-DATE": "20240101",
+    "LS-PROCESS-ID": "",
+    "LS-RECOVERY-TYPE": "A",
+    "LS-RECOVERY-PARM": "",
+    "LS-RETURN-CODE": "0"
+   },
+   "datasets": {
+    "BCHCTL": {
+     "records": [
+      "JOBC    202401010001A                                \u0000\u0000        0000\u0000\u0000        0000\u0000\u0000        0000\u0000\u0000        0000\u0000\u0000        0000\u0000\u0000        0000\u0000\u0000        0000\u0000\u0000        0000\u0000\u0000        0000\u0000\u0000        0000\u0000\u0000\u0000\u0000                                                                                \u0000\u0003                                                                                                      "
+     ]
+    },
+    "PRCSEQ": {
+     "records": [
+      "JOBC    \u0000\u0000RECOVERY TEST PROCESS         PRCD00000000\u0000\u0000        H\u0000\u0000        H\u0000\u0000        H\u0000\u0000        H\u0000\u0000        H\u0000\u0000        H\u0000\u0000        H\u0000\u0000        H\u0000\u0000        H\u0000\u0000        H\u0000\u0000PGM00001                                                  \u0000\u0000NYYYYYNNNN                                                          \u0000\u0000                                                                                      "
+     ]
+    }
+   },
+   "expect": {
+    "outcome": "GOBACK",
+    "return_code": 0,
+    "items": {
+     "LS-RETURN-CODE": "0",
+     "LS-PROCESS-ID": "JOBC",
+     "WS-ACTION-BYPASS": true
+    },
+    "datasets": {
+     "BCHCTL": [
+      "JOBC    202401010001D                                \u0000\u0000        0000\u0000\u0000        0000\u0000\u0000        0000\u0000\u0000        0000\u0000\u0000        0000\u0000\u0000        0000\u0000\u0000        0000\u0000\u0000        0000\u0000\u0000        0000\u0000\u0000        0000\u0000\u0000\u0000\u0004Process bypassed by recovery                                                    \u0000\u0003"
+     ]
+    }
+   }
+  },
+  {
+   "id": "R10",
+   "title": "BR-028, BR-030 restartable process: CALL INIT type 'A'; RECV reaches JOBC whose definition has PSR-RESTART 'Y': line 182 true -> RESTART; line 194 dispatches 2121, which sets status 'R' and adds 1 to the restart count, then blocks at ACCEPT FROM TIME STAMP (line 207) before the REWRITE",
+   "cobol_lines": [
+    72,
+    73,
+    74,
+    75,
+    76,
+    84,
+    85,
+    89,
+    90,
+    91,
+    95,
+    100,
+    101,
+    119,
+    120,
+    125,
+    126,
+    133,
+    138,
+    140,
+    141,
+    142,
+    150,
+    152,
+    160,
+    161,
+    163,
+    169,
+    170,
+    174,
+    176,
+    182,
+    183,
+    194,
+    195,
+    196,
+    205,
+    206,
+    207,
+    264,
+    266,
+    272,
+    273,
+    276,
+    277,
+    278
+   ],
+   "kind": "call",
+   "calls": [
+    {
+     "set": {
+      "LS-FUNCTION": "INIT",
+      "LS-PROCESS-DATE": "20240101",
+      "LS-PROCESS-ID": "",
+      "LS-RECOVERY-TYPE": "A",
+      "LS-RECOVERY-PARM": "",
+      "LS-RETURN-CODE": "0"
+     }
+    }
+   ],
+   "set": {
+    "LS-FUNCTION": "RECV",
+    "LS-PROCESS-DATE": "20240101",
+    "LS-PROCESS-ID": "",
+    "LS-RECOVERY-TYPE": "A",
+    "LS-RECOVERY-PARM": "",
+    "LS-RETURN-CODE": "0"
+   },
+   "datasets": {
+    "BCHCTL": {
+     "records": [
+      "JOBC    202401010001A                                \u0000\u0000        0000\u0000\u0000        0000\u0000\u0000        0000\u0000\u0000        0000\u0000\u0000        0000\u0000\u0000        0000\u0000\u0000        0000\u0000\u0000        0000\u0000\u0000        0000\u0000\u0000        0000\u0000\u0000\u0000\u0000                                                                                \u0000\u0003                                                                                                      "
+     ]
+    },
+    "PRCSEQ": {
+     "records": [
+      "JOBC    \u0000\u0000RECOVERY TEST PROCESS         PRCD00000000\u0000\u0000        H\u0000\u0000        H\u0000\u0000        H\u0000\u0000        H\u0000\u0000        H\u0000\u0000        H\u0000\u0000        H\u0000\u0000        H\u0000\u0000        H\u0000\u0000        H\u0000\u0000PGM00001                                                  \u0000\u0000YYYYYYNNNN                                                          \u0000\u0000                                                                                      "
+     ]
+    }
+   },
+   "expect": {
+    "outcome": "BLOCKED AT src/programs/batch/RCVPRC00.cbl:207"
+   }
+  },
+  {
+   "id": "V01",
+   "title": "BR-032 LS-RETURN-CODE = 0: 3100-UPDATE-FINAL-STATUS moves 'Recovery completed successfully' to ERR-TEXT and leaves LS-RETURN-CODE 0, then CALLs 'ERRPROC' unconditionally (not registered)",
+   "cobol_lines": [
+    72,
+    77,
+    78,
+    106,
+    284,
+    285,
+    290
+   ],
+   "kind": "call",
+   "set": {
+    "LS-FUNCTION": "TERM",
+    "LS-PROCESS-DATE": "20240101",
+    "LS-PROCESS-ID": "30000001",
+    "LS-RECOVERY-TYPE": "P",
+    "LS-RECOVERY-PARM": "",
+    "LS-RETURN-CODE": "0"
+   },
+   "expect": {
+    "outcome": "BLOCKED RUNTIME-CALL-UNAVAILABLE",
+    "items": {
+     "ERR-TEXT": "Recovery completed successfully",
+     "LS-RETURN-CODE": "0"
+    }
+   }
+  },
+  {
+   "id": "V02",
+   "title": "BR-032 LS-RETURN-CODE = +4 (not zero): 'Recovery completed with errors' is moved to ERR-TEXT, LS-RETURN-CODE stays +4, then CALL 'ERRPROC' (not registered)",
+   "cobol_lines": [
+    72,
+    77,
+    78,
+    106,
+    284,
+    286,
+    287,
+    290
+   ],
+   "kind": "call",
+   "set": {
+    "LS-FUNCTION": "TERM",
+    "LS-PROCESS-DATE": "20240101",
+    "LS-PROCESS-ID": "30000001",
+    "LS-RECOVERY-TYPE": "P",
+    "LS-RECOVERY-PARM": "",
+    "LS-RETURN-CODE": "4"
+   },
+   "expect": {
+    "outcome": "BLOCKED RUNTIME-CALL-UNAVAILABLE",
+    "items": {
+     "ERR-TEXT": "Recovery completed with errors",
+     "LS-RETURN-CODE": "4"
+    }
+   }
+  },
+  {
+   "id": "V03",
+   "title": "BR-032 negative LS-RETURN-CODE (-1) is also not zero: 'Recovery completed with errors', LS-RETURN-CODE stays -1, then CALL 'ERRPROC' (not registered)",
+   "cobol_lines": [
+    72,
+    77,
+    78,
+    106,
+    284,
+    286,
+    287,
+    290
+   ],
+   "kind": "call",
+   "set": {
+    "LS-FUNCTION": "TERM",
+    "LS-PROCESS-DATE": "20240101",
+    "LS-PROCESS-ID": "30000001",
+    "LS-RECOVERY-TYPE": "P",
+    "LS-RECOVERY-PARM": "",
+    "LS-RETURN-CODE": "-1"
+   },
+   "expect": {
+    "outcome": "BLOCKED RUNTIME-CALL-UNAVAILABLE",
+    "items": {
+     "ERR-TEXT": "Recovery completed with errors",
+     "LS-RETURN-CODE": "-1"
+    }
+   }
+  }
+ ]
+}

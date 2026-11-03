@@ -1,0 +1,345 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://revforge.local/contracts/orchestrator/design-approval-request.schema.json",
+  "title": "Immutable G3 (architecture) / G4 (story set) approval request",
+  "description": "Binds the exact baseline, scope digest, approved-requirements hash, upstream signed approvals, the architecture or story-set artefact hash and the dependency manifest. Issued only for an artefact that passed its validation.",
+  "type": "object",
+  "properties": {
+    "contract": {
+      "const": "design-approval-request"
+    },
+    "contract_version": {
+      "const": "1.0"
+    },
+    "request_id": {
+      "type": "string",
+      "pattern": "^DREQ-[0-9]{4}$"
+    },
+    "request_sha256": {
+      "$ref": "../common.schema.json#/definitions/sha256"
+    },
+    "payload": {
+      "type": "object",
+      "properties": {
+        "contract": {
+          "const": "design-approval-request-payload"
+        },
+        "contract_version": {
+          "const": "1.0"
+        },
+        "request_id": {
+          "type": "string",
+          "pattern": "^DREQ-[0-9]{4}$"
+        },
+        "gate": {
+          "enum": [
+            "G3",
+            "G4"
+          ]
+        },
+        "workflow_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "run_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "baseline": {
+          "type": "object",
+          "properties": {
+            "manifest_sha256": {
+              "$ref": "../common.schema.json#/definitions/sha256"
+            }
+          },
+          "required": [
+            "manifest_sha256"
+          ],
+          "additionalProperties": false
+        },
+        "scope": {
+          "type": "object",
+          "properties": {
+            "selector_text": {
+              "type": "string",
+              "minLength": 1
+            },
+            "scope_sha256": {
+              "$ref": "../common.schema.json#/definitions/sha256"
+            }
+          },
+          "required": [
+            "selector_text",
+            "scope_sha256"
+          ],
+          "additionalProperties": false
+        },
+        "requirements": {
+          "type": "object",
+          "properties": {
+            "sha256": {
+              "$ref": "../common.schema.json#/definitions/sha256"
+            },
+            "ids": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "minLength": 1
+              },
+              "minItems": 1
+            }
+          },
+          "required": [
+            "sha256",
+            "ids"
+          ],
+          "additionalProperties": false
+        },
+        "upstream_approvals": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "gate": {
+                "enum": [
+                  "G2",
+                  "G3"
+                ]
+              },
+              "approval_id": {
+                "type": "string",
+                "minLength": 1
+              },
+              "sha256": {
+                "$ref": "../common.schema.json#/definitions/sha256"
+              }
+            },
+            "required": [
+              "gate",
+              "approval_id",
+              "sha256"
+            ],
+            "additionalProperties": false
+          },
+          "minItems": 1
+        },
+        "artifact": {
+          "type": "object",
+          "properties": {
+            "kind": {
+              "enum": [
+                "architecture",
+                "story_set"
+              ]
+            },
+            "agent": {
+              "enum": [
+                "F3",
+                "F4"
+              ]
+            },
+            "receipt_id": {
+              "type": "string",
+              "minLength": 1
+            },
+            "files": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  "path": {
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  "sha256": {
+                    "$ref": "../common.schema.json#/definitions/sha256"
+                  }
+                },
+                "required": [
+                  "name",
+                  "path",
+                  "sha256"
+                ],
+                "additionalProperties": false
+              },
+              "minItems": 1
+            },
+            "sha256": {
+              "$ref": "../common.schema.json#/definitions/sha256"
+            }
+          },
+          "required": [
+            "kind",
+            "agent",
+            "receipt_id",
+            "files",
+            "sha256"
+          ],
+          "additionalProperties": false
+        },
+        "dependency_manifest": {
+          "type": "object",
+          "properties": {
+            "sha256": {
+              "$ref": "../common.schema.json#/definitions/sha256"
+            },
+            "units": {
+              "type": "array",
+              "items": {
+                "type": "object"
+              }
+            },
+            "data_contracts": {
+              "type": "array",
+              "items": {
+                "type": "object"
+              }
+            },
+            "runtime_requirements": {
+              "type": "array",
+              "items": {
+                "type": "object"
+              }
+            },
+            "decisions": {
+              "type": "array",
+              "items": {
+                "type": "object"
+              }
+            },
+            "architecture_sha256": {
+              "anyOf": [
+                {
+                  "$ref": "../common.schema.json#/definitions/sha256"
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            }
+          },
+          "required": [
+            "sha256",
+            "units",
+            "data_contracts",
+            "runtime_requirements",
+            "decisions",
+            "architecture_sha256"
+          ],
+          "additionalProperties": false
+        },
+        "validation": {
+          "type": "object",
+          "properties": {
+            "ok": {
+              "const": true
+            },
+            "checks": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  "ok": {
+                    "type": "boolean"
+                  },
+                  "detail": {
+                    "type": "string",
+                    "minLength": 1
+                  }
+                },
+                "required": [
+                  "id",
+                  "ok",
+                  "detail"
+                ],
+                "additionalProperties": false
+              },
+              "minItems": 1
+            }
+          },
+          "required": [
+            "ok",
+            "checks"
+          ],
+          "additionalProperties": false
+        },
+        "policy_sha256": {
+          "$ref": "../common.schema.json#/definitions/sha256"
+        },
+        "required_roles": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "minItems": 1
+        },
+        "co_approval_roles": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "approval_covers": {
+          "type": "string",
+          "minLength": 1
+        },
+        "requested_by": {
+          "type": "string",
+          "minLength": 1
+        },
+        "created_at": {
+          "$ref": "../common.schema.json#/definitions/isoTimestamp"
+        },
+        "expires_at": {
+          "$ref": "../common.schema.json#/definitions/isoTimestamp"
+        },
+        "nonce": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{32}$"
+        }
+      },
+      "required": [
+        "contract",
+        "contract_version",
+        "request_id",
+        "gate",
+        "workflow_id",
+        "run_id",
+        "baseline",
+        "scope",
+        "requirements",
+        "upstream_approvals",
+        "artifact",
+        "dependency_manifest",
+        "validation",
+        "policy_sha256",
+        "required_roles",
+        "co_approval_roles",
+        "approval_covers",
+        "requested_by",
+        "created_at",
+        "expires_at",
+        "nonce"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "required": [
+    "contract",
+    "contract_version",
+    "request_id",
+    "request_sha256",
+    "payload"
+  ],
+  "additionalProperties": false
+}

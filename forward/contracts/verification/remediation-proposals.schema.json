@@ -1,0 +1,114 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://revforge.local/contracts/verification/remediation-proposals.schema.json",
+  "title": "Versioned remediation proposals (never applied or authorised by this record)",
+  "type": "object",
+  "required": [
+    "contract",
+    "contract_version",
+    "generated_at",
+    "baseline_manifest_sha256",
+    "rule",
+    "summary",
+    "proposals"
+  ],
+  "properties": {
+    "contract": {
+      "const": "remediation-proposals"
+    },
+    "contract_version": {
+      "const": "1.0"
+    },
+    "baseline_manifest_sha256": {
+      "$ref": "../common.schema.json#/definitions/sha256"
+    },
+    "summary": {
+      "type": "object",
+      "required": [
+        "proposals",
+        "authorized"
+      ],
+      "properties": {
+        "authorized": {
+          "const": 0
+        }
+      }
+    },
+    "proposals": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "proposal_id",
+          "proposal_key",
+          "version",
+          "kind",
+          "root_cause_id",
+          "status",
+          "target",
+          "original_finding",
+          "original_value",
+          "proposed_value",
+          "original_evidence",
+          "new_evidence",
+          "deterministic_checks",
+          "source_hashes",
+          "reason",
+          "affected_requirements",
+          "affected_decisions",
+          "required_role",
+          "authorization",
+          "invalidation_impact",
+          "content_sha256",
+          "previous_version"
+        ],
+        "properties": {
+          "proposal_id": {
+            "type": "string",
+            "pattern": "^RP-[0-9a-f]{10}$"
+          },
+          "version": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "kind": {
+            "enum": [
+              "citation_correction",
+              "field_attribute_correction",
+              "java_type_compatibility",
+              "record_size_correction"
+            ]
+          },
+          "status": {
+            "const": "proposed"
+          },
+          "authorization": {
+            "type": "object",
+            "required": [
+              "status",
+              "requires"
+            ],
+            "properties": {
+              "status": {
+                "const": "not_authorized"
+              }
+            }
+          },
+          "target": {
+            "type": "object",
+            "required": [
+              "document",
+              "pointer",
+              "item_kind",
+              "item_id",
+              "item_sha256"
+            ]
+          },
+          "content_sha256": {
+            "$ref": "../common.schema.json#/definitions/sha256"
+          }
+        }
+      }
+    }
+  }
+}

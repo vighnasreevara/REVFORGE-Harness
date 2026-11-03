@@ -1,0 +1,90 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://revforge.local/contracts/common.schema.json",
+  "title": "REVFORGE forward contracts: shared definitions",
+  "description": "Identifier formats and shared shapes. Permanent source IDs are issued by the reverse harness's Neo4j registry and must be copied unchanged. Catalogue IDs (BR-, RS-, GAP-, ASM-, EH-, REL-, COND-) are run-local: they are only meaningful together with the exact reverse run they came from.",
+  "definitions": {
+    "systemId": { "type": "string", "pattern": "^SYS-[A-Z0-9]{2,20}-[0-9]{3}$" },
+    "fileId": { "type": "string", "pattern": "^SYS-[A-Z0-9]{2,20}-[0-9]{3}-FIL-[0-9]{4}$" },
+    "pathId": { "type": "string", "pattern": "^SYS-[A-Z0-9]{2,20}-[0-9]{3}-PATH-[0-9]{4}$" },
+    "sectionId": { "type": "string", "pattern": "^SYS-[A-Z0-9]{2,20}-[0-9]{3}-FIL-[0-9]{4}-SEC-[0-9]{4}$" },
+    "paragraphId": { "type": "string", "pattern": "^SYS-[A-Z0-9]{2,20}-[0-9]{3}-FIL-[0-9]{4}-PAR-[0-9]{4}$" },
+    "statementId": { "type": "string", "pattern": "^SYS-[A-Z0-9]{2,20}-[0-9]{3}-FIL-[0-9]{4}-STMT-[0-9]{6}$" },
+    "recordId": { "type": "string", "pattern": "^SYS-[A-Z0-9]{2,20}-[0-9]{3}-FIL-[0-9]{4}-REC-[0-9]{4}$" },
+    "fieldId": { "type": "string", "pattern": "^SYS-[A-Z0-9]{2,20}-[0-9]{3}-FIL-[0-9]{4}-FLD-[0-9]{6}$" },
+    "nullableFileId": { "anyOf": [{ "$ref": "#/definitions/fileId" }, { "type": "null" }] },
+    "nullablePathId": { "anyOf": [{ "$ref": "#/definitions/pathId" }, { "type": "null" }] },
+    "ruleId": { "type": "string", "pattern": "^BR-[0-9]{3,}$" },
+    "ruleSetId": { "type": "string", "pattern": "^RS-[0-9]{3,}$" },
+    "gapId": { "type": "string", "pattern": "^GAP-[0-9]{3,}$" },
+    "assumptionId": { "type": "string", "pattern": "^ASM-[0-9]{3,}$" },
+    "decisionId": { "type": "string", "pattern": "^DEC-[0-9]{4,}$" },
+    "sha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+    "isoTimestamp": { "type": "string", "format": "date-time" },
+    "evidenceClass": { "enum": ["confirmed", "inferred", "uncertain"] },
+    "confidence": { "enum": ["confirmed", "high", "medium", "low"] },
+    "severity": { "enum": ["critical", "high", "medium", "low", "info"] },
+    "artifactStatus": { "enum": ["draft", "unverified", "verified"] },
+    "sourceRun": {
+      "description": "Exact reverse run/version a run-local catalogue ID belongs to.",
+      "type": "object",
+      "required": ["artifact", "sha256"],
+      "properties": {
+        "artifact": { "type": "string" },
+        "agent_version": { "type": ["string", "null"] },
+        "generated_at": { "type": ["string", "null"] },
+        "sha256": { "$ref": "#/definitions/sha256" },
+        "run_ids": { "type": "array", "items": { "type": "string" } }
+      },
+      "additionalProperties": false
+    },
+    "runLocalRef": {
+      "type": "object",
+      "required": ["id", "scope", "source_run"],
+      "properties": {
+        "id": { "type": "string" },
+        "scope": { "const": "run-local" },
+        "source_run": { "type": "string", "description": "Key of an entry in the baseline manifest's source_runs." }
+      },
+      "additionalProperties": false
+    },
+    "sourceIds": {
+      "description": "Permanent source identities. null means the reverse harness recorded no ID; it is never filled in by the forward runtime.",
+      "type": "object",
+      "properties": {
+        "system_id": { "anyOf": [{ "$ref": "#/definitions/systemId" }, { "type": "null" }] },
+        "file_id": { "$ref": "#/definitions/nullableFileId" },
+        "path_id": { "$ref": "#/definitions/nullablePathId" },
+        "section_id": { "anyOf": [{ "$ref": "#/definitions/sectionId" }, { "type": "null" }] },
+        "paragraph_id": { "anyOf": [{ "$ref": "#/definitions/paragraphId" }, { "type": "null" }] },
+        "statement_id": { "anyOf": [{ "$ref": "#/definitions/statementId" }, { "type": "null" }] },
+        "record_id": { "anyOf": [{ "$ref": "#/definitions/recordId" }, { "type": "null" }] },
+        "field_id": { "anyOf": [{ "$ref": "#/definitions/fieldId" }, { "type": "null" }] }
+      }
+    },
+    "pathRef": {
+      "description": "A path as recorded upstream plus its repo-relative form. Windows absolute paths are kept verbatim in 'raw'.",
+      "type": "object",
+      "required": ["raw", "kind", "repo_relative"],
+      "properties": {
+        "raw": { "type": "string" },
+        "kind": { "enum": ["windows_absolute", "posix_absolute", "relative"] },
+        "repo_relative": { "type": ["string", "null"] }
+      },
+      "additionalProperties": false
+    },
+    "outputHeader": {
+      "type": "object",
+      "required": ["contract", "contract_version", "forward_run_id", "generated_at", "status", "baseline_manifest"],
+      "properties": {
+        "contract": { "type": "string" },
+        "contract_version": { "type": "string" },
+        "forward_run_id": { "type": "string" },
+        "generated_at": { "$ref": "#/definitions/isoTimestamp" },
+        "status": { "$ref": "#/definitions/artifactStatus" },
+        "status_note": { "type": "string" },
+        "baseline_manifest": { "type": "string" }
+      }
+    }
+  }
+}

@@ -1,0 +1,100 @@
+{
+  "contract": "bmad/binding-config",
+  "contract_version": "1.0",
+  "binding_version": "1.0.0",
+  "release": { "package": "bmad-method", "version": "6.12.4" },
+  "live_execution": {
+    "requested": false,
+    "note": "This flag alone never enables LIVE. LIVE also needs an eligible workflow, a verified isolated installation, a signed execution authorization and an implemented executor that dispatches through the forward workflow."
+  },
+  "bindings": [
+    {
+      "binding_id": "BMAD-PRD",
+      "workflow_id": "bmad-prd",
+      "purpose": "Render the G2-approved requirements specification of one scope as a PRD. Adds no requirement and changes none.",
+      "revforge_target": "approved_requirements_specification",
+      "agent": "F1",
+      "allowed_states": ["REQUIREMENTS_APPROVED", "ARCHITECTURE_DRAFTED", "ARCHITECTURE_APPROVED", "STORIES_DRAFTED", "STORIES_APPROVED"],
+      "requires_gates": ["G2"],
+      "requires_exact_scope": true,
+      "requires": [],
+      "output_contract": "bmad/output-prd",
+      "may_write_code": false,
+      "may_approve": false
+    },
+    {
+      "binding_id": "BMAD-ARCH",
+      "workflow_id": "bmad-architecture",
+      "purpose": "Draft the F3 architecture spine and compatibility decisions for the approved scope. Never approves the architecture (G3 is a human gate).",
+      "revforge_target": "F3_architecture",
+      "agent": "F3",
+      "allowed_states": ["REQUIREMENTS_APPROVED", "ARCHITECTURE_DRAFTED"],
+      "requires_gates": ["G2"],
+      "requires_exact_scope": true,
+      "requires": [],
+      "output_contract": "bmad/output-architecture",
+      "may_write_code": false,
+      "may_approve": false
+    },
+    {
+      "binding_id": "BMAD-EPICS",
+      "workflow_id": "bmad-create-epics-and-stories",
+      "purpose": "Draft F4 epics and stories from the approved requirements and the architecture. Stories stay drafts until G3 and then G4 pass.",
+      "revforge_target": "F4_stories",
+      "agent": "F4",
+      "allowed_states": ["ARCHITECTURE_APPROVED", "STORIES_DRAFTED"],
+      "requires_gates": ["G2", "G3"],
+      "requires_exact_scope": true,
+      "requires": ["architecture_artifacts"],
+      "output_contract": "bmad/output-epics",
+      "may_write_code": false,
+      "may_approve": false
+    },
+    {
+      "binding_id": "BMAD-SPRINT",
+      "workflow_id": "bmad-sprint-planning",
+      "purpose": "F4 sprint readiness and sprint status from approved stories.",
+      "revforge_target": "F4_sprint_readiness",
+      "agent": "F4",
+      "allowed_states": ["STORIES_APPROVED"],
+      "requires_gates": ["G2", "G3", "G4"],
+      "requires_exact_scope": true,
+      "requires": ["approved_stories"],
+      "output_contract": "bmad/output-sprint",
+      "may_write_code": false,
+      "may_approve": false
+    },
+    {
+      "binding_id": "BMAD-BUILD",
+      "workflow_id": "bmad-build",
+      "purpose": "F5 implementation of approved stories inside the authorised Java target directory only.",
+      "revforge_target": "F5_implementation",
+      "agent": "F5",
+      "allowed_states": ["STORIES_APPROVED", "IMPLEMENTING"],
+      "requires_gates": ["G2", "G3", "G4"],
+      "requires_exact_scope": true,
+      "requires": ["approved_stories", "java_target_dir", "generation_authorized"],
+      "output_contract": "bmad/output-build",
+      "may_write_code": true,
+      "may_approve": false
+    },
+    {
+      "binding_id": "BMAD-REVIEW",
+      "workflow_id": "bmad-code-review",
+      "purpose": "F7 adversarial review of the actual implementation, after independent F6 testing. Recommends; never accepts.",
+      "revforge_target": "F7_review",
+      "agent": "F7",
+      "allowed_states": ["REVIEWING"],
+      "requires_gates": ["G2", "G3", "G4", "G5", "G6"],
+      "requires_exact_scope": true,
+      "requires": ["implementation_artifacts", "independent_test_receipt", "reviewer_not_implementer"],
+      "output_contract": "bmad/output-review",
+      "may_write_code": false,
+      "may_approve": false
+    }
+  ],
+  "independent_agents": [
+    { "agent": "F6", "reason": "Independent testing stays outside BMad so that the implementation workflow cannot test or approve itself." },
+    { "agent": "F2", "reason": "Data mapping is reverse-evidence work with no BMad counterpart." }
+  ]
+}

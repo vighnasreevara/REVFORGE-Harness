@@ -1,0 +1,336 @@
+{
+ "program": "DB2ERR",
+ "provenance": "Written 2026-11-02 by a scenario-author agent (F6 independent fixture design) from the COBOL source src/programs/common/DB2ERR.cbl and the copybooks it COPYs (src/copybook/db2/DBTBLS.cpy, src/copybook/db2/SQLCA.cpy, src/copybook/db2/DBPROC.cpy, src/copybook/common/ERRHAND.cpy), plus the gap origins in the 'gaps' array of forward/generated/java/DB2ERR/pilot-result.json. No generated Java, source map or execution result was read.",
+ "scenarios": [
+  {
+   "id": "E01",
+   "title": "DIAG deadlock (-911): retry message and return code 4; DIAG never touches LS-RETRY-FLAG",
+   "cobol_lines": [
+    60,
+    61,
+    69,
+    32,
+    141,
+    142,
+    143,
+    145
+   ],
+   "kind": "call",
+   "set": {
+    "LS-FUNCTION": "DIAG",
+    "LS-PROGRAM-ID": "TESTPGM",
+    "LS-SQLCODE": "-911",
+    "LS-SQLSTATE": "00000",
+    "LS-ERROR-TEXT": "",
+    "LS-ADDITIONAL-INFO": "",
+    "LS-RETURN-CODE": "99",
+    "LS-RETRY-FLAG": "X"
+   },
+   "expect": {
+    "outcome": "GOBACK",
+    "items": {
+     "LS-ERROR-TEXT": "Deadlock detected - retry transaction",
+     "LS-RETURN-CODE": "4",
+     "LS-SQLCODE": "-911",
+     "LS-RETRY-FLAG": "X"
+    }
+   }
+  },
+  {
+   "id": "E02",
+   "title": "DIAG timeout (-913)",
+   "cobol_lines": [
+    60,
+    61,
+    69,
+    33,
+    146,
+    147,
+    149
+   ],
+   "kind": "call",
+   "set": {
+    "LS-FUNCTION": "DIAG",
+    "LS-PROGRAM-ID": "TESTPGM",
+    "LS-SQLCODE": "-913",
+    "LS-SQLSTATE": "00000",
+    "LS-ERROR-TEXT": "",
+    "LS-ADDITIONAL-INFO": "",
+    "LS-RETURN-CODE": "99",
+    "LS-RETRY-FLAG": "X"
+   },
+   "expect": {
+    "outcome": "GOBACK",
+    "items": {
+     "LS-ERROR-TEXT": "Timeout occurred - retry transaction",
+     "LS-RETURN-CODE": "4",
+     "LS-SQLCODE": "-913",
+     "LS-RETRY-FLAG": "X"
+    }
+   }
+  },
+  {
+   "id": "E03",
+   "title": "DIAG connection error (-30081)",
+   "cobol_lines": [
+    60,
+    61,
+    69,
+    34,
+    150,
+    151,
+    153
+   ],
+   "kind": "call",
+   "set": {
+    "LS-FUNCTION": "DIAG",
+    "LS-PROGRAM-ID": "TESTPGM",
+    "LS-SQLCODE": "-30081",
+    "LS-SQLSTATE": "00000",
+    "LS-ERROR-TEXT": "",
+    "LS-ADDITIONAL-INFO": "",
+    "LS-RETURN-CODE": "99",
+    "LS-RETRY-FLAG": "X"
+   },
+   "expect": {
+    "outcome": "GOBACK",
+    "items": {
+     "LS-ERROR-TEXT": "DB2 connection error - check availability",
+     "LS-RETURN-CODE": "12",
+     "LS-SQLCODE": "-30081",
+     "LS-RETRY-FLAG": "X"
+    }
+   }
+  },
+  {
+   "id": "E04",
+   "title": "DIAG duplicate key (-803)",
+   "cobol_lines": [
+    60,
+    61,
+    69,
+    35,
+    154,
+    155,
+    157
+   ],
+   "kind": "call",
+   "set": {
+    "LS-FUNCTION": "DIAG",
+    "LS-PROGRAM-ID": "TESTPGM",
+    "LS-SQLCODE": "-803",
+    "LS-SQLSTATE": "00000",
+    "LS-ERROR-TEXT": "",
+    "LS-ADDITIONAL-INFO": "",
+    "LS-RETURN-CODE": "99",
+    "LS-RETRY-FLAG": "X"
+   },
+   "expect": {
+    "outcome": "GOBACK",
+    "items": {
+     "LS-ERROR-TEXT": "Duplicate key violation",
+     "LS-RETURN-CODE": "8",
+     "LS-SQLCODE": "-803",
+     "LS-RETRY-FLAG": "X"
+    }
+   }
+  },
+  {
+   "id": "E05",
+   "title": "DIAG any other negative SQLCODE is an unhandled error with return code 12",
+   "cobol_lines": [
+    60,
+    61,
+    69,
+    158,
+    159,
+    160,
+    162
+   ],
+   "kind": "call",
+   "set": {
+    "LS-FUNCTION": "DIAG",
+    "LS-PROGRAM-ID": "TESTPGM",
+    "LS-SQLCODE": "-204",
+    "LS-SQLSTATE": "00000",
+    "LS-ERROR-TEXT": "",
+    "LS-ADDITIONAL-INFO": "",
+    "LS-RETURN-CODE": "99",
+    "LS-RETRY-FLAG": "X"
+   },
+   "expect": {
+    "outcome": "GOBACK",
+    "items": {
+     "LS-ERROR-TEXT": "Unhandled DB2 error",
+     "LS-RETURN-CODE": "12",
+     "LS-SQLCODE": "-204",
+     "LS-RETRY-FLAG": "X"
+    }
+   }
+  },
+  {
+   "id": "E06",
+   "title": "DIAG +100: WS-NOT-FOUND is declared but DIAG has no WHEN for it, so it falls to WHEN OTHER and is a warning (4)",
+   "cobol_lines": [
+    60,
+    61,
+    69,
+    36,
+    158,
+    159,
+    164,
+    166
+   ],
+   "kind": "call",
+   "set": {
+    "LS-FUNCTION": "DIAG",
+    "LS-PROGRAM-ID": "TESTPGM",
+    "LS-SQLCODE": "100",
+    "LS-SQLSTATE": "00000",
+    "LS-ERROR-TEXT": "",
+    "LS-ADDITIONAL-INFO": "",
+    "LS-RETURN-CODE": "99",
+    "LS-RETRY-FLAG": "X"
+   },
+   "expect": {
+    "outcome": "GOBACK",
+    "items": {
+     "LS-ERROR-TEXT": "DB2 warning condition",
+     "LS-RETURN-CODE": "4",
+     "LS-SQLCODE": "100",
+     "LS-RETRY-FLAG": "X"
+    }
+   }
+  },
+  {
+   "id": "E07",
+   "title": "DIAG boundary SQLCODE 0 is not < 0, so it is reported as a warning (4)",
+   "cobol_lines": [
+    60,
+    61,
+    69,
+    158,
+    159,
+    163,
+    164,
+    166
+   ],
+   "kind": "call",
+   "set": {
+    "LS-FUNCTION": "DIAG",
+    "LS-PROGRAM-ID": "TESTPGM",
+    "LS-SQLCODE": "0",
+    "LS-SQLSTATE": "00000",
+    "LS-ERROR-TEXT": "",
+    "LS-ADDITIONAL-INFO": "",
+    "LS-RETURN-CODE": "99",
+    "LS-RETRY-FLAG": "X"
+   },
+   "expect": {
+    "outcome": "GOBACK",
+    "items": {
+     "LS-ERROR-TEXT": "DB2 warning condition",
+     "LS-RETURN-CODE": "4",
+     "LS-SQLCODE": "0",
+     "LS-RETRY-FLAG": "X"
+    }
+   }
+  },
+  {
+   "id": "E08",
+   "title": "LOG blocks at its first statement: INITIALIZE WS-ERRLOG-REC (the name is declared twice, at line 18 and by the REPLACING copy of DBTBLS)",
+   "cobol_lines": [
+    58,
+    59,
+    73
+   ],
+   "kind": "call",
+   "set": {
+    "LS-FUNCTION": "LOG ",
+    "LS-PROGRAM-ID": "TESTPGM",
+    "LS-SQLCODE": "0",
+    "LS-SQLSTATE": "00000",
+    "LS-ERROR-TEXT": "",
+    "LS-ADDITIONAL-INFO": "",
+    "LS-RETURN-CODE": "0",
+    "LS-RETRY-FLAG": "X"
+   },
+   "expect": {
+    "outcome": "BLOCKED AT src/programs/common/DB2ERR.cbl:73"
+   }
+  },
+  {
+   "id": "E09",
+   "title": "the 88 FUNC-LOG value is 'LOG ' with a trailing space; 'LOG' moved into X(4) is space padded and selects LOG",
+   "cobol_lines": [
+    41,
+    58,
+    59,
+    73
+   ],
+   "kind": "call",
+   "set": {
+    "LS-FUNCTION": "LOG",
+    "LS-PROGRAM-ID": "TESTPGM",
+    "LS-SQLCODE": "0",
+    "LS-SQLSTATE": "00000",
+    "LS-ERROR-TEXT": "",
+    "LS-ADDITIONAL-INFO": "",
+    "LS-RETURN-CODE": "0",
+    "LS-RETRY-FLAG": "X"
+   },
+   "expect": {
+    "outcome": "BLOCKED AT src/programs/common/DB2ERR.cbl:73"
+   }
+  },
+  {
+   "id": "E10",
+   "title": "RETR blocks at EXEC SQL SELECT from ERRLOG",
+   "cobol_lines": [
+    62,
+    63,
+    172
+   ],
+   "kind": "call",
+   "set": {
+    "LS-FUNCTION": "RETR",
+    "LS-PROGRAM-ID": "TESTPGM",
+    "LS-SQLCODE": "0",
+    "LS-SQLSTATE": "00000",
+    "LS-ERROR-TEXT": "",
+    "LS-ADDITIONAL-INFO": "",
+    "LS-RETURN-CODE": "0",
+    "LS-RETRY-FLAG": "X"
+   },
+   "expect": {
+    "outcome": "BLOCKED AT src/programs/common/DB2ERR.cbl:172"
+   }
+  },
+  {
+   "id": "E11",
+   "title": "an unknown function code takes WHEN OTHER: 9000-ERROR-ROUTINE CALLs ERRPROC (application program, not registered)",
+   "cobol_lines": [
+    64,
+    65,
+    66,
+    197,
+    198,
+    199
+   ],
+   "kind": "call",
+   "set": {
+    "LS-FUNCTION": "DIAX",
+    "LS-PROGRAM-ID": "TESTPGM",
+    "LS-SQLCODE": "0",
+    "LS-SQLSTATE": "00000",
+    "LS-ERROR-TEXT": "",
+    "LS-ADDITIONAL-INFO": "",
+    "LS-RETURN-CODE": "0",
+    "LS-RETRY-FLAG": "X"
+   },
+   "expect": {
+    "outcome": "BLOCKED RUNTIME-CALL-UNAVAILABLE"
+   }
+  }
+ ]
+}

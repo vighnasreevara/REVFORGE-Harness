@@ -1,0 +1,117 @@
+{
+ "program": "SECMGR",
+ "provenance": "Written 2026-11-02 by a scenario-author agent (F6 independent fixture design) from the COBOL source under references/udara-legacy-modernization-harness/src/ and its copybooks, plus only the 'gaps' array of pilot-result.json for gap line numbers. No generated Java, source map or test result was read or run.",
+ "scenarios": [
+  {
+   "id": "C01",
+   "title": "validate request: P100-VALIDATE-USER begins with EXEC CICS ASSIGN USERID",
+   "cobol_lines": [
+    42,
+    43,
+    44,
+    57
+   ],
+   "kind": "call",
+   "set": {
+    "SEC-REQUEST-TYPE": "V",
+    "SEC-USER-ID": "USER0001",
+    "SEC-RESOURCE-NAME": "INQONLN",
+    "SEC-ACCESS-TYPE": "READ",
+    "SEC-RESPONSE-CODE": "0",
+    "SEC-ERROR-INFO": ""
+   },
+   "expect": {
+    "outcome": "BLOCKED AT src/programs/online/SECMGR.cbl:57"
+   }
+  },
+  {
+   "id": "C02",
+   "title": "authorize request: P200-CHECK-AUTH begins with EXEC SQL SELECT COUNT(*)",
+   "cobol_lines": [
+    42,
+    46,
+    47,
+    79
+   ],
+   "kind": "call",
+   "set": {
+    "SEC-REQUEST-TYPE": "A",
+    "SEC-USER-ID": "USER0001",
+    "SEC-RESOURCE-NAME": "INQONLN",
+    "SEC-ACCESS-TYPE": "READ",
+    "SEC-RESPONSE-CODE": "0",
+    "SEC-ERROR-INFO": ""
+   },
+   "expect": {
+    "outcome": "BLOCKED AT src/programs/online/SECMGR.cbl:79"
+   }
+  },
+  {
+   "id": "C03",
+   "title": "audit request: MOVE FUNCTION CURRENT-DATE is defined, then EXEC CICS ASSIGN USERID/TERMID/TRANSID blocks",
+   "cobol_lines": [
+    42,
+    49,
+    50,
+    106,
+    108
+   ],
+   "kind": "call",
+   "set": {
+    "SEC-REQUEST-TYPE": "L",
+    "SEC-USER-ID": "USER0001",
+    "SEC-RESOURCE-NAME": "INQONLN",
+    "SEC-ACCESS-TYPE": "READ",
+    "SEC-RESPONSE-CODE": "0",
+    "SEC-ERROR-INFO": ""
+   },
+   "clock": "2026-03-04T05:06:07.08Z",
+   "expect": {
+    "outcome": "BLOCKED AT src/programs/online/SECMGR.cbl:108"
+   }
+  },
+  {
+   "id": "C04",
+   "title": "unknown request type: the EVALUATE has no WHEN OTHER, nothing is set, and control reaches EXEC CICS RETURN",
+   "cobol_lines": [
+    42,
+    52,
+    54
+   ],
+   "kind": "call",
+   "set": {
+    "SEC-REQUEST-TYPE": "X",
+    "SEC-USER-ID": "USER0001",
+    "SEC-RESOURCE-NAME": "INQONLN",
+    "SEC-ACCESS-TYPE": "READ",
+    "SEC-RESPONSE-CODE": "0",
+    "SEC-ERROR-INFO": ""
+   },
+   "expect": {
+    "outcome": "BLOCKED AT src/programs/online/SECMGR.cbl:54"
+   }
+  },
+  {
+   "id": "C05",
+   "title": "the request type is case-sensitive: lower-case 'v' matches none of the 88-levels and goes straight to EXEC CICS RETURN",
+   "cobol_lines": [
+    32,
+    42,
+    52,
+    54
+   ],
+   "kind": "call",
+   "set": {
+    "SEC-REQUEST-TYPE": "v",
+    "SEC-USER-ID": "USER0001",
+    "SEC-RESOURCE-NAME": "INQONLN",
+    "SEC-ACCESS-TYPE": "READ",
+    "SEC-RESPONSE-CODE": "0",
+    "SEC-ERROR-INFO": ""
+   },
+   "expect": {
+    "outcome": "BLOCKED AT src/programs/online/SECMGR.cbl:54"
+   }
+  }
+ ]
+}

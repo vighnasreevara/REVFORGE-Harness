@@ -1,0 +1,1356 @@
+{
+  "gate": "SOURCE_READINESS",
+  "subject": "DB2STAT",
+  "status": "FAIL",
+  "checks": [
+    {
+      "id": "source_available",
+      "ok": true,
+      "detail": "src/programs/common/DB2STAT.cbl sha256 082eb02647d2ccaeb6c085425e03f647bfd54a15018b05a0c25de4bb42efd00f; 81 statement(s) in 9 paragraph(s)"
+    },
+    {
+      "id": "complete_program",
+      "ok": true,
+      "detail": "every paragraph contains statements"
+    },
+    {
+      "id": "copybooks_resolved",
+      "ok": false,
+      "detail": "unresolved or circular includes: SQLCA@6"
+    },
+    {
+      "id": "requirements_and_data_mapping_delivered",
+      "ok": true,
+      "detail": "F1/F2 deliveries accepted for ERRHAND, DBPROC, SQLCA, DB2STAT, ERRPROC"
+    },
+    {
+      "id": "behaviour_classified",
+      "ok": true,
+      "detail": "6 behaviour(s): 0 VERIFIED_CANDIDATE, 6 PARTIAL, 0 GAP"
+    },
+    {
+      "id": "dependencies_identified",
+      "ok": false,
+      "detail": "closure UNRESOLVED for DB2STAT:0000-MAIN (line 80: STAMP is neither declared, a keyword, a paragraph nor the subject of a blocking decision (unknown dependency)); DB2STAT:1000-INITIALIZE (line 80: STAMP is neither declared, a keyword, a paragraph nor the subject of a blocking decision (unknown dependency)); DB2STAT:3000-TERMINATE (line 158: STAMP is neither declared, a keyword, a paragraph nor the subject of a blocking decision (unknown dependency))"
+    },
+    {
+      "id": "unsupported_documented",
+      "ok": false,
+      "detail": "non-verified behaviour without a gap: DB2STAT:9000-ERROR-ROUTINE"
+    },
+    {
+      "id": "unknowns_documented",
+      "ok": true,
+      "detail": "13 open decision(s) record the remaining questions (3 blocking for approval); none is resolved or assumed here"
+    }
+  ],
+  "note": "An engineering gate: it states that the source is understood well enough to convert, with every unknown documented. It is not a G2 approval and does not authorise generation.",
+  "behaviours": [
+    {
+      "behaviour_id": "DB2STAT:ENTRY-DISPATCH",
+      "kind": "dispatch",
+      "classification": "PARTIAL",
+      "lines": [
+        59,
+        70
+      ],
+      "inputs": [
+        "LS-FUNCTION"
+      ],
+      "outputs": [
+        "ERR-TEXT"
+      ],
+      "side_effects": [],
+      "unresolved": [],
+      "covered_by": [
+        "REQ-DB2STAT-001"
+      ]
+    },
+    {
+      "behaviour_id": "DB2STAT:1000-INITIALIZE",
+      "kind": "performed_range",
+      "classification": "PARTIAL",
+      "lines": [
+        77,
+        228
+      ],
+      "inputs": [
+        "ERR-MESSAGE",
+        "LS-PROGRAM-ID",
+        "WS-CURRENT-TIMESTAMP",
+        "WS-PROGRAM-ID"
+      ],
+      "outputs": [
+        "ERR-PROGRAM",
+        "ERR-TEXT",
+        "LS-RETURN-CODE",
+        "WS-PROGRAM-ID",
+        "WS-START-TIME",
+        "WS-START-TIMESTAMP",
+        "WS-STATS-RECORD"
+      ],
+      "side_effects": [
+        {
+          "line": 89,
+          "kind": "embedded_sql",
+          "operation": "DECLARE",
+          "table": null
+        },
+        {
+          "line": 112,
+          "kind": "embedded_sql",
+          "operation": "INSERT",
+          "table": "SESSION"
+        },
+        {
+          "line": 227,
+          "kind": "call",
+          "operation": "CALL",
+          "table": null
+        }
+      ],
+      "unresolved": [
+        "SQLCODE"
+      ],
+      "covered_by": [
+        "REQ-DB2STAT-001"
+      ]
+    },
+    {
+      "behaviour_id": "DB2STAT:2000-UPDATE-STATS",
+      "kind": "performed_range",
+      "classification": "PARTIAL",
+      "lines": [
+        131,
+        228
+      ],
+      "inputs": [
+        "ERR-MESSAGE",
+        "LS-COMMITS",
+        "LS-ROLLBACKS",
+        "LS-ROWS-DELT",
+        "LS-ROWS-INSRT",
+        "LS-ROWS-READ",
+        "LS-ROWS-UPDT",
+        "WS-COMMITS",
+        "WS-PROGRAM-ID",
+        "WS-ROLLBACKS",
+        "WS-ROWS-DELETED",
+        "WS-ROWS-INSERTED",
+        "WS-ROWS-READ",
+        "WS-ROWS-UPDATED"
+      ],
+      "outputs": [
+        "ERR-PROGRAM",
+        "ERR-TEXT",
+        "LS-RETURN-CODE",
+        "WS-COMMITS",
+        "WS-ROLLBACKS",
+        "WS-ROWS-DELETED",
+        "WS-ROWS-INSERTED",
+        "WS-ROWS-READ",
+        "WS-ROWS-UPDATED"
+      ],
+      "side_effects": [
+        {
+          "line": 138,
+          "kind": "embedded_sql",
+          "operation": "UPDATE",
+          "table": "SESSION"
+        },
+        {
+          "line": 227,
+          "kind": "call",
+          "operation": "CALL",
+          "table": null
+        }
+      ],
+      "unresolved": [
+        "SQLCODE"
+      ],
+      "covered_by": [
+        "REQ-DB2STAT-001"
+      ]
+    },
+    {
+      "behaviour_id": "DB2STAT:3000-TERMINATE",
+      "kind": "performed_range",
+      "classification": "PARTIAL",
+      "lines": [
+        158,
+        228
+      ],
+      "inputs": [
+        "ERR-MESSAGE",
+        "WS-COMMITS",
+        "WS-CPU-TIME",
+        "WS-CURRENT-TIMESTAMP",
+        "WS-ELAPSED-TIME",
+        "WS-END-TIME",
+        "WS-FORMATTED-TIME",
+        "WS-PROGRAM-ID",
+        "WS-ROLLBACKS",
+        "WS-ROWS-DELETED",
+        "WS-ROWS-INSERTED",
+        "WS-ROWS-READ",
+        "WS-ROWS-UPDATED",
+        "WS-START-TIMESTAMP"
+      ],
+      "outputs": [
+        "ERR-PROGRAM",
+        "ERR-TEXT",
+        "LS-RETURN-CODE",
+        "WS-CPU-TIME",
+        "WS-END-TIME",
+        "WS-FORMATTED-TIME",
+        "WS-STATS-RECORD"
+      ],
+      "side_effects": [
+        {
+          "line": 163,
+          "kind": "embedded_sql",
+          "operation": "UPDATE",
+          "table": "SESSION"
+        },
+        {
+          "line": 190,
+          "kind": "embedded_sql",
+          "operation": "SELECT",
+          "table": "SESSION"
+        },
+        {
+          "line": 227,
+          "kind": "call",
+          "operation": "CALL",
+          "table": null
+        }
+      ],
+      "unresolved": [
+        "SQLCODE",
+        "NUMVAL"
+      ],
+      "covered_by": [
+        "REQ-DB2STAT-001"
+      ]
+    },
+    {
+      "behaviour_id": "DB2STAT:4000-DISPLAY-STATS",
+      "kind": "performed_range",
+      "classification": "PARTIAL",
+      "lines": [
+        190,
+        228
+      ],
+      "inputs": [
+        "ERR-MESSAGE",
+        "WS-COMMITS",
+        "WS-CPU-TIME",
+        "WS-ELAPSED-TIME",
+        "WS-FORMATTED-TIME",
+        "WS-PROGRAM-ID",
+        "WS-ROLLBACKS",
+        "WS-ROWS-DELETED",
+        "WS-ROWS-INSERTED",
+        "WS-ROWS-READ",
+        "WS-ROWS-UPDATED"
+      ],
+      "outputs": [
+        "ERR-PROGRAM",
+        "ERR-TEXT",
+        "LS-RETURN-CODE",
+        "WS-FORMATTED-TIME",
+        "WS-STATS-RECORD"
+      ],
+      "side_effects": [
+        {
+          "line": 190,
+          "kind": "embedded_sql",
+          "operation": "SELECT",
+          "table": "SESSION"
+        },
+        {
+          "line": 227,
+          "kind": "call",
+          "operation": "CALL",
+          "table": null
+        }
+      ],
+      "unresolved": [
+        "SQLCODE"
+      ],
+      "covered_by": [
+        "REQ-DB2STAT-001"
+      ]
+    },
+    {
+      "behaviour_id": "DB2STAT:9000-ERROR-ROUTINE",
+      "kind": "performed_range",
+      "classification": "PARTIAL",
+      "lines": [
+        225,
+        228
+      ],
+      "inputs": [
+        "ERR-MESSAGE"
+      ],
+      "outputs": [
+        "ERR-PROGRAM",
+        "LS-RETURN-CODE"
+      ],
+      "side_effects": [
+        {
+          "line": 227,
+          "kind": "call",
+          "operation": "CALL",
+          "table": null
+        }
+      ],
+      "unresolved": [],
+      "covered_by": [
+        "REQ-DB2STAT-001",
+        "RT-DB2STAT-001",
+        "RT-DB2STAT-002",
+        "RT-DB2STAT-003"
+      ]
+    }
+  ],
+  "gaps": [
+    {
+      "gap_id": "GAP-DB2STAT-1000-INITIALIZE-SQLCODE",
+      "kind": "UNDECLARED_NAME_SEMANTICS",
+      "behaviour_id": "DB2STAT:1000-INITIALIZE",
+      "source": {
+        "path": "src/programs/common/DB2STAT.cbl",
+        "sha256": "082eb02647d2ccaeb6c085425e03f647bfd54a15018b05a0c25de4bb42efd00f",
+        "lines": [
+          105,
+          106,
+          107,
+          122,
+          123,
+          125,
+          126
+        ],
+        "statements": [
+          {
+            "line": 105,
+            "text": "IF SQLCODE NOT = 0 AND SQLCODE NOT = -601"
+          },
+          {
+            "line": 106,
+            "text": "MOVE 'ERROR CREATING STATS TABLE' TO ERR-TEXT"
+          },
+          {
+            "line": 107,
+            "text": "PERFORM 9000-ERROR-ROUTINE"
+          },
+          {
+            "line": 122,
+            "text": "IF SQLCODE = 0"
+          },
+          {
+            "line": 123,
+            "text": "MOVE 0 TO LS-RETURN-CODE"
+          },
+          {
+            "line": 125,
+            "text": "MOVE 'ERROR INITIALIZING STATS' TO ERR-TEXT"
+          },
+          {
+            "line": 126,
+            "text": "PERFORM 9000-ERROR-ROUTINE"
+          }
+        ]
+      },
+      "missing_fact": "SQLCODE is used but declared nowhere in the repository; its layout and value meanings are the subject of DR-F2-0011-001, DR-DB2ERR-001 (missing: the real SQLCA member (the repository copy includes itself); a declaration of SQLCODE; a declaration of SQLERRMC)",
+      "why_unsafe": "the outputs of these statements (ERR-TEXT, LS-RETURN-CODE) depend on a value whose meaning is not established; any Java mapping would invent it",
+      "affected_requirements": [
+        "REQ-DB2STAT-001"
+      ],
+      "affected_java_component": "outcome mapping of behaviour 1000-INITIALIZE (behind a port whose only implementation throws until the gap is resolved)",
+      "required_action": [
+        "DR-F2-0011-001: a signed resolution by technical_authority",
+        "DR-DB2ERR-001: a signed resolution by technical_authority"
+      ],
+      "validation_evidence": "the real definition of SQLCODE for the target runtime and a captured legacy run showing each outcome branch",
+      "blocks_execution_path": "request FUNC-INIT ('INIT') -> 1000-INITIALIZE: statements 105, 106, 107, 122, 123, 125, 126",
+      "blocking": true,
+      "status": "OPEN"
+    },
+    {
+      "gap_id": "GAP-DB2STAT-1000-INITIALIZE-SQL-DECLARE-UNKNOWN",
+      "kind": "EXTERNAL_DATABASE_RUNTIME",
+      "behaviour_id": "DB2STAT:1000-INITIALIZE",
+      "source": {
+        "path": "src/programs/common/DB2STAT.cbl",
+        "sha256": "082eb02647d2ccaeb6c085425e03f647bfd54a15018b05a0c25de4bb42efd00f",
+        "lines": [
+          89,
+          103
+        ],
+        "statements": [
+          {
+            "line": 89,
+            "text": "EXEC SQL DECLARE GLOBAL TEMPORARY TABLE SESSION.DBSTATS (PROGRAM_ID      CHAR(8)      NOT NULL, START_TIME     TIMESTAMP    NOT NULL, END_TIME      TIMESTAMP, ROWS_READ     INTEGER      NOT NULL, ROWS_INSERTED INTEGER      NOT NULL, ROWS_UPDATED  INTEGER      NOT NULL, ROWS_DELETED  INTEGER      NOT NULL, COMMITS       INTEGER      NOT NULL, ROLLBACKS     INTEGER      NOT NULL, CPU_TIME      DECIMAL(11,2), ELAPSED_TIME  DECIMAL(11,2)) ON COMMIT PRESERVE ROWS END-EXEC"
+          }
+        ]
+      },
+      "missing_fact": "the runtime behaviour of embedded SQL DECLARE on null: database product and version, host-variable conversions, NULL and no-row results, constraint violations and the status they report",
+      "why_unsafe": "the result and every status it produces come from an external database the repository does not describe; a Java implementation would have to assume them",
+      "affected_requirements": [
+        "REQ-DB2STAT-001"
+      ],
+      "affected_java_component": "database port for DECLARE null (interface only; no implementation until specified)",
+      "required_action": [
+        "an approved specification of the database interaction (technical authority), recorded as an ADR at G3"
+      ],
+      "validation_evidence": "a captured run against the real (or an approved equivalent) database for each outcome, including errors",
+      "blocks_execution_path": "request FUNC-INIT ('INIT') -> 1000-INITIALIZE: statement 89",
+      "blocking": true,
+      "status": "OPEN"
+    },
+    {
+      "gap_id": "GAP-DB2STAT-1000-INITIALIZE-SQL-INSERT-SESSION",
+      "kind": "EXTERNAL_DATABASE_RUNTIME",
+      "behaviour_id": "DB2STAT:1000-INITIALIZE",
+      "source": {
+        "path": "src/programs/common/DB2STAT.cbl",
+        "sha256": "082eb02647d2ccaeb6c085425e03f647bfd54a15018b05a0c25de4bb42efd00f",
+        "lines": [
+          112,
+          120
+        ],
+        "statements": [
+          {
+            "line": 112,
+            "text": "EXEC SQL INSERT INTO SESSION.DBSTATS (PROGRAM_ID, START_TIME, ROWS_READ, ROWS_INSERTED, ROWS_UPDATED, ROWS_DELETED, COMMITS, ROLLBACKS) VALUES (:WS-PROGRAM-ID, CURRENT TIMESTAMP, 0, 0, 0, 0, 0, 0) END-EXEC"
+          }
+        ]
+      },
+      "missing_fact": "the runtime behaviour of embedded SQL INSERT on SESSION: database product and version, host-variable conversions, NULL and no-row results, constraint violations and the status they report",
+      "why_unsafe": "the result and every status it produces come from an external database the repository does not describe; a Java implementation would have to assume them",
+      "affected_requirements": [
+        "REQ-DB2STAT-001"
+      ],
+      "affected_java_component": "database port for INSERT SESSION (interface only; no implementation until specified)",
+      "required_action": [
+        "an approved specification of the database interaction (technical authority), recorded as an ADR at G3"
+      ],
+      "validation_evidence": "a captured run against the real (or an approved equivalent) database for each outcome, including errors",
+      "blocks_execution_path": "request FUNC-INIT ('INIT') -> 1000-INITIALIZE: statement 112",
+      "blocking": true,
+      "status": "OPEN"
+    },
+    {
+      "gap_id": "GAP-DB2STAT-2000-UPDATE-STATS-SQLCODE",
+      "kind": "UNDECLARED_NAME_SEMANTICS",
+      "behaviour_id": "DB2STAT:2000-UPDATE-STATS",
+      "source": {
+        "path": "src/programs/common/DB2STAT.cbl",
+        "sha256": "082eb02647d2ccaeb6c085425e03f647bfd54a15018b05a0c25de4bb42efd00f",
+        "lines": [
+          149,
+          150,
+          152,
+          153
+        ],
+        "statements": [
+          {
+            "line": 149,
+            "text": "IF SQLCODE = 0"
+          },
+          {
+            "line": 150,
+            "text": "MOVE 0 TO LS-RETURN-CODE"
+          },
+          {
+            "line": 152,
+            "text": "MOVE 'ERROR UPDATING STATS' TO ERR-TEXT"
+          },
+          {
+            "line": 153,
+            "text": "PERFORM 9000-ERROR-ROUTINE"
+          }
+        ]
+      },
+      "missing_fact": "SQLCODE is used but declared nowhere in the repository; its layout and value meanings are the subject of DR-F2-0011-001, DR-DB2ERR-001 (missing: the real SQLCA member (the repository copy includes itself); a declaration of SQLCODE; a declaration of SQLERRMC)",
+      "why_unsafe": "the outputs of these statements (LS-RETURN-CODE, ERR-TEXT) depend on a value whose meaning is not established; any Java mapping would invent it",
+      "affected_requirements": [
+        "REQ-DB2STAT-001"
+      ],
+      "affected_java_component": "outcome mapping of behaviour 2000-UPDATE-STATS (behind a port whose only implementation throws until the gap is resolved)",
+      "required_action": [
+        "DR-F2-0011-001: a signed resolution by technical_authority",
+        "DR-DB2ERR-001: a signed resolution by technical_authority"
+      ],
+      "validation_evidence": "the real definition of SQLCODE for the target runtime and a captured legacy run showing each outcome branch",
+      "blocks_execution_path": "request FUNC-UPDT ('UPDT') -> 2000-UPDATE-STATS: statements 149, 150, 152, 153",
+      "blocking": true,
+      "status": "OPEN"
+    },
+    {
+      "gap_id": "GAP-DB2STAT-2000-UPDATE-STATS-SQL-UPDATE-SESSION",
+      "kind": "EXTERNAL_DATABASE_RUNTIME",
+      "behaviour_id": "DB2STAT:2000-UPDATE-STATS",
+      "source": {
+        "path": "src/programs/common/DB2STAT.cbl",
+        "sha256": "082eb02647d2ccaeb6c085425e03f647bfd54a15018b05a0c25de4bb42efd00f",
+        "lines": [
+          138,
+          147
+        ],
+        "statements": [
+          {
+            "line": 138,
+            "text": "EXEC SQL UPDATE SESSION.DBSTATS SET ROWS_READ = :WS-ROWS-READ, ROWS_INSERTED = :WS-ROWS-INSERTED, ROWS_UPDATED = :WS-ROWS-UPDATED, ROWS_DELETED = :WS-ROWS-DELETED, COMMITS = :WS-COMMITS, ROLLBACKS = :WS-ROLLBACKS WHERE PROGRAM_ID = :WS-PROGRAM-ID END-EXEC"
+          }
+        ]
+      },
+      "missing_fact": "the runtime behaviour of embedded SQL UPDATE on SESSION: database product and version, host-variable conversions, NULL and no-row results, constraint violations and the status they report",
+      "why_unsafe": "the result and every status it produces come from an external database the repository does not describe; a Java implementation would have to assume them",
+      "affected_requirements": [
+        "REQ-DB2STAT-001"
+      ],
+      "affected_java_component": "database port for UPDATE SESSION (interface only; no implementation until specified)",
+      "required_action": [
+        "an approved specification of the database interaction (technical authority), recorded as an ADR at G3"
+      ],
+      "validation_evidence": "a captured run against the real (or an approved equivalent) database for each outcome, including errors",
+      "blocks_execution_path": "request FUNC-UPDT ('UPDT') -> 2000-UPDATE-STATS: statement 138",
+      "blocking": true,
+      "status": "OPEN"
+    },
+    {
+      "gap_id": "GAP-DB2STAT-2000-UPDATE-STATS-TRUNC-WS-ROWS-READ",
+      "kind": "COMPILER_OPTION_DEPENDENT",
+      "behaviour_id": "DB2STAT:2000-UPDATE-STATS",
+      "source": {
+        "path": "src/programs/common/DB2STAT.cbl",
+        "sha256": "082eb02647d2ccaeb6c085425e03f647bfd54a15018b05a0c25de4bb42efd00f",
+        "lines": [
+          131
+        ],
+        "statements": [
+          {
+            "line": 131,
+            "text": "MOVE LS-ROWS-READ  TO WS-ROWS-READ"
+          }
+        ]
+      },
+      "missing_fact": "the compiler TRUNC option used for DB2STAT (binary item WS-ROWS-READ S9(9))",
+      "why_unsafe": "values beyond the 9 digits of PIC S9(9) behave according to the compiler TRUNC option, which the repository does not record",
+      "affected_requirements": [
+        "REQ-DB2STAT-001"
+      ],
+      "affected_java_component": "input validation of behaviour 2000-UPDATE-STATS: values outside the PIC range are rejected, not truncated, until the option is known",
+      "required_action": [
+        "the build/compile options of the legacy program (technical authority)"
+      ],
+      "validation_evidence": "the compile listing or JCL showing TRUNC(STD|OPT|BIN), or a captured run with an out-of-range value",
+      "blocks_execution_path": "only inputs outside the PIC range of WS-ROWS-READ",
+      "blocking": false,
+      "status": "OPEN"
+    },
+    {
+      "gap_id": "GAP-DB2STAT-2000-UPDATE-STATS-TRUNC-WS-ROWS-INSERTED",
+      "kind": "COMPILER_OPTION_DEPENDENT",
+      "behaviour_id": "DB2STAT:2000-UPDATE-STATS",
+      "source": {
+        "path": "src/programs/common/DB2STAT.cbl",
+        "sha256": "082eb02647d2ccaeb6c085425e03f647bfd54a15018b05a0c25de4bb42efd00f",
+        "lines": [
+          132
+        ],
+        "statements": [
+          {
+            "line": 132,
+            "text": "MOVE LS-ROWS-INSRT TO WS-ROWS-INSERTED"
+          }
+        ]
+      },
+      "missing_fact": "the compiler TRUNC option used for DB2STAT (binary item WS-ROWS-INSERTED S9(9))",
+      "why_unsafe": "values beyond the 9 digits of PIC S9(9) behave according to the compiler TRUNC option, which the repository does not record",
+      "affected_requirements": [
+        "REQ-DB2STAT-001"
+      ],
+      "affected_java_component": "input validation of behaviour 2000-UPDATE-STATS: values outside the PIC range are rejected, not truncated, until the option is known",
+      "required_action": [
+        "the build/compile options of the legacy program (technical authority)"
+      ],
+      "validation_evidence": "the compile listing or JCL showing TRUNC(STD|OPT|BIN), or a captured run with an out-of-range value",
+      "blocks_execution_path": "only inputs outside the PIC range of WS-ROWS-INSERTED",
+      "blocking": false,
+      "status": "OPEN"
+    },
+    {
+      "gap_id": "GAP-DB2STAT-2000-UPDATE-STATS-TRUNC-WS-ROWS-UPDATED",
+      "kind": "COMPILER_OPTION_DEPENDENT",
+      "behaviour_id": "DB2STAT:2000-UPDATE-STATS",
+      "source": {
+        "path": "src/programs/common/DB2STAT.cbl",
+        "sha256": "082eb02647d2ccaeb6c085425e03f647bfd54a15018b05a0c25de4bb42efd00f",
+        "lines": [
+          133
+        ],
+        "statements": [
+          {
+            "line": 133,
+            "text": "MOVE LS-ROWS-UPDT  TO WS-ROWS-UPDATED"
+          }
+        ]
+      },
+      "missing_fact": "the compiler TRUNC option used for DB2STAT (binary item WS-ROWS-UPDATED S9(9))",
+      "why_unsafe": "values beyond the 9 digits of PIC S9(9) behave according to the compiler TRUNC option, which the repository does not record",
+      "affected_requirements": [
+        "REQ-DB2STAT-001"
+      ],
+      "affected_java_component": "input validation of behaviour 2000-UPDATE-STATS: values outside the PIC range are rejected, not truncated, until the option is known",
+      "required_action": [
+        "the build/compile options of the legacy program (technical authority)"
+      ],
+      "validation_evidence": "the compile listing or JCL showing TRUNC(STD|OPT|BIN), or a captured run with an out-of-range value",
+      "blocks_execution_path": "only inputs outside the PIC range of WS-ROWS-UPDATED",
+      "blocking": false,
+      "status": "OPEN"
+    },
+    {
+      "gap_id": "GAP-DB2STAT-2000-UPDATE-STATS-TRUNC-WS-ROWS-DELETED",
+      "kind": "COMPILER_OPTION_DEPENDENT",
+      "behaviour_id": "DB2STAT:2000-UPDATE-STATS",
+      "source": {
+        "path": "src/programs/common/DB2STAT.cbl",
+        "sha256": "082eb02647d2ccaeb6c085425e03f647bfd54a15018b05a0c25de4bb42efd00f",
+        "lines": [
+          134
+        ],
+        "statements": [
+          {
+            "line": 134,
+            "text": "MOVE LS-ROWS-DELT  TO WS-ROWS-DELETED"
+          }
+        ]
+      },
+      "missing_fact": "the compiler TRUNC option used for DB2STAT (binary item WS-ROWS-DELETED S9(9))",
+      "why_unsafe": "values beyond the 9 digits of PIC S9(9) behave according to the compiler TRUNC option, which the repository does not record",
+      "affected_requirements": [
+        "REQ-DB2STAT-001"
+      ],
+      "affected_java_component": "input validation of behaviour 2000-UPDATE-STATS: values outside the PIC range are rejected, not truncated, until the option is known",
+      "required_action": [
+        "the build/compile options of the legacy program (technical authority)"
+      ],
+      "validation_evidence": "the compile listing or JCL showing TRUNC(STD|OPT|BIN), or a captured run with an out-of-range value",
+      "blocks_execution_path": "only inputs outside the PIC range of WS-ROWS-DELETED",
+      "blocking": false,
+      "status": "OPEN"
+    },
+    {
+      "gap_id": "GAP-DB2STAT-2000-UPDATE-STATS-TRUNC-WS-COMMITS",
+      "kind": "COMPILER_OPTION_DEPENDENT",
+      "behaviour_id": "DB2STAT:2000-UPDATE-STATS",
+      "source": {
+        "path": "src/programs/common/DB2STAT.cbl",
+        "sha256": "082eb02647d2ccaeb6c085425e03f647bfd54a15018b05a0c25de4bb42efd00f",
+        "lines": [
+          135
+        ],
+        "statements": [
+          {
+            "line": 135,
+            "text": "MOVE LS-COMMITS    TO WS-COMMITS"
+          }
+        ]
+      },
+      "missing_fact": "the compiler TRUNC option used for DB2STAT (binary item WS-COMMITS S9(9))",
+      "why_unsafe": "values beyond the 9 digits of PIC S9(9) behave according to the compiler TRUNC option, which the repository does not record",
+      "affected_requirements": [
+        "REQ-DB2STAT-001"
+      ],
+      "affected_java_component": "input validation of behaviour 2000-UPDATE-STATS: values outside the PIC range are rejected, not truncated, until the option is known",
+      "required_action": [
+        "the build/compile options of the legacy program (technical authority)"
+      ],
+      "validation_evidence": "the compile listing or JCL showing TRUNC(STD|OPT|BIN), or a captured run with an out-of-range value",
+      "blocks_execution_path": "only inputs outside the PIC range of WS-COMMITS",
+      "blocking": false,
+      "status": "OPEN"
+    },
+    {
+      "gap_id": "GAP-DB2STAT-2000-UPDATE-STATS-TRUNC-WS-ROLLBACKS",
+      "kind": "COMPILER_OPTION_DEPENDENT",
+      "behaviour_id": "DB2STAT:2000-UPDATE-STATS",
+      "source": {
+        "path": "src/programs/common/DB2STAT.cbl",
+        "sha256": "082eb02647d2ccaeb6c085425e03f647bfd54a15018b05a0c25de4bb42efd00f",
+        "lines": [
+          136
+        ],
+        "statements": [
+          {
+            "line": 136,
+            "text": "MOVE LS-ROLLBACKS  TO WS-ROLLBACKS"
+          }
+        ]
+      },
+      "missing_fact": "the compiler TRUNC option used for DB2STAT (binary item WS-ROLLBACKS S9(9))",
+      "why_unsafe": "values beyond the 9 digits of PIC S9(9) behave according to the compiler TRUNC option, which the repository does not record",
+      "affected_requirements": [
+        "REQ-DB2STAT-001"
+      ],
+      "affected_java_component": "input validation of behaviour 2000-UPDATE-STATS: values outside the PIC range are rejected, not truncated, until the option is known",
+      "required_action": [
+        "the build/compile options of the legacy program (technical authority)"
+      ],
+      "validation_evidence": "the compile listing or JCL showing TRUNC(STD|OPT|BIN), or a captured run with an out-of-range value",
+      "blocks_execution_path": "only inputs outside the PIC range of WS-ROLLBACKS",
+      "blocking": false,
+      "status": "OPEN"
+    },
+    {
+      "gap_id": "GAP-DB2STAT-3000-TERMINATE-SQLCODE",
+      "kind": "UNDECLARED_NAME_SEMANTICS",
+      "behaviour_id": "DB2STAT:3000-TERMINATE",
+      "source": {
+        "path": "src/programs/common/DB2STAT.cbl",
+        "sha256": "082eb02647d2ccaeb6c085425e03f647bfd54a15018b05a0c25de4bb42efd00f",
+        "lines": [
+          171,
+          172,
+          173,
+          175,
+          176,
+          200,
+          201,
+          202,
+          203,
+          204,
+          205,
+          206,
+          207,
+          209,
+          210,
+          213,
+          214,
+          217,
+          219,
+          220
+        ],
+        "statements": [
+          {
+            "line": 171,
+            "text": "IF SQLCODE = 0"
+          },
+          {
+            "line": 172,
+            "text": "MOVE 0 TO LS-RETURN-CODE"
+          },
+          {
+            "line": 173,
+            "text": "PERFORM 4000-DISPLAY-STATS"
+          },
+          {
+            "line": 175,
+            "text": "MOVE 'ERROR FINALIZING STATS' TO ERR-TEXT"
+          },
+          {
+            "line": 176,
+            "text": "PERFORM 9000-ERROR-ROUTINE"
+          },
+          {
+            "line": 200,
+            "text": "IF SQLCODE = 0"
+          },
+          {
+            "line": 201,
+            "text": "DISPLAY 'DB2 STATISTICS FOR ' WS-PROGRAM-ID"
+          },
+          {
+            "line": 202,
+            "text": "DISPLAY '  RECORDS READ:    ' WS-ROWS-READ"
+          },
+          {
+            "line": 203,
+            "text": "DISPLAY '  RECORDS INSERTED: ' WS-ROWS-INSERTED"
+          },
+          {
+            "line": 204,
+            "text": "DISPLAY '  RECORDS UPDATED:  ' WS-ROWS-UPDATED"
+          },
+          {
+            "line": 205,
+            "text": "DISPLAY '  RECORDS DELETED:  ' WS-ROWS-DELETED"
+          },
+          {
+            "line": 206,
+            "text": "DISPLAY '  COMMITS:          ' WS-COMMITS"
+          },
+          {
+            "line": 207,
+            "text": "DISPLAY '  ROLLBACKS:        ' WS-ROLLBACKS"
+          },
+          {
+            "line": 209,
+            "text": "MOVE WS-CPU-TIME TO WS-FORMATTED-TIME"
+          },
+          {
+            "line": 210,
+            "text": "DISPLAY '  CPU TIME:         ' WS-FORMATTED-TIME ' SECONDS'"
+          },
+          {
+            "line": 213,
+            "text": "MOVE WS-ELAPSED-TIME TO WS-FORMATTED-TIME"
+          },
+          {
+            "line": 214,
+            "text": "DISPLAY '  ELAPSED TIME:     ' WS-FORMATTED-TIME ' SECONDS'"
+          },
+          {
+            "line": 217,
+            "text": "MOVE 0 TO LS-RETURN-CODE"
+          },
+          {
+            "line": 219,
+            "text": "MOVE 'ERROR RETRIEVING STATS' TO ERR-TEXT"
+          },
+          {
+            "line": 220,
+            "text": "PERFORM 9000-ERROR-ROUTINE"
+          }
+        ]
+      },
+      "missing_fact": "SQLCODE is used but declared nowhere in the repository; its layout and value meanings are the subject of DR-F2-0011-001, DR-DB2ERR-001 (missing: the real SQLCA member (the repository copy includes itself); a declaration of SQLCODE; a declaration of SQLERRMC)",
+      "why_unsafe": "the outputs of these statements (LS-RETURN-CODE, ERR-TEXT, WS-FORMATTED-TIME) depend on a value whose meaning is not established; any Java mapping would invent it",
+      "affected_requirements": [
+        "REQ-DB2STAT-001"
+      ],
+      "affected_java_component": "outcome mapping of behaviour 3000-TERMINATE (behind a port whose only implementation throws until the gap is resolved)",
+      "required_action": [
+        "DR-F2-0011-001: a signed resolution by technical_authority",
+        "DR-DB2ERR-001: a signed resolution by technical_authority"
+      ],
+      "validation_evidence": "the real definition of SQLCODE for the target runtime and a captured legacy run showing each outcome branch",
+      "blocks_execution_path": "request FUNC-TERM ('TERM') -> 3000-TERMINATE: statements 171, 172, 173, 175, 176, 200, 201, 202, 203, 204, 205, 206, 207, 209, 210, 213, 214, 217, 219, 220",
+      "blocking": true,
+      "status": "OPEN"
+    },
+    {
+      "gap_id": "GAP-DB2STAT-3000-TERMINATE-NUMVAL",
+      "kind": "UNDECLARED_NAME_SEMANTICS",
+      "behaviour_id": "DB2STAT:3000-TERMINATE",
+      "source": {
+        "path": "src/programs/common/DB2STAT.cbl",
+        "sha256": "082eb02647d2ccaeb6c085425e03f647bfd54a15018b05a0c25de4bb42efd00f",
+        "lines": [
+          181
+        ],
+        "statements": [
+          {
+            "line": 181,
+            "text": "COMPUTE WS-ELAPSED-TIME = FUNCTION NUMVAL(WS-END-TIME(1:15)) - NUMVAL(WS-START-TIMESTAMP(1:15))"
+          }
+        ]
+      },
+      "missing_fact": "NUMVAL is used but declared nowhere in the repository; its layout and value meanings are the subject of DR-DB2STAT-001 (missing: a declaration of FUNCTION; a declaration of NUMVAL)",
+      "why_unsafe": "the outputs of these statements (control flow) depend on a value whose meaning is not established; any Java mapping would invent it",
+      "affected_requirements": [
+        "REQ-DB2STAT-001"
+      ],
+      "affected_java_component": "outcome mapping of behaviour 3000-TERMINATE (behind a port whose only implementation throws until the gap is resolved)",
+      "required_action": [
+        "DR-DB2STAT-001: a signed resolution by business_sme"
+      ],
+      "validation_evidence": "the real definition of NUMVAL for the target runtime and a captured legacy run showing each outcome branch",
+      "blocks_execution_path": "request FUNC-TERM ('TERM') -> 3000-TERMINATE: statements 181",
+      "blocking": true,
+      "status": "OPEN"
+    },
+    {
+      "gap_id": "GAP-DB2STAT-3000-TERMINATE-SQL-UPDATE-SESSION",
+      "kind": "EXTERNAL_DATABASE_RUNTIME",
+      "behaviour_id": "DB2STAT:3000-TERMINATE",
+      "source": {
+        "path": "src/programs/common/DB2STAT.cbl",
+        "sha256": "082eb02647d2ccaeb6c085425e03f647bfd54a15018b05a0c25de4bb42efd00f",
+        "lines": [
+          163,
+          169
+        ],
+        "statements": [
+          {
+            "line": 163,
+            "text": "EXEC SQL UPDATE SESSION.DBSTATS SET END_TIME = :WS-END-TIME, CPU_TIME = :WS-CPU-TIME, ELAPSED_TIME = :WS-ELAPSED-TIME WHERE PROGRAM_ID = :WS-PROGRAM-ID END-EXEC"
+          }
+        ]
+      },
+      "missing_fact": "the runtime behaviour of embedded SQL UPDATE on SESSION: database product and version, host-variable conversions, NULL and no-row results, constraint violations and the status they report",
+      "why_unsafe": "the result and every status it produces come from an external database the repository does not describe; a Java implementation would have to assume them",
+      "affected_requirements": [
+        "REQ-DB2STAT-001"
+      ],
+      "affected_java_component": "database port for UPDATE SESSION (interface only; no implementation until specified)",
+      "required_action": [
+        "an approved specification of the database interaction (technical authority), recorded as an ADR at G3"
+      ],
+      "validation_evidence": "a captured run against the real (or an approved equivalent) database for each outcome, including errors",
+      "blocks_execution_path": "request FUNC-TERM ('TERM') -> 3000-TERMINATE: statement 163",
+      "blocking": true,
+      "status": "OPEN"
+    },
+    {
+      "gap_id": "GAP-DB2STAT-3000-TERMINATE-SQL-SELECT-SESSION",
+      "kind": "EXTERNAL_DATABASE_RUNTIME",
+      "behaviour_id": "DB2STAT:3000-TERMINATE",
+      "source": {
+        "path": "src/programs/common/DB2STAT.cbl",
+        "sha256": "082eb02647d2ccaeb6c085425e03f647bfd54a15018b05a0c25de4bb42efd00f",
+        "lines": [
+          190,
+          198
+        ],
+        "statements": [
+          {
+            "line": 190,
+            "text": "EXEC SQL SELECT ROWS_READ, ROWS_INSERTED, ROWS_UPDATED, ROWS_DELETED, COMMITS, ROLLBACKS, CPU_TIME, ELAPSED_TIME INTO :WS-STATS-RECORD FROM SESSION.DBSTATS WHERE PROGRAM_ID = :WS-PROGRAM-ID END-EXEC"
+          }
+        ]
+      },
+      "missing_fact": "the runtime behaviour of embedded SQL SELECT on SESSION: database product and version, host-variable conversions, NULL and no-row results, constraint violations and the status they report",
+      "why_unsafe": "the result and every status it produces come from an external database the repository does not describe; a Java implementation would have to assume them",
+      "affected_requirements": [
+        "REQ-DB2STAT-001"
+      ],
+      "affected_java_component": "database port for SELECT SESSION (interface only; no implementation until specified)",
+      "required_action": [
+        "an approved specification of the database interaction (technical authority), recorded as an ADR at G3"
+      ],
+      "validation_evidence": "a captured run against the real (or an approved equivalent) database for each outcome, including errors",
+      "blocks_execution_path": "request FUNC-TERM ('TERM') -> 3000-TERMINATE: statement 190",
+      "blocking": true,
+      "status": "OPEN"
+    },
+    {
+      "gap_id": "GAP-DB2STAT-4000-DISPLAY-STATS-SQLCODE",
+      "kind": "UNDECLARED_NAME_SEMANTICS",
+      "behaviour_id": "DB2STAT:4000-DISPLAY-STATS",
+      "source": {
+        "path": "src/programs/common/DB2STAT.cbl",
+        "sha256": "082eb02647d2ccaeb6c085425e03f647bfd54a15018b05a0c25de4bb42efd00f",
+        "lines": [
+          200,
+          201,
+          202,
+          203,
+          204,
+          205,
+          206,
+          207,
+          209,
+          210,
+          213,
+          214,
+          217,
+          219,
+          220
+        ],
+        "statements": [
+          {
+            "line": 200,
+            "text": "IF SQLCODE = 0"
+          },
+          {
+            "line": 201,
+            "text": "DISPLAY 'DB2 STATISTICS FOR ' WS-PROGRAM-ID"
+          },
+          {
+            "line": 202,
+            "text": "DISPLAY '  RECORDS READ:    ' WS-ROWS-READ"
+          },
+          {
+            "line": 203,
+            "text": "DISPLAY '  RECORDS INSERTED: ' WS-ROWS-INSERTED"
+          },
+          {
+            "line": 204,
+            "text": "DISPLAY '  RECORDS UPDATED:  ' WS-ROWS-UPDATED"
+          },
+          {
+            "line": 205,
+            "text": "DISPLAY '  RECORDS DELETED:  ' WS-ROWS-DELETED"
+          },
+          {
+            "line": 206,
+            "text": "DISPLAY '  COMMITS:          ' WS-COMMITS"
+          },
+          {
+            "line": 207,
+            "text": "DISPLAY '  ROLLBACKS:        ' WS-ROLLBACKS"
+          },
+          {
+            "line": 209,
+            "text": "MOVE WS-CPU-TIME TO WS-FORMATTED-TIME"
+          },
+          {
+            "line": 210,
+            "text": "DISPLAY '  CPU TIME:         ' WS-FORMATTED-TIME ' SECONDS'"
+          },
+          {
+            "line": 213,
+            "text": "MOVE WS-ELAPSED-TIME TO WS-FORMATTED-TIME"
+          },
+          {
+            "line": 214,
+            "text": "DISPLAY '  ELAPSED TIME:     ' WS-FORMATTED-TIME ' SECONDS'"
+          },
+          {
+            "line": 217,
+            "text": "MOVE 0 TO LS-RETURN-CODE"
+          },
+          {
+            "line": 219,
+            "text": "MOVE 'ERROR RETRIEVING STATS' TO ERR-TEXT"
+          },
+          {
+            "line": 220,
+            "text": "PERFORM 9000-ERROR-ROUTINE"
+          }
+        ]
+      },
+      "missing_fact": "SQLCODE is used but declared nowhere in the repository; its layout and value meanings are the subject of DR-F2-0011-001, DR-DB2ERR-001 (missing: the real SQLCA member (the repository copy includes itself); a declaration of SQLCODE; a declaration of SQLERRMC)",
+      "why_unsafe": "the outputs of these statements (WS-FORMATTED-TIME, LS-RETURN-CODE, ERR-TEXT) depend on a value whose meaning is not established; any Java mapping would invent it",
+      "affected_requirements": [
+        "REQ-DB2STAT-001"
+      ],
+      "affected_java_component": "outcome mapping of behaviour 4000-DISPLAY-STATS (behind a port whose only implementation throws until the gap is resolved)",
+      "required_action": [
+        "DR-F2-0011-001: a signed resolution by technical_authority",
+        "DR-DB2ERR-001: a signed resolution by technical_authority"
+      ],
+      "validation_evidence": "the real definition of SQLCODE for the target runtime and a captured legacy run showing each outcome branch",
+      "blocks_execution_path": "request FUNC-DISP ('DISP') -> 4000-DISPLAY-STATS: statements 200, 201, 202, 203, 204, 205, 206, 207, 209, 210, 213, 214, 217, 219, 220",
+      "blocking": true,
+      "status": "OPEN"
+    },
+    {
+      "gap_id": "GAP-DB2STAT-4000-DISPLAY-STATS-SQL-SELECT-SESSION",
+      "kind": "EXTERNAL_DATABASE_RUNTIME",
+      "behaviour_id": "DB2STAT:4000-DISPLAY-STATS",
+      "source": {
+        "path": "src/programs/common/DB2STAT.cbl",
+        "sha256": "082eb02647d2ccaeb6c085425e03f647bfd54a15018b05a0c25de4bb42efd00f",
+        "lines": [
+          190,
+          198
+        ],
+        "statements": [
+          {
+            "line": 190,
+            "text": "EXEC SQL SELECT ROWS_READ, ROWS_INSERTED, ROWS_UPDATED, ROWS_DELETED, COMMITS, ROLLBACKS, CPU_TIME, ELAPSED_TIME INTO :WS-STATS-RECORD FROM SESSION.DBSTATS WHERE PROGRAM_ID = :WS-PROGRAM-ID END-EXEC"
+          }
+        ]
+      },
+      "missing_fact": "the runtime behaviour of embedded SQL SELECT on SESSION: database product and version, host-variable conversions, NULL and no-row results, constraint violations and the status they report",
+      "why_unsafe": "the result and every status it produces come from an external database the repository does not describe; a Java implementation would have to assume them",
+      "affected_requirements": [
+        "REQ-DB2STAT-001"
+      ],
+      "affected_java_component": "database port for SELECT SESSION (interface only; no implementation until specified)",
+      "required_action": [
+        "an approved specification of the database interaction (technical authority), recorded as an ADR at G3"
+      ],
+      "validation_evidence": "a captured run against the real (or an approved equivalent) database for each outcome, including errors",
+      "blocks_execution_path": "request FUNC-DISP ('DISP') -> 4000-DISPLAY-STATS: statement 190",
+      "blocking": true,
+      "status": "OPEN"
+    }
+  ],
+  "closures": [
+    {
+      "behaviour_id": "DB2STAT:0000-MAIN",
+      "status": "UNRESOLVED",
+      "unresolved_reasons": [
+        "line 80: STAMP is neither declared, a keyword, a paragraph nor the subject of a blocking decision (unknown dependency)",
+        "line 158: STAMP is neither declared, a keyword, a paragraph nor the subject of a blocking decision (unknown dependency)"
+      ],
+      "units": [
+        "DB2STAT",
+        "ERRHAND",
+        "ERRPROC"
+      ],
+      "external": [
+        {
+          "kind": "embedded_sql",
+          "line": 89,
+          "operation": "DECLARE",
+          "target": null,
+          "relation": "performed"
+        },
+        {
+          "kind": "embedded_sql",
+          "line": 112,
+          "operation": "INSERT",
+          "target": "SESSION",
+          "relation": "performed"
+        },
+        {
+          "kind": "embedded_sql",
+          "line": 138,
+          "operation": "UPDATE",
+          "target": "SESSION",
+          "relation": "performed"
+        },
+        {
+          "kind": "embedded_sql",
+          "line": 163,
+          "operation": "UPDATE",
+          "target": "SESSION",
+          "relation": "performed"
+        },
+        {
+          "kind": "embedded_sql",
+          "line": 190,
+          "operation": "SELECT",
+          "target": "SESSION",
+          "relation": "performed"
+        }
+      ],
+      "undeclared": [
+        "SQLCODE",
+        "NUMVAL"
+      ],
+      "sha256": "df9aa73834a89a3c93d73f52a323ccbe6f8fa148747ac4fd802371c1203543f5"
+    },
+    {
+      "behaviour_id": "DB2STAT:1000-INITIALIZE",
+      "status": "UNRESOLVED",
+      "unresolved_reasons": [
+        "line 80: STAMP is neither declared, a keyword, a paragraph nor the subject of a blocking decision (unknown dependency)"
+      ],
+      "units": [
+        "DB2STAT",
+        "ERRHAND",
+        "ERRPROC"
+      ],
+      "external": [
+        {
+          "kind": "embedded_sql",
+          "line": 89,
+          "operation": "DECLARE",
+          "target": null,
+          "relation": "performed"
+        },
+        {
+          "kind": "embedded_sql",
+          "line": 112,
+          "operation": "INSERT",
+          "target": "SESSION",
+          "relation": "performed"
+        },
+        {
+          "kind": "embedded_sql",
+          "line": 190,
+          "operation": "SELECT",
+          "target": "SESSION",
+          "relation": "input_writer"
+        }
+      ],
+      "undeclared": [
+        "SQLCODE"
+      ],
+      "sha256": "999db7e406c0831ae3c289353671ea048c12f488c283a62618318b0f25c8318e"
+    },
+    {
+      "behaviour_id": "DB2STAT:2000-UPDATE-STATS",
+      "status": "RESOLVED",
+      "unresolved_reasons": [],
+      "units": [
+        "DB2STAT",
+        "ERRHAND",
+        "ERRPROC"
+      ],
+      "external": [
+        {
+          "kind": "embedded_sql",
+          "line": 138,
+          "operation": "UPDATE",
+          "target": "SESSION",
+          "relation": "direct"
+        },
+        {
+          "kind": "embedded_sql",
+          "line": 190,
+          "operation": "SELECT",
+          "target": "SESSION",
+          "relation": "input_writer"
+        }
+      ],
+      "undeclared": [
+        "SQLCODE"
+      ],
+      "sha256": "1d849833ecb9c8376d87dff350f13085bbcc64d4090b85b794f334a44e6c870a"
+    },
+    {
+      "behaviour_id": "DB2STAT:3000-TERMINATE",
+      "status": "UNRESOLVED",
+      "unresolved_reasons": [
+        "line 158: STAMP is neither declared, a keyword, a paragraph nor the subject of a blocking decision (unknown dependency)"
+      ],
+      "units": [
+        "DB2STAT",
+        "ERRHAND",
+        "ERRPROC"
+      ],
+      "external": [
+        {
+          "kind": "embedded_sql",
+          "line": 163,
+          "operation": "UPDATE",
+          "target": "SESSION",
+          "relation": "direct"
+        },
+        {
+          "kind": "embedded_sql",
+          "line": 190,
+          "operation": "SELECT",
+          "target": "SESSION",
+          "relation": "performed"
+        }
+      ],
+      "undeclared": [
+        "SQLCODE",
+        "NUMVAL"
+      ],
+      "sha256": "a667aac2dc7618c873ab3e71bce9aea0ef0c0283b9c09045731eec7adbba9762"
+    },
+    {
+      "behaviour_id": "DB2STAT:4000-DISPLAY-STATS",
+      "status": "RESOLVED",
+      "unresolved_reasons": [],
+      "units": [
+        "DB2STAT",
+        "ERRHAND",
+        "ERRPROC"
+      ],
+      "external": [
+        {
+          "kind": "embedded_sql",
+          "line": 190,
+          "operation": "SELECT",
+          "target": "SESSION",
+          "relation": "direct"
+        }
+      ],
+      "undeclared": [
+        "SQLCODE",
+        "NUMVAL"
+      ],
+      "sha256": "15d6fadb39036e05067c670b782a469432de617bc852a464cb58752d7e43a65f"
+    },
+    {
+      "behaviour_id": "DB2STAT:9000-ERROR-ROUTINE",
+      "status": "RESOLVED",
+      "unresolved_reasons": [],
+      "units": [
+        "DB2STAT",
+        "ERRHAND",
+        "ERRPROC"
+      ],
+      "external": [],
+      "undeclared": [],
+      "sha256": "a7de285a905a990ed78dca186fd396b4381b2ee578be1846d990f0e65e68d385"
+    }
+  ],
+  "open_decisions": [
+    {
+      "id": "DR-DB2ERR-001",
+      "blocking": true,
+      "question": "Copybook SQLCA (FIL-0017) includes itself ('EXEC SQL INCLUDE SQLCA' at line 6) and defines only SQL-STATUS-CODES, with no SQLCODE or SQLERRMC field; SQLCODE/SQLERRMC therefore have no Field ID in the 14 DB2 programs. Which SQLCA layout does the precompiler supply, and may the modern design assume the standard DB2 SQLCODE/SQLERRMC meaning (assumption ASM-004)?"
+    },
+    {
+      "id": "DR-DB2ERR-002",
+      "blocking": false,
+      "question": "DB2ERR (line 75) uses the non-standard 'ACCEPT WS-CURRENT-TIMESTAMP FROM TIME STAMP'; the ERRPROC logic file flags the same construct (line 57) and PORTDEL uses it for the deletion audit timestamp (source line 169). Which compiler extension is in use and what timestamp format do ERRLOG rows, error-log records and deletion audit records actually carry?"
+    },
+    {
+      "id": "DR-DB2STAT-001",
+      "blocking": true,
+      "question": "BR-056 (deferred): at TERM the statistics collector computes elapsed time as 'FUNCTION NUMVAL(WS-END-TIME(1:15)) - NUMVAL(WS-START-TIMESTAMP(1:15))' (second NUMVAL lacks the FUNCTION keyword) and sets CPU time to elapsed x 0.65 (an estimate, not a measurement). Should the modern system keep this calculation, measure CPU time instead, or drop the CPU figure, and what is the intended elapsed-time arithmetic?"
+    },
+    {
+      "id": "DR-DB2STAT-002",
+      "blocking": false,
+      "question": "The DISP function selects 8 columns INTO :WS-STATS-RECORD (11 items) at line 190, which does not line up by position. What is the intended column-to-field mapping of the displayed statistics?"
+    },
+    {
+      "id": "DR-F2-0011-001",
+      "blocking": true,
+      "question": "Copybook SQLCA (SYS-PORTFOLIO-001-FIL-0017) line 6 contains 'EXEC SQL INCLUDE SQLCA END-EXEC', naming itself. The included SQL communication area (SQLCODE, SQLSTATE, SQLERRMC, ...) has no layout in any reverse artifact. How should the forward design obtain the SQLCA layout and the SQLCODE/SQLSTATE semantics used by the 14 DB2 programs?"
+    },
+    {
+      "id": "DR-F2-0011-002",
+      "blocking": false,
+      "question": "DBPROC procedure code (DB2-ERROR-ROUTINE, lines 47-56) moves data to ERR-PROGRAM and ERR-TEXT and calls 'ERRPROC' USING ERR-MESSAGE, but DBPROC declares none of these and ERR-TEXT is declared in no packet copybook. Which record declares ERR-TEXT / ERR-MESSAGE in each including program, and what is the ERRPROC parameter layout?"
+    },
+    {
+      "id": "DR-F2-0011-003",
+      "blocking": false,
+      "question": "Which TRUNC compiler option (STD, OPT or BIN) was used for programs including these copybooks? It decides whether S9(4)/S9(8)/S9(9) COMP fields are truncated to their PIC digits or to the binary halfword/fullword range on store."
+    },
+    {
+      "id": "DR-F2-P0006-002",
+      "blocking": false,
+      "question": "The project SQLCA copybook (SYS-PORTFOLIO-001-FIL-0017) includes itself and declares only SQL-STATUS-CODES, while eight packet programs test SQLCODE (and DB2ONLN SQLERRMC), which only the DB2 precompiler's SQLCA supplies. Should the Java design treat SQL status as coming from the SQL driver (SQLException/SQLState) and ignore the project SQLCA content, or must the 35-byte WS-DB2-AREA content be reproduced?"
+    },
+    {
+      "id": "DR-F2-P0006-004",
+      "blocking": false,
+      "question": "Five record-level 01 elementary items (DB2ERR WS-CURRENT-TIMESTAMP, WS-FORMATTED-SQLCODE; DB2STAT WS-CURRENT-TIMESTAMP, WS-START-TIMESTAMP, WS-FORMATTED-TIME) have no Field ID in the reverse catalogue. Should the reverse pipeline register Field IDs for them so they can receive Java types, or may they be modelled by Record ID only?"
+    },
+    {
+      "id": "DR-F2-P0006-009",
+      "blocking": false,
+      "question": "ERRPROC's LINKAGE LS-ERROR-REQUEST is 354 bytes, but DB2ERR (line 199) and DB2STAT (line 227) CALL 'ERRPROC' USING ERR-MESSAGE from copybook ERRHAND (about 370 bytes, different field order). Which layout is the contract of the Java error service?"
+    },
+    {
+      "id": "DR-F2-PKT0010-002",
+      "blocking": false,
+      "question": "Which character encoding (code page) do the files and areas described by these copybooks use for DISPLAY data on the legacy platform (EBCDIC 037, 1140, another EBCDIC variant, or ASCII)? The zoned-decimal test vectors and String codecs depend on it."
+    },
+    {
+      "id": "RVW-GAP-092",
+      "blocking": false,
+      "question": "GAP-092 (medium, DIAGRAM_RENDER_UNVERIFIED) is not addressed by any decision or requirement: Visual rendering of the 65 Mermaid diagrams is unverified. Acknowledge it as a known limitation (resolved_no_change) or exclude the affected units?"
+    },
+    {
+      "id": "RVW-GAP-104",
+      "blocking": false,
+      "question": "GAP-104 (low, DIAGRAM_INCOMPLETE) is not addressed by any decision or requirement: COMP-UNRESOLVED: all seven edges are unsupported. Acknowledge it as a known limitation (resolved_no_change) or exclude the affected units?"
+    }
+  ],
+  "authorisation": {
+    "generation_authorized": false,
+    "blockers": [
+      "config generation.java_generation_allowed is false (project authority)",
+      "no authorised orchestrator.java_target_dir",
+      "G4 is BLOCKED (needs signed G2, G3 and G4 approvals by trusted signers)",
+      "trust store: TRUST_NOT_CONFIGURED"
+    ],
+    "gates": {
+      "G0": "PASS",
+      "G1": "PASS",
+      "G2": "UNVERIFIED",
+      "G3": "BLOCKED",
+      "G4": "BLOCKED",
+      "G5": "BLOCKED",
+      "G6": "BLOCKED",
+      "G7": "BLOCKED",
+      "G8": "BLOCKED"
+    },
+    "trust": "TRUST_NOT_CONFIGURED",
+    "program_g2_scope": {
+      "readiness": "NOT_READY",
+      "blocking": 18,
+      "scope_sha256": "31cbdbd06c105e7ef8e98037b4dcf0ab43d5d45ea095aa152f7a79fd9668790b"
+    },
+    "note": "Engineering gates never authorise generation. Java may be generated only when generation_authorized is true."
+  }
+}

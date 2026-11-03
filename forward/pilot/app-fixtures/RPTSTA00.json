@@ -1,0 +1,48 @@
+{
+ "program": "RPTSTA00",
+ "provenance": "Written by a scenario-author agent (F6 independent fixture design) on 2026-11-02 from the COBOL source src/programs/batch/RPTSTA00.cbl and its copybooks (src/copybook/db2/SQLCA.cpy, src/copybook/db2/DBPROC.cpy, src/copybook/common/ERRHAND.cpy, src/copybook/batch/BCHCTL.cpy, src/copybook/common/RTNCODE.cpy) under references/udara-legacy-modernization-harness, the fixture README, and only the gaps/inspection arrays of forward/generated/java/RPTSTA00/pilot-result.json. No generated Java, source map or execution result was read or run.",
+ "scenarios": [
+  {
+   "id": "M01",
+   "title": "0000-MAIN -> 1000-INITIALIZE -> 1100-OPEN-FILES: the first statement OPEN INPUT DB2-STATS: DB2-STATS has no FD entry (DB2STAT and BCHCTL are COPYed into the FILE SECTION without an FD); the run blocks before any header is written",
+   "cobol_lines": [
+    97,
+    103,
+    108
+   ],
+   "kind": "main",
+   "datasets": {
+    "DB2STATS": {
+     "records": [
+      "X"
+     ]
+    },
+    "BCHSTATS": {
+     "records": [
+      "X"
+     ]
+    }
+   },
+   "outputs": [
+    "RPTFILE"
+   ],
+   "clock": "2024-04-09T06:00:00.00Z",
+   "expect": {
+    "outcome": "BLOCKED AT src/programs/batch/RPTSTA00.cbl:108"
+   }
+  },
+  {
+   "id": "M02",
+   "title": "the block is at the OPEN itself, so it is reached with no dataset allocated (no status-35 / 9999-ERROR-HANDLER path is reachable first)",
+   "cobol_lines": [
+    97,
+    103,
+    108
+   ],
+   "kind": "main",
+   "expect": {
+    "outcome": "BLOCKED AT src/programs/batch/RPTSTA00.cbl:108"
+   }
+  }
+ ]
+}

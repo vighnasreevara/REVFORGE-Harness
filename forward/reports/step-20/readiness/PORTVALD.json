@@ -1,0 +1,332 @@
+{
+  "gate": "SOURCE_READINESS",
+  "subject": "PORTVALD",
+  "status": "PASS",
+  "checks": [
+    {
+      "id": "source_available",
+      "ok": true,
+      "detail": "src/programs/portfolio/PORTVALD.cbl sha256 5957fd22546258ae4d9e28847269168d1824bf8d11a9e661f9f62a5adc47f603; 50 statement(s) in 5 paragraph(s)"
+    },
+    {
+      "id": "complete_program",
+      "ok": true,
+      "detail": "every paragraph contains statements"
+    },
+    {
+      "id": "copybooks_resolved",
+      "ok": true,
+      "detail": "all 1 include(s) resolved: PORTVAL"
+    },
+    {
+      "id": "requirements_and_data_mapping_delivered",
+      "ok": true,
+      "detail": "F1/F2 deliveries accepted for PORTVAL, PORTVALD"
+    },
+    {
+      "id": "behaviour_classified",
+      "ok": true,
+      "detail": "5 behaviour(s): 3 VERIFIED_CANDIDATE, 2 PARTIAL, 0 GAP"
+    },
+    {
+      "id": "dependencies_identified",
+      "ok": true,
+      "detail": "5 behaviour closure(s) resolved; units PORTVALD, PORTVAL; external operations 0"
+    },
+    {
+      "id": "unsupported_documented",
+      "ok": true,
+      "detail": "1 gap(s) document every PARTIAL/GAP behaviour"
+    },
+    {
+      "id": "unknowns_documented",
+      "ok": true,
+      "detail": "6 open decision(s) record the remaining questions (3 blocking for approval); none is resolved or assumed here"
+    }
+  ],
+  "note": "An engineering gate: it states that the source is understood well enough to convert, with every unknown documented. It is not a G2 approval and does not authorise generation.",
+  "behaviours": [
+    {
+      "behaviour_id": "PORTVALD:ENTRY-DISPATCH",
+      "kind": "dispatch",
+      "classification": "PARTIAL",
+      "lines": [
+        33,
+        46
+      ],
+      "inputs": [
+        "LS-VALIDATE-TYPE",
+        "VAL-INVALID-ID"
+      ],
+      "outputs": [
+        "LS-ERROR-MSG",
+        "LS-RETURN-CODE",
+        "VAL-WORK-AREAS"
+      ],
+      "side_effects": [],
+      "unresolved": [],
+      "covered_by": [
+        "REQ-PORTVALD-001"
+      ]
+    },
+    {
+      "behaviour_id": "PORTVALD:1000-VALIDATE-ID",
+      "kind": "performed_range",
+      "classification": "VERIFIED_CANDIDATE",
+      "lines": [
+        56,
+        71
+      ],
+      "inputs": [
+        "LS-INPUT-VALUE",
+        "VAL-ERR-ID",
+        "VAL-ID-PREFIX",
+        "VAL-INVALID-ID",
+        "VAL-NUMERIC-CHECK",
+        "VAL-SUCCESS"
+      ],
+      "outputs": [
+        "LS-ERROR-MSG",
+        "LS-RETURN-CODE",
+        "VAL-NUMERIC-CHECK"
+      ],
+      "side_effects": [],
+      "unresolved": [],
+      "covered_by": [
+        "REQ-PORTVALD-001",
+        "REQ-PORTVALD-002"
+      ]
+    },
+    {
+      "behaviour_id": "PORTVALD:2000-VALIDATE-ACCOUNT",
+      "kind": "performed_range",
+      "classification": "VERIFIED_CANDIDATE",
+      "lines": [
+        77,
+        86
+      ],
+      "inputs": [
+        "LS-INPUT-VALUE",
+        "VAL-ERR-ACCT",
+        "VAL-INVALID-ACCT",
+        "VAL-SUCCESS"
+      ],
+      "outputs": [
+        "LS-ERROR-MSG",
+        "LS-RETURN-CODE"
+      ],
+      "side_effects": [],
+      "unresolved": [],
+      "covered_by": [
+        "REQ-PORTVALD-001"
+      ]
+    },
+    {
+      "behaviour_id": "PORTVALD:3000-VALIDATE-TYPE",
+      "kind": "performed_range",
+      "classification": "VERIFIED_CANDIDATE",
+      "lines": [
+        92,
+        103
+      ],
+      "inputs": [
+        "LS-INPUT-VALUE",
+        "VAL-ERR-TYPE",
+        "VAL-INVALID-TYPE",
+        "VAL-SUCCESS"
+      ],
+      "outputs": [
+        "LS-ERROR-MSG",
+        "LS-RETURN-CODE"
+      ],
+      "side_effects": [],
+      "unresolved": [],
+      "covered_by": [
+        "REQ-PORTVALD-001",
+        "REQ-PORTVALD-003"
+      ]
+    },
+    {
+      "behaviour_id": "PORTVALD:4000-VALIDATE-AMOUNT",
+      "kind": "performed_range",
+      "classification": "PARTIAL",
+      "lines": [
+        109,
+        120
+      ],
+      "inputs": [
+        "LS-INPUT-VALUE",
+        "VAL-ERR-AMT",
+        "VAL-INVALID-AMT",
+        "VAL-MAX-AMOUNT",
+        "VAL-MIN-AMOUNT",
+        "VAL-SUCCESS",
+        "VAL-TEMP-NUM"
+      ],
+      "outputs": [
+        "LS-ERROR-MSG",
+        "LS-RETURN-CODE",
+        "VAL-TEMP-NUM"
+      ],
+      "side_effects": [],
+      "unresolved": [],
+      "covered_by": [
+        "REQ-PORTVALD-001"
+      ]
+    }
+  ],
+  "gaps": [
+    {
+      "gap_id": "GAP-PORTVALD-4000-VALIDATE-AMOUNT-ALNUM-TO-NUMERIC-VAL-TEMP-NUM",
+      "kind": "DATA_CONVERSION_UNDEFINED",
+      "behaviour_id": "PORTVALD:4000-VALIDATE-AMOUNT",
+      "source": {
+        "path": "src/programs/portfolio/PORTVALD.cbl",
+        "sha256": "5957fd22546258ae4d9e28847269168d1824bf8d11a9e661f9f62a5adc47f603",
+        "lines": [
+          109
+        ],
+        "statements": [
+          {
+            "line": 109,
+            "text": "MOVE LS-INPUT-VALUE TO VAL-TEMP-NUM"
+          }
+        ]
+      },
+      "missing_fact": "MOVE of alphanumeric LS-INPUT-VALUE (X(50)) to numeric VAL-TEMP-NUM (PIC S9(13)V99): defined only when the sending content is all digits; otherwise the result depends on the compiler and the data representation",
+      "why_unsafe": "for content that is not all digits the value of VAL-TEMP-NUM, and every result computed from it, is not defined by the source; a Java conversion would have to invent it",
+      "affected_requirements": [
+        "REQ-PORTVALD-001"
+      ],
+      "affected_java_component": "input conversion of behaviour 4000-VALIDATE-AMOUNT: only all-digit content is supported; anything else fails explicitly as unsupported",
+      "required_action": [
+        "the business rule for non-numeric and decimal input (business SME), or the compiler options and a captured legacy run (technical authority)"
+      ],
+      "validation_evidence": "a captured legacy run with non-digit, decimal, signed and space-padded input",
+      "blocks_execution_path": "request LS-VAL-AMT ('M') -> 4000-VALIDATE-AMOUNT: statement 109 for content that is not all digits",
+      "blocking": true,
+      "status": "OPEN"
+    }
+  ],
+  "closures": [
+    {
+      "behaviour_id": "PORTVALD:0000-MAIN",
+      "status": "RESOLVED",
+      "unresolved_reasons": [],
+      "units": [
+        "PORTVALD",
+        "PORTVAL"
+      ],
+      "external": [],
+      "undeclared": [],
+      "sha256": "094d38c4d03fafccd2d630a096fcbdb065731b3f77da88d1f4d971439ca76d96"
+    },
+    {
+      "behaviour_id": "PORTVALD:1000-VALIDATE-ID",
+      "status": "RESOLVED",
+      "unresolved_reasons": [],
+      "units": [
+        "PORTVALD",
+        "PORTVAL"
+      ],
+      "external": [],
+      "undeclared": [],
+      "sha256": "b66cbe4c98fd1ea0257a0fdb2ebe565cf82dadf765fd9c55870ff46ee2da6dc7"
+    },
+    {
+      "behaviour_id": "PORTVALD:2000-VALIDATE-ACCOUNT",
+      "status": "RESOLVED",
+      "unresolved_reasons": [],
+      "units": [
+        "PORTVALD",
+        "PORTVAL"
+      ],
+      "external": [],
+      "undeclared": [],
+      "sha256": "e5dd9e58d32e9e4e9936de6626cf7066c6c7958e8184d75f5988727917ffa456"
+    },
+    {
+      "behaviour_id": "PORTVALD:3000-VALIDATE-TYPE",
+      "status": "RESOLVED",
+      "unresolved_reasons": [],
+      "units": [
+        "PORTVALD",
+        "PORTVAL"
+      ],
+      "external": [],
+      "undeclared": [],
+      "sha256": "a26c9b67bc55feb5d4dab87e01e3ae126f7a77812d00091565bb6a1444741077"
+    },
+    {
+      "behaviour_id": "PORTVALD:4000-VALIDATE-AMOUNT",
+      "status": "RESOLVED",
+      "unresolved_reasons": [],
+      "units": [
+        "PORTVALD",
+        "PORTVAL"
+      ],
+      "external": [],
+      "undeclared": [],
+      "sha256": "b2e4b27aaee58ae15e8642997ded9ff27be27d719f0b89fd55380dfc20282f32"
+    }
+  ],
+  "open_decisions": [
+    {
+      "id": "DR-F2-PKT0010-002",
+      "blocking": false,
+      "question": "Which character encoding (code page) do the files and areas described by these copybooks use for DISPLAY data on the legacy platform (EBCDIC 037, 1140, another EBCDIC variant, or ASCII)? The zoned-decimal test vectors and String codecs depend on it."
+    },
+    {
+      "id": "DR-PORTVALD-001",
+      "blocking": true,
+      "question": "BR-120 (SME review): 'VAL-NUMERIC-CHECK IS NOT NUMERIC' after MOVE LS-INPUT-VALUE(5:4) TO VAL-NUMERIC-CHECK (PIC X(10)); the 6 padded spaces make the test true for every input, so as written no portfolio ID can pass ('LS-RETURN-CODE = VAL-INVALID-ID; error message'). The source comment says the ID 'must start with PORT and have 4 numeric digits'. What is the intended portfolio-ID suffix rule (length and content), and is the defect known in production?"
+    },
+    {
+      "id": "DR-PORTVALD-002",
+      "blocking": true,
+      "question": "BR-121 (SME review): 'LS-INPUT-VALUE IS NOT NUMERIC OR LS-INPUT-VALUE = ZEROS' -> 'LS-RETURN-CODE = VAL-INVALID-ACCT; error message'. The NUMERIC test covers the whole 50-character input, so a 10-digit account number followed by spaces is rejected, although the source comment says 'Account number must be 10 numeric digits'. What is the intended account-number length and rule?"
+    },
+    {
+      "id": "DR-PORTVALD-003",
+      "blocking": true,
+      "question": "BR-123 (SME review): 'VAL-TEMP-NUM < VAL-MIN-AMOUNT OR VAL-TEMP-NUM > VAL-MAX-AMOUNT' -> 'LS-RETURN-CODE = VAL-INVALID-AMT'. PORTVAL declares VAL-MIN-AMOUNT -9999999999999.99 and VAL-MAX-AMOUNT +9999999999999.99, the full S9(13)V99 range, so no valid number is rejected; the alphanumeric-to-numeric MOVE of non-digit input is compiler-dependent. What are the intended minimum and maximum amounts, and how must non-numeric input be treated?"
+    },
+    {
+      "id": "RVW-GAP-092",
+      "blocking": false,
+      "question": "GAP-092 (medium, DIAGRAM_RENDER_UNVERIFIED) is not addressed by any decision or requirement: Visual rendering of the 65 Mermaid diagrams is unverified. Acknowledge it as a known limitation (resolved_no_change) or exclude the affected units?"
+    },
+    {
+      "id": "RVW-GAP-104",
+      "blocking": false,
+      "question": "GAP-104 (low, DIAGRAM_INCOMPLETE) is not addressed by any decision or requirement: COMP-UNRESOLVED: all seven edges are unsupported. Acknowledge it as a known limitation (resolved_no_change) or exclude the affected units?"
+    }
+  ],
+  "authorisation": {
+    "generation_authorized": false,
+    "blockers": [
+      "config generation.java_generation_allowed is false (project authority)",
+      "no authorised orchestrator.java_target_dir",
+      "G4 is BLOCKED (needs signed G2, G3 and G4 approvals by trusted signers)",
+      "trust store: TRUST_NOT_CONFIGURED"
+    ],
+    "gates": {
+      "G0": "PASS",
+      "G1": "PASS",
+      "G2": "UNVERIFIED",
+      "G3": "BLOCKED",
+      "G4": "BLOCKED",
+      "G5": "BLOCKED",
+      "G6": "BLOCKED",
+      "G7": "BLOCKED",
+      "G8": "BLOCKED"
+    },
+    "trust": "TRUST_NOT_CONFIGURED",
+    "program_g2_scope": {
+      "readiness": "NOT_READY",
+      "blocking": 11,
+      "scope_sha256": "874929944bc3dbf0964d8edb9bb6682aadf758b9ad3a5e63d6d265dc23e72133"
+    },
+    "note": "Engineering gates never authorise generation. Java may be generated only when generation_authorized is true."
+  }
+}

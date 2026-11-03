@@ -1,0 +1,244 @@
+{
+ "contract": "step-21/g2-scope-assessment",
+ "scope": "programs:PORTREAD",
+ "scope_sha256": "c6b1864a61d126f8f09c5b2e5aace229df1da15dc8314fa0d07f16a756a6178f",
+ "readiness": "NOT_READY",
+ "units": [
+  "PORTFLIO",
+  "PORTREAD"
+ ],
+ "findings_total": 26,
+ "blocking": 12,
+ "by_classification": {
+  "GENUINE_CROSS_SCOPE": 4,
+  "GENUINE_POLICY": 6,
+  "GENUINE": 2
+ },
+ "application_scope_note": "the 417 blocking findings belong to the application scope; a programs:PORTREAD approval needs only these findings resolved plus a signed G2 approval for this exact scope digest",
+ "classification_defects_found": 0,
+ "findings": [
+  {
+   "id": "PKT-0003-F1:CON-PKT0003-001",
+   "kind": "contradiction",
+   "outcome": "CONTRADICTED",
+   "units": [],
+   "portread_specific": true,
+   "classification": "GENUINE_CROSS_SCOPE",
+   "why": "portfolio status domain: copybook PORTFLIO declares A/C/S while PORTMSTR validates A/I/C (BR-095, BR-149); a signed business_sme decision (DR-PORTMSTR-001 / DR-PORTUPDT-001) is required",
+   "resolving_role": "business_sme",
+   "decisions": [
+    "DR-PORTMSTR-001"
+   ],
+   "reasons": [
+    "Portfolio status domain conflict: PORTMSTR 2100-VALIDATE-PORTFOLIO accepts only 'A', 'I' or 'C' (88-level VALID-STATUS, BR-095), while copybook PORTFLIO used by PORTADD and PORTDEL declares 'A' active, 'C' closed and 'S' suspended (BR-149). 'I' exists only in PORTMSTR and 'S' only in PORTFLIO. GAP-091 also records that the PORTFLIO and PORTMSTR records are linked only by naming convention. (awaiting DR-PORTMSTR-001)"
+   ]
+  },
+  {
+   "id": "PKT-0004-F1:CON-PKT0004-001",
+   "kind": "contradiction",
+   "outcome": "CONTRADICTED",
+   "units": [],
+   "portread_specific": true,
+   "classification": "GENUINE_CROSS_SCOPE",
+   "why": "portfolio status domain: copybook PORTFLIO declares A/C/S while PORTMSTR validates A/I/C (BR-095, BR-149); a signed business_sme decision (DR-PORTMSTR-001 / DR-PORTUPDT-001) is required",
+   "resolving_role": "business_sme",
+   "decisions": [
+    "DR-PORTUPDT-001"
+   ],
+   "reasons": [
+    "Portfolio status domain conflict: copybook PORTFLIO declares PORT-STATUS values A (active), C (closed), S (suspended) (BR-149), while PORTMSTR validates A, I, C (BR-095). 'S' and 'I' each exist in only one set. PORTUPDT action 'S' moves the new value into PORT-STATUS without any validation (BR-117), so the forward status rule cannot be chosen from the evidence. (awaiting DR-PORTUPDT-001)"
+   ]
+  },
+  {
+   "id": "BR-149",
+   "kind": "rule",
+   "outcome": "CONTRADICTED",
+   "units": [],
+   "portread_specific": true,
+   "classification": "GENUINE_CROSS_SCOPE",
+   "why": "portfolio status domain: copybook PORTFLIO declares A/C/S while PORTMSTR validates A/I/C (BR-095, BR-149); a signed business_sme decision (DR-PORTMSTR-001 / DR-PORTUPDT-001) is required",
+   "resolving_role": "business_sme",
+   "decisions": [
+    "DR-PORTMSTR-001",
+    "DR-PORTUPDT-001"
+   ],
+   "reasons": [
+    "rule evidence is contradictory; pending DR-PORTMSTR-001, DR-PORTUPDT-001"
+   ]
+  },
+  {
+   "id": "SYS-PORTFOLIO-001-FIL-0070-REC-0001",
+   "kind": "data_record",
+   "outcome": "REQUIRES_EVIDENCE",
+   "units": [
+    "PORTREAD"
+   ],
+   "portread_specific": true,
+   "classification": "GENUINE_POLICY",
+   "why": "declared reverse_artifact_supported by F1/F2; the G2 policy maps that to REQUIRES_EVIDENCE. Needs a source-verified re-delivery (verified_from_source with checkable citations) or a signed evidence adjudication",
+   "resolving_role": "technical_authority",
+   "decisions": [
+    "RVW-REC-SYS-PORTFOLIO-001-FIL-0070-REC-0001"
+   ],
+   "reasons": [
+    "REQUIRES_EVIDENCE: 3 item(s): supported by reverse artifacts only; not independently verified against the source (SYS-PORTFOLIO-001-FIL-0070-FLD-000001, SYS-PORTFOLIO-001-FIL-0070-FLD-000002, SYS-PORTFOLIO-001-FIL-0070-FLD-000003)"
+   ]
+  },
+  {
+   "id": "SYS-PORTFOLIO-001-FIL-0070-REC-0002",
+   "kind": "data_record",
+   "outcome": "REQUIRES_EVIDENCE",
+   "units": [
+    "PORTREAD"
+   ],
+   "portread_specific": true,
+   "classification": "GENUINE_POLICY",
+   "why": "declared reverse_artifact_supported by F1/F2; the G2 policy maps that to REQUIRES_EVIDENCE. Needs a source-verified re-delivery (verified_from_source with checkable citations) or a signed evidence adjudication",
+   "resolving_role": "technical_authority",
+   "decisions": [
+    "RVW-REC-SYS-PORTFOLIO-001-FIL-0070-REC-0002"
+   ],
+   "reasons": [
+    "REQUIRES_EVIDENCE: 2 item(s): supported by reverse artifacts only; not independently verified against the source (SYS-PORTFOLIO-001-FIL-0070-FLD-000004, SYS-PORTFOLIO-001-FIL-0070-FLD-000008)"
+   ]
+  },
+  {
+   "id": "SYS-PORTFOLIO-001-FIL-0070-REC-0003",
+   "kind": "data_record",
+   "outcome": "REQUIRES_EVIDENCE",
+   "units": [
+    "PORTREAD"
+   ],
+   "portread_specific": true,
+   "classification": "GENUINE_POLICY",
+   "why": "declared reverse_artifact_supported by F1/F2; the G2 policy maps that to REQUIRES_EVIDENCE. Needs a source-verified re-delivery (verified_from_source with checkable citations) or a signed evidence adjudication",
+   "resolving_role": "technical_authority",
+   "decisions": [
+    "RVW-REC-SYS-PORTFOLIO-001-FIL-0070-REC-0003"
+   ],
+   "reasons": [
+    "REQUIRES_EVIDENCE: 2 item(s): supported by reverse artifacts only; not independently verified against the source (SYS-PORTFOLIO-001-FIL-0070-FLD-000011, SYS-PORTFOLIO-001-FIL-0070-FLD-000012)"
+   ]
+  },
+  {
+   "id": "FO-PORTREAD",
+   "kind": "file_operations",
+   "outcome": "REQUIRES_EVIDENCE",
+   "units": [
+    "PORTREAD"
+   ],
+   "portread_specific": true,
+   "classification": "GENUINE_POLICY",
+   "why": "declared reverse_artifact_supported by F1/F2; the G2 policy maps that to REQUIRES_EVIDENCE. Needs a source-verified re-delivery (verified_from_source with checkable citations) or a signed evidence adjudication",
+   "resolving_role": "technical_authority",
+   "decisions": [
+    "RVW-FO-PORTREAD"
+   ],
+   "reasons": [
+    "REQUIRES_EVIDENCE: 3 of 3 file operation(s) — e.g. OPEN PORTFOLIO-FILE (SYS-PORTFOLIO-001-FIL-0070-STMT-000006): supported by reverse artifacts only; not independently verified against the source"
+   ]
+  },
+  {
+   "id": "RT-PORTREAD-002",
+   "kind": "runtime_requirement",
+   "outcome": "REQUIRES_EVIDENCE",
+   "units": [
+    "PORTREAD"
+   ],
+   "portread_specific": true,
+   "classification": "GENUINE_POLICY",
+   "why": "declared reverse_artifact_supported by F1/F2; the G2 policy maps that to REQUIRES_EVIDENCE. Needs a source-verified re-delivery (verified_from_source with checkable citations) or a signed evidence adjudication",
+   "resolving_role": "technical_authority",
+   "decisions": [
+    "RVW-RT-PORTREAD-002"
+   ],
+   "reasons": [
+    "REQUIRES_EVIDENCE: supported by reverse artifacts only; not independently verified against the source"
+   ]
+  },
+  {
+   "id": "RT-PORTREAD-003",
+   "kind": "runtime_requirement",
+   "outcome": "REQUIRES_EVIDENCE",
+   "units": [
+    "PORTREAD"
+   ],
+   "portread_specific": true,
+   "classification": "GENUINE_POLICY",
+   "why": "declared reverse_artifact_supported by F1/F2; the G2 policy maps that to REQUIRES_EVIDENCE. Needs a source-verified re-delivery (verified_from_source with checkable citations) or a signed evidence adjudication",
+   "resolving_role": "technical_authority",
+   "decisions": [
+    "RVW-RT-PORTREAD-003"
+   ],
+   "reasons": [
+    "REQUIRES_EVIDENCE: supported by reverse artifacts only; not independently verified against the source"
+   ]
+  },
+  {
+   "id": "DR-PORTUPDT-001",
+   "kind": "decision:business",
+   "outcome": "REQUIRES_SME_DECISION",
+   "units": [
+    "PORTUPDT",
+    "PORTREAD"
+   ],
+   "portread_specific": false,
+   "classification": "GENUINE_CROSS_SCOPE",
+   "why": "open blocking decision; needs a signed resolution",
+   "resolving_role": "business_sme",
+   "decisions": [
+    "DR-PORTUPDT-001"
+   ],
+   "reasons": [
+    "blocking decision open — Contradiction CON-PKT0004-001 (BR-149, GAP-212): copybook PORTFLIO declares portfolio status 'PORT-STATUS 88 PORT-ACTIVE 'A' / PORT-CLOSED 'C' / PORT-SUSPENDED 'S'', while PORTMSTR validates A / I / C (BR-095). PORTUPDT action 'S' moves the new value into PORT-STATUS without validation. Which portfo"
+   ]
+  },
+  {
+   "id": "REQ-PORTREAD-001",
+   "kind": "requirement",
+   "outcome": "REQUIRES_SME_DECISION",
+   "units": [
+    "PORTREAD"
+   ],
+   "portread_specific": true,
+   "classification": "GENUINE",
+   "why": "flagged for SME review by the requirements analyst (F1); needs SME confirmation and the signed requirements approval",
+   "resolving_role": "business_sme / requirements_approver",
+   "decisions": [
+    "DR-PORTREAD-001",
+    "RVW-REQ-PORTREAD-001"
+   ],
+   "reasons": [
+    "REQUIRES_SME_DECISION: flagged for SME review by the requirements analyst",
+    "REQUIRES_SME_DECISION: blocked by RVW-REQ-PORTREAD-001 (open)"
+   ]
+  },
+  {
+   "id": "REQ-PORTREAD-002",
+   "kind": "requirement",
+   "outcome": "REQUIRES_SME_DECISION",
+   "units": [
+    "PORTREAD"
+   ],
+   "portread_specific": true,
+   "classification": "GENUINE",
+   "why": "flagged for SME review by the requirements analyst (F1); needs SME confirmation and the signed requirements approval",
+   "resolving_role": "business_sme / requirements_approver",
+   "decisions": [
+    "DR-PORTREAD-002",
+    "RVW-REQ-PORTREAD-002"
+   ],
+   "reasons": [
+    "REQUIRES_SME_DECISION: flagged for SME review by the requirements analyst",
+    "REQUIRES_SME_DECISION: blocked by RVW-REQ-PORTREAD-002 (open)"
+   ]
+  }
+ ],
+ "evidence_required_for_approval": [
+  "a signed business_sme resolution of the portfolio-status contradiction (DR-PORTMSTR-001, DR-PORTUPDT-001) that applies to the shared copybook PORTFLIO",
+  "source-verified evidence for the PORTFLIO records, the 3 PORTREAD file operations and RT-PORTREAD-002/003 (F2/F1 re-delivery with verified_from_source citations, or a signed evidence adjudication by technical_authority)",
+  "SME confirmation of REQUIRES_SME_DECISION requirements REQ-PORTREAD-001/002",
+  "a signed G2 approval by a requirements_approver for programs:PORTREAD at the current scope digest (distinct requester and approver)"
+ ],
+ "workflow_state_note": "the workflow state is REQUIREMENTS_DRAFTED; BMAD-PRD needs REQUIREMENTS_APPROVED or later, which follows from the signed G2 approval"
+}

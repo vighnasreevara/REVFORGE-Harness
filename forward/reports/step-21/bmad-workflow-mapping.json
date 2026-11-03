@@ -1,0 +1,202 @@
+{
+ "contract": "step-21/bmad-workflow-mapping",
+ "bindings_version": "1.0.0",
+ "mapping": [
+  {
+   "stage": "requirements",
+   "binding_id": "BMAD-PRD",
+   "workflow_id": "bmad-prd",
+   "agent": "F1",
+   "gates_required": [
+    "G2"
+   ],
+   "allowed_states": [
+    "REQUIREMENTS_APPROVED",
+    "ARCHITECTURE_DRAFTED",
+    "ARCHITECTURE_APPROVED",
+    "STORIES_DRAFTED",
+    "STORIES_APPROVED"
+   ],
+   "needs": [],
+   "registry_lifecycle": "active",
+   "definition_path": "src/bmm-skills/plan/bmad-prd",
+   "definition_sha256": null,
+   "executable_definition": true,
+   "installed_in_workspace": true,
+   "status": {
+    "mapped": true,
+    "unit_tested": true,
+    "authorized": false,
+    "executed": false,
+    "receipt_verified": false,
+    "blocked": true
+   }
+  },
+  {
+   "stage": "architecture",
+   "binding_id": "BMAD-ARCH",
+   "workflow_id": "bmad-architecture",
+   "agent": "F3",
+   "gates_required": [
+    "G2"
+   ],
+   "allowed_states": [
+    "REQUIREMENTS_APPROVED",
+    "ARCHITECTURE_DRAFTED"
+   ],
+   "needs": [],
+   "registry_lifecycle": "active",
+   "definition_path": "src/bmm-skills/plan/bmad-architecture",
+   "definition_sha256": null,
+   "executable_definition": true,
+   "installed_in_workspace": true,
+   "status": {
+    "mapped": true,
+    "unit_tested": true,
+    "authorized": false,
+    "executed": false,
+    "receipt_verified": false,
+    "blocked": true
+   }
+  },
+  {
+   "stage": "stories",
+   "binding_id": "BMAD-EPICS",
+   "workflow_id": "bmad-create-epics-and-stories",
+   "agent": "F4",
+   "gates_required": [
+    "G2",
+    "G3"
+   ],
+   "allowed_states": [
+    "ARCHITECTURE_APPROVED",
+    "STORIES_DRAFTED"
+   ],
+   "needs": [
+    "architecture_artifacts"
+   ],
+   "registry_lifecycle": "active",
+   "definition_path": "src/bmm-skills/plan/bmad-create-epics-and-stories",
+   "definition_sha256": null,
+   "executable_definition": true,
+   "installed_in_workspace": true,
+   "status": {
+    "mapped": true,
+    "unit_tested": true,
+    "authorized": false,
+    "executed": false,
+    "receipt_verified": false,
+    "blocked": true
+   }
+  },
+  {
+   "stage": "sprint",
+   "binding_id": "BMAD-SPRINT",
+   "workflow_id": "bmad-sprint-planning",
+   "agent": "F4",
+   "gates_required": [
+    "G2",
+    "G3",
+    "G4"
+   ],
+   "allowed_states": [
+    "STORIES_APPROVED"
+   ],
+   "needs": [
+    "approved_stories"
+   ],
+   "registry_lifecycle": "active",
+   "definition_path": "src/bmm-skills/plan/bmad-sprint-planning",
+   "definition_sha256": null,
+   "executable_definition": true,
+   "installed_in_workspace": true,
+   "status": {
+    "mapped": true,
+    "unit_tested": true,
+    "authorized": false,
+    "executed": false,
+    "receipt_verified": false,
+    "blocked": true
+   }
+  },
+  {
+   "stage": "implementation",
+   "binding_id": "BMAD-BUILD",
+   "workflow_id": "bmad-build",
+   "agent": "F5",
+   "gates_required": [
+    "G2",
+    "G3",
+    "G4"
+   ],
+   "allowed_states": [
+    "STORIES_APPROVED",
+    "IMPLEMENTING"
+   ],
+   "needs": [
+    "approved_stories",
+    "java_target_dir",
+    "generation_authorized"
+   ],
+   "registry_lifecycle": "active",
+   "definition_path": "src/bmm-skills/ship/bmad-build",
+   "definition_sha256": null,
+   "executable_definition": true,
+   "installed_in_workspace": true,
+   "status": {
+    "mapped": true,
+    "unit_tested": true,
+    "authorized": false,
+    "executed": false,
+    "receipt_verified": false,
+    "blocked": true
+   }
+  },
+  {
+   "stage": "review",
+   "binding_id": "BMAD-REVIEW",
+   "workflow_id": "bmad-code-review",
+   "agent": "F7",
+   "gates_required": [
+    "G2",
+    "G3",
+    "G4",
+    "G5",
+    "G6"
+   ],
+   "allowed_states": [
+    "REVIEWING"
+   ],
+   "needs": [
+    "implementation_artifacts",
+    "independent_test_receipt",
+    "reviewer_not_implementer"
+   ],
+   "registry_lifecycle": "active",
+   "definition_path": "src/bmm-skills/ship/bmad-code-review",
+   "definition_sha256": null,
+   "executable_definition": true,
+   "installed_in_workspace": true,
+   "status": {
+    "mapped": true,
+    "unit_tested": true,
+    "authorized": false,
+    "executed": false,
+    "receipt_verified": false,
+    "blocked": true
+   }
+  }
+ ],
+ "outside_bmad": [
+  {
+   "agent": "F6",
+   "reason": "Independent testing stays outside BMad so that the implementation workflow cannot test or approve itself."
+  },
+  {
+   "agent": "F2",
+   "reason": "Data mapping is reverse-evidence work with no BMad counterpart."
+  }
+ ],
+ "acceptance": "the independent F6 test receipt and gates G6-G8 (deliberately outside BMad)",
+ "output_consumption": "each accepted receipt becomes an upstream input of the next binding (adapter upstreamReceipts / mapping); BMad receipts never count toward gates G3-G8 (counts_toward_gates: false); the forward agents F1-F7 and the local converter remain the authority, and an accepted BMad output is a draft pending human approval"
+}

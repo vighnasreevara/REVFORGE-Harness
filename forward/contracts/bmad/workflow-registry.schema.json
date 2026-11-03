@@ -1,0 +1,136 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://revforge.local/contracts/bmad/workflow-registry.schema.json",
+  "title": "Verified BMad workflow catalogue of the pinned release",
+  "type": "object",
+  "properties": {
+    "contract": {
+      "const": "bmad/workflow-registry"
+    },
+    "contract_version": {
+      "const": "1.0"
+    },
+    "package": {
+      "const": "bmad-method"
+    },
+    "version": {
+      "type": "string",
+      "minLength": 1
+    },
+    "derived_from": {
+      "type": "string",
+      "minLength": 1
+    },
+    "workflows": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "workflow_id": {
+            "type": "string",
+            "pattern": "^bmad-[a-z0-9-]+$"
+          },
+          "path": {
+            "type": "string",
+            "minLength": 1
+          },
+          "directory_name": {
+            "type": "string",
+            "minLength": 1
+          },
+          "lifecycle": {
+            "enum": [
+              "active",
+              "shim",
+              "deprecated",
+              "agent"
+            ]
+          },
+          "forwards_to": {
+            "anyOf": [
+              {
+                "type": "string",
+                "pattern": "^bmad-[a-z0-9-]+$"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "phase_dir": {
+            "type": "string",
+            "minLength": 1
+          },
+          "display_name": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "menu_code": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "catalog_phase": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "output_location": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "skill_md_sha256": {
+            "$ref": "../common.schema.json#/definitions/sha256"
+          },
+          "files": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "directory_sha256": {
+            "$ref": "../common.schema.json#/definitions/sha256"
+          },
+          "requires_python_uv": {
+            "type": "boolean"
+          },
+          "description": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "workflow_id",
+          "path",
+          "directory_name",
+          "lifecycle",
+          "forwards_to",
+          "phase_dir",
+          "display_name",
+          "menu_code",
+          "catalog_phase",
+          "output_location",
+          "skill_md_sha256",
+          "files",
+          "directory_sha256",
+          "requires_python_uv",
+          "description"
+        ],
+        "additionalProperties": false
+      },
+      "minItems": 1
+    }
+  },
+  "required": [
+    "contract",
+    "contract_version",
+    "package",
+    "version",
+    "derived_from",
+    "workflows"
+  ],
+  "additionalProperties": false
+}

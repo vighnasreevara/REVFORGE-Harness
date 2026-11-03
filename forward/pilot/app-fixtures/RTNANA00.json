@@ -1,0 +1,51 @@
+{
+ "program": "RTNANA00",
+ "provenance": "Written 2026-11-02 by a scenario-author agent (F6 independent fixture design) from the COBOL source src/programs/batch/RTNANA00.cbl with copybooks src/copybook/db2/SQLCA.cpy and the gaps array of forward/generated/java/RTNANA00/pilot-result.json only; no generated Java, source map or test result was read. DISPLAY lines are given right-trimmed.",
+ "scenarios": [
+  {
+   "id": "S01",
+   "title": "RPTFILE not allocated: OPEN OUTPUT fails, status shown, RETURN-CODE 12, GOBACK before any SQL",
+   "cobol_lines": [
+    97,
+    112,
+    114,
+    115,
+    116,
+    117,
+    118
+   ],
+   "kind": "main",
+   "clock": "2026-03-04T05:06:07.08Z",
+   "expect": {
+    "outcome": "END",
+    "return_code": 12,
+    "display": [
+     "Error opening report file: 35"
+    ]
+   }
+  },
+  {
+   "id": "S02",
+   "title": "RPTFILE allocated: P100 succeeds, P200 reaches EXEC SQL OPEN PRGCUR (the DECLARE is declarative) and blocks",
+   "cobol_lines": [
+    97,
+    100,
+    112,
+    114,
+    115,
+    121,
+    126,
+    139
+   ],
+   "kind": "main",
+   "clock": "2026-03-04T05:06:07.08Z",
+   "outputs": [
+    "RPTFILE"
+   ],
+   "expect": {
+    "outcome": "BLOCKED AT src/programs/batch/RTNANA00.cbl:139",
+    "display": []
+   }
+  }
+ ]
+}

@@ -1,0 +1,145 @@
+{
+  "assessed_at": "2026-11-01T18:27:58.117Z",
+  "host": {
+    "platform": "win32 x64",
+    "release": "10.0.26200",
+    "os": "Microsoft Windows 11 Home",
+    "hypervisor_present": true
+  },
+  "wsl": {
+    "available": true,
+    "distro": "Ubuntu",
+    "version": 2,
+    "kernel": "6.6.87.2-microsoft-standard-WSL2",
+    "os": "Ubuntu 24.04.4 LTS"
+  },
+  "primitives": {
+    "docker_host": {
+      "available": false,
+      "detail": "not installed on the host"
+    },
+    "podman_host": {
+      "available": false,
+      "detail": "not installed on the host"
+    },
+    "linux_unshare": {
+      "available": true,
+      "detail": "/usr/bin/unshare"
+    },
+    "linux_setpriv": {
+      "available": true,
+      "detail": "/usr/bin/setpriv"
+    },
+    "linux_bwrap": {
+      "available": false,
+      "detail": "not installed"
+    },
+    "linux_docker": {
+      "available": false,
+      "detail": "not installed"
+    },
+    "linux_podman": {
+      "available": false,
+      "detail": "not installed"
+    },
+    "linux_firejail": {
+      "available": false,
+      "detail": "not installed"
+    },
+    "linux_socat": {
+      "available": false,
+      "detail": "not installed"
+    },
+    "linux_node": {
+      "available": false,
+      "detail": "not installed"
+    },
+    "linux_claude": {
+      "available": false,
+      "detail": "not installed"
+    },
+    "unprivileged_user_namespaces": {
+      "available": true,
+      "detail": "user + mount + net + pid namespaces can be created without privileges"
+    },
+    "passwordless_sudo": {
+      "available": false,
+      "detail": "sudo needs a password: installing packages or creating a dedicated user is an administrator action"
+    },
+    "windows_sandbox_or_hyperv": {
+      "available": false,
+      "detail": "Microsoft Windows 11 Home: Windows Sandbox and the Hyper-V manager are not available on the Home edition"
+    },
+    "revforge_sandbox_launcher": {
+      "available": true,
+      "detail": "forward/integrations/bmad/isolation/sandbox.sh sha256 959c159231192d58…"
+    }
+  },
+  "boundaries": [
+    {
+      "boundary": "whole_process_filesystem",
+      "enforceable": true,
+      "how": "sandbox.sh: mount namespace + pivot_root into a minimal root; old root (Windows drives, home, /run) detached",
+      "limits": "shares the WSL2 kernel with the host distribution; not a VM boundary"
+    },
+    {
+      "boundary": "source_read_only",
+      "enforceable": true,
+      "how": "bind mount remounted read-only",
+      "limits": "none known"
+    },
+    {
+      "boundary": "single_writable_output",
+      "enforceable": true,
+      "how": "only /work/out is a writable host bind; root and /usr read-only; /tmp private tmpfs",
+      "limits": "/tmp is writable but private and discarded"
+    },
+    {
+      "boundary": "network_default_deny",
+      "enforceable": true,
+      "how": "new network namespace with no interfaces configured",
+      "limits": "all-or-nothing: there is no egress path at all"
+    },
+    {
+      "boundary": "provider_egress_allowlist",
+      "enforceable": false,
+      "how": "would need an egress proxy outside the namespace (e.g. sandbox-runtime with socat, or a firewall in a container/VM)",
+      "limits": "not installed; a hostname allowlist would still not inspect TLS payloads"
+    },
+    {
+      "boundary": "payload_content_enforcement",
+      "enforceable": false,
+      "how": "none: TLS to the provider is end-to-end",
+      "limits": "only the minimal workspace limits what can be disclosed"
+    },
+    {
+      "boundary": "privilege_drop",
+      "enforceable": true,
+      "how": "setpriv: no capabilities (bounding/inheritable/ambient), no_new_privs",
+      "limits": "none known"
+    },
+    {
+      "boundary": "host_control_sockets",
+      "enforceable": true,
+      "how": "no /run, no docker socket, no WSL interop socket inside the new root",
+      "limits": "none known"
+    },
+    {
+      "boundary": "claude_code_inside_boundary",
+      "enforceable": false,
+      "how": "Claude Code (Node) must be installed inside the Linux environment that the sandbox exposes",
+      "limits": "Claude Code and Node are not installed in the WSL2 distribution"
+    }
+  ],
+  "admin_actions_required": [
+    "install Node.js and Claude Code inside the WSL2 distribution (under /usr or another path the sandbox exposes read-only), pinned to an approved version",
+    "optional: install bubblewrap and socat (sudo) to use the official Claude Code sandbox runtime as an additional layer and its hostname-allowlist proxy",
+    "provide a verified provider-egress component (allowlist proxy outside the namespace) before any LIVE run; without it the boundary has no network at all",
+    "administrator: optionally create a dedicated non-login user for AI execution (needs sudo)"
+  ],
+  "status": "ISOLATION_CONFIGURED",
+  "isolation_tested": false,
+  "isolation_problems": [
+    "no isolation test report: run bmad isolation test --record"
+  ]
+}

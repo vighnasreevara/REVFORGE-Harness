@@ -1,0 +1,29 @@
+{
+  "contract": "pilot/fixtures",
+  "contract_version": "1.0",
+  "synthetic": true,
+  "program": "SYNVAL01",
+  "format": "kind|value|rc|message (alphanumeric fields right-trimmed on output)",
+  "provenance": "Hand-derived by the converter author from SPEC.md before any Java was generated; not produced by executing Java; not reviewed by an independent human.",
+  "cases": [
+    { "id": "F01", "title": "valid order code", "input": "C|ORD-123|99|OLD", "expected": { "image": "C|ORD-123|0|" } },
+    { "id": "F02", "title": "wrong prefix", "input": "C|ORX-123|0|", "expected": { "image": "C|ORX-123|11|Order code rejected" } },
+    { "id": "F03", "title": "non-digit in the code number", "input": "C|ORD-12A|0|", "expected": { "image": "C|ORD-12A|11|Order code rejected" } },
+    { "id": "F04", "title": "short code number (padding space is not a digit)", "input": "C|ORD-12|0|", "expected": { "image": "C|ORD-12|11|Order code rejected" } },
+    { "id": "F05", "title": "valid quantity", "input": "Q|0007|99|OLD", "expected": { "image": "Q|0007|0|" } },
+    { "id": "F06", "title": "zero quantity", "input": "Q|0000|0|", "expected": { "image": "Q|0000|12|Quantity rejected" } },
+    { "id": "F07", "title": "short quantity", "input": "Q|12|0|", "expected": { "image": "Q|12|12|Quantity rejected" } },
+    { "id": "F08", "title": "status NEW", "input": "S|NEW|5|X", "expected": { "image": "S|NEW|0|" } },
+    { "id": "F09", "title": "status HLD", "input": "S|HLD|0|", "expected": { "image": "S|HLD|0|" } },
+    { "id": "F10", "title": "status CAN", "input": "S|CAN|0|", "expected": { "image": "S|CAN|0|" } },
+    { "id": "F11", "title": "status is case-sensitive", "input": "S|new|0|", "expected": { "image": "S|new|13|Status rejected" } },
+    { "id": "F12", "title": "status with trailing characters", "input": "S|NEWX|0|", "expected": { "image": "S|NEWX|13|Status rejected" } },
+    { "id": "F13", "title": "price 100 units", "input": "P|0000100|0|", "expected": { "image": "P|0000100|0|" } },
+    { "id": "F14", "title": "price below the minimum", "input": "P|0000000|0|", "expected": { "image": "P|0000000|14|Price out of range" } },
+    { "id": "F15", "title": "price at the maximum (inclusive)", "input": "P|0005000|0|", "expected": { "image": "P|0005000|0|" } },
+    { "id": "F16", "title": "price above the maximum", "input": "P|0005001|0|", "expected": { "image": "P|0005001|14|Price out of range" } },
+    { "id": "F17", "title": "price at the minimum (inclusive)", "input": "P|0000001|0|", "expected": { "image": "P|0000001|0|" } },
+    { "id": "F18", "title": "decimal price text: the MOVE is undefined by the source; the path must stay blocked", "input": "P|100.00|0|", "expected": { "blocked": true, "reason": "undefined data conversion into OV-PRICE" } },
+    { "id": "F19", "title": "unknown request kind", "input": "X|ANY|0|", "expected": { "image": "X|ANY|19|Unknown request kind" } }
+  ]
+}

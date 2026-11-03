@@ -1,0 +1,272 @@
+{
+  "decision_id": "DR-F2-0011-001",
+  "kind": "data_layout",
+  "question": "Copybook SQLCA (SYS-PORTFOLIO-001-FIL-0017) line 6 contains 'EXEC SQL INCLUDE SQLCA END-EXEC', naming itself. The included SQL communication area (SQLCODE, SQLSTATE, SQLERRMC, ...) has no layout in any reverse artifact. How should the forward design obtain the SQLCA layout and the SQLCODE/SQLSTATE semantics used by the 14 DB2 programs?",
+  "options_recorded": [
+    "Treat the include as the IBM DB2 precompiler-supplied SQLCA and supply its standard layout from authoritative IBM documentation as a documented external dependency (requires SME confirmation of the DB2 version).",
+    "Do not model an SQLCA record; map SQLCODE/SQLSTATE checks to JDBC SQLException error code and SQLState in the Java design, with the SQL-STATUS-CODES constants as the SQLSTATE comparison table.",
+    "Obtain the real SQLCA member from the source library (the repository copy appears to be a placeholder that shadows it) and re-run the reverse harness."
+  ],
+  "allowed_outcomes": [
+    {
+      "outcome": "resolved_no_change",
+      "roles": [
+        "technical_authority"
+      ]
+    },
+    {
+      "outcome": "excluded_from_scope",
+      "roles": [
+        "technical_authority"
+      ]
+    }
+  ],
+  "affected_units": [
+    "SQLCA"
+  ],
+  "affected_requirements": [],
+  "copybooks": [
+    {
+      "name": "SQLCA",
+      "file_id": "SYS-PORTFOLIO-001-FIL-0017",
+      "path": "src/copybook/db2/SQLCA.cpy",
+      "sha256": "03e8f64ae705fe87324100488072c05d179fb75f64db0dc0cf753f23ab10afc7",
+      "available": true,
+      "self_inclusion": [
+        {
+          "line": 6,
+          "text": "EXEC SQL INCLUDE SQLCA END-EXEC."
+        }
+      ],
+      "declarations": [
+        {
+          "kind": "item",
+          "name": "SQL-STATUS-CODES",
+          "level": 1,
+          "line": 9,
+          "values": [],
+          "parent": null
+        },
+        {
+          "kind": "item",
+          "name": "SQL-SUCCESS",
+          "level": 5,
+          "line": 10,
+          "values": [
+            "00000"
+          ],
+          "parent": "SQL-STATUS-CODES"
+        },
+        {
+          "kind": "item",
+          "name": "SQL-NOT-FOUND",
+          "level": 5,
+          "line": 11,
+          "values": [
+            "02000"
+          ],
+          "parent": "SQL-STATUS-CODES"
+        },
+        {
+          "kind": "item",
+          "name": "SQL-DUP-KEY",
+          "level": 5,
+          "line": 12,
+          "values": [
+            "23505"
+          ],
+          "parent": "SQL-STATUS-CODES"
+        },
+        {
+          "kind": "item",
+          "name": "SQL-DEADLOCK",
+          "level": 5,
+          "line": 13,
+          "values": [
+            "40001"
+          ],
+          "parent": "SQL-STATUS-CODES"
+        },
+        {
+          "kind": "item",
+          "name": "SQL-TIMEOUT",
+          "level": 5,
+          "line": 14,
+          "values": [
+            "40003"
+          ],
+          "parent": "SQL-STATUS-CODES"
+        },
+        {
+          "kind": "item",
+          "name": "SQL-CONNECTION-ERROR",
+          "level": 5,
+          "line": 15,
+          "values": [
+            "08001"
+          ],
+          "parent": "SQL-STATUS-CODES"
+        },
+        {
+          "kind": "item",
+          "name": "SQL-DB-ERROR",
+          "level": 5,
+          "line": 16,
+          "values": [
+            "58004"
+          ],
+          "parent": "SQL-STATUS-CODES"
+        }
+      ],
+      "included_by_programs": [
+        "CURSMGR",
+        "DB2CMT",
+        "DB2CONN",
+        "DB2ERR",
+        "DB2HNDL",
+        "DB2ONLN",
+        "DB2RECV",
+        "DB2STAT",
+        "ERRHNDL",
+        "HISTLD00",
+        "INQHIST",
+        "RTNANA00",
+        "RTNCDE00",
+        "SECMGR"
+      ]
+    }
+  ],
+  "names_used_by_programs": [
+    {
+      "name": "SQLCODE",
+      "declared_in_repository": false,
+      "used_by_programs": [
+        "CURSMGR",
+        "DB2CMT",
+        "DB2CONN",
+        "DB2ERR",
+        "DB2HNDL",
+        "DB2ONLN",
+        "DB2RECV",
+        "DB2STAT",
+        "ERRHNDL",
+        "HISTLD00",
+        "INQHIST",
+        "RTNANA00",
+        "RTNCDE00",
+        "SECMGR"
+      ]
+    },
+    {
+      "name": "SQLERRMC",
+      "declared_in_repository": false,
+      "used_by_programs": [
+        "DB2HNDL",
+        "DB2ONLN"
+      ]
+    }
+  ],
+  "affected_scopes": [
+    {
+      "scope": "programs:CURSMGR",
+      "readiness": "NOT_READY",
+      "blocking": 12
+    },
+    {
+      "scope": "programs:DB2CMT",
+      "readiness": "NOT_READY",
+      "blocking": 30
+    },
+    {
+      "scope": "programs:DB2CONN",
+      "readiness": "NOT_READY",
+      "blocking": 20
+    },
+    {
+      "scope": "programs:DB2ERR",
+      "readiness": "NOT_READY",
+      "blocking": 21
+    },
+    {
+      "scope": "programs:DB2HNDL",
+      "readiness": "NOT_READY",
+      "blocking": 10
+    },
+    {
+      "scope": "programs:DB2ONLN",
+      "readiness": "NOT_READY",
+      "blocking": 9
+    },
+    {
+      "scope": "programs:DB2RECV",
+      "readiness": "NOT_READY",
+      "blocking": 30
+    },
+    {
+      "scope": "programs:DB2STAT",
+      "readiness": "NOT_READY",
+      "blocking": 18
+    },
+    {
+      "scope": "programs:ERRHNDL",
+      "readiness": "NOT_READY",
+      "blocking": 10
+    },
+    {
+      "scope": "programs:HISTLD00",
+      "readiness": "NOT_READY",
+      "blocking": 19
+    },
+    {
+      "scope": "programs:INQHIST",
+      "readiness": "NOT_READY",
+      "blocking": 52
+    },
+    {
+      "scope": "programs:INQONLN",
+      "readiness": "NOT_READY",
+      "blocking": 79
+    },
+    {
+      "scope": "programs:RTNANA00",
+      "readiness": "NOT_READY",
+      "blocking": 10
+    },
+    {
+      "scope": "programs:RTNCDE00",
+      "readiness": "NOT_READY",
+      "blocking": 6
+    },
+    {
+      "scope": "programs:SECMGR",
+      "readiness": "NOT_READY",
+      "blocking": 10
+    }
+  ],
+  "counts": {
+    "affected_units": 1,
+    "affected_requirements": 0,
+    "affected_program_scopes": 15
+  },
+  "separation": {
+    "A_source_demonstrates": [
+      "src/copybook/db2/SQLCA.cpy (sha256 03e8f64ae705…) declares SQL-STATUS-CODES with 7 VALUE clause(s)",
+      "SQLCA line 6 includes itself: \"EXEC SQL INCLUDE SQLCA END-EXEC.\"",
+      "SQLCA is included by 14 program(s)"
+    ],
+    "B_external_environment_may_provide": [
+      "SQLCODE: used by 14 program(s) but declared nowhere in the repository; a DB2 precompiler or runtime normally supplies such names, which the repository cannot confirm",
+      "SQLERRMC: used by 2 program(s) but declared nowhere in the repository; a DB2 precompiler or runtime normally supplies such names, which the repository cannot confirm"
+    ],
+    "C_unsupported_assumptions": [
+      "any layout, field order or value meaning of SQLCODE, SQLERRMC beyond what the repository declares",
+      "the target DB2 version and its SQLCA definition"
+    ],
+    "D_missing_artifacts": [
+      "the real SQLCA member (the repository copy includes itself)",
+      "a declaration of SQLCODE",
+      "a declaration of SQLERRMC"
+    ],
+    "E_must_be_decided": "the technical authority must choose one allowed outcome (resolved_no_change, excluded_from_scope); the runtime does not choose"
+  }
+}

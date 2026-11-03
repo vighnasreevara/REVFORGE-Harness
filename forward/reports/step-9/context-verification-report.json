@@ -1,0 +1,2095 @@
+{
+  "contract": "verification/context-report",
+  "contract_version": "1.0",
+  "generated_at": "2026-11-01T18:26:55.277Z",
+  "baseline_manifest_sha256": "352b97f0bbcbdb149c1118791aaabaa2e8e9972716bc77adc3a2f0644d24a068",
+  "scope": "programs:RTNCDE00",
+  "source_available": true,
+  "summary": {
+    "items": 7,
+    "by_status": {
+      "CONTEXT_SUPPORTED": 5,
+      "CONTEXT_UNSUPPORTED": 1,
+      "CITATION_MISMATCH": 1
+    },
+    "dependency_chains": 13,
+    "additional_references_supporting_claims": 9,
+    "items_with_new_evidence": 1,
+    "contradictions": 0,
+    "metadata_disagreements": 0
+  },
+  "results": [
+    {
+      "item_id": "REQ-RTNCDE00-001",
+      "kind": "requirement",
+      "item_sha256": "70a3b283f57b4ad031f3f4f6493b33d8cccda01184ab7ba117214bf245cc9c5e",
+      "claim": "Route return-code service requests by request type The return-code service selects its action from the request type (RC-REQUEST-TYPE): 'I' initialises the return-code area (program ID spaces, current and highest code 0, status SUCCESS, response code 0); 'S' records a new return code; 'G' returns the current code, the highest code and the status with response code 0; 'L' inserts one row into DB2 table RTNCODES with the current timestamp, program ID, current code, highest code, status and message, setting response code 0 when the insert succeeds (SQLCODE 0) and 8 otherwise; 'A' analyses logged codes over a time window. Any other request type performs nothing and leaves the response code unchanged.",
+      "claimed_literals": [
+        "I",
+        "S",
+        "G",
+        "L",
+        "A"
+      ],
+      "existing": {
+        "claim_result": "verified",
+        "reasons": []
+      },
+      "refs": [
+        {
+          "ref_index": 0,
+          "file_id": "SYS-PORTFOLIO-001-FIL-0052",
+          "path": "src/programs/batch/RTNCDE00.cbl",
+          "sha256": "7cb951ea1f418c19ddd61c0eca00f21108af5f364b5ecf05742cbc428862994e",
+          "statement_id": "SYS-PORTFOLIO-001-FIL-0052-STMT-000001",
+          "statement_range": [
+            33,
+            49
+          ],
+          "cited_line": 33,
+          "cited_line_inside_statement": true,
+          "comment_lines_skipped": 0,
+          "continuation_lines_joined": 0,
+          "references": [
+            {
+              "name": "RC-INITIALIZE",
+              "qualifiers": [],
+              "usage": "tested",
+              "resolution": "resolved",
+              "candidates": 1,
+              "declared": {
+                "kind": "condition",
+                "line": 6,
+                "file": "RTNCODE.cpy",
+                "values": [
+                  "I"
+                ]
+              }
+            },
+            {
+              "name": "RC-SET-CODE",
+              "qualifiers": [],
+              "usage": "tested",
+              "resolution": "resolved",
+              "candidates": 1,
+              "declared": {
+                "kind": "condition",
+                "line": 7,
+                "file": "RTNCODE.cpy",
+                "values": [
+                  "S"
+                ]
+              }
+            },
+            {
+              "name": "RC-GET-CODE",
+              "qualifiers": [],
+              "usage": "tested",
+              "resolution": "resolved",
+              "candidates": 1,
+              "declared": {
+                "kind": "condition",
+                "line": 8,
+                "file": "RTNCODE.cpy",
+                "values": [
+                  "G"
+                ]
+              }
+            },
+            {
+              "name": "RC-LOG-CODE",
+              "qualifiers": [],
+              "usage": "tested",
+              "resolution": "resolved",
+              "candidates": 1,
+              "declared": {
+                "kind": "condition",
+                "line": 9,
+                "file": "RTNCODE.cpy",
+                "values": [
+                  "L"
+                ]
+              }
+            },
+            {
+              "name": "RC-ANALYZE",
+              "qualifiers": [],
+              "usage": "tested",
+              "resolution": "resolved",
+              "candidates": 1,
+              "declared": {
+                "kind": "condition",
+                "line": 10,
+                "file": "RTNCODE.cpy",
+                "values": [
+                  "A"
+                ]
+              }
+            }
+          ],
+          "literals": [
+            {
+              "literal": "I",
+              "support": "declared_value_of_referenced_condition",
+              "via": [
+                {
+                  "condition": "RC-INITIALIZE",
+                  "usage": "tested",
+                  "definition": {
+                    "kind": "condition",
+                    "name": "RC-INITIALIZE",
+                    "file": "D:\\PROJECTS\\REVFORGE-Harness\\references\\udara-legacy-modernization-harness\\src\\copybook\\common\\RTNCODE.cpy",
+                    "line": 6,
+                    "level": 88,
+                    "values": [
+                      "I"
+                    ],
+                    "ancestors": [
+                      "RETURN-CODE-AREA",
+                      "RC-REQUEST-TYPE"
+                    ],
+                    "parent": {
+                      "name": "RC-REQUEST-TYPE",
+                      "line": 5,
+                      "file": "D:\\PROJECTS\\REVFORGE-Harness\\references\\udara-legacy-modernization-harness\\src\\copybook\\common\\RTNCODE.cpy"
+                    },
+                    "record": "RETURN-CODE-AREA",
+                    "include_chain": [
+                      {
+                        "member": "RTNCODE",
+                        "included_from": "D:\\PROJECTS\\REVFORGE-Harness\\references\\udara-legacy-modernization-harness\\src\\programs\\batch\\RTNCDE00.cbl",
+                        "line": 30
+                      }
+                    ]
+                  }
+                }
+              ],
+              "unrelated": []
+            },
+            {
+              "literal": "S",
+              "support": "declared_value_of_referenced_condition",
+              "via": [
+                {
+                  "condition": "RC-SET-CODE",
+                  "usage": "tested",
+                  "definition": {
+                    "kind": "condition",
+                    "name": "RC-SET-CODE",
+                    "file": "D:\\PROJECTS\\REVFORGE-Harness\\references\\udara-legacy-modernization-harness\\src\\copybook\\common\\RTNCODE.cpy",
+                    "line": 7,
+                    "level": 88,
+                    "values": [
+                      "S"
+                    ],
+                    "ancestors": [
+                      "RETURN-CODE-AREA",
+                      "RC-REQUEST-TYPE"
+                    ],
+                    "parent": {
+                      "name": "RC-REQUEST-TYPE",
+                      "line": 5,
+                      "file": "D:\\PROJECTS\\REVFORGE-Harness\\references\\udara-legacy-modernization-harness\\src\\copybook\\common\\RTNCODE.cpy"
+                    },
+                    "record": "RETURN-CODE-AREA",
+                    "include_chain": [
+                      {
+                        "member": "RTNCODE",
+                        "included_from": "D:\\PROJECTS\\REVFORGE-Harness\\references\\udara-legacy-modernization-harness\\src\\programs\\batch\\RTNCDE00.cbl",
+                        "line": 30
+                      }
+                    ]
+                  }
+                }
+              ],
+              "unrelated": []
+            },
+            {
+              "literal": "G",
+              "support": "declared_value_of_referenced_condition",
+              "via": [
+                {
+                  "condition": "RC-GET-CODE",
+                  "usage": "tested",
+                  "definition": {
+                    "kind": "condition",
+                    "name": "RC-GET-CODE",
+                    "file": "D:\\PROJECTS\\REVFORGE-Harness\\references\\udara-legacy-modernization-harness\\src\\copybook\\common\\RTNCODE.cpy",
+                    "line": 8,
+                    "level": 88,
+                    "values": [
+                      "G"
+                    ],
+                    "ancestors": [
+                      "RETURN-CODE-AREA",
+                      "RC-REQUEST-TYPE"
+                    ],
+                    "parent": {
+                      "name": "RC-REQUEST-TYPE",
+                      "line": 5,
+                      "file": "D:\\PROJECTS\\REVFORGE-Harness\\references\\udara-legacy-modernization-harness\\src\\copybook\\common\\RTNCODE.cpy"
+                    },
+                    "record": "RETURN-CODE-AREA",
+                    "include_chain": [
+                      {
+                        "member": "RTNCODE",
+                        "included_from": "D:\\PROJECTS\\REVFORGE-Harness\\references\\udara-legacy-modernization-harness\\src\\programs\\batch\\RTNCDE00.cbl",
+                        "line": 30
+                      }
+                    ]
+                  }
+                }
+              ],
+              "unrelated": []
+            },
+            {
+              "literal": "L",
+              "support": "declared_value_of_referenced_condition",
+              "via": [
+                {
+                  "condition": "RC-LOG-CODE",
+                  "usage": "tested",
+                  "definition": {
+                    "kind": "condition",
+                    "name": "RC-LOG-CODE",
+                    "file": "D:\\PROJECTS\\REVFORGE-Harness\\references\\udara-legacy-modernization-harness\\src\\copybook\\common\\RTNCODE.cpy",
+                    "line": 9,
+                    "level": 88,
+                    "values": [
+                      "L"
+                    ],
+                    "ancestors": [
+                      "RETURN-CODE-AREA",
+                      "RC-REQUEST-TYPE"
+                    ],
+                    "parent": {
+                      "name": "RC-REQUEST-TYPE",
+                      "line": 5,
+                      "file": "D:\\PROJECTS\\REVFORGE-Harness\\references\\udara-legacy-modernization-harness\\src\\copybook\\common\\RTNCODE.cpy"
+                    },
+                    "record": "RETURN-CODE-AREA",
+                    "include_chain": [
+                      {
+                        "member": "RTNCODE",
+                        "included_from": "D:\\PROJECTS\\REVFORGE-Harness\\references\\udara-legacy-modernization-harness\\src\\programs\\batch\\RTNCDE00.cbl",
+                        "line": 30
+                      }
+                    ]
+                  }
+                }
+              ],
+              "unrelated": []
+            },
+            {
+              "literal": "A",
+              "support": "declared_value_of_referenced_condition",
+              "via": [
+                {
+                  "condition": "RC-ANALYZE",
+                  "usage": "tested",
+                  "definition": {
+                    "kind": "condition",
+                    "name": "RC-ANALYZE",
+                    "file": "D:\\PROJECTS\\REVFORGE-Harness\\references\\udara-legacy-modernization-harness\\src\\copybook\\common\\RTNCODE.cpy",
+                    "line": 10,
+                    "level": 88,
+                    "values": [
+                      "A"
+                    ],
+                    "ancestors": [
+                      "RETURN-CODE-AREA",
+                      "RC-REQUEST-TYPE"
+                    ],
+                    "parent": {
+                      "name": "RC-REQUEST-TYPE",
+                      "line": 5,
+                      "file": "D:\\PROJECTS\\REVFORGE-Harness\\references\\udara-legacy-modernization-harness\\src\\copybook\\common\\RTNCODE.cpy"
+                    },
+                    "record": "RETURN-CODE-AREA",
+                    "include_chain": [
+                      {
+                        "member": "RTNCODE",
+                        "included_from": "D:\\PROJECTS\\REVFORGE-Harness\\references\\udara-legacy-modernization-harness\\src\\programs\\batch\\RTNCDE00.cbl",
+                        "line": 30
+                      }
+                    ]
+                  }
+                }
+              ],
+              "unrelated": []
+            }
+          ]
+        },
+        {
+          "ref_index": 1,
+          "file_id": "SYS-PORTFOLIO-001-FIL-0013",
+          "field_id": "SYS-PORTFOLIO-001-FIL-0013-FLD-000001",
+          "field": {
+            "name": "RC-REQUEST-TYPE",
+            "qualified_name": "RETURN-CODE-AREA.RC-REQUEST-TYPE",
+            "source_line": 5
+          },
+          "field_in_source": [
+            {
+              "file": "RTNCODE.cpy",
+              "line": 5
+            }
+          ],
+          "status": "field_resolves"
+        }
+      ],
+      "levels": {
+        "symbol_exists": true,
+        "symbol_resolved": true,
+        "value_declared": true,
+        "statement_references": true,
+        "runtime_effect_supported": false,
+        "business_interpretation": "not_established_requires_human"
+      },
+      "status": "CONTEXT_SUPPORTED",
+      "literal_support": [
+        {
+          "literal": "I",
+          "support": "declared_value_of_referenced_condition",
+          "via": [
+            {
+              "condition": "RC-INITIALIZE",
+              "usage": "tested",
+              "definition": {
+                "kind": "condition",
+                "name": "RC-INITIALIZE",
+                "file": "D:\\PROJECTS\\REVFORGE-Harness\\references\\udara-legacy-modernization-harness\\src\\copybook\\common\\RTNCODE.cpy",
+                "line": 6,
+                "level": 88,
+                "values": [
+                  "I"
+                ],
+                "ancestors": [
+                  "RETURN-CODE-AREA",
+                  "RC-REQUEST-TYPE"
+                ],
+                "parent": {
+                  "name": "RC-REQUEST-TYPE",
+                  "line": 5,
+                  "file": "D:\\PROJECTS\\REVFORGE-Harness\\references\\udara-legacy-modernization-harness\\src\\copybook\\common\\RTNCODE.cpy"
+                },
+                "record": "RETURN-CODE-AREA",
+                "include_chain": [
+                  {
+                    "member": "RTNCODE",
+                    "included_from": "D:\\PROJECTS\\REVFORGE-Harness\\references\\udara-legacy-modernization-harness\\src\\programs\\batch\\RTNCDE00.cbl",
+                    "line": 30
+                  }
+                ]
+              }
+            }
+          ],
+          "unrelated": []
+        },
+        {
+          "literal": "S",
+          "support": "declared_value_of_referenced_condition",
+          "via": [
+            {
+              "condition": "RC-SET-CODE",
+              "usage": "tested",
+              "definition": {
+                "kind": "condition",
+                "name": "RC-SET-CODE",
+                "file": "D:\\PROJECTS\\REVFORGE-Harness\\references\\udara-legacy-modernization-harness\\src\\copybook\\common\\RTNCODE.cpy",
+                "line": 7,
+                "level": 88,
+                "values": [
+                  "S"
+                ],
+                "ancestors": [
+                  "RETURN-CODE-AREA",
+                  "RC-REQUEST-TYPE"
+                ],
+                "parent": {
+                  "name": "RC-REQUEST-TYPE",
+                  "line": 5,
+                  "file": "D:\\PROJECTS\\REVFORGE-Harness\\references\\udara-legacy-modernization-harness\\src\\copybook\\common\\RTNCODE.cpy"
+                },
+                "record": "RETURN-CODE-AREA",
+                "include_chain": [
+                  {
+                    "member": "RTNCODE",
+                    "included_from": "D:\\PROJECTS\\REVFORGE-Harness\\references\\udara-legacy-modernization-harness\\src\\programs\\batch\\RTNCDE00.cbl",
+                    "line": 30
+                  }
+                ]
+              }
+            }
+          ],
+          "unrelated": []
+        },
+        {
+          "literal": "G",
+          "support": "declared_value_of_referenced_condition",
+          "via": [
+            {
+              "condition": "RC-GET-CODE",
+              "usage": "tested",
+              "definition": {
+                "kind": "condition",
+                "name": "RC-GET-CODE",
+                "file": "D:\\PROJECTS\\REVFORGE-Harness\\references\\udara-legacy-modernization-harness\\src\\copybook\\common\\RTNCODE.cpy",
+                "line": 8,
+                "level": 88,
+                "values": [
+                  "G"
+                ],
+                "ancestors": [
+                  "RETURN-CODE-AREA",
+                  "RC-REQUEST-TYPE"
+                ],
+                "parent": {
+                  "name": "RC-REQUEST-TYPE",
+                  "line": 5,
+                  "file": "D:\\PROJECTS\\REVFORGE-Harness\\references\\udara-legacy-modernization-harness\\src\\copybook\\common\\RTNCODE.cpy"
+                },
+                "record": "RETURN-CODE-AREA",
+                "include_chain": [
+                  {
+                    "member": "RTNCODE",
+                    "included_from": "D:\\PROJECTS\\REVFORGE-Harness\\references\\udara-legacy-modernization-harness\\src\\programs\\batch\\RTNCDE00.cbl",
+                    "line": 30
+                  }
+                ]
+              }
+            }
+          ],
+          "unrelated": []
+        },
+        {
+          "literal": "L",
+          "support": "declared_value_of_referenced_condition",
+          "via": [
+            {
+              "condition": "RC-LOG-CODE",
+              "usage": "tested",
+              "definition": {
+                "kind": "condition",
+                "name": "RC-LOG-CODE",
+                "file": "D:\\PROJECTS\\REVFORGE-Harness\\references\\udara-legacy-modernization-harness\\src\\copybook\\common\\RTNCODE.cpy",
+                "line": 9,
+                "level": 88,
+                "values": [
+                  "L"
+                ],
+                "ancestors": [
+                  "RETURN-CODE-AREA",
+                  "RC-REQUEST-TYPE"
+                ],
+                "parent": {
+                  "name": "RC-REQUEST-TYPE",
+                  "line": 5,
+                  "file": "D:\\PROJECTS\\REVFORGE-Harness\\references\\udara-legacy-modernization-harness\\src\\copybook\\common\\RTNCODE.cpy"
+                },
+                "record": "RETURN-CODE-AREA",
+                "include_chain": [
+                  {
+                    "member": "RTNCODE",
+                    "included_from": "D:\\PROJECTS\\REVFORGE-Harness\\references\\udara-legacy-modernization-harness\\src\\programs\\batch\\RTNCDE00.cbl",
+                    "line": 30
+                  }
+                ]
+              }
+            }
+          ],
+          "unrelated": []
+        },
+        {
+          "literal": "A",
+          "support": "declared_value_of_referenced_condition",
+          "via": [
+            {
+              "condition": "RC-ANALYZE",
+              "usage": "tested",
+              "definition": {
+                "kind": "condition",
+                "name": "RC-ANALYZE",
+                "file": "D:\\PROJECTS\\REVFORGE-Harness\\references\\udara-legacy-modernization-harness\\src\\copybook\\common\\RTNCODE.cpy",
+                "line": 10,
+                "level": 88,
+                "values": [
+                  "A"
+                ],
+                "ancestors": [
+                  "RETURN-CODE-AREA",
+                  "RC-REQUEST-TYPE"
+                ],
+                "parent": {
+                  "name": "RC-REQUEST-TYPE",
+                  "line": 5,
+                  "file": "D:\\PROJECTS\\REVFORGE-Harness\\references\\udara-legacy-modernization-harness\\src\\copybook\\common\\RTNCODE.cpy"
+                },
+                "record": "RETURN-CODE-AREA",
+                "include_chain": [
+                  {
+                    "member": "RTNCODE",
+                    "included_from": "D:\\PROJECTS\\REVFORGE-Harness\\references\\udara-legacy-modernization-harness\\src\\programs\\batch\\RTNCDE00.cbl",
+                    "line": 30
+                  }
+                ]
+              }
+            }
+          ],
+          "unrelated": []
+        }
+      ],
+      "additional_references": [
+        {
+          "condition": "RC-INITIALIZE",
+          "declared_in": "src/copybook/common/RTNCODE.cpy",
+          "line": 6,
+          "values": [
+            "I"
+          ],
+          "parent": "RC-REQUEST-TYPE",
+          "condition_id": "SYS-PORTFOLIO-001-FIL-0013-FLD-000002",
+          "parent_field_id": "SYS-PORTFOLIO-001-FIL-0013-FLD-000001",
+          "include_chain": [
+            {
+              "member": "RTNCODE",
+              "included_from": "src/programs/batch/RTNCDE00.cbl",
+              "line": 30
+            }
+          ],
+          "usage": "tested"
+        },
+        {
+          "condition": "RC-SET-CODE",
+          "declared_in": "src/copybook/common/RTNCODE.cpy",
+          "line": 7,
+          "values": [
+            "S"
+          ],
+          "parent": "RC-REQUEST-TYPE",
+          "condition_id": "SYS-PORTFOLIO-001-FIL-0013-FLD-000003",
+          "parent_field_id": "SYS-PORTFOLIO-001-FIL-0013-FLD-000001",
+          "include_chain": [
+            {
+              "member": "RTNCODE",
+              "included_from": "src/programs/batch/RTNCDE00.cbl",
+              "line": 30
+            }
+          ],
+          "usage": "tested"
+        },
+        {
+          "condition": "RC-GET-CODE",
+          "declared_in": "src/copybook/common/RTNCODE.cpy",
+          "line": 8,
+          "values": [
+            "G"
+          ],
+          "parent": "RC-REQUEST-TYPE",
+          "condition_id": "SYS-PORTFOLIO-001-FIL-0013-FLD-000004",
+          "parent_field_id": "SYS-PORTFOLIO-001-FIL-0013-FLD-000001",
+          "include_chain": [
+            {
+              "member": "RTNCODE",
+              "included_from": "src/programs/batch/RTNCDE00.cbl",
+              "line": 30
+            }
+          ],
+          "usage": "tested"
+        },
+        {
+          "condition": "RC-LOG-CODE",
+          "declared_in": "src/copybook/common/RTNCODE.cpy",
+          "line": 9,
+          "values": [
+            "L"
+          ],
+          "parent": "RC-REQUEST-TYPE",
+          "condition_id": "SYS-PORTFOLIO-001-FIL-0013-FLD-000005",
+          "parent_field_id": "SYS-PORTFOLIO-001-FIL-0013-FLD-000001",
+          "include_chain": [
+            {
+              "member": "RTNCODE",
+              "included_from": "src/programs/batch/RTNCDE00.cbl",
+              "line": 30
+            }
+          ],
+          "usage": "tested"
+        },
+        {
+          "condition": "RC-ANALYZE",
+          "declared_in": "src/copybook/common/RTNCODE.cpy",
+          "line": 10,
+          "values": [
+            "A"
+          ],
+          "parent": "RC-REQUEST-TYPE",
+          "condition_id": "SYS-PORTFOLIO-001-FIL-0013-FLD-000006",
+          "parent_field_id": "SYS-PORTFOLIO-001-FIL-0013-FLD-000001",
+          "include_chain": [
+            {
+              "member": "RTNCODE",
+              "included_from": "src/programs/batch/RTNCDE00.cbl",
+              "line": 30
+            }
+          ],
+          "usage": "tested"
+        }
+      ],
+      "contradictions": [],
+      "metadata_disagreements": [],
+      "uncertainties": [
+        "COPY SQLCA at SQLCA.cpy:6 is circular: symbols it would define stay unresolved"
+      ],
+      "source_hashes": [
+        {
+          "path": "src/copybook/common/RTNCODE.cpy",
+          "sha256": "27eabb519319258b07b32f09ab60e80a18f6658a118e96c8fa01411fc473cbc9"
+        },
+        {
+          "path": "src/copybook/db2/SQLCA.cpy",
+          "sha256": "03e8f64ae705fe87324100488072c05d179fb75f64db0dc0cf753f23ab10afc7"
+        },
+        {
+          "path": "src/programs/batch/RTNCDE00.cbl",
+          "sha256": "7cb951ea1f418c19ddd61c0eca00f21108af5f364b5ecf05742cbc428862994e"
+        }
+      ],
+      "human_decision_needed": {
+        "needed": true,
+        "why": "the source structurally supports the stated values; whether this is the intended business behaviour is an interpretation only an authorised reviewer can confirm (by selecting the evidence supplement in a signed resolution)"
+      },
+      "result_sha256": "456974467912d81e3b637a2d4c4a93016c63e91d34a98952f1a9f6ce245fa31e"
+    },
+    {
+      "item_id": "REQ-RTNCDE00-002",
+      "kind": "requirement",
+      "item_sha256": "88a2aeb73bc02e2ecc83895f0da65046b7238dd597036a28e222c7ecddf217de",
+      "claim": "Keep the highest return code across calls When a new return code is set ('S'), if it is greater than the highest code recorded so far (RC-HIGHEST-CODE) it becomes the new highest code; otherwise the highest code is kept. In both cases the current code becomes the new code. The highest code is held in the caller's request area, so it persists only as long as the caller keeps that area.",
+      "claimed_literals": [
+        "S"
+      ],
+      "existing": {
+        "claim_result": "verified",
+        "reasons": []
+      },
+      "refs": [
+        {
+          "ref_index": 0,
+          "file_id": "SYS-PORTFOLIO-001-FIL-0052",
+          "path": "src/programs/batch/RTNCDE00.cbl",
+          "sha256": "7cb951ea1f418c19ddd61c0eca00f21108af5f364b5ecf05742cbc428862994e",
+          "statement_id": "SYS-PORTFOLIO-001-FIL-0052-STMT-000010",
+          "statement_range": [
+            64,
+            66
+          ],
+          "cited_line": 64,
+          "cited_line_inside_statement": true,
+          "comment_lines_skipped": 0,
+          "continuation_lines_joined": 0,
+          "references": [
+            {
+              "name": "RC-NEW-CODE",
+              "qualifiers": [],
+              "usage": "referenced",
+              "resolution": "resolved",
+              "candidates": 1,
+              "declared": {
+                "kind": "item",
+                "line": 15,
+                "file": "RTNCODE.cpy",
+                "values": []
+              }
+            },
+            {
+              "name": "RC-HIGHEST-CODE",
+              "qualifiers": [],
+              "usage": "referenced",
+              "resolution": "resolved",
+              "candidates": 1,
+              "declared": {
+                "kind": "item",
+                "line": 14,
+                "file": "RTNCODE.cpy",
+                "values": []
+              }
+            },
+            {
+              "name": "RC-NEW-CODE",
+              "qualifiers": [],
+              "usage": "referenced",
+              "resolution": "resolved",
+              "candidates": 1,
+              "declared": {
+                "kind": "item",
+                "line": 15,
+                "file": "RTNCODE.cpy",
+                "values": []
+              }
+            },
+            {
+              "name": "RC-HIGHEST-CODE",
+              "qualifiers": [],
+              "usage": "referenced",
+              "resolution": "resolved",
+              "candidates": 1,
+              "declared": {
+                "kind": "item",
+                "line": 14,
+                "file": "RTNCODE.cpy",
+                "values": []
+              }
+            }
+          ],
+          "literals": [
+            {
+              "literal": "S",
+              "support": "unrelated_occurrence_only",
+              "via": [],
+              "unrelated": [
+                {
+                  "name": "RC-SET-CODE",
+                  "file": "D:\\PROJECTS\\REVFORGE-Harness\\references\\udara-legacy-modernization-harness\\src\\copybook\\common\\RTNCODE.cpy",
+                  "line": 7
+                },
+                {
+                  "name": "RC-STATUS-SUCCESS",
+                  "file": "D:\\PROJECTS\\REVFORGE-Harness\\references\\udara-legacy-modernization-harness\\src\\copybook\\common\\RTNCODE.cpy",
+                  "line": 17
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "ref_index": 1,
+          "file_id": "SYS-PORTFOLIO-001-FIL-0013",
+          "field_id": "SYS-PORTFOLIO-001-FIL-0013-FLD-000011",
+          "field": {
+            "name": "RC-NEW-CODE",
+            "qualified_name": "RETURN-CODE-AREA.RC-CODES-AREA.RC-NEW-CODE",
+            "source_line": 15
+          },
+          "field_in_source": [
+            {
+              "file": "RTNCODE.cpy",
+              "line": 15
+            }
+          ],
+          "status": "field_resolves"
+        }
+      ],
+      "levels": {
+        "symbol_exists": true,
+        "symbol_resolved": false,
+        "value_declared": false,
+        "statement_references": false,
+        "runtime_effect_supported": false,
+        "business_interpretation": "not_established_requires_human"
+      },
+      "status": "CONTEXT_UNSUPPORTED",
+      "literal_support": [
+        {
+          "literal": "S",
+          "support": "unrelated_occurrence_only",
+          "via": [],
+          "unrelated": [
+            {
+              "name": "RC-SET-CODE",
+              "file": "D:\\PROJECTS\\REVFORGE-Harness\\references\\udara-legacy-modernization-harness\\src\\copybook\\common\\RTNCODE.cpy",
+              "line": 7
+            },
+            {
+              "name": "RC-STATUS-SUCCESS",
+              "file": "D:\\PROJECTS\\REVFORGE-Harness\\references\\udara-legacy-modernization-harness\\src\\copybook\\common\\RTNCODE.cpy",
+              "line": 17
+            }
+          ]
+        }
+      ],
+      "additional_references": [],
+      "contradictions": [],
+      "metadata_disagreements": [],
+      "uncertainties": [
+        "COPY SQLCA at SQLCA.cpy:6 is circular: symbols it would define stay unresolved",
+        "'S' is declared by RC-SET-CODE (RTNCODE.cpy:7), RC-STATUS-SUCCESS (RTNCODE.cpy:17), but no cited statement references it: not counted as evidence"
+      ],
+      "source_hashes": [
+        {
+          "path": "src/copybook/common/RTNCODE.cpy",
+          "sha256": "27eabb519319258b07b32f09ab60e80a18f6658a118e96c8fa01411fc473cbc9"
+        },
+        {
+          "path": "src/copybook/db2/SQLCA.cpy",
+          "sha256": "03e8f64ae705fe87324100488072c05d179fb75f64db0dc0cf753f23ab10afc7"
+        },
+        {
+          "path": "src/programs/batch/RTNCDE00.cbl",
+          "sha256": "7cb951ea1f418c19ddd61c0eca00f21108af5f364b5ecf05742cbc428862994e"
+        }
+      ],
+      "human_decision_needed": {
+        "needed": true,
+        "why": "the source does not establish the claim deterministically; an authorised decision is still required"
+      },
+      "result_sha256": "57ed8f7046785fd07b900e780b1cd7b83d22735497636b8af27fc07f7d19c7f9"
+    },
+    {
+      "item_id": "REQ-RTNCDE00-003",
+      "kind": "requirement",
+      "item_sha256": "ec665cc58b23e4e018cd684d7e7eb95f38767f28db156d80ca4cea4c30b1a28c",
+      "claim": "Classify a new return code by severity When a new return code is set, the system classifies it: 0 is SUCCESS ('S'), 1 to 4 is WARNING ('W'), 5 to 8 is ERROR ('E') and any other value is SEVERE ('F'). The response code is then set to 0.",
+      "claimed_literals": [
+        "S",
+        "W",
+        "E",
+        "F"
+      ],
+      "existing": {
+        "claim_result": "unverified",
+        "reasons": [
+          "stated values found in the program but not in the cited lines: F"
+        ]
+      },
+      "refs": [
+        {
+          "ref_index": 0,
+          "file_id": "SYS-PORTFOLIO-001-FIL-0052",
+          "path": "src/programs/batch/RTNCDE00.cbl",
+          "sha256": "7cb951ea1f418c19ddd61c0eca00f21108af5f364b5ecf05742cbc428862994e",
+          "statement_id": "SYS-PORTFOLIO-001-FIL-0052-STMT-000012",
+          "statement_range": [
+            70,
+            79
+          ],
+          "cited_line": 70,
+          "cited_line_inside_statement": true,
+          "comment_lines_skipped": 0,
+          "continuation_lines_joined": 0,
+          "references": [
+            {
+              "name": "RC-NEW-CODE",
+              "qualifiers": [],
+              "usage": "referenced",
+              "resolution": "resolved",
+              "candidates": 1,
+              "declared": {
+                "kind": "item",
+                "line": 15,
+                "file": "RTNCODE.cpy",
+                "values": []
+              }
+            },
+            {
+              "name": "RC-STATUS-SUCCESS",
+              "qualifiers": [],
+              "usage": "sets_true",
+              "resolution": "resolved",
+              "candidates": 1,
+              "declared": {
+                "kind": "condition",
+                "line": 17,
+                "file": "RTNCODE.cpy",
+                "values": [
+                  "S"
+                ]
+              }
+            },
+            {
+              "name": "RC-STATUS-WARNING",
+              "qualifiers": [],
+              "usage": "sets_true",
+              "resolution": "resolved",
+              "candidates": 1,
+              "declared": {
+                "kind": "condition",
+                "line": 18,
+                "file": "RTNCODE.cpy",
+                "values": [
+                  "W"
+                ]
+              }
+            },
+            {
+              "name": "RC-STATUS-ERROR",
+              "qualifiers": [],
+              "usage": "sets_true",
+              "resolution": "resolved",
+              "candidates": 1,
+              "declared": {
+                "kind": "condition",
+                "line": 19,
+                "file": "RTNCODE.cpy",
+                "values": [
+                  "E"
+                ]
+              }
+            },
+            {
+              "name": "RC-STATUS-SEVERE",
+              "qualifiers": [],
+              "usage": "sets_true",
+              "resolution": "resolved",
+              "candidates": 1,
+              "declared": {
+                "kind": "condition",
+                "line": 20,
+                "file": "RTNCODE.cpy",
+                "values": [
+                  "F"
+                ]
+              }
+            }
+          ],
+          "literals": [
+            {
+              "literal": "S",
+              "support": "declared_value_of_referenced_condition",
+              "via": [
+                {
+                  "condition": "RC-STATUS-SUCCESS",
+                  "usage": "sets_true",
+                  "definition": {
+                    "kind": "condition",
+                    "name": "RC-STATUS-SUCCESS",
+                    "file": "D:\\PROJECTS\\REVFORGE-Harness\\references\\udara-legacy-modernization-harness\\src\\copybook\\common\\RTNCODE.cpy",
+                    "line": 17,
+                    "level": 88,
+                    "values": [
+                      "S"
+                    ],
+                    "ancestors": [
+                      "RETURN-CODE-AREA",
+                      "RC-CODES-AREA",
+                      "RC-STATUS"
+                    ],
+                    "parent": {
+                      "name": "RC-STATUS",
+                      "line": 16,
+                      "file": "D:\\PROJECTS\\REVFORGE-Harness\\references\\udara-legacy-modernization-harness\\src\\copybook\\common\\RTNCODE.cpy"
+                    },
+                    "record": "RETURN-CODE-AREA",
+                    "include_chain": [
+                      {
+                        "member": "RTNCODE",
+                        "included_from": "D:\\PROJECTS\\REVFORGE-Harness\\references\\udara-legacy-modernization-harness\\src\\programs\\batch\\RTNCDE00.cbl",
+                        "line": 30
+                      }
+                    ]
+                  }
+                }
+              ],
+              "unrelated": []
+            },
+            {
+              "literal": "W",
+              "support": "declared_value_of_referenced_condition",
+              "via": [
+                {
+                  "condition": "RC-STATUS-WARNING",
+                  "usage": "sets_true",
+                  "definition": {
+                    "kind": "condition",
+                    "name": "RC-STATUS-WARNING",
+                    "file": "D:\\PROJECTS\\REVFORGE-Harness\\references\\udara-legacy-modernization-harness\\src\\copybook\\common\\RTNCODE.cpy",
+                    "line": 18,
+                    "level": 88,
+                    "values": [
+                      "W"
+                    ],
+                    "ancestors": [
+                      "RETURN-CODE-AREA",
+                      "RC-CODES-AREA",
+                      "RC-STATUS"
+                    ],
+                    "parent": {
+                      "name": "RC-STATUS",
+                      "line": 16,
+                      "file": "D:\\PROJECTS\\REVFORGE-Harness\\references\\udara-legacy-modernization-harness\\src\\copybook\\common\\RTNCODE.cpy"
+                    },
+                    "record": "RETURN-CODE-AREA",
+                    "include_chain": [
+                      {
+                        "member": "RTNCODE",
+                        "included_from": "D:\\PROJECTS\\REVFORGE-Harness\\references\\udara-legacy-modernization-harness\\src\\programs\\batch\\RTNCDE00.cbl",
+                        "line": 30
+                      }
+                    ]
+                  }
+                }
+              ],
+              "unrelated": []
+            },
+            {
+              "literal": "E",
+              "support": "declared_value_of_referenced_condition",
+              "via": [
+                {
+                  "condition": "RC-STATUS-ERROR",
+                  "usage": "sets_true",
+                  "definition": {
+                    "kind": "condition",
+                    "name": "RC-STATUS-ERROR",
+                    "file": "D:\\PROJECTS\\REVFORGE-Harness\\references\\udara-legacy-modernization-harness\\src\\copybook\\common\\RTNCODE.cpy",
+                    "line": 19,
+                    "level": 88,
+                    "values": [
+                      "E"
+                    ],
+                    "ancestors": [
+                      "RETURN-CODE-AREA",
+                      "RC-CODES-AREA",
+                      "RC-STATUS"
+                    ],
+                    "parent": {
+                      "name": "RC-STATUS",
+                      "line": 16,
+                      "file": "D:\\PROJECTS\\REVFORGE-Harness\\references\\udara-legacy-modernization-harness\\src\\copybook\\common\\RTNCODE.cpy"
+                    },
+                    "record": "RETURN-CODE-AREA",
+                    "include_chain": [
+                      {
+                        "member": "RTNCODE",
+                        "included_from": "D:\\PROJECTS\\REVFORGE-Harness\\references\\udara-legacy-modernization-harness\\src\\programs\\batch\\RTNCDE00.cbl",
+                        "line": 30
+                      }
+                    ]
+                  }
+                }
+              ],
+              "unrelated": []
+            },
+            {
+              "literal": "F",
+              "support": "declared_value_of_referenced_condition",
+              "via": [
+                {
+                  "condition": "RC-STATUS-SEVERE",
+                  "usage": "sets_true",
+                  "definition": {
+                    "kind": "condition",
+                    "name": "RC-STATUS-SEVERE",
+                    "file": "D:\\PROJECTS\\REVFORGE-Harness\\references\\udara-legacy-modernization-harness\\src\\copybook\\common\\RTNCODE.cpy",
+                    "line": 20,
+                    "level": 88,
+                    "values": [
+                      "F"
+                    ],
+                    "ancestors": [
+                      "RETURN-CODE-AREA",
+                      "RC-CODES-AREA",
+                      "RC-STATUS"
+                    ],
+                    "parent": {
+                      "name": "RC-STATUS",
+                      "line": 16,
+                      "file": "D:\\PROJECTS\\REVFORGE-Harness\\references\\udara-legacy-modernization-harness\\src\\copybook\\common\\RTNCODE.cpy"
+                    },
+                    "record": "RETURN-CODE-AREA",
+                    "include_chain": [
+                      {
+                        "member": "RTNCODE",
+                        "included_from": "D:\\PROJECTS\\REVFORGE-Harness\\references\\udara-legacy-modernization-harness\\src\\programs\\batch\\RTNCDE00.cbl",
+                        "line": 30
+                      }
+                    ]
+                  }
+                }
+              ],
+              "unrelated": []
+            }
+          ]
+        },
+        {
+          "ref_index": 1,
+          "file_id": "SYS-PORTFOLIO-001-FIL-0013",
+          "field_id": "SYS-PORTFOLIO-001-FIL-0013-FLD-000011",
+          "field": {
+            "name": "RC-NEW-CODE",
+            "qualified_name": "RETURN-CODE-AREA.RC-CODES-AREA.RC-NEW-CODE",
+            "source_line": 15
+          },
+          "field_in_source": [
+            {
+              "file": "RTNCODE.cpy",
+              "line": 15
+            }
+          ],
+          "status": "field_resolves"
+        }
+      ],
+      "levels": {
+        "symbol_exists": true,
+        "symbol_resolved": true,
+        "value_declared": true,
+        "statement_references": true,
+        "runtime_effect_supported": true,
+        "business_interpretation": "not_established_requires_human"
+      },
+      "status": "CONTEXT_SUPPORTED",
+      "literal_support": [
+        {
+          "literal": "S",
+          "support": "declared_value_of_referenced_condition",
+          "via": [
+            {
+              "condition": "RC-STATUS-SUCCESS",
+              "usage": "sets_true",
+              "definition": {
+                "kind": "condition",
+                "name": "RC-STATUS-SUCCESS",
+                "file": "D:\\PROJECTS\\REVFORGE-Harness\\references\\udara-legacy-modernization-harness\\src\\copybook\\common\\RTNCODE.cpy",
+                "line": 17,
+                "level": 88,
+                "values": [
+                  "S"
+                ],
+                "ancestors": [
+                  "RETURN-CODE-AREA",
+                  "RC-CODES-AREA",
+                  "RC-STATUS"
+                ],
+                "parent": {
+                  "name": "RC-STATUS",
+                  "line": 16,
+                  "file": "D:\\PROJECTS\\REVFORGE-Harness\\references\\udara-legacy-modernization-harness\\src\\copybook\\common\\RTNCODE.cpy"
+                },
+                "record": "RETURN-CODE-AREA",
+                "include_chain": [
+                  {
+                    "member": "RTNCODE",
+                    "included_from": "D:\\PROJECTS\\REVFORGE-Harness\\references\\udara-legacy-modernization-harness\\src\\programs\\batch\\RTNCDE00.cbl",
+                    "line": 30
+                  }
+                ]
+              }
+            }
+          ],
+          "unrelated": []
+        },
+        {
+          "literal": "W",
+          "support": "declared_value_of_referenced_condition",
+          "via": [
+            {
+              "condition": "RC-STATUS-WARNING",
+              "usage": "sets_true",
+              "definition": {
+                "kind": "condition",
+                "name": "RC-STATUS-WARNING",
+                "file": "D:\\PROJECTS\\REVFORGE-Harness\\references\\udara-legacy-modernization-harness\\src\\copybook\\common\\RTNCODE.cpy",
+                "line": 18,
+                "level": 88,
+                "values": [
+                  "W"
+                ],
+                "ancestors": [
+                  "RETURN-CODE-AREA",
+                  "RC-CODES-AREA",
+                  "RC-STATUS"
+                ],
+                "parent": {
+                  "name": "RC-STATUS",
+                  "line": 16,
+                  "file": "D:\\PROJECTS\\REVFORGE-Harness\\references\\udara-legacy-modernization-harness\\src\\copybook\\common\\RTNCODE.cpy"
+                },
+                "record": "RETURN-CODE-AREA",
+                "include_chain": [
+                  {
+                    "member": "RTNCODE",
+                    "included_from": "D:\\PROJECTS\\REVFORGE-Harness\\references\\udara-legacy-modernization-harness\\src\\programs\\batch\\RTNCDE00.cbl",
+                    "line": 30
+                  }
+                ]
+              }
+            }
+          ],
+          "unrelated": []
+        },
+        {
+          "literal": "E",
+          "support": "declared_value_of_referenced_condition",
+          "via": [
+            {
+              "condition": "RC-STATUS-ERROR",
+              "usage": "sets_true",
+              "definition": {
+                "kind": "condition",
+                "name": "RC-STATUS-ERROR",
+                "file": "D:\\PROJECTS\\REVFORGE-Harness\\references\\udara-legacy-modernization-harness\\src\\copybook\\common\\RTNCODE.cpy",
+                "line": 19,
+                "level": 88,
+                "values": [
+                  "E"
+                ],
+                "ancestors": [
+                  "RETURN-CODE-AREA",
+                  "RC-CODES-AREA",
+                  "RC-STATUS"
+                ],
+                "parent": {
+                  "name": "RC-STATUS",
+                  "line": 16,
+                  "file": "D:\\PROJECTS\\REVFORGE-Harness\\references\\udara-legacy-modernization-harness\\src\\copybook\\common\\RTNCODE.cpy"
+                },
+                "record": "RETURN-CODE-AREA",
+                "include_chain": [
+                  {
+                    "member": "RTNCODE",
+                    "included_from": "D:\\PROJECTS\\REVFORGE-Harness\\references\\udara-legacy-modernization-harness\\src\\programs\\batch\\RTNCDE00.cbl",
+                    "line": 30
+                  }
+                ]
+              }
+            }
+          ],
+          "unrelated": []
+        },
+        {
+          "literal": "F",
+          "support": "declared_value_of_referenced_condition",
+          "via": [
+            {
+              "condition": "RC-STATUS-SEVERE",
+              "usage": "sets_true",
+              "definition": {
+                "kind": "condition",
+                "name": "RC-STATUS-SEVERE",
+                "file": "D:\\PROJECTS\\REVFORGE-Harness\\references\\udara-legacy-modernization-harness\\src\\copybook\\common\\RTNCODE.cpy",
+                "line": 20,
+                "level": 88,
+                "values": [
+                  "F"
+                ],
+                "ancestors": [
+                  "RETURN-CODE-AREA",
+                  "RC-CODES-AREA",
+                  "RC-STATUS"
+                ],
+                "parent": {
+                  "name": "RC-STATUS",
+                  "line": 16,
+                  "file": "D:\\PROJECTS\\REVFORGE-Harness\\references\\udara-legacy-modernization-harness\\src\\copybook\\common\\RTNCODE.cpy"
+                },
+                "record": "RETURN-CODE-AREA",
+                "include_chain": [
+                  {
+                    "member": "RTNCODE",
+                    "included_from": "D:\\PROJECTS\\REVFORGE-Harness\\references\\udara-legacy-modernization-harness\\src\\programs\\batch\\RTNCDE00.cbl",
+                    "line": 30
+                  }
+                ]
+              }
+            }
+          ],
+          "unrelated": []
+        }
+      ],
+      "additional_references": [
+        {
+          "condition": "RC-STATUS-SUCCESS",
+          "declared_in": "src/copybook/common/RTNCODE.cpy",
+          "line": 17,
+          "values": [
+            "S"
+          ],
+          "parent": "RC-STATUS",
+          "condition_id": "SYS-PORTFOLIO-001-FIL-0013-FLD-000013",
+          "parent_field_id": "SYS-PORTFOLIO-001-FIL-0013-FLD-000012",
+          "include_chain": [
+            {
+              "member": "RTNCODE",
+              "included_from": "src/programs/batch/RTNCDE00.cbl",
+              "line": 30
+            }
+          ],
+          "usage": "sets_true"
+        },
+        {
+          "condition": "RC-STATUS-WARNING",
+          "declared_in": "src/copybook/common/RTNCODE.cpy",
+          "line": 18,
+          "values": [
+            "W"
+          ],
+          "parent": "RC-STATUS",
+          "condition_id": "SYS-PORTFOLIO-001-FIL-0013-FLD-000014",
+          "parent_field_id": "SYS-PORTFOLIO-001-FIL-0013-FLD-000012",
+          "include_chain": [
+            {
+              "member": "RTNCODE",
+              "included_from": "src/programs/batch/RTNCDE00.cbl",
+              "line": 30
+            }
+          ],
+          "usage": "sets_true"
+        },
+        {
+          "condition": "RC-STATUS-ERROR",
+          "declared_in": "src/copybook/common/RTNCODE.cpy",
+          "line": 19,
+          "values": [
+            "E"
+          ],
+          "parent": "RC-STATUS",
+          "condition_id": "SYS-PORTFOLIO-001-FIL-0013-FLD-000015",
+          "parent_field_id": "SYS-PORTFOLIO-001-FIL-0013-FLD-000012",
+          "include_chain": [
+            {
+              "member": "RTNCODE",
+              "included_from": "src/programs/batch/RTNCDE00.cbl",
+              "line": 30
+            }
+          ],
+          "usage": "sets_true"
+        },
+        {
+          "condition": "RC-STATUS-SEVERE",
+          "declared_in": "src/copybook/common/RTNCODE.cpy",
+          "line": 20,
+          "values": [
+            "F"
+          ],
+          "parent": "RC-STATUS",
+          "condition_id": "SYS-PORTFOLIO-001-FIL-0013-FLD-000016",
+          "parent_field_id": "SYS-PORTFOLIO-001-FIL-0013-FLD-000012",
+          "include_chain": [
+            {
+              "member": "RTNCODE",
+              "included_from": "src/programs/batch/RTNCDE00.cbl",
+              "line": 30
+            }
+          ],
+          "usage": "sets_true"
+        }
+      ],
+      "contradictions": [],
+      "metadata_disagreements": [],
+      "uncertainties": [
+        "COPY SQLCA at SQLCA.cpy:6 is circular: symbols it would define stay unresolved"
+      ],
+      "source_hashes": [
+        {
+          "path": "src/copybook/common/RTNCODE.cpy",
+          "sha256": "27eabb519319258b07b32f09ab60e80a18f6658a118e96c8fa01411fc473cbc9"
+        },
+        {
+          "path": "src/copybook/db2/SQLCA.cpy",
+          "sha256": "03e8f64ae705fe87324100488072c05d179fb75f64db0dc0cf753f23ab10afc7"
+        },
+        {
+          "path": "src/programs/batch/RTNCDE00.cbl",
+          "sha256": "7cb951ea1f418c19ddd61c0eca00f21108af5f364b5ecf05742cbc428862994e"
+        }
+      ],
+      "human_decision_needed": {
+        "needed": true,
+        "why": "the source structurally supports the stated values; whether this is the intended business behaviour is an interpretation only an authorised reviewer can confirm (by selecting the evidence supplement in a signed resolution)"
+      },
+      "result_sha256": "aa819e994cc4bce3d9c712e18e7546085f6092cdf70d962cab55ca3e59b46948"
+    },
+    {
+      "item_id": "REQ-RTNCDE00-004",
+      "kind": "requirement",
+      "item_sha256": "0ac2f6b674b57cdeceab63b1845884a51dc70e50d0eccdbaf9ab57f1a5292269",
+      "claim": "Analyse logged return codes for a program within a time window On an analyse request ('A') the system counts the logged return codes in RTNCODES for the requested program ID whose timestamp is greater than or equal to the caller's start time and less than or equal to the caller's end time, and returns the count, the highest (MAX) and the lowest (MIN) logged return code. The response code is 0 when the query succeeds (SQLCODE 0) and 8 otherwise.",
+      "claimed_literals": [
+        "A"
+      ],
+      "existing": {
+        "claim_result": "contradicted",
+        "reasons": [
+          "cited line 121 is outside SYS-PORTFOLIO-001-FIL-0052-STMT-000024 (lines 122-133)"
+        ]
+      },
+      "refs": [
+        {
+          "ref_index": 0,
+          "file_id": "SYS-PORTFOLIO-001-FIL-0052",
+          "path": "src/programs/batch/RTNCDE00.cbl",
+          "sha256": "7cb951ea1f418c19ddd61c0eca00f21108af5f364b5ecf05742cbc428862994e",
+          "statement_id": "SYS-PORTFOLIO-001-FIL-0052-STMT-000024",
+          "statement_range": [
+            122,
+            133
+          ],
+          "cited_line": 121,
+          "cited_line_inside_statement": false,
+          "comment_lines_skipped": 0,
+          "continuation_lines_joined": 0,
+          "references": [
+            {
+              "name": "RC-TOTAL-CODES",
+              "qualifiers": [],
+              "usage": "referenced",
+              "resolution": "resolved",
+              "candidates": 1,
+              "declared": {
+                "kind": "item",
+                "line": 26,
+                "file": "RTNCODE.cpy",
+                "values": []
+              }
+            },
+            {
+              "name": "RC-MAX-CODE",
+              "qualifiers": [],
+              "usage": "referenced",
+              "resolution": "resolved",
+              "candidates": 1,
+              "declared": {
+                "kind": "item",
+                "line": 27,
+                "file": "RTNCODE.cpy",
+                "values": []
+              }
+            },
+            {
+              "name": "RC-MIN-CODE",
+              "qualifiers": [],
+              "usage": "referenced",
+              "resolution": "resolved",
+              "candidates": 1,
+              "declared": {
+                "kind": "item",
+                "line": 28,
+                "file": "RTNCODE.cpy",
+                "values": []
+              }
+            },
+            {
+              "name": "RC-PROGRAM-ID",
+              "qualifiers": [],
+              "usage": "referenced",
+              "resolution": "resolved",
+              "candidates": 1,
+              "declared": {
+                "kind": "item",
+                "line": 11,
+                "file": "RTNCODE.cpy",
+                "values": []
+              }
+            },
+            {
+              "name": "RC-START-TIME",
+              "qualifiers": [],
+              "usage": "referenced",
+              "resolution": "resolved",
+              "candidates": 1,
+              "declared": {
+                "kind": "item",
+                "line": 24,
+                "file": "RTNCODE.cpy",
+                "values": []
+              }
+            },
+            {
+              "name": "RC-END-TIME",
+              "qualifiers": [],
+              "usage": "referenced",
+              "resolution": "resolved",
+              "candidates": 1,
+              "declared": {
+                "kind": "item",
+                "line": 25,
+                "file": "RTNCODE.cpy",
+                "values": []
+              }
+            }
+          ],
+          "literals": [
+            {
+              "literal": "A",
+              "support": "unrelated_occurrence_only",
+              "via": [],
+              "unrelated": [
+                {
+                  "name": "RC-ANALYZE",
+                  "file": "D:\\PROJECTS\\REVFORGE-Harness\\references\\udara-legacy-modernization-harness\\src\\copybook\\common\\RTNCODE.cpy",
+                  "line": 10
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "levels": {
+        "symbol_exists": true,
+        "symbol_resolved": false,
+        "value_declared": false,
+        "statement_references": false,
+        "runtime_effect_supported": false,
+        "business_interpretation": "not_established_requires_human"
+      },
+      "status": "CITATION_MISMATCH",
+      "literal_support": [
+        {
+          "literal": "A",
+          "support": "unrelated_occurrence_only",
+          "via": [],
+          "unrelated": [
+            {
+              "name": "RC-ANALYZE",
+              "file": "D:\\PROJECTS\\REVFORGE-Harness\\references\\udara-legacy-modernization-harness\\src\\copybook\\common\\RTNCODE.cpy",
+              "line": 10
+            }
+          ]
+        }
+      ],
+      "additional_references": [],
+      "contradictions": [],
+      "metadata_disagreements": [],
+      "uncertainties": [
+        "COPY SQLCA at SQLCA.cpy:6 is circular: symbols it would define stay unresolved",
+        "'A' is declared by RC-ANALYZE (RTNCODE.cpy:10), but no cited statement references it: not counted as evidence"
+      ],
+      "source_hashes": [
+        {
+          "path": "src/copybook/common/RTNCODE.cpy",
+          "sha256": "27eabb519319258b07b32f09ab60e80a18f6658a118e96c8fa01411fc473cbc9"
+        },
+        {
+          "path": "src/copybook/db2/SQLCA.cpy",
+          "sha256": "03e8f64ae705fe87324100488072c05d179fb75f64db0dc0cf753f23ab10afc7"
+        },
+        {
+          "path": "src/programs/batch/RTNCDE00.cbl",
+          "sha256": "7cb951ea1f418c19ddd61c0eca00f21108af5f364b5ecf05742cbc428862994e"
+        }
+      ],
+      "human_decision_needed": {
+        "needed": true,
+        "why": "the cited line lies outside the cited statement: an authorised citation correction is needed before the evidence can count"
+      },
+      "result_sha256": "54ecf550d357ff0fb69f79d523d776ae67a89be5d4b229c4bd8ac06fdacb37f7"
+    },
+    {
+      "item_id": "RT-RTNCDE00-001",
+      "kind": "runtime_requirement",
+      "item_sha256": "df9759abc7f29462422df7513c5253527a83e18c5525b4450802ee6db6ef4e60",
+      "claim": "SET request classifies the new code: 0 success, 1-4 warning, 5-8 error, anything else severe, and keeps the highest code seen in the caller's area (state lives in the caller-supplied RC-REQUEST-AREA, not in this program).",
+      "claimed_literals": [],
+      "existing": {
+        "claim_result": "verified",
+        "reasons": []
+      },
+      "refs": [
+        {
+          "ref_index": 0,
+          "file_id": "SYS-PORTFOLIO-001-FIL-0052",
+          "path": "src/programs/batch/RTNCDE00.cbl",
+          "sha256": "7cb951ea1f418c19ddd61c0eca00f21108af5f364b5ecf05742cbc428862994e",
+          "statement_id": "SYS-PORTFOLIO-001-FIL-0052-STMT-000012",
+          "statement_range": [
+            70,
+            79
+          ],
+          "cited_line": 70,
+          "cited_line_inside_statement": true,
+          "comment_lines_skipped": 0,
+          "continuation_lines_joined": 0,
+          "references": [
+            {
+              "name": "RC-NEW-CODE",
+              "qualifiers": [],
+              "usage": "referenced",
+              "resolution": "resolved",
+              "candidates": 1,
+              "declared": {
+                "kind": "item",
+                "line": 15,
+                "file": "RTNCODE.cpy",
+                "values": []
+              }
+            },
+            {
+              "name": "RC-STATUS-SUCCESS",
+              "qualifiers": [],
+              "usage": "sets_true",
+              "resolution": "resolved",
+              "candidates": 1,
+              "declared": {
+                "kind": "condition",
+                "line": 17,
+                "file": "RTNCODE.cpy",
+                "values": [
+                  "S"
+                ]
+              }
+            },
+            {
+              "name": "RC-STATUS-WARNING",
+              "qualifiers": [],
+              "usage": "sets_true",
+              "resolution": "resolved",
+              "candidates": 1,
+              "declared": {
+                "kind": "condition",
+                "line": 18,
+                "file": "RTNCODE.cpy",
+                "values": [
+                  "W"
+                ]
+              }
+            },
+            {
+              "name": "RC-STATUS-ERROR",
+              "qualifiers": [],
+              "usage": "sets_true",
+              "resolution": "resolved",
+              "candidates": 1,
+              "declared": {
+                "kind": "condition",
+                "line": 19,
+                "file": "RTNCODE.cpy",
+                "values": [
+                  "E"
+                ]
+              }
+            },
+            {
+              "name": "RC-STATUS-SEVERE",
+              "qualifiers": [],
+              "usage": "sets_true",
+              "resolution": "resolved",
+              "candidates": 1,
+              "declared": {
+                "kind": "condition",
+                "line": 20,
+                "file": "RTNCODE.cpy",
+                "values": [
+                  "F"
+                ]
+              }
+            }
+          ],
+          "literals": []
+        }
+      ],
+      "levels": {
+        "symbol_exists": true,
+        "symbol_resolved": true,
+        "value_declared": true,
+        "statement_references": true,
+        "runtime_effect_supported": true,
+        "business_interpretation": "not_established_requires_human"
+      },
+      "status": "CONTEXT_SUPPORTED",
+      "literal_support": [],
+      "additional_references": [
+        {
+          "condition": "RC-STATUS-SUCCESS",
+          "declared_in": "src/copybook/common/RTNCODE.cpy",
+          "line": 17,
+          "values": [
+            "S"
+          ],
+          "parent": "RC-STATUS",
+          "condition_id": "SYS-PORTFOLIO-001-FIL-0013-FLD-000013",
+          "parent_field_id": "SYS-PORTFOLIO-001-FIL-0013-FLD-000012",
+          "include_chain": [
+            {
+              "member": "RTNCODE",
+              "included_from": "src/programs/batch/RTNCDE00.cbl",
+              "line": 30
+            }
+          ],
+          "usage": "sets_true"
+        },
+        {
+          "condition": "RC-STATUS-WARNING",
+          "declared_in": "src/copybook/common/RTNCODE.cpy",
+          "line": 18,
+          "values": [
+            "W"
+          ],
+          "parent": "RC-STATUS",
+          "condition_id": "SYS-PORTFOLIO-001-FIL-0013-FLD-000014",
+          "parent_field_id": "SYS-PORTFOLIO-001-FIL-0013-FLD-000012",
+          "include_chain": [
+            {
+              "member": "RTNCODE",
+              "included_from": "src/programs/batch/RTNCDE00.cbl",
+              "line": 30
+            }
+          ],
+          "usage": "sets_true"
+        },
+        {
+          "condition": "RC-STATUS-ERROR",
+          "declared_in": "src/copybook/common/RTNCODE.cpy",
+          "line": 19,
+          "values": [
+            "E"
+          ],
+          "parent": "RC-STATUS",
+          "condition_id": "SYS-PORTFOLIO-001-FIL-0013-FLD-000015",
+          "parent_field_id": "SYS-PORTFOLIO-001-FIL-0013-FLD-000012",
+          "include_chain": [
+            {
+              "member": "RTNCODE",
+              "included_from": "src/programs/batch/RTNCDE00.cbl",
+              "line": 30
+            }
+          ],
+          "usage": "sets_true"
+        },
+        {
+          "condition": "RC-STATUS-SEVERE",
+          "declared_in": "src/copybook/common/RTNCODE.cpy",
+          "line": 20,
+          "values": [
+            "F"
+          ],
+          "parent": "RC-STATUS",
+          "condition_id": "SYS-PORTFOLIO-001-FIL-0013-FLD-000016",
+          "parent_field_id": "SYS-PORTFOLIO-001-FIL-0013-FLD-000012",
+          "include_chain": [
+            {
+              "member": "RTNCODE",
+              "included_from": "src/programs/batch/RTNCDE00.cbl",
+              "line": 30
+            }
+          ],
+          "usage": "sets_true"
+        }
+      ],
+      "contradictions": [],
+      "metadata_disagreements": [],
+      "uncertainties": [
+        "COPY SQLCA at SQLCA.cpy:6 is circular: symbols it would define stay unresolved"
+      ],
+      "source_hashes": [
+        {
+          "path": "src/copybook/common/RTNCODE.cpy",
+          "sha256": "27eabb519319258b07b32f09ab60e80a18f6658a118e96c8fa01411fc473cbc9"
+        },
+        {
+          "path": "src/copybook/db2/SQLCA.cpy",
+          "sha256": "03e8f64ae705fe87324100488072c05d179fb75f64db0dc0cf753f23ab10afc7"
+        },
+        {
+          "path": "src/programs/batch/RTNCDE00.cbl",
+          "sha256": "7cb951ea1f418c19ddd61c0eca00f21108af5f364b5ecf05742cbc428862994e"
+        }
+      ],
+      "human_decision_needed": {
+        "needed": true,
+        "why": "the source structurally supports the stated values; whether this is the intended business behaviour is an interpretation only an authorised reviewer can confirm (by selecting the evidence supplement in a signed resolution)"
+      },
+      "result_sha256": "4a7988102c08e2401b09fb156b5259138ce77eed1b5870e271de0a47ba675bd0"
+    },
+    {
+      "item_id": "RT-RTNCDE00-002",
+      "kind": "runtime_requirement",
+      "item_sha256": "ba25007532f27658e7138af4bd55952c7a3647e4ded4bac7cf62378fb03af17a",
+      "claim": "LOG request inserts one RTNCODES row whose TIMESTAMP is the 16-character CURRENT-DATE prefix (YYYYMMDDHHMMSShh) and reports SQL success/failure only as response code 0/8.",
+      "claimed_literals": [],
+      "existing": {
+        "claim_result": "verified",
+        "reasons": []
+      },
+      "refs": [
+        {
+          "ref_index": 0,
+          "file_id": "SYS-PORTFOLIO-001-FIL-0052",
+          "path": "src/programs/batch/RTNCDE00.cbl",
+          "sha256": "7cb951ea1f418c19ddd61c0eca00f21108af5f364b5ecf05742cbc428862994e",
+          "statement_id": "SYS-PORTFOLIO-001-FIL-0052-STMT-000021",
+          "statement_range": [
+            96,
+            111
+          ],
+          "cited_line": 96,
+          "cited_line_inside_statement": true,
+          "comment_lines_skipped": 0,
+          "continuation_lines_joined": 0,
+          "references": [
+            {
+              "name": "WS-CURRENT-TIME",
+              "qualifiers": [],
+              "usage": "referenced",
+              "resolution": "resolved",
+              "candidates": 1,
+              "declared": {
+                "kind": "item",
+                "line": 15,
+                "file": "RTNCDE00.cbl",
+                "values": []
+              }
+            },
+            {
+              "name": "RC-PROGRAM-ID",
+              "qualifiers": [],
+              "usage": "referenced",
+              "resolution": "resolved",
+              "candidates": 1,
+              "declared": {
+                "kind": "item",
+                "line": 11,
+                "file": "RTNCODE.cpy",
+                "values": []
+              }
+            },
+            {
+              "name": "RC-CURRENT-CODE",
+              "qualifiers": [],
+              "usage": "referenced",
+              "resolution": "resolved",
+              "candidates": 1,
+              "declared": {
+                "kind": "item",
+                "line": 13,
+                "file": "RTNCODE.cpy",
+                "values": []
+              }
+            },
+            {
+              "name": "RC-HIGHEST-CODE",
+              "qualifiers": [],
+              "usage": "referenced",
+              "resolution": "resolved",
+              "candidates": 1,
+              "declared": {
+                "kind": "item",
+                "line": 14,
+                "file": "RTNCODE.cpy",
+                "values": []
+              }
+            },
+            {
+              "name": "RC-STATUS",
+              "qualifiers": [],
+              "usage": "referenced",
+              "resolution": "resolved",
+              "candidates": 1,
+              "declared": {
+                "kind": "item",
+                "line": 16,
+                "file": "RTNCODE.cpy",
+                "values": []
+              }
+            },
+            {
+              "name": "RC-MESSAGE",
+              "qualifiers": [],
+              "usage": "referenced",
+              "resolution": "resolved",
+              "candidates": 1,
+              "declared": {
+                "kind": "item",
+                "line": 21,
+                "file": "RTNCODE.cpy",
+                "values": []
+              }
+            }
+          ],
+          "literals": []
+        }
+      ],
+      "levels": {
+        "symbol_exists": true,
+        "symbol_resolved": false,
+        "value_declared": false,
+        "statement_references": false,
+        "runtime_effect_supported": false,
+        "business_interpretation": "not_established_requires_human"
+      },
+      "status": "CONTEXT_SUPPORTED",
+      "literal_support": [],
+      "additional_references": [],
+      "contradictions": [],
+      "metadata_disagreements": [],
+      "uncertainties": [
+        "COPY SQLCA at SQLCA.cpy:6 is circular: symbols it would define stay unresolved"
+      ],
+      "source_hashes": [
+        {
+          "path": "src/copybook/common/RTNCODE.cpy",
+          "sha256": "27eabb519319258b07b32f09ab60e80a18f6658a118e96c8fa01411fc473cbc9"
+        },
+        {
+          "path": "src/copybook/db2/SQLCA.cpy",
+          "sha256": "03e8f64ae705fe87324100488072c05d179fb75f64db0dc0cf753f23ab10afc7"
+        },
+        {
+          "path": "src/programs/batch/RTNCDE00.cbl",
+          "sha256": "7cb951ea1f418c19ddd61c0eca00f21108af5f364b5ecf05742cbc428862994e"
+        }
+      ],
+      "human_decision_needed": {
+        "needed": true,
+        "why": "the source structurally supports the stated values; whether this is the intended business behaviour is an interpretation only an authorised reviewer can confirm (by selecting the evidence supplement in a signed resolution)"
+      },
+      "result_sha256": "3b009316d0d3910f6f41c51caf1a858163ca725b608180e70d9a611dc8cb487c"
+    },
+    {
+      "item_id": "RT-RTNCDE00-003",
+      "kind": "runtime_requirement",
+      "item_sha256": "9e704b8a16d5f43dfad07e0a07abdee815875185fbd006ac42162b939ad26a31",
+      "claim": "ANALYZE request returns count, max and min RETURN_CODE for a program within [RC-START-TIME, RC-END-TIME] via a singleton SELECT INTO.",
+      "claimed_literals": [],
+      "existing": {
+        "claim_result": "verified",
+        "reasons": []
+      },
+      "refs": [
+        {
+          "ref_index": 0,
+          "file_id": "SYS-PORTFOLIO-001-FIL-0052",
+          "path": "src/programs/batch/RTNCDE00.cbl",
+          "sha256": "7cb951ea1f418c19ddd61c0eca00f21108af5f364b5ecf05742cbc428862994e",
+          "statement_id": "SYS-PORTFOLIO-001-FIL-0052-STMT-000024",
+          "statement_range": [
+            122,
+            133
+          ],
+          "cited_line": 122,
+          "cited_line_inside_statement": true,
+          "comment_lines_skipped": 0,
+          "continuation_lines_joined": 0,
+          "references": [
+            {
+              "name": "RC-TOTAL-CODES",
+              "qualifiers": [],
+              "usage": "referenced",
+              "resolution": "resolved",
+              "candidates": 1,
+              "declared": {
+                "kind": "item",
+                "line": 26,
+                "file": "RTNCODE.cpy",
+                "values": []
+              }
+            },
+            {
+              "name": "RC-MAX-CODE",
+              "qualifiers": [],
+              "usage": "referenced",
+              "resolution": "resolved",
+              "candidates": 1,
+              "declared": {
+                "kind": "item",
+                "line": 27,
+                "file": "RTNCODE.cpy",
+                "values": []
+              }
+            },
+            {
+              "name": "RC-MIN-CODE",
+              "qualifiers": [],
+              "usage": "referenced",
+              "resolution": "resolved",
+              "candidates": 1,
+              "declared": {
+                "kind": "item",
+                "line": 28,
+                "file": "RTNCODE.cpy",
+                "values": []
+              }
+            },
+            {
+              "name": "RC-PROGRAM-ID",
+              "qualifiers": [],
+              "usage": "referenced",
+              "resolution": "resolved",
+              "candidates": 1,
+              "declared": {
+                "kind": "item",
+                "line": 11,
+                "file": "RTNCODE.cpy",
+                "values": []
+              }
+            },
+            {
+              "name": "RC-START-TIME",
+              "qualifiers": [],
+              "usage": "referenced",
+              "resolution": "resolved",
+              "candidates": 1,
+              "declared": {
+                "kind": "item",
+                "line": 24,
+                "file": "RTNCODE.cpy",
+                "values": []
+              }
+            },
+            {
+              "name": "RC-END-TIME",
+              "qualifiers": [],
+              "usage": "referenced",
+              "resolution": "resolved",
+              "candidates": 1,
+              "declared": {
+                "kind": "item",
+                "line": 25,
+                "file": "RTNCODE.cpy",
+                "values": []
+              }
+            }
+          ],
+          "literals": []
+        }
+      ],
+      "levels": {
+        "symbol_exists": true,
+        "symbol_resolved": false,
+        "value_declared": false,
+        "statement_references": false,
+        "runtime_effect_supported": false,
+        "business_interpretation": "not_established_requires_human"
+      },
+      "status": "CONTEXT_SUPPORTED",
+      "literal_support": [],
+      "additional_references": [],
+      "contradictions": [],
+      "metadata_disagreements": [],
+      "uncertainties": [
+        "COPY SQLCA at SQLCA.cpy:6 is circular: symbols it would define stay unresolved"
+      ],
+      "source_hashes": [
+        {
+          "path": "src/copybook/common/RTNCODE.cpy",
+          "sha256": "27eabb519319258b07b32f09ab60e80a18f6658a118e96c8fa01411fc473cbc9"
+        },
+        {
+          "path": "src/copybook/db2/SQLCA.cpy",
+          "sha256": "03e8f64ae705fe87324100488072c05d179fb75f64db0dc0cf753f23ab10afc7"
+        },
+        {
+          "path": "src/programs/batch/RTNCDE00.cbl",
+          "sha256": "7cb951ea1f418c19ddd61c0eca00f21108af5f364b5ecf05742cbc428862994e"
+        }
+      ],
+      "human_decision_needed": {
+        "needed": true,
+        "why": "the source structurally supports the stated values; whether this is the intended business behaviour is an interpretation only an authorised reviewer can confirm (by selecting the evidence supplement in a signed resolution)"
+      },
+      "result_sha256": "50a382d033d1408bd219eabb9064b1ceacf29e33c7feca05ad64867e9b029ffd"
+    }
+  ],
+  "supplements": [
+    {
+      "supplement_id": "ESU-0001",
+      "item_id": "REQ-RTNCDE00-002",
+      "version": 1,
+      "status": "CONTEXT_UNSUPPORTED",
+      "new": true
+    },
+    {
+      "supplement_id": "ESU-0002",
+      "item_id": "REQ-RTNCDE00-003",
+      "version": 1,
+      "status": "CONTEXT_SUPPORTED",
+      "new": true
+    },
+    {
+      "supplement_id": "ESU-0003",
+      "item_id": "REQ-RTNCDE00-004",
+      "version": 1,
+      "status": "CITATION_MISMATCH",
+      "new": true
+    }
+  ]
+}

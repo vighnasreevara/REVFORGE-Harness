@@ -1,0 +1,225 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://revforge.local/contracts/openai/pass-b-output.schema.json",
+  "title": "Pass B interpretation comparison (model output)",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "packet_id",
+    "pass",
+    "comparisons",
+    "recommendation",
+    "untrusted_instructions_observed"
+  ],
+  "properties": {
+    "packet_id": {
+      "type": "string"
+    },
+    "pass": {
+      "type": "string",
+      "enum": [
+        "B"
+      ]
+    },
+    "comparisons": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "interpretation_id",
+          "interpretation_source",
+          "classification",
+          "differences",
+          "explanation",
+          "citations"
+        ],
+        "properties": {
+          "interpretation_id": {
+            "type": "string"
+          },
+          "interpretation_source": {
+            "type": "string"
+          },
+          "classification": {
+            "type": "string",
+            "enum": [
+              "AGREEMENT",
+              "PARTIAL_AGREEMENT",
+              "DISAGREEMENT",
+              "INSUFFICIENT_EVIDENCE",
+              "UNSUPPORTED_INTERPRETATION"
+            ]
+          },
+          "differences": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "aspect",
+                "independent_reading",
+                "existing_reading",
+                "citations"
+              ],
+              "properties": {
+                "aspect": {
+                  "type": "string",
+                  "enum": [
+                    "operation",
+                    "condition",
+                    "calculation",
+                    "effect",
+                    "assumption",
+                    "scope"
+                  ]
+                },
+                "independent_reading": {
+                  "type": "string"
+                },
+                "existing_reading": {
+                  "type": "string"
+                },
+                "citations": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/$defs/citation"
+                  }
+                }
+              }
+            }
+          },
+          "explanation": {
+            "type": "string"
+          },
+          "citations": {
+            "type": "array",
+            "items": {
+              "$ref": "#/$defs/citation"
+            }
+          }
+        }
+      }
+    },
+    "recommendation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "outcome",
+        "human_review",
+        "further_deterministic_checks",
+        "suggested_remediation"
+      ],
+      "properties": {
+        "outcome": {
+          "type": "string",
+          "enum": [
+            "SUPPORTS_EXISTING",
+            "CONTRADICTS_EXISTING",
+            "EVIDENCE_INSUFFICIENT",
+            "DETERMINISTIC_CHECK_REQUIRED",
+            "CORRECTION_PROPOSAL_JUSTIFIED",
+            "HUMAN_REVIEW_REQUIRED"
+          ]
+        },
+        "human_review": {
+          "type": "string",
+          "enum": [
+            "business",
+            "technical",
+            "both",
+            "none"
+          ]
+        },
+        "further_deterministic_checks": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "suggested_remediation": {
+          "anyOf": [
+            {
+              "type": "null"
+            },
+            {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "kind",
+                "description",
+                "target_reference",
+                "citations"
+              ],
+              "properties": {
+                "kind": {
+                  "type": "string",
+                  "enum": [
+                    "citation_correction",
+                    "interpretation_correction",
+                    "data_contract_correction",
+                    "additional_evidence"
+                  ]
+                },
+                "description": {
+                  "type": "string"
+                },
+                "target_reference": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "citations": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/$defs/citation"
+                  }
+                }
+              }
+            }
+          ]
+        }
+      }
+    },
+    "untrusted_instructions_observed": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    }
+  },
+  "$defs": {
+    "citation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "path",
+        "line_start",
+        "line_end",
+        "quoted_text",
+        "permanent_id"
+      ],
+      "properties": {
+        "path": {
+          "type": "string"
+        },
+        "line_start": {
+          "type": "integer"
+        },
+        "line_end": {
+          "type": "integer"
+        },
+        "quoted_text": {
+          "type": "string"
+        },
+        "permanent_id": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      }
+    }
+  }
+}

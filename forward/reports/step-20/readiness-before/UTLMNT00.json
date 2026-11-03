@@ -1,0 +1,450 @@
+{
+  "gate": "SOURCE_READINESS",
+  "subject": "UTLMNT00",
+  "status": "FAIL",
+  "checks": [
+    {
+      "id": "source_available",
+      "ok": true,
+      "detail": "src/programs/utility/UTLMNT00.cbl sha256 ea0333db7c050636d4fb20965af4132775e86b2e16a5fbccadd15ec10e0fe94a; 63 statement(s) in 12 paragraph(s)"
+    },
+    {
+      "id": "complete_program",
+      "ok": true,
+      "detail": "every paragraph contains statements"
+    },
+    {
+      "id": "copybooks_resolved",
+      "ok": true,
+      "detail": "all 2 include(s) resolved: RTNCODE, ERRHAND"
+    },
+    {
+      "id": "requirements_and_data_mapping_delivered",
+      "ok": true,
+      "detail": "F1/F2 deliveries accepted for ERRHAND, RTNCODE, UTLMNT00"
+    },
+    {
+      "id": "behaviour_classified",
+      "ok": true,
+      "detail": "4 behaviour(s): 0 VERIFIED_CANDIDATE, 3 PARTIAL, 1 GAP"
+    },
+    {
+      "id": "dependencies_identified",
+      "ok": false,
+      "detail": "closure UNRESOLVED for UTLMNT00:0000-MAIN (PERFORM/GO TO target 2210-OPEN-VSAM (line 150) is not a paragraph of UTLMNT00); UTLMNT00:1000-INITIALIZE (PERFORM/GO TO target 2210-OPEN-VSAM (line 150) is not a paragraph of UTLMNT00); UTLMNT00:2000-PROCESS (PERFORM/GO TO target 2210-OPEN-VSAM (line 150) is not a paragraph of UTLMNT00); UTLMNT00:3000-CLEANUP (PERFORM/GO TO target 2210-OPEN-VSAM (line 150) is not a paragraph of UTLMNT00)"
+    },
+    {
+      "id": "unsupported_documented",
+      "ok": false,
+      "detail": "non-verified behaviour without a gap: UTLMNT00:3000-CLEANUP"
+    },
+    {
+      "id": "unknowns_documented",
+      "ok": true,
+      "detail": "10 open decision(s) record the remaining questions (4 blocking for approval); none is resolved or assumed here"
+    }
+  ],
+  "note": "An engineering gate: it states that the source is understood well enough to convert, with every unknown documented. It is not a G2 approval and does not authorise generation.",
+  "behaviours": [
+    {
+      "behaviour_id": "UTLMNT00:ENTRY-DISPATCH",
+      "kind": "dispatch",
+      "classification": "PARTIAL",
+      "lines": [
+        88,
+        90
+      ],
+      "inputs": [],
+      "outputs": [],
+      "side_effects": [],
+      "unresolved": [],
+      "covered_by": []
+    },
+    {
+      "behaviour_id": "UTLMNT00:1000-INITIALIZE",
+      "kind": "performed_range",
+      "classification": "PARTIAL",
+      "lines": [
+        94,
+        180
+      ],
+      "inputs": [
+        "WS-ARCH-STATUS",
+        "WS-CTL-STATUS",
+        "WS-ERROR-COUNT",
+        "WS-REPORT-STATUS"
+      ],
+      "outputs": [
+        "RETURN-CODE",
+        "WS-COUNTERS",
+        "WS-ERROR-MESSAGE"
+      ],
+      "side_effects": [
+        {
+          "line": 98,
+          "kind": "file_io",
+          "operation": "OPEN",
+          "table": null
+        },
+        {
+          "line": 105,
+          "kind": "file_io",
+          "operation": "OPEN",
+          "table": null
+        },
+        {
+          "line": 112,
+          "kind": "file_io",
+          "operation": "OPEN",
+          "table": null
+        }
+      ],
+      "unresolved": [
+        "WS-ERROR-MESSAGE"
+      ],
+      "covered_by": []
+    },
+    {
+      "behaviour_id": "UTLMNT00:2000-PROCESS",
+      "kind": "performed_range",
+      "classification": "PARTIAL",
+      "lines": [
+        123,
+        180
+      ],
+      "inputs": [
+        "CTL-FILE-NAME",
+        "CTL-FUNCTION",
+        "WS-ANALYZE",
+        "WS-ARCHIVE",
+        "WS-CLEANUP",
+        "WS-END-OF-CTL",
+        "WS-ERROR-COUNT",
+        "WS-REORG"
+      ],
+      "outputs": [
+        "RETURN-CODE",
+        "WS-END-OF-CTL",
+        "WS-ERROR-MESSAGE",
+        "WS-VSAM-NAME"
+      ],
+      "side_effects": [
+        {
+          "line": 124,
+          "kind": "file_io",
+          "operation": "READ",
+          "table": null
+        }
+      ],
+      "unresolved": [
+        "WS-ERROR-MESSAGE"
+      ],
+      "covered_by": []
+    },
+    {
+      "behaviour_id": "UTLMNT00:3000-CLEANUP",
+      "kind": "performed_range",
+      "classification": "GAP",
+      "lines": [
+        172,
+        174
+      ],
+      "inputs": [],
+      "outputs": [],
+      "side_effects": [
+        {
+          "line": 172,
+          "kind": "file_io",
+          "operation": "CLOSE",
+          "table": null
+        }
+      ],
+      "unresolved": [],
+      "covered_by": []
+    }
+  ],
+  "gaps": [
+    {
+      "gap_id": "GAP-UTLMNT00-1000-INITIALIZE-WS-ERROR-MESSAGE",
+      "kind": "UNDECLARED_NAME_SEMANTICS",
+      "behaviour_id": "UTLMNT00:1000-INITIALIZE",
+      "source": {
+        "path": "src/programs/utility/UTLMNT00.cbl",
+        "sha256": "ea0333db7c050636d4fb20965af4132775e86b2e16a5fbccadd15ec10e0fe94a",
+        "lines": [
+          100,
+          107,
+          114,
+          178
+        ],
+        "statements": [
+          {
+            "line": 100,
+            "text": "MOVE 'ERROR OPENING CONTROL FILE' TO WS-ERROR-MESSAGE"
+          },
+          {
+            "line": 107,
+            "text": "MOVE 'ERROR OPENING ARCHIVE FILE' TO WS-ERROR-MESSAGE"
+          },
+          {
+            "line": 114,
+            "text": "MOVE 'ERROR OPENING REPORT FILE' TO WS-ERROR-MESSAGE"
+          },
+          {
+            "line": 178,
+            "text": "DISPLAY WS-ERROR-MESSAGE UPON CONS"
+          }
+        ]
+      },
+      "missing_fact": "WS-ERROR-MESSAGE is used but declared nowhere in the repository; its layout and value meanings are the subject of DR-UTLMNT00-002 (missing: a declaration of WS-ERROR-MESSAGE)",
+      "why_unsafe": "the outputs of these statements (WS-ERROR-MESSAGE) depend on a value whose meaning is not established; any Java mapping would invent it",
+      "affected_requirements": [],
+      "affected_java_component": "outcome mapping of behaviour 1000-INITIALIZE (behind a port whose only implementation throws until the gap is resolved)",
+      "required_action": [
+        "DR-UTLMNT00-002: a signed resolution by technical_authority"
+      ],
+      "validation_evidence": "the real definition of WS-ERROR-MESSAGE for the target runtime and a captured legacy run showing each outcome branch",
+      "blocks_execution_path": "request its PERFORM -> 1000-INITIALIZE: statements 100, 107, 114, 178",
+      "blocking": true,
+      "status": "OPEN"
+    },
+    {
+      "gap_id": "GAP-UTLMNT00-2000-PROCESS-WS-ERROR-MESSAGE",
+      "kind": "UNDECLARED_NAME_SEMANTICS",
+      "behaviour_id": "UTLMNT00:2000-PROCESS",
+      "source": {
+        "path": "src/programs/utility/UTLMNT00.cbl",
+        "sha256": "ea0333db7c050636d4fb20965af4132775e86b2e16a5fbccadd15ec10e0fe94a",
+        "lines": [
+          143,
+          178
+        ],
+        "statements": [
+          {
+            "line": 143,
+            "text": "MOVE 'INVALID FUNCTION SPECIFIED' TO WS-ERROR-MESSAGE"
+          },
+          {
+            "line": 178,
+            "text": "DISPLAY WS-ERROR-MESSAGE UPON CONS"
+          }
+        ]
+      },
+      "missing_fact": "WS-ERROR-MESSAGE is used but declared nowhere in the repository; its layout and value meanings are the subject of DR-UTLMNT00-002 (missing: a declaration of WS-ERROR-MESSAGE)",
+      "why_unsafe": "the outputs of these statements (WS-ERROR-MESSAGE) depend on a value whose meaning is not established; any Java mapping would invent it",
+      "affected_requirements": [],
+      "affected_java_component": "outcome mapping of behaviour 2000-PROCESS (behind a port whose only implementation throws until the gap is resolved)",
+      "required_action": [
+        "DR-UTLMNT00-002: a signed resolution by technical_authority"
+      ],
+      "validation_evidence": "the real definition of WS-ERROR-MESSAGE for the target runtime and a captured legacy run showing each outcome branch",
+      "blocks_execution_path": "request its PERFORM -> 2000-PROCESS: statements 143, 178",
+      "blocking": true,
+      "status": "OPEN"
+    }
+  ],
+  "closures": [
+    {
+      "behaviour_id": "UTLMNT00:0000-MAIN",
+      "status": "UNRESOLVED",
+      "unresolved_reasons": [
+        "PERFORM/GO TO target 2210-OPEN-VSAM (line 150) is not a paragraph of UTLMNT00",
+        "PERFORM/GO TO target 2220-ARCHIVE-RECORDS (line 151) is not a paragraph of UTLMNT00",
+        "PERFORM/GO TO target 2230-CLOSE-VSAM (line 152) is not a paragraph of UTLMNT00",
+        "PERFORM/GO TO target 2310-ANALYZE-SPACE (line 156) is not a paragraph of UTLMNT00",
+        "PERFORM/GO TO target 2320-DELETE-OLD (line 157) is not a paragraph of UTLMNT00",
+        "PERFORM/GO TO target 2330-UPDATE-CATALOG (line 158) is not a paragraph of UTLMNT00",
+        "PERFORM/GO TO target 2410-EXPORT-DATA (line 162) is not a paragraph of UTLMNT00",
+        "PERFORM/GO TO target 2420-DELETE-DEFINE (line 163) is not a paragraph of UTLMNT00",
+        "PERFORM/GO TO target 2430-IMPORT-DATA (line 164) is not a paragraph of UTLMNT00",
+        "PERFORM/GO TO target 2510-COLLECT-STATS (line 168) is not a paragraph of UTLMNT00",
+        "PERFORM/GO TO target 2520-GENERATE-REPORT (line 169) is not a paragraph of UTLMNT00",
+        "line 178: UPON is neither declared, a keyword, a paragraph nor the subject of a blocking decision (unknown dependency)",
+        "line 178: CONS is neither declared, a keyword, a paragraph nor the subject of a blocking decision (unknown dependency)",
+        "line 180: RETURN-CODE is neither declared, a keyword, a paragraph nor the subject of a blocking decision (unknown dependency)"
+      ],
+      "units": [
+        "UTLMNT00"
+      ],
+      "external": [
+        {
+          "kind": "file_io",
+          "line": 124,
+          "operation": "READ",
+          "target": "CONTROL-FILE",
+          "relation": "direct"
+        }
+      ],
+      "undeclared": [
+        "WS-ERROR-MESSAGE"
+      ],
+      "sha256": "77e06f46e153f03afac1994344505fee1f58bd7ad96fbf89a3595fda02bc5a07"
+    },
+    {
+      "behaviour_id": "UTLMNT00:1000-INITIALIZE",
+      "status": "UNRESOLVED",
+      "unresolved_reasons": [
+        "PERFORM/GO TO target 2210-OPEN-VSAM (line 150) is not a paragraph of UTLMNT00",
+        "PERFORM/GO TO target 2220-ARCHIVE-RECORDS (line 151) is not a paragraph of UTLMNT00",
+        "PERFORM/GO TO target 2230-CLOSE-VSAM (line 152) is not a paragraph of UTLMNT00",
+        "PERFORM/GO TO target 2310-ANALYZE-SPACE (line 156) is not a paragraph of UTLMNT00",
+        "PERFORM/GO TO target 2320-DELETE-OLD (line 157) is not a paragraph of UTLMNT00",
+        "PERFORM/GO TO target 2330-UPDATE-CATALOG (line 158) is not a paragraph of UTLMNT00",
+        "PERFORM/GO TO target 2410-EXPORT-DATA (line 162) is not a paragraph of UTLMNT00",
+        "PERFORM/GO TO target 2420-DELETE-DEFINE (line 163) is not a paragraph of UTLMNT00",
+        "PERFORM/GO TO target 2430-IMPORT-DATA (line 164) is not a paragraph of UTLMNT00",
+        "PERFORM/GO TO target 2510-COLLECT-STATS (line 168) is not a paragraph of UTLMNT00",
+        "PERFORM/GO TO target 2520-GENERATE-REPORT (line 169) is not a paragraph of UTLMNT00",
+        "line 178: UPON is neither declared, a keyword, a paragraph nor the subject of a blocking decision (unknown dependency)",
+        "line 178: CONS is neither declared, a keyword, a paragraph nor the subject of a blocking decision (unknown dependency)",
+        "line 180: RETURN-CODE is neither declared, a keyword, a paragraph nor the subject of a blocking decision (unknown dependency)"
+      ],
+      "units": [
+        "UTLMNT00"
+      ],
+      "external": [],
+      "undeclared": [
+        "WS-ERROR-MESSAGE"
+      ],
+      "sha256": "ca226c8e045e6ca4f4c44dfa5a3791638bd3d7d69f5a4c986cd7bf442792b6e1"
+    },
+    {
+      "behaviour_id": "UTLMNT00:2000-PROCESS",
+      "status": "UNRESOLVED",
+      "unresolved_reasons": [
+        "PERFORM/GO TO target 2210-OPEN-VSAM (line 150) is not a paragraph of UTLMNT00",
+        "PERFORM/GO TO target 2220-ARCHIVE-RECORDS (line 151) is not a paragraph of UTLMNT00",
+        "PERFORM/GO TO target 2230-CLOSE-VSAM (line 152) is not a paragraph of UTLMNT00",
+        "PERFORM/GO TO target 2310-ANALYZE-SPACE (line 156) is not a paragraph of UTLMNT00",
+        "PERFORM/GO TO target 2320-DELETE-OLD (line 157) is not a paragraph of UTLMNT00",
+        "PERFORM/GO TO target 2330-UPDATE-CATALOG (line 158) is not a paragraph of UTLMNT00",
+        "PERFORM/GO TO target 2410-EXPORT-DATA (line 162) is not a paragraph of UTLMNT00",
+        "PERFORM/GO TO target 2420-DELETE-DEFINE (line 163) is not a paragraph of UTLMNT00",
+        "PERFORM/GO TO target 2430-IMPORT-DATA (line 164) is not a paragraph of UTLMNT00",
+        "PERFORM/GO TO target 2510-COLLECT-STATS (line 168) is not a paragraph of UTLMNT00",
+        "PERFORM/GO TO target 2520-GENERATE-REPORT (line 169) is not a paragraph of UTLMNT00",
+        "line 178: UPON is neither declared, a keyword, a paragraph nor the subject of a blocking decision (unknown dependency)",
+        "line 178: CONS is neither declared, a keyword, a paragraph nor the subject of a blocking decision (unknown dependency)",
+        "line 180: RETURN-CODE is neither declared, a keyword, a paragraph nor the subject of a blocking decision (unknown dependency)"
+      ],
+      "units": [
+        "UTLMNT00"
+      ],
+      "external": [
+        {
+          "kind": "file_io",
+          "line": 124,
+          "operation": "READ",
+          "target": "CONTROL-FILE",
+          "relation": "direct"
+        }
+      ],
+      "undeclared": [
+        "WS-ERROR-MESSAGE"
+      ],
+      "sha256": "a4d790a952ddf7938882cc7e76770a4653572cbc824db452d47d3fd4d31bf20c"
+    },
+    {
+      "behaviour_id": "UTLMNT00:3000-CLEANUP",
+      "status": "UNRESOLVED",
+      "unresolved_reasons": [
+        "PERFORM/GO TO target 2210-OPEN-VSAM (line 150) is not a paragraph of UTLMNT00",
+        "PERFORM/GO TO target 2220-ARCHIVE-RECORDS (line 151) is not a paragraph of UTLMNT00",
+        "PERFORM/GO TO target 2230-CLOSE-VSAM (line 152) is not a paragraph of UTLMNT00",
+        "PERFORM/GO TO target 2310-ANALYZE-SPACE (line 156) is not a paragraph of UTLMNT00",
+        "PERFORM/GO TO target 2320-DELETE-OLD (line 157) is not a paragraph of UTLMNT00",
+        "PERFORM/GO TO target 2330-UPDATE-CATALOG (line 158) is not a paragraph of UTLMNT00",
+        "PERFORM/GO TO target 2410-EXPORT-DATA (line 162) is not a paragraph of UTLMNT00",
+        "PERFORM/GO TO target 2420-DELETE-DEFINE (line 163) is not a paragraph of UTLMNT00",
+        "PERFORM/GO TO target 2430-IMPORT-DATA (line 164) is not a paragraph of UTLMNT00",
+        "PERFORM/GO TO target 2510-COLLECT-STATS (line 168) is not a paragraph of UTLMNT00",
+        "PERFORM/GO TO target 2520-GENERATE-REPORT (line 169) is not a paragraph of UTLMNT00"
+      ],
+      "units": [
+        "UTLMNT00"
+      ],
+      "external": [],
+      "undeclared": [],
+      "sha256": "f62e9f39081128cb877417c2f820da59e4554e126466cf564a545d1802e4d1f3"
+    }
+  ],
+  "open_decisions": [
+    {
+      "id": "DR-TSTGEN00-001",
+      "blocking": true,
+      "question": "TSTGEN00 is a confirmed test tool (configuration-driven test-data generator: routes by CFG-TEST-TYPE 'PORTFOLIO' / 'TRANSACTN' / 'ERROR' / 'VOLUME', BR-124; ends with return code 12 after more than 100 errors, BR-125). Is TSTGEN00 modernised, retired, replaced by a framework/test-data service, or kept as test tooling?"
+    },
+    {
+      "id": "DR-UTLMNT00-001",
+      "blocking": true,
+      "question": "UTLMNT00 is a confirmed utility (control-file-driven file maintenance: routes by CTL-FUNCTION 'ARCHIVE' / 'CLEANUP' / 'REORG' / 'ANALYZE', BR-128; ends with return code 12 after more than 100 errors, BR-125). Is UTLMNT00 modernised, retired, replaced by platform/storage services, or kept as operational tooling?"
+    },
+    {
+      "id": "SCOPE-UTLMNT00",
+      "blocking": true,
+      "question": "UTLMNT00 is classified utility (confirmed): classified as utility (confirmed); a human must decide whether it is in modernisation scope. Keep it in the modernisation scope (resolved_no_change) or exclude it (excluded_from_scope)?"
+    },
+    {
+      "id": "DR-F2-P0007-003",
+      "blocking": false,
+      "question": "Ten elementary level-01 FD/WS items have no permanent Field ID (PORTTRAN WS-EOF-FLAG, TSTGEN00 SEED-RECORD, TSTVAL00 EXPECTED-RECORD/ACTUAL-RECORD/REPORT-RECORD, UTLMNT00 ARCHIVE-RECORD/REPORT-RECORD, UTLVAL00 ERROR-RECORD, FILEHNDL INPUT-RECORD/OUTPUT-RECORD). Should the reverse data agent register Field IDs for record-level elementary items so their Java types can be fixed?"
+    },
+    {
+      "id": "DR-F2-P0007-005",
+      "blocking": false,
+      "question": "WS-ERROR-MESSAGE is referenced but declared nowhere in TSTGEN00, TSTVAL00, UTLMNT00, UTLMON00 and UTLVAL00 (it may have been expected from ERRHAND or RTNCODE). What is its intended layout and owning copybook?"
+    },
+    {
+      "id": "DR-F2-P0007-008",
+      "blocking": false,
+      "question": "UTLMNT00 ARCHIVE-FILE is RECORDING MODE V with a single X(32760) record. What is the actual archive record format (lengths and content) that the Java writer must reproduce?"
+    },
+    {
+      "id": "DR-F2-PKT0010-002",
+      "blocking": false,
+      "question": "Which character encoding (code page) do the files and areas described by these copybooks use for DISPLAY data on the legacy platform (EBCDIC 037, 1140, another EBCDIC variant, or ASCII)? The zoned-decimal test vectors and String codecs depend on it."
+    },
+    {
+      "id": "DR-UTLMNT00-002",
+      "blocking": true,
+      "question": "If UTLMNT00 is kept: GAP-019 - all four functions delegate to 11 paragraphs not in the source (2210-OPEN-VSAM, 2220-ARCHIVE-RECORDS, 2230-CLOSE-VSAM, 2310-ANALYZE-SPACE, 2320-DELETE-OLD, 2330-UPDATE-CATALOG, 2410-EXPORT-DATA, 2420-DELETE-DEFINE, 2430-IMPORT-DATA, 2510-COLLECT-STATS, 2520-GENERATE-REPORT); GAP-040 - WS-ERROR-MESSAGE is declared nowhere. Can the full source be located and the maintenance procedures documented with operations staff?"
+    },
+    {
+      "id": "RVW-GAP-092",
+      "blocking": false,
+      "question": "GAP-092 (medium, DIAGRAM_RENDER_UNVERIFIED) is not addressed by any decision or requirement: Visual rendering of the 65 Mermaid diagrams is unverified. Acknowledge it as a known limitation (resolved_no_change) or exclude the affected units?"
+    },
+    {
+      "id": "RVW-GAP-104",
+      "blocking": false,
+      "question": "GAP-104 (low, DIAGRAM_INCOMPLETE) is not addressed by any decision or requirement: COMP-UNRESOLVED: all seven edges are unsupported. Acknowledge it as a known limitation (resolved_no_change) or exclude the affected units?"
+    }
+  ],
+  "authorisation": {
+    "generation_authorized": false,
+    "blockers": [
+      "config generation.java_generation_allowed is false (project authority)",
+      "no authorised orchestrator.java_target_dir",
+      "G4 is BLOCKED (needs signed G2, G3 and G4 approvals by trusted signers)",
+      "trust store: TRUST_NOT_CONFIGURED"
+    ],
+    "gates": {
+      "G0": "PASS",
+      "G1": "PASS",
+      "G2": "UNVERIFIED",
+      "G3": "BLOCKED",
+      "G4": "BLOCKED",
+      "G5": "BLOCKED",
+      "G6": "BLOCKED",
+      "G7": "BLOCKED",
+      "G8": "BLOCKED"
+    },
+    "trust": "TRUST_NOT_CONFIGURED",
+    "program_g2_scope": {
+      "readiness": "NOT_READY",
+      "blocking": 15,
+      "scope_sha256": "8051ef89aea2ecd39a2058f9ec7f8d02c932b783f53f13943c9ba7908f4e0e7e"
+    },
+    "note": "Engineering gates never authorise generation. Java may be generated only when generation_authorized is true."
+  }
+}

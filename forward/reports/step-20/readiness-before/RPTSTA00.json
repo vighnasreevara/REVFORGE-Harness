@@ -1,0 +1,592 @@
+{
+  "gate": "SOURCE_READINESS",
+  "subject": "RPTSTA00",
+  "status": "FAIL",
+  "checks": [
+    {
+      "id": "source_available",
+      "ok": true,
+      "detail": "src/programs/batch/RPTSTA00.cbl sha256 8b18c42b786afa5fb4a45fd65168d91fe4763f4154f0aeac609c8d3e1dbf7a6c; 54 statement(s) in 12 paragraph(s)"
+    },
+    {
+      "id": "complete_program",
+      "ok": true,
+      "detail": "every paragraph contains statements"
+    },
+    {
+      "id": "copybooks_resolved",
+      "ok": false,
+      "detail": "unresolved or circular includes: SQLCA@6"
+    },
+    {
+      "id": "requirements_and_data_mapping_delivered",
+      "ok": true,
+      "detail": "F1/F2 deliveries accepted for BCHCTL, ERRHAND, RTNCODE, RPTSTA00"
+    },
+    {
+      "id": "behaviour_classified",
+      "ok": true,
+      "detail": "4 behaviour(s): 0 VERIFIED_CANDIDATE, 3 PARTIAL, 1 GAP"
+    },
+    {
+      "id": "dependencies_identified",
+      "ok": false,
+      "detail": "closure UNRESOLVED for RPTSTA00:0000-MAIN (PERFORM/GO TO target 2110-ACCUMULATE-DB2-STATS (line 150) is not a paragraph of RPTSTA00); RPTSTA00:1000-INITIALIZE (PERFORM/GO TO target 2110-ACCUMULATE-DB2-STATS (line 150) is not a paragraph of RPTSTA00); RPTSTA00:2000-PROCESS-REPORT (PERFORM/GO TO target 2110-ACCUMULATE-DB2-STATS (line 150) is not a paragraph of RPTSTA00); RPTSTA00:3000-CLEANUP (PERFORM/GO TO target 2110-ACCUMULATE-DB2-STATS (line 150) is not a paragraph of RPTSTA00)"
+    },
+    {
+      "id": "unsupported_documented",
+      "ok": false,
+      "detail": "non-verified behaviour without a gap: RPTSTA00:3000-CLEANUP"
+    },
+    {
+      "id": "unknowns_documented",
+      "ok": true,
+      "detail": "11 open decision(s) record the remaining questions (3 blocking for approval); none is resolved or assumed here"
+    }
+  ],
+  "note": "An engineering gate: it states that the source is understood well enough to convert, with every unknown documented. It is not a G2 approval and does not authorise generation.",
+  "behaviours": [
+    {
+      "behaviour_id": "RPTSTA00:ENTRY-DISPATCH",
+      "kind": "dispatch",
+      "classification": "PARTIAL",
+      "lines": [
+        97,
+        99
+      ],
+      "inputs": [],
+      "outputs": [],
+      "side_effects": [],
+      "unresolved": [],
+      "covered_by": []
+    },
+    {
+      "behaviour_id": "RPTSTA00:1000-INITIALIZE",
+      "kind": "performed_range",
+      "classification": "PARTIAL",
+      "lines": [
+        103,
+        184
+      ],
+      "inputs": [
+        "REPORT-RECORD",
+        "WS-BCH-STATUS",
+        "WS-DB2-STATUS",
+        "WS-HEADER1",
+        "WS-HEADER2",
+        "WS-HEADER3",
+        "WS-REPORT-DATE",
+        "WS-REPORT-STATUS"
+      ],
+      "outputs": [
+        "RETURN-CODE",
+        "WS-ERROR-MESSAGE",
+        "WS-PERFORMANCE-METRICS"
+      ],
+      "side_effects": [
+        {
+          "line": 108,
+          "kind": "file_io",
+          "operation": "OPEN",
+          "table": null
+        },
+        {
+          "line": 115,
+          "kind": "file_io",
+          "operation": "OPEN",
+          "table": null
+        },
+        {
+          "line": 122,
+          "kind": "file_io",
+          "operation": "OPEN",
+          "table": null
+        },
+        {
+          "line": 131,
+          "kind": "file_io",
+          "operation": "WRITE",
+          "table": null
+        },
+        {
+          "line": 132,
+          "kind": "file_io",
+          "operation": "WRITE",
+          "table": null
+        },
+        {
+          "line": 133,
+          "kind": "file_io",
+          "operation": "WRITE",
+          "table": null
+        }
+      ],
+      "unresolved": [
+        "WS-ERROR-MESSAGE"
+      ],
+      "covered_by": []
+    },
+    {
+      "behaviour_id": "RPTSTA00:2000-PROCESS-REPORT",
+      "kind": "performed_range",
+      "classification": "PARTIAL",
+      "lines": [
+        139,
+        175
+      ],
+      "inputs": [],
+      "outputs": [],
+      "side_effects": [
+        {
+          "line": 145,
+          "kind": "file_io",
+          "operation": "READ",
+          "table": null
+        },
+        {
+          "line": 151,
+          "kind": "file_io",
+          "operation": "READ",
+          "table": null
+        },
+        {
+          "line": 157,
+          "kind": "file_io",
+          "operation": "READ",
+          "table": null
+        },
+        {
+          "line": 163,
+          "kind": "file_io",
+          "operation": "READ",
+          "table": null
+        }
+      ],
+      "unresolved": [
+        "END-OF-DB2-STATS",
+        "END-OF-BATCH-STATS"
+      ],
+      "covered_by": []
+    },
+    {
+      "behaviour_id": "RPTSTA00:3000-CLEANUP",
+      "kind": "performed_range",
+      "classification": "GAP",
+      "lines": [
+        178,
+        180
+      ],
+      "inputs": [],
+      "outputs": [],
+      "side_effects": [
+        {
+          "line": 178,
+          "kind": "file_io",
+          "operation": "CLOSE",
+          "table": null
+        }
+      ],
+      "unresolved": [],
+      "covered_by": []
+    }
+  ],
+  "gaps": [
+    {
+      "gap_id": "GAP-RPTSTA00-1000-INITIALIZE-WS-ERROR-MESSAGE",
+      "kind": "UNDECLARED_NAME_SEMANTICS",
+      "behaviour_id": "RPTSTA00:1000-INITIALIZE",
+      "source": {
+        "path": "src/programs/batch/RPTSTA00.cbl",
+        "sha256": "8b18c42b786afa5fb4a45fd65168d91fe4763f4154f0aeac609c8d3e1dbf7a6c",
+        "lines": [
+          110,
+          117,
+          124,
+          183
+        ],
+        "statements": [
+          {
+            "line": 110,
+            "text": "MOVE 'ERROR OPENING DB2 STATS' TO WS-ERROR-MESSAGE"
+          },
+          {
+            "line": 117,
+            "text": "MOVE 'ERROR OPENING BATCH STATS' TO WS-ERROR-MESSAGE"
+          },
+          {
+            "line": 124,
+            "text": "MOVE 'ERROR OPENING REPORT FILE' TO WS-ERROR-MESSAGE"
+          },
+          {
+            "line": 183,
+            "text": "DISPLAY WS-ERROR-MESSAGE"
+          }
+        ]
+      },
+      "missing_fact": "WS-ERROR-MESSAGE is used but declared nowhere in the repository; its layout and value meanings are the subject of DR-RPTSTA00-001 (missing: a declaration of DB2STAT; a declaration of DB2-STATS; a declaration of WS-ERROR-MESSAGE; a declaration of END-OF-DB2-STATS; a declaration of END-OF-BATCH-STATS)",
+      "why_unsafe": "the outputs of these statements (WS-ERROR-MESSAGE) depend on a value whose meaning is not established; any Java mapping would invent it",
+      "affected_requirements": [],
+      "affected_java_component": "outcome mapping of behaviour 1000-INITIALIZE (behind a port whose only implementation throws until the gap is resolved)",
+      "required_action": [
+        "DR-RPTSTA00-001: a signed resolution by technical_authority"
+      ],
+      "validation_evidence": "the real definition of WS-ERROR-MESSAGE for the target runtime and a captured legacy run showing each outcome branch",
+      "blocks_execution_path": "request its PERFORM -> 1000-INITIALIZE: statements 110, 117, 124, 183",
+      "blocking": true,
+      "status": "OPEN"
+    },
+    {
+      "gap_id": "GAP-RPTSTA00-2000-PROCESS-REPORT-END-OF-DB2-STATS",
+      "kind": "UNDECLARED_NAME_SEMANTICS",
+      "behaviour_id": "RPTSTA00:2000-PROCESS-REPORT",
+      "source": {
+        "path": "src/programs/batch/RPTSTA00.cbl",
+        "sha256": "8b18c42b786afa5fb4a45fd65168d91fe4763f4154f0aeac609c8d3e1dbf7a6c",
+        "lines": [
+          145,
+          149,
+          151
+        ],
+        "statements": [
+          {
+            "line": 145,
+            "text": "READ DB2-STATS AT END SET END-OF-DB2-STATS TO TRUE"
+          },
+          {
+            "line": 149,
+            "text": "PERFORM UNTIL END-OF-DB2-STATS"
+          },
+          {
+            "line": 151,
+            "text": "READ DB2-STATS AT END SET END-OF-DB2-STATS TO TRUE"
+          }
+        ]
+      },
+      "missing_fact": "END-OF-DB2-STATS is used but declared nowhere in the repository; its layout and value meanings are the subject of DR-RPTSTA00-001, DR-F2-0005-001 (missing: a declaration of DB2STAT; a declaration of DB2-STATS; a declaration of WS-ERROR-MESSAGE; a declaration of END-OF-DB2-STATS; a declaration of END-OF-BATCH-STATS)",
+      "why_unsafe": "the outputs of these statements (control flow) depend on a value whose meaning is not established; any Java mapping would invent it",
+      "affected_requirements": [],
+      "affected_java_component": "outcome mapping of behaviour 2000-PROCESS-REPORT (behind a port whose only implementation throws until the gap is resolved)",
+      "required_action": [
+        "DR-RPTSTA00-001: a signed resolution by technical_authority",
+        "DR-F2-0005-001: a signed resolution by technical_authority"
+      ],
+      "validation_evidence": "the real definition of END-OF-DB2-STATS for the target runtime and a captured legacy run showing each outcome branch",
+      "blocks_execution_path": "request its PERFORM -> 2000-PROCESS-REPORT: statements 145, 149, 151",
+      "blocking": true,
+      "status": "OPEN"
+    },
+    {
+      "gap_id": "GAP-RPTSTA00-2000-PROCESS-REPORT-END-OF-BATCH-STATS",
+      "kind": "UNDECLARED_NAME_SEMANTICS",
+      "behaviour_id": "RPTSTA00:2000-PROCESS-REPORT",
+      "source": {
+        "path": "src/programs/batch/RPTSTA00.cbl",
+        "sha256": "8b18c42b786afa5fb4a45fd65168d91fe4763f4154f0aeac609c8d3e1dbf7a6c",
+        "lines": [
+          157,
+          161,
+          163
+        ],
+        "statements": [
+          {
+            "line": 157,
+            "text": "READ BATCH-STATS AT END SET END-OF-BATCH-STATS TO TRUE"
+          },
+          {
+            "line": 161,
+            "text": "PERFORM UNTIL END-OF-BATCH-STATS"
+          },
+          {
+            "line": 163,
+            "text": "READ BATCH-STATS AT END SET END-OF-BATCH-STATS TO TRUE"
+          }
+        ]
+      },
+      "missing_fact": "END-OF-BATCH-STATS is used but declared nowhere in the repository; its layout and value meanings are the subject of DR-RPTSTA00-001 (missing: a declaration of DB2STAT; a declaration of DB2-STATS; a declaration of WS-ERROR-MESSAGE; a declaration of END-OF-DB2-STATS; a declaration of END-OF-BATCH-STATS)",
+      "why_unsafe": "the outputs of these statements (control flow) depend on a value whose meaning is not established; any Java mapping would invent it",
+      "affected_requirements": [],
+      "affected_java_component": "outcome mapping of behaviour 2000-PROCESS-REPORT (behind a port whose only implementation throws until the gap is resolved)",
+      "required_action": [
+        "DR-RPTSTA00-001: a signed resolution by technical_authority"
+      ],
+      "validation_evidence": "the real definition of END-OF-BATCH-STATS for the target runtime and a captured legacy run showing each outcome branch",
+      "blocks_execution_path": "request its PERFORM -> 2000-PROCESS-REPORT: statements 157, 161, 163",
+      "blocking": true,
+      "status": "OPEN"
+    }
+  ],
+  "closures": [
+    {
+      "behaviour_id": "RPTSTA00:0000-MAIN",
+      "status": "UNRESOLVED",
+      "unresolved_reasons": [
+        "PERFORM/GO TO target 2110-ACCUMULATE-DB2-STATS (line 150) is not a paragraph of RPTSTA00",
+        "PERFORM/GO TO target 2210-ACCUMULATE-BATCH-STATS (line 162) is not a paragraph of RPTSTA00",
+        "PERFORM/GO TO target 2310-CALC-DB2-METRICS (line 169) is not a paragraph of RPTSTA00",
+        "PERFORM/GO TO target 2320-CALC-BATCH-METRICS (line 170) is not a paragraph of RPTSTA00",
+        "PERFORM/GO TO target 2410-WRITE-DB2-SECTION (line 173) is not a paragraph of RPTSTA00",
+        "PERFORM/GO TO target 2420-WRITE-BATCH-SECTION (line 174) is not a paragraph of RPTSTA00",
+        "PERFORM/GO TO target 2430-WRITE-TREND-ANALYSIS (line 175) is not a paragraph of RPTSTA00",
+        "line 184: RETURN-CODE is neither declared, a keyword, a paragraph nor the subject of a blocking decision (unknown dependency)"
+      ],
+      "units": [
+        "RPTSTA00"
+      ],
+      "external": [
+        {
+          "kind": "file_io",
+          "line": 131,
+          "operation": "WRITE",
+          "target": "REPORT-RECORD",
+          "relation": "direct"
+        },
+        {
+          "kind": "file_io",
+          "line": 132,
+          "operation": "WRITE",
+          "target": "REPORT-RECORD",
+          "relation": "direct"
+        },
+        {
+          "kind": "file_io",
+          "line": 133,
+          "operation": "WRITE",
+          "target": "REPORT-RECORD",
+          "relation": "direct"
+        },
+        {
+          "kind": "file_io",
+          "line": 145,
+          "operation": "READ",
+          "target": "DB2-STATS",
+          "relation": "direct"
+        },
+        {
+          "kind": "file_io",
+          "line": 151,
+          "operation": "READ",
+          "target": "DB2-STATS",
+          "relation": "direct"
+        },
+        {
+          "kind": "file_io",
+          "line": 157,
+          "operation": "READ",
+          "target": "BATCH-STATS",
+          "relation": "direct"
+        },
+        {
+          "kind": "file_io",
+          "line": 163,
+          "operation": "READ",
+          "target": "BATCH-STATS",
+          "relation": "direct"
+        }
+      ],
+      "undeclared": [
+        "WS-ERROR-MESSAGE",
+        "END-OF-DB2-STATS",
+        "END-OF-BATCH-STATS"
+      ],
+      "sha256": "ce840dd9a218c70596c158c4425bae27a9aa52ab6f468f2de445e0a4b357c61d"
+    },
+    {
+      "behaviour_id": "RPTSTA00:1000-INITIALIZE",
+      "status": "UNRESOLVED",
+      "unresolved_reasons": [
+        "PERFORM/GO TO target 2110-ACCUMULATE-DB2-STATS (line 150) is not a paragraph of RPTSTA00",
+        "PERFORM/GO TO target 2210-ACCUMULATE-BATCH-STATS (line 162) is not a paragraph of RPTSTA00",
+        "PERFORM/GO TO target 2310-CALC-DB2-METRICS (line 169) is not a paragraph of RPTSTA00",
+        "PERFORM/GO TO target 2320-CALC-BATCH-METRICS (line 170) is not a paragraph of RPTSTA00",
+        "PERFORM/GO TO target 2410-WRITE-DB2-SECTION (line 173) is not a paragraph of RPTSTA00",
+        "PERFORM/GO TO target 2420-WRITE-BATCH-SECTION (line 174) is not a paragraph of RPTSTA00",
+        "PERFORM/GO TO target 2430-WRITE-TREND-ANALYSIS (line 175) is not a paragraph of RPTSTA00",
+        "line 184: RETURN-CODE is neither declared, a keyword, a paragraph nor the subject of a blocking decision (unknown dependency)"
+      ],
+      "units": [
+        "RPTSTA00"
+      ],
+      "external": [
+        {
+          "kind": "file_io",
+          "line": 131,
+          "operation": "WRITE",
+          "target": "REPORT-RECORD",
+          "relation": "direct"
+        },
+        {
+          "kind": "file_io",
+          "line": 132,
+          "operation": "WRITE",
+          "target": "REPORT-RECORD",
+          "relation": "direct"
+        },
+        {
+          "kind": "file_io",
+          "line": 133,
+          "operation": "WRITE",
+          "target": "REPORT-RECORD",
+          "relation": "direct"
+        }
+      ],
+      "undeclared": [
+        "WS-ERROR-MESSAGE"
+      ],
+      "sha256": "3e95329dadf1315768bd0c4a2bff2d3d640510d00e0c521a98674c8bab16adf5"
+    },
+    {
+      "behaviour_id": "RPTSTA00:2000-PROCESS-REPORT",
+      "status": "UNRESOLVED",
+      "unresolved_reasons": [
+        "PERFORM/GO TO target 2110-ACCUMULATE-DB2-STATS (line 150) is not a paragraph of RPTSTA00",
+        "PERFORM/GO TO target 2210-ACCUMULATE-BATCH-STATS (line 162) is not a paragraph of RPTSTA00",
+        "PERFORM/GO TO target 2310-CALC-DB2-METRICS (line 169) is not a paragraph of RPTSTA00",
+        "PERFORM/GO TO target 2320-CALC-BATCH-METRICS (line 170) is not a paragraph of RPTSTA00",
+        "PERFORM/GO TO target 2410-WRITE-DB2-SECTION (line 173) is not a paragraph of RPTSTA00",
+        "PERFORM/GO TO target 2420-WRITE-BATCH-SECTION (line 174) is not a paragraph of RPTSTA00",
+        "PERFORM/GO TO target 2430-WRITE-TREND-ANALYSIS (line 175) is not a paragraph of RPTSTA00"
+      ],
+      "units": [
+        "RPTSTA00"
+      ],
+      "external": [
+        {
+          "kind": "file_io",
+          "line": 145,
+          "operation": "READ",
+          "target": "DB2-STATS",
+          "relation": "direct"
+        },
+        {
+          "kind": "file_io",
+          "line": 151,
+          "operation": "READ",
+          "target": "DB2-STATS",
+          "relation": "direct"
+        },
+        {
+          "kind": "file_io",
+          "line": 157,
+          "operation": "READ",
+          "target": "BATCH-STATS",
+          "relation": "direct"
+        },
+        {
+          "kind": "file_io",
+          "line": 163,
+          "operation": "READ",
+          "target": "BATCH-STATS",
+          "relation": "direct"
+        }
+      ],
+      "undeclared": [
+        "END-OF-DB2-STATS",
+        "END-OF-BATCH-STATS"
+      ],
+      "sha256": "9d33c62a66ee424f1d88995c19a8d45585cd7d6547df8f911242a4b9ed0e6828"
+    },
+    {
+      "behaviour_id": "RPTSTA00:3000-CLEANUP",
+      "status": "UNRESOLVED",
+      "unresolved_reasons": [
+        "PERFORM/GO TO target 2110-ACCUMULATE-DB2-STATS (line 150) is not a paragraph of RPTSTA00",
+        "PERFORM/GO TO target 2210-ACCUMULATE-BATCH-STATS (line 162) is not a paragraph of RPTSTA00",
+        "PERFORM/GO TO target 2310-CALC-DB2-METRICS (line 169) is not a paragraph of RPTSTA00",
+        "PERFORM/GO TO target 2320-CALC-BATCH-METRICS (line 170) is not a paragraph of RPTSTA00",
+        "PERFORM/GO TO target 2410-WRITE-DB2-SECTION (line 173) is not a paragraph of RPTSTA00",
+        "PERFORM/GO TO target 2420-WRITE-BATCH-SECTION (line 174) is not a paragraph of RPTSTA00",
+        "PERFORM/GO TO target 2430-WRITE-TREND-ANALYSIS (line 175) is not a paragraph of RPTSTA00"
+      ],
+      "units": [
+        "RPTSTA00"
+      ],
+      "external": [],
+      "undeclared": [],
+      "sha256": "43fe534896c972da5e70c932f9373b1ab1745a3fac12e4555c2329ffc0eefa98"
+    }
+  ],
+  "open_decisions": [
+    {
+      "id": "DR-F2-0005-001",
+      "blocking": true,
+      "question": "RPTSTA00 copies DB2STAT (a program, SYS-PORTFOLIO-001-FIL-0057, not a copybook) into its FILE SECTION, and SELECT DB2-STATS (DD DB2STATS, RECORD KEY STAT-KEY) has no FD. What is the record layout of the DB2-STATS file (key STAT-KEY, the fields accumulated into WS-DB2-METRICS, and the END-OF-DB2-STATS switch)?"
+    },
+    {
+      "id": "DR-F2-0005-002",
+      "blocking": false,
+      "question": "RPTSTA00 SELECT BATCH-STATS (DD BCHSTATS, RECORD KEY BCH-KEY) has no FD; COPY BCHCTL (line 36) sits directly in the FILE SECTION. Is the BCHCTL batch-control record (key BCT-KEY) the record layout of BATCH-STATS, and how is END-OF-BATCH-STATS declared?"
+    },
+    {
+      "id": "DR-F2-0005-004",
+      "blocking": false,
+      "question": "WS-ERROR-MESSAGE is used by the error handlers of RPTAUD00 and RPTSTA00 (and RPTPOS00) but is declared nowhere (ERRHAND defines ERR-MESSAGE). What is its declaration (length and type) for the DISPLAY in 9999-ERROR-HANDLER?"
+    },
+    {
+      "id": "DR-F2-0005-012",
+      "blocking": false,
+      "question": "Fifteen elementary level-01 items (e.g. HISTLD00 WS-COMMIT-THRESHOLD, the REPORT-RECORD print lines, DB2CONN WS-CONNECTION-STATE/WS-RETRY-COUNT/WS-MAX-RETRIES, DB2CMT WS-SAVEPOINT-ID) are catalogued as record-level items without Field IDs, so no Java type could be assigned. Should the reverse harness register Field IDs for them, or may later stages map them at record level using the catalogued PIC?"
+    },
+    {
+      "id": "DR-F2-0005-017",
+      "blocking": true,
+      "question": "RPTSTA00 reads DB2-STATS and BATCH-STATS but the accumulation, metric calculation and report-writing paragraphs (2110, 2210, 2310, 2320, 2410, 2420, 2430) are missing, and the error handler ends the run without closing files. How are the metrics computed and written?"
+    },
+    {
+      "id": "DR-F2-0005-025",
+      "blocking": false,
+      "question": "The character encoding of DISPLAY data is not stated anywhere (source declares IBM-ZOS only). Is EBCDIC code page 037 correct for all files and the DB2 subsystem, or another code page (e.g. 1140 with the euro sign, which changes the '$' currency byte in WS-POS-VALUE)?"
+    },
+    {
+      "id": "DR-F2-PKT0010-002",
+      "blocking": false,
+      "question": "Which character encoding (code page) do the files and areas described by these copybooks use for DISPLAY data on the legacy platform (EBCDIC 037, 1140, another EBCDIC variant, or ASCII)? The zoned-decimal test vectors and String codecs depend on it."
+    },
+    {
+      "id": "DR-F2-PKT0010-003",
+      "blocking": false,
+      "question": "Which TRUNC compiler option (STD, OPT or BIN) were the programs including these copybooks compiled with? It decides whether COMP fields such as 9(2) COMP, 9(3) COMP, 9(5) COMP and 9(9) COMP may hold values beyond their PIC digits (up to the halfword/fullword limit), which affects Java range validation and whether 9(9) COMP counters need long instead of int."
+    },
+    {
+      "id": "DR-RPTSTA00-001",
+      "blocking": true,
+      "question": "RPTSTA00 copies DB2STAT (line 35), which names a program, not a copybook, so the DB2-STATS record layout is unavailable; it performs 7 paragraphs that are not in the source (2110-ACCUMULATE-DB2-STATS, 2210-ACCUMULATE-BATCH-STATS, 2310-CALC-DB2-METRICS, 2320-CALC-BATCH-METRICS, 2410-WRITE-DB2-SECTION, 2420-WRITE-BATCH-SECTION, 2430-WRITE-TREND-ANALYSIS); WS-ERROR-MESSAGE, END-OF-DB2-STATS and END-OF-BATCH-STATS are declared nowhere; the error handler ends the run without closing files. Can the record layout and complete source be supplied, or must the business specify the statistics and performance report?"
+    },
+    {
+      "id": "RVW-GAP-092",
+      "blocking": false,
+      "question": "GAP-092 (medium, DIAGRAM_RENDER_UNVERIFIED) is not addressed by any decision or requirement: Visual rendering of the 65 Mermaid diagrams is unverified. Acknowledge it as a known limitation (resolved_no_change) or exclude the affected units?"
+    },
+    {
+      "id": "RVW-GAP-104",
+      "blocking": false,
+      "question": "GAP-104 (low, DIAGRAM_INCOMPLETE) is not addressed by any decision or requirement: COMP-UNRESOLVED: all seven edges are unsupported. Acknowledge it as a known limitation (resolved_no_change) or exclude the affected units?"
+    }
+  ],
+  "authorisation": {
+    "generation_authorized": false,
+    "blockers": [
+      "config generation.java_generation_allowed is false (project authority)",
+      "no authorised orchestrator.java_target_dir",
+      "G4 is BLOCKED (needs signed G2, G3 and G4 approvals by trusted signers)",
+      "trust store: TRUST_NOT_CONFIGURED"
+    ],
+    "gates": {
+      "G0": "PASS",
+      "G1": "PASS",
+      "G2": "UNVERIFIED",
+      "G3": "BLOCKED",
+      "G4": "BLOCKED",
+      "G5": "BLOCKED",
+      "G6": "BLOCKED",
+      "G7": "BLOCKED",
+      "G8": "BLOCKED"
+    },
+    "trust": "TRUST_NOT_CONFIGURED",
+    "program_g2_scope": {
+      "readiness": "NOT_READY",
+      "blocking": 7,
+      "scope_sha256": "6b41aa506dd36dcab30bd1db380d5bcc6ff320bf29019af9e9550cd8c0881540"
+    },
+    "note": "Engineering gates never authorise generation. Java may be generated only when generation_authorized is true."
+  }
+}

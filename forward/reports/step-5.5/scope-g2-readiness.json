@@ -1,0 +1,70 @@
+{
+  "contract": "scope-g2-readiness",
+  "contract_version": "1.0",
+  "generated_at": "2026-11-01T00:14:35.047Z",
+  "scope": "programs:RTNCDE00",
+  "scope_sha256": "88d8562c1b30170f33446a43303d54d47fd102ec25c3d79249749d6dfd126f13",
+  "readiness": "NOT_READY",
+  "unique_root_causes": 3,
+  "blocking_findings": 5,
+  "blocking_decisions": [
+    "DR-DB2CONN-002",
+    "DR-F2-0011-001",
+    "RVW-REQ-RTNCDE00-003",
+    "RVW-REQ-RTNCDE00-004"
+  ],
+  "source_evidence_issues": [
+    {
+      "id": "REQ-RTNCDE00-004",
+      "kind": "requirement",
+      "outcome": "CONTRADICTED",
+      "reason": "CONTRADICTED: the source contradicts the cited evidence: cited line 121 is outside SYS-PORTFOLIO-001-FIL-0052-STMT-000024 (lines 122-133)"
+    },
+    {
+      "id": "REQ-RTNCDE00-003",
+      "kind": "requirement",
+      "outcome": "REQUIRES_EVIDENCE",
+      "reason": "REQUIRES_EVIDENCE: declared verified_from_source but not confirmed by the runtime: stated values found in the program but not in the cited lines: F"
+    },
+    {
+      "id": "REQ-RTNCDE00-001",
+      "kind": "requirement",
+      "outcome": "REQUIRES_SME_DECISION",
+      "reason": "REQUIRES_SME_DECISION: blocked by DR-DB2CONN-002 (open)"
+    }
+  ],
+  "failing_checks": [
+    {
+      "check": "requirement_evidence",
+      "blocking": 3,
+      "items": [
+        "requirement:REQ-RTNCDE00-004 (CONTRADICTED)",
+        "requirement:REQ-RTNCDE00-003 (REQUIRES_EVIDENCE)",
+        "requirement:REQ-RTNCDE00-001 (REQUIRES_SME_DECISION)"
+      ]
+    },
+    {
+      "check": "contradicted_claims",
+      "blocking": 1,
+      "items": [
+        "requirement:REQ-RTNCDE00-004 (CONTRADICTED)"
+      ]
+    },
+    {
+      "check": "blocking_decisions",
+      "blocking": 2,
+      "items": [
+        "decision:technical:DR-DB2CONN-002 (REQUIRES_SME_DECISION)",
+        "decision:data_layout:DR-F2-0011-001 (REQUIRES_SME_DECISION)"
+      ]
+    }
+  ],
+  "trust": "TRUST_NOT_CONFIGURED",
+  "g2_can_pass": false,
+  "why_g2_cannot_pass": [
+    "scope is NOT_READY: 5 blocking finding(s) from 3 root cause(s)",
+    "TRUST_NOT_CONFIGURED: no usable trust anchor with the required roles",
+    "no signed requirements approval has been imported for this (or any) scope"
+  ],
+  "note": "Evaluated with the existing G2 scope evaluator. A signed approval is valid only for this exact scope digest and baseline."
+}

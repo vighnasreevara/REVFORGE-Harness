@@ -1,0 +1,42 @@
+{
+ "program": "DB2HNDL",
+ "provenance": "Written 2026-11-02 by a scenario-author agent (F6 independent fixture design) from the COBOL source src/templates/database/db2-handling.cbl with copybooks src/copybook/db2/SQLCA.cpy and the gaps array of forward/generated/java/DB2HNDL/pilot-result.json only; no generated Java, source map or test result was read. DISPLAY lines are given right-trimmed.",
+ "scenarios": [
+  {
+   "id": "S01",
+   "title": "template run: INITIALIZE host variables, then EXEC SQL CONNECT TO sample blocks; nothing displayed",
+   "cobol_lines": [
+    67,
+    76,
+    77,
+    79
+   ],
+   "kind": "main",
+   "expect": {
+    "outcome": "BLOCKED AT src/templates/database/db2-handling.cbl:79",
+    "display": []
+   }
+  },
+  {
+   "id": "S02",
+   "title": "state at the block: INITIALIZE set host variables to spaces/zero and null indicators to zero",
+   "cobol_lines": [
+    76,
+    77,
+    79
+   ],
+   "kind": "main",
+   "expect": {
+    "outcome": "BLOCKED AT src/templates/database/db2-handling.cbl:79",
+    "items": {
+     "HV-PORTFOLIO-ID": "",
+     "HV-PORTFOLIO-NAME": "",
+     "HV-TOTAL-VALUE": "0",
+     "HV-STATUS": "",
+     "NI-PORTFOLIO-ID": "0",
+     "NI-STATUS": "0"
+    }
+   }
+  }
+ ]
+}

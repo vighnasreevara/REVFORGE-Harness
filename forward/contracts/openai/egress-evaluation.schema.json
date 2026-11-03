@@ -1,0 +1,59 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://revforge.local/contracts/openai/egress-evaluation.schema.json",
+  "title": "Egress authorization evaluation of one outgoing request attempt",
+  "type": "object",
+  "required": [
+    "evaluated_at",
+    "allowed",
+    "mode",
+    "packet_id",
+    "pass",
+    "payload_sha256",
+    "authorization_id",
+    "checks"
+  ],
+  "properties": {
+    "allowed": {
+      "type": "boolean"
+    },
+    "mode": {
+      "enum": [
+        "OFFLINE",
+        "MOCK",
+        "LIVE"
+      ]
+    },
+    "payload_sha256": {
+      "$ref": "../common.schema.json#/definitions/sha256"
+    },
+    "authorization_id": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "checks": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "id",
+          "ok",
+          "detail"
+        ],
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "ok": {
+            "type": "boolean"
+          },
+          "detail": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  }
+}

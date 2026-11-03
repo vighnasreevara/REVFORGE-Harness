@@ -1,0 +1,66 @@
+{
+  "contract": "pilot/generation-review",
+  "contract_version": "1.0",
+  "program": "PORTVALD",
+  "authorization": "LGA-0001",
+  "reviewer": "Claude Code (the same session that wrote the converter); permitted by LGA-0001 (ai_review_in_session_permitted). NOT independent of the converter author and NOT a human review.",
+  "method": "F7-style read of the generated Java (Portvald.java, LsValidationRequest.java, Cobol.java helpers) against the Step 14 conversion spec and test cases; no source text is quoted here.",
+  "inputs": {
+    "source_sha256": "5957fd22546258ae4d9e28847269168d1824bf8d11a9e661f9f62a5adc47f603",
+    "copybook_sha256": "8d9c7666b01561c4eba4d1e0a95b9da62baaa60c9dcfc2aa5effff06854104bf",
+    "output_dir": "forward/generated/java/PORTVALD/"
+  },
+  "checked": [
+    { "area": "dispatch (EVALUATE TRUE on the 88-levels)", "result": "OK", "detail": "I/A/T/M dispatch with case-sensitive single-character equality; lower-case types fall to WHEN OTHER (V16)" },
+    { "area": "WHEN OTHER", "result": "OK (preserved)", "detail": "return code 1 (VAL-INVALID-ID) with the literal 'Invalid validation type', as written (V15)" },
+    { "area": "ID validation (impossible success path)", "result": "OK (preserved)", "detail": "4 characters moved into X(10) leave 6 spaces, so the NUMERIC test always fails; no ID can succeed (DR-PORTVALD-001; V01, V02)" },
+    { "area": "account validation", "result": "OK", "detail": "the whole X(50) must be digits and not all zeros: exactly 50 digits (V03-V06, V17)" },
+    { "area": "investment type", "result": "OK", "detail": "STK, BND, MMF, ETF compared space-padded to 50; leading space and lower case rejected (V07-V12)" },
+    { "area": "alphanumeric-to-numeric MOVE (line 109)", "result": "GAP kept", "detail": "non-digit content throws UnresolvedGapException(GAP-PORTVALD-0001); no return code is invented (V14 BLOCKED_AS_EXPECTED)" },
+    { "area": "EXIT PARAGRAPH / GOBACK", "result": "OK", "detail": "EXIT PARAGRAPH becomes return from the paragraph method; GOBACK returns from the call" },
+    { "area": "INITIALIZE VAL-WORK-AREAS", "result": "OK", "detail": "numeric items to zero, alphanumeric to spaces, before any use; items without VALUE clauses are annotated" },
+    { "area": "return codes and messages", "result": "OK", "detail": "every defined path writes both LS-RETURN-CODE and LS-ERROR-MSG; earlier contents never leak (V17)" },
+    { "area": "decimal handling", "result": "OK", "detail": "S9(13)V99 as BigDecimal scale 2; truncation, never rounding" },
+    { "area": "binary LS-RETURN-CODE S9(4) COMP", "result": "OK", "detail": "only constants 0-4 are moved; no TRUNC-dependent value is produced" },
+    { "area": "compilation", "result": "OK", "detail": "javac 21 with -Xlint:all -Werror, 0 diagnostics, 7 class files" }
+  ],
+  "findings": [
+    {
+      "id": "RV-16-01",
+      "severity": "MEDIUM",
+      "title": "V13 (all-digit amount) relies on an interpretation that no COBOL run has confirmed",
+      "detail": "The MOVE takes the low-order 13 integer digits of a 50-digit alphanumeric value. Standard COBOL treats all-digit alphanumeric senders as unsigned integers, but 50 digits exceeds the 18 or 31 digit numeric limits (ARITH option), so the result may depend on the compiler. The LS-VAL-AMT branch is already classified GAP, so its V13 PASS is not counted as verified behaviour.",
+      "recommendation": "Confirm with a captured legacy run, or widen GAP-PORTVALD-0001 to cover all amount content. A business or technical owner must decide; this review does not."
+    },
+    {
+      "id": "RV-16-02",
+      "severity": "LOW",
+      "title": "the VAL-INVALID-AMT (return code 4) path is unreachable",
+      "detail": "after the MOVE the value is unsigned and at most 13 integer digits, so it always lies within the full-range bounds (DR-PORTVALD-003). Preserved as written; no fixture can reach it.",
+      "recommendation": "Business SME decision on the intended amount limits."
+    },
+    {
+      "id": "RV-16-03",
+      "severity": "LOW",
+      "title": "the test harness rejects initial return codes of 10000 or more",
+      "detail": "the field-list parser accepts at most 4 digits, but a halfword COMP item may hold up to 32767 under TRUNC(BIN). This only restricts the harness; the program overwrites the return code on every path.",
+      "recommendation": "none for this program"
+    },
+    {
+      "id": "RV-16-04",
+      "severity": "INFO",
+      "title": "naming differences from the Step 14 spec",
+      "detail": "the spec names the exception UnsupportedLegacyBehaviourException; the generator emits UnresolvedGapException. The gap ID is GAP-PORTVALD-0001 with stable_ref GAP-PORTVALD-4000-VALIDATE-AMOUNT-ALNUM-TO-NUMERIC-VAL-TEMP-NUM. The behaviour is the same.",
+      "recommendation": "none"
+    },
+    {
+      "id": "RV-16-05",
+      "severity": "INFO",
+      "title": "equivalence is not established",
+      "detail": "no COBOL compiler is available, so expected results come from the reviewed Step 14 cases, not from a legacy run (EQUIVALENCE_UNVERIFIED).",
+      "recommendation": "capture reference outputs on a COBOL toolchain before any claim of equivalence"
+    }
+  ],
+  "defects_found": 0,
+  "verdict": "No correctness defect against the source semantics on the paths exercised. PARTIAL is accurate. Not an acceptance."
+}

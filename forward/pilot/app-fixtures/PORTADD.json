@@ -1,0 +1,207 @@
+{
+ "program": "PORTADD",
+ "provenance": "Written 2026-11-02 by a scenario-author agent (F6 independent fixture design) from the COBOL source under references/udara-legacy-modernization-harness/src/ and its copybooks, plus only the 'gaps' array of pilot-result.json for gap line numbers. No generated Java, source map or test result was read or run. Scenarios V01.. were added on 2026-11-03 (partly-covered rule extension) by an F6 scenario-author agent from the same COBOL source, copybooks, README and gaps array only; no generated Java, source map or test result was read or run.",
+ "scenarios": [
+  {
+   "id": "A01",
+   "title": "neither dataset allocated: both OPENs give 35, the error DISPLAY and the 3000-TERMINATE summary run and RC 8 is set, but 1000-INITIALIZE does not stop the run, so 0000-MAIN goes on into 2000-PROCESS, whose READ ... INTO PORT-RECORD (PORT-RECORD declared in both FDs) is a gap",
+   "cobol_lines": [
+    77,
+    87,
+    89,
+    91,
+    92,
+    94,
+    95,
+    96,
+    97,
+    98,
+    99,
+    100,
+    140,
+    143,
+    144,
+    145,
+    147,
+    79,
+    105
+   ],
+   "kind": "main",
+   "clock": "2026-03-04T05:06:07.08Z",
+   "expect": {
+    "outcome": "BLOCKED AT src/programs/portfolio/PORTADD.cbl:105",
+    "display": [
+     "Error opening files: PORT=35INPT=35",
+     "Records added:    0000000",
+     "Duplicate records:0000000",
+     "Errors occurred:  0000000"
+    ]
+   }
+  },
+  {
+   "id": "A02",
+   "title": "PORTFILE allocated, INPTFILE missing: the IF tests both statuses with OR, so one failed OPEN is enough for the error path; then blocks at the READ gap",
+   "cobol_lines": [
+    91,
+    92,
+    94,
+    95,
+    96,
+    99,
+    100,
+    143,
+    144,
+    145,
+    105
+   ],
+   "kind": "main",
+   "clock": "2026-03-04T05:06:07.08Z",
+   "datasets": {
+    "PORTFILE": {
+     "records": [
+      "P00000011000000001ACME HOLDINGS INTERNATIONAL COC0000000000000000A\u0000\u0000\u0000\u0000\u0000\u0000\u0000\f\u0000\u0000\u0000\u0000\u0000\u0000\u0000\fBATCH00100000000"
+     ]
+    }
+   },
+   "expect": {
+    "outcome": "BLOCKED AT src/programs/portfolio/PORTADD.cbl:105",
+    "display": [
+     "Error opening files: PORT=00INPT=35",
+     "Records added:    0000000",
+     "Duplicate records:0000000",
+     "Errors occurred:  0000000"
+    ]
+   }
+  },
+  {
+   "id": "A03",
+   "title": "both datasets allocated: OPENs succeed, no DISPLAY, and the first READ INPUT-FILE INTO PORT-RECORD is the ambiguous-name gap, so no record is validated or written",
+   "cobol_lines": [
+    87,
+    89,
+    91,
+    92,
+    94,
+    79,
+    105
+   ],
+   "kind": "main",
+   "clock": "2026-03-04T05:06:07.08Z",
+   "datasets": {
+    "PORTFILE": {
+     "records": []
+    },
+    "INPTFILE": {
+     "records": [
+      "P00000011000000001ACME HOLDINGS INTERNATIONAL COC0000000000000000A\u0000\u0000\u0000\u0000\u0000\u0000\u0000\f\u0000\u0000\u0000\u0000\u0000\u0000\u0000\fBATCH00100000000"
+     ]
+    }
+   },
+   "expect": {
+    "outcome": "BLOCKED AT src/programs/portfolio/PORTADD.cbl:105",
+    "display": []
+   }
+  },
+  {
+   "id": "V01",
+   "title": "BR-085 termination after both OPENs fail (35/35): 3000-TERMINATE CLOSEs two files that are not open (status 42 each), DISPLAYs the three zero totals and moves WS-RETURN-CODE (+8) to RETURN-CODE; the run then continues into the READ gap",
+   "cobol_lines": [
+    77,
+    79,
+    87,
+    89,
+    91,
+    92,
+    94,
+    95,
+    96,
+    97,
+    98,
+    99,
+    100,
+    105,
+    139,
+    140,
+    141,
+    143,
+    144,
+    145,
+    147
+   ],
+   "kind": "main",
+   "clock": "2026-03-04T05:06:07.08Z",
+   "expect": {
+    "outcome": "BLOCKED AT src/programs/portfolio/PORTADD.cbl:105",
+    "return_code": 8,
+    "display": [
+     "Error opening files: PORT=35INPT=35",
+     "Records added:    0000000",
+     "Duplicate records:0000000",
+     "Errors occurred:  0000000"
+    ],
+    "items": {
+     "WS-RETURN-CODE": "8",
+     "WS-ADD-COUNT": "0",
+     "WS-DUP-COUNT": "0",
+     "WS-ERROR-COUNT": "0",
+     "WS-FILE-STATUS": "42",
+     "WS-INPUT-STATUS": "42"
+    }
+   }
+  },
+  {
+   "id": "V02",
+   "title": "BR-085 termination after only INPTFILE fails: CLOSE of the open PORTFILE gives 00 and of INPTFILE 42; totals 0/0/0 and RETURN-CODE 8; PORTFILE is closed unchanged",
+   "cobol_lines": [
+    77,
+    79,
+    87,
+    89,
+    91,
+    92,
+    94,
+    95,
+    96,
+    99,
+    100,
+    105,
+    139,
+    140,
+    141,
+    143,
+    144,
+    145,
+    147
+   ],
+   "kind": "main",
+   "clock": "2026-03-04T05:06:07.08Z",
+   "datasets": {
+    "PORTFILE": {
+     "records": [
+      "P00000011000000001ACME HOLDINGS INTERNATIONAL COC0000000000000000A\u0000\u0000\u0000\u0000\u0000\u0000\u0000\f\u0000\u0000\u0000\u0000\u0000\u0000\u0000\fBATCH00100000000"
+     ]
+    }
+   },
+   "expect": {
+    "outcome": "BLOCKED AT src/programs/portfolio/PORTADD.cbl:105",
+    "return_code": 8,
+    "display": [
+     "Error opening files: PORT=00INPT=35",
+     "Records added:    0000000",
+     "Duplicate records:0000000",
+     "Errors occurred:  0000000"
+    ],
+    "items": {
+     "WS-RETURN-CODE": "8",
+     "WS-FILE-STATUS": "00",
+     "WS-INPUT-STATUS": "42"
+    },
+    "datasets": {
+     "PORTFILE": [
+      "P00000011000000001ACME HOLDINGS INTERNATIONAL COC0000000000000000A\u0000\u0000\u0000\u0000\u0000\u0000\u0000\f\u0000\u0000\u0000\u0000\u0000\u0000\u0000\fBATCH00100000000"
+     ]
+    }
+   }
+  }
+ ]
+}

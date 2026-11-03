@@ -1,0 +1,45 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://revforge.local/contracts/input/gaps-register.schema.json",
+  "title": "Reverse Agent 7 gaps_register.json (consumed core)",
+  "type": "object",
+  "required": ["meta", "gaps"],
+  "properties": {
+    "meta": {
+      "type": "object",
+      "required": ["agent_version", "system_id"],
+      "properties": {
+        "agent_version": { "type": "string" },
+        "system_id": { "$ref": "../common.schema.json#/definitions/systemId" }
+      }
+    },
+    "gaps": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["gap_id", "gap_type", "severity", "title", "requires_sme_review"],
+        "properties": {
+          "gap_id": { "$ref": "../common.schema.json#/definitions/gapId" },
+          "gap_type": { "type": "string" },
+          "severity": { "enum": ["critical", "high", "medium", "low"] },
+          "title": { "type": "string" },
+          "requires_sme_review": { "type": "boolean" },
+          "confidence": { "type": ["string", "null"] },
+          "source_program": { "type": ["string", "null"] },
+          "related_rule_ids": { "type": "array", "items": { "$ref": "../common.schema.json#/definitions/ruleId" } },
+          "related_gap_ids": { "type": "array", "items": { "$ref": "../common.schema.json#/definitions/gapId" } },
+          "source_ids": { "type": ["object", "null"] },
+          "affected": { "type": ["array", "null"], "items": { "type": "object" } }
+        }
+      }
+    },
+    "assumptions": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["assumption_id", "description"],
+        "properties": { "assumption_id": { "$ref": "../common.schema.json#/definitions/assumptionId" } }
+      }
+    }
+  }
+}

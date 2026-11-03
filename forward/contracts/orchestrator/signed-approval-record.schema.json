@@ -1,0 +1,195 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://revforge.local/contracts/orchestrator/signed-approval-record.schema.json",
+  "title": "Imported, verified G2 approval (runtime record)",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "contract",
+    "contract_version",
+    "approval_id",
+    "gate",
+    "decision",
+    "recorded_at",
+    "recorded_by",
+    "request_id",
+    "request_sha256",
+    "scope",
+    "baseline_manifest_sha256",
+    "signer",
+    "trust_store_sha256",
+    "statement",
+    "signature",
+    "verification"
+  ],
+  "properties": {
+    "contract": {
+      "const": "signed-approval-record"
+    },
+    "contract_version": {
+      "const": "1.0"
+    },
+    "approval_id": {
+      "type": "string",
+      "pattern": "^APR-[0-9]{4}$"
+    },
+    "gate": {
+      "const": "G2"
+    },
+    "decision": {
+      "enum": [
+        "approved",
+        "rejected"
+      ]
+    },
+    "recorded_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "recorded_by": {
+      "const": "runtime"
+    },
+    "request_id": {
+      "type": "string"
+    },
+    "request_sha256": {
+      "$ref": "../common.schema.json#/definitions/sha256"
+    },
+    "scope": {
+      "type": "object",
+      "required": [
+        "selector",
+        "selector_text",
+        "scope_sha256"
+      ],
+      "properties": {
+        "scope_sha256": {
+          "$ref": "../common.schema.json#/definitions/sha256"
+        }
+      }
+    },
+    "baseline_manifest_sha256": {
+      "$ref": "../common.schema.json#/definitions/sha256"
+    },
+    "signer": {
+      "type": "object",
+      "required": [
+        "signer_id",
+        "role",
+        "key_fingerprint"
+      ],
+      "properties": {
+        "signer_id": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9._@-]{2,128}$"
+        },
+        "key_fingerprint": {
+          "$ref": "../common.schema.json#/definitions/sha256"
+        }
+      }
+    },
+    "trust_store_sha256": {
+      "$ref": "../common.schema.json#/definitions/sha256"
+    },
+    "statement": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "contract",
+        "statement_version",
+        "gate",
+        "request_id",
+        "request_sha256",
+        "scope_sha256",
+        "baseline_manifest_sha256",
+        "decision",
+        "signer_id",
+        "role"
+      ],
+      "properties": {
+        "contract": {
+          "const": "approval-statement"
+        },
+        "statement_version": {
+          "const": "1.0"
+        },
+        "gate": {
+          "const": "G2"
+        },
+        "request_id": {
+          "type": "string",
+          "pattern": "^AREQ-[0-9]{4}$"
+        },
+        "request_sha256": {
+          "$ref": "../common.schema.json#/definitions/sha256"
+        },
+        "scope_sha256": {
+          "$ref": "../common.schema.json#/definitions/sha256"
+        },
+        "baseline_manifest_sha256": {
+          "$ref": "../common.schema.json#/definitions/sha256"
+        },
+        "decision": {
+          "enum": [
+            "approved",
+            "rejected"
+          ]
+        },
+        "signer_id": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9._@-]{2,128}$"
+        },
+        "role": {
+          "type": "string",
+          "minLength": 1
+        },
+        "comment": {
+          "type": "string",
+          "maxLength": 2000
+        }
+      }
+    },
+    "signature": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "algorithm",
+        "value"
+      ],
+      "properties": {
+        "algorithm": {
+          "const": "ed25519"
+        },
+        "value": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9+/=]{80,100}$",
+          "description": "Base64 Ed25519 signature over the UTF-8 canonical JSON of the signed object"
+        }
+      }
+    },
+    "verification": {
+      "type": "object",
+      "required": [
+        "checks"
+      ],
+      "properties": {
+        "checks": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": [
+              "id",
+              "ok",
+              "detail"
+            ],
+            "properties": {
+              "ok": {
+                "const": true
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

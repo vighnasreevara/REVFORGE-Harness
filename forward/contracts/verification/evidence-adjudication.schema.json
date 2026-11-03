@@ -1,0 +1,104 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://revforge.local/contracts/verification/evidence-adjudication.schema.json",
+  "title": "Versioned evidence adjudication of one finding (evidence class, never an approval)",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "contract",
+    "contract_version",
+    "adjudication_id",
+    "item_id",
+    "version",
+    "supersedes",
+    "recorded_at",
+    "baseline_manifest_sha256",
+    "item_sha256",
+    "linked",
+    "content_sha256",
+    "result",
+    "effect"
+  ],
+  "properties": {
+    "contract": {
+      "const": "verification/evidence-adjudication"
+    },
+    "contract_version": {
+      "const": "1.0"
+    },
+    "adjudication_id": {
+      "type": "string",
+      "pattern": "^EAR-[0-9]{4}$"
+    },
+    "item_id": {
+      "type": "string"
+    },
+    "version": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "supersedes": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "recorded_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "baseline_manifest_sha256": {
+      "$ref": "../common.schema.json#/definitions/sha256"
+    },
+    "item_sha256": {
+      "$ref": "../common.schema.json#/definitions/sha256"
+    },
+    "linked": {
+      "type": "object"
+    },
+    "content_sha256": {
+      "$ref": "../common.schema.json#/definitions/sha256"
+    },
+    "effect": {
+      "type": "string",
+      "minLength": 20
+    },
+    "result": {
+      "type": "object",
+      "required": [
+        "cohort",
+        "classification",
+        "superseding_status",
+        "needs_human_acceptance",
+        "source_files"
+      ],
+      "properties": {
+        "cohort": {
+          "enum": [
+            "newly_supported",
+            "questionable_earlier_verification"
+          ]
+        },
+        "classification": {
+          "enum": [
+            "SOURCE_CHAIN_VERIFIED",
+            "SOURCE_CHAIN_PARTIAL",
+            "SOURCE_CHAIN_AMBIGUOUS",
+            "SOURCE_CHAIN_CONTRADICTED",
+            "SOURCE_CHAIN_UNAVAILABLE"
+          ]
+        },
+        "superseding_status": {
+          "enum": [
+            null,
+            "EVIDENCE_INVALIDATED",
+            "EARLIER_VERIFICATION_CONFIRMED"
+          ]
+        },
+        "needs_human_acceptance": {
+          "const": true
+        }
+      }
+    }
+  }
+}

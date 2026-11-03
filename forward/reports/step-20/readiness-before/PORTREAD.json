@@ -1,0 +1,307 @@
+{
+  "gate": "SOURCE_READINESS",
+  "subject": "PORTREAD",
+  "status": "FAIL",
+  "checks": [
+    {
+      "id": "source_available",
+      "ok": true,
+      "detail": "src/programs/portfolio/PORTREAD.cbl sha256 1e90eef73115c6065dfeee8ca7a0ad8cff96a22cfa50789c62baec4ec22b5aa1; 26 statement(s) in 5 paragraph(s)"
+    },
+    {
+      "id": "complete_program",
+      "ok": true,
+      "detail": "every paragraph contains statements"
+    },
+    {
+      "id": "copybooks_resolved",
+      "ok": true,
+      "detail": "all 1 include(s) resolved: PORTFLIO"
+    },
+    {
+      "id": "requirements_and_data_mapping_delivered",
+      "ok": true,
+      "detail": "F1/F2 deliveries accepted for PORTFLIO, PORTREAD"
+    },
+    {
+      "id": "behaviour_classified",
+      "ok": true,
+      "detail": "4 behaviour(s): 0 VERIFIED_CANDIDATE, 4 PARTIAL, 0 GAP"
+    },
+    {
+      "id": "dependencies_identified",
+      "ok": false,
+      "detail": "closure UNRESOLVED for PORTREAD:0000-MAIN (line 110: RETURN-CODE is neither declared, a keyword, a paragraph nor the subject of a blocking decision (unknown dependency)); PORTREAD:1000-INITIALIZE (line 110: RETURN-CODE is neither declared, a keyword, a paragraph nor the subject of a blocking decision (unknown dependency)); PORTREAD:2000-PROCESS (line 86: NEXT is neither declared, a keyword, a paragraph nor the subject of a blocking decision (unknown dependency)); PORTREAD:3000-TERMINATE (line 110: RETURN-CODE is neither declared, a keyword, a paragraph nor the subject of a blocking decision (unknown dependency))"
+    },
+    {
+      "id": "unsupported_documented",
+      "ok": false,
+      "detail": "non-verified behaviour without a gap: PORTREAD:1000-INITIALIZE, PORTREAD:2000-PROCESS, PORTREAD:3000-TERMINATE"
+    },
+    {
+      "id": "unknowns_documented",
+      "ok": true,
+      "detail": "8 open decision(s) record the remaining questions (1 blocking for approval); none is resolved or assumed here"
+    }
+  ],
+  "note": "An engineering gate: it states that the source is understood well enough to convert, with every unknown documented. It is not a G2 approval and does not authorise generation.",
+  "behaviours": [
+    {
+      "behaviour_id": "PORTREAD:ENTRY-DISPATCH",
+      "kind": "dispatch",
+      "classification": "PARTIAL",
+      "lines": [
+        65,
+        70
+      ],
+      "inputs": [
+        "WS-END-OF-FILE-SW"
+      ],
+      "outputs": [],
+      "side_effects": [],
+      "unresolved": [],
+      "covered_by": []
+    },
+    {
+      "behaviour_id": "PORTREAD:1000-INITIALIZE",
+      "kind": "performed_range",
+      "classification": "PARTIAL",
+      "lines": [
+        75,
+        111
+      ],
+      "inputs": [
+        "WS-ERROR",
+        "WS-FILE-STATUS",
+        "WS-RECORD-COUNT",
+        "WS-RETURN-CODE"
+      ],
+      "outputs": [
+        "RETURN-CODE",
+        "WS-RETURN-CODE",
+        "WS-WORK-AREAS"
+      ],
+      "side_effects": [
+        {
+          "line": 77,
+          "kind": "file_io",
+          "operation": "OPEN",
+          "table": null
+        },
+        {
+          "line": 106,
+          "kind": "file_io",
+          "operation": "CLOSE",
+          "table": null
+        }
+      ],
+      "unresolved": [],
+      "covered_by": [
+        "REQ-PORTREAD-002"
+      ]
+    },
+    {
+      "behaviour_id": "PORTREAD:2000-PROCESS",
+      "kind": "performed_range",
+      "classification": "PARTIAL",
+      "lines": [
+        86,
+        103
+      ],
+      "inputs": [
+        "PORT-ACCOUNT-NO",
+        "PORT-CLIENT-NAME",
+        "PORT-ID",
+        "PORT-STATUS",
+        "PORT-TOTAL-VALUE",
+        "WS-RECORD-COUNT"
+      ],
+      "outputs": [
+        "WS-END-OF-FILE-SW"
+      ],
+      "side_effects": [
+        {
+          "line": 86,
+          "kind": "file_io",
+          "operation": "READ",
+          "table": null
+        }
+      ],
+      "unresolved": [],
+      "covered_by": [
+        "REQ-PORTREAD-001"
+      ]
+    },
+    {
+      "behaviour_id": "PORTREAD:3000-TERMINATE",
+      "kind": "performed_range",
+      "classification": "PARTIAL",
+      "lines": [
+        106,
+        111
+      ],
+      "inputs": [
+        "WS-RECORD-COUNT",
+        "WS-RETURN-CODE"
+      ],
+      "outputs": [
+        "RETURN-CODE"
+      ],
+      "side_effects": [
+        {
+          "line": 106,
+          "kind": "file_io",
+          "operation": "CLOSE",
+          "table": null
+        }
+      ],
+      "unresolved": [],
+      "covered_by": [
+        "REQ-PORTREAD-002"
+      ]
+    }
+  ],
+  "gaps": [],
+  "closures": [
+    {
+      "behaviour_id": "PORTREAD:0000-MAIN",
+      "status": "UNRESOLVED",
+      "unresolved_reasons": [
+        "line 110: RETURN-CODE is neither declared, a keyword, a paragraph nor the subject of a blocking decision (unknown dependency)",
+        "line 86: NEXT is neither declared, a keyword, a paragraph nor the subject of a blocking decision (unknown dependency)"
+      ],
+      "units": [
+        "PORTREAD",
+        "PORTFLIO"
+      ],
+      "external": [
+        {
+          "kind": "file_io",
+          "line": 86,
+          "operation": "READ",
+          "target": "PORTFOLIO-FILE",
+          "relation": "direct"
+        }
+      ],
+      "undeclared": [],
+      "sha256": "4d04b947316d12d63bf68043c9a71108f0dd510d416bf061a845bafb0f469b9e"
+    },
+    {
+      "behaviour_id": "PORTREAD:1000-INITIALIZE",
+      "status": "UNRESOLVED",
+      "unresolved_reasons": [
+        "line 110: RETURN-CODE is neither declared, a keyword, a paragraph nor the subject of a blocking decision (unknown dependency)"
+      ],
+      "units": [
+        "PORTREAD"
+      ],
+      "external": [],
+      "undeclared": [],
+      "sha256": "c054ef605aa1e1d53e20ab096f3849e5d2469ec0f4c585fca680664475f9517c"
+    },
+    {
+      "behaviour_id": "PORTREAD:2000-PROCESS",
+      "status": "UNRESOLVED",
+      "unresolved_reasons": [
+        "line 86: NEXT is neither declared, a keyword, a paragraph nor the subject of a blocking decision (unknown dependency)"
+      ],
+      "units": [
+        "PORTREAD",
+        "PORTFLIO"
+      ],
+      "external": [
+        {
+          "kind": "file_io",
+          "line": 86,
+          "operation": "READ",
+          "target": "PORTFOLIO-FILE",
+          "relation": "direct"
+        }
+      ],
+      "undeclared": [],
+      "sha256": "4cd208e73686749fad12bf6c47363636b839103b1e65bf7ca67b63b6270b8dbd"
+    },
+    {
+      "behaviour_id": "PORTREAD:3000-TERMINATE",
+      "status": "UNRESOLVED",
+      "unresolved_reasons": [
+        "line 110: RETURN-CODE is neither declared, a keyword, a paragraph nor the subject of a blocking decision (unknown dependency)"
+      ],
+      "units": [
+        "PORTREAD"
+      ],
+      "external": [],
+      "undeclared": [],
+      "sha256": "55a391f5f09d9e15a5592b1ff4a505c749782c57e69cb359539cc8259deb022e"
+    }
+  ],
+  "open_decisions": [
+    {
+      "id": "DR-F2-P0007-009",
+      "blocking": false,
+      "question": "Which character encoding do the DISPLAY files of this batch use (assumed EBCDIC code page 037), and must Java preserve EBCDIC collation for indexed keys such as PORT-KEY, VSAM-RECORD-KEY, POS-KEY and TRAN-KEY?"
+    },
+    {
+      "id": "DR-F2-PKT0010-002",
+      "blocking": false,
+      "question": "Which character encoding (code page) do the files and areas described by these copybooks use for DISPLAY data on the legacy platform (EBCDIC 037, 1140, another EBCDIC variant, or ASCII)? The zoned-decimal test vectors and String codecs depend on it."
+    },
+    {
+      "id": "DR-PORTREAD-001",
+      "blocking": false,
+      "question": "BR-099/BR-100 (low confidence, SME review): PORTREAD adds 1 to WS-RECORD-COUNT for each portfolio record read ('ADD 1 TO WS-RECORD-COUNT per record read') and displays the total at termination ('DISPLAY total records read at termination'). The SME note says no business decision depends on the count and its purpose beyond run reporting is unclear. Confirm, correct or reject this listing count and total as required behaviour of the portfolio listing."
+    },
+    {
+      "id": "DR-PORTREAD-002",
+      "blocking": false,
+      "question": "GAP-074: on an OPEN error PORTREAD performs 3000-TERMINATE, which returns (line 81); the read loop then still runs on an unopened file and 3000-TERMINATE runs twice. Should the forward listing stop after an open failure with return code 8, or reproduce the as-found behaviour?"
+    },
+    {
+      "id": "DR-PORTUPDT-001",
+      "blocking": true,
+      "question": "Contradiction CON-PKT0004-001 (BR-149, GAP-212): copybook PORTFLIO declares portfolio status 'PORT-STATUS 88 PORT-ACTIVE 'A' / PORT-CLOSED 'C' / PORT-SUSPENDED 'S'', while PORTMSTR validates A / I / C (BR-095). PORTUPDT action 'S' moves the new value into PORT-STATUS without validation. Which portfolio status set is authoritative, and must a status maintenance update be validated against it?"
+    },
+    {
+      "id": "RVW-GAP-092",
+      "blocking": false,
+      "question": "GAP-092 (medium, DIAGRAM_RENDER_UNVERIFIED) is not addressed by any decision or requirement: Visual rendering of the 65 Mermaid diagrams is unverified. Acknowledge it as a known limitation (resolved_no_change) or exclude the affected units?"
+    },
+    {
+      "id": "RVW-GAP-104",
+      "blocking": false,
+      "question": "GAP-104 (low, DIAGRAM_INCOMPLETE) is not addressed by any decision or requirement: COMP-UNRESOLVED: all seven edges are unsupported. Acknowledge it as a known limitation (resolved_no_change) or exclude the affected units?"
+    },
+    {
+      "id": "RVW-GAP-211",
+      "blocking": false,
+      "question": "GAP-211 (low, MEDIUM_CONFIDENCE_RULE) is not addressed by any decision or requirement: BR-148 Validate client type is individual, corporate or trust — medium confidence. Acknowledge it as a known limitation (resolved_no_change) or exclude the affected units?"
+    }
+  ],
+  "authorisation": {
+    "generation_authorized": false,
+    "blockers": [
+      "config generation.java_generation_allowed is false (project authority)",
+      "no authorised orchestrator.java_target_dir",
+      "G4 is BLOCKED (needs signed G2, G3 and G4 approvals by trusted signers)",
+      "trust store: TRUST_NOT_CONFIGURED"
+    ],
+    "gates": {
+      "G0": "PASS",
+      "G1": "PASS",
+      "G2": "UNVERIFIED",
+      "G3": "BLOCKED",
+      "G4": "BLOCKED",
+      "G5": "BLOCKED",
+      "G6": "BLOCKED",
+      "G7": "BLOCKED",
+      "G8": "BLOCKED"
+    },
+    "trust": "TRUST_NOT_CONFIGURED",
+    "program_g2_scope": {
+      "readiness": "NOT_READY",
+      "blocking": 12,
+      "scope_sha256": "c6b1864a61d126f8f09c5b2e5aace229df1da15dc8314fa0d07f16a756a6178f"
+    },
+    "note": "Engineering gates never authorise generation. Java may be generated only when generation_authorized is true."
+  }
+}

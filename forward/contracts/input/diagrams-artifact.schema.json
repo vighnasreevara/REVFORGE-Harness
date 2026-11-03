@@ -1,0 +1,36 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://revforge.local/contracts/input/diagrams-artifact.schema.json",
+  "title": "Reverse Agent 6 diagrams_artifact.json (consumed core)",
+  "description": "Diagrams are supporting evidence only: the forward runtime never infers behaviour from them when structural evidence is unavailable.",
+  "type": "object",
+  "required": ["meta", "component_diagrams", "sequence_diagrams", "process_flow_diagrams"],
+  "definitions": {
+    "diagram": {
+      "type": "object",
+      "required": ["diagram_id", "file", "type"],
+      "properties": {
+        "diagram_id": { "type": "string" },
+        "file": { "type": "string" },
+        "type": { "type": "string" },
+        "program_id": { "type": ["string", "null"] },
+        "incomplete": { "type": ["boolean", "null"] },
+        "truncated": { "type": ["boolean", "null"] },
+        "edge_evidence": {
+          "type": "array",
+          "items": { "type": "object", "properties": { "evidence": { "enum": ["confirmed", "uncertain", "unsupported"] } } }
+        }
+      }
+    }
+  },
+  "properties": {
+    "meta": { "type": "object", "required": ["agent_version"] },
+    "component_diagrams": { "type": "array", "items": { "$ref": "#/definitions/diagram" } },
+    "erd_diagrams": { "type": "array", "items": { "$ref": "#/definitions/diagram" } },
+    "erd": { "anyOf": [{ "$ref": "#/definitions/diagram" }, { "type": "null" }] },
+    "sequence_diagrams": { "type": "array", "items": { "$ref": "#/definitions/diagram" } },
+    "process_flow_diagrams": { "type": "array", "items": { "$ref": "#/definitions/diagram" } },
+    "diagrams_by_file_id": { "type": "object" },
+    "source_id_verification": { "type": ["object", "null"] }
+  }
+}

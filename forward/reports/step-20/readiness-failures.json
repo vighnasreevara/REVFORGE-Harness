@@ -1,0 +1,2153 @@
+{
+ "contract": "step-20/readiness-failures",
+ "note": "Every failing readiness check per program before and after STEP 20, with the reason, a classification (GATE_DEFECT corrected in STEP 20; CONVERTER_DEFECT; MISSING_DEPENDENCY; GENUINE_SOURCE_ISSUE) and the root cause. No gate check was disabled or relaxed.",
+ "gate_corrections": [
+  {
+   "id": "RG-01",
+   "file": "forward/runtime/src/approval/closure.ts",
+   "defect": "IBM special register RETURN-CODE reported as an unknown dependency",
+   "correction": "recognised as a compiler-defined special register and recorded in the closure (special_registers); not a keyword, so it stays visible as a dependency",
+   "classification": "GATE_DEFECT"
+  },
+  {
+   "id": "RG-02",
+   "file": "forward/runtime/src/approval/closure.ts",
+   "defect": "reserved words of OPEN I-O, READ ... NEXT RECORD, DELETE file, DISPLAY ... UPON and ACCEPT ... FROM DATE YYYYMMDD reported as unknown names",
+   "correction": "added I-O, NEXT, DELETE, UPON, YYYYMMDD to the reserved-word set",
+   "classification": "GATE_DEFECT"
+  },
+  {
+   "id": "RG-03",
+   "file": "forward/runtime/src/approval/closure.ts",
+   "defect": "mnemonic names declared in SPECIAL-NAMES (CONSOLE IS CONS) reported as unknown",
+   "correction": "names declared by `<system-name> IS <mnemonic>` in SPECIAL-NAMES resolve; an undeclared mnemonic stays unknown (synthetic test)",
+   "classification": "GATE_DEFECT"
+  },
+  {
+   "id": "RG-04",
+   "file": "forward/runtime/src/approval/closure.ts",
+   "defect": "index names declared by OCCURS ... INDEXED BY reported as unknown",
+   "correction": "index names of the program and its included members resolve (same recognition as the converter)",
+   "classification": "GATE_DEFECT"
+  },
+  {
+   "id": "RG-05",
+   "file": "forward/runtime/src/approval/closure.ts",
+   "defect": "a PERFORM of a paragraph missing from the source aborted the whole readiness gate with an exception (CURSMGR)",
+   "correction": "the closure of a missing entry paragraph is UNRESOLVED with the reason, as the closure contract states (fail-closed)",
+   "classification": "GATE_DEFECT"
+  },
+  {
+   "id": "RG-06",
+   "file": "forward/runtime/src/pilot/scope.ts",
+   "defect": "file I/O and CALL side effects made behaviours PARTIAL, but the gap handoff documented only embedded SQL, so unsupported_documented failed although the cause was known",
+   "correction": "blocking OPEN gaps EXTERNAL_FILE_RUNTIME and EXTERNAL_PROGRAM_CALL are recorded for them; the behaviour classification is unchanged",
+   "classification": "GATE_DEFECT"
+  }
+ ],
+ "programs": [
+  {
+   "program": "AUDPROC",
+   "cobol_source": {
+    "path": "src/programs/common/AUDPROC.cbl",
+    "sha256": "c688d44dee1a7042adeec1984b4502a246b079116bae900e2c138eaa056bcfbf"
+   },
+   "reverse_gaps": [
+    "GAP-065"
+   ],
+   "java": "forward/generated/java/AUDPROC/",
+   "before": {
+    "status": "FAIL",
+    "failing_checks": [
+     "dependencies_identified",
+     "unsupported_documented"
+    ]
+   },
+   "after": {
+    "status": "FAIL",
+    "failing_checks": [
+     "dependencies_identified"
+    ]
+   },
+   "failures": [
+    {
+     "gate_check": "dependencies_identified",
+     "behaviour": "AUDPROC:0000-MAIN",
+     "cobol_line": 60,
+     "reason": "line 60: STAMP is neither declared, a keyword, a paragraph nor the subject of a blocking decision (unknown dependency)",
+     "classification": "GENUINE_SOURCE_ISSUE",
+     "root_cause": "ACCEPT ... FROM TIME STAMP is not a standard ACCEPT source; its content needs the legacy environment definition"
+    }
+   ]
+  },
+  {
+   "program": "BCHCTL00",
+   "cobol_source": {
+    "path": "src/programs/batch/BCHCTL00.cbl",
+    "sha256": "876e218a3c1a532dd16ff415cd936b53ac8073b6a457d0a0f05806eb58282880"
+   },
+   "reverse_gaps": [
+    "GAP-010",
+    "GAP-108",
+    "GAP-124",
+    "GAP-216"
+   ],
+   "java": "forward/generated/java/BCHCTL00/",
+   "before": {
+    "status": "FAIL",
+    "failing_checks": [
+     "dependencies_identified",
+     "unsupported_documented"
+    ]
+   },
+   "after": {
+    "status": "FAIL",
+    "failing_checks": [
+     "dependencies_identified"
+    ]
+   },
+   "failures": [
+    {
+     "gate_check": "dependencies_identified",
+     "behaviour": "BCHCTL00:0000-MAIN",
+     "cobol_line": null,
+     "reason": "PERFORM/GO TO target 1100-OPEN-FILES (line 84) is not a paragraph of BCHCTL00",
+     "classification": "GENUINE_SOURCE_ISSUE",
+     "root_cause": "the PERFORM / GO TO target is missing from the source"
+    }
+   ]
+  },
+  {
+   "program": "CKPRST",
+   "cobol_source": {
+    "path": "src/programs/batch/CKPRST.cbl",
+    "sha256": "870875c04b844564ada25a3b662deeea9a53cc3eb787f01646d9c0854424d058"
+   },
+   "reverse_gaps": [
+    "GAP-028",
+    "GAP-083",
+    "GAP-125"
+   ],
+   "java": "forward/generated/java/CKPRST/",
+   "before": {
+    "status": "FAIL",
+    "failing_checks": [
+     "complete_program",
+     "dependencies_identified"
+    ]
+   },
+   "after": {
+    "status": "FAIL",
+    "failing_checks": [
+     "complete_program",
+     "dependencies_identified"
+    ]
+   },
+   "failures": [
+    {
+     "gate_check": "complete_program",
+     "behaviour": null,
+     "cobol_line": null,
+     "reason": "paragraph(s) without statements (stub or template): PROC-INIT, PROC-TAKE-CHECKPOINT, PROC-COMMIT-CHECKPOINT, PROC-RESTART",
+     "classification": "GENUINE_SOURCE_ISSUE",
+     "root_cause": "paragraph(s) without statements (stub or template): PROC-INIT, PROC-TAKE-CHECKPOINT, PROC-COMMIT-CHECKPOINT, PROC-RESTART"
+    },
+    {
+     "gate_check": "dependencies_identified",
+     "behaviour": "CKPRST:PROC-TAKE-CHECKPOINT",
+     "cobol_line": 32,
+     "reason": "line 32: ENTRY-POINT-TAKE is neither declared, a keyword, a paragraph nor the subject of a blocking decision (unknown dependency)",
+     "classification": "GENUINE_SOURCE_ISSUE",
+     "root_cause": "ENTRY-POINT-TAKE is used but declared nowhere in the program or its copybooks"
+    },
+    {
+     "gate_check": "dependencies_identified",
+     "behaviour": "CKPRST:PROC-COMMIT-CHECKPOINT",
+     "cobol_line": 34,
+     "reason": "line 34: ENTRY-POINT-COMMIT is neither declared, a keyword, a paragraph nor the subject of a blocking decision (unknown dependency)",
+     "classification": "GENUINE_SOURCE_ISSUE",
+     "root_cause": "ENTRY-POINT-COMMIT is used but declared nowhere in the program or its copybooks"
+    },
+    {
+     "gate_check": "dependencies_identified",
+     "behaviour": "CKPRST:PROC-RESTART",
+     "cobol_line": 36,
+     "reason": "line 36: ENTRY-POINT-RESTART is neither declared, a keyword, a paragraph nor the subject of a blocking decision (unknown dependency)",
+     "classification": "GENUINE_SOURCE_ISSUE",
+     "root_cause": "ENTRY-POINT-RESTART is used but declared nowhere in the program or its copybooks"
+    }
+   ]
+  },
+  {
+   "program": "CURSMGR",
+   "cobol_source": {
+    "path": "src/programs/online/CURSMGR.cbl",
+    "sha256": "5e367102d18d1775c3504afff9b4d3e28cfc655ae2daad836376f63f05b125db"
+   },
+   "reverse_gaps": [
+    "GAP-015",
+    "GAP-045",
+    "GAP-115",
+    "GAP-147"
+   ],
+   "java": "forward/generated/java/CURSMGR/",
+   "before": {
+    "status": "CRASH",
+    "failing_checks": [
+     "(gate aborted: unknown paragraph P300-FETCH-DATA in CURSMGR)"
+    ]
+   },
+   "after": {
+    "status": "FAIL",
+    "failing_checks": [
+     "copybooks_resolved",
+     "dependencies_identified"
+    ]
+   },
+   "failures": [
+    {
+     "gate_check": "copybooks_resolved",
+     "behaviour": null,
+     "cobol_line": null,
+     "reason": "unresolved or circular includes: SQLCA@6",
+     "classification": "MISSING_DEPENDENCY",
+     "root_cause": "SQLCA.cpy line 6 is EXEC SQL INCLUDE SQLCA (it includes itself); the SQLCA is supplied by the DB2 precompiler, which is not available"
+    },
+    {
+     "gate_check": "dependencies_identified",
+     "behaviour": "CURSMGR:P100-DECLARE-CURSOR",
+     "cobol_line": null,
+     "reason": "PERFORM/GO TO target P200-EXIT (line 49) is not a paragraph of CURSMGR",
+     "classification": "GENUINE_SOURCE_ISSUE",
+     "root_cause": "the PERFORM / GO TO target is missing from the source"
+    },
+    {
+     "gate_check": "dependencies_identified",
+     "behaviour": "CURSMGR:P200-OPEN-CURSOR",
+     "cobol_line": 90,
+     "reason": "line 90: P200-EXIT is neither declared, a keyword, a paragraph nor the subject of a blocking decision (unknown dependency)",
+     "classification": "GENUINE_SOURCE_ISSUE",
+     "root_cause": "P200-EXIT is used but declared nowhere in the program or its copybooks"
+    }
+   ]
+  },
+  {
+   "program": "DB2CMT",
+   "cobol_source": {
+    "path": "src/programs/common/DB2CMT.cbl",
+    "sha256": "d753db038a2a033997d333a5ce09336b37458ba413c39f8ddc5326a6d30e3b52"
+   },
+   "reverse_gaps": [
+    "GAP-141"
+   ],
+   "java": "forward/generated/java/DB2CMT/",
+   "before": {
+    "status": "FAIL",
+    "failing_checks": [
+     "copybooks_resolved",
+     "unsupported_documented"
+    ]
+   },
+   "after": {
+    "status": "FAIL",
+    "failing_checks": [
+     "copybooks_resolved"
+    ]
+   },
+   "failures": [
+    {
+     "gate_check": "copybooks_resolved",
+     "behaviour": null,
+     "cobol_line": null,
+     "reason": "unresolved or circular includes: SQLCA@6",
+     "classification": "MISSING_DEPENDENCY",
+     "root_cause": "SQLCA.cpy line 6 is EXEC SQL INCLUDE SQLCA (it includes itself); the SQLCA is supplied by the DB2 precompiler, which is not available"
+    }
+   ]
+  },
+  {
+   "program": "DB2CONN",
+   "cobol_source": {
+    "path": "src/programs/common/DB2CONN.cbl",
+    "sha256": "488a9dcd9fa71ab4a4476694f2e117fc103a7e0a85f2cde249953fd590bd371c"
+   },
+   "reverse_gaps": [
+    "GAP-007",
+    "GAP-106",
+    "GAP-114",
+    "GAP-142",
+    "GAP-143"
+   ],
+   "java": "forward/generated/java/DB2CONN/",
+   "before": {
+    "status": "FAIL",
+    "failing_checks": [
+     "copybooks_resolved",
+     "dependencies_identified",
+     "unsupported_documented"
+    ]
+   },
+   "after": {
+    "status": "FAIL",
+    "failing_checks": [
+     "copybooks_resolved",
+     "dependencies_identified"
+    ]
+   },
+   "failures": [
+    {
+     "gate_check": "copybooks_resolved",
+     "behaviour": null,
+     "cobol_line": null,
+     "reason": "unresolved or circular includes: SQLCA@6",
+     "classification": "MISSING_DEPENDENCY",
+     "root_cause": "SQLCA.cpy line 6 is EXEC SQL INCLUDE SQLCA (it includes itself); the SQLCA is supplied by the DB2 precompiler, which is not available"
+    },
+    {
+     "gate_check": "dependencies_identified",
+     "behaviour": "DB2CONN:0000-MAIN",
+     "cobol_line": null,
+     "reason": "CALL 'DELAY' at line 86: the called program is not in the inventory",
+     "classification": "MISSING_DEPENDENCY",
+     "root_cause": "the called program is not part of the application"
+    }
+   ]
+  },
+  {
+   "program": "DB2ERR",
+   "cobol_source": {
+    "path": "src/programs/common/DB2ERR.cbl",
+    "sha256": "cb599435c5aee112ac61004b36a3d3a459effdb9d796d312e2688b605fd80a63"
+   },
+   "reverse_gaps": [
+    "GAP-086",
+    "GAP-144",
+    "GAP-145"
+   ],
+   "java": "forward/generated/java/DB2ERR/",
+   "before": {
+    "status": "FAIL",
+    "failing_checks": [
+     "copybooks_resolved",
+     "dependencies_identified",
+     "unsupported_documented"
+    ]
+   },
+   "after": {
+    "status": "FAIL",
+    "failing_checks": [
+     "copybooks_resolved",
+     "dependencies_identified"
+    ]
+   },
+   "failures": [
+    {
+     "gate_check": "copybooks_resolved",
+     "behaviour": null,
+     "cobol_line": null,
+     "reason": "unresolved or circular includes: SQLCA@6",
+     "classification": "MISSING_DEPENDENCY",
+     "root_cause": "SQLCA.cpy line 6 is EXEC SQL INCLUDE SQLCA (it includes itself); the SQLCA is supplied by the DB2 precompiler, which is not available"
+    },
+    {
+     "gate_check": "dependencies_identified",
+     "behaviour": "DB2ERR:0000-MAIN",
+     "cobol_line": 75,
+     "reason": "line 75: STAMP is neither declared, a keyword, a paragraph nor the subject of a blocking decision (unknown dependency)",
+     "classification": "GENUINE_SOURCE_ISSUE",
+     "root_cause": "ACCEPT ... FROM TIME STAMP is not a standard ACCEPT source; its content needs the legacy environment definition"
+    }
+   ]
+  },
+  {
+   "program": "DB2HNDL",
+   "cobol_source": {
+    "path": "src/templates/database/db2-handling.cbl",
+    "sha256": "6f7d5fb2ad1cb0fb9283f74542f2768aa8da1044a4d29e16b0c894482688b678"
+   },
+   "reverse_gaps": [
+    "GAP-022",
+    "GAP-082",
+    "GAP-121"
+   ],
+   "java": "forward/generated/java/DB2HNDL/",
+   "before": {
+    "status": "FAIL",
+    "failing_checks": [
+     "copybooks_resolved",
+     "dependencies_identified"
+    ]
+   },
+   "after": {
+    "status": "FAIL",
+    "failing_checks": [
+     "copybooks_resolved",
+     "dependencies_identified"
+    ]
+   },
+   "failures": [
+    {
+     "gate_check": "copybooks_resolved",
+     "behaviour": null,
+     "cobol_line": null,
+     "reason": "unresolved or circular includes: SQLCA@6",
+     "classification": "MISSING_DEPENDENCY",
+     "root_cause": "SQLCA.cpy line 6 is EXEC SQL INCLUDE SQLCA (it includes itself); the SQLCA is supplied by the DB2 precompiler, which is not available"
+    },
+    {
+     "gate_check": "dependencies_identified",
+     "behaviour": "DB2HNDL:0000-MAIN",
+     "cobol_line": null,
+     "reason": "PERFORM/GO TO target 2310-PROCESS-CURSOR-ROW (line 174) is not a paragraph of DB2HNDL",
+     "classification": "GENUINE_SOURCE_ISSUE",
+     "root_cause": "the PERFORM / GO TO target is missing from the source"
+    }
+   ]
+  },
+  {
+   "program": "DB2ONLN",
+   "cobol_source": {
+    "path": "src/programs/online/DB2ONLN.cbl",
+    "sha256": "651889f0e13a3465466a3f671b97b122c12563a3ee251abbacddadbca0e134b4"
+   },
+   "reverse_gaps": [
+    "GAP-046",
+    "GAP-067",
+    "GAP-087",
+    "GAP-148"
+   ],
+   "java": "forward/generated/java/DB2ONLN/",
+   "before": {
+    "status": "FAIL",
+    "failing_checks": [
+     "copybooks_resolved"
+    ]
+   },
+   "after": {
+    "status": "FAIL",
+    "failing_checks": [
+     "copybooks_resolved"
+    ]
+   },
+   "failures": [
+    {
+     "gate_check": "copybooks_resolved",
+     "behaviour": null,
+     "cobol_line": null,
+     "reason": "unresolved or circular includes: SQLCA@6",
+     "classification": "MISSING_DEPENDENCY",
+     "root_cause": "SQLCA.cpy line 6 is EXEC SQL INCLUDE SQLCA (it includes itself); the SQLCA is supplied by the DB2 precompiler, which is not available"
+    }
+   ]
+  },
+  {
+   "program": "DB2RECV",
+   "cobol_source": {
+    "path": "src/programs/online/DB2RECV.cbl",
+    "sha256": "ca0e1dc9a3e8a59c093677e1e650913ffb0807f8133df723bba5547c4fa21c52"
+   },
+   "reverse_gaps": [
+    "GAP-025",
+    "GAP-047",
+    "GAP-056",
+    "GAP-068",
+    "GAP-149",
+    "GAP-150",
+    "GAP-151"
+   ],
+   "java": "forward/generated/java/DB2RECV/",
+   "before": {
+    "status": "FAIL",
+    "failing_checks": [
+     "copybooks_resolved",
+     "dependencies_identified"
+    ]
+   },
+   "after": {
+    "status": "FAIL",
+    "failing_checks": [
+     "copybooks_resolved",
+     "dependencies_identified"
+    ]
+   },
+   "failures": [
+    {
+     "gate_check": "copybooks_resolved",
+     "behaviour": null,
+     "cobol_line": null,
+     "reason": "unresolved or circular includes: SQLCA@6",
+     "classification": "MISSING_DEPENDENCY",
+     "root_cause": "SQLCA.cpy line 6 is EXEC SQL INCLUDE SQLCA (it includes itself); the SQLCA is supplied by the DB2 precompiler, which is not available"
+    },
+    {
+     "gate_check": "dependencies_identified",
+     "behaviour": "DB2RECV:P100-RECOVER-CONNECTION",
+     "cobol_line": 88,
+     "reason": "line 88: EXEC CICS hands control and data to the transaction monitor",
+     "classification": "MISSING_DEPENDENCY",
+     "root_cause": "EXEC CICS needs a CICS environment (or an approved replacement design)"
+    },
+    {
+     "gate_check": "dependencies_identified",
+     "behaviour": "DB2RECV:P100-RECOVER-CONNECTION",
+     "cobol_line": 88,
+     "reason": "line 88: LINK is neither declared, a keyword, a paragraph nor the subject of a blocking decision (unknown dependency)",
+     "classification": "MISSING_DEPENDENCY",
+     "root_cause": "LINK belongs to the CICS command level (translator / EIB); no CICS environment is available"
+    },
+    {
+     "gate_check": "dependencies_identified",
+     "behaviour": "DB2RECV:P100-RECOVER-CONNECTION",
+     "cobol_line": 105,
+     "reason": "line 105: DELAY is neither declared, a keyword, a paragraph nor the subject of a blocking decision (unknown dependency)",
+     "classification": "MISSING_DEPENDENCY",
+     "root_cause": "DELAY belongs to the CICS command level (translator / EIB); no CICS environment is available"
+    },
+    {
+     "gate_check": "dependencies_identified",
+     "behaviour": "DB2RECV:P100-RECOVER-CONNECTION",
+     "cobol_line": 105,
+     "reason": "line 105: INTERVAL is neither declared, a keyword, a paragraph nor the subject of a blocking decision (unknown dependency)",
+     "classification": "MISSING_DEPENDENCY",
+     "root_cause": "INTERVAL belongs to the CICS command level (translator / EIB); no CICS environment is available"
+    },
+    {
+     "gate_check": "dependencies_identified",
+     "behaviour": "DB2RECV:P300-RECOVER-CURSOR",
+     "cobol_line": 128,
+     "reason": "line 128: RECV-CURSOR is ambiguous (2 declarations)",
+     "classification": "GENUINE_SOURCE_ISSUE",
+     "root_cause": "an ambiguous reference"
+    }
+   ]
+  },
+  {
+   "program": "DB2STAT",
+   "cobol_source": {
+    "path": "src/programs/common/DB2STAT.cbl",
+    "sha256": "082eb02647d2ccaeb6c085425e03f647bfd54a15018b05a0c25de4bb42efd00f"
+   },
+   "reverse_gaps": [
+    "GAP-066",
+    "GAP-085",
+    "GAP-146"
+   ],
+   "java": "forward/generated/java/DB2STAT/",
+   "before": {
+    "status": "FAIL",
+    "failing_checks": [
+     "copybooks_resolved",
+     "dependencies_identified",
+     "unsupported_documented"
+    ]
+   },
+   "after": {
+    "status": "FAIL",
+    "failing_checks": [
+     "copybooks_resolved",
+     "dependencies_identified"
+    ]
+   },
+   "failures": [
+    {
+     "gate_check": "copybooks_resolved",
+     "behaviour": null,
+     "cobol_line": null,
+     "reason": "unresolved or circular includes: SQLCA@6",
+     "classification": "MISSING_DEPENDENCY",
+     "root_cause": "SQLCA.cpy line 6 is EXEC SQL INCLUDE SQLCA (it includes itself); the SQLCA is supplied by the DB2 precompiler, which is not available"
+    },
+    {
+     "gate_check": "dependencies_identified",
+     "behaviour": "DB2STAT:0000-MAIN",
+     "cobol_line": 80,
+     "reason": "line 80: STAMP is neither declared, a keyword, a paragraph nor the subject of a blocking decision (unknown dependency)",
+     "classification": "GENUINE_SOURCE_ISSUE",
+     "root_cause": "ACCEPT ... FROM TIME STAMP is not a standard ACCEPT source; its content needs the legacy environment definition"
+    }
+   ]
+  },
+  {
+   "program": "ERRHANDL",
+   "cobol_source": {
+    "path": "src/templates/error/error-handling.cbl",
+    "sha256": "22548dd957eaa37c181b34e3d3ac0c78ce080a7d8a1be73ac507264e79f415e6"
+   },
+   "reverse_gaps": [
+    "GAP-009",
+    "GAP-122",
+    "GAP-195",
+    "GAP-196",
+    "GAP-197"
+   ],
+   "java": "forward/generated/java/ERRHANDL/",
+   "before": {
+    "status": "FAIL",
+    "failing_checks": [
+     "dependencies_identified",
+     "unsupported_documented"
+    ]
+   },
+   "after": {
+    "status": "FAIL",
+    "failing_checks": [
+     "dependencies_identified"
+    ]
+   },
+   "failures": [
+    {
+     "gate_check": "dependencies_identified",
+     "behaviour": "ERRHANDL:0000-MAIN",
+     "cobol_line": null,
+     "reason": "CALL 'CEE3ABD' at line 186: the called program is not in the inventory",
+     "classification": "MISSING_DEPENDENCY",
+     "root_cause": "the called program is not part of the application"
+    }
+   ]
+  },
+  {
+   "program": "ERRHNDL",
+   "cobol_source": {
+    "path": "src/programs/online/ERRHNDL.cbl",
+    "sha256": "11304d2864669b12837bc4b68fdf7638f12212a65f59d9f57831288a927d5c0a"
+   },
+   "reverse_gaps": [
+    "GAP-048",
+    "GAP-058",
+    "GAP-088",
+    "GAP-097",
+    "GAP-152",
+    "GAP-153"
+   ],
+   "java": "forward/generated/java/ERRHNDL/",
+   "before": {
+    "status": "FAIL",
+    "failing_checks": [
+     "copybooks_resolved",
+     "dependencies_identified"
+    ]
+   },
+   "after": {
+    "status": "FAIL",
+    "failing_checks": [
+     "copybooks_resolved",
+     "dependencies_identified"
+    ]
+   },
+   "failures": [
+    {
+     "gate_check": "copybooks_resolved",
+     "behaviour": null,
+     "cobol_line": null,
+     "reason": "unresolved or circular includes: SQLCA@6",
+     "classification": "MISSING_DEPENDENCY",
+     "root_cause": "SQLCA.cpy line 6 is EXEC SQL INCLUDE SQLCA (it includes itself); the SQLCA is supplied by the DB2 precompiler, which is not available"
+    },
+    {
+     "gate_check": "dependencies_identified",
+     "behaviour": "ERRHNDL:P200-LOG-ERROR",
+     "cobol_line": 64,
+     "reason": "line 64: LOG-TIMESTAMP is neither declared, a keyword, a paragraph nor the subject of a blocking decision (unknown dependency)",
+     "classification": "GENUINE_SOURCE_ISSUE",
+     "root_cause": "LOG-TIMESTAMP is used but declared nowhere in the program or its copybooks"
+    },
+    {
+     "gate_check": "dependencies_identified",
+     "behaviour": "ERRHNDL:P200-LOG-ERROR",
+     "cobol_line": 65,
+     "reason": "line 65: LOG-PROGRAM is neither declared, a keyword, a paragraph nor the subject of a blocking decision (unknown dependency)",
+     "classification": "GENUINE_SOURCE_ISSUE",
+     "root_cause": "LOG-PROGRAM is used but declared nowhere in the program or its copybooks"
+    },
+    {
+     "gate_check": "dependencies_identified",
+     "behaviour": "ERRHNDL:P200-LOG-ERROR",
+     "cobol_line": 66,
+     "reason": "line 66: LOG-PARAGRAPH is neither declared, a keyword, a paragraph nor the subject of a blocking decision (unknown dependency)",
+     "classification": "GENUINE_SOURCE_ISSUE",
+     "root_cause": "LOG-PARAGRAPH is used but declared nowhere in the program or its copybooks"
+    },
+    {
+     "gate_check": "dependencies_identified",
+     "behaviour": "ERRHNDL:P200-LOG-ERROR",
+     "cobol_line": 67,
+     "reason": "line 67: LOG-SQLCODE is neither declared, a keyword, a paragraph nor the subject of a blocking decision (unknown dependency)",
+     "classification": "GENUINE_SOURCE_ISSUE",
+     "root_cause": "LOG-SQLCODE is used but declared nowhere in the program or its copybooks"
+    },
+    {
+     "gate_check": "dependencies_identified",
+     "behaviour": "ERRHNDL:P200-LOG-ERROR",
+     "cobol_line": 68,
+     "reason": "line 68: LOG-CICS-RESP is neither declared, a keyword, a paragraph nor the subject of a blocking decision (unknown dependency)",
+     "classification": "GENUINE_SOURCE_ISSUE",
+     "root_cause": "LOG-CICS-RESP is used but declared nowhere in the program or its copybooks"
+    },
+    {
+     "gate_check": "dependencies_identified",
+     "behaviour": "ERRHNDL:P200-LOG-ERROR",
+     "cobol_line": 69,
+     "reason": "line 69: LOG-SEVERITY is neither declared, a keyword, a paragraph nor the subject of a blocking decision (unknown dependency)",
+     "classification": "GENUINE_SOURCE_ISSUE",
+     "root_cause": "LOG-SEVERITY is used but declared nowhere in the program or its copybooks"
+    },
+    {
+     "gate_check": "dependencies_identified",
+     "behaviour": "ERRHNDL:P200-LOG-ERROR",
+     "cobol_line": 70,
+     "reason": "line 70: LOG-MESSAGE is neither declared, a keyword, a paragraph nor the subject of a blocking decision (unknown dependency)",
+     "classification": "GENUINE_SOURCE_ISSUE",
+     "root_cause": "LOG-MESSAGE is used but declared nowhere in the program or its copybooks"
+    },
+    {
+     "gate_check": "dependencies_identified",
+     "behaviour": "ERRHNDL:P200-LOG-ERROR",
+     "cobol_line": 71,
+     "reason": "line 71: LOG-TRACE-ID is neither declared, a keyword, a paragraph nor the subject of a blocking decision (unknown dependency)",
+     "classification": "GENUINE_SOURCE_ISSUE",
+     "root_cause": "LOG-TRACE-ID is used but declared nowhere in the program or its copybooks"
+    }
+   ]
+  },
+  {
+   "program": "ERRPROC",
+   "cobol_source": {
+    "path": "src/programs/common/ERRPROC.cbl",
+    "sha256": "b9bbfaaaaec49ff558c167be17e2561b80b671c6d2c86271a6780a3f973697b2"
+   },
+   "reverse_gaps": [],
+   "java": "forward/generated/java/ERRPROC/",
+   "before": {
+    "status": "FAIL",
+    "failing_checks": [
+     "dependencies_identified",
+     "unsupported_documented"
+    ]
+   },
+   "after": {
+    "status": "FAIL",
+    "failing_checks": [
+     "dependencies_identified"
+    ]
+   },
+   "failures": [
+    {
+     "gate_check": "dependencies_identified",
+     "behaviour": "ERRPROC:0000-MAIN",
+     "cobol_line": 57,
+     "reason": "line 57: STAMP is neither declared, a keyword, a paragraph nor the subject of a blocking decision (unknown dependency)",
+     "classification": "GENUINE_SOURCE_ISSUE",
+     "root_cause": "ACCEPT ... FROM TIME STAMP is not a standard ACCEPT source; its content needs the legacy environment definition"
+    }
+   ]
+  },
+  {
+   "program": "FILEHNDL",
+   "cobol_source": {
+    "path": "src/templates/program/file-handling.cbl",
+    "sha256": "d9ca04c39498600c132b1e5aba353daba245f28d1411b19e497aab2d56f006db"
+   },
+   "reverse_gaps": [
+    "GAP-023",
+    "GAP-024",
+    "GAP-095",
+    "GAP-123"
+   ],
+   "java": "forward/generated/java/FILEHNDL/",
+   "before": {
+    "status": "FAIL",
+    "failing_checks": [
+     "complete_program",
+     "dependencies_identified",
+     "unsupported_documented"
+    ]
+   },
+   "after": {
+    "status": "FAIL",
+    "failing_checks": [
+     "complete_program",
+     "dependencies_identified"
+    ]
+   },
+   "failures": [
+    {
+     "gate_check": "complete_program",
+     "behaviour": null,
+     "cobol_line": null,
+     "reason": "paragraph(s) without statements (stub or template): 2000-PROCESS",
+     "classification": "GENUINE_SOURCE_ISSUE",
+     "root_cause": "paragraph(s) without statements (stub or template): 2000-PROCESS"
+    },
+    {
+     "gate_check": "dependencies_identified",
+     "behaviour": "FILEHNDL:0000-MAIN",
+     "cobol_line": null,
+     "reason": "PERFORM/GO TO target 2110-PROCESS-VSAM-RECORD (line 122) is not a paragraph of FILEHNDL",
+     "classification": "GENUINE_SOURCE_ISSUE",
+     "root_cause": "the PERFORM / GO TO target is missing from the source"
+    }
+   ]
+  },
+  {
+   "program": "HISTLD00",
+   "cobol_source": {
+    "path": "src/programs/batch/HISTLD00.cbl",
+    "sha256": "148f75d448f2679783e222d4aca4f208ba336736dcd39bfebc8bcba8d85f69d6"
+   },
+   "reverse_gaps": [
+    "GAP-011",
+    "GAP-029",
+    "GAP-099",
+    "GAP-109",
+    "GAP-126",
+    "GAP-127"
+   ],
+   "java": "forward/generated/java/HISTLD00/",
+   "before": {
+    "status": "FAIL",
+    "failing_checks": [
+     "copybooks_resolved",
+     "dependencies_identified"
+    ]
+   },
+   "after": {
+    "status": "FAIL",
+    "failing_checks": [
+     "copybooks_resolved",
+     "dependencies_identified"
+    ]
+   },
+   "failures": [
+    {
+     "gate_check": "copybooks_resolved",
+     "behaviour": null,
+     "cobol_line": null,
+     "reason": "unresolved or circular includes: SQLCA@6",
+     "classification": "MISSING_DEPENDENCY",
+     "root_cause": "SQLCA.cpy line 6 is EXEC SQL INCLUDE SQLCA (it includes itself); the SQLCA is supplied by the DB2 precompiler, which is not available"
+    },
+    {
+     "gate_check": "dependencies_identified",
+     "behaviour": "HISTLD00:0000-MAIN",
+     "cobol_line": null,
+     "reason": "PERFORM/GO TO target CONNECT-TO-DB2 (line 117) is not a paragraph of HISTLD00",
+     "classification": "GENUINE_SOURCE_ISSUE",
+     "root_cause": "the PERFORM / GO TO target is missing from the source"
+    }
+   ]
+  },
+  {
+   "program": "INQHIST",
+   "cobol_source": {
+    "path": "src/programs/online/INQHIST.cbl",
+    "sha256": "ab4b4e2072fb05e3b3e4244f3498bdab9f036a314df93c904c18ec8d29edc48b"
+   },
+   "reverse_gaps": [
+    "GAP-016",
+    "GAP-026",
+    "GAP-034",
+    "GAP-049",
+    "GAP-053",
+    "GAP-069",
+    "GAP-154",
+    "GAP-155"
+   ],
+   "java": "forward/generated/java/INQHIST/",
+   "before": {
+    "status": "FAIL",
+    "failing_checks": [
+     "copybooks_resolved",
+     "dependencies_identified"
+    ]
+   },
+   "after": {
+    "status": "FAIL",
+    "failing_checks": [
+     "copybooks_resolved",
+     "dependencies_identified"
+    ]
+   },
+   "failures": [
+    {
+     "gate_check": "copybooks_resolved",
+     "behaviour": null,
+     "cobol_line": null,
+     "reason": "unresolved or circular includes: SQLCA@6",
+     "classification": "MISSING_DEPENDENCY",
+     "root_cause": "SQLCA.cpy line 6 is EXEC SQL INCLUDE SQLCA (it includes itself); the SQLCA is supplied by the DB2 precompiler, which is not available"
+    },
+    {
+     "gate_check": "dependencies_identified",
+     "behaviour": "INQHIST:P100-INIT-PROGRAM",
+     "cobol_line": 86,
+     "reason": "line 86: EXEC CICS hands control and data to the transaction monitor",
+     "classification": "MISSING_DEPENDENCY",
+     "root_cause": "EXEC CICS needs a CICS environment (or an approved replacement design)"
+    },
+    {
+     "gate_check": "dependencies_identified",
+     "behaviour": "INQHIST:P100-INIT-PROGRAM",
+     "cobol_line": 98,
+     "reason": "line 98: LINK is neither declared, a keyword, a paragraph nor the subject of a blocking decision (unknown dependency)",
+     "classification": "MISSING_DEPENDENCY",
+     "root_cause": "LINK belongs to the CICS command level (translator / EIB); no CICS environment is available"
+    },
+    {
+     "gate_check": "dependencies_identified",
+     "behaviour": "INQHIST:P300-FORMAT-DISPLAY",
+     "cobol_line": 178,
+     "reason": "line 178: MAP is neither declared, a keyword, a paragraph nor the subject of a blocking decision (unknown dependency)",
+     "classification": "MISSING_DEPENDENCY",
+     "root_cause": "MAP belongs to the CICS command level (translator / EIB); no CICS environment is available"
+    },
+    {
+     "gate_check": "dependencies_identified",
+     "behaviour": "INQHIST:P300-FORMAT-DISPLAY",
+     "cobol_line": 178,
+     "reason": "line 178: RESP is neither declared, a keyword, a paragraph nor the subject of a blocking decision (unknown dependency)",
+     "classification": "MISSING_DEPENDENCY",
+     "root_cause": "RESP belongs to the CICS command level (translator / EIB); no CICS environment is available"
+    }
+   ]
+  },
+  {
+   "program": "INQONLN",
+   "cobol_source": {
+    "path": "src/programs/online/INQONLN.cbl",
+    "sha256": "a05307ca63e1bc02e3765ac98b3b56c1063ea1751998c70697d933fcf9ce1963"
+   },
+   "reverse_gaps": [
+    "GAP-035",
+    "GAP-050",
+    "GAP-054",
+    "GAP-107",
+    "GAP-156",
+    "GAP-157"
+   ],
+   "java": "forward/generated/java/INQONLN/",
+   "before": {
+    "status": "FAIL",
+    "failing_checks": [
+     "dependencies_identified"
+    ]
+   },
+   "after": {
+    "status": "FAIL",
+    "failing_checks": [
+     "dependencies_identified"
+    ]
+   },
+   "failures": [
+    {
+     "gate_check": "dependencies_identified",
+     "behaviour": "INQONLN:P100-PROCESS-REQUEST",
+     "cobol_line": 56,
+     "reason": "line 56: EXEC CICS hands control and data to the transaction monitor",
+     "classification": "MISSING_DEPENDENCY",
+     "root_cause": "EXEC CICS needs a CICS environment (or an approved replacement design)"
+    },
+    {
+     "gate_check": "dependencies_identified",
+     "behaviour": "INQONLN:P100-PROCESS-REQUEST",
+     "cobol_line": 56,
+     "reason": "line 56: MAP is neither declared, a keyword, a paragraph nor the subject of a blocking decision (unknown dependency)",
+     "classification": "MISSING_DEPENDENCY",
+     "root_cause": "MAP belongs to the CICS command level (translator / EIB); no CICS environment is available"
+    },
+    {
+     "gate_check": "dependencies_identified",
+     "behaviour": "INQONLN:P100-PROCESS-REQUEST",
+     "cobol_line": 56,
+     "reason": "line 56: RESP is neither declared, a keyword, a paragraph nor the subject of a blocking decision (unknown dependency)",
+     "classification": "MISSING_DEPENDENCY",
+     "root_cause": "RESP belongs to the CICS command level (translator / EIB); no CICS environment is available"
+    },
+    {
+     "gate_check": "dependencies_identified",
+     "behaviour": "INQONLN:P100-PROCESS-REQUEST",
+     "cobol_line": 102,
+     "reason": "line 102: LINK is neither declared, a keyword, a paragraph nor the subject of a blocking decision (unknown dependency)",
+     "classification": "MISSING_DEPENDENCY",
+     "root_cause": "LINK belongs to the CICS command level (translator / EIB); no CICS environment is available"
+    },
+    {
+     "gate_check": "dependencies_identified",
+     "behaviour": "INQONLN:P100-PROCESS-REQUEST",
+     "cobol_line": 122,
+     "reason": "line 122: EIBRESP is neither declared, a keyword, a paragraph nor the subject of a blocking decision (unknown dependency)",
+     "classification": "MISSING_DEPENDENCY",
+     "root_cause": "EIBRESP belongs to the CICS command level (translator / EIB); no CICS environment is available"
+    },
+    {
+     "gate_check": "dependencies_identified",
+     "behaviour": "INQONLN:P100-PROCESS-REQUEST",
+     "cobol_line": 123,
+     "reason": "line 123: EIBRESP2 is neither declared, a keyword, a paragraph nor the subject of a blocking decision (unknown dependency)",
+     "classification": "MISSING_DEPENDENCY",
+     "root_cause": "EIBRESP2 belongs to the CICS command level (translator / EIB); no CICS environment is available"
+    },
+    {
+     "gate_check": "dependencies_identified",
+     "behaviour": "INQONLN:P100-PROCESS-REQUEST",
+     "cobol_line": 142,
+     "reason": "line 142: ASSIGN is neither declared, a keyword, a paragraph nor the subject of a blocking decision (unknown dependency)",
+     "classification": "MISSING_DEPENDENCY",
+     "root_cause": "ASSIGN belongs to the CICS command level (translator / EIB); no CICS environment is available"
+    },
+    {
+     "gate_check": "dependencies_identified",
+     "behaviour": "INQONLN:P100-PROCESS-REQUEST",
+     "cobol_line": 142,
+     "reason": "line 142: USERID is neither declared, a keyword, a paragraph nor the subject of a blocking decision (unknown dependency)",
+     "classification": "MISSING_DEPENDENCY",
+     "root_cause": "USERID belongs to the CICS command level (translator / EIB); no CICS environment is available"
+    }
+   ]
+  },
+  {
+   "program": "INQPORT",
+   "cobol_source": {
+    "path": "src/programs/online/INQPORT.cbl",
+    "sha256": "5c752c9243105066d0e0f055501217a99b198d94b577b41c8de2d52a305b4bdc"
+   },
+   "reverse_gaps": [
+    "GAP-004",
+    "GAP-027",
+    "GAP-036",
+    "GAP-051",
+    "GAP-055",
+    "GAP-158"
+   ],
+   "java": "forward/generated/java/INQPORT/",
+   "before": {
+    "status": "FAIL",
+    "failing_checks": [
+     "copybooks_resolved",
+     "dependencies_identified"
+    ]
+   },
+   "after": {
+    "status": "FAIL",
+    "failing_checks": [
+     "copybooks_resolved",
+     "dependencies_identified"
+    ]
+   },
+   "failures": [
+    {
+     "gate_check": "copybooks_resolved",
+     "behaviour": null,
+     "cobol_line": null,
+     "reason": "unresolved or circular includes: SQLPOS@21",
+     "classification": "MISSING_DEPENDENCY",
+     "root_cause": "a COPY / INCLUDE member is missing from the repository: unresolved or circular includes: SQLPOS@21"
+    },
+    {
+     "gate_check": "dependencies_identified",
+     "behaviour": "INQPORT:P100-INIT-PROGRAM",
+     "cobol_line": 61,
+     "reason": "line 61: EXEC CICS hands control and data to the transaction monitor",
+     "classification": "MISSING_DEPENDENCY",
+     "root_cause": "EXEC CICS needs a CICS environment (or an approved replacement design)"
+    },
+    {
+     "gate_check": "dependencies_identified",
+     "behaviour": "INQPORT:P100-INIT-PROGRAM",
+     "cobol_line": 61,
+     "reason": "line 61: NOTFND is neither declared, a keyword, a paragraph nor the subject of a blocking decision (unknown dependency)",
+     "classification": "MISSING_DEPENDENCY",
+     "root_cause": "NOTFND belongs to the CICS command level (translator / EIB); no CICS environment is available"
+    },
+    {
+     "gate_check": "dependencies_identified",
+     "behaviour": "INQPORT:P200-GET-POSITION",
+     "cobol_line": 72,
+     "reason": "line 72: FILE is neither declared, a keyword, a paragraph nor the subject of a blocking decision (unknown dependency)",
+     "classification": "MISSING_DEPENDENCY",
+     "root_cause": "FILE belongs to the CICS command level (translator / EIB); no CICS environment is available"
+    },
+    {
+     "gate_check": "dependencies_identified",
+     "behaviour": "INQPORT:P200-GET-POSITION",
+     "cobol_line": 72,
+     "reason": "line 72: RESP is neither declared, a keyword, a paragraph nor the subject of a blocking decision (unknown dependency)",
+     "classification": "MISSING_DEPENDENCY",
+     "root_cause": "RESP belongs to the CICS command level (translator / EIB); no CICS environment is available"
+    },
+    {
+     "gate_check": "dependencies_identified",
+     "behaviour": "INQPORT:P200-GET-POSITION",
+     "cobol_line": 78,
+     "reason": "line 78: DFHRESP is neither declared, a keyword, a paragraph nor the subject of a blocking decision (unknown dependency)",
+     "classification": "MISSING_DEPENDENCY",
+     "root_cause": "DFHRESP belongs to the CICS command level (translator / EIB); no CICS environment is available"
+    },
+    {
+     "gate_check": "dependencies_identified",
+     "behaviour": "INQPORT:P200-GET-POSITION",
+     "cobol_line": 78,
+     "reason": "line 78: NORMAL is neither declared, a keyword, a paragraph nor the subject of a blocking decision (unknown dependency)",
+     "classification": "MISSING_DEPENDENCY",
+     "root_cause": "NORMAL belongs to the CICS command level (translator / EIB); no CICS environment is available"
+    },
+    {
+     "gate_check": "dependencies_identified",
+     "behaviour": "INQPORT:P300-FORMAT-DISPLAY",
+     "cobol_line": 87,
+     "reason": "line 87: MAP is neither declared, a keyword, a paragraph nor the subject of a blocking decision (unknown dependency)",
+     "classification": "MISSING_DEPENDENCY",
+     "root_cause": "MAP belongs to the CICS command level (translator / EIB); no CICS environment is available"
+    }
+   ]
+  },
+  {
+   "program": "PORTADD",
+   "cobol_source": {
+    "path": "src/programs/portfolio/PORTADD.cbl",
+    "sha256": "86cd685a216b37d2003e7dac1ae482d20e92268edc41e48495b49e0c39c21add"
+   },
+   "reverse_gaps": [
+    "GAP-059",
+    "GAP-071",
+    "GAP-160",
+    "GAP-161",
+    "GAP-162"
+   ],
+   "java": "forward/generated/java/PORTADD/",
+   "before": {
+    "status": "FAIL",
+    "failing_checks": [
+     "dependencies_identified",
+     "unsupported_documented"
+    ]
+   },
+   "after": {
+    "status": "PASS",
+    "failing_checks": []
+   },
+   "failures": []
+  },
+  {
+   "program": "PORTDEL",
+   "cobol_source": {
+    "path": "src/programs/portfolio/PORTDEL.cbl",
+    "sha256": "baaab39ebebed361185d44f7551a6e566d46abd6ec5ecad896a56e2cc2bcdc84"
+   },
+   "reverse_gaps": [
+    "GAP-072",
+    "GAP-163",
+    "GAP-164",
+    "GAP-165",
+    "GAP-217"
+   ],
+   "java": "forward/generated/java/PORTDEL/",
+   "before": {
+    "status": "FAIL",
+    "failing_checks": [
+     "dependencies_identified",
+     "unsupported_documented"
+    ]
+   },
+   "after": {
+    "status": "FAIL",
+    "failing_checks": [
+     "dependencies_identified"
+    ]
+   },
+   "failures": [
+    {
+     "gate_check": "dependencies_identified",
+     "behaviour": "PORTDEL:0000-MAIN",
+     "cobol_line": 169,
+     "reason": "line 169: STAMP is neither declared, a keyword, a paragraph nor the subject of a blocking decision (unknown dependency)",
+     "classification": "GENUINE_SOURCE_ISSUE",
+     "root_cause": "ACCEPT ... FROM TIME STAMP is not a standard ACCEPT source; its content needs the legacy environment definition"
+    }
+   ]
+  },
+  {
+   "program": "PORTMSTR",
+   "cobol_source": {
+    "path": "src/programs/portfolio/PORTMSTR.cbl",
+    "sha256": "9d1c7f7740ef43c045a43fa61136e51c552b9222b261ff5b81a433a818fb3cb3"
+   },
+   "reverse_gaps": [
+    "GAP-037",
+    "GAP-073",
+    "GAP-090",
+    "GAP-091",
+    "GAP-094",
+    "GAP-102",
+    "GAP-166",
+    "GAP-167",
+    "GAP-168",
+    "GAP-169",
+    "GAP-170",
+    "GAP-171"
+   ],
+   "java": "forward/generated/java/PORTMSTR/",
+   "before": {
+    "status": "FAIL",
+    "failing_checks": [
+     "dependencies_identified"
+    ]
+   },
+   "after": {
+    "status": "FAIL",
+    "failing_checks": [
+     "dependencies_identified"
+    ]
+   },
+   "failures": [
+    {
+     "gate_check": "dependencies_identified",
+     "behaviour": "PORTMSTR:0000-MAIN",
+     "cobol_line": 271,
+     "reason": "line 271: LS-SYSTEM-ID is neither declared, a keyword, a paragraph nor the subject of a blocking decision (unknown dependency)",
+     "classification": "GENUINE_SOURCE_ISSUE",
+     "root_cause": "LS-SYSTEM-ID is used but declared nowhere in the program or its copybooks"
+    },
+    {
+     "gate_check": "dependencies_identified",
+     "behaviour": "PORTMSTR:0000-MAIN",
+     "cobol_line": 272,
+     "reason": "line 272: LS-USER-ID is neither declared, a keyword, a paragraph nor the subject of a blocking decision (unknown dependency)",
+     "classification": "GENUINE_SOURCE_ISSUE",
+     "root_cause": "LS-USER-ID is used but declared nowhere in the program or its copybooks"
+    },
+    {
+     "gate_check": "dependencies_identified",
+     "behaviour": "PORTMSTR:0000-MAIN",
+     "cobol_line": 273,
+     "reason": "line 273: LS-PROGRAM is neither declared, a keyword, a paragraph nor the subject of a blocking decision (unknown dependency)",
+     "classification": "GENUINE_SOURCE_ISSUE",
+     "root_cause": "LS-PROGRAM is used but declared nowhere in the program or its copybooks"
+    },
+    {
+     "gate_check": "dependencies_identified",
+     "behaviour": "PORTMSTR:0000-MAIN",
+     "cobol_line": 274,
+     "reason": "line 274: LS-TERMINAL is neither declared, a keyword, a paragraph nor the subject of a blocking decision (unknown dependency)",
+     "classification": "GENUINE_SOURCE_ISSUE",
+     "root_cause": "LS-TERMINAL is used but declared nowhere in the program or its copybooks"
+    },
+    {
+     "gate_check": "dependencies_identified",
+     "behaviour": "PORTMSTR:0000-MAIN",
+     "cobol_line": 276,
+     "reason": "line 276: LS-TYPE is neither declared, a keyword, a paragraph nor the subject of a blocking decision (unknown dependency)",
+     "classification": "GENUINE_SOURCE_ISSUE",
+     "root_cause": "LS-TYPE is used but declared nowhere in the program or its copybooks"
+    },
+    {
+     "gate_check": "dependencies_identified",
+     "behaviour": "PORTMSTR:0000-MAIN",
+     "cobol_line": 277,
+     "reason": "line 277: LS-ACTION is neither declared, a keyword, a paragraph nor the subject of a blocking decision (unknown dependency)",
+     "classification": "GENUINE_SOURCE_ISSUE",
+     "root_cause": "LS-ACTION is used but declared nowhere in the program or its copybooks"
+    },
+    {
+     "gate_check": "dependencies_identified",
+     "behaviour": "PORTMSTR:0000-MAIN",
+     "cobol_line": 278,
+     "reason": "line 278: LS-STATUS is neither declared, a keyword, a paragraph nor the subject of a blocking decision (unknown dependency)",
+     "classification": "GENUINE_SOURCE_ISSUE",
+     "root_cause": "LS-STATUS is used but declared nowhere in the program or its copybooks"
+    },
+    {
+     "gate_check": "dependencies_identified",
+     "behaviour": "PORTMSTR:0000-MAIN",
+     "cobol_line": 280,
+     "reason": "line 280: LS-PORT-ID is neither declared, a keyword, a paragraph nor the subject of a blocking decision (unknown dependency)",
+     "classification": "GENUINE_SOURCE_ISSUE",
+     "root_cause": "LS-PORT-ID is used but declared nowhere in the program or its copybooks"
+    },
+    {
+     "gate_check": "dependencies_identified",
+     "behaviour": "PORTMSTR:0000-MAIN",
+     "cobol_line": 281,
+     "reason": "line 281: PORT-ACCOUNT-NO is neither declared, a keyword, a paragraph nor the subject of a blocking decision (unknown dependency)",
+     "classification": "GENUINE_SOURCE_ISSUE",
+     "root_cause": "PORT-ACCOUNT-NO is used but declared nowhere in the program or its copybooks"
+    },
+    {
+     "gate_check": "dependencies_identified",
+     "behaviour": "PORTMSTR:0000-MAIN",
+     "cobol_line": 281,
+     "reason": "line 281: LS-ACCT-NO is neither declared, a keyword, a paragraph nor the subject of a blocking decision (unknown dependency)",
+     "classification": "GENUINE_SOURCE_ISSUE",
+     "root_cause": "LS-ACCT-NO is used but declared nowhere in the program or its copybooks"
+    },
+    {
+     "gate_check": "dependencies_identified",
+     "behaviour": "PORTMSTR:0000-MAIN",
+     "cobol_line": 283,
+     "reason": "line 283: LS-BEFORE-IMAGE is neither declared, a keyword, a paragraph nor the subject of a blocking decision (unknown dependency)",
+     "classification": "GENUINE_SOURCE_ISSUE",
+     "root_cause": "LS-BEFORE-IMAGE is used but declared nowhere in the program or its copybooks"
+    },
+    {
+     "gate_check": "dependencies_identified",
+     "behaviour": "PORTMSTR:0000-MAIN",
+     "cobol_line": 284,
+     "reason": "line 284: LS-AFTER-IMAGE is neither declared, a keyword, a paragraph nor the subject of a blocking decision (unknown dependency)",
+     "classification": "GENUINE_SOURCE_ISSUE",
+     "root_cause": "LS-AFTER-IMAGE is used but declared nowhere in the program or its copybooks"
+    },
+    {
+     "gate_check": "dependencies_identified",
+     "behaviour": "PORTMSTR:0000-MAIN",
+     "cobol_line": 285,
+     "reason": "line 285: LS-MESSAGE is neither declared, a keyword, a paragraph nor the subject of a blocking decision (unknown dependency)",
+     "classification": "GENUINE_SOURCE_ISSUE",
+     "root_cause": "LS-MESSAGE is used but declared nowhere in the program or its copybooks"
+    }
+   ]
+  },
+  {
+   "program": "PORTREAD",
+   "cobol_source": {
+    "path": "src/programs/portfolio/PORTREAD.cbl",
+    "sha256": "1e90eef73115c6065dfeee8ca7a0ad8cff96a22cfa50789c62baec4ec22b5aa1"
+   },
+   "reverse_gaps": [
+    "GAP-074",
+    "GAP-172",
+    "GAP-173"
+   ],
+   "java": "forward/generated/java/PORTREAD/",
+   "before": {
+    "status": "FAIL",
+    "failing_checks": [
+     "dependencies_identified",
+     "unsupported_documented"
+    ]
+   },
+   "after": {
+    "status": "PASS",
+    "failing_checks": []
+   },
+   "failures": []
+  },
+  {
+   "program": "PORTTEST",
+   "cobol_source": {
+    "path": "src/programs/portfolio/PORTTEST.cbl",
+    "sha256": "5cee7bdd6395f524b715c88c71f5e3120fb18dfc3fde9cdf7acc106b47f69df2"
+   },
+   "reverse_gaps": [
+    "GAP-075",
+    "GAP-089",
+    "GAP-174",
+    "GAP-175",
+    "GAP-176"
+   ],
+   "java": "forward/generated/java/PORTTEST/",
+   "before": {
+    "status": "FAIL",
+    "failing_checks": [
+     "dependencies_identified",
+     "unsupported_documented"
+    ]
+   },
+   "after": {
+    "status": "PASS",
+    "failing_checks": []
+   },
+   "failures": []
+  },
+  {
+   "program": "PORTTRAN",
+   "cobol_source": {
+    "path": "src/programs/portfolio/PORTTRAN.cbl",
+    "sha256": "6e8485dfeb001ea0378dc932c59ea3a7dab4ad1949f08af5c0fe94e461e06a58"
+   },
+   "reverse_gaps": [
+    "GAP-003",
+    "GAP-076",
+    "GAP-093",
+    "GAP-103",
+    "GAP-105",
+    "GAP-177",
+    "GAP-178",
+    "GAP-179",
+    "GAP-180",
+    "GAP-181",
+    "GAP-182"
+   ],
+   "java": "forward/generated/java/PORTTRAN/",
+   "before": {
+    "status": "FAIL",
+    "failing_checks": [
+     "copybooks_resolved",
+     "dependencies_identified",
+     "unsupported_documented"
+    ]
+   },
+   "after": {
+    "status": "FAIL",
+    "failing_checks": [
+     "copybooks_resolved"
+    ]
+   },
+   "failures": [
+    {
+     "gate_check": "copybooks_resolved",
+     "behaviour": null,
+     "cobol_line": null,
+     "reason": "unresolved or circular includes: PORTREC@40",
+     "classification": "MISSING_DEPENDENCY",
+     "root_cause": "a COPY / INCLUDE member is missing from the repository: unresolved or circular includes: PORTREC@40"
+    }
+   ]
+  },
+  {
+   "program": "PORTUPDT",
+   "cobol_source": {
+    "path": "src/programs/portfolio/PORTUPDT.cbl",
+    "sha256": "e386049e473b4c2411540ad240a0d2f8fbdff0c88464cce80ba724fb9e375eff"
+   },
+   "reverse_gaps": [
+    "GAP-077",
+    "GAP-183"
+   ],
+   "java": "forward/generated/java/PORTUPDT/",
+   "before": {
+    "status": "FAIL",
+    "failing_checks": [
+     "dependencies_identified",
+     "unsupported_documented"
+    ]
+   },
+   "after": {
+    "status": "PASS",
+    "failing_checks": []
+   },
+   "failures": []
+  },
+  {
+   "program": "PORTVALD",
+   "cobol_source": {
+    "path": "src/programs/portfolio/PORTVALD.cbl",
+    "sha256": "5957fd22546258ae4d9e28847269168d1824bf8d11a9e661f9f62a5adc47f603"
+   },
+   "reverse_gaps": [
+    "GAP-078",
+    "GAP-184",
+    "GAP-185",
+    "GAP-186"
+   ],
+   "java": "forward/generated/java/PORTVALD/",
+   "before": {
+    "status": "PASS",
+    "failing_checks": []
+   },
+   "after": {
+    "status": "PASS",
+    "failing_checks": []
+   },
+   "failures": []
+  },
+  {
+   "program": "POSUPDT",
+   "cobol_source": {
+    "path": "src/programs/batch/POSUPDT.cbl",
+    "sha256": "36a9e7f1c95b82ffb99743e0c5c4ce95d83c9a430aac59f84ef3cbfab6145068"
+   },
+   "reverse_gaps": [
+    "GAP-001",
+    "GAP-110"
+   ],
+   "java": null,
+   "before": {
+    "status": "FAIL",
+    "failing_checks": [
+     "source_available"
+    ]
+   },
+   "after": {
+    "status": "FAIL",
+    "failing_checks": [
+     "source_available"
+    ]
+   },
+   "failures": [
+    {
+     "gate_check": "source_available",
+     "behaviour": null,
+     "cobol_line": null,
+     "reason": "src/programs/batch/POSUPDT.cbl sha256 36a9e7f1c95b82ffb99743e0c5c4ce95d83c9a430aac59f84ef3cbfab6145068; 0 statement(s) in 0 paragraph(s)",
+     "classification": "GENUINE_SOURCE_ISSUE",
+     "root_cause": "the source file is empty (no PROGRAM-ID)"
+    }
+   ]
+  },
+  {
+   "program": "PRCSEQ00",
+   "cobol_source": {
+    "path": "src/programs/batch/PRCSEQ00.cbl",
+    "sha256": "bf37a5d7a464a4e51ef9379a99761a44ec683d4521ef966fedf58e19f3deb5b3"
+   },
+   "reverse_gaps": [
+    "GAP-030",
+    "GAP-060",
+    "GAP-100",
+    "GAP-128",
+    "GAP-129",
+    "GAP-130",
+    "GAP-131",
+    "GAP-132",
+    "GAP-133",
+    "GAP-134",
+    "GAP-135"
+   ],
+   "java": "forward/generated/java/PRCSEQ00/",
+   "before": {
+    "status": "FAIL",
+    "failing_checks": [
+     "dependencies_identified",
+     "unsupported_documented"
+    ]
+   },
+   "after": {
+    "status": "FAIL",
+    "failing_checks": [
+     "dependencies_identified"
+    ]
+   },
+   "failures": [
+    {
+     "gate_check": "dependencies_identified",
+     "behaviour": "PRCSEQ00:0000-MAIN",
+     "cobol_line": 230,
+     "reason": "line 230: WS-SUB is neither declared, a keyword, a paragraph nor the subject of a blocking decision (unknown dependency)",
+     "classification": "GENUINE_SOURCE_ISSUE",
+     "root_cause": "WS-SUB is used but declared nowhere in the program or its copybooks"
+    },
+    {
+     "gate_check": "dependencies_identified",
+     "behaviour": "PRCSEQ00:0000-MAIN",
+     "cobol_line": 271,
+     "reason": "line 271: STAMP is neither declared, a keyword, a paragraph nor the subject of a blocking decision (unknown dependency)",
+     "classification": "GENUINE_SOURCE_ISSUE",
+     "root_cause": "ACCEPT ... FROM TIME STAMP is not a standard ACCEPT source; its content needs the legacy environment definition"
+    }
+   ]
+  },
+  {
+   "program": "PROGNAME",
+   "cobol_source": {
+    "path": "src/templates/program/standard-program.cbl",
+    "sha256": "6199f4b373e583d16df67a914ff33bb7109f577c511b4697f511a44e50d43191"
+   },
+   "reverse_gaps": [
+    "GAP-096"
+   ],
+   "java": "forward/generated/java/PROGNAME/",
+   "before": {
+    "status": "FAIL",
+    "failing_checks": [
+     "dependencies_identified"
+    ]
+   },
+   "after": {
+    "status": "PASS",
+    "failing_checks": []
+   },
+   "failures": []
+  },
+  {
+   "program": "RCVPRC00",
+   "cobol_source": {
+    "path": "src/programs/batch/RCVPRC00.cbl",
+    "sha256": "7dd7e5cfb2b6c6a4089b389496689dd09ad7d32d7820a403050a68bdda85ce13"
+   },
+   "reverse_gaps": [
+    "GAP-061",
+    "GAP-101",
+    "GAP-136"
+   ],
+   "java": "forward/generated/java/RCVPRC00/",
+   "before": {
+    "status": "FAIL",
+    "failing_checks": [
+     "dependencies_identified",
+     "unsupported_documented"
+    ]
+   },
+   "after": {
+    "status": "FAIL",
+    "failing_checks": [
+     "dependencies_identified"
+    ]
+   },
+   "failures": [
+    {
+     "gate_check": "dependencies_identified",
+     "behaviour": "RCVPRC00:0000-MAIN",
+     "cobol_line": 207,
+     "reason": "line 207: STAMP is neither declared, a keyword, a paragraph nor the subject of a blocking decision (unknown dependency)",
+     "classification": "GENUINE_SOURCE_ISSUE",
+     "root_cause": "ACCEPT ... FROM TIME STAMP is not a standard ACCEPT source; its content needs the legacy environment definition"
+    }
+   ]
+  },
+  {
+   "program": "RPTAUD00",
+   "cobol_source": {
+    "path": "src/programs/batch/RPTAUD00.cbl",
+    "sha256": "1407e0aa1ad4413341662a1dcf997c97dff47b3e0a93780a8a8ca90ac912f13e"
+   },
+   "reverse_gaps": [
+    "GAP-012",
+    "GAP-031",
+    "GAP-062",
+    "GAP-111"
+   ],
+   "java": "forward/generated/java/RPTAUD00/",
+   "before": {
+    "status": "FAIL",
+    "failing_checks": [
+     "dependencies_identified",
+     "unsupported_documented"
+    ]
+   },
+   "after": {
+    "status": "FAIL",
+    "failing_checks": [
+     "dependencies_identified"
+    ]
+   },
+   "failures": [
+    {
+     "gate_check": "dependencies_identified",
+     "behaviour": "RPTAUD00:0000-MAIN",
+     "cobol_line": null,
+     "reason": "PERFORM/GO TO target 2110-READ-AUDIT-RECORDS (line 127) is not a paragraph of RPTAUD00",
+     "classification": "GENUINE_SOURCE_ISSUE",
+     "root_cause": "the PERFORM / GO TO target is missing from the source"
+    },
+    {
+     "gate_check": "dependencies_identified",
+     "behaviour": "RPTAUD00:0000-MAIN",
+     "cobol_line": 94,
+     "reason": "line 94: AUDIT-FILE is neither declared, a keyword, a paragraph nor the subject of a blocking decision (unknown dependency)",
+     "classification": "GENUINE_SOURCE_ISSUE",
+     "root_cause": "AUDIT-FILE is named in a SELECT but has no FD (the source as written would not compile)"
+    },
+    {
+     "gate_check": "dependencies_identified",
+     "behaviour": "RPTAUD00:0000-MAIN",
+     "cobol_line": 101,
+     "reason": "line 101: ERROR-FILE is neither declared, a keyword, a paragraph nor the subject of a blocking decision (unknown dependency)",
+     "classification": "GENUINE_SOURCE_ISSUE",
+     "root_cause": "ERROR-FILE is named in a SELECT but has no FD (the source as written would not compile)"
+    }
+   ]
+  },
+  {
+   "program": "RPTPOS00",
+   "cobol_source": {
+    "path": "src/programs/batch/RPTPOS00.cbl",
+    "sha256": "032436b2a4bded557262bdacb4c4ed3100ef3fef4df960c9c06fb40ff0d92b53"
+   },
+   "reverse_gaps": [
+    "GAP-013",
+    "GAP-032",
+    "GAP-112",
+    "GAP-137"
+   ],
+   "java": "forward/generated/java/RPTPOS00/",
+   "before": {
+    "status": "FAIL",
+    "failing_checks": [
+     "dependencies_identified",
+     "unsupported_documented"
+    ]
+   },
+   "after": {
+    "status": "FAIL",
+    "failing_checks": [
+     "dependencies_identified"
+    ]
+   },
+   "failures": [
+    {
+     "gate_check": "dependencies_identified",
+     "behaviour": "RPTPOS00:0000-MAIN",
+     "cobol_line": null,
+     "reason": "PERFORM/GO TO target 2210-READ-TRANSACTIONS (line 144) is not a paragraph of RPTPOS00",
+     "classification": "GENUINE_SOURCE_ISSUE",
+     "root_cause": "the PERFORM / GO TO target is missing from the source"
+    },
+    {
+     "gate_check": "dependencies_identified",
+     "behaviour": "RPTPOS00:0000-MAIN",
+     "cobol_line": 96,
+     "reason": "line 96: TRANSACTION-HISTORY is neither declared, a keyword, a paragraph nor the subject of a blocking decision (unknown dependency)",
+     "classification": "GENUINE_SOURCE_ISSUE",
+     "root_cause": "TRANSACTION-HISTORY is named in a SELECT but has no FD (the source as written would not compile)"
+    }
+   ]
+  },
+  {
+   "program": "RPTSTA00",
+   "cobol_source": {
+    "path": "src/programs/batch/RPTSTA00.cbl",
+    "sha256": "8b18c42b786afa5fb4a45fd65168d91fe4763f4154f0aeac609c8d3e1dbf7a6c"
+   },
+   "reverse_gaps": [
+    "GAP-005",
+    "GAP-014",
+    "GAP-033",
+    "GAP-063",
+    "GAP-113"
+   ],
+   "java": "forward/generated/java/RPTSTA00/",
+   "before": {
+    "status": "FAIL",
+    "failing_checks": [
+     "copybooks_resolved",
+     "dependencies_identified",
+     "unsupported_documented"
+    ]
+   },
+   "after": {
+    "status": "FAIL",
+    "failing_checks": [
+     "copybooks_resolved",
+     "dependencies_identified"
+    ]
+   },
+   "failures": [
+    {
+     "gate_check": "copybooks_resolved",
+     "behaviour": null,
+     "cobol_line": null,
+     "reason": "unresolved or circular includes: SQLCA@6",
+     "classification": "MISSING_DEPENDENCY",
+     "root_cause": "SQLCA.cpy line 6 is EXEC SQL INCLUDE SQLCA (it includes itself); the SQLCA is supplied by the DB2 precompiler, which is not available"
+    },
+    {
+     "gate_check": "dependencies_identified",
+     "behaviour": "RPTSTA00:0000-MAIN",
+     "cobol_line": null,
+     "reason": "PERFORM/GO TO target 2110-ACCUMULATE-DB2-STATS (line 150) is not a paragraph of RPTSTA00",
+     "classification": "GENUINE_SOURCE_ISSUE",
+     "root_cause": "the PERFORM / GO TO target is missing from the source"
+    }
+   ]
+  },
+  {
+   "program": "RTNANA00",
+   "cobol_source": {
+    "path": "src/programs/batch/RTNANA00.cbl",
+    "sha256": "c9c49d1bea7acf4d6002374812fe61100167f4ff0117f1866f573cdcef1c8b48"
+   },
+   "reverse_gaps": [
+    "GAP-043",
+    "GAP-064",
+    "GAP-084",
+    "GAP-138",
+    "GAP-139"
+   ],
+   "java": "forward/generated/java/RTNANA00/",
+   "before": {
+    "status": "FAIL",
+    "failing_checks": [
+     "copybooks_resolved",
+     "dependencies_identified",
+     "unsupported_documented"
+    ]
+   },
+   "after": {
+    "status": "FAIL",
+    "failing_checks": [
+     "copybooks_resolved"
+    ]
+   },
+   "failures": [
+    {
+     "gate_check": "copybooks_resolved",
+     "behaviour": null,
+     "cobol_line": null,
+     "reason": "unresolved or circular includes: SQLCA@6",
+     "classification": "MISSING_DEPENDENCY",
+     "root_cause": "SQLCA.cpy line 6 is EXEC SQL INCLUDE SQLCA (it includes itself); the SQLCA is supplied by the DB2 precompiler, which is not available"
+    }
+   ]
+  },
+  {
+   "program": "RTNCDE00",
+   "cobol_source": {
+    "path": "src/programs/batch/RTNCDE00.cbl",
+    "sha256": "7cb951ea1f418c19ddd61c0eca00f21108af5f364b5ecf05742cbc428862994e"
+   },
+   "reverse_gaps": [
+    "GAP-044",
+    "GAP-140"
+   ],
+   "java": "forward/generated/java/RTNCDE00/",
+   "before": {
+    "status": "FAIL",
+    "failing_checks": [
+     "copybooks_resolved"
+    ]
+   },
+   "after": {
+    "status": "FAIL",
+    "failing_checks": [
+     "copybooks_resolved"
+    ]
+   },
+   "failures": [
+    {
+     "gate_check": "copybooks_resolved",
+     "behaviour": null,
+     "cobol_line": null,
+     "reason": "unresolved or circular includes: SQLCA@6",
+     "classification": "MISSING_DEPENDENCY",
+     "root_cause": "SQLCA.cpy line 6 is EXEC SQL INCLUDE SQLCA (it includes itself); the SQLCA is supplied by the DB2 precompiler, which is not available"
+    }
+   ]
+  },
+  {
+   "program": "SECMGR",
+   "cobol_source": {
+    "path": "src/programs/online/SECMGR.cbl",
+    "sha256": "74281106e716079b408a5a597746a5a2c201b469820396b651fc1adc6ae37370"
+   },
+   "reverse_gaps": [
+    "GAP-052",
+    "GAP-070",
+    "GAP-159"
+   ],
+   "java": "forward/generated/java/SECMGR/",
+   "before": {
+    "status": "FAIL",
+    "failing_checks": [
+     "copybooks_resolved",
+     "dependencies_identified"
+    ]
+   },
+   "after": {
+    "status": "FAIL",
+    "failing_checks": [
+     "copybooks_resolved",
+     "dependencies_identified"
+    ]
+   },
+   "failures": [
+    {
+     "gate_check": "copybooks_resolved",
+     "behaviour": null,
+     "cobol_line": null,
+     "reason": "unresolved or circular includes: SQLCA@6",
+     "classification": "MISSING_DEPENDENCY",
+     "root_cause": "SQLCA.cpy line 6 is EXEC SQL INCLUDE SQLCA (it includes itself); the SQLCA is supplied by the DB2 precompiler, which is not available"
+    },
+    {
+     "gate_check": "dependencies_identified",
+     "behaviour": "SECMGR:P100-VALIDATE-USER",
+     "cobol_line": 57,
+     "reason": "line 57: EXEC CICS hands control and data to the transaction monitor",
+     "classification": "MISSING_DEPENDENCY",
+     "root_cause": "EXEC CICS needs a CICS environment (or an approved replacement design)"
+    },
+    {
+     "gate_check": "dependencies_identified",
+     "behaviour": "SECMGR:P100-VALIDATE-USER",
+     "cobol_line": 57,
+     "reason": "line 57: ASSIGN is neither declared, a keyword, a paragraph nor the subject of a blocking decision (unknown dependency)",
+     "classification": "MISSING_DEPENDENCY",
+     "root_cause": "ASSIGN belongs to the CICS command level (translator / EIB); no CICS environment is available"
+    },
+    {
+     "gate_check": "dependencies_identified",
+     "behaviour": "SECMGR:P100-VALIDATE-USER",
+     "cobol_line": 57,
+     "reason": "line 57: USERID is neither declared, a keyword, a paragraph nor the subject of a blocking decision (unknown dependency)",
+     "classification": "MISSING_DEPENDENCY",
+     "root_cause": "USERID belongs to the CICS command level (translator / EIB); no CICS environment is available"
+    },
+    {
+     "gate_check": "dependencies_identified",
+     "behaviour": "SECMGR:P100-VALIDATE-USER",
+     "cobol_line": 57,
+     "reason": "line 57: RESP is neither declared, a keyword, a paragraph nor the subject of a blocking decision (unknown dependency)",
+     "classification": "MISSING_DEPENDENCY",
+     "root_cause": "RESP belongs to the CICS command level (translator / EIB); no CICS environment is available"
+    },
+    {
+     "gate_check": "dependencies_identified",
+     "behaviour": "SECMGR:P100-VALIDATE-USER",
+     "cobol_line": 62,
+     "reason": "line 62: DFHRESP is neither declared, a keyword, a paragraph nor the subject of a blocking decision (unknown dependency)",
+     "classification": "MISSING_DEPENDENCY",
+     "root_cause": "DFHRESP belongs to the CICS command level (translator / EIB); no CICS environment is available"
+    },
+    {
+     "gate_check": "dependencies_identified",
+     "behaviour": "SECMGR:P100-VALIDATE-USER",
+     "cobol_line": 62,
+     "reason": "line 62: NORMAL is neither declared, a keyword, a paragraph nor the subject of a blocking decision (unknown dependency)",
+     "classification": "MISSING_DEPENDENCY",
+     "root_cause": "NORMAL belongs to the CICS command level (translator / EIB); no CICS environment is available"
+    },
+    {
+     "gate_check": "dependencies_identified",
+     "behaviour": "SECMGR:P300-LOG-ACCESS",
+     "cobol_line": 108,
+     "reason": "line 108: TERMID is neither declared, a keyword, a paragraph nor the subject of a blocking decision (unknown dependency)",
+     "classification": "MISSING_DEPENDENCY",
+     "root_cause": "TERMID belongs to the CICS command level (translator / EIB); no CICS environment is available"
+    }
+   ]
+  },
+  {
+   "program": "TSTGEN00",
+   "cobol_source": {
+    "path": "src/programs/test/TSTGEN00.cbl",
+    "sha256": "9c6cd375f322373b22a55e90059256b2a43ae6877930b50c8c47f70796493465"
+   },
+   "reverse_gaps": [
+    "GAP-017",
+    "GAP-038",
+    "GAP-057",
+    "GAP-116",
+    "GAP-187",
+    "GAP-188"
+   ],
+   "java": "forward/generated/java/TSTGEN00/",
+   "before": {
+    "status": "FAIL",
+    "failing_checks": [
+     "dependencies_identified",
+     "unsupported_documented"
+    ]
+   },
+   "after": {
+    "status": "FAIL",
+    "failing_checks": [
+     "dependencies_identified"
+    ]
+   },
+   "failures": [
+    {
+     "gate_check": "dependencies_identified",
+     "behaviour": "TSTGEN00:0000-MAIN",
+     "cobol_line": null,
+     "reason": "PERFORM/GO TO target 2210-GEN-PORT-DATA (line 185) is not a paragraph of TSTGEN00",
+     "classification": "GENUINE_SOURCE_ISSUE",
+     "root_cause": "the PERFORM / GO TO target is missing from the source"
+    },
+    {
+     "gate_check": "dependencies_identified",
+     "behaviour": "TSTGEN00:0000-MAIN",
+     "cobol_line": 129,
+     "reason": "line 129: WS-PORT-STATUS is ambiguous (2 declarations)",
+     "classification": "GENUINE_SOURCE_ISSUE",
+     "root_cause": "an ambiguous reference"
+    }
+   ]
+  },
+  {
+   "program": "TSTVAL00",
+   "cobol_source": {
+    "path": "src/programs/test/TSTVAL00.cbl",
+    "sha256": "acdb86f9d38dbc337b16d0f5e54f8260777483f25398364f7fdfae3038a1cfe9"
+   },
+   "reverse_gaps": [
+    "GAP-018",
+    "GAP-039",
+    "GAP-079",
+    "GAP-117",
+    "GAP-189",
+    "GAP-190"
+   ],
+   "java": "forward/generated/java/TSTVAL00/",
+   "before": {
+    "status": "FAIL",
+    "failing_checks": [
+     "dependencies_identified",
+     "unsupported_documented"
+    ]
+   },
+   "after": {
+    "status": "FAIL",
+    "failing_checks": [
+     "dependencies_identified"
+    ]
+   },
+   "failures": [
+    {
+     "gate_check": "dependencies_identified",
+     "behaviour": "TSTVAL00:0000-MAIN",
+     "cobol_line": null,
+     "reason": "PERFORM/GO TO target 2200-RUN-FUNCTIONAL-TEST (line 190) is not a paragraph of TSTVAL00",
+     "classification": "GENUINE_SOURCE_ISSUE",
+     "root_cause": "the PERFORM / GO TO target is missing from the source"
+    }
+   ]
+  },
+  {
+   "program": "UTLMNT00",
+   "cobol_source": {
+    "path": "src/programs/utility/UTLMNT00.cbl",
+    "sha256": "ea0333db7c050636d4fb20965af4132775e86b2e16a5fbccadd15ec10e0fe94a"
+   },
+   "reverse_gaps": [
+    "GAP-019",
+    "GAP-040",
+    "GAP-118",
+    "GAP-191"
+   ],
+   "java": "forward/generated/java/UTLMNT00/",
+   "before": {
+    "status": "FAIL",
+    "failing_checks": [
+     "dependencies_identified",
+     "unsupported_documented"
+    ]
+   },
+   "after": {
+    "status": "FAIL",
+    "failing_checks": [
+     "dependencies_identified"
+    ]
+   },
+   "failures": [
+    {
+     "gate_check": "dependencies_identified",
+     "behaviour": "UTLMNT00:0000-MAIN",
+     "cobol_line": null,
+     "reason": "PERFORM/GO TO target 2210-OPEN-VSAM (line 150) is not a paragraph of UTLMNT00",
+     "classification": "GENUINE_SOURCE_ISSUE",
+     "root_cause": "the PERFORM / GO TO target is missing from the source"
+    }
+   ]
+  },
+  {
+   "program": "UTLMON00",
+   "cobol_source": {
+    "path": "src/programs/utility/UTLMON00.cbl",
+    "sha256": "3e74b5376896c7c35bb9799099a14818eb81f4a07269b9588dcf61ca240fcb77"
+   },
+   "reverse_gaps": [
+    "GAP-006",
+    "GAP-008",
+    "GAP-020",
+    "GAP-041",
+    "GAP-080",
+    "GAP-119",
+    "GAP-192",
+    "GAP-193"
+   ],
+   "java": "forward/generated/java/UTLMON00/",
+   "before": {
+    "status": "FAIL",
+    "failing_checks": [
+     "copybooks_resolved",
+     "dependencies_identified",
+     "unsupported_documented"
+    ]
+   },
+   "after": {
+    "status": "FAIL",
+    "failing_checks": [
+     "copybooks_resolved",
+     "dependencies_identified"
+    ]
+   },
+   "failures": [
+    {
+     "gate_check": "copybooks_resolved",
+     "behaviour": null,
+     "cobol_line": null,
+     "reason": "unresolved or circular includes: SQLCA@6",
+     "classification": "MISSING_DEPENDENCY",
+     "root_cause": "SQLCA.cpy line 6 is EXEC SQL INCLUDE SQLCA (it includes itself); the SQLCA is supplied by the DB2 precompiler, which is not available"
+    },
+    {
+     "gate_check": "dependencies_identified",
+     "behaviour": "UTLMON00:0000-MAIN",
+     "cobol_line": null,
+     "reason": "PERFORM/GO TO target 1310-STORE-CONFIG (line 177) is not a paragraph of UTLMON00",
+     "classification": "GENUINE_SOURCE_ISSUE",
+     "root_cause": "the PERFORM / GO TO target is missing from the source"
+    },
+    {
+     "gate_check": "dependencies_identified",
+     "behaviour": "UTLMON00:0000-MAIN",
+     "cobol_line": 161,
+     "reason": "line 161: DB2-STATS is neither declared, a keyword, a paragraph nor the subject of a blocking decision (unknown dependency)",
+     "classification": "GENUINE_SOURCE_ISSUE",
+     "root_cause": "DB2-STATS is named in a SELECT but has no FD (the source as written would not compile)"
+    },
+    {
+     "gate_check": "dependencies_identified",
+     "behaviour": "UTLMON00:0000-MAIN",
+     "cobol_line": null,
+     "reason": "CALL 'ILBOABN0' at line 186: the called program is not in the inventory",
+     "classification": "MISSING_DEPENDENCY",
+     "root_cause": "the called program is not part of the application"
+    }
+   ]
+  },
+  {
+   "program": "UTLVAL00",
+   "cobol_source": {
+    "path": "src/programs/utility/UTLVAL00.cbl",
+    "sha256": "9531008642833182a28188d5198bc9ddf69231944b1b858e1944b987658888cd"
+   },
+   "reverse_gaps": [
+    "GAP-021",
+    "GAP-042",
+    "GAP-081",
+    "GAP-120",
+    "GAP-194"
+   ],
+   "java": "forward/generated/java/UTLVAL00/",
+   "before": {
+    "status": "FAIL",
+    "failing_checks": [
+     "dependencies_identified",
+     "unsupported_documented"
+    ]
+   },
+   "after": {
+    "status": "FAIL",
+    "failing_checks": [
+     "dependencies_identified"
+    ]
+   },
+   "failures": [
+    {
+     "gate_check": "dependencies_identified",
+     "behaviour": "UTLVAL00:0000-MAIN",
+     "cobol_line": null,
+     "reason": "PERFORM/GO TO target 2210-CHECK-POSITION-INTEGRITY (line 165) is not a paragraph of UTLVAL00",
+     "classification": "GENUINE_SOURCE_ISSUE",
+     "root_cause": "the PERFORM / GO TO target is missing from the source"
+    },
+    {
+     "gate_check": "dependencies_identified",
+     "behaviour": "UTLVAL00:0000-MAIN",
+     "cobol_line": 114,
+     "reason": "line 114: POSITION-MASTER is neither declared, a keyword, a paragraph nor the subject of a blocking decision (unknown dependency)",
+     "classification": "GENUINE_SOURCE_ISSUE",
+     "root_cause": "POSITION-MASTER is named in a SELECT but has no FD (the source as written would not compile)"
+    },
+    {
+     "gate_check": "dependencies_identified",
+     "behaviour": "UTLVAL00:0000-MAIN",
+     "cobol_line": 121,
+     "reason": "line 121: TRANSACTION-HISTORY is neither declared, a keyword, a paragraph nor the subject of a blocking decision (unknown dependency)",
+     "classification": "GENUINE_SOURCE_ISSUE",
+     "root_cause": "TRANSACTION-HISTORY is named in a SELECT but has no FD (the source as written would not compile)"
+    }
+   ]
+  }
+ ]
+}

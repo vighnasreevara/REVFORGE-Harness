@@ -1,0 +1,446 @@
+{
+ "provenance": "One scenario per JCL member: data sets mapped through the JCL DD statements; expected step results taken from the source-derived program scenarios; written before the integrated run.",
+ "scenarios": [
+  {
+   "id": "JOB-RPTAUD00",
+   "kind": "job",
+   "job": "RPTAUD00",
+   "title": "RPTAUD00.jcl runs RPTAUD00 with the data sets of scenario RPTAUD00 M02 (DD to DSN from the JCL)",
+   "cobol_lines": [
+    84,
+    90,
+    94
+   ],
+   "expect": {
+    "steps": [
+     {
+      "step": "STEP01",
+      "outcome": "BLOCKED GAP-RPTAUD00-0001"
+     }
+    ]
+   }
+  },
+  {
+   "id": "JOB-RPTPOS00",
+   "kind": "job",
+   "job": "RPTPOS00",
+   "title": "RPTPOS00.jcl runs RPTPOS00 with the data sets of scenario RPTPOS00 M02 (DD to DSN from the JCL)",
+   "cobol_lines": [
+    79,
+    85,
+    89
+   ],
+   "expect": {
+    "steps": [
+     {
+      "step": "STEP01",
+      "outcome": "BLOCKED GAP-RPTPOS00-0001"
+     }
+    ]
+   }
+  },
+  {
+   "id": "JOB-RPTSTA00",
+   "kind": "job",
+   "job": "RPTSTA00",
+   "title": "RPTSTA00.jcl runs RPTSTA00 with the data sets of scenario RPTSTA00 M02 (DD to DSN from the JCL)",
+   "cobol_lines": [
+    97,
+    103,
+    108
+   ],
+   "expect": {
+    "steps": [
+     {
+      "step": "STEP01",
+      "outcome": "BLOCKED GAP-RPTSTA00-0001"
+     }
+    ]
+   }
+  },
+  {
+   "id": "JOB-PORTADD",
+   "kind": "job",
+   "job": "PORTADD",
+   "title": "PORTADD.jcl runs PORTADD with the data sets of scenario PORTADD A03 (DD to DSN from the JCL)",
+   "cobol_lines": [
+    87,
+    89,
+    91,
+    92,
+    94,
+    79,
+    105
+   ],
+   "clock": "2026-03-04T05:06:07.08Z",
+   "datasets": {
+    "PORTFOLIO.MASTER.FILE": {
+     "dd": "PORTFILE",
+     "records": []
+    },
+    "PORTFOLIO.INPUT.FILE": {
+     "dd": "INPTFILE",
+     "records": [
+      "P00000011000000001ACME HOLDINGS INTERNATIONAL COC0000000000000000A\u0000\u0000\u0000\u0000\u0000\u0000\u0000\f\u0000\u0000\u0000\u0000\u0000\u0000\u0000\fBATCH00100000000"
+     ]
+    }
+   },
+   "expect": {
+    "steps": [
+     {
+      "step": "STEP1",
+      "outcome": "BLOCKED GAP-PORTADD-0001"
+     }
+    ]
+   }
+  },
+  {
+   "id": "JOB-PORTDEF",
+   "kind": "job",
+   "job": "PORTDEF",
+   "title": "IDCAMS (VSAM DEFINE) is a system utility, not an application program: the step stays an explicit boundary",
+   "expect": {
+    "steps": [
+     {
+      "step": "DEFVSAM",
+      "outcome": "BLOCKED UTILITY IDCAMS"
+     }
+    ]
+   }
+  },
+  {
+   "id": "JOB-PORTDEL",
+   "kind": "job",
+   "job": "PORTDEL",
+   "title": "PORTDEL.jcl runs PORTDEL with the data sets of scenario PORTDEL D01 (DD to DSN from the JCL)",
+   "cobol_lines": [
+    102,
+    112,
+    114,
+    115,
+    116,
+    118,
+    104,
+    131,
+    132,
+    133,
+    107,
+    185,
+    189,
+    190,
+    191,
+    193
+   ],
+   "datasets": {
+    "PORTFOLIO.MASTER.FILE": {
+     "dd": "PORTFILE",
+     "records": [
+      "P00000011000000001ACME HOLDINGS INTERNATIONAL COC2024010120240101A\u0000\u0000\u0000\u0000\u0000\u0010\u0000\f\u0000\u0000\u0000\u0000\u0000\u0000\u0000\fBATCH00100000000"
+     ]
+    },
+    "PORTFOLIO.DELETE.FILE": {
+     "dd": "DELEFILE",
+     "records": []
+    }
+   },
+   "expect": {
+    "steps": [
+     {
+      "step": "STEP1",
+      "outcome": "END",
+      "return_code": 0,
+      "display_contains": [
+       "Records deleted:  0000000",
+       "Records not found:0000000",
+       "Errors occurred:  0000000"
+      ]
+     }
+    ],
+    "datasets": {
+     "PORTFOLIO.AUDIT.FILE": {
+      "dd": "AUDFILE",
+      "records": []
+     }
+    }
+   }
+  },
+  {
+   "id": "JOB-PORTREAD",
+   "kind": "job",
+   "job": "PORTREAD",
+   "title": "PORTREAD.jcl runs PORTREAD with the data sets of scenario PORTREAD R01 (DD to DSN from the JCL)",
+   "cobol_lines": [
+    65,
+    75,
+    77,
+    78,
+    67,
+    86,
+    89,
+    90,
+    91,
+    96,
+    97,
+    98,
+    99,
+    100,
+    101,
+    102,
+    87,
+    88,
+    70,
+    106,
+    108,
+    110
+   ],
+   "datasets": {
+    "PORTFOLIO.MASTER.FILE": {
+     "dd": "PORTFILE",
+     "records": [
+      "P00000055000000005NORTHWIND CAPITAL PARTNERS LLCI2024010120240101C\u0000\u0000\u0000\u0000\u0000\u0000\u0000\f\u0000\u0000\u0000\u0000\u0000\u0000\u0000\fBATCH00100000000"
+     ]
+    }
+   },
+   "expect": {
+    "steps": [
+     {
+      "step": "STEP1",
+      "outcome": "END",
+      "return_code": 0,
+      "display_contains": [
+       "Portfolio Record: 0000001",
+       "  ID: P0000005",
+       "  Account: 5000000005",
+       "  Client: NORTHWIND CAPITAL PARTNERS LLC",
+       "  Status: C",
+       "  Total Value: 000000000000000",
+       "Total Records Read: 0000001"
+      ]
+     }
+    ]
+   }
+  },
+  {
+   "id": "JOB-PORTTEST",
+   "kind": "job",
+   "job": "PORTTEST",
+   "title": "PORTTEST.jcl runs PORTTEST with the data sets of scenario PORTTEST S02 (DD to DSN from the JCL)",
+   "cobol_lines": [
+    47,
+    48,
+    49,
+    57,
+    66,
+    68,
+    83,
+    84,
+    85,
+    87
+   ],
+   "clock": "2026-03-04T05:06:07.08Z",
+   "expect": {
+    "steps": [
+     {
+      "step": "STEP1",
+      "outcome": "BLOCKED GAP-PORTTEST-0001"
+     }
+    ]
+   }
+  },
+  {
+   "id": "JOB-PORTUPDT",
+   "kind": "job",
+   "job": "PORTUPDT",
+   "title": "PORTUPDT.jcl runs PORTUPDT with the data sets of scenario PORTUPDT S01 (DD to DSN from the JCL)",
+   "cobol_lines": [
+    84,
+    86,
+    89,
+    94,
+    96,
+    97,
+    99,
+    110,
+    114,
+    119,
+    121,
+    123,
+    124,
+    133,
+    134,
+    142,
+    144,
+    145,
+    153,
+    156,
+    157,
+    159
+   ],
+   "datasets": {
+    "PORTFOLIO.MASTER.FILE": {
+     "dd": "PORTFILE",
+     "records": [
+      "P00000011234567890ORIGINAL CLIENT               I2024010120240101A\u0000\u0000\u0000\u0000\u0000\u0000\u0000\f\u0000\u0000\u0000\u0000\u0000\u0000\u0000\fTESTUSER20240101                                                  "
+     ]
+    },
+    "PORTFOLIO.UPDATE.FILE": {
+     "dd": "UPDTFILE",
+     "records": [
+      "P00000011234567890SC                                                 "
+     ]
+    }
+   },
+   "expect": {
+    "steps": [
+     {
+      "step": "STEP1",
+      "outcome": "END",
+      "return_code": 0,
+      "display_contains": [
+       "Updates processed: 0000001",
+       "Errors occurred:  0000000"
+      ]
+     }
+    ],
+    "datasets": {
+     "PORTFOLIO.MASTER.FILE": {
+      "dd": "PORTFILE",
+      "records": [
+       "P00000011234567890ORIGINAL CLIENT               I2024010120240101C\u0000\u0000\u0000\u0000\u0000\u0000\u0000\f\u0000\u0000\u0000\u0000\u0000\u0000\u0000\fTESTUSER20240101"
+      ]
+     }
+    }
+   }
+  },
+  {
+   "id": "JOB-RTNANA00",
+   "kind": "job",
+   "job": "RTNANA00",
+   "title": "RTNANA00.jcl runs RTNANA00 with the data sets of scenario RTNANA00 S02 (DD to DSN from the JCL)",
+   "cobol_lines": [
+    97,
+    100,
+    112,
+    114,
+    115,
+    121,
+    126,
+    139
+   ],
+   "clock": "2026-03-04T05:06:07.08Z",
+   "expect": {
+    "steps": [
+     {
+      "step": "RTNANA",
+      "outcome": "BLOCKED GAP-RTNANA00-0001"
+     }
+    ]
+   }
+  },
+  {
+   "id": "JOB-TSTGEN00",
+   "kind": "job",
+   "job": "TSTGEN00",
+   "title": "TSTGEN00.jcl runs TSTGEN00 with the data sets of scenario TSTGEN00 S01 (DD to DSN from the JCL)",
+   "cobol_lines": [
+    110,
+    116,
+    121,
+    122,
+    123
+   ],
+   "expect": {
+    "steps": [
+     {
+      "step": "STEP01",
+      "outcome": "BLOCKED GAP-TSTGEN00-0001"
+     }
+    ]
+   }
+  },
+  {
+   "id": "JOB-TSTVAL00",
+   "kind": "job",
+   "job": "TSTVAL00",
+   "title": "TSTVAL00.jcl runs TSTVAL00 with the data sets of scenario TSTVAL00 S01 (DD to DSN from the JCL)",
+   "cobol_lines": [
+    129,
+    135,
+    140,
+    141,
+    142
+   ],
+   "expect": {
+    "steps": [
+     {
+      "step": "STEP01",
+      "outcome": "BLOCKED GAP-TSTVAL00-0001"
+     }
+    ]
+   }
+  },
+  {
+   "id": "JOB-UTLMNT00",
+   "kind": "job",
+   "job": "UTLMNT00",
+   "title": "UTLMNT00.jcl runs UTLMNT00 with the data sets of scenario UTLMNT00 S01 (DD to DSN from the JCL)",
+   "cobol_lines": [
+    88,
+    94,
+    98,
+    99,
+    100
+   ],
+   "expect": {
+    "steps": [
+     {
+      "step": "STEP01",
+      "outcome": "BLOCKED GAP-UTLMNT00-0001"
+     }
+    ]
+   }
+  },
+  {
+   "id": "JOB-UTLMON00",
+   "kind": "job",
+   "job": "UTLMON00",
+   "title": "UTLMON00.jcl runs UTLMON00 with the data sets of scenario UTLMON00 S01 (DD to DSN from the JCL)",
+   "cobol_lines": [
+    129,
+    135,
+    140,
+    141,
+    142
+   ],
+   "expect": {
+    "steps": [
+     {
+      "step": "STEP01",
+      "outcome": "BLOCKED GAP-UTLMON00-0001"
+     }
+    ]
+   }
+  },
+  {
+   "id": "JOB-UTLVAL00",
+   "kind": "job",
+   "job": "UTLVAL00",
+   "title": "UTLVAL00.jcl runs UTLVAL00 with the data sets of scenario UTLVAL00 S01 (DD to DSN from the JCL)",
+   "cobol_lines": [
+    97,
+    103,
+    107,
+    108,
+    109
+   ],
+   "expect": {
+    "steps": [
+     {
+      "step": "STEP01",
+      "outcome": "BLOCKED GAP-UTLVAL00-0001"
+     }
+    ]
+   }
+  }
+ ]
+}

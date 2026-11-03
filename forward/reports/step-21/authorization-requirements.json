@@ -1,0 +1,67 @@
+{
+ "contract": "step-21/authorization-requirements",
+ "scope": "programs:PORTREAD",
+ "disclosure_request": {
+  "file": "forward/reports/step-21/authorization-request-PORTREAD.unsigned.json",
+  "authorization_id": "ADA-8154d6398d4d",
+  "sha256": "ed634bd7fe2e40c5c0bc056c6ab8cd3f2f9c503b8b9b67b7b81abde797945a96",
+  "provider": {
+   "name": "anthropic",
+   "service": "claude-code-cli",
+   "endpoint_host": "api.anthropic.com"
+  },
+  "models": {
+   "mode": "exact",
+   "values": [
+    "claude-opus-5-5"
+   ]
+  },
+  "workflows": [
+   "bmad-prd",
+   "bmad-architecture",
+   "bmad-create-epics-and-stories",
+   "bmad-sprint-planning",
+   "bmad-build",
+   "bmad-code-review"
+  ],
+  "source_files": [
+   {
+    "file_id": "SYS-PORTFOLIO-001-FIL-0009",
+    "path": "src/copybook/common/PORTFLIO.cpy",
+    "sha256": "030f0a0fb30654f6c4fd367bcab35b03953687f8b2a7b4df3caeffc0c26d71ce"
+   },
+   {
+    "file_id": "SYS-PORTFOLIO-001-FIL-0070",
+    "path": "src/programs/portfolio/PORTREAD.cbl",
+    "sha256": "1e90eef73115c6065dfeee8ca7a0ad8cff96a22cfa50789c62baec4ec22b5aa1"
+   }
+  ],
+  "limits": {
+   "max_files": 2,
+   "max_bytes": 5634,
+   "max_cost_usd": 5,
+   "max_runs": 6
+  },
+  "expires_at": "2026-11-06T20:45:24.374Z",
+  "signed": false
+ },
+ "contract_checks": [
+  "contract orchestrator/ai-disclosure-authorization, signed as signed-ai-disclosure-authorization (ed25519) over the canonical JSON",
+  "signer must be a trusted data_owner in the approval trust store; a different role or an unknown key is rejected (tests/step8, step9, step21)",
+  "bound to provider anthropic / service claude-code-cli, the exact scope digest, the listed files and hashes, the workflows, limits and validity window; re-verified at every use",
+  "an OpenAI source-export authorization never covers Claude"
+ ],
+ "current_state": "{\n  \"trust\": \"TRUST_NOT_CONFIGURED\",\n  \"providers\": [\n    {\n      \"provider\": \"anthropic\",\n      \"service\": \"claude-code-cli\",\n      \"valid\": [],\n      \"rejected\": [],\n      \"considered\": 0\n    },\n    {\n      \"provider\": \"openai\",\n      \"service\": \"responses-api\",\n      \"valid\": [],\n      \"rejected\": [],\n      \"considered\": 0\n    }\n  ]\n}",
+ "trust_store": null,
+ "steps": [
+  {
+   "actor": "trust custodian (administrator)",
+   "action": "provision the approval trust store with public keys for data_owner, requirements_approver, business_sme and technical_authority (forward/docs/HUMAN-APPROVAL-OPERATIONS.md); private keys never enter the repository"
+  },
+  {
+   "actor": "data_owner",
+   "action": "review and sign ADA-8154d6398d4d outside REVFORGE (signer_id, role=data_owner, signed_at), then `provider authorization verify --file signed.json` and `provider authorization import --file signed.json`; re-prepare first if it has expired"
+  }
+ ],
+ "not_done": "nothing was signed, approved or imported in STEP 21"
+}

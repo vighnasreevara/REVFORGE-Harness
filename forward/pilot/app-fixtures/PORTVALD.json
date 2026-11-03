@@ -1,0 +1,428 @@
+{
+ "program": "PORTVALD",
+ "provenance": "The 17 reviewed Step 14 test cases (reports/step-14/portvald-test-cases.json), converted mechanically; expectations were written from the COBOL source before any Java existed.",
+ "scenarios": [
+  {
+   "id": "V01",
+   "title": "as written, no portfolio ID can pass: 4 characters moved into X(10) leave 6 spaces, so NOT NUMERIC is always true (DR-PORTVALD-001, preserved, not corrected)",
+   "kind": "call",
+   "set": {
+    "LS-VALIDATE-TYPE": "I",
+    "LS-INPUT-VALUE": "PORT1234",
+    "LS-RETURN-CODE": "0",
+    "LS-ERROR-MSG": ""
+   },
+   "cobol_lines": [
+    56,
+    62,
+    63,
+    64,
+    65,
+    66
+   ],
+   "expect": {
+    "outcome": "GOBACK",
+    "items": {
+     "LS-RETURN-CODE": "1",
+     "LS-ERROR-MSG": "Invalid Portfolio ID format",
+     "LS-VALIDATE-TYPE": "I",
+     "LS-INPUT-VALUE": "PORT1234"
+    }
+   }
+  },
+  {
+   "id": "V02",
+   "title": "V02",
+   "kind": "call",
+   "set": {
+    "LS-VALIDATE-TYPE": "I",
+    "LS-INPUT-VALUE": "ABCD1234",
+    "LS-RETURN-CODE": "0",
+    "LS-ERROR-MSG": ""
+   },
+   "cobol_lines": [
+    56,
+    57,
+    58,
+    59
+   ],
+   "expect": {
+    "outcome": "GOBACK",
+    "items": {
+     "LS-RETURN-CODE": "1",
+     "LS-ERROR-MSG": "Invalid Portfolio ID format",
+     "LS-VALIDATE-TYPE": "I",
+     "LS-INPUT-VALUE": "ABCD1234"
+    }
+   }
+  },
+  {
+   "id": "V03",
+   "title": "the NUMERIC test covers all 50 characters, so 10 digits followed by spaces are rejected (DR-PORTVALD-002, preserved)",
+   "kind": "call",
+   "set": {
+    "LS-VALIDATE-TYPE": "A",
+    "LS-INPUT-VALUE": "1234567890",
+    "LS-RETURN-CODE": "0",
+    "LS-ERROR-MSG": ""
+   },
+   "cobol_lines": [
+    77,
+    79,
+    80,
+    81
+   ],
+   "expect": {
+    "outcome": "GOBACK",
+    "items": {
+     "LS-RETURN-CODE": "2",
+     "LS-ERROR-MSG": "Invalid Account Number format",
+     "LS-VALIDATE-TYPE": "A",
+     "LS-INPUT-VALUE": "1234567890"
+    }
+   }
+  },
+  {
+   "id": "V04",
+   "title": "V04",
+   "kind": "call",
+   "set": {
+    "LS-VALIDATE-TYPE": "A",
+    "LS-INPUT-VALUE": "00000000000000000000000000000000000000000000000001",
+    "LS-RETURN-CODE": "0",
+    "LS-ERROR-MSG": ""
+   },
+   "cobol_lines": [
+    77,
+    84,
+    85
+   ],
+   "expect": {
+    "outcome": "GOBACK",
+    "items": {
+     "LS-RETURN-CODE": "0",
+     "LS-ERROR-MSG": "",
+     "LS-VALIDATE-TYPE": "A",
+     "LS-INPUT-VALUE": "00000000000000000000000000000000000000000000000001"
+    }
+   }
+  },
+  {
+   "id": "V05",
+   "title": "V05",
+   "kind": "call",
+   "set": {
+    "LS-VALIDATE-TYPE": "A",
+    "LS-INPUT-VALUE": "00000000000000000000000000000000000000000000000000",
+    "LS-RETURN-CODE": "0",
+    "LS-ERROR-MSG": ""
+   },
+   "cobol_lines": [
+    78,
+    79,
+    80
+   ],
+   "expect": {
+    "outcome": "GOBACK",
+    "items": {
+     "LS-RETURN-CODE": "2",
+     "LS-ERROR-MSG": "Invalid Account Number format",
+     "LS-VALIDATE-TYPE": "A",
+     "LS-INPUT-VALUE": "00000000000000000000000000000000000000000000000000"
+    }
+   }
+  },
+  {
+   "id": "V06",
+   "title": "V06",
+   "kind": "call",
+   "set": {
+    "LS-VALIDATE-TYPE": "A",
+    "LS-INPUT-VALUE": "ABC",
+    "LS-RETURN-CODE": "0",
+    "LS-ERROR-MSG": ""
+   },
+   "cobol_lines": [
+    77,
+    79,
+    80
+   ],
+   "expect": {
+    "outcome": "GOBACK",
+    "items": {
+     "LS-RETURN-CODE": "2",
+     "LS-ERROR-MSG": "Invalid Account Number format",
+     "LS-VALIDATE-TYPE": "A",
+     "LS-INPUT-VALUE": "ABC"
+    }
+   }
+  },
+  {
+   "id": "V07",
+   "title": "V07",
+   "kind": "call",
+   "set": {
+    "LS-VALIDATE-TYPE": "T",
+    "LS-INPUT-VALUE": "STK",
+    "LS-RETURN-CODE": "0",
+    "LS-ERROR-MSG": ""
+   },
+   "cobol_lines": [
+    92,
+    101,
+    102
+   ],
+   "expect": {
+    "outcome": "GOBACK",
+    "items": {
+     "LS-RETURN-CODE": "0",
+     "LS-ERROR-MSG": "",
+     "LS-VALIDATE-TYPE": "T",
+     "LS-INPUT-VALUE": "STK"
+    }
+   }
+  },
+  {
+   "id": "V08",
+   "title": "V08",
+   "kind": "call",
+   "set": {
+    "LS-VALIDATE-TYPE": "T",
+    "LS-INPUT-VALUE": "BND",
+    "LS-RETURN-CODE": "0",
+    "LS-ERROR-MSG": ""
+   },
+   "cobol_lines": [
+    93,
+    101,
+    102
+   ],
+   "expect": {
+    "outcome": "GOBACK",
+    "items": {
+     "LS-RETURN-CODE": "0",
+     "LS-ERROR-MSG": "",
+     "LS-VALIDATE-TYPE": "T",
+     "LS-INPUT-VALUE": "BND"
+    }
+   }
+  },
+  {
+   "id": "V09",
+   "title": "V09",
+   "kind": "call",
+   "set": {
+    "LS-VALIDATE-TYPE": "T",
+    "LS-INPUT-VALUE": "MMF",
+    "LS-RETURN-CODE": "0",
+    "LS-ERROR-MSG": ""
+   },
+   "cobol_lines": [
+    94,
+    101,
+    102
+   ],
+   "expect": {
+    "outcome": "GOBACK",
+    "items": {
+     "LS-RETURN-CODE": "0",
+     "LS-ERROR-MSG": "",
+     "LS-VALIDATE-TYPE": "T",
+     "LS-INPUT-VALUE": "MMF"
+    }
+   }
+  },
+  {
+   "id": "V10",
+   "title": "V10",
+   "kind": "call",
+   "set": {
+    "LS-VALIDATE-TYPE": "T",
+    "LS-INPUT-VALUE": "ETF",
+    "LS-RETURN-CODE": "0",
+    "LS-ERROR-MSG": ""
+   },
+   "cobol_lines": [
+    95,
+    101,
+    102
+   ],
+   "expect": {
+    "outcome": "GOBACK",
+    "items": {
+     "LS-RETURN-CODE": "0",
+     "LS-ERROR-MSG": "",
+     "LS-VALIDATE-TYPE": "T",
+     "LS-INPUT-VALUE": "ETF"
+    }
+   }
+  },
+  {
+   "id": "V11",
+   "title": "comparison is case-sensitive",
+   "kind": "call",
+   "set": {
+    "LS-VALIDATE-TYPE": "T",
+    "LS-INPUT-VALUE": "stk",
+    "LS-RETURN-CODE": "0",
+    "LS-ERROR-MSG": ""
+   },
+   "cobol_lines": [
+    92,
+    96,
+    97
+   ],
+   "expect": {
+    "outcome": "GOBACK",
+    "items": {
+     "LS-RETURN-CODE": "3",
+     "LS-ERROR-MSG": "Invalid Investment Type",
+     "LS-VALIDATE-TYPE": "T",
+     "LS-INPUT-VALUE": "stk"
+    }
+   }
+  },
+  {
+   "id": "V12",
+   "title": "a leading space is significant",
+   "kind": "call",
+   "set": {
+    "LS-VALIDATE-TYPE": "T",
+    "LS-INPUT-VALUE": " STK",
+    "LS-RETURN-CODE": "0",
+    "LS-ERROR-MSG": ""
+   },
+   "cobol_lines": [
+    92,
+    96,
+    97
+   ],
+   "expect": {
+    "outcome": "GOBACK",
+    "items": {
+     "LS-RETURN-CODE": "3",
+     "LS-ERROR-MSG": "Invalid Investment Type",
+     "LS-VALIDATE-TYPE": "T",
+     "LS-INPUT-VALUE": " STK"
+    }
+   }
+  },
+  {
+   "id": "V13",
+   "title": "all-digit content is defined; the full S9(13)V99 range means the range check never fails (DR-PORTVALD-003, preserved)",
+   "kind": "call",
+   "set": {
+    "LS-VALIDATE-TYPE": "M",
+    "LS-INPUT-VALUE": "00000000000000000000000000000000000000000000012345",
+    "LS-RETURN-CODE": "0",
+    "LS-ERROR-MSG": ""
+   },
+   "cobol_lines": [
+    109,
+    111,
+    118,
+    119
+   ],
+   "expect": {
+    "outcome": "GOBACK",
+    "items": {
+     "LS-RETURN-CODE": "0",
+     "LS-ERROR-MSG": "",
+     "LS-VALIDATE-TYPE": "M",
+     "LS-INPUT-VALUE": "00000000000000000000000000000000000000000000012345"
+    }
+   }
+  },
+  {
+   "id": "V14",
+   "title": "content that is not all digits: the MOVE result is not defined by the source; must fail explicitly as unsupported, never with an invented return code",
+   "kind": "call",
+   "set": {
+    "LS-VALIDATE-TYPE": "M",
+    "LS-INPUT-VALUE": "100.00",
+    "LS-RETURN-CODE": "0",
+    "LS-ERROR-MSG": ""
+   },
+   "cobol_lines": [
+    109
+   ],
+   "expect": {
+    "outcome": "BLOCKED AT src/programs/portfolio/PORTVALD.cbl:109"
+   }
+  },
+  {
+   "id": "V15",
+   "title": "WHEN OTHER reuses code 1 (VAL-INVALID-ID)",
+   "kind": "call",
+   "set": {
+    "LS-VALIDATE-TYPE": "X",
+    "LS-INPUT-VALUE": "anything",
+    "LS-RETURN-CODE": "0",
+    "LS-ERROR-MSG": ""
+   },
+   "cobol_lines": [
+    44,
+    45,
+    46
+   ],
+   "expect": {
+    "outcome": "GOBACK",
+    "items": {
+     "LS-RETURN-CODE": "1",
+     "LS-ERROR-MSG": "Invalid validation type",
+     "LS-VALIDATE-TYPE": "X",
+     "LS-INPUT-VALUE": "anything"
+    }
+   }
+  },
+  {
+   "id": "V16",
+   "title": "the request type is case-sensitive",
+   "kind": "call",
+   "set": {
+    "LS-VALIDATE-TYPE": "i",
+    "LS-INPUT-VALUE": "PORT1234",
+    "LS-RETURN-CODE": "0",
+    "LS-ERROR-MSG": ""
+   },
+   "cobol_lines": [
+    44,
+    45,
+    46
+   ],
+   "expect": {
+    "outcome": "GOBACK",
+    "items": {
+     "LS-RETURN-CODE": "1",
+     "LS-ERROR-MSG": "Invalid validation type",
+     "LS-VALIDATE-TYPE": "i",
+     "LS-INPUT-VALUE": "PORT1234"
+    }
+   }
+  },
+  {
+   "id": "V17",
+   "title": "every defined path writes both outputs; earlier contents never leak",
+   "kind": "call",
+   "set": {
+    "LS-VALIDATE-TYPE": "A",
+    "LS-INPUT-VALUE": "1234567890",
+    "LS-RETURN-CODE": "9",
+    "LS-ERROR-MSG": "X"
+   },
+   "cobol_lines": [
+    79,
+    80
+   ],
+   "expect": {
+    "outcome": "GOBACK",
+    "items": {
+     "LS-RETURN-CODE": "2",
+     "LS-ERROR-MSG": "Invalid Account Number format",
+     "LS-VALIDATE-TYPE": "A",
+     "LS-INPUT-VALUE": "1234567890"
+    }
+   }
+  }
+ ]
+}

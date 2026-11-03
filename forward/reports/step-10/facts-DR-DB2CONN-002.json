@@ -1,0 +1,246 @@
+{
+  "decision_id": "DR-DB2CONN-002",
+  "kind": "technical",
+  "question": "Copybook SQLCA (src/copybook/db2/SQLCA.cpy) includes itself (EXEC SQL INCLUDE SQLCA at line 6) and defines only SQL-STATUS-CODES, with no SQLCODE or SQLERRMC field; SQLCODE/SQLERRMC therefore have no Field ID in 14 DB2 programs, including HISTLD00, RTNANA00, RTNCDE00, DB2CMT and DB2CONN. Which SQLCA does the precompiler actually supply, and may the forward design assume the standard DB2 SQLCODE meaning (0 success, -803 duplicate key, negative values errors) used in these requirements?",
+  "options_recorded": [
+    "Confirm the standard DB2 SQLCA is supplied by the precompiler",
+    "Supply the real SQLCA layout"
+  ],
+  "allowed_outcomes": [
+    {
+      "outcome": "resolved_no_change",
+      "roles": [
+        "technical_authority"
+      ]
+    },
+    {
+      "outcome": "excluded_from_scope",
+      "roles": [
+        "technical_authority"
+      ]
+    },
+    {
+      "outcome": "resolved_requires_update",
+      "roles": [
+        "technical_authority"
+      ]
+    }
+  ],
+  "affected_units": [
+    "HISTLD00",
+    "RTNANA00",
+    "RTNCDE00",
+    "DB2CMT",
+    "DB2CONN"
+  ],
+  "affected_requirements": [
+    "REQ-DB2CMT-002",
+    "REQ-DB2CMT-003",
+    "REQ-DB2CONN-002",
+    "REQ-DB2CONN-003",
+    "REQ-DB2CONN-004",
+    "REQ-HISTLD00-002",
+    "REQ-RTNANA00-001",
+    "REQ-RTNCDE00-001",
+    "REQ-RTNCDE00-004"
+  ],
+  "copybooks": [
+    {
+      "name": "SQLCA",
+      "file_id": "SYS-PORTFOLIO-001-FIL-0017",
+      "path": "src/copybook/db2/SQLCA.cpy",
+      "sha256": "03e8f64ae705fe87324100488072c05d179fb75f64db0dc0cf753f23ab10afc7",
+      "available": true,
+      "self_inclusion": [
+        {
+          "line": 6,
+          "text": "EXEC SQL INCLUDE SQLCA END-EXEC."
+        }
+      ],
+      "declarations": [
+        {
+          "kind": "item",
+          "name": "SQL-STATUS-CODES",
+          "level": 1,
+          "line": 9,
+          "values": [],
+          "parent": null
+        },
+        {
+          "kind": "item",
+          "name": "SQL-SUCCESS",
+          "level": 5,
+          "line": 10,
+          "values": [
+            "00000"
+          ],
+          "parent": "SQL-STATUS-CODES"
+        },
+        {
+          "kind": "item",
+          "name": "SQL-NOT-FOUND",
+          "level": 5,
+          "line": 11,
+          "values": [
+            "02000"
+          ],
+          "parent": "SQL-STATUS-CODES"
+        },
+        {
+          "kind": "item",
+          "name": "SQL-DUP-KEY",
+          "level": 5,
+          "line": 12,
+          "values": [
+            "23505"
+          ],
+          "parent": "SQL-STATUS-CODES"
+        },
+        {
+          "kind": "item",
+          "name": "SQL-DEADLOCK",
+          "level": 5,
+          "line": 13,
+          "values": [
+            "40001"
+          ],
+          "parent": "SQL-STATUS-CODES"
+        },
+        {
+          "kind": "item",
+          "name": "SQL-TIMEOUT",
+          "level": 5,
+          "line": 14,
+          "values": [
+            "40003"
+          ],
+          "parent": "SQL-STATUS-CODES"
+        },
+        {
+          "kind": "item",
+          "name": "SQL-CONNECTION-ERROR",
+          "level": 5,
+          "line": 15,
+          "values": [
+            "08001"
+          ],
+          "parent": "SQL-STATUS-CODES"
+        },
+        {
+          "kind": "item",
+          "name": "SQL-DB-ERROR",
+          "level": 5,
+          "line": 16,
+          "values": [
+            "58004"
+          ],
+          "parent": "SQL-STATUS-CODES"
+        }
+      ],
+      "included_by_programs": [
+        "CURSMGR",
+        "DB2CMT",
+        "DB2CONN",
+        "DB2ERR",
+        "DB2HNDL",
+        "DB2ONLN",
+        "DB2RECV",
+        "DB2STAT",
+        "ERRHNDL",
+        "HISTLD00",
+        "INQHIST",
+        "RTNANA00",
+        "RTNCDE00",
+        "SECMGR"
+      ]
+    }
+  ],
+  "names_used_by_programs": [
+    {
+      "name": "SQL-STATUS-CODES",
+      "declared_in_repository": true,
+      "used_by_programs": []
+    },
+    {
+      "name": "SQLCODE",
+      "declared_in_repository": false,
+      "used_by_programs": [
+        "CURSMGR",
+        "DB2CMT",
+        "DB2CONN",
+        "DB2ERR",
+        "DB2HNDL",
+        "DB2ONLN",
+        "DB2RECV",
+        "DB2STAT",
+        "ERRHNDL",
+        "HISTLD00",
+        "INQHIST",
+        "RTNANA00",
+        "RTNCDE00",
+        "SECMGR"
+      ]
+    },
+    {
+      "name": "SQLERRMC",
+      "declared_in_repository": false,
+      "used_by_programs": [
+        "DB2HNDL",
+        "DB2ONLN"
+      ]
+    }
+  ],
+  "affected_scopes": [
+    {
+      "scope": "programs:DB2CMT",
+      "readiness": "NOT_READY",
+      "blocking": 30
+    },
+    {
+      "scope": "programs:DB2CONN",
+      "readiness": "NOT_READY",
+      "blocking": 20
+    },
+    {
+      "scope": "programs:HISTLD00",
+      "readiness": "NOT_READY",
+      "blocking": 19
+    },
+    {
+      "scope": "programs:RTNANA00",
+      "readiness": "NOT_READY",
+      "blocking": 10
+    },
+    {
+      "scope": "programs:RTNCDE00",
+      "readiness": "NOT_READY",
+      "blocking": 6
+    }
+  ],
+  "counts": {
+    "affected_units": 5,
+    "affected_requirements": 9,
+    "affected_program_scopes": 5
+  },
+  "separation": {
+    "A_source_demonstrates": [
+      "src/copybook/db2/SQLCA.cpy (sha256 03e8f64ae705…) declares SQL-STATUS-CODES with 7 VALUE clause(s)",
+      "SQLCA line 6 includes itself: \"EXEC SQL INCLUDE SQLCA END-EXEC.\"",
+      "SQLCA is included by 14 program(s)"
+    ],
+    "B_external_environment_may_provide": [
+      "SQLCODE: used by 14 program(s) but declared nowhere in the repository; a DB2 precompiler or runtime normally supplies such names, which the repository cannot confirm",
+      "SQLERRMC: used by 2 program(s) but declared nowhere in the repository; a DB2 precompiler or runtime normally supplies such names, which the repository cannot confirm"
+    ],
+    "C_unsupported_assumptions": [
+      "any layout, field order or value meaning of SQLCODE, SQLERRMC beyond what the repository declares",
+      "the target DB2 version and its SQLCA definition"
+    ],
+    "D_missing_artifacts": [
+      "the real SQLCA member (the repository copy includes itself)",
+      "a declaration of SQLCODE",
+      "a declaration of SQLERRMC"
+    ],
+    "E_must_be_decided": "the technical authority must choose one allowed outcome (resolved_no_change, excluded_from_scope, resolved_requires_update); the runtime does not choose"
+  }
+}

@@ -1,0 +1,140 @@
+{
+  "contract": "bmad/mapping-spec",
+  "contract_version": "1.0",
+  "mapping_version": "1.1.0",
+  "principles": [
+    "Only material inside the exact approved scope is mapped; nothing is summarised, rewritten or invented.",
+    "Every mapped element keeps its REVFORGE identifier, its source references (permanent SYS-/FIL-/PATH-/SEC-/PAR-/STMT-/REC-/FLD- IDs), the sha256 of the record it came from and, for run-local catalogue IDs (BR-/GAP-/DEC-), the source run that issued it.",
+    "Each mapped input is written with a provenance sidecar (<name>.provenance.json, contract bmad/provenance) that the output validator re-checks before a result is accepted.",
+    "Runtime requirements are mapped and counted separately from business requirements, and every requirement, data contract and decision carries its inclusion class (direct, shared_dependency, cross_scope, global) and reason from the scope reconciliation (STEP 7)."
+  ],
+  "inputs": {
+    "BMAD-PRD": [
+      {
+        "name": "approved-requirements",
+        "from": "scope requirements (accepted F1 receipts) and their G2 outcomes",
+        "bmad_input": "PRD functional requirements (one FR per REVFORGE requirement ID)"
+      },
+      {
+        "name": "business-rules",
+        "from": "canonical rule register entries of the scope",
+        "bmad_input": "PRD business rules / constraints"
+      },
+      {
+        "name": "data-contracts",
+        "from": "accepted F2 data_record and file_operations items of the scope",
+        "bmad_input": "PRD data requirements"
+      },
+      {
+        "name": "decisions",
+        "from": "signed decision resolutions that affect the scope",
+        "bmad_input": "PRD assumptions and resolved questions"
+      },
+      {
+        "name": "approval",
+        "from": "the signed G2 approval bound to the scope digest",
+        "bmad_input": "PRD status and sign-off section"
+      }
+    ],
+    "BMAD-ARCH": [
+      {
+        "name": "approved-requirements",
+        "from": "as BMAD-PRD",
+        "bmad_input": "architecture requirements spec"
+      },
+      {
+        "name": "data-contracts",
+        "from": "as BMAD-PRD",
+        "bmad_input": "data ownership and state rules"
+      },
+      {
+        "name": "runtime-requirements",
+        "from": "accepted F1 runtime_requirement items of the scope",
+        "bmad_input": "runtime and integration constraints"
+      },
+      {
+        "name": "decisions",
+        "from": "as BMAD-PRD",
+        "bmad_input": "decided constraints"
+      },
+      {
+        "name": "approval",
+        "from": "as BMAD-PRD",
+        "bmad_input": "approved scope"
+      }
+    ],
+    "BMAD-EPICS": [
+      {
+        "name": "approved-requirements",
+        "from": "as BMAD-PRD",
+        "bmad_input": "PRD requirements"
+      },
+      {
+        "name": "architecture",
+        "from": "recorded BMAD-ARCH / F3 results of the scope",
+        "bmad_input": "architecture decisions"
+      },
+      {
+        "name": "approval",
+        "from": "as BMAD-PRD",
+        "bmad_input": "approved scope"
+      }
+    ],
+    "BMAD-SPRINT": [
+      {
+        "name": "stories",
+        "from": "recorded BMAD-EPICS / F4 results approved at G4",
+        "bmad_input": "epics file"
+      },
+      {
+        "name": "approval",
+        "from": "as BMAD-PRD",
+        "bmad_input": "approved scope"
+      }
+    ],
+    "BMAD-BUILD": [
+      {
+        "name": "stories",
+        "from": "as BMAD-SPRINT",
+        "bmad_input": "story / spec to implement"
+      },
+      {
+        "name": "architecture",
+        "from": "as BMAD-EPICS",
+        "bmad_input": "architecture constraints"
+      },
+      {
+        "name": "data-contracts",
+        "from": "as BMAD-PRD",
+        "bmad_input": "data layouts"
+      },
+      {
+        "name": "approval",
+        "from": "as BMAD-PRD",
+        "bmad_input": "approved scope"
+      }
+    ],
+    "BMAD-REVIEW": [
+      {
+        "name": "implementation",
+        "from": "recorded BMAD-BUILD / F5 results (files and sha256)",
+        "bmad_input": "diff / content to review"
+      },
+      {
+        "name": "independent-tests",
+        "from": "accepted F6 receipt",
+        "bmad_input": "verification evidence"
+      },
+      {
+        "name": "approved-requirements",
+        "from": "as BMAD-PRD",
+        "bmad_input": "spec to review against"
+      },
+      {
+        "name": "approval",
+        "from": "as BMAD-PRD",
+        "bmad_input": "approved scope"
+      }
+    ]
+  }
+}

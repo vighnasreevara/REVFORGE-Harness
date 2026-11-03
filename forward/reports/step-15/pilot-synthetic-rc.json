@@ -1,0 +1,815 @@
+{
+  "contract": "pilot/pilot-result",
+  "contract_version": "1.0",
+  "synthetic": true,
+  "statement": "Synthetic pilot written for REVFORGE Step 11. Not taken from, derived from or equivalent to any portfolio program.",
+  "generated_at": "2026-11-02T22:36:04.654Z",
+  "inputs": [
+    {
+      "path": "pilot.json",
+      "sha256": "bc6699918aee456c286fdb36dc98c092c2d0255d52accb56d1ab42d752cec378"
+    },
+    {
+      "path": "cobol/SYNRC01.cbl",
+      "sha256": "ba4021612beae607b7c281c4410162dc0e00a0786d423a4d796458350d4ab486"
+    },
+    {
+      "path": "cobol/SYNDRV01.cbl",
+      "sha256": "d895279498610dd45ae8547dc7027f441b45d580e93739b320ec6577e7dca475"
+    },
+    {
+      "path": "SPEC.md",
+      "sha256": "01f98cebfa5577cc88c15e5f8f8aedf1f7ecfbf0b7ecc313410c7087c3e3d9d3"
+    },
+    {
+      "path": "fixtures/cases.json",
+      "sha256": "e45bf4fb742071aac61e6ea4cf08fba66a81fcf6a0339ec289f8809fd79fb562"
+    }
+  ],
+  "stages": [
+    {
+      "stage": "inspection",
+      "analogue": "reverse agents 2-3 (parser, data)",
+      "execution": "deterministic tool (strict COBOL subset parser)"
+    },
+    {
+      "stage": "behaviour extraction",
+      "analogue": "F1 requirements analyst",
+      "execution": "deterministic tool (dispatch table, decision tables, statement inventory); no agent invoked"
+    },
+    {
+      "stage": "gap analysis",
+      "analogue": "F1 uncertainty register / F2 data mapping",
+      "execution": "deterministic tool"
+    },
+    {
+      "stage": "architecture",
+      "analogue": "F3 Java architect",
+      "execution": "not executed (fixed pilot layout: one class per program, record, port, placeholder); no F3 agent invoked"
+    },
+    {
+      "stage": "implementation",
+      "analogue": "F5 Java developer",
+      "execution": "deterministic generator; the F5 agent was NOT invoked and production generation stays unauthorized"
+    },
+    {
+      "stage": "testing",
+      "analogue": "F6 independent tester",
+      "execution": "real javac/java execution against specification-derived fixtures; no F6 agent invoked"
+    },
+    {
+      "stage": "review",
+      "analogue": "F7 independent reviewer",
+      "execution": "deterministic trace audit; no F7 agent invoked"
+    }
+  ],
+  "isolation": {
+    "pilot_dir": "D:\\PROJECTS\\REVFORGE-Harness\\forward\\pilot\\synthetic-rc",
+    "output_dir": "D:\\PROJECTS\\REVFORGE-Harness\\forward\\pilot\\synthetic-rc\\out",
+    "workflow_used": false,
+    "approvals_used": false,
+    "production_generation": false,
+    "external_ai_calls": false
+  },
+  "toolchain": {
+    "java": {
+      "available": true,
+      "javac": "C:\\Program Files\\Microsoft\\jdk-21.0.13.21-hotspot\\bin\\javac.exe",
+      "java": "C:\\Program Files\\Microsoft\\jdk-21.0.13.21-hotspot\\bin\\java.exe",
+      "version": "javac 21.0.13.0.2",
+      "source": "REVFORGE_JAVA_HOME"
+    },
+    "cobol": {
+      "available": false,
+      "cobc": null,
+      "version": null,
+      "source": null
+    }
+  },
+  "inspection": {
+    "program_id": "SYNRC01",
+    "sha256": "ba4021612beae607b7c281c4410162dc0e00a0786d423a4d796458350d4ab486",
+    "interface": {
+      "record": "SYN-REQUEST",
+      "length": 24,
+      "fields": [
+        {
+          "name": "SYN-ACTION",
+          "offset": 0,
+          "length": 1,
+          "type": {
+            "kind": "alnum",
+            "length": 1
+          },
+          "conditions": [
+            {
+              "name": "SYN-ACT-RESET",
+              "values": [
+                "R"
+              ],
+              "line": 17
+            },
+            {
+              "name": "SYN-ACT-POST",
+              "values": [
+                "P"
+              ],
+              "line": 18
+            },
+            {
+              "name": "SYN-ACT-QUERY",
+              "values": [
+                "Q"
+              ],
+              "line": 19
+            },
+            {
+              "name": "SYN-ACT-PUBLISH",
+              "values": [
+                "U"
+              ],
+              "line": 20
+            }
+          ]
+        },
+        {
+          "name": "SYN-INPUT-CODE",
+          "offset": 1,
+          "length": 5,
+          "type": {
+            "kind": "numeric",
+            "digits": 4,
+            "scale": 0,
+            "signed": true,
+            "usage": "display",
+            "signSeparate": true
+          },
+          "conditions": []
+        },
+        {
+          "name": "SYN-LAST-CODE",
+          "offset": 6,
+          "length": 5,
+          "type": {
+            "kind": "numeric",
+            "digits": 4,
+            "scale": 0,
+            "signed": true,
+            "usage": "display",
+            "signSeparate": true
+          },
+          "conditions": []
+        },
+        {
+          "name": "SYN-PEAK-CODE",
+          "offset": 11,
+          "length": 5,
+          "type": {
+            "kind": "numeric",
+            "digits": 4,
+            "scale": 0,
+            "signed": true,
+            "usage": "display",
+            "signSeparate": true
+          },
+          "conditions": []
+        },
+        {
+          "name": "SYN-SEVERITY",
+          "offset": 16,
+          "length": 1,
+          "type": {
+            "kind": "alnum",
+            "length": 1
+          },
+          "conditions": [
+            {
+              "name": "SYN-SEV-CLEAR",
+              "values": [
+                "C"
+              ],
+              "line": 25
+            },
+            {
+              "name": "SYN-SEV-NOTICE",
+              "values": [
+                "N"
+              ],
+              "line": 26
+            },
+            {
+              "name": "SYN-SEV-FAULT",
+              "values": [
+                "T"
+              ],
+              "line": 27
+            },
+            {
+              "name": "SYN-SEV-ABORT",
+              "values": [
+                "A"
+              ],
+              "line": 28
+            }
+          ]
+        },
+        {
+          "name": "SYN-OUT-CODE",
+          "offset": 17,
+          "length": 5,
+          "type": {
+            "kind": "numeric",
+            "digits": 4,
+            "scale": 0,
+            "signed": true,
+            "usage": "display",
+            "signSeparate": true
+          },
+          "conditions": []
+        },
+        {
+          "name": "SYN-RESULT",
+          "offset": 22,
+          "length": 2,
+          "type": {
+            "kind": "numeric",
+            "digits": 2,
+            "scale": 0,
+            "signed": false,
+            "usage": "display",
+            "signSeparate": false
+          },
+          "conditions": []
+        }
+      ]
+    },
+    "working_storage": [
+      {
+        "name": "WS-EXT-RC",
+        "type": {
+          "kind": "numeric",
+          "digits": 4,
+          "scale": 0,
+          "signed": true,
+          "usage": "display",
+          "signSeparate": true
+        },
+        "value": null,
+        "line": 13
+      }
+    ],
+    "paragraphs": [
+      {
+        "name": null,
+        "lines": [
+          32,
+          44
+        ],
+        "statements": 7
+      },
+      {
+        "name": "A100-RESET",
+        "lines": [
+          45,
+          50
+        ],
+        "statements": 5
+      },
+      {
+        "name": "A100-EXIT",
+        "lines": [
+          51,
+          52
+        ],
+        "statements": 1
+      },
+      {
+        "name": "A200-POST",
+        "lines": [
+          53,
+          72
+        ],
+        "statements": 11
+      },
+      {
+        "name": "A200-EXIT",
+        "lines": [
+          73,
+          74
+        ],
+        "statements": 1
+      },
+      {
+        "name": "A300-QUERY",
+        "lines": [
+          75,
+          77
+        ],
+        "statements": 2
+      },
+      {
+        "name": "A300-EXIT",
+        "lines": [
+          78,
+          79
+        ],
+        "statements": 1
+      },
+      {
+        "name": "A400-PUBLISH",
+        "lines": [
+          80,
+          86
+        ],
+        "statements": 4
+      },
+      {
+        "name": "A400-EXIT",
+        "lines": [
+          87,
+          89
+        ],
+        "statements": 1
+      }
+    ]
+  },
+  "extraction": {
+    "dispatch": [
+      {
+        "line": 33,
+        "condition": "SYN-ACT-RESET",
+        "field": "SYN-ACTION",
+        "values": [
+          "R"
+        ],
+        "performs": [
+          [
+            "A100-RESET",
+            "A100-EXIT"
+          ]
+        ],
+        "other_statements": []
+      },
+      {
+        "line": 35,
+        "condition": "SYN-ACT-POST",
+        "field": "SYN-ACTION",
+        "values": [
+          "P"
+        ],
+        "performs": [
+          [
+            "A200-POST",
+            "A200-EXIT"
+          ]
+        ],
+        "other_statements": []
+      },
+      {
+        "line": 37,
+        "condition": "SYN-ACT-QUERY",
+        "field": "SYN-ACTION",
+        "values": [
+          "Q"
+        ],
+        "performs": [
+          [
+            "A300-QUERY",
+            "A300-EXIT"
+          ]
+        ],
+        "other_statements": []
+      },
+      {
+        "line": 39,
+        "condition": "SYN-ACT-PUBLISH",
+        "field": "SYN-ACTION",
+        "values": [
+          "U"
+        ],
+        "performs": [
+          [
+            "A400-PUBLISH",
+            "A400-EXIT"
+          ]
+        ],
+        "other_statements": []
+      },
+      {
+        "line": 32,
+        "condition": "OTHER",
+        "statements": [
+          {
+            "kind": "move",
+            "line": 42
+          }
+        ]
+      }
+    ],
+    "decision_tables": [
+      {
+        "paragraph": "A200-POST",
+        "line": 61,
+        "subject": "SYN-INPUT-CODE",
+        "rows": [
+          {
+            "when": "0",
+            "sets": [
+              "SYN-SEV-CLEAR"
+            ]
+          },
+          {
+            "when": "1 THRU 3",
+            "sets": [
+              "SYN-SEV-NOTICE"
+            ]
+          },
+          {
+            "when": "4 THRU 11",
+            "sets": [
+              "SYN-SEV-FAULT"
+            ]
+          },
+          {
+            "when": "OTHER",
+            "sets": [
+              "SYN-SEV-ABORT"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "gaps": [
+    {
+      "gap_id": "GAP-SYNRC01-0001",
+      "stable_ref": "GAP-SYNRC01-A400-PUBLISH-CALL-SYNEXT01",
+      "kind": "UNDEFINED_EXTERNAL_CALL",
+      "subject": "SYNEXT01",
+      "description": "CALL 'SYNEXT01' has no source among the converter's programs: its behaviour and its effect on SYN-PEAK-CODE, WS-EXT-RC are unknown",
+      "origin": {
+        "file": "SYNRC01.cbl",
+        "sha256": "ba4021612beae607b7c281c4410162dc0e00a0786d423a4d796458350d4ab486",
+        "paragraph": "A400-PUBLISH",
+        "line": 81,
+        "end_line": 81,
+        "excerpt": [
+          {
+            "line": 80,
+            "text": "       A400-PUBLISH."
+          },
+          {
+            "line": 81,
+            "text": "           CALL 'SYNEXT01' USING SYN-PEAK-CODE WS-EXT-RC."
+          },
+          {
+            "line": 82,
+            "text": "           IF WS-EXT-RC = 0"
+          },
+          {
+            "line": 83,
+            "text": "              MOVE 0 TO SYN-RESULT"
+          },
+          {
+            "line": 84,
+            "text": "           ELSE"
+          },
+          {
+            "line": 85,
+            "text": "              MOVE 30 TO SYN-RESULT"
+          },
+          {
+            "line": 86,
+            "text": "           END-IF."
+          }
+        ]
+      },
+      "affected_items": [
+        "SYN-PEAK-CODE",
+        "WS-EXT-RC"
+      ],
+      "dependent_statements": [
+        {
+          "line": 81,
+          "kind": "call",
+          "reason": "the call itself"
+        },
+        {
+          "line": 82,
+          "kind": "if",
+          "reason": "uses WS-EXT-RC after the call"
+        },
+        {
+          "line": 83,
+          "kind": "move",
+          "reason": "nested under the dependent IF at line 82"
+        },
+        {
+          "line": 85,
+          "kind": "move",
+          "reason": "nested under the dependent IF at line 82"
+        }
+      ],
+      "affected_paragraphs": [
+        "A400-PUBLISH"
+      ],
+      "reached_from": [
+        {
+          "paragraph": null,
+          "line": 40,
+          "via": "PERFORM A400-PUBLISH THRU A400-EXIT"
+        }
+      ],
+      "status": "OPEN",
+      "resolution_required": "the source or an approved specification of SYNEXT01 (behaviour, parameters, effect on each argument and its return values)"
+    }
+  ],
+  "behaviours": [
+    {
+      "branch": "SYN-ACT-RESET",
+      "values": [
+        "R"
+      ],
+      "line": 33,
+      "paragraphs": [
+        "A100-RESET",
+        "A100-EXIT"
+      ],
+      "category": "VERIFIED",
+      "blocked_by": []
+    },
+    {
+      "branch": "SYN-ACT-POST",
+      "values": [
+        "P"
+      ],
+      "line": 35,
+      "paragraphs": [
+        "A200-POST",
+        "A200-EXIT"
+      ],
+      "category": "VERIFIED",
+      "blocked_by": []
+    },
+    {
+      "branch": "SYN-ACT-QUERY",
+      "values": [
+        "Q"
+      ],
+      "line": 37,
+      "paragraphs": [
+        "A300-QUERY",
+        "A300-EXIT"
+      ],
+      "category": "VERIFIED",
+      "blocked_by": []
+    },
+    {
+      "branch": "SYN-ACT-PUBLISH",
+      "values": [
+        "U"
+      ],
+      "line": 39,
+      "paragraphs": [
+        "A400-PUBLISH",
+        "A400-EXIT"
+      ],
+      "category": "GAP",
+      "blocked_by": [
+        "GAP-SYNRC01-0001"
+      ]
+    },
+    {
+      "branch": "OTHER",
+      "values": null,
+      "line": 32,
+      "paragraphs": [],
+      "category": "VERIFIED",
+      "blocked_by": []
+    }
+  ],
+  "generation": {
+    "files": [
+      {
+        "path": "java/src/revforge/pilot/synrc01/Cobol.java",
+        "sha256": "70d2b556b3a4c035feeafe41cfe26a1a7c8a53dc8fe6f4d1d23b5616c1103506",
+        "lines": 119
+      },
+      {
+        "path": "java/src/revforge/pilot/synrc01/ExternalSynext01.java",
+        "sha256": "2d6c4b2af7ff07cde4cb549b807c2b0d62cc7521e615427e8c474de34b439a1a",
+        "lines": 13
+      },
+      {
+        "path": "java/src/revforge/pilot/synrc01/PilotHarness.java",
+        "sha256": "2a680bfa9e7e1d06d873c01d231c420b434d781f0cff29a543f21328bf2b575b",
+        "lines": 31
+      },
+      {
+        "path": "java/src/revforge/pilot/synrc01/SynRequest.java",
+        "sha256": "3d09e111438d68e02e965d5ef418c5976214d4ad5bb6e45d3ef616e0d5e5296d",
+        "lines": 42
+      },
+      {
+        "path": "java/src/revforge/pilot/synrc01/Synrc01.java",
+        "sha256": "aac2f6103340291de463ff85d69ecf83228ce1f066474a3f0743ce7d7d3c6e30",
+        "lines": 122
+      },
+      {
+        "path": "java/src/revforge/pilot/synrc01/UnresolvedGapException.java",
+        "sha256": "0d510a8a2ba4efc3cc1c6232f07c3f5f29ed966eb14cce66b858b05038adf8d0",
+        "lines": 18
+      },
+      {
+        "path": "java/src/revforge/pilot/synrc01/UnresolvedSynext01.java",
+        "sha256": "83192e0901662690540d1bf47176646b2adb3b7e3d398676f71afb09df2a3152",
+        "lines": 11
+      }
+    ],
+    "source_map": "source-map.json"
+  },
+  "gap_trace": [
+    {
+      "gap_id": "GAP-SYNRC01-0001",
+      "kind": "UNDEFINED_EXTERNAL_CALL",
+      "subject": "SYNEXT01",
+      "cobol": "SYNRC01.cbl:81",
+      "java": {
+        "gap_id": "GAP-SYNRC01-0001",
+        "interface": "revforge/pilot/synrc01/ExternalSynext01.java",
+        "placeholder": "revforge/pilot/synrc01/UnresolvedSynext01.java",
+        "call_sites": [
+          {
+            "java_file": "revforge/pilot/synrc01/Synrc01.java",
+            "java_line": 108
+          }
+        ],
+        "affected_methods": [
+          "a400Publish"
+        ]
+      },
+      "blocked_behaviours": [
+        "SYN-ACT-PUBLISH"
+      ]
+    }
+  ],
+  "compilation": {
+    "status": "COMPILED",
+    "javac": "javac 21.0.13.0.2",
+    "exit_code": 0,
+    "diagnostics": []
+  },
+  "execution": {
+    "status": "EXECUTED",
+    "exit_code": 0,
+    "stderr": [],
+    "cases": [
+      {
+        "id": "C01",
+        "title": "reset clears codes, severity and result",
+        "expected": "R+0007+0000+0000C+000000",
+        "actual": "R+0007+0000+0000C+000000",
+        "status": "PASS"
+      },
+      {
+        "id": "C02",
+        "title": "post 0: severity clear, peak kept, result 00",
+        "expected": "P+0000+0000+0003C+000000",
+        "actual": "P+0000+0000+0003C+000000",
+        "status": "PASS"
+      },
+      {
+        "id": "C03",
+        "title": "post 1 (lower notice boundary), new peak",
+        "expected": "P+0001+0001+0001N+000000",
+        "actual": "P+0001+0001+0001N+000000",
+        "status": "PASS"
+      },
+      {
+        "id": "C04",
+        "title": "post 3 (upper notice boundary), lower than peak",
+        "expected": "P+0003+0003+0005N+000000",
+        "actual": "P+0003+0003+0005N+000000",
+        "status": "PASS"
+      },
+      {
+        "id": "C05",
+        "title": "post 4 (lower fault boundary), new peak",
+        "expected": "P+0004+0004+0004T+000000",
+        "actual": "P+0004+0004+0004T+000000",
+        "status": "PASS"
+      },
+      {
+        "id": "C06",
+        "title": "post 11 (upper fault boundary)",
+        "expected": "P+0011+0011+0011T+000000",
+        "actual": "P+0011+0011+0011T+000000",
+        "status": "PASS"
+      },
+      {
+        "id": "C07",
+        "title": "post 12 (first abort value)",
+        "expected": "P+0012+0012+0012A+000000",
+        "actual": "P+0012+0012+0012A+000000",
+        "status": "PASS"
+      },
+      {
+        "id": "C08",
+        "title": "post 9999 (largest S9(4) value)",
+        "expected": "P+9999+9999+9999A+000000",
+        "actual": "P+9999+9999+9999A+000000",
+        "status": "PASS"
+      },
+      {
+        "id": "C09",
+        "title": "post equal to peak keeps peak",
+        "expected": "P+0005+0005+0005T+000000",
+        "actual": "P+0005+0005+0005T+000000",
+        "status": "PASS"
+      },
+      {
+        "id": "C10",
+        "title": "post below peak keeps peak",
+        "expected": "P+0002+0002+0009N+000000",
+        "actual": "P+0002+0002+0009N+000000",
+        "status": "PASS"
+      },
+      {
+        "id": "C11",
+        "title": "ERROR: negative post is rejected with 20 and changes nothing else",
+        "expected": "P-0001+0004+0006T+000020",
+        "actual": "P-0001+0004+0006T+000020",
+        "status": "PASS"
+      },
+      {
+        "id": "C12",
+        "title": "query copies peak to out",
+        "expected": "Q+0000+0002+0009N+000900",
+        "actual": "Q+0000+0002+0009N+000900",
+        "status": "PASS"
+      },
+      {
+        "id": "C13",
+        "title": "ERROR: unknown action gives 90 and changes nothing else",
+        "expected": "Z+0004+0001+0002N+000390",
+        "actual": "Z+0004+0001+0002N+000390",
+        "status": "PASS"
+      },
+      {
+        "id": "C14",
+        "title": "ERROR: lower-case r is not reset",
+        "expected": "r+0000+0008+0008T+000090",
+        "actual": "r+0000+0008+0008T+000090",
+        "status": "PASS"
+      },
+      {
+        "id": "C15",
+        "title": "publish depends on the unprovided external program SYNEXT01: must stay blocked",
+        "expected": "BLOCKED (undefined external call SYNEXT01)",
+        "actual": "BLOCKED GAP-SYNRC01-0001",
+        "status": "BLOCKED_AS_EXPECTED",
+        "gap_id": "GAP-SYNRC01-0001"
+      }
+    ],
+    "counts": {
+      "PASS": 14,
+      "BLOCKED_AS_EXPECTED": 1,
+      "FAIL": 0,
+      "total": 15
+    }
+  },
+  "cobol_reference": {
+    "status": "COBOL_COMPILER_UNAVAILABLE",
+    "detail": "no COBOL compiler (REVFORGE_COBC or cobc on PATH); the synthetic COBOL was not executed and no reference outputs exist"
+  },
+  "validation": {
+    "kind": "FIXTURE_BASED",
+    "fixtures_provenance": "Hand-derived by the pilot author from SPEC.md before any Java was generated; not produced by executing Java; not reviewed by an independent human.",
+    "statement": "Java outputs were compared only with specification-derived fixture expectations. This is fixture-based validation, NOT runtime COBOL/Java equivalence."
+  },
+  "equivalence": "EQUIVALENCE_UNVERIFIED",
+  "conversion_status": "PARTIAL",
+  "conversion_status_reason": "the Java compiles and every verified path matches its fixtures, but 1 gap(s) stay open (GAP-SYNRC01-0001) and their paths are blocked",
+  "trace_audit": {
+    "statements": 33,
+    "mapped_statements": 33,
+    "gaps_traced": 1,
+    "verified_branches": [
+      "SYN-ACT-RESET",
+      "SYN-ACT-POST",
+      "SYN-ACT-QUERY",
+      "OTHER"
+    ],
+    "passing_cases": 14,
+    "notes": [
+      "WS-EXT-RC has no VALUE clause; it is only read after GAP-SYNRC01-0001 writes it"
+    ],
+    "findings": [],
+    "verdict": "NO_FINDINGS"
+  },
+  "evidence": {
+    "manifest": "evidence-manifest.json",
+    "manifest_sha256": "eee74f692ea7e32da8dd3172d73f04fde1bf5d692c62eaa0469f42acd1f8ba48",
+    "files": 8
+  }
+}

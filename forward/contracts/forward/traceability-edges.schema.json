@@ -1,0 +1,57 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://revforge.local/contracts/forward/traceability-edges.schema.json",
+  "title": "Traceability edges (F1 evidence references; F7 end-to-end trace audit)",
+  "description": "Edges of the chain: COBOL source ID -> reverse finding -> requirement -> architecture -> story -> Java -> test -> verification. Run-local nodes carry their reverse-run binding.",
+  "allOf": [{ "$ref": "forward-common.schema.json#/definitions/header" }],
+  "type": "object",
+  "required": ["contract", "edges", "breaks"],
+  "definitions": {
+    "node": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["kind", "id"],
+      "properties": {
+        "kind": { "enum": ["source_id", "reverse_rule", "reverse_gap", "gap_item", "requirement", "decision_request", "data_contract", "component", "adr", "story", "java", "test_fixture", "verification"] },
+        "id": { "type": "string", "minLength": 1 },
+        "source_run": { "type": "string" }
+      },
+      "allOf": [
+        {
+          "if": { "properties": { "kind": { "enum": ["reverse_rule", "reverse_gap", "gap_item"] } } },
+          "then": { "required": ["source_run"] }
+        }
+      ]
+    }
+  },
+  "properties": {
+    "contract": { "const": "forward/traceability-edges" },
+    "edges": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["from", "to", "relation", "evidence_status"],
+        "properties": {
+          "from": { "$ref": "#/definitions/node" },
+          "to": { "$ref": "#/definitions/node" },
+          "relation": { "enum": ["extracted_from", "derived_from", "split_from", "merged_from", "constrained_by", "maps_to", "designed_by", "planned_in", "implemented_by", "tested_by", "verified_by"] },
+          "evidence_status": { "$ref": "forward-common.schema.json#/definitions/evidenceStatus" }
+        }
+      }
+    },
+    "breaks": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["node", "problem"],
+        "properties": {
+          "node": { "$ref": "#/definitions/node" },
+          "problem": { "enum": ["missing_upstream", "missing_downstream", "stale_run_binding", "conflicting_reference", "unknown_id"] },
+          "detail": { "type": "string" }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,37 @@
+{
+ "program": "CKPRST",
+ "provenance": "Written by a scenario-author agent (F6 independent fixture design) on 2026-11-02 from the COBOL source src/programs/batch/CKPRST.cbl and its copybooks (src/copybook/batch/CKPRST.cpy (FILE and LINKAGE), src/copybook/common/RETHND.cpy) under references/udara-legacy-modernization-harness, the fixture README, and only the gaps/inspection arrays of forward/generated/java/CKPRST/pilot-result.json. No generated Java, source map or execution result was read or run.",
+ "scenarios": [
+  {
+   "id": "C01",
+   "title": "the first executable statement is EVALUATE TRUE WHEN ENTRY-POINT-INIT; ENTRY-POINT-INIT (and -TAKE/-COMMIT/-RESTART) is declared nowhere, so every call blocks there",
+   "cobol_lines": [
+    29,
+    30
+   ],
+   "kind": "call",
+   "expect": {
+    "outcome": "BLOCKED AT src/programs/batch/CKPRST.cbl:29"
+   }
+  },
+  {
+   "id": "C02",
+   "title": "same block whatever the linkage content: the EVALUATE subjects do not depend on the caller's data",
+   "cobol_lines": [
+    29,
+    30,
+    32,
+    34,
+    36
+   ],
+   "kind": "call",
+   "set": {
+    "MODULE-ID": "PORTMSTR",
+    "FUNCTION-ID": "TAKE"
+   },
+   "expect": {
+    "outcome": "BLOCKED AT src/programs/batch/CKPRST.cbl:29"
+   }
+  }
+ ]
+}

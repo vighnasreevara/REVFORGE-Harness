@@ -1,0 +1,2612 @@
+{
+  "contract": "verification/evidence-adjudication-report",
+  "contract_version": "1.0",
+  "generated_at": "2026-11-02T15:59:17.907Z",
+  "baseline_manifest_sha256": "352b97f0bbcbdb149c1118791aaabaa2e8e9972716bc77adc3a2f0644d24a068",
+  "scope": "application",
+  "summary": {
+    "newly_supported": 18,
+    "questionable_earlier_verifications": 7,
+    "by_classification": {
+      "SOURCE_CHAIN_VERIFIED": 20,
+      "SOURCE_CHAIN_PARTIAL": 4,
+      "SOURCE_CHAIN_AMBIGUOUS": 1,
+      "SOURCE_CHAIN_CONTRADICTED": 0,
+      "SOURCE_CHAIN_UNAVAILABLE": 0
+    },
+    "evidence_invalidated": 4,
+    "earlier_verification_confirmed": 3
+  },
+  "results": [
+    {
+      "item_id": "REQ-BCHCTL00-001",
+      "item_kind": "requirement",
+      "item_sha256": "855d3310855e67b605c974ad57e7d25bfad06eb59ae2d13d05d3ea6798ee71ec",
+      "claim": "Route batch control requests by function code The batch control service selects its processing from the caller's function code (LS-FUNCTION): 'INIT' sets process mode 'I' and performs batch initialisation; 'CHEK' sets process mode 'C' and performs the prerequisite check; 'UPDT' sets process mode 'U' and performs the status update; 'TERM' sets process mode 'F' and performs batch termination. Any other function code sets the error text 'Invalid function code', sets the return code to 8 (BCT-RC-ERROR) and calls the common error processor ERRPROC. In every case the request's return code (LS-RETURN-CODE) is copied to the program return code before control returns to the caller. The initialise, prerequisite, update and terminate work itself is performed by 11 paragraphs that are not present in the source (see DR-BCHCTL00-001); the effect of the process mode is unknown (see DR-BCHCTL00-003).",
+      "earlier_result": {
+        "method": "verifyTextClaim: claimed values (quoted literals, multi-digit numbers) searched as plain substrings of the cited range text",
+        "result": "unverified",
+        "reasons": [
+          "stated values found in the program but not in the cited lines: 11"
+        ]
+      },
+      "context_result": {
+        "status": "CONTEXT_SUPPORTED",
+        "result_sha256": "c6e5b3fe8884f7cca169a06785650d0275043ad1e42107efd3e308bf57e5ef52",
+        "literal_support": [
+          {
+            "literal": "INIT",
+            "support": "declared_value_of_referenced_condition",
+            "via": [
+              "FUNC-INIT"
+            ]
+          },
+          {
+            "literal": "I",
+            "support": "declared_value_of_referenced_condition",
+            "via": [
+              "MODE-INITIALIZE"
+            ]
+          },
+          {
+            "literal": "CHEK",
+            "support": "declared_value_of_referenced_condition",
+            "via": [
+              "FUNC-CHEK"
+            ]
+          },
+          {
+            "literal": "C",
+            "support": "declared_value_of_referenced_condition",
+            "via": [
+              "MODE-CHECK-PREREQ"
+            ]
+          },
+          {
+            "literal": "UPDT",
+            "support": "declared_value_of_referenced_condition",
+            "via": [
+              "FUNC-UPDT"
+            ]
+          },
+          {
+            "literal": "U",
+            "support": "declared_value_of_referenced_condition",
+            "via": [
+              "MODE-UPDATE-STATUS"
+            ]
+          },
+          {
+            "literal": "TERM",
+            "support": "declared_value_of_referenced_condition",
+            "via": [
+              "FUNC-TERM"
+            ]
+          },
+          {
+            "literal": "F",
+            "support": "declared_value_of_referenced_condition",
+            "via": [
+              "MODE-FINALIZE"
+            ]
+          },
+          {
+            "literal": "Invalid function code",
+            "support": "in_statement",
+            "via": []
+          }
+        ]
+      },
+      "source_files": [
+        {
+          "path": "src/copybook/batch/BCHCON.cpy",
+          "sha256": "374943d4a21510f06a1b52b40497db2e597136688323576e03f8d79c09675e7b",
+          "current": "374943d4a21510f06a1b52b40497db2e597136688323576e03f8d79c09675e7b"
+        },
+        {
+          "path": "src/copybook/batch/BCHCTL.cpy",
+          "sha256": "d075c66c44896fcb2fda7c1b53c5cff5298791810b631d7768ada636a4aa65b4",
+          "current": "d075c66c44896fcb2fda7c1b53c5cff5298791810b631d7768ada636a4aa65b4"
+        },
+        {
+          "path": "src/copybook/common/ERRHAND.cpy",
+          "sha256": "c129b21fe77062f205ca6fb76f227f798549cd13bc231d169fa3a34a9b181442",
+          "current": "c129b21fe77062f205ca6fb76f227f798549cd13bc231d169fa3a34a9b181442"
+        },
+        {
+          "path": "src/programs/batch/BCHCTL00.cbl",
+          "sha256": "876e218a3c1a532dd16ff415cd936b53ac8073b6a457d0a0f05806eb58282880",
+          "current": "876e218a3c1a532dd16ff415cd936b53ac8073b6a457d0a0f05806eb58282880"
+        }
+      ],
+      "permanent_ids": [
+        {
+          "condition": "FUNC-INIT",
+          "condition_id": "SYS-PORTFOLIO-001-FIL-0042-FLD-000012",
+          "parent_field_id": "SYS-PORTFOLIO-001-FIL-0042-FLD-000011"
+        },
+        {
+          "condition": "MODE-INITIALIZE",
+          "condition_id": "SYS-PORTFOLIO-001-FIL-0042-FLD-000007",
+          "parent_field_id": "SYS-PORTFOLIO-001-FIL-0042-FLD-000006"
+        },
+        {
+          "condition": "FUNC-CHEK",
+          "condition_id": "SYS-PORTFOLIO-001-FIL-0042-FLD-000013",
+          "parent_field_id": "SYS-PORTFOLIO-001-FIL-0042-FLD-000011"
+        },
+        {
+          "condition": "MODE-CHECK-PREREQ",
+          "condition_id": "SYS-PORTFOLIO-001-FIL-0042-FLD-000008",
+          "parent_field_id": "SYS-PORTFOLIO-001-FIL-0042-FLD-000006"
+        },
+        {
+          "condition": "FUNC-UPDT",
+          "condition_id": "SYS-PORTFOLIO-001-FIL-0042-FLD-000014",
+          "parent_field_id": "SYS-PORTFOLIO-001-FIL-0042-FLD-000011"
+        },
+        {
+          "condition": "MODE-UPDATE-STATUS",
+          "condition_id": "SYS-PORTFOLIO-001-FIL-0042-FLD-000009",
+          "parent_field_id": "SYS-PORTFOLIO-001-FIL-0042-FLD-000006"
+        },
+        {
+          "condition": "FUNC-TERM",
+          "condition_id": "SYS-PORTFOLIO-001-FIL-0042-FLD-000015",
+          "parent_field_id": "SYS-PORTFOLIO-001-FIL-0042-FLD-000011"
+        },
+        {
+          "condition": "MODE-FINALIZE",
+          "condition_id": "SYS-PORTFOLIO-001-FIL-0042-FLD-000010",
+          "parent_field_id": "SYS-PORTFOLIO-001-FIL-0042-FLD-000006"
+        }
+      ],
+      "remaining_uncertainty": [
+        "business interpretation is not established by any source check"
+      ],
+      "needs_human_acceptance": true,
+      "cohort": "newly_supported",
+      "classification": "SOURCE_CHAIN_VERIFIED",
+      "classification_reasons": [],
+      "superseding_status": null
+    },
+    {
+      "item_id": "REQ-RTNCDE00-002",
+      "item_kind": "requirement",
+      "item_sha256": "88a2aeb73bc02e2ecc83895f0da65046b7238dd597036a28e222c7ecddf217de",
+      "claim": "Keep the highest return code across calls When a new return code is set ('S'), if it is greater than the highest code recorded so far (RC-HIGHEST-CODE) it becomes the new highest code; otherwise the highest code is kept. In both cases the current code becomes the new code. The highest code is held in the caller's request area, so it persists only as long as the caller keeps that area.",
+      "earlier_result": {
+        "method": "verifyTextClaim: claimed values (quoted literals, multi-digit numbers) searched as plain substrings of the cited range text",
+        "result": "verified",
+        "reasons": []
+      },
+      "context_result": {
+        "status": "CONTEXT_UNSUPPORTED",
+        "result_sha256": "57ed8f7046785fd07b900e780b1cd7b83d22735497636b8af27fc07f7d19c7f9",
+        "literal_support": [
+          {
+            "literal": "S",
+            "support": "unrelated_occurrence_only",
+            "via": []
+          }
+        ]
+      },
+      "source_files": [
+        {
+          "path": "src/copybook/common/RTNCODE.cpy",
+          "sha256": "27eabb519319258b07b32f09ab60e80a18f6658a118e96c8fa01411fc473cbc9",
+          "current": "27eabb519319258b07b32f09ab60e80a18f6658a118e96c8fa01411fc473cbc9"
+        },
+        {
+          "path": "src/copybook/db2/SQLCA.cpy",
+          "sha256": "03e8f64ae705fe87324100488072c05d179fb75f64db0dc0cf753f23ab10afc7",
+          "current": "03e8f64ae705fe87324100488072c05d179fb75f64db0dc0cf753f23ab10afc7"
+        },
+        {
+          "path": "src/programs/batch/RTNCDE00.cbl",
+          "sha256": "7cb951ea1f418c19ddd61c0eca00f21108af5f364b5ecf05742cbc428862994e",
+          "current": "7cb951ea1f418c19ddd61c0eca00f21108af5f364b5ecf05742cbc428862994e"
+        }
+      ],
+      "permanent_ids": [],
+      "remaining_uncertainty": [
+        "COPY SQLCA at SQLCA.cpy:6 is circular: symbols it would define stay unresolved",
+        "'S' is declared by RC-SET-CODE (RTNCODE.cpy:7), RC-STATUS-SUCCESS (RTNCODE.cpy:17), but no cited statement references it: not counted as evidence",
+        "business interpretation is not established by any source check"
+      ],
+      "needs_human_acceptance": true,
+      "cohort": "questionable_earlier_verification",
+      "reproduced_earlier_result": {
+        "result": "verified",
+        "literals_in_cited_lines": [
+          "S"
+        ],
+        "literals_elsewhere_in_file": []
+      },
+      "matches": [
+        {
+          "value": "S",
+          "match": "substring_of_name",
+          "context_support": "unrelated_occurrence_only"
+        }
+      ],
+      "alternative_evidence": [
+        {
+          "value": "S",
+          "statements": [
+            {
+              "statement_id": "SYS-PORTFOLIO-001-FIL-0052-STMT-000001",
+              "lines": [
+                33,
+                49
+              ],
+              "statement_type": "EVALUATE",
+              "support": "declared_value_of_referenced_condition",
+              "via": [
+                {
+                  "condition": "RC-SET-CODE",
+                  "usage": "tested",
+                  "declared": "RTNCODE.cpy:7"
+                }
+              ]
+            },
+            {
+              "statement_id": "SYS-PORTFOLIO-001-FIL-0052-STMT-000007",
+              "lines": [
+                58,
+                58
+              ],
+              "statement_type": "SET",
+              "support": "declared_value_of_referenced_condition",
+              "via": [
+                {
+                  "condition": "RC-STATUS-SUCCESS",
+                  "usage": "sets_true",
+                  "declared": "RTNCODE.cpy:17"
+                }
+              ]
+            },
+            {
+              "statement_id": "SYS-PORTFOLIO-001-FIL-0052-STMT-000012",
+              "lines": [
+                70,
+                79
+              ],
+              "statement_type": "EVALUATE",
+              "support": "declared_value_of_referenced_condition",
+              "via": [
+                {
+                  "condition": "RC-STATUS-SUCCESS",
+                  "usage": "sets_true",
+                  "declared": "RTNCODE.cpy:17"
+                }
+              ]
+            },
+            {
+              "statement_id": "SYS-PORTFOLIO-001-FIL-0052-STMT-000033",
+              "lines": [
+                72,
+                72
+              ],
+              "statement_type": "SET",
+              "support": "declared_value_of_referenced_condition",
+              "via": [
+                {
+                  "condition": "RC-STATUS-SUCCESS",
+                  "usage": "sets_true",
+                  "declared": "RTNCODE.cpy:17"
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "diagnosis": [
+        "INCORRECT_VERIFICATION_METHOD",
+        "UNSUPPORTED_SOURCE_CITATION",
+        "CORRECT_CLAIM_ALTERNATIVE_EVIDENCE"
+      ],
+      "classification": "SOURCE_CHAIN_PARTIAL",
+      "superseding_status": "EVIDENCE_INVALIDATED",
+      "superseding_reason": "the earlier verification relied on value(s) 'S' matched only as a substring inside a data name in the cited text, and no cited statement supports them; other statements in the program do support the value (alternative evidence for a citation update by a reviewer)"
+    },
+    {
+      "item_id": "REQ-RTNCDE00-003",
+      "item_kind": "requirement",
+      "item_sha256": "ec665cc58b23e4e018cd684d7e7eb95f38767f28db156d80ca4cea4c30b1a28c",
+      "claim": "Classify a new return code by severity When a new return code is set, the system classifies it: 0 is SUCCESS ('S'), 1 to 4 is WARNING ('W'), 5 to 8 is ERROR ('E') and any other value is SEVERE ('F'). The response code is then set to 0.",
+      "earlier_result": {
+        "method": "verifyTextClaim: claimed values (quoted literals, multi-digit numbers) searched as plain substrings of the cited range text",
+        "result": "unverified",
+        "reasons": [
+          "stated values found in the program but not in the cited lines: F"
+        ]
+      },
+      "context_result": {
+        "status": "CONTEXT_SUPPORTED",
+        "result_sha256": "aa819e994cc4bce3d9c712e18e7546085f6092cdf70d962cab55ca3e59b46948",
+        "literal_support": [
+          {
+            "literal": "S",
+            "support": "declared_value_of_referenced_condition",
+            "via": [
+              "RC-STATUS-SUCCESS"
+            ]
+          },
+          {
+            "literal": "W",
+            "support": "declared_value_of_referenced_condition",
+            "via": [
+              "RC-STATUS-WARNING"
+            ]
+          },
+          {
+            "literal": "E",
+            "support": "declared_value_of_referenced_condition",
+            "via": [
+              "RC-STATUS-ERROR"
+            ]
+          },
+          {
+            "literal": "F",
+            "support": "declared_value_of_referenced_condition",
+            "via": [
+              "RC-STATUS-SEVERE"
+            ]
+          }
+        ]
+      },
+      "source_files": [
+        {
+          "path": "src/copybook/common/RTNCODE.cpy",
+          "sha256": "27eabb519319258b07b32f09ab60e80a18f6658a118e96c8fa01411fc473cbc9",
+          "current": "27eabb519319258b07b32f09ab60e80a18f6658a118e96c8fa01411fc473cbc9"
+        },
+        {
+          "path": "src/copybook/db2/SQLCA.cpy",
+          "sha256": "03e8f64ae705fe87324100488072c05d179fb75f64db0dc0cf753f23ab10afc7",
+          "current": "03e8f64ae705fe87324100488072c05d179fb75f64db0dc0cf753f23ab10afc7"
+        },
+        {
+          "path": "src/programs/batch/RTNCDE00.cbl",
+          "sha256": "7cb951ea1f418c19ddd61c0eca00f21108af5f364b5ecf05742cbc428862994e",
+          "current": "7cb951ea1f418c19ddd61c0eca00f21108af5f364b5ecf05742cbc428862994e"
+        }
+      ],
+      "permanent_ids": [
+        {
+          "condition": "RC-STATUS-SUCCESS",
+          "condition_id": "SYS-PORTFOLIO-001-FIL-0013-FLD-000013",
+          "parent_field_id": "SYS-PORTFOLIO-001-FIL-0013-FLD-000012"
+        },
+        {
+          "condition": "RC-STATUS-WARNING",
+          "condition_id": "SYS-PORTFOLIO-001-FIL-0013-FLD-000014",
+          "parent_field_id": "SYS-PORTFOLIO-001-FIL-0013-FLD-000012"
+        },
+        {
+          "condition": "RC-STATUS-ERROR",
+          "condition_id": "SYS-PORTFOLIO-001-FIL-0013-FLD-000015",
+          "parent_field_id": "SYS-PORTFOLIO-001-FIL-0013-FLD-000012"
+        },
+        {
+          "condition": "RC-STATUS-SEVERE",
+          "condition_id": "SYS-PORTFOLIO-001-FIL-0013-FLD-000016",
+          "parent_field_id": "SYS-PORTFOLIO-001-FIL-0013-FLD-000012"
+        }
+      ],
+      "remaining_uncertainty": [
+        "COPY SQLCA at SQLCA.cpy:6 is circular: symbols it would define stay unresolved",
+        "business interpretation is not established by any source check"
+      ],
+      "needs_human_acceptance": true,
+      "cohort": "newly_supported",
+      "classification": "SOURCE_CHAIN_VERIFIED",
+      "classification_reasons": [],
+      "superseding_status": null
+    },
+    {
+      "item_id": "REQ-DB2CMT-001",
+      "item_kind": "requirement",
+      "item_sha256": "c1a5c5fe7af5c5590b2c039e066ac08f2003b436b56b3afb723622c139572ff4",
+      "claim": "Route DB2 commit control requests by function code The commit controller selects its action from the caller's function code (LS-FUNCTION): 'INIT' clears the commit statistics and sets the return code to 0; 'CMIT' commits when the commit condition is met; 'RBAK' rolls back; 'SAVE' creates the named savepoint; 'REST' rolls back to the named savepoint; 'STAT' displays the commit, rollback and savepoint counters. Any other code sets the error text 'Invalid function code', sets the return code to 12 and calls ERRPROC.",
+      "earlier_result": {
+        "method": "verifyTextClaim: claimed values (quoted literals, multi-digit numbers) searched as plain substrings of the cited range text",
+        "result": "unverified",
+        "reasons": [
+          "stated values found in the program but not in the cited lines: RBAK, 12"
+        ]
+      },
+      "context_result": {
+        "status": "CONTEXT_SUPPORTED",
+        "result_sha256": "19217cfa68605680b5a4c2d6d8b341a9be80e30a08a4bf8957f42cc6fd45e837",
+        "literal_support": [
+          {
+            "literal": "INIT",
+            "support": "declared_value_of_referenced_condition",
+            "via": [
+              "FUNC-INIT"
+            ]
+          },
+          {
+            "literal": "CMIT",
+            "support": "declared_value_of_referenced_condition",
+            "via": [
+              "FUNC-CMIT"
+            ]
+          },
+          {
+            "literal": "RBAK",
+            "support": "declared_value_of_referenced_condition",
+            "via": [
+              "FUNC-RBACK"
+            ]
+          },
+          {
+            "literal": "SAVE",
+            "support": "declared_value_of_referenced_condition",
+            "via": [
+              "FUNC-SAVE"
+            ]
+          },
+          {
+            "literal": "REST",
+            "support": "declared_value_of_referenced_condition",
+            "via": [
+              "FUNC-REST"
+            ]
+          },
+          {
+            "literal": "STAT",
+            "support": "declared_value_of_referenced_condition",
+            "via": [
+              "FUNC-STAT"
+            ]
+          },
+          {
+            "literal": "Invalid function code",
+            "support": "in_statement",
+            "via": []
+          }
+        ]
+      },
+      "source_files": [
+        {
+          "path": "src/copybook/common/ERRHAND.cpy",
+          "sha256": "c129b21fe77062f205ca6fb76f227f798549cd13bc231d169fa3a34a9b181442",
+          "current": "c129b21fe77062f205ca6fb76f227f798549cd13bc231d169fa3a34a9b181442"
+        },
+        {
+          "path": "src/copybook/db2/DBPROC.cpy",
+          "sha256": "74da3b10107f406aff6c1afaf951b120f95c42b23b2050874a45f4f6f40aa7c6",
+          "current": "74da3b10107f406aff6c1afaf951b120f95c42b23b2050874a45f4f6f40aa7c6"
+        },
+        {
+          "path": "src/copybook/db2/SQLCA.cpy",
+          "sha256": "03e8f64ae705fe87324100488072c05d179fb75f64db0dc0cf753f23ab10afc7",
+          "current": "03e8f64ae705fe87324100488072c05d179fb75f64db0dc0cf753f23ab10afc7"
+        },
+        {
+          "path": "src/programs/common/DB2CMT.cbl",
+          "sha256": "d753db038a2a033997d333a5ce09336b37458ba413c39f8ddc5326a6d30e3b52",
+          "current": "d753db038a2a033997d333a5ce09336b37458ba413c39f8ddc5326a6d30e3b52"
+        }
+      ],
+      "permanent_ids": [
+        {
+          "condition": "FUNC-INIT",
+          "condition_id": "SYS-PORTFOLIO-001-FIL-0054-FLD-000005",
+          "parent_field_id": "SYS-PORTFOLIO-001-FIL-0054-FLD-000004"
+        },
+        {
+          "condition": "FUNC-CMIT",
+          "condition_id": "SYS-PORTFOLIO-001-FIL-0054-FLD-000006",
+          "parent_field_id": "SYS-PORTFOLIO-001-FIL-0054-FLD-000004"
+        },
+        {
+          "condition": "FUNC-RBACK",
+          "condition_id": "SYS-PORTFOLIO-001-FIL-0054-FLD-000007",
+          "parent_field_id": "SYS-PORTFOLIO-001-FIL-0054-FLD-000004"
+        },
+        {
+          "condition": "FUNC-SAVE",
+          "condition_id": "SYS-PORTFOLIO-001-FIL-0054-FLD-000008",
+          "parent_field_id": "SYS-PORTFOLIO-001-FIL-0054-FLD-000004"
+        },
+        {
+          "condition": "FUNC-REST",
+          "condition_id": "SYS-PORTFOLIO-001-FIL-0054-FLD-000009",
+          "parent_field_id": "SYS-PORTFOLIO-001-FIL-0054-FLD-000004"
+        },
+        {
+          "condition": "FUNC-STAT",
+          "condition_id": "SYS-PORTFOLIO-001-FIL-0054-FLD-000010",
+          "parent_field_id": "SYS-PORTFOLIO-001-FIL-0054-FLD-000004"
+        }
+      ],
+      "remaining_uncertainty": [
+        "COPY SQLCA at SQLCA.cpy:6 is circular: symbols it would define stay unresolved",
+        "business interpretation is not established by any source check"
+      ],
+      "needs_human_acceptance": true,
+      "cohort": "newly_supported",
+      "classification": "SOURCE_CHAIN_VERIFIED",
+      "classification_reasons": [],
+      "superseding_status": null
+    },
+    {
+      "item_id": "REQ-DB2CONN-001",
+      "item_kind": "requirement",
+      "item_sha256": "29b1d6964f77985d7fb737cdd776cc4a0e77e88927dd1600debef96b00d23b1f",
+      "claim": "Route DB2 connection requests by function code The batch DB2 connection manager selects its action from the caller's function code (LS-FUNCTION): 'CONN' connects (with retries), 'DISC' disconnects and 'STAT' checks the connection. Any other code sets the error text 'Invalid function code', sets the return code to 12 and calls ERRPROC.",
+      "earlier_result": {
+        "method": "verifyTextClaim: claimed values (quoted literals, multi-digit numbers) searched as plain substrings of the cited range text",
+        "result": "unverified",
+        "reasons": [
+          "stated values found in the program but not in the cited lines: 12"
+        ]
+      },
+      "context_result": {
+        "status": "CONTEXT_SUPPORTED",
+        "result_sha256": "bd75d604002261000356e459faff035c5221ea4f9187f6d1b58bae048e43c325",
+        "literal_support": [
+          {
+            "literal": "CONN",
+            "support": "declared_value_of_referenced_condition",
+            "via": [
+              "FUNC-CONN"
+            ]
+          },
+          {
+            "literal": "DISC",
+            "support": "declared_value_of_referenced_condition",
+            "via": [
+              "FUNC-DISC"
+            ]
+          },
+          {
+            "literal": "STAT",
+            "support": "declared_value_of_referenced_condition",
+            "via": [
+              "FUNC-STAT"
+            ]
+          },
+          {
+            "literal": "Invalid function code",
+            "support": "in_statement",
+            "via": []
+          }
+        ]
+      },
+      "source_files": [
+        {
+          "path": "src/copybook/common/ERRHAND.cpy",
+          "sha256": "c129b21fe77062f205ca6fb76f227f798549cd13bc231d169fa3a34a9b181442",
+          "current": "c129b21fe77062f205ca6fb76f227f798549cd13bc231d169fa3a34a9b181442"
+        },
+        {
+          "path": "src/copybook/db2/DBPROC.cpy",
+          "sha256": "74da3b10107f406aff6c1afaf951b120f95c42b23b2050874a45f4f6f40aa7c6",
+          "current": "74da3b10107f406aff6c1afaf951b120f95c42b23b2050874a45f4f6f40aa7c6"
+        },
+        {
+          "path": "src/copybook/db2/SQLCA.cpy",
+          "sha256": "03e8f64ae705fe87324100488072c05d179fb75f64db0dc0cf753f23ab10afc7",
+          "current": "03e8f64ae705fe87324100488072c05d179fb75f64db0dc0cf753f23ab10afc7"
+        },
+        {
+          "path": "src/programs/common/DB2CONN.cbl",
+          "sha256": "488a9dcd9fa71ab4a4476694f2e117fc103a7e0a85f2cde249953fd590bd371c",
+          "current": "488a9dcd9fa71ab4a4476694f2e117fc103a7e0a85f2cde249953fd590bd371c"
+        }
+      ],
+      "permanent_ids": [
+        {
+          "condition": "FUNC-CONN",
+          "condition_id": "SYS-PORTFOLIO-001-FIL-0055-FLD-000004",
+          "parent_field_id": "SYS-PORTFOLIO-001-FIL-0055-FLD-000003"
+        },
+        {
+          "condition": "FUNC-DISC",
+          "condition_id": "SYS-PORTFOLIO-001-FIL-0055-FLD-000005",
+          "parent_field_id": "SYS-PORTFOLIO-001-FIL-0055-FLD-000003"
+        },
+        {
+          "condition": "FUNC-STAT",
+          "condition_id": "SYS-PORTFOLIO-001-FIL-0055-FLD-000006",
+          "parent_field_id": "SYS-PORTFOLIO-001-FIL-0055-FLD-000003"
+        }
+      ],
+      "remaining_uncertainty": [
+        "COPY SQLCA at SQLCA.cpy:6 is circular: symbols it would define stay unresolved",
+        "business interpretation is not established by any source check"
+      ],
+      "needs_human_acceptance": true,
+      "cohort": "newly_supported",
+      "classification": "SOURCE_CHAIN_VERIFIED",
+      "classification_reasons": [],
+      "superseding_status": null
+    },
+    {
+      "item_id": "REQ-DB2CONN-003",
+      "item_kind": "requirement",
+      "item_sha256": "7d89135d9eebd21bfd5a59c7da0c63a5cc43d5f13fbc9dcaf0564516d7fd62dd",
+      "claim": "Disconnect only when a connection is active On a 'DISC' request, when the saved connection state shows connected ('Y'), the system commits outstanding work (COMMIT WORK) and resets the DB2 connection (CONNECT RESET); on success it marks itself disconnected and sets the return code to 0, and on failure it returns the SQLCODE and 'Error disconnecting from DB2' with return code 8. When not connected nothing is done and the return code is not set. The connection state persists between calls.",
+      "earlier_result": {
+        "method": "verifyTextClaim: claimed values (quoted literals, multi-digit numbers) searched as plain substrings of the cited range text",
+        "result": "unverified",
+        "reasons": [
+          "stated values found in the program but not in the cited lines: Y"
+        ]
+      },
+      "context_result": {
+        "status": "CONTEXT_SUPPORTED",
+        "result_sha256": "a8da23a85f9524bd18191ed6f0a3cf08bf1ab931b2b274113942e09a0f2ac092",
+        "literal_support": [
+          {
+            "literal": "DISC",
+            "support": "in_statement",
+            "via": []
+          },
+          {
+            "literal": "Y",
+            "support": "declared_value_of_referenced_condition",
+            "via": [
+              "WS-CONNECTED"
+            ]
+          },
+          {
+            "literal": "Error disconnecting from DB2",
+            "support": "in_statement",
+            "via": []
+          }
+        ]
+      },
+      "source_files": [
+        {
+          "path": "src/copybook/common/ERRHAND.cpy",
+          "sha256": "c129b21fe77062f205ca6fb76f227f798549cd13bc231d169fa3a34a9b181442",
+          "current": "c129b21fe77062f205ca6fb76f227f798549cd13bc231d169fa3a34a9b181442"
+        },
+        {
+          "path": "src/copybook/db2/DBPROC.cpy",
+          "sha256": "74da3b10107f406aff6c1afaf951b120f95c42b23b2050874a45f4f6f40aa7c6",
+          "current": "74da3b10107f406aff6c1afaf951b120f95c42b23b2050874a45f4f6f40aa7c6"
+        },
+        {
+          "path": "src/copybook/db2/SQLCA.cpy",
+          "sha256": "03e8f64ae705fe87324100488072c05d179fb75f64db0dc0cf753f23ab10afc7",
+          "current": "03e8f64ae705fe87324100488072c05d179fb75f64db0dc0cf753f23ab10afc7"
+        },
+        {
+          "path": "src/programs/common/DB2CONN.cbl",
+          "sha256": "488a9dcd9fa71ab4a4476694f2e117fc103a7e0a85f2cde249953fd590bd371c",
+          "current": "488a9dcd9fa71ab4a4476694f2e117fc103a7e0a85f2cde249953fd590bd371c"
+        }
+      ],
+      "permanent_ids": [
+        {
+          "condition": "WS-CONNECTED",
+          "condition_id": "SYS-PORTFOLIO-001-FIL-0055-FLD-000001",
+          "parent_field_id": null
+        },
+        {
+          "condition": "WS-DISCONNECTED",
+          "condition_id": "SYS-PORTFOLIO-001-FIL-0055-FLD-000002",
+          "parent_field_id": null
+        }
+      ],
+      "remaining_uncertainty": [
+        "COPY SQLCA at SQLCA.cpy:6 is circular: symbols it would define stay unresolved",
+        "business interpretation is not established by any source check"
+      ],
+      "needs_human_acceptance": true,
+      "cohort": "newly_supported",
+      "classification": "SOURCE_CHAIN_VERIFIED",
+      "classification_reasons": [],
+      "superseding_status": null
+    },
+    {
+      "item_id": "REQ-DB2ERR-001",
+      "item_kind": "requirement",
+      "item_sha256": "b76fd4c9eae32ebe0329e4a9b865f2de5674d1f066e28e7311f932c29b2ea359",
+      "claim": "Route DB2 error service requests by function code The DB2 error service selects its action from the caller's function code: 'LOG ' records the error in the ERRLOG table with a severity, 'DIAG' diagnoses the error and 'RETR' retrieves the latest logged error for the calling program. Any other function code sets the text 'Invalid function code', sets return code 12 and calls the common error processor ERRPROC.",
+      "earlier_result": {
+        "method": "verifyTextClaim: claimed values (quoted literals, multi-digit numbers) searched as plain substrings of the cited range text",
+        "result": "unverified",
+        "reasons": [
+          "stated values found in the program but not in the cited lines: LOG "
+        ]
+      },
+      "context_result": {
+        "status": "CONTEXT_SUPPORTED",
+        "result_sha256": "aa8da4f0bdd0f24fac0307e58a110a62be988fbfdc35b70334595e221cdcbfcf",
+        "literal_support": [
+          {
+            "literal": "LOG ",
+            "support": "declared_value_of_referenced_condition",
+            "via": [
+              "FUNC-LOG"
+            ]
+          },
+          {
+            "literal": "DIAG",
+            "support": "declared_value_of_referenced_condition",
+            "via": [
+              "FUNC-DIAG"
+            ]
+          },
+          {
+            "literal": "RETR",
+            "support": "declared_value_of_referenced_condition",
+            "via": [
+              "FUNC-RETR"
+            ]
+          },
+          {
+            "literal": "Invalid function code",
+            "support": "in_statement",
+            "via": []
+          }
+        ]
+      },
+      "source_files": [
+        {
+          "path": "src/copybook/common/ERRHAND.cpy",
+          "sha256": "c129b21fe77062f205ca6fb76f227f798549cd13bc231d169fa3a34a9b181442",
+          "current": "c129b21fe77062f205ca6fb76f227f798549cd13bc231d169fa3a34a9b181442"
+        },
+        {
+          "path": "src/copybook/db2/DBPROC.cpy",
+          "sha256": "74da3b10107f406aff6c1afaf951b120f95c42b23b2050874a45f4f6f40aa7c6",
+          "current": "74da3b10107f406aff6c1afaf951b120f95c42b23b2050874a45f4f6f40aa7c6"
+        },
+        {
+          "path": "src/copybook/db2/DBTBLS.cpy",
+          "sha256": "ef8bad44dfbc0aa9af4209e2e1019b3dd10b10efc8dbeca8c55e5bedbfb14189",
+          "current": "ef8bad44dfbc0aa9af4209e2e1019b3dd10b10efc8dbeca8c55e5bedbfb14189"
+        },
+        {
+          "path": "src/copybook/db2/SQLCA.cpy",
+          "sha256": "03e8f64ae705fe87324100488072c05d179fb75f64db0dc0cf753f23ab10afc7",
+          "current": "03e8f64ae705fe87324100488072c05d179fb75f64db0dc0cf753f23ab10afc7"
+        },
+        {
+          "path": "src/programs/common/DB2ERR.cbl",
+          "sha256": "cb599435c5aee112ac61004b36a3d3a459effdb9d796d312e2688b605fd80a63",
+          "current": "cb599435c5aee112ac61004b36a3d3a459effdb9d796d312e2688b605fd80a63"
+        }
+      ],
+      "permanent_ids": [
+        {
+          "condition": "FUNC-LOG",
+          "condition_id": "SYS-PORTFOLIO-001-FIL-0056-FLD-000007",
+          "parent_field_id": "SYS-PORTFOLIO-001-FIL-0056-FLD-000006"
+        },
+        {
+          "condition": "FUNC-DIAG",
+          "condition_id": "SYS-PORTFOLIO-001-FIL-0056-FLD-000008",
+          "parent_field_id": "SYS-PORTFOLIO-001-FIL-0056-FLD-000006"
+        },
+        {
+          "condition": "FUNC-RETR",
+          "condition_id": "SYS-PORTFOLIO-001-FIL-0056-FLD-000009",
+          "parent_field_id": "SYS-PORTFOLIO-001-FIL-0056-FLD-000006"
+        }
+      ],
+      "remaining_uncertainty": [
+        "COPY SQLCA at SQLCA.cpy:6 is circular: symbols it would define stay unresolved",
+        "business interpretation is not established by any source check"
+      ],
+      "needs_human_acceptance": true,
+      "cohort": "newly_supported",
+      "classification": "SOURCE_CHAIN_VERIFIED",
+      "classification_reasons": [],
+      "superseding_status": null
+    },
+    {
+      "item_id": "REQ-DB2ERR-002",
+      "item_kind": "requirement",
+      "item_sha256": "dac710c6322a52a17a5b778b114694b0167c21b41b696b7beaec722e493418f5",
+      "claim": "Classify logged DB2 error severity and retry recommendation for listed SQL codes When logging a caller's DB2 error, the service classifies the caller-supplied SQL code: deadlock (-911) and timeout (-913) get severity 2 and retry flag 'Y' (retry recommended); connection error (-30081) gets severity 4 and retry flag 'N'; duplicate key (-803) and not found (+100) get severity 1 and retry flag 'N'. Any other code uses the sign-based default (REQ-DB2ERR-003).",
+      "earlier_result": {
+        "method": "verifyTextClaim: claimed values (quoted literals, multi-digit numbers) searched as plain substrings of the cited range text",
+        "result": "unverified",
+        "reasons": [
+          "stated values found in the program but not in the cited lines: 100"
+        ]
+      },
+      "context_result": {
+        "status": "CONTEXT_SUPPORTED",
+        "result_sha256": "10029d22a1c9704d91b4b8d12c7d8c7a076f8b9705b6ede82a85dc4ea81ba22e",
+        "literal_support": [
+          {
+            "literal": "Y",
+            "support": "declared_value_of_referenced_condition",
+            "via": [
+              "LS-SHOULD-RETRY"
+            ]
+          },
+          {
+            "literal": "N",
+            "support": "declared_value_of_referenced_condition",
+            "via": [
+              "LS-NO-RETRY",
+              "LS-NO-RETRY",
+              "LS-NO-RETRY",
+              "LS-NO-RETRY",
+              "LS-NO-RETRY"
+            ]
+          }
+        ]
+      },
+      "source_files": [
+        {
+          "path": "src/copybook/common/ERRHAND.cpy",
+          "sha256": "c129b21fe77062f205ca6fb76f227f798549cd13bc231d169fa3a34a9b181442",
+          "current": "c129b21fe77062f205ca6fb76f227f798549cd13bc231d169fa3a34a9b181442"
+        },
+        {
+          "path": "src/copybook/db2/DBPROC.cpy",
+          "sha256": "74da3b10107f406aff6c1afaf951b120f95c42b23b2050874a45f4f6f40aa7c6",
+          "current": "74da3b10107f406aff6c1afaf951b120f95c42b23b2050874a45f4f6f40aa7c6"
+        },
+        {
+          "path": "src/copybook/db2/DBTBLS.cpy",
+          "sha256": "ef8bad44dfbc0aa9af4209e2e1019b3dd10b10efc8dbeca8c55e5bedbfb14189",
+          "current": "ef8bad44dfbc0aa9af4209e2e1019b3dd10b10efc8dbeca8c55e5bedbfb14189"
+        },
+        {
+          "path": "src/copybook/db2/SQLCA.cpy",
+          "sha256": "03e8f64ae705fe87324100488072c05d179fb75f64db0dc0cf753f23ab10afc7",
+          "current": "03e8f64ae705fe87324100488072c05d179fb75f64db0dc0cf753f23ab10afc7"
+        },
+        {
+          "path": "src/programs/common/DB2ERR.cbl",
+          "sha256": "cb599435c5aee112ac61004b36a3d3a459effdb9d796d312e2688b605fd80a63",
+          "current": "cb599435c5aee112ac61004b36a3d3a459effdb9d796d312e2688b605fd80a63"
+        }
+      ],
+      "permanent_ids": [
+        {
+          "condition": "LS-SHOULD-RETRY",
+          "condition_id": "SYS-PORTFOLIO-001-FIL-0056-FLD-000018",
+          "parent_field_id": "SYS-PORTFOLIO-001-FIL-0056-FLD-000017"
+        },
+        {
+          "condition": "LS-NO-RETRY",
+          "condition_id": "SYS-PORTFOLIO-001-FIL-0056-FLD-000019",
+          "parent_field_id": "SYS-PORTFOLIO-001-FIL-0056-FLD-000017"
+        },
+        {
+          "condition": "LS-NO-RETRY",
+          "condition_id": "SYS-PORTFOLIO-001-FIL-0056-FLD-000019",
+          "parent_field_id": "SYS-PORTFOLIO-001-FIL-0056-FLD-000017"
+        },
+        {
+          "condition": "LS-NO-RETRY",
+          "condition_id": "SYS-PORTFOLIO-001-FIL-0056-FLD-000019",
+          "parent_field_id": "SYS-PORTFOLIO-001-FIL-0056-FLD-000017"
+        },
+        {
+          "condition": "LS-NO-RETRY",
+          "condition_id": "SYS-PORTFOLIO-001-FIL-0056-FLD-000019",
+          "parent_field_id": "SYS-PORTFOLIO-001-FIL-0056-FLD-000017"
+        },
+        {
+          "condition": "LS-NO-RETRY",
+          "condition_id": "SYS-PORTFOLIO-001-FIL-0056-FLD-000019",
+          "parent_field_id": "SYS-PORTFOLIO-001-FIL-0056-FLD-000017"
+        }
+      ],
+      "remaining_uncertainty": [
+        "COPY SQLCA at SQLCA.cpy:6 is circular: symbols it would define stay unresolved",
+        "business interpretation is not established by any source check"
+      ],
+      "needs_human_acceptance": true,
+      "cohort": "newly_supported",
+      "classification": "SOURCE_CHAIN_VERIFIED",
+      "classification_reasons": [],
+      "superseding_status": null
+    },
+    {
+      "item_id": "REQ-DB2ERR-003",
+      "item_kind": "requirement",
+      "item_sha256": "f600ab6c116d04740f9a962c70529b9ae77f0c3be7f18a0bbd5caa2ea4787530",
+      "claim": "Default logged DB2 error severity by SQL code sign When the caller's SQL code is none of -911, -913, -30081, -803 or +100, a negative code gets severity 3 and any other code gets severity 1; in both cases retry flag 'N' (no retry recommended).",
+      "earlier_result": {
+        "method": "verifyTextClaim: claimed values (quoted literals, multi-digit numbers) searched as plain substrings of the cited range text",
+        "result": "unverified",
+        "reasons": [
+          "stated values found in the program but not in the cited lines: 100"
+        ]
+      },
+      "context_result": {
+        "status": "CONTEXT_SUPPORTED",
+        "result_sha256": "cf3407f0f1fa7bd5e88371458cf226f7a63c2fc788c350a70d8a6a4afd7853ef",
+        "literal_support": [
+          {
+            "literal": "N",
+            "support": "declared_value_of_referenced_condition",
+            "via": [
+              "LS-NO-RETRY",
+              "LS-NO-RETRY"
+            ]
+          }
+        ]
+      },
+      "source_files": [
+        {
+          "path": "src/copybook/common/ERRHAND.cpy",
+          "sha256": "c129b21fe77062f205ca6fb76f227f798549cd13bc231d169fa3a34a9b181442",
+          "current": "c129b21fe77062f205ca6fb76f227f798549cd13bc231d169fa3a34a9b181442"
+        },
+        {
+          "path": "src/copybook/db2/DBPROC.cpy",
+          "sha256": "74da3b10107f406aff6c1afaf951b120f95c42b23b2050874a45f4f6f40aa7c6",
+          "current": "74da3b10107f406aff6c1afaf951b120f95c42b23b2050874a45f4f6f40aa7c6"
+        },
+        {
+          "path": "src/copybook/db2/DBTBLS.cpy",
+          "sha256": "ef8bad44dfbc0aa9af4209e2e1019b3dd10b10efc8dbeca8c55e5bedbfb14189",
+          "current": "ef8bad44dfbc0aa9af4209e2e1019b3dd10b10efc8dbeca8c55e5bedbfb14189"
+        },
+        {
+          "path": "src/copybook/db2/SQLCA.cpy",
+          "sha256": "03e8f64ae705fe87324100488072c05d179fb75f64db0dc0cf753f23ab10afc7",
+          "current": "03e8f64ae705fe87324100488072c05d179fb75f64db0dc0cf753f23ab10afc7"
+        },
+        {
+          "path": "src/programs/common/DB2ERR.cbl",
+          "sha256": "cb599435c5aee112ac61004b36a3d3a459effdb9d796d312e2688b605fd80a63",
+          "current": "cb599435c5aee112ac61004b36a3d3a459effdb9d796d312e2688b605fd80a63"
+        }
+      ],
+      "permanent_ids": [
+        {
+          "condition": "LS-NO-RETRY",
+          "condition_id": "SYS-PORTFOLIO-001-FIL-0056-FLD-000019",
+          "parent_field_id": "SYS-PORTFOLIO-001-FIL-0056-FLD-000017"
+        },
+        {
+          "condition": "LS-NO-RETRY",
+          "condition_id": "SYS-PORTFOLIO-001-FIL-0056-FLD-000019",
+          "parent_field_id": "SYS-PORTFOLIO-001-FIL-0056-FLD-000017"
+        }
+      ],
+      "remaining_uncertainty": [
+        "COPY SQLCA at SQLCA.cpy:6 is circular: symbols it would define stay unresolved",
+        "business interpretation is not established by any source check"
+      ],
+      "needs_human_acceptance": true,
+      "cohort": "newly_supported",
+      "classification": "SOURCE_CHAIN_VERIFIED",
+      "classification_reasons": [],
+      "superseding_status": null
+    },
+    {
+      "item_id": "REQ-DB2STAT-001",
+      "item_kind": "requirement",
+      "item_sha256": "9c08898336b6be27954c0145e615c38f742e76c1b0b336bafdea94242f578f97",
+      "claim": "Route DB2 statistics requests by function code The DB2 statistics collector selects its action from the caller's function code: 'INIT' records the start time and creates a zeroed statistics row, 'UPDT' updates the statistics, 'TERM' records the end time, computes elapsed and CPU time and displays them, and 'DISP' displays the statistics. Any other code is rejected with return code 12 and a call to ERRPROC. The TERM time calculation itself is deferred (BR-056, DR-DB2STAT-001).",
+      "earlier_result": {
+        "method": "verifyTextClaim: claimed values (quoted literals, multi-digit numbers) searched as plain substrings of the cited range text",
+        "result": null,
+        "reasons": []
+      },
+      "context_result": {
+        "status": "CONTEXT_SUPPORTED",
+        "result_sha256": "b992ff451d107188a2e27e7af51c19ff0cad0e0bca334acda37d021ad39dda00",
+        "literal_support": [
+          {
+            "literal": "INIT",
+            "support": "declared_value_of_referenced_condition",
+            "via": [
+              "FUNC-INIT"
+            ]
+          },
+          {
+            "literal": "UPDT",
+            "support": "declared_value_of_referenced_condition",
+            "via": [
+              "FUNC-UPDT"
+            ]
+          },
+          {
+            "literal": "TERM",
+            "support": "declared_value_of_referenced_condition",
+            "via": [
+              "FUNC-TERM"
+            ]
+          },
+          {
+            "literal": "DISP",
+            "support": "declared_value_of_referenced_condition",
+            "via": [
+              "FUNC-DISP"
+            ]
+          }
+        ]
+      },
+      "source_files": [
+        {
+          "path": "src/copybook/common/ERRHAND.cpy",
+          "sha256": "c129b21fe77062f205ca6fb76f227f798549cd13bc231d169fa3a34a9b181442",
+          "current": "c129b21fe77062f205ca6fb76f227f798549cd13bc231d169fa3a34a9b181442"
+        },
+        {
+          "path": "src/copybook/db2/DBPROC.cpy",
+          "sha256": "74da3b10107f406aff6c1afaf951b120f95c42b23b2050874a45f4f6f40aa7c6",
+          "current": "74da3b10107f406aff6c1afaf951b120f95c42b23b2050874a45f4f6f40aa7c6"
+        },
+        {
+          "path": "src/copybook/db2/SQLCA.cpy",
+          "sha256": "03e8f64ae705fe87324100488072c05d179fb75f64db0dc0cf753f23ab10afc7",
+          "current": "03e8f64ae705fe87324100488072c05d179fb75f64db0dc0cf753f23ab10afc7"
+        },
+        {
+          "path": "src/programs/common/DB2STAT.cbl",
+          "sha256": "082eb02647d2ccaeb6c085425e03f647bfd54a15018b05a0c25de4bb42efd00f",
+          "current": "082eb02647d2ccaeb6c085425e03f647bfd54a15018b05a0c25de4bb42efd00f"
+        }
+      ],
+      "permanent_ids": [
+        {
+          "condition": "FUNC-INIT",
+          "condition_id": "SYS-PORTFOLIO-001-FIL-0057-FLD-000013",
+          "parent_field_id": "SYS-PORTFOLIO-001-FIL-0057-FLD-000012"
+        },
+        {
+          "condition": "FUNC-UPDT",
+          "condition_id": "SYS-PORTFOLIO-001-FIL-0057-FLD-000014",
+          "parent_field_id": "SYS-PORTFOLIO-001-FIL-0057-FLD-000012"
+        },
+        {
+          "condition": "FUNC-TERM",
+          "condition_id": "SYS-PORTFOLIO-001-FIL-0057-FLD-000015",
+          "parent_field_id": "SYS-PORTFOLIO-001-FIL-0057-FLD-000012"
+        },
+        {
+          "condition": "FUNC-DISP",
+          "condition_id": "SYS-PORTFOLIO-001-FIL-0057-FLD-000016",
+          "parent_field_id": "SYS-PORTFOLIO-001-FIL-0057-FLD-000012"
+        }
+      ],
+      "remaining_uncertainty": [
+        "COPY SQLCA at SQLCA.cpy:6 is circular: symbols it would define stay unresolved",
+        "business interpretation is not established by any source check"
+      ],
+      "needs_human_acceptance": true,
+      "cohort": "newly_supported",
+      "classification": "SOURCE_CHAIN_VERIFIED",
+      "classification_reasons": [],
+      "superseding_status": null
+    },
+    {
+      "item_id": "REQ-CURSMGR-001",
+      "item_kind": "requirement",
+      "item_sha256": "e4d0a918a36352946c61357059294056a3547dba357885b4565370ec879526ac",
+      "claim": "Route cursor requests by request type The cursor manager selects its action from the request type: 'D' declares the cursor named by the caller and 'O' resets the fetch counters and opens it, returning the SQLCODE outcome in the response code (0 on success). The 'F' (fetch) and 'C' (close) requests perform paragraphs P300-FETCH-DATA and P400-CLOSE-CURSOR that are not present in the truncated source, so their behaviour is not specified here and is subject to DR-CURSMGR-001. Any other request type performs no action and leaves the response code unset.",
+      "earlier_result": {
+        "method": "verifyTextClaim: claimed values (quoted literals, multi-digit numbers) searched as plain substrings of the cited range text",
+        "result": null,
+        "reasons": []
+      },
+      "context_result": {
+        "status": "CONTEXT_SUPPORTED",
+        "result_sha256": "ef2a7e96e678c238b77232f09aeee1173db5fe826000c5274d986011733e4fa1",
+        "literal_support": [
+          {
+            "literal": "D",
+            "support": "declared_value_of_referenced_condition",
+            "via": [
+              "CURS-DECLARE"
+            ]
+          },
+          {
+            "literal": "O",
+            "support": "declared_value_of_referenced_condition",
+            "via": [
+              "CURS-OPEN"
+            ]
+          },
+          {
+            "literal": "F",
+            "support": "declared_value_of_referenced_condition",
+            "via": [
+              "CURS-FETCH"
+            ]
+          },
+          {
+            "literal": "C",
+            "support": "declared_value_of_referenced_condition",
+            "via": [
+              "CURS-CLOSE"
+            ]
+          }
+        ]
+      },
+      "source_files": [
+        {
+          "path": "src/copybook/db2/SQLCA.cpy",
+          "sha256": "03e8f64ae705fe87324100488072c05d179fb75f64db0dc0cf753f23ab10afc7",
+          "current": "03e8f64ae705fe87324100488072c05d179fb75f64db0dc0cf753f23ab10afc7"
+        },
+        {
+          "path": "src/programs/online/CURSMGR.cbl",
+          "sha256": "5e367102d18d1775c3504afff9b4d3e28cfc655ae2daad836376f63f05b125db",
+          "current": "5e367102d18d1775c3504afff9b4d3e28cfc655ae2daad836376f63f05b125db"
+        }
+      ],
+      "permanent_ids": [
+        {
+          "condition": "CURS-DECLARE",
+          "condition_id": "SYS-PORTFOLIO-001-FIL-0059-FLD-000007",
+          "parent_field_id": "SYS-PORTFOLIO-001-FIL-0059-FLD-000006"
+        },
+        {
+          "condition": "CURS-OPEN",
+          "condition_id": "SYS-PORTFOLIO-001-FIL-0059-FLD-000008",
+          "parent_field_id": "SYS-PORTFOLIO-001-FIL-0059-FLD-000006"
+        },
+        {
+          "condition": "CURS-FETCH",
+          "condition_id": "SYS-PORTFOLIO-001-FIL-0059-FLD-000009",
+          "parent_field_id": "SYS-PORTFOLIO-001-FIL-0059-FLD-000006"
+        },
+        {
+          "condition": "CURS-CLOSE",
+          "condition_id": "SYS-PORTFOLIO-001-FIL-0059-FLD-000010",
+          "parent_field_id": "SYS-PORTFOLIO-001-FIL-0059-FLD-000006"
+        }
+      ],
+      "remaining_uncertainty": [
+        "COPY SQLCA at SQLCA.cpy:6 is circular: symbols it would define stay unresolved",
+        "business interpretation is not established by any source check"
+      ],
+      "needs_human_acceptance": true,
+      "cohort": "newly_supported",
+      "classification": "SOURCE_CHAIN_VERIFIED",
+      "classification_reasons": [],
+      "superseding_status": null
+    },
+    {
+      "item_id": "REQ-CURSMGR-002",
+      "item_kind": "requirement",
+      "item_sha256": "0c460f7713b35c8913cfdf4f6a6bf815806ffea75d67f8e31c69140e6ace0e5d",
+      "claim": "Select cursor fetch array size from the array-fetch indicator When declaring a cursor, if the caller requests array fetch (CURS-ARRAY-FETCH = 'Y') the fetch array size is set to the maximum rows (WS-MAX-ROWS); otherwise the fetch array size is 1.",
+      "earlier_result": {
+        "method": "verifyTextClaim: claimed values (quoted literals, multi-digit numbers) searched as plain substrings of the cited range text",
+        "result": null,
+        "reasons": []
+      },
+      "context_result": {
+        "status": "CONTEXT_SUPPORTED",
+        "result_sha256": "5a20611567528ca8253d225ab2266c44beecac805aead1bed98bccb1235b99f8",
+        "literal_support": [
+          {
+            "literal": "Y",
+            "support": "declared_value_of_referenced_condition",
+            "via": [
+              "USE-ARRAY-FETCH"
+            ]
+          }
+        ]
+      },
+      "source_files": [
+        {
+          "path": "src/copybook/db2/SQLCA.cpy",
+          "sha256": "03e8f64ae705fe87324100488072c05d179fb75f64db0dc0cf753f23ab10afc7",
+          "current": "03e8f64ae705fe87324100488072c05d179fb75f64db0dc0cf753f23ab10afc7"
+        },
+        {
+          "path": "src/programs/online/CURSMGR.cbl",
+          "sha256": "5e367102d18d1775c3504afff9b4d3e28cfc655ae2daad836376f63f05b125db",
+          "current": "5e367102d18d1775c3504afff9b4d3e28cfc655ae2daad836376f63f05b125db"
+        }
+      ],
+      "permanent_ids": [
+        {
+          "condition": "USE-ARRAY-FETCH",
+          "condition_id": "SYS-PORTFOLIO-001-FIL-0059-FLD-000014",
+          "parent_field_id": "SYS-PORTFOLIO-001-FIL-0059-FLD-000013"
+        }
+      ],
+      "remaining_uncertainty": [
+        "COPY SQLCA at SQLCA.cpy:6 is circular: symbols it would define stay unresolved",
+        "business interpretation is not established by any source check"
+      ],
+      "needs_human_acceptance": true,
+      "cohort": "newly_supported",
+      "classification": "SOURCE_CHAIN_VERIFIED",
+      "classification_reasons": [],
+      "superseding_status": null
+    },
+    {
+      "item_id": "REQ-DB2RECV-001",
+      "item_kind": "requirement",
+      "item_sha256": "6023c630520ef49f651b7a2ee35072ddc9f4fb1aa00dc75ac4746917b305a014",
+      "claim": "Route DB2 recovery requests by recovery request type The online DB2 recovery program selects its action from the request type: 'C' recovers a lost connection by retrying through DB2ONLN (REQ-DB2RECV-002 to -005), 'T' recovers a transaction by rolling back the current DB2 unit of work and reporting the result and SQLCODE, and the cursor request (condition name RECV-CURSOR, ambiguous) recovers a cursor failure through the error handler ERRHNDL (REQ-DB2RECV-006). Any other request type returns with the recovery status unchanged.",
+      "earlier_result": {
+        "method": "verifyTextClaim: claimed values (quoted literals, multi-digit numbers) searched as plain substrings of the cited range text",
+        "result": null,
+        "reasons": []
+      },
+      "context_result": {
+        "status": "CONTEXT_SUPPORTED",
+        "result_sha256": "0240a3656751e11152b5b264f4685efcffde0ffbcfe5aa9cc2257daa44aba813",
+        "literal_support": [
+          {
+            "literal": "C",
+            "support": "declared_value_of_referenced_condition",
+            "via": [
+              "RECV-CONNECTION"
+            ]
+          },
+          {
+            "literal": "T",
+            "support": "declared_value_of_referenced_condition",
+            "via": [
+              "RECV-TRANSACTION"
+            ]
+          }
+        ]
+      },
+      "source_files": [
+        {
+          "path": "src/copybook/db2/SQLCA.cpy",
+          "sha256": "03e8f64ae705fe87324100488072c05d179fb75f64db0dc0cf753f23ab10afc7",
+          "current": "03e8f64ae705fe87324100488072c05d179fb75f64db0dc0cf753f23ab10afc7"
+        },
+        {
+          "path": "src/copybook/online/DB2REQ.cpy",
+          "sha256": "72a9d7b9eb91cdb093abe0aee5708e4808584b2aca07e31fcf0ff5a8a043f1aa",
+          "current": "72a9d7b9eb91cdb093abe0aee5708e4808584b2aca07e31fcf0ff5a8a043f1aa"
+        },
+        {
+          "path": "src/copybook/online/ERRHND.cpy",
+          "sha256": "57a539ec14c486ee0663a205b76453d40fd6f01fcbb472b7aa45027edf453835",
+          "current": "57a539ec14c486ee0663a205b76453d40fd6f01fcbb472b7aa45027edf453835"
+        },
+        {
+          "path": "src/programs/online/DB2RECV.cbl",
+          "sha256": "ca0e1dc9a3e8a59c093677e1e650913ffb0807f8133df723bba5547c4fa21c52",
+          "current": "ca0e1dc9a3e8a59c093677e1e650913ffb0807f8133df723bba5547c4fa21c52"
+        }
+      ],
+      "permanent_ids": [
+        {
+          "condition": "RECV-CONNECTION",
+          "condition_id": "SYS-PORTFOLIO-001-FIL-0061-FLD-000006",
+          "parent_field_id": "SYS-PORTFOLIO-001-FIL-0061-FLD-000005"
+        },
+        {
+          "condition": "RECV-TRANSACTION",
+          "condition_id": "SYS-PORTFOLIO-001-FIL-0061-FLD-000007",
+          "parent_field_id": "SYS-PORTFOLIO-001-FIL-0061-FLD-000005"
+        }
+      ],
+      "remaining_uncertainty": [
+        "COPY SQLCA at SQLCA.cpy:6 is circular: symbols it would define stay unresolved",
+        "RECV-CURSOR is ambiguous (2 declarations); qualify it (OF/IN) to resolve",
+        "business interpretation is not established by any source check"
+      ],
+      "needs_human_acceptance": true,
+      "cohort": "newly_supported",
+      "classification": "SOURCE_CHAIN_AMBIGUOUS",
+      "classification_reasons": [
+        "an ambiguous symbol is involved"
+      ],
+      "superseding_status": null
+    },
+    {
+      "item_id": "REQ-DB2RECV-002",
+      "item_kind": "requirement",
+      "item_sha256": "1f42d9ed7c3e6ccccb7ac04b4a417ae4e404ae9321fe705d73102057ed951ec1",
+      "claim": "Cap DB2 reconnect attempts at 3 and declare recovery failed During connection recovery the program retries the reconnect through DB2ONLN while the retry count is below the maximum of 3 retries, leaving the loop early on success. When the retry count reaches 3, the recovery status is set to FAILED ('F') with response code -1.",
+      "earlier_result": {
+        "method": "verifyTextClaim: claimed values (quoted literals, multi-digit numbers) searched as plain substrings of the cited range text",
+        "result": null,
+        "reasons": []
+      },
+      "context_result": {
+        "status": "CONTEXT_SUPPORTED",
+        "result_sha256": "fd695ef152b8c8ddcab169e03c8a2da4d02102127bd532a23a0cdc22bc27caad",
+        "literal_support": [
+          {
+            "literal": "F",
+            "support": "declared_value_of_referenced_condition",
+            "via": [
+              "RECV-FAILED"
+            ]
+          }
+        ]
+      },
+      "source_files": [
+        {
+          "path": "src/copybook/db2/SQLCA.cpy",
+          "sha256": "03e8f64ae705fe87324100488072c05d179fb75f64db0dc0cf753f23ab10afc7",
+          "current": "03e8f64ae705fe87324100488072c05d179fb75f64db0dc0cf753f23ab10afc7"
+        },
+        {
+          "path": "src/copybook/online/DB2REQ.cpy",
+          "sha256": "72a9d7b9eb91cdb093abe0aee5708e4808584b2aca07e31fcf0ff5a8a043f1aa",
+          "current": "72a9d7b9eb91cdb093abe0aee5708e4808584b2aca07e31fcf0ff5a8a043f1aa"
+        },
+        {
+          "path": "src/copybook/online/ERRHND.cpy",
+          "sha256": "57a539ec14c486ee0663a205b76453d40fd6f01fcbb472b7aa45027edf453835",
+          "current": "57a539ec14c486ee0663a205b76453d40fd6f01fcbb472b7aa45027edf453835"
+        },
+        {
+          "path": "src/programs/online/DB2RECV.cbl",
+          "sha256": "ca0e1dc9a3e8a59c093677e1e650913ffb0807f8133df723bba5547c4fa21c52",
+          "current": "ca0e1dc9a3e8a59c093677e1e650913ffb0807f8133df723bba5547c4fa21c52"
+        }
+      ],
+      "permanent_ids": [
+        {
+          "condition": "RECV-FAILED",
+          "condition_id": "SYS-PORTFOLIO-001-FIL-0061-FLD-000017",
+          "parent_field_id": "SYS-PORTFOLIO-001-FIL-0061-FLD-000015"
+        },
+        {
+          "condition": "RECV-SUCCESS",
+          "condition_id": "SYS-PORTFOLIO-001-FIL-0061-FLD-000016",
+          "parent_field_id": "SYS-PORTFOLIO-001-FIL-0061-FLD-000015"
+        }
+      ],
+      "remaining_uncertainty": [
+        "COPY SQLCA at SQLCA.cpy:6 is circular: symbols it would define stay unresolved",
+        "business interpretation is not established by any source check"
+      ],
+      "needs_human_acceptance": true,
+      "cohort": "newly_supported",
+      "classification": "SOURCE_CHAIN_VERIFIED",
+      "classification_reasons": [],
+      "superseding_status": null
+    },
+    {
+      "item_id": "REQ-DB2RECV-006",
+      "item_kind": "requirement",
+      "item_sha256": "8d30522ef70069cf5d04516f8fd39c50c61ca636b4ba3f5fc4db0e3cd3b7e52c",
+      "claim": "Set cursor-recovery outcome from the error handler's advised action After passing a cursor failure to the central error handler ERRHNDL, when the handler advises continue (action 'C') the recovery status is set to RETRY; otherwise it is set to FAILED. In both cases the handler's message is returned in the recovery message.",
+      "earlier_result": {
+        "method": "verifyTextClaim: claimed values (quoted literals, multi-digit numbers) searched as plain substrings of the cited range text",
+        "result": null,
+        "reasons": []
+      },
+      "context_result": {
+        "status": "CONTEXT_SUPPORTED",
+        "result_sha256": "514b0babfd3263cce9c07c950e3c13d1993f0c71bec1eb44d1af59dc7cfa25c4",
+        "literal_support": [
+          {
+            "literal": "C",
+            "support": "declared_value_of_referenced_condition",
+            "via": [
+              "ERR-CONTINUE"
+            ]
+          }
+        ]
+      },
+      "source_files": [
+        {
+          "path": "src/copybook/db2/SQLCA.cpy",
+          "sha256": "03e8f64ae705fe87324100488072c05d179fb75f64db0dc0cf753f23ab10afc7",
+          "current": "03e8f64ae705fe87324100488072c05d179fb75f64db0dc0cf753f23ab10afc7"
+        },
+        {
+          "path": "src/copybook/online/DB2REQ.cpy",
+          "sha256": "72a9d7b9eb91cdb093abe0aee5708e4808584b2aca07e31fcf0ff5a8a043f1aa",
+          "current": "72a9d7b9eb91cdb093abe0aee5708e4808584b2aca07e31fcf0ff5a8a043f1aa"
+        },
+        {
+          "path": "src/copybook/online/ERRHND.cpy",
+          "sha256": "57a539ec14c486ee0663a205b76453d40fd6f01fcbb472b7aa45027edf453835",
+          "current": "57a539ec14c486ee0663a205b76453d40fd6f01fcbb472b7aa45027edf453835"
+        },
+        {
+          "path": "src/programs/online/DB2RECV.cbl",
+          "sha256": "ca0e1dc9a3e8a59c093677e1e650913ffb0807f8133df723bba5547c4fa21c52",
+          "current": "ca0e1dc9a3e8a59c093677e1e650913ffb0807f8133df723bba5547c4fa21c52"
+        }
+      ],
+      "permanent_ids": [
+        {
+          "condition": "ERR-CONTINUE",
+          "condition_id": "SYS-PORTFOLIO-001-FIL-0019-FLD-000013",
+          "parent_field_id": "SYS-PORTFOLIO-001-FIL-0019-FLD-000011"
+        },
+        {
+          "condition": "RECV-RETRY",
+          "condition_id": "SYS-PORTFOLIO-001-FIL-0061-FLD-000018",
+          "parent_field_id": "SYS-PORTFOLIO-001-FIL-0061-FLD-000015"
+        },
+        {
+          "condition": "RECV-FAILED",
+          "condition_id": "SYS-PORTFOLIO-001-FIL-0061-FLD-000017",
+          "parent_field_id": "SYS-PORTFOLIO-001-FIL-0061-FLD-000015"
+        }
+      ],
+      "remaining_uncertainty": [
+        "COPY SQLCA at SQLCA.cpy:6 is circular: symbols it would define stay unresolved",
+        "business interpretation is not established by any source check"
+      ],
+      "needs_human_acceptance": true,
+      "cohort": "newly_supported",
+      "classification": "SOURCE_CHAIN_VERIFIED",
+      "classification_reasons": [],
+      "superseding_status": null
+    },
+    {
+      "item_id": "REQ-ERRHNDL-002",
+      "item_kind": "requirement",
+      "item_sha256": "57d608923d939b1dbf6dffaf2dd554faa0305ecc31b5fed0492dd9bf041cc00f",
+      "claim": "Select the recovery action from the error severity The central online error handler decides the recovery action from the error severity: fatal ('F') selects abend (action 'A'); warning ('W') and information ('I') select continue (action 'C'); any other severity selects return (action 'R'). Online callers act on this advice (REQ-DB2RECV-006, REQ-INQONLN-003).",
+      "earlier_result": {
+        "method": "verifyTextClaim: claimed values (quoted literals, multi-digit numbers) searched as plain substrings of the cited range text",
+        "result": null,
+        "reasons": []
+      },
+      "context_result": {
+        "status": "CONTEXT_SUPPORTED",
+        "result_sha256": "9faecbd2891fb59d6f58ecba9bff62e96cfec810bf4e987cd7e0ff5ae5a53cb8",
+        "literal_support": [
+          {
+            "literal": "F",
+            "support": "declared_value_of_referenced_condition",
+            "via": [
+              "ERR-FATAL"
+            ]
+          },
+          {
+            "literal": "A",
+            "support": "declared_value_of_referenced_condition",
+            "via": [
+              "ERR-ABEND"
+            ]
+          },
+          {
+            "literal": "W",
+            "support": "declared_value_of_referenced_condition",
+            "via": [
+              "ERR-WARNING"
+            ]
+          },
+          {
+            "literal": "I",
+            "support": "declared_value_of_referenced_condition",
+            "via": [
+              "ERR-INFO"
+            ]
+          },
+          {
+            "literal": "C",
+            "support": "declared_value_of_referenced_condition",
+            "via": [
+              "ERR-CONTINUE",
+              "ERR-CONTINUE"
+            ]
+          },
+          {
+            "literal": "R",
+            "support": "declared_value_of_referenced_condition",
+            "via": [
+              "ERR-RETURN"
+            ]
+          }
+        ]
+      },
+      "source_files": [
+        {
+          "path": "src/copybook/db2/SQLCA.cpy",
+          "sha256": "03e8f64ae705fe87324100488072c05d179fb75f64db0dc0cf753f23ab10afc7",
+          "current": "03e8f64ae705fe87324100488072c05d179fb75f64db0dc0cf753f23ab10afc7"
+        },
+        {
+          "path": "src/copybook/online/ERRHND.cpy",
+          "sha256": "57a539ec14c486ee0663a205b76453d40fd6f01fcbb472b7aa45027edf453835",
+          "current": "57a539ec14c486ee0663a205b76453d40fd6f01fcbb472b7aa45027edf453835"
+        },
+        {
+          "path": "src/programs/online/ERRHNDL.cbl",
+          "sha256": "11304d2864669b12837bc4b68fdf7638f12212a65f59d9f57831288a927d5c0a",
+          "current": "11304d2864669b12837bc4b68fdf7638f12212a65f59d9f57831288a927d5c0a"
+        }
+      ],
+      "permanent_ids": [
+        {
+          "condition": "ERR-FATAL",
+          "condition_id": "SYS-PORTFOLIO-001-FIL-0019-FLD-000007",
+          "parent_field_id": "SYS-PORTFOLIO-001-FIL-0019-FLD-000006"
+        },
+        {
+          "condition": "ERR-ABEND",
+          "condition_id": "SYS-PORTFOLIO-001-FIL-0019-FLD-000014",
+          "parent_field_id": "SYS-PORTFOLIO-001-FIL-0019-FLD-000011"
+        },
+        {
+          "condition": "ERR-WARNING",
+          "condition_id": "SYS-PORTFOLIO-001-FIL-0019-FLD-000008",
+          "parent_field_id": "SYS-PORTFOLIO-001-FIL-0019-FLD-000006"
+        },
+        {
+          "condition": "ERR-CONTINUE",
+          "condition_id": "SYS-PORTFOLIO-001-FIL-0019-FLD-000013",
+          "parent_field_id": "SYS-PORTFOLIO-001-FIL-0019-FLD-000011"
+        },
+        {
+          "condition": "ERR-INFO",
+          "condition_id": "SYS-PORTFOLIO-001-FIL-0019-FLD-000009",
+          "parent_field_id": "SYS-PORTFOLIO-001-FIL-0019-FLD-000006"
+        },
+        {
+          "condition": "ERR-CONTINUE",
+          "condition_id": "SYS-PORTFOLIO-001-FIL-0019-FLD-000013",
+          "parent_field_id": "SYS-PORTFOLIO-001-FIL-0019-FLD-000011"
+        },
+        {
+          "condition": "ERR-RETURN",
+          "condition_id": "SYS-PORTFOLIO-001-FIL-0019-FLD-000012",
+          "parent_field_id": "SYS-PORTFOLIO-001-FIL-0019-FLD-000011"
+        }
+      ],
+      "remaining_uncertainty": [
+        "COPY SQLCA at SQLCA.cpy:6 is circular: symbols it would define stay unresolved",
+        "business interpretation is not established by any source check"
+      ],
+      "needs_human_acceptance": true,
+      "cohort": "newly_supported",
+      "classification": "SOURCE_CHAIN_VERIFIED",
+      "classification_reasons": [],
+      "superseding_status": null
+    },
+    {
+      "item_id": "REQ-INQONLN-003",
+      "item_kind": "requirement",
+      "item_sha256": "67054d207181ed28c1ef8caf1feade661eaa41fbbe3eaf0524d4e9366dc52ff0",
+      "claim": "Abend the inquiry task on fatal errors After passing an error to the central error handler ERRHNDL, when the handler returns the abend action ('A', chosen for fatal severity) the inquiry program abends the CICS task with abend code 'IERR'; otherwise the error routine returns normally.",
+      "earlier_result": {
+        "method": "verifyTextClaim: claimed values (quoted literals, multi-digit numbers) searched as plain substrings of the cited range text",
+        "result": null,
+        "reasons": []
+      },
+      "context_result": {
+        "status": "CONTEXT_SUPPORTED",
+        "result_sha256": "9bbc0df22723b733931593da1a45d15ee3bb9ea6dabc8df219da3e916fbaef54",
+        "literal_support": [
+          {
+            "literal": "A",
+            "support": "declared_value_of_referenced_condition",
+            "via": [
+              "ERR-ABEND"
+            ]
+          },
+          {
+            "literal": "IERR",
+            "support": "in_statement",
+            "via": []
+          }
+        ]
+      },
+      "source_files": [
+        {
+          "path": "src/copybook/online/ERRHND.cpy",
+          "sha256": "57a539ec14c486ee0663a205b76453d40fd6f01fcbb472b7aa45027edf453835",
+          "current": "57a539ec14c486ee0663a205b76453d40fd6f01fcbb472b7aa45027edf453835"
+        },
+        {
+          "path": "src/copybook/online/INQCOM.cpy",
+          "sha256": "b03fdd3ad2e662250906f988719654ab25915ebccfda465b3d02423457e17cb9",
+          "current": "b03fdd3ad2e662250906f988719654ab25915ebccfda465b3d02423457e17cb9"
+        },
+        {
+          "path": "src/programs/online/INQONLN.cbl",
+          "sha256": "a05307ca63e1bc02e3765ac98b3b56c1063ea1751998c70697d933fcf9ce1963",
+          "current": "a05307ca63e1bc02e3765ac98b3b56c1063ea1751998c70697d933fcf9ce1963"
+        }
+      ],
+      "permanent_ids": [
+        {
+          "condition": "ERR-ABEND",
+          "condition_id": "SYS-PORTFOLIO-001-FIL-0019-FLD-000014",
+          "parent_field_id": "SYS-PORTFOLIO-001-FIL-0019-FLD-000011"
+        }
+      ],
+      "remaining_uncertainty": [
+        "business interpretation is not established by any source check"
+      ],
+      "needs_human_acceptance": true,
+      "cohort": "newly_supported",
+      "classification": "SOURCE_CHAIN_VERIFIED",
+      "classification_reasons": [],
+      "superseding_status": null
+    },
+    {
+      "item_id": "REQ-PORTDEL-002",
+      "item_kind": "requirement",
+      "item_sha256": "b08c8ab2dca65361915d670b59d6d4a564ea7b2ff631c22c7eeb2b0b25a1090a",
+      "claim": "Audit every successful portfolio deletion When a portfolio record is deleted successfully, the batch delete adds 1 to the deleted count and writes an audit record with the timestamp, action 'DELETE', the portfolio key, the deletion reason code and the portfolio status. Otherwise it adds 1 to the error count and displays 'Delete failed for: ' with the key. A failed audit write only displays 'Audit write failed for: ' with the key.",
+      "earlier_result": {
+        "method": "verifyTextClaim: claimed values (quoted literals, multi-digit numbers) searched as plain substrings of the cited range text",
+        "result": "verified",
+        "reasons": []
+      },
+      "context_result": {
+        "status": "CONTEXT_PARTIAL",
+        "result_sha256": "c168648a7b1b53f38a05681c3a09f5b656ab28817cc66104aa5e6a0001599a12",
+        "literal_support": [
+          {
+            "literal": "DELETE",
+            "support": "in_statement",
+            "via": []
+          },
+          {
+            "literal": "Delete failed for: ",
+            "support": "in_statement",
+            "via": []
+          },
+          {
+            "literal": "Audit write failed for: ",
+            "support": "unsupported",
+            "via": []
+          }
+        ]
+      },
+      "source_files": [
+        {
+          "path": "src/copybook/common/PORTFLIO.cpy",
+          "sha256": "030f0a0fb30654f6c4fd367bcab35b03953687f8b2a7b4df3caeffc0c26d71ce",
+          "current": "030f0a0fb30654f6c4fd367bcab35b03953687f8b2a7b4df3caeffc0c26d71ce"
+        },
+        {
+          "path": "src/programs/portfolio/PORTDEL.cbl",
+          "sha256": "baaab39ebebed361185d44f7551a6e566d46abd6ec5ecad896a56e2cc2bcdc84",
+          "current": "baaab39ebebed361185d44f7551a6e566d46abd6ec5ecad896a56e2cc2bcdc84"
+        }
+      ],
+      "permanent_ids": [
+        {
+          "condition": "WS-SUCCESS-STATUS",
+          "condition_id": "SYS-PORTFOLIO-001-FIL-0068-FLD-000019",
+          "parent_field_id": "SYS-PORTFOLIO-001-FIL-0068-FLD-000018"
+        }
+      ],
+      "remaining_uncertainty": [
+        "business interpretation is not established by any source check"
+      ],
+      "needs_human_acceptance": true,
+      "cohort": "questionable_earlier_verification",
+      "reproduced_earlier_result": {
+        "result": "verified",
+        "literals_in_cited_lines": [
+          "DELETE",
+          "Delete failed for: ",
+          "Audit write failed for: "
+        ],
+        "literals_elsewhere_in_file": []
+      },
+      "matches": [
+        {
+          "value": "DELETE",
+          "match": "literal",
+          "context_support": "in_statement"
+        },
+        {
+          "value": "Delete failed for: ",
+          "match": "literal",
+          "context_support": "in_statement"
+        },
+        {
+          "value": "Audit write failed for: ",
+          "match": "literal",
+          "context_support": "unsupported"
+        }
+      ],
+      "alternative_evidence": [],
+      "diagnosis": [
+        "EARLIER_VERIFICATION_DEFENSIBLE"
+      ],
+      "classification": "SOURCE_CHAIN_VERIFIED",
+      "superseding_status": "EARLIER_VERIFICATION_CONFIRMED",
+      "superseding_reason": "every value the earlier check matched occurs as a literal, number or word in the cited text"
+    },
+    {
+      "item_id": "REQ-PORTDEL-004",
+      "item_kind": "requirement",
+      "item_sha256": "f856843dbfab3145de5c213288cdf150a3bfff86ab1ec549d6bac7c54f39c1b4",
+      "claim": "Report batch delete run totals at termination At the end of the run the batch delete displays the accumulated totals 'Records deleted:', 'Records not found:' and 'Errors occurred:'. Record-level errors do not change the return code.",
+      "earlier_result": {
+        "method": "verifyTextClaim: claimed values (quoted literals, multi-digit numbers) searched as plain substrings of the cited range text",
+        "result": "verified",
+        "reasons": []
+      },
+      "context_result": {
+        "status": "CONTEXT_UNSUPPORTED",
+        "result_sha256": "fcbad3bed56cec56ffa966450b08a4c53b8333541b42c4d8e53ca6db2b2b75d4",
+        "literal_support": [
+          {
+            "literal": "Records deleted:",
+            "support": "unsupported",
+            "via": []
+          },
+          {
+            "literal": "Records not found:",
+            "support": "unsupported",
+            "via": []
+          },
+          {
+            "literal": "Errors occurred:",
+            "support": "unsupported",
+            "via": []
+          }
+        ]
+      },
+      "source_files": [
+        {
+          "path": "src/copybook/common/PORTFLIO.cpy",
+          "sha256": "030f0a0fb30654f6c4fd367bcab35b03953687f8b2a7b4df3caeffc0c26d71ce",
+          "current": "030f0a0fb30654f6c4fd367bcab35b03953687f8b2a7b4df3caeffc0c26d71ce"
+        },
+        {
+          "path": "src/programs/portfolio/PORTDEL.cbl",
+          "sha256": "baaab39ebebed361185d44f7551a6e566d46abd6ec5ecad896a56e2cc2bcdc84",
+          "current": "baaab39ebebed361185d44f7551a6e566d46abd6ec5ecad896a56e2cc2bcdc84"
+        }
+      ],
+      "permanent_ids": [],
+      "remaining_uncertainty": [
+        "business interpretation is not established by any source check"
+      ],
+      "needs_human_acceptance": true,
+      "cohort": "questionable_earlier_verification",
+      "reproduced_earlier_result": {
+        "result": "verified",
+        "literals_in_cited_lines": [
+          "Records deleted:",
+          "Records not found:",
+          "Errors occurred:"
+        ],
+        "literals_elsewhere_in_file": []
+      },
+      "matches": [
+        {
+          "value": "Records deleted:",
+          "match": "literal",
+          "context_support": "unsupported"
+        },
+        {
+          "value": "Records not found:",
+          "match": "literal",
+          "context_support": "unsupported"
+        },
+        {
+          "value": "Errors occurred:",
+          "match": "literal",
+          "context_support": "unsupported"
+        }
+      ],
+      "alternative_evidence": [],
+      "diagnosis": [
+        "EARLIER_VERIFICATION_DEFENSIBLE"
+      ],
+      "classification": "SOURCE_CHAIN_VERIFIED",
+      "superseding_status": "EARLIER_VERIFICATION_CONFIRMED",
+      "superseding_reason": "every value the earlier check matched occurs as a literal, number or word in the cited text"
+    },
+    {
+      "item_id": "REQ-PORTUPDT-002",
+      "item_kind": "requirement",
+      "item_sha256": "a30bbf265a7572b2ae38a386591800840cf360a6aa8ed483e91654191b9091da",
+      "claim": "Replace one portfolio field selected by the update action code When the portfolio master record is found, the action code selects the field replaced by the transaction's new value: 'S' replaces the portfolio status, 'N' replaces the client name, and 'V' replaces the total value (the 50-character new value is moved to a signed numeric work field with 13 integer and 2 decimal digits and from there to the total value). With any other action code no field is changed. In every case the record is then rewritten; the new status value is not validated.",
+      "earlier_result": {
+        "method": "verifyTextClaim: claimed values (quoted literals, multi-digit numbers) searched as plain substrings of the cited range text",
+        "result": "unverified",
+        "reasons": [
+          "stated values found in the program but not in the cited lines: 13"
+        ]
+      },
+      "context_result": {
+        "status": "CONTEXT_SUPPORTED",
+        "result_sha256": "51d8c7fa5dc378de01d097f495bdc33a887be927f495831dcfbc90c0533763d3",
+        "literal_support": [
+          {
+            "literal": "S",
+            "support": "declared_value_of_referenced_condition",
+            "via": [
+              "UPDT-STATUS"
+            ]
+          },
+          {
+            "literal": "N",
+            "support": "declared_value_of_referenced_condition",
+            "via": [
+              "UPDT-NAME"
+            ]
+          },
+          {
+            "literal": "V",
+            "support": "declared_value_of_referenced_condition",
+            "via": [
+              "UPDT-VALUE"
+            ]
+          }
+        ]
+      },
+      "source_files": [
+        {
+          "path": "src/copybook/common/PORTFLIO.cpy",
+          "sha256": "030f0a0fb30654f6c4fd367bcab35b03953687f8b2a7b4df3caeffc0c26d71ce",
+          "current": "030f0a0fb30654f6c4fd367bcab35b03953687f8b2a7b4df3caeffc0c26d71ce"
+        },
+        {
+          "path": "src/programs/portfolio/PORTUPDT.cbl",
+          "sha256": "e386049e473b4c2411540ad240a0d2f8fbdff0c88464cce80ba724fb9e375eff",
+          "current": "e386049e473b4c2411540ad240a0d2f8fbdff0c88464cce80ba724fb9e375eff"
+        }
+      ],
+      "permanent_ids": [
+        {
+          "condition": "UPDT-STATUS",
+          "condition_id": "SYS-PORTFOLIO-001-FIL-0073-FLD-000005",
+          "parent_field_id": "SYS-PORTFOLIO-001-FIL-0073-FLD-000004"
+        },
+        {
+          "condition": "UPDT-NAME",
+          "condition_id": "SYS-PORTFOLIO-001-FIL-0073-FLD-000007",
+          "parent_field_id": "SYS-PORTFOLIO-001-FIL-0073-FLD-000004"
+        },
+        {
+          "condition": "UPDT-VALUE",
+          "condition_id": "SYS-PORTFOLIO-001-FIL-0073-FLD-000006",
+          "parent_field_id": "SYS-PORTFOLIO-001-FIL-0073-FLD-000004"
+        }
+      ],
+      "remaining_uncertainty": [
+        "ref 3: permanent field ID SYS-PORTFOLIO-001-FIL-0073-FLD-000005 is not in the reverse field catalogue",
+        "ref 4: permanent field ID SYS-PORTFOLIO-001-FIL-0073-FLD-000007 is not in the reverse field catalogue",
+        "ref 5: permanent field ID SYS-PORTFOLIO-001-FIL-0073-FLD-000006 is not in the reverse field catalogue",
+        "business interpretation is not established by any source check"
+      ],
+      "needs_human_acceptance": true,
+      "cohort": "newly_supported",
+      "classification": "SOURCE_CHAIN_VERIFIED",
+      "classification_reasons": [],
+      "superseding_status": null
+    },
+    {
+      "item_id": "REQ-PORTUPDT-003",
+      "item_kind": "requirement",
+      "item_sha256": "1d59c07b88f94f1188fa77b03c726c779226ab91adcfe091ea89878e36c06ca0",
+      "claim": "Count successful and failed rewrites, report counts and handle open failure After the rewrite, when the file status is '00' the batch adds 1 to the update count; otherwise it adds 1 to the error count and displays 'Update failed for: ' with the key. At termination it closes both files, displays 'Updates processed: ' and 'Errors occurred:  ' with the counts and sets the program return code from its work return code. When either file fails to open it displays 'Error opening files: ' with both file statuses, sets the return code to 8 and performs termination; as found, processing is not stopped (the read loop still runs and termination runs a second time).",
+      "earlier_result": {
+        "method": "verifyTextClaim: claimed values (quoted literals, multi-digit numbers) searched as plain substrings of the cited range text",
+        "result": "verified",
+        "reasons": []
+      },
+      "context_result": {
+        "status": "CONTEXT_PARTIAL",
+        "result_sha256": "a72991c05bf6dfde813d64f3a33c08e82a8f439ebcc3bc47153ae43689533e02",
+        "literal_support": [
+          {
+            "literal": "Update failed for: ",
+            "support": "in_statement",
+            "via": []
+          },
+          {
+            "literal": "Updates processed: ",
+            "support": "unsupported",
+            "via": []
+          },
+          {
+            "literal": "Errors occurred:  ",
+            "support": "unsupported",
+            "via": []
+          },
+          {
+            "literal": "Error opening files: ",
+            "support": "in_statement",
+            "via": []
+          }
+        ]
+      },
+      "source_files": [
+        {
+          "path": "src/copybook/common/PORTFLIO.cpy",
+          "sha256": "030f0a0fb30654f6c4fd367bcab35b03953687f8b2a7b4df3caeffc0c26d71ce",
+          "current": "030f0a0fb30654f6c4fd367bcab35b03953687f8b2a7b4df3caeffc0c26d71ce"
+        },
+        {
+          "path": "src/programs/portfolio/PORTUPDT.cbl",
+          "sha256": "e386049e473b4c2411540ad240a0d2f8fbdff0c88464cce80ba724fb9e375eff",
+          "current": "e386049e473b4c2411540ad240a0d2f8fbdff0c88464cce80ba724fb9e375eff"
+        }
+      ],
+      "permanent_ids": [
+        {
+          "condition": "WS-SUCCESS-STATUS",
+          "condition_id": "SYS-PORTFOLIO-001-FIL-0073-FLD-000013",
+          "parent_field_id": "SYS-PORTFOLIO-001-FIL-0073-FLD-000012"
+        },
+        {
+          "condition": "WS-SUCCESS-STATUS",
+          "condition_id": "SYS-PORTFOLIO-001-FIL-0073-FLD-000013",
+          "parent_field_id": "SYS-PORTFOLIO-001-FIL-0073-FLD-000012"
+        },
+        {
+          "condition": "WS-UPDT-SUCCESS",
+          "condition_id": "SYS-PORTFOLIO-001-FIL-0073-FLD-000017",
+          "parent_field_id": "SYS-PORTFOLIO-001-FIL-0073-FLD-000016"
+        }
+      ],
+      "remaining_uncertainty": [
+        "business interpretation is not established by any source check"
+      ],
+      "needs_human_acceptance": true,
+      "cohort": "questionable_earlier_verification",
+      "reproduced_earlier_result": {
+        "result": "verified",
+        "literals_in_cited_lines": [
+          "00",
+          "Update failed for: ",
+          "Updates processed: ",
+          "Errors occurred:  ",
+          "Error opening files: "
+        ],
+        "literals_elsewhere_in_file": []
+      },
+      "matches": [
+        {
+          "value": "00",
+          "match": "substring_of_name",
+          "context_support": "numeric (not re-evaluated by the dependency check)"
+        },
+        {
+          "value": "Update failed for: ",
+          "match": "literal",
+          "context_support": "in_statement"
+        },
+        {
+          "value": "Updates processed: ",
+          "match": "literal",
+          "context_support": "unsupported"
+        },
+        {
+          "value": "Errors occurred:  ",
+          "match": "literal",
+          "context_support": "unsupported"
+        },
+        {
+          "value": "Error opening files: ",
+          "match": "literal",
+          "context_support": "in_statement"
+        }
+      ],
+      "alternative_evidence": [
+        {
+          "value": "00",
+          "statements": [
+            {
+              "statement_id": "SYS-PORTFOLIO-001-FIL-0073-STMT-000012",
+              "lines": [
+                123,
+                128
+              ],
+              "statement_type": "IF",
+              "support": "declared_value_of_referenced_condition",
+              "via": [
+                {
+                  "condition": "WS-SUCCESS-STATUS",
+                  "usage": "tested",
+                  "declared": "PORTUPDT.cbl:61"
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "diagnosis": [
+        "INCORRECT_VERIFICATION_METHOD",
+        "UNSUPPORTED_SOURCE_CITATION",
+        "CORRECT_CLAIM_ALTERNATIVE_EVIDENCE"
+      ],
+      "classification": "SOURCE_CHAIN_PARTIAL",
+      "superseding_status": "EVIDENCE_INVALIDATED",
+      "superseding_reason": "the earlier verification relied on value(s) '00' matched only as a substring inside a data name in the cited text, and no cited statement supports them; other statements in the program do support the value (alternative evidence for a citation update by a reviewer)"
+    },
+    {
+      "item_id": "RT-PORTADD-001",
+      "item_kind": "runtime_requirement",
+      "item_sha256": "29616b2eac8d6906370f5138ad2f7089d9387c2c2a3cee4efb38e0e2f7995ebb",
+      "claim": "Process INPUT-FILE strictly in physical order until AT END; each valid record (PORT-ID and PORT-CLIENT-NAME not blank, PORT-STATUS = 'A') is stamped with today's YYYYMMDD as create and last-maintenance date and inserted by key into the indexed PORTFOLIO-FILE.",
+      "earlier_result": {
+        "method": "verifyTextClaim: claimed values (quoted literals, multi-digit numbers) searched as plain substrings of the cited range text",
+        "result": "verified",
+        "reasons": []
+      },
+      "context_result": {
+        "status": "CONTEXT_UNSUPPORTED",
+        "result_sha256": "a5dca0e5fde414f840ee491c68e63c595e1dad3d3c671d60dfdc33e2e62a4661",
+        "literal_support": [
+          {
+            "literal": "A",
+            "support": "unrelated_occurrence_only",
+            "via": []
+          }
+        ]
+      },
+      "source_files": [
+        {
+          "path": "src/copybook/common/PORTFLIO.cpy",
+          "sha256": "030f0a0fb30654f6c4fd367bcab35b03953687f8b2a7b4df3caeffc0c26d71ce",
+          "current": "030f0a0fb30654f6c4fd367bcab35b03953687f8b2a7b4df3caeffc0c26d71ce"
+        },
+        {
+          "path": "src/programs/portfolio/PORTADD.cbl",
+          "sha256": "86cd685a216b37d2003e7dac1ae482d20e92268edc41e48495b49e0c39c21add",
+          "current": "86cd685a216b37d2003e7dac1ae482d20e92268edc41e48495b49e0c39c21add"
+        }
+      ],
+      "permanent_ids": [
+        {
+          "condition": "END-OF-FILE",
+          "condition_id": "SYS-PORTFOLIO-001-FIL-0067-FLD-000012",
+          "parent_field_id": "SYS-PORTFOLIO-001-FIL-0067-FLD-000011"
+        }
+      ],
+      "remaining_uncertainty": [
+        "'A' is declared by PORT-ACTIVE (PORTFLIO.cpy:25), PORT-ACTIVE (PORTFLIO.cpy:25), but no cited statement references it: not counted as evidence",
+        "business interpretation is not established by any source check"
+      ],
+      "needs_human_acceptance": true,
+      "cohort": "questionable_earlier_verification",
+      "reproduced_earlier_result": {
+        "result": "verified",
+        "literals_in_cited_lines": [
+          "A"
+        ],
+        "literals_elsewhere_in_file": []
+      },
+      "matches": [
+        {
+          "value": "A",
+          "match": "substring_of_name",
+          "context_support": "unrelated_occurrence_only"
+        }
+      ],
+      "alternative_evidence": [
+        {
+          "value": "A",
+          "statements": [
+            {
+              "statement_id": "SYS-PORTFOLIO-001-FIL-0067-STMT-000011",
+              "lines": [
+                114,
+                120
+              ],
+              "statement_type": "IF",
+              "support": "in_statement",
+              "via": []
+            }
+          ]
+        }
+      ],
+      "diagnosis": [
+        "INCORRECT_VERIFICATION_METHOD",
+        "UNSUPPORTED_SOURCE_CITATION",
+        "CORRECT_CLAIM_ALTERNATIVE_EVIDENCE"
+      ],
+      "classification": "SOURCE_CHAIN_PARTIAL",
+      "superseding_status": "EVIDENCE_INVALIDATED",
+      "superseding_reason": "the earlier verification relied on value(s) 'A' matched only as a substring inside a data name in the cited text, and no cited statement supports them; other statements in the program do support the value (alternative evidence for a citation update by a reviewer)"
+    },
+    {
+      "item_id": "RT-BCHCTL00-004",
+      "item_kind": "runtime_requirement",
+      "item_sha256": "92109f4af254a5a2366f3bbba84a45322c95fc2ee2ebd84af09dc88558414fbf",
+      "claim": "Function CHEK returns +0 when the prerequisite flag is 'Y' and +4 otherwise; the flag is set only by the missing 2200-CHECK-DEPENDENCIES, so its derivation must come from an SME decision, not from this source.",
+      "earlier_result": {
+        "method": "verifyTextClaim: claimed values (quoted literals, multi-digit numbers) searched as plain substrings of the cited range text",
+        "result": "unverified",
+        "reasons": [
+          "stated values found in the program but not in the cited lines: Y"
+        ]
+      },
+      "context_result": {
+        "status": "CONTEXT_SUPPORTED",
+        "result_sha256": "71d43f58daa914197588114ffd00edaa71387d92cdbb287e980c51690db62f2b",
+        "literal_support": [
+          {
+            "literal": "Y",
+            "support": "declared_value_of_referenced_condition",
+            "via": [
+              "PREREQS-SATISFIED"
+            ]
+          }
+        ]
+      },
+      "source_files": [
+        {
+          "path": "src/copybook/batch/BCHCON.cpy",
+          "sha256": "374943d4a21510f06a1b52b40497db2e597136688323576e03f8d79c09675e7b",
+          "current": "374943d4a21510f06a1b52b40497db2e597136688323576e03f8d79c09675e7b"
+        },
+        {
+          "path": "src/copybook/batch/BCHCTL.cpy",
+          "sha256": "d075c66c44896fcb2fda7c1b53c5cff5298791810b631d7768ada636a4aa65b4",
+          "current": "d075c66c44896fcb2fda7c1b53c5cff5298791810b631d7768ada636a4aa65b4"
+        },
+        {
+          "path": "src/copybook/common/ERRHAND.cpy",
+          "sha256": "c129b21fe77062f205ca6fb76f227f798549cd13bc231d169fa3a34a9b181442",
+          "current": "c129b21fe77062f205ca6fb76f227f798549cd13bc231d169fa3a34a9b181442"
+        },
+        {
+          "path": "src/programs/batch/BCHCTL00.cbl",
+          "sha256": "876e218a3c1a532dd16ff415cd936b53ac8073b6a457d0a0f05806eb58282880",
+          "current": "876e218a3c1a532dd16ff415cd936b53ac8073b6a457d0a0f05806eb58282880"
+        }
+      ],
+      "permanent_ids": [
+        {
+          "condition": "PREREQS-SATISFIED",
+          "condition_id": "SYS-PORTFOLIO-001-FIL-0042-FLD-000004",
+          "parent_field_id": "SYS-PORTFOLIO-001-FIL-0042-FLD-000003"
+        }
+      ],
+      "remaining_uncertainty": [
+        "business interpretation is not established by any source check"
+      ],
+      "needs_human_acceptance": true,
+      "cohort": "newly_supported",
+      "classification": "SOURCE_CHAIN_VERIFIED",
+      "classification_reasons": [],
+      "superseding_status": null
+    },
+    {
+      "item_id": "RT-RCVPRC00-001",
+      "item_kind": "runtime_requirement",
+      "item_sha256": "30b20914ebcc4f7747e6694fd9747b49e8f66920d558805d625abf9796bd07f9",
+      "claim": "Recovery mode is taken from LS-RECOVERY-TYPE: 'P' one process (process ID required), 'S' all control records of the process date (browse from date/LOW-VALUES), 'A' every control record in key order; other values are rejected through the error routine.",
+      "earlier_result": {
+        "method": "verifyTextClaim: claimed values (quoted literals, multi-digit numbers) searched as plain substrings of the cited range text",
+        "result": "verified",
+        "reasons": []
+      },
+      "context_result": {
+        "status": "CONTEXT_UNSUPPORTED",
+        "result_sha256": "a91f7da1793d96ba2a6151512e0274b6aefca32eb8c0305022aac656ebdbf8a0",
+        "literal_support": [
+          {
+            "literal": "P",
+            "support": "unrelated_occurrence_only",
+            "via": []
+          },
+          {
+            "literal": "S",
+            "support": "unrelated_occurrence_only",
+            "via": []
+          },
+          {
+            "literal": "A",
+            "support": "unrelated_occurrence_only",
+            "via": []
+          }
+        ]
+      },
+      "source_files": [
+        {
+          "path": "src/copybook/batch/BCHCON.cpy",
+          "sha256": "374943d4a21510f06a1b52b40497db2e597136688323576e03f8d79c09675e7b",
+          "current": "374943d4a21510f06a1b52b40497db2e597136688323576e03f8d79c09675e7b"
+        },
+        {
+          "path": "src/copybook/batch/BCHCTL.cpy",
+          "sha256": "d075c66c44896fcb2fda7c1b53c5cff5298791810b631d7768ada636a4aa65b4",
+          "current": "d075c66c44896fcb2fda7c1b53c5cff5298791810b631d7768ada636a4aa65b4"
+        },
+        {
+          "path": "src/copybook/batch/PRCSEQ.cpy",
+          "sha256": "f9cd772e7a236ce88aa39ac92514a31a91bc1db064e20493e1c3387618aff528",
+          "current": "f9cd772e7a236ce88aa39ac92514a31a91bc1db064e20493e1c3387618aff528"
+        },
+        {
+          "path": "src/copybook/common/ERRHAND.cpy",
+          "sha256": "c129b21fe77062f205ca6fb76f227f798549cd13bc231d169fa3a34a9b181442",
+          "current": "c129b21fe77062f205ca6fb76f227f798549cd13bc231d169fa3a34a9b181442"
+        },
+        {
+          "path": "src/programs/batch/RCVPRC00.cbl",
+          "sha256": "7dd7e5cfb2b6c6a4089b389496689dd09ad7d32d7820a403050a68bdda85ce13",
+          "current": "7dd7e5cfb2b6c6a4089b389496689dd09ad7d32d7820a403050a68bdda85ce13"
+        }
+      ],
+      "permanent_ids": [],
+      "remaining_uncertainty": [
+        "'P' is declared by BCT-REC-PROCESS (BCHCON.cpy:52), WS-RECOVER-PROCESS (RCVPRC00.cbl:50), but no cited statement references it: not counted as evidence",
+        "'S' is declared by PSR-DEP-SOFT (PRCSEQ.cpy:30), WS-RECOVER-SEQUENCE (RCVPRC00.cbl:51), but no cited statement references it: not counted as evidence",
+        "'A' is declared by BCT-STATUS-ACTIVE (BCHCTL.cpy:17), BCT-STAT-ACTIVE (BCHCON.cpy:10), WS-RECOVER-ALL (RCVPRC00.cbl:52), but no cited statement references it: not counted as evidence",
+        "business interpretation is not established by any source check"
+      ],
+      "needs_human_acceptance": true,
+      "cohort": "questionable_earlier_verification",
+      "reproduced_earlier_result": {
+        "result": "verified",
+        "literals_in_cited_lines": [
+          "P",
+          "S",
+          "A"
+        ],
+        "literals_elsewhere_in_file": []
+      },
+      "matches": [
+        {
+          "value": "P",
+          "match": "literal",
+          "context_support": "unrelated_occurrence_only"
+        },
+        {
+          "value": "S",
+          "match": "literal",
+          "context_support": "unrelated_occurrence_only"
+        },
+        {
+          "value": "A",
+          "match": "literal",
+          "context_support": "unrelated_occurrence_only"
+        }
+      ],
+      "alternative_evidence": [],
+      "diagnosis": [
+        "EARLIER_VERIFICATION_DEFENSIBLE"
+      ],
+      "classification": "SOURCE_CHAIN_VERIFIED",
+      "superseding_status": "EARLIER_VERIFICATION_CONFIRMED",
+      "superseding_reason": "every value the earlier check matched occurs as a literal, number or word in the cited text"
+    },
+    {
+      "item_id": "RT-RCVPRC00-002",
+      "item_kind": "runtime_requirement",
+      "item_sha256": "b298dc039ed9528081359d27ec59c7a22a54ffa0ea7e198ba658358fabfb5355",
+      "claim": "Inside the 'S' and 'A' browse loops each record is recovered through 2100-RECOVER-PROCESS, which issues a random READ and a REWRITE on the same file that is being browsed; on an indexed dynamic file this re-positions the browse at the record just read. The Java design must reproduce this positioning (or an SME must approve a change).",
+      "earlier_result": {
+        "method": "verifyTextClaim: claimed values (quoted literals, multi-digit numbers) searched as plain substrings of the cited range text",
+        "result": "verified",
+        "reasons": []
+      },
+      "context_result": {
+        "status": "CONTEXT_UNSUPPORTED",
+        "result_sha256": "8b7952a069a3d9e1c3297c0414c7cdd9189d5886bcb25e27c229841cb3fe15f5",
+        "literal_support": [
+          {
+            "literal": "S",
+            "support": "unrelated_occurrence_only",
+            "via": []
+          },
+          {
+            "literal": "A",
+            "support": "unrelated_occurrence_only",
+            "via": []
+          }
+        ]
+      },
+      "source_files": [
+        {
+          "path": "src/copybook/batch/BCHCON.cpy",
+          "sha256": "374943d4a21510f06a1b52b40497db2e597136688323576e03f8d79c09675e7b",
+          "current": "374943d4a21510f06a1b52b40497db2e597136688323576e03f8d79c09675e7b"
+        },
+        {
+          "path": "src/copybook/batch/BCHCTL.cpy",
+          "sha256": "d075c66c44896fcb2fda7c1b53c5cff5298791810b631d7768ada636a4aa65b4",
+          "current": "d075c66c44896fcb2fda7c1b53c5cff5298791810b631d7768ada636a4aa65b4"
+        },
+        {
+          "path": "src/copybook/batch/PRCSEQ.cpy",
+          "sha256": "f9cd772e7a236ce88aa39ac92514a31a91bc1db064e20493e1c3387618aff528",
+          "current": "f9cd772e7a236ce88aa39ac92514a31a91bc1db064e20493e1c3387618aff528"
+        },
+        {
+          "path": "src/copybook/common/ERRHAND.cpy",
+          "sha256": "c129b21fe77062f205ca6fb76f227f798549cd13bc231d169fa3a34a9b181442",
+          "current": "c129b21fe77062f205ca6fb76f227f798549cd13bc231d169fa3a34a9b181442"
+        },
+        {
+          "path": "src/programs/batch/RCVPRC00.cbl",
+          "sha256": "7dd7e5cfb2b6c6a4089b389496689dd09ad7d32d7820a403050a68bdda85ce13",
+          "current": "7dd7e5cfb2b6c6a4089b389496689dd09ad7d32d7820a403050a68bdda85ce13"
+        }
+      ],
+      "permanent_ids": [],
+      "remaining_uncertainty": [
+        "'S' is declared by PSR-DEP-SOFT (PRCSEQ.cpy:30), WS-RECOVER-SEQUENCE (RCVPRC00.cbl:51), but no cited statement references it: not counted as evidence",
+        "'A' is declared by BCT-STATUS-ACTIVE (BCHCTL.cpy:17), BCT-STAT-ACTIVE (BCHCON.cpy:10), WS-RECOVER-ALL (RCVPRC00.cbl:52), but no cited statement references it: not counted as evidence",
+        "business interpretation is not established by any source check"
+      ],
+      "needs_human_acceptance": true,
+      "cohort": "questionable_earlier_verification",
+      "reproduced_earlier_result": {
+        "result": "verified",
+        "literals_in_cited_lines": [
+          "S",
+          "A"
+        ],
+        "literals_elsewhere_in_file": []
+      },
+      "matches": [
+        {
+          "value": "S",
+          "match": "substring_of_name",
+          "context_support": "unrelated_occurrence_only"
+        },
+        {
+          "value": "A",
+          "match": "substring_of_name",
+          "context_support": "unrelated_occurrence_only"
+        }
+      ],
+      "alternative_evidence": [
+        {
+          "value": "S",
+          "statements": [
+            {
+              "statement_id": "SYS-PORTFOLIO-001-FIL-0047-STMT-000007",
+              "lines": [
+                95,
+                102
+              ],
+              "statement_type": "EVALUATE",
+              "support": "in_statement",
+              "via": []
+            },
+            {
+              "statement_id": "SYS-PORTFOLIO-001-FIL-0047-STMT-000018",
+              "lines": [
+                138,
+                146
+              ],
+              "statement_type": "EVALUATE",
+              "support": "in_statement",
+              "via": []
+            }
+          ]
+        },
+        {
+          "value": "A",
+          "statements": [
+            {
+              "statement_id": "SYS-PORTFOLIO-001-FIL-0047-STMT-000007",
+              "lines": [
+                95,
+                102
+              ],
+              "statement_type": "EVALUATE",
+              "support": "in_statement",
+              "via": []
+            },
+            {
+              "statement_id": "SYS-PORTFOLIO-001-FIL-0047-STMT-000018",
+              "lines": [
+                138,
+                146
+              ],
+              "statement_type": "EVALUATE",
+              "support": "in_statement",
+              "via": []
+            }
+          ]
+        }
+      ],
+      "diagnosis": [
+        "INCORRECT_VERIFICATION_METHOD",
+        "UNSUPPORTED_SOURCE_CITATION",
+        "CORRECT_CLAIM_ALTERNATIVE_EVIDENCE"
+      ],
+      "classification": "SOURCE_CHAIN_PARTIAL",
+      "superseding_status": "EVIDENCE_INVALIDATED",
+      "superseding_reason": "the earlier verification relied on value(s) 'S', 'A' matched only as a substring inside a data name in the cited text, and no cited statement supports them; other statements in the program do support the value (alternative evidence for a citation update by a reviewer)"
+    }
+  ],
+  "recorded": [
+    {
+      "adjudication_id": "EAR-0001",
+      "item_id": "REQ-BCHCTL00-001",
+      "version": 1,
+      "classification": "SOURCE_CHAIN_VERIFIED",
+      "superseding_status": null,
+      "new": true
+    },
+    {
+      "adjudication_id": "EAR-0002",
+      "item_id": "REQ-RTNCDE00-002",
+      "version": 1,
+      "classification": "SOURCE_CHAIN_PARTIAL",
+      "superseding_status": "EVIDENCE_INVALIDATED",
+      "new": true
+    },
+    {
+      "adjudication_id": "EAR-0003",
+      "item_id": "REQ-RTNCDE00-003",
+      "version": 1,
+      "classification": "SOURCE_CHAIN_VERIFIED",
+      "superseding_status": null,
+      "new": true
+    },
+    {
+      "adjudication_id": "EAR-0004",
+      "item_id": "REQ-DB2CMT-001",
+      "version": 1,
+      "classification": "SOURCE_CHAIN_VERIFIED",
+      "superseding_status": null,
+      "new": true
+    },
+    {
+      "adjudication_id": "EAR-0005",
+      "item_id": "REQ-DB2CONN-001",
+      "version": 1,
+      "classification": "SOURCE_CHAIN_VERIFIED",
+      "superseding_status": null,
+      "new": true
+    },
+    {
+      "adjudication_id": "EAR-0006",
+      "item_id": "REQ-DB2CONN-003",
+      "version": 1,
+      "classification": "SOURCE_CHAIN_VERIFIED",
+      "superseding_status": null,
+      "new": true
+    },
+    {
+      "adjudication_id": "EAR-0007",
+      "item_id": "REQ-DB2ERR-001",
+      "version": 1,
+      "classification": "SOURCE_CHAIN_VERIFIED",
+      "superseding_status": null,
+      "new": true
+    },
+    {
+      "adjudication_id": "EAR-0008",
+      "item_id": "REQ-DB2ERR-002",
+      "version": 1,
+      "classification": "SOURCE_CHAIN_VERIFIED",
+      "superseding_status": null,
+      "new": true
+    },
+    {
+      "adjudication_id": "EAR-0009",
+      "item_id": "REQ-DB2ERR-003",
+      "version": 1,
+      "classification": "SOURCE_CHAIN_VERIFIED",
+      "superseding_status": null,
+      "new": true
+    },
+    {
+      "adjudication_id": "EAR-0010",
+      "item_id": "REQ-DB2STAT-001",
+      "version": 1,
+      "classification": "SOURCE_CHAIN_VERIFIED",
+      "superseding_status": null,
+      "new": true
+    },
+    {
+      "adjudication_id": "EAR-0011",
+      "item_id": "REQ-CURSMGR-001",
+      "version": 1,
+      "classification": "SOURCE_CHAIN_VERIFIED",
+      "superseding_status": null,
+      "new": true
+    },
+    {
+      "adjudication_id": "EAR-0012",
+      "item_id": "REQ-CURSMGR-002",
+      "version": 1,
+      "classification": "SOURCE_CHAIN_VERIFIED",
+      "superseding_status": null,
+      "new": true
+    },
+    {
+      "adjudication_id": "EAR-0013",
+      "item_id": "REQ-DB2RECV-001",
+      "version": 1,
+      "classification": "SOURCE_CHAIN_AMBIGUOUS",
+      "superseding_status": null,
+      "new": true
+    },
+    {
+      "adjudication_id": "EAR-0014",
+      "item_id": "REQ-DB2RECV-002",
+      "version": 1,
+      "classification": "SOURCE_CHAIN_VERIFIED",
+      "superseding_status": null,
+      "new": true
+    },
+    {
+      "adjudication_id": "EAR-0015",
+      "item_id": "REQ-DB2RECV-006",
+      "version": 1,
+      "classification": "SOURCE_CHAIN_VERIFIED",
+      "superseding_status": null,
+      "new": true
+    },
+    {
+      "adjudication_id": "EAR-0016",
+      "item_id": "REQ-ERRHNDL-002",
+      "version": 1,
+      "classification": "SOURCE_CHAIN_VERIFIED",
+      "superseding_status": null,
+      "new": true
+    },
+    {
+      "adjudication_id": "EAR-0017",
+      "item_id": "REQ-INQONLN-003",
+      "version": 1,
+      "classification": "SOURCE_CHAIN_VERIFIED",
+      "superseding_status": null,
+      "new": true
+    },
+    {
+      "adjudication_id": "EAR-0018",
+      "item_id": "REQ-PORTDEL-002",
+      "version": 1,
+      "classification": "SOURCE_CHAIN_VERIFIED",
+      "superseding_status": "EARLIER_VERIFICATION_CONFIRMED",
+      "new": true
+    },
+    {
+      "adjudication_id": "EAR-0019",
+      "item_id": "REQ-PORTDEL-004",
+      "version": 1,
+      "classification": "SOURCE_CHAIN_VERIFIED",
+      "superseding_status": "EARLIER_VERIFICATION_CONFIRMED",
+      "new": true
+    },
+    {
+      "adjudication_id": "EAR-0020",
+      "item_id": "REQ-PORTUPDT-002",
+      "version": 1,
+      "classification": "SOURCE_CHAIN_VERIFIED",
+      "superseding_status": null,
+      "new": true
+    },
+    {
+      "adjudication_id": "EAR-0021",
+      "item_id": "REQ-PORTUPDT-003",
+      "version": 1,
+      "classification": "SOURCE_CHAIN_PARTIAL",
+      "superseding_status": "EVIDENCE_INVALIDATED",
+      "new": true
+    },
+    {
+      "adjudication_id": "EAR-0022",
+      "item_id": "RT-PORTADD-001",
+      "version": 1,
+      "classification": "SOURCE_CHAIN_PARTIAL",
+      "superseding_status": "EVIDENCE_INVALIDATED",
+      "new": true
+    },
+    {
+      "adjudication_id": "EAR-0023",
+      "item_id": "RT-BCHCTL00-004",
+      "version": 1,
+      "classification": "SOURCE_CHAIN_VERIFIED",
+      "superseding_status": null,
+      "new": true
+    },
+    {
+      "adjudication_id": "EAR-0024",
+      "item_id": "RT-RCVPRC00-001",
+      "version": 1,
+      "classification": "SOURCE_CHAIN_VERIFIED",
+      "superseding_status": "EARLIER_VERIFICATION_CONFIRMED",
+      "new": true
+    },
+    {
+      "adjudication_id": "EAR-0025",
+      "item_id": "RT-RCVPRC00-002",
+      "version": 1,
+      "classification": "SOURCE_CHAIN_PARTIAL",
+      "superseding_status": "EVIDENCE_INVALIDATED",
+      "new": true
+    }
+  ]
+}

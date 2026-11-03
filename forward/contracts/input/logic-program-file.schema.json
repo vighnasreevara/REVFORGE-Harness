@@ -1,0 +1,30 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://revforge.local/contracts/input/logic-program-file.schema.json",
+  "title": "Reverse Agent 4 per-program logic file (consumed core)",
+  "type": "object",
+  "required": ["program_summary", "program_id", "file_id"],
+  "properties": {
+    "program_summary": { "type": "object", "required": ["program_id", "file_id", "logic_status"] },
+    "program_id": { "type": "string" },
+    "system_id": { "$ref": "../common.schema.json#/definitions/systemId" },
+    "file_id": { "$ref": "../common.schema.json#/definitions/fileId" },
+    "path_id": { "$ref": "../common.schema.json#/definitions/pathId" },
+    "relative_path": { "type": "string" },
+    "parse_run_id": { "type": ["string", "null"] },
+    "data_run_id": { "type": ["string", "null"] },
+    "paragraphs": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["name"],
+        "properties": {
+          "name": { "type": "string" },
+          "paragraph_id": { "anyOf": [{ "$ref": "../common.schema.json#/definitions/paragraphId" }, { "type": "null" }] }
+        }
+      }
+    },
+    "unresolvable_paths": { "type": "array" },
+    "dead_code_confirmed": { "type": "array" }
+  }
+}

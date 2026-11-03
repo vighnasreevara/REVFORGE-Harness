@@ -1,0 +1,39 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://revforge.local/contracts/forward/review-report.schema.json",
+  "title": "Independent review report (F7, fe-adversarial-code-review)",
+  "allOf": [{ "$ref": "forward-common.schema.json#/definitions/header" }],
+  "type": "object",
+  "required": ["contract", "record_type", "findings", "recommendation"],
+  "properties": {
+    "contract": { "const": "forward/review-report" },
+    "record_type": { "enum": ["blocking_findings", "acceptance_recommendation"] },
+    "findings": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["review_finding_id", "category", "severity", "blocking", "description", "artifact", "source_refs"],
+        "properties": {
+          "review_finding_id": { "type": "string", "pattern": "^RV-[0-9]{3,}$" },
+          "category": { "enum": ["business_behavior", "missing_requirement", "data_conversion", "numeric_difference", "security", "unsupported_assumption", "test_coverage", "error_handling", "legacy_compatibility", "traceability"] },
+          "severity": { "enum": ["critical", "high", "medium", "low"] },
+          "blocking": { "type": "boolean" },
+          "description": { "type": "string", "minLength": 5 },
+          "artifact": { "type": "string" },
+          "source_refs": { "type": "array", "items": { "$ref": "forward-common.schema.json#/definitions/sourceRef" } }
+        }
+      }
+    },
+    "recommendation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["recommend_acceptance", "reasons", "decided_by"],
+      "properties": {
+        "recommend_acceptance": { "type": "boolean" },
+        "reasons": { "type": "array", "minItems": 1, "items": { "type": "string" } },
+        "decided_by": { "const": "human_gate_G8" }
+      }
+    }
+  }
+}

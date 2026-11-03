@@ -1,0 +1,205 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://revforge.local/contracts/orchestrator/dispatch-packet.schema.json",
+  "title": "Agent dispatch (input) packet, written by the runtime",
+  "type": "object",
+  "required": [
+    "contract",
+    "packet_id",
+    "created_at",
+    "workflow_id",
+    "workflow_state",
+    "baseline",
+    "agent",
+    "dispatchable",
+    "blockers",
+    "programs",
+    "inputs",
+    "skills",
+    "permissions",
+    "expected_outputs",
+    "invocation"
+  ],
+  "properties": {
+    "contract": {
+      "const": "dispatch-packet"
+    },
+    "packet_id": {
+      "type": "string",
+      "pattern": "^PKT-[0-9]{4}-F[1-7]$"
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "baseline": {
+      "type": "object",
+      "required": [
+        "run_id",
+        "manifest_sha256"
+      ],
+      "properties": {
+        "manifest_sha256": {
+          "$ref": "../common.schema.json#/definitions/sha256"
+        }
+      }
+    },
+    "agent": {
+      "type": "object",
+      "required": [
+        "id",
+        "name",
+        "definition"
+      ],
+      "properties": {
+        "id": {
+          "enum": [
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "F5",
+            "F6",
+            "F7"
+          ]
+        },
+        "name": {
+          "type": "string",
+          "pattern": "^fe-"
+        }
+      }
+    },
+    "dispatchable": {
+      "type": "boolean"
+    },
+    "blockers": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "programs": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "program_id",
+          "file_id",
+          "classification",
+          "modernization_scope"
+        ],
+        "properties": {
+          "file_id": {
+            "$ref": "../common.schema.json#/definitions/fileId"
+          }
+        }
+      }
+    },
+    "inputs": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "kind",
+          "required",
+          "files"
+        ],
+        "properties": {
+          "files": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": [
+                "path",
+                "sha256",
+                "present"
+              ],
+              "properties": {
+                "sha256": {
+                  "anyOf": [
+                    {
+                      "$ref": "../common.schema.json#/definitions/sha256"
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "skills": {
+      "type": "array",
+      "minItems": 2,
+      "maxItems": 2,
+      "items": {
+        "type": "object",
+        "required": [
+          "name",
+          "status",
+          "sha256"
+        ],
+        "properties": {
+          "status": {
+            "enum": [
+              "INSTALLED",
+              "SKILL_NOT_INSTALLED",
+              "SKILL_INVALID"
+            ]
+          },
+          "sha256": {
+            "anyOf": [
+              {
+                "$ref": "../common.schema.json#/definitions/sha256"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        }
+      }
+    },
+    "permissions": {
+      "type": "object",
+      "required": [
+        "output_dir",
+        "may_write_code",
+        "generation_authorized",
+        "allowed_tools",
+        "forbidden"
+      ]
+    },
+    "expected_outputs": {
+      "type": "array",
+      "minItems": 1
+    },
+    "invocation": {
+      "type": "string"
+    }
+  },
+  "if": {
+    "properties": {
+      "dispatchable": {
+        "const": true
+      }
+    }
+  },
+  "then": {
+    "properties": {
+      "blockers": {
+        "maxItems": 0
+      }
+    }
+  },
+  "else": {
+    "properties": {
+      "blockers": {
+        "minItems": 1
+      }
+    }
+  }
+}

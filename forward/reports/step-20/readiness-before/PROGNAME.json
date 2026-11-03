@@ -1,0 +1,216 @@
+{
+  "gate": "SOURCE_READINESS",
+  "subject": "PROGNAME",
+  "status": "FAIL",
+  "checks": [
+    {
+      "id": "source_available",
+      "ok": true,
+      "detail": "src/templates/program/standard-program.cbl sha256 6199f4b373e583d16df67a914ff33bb7109f577c511b4697f511a44e50d43191; 8 statement(s) in 5 paragraph(s)"
+    },
+    {
+      "id": "complete_program",
+      "ok": true,
+      "detail": "every paragraph contains statements"
+    },
+    {
+      "id": "copybooks_resolved",
+      "ok": true,
+      "detail": "all 0 include(s) resolved: none"
+    },
+    {
+      "id": "requirements_and_data_mapping_delivered",
+      "ok": true,
+      "detail": "F1/F2 deliveries accepted for PROGNAME"
+    },
+    {
+      "id": "behaviour_classified",
+      "ok": true,
+      "detail": "4 behaviour(s): 4 VERIFIED_CANDIDATE, 0 PARTIAL, 0 GAP"
+    },
+    {
+      "id": "dependencies_identified",
+      "ok": false,
+      "detail": "closure UNRESOLVED for PROGNAME:0000-MAIN (line 82: RETURN-CODE is neither declared, a keyword, a paragraph nor the subject of a blocking decision (unknown dependency)); PROGNAME:3000-TERMINATE (line 82: RETURN-CODE is neither declared, a keyword, a paragraph nor the subject of a blocking decision (unknown dependency))"
+    },
+    {
+      "id": "unsupported_documented",
+      "ok": true,
+      "detail": "0 gap(s) document every PARTIAL/GAP behaviour"
+    },
+    {
+      "id": "unknowns_documented",
+      "ok": true,
+      "detail": "4 open decision(s) record the remaining questions (2 blocking for approval); none is resolved or assumed here"
+    }
+  ],
+  "note": "An engineering gate: it states that the source is understood well enough to convert, with every unknown documented. It is not a G2 approval and does not authorise generation.",
+  "behaviours": [
+    {
+      "behaviour_id": "PROGNAME:ENTRY-DISPATCH",
+      "kind": "dispatch",
+      "classification": "VERIFIED_CANDIDATE",
+      "lines": [
+        54,
+        59
+      ],
+      "inputs": [
+        "WS-END-OF-FILE-SW"
+      ],
+      "outputs": [],
+      "side_effects": [],
+      "unresolved": [],
+      "covered_by": []
+    },
+    {
+      "behaviour_id": "PROGNAME:1000-INITIALIZE",
+      "kind": "performed_range",
+      "classification": "VERIFIED_CANDIDATE",
+      "lines": [
+        67,
+        68
+      ],
+      "inputs": [],
+      "outputs": [
+        "WS-WORK-AREAS"
+      ],
+      "side_effects": [],
+      "unresolved": [],
+      "covered_by": []
+    },
+    {
+      "behaviour_id": "PROGNAME:2000-PROCESS",
+      "kind": "performed_range",
+      "classification": "VERIFIED_CANDIDATE",
+      "lines": [
+        75,
+        76
+      ],
+      "inputs": [],
+      "outputs": [
+        "WS-END-OF-FILE-SW"
+      ],
+      "side_effects": [],
+      "unresolved": [],
+      "covered_by": []
+    },
+    {
+      "behaviour_id": "PROGNAME:3000-TERMINATE",
+      "kind": "performed_range",
+      "classification": "VERIFIED_CANDIDATE",
+      "lines": [
+        82,
+        83
+      ],
+      "inputs": [
+        "WS-RETURN-CODE"
+      ],
+      "outputs": [
+        "RETURN-CODE"
+      ],
+      "side_effects": [],
+      "unresolved": [],
+      "covered_by": []
+    }
+  ],
+  "gaps": [],
+  "closures": [
+    {
+      "behaviour_id": "PROGNAME:0000-MAIN",
+      "status": "UNRESOLVED",
+      "unresolved_reasons": [
+        "line 82: RETURN-CODE is neither declared, a keyword, a paragraph nor the subject of a blocking decision (unknown dependency)"
+      ],
+      "units": [
+        "PROGNAME"
+      ],
+      "external": [],
+      "undeclared": [],
+      "sha256": "391d7cafb98cf8d5eadd4112fb89ed991efdc933d1a47af820383ec1341fdec5"
+    },
+    {
+      "behaviour_id": "PROGNAME:1000-INITIALIZE",
+      "status": "RESOLVED",
+      "unresolved_reasons": [],
+      "units": [
+        "PROGNAME"
+      ],
+      "external": [],
+      "undeclared": [],
+      "sha256": "ca40defae3fa8f727712d02e96affa5adfb21a460e67ea365382c5f224b97448"
+    },
+    {
+      "behaviour_id": "PROGNAME:2000-PROCESS",
+      "status": "RESOLVED",
+      "unresolved_reasons": [],
+      "units": [
+        "PROGNAME"
+      ],
+      "external": [],
+      "undeclared": [],
+      "sha256": "28e8493bc4de9540b05c9e293aae1cc3fb815ca0fe38789795740b3704d6387b"
+    },
+    {
+      "behaviour_id": "PROGNAME:3000-TERMINATE",
+      "status": "UNRESOLVED",
+      "unresolved_reasons": [
+        "line 82: RETURN-CODE is neither declared, a keyword, a paragraph nor the subject of a blocking decision (unknown dependency)"
+      ],
+      "units": [
+        "PROGNAME"
+      ],
+      "external": [],
+      "undeclared": [],
+      "sha256": "bf4c345ccd0afed7515e8051874bc8cedc4ace9f23d5a9beff83f6e4cde57642"
+    }
+  ],
+  "open_decisions": [
+    {
+      "id": "DR-PROGNAME-001",
+      "blocking": true,
+      "question": "PROGNAME is a confirmed program template (src/templates/program/standard-program.cbl): a skeleton whose processing loop runs once and whose error routine 9000-HANDLE-ERROR is never invoked (GAP-096). It has no business rules in scope. Is it retired, replaced by a framework program skeleton, or kept as a developer template?"
+    },
+    {
+      "id": "SCOPE-PROGNAME",
+      "blocking": true,
+      "question": "PROGNAME is classified template (confirmed): classified as template (confirmed); a human must decide whether it is in modernisation scope. Keep it in the modernisation scope (resolved_no_change) or exclude it (excluded_from_scope)?"
+    },
+    {
+      "id": "RVW-GAP-092",
+      "blocking": false,
+      "question": "GAP-092 (medium, DIAGRAM_RENDER_UNVERIFIED) is not addressed by any decision or requirement: Visual rendering of the 65 Mermaid diagrams is unverified. Acknowledge it as a known limitation (resolved_no_change) or exclude the affected units?"
+    },
+    {
+      "id": "RVW-GAP-104",
+      "blocking": false,
+      "question": "GAP-104 (low, DIAGRAM_INCOMPLETE) is not addressed by any decision or requirement: COMP-UNRESOLVED: all seven edges are unsupported. Acknowledge it as a known limitation (resolved_no_change) or exclude the affected units?"
+    }
+  ],
+  "authorisation": {
+    "generation_authorized": false,
+    "blockers": [
+      "config generation.java_generation_allowed is false (project authority)",
+      "no authorised orchestrator.java_target_dir",
+      "G4 is BLOCKED (needs signed G2, G3 and G4 approvals by trusted signers)",
+      "trust store: TRUST_NOT_CONFIGURED"
+    ],
+    "gates": {
+      "G0": "PASS",
+      "G1": "PASS",
+      "G2": "UNVERIFIED",
+      "G3": "BLOCKED",
+      "G4": "BLOCKED",
+      "G5": "BLOCKED",
+      "G6": "BLOCKED",
+      "G7": "BLOCKED",
+      "G8": "BLOCKED"
+    },
+    "trust": "TRUST_NOT_CONFIGURED",
+    "program_g2_scope": {
+      "readiness": "NOT_READY",
+      "blocking": 6,
+      "scope_sha256": "b3ef4a1026d79b8e797c1d1e009681446908b66230f148b7a6bcfdf4827a12fa"
+    },
+    "note": "Engineering gates never authorise generation. Java may be generated only when generation_authorized is true."
+  }
+}

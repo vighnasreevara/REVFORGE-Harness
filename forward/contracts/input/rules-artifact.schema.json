@@ -1,0 +1,64 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://revforge.local/contracts/input/rules-artifact.schema.json",
+  "title": "Reverse Agent 5 rules_artifact.json (consumed core)",
+  "type": "object",
+  "required": ["meta", "rule_sets", "business_rules"],
+  "definitions": {
+    "ruleSource": {
+      "type": "object",
+      "properties": {
+        "program_id": { "type": ["string", "null"] },
+        "copybook": { "type": ["string", "null"] },
+        "paragraph": { "type": ["string", "null"] },
+        "line": { "type": ["integer", "null"] },
+        "evidence": { "enum": ["complete", "partial"] },
+        "source_ids": { "$ref": "../common.schema.json#/definitions/sourceIds" }
+      }
+    }
+  },
+  "properties": {
+    "meta": {
+      "type": "object",
+      "required": ["agent_version", "system_id"],
+      "properties": {
+        "agent_version": { "type": "string" },
+        "system_id": { "$ref": "../common.schema.json#/definitions/systemId" }
+      }
+    },
+    "rule_sets": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["rule_set_id", "rule_ids"],
+        "properties": {
+          "rule_set_id": { "$ref": "../common.schema.json#/definitions/ruleSetId" },
+          "rule_ids": { "type": "array", "items": { "$ref": "../common.schema.json#/definitions/ruleId" } }
+        }
+      }
+    },
+    "business_rules": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["rule_id", "name", "category", "confidence", "requires_sme_review", "sources"],
+        "properties": {
+          "rule_id": { "$ref": "../common.schema.json#/definitions/ruleId" },
+          "rule_set_id": { "anyOf": [{ "$ref": "../common.schema.json#/definitions/ruleSetId" }, { "type": "null" }] },
+          "name": { "type": "string" },
+          "category": { "type": "string" },
+          "confidence": { "$ref": "../common.schema.json#/definitions/confidence" },
+          "requires_sme_review": { "type": "boolean" },
+          "dead_code": { "type": ["boolean", "null"] },
+          "primary_source": { "anyOf": [{ "$ref": "#/definitions/ruleSource" }, { "type": "null" }] },
+          "sources": { "type": "array", "items": { "$ref": "#/definitions/ruleSource" } },
+          "implemented_in_programs": { "type": "array", "items": { "type": "string" } }
+        }
+      }
+    },
+    "error_handling_catalogue": { "type": "array" },
+    "technical_condition_declarations": { "type": "array" },
+    "rules_by_program": { "type": "object" },
+    "issues": { "type": "array" }
+  }
+}

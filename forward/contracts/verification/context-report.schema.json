@@ -1,0 +1,113 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://revforge.local/contracts/verification/context-report.schema.json",
+  "title": "Dependency-aware source-context verification report",
+  "type": "object",
+  "required": [
+    "contract",
+    "contract_version",
+    "generated_at",
+    "baseline_manifest_sha256",
+    "scope",
+    "source_available",
+    "summary",
+    "results"
+  ],
+  "properties": {
+    "contract": {
+      "const": "verification/context-report"
+    },
+    "contract_version": {
+      "const": "1.0"
+    },
+    "baseline_manifest_sha256": {
+      "$ref": "../common.schema.json#/definitions/sha256"
+    },
+    "results": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "item_id",
+          "kind",
+          "item_sha256",
+          "claim",
+          "claimed_literals",
+          "existing",
+          "refs",
+          "levels",
+          "status",
+          "literal_support",
+          "additional_references",
+          "contradictions",
+          "metadata_disagreements",
+          "uncertainties",
+          "source_hashes",
+          "human_decision_needed",
+          "result_sha256"
+        ],
+        "properties": {
+          "item_id": {
+            "type": "string"
+          },
+          "item_sha256": {
+            "$ref": "../common.schema.json#/definitions/sha256"
+          },
+          "status": {
+            "enum": [
+              "CONTEXT_SUPPORTED",
+              "CONTEXT_PARTIAL",
+              "CONTEXT_UNSUPPORTED",
+              "CONTEXT_UNRESOLVED",
+              "CONTEXT_CONTRADICTED",
+              "CITATION_MISMATCH",
+              "SOURCE_UNAVAILABLE",
+              "NOT_APPLICABLE"
+            ]
+          },
+          "result_sha256": {
+            "$ref": "../common.schema.json#/definitions/sha256"
+          },
+          "levels": {
+            "type": "object",
+            "required": [
+              "symbol_exists",
+              "symbol_resolved",
+              "value_declared",
+              "statement_references",
+              "runtime_effect_supported",
+              "business_interpretation"
+            ],
+            "properties": {
+              "business_interpretation": {
+                "const": "not_established_requires_human"
+              }
+            }
+          },
+          "human_decision_needed": {
+            "type": "object",
+            "required": [
+              "needed",
+              "why"
+            ],
+            "properties": {
+              "needed": {
+                "const": true
+              }
+            }
+          },
+          "source_hashes": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": [
+                "path",
+                "sha256"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}

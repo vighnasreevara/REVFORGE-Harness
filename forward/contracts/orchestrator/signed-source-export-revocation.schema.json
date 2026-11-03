@@ -1,0 +1,68 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://revforge.local/contracts/orchestrator/signed-source-export-revocation.schema.json",
+  "title": "Signed revocation of a source-export authorization",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "contract",
+    "revocation",
+    "signature"
+  ],
+  "properties": {
+    "contract": {
+      "const": "signed-source-export-revocation"
+    },
+    "revocation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "contract",
+        "authorization_id",
+        "reason",
+        "revoked_at",
+        "signer_id",
+        "role"
+      ],
+      "properties": {
+        "contract": {
+          "const": "source-export-revocation"
+        },
+        "authorization_id": {
+          "type": "string"
+        },
+        "reason": {
+          "type": "string",
+          "minLength": 3
+        },
+        "revoked_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "signer_id": {
+          "type": "string"
+        },
+        "role": {
+          "type": "string"
+        }
+      }
+    },
+    "signature": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "algorithm",
+        "value"
+      ],
+      "properties": {
+        "algorithm": {
+          "const": "ed25519"
+        },
+        "value": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9+/=]{80,100}$"
+        }
+      }
+    }
+  }
+}

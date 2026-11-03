@@ -1,0 +1,50 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://revforge.local/contracts/verification/evidence-adjudication-report.schema.json",
+  "title": "Evidence adjudication report",
+  "type": "object",
+  "required": [
+    "contract",
+    "contract_version",
+    "generated_at",
+    "baseline_manifest_sha256",
+    "scope",
+    "summary",
+    "results"
+  ],
+  "properties": {
+    "contract": {
+      "const": "verification/evidence-adjudication-report"
+    },
+    "contract_version": {
+      "const": "1.0"
+    },
+    "baseline_manifest_sha256": {
+      "$ref": "../common.schema.json#/definitions/sha256"
+    },
+    "results": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "item_id",
+          "cohort",
+          "classification",
+          "superseding_status",
+          "needs_human_acceptance"
+        ],
+        "properties": {
+          "cohort": {
+            "enum": [
+              "newly_supported",
+              "questionable_earlier_verification"
+            ]
+          },
+          "needs_human_acceptance": {
+            "const": true
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,572 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://revforge.local/contracts/forward-config.schema.json",
+  "title": "REVFORGE forward execution configuration",
+  "type": "object",
+  "required": [
+    "config_version",
+    "repo_root",
+    "reverse_artifacts",
+    "selection",
+    "runs_dir",
+    "generation",
+    "neo4j"
+  ],
+  "properties": {
+    "$schema": {
+      "type": "string"
+    },
+    "config_version": {
+      "type": "string"
+    },
+    "repo_root": {
+      "type": "string",
+      "description": "Repository root, relative to the forward/ directory or absolute."
+    },
+    "reverse_artifacts": {
+      "type": "object",
+      "required": [
+        "inventory",
+        "parser",
+        "data",
+        "logic",
+        "rules",
+        "diagrams",
+        "gaps",
+        "brd"
+      ],
+      "additionalProperties": {
+        "type": "string"
+      }
+    },
+    "optional_artifacts": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "string"
+      }
+    },
+    "cobol_source": {
+      "type": "object",
+      "properties": {
+        "root": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "env_var": {
+          "type": "string"
+        },
+        "note": {
+          "type": "string"
+        }
+      }
+    },
+    "selection": {
+      "type": "object",
+      "required": [
+        "programs"
+      ],
+      "properties": {
+        "programs": {
+          "oneOf": [
+            {
+              "const": "all"
+            },
+            {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "minLength": 1
+              },
+              "minItems": 1
+            }
+          ]
+        }
+      }
+    },
+    "runs_dir": {
+      "type": "string"
+    },
+    "generation": {
+      "type": "object",
+      "required": [
+        "java_generation_allowed",
+        "current_step"
+      ],
+      "properties": {
+        "java_generation_allowed": {
+          "type": "boolean"
+        },
+        "current_step": {
+          "type": "string"
+        },
+        "note": {
+          "type": "string"
+        }
+      }
+    },
+    "neo4j": {
+      "type": "object",
+      "required": [
+        "live_verification"
+      ],
+      "properties": {
+        "live_verification": {
+          "type": "boolean"
+        },
+        "note": {
+          "type": "string"
+        }
+      }
+    },
+    "orchestrator": {
+      "type": "object",
+      "properties": {
+        "agents_dir": {
+          "type": "string"
+        },
+        "skills_dir": {
+          "type": "string"
+        },
+        "java_target_dir": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "note": {
+          "type": "string"
+        },
+        "batch_size": {
+          "type": "integer",
+          "minimum": 1
+        }
+      },
+      "additionalProperties": false
+    },
+    "approval": {
+      "type": "object",
+      "additionalProperties": false,
+      "description": "Human approval boundary (STEP 4). Approvals and decision resolutions are accepted only when signed (Ed25519) by a signer in an externally provisioned trust store. The harness never creates or trusts a signer itself.",
+      "properties": {
+        "trust_store": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "Path (relative to repo_root, or absolute) of the trust store holding signer PUBLIC keys and roles. Null = no trust anchor: G2 cannot pass."
+        },
+        "trust_store_env": {
+          "type": "string",
+          "description": "Environment variable that may name the trust store instead (takes precedence)."
+        },
+        "request_ttl_hours": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 2160
+        },
+        "max_clock_skew_minutes": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 1440
+        },
+        "require_distinct_requester": {
+          "type": "boolean",
+          "description": "Reject approvals signed by the identity that requested them (no self-approval)."
+        },
+        "roles": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "requirements_approval",
+            "exception",
+            "decision"
+          ],
+          "properties": {
+            "requirements_approval": {
+              "type": "array",
+              "minItems": 1,
+              "items": {
+                "type": "string",
+                "minLength": 1
+              }
+            },
+            "exception": {
+              "type": "array",
+              "minItems": 1,
+              "items": {
+                "type": "string",
+                "minLength": 1
+              }
+            },
+            "decision": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "business",
+                "technical",
+                "scope",
+                "data_layout",
+                "runtime_semantics",
+                "review"
+              ],
+              "properties": {
+                "business": {
+                  "type": "array",
+                  "minItems": 1,
+                  "items": {
+                    "type": "string",
+                    "minLength": 1
+                  }
+                },
+                "technical": {
+                  "type": "array",
+                  "minItems": 1,
+                  "items": {
+                    "type": "string",
+                    "minLength": 1
+                  }
+                },
+                "scope": {
+                  "type": "array",
+                  "minItems": 1,
+                  "items": {
+                    "type": "string",
+                    "minLength": 1
+                  }
+                },
+                "data_layout": {
+                  "type": "array",
+                  "minItems": 1,
+                  "items": {
+                    "type": "string",
+                    "minLength": 1
+                  }
+                },
+                "runtime_semantics": {
+                  "type": "array",
+                  "minItems": 1,
+                  "items": {
+                    "type": "string",
+                    "minLength": 1
+                  }
+                },
+                "review": {
+                  "type": "array",
+                  "minItems": 1,
+                  "items": {
+                    "type": "string",
+                    "minLength": 1
+                  }
+                }
+              }
+            }
+          }
+        },
+        "g2": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "default_scope": {
+              "type": "string",
+              "description": "Scope evaluated for the workflow gate when no approval exists: application | programs:A,B | requirements:R1,R2"
+            },
+            "reverse_artifact_supported": {
+              "enum": [
+                "REQUIRES_EVIDENCE",
+                "REQUIRES_SME_DECISION"
+              ],
+              "description": "Outcome for claims supported only by reverse artifacts (never VERIFIED: no silent upgrade)."
+            },
+            "allow_exceptions_for": {
+              "type": "array",
+              "items": {
+                "enum": [
+                  "REQUIRES_EVIDENCE",
+                  "REQUIRES_SME_DECISION"
+                ]
+              },
+              "description": "Outcomes a signed approved_exception may cover. CONTRADICTED is never eligible."
+            },
+            "accept_independent_verification_without_read_telemetry": {
+              "type": "boolean",
+              "description": "When true, a claim the runtime independently re-verified against source is accepted even if the agent's read telemetry is missing. Claims are never accepted on an agent's declaration."
+            },
+            "blocking_gap_severities": {
+              "type": "array",
+              "items": {
+                "enum": [
+                  "critical",
+                  "high",
+                  "medium",
+                  "low"
+                ]
+              }
+            },
+            "include_called_programs": {
+              "type": "boolean",
+              "description": "Program scopes include statically called programs and included copybooks as shared dependencies."
+            }
+          }
+        },
+        "note": {
+          "type": "string"
+        }
+      }
+    },
+    "openai_verification": {
+      "type": "object",
+      "additionalProperties": false,
+      "description": "STEP 5 independent OpenAI verification. Network access is disabled by default; LIVE needs network_enabled, an API key AND a verified signed source-export authorization. An API key is never authorization.",
+      "required": [
+        "mode",
+        "network_enabled",
+        "provider",
+        "endpoint",
+        "model",
+        "api_key_env",
+        "request",
+        "budget",
+        "selection",
+        "template_version",
+        "source_export"
+      ],
+      "properties": {
+        "mode": {
+          "enum": [
+            "OFFLINE",
+            "MOCK",
+            "LIVE"
+          ]
+        },
+        "network_enabled": {
+          "type": "boolean"
+        },
+        "provider": {
+          "const": "openai"
+        },
+        "endpoint": {
+          "type": "string",
+          "pattern": "^https://"
+        },
+        "model": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "Exact model ID; null = not configured (LIVE blocked). Never substituted."
+        },
+        "model_verification": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "source": {
+              "type": "string"
+            },
+            "verified_on": {
+              "type": "string"
+            },
+            "capabilities": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "context_window": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "max_output_tokens": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "note": {
+              "type": "string"
+            }
+          }
+        },
+        "api_key_env": {
+          "type": "string",
+          "pattern": "^[A-Z][A-Z0-9_]*$"
+        },
+        "request": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "max_output_tokens",
+            "timeout_ms",
+            "max_retries",
+            "retry_base_delay_ms",
+            "concurrency",
+            "store"
+          ],
+          "properties": {
+            "max_output_tokens": {
+              "type": "integer",
+              "minimum": 256,
+              "maximum": 128000
+            },
+            "timeout_ms": {
+              "type": "integer",
+              "minimum": 1000,
+              "maximum": 900000
+            },
+            "max_retries": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 5
+            },
+            "retry_base_delay_ms": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 60000
+            },
+            "concurrency": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 8
+            },
+            "store": {
+              "const": false
+            }
+          }
+        },
+        "budget": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "max_calls_per_run",
+            "max_input_tokens_per_run",
+            "max_output_tokens_per_run",
+            "max_cost_usd_per_run"
+          ],
+          "properties": {
+            "max_calls_per_run": {
+              "type": "integer",
+              "minimum": 1
+            },
+            "max_input_tokens_per_run": {
+              "type": "integer",
+              "minimum": 1
+            },
+            "max_output_tokens_per_run": {
+              "type": "integer",
+              "minimum": 1
+            },
+            "max_cost_usd_per_run": {
+              "type": "number",
+              "exclusiveMinimum": 0
+            }
+          }
+        },
+        "pricing": {
+          "type": [
+            "object",
+            "null"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "currency": {
+              "const": "USD"
+            },
+            "input_per_1m": {
+              "type": "number",
+              "minimum": 0
+            },
+            "cached_input_per_1m": {
+              "type": "number",
+              "minimum": 0
+            },
+            "output_per_1m": {
+              "type": "number",
+              "minimum": 0
+            },
+            "source": {
+              "type": "string"
+            },
+            "verified_on": {
+              "type": "string"
+            }
+          }
+        },
+        "selection": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "max_packets",
+            "category_priority"
+          ],
+          "properties": {
+            "max_packets": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 50
+            },
+            "category_priority": {
+              "type": "array",
+              "items": {
+                "enum": [
+                  "contradictory_business_rules",
+                  "unsupported_business_interpretation",
+                  "data_layout_inconsistency",
+                  "control_flow_uncertainty",
+                  "runtime_behavior_uncertainty",
+                  "incorrect_source_citation",
+                  "missing_evidence",
+                  "missing_source_or_dependency",
+                  "program_scope_uncertainty",
+                  "approval_prerequisite"
+                ]
+              }
+            },
+            "prepare_also_categories": {
+              "type": "array",
+              "items": {
+                "enum": [
+                  "contradictory_business_rules",
+                  "unsupported_business_interpretation",
+                  "data_layout_inconsistency",
+                  "control_flow_uncertainty",
+                  "runtime_behavior_uncertainty",
+                  "incorrect_source_citation",
+                  "missing_evidence",
+                  "missing_source_or_dependency",
+                  "program_scope_uncertainty",
+                  "approval_prerequisite"
+                ]
+              }
+            }
+          }
+        },
+        "template_version": {
+          "type": "string",
+          "minLength": 3
+        },
+        "source_export": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "required_roles",
+            "purpose"
+          ],
+          "properties": {
+            "required_roles": {
+              "type": "array",
+              "minItems": 1,
+              "items": {
+                "type": "string"
+              }
+            },
+            "purpose": {
+              "const": "independent_semantic_verification"
+            }
+          }
+        },
+        "note": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}

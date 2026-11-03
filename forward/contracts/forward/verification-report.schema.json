@@ -1,0 +1,58 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://revforge.local/contracts/forward/verification-report.schema.json",
+  "title": "Independent verification and equivalence report (F6, fe-legacy-java-equivalence)",
+  "allOf": [{ "$ref": "forward-common.schema.json#/definitions/header" }],
+  "type": "object",
+  "required": ["contract", "record_type", "test_runs", "equivalence"],
+  "properties": {
+    "contract": { "const": "forward/verification-report" },
+    "record_type": { "enum": ["junit_results", "equivalence_assessment", "unresolved_findings"] },
+    "test_runs": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["command", "exit_code", "tests", "failures", "errors", "skipped", "executed_at"],
+        "properties": {
+          "command": { "type": "string" },
+          "exit_code": { "type": "integer" },
+          "tests": { "type": "integer", "minimum": 0 },
+          "failures": { "type": "integer", "minimum": 0 },
+          "errors": { "type": "integer", "minimum": 0 },
+          "skipped": { "type": "integer", "minimum": 0 },
+          "executed_at": { "type": "string", "format": "date-time" }
+        }
+      }
+    },
+    "equivalence": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["requirement_id", "status", "compared_aspects", "reference_evidence", "differences"],
+        "properties": {
+          "requirement_id": { "$ref": "forward-common.schema.json#/definitions/requirementId" },
+          "status": { "enum": ["EQUIVALENT", "DIFFERENT", "EQUIVALENCE_UNVERIFIED"] },
+          "compared_aspects": { "type": "array", "items": { "enum": ["output_values", "output_file_bytes", "record_ordering", "return_codes", "error_behavior", "numeric_results", "persistent_state", "side_effects"] } },
+          "reference_evidence": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": ["kind", "path", "sha256"],
+              "properties": {
+                "kind": { "enum": ["captured_cobol_output", "cobol_execution_log", "golden_file"] },
+                "path": { "type": "string" },
+                "sha256": { "$ref": "../common.schema.json#/definitions/sha256" }
+              }
+            }
+          },
+          "differences": { "type": "array", "items": { "type": "string" } }
+        },
+        "if": { "properties": { "status": { "const": "EQUIVALENT" } } },
+        "then": { "properties": { "reference_evidence": { "minItems": 1 }, "compared_aspects": { "minItems": 1 } } }
+      }
+    }
+  }
+}

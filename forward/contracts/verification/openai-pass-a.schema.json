@@ -1,0 +1,206 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://revforge.local/contracts/verification/openai-pass-a.schema.json",
+  "title": "Independent review Pass A packets: source evidence only",
+  "description": "Pass A must never contain an existing interpretation: packets admit only source excerpts, source-derived definitions and control flow, a neutral question and the output contract.",
+  "type": "object",
+  "required": [
+    "contract",
+    "contract_version",
+    "generated_at",
+    "baseline_manifest_sha256",
+    "export_authorization",
+    "packets"
+  ],
+  "properties": {
+    "contract": {
+      "const": "openai-pass-a"
+    },
+    "contract_version": {
+      "const": "1.0"
+    },
+    "baseline_manifest_sha256": {
+      "$ref": "../common.schema.json#/definitions/sha256"
+    },
+    "export_authorization": {
+      "enum": [
+        "AUTHORIZED",
+        "NOT_AUTHORIZED"
+      ]
+    },
+    "packets": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "packet_id",
+          "pass",
+          "baseline_manifest_sha256",
+          "root_cause_id",
+          "data_classification",
+          "export_authorization",
+          "sources",
+          "definitions",
+          "control_flow",
+          "question",
+          "missing_context",
+          "output_contract",
+          "redactions"
+        ],
+        "properties": {
+          "packet_id": {
+            "type": "string",
+            "pattern": "^OAV-[A-Z]{3}-[0-9a-f]{10}$"
+          },
+          "pass": {
+            "const": "A"
+          },
+          "baseline_manifest_sha256": {
+            "$ref": "../common.schema.json#/definitions/sha256"
+          },
+          "root_cause_id": {
+            "type": "string"
+          },
+          "data_classification": {
+            "type": "string"
+          },
+          "export_authorization": {
+            "type": "object",
+            "required": [
+              "status",
+              "reason"
+            ],
+            "additionalProperties": false,
+            "properties": {
+              "status": {
+                "enum": [
+                  "AUTHORIZED",
+                  "NOT_AUTHORIZED"
+                ]
+              },
+              "reason": {
+                "type": "string"
+              }
+            }
+          },
+          "sources": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "file_id",
+                "path",
+                "sha256",
+                "lines",
+                "excerpt",
+                "available"
+              ],
+              "properties": {
+                "file_id": {
+                  "type": "string"
+                },
+                "path": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "sha256": {
+                  "anyOf": [
+                    {
+                      "$ref": "../common.schema.json#/definitions/sha256"
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ]
+                },
+                "lines": {
+                  "type": "array"
+                },
+                "available": {
+                  "type": "boolean"
+                },
+                "excerpt": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "additionalProperties": false,
+                    "required": [
+                      "line",
+                      "text"
+                    ],
+                    "properties": {
+                      "line": {
+                        "type": "integer"
+                      },
+                      "text": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "definitions": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "file",
+                "name",
+                "level"
+              ],
+              "properties": {
+                "file": {},
+                "name": {},
+                "level": {},
+                "pic": {},
+                "usage": {},
+                "occurs": {},
+                "redefines": {},
+                "size_bytes": {},
+                "defined_at_line": {},
+                "condition_names": {}
+              }
+            }
+          },
+          "control_flow": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "properties": {
+                "file": {},
+                "lines": {},
+                "paragraph": {},
+                "paragraph_lines": {},
+                "performed_from_lines": {},
+                "perform_until_in_paragraph": {}
+              }
+            }
+          },
+          "question": {
+            "type": "string"
+          },
+          "missing_context": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "output_contract": {
+            "type": "object"
+          },
+          "redactions": {
+            "type": "array"
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,148 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://revforge.local/contracts/orchestrator/approval-request.schema.json",
+  "title": "G2 approval request (runtime record, immutable)",
+  "description": "Exported for a READY scope. request_sha256 is the SHA-256 of the canonical JSON of payload; the record's file hash is sealed in the audit log. Signers sign an approval-statement that binds request_sha256, never this file directly.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "contract",
+    "contract_version",
+    "request_id",
+    "request_sha256",
+    "payload"
+  ],
+  "properties": {
+    "contract": {
+      "const": "approval-request"
+    },
+    "contract_version": {
+      "const": "1.0"
+    },
+    "request_id": {
+      "type": "string",
+      "pattern": "^AREQ-[0-9]{4}$"
+    },
+    "request_sha256": {
+      "$ref": "../common.schema.json#/definitions/sha256"
+    },
+    "payload": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "contract",
+        "contract_version",
+        "request_id",
+        "gate",
+        "workflow_id",
+        "run_id",
+        "baseline",
+        "scope",
+        "policy_sha256",
+        "required_roles",
+        "approval_covers",
+        "requested_by",
+        "created_at",
+        "expires_at",
+        "nonce"
+      ],
+      "properties": {
+        "contract": {
+          "const": "approval-request-payload"
+        },
+        "contract_version": {
+          "const": "1.0"
+        },
+        "request_id": {
+          "type": "string"
+        },
+        "gate": {
+          "const": "G2"
+        },
+        "workflow_id": {
+          "type": "string"
+        },
+        "run_id": {
+          "type": "string"
+        },
+        "baseline": {
+          "type": "object",
+          "required": [
+            "manifest_sha256"
+          ],
+          "properties": {
+            "manifest_sha256": {
+              "$ref": "../common.schema.json#/definitions/sha256"
+            }
+          }
+        },
+        "scope": {
+          "type": "object",
+          "required": [
+            "selector",
+            "selector_text",
+            "scope_sha256",
+            "units",
+            "requirements",
+            "summary"
+          ],
+          "properties": {
+            "scope_sha256": {
+              "$ref": "../common.schema.json#/definitions/sha256"
+            },
+            "behaviour": {
+              "description": "STEP 13: present only for a behaviour scope; binds the exact behaviour, its typed items, closure, decision attribution and deferred gaps.",
+              "type": "object",
+              "required": ["program", "entry", "range", "source", "closure_sha256", "items", "applicable_decisions", "excluded_decisions", "deferred_gaps", "covers_only"],
+              "properties": {
+                "closure_sha256": { "$ref": "../common.schema.json#/definitions/sha256" },
+                "items": {
+                  "type": "array",
+                  "minItems": 1,
+                  "items": {
+                    "type": "object",
+                    "required": ["kind", "id", "sha256"],
+                    "properties": { "kind": { "enum": ["requirement", "runtime_requirement"] }, "sha256": { "$ref": "../common.schema.json#/definitions/sha256" } }
+                  }
+                },
+                "applicable_decisions": { "type": "array", "items": { "type": "object", "required": ["id", "sha256"] } },
+                "excluded_decisions": { "type": "array", "items": { "type": "object", "required": ["id", "reason"] } },
+                "deferred_gaps": { "type": "array", "items": { "type": "object", "required": ["gap_id", "in_closure", "blocking"] } },
+                "covers_only": { "type": "string", "minLength": 10 }
+              }
+            }
+          }
+        },
+        "policy_sha256": {
+          "$ref": "../common.schema.json#/definitions/sha256"
+        },
+        "required_roles": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "string"
+          }
+        },
+        "approval_covers": {
+          "type": "string"
+        },
+        "requested_by": {
+          "type": "string",
+          "minLength": 2
+        },
+        "created_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "expires_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "nonce": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{32}$"
+        }
+      }
+    }
+  }
+}

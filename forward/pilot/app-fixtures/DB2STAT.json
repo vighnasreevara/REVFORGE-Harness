@@ -1,0 +1,251 @@
+{
+ "program": "DB2STAT",
+ "provenance": "Written 2026-11-02 by a scenario-author agent (F6 independent fixture design) from the COBOL source src/programs/common/DB2STAT.cbl and the copybooks it COPYs (src/copybook/db2/SQLCA.cpy, src/copybook/db2/DBPROC.cpy, src/copybook/common/ERRHAND.cpy), plus the gap origins in the 'gaps' array of forward/generated/java/DB2STAT/pilot-result.json. No generated Java, source map or execution result was read. Scenarios V01.. were added on 2026-11-03 (partly-covered rule extension) by an F6 scenario-author agent from the same COBOL source, copybooks, README and gaps array only; no generated Java, source map or test result was read or run.",
+ "scenarios": [
+  {
+   "id": "T01",
+   "title": "INIT initialises the stats record, copies the program id, then blocks at ACCEPT ... FROM TIME STAMP",
+   "cobol_lines": [
+    60,
+    61,
+    77,
+    78,
+    80
+   ],
+   "kind": "call",
+   "set": {
+    "LS-FUNCTION": "INIT",
+    "LS-PROGRAM-ID": "TESTPGM",
+    "LS-ROWS-READ": "10",
+    "LS-ROWS-INSRT": "2",
+    "LS-ROWS-UPDT": "3",
+    "LS-ROWS-DELT": "1",
+    "LS-COMMITS": "4",
+    "LS-ROLLBACKS": "0",
+    "LS-RETURN-CODE": "0"
+   },
+   "expect": {
+    "outcome": "BLOCKED AT src/programs/common/DB2STAT.cbl:80"
+   }
+  },
+  {
+   "id": "T02",
+   "title": "UPDT copies the six counters into WS-STATS-RECORD and blocks at EXEC SQL UPDATE SESSION.DBSTATS",
+   "cobol_lines": [
+    62,
+    63,
+    131,
+    132,
+    133,
+    134,
+    135,
+    136,
+    138
+   ],
+   "kind": "call",
+   "set": {
+    "LS-FUNCTION": "UPDT",
+    "LS-PROGRAM-ID": "TESTPGM",
+    "LS-ROWS-READ": "10",
+    "LS-ROWS-INSRT": "2",
+    "LS-ROWS-UPDT": "3",
+    "LS-ROWS-DELT": "1",
+    "LS-COMMITS": "4",
+    "LS-ROLLBACKS": "0",
+    "LS-RETURN-CODE": "0"
+   },
+   "expect": {
+    "outcome": "BLOCKED AT src/programs/common/DB2STAT.cbl:138"
+   }
+  },
+  {
+   "id": "T03",
+   "title": "TERM blocks at its first statement, ACCEPT ... FROM TIME STAMP",
+   "cobol_lines": [
+    64,
+    65,
+    158
+   ],
+   "kind": "call",
+   "set": {
+    "LS-FUNCTION": "TERM",
+    "LS-PROGRAM-ID": "TESTPGM",
+    "LS-ROWS-READ": "10",
+    "LS-ROWS-INSRT": "2",
+    "LS-ROWS-UPDT": "3",
+    "LS-ROWS-DELT": "1",
+    "LS-COMMITS": "4",
+    "LS-ROLLBACKS": "0",
+    "LS-RETURN-CODE": "0"
+   },
+   "expect": {
+    "outcome": "BLOCKED AT src/programs/common/DB2STAT.cbl:158"
+   }
+  },
+  {
+   "id": "T04",
+   "title": "DISP blocks at EXEC SQL SELECT before any DISPLAY",
+   "cobol_lines": [
+    66,
+    67,
+    190
+   ],
+   "kind": "call",
+   "set": {
+    "LS-FUNCTION": "DISP",
+    "LS-PROGRAM-ID": "TESTPGM",
+    "LS-ROWS-READ": "10",
+    "LS-ROWS-INSRT": "2",
+    "LS-ROWS-UPDT": "3",
+    "LS-ROWS-DELT": "1",
+    "LS-COMMITS": "4",
+    "LS-ROLLBACKS": "0",
+    "LS-RETURN-CODE": "0"
+   },
+   "expect": {
+    "outcome": "BLOCKED AT src/programs/common/DB2STAT.cbl:190"
+   }
+  },
+  {
+   "id": "T05",
+   "title": "an unknown function code takes WHEN OTHER: 9000-ERROR-ROUTINE CALLs ERRPROC (application program, not registered)",
+   "cobol_lines": [
+    68,
+    69,
+    70,
+    225,
+    226,
+    227
+   ],
+   "kind": "call",
+   "set": {
+    "LS-FUNCTION": "init",
+    "LS-PROGRAM-ID": "TESTPGM",
+    "LS-ROWS-READ": "10",
+    "LS-ROWS-INSRT": "2",
+    "LS-ROWS-UPDT": "3",
+    "LS-ROWS-DELT": "1",
+    "LS-COMMITS": "4",
+    "LS-ROLLBACKS": "0",
+    "LS-RETURN-CODE": "0"
+   },
+   "expect": {
+    "outcome": "BLOCKED RUNTIME-CALL-UNAVAILABLE"
+   }
+  },
+  {
+   "id": "V01",
+   "title": "BR-055 INIT routes to 1000-INITIALIZE: INITIALIZE WS-STATS-RECORD zeroes the six counters and both times (COMP/COMP-3) and blanks the timestamps, WS-PROGRAM-ID := 'TESTPGM'; the caller's counters are not copied and LS-RETURN-CODE (+5) is untouched before ACCEPT FROM TIME STAMP (line 80)",
+   "cobol_lines": [
+    59,
+    60,
+    61,
+    77,
+    78,
+    80
+   ],
+   "kind": "call",
+   "set": {
+    "LS-FUNCTION": "INIT",
+    "LS-PROGRAM-ID": "TESTPGM",
+    "LS-ROWS-READ": "10",
+    "LS-ROWS-INSRT": "2",
+    "LS-ROWS-UPDT": "3",
+    "LS-ROWS-DELT": "1",
+    "LS-COMMITS": "4",
+    "LS-ROLLBACKS": "0",
+    "LS-RETURN-CODE": "5"
+   },
+   "expect": {
+    "outcome": "BLOCKED AT src/programs/common/DB2STAT.cbl:80",
+    "items": {
+     "WS-PROGRAM-ID": "TESTPGM",
+     "WS-START-TIME": "",
+     "WS-END-TIME": "",
+     "LS-RETURN-CODE": "5",
+     "WS-ROWS-READ": "0",
+     "WS-ROWS-INSERTED": "0",
+     "WS-ROWS-UPDATED": "0",
+     "WS-ROWS-DELETED": "0",
+     "WS-COMMITS": "0",
+     "WS-ROLLBACKS": "0",
+     "WS-CPU-TIME": "0",
+     "WS-ELAPSED-TIME": "0"
+    }
+   }
+  },
+  {
+   "id": "V02",
+   "title": "BR-055 UPDT routes to 2000-UPDATE-STATS: the six LINKAGE counters are copied into WS-STATS-RECORD (including a negative value and the S9(9) maximum), LS-RETURN-CODE (+5) untouched before EXEC SQL UPDATE (line 138)",
+   "cobol_lines": [
+    59,
+    62,
+    63,
+    131,
+    132,
+    133,
+    134,
+    135,
+    136,
+    138
+   ],
+   "kind": "call",
+   "set": {
+    "LS-FUNCTION": "UPDT",
+    "LS-PROGRAM-ID": "TESTPGM",
+    "LS-ROWS-READ": "999999999",
+    "LS-ROWS-INSRT": "2",
+    "LS-ROWS-UPDT": "3",
+    "LS-ROWS-DELT": "1",
+    "LS-COMMITS": "4",
+    "LS-ROLLBACKS": "-7",
+    "LS-RETURN-CODE": "5"
+   },
+   "expect": {
+    "outcome": "BLOCKED AT src/programs/common/DB2STAT.cbl:138",
+    "items": {
+     "WS-ROWS-READ": "999999999",
+     "WS-ROWS-INSERTED": "2",
+     "WS-ROWS-UPDATED": "3",
+     "WS-ROWS-DELETED": "1",
+     "WS-COMMITS": "4",
+     "WS-ROLLBACKS": "-7",
+     "LS-RETURN-CODE": "5"
+    }
+   }
+  },
+  {
+   "id": "V03",
+   "title": "BR-055 WHEN OTHER (function 'STOP'): ERR-TEXT 'Invalid function code', ERR-PROGRAM 'DB2STAT' and LS-RETURN-CODE 12 are set before CALL 'ERRPROC' (not registered); no counter is copied",
+   "cobol_lines": [
+    59,
+    68,
+    69,
+    70,
+    225,
+    226,
+    227
+   ],
+   "kind": "call",
+   "set": {
+    "LS-FUNCTION": "STOP",
+    "LS-PROGRAM-ID": "TESTPGM",
+    "LS-ROWS-READ": "10",
+    "LS-ROWS-INSRT": "2",
+    "LS-ROWS-UPDT": "3",
+    "LS-ROWS-DELT": "1",
+    "LS-COMMITS": "4",
+    "LS-ROLLBACKS": "0",
+    "LS-RETURN-CODE": "5"
+   },
+   "expect": {
+    "outcome": "BLOCKED RUNTIME-CALL-UNAVAILABLE",
+    "items": {
+     "ERR-TEXT": "Invalid function code",
+     "ERR-PROGRAM": "DB2STAT",
+     "LS-RETURN-CODE": "12"
+    }
+   }
+  }
+ ]
+}

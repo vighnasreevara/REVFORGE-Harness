@@ -1,0 +1,109 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://revforge.local/contracts/output/evidence-packet.schema.json",
+  "title": "Program-level evidence packet",
+  "description": "All reverse-engineering evidence for one program, with permanent IDs preserved and run-local catalogue IDs bound to their source run.",
+  "allOf": [{ "$ref": "../common.schema.json#/definitions/outputHeader" }],
+  "type": "object",
+  "required": ["contract", "program", "source_files", "structure", "logic", "dependencies", "data_records", "rules", "gaps", "diagrams", "readiness"],
+  "definitions": {
+    "ruleEntry": {
+      "type": "object",
+      "required": ["ref", "name", "category", "confidence", "requires_sme_review", "evidence_class", "evidence_reasons", "sources"],
+      "properties": {
+        "ref": { "$ref": "../common.schema.json#/definitions/runLocalRef" },
+        "rule_set": { "anyOf": [{ "$ref": "../common.schema.json#/definitions/runLocalRef" }, { "type": "null" }] },
+        "confidence": { "$ref": "../common.schema.json#/definitions/confidence" },
+        "requires_sme_review": { "type": "boolean" },
+        "evidence_class": { "$ref": "../common.schema.json#/definitions/evidenceClass" },
+        "evidence_reasons": { "type": "array", "items": { "type": "string" } },
+        "sources": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["source_ids"],
+            "properties": { "source_ids": { "$ref": "../common.schema.json#/definitions/sourceIds" } }
+          }
+        }
+      }
+    }
+  },
+  "properties": {
+    "contract": { "const": "evidence-packet" },
+    "program": {
+      "type": "object",
+      "required": ["program_id", "source_ids"],
+      "properties": {
+        "program_id": { "type": "string" },
+        "source_ids": {
+          "type": "object",
+          "required": ["system_id", "file_id", "path_id"],
+          "properties": {
+            "system_id": { "anyOf": [{ "$ref": "../common.schema.json#/definitions/systemId" }, { "type": "null" }] },
+            "file_id": { "$ref": "../common.schema.json#/definitions/fileId" },
+            "path_id": { "$ref": "../common.schema.json#/definitions/nullablePathId" }
+          }
+        }
+      }
+    },
+    "source_files": {
+      "type": "object",
+      "required": ["cobol_source_available"],
+      "properties": { "cobol_source_available": { "type": "boolean" } }
+    },
+    "structure": { "type": ["object", "null"] },
+    "logic": { "type": ["object", "null"] },
+    "dependencies": { "type": "object", "required": ["calls_out", "called_by", "includes", "jcl_jobs"] },
+    "data_records": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["record_id", "file_id", "owner"],
+        "properties": {
+          "record_id": { "$ref": "../common.schema.json#/definitions/recordId" },
+          "file_id": { "$ref": "../common.schema.json#/definitions/fileId" },
+          "owner": { "enum": ["program", "copybook"] }
+        }
+      }
+    },
+    "rules": {
+      "type": "object",
+      "required": ["implemented", "in_scope_via_copybook", "evidence_summary"],
+      "properties": {
+        "implemented": { "type": "array", "items": { "$ref": "#/definitions/ruleEntry" } },
+        "in_scope_via_copybook": { "type": "array", "items": { "$ref": "#/definitions/ruleEntry" } },
+        "evidence_summary": {
+          "type": "object",
+          "required": ["confirmed", "inferred", "uncertain"],
+          "additionalProperties": { "type": "integer", "minimum": 0 }
+        }
+      }
+    },
+    "gaps": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["ref", "gap_type", "severity", "requires_sme_review", "expanded_items"],
+        "properties": {
+          "ref": { "$ref": "../common.schema.json#/definitions/runLocalRef" },
+          "severity": { "$ref": "../common.schema.json#/definitions/severity" },
+          "expanded_items": { "type": "array", "items": { "type": "string", "pattern": "^GAP-[0-9]{3,}#[0-9]{2,}$" } }
+        }
+      }
+    },
+    "diagrams": {
+      "type": "object",
+      "required": ["role", "items"],
+      "properties": { "role": { "const": "supporting" }, "items": { "type": "array" } }
+    },
+    "readiness": {
+      "type": "object",
+      "required": ["status", "blockers", "cautions"],
+      "properties": {
+        "status": { "enum": ["blocked", "needs_sme_decision", "design_candidate"] },
+        "blockers": { "type": "array", "items": { "type": "string" } },
+        "cautions": { "type": "array", "items": { "type": "string" } }
+      }
+    }
+  }
+}

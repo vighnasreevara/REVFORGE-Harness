@@ -1,0 +1,114 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://revforge.local/contracts/orchestrator/approval-invalidation.schema.json",
+  "title": "Auditable invalidation of a previously valid approval (never deletes or rewrites it)",
+  "type": "object",
+  "properties": {
+    "contract": {
+      "const": "approval-invalidation"
+    },
+    "contract_version": {
+      "const": "1.0"
+    },
+    "invalidation_id": {
+      "type": "string",
+      "pattern": "^INV-[0-9]{4}$"
+    },
+    "detected_at": {
+      "$ref": "../common.schema.json#/definitions/isoTimestamp"
+    },
+    "gate": {
+      "enum": [
+        "G2",
+        "G3",
+        "G4"
+      ]
+    },
+    "approval_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "causes": {
+      "type": "array",
+      "items": {
+        "enum": [
+          "baseline_changed",
+          "scope_changed",
+          "requirements_changed",
+          "artifact_changed",
+          "dependency_changed",
+          "upstream_invalidated",
+          "signer_revoked_or_invalid",
+          "record_tampered",
+          "trust_unavailable"
+        ]
+      },
+      "minItems": 1
+    },
+    "failed_checks": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "ok": {
+            "type": "boolean"
+          },
+          "detail": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "required": [
+          "id",
+          "ok",
+          "detail"
+        ],
+        "additionalProperties": false
+      },
+      "minItems": 1
+    },
+    "downstream_impact": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "gate": {
+            "enum": [
+              "G3",
+              "G4"
+            ]
+          },
+          "approval_id": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "required": [
+          "gate",
+          "approval_id"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "causes_sha256": {
+      "$ref": "../common.schema.json#/definitions/sha256"
+    }
+  },
+  "required": [
+    "contract",
+    "contract_version",
+    "invalidation_id",
+    "detected_at",
+    "gate",
+    "approval_id",
+    "causes",
+    "failed_checks",
+    "downstream_impact",
+    "causes_sha256"
+  ],
+  "additionalProperties": false
+}

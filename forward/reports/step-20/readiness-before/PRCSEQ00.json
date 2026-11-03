@@ -1,0 +1,716 @@
+{
+  "gate": "SOURCE_READINESS",
+  "subject": "PRCSEQ00",
+  "status": "FAIL",
+  "checks": [
+    {
+      "id": "source_available",
+      "ok": true,
+      "detail": "src/programs/batch/PRCSEQ00.cbl sha256 bf37a5d7a464a4e51ef9379a99761a44ec683d4521ef966fedf58e19f3deb5b3; 157 statement(s) in 19 paragraph(s)"
+    },
+    {
+      "id": "complete_program",
+      "ok": true,
+      "detail": "every paragraph contains statements"
+    },
+    {
+      "id": "copybooks_resolved",
+      "ok": true,
+      "detail": "all 4 include(s) resolved: PRCSEQ, BCHCTL, BCHCON, ERRHAND"
+    },
+    {
+      "id": "requirements_and_data_mapping_delivered",
+      "ok": true,
+      "detail": "F1/F2 deliveries accepted for BCHCON, BCHCTL, PRCSEQ, ERRHAND, PRCSEQ00, ERRPROC"
+    },
+    {
+      "id": "behaviour_classified",
+      "ok": true,
+      "detail": "6 behaviour(s): 0 VERIFIED_CANDIDATE, 6 PARTIAL, 0 GAP"
+    },
+    {
+      "id": "dependencies_identified",
+      "ok": false,
+      "detail": "closure UNRESOLVED for PRCSEQ00:0000-MAIN (line 90: RETURN-CODE is neither declared, a keyword, a paragraph nor the subject of a blocking decision (unknown dependency)); PRCSEQ00:1000-INITIALIZE-SEQUENCE (line 142: I-O is neither declared, a keyword, a paragraph nor the subject of a blocking decision (unknown dependency)); PRCSEQ00:2000-GET-NEXT-PROCESS (line 230: WS-SUB is neither declared, a keyword, a paragraph nor the subject of a blocking decision (unknown dependency))"
+    },
+    {
+      "id": "unsupported_documented",
+      "ok": false,
+      "detail": "non-verified behaviour without a gap: PRCSEQ00:1000-INITIALIZE-SEQUENCE, PRCSEQ00:2000-GET-NEXT-PROCESS, PRCSEQ00:3000-CHECK-STATUS, PRCSEQ00:4000-TERMINATE-SEQUENCE, PRCSEQ00:9000-ERROR-ROUTINE"
+    },
+    {
+      "id": "unknowns_documented",
+      "ok": true,
+      "detail": "13 open decision(s) record the remaining questions (0 blocking for approval); none is resolved or assumed here"
+    }
+  ],
+  "note": "An engineering gate: it states that the source is understood well enough to convert, with every unknown documented. It is not a G2 approval and does not authorise generation.",
+  "behaviours": [
+    {
+      "behaviour_id": "PRCSEQ00:ENTRY-DISPATCH",
+      "kind": "dispatch",
+      "classification": "PARTIAL",
+      "lines": [
+        76,
+        90
+      ],
+      "inputs": [
+        "LS-FUNCTION",
+        "LS-RETURN-CODE"
+      ],
+      "outputs": [
+        "ERR-TEXT",
+        "RETURN-CODE"
+      ],
+      "side_effects": [],
+      "unresolved": [],
+      "covered_by": [
+        "REQ-PRCSEQ00-001"
+      ]
+    },
+    {
+      "behaviour_id": "PRCSEQ00:1000-INITIALIZE-SEQUENCE",
+      "kind": "performed_range",
+      "classification": "PARTIAL",
+      "lines": [
+        95,
+        204
+      ],
+      "inputs": [
+        "BATCH-CONTROL-RECORD",
+        "BCT-RC-ERROR",
+        "BCT-STAT-READY",
+        "ERR-MESSAGE",
+        "LS-PROCESS-DATE",
+        "LS-SEQUENCE-TYPE",
+        "PSR-KEY",
+        "PSR-PROCESS-ID",
+        "PSR-TYPE",
+        "WS-BCT-STATUS",
+        "WS-PROC-ID",
+        "WS-PROC-SEQ",
+        "WS-PROC-STATUS",
+        "WS-PROCESS-COUNT",
+        "WS-PSR-STATUS",
+        "WS-SEQUENCE-IX"
+      ],
+      "outputs": [
+        "AT",
+        "BATCH-CONTROL-RECORD",
+        "BCT-JOB-NAME",
+        "BCT-PROCESS-DATE",
+        "BCT-SEQUENCE-NO",
+        "BCT-STATUS",
+        "END",
+        "ERR-PROGRAM",
+        "ERR-TEXT",
+        "LS-RETURN-CODE",
+        "NOT",
+        "PSR-KEY",
+        "WS-PROC-ID(WS-PROC-IX)",
+        "WS-PROC-IX",
+        "WS-PROC-SEQ(WS-PROC-IX)",
+        "WS-PROC-STATUS(WS-PROC-IX)",
+        "WS-PROCESS-TABLE",
+        "WS-PSR-STATUS"
+      ],
+      "side_effects": [
+        {
+          "line": 122,
+          "kind": "call",
+          "operation": "CALL",
+          "table": null
+        },
+        {
+          "line": 142,
+          "kind": "file_io",
+          "operation": "OPEN",
+          "table": null
+        },
+        {
+          "line": 148,
+          "kind": "file_io",
+          "operation": "OPEN",
+          "table": null
+        },
+        {
+          "line": 162,
+          "kind": "file_io",
+          "operation": "START",
+          "table": null
+        },
+        {
+          "line": 169,
+          "kind": "file_io",
+          "operation": "READ",
+          "table": null
+        },
+        {
+          "line": 198,
+          "kind": "file_io",
+          "operation": "WRITE",
+          "table": null
+        }
+      ],
+      "unresolved": [],
+      "covered_by": [
+        "REQ-PRCSEQ00-001"
+      ]
+    },
+    {
+      "behaviour_id": "PRCSEQ00:2000-GET-NEXT-PROCESS",
+      "kind": "performed_range",
+      "classification": "PARTIAL",
+      "lines": [
+        101,
+        279
+      ],
+      "inputs": [
+        "BATCH-CONTROL-RECORD",
+        "BCT-RC-ERROR",
+        "BCT-RC-WARNING",
+        "BCT-RETURN-CODE",
+        "BCT-STAT-ACTIVE",
+        "BCT-STAT-READY",
+        "BCT-STATUS",
+        "ERR-MESSAGE",
+        "LS-NEXT-PROCESS",
+        "LS-PROCESS-DATE",
+        "LS-RETURN-CODE",
+        "PSR-DEP-COUNT",
+        "PSR-DEP-ID",
+        "PSR-DEP-RC",
+        "PSR-DEP-TYPE",
+        "WS-CURRENT-TIME",
+        "WS-PROC-ID",
+        "WS-PROC-STATUS",
+        "WS-PROCESS-COUNT",
+        "WS-SEQUENCE-IX"
+      ],
+      "outputs": [
+        "BCT-JOB-NAME",
+        "BCT-PROCESS-DATE",
+        "BCT-START-TIME",
+        "BCT-STATUS",
+        "ERR-PROGRAM",
+        "ERR-TEXT",
+        "LS-NEXT-PROCESS",
+        "LS-RETURN-CODE",
+        "PSR-PROCESS-ID"
+      ],
+      "side_effects": [
+        {
+          "line": 122,
+          "kind": "call",
+          "operation": "CALL",
+          "table": null
+        },
+        {
+          "line": 224,
+          "kind": "file_io",
+          "operation": "READ",
+          "table": null
+        },
+        {
+          "line": 243,
+          "kind": "file_io",
+          "operation": "READ",
+          "table": null
+        },
+        {
+          "line": 264,
+          "kind": "file_io",
+          "operation": "READ",
+          "table": null
+        },
+        {
+          "line": 274,
+          "kind": "file_io",
+          "operation": "REWRITE",
+          "table": null
+        }
+      ],
+      "unresolved": [],
+      "covered_by": [
+        "REQ-PRCSEQ00-001",
+        "REQ-PRCSEQ00-005",
+        "RT-PRCSEQ00-003"
+      ]
+    },
+    {
+      "behaviour_id": "PRCSEQ00:3000-CHECK-STATUS",
+      "kind": "performed_range",
+      "classification": "PARTIAL",
+      "lines": [
+        109,
+        320
+      ],
+      "inputs": [
+        "BCT-JOB-NAME",
+        "BCT-RC-ERROR",
+        "BCT-RETURN-CODE",
+        "BCT-STAT-ACTIVE",
+        "BCT-STAT-ERROR",
+        "BCT-STATUS",
+        "ERR-MESSAGE",
+        "LS-NEXT-PROCESS",
+        "LS-PROCESS-DATE",
+        "WS-ACTIVE-COUNT",
+        "WS-ERROR-COUNT",
+        "WS-PROC-ID",
+        "WS-PROC-RC",
+        "WS-PROC-STATUS",
+        "WS-PROCESS-COUNT",
+        "WS-SEQUENCE-IX"
+      ],
+      "outputs": [
+        "BCT-JOB-NAME",
+        "BCT-PROCESS-DATE",
+        "ERR-PROGRAM",
+        "ERR-TEXT",
+        "LS-RETURN-CODE",
+        "WS-ACTIVE-COUNT",
+        "WS-ERROR-COUNT",
+        "WS-PROC-RC(WS-SEQUENCE-IX)",
+        "WS-PROC-STATUS(WS-SEQUENCE-IX)"
+      ],
+      "side_effects": [
+        {
+          "line": 122,
+          "kind": "call",
+          "operation": "CALL",
+          "table": null
+        },
+        {
+          "line": 285,
+          "kind": "file_io",
+          "operation": "READ",
+          "table": null
+        }
+      ],
+      "unresolved": [],
+      "covered_by": [
+        "REQ-PRCSEQ00-001"
+      ]
+    },
+    {
+      "behaviour_id": "PRCSEQ00:4000-TERMINATE-SEQUENCE",
+      "kind": "performed_range",
+      "classification": "PARTIAL",
+      "lines": [
+        115,
+        343
+      ],
+      "inputs": [
+        "BCT-RC-ERROR",
+        "BCT-RC-SUCCESS",
+        "BCT-RC-WARNING",
+        "BCT-STAT-ACTIVE",
+        "BCT-STAT-ERROR",
+        "ERR-MESSAGE",
+        "WS-ACTIVE-COUNT",
+        "WS-BCT-STATUS",
+        "WS-ERROR-COUNT",
+        "WS-PROC-STATUS",
+        "WS-PROCESS-COUNT",
+        "WS-PSR-STATUS",
+        "WS-SEQUENCE-IX"
+      ],
+      "outputs": [
+        "ERR-PROGRAM",
+        "ERR-TEXT",
+        "LS-RETURN-CODE",
+        "WS-ACTIVE-COUNT",
+        "WS-ERROR-COUNT"
+      ],
+      "side_effects": [
+        {
+          "line": 122,
+          "kind": "call",
+          "operation": "CALL",
+          "table": null
+        },
+        {
+          "line": 337,
+          "kind": "file_io",
+          "operation": "CLOSE",
+          "table": null
+        }
+      ],
+      "unresolved": [],
+      "covered_by": [
+        "REQ-PRCSEQ00-001"
+      ]
+    },
+    {
+      "behaviour_id": "PRCSEQ00:9000-ERROR-ROUTINE",
+      "kind": "performed_range",
+      "classification": "PARTIAL",
+      "lines": [
+        120,
+        123
+      ],
+      "inputs": [
+        "BCT-RC-ERROR",
+        "ERR-MESSAGE"
+      ],
+      "outputs": [
+        "ERR-PROGRAM",
+        "LS-RETURN-CODE"
+      ],
+      "side_effects": [
+        {
+          "line": 122,
+          "kind": "call",
+          "operation": "CALL",
+          "table": null
+        }
+      ],
+      "unresolved": [],
+      "covered_by": [
+        "REQ-PRCSEQ00-001",
+        "REQ-PRCSEQ00-002",
+        "REQ-PRCSEQ00-004",
+        "REQ-PRCSEQ00-005",
+        "RT-PRCSEQ00-001",
+        "RT-PRCSEQ00-002",
+        "RT-PRCSEQ00-003",
+        "RT-PRCSEQ00-004"
+      ]
+    }
+  ],
+  "gaps": [],
+  "closures": [
+    {
+      "behaviour_id": "PRCSEQ00:0000-MAIN",
+      "status": "UNRESOLVED",
+      "unresolved_reasons": [
+        "line 90: RETURN-CODE is neither declared, a keyword, a paragraph nor the subject of a blocking decision (unknown dependency)",
+        "line 142: I-O is neither declared, a keyword, a paragraph nor the subject of a blocking decision (unknown dependency)",
+        "line 148: I-O is neither declared, a keyword, a paragraph nor the subject of a blocking decision (unknown dependency)",
+        "line 158: WS-PROC-IX is neither declared, a keyword, a paragraph nor the subject of a blocking decision (unknown dependency)",
+        "line 169: NEXT is neither declared, a keyword, a paragraph nor the subject of a blocking decision (unknown dependency)",
+        "line 182: WS-PROC-IX is neither declared, a keyword, a paragraph nor the subject of a blocking decision (unknown dependency)",
+        "line 183: WS-PROC-IX is neither declared, a keyword, a paragraph nor the subject of a blocking decision (unknown dependency)",
+        "line 184: WS-PROC-IX is neither declared, a keyword, a paragraph nor the subject of a blocking decision (unknown dependency)",
+        "line 185: WS-PROC-IX is neither declared, a keyword, a paragraph nor the subject of a blocking decision (unknown dependency)",
+        "line 230: WS-SUB is neither declared, a keyword, a paragraph nor the subject of a blocking decision (unknown dependency)",
+        "line 240: WS-SUB is neither declared, a keyword, a paragraph nor the subject of a blocking decision (unknown dependency)",
+        "line 250: WS-SUB is neither declared, a keyword, a paragraph nor the subject of a blocking decision (unknown dependency)",
+        "line 254: WS-SUB is neither declared, a keyword, a paragraph nor the subject of a blocking decision (unknown dependency)",
+        "line 271: STAMP is neither declared, a keyword, a paragraph nor the subject of a blocking decision (unknown dependency)"
+      ],
+      "units": [
+        "PRCSEQ00",
+        "ERRHAND",
+        "BCHCON",
+        "PRCSEQ",
+        "BCHCTL",
+        "ERRPROC"
+      ],
+      "external": [
+        {
+          "kind": "file_io",
+          "line": 162,
+          "operation": "START",
+          "target": "PROCESS-SEQ-FILE",
+          "relation": "direct"
+        },
+        {
+          "kind": "file_io",
+          "line": 169,
+          "operation": "READ",
+          "target": "PROCESS-SEQ-FILE",
+          "relation": "direct"
+        },
+        {
+          "kind": "file_io",
+          "line": 198,
+          "operation": "WRITE",
+          "target": "BATCH-CONTROL-FILE",
+          "relation": "direct"
+        },
+        {
+          "kind": "file_io",
+          "line": 224,
+          "operation": "READ",
+          "target": "PROCESS-SEQ-FILE",
+          "relation": "direct"
+        },
+        {
+          "kind": "file_io",
+          "line": 243,
+          "operation": "READ",
+          "target": "BATCH-CONTROL-FILE",
+          "relation": "direct"
+        },
+        {
+          "kind": "file_io",
+          "line": 264,
+          "operation": "READ",
+          "target": "BATCH-CONTROL-FILE",
+          "relation": "direct"
+        },
+        {
+          "kind": "file_io",
+          "line": 274,
+          "operation": "REWRITE",
+          "target": "BATCH-CONTROL-FILE",
+          "relation": "direct"
+        },
+        {
+          "kind": "file_io",
+          "line": 285,
+          "operation": "READ",
+          "target": "BATCH-CONTROL-FILE",
+          "relation": "direct"
+        }
+      ],
+      "undeclared": [],
+      "sha256": "e6c4e4aff1d47b9987f26a46dc81db7d1143d37b08fda0dca4d33dddc4895135"
+    },
+    {
+      "behaviour_id": "PRCSEQ00:1000-INITIALIZE-SEQUENCE",
+      "status": "UNRESOLVED",
+      "unresolved_reasons": [
+        "line 142: I-O is neither declared, a keyword, a paragraph nor the subject of a blocking decision (unknown dependency)",
+        "line 148: I-O is neither declared, a keyword, a paragraph nor the subject of a blocking decision (unknown dependency)",
+        "line 158: WS-PROC-IX is neither declared, a keyword, a paragraph nor the subject of a blocking decision (unknown dependency)",
+        "line 169: NEXT is neither declared, a keyword, a paragraph nor the subject of a blocking decision (unknown dependency)",
+        "line 182: WS-PROC-IX is neither declared, a keyword, a paragraph nor the subject of a blocking decision (unknown dependency)",
+        "line 183: WS-PROC-IX is neither declared, a keyword, a paragraph nor the subject of a blocking decision (unknown dependency)",
+        "line 184: WS-PROC-IX is neither declared, a keyword, a paragraph nor the subject of a blocking decision (unknown dependency)",
+        "line 185: WS-PROC-IX is neither declared, a keyword, a paragraph nor the subject of a blocking decision (unknown dependency)"
+      ],
+      "units": [
+        "PRCSEQ00",
+        "ERRHAND",
+        "BCHCON",
+        "PRCSEQ",
+        "BCHCTL",
+        "ERRPROC"
+      ],
+      "external": [
+        {
+          "kind": "file_io",
+          "line": 162,
+          "operation": "START",
+          "target": "PROCESS-SEQ-FILE",
+          "relation": "direct"
+        },
+        {
+          "kind": "file_io",
+          "line": 169,
+          "operation": "READ",
+          "target": "PROCESS-SEQ-FILE",
+          "relation": "direct"
+        },
+        {
+          "kind": "file_io",
+          "line": 198,
+          "operation": "WRITE",
+          "target": "BATCH-CONTROL-FILE",
+          "relation": "direct"
+        }
+      ],
+      "undeclared": [],
+      "sha256": "19bccb54e85c690bfadfef9ab6dbac4f0f93c3899213b1bc24ae88e9b52b5ce4"
+    },
+    {
+      "behaviour_id": "PRCSEQ00:2000-GET-NEXT-PROCESS",
+      "status": "UNRESOLVED",
+      "unresolved_reasons": [
+        "line 230: WS-SUB is neither declared, a keyword, a paragraph nor the subject of a blocking decision (unknown dependency)",
+        "line 240: WS-SUB is neither declared, a keyword, a paragraph nor the subject of a blocking decision (unknown dependency)",
+        "line 250: WS-SUB is neither declared, a keyword, a paragraph nor the subject of a blocking decision (unknown dependency)",
+        "line 254: WS-SUB is neither declared, a keyword, a paragraph nor the subject of a blocking decision (unknown dependency)",
+        "line 271: STAMP is neither declared, a keyword, a paragraph nor the subject of a blocking decision (unknown dependency)"
+      ],
+      "units": [
+        "PRCSEQ00",
+        "BCHCON",
+        "PRCSEQ",
+        "ERRHAND",
+        "BCHCTL",
+        "ERRPROC"
+      ],
+      "external": [
+        {
+          "kind": "file_io",
+          "line": 224,
+          "operation": "READ",
+          "target": "PROCESS-SEQ-FILE",
+          "relation": "direct"
+        },
+        {
+          "kind": "file_io",
+          "line": 243,
+          "operation": "READ",
+          "target": "BATCH-CONTROL-FILE",
+          "relation": "direct"
+        },
+        {
+          "kind": "file_io",
+          "line": 264,
+          "operation": "READ",
+          "target": "BATCH-CONTROL-FILE",
+          "relation": "direct"
+        },
+        {
+          "kind": "file_io",
+          "line": 274,
+          "operation": "REWRITE",
+          "target": "BATCH-CONTROL-FILE",
+          "relation": "direct"
+        }
+      ],
+      "undeclared": [],
+      "sha256": "4471c6254829b07c44bebda215cf9e913c7e300ad0b8c89aba28457184d5349d"
+    },
+    {
+      "behaviour_id": "PRCSEQ00:3000-CHECK-STATUS",
+      "status": "RESOLVED",
+      "unresolved_reasons": [],
+      "units": [
+        "PRCSEQ00",
+        "BCHCTL",
+        "ERRHAND",
+        "BCHCON",
+        "ERRPROC"
+      ],
+      "external": [
+        {
+          "kind": "file_io",
+          "line": 285,
+          "operation": "READ",
+          "target": "BATCH-CONTROL-FILE",
+          "relation": "direct"
+        }
+      ],
+      "undeclared": [],
+      "sha256": "7ca32e956d1ac76dfc8b7f13d06d7ede2f0b75c463f95d1a9168519385185886"
+    },
+    {
+      "behaviour_id": "PRCSEQ00:4000-TERMINATE-SEQUENCE",
+      "status": "RESOLVED",
+      "unresolved_reasons": [],
+      "units": [
+        "PRCSEQ00",
+        "BCHCON",
+        "ERRHAND",
+        "ERRPROC"
+      ],
+      "external": [],
+      "undeclared": [],
+      "sha256": "7b66dfd7ab8cc49aa539b8b19e560cac642a77303bd8dd3c33c8c16835c6f033"
+    },
+    {
+      "behaviour_id": "PRCSEQ00:9000-ERROR-ROUTINE",
+      "status": "RESOLVED",
+      "unresolved_reasons": [],
+      "units": [
+        "PRCSEQ00",
+        "ERRHAND",
+        "BCHCON",
+        "ERRPROC"
+      ],
+      "external": [],
+      "undeclared": [],
+      "sha256": "cd92afe07931580ccdbb0442c12cec337a759820c782b249fb58c9e4871c8813"
+    }
+  ],
+  "open_decisions": [
+    {
+      "id": "DR-DB2ERR-002",
+      "blocking": false,
+      "question": "DB2ERR (line 75) uses the non-standard 'ACCEPT WS-CURRENT-TIMESTAMP FROM TIME STAMP'; the ERRPROC logic file flags the same construct (line 57) and PORTDEL uses it for the deletion audit timestamp (source line 169). Which compiler extension is in use and what timestamp format do ERRLOG rows, error-log records and deletion audit records actually carry?"
+    },
+    {
+      "id": "DR-F2-0005-008",
+      "blocking": false,
+      "question": "PRCSEQ00 uses WS-SUB as the subscript of the dependency loop (line 230) but WS-SUB is declared nowhere. What is its PIC/USAGE, and therefore the maximum dependency count supported?"
+    },
+    {
+      "id": "DR-F2-0005-021",
+      "blocking": false,
+      "question": "PRCSEQ00's build loop ends only on file status '10' (possible endless loop after a failed START), the 100-entry process table has no overflow check, and the dependency subscript is unbounded. Which guard behaviour must Java implement?"
+    },
+    {
+      "id": "DR-F2-P0006-009",
+      "blocking": false,
+      "question": "ERRPROC's LINKAGE LS-ERROR-REQUEST is 354 bytes, but DB2ERR (line 199) and DB2STAT (line 227) CALL 'ERRPROC' USING ERR-MESSAGE from copybook ERRHAND (about 370 bytes, different field order). Which layout is the contract of the Java error service?"
+    },
+    {
+      "id": "DR-F2-PKT0010-001",
+      "blocking": false,
+      "question": "BCHCON BCT-EMERGENCY is PIC X(8) with VALUE 'EMERGENCY' (9 characters). What initial 8-byte value must the Java constant hold: the compiler-truncated 'EMERGENC', or is the copybook to be corrected (for example a 9-byte field or a different literal)?"
+    },
+    {
+      "id": "DR-F2-PKT0010-002",
+      "blocking": false,
+      "question": "Which character encoding (code page) do the files and areas described by these copybooks use for DISPLAY data on the legacy platform (EBCDIC 037, 1140, another EBCDIC variant, or ASCII)? The zoned-decimal test vectors and String codecs depend on it."
+    },
+    {
+      "id": "DR-F2-PKT0010-003",
+      "blocking": false,
+      "question": "Which TRUNC compiler option (STD, OPT or BIN) were the programs including these copybooks compiled with? It decides whether COMP fields such as 9(2) COMP, 9(3) COMP, 9(5) COMP and 9(9) COMP may hold values beyond their PIC digits (up to the halfword/fullword limit), which affects Java range validation and whether 9(9) COMP counters need long instead of int."
+    },
+    {
+      "id": "DR-PRCSEQ00-001",
+      "blocking": false,
+      "question": "PRCSEQ00 checks dependencies with subscript WS-SUB, which is declared nowhere (GAP-030). The stated behaviour (BR-013, BR-015, BR-016, all medium with SME flag): stop at the first dependency that leaves a non-zero return code; a hard dependency ('H') that is not DONE gives return code 4; a soft dependency that is not DONE is ignored; a DONE dependency whose return code exceeds its allowed maximum (PSR-DEP-RC) gives return code 8; the process starts only when the return code is still zero (BR-009, which is not reset on entry). Confirm, correct or reject this dependency behaviour."
+    },
+    {
+      "id": "DR-PRCSEQ00-002",
+      "blocking": false,
+      "question": "PRCSEQ00 has a possible endless build loop (the read loop ends only on file status '10'; a persistent read error would not end it, statement at line 168), no check against the 100-entry sequence table when adding processes, and a dependency subscript with no range check. Must the forward implementation reproduce these as-is or add bounds and error termination (which would change behaviour)?"
+    },
+    {
+      "id": "DR-PRCSEQ00-003",
+      "blocking": false,
+      "question": "Several PRCSEQ00 rules are medium confidence: BR-012 (when no READY process is found the next-process ID is blank and the dependency check still runs and fails with 'Process definition not found', return code 8), BR-017 (status refresh by matching job name), BR-018/BR-019 (active and failed counts) and BR-022 (sequence number = load order). Confirm these behaviours, in particular whether 'no READY process' should be reported as an error (return code 8) as implemented."
+    },
+    {
+      "id": "DR-PRCSEQ00-004",
+      "blocking": false,
+      "question": "Copybook PRCSEQ declares process-definition value domains that no executable statement tests: process type PSR-TYPE ('INI','PRC','RPT','TRM'; BR-138 - PRCSEQ00 only compares PSR-TYPE with the requested sequence type), run frequency PSR-FREQ ('D','W','M'; BR-139), active days PSR-ACTIVE-DAYS ('YYYYYNN','NNNNNYY','YYYYYYY'; BR-140), month-end indicator PSR-MONTH-END ('Y'; BR-141) and holiday run PSR-HOLIDAY-RUN ('N','Y'; BR-142). Must the forward scheduler validate the requested sequence type against these values or use frequency, active days, month-end and holiday flags when building a sequence?"
+    },
+    {
+      "id": "RVW-GAP-092",
+      "blocking": false,
+      "question": "GAP-092 (medium, DIAGRAM_RENDER_UNVERIFIED) is not addressed by any decision or requirement: Visual rendering of the 65 Mermaid diagrams is unverified. Acknowledge it as a known limitation (resolved_no_change) or exclude the affected units?"
+    },
+    {
+      "id": "RVW-GAP-104",
+      "blocking": false,
+      "question": "GAP-104 (low, DIAGRAM_INCOMPLETE) is not addressed by any decision or requirement: COMP-UNRESOLVED: all seven edges are unsupported. Acknowledge it as a known limitation (resolved_no_change) or exclude the affected units?"
+    }
+  ],
+  "authorisation": {
+    "generation_authorized": false,
+    "blockers": [
+      "config generation.java_generation_allowed is false (project authority)",
+      "no authorised orchestrator.java_target_dir",
+      "G4 is BLOCKED (needs signed G2, G3 and G4 approvals by trusted signers)",
+      "trust store: TRUST_NOT_CONFIGURED"
+    ],
+    "gates": {
+      "G0": "PASS",
+      "G1": "PASS",
+      "G2": "UNVERIFIED",
+      "G3": "BLOCKED",
+      "G4": "BLOCKED",
+      "G5": "BLOCKED",
+      "G6": "BLOCKED",
+      "G7": "BLOCKED",
+      "G8": "BLOCKED"
+    },
+    "trust": "TRUST_NOT_CONFIGURED",
+    "program_g2_scope": {
+      "readiness": "NOT_READY",
+      "blocking": 12,
+      "scope_sha256": "068e32d5bb4fe3b53f5d523adff8001e357e30fa9daeb30011cd1cc4766a348a"
+    },
+    "note": "Engineering gates never authorise generation. Java may be generated only when generation_authorized is true."
+  }
+}

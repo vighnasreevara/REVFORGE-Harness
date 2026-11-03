@@ -1,0 +1,819 @@
+{
+  "contract": "pilot/pilot-result",
+  "contract_version": "1.0",
+  "synthetic": true,
+  "statement": "Synthetic converter fixture written for REVFORGE Step 15. Not taken from, derived from or equivalent to any portfolio program.",
+  "generated_at": "2026-11-02T22:36:07.696Z",
+  "inputs": [
+    {
+      "path": "pilot.json",
+      "sha256": "06a75adf1f275f6dbb11cd3de08141a31e76d4459e459eda039635f9348368f1"
+    },
+    {
+      "path": "cobol/SYNVAL01.cbl",
+      "sha256": "8dcb680c43857d4f35b8312ff71d3ed9e940de37cdb2b708bb4f8792a2815cb2"
+    },
+    {
+      "path": "SPEC.md",
+      "sha256": "51bccafa1598cdbc9c7f53071495163fc4f323fef48afc930299e34cfa34ddd3"
+    },
+    {
+      "path": "fixtures/cases.json",
+      "sha256": "b2b55bba994291829dded1773f910164ba057f151320e3467cc066e213754ce7"
+    }
+  ],
+  "stages": [
+    {
+      "stage": "inspection",
+      "analogue": "reverse agents 2-3 (parser, data)",
+      "execution": "deterministic tool (strict COBOL subset parser)"
+    },
+    {
+      "stage": "behaviour extraction",
+      "analogue": "F1 requirements analyst",
+      "execution": "deterministic tool (dispatch table, decision tables, statement inventory); no agent invoked"
+    },
+    {
+      "stage": "gap analysis",
+      "analogue": "F1 uncertainty register / F2 data mapping",
+      "execution": "deterministic tool"
+    },
+    {
+      "stage": "architecture",
+      "analogue": "F3 Java architect",
+      "execution": "not executed (fixed pilot layout: one class per program, record, port, placeholder); no F3 agent invoked"
+    },
+    {
+      "stage": "implementation",
+      "analogue": "F5 Java developer",
+      "execution": "deterministic generator; the F5 agent was NOT invoked and production generation stays unauthorized"
+    },
+    {
+      "stage": "testing",
+      "analogue": "F6 independent tester",
+      "execution": "real javac/java execution against specification-derived fixtures; no F6 agent invoked"
+    },
+    {
+      "stage": "review",
+      "analogue": "F7 independent reviewer",
+      "execution": "deterministic trace audit; no F7 agent invoked"
+    }
+  ],
+  "isolation": {
+    "pilot_dir": "D:\\PROJECTS\\REVFORGE-Harness\\forward\\pilot\\synthetic-val",
+    "output_dir": "D:\\PROJECTS\\REVFORGE-Harness\\forward\\pilot\\synthetic-val\\out",
+    "workflow_used": false,
+    "approvals_used": false,
+    "production_generation": false,
+    "external_ai_calls": false
+  },
+  "toolchain": {
+    "java": {
+      "available": true,
+      "javac": "C:\\Program Files\\Microsoft\\jdk-21.0.13.21-hotspot\\bin\\javac.exe",
+      "java": "C:\\Program Files\\Microsoft\\jdk-21.0.13.21-hotspot\\bin\\java.exe",
+      "version": "javac 21.0.13.0.2",
+      "source": "REVFORGE_JAVA_HOME"
+    },
+    "cobol": {
+      "available": false,
+      "cobc": null,
+      "version": null,
+      "source": null
+    }
+  },
+  "inspection": {
+    "program_id": "SYNVAL01",
+    "sha256": "8dcb680c43857d4f35b8312ff71d3ed9e940de37cdb2b708bb4f8792a2815cb2",
+    "interface": {
+      "record": "OV-REQUEST",
+      "length": 45,
+      "fields": [
+        {
+          "name": "OV-KIND",
+          "offset": 0,
+          "length": 1,
+          "type": {
+            "kind": "alnum",
+            "length": 1
+          },
+          "conditions": [
+            {
+              "name": "OV-KIND-CODE",
+              "values": [
+                "C"
+              ],
+              "line": 20
+            },
+            {
+              "name": "OV-KIND-QTY",
+              "values": [
+                "Q"
+              ],
+              "line": 21
+            },
+            {
+              "name": "OV-KIND-STATUS",
+              "values": [
+                "S"
+              ],
+              "line": 22
+            },
+            {
+              "name": "OV-KIND-PRICE",
+              "values": [
+                "P"
+              ],
+              "line": 23
+            }
+          ]
+        },
+        {
+          "name": "OV-VALUE",
+          "offset": 1,
+          "length": 12,
+          "type": {
+            "kind": "alnum",
+            "length": 12
+          },
+          "conditions": []
+        },
+        {
+          "name": "OV-RC",
+          "offset": 13,
+          "length": 2,
+          "type": {
+            "kind": "numeric",
+            "digits": 4,
+            "scale": 0,
+            "signed": true,
+            "usage": "binary",
+            "signSeparate": false
+          },
+          "conditions": []
+        },
+        {
+          "name": "OV-MESSAGE",
+          "offset": 15,
+          "length": 30,
+          "type": {
+            "kind": "alnum",
+            "length": 30
+          },
+          "conditions": []
+        }
+      ]
+    },
+    "working_storage": [
+      {
+        "name": "OV-OK",
+        "type": {
+          "kind": "numeric",
+          "digits": 4,
+          "scale": 0,
+          "signed": true,
+          "usage": "display",
+          "signSeparate": false
+        },
+        "value": "+0",
+        "line": 7
+      },
+      {
+        "name": "OV-BAD-CODE",
+        "type": {
+          "kind": "numeric",
+          "digits": 4,
+          "scale": 0,
+          "signed": true,
+          "usage": "display",
+          "signSeparate": false
+        },
+        "value": "+11",
+        "line": 8
+      },
+      {
+        "name": "OV-BAD-QTY",
+        "type": {
+          "kind": "numeric",
+          "digits": 4,
+          "scale": 0,
+          "signed": true,
+          "usage": "display",
+          "signSeparate": false
+        },
+        "value": "+12",
+        "line": 9
+      },
+      {
+        "name": "OV-BAD-STATUS",
+        "type": {
+          "kind": "numeric",
+          "digits": 4,
+          "scale": 0,
+          "signed": true,
+          "usage": "display",
+          "signSeparate": false
+        },
+        "value": "+13",
+        "line": 10
+      },
+      {
+        "name": "OV-BAD-PRICE",
+        "type": {
+          "kind": "numeric",
+          "digits": 4,
+          "scale": 0,
+          "signed": true,
+          "usage": "display",
+          "signSeparate": false
+        },
+        "value": "+14",
+        "line": 11
+      },
+      {
+        "name": "OV-BAD-REQUEST",
+        "type": {
+          "kind": "numeric",
+          "digits": 4,
+          "scale": 0,
+          "signed": true,
+          "usage": "display",
+          "signSeparate": false
+        },
+        "value": "+19",
+        "line": 12
+      },
+      {
+        "name": "OV-MSG-CODE",
+        "type": {
+          "kind": "alnum",
+          "length": 30
+        },
+        "value": "Order code rejected",
+        "line": 14
+      },
+      {
+        "name": "OV-MSG-QTY",
+        "type": {
+          "kind": "alnum",
+          "length": 30
+        },
+        "value": "Quantity rejected",
+        "line": 16
+      },
+      {
+        "name": "OV-MSG-STATUS",
+        "type": {
+          "kind": "alnum",
+          "length": 30
+        },
+        "value": "Status rejected",
+        "line": 17
+      },
+      {
+        "name": "OV-MSG-PRICE",
+        "type": {
+          "kind": "alnum",
+          "length": 30
+        },
+        "value": "Price out of range",
+        "line": 18
+      },
+      {
+        "name": "OV-CODE-PREFIX",
+        "type": {
+          "kind": "alnum",
+          "length": 4
+        },
+        "value": "ORD-",
+        "line": 20
+      },
+      {
+        "name": "OV-MIN-PRICE",
+        "type": {
+          "kind": "numeric",
+          "digits": 9,
+          "scale": 2,
+          "signed": true,
+          "usage": "display",
+          "signSeparate": false
+        },
+        "value": "+1.00",
+        "line": 21
+      },
+      {
+        "name": "OV-MAX-PRICE",
+        "type": {
+          "kind": "numeric",
+          "digits": 9,
+          "scale": 2,
+          "signed": true,
+          "usage": "display",
+          "signSeparate": false
+        },
+        "value": "+5000.00",
+        "line": 22
+      },
+      {
+        "name": "OV-DIGITS",
+        "type": {
+          "kind": "alnum",
+          "length": 3
+        },
+        "value": null,
+        "line": 24
+      },
+      {
+        "name": "OV-PRICE",
+        "type": {
+          "kind": "numeric",
+          "digits": 9,
+          "scale": 2,
+          "signed": true,
+          "usage": "display",
+          "signSeparate": false
+        },
+        "value": null,
+        "line": 25
+      },
+      {
+        "name": "OV-QTY-COUNT",
+        "type": {
+          "kind": "numeric",
+          "digits": 4,
+          "scale": 0,
+          "signed": false,
+          "usage": "display",
+          "signSeparate": false
+        },
+        "value": null,
+        "line": 26
+      }
+    ],
+    "paragraphs": [
+      {
+        "name": "0000-MAIN",
+        "lines": [
+          29,
+          48
+        ],
+        "statements": 9
+      },
+      {
+        "name": "1000-CHECK-CODE",
+        "lines": [
+          49,
+          67
+        ],
+        "statements": 11
+      },
+      {
+        "name": "2000-CHECK-QTY",
+        "lines": [
+          68,
+          80
+        ],
+        "statements": 6
+      },
+      {
+        "name": "3000-CHECK-STATUS",
+        "lines": [
+          81,
+          94
+        ],
+        "statements": 6
+      },
+      {
+        "name": "4000-CHECK-PRICE",
+        "lines": [
+          95,
+          109
+        ],
+        "statements": 7
+      }
+    ]
+  },
+  "extraction": {
+    "dispatch": [
+      {
+        "line": 33,
+        "condition": "OV-KIND-CODE",
+        "field": "OV-KIND",
+        "values": [
+          "C"
+        ],
+        "performs": [
+          [
+            "1000-CHECK-CODE"
+          ]
+        ],
+        "other_statements": []
+      },
+      {
+        "line": 35,
+        "condition": "OV-KIND-QTY",
+        "field": "OV-KIND",
+        "values": [
+          "Q"
+        ],
+        "performs": [
+          [
+            "2000-CHECK-QTY"
+          ]
+        ],
+        "other_statements": []
+      },
+      {
+        "line": 37,
+        "condition": "OV-KIND-STATUS",
+        "field": "OV-KIND",
+        "values": [
+          "S"
+        ],
+        "performs": [
+          [
+            "3000-CHECK-STATUS"
+          ]
+        ],
+        "other_statements": []
+      },
+      {
+        "line": 39,
+        "condition": "OV-KIND-PRICE",
+        "field": "OV-KIND",
+        "values": [
+          "P"
+        ],
+        "performs": [
+          [
+            "4000-CHECK-PRICE"
+          ]
+        ],
+        "other_statements": []
+      },
+      {
+        "line": 32,
+        "condition": "OTHER",
+        "statements": [
+          {
+            "kind": "move",
+            "line": 42
+          },
+          {
+            "kind": "move",
+            "line": 43
+          }
+        ]
+      }
+    ],
+    "decision_tables": []
+  },
+  "gaps": [
+    {
+      "gap_id": "GAP-SYNVAL01-0001",
+      "stable_ref": "GAP-SYNVAL01-4000-CHECK-PRICE-ALNUM-TO-NUMERIC-OV-PRICE",
+      "kind": "DATA_CONVERSION_UNDEFINED",
+      "subject": "OV-PRICE",
+      "description": "MOVE of alphanumeric OV-VALUE to numeric OV-PRICE: defined only when the content is all digits; otherwise the result depends on the compiler and the data representation",
+      "origin": {
+        "file": "SYNVAL01.cbl",
+        "sha256": "8dcb680c43857d4f35b8312ff71d3ed9e940de37cdb2b708bb4f8792a2815cb2",
+        "paragraph": "4000-CHECK-PRICE",
+        "line": 97,
+        "end_line": 97,
+        "excerpt": [
+          {
+            "line": 97,
+            "text": "           MOVE OV-VALUE(1:7) TO OV-PRICE"
+          }
+        ]
+      },
+      "affected_items": [
+        "OV-PRICE"
+      ],
+      "dependent_statements": [
+        {
+          "line": 97,
+          "kind": "move",
+          "reason": "content that is not all digits"
+        }
+      ],
+      "affected_paragraphs": [
+        "4000-CHECK-PRICE"
+      ],
+      "reached_from": [
+        {
+          "paragraph": "0000-MAIN",
+          "line": 40,
+          "via": "PERFORM 4000-CHECK-PRICE"
+        }
+      ],
+      "status": "OPEN",
+      "resolution_required": "the business rule for non-digit input, or the compiler options and a captured legacy run"
+    }
+  ],
+  "behaviours": [
+    {
+      "branch": "OV-KIND-CODE",
+      "values": [
+        "C"
+      ],
+      "line": 33,
+      "paragraphs": [
+        "1000-CHECK-CODE"
+      ],
+      "category": "VERIFIED",
+      "blocked_by": []
+    },
+    {
+      "branch": "OV-KIND-QTY",
+      "values": [
+        "Q"
+      ],
+      "line": 35,
+      "paragraphs": [
+        "2000-CHECK-QTY"
+      ],
+      "category": "VERIFIED",
+      "blocked_by": []
+    },
+    {
+      "branch": "OV-KIND-STATUS",
+      "values": [
+        "S"
+      ],
+      "line": 37,
+      "paragraphs": [
+        "3000-CHECK-STATUS"
+      ],
+      "category": "VERIFIED",
+      "blocked_by": []
+    },
+    {
+      "branch": "OV-KIND-PRICE",
+      "values": [
+        "P"
+      ],
+      "line": 39,
+      "paragraphs": [
+        "4000-CHECK-PRICE"
+      ],
+      "category": "GAP",
+      "blocked_by": [
+        "GAP-SYNVAL01-0001"
+      ]
+    },
+    {
+      "branch": "OTHER",
+      "values": null,
+      "line": 32,
+      "paragraphs": [],
+      "category": "VERIFIED",
+      "blocked_by": []
+    }
+  ],
+  "generation": {
+    "files": [
+      {
+        "path": "java/src/revforge/pilot/synval01/Cobol.java",
+        "sha256": "4ca65b207ca8374be871d75d12d9c98c12409b7246d45fda05f843c9f57dd552",
+        "lines": 119
+      },
+      {
+        "path": "java/src/revforge/pilot/synval01/OvRequest.java",
+        "sha256": "7beae2da3af41840931cdca1ac71bd76355d8b92107c8369355db889afbce68a",
+        "lines": 32
+      },
+      {
+        "path": "java/src/revforge/pilot/synval01/PilotHarness.java",
+        "sha256": "37a9d22680bb62b22ff46c5acce100ba55f101bc39a7f96f5d48de1ab84de836",
+        "lines": 31
+      },
+      {
+        "path": "java/src/revforge/pilot/synval01/Synval01.java",
+        "sha256": "e73c2584017010022351dd1142361432825dcf9ad47f83083c2cf0f37f06f0f6",
+        "lines": 110
+      },
+      {
+        "path": "java/src/revforge/pilot/synval01/UnresolvedGapException.java",
+        "sha256": "362010029f2fc3e49ba25cba94923bd945ce63ad6dc6fc4b3ac37619b9f54428",
+        "lines": 18
+      }
+    ],
+    "source_map": "source-map.json"
+  },
+  "gap_trace": [
+    {
+      "gap_id": "GAP-SYNVAL01-0001",
+      "kind": "DATA_CONVERSION_UNDEFINED",
+      "subject": "OV-PRICE",
+      "cobol": "SYNVAL01.cbl:97",
+      "java": {
+        "gap_id": "GAP-SYNVAL01-0001",
+        "interface": "revforge/pilot/synval01/Cobol.java",
+        "placeholder": "revforge/pilot/synval01/Cobol.java",
+        "call_sites": [
+          {
+            "java_file": "revforge/pilot/synval01/Synval01.java",
+            "java_line": 101
+          }
+        ],
+        "affected_methods": [
+          "p4000CheckPrice"
+        ]
+      },
+      "blocked_behaviours": [
+        "OV-KIND-PRICE"
+      ]
+    }
+  ],
+  "compilation": {
+    "status": "COMPILED",
+    "javac": "javac 21.0.13.0.2",
+    "exit_code": 0,
+    "diagnostics": []
+  },
+  "execution": {
+    "status": "EXECUTED",
+    "exit_code": 0,
+    "stderr": [],
+    "cases": [
+      {
+        "id": "F01",
+        "title": "valid order code",
+        "expected": "C|ORD-123|0|",
+        "actual": "C|ORD-123|0|",
+        "status": "PASS"
+      },
+      {
+        "id": "F02",
+        "title": "wrong prefix",
+        "expected": "C|ORX-123|11|Order code rejected",
+        "actual": "C|ORX-123|11|Order code rejected",
+        "status": "PASS"
+      },
+      {
+        "id": "F03",
+        "title": "non-digit in the code number",
+        "expected": "C|ORD-12A|11|Order code rejected",
+        "actual": "C|ORD-12A|11|Order code rejected",
+        "status": "PASS"
+      },
+      {
+        "id": "F04",
+        "title": "short code number (padding space is not a digit)",
+        "expected": "C|ORD-12|11|Order code rejected",
+        "actual": "C|ORD-12|11|Order code rejected",
+        "status": "PASS"
+      },
+      {
+        "id": "F05",
+        "title": "valid quantity",
+        "expected": "Q|0007|0|",
+        "actual": "Q|0007|0|",
+        "status": "PASS"
+      },
+      {
+        "id": "F06",
+        "title": "zero quantity",
+        "expected": "Q|0000|12|Quantity rejected",
+        "actual": "Q|0000|12|Quantity rejected",
+        "status": "PASS"
+      },
+      {
+        "id": "F07",
+        "title": "short quantity",
+        "expected": "Q|12|12|Quantity rejected",
+        "actual": "Q|12|12|Quantity rejected",
+        "status": "PASS"
+      },
+      {
+        "id": "F08",
+        "title": "status NEW",
+        "expected": "S|NEW|0|",
+        "actual": "S|NEW|0|",
+        "status": "PASS"
+      },
+      {
+        "id": "F09",
+        "title": "status HLD",
+        "expected": "S|HLD|0|",
+        "actual": "S|HLD|0|",
+        "status": "PASS"
+      },
+      {
+        "id": "F10",
+        "title": "status CAN",
+        "expected": "S|CAN|0|",
+        "actual": "S|CAN|0|",
+        "status": "PASS"
+      },
+      {
+        "id": "F11",
+        "title": "status is case-sensitive",
+        "expected": "S|new|13|Status rejected",
+        "actual": "S|new|13|Status rejected",
+        "status": "PASS"
+      },
+      {
+        "id": "F12",
+        "title": "status with trailing characters",
+        "expected": "S|NEWX|13|Status rejected",
+        "actual": "S|NEWX|13|Status rejected",
+        "status": "PASS"
+      },
+      {
+        "id": "F13",
+        "title": "price 100 units",
+        "expected": "P|0000100|0|",
+        "actual": "P|0000100|0|",
+        "status": "PASS"
+      },
+      {
+        "id": "F14",
+        "title": "price below the minimum",
+        "expected": "P|0000000|14|Price out of range",
+        "actual": "P|0000000|14|Price out of range",
+        "status": "PASS"
+      },
+      {
+        "id": "F15",
+        "title": "price at the maximum (inclusive)",
+        "expected": "P|0005000|0|",
+        "actual": "P|0005000|0|",
+        "status": "PASS"
+      },
+      {
+        "id": "F16",
+        "title": "price above the maximum",
+        "expected": "P|0005001|14|Price out of range",
+        "actual": "P|0005001|14|Price out of range",
+        "status": "PASS"
+      },
+      {
+        "id": "F17",
+        "title": "price at the minimum (inclusive)",
+        "expected": "P|0000001|0|",
+        "actual": "P|0000001|0|",
+        "status": "PASS"
+      },
+      {
+        "id": "F18",
+        "title": "decimal price text: the MOVE is undefined by the source; the path must stay blocked",
+        "expected": "BLOCKED (undefined data conversion into OV-PRICE)",
+        "actual": "BLOCKED GAP-SYNVAL01-0001",
+        "status": "BLOCKED_AS_EXPECTED",
+        "gap_id": "GAP-SYNVAL01-0001"
+      },
+      {
+        "id": "F19",
+        "title": "unknown request kind",
+        "expected": "X|ANY|19|Unknown request kind",
+        "actual": "X|ANY|19|Unknown request kind",
+        "status": "PASS"
+      }
+    ],
+    "counts": {
+      "PASS": 18,
+      "BLOCKED_AS_EXPECTED": 1,
+      "FAIL": 0,
+      "total": 19
+    }
+  },
+  "cobol_reference": {
+    "status": "COBOL_COMPILER_UNAVAILABLE",
+    "detail": "no COBOL compiler (REVFORGE_COBC or cobc on PATH); the synthetic COBOL was not executed and no reference outputs exist"
+  },
+  "validation": {
+    "kind": "FIXTURE_BASED",
+    "fixtures_provenance": "Hand-derived by the converter author from SPEC.md before any Java was generated; not produced by executing Java; not reviewed by an independent human.",
+    "statement": "Java outputs were compared only with specification-derived fixture expectations. This is fixture-based validation, NOT runtime COBOL/Java equivalence."
+  },
+  "equivalence": "EQUIVALENCE_UNVERIFIED",
+  "conversion_status": "PARTIAL",
+  "conversion_status_reason": "the Java compiles and every verified path matches its fixtures, but 1 gap(s) stay open (GAP-SYNVAL01-0001) and their paths are blocked",
+  "trace_audit": {
+    "statements": 39,
+    "mapped_statements": 39,
+    "gaps_traced": 1,
+    "verified_branches": [
+      "OV-KIND-CODE",
+      "OV-KIND-QTY",
+      "OV-KIND-STATUS",
+      "OTHER"
+    ],
+    "passing_cases": 18,
+    "notes": [
+      "OV-DIGITS has no VALUE clause; its initial content is not specified by the source",
+      "OV-PRICE has no VALUE clause; it is only read after GAP-SYNVAL01-0001 writes it",
+      "OV-QTY-COUNT has no VALUE clause; its initial content is not specified by the source"
+    ],
+    "findings": [],
+    "verdict": "NO_FINDINGS"
+  },
+  "evidence": {
+    "manifest": "evidence-manifest.json",
+    "manifest_sha256": "be70abdb2e3cde622de0edfd81cd64d2aa802fdc88ebe3923af21caa033887f9",
+    "files": 6
+  }
+}

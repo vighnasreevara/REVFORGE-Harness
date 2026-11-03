@@ -1,0 +1,43 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://revforge.local/contracts/pilot/verified-scope.schema.json",
+  "title": "Behaviour classification and verified-scope manifest (non-authoritative)",
+  "type": "object",
+  "required": ["contract", "contract_version", "status", "scope", "scope_sha256", "baseline", "readiness", "programs"],
+  "properties": {
+    "contract": { "const": "pilot/verified-scope" },
+    "contract_version": { "const": "1.0" },
+    "status": { "const": "NON_AUTHORITATIVE" },
+    "scope_sha256": { "$ref": "../common.schema.json#/definitions/sha256" },
+    "readiness": { "enum": ["READY", "NOT_READY"] },
+    "programs": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["program", "source_available"],
+        "properties": {
+          "behaviours": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": ["behaviour_id", "kind", "classification", "statements", "inputs", "outputs", "covered_by"],
+              "properties": { "classification": { "enum": ["VERIFIED_CANDIDATE", "PARTIAL", "GAP"] } }
+            }
+          },
+          "gaps": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": ["gap_id", "kind", "source", "missing_fact", "why_unsafe", "affected_requirements", "affected_java_component", "required_action", "validation_evidence", "blocks_execution_path", "blocking", "status"],
+              "properties": { "gap_id": { "type": "string", "pattern": "^GAP-[A-Z0-9-]+$" }, "status": { "const": "OPEN" } }
+            }
+          },
+          "selected_candidate": {
+            "type": ["object", "null"],
+            "properties": { "classification": { "const": "VERIFIED_CANDIDATE" } }
+          }
+        }
+      }
+    }
+  }
+}

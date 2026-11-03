@@ -1,0 +1,98 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://revforge.local/contracts/forward/forward-common.schema.json",
+  "title": "Canonical forward-workflow deliverables: shared definitions",
+  "description": "Header and evidence shapes shared by every forward deliverable (F1-F7 outputs). Structural validity is necessary but not sufficient: the runtime also runs deterministic semantic checks (forward/verification/src/semantic.ts).",
+  "definitions": {
+    "agentId": { "enum": ["F1", "F2", "F3", "F4", "F5", "F6", "F7"] },
+    "skillName": { "type": "string", "pattern": "^fe-[a-z0-9-]+$" },
+    "evidenceStatus": {
+      "description": "verified_from_source: checked against original COBOL text; reverse_artifact_supported: present in reverse artifacts but not independently source-checked; inferred: derived by interpretation; unresolved: evidence missing or contradictory.",
+      "enum": ["verified_from_source", "reverse_artifact_supported", "inferred", "unresolved"]
+    },
+    "evidenceClass": { "enum": ["confirmed", "inferred", "uncertain"] },
+    "confidence": { "enum": ["confirmed", "high", "medium", "low"] },
+    "requirementId": { "type": "string", "pattern": "^REQ-[A-Z0-9][A-Z0-9-]*-[0-9]{3}$" },
+    "decisionRequestId": { "type": "string", "pattern": "^DR-[A-Z0-9][A-Z0-9-]*-[0-9]{3}$" },
+    "gapItemId": { "type": "string", "pattern": "^GAP-[0-9]{3,}#[0-9]{2,}$" },
+    "unit": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["unit_kind", "name", "file_id"],
+      "properties": {
+        "unit_kind": { "enum": ["program", "copybook"] },
+        "name": { "type": "string", "minLength": 1 },
+        "file_id": { "$ref": "../common.schema.json#/definitions/fileId" }
+      }
+    },
+    "sourceRef": {
+      "description": "Permanent source identities copied unchanged from the reverse artifacts. A null means no ID exists; it is never filled in.",
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["file_id"],
+      "properties": {
+        "file_id": { "$ref": "../common.schema.json#/definitions/nullableFileId" },
+        "path_id": { "$ref": "../common.schema.json#/definitions/nullablePathId" },
+        "section_id": { "anyOf": [{ "$ref": "../common.schema.json#/definitions/sectionId" }, { "type": "null" }] },
+        "paragraph_id": { "anyOf": [{ "$ref": "../common.schema.json#/definitions/paragraphId" }, { "type": "null" }] },
+        "statement_id": { "anyOf": [{ "$ref": "../common.schema.json#/definitions/statementId" }, { "type": "null" }] },
+        "record_id": { "anyOf": [{ "$ref": "../common.schema.json#/definitions/recordId" }, { "type": "null" }] },
+        "field_id": { "anyOf": [{ "$ref": "../common.schema.json#/definitions/fieldId" }, { "type": "null" }] },
+        "relative_path": { "type": ["string", "null"] },
+        "line": { "type": ["integer", "null"], "minimum": 1 }
+      }
+    },
+    "finding": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["finding_id", "description", "evidence_status"],
+      "properties": {
+        "finding_id": { "type": "string", "minLength": 1 },
+        "description": { "type": "string", "minLength": 1 },
+        "evidence_status": { "$ref": "#/definitions/evidenceStatus" },
+        "source_refs": { "type": "array", "items": { "$ref": "#/definitions/sourceRef" } },
+        "gap_items": { "type": "array", "items": { "$ref": "#/definitions/gapItemId" } },
+        "rule_refs": { "type": "array", "items": { "$ref": "../common.schema.json#/definitions/runLocalRef" } }
+      }
+    },
+    "header": {
+      "type": "object",
+      "required": ["contract", "contract_version", "authoring_agent", "packet_id", "baseline", "generated_at", "skills_used", "inputs_used", "units_covered", "unresolved_findings"],
+      "properties": {
+        "contract": { "type": "string" },
+        "contract_version": { "const": "1.0" },
+        "authoring_agent": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["id", "name"],
+          "properties": { "id": { "$ref": "#/definitions/agentId" }, "name": { "type": "string", "pattern": "^fe-" } }
+        },
+        "packet_id": { "type": "string", "pattern": "^PKT-[0-9]{4}-F[1-7]$" },
+        "baseline": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["run_id", "manifest_sha256"],
+          "properties": { "run_id": { "type": "string" }, "manifest_sha256": { "$ref": "../common.schema.json#/definitions/sha256" } }
+        },
+        "generated_at": { "type": "string", "format": "date-time" },
+        "skills_used": { "type": "array", "minItems": 1, "items": { "$ref": "#/definitions/skillName" } },
+        "inputs_used": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["path", "sha256"],
+            "properties": {
+              "path": { "type": "string", "minLength": 1 },
+              "sha256": { "anyOf": [{ "$ref": "../common.schema.json#/definitions/sha256" }, { "type": "null" }] }
+            }
+          }
+        },
+        "units_covered": { "type": "array", "items": { "$ref": "#/definitions/unit" } },
+        "unresolved_findings": { "type": "array", "items": { "$ref": "#/definitions/finding" } },
+        "notes": { "type": "string" }
+      }
+    }
+  }
+}

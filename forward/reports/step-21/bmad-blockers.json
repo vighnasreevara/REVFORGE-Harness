@@ -1,0 +1,74 @@
+{
+ "contract": "step-21/bmad-blockers",
+ "scope": "programs:PORTREAD",
+ "from_preflight": "BPF-0012",
+ "blockers": [
+  {
+   "check": "g2_exact_scope",
+   "detail": "G2 has not passed on the current baseline | G2 re-evaluated now: UNVERIFIED — G2 not approved for scope application: NOT_READY (417 blocking finding(s)); failing checks: canonical_rule_coverage, cross_batch_reconciliation, requirement_evidence, runtime_evidence, semantic_contradictions, contradicted_claims, blocking_decisions, data_contracts, scope_classification, readiness, trust_anchor, human_approval | requested scope programs:PORTREAD (digest c6b1864a61d126f8…) is not the G2-approved scope (none approved)",
+   "responsible": "requirements_approver (signed G2 for programs:PORTREAD) after business_sme and technical_authority resolutions"
+  },
+  {
+   "check": "workflow_state",
+   "detail": "workflow state is REQUIREMENTS_DRAFTED; BMAD-PRD is allowed only in REQUIREMENTS_APPROVED, ARCHITECTURE_DRAFTED, ARCHITECTURE_APPROVED, STORIES_DRAFTED, STORIES_APPROVED",
+   "responsible": "follows from the signed G2 approval"
+  },
+  {
+   "check": "provider_authorization",
+   "detail": "no valid signed disclosure authorization for anthropic/claude-code-cli, scope programs:PORTREAD, workflow bmad-prd (0 disclosure record(s) considered); 0 OpenAI source-export authorization(s) exist and are not applicable to Claude",
+   "responsible": "data_owner (sign ADA request) and trust custodian (trust store)"
+  },
+  {
+   "check": "source_hashes_current",
+   "detail": "no authorization to compare source hashes against",
+   "responsible": "follows from the signed disclosure authorization"
+  },
+  {
+   "check": "authorized_content_only",
+   "detail": "2 file(s) would be exposed and none is authorized",
+   "responsible": "follows from the signed disclosure authorization"
+  },
+  {
+   "check": "runtime_execution_authorization",
+   "detail": "bindings.json live_execution.requested is false",
+   "responsible": "project owner: set bindings.json live_execution.requested only after the other prerequisites hold"
+  },
+  {
+   "check": "limits",
+   "detail": "no authorized limits (cost, files, bytes, runs)",
+   "responsible": "follows from the signed disclosure authorization"
+  },
+  {
+   "check": "workspace_manifest",
+   "detail": "no minimal workspace can be planned without an authorization naming its files",
+   "responsible": "follows from the signed disclosure authorization"
+  },
+  {
+   "check": "network_isolation",
+   "detail": "default-deny verified (no route, no DNS); no verified provider-egress component exists, so a LIVE run could not reach the provider without weakening the boundary",
+   "responsible": "administrator: verified provider-egress component"
+  },
+  {
+   "check": "runner_inside_boundary",
+   "detail": "Claude Code and Node are not installed inside the WSL2 environment: the runner cannot run inside the boundary",
+   "responsible": "administrator: Node.js and Claude Code inside WSL2"
+  },
+  {
+   "check": "enforceable_launch_boundary",
+   "detail": "not enforceable for LIVE: network: the tested boundary has no network at all; a LIVE run needs a verified provider-egress component (allowlist proxy outside the namespace), which does not exist. Even then, TLS to the provider is end-to-end: request content cannot be inspected, so only the minimal workspace limits what can be disclosed | runner: Claude Code and Node are not installed inside the isolated Linux environment, so the runner cannot execute within the boundary",
+   "responsible": "administrator: egress component plus runner inside the boundary"
+  }
+ ],
+ "further": [
+  {
+   "check": "live_runner",
+   "detail": "no LIVE runner adapter can run here: the headless Claude Code runner must run inside the verified boundary, which needs the administrator actions above",
+   "responsible": "administrator, then engineering"
+  },
+  {
+   "check": "build_disabled",
+   "detail": "BMAD-BUILD needs generation.java_generation_allowed and an authorised java_target_dir (plus G4)",
+   "responsible": "project owner (generation authority) after G3/G4"
+  }
+ ]
+}

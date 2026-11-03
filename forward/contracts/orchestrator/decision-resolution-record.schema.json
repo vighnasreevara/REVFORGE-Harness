@@ -1,0 +1,262 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://revforge.local/contracts/orchestrator/decision-resolution-record.schema.json",
+  "title": "Recorded decision resolution (runtime record, never edited)",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "contract",
+    "contract_version",
+    "resolution_id",
+    "recorded_at",
+    "recorded_by",
+    "decision_id",
+    "resolution",
+    "signature",
+    "signer",
+    "trust_store_sha256",
+    "required_roles",
+    "verification"
+  ],
+  "properties": {
+    "contract": {
+      "const": "decision-resolution-record"
+    },
+    "contract_version": {
+      "const": "1.0"
+    },
+    "resolution_id": {
+      "type": "string",
+      "pattern": "^RES-[0-9]{4}$"
+    },
+    "recorded_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "recorded_by": {
+      "const": "runtime"
+    },
+    "decision_id": {
+      "type": "string"
+    },
+    "resolution": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "contract",
+        "contract_version",
+        "decision_id",
+        "decision_sha256",
+        "decision_kind",
+        "workflow_id",
+        "run_id",
+        "baseline_manifest_sha256",
+        "affected_requirements",
+        "affected_item_hashes",
+        "affected_source_ids",
+        "affected_units",
+        "original_problem",
+        "available_evidence",
+        "allowed_outcomes",
+        "required_roles_by_outcome",
+        "impacted_artifacts",
+        "outcome",
+        "selected_option",
+        "resolution_text",
+        "justification",
+        "signer_id",
+        "role",
+        "resolved_at",
+        "supersedes"
+      ],
+      "properties": {
+        "contract": {
+          "const": "decision-resolution"
+        },
+        "contract_version": {
+          "const": "1.0"
+        },
+        "decision_id": {
+          "type": "string",
+          "minLength": 3
+        },
+        "decision_sha256": {
+          "$ref": "../common.schema.json#/definitions/sha256"
+        },
+        "decision_kind": {
+          "enum": [
+            "business",
+            "technical",
+            "scope",
+            "data_layout",
+            "runtime_semantics",
+            "review"
+          ]
+        },
+        "workflow_id": {
+          "type": "string"
+        },
+        "run_id": {
+          "type": "string"
+        },
+        "baseline_manifest_sha256": {
+          "$ref": "../common.schema.json#/definitions/sha256"
+        },
+        "affected_requirements": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "affected_item_hashes": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "affected_source_ids": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "affected_units": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "original_problem": {
+          "type": "string",
+          "minLength": 3
+        },
+        "available_evidence": {
+          "type": "array"
+        },
+        "allowed_outcomes": {
+          "type": "array",
+          "items": {
+            "enum": [
+              "resolved_no_change",
+              "resolved_requires_update",
+              "excluded_from_scope",
+              "approved_exception"
+            ]
+          }
+        },
+        "required_roles_by_outcome": {
+          "type": "object"
+        },
+        "impacted_artifacts": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "outcome": {
+          "enum": [
+            "resolved_no_change",
+            "resolved_requires_update",
+            "excluded_from_scope",
+            "approved_exception"
+          ]
+        },
+        "selected_option": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "resolution_text": {
+          "type": "string",
+          "minLength": 10
+        },
+        "justification": {
+          "type": "string",
+          "minLength": 10
+        },
+        "signer_id": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9._@-]{2,128}$"
+        },
+        "role": {
+          "type": "string",
+          "minLength": 1
+        },
+        "resolved_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "supersedes": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "pattern": "^RES-[0-9]{4}$"
+        },
+        "scope": {
+          "description": "Optional: the scope (selector text) this resolution is requested for; the decision must belong to it and a scope-restricted signer must cover it.",
+          "type": "string",
+          "minLength": 1
+        },
+        "expires_at": {
+          "description": "Optional: the resolution request expires at this time; it must be signed and imported before.",
+          "type": "string",
+          "format": "date-time"
+        },
+        "request_id": {
+          "description": "Optional: ID of the exported resolution request (DRQ-...).",
+          "type": "string",
+          "pattern": "^DRQ-[0-9a-f]{12}$"
+        }
+      }
+    },
+    "signature": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "algorithm",
+        "value"
+      ],
+      "properties": {
+        "algorithm": {
+          "const": "ed25519"
+        },
+        "value": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9+/=]{80,100}$",
+          "description": "Base64 Ed25519 signature over the UTF-8 canonical JSON of the signed object"
+        }
+      }
+    },
+    "signer": {
+      "type": "object",
+      "required": [
+        "signer_id",
+        "role",
+        "key_fingerprint"
+      ]
+    },
+    "trust_store_sha256": {
+      "$ref": "../common.schema.json#/definitions/sha256"
+    },
+    "required_roles": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "verification": {
+      "type": "object",
+      "required": [
+        "status",
+        "checks"
+      ],
+      "properties": {
+        "status": {
+          "const": "signature_verified"
+        }
+      }
+    }
+  }
+}

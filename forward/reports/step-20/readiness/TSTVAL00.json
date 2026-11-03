@@ -1,0 +1,737 @@
+{
+  "gate": "SOURCE_READINESS",
+  "subject": "TSTVAL00",
+  "status": "FAIL",
+  "checks": [
+    {
+      "id": "source_available",
+      "ok": true,
+      "detail": "src/programs/test/TSTVAL00.cbl sha256 acdb86f9d38dbc337b16d0f5e54f8260777483f25398364f7fdfae3038a1cfe9; 65 statement(s) in 10 paragraph(s)"
+    },
+    {
+      "id": "complete_program",
+      "ok": true,
+      "detail": "every paragraph contains statements"
+    },
+    {
+      "id": "copybooks_resolved",
+      "ok": true,
+      "detail": "all 2 include(s) resolved: RTNCODE, ERRHAND"
+    },
+    {
+      "id": "requirements_and_data_mapping_delivered",
+      "ok": true,
+      "detail": "F1/F2 deliveries accepted for ERRHAND, RTNCODE, TSTVAL00"
+    },
+    {
+      "id": "behaviour_classified",
+      "ok": true,
+      "detail": "4 behaviour(s): 0 VERIFIED_CANDIDATE, 3 PARTIAL, 1 GAP"
+    },
+    {
+      "id": "dependencies_identified",
+      "ok": false,
+      "detail": "closure UNRESOLVED for TSTVAL00:0000-MAIN (PERFORM/GO TO target 2200-RUN-FUNCTIONAL-TEST (line 190) is not a paragraph of TSTVAL00); TSTVAL00:1000-INITIALIZE (PERFORM/GO TO target 2200-RUN-FUNCTIONAL-TEST (line 190) is not a paragraph of TSTVAL00); TSTVAL00:2000-PROCESS (PERFORM/GO TO target 2200-RUN-FUNCTIONAL-TEST (line 190) is not a paragraph of TSTVAL00); TSTVAL00:3000-CLEANUP (PERFORM/GO TO target 2200-RUN-FUNCTIONAL-TEST (line 190) is not a paragraph of TSTVAL00)"
+    },
+    {
+      "id": "unsupported_documented",
+      "ok": true,
+      "detail": "10 gap(s) document every PARTIAL/GAP behaviour"
+    },
+    {
+      "id": "unknowns_documented",
+      "ok": true,
+      "detail": "8 open decision(s) record the remaining questions (3 blocking for approval); none is resolved or assumed here"
+    }
+  ],
+  "note": "An engineering gate: it states that the source is understood well enough to convert, with every unknown documented. It is not a G2 approval and does not authorise generation.",
+  "behaviours": [
+    {
+      "behaviour_id": "TSTVAL00:ENTRY-DISPATCH",
+      "kind": "dispatch",
+      "classification": "PARTIAL",
+      "lines": [
+        129,
+        131
+      ],
+      "inputs": [],
+      "outputs": [],
+      "side_effects": [],
+      "unresolved": [],
+      "covered_by": []
+    },
+    {
+      "behaviour_id": "TSTVAL00:1000-INITIALIZE",
+      "kind": "performed_range",
+      "classification": "PARTIAL",
+      "lines": [
+        135,
+        224
+      ],
+      "inputs": [
+        "REPORT-RECORD",
+        "WS-ACT-STATUS",
+        "WS-EXP-STATUS",
+        "WS-HEADER1",
+        "WS-HEADER2",
+        "WS-RPT-STATUS",
+        "WS-START-TIME",
+        "WS-TEST-STATUS"
+      ],
+      "outputs": [
+        "RETURN-CODE",
+        "WS-ERROR-MESSAGE",
+        "WS-TEST-METRICS"
+      ],
+      "side_effects": [
+        {
+          "line": 140,
+          "kind": "file_io",
+          "operation": "OPEN",
+          "table": null
+        },
+        {
+          "line": 147,
+          "kind": "file_io",
+          "operation": "OPEN",
+          "table": null
+        },
+        {
+          "line": 154,
+          "kind": "file_io",
+          "operation": "OPEN",
+          "table": null
+        },
+        {
+          "line": 161,
+          "kind": "file_io",
+          "operation": "OPEN",
+          "table": null
+        },
+        {
+          "line": 169,
+          "kind": "file_io",
+          "operation": "WRITE",
+          "table": null
+        },
+        {
+          "line": 170,
+          "kind": "file_io",
+          "operation": "WRITE",
+          "table": null
+        }
+      ],
+      "unresolved": [
+        "WS-ERROR-MESSAGE"
+      ],
+      "covered_by": []
+    },
+    {
+      "behaviour_id": "TSTVAL00:2000-PROCESS",
+      "kind": "performed_range",
+      "classification": "PARTIAL",
+      "lines": [
+        177,
+        224
+      ],
+      "inputs": [
+        "REPORT-RECORD",
+        "TEST-TYPE",
+        "WS-ELAPSED-TIME",
+        "WS-END-OF-TESTS",
+        "WS-END-TIME",
+        "WS-ERROR",
+        "WS-FUNCTIONAL",
+        "WS-INTEGRATION",
+        "WS-PERFORMANCE",
+        "WS-START-TIME",
+        "WS-SUCCESS-RATE",
+        "WS-SUMMARY-LINE",
+        "WS-TESTS-FAILED",
+        "WS-TESTS-PASSED",
+        "WS-TOTAL-TESTS"
+      ],
+      "outputs": [
+        "RETURN-CODE",
+        "WS-END-OF-TESTS",
+        "WS-ERROR-MESSAGE",
+        "WS-FAILED-OUT",
+        "WS-PASSED-OUT",
+        "WS-TOTAL-OUT"
+      ],
+      "side_effects": [
+        {
+          "line": 178,
+          "kind": "file_io",
+          "operation": "READ",
+          "table": null
+        },
+        {
+          "line": 214,
+          "kind": "file_io",
+          "operation": "WRITE",
+          "table": null
+        }
+      ],
+      "unresolved": [
+        "WS-ERROR-MESSAGE"
+      ],
+      "covered_by": []
+    },
+    {
+      "behaviour_id": "TSTVAL00:3000-CLEANUP",
+      "kind": "performed_range",
+      "classification": "GAP",
+      "lines": [
+        217,
+        220
+      ],
+      "inputs": [],
+      "outputs": [],
+      "side_effects": [
+        {
+          "line": 217,
+          "kind": "file_io",
+          "operation": "CLOSE",
+          "table": null
+        }
+      ],
+      "unresolved": [],
+      "covered_by": []
+    }
+  ],
+  "gaps": [
+    {
+      "gap_id": "GAP-TSTVAL00-1000-INITIALIZE-WS-ERROR-MESSAGE",
+      "kind": "UNDECLARED_NAME_SEMANTICS",
+      "behaviour_id": "TSTVAL00:1000-INITIALIZE",
+      "source": {
+        "path": "src/programs/test/TSTVAL00.cbl",
+        "sha256": "acdb86f9d38dbc337b16d0f5e54f8260777483f25398364f7fdfae3038a1cfe9",
+        "lines": [
+          142,
+          149,
+          156,
+          163,
+          223
+        ],
+        "statements": [
+          {
+            "line": 142,
+            "text": "MOVE 'ERROR OPENING TEST CASES' TO WS-ERROR-MESSAGE"
+          },
+          {
+            "line": 149,
+            "text": "MOVE 'ERROR OPENING EXPECTED RESULTS' TO WS-ERROR-MESSAGE"
+          },
+          {
+            "line": 156,
+            "text": "MOVE 'ERROR OPENING ACTUAL RESULTS' TO WS-ERROR-MESSAGE"
+          },
+          {
+            "line": 163,
+            "text": "MOVE 'ERROR OPENING TEST REPORT' TO WS-ERROR-MESSAGE"
+          },
+          {
+            "line": 223,
+            "text": "DISPLAY WS-ERROR-MESSAGE UPON CONS"
+          }
+        ]
+      },
+      "missing_fact": "WS-ERROR-MESSAGE is used but declared nowhere in the repository; its layout and value meanings are the subject of DR-TSTVAL00-002 (missing: a declaration of WS-ERROR-MESSAGE; a declaration of COMPUTE)",
+      "why_unsafe": "the outputs of these statements (WS-ERROR-MESSAGE) depend on a value whose meaning is not established; any Java mapping would invent it",
+      "affected_requirements": [],
+      "affected_java_component": "outcome mapping of behaviour 1000-INITIALIZE (behind a port whose only implementation throws until the gap is resolved)",
+      "required_action": [
+        "DR-TSTVAL00-002: a signed resolution by technical_authority"
+      ],
+      "validation_evidence": "the real definition of WS-ERROR-MESSAGE for the target runtime and a captured legacy run showing each outcome branch",
+      "blocks_execution_path": "request its PERFORM -> 1000-INITIALIZE: statements 142, 149, 156, 163, 223",
+      "blocking": true,
+      "status": "OPEN"
+    },
+    {
+      "gap_id": "GAP-TSTVAL00-1000-INITIALIZE-FILE-OPEN-TEST-CASES",
+      "kind": "EXTERNAL_FILE_RUNTIME",
+      "behaviour_id": "TSTVAL00:1000-INITIALIZE",
+      "source": {
+        "path": "src/programs/test/TSTVAL00.cbl",
+        "sha256": "acdb86f9d38dbc337b16d0f5e54f8260777483f25398364f7fdfae3038a1cfe9",
+        "lines": [
+          140
+        ],
+        "statements": [
+          {
+            "line": 140,
+            "text": "OPEN INPUT TEST-CASES"
+          }
+        ]
+      },
+      "missing_fact": "the run-time behaviour of OPEN on TEST-CASES: the dataset bound to it (JCL DD), its content and record encoding, and the file-system status outcomes the COBOL source does not define",
+      "why_unsafe": "the records read and the statuses reported come from a dataset outside the program; a Java implementation verified only against source-derived fixtures does not establish them",
+      "affected_requirements": [],
+      "affected_java_component": "file port for OPEN TEST-CASES (runtime file semantics; dataset contents unverified)",
+      "required_action": [
+        "the dataset definitions (JCL DD, organisation, record format) and a captured legacy run for each status outcome (technical authority)"
+      ],
+      "validation_evidence": "a captured legacy run against the real (or an approved equivalent) dataset, including end-of-file and error statuses",
+      "blocks_execution_path": "request its PERFORM -> 1000-INITIALIZE: statement(s) 140",
+      "blocking": true,
+      "status": "OPEN"
+    },
+    {
+      "gap_id": "GAP-TSTVAL00-1000-INITIALIZE-FILE-OPEN-EXPECTED-RESULTS",
+      "kind": "EXTERNAL_FILE_RUNTIME",
+      "behaviour_id": "TSTVAL00:1000-INITIALIZE",
+      "source": {
+        "path": "src/programs/test/TSTVAL00.cbl",
+        "sha256": "acdb86f9d38dbc337b16d0f5e54f8260777483f25398364f7fdfae3038a1cfe9",
+        "lines": [
+          147
+        ],
+        "statements": [
+          {
+            "line": 147,
+            "text": "OPEN INPUT EXPECTED-RESULTS"
+          }
+        ]
+      },
+      "missing_fact": "the run-time behaviour of OPEN on EXPECTED-RESULTS: the dataset bound to it (JCL DD), its content and record encoding, and the file-system status outcomes the COBOL source does not define",
+      "why_unsafe": "the records read and the statuses reported come from a dataset outside the program; a Java implementation verified only against source-derived fixtures does not establish them",
+      "affected_requirements": [],
+      "affected_java_component": "file port for OPEN EXPECTED-RESULTS (runtime file semantics; dataset contents unverified)",
+      "required_action": [
+        "the dataset definitions (JCL DD, organisation, record format) and a captured legacy run for each status outcome (technical authority)"
+      ],
+      "validation_evidence": "a captured legacy run against the real (or an approved equivalent) dataset, including end-of-file and error statuses",
+      "blocks_execution_path": "request its PERFORM -> 1000-INITIALIZE: statement(s) 147",
+      "blocking": true,
+      "status": "OPEN"
+    },
+    {
+      "gap_id": "GAP-TSTVAL00-1000-INITIALIZE-FILE-OPEN-ACTUAL-RESULTS",
+      "kind": "EXTERNAL_FILE_RUNTIME",
+      "behaviour_id": "TSTVAL00:1000-INITIALIZE",
+      "source": {
+        "path": "src/programs/test/TSTVAL00.cbl",
+        "sha256": "acdb86f9d38dbc337b16d0f5e54f8260777483f25398364f7fdfae3038a1cfe9",
+        "lines": [
+          154
+        ],
+        "statements": [
+          {
+            "line": 154,
+            "text": "OPEN INPUT ACTUAL-RESULTS"
+          }
+        ]
+      },
+      "missing_fact": "the run-time behaviour of OPEN on ACTUAL-RESULTS: the dataset bound to it (JCL DD), its content and record encoding, and the file-system status outcomes the COBOL source does not define",
+      "why_unsafe": "the records read and the statuses reported come from a dataset outside the program; a Java implementation verified only against source-derived fixtures does not establish them",
+      "affected_requirements": [],
+      "affected_java_component": "file port for OPEN ACTUAL-RESULTS (runtime file semantics; dataset contents unverified)",
+      "required_action": [
+        "the dataset definitions (JCL DD, organisation, record format) and a captured legacy run for each status outcome (technical authority)"
+      ],
+      "validation_evidence": "a captured legacy run against the real (or an approved equivalent) dataset, including end-of-file and error statuses",
+      "blocks_execution_path": "request its PERFORM -> 1000-INITIALIZE: statement(s) 154",
+      "blocking": true,
+      "status": "OPEN"
+    },
+    {
+      "gap_id": "GAP-TSTVAL00-1000-INITIALIZE-FILE-OPEN-TEST-REPORT",
+      "kind": "EXTERNAL_FILE_RUNTIME",
+      "behaviour_id": "TSTVAL00:1000-INITIALIZE",
+      "source": {
+        "path": "src/programs/test/TSTVAL00.cbl",
+        "sha256": "acdb86f9d38dbc337b16d0f5e54f8260777483f25398364f7fdfae3038a1cfe9",
+        "lines": [
+          161
+        ],
+        "statements": [
+          {
+            "line": 161,
+            "text": "OPEN OUTPUT TEST-REPORT"
+          }
+        ]
+      },
+      "missing_fact": "the run-time behaviour of OPEN on TEST-REPORT: the dataset bound to it (JCL DD), its content and record encoding, and the file-system status outcomes the COBOL source does not define",
+      "why_unsafe": "the records read and the statuses reported come from a dataset outside the program; a Java implementation verified only against source-derived fixtures does not establish them",
+      "affected_requirements": [],
+      "affected_java_component": "file port for OPEN TEST-REPORT (runtime file semantics; dataset contents unverified)",
+      "required_action": [
+        "the dataset definitions (JCL DD, organisation, record format) and a captured legacy run for each status outcome (technical authority)"
+      ],
+      "validation_evidence": "a captured legacy run against the real (or an approved equivalent) dataset, including end-of-file and error statuses",
+      "blocks_execution_path": "request its PERFORM -> 1000-INITIALIZE: statement(s) 161",
+      "blocking": true,
+      "status": "OPEN"
+    },
+    {
+      "gap_id": "GAP-TSTVAL00-1000-INITIALIZE-FILE-WRITE-REPORT-RECORD",
+      "kind": "EXTERNAL_FILE_RUNTIME",
+      "behaviour_id": "TSTVAL00:1000-INITIALIZE",
+      "source": {
+        "path": "src/programs/test/TSTVAL00.cbl",
+        "sha256": "acdb86f9d38dbc337b16d0f5e54f8260777483f25398364f7fdfae3038a1cfe9",
+        "lines": [
+          169,
+          170
+        ],
+        "statements": [
+          {
+            "line": 169,
+            "text": "WRITE REPORT-RECORD FROM WS-HEADER1"
+          },
+          {
+            "line": 170,
+            "text": "WRITE REPORT-RECORD FROM WS-HEADER2."
+          }
+        ]
+      },
+      "missing_fact": "the run-time behaviour of WRITE on REPORT-RECORD: the dataset bound to it (JCL DD), its content and record encoding, and the file-system status outcomes the COBOL source does not define",
+      "why_unsafe": "the records read and the statuses reported come from a dataset outside the program; a Java implementation verified only against source-derived fixtures does not establish them",
+      "affected_requirements": [],
+      "affected_java_component": "file port for WRITE REPORT-RECORD (runtime file semantics; dataset contents unverified)",
+      "required_action": [
+        "the dataset definitions (JCL DD, organisation, record format) and a captured legacy run for each status outcome (technical authority)"
+      ],
+      "validation_evidence": "a captured legacy run against the real (or an approved equivalent) dataset, including end-of-file and error statuses",
+      "blocks_execution_path": "request its PERFORM -> 1000-INITIALIZE: statement(s) 169, 170",
+      "blocking": true,
+      "status": "OPEN"
+    },
+    {
+      "gap_id": "GAP-TSTVAL00-2000-PROCESS-WS-ERROR-MESSAGE",
+      "kind": "UNDECLARED_NAME_SEMANTICS",
+      "behaviour_id": "TSTVAL00:2000-PROCESS",
+      "source": {
+        "path": "src/programs/test/TSTVAL00.cbl",
+        "sha256": "acdb86f9d38dbc337b16d0f5e54f8260777483f25398364f7fdfae3038a1cfe9",
+        "lines": [
+          198,
+          223
+        ],
+        "statements": [
+          {
+            "line": 198,
+            "text": "MOVE 'INVALID TEST TYPE' TO WS-ERROR-MESSAGE"
+          },
+          {
+            "line": 223,
+            "text": "DISPLAY WS-ERROR-MESSAGE UPON CONS"
+          }
+        ]
+      },
+      "missing_fact": "WS-ERROR-MESSAGE is used but declared nowhere in the repository; its layout and value meanings are the subject of DR-TSTVAL00-002 (missing: a declaration of WS-ERROR-MESSAGE; a declaration of COMPUTE)",
+      "why_unsafe": "the outputs of these statements (WS-ERROR-MESSAGE) depend on a value whose meaning is not established; any Java mapping would invent it",
+      "affected_requirements": [],
+      "affected_java_component": "outcome mapping of behaviour 2000-PROCESS (behind a port whose only implementation throws until the gap is resolved)",
+      "required_action": [
+        "DR-TSTVAL00-002: a signed resolution by technical_authority"
+      ],
+      "validation_evidence": "the real definition of WS-ERROR-MESSAGE for the target runtime and a captured legacy run showing each outcome branch",
+      "blocks_execution_path": "request its PERFORM -> 2000-PROCESS: statements 198, 223",
+      "blocking": true,
+      "status": "OPEN"
+    },
+    {
+      "gap_id": "GAP-TSTVAL00-2000-PROCESS-FILE-READ-TEST-CASES",
+      "kind": "EXTERNAL_FILE_RUNTIME",
+      "behaviour_id": "TSTVAL00:2000-PROCESS",
+      "source": {
+        "path": "src/programs/test/TSTVAL00.cbl",
+        "sha256": "acdb86f9d38dbc337b16d0f5e54f8260777483f25398364f7fdfae3038a1cfe9",
+        "lines": [
+          178
+        ],
+        "statements": [
+          {
+            "line": 178,
+            "text": "READ TEST-CASES AT END"
+          }
+        ]
+      },
+      "missing_fact": "the run-time behaviour of READ on TEST-CASES: the dataset bound to it (JCL DD), its content and record encoding, and the file-system status outcomes the COBOL source does not define",
+      "why_unsafe": "the records read and the statuses reported come from a dataset outside the program; a Java implementation verified only against source-derived fixtures does not establish them",
+      "affected_requirements": [],
+      "affected_java_component": "file port for READ TEST-CASES (runtime file semantics; dataset contents unverified)",
+      "required_action": [
+        "the dataset definitions (JCL DD, organisation, record format) and a captured legacy run for each status outcome (technical authority)"
+      ],
+      "validation_evidence": "a captured legacy run against the real (or an approved equivalent) dataset, including end-of-file and error statuses",
+      "blocks_execution_path": "request its PERFORM -> 2000-PROCESS: statement(s) 178",
+      "blocking": true,
+      "status": "OPEN"
+    },
+    {
+      "gap_id": "GAP-TSTVAL00-2000-PROCESS-FILE-WRITE-REPORT-RECORD",
+      "kind": "EXTERNAL_FILE_RUNTIME",
+      "behaviour_id": "TSTVAL00:2000-PROCESS",
+      "source": {
+        "path": "src/programs/test/TSTVAL00.cbl",
+        "sha256": "acdb86f9d38dbc337b16d0f5e54f8260777483f25398364f7fdfae3038a1cfe9",
+        "lines": [
+          214
+        ],
+        "statements": [
+          {
+            "line": 214,
+            "text": "WRITE REPORT-RECORD FROM WS-SUMMARY-LINE."
+          }
+        ]
+      },
+      "missing_fact": "the run-time behaviour of WRITE on REPORT-RECORD: the dataset bound to it (JCL DD), its content and record encoding, and the file-system status outcomes the COBOL source does not define",
+      "why_unsafe": "the records read and the statuses reported come from a dataset outside the program; a Java implementation verified only against source-derived fixtures does not establish them",
+      "affected_requirements": [],
+      "affected_java_component": "file port for WRITE REPORT-RECORD (runtime file semantics; dataset contents unverified)",
+      "required_action": [
+        "the dataset definitions (JCL DD, organisation, record format) and a captured legacy run for each status outcome (technical authority)"
+      ],
+      "validation_evidence": "a captured legacy run against the real (or an approved equivalent) dataset, including end-of-file and error statuses",
+      "blocks_execution_path": "request its PERFORM -> 2000-PROCESS: statement(s) 214",
+      "blocking": true,
+      "status": "OPEN"
+    },
+    {
+      "gap_id": "GAP-TSTVAL00-3000-CLEANUP-FILE-CLOSE-TEST-CASES",
+      "kind": "EXTERNAL_FILE_RUNTIME",
+      "behaviour_id": "TSTVAL00:3000-CLEANUP",
+      "source": {
+        "path": "src/programs/test/TSTVAL00.cbl",
+        "sha256": "acdb86f9d38dbc337b16d0f5e54f8260777483f25398364f7fdfae3038a1cfe9",
+        "lines": [
+          217
+        ],
+        "statements": [
+          {
+            "line": 217,
+            "text": "CLOSE TEST-CASES EXPECTED-RESULTS ACTUAL-RESULTS TEST-REPORT."
+          }
+        ]
+      },
+      "missing_fact": "the run-time behaviour of CLOSE on TEST-CASES: the dataset bound to it (JCL DD), its content and record encoding, and the file-system status outcomes the COBOL source does not define",
+      "why_unsafe": "the records read and the statuses reported come from a dataset outside the program; a Java implementation verified only against source-derived fixtures does not establish them",
+      "affected_requirements": [],
+      "affected_java_component": "file port for CLOSE TEST-CASES (runtime file semantics; dataset contents unverified)",
+      "required_action": [
+        "the dataset definitions (JCL DD, organisation, record format) and a captured legacy run for each status outcome (technical authority)"
+      ],
+      "validation_evidence": "a captured legacy run against the real (or an approved equivalent) dataset, including end-of-file and error statuses",
+      "blocks_execution_path": "request its PERFORM -> 3000-CLEANUP: statement(s) 217",
+      "blocking": true,
+      "status": "OPEN"
+    }
+  ],
+  "closures": [
+    {
+      "behaviour_id": "TSTVAL00:0000-MAIN",
+      "status": "UNRESOLVED",
+      "unresolved_reasons": [
+        "PERFORM/GO TO target 2200-RUN-FUNCTIONAL-TEST (line 190) is not a paragraph of TSTVAL00",
+        "PERFORM/GO TO target 2300-RUN-INTEGRATION-TEST (line 192) is not a paragraph of TSTVAL00",
+        "PERFORM/GO TO target 2400-RUN-PERFORMANCE-TEST (line 194) is not a paragraph of TSTVAL00",
+        "PERFORM/GO TO target 2500-RUN-ERROR-TEST (line 196) is not a paragraph of TSTVAL00",
+        "PERFORM/GO TO target 2600-VALIDATE-RESULTS (line 202) is not a paragraph of TSTVAL00",
+        "PERFORM/GO TO target 2700-UPDATE-METRICS (line 203) is not a paragraph of TSTVAL00",
+        "PERFORM/GO TO target 2800-WRITE-TEST-DETAIL (line 204) is not a paragraph of TSTVAL00"
+      ],
+      "units": [
+        "TSTVAL00"
+      ],
+      "external": [
+        {
+          "kind": "file_io",
+          "line": 169,
+          "operation": "WRITE",
+          "target": "TEST-REPORT",
+          "relation": "direct"
+        },
+        {
+          "kind": "file_io",
+          "line": 170,
+          "operation": "WRITE",
+          "target": "TEST-REPORT",
+          "relation": "direct"
+        },
+        {
+          "kind": "file_io",
+          "line": 178,
+          "operation": "READ",
+          "target": "TEST-CASES",
+          "relation": "direct"
+        },
+        {
+          "kind": "file_io",
+          "line": 214,
+          "operation": "WRITE",
+          "target": "TEST-REPORT",
+          "relation": "direct"
+        }
+      ],
+      "undeclared": [
+        "WS-ERROR-MESSAGE"
+      ],
+      "sha256": "bd1ea71b7e8ddda831e53901e9d29f4c3fe9e386c0ec5d7ae3001201fc9b4b78"
+    },
+    {
+      "behaviour_id": "TSTVAL00:1000-INITIALIZE",
+      "status": "UNRESOLVED",
+      "unresolved_reasons": [
+        "PERFORM/GO TO target 2200-RUN-FUNCTIONAL-TEST (line 190) is not a paragraph of TSTVAL00",
+        "PERFORM/GO TO target 2300-RUN-INTEGRATION-TEST (line 192) is not a paragraph of TSTVAL00",
+        "PERFORM/GO TO target 2400-RUN-PERFORMANCE-TEST (line 194) is not a paragraph of TSTVAL00",
+        "PERFORM/GO TO target 2500-RUN-ERROR-TEST (line 196) is not a paragraph of TSTVAL00",
+        "PERFORM/GO TO target 2600-VALIDATE-RESULTS (line 202) is not a paragraph of TSTVAL00",
+        "PERFORM/GO TO target 2700-UPDATE-METRICS (line 203) is not a paragraph of TSTVAL00",
+        "PERFORM/GO TO target 2800-WRITE-TEST-DETAIL (line 204) is not a paragraph of TSTVAL00"
+      ],
+      "units": [
+        "TSTVAL00"
+      ],
+      "external": [
+        {
+          "kind": "file_io",
+          "line": 169,
+          "operation": "WRITE",
+          "target": "TEST-REPORT",
+          "relation": "direct"
+        },
+        {
+          "kind": "file_io",
+          "line": 170,
+          "operation": "WRITE",
+          "target": "TEST-REPORT",
+          "relation": "direct"
+        }
+      ],
+      "undeclared": [
+        "WS-ERROR-MESSAGE"
+      ],
+      "sha256": "0ac3827d6d9c6e03bbb955b4e5c8af93045bd7b3e7c99a3a7f9e139828ac7750"
+    },
+    {
+      "behaviour_id": "TSTVAL00:2000-PROCESS",
+      "status": "UNRESOLVED",
+      "unresolved_reasons": [
+        "PERFORM/GO TO target 2200-RUN-FUNCTIONAL-TEST (line 190) is not a paragraph of TSTVAL00",
+        "PERFORM/GO TO target 2300-RUN-INTEGRATION-TEST (line 192) is not a paragraph of TSTVAL00",
+        "PERFORM/GO TO target 2400-RUN-PERFORMANCE-TEST (line 194) is not a paragraph of TSTVAL00",
+        "PERFORM/GO TO target 2500-RUN-ERROR-TEST (line 196) is not a paragraph of TSTVAL00",
+        "PERFORM/GO TO target 2600-VALIDATE-RESULTS (line 202) is not a paragraph of TSTVAL00",
+        "PERFORM/GO TO target 2700-UPDATE-METRICS (line 203) is not a paragraph of TSTVAL00",
+        "PERFORM/GO TO target 2800-WRITE-TEST-DETAIL (line 204) is not a paragraph of TSTVAL00"
+      ],
+      "units": [
+        "TSTVAL00"
+      ],
+      "external": [
+        {
+          "kind": "file_io",
+          "line": 178,
+          "operation": "READ",
+          "target": "TEST-CASES",
+          "relation": "direct"
+        },
+        {
+          "kind": "file_io",
+          "line": 214,
+          "operation": "WRITE",
+          "target": "TEST-REPORT",
+          "relation": "direct"
+        }
+      ],
+      "undeclared": [
+        "WS-ERROR-MESSAGE"
+      ],
+      "sha256": "16575005497e7a9d4bacee0433234f616f7564e4aa6bc6bf550552ce301c8a14"
+    },
+    {
+      "behaviour_id": "TSTVAL00:3000-CLEANUP",
+      "status": "UNRESOLVED",
+      "unresolved_reasons": [
+        "PERFORM/GO TO target 2200-RUN-FUNCTIONAL-TEST (line 190) is not a paragraph of TSTVAL00",
+        "PERFORM/GO TO target 2300-RUN-INTEGRATION-TEST (line 192) is not a paragraph of TSTVAL00",
+        "PERFORM/GO TO target 2400-RUN-PERFORMANCE-TEST (line 194) is not a paragraph of TSTVAL00",
+        "PERFORM/GO TO target 2500-RUN-ERROR-TEST (line 196) is not a paragraph of TSTVAL00",
+        "PERFORM/GO TO target 2600-VALIDATE-RESULTS (line 202) is not a paragraph of TSTVAL00",
+        "PERFORM/GO TO target 2700-UPDATE-METRICS (line 203) is not a paragraph of TSTVAL00",
+        "PERFORM/GO TO target 2800-WRITE-TEST-DETAIL (line 204) is not a paragraph of TSTVAL00"
+      ],
+      "units": [
+        "TSTVAL00"
+      ],
+      "external": [],
+      "undeclared": [],
+      "sha256": "aab921c13bb52075a88fab898ed02988d0500451a4d627c5ca9ce1279e5131c0"
+    }
+  ],
+  "open_decisions": [
+    {
+      "id": "DR-TSTVAL00-001",
+      "blocking": true,
+      "question": "TSTVAL00 is a confirmed test tool (test-validation driver: routes by TEST-TYPE 'FUNCTIONAL' / 'INTEGRATE' / 'PERFORM' / 'ERROR', BR-126; computes 'WS-SUCCESS-RATE = (WS-TESTS-PASSED / WS-TOTAL-TESTS) * 100', BR-127). Is TSTVAL00 modernised, retired, replaced by a framework test harness, or kept as test tooling?"
+    },
+    {
+      "id": "SCOPE-TSTVAL00",
+      "blocking": true,
+      "question": "TSTVAL00 is classified test_tool (confirmed): classified as test_tool (confirmed); a human must decide whether it is in modernisation scope. Keep it in the modernisation scope (resolved_no_change) or exclude it (excluded_from_scope)?"
+    },
+    {
+      "id": "DR-F2-P0007-003",
+      "blocking": false,
+      "question": "Ten elementary level-01 FD/WS items have no permanent Field ID (PORTTRAN WS-EOF-FLAG, TSTGEN00 SEED-RECORD, TSTVAL00 EXPECTED-RECORD/ACTUAL-RECORD/REPORT-RECORD, UTLMNT00 ARCHIVE-RECORD/REPORT-RECORD, UTLVAL00 ERROR-RECORD, FILEHNDL INPUT-RECORD/OUTPUT-RECORD). Should the reverse data agent register Field IDs for record-level elementary items so their Java types can be fixed?"
+    },
+    {
+      "id": "DR-F2-P0007-005",
+      "blocking": false,
+      "question": "WS-ERROR-MESSAGE is referenced but declared nowhere in TSTGEN00, TSTVAL00, UTLMNT00, UTLMON00 and UTLVAL00 (it may have been expected from ERRHAND or RTNCODE). What is its intended layout and owning copybook?"
+    },
+    {
+      "id": "DR-F2-PKT0010-002",
+      "blocking": false,
+      "question": "Which character encoding (code page) do the files and areas described by these copybooks use for DISPLAY data on the legacy platform (EBCDIC 037, 1140, another EBCDIC variant, or ASCII)? The zoned-decimal test vectors and String codecs depend on it."
+    },
+    {
+      "id": "DR-TSTVAL00-002",
+      "blocking": true,
+      "question": "If TSTVAL00 is kept: GAP-018 - seven paragraphs (2200-RUN-FUNCTIONAL-TEST, 2300-RUN-INTEGRATION-TEST, 2400-RUN-PERFORMANCE-TEST, 2500-RUN-ERROR-TEST, 2600-VALIDATE-RESULTS, 2700-UPDATE-METRICS, 2800-WRITE-TEST-DETAIL) are not declared; GAP-039 - WS-ERROR-MESSAGE is declared nowhere; GAP-079 - test metrics are never updated, so the success-rate COMPUTE (line 212) may divide by zero. Can the full source be located, or is the tool unfinished?"
+    },
+    {
+      "id": "RVW-GAP-092",
+      "blocking": false,
+      "question": "GAP-092 (medium, DIAGRAM_RENDER_UNVERIFIED) is not addressed by any decision or requirement: Visual rendering of the 65 Mermaid diagrams is unverified. Acknowledge it as a known limitation (resolved_no_change) or exclude the affected units?"
+    },
+    {
+      "id": "RVW-GAP-104",
+      "blocking": false,
+      "question": "GAP-104 (low, DIAGRAM_INCOMPLETE) is not addressed by any decision or requirement: COMP-UNRESOLVED: all seven edges are unsupported. Acknowledge it as a known limitation (resolved_no_change) or exclude the affected units?"
+    }
+  ],
+  "authorisation": {
+    "generation_authorized": false,
+    "blockers": [
+      "config generation.java_generation_allowed is false (project authority)",
+      "no authorised orchestrator.java_target_dir",
+      "G4 is BLOCKED (needs signed G2, G3 and G4 approvals by trusted signers)",
+      "trust store: TRUST_NOT_CONFIGURED"
+    ],
+    "gates": {
+      "G0": "PASS",
+      "G1": "PASS",
+      "G2": "UNVERIFIED",
+      "G3": "BLOCKED",
+      "G4": "BLOCKED",
+      "G5": "BLOCKED",
+      "G6": "BLOCKED",
+      "G7": "BLOCKED",
+      "G8": "BLOCKED"
+    },
+    "trust": "TRUST_NOT_CONFIGURED",
+    "program_g2_scope": {
+      "readiness": "NOT_READY",
+      "blocking": 17,
+      "scope_sha256": "0dfb9b447bb9a2dd813588622c8d38628f16e9926e240018d68b62f3bb6ea8dc"
+    },
+    "note": "Engineering gates never authorise generation. Java may be generated only when generation_authorized is true."
+  }
+}

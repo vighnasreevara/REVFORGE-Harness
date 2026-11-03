@@ -1,0 +1,336 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://revforge.local/contracts/bmad/provenance.schema.json",
+  "title": "Provenance sidecar of one mapped BMad input",
+  "type": "object",
+  "properties": {
+    "contract": {
+      "const": "bmad/provenance"
+    },
+    "contract_version": {
+      "const": "1.0"
+    },
+    "mapping_version": {
+      "type": "string",
+      "minLength": 1
+    },
+    "input": {
+      "type": "string",
+      "minLength": 1
+    },
+    "input_sha256": {
+      "$ref": "../common.schema.json#/definitions/sha256"
+    },
+    "binding_id": {
+      "type": "string",
+      "pattern": "^BMAD-[A-Z]+$"
+    },
+    "workflow_id": {
+      "type": "string",
+      "pattern": "^bmad-[a-z0-9-]+$"
+    },
+    "scope": {
+      "type": "string",
+      "minLength": 1
+    },
+    "scope_sha256": {
+      "$ref": "../common.schema.json#/definitions/sha256"
+    },
+    "baseline": {
+      "type": "object",
+      "properties": {
+        "run_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "manifest_sha256": {
+          "$ref": "../common.schema.json#/definitions/sha256"
+        }
+      },
+      "required": [
+        "run_id",
+        "manifest_sha256"
+      ],
+      "additionalProperties": false
+    },
+    "requirements": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "kind": {
+            "const": "requirement"
+          },
+          "record_sha256": {
+            "$ref": "../common.schema.json#/definitions/sha256"
+          },
+          "receipt": {
+            "type": "string",
+            "minLength": 1
+          },
+          "outcome": {
+            "type": "string",
+            "minLength": 1
+          },
+          "source_refs": {
+            "type": "array",
+            "items": {
+              "type": "object"
+            }
+          },
+          "inclusion": {
+            "enum": [
+              "direct",
+              "shared_dependency"
+            ]
+          }
+        },
+        "required": [
+          "id",
+          "kind",
+          "record_sha256",
+          "receipt",
+          "outcome",
+          "source_refs",
+          "inclusion"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "rules": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "source_run": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "requirement_ids": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1
+            }
+          }
+        },
+        "required": [
+          "id",
+          "source_run",
+          "requirement_ids"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "data_contracts": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "kind": {
+            "type": "string",
+            "minLength": 1
+          },
+          "record_sha256": {
+            "$ref": "../common.schema.json#/definitions/sha256"
+          },
+          "receipt": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "required": [
+          "id",
+          "kind",
+          "record_sha256",
+          "receipt"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "decisions": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "resolution_id": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "outcome": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "class": {
+            "enum": [
+              "direct",
+              "shared_dependency",
+              "cross_scope",
+              "global"
+            ]
+          },
+          "effective_blocking": {
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "id",
+          "resolution_id",
+          "outcome",
+          "class",
+          "effective_blocking"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "approvals": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "approval_id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "signer_id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "role": {
+            "type": "string",
+            "minLength": 1
+          },
+          "scope_sha256": {
+            "$ref": "../common.schema.json#/definitions/sha256"
+          }
+        },
+        "required": [
+          "approval_id",
+          "signer_id",
+          "role",
+          "scope_sha256"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "upstream_receipts": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "receipt_id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "binding_id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "sha256": {
+            "$ref": "../common.schema.json#/definitions/sha256"
+          }
+        },
+        "required": [
+          "receipt_id",
+          "binding_id",
+          "sha256"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "runtime_requirements": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "kind": {
+            "const": "runtime_requirement"
+          },
+          "record_sha256": {
+            "$ref": "../common.schema.json#/definitions/sha256"
+          },
+          "receipt": {
+            "type": "string",
+            "minLength": 1
+          },
+          "outcome": {
+            "type": "string",
+            "minLength": 1
+          },
+          "source_refs": {
+            "type": "array",
+            "items": {
+              "type": "object"
+            }
+          },
+          "inclusion": {
+            "enum": [
+              "direct",
+              "shared_dependency"
+            ]
+          }
+        },
+        "required": [
+          "id",
+          "kind",
+          "record_sha256",
+          "receipt",
+          "outcome",
+          "source_refs",
+          "inclusion"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "reconciliation_sha256": {
+      "$ref": "../common.schema.json#/definitions/sha256"
+    }
+  },
+  "required": [
+    "contract",
+    "contract_version",
+    "mapping_version",
+    "input",
+    "input_sha256",
+    "binding_id",
+    "workflow_id",
+    "scope",
+    "scope_sha256",
+    "baseline",
+    "requirements",
+    "rules",
+    "data_contracts",
+    "decisions",
+    "approvals",
+    "upstream_receipts",
+    "runtime_requirements",
+    "reconciliation_sha256"
+  ],
+  "additionalProperties": false
+}

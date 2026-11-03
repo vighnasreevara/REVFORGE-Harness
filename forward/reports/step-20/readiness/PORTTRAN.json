@@ -1,0 +1,674 @@
+{
+  "gate": "SOURCE_READINESS",
+  "subject": "PORTTRAN",
+  "status": "FAIL",
+  "checks": [
+    {
+      "id": "source_available",
+      "ok": true,
+      "detail": "src/programs/portfolio/PORTTRAN.cbl sha256 6e8485dfeb001ea0378dc932c59ea3a7dab4ad1949f08af5c0fe94e461e06a58; 155 statement(s) in 16 paragraph(s)"
+    },
+    {
+      "id": "complete_program",
+      "ok": true,
+      "detail": "every paragraph contains statements"
+    },
+    {
+      "id": "copybooks_resolved",
+      "ok": false,
+      "detail": "unresolved or circular includes: PORTREC@40"
+    },
+    {
+      "id": "requirements_and_data_mapping_delivered",
+      "ok": true,
+      "detail": "F1/F2 deliveries accepted for AUDITLOG, ERRHAND, TRNREC, AUDPROC, ERRPROC, PORTTRAN"
+    },
+    {
+      "id": "behaviour_classified",
+      "ok": true,
+      "detail": "4 behaviour(s): 0 VERIFIED_CANDIDATE, 4 PARTIAL, 0 GAP"
+    },
+    {
+      "id": "dependencies_identified",
+      "ok": true,
+      "detail": "4 behaviour closure(s) resolved; units PORTTRAN, ERRHAND, TRNREC, ERRPROC; external operations 4"
+    },
+    {
+      "id": "unsupported_documented",
+      "ok": true,
+      "detail": "8 gap(s) document every PARTIAL/GAP behaviour"
+    },
+    {
+      "id": "unknowns_documented",
+      "ok": true,
+      "detail": "19 open decision(s) record the remaining questions (7 blocking for approval); none is resolved or assumed here"
+    }
+  ],
+  "note": "An engineering gate: it states that the source is understood well enough to convert, with every unknown documented. It is not a G2 approval and does not authorise generation.",
+  "behaviours": [
+    {
+      "behaviour_id": "PORTTRAN:ENTRY-DISPATCH",
+      "kind": "dispatch",
+      "classification": "PARTIAL",
+      "lines": [
+        61,
+        69
+      ],
+      "inputs": [
+        "WS-EOF-FLAG",
+        "WS-ERROR-COUNT",
+        "WS-TRAN-STATUS"
+      ],
+      "outputs": [],
+      "side_effects": [],
+      "unresolved": [],
+      "covered_by": [
+        "REQ-PORTTRAN-001"
+      ]
+    },
+    {
+      "behaviour_id": "PORTTRAN:1000-INITIALIZE",
+      "kind": "performed_range",
+      "classification": "PARTIAL",
+      "lines": [
+        75,
+        317
+      ],
+      "inputs": [
+        "ERR-CAT-PROC",
+        "ERR-MESSAGE",
+        "WS-COUNTERS",
+        "WS-ERROR-COUNT",
+        "WS-PORT-STATUS",
+        "WS-TRAN-STATUS"
+      ],
+      "outputs": [
+        "ERR-CATEGORY",
+        "ERR-PROGRAM",
+        "ERR-TEXT",
+        "WS-EOF-FLAG",
+        "WS-FILE-STATUS"
+      ],
+      "side_effects": [
+        {
+          "line": 79,
+          "kind": "file_io",
+          "operation": "OPEN",
+          "table": null
+        },
+        {
+          "line": 85,
+          "kind": "file_io",
+          "operation": "OPEN",
+          "table": null
+        },
+        {
+          "line": 316,
+          "kind": "call",
+          "operation": "CALL",
+          "table": null
+        }
+      ],
+      "unresolved": [],
+      "covered_by": [
+        "REQ-PORTTRAN-001",
+        "REQ-PORTTRAN-010"
+      ]
+    },
+    {
+      "behaviour_id": "PORTTRAN:2000-PROCESS-TRANSACTIONS",
+      "kind": "performed_range",
+      "classification": "PARTIAL",
+      "lines": [
+        93,
+        317
+      ],
+      "inputs": [
+        "ERR-CAT-PROC",
+        "ERR-MESSAGE",
+        "ERR-TEXT",
+        "TRN-AMOUNT",
+        "TRN-PORTFOLIO-ID",
+        "TRN-PRICE",
+        "TRN-QUANTITY",
+        "TRN-TYPE",
+        "WS-ERROR-COUNT",
+        "WS-PROCESS-COUNT",
+        "WS-READ-COUNT"
+      ],
+      "outputs": [
+        "ERR-CATEGORY",
+        "ERR-PROGRAM",
+        "ERR-TEXT",
+        "PORT-ID",
+        "WS-EOF-FLAG"
+      ],
+      "side_effects": [
+        {
+          "line": 93,
+          "kind": "file_io",
+          "operation": "READ",
+          "table": null
+        },
+        {
+          "line": 127,
+          "kind": "file_io",
+          "operation": "READ",
+          "table": null
+        },
+        {
+          "line": 316,
+          "kind": "call",
+          "operation": "CALL",
+          "table": null
+        }
+      ],
+      "unresolved": [
+        "PORT-ID"
+      ],
+      "covered_by": [
+        "REQ-PORTTRAN-001",
+        "REQ-PORTTRAN-009"
+      ]
+    },
+    {
+      "behaviour_id": "PORTTRAN:3000-TERMINATE",
+      "kind": "performed_range",
+      "classification": "PARTIAL",
+      "lines": [
+        303,
+        309
+      ],
+      "inputs": [
+        "WS-ERROR-COUNT",
+        "WS-PROCESS-COUNT",
+        "WS-READ-COUNT"
+      ],
+      "outputs": [],
+      "side_effects": [
+        {
+          "line": 303,
+          "kind": "file_io",
+          "operation": "CLOSE",
+          "table": null
+        }
+      ],
+      "unresolved": [],
+      "covered_by": [
+        "REQ-PORTTRAN-001"
+      ]
+    }
+  ],
+  "gaps": [
+    {
+      "gap_id": "GAP-PORTTRAN-1000-INITIALIZE-FILE-OPEN-TRANSACTION-FILE",
+      "kind": "EXTERNAL_FILE_RUNTIME",
+      "behaviour_id": "PORTTRAN:1000-INITIALIZE",
+      "source": {
+        "path": "src/programs/portfolio/PORTTRAN.cbl",
+        "sha256": "6e8485dfeb001ea0378dc932c59ea3a7dab4ad1949f08af5c0fe94e461e06a58",
+        "lines": [
+          79
+        ],
+        "statements": [
+          {
+            "line": 79,
+            "text": "OPEN INPUT TRANSACTION-FILE"
+          }
+        ]
+      },
+      "missing_fact": "the run-time behaviour of OPEN on TRANSACTION-FILE: the dataset bound to it (JCL DD), its content and record encoding, and the file-system status outcomes the COBOL source does not define",
+      "why_unsafe": "the records read and the statuses reported come from a dataset outside the program; a Java implementation verified only against source-derived fixtures does not establish them",
+      "affected_requirements": [
+        "REQ-PORTTRAN-001",
+        "REQ-PORTTRAN-010"
+      ],
+      "affected_java_component": "file port for OPEN TRANSACTION-FILE (runtime file semantics; dataset contents unverified)",
+      "required_action": [
+        "the dataset definitions (JCL DD, organisation, record format) and a captured legacy run for each status outcome (technical authority)"
+      ],
+      "validation_evidence": "a captured legacy run against the real (or an approved equivalent) dataset, including end-of-file and error statuses",
+      "blocks_execution_path": "request its PERFORM -> 1000-INITIALIZE: statement(s) 79",
+      "blocking": true,
+      "status": "OPEN"
+    },
+    {
+      "gap_id": "GAP-PORTTRAN-1000-INITIALIZE-FILE-OPEN-PORTFOLIO-FILE",
+      "kind": "EXTERNAL_FILE_RUNTIME",
+      "behaviour_id": "PORTTRAN:1000-INITIALIZE",
+      "source": {
+        "path": "src/programs/portfolio/PORTTRAN.cbl",
+        "sha256": "6e8485dfeb001ea0378dc932c59ea3a7dab4ad1949f08af5c0fe94e461e06a58",
+        "lines": [
+          85
+        ],
+        "statements": [
+          {
+            "line": 85,
+            "text": "OPEN I-O PORTFOLIO-FILE"
+          }
+        ]
+      },
+      "missing_fact": "the run-time behaviour of OPEN on PORTFOLIO-FILE: the dataset bound to it (JCL DD), its content and record encoding, and the file-system status outcomes the COBOL source does not define",
+      "why_unsafe": "the records read and the statuses reported come from a dataset outside the program; a Java implementation verified only against source-derived fixtures does not establish them",
+      "affected_requirements": [
+        "REQ-PORTTRAN-001",
+        "REQ-PORTTRAN-010"
+      ],
+      "affected_java_component": "file port for OPEN PORTFOLIO-FILE (runtime file semantics; dataset contents unverified)",
+      "required_action": [
+        "the dataset definitions (JCL DD, organisation, record format) and a captured legacy run for each status outcome (technical authority)"
+      ],
+      "validation_evidence": "a captured legacy run against the real (or an approved equivalent) dataset, including end-of-file and error statuses",
+      "blocks_execution_path": "request its PERFORM -> 1000-INITIALIZE: statement(s) 85",
+      "blocking": true,
+      "status": "OPEN"
+    },
+    {
+      "gap_id": "GAP-PORTTRAN-1000-INITIALIZE-CALL-CALL-ERRPROC",
+      "kind": "EXTERNAL_PROGRAM_CALL",
+      "behaviour_id": "PORTTRAN:1000-INITIALIZE",
+      "source": {
+        "path": "src/programs/portfolio/PORTTRAN.cbl",
+        "sha256": "6e8485dfeb001ea0378dc932c59ea3a7dab4ad1949f08af5c0fe94e461e06a58",
+        "lines": [
+          316
+        ],
+        "statements": [
+          {
+            "line": 316,
+            "text": "CALL 'ERRPROC' USING ERR-MESSAGE ."
+          }
+        ]
+      },
+      "missing_fact": "the behaviour of the called program ERRPROC for this USING interface; it is established only by ERRPROC's own closure and evidence, never by this behaviour",
+      "why_unsafe": "the outputs this behaviour receives back from ERRPROC are not part of this closure; treating them as known would assume the callee's behaviour",
+      "affected_requirements": [
+        "REQ-PORTTRAN-001",
+        "REQ-PORTTRAN-010"
+      ],
+      "affected_java_component": "call to ERRPROC through the program registry",
+      "required_action": [
+        "ERRPROC: its own source readiness and a recorded interface contract for the USING parameters"
+      ],
+      "validation_evidence": "a captured legacy run of the call to ERRPROC for each outcome it returns",
+      "blocks_execution_path": "request its PERFORM -> 1000-INITIALIZE: statement(s) 316",
+      "blocking": true,
+      "status": "OPEN"
+    },
+    {
+      "gap_id": "GAP-PORTTRAN-2000-PROCESS-TRANSACTIONS-PORT-ID",
+      "kind": "UNDECLARED_NAME_SEMANTICS",
+      "behaviour_id": "PORTTRAN:2000-PROCESS-TRANSACTIONS",
+      "source": {
+        "path": "src/programs/portfolio/PORTTRAN.cbl",
+        "sha256": "6e8485dfeb001ea0378dc932c59ea3a7dab4ad1949f08af5c0fe94e461e06a58",
+        "lines": [
+          126
+        ],
+        "statements": [
+          {
+            "line": 126,
+            "text": "MOVE TRN-PORTFOLIO-ID TO PORT-ID"
+          }
+        ]
+      },
+      "missing_fact": "PORT-ID is used but declared nowhere in the repository; its layout and value meanings are the subject of DR-PORTTRAN-001, DR-F2-P0007-001 (missing: a declaration of PORTREC; a declaration of PORTFOLIO-FILE; a declaration of PORT-TOTAL-UNITS; a declaration of PORT-TOTAL-COST)",
+      "why_unsafe": "the outputs of these statements (PORT-ID) depend on a value whose meaning is not established; any Java mapping would invent it",
+      "affected_requirements": [
+        "REQ-PORTTRAN-001",
+        "REQ-PORTTRAN-009"
+      ],
+      "affected_java_component": "outcome mapping of behaviour 2000-PROCESS-TRANSACTIONS (behind a port whose only implementation throws until the gap is resolved)",
+      "required_action": [
+        "DR-PORTTRAN-001: a signed resolution by technical_authority",
+        "DR-F2-P0007-001: a signed resolution by technical_authority"
+      ],
+      "validation_evidence": "the real definition of PORT-ID for the target runtime and a captured legacy run showing each outcome branch",
+      "blocks_execution_path": "request its PERFORM -> 2000-PROCESS-TRANSACTIONS: statements 126",
+      "blocking": true,
+      "status": "OPEN"
+    },
+    {
+      "gap_id": "GAP-PORTTRAN-2000-PROCESS-TRANSACTIONS-FILE-READ-TRANSACTION-FILE",
+      "kind": "EXTERNAL_FILE_RUNTIME",
+      "behaviour_id": "PORTTRAN:2000-PROCESS-TRANSACTIONS",
+      "source": {
+        "path": "src/programs/portfolio/PORTTRAN.cbl",
+        "sha256": "6e8485dfeb001ea0378dc932c59ea3a7dab4ad1949f08af5c0fe94e461e06a58",
+        "lines": [
+          93
+        ],
+        "statements": [
+          {
+            "line": 93,
+            "text": "READ TRANSACTION-FILE AT END"
+          }
+        ]
+      },
+      "missing_fact": "the run-time behaviour of READ on TRANSACTION-FILE: the dataset bound to it (JCL DD), its content and record encoding, and the file-system status outcomes the COBOL source does not define",
+      "why_unsafe": "the records read and the statuses reported come from a dataset outside the program; a Java implementation verified only against source-derived fixtures does not establish them",
+      "affected_requirements": [
+        "REQ-PORTTRAN-001",
+        "REQ-PORTTRAN-009"
+      ],
+      "affected_java_component": "file port for READ TRANSACTION-FILE (runtime file semantics; dataset contents unverified)",
+      "required_action": [
+        "the dataset definitions (JCL DD, organisation, record format) and a captured legacy run for each status outcome (technical authority)"
+      ],
+      "validation_evidence": "a captured legacy run against the real (or an approved equivalent) dataset, including end-of-file and error statuses",
+      "blocks_execution_path": "request its PERFORM -> 2000-PROCESS-TRANSACTIONS: statement(s) 93",
+      "blocking": true,
+      "status": "OPEN"
+    },
+    {
+      "gap_id": "GAP-PORTTRAN-2000-PROCESS-TRANSACTIONS-FILE-READ-PORTFOLIO-FILE",
+      "kind": "EXTERNAL_FILE_RUNTIME",
+      "behaviour_id": "PORTTRAN:2000-PROCESS-TRANSACTIONS",
+      "source": {
+        "path": "src/programs/portfolio/PORTTRAN.cbl",
+        "sha256": "6e8485dfeb001ea0378dc932c59ea3a7dab4ad1949f08af5c0fe94e461e06a58",
+        "lines": [
+          127
+        ],
+        "statements": [
+          {
+            "line": 127,
+            "text": "READ PORTFOLIO-FILE INVALID KEY"
+          }
+        ]
+      },
+      "missing_fact": "the run-time behaviour of READ on PORTFOLIO-FILE: the dataset bound to it (JCL DD), its content and record encoding, and the file-system status outcomes the COBOL source does not define",
+      "why_unsafe": "the records read and the statuses reported come from a dataset outside the program; a Java implementation verified only against source-derived fixtures does not establish them",
+      "affected_requirements": [
+        "REQ-PORTTRAN-001",
+        "REQ-PORTTRAN-009"
+      ],
+      "affected_java_component": "file port for READ PORTFOLIO-FILE (runtime file semantics; dataset contents unverified)",
+      "required_action": [
+        "the dataset definitions (JCL DD, organisation, record format) and a captured legacy run for each status outcome (technical authority)"
+      ],
+      "validation_evidence": "a captured legacy run against the real (or an approved equivalent) dataset, including end-of-file and error statuses",
+      "blocks_execution_path": "request its PERFORM -> 2000-PROCESS-TRANSACTIONS: statement(s) 127",
+      "blocking": true,
+      "status": "OPEN"
+    },
+    {
+      "gap_id": "GAP-PORTTRAN-2000-PROCESS-TRANSACTIONS-CALL-CALL-ERRPROC",
+      "kind": "EXTERNAL_PROGRAM_CALL",
+      "behaviour_id": "PORTTRAN:2000-PROCESS-TRANSACTIONS",
+      "source": {
+        "path": "src/programs/portfolio/PORTTRAN.cbl",
+        "sha256": "6e8485dfeb001ea0378dc932c59ea3a7dab4ad1949f08af5c0fe94e461e06a58",
+        "lines": [
+          316
+        ],
+        "statements": [
+          {
+            "line": 316,
+            "text": "CALL 'ERRPROC' USING ERR-MESSAGE ."
+          }
+        ]
+      },
+      "missing_fact": "the behaviour of the called program ERRPROC for this USING interface; it is established only by ERRPROC's own closure and evidence, never by this behaviour",
+      "why_unsafe": "the outputs this behaviour receives back from ERRPROC are not part of this closure; treating them as known would assume the callee's behaviour",
+      "affected_requirements": [
+        "REQ-PORTTRAN-001",
+        "REQ-PORTTRAN-009"
+      ],
+      "affected_java_component": "call to ERRPROC through the program registry",
+      "required_action": [
+        "ERRPROC: its own source readiness and a recorded interface contract for the USING parameters"
+      ],
+      "validation_evidence": "a captured legacy run of the call to ERRPROC for each outcome it returns",
+      "blocks_execution_path": "request its PERFORM -> 2000-PROCESS-TRANSACTIONS: statement(s) 316",
+      "blocking": true,
+      "status": "OPEN"
+    },
+    {
+      "gap_id": "GAP-PORTTRAN-3000-TERMINATE-FILE-CLOSE-TRANSACTION-FILE",
+      "kind": "EXTERNAL_FILE_RUNTIME",
+      "behaviour_id": "PORTTRAN:3000-TERMINATE",
+      "source": {
+        "path": "src/programs/portfolio/PORTTRAN.cbl",
+        "sha256": "6e8485dfeb001ea0378dc932c59ea3a7dab4ad1949f08af5c0fe94e461e06a58",
+        "lines": [
+          303
+        ],
+        "statements": [
+          {
+            "line": 303,
+            "text": "CLOSE TRANSACTION-FILE PORTFOLIO-FILE"
+          }
+        ]
+      },
+      "missing_fact": "the run-time behaviour of CLOSE on TRANSACTION-FILE: the dataset bound to it (JCL DD), its content and record encoding, and the file-system status outcomes the COBOL source does not define",
+      "why_unsafe": "the records read and the statuses reported come from a dataset outside the program; a Java implementation verified only against source-derived fixtures does not establish them",
+      "affected_requirements": [
+        "REQ-PORTTRAN-001"
+      ],
+      "affected_java_component": "file port for CLOSE TRANSACTION-FILE (runtime file semantics; dataset contents unverified)",
+      "required_action": [
+        "the dataset definitions (JCL DD, organisation, record format) and a captured legacy run for each status outcome (technical authority)"
+      ],
+      "validation_evidence": "a captured legacy run against the real (or an approved equivalent) dataset, including end-of-file and error statuses",
+      "blocks_execution_path": "request its PERFORM -> 3000-TERMINATE: statement(s) 303",
+      "blocking": true,
+      "status": "OPEN"
+    }
+  ],
+  "closures": [
+    {
+      "behaviour_id": "PORTTRAN:0000-MAIN",
+      "status": "RESOLVED",
+      "unresolved_reasons": [],
+      "units": [
+        "PORTTRAN",
+        "ERRHAND",
+        "TRNREC",
+        "ERRPROC"
+      ],
+      "external": [
+        {
+          "kind": "file_io",
+          "line": 93,
+          "operation": "READ",
+          "target": "TRANSACTION-FILE",
+          "relation": "direct"
+        },
+        {
+          "kind": "file_io",
+          "line": 127,
+          "operation": "READ",
+          "target": "PORTFOLIO-FILE",
+          "relation": "direct"
+        }
+      ],
+      "undeclared": [
+        "PORT-ID",
+        "PORT-TOTAL-UNITS"
+      ],
+      "sha256": "0fadda258f957bb73090cc8c22b7afd55d724ae240650fb704c3e8a5e9d72903"
+    },
+    {
+      "behaviour_id": "PORTTRAN:1000-INITIALIZE",
+      "status": "RESOLVED",
+      "unresolved_reasons": [],
+      "units": [
+        "PORTTRAN",
+        "ERRHAND",
+        "ERRPROC"
+      ],
+      "external": [],
+      "undeclared": [],
+      "sha256": "fdef53125ccc52f63edf6181080ca1fbb66baa5bec784b028a25f5431dc3fafc"
+    },
+    {
+      "behaviour_id": "PORTTRAN:2000-PROCESS-TRANSACTIONS",
+      "status": "RESOLVED",
+      "unresolved_reasons": [],
+      "units": [
+        "PORTTRAN",
+        "ERRHAND",
+        "TRNREC",
+        "ERRPROC"
+      ],
+      "external": [
+        {
+          "kind": "file_io",
+          "line": 93,
+          "operation": "READ",
+          "target": "TRANSACTION-FILE",
+          "relation": "direct"
+        },
+        {
+          "kind": "file_io",
+          "line": 127,
+          "operation": "READ",
+          "target": "PORTFOLIO-FILE",
+          "relation": "direct"
+        }
+      ],
+      "undeclared": [
+        "PORT-ID",
+        "PORT-TOTAL-UNITS"
+      ],
+      "sha256": "8e4612fd18d3e8416a5da04b2c864a5e241bb09a3d7f1f2c3ca5993fe9793e38"
+    },
+    {
+      "behaviour_id": "PORTTRAN:3000-TERMINATE",
+      "status": "RESOLVED",
+      "unresolved_reasons": [],
+      "units": [
+        "PORTTRAN"
+      ],
+      "external": [],
+      "undeclared": [],
+      "sha256": "7d5302f0604a81dbd5bbfe50e9e8e298f0642dc0fa7632e692bd51003d5140c0"
+    }
+  ],
+  "open_decisions": [
+    {
+      "id": "DR-AUDPROC-001",
+      "blocking": true,
+      "question": "In AUDPROC the audit timestamp is moved into AUD-TIMESTAMP (line 74) and then overwritten by the group move of the 32-byte system information into the 58-byte AUD-HEADER (line 75), so the written audit record carries neither the timestamp nor correctly aligned system/user/program/terminal values. On open failure the program also closes the unopened audit file. Must the forward audit service reproduce the record exactly as written today, or write the timestamp and the system, user, program and terminal identifiers in their own fields?"
+    },
+    {
+      "id": "DR-AUDPROC-002",
+      "blocking": false,
+      "question": "Copybook AUDITLOG declares audit types ('TRAN','USER','SYST'; BR-143), actions (CREATE, UPDATE, DELETE, INQUIRE, LOGIN, LOGOUT, STARTUP, SHUTDOWN; BR-144) and outcome statuses ('SUCC','FAIL','WARN'; BR-145). Callers assign them and AUDPROC writes them unchecked. Must the forward audit service reject values outside these domains, or record whatever the caller supplies (as implemented)?"
+    },
+    {
+      "id": "DR-DB2ERR-002",
+      "blocking": false,
+      "question": "DB2ERR (line 75) uses the non-standard 'ACCEPT WS-CURRENT-TIMESTAMP FROM TIME STAMP'; the ERRPROC logic file flags the same construct (line 57) and PORTDEL uses it for the deletion audit timestamp (source line 169). Which compiler extension is in use and what timestamp format do ERRLOG rows, error-log records and deletion audit records actually carry?"
+    },
+    {
+      "id": "DR-F2-0005-012",
+      "blocking": false,
+      "question": "Fifteen elementary level-01 items (e.g. HISTLD00 WS-COMMIT-THRESHOLD, the REPORT-RECORD print lines, DB2CONN WS-CONNECTION-STATE/WS-RETRY-COUNT/WS-MAX-RETRIES, DB2CMT WS-SAVEPOINT-ID) are catalogued as record-level items without Field IDs, so no Java type could be assigned. Should the reverse harness register Field IDs for them, or may later stages map them at record level using the catalogued PIC?"
+    },
+    {
+      "id": "DR-F2-0005-023",
+      "blocking": false,
+      "question": "AUDPROC appends audit records to a sequential dataset (DD AUDFILE, OPEN EXTEND per call), its group MOVE LS-SYSTEM-INFO TO AUD-HEADER may overwrite the timestamp just set, and it CLOSEs the file after a failed OPEN; RPTAUD00 meanwhile reads an indexed audit file keyed AUD-KEY (DD AUDITLOG) built on the same copybook. Is there one audit trail (and which organisation), and must the timestamp overwrite be reproduced?"
+    },
+    {
+      "id": "DR-F2-P0006-009",
+      "blocking": false,
+      "question": "ERRPROC's LINKAGE LS-ERROR-REQUEST is 354 bytes, but DB2ERR (line 199) and DB2STAT (line 227) CALL 'ERRPROC' USING ERR-MESSAGE from copybook ERRHAND (about 370 bytes, different field order). Which layout is the contract of the Java error service?"
+    },
+    {
+      "id": "DR-F2-P0007-001",
+      "blocking": true,
+      "question": "COPY PORTREC (PORTTRAN line 40) is missing from the repository, so FD PORTFOLIO-FILE (record PORTFOLIO-RECORD, RECORD KEY PORT-ID, read and REWRITTEN by PORTTRAN) has no layout. Which copybook or record definition is authoritative for this file?"
+    },
+    {
+      "id": "DR-F2-P0007-003",
+      "blocking": false,
+      "question": "Ten elementary level-01 FD/WS items have no permanent Field ID (PORTTRAN WS-EOF-FLAG, TSTGEN00 SEED-RECORD, TSTVAL00 EXPECTED-RECORD/ACTUAL-RECORD/REPORT-RECORD, UTLMNT00 ARCHIVE-RECORD/REPORT-RECORD, UTLVAL00 ERROR-RECORD, FILEHNDL INPUT-RECORD/OUTPUT-RECORD). Should the reverse data agent register Field IDs for record-level elementary items so their Java types can be fixed?"
+    },
+    {
+      "id": "DR-F2-P0007-009",
+      "blocking": false,
+      "question": "Which character encoding do the DISPLAY files of this batch use (assumed EBCDIC code page 037), and must Java preserve EBCDIC collation for indexed keys such as PORT-KEY, VSAM-RECORD-KEY, POS-KEY and TRAN-KEY?"
+    },
+    {
+      "id": "DR-F2-PKT0010-002",
+      "blocking": false,
+      "question": "Which character encoding (code page) do the files and areas described by these copybooks use for DISPLAY data on the legacy platform (EBCDIC 037, 1140, another EBCDIC variant, or ASCII)? The zoned-decimal test vectors and String codecs depend on it."
+    },
+    {
+      "id": "DR-F2-PKT0010-005",
+      "blocking": false,
+      "question": "Several data names are declared more than once: CK-FILE-STATUS (CKPRST group line 35 and child line 38); ERR-VALIDATION/ERR-PROCESSING/ERR-SECURITY (RETHND level-88 and STD-ERROR-CODES fields); RC-SUCCESS..RC-CRITICAL, TRN-TYPE-BUY/SELL/FEE, ERROR-CODE and ERROR-ROUTINE across COMMON, RETHND and TRNREC. What Java naming convention should disambiguate them (for example record-qualified class members keyed by Field ID)?"
+    },
+    {
+      "id": "DR-PORTTRAN-001",
+      "blocking": true,
+      "question": "GAP-003 (critical): PORTTRAN copies PORTREC at line 40 under FD PORTFOLIO-FILE, but no PORTREC copybook exists; PORT-ID, PORT-TOTAL-UNITS, PORT-TOTAL-COST, PORTFOLIO-RECORD, PORT-ACCOUNT-NO and PORT-RECORD have no Field IDs. Where is the authoritative PORTREC layout (load library, external PDS, vendor library), or should PORTTRAN's portfolio file be specified with another existing layout such as PORTFLIO?"
+    },
+    {
+      "id": "DR-PORTTRAN-002",
+      "blocking": true,
+      "question": "BR-111 to BR-114 describe confirmed dead code in PORTTRAN: 2200-UPDATE-POSITIONS is never performed, so the routing by type (BU -> 2210-PROCESS-BUY, SL -> 2220-PROCESS-SELL, TR -> 2230-PROCESS-TRANSFER reporting 'Transfer processing not implemented', FE -> 2240-PROCESS-FEE), the sale check 'PORT-TOTAL-UNITS < TRN-QUANTITY' -> 'Insufficient units for sale', the position arithmetic (buy: units += quantity, cost += amount; sell: units -= quantity, cost -= amount; fee: cost -= amount) and the audit mapping (BU -> 'CREATE', SL -> 'DELETE', TR/FE -> 'UPDATE') never execute. Validated transactions are only counted. Should the forward system (a) keep the as-found behaviour (validate and count only), or (b) implement the designed but unreachable position update, short-sale check and audit trail, or are these applied elsewhere?"
+    },
+    {
+      "id": "DR-PORTTRAN-003",
+      "blocking": false,
+      "question": "GAP-076: CALL 'ERRPROC' USING ERR-MESSAGE (line 316) passes the 370-byte ERRHAND record ERR-MESSAGE, while ERRPROC receives the 354-byte LS-ERROR-REQUEST; the layouts are offset by 18 bytes. Which error-record layout is authoritative for errors reported by PORTTRAN, and should the forward error reporting reproduce the shifted fields?"
+    },
+    {
+      "id": "RVW-GAP-092",
+      "blocking": false,
+      "question": "GAP-092 (medium, DIAGRAM_RENDER_UNVERIFIED) is not addressed by any decision or requirement: Visual rendering of the 65 Mermaid diagrams is unverified. Acknowledge it as a known limitation (resolved_no_change) or exclude the affected units?"
+    },
+    {
+      "id": "RVW-GAP-104",
+      "blocking": false,
+      "question": "GAP-104 (low, DIAGRAM_INCOMPLETE) is not addressed by any decision or requirement: COMP-UNRESOLVED: all seven edges are unsupported. Acknowledge it as a known limitation (resolved_no_change) or exclude the affected units?"
+    },
+    {
+      "id": "DR-CONSOLIDATION-001",
+      "blocking": true,
+      "question": "Batches disagree on BR-143 (Report audit record type as transaction, user action or system event): PKT-0002-F1=mapped, PKT-0004-F1=not_a_requirement. Should this declared value domain be a forward requirement?"
+    },
+    {
+      "id": "DR-CONSOLIDATION-002",
+      "blocking": true,
+      "question": "Batches disagree on BR-144 (Report audit action as a declared audit action): PKT-0002-F1=mapped, PKT-0004-F1=not_a_requirement. Should this declared value domain be a forward requirement?"
+    },
+    {
+      "id": "DR-CONSOLIDATION-003",
+      "blocking": true,
+      "question": "Batches disagree on BR-145 (Report audit outcome status as success, failure or warning): PKT-0002-F1=mapped, PKT-0004-F1=not_a_requirement. Should this declared value domain be a forward requirement?"
+    }
+  ],
+  "authorisation": {
+    "generation_authorized": false,
+    "blockers": [
+      "config generation.java_generation_allowed is false (project authority)",
+      "no authorised orchestrator.java_target_dir",
+      "G4 is BLOCKED (needs signed G2, G3 and G4 approvals by trusted signers)",
+      "trust store: TRUST_NOT_CONFIGURED"
+    ],
+    "gates": {
+      "G0": "PASS",
+      "G1": "PASS",
+      "G2": "UNVERIFIED",
+      "G3": "BLOCKED",
+      "G4": "BLOCKED",
+      "G5": "BLOCKED",
+      "G6": "BLOCKED",
+      "G7": "BLOCKED",
+      "G8": "BLOCKED"
+    },
+    "trust": "TRUST_NOT_CONFIGURED",
+    "program_g2_scope": {
+      "readiness": "NOT_READY",
+      "blocking": 35,
+      "scope_sha256": "0e25f3e0ed78cdfaba68aa356f678e89a656315a4fd6fd82c635cb477813ad17"
+    },
+    "note": "Engineering gates never authorise generation. Java may be generated only when generation_authorized is true."
+  }
+}

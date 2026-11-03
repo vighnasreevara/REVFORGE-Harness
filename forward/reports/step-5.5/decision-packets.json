@@ -1,0 +1,688 @@
+{
+  "contract": "decision-review-packets",
+  "contract_version": "1.0",
+  "generated_at": "2026-11-01T00:14:35.047Z",
+  "scope": "programs:RTNCDE00",
+  "scope_sha256": "88d8562c1b30170f33446a43303d54d47fd102ec25c3d79249749d6dfd126f13",
+  "rule": "Packets explain; they do not decide. A decision is resolved only by importing a signed resolution from an authorized human (workflow decisions resolve).",
+  "summary": {
+    "root_causes": 3,
+    "by_class": {
+      "A": 1,
+      "B": 1,
+      "D": 1
+    },
+    "blocking_decisions": 4
+  },
+  "packets": [
+    {
+      "root_cause_id": "RC-CIT-fd279b78dd",
+      "class": "A",
+      "class_meaning": "technical fact verifiable from source",
+      "title": "Citation of REQ-RTNCDE00-004 contradicted by the source",
+      "what_the_cobol_appears_to_do": "Deterministic checks establish whether the cited statement or the cited line is wrong, from the stated values.",
+      "deterministic_checks": [
+        {
+          "check": "citation",
+          "status": "SOURCE_CITATION_CORRECTED",
+          "detail": "1/1 stated value(s) occur at line=122 (lines 122-133) -> propose line=122"
+        }
+      ],
+      "source_evidence": [
+        {
+          "path": "src/programs/batch/RTNCDE00.cbl",
+          "sha256": "7cb951ea1f418c19ddd61c0eca00f21108af5f364b5ecf05742cbc428862994e",
+          "lines": [
+            119,
+            135
+          ],
+          "excerpt": [
+            {
+              "line": 119,
+              "text": "           EXIT."
+            },
+            {
+              "line": 120,
+              "text": "           "
+            },
+            {
+              "line": 121,
+              "text": "       P500-ANALYZE-CODES."
+            },
+            {
+              "line": 122,
+              "text": "           EXEC SQL"
+            },
+            {
+              "line": 123,
+              "text": "                SELECT COUNT(*),"
+            },
+            {
+              "line": 124,
+              "text": "                       MAX(RETURN_CODE),"
+            },
+            {
+              "line": 125,
+              "text": "                       MIN(RETURN_CODE)"
+            },
+            {
+              "line": 126,
+              "text": "                INTO :RC-TOTAL-CODES,"
+            },
+            {
+              "line": 127,
+              "text": "                     :RC-MAX-CODE,"
+            },
+            {
+              "line": 128,
+              "text": "                     :RC-MIN-CODE"
+            },
+            {
+              "line": 129,
+              "text": "                FROM RTNCODES"
+            },
+            {
+              "line": 130,
+              "text": "                WHERE PROGRAM_ID = :RC-PROGRAM-ID"
+            },
+            {
+              "line": 131,
+              "text": "                  AND TIMESTAMP >= :RC-START-TIME"
+            },
+            {
+              "line": 132,
+              "text": "                  AND TIMESTAMP <= :RC-END-TIME"
+            },
+            {
+              "line": 133,
+              "text": "           END-EXEC."
+            },
+            {
+              "line": 134,
+              "text": "           "
+            },
+            {
+              "line": 135,
+              "text": "           IF SQLCODE = 0"
+            }
+          ],
+          "available": true
+        }
+      ],
+      "why_the_issue_exists": [
+        "CONTRADICTED: the source contradicts the cited evidence: cited line 121 is outside SYS-PORTFOLIO-001-FIL-0052-STMT-000024 (lines 122-133)",
+        "REQUIRES_SME_DECISION: blocked by DR-DB2CONN-002 (open)",
+        "REQUIRES_SME_DECISION: blocked by RVW-REQ-RTNCDE00-004 (open)"
+      ],
+      "objective_technical_fact": {
+        "proven": true,
+        "statement": "The source establishes whether the cited statement or the cited line is wrong, from the stated values (SOURCE_CITATION_CORRECTED)."
+      },
+      "why_human_judgment_is_needed": "A technical reviewer must confirm the source fact and authorize the corresponding correction or acceptance; the runtime never applies it on its own.",
+      "affected": {
+        "requirements": [
+          "REQ-RTNCDE00-004"
+        ],
+        "data_contracts": [],
+        "findings": [
+          "requirement:REQ-RTNCDE00-004"
+        ]
+      },
+      "decisions": [
+        {
+          "decision_id": "RVW-REQ-RTNCDE00-004",
+          "kind": "review",
+          "origin": "derived",
+          "question": "requirement REQ-RTNCDE00-004 (RTNCDE00) is not approvable as drafted: CONTRADICTED: the source contradicts the cited evidence: cited line 121 is outside SYS-PORTFOLIO-001-FIL-0052-STMT-000024 (lines 122-133)",
+          "options_recorded_by_agent": [
+            "excluded_from_scope",
+            "resolved_requires_update"
+          ],
+          "supported_outcomes": [
+            {
+              "outcome": "excluded_from_scope",
+              "effect": "The affected requirement(s) (or, for a scope decision, the unit) leave the scope with the written justification. A unit another unit in scope depends on cannot be hidden this way.",
+              "authorized_roles": [
+                "business_sme"
+              ]
+            },
+            {
+              "outcome": "resolved_requires_update",
+              "effect": "The affected item stays blocked until its content changes (new content hash, e.g. an authorized correction or re-delivery); it is then re-evaluated.",
+              "authorized_roles": [
+                "business_sme"
+              ]
+            }
+          ],
+          "decision_sha256": "4c90e9fdf811008ae46354b0dcff72e113e65dfdc4f112d19ddf6247d92587ef",
+          "resolution_request": "forward/reports/step-5.5/resolution-requests/RVW-REQ-RTNCDE00-004.resolution-request.json",
+          "status": "open"
+        }
+      ],
+      "authorized_roles": [
+        "business_sme"
+      ],
+      "ai_advisory": null,
+      "required_remediation": "Correct the citation through a versioned remediation proposal, approved by a signed resolution and applied as a validated correction; then re-verify the claim against the corrected citation."
+    },
+    {
+      "root_cause_id": "RC-EVD-af66b09e34",
+      "class": "B",
+      "class_meaning": "interpretation needing independent review",
+      "title": "requirement evidence of RTNCDE00 not established (unconfirmed_claim)",
+      "what_the_cobol_appears_to_do": "Deterministic checks establish which cited facts the source supports.",
+      "deterministic_checks": [
+        {
+          "check": "source_reference",
+          "status": "VERIFIED_STRUCTURALLY",
+          "detail": "SYS-PORTFOLIO-001-FIL-0052-STMT-000012 (EVALUATE) is at src/programs/batch/RTNCDE00.cbl:70"
+        },
+        {
+          "check": "source_reference",
+          "status": "VERIFIED_STRUCTURALLY",
+          "detail": "src/copybook/common/RTNCODE.cpy exists (sha256 27eabb519319…)"
+        },
+        {
+          "check": "stated_values",
+          "status": "INSUFFICIENT_EVIDENCE",
+          "detail": "3/4 stated value(s) occur in the cited statements; missing: F"
+        }
+      ],
+      "source_evidence": [
+        {
+          "path": "src/programs/batch/RTNCDE00.cbl",
+          "sha256": "7cb951ea1f418c19ddd61c0eca00f21108af5f364b5ecf05742cbc428862994e",
+          "lines": [
+            68,
+            81
+          ],
+          "excerpt": [
+            {
+              "line": 68,
+              "text": "           MOVE RC-NEW-CODE TO RC-CURRENT-CODE."
+            },
+            {
+              "line": 69,
+              "text": "           "
+            },
+            {
+              "line": 70,
+              "text": "           EVALUATE RC-NEW-CODE"
+            },
+            {
+              "line": 71,
+              "text": "               WHEN 0"
+            },
+            {
+              "line": 72,
+              "text": "                    SET RC-STATUS-SUCCESS TO TRUE"
+            },
+            {
+              "line": 73,
+              "text": "               WHEN 1 THRU 4"
+            },
+            {
+              "line": 74,
+              "text": "                    SET RC-STATUS-WARNING TO TRUE"
+            },
+            {
+              "line": 75,
+              "text": "               WHEN 5 THRU 8"
+            },
+            {
+              "line": 76,
+              "text": "                    SET RC-STATUS-ERROR TO TRUE"
+            },
+            {
+              "line": 77,
+              "text": "               WHEN OTHER"
+            },
+            {
+              "line": 78,
+              "text": "                    SET RC-STATUS-SEVERE TO TRUE"
+            },
+            {
+              "line": 79,
+              "text": "           END-EVALUATE."
+            },
+            {
+              "line": 80,
+              "text": "           "
+            },
+            {
+              "line": 81,
+              "text": "           MOVE 0 TO RC-RESPONSE-CODE."
+            }
+          ],
+          "available": true
+        }
+      ],
+      "why_the_issue_exists": [
+        "REQUIRES_EVIDENCE: declared verified_from_source but not confirmed by the runtime: stated values found in the program but not in the cited lines: F",
+        "REQUIRES_SME_DECISION: blocked by RVW-REQ-RTNCDE00-003 (open)"
+      ],
+      "objective_technical_fact": {
+        "proven": false,
+        "statement": "The source does not settle this (INSUFFICIENT_EVIDENCE)."
+      },
+      "why_human_judgment_is_needed": "The source does not establish business intent, and behaviour beyond the cited source text; that needs interpretation needing independent review.",
+      "affected": {
+        "requirements": [
+          "REQ-RTNCDE00-003"
+        ],
+        "data_contracts": [],
+        "findings": [
+          "requirement:REQ-RTNCDE00-003"
+        ]
+      },
+      "decisions": [
+        {
+          "decision_id": "RVW-REQ-RTNCDE00-003",
+          "kind": "review",
+          "origin": "derived",
+          "question": "requirement REQ-RTNCDE00-003 (RTNCDE00) is not approvable as drafted: REQUIRES_EVIDENCE: declared verified_from_source but not confirmed by the runtime: stated values found in the program but not in the cited lines: F",
+          "options_recorded_by_agent": [
+            "excluded_from_scope",
+            "resolved_requires_update",
+            "approved_exception"
+          ],
+          "supported_outcomes": [
+            {
+              "outcome": "excluded_from_scope",
+              "effect": "The affected requirement(s) (or, for a scope decision, the unit) leave the scope with the written justification. A unit another unit in scope depends on cannot be hidden this way.",
+              "authorized_roles": [
+                "business_sme"
+              ]
+            },
+            {
+              "outcome": "resolved_requires_update",
+              "effect": "The affected item stays blocked until its content changes (new content hash, e.g. an authorized correction or re-delivery); it is then re-evaluated.",
+              "authorized_roles": [
+                "business_sme"
+              ]
+            },
+            {
+              "outcome": "approved_exception",
+              "effect": "Items that only lack evidence are accepted as they are by an exception approver. Never available for contradicted items.",
+              "authorized_roles": [
+                "exception_approver"
+              ]
+            }
+          ],
+          "decision_sha256": "82b16155d4f2bfa3269dc4c282b381d3fd014f29223ea8f8d6efea5bdf133144",
+          "resolution_request": "forward/reports/step-5.5/resolution-requests/RVW-REQ-RTNCDE00-003.resolution-request.json",
+          "status": "open"
+        }
+      ],
+      "authorized_roles": [
+        "business_sme"
+      ],
+      "ai_advisory": null,
+      "required_remediation": "Establish the evidence: independently verify the claims against the source (where possible) or deliver the missing analysis; otherwise exclude with justification or, where policy permits, sign an exception."
+    },
+    {
+      "root_cause_id": "RC-SRC-3b9f4685e9",
+      "class": "D",
+      "class_meaning": "architecture / technical decision for a technical authority",
+      "title": "CIRCULAR_COPY GAP-002: Copybook SQLCA includes itself (circular copy)",
+      "what_the_cobol_appears_to_do": "Deterministic checks establish the member includes itself, so its layout cannot be expanded from the repository.",
+      "deterministic_checks": [
+        {
+          "check": "self_inclusion",
+          "status": "VERIFIED_DETERMINISTICALLY",
+          "detail": "src/copybook/db2/SQLCA.cpy:6 includes SQLCA itself"
+        }
+      ],
+      "source_evidence": [
+        {
+          "path": "src/programs/online/CURSMGR.cbl",
+          "sha256": "5e367102d18d1775c3504afff9b4d3e28cfc655ae2daad836376f63f05b125db",
+          "lines": [
+            14,
+            18
+          ],
+          "excerpt": [
+            {
+              "line": 14,
+              "text": "       WORKING-STORAGE SECTION."
+            },
+            {
+              "line": 15,
+              "text": "       01  WS-DB2-AREA."
+            },
+            {
+              "line": 16,
+              "text": "           EXEC SQL INCLUDE SQLCA END-EXEC."
+            },
+            {
+              "line": 17,
+              "text": "           "
+            },
+            {
+              "line": 18,
+              "text": "       01  WS-CURSOR-STATS."
+            }
+          ],
+          "available": true
+        },
+        {
+          "path": "src/programs/online/CURSMGR.cbl",
+          "sha256": "5e367102d18d1775c3504afff9b4d3e28cfc655ae2daad836376f63f05b125db",
+          "lines": [
+            42,
+            59
+          ],
+          "excerpt": [
+            {
+              "line": 42,
+              "text": "           "
+            },
+            {
+              "line": 43,
+              "text": "       PROCEDURE DIVISION USING CURSOR-REQUEST-AREA."
+            },
+            {
+              "line": 44,
+              "text": "           EVALUATE TRUE"
+            },
+            {
+              "line": 45,
+              "text": "               WHEN CURS-DECLARE"
+            },
+            {
+              "line": 46,
+              "text": "                    PERFORM P100-DECLARE-CURSOR"
+            },
+            {
+              "line": 47,
+              "text": "                       THRU P100-EXIT"
+            },
+            {
+              "line": 48,
+              "text": "               WHEN CURS-OPEN"
+            },
+            {
+              "line": 49,
+              "text": "                    PERFORM P200-OPEN-CURSOR"
+            },
+            {
+              "line": 50,
+              "text": "                       THRU P200-EXIT"
+            },
+            {
+              "line": 51,
+              "text": "               WHEN CURS-FETCH"
+            },
+            {
+              "line": 52,
+              "text": "                    PERFORM P300-FETCH-DATA"
+            },
+            {
+              "line": 53,
+              "text": "                       THRU P300-EXIT"
+            },
+            {
+              "line": 54,
+              "text": "               WHEN CURS-CLOSE"
+            },
+            {
+              "line": 55,
+              "text": "                    PERFORM P400-CLOSE-CURSOR"
+            },
+            {
+              "line": 56,
+              "text": "                       THRU P400-EXIT"
+            },
+            {
+              "line": 57,
+              "text": "           END-EVALUATE."
+            },
+            {
+              "line": 58,
+              "text": "           "
+            },
+            {
+              "line": 59,
+              "text": "           EXEC CICS RETURN END-EXEC."
+            }
+          ],
+          "available": true
+        },
+        {
+          "path": "src/programs/common/DB2CMT.cbl",
+          "sha256": "d753db038a2a033997d333a5ce09336b37458ba413c39f8ddc5326a6d30e3b52",
+          "lines": [
+            79,
+            86
+          ],
+          "excerpt": [
+            {
+              "line": 79,
+              "text": "           "
+            },
+            {
+              "line": 80,
+              "text": "       2000-COMMIT."
+            },
+            {
+              "line": 81,
+              "text": "           IF LS-RECORDS-PROC >= LS-COMMIT-FREQ"
+            },
+            {
+              "line": 82,
+              "text": "           OR LS-FORCE-COMMIT"
+            },
+            {
+              "line": 83,
+              "text": "               PERFORM 2100-ISSUE-COMMIT"
+            },
+            {
+              "line": 84,
+              "text": "           END-IF"
+            },
+            {
+              "line": 85,
+              "text": "           ."
+            },
+            {
+              "line": 86,
+              "text": "           "
+            }
+          ],
+          "available": true
+        },
+        {
+          "path": "src/programs/common/DB2CMT.cbl",
+          "sha256": "d753db038a2a033997d333a5ce09336b37458ba413c39f8ddc5326a6d30e3b52",
+          "lines": [
+            107,
+            111
+          ],
+          "excerpt": [
+            {
+              "line": 107,
+              "text": "           "
+            },
+            {
+              "line": 108,
+              "text": "           IF SQLCODE = 0"
+            },
+            {
+              "line": 109,
+              "text": "               ADD 1 TO WS-ROLLBACK-COUNT"
+            },
+            {
+              "line": 110,
+              "text": "               MOVE 0 TO LS-RETURN-CODE"
+            },
+            {
+              "line": 111,
+              "text": "           ELSE"
+            }
+          ],
+          "available": true
+        },
+        {
+          "path": "src/programs/common/DB2CMT.cbl",
+          "sha256": "d753db038a2a033997d333a5ce09336b37458ba413c39f8ddc5326a6d30e3b52",
+          "lines": [
+            125,
+            129
+          ],
+          "excerpt": [
+            {
+              "line": 125,
+              "text": "           "
+            },
+            {
+              "line": 126,
+              "text": "           IF SQLCODE = 0"
+            },
+            {
+              "line": 127,
+              "text": "               ADD 1 TO WS-SAVEPOINT-COUNT"
+            },
+            {
+              "line": 128,
+              "text": "               MOVE 0 TO LS-RETURN-CODE"
+            },
+            {
+              "line": 129,
+              "text": "           ELSE"
+            }
+          ],
+          "available": true
+        },
+        {
+          "path": "src/programs/common/DB2CMT.cbl",
+          "sha256": "d753db038a2a033997d333a5ce09336b37458ba413c39f8ddc5326a6d30e3b52",
+          "lines": [
+            143,
+            147
+          ],
+          "excerpt": [
+            {
+              "line": 143,
+              "text": "           "
+            },
+            {
+              "line": 144,
+              "text": "           IF SQLCODE = 0"
+            },
+            {
+              "line": 145,
+              "text": "               ADD 1 TO WS-ROLLBACK-COUNT"
+            },
+            {
+              "line": 146,
+              "text": "               MOVE 0 TO LS-RETURN-CODE"
+            },
+            {
+              "line": 147,
+              "text": "           ELSE"
+            }
+          ],
+          "available": true
+        }
+      ],
+      "why_the_issue_exists": [
+        "CONTRADICTED: the source contradicts the cited evidence: cited line 121 is outside SYS-PORTFOLIO-001-FIL-0052-STMT-000024 (lines 122-133)",
+        "REQUIRES_SME_DECISION: blocked by DR-DB2CONN-002 (open)",
+        "REQUIRES_SME_DECISION: blocked by RVW-REQ-RTNCDE00-004 (open)",
+        "blocking decision open — Copybook SQLCA (src/copybook/db2/SQLCA.cpy) includes itself (EXEC SQL INCLUDE SQLCA at line 6) and defines only SQL-STATUS-CODES, with no SQLCODE or SQLERRMC field; SQLCODE/SQLERRMC therefore have no Field ID in 14 DB2 programs, including HISTLD00, RTNANA00, RTNCDE00, DB2CMT and DB2CONN. Which SQLCA",
+        "blocking decision open — Copybook SQLCA (SYS-PORTFOLIO-001-FIL-0017) line 6 contains 'EXEC SQL INCLUDE SQLCA END-EXEC', naming itself. The included SQL communication area (SQLCODE, SQLSTATE, SQLERRMC, ...) has no layout in any reverse artifact. How should the forward design obtain the SQLCA layout and the SQLCODE/SQLSTATE s"
+      ],
+      "objective_technical_fact": {
+        "proven": true,
+        "statement": "The source establishes the member includes itself, so its layout cannot be expanded from the repository (VERIFIED_DETERMINISTICALLY)."
+      },
+      "why_human_judgment_is_needed": "The source does not establish which communication area the precompiler actually supplies; that needs architecture / technical decision for a technical authority.",
+      "affected": {
+        "requirements": [
+          "REQ-RTNCDE00-001",
+          "REQ-RTNCDE00-004"
+        ],
+        "data_contracts": [],
+        "findings": [
+          "requirement:REQ-RTNCDE00-004",
+          "decision:technical:DR-DB2CONN-002",
+          "decision:data_layout:DR-F2-0011-001",
+          "requirement:REQ-RTNCDE00-001"
+        ]
+      },
+      "decisions": [
+        {
+          "decision_id": "DR-DB2CONN-002",
+          "kind": "technical",
+          "origin": "agent",
+          "question": "Copybook SQLCA (src/copybook/db2/SQLCA.cpy) includes itself (EXEC SQL INCLUDE SQLCA at line 6) and defines only SQL-STATUS-CODES, with no SQLCODE or SQLERRMC field; SQLCODE/SQLERRMC therefore have no Field ID in 14 DB2 programs, including HISTLD00, RTNANA00, RTNCDE00, DB2CMT and DB2CONN. Which SQLCA does the precompiler actually supply, and may the forward design assume the standard DB2 SQLCODE meaning (0 success, -803 duplicate key, negative values errors) used in these requirements?",
+          "options_recorded_by_agent": [
+            "Confirm the standard DB2 SQLCA is supplied by the precompiler",
+            "Supply the real SQLCA layout"
+          ],
+          "supported_outcomes": [
+            {
+              "outcome": "resolved_no_change",
+              "effect": "The drafted item stands; the decision stops blocking. Any missing source evidence on the item still has to be established separately.",
+              "authorized_roles": [
+                "technical_authority"
+              ]
+            },
+            {
+              "outcome": "excluded_from_scope",
+              "effect": "The affected requirement(s) (or, for a scope decision, the unit) leave the scope with the written justification. A unit another unit in scope depends on cannot be hidden this way.",
+              "authorized_roles": [
+                "technical_authority"
+              ]
+            },
+            {
+              "outcome": "resolved_requires_update",
+              "effect": "The affected item stays blocked until its content changes (new content hash, e.g. an authorized correction or re-delivery); it is then re-evaluated.",
+              "authorized_roles": [
+                "technical_authority"
+              ]
+            }
+          ],
+          "decision_sha256": "7004bffb5b7e045c7e8f669d67550d4534d729a241f7c756c08bb19aa9ac1fea",
+          "resolution_request": "forward/reports/step-5.5/resolution-requests/DR-DB2CONN-002.resolution-request.json",
+          "status": "open"
+        },
+        {
+          "decision_id": "DR-F2-0011-001",
+          "kind": "data_layout",
+          "origin": "agent",
+          "question": "Copybook SQLCA (SYS-PORTFOLIO-001-FIL-0017) line 6 contains 'EXEC SQL INCLUDE SQLCA END-EXEC', naming itself. The included SQL communication area (SQLCODE, SQLSTATE, SQLERRMC, ...) has no layout in any reverse artifact. How should the forward design obtain the SQLCA layout and the SQLCODE/SQLSTATE semantics used by the 14 DB2 programs?",
+          "options_recorded_by_agent": [
+            "Treat the include as the IBM DB2 precompiler-supplied SQLCA and supply its standard layout from authoritative IBM documentation as a documented external dependency (requires SME confirmation of the DB2 version).",
+            "Do not model an SQLCA record; map SQLCODE/SQLSTATE checks to JDBC SQLException error code and SQLState in the Java design, with the SQL-STATUS-CODES constants as the SQLSTATE comparison table.",
+            "Obtain the real SQLCA member from the source library (the repository copy appears to be a placeholder that shadows it) and re-run the reverse harness."
+          ],
+          "supported_outcomes": [
+            {
+              "outcome": "resolved_no_change",
+              "effect": "The drafted item stands; the decision stops blocking. Any missing source evidence on the item still has to be established separately.",
+              "authorized_roles": [
+                "technical_authority"
+              ]
+            },
+            {
+              "outcome": "excluded_from_scope",
+              "effect": "The affected requirement(s) (or, for a scope decision, the unit) leave the scope with the written justification. A unit another unit in scope depends on cannot be hidden this way.",
+              "authorized_roles": [
+                "technical_authority"
+              ]
+            }
+          ],
+          "decision_sha256": "9295eb19e7b7bf928ede74d7df5811cab75951ba41245bb62b97a3764bc5493f",
+          "resolution_request": "forward/reports/step-5.5/resolution-requests/DR-F2-0011-001.resolution-request.json",
+          "status": "open"
+        }
+      ],
+      "authorized_roles": [
+        "technical_authority"
+      ],
+      "ai_advisory": null,
+      "required_remediation": "Obtain the missing source member or runtime component (or confirm it is retired/provided by the platform), add it read-only to the source checkout and re-run the affected reverse and forward steps; until then the affected behaviour stays unverified."
+    }
+  ]
+}

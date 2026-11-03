@@ -1,0 +1,149 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://revforge.local/contracts/verification/root-cause-registry.schema.json",
+  "title": "Canonical root-cause registry (STEP 4.5 runtime record)",
+  "description": "Links every decision and finding to the problem it stems from using structural evidence. Grouping resolves nothing.",
+  "type": "object",
+  "required": [
+    "contract",
+    "contract_version",
+    "generated_at",
+    "baseline_manifest_sha256",
+    "method",
+    "summary",
+    "roots",
+    "decision_view"
+  ],
+  "properties": {
+    "contract": {
+      "const": "root-cause-registry"
+    },
+    "contract_version": {
+      "const": "1.0"
+    },
+    "baseline_manifest_sha256": {
+      "$ref": "../common.schema.json#/definitions/sha256"
+    },
+    "roots": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "root_cause_id",
+          "key",
+          "category",
+          "title",
+          "baseline_manifest_sha256",
+          "source",
+          "related",
+          "impacted_programs",
+          "severity",
+          "blocking",
+          "evidence_status",
+          "approval_scope_impact",
+          "required_remediation",
+          "required_authority",
+          "deterministic_verification_possible",
+          "resolution_status"
+        ],
+        "properties": {
+          "root_cause_id": {
+            "type": "string",
+            "pattern": "^RC-[A-Z]{3}-[0-9a-f]{10}$"
+          },
+          "key": {
+            "type": "string"
+          },
+          "category": {
+            "enum": [
+              "missing_source_or_dependency",
+              "incorrect_source_citation",
+              "unsupported_business_interpretation",
+              "contradictory_business_rules",
+              "data_layout_inconsistency",
+              "runtime_behavior_uncertainty",
+              "control_flow_uncertainty",
+              "missing_evidence",
+              "program_scope_uncertainty",
+              "approval_prerequisite"
+            ]
+          },
+          "title": {
+            "type": "string"
+          },
+          "baseline_manifest_sha256": {
+            "$ref": "../common.schema.json#/definitions/sha256"
+          },
+          "source": {
+            "type": "object"
+          },
+          "related": {
+            "type": "object",
+            "required": [
+              "rules",
+              "requirements",
+              "data_contracts",
+              "gaps",
+              "decisions",
+              "primary_decisions",
+              "findings"
+            ]
+          },
+          "impacted_programs": {
+            "type": "array"
+          },
+          "severity": {
+            "enum": [
+              "critical",
+              "high",
+              "medium",
+              "low"
+            ]
+          },
+          "blocking": {
+            "type": "boolean"
+          },
+          "evidence_status": {
+            "type": "string"
+          },
+          "approval_scope_impact": {
+            "type": "object"
+          },
+          "required_remediation": {
+            "type": "string"
+          },
+          "required_authority": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "deterministic_verification_possible": {
+            "type": "boolean"
+          },
+          "resolution_status": {
+            "enum": [
+              "open",
+              "partially_resolved",
+              "resolved",
+              "not_a_decision"
+            ]
+          }
+        }
+      }
+    },
+    "decision_view": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "decision_id",
+          "status",
+          "sha256",
+          "primary_root_cause"
+        ]
+      }
+    }
+  }
+}

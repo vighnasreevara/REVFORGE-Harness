@@ -1,0 +1,89 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://revforge.local/contracts/openai/verification-run.schema.json",
+  "title": "OpenAI verification run (review or compare)",
+  "type": "object",
+  "required": [
+    "contract",
+    "contract_version",
+    "verification_run_id",
+    "kind",
+    "mode",
+    "provider",
+    "model",
+    "template_version",
+    "started_at",
+    "finished_at",
+    "baseline_manifest_sha256",
+    "packet_source",
+    "selection",
+    "requests",
+    "usage",
+    "budget",
+    "results",
+    "live_status"
+  ],
+  "properties": {
+    "contract": {
+      "const": "openai-verification-run"
+    },
+    "contract_version": {
+      "const": "1.0"
+    },
+    "verification_run_id": {
+      "type": "string",
+      "pattern": "^OVR-[0-9]{4}$"
+    },
+    "kind": {
+      "enum": [
+        "review",
+        "compare"
+      ]
+    },
+    "mode": {
+      "enum": [
+        "OFFLINE",
+        "MOCK",
+        "LIVE"
+      ]
+    },
+    "requests": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "request_id",
+          "packet_id",
+          "pass",
+          "attempt",
+          "payload_sha256",
+          "egress",
+          "outcome"
+        ]
+      }
+    },
+    "usage": {
+      "type": "object",
+      "required": [
+        "calls",
+        "input_tokens",
+        "cached_input_tokens",
+        "output_tokens",
+        "cost_usd",
+        "usage_source"
+      ],
+      "properties": {
+        "usage_source": {
+          "enum": [
+            "none",
+            "mock_estimate",
+            "provider_reported"
+          ]
+        }
+      }
+    },
+    "live_status": {
+      "type": "string"
+    }
+  }
+}

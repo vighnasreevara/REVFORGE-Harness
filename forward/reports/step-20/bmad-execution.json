@@ -1,0 +1,262 @@
+{
+ "contract": "step-20/bmad-execution",
+ "status": "BMAD_BLOCKED",
+ "installed_release": "bmad-method@6.12.4 (stable, pinned, integrity-verified); staged and installed only in the isolated executor workspace synthetic-001; not installed in the repository",
+ "workflows_registered": 50,
+ "bound_workflows": {
+  "F1": "bmad-prd",
+  "F3": "bmad-architecture",
+  "F4": [
+   "bmad-create-epics-and-stories",
+   "bmad-sprint-planning"
+  ],
+  "F5": "bmad-build (disabled)",
+  "F7": "bmad-code-review",
+  "F2": "none (no BMad counterpart)",
+  "F6": "none (independent testing stays outside BMad)"
+ },
+ "workflows_that_execute": [],
+ "f1_f7_invoke_bmad": false,
+ "local_converter_runs_under_bmad": false,
+ "execution_evidence": {
+  "live_receipts": [],
+  "mock_receipts": [],
+  "note": "no BRC receipt (LIVE or MOCK) exists in any run; MOCK receipts would be MOCK_NOT_EVIDENCE in any case"
+ },
+ "silent_bypass": false,
+ "preflights_this_step": [
+  {
+   "record_id": "BPF-0004",
+   "workflow": "bmad-prd",
+   "agent": "F1",
+   "scope": "programs:ERRHNDL",
+   "evaluated_at": "2026-11-03T18:49:07.257Z",
+   "execution_status": "EXECUTION_UNSUPPORTED",
+   "launch_permitted": false,
+   "failed_checks": [
+    "g2_exact_scope",
+    "workflow_state",
+    "provider_authorization",
+    "source_hashes_current",
+    "authorized_content_only",
+    "runtime_execution_authorization",
+    "limits",
+    "workspace_manifest",
+    "network_isolation",
+    "runner_inside_boundary",
+    "enforceable_launch_boundary"
+   ],
+   "refusal_reasons": [
+    "g2_exact_scope: G2 has not passed on the current baseline | G2 re-evaluated now: UNVERIFIED — G2 not approved for scope application: NOT_READY (417 blocking finding(s)); failing checks: canonical_rule_coverage, cross_batch_reconciliation, requirement_evidence, runtime_evidence, semantic_contradictions, contradicted_claims, blocking_decisions, data_contracts, scope_classification, readiness, trust_anchor, human_approval | requested scope programs:ERRHNDL (digest 2a0c03c7b9cb7df9…) is not the G2-approved scope (none approved)",
+    "workflow_state: workflow state is REQUIREMENTS_DRAFTED; BMAD-PRD is allowed only in REQUIREMENTS_APPROVED, ARCHITECTURE_DRAFTED, ARCHITECTURE_APPROVED, STORIES_DRAFTED, STORIES_APPROVED",
+    "provider_authorization: no valid signed disclosure authorization for anthropic/claude-code-cli, scope programs:ERRHNDL, workflow bmad-prd (0 disclosure record(s) considered); 0 OpenAI source-export authorization(s) exist and are not applicable to Claude",
+    "source_hashes_current: no authorization to compare source hashes against",
+    "authorized_content_only: 3 file(s) would be exposed and none is authorized",
+    "runtime_execution_authorization: bindings.json live_execution.requested is false",
+    "limits: no authorized limits (cost, files, bytes, runs)",
+    "workspace_manifest: no minimal workspace can be planned without an authorization naming its files",
+    "network_isolation: default-deny verified (no route, no DNS); no verified provider-egress component exists, so a LIVE run could not reach the provider without weakening the boundary",
+    "runner_inside_boundary: Claude Code and Node are not installed inside the WSL2 environment: the runner cannot run inside the boundary",
+    "enforceable_launch_boundary: not enforceable for LIVE: network: the tested boundary has no network at all; a LIVE run needs a verified provider-egress component (allowlist proxy outside the namespace), which does not exist. Even then, TLS to the provider is end-to-end: request content cannot be inspected, so only the minimal workspace limits what can be disclosed | runner: Claude Code and Node are not installed inside the isolated Linux environment, so the runner cannot execute within the boundary"
+   ]
+  },
+  {
+   "record_id": "BPF-0005",
+   "workflow": "bmad-architecture",
+   "agent": "F3",
+   "scope": "programs:ERRHNDL",
+   "evaluated_at": "2026-11-03T18:49:22.688Z",
+   "execution_status": "EXECUTION_UNSUPPORTED",
+   "launch_permitted": false,
+   "failed_checks": [
+    "g2_exact_scope",
+    "workflow_state",
+    "provider_authorization",
+    "source_hashes_current",
+    "authorized_content_only",
+    "runtime_execution_authorization",
+    "limits",
+    "workspace_manifest",
+    "network_isolation",
+    "runner_inside_boundary",
+    "enforceable_launch_boundary"
+   ],
+   "refusal_reasons": [
+    "g2_exact_scope: G2 has not passed on the current baseline | G2 re-evaluated now: UNVERIFIED — G2 not approved for scope application: NOT_READY (417 blocking finding(s)); failing checks: canonical_rule_coverage, cross_batch_reconciliation, requirement_evidence, runtime_evidence, semantic_contradictions, contradicted_claims, blocking_decisions, data_contracts, scope_classification, readiness, trust_anchor, human_approval | requested scope programs:ERRHNDL (digest 2a0c03c7b9cb7df9…) is not the G2-approved scope (none approved)",
+    "workflow_state: workflow state is REQUIREMENTS_DRAFTED; BMAD-ARCH is allowed only in REQUIREMENTS_APPROVED, ARCHITECTURE_DRAFTED",
+    "provider_authorization: no valid signed disclosure authorization for anthropic/claude-code-cli, scope programs:ERRHNDL, workflow bmad-architecture (0 disclosure record(s) considered); 0 OpenAI source-export authorization(s) exist and are not applicable to Claude",
+    "source_hashes_current: no authorization to compare source hashes against",
+    "authorized_content_only: 3 file(s) would be exposed and none is authorized",
+    "runtime_execution_authorization: bindings.json live_execution.requested is false",
+    "limits: no authorized limits (cost, files, bytes, runs)",
+    "workspace_manifest: no minimal workspace can be planned without an authorization naming its files",
+    "network_isolation: default-deny verified (no route, no DNS); no verified provider-egress component exists, so a LIVE run could not reach the provider without weakening the boundary",
+    "runner_inside_boundary: Claude Code and Node are not installed inside the WSL2 environment: the runner cannot run inside the boundary",
+    "enforceable_launch_boundary: not enforceable for LIVE: network: the tested boundary has no network at all; a LIVE run needs a verified provider-egress component (allowlist proxy outside the namespace), which does not exist. Even then, TLS to the provider is end-to-end: request content cannot be inspected, so only the minimal workspace limits what can be disclosed | runner: Claude Code and Node are not installed inside the isolated Linux environment, so the runner cannot execute within the boundary"
+   ]
+  },
+  {
+   "record_id": "BPF-0006",
+   "workflow": "bmad-create-epics-and-stories",
+   "agent": "F4",
+   "scope": "programs:ERRHNDL",
+   "evaluated_at": "2026-11-03T18:49:38.495Z",
+   "execution_status": "EXECUTION_UNSUPPORTED",
+   "launch_permitted": false,
+   "failed_checks": [
+    "g2_exact_scope",
+    "workflow_state",
+    "provider_authorization",
+    "source_hashes_current",
+    "authorized_content_only",
+    "runtime_execution_authorization",
+    "limits",
+    "workspace_manifest",
+    "network_isolation",
+    "runner_inside_boundary",
+    "enforceable_launch_boundary"
+   ],
+   "refusal_reasons": [
+    "g2_exact_scope: G2 has not passed on the current baseline | G2 re-evaluated now: UNVERIFIED — G2 not approved for scope application: NOT_READY (417 blocking finding(s)); failing checks: canonical_rule_coverage, cross_batch_reconciliation, requirement_evidence, runtime_evidence, semantic_contradictions, contradicted_claims, blocking_decisions, data_contracts, scope_classification, readiness, trust_anchor, human_approval | requested scope programs:ERRHNDL (digest 2a0c03c7b9cb7df9…) is not the G2-approved scope (none approved)",
+    "workflow_state: workflow state is REQUIREMENTS_DRAFTED; BMAD-EPICS is allowed only in ARCHITECTURE_APPROVED, STORIES_DRAFTED",
+    "provider_authorization: no valid signed disclosure authorization for anthropic/claude-code-cli, scope programs:ERRHNDL, workflow bmad-create-epics-and-stories (0 disclosure record(s) considered); 0 OpenAI source-export authorization(s) exist and are not applicable to Claude",
+    "source_hashes_current: no authorization to compare source hashes against",
+    "authorized_content_only: 3 file(s) would be exposed and none is authorized",
+    "runtime_execution_authorization: bindings.json live_execution.requested is false",
+    "limits: no authorized limits (cost, files, bytes, runs)",
+    "workspace_manifest: no minimal workspace can be planned without an authorization naming its files",
+    "network_isolation: default-deny verified (no route, no DNS); no verified provider-egress component exists, so a LIVE run could not reach the provider without weakening the boundary",
+    "runner_inside_boundary: Claude Code and Node are not installed inside the WSL2 environment: the runner cannot run inside the boundary",
+    "enforceable_launch_boundary: not enforceable for LIVE: network: the tested boundary has no network at all; a LIVE run needs a verified provider-egress component (allowlist proxy outside the namespace), which does not exist. Even then, TLS to the provider is end-to-end: request content cannot be inspected, so only the minimal workspace limits what can be disclosed | runner: Claude Code and Node are not installed inside the isolated Linux environment, so the runner cannot execute within the boundary"
+   ]
+  },
+  {
+   "record_id": "BPF-0007",
+   "workflow": "bmad-sprint-planning",
+   "agent": "F4",
+   "scope": "programs:ERRHNDL",
+   "evaluated_at": "2026-11-03T18:49:54.751Z",
+   "execution_status": "EXECUTION_UNSUPPORTED",
+   "launch_permitted": false,
+   "failed_checks": [
+    "g2_exact_scope",
+    "workflow_state",
+    "provider_authorization",
+    "source_hashes_current",
+    "authorized_content_only",
+    "runtime_execution_authorization",
+    "limits",
+    "workspace_manifest",
+    "network_isolation",
+    "runner_inside_boundary",
+    "enforceable_launch_boundary"
+   ],
+   "refusal_reasons": [
+    "g2_exact_scope: G2 has not passed on the current baseline | G2 re-evaluated now: UNVERIFIED — G2 not approved for scope application: NOT_READY (417 blocking finding(s)); failing checks: canonical_rule_coverage, cross_batch_reconciliation, requirement_evidence, runtime_evidence, semantic_contradictions, contradicted_claims, blocking_decisions, data_contracts, scope_classification, readiness, trust_anchor, human_approval | requested scope programs:ERRHNDL (digest 2a0c03c7b9cb7df9…) is not the G2-approved scope (none approved)",
+    "workflow_state: workflow state is REQUIREMENTS_DRAFTED; BMAD-SPRINT is allowed only in STORIES_APPROVED",
+    "provider_authorization: no valid signed disclosure authorization for anthropic/claude-code-cli, scope programs:ERRHNDL, workflow bmad-sprint-planning (0 disclosure record(s) considered); 0 OpenAI source-export authorization(s) exist and are not applicable to Claude",
+    "source_hashes_current: no authorization to compare source hashes against",
+    "authorized_content_only: 3 file(s) would be exposed and none is authorized",
+    "runtime_execution_authorization: bindings.json live_execution.requested is false",
+    "limits: no authorized limits (cost, files, bytes, runs)",
+    "workspace_manifest: no minimal workspace can be planned without an authorization naming its files",
+    "network_isolation: default-deny verified (no route, no DNS); no verified provider-egress component exists, so a LIVE run could not reach the provider without weakening the boundary",
+    "runner_inside_boundary: Claude Code and Node are not installed inside the WSL2 environment: the runner cannot run inside the boundary",
+    "enforceable_launch_boundary: not enforceable for LIVE: network: the tested boundary has no network at all; a LIVE run needs a verified provider-egress component (allowlist proxy outside the namespace), which does not exist. Even then, TLS to the provider is end-to-end: request content cannot be inspected, so only the minimal workspace limits what can be disclosed | runner: Claude Code and Node are not installed inside the isolated Linux environment, so the runner cannot execute within the boundary"
+   ]
+  },
+  {
+   "record_id": "BPF-0008",
+   "workflow": "bmad-build",
+   "agent": "F5",
+   "scope": "programs:ERRHNDL",
+   "evaluated_at": "2026-11-03T18:50:10.944Z",
+   "execution_status": "EXECUTION_UNSUPPORTED",
+   "launch_permitted": false,
+   "failed_checks": [
+    "g2_exact_scope",
+    "workflow_state",
+    "binding_and_agent",
+    "provider_authorization",
+    "source_hashes_current",
+    "authorized_content_only",
+    "runtime_execution_authorization",
+    "limits",
+    "workspace_manifest",
+    "network_isolation",
+    "runner_inside_boundary",
+    "enforceable_launch_boundary"
+   ],
+   "refusal_reasons": [
+    "g2_exact_scope: G2 has not passed on the current baseline | G2 re-evaluated now: UNVERIFIED — G2 not approved for scope application: NOT_READY (417 blocking finding(s)); failing checks: canonical_rule_coverage, cross_batch_reconciliation, requirement_evidence, runtime_evidence, semantic_contradictions, contradicted_claims, blocking_decisions, data_contracts, scope_classification, readiness, trust_anchor, human_approval | requested scope programs:ERRHNDL (digest 2a0c03c7b9cb7df9…) is not the G2-approved scope (none approved)",
+    "workflow_state: workflow state is REQUIREMENTS_DRAFTED; BMAD-BUILD is allowed only in STORIES_APPROVED, IMPLEMENTING",
+    "binding_and_agent: Build is disabled: production Java generation is not authorised in STEP 7",
+    "provider_authorization: no valid signed disclosure authorization for anthropic/claude-code-cli, scope programs:ERRHNDL, workflow bmad-build (0 disclosure record(s) considered); 0 OpenAI source-export authorization(s) exist and are not applicable to Claude",
+    "source_hashes_current: no authorization to compare source hashes against",
+    "authorized_content_only: 3 file(s) would be exposed and none is authorized",
+    "runtime_execution_authorization: bindings.json live_execution.requested is false",
+    "limits: no authorized limits (cost, files, bytes, runs)",
+    "workspace_manifest: no minimal workspace can be planned without an authorization naming its files",
+    "network_isolation: default-deny verified (no route, no DNS); no verified provider-egress component exists, so a LIVE run could not reach the provider without weakening the boundary",
+    "runner_inside_boundary: Claude Code and Node are not installed inside the WSL2 environment: the runner cannot run inside the boundary",
+    "enforceable_launch_boundary: not enforceable for LIVE: network: the tested boundary has no network at all; a LIVE run needs a verified provider-egress component (allowlist proxy outside the namespace), which does not exist. Even then, TLS to the provider is end-to-end: request content cannot be inspected, so only the minimal workspace limits what can be disclosed | runner: Claude Code and Node are not installed inside the isolated Linux environment, so the runner cannot execute within the boundary"
+   ]
+  },
+  {
+   "record_id": "BPF-0009",
+   "workflow": "bmad-code-review",
+   "agent": "F7",
+   "scope": "programs:ERRHNDL",
+   "evaluated_at": "2026-11-03T18:50:27.323Z",
+   "execution_status": "EXECUTION_UNSUPPORTED",
+   "launch_permitted": false,
+   "failed_checks": [
+    "g2_exact_scope",
+    "workflow_state",
+    "provider_authorization",
+    "source_hashes_current",
+    "authorized_content_only",
+    "runtime_execution_authorization",
+    "limits",
+    "workspace_manifest",
+    "network_isolation",
+    "runner_inside_boundary",
+    "enforceable_launch_boundary"
+   ],
+   "refusal_reasons": [
+    "g2_exact_scope: G2 has not passed on the current baseline | G2 re-evaluated now: UNVERIFIED — G2 not approved for scope application: NOT_READY (417 blocking finding(s)); failing checks: canonical_rule_coverage, cross_batch_reconciliation, requirement_evidence, runtime_evidence, semantic_contradictions, contradicted_claims, blocking_decisions, data_contracts, scope_classification, readiness, trust_anchor, human_approval | requested scope programs:ERRHNDL (digest 2a0c03c7b9cb7df9…) is not the G2-approved scope (none approved)",
+    "workflow_state: workflow state is REQUIREMENTS_DRAFTED; BMAD-REVIEW is allowed only in REVIEWING",
+    "provider_authorization: no valid signed disclosure authorization for anthropic/claude-code-cli, scope programs:ERRHNDL, workflow bmad-code-review (0 disclosure record(s) considered); 0 OpenAI source-export authorization(s) exist and are not applicable to Claude",
+    "source_hashes_current: no authorization to compare source hashes against",
+    "authorized_content_only: 3 file(s) would be exposed and none is authorized",
+    "runtime_execution_authorization: bindings.json live_execution.requested is false",
+    "limits: no authorized limits (cost, files, bytes, runs)",
+    "workspace_manifest: no minimal workspace can be planned without an authorization naming its files",
+    "network_isolation: default-deny verified (no route, no DNS); no verified provider-egress component exists, so a LIVE run could not reach the provider without weakening the boundary",
+    "runner_inside_boundary: Claude Code and Node are not installed inside the WSL2 environment: the runner cannot run inside the boundary",
+    "enforceable_launch_boundary: not enforceable for LIVE: network: the tested boundary has no network at all; a LIVE run needs a verified provider-egress component (allowlist proxy outside the namespace), which does not exist. Even then, TLS to the provider is end-to-end: request content cannot be inspected, so only the minimal workspace limits what can be disclosed | runner: Claude Code and Node are not installed inside the isolated Linux environment, so the runner cannot execute within the boundary"
+   ]
+  }
+ ],
+ "blockers": [
+  "no signed AI-provider disclosure authorization for anthropic / claude-code-cli (provider authorization doctor: NOT AUTHORIZED, 0 records); none can be created without a data_owner signature",
+  "trust store TRUST_NOT_CONFIGURED: no trusted signer exists for G2-G4 or for the disclosure authorization",
+  "G2 is UNVERIFIED for every scope (application scope NOT_READY with 417 blocking findings); workflow state REQUIREMENTS_DRAFTED",
+  "bindings.json live_execution.requested is false",
+  "BMAD-BUILD is disabled: production Java generation is not authorised (generation.java_generation_allowed = false)",
+  "the runner cannot run inside the tested isolation boundary (Node and Claude Code are not installed in WSL2), and no verified provider-egress component exists"
+ ],
+ "step20_work_governance": "All STEP 20 changes ran outside BMad. Regeneration used the existing project-owner LGA authorizations (LGA-0001..0042, deterministic local conversion, valid until 2026-12-03) through pilot convert-app, which re-verifies them. They are reported as LGA-governed and BMAD BLOCKED, never as BMAD-compliant.",
+ "commands_run": [
+  {
+   "command": "node dist/runtime/src/cli.js bmad doctor",
+   "exit_code": 0,
+   "result": "bmad doctor: OK — bmad-method@6.12.4 staged; not installed in the repository (isolated executor installation: bmad executor doctor)"
+  },
+  {
+   "command": "node dist/runtime/src/cli.js bmad executor doctor",
+   "exit_code": 0,
+   "result": "bmad executor: isolated installation VERIFIED; LIVE execution BLOCKED; [FAIL] provider_disclosure_authorization: no signed AI-provider disclosure authorization exists for anthropic (claude-code-cli); signed source-export authorizat [FAIL] live_requested: bindings.json live_execution.requested is false "
+  }
+ ]
+}

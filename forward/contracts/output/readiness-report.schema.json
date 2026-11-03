@@ -1,0 +1,46 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://revforge.local/contracts/output/readiness-report.schema.json",
+  "title": "Forward-engineering readiness report",
+  "allOf": [{ "$ref": "../common.schema.json#/definitions/outputHeader" }],
+  "type": "object",
+  "required": ["contract", "system", "overall", "counts", "checks", "source_availability", "decisions", "programs"],
+  "properties": {
+    "contract": { "const": "readiness-report" },
+    "status": { "enum": ["draft", "unverified"] },
+    "overall": {
+      "type": "object",
+      "required": ["status", "reasons"],
+      "properties": {
+        "status": { "enum": ["not_ready", "conditionally_ready", "ready"] },
+        "reasons": { "type": "array", "items": { "type": "string" }, "minItems": 1 }
+      }
+    },
+    "counts": { "type": "object", "additionalProperties": { "type": "integer", "minimum": 0 } },
+    "checks": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "status", "detail"],
+        "properties": { "status": { "enum": ["pass", "warn", "fail", "info"] } }
+      }
+    },
+    "source_availability": {
+      "type": "object",
+      "required": ["configured", "root_exists", "programs_found", "programs_checked"]
+    },
+    "decisions": { "type": "object", "required": ["total", "blocking"] },
+    "programs": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["program_id", "file_id", "readiness", "blockers", "cautions", "source_available"],
+        "properties": {
+          "file_id": { "$ref": "../common.schema.json#/definitions/fileId" },
+          "readiness": { "enum": ["blocked", "needs_sme_decision", "design_candidate"] },
+          "source_available": { "type": "boolean" }
+        }
+      }
+    }
+  }
+}

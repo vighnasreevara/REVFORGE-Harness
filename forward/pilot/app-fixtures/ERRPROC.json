@@ -1,0 +1,57 @@
+{
+ "program": "ERRPROC",
+ "provenance": "Written 2026-11-02 by a scenario-author agent (F6 independent fixture design) from the COBOL source src/programs/common/ERRPROC.cbl with copybooks src/copybook/common/ERRHAND.cpy and the gaps array of forward/generated/java/ERRPROC/pilot-result.json only; no generated Java, source map or test result was read. DISPLAY lines are given right-trimmed.",
+ "scenarios": [
+  {
+   "id": "S01",
+   "title": "normal error request with ERRLOG allocated: INITIALIZE WS-WORK-AREAS, then ACCEPT FROM TIME STAMP blocks; nothing is logged or displayed",
+   "cobol_lines": [
+    49,
+    56,
+    57
+   ],
+   "kind": "call",
+   "set": {
+    "LS-PROGRAM-ID": "PGM00001",
+    "LS-CATEGORY": "VS",
+    "LS-ERROR-CODE": "0023",
+    "LS-SEVERITY": "8",
+    "LS-ERROR-TEXT": "Record not found",
+    "LS-ERROR-DETAILS": "KEY=PORT0001",
+    "LS-RETURN-CODE": "0"
+   },
+   "datasets": {
+    "ERRLOG": {
+     "records": []
+    }
+   },
+   "expect": {
+    "outcome": "BLOCKED AT src/programs/common/ERRPROC.cbl:57",
+    "display": []
+   }
+  },
+  {
+   "id": "S02",
+   "title": "ERRLOG not allocated: the open-error DISPLAY (line 61) is never reached because the TIME STAMP ACCEPT precedes OPEN EXTEND",
+   "cobol_lines": [
+    49,
+    57,
+    59
+   ],
+   "kind": "call",
+   "set": {
+    "LS-PROGRAM-ID": "PGM00001",
+    "LS-CATEGORY": "VS",
+    "LS-ERROR-CODE": "0023",
+    "LS-SEVERITY": "8",
+    "LS-ERROR-TEXT": "Record not found",
+    "LS-ERROR-DETAILS": "KEY=PORT0001",
+    "LS-RETURN-CODE": "0"
+   },
+   "expect": {
+    "outcome": "BLOCKED AT src/programs/common/ERRPROC.cbl:57",
+    "display": []
+   }
+  }
+ ]
+}

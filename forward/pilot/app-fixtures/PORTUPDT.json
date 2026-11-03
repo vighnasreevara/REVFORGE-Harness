@@ -1,0 +1,237 @@
+{
+ "program": "PORTUPDT",
+ "provenance": "Written 2026-11-02 by a scenario-author agent (F6 independent fixture design) from the COBOL source src/programs/portfolio/PORTUPDT.cbl and its copybooks under references/udara-legacy-modernization-harness, the fixtures README contract, and the gaps array of pilot-result.json; no generated Java, source map or test results were read.",
+ "scenarios": [
+  {
+   "id": "S01",
+   "title": "status update 'S': the first byte of UPDT-NEW-VALUE replaces PORT-STATUS, REWRITE succeeds, one update counted, RETURN-CODE 0",
+   "cobol_lines": [
+    84,
+    86,
+    89,
+    94,
+    96,
+    97,
+    99,
+    110,
+    114,
+    119,
+    121,
+    123,
+    124,
+    133,
+    134,
+    142,
+    144,
+    145,
+    153,
+    156,
+    157,
+    159
+   ],
+   "kind": "main",
+   "datasets": {
+    "PORTFILE": {
+     "records": [
+      "P00000011234567890ORIGINAL CLIENT               I2024010120240101A\u0000\u0000\u0000\u0000\u0000\u0000\u0000\f\u0000\u0000\u0000\u0000\u0000\u0000\u0000\fTESTUSER20240101                                                  "
+     ]
+    },
+    "UPDTFILE": {
+     "records": [
+      "P00000011234567890SC                                                 "
+     ]
+    }
+   },
+   "expect": {
+    "outcome": "END",
+    "return_code": 0,
+    "display": [
+     "Updates processed: 0000001",
+     "Errors occurred:  0000000"
+    ],
+    "datasets": {
+     "PORTFILE": [
+      "P00000011234567890ORIGINAL CLIENT               I2024010120240101C\u0000\u0000\u0000\u0000\u0000\u0000\u0000\f\u0000\u0000\u0000\u0000\u0000\u0000\u0000\fTESTUSER20240101"
+     ]
+    }
+   }
+  },
+  {
+   "id": "S02",
+   "title": "update key not on the master: READ gives status 23, one error counted, master unchanged, RETURN-CODE stays 0",
+   "cobol_lines": [
+    119,
+    121,
+    123,
+    125,
+    126,
+    127,
+    156,
+    157,
+    159
+   ],
+   "kind": "main",
+   "datasets": {
+    "PORTFILE": {
+     "records": [
+      "P00000011234567890ORIGINAL CLIENT               I2024010120240101A\u0000\u0000\u0000\u0000\u0000\u0000\u0000\f\u0000\u0000\u0000\u0000\u0000\u0000\u0000\fTESTUSER20240101                                                  "
+     ]
+    },
+    "UPDTFILE": {
+     "records": [
+      "P00000091234567890SC                                                 "
+     ]
+    }
+   },
+   "expect": {
+    "outcome": "END",
+    "return_code": 0,
+    "display_contains": [
+     "Updates processed: 0000000",
+     "Errors occurred:  0000001"
+    ],
+    "datasets": {
+     "PORTFILE": [
+      "P00000011234567890ORIGINAL CLIENT               I2024010120240101A\u0000\u0000\u0000\u0000\u0000\u0000\u0000\f\u0000\u0000\u0000\u0000\u0000\u0000\u0000\fTESTUSER20240101"
+     ]
+    }
+   }
+  },
+  {
+   "id": "S03",
+   "title": "name update 'N': a 36-character value is truncated on the right to PORT-CLIENT-NAME X(30)",
+   "cobol_lines": [
+    135,
+    136,
+    142,
+    144,
+    145
+   ],
+   "kind": "main",
+   "datasets": {
+    "PORTFILE": {
+     "records": [
+      "P00000011234567890ORIGINAL CLIENT               I2024010120240101A\u0000\u0000\u0000\u0000\u0000\u0000\u0000\f\u0000\u0000\u0000\u0000\u0000\u0000\u0000\fTESTUSER20240101                                                  "
+     ]
+    },
+    "UPDTFILE": {
+     "records": [
+      "P00000011234567890NABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789              "
+     ]
+    }
+   },
+   "expect": {
+    "outcome": "END",
+    "return_code": 0,
+    "display": [
+     "Updates processed: 0000001",
+     "Errors occurred:  0000000"
+    ],
+    "datasets": {
+     "PORTFILE": [
+      "P00000011234567890ABCDEFGHIJKLMNOPQRSTUVWXYZ0123I2024010120240101A\u0000\u0000\u0000\u0000\u0000\u0000\u0000\f\u0000\u0000\u0000\u0000\u0000\u0000\u0000\fTESTUSER20240101"
+     ]
+    }
+   }
+  },
+  {
+   "id": "S04",
+   "title": "value update 'V' with 50 digits: alphanumeric-to-numeric MOVE keeps the low-order 13 integer digits (12345.00), stored packed in PORT-TOTAL-VALUE",
+   "cobol_lines": [
+    137,
+    138,
+    139,
+    142,
+    144,
+    145
+   ],
+   "kind": "main",
+   "datasets": {
+    "PORTFILE": {
+     "records": [
+      "P00000011234567890ORIGINAL CLIENT               I2024010120240101A\u0000\u0000\u0000\u0000\u0000\u0000\u0000\f\u0000\u0000\u0000\u0000\u0000\u0000\u0000\fTESTUSER20240101                                                  "
+     ]
+    },
+    "UPDTFILE": {
+     "records": [
+      "P00000011234567890V99999999999999999999999999999999999990000000012345"
+     ]
+    }
+   },
+   "expect": {
+    "outcome": "END",
+    "return_code": 0,
+    "display": [
+     "Updates processed: 0000001",
+     "Errors occurred:  0000000"
+    ],
+    "datasets": {
+     "PORTFILE": [
+      "P00000011234567890ORIGINAL CLIENT               I2024010120240101A\u0000\u0000\u0000\u0000\u00124P\f\u0000\u0000\u0000\u0000\u0000\u0000\u0000\fTESTUSER20240101"
+     ]
+    }
+   }
+  },
+  {
+   "id": "S05",
+   "title": "value update 'V' with non-digit content ('100.00' plus trailing spaces): the MOVE is undefined by the source",
+   "cobol_lines": [
+    137,
+    138
+   ],
+   "kind": "main",
+   "datasets": {
+    "PORTFILE": {
+     "records": [
+      "P00000011234567890ORIGINAL CLIENT               I2024010120240101A\u0000\u0000\u0000\u0000\u0000\u0000\u0000\f\u0000\u0000\u0000\u0000\u0000\u0000\u0000\fTESTUSER20240101                                                  "
+     ]
+    },
+    "UPDTFILE": {
+     "records": [
+      "P00000011234567890V100.00                                            "
+     ]
+    }
+   },
+   "expect": {
+    "outcome": "BLOCKED AT src/programs/portfolio/PORTUPDT.cbl:138"
+   }
+  },
+  {
+   "id": "S06",
+   "title": "unknown action 'X': EVALUATE has no WHEN OTHER, the record is rewritten unchanged and still counted as an update",
+   "cobol_lines": [
+    132,
+    140,
+    142,
+    144,
+    145
+   ],
+   "kind": "main",
+   "datasets": {
+    "PORTFILE": {
+     "records": [
+      "P00000011234567890ORIGINAL CLIENT               I2024010120240101A\u0000\u0000\u0000\u0000\u0000\u0000\u0000\f\u0000\u0000\u0000\u0000\u0000\u0000\u0000\fTESTUSER20240101                                                  "
+     ]
+    },
+    "UPDTFILE": {
+     "records": [
+      "P00000011234567890XANYTHING                                          "
+     ]
+    }
+   },
+   "expect": {
+    "outcome": "END",
+    "return_code": 0,
+    "display": [
+     "Updates processed: 0000001",
+     "Errors occurred:  0000000"
+    ],
+    "datasets": {
+     "PORTFILE": [
+      "P00000011234567890ORIGINAL CLIENT               I2024010120240101A\u0000\u0000\u0000\u0000\u0000\u0000\u0000\f\u0000\u0000\u0000\u0000\u0000\u0000\u0000\fTESTUSER20240101"
+     ]
+    }
+   }
+  }
+ ]
+}

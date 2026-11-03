@@ -1,0 +1,124 @@
+{
+  "contract": "openai-live-pilot",
+  "contract_version": "1.0",
+  "generated_at": "2026-11-01T00:14:35.047Z",
+  "scope": "programs:RTNCDE00",
+  "model": "gpt-6-astra",
+  "pricing": {
+    "currency": "USD",
+    "input_per_1m": 10,
+    "cached_input_per_1m": 1,
+    "output_per_1m": 50,
+    "source": "https://developers.openai.com/api/docs/models/gpt-6-astra",
+    "verified_on": "2026-10-31"
+  },
+  "status": "LIVE_OPENAI_VERIFICATION_NOT_AUTHORIZED",
+  "blocked_by": [
+    "network disabled (openai_verification.network_enabled=false)",
+    "OPENAI_API_KEY not set",
+    "no trust anchor",
+    "no signed source-export authorization"
+  ],
+  "candidates_in_scope": 1,
+  "unsettled_eligible": 1,
+  "cases": [
+    {
+      "packet_id": "OAV-EVD-af66b09e34",
+      "root_cause_id": "RC-EVD-af66b09e34",
+      "category": "missing_evidence",
+      "deterministic_status": "INSUFFICIENT_EVIDENCE",
+      "why_selected": "unresolved meaning in the chosen scope; the source checks do not settle it",
+      "source_evidence": [
+        {
+          "path": "src/programs/batch/RTNCDE00.cbl",
+          "sha256": "7cb951ea1f418c19ddd61c0eca00f21108af5f364b5ecf05742cbc428862994e",
+          "lines": [
+            68,
+            81
+          ],
+          "excerpt_lines": 14
+        }
+      ],
+      "definitions": [
+        "RC-CURRENT-CODE S9(4) BINARY",
+        "RC-NEW-CODE S9(4) BINARY",
+        "RC-STATUS X DISPLAY",
+        "RC-RESPONSE-CODE S9(8) BINARY"
+      ],
+      "pass_a_question": "Using only the source excerpts and definitions provided, state precisely what each excerpt does: the conditions it tests, the values it compares, assigns or computes, the data items it changes, and where control goes next. Cite line numbers for every statement. List explicitly what cannot be determined from these excerpts alone.",
+      "pass_b_context": {
+        "existing_interpretations": [
+          "requirement:REQ-RTNCDE00-003"
+        ],
+        "conflicting": 0,
+        "deterministic_status": "INSUFFICIENT_EVIDENCE"
+      },
+      "data_classification": "confidential: proprietary application source code and derived analysis",
+      "estimated_tokens": {
+        "pass_a_input": 1075,
+        "pass_a_output_max": 6000,
+        "pass_b_input_max": 6957,
+        "pass_b_output_max": 6000
+      },
+      "estimated_cost_usd_upper_bound": 0.68032,
+      "review_steps": [
+        "run Pass A (review) and record it",
+        "validate every citation locally (file in scope, hash, lines, quoted text, IDs)",
+        "run Pass B (compare) on the verified Pass A findings",
+        "route the advisory record to the root-cause review queue",
+        "a human decides; the model output never resolves anything"
+      ]
+    }
+  ],
+  "total_estimate": {
+    "input_tokens_max": 8032,
+    "output_tokens_max": 12000,
+    "cost_usd_upper_bound": 0.68032
+  },
+  "authorization_request": {
+    "status": "UNSIGNED — for a real data owner to review, complete and sign outside the harness",
+    "payload": {
+      "contract": "source-export-authorization",
+      "contract_version": "1.0",
+      "authorization_id": "SEA-<choose-an-id>",
+      "workflow_id": "WF-FWD-20261031T172520Z-66b3",
+      "run_id": "FWD-20261031T172520Z-66b3",
+      "baseline_manifest_sha256": "352b97f0bbcbdb149c1118791aaabaa2e8e9972716bc77adc3a2f0644d24a068",
+      "destination": {
+        "provider": "openai",
+        "endpoint": "https://api.openai.com/v1/responses"
+      },
+      "models": [
+        "gpt-6-astra"
+      ],
+      "purpose": "independent_semantic_verification",
+      "data_classification": "confidential: proprietary application source code and derived analysis",
+      "scope": {
+        "packets": [
+          "OAV-EVD-af66b09e34"
+        ],
+        "files": [
+          {
+            "path": "src/programs/batch/RTNCDE00.cbl",
+            "sha256": "7cb951ea1f418c19ddd61c0eca00f21108af5f364b5ecf05742cbc428862994e"
+          }
+        ]
+      },
+      "passes": [
+        "A",
+        "B"
+      ],
+      "disclosure": "source_excerpts_and_derived_analysis",
+      "limits": {
+        "max_requests": 6,
+        "max_chars_per_request": 200000,
+        "max_excerpt_lines_per_request": 400
+      },
+      "not_before": "2026-11-01T00:14:36.161Z",
+      "expires_at": "2026-11-08T00:14:36.161Z",
+      "signer_id": "<data owner signer id>",
+      "role": "data_owner"
+    }
+  },
+  "note": "Nothing was sent. Model output stays advisory even after an authorized live review."
+}

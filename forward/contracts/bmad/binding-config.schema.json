@@ -1,0 +1,189 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://revforge.local/contracts/bmad/binding-config.schema.json",
+  "title": "BMad workflow to REVFORGE agent bindings",
+  "type": "object",
+  "properties": {
+    "contract": {
+      "const": "bmad/binding-config"
+    },
+    "contract_version": {
+      "const": "1.0"
+    },
+    "binding_version": {
+      "type": "string",
+      "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$"
+    },
+    "release": {
+      "type": "object",
+      "properties": {
+        "package": {
+          "const": "bmad-method"
+        },
+        "version": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "required": [
+        "package",
+        "version"
+      ],
+      "additionalProperties": false
+    },
+    "live_execution": {
+      "type": "object",
+      "properties": {
+        "requested": {
+          "type": "boolean"
+        },
+        "note": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "required": [
+        "requested",
+        "note"
+      ],
+      "additionalProperties": false
+    },
+    "bindings": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "binding_id": {
+            "type": "string",
+            "pattern": "^BMAD-[A-Z]+$"
+          },
+          "workflow_id": {
+            "type": "string",
+            "pattern": "^bmad-[a-z0-9-]+$"
+          },
+          "purpose": {
+            "type": "string",
+            "minLength": 1
+          },
+          "revforge_target": {
+            "type": "string",
+            "minLength": 1
+          },
+          "agent": {
+            "enum": [
+              "F1",
+              "F2",
+              "F3",
+              "F4",
+              "F5",
+              "F6",
+              "F7"
+            ]
+          },
+          "allowed_states": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1
+            },
+            "minItems": 1
+          },
+          "requires_gates": {
+            "type": "array",
+            "items": {
+              "enum": [
+                "G2",
+                "G3",
+                "G4",
+                "G5",
+                "G6"
+              ]
+            },
+            "minItems": 1
+          },
+          "requires_exact_scope": {
+            "const": true
+          },
+          "requires": {
+            "type": "array",
+            "items": {
+              "enum": [
+                "architecture_artifacts",
+                "approved_stories",
+                "java_target_dir",
+                "generation_authorized",
+                "implementation_artifacts",
+                "independent_test_receipt",
+                "reviewer_not_implementer"
+              ]
+            }
+          },
+          "output_contract": {
+            "type": "string",
+            "pattern": "^bmad/output-[a-z]+$"
+          },
+          "may_write_code": {
+            "type": "boolean"
+          },
+          "may_approve": {
+            "const": false
+          }
+        },
+        "required": [
+          "binding_id",
+          "workflow_id",
+          "purpose",
+          "revforge_target",
+          "agent",
+          "allowed_states",
+          "requires_gates",
+          "requires_exact_scope",
+          "requires",
+          "output_contract",
+          "may_write_code",
+          "may_approve"
+        ],
+        "additionalProperties": false
+      },
+      "minItems": 1
+    },
+    "independent_agents": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "agent": {
+            "enum": [
+              "F1",
+              "F2",
+              "F3",
+              "F4",
+              "F5",
+              "F6",
+              "F7"
+            ]
+          },
+          "reason": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "required": [
+          "agent",
+          "reason"
+        ],
+        "additionalProperties": false
+      }
+    }
+  },
+  "required": [
+    "contract",
+    "contract_version",
+    "binding_version",
+    "release",
+    "live_execution",
+    "bindings",
+    "independent_agents"
+  ],
+  "additionalProperties": false
+}

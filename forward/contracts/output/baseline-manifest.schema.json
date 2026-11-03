@@ -1,0 +1,97 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://revforge.local/contracts/output/baseline-manifest.schema.json",
+  "title": "Forward run baseline manifest",
+  "description": "Pins the exact reverse inputs (hashes, agent versions, run IDs) and repository version a forward run was planned from.",
+  "allOf": [{ "$ref": "../common.schema.json#/definitions/outputHeader" }],
+  "type": "object",
+  "required": ["contract", "repository", "runtime", "config", "system", "selection", "inputs", "per_program_files", "source_runs", "cobol_source", "neo4j", "id_policy"],
+  "properties": {
+    "contract": { "const": "baseline-manifest" },
+    "repository": {
+      "type": "object",
+      "required": ["git"],
+      "properties": {
+        "git": {
+          "type": "object",
+          "required": ["available", "branch", "commit", "dirty"],
+          "properties": {
+            "available": { "type": "boolean" },
+            "branch": { "type": ["string", "null"] },
+            "commit": { "type": ["string", "null"], "pattern": "^[0-9a-f]{40}$" },
+            "dirty": { "type": ["boolean", "null"] },
+            "changed_paths": { "type": ["integer", "null"] },
+            "reverse_paths_changed": { "type": ["array", "null"], "items": { "type": "string" } }
+          }
+        }
+      }
+    },
+    "runtime": { "type": "object", "required": ["node_version", "platform"] },
+    "config": {
+      "type": "object",
+      "required": ["path", "sha256", "generation"],
+      "properties": {
+        "sha256": { "anyOf": [{ "$ref": "../common.schema.json#/definitions/sha256" }, { "type": "null" }] },
+        "generation": {
+          "type": "object",
+          "required": ["java_generation_allowed"],
+          "properties": { "java_generation_allowed": { "type": "boolean" } }
+        }
+      }
+    },
+    "system": {
+      "type": "object",
+      "required": ["system_id"],
+      "properties": { "system_id": { "anyOf": [{ "$ref": "../common.schema.json#/definitions/systemId" }, { "type": "null" }] } }
+    },
+    "selection": {
+      "type": "object",
+      "required": ["mode", "selected", "unknown"],
+      "properties": {
+        "mode": { "enum": ["all", "subset"] },
+        "selected": { "type": "integer", "minimum": 0 },
+        "unknown": { "type": "array", "items": { "type": "string" } }
+      }
+    },
+    "inputs": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["key", "path", "required", "present", "sha256"],
+        "properties": {
+          "key": { "type": "string" },
+          "path": { "type": "string" },
+          "required": { "type": "boolean" },
+          "present": { "type": "boolean" },
+          "sha256": { "anyOf": [{ "$ref": "../common.schema.json#/definitions/sha256" }, { "type": "null" }] },
+          "run_ids": { "type": "array", "items": { "type": "string" } }
+        }
+      }
+    },
+    "per_program_files": {
+      "type": "object",
+      "required": ["logic", "raw_structure"],
+      "additionalProperties": {
+        "type": "object",
+        "required": ["count", "sha256"],
+        "properties": { "count": { "type": "integer" }, "sha256": { "$ref": "../common.schema.json#/definitions/sha256" } }
+      }
+    },
+    "source_runs": { "type": "object", "additionalProperties": { "$ref": "../common.schema.json#/definitions/sourceRun" } },
+    "cobol_source": {
+      "type": "object",
+      "required": ["configured", "available"],
+      "properties": { "configured": { "type": "boolean" }, "available": { "type": "boolean" } }
+    },
+    "neo4j": {
+      "type": "object",
+      "required": ["live_verification_performed", "recorded_upstream_verifications"],
+      "properties": {
+        "live_verification_performed": { "const": false },
+        "recorded_upstream_verifications": { "type": "array" }
+      }
+    },
+    "id_policy": { "type": "string" }
+  }
+}

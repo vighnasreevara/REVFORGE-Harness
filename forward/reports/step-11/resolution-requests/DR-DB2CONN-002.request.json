@@ -1,0 +1,93 @@
+{
+  "contract": "decision-resolution",
+  "contract_version": "1.0",
+  "decision_id": "DR-DB2CONN-002",
+  "decision_sha256": "7004bffb5b7e045c7e8f669d67550d4534d729a241f7c756c08bb19aa9ac1fea",
+  "decision_kind": "technical",
+  "workflow_id": "WF-FWD-20261031T172520Z-66b3",
+  "run_id": "FWD-20261031T172520Z-66b3",
+  "baseline_manifest_sha256": "352b97f0bbcbdb149c1118791aaabaa2e8e9972716bc77adc3a2f0644d24a068",
+  "affected_requirements": [
+    "REQ-DB2CMT-002",
+    "REQ-DB2CMT-003",
+    "REQ-DB2CONN-002",
+    "REQ-DB2CONN-003",
+    "REQ-DB2CONN-004",
+    "REQ-HISTLD00-002",
+    "REQ-RTNANA00-001",
+    "REQ-RTNCDE00-001",
+    "REQ-RTNCDE00-004"
+  ],
+  "affected_item_hashes": {
+    "REQ-DB2CMT-002": "454ab9d312e48636f81fbc59b9ae3f875702d4520409731b84a7e944e740aef9",
+    "REQ-DB2CMT-003": "0bcce6a2706f5860e709e6b1e686098f32d7ce984c56395839acc00d131aedc9",
+    "REQ-DB2CONN-002": "0f94b35546cd7bc1a5c0d63bc89aa27cfdb2694a2bd0871616a65fd67446ae27",
+    "REQ-DB2CONN-003": "7d89135d9eebd21bfd5a59c7da0c63a5cc43d5f13fbc9dcaf0564516d7fd62dd",
+    "REQ-DB2CONN-004": "396830efe88c423953fc48be5188b16059f604ecf9654effa4b9b9536bde2f5f",
+    "REQ-HISTLD00-002": "7c062f2cb39f2a4a26ae4ec5eb23e91e0eb7b1135e1153f4f648e8c58aaac66b",
+    "REQ-RTNANA00-001": "91f2decb2e0a4bfccecfb30a47ea58b99b359cc42d7e95d1ac0b8533468fb4f0",
+    "REQ-RTNCDE00-001": "70a3b283f57b4ad031f3f4f6493b33d8cccda01184ab7ba117214bf245cc9c5e",
+    "REQ-RTNCDE00-004": "0ac2f6b674b57cdeceab63b1845884a51dc70e50d0eccdbaf9ab57f1a5292269"
+  },
+  "affected_source_ids": [
+    "SYS-PORTFOLIO-001-FIL-0017",
+    "SYS-PORTFOLIO-001-FIL-0017-REC-0001",
+    "SYS-PORTFOLIO-001-PATH-0017"
+  ],
+  "affected_units": [
+    "DB2CMT",
+    "DB2CONN",
+    "HISTLD00",
+    "RTNANA00",
+    "RTNCDE00"
+  ],
+  "original_problem": "Copybook SQLCA (src/copybook/db2/SQLCA.cpy) includes itself (EXEC SQL INCLUDE SQLCA at line 6) and defines only SQL-STATUS-CODES, with no SQLCODE or SQLERRMC field; SQLCODE/SQLERRMC therefore have no Field ID in 14 DB2 programs, including HISTLD00, RTNANA00, RTNCDE00, DB2CMT and DB2CONN. Which SQLCA does the precompiler actually supply, and may the forward design assume the standard DB2 SQLCODE meaning (0 success, -803 duplicate key, negative values errors) used in these requirements?",
+  "available_evidence": [
+    {
+      "kind": "deliverable",
+      "ref": "forward/runs/FWD-20261031T172520Z-66b3/workflow/agents/F1/PKT-0002-F1/uncertainty_decision_register.json",
+      "sha256": "4da2068478eaada9b46607efaa1cbfe7c97d437b57a2e54e92136450778d7037"
+    },
+    {
+      "kind": "gap",
+      "ref": "GAP-002",
+      "detail": "items GAP-002#01"
+    },
+    {
+      "kind": "gap",
+      "ref": "GAP-098",
+      "detail": "items GAP-098#01"
+    }
+  ],
+  "allowed_outcomes": [
+    "resolved_no_change",
+    "excluded_from_scope",
+    "resolved_requires_update"
+  ],
+  "required_roles_by_outcome": {
+    "resolved_no_change": [
+      "technical_authority"
+    ],
+    "excluded_from_scope": [
+      "technical_authority"
+    ],
+    "resolved_requires_update": [
+      "technical_authority"
+    ]
+  },
+  "impacted_artifacts": [
+    "forward/runs/FWD-20261031T172520Z-66b3/workflow/agents/F1/PKT-0002-F1/uncertainty_decision_register.json",
+    "forward/runs/FWD-20261031T172520Z-66b3/workflow/agents/F1/PKT-0002-F1/draft_requirements.json"
+  ],
+  "outcome": null,
+  "selected_option": null,
+  "resolution_text": "",
+  "justification": "",
+  "signer_id": "",
+  "role": "",
+  "resolved_at": "",
+  "supersedes": null,
+  "scope": "programs:RTNCDE00",
+  "expires_at": "2026-11-09T17:40:45.759Z",
+  "request_id": "DRQ-8a46d20a555f"
+}

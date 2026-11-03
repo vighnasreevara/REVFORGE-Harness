@@ -1,0 +1,248 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://revforge.local/contracts/bmad/execution-packet.schema.json",
+  "title": "Prepared BMad execution packet (runtime-written, immutable)",
+  "type": "object",
+  "properties": {
+    "contract": {
+      "const": "bmad/execution-packet"
+    },
+    "contract_version": {
+      "const": "1.0"
+    },
+    "packet_id": {
+      "type": "string",
+      "pattern": "^BPK-[0-9]{4}$"
+    },
+    "prepared_at": {
+      "$ref": "../common.schema.json#/definitions/isoTimestamp"
+    },
+    "mode": {
+      "enum": [
+        "MOCK",
+        "LIVE"
+      ]
+    },
+    "binding_id": {
+      "type": "string",
+      "pattern": "^BMAD-[A-Z]+$"
+    },
+    "binding_version": {
+      "type": "string",
+      "minLength": 1
+    },
+    "workflow_id": {
+      "type": "string",
+      "pattern": "^bmad-[a-z0-9-]+$"
+    },
+    "workflow": {
+      "type": "object",
+      "properties": {
+        "path": {
+          "type": "string",
+          "minLength": 1
+        },
+        "directory_sha256": {
+          "$ref": "../common.schema.json#/definitions/sha256"
+        },
+        "skill_md_sha256": {
+          "$ref": "../common.schema.json#/definitions/sha256"
+        }
+      },
+      "required": [
+        "path",
+        "directory_sha256",
+        "skill_md_sha256"
+      ],
+      "additionalProperties": false
+    },
+    "release": {
+      "type": "object",
+      "properties": {
+        "package": {
+          "type": "string",
+          "minLength": 1
+        },
+        "version": {
+          "type": "string",
+          "minLength": 1
+        },
+        "tarball_sha256": {
+          "$ref": "../common.schema.json#/definitions/sha256"
+        },
+        "directory_sha256": {
+          "$ref": "../common.schema.json#/definitions/sha256"
+        }
+      },
+      "required": [
+        "package",
+        "version",
+        "tarball_sha256",
+        "directory_sha256"
+      ],
+      "additionalProperties": false
+    },
+    "agent": {
+      "enum": [
+        "F1",
+        "F2",
+        "F3",
+        "F4",
+        "F5",
+        "F6",
+        "F7"
+      ]
+    },
+    "scope": {
+      "type": "string",
+      "minLength": 1
+    },
+    "scope_sha256": {
+      "$ref": "../common.schema.json#/definitions/sha256"
+    },
+    "baseline": {
+      "type": "object",
+      "properties": {
+        "run_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "manifest_sha256": {
+          "$ref": "../common.schema.json#/definitions/sha256"
+        }
+      },
+      "required": [
+        "run_id",
+        "manifest_sha256"
+      ],
+      "additionalProperties": false
+    },
+    "mapping_version": {
+      "type": "string",
+      "minLength": 1
+    },
+    "config_hashes": {
+      "type": "object",
+      "properties": {
+        "bindings": {
+          "$ref": "../common.schema.json#/definitions/sha256"
+        },
+        "registry": {
+          "$ref": "../common.schema.json#/definitions/sha256"
+        },
+        "mapping": {
+          "$ref": "../common.schema.json#/definitions/sha256"
+        },
+        "pin": {
+          "$ref": "../common.schema.json#/definitions/sha256"
+        }
+      },
+      "required": [
+        "bindings",
+        "registry",
+        "mapping",
+        "pin"
+      ],
+      "additionalProperties": false
+    },
+    "eligibility_record": {
+      "type": "string",
+      "minLength": 1
+    },
+    "inputs": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "minLength": 1
+          },
+          "path": {
+            "type": "string",
+            "minLength": 1
+          },
+          "sha256": {
+            "$ref": "../common.schema.json#/definitions/sha256"
+          },
+          "provenance": {
+            "type": "string",
+            "minLength": 1
+          },
+          "provenance_sha256": {
+            "$ref": "../common.schema.json#/definitions/sha256"
+          }
+        },
+        "required": [
+          "name",
+          "path",
+          "sha256",
+          "provenance",
+          "provenance_sha256"
+        ],
+        "additionalProperties": false
+      },
+      "minItems": 1
+    },
+    "allowed_outputs": {
+      "type": "object",
+      "properties": {
+        "output_dir": {
+          "type": "string",
+          "minLength": 1
+        },
+        "java_target_dir": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "may_write_code": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "output_dir",
+        "java_target_dir",
+        "may_write_code"
+      ],
+      "additionalProperties": false
+    },
+    "forbidden": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "minItems": 1
+    },
+    "output_contract": {
+      "type": "string",
+      "minLength": 1
+    }
+  },
+  "required": [
+    "contract",
+    "contract_version",
+    "packet_id",
+    "prepared_at",
+    "mode",
+    "binding_id",
+    "binding_version",
+    "workflow_id",
+    "workflow",
+    "release",
+    "agent",
+    "scope",
+    "scope_sha256",
+    "baseline",
+    "mapping_version",
+    "config_hashes",
+    "eligibility_record",
+    "inputs",
+    "allowed_outputs",
+    "forbidden",
+    "output_contract"
+  ],
+  "additionalProperties": false
+}

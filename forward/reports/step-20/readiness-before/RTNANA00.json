@@ -1,0 +1,711 @@
+{
+  "gate": "SOURCE_READINESS",
+  "subject": "RTNANA00",
+  "status": "FAIL",
+  "checks": [
+    {
+      "id": "source_available",
+      "ok": true,
+      "detail": "src/programs/batch/RTNANA00.cbl sha256 c9c49d1bea7acf4d6002374812fe61100167f4ff0117f1866f573cdcef1c8b48; 51 statement(s) in 12 paragraph(s)"
+    },
+    {
+      "id": "complete_program",
+      "ok": true,
+      "detail": "every paragraph contains statements"
+    },
+    {
+      "id": "copybooks_resolved",
+      "ok": false,
+      "detail": "unresolved or circular includes: SQLCA@6"
+    },
+    {
+      "id": "requirements_and_data_mapping_delivered",
+      "ok": true,
+      "detail": "F1/F2 deliveries accepted for SQLCA, RTNANA00"
+    },
+    {
+      "id": "behaviour_classified",
+      "ok": true,
+      "detail": "5 behaviour(s): 0 VERIFIED_CANDIDATE, 4 PARTIAL, 1 GAP"
+    },
+    {
+      "id": "dependencies_identified",
+      "ok": false,
+      "detail": "closure UNRESOLVED for RTNANA00:P100-INIT-PROGRAM (line 117: RETURN-CODE is neither declared, a keyword, a paragraph nor the subject of a blocking decision (unknown dependency))"
+    },
+    {
+      "id": "unsupported_documented",
+      "ok": false,
+      "detail": "non-verified behaviour without a gap: RTNANA00:P100-INIT-PROGRAM, RTNANA00:P300-GENERATE-REPORT, RTNANA00:P900-CLOSE-FILES"
+    },
+    {
+      "id": "unknowns_documented",
+      "ok": true,
+      "detail": "10 open decision(s) record the remaining questions (3 blocking for approval); none is resolved or assumed here"
+    }
+  ],
+  "note": "An engineering gate: it states that the source is understood well enough to convert, with every unknown documented. It is not a G2 approval and does not authorise generation.",
+  "behaviours": [
+    {
+      "behaviour_id": "RTNANA00:ENTRY-DISPATCH",
+      "kind": "dispatch",
+      "classification": "PARTIAL",
+      "lines": [
+        97,
+        107
+      ],
+      "inputs": [],
+      "outputs": [],
+      "side_effects": [],
+      "unresolved": [],
+      "covered_by": []
+    },
+    {
+      "behaviour_id": "RTNANA00:P100-INIT-PROGRAM",
+      "kind": "performed_range",
+      "classification": "PARTIAL",
+      "lines": [
+        112,
+        121
+      ],
+      "inputs": [
+        "FUNCTION CURRENT-DATE (system date and time)",
+        "WS-REPORT-STATUS"
+      ],
+      "outputs": [
+        "RETURN-CODE",
+        "WS-ANALYSIS-AREA",
+        "WS-CURRENT-DATE-DATA"
+      ],
+      "side_effects": [
+        {
+          "line": 114,
+          "kind": "file_io",
+          "operation": "OPEN",
+          "table": null
+        }
+      ],
+      "unresolved": [],
+      "covered_by": [
+        "RT-RTNANA00-003"
+      ]
+    },
+    {
+      "behaviour_id": "RTNANA00:P200-PROCESS-ANALYSIS",
+      "kind": "performed_range",
+      "classification": "PARTIAL",
+      "lines": [
+        126,
+        187
+      ],
+      "inputs": [
+        "REPORT-RECORD",
+        "WS-CURRENT-DATE",
+        "WS-CURRENT-HOUR",
+        "WS-CURRENT-MINUTE",
+        "WS-CURRENT-SECOND",
+        "WS-DETAIL-HDR",
+        "WS-DETAIL-LINE",
+        "WS-DTL-ERROR",
+        "WS-DTL-PROGRAM",
+        "WS-DTL-SEVERE",
+        "WS-DTL-SUCCESS",
+        "WS-DTL-TOTAL",
+        "WS-DTL-WARNING",
+        "WS-ERROR-COUNT",
+        "WS-HEADER1",
+        "WS-HEADER2",
+        "WS-HEADER3",
+        "WS-PROGRAM-COUNT",
+        "WS-RPT-TIME",
+        "WS-SEVERE-COUNT",
+        "WS-SUCCESS-COUNT",
+        "WS-WARNING-COUNT"
+      ],
+      "outputs": [
+        "WS-RPT-DATE"
+      ],
+      "side_effects": [
+        {
+          "line": 126,
+          "kind": "embedded_sql",
+          "operation": "DECLARE",
+          "table": "RTNCODES"
+        },
+        {
+          "line": 139,
+          "kind": "embedded_sql",
+          "operation": "OPEN",
+          "table": null
+        },
+        {
+          "line": 148,
+          "kind": "embedded_sql",
+          "operation": "CLOSE",
+          "table": null
+        },
+        {
+          "line": 153,
+          "kind": "file_io",
+          "operation": "WRITE",
+          "table": null
+        },
+        {
+          "line": 154,
+          "kind": "file_io",
+          "operation": "WRITE",
+          "table": null
+        },
+        {
+          "line": 161,
+          "kind": "file_io",
+          "operation": "WRITE",
+          "table": null
+        },
+        {
+          "line": 163,
+          "kind": "file_io",
+          "operation": "WRITE",
+          "table": null
+        },
+        {
+          "line": 164,
+          "kind": "file_io",
+          "operation": "WRITE",
+          "table": null
+        },
+        {
+          "line": 165,
+          "kind": "file_io",
+          "operation": "WRITE",
+          "table": null
+        },
+        {
+          "line": 170,
+          "kind": "embedded_sql",
+          "operation": "FETCH",
+          "table": null
+        },
+        {
+          "line": 181,
+          "kind": "file_io",
+          "operation": "WRITE",
+          "table": null
+        }
+      ],
+      "unresolved": [
+        "SQLCODE"
+      ],
+      "covered_by": [
+        "REQ-RTNANA00-001",
+        "RT-RTNANA00-002"
+      ]
+    },
+    {
+      "behaviour_id": "RTNANA00:P300-GENERATE-REPORT",
+      "kind": "performed_range",
+      "classification": "PARTIAL",
+      "lines": [
+        193,
+        203
+      ],
+      "inputs": [
+        "REPORT-RECORD",
+        "WS-DETAIL-LINE",
+        "WS-ERROR-COUNT",
+        "WS-HEADER1",
+        "WS-PROGRAM-COUNT",
+        "WS-SEVERE-COUNT",
+        "WS-SUCCESS-COUNT",
+        "WS-WARNING-COUNT"
+      ],
+      "outputs": [
+        "WS-DTL-ERROR",
+        "WS-DTL-PROGRAM",
+        "WS-DTL-SEVERE",
+        "WS-DTL-SUCCESS",
+        "WS-DTL-TOTAL",
+        "WS-DTL-WARNING"
+      ],
+      "side_effects": [
+        {
+          "line": 193,
+          "kind": "file_io",
+          "operation": "WRITE",
+          "table": null
+        },
+        {
+          "line": 202,
+          "kind": "file_io",
+          "operation": "WRITE",
+          "table": null
+        },
+        {
+          "line": 203,
+          "kind": "file_io",
+          "operation": "WRITE",
+          "table": null
+        }
+      ],
+      "unresolved": [],
+      "covered_by": [
+        "REQ-RTNANA00-002"
+      ]
+    },
+    {
+      "behaviour_id": "RTNANA00:P900-CLOSE-FILES",
+      "kind": "performed_range",
+      "classification": "GAP",
+      "lines": [
+        208,
+        208
+      ],
+      "inputs": [],
+      "outputs": [],
+      "side_effects": [
+        {
+          "line": 208,
+          "kind": "file_io",
+          "operation": "CLOSE",
+          "table": null
+        }
+      ],
+      "unresolved": [],
+      "covered_by": []
+    }
+  ],
+  "gaps": [
+    {
+      "gap_id": "GAP-RTNANA00-P200-PROCESS-ANALYSIS-SQLCODE",
+      "kind": "UNDECLARED_NAME_SEMANTICS",
+      "behaviour_id": "RTNANA00:P200-PROCESS-ANALYSIS",
+      "source": {
+        "path": "src/programs/batch/RTNANA00.cbl",
+        "sha256": "c9c49d1bea7acf4d6002374812fe61100167f4ff0117f1866f573cdcef1c8b48",
+        "lines": [
+          144,
+          180,
+          181,
+          183,
+          184,
+          185,
+          186,
+          187
+        ],
+        "statements": [
+          {
+            "line": 144,
+            "text": "PERFORM P220-PROCESS-DETAIL THRU P220-EXIT UNTIL SQLCODE = 100."
+          },
+          {
+            "line": 180,
+            "text": "IF SQLCODE = 0"
+          },
+          {
+            "line": 181,
+            "text": "WRITE REPORT-RECORD FROM WS-DETAIL-LINE"
+          },
+          {
+            "line": 183,
+            "text": "ADD WS-DTL-TOTAL TO WS-PROGRAM-COUNT"
+          },
+          {
+            "line": 184,
+            "text": "ADD WS-DTL-SUCCESS TO WS-SUCCESS-COUNT"
+          },
+          {
+            "line": 185,
+            "text": "ADD WS-DTL-WARNING TO WS-WARNING-COUNT"
+          },
+          {
+            "line": 186,
+            "text": "ADD WS-DTL-ERROR TO WS-ERROR-COUNT"
+          },
+          {
+            "line": 187,
+            "text": "ADD WS-DTL-SEVERE TO WS-SEVERE-COUNT"
+          }
+        ]
+      },
+      "missing_fact": "SQLCODE is used but declared nowhere in the repository; its layout and value meanings are the subject of DR-F2-0011-001, DR-DB2CONN-002 (missing: the real SQLCA member (the repository copy includes itself); a declaration of SQLCODE; a declaration of SQLERRMC)",
+      "why_unsafe": "the outputs of these statements (control flow) depend on a value whose meaning is not established; any Java mapping would invent it",
+      "affected_requirements": [
+        "REQ-RTNANA00-001",
+        "RT-RTNANA00-002"
+      ],
+      "affected_java_component": "outcome mapping of behaviour P200-PROCESS-ANALYSIS (behind a port whose only implementation throws until the gap is resolved)",
+      "required_action": [
+        "DR-F2-0011-001: a signed resolution by technical_authority",
+        "DR-DB2CONN-002: a signed resolution by technical_authority"
+      ],
+      "validation_evidence": "the real definition of SQLCODE for the target runtime and a captured legacy run showing each outcome branch",
+      "blocks_execution_path": "request its PERFORM -> P200-PROCESS-ANALYSIS: statements 144, 180, 181, 183, 184, 185, 186, 187",
+      "blocking": true,
+      "status": "OPEN"
+    },
+    {
+      "gap_id": "GAP-RTNANA00-P200-PROCESS-ANALYSIS-SQL-DECLARE-RTNCODES",
+      "kind": "EXTERNAL_DATABASE_RUNTIME",
+      "behaviour_id": "RTNANA00:P200-PROCESS-ANALYSIS",
+      "source": {
+        "path": "src/programs/batch/RTNANA00.cbl",
+        "sha256": "c9c49d1bea7acf4d6002374812fe61100167f4ff0117f1866f573cdcef1c8b48",
+        "lines": [
+          126,
+          137
+        ],
+        "statements": [
+          {
+            "line": 126,
+            "text": "EXEC SQL DECLARE PRGCUR CURSOR FOR SELECT PROGRAM_ID, COUNT(*) AS TOTAL, COUNT(CASE WHEN STATUS_CODE = 'S' THEN 1 END), COUNT(CASE WHEN STATUS_CODE = 'W' THEN 1 END), COUNT(CASE WHEN STATUS_CODE = 'E' THEN 1 END), COUNT(CASE WHEN STATUS_CODE = 'F' THEN 1 END) FROM RTNCODES GROUP BY PROGRAM_ID ORDER BY PROGRAM_ID END-EXEC."
+          }
+        ]
+      },
+      "missing_fact": "the runtime behaviour of embedded SQL DECLARE on RTNCODES: database product and version, host-variable conversions, NULL and no-row results, constraint violations and the status they report",
+      "why_unsafe": "the result and every status it produces come from an external database the repository does not describe; a Java implementation would have to assume them",
+      "affected_requirements": [
+        "REQ-RTNANA00-001",
+        "RT-RTNANA00-002"
+      ],
+      "affected_java_component": "database port for DECLARE RTNCODES (interface only; no implementation until specified)",
+      "required_action": [
+        "an approved specification of the database interaction (technical authority), recorded as an ADR at G3"
+      ],
+      "validation_evidence": "a captured run against the real (or an approved equivalent) database for each outcome, including errors",
+      "blocks_execution_path": "request its PERFORM -> P200-PROCESS-ANALYSIS: statement 126",
+      "blocking": true,
+      "status": "OPEN"
+    },
+    {
+      "gap_id": "GAP-RTNANA00-P200-PROCESS-ANALYSIS-SQL-OPEN-UNKNOWN",
+      "kind": "EXTERNAL_DATABASE_RUNTIME",
+      "behaviour_id": "RTNANA00:P200-PROCESS-ANALYSIS",
+      "source": {
+        "path": "src/programs/batch/RTNANA00.cbl",
+        "sha256": "c9c49d1bea7acf4d6002374812fe61100167f4ff0117f1866f573cdcef1c8b48",
+        "lines": [
+          139,
+          139
+        ],
+        "statements": [
+          {
+            "line": 139,
+            "text": "EXEC SQL OPEN PRGCUR END-EXEC."
+          }
+        ]
+      },
+      "missing_fact": "the runtime behaviour of embedded SQL OPEN on null: database product and version, host-variable conversions, NULL and no-row results, constraint violations and the status they report",
+      "why_unsafe": "the result and every status it produces come from an external database the repository does not describe; a Java implementation would have to assume them",
+      "affected_requirements": [
+        "REQ-RTNANA00-001",
+        "RT-RTNANA00-002"
+      ],
+      "affected_java_component": "database port for OPEN null (interface only; no implementation until specified)",
+      "required_action": [
+        "an approved specification of the database interaction (technical authority), recorded as an ADR at G3"
+      ],
+      "validation_evidence": "a captured run against the real (or an approved equivalent) database for each outcome, including errors",
+      "blocks_execution_path": "request its PERFORM -> P200-PROCESS-ANALYSIS: statement 139",
+      "blocking": true,
+      "status": "OPEN"
+    },
+    {
+      "gap_id": "GAP-RTNANA00-P200-PROCESS-ANALYSIS-SQL-CLOSE-UNKNOWN",
+      "kind": "EXTERNAL_DATABASE_RUNTIME",
+      "behaviour_id": "RTNANA00:P200-PROCESS-ANALYSIS",
+      "source": {
+        "path": "src/programs/batch/RTNANA00.cbl",
+        "sha256": "c9c49d1bea7acf4d6002374812fe61100167f4ff0117f1866f573cdcef1c8b48",
+        "lines": [
+          148,
+          148
+        ],
+        "statements": [
+          {
+            "line": 148,
+            "text": "EXEC SQL CLOSE PRGCUR END-EXEC."
+          }
+        ]
+      },
+      "missing_fact": "the runtime behaviour of embedded SQL CLOSE on null: database product and version, host-variable conversions, NULL and no-row results, constraint violations and the status they report",
+      "why_unsafe": "the result and every status it produces come from an external database the repository does not describe; a Java implementation would have to assume them",
+      "affected_requirements": [
+        "REQ-RTNANA00-001",
+        "RT-RTNANA00-002"
+      ],
+      "affected_java_component": "database port for CLOSE null (interface only; no implementation until specified)",
+      "required_action": [
+        "an approved specification of the database interaction (technical authority), recorded as an ADR at G3"
+      ],
+      "validation_evidence": "a captured run against the real (or an approved equivalent) database for each outcome, including errors",
+      "blocks_execution_path": "request its PERFORM -> P200-PROCESS-ANALYSIS: statement 148",
+      "blocking": true,
+      "status": "OPEN"
+    },
+    {
+      "gap_id": "GAP-RTNANA00-P200-PROCESS-ANALYSIS-SQL-FETCH-UNKNOWN",
+      "kind": "EXTERNAL_DATABASE_RUNTIME",
+      "behaviour_id": "RTNANA00:P200-PROCESS-ANALYSIS",
+      "source": {
+        "path": "src/programs/batch/RTNANA00.cbl",
+        "sha256": "c9c49d1bea7acf4d6002374812fe61100167f4ff0117f1866f573cdcef1c8b48",
+        "lines": [
+          170,
+          178
+        ],
+        "statements": [
+          {
+            "line": 170,
+            "text": "EXEC SQL FETCH PRGCUR INTO :WS-DTL-PROGRAM, :WS-DTL-TOTAL, :WS-DTL-SUCCESS, :WS-DTL-WARNING, :WS-DTL-ERROR, :WS-DTL-SEVERE END-EXEC."
+          }
+        ]
+      },
+      "missing_fact": "the runtime behaviour of embedded SQL FETCH on null: database product and version, host-variable conversions, NULL and no-row results, constraint violations and the status they report",
+      "why_unsafe": "the result and every status it produces come from an external database the repository does not describe; a Java implementation would have to assume them",
+      "affected_requirements": [
+        "REQ-RTNANA00-001",
+        "RT-RTNANA00-002"
+      ],
+      "affected_java_component": "database port for FETCH null (interface only; no implementation until specified)",
+      "required_action": [
+        "an approved specification of the database interaction (technical authority), recorded as an ADR at G3"
+      ],
+      "validation_evidence": "a captured run against the real (or an approved equivalent) database for each outcome, including errors",
+      "blocks_execution_path": "request its PERFORM -> P200-PROCESS-ANALYSIS: statement 170",
+      "blocking": true,
+      "status": "OPEN"
+    }
+  ],
+  "closures": [
+    {
+      "behaviour_id": "RTNANA00:P100-INIT-PROGRAM",
+      "status": "UNRESOLVED",
+      "unresolved_reasons": [
+        "line 117: RETURN-CODE is neither declared, a keyword, a paragraph nor the subject of a blocking decision (unknown dependency)"
+      ],
+      "units": [
+        "RTNANA00"
+      ],
+      "external": [],
+      "undeclared": [],
+      "sha256": "7ab129866512d6ea17527f72d40ca96e6b32d8ae9b74ede0afa3ce8f5ae360ab"
+    },
+    {
+      "behaviour_id": "RTNANA00:P200-PROCESS-ANALYSIS",
+      "status": "RESOLVED",
+      "unresolved_reasons": [],
+      "units": [
+        "RTNANA00",
+        "SQLCA"
+      ],
+      "external": [
+        {
+          "kind": "embedded_sql",
+          "line": 126,
+          "operation": "DECLARE",
+          "target": "RTNCODES",
+          "relation": "direct"
+        },
+        {
+          "kind": "embedded_sql",
+          "line": 139,
+          "operation": "OPEN",
+          "target": null,
+          "relation": "direct"
+        },
+        {
+          "kind": "embedded_sql",
+          "line": 148,
+          "operation": "CLOSE",
+          "target": null,
+          "relation": "direct"
+        },
+        {
+          "kind": "embedded_sql",
+          "line": 170,
+          "operation": "FETCH",
+          "target": null,
+          "relation": "performed"
+        },
+        {
+          "kind": "file_io",
+          "line": 153,
+          "operation": "WRITE",
+          "target": "REPORT-FILE",
+          "relation": "direct"
+        },
+        {
+          "kind": "file_io",
+          "line": 154,
+          "operation": "WRITE",
+          "target": "REPORT-FILE",
+          "relation": "direct"
+        },
+        {
+          "kind": "file_io",
+          "line": 161,
+          "operation": "WRITE",
+          "target": "REPORT-FILE",
+          "relation": "direct"
+        },
+        {
+          "kind": "file_io",
+          "line": 163,
+          "operation": "WRITE",
+          "target": "REPORT-FILE",
+          "relation": "direct"
+        },
+        {
+          "kind": "file_io",
+          "line": 164,
+          "operation": "WRITE",
+          "target": "REPORT-FILE",
+          "relation": "direct"
+        },
+        {
+          "kind": "file_io",
+          "line": 165,
+          "operation": "WRITE",
+          "target": "REPORT-FILE",
+          "relation": "direct"
+        },
+        {
+          "kind": "file_io",
+          "line": 181,
+          "operation": "WRITE",
+          "target": "REPORT-FILE",
+          "relation": "direct"
+        }
+      ],
+      "undeclared": [
+        "SQLCODE"
+      ],
+      "sha256": "40d9d8c30dfd8ca9bfef62834d62a6d621a8b1b48ca8de9c3e97bca4c6a0fc6c"
+    },
+    {
+      "behaviour_id": "RTNANA00:P300-GENERATE-REPORT",
+      "status": "RESOLVED",
+      "unresolved_reasons": [],
+      "units": [
+        "RTNANA00"
+      ],
+      "external": [
+        {
+          "kind": "file_io",
+          "line": 193,
+          "operation": "WRITE",
+          "target": "REPORT-FILE",
+          "relation": "direct"
+        },
+        {
+          "kind": "file_io",
+          "line": 202,
+          "operation": "WRITE",
+          "target": "REPORT-FILE",
+          "relation": "direct"
+        },
+        {
+          "kind": "file_io",
+          "line": 203,
+          "operation": "WRITE",
+          "target": "REPORT-FILE",
+          "relation": "direct"
+        }
+      ],
+      "undeclared": [
+        "SQLCODE"
+      ],
+      "sha256": "e6daede9421bc0c4e5c130c5aab0c3426ea82224a6cb886210ae6d664a824abc"
+    },
+    {
+      "behaviour_id": "RTNANA00:P900-CLOSE-FILES",
+      "status": "RESOLVED",
+      "unresolved_reasons": [],
+      "units": [
+        "RTNANA00"
+      ],
+      "external": [],
+      "undeclared": [],
+      "sha256": "c80a3cfc6f2e04e575230050fc637cad546300409de369e2c5e862d3f1e385c8"
+    }
+  ],
+  "open_decisions": [
+    {
+      "id": "DR-DB2CONN-002",
+      "blocking": true,
+      "question": "Copybook SQLCA (src/copybook/db2/SQLCA.cpy) includes itself (EXEC SQL INCLUDE SQLCA at line 6) and defines only SQL-STATUS-CODES, with no SQLCODE or SQLERRMC field; SQLCODE/SQLERRMC therefore have no Field ID in 14 DB2 programs, including HISTLD00, RTNANA00, RTNCDE00, DB2CMT and DB2CONN. Which SQLCA does the precompiler actually supply, and may the forward design assume the standard DB2 SQLCODE meaning (0 success, -803 duplicate key, negative values errors) used in these requirements?"
+    },
+    {
+      "id": "DR-F2-0005-009",
+      "blocking": false,
+      "question": "RTNANA00 and RTNCDE00 include SQLCA (a self-including copybook) inside a program 01 WS-DB2-AREA, so the copybook's 01 SQL-STATUS-CODES record is nested under another 01, and SQLCODE/SQLERRMC have no Field ID. Should the Java design model WS-DB2-AREA as the SQLCA copybook record (35 bytes) or replace it entirely with JDBC SQLException/SQLState handling?"
+    },
+    {
+      "id": "DR-F2-0005-011",
+      "blocking": false,
+      "question": "RTNANA00 FETCHes COUNT(*) results into numeric-edited fields WS-DTL-TOTAL/-SUCCESS/-WARNING/-ERROR/-SEVERE (PIC ZZZ,ZZ9) and then ADDs them into S9(8) COMP totals. Should Java fetch the counts as integers and format them for the report (treating the edited fields as output-only), or reproduce some other observed legacy result?"
+    },
+    {
+      "id": "DR-F2-0005-012",
+      "blocking": false,
+      "question": "Fifteen elementary level-01 items (e.g. HISTLD00 WS-COMMIT-THRESHOLD, the REPORT-RECORD print lines, DB2CONN WS-CONNECTION-STATE/WS-RETRY-COUNT/WS-MAX-RETRIES, DB2CMT WS-SAVEPOINT-ID) are catalogued as record-level items without Field IDs, so no Java type could be assigned. Should the reverse harness register Field IDs for them, or may later stages map them at record level using the catalogued PIC?"
+    },
+    {
+      "id": "DR-F2-0005-020",
+      "blocking": false,
+      "question": "RTNANA00 loops PERFORM ... UNTIL SQLCODE = 100 and ignores negative SQLCODEs from FETCH, so a persistent SQL error never ends the loop. Should Java stop with an error return code on a negative SQLCODE (behaviour change) or reproduce the legacy loop?"
+    },
+    {
+      "id": "DR-F2-0011-001",
+      "blocking": true,
+      "question": "Copybook SQLCA (SYS-PORTFOLIO-001-FIL-0017) line 6 contains 'EXEC SQL INCLUDE SQLCA END-EXEC', naming itself. The included SQL communication area (SQLCODE, SQLSTATE, SQLERRMC, ...) has no layout in any reverse artifact. How should the forward design obtain the SQLCA layout and the SQLCODE/SQLSTATE semantics used by the 14 DB2 programs?"
+    },
+    {
+      "id": "DR-RTNANA00-001",
+      "blocking": true,
+      "question": "BR-036 states: for each program row fetched successfully, the row's total, success, warning, error and severe counts are added to the matching grand totals. The FETCH (statement at line 170) loads numeric-edited fields (PIC ZZZ,ZZ9) that are then used as ADD operands, which is compiler-dependent. Confirm, correct or reject that the TOTALS line must equal the arithmetic sum of the per-program counts, and how the per-program counts are to be held."
+    },
+    {
+      "id": "DR-RTNANA00-002",
+      "blocking": false,
+      "question": "RTNANA00 uses 6 PERFORM ... THRU ranges and its fetch loop may not end on a persistent SQL error (statement at line 144). Must the forward implementation terminate the analysis on a persistent SQL error, and with which outcome?"
+    },
+    {
+      "id": "RVW-GAP-092",
+      "blocking": false,
+      "question": "GAP-092 (medium, DIAGRAM_RENDER_UNVERIFIED) is not addressed by any decision or requirement: Visual rendering of the 65 Mermaid diagrams is unverified. Acknowledge it as a known limitation (resolved_no_change) or exclude the affected units?"
+    },
+    {
+      "id": "RVW-GAP-104",
+      "blocking": false,
+      "question": "GAP-104 (low, DIAGRAM_INCOMPLETE) is not addressed by any decision or requirement: COMP-UNRESOLVED: all seven edges are unsupported. Acknowledge it as a known limitation (resolved_no_change) or exclude the affected units?"
+    }
+  ],
+  "authorisation": {
+    "generation_authorized": false,
+    "blockers": [
+      "config generation.java_generation_allowed is false (project authority)",
+      "no authorised orchestrator.java_target_dir",
+      "G4 is BLOCKED (needs signed G2, G3 and G4 approvals by trusted signers)",
+      "trust store: TRUST_NOT_CONFIGURED"
+    ],
+    "gates": {
+      "G0": "PASS",
+      "G1": "PASS",
+      "G2": "UNVERIFIED",
+      "G3": "BLOCKED",
+      "G4": "BLOCKED",
+      "G5": "BLOCKED",
+      "G6": "BLOCKED",
+      "G7": "BLOCKED",
+      "G8": "BLOCKED"
+    },
+    "trust": "TRUST_NOT_CONFIGURED",
+    "program_g2_scope": {
+      "readiness": "NOT_READY",
+      "blocking": 11,
+      "scope_sha256": "9cb48ae8d30e0fa8d8d691a63883ca6548ac45c37d695fffd7152296db928063"
+    },
+    "note": "Engineering gates never authorise generation. Java may be generated only when generation_authorized is true."
+  }
+}

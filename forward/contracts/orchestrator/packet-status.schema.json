@@ -1,0 +1,43 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://revforge.local/contracts/orchestrator/packet-status.schema.json",
+  "title": "Packet status review (runtime record)",
+  "description": "Classification of dispatch packets without an accepted receipt as superseded (every unit covered by a later accepted packet of the same agent) or still required. Written only by the runtime; packets and receipts are never modified.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["contract", "contract_version", "generated_at", "baseline_manifest_sha256", "rule", "packets", "summary"],
+  "properties": {
+    "contract": { "const": "packet-status" },
+    "contract_version": { "const": "1.0" },
+    "generated_at": { "type": "string", "format": "date-time" },
+    "baseline_manifest_sha256": { "$ref": "../common.schema.json#/definitions/sha256" },
+    "rule": { "type": "string" },
+    "packets": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["packet_id", "agent", "created_at", "packet_sha256", "dispatchable", "blockers", "covered_file_ids", "legacy_without_units", "covered_by", "uncovered_file_ids", "status", "justification"],
+        "properties": {
+          "packet_id": { "type": "string", "pattern": "^PKT-[0-9]{4}-F[1-7]$" },
+          "agent": { "type": "string" },
+          "created_at": { "type": "string" },
+          "packet_sha256": { "anyOf": [{ "$ref": "../common.schema.json#/definitions/sha256" }, { "type": "null" }] },
+          "dispatchable": { "type": "boolean" },
+          "blockers": { "type": "array", "items": { "type": "string" } },
+          "covered_file_ids": { "type": "array", "items": { "type": "string" } },
+          "legacy_without_units": { "type": "boolean" },
+          "covered_by": { "type": "array", "items": { "type": "object", "required": ["packet_id", "receipt_id"] } },
+          "uncovered_file_ids": { "type": "array", "items": { "type": "string" } },
+          "status": { "enum": ["superseded", "still_required"] },
+          "justification": { "type": "string", "minLength": 10 }
+        }
+      }
+    },
+    "summary": {
+      "type": "object",
+      "required": ["unreceipted", "superseded", "still_required"],
+      "additionalProperties": { "type": "integer", "minimum": 0 }
+    }
+  }
+}

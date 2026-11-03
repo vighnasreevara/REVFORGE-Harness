@@ -1,0 +1,74 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://revforge.local/contracts/forward/requirements.schema.json",
+  "title": "Draft forward requirements with rule coverage (F1, fe-source-grounded-requirements)",
+  "allOf": [{ "$ref": "forward-common.schema.json#/definitions/header" }],
+  "type": "object",
+  "required": ["contract", "requirements", "rule_coverage", "contradictions", "coverage_summary"],
+  "properties": {
+    "contract": { "const": "forward/requirements" },
+    "requirements": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["requirement_id", "title", "statement", "category", "status", "approval_status", "evidence_class", "evidence_status", "confidence", "requires_sme_review", "derived_from_rules", "source_refs", "units", "open_decisions"],
+        "properties": {
+          "requirement_id": { "$ref": "forward-common.schema.json#/definitions/requirementId" },
+          "title": { "type": "string", "minLength": 3 },
+          "statement": { "type": "string", "minLength": 10 },
+          "category": { "enum": ["VALIDATION", "CALCULATION", "ROUTING", "LIMIT_CHECK", "ERROR_HANDLING", "COMPLIANCE", "DATA", "INTERFACE", "PROCESSING"] },
+          "status": { "const": "draft" },
+          "approval_status": { "const": "not_approved" },
+          "evidence_class": { "$ref": "forward-common.schema.json#/definitions/evidenceClass" },
+          "evidence_status": { "$ref": "forward-common.schema.json#/definitions/evidenceStatus" },
+          "confidence": { "$ref": "forward-common.schema.json#/definitions/confidence" },
+          "requires_sme_review": { "type": "boolean" },
+          "derived_from_rules": { "type": "array", "items": { "$ref": "../common.schema.json#/definitions/runLocalRef" } },
+          "source_refs": { "type": "array", "minItems": 1, "items": { "$ref": "forward-common.schema.json#/definitions/sourceRef" } },
+          "units": { "type": "array", "minItems": 1, "items": { "$ref": "forward-common.schema.json#/definitions/unit" } },
+          "acceptance_hints": { "type": "array", "items": { "type": "string" } },
+          "open_decisions": { "type": "array", "items": { "$ref": "forward-common.schema.json#/definitions/decisionRequestId" } },
+          "gap_items": { "type": "array", "items": { "$ref": "forward-common.schema.json#/definitions/gapItemId" } },
+          "notes": { "type": "string" }
+        }
+      }
+    },
+    "rule_coverage": {
+      "description": "Every reverse rule in the packet scope must appear exactly once with a disposition; none may be silently discarded.",
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["rule", "disposition", "requirement_ids", "reason"],
+        "properties": {
+          "rule": { "$ref": "../common.schema.json#/definitions/runLocalRef" },
+          "disposition": { "enum": ["mapped", "deferred_scope", "deferred_decision", "not_a_requirement", "contradictory"] },
+          "requirement_ids": { "type": "array", "items": { "$ref": "forward-common.schema.json#/definitions/requirementId" } },
+          "decision_requests": { "type": "array", "items": { "$ref": "forward-common.schema.json#/definitions/decisionRequestId" } },
+          "reason": { "type": "string", "minLength": 3 }
+        }
+      }
+    },
+    "contradictions": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["contradiction_id", "description", "rule_refs", "source_refs"],
+        "properties": {
+          "contradiction_id": { "type": "string" },
+          "description": { "type": "string" },
+          "rule_refs": { "type": "array", "items": { "$ref": "../common.schema.json#/definitions/runLocalRef" } },
+          "source_refs": { "type": "array", "items": { "$ref": "forward-common.schema.json#/definitions/sourceRef" } },
+          "decision_request": { "$ref": "forward-common.schema.json#/definitions/decisionRequestId" }
+        }
+      }
+    },
+    "coverage_summary": {
+      "type": "object",
+      "required": ["rules_in_scope", "mapped", "deferred", "not_a_requirement", "contradictory", "requirements"],
+      "additionalProperties": { "type": "integer", "minimum": 0 }
+    }
+  }
+}

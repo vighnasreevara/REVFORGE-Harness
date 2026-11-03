@@ -1,0 +1,44 @@
+{
+ "program": "HISTLD00",
+ "provenance": "Written by a scenario-author agent (F6 independent fixture design) on 2026-11-02 from the COBOL source src/programs/batch/HISTLD00.cbl and its copybooks (src/copybook/common/HISTREC.cpy, src/copybook/batch/BCHCTL.cpy, src/copybook/db2/DBTBLS.cpy, src/copybook/db2/SQLCA.cpy, src/copybook/db2/DBPROC.cpy, src/copybook/common/ERRHAND.cpy, src/copybook/batch/BCHCON.cpy) under references/udara-legacy-modernization-harness, the fixture README, and only the gaps/inspection arrays of forward/generated/java/HISTLD00/pilot-result.json. No generated Java, source map or execution result was read or run.",
+ "scenarios": [
+  {
+   "id": "H01",
+   "title": "0000-MAIN -> 1000-INITIALIZE -> 1100-OPEN-FILES: the first statement OPEN INPUT TRANSACTION-HISTORY is a gap (RECORD KEY TH-KEY is not an item of HISTORY-RECORD)",
+   "cobol_lines": [
+    68,
+    81,
+    103
+   ],
+   "kind": "main",
+   "datasets": {
+    "TRANHIST": {
+     "records": [
+      "PORT000120240101120000000 1TRA"
+     ]
+    },
+    "BCHCTL": {
+     "records": [
+      "HISTLD00                    A"
+     ]
+    }
+   },
+   "expect": {
+    "outcome": "BLOCKED AT src/programs/batch/HISTLD00.cbl:103"
+   }
+  },
+  {
+   "id": "H02",
+   "title": "the block is at the OPEN itself, so it is reached even when no dataset is allocated (no file status 35 path is reachable first)",
+   "cobol_lines": [
+    68,
+    81,
+    103
+   ],
+   "kind": "main",
+   "expect": {
+    "outcome": "BLOCKED AT src/programs/batch/HISTLD00.cbl:103"
+   }
+  }
+ ]
+}

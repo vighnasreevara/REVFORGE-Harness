@@ -1,0 +1,300 @@
+{
+  "exported_copy_of": "workflow/step45/remediation-proposals-0004.json",
+  "sealed_sha256": "d0406661f363308c4913b702b36b34063005a35dfb1cbc2771dc6f340d24e50b",
+  "record_id": "remediation-proposals-0004",
+  "contract": "remediation-proposals",
+  "contract_version": "1.0",
+  "generated_at": "2026-10-31T21:57:29.663Z",
+  "baseline_manifest_sha256": "352b97f0bbcbdb149c1118791aaabaa2e8e9972716bc77adc3a2f0644d24a068",
+  "rule": "Proposals are evidence-backed suggestions. None is applied or authorised here; each needs a signed resolution and a validated versioned correction. Originals, receipts, previous corrections and earlier proposals are never modified.",
+  "previous_record": "remediation-proposals-0003",
+  "summary": {
+    "proposals": 2,
+    "by_kind": {
+      "citation_correction": 2
+    },
+    "new": 0,
+    "changed": 0,
+    "unchanged": 2,
+    "authorized": 0
+  },
+  "proposals": [
+    {
+      "proposal_id": "RP-09cd2b5251",
+      "proposal_key": "forward/runs/FWD-20261031T172520Z-66b3/workflow/agents/F1/PKT-0002-F1/draft_requirements.json#/requirements/6/source_refs/2/line",
+      "kind": "citation_correction",
+      "root_cause_id": "RC-CIT-0b8852d395",
+      "status": "proposed",
+      "target": {
+        "document": "forward/runs/FWD-20261031T172520Z-66b3/workflow/agents/F1/PKT-0002-F1/draft_requirements.json",
+        "read_from": "forward/runs/FWD-20261031T172520Z-66b3/workflow/agents/F1/PKT-0002-F1/draft_requirements.json",
+        "document_sha256": "fb8558db729aa645d0bc22be2317d7bcc93633072d08da95442e6f0abc555e54",
+        "pointer": "/requirements/6/source_refs/2/line",
+        "item_kind": "requirement",
+        "item_id": "REQ-PRCSEQ00-002",
+        "item_sha256": "2bbd0a9001a9ea4002cc71e53d5fedccb590976f432f7b7d26860649d38a4978"
+      },
+      "original_finding": {
+        "item": "REQ-PRCSEQ00-002",
+        "version_sha256": "2bbd0a9001a9ea4002cc71e53d5fedccb590976f432f7b7d26860649d38a4978",
+        "citation": {
+          "statement_id": "SYS-PORTFOLIO-001-FIL-0046-STMT-000027",
+          "line": 180
+        },
+        "claim": "On an 'INIT' request the system opens the process-sequence and batch-control files for update, clears the in-memory sequence table and process count, and positions the process-sequence file at the first key greater than or equal to the requested process date ('No sequence found for date' is reported if none). It then reads every following process definition; when a definition's type (PSR-TYPE) equals the sequence type requested by the caller (LS-SEQUENCE-TYPE), it adds 1 to the process count and appends the process ID with sequence number equal to that count and status READY ('R'); otherwise the definition is skipped. No check is made against the 100-entry table limit. For each table entry it then writes one batch-control record with the process ID as job name, the requested process date, the sequence number and status READY ('Error creating control record' is reported on a write failure)."
+      },
+      "original_value": 180,
+      "proposed_value": 181,
+      "alternatives": [
+        {
+          "field": "line",
+          "value": 181,
+          "literal_support": 1,
+          "statement_range": [
+            181,
+            181
+          ]
+        }
+      ],
+      "original_evidence": {
+        "claim_check": {
+          "result": "contradicted",
+          "reasons": [
+            "cited line 180 is outside SYS-PORTFOLIO-001-FIL-0046-STMT-000027 (lines 181-181)"
+          ]
+        }
+      },
+      "new_evidence": {
+        "citation_analysis": {
+          "item": "REQ-PRCSEQ00-002",
+          "ref_index": 2,
+          "original": {
+            "statement_id": "SYS-PORTFOLIO-001-FIL-0046-STMT-000027",
+            "line": 180
+          },
+          "proposed": {
+            "field": "line",
+            "value": 181
+          },
+          "alternatives": [
+            {
+              "field": "line",
+              "value": 181,
+              "literal_support": 1,
+              "statement_range": [
+                181,
+                181
+              ]
+            }
+          ],
+          "literals": [
+            "INIT",
+            "NO SEQUENCE FOUND FOR DATE",
+            "R",
+            "ERROR CREATING CONTROL RECORD"
+          ],
+          "status": "SOURCE_CITATION_CORRECTED",
+          "claim_supported_after_correction": false,
+          "reasons": [
+            "1/4 stated value(s) occur at line=181 (lines 181-181)"
+          ]
+        }
+      },
+      "deterministic_checks": [
+        {
+          "id": "citation",
+          "status": "SOURCE_CITATION_CORRECTED",
+          "detail": "1/4 stated value(s) occur at line=181 (lines 181-181) -> propose line=181 (not every stated value occurs there)"
+        }
+      ],
+      "source_hashes": [
+        {
+          "path": "src/copybook/batch/BCHCON.cpy",
+          "sha256": "374943d4a21510f06a1b52b40497db2e597136688323576e03f8d79c09675e7b"
+        },
+        {
+          "path": "src/copybook/batch/BCHCTL.cpy",
+          "sha256": "d075c66c44896fcb2fda7c1b53c5cff5298791810b631d7768ada636a4aa65b4"
+        },
+        {
+          "path": "src/copybook/batch/PRCSEQ.cpy",
+          "sha256": "f9cd772e7a236ce88aa39ac92514a31a91bc1db064e20493e1c3387618aff528"
+        },
+        {
+          "path": "src/copybook/common/ERRHAND.cpy",
+          "sha256": "c129b21fe77062f205ca6fb76f227f798549cd13bc231d169fa3a34a9b181442"
+        },
+        {
+          "path": "src/programs/batch/PRCSEQ00.cbl",
+          "sha256": "bf37a5d7a464a4e51ef9379a99761a44ec683d4521ef966fedf58e19f3deb5b3"
+        }
+      ],
+      "reason": "The cited line lies outside the cited statement; the stated values occur at line=181. Not every stated value occurs there: the requirement text itself still needs review.",
+      "affected_requirements": [
+        "REQ-PRCSEQ00-002"
+      ],
+      "affected_decisions": [
+        "DR-PRCSEQ00-002",
+        "DR-PRCSEQ00-003",
+        "DR-PRCSEQ00-004",
+        "RVW-REQ-PRCSEQ00-002"
+      ],
+      "required_role": [
+        "business_sme"
+      ],
+      "authorization": {
+        "status": "not_authorized",
+        "requires": "a signed resolution of RVW-REQ-PRCSEQ00-002 with outcome resolved_requires_update by business_sme, then a validated versioned correction (a line-number correction kind does not exist yet; it needs a later step or a re-delivery)"
+      },
+      "invalidation_impact": {
+        "item_hash_changes": true,
+        "scopes": [
+          "application",
+          "programs:PRCSEQ00",
+          "requirements:REQ-PRCSEQ00-002"
+        ],
+        "note": "Applying the correction changes the item hash, which changes these scope digests and invalidates any approval of them."
+      },
+      "version": 1,
+      "content_sha256": "8802b064dd15f8221c6df53a82ee17728fc091da0523894e94c912dcc0ba2be7",
+      "previous_version": {
+        "record": "remediation-proposals-0003",
+        "version": 1,
+        "unchanged": true
+      }
+    },
+    {
+      "proposal_id": "RP-8d2dd33787",
+      "proposal_key": "forward/runs/FWD-20261031T172520Z-66b3/workflow/agents/F1/PKT-0002-F1/draft_requirements.json#/requirements/26/source_refs/0/line",
+      "kind": "citation_correction",
+      "root_cause_id": "RC-CIT-fd279b78dd",
+      "status": "proposed",
+      "target": {
+        "document": "forward/runs/FWD-20261031T172520Z-66b3/workflow/agents/F1/PKT-0002-F1/draft_requirements.json",
+        "read_from": "forward/runs/FWD-20261031T172520Z-66b3/workflow/agents/F1/PKT-0002-F1/draft_requirements.json",
+        "document_sha256": "fb8558db729aa645d0bc22be2317d7bcc93633072d08da95442e6f0abc555e54",
+        "pointer": "/requirements/26/source_refs/0/line",
+        "item_kind": "requirement",
+        "item_id": "REQ-RTNCDE00-004",
+        "item_sha256": "0ac2f6b674b57cdeceab63b1845884a51dc70e50d0eccdbaf9ab57f1a5292269"
+      },
+      "original_finding": {
+        "item": "REQ-RTNCDE00-004",
+        "version_sha256": "0ac2f6b674b57cdeceab63b1845884a51dc70e50d0eccdbaf9ab57f1a5292269",
+        "citation": {
+          "statement_id": "SYS-PORTFOLIO-001-FIL-0052-STMT-000024",
+          "line": 121
+        },
+        "claim": "On an analyse request ('A') the system counts the logged return codes in RTNCODES for the requested program ID whose timestamp is greater than or equal to the caller's start time and less than or equal to the caller's end time, and returns the count, the highest (MAX) and the lowest (MIN) logged return code. The response code is 0 when the query succeeds (SQLCODE 0) and 8 otherwise."
+      },
+      "original_value": 121,
+      "proposed_value": 122,
+      "alternatives": [
+        {
+          "field": "line",
+          "value": 122,
+          "literal_support": 1,
+          "statement_range": [
+            122,
+            133
+          ]
+        }
+      ],
+      "original_evidence": {
+        "claim_check": {
+          "result": "contradicted",
+          "reasons": [
+            "cited line 121 is outside SYS-PORTFOLIO-001-FIL-0052-STMT-000024 (lines 122-133)"
+          ]
+        }
+      },
+      "new_evidence": {
+        "citation_analysis": {
+          "item": "REQ-RTNCDE00-004",
+          "ref_index": 0,
+          "original": {
+            "statement_id": "SYS-PORTFOLIO-001-FIL-0052-STMT-000024",
+            "line": 121
+          },
+          "proposed": {
+            "field": "line",
+            "value": 122
+          },
+          "alternatives": [
+            {
+              "field": "line",
+              "value": 122,
+              "literal_support": 1,
+              "statement_range": [
+                122,
+                133
+              ]
+            }
+          ],
+          "literals": [
+            "A"
+          ],
+          "status": "SOURCE_CITATION_CORRECTED",
+          "claim_supported_after_correction": true,
+          "reasons": [
+            "1/1 stated value(s) occur at line=122 (lines 122-133)"
+          ]
+        }
+      },
+      "deterministic_checks": [
+        {
+          "id": "citation",
+          "status": "SOURCE_CITATION_CORRECTED",
+          "detail": "1/1 stated value(s) occur at line=122 (lines 122-133) -> propose line=122"
+        }
+      ],
+      "source_hashes": [
+        {
+          "path": "src/copybook/common/RTNCODE.cpy",
+          "sha256": "27eabb519319258b07b32f09ab60e80a18f6658a118e96c8fa01411fc473cbc9"
+        },
+        {
+          "path": "src/copybook/db2/SQLCA.cpy",
+          "sha256": "03e8f64ae705fe87324100488072c05d179fb75f64db0dc0cf753f23ab10afc7"
+        },
+        {
+          "path": "src/programs/batch/RTNCDE00.cbl",
+          "sha256": "7cb951ea1f418c19ddd61c0eca00f21108af5f364b5ecf05742cbc428862994e"
+        }
+      ],
+      "reason": "The cited line lies outside the cited statement; the stated values occur at line=122.",
+      "affected_requirements": [
+        "REQ-RTNCDE00-004"
+      ],
+      "affected_decisions": [
+        "DR-DB2CONN-002",
+        "DR-RTNCDE00-001",
+        "RVW-REQ-RTNCDE00-004"
+      ],
+      "required_role": [
+        "business_sme"
+      ],
+      "authorization": {
+        "status": "not_authorized",
+        "requires": "a signed resolution of RVW-REQ-RTNCDE00-004 with outcome resolved_requires_update by business_sme, then a validated versioned correction (a line-number correction kind does not exist yet; it needs a later step or a re-delivery)"
+      },
+      "invalidation_impact": {
+        "item_hash_changes": true,
+        "scopes": [
+          "application",
+          "programs:RTNCDE00",
+          "requirements:REQ-RTNCDE00-004"
+        ],
+        "note": "Applying the correction changes the item hash, which changes these scope digests and invalidates any approval of them."
+      },
+      "version": 1,
+      "content_sha256": "7980e836a8f8f2fcb250666bcdd408b6cdcad62b8fa915356c1e45568d02fd85",
+      "previous_version": {
+        "record": "remediation-proposals-0003",
+        "version": 1,
+        "unchanged": true
+      }
+    }
+  ],
+  "analysis_inputs_sha256": "4d86cc22753e0d3767927ff1b935ca3cc23019951fe6e2636ca7f7344ca4d2d3"
+}

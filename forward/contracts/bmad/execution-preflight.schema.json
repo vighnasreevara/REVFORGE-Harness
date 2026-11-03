@@ -1,0 +1,225 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://revforge.local/contracts/bmad/execution-preflight.schema.json",
+  "title": "Sealed BMad execution preflight (every check; never launches)",
+  "type": "object",
+  "properties": {
+    "contract": {
+      "const": "bmad/execution-preflight"
+    },
+    "contract_version": {
+      "const": "1.0"
+    },
+    "evaluated_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "binding_id": {
+      "type": "string",
+      "pattern": "^BMAD-[A-Z]+$"
+    },
+    "workflow_id": {
+      "type": "string",
+      "pattern": "^bmad-[a-z0-9-]+$"
+    },
+    "agent": {
+      "type": "string",
+      "minLength": 1
+    },
+    "scope": {
+      "type": "string",
+      "minLength": 1
+    },
+    "scope_sha256": {
+      "anyOf": [
+        {
+          "$ref": "../common.schema.json#/definitions/sha256"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "baseline_manifest_sha256": {
+      "$ref": "../common.schema.json#/definitions/sha256"
+    },
+    "provider": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "minLength": 1
+        },
+        "service": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "required": [
+        "name",
+        "service"
+      ],
+      "additionalProperties": false
+    },
+    "authorization_id": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "exposure": {
+      "type": "object",
+      "properties": {
+        "authorized_files": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "would_expose": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "unauthorized": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      },
+      "required": [
+        "authorized_files",
+        "would_expose",
+        "unauthorized"
+      ],
+      "additionalProperties": false
+    },
+    "launch_boundary": {
+      "type": "object",
+      "properties": {
+        "network_enforcement": {
+          "type": "boolean"
+        },
+        "filesystem_isolation": {
+          "type": "boolean"
+        },
+        "enforceable": {
+          "type": "boolean"
+        },
+        "controls": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "gaps": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "network_default_deny": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "network_enforcement",
+        "filesystem_isolation",
+        "enforceable",
+        "controls",
+        "gaps",
+        "network_default_deny"
+      ],
+      "additionalProperties": false
+    },
+    "checks": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "ok": {
+            "type": "boolean"
+          },
+          "detail": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "required": [
+          "id",
+          "ok",
+          "detail"
+        ],
+        "additionalProperties": false
+      },
+      "minItems": 12
+    },
+    "launch_permitted": {
+      "type": "boolean"
+    },
+    "refusal_reasons": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "isolation": {
+      "type": "object",
+      "required": [
+        "tested",
+        "problems"
+      ],
+      "properties": {
+        "tested": {
+          "type": "boolean"
+        },
+        "problems": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "execution_status": {
+      "enum": [
+        "EXECUTION_AUTHORIZED",
+        "EXECUTION_BLOCKED",
+        "EXECUTION_UNSUPPORTED"
+      ]
+    }
+  },
+  "required": [
+    "contract",
+    "contract_version",
+    "evaluated_at",
+    "binding_id",
+    "workflow_id",
+    "agent",
+    "scope",
+    "scope_sha256",
+    "baseline_manifest_sha256",
+    "provider",
+    "authorization_id",
+    "exposure",
+    "launch_boundary",
+    "checks",
+    "launch_permitted",
+    "refusal_reasons",
+    "isolation",
+    "execution_status"
+  ],
+  "additionalProperties": false
+}

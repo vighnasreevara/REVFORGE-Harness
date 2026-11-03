@@ -1,0 +1,269 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://revforge.local/contracts/bmad/release-pin.schema.json",
+  "title": "Pinned, integrity-verified BMad release staged for the forward harness",
+  "description": "The release is pinned by version, tarball hashes and the sha256 of every extracted file. Install-time lifecycle scripts must be absent.",
+  "type": "object",
+  "properties": {
+    "contract": {
+      "const": "bmad/release-pin"
+    },
+    "contract_version": {
+      "const": "1.0"
+    },
+    "package": {
+      "const": "bmad-method"
+    },
+    "version": {
+      "type": "string",
+      "pattern": "^6\\.12\\.[0-9]+$"
+    },
+    "channel": {
+      "const": "stable"
+    },
+    "release_line": {
+      "const": "6.12"
+    },
+    "published_at": {
+      "type": "string",
+      "minLength": 1
+    },
+    "selected_because": {
+      "type": "string",
+      "minLength": 1
+    },
+    "staged_at": {
+      "type": "string",
+      "minLength": 1
+    },
+    "staging_method": {
+      "type": "string",
+      "minLength": 1
+    },
+    "registry": {
+      "type": "string",
+      "minLength": 1
+    },
+    "tarball_url": {
+      "type": "string",
+      "minLength": 1
+    },
+    "repository": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "license": {
+      "const": "MIT"
+    },
+    "license_file_sha256": {
+      "$ref": "../common.schema.json#/definitions/sha256"
+    },
+    "author": {
+      "type": "string",
+      "minLength": 1
+    },
+    "tarball": {
+      "type": "object",
+      "properties": {
+        "file": {
+          "type": "string",
+          "minLength": 1
+        },
+        "bytes": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "sha256": {
+          "$ref": "../common.schema.json#/definitions/sha256"
+        },
+        "sha1": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{40}$"
+        },
+        "integrity": {
+          "type": "string",
+          "pattern": "^sha512-"
+        },
+        "registry_integrity_verified": {
+          "type": "boolean"
+        },
+        "registry_shasum_verified": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "file",
+        "bytes",
+        "sha256",
+        "sha1",
+        "integrity",
+        "registry_integrity_verified",
+        "registry_shasum_verified"
+      ],
+      "additionalProperties": false
+    },
+    "extracted": {
+      "type": "object",
+      "properties": {
+        "dir": {
+          "type": "string",
+          "minLength": 1
+        },
+        "files": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "digest_rule": {
+          "type": "string",
+          "minLength": 1
+        },
+        "directory_sha256": {
+          "$ref": "../common.schema.json#/definitions/sha256"
+        }
+      },
+      "required": [
+        "dir",
+        "files",
+        "digest_rule",
+        "directory_sha256"
+      ],
+      "additionalProperties": false
+    },
+    "node": {
+      "type": "object",
+      "properties": {
+        "engines": {
+          "type": "string",
+          "minLength": 1
+        },
+        "bin": {
+          "type": "object"
+        },
+        "dependencies": {
+          "type": "object"
+        },
+        "lifecycle_scripts": {
+          "type": "object",
+          "maxProperties": 0
+        },
+        "development_only_scripts": {
+          "type": "object"
+        },
+        "development_only_note": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "required": [
+        "engines",
+        "bin",
+        "dependencies",
+        "lifecycle_scripts",
+        "development_only_scripts",
+        "development_only_note"
+      ],
+      "additionalProperties": false
+    },
+    "python": {
+      "type": "object",
+      "properties": {
+        "required_by": {
+          "type": "string",
+          "minLength": 1
+        },
+        "requires_python": {
+          "type": "string",
+          "minLength": 1
+        },
+        "runner": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "required": [
+        "required_by",
+        "requires_python",
+        "runner"
+      ],
+      "additionalProperties": false
+    },
+    "installer": {
+      "type": "object",
+      "properties": {
+        "command": {
+          "type": "string",
+          "minLength": 1
+        },
+        "flags_verified": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "claude_code_target": {
+          "type": "object"
+        },
+        "writes": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "executed": {
+          "type": "boolean"
+        },
+        "reason_not_executed": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      },
+      "required": [
+        "command",
+        "flags_verified",
+        "claude_code_target",
+        "writes",
+        "executed",
+        "reason_not_executed"
+      ],
+      "additionalProperties": false
+    },
+    "files": {
+      "type": "object",
+      "minProperties": 1,
+      "additionalProperties": {
+        "$ref": "../common.schema.json#/definitions/sha256"
+      }
+    }
+  },
+  "required": [
+    "contract",
+    "contract_version",
+    "package",
+    "version",
+    "channel",
+    "release_line",
+    "published_at",
+    "selected_because",
+    "staged_at",
+    "staging_method",
+    "registry",
+    "tarball_url",
+    "repository",
+    "license",
+    "license_file_sha256",
+    "author",
+    "tarball",
+    "extracted",
+    "node",
+    "python",
+    "installer",
+    "files"
+  ],
+  "additionalProperties": false
+}

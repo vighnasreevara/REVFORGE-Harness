@@ -1,0 +1,40 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://revforge.local/contracts/orchestrator/gate-result.schema.json",
+  "title": "Gate evaluation result, written by the runtime",
+  "type": "object",
+  "required": ["contract", "gate", "name", "status", "reason", "evaluated_at", "evaluator", "baseline", "inputs", "checks", "limitations"],
+  "properties": {
+    "contract": { "const": "gate-result" },
+    "gate": { "enum": ["G0", "G1", "G2", "G3", "G4", "G5", "G6", "G7", "G8"] },
+    "status": { "enum": ["PASS", "FAIL", "BLOCKED", "NOT_RUN", "UNVERIFIED"] },
+    "reason": { "type": "string", "minLength": 1 },
+    "evaluated_at": { "type": "string", "format": "date-time" },
+    "evaluator": { "enum": ["implemented", "fail_closed"] },
+    "baseline": {
+      "type": "object",
+      "required": ["run_id", "manifest_sha256"],
+      "properties": { "manifest_sha256": { "$ref": "../common.schema.json#/definitions/sha256" } }
+    },
+    "inputs": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "type": "object", "required": ["kind", "ref", "sha256"] }
+    },
+    "checks": {
+      "type": "array",
+      "items": { "type": "object", "required": ["id", "status", "detail"], "properties": { "status": { "enum": ["pass", "fail", "warn", "info"] } } }
+    },
+    "limitations": { "type": "array", "items": { "type": "string" } }
+  },
+  "allOf": [
+    {
+      "if": { "properties": { "evaluator": { "const": "fail_closed" } } },
+      "then": { "properties": { "status": { "not": { "const": "PASS" } } } }
+    },
+    {
+      "if": { "properties": { "status": { "const": "PASS" } } },
+      "then": { "properties": { "checks": { "minItems": 1, "items": { "properties": { "status": { "not": { "const": "fail" } } } } } } }
+    }
+  ]
+}

@@ -1,0 +1,94 @@
+{
+ "program": "FILEHNDL",
+ "provenance": "Written 2026-11-02 by a scenario-author agent (F6 independent fixture design) from the COBOL source src/templates/program/file-handling.cbl and the gaps array of forward/generated/java/FILEHNDL/pilot-result.json only; no generated Java, source map or test result was read. DISPLAY lines are given right-trimmed.",
+ "scenarios": [
+  {
+   "id": "S01",
+   "title": "all three files allocated: opens succeed, 2000-PROCESS is an empty paragraph (2100/2200/2300 are separate paragraphs, never performed), closes succeed, RETURN-CODE 0, OUTFILE empty",
+   "cobol_lines": [
+    91,
+    92,
+    93,
+    94,
+    100,
+    102,
+    103,
+    104,
+    106,
+    109,
+    152,
+    153,
+    154,
+    156,
+    163,
+    167,
+    171
+   ],
+   "kind": "main",
+   "datasets": {
+    "VSAMFILE": {
+     "records": [
+      "KEY0000001SAMPLE VSAM DATA"
+     ]
+    },
+    "INFILE": {
+     "records": []
+    }
+   },
+   "outputs": [
+    "OUTFILE"
+   ],
+   "expect": {
+    "outcome": "END",
+    "return_code": 0,
+    "display": [],
+    "datasets": {
+     "OUTFILE": []
+    },
+    "items": {
+     "WS-VSAM-STATUS": "00",
+     "WS-INPUT-STATUS": "00",
+     "WS-OUTPUT-STATUS": "00",
+     "VSAM-SUCCESS": true,
+     "INPUT-SUCCESS": true,
+     "OUTPUT-SUCCESS": true
+    }
+   }
+  },
+  {
+   "id": "S02",
+   "title": "input records present: still never read (no READ is reachable), nothing written; the gaps at lines 122 and 144 are not reached",
+   "cobol_lines": [
+    92,
+    109,
+    113
+   ],
+   "kind": "main",
+   "datasets": {
+    "VSAMFILE": {
+     "records": [
+      "KEY0000001SAMPLE VSAM DATA",
+      "KEY0000002SECOND"
+     ]
+    },
+    "INFILE": {
+     "records": [
+      "INPUT RECORD 1",
+      "INPUT RECORD 2"
+     ]
+    }
+   },
+   "outputs": [
+    "OUTFILE"
+   ],
+   "expect": {
+    "outcome": "END",
+    "return_code": 0,
+    "display": [],
+    "datasets": {
+     "OUTFILE": []
+    }
+   }
+  }
+ ]
+}

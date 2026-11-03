@@ -1,0 +1,64 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://revforge.local/contracts/bmad/mapping-spec.schema.json",
+  "title": "Versioned REVFORGE to BMad input mapping",
+  "type": "object",
+  "properties": {
+    "contract": {
+      "const": "bmad/mapping-spec"
+    },
+    "contract_version": {
+      "const": "1.0"
+    },
+    "mapping_version": {
+      "type": "string",
+      "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$"
+    },
+    "principles": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "minItems": 1
+    },
+    "inputs": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "name": {
+              "type": "string",
+              "minLength": 1
+            },
+            "from": {
+              "type": "string",
+              "minLength": 1
+            },
+            "bmad_input": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          "required": [
+            "name",
+            "from",
+            "bmad_input"
+          ],
+          "additionalProperties": false
+        },
+        "minItems": 1
+      }
+    }
+  },
+  "required": [
+    "contract",
+    "contract_version",
+    "mapping_version",
+    "principles",
+    "inputs"
+  ],
+  "additionalProperties": false
+}

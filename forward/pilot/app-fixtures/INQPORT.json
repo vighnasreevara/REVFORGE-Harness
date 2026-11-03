@@ -1,0 +1,34 @@
+{
+ "program": "INQPORT",
+ "provenance": "Written 2026-11-02 by a scenario-author agent (F6 independent fixture design) from the COBOL source under references/udara-legacy-modernization-harness/src/ and its copybooks, plus only the 'gaps' array of pilot-result.json for gap line numbers. No generated Java, source map or test result was read or run.",
+ "scenarios": [
+  {
+   "id": "Q01",
+   "title": "P100-INIT-PROGRAM first moves LOW-VALUES to WS-POSITION-RECORD, a group whose only content is a nested 01 copybook record, so it has no layout (gap) before any CICS call",
+   "cobol_lines": [
+    41,
+    57,
+    58
+   ],
+   "kind": "main",
+   "expect": {
+    "outcome": "BLOCKED AT src/programs/online/INQPORT.cbl:58"
+   }
+  },
+  {
+   "id": "Q02",
+   "title": "input on SYSIN changes nothing: no statement before the gap reads input",
+   "cobol_lines": [
+    41,
+    58
+   ],
+   "kind": "main",
+   "sysin": [
+    "INQP1234567890"
+   ],
+   "expect": {
+    "outcome": "BLOCKED AT src/programs/online/INQPORT.cbl:58"
+   }
+  }
+ ]
+}

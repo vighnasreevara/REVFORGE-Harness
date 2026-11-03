@@ -1,0 +1,140 @@
+{
+ "contract": "step-21/environment-readiness",
+ "host": {
+  "platform": "win32 x64",
+  "release": "10.0.26200",
+  "os": "Microsoft Windows 11 Home",
+  "hypervisor_present": true
+ },
+ "wsl": {
+  "available": true,
+  "distro": "Ubuntu",
+  "version": 2,
+  "kernel": "6.6.87.2-microsoft-standard-WSL2",
+  "os": "Ubuntu 24.04.4 LTS"
+ },
+ "host_tools": {
+  "node": "v22.12.0 (forward runtime toolchain, outside any boundary)",
+  "claude_code_cli": "2.1.302 on the host, outside any boundary",
+  "docker_desktop": {
+   "available": true,
+   "detail": "Docker version 29.9.2, build a82e528"
+  }
+ },
+ "inside_wsl2": {
+  "linux_node": {
+   "available": false,
+   "detail": "not installed"
+  },
+  "linux_claude": {
+   "available": false,
+   "detail": "not installed"
+  },
+  "linux_bwrap": {
+   "available": false,
+   "detail": "not installed"
+  },
+  "linux_socat": {
+   "available": false,
+   "detail": "not installed"
+  },
+  "linux_unshare": {
+   "available": true,
+   "detail": "/usr/bin/unshare"
+  },
+  "linux_setpriv": {
+   "available": true,
+   "detail": "/usr/bin/setpriv"
+  },
+  "unprivileged_user_namespaces": {
+   "available": true,
+   "detail": "user + mount + net + pid namespaces can be created without privileges"
+  },
+  "passwordless_sudo": {
+   "available": false,
+   "detail": "sudo needs a password: installing packages or creating a dedicated user is an administrator action"
+  }
+ },
+ "isolation_status": "ISOLATION_CONFIGURED",
+ "isolation_tested": true,
+ "isolation_problems": [],
+ "boundaries": [
+  {
+   "boundary": "whole_process_filesystem",
+   "enforceable": true,
+   "how": "sandbox.sh: mount namespace + pivot_root into a minimal root; old root (Windows drives, home, /run) detached",
+   "limits": "shares the WSL2 kernel with the host distribution; not a VM boundary"
+  },
+  {
+   "boundary": "source_read_only",
+   "enforceable": true,
+   "how": "bind mount remounted read-only",
+   "limits": "none known"
+  },
+  {
+   "boundary": "single_writable_output",
+   "enforceable": true,
+   "how": "only /work/out is a writable host bind; root and /usr read-only; /tmp private tmpfs",
+   "limits": "/tmp is writable but private and discarded"
+  },
+  {
+   "boundary": "network_default_deny",
+   "enforceable": true,
+   "how": "new network namespace with no interfaces configured",
+   "limits": "all-or-nothing: there is no egress path at all"
+  },
+  {
+   "boundary": "provider_egress_allowlist",
+   "enforceable": false,
+   "how": "would need an egress proxy outside the namespace (e.g. sandbox-runtime with socat, or a firewall in a container/VM)",
+   "limits": "not installed; a hostname allowlist would still not inspect TLS payloads"
+  },
+  {
+   "boundary": "payload_content_enforcement",
+   "enforceable": false,
+   "how": "none: TLS to the provider is end-to-end",
+   "limits": "only the minimal workspace limits what can be disclosed"
+  },
+  {
+   "boundary": "privilege_drop",
+   "enforceable": true,
+   "how": "setpriv: no capabilities (bounding/inheritable/ambient), no_new_privs",
+   "limits": "none known"
+  },
+  {
+   "boundary": "host_control_sockets",
+   "enforceable": true,
+   "how": "no /run, no docker socket, no WSL interop socket inside the new root",
+   "limits": "none known"
+  },
+  {
+   "boundary": "claude_code_inside_boundary",
+   "enforceable": false,
+   "how": "Claude Code (Node) must be installed inside the Linux environment that the sandbox exposes",
+   "limits": "Claude Code and Node are not installed in the WSL2 distribution"
+  }
+ ],
+ "admin_actions_required": [
+  "install Node.js and Claude Code inside the WSL2 distribution (under /usr or another path the sandbox exposes read-only), pinned to an approved version",
+  "optional: install bubblewrap and socat (sudo) to use the official Claude Code sandbox runtime as an additional layer and its hostname-allowlist proxy",
+  "provide a verified provider-egress component (allowlist proxy outside the namespace) before any LIVE run; without it the boundary has no network at all",
+  "administrator: optionally create a dedicated non-login user for AI execution (needs sudo)"
+ ],
+ "credential_handling": "no credential is placed in the boundary (tested: host_secrets_excluded); a provider credential for a LIVE run must be injected only into the runner process by the administrator, never written to the workspace or the repository",
+ "network_requirements": "default-deny inside the namespace (tested); a LIVE run needs a separately verified egress component outside the namespace that allows only the authorised provider endpoint host from the disclosure authorization (api.anthropic.com for claude-code-cli); TLS remains end-to-end, so the minimal workspace is what limits disclosure",
+ "setup_instructions": [
+  "administrator, inside the WSL2 Ubuntu distribution: install a pinned Node.js (the host uses v22.12.0) under /usr/local, which the sandbox exposes read-only",
+  "administrator: install the pinned Claude Code CLI in the same prefix (npm install -g @anthropic-ai/claude-code@2.1.302 --prefix /usr/local), matching the version the executor manifest was investigated with",
+  "administrator: provide and verify a provider-egress allowlist component outside the namespace (for example the official sandbox runtime with bubblewrap and socat, or a container/VM firewall); Docker Desktop 29.9.2 is present on the host but is not configured or tested as a boundary",
+  "operator: re-run `bmad isolation test --record` (the recorded offline report expires after 7 days) and `bmad isolation doctor`; runner_inside_boundary must become available",
+  "operator: `bmad executor doctor` must report LIVE prerequisites only for authorization and live_requested; then `bmad executor preflight --workflow bmad-prd --scope programs:PORTREAD --no-record`"
+ ],
+ "diagnostics": [
+  "bmad isolation doctor",
+  "bmad executor doctor",
+  "provider authorization doctor",
+  "bmad executor preflight --workflow W --scope programs:PORTREAD --no-record",
+  "bmad governance --scope programs:PORTREAD"
+ ],
+ "installed_in_step21": "nothing (installation inside WSL2 needs an administrator password; no network route was created)"
+}

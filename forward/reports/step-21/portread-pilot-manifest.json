@@ -1,0 +1,120 @@
+{
+ "contract": "step-21/portread-pilot-manifest",
+ "scope": "programs:PORTREAD",
+ "scope_sha256": "c6b1864a61d126f8f09c5b2e5aace229df1da15dc8314fa0d07f16a756a6178f",
+ "source": {
+  "path": "src/programs/portfolio/PORTREAD.cbl",
+  "sha256": "1e90eef73115c6065dfeee8ca7a0ad8cff96a22cfa50789c62baec4ec22b5aa1"
+ },
+ "copybooks": [
+  {
+   "path": "src/copybook/common/PORTFLIO.cpy",
+   "sha256": "030f0a0fb30654f6c4fd367bcab35b03953687f8b2a7b4df3caeffc0c26d71ce"
+  }
+ ],
+ "disclosure_files": [
+  {
+   "file_id": "SYS-PORTFOLIO-001-FIL-0009",
+   "path": "src/copybook/common/PORTFLIO.cpy",
+   "sha256": "030f0a0fb30654f6c4fd367bcab35b03953687f8b2a7b4df3caeffc0c26d71ce"
+  },
+  {
+   "file_id": "SYS-PORTFOLIO-001-FIL-0070",
+   "path": "src/programs/portfolio/PORTREAD.cbl",
+   "sha256": "1e90eef73115c6065dfeee8ca7a0ad8cff96a22cfa50789c62baec4ec22b5aa1"
+  }
+ ],
+ "reverse_references": {
+  "business_rules": [
+   {
+    "rule": "BR-099",
+    "name": "Calculate portfolio listing record count per record read",
+    "status": "IMPLEMENTED_VERIFIED"
+   },
+   {
+    "rule": "BR-100",
+    "name": "Report total portfolio records listed at termination",
+    "status": "IMPLEMENTED_VERIFIED"
+   }
+  ],
+  "reverse_gaps": [
+   {
+    "gap_id": "GAP-074",
+    "type": "SUSPECTED_LOGIC_DEFECT",
+    "title": "PORTREAD: read loop runs on an unopened file after an open failure"
+   },
+   {
+    "gap_id": "GAP-172",
+    "type": "SME_REVIEW_REQUIRED",
+    "title": "BR-099 Calculate portfolio listing record count per record read — SME review"
+   },
+   {
+    "gap_id": "GAP-173",
+    "type": "SME_REVIEW_REQUIRED",
+    "title": "BR-100 Report total portfolio records listed at termination — SME review"
+   }
+  ]
+ },
+ "java": {
+  "status": "COMPLETE",
+  "counts": {
+   "PASS": 19,
+   "BLOCKED_AS_EXPECTED": 0,
+   "FAIL": 0,
+   "total": 19
+  },
+  "files": [
+   {
+    "path": "forward/generated/java/PORTREAD/java/src/revforge/app/copybooks/Portflio.java",
+    "sha256": "70cc8a45d2e9f67e93bae3e6053e03a602dc8b800ed645c3a2afb4890ce287b2"
+   },
+   {
+    "path": "forward/generated/java/PORTREAD/java/src/revforge/app/portread/Portread.java",
+    "sha256": "f4892e112b0dcf9fb37e30c68cb8db1f6d49e3be1b697b85b8d3efe2c65b1b6a"
+   },
+   {
+    "path": "forward/generated/java/PORTREAD/java/src/revforge/app/portread/PortreadTests.java",
+    "sha256": "d819adcdf70b4e63629a9a2d2c5e4d3e66011f3307a8e0b4b047eef6ee2d9dd5"
+   }
+  ],
+  "local_authorization": "LGA-0030",
+  "governance": "LOCAL_LGA_NOT_BMAD_GOVERNED",
+  "unchanged_in_step21": true
+ },
+ "tests": [
+  "INIT WS-PROGRAM-NAME",
+  "INIT WS-SUCCESS",
+  "INIT WS-ERROR",
+  "INIT WS-END-OF-FILE-SW",
+  "INIT WS-RECORD-COUNT",
+  "INIT WS-RETURN-CODE",
+  "C88 PORT-INDIVIDUAL",
+  "C88 PORT-CORPORATE",
+  "C88 PORT-TRUST",
+  "C88 PORT-ACTIVE",
+  "C88 PORT-CLOSED",
+  "C88 PORT-SUSPENDED",
+  "C88 WS-SUCCESS-STATUS",
+  "C88 WS-EOF-STATUS",
+  "C88 WS-REC-NOT-FND",
+  "C88 END-OF-FILE",
+  "C88 NOT-END-OF-FILE",
+  "R01",
+  "R02"
+ ],
+ "external_dependencies": "none (sequential file PORTFOLIO-FILE; no DB2, CICS or CALL)",
+ "readiness": {
+  "status": "PASS",
+  "source": "forward/reports/step-20/readiness/PORTREAD.json"
+ },
+ "g2": {
+  "readiness": "NOT_READY",
+  "blocking_findings": 12,
+  "approved": false
+ },
+ "authorization": {
+  "disclosure_request": "ADA-8154d6398d4d",
+  "signed": false
+ },
+ "excluded": "no other COBOL program, copybook or repository content is part of the disclosure set"
+}

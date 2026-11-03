@@ -1,0 +1,1754 @@
+{
+  "contract": "decision-dossiers",
+  "contract_version": "1.0",
+  "generated_at": "2026-11-01T17:25:18.970Z",
+  "scope": "programs:RTNCDE00",
+  "scope_sha256": "88d8562c1b30170f33446a43303d54d47fd102ec25c3d79249749d6dfd126f13",
+  "baseline_manifest_sha256": "352b97f0bbcbdb149c1118791aaabaa2e8e9972716bc77adc3a2f0644d24a068",
+  "trust_status": "TRUST_NOT_CONFIGURED",
+  "dossiers": [
+    {
+      "decision_id": "DR-DB2CONN-002",
+      "kind": "technical",
+      "origin": "agent",
+      "blocking": true,
+      "status": "open",
+      "inclusion": {
+        "class": "cross_scope",
+        "reason": "affects RTNCDE00 in scope and 4 unit(s) outside it (DB2CMT, DB2CONN, HISTLD00, RTNANA00); one decision shared across scopes"
+      },
+      "question": "Copybook SQLCA (src/copybook/db2/SQLCA.cpy) includes itself (EXEC SQL INCLUDE SQLCA at line 6) and defines only SQL-STATUS-CODES, with no SQLCODE or SQLERRMC field; SQLCODE/SQLERRMC therefore have no Field ID in 14 DB2 programs, including HISTLD00, RTNANA00, RTNCDE00, DB2CMT and DB2CONN. Which SQLCA does the precompiler actually supply, and may the forward design assume the standard DB2 SQLCODE meaning (0 success, -803 duplicate key, negative values errors) used in these requirements?",
+      "options_recorded": [
+        "Confirm the standard DB2 SQLCA is supplied by the precompiler",
+        "Supply the real SQLCA layout"
+      ],
+      "blocking_rationale": "Critical gap GAP-002: every SQL success/failure test in the affected requirements depends on the SQLCODE semantics, which are assumed (ASM-004) rather than evidenced.",
+      "allowed_outcomes": [
+        {
+          "outcome": "resolved_no_change",
+          "roles": [
+            "technical_authority"
+          ],
+          "signers_available": []
+        },
+        {
+          "outcome": "excluded_from_scope",
+          "roles": [
+            "technical_authority"
+          ],
+          "signers_available": []
+        },
+        {
+          "outcome": "resolved_requires_update",
+          "roles": [
+            "technical_authority"
+          ],
+          "signers_available": []
+        }
+      ],
+      "decision_sha256": "7004bffb5b7e045c7e8f669d67550d4534d729a241f7c756c08bb19aa9ac1fea",
+      "affected": {
+        "requirements": [
+          "REQ-DB2CMT-002",
+          "REQ-DB2CMT-003",
+          "REQ-DB2CONN-002",
+          "REQ-DB2CONN-003",
+          "REQ-DB2CONN-004",
+          "REQ-HISTLD00-002",
+          "REQ-RTNANA00-001",
+          "REQ-RTNCDE00-001",
+          "REQ-RTNCDE00-004"
+        ],
+        "requirements_in_scope": [
+          "REQ-RTNCDE00-001",
+          "REQ-RTNCDE00-004"
+        ],
+        "units": [
+          "HISTLD00",
+          "RTNANA00",
+          "RTNCDE00",
+          "DB2CMT",
+          "DB2CONN"
+        ],
+        "source_ids": 1
+      },
+      "root_causes": [
+        {
+          "root_cause_id": "RC-SRC-3b9f4685e9",
+          "title": "CIRCULAR_COPY GAP-002: Copybook SQLCA includes itself (circular copy)"
+        }
+      ],
+      "source_evidence": [
+        {
+          "path": "src/programs/online/CURSMGR.cbl",
+          "sha256": "5e367102d18d1775c3504afff9b4d3e28cfc655ae2daad836376f63f05b125db",
+          "lines": [
+            14,
+            18
+          ],
+          "excerpt": [
+            {
+              "line": 14,
+              "text": "       WORKING-STORAGE SECTION."
+            },
+            {
+              "line": 15,
+              "text": "       01  WS-DB2-AREA."
+            },
+            {
+              "line": 16,
+              "text": "           EXEC SQL INCLUDE SQLCA END-EXEC."
+            },
+            {
+              "line": 17,
+              "text": "           "
+            },
+            {
+              "line": 18,
+              "text": "       01  WS-CURSOR-STATS."
+            }
+          ],
+          "available": true
+        },
+        {
+          "path": "src/programs/online/CURSMGR.cbl",
+          "sha256": "5e367102d18d1775c3504afff9b4d3e28cfc655ae2daad836376f63f05b125db",
+          "lines": [
+            42,
+            59
+          ],
+          "excerpt": [
+            {
+              "line": 42,
+              "text": "           "
+            },
+            {
+              "line": 43,
+              "text": "       PROCEDURE DIVISION USING CURSOR-REQUEST-AREA."
+            },
+            {
+              "line": 44,
+              "text": "           EVALUATE TRUE"
+            },
+            {
+              "line": 45,
+              "text": "               WHEN CURS-DECLARE"
+            },
+            {
+              "line": 46,
+              "text": "                    PERFORM P100-DECLARE-CURSOR"
+            },
+            {
+              "line": 47,
+              "text": "                       THRU P100-EXIT"
+            },
+            {
+              "line": 48,
+              "text": "               WHEN CURS-OPEN"
+            },
+            {
+              "line": 49,
+              "text": "                    PERFORM P200-OPEN-CURSOR"
+            },
+            {
+              "line": 50,
+              "text": "                       THRU P200-EXIT"
+            },
+            {
+              "line": 51,
+              "text": "               WHEN CURS-FETCH"
+            },
+            {
+              "line": 52,
+              "text": "                    PERFORM P300-FETCH-DATA"
+            },
+            {
+              "line": 53,
+              "text": "                       THRU P300-EXIT"
+            },
+            {
+              "line": 54,
+              "text": "               WHEN CURS-CLOSE"
+            },
+            {
+              "line": 55,
+              "text": "                    PERFORM P400-CLOSE-CURSOR"
+            },
+            {
+              "line": 56,
+              "text": "                       THRU P400-EXIT"
+            },
+            {
+              "line": 57,
+              "text": "           END-EVALUATE."
+            },
+            {
+              "line": 58,
+              "text": "           "
+            },
+            {
+              "line": 59,
+              "text": "           EXEC CICS RETURN END-EXEC."
+            }
+          ],
+          "available": true
+        },
+        {
+          "path": "src/programs/common/DB2CMT.cbl",
+          "sha256": "d753db038a2a033997d333a5ce09336b37458ba413c39f8ddc5326a6d30e3b52",
+          "lines": [
+            79,
+            86
+          ],
+          "excerpt": [
+            {
+              "line": 79,
+              "text": "           "
+            },
+            {
+              "line": 80,
+              "text": "       2000-COMMIT."
+            },
+            {
+              "line": 81,
+              "text": "           IF LS-RECORDS-PROC >= LS-COMMIT-FREQ"
+            },
+            {
+              "line": 82,
+              "text": "           OR LS-FORCE-COMMIT"
+            },
+            {
+              "line": 83,
+              "text": "               PERFORM 2100-ISSUE-COMMIT"
+            },
+            {
+              "line": 84,
+              "text": "           END-IF"
+            },
+            {
+              "line": 85,
+              "text": "           ."
+            },
+            {
+              "line": 86,
+              "text": "           "
+            }
+          ],
+          "available": true
+        },
+        {
+          "path": "src/programs/common/DB2CMT.cbl",
+          "sha256": "d753db038a2a033997d333a5ce09336b37458ba413c39f8ddc5326a6d30e3b52",
+          "lines": [
+            107,
+            111
+          ],
+          "excerpt": [
+            {
+              "line": 107,
+              "text": "           "
+            },
+            {
+              "line": 108,
+              "text": "           IF SQLCODE = 0"
+            },
+            {
+              "line": 109,
+              "text": "               ADD 1 TO WS-ROLLBACK-COUNT"
+            },
+            {
+              "line": 110,
+              "text": "               MOVE 0 TO LS-RETURN-CODE"
+            },
+            {
+              "line": 111,
+              "text": "           ELSE"
+            }
+          ],
+          "available": true
+        },
+        {
+          "path": "src/programs/common/DB2CMT.cbl",
+          "sha256": "d753db038a2a033997d333a5ce09336b37458ba413c39f8ddc5326a6d30e3b52",
+          "lines": [
+            125,
+            129
+          ],
+          "excerpt": [
+            {
+              "line": 125,
+              "text": "           "
+            },
+            {
+              "line": 126,
+              "text": "           IF SQLCODE = 0"
+            },
+            {
+              "line": 127,
+              "text": "               ADD 1 TO WS-SAVEPOINT-COUNT"
+            },
+            {
+              "line": 128,
+              "text": "               MOVE 0 TO LS-RETURN-CODE"
+            },
+            {
+              "line": 129,
+              "text": "           ELSE"
+            }
+          ],
+          "available": true
+        },
+        {
+          "path": "src/programs/common/DB2CMT.cbl",
+          "sha256": "d753db038a2a033997d333a5ce09336b37458ba413c39f8ddc5326a6d30e3b52",
+          "lines": [
+            143,
+            147
+          ],
+          "excerpt": [
+            {
+              "line": 143,
+              "text": "           "
+            },
+            {
+              "line": 144,
+              "text": "           IF SQLCODE = 0"
+            },
+            {
+              "line": 145,
+              "text": "               ADD 1 TO WS-ROLLBACK-COUNT"
+            },
+            {
+              "line": 146,
+              "text": "               MOVE 0 TO LS-RETURN-CODE"
+            },
+            {
+              "line": 147,
+              "text": "           ELSE"
+            }
+          ],
+          "available": true
+        }
+      ],
+      "evidence_analysis": {
+        "requirements": [
+          {
+            "id": "REQ-RTNCDE00-001",
+            "kind": "requirement",
+            "sha256": "70a3b283f57b4ad031f3f4f6493b33d8cccda01184ab7ba117214bf245cc9c5e",
+            "evidence_status_declared": "verified_from_source",
+            "claim": "The return-code service selects its action from the request type (RC-REQUEST-TYPE): 'I' initialises the return-code area (program ID spaces, current and highest code 0, status SUCCESS, response code 0); 'S' records a new return code; 'G' returns the current code, the highest code and the status with response code 0; 'L' inserts one row into DB2 table RTNCODES with the current timestamp, program ID, current code, highest code, status and message, setting response code 0 when the insert succeeds (SQLCODE 0) and 8 otherwise; 'A' analyses logged codes over a time window. Any other request type performs nothing and leaves the response code unchanged.",
+            "title": "Route return-code service requests by request type",
+            "stated_values": [
+              "I",
+              "S",
+              "G",
+              "L",
+              "A"
+            ],
+            "cited_sources": [
+              {
+                "ref": {
+                  "file_id": "SYS-PORTFOLIO-001-FIL-0052",
+                  "path_id": "SYS-PORTFOLIO-001-PATH-0052",
+                  "section_id": null,
+                  "paragraph_id": "SYS-PORTFOLIO-001-FIL-0052-PAR-0001",
+                  "statement_id": "SYS-PORTFOLIO-001-FIL-0052-STMT-000001",
+                  "relative_path": "src/programs/batch/RTNCDE00.cbl",
+                  "line": 33
+                },
+                "path": "src/programs/batch/RTNCDE00.cbl",
+                "sha256": "7cb951ea1f418c19ddd61c0eca00f21108af5f364b5ecf05742cbc428862994e",
+                "statement_range": [
+                  33,
+                  49
+                ],
+                "cited_line": 33,
+                "cited_line_inside_statement": true,
+                "lines": [
+                  {
+                    "line": 33,
+                    "text": "           EVALUATE TRUE"
+                  },
+                  {
+                    "line": 34,
+                    "text": "               WHEN RC-INITIALIZE"
+                  },
+                  {
+                    "line": 35,
+                    "text": "                    PERFORM P100-INIT-RETURN-CODES"
+                  },
+                  {
+                    "line": 36,
+                    "text": "                       THRU P100-EXIT"
+                  },
+                  {
+                    "line": 37,
+                    "text": "               WHEN RC-SET-CODE"
+                  },
+                  {
+                    "line": 38,
+                    "text": "                    PERFORM P200-SET-RETURN-CODE"
+                  },
+                  {
+                    "line": 39,
+                    "text": "                       THRU P200-EXIT"
+                  },
+                  {
+                    "line": 40,
+                    "text": "               WHEN RC-GET-CODE"
+                  },
+                  {
+                    "line": 41,
+                    "text": "                    PERFORM P300-GET-RETURN-CODE"
+                  },
+                  {
+                    "line": 42,
+                    "text": "                       THRU P300-EXIT"
+                  },
+                  {
+                    "line": 43,
+                    "text": "               WHEN RC-LOG-CODE"
+                  },
+                  {
+                    "line": 44,
+                    "text": "                    PERFORM P400-LOG-RETURN-CODE"
+                  },
+                  {
+                    "line": 45,
+                    "text": "                       THRU P400-EXIT"
+                  },
+                  {
+                    "line": 46,
+                    "text": "               WHEN RC-ANALYZE"
+                  },
+                  {
+                    "line": 47,
+                    "text": "                    PERFORM P500-ANALYZE-CODES"
+                  },
+                  {
+                    "line": 48,
+                    "text": "                       THRU P500-EXIT"
+                  },
+                  {
+                    "line": 49,
+                    "text": "           END-EVALUATE."
+                  }
+                ]
+              },
+              {
+                "ref": {
+                  "file_id": "SYS-PORTFOLIO-001-FIL-0013",
+                  "field_id": "SYS-PORTFOLIO-001-FIL-0013-FLD-000001"
+                },
+                "path": "src/copybook/common/RTNCODE.cpy",
+                "sha256": "27eabb519319258b07b32f09ab60e80a18f6658a118e96c8fa01411fc473cbc9",
+                "statement_range": null,
+                "cited_line": null,
+                "cited_line_inside_statement": null,
+                "lines": []
+              }
+            ],
+            "deterministic_checks": [],
+            "missing_values": []
+          },
+          {
+            "id": "REQ-RTNCDE00-004",
+            "kind": "requirement",
+            "sha256": "0ac2f6b674b57cdeceab63b1845884a51dc70e50d0eccdbaf9ab57f1a5292269",
+            "evidence_status_declared": "verified_from_source",
+            "claim": "On an analyse request ('A') the system counts the logged return codes in RTNCODES for the requested program ID whose timestamp is greater than or equal to the caller's start time and less than or equal to the caller's end time, and returns the count, the highest (MAX) and the lowest (MIN) logged return code. The response code is 0 when the query succeeds (SQLCODE 0) and 8 otherwise.",
+            "title": "Analyse logged return codes for a program within a time window",
+            "stated_values": [
+              "A"
+            ],
+            "cited_sources": [
+              {
+                "ref": {
+                  "file_id": "SYS-PORTFOLIO-001-FIL-0052",
+                  "path_id": "SYS-PORTFOLIO-001-PATH-0052",
+                  "section_id": null,
+                  "paragraph_id": "SYS-PORTFOLIO-001-FIL-0052-PAR-0010",
+                  "statement_id": "SYS-PORTFOLIO-001-FIL-0052-STMT-000024",
+                  "relative_path": "src/programs/batch/RTNCDE00.cbl",
+                  "line": 121
+                },
+                "path": "src/programs/batch/RTNCDE00.cbl",
+                "sha256": "7cb951ea1f418c19ddd61c0eca00f21108af5f364b5ecf05742cbc428862994e",
+                "statement_range": [
+                  122,
+                  133
+                ],
+                "cited_line": 121,
+                "cited_line_inside_statement": false,
+                "lines": [
+                  {
+                    "line": 122,
+                    "text": "           EXEC SQL"
+                  },
+                  {
+                    "line": 123,
+                    "text": "                SELECT COUNT(*),"
+                  },
+                  {
+                    "line": 124,
+                    "text": "                       MAX(RETURN_CODE),"
+                  },
+                  {
+                    "line": 125,
+                    "text": "                       MIN(RETURN_CODE)"
+                  },
+                  {
+                    "line": 126,
+                    "text": "                INTO :RC-TOTAL-CODES,"
+                  },
+                  {
+                    "line": 127,
+                    "text": "                     :RC-MAX-CODE,"
+                  },
+                  {
+                    "line": 128,
+                    "text": "                     :RC-MIN-CODE"
+                  },
+                  {
+                    "line": 129,
+                    "text": "                FROM RTNCODES"
+                  },
+                  {
+                    "line": 130,
+                    "text": "                WHERE PROGRAM_ID = :RC-PROGRAM-ID"
+                  },
+                  {
+                    "line": 131,
+                    "text": "                  AND TIMESTAMP >= :RC-START-TIME"
+                  },
+                  {
+                    "line": 132,
+                    "text": "                  AND TIMESTAMP <= :RC-END-TIME"
+                  },
+                  {
+                    "line": 133,
+                    "text": "           END-EXEC."
+                  }
+                ]
+              }
+            ],
+            "deterministic_checks": [],
+            "missing_values": []
+          }
+        ],
+        "deterministic": [
+          {
+            "root_cause_id": "RC-SRC-3b9f4685e9",
+            "status": "VERIFIED_DETERMINISTICALLY",
+            "establishes": "the member includes itself, so its layout cannot be expanded from the repository",
+            "does_not_establish": "which communication area the precompiler actually supplies",
+            "next_step": "REQUIRES_TECHNICAL_SME"
+          }
+        ],
+        "objective_facts": [
+          {
+            "proven": true,
+            "statement": "The source establishes the member includes itself, so its layout cannot be expanded from the repository (VERIFIED_DETERMINISTICALLY)."
+          }
+        ]
+      },
+      "remediation": [
+        {
+          "proposal_id": "RP-8d2dd33787",
+          "version": 1,
+          "kind": "citation_correction",
+          "item": "REQ-RTNCDE00-004",
+          "document": "forward/runs/FWD-20261031T172520Z-66b3/workflow/agents/F1/PKT-0002-F1/draft_requirements.json",
+          "pointer": "/requirements/26/source_refs/0/line",
+          "original_value": 121,
+          "proposed_value": 122,
+          "original_line_text": "       P500-ANALYZE-CODES.",
+          "proposed_line_text": "           EXEC SQL",
+          "reason": "The cited line lies outside the cited statement; the stated values occur at line=122.",
+          "claim_supported_after_correction": true,
+          "checks": [
+            {
+              "id": "item_unchanged",
+              "ok": true,
+              "detail": "the cited item is unchanged since the proposal"
+            },
+            {
+              "id": "source:src/copybook/common/RTNCODE.cpy",
+              "ok": true,
+              "detail": "src/copybook/common/RTNCODE.cpy hash unchanged"
+            },
+            {
+              "id": "source:src/copybook/db2/SQLCA.cpy",
+              "ok": true,
+              "detail": "src/copybook/db2/SQLCA.cpy hash unchanged"
+            },
+            {
+              "id": "source:src/programs/batch/RTNCDE00.cbl",
+              "ok": true,
+              "detail": "src/programs/batch/RTNCDE00.cbl hash unchanged"
+            },
+            {
+              "id": "rederived",
+              "ok": true,
+              "detail": "re-derived: 1/1 stated value(s) occur at line=122 (lines 122-133)"
+            }
+          ],
+          "verified_now": true,
+          "authorization": {
+            "status": "NOT_AUTHORIZED",
+            "decision": "RVW-REQ-RTNCDE00-004",
+            "decision_status": "open",
+            "required_roles": [
+              "business_sme"
+            ],
+            "steps": [
+              "workflow decisions template --decision RVW-REQ-RTNCDE00-004 --out RVW-REQ-RTNCDE00-004.json",
+              "the reviewer sets outcome=resolved_requires_update and selected_option=RP-8d2dd33787, signs it, then: workflow decisions resolve --file signed.json",
+              "workflow correct --packet PKT-0002-F1 --file draft_requirements.json --pointer /requirements/26/source_refs/0/line --kind citation_line --proposal RP-8d2dd33787 --authorized-by RES-NNNN --reason \"<reason>\""
+            ]
+          },
+          "effect": "Applying it creates a new versioned correction overlay; the original deliverable is untouched. The requirement then has a new content hash and is re-verified against the corrected citation; its review decision becomes stale and must be re-decided on the new content."
+        }
+      ],
+      "independent_review": [],
+      "shared_impact": [
+        {
+          "scope": "programs:DB2CMT",
+          "readiness": "NOT_READY",
+          "blocking": 30,
+          "contains": [
+            "DB2CMT"
+          ]
+        },
+        {
+          "scope": "programs:DB2CONN",
+          "readiness": "NOT_READY",
+          "blocking": 20,
+          "contains": [
+            "DB2CONN"
+          ]
+        },
+        {
+          "scope": "programs:HISTLD00",
+          "readiness": "NOT_READY",
+          "blocking": 19,
+          "contains": [
+            "HISTLD00"
+          ]
+        },
+        {
+          "scope": "programs:RTNANA00",
+          "readiness": "NOT_READY",
+          "blocking": 10,
+          "contains": [
+            "RTNANA00"
+          ]
+        },
+        {
+          "scope": "programs:RTNCDE00",
+          "readiness": "NOT_READY",
+          "blocking": 5,
+          "contains": [
+            "RTNCDE00"
+          ]
+        }
+      ],
+      "source_hashes": [
+        {
+          "path": "src/programs/batch/RTNCDE00.cbl",
+          "sha256": "7cb951ea1f418c19ddd61c0eca00f21108af5f364b5ecf05742cbc428862994e"
+        },
+        {
+          "path": "src/copybook/common/RTNCODE.cpy",
+          "sha256": "27eabb519319258b07b32f09ab60e80a18f6658a118e96c8fa01411fc473cbc9"
+        }
+      ],
+      "human_judgment": {
+        "required": true,
+        "why": "the source establishes facts, not the business or technical choice this decision asks for; only a signer with an authorised role can choose an outcome"
+      }
+    },
+    {
+      "decision_id": "DR-F2-0011-001",
+      "kind": "data_layout",
+      "origin": "agent",
+      "blocking": true,
+      "status": "open",
+      "inclusion": {
+        "class": "shared_dependency",
+        "reason": "affects only dependency unit(s) SQLCA in scope"
+      },
+      "question": "Copybook SQLCA (SYS-PORTFOLIO-001-FIL-0017) line 6 contains 'EXEC SQL INCLUDE SQLCA END-EXEC', naming itself. The included SQL communication area (SQLCODE, SQLSTATE, SQLERRMC, ...) has no layout in any reverse artifact. How should the forward design obtain the SQLCA layout and the SQLCODE/SQLSTATE semantics used by the 14 DB2 programs?",
+      "options_recorded": [
+        "Treat the include as the IBM DB2 precompiler-supplied SQLCA and supply its standard layout from authoritative IBM documentation as a documented external dependency (requires SME confirmation of the DB2 version).",
+        "Do not model an SQLCA record; map SQLCODE/SQLSTATE checks to JDBC SQLException error code and SQLState in the Java design, with the SQL-STATUS-CODES constants as the SQLSTATE comparison table.",
+        "Obtain the real SQLCA member from the source library (the repository copy appears to be a placeholder that shadows it) and re-run the reverse harness."
+      ],
+      "blocking_rationale": "The included SQL communication area has no layout at all in the reverse artifacts, and SQLCODE/SQLSTATE drive error handling in 14 programs; a layout cannot be invented by F2.",
+      "allowed_outcomes": [
+        {
+          "outcome": "resolved_no_change",
+          "roles": [
+            "technical_authority"
+          ],
+          "signers_available": []
+        },
+        {
+          "outcome": "excluded_from_scope",
+          "roles": [
+            "technical_authority"
+          ],
+          "signers_available": []
+        }
+      ],
+      "decision_sha256": "9295eb19e7b7bf928ede74d7df5811cab75951ba41245bb62b97a3764bc5493f",
+      "affected": {
+        "requirements": [],
+        "requirements_in_scope": [],
+        "units": [
+          "SQLCA"
+        ],
+        "source_ids": 1
+      },
+      "root_causes": [
+        {
+          "root_cause_id": "RC-SRC-3b9f4685e9",
+          "title": "CIRCULAR_COPY GAP-002: Copybook SQLCA includes itself (circular copy)"
+        }
+      ],
+      "source_evidence": [
+        {
+          "path": "src/programs/online/CURSMGR.cbl",
+          "sha256": "5e367102d18d1775c3504afff9b4d3e28cfc655ae2daad836376f63f05b125db",
+          "lines": [
+            14,
+            18
+          ],
+          "excerpt": [
+            {
+              "line": 14,
+              "text": "       WORKING-STORAGE SECTION."
+            },
+            {
+              "line": 15,
+              "text": "       01  WS-DB2-AREA."
+            },
+            {
+              "line": 16,
+              "text": "           EXEC SQL INCLUDE SQLCA END-EXEC."
+            },
+            {
+              "line": 17,
+              "text": "           "
+            },
+            {
+              "line": 18,
+              "text": "       01  WS-CURSOR-STATS."
+            }
+          ],
+          "available": true
+        },
+        {
+          "path": "src/programs/online/CURSMGR.cbl",
+          "sha256": "5e367102d18d1775c3504afff9b4d3e28cfc655ae2daad836376f63f05b125db",
+          "lines": [
+            42,
+            59
+          ],
+          "excerpt": [
+            {
+              "line": 42,
+              "text": "           "
+            },
+            {
+              "line": 43,
+              "text": "       PROCEDURE DIVISION USING CURSOR-REQUEST-AREA."
+            },
+            {
+              "line": 44,
+              "text": "           EVALUATE TRUE"
+            },
+            {
+              "line": 45,
+              "text": "               WHEN CURS-DECLARE"
+            },
+            {
+              "line": 46,
+              "text": "                    PERFORM P100-DECLARE-CURSOR"
+            },
+            {
+              "line": 47,
+              "text": "                       THRU P100-EXIT"
+            },
+            {
+              "line": 48,
+              "text": "               WHEN CURS-OPEN"
+            },
+            {
+              "line": 49,
+              "text": "                    PERFORM P200-OPEN-CURSOR"
+            },
+            {
+              "line": 50,
+              "text": "                       THRU P200-EXIT"
+            },
+            {
+              "line": 51,
+              "text": "               WHEN CURS-FETCH"
+            },
+            {
+              "line": 52,
+              "text": "                    PERFORM P300-FETCH-DATA"
+            },
+            {
+              "line": 53,
+              "text": "                       THRU P300-EXIT"
+            },
+            {
+              "line": 54,
+              "text": "               WHEN CURS-CLOSE"
+            },
+            {
+              "line": 55,
+              "text": "                    PERFORM P400-CLOSE-CURSOR"
+            },
+            {
+              "line": 56,
+              "text": "                       THRU P400-EXIT"
+            },
+            {
+              "line": 57,
+              "text": "           END-EVALUATE."
+            },
+            {
+              "line": 58,
+              "text": "           "
+            },
+            {
+              "line": 59,
+              "text": "           EXEC CICS RETURN END-EXEC."
+            }
+          ],
+          "available": true
+        },
+        {
+          "path": "src/programs/common/DB2CMT.cbl",
+          "sha256": "d753db038a2a033997d333a5ce09336b37458ba413c39f8ddc5326a6d30e3b52",
+          "lines": [
+            79,
+            86
+          ],
+          "excerpt": [
+            {
+              "line": 79,
+              "text": "           "
+            },
+            {
+              "line": 80,
+              "text": "       2000-COMMIT."
+            },
+            {
+              "line": 81,
+              "text": "           IF LS-RECORDS-PROC >= LS-COMMIT-FREQ"
+            },
+            {
+              "line": 82,
+              "text": "           OR LS-FORCE-COMMIT"
+            },
+            {
+              "line": 83,
+              "text": "               PERFORM 2100-ISSUE-COMMIT"
+            },
+            {
+              "line": 84,
+              "text": "           END-IF"
+            },
+            {
+              "line": 85,
+              "text": "           ."
+            },
+            {
+              "line": 86,
+              "text": "           "
+            }
+          ],
+          "available": true
+        },
+        {
+          "path": "src/programs/common/DB2CMT.cbl",
+          "sha256": "d753db038a2a033997d333a5ce09336b37458ba413c39f8ddc5326a6d30e3b52",
+          "lines": [
+            107,
+            111
+          ],
+          "excerpt": [
+            {
+              "line": 107,
+              "text": "           "
+            },
+            {
+              "line": 108,
+              "text": "           IF SQLCODE = 0"
+            },
+            {
+              "line": 109,
+              "text": "               ADD 1 TO WS-ROLLBACK-COUNT"
+            },
+            {
+              "line": 110,
+              "text": "               MOVE 0 TO LS-RETURN-CODE"
+            },
+            {
+              "line": 111,
+              "text": "           ELSE"
+            }
+          ],
+          "available": true
+        },
+        {
+          "path": "src/programs/common/DB2CMT.cbl",
+          "sha256": "d753db038a2a033997d333a5ce09336b37458ba413c39f8ddc5326a6d30e3b52",
+          "lines": [
+            125,
+            129
+          ],
+          "excerpt": [
+            {
+              "line": 125,
+              "text": "           "
+            },
+            {
+              "line": 126,
+              "text": "           IF SQLCODE = 0"
+            },
+            {
+              "line": 127,
+              "text": "               ADD 1 TO WS-SAVEPOINT-COUNT"
+            },
+            {
+              "line": 128,
+              "text": "               MOVE 0 TO LS-RETURN-CODE"
+            },
+            {
+              "line": 129,
+              "text": "           ELSE"
+            }
+          ],
+          "available": true
+        },
+        {
+          "path": "src/programs/common/DB2CMT.cbl",
+          "sha256": "d753db038a2a033997d333a5ce09336b37458ba413c39f8ddc5326a6d30e3b52",
+          "lines": [
+            143,
+            147
+          ],
+          "excerpt": [
+            {
+              "line": 143,
+              "text": "           "
+            },
+            {
+              "line": 144,
+              "text": "           IF SQLCODE = 0"
+            },
+            {
+              "line": 145,
+              "text": "               ADD 1 TO WS-ROLLBACK-COUNT"
+            },
+            {
+              "line": 146,
+              "text": "               MOVE 0 TO LS-RETURN-CODE"
+            },
+            {
+              "line": 147,
+              "text": "           ELSE"
+            }
+          ],
+          "available": true
+        }
+      ],
+      "evidence_analysis": {
+        "requirements": [],
+        "deterministic": [
+          {
+            "root_cause_id": "RC-SRC-3b9f4685e9",
+            "status": "VERIFIED_DETERMINISTICALLY",
+            "establishes": "the member includes itself, so its layout cannot be expanded from the repository",
+            "does_not_establish": "which communication area the precompiler actually supplies",
+            "next_step": "REQUIRES_TECHNICAL_SME"
+          }
+        ],
+        "objective_facts": [
+          {
+            "proven": true,
+            "statement": "The source establishes the member includes itself, so its layout cannot be expanded from the repository (VERIFIED_DETERMINISTICALLY)."
+          }
+        ]
+      },
+      "remediation": [],
+      "independent_review": [],
+      "shared_impact": [
+        {
+          "scope": "programs:CURSMGR",
+          "readiness": "NOT_READY",
+          "blocking": 12,
+          "contains": [
+            "SQLCA"
+          ]
+        },
+        {
+          "scope": "programs:DB2CMT",
+          "readiness": "NOT_READY",
+          "blocking": 30,
+          "contains": [
+            "SQLCA"
+          ]
+        },
+        {
+          "scope": "programs:DB2CONN",
+          "readiness": "NOT_READY",
+          "blocking": 20,
+          "contains": [
+            "SQLCA"
+          ]
+        },
+        {
+          "scope": "programs:DB2ERR",
+          "readiness": "NOT_READY",
+          "blocking": 21,
+          "contains": [
+            "SQLCA"
+          ]
+        },
+        {
+          "scope": "programs:DB2HNDL",
+          "readiness": "NOT_READY",
+          "blocking": 10,
+          "contains": [
+            "SQLCA"
+          ]
+        },
+        {
+          "scope": "programs:DB2ONLN",
+          "readiness": "NOT_READY",
+          "blocking": 9,
+          "contains": [
+            "SQLCA"
+          ]
+        },
+        {
+          "scope": "programs:DB2RECV",
+          "readiness": "NOT_READY",
+          "blocking": 30,
+          "contains": [
+            "SQLCA"
+          ]
+        },
+        {
+          "scope": "programs:DB2STAT",
+          "readiness": "NOT_READY",
+          "blocking": 18,
+          "contains": [
+            "SQLCA"
+          ]
+        },
+        {
+          "scope": "programs:ERRHNDL",
+          "readiness": "NOT_READY",
+          "blocking": 10,
+          "contains": [
+            "SQLCA"
+          ]
+        },
+        {
+          "scope": "programs:HISTLD00",
+          "readiness": "NOT_READY",
+          "blocking": 19,
+          "contains": [
+            "SQLCA"
+          ]
+        },
+        {
+          "scope": "programs:INQHIST",
+          "readiness": "NOT_READY",
+          "blocking": 52,
+          "contains": [
+            "SQLCA"
+          ]
+        },
+        {
+          "scope": "programs:INQONLN",
+          "readiness": "NOT_READY",
+          "blocking": 79,
+          "contains": [
+            "SQLCA"
+          ]
+        },
+        {
+          "scope": "programs:RTNANA00",
+          "readiness": "NOT_READY",
+          "blocking": 10,
+          "contains": [
+            "SQLCA"
+          ]
+        },
+        {
+          "scope": "programs:RTNCDE00",
+          "readiness": "NOT_READY",
+          "blocking": 5,
+          "contains": [
+            "SQLCA"
+          ]
+        },
+        {
+          "scope": "programs:SECMGR",
+          "readiness": "NOT_READY",
+          "blocking": 10,
+          "contains": [
+            "SQLCA"
+          ]
+        }
+      ],
+      "source_hashes": [],
+      "human_judgment": {
+        "required": true,
+        "why": "the source establishes facts, not the business or technical choice this decision asks for; only a signer with an authorised role can choose an outcome"
+      }
+    },
+    {
+      "decision_id": "RVW-REQ-RTNCDE00-003",
+      "kind": "review",
+      "origin": "derived",
+      "blocking": true,
+      "status": "open",
+      "inclusion": {
+        "class": "direct",
+        "reason": "affects primary unit(s) RTNCDE00 and requirement(s) REQ-RTNCDE00-003"
+      },
+      "question": "requirement REQ-RTNCDE00-003 (RTNCDE00) is not approvable as drafted: REQUIRES_EVIDENCE: declared verified_from_source but not confirmed by the runtime: stated values found in the program but not in the cited lines: F",
+      "options_recorded": [
+        "excluded_from_scope",
+        "resolved_requires_update",
+        "approved_exception"
+      ],
+      "blocking_rationale": "the item cannot be approved until its evidence is verified, it is excluded with justification, or (where policy permits) an exception is signed",
+      "allowed_outcomes": [
+        {
+          "outcome": "excluded_from_scope",
+          "roles": [
+            "business_sme"
+          ],
+          "signers_available": []
+        },
+        {
+          "outcome": "resolved_requires_update",
+          "roles": [
+            "business_sme"
+          ],
+          "signers_available": []
+        },
+        {
+          "outcome": "approved_exception",
+          "roles": [
+            "exception_approver"
+          ],
+          "signers_available": []
+        }
+      ],
+      "decision_sha256": "82b16155d4f2bfa3269dc4c282b381d3fd014f29223ea8f8d6efea5bdf133144",
+      "affected": {
+        "requirements": [
+          "REQ-RTNCDE00-003"
+        ],
+        "requirements_in_scope": [
+          "REQ-RTNCDE00-003"
+        ],
+        "units": [
+          "RTNCDE00"
+        ],
+        "source_ids": 2
+      },
+      "root_causes": [
+        {
+          "root_cause_id": "RC-EVD-af66b09e34",
+          "title": "requirement evidence of RTNCDE00 not established (unconfirmed_claim)"
+        }
+      ],
+      "source_evidence": [
+        {
+          "path": "src/programs/batch/RTNCDE00.cbl",
+          "sha256": "7cb951ea1f418c19ddd61c0eca00f21108af5f364b5ecf05742cbc428862994e",
+          "lines": [
+            68,
+            81
+          ],
+          "excerpt": [
+            {
+              "line": 68,
+              "text": "           MOVE RC-NEW-CODE TO RC-CURRENT-CODE."
+            },
+            {
+              "line": 69,
+              "text": "           "
+            },
+            {
+              "line": 70,
+              "text": "           EVALUATE RC-NEW-CODE"
+            },
+            {
+              "line": 71,
+              "text": "               WHEN 0"
+            },
+            {
+              "line": 72,
+              "text": "                    SET RC-STATUS-SUCCESS TO TRUE"
+            },
+            {
+              "line": 73,
+              "text": "               WHEN 1 THRU 4"
+            },
+            {
+              "line": 74,
+              "text": "                    SET RC-STATUS-WARNING TO TRUE"
+            },
+            {
+              "line": 75,
+              "text": "               WHEN 5 THRU 8"
+            },
+            {
+              "line": 76,
+              "text": "                    SET RC-STATUS-ERROR TO TRUE"
+            },
+            {
+              "line": 77,
+              "text": "               WHEN OTHER"
+            },
+            {
+              "line": 78,
+              "text": "                    SET RC-STATUS-SEVERE TO TRUE"
+            },
+            {
+              "line": 79,
+              "text": "           END-EVALUATE."
+            },
+            {
+              "line": 80,
+              "text": "           "
+            },
+            {
+              "line": 81,
+              "text": "           MOVE 0 TO RC-RESPONSE-CODE."
+            }
+          ],
+          "available": true
+        }
+      ],
+      "evidence_analysis": {
+        "requirements": [
+          {
+            "id": "REQ-RTNCDE00-003",
+            "kind": "requirement",
+            "sha256": "ec665cc58b23e4e018cd684d7e7eb95f38767f28db156d80ca4cea4c30b1a28c",
+            "evidence_status_declared": "verified_from_source",
+            "claim": "When a new return code is set, the system classifies it: 0 is SUCCESS ('S'), 1 to 4 is WARNING ('W'), 5 to 8 is ERROR ('E') and any other value is SEVERE ('F'). The response code is then set to 0.",
+            "title": "Classify a new return code by severity",
+            "stated_values": [
+              "S",
+              "W",
+              "E",
+              "F"
+            ],
+            "cited_sources": [
+              {
+                "ref": {
+                  "file_id": "SYS-PORTFOLIO-001-FIL-0052",
+                  "path_id": "SYS-PORTFOLIO-001-PATH-0052",
+                  "section_id": null,
+                  "paragraph_id": "SYS-PORTFOLIO-001-FIL-0052-PAR-0004",
+                  "statement_id": "SYS-PORTFOLIO-001-FIL-0052-STMT-000012",
+                  "relative_path": "src/programs/batch/RTNCDE00.cbl",
+                  "line": 70
+                },
+                "path": "src/programs/batch/RTNCDE00.cbl",
+                "sha256": "7cb951ea1f418c19ddd61c0eca00f21108af5f364b5ecf05742cbc428862994e",
+                "statement_range": [
+                  70,
+                  79
+                ],
+                "cited_line": 70,
+                "cited_line_inside_statement": true,
+                "lines": [
+                  {
+                    "line": 70,
+                    "text": "           EVALUATE RC-NEW-CODE"
+                  },
+                  {
+                    "line": 71,
+                    "text": "               WHEN 0"
+                  },
+                  {
+                    "line": 72,
+                    "text": "                    SET RC-STATUS-SUCCESS TO TRUE"
+                  },
+                  {
+                    "line": 73,
+                    "text": "               WHEN 1 THRU 4"
+                  },
+                  {
+                    "line": 74,
+                    "text": "                    SET RC-STATUS-WARNING TO TRUE"
+                  },
+                  {
+                    "line": 75,
+                    "text": "               WHEN 5 THRU 8"
+                  },
+                  {
+                    "line": 76,
+                    "text": "                    SET RC-STATUS-ERROR TO TRUE"
+                  },
+                  {
+                    "line": 77,
+                    "text": "               WHEN OTHER"
+                  },
+                  {
+                    "line": 78,
+                    "text": "                    SET RC-STATUS-SEVERE TO TRUE"
+                  },
+                  {
+                    "line": 79,
+                    "text": "           END-EVALUATE."
+                  }
+                ]
+              },
+              {
+                "ref": {
+                  "file_id": "SYS-PORTFOLIO-001-FIL-0013",
+                  "field_id": "SYS-PORTFOLIO-001-FIL-0013-FLD-000011"
+                },
+                "path": "src/copybook/common/RTNCODE.cpy",
+                "sha256": "27eabb519319258b07b32f09ab60e80a18f6658a118e96c8fa01411fc473cbc9",
+                "statement_range": null,
+                "cited_line": null,
+                "cited_line_inside_statement": null,
+                "lines": []
+              }
+            ],
+            "deterministic_checks": [
+              {
+                "id": "source_reference",
+                "subject": "REQ-RTNCDE00-003",
+                "status": "VERIFIED_STRUCTURALLY",
+                "detail": "SYS-PORTFOLIO-001-FIL-0052-STMT-000012 (EVALUATE) is at src/programs/batch/RTNCDE00.cbl:70"
+              },
+              {
+                "id": "source_reference",
+                "subject": "REQ-RTNCDE00-003",
+                "status": "VERIFIED_STRUCTURALLY",
+                "detail": "src/copybook/common/RTNCODE.cpy exists (sha256 27eabb519319…)"
+              },
+              {
+                "id": "stated_values",
+                "subject": "REQ-RTNCDE00-003",
+                "status": "INSUFFICIENT_EVIDENCE",
+                "detail": "3/4 stated value(s) occur in the cited statements; missing: F"
+              }
+            ],
+            "missing_values": [
+              {
+                "value": "F",
+                "occurrences": [
+                  {
+                    "path": "src/copybook/common/RTNCODE.cpy",
+                    "sha256": "27eabb519319258b07b32f09ab60e80a18f6658a118e96c8fa01411fc473cbc9",
+                    "line": 20,
+                    "text": "                 88 RC-STATUS-SEVERE     VALUE 'F'.",
+                    "condition_name": "RC-STATUS-SEVERE",
+                    "condition_used_in_cited_file": [
+                      {
+                        "line": 78,
+                        "text": "                    SET RC-STATUS-SEVERE TO TRUE",
+                        "inside_cited_statement": true
+                      }
+                    ]
+                  }
+                ],
+                "finding": "'F' is the VALUE of condition RC-STATUS-SEVERE (src/copybook/common/RTNCODE.cpy:20); the cited statement sets or tests that condition at line(s) 78. The value is reachable from the cited code through the condition name, but the citation does not name the defining line."
+              }
+            ]
+          }
+        ],
+        "deterministic": [
+          {
+            "root_cause_id": "RC-EVD-af66b09e34",
+            "status": "INSUFFICIENT_EVIDENCE",
+            "establishes": "which cited facts the source supports",
+            "does_not_establish": "business intent, and behaviour beyond the cited source text",
+            "next_step": "REQUIRES_INDEPENDENT_SEMANTIC_REVIEW"
+          }
+        ],
+        "objective_facts": [
+          {
+            "proven": false,
+            "statement": "The source does not settle this (INSUFFICIENT_EVIDENCE)."
+          }
+        ]
+      },
+      "remediation": [],
+      "independent_review": [
+        {
+          "packet_id": "OAV-EVD-af66b09e34",
+          "status": "NOT_AUTHORIZED",
+          "sources": 1,
+          "source_lines": 14,
+          "note": "prepared, never sent; sending needs a signed OpenAI source-export authorization and an explicit LIVE run"
+        }
+      ],
+      "shared_impact": [
+        {
+          "scope": "programs:RTNCDE00",
+          "readiness": "NOT_READY",
+          "blocking": 5,
+          "contains": [
+            "RTNCDE00"
+          ]
+        }
+      ],
+      "source_hashes": [
+        {
+          "path": "src/programs/batch/RTNCDE00.cbl",
+          "sha256": "7cb951ea1f418c19ddd61c0eca00f21108af5f364b5ecf05742cbc428862994e"
+        },
+        {
+          "path": "src/copybook/common/RTNCODE.cpy",
+          "sha256": "27eabb519319258b07b32f09ab60e80a18f6658a118e96c8fa01411fc473cbc9"
+        }
+      ],
+      "human_judgment": {
+        "required": true,
+        "why": "the source establishes facts, not the business or technical choice this decision asks for; only a signer with an authorised role can choose an outcome"
+      }
+    },
+    {
+      "decision_id": "RVW-REQ-RTNCDE00-004",
+      "kind": "review",
+      "origin": "derived",
+      "blocking": true,
+      "status": "open",
+      "inclusion": {
+        "class": "direct",
+        "reason": "affects primary unit(s) RTNCDE00 and requirement(s) REQ-RTNCDE00-004"
+      },
+      "question": "requirement REQ-RTNCDE00-004 (RTNCDE00) is not approvable as drafted: CONTRADICTED: the source contradicts the cited evidence: cited line 121 is outside SYS-PORTFOLIO-001-FIL-0052-STMT-000024 (lines 122-133)",
+      "options_recorded": [
+        "excluded_from_scope",
+        "resolved_requires_update"
+      ],
+      "blocking_rationale": "the item cannot be approved until its evidence is verified, it is excluded with justification, or (where policy permits) an exception is signed",
+      "allowed_outcomes": [
+        {
+          "outcome": "excluded_from_scope",
+          "roles": [
+            "business_sme"
+          ],
+          "signers_available": []
+        },
+        {
+          "outcome": "resolved_requires_update",
+          "roles": [
+            "business_sme"
+          ],
+          "signers_available": []
+        }
+      ],
+      "decision_sha256": "4c90e9fdf811008ae46354b0dcff72e113e65dfdc4f112d19ddf6247d92587ef",
+      "affected": {
+        "requirements": [
+          "REQ-RTNCDE00-004"
+        ],
+        "requirements_in_scope": [
+          "REQ-RTNCDE00-004"
+        ],
+        "units": [
+          "RTNCDE00"
+        ],
+        "source_ids": 1
+      },
+      "root_causes": [
+        {
+          "root_cause_id": "RC-CIT-fd279b78dd",
+          "title": "Citation of REQ-RTNCDE00-004 contradicted by the source"
+        }
+      ],
+      "source_evidence": [
+        {
+          "path": "src/programs/batch/RTNCDE00.cbl",
+          "sha256": "7cb951ea1f418c19ddd61c0eca00f21108af5f364b5ecf05742cbc428862994e",
+          "lines": [
+            119,
+            135
+          ],
+          "excerpt": [
+            {
+              "line": 119,
+              "text": "           EXIT."
+            },
+            {
+              "line": 120,
+              "text": "           "
+            },
+            {
+              "line": 121,
+              "text": "       P500-ANALYZE-CODES."
+            },
+            {
+              "line": 122,
+              "text": "           EXEC SQL"
+            },
+            {
+              "line": 123,
+              "text": "                SELECT COUNT(*),"
+            },
+            {
+              "line": 124,
+              "text": "                       MAX(RETURN_CODE),"
+            },
+            {
+              "line": 125,
+              "text": "                       MIN(RETURN_CODE)"
+            },
+            {
+              "line": 126,
+              "text": "                INTO :RC-TOTAL-CODES,"
+            },
+            {
+              "line": 127,
+              "text": "                     :RC-MAX-CODE,"
+            },
+            {
+              "line": 128,
+              "text": "                     :RC-MIN-CODE"
+            },
+            {
+              "line": 129,
+              "text": "                FROM RTNCODES"
+            },
+            {
+              "line": 130,
+              "text": "                WHERE PROGRAM_ID = :RC-PROGRAM-ID"
+            },
+            {
+              "line": 131,
+              "text": "                  AND TIMESTAMP >= :RC-START-TIME"
+            },
+            {
+              "line": 132,
+              "text": "                  AND TIMESTAMP <= :RC-END-TIME"
+            },
+            {
+              "line": 133,
+              "text": "           END-EXEC."
+            },
+            {
+              "line": 134,
+              "text": "           "
+            },
+            {
+              "line": 135,
+              "text": "           IF SQLCODE = 0"
+            }
+          ],
+          "available": true
+        }
+      ],
+      "evidence_analysis": {
+        "requirements": [
+          {
+            "id": "REQ-RTNCDE00-004",
+            "kind": "requirement",
+            "sha256": "0ac2f6b674b57cdeceab63b1845884a51dc70e50d0eccdbaf9ab57f1a5292269",
+            "evidence_status_declared": "verified_from_source",
+            "claim": "On an analyse request ('A') the system counts the logged return codes in RTNCODES for the requested program ID whose timestamp is greater than or equal to the caller's start time and less than or equal to the caller's end time, and returns the count, the highest (MAX) and the lowest (MIN) logged return code. The response code is 0 when the query succeeds (SQLCODE 0) and 8 otherwise.",
+            "title": "Analyse logged return codes for a program within a time window",
+            "stated_values": [
+              "A"
+            ],
+            "cited_sources": [
+              {
+                "ref": {
+                  "file_id": "SYS-PORTFOLIO-001-FIL-0052",
+                  "path_id": "SYS-PORTFOLIO-001-PATH-0052",
+                  "section_id": null,
+                  "paragraph_id": "SYS-PORTFOLIO-001-FIL-0052-PAR-0010",
+                  "statement_id": "SYS-PORTFOLIO-001-FIL-0052-STMT-000024",
+                  "relative_path": "src/programs/batch/RTNCDE00.cbl",
+                  "line": 121
+                },
+                "path": "src/programs/batch/RTNCDE00.cbl",
+                "sha256": "7cb951ea1f418c19ddd61c0eca00f21108af5f364b5ecf05742cbc428862994e",
+                "statement_range": [
+                  122,
+                  133
+                ],
+                "cited_line": 121,
+                "cited_line_inside_statement": false,
+                "lines": [
+                  {
+                    "line": 122,
+                    "text": "           EXEC SQL"
+                  },
+                  {
+                    "line": 123,
+                    "text": "                SELECT COUNT(*),"
+                  },
+                  {
+                    "line": 124,
+                    "text": "                       MAX(RETURN_CODE),"
+                  },
+                  {
+                    "line": 125,
+                    "text": "                       MIN(RETURN_CODE)"
+                  },
+                  {
+                    "line": 126,
+                    "text": "                INTO :RC-TOTAL-CODES,"
+                  },
+                  {
+                    "line": 127,
+                    "text": "                     :RC-MAX-CODE,"
+                  },
+                  {
+                    "line": 128,
+                    "text": "                     :RC-MIN-CODE"
+                  },
+                  {
+                    "line": 129,
+                    "text": "                FROM RTNCODES"
+                  },
+                  {
+                    "line": 130,
+                    "text": "                WHERE PROGRAM_ID = :RC-PROGRAM-ID"
+                  },
+                  {
+                    "line": 131,
+                    "text": "                  AND TIMESTAMP >= :RC-START-TIME"
+                  },
+                  {
+                    "line": 132,
+                    "text": "                  AND TIMESTAMP <= :RC-END-TIME"
+                  },
+                  {
+                    "line": 133,
+                    "text": "           END-EXEC."
+                  }
+                ]
+              }
+            ],
+            "deterministic_checks": [],
+            "missing_values": []
+          }
+        ],
+        "deterministic": [
+          {
+            "root_cause_id": "RC-CIT-fd279b78dd",
+            "status": "SOURCE_CITATION_CORRECTED",
+            "establishes": "whether the cited statement or the cited line is wrong, from the stated values",
+            "does_not_establish": "that the requirement is correct once the citation is fixed",
+            "next_step": "REQUIRES_PROPOSAL_REVIEW"
+          }
+        ],
+        "objective_facts": [
+          {
+            "proven": true,
+            "statement": "The source establishes whether the cited statement or the cited line is wrong, from the stated values (SOURCE_CITATION_CORRECTED)."
+          }
+        ]
+      },
+      "remediation": [
+        {
+          "proposal_id": "RP-8d2dd33787",
+          "version": 1,
+          "kind": "citation_correction",
+          "item": "REQ-RTNCDE00-004",
+          "document": "forward/runs/FWD-20261031T172520Z-66b3/workflow/agents/F1/PKT-0002-F1/draft_requirements.json",
+          "pointer": "/requirements/26/source_refs/0/line",
+          "original_value": 121,
+          "proposed_value": 122,
+          "original_line_text": "       P500-ANALYZE-CODES.",
+          "proposed_line_text": "           EXEC SQL",
+          "reason": "The cited line lies outside the cited statement; the stated values occur at line=122.",
+          "claim_supported_after_correction": true,
+          "checks": [
+            {
+              "id": "item_unchanged",
+              "ok": true,
+              "detail": "the cited item is unchanged since the proposal"
+            },
+            {
+              "id": "source:src/copybook/common/RTNCODE.cpy",
+              "ok": true,
+              "detail": "src/copybook/common/RTNCODE.cpy hash unchanged"
+            },
+            {
+              "id": "source:src/copybook/db2/SQLCA.cpy",
+              "ok": true,
+              "detail": "src/copybook/db2/SQLCA.cpy hash unchanged"
+            },
+            {
+              "id": "source:src/programs/batch/RTNCDE00.cbl",
+              "ok": true,
+              "detail": "src/programs/batch/RTNCDE00.cbl hash unchanged"
+            },
+            {
+              "id": "rederived",
+              "ok": true,
+              "detail": "re-derived: 1/1 stated value(s) occur at line=122 (lines 122-133)"
+            }
+          ],
+          "verified_now": true,
+          "authorization": {
+            "status": "NOT_AUTHORIZED",
+            "decision": "RVW-REQ-RTNCDE00-004",
+            "decision_status": "open",
+            "required_roles": [
+              "business_sme"
+            ],
+            "steps": [
+              "workflow decisions template --decision RVW-REQ-RTNCDE00-004 --out RVW-REQ-RTNCDE00-004.json",
+              "the reviewer sets outcome=resolved_requires_update and selected_option=RP-8d2dd33787, signs it, then: workflow decisions resolve --file signed.json",
+              "workflow correct --packet PKT-0002-F1 --file draft_requirements.json --pointer /requirements/26/source_refs/0/line --kind citation_line --proposal RP-8d2dd33787 --authorized-by RES-NNNN --reason \"<reason>\""
+            ]
+          },
+          "effect": "Applying it creates a new versioned correction overlay; the original deliverable is untouched. The requirement then has a new content hash and is re-verified against the corrected citation; its review decision becomes stale and must be re-decided on the new content."
+        }
+      ],
+      "independent_review": [],
+      "shared_impact": [
+        {
+          "scope": "programs:RTNCDE00",
+          "readiness": "NOT_READY",
+          "blocking": 5,
+          "contains": [
+            "RTNCDE00"
+          ]
+        }
+      ],
+      "source_hashes": [
+        {
+          "path": "src/programs/batch/RTNCDE00.cbl",
+          "sha256": "7cb951ea1f418c19ddd61c0eca00f21108af5f364b5ecf05742cbc428862994e"
+        }
+      ],
+      "human_judgment": {
+        "required": true,
+        "why": "the source establishes facts, not the business or technical choice this decision asks for; only a signer with an authorised role can choose an outcome"
+      }
+    }
+  ],
+  "summary": {
+    "decisions": 4,
+    "with_remediation": 2,
+    "cross_scope": 2
+  }
+}

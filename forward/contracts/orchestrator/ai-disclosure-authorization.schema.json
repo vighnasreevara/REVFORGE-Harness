@@ -1,0 +1,215 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://revforge.local/contracts/orchestrator/ai-disclosure-authorization.schema.json",
+  "title": "Provider-specific AI disclosure authorization (unsigned request / signed payload)",
+  "description": "Authorizes disclosure of exactly the listed source files (by sha256) of one scope to one provider and service, for the listed workflows and purpose, within limits and a validity window. It authorizes nothing else: no other provider, scope, file or workflow. An API key or an active login is not an authorization.",
+  "type": "object",
+  "properties": {
+    "contract": {
+      "const": "ai-disclosure-authorization"
+    },
+    "contract_version": {
+      "const": "1.0"
+    },
+    "authorization_id": {
+      "type": "string",
+      "pattern": "^ADA-[0-9a-f]{12}$"
+    },
+    "workflow_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "run_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "baseline_manifest_sha256": {
+      "$ref": "../common.schema.json#/definitions/sha256"
+    },
+    "provider": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "enum": [
+            "anthropic",
+            "openai",
+            "other"
+          ]
+        },
+        "service": {
+          "type": "string",
+          "minLength": 1
+        },
+        "endpoint_host": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "required": [
+        "name",
+        "service",
+        "endpoint_host"
+      ],
+      "additionalProperties": false
+    },
+    "models": {
+      "type": "object",
+      "properties": {
+        "mode": {
+          "enum": [
+            "exact",
+            "class"
+          ]
+        },
+        "values": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "minItems": 1
+        }
+      },
+      "required": [
+        "mode",
+        "values"
+      ],
+      "additionalProperties": false
+    },
+    "scope": {
+      "type": "object",
+      "properties": {
+        "selector_text": {
+          "type": "string",
+          "minLength": 1
+        },
+        "scope_sha256": {
+          "$ref": "../common.schema.json#/definitions/sha256"
+        }
+      },
+      "required": [
+        "selector_text",
+        "scope_sha256"
+      ],
+      "additionalProperties": false
+    },
+    "source_files": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "file_id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "path": {
+            "type": "string",
+            "minLength": 1
+          },
+          "sha256": {
+            "$ref": "../common.schema.json#/definitions/sha256"
+          }
+        },
+        "required": [
+          "file_id",
+          "path",
+          "sha256"
+        ],
+        "additionalProperties": false
+      },
+      "minItems": 1
+    },
+    "data_classification": {
+      "enum": [
+        "public",
+        "internal",
+        "confidential",
+        "restricted"
+      ]
+    },
+    "purpose": {
+      "type": "string",
+      "minLength": 20
+    },
+    "workflows": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "pattern": "^bmad-[a-z0-9-]+$"
+      },
+      "minItems": 1
+    },
+    "limits": {
+      "type": "object",
+      "properties": {
+        "max_files": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "max_bytes": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "max_cost_usd": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        },
+        "max_runs": {
+          "type": "integer",
+          "minimum": 1
+        }
+      },
+      "required": [
+        "max_files",
+        "max_bytes",
+        "max_cost_usd",
+        "max_runs"
+      ],
+      "additionalProperties": false
+    },
+    "not_before": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "expires_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "prepared_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "signer_id": {
+      "type": "string"
+    },
+    "role": {
+      "type": "string"
+    },
+    "signed_at": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "contract",
+    "contract_version",
+    "authorization_id",
+    "workflow_id",
+    "run_id",
+    "baseline_manifest_sha256",
+    "provider",
+    "models",
+    "scope",
+    "source_files",
+    "data_classification",
+    "purpose",
+    "workflows",
+    "limits",
+    "not_before",
+    "expires_at",
+    "prepared_at",
+    "signer_id",
+    "role",
+    "signed_at"
+  ],
+  "additionalProperties": false
+}

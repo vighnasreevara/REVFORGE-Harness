@@ -1,0 +1,253 @@
+{
+ "program": "PORTDEL",
+ "provenance": "Written 2026-11-02 by a scenario-author agent (F6 independent fixture design) from the COBOL source under references/udara-legacy-modernization-harness/src/ and its copybooks, plus only the 'gaps' array of pilot-result.json for gap line numbers. No generated Java, source map or test result was read or run. Scenarios V01.. were added on 2026-11-03 (partly-covered rule extension) by an F6 scenario-author agent from the same COBOL source, copybooks, README and gaps array only; no generated Java, source map or test result was read or run.",
+ "scenarios": [
+  {
+   "id": "D01",
+   "title": "no delete requests: the first READ DELETE-FILE is AT END, the summary shows zero counts, RETURN-CODE is 0 and the audit file stays empty",
+   "cobol_lines": [
+    102,
+    112,
+    114,
+    115,
+    116,
+    118,
+    104,
+    131,
+    132,
+    133,
+    107,
+    185,
+    189,
+    190,
+    191,
+    193
+   ],
+   "kind": "main",
+   "datasets": {
+    "PORTFILE": {
+     "records": [
+      "P00000011000000001ACME HOLDINGS INTERNATIONAL COC2024010120240101A\u0000\u0000\u0000\u0000\u0000\u0010\u0000\f\u0000\u0000\u0000\u0000\u0000\u0000\u0000\fBATCH00100000000"
+     ]
+    },
+    "DELEFILE": {
+     "records": []
+    }
+   },
+   "outputs": [
+    "AUDFILE"
+   ],
+   "expect": {
+    "outcome": "END",
+    "return_code": 0,
+    "display": [
+     "Records deleted:  0000000",
+     "Records not found:0000000",
+     "Errors occurred:  0000000"
+    ],
+    "datasets": {
+     "AUDFILE": []
+    }
+   }
+  },
+  {
+   "id": "D02",
+   "title": "two requests whose 18-byte key (ID + account) is not on the master, one of them with a matching PORT-ID but a different account: READ gives 23, each is reported and counted, nothing is deleted or audited, RETURN-CODE stays 0",
+   "cobol_lines": [
+    131,
+    134,
+    135,
+    140,
+    142,
+    144,
+    147,
+    148,
+    149,
+    189,
+    190,
+    191,
+    193
+   ],
+   "kind": "main",
+   "datasets": {
+    "PORTFILE": {
+     "records": [
+      "P00000011000000001ACME HOLDINGS INTERNATIONAL COC2024010120240101A\u0000\u0000\u0000\u0000\u0000\u0010\u0000\f\u0000\u0000\u0000\u0000\u0000\u0000\u0000\fBATCH00100000000"
+     ]
+    },
+    "DELEFILE": {
+     "records": [
+      "P0000009999999999901",
+      "P0000001100000000203"
+     ]
+    }
+   },
+   "outputs": [
+    "AUDFILE"
+   ],
+   "expect": {
+    "outcome": "END",
+    "return_code": 0,
+    "display": [
+     "Record not found: P00000099999999999",
+     "Record not found: P00000011000000002",
+     "Records deleted:  0000000",
+     "Records not found:0000002",
+     "Errors occurred:  0000000"
+    ],
+    "datasets": {
+     "AUDFILE": []
+    }
+   }
+  },
+  {
+   "id": "D03",
+   "title": "request for an existing record: READ 00, DELETE 00, count, then 2300-WRITE-AUDIT starts with ACCEPT FROM TIME STAMP, which is a gap",
+   "cobol_lines": [
+    140,
+    142,
+    145,
+    146,
+    157,
+    159,
+    160,
+    161,
+    169
+   ],
+   "kind": "main",
+   "datasets": {
+    "PORTFILE": {
+     "records": [
+      "P00000011000000001ACME HOLDINGS INTERNATIONAL COC2024010120240101A\u0000\u0000\u0000\u0000\u0000\u0010\u0000\f\u0000\u0000\u0000\u0000\u0000\u0000\u0000\fBATCH00100000000"
+     ]
+    },
+    "DELEFILE": {
+     "records": [
+      "P0000001100000000102"
+     ]
+    }
+   },
+   "outputs": [
+    "AUDFILE"
+   ],
+   "expect": {
+    "outcome": "BLOCKED AT src/programs/portfolio/PORTDEL.cbl:169",
+    "display": []
+   }
+  },
+  {
+   "id": "V01",
+   "title": "BR-087, BR-088 successful deletion: READ and DELETE give 00, line 159 is true, WS-DELETE-COUNT becomes 1 (not-found and error counts stay 0) and 2300-WRITE-AUDIT is entered, blocking at ACCEPT FROM TIME STAMP before any audit record; the master record is already deleted (PORTFILE empty when the run unit ends) and AUDFILE has no record. BR-089 (termination totals) is not reached on this path",
+   "cobol_lines": [
+    102,
+    104,
+    112,
+    114,
+    115,
+    116,
+    118,
+    131,
+    134,
+    135,
+    140,
+    142,
+    144,
+    145,
+    146,
+    157,
+    159,
+    160,
+    161,
+    169
+   ],
+   "kind": "main",
+   "datasets": {
+    "PORTFILE": {
+     "records": [
+      "P00000011000000001ACME HOLDINGS INTERNATIONAL COC2024010120240101A\u0000\u0000\u0000\u0000\u0000\u0010\u0000\f\u0000\u0000\u0000\u0000\u0000\u0000\u0000\fBATCH00100000000"
+     ]
+    },
+    "DELEFILE": {
+     "records": [
+      "P0000001100000000102"
+     ]
+    }
+   },
+   "outputs": [
+    "AUDFILE"
+   ],
+   "expect": {
+    "outcome": "BLOCKED AT src/programs/portfolio/PORTDEL.cbl:169",
+    "display": [],
+    "items": {
+     "WS-DELETE-COUNT": "1",
+     "WS-NOT-FND-COUNT": "0",
+     "WS-ERROR-COUNT": "0",
+     "WS-FILE-STATUS": "00",
+     "WS-RETURN-CODE": "0"
+    },
+    "datasets": {
+     "PORTFILE": [],
+     "AUDFILE": []
+    }
+   }
+  },
+  {
+   "id": "V02",
+   "title": "BR-088 per-request counters: request 1 (P0000009/9999999999) is not on the master -> WS-NOT-FND-COUNT 1 and 'Record not found' DISPLAY; request 2 deletes P0000001/1000000001 -> WS-DELETE-COUNT 1, then the audit TIME STAMP gap; the other master record P0000002 stays on PORTFILE",
+   "cobol_lines": [
+    131,
+    134,
+    135,
+    140,
+    142,
+    144,
+    145,
+    146,
+    147,
+    148,
+    149,
+    157,
+    159,
+    160,
+    161,
+    169
+   ],
+   "kind": "main",
+   "datasets": {
+    "PORTFILE": {
+     "records": [
+      "P00000011000000001ACME HOLDINGS INTERNATIONAL COC2024010120240101A\u0000\u0000\u0000\u0000\u0000\u0010\u0000\f\u0000\u0000\u0000\u0000\u0000\u0000\u0000\fBATCH00100000000",
+      "P00000021000000001ACME HOLDINGS INTERNATIONAL COC2024010120240101A\u0000\u0000\u0000\u0000\u0000\u0010\u0000\f\u0000\u0000\u0000\u0000\u0000\u0000\u0000\fBATCH00100000000"
+     ]
+    },
+    "DELEFILE": {
+     "records": [
+      "P0000009999999999901",
+      "P0000001100000000102"
+     ]
+    }
+   },
+   "outputs": [
+    "AUDFILE"
+   ],
+   "expect": {
+    "outcome": "BLOCKED AT src/programs/portfolio/PORTDEL.cbl:169",
+    "display": [
+     "Record not found: P00000099999999999"
+    ],
+    "items": {
+     "WS-DELETE-COUNT": "1",
+     "WS-NOT-FND-COUNT": "1",
+     "WS-ERROR-COUNT": "0"
+    },
+    "datasets": {
+     "PORTFILE": [
+      "P00000021000000001ACME HOLDINGS INTERNATIONAL COC2024010120240101A\u0000\u0000\u0000\u0000\u0000\u0010\u0000\f\u0000\u0000\u0000\u0000\u0000\u0000\u0000\fBATCH00100000000"
+     ],
+     "AUDFILE": []
+    }
+   }
+  }
+ ]
+}

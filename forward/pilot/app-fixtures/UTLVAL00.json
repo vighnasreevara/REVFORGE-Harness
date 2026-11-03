@@ -1,0 +1,46 @@
+{
+ "program": "UTLVAL00",
+ "provenance": "Written 2026-11-02 by a scenario-author agent (F6 independent fixture design) from the COBOL source src/programs/utility/UTLVAL00.cbl and its copybooks under references/udara-legacy-modernization-harness, the fixtures README contract, and the gaps array of pilot-result.json; no generated Java, source map or test results were read.",
+ "scenarios": [
+  {
+   "id": "S01",
+   "title": "VALCTL not allocated: the error branch moves to the undeclared WS-ERROR-MESSAGE",
+   "cobol_lines": [
+    97,
+    103,
+    107,
+    108,
+    109
+   ],
+   "kind": "main",
+   "expect": {
+    "outcome": "BLOCKED AT src/programs/utility/UTLVAL00.cbl:109",
+    "display": []
+   }
+  },
+  {
+   "id": "S02",
+   "title": "VALCTL opens: OPEN INPUT POSITION-MASTER has no FD entry in the program",
+   "cobol_lines": [
+    107,
+    108,
+    114
+   ],
+   "kind": "main",
+   "datasets": {
+    "VALCTL": {
+     "records": [
+      "INTEGRITY                                                                       "
+     ]
+    }
+   },
+   "outputs": [
+    "ERRRPT"
+   ],
+   "expect": {
+    "outcome": "BLOCKED AT src/programs/utility/UTLVAL00.cbl:114",
+    "display": []
+   }
+  }
+ ]
+}

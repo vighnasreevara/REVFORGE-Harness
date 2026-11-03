@@ -1,0 +1,31 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://revforge.local/contracts/orchestrator/approval-record.schema.json",
+  "title": "Human approval record (interface; no command creates these in STEP 2)",
+  "description": "Approvals are recorded by the runtime on behalf of an identified human and bound to the exact receipts they approve. Records from an agent, or not bound to receipts, are rejected.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["contract", "gate", "decision", "actor", "recorded_by", "recorded_at", "bound_receipts"],
+  "properties": {
+    "contract": { "const": "approval-record" },
+    "gate": { "enum": ["G2", "G3", "G4", "G8"] },
+    "decision": { "enum": ["approved", "rejected"] },
+    "actor": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["kind", "id"],
+      "properties": { "kind": { "const": "human" }, "id": { "type": "string", "minLength": 1 } }
+    },
+    "recorded_by": { "const": "runtime" },
+    "recorded_at": { "type": "string", "format": "date-time" },
+    "bound_receipts": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["receipt_id", "sha256"],
+        "properties": { "sha256": { "$ref": "../common.schema.json#/definitions/sha256" } }
+      }
+    }
+  }
+}

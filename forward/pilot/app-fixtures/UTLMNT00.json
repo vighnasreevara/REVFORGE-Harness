@@ -1,0 +1,360 @@
+{
+ "program": "UTLMNT00",
+ "provenance": "Written 2026-11-02 by a scenario-author agent (F6 independent fixture design) from the COBOL source src/programs/utility/UTLMNT00.cbl and its copybooks under references/udara-legacy-modernization-harness, the fixtures README contract, and the gaps array of pilot-result.json; no generated Java, source map or test results were read. Scenarios V01.. were added on 2026-11-03 (partly-covered rule extension) by an F6 scenario-author agent from the same COBOL source, copybooks, README and gaps array only; no generated Java, source map or test result was read or run.",
+ "scenarios": [
+  {
+   "id": "S01",
+   "title": "CTLFILE not allocated: the error branch moves to the undeclared WS-ERROR-MESSAGE",
+   "cobol_lines": [
+    88,
+    94,
+    98,
+    99,
+    100
+   ],
+   "kind": "main",
+   "expect": {
+    "outcome": "BLOCKED AT src/programs/utility/UTLMNT00.cbl:100",
+    "display": []
+   }
+  },
+  {
+   "id": "S02",
+   "title": "empty control file: all files open, the read loop ends at once, files close and the run ends with RETURN-CODE 0 and empty outputs",
+   "cobol_lines": [
+    88,
+    89,
+    90,
+    91,
+    98,
+    105,
+    112,
+    120,
+    123,
+    124,
+    125,
+    126,
+    172,
+    173,
+    174
+   ],
+   "kind": "main",
+   "datasets": {
+    "CTLFILE": {
+     "records": []
+    }
+   },
+   "outputs": [
+    "ARCHFILE",
+    "RPTFILE"
+   ],
+   "expect": {
+    "outcome": "END",
+    "return_code": 0,
+    "display": [],
+    "datasets": {
+     "ARCHFILE": [],
+     "RPTFILE": []
+    }
+   }
+  },
+  {
+   "id": "S03",
+   "title": "RPTFILE not allocated: OPEN OUTPUT REPORT-FILE fails and the error branch is a gap",
+   "cobol_lines": [
+    98,
+    105,
+    106,
+    112,
+    113,
+    114
+   ],
+   "kind": "main",
+   "datasets": {
+    "CTLFILE": {
+     "records": []
+    }
+   },
+   "outputs": [
+    "ARCHFILE"
+   ],
+   "expect": {
+    "outcome": "BLOCKED AT src/programs/utility/UTLMNT00.cbl:114",
+    "display": []
+   }
+  },
+  {
+   "id": "S04",
+   "title": "ARCHIVE function: 2200-ARCHIVE-PROCESS performs the undefined 2210-OPEN-VSAM",
+   "cobol_lines": [
+    124,
+    128,
+    133,
+    134,
+    135,
+    149,
+    150
+   ],
+   "kind": "main",
+   "datasets": {
+    "CTLFILE": {
+     "records": [
+      "ARCHIVE PROD.PORTFOLIO.MASTER                                                                                                                           "
+     ]
+    }
+   },
+   "outputs": [
+    "ARCHFILE",
+    "RPTFILE"
+   ],
+   "expect": {
+    "outcome": "BLOCKED AT src/programs/utility/UTLMNT00.cbl:150",
+    "display": []
+   }
+  },
+  {
+   "id": "S05",
+   "title": "ANALYZE function: 2500-ANALYZE-PROCESS performs the undefined 2510-COLLECT-STATS",
+   "cobol_lines": [
+    124,
+    128,
+    133,
+    140,
+    141,
+    167,
+    168
+   ],
+   "kind": "main",
+   "datasets": {
+    "CTLFILE": {
+     "records": [
+      "ANALYZE PROD.PORTFOLIO.MASTER                                                                                                                           "
+     ]
+    }
+   },
+   "outputs": [
+    "ARCHFILE",
+    "RPTFILE"
+   ],
+   "expect": {
+    "outcome": "BLOCKED AT src/programs/utility/UTLMNT00.cbl:168",
+    "display": []
+   }
+  },
+  {
+   "id": "S06",
+   "title": "unknown function 'PURGE': WHEN OTHER moves to the undeclared WS-ERROR-MESSAGE",
+   "cobol_lines": [
+    124,
+    128,
+    133,
+    142,
+    143
+   ],
+   "kind": "main",
+   "datasets": {
+    "CTLFILE": {
+     "records": [
+      "PURGE   PROD.PORTFOLIO.MASTER                                                                                                                           "
+     ]
+    }
+   },
+   "outputs": [
+    "ARCHFILE",
+    "RPTFILE"
+   ],
+   "expect": {
+    "outcome": "BLOCKED AT src/programs/utility/UTLMNT00.cbl:143",
+    "display": []
+   }
+  },
+  {
+   "id": "V01",
+   "title": "BR-128 CTL-FUNCTION 'ARCHIVE' routes to its maintenance paragraph, which moves CTL-FILE-NAME to WS-VSAM-NAME before the undefined paragraph at line 150; nothing is written (ARCHFILE and RPTFILE empty) and WS-ERROR-COUNT stays 0",
+   "cobol_lines": [
+    88,
+    89,
+    94,
+    95,
+    98,
+    105,
+    112,
+    120,
+    123,
+    124,
+    128,
+    133,
+    134,
+    135,
+    149,
+    150
+   ],
+   "kind": "main",
+   "datasets": {
+    "CTLFILE": {
+     "records": [
+      "ARCHIVE PROD.PORTFOLIO.MASTER                                                                                                                           "
+     ]
+    }
+   },
+   "outputs": [
+    "ARCHFILE",
+    "RPTFILE"
+   ],
+   "expect": {
+    "outcome": "BLOCKED AT src/programs/utility/UTLMNT00.cbl:150",
+    "display": [],
+    "items": {
+     "WS-VSAM-NAME": "PROD.PORTFOLIO.MASTER",
+     "WS-ERROR-COUNT": "0",
+     "WS-RECORDS-READ": "0"
+    },
+    "datasets": {
+     "ARCHFILE": [],
+     "RPTFILE": []
+    }
+   }
+  },
+  {
+   "id": "V02",
+   "title": "BR-128 CTL-FUNCTION 'CLEANUP' routes to its maintenance paragraph, which moves CTL-FILE-NAME to WS-VSAM-NAME before the undefined paragraph at line 156; nothing is written (ARCHFILE and RPTFILE empty) and WS-ERROR-COUNT stays 0",
+   "cobol_lines": [
+    88,
+    89,
+    94,
+    95,
+    98,
+    105,
+    112,
+    120,
+    123,
+    124,
+    128,
+    133,
+    136,
+    137,
+    155,
+    156
+   ],
+   "kind": "main",
+   "datasets": {
+    "CTLFILE": {
+     "records": [
+      "CLEANUP PROD.PORTFOLIO.MASTER                                                                                                                           "
+     ]
+    }
+   },
+   "outputs": [
+    "ARCHFILE",
+    "RPTFILE"
+   ],
+   "expect": {
+    "outcome": "BLOCKED AT src/programs/utility/UTLMNT00.cbl:156",
+    "display": [],
+    "items": {
+     "WS-VSAM-NAME": "PROD.PORTFOLIO.MASTER",
+     "WS-ERROR-COUNT": "0",
+     "WS-RECORDS-READ": "0"
+    },
+    "datasets": {
+     "ARCHFILE": [],
+     "RPTFILE": []
+    }
+   }
+  },
+  {
+   "id": "V03",
+   "title": "BR-128 CTL-FUNCTION 'REORG' routes to its maintenance paragraph, which moves CTL-FILE-NAME to WS-VSAM-NAME before the undefined paragraph at line 162; nothing is written (ARCHFILE and RPTFILE empty) and WS-ERROR-COUNT stays 0",
+   "cobol_lines": [
+    88,
+    89,
+    94,
+    95,
+    98,
+    105,
+    112,
+    120,
+    123,
+    124,
+    128,
+    133,
+    138,
+    139,
+    161,
+    162
+   ],
+   "kind": "main",
+   "datasets": {
+    "CTLFILE": {
+     "records": [
+      "REORG   PROD.PORTFOLIO.MASTER                                                                                                                           "
+     ]
+    }
+   },
+   "outputs": [
+    "ARCHFILE",
+    "RPTFILE"
+   ],
+   "expect": {
+    "outcome": "BLOCKED AT src/programs/utility/UTLMNT00.cbl:162",
+    "display": [],
+    "items": {
+     "WS-VSAM-NAME": "PROD.PORTFOLIO.MASTER",
+     "WS-ERROR-COUNT": "0",
+     "WS-RECORDS-READ": "0"
+    },
+    "datasets": {
+     "ARCHFILE": [],
+     "RPTFILE": []
+    }
+   }
+  },
+  {
+   "id": "V04",
+   "title": "BR-128 CTL-FUNCTION 'ANALYZE' routes to its maintenance paragraph, which moves CTL-FILE-NAME to WS-VSAM-NAME before the undefined paragraph at line 168; nothing is written (ARCHFILE and RPTFILE empty) and WS-ERROR-COUNT stays 0",
+   "cobol_lines": [
+    88,
+    89,
+    94,
+    95,
+    98,
+    105,
+    112,
+    120,
+    123,
+    124,
+    128,
+    133,
+    140,
+    141,
+    167,
+    168
+   ],
+   "kind": "main",
+   "datasets": {
+    "CTLFILE": {
+     "records": [
+      "ANALYZE PROD.PORTFOLIO.MASTER                                                                                                                           "
+     ]
+    }
+   },
+   "outputs": [
+    "ARCHFILE",
+    "RPTFILE"
+   ],
+   "expect": {
+    "outcome": "BLOCKED AT src/programs/utility/UTLMNT00.cbl:168",
+    "display": [],
+    "items": {
+     "WS-VSAM-NAME": "PROD.PORTFOLIO.MASTER",
+     "WS-ERROR-COUNT": "0",
+     "WS-RECORDS-READ": "0"
+    },
+    "datasets": {
+     "ARCHFILE": [],
+     "RPTFILE": []
+    }
+   }
+  }
+ ]
+}

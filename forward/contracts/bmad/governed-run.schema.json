@@ -1,0 +1,45 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://revforge.local/contracts/bmad/governed-run.schema.json",
+  "title": "BMad-governed forward run (STEP 21)",
+  "description": "One attempt to run the mandatory BMad lifecycle for one exact scope. Stages run in order; the first stage that cannot launch stops the run, which is then BMAD_BLOCKED. There is never a fallback to an ungoverned local workflow. BMAD_COMPLIANT requires a verified LIVE receipt for every stage.",
+  "type": "object",
+  "required": ["record_id", "contract", "contract_version", "started_at", "ended_at", "scope", "scope_sha256", "mandatory", "status", "stages", "fallback", "local_conversion_invoked"],
+  "properties": {
+    "record_id": { "type": "string", "pattern": "^BGR-[0-9]{4}$" },
+    "contract": { "const": "bmad/governed-run" },
+    "contract_version": { "const": "1.0" },
+    "started_at": { "type": "string", "minLength": 1 },
+    "ended_at": { "type": "string", "minLength": 1 },
+    "scope": { "type": "string", "minLength": 1 },
+    "scope_sha256": { "type": ["string", "null"] },
+    "mandatory": { "type": "boolean" },
+    "status": { "enum": ["BMAD_COMPLIANT", "BMAD_BLOCKED"] },
+    "stages": {
+      "type": "array",
+      "minItems": 6,
+      "maxItems": 6,
+      "items": {
+        "type": "object",
+        "required": ["stage", "binding_id", "workflow_id", "agent", "status", "preflight_id", "authorization_id", "receipt_id", "blockers"],
+        "properties": {
+          "stage": { "enum": ["requirements", "architecture", "stories", "sprint", "implementation", "review"] },
+          "binding_id": { "type": "string" },
+          "workflow_id": { "type": "string" },
+          "agent": { "type": "string" },
+          "status": { "enum": ["RECEIPT_VERIFIED", "EXECUTED_REJECTED", "EXECUTION_FAILED", "BLOCKED", "NOT_ATTEMPTED"] },
+          "preflight_id": { "type": ["string", "null"] },
+          "authorization_id": { "type": ["string", "null"] },
+          "receipt_id": { "type": ["string", "null"] },
+          "execution_record": { "type": ["string", "null"] },
+          "blockers": { "type": "array", "items": { "type": "string" } }
+        },
+        "additionalProperties": false
+      }
+    },
+    "fallback": { "const": "none" },
+    "local_conversion_invoked": { "const": false },
+    "note": { "type": "string" }
+  },
+  "additionalProperties": false
+}

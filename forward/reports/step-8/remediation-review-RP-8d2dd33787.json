@@ -1,0 +1,84 @@
+{
+  "contract": "correction-review",
+  "contract_version": "1.0",
+  "generated_at": "2026-11-01T17:25:48.776Z",
+  "proposal_record": "remediation-proposals-0004",
+  "scope": "programs:RTNCDE00",
+  "proposals": [
+    {
+      "proposal_id": "RP-8d2dd33787",
+      "version": 1,
+      "kind": "citation_correction",
+      "item": "REQ-RTNCDE00-004",
+      "document": "forward/runs/FWD-20261031T172520Z-66b3/workflow/agents/F1/PKT-0002-F1/draft_requirements.json",
+      "pointer": "/requirements/26/source_refs/0/line",
+      "original_value": 121,
+      "proposed_value": 122,
+      "original_line_text": "       P500-ANALYZE-CODES.",
+      "proposed_line_text": "           EXEC SQL",
+      "reason": "The cited line lies outside the cited statement; the stated values occur at line=122.",
+      "claim_supported_after_correction": true,
+      "checks": [
+        {
+          "id": "item_unchanged",
+          "ok": true,
+          "detail": "the cited item is unchanged since the proposal"
+        },
+        {
+          "id": "source:src/copybook/common/RTNCODE.cpy",
+          "ok": true,
+          "detail": "src/copybook/common/RTNCODE.cpy hash unchanged"
+        },
+        {
+          "id": "source:src/copybook/db2/SQLCA.cpy",
+          "ok": true,
+          "detail": "src/copybook/db2/SQLCA.cpy hash unchanged"
+        },
+        {
+          "id": "source:src/programs/batch/RTNCDE00.cbl",
+          "ok": true,
+          "detail": "src/programs/batch/RTNCDE00.cbl hash unchanged"
+        },
+        {
+          "id": "rederived",
+          "ok": true,
+          "detail": "re-derived: 1/1 stated value(s) occur at line=122 (lines 122-133)"
+        }
+      ],
+      "verified_now": true,
+      "authorization": {
+        "status": "NOT_AUTHORIZED",
+        "decision": "RVW-REQ-RTNCDE00-004",
+        "decision_status": "open",
+        "required_roles": [
+          "business_sme"
+        ],
+        "steps": [
+          "workflow decisions template --decision RVW-REQ-RTNCDE00-004 --out RVW-REQ-RTNCDE00-004.json",
+          "the reviewer sets outcome=resolved_requires_update and selected_option=RP-8d2dd33787, signs it, then: workflow decisions resolve --file signed.json",
+          "workflow correct --packet PKT-0002-F1 --file draft_requirements.json --pointer /requirements/26/source_refs/0/line --kind citation_line --proposal RP-8d2dd33787 --authorized-by RES-NNNN --reason \"<reason>\""
+        ]
+      },
+      "effect": "Applying it creates a new versioned correction overlay; the original deliverable is untouched. The requirement then has a new content hash and is re-verified against the corrected citation; its review decision becomes stale and must be re-decided on the new content.",
+      "item_sha256": "0ac2f6b674b57cdeceab63b1845884a51dc70e50d0eccdbaf9ab57f1a5292269",
+      "source_files": [
+        "src/programs/batch/RTNCDE00.cbl"
+      ],
+      "affected_scopes": [
+        {
+          "scope": "programs:RTNCDE00",
+          "readiness": "NOT_READY",
+          "blocking": 5,
+          "contains": [
+            "RTNCDE00"
+          ]
+        }
+      ]
+    }
+  ],
+  "summary": {
+    "proposals": 1,
+    "verified_now": 1,
+    "authorized": 0
+  }
+}

@@ -1,0 +1,124 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://revforge.local/contracts/orchestrator/ai-disclosure-record.schema.json",
+  "title": "Runtime record of an imported, verified AI disclosure authorization",
+  "type": "object",
+  "properties": {
+    "contract": {
+      "const": "ai-disclosure-record"
+    },
+    "contract_version": {
+      "const": "1.0"
+    },
+    "record_id": {
+      "type": "string",
+      "pattern": "^DAU-[0-9]{4}$"
+    },
+    "authorization_id": {
+      "type": "string",
+      "pattern": "^ADA-[0-9a-f]{12}$"
+    },
+    "recorded_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "recorded_by": {
+      "const": "runtime"
+    },
+    "provider": {
+      "type": "string",
+      "minLength": 1
+    },
+    "service": {
+      "type": "string",
+      "minLength": 1
+    },
+    "scope": {
+      "type": "string",
+      "minLength": 1
+    },
+    "signer": {
+      "type": "object",
+      "properties": {
+        "signer_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "role": {
+          "type": "string",
+          "minLength": 1
+        },
+        "key_fingerprint": {
+          "$ref": "../common.schema.json#/definitions/sha256"
+        }
+      },
+      "required": [
+        "signer_id",
+        "role",
+        "key_fingerprint"
+      ],
+      "additionalProperties": false
+    },
+    "trust_store_sha256": {
+      "$ref": "../common.schema.json#/definitions/sha256"
+    },
+    "authorization": {
+      "type": "object"
+    },
+    "signature": {
+      "type": "object"
+    },
+    "verification": {
+      "type": "object",
+      "properties": {
+        "checks": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "minLength": 1
+              },
+              "ok": {
+                "type": "boolean"
+              },
+              "detail": {
+                "type": "string",
+                "minLength": 1
+              }
+            },
+            "required": [
+              "id",
+              "ok",
+              "detail"
+            ],
+            "additionalProperties": false
+          },
+          "minItems": 1
+        }
+      },
+      "required": [
+        "checks"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "required": [
+    "contract",
+    "contract_version",
+    "record_id",
+    "authorization_id",
+    "recorded_at",
+    "recorded_by",
+    "provider",
+    "service",
+    "scope",
+    "signer",
+    "trust_store_sha256",
+    "authorization",
+    "signature",
+    "verification"
+  ],
+  "additionalProperties": false
+}

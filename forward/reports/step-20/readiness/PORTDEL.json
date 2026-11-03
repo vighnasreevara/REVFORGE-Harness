@@ -1,0 +1,748 @@
+{
+  "gate": "SOURCE_READINESS",
+  "subject": "PORTDEL",
+  "status": "FAIL",
+  "checks": [
+    {
+      "id": "source_available",
+      "ok": true,
+      "detail": "src/programs/portfolio/PORTDEL.cbl sha256 baaab39ebebed361185d44f7551a6e566d46abd6ec5ecad896a56e2cc2bcdc84; 53 statement(s) in 7 paragraph(s)"
+    },
+    {
+      "id": "complete_program",
+      "ok": true,
+      "detail": "every paragraph contains statements"
+    },
+    {
+      "id": "copybooks_resolved",
+      "ok": true,
+      "detail": "all 1 include(s) resolved: PORTFLIO"
+    },
+    {
+      "id": "requirements_and_data_mapping_delivered",
+      "ok": true,
+      "detail": "F1/F2 deliveries accepted for PORTFLIO, PORTDEL"
+    },
+    {
+      "id": "behaviour_classified",
+      "ok": true,
+      "detail": "4 behaviour(s): 0 VERIFIED_CANDIDATE, 4 PARTIAL, 0 GAP"
+    },
+    {
+      "id": "dependencies_identified",
+      "ok": false,
+      "detail": "closure UNRESOLVED for PORTDEL:0000-MAIN (line 169: STAMP is neither declared, a keyword, a paragraph nor the subject of a blocking decision (unknown dependency)); PORTDEL:2000-PROCESS (line 169: STAMP is neither declared, a keyword, a paragraph nor the subject of a blocking decision (unknown dependency))"
+    },
+    {
+      "id": "unsupported_documented",
+      "ok": true,
+      "detail": "11 gap(s) document every PARTIAL/GAP behaviour"
+    },
+    {
+      "id": "unknowns_documented",
+      "ok": true,
+      "detail": "10 open decision(s) record the remaining questions (1 blocking for approval); none is resolved or assumed here"
+    }
+  ],
+  "note": "An engineering gate: it states that the source is understood well enough to convert, with every unknown documented. It is not a G2 approval and does not authorise generation.",
+  "behaviours": [
+    {
+      "behaviour_id": "PORTDEL:ENTRY-DISPATCH",
+      "kind": "dispatch",
+      "classification": "PARTIAL",
+      "lines": [
+        102,
+        107
+      ],
+      "inputs": [
+        "WS-END-OF-FILE-SW"
+      ],
+      "outputs": [],
+      "side_effects": [],
+      "unresolved": [],
+      "covered_by": []
+    },
+    {
+      "behaviour_id": "PORTDEL:1000-INITIALIZE",
+      "kind": "performed_range",
+      "classification": "PARTIAL",
+      "lines": [
+        112,
+        194
+      ],
+      "inputs": [
+        "WS-AUD-STATUS",
+        "WS-DEL-STATUS",
+        "WS-DELETE-COUNT",
+        "WS-ERROR",
+        "WS-ERROR-COUNT",
+        "WS-FILE-STATUS",
+        "WS-NOT-FND-COUNT",
+        "WS-RETURN-CODE"
+      ],
+      "outputs": [
+        "RETURN-CODE",
+        "WS-RETURN-CODE",
+        "WS-WORK-AREAS"
+      ],
+      "side_effects": [
+        {
+          "line": 114,
+          "kind": "file_io",
+          "operation": "OPEN",
+          "table": null
+        },
+        {
+          "line": 115,
+          "kind": "file_io",
+          "operation": "OPEN",
+          "table": null
+        },
+        {
+          "line": 116,
+          "kind": "file_io",
+          "operation": "OPEN",
+          "table": null
+        },
+        {
+          "line": 185,
+          "kind": "file_io",
+          "operation": "CLOSE",
+          "table": null
+        },
+        {
+          "line": 186,
+          "kind": "file_io",
+          "operation": "DELETE",
+          "table": null
+        }
+      ],
+      "unresolved": [],
+      "covered_by": [
+        "REQ-PORTDEL-006"
+      ]
+    },
+    {
+      "behaviour_id": "PORTDEL:2000-PROCESS",
+      "kind": "performed_range",
+      "classification": "PARTIAL",
+      "lines": [
+        131,
+        180
+      ],
+      "inputs": [
+        "AUDIT-RECORD",
+        "DEL-KEY",
+        "DEL-REASON-CODE",
+        "PORT-KEY",
+        "PORT-STATUS",
+        "WS-AUD-STATUS",
+        "WS-DELETE-COUNT",
+        "WS-ERROR-COUNT",
+        "WS-FILE-STATUS",
+        "WS-NOT-FND-COUNT",
+        "WS-TIMESTAMP"
+      ],
+      "outputs": [
+        "AUD-ACTION",
+        "AUD-KEY",
+        "AUD-REASON",
+        "AUD-STATUS",
+        "AUD-TIMESTAMP",
+        "PORT-KEY",
+        "WS-END-OF-FILE-SW"
+      ],
+      "side_effects": [
+        {
+          "line": 131,
+          "kind": "file_io",
+          "operation": "READ",
+          "table": null
+        },
+        {
+          "line": 142,
+          "kind": "file_io",
+          "operation": "READ",
+          "table": null
+        },
+        {
+          "line": 157,
+          "kind": "file_io",
+          "operation": "DELETE",
+          "table": null
+        },
+        {
+          "line": 177,
+          "kind": "file_io",
+          "operation": "WRITE",
+          "table": null
+        }
+      ],
+      "unresolved": [],
+      "covered_by": []
+    },
+    {
+      "behaviour_id": "PORTDEL:3000-TERMINATE",
+      "kind": "performed_range",
+      "classification": "PARTIAL",
+      "lines": [
+        185,
+        194
+      ],
+      "inputs": [
+        "WS-DELETE-COUNT",
+        "WS-ERROR-COUNT",
+        "WS-NOT-FND-COUNT",
+        "WS-RETURN-CODE"
+      ],
+      "outputs": [
+        "RETURN-CODE"
+      ],
+      "side_effects": [
+        {
+          "line": 185,
+          "kind": "file_io",
+          "operation": "CLOSE",
+          "table": null
+        },
+        {
+          "line": 186,
+          "kind": "file_io",
+          "operation": "DELETE",
+          "table": null
+        }
+      ],
+      "unresolved": [],
+      "covered_by": [
+        "REQ-PORTDEL-006",
+        "RT-PORTDEL-004"
+      ]
+    }
+  ],
+  "gaps": [
+    {
+      "gap_id": "GAP-PORTDEL-1000-INITIALIZE-FILE-OPEN-PORTFOLIO-FILE",
+      "kind": "EXTERNAL_FILE_RUNTIME",
+      "behaviour_id": "PORTDEL:1000-INITIALIZE",
+      "source": {
+        "path": "src/programs/portfolio/PORTDEL.cbl",
+        "sha256": "baaab39ebebed361185d44f7551a6e566d46abd6ec5ecad896a56e2cc2bcdc84",
+        "lines": [
+          114
+        ],
+        "statements": [
+          {
+            "line": 114,
+            "text": "OPEN I-O   PORTFOLIO-FILE"
+          }
+        ]
+      },
+      "missing_fact": "the run-time behaviour of OPEN on PORTFOLIO-FILE: the dataset bound to it (JCL DD), its content and record encoding, and the file-system status outcomes the COBOL source does not define",
+      "why_unsafe": "the records read and the statuses reported come from a dataset outside the program; a Java implementation verified only against source-derived fixtures does not establish them",
+      "affected_requirements": [
+        "REQ-PORTDEL-006"
+      ],
+      "affected_java_component": "file port for OPEN PORTFOLIO-FILE (runtime file semantics; dataset contents unverified)",
+      "required_action": [
+        "the dataset definitions (JCL DD, organisation, record format) and a captured legacy run for each status outcome (technical authority)"
+      ],
+      "validation_evidence": "a captured legacy run against the real (or an approved equivalent) dataset, including end-of-file and error statuses",
+      "blocks_execution_path": "request its PERFORM -> 1000-INITIALIZE: statement(s) 114",
+      "blocking": true,
+      "status": "OPEN"
+    },
+    {
+      "gap_id": "GAP-PORTDEL-1000-INITIALIZE-FILE-OPEN-DELETE-FILE",
+      "kind": "EXTERNAL_FILE_RUNTIME",
+      "behaviour_id": "PORTDEL:1000-INITIALIZE",
+      "source": {
+        "path": "src/programs/portfolio/PORTDEL.cbl",
+        "sha256": "baaab39ebebed361185d44f7551a6e566d46abd6ec5ecad896a56e2cc2bcdc84",
+        "lines": [
+          115
+        ],
+        "statements": [
+          {
+            "line": 115,
+            "text": "OPEN INPUT DELETE-FILE"
+          }
+        ]
+      },
+      "missing_fact": "the run-time behaviour of OPEN on DELETE-FILE: the dataset bound to it (JCL DD), its content and record encoding, and the file-system status outcomes the COBOL source does not define",
+      "why_unsafe": "the records read and the statuses reported come from a dataset outside the program; a Java implementation verified only against source-derived fixtures does not establish them",
+      "affected_requirements": [
+        "REQ-PORTDEL-006"
+      ],
+      "affected_java_component": "file port for OPEN DELETE-FILE (runtime file semantics; dataset contents unverified)",
+      "required_action": [
+        "the dataset definitions (JCL DD, organisation, record format) and a captured legacy run for each status outcome (technical authority)"
+      ],
+      "validation_evidence": "a captured legacy run against the real (or an approved equivalent) dataset, including end-of-file and error statuses",
+      "blocks_execution_path": "request its PERFORM -> 1000-INITIALIZE: statement(s) 115",
+      "blocking": true,
+      "status": "OPEN"
+    },
+    {
+      "gap_id": "GAP-PORTDEL-1000-INITIALIZE-FILE-OPEN-AUDIT-FILE",
+      "kind": "EXTERNAL_FILE_RUNTIME",
+      "behaviour_id": "PORTDEL:1000-INITIALIZE",
+      "source": {
+        "path": "src/programs/portfolio/PORTDEL.cbl",
+        "sha256": "baaab39ebebed361185d44f7551a6e566d46abd6ec5ecad896a56e2cc2bcdc84",
+        "lines": [
+          116
+        ],
+        "statements": [
+          {
+            "line": 116,
+            "text": "OPEN OUTPUT AUDIT-FILE"
+          }
+        ]
+      },
+      "missing_fact": "the run-time behaviour of OPEN on AUDIT-FILE: the dataset bound to it (JCL DD), its content and record encoding, and the file-system status outcomes the COBOL source does not define",
+      "why_unsafe": "the records read and the statuses reported come from a dataset outside the program; a Java implementation verified only against source-derived fixtures does not establish them",
+      "affected_requirements": [
+        "REQ-PORTDEL-006"
+      ],
+      "affected_java_component": "file port for OPEN AUDIT-FILE (runtime file semantics; dataset contents unverified)",
+      "required_action": [
+        "the dataset definitions (JCL DD, organisation, record format) and a captured legacy run for each status outcome (technical authority)"
+      ],
+      "validation_evidence": "a captured legacy run against the real (or an approved equivalent) dataset, including end-of-file and error statuses",
+      "blocks_execution_path": "request its PERFORM -> 1000-INITIALIZE: statement(s) 116",
+      "blocking": true,
+      "status": "OPEN"
+    },
+    {
+      "gap_id": "GAP-PORTDEL-1000-INITIALIZE-FILE-CLOSE-PORTFOLIO-FILE",
+      "kind": "EXTERNAL_FILE_RUNTIME",
+      "behaviour_id": "PORTDEL:1000-INITIALIZE",
+      "source": {
+        "path": "src/programs/portfolio/PORTDEL.cbl",
+        "sha256": "baaab39ebebed361185d44f7551a6e566d46abd6ec5ecad896a56e2cc2bcdc84",
+        "lines": [
+          185
+        ],
+        "statements": [
+          {
+            "line": 185,
+            "text": "CLOSE PORTFOLIO-FILE"
+          }
+        ]
+      },
+      "missing_fact": "the run-time behaviour of CLOSE on PORTFOLIO-FILE: the dataset bound to it (JCL DD), its content and record encoding, and the file-system status outcomes the COBOL source does not define",
+      "why_unsafe": "the records read and the statuses reported come from a dataset outside the program; a Java implementation verified only against source-derived fixtures does not establish them",
+      "affected_requirements": [
+        "REQ-PORTDEL-006"
+      ],
+      "affected_java_component": "file port for CLOSE PORTFOLIO-FILE (runtime file semantics; dataset contents unverified)",
+      "required_action": [
+        "the dataset definitions (JCL DD, organisation, record format) and a captured legacy run for each status outcome (technical authority)"
+      ],
+      "validation_evidence": "a captured legacy run against the real (or an approved equivalent) dataset, including end-of-file and error statuses",
+      "blocks_execution_path": "request its PERFORM -> 1000-INITIALIZE: statement(s) 185",
+      "blocking": true,
+      "status": "OPEN"
+    },
+    {
+      "gap_id": "GAP-PORTDEL-1000-INITIALIZE-FILE-DELETE-UNKNOWN",
+      "kind": "EXTERNAL_FILE_RUNTIME",
+      "behaviour_id": "PORTDEL:1000-INITIALIZE",
+      "source": {
+        "path": "src/programs/portfolio/PORTDEL.cbl",
+        "sha256": "baaab39ebebed361185d44f7551a6e566d46abd6ec5ecad896a56e2cc2bcdc84",
+        "lines": [
+          186
+        ],
+        "statements": [
+          {
+            "line": 186,
+            "text": "DELETE-FILE AUDIT-FILE"
+          }
+        ]
+      },
+      "missing_fact": "the run-time behaviour of DELETE on UNKNOWN: the dataset bound to it (JCL DD), its content and record encoding, and the file-system status outcomes the COBOL source does not define",
+      "why_unsafe": "the records read and the statuses reported come from a dataset outside the program; a Java implementation verified only against source-derived fixtures does not establish them",
+      "affected_requirements": [
+        "REQ-PORTDEL-006"
+      ],
+      "affected_java_component": "file port for DELETE UNKNOWN (runtime file semantics; dataset contents unverified)",
+      "required_action": [
+        "the dataset definitions (JCL DD, organisation, record format) and a captured legacy run for each status outcome (technical authority)"
+      ],
+      "validation_evidence": "a captured legacy run against the real (or an approved equivalent) dataset, including end-of-file and error statuses",
+      "blocks_execution_path": "request its PERFORM -> 1000-INITIALIZE: statement(s) 186",
+      "blocking": true,
+      "status": "OPEN"
+    },
+    {
+      "gap_id": "GAP-PORTDEL-2000-PROCESS-FILE-READ-DELETE-FILE",
+      "kind": "EXTERNAL_FILE_RUNTIME",
+      "behaviour_id": "PORTDEL:2000-PROCESS",
+      "source": {
+        "path": "src/programs/portfolio/PORTDEL.cbl",
+        "sha256": "baaab39ebebed361185d44f7551a6e566d46abd6ec5ecad896a56e2cc2bcdc84",
+        "lines": [
+          131
+        ],
+        "statements": [
+          {
+            "line": 131,
+            "text": "READ DELETE-FILE AT END"
+          }
+        ]
+      },
+      "missing_fact": "the run-time behaviour of READ on DELETE-FILE: the dataset bound to it (JCL DD), its content and record encoding, and the file-system status outcomes the COBOL source does not define",
+      "why_unsafe": "the records read and the statuses reported come from a dataset outside the program; a Java implementation verified only against source-derived fixtures does not establish them",
+      "affected_requirements": [],
+      "affected_java_component": "file port for READ DELETE-FILE (runtime file semantics; dataset contents unverified)",
+      "required_action": [
+        "the dataset definitions (JCL DD, organisation, record format) and a captured legacy run for each status outcome (technical authority)"
+      ],
+      "validation_evidence": "a captured legacy run against the real (or an approved equivalent) dataset, including end-of-file and error statuses",
+      "blocks_execution_path": "request its PERFORM -> 2000-PROCESS: statement(s) 131",
+      "blocking": true,
+      "status": "OPEN"
+    },
+    {
+      "gap_id": "GAP-PORTDEL-2000-PROCESS-FILE-READ-PORTFOLIO-FILE",
+      "kind": "EXTERNAL_FILE_RUNTIME",
+      "behaviour_id": "PORTDEL:2000-PROCESS",
+      "source": {
+        "path": "src/programs/portfolio/PORTDEL.cbl",
+        "sha256": "baaab39ebebed361185d44f7551a6e566d46abd6ec5ecad896a56e2cc2bcdc84",
+        "lines": [
+          142
+        ],
+        "statements": [
+          {
+            "line": 142,
+            "text": "READ PORTFOLIO-FILE"
+          }
+        ]
+      },
+      "missing_fact": "the run-time behaviour of READ on PORTFOLIO-FILE: the dataset bound to it (JCL DD), its content and record encoding, and the file-system status outcomes the COBOL source does not define",
+      "why_unsafe": "the records read and the statuses reported come from a dataset outside the program; a Java implementation verified only against source-derived fixtures does not establish them",
+      "affected_requirements": [],
+      "affected_java_component": "file port for READ PORTFOLIO-FILE (runtime file semantics; dataset contents unverified)",
+      "required_action": [
+        "the dataset definitions (JCL DD, organisation, record format) and a captured legacy run for each status outcome (technical authority)"
+      ],
+      "validation_evidence": "a captured legacy run against the real (or an approved equivalent) dataset, including end-of-file and error statuses",
+      "blocks_execution_path": "request its PERFORM -> 2000-PROCESS: statement(s) 142",
+      "blocking": true,
+      "status": "OPEN"
+    },
+    {
+      "gap_id": "GAP-PORTDEL-2000-PROCESS-FILE-DELETE-PORTFOLIO-FILE",
+      "kind": "EXTERNAL_FILE_RUNTIME",
+      "behaviour_id": "PORTDEL:2000-PROCESS",
+      "source": {
+        "path": "src/programs/portfolio/PORTDEL.cbl",
+        "sha256": "baaab39ebebed361185d44f7551a6e566d46abd6ec5ecad896a56e2cc2bcdc84",
+        "lines": [
+          157
+        ],
+        "statements": [
+          {
+            "line": 157,
+            "text": "DELETE PORTFOLIO-FILE"
+          }
+        ]
+      },
+      "missing_fact": "the run-time behaviour of DELETE on PORTFOLIO-FILE: the dataset bound to it (JCL DD), its content and record encoding, and the file-system status outcomes the COBOL source does not define",
+      "why_unsafe": "the records read and the statuses reported come from a dataset outside the program; a Java implementation verified only against source-derived fixtures does not establish them",
+      "affected_requirements": [],
+      "affected_java_component": "file port for DELETE PORTFOLIO-FILE (runtime file semantics; dataset contents unverified)",
+      "required_action": [
+        "the dataset definitions (JCL DD, organisation, record format) and a captured legacy run for each status outcome (technical authority)"
+      ],
+      "validation_evidence": "a captured legacy run against the real (or an approved equivalent) dataset, including end-of-file and error statuses",
+      "blocks_execution_path": "request its PERFORM -> 2000-PROCESS: statement(s) 157",
+      "blocking": true,
+      "status": "OPEN"
+    },
+    {
+      "gap_id": "GAP-PORTDEL-2000-PROCESS-FILE-WRITE-AUDIT-RECORD",
+      "kind": "EXTERNAL_FILE_RUNTIME",
+      "behaviour_id": "PORTDEL:2000-PROCESS",
+      "source": {
+        "path": "src/programs/portfolio/PORTDEL.cbl",
+        "sha256": "baaab39ebebed361185d44f7551a6e566d46abd6ec5ecad896a56e2cc2bcdc84",
+        "lines": [
+          177
+        ],
+        "statements": [
+          {
+            "line": 177,
+            "text": "WRITE AUDIT-RECORD"
+          }
+        ]
+      },
+      "missing_fact": "the run-time behaviour of WRITE on AUDIT-RECORD: the dataset bound to it (JCL DD), its content and record encoding, and the file-system status outcomes the COBOL source does not define",
+      "why_unsafe": "the records read and the statuses reported come from a dataset outside the program; a Java implementation verified only against source-derived fixtures does not establish them",
+      "affected_requirements": [],
+      "affected_java_component": "file port for WRITE AUDIT-RECORD (runtime file semantics; dataset contents unverified)",
+      "required_action": [
+        "the dataset definitions (JCL DD, organisation, record format) and a captured legacy run for each status outcome (technical authority)"
+      ],
+      "validation_evidence": "a captured legacy run against the real (or an approved equivalent) dataset, including end-of-file and error statuses",
+      "blocks_execution_path": "request its PERFORM -> 2000-PROCESS: statement(s) 177",
+      "blocking": true,
+      "status": "OPEN"
+    },
+    {
+      "gap_id": "GAP-PORTDEL-3000-TERMINATE-FILE-CLOSE-PORTFOLIO-FILE",
+      "kind": "EXTERNAL_FILE_RUNTIME",
+      "behaviour_id": "PORTDEL:3000-TERMINATE",
+      "source": {
+        "path": "src/programs/portfolio/PORTDEL.cbl",
+        "sha256": "baaab39ebebed361185d44f7551a6e566d46abd6ec5ecad896a56e2cc2bcdc84",
+        "lines": [
+          185
+        ],
+        "statements": [
+          {
+            "line": 185,
+            "text": "CLOSE PORTFOLIO-FILE"
+          }
+        ]
+      },
+      "missing_fact": "the run-time behaviour of CLOSE on PORTFOLIO-FILE: the dataset bound to it (JCL DD), its content and record encoding, and the file-system status outcomes the COBOL source does not define",
+      "why_unsafe": "the records read and the statuses reported come from a dataset outside the program; a Java implementation verified only against source-derived fixtures does not establish them",
+      "affected_requirements": [
+        "REQ-PORTDEL-006",
+        "RT-PORTDEL-004"
+      ],
+      "affected_java_component": "file port for CLOSE PORTFOLIO-FILE (runtime file semantics; dataset contents unverified)",
+      "required_action": [
+        "the dataset definitions (JCL DD, organisation, record format) and a captured legacy run for each status outcome (technical authority)"
+      ],
+      "validation_evidence": "a captured legacy run against the real (or an approved equivalent) dataset, including end-of-file and error statuses",
+      "blocks_execution_path": "request its PERFORM -> 3000-TERMINATE: statement(s) 185",
+      "blocking": true,
+      "status": "OPEN"
+    },
+    {
+      "gap_id": "GAP-PORTDEL-3000-TERMINATE-FILE-DELETE-UNKNOWN",
+      "kind": "EXTERNAL_FILE_RUNTIME",
+      "behaviour_id": "PORTDEL:3000-TERMINATE",
+      "source": {
+        "path": "src/programs/portfolio/PORTDEL.cbl",
+        "sha256": "baaab39ebebed361185d44f7551a6e566d46abd6ec5ecad896a56e2cc2bcdc84",
+        "lines": [
+          186
+        ],
+        "statements": [
+          {
+            "line": 186,
+            "text": "DELETE-FILE AUDIT-FILE"
+          }
+        ]
+      },
+      "missing_fact": "the run-time behaviour of DELETE on UNKNOWN: the dataset bound to it (JCL DD), its content and record encoding, and the file-system status outcomes the COBOL source does not define",
+      "why_unsafe": "the records read and the statuses reported come from a dataset outside the program; a Java implementation verified only against source-derived fixtures does not establish them",
+      "affected_requirements": [
+        "REQ-PORTDEL-006",
+        "RT-PORTDEL-004"
+      ],
+      "affected_java_component": "file port for DELETE UNKNOWN (runtime file semantics; dataset contents unverified)",
+      "required_action": [
+        "the dataset definitions (JCL DD, organisation, record format) and a captured legacy run for each status outcome (technical authority)"
+      ],
+      "validation_evidence": "a captured legacy run against the real (or an approved equivalent) dataset, including end-of-file and error statuses",
+      "blocks_execution_path": "request its PERFORM -> 3000-TERMINATE: statement(s) 186",
+      "blocking": true,
+      "status": "OPEN"
+    }
+  ],
+  "closures": [
+    {
+      "behaviour_id": "PORTDEL:0000-MAIN",
+      "status": "UNRESOLVED",
+      "unresolved_reasons": [
+        "line 169: STAMP is neither declared, a keyword, a paragraph nor the subject of a blocking decision (unknown dependency)"
+      ],
+      "units": [
+        "PORTDEL",
+        "PORTFLIO"
+      ],
+      "external": [
+        {
+          "kind": "file_io",
+          "line": 131,
+          "operation": "READ",
+          "target": "DELETE-FILE",
+          "relation": "direct"
+        },
+        {
+          "kind": "file_io",
+          "line": 142,
+          "operation": "READ",
+          "target": "PORTFOLIO-FILE",
+          "relation": "direct"
+        },
+        {
+          "kind": "file_io",
+          "line": 157,
+          "operation": "DELETE",
+          "target": "PORTFOLIO-FILE",
+          "relation": "direct"
+        },
+        {
+          "kind": "file_io",
+          "line": 177,
+          "operation": "WRITE",
+          "target": "AUDIT-FILE",
+          "relation": "direct"
+        }
+      ],
+      "undeclared": [],
+      "sha256": "936cf939103f42d27e5c18a4c9f469085f0aa84306e182762189298a731a81a8"
+    },
+    {
+      "behaviour_id": "PORTDEL:1000-INITIALIZE",
+      "status": "RESOLVED",
+      "unresolved_reasons": [],
+      "units": [
+        "PORTDEL"
+      ],
+      "external": [],
+      "undeclared": [],
+      "sha256": "dcc676892dfda7c0b4ec6913d4b0be8c55b43d387fab0fd2cd9e6f8546856e6f"
+    },
+    {
+      "behaviour_id": "PORTDEL:2000-PROCESS",
+      "status": "UNRESOLVED",
+      "unresolved_reasons": [
+        "line 169: STAMP is neither declared, a keyword, a paragraph nor the subject of a blocking decision (unknown dependency)"
+      ],
+      "units": [
+        "PORTDEL",
+        "PORTFLIO"
+      ],
+      "external": [
+        {
+          "kind": "file_io",
+          "line": 131,
+          "operation": "READ",
+          "target": "DELETE-FILE",
+          "relation": "direct"
+        },
+        {
+          "kind": "file_io",
+          "line": 142,
+          "operation": "READ",
+          "target": "PORTFOLIO-FILE",
+          "relation": "direct"
+        },
+        {
+          "kind": "file_io",
+          "line": 157,
+          "operation": "DELETE",
+          "target": "PORTFOLIO-FILE",
+          "relation": "direct"
+        },
+        {
+          "kind": "file_io",
+          "line": 177,
+          "operation": "WRITE",
+          "target": "AUDIT-FILE",
+          "relation": "direct"
+        }
+      ],
+      "undeclared": [],
+      "sha256": "9c4a677c591abdf76ebaea33c89bc297c1829a4760102ea37e75badd80c486d6"
+    },
+    {
+      "behaviour_id": "PORTDEL:3000-TERMINATE",
+      "status": "RESOLVED",
+      "unresolved_reasons": [],
+      "units": [
+        "PORTDEL"
+      ],
+      "external": [],
+      "undeclared": [],
+      "sha256": "c96a1b4c59b9dddc8833e33054d9c2bd8e53922e7e36fdf6cfa66618bc1a7b30"
+    }
+  ],
+  "open_decisions": [
+    {
+      "id": "DR-DB2ERR-002",
+      "blocking": false,
+      "question": "DB2ERR (line 75) uses the non-standard 'ACCEPT WS-CURRENT-TIMESTAMP FROM TIME STAMP'; the ERRPROC logic file flags the same construct (line 57) and PORTDEL uses it for the deletion audit timestamp (source line 169). Which compiler extension is in use and what timestamp format do ERRLOG rows, error-log records and deletion audit records actually carry?"
+    },
+    {
+      "id": "DR-F2-P0006-013",
+      "blocking": false,
+      "question": "Error paths do not stop as expected: PORTADD and PORTDEL continue the read loop on closed files after an open failure (returning RC 8), and PORTMSTR's 9000-ERROR GOBACKs from inside a PERFORM after closing a possibly unopened file. Should Java reproduce this behaviour or end the step/call immediately with RC 8?"
+    },
+    {
+      "id": "DR-F2-P0006-014",
+      "blocking": false,
+      "question": "PORTADD and PORTDEL (key PORT-KEY, PORTFLIO layout) and PORTMSTR (key PORT-ID, 103-byte PORTFOLIO-RECORD) all ASSIGN TO PORTFILE as an indexed file. Do they address the same VSAM dataset, and if so which record layout and key are authoritative?"
+    },
+    {
+      "id": "DR-F2-PKT0010-002",
+      "blocking": false,
+      "question": "Which character encoding (code page) do the files and areas described by these copybooks use for DISPLAY data on the legacy platform (EBCDIC 037, 1140, another EBCDIC variant, or ASCII)? The zoned-decimal test vectors and String codecs depend on it."
+    },
+    {
+      "id": "DR-PORTDEL-001",
+      "blocking": false,
+      "question": "On an open failure PORTDEL sets return code 8 and 3000-TERMINATE returns (line 126); 0000-MAIN still runs 2000-PROCESS on closed files and 3000-TERMINATE again, and whether the loop ends depends on run-time file status, so deletion counts and audit writes are unpredictable. Should the batch delete stop immediately after an open failure?"
+    },
+    {
+      "id": "DR-PORTDEL-002",
+      "blocking": false,
+      "question": "The deletion request declares reason codes '01' account closed, '02' transferred and '03' client requested, and the code is copied into the deletion audit record, but it is not validated before the portfolio is deleted. Should the modern system validate the reason code (and reject or count requests with other values) or keep accepting any value?"
+    },
+    {
+      "id": "DR-PORTMSTR-001",
+      "blocking": true,
+      "question": "Which portfolio status domain is authoritative? PORTMSTR validates 'A', 'I', 'C' (VALID-STATUS, BR-095) while copybook PORTFLIO used by PORTADD and PORTDEL declares 'A' active, 'C' closed, 'S' suspended (BR-149); 'I' and 'S' each exist in only one place, and the PORTFLIO and PORTMSTR records are linked only by naming convention (REL-002, GAP-091). What do 'I' and 'S' mean, and do PORTMSTR and the batch programs maintain the same portfolio master?"
+    },
+    {
+      "id": "RVW-GAP-092",
+      "blocking": false,
+      "question": "GAP-092 (medium, DIAGRAM_RENDER_UNVERIFIED) is not addressed by any decision or requirement: Visual rendering of the 65 Mermaid diagrams is unverified. Acknowledge it as a known limitation (resolved_no_change) or exclude the affected units?"
+    },
+    {
+      "id": "RVW-GAP-104",
+      "blocking": false,
+      "question": "GAP-104 (low, DIAGRAM_INCOMPLETE) is not addressed by any decision or requirement: COMP-UNRESOLVED: all seven edges are unsupported. Acknowledge it as a known limitation (resolved_no_change) or exclude the affected units?"
+    },
+    {
+      "id": "RVW-GAP-211",
+      "blocking": false,
+      "question": "GAP-211 (low, MEDIUM_CONFIDENCE_RULE) is not addressed by any decision or requirement: BR-148 Validate client type is individual, corporate or trust — medium confidence. Acknowledge it as a known limitation (resolved_no_change) or exclude the affected units?"
+    }
+  ],
+  "authorisation": {
+    "generation_authorized": false,
+    "blockers": [
+      "config generation.java_generation_allowed is false (project authority)",
+      "no authorised orchestrator.java_target_dir",
+      "G4 is BLOCKED (needs signed G2, G3 and G4 approvals by trusted signers)",
+      "trust store: TRUST_NOT_CONFIGURED"
+    ],
+    "gates": {
+      "G0": "PASS",
+      "G1": "PASS",
+      "G2": "UNVERIFIED",
+      "G3": "BLOCKED",
+      "G4": "BLOCKED",
+      "G5": "BLOCKED",
+      "G6": "BLOCKED",
+      "G7": "BLOCKED",
+      "G8": "BLOCKED"
+    },
+    "trust": "TRUST_NOT_CONFIGURED",
+    "program_g2_scope": {
+      "readiness": "NOT_READY",
+      "blocking": 8,
+      "scope_sha256": "64335c09f0293096c3cdfe99be6b5ba8e593b576293d6a75e45ca258c2eec0bb"
+    },
+    "note": "Engineering gates never authorise generation. Java may be generated only when generation_authorized is true."
+  }
+}

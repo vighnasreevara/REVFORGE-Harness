@@ -1,0 +1,35 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://revforge.local/contracts/orchestrator/workflow-state.schema.json",
+  "title": "Forward workflow state and checkpoint",
+  "type": "object",
+  "required": ["contract", "workflow_id", "run_id", "baseline", "state", "blocked_from", "blockers", "history", "gates", "packets", "receipts", "checkpoint"],
+  "properties": {
+    "contract": { "const": "workflow-state" },
+    "state": {
+      "enum": ["INITIALIZED", "BASELINE_LOADED", "EVIDENCE_VALIDATED", "REQUIREMENTS_DRAFTED", "REQUIREMENTS_APPROVED", "ARCHITECTURE_DRAFTED", "ARCHITECTURE_APPROVED", "STORIES_DRAFTED", "STORIES_APPROVED", "IMPLEMENTING", "IMPLEMENTATION_BUILT", "TESTING", "REVIEWING", "AWAITING_ACCEPTANCE", "ACCEPTED", "BLOCKED", "FAILED"]
+    },
+    "baseline": {
+      "type": "object",
+      "required": ["run_id", "manifest_sha256", "inputs"],
+      "properties": { "manifest_sha256": { "$ref": "../common.schema.json#/definitions/sha256" } }
+    },
+    "history": {
+      "type": "array",
+      "items": { "type": "object", "required": ["seq", "at", "from", "to", "guard"] }
+    },
+    "gates": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "object",
+        "required": ["status", "result_file", "evaluated_at", "baseline_sha256"],
+        "properties": { "status": { "enum": ["PASS", "FAIL", "BLOCKED", "NOT_RUN", "UNVERIFIED"] } }
+      }
+    },
+    "checkpoint": {
+      "type": "object",
+      "required": ["seq", "at", "state_sha256", "audit_head", "audit_entries"],
+      "properties": { "state_sha256": { "$ref": "../common.schema.json#/definitions/sha256" } }
+    }
+  }
+}

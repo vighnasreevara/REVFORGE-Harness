@@ -1,0 +1,36 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://revforge.local/contracts/pilot/local-generation-record.schema.json",
+  "title": "Program-scoped local generation policy adoption or authorisation (LGP / LGA)",
+  "type": "object",
+  "required": ["contract", "contract_version", "kind", "record_id", "policy"],
+  "properties": {
+    "contract": { "const": "pilot/local-generation-record" },
+    "contract_version": { "const": "1.0" },
+    "kind": { "enum": ["policy_adoption", "program_authorization"] },
+    "policy": { "const": "program_scoped_local_v1" },
+    "presented_text_sha256": { "$ref": "../common.schema.json#/definitions/sha256" }
+  },
+  "allOf": [
+    {
+      "if": { "properties": { "kind": { "const": "policy_adoption" } } },
+      "then": {
+        "required": ["statement", "adopted_by", "adopted_at", "acceptance_evidence", "presented_text_sha256"],
+        "properties": { "record_id": { "type": "string", "pattern": "^LGP-[0-9]{4}$" } }
+      }
+    },
+    {
+      "if": { "properties": { "kind": { "const": "program_authorization" } } },
+      "then": {
+        "required": ["policy_record", "program", "source", "copybooks", "output_dir", "purpose", "external_ai_disclosure", "ai_review_in_session_permitted", "accepted_by", "accepted_at", "valid_until", "presented_text", "presented_text_sha256", "acceptance_evidence"],
+        "properties": {
+          "record_id": { "type": "string", "pattern": "^LGA-[0-9]{4}$" },
+          "source": { "type": "object", "required": ["path", "sha256"], "properties": { "sha256": { "$ref": "../common.schema.json#/definitions/sha256" } } },
+          "copybooks": { "type": "array", "items": { "type": "object", "required": ["path", "sha256"], "properties": { "sha256": { "$ref": "../common.schema.json#/definitions/sha256" } } } },
+          "output_dir": { "type": "string", "pattern": "^forward/generated/" },
+          "external_ai_disclosure": { "const": "none" }
+        }
+      }
+    }
+  ]
+}

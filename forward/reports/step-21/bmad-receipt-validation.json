@@ -1,0 +1,85 @@
+{
+ "contract": "step-21/bmad-receipt-validation",
+ "receipts_in_run": 0,
+ "live_receipts": 0,
+ "validated_live_receipts": 0,
+ "governance_verdict": {
+  "scope": "programs:PORTREAD",
+  "scope_sha256": "c6b1864a61d126f8f09c5b2e5aace229df1da15dc8314fa0d07f16a756a6178f",
+  "scope_error": null,
+  "mandatory": true,
+  "status": "BMAD_BLOCKED",
+  "stages": [
+   {
+    "stage": "requirements",
+    "binding_id": "BMAD-PRD",
+    "workflow_id": "bmad-prd",
+    "agent": "F1",
+    "status": "NOT_ATTEMPTED",
+    "receipt_id": null,
+    "reasons": [
+     "no BMad receipt recorded for this stage and scope"
+    ]
+   },
+   {
+    "stage": "architecture",
+    "binding_id": "BMAD-ARCH",
+    "workflow_id": "bmad-architecture",
+    "agent": "F3",
+    "status": "NOT_ATTEMPTED",
+    "receipt_id": null,
+    "reasons": [
+     "no BMad receipt recorded for this stage and scope"
+    ]
+   },
+   {
+    "stage": "stories",
+    "binding_id": "BMAD-EPICS",
+    "workflow_id": "bmad-create-epics-and-stories",
+    "agent": "F4",
+    "status": "NOT_ATTEMPTED",
+    "receipt_id": null,
+    "reasons": [
+     "no BMad receipt recorded for this stage and scope"
+    ]
+   },
+   {
+    "stage": "sprint",
+    "binding_id": "BMAD-SPRINT",
+    "workflow_id": "bmad-sprint-planning",
+    "agent": "F4",
+    "status": "NOT_ATTEMPTED",
+    "receipt_id": null,
+    "reasons": [
+     "no BMad receipt recorded for this stage and scope"
+    ]
+   },
+   {
+    "stage": "implementation",
+    "binding_id": "BMAD-BUILD",
+    "workflow_id": "bmad-build",
+    "agent": "F5",
+    "status": "NOT_ATTEMPTED",
+    "receipt_id": null,
+    "reasons": [
+     "no BMad receipt recorded for this stage and scope"
+    ]
+   },
+   {
+    "stage": "review",
+    "binding_id": "BMAD-REVIEW",
+    "workflow_id": "bmad-code-review",
+    "agent": "F7",
+    "status": "NOT_ATTEMPTED",
+    "receipt_id": null,
+    "reasons": [
+     "no BMad receipt recorded for this stage and scope"
+    ]
+   }
+  ],
+  "acceptance": "acceptance is the independent F6 test receipt and gates G6-G8, deliberately outside BMad"
+ },
+ "receipt_contract": "forward/contracts/bmad/receipt.schema.json (evidence_status MOCK_NOT_EVIDENCE | DRAFT_PENDING_HUMAN_APPROVAL | REJECTED; counts_toward_gates false)",
+ "counting_rule": "a stage is RECEIPT_VERIFIED only for an accepted, sealed, intact LIVE receipt of the current scope digest whose documents are unchanged (runtime/src/bmad/governance.ts receiptCounts); MOCK receipts never count",
+ "validator_tests": "tests/step21.test.ts (rejected forged receipt, MOCK receipt, failed execution, test-double counting rule) and tests/step6-9"
+}

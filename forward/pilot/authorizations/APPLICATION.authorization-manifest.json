@@ -1,0 +1,1290 @@
+{
+  "contract": "pilot/local-authorization-manifest",
+  "contract_version": "1.0",
+  "scope": "APPLICATION (Step 17 full-application local conversion)",
+  "policy": "program_scoped_local_v1",
+  "output_root": "forward/generated/java/",
+  "integration_dir": "forward/generated/java/app/",
+  "programs": [
+    {
+      "program": "BCHCTL00",
+      "source": {
+        "path": "src/programs/batch/BCHCTL00.cbl",
+        "sha256": "876e218a3c1a532dd16ff415cd936b53ac8073b6a457d0a0f05806eb58282880"
+      },
+      "copybooks": [
+        {
+          "path": "src/copybook/batch/BCHCTL.cpy",
+          "sha256": "d075c66c44896fcb2fda7c1b53c5cff5298791810b631d7768ada636a4aa65b4"
+        },
+        {
+          "path": "src/copybook/batch/BCHCON.cpy",
+          "sha256": "374943d4a21510f06a1b52b40497db2e597136688323576e03f8d79c09675e7b"
+        },
+        {
+          "path": "src/copybook/common/ERRHAND.cpy",
+          "sha256": "c129b21fe77062f205ca6fb76f227f798549cd13bc231d169fa3a34a9b181442"
+        }
+      ],
+      "unresolved_members": [],
+      "dependencies": [],
+      "output_dir": "forward/generated/java/BCHCTL00/"
+    },
+    {
+      "program": "CKPRST",
+      "source": {
+        "path": "src/programs/batch/CKPRST.cbl",
+        "sha256": "870875c04b844564ada25a3b662deeea9a53cc3eb787f01646d9c0854424d058"
+      },
+      "copybooks": [
+        {
+          "path": "src/copybook/batch/CKPRST.cpy",
+          "sha256": "843495fc49cea64f06d227a368d63e0f8ce6301f4ccd35f3be29b2ce14c9cf3f"
+        },
+        {
+          "path": "src/copybook/batch/CKPRST.cpy",
+          "sha256": "843495fc49cea64f06d227a368d63e0f8ce6301f4ccd35f3be29b2ce14c9cf3f"
+        },
+        {
+          "path": "src/copybook/common/RETHND.cpy",
+          "sha256": "3de137d3f713edbb5d9c465a1d5cbc551ace1a6faf8b66eceb288ba995483711"
+        }
+      ],
+      "unresolved_members": [],
+      "dependencies": [],
+      "output_dir": "forward/generated/java/CKPRST/"
+    },
+    {
+      "program": "HISTLD00",
+      "source": {
+        "path": "src/programs/batch/HISTLD00.cbl",
+        "sha256": "148f75d448f2679783e222d4aca4f208ba336736dcd39bfebc8bcba8d85f69d6"
+      },
+      "copybooks": [
+        {
+          "path": "src/copybook/common/HISTREC.cpy",
+          "sha256": "ec0fef7e5a93ba98a8890127aa3c25ab7cf57316f72986a5027f3104236f6576"
+        },
+        {
+          "path": "src/copybook/batch/BCHCTL.cpy",
+          "sha256": "d075c66c44896fcb2fda7c1b53c5cff5298791810b631d7768ada636a4aa65b4"
+        },
+        {
+          "path": "src/copybook/db2/DBTBLS.cpy",
+          "sha256": "ef8bad44dfbc0aa9af4209e2e1019b3dd10b10efc8dbeca8c55e5bedbfb14189"
+        },
+        {
+          "path": "src/copybook/db2/SQLCA.cpy",
+          "sha256": "03e8f64ae705fe87324100488072c05d179fb75f64db0dc0cf753f23ab10afc7"
+        },
+        {
+          "path": "src/copybook/db2/SQLCA.cpy",
+          "sha256": "03e8f64ae705fe87324100488072c05d179fb75f64db0dc0cf753f23ab10afc7"
+        },
+        {
+          "path": "src/copybook/db2/DBPROC.cpy",
+          "sha256": "74da3b10107f406aff6c1afaf951b120f95c42b23b2050874a45f4f6f40aa7c6"
+        },
+        {
+          "path": "src/copybook/common/ERRHAND.cpy",
+          "sha256": "c129b21fe77062f205ca6fb76f227f798549cd13bc231d169fa3a34a9b181442"
+        },
+        {
+          "path": "src/copybook/batch/BCHCON.cpy",
+          "sha256": "374943d4a21510f06a1b52b40497db2e597136688323576e03f8d79c09675e7b"
+        }
+      ],
+      "unresolved_members": [],
+      "dependencies": [
+        {
+          "path": "src/database/db2/POSHIST.sql",
+          "sha256": "278111c9911af37f7180d43383917619ba07da396f792b0dd1dacf4274640469"
+        }
+      ],
+      "output_dir": "forward/generated/java/HISTLD00/"
+    },
+    {
+      "program": "POSUPDT",
+      "source": {
+        "path": "src/programs/batch/POSUPDT.cbl",
+        "sha256": "36a9e7f1c95b82ffb99743e0c5c4ce95d83c9a430aac59f84ef3cbfab6145068"
+      },
+      "copybooks": [],
+      "unresolved_members": [],
+      "dependencies": [],
+      "output_dir": "forward/generated/java/POSUPDT/"
+    },
+    {
+      "program": "PRCSEQ00",
+      "source": {
+        "path": "src/programs/batch/PRCSEQ00.cbl",
+        "sha256": "bf37a5d7a464a4e51ef9379a99761a44ec683d4521ef966fedf58e19f3deb5b3"
+      },
+      "copybooks": [
+        {
+          "path": "src/copybook/batch/PRCSEQ.cpy",
+          "sha256": "f9cd772e7a236ce88aa39ac92514a31a91bc1db064e20493e1c3387618aff528"
+        },
+        {
+          "path": "src/copybook/batch/BCHCTL.cpy",
+          "sha256": "d075c66c44896fcb2fda7c1b53c5cff5298791810b631d7768ada636a4aa65b4"
+        },
+        {
+          "path": "src/copybook/batch/BCHCON.cpy",
+          "sha256": "374943d4a21510f06a1b52b40497db2e597136688323576e03f8d79c09675e7b"
+        },
+        {
+          "path": "src/copybook/common/ERRHAND.cpy",
+          "sha256": "c129b21fe77062f205ca6fb76f227f798549cd13bc231d169fa3a34a9b181442"
+        }
+      ],
+      "unresolved_members": [],
+      "dependencies": [],
+      "output_dir": "forward/generated/java/PRCSEQ00/"
+    },
+    {
+      "program": "RCVPRC00",
+      "source": {
+        "path": "src/programs/batch/RCVPRC00.cbl",
+        "sha256": "7dd7e5cfb2b6c6a4089b389496689dd09ad7d32d7820a403050a68bdda85ce13"
+      },
+      "copybooks": [
+        {
+          "path": "src/copybook/batch/BCHCTL.cpy",
+          "sha256": "d075c66c44896fcb2fda7c1b53c5cff5298791810b631d7768ada636a4aa65b4"
+        },
+        {
+          "path": "src/copybook/batch/PRCSEQ.cpy",
+          "sha256": "f9cd772e7a236ce88aa39ac92514a31a91bc1db064e20493e1c3387618aff528"
+        },
+        {
+          "path": "src/copybook/batch/BCHCON.cpy",
+          "sha256": "374943d4a21510f06a1b52b40497db2e597136688323576e03f8d79c09675e7b"
+        },
+        {
+          "path": "src/copybook/common/ERRHAND.cpy",
+          "sha256": "c129b21fe77062f205ca6fb76f227f798549cd13bc231d169fa3a34a9b181442"
+        }
+      ],
+      "unresolved_members": [],
+      "dependencies": [],
+      "output_dir": "forward/generated/java/RCVPRC00/"
+    },
+    {
+      "program": "RPTAUD00",
+      "source": {
+        "path": "src/programs/batch/RPTAUD00.cbl",
+        "sha256": "1407e0aa1ad4413341662a1dcf997c97dff47b3e0a93780a8a8ca90ac912f13e"
+      },
+      "copybooks": [
+        {
+          "path": "src/copybook/common/AUDITLOG.cpy",
+          "sha256": "06199f6bda98966a0461cccdffab33a566bd6e40d0cda98bd41019bcb044b764"
+        },
+        {
+          "path": "src/copybook/common/ERRHAND.cpy",
+          "sha256": "c129b21fe77062f205ca6fb76f227f798549cd13bc231d169fa3a34a9b181442"
+        },
+        {
+          "path": "src/copybook/common/RTNCODE.cpy",
+          "sha256": "27eabb519319258b07b32f09ab60e80a18f6658a118e96c8fa01411fc473cbc9"
+        }
+      ],
+      "unresolved_members": [],
+      "dependencies": [
+        {
+          "path": "src/jcl/batch/RPTAUD.jcl",
+          "sha256": "b661e461bbf43902f304bcf88dbae4a013c798a6834bb1539bb029de448af7a5"
+        }
+      ],
+      "output_dir": "forward/generated/java/RPTAUD00/"
+    },
+    {
+      "program": "RPTPOS00",
+      "source": {
+        "path": "src/programs/batch/RPTPOS00.cbl",
+        "sha256": "032436b2a4bded557262bdacb4c4ed3100ef3fef4df960c9c06fb40ff0d92b53"
+      },
+      "copybooks": [
+        {
+          "path": "src/copybook/common/POSREC.cpy",
+          "sha256": "25abd2f34eefaf6dc2537f6b1dd1fbff168999343bef379b894d9410ea7933ff"
+        },
+        {
+          "path": "src/copybook/common/TRNREC.cpy",
+          "sha256": "03c470f3bf8aac2dbc64e784d2fc20fb4aa76b8691d849ecc8f38c508b7516e9"
+        },
+        {
+          "path": "src/copybook/common/RTNCODE.cpy",
+          "sha256": "27eabb519319258b07b32f09ab60e80a18f6658a118e96c8fa01411fc473cbc9"
+        },
+        {
+          "path": "src/copybook/common/ERRHAND.cpy",
+          "sha256": "c129b21fe77062f205ca6fb76f227f798549cd13bc231d169fa3a34a9b181442"
+        }
+      ],
+      "unresolved_members": [],
+      "dependencies": [
+        {
+          "path": "src/jcl/batch/RPTPOS.jcl",
+          "sha256": "95abc235f81b954304e80053678ff94acf776c86f406f906cf3da00e51ac478e"
+        }
+      ],
+      "output_dir": "forward/generated/java/RPTPOS00/"
+    },
+    {
+      "program": "RPTSTA00",
+      "source": {
+        "path": "src/programs/batch/RPTSTA00.cbl",
+        "sha256": "8b18c42b786afa5fb4a45fd65168d91fe4763f4154f0aeac609c8d3e1dbf7a6c"
+      },
+      "copybooks": [
+        {
+          "path": "src/copybook/db2/SQLCA.cpy",
+          "sha256": "03e8f64ae705fe87324100488072c05d179fb75f64db0dc0cf753f23ab10afc7"
+        },
+        {
+          "path": "src/copybook/db2/SQLCA.cpy",
+          "sha256": "03e8f64ae705fe87324100488072c05d179fb75f64db0dc0cf753f23ab10afc7"
+        },
+        {
+          "path": "src/copybook/db2/DBPROC.cpy",
+          "sha256": "74da3b10107f406aff6c1afaf951b120f95c42b23b2050874a45f4f6f40aa7c6"
+        },
+        {
+          "path": "src/copybook/common/ERRHAND.cpy",
+          "sha256": "c129b21fe77062f205ca6fb76f227f798549cd13bc231d169fa3a34a9b181442"
+        },
+        {
+          "path": "src/copybook/batch/BCHCTL.cpy",
+          "sha256": "d075c66c44896fcb2fda7c1b53c5cff5298791810b631d7768ada636a4aa65b4"
+        },
+        {
+          "path": "src/copybook/common/RTNCODE.cpy",
+          "sha256": "27eabb519319258b07b32f09ab60e80a18f6658a118e96c8fa01411fc473cbc9"
+        },
+        {
+          "path": "src/copybook/common/ERRHAND.cpy",
+          "sha256": "c129b21fe77062f205ca6fb76f227f798549cd13bc231d169fa3a34a9b181442"
+        }
+      ],
+      "unresolved_members": [
+        "DB2STAT"
+      ],
+      "dependencies": [
+        {
+          "path": "src/jcl/batch/RPTSTA.jcl",
+          "sha256": "4c4bcc2ed52f7bfd5458dfc18cff2b7ce945b71799762a9ec37af62990567e2c"
+        }
+      ],
+      "output_dir": "forward/generated/java/RPTSTA00/"
+    },
+    {
+      "program": "RTNANA00",
+      "source": {
+        "path": "src/programs/batch/RTNANA00.cbl",
+        "sha256": "c9c49d1bea7acf4d6002374812fe61100167f4ff0117f1866f573cdcef1c8b48"
+      },
+      "copybooks": [
+        {
+          "path": "src/copybook/db2/SQLCA.cpy",
+          "sha256": "03e8f64ae705fe87324100488072c05d179fb75f64db0dc0cf753f23ab10afc7"
+        },
+        {
+          "path": "src/copybook/db2/SQLCA.cpy",
+          "sha256": "03e8f64ae705fe87324100488072c05d179fb75f64db0dc0cf753f23ab10afc7"
+        }
+      ],
+      "unresolved_members": [],
+      "dependencies": [
+        {
+          "path": "src/jcl/RTNANA.jcl",
+          "sha256": "da18691bd638dc4a009d6c0f6f16d19141d805ca8c77f6902f64e7ec3ba209d4"
+        },
+        {
+          "path": "src/database/db2/RTNCODES.sql",
+          "sha256": "3a2ca982d9386f58dbc1419880db285a2775866c0f341e86300da8894140400e"
+        }
+      ],
+      "output_dir": "forward/generated/java/RTNANA00/"
+    },
+    {
+      "program": "RTNCDE00",
+      "source": {
+        "path": "src/programs/batch/RTNCDE00.cbl",
+        "sha256": "7cb951ea1f418c19ddd61c0eca00f21108af5f364b5ecf05742cbc428862994e"
+      },
+      "copybooks": [
+        {
+          "path": "src/copybook/db2/SQLCA.cpy",
+          "sha256": "03e8f64ae705fe87324100488072c05d179fb75f64db0dc0cf753f23ab10afc7"
+        },
+        {
+          "path": "src/copybook/db2/SQLCA.cpy",
+          "sha256": "03e8f64ae705fe87324100488072c05d179fb75f64db0dc0cf753f23ab10afc7"
+        },
+        {
+          "path": "src/copybook/common/RTNCODE.cpy",
+          "sha256": "27eabb519319258b07b32f09ab60e80a18f6658a118e96c8fa01411fc473cbc9"
+        }
+      ],
+      "unresolved_members": [],
+      "dependencies": [
+        {
+          "path": "src/database/db2/RTNCODES.sql",
+          "sha256": "3a2ca982d9386f58dbc1419880db285a2775866c0f341e86300da8894140400e"
+        }
+      ],
+      "output_dir": "forward/generated/java/RTNCDE00/"
+    },
+    {
+      "program": "AUDPROC",
+      "source": {
+        "path": "src/programs/common/AUDPROC.cbl",
+        "sha256": "c688d44dee1a7042adeec1984b4502a246b079116bae900e2c138eaa056bcfbf"
+      },
+      "copybooks": [
+        {
+          "path": "src/copybook/common/AUDITLOG.cpy",
+          "sha256": "06199f6bda98966a0461cccdffab33a566bd6e40d0cda98bd41019bcb044b764"
+        }
+      ],
+      "unresolved_members": [],
+      "dependencies": [],
+      "output_dir": "forward/generated/java/AUDPROC/"
+    },
+    {
+      "program": "DB2CMT",
+      "source": {
+        "path": "src/programs/common/DB2CMT.cbl",
+        "sha256": "d753db038a2a033997d333a5ce09336b37458ba413c39f8ddc5326a6d30e3b52"
+      },
+      "copybooks": [
+        {
+          "path": "src/copybook/db2/SQLCA.cpy",
+          "sha256": "03e8f64ae705fe87324100488072c05d179fb75f64db0dc0cf753f23ab10afc7"
+        },
+        {
+          "path": "src/copybook/db2/SQLCA.cpy",
+          "sha256": "03e8f64ae705fe87324100488072c05d179fb75f64db0dc0cf753f23ab10afc7"
+        },
+        {
+          "path": "src/copybook/db2/DBPROC.cpy",
+          "sha256": "74da3b10107f406aff6c1afaf951b120f95c42b23b2050874a45f4f6f40aa7c6"
+        },
+        {
+          "path": "src/copybook/common/ERRHAND.cpy",
+          "sha256": "c129b21fe77062f205ca6fb76f227f798549cd13bc231d169fa3a34a9b181442"
+        }
+      ],
+      "unresolved_members": [],
+      "dependencies": [],
+      "output_dir": "forward/generated/java/DB2CMT/"
+    },
+    {
+      "program": "DB2CONN",
+      "source": {
+        "path": "src/programs/common/DB2CONN.cbl",
+        "sha256": "488a9dcd9fa71ab4a4476694f2e117fc103a7e0a85f2cde249953fd590bd371c"
+      },
+      "copybooks": [
+        {
+          "path": "src/copybook/db2/SQLCA.cpy",
+          "sha256": "03e8f64ae705fe87324100488072c05d179fb75f64db0dc0cf753f23ab10afc7"
+        },
+        {
+          "path": "src/copybook/db2/SQLCA.cpy",
+          "sha256": "03e8f64ae705fe87324100488072c05d179fb75f64db0dc0cf753f23ab10afc7"
+        },
+        {
+          "path": "src/copybook/db2/DBPROC.cpy",
+          "sha256": "74da3b10107f406aff6c1afaf951b120f95c42b23b2050874a45f4f6f40aa7c6"
+        },
+        {
+          "path": "src/copybook/common/ERRHAND.cpy",
+          "sha256": "c129b21fe77062f205ca6fb76f227f798549cd13bc231d169fa3a34a9b181442"
+        }
+      ],
+      "unresolved_members": [],
+      "dependencies": [],
+      "output_dir": "forward/generated/java/DB2CONN/"
+    },
+    {
+      "program": "DB2ERR",
+      "source": {
+        "path": "src/programs/common/DB2ERR.cbl",
+        "sha256": "cb599435c5aee112ac61004b36a3d3a459effdb9d796d312e2688b605fd80a63"
+      },
+      "copybooks": [
+        {
+          "path": "src/copybook/db2/DBTBLS.cpy",
+          "sha256": "ef8bad44dfbc0aa9af4209e2e1019b3dd10b10efc8dbeca8c55e5bedbfb14189"
+        },
+        {
+          "path": "src/copybook/db2/SQLCA.cpy",
+          "sha256": "03e8f64ae705fe87324100488072c05d179fb75f64db0dc0cf753f23ab10afc7"
+        },
+        {
+          "path": "src/copybook/db2/SQLCA.cpy",
+          "sha256": "03e8f64ae705fe87324100488072c05d179fb75f64db0dc0cf753f23ab10afc7"
+        },
+        {
+          "path": "src/copybook/db2/DBPROC.cpy",
+          "sha256": "74da3b10107f406aff6c1afaf951b120f95c42b23b2050874a45f4f6f40aa7c6"
+        },
+        {
+          "path": "src/copybook/common/ERRHAND.cpy",
+          "sha256": "c129b21fe77062f205ca6fb76f227f798549cd13bc231d169fa3a34a9b181442"
+        }
+      ],
+      "unresolved_members": [],
+      "dependencies": [
+        {
+          "path": "src/database/db2/ERRLOG.sql",
+          "sha256": "af8d3529311409319161675b3d0af4c68315cb3d498c7914e5151bdec58ff7aa"
+        }
+      ],
+      "output_dir": "forward/generated/java/DB2ERR/"
+    },
+    {
+      "program": "DB2STAT",
+      "source": {
+        "path": "src/programs/common/DB2STAT.cbl",
+        "sha256": "082eb02647d2ccaeb6c085425e03f647bfd54a15018b05a0c25de4bb42efd00f"
+      },
+      "copybooks": [
+        {
+          "path": "src/copybook/db2/SQLCA.cpy",
+          "sha256": "03e8f64ae705fe87324100488072c05d179fb75f64db0dc0cf753f23ab10afc7"
+        },
+        {
+          "path": "src/copybook/db2/SQLCA.cpy",
+          "sha256": "03e8f64ae705fe87324100488072c05d179fb75f64db0dc0cf753f23ab10afc7"
+        },
+        {
+          "path": "src/copybook/db2/DBPROC.cpy",
+          "sha256": "74da3b10107f406aff6c1afaf951b120f95c42b23b2050874a45f4f6f40aa7c6"
+        },
+        {
+          "path": "src/copybook/common/ERRHAND.cpy",
+          "sha256": "c129b21fe77062f205ca6fb76f227f798549cd13bc231d169fa3a34a9b181442"
+        }
+      ],
+      "unresolved_members": [],
+      "dependencies": [],
+      "output_dir": "forward/generated/java/DB2STAT/"
+    },
+    {
+      "program": "ERRPROC",
+      "source": {
+        "path": "src/programs/common/ERRPROC.cbl",
+        "sha256": "b9bbfaaaaec49ff558c167be17e2561b80b671c6d2c86271a6780a3f973697b2"
+      },
+      "copybooks": [
+        {
+          "path": "src/copybook/common/ERRHAND.cpy",
+          "sha256": "c129b21fe77062f205ca6fb76f227f798549cd13bc231d169fa3a34a9b181442"
+        }
+      ],
+      "unresolved_members": [],
+      "dependencies": [],
+      "output_dir": "forward/generated/java/ERRPROC/"
+    },
+    {
+      "program": "CURSMGR",
+      "source": {
+        "path": "src/programs/online/CURSMGR.cbl",
+        "sha256": "5e367102d18d1775c3504afff9b4d3e28cfc655ae2daad836376f63f05b125db"
+      },
+      "copybooks": [
+        {
+          "path": "src/copybook/db2/SQLCA.cpy",
+          "sha256": "03e8f64ae705fe87324100488072c05d179fb75f64db0dc0cf753f23ab10afc7"
+        },
+        {
+          "path": "src/copybook/db2/SQLCA.cpy",
+          "sha256": "03e8f64ae705fe87324100488072c05d179fb75f64db0dc0cf753f23ab10afc7"
+        }
+      ],
+      "unresolved_members": [],
+      "dependencies": [],
+      "output_dir": "forward/generated/java/CURSMGR/"
+    },
+    {
+      "program": "DB2ONLN",
+      "source": {
+        "path": "src/programs/online/DB2ONLN.cbl",
+        "sha256": "651889f0e13a3465466a3f671b97b122c12563a3ee251abbacddadbca0e134b4"
+      },
+      "copybooks": [
+        {
+          "path": "src/copybook/db2/SQLCA.cpy",
+          "sha256": "03e8f64ae705fe87324100488072c05d179fb75f64db0dc0cf753f23ab10afc7"
+        },
+        {
+          "path": "src/copybook/db2/SQLCA.cpy",
+          "sha256": "03e8f64ae705fe87324100488072c05d179fb75f64db0dc0cf753f23ab10afc7"
+        },
+        {
+          "path": "src/copybook/online/ERRHND.cpy",
+          "sha256": "57a539ec14c486ee0663a205b76453d40fd6f01fcbb472b7aa45027edf453835"
+        }
+      ],
+      "unresolved_members": [],
+      "dependencies": [],
+      "output_dir": "forward/generated/java/DB2ONLN/"
+    },
+    {
+      "program": "DB2RECV",
+      "source": {
+        "path": "src/programs/online/DB2RECV.cbl",
+        "sha256": "ca0e1dc9a3e8a59c093677e1e650913ffb0807f8133df723bba5547c4fa21c52"
+      },
+      "copybooks": [
+        {
+          "path": "src/copybook/db2/SQLCA.cpy",
+          "sha256": "03e8f64ae705fe87324100488072c05d179fb75f64db0dc0cf753f23ab10afc7"
+        },
+        {
+          "path": "src/copybook/db2/SQLCA.cpy",
+          "sha256": "03e8f64ae705fe87324100488072c05d179fb75f64db0dc0cf753f23ab10afc7"
+        },
+        {
+          "path": "src/copybook/online/ERRHND.cpy",
+          "sha256": "57a539ec14c486ee0663a205b76453d40fd6f01fcbb472b7aa45027edf453835"
+        },
+        {
+          "path": "src/copybook/online/DB2REQ.cpy",
+          "sha256": "72a9d7b9eb91cdb093abe0aee5708e4808584b2aca07e31fcf0ff5a8a043f1aa"
+        }
+      ],
+      "unresolved_members": [],
+      "dependencies": [],
+      "output_dir": "forward/generated/java/DB2RECV/"
+    },
+    {
+      "program": "ERRHNDL",
+      "source": {
+        "path": "src/programs/online/ERRHNDL.cbl",
+        "sha256": "11304d2864669b12837bc4b68fdf7638f12212a65f59d9f57831288a927d5c0a"
+      },
+      "copybooks": [
+        {
+          "path": "src/copybook/online/ERRHND.cpy",
+          "sha256": "57a539ec14c486ee0663a205b76453d40fd6f01fcbb472b7aa45027edf453835"
+        },
+        {
+          "path": "src/copybook/db2/SQLCA.cpy",
+          "sha256": "03e8f64ae705fe87324100488072c05d179fb75f64db0dc0cf753f23ab10afc7"
+        },
+        {
+          "path": "src/copybook/db2/SQLCA.cpy",
+          "sha256": "03e8f64ae705fe87324100488072c05d179fb75f64db0dc0cf753f23ab10afc7"
+        },
+        {
+          "path": "src/copybook/online/ERRHND.cpy",
+          "sha256": "57a539ec14c486ee0663a205b76453d40fd6f01fcbb472b7aa45027edf453835"
+        }
+      ],
+      "unresolved_members": [],
+      "dependencies": [
+        {
+          "path": "src/database/db2/ERRLOG.sql",
+          "sha256": "af8d3529311409319161675b3d0af4c68315cb3d498c7914e5151bdec58ff7aa"
+        }
+      ],
+      "output_dir": "forward/generated/java/ERRHNDL/"
+    },
+    {
+      "program": "INQHIST",
+      "source": {
+        "path": "src/programs/online/INQHIST.cbl",
+        "sha256": "ab4b4e2072fb05e3b3e4244f3498bdab9f036a314df93c904c18ec8d29edc48b"
+      },
+      "copybooks": [
+        {
+          "path": "src/copybook/online/INQCOM.cpy",
+          "sha256": "b03fdd3ad2e662250906f988719654ab25915ebccfda465b3d02423457e17cb9"
+        },
+        {
+          "path": "src/copybook/db2/SQLCA.cpy",
+          "sha256": "03e8f64ae705fe87324100488072c05d179fb75f64db0dc0cf753f23ab10afc7"
+        },
+        {
+          "path": "src/copybook/db2/SQLCA.cpy",
+          "sha256": "03e8f64ae705fe87324100488072c05d179fb75f64db0dc0cf753f23ab10afc7"
+        },
+        {
+          "path": "src/copybook/online/INQCOM.cpy",
+          "sha256": "b03fdd3ad2e662250906f988719654ab25915ebccfda465b3d02423457e17cb9"
+        }
+      ],
+      "unresolved_members": [],
+      "dependencies": [],
+      "output_dir": "forward/generated/java/INQHIST/"
+    },
+    {
+      "program": "INQONLN",
+      "source": {
+        "path": "src/programs/online/INQONLN.cbl",
+        "sha256": "a05307ca63e1bc02e3765ac98b3b56c1063ea1751998c70697d933fcf9ce1963"
+      },
+      "copybooks": [
+        {
+          "path": "src/copybook/online/INQCOM.cpy",
+          "sha256": "b03fdd3ad2e662250906f988719654ab25915ebccfda465b3d02423457e17cb9"
+        },
+        {
+          "path": "src/copybook/online/ERRHND.cpy",
+          "sha256": "57a539ec14c486ee0663a205b76453d40fd6f01fcbb472b7aa45027edf453835"
+        },
+        {
+          "path": "src/copybook/online/INQCOM.cpy",
+          "sha256": "b03fdd3ad2e662250906f988719654ab25915ebccfda465b3d02423457e17cb9"
+        }
+      ],
+      "unresolved_members": [],
+      "dependencies": [],
+      "output_dir": "forward/generated/java/INQONLN/"
+    },
+    {
+      "program": "INQPORT",
+      "source": {
+        "path": "src/programs/online/INQPORT.cbl",
+        "sha256": "5c752c9243105066d0e0f055501217a99b198d94b577b41c8de2d52a305b4bdc"
+      },
+      "copybooks": [
+        {
+          "path": "src/copybook/online/INQCOM.cpy",
+          "sha256": "b03fdd3ad2e662250906f988719654ab25915ebccfda465b3d02423457e17cb9"
+        },
+        {
+          "path": "src/copybook/common/POSREC.cpy",
+          "sha256": "25abd2f34eefaf6dc2537f6b1dd1fbff168999343bef379b894d9410ea7933ff"
+        },
+        {
+          "path": "src/copybook/online/INQCOM.cpy",
+          "sha256": "b03fdd3ad2e662250906f988719654ab25915ebccfda465b3d02423457e17cb9"
+        }
+      ],
+      "unresolved_members": [
+        "SQLPOS"
+      ],
+      "dependencies": [],
+      "output_dir": "forward/generated/java/INQPORT/"
+    },
+    {
+      "program": "SECMGR",
+      "source": {
+        "path": "src/programs/online/SECMGR.cbl",
+        "sha256": "74281106e716079b408a5a597746a5a2c201b469820396b651fc1adc6ae37370"
+      },
+      "copybooks": [
+        {
+          "path": "src/copybook/db2/SQLCA.cpy",
+          "sha256": "03e8f64ae705fe87324100488072c05d179fb75f64db0dc0cf753f23ab10afc7"
+        },
+        {
+          "path": "src/copybook/db2/SQLCA.cpy",
+          "sha256": "03e8f64ae705fe87324100488072c05d179fb75f64db0dc0cf753f23ab10afc7"
+        },
+        {
+          "path": "src/copybook/online/ERRHND.cpy",
+          "sha256": "57a539ec14c486ee0663a205b76453d40fd6f01fcbb472b7aa45027edf453835"
+        }
+      ],
+      "unresolved_members": [],
+      "dependencies": [],
+      "output_dir": "forward/generated/java/SECMGR/"
+    },
+    {
+      "program": "PORTADD",
+      "source": {
+        "path": "src/programs/portfolio/PORTADD.cbl",
+        "sha256": "86cd685a216b37d2003e7dac1ae482d20e92268edc41e48495b49e0c39c21add"
+      },
+      "copybooks": [
+        {
+          "path": "src/copybook/common/PORTFLIO.cpy",
+          "sha256": "030f0a0fb30654f6c4fd367bcab35b03953687f8b2a7b4df3caeffc0c26d71ce"
+        },
+        {
+          "path": "src/copybook/common/PORTFLIO.cpy",
+          "sha256": "030f0a0fb30654f6c4fd367bcab35b03953687f8b2a7b4df3caeffc0c26d71ce"
+        }
+      ],
+      "unresolved_members": [],
+      "dependencies": [
+        {
+          "path": "src/jcl/portfolio/PORTADD.jcl",
+          "sha256": "2773e28657ec5c35500b09f38afc459fcb4495ce83a24d2428191f0b4b03055c"
+        }
+      ],
+      "output_dir": "forward/generated/java/PORTADD/"
+    },
+    {
+      "program": "PORTDEL",
+      "source": {
+        "path": "src/programs/portfolio/PORTDEL.cbl",
+        "sha256": "baaab39ebebed361185d44f7551a6e566d46abd6ec5ecad896a56e2cc2bcdc84"
+      },
+      "copybooks": [
+        {
+          "path": "src/copybook/common/PORTFLIO.cpy",
+          "sha256": "030f0a0fb30654f6c4fd367bcab35b03953687f8b2a7b4df3caeffc0c26d71ce"
+        }
+      ],
+      "unresolved_members": [],
+      "dependencies": [
+        {
+          "path": "src/jcl/portfolio/PORTDEL.jcl",
+          "sha256": "978135f9d9e395449d99316acc1d829933ac81e6376cff78043c242aa46217f5"
+        }
+      ],
+      "output_dir": "forward/generated/java/PORTDEL/"
+    },
+    {
+      "program": "PORTMSTR",
+      "source": {
+        "path": "src/programs/portfolio/PORTMSTR.cbl",
+        "sha256": "9d1c7f7740ef43c045a43fa61136e51c552b9222b261ff5b81a433a818fb3cb3"
+      },
+      "copybooks": [],
+      "unresolved_members": [],
+      "dependencies": [],
+      "output_dir": "forward/generated/java/PORTMSTR/"
+    },
+    {
+      "program": "PORTREAD",
+      "source": {
+        "path": "src/programs/portfolio/PORTREAD.cbl",
+        "sha256": "1e90eef73115c6065dfeee8ca7a0ad8cff96a22cfa50789c62baec4ec22b5aa1"
+      },
+      "copybooks": [
+        {
+          "path": "src/copybook/common/PORTFLIO.cpy",
+          "sha256": "030f0a0fb30654f6c4fd367bcab35b03953687f8b2a7b4df3caeffc0c26d71ce"
+        }
+      ],
+      "unresolved_members": [],
+      "dependencies": [
+        {
+          "path": "src/jcl/portfolio/PORTREAD.jcl",
+          "sha256": "e049c2e870acb94500428110096925ab6c0f39e18ebe57e279e11cb4de9c492d"
+        }
+      ],
+      "output_dir": "forward/generated/java/PORTREAD/"
+    },
+    {
+      "program": "PORTTEST",
+      "source": {
+        "path": "src/programs/portfolio/PORTTEST.cbl",
+        "sha256": "5cee7bdd6395f524b715c88c71f5e3120fb18dfc3fde9cdf7acc106b47f69df2"
+      },
+      "copybooks": [
+        {
+          "path": "src/copybook/common/PORTFLIO.cpy",
+          "sha256": "030f0a0fb30654f6c4fd367bcab35b03953687f8b2a7b4df3caeffc0c26d71ce"
+        },
+        {
+          "path": "src/copybook/common/ERRHAND.cpy",
+          "sha256": "c129b21fe77062f205ca6fb76f227f798549cd13bc231d169fa3a34a9b181442"
+        }
+      ],
+      "unresolved_members": [],
+      "dependencies": [
+        {
+          "path": "src/jcl/portfolio/PORTTEST.jcl",
+          "sha256": "d39f5474b1aca64e990814604c7872a09042af0bd1fb0b25c95e259ba2951a29"
+        }
+      ],
+      "output_dir": "forward/generated/java/PORTTEST/"
+    },
+    {
+      "program": "PORTTRAN",
+      "source": {
+        "path": "src/programs/portfolio/PORTTRAN.cbl",
+        "sha256": "6e8485dfeb001ea0378dc932c59ea3a7dab4ad1949f08af5c0fe94e461e06a58"
+      },
+      "copybooks": [
+        {
+          "path": "src/copybook/common/TRNREC.cpy",
+          "sha256": "03c470f3bf8aac2dbc64e784d2fc20fb4aa76b8691d849ecc8f38c508b7516e9"
+        },
+        {
+          "path": "src/copybook/common/ERRHAND.cpy",
+          "sha256": "c129b21fe77062f205ca6fb76f227f798549cd13bc231d169fa3a34a9b181442"
+        },
+        {
+          "path": "src/copybook/common/AUDITLOG.cpy",
+          "sha256": "06199f6bda98966a0461cccdffab33a566bd6e40d0cda98bd41019bcb044b764"
+        }
+      ],
+      "unresolved_members": [
+        "PORTREC"
+      ],
+      "dependencies": [],
+      "output_dir": "forward/generated/java/PORTTRAN/"
+    },
+    {
+      "program": "PORTUPDT",
+      "source": {
+        "path": "src/programs/portfolio/PORTUPDT.cbl",
+        "sha256": "e386049e473b4c2411540ad240a0d2f8fbdff0c88464cce80ba724fb9e375eff"
+      },
+      "copybooks": [
+        {
+          "path": "src/copybook/common/PORTFLIO.cpy",
+          "sha256": "030f0a0fb30654f6c4fd367bcab35b03953687f8b2a7b4df3caeffc0c26d71ce"
+        }
+      ],
+      "unresolved_members": [],
+      "dependencies": [
+        {
+          "path": "src/jcl/portfolio/PORTUPDT.jcl",
+          "sha256": "9e6d8060e00204ea1883c45a26e0fed0c89be698a4ec51eefd46ce9a956da030"
+        }
+      ],
+      "output_dir": "forward/generated/java/PORTUPDT/"
+    },
+    {
+      "program": "PORTVALD",
+      "source": {
+        "path": "src/programs/portfolio/PORTVALD.cbl",
+        "sha256": "5957fd22546258ae4d9e28847269168d1824bf8d11a9e661f9f62a5adc47f603"
+      },
+      "copybooks": [
+        {
+          "path": "src/copybook/common/PORTVAL.cpy",
+          "sha256": "8d9c7666b01561c4eba4d1e0a95b9da62baaa60c9dcfc2aa5effff06854104bf"
+        }
+      ],
+      "unresolved_members": [],
+      "dependencies": [],
+      "output_dir": "forward/generated/java/PORTVALD/"
+    },
+    {
+      "program": "TSTGEN00",
+      "source": {
+        "path": "src/programs/test/TSTGEN00.cbl",
+        "sha256": "9c6cd375f322373b22a55e90059256b2a43ae6877930b50c8c47f70796493465"
+      },
+      "copybooks": [
+        {
+          "path": "src/copybook/common/PORTFLIO.cpy",
+          "sha256": "030f0a0fb30654f6c4fd367bcab35b03953687f8b2a7b4df3caeffc0c26d71ce"
+        },
+        {
+          "path": "src/copybook/common/TRNREC.cpy",
+          "sha256": "03c470f3bf8aac2dbc64e784d2fc20fb4aa76b8691d849ecc8f38c508b7516e9"
+        },
+        {
+          "path": "src/copybook/common/RTNCODE.cpy",
+          "sha256": "27eabb519319258b07b32f09ab60e80a18f6658a118e96c8fa01411fc473cbc9"
+        },
+        {
+          "path": "src/copybook/common/ERRHAND.cpy",
+          "sha256": "c129b21fe77062f205ca6fb76f227f798549cd13bc231d169fa3a34a9b181442"
+        }
+      ],
+      "unresolved_members": [],
+      "dependencies": [
+        {
+          "path": "src/jcl/test/TSTGEN.jcl",
+          "sha256": "9d2fe28147e6b3fe40fe3fb71b39cd540ab94e9c6122a9c26482c415c81b0c5e"
+        }
+      ],
+      "output_dir": "forward/generated/java/TSTGEN00/"
+    },
+    {
+      "program": "TSTVAL00",
+      "source": {
+        "path": "src/programs/test/TSTVAL00.cbl",
+        "sha256": "acdb86f9d38dbc337b16d0f5e54f8260777483f25398364f7fdfae3038a1cfe9"
+      },
+      "copybooks": [
+        {
+          "path": "src/copybook/common/RTNCODE.cpy",
+          "sha256": "27eabb519319258b07b32f09ab60e80a18f6658a118e96c8fa01411fc473cbc9"
+        },
+        {
+          "path": "src/copybook/common/ERRHAND.cpy",
+          "sha256": "c129b21fe77062f205ca6fb76f227f798549cd13bc231d169fa3a34a9b181442"
+        }
+      ],
+      "unresolved_members": [],
+      "dependencies": [
+        {
+          "path": "src/jcl/test/TSTVAL.jcl",
+          "sha256": "334aea299eadca784807924c9104cdd41ca5775c1c832bb8362f594aec3e63d7"
+        }
+      ],
+      "output_dir": "forward/generated/java/TSTVAL00/"
+    },
+    {
+      "program": "UTLMNT00",
+      "source": {
+        "path": "src/programs/utility/UTLMNT00.cbl",
+        "sha256": "ea0333db7c050636d4fb20965af4132775e86b2e16a5fbccadd15ec10e0fe94a"
+      },
+      "copybooks": [
+        {
+          "path": "src/copybook/common/RTNCODE.cpy",
+          "sha256": "27eabb519319258b07b32f09ab60e80a18f6658a118e96c8fa01411fc473cbc9"
+        },
+        {
+          "path": "src/copybook/common/ERRHAND.cpy",
+          "sha256": "c129b21fe77062f205ca6fb76f227f798549cd13bc231d169fa3a34a9b181442"
+        }
+      ],
+      "unresolved_members": [],
+      "dependencies": [
+        {
+          "path": "src/jcl/utility/UTLMNT.jcl",
+          "sha256": "1a88ad4064e4954010fb2062c37e6b515f0463592a52ba5f3a3b4c7a9ec83a3d"
+        }
+      ],
+      "output_dir": "forward/generated/java/UTLMNT00/"
+    },
+    {
+      "program": "UTLMON00",
+      "source": {
+        "path": "src/programs/utility/UTLMON00.cbl",
+        "sha256": "3e74b5376896c7c35bb9799099a14818eb81f4a07269b9588dcf61ca240fcb77"
+      },
+      "copybooks": [
+        {
+          "path": "src/copybook/db2/SQLCA.cpy",
+          "sha256": "03e8f64ae705fe87324100488072c05d179fb75f64db0dc0cf753f23ab10afc7"
+        },
+        {
+          "path": "src/copybook/db2/SQLCA.cpy",
+          "sha256": "03e8f64ae705fe87324100488072c05d179fb75f64db0dc0cf753f23ab10afc7"
+        },
+        {
+          "path": "src/copybook/db2/DBPROC.cpy",
+          "sha256": "74da3b10107f406aff6c1afaf951b120f95c42b23b2050874a45f4f6f40aa7c6"
+        },
+        {
+          "path": "src/copybook/common/ERRHAND.cpy",
+          "sha256": "c129b21fe77062f205ca6fb76f227f798549cd13bc231d169fa3a34a9b181442"
+        },
+        {
+          "path": "src/copybook/common/RTNCODE.cpy",
+          "sha256": "27eabb519319258b07b32f09ab60e80a18f6658a118e96c8fa01411fc473cbc9"
+        },
+        {
+          "path": "src/copybook/common/ERRHAND.cpy",
+          "sha256": "c129b21fe77062f205ca6fb76f227f798549cd13bc231d169fa3a34a9b181442"
+        }
+      ],
+      "unresolved_members": [
+        "DB2STAT"
+      ],
+      "dependencies": [
+        {
+          "path": "src/jcl/utility/UTLMON.jcl",
+          "sha256": "7533d0944bdd8ff2077d2e7ba417d0d4074d86ec5daa97e0f89a0b876927604c"
+        }
+      ],
+      "output_dir": "forward/generated/java/UTLMON00/"
+    },
+    {
+      "program": "UTLVAL00",
+      "source": {
+        "path": "src/programs/utility/UTLVAL00.cbl",
+        "sha256": "9531008642833182a28188d5198bc9ddf69231944b1b858e1944b987658888cd"
+      },
+      "copybooks": [
+        {
+          "path": "src/copybook/common/POSREC.cpy",
+          "sha256": "25abd2f34eefaf6dc2537f6b1dd1fbff168999343bef379b894d9410ea7933ff"
+        },
+        {
+          "path": "src/copybook/common/TRNREC.cpy",
+          "sha256": "03c470f3bf8aac2dbc64e784d2fc20fb4aa76b8691d849ecc8f38c508b7516e9"
+        },
+        {
+          "path": "src/copybook/common/RTNCODE.cpy",
+          "sha256": "27eabb519319258b07b32f09ab60e80a18f6658a118e96c8fa01411fc473cbc9"
+        },
+        {
+          "path": "src/copybook/common/ERRHAND.cpy",
+          "sha256": "c129b21fe77062f205ca6fb76f227f798549cd13bc231d169fa3a34a9b181442"
+        }
+      ],
+      "unresolved_members": [],
+      "dependencies": [
+        {
+          "path": "src/jcl/utility/UTLVAL.jcl",
+          "sha256": "0e38d1f738003df39c8f17f1ba4ff588e5e4e045b7e9bc24ba54075e6a225907"
+        }
+      ],
+      "output_dir": "forward/generated/java/UTLVAL00/"
+    },
+    {
+      "program": "DB2HNDL",
+      "source": {
+        "path": "src/templates/database/db2-handling.cbl",
+        "sha256": "6f7d5fb2ad1cb0fb9283f74542f2768aa8da1044a4d29e16b0c894482688b678"
+      },
+      "copybooks": [
+        {
+          "path": "src/copybook/db2/SQLCA.cpy",
+          "sha256": "03e8f64ae705fe87324100488072c05d179fb75f64db0dc0cf753f23ab10afc7"
+        },
+        {
+          "path": "src/copybook/db2/SQLCA.cpy",
+          "sha256": "03e8f64ae705fe87324100488072c05d179fb75f64db0dc0cf753f23ab10afc7"
+        }
+      ],
+      "unresolved_members": [],
+      "dependencies": [],
+      "output_dir": "forward/generated/java/DB2HNDL/"
+    },
+    {
+      "program": "ERRHANDL",
+      "source": {
+        "path": "src/templates/error/error-handling.cbl",
+        "sha256": "22548dd957eaa37c181b34e3d3ac0c78ce080a7d8a1be73ac507264e79f415e6"
+      },
+      "copybooks": [],
+      "unresolved_members": [],
+      "dependencies": [],
+      "output_dir": "forward/generated/java/ERRHANDL/"
+    },
+    {
+      "program": "FILEHNDL",
+      "source": {
+        "path": "src/templates/program/file-handling.cbl",
+        "sha256": "d9ca04c39498600c132b1e5aba353daba245f28d1411b19e497aab2d56f006db"
+      },
+      "copybooks": [],
+      "unresolved_members": [],
+      "dependencies": [],
+      "output_dir": "forward/generated/java/FILEHNDL/"
+    },
+    {
+      "program": "PROGNAME",
+      "source": {
+        "path": "src/templates/program/standard-program.cbl",
+        "sha256": "6199f4b373e583d16df67a914ff33bb7109f577c511b4697f511a44e50d43191"
+      },
+      "copybooks": [],
+      "unresolved_members": [],
+      "dependencies": [],
+      "output_dir": "forward/generated/java/PROGNAME/"
+    }
+  ],
+  "copybooks": [
+    {
+      "copybook": "BCHCON",
+      "path": "src/copybook/batch/BCHCON.cpy",
+      "sha256": "374943d4a21510f06a1b52b40497db2e597136688323576e03f8d79c09675e7b"
+    },
+    {
+      "copybook": "BCHCTL",
+      "path": "src/copybook/batch/BCHCTL.cpy",
+      "sha256": "d075c66c44896fcb2fda7c1b53c5cff5298791810b631d7768ada636a4aa65b4"
+    },
+    {
+      "copybook": "CKPRST",
+      "path": "src/copybook/batch/CKPRST.cpy",
+      "sha256": "843495fc49cea64f06d227a368d63e0f8ce6301f4ccd35f3be29b2ce14c9cf3f"
+    },
+    {
+      "copybook": "PRCSEQ",
+      "path": "src/copybook/batch/PRCSEQ.cpy",
+      "sha256": "f9cd772e7a236ce88aa39ac92514a31a91bc1db064e20493e1c3387618aff528"
+    },
+    {
+      "copybook": "AUDITLOG",
+      "path": "src/copybook/common/AUDITLOG.cpy",
+      "sha256": "06199f6bda98966a0461cccdffab33a566bd6e40d0cda98bd41019bcb044b764"
+    },
+    {
+      "copybook": "COMMON",
+      "path": "src/copybook/common/COMMON.cpy",
+      "sha256": "ec069291864a436c3c38702657f6a82e0d48f3b0016ddc9589d4afc9d3f968fb"
+    },
+    {
+      "copybook": "ERRHAND",
+      "path": "src/copybook/common/ERRHAND.cpy",
+      "sha256": "c129b21fe77062f205ca6fb76f227f798549cd13bc231d169fa3a34a9b181442"
+    },
+    {
+      "copybook": "HISTREC",
+      "path": "src/copybook/common/HISTREC.cpy",
+      "sha256": "ec0fef7e5a93ba98a8890127aa3c25ab7cf57316f72986a5027f3104236f6576"
+    },
+    {
+      "copybook": "PORTFLIO",
+      "path": "src/copybook/common/PORTFLIO.cpy",
+      "sha256": "030f0a0fb30654f6c4fd367bcab35b03953687f8b2a7b4df3caeffc0c26d71ce"
+    },
+    {
+      "copybook": "PORTVAL",
+      "path": "src/copybook/common/PORTVAL.cpy",
+      "sha256": "8d9c7666b01561c4eba4d1e0a95b9da62baaa60c9dcfc2aa5effff06854104bf"
+    },
+    {
+      "copybook": "POSREC",
+      "path": "src/copybook/common/POSREC.cpy",
+      "sha256": "25abd2f34eefaf6dc2537f6b1dd1fbff168999343bef379b894d9410ea7933ff"
+    },
+    {
+      "copybook": "RETHND",
+      "path": "src/copybook/common/RETHND.cpy",
+      "sha256": "3de137d3f713edbb5d9c465a1d5cbc551ace1a6faf8b66eceb288ba995483711"
+    },
+    {
+      "copybook": "RTNCODE",
+      "path": "src/copybook/common/RTNCODE.cpy",
+      "sha256": "27eabb519319258b07b32f09ab60e80a18f6658a118e96c8fa01411fc473cbc9"
+    },
+    {
+      "copybook": "TRNREC",
+      "path": "src/copybook/common/TRNREC.cpy",
+      "sha256": "03c470f3bf8aac2dbc64e784d2fc20fb4aa76b8691d849ecc8f38c508b7516e9"
+    },
+    {
+      "copybook": "DBPROC",
+      "path": "src/copybook/db2/DBPROC.cpy",
+      "sha256": "74da3b10107f406aff6c1afaf951b120f95c42b23b2050874a45f4f6f40aa7c6"
+    },
+    {
+      "copybook": "DBTBLS",
+      "path": "src/copybook/db2/DBTBLS.cpy",
+      "sha256": "ef8bad44dfbc0aa9af4209e2e1019b3dd10b10efc8dbeca8c55e5bedbfb14189"
+    },
+    {
+      "copybook": "SQLCA",
+      "path": "src/copybook/db2/SQLCA.cpy",
+      "sha256": "03e8f64ae705fe87324100488072c05d179fb75f64db0dc0cf753f23ab10afc7"
+    },
+    {
+      "copybook": "DB2REQ",
+      "path": "src/copybook/online/DB2REQ.cpy",
+      "sha256": "72a9d7b9eb91cdb093abe0aee5708e4808584b2aca07e31fcf0ff5a8a043f1aa"
+    },
+    {
+      "copybook": "ERRHND",
+      "path": "src/copybook/online/ERRHND.cpy",
+      "sha256": "57a539ec14c486ee0663a205b76453d40fd6f01fcbb472b7aa45027edf453835"
+    },
+    {
+      "copybook": "INQCOM",
+      "path": "src/copybook/online/INQCOM.cpy",
+      "sha256": "b03fdd3ad2e662250906f988719654ab25915ebccfda465b3d02423457e17cb9"
+    },
+    {
+      "copybook": "ERRLOG",
+      "path": "src/database/db2/ERRLOG.sql",
+      "sha256": "af8d3529311409319161675b3d0af4c68315cb3d498c7914e5151bdec58ff7aa"
+    },
+    {
+      "copybook": "PORTPLAN",
+      "path": "src/database/db2/PORTPLAN.sql",
+      "sha256": "3812b80c4bee76a595cffc0c72eca66bbfb0dab3f059dcb54983639b612156a3"
+    },
+    {
+      "copybook": "POSHIST",
+      "path": "src/database/db2/POSHIST.sql",
+      "sha256": "278111c9911af37f7180d43383917619ba07da396f792b0dd1dacf4274640469"
+    },
+    {
+      "copybook": "RTNCODES",
+      "path": "src/database/db2/RTNCODES.sql",
+      "sha256": "3a2ca982d9386f58dbc1419880db285a2775866c0f341e86300da8894140400e"
+    },
+    {
+      "copybook": "DB2-DEFINITIONS",
+      "path": "src/database/db2/db2-definitions.sql",
+      "sha256": "67f12b314e2194637805be662b2c9480fc73172a56f5a6a595aaec0d457ffef2"
+    }
+  ],
+  "jcl": [
+    {
+      "path": "src/jcl/batch/RPTAUD.jcl",
+      "sha256": "b661e461bbf43902f304bcf88dbae4a013c798a6834bb1539bb029de448af7a5"
+    },
+    {
+      "path": "src/jcl/batch/RPTPOS.jcl",
+      "sha256": "95abc235f81b954304e80053678ff94acf776c86f406f906cf3da00e51ac478e"
+    },
+    {
+      "path": "src/jcl/batch/RPTSTA.jcl",
+      "sha256": "4c4bcc2ed52f7bfd5458dfc18cff2b7ce945b71799762a9ec37af62990567e2c"
+    },
+    {
+      "path": "src/jcl/portfolio/PORTADD.jcl",
+      "sha256": "2773e28657ec5c35500b09f38afc459fcb4495ce83a24d2428191f0b4b03055c"
+    },
+    {
+      "path": "src/jcl/portfolio/PORTDEF.jcl",
+      "sha256": "feea4e1544891d269d168ce3fe4366270201942c59514113c5fe00d5018e92f5"
+    },
+    {
+      "path": "src/jcl/portfolio/PORTDEL.jcl",
+      "sha256": "978135f9d9e395449d99316acc1d829933ac81e6376cff78043c242aa46217f5"
+    },
+    {
+      "path": "src/jcl/portfolio/PORTREAD.jcl",
+      "sha256": "e049c2e870acb94500428110096925ab6c0f39e18ebe57e279e11cb4de9c492d"
+    },
+    {
+      "path": "src/jcl/portfolio/PORTTEST.jcl",
+      "sha256": "d39f5474b1aca64e990814604c7872a09042af0bd1fb0b25c95e259ba2951a29"
+    },
+    {
+      "path": "src/jcl/portfolio/PORTUPDT.jcl",
+      "sha256": "9e6d8060e00204ea1883c45a26e0fed0c89be698a4ec51eefd46ce9a956da030"
+    },
+    {
+      "path": "src/jcl/RTNANA.jcl",
+      "sha256": "da18691bd638dc4a009d6c0f6f16d19141d805ca8c77f6902f64e7ec3ba209d4"
+    },
+    {
+      "path": "src/jcl/test/TSTGEN.jcl",
+      "sha256": "9d2fe28147e6b3fe40fe3fb71b39cd540ab94e9c6122a9c26482c415c81b0c5e"
+    },
+    {
+      "path": "src/jcl/test/TSTVAL.jcl",
+      "sha256": "334aea299eadca784807924c9104cdd41ca5775c1c832bb8362f594aec3e63d7"
+    },
+    {
+      "path": "src/jcl/utility/UTLMNT.jcl",
+      "sha256": "1a88ad4064e4954010fb2062c37e6b515f0463592a52ba5f3a3b4c7a9ec83a3d"
+    },
+    {
+      "path": "src/jcl/utility/UTLMON.jcl",
+      "sha256": "7533d0944bdd8ff2077d2e7ba417d0d4074d86ec5daa97e0f89a0b876927604c"
+    },
+    {
+      "path": "src/jcl/utility/UTLVAL.jcl",
+      "sha256": "0e38d1f738003df39c8f17f1ba4ff588e5e4e045b7e9bc24ba54075e6a225907"
+    }
+  ],
+  "db2": [
+    {
+      "path": "src/database/db2/db2-definitions.sql",
+      "sha256": "67f12b314e2194637805be662b2c9480fc73172a56f5a6a595aaec0d457ffef2"
+    },
+    {
+      "path": "src/database/db2/ERRLOG.sql",
+      "sha256": "af8d3529311409319161675b3d0af4c68315cb3d498c7914e5151bdec58ff7aa"
+    },
+    {
+      "path": "src/database/db2/PORTPLAN.sql",
+      "sha256": "3812b80c4bee76a595cffc0c72eca66bbfb0dab3f059dcb54983639b612156a3"
+    },
+    {
+      "path": "src/database/db2/POSHIST.sql",
+      "sha256": "278111c9911af37f7180d43383917619ba07da396f792b0dd1dacf4274640469"
+    },
+    {
+      "path": "src/database/db2/RTNCODES.sql",
+      "sha256": "3a2ca982d9386f58dbc1419880db285a2775866c0f341e86300da8894140400e"
+    }
+  ]
+}

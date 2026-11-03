@@ -1,0 +1,624 @@
+{
+  "gate": "SOURCE_READINESS",
+  "subject": "RCVPRC00",
+  "status": "FAIL",
+  "checks": [
+    {
+      "id": "source_available",
+      "ok": true,
+      "detail": "src/programs/batch/RCVPRC00.cbl sha256 7dd7e5cfb2b6c6a4089b389496689dd09ad7d32d7820a403050a68bdda85ce13; 146 statement(s) in 18 paragraph(s)"
+    },
+    {
+      "id": "complete_program",
+      "ok": true,
+      "detail": "every paragraph contains statements"
+    },
+    {
+      "id": "copybooks_resolved",
+      "ok": true,
+      "detail": "all 4 include(s) resolved: BCHCTL, PRCSEQ, BCHCON, ERRHAND"
+    },
+    {
+      "id": "requirements_and_data_mapping_delivered",
+      "ok": true,
+      "detail": "F1/F2 deliveries accepted for BCHCON, BCHCTL, PRCSEQ, ERRHAND, RCVPRC00, ERRPROC"
+    },
+    {
+      "id": "behaviour_classified",
+      "ok": true,
+      "detail": "5 behaviour(s): 0 VERIFIED_CANDIDATE, 5 PARTIAL, 0 GAP"
+    },
+    {
+      "id": "dependencies_identified",
+      "ok": false,
+      "detail": "closure UNRESOLVED for RCVPRC00:0000-MAIN (line 84: RETURN-CODE is neither declared, a keyword, a paragraph nor the subject of a blocking decision (unknown dependency)); RCVPRC00:1000-INITIALIZE-RECOVERY (line 119: I-O is neither declared, a keyword, a paragraph nor the subject of a blocking decision (unknown dependency)); RCVPRC00:2000-PROCESS-RECOVERY (line 207: STAMP is neither declared, a keyword, a paragraph nor the subject of a blocking decision (unknown dependency))"
+    },
+    {
+      "id": "unsupported_documented",
+      "ok": false,
+      "detail": "non-verified behaviour without a gap: RCVPRC00:1000-INITIALIZE-RECOVERY, RCVPRC00:2000-PROCESS-RECOVERY, RCVPRC00:3000-TERMINATE-RECOVERY, RCVPRC00:9000-ERROR-ROUTINE"
+    },
+    {
+      "id": "unknowns_documented",
+      "ok": true,
+      "detail": "12 open decision(s) record the remaining questions (0 blocking for approval); none is resolved or assumed here"
+    }
+  ],
+  "note": "An engineering gate: it states that the source is understood well enough to convert, with every unknown documented. It is not a G2 approval and does not authorise generation.",
+  "behaviours": [
+    {
+      "behaviour_id": "RCVPRC00:ENTRY-DISPATCH",
+      "kind": "dispatch",
+      "classification": "PARTIAL",
+      "lines": [
+        72,
+        84
+      ],
+      "inputs": [
+        "LS-FUNCTION",
+        "LS-RETURN-CODE"
+      ],
+      "outputs": [
+        "ERR-TEXT",
+        "RETURN-CODE"
+      ],
+      "side_effects": [],
+      "unresolved": [],
+      "covered_by": [
+        "REQ-RCVPRC00-001"
+      ]
+    },
+    {
+      "behaviour_id": "RCVPRC00:1000-INITIALIZE-RECOVERY",
+      "kind": "performed_range",
+      "classification": "PARTIAL",
+      "lines": [
+        89,
+        155
+      ],
+      "inputs": [
+        "BCT-RC-ERROR",
+        "ERR-MESSAGE",
+        "LS-PROCESS-DATE",
+        "LS-PROCESS-ID",
+        "LS-RECOVERY-TYPE",
+        "WS-BCT-STATUS",
+        "WS-PSR-STATUS",
+        "WS-RECOVERY-MODE"
+      ],
+      "outputs": [
+        "ERR-PROGRAM",
+        "ERR-TEXT",
+        "LS-RETURN-CODE",
+        "WS-RECOVERY-MODE"
+      ],
+      "side_effects": [
+        {
+          "line": 113,
+          "kind": "call",
+          "operation": "CALL",
+          "table": null
+        },
+        {
+          "line": 119,
+          "kind": "file_io",
+          "operation": "OPEN",
+          "table": null
+        },
+        {
+          "line": 125,
+          "kind": "file_io",
+          "operation": "OPEN",
+          "table": null
+        }
+      ],
+      "unresolved": [],
+      "covered_by": [
+        "REQ-RCVPRC00-001"
+      ]
+    },
+    {
+      "behaviour_id": "RCVPRC00:2000-PROCESS-RECOVERY",
+      "kind": "performed_range",
+      "classification": "PARTIAL",
+      "lines": [
+        95,
+        281
+      ],
+      "inputs": [
+        "BATCH-CONTROL-RECORD",
+        "BCT-JOB-NAME",
+        "BCT-KEY",
+        "BCT-MAX-RESTARTS",
+        "BCT-PROCESS-DATE",
+        "BCT-RC-ERROR",
+        "BCT-RC-WARNING",
+        "BCT-RESTART-COUNT",
+        "BCT-STAT-DONE",
+        "BCT-STAT-ERROR",
+        "BCT-STAT-READY",
+        "ERR-MESSAGE",
+        "LS-PROCESS-DATE",
+        "LS-PROCESS-ID",
+        "PSR-RESTART",
+        "WS-BCT-STATUS",
+        "WS-CURRENT-TIME",
+        "WS-RECOVERY-ACTION",
+        "WS-RECOVERY-MODE"
+      ],
+      "outputs": [
+        "AT",
+        "BCT-ATTEMPT-TS",
+        "BCT-ERROR-DESC",
+        "BCT-JOB-NAME",
+        "BCT-KEY",
+        "BCT-PROCESS-DATE",
+        "BCT-RETURN-CODE",
+        "BCT-STATUS",
+        "END",
+        "ERR-PROGRAM",
+        "ERR-TEXT",
+        "LS-PROCESS-ID",
+        "LS-RETURN-CODE",
+        "NOT",
+        "PSR-PROCESS-ID",
+        "WS-BCT-STATUS",
+        "WS-RECOVERY-ACTION"
+      ],
+      "side_effects": [
+        {
+          "line": 113,
+          "kind": "call",
+          "operation": "CALL",
+          "table": null
+        },
+        {
+          "line": 163,
+          "kind": "file_io",
+          "operation": "READ",
+          "table": null
+        },
+        {
+          "line": 176,
+          "kind": "file_io",
+          "operation": "READ",
+          "table": null
+        },
+        {
+          "line": 210,
+          "kind": "file_io",
+          "operation": "REWRITE",
+          "table": null
+        },
+        {
+          "line": 222,
+          "kind": "file_io",
+          "operation": "REWRITE",
+          "table": null
+        },
+        {
+          "line": 234,
+          "kind": "file_io",
+          "operation": "REWRITE",
+          "table": null
+        },
+        {
+          "line": 245,
+          "kind": "file_io",
+          "operation": "START",
+          "table": null
+        },
+        {
+          "line": 252,
+          "kind": "file_io",
+          "operation": "READ",
+          "table": null
+        },
+        {
+          "line": 266,
+          "kind": "file_io",
+          "operation": "START",
+          "table": null
+        },
+        {
+          "line": 273,
+          "kind": "file_io",
+          "operation": "READ",
+          "table": null
+        }
+      ],
+      "unresolved": [],
+      "covered_by": [
+        "REQ-RCVPRC00-001",
+        "REQ-RCVPRC00-003"
+      ]
+    },
+    {
+      "behaviour_id": "RCVPRC00:3000-TERMINATE-RECOVERY",
+      "kind": "performed_range",
+      "classification": "PARTIAL",
+      "lines": [
+        106,
+        300
+      ],
+      "inputs": [
+        "BCT-RC-ERROR",
+        "ERR-MESSAGE",
+        "LS-RETURN-CODE",
+        "WS-BCT-STATUS",
+        "WS-PSR-STATUS"
+      ],
+      "outputs": [
+        "ERR-PROGRAM",
+        "ERR-TEXT",
+        "LS-RETURN-CODE"
+      ],
+      "side_effects": [
+        {
+          "line": 113,
+          "kind": "call",
+          "operation": "CALL",
+          "table": null
+        },
+        {
+          "line": 290,
+          "kind": "call",
+          "operation": "CALL",
+          "table": null
+        },
+        {
+          "line": 294,
+          "kind": "file_io",
+          "operation": "CLOSE",
+          "table": null
+        }
+      ],
+      "unresolved": [],
+      "covered_by": [
+        "REQ-RCVPRC00-001"
+      ]
+    },
+    {
+      "behaviour_id": "RCVPRC00:9000-ERROR-ROUTINE",
+      "kind": "performed_range",
+      "classification": "PARTIAL",
+      "lines": [
+        111,
+        114
+      ],
+      "inputs": [
+        "BCT-RC-ERROR",
+        "ERR-MESSAGE"
+      ],
+      "outputs": [
+        "ERR-PROGRAM",
+        "LS-RETURN-CODE"
+      ],
+      "side_effects": [
+        {
+          "line": 113,
+          "kind": "call",
+          "operation": "CALL",
+          "table": null
+        }
+      ],
+      "unresolved": [],
+      "covered_by": [
+        "REQ-RCVPRC00-001",
+        "REQ-RCVPRC00-002",
+        "REQ-RCVPRC00-003",
+        "REQ-RCVPRC00-004",
+        "REQ-RCVPRC00-005",
+        "RT-RCVPRC00-001",
+        "RT-RCVPRC00-002",
+        "RT-RCVPRC00-003"
+      ]
+    }
+  ],
+  "gaps": [],
+  "closures": [
+    {
+      "behaviour_id": "RCVPRC00:0000-MAIN",
+      "status": "UNRESOLVED",
+      "unresolved_reasons": [
+        "line 84: RETURN-CODE is neither declared, a keyword, a paragraph nor the subject of a blocking decision (unknown dependency)",
+        "line 119: I-O is neither declared, a keyword, a paragraph nor the subject of a blocking decision (unknown dependency)",
+        "line 207: STAMP is neither declared, a keyword, a paragraph nor the subject of a blocking decision (unknown dependency)",
+        "line 252: NEXT is neither declared, a keyword, a paragraph nor the subject of a blocking decision (unknown dependency)",
+        "line 273: NEXT is neither declared, a keyword, a paragraph nor the subject of a blocking decision (unknown dependency)"
+      ],
+      "units": [
+        "RCVPRC00",
+        "ERRHAND",
+        "BCHCON",
+        "BCHCTL",
+        "PRCSEQ",
+        "ERRPROC"
+      ],
+      "external": [
+        {
+          "kind": "file_io",
+          "line": 163,
+          "operation": "READ",
+          "target": "BATCH-CONTROL-FILE",
+          "relation": "direct"
+        },
+        {
+          "kind": "file_io",
+          "line": 176,
+          "operation": "READ",
+          "target": "PROCESS-SEQ-FILE",
+          "relation": "direct"
+        },
+        {
+          "kind": "file_io",
+          "line": 210,
+          "operation": "REWRITE",
+          "target": "BATCH-CONTROL-FILE",
+          "relation": "direct"
+        },
+        {
+          "kind": "file_io",
+          "line": 222,
+          "operation": "REWRITE",
+          "target": "BATCH-CONTROL-FILE",
+          "relation": "direct"
+        },
+        {
+          "kind": "file_io",
+          "line": 234,
+          "operation": "REWRITE",
+          "target": "BATCH-CONTROL-FILE",
+          "relation": "direct"
+        },
+        {
+          "kind": "file_io",
+          "line": 245,
+          "operation": "START",
+          "target": "BATCH-CONTROL-FILE",
+          "relation": "direct"
+        },
+        {
+          "kind": "file_io",
+          "line": 252,
+          "operation": "READ",
+          "target": "BATCH-CONTROL-FILE",
+          "relation": "direct"
+        },
+        {
+          "kind": "file_io",
+          "line": 266,
+          "operation": "START",
+          "target": "BATCH-CONTROL-FILE",
+          "relation": "direct"
+        },
+        {
+          "kind": "file_io",
+          "line": 273,
+          "operation": "READ",
+          "target": "BATCH-CONTROL-FILE",
+          "relation": "direct"
+        }
+      ],
+      "undeclared": [],
+      "sha256": "725d879fa5b15f5d5a3389000ef9ffd8d7d73592eaffec5f9fcfadb222299d88"
+    },
+    {
+      "behaviour_id": "RCVPRC00:1000-INITIALIZE-RECOVERY",
+      "status": "UNRESOLVED",
+      "unresolved_reasons": [
+        "line 119: I-O is neither declared, a keyword, a paragraph nor the subject of a blocking decision (unknown dependency)"
+      ],
+      "units": [
+        "RCVPRC00",
+        "ERRHAND",
+        "BCHCON",
+        "ERRPROC"
+      ],
+      "external": [],
+      "undeclared": [],
+      "sha256": "8b9fc4d3de5b4f23a78f665110e7a6146de5ace97422da1ec7547e3a016883fe"
+    },
+    {
+      "behaviour_id": "RCVPRC00:2000-PROCESS-RECOVERY",
+      "status": "UNRESOLVED",
+      "unresolved_reasons": [
+        "line 207: STAMP is neither declared, a keyword, a paragraph nor the subject of a blocking decision (unknown dependency)",
+        "line 252: NEXT is neither declared, a keyword, a paragraph nor the subject of a blocking decision (unknown dependency)",
+        "line 273: NEXT is neither declared, a keyword, a paragraph nor the subject of a blocking decision (unknown dependency)"
+      ],
+      "units": [
+        "RCVPRC00",
+        "BCHCTL",
+        "ERRHAND",
+        "BCHCON",
+        "PRCSEQ",
+        "ERRPROC"
+      ],
+      "external": [
+        {
+          "kind": "file_io",
+          "line": 163,
+          "operation": "READ",
+          "target": "BATCH-CONTROL-FILE",
+          "relation": "direct"
+        },
+        {
+          "kind": "file_io",
+          "line": 176,
+          "operation": "READ",
+          "target": "PROCESS-SEQ-FILE",
+          "relation": "direct"
+        },
+        {
+          "kind": "file_io",
+          "line": 210,
+          "operation": "REWRITE",
+          "target": "BATCH-CONTROL-FILE",
+          "relation": "direct"
+        },
+        {
+          "kind": "file_io",
+          "line": 222,
+          "operation": "REWRITE",
+          "target": "BATCH-CONTROL-FILE",
+          "relation": "direct"
+        },
+        {
+          "kind": "file_io",
+          "line": 234,
+          "operation": "REWRITE",
+          "target": "BATCH-CONTROL-FILE",
+          "relation": "direct"
+        },
+        {
+          "kind": "file_io",
+          "line": 245,
+          "operation": "START",
+          "target": "BATCH-CONTROL-FILE",
+          "relation": "direct"
+        },
+        {
+          "kind": "file_io",
+          "line": 252,
+          "operation": "READ",
+          "target": "BATCH-CONTROL-FILE",
+          "relation": "direct"
+        },
+        {
+          "kind": "file_io",
+          "line": 266,
+          "operation": "START",
+          "target": "BATCH-CONTROL-FILE",
+          "relation": "direct"
+        },
+        {
+          "kind": "file_io",
+          "line": 273,
+          "operation": "READ",
+          "target": "BATCH-CONTROL-FILE",
+          "relation": "direct"
+        }
+      ],
+      "undeclared": [],
+      "sha256": "ece47f8aa332d4cf31b7fdd7b4ddac436b78b9d54f028d15fff2d3c4ae1a34a6"
+    },
+    {
+      "behaviour_id": "RCVPRC00:3000-TERMINATE-RECOVERY",
+      "status": "RESOLVED",
+      "unresolved_reasons": [],
+      "units": [
+        "RCVPRC00",
+        "ERRHAND",
+        "BCHCON",
+        "ERRPROC"
+      ],
+      "external": [],
+      "undeclared": [],
+      "sha256": "2d98e37af17b3c09248e187818404c860e1bdf76025b9a27a5ba416daa79d8dc"
+    },
+    {
+      "behaviour_id": "RCVPRC00:9000-ERROR-ROUTINE",
+      "status": "RESOLVED",
+      "unresolved_reasons": [],
+      "units": [
+        "RCVPRC00",
+        "ERRHAND",
+        "BCHCON",
+        "ERRPROC"
+      ],
+      "external": [],
+      "undeclared": [],
+      "sha256": "b079838b1e7e22dd7dac825b6b0d874fb2632ba5b922f8c5e7d642a65b9d45d1"
+    }
+  ],
+  "open_decisions": [
+    {
+      "id": "DR-DB2ERR-002",
+      "blocking": false,
+      "question": "DB2ERR (line 75) uses the non-standard 'ACCEPT WS-CURRENT-TIMESTAMP FROM TIME STAMP'; the ERRPROC logic file flags the same construct (line 57) and PORTDEL uses it for the deletion audit timestamp (source line 169). Which compiler extension is in use and what timestamp format do ERRLOG rows, error-log records and deletion audit records actually carry?"
+    },
+    {
+      "id": "DR-F2-0005-022",
+      "blocking": false,
+      "question": "RCVPRC00's error routine sets the error return code but lets processing continue, and the sequence/all recovery browse loops issue random READ/REWRITE on the file being browsed (re-positioning the browse). Must Java reproduce both behaviours?"
+    },
+    {
+      "id": "DR-F2-P0006-009",
+      "blocking": false,
+      "question": "ERRPROC's LINKAGE LS-ERROR-REQUEST is 354 bytes, but DB2ERR (line 199) and DB2STAT (line 227) CALL 'ERRPROC' USING ERR-MESSAGE from copybook ERRHAND (about 370 bytes, different field order). Which layout is the contract of the Java error service?"
+    },
+    {
+      "id": "DR-F2-PKT0010-001",
+      "blocking": false,
+      "question": "BCHCON BCT-EMERGENCY is PIC X(8) with VALUE 'EMERGENCY' (9 characters). What initial 8-byte value must the Java constant hold: the compiler-truncated 'EMERGENC', or is the copybook to be corrected (for example a 9-byte field or a different literal)?"
+    },
+    {
+      "id": "DR-F2-PKT0010-002",
+      "blocking": false,
+      "question": "Which character encoding (code page) do the files and areas described by these copybooks use for DISPLAY data on the legacy platform (EBCDIC 037, 1140, another EBCDIC variant, or ASCII)? The zoned-decimal test vectors and String codecs depend on it."
+    },
+    {
+      "id": "DR-F2-PKT0010-003",
+      "blocking": false,
+      "question": "Which TRUNC compiler option (STD, OPT or BIN) were the programs including these copybooks compiled with? It decides whether COMP fields such as 9(2) COMP, 9(3) COMP, 9(5) COMP and 9(9) COMP may hold values beyond their PIC digits (up to the halfword/fullword limit), which affects Java range validation and whether 9(9) COMP counters need long instead of int."
+    },
+    {
+      "id": "DR-PRCSEQ00-004",
+      "blocking": false,
+      "question": "Copybook PRCSEQ declares process-definition value domains that no executable statement tests: process type PSR-TYPE ('INI','PRC','RPT','TRM'; BR-138 - PRCSEQ00 only compares PSR-TYPE with the requested sequence type), run frequency PSR-FREQ ('D','W','M'; BR-139), active days PSR-ACTIVE-DAYS ('YYYYYNN','NNNNNYY','YYYYYYY'; BR-140), month-end indicator PSR-MONTH-END ('Y'; BR-141) and holiday run PSR-HOLIDAY-RUN ('N','Y'; BR-142). Must the forward scheduler validate the requested sequence type against these values or use frequency, active days, month-end and holiday flags when building a sequence?"
+    },
+    {
+      "id": "DR-RCVPRC00-001",
+      "blocking": false,
+      "question": "In RCVPRC00 the error routine (9000-ERROR-ROUTINE) sets return code 8 and calls ERRPROC but does not stop processing: after 'Process date required', 'Invalid recovery type', 'Process ID required for process recovery', a failed file open or a missing record, recovery continues (and the browse loops nest record I/O). Must the forward recovery service reproduce this continue-after-error behaviour, or stop at the first validation failure?"
+    },
+    {
+      "id": "DR-RCVPRC00-002",
+      "blocking": false,
+      "question": "RCVPRC00 restarts a restartable process (PSR-RESTART = 'Y') every time without applying the restart limit; the limit (restart count > BCT-MAX-RESTARTS = 3 gives terminate, otherwise bypass with return code 4) applies only to non-restartable processes. Is this the intended recovery policy, or should restartable processes also be limited to 3 restarts?"
+    },
+    {
+      "id": "DR-RCVPRC00-003",
+      "blocking": false,
+      "question": "BR-032 (medium confidence): at recovery termination the message is 'Recovery completed successfully' when the return code is zero, otherwise 'Recovery completed with errors', and it is passed to ERRPROC (the error processor) even on success. Confirm that the completion message must be routed through the error processor."
+    },
+    {
+      "id": "RVW-GAP-092",
+      "blocking": false,
+      "question": "GAP-092 (medium, DIAGRAM_RENDER_UNVERIFIED) is not addressed by any decision or requirement: Visual rendering of the 65 Mermaid diagrams is unverified. Acknowledge it as a known limitation (resolved_no_change) or exclude the affected units?"
+    },
+    {
+      "id": "RVW-GAP-104",
+      "blocking": false,
+      "question": "GAP-104 (low, DIAGRAM_INCOMPLETE) is not addressed by any decision or requirement: COMP-UNRESOLVED: all seven edges are unsupported. Acknowledge it as a known limitation (resolved_no_change) or exclude the affected units?"
+    }
+  ],
+  "authorisation": {
+    "generation_authorized": false,
+    "blockers": [
+      "config generation.java_generation_allowed is false (project authority)",
+      "no authorised orchestrator.java_target_dir",
+      "G4 is BLOCKED (needs signed G2, G3 and G4 approvals by trusted signers)",
+      "trust store: TRUST_NOT_CONFIGURED"
+    ],
+    "gates": {
+      "G0": "PASS",
+      "G1": "PASS",
+      "G2": "UNVERIFIED",
+      "G3": "BLOCKED",
+      "G4": "BLOCKED",
+      "G5": "BLOCKED",
+      "G6": "BLOCKED",
+      "G7": "BLOCKED",
+      "G8": "BLOCKED"
+    },
+    "trust": "TRUST_NOT_CONFIGURED",
+    "program_g2_scope": {
+      "readiness": "NOT_READY",
+      "blocking": 10,
+      "scope_sha256": "ae27410dcb8e237dc3ae149491747d219433db03f42f2909751b85a443ebc671"
+    },
+    "note": "Engineering gates never authorise generation. Java may be generated only when generation_authorized is true."
+  }
+}

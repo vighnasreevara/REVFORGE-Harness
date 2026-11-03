@@ -1,0 +1,668 @@
+{
+  "gate": "SOURCE_READINESS",
+  "subject": "RTNCDE00",
+  "status": "FAIL",
+  "checks": [
+    {
+      "id": "source_available",
+      "ok": true,
+      "detail": "src/programs/batch/RTNCDE00.cbl sha256 7cb951ea1f418c19ddd61c0eca00f21108af5f364b5ecf05742cbc428862994e; 56 statement(s) in 10 paragraph(s)"
+    },
+    {
+      "id": "complete_program",
+      "ok": true,
+      "detail": "every paragraph contains statements"
+    },
+    {
+      "id": "copybooks_resolved",
+      "ok": false,
+      "detail": "unresolved or circular includes: SQLCA@6"
+    },
+    {
+      "id": "requirements_and_data_mapping_delivered",
+      "ok": true,
+      "detail": "F1/F2 deliveries accepted for RTNCODE, SQLCA, RTNCDE00"
+    },
+    {
+      "id": "behaviour_classified",
+      "ok": true,
+      "detail": "7 behaviour(s): 4 VERIFIED_CANDIDATE, 2 PARTIAL, 1 GAP"
+    },
+    {
+      "id": "dependencies_identified",
+      "ok": true,
+      "detail": "5 behaviour closure(s) resolved; units RTNCDE00, RTNCODE, SQLCA; external operations 2"
+    },
+    {
+      "id": "unsupported_documented",
+      "ok": true,
+      "detail": "8 gap(s) document every PARTIAL/GAP behaviour"
+    },
+    {
+      "id": "unknowns_documented",
+      "ok": true,
+      "detail": "8 open decision(s) record the remaining questions (2 blocking for approval); none is resolved or assumed here"
+    }
+  ],
+  "note": "An engineering gate: it states that the source is understood well enough to convert, with every unknown documented. It is not a G2 approval and does not authorise generation.",
+  "behaviours": [
+    {
+      "behaviour_id": "RTNCDE00:ENTRY-DISPATCH",
+      "kind": "dispatch",
+      "classification": "PARTIAL",
+      "lines": [
+        33,
+        48
+      ],
+      "inputs": [
+        "RC-REQUEST-TYPE"
+      ],
+      "outputs": [],
+      "side_effects": [],
+      "unresolved": [],
+      "covered_by": [
+        "REQ-RTNCDE00-001"
+      ]
+    },
+    {
+      "behaviour_id": "RTNCDE00:P100-INIT-RETURN-CODES",
+      "kind": "performed_range",
+      "classification": "VERIFIED_CANDIDATE",
+      "lines": [
+        54,
+        59
+      ],
+      "inputs": [],
+      "outputs": [
+        "RC-CODES-AREA",
+        "RC-CURRENT-CODE",
+        "RC-HIGHEST-CODE",
+        "RC-PROGRAM-ID",
+        "RC-RESPONSE-CODE",
+        "RC-STATUS"
+      ],
+      "side_effects": [],
+      "unresolved": [],
+      "covered_by": [
+        "REQ-RTNCDE00-001"
+      ]
+    },
+    {
+      "behaviour_id": "RTNCDE00:P200-SET-RETURN-CODE",
+      "kind": "performed_range",
+      "classification": "VERIFIED_CANDIDATE",
+      "lines": [
+        64,
+        81
+      ],
+      "inputs": [
+        "RC-HIGHEST-CODE",
+        "RC-NEW-CODE"
+      ],
+      "outputs": [
+        "RC-CURRENT-CODE",
+        "RC-HIGHEST-CODE",
+        "RC-RESPONSE-CODE",
+        "RC-STATUS"
+      ],
+      "side_effects": [],
+      "unresolved": [],
+      "covered_by": [
+        "REQ-RTNCDE00-001",
+        "REQ-RTNCDE00-002",
+        "REQ-RTNCDE00-003",
+        "RT-RTNCDE00-001"
+      ]
+    },
+    {
+      "behaviour_id": "RTNCDE00:P300-GET-RETURN-CODE",
+      "kind": "performed_range",
+      "classification": "VERIFIED_CANDIDATE",
+      "lines": [
+        86,
+        89
+      ],
+      "inputs": [
+        "RC-CURRENT-CODE",
+        "RC-HIGHEST-CODE",
+        "RC-STATUS"
+      ],
+      "outputs": [
+        "RC-HIGHEST-RETURN",
+        "RC-RESPONSE-CODE",
+        "RC-RETURN-STATUS",
+        "RC-RETURN-VALUE"
+      ],
+      "side_effects": [],
+      "unresolved": [],
+      "covered_by": [
+        "REQ-RTNCDE00-001"
+      ]
+    },
+    {
+      "behaviour_id": "RTNCDE00:P400-LOG-RETURN-CODE",
+      "kind": "performed_range",
+      "classification": "PARTIAL",
+      "lines": [
+        94,
+        116
+      ],
+      "inputs": [
+        "FUNCTION CURRENT-DATE (system date and time)",
+        "RC-CURRENT-CODE",
+        "RC-HIGHEST-CODE",
+        "RC-MESSAGE",
+        "RC-PROGRAM-ID",
+        "RC-STATUS",
+        "WS-CURRENT-TIME"
+      ],
+      "outputs": [
+        "RC-RESPONSE-CODE",
+        "WS-CURRENT-TIME"
+      ],
+      "side_effects": [
+        {
+          "line": 96,
+          "kind": "embedded_sql",
+          "operation": "INSERT",
+          "table": "RTNCODES"
+        }
+      ],
+      "unresolved": [
+        "SQLCODE"
+      ],
+      "covered_by": [
+        "REQ-RTNCDE00-001",
+        "RT-RTNCDE00-002"
+      ]
+    },
+    {
+      "behaviour_id": "RTNCDE00:P500-ANALYZE-CODES",
+      "kind": "performed_range",
+      "classification": "GAP",
+      "lines": [
+        122,
+        138
+      ],
+      "inputs": [
+        "RC-END-TIME",
+        "RC-PROGRAM-ID",
+        "RC-START-TIME"
+      ],
+      "outputs": [
+        "RC-MAX-CODE",
+        "RC-MIN-CODE",
+        "RC-RESPONSE-CODE",
+        "RC-TOTAL-CODES"
+      ],
+      "side_effects": [
+        {
+          "line": 122,
+          "kind": "embedded_sql",
+          "operation": "SELECT",
+          "table": "RTNCODES"
+        }
+      ],
+      "unresolved": [
+        "SQLCODE"
+      ],
+      "covered_by": [
+        "REQ-RTNCDE00-001",
+        "REQ-RTNCDE00-004",
+        "RT-RTNCDE00-003"
+      ]
+    },
+    {
+      "behaviour_id": "RTNCDE00:NO-MATCH",
+      "kind": "no_match",
+      "classification": "VERIFIED_CANDIDATE",
+      "lines": null,
+      "inputs": [],
+      "outputs": [],
+      "side_effects": [],
+      "unresolved": [],
+      "covered_by": [
+        "REQ-RTNCDE00-001"
+      ]
+    }
+  ],
+  "gaps": [
+    {
+      "gap_id": "GAP-RTNCDE00-P200-SET-RETURN-CODE-TRUNC-RC-HIGHEST-CODE",
+      "kind": "COMPILER_OPTION_DEPENDENT",
+      "behaviour_id": "RTNCDE00:P200-SET-RETURN-CODE",
+      "source": {
+        "path": "src/programs/batch/RTNCDE00.cbl",
+        "sha256": "7cb951ea1f418c19ddd61c0eca00f21108af5f364b5ecf05742cbc428862994e",
+        "lines": [
+          65
+        ],
+        "statements": [
+          {
+            "line": 65,
+            "text": "MOVE RC-NEW-CODE TO RC-HIGHEST-CODE"
+          }
+        ]
+      },
+      "missing_fact": "the compiler TRUNC option used for RTNCDE00 (binary item RC-HIGHEST-CODE S9(4))",
+      "why_unsafe": "values beyond the 4 digits of PIC S9(4) behave according to the compiler TRUNC option, which the repository does not record",
+      "affected_requirements": [
+        "REQ-RTNCDE00-001",
+        "REQ-RTNCDE00-002",
+        "REQ-RTNCDE00-003",
+        "RT-RTNCDE00-001"
+      ],
+      "affected_java_component": "input validation of behaviour P200-SET-RETURN-CODE: values outside the PIC range are rejected, not truncated, until the option is known",
+      "required_action": [
+        "the build/compile options of the legacy program (technical authority)"
+      ],
+      "validation_evidence": "the compile listing or JCL showing TRUNC(STD|OPT|BIN), or a captured run with an out-of-range value",
+      "blocks_execution_path": "only inputs outside the PIC range of RC-HIGHEST-CODE",
+      "blocking": false,
+      "status": "OPEN"
+    },
+    {
+      "gap_id": "GAP-RTNCDE00-P200-SET-RETURN-CODE-TRUNC-RC-CURRENT-CODE",
+      "kind": "COMPILER_OPTION_DEPENDENT",
+      "behaviour_id": "RTNCDE00:P200-SET-RETURN-CODE",
+      "source": {
+        "path": "src/programs/batch/RTNCDE00.cbl",
+        "sha256": "7cb951ea1f418c19ddd61c0eca00f21108af5f364b5ecf05742cbc428862994e",
+        "lines": [
+          68
+        ],
+        "statements": [
+          {
+            "line": 68,
+            "text": "MOVE RC-NEW-CODE TO RC-CURRENT-CODE."
+          }
+        ]
+      },
+      "missing_fact": "the compiler TRUNC option used for RTNCDE00 (binary item RC-CURRENT-CODE S9(4))",
+      "why_unsafe": "values beyond the 4 digits of PIC S9(4) behave according to the compiler TRUNC option, which the repository does not record",
+      "affected_requirements": [
+        "REQ-RTNCDE00-001",
+        "REQ-RTNCDE00-002",
+        "REQ-RTNCDE00-003",
+        "RT-RTNCDE00-001"
+      ],
+      "affected_java_component": "input validation of behaviour P200-SET-RETURN-CODE: values outside the PIC range are rejected, not truncated, until the option is known",
+      "required_action": [
+        "the build/compile options of the legacy program (technical authority)"
+      ],
+      "validation_evidence": "the compile listing or JCL showing TRUNC(STD|OPT|BIN), or a captured run with an out-of-range value",
+      "blocks_execution_path": "only inputs outside the PIC range of RC-CURRENT-CODE",
+      "blocking": false,
+      "status": "OPEN"
+    },
+    {
+      "gap_id": "GAP-RTNCDE00-P300-GET-RETURN-CODE-TRUNC-RC-RETURN-VALUE",
+      "kind": "COMPILER_OPTION_DEPENDENT",
+      "behaviour_id": "RTNCDE00:P300-GET-RETURN-CODE",
+      "source": {
+        "path": "src/programs/batch/RTNCDE00.cbl",
+        "sha256": "7cb951ea1f418c19ddd61c0eca00f21108af5f364b5ecf05742cbc428862994e",
+        "lines": [
+          86
+        ],
+        "statements": [
+          {
+            "line": 86,
+            "text": "MOVE RC-CURRENT-CODE TO RC-RETURN-VALUE."
+          }
+        ]
+      },
+      "missing_fact": "the compiler TRUNC option used for RTNCDE00 (binary item RC-RETURN-VALUE S9(4))",
+      "why_unsafe": "values beyond the 4 digits of PIC S9(4) behave according to the compiler TRUNC option, which the repository does not record",
+      "affected_requirements": [
+        "REQ-RTNCDE00-001"
+      ],
+      "affected_java_component": "input validation of behaviour P300-GET-RETURN-CODE: values outside the PIC range are rejected, not truncated, until the option is known",
+      "required_action": [
+        "the build/compile options of the legacy program (technical authority)"
+      ],
+      "validation_evidence": "the compile listing or JCL showing TRUNC(STD|OPT|BIN), or a captured run with an out-of-range value",
+      "blocks_execution_path": "only inputs outside the PIC range of RC-RETURN-VALUE",
+      "blocking": false,
+      "status": "OPEN"
+    },
+    {
+      "gap_id": "GAP-RTNCDE00-P300-GET-RETURN-CODE-TRUNC-RC-HIGHEST-RETURN",
+      "kind": "COMPILER_OPTION_DEPENDENT",
+      "behaviour_id": "RTNCDE00:P300-GET-RETURN-CODE",
+      "source": {
+        "path": "src/programs/batch/RTNCDE00.cbl",
+        "sha256": "7cb951ea1f418c19ddd61c0eca00f21108af5f364b5ecf05742cbc428862994e",
+        "lines": [
+          87
+        ],
+        "statements": [
+          {
+            "line": 87,
+            "text": "MOVE RC-HIGHEST-CODE TO RC-HIGHEST-RETURN."
+          }
+        ]
+      },
+      "missing_fact": "the compiler TRUNC option used for RTNCDE00 (binary item RC-HIGHEST-RETURN S9(4))",
+      "why_unsafe": "values beyond the 4 digits of PIC S9(4) behave according to the compiler TRUNC option, which the repository does not record",
+      "affected_requirements": [
+        "REQ-RTNCDE00-001"
+      ],
+      "affected_java_component": "input validation of behaviour P300-GET-RETURN-CODE: values outside the PIC range are rejected, not truncated, until the option is known",
+      "required_action": [
+        "the build/compile options of the legacy program (technical authority)"
+      ],
+      "validation_evidence": "the compile listing or JCL showing TRUNC(STD|OPT|BIN), or a captured run with an out-of-range value",
+      "blocks_execution_path": "only inputs outside the PIC range of RC-HIGHEST-RETURN",
+      "blocking": false,
+      "status": "OPEN"
+    },
+    {
+      "gap_id": "GAP-RTNCDE00-P400-LOG-RETURN-CODE-SQLCODE",
+      "kind": "UNDECLARED_NAME_SEMANTICS",
+      "behaviour_id": "RTNCDE00:P400-LOG-RETURN-CODE",
+      "source": {
+        "path": "src/programs/batch/RTNCDE00.cbl",
+        "sha256": "7cb951ea1f418c19ddd61c0eca00f21108af5f364b5ecf05742cbc428862994e",
+        "lines": [
+          113,
+          114,
+          116
+        ],
+        "statements": [
+          {
+            "line": 113,
+            "text": "IF SQLCODE = 0"
+          },
+          {
+            "line": 114,
+            "text": "MOVE 0 TO RC-RESPONSE-CODE"
+          },
+          {
+            "line": 116,
+            "text": "MOVE 8 TO RC-RESPONSE-CODE"
+          }
+        ]
+      },
+      "missing_fact": "SQLCODE is used but declared nowhere in the repository; its layout and value meanings are the subject of DR-F2-0011-001, DR-DB2CONN-002 (missing: the real SQLCA member (the repository copy includes itself); a declaration of SQLCODE; a declaration of SQLERRMC)",
+      "why_unsafe": "the outputs of these statements (RC-RESPONSE-CODE) depend on a value whose meaning is not established; any Java mapping would invent it",
+      "affected_requirements": [
+        "REQ-RTNCDE00-001",
+        "RT-RTNCDE00-002"
+      ],
+      "affected_java_component": "outcome mapping of behaviour P400-LOG-RETURN-CODE (behind a port whose only implementation throws until the gap is resolved)",
+      "required_action": [
+        "DR-F2-0011-001: a signed resolution by technical_authority",
+        "DR-DB2CONN-002: a signed resolution by technical_authority"
+      ],
+      "validation_evidence": "the real definition of SQLCODE for the target runtime and a captured legacy run showing each outcome branch",
+      "blocks_execution_path": "request RC-LOG-CODE ('L') -> P400-LOG-RETURN-CODE: statements 113, 114, 116",
+      "blocking": true,
+      "status": "OPEN"
+    },
+    {
+      "gap_id": "GAP-RTNCDE00-P400-LOG-RETURN-CODE-SQL-INSERT-RTNCODES",
+      "kind": "EXTERNAL_DATABASE_RUNTIME",
+      "behaviour_id": "RTNCDE00:P400-LOG-RETURN-CODE",
+      "source": {
+        "path": "src/programs/batch/RTNCDE00.cbl",
+        "sha256": "7cb951ea1f418c19ddd61c0eca00f21108af5f364b5ecf05742cbc428862994e",
+        "lines": [
+          96,
+          111
+        ],
+        "statements": [
+          {
+            "line": 96,
+            "text": "EXEC SQL INSERT INTO RTNCODES (TIMESTAMP, PROGRAM_ID, RETURN_CODE, HIGHEST_CODE, STATUS_CODE, MESSAGE_TEXT) VALUES (:WS-CURRENT-TIME, :RC-PROGRAM-ID, :RC-CURRENT-CODE, :RC-HIGHEST-CODE, :RC-STATUS, :RC-MESSAGE) END-EXEC."
+          }
+        ]
+      },
+      "missing_fact": "the runtime behaviour of embedded SQL INSERT on RTNCODES: database product and version, host-variable conversions, NULL and no-row results, constraint violations and the status they report",
+      "why_unsafe": "the result and every status it produces come from an external database the repository does not describe; a Java implementation would have to assume them",
+      "affected_requirements": [
+        "REQ-RTNCDE00-001",
+        "RT-RTNCDE00-002"
+      ],
+      "affected_java_component": "database port for INSERT RTNCODES (interface only; no implementation until specified)",
+      "required_action": [
+        "an approved specification of the database interaction (technical authority), recorded as an ADR at G3"
+      ],
+      "validation_evidence": "a captured run against the real (or an approved equivalent) database for each outcome, including errors",
+      "blocks_execution_path": "request RC-LOG-CODE ('L') -> P400-LOG-RETURN-CODE: statement 96",
+      "blocking": true,
+      "status": "OPEN"
+    },
+    {
+      "gap_id": "GAP-RTNCDE00-P500-ANALYZE-CODES-SQLCODE",
+      "kind": "UNDECLARED_NAME_SEMANTICS",
+      "behaviour_id": "RTNCDE00:P500-ANALYZE-CODES",
+      "source": {
+        "path": "src/programs/batch/RTNCDE00.cbl",
+        "sha256": "7cb951ea1f418c19ddd61c0eca00f21108af5f364b5ecf05742cbc428862994e",
+        "lines": [
+          135,
+          136,
+          138
+        ],
+        "statements": [
+          {
+            "line": 135,
+            "text": "IF SQLCODE = 0"
+          },
+          {
+            "line": 136,
+            "text": "MOVE 0 TO RC-RESPONSE-CODE"
+          },
+          {
+            "line": 138,
+            "text": "MOVE 8 TO RC-RESPONSE-CODE"
+          }
+        ]
+      },
+      "missing_fact": "SQLCODE is used but declared nowhere in the repository; its layout and value meanings are the subject of DR-F2-0011-001, DR-DB2CONN-002 (missing: the real SQLCA member (the repository copy includes itself); a declaration of SQLCODE; a declaration of SQLERRMC)",
+      "why_unsafe": "the outputs of these statements (RC-RESPONSE-CODE) depend on a value whose meaning is not established; any Java mapping would invent it",
+      "affected_requirements": [
+        "REQ-RTNCDE00-001",
+        "REQ-RTNCDE00-004",
+        "RT-RTNCDE00-003"
+      ],
+      "affected_java_component": "outcome mapping of behaviour P500-ANALYZE-CODES (behind a port whose only implementation throws until the gap is resolved)",
+      "required_action": [
+        "DR-F2-0011-001: a signed resolution by technical_authority",
+        "DR-DB2CONN-002: a signed resolution by technical_authority"
+      ],
+      "validation_evidence": "the real definition of SQLCODE for the target runtime and a captured legacy run showing each outcome branch",
+      "blocks_execution_path": "request RC-ANALYZE ('A') -> P500-ANALYZE-CODES: statements 135, 136, 138",
+      "blocking": true,
+      "status": "OPEN"
+    },
+    {
+      "gap_id": "GAP-RTNCDE00-P500-ANALYZE-CODES-SQL-SELECT-RTNCODES",
+      "kind": "EXTERNAL_DATABASE_RUNTIME",
+      "behaviour_id": "RTNCDE00:P500-ANALYZE-CODES",
+      "source": {
+        "path": "src/programs/batch/RTNCDE00.cbl",
+        "sha256": "7cb951ea1f418c19ddd61c0eca00f21108af5f364b5ecf05742cbc428862994e",
+        "lines": [
+          122,
+          133
+        ],
+        "statements": [
+          {
+            "line": 122,
+            "text": "EXEC SQL SELECT COUNT(*), MAX(RETURN_CODE), MIN(RETURN_CODE) INTO :RC-TOTAL-CODES, :RC-MAX-CODE, :RC-MIN-CODE FROM RTNCODES WHERE PROGRAM_ID = :RC-PROGRAM-ID AND TIMESTAMP >= :RC-START-TIME AND TIMESTAMP <= :RC-END-TIME END-EXEC."
+          }
+        ]
+      },
+      "missing_fact": "the runtime behaviour of embedded SQL SELECT on RTNCODES: database product and version, host-variable conversions, NULL and no-row results, constraint violations and the status they report",
+      "why_unsafe": "the result and every status it produces come from an external database the repository does not describe; a Java implementation would have to assume them",
+      "affected_requirements": [
+        "REQ-RTNCDE00-001",
+        "REQ-RTNCDE00-004",
+        "RT-RTNCDE00-003"
+      ],
+      "affected_java_component": "database port for SELECT RTNCODES (interface only; no implementation until specified)",
+      "required_action": [
+        "an approved specification of the database interaction (technical authority), recorded as an ADR at G3"
+      ],
+      "validation_evidence": "a captured run against the real (or an approved equivalent) database for each outcome, including errors",
+      "blocks_execution_path": "request RC-ANALYZE ('A') -> P500-ANALYZE-CODES: statement 122",
+      "blocking": true,
+      "status": "OPEN"
+    }
+  ],
+  "closures": [
+    {
+      "behaviour_id": "RTNCDE00:P100-INIT-RETURN-CODES",
+      "status": "RESOLVED",
+      "unresolved_reasons": [],
+      "units": [
+        "RTNCDE00",
+        "RTNCODE"
+      ],
+      "external": [],
+      "undeclared": [],
+      "sha256": "ef80e70c73cfcfe5ff8812598508921538e4cd2830a1bb1edf63459c1474d4bf"
+    },
+    {
+      "behaviour_id": "RTNCDE00:P200-SET-RETURN-CODE",
+      "status": "RESOLVED",
+      "unresolved_reasons": [],
+      "units": [
+        "RTNCDE00",
+        "RTNCODE"
+      ],
+      "external": [],
+      "undeclared": [],
+      "sha256": "3d6bf30ca09513c7773c357e9ee69db5c8f94726fdaea31a759c49823ed5c21b"
+    },
+    {
+      "behaviour_id": "RTNCDE00:P300-GET-RETURN-CODE",
+      "status": "RESOLVED",
+      "unresolved_reasons": [],
+      "units": [
+        "RTNCDE00",
+        "RTNCODE"
+      ],
+      "external": [],
+      "undeclared": [],
+      "sha256": "51f1a02a97a8352e6f23dde5d18c7f3d614195484a75d98931533f69fbe5a03a"
+    },
+    {
+      "behaviour_id": "RTNCDE00:P400-LOG-RETURN-CODE",
+      "status": "RESOLVED",
+      "unresolved_reasons": [],
+      "units": [
+        "RTNCDE00",
+        "RTNCODE",
+        "SQLCA"
+      ],
+      "external": [
+        {
+          "kind": "embedded_sql",
+          "line": 96,
+          "operation": "INSERT",
+          "target": "RTNCODES",
+          "relation": "direct"
+        }
+      ],
+      "undeclared": [
+        "SQLCODE"
+      ],
+      "sha256": "95eb9c9329846a63d7b80bf44ab7dde25bfb9b6bb34ea303819de58a6fff57c7"
+    },
+    {
+      "behaviour_id": "RTNCDE00:P500-ANALYZE-CODES",
+      "status": "RESOLVED",
+      "unresolved_reasons": [],
+      "units": [
+        "RTNCDE00",
+        "RTNCODE",
+        "SQLCA"
+      ],
+      "external": [
+        {
+          "kind": "embedded_sql",
+          "line": 122,
+          "operation": "SELECT",
+          "target": "RTNCODES",
+          "relation": "direct"
+        }
+      ],
+      "undeclared": [
+        "SQLCODE"
+      ],
+      "sha256": "49f5b5a7feba890d1a292f001c77a5022687b75eac49fdee0a9f6b4f08df293a"
+    }
+  ],
+  "open_decisions": [
+    {
+      "id": "DR-DB2CONN-002",
+      "blocking": true,
+      "question": "Copybook SQLCA (src/copybook/db2/SQLCA.cpy) includes itself (EXEC SQL INCLUDE SQLCA at line 6) and defines only SQL-STATUS-CODES, with no SQLCODE or SQLERRMC field; SQLCODE/SQLERRMC therefore have no Field ID in 14 DB2 programs, including HISTLD00, RTNANA00, RTNCDE00, DB2CMT and DB2CONN. Which SQLCA does the precompiler actually supply, and may the forward design assume the standard DB2 SQLCODE meaning (0 success, -803 duplicate key, negative values errors) used in these requirements?"
+    },
+    {
+      "id": "DR-F2-0005-009",
+      "blocking": false,
+      "question": "RTNANA00 and RTNCDE00 include SQLCA (a self-including copybook) inside a program 01 WS-DB2-AREA, so the copybook's 01 SQL-STATUS-CODES record is nested under another 01, and SQLCODE/SQLERRMC have no Field ID. Should the Java design model WS-DB2-AREA as the SQLCA copybook record (35 bytes) or replace it entirely with JDBC SQLException/SQLState handling?"
+    },
+    {
+      "id": "DR-F2-0005-010",
+      "blocking": false,
+      "question": "RTNCDE00's caller interface RC-REQUEST-AREA (165 bytes) consists only of the 01 record of copybook RTNCODE (SYS-PORTFOLIO-001-FIL-0013-REC-0001) nested inside another 01. Is the RTNCODE copybook record (mapped in the RTNCODE unit's packet) the authoritative interface contract for all callers of RTNCDE00?"
+    },
+    {
+      "id": "DR-F2-0011-001",
+      "blocking": true,
+      "question": "Copybook SQLCA (SYS-PORTFOLIO-001-FIL-0017) line 6 contains 'EXEC SQL INCLUDE SQLCA END-EXEC', naming itself. The included SQL communication area (SQLCODE, SQLSTATE, SQLERRMC, ...) has no layout in any reverse artifact. How should the forward design obtain the SQLCA layout and the SQLCODE/SQLSTATE semantics used by the 14 DB2 programs?"
+    },
+    {
+      "id": "DR-F2-PKT0010-002",
+      "blocking": false,
+      "question": "Which character encoding (code page) do the files and areas described by these copybooks use for DISPLAY data on the legacy platform (EBCDIC 037, 1140, another EBCDIC variant, or ASCII)? The zoned-decimal test vectors and String codecs depend on it."
+    },
+    {
+      "id": "DR-RTNCDE00-001",
+      "blocking": false,
+      "question": "RTNCDE00 uses 5 PERFORM ... THRU ranges (each Pn00 THRU Pn00-EXIT) and BR-041 (time-window analysis: COUNT, MAX and MIN of RETURN_CODE for one program with TIMESTAMP between start and end inclusive) is medium confidence. Confirm the inclusive time-window semantics and that the THRU ranges carry no behaviour beyond their single paragraph."
+    },
+    {
+      "id": "RVW-GAP-092",
+      "blocking": false,
+      "question": "GAP-092 (medium, DIAGRAM_RENDER_UNVERIFIED) is not addressed by any decision or requirement: Visual rendering of the 65 Mermaid diagrams is unverified. Acknowledge it as a known limitation (resolved_no_change) or exclude the affected units?"
+    },
+    {
+      "id": "RVW-GAP-104",
+      "blocking": false,
+      "question": "GAP-104 (low, DIAGRAM_INCOMPLETE) is not addressed by any decision or requirement: COMP-UNRESOLVED: all seven edges are unsupported. Acknowledge it as a known limitation (resolved_no_change) or exclude the affected units?"
+    }
+  ],
+  "authorisation": {
+    "generation_authorized": false,
+    "blockers": [
+      "config generation.java_generation_allowed is false (project authority)",
+      "no authorised orchestrator.java_target_dir",
+      "G4 is BLOCKED (needs signed G2, G3 and G4 approvals by trusted signers)",
+      "trust store: TRUST_NOT_CONFIGURED"
+    ],
+    "gates": {
+      "G0": "PASS",
+      "G1": "PASS",
+      "G2": "UNVERIFIED",
+      "G3": "BLOCKED",
+      "G4": "BLOCKED",
+      "G5": "BLOCKED",
+      "G6": "BLOCKED",
+      "G7": "BLOCKED",
+      "G8": "BLOCKED"
+    },
+    "trust": "TRUST_NOT_CONFIGURED",
+    "program_g2_scope": {
+      "readiness": "NOT_READY",
+      "blocking": 8,
+      "scope_sha256": "3c8aa823d8353b384d12a341c029d729b74c3306c823fc38e05a8a0559a75dc4"
+    },
+    "note": "Engineering gates never authorise generation. Java may be generated only when generation_authorized is true."
+  }
+}

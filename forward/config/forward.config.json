@@ -1,0 +1,163 @@
+{
+  "$schema": "../contracts/forward-config.schema.json",
+  "config_version": "1.0",
+  "repo_root": "..",
+  "reverse_artifacts": {
+    "inventory": "output/inventory/inventory_artifact.json",
+    "parser": "output/parser/parser_artifact.json",
+    "data": "output/data/data_artifact.json",
+    "logic": "output/logic/logic_artifact.json",
+    "rules": "output/rules/rules_artifact.json",
+    "diagrams": "output/diagram/diagrams_artifact.json",
+    "gaps": "output/final_report/gaps_register.json",
+    "brd": "output/final_report/brd.md"
+  },
+  "optional_artifacts": {
+    "classified_conditions": "output/rules/classified_conditions.json",
+    "brd_summary": "output/final_report/brd_summary.md",
+    "gaps_markdown": "output/final_report/gaps_register.md"
+  },
+  "cobol_source": {
+    "root": null,
+    "env_var": "REVFORGE_COBOL_SOURCE_ROOT",
+    "note": "Original COBOL source is not part of this repository. Set 'root' (relative to repo_root or absolute) or the environment variable to enable source availability checks."
+  },
+  "selection": {
+    "programs": "all"
+  },
+  "runs_dir": "forward/runs",
+  "generation": {
+    "java_generation_allowed": false,
+    "current_step": "STEP-5",
+    "note": "Java generation is not authorised. It requires this flag AND an approved generation gate (G4 PASS), which cannot occur before a later step."
+  },
+  "neo4j": {
+    "live_verification": false,
+    "note": "STEP 1 does not contact Neo4j. Verification results recorded by the reverse agents are reported with attribution, never as live checks."
+  },
+  "orchestrator": {
+    "agents_dir": "forward/agents",
+    "skills_dir": "forward/skills",
+    "java_target_dir": null,
+    "note": "java_target_dir is the only place F5 may ever write Java; it is null (no target authorised) until a later step authorises generation.",
+    "batch_size": 14
+  },
+  "approval": {
+    "trust_store": null,
+    "trust_store_env": "REVFORGE_APPROVAL_TRUST_STORE",
+    "request_ttl_hours": 168,
+    "max_clock_skew_minutes": 10,
+    "require_distinct_requester": true,
+    "roles": {
+      "requirements_approval": [
+        "requirements_approver"
+      ],
+      "exception": [
+        "exception_approver"
+      ],
+      "decision": {
+        "business": [
+          "business_sme"
+        ],
+        "technical": [
+          "technical_authority"
+        ],
+        "scope": [
+          "business_sme",
+          "product_owner"
+        ],
+        "data_layout": [
+          "technical_authority"
+        ],
+        "runtime_semantics": [
+          "technical_authority"
+        ],
+        "review": [
+          "business_sme"
+        ]
+      }
+    },
+    "g2": {
+      "default_scope": "application",
+      "reverse_artifact_supported": "REQUIRES_EVIDENCE",
+      "allow_exceptions_for": [
+        "REQUIRES_EVIDENCE"
+      ],
+      "accept_independent_verification_without_read_telemetry": true,
+      "blocking_gap_severities": [
+        "critical",
+        "high"
+      ],
+      "include_called_programs": true
+    },
+    "note": "trust_store is null: no trust anchor is provisioned, so G2 cannot pass. Provision public keys only (see forward/docs/HUMAN-APPROVAL-OPERATIONS.md); private keys never belong in this repository."
+  },
+  "bmad_governance": {
+    "mandatory": true,
+    "note": "STEP 21: every governed forward run needs a verified LIVE BMad receipt for each lifecycle stage (requirements, architecture, stories, sprint, implementation, review) for its exact scope; until then it is BMAD_BLOCKED, and Java generation through the workflow also needs the stages up to sprint. Local LGA conversions stay valid historical records and are never BMad-governed."
+  },
+  "openai_verification": {
+    "mode": "OFFLINE",
+    "network_enabled": false,
+    "provider": "openai",
+    "endpoint": "https://api.openai.com/v1/responses",
+    "model": "gpt-6-astra",
+    "model_verification": {
+      "source": "https://developers.openai.com/api/docs/models/gpt-6-astra",
+      "verified_on": "2026-10-31",
+      "capabilities": [
+        "responses_api",
+        "structured_outputs"
+      ],
+      "context_window": 1050000,
+      "max_output_tokens": 128000,
+      "note": "Verified against the official model page and the Structured Outputs guide on 2026-10-31 (Responses API v1/responses supported; structured_outputs listed). Re-verify before any LIVE run; the runtime never substitutes another model."
+    },
+    "api_key_env": "OPENAI_API_KEY",
+    "request": {
+      "max_output_tokens": 6000,
+      "timeout_ms": 180000,
+      "max_retries": 2,
+      "retry_base_delay_ms": 2000,
+      "concurrency": 2,
+      "store": false
+    },
+    "budget": {
+      "max_calls_per_run": 10,
+      "max_input_tokens_per_run": 200000,
+      "max_output_tokens_per_run": 60000,
+      "max_cost_usd_per_run": 5
+    },
+    "pricing": {
+      "currency": "USD",
+      "input_per_1m": 10,
+      "cached_input_per_1m": 1,
+      "output_per_1m": 50,
+      "source": "https://developers.openai.com/api/docs/models/gpt-6-astra",
+      "verified_on": "2026-10-31"
+    },
+    "selection": {
+      "max_packets": 5,
+      "category_priority": [
+        "contradictory_business_rules",
+        "unsupported_business_interpretation",
+        "data_layout_inconsistency",
+        "control_flow_uncertainty",
+        "runtime_behavior_uncertainty",
+        "incorrect_source_citation",
+        "missing_evidence"
+      ],
+      "prepare_also_categories": [
+        "contradictory_business_rules"
+      ]
+    },
+    "template_version": "revforge-ovr-1.0",
+    "source_export": {
+      "required_roles": [
+        "data_owner"
+      ],
+      "purpose": "independent_semantic_verification"
+    },
+    "note": "OFFLINE and network disabled by default. LIVE requires network_enabled=true, the API key in OPENAI_API_KEY and a signed source-export authorization verified against the trust store. An API key, a CLI flag, a G2 approval or an agent statement is never export authorization."
+  }
+}

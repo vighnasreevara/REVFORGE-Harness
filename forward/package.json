@@ -1,0 +1,33 @@
+{
+  "name": "revforge-forward",
+  "version": "0.1.0",
+  "private": true,
+  "description": "REVFORGE Forward Engineering Harness: runtime, contracts and verification utilities that consume the reverse-engineering artifacts.",
+  "license": "MIT",
+  "author": "Vighnasree Vara",
+  "type": "commonjs",
+  "main": "dist/runtime/src/cli.js",
+  "bin": {
+    "revforge-forward": "dist/runtime/src/cli.js"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "clean": "node -e \"require('fs').rmSync('dist',{recursive:true,force:true})\"",
+    "build": "npm run clean && tsc -p tsconfig.json",
+    "test": "npm run build && node --test --test-reporter=spec \"dist/tests/**/*.test.js\"",
+    "doctor": "node dist/runtime/src/cli.js doctor",
+    "validate": "node dist/runtime/src/cli.js validate",
+    "plan": "node dist/runtime/src/cli.js plan --all"
+  },
+  "dependencies": {
+    "ajv": "8.20.0",
+    "ajv-formats": "3.0.1",
+    "openai": "7.35.0"
+  },
+  "devDependencies": {
+    "@types/node": "22.10.2",
+    "typescript": "5.6.3"
+  }
+}

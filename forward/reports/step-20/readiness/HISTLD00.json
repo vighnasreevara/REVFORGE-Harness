@@ -1,0 +1,1955 @@
+{
+  "gate": "SOURCE_READINESS",
+  "subject": "HISTLD00",
+  "status": "FAIL",
+  "checks": [
+    {
+      "id": "source_available",
+      "ok": true,
+      "detail": "src/programs/batch/HISTLD00.cbl sha256 148f75d448f2679783e222d4aca4f208ba336736dcd39bfebc8bcba8d85f69d6; 88 statement(s) in 16 paragraph(s)"
+    },
+    {
+      "id": "complete_program",
+      "ok": true,
+      "detail": "every paragraph contains statements"
+    },
+    {
+      "id": "copybooks_resolved",
+      "ok": false,
+      "detail": "unresolved or circular includes: SQLCA@6"
+    },
+    {
+      "id": "requirements_and_data_mapping_delivered",
+      "ok": true,
+      "detail": "F1/F2 deliveries accepted for BCHCON, BCHCTL, ERRHAND, HISTREC, DBPROC, DBTBLS, SQLCA, HISTLD00, ERRPROC"
+    },
+    {
+      "id": "behaviour_classified",
+      "ok": true,
+      "detail": "4 behaviour(s): 0 VERIFIED_CANDIDATE, 4 PARTIAL, 0 GAP"
+    },
+    {
+      "id": "dependencies_identified",
+      "ok": false,
+      "detail": "closure UNRESOLVED for HISTLD00:0000-MAIN (PERFORM/GO TO target CONNECT-TO-DB2 (line 117) is not a paragraph of HISTLD00); HISTLD00:1000-INITIALIZE (PERFORM/GO TO target CONNECT-TO-DB2 (line 117) is not a paragraph of HISTLD00); HISTLD00:2000-PROCESS (PERFORM/GO TO target CONNECT-TO-DB2 (line 117) is not a paragraph of HISTLD00); HISTLD00:3000-TERMINATE (PERFORM/GO TO target CONNECT-TO-DB2 (line 117) is not a paragraph of HISTLD00)"
+    },
+    {
+      "id": "unsupported_documented",
+      "ok": true,
+      "detail": "38 gap(s) document every PARTIAL/GAP behaviour"
+    },
+    {
+      "id": "unknowns_documented",
+      "ok": true,
+      "detail": "21 open decision(s) record the remaining questions (6 blocking for approval); none is resolved or assumed here"
+    }
+  ],
+  "note": "An engineering gate: it states that the source is understood well enough to convert, with every unknown documented. It is not a G2 approval and does not authorise generation.",
+  "behaviours": [
+    {
+      "behaviour_id": "HISTLD00:ENTRY-DISPATCH",
+      "kind": "dispatch",
+      "classification": "PARTIAL",
+      "lines": [
+        68,
+        76
+      ],
+      "inputs": [
+        "WS-END-OF-FILE-SW",
+        "WS-ERROR-COUNT"
+      ],
+      "outputs": [
+        "RETURN-CODE"
+      ],
+      "side_effects": [],
+      "unresolved": [],
+      "covered_by": [
+        "REQ-HISTLD00-001",
+        "RT-HISTLD00-005"
+      ]
+    },
+    {
+      "behaviour_id": "HISTLD00:1000-INITIALIZE",
+      "kind": "performed_range",
+      "classification": "PARTIAL",
+      "lines": [
+        81,
+        233
+      ],
+      "inputs": [
+        "BATCH-CONTROL-RECORD",
+        "BCT-STAT-ACTIVE",
+        "ERR-MESSAGE",
+        "WS-BCT-STATUS",
+        "WS-TH-STATUS"
+      ],
+      "outputs": [
+        "BCT-JOB-NAME",
+        "BCT-KEY",
+        "BCT-STATUS",
+        "ERR-PROGRAM",
+        "ERR-TEXT"
+      ],
+      "side_effects": [
+        {
+          "line": 103,
+          "kind": "file_io",
+          "operation": "OPEN",
+          "table": null
+        },
+        {
+          "line": 109,
+          "kind": "file_io",
+          "operation": "OPEN",
+          "table": null
+        },
+        {
+          "line": 124,
+          "kind": "file_io",
+          "operation": "READ",
+          "table": null
+        },
+        {
+          "line": 131,
+          "kind": "file_io",
+          "operation": "REWRITE",
+          "table": null
+        },
+        {
+          "line": 228,
+          "kind": "call",
+          "operation": "CALL",
+          "table": null
+        },
+        {
+          "line": 230,
+          "kind": "embedded_sql",
+          "operation": "ROLLBACK",
+          "table": null
+        }
+      ],
+      "unresolved": [
+        "CONNECT-TO-DB2"
+      ],
+      "covered_by": [
+        "REQ-HISTLD00-001",
+        "RT-HISTLD00-005"
+      ]
+    },
+    {
+      "behaviour_id": "HISTLD00:2000-PROCESS",
+      "kind": "performed_range",
+      "classification": "PARTIAL",
+      "lines": [
+        87,
+        233
+      ],
+      "inputs": [
+        "BATCH-CONTROL-RECORD",
+        "ERR-MESSAGE",
+        "POSHIST-RECORD",
+        "WS-COMMIT-COUNT",
+        "WS-COMMIT-THRESHOLD",
+        "WS-END-OF-FILE-SW",
+        "WS-ERROR-COUNT",
+        "WS-RECORDS-READ",
+        "WS-RECORDS-WRITTEN"
+      ],
+      "outputs": [
+        "BCT-RECORDS-READ",
+        "BCT-RECORDS-WRITTEN",
+        "ERR-PROGRAM",
+        "ERR-TEXT",
+        "PH-ACCOUNT-NO",
+        "PH-AMOUNT",
+        "PH-COST-BASIS",
+        "PH-FEES",
+        "PH-GAIN-LOSS",
+        "PH-PORTFOLIO-ID",
+        "PH-PRICE",
+        "PH-QUANTITY",
+        "PH-SECURITY-ID",
+        "PH-TOTAL-AMOUNT",
+        "PH-TRANS-DATE",
+        "PH-TRANS-TIME",
+        "PH-TRANS-TYPE",
+        "POSHIST-RECORD",
+        "WS-COMMIT-COUNT",
+        "WS-END-OF-FILE-SW"
+      ],
+      "side_effects": [
+        {
+          "line": 135,
+          "kind": "file_io",
+          "operation": "READ",
+          "table": null
+        },
+        {
+          "line": 160,
+          "kind": "embedded_sql",
+          "operation": "INSERT",
+          "table": "POSHIST"
+        },
+        {
+          "line": 181,
+          "kind": "embedded_sql",
+          "operation": "COMMIT",
+          "table": null
+        },
+        {
+          "line": 195,
+          "kind": "file_io",
+          "operation": "REWRITE",
+          "table": null
+        },
+        {
+          "line": 228,
+          "kind": "call",
+          "operation": "CALL",
+          "table": null
+        },
+        {
+          "line": 230,
+          "kind": "embedded_sql",
+          "operation": "ROLLBACK",
+          "table": null
+        }
+      ],
+      "unresolved": [
+        "TH-ACCOUNT-NO",
+        "TH-PORTFOLIO-ID",
+        "TH-TRANS-DATE",
+        "TH-TRANS-TIME",
+        "TH-TRANS-TYPE",
+        "TH-SECURITY-ID",
+        "TH-QUANTITY",
+        "TH-PRICE",
+        "TH-AMOUNT",
+        "TH-FEES",
+        "TH-TOTAL-AMOUNT",
+        "TH-COST-BASIS",
+        "TH-GAIN-LOSS",
+        "SQLCODE",
+        "DB2-ERROR-ROUTINE",
+        "BCT-RECORDS-READ",
+        "BCT-RECORDS-WRITTEN"
+      ],
+      "covered_by": [
+        "REQ-HISTLD00-001",
+        "RT-HISTLD00-005"
+      ]
+    },
+    {
+      "behaviour_id": "HISTLD00:3000-TERMINATE",
+      "kind": "performed_range",
+      "classification": "PARTIAL",
+      "lines": [
+        96,
+        233
+      ],
+      "inputs": [
+        "BATCH-CONTROL-RECORD",
+        "ERR-MESSAGE",
+        "WS-ERROR-COUNT",
+        "WS-RECORDS-READ",
+        "WS-RECORDS-WRITTEN"
+      ],
+      "outputs": [
+        "BCT-RECORDS-READ",
+        "BCT-RECORDS-WRITTEN",
+        "ERR-PROGRAM",
+        "ERR-TEXT"
+      ],
+      "side_effects": [
+        {
+          "line": 195,
+          "kind": "file_io",
+          "operation": "REWRITE",
+          "table": null
+        },
+        {
+          "line": 203,
+          "kind": "embedded_sql",
+          "operation": "COMMIT",
+          "table": null
+        },
+        {
+          "line": 211,
+          "kind": "file_io",
+          "operation": "CLOSE",
+          "table": null
+        },
+        {
+          "line": 228,
+          "kind": "call",
+          "operation": "CALL",
+          "table": null
+        },
+        {
+          "line": 230,
+          "kind": "embedded_sql",
+          "operation": "ROLLBACK",
+          "table": null
+        }
+      ],
+      "unresolved": [
+        "BCT-RECORDS-READ",
+        "BCT-RECORDS-WRITTEN",
+        "DISCONNECT-FROM-DB2"
+      ],
+      "covered_by": [
+        "REQ-HISTLD00-001",
+        "RT-HISTLD00-005"
+      ]
+    }
+  ],
+  "gaps": [
+    {
+      "gap_id": "GAP-HISTLD00-1000-INITIALIZE-CONNECT-TO-DB2",
+      "kind": "UNDECLARED_NAME_SEMANTICS",
+      "behaviour_id": "HISTLD00:1000-INITIALIZE",
+      "source": {
+        "path": "src/programs/batch/HISTLD00.cbl",
+        "sha256": "148f75d448f2679783e222d4aca4f208ba336736dcd39bfebc8bcba8d85f69d6",
+        "lines": [
+          117
+        ],
+        "statements": [
+          {
+            "line": 117,
+            "text": "PERFORM CONNECT-TO-DB2 ."
+          }
+        ]
+      },
+      "missing_fact": "CONNECT-TO-DB2 is used but declared nowhere in the repository; its layout and value meanings are the subject of DR-HISTLD00-001 (missing: a declaration of CONNECT-TO-DB2; a declaration of DB2-ERROR-ROUTINE; a declaration of DISCONNECT-FROM-DB2)",
+      "why_unsafe": "the outputs of these statements (control flow) depend on a value whose meaning is not established; any Java mapping would invent it",
+      "affected_requirements": [
+        "REQ-HISTLD00-001",
+        "RT-HISTLD00-005"
+      ],
+      "affected_java_component": "outcome mapping of behaviour 1000-INITIALIZE (behind a port whose only implementation throws until the gap is resolved)",
+      "required_action": [
+        "DR-HISTLD00-001: a signed resolution by technical_authority"
+      ],
+      "validation_evidence": "the real definition of CONNECT-TO-DB2 for the target runtime and a captured legacy run showing each outcome branch",
+      "blocks_execution_path": "request its PERFORM -> 1000-INITIALIZE: statements 117",
+      "blocking": true,
+      "status": "OPEN"
+    },
+    {
+      "gap_id": "GAP-HISTLD00-1000-INITIALIZE-SQL-ROLLBACK-UNKNOWN",
+      "kind": "EXTERNAL_DATABASE_RUNTIME",
+      "behaviour_id": "HISTLD00:1000-INITIALIZE",
+      "source": {
+        "path": "src/programs/batch/HISTLD00.cbl",
+        "sha256": "148f75d448f2679783e222d4aca4f208ba336736dcd39bfebc8bcba8d85f69d6",
+        "lines": [
+          230,
+          233
+        ],
+        "statements": [
+          {
+            "line": 230,
+            "text": "EXEC SQL ROLLBACK WORK END-EXEC ."
+          }
+        ]
+      },
+      "missing_fact": "the runtime behaviour of embedded SQL ROLLBACK on null: database product and version, host-variable conversions, NULL and no-row results, constraint violations and the status they report",
+      "why_unsafe": "the result and every status it produces come from an external database the repository does not describe; a Java implementation would have to assume them",
+      "affected_requirements": [
+        "REQ-HISTLD00-001",
+        "RT-HISTLD00-005"
+      ],
+      "affected_java_component": "database port for ROLLBACK null (interface only; no implementation until specified)",
+      "required_action": [
+        "an approved specification of the database interaction (technical authority), recorded as an ADR at G3"
+      ],
+      "validation_evidence": "a captured run against the real (or an approved equivalent) database for each outcome, including errors",
+      "blocks_execution_path": "request its PERFORM -> 1000-INITIALIZE: statement 230",
+      "blocking": true,
+      "status": "OPEN"
+    },
+    {
+      "gap_id": "GAP-HISTLD00-1000-INITIALIZE-FILE-OPEN-TRANSACTION-HISTORY",
+      "kind": "EXTERNAL_FILE_RUNTIME",
+      "behaviour_id": "HISTLD00:1000-INITIALIZE",
+      "source": {
+        "path": "src/programs/batch/HISTLD00.cbl",
+        "sha256": "148f75d448f2679783e222d4aca4f208ba336736dcd39bfebc8bcba8d85f69d6",
+        "lines": [
+          103
+        ],
+        "statements": [
+          {
+            "line": 103,
+            "text": "OPEN INPUT TRANSACTION-HISTORY"
+          }
+        ]
+      },
+      "missing_fact": "the run-time behaviour of OPEN on TRANSACTION-HISTORY: the dataset bound to it (JCL DD), its content and record encoding, and the file-system status outcomes the COBOL source does not define",
+      "why_unsafe": "the records read and the statuses reported come from a dataset outside the program; a Java implementation verified only against source-derived fixtures does not establish them",
+      "affected_requirements": [
+        "REQ-HISTLD00-001",
+        "RT-HISTLD00-005"
+      ],
+      "affected_java_component": "file port for OPEN TRANSACTION-HISTORY (runtime file semantics; dataset contents unverified)",
+      "required_action": [
+        "the dataset definitions (JCL DD, organisation, record format) and a captured legacy run for each status outcome (technical authority)"
+      ],
+      "validation_evidence": "a captured legacy run against the real (or an approved equivalent) dataset, including end-of-file and error statuses",
+      "blocks_execution_path": "request its PERFORM -> 1000-INITIALIZE: statement(s) 103",
+      "blocking": true,
+      "status": "OPEN"
+    },
+    {
+      "gap_id": "GAP-HISTLD00-1000-INITIALIZE-FILE-OPEN-BATCH-CONTROL-FILE",
+      "kind": "EXTERNAL_FILE_RUNTIME",
+      "behaviour_id": "HISTLD00:1000-INITIALIZE",
+      "source": {
+        "path": "src/programs/batch/HISTLD00.cbl",
+        "sha256": "148f75d448f2679783e222d4aca4f208ba336736dcd39bfebc8bcba8d85f69d6",
+        "lines": [
+          109
+        ],
+        "statements": [
+          {
+            "line": 109,
+            "text": "OPEN I-O BATCH-CONTROL-FILE"
+          }
+        ]
+      },
+      "missing_fact": "the run-time behaviour of OPEN on BATCH-CONTROL-FILE: the dataset bound to it (JCL DD), its content and record encoding, and the file-system status outcomes the COBOL source does not define",
+      "why_unsafe": "the records read and the statuses reported come from a dataset outside the program; a Java implementation verified only against source-derived fixtures does not establish them",
+      "affected_requirements": [
+        "REQ-HISTLD00-001",
+        "RT-HISTLD00-005"
+      ],
+      "affected_java_component": "file port for OPEN BATCH-CONTROL-FILE (runtime file semantics; dataset contents unverified)",
+      "required_action": [
+        "the dataset definitions (JCL DD, organisation, record format) and a captured legacy run for each status outcome (technical authority)"
+      ],
+      "validation_evidence": "a captured legacy run against the real (or an approved equivalent) dataset, including end-of-file and error statuses",
+      "blocks_execution_path": "request its PERFORM -> 1000-INITIALIZE: statement(s) 109",
+      "blocking": true,
+      "status": "OPEN"
+    },
+    {
+      "gap_id": "GAP-HISTLD00-1000-INITIALIZE-FILE-READ-BATCH-CONTROL-FILE",
+      "kind": "EXTERNAL_FILE_RUNTIME",
+      "behaviour_id": "HISTLD00:1000-INITIALIZE",
+      "source": {
+        "path": "src/programs/batch/HISTLD00.cbl",
+        "sha256": "148f75d448f2679783e222d4aca4f208ba336736dcd39bfebc8bcba8d85f69d6",
+        "lines": [
+          124
+        ],
+        "statements": [
+          {
+            "line": 124,
+            "text": "READ BATCH-CONTROL-FILE INVALID KEY"
+          }
+        ]
+      },
+      "missing_fact": "the run-time behaviour of READ on BATCH-CONTROL-FILE: the dataset bound to it (JCL DD), its content and record encoding, and the file-system status outcomes the COBOL source does not define",
+      "why_unsafe": "the records read and the statuses reported come from a dataset outside the program; a Java implementation verified only against source-derived fixtures does not establish them",
+      "affected_requirements": [
+        "REQ-HISTLD00-001",
+        "RT-HISTLD00-005"
+      ],
+      "affected_java_component": "file port for READ BATCH-CONTROL-FILE (runtime file semantics; dataset contents unverified)",
+      "required_action": [
+        "the dataset definitions (JCL DD, organisation, record format) and a captured legacy run for each status outcome (technical authority)"
+      ],
+      "validation_evidence": "a captured legacy run against the real (or an approved equivalent) dataset, including end-of-file and error statuses",
+      "blocks_execution_path": "request its PERFORM -> 1000-INITIALIZE: statement(s) 124",
+      "blocking": true,
+      "status": "OPEN"
+    },
+    {
+      "gap_id": "GAP-HISTLD00-1000-INITIALIZE-FILE-REWRITE-BATCH-CONTROL-RECORD",
+      "kind": "EXTERNAL_FILE_RUNTIME",
+      "behaviour_id": "HISTLD00:1000-INITIALIZE",
+      "source": {
+        "path": "src/programs/batch/HISTLD00.cbl",
+        "sha256": "148f75d448f2679783e222d4aca4f208ba336736dcd39bfebc8bcba8d85f69d6",
+        "lines": [
+          131
+        ],
+        "statements": [
+          {
+            "line": 131,
+            "text": "REWRITE BATCH-CONTROL-RECORD ."
+          }
+        ]
+      },
+      "missing_fact": "the run-time behaviour of REWRITE on BATCH-CONTROL-RECORD: the dataset bound to it (JCL DD), its content and record encoding, and the file-system status outcomes the COBOL source does not define",
+      "why_unsafe": "the records read and the statuses reported come from a dataset outside the program; a Java implementation verified only against source-derived fixtures does not establish them",
+      "affected_requirements": [
+        "REQ-HISTLD00-001",
+        "RT-HISTLD00-005"
+      ],
+      "affected_java_component": "file port for REWRITE BATCH-CONTROL-RECORD (runtime file semantics; dataset contents unverified)",
+      "required_action": [
+        "the dataset definitions (JCL DD, organisation, record format) and a captured legacy run for each status outcome (technical authority)"
+      ],
+      "validation_evidence": "a captured legacy run against the real (or an approved equivalent) dataset, including end-of-file and error statuses",
+      "blocks_execution_path": "request its PERFORM -> 1000-INITIALIZE: statement(s) 131",
+      "blocking": true,
+      "status": "OPEN"
+    },
+    {
+      "gap_id": "GAP-HISTLD00-1000-INITIALIZE-CALL-CALL-ERRPROC",
+      "kind": "EXTERNAL_PROGRAM_CALL",
+      "behaviour_id": "HISTLD00:1000-INITIALIZE",
+      "source": {
+        "path": "src/programs/batch/HISTLD00.cbl",
+        "sha256": "148f75d448f2679783e222d4aca4f208ba336736dcd39bfebc8bcba8d85f69d6",
+        "lines": [
+          228
+        ],
+        "statements": [
+          {
+            "line": 228,
+            "text": "CALL 'ERRPROC' USING ERR-MESSAGE"
+          }
+        ]
+      },
+      "missing_fact": "the behaviour of the called program ERRPROC for this USING interface; it is established only by ERRPROC's own closure and evidence, never by this behaviour",
+      "why_unsafe": "the outputs this behaviour receives back from ERRPROC are not part of this closure; treating them as known would assume the callee's behaviour",
+      "affected_requirements": [
+        "REQ-HISTLD00-001",
+        "RT-HISTLD00-005"
+      ],
+      "affected_java_component": "call to ERRPROC through the program registry",
+      "required_action": [
+        "ERRPROC: its own source readiness and a recorded interface contract for the USING parameters"
+      ],
+      "validation_evidence": "a captured legacy run of the call to ERRPROC for each outcome it returns",
+      "blocks_execution_path": "request its PERFORM -> 1000-INITIALIZE: statement(s) 228",
+      "blocking": true,
+      "status": "OPEN"
+    },
+    {
+      "gap_id": "GAP-HISTLD00-2000-PROCESS-TH-ACCOUNT-NO",
+      "kind": "UNDECLARED_NAME_SEMANTICS",
+      "behaviour_id": "HISTLD00:2000-PROCESS",
+      "source": {
+        "path": "src/programs/batch/HISTLD00.cbl",
+        "sha256": "148f75d448f2679783e222d4aca4f208ba336736dcd39bfebc8bcba8d85f69d6",
+        "lines": [
+          146
+        ],
+        "statements": [
+          {
+            "line": 146,
+            "text": "MOVE TH-ACCOUNT-NO    TO PH-ACCOUNT-NO"
+          }
+        ]
+      },
+      "missing_fact": "TH-ACCOUNT-NO is used but declared nowhere in the repository; its layout and value meanings are the subject of DR-HISTLD00-002, DR-F2-0005-006 (missing: a declaration of TH-ACCOUNT-NO; a declaration of TH-PORTFOLIO-ID; a declaration of TH-TRANS-DATE; a declaration of TH-TRANS-TIME; a declaration of TH-TRANS-TYPE; a declaration of TH-SECURITY-ID; a declaration of TH-QUANTITY; a declaration of TH-PRICE; a declaration of TH-AMOUNT; a declaration of TH-FEES; a declaration of TH-TOTAL-AMOUNT; a declaration of TH-COST-BASIS; a declaration of TH-GAIN-LOSS; a declaration of BCT-RECORDS-READ; a declaration of BCT-RECORDS-WRITTEN)",
+      "why_unsafe": "the outputs of these statements (PH-ACCOUNT-NO) depend on a value whose meaning is not established; any Java mapping would invent it",
+      "affected_requirements": [
+        "REQ-HISTLD00-001",
+        "RT-HISTLD00-005"
+      ],
+      "affected_java_component": "outcome mapping of behaviour 2000-PROCESS (behind a port whose only implementation throws until the gap is resolved)",
+      "required_action": [
+        "DR-HISTLD00-002: a signed resolution by technical_authority",
+        "DR-F2-0005-006: a signed resolution by technical_authority"
+      ],
+      "validation_evidence": "the real definition of TH-ACCOUNT-NO for the target runtime and a captured legacy run showing each outcome branch",
+      "blocks_execution_path": "request its PERFORM -> 2000-PROCESS: statements 146",
+      "blocking": true,
+      "status": "OPEN"
+    },
+    {
+      "gap_id": "GAP-HISTLD00-2000-PROCESS-TH-PORTFOLIO-ID",
+      "kind": "UNDECLARED_NAME_SEMANTICS",
+      "behaviour_id": "HISTLD00:2000-PROCESS",
+      "source": {
+        "path": "src/programs/batch/HISTLD00.cbl",
+        "sha256": "148f75d448f2679783e222d4aca4f208ba336736dcd39bfebc8bcba8d85f69d6",
+        "lines": [
+          147
+        ],
+        "statements": [
+          {
+            "line": 147,
+            "text": "MOVE TH-PORTFOLIO-ID  TO PH-PORTFOLIO-ID"
+          }
+        ]
+      },
+      "missing_fact": "TH-PORTFOLIO-ID is used but declared nowhere in the repository; its layout and value meanings are the subject of DR-HISTLD00-002 (missing: a declaration of TH-ACCOUNT-NO; a declaration of TH-PORTFOLIO-ID; a declaration of TH-TRANS-DATE; a declaration of TH-TRANS-TIME; a declaration of TH-TRANS-TYPE; a declaration of TH-SECURITY-ID; a declaration of TH-QUANTITY; a declaration of TH-PRICE; a declaration of TH-AMOUNT; a declaration of TH-FEES; a declaration of TH-TOTAL-AMOUNT; a declaration of TH-COST-BASIS; a declaration of TH-GAIN-LOSS; a declaration of BCT-RECORDS-READ; a declaration of BCT-RECORDS-WRITTEN)",
+      "why_unsafe": "the outputs of these statements (PH-PORTFOLIO-ID) depend on a value whose meaning is not established; any Java mapping would invent it",
+      "affected_requirements": [
+        "REQ-HISTLD00-001",
+        "RT-HISTLD00-005"
+      ],
+      "affected_java_component": "outcome mapping of behaviour 2000-PROCESS (behind a port whose only implementation throws until the gap is resolved)",
+      "required_action": [
+        "DR-HISTLD00-002: a signed resolution by technical_authority"
+      ],
+      "validation_evidence": "the real definition of TH-PORTFOLIO-ID for the target runtime and a captured legacy run showing each outcome branch",
+      "blocks_execution_path": "request its PERFORM -> 2000-PROCESS: statements 147",
+      "blocking": true,
+      "status": "OPEN"
+    },
+    {
+      "gap_id": "GAP-HISTLD00-2000-PROCESS-TH-TRANS-DATE",
+      "kind": "UNDECLARED_NAME_SEMANTICS",
+      "behaviour_id": "HISTLD00:2000-PROCESS",
+      "source": {
+        "path": "src/programs/batch/HISTLD00.cbl",
+        "sha256": "148f75d448f2679783e222d4aca4f208ba336736dcd39bfebc8bcba8d85f69d6",
+        "lines": [
+          148
+        ],
+        "statements": [
+          {
+            "line": 148,
+            "text": "MOVE TH-TRANS-DATE    TO PH-TRANS-DATE"
+          }
+        ]
+      },
+      "missing_fact": "TH-TRANS-DATE is used but declared nowhere in the repository; its layout and value meanings are the subject of DR-HISTLD00-002 (missing: a declaration of TH-ACCOUNT-NO; a declaration of TH-PORTFOLIO-ID; a declaration of TH-TRANS-DATE; a declaration of TH-TRANS-TIME; a declaration of TH-TRANS-TYPE; a declaration of TH-SECURITY-ID; a declaration of TH-QUANTITY; a declaration of TH-PRICE; a declaration of TH-AMOUNT; a declaration of TH-FEES; a declaration of TH-TOTAL-AMOUNT; a declaration of TH-COST-BASIS; a declaration of TH-GAIN-LOSS; a declaration of BCT-RECORDS-READ; a declaration of BCT-RECORDS-WRITTEN)",
+      "why_unsafe": "the outputs of these statements (PH-TRANS-DATE) depend on a value whose meaning is not established; any Java mapping would invent it",
+      "affected_requirements": [
+        "REQ-HISTLD00-001",
+        "RT-HISTLD00-005"
+      ],
+      "affected_java_component": "outcome mapping of behaviour 2000-PROCESS (behind a port whose only implementation throws until the gap is resolved)",
+      "required_action": [
+        "DR-HISTLD00-002: a signed resolution by technical_authority"
+      ],
+      "validation_evidence": "the real definition of TH-TRANS-DATE for the target runtime and a captured legacy run showing each outcome branch",
+      "blocks_execution_path": "request its PERFORM -> 2000-PROCESS: statements 148",
+      "blocking": true,
+      "status": "OPEN"
+    },
+    {
+      "gap_id": "GAP-HISTLD00-2000-PROCESS-TH-TRANS-TIME",
+      "kind": "UNDECLARED_NAME_SEMANTICS",
+      "behaviour_id": "HISTLD00:2000-PROCESS",
+      "source": {
+        "path": "src/programs/batch/HISTLD00.cbl",
+        "sha256": "148f75d448f2679783e222d4aca4f208ba336736dcd39bfebc8bcba8d85f69d6",
+        "lines": [
+          149
+        ],
+        "statements": [
+          {
+            "line": 149,
+            "text": "MOVE TH-TRANS-TIME    TO PH-TRANS-TIME"
+          }
+        ]
+      },
+      "missing_fact": "TH-TRANS-TIME is used but declared nowhere in the repository; its layout and value meanings are the subject of DR-HISTLD00-002 (missing: a declaration of TH-ACCOUNT-NO; a declaration of TH-PORTFOLIO-ID; a declaration of TH-TRANS-DATE; a declaration of TH-TRANS-TIME; a declaration of TH-TRANS-TYPE; a declaration of TH-SECURITY-ID; a declaration of TH-QUANTITY; a declaration of TH-PRICE; a declaration of TH-AMOUNT; a declaration of TH-FEES; a declaration of TH-TOTAL-AMOUNT; a declaration of TH-COST-BASIS; a declaration of TH-GAIN-LOSS; a declaration of BCT-RECORDS-READ; a declaration of BCT-RECORDS-WRITTEN)",
+      "why_unsafe": "the outputs of these statements (PH-TRANS-TIME) depend on a value whose meaning is not established; any Java mapping would invent it",
+      "affected_requirements": [
+        "REQ-HISTLD00-001",
+        "RT-HISTLD00-005"
+      ],
+      "affected_java_component": "outcome mapping of behaviour 2000-PROCESS (behind a port whose only implementation throws until the gap is resolved)",
+      "required_action": [
+        "DR-HISTLD00-002: a signed resolution by technical_authority"
+      ],
+      "validation_evidence": "the real definition of TH-TRANS-TIME for the target runtime and a captured legacy run showing each outcome branch",
+      "blocks_execution_path": "request its PERFORM -> 2000-PROCESS: statements 149",
+      "blocking": true,
+      "status": "OPEN"
+    },
+    {
+      "gap_id": "GAP-HISTLD00-2000-PROCESS-TH-TRANS-TYPE",
+      "kind": "UNDECLARED_NAME_SEMANTICS",
+      "behaviour_id": "HISTLD00:2000-PROCESS",
+      "source": {
+        "path": "src/programs/batch/HISTLD00.cbl",
+        "sha256": "148f75d448f2679783e222d4aca4f208ba336736dcd39bfebc8bcba8d85f69d6",
+        "lines": [
+          150
+        ],
+        "statements": [
+          {
+            "line": 150,
+            "text": "MOVE TH-TRANS-TYPE    TO PH-TRANS-TYPE"
+          }
+        ]
+      },
+      "missing_fact": "TH-TRANS-TYPE is used but declared nowhere in the repository; its layout and value meanings are the subject of DR-HISTLD00-002 (missing: a declaration of TH-ACCOUNT-NO; a declaration of TH-PORTFOLIO-ID; a declaration of TH-TRANS-DATE; a declaration of TH-TRANS-TIME; a declaration of TH-TRANS-TYPE; a declaration of TH-SECURITY-ID; a declaration of TH-QUANTITY; a declaration of TH-PRICE; a declaration of TH-AMOUNT; a declaration of TH-FEES; a declaration of TH-TOTAL-AMOUNT; a declaration of TH-COST-BASIS; a declaration of TH-GAIN-LOSS; a declaration of BCT-RECORDS-READ; a declaration of BCT-RECORDS-WRITTEN)",
+      "why_unsafe": "the outputs of these statements (PH-TRANS-TYPE) depend on a value whose meaning is not established; any Java mapping would invent it",
+      "affected_requirements": [
+        "REQ-HISTLD00-001",
+        "RT-HISTLD00-005"
+      ],
+      "affected_java_component": "outcome mapping of behaviour 2000-PROCESS (behind a port whose only implementation throws until the gap is resolved)",
+      "required_action": [
+        "DR-HISTLD00-002: a signed resolution by technical_authority"
+      ],
+      "validation_evidence": "the real definition of TH-TRANS-TYPE for the target runtime and a captured legacy run showing each outcome branch",
+      "blocks_execution_path": "request its PERFORM -> 2000-PROCESS: statements 150",
+      "blocking": true,
+      "status": "OPEN"
+    },
+    {
+      "gap_id": "GAP-HISTLD00-2000-PROCESS-TH-SECURITY-ID",
+      "kind": "UNDECLARED_NAME_SEMANTICS",
+      "behaviour_id": "HISTLD00:2000-PROCESS",
+      "source": {
+        "path": "src/programs/batch/HISTLD00.cbl",
+        "sha256": "148f75d448f2679783e222d4aca4f208ba336736dcd39bfebc8bcba8d85f69d6",
+        "lines": [
+          151
+        ],
+        "statements": [
+          {
+            "line": 151,
+            "text": "MOVE TH-SECURITY-ID   TO PH-SECURITY-ID"
+          }
+        ]
+      },
+      "missing_fact": "TH-SECURITY-ID is used but declared nowhere in the repository; its layout and value meanings are the subject of DR-HISTLD00-002 (missing: a declaration of TH-ACCOUNT-NO; a declaration of TH-PORTFOLIO-ID; a declaration of TH-TRANS-DATE; a declaration of TH-TRANS-TIME; a declaration of TH-TRANS-TYPE; a declaration of TH-SECURITY-ID; a declaration of TH-QUANTITY; a declaration of TH-PRICE; a declaration of TH-AMOUNT; a declaration of TH-FEES; a declaration of TH-TOTAL-AMOUNT; a declaration of TH-COST-BASIS; a declaration of TH-GAIN-LOSS; a declaration of BCT-RECORDS-READ; a declaration of BCT-RECORDS-WRITTEN)",
+      "why_unsafe": "the outputs of these statements (PH-SECURITY-ID) depend on a value whose meaning is not established; any Java mapping would invent it",
+      "affected_requirements": [
+        "REQ-HISTLD00-001",
+        "RT-HISTLD00-005"
+      ],
+      "affected_java_component": "outcome mapping of behaviour 2000-PROCESS (behind a port whose only implementation throws until the gap is resolved)",
+      "required_action": [
+        "DR-HISTLD00-002: a signed resolution by technical_authority"
+      ],
+      "validation_evidence": "the real definition of TH-SECURITY-ID for the target runtime and a captured legacy run showing each outcome branch",
+      "blocks_execution_path": "request its PERFORM -> 2000-PROCESS: statements 151",
+      "blocking": true,
+      "status": "OPEN"
+    },
+    {
+      "gap_id": "GAP-HISTLD00-2000-PROCESS-TH-QUANTITY",
+      "kind": "UNDECLARED_NAME_SEMANTICS",
+      "behaviour_id": "HISTLD00:2000-PROCESS",
+      "source": {
+        "path": "src/programs/batch/HISTLD00.cbl",
+        "sha256": "148f75d448f2679783e222d4aca4f208ba336736dcd39bfebc8bcba8d85f69d6",
+        "lines": [
+          152
+        ],
+        "statements": [
+          {
+            "line": 152,
+            "text": "MOVE TH-QUANTITY      TO PH-QUANTITY"
+          }
+        ]
+      },
+      "missing_fact": "TH-QUANTITY is used but declared nowhere in the repository; its layout and value meanings are the subject of DR-HISTLD00-002 (missing: a declaration of TH-ACCOUNT-NO; a declaration of TH-PORTFOLIO-ID; a declaration of TH-TRANS-DATE; a declaration of TH-TRANS-TIME; a declaration of TH-TRANS-TYPE; a declaration of TH-SECURITY-ID; a declaration of TH-QUANTITY; a declaration of TH-PRICE; a declaration of TH-AMOUNT; a declaration of TH-FEES; a declaration of TH-TOTAL-AMOUNT; a declaration of TH-COST-BASIS; a declaration of TH-GAIN-LOSS; a declaration of BCT-RECORDS-READ; a declaration of BCT-RECORDS-WRITTEN)",
+      "why_unsafe": "the outputs of these statements (PH-QUANTITY) depend on a value whose meaning is not established; any Java mapping would invent it",
+      "affected_requirements": [
+        "REQ-HISTLD00-001",
+        "RT-HISTLD00-005"
+      ],
+      "affected_java_component": "outcome mapping of behaviour 2000-PROCESS (behind a port whose only implementation throws until the gap is resolved)",
+      "required_action": [
+        "DR-HISTLD00-002: a signed resolution by technical_authority"
+      ],
+      "validation_evidence": "the real definition of TH-QUANTITY for the target runtime and a captured legacy run showing each outcome branch",
+      "blocks_execution_path": "request its PERFORM -> 2000-PROCESS: statements 152",
+      "blocking": true,
+      "status": "OPEN"
+    },
+    {
+      "gap_id": "GAP-HISTLD00-2000-PROCESS-TH-PRICE",
+      "kind": "UNDECLARED_NAME_SEMANTICS",
+      "behaviour_id": "HISTLD00:2000-PROCESS",
+      "source": {
+        "path": "src/programs/batch/HISTLD00.cbl",
+        "sha256": "148f75d448f2679783e222d4aca4f208ba336736dcd39bfebc8bcba8d85f69d6",
+        "lines": [
+          153
+        ],
+        "statements": [
+          {
+            "line": 153,
+            "text": "MOVE TH-PRICE         TO PH-PRICE"
+          }
+        ]
+      },
+      "missing_fact": "TH-PRICE is used but declared nowhere in the repository; its layout and value meanings are the subject of DR-HISTLD00-002 (missing: a declaration of TH-ACCOUNT-NO; a declaration of TH-PORTFOLIO-ID; a declaration of TH-TRANS-DATE; a declaration of TH-TRANS-TIME; a declaration of TH-TRANS-TYPE; a declaration of TH-SECURITY-ID; a declaration of TH-QUANTITY; a declaration of TH-PRICE; a declaration of TH-AMOUNT; a declaration of TH-FEES; a declaration of TH-TOTAL-AMOUNT; a declaration of TH-COST-BASIS; a declaration of TH-GAIN-LOSS; a declaration of BCT-RECORDS-READ; a declaration of BCT-RECORDS-WRITTEN)",
+      "why_unsafe": "the outputs of these statements (PH-PRICE) depend on a value whose meaning is not established; any Java mapping would invent it",
+      "affected_requirements": [
+        "REQ-HISTLD00-001",
+        "RT-HISTLD00-005"
+      ],
+      "affected_java_component": "outcome mapping of behaviour 2000-PROCESS (behind a port whose only implementation throws until the gap is resolved)",
+      "required_action": [
+        "DR-HISTLD00-002: a signed resolution by technical_authority"
+      ],
+      "validation_evidence": "the real definition of TH-PRICE for the target runtime and a captured legacy run showing each outcome branch",
+      "blocks_execution_path": "request its PERFORM -> 2000-PROCESS: statements 153",
+      "blocking": true,
+      "status": "OPEN"
+    },
+    {
+      "gap_id": "GAP-HISTLD00-2000-PROCESS-TH-AMOUNT",
+      "kind": "UNDECLARED_NAME_SEMANTICS",
+      "behaviour_id": "HISTLD00:2000-PROCESS",
+      "source": {
+        "path": "src/programs/batch/HISTLD00.cbl",
+        "sha256": "148f75d448f2679783e222d4aca4f208ba336736dcd39bfebc8bcba8d85f69d6",
+        "lines": [
+          154
+        ],
+        "statements": [
+          {
+            "line": 154,
+            "text": "MOVE TH-AMOUNT        TO PH-AMOUNT"
+          }
+        ]
+      },
+      "missing_fact": "TH-AMOUNT is used but declared nowhere in the repository; its layout and value meanings are the subject of DR-HISTLD00-002 (missing: a declaration of TH-ACCOUNT-NO; a declaration of TH-PORTFOLIO-ID; a declaration of TH-TRANS-DATE; a declaration of TH-TRANS-TIME; a declaration of TH-TRANS-TYPE; a declaration of TH-SECURITY-ID; a declaration of TH-QUANTITY; a declaration of TH-PRICE; a declaration of TH-AMOUNT; a declaration of TH-FEES; a declaration of TH-TOTAL-AMOUNT; a declaration of TH-COST-BASIS; a declaration of TH-GAIN-LOSS; a declaration of BCT-RECORDS-READ; a declaration of BCT-RECORDS-WRITTEN)",
+      "why_unsafe": "the outputs of these statements (PH-AMOUNT) depend on a value whose meaning is not established; any Java mapping would invent it",
+      "affected_requirements": [
+        "REQ-HISTLD00-001",
+        "RT-HISTLD00-005"
+      ],
+      "affected_java_component": "outcome mapping of behaviour 2000-PROCESS (behind a port whose only implementation throws until the gap is resolved)",
+      "required_action": [
+        "DR-HISTLD00-002: a signed resolution by technical_authority"
+      ],
+      "validation_evidence": "the real definition of TH-AMOUNT for the target runtime and a captured legacy run showing each outcome branch",
+      "blocks_execution_path": "request its PERFORM -> 2000-PROCESS: statements 154",
+      "blocking": true,
+      "status": "OPEN"
+    },
+    {
+      "gap_id": "GAP-HISTLD00-2000-PROCESS-TH-FEES",
+      "kind": "UNDECLARED_NAME_SEMANTICS",
+      "behaviour_id": "HISTLD00:2000-PROCESS",
+      "source": {
+        "path": "src/programs/batch/HISTLD00.cbl",
+        "sha256": "148f75d448f2679783e222d4aca4f208ba336736dcd39bfebc8bcba8d85f69d6",
+        "lines": [
+          155
+        ],
+        "statements": [
+          {
+            "line": 155,
+            "text": "MOVE TH-FEES          TO PH-FEES"
+          }
+        ]
+      },
+      "missing_fact": "TH-FEES is used but declared nowhere in the repository; its layout and value meanings are the subject of DR-HISTLD00-002 (missing: a declaration of TH-ACCOUNT-NO; a declaration of TH-PORTFOLIO-ID; a declaration of TH-TRANS-DATE; a declaration of TH-TRANS-TIME; a declaration of TH-TRANS-TYPE; a declaration of TH-SECURITY-ID; a declaration of TH-QUANTITY; a declaration of TH-PRICE; a declaration of TH-AMOUNT; a declaration of TH-FEES; a declaration of TH-TOTAL-AMOUNT; a declaration of TH-COST-BASIS; a declaration of TH-GAIN-LOSS; a declaration of BCT-RECORDS-READ; a declaration of BCT-RECORDS-WRITTEN)",
+      "why_unsafe": "the outputs of these statements (PH-FEES) depend on a value whose meaning is not established; any Java mapping would invent it",
+      "affected_requirements": [
+        "REQ-HISTLD00-001",
+        "RT-HISTLD00-005"
+      ],
+      "affected_java_component": "outcome mapping of behaviour 2000-PROCESS (behind a port whose only implementation throws until the gap is resolved)",
+      "required_action": [
+        "DR-HISTLD00-002: a signed resolution by technical_authority"
+      ],
+      "validation_evidence": "the real definition of TH-FEES for the target runtime and a captured legacy run showing each outcome branch",
+      "blocks_execution_path": "request its PERFORM -> 2000-PROCESS: statements 155",
+      "blocking": true,
+      "status": "OPEN"
+    },
+    {
+      "gap_id": "GAP-HISTLD00-2000-PROCESS-TH-TOTAL-AMOUNT",
+      "kind": "UNDECLARED_NAME_SEMANTICS",
+      "behaviour_id": "HISTLD00:2000-PROCESS",
+      "source": {
+        "path": "src/programs/batch/HISTLD00.cbl",
+        "sha256": "148f75d448f2679783e222d4aca4f208ba336736dcd39bfebc8bcba8d85f69d6",
+        "lines": [
+          156
+        ],
+        "statements": [
+          {
+            "line": 156,
+            "text": "MOVE TH-TOTAL-AMOUNT  TO PH-TOTAL-AMOUNT"
+          }
+        ]
+      },
+      "missing_fact": "TH-TOTAL-AMOUNT is used but declared nowhere in the repository; its layout and value meanings are the subject of DR-HISTLD00-002 (missing: a declaration of TH-ACCOUNT-NO; a declaration of TH-PORTFOLIO-ID; a declaration of TH-TRANS-DATE; a declaration of TH-TRANS-TIME; a declaration of TH-TRANS-TYPE; a declaration of TH-SECURITY-ID; a declaration of TH-QUANTITY; a declaration of TH-PRICE; a declaration of TH-AMOUNT; a declaration of TH-FEES; a declaration of TH-TOTAL-AMOUNT; a declaration of TH-COST-BASIS; a declaration of TH-GAIN-LOSS; a declaration of BCT-RECORDS-READ; a declaration of BCT-RECORDS-WRITTEN)",
+      "why_unsafe": "the outputs of these statements (PH-TOTAL-AMOUNT) depend on a value whose meaning is not established; any Java mapping would invent it",
+      "affected_requirements": [
+        "REQ-HISTLD00-001",
+        "RT-HISTLD00-005"
+      ],
+      "affected_java_component": "outcome mapping of behaviour 2000-PROCESS (behind a port whose only implementation throws until the gap is resolved)",
+      "required_action": [
+        "DR-HISTLD00-002: a signed resolution by technical_authority"
+      ],
+      "validation_evidence": "the real definition of TH-TOTAL-AMOUNT for the target runtime and a captured legacy run showing each outcome branch",
+      "blocks_execution_path": "request its PERFORM -> 2000-PROCESS: statements 156",
+      "blocking": true,
+      "status": "OPEN"
+    },
+    {
+      "gap_id": "GAP-HISTLD00-2000-PROCESS-TH-COST-BASIS",
+      "kind": "UNDECLARED_NAME_SEMANTICS",
+      "behaviour_id": "HISTLD00:2000-PROCESS",
+      "source": {
+        "path": "src/programs/batch/HISTLD00.cbl",
+        "sha256": "148f75d448f2679783e222d4aca4f208ba336736dcd39bfebc8bcba8d85f69d6",
+        "lines": [
+          157
+        ],
+        "statements": [
+          {
+            "line": 157,
+            "text": "MOVE TH-COST-BASIS    TO PH-COST-BASIS"
+          }
+        ]
+      },
+      "missing_fact": "TH-COST-BASIS is used but declared nowhere in the repository; its layout and value meanings are the subject of DR-HISTLD00-002 (missing: a declaration of TH-ACCOUNT-NO; a declaration of TH-PORTFOLIO-ID; a declaration of TH-TRANS-DATE; a declaration of TH-TRANS-TIME; a declaration of TH-TRANS-TYPE; a declaration of TH-SECURITY-ID; a declaration of TH-QUANTITY; a declaration of TH-PRICE; a declaration of TH-AMOUNT; a declaration of TH-FEES; a declaration of TH-TOTAL-AMOUNT; a declaration of TH-COST-BASIS; a declaration of TH-GAIN-LOSS; a declaration of BCT-RECORDS-READ; a declaration of BCT-RECORDS-WRITTEN)",
+      "why_unsafe": "the outputs of these statements (PH-COST-BASIS) depend on a value whose meaning is not established; any Java mapping would invent it",
+      "affected_requirements": [
+        "REQ-HISTLD00-001",
+        "RT-HISTLD00-005"
+      ],
+      "affected_java_component": "outcome mapping of behaviour 2000-PROCESS (behind a port whose only implementation throws until the gap is resolved)",
+      "required_action": [
+        "DR-HISTLD00-002: a signed resolution by technical_authority"
+      ],
+      "validation_evidence": "the real definition of TH-COST-BASIS for the target runtime and a captured legacy run showing each outcome branch",
+      "blocks_execution_path": "request its PERFORM -> 2000-PROCESS: statements 157",
+      "blocking": true,
+      "status": "OPEN"
+    },
+    {
+      "gap_id": "GAP-HISTLD00-2000-PROCESS-TH-GAIN-LOSS",
+      "kind": "UNDECLARED_NAME_SEMANTICS",
+      "behaviour_id": "HISTLD00:2000-PROCESS",
+      "source": {
+        "path": "src/programs/batch/HISTLD00.cbl",
+        "sha256": "148f75d448f2679783e222d4aca4f208ba336736dcd39bfebc8bcba8d85f69d6",
+        "lines": [
+          158
+        ],
+        "statements": [
+          {
+            "line": 158,
+            "text": "MOVE TH-GAIN-LOSS     TO PH-GAIN-LOSS"
+          }
+        ]
+      },
+      "missing_fact": "TH-GAIN-LOSS is used but declared nowhere in the repository; its layout and value meanings are the subject of DR-HISTLD00-002, DR-F2-0005-006 (missing: a declaration of TH-ACCOUNT-NO; a declaration of TH-PORTFOLIO-ID; a declaration of TH-TRANS-DATE; a declaration of TH-TRANS-TIME; a declaration of TH-TRANS-TYPE; a declaration of TH-SECURITY-ID; a declaration of TH-QUANTITY; a declaration of TH-PRICE; a declaration of TH-AMOUNT; a declaration of TH-FEES; a declaration of TH-TOTAL-AMOUNT; a declaration of TH-COST-BASIS; a declaration of TH-GAIN-LOSS; a declaration of BCT-RECORDS-READ; a declaration of BCT-RECORDS-WRITTEN)",
+      "why_unsafe": "the outputs of these statements (PH-GAIN-LOSS) depend on a value whose meaning is not established; any Java mapping would invent it",
+      "affected_requirements": [
+        "REQ-HISTLD00-001",
+        "RT-HISTLD00-005"
+      ],
+      "affected_java_component": "outcome mapping of behaviour 2000-PROCESS (behind a port whose only implementation throws until the gap is resolved)",
+      "required_action": [
+        "DR-HISTLD00-002: a signed resolution by technical_authority",
+        "DR-F2-0005-006: a signed resolution by technical_authority"
+      ],
+      "validation_evidence": "the real definition of TH-GAIN-LOSS for the target runtime and a captured legacy run showing each outcome branch",
+      "blocks_execution_path": "request its PERFORM -> 2000-PROCESS: statements 158",
+      "blocking": true,
+      "status": "OPEN"
+    },
+    {
+      "gap_id": "GAP-HISTLD00-2000-PROCESS-SQLCODE",
+      "kind": "UNDECLARED_NAME_SEMANTICS",
+      "behaviour_id": "HISTLD00:2000-PROCESS",
+      "source": {
+        "path": "src/programs/batch/HISTLD00.cbl",
+        "sha256": "148f75d448f2679783e222d4aca4f208ba336736dcd39bfebc8bcba8d85f69d6",
+        "lines": [
+          165,
+          166,
+          168,
+          169,
+          171
+        ],
+        "statements": [
+          {
+            "line": 165,
+            "text": "IF SQLCODE = 0"
+          },
+          {
+            "line": 166,
+            "text": "ADD 1 TO WS-RECORDS-WRITTEN"
+          },
+          {
+            "line": 168,
+            "text": "IF SQLCODE = -803"
+          },
+          {
+            "line": 169,
+            "text": "CONTINUE"
+          },
+          {
+            "line": 171,
+            "text": "ADD 1 TO WS-ERROR-COUNT"
+          }
+        ]
+      },
+      "missing_fact": "SQLCODE is used but declared nowhere in the repository; its layout and value meanings are the subject of DR-F2-0011-001, DR-DB2CONN-002 (missing: the real SQLCA member (the repository copy includes itself); a declaration of SQLCODE; a declaration of SQLERRMC)",
+      "why_unsafe": "the outputs of these statements (control flow) depend on a value whose meaning is not established; any Java mapping would invent it",
+      "affected_requirements": [
+        "REQ-HISTLD00-001",
+        "RT-HISTLD00-005"
+      ],
+      "affected_java_component": "outcome mapping of behaviour 2000-PROCESS (behind a port whose only implementation throws until the gap is resolved)",
+      "required_action": [
+        "DR-F2-0011-001: a signed resolution by technical_authority",
+        "DR-DB2CONN-002: a signed resolution by technical_authority"
+      ],
+      "validation_evidence": "the real definition of SQLCODE for the target runtime and a captured legacy run showing each outcome branch",
+      "blocks_execution_path": "request its PERFORM -> 2000-PROCESS: statements 165, 166, 168, 169, 171",
+      "blocking": true,
+      "status": "OPEN"
+    },
+    {
+      "gap_id": "GAP-HISTLD00-2000-PROCESS-DB2-ERROR-ROUTINE",
+      "kind": "UNDECLARED_NAME_SEMANTICS",
+      "behaviour_id": "HISTLD00:2000-PROCESS",
+      "source": {
+        "path": "src/programs/batch/HISTLD00.cbl",
+        "sha256": "148f75d448f2679783e222d4aca4f208ba336736dcd39bfebc8bcba8d85f69d6",
+        "lines": [
+          172
+        ],
+        "statements": [
+          {
+            "line": 172,
+            "text": "PERFORM DB2-ERROR-ROUTINE"
+          }
+        ]
+      },
+      "missing_fact": "DB2-ERROR-ROUTINE is used but declared nowhere in the repository; its layout and value meanings are the subject of DR-HISTLD00-001 (missing: a declaration of CONNECT-TO-DB2; a declaration of DB2-ERROR-ROUTINE; a declaration of DISCONNECT-FROM-DB2)",
+      "why_unsafe": "the outputs of these statements (control flow) depend on a value whose meaning is not established; any Java mapping would invent it",
+      "affected_requirements": [
+        "REQ-HISTLD00-001",
+        "RT-HISTLD00-005"
+      ],
+      "affected_java_component": "outcome mapping of behaviour 2000-PROCESS (behind a port whose only implementation throws until the gap is resolved)",
+      "required_action": [
+        "DR-HISTLD00-001: a signed resolution by technical_authority"
+      ],
+      "validation_evidence": "the real definition of DB2-ERROR-ROUTINE for the target runtime and a captured legacy run showing each outcome branch",
+      "blocks_execution_path": "request its PERFORM -> 2000-PROCESS: statements 172",
+      "blocking": true,
+      "status": "OPEN"
+    },
+    {
+      "gap_id": "GAP-HISTLD00-2000-PROCESS-BCT-RECORDS-READ",
+      "kind": "UNDECLARED_NAME_SEMANTICS",
+      "behaviour_id": "HISTLD00:2000-PROCESS",
+      "source": {
+        "path": "src/programs/batch/HISTLD00.cbl",
+        "sha256": "148f75d448f2679783e222d4aca4f208ba336736dcd39bfebc8bcba8d85f69d6",
+        "lines": [
+          192
+        ],
+        "statements": [
+          {
+            "line": 192,
+            "text": "MOVE WS-RECORDS-READ TO BCT-RECORDS-READ"
+          }
+        ]
+      },
+      "missing_fact": "BCT-RECORDS-READ is used but declared nowhere in the repository; its layout and value meanings are the subject of DR-HISTLD00-002, DR-HISTLD00-003, DR-F2-0005-006 (missing: a declaration of TH-ACCOUNT-NO; a declaration of TH-PORTFOLIO-ID; a declaration of TH-TRANS-DATE; a declaration of TH-TRANS-TIME; a declaration of TH-TRANS-TYPE; a declaration of TH-SECURITY-ID; a declaration of TH-QUANTITY; a declaration of TH-PRICE; a declaration of TH-AMOUNT; a declaration of TH-FEES; a declaration of TH-TOTAL-AMOUNT; a declaration of TH-COST-BASIS; a declaration of TH-GAIN-LOSS; a declaration of BCT-RECORDS-READ; a declaration of BCT-RECORDS-WRITTEN)",
+      "why_unsafe": "the outputs of these statements (BCT-RECORDS-READ) depend on a value whose meaning is not established; any Java mapping would invent it",
+      "affected_requirements": [
+        "REQ-HISTLD00-001",
+        "RT-HISTLD00-005"
+      ],
+      "affected_java_component": "outcome mapping of behaviour 2000-PROCESS (behind a port whose only implementation throws until the gap is resolved)",
+      "required_action": [
+        "DR-HISTLD00-002: a signed resolution by technical_authority",
+        "DR-HISTLD00-003: a signed resolution by business_sme",
+        "DR-F2-0005-006: a signed resolution by technical_authority"
+      ],
+      "validation_evidence": "the real definition of BCT-RECORDS-READ for the target runtime and a captured legacy run showing each outcome branch",
+      "blocks_execution_path": "request its PERFORM -> 2000-PROCESS: statements 192",
+      "blocking": true,
+      "status": "OPEN"
+    },
+    {
+      "gap_id": "GAP-HISTLD00-2000-PROCESS-BCT-RECORDS-WRITTEN",
+      "kind": "UNDECLARED_NAME_SEMANTICS",
+      "behaviour_id": "HISTLD00:2000-PROCESS",
+      "source": {
+        "path": "src/programs/batch/HISTLD00.cbl",
+        "sha256": "148f75d448f2679783e222d4aca4f208ba336736dcd39bfebc8bcba8d85f69d6",
+        "lines": [
+          193
+        ],
+        "statements": [
+          {
+            "line": 193,
+            "text": "MOVE WS-RECORDS-WRITTEN TO BCT-RECORDS-WRITTEN"
+          }
+        ]
+      },
+      "missing_fact": "BCT-RECORDS-WRITTEN is used but declared nowhere in the repository; its layout and value meanings are the subject of DR-HISTLD00-002, DR-HISTLD00-003, DR-F2-0005-006 (missing: a declaration of TH-ACCOUNT-NO; a declaration of TH-PORTFOLIO-ID; a declaration of TH-TRANS-DATE; a declaration of TH-TRANS-TIME; a declaration of TH-TRANS-TYPE; a declaration of TH-SECURITY-ID; a declaration of TH-QUANTITY; a declaration of TH-PRICE; a declaration of TH-AMOUNT; a declaration of TH-FEES; a declaration of TH-TOTAL-AMOUNT; a declaration of TH-COST-BASIS; a declaration of TH-GAIN-LOSS; a declaration of BCT-RECORDS-READ; a declaration of BCT-RECORDS-WRITTEN)",
+      "why_unsafe": "the outputs of these statements (BCT-RECORDS-WRITTEN) depend on a value whose meaning is not established; any Java mapping would invent it",
+      "affected_requirements": [
+        "REQ-HISTLD00-001",
+        "RT-HISTLD00-005"
+      ],
+      "affected_java_component": "outcome mapping of behaviour 2000-PROCESS (behind a port whose only implementation throws until the gap is resolved)",
+      "required_action": [
+        "DR-HISTLD00-002: a signed resolution by technical_authority",
+        "DR-HISTLD00-003: a signed resolution by business_sme",
+        "DR-F2-0005-006: a signed resolution by technical_authority"
+      ],
+      "validation_evidence": "the real definition of BCT-RECORDS-WRITTEN for the target runtime and a captured legacy run showing each outcome branch",
+      "blocks_execution_path": "request its PERFORM -> 2000-PROCESS: statements 193",
+      "blocking": true,
+      "status": "OPEN"
+    },
+    {
+      "gap_id": "GAP-HISTLD00-2000-PROCESS-SQL-INSERT-POSHIST",
+      "kind": "EXTERNAL_DATABASE_RUNTIME",
+      "behaviour_id": "HISTLD00:2000-PROCESS",
+      "source": {
+        "path": "src/programs/batch/HISTLD00.cbl",
+        "sha256": "148f75d448f2679783e222d4aca4f208ba336736dcd39bfebc8bcba8d85f69d6",
+        "lines": [
+          160,
+          163
+        ],
+        "statements": [
+          {
+            "line": 160,
+            "text": "EXEC SQL INSERT INTO POSHIST VALUES (:POSHIST-RECORD) END-EXEC"
+          }
+        ]
+      },
+      "missing_fact": "the runtime behaviour of embedded SQL INSERT on POSHIST: database product and version, host-variable conversions, NULL and no-row results, constraint violations and the status they report",
+      "why_unsafe": "the result and every status it produces come from an external database the repository does not describe; a Java implementation would have to assume them",
+      "affected_requirements": [
+        "REQ-HISTLD00-001",
+        "RT-HISTLD00-005"
+      ],
+      "affected_java_component": "database port for INSERT POSHIST (interface only; no implementation until specified)",
+      "required_action": [
+        "an approved specification of the database interaction (technical authority), recorded as an ADR at G3"
+      ],
+      "validation_evidence": "a captured run against the real (or an approved equivalent) database for each outcome, including errors",
+      "blocks_execution_path": "request its PERFORM -> 2000-PROCESS: statement 160",
+      "blocking": true,
+      "status": "OPEN"
+    },
+    {
+      "gap_id": "GAP-HISTLD00-2000-PROCESS-SQL-COMMIT-UNKNOWN",
+      "kind": "EXTERNAL_DATABASE_RUNTIME",
+      "behaviour_id": "HISTLD00:2000-PROCESS",
+      "source": {
+        "path": "src/programs/batch/HISTLD00.cbl",
+        "sha256": "148f75d448f2679783e222d4aca4f208ba336736dcd39bfebc8bcba8d85f69d6",
+        "lines": [
+          181,
+          183
+        ],
+        "statements": [
+          {
+            "line": 181,
+            "text": "EXEC SQL COMMIT WORK END-EXEC"
+          }
+        ]
+      },
+      "missing_fact": "the runtime behaviour of embedded SQL COMMIT on null: database product and version, host-variable conversions, NULL and no-row results, constraint violations and the status they report",
+      "why_unsafe": "the result and every status it produces come from an external database the repository does not describe; a Java implementation would have to assume them",
+      "affected_requirements": [
+        "REQ-HISTLD00-001",
+        "RT-HISTLD00-005"
+      ],
+      "affected_java_component": "database port for COMMIT null (interface only; no implementation until specified)",
+      "required_action": [
+        "an approved specification of the database interaction (technical authority), recorded as an ADR at G3"
+      ],
+      "validation_evidence": "a captured run against the real (or an approved equivalent) database for each outcome, including errors",
+      "blocks_execution_path": "request its PERFORM -> 2000-PROCESS: statement 181",
+      "blocking": true,
+      "status": "OPEN"
+    },
+    {
+      "gap_id": "GAP-HISTLD00-2000-PROCESS-SQL-ROLLBACK-UNKNOWN",
+      "kind": "EXTERNAL_DATABASE_RUNTIME",
+      "behaviour_id": "HISTLD00:2000-PROCESS",
+      "source": {
+        "path": "src/programs/batch/HISTLD00.cbl",
+        "sha256": "148f75d448f2679783e222d4aca4f208ba336736dcd39bfebc8bcba8d85f69d6",
+        "lines": [
+          230,
+          233
+        ],
+        "statements": [
+          {
+            "line": 230,
+            "text": "EXEC SQL ROLLBACK WORK END-EXEC ."
+          }
+        ]
+      },
+      "missing_fact": "the runtime behaviour of embedded SQL ROLLBACK on null: database product and version, host-variable conversions, NULL and no-row results, constraint violations and the status they report",
+      "why_unsafe": "the result and every status it produces come from an external database the repository does not describe; a Java implementation would have to assume them",
+      "affected_requirements": [
+        "REQ-HISTLD00-001",
+        "RT-HISTLD00-005"
+      ],
+      "affected_java_component": "database port for ROLLBACK null (interface only; no implementation until specified)",
+      "required_action": [
+        "an approved specification of the database interaction (technical authority), recorded as an ADR at G3"
+      ],
+      "validation_evidence": "a captured run against the real (or an approved equivalent) database for each outcome, including errors",
+      "blocks_execution_path": "request its PERFORM -> 2000-PROCESS: statement 230",
+      "blocking": true,
+      "status": "OPEN"
+    },
+    {
+      "gap_id": "GAP-HISTLD00-2000-PROCESS-FILE-READ-TRANSACTION-HISTORY",
+      "kind": "EXTERNAL_FILE_RUNTIME",
+      "behaviour_id": "HISTLD00:2000-PROCESS",
+      "source": {
+        "path": "src/programs/batch/HISTLD00.cbl",
+        "sha256": "148f75d448f2679783e222d4aca4f208ba336736dcd39bfebc8bcba8d85f69d6",
+        "lines": [
+          135
+        ],
+        "statements": [
+          {
+            "line": 135,
+            "text": "READ TRANSACTION-HISTORY AT END"
+          }
+        ]
+      },
+      "missing_fact": "the run-time behaviour of READ on TRANSACTION-HISTORY: the dataset bound to it (JCL DD), its content and record encoding, and the file-system status outcomes the COBOL source does not define",
+      "why_unsafe": "the records read and the statuses reported come from a dataset outside the program; a Java implementation verified only against source-derived fixtures does not establish them",
+      "affected_requirements": [
+        "REQ-HISTLD00-001",
+        "RT-HISTLD00-005"
+      ],
+      "affected_java_component": "file port for READ TRANSACTION-HISTORY (runtime file semantics; dataset contents unverified)",
+      "required_action": [
+        "the dataset definitions (JCL DD, organisation, record format) and a captured legacy run for each status outcome (technical authority)"
+      ],
+      "validation_evidence": "a captured legacy run against the real (or an approved equivalent) dataset, including end-of-file and error statuses",
+      "blocks_execution_path": "request its PERFORM -> 2000-PROCESS: statement(s) 135",
+      "blocking": true,
+      "status": "OPEN"
+    },
+    {
+      "gap_id": "GAP-HISTLD00-2000-PROCESS-FILE-REWRITE-BATCH-CONTROL-RECORD",
+      "kind": "EXTERNAL_FILE_RUNTIME",
+      "behaviour_id": "HISTLD00:2000-PROCESS",
+      "source": {
+        "path": "src/programs/batch/HISTLD00.cbl",
+        "sha256": "148f75d448f2679783e222d4aca4f208ba336736dcd39bfebc8bcba8d85f69d6",
+        "lines": [
+          195
+        ],
+        "statements": [
+          {
+            "line": 195,
+            "text": "REWRITE BATCH-CONTROL-RECORD INVALID KEY"
+          }
+        ]
+      },
+      "missing_fact": "the run-time behaviour of REWRITE on BATCH-CONTROL-RECORD: the dataset bound to it (JCL DD), its content and record encoding, and the file-system status outcomes the COBOL source does not define",
+      "why_unsafe": "the records read and the statuses reported come from a dataset outside the program; a Java implementation verified only against source-derived fixtures does not establish them",
+      "affected_requirements": [
+        "REQ-HISTLD00-001",
+        "RT-HISTLD00-005"
+      ],
+      "affected_java_component": "file port for REWRITE BATCH-CONTROL-RECORD (runtime file semantics; dataset contents unverified)",
+      "required_action": [
+        "the dataset definitions (JCL DD, organisation, record format) and a captured legacy run for each status outcome (technical authority)"
+      ],
+      "validation_evidence": "a captured legacy run against the real (or an approved equivalent) dataset, including end-of-file and error statuses",
+      "blocks_execution_path": "request its PERFORM -> 2000-PROCESS: statement(s) 195",
+      "blocking": true,
+      "status": "OPEN"
+    },
+    {
+      "gap_id": "GAP-HISTLD00-2000-PROCESS-CALL-CALL-ERRPROC",
+      "kind": "EXTERNAL_PROGRAM_CALL",
+      "behaviour_id": "HISTLD00:2000-PROCESS",
+      "source": {
+        "path": "src/programs/batch/HISTLD00.cbl",
+        "sha256": "148f75d448f2679783e222d4aca4f208ba336736dcd39bfebc8bcba8d85f69d6",
+        "lines": [
+          228
+        ],
+        "statements": [
+          {
+            "line": 228,
+            "text": "CALL 'ERRPROC' USING ERR-MESSAGE"
+          }
+        ]
+      },
+      "missing_fact": "the behaviour of the called program ERRPROC for this USING interface; it is established only by ERRPROC's own closure and evidence, never by this behaviour",
+      "why_unsafe": "the outputs this behaviour receives back from ERRPROC are not part of this closure; treating them as known would assume the callee's behaviour",
+      "affected_requirements": [
+        "REQ-HISTLD00-001",
+        "RT-HISTLD00-005"
+      ],
+      "affected_java_component": "call to ERRPROC through the program registry",
+      "required_action": [
+        "ERRPROC: its own source readiness and a recorded interface contract for the USING parameters"
+      ],
+      "validation_evidence": "a captured legacy run of the call to ERRPROC for each outcome it returns",
+      "blocks_execution_path": "request its PERFORM -> 2000-PROCESS: statement(s) 228",
+      "blocking": true,
+      "status": "OPEN"
+    },
+    {
+      "gap_id": "GAP-HISTLD00-3000-TERMINATE-BCT-RECORDS-READ",
+      "kind": "UNDECLARED_NAME_SEMANTICS",
+      "behaviour_id": "HISTLD00:3000-TERMINATE",
+      "source": {
+        "path": "src/programs/batch/HISTLD00.cbl",
+        "sha256": "148f75d448f2679783e222d4aca4f208ba336736dcd39bfebc8bcba8d85f69d6",
+        "lines": [
+          192
+        ],
+        "statements": [
+          {
+            "line": 192,
+            "text": "MOVE WS-RECORDS-READ TO BCT-RECORDS-READ"
+          }
+        ]
+      },
+      "missing_fact": "BCT-RECORDS-READ is used but declared nowhere in the repository; its layout and value meanings are the subject of DR-HISTLD00-002, DR-HISTLD00-003, DR-F2-0005-006 (missing: a declaration of TH-ACCOUNT-NO; a declaration of TH-PORTFOLIO-ID; a declaration of TH-TRANS-DATE; a declaration of TH-TRANS-TIME; a declaration of TH-TRANS-TYPE; a declaration of TH-SECURITY-ID; a declaration of TH-QUANTITY; a declaration of TH-PRICE; a declaration of TH-AMOUNT; a declaration of TH-FEES; a declaration of TH-TOTAL-AMOUNT; a declaration of TH-COST-BASIS; a declaration of TH-GAIN-LOSS; a declaration of BCT-RECORDS-READ; a declaration of BCT-RECORDS-WRITTEN)",
+      "why_unsafe": "the outputs of these statements (BCT-RECORDS-READ) depend on a value whose meaning is not established; any Java mapping would invent it",
+      "affected_requirements": [
+        "REQ-HISTLD00-001",
+        "RT-HISTLD00-005"
+      ],
+      "affected_java_component": "outcome mapping of behaviour 3000-TERMINATE (behind a port whose only implementation throws until the gap is resolved)",
+      "required_action": [
+        "DR-HISTLD00-002: a signed resolution by technical_authority",
+        "DR-HISTLD00-003: a signed resolution by business_sme",
+        "DR-F2-0005-006: a signed resolution by technical_authority"
+      ],
+      "validation_evidence": "the real definition of BCT-RECORDS-READ for the target runtime and a captured legacy run showing each outcome branch",
+      "blocks_execution_path": "request its PERFORM -> 3000-TERMINATE: statements 192",
+      "blocking": true,
+      "status": "OPEN"
+    },
+    {
+      "gap_id": "GAP-HISTLD00-3000-TERMINATE-BCT-RECORDS-WRITTEN",
+      "kind": "UNDECLARED_NAME_SEMANTICS",
+      "behaviour_id": "HISTLD00:3000-TERMINATE",
+      "source": {
+        "path": "src/programs/batch/HISTLD00.cbl",
+        "sha256": "148f75d448f2679783e222d4aca4f208ba336736dcd39bfebc8bcba8d85f69d6",
+        "lines": [
+          193
+        ],
+        "statements": [
+          {
+            "line": 193,
+            "text": "MOVE WS-RECORDS-WRITTEN TO BCT-RECORDS-WRITTEN"
+          }
+        ]
+      },
+      "missing_fact": "BCT-RECORDS-WRITTEN is used but declared nowhere in the repository; its layout and value meanings are the subject of DR-HISTLD00-002, DR-HISTLD00-003, DR-F2-0005-006 (missing: a declaration of TH-ACCOUNT-NO; a declaration of TH-PORTFOLIO-ID; a declaration of TH-TRANS-DATE; a declaration of TH-TRANS-TIME; a declaration of TH-TRANS-TYPE; a declaration of TH-SECURITY-ID; a declaration of TH-QUANTITY; a declaration of TH-PRICE; a declaration of TH-AMOUNT; a declaration of TH-FEES; a declaration of TH-TOTAL-AMOUNT; a declaration of TH-COST-BASIS; a declaration of TH-GAIN-LOSS; a declaration of BCT-RECORDS-READ; a declaration of BCT-RECORDS-WRITTEN)",
+      "why_unsafe": "the outputs of these statements (BCT-RECORDS-WRITTEN) depend on a value whose meaning is not established; any Java mapping would invent it",
+      "affected_requirements": [
+        "REQ-HISTLD00-001",
+        "RT-HISTLD00-005"
+      ],
+      "affected_java_component": "outcome mapping of behaviour 3000-TERMINATE (behind a port whose only implementation throws until the gap is resolved)",
+      "required_action": [
+        "DR-HISTLD00-002: a signed resolution by technical_authority",
+        "DR-HISTLD00-003: a signed resolution by business_sme",
+        "DR-F2-0005-006: a signed resolution by technical_authority"
+      ],
+      "validation_evidence": "the real definition of BCT-RECORDS-WRITTEN for the target runtime and a captured legacy run showing each outcome branch",
+      "blocks_execution_path": "request its PERFORM -> 3000-TERMINATE: statements 193",
+      "blocking": true,
+      "status": "OPEN"
+    },
+    {
+      "gap_id": "GAP-HISTLD00-3000-TERMINATE-DISCONNECT-FROM-DB2",
+      "kind": "UNDECLARED_NAME_SEMANTICS",
+      "behaviour_id": "HISTLD00:3000-TERMINATE",
+      "source": {
+        "path": "src/programs/batch/HISTLD00.cbl",
+        "sha256": "148f75d448f2679783e222d4aca4f208ba336736dcd39bfebc8bcba8d85f69d6",
+        "lines": [
+          216
+        ],
+        "statements": [
+          {
+            "line": 216,
+            "text": "PERFORM DISCONNECT-FROM-DB2 ."
+          }
+        ]
+      },
+      "missing_fact": "DISCONNECT-FROM-DB2 is used but declared nowhere in the repository; its layout and value meanings are the subject of DR-HISTLD00-001 (missing: a declaration of CONNECT-TO-DB2; a declaration of DB2-ERROR-ROUTINE; a declaration of DISCONNECT-FROM-DB2)",
+      "why_unsafe": "the outputs of these statements (control flow) depend on a value whose meaning is not established; any Java mapping would invent it",
+      "affected_requirements": [
+        "REQ-HISTLD00-001",
+        "RT-HISTLD00-005"
+      ],
+      "affected_java_component": "outcome mapping of behaviour 3000-TERMINATE (behind a port whose only implementation throws until the gap is resolved)",
+      "required_action": [
+        "DR-HISTLD00-001: a signed resolution by technical_authority"
+      ],
+      "validation_evidence": "the real definition of DISCONNECT-FROM-DB2 for the target runtime and a captured legacy run showing each outcome branch",
+      "blocks_execution_path": "request its PERFORM -> 3000-TERMINATE: statements 216",
+      "blocking": true,
+      "status": "OPEN"
+    },
+    {
+      "gap_id": "GAP-HISTLD00-3000-TERMINATE-SQL-COMMIT-UNKNOWN",
+      "kind": "EXTERNAL_DATABASE_RUNTIME",
+      "behaviour_id": "HISTLD00:3000-TERMINATE",
+      "source": {
+        "path": "src/programs/batch/HISTLD00.cbl",
+        "sha256": "148f75d448f2679783e222d4aca4f208ba336736dcd39bfebc8bcba8d85f69d6",
+        "lines": [
+          203,
+          205
+        ],
+        "statements": [
+          {
+            "line": 203,
+            "text": "EXEC SQL COMMIT WORK END-EXEC"
+          }
+        ]
+      },
+      "missing_fact": "the runtime behaviour of embedded SQL COMMIT on null: database product and version, host-variable conversions, NULL and no-row results, constraint violations and the status they report",
+      "why_unsafe": "the result and every status it produces come from an external database the repository does not describe; a Java implementation would have to assume them",
+      "affected_requirements": [
+        "REQ-HISTLD00-001",
+        "RT-HISTLD00-005"
+      ],
+      "affected_java_component": "database port for COMMIT null (interface only; no implementation until specified)",
+      "required_action": [
+        "an approved specification of the database interaction (technical authority), recorded as an ADR at G3"
+      ],
+      "validation_evidence": "a captured run against the real (or an approved equivalent) database for each outcome, including errors",
+      "blocks_execution_path": "request its PERFORM -> 3000-TERMINATE: statement 203",
+      "blocking": true,
+      "status": "OPEN"
+    },
+    {
+      "gap_id": "GAP-HISTLD00-3000-TERMINATE-SQL-ROLLBACK-UNKNOWN",
+      "kind": "EXTERNAL_DATABASE_RUNTIME",
+      "behaviour_id": "HISTLD00:3000-TERMINATE",
+      "source": {
+        "path": "src/programs/batch/HISTLD00.cbl",
+        "sha256": "148f75d448f2679783e222d4aca4f208ba336736dcd39bfebc8bcba8d85f69d6",
+        "lines": [
+          230,
+          233
+        ],
+        "statements": [
+          {
+            "line": 230,
+            "text": "EXEC SQL ROLLBACK WORK END-EXEC ."
+          }
+        ]
+      },
+      "missing_fact": "the runtime behaviour of embedded SQL ROLLBACK on null: database product and version, host-variable conversions, NULL and no-row results, constraint violations and the status they report",
+      "why_unsafe": "the result and every status it produces come from an external database the repository does not describe; a Java implementation would have to assume them",
+      "affected_requirements": [
+        "REQ-HISTLD00-001",
+        "RT-HISTLD00-005"
+      ],
+      "affected_java_component": "database port for ROLLBACK null (interface only; no implementation until specified)",
+      "required_action": [
+        "an approved specification of the database interaction (technical authority), recorded as an ADR at G3"
+      ],
+      "validation_evidence": "a captured run against the real (or an approved equivalent) database for each outcome, including errors",
+      "blocks_execution_path": "request its PERFORM -> 3000-TERMINATE: statement 230",
+      "blocking": true,
+      "status": "OPEN"
+    },
+    {
+      "gap_id": "GAP-HISTLD00-3000-TERMINATE-FILE-REWRITE-BATCH-CONTROL-RECORD",
+      "kind": "EXTERNAL_FILE_RUNTIME",
+      "behaviour_id": "HISTLD00:3000-TERMINATE",
+      "source": {
+        "path": "src/programs/batch/HISTLD00.cbl",
+        "sha256": "148f75d448f2679783e222d4aca4f208ba336736dcd39bfebc8bcba8d85f69d6",
+        "lines": [
+          195
+        ],
+        "statements": [
+          {
+            "line": 195,
+            "text": "REWRITE BATCH-CONTROL-RECORD INVALID KEY"
+          }
+        ]
+      },
+      "missing_fact": "the run-time behaviour of REWRITE on BATCH-CONTROL-RECORD: the dataset bound to it (JCL DD), its content and record encoding, and the file-system status outcomes the COBOL source does not define",
+      "why_unsafe": "the records read and the statuses reported come from a dataset outside the program; a Java implementation verified only against source-derived fixtures does not establish them",
+      "affected_requirements": [
+        "REQ-HISTLD00-001",
+        "RT-HISTLD00-005"
+      ],
+      "affected_java_component": "file port for REWRITE BATCH-CONTROL-RECORD (runtime file semantics; dataset contents unverified)",
+      "required_action": [
+        "the dataset definitions (JCL DD, organisation, record format) and a captured legacy run for each status outcome (technical authority)"
+      ],
+      "validation_evidence": "a captured legacy run against the real (or an approved equivalent) dataset, including end-of-file and error statuses",
+      "blocks_execution_path": "request its PERFORM -> 3000-TERMINATE: statement(s) 195",
+      "blocking": true,
+      "status": "OPEN"
+    },
+    {
+      "gap_id": "GAP-HISTLD00-3000-TERMINATE-FILE-CLOSE-TRANSACTION-HISTORY",
+      "kind": "EXTERNAL_FILE_RUNTIME",
+      "behaviour_id": "HISTLD00:3000-TERMINATE",
+      "source": {
+        "path": "src/programs/batch/HISTLD00.cbl",
+        "sha256": "148f75d448f2679783e222d4aca4f208ba336736dcd39bfebc8bcba8d85f69d6",
+        "lines": [
+          211
+        ],
+        "statements": [
+          {
+            "line": 211,
+            "text": "CLOSE TRANSACTION-HISTORY BATCH-CONTROL-FILE ."
+          }
+        ]
+      },
+      "missing_fact": "the run-time behaviour of CLOSE on TRANSACTION-HISTORY: the dataset bound to it (JCL DD), its content and record encoding, and the file-system status outcomes the COBOL source does not define",
+      "why_unsafe": "the records read and the statuses reported come from a dataset outside the program; a Java implementation verified only against source-derived fixtures does not establish them",
+      "affected_requirements": [
+        "REQ-HISTLD00-001",
+        "RT-HISTLD00-005"
+      ],
+      "affected_java_component": "file port for CLOSE TRANSACTION-HISTORY (runtime file semantics; dataset contents unverified)",
+      "required_action": [
+        "the dataset definitions (JCL DD, organisation, record format) and a captured legacy run for each status outcome (technical authority)"
+      ],
+      "validation_evidence": "a captured legacy run against the real (or an approved equivalent) dataset, including end-of-file and error statuses",
+      "blocks_execution_path": "request its PERFORM -> 3000-TERMINATE: statement(s) 211",
+      "blocking": true,
+      "status": "OPEN"
+    },
+    {
+      "gap_id": "GAP-HISTLD00-3000-TERMINATE-CALL-CALL-ERRPROC",
+      "kind": "EXTERNAL_PROGRAM_CALL",
+      "behaviour_id": "HISTLD00:3000-TERMINATE",
+      "source": {
+        "path": "src/programs/batch/HISTLD00.cbl",
+        "sha256": "148f75d448f2679783e222d4aca4f208ba336736dcd39bfebc8bcba8d85f69d6",
+        "lines": [
+          228
+        ],
+        "statements": [
+          {
+            "line": 228,
+            "text": "CALL 'ERRPROC' USING ERR-MESSAGE"
+          }
+        ]
+      },
+      "missing_fact": "the behaviour of the called program ERRPROC for this USING interface; it is established only by ERRPROC's own closure and evidence, never by this behaviour",
+      "why_unsafe": "the outputs this behaviour receives back from ERRPROC are not part of this closure; treating them as known would assume the callee's behaviour",
+      "affected_requirements": [
+        "REQ-HISTLD00-001",
+        "RT-HISTLD00-005"
+      ],
+      "affected_java_component": "call to ERRPROC through the program registry",
+      "required_action": [
+        "ERRPROC: its own source readiness and a recorded interface contract for the USING parameters"
+      ],
+      "validation_evidence": "a captured legacy run of the call to ERRPROC for each outcome it returns",
+      "blocks_execution_path": "request its PERFORM -> 3000-TERMINATE: statement(s) 228",
+      "blocking": true,
+      "status": "OPEN"
+    }
+  ],
+  "closures": [
+    {
+      "behaviour_id": "HISTLD00:0000-MAIN",
+      "status": "UNRESOLVED",
+      "unresolved_reasons": [
+        "PERFORM/GO TO target CONNECT-TO-DB2 (line 117) is not a paragraph of HISTLD00",
+        "PERFORM/GO TO target DB2-ERROR-ROUTINE (line 172) is not a paragraph of HISTLD00",
+        "PERFORM/GO TO target DISCONNECT-FROM-DB2 (line 216) is not a paragraph of HISTLD00"
+      ],
+      "units": [
+        "HISTLD00",
+        "ERRHAND",
+        "BCHCTL",
+        "BCHCON",
+        "DBTBLS",
+        "ERRPROC"
+      ],
+      "external": [
+        {
+          "kind": "embedded_sql",
+          "line": 230,
+          "operation": "ROLLBACK",
+          "target": null,
+          "relation": "performed"
+        },
+        {
+          "kind": "embedded_sql",
+          "line": 160,
+          "operation": "INSERT",
+          "target": "POSHIST",
+          "relation": "performed"
+        },
+        {
+          "kind": "embedded_sql",
+          "line": 181,
+          "operation": "COMMIT",
+          "target": null,
+          "relation": "performed"
+        },
+        {
+          "kind": "embedded_sql",
+          "line": 203,
+          "operation": "COMMIT",
+          "target": null,
+          "relation": "performed"
+        },
+        {
+          "kind": "file_io",
+          "line": 124,
+          "operation": "READ",
+          "target": "BATCH-CONTROL-FILE",
+          "relation": "direct"
+        },
+        {
+          "kind": "file_io",
+          "line": 131,
+          "operation": "REWRITE",
+          "target": "BATCH-CONTROL-FILE",
+          "relation": "direct"
+        },
+        {
+          "kind": "file_io",
+          "line": 135,
+          "operation": "READ",
+          "target": "TRANSACTION-HISTORY",
+          "relation": "direct"
+        },
+        {
+          "kind": "file_io",
+          "line": 195,
+          "operation": "REWRITE",
+          "target": "BATCH-CONTROL-FILE",
+          "relation": "direct"
+        }
+      ],
+      "undeclared": [
+        "CONNECT-TO-DB2",
+        "TH-ACCOUNT-NO",
+        "TH-PORTFOLIO-ID",
+        "TH-TRANS-DATE",
+        "TH-TRANS-TIME",
+        "TH-TRANS-TYPE",
+        "TH-SECURITY-ID",
+        "TH-QUANTITY",
+        "TH-PRICE",
+        "TH-AMOUNT",
+        "TH-FEES",
+        "TH-TOTAL-AMOUNT",
+        "TH-COST-BASIS",
+        "TH-GAIN-LOSS",
+        "SQLCODE",
+        "DB2-ERROR-ROUTINE",
+        "BCT-RECORDS-READ",
+        "BCT-RECORDS-WRITTEN",
+        "DISCONNECT-FROM-DB2"
+      ],
+      "sha256": "e44399bb658ee88f2a13060ad4d1dab5673f86bc23f56039dfce683fefccfe26"
+    },
+    {
+      "behaviour_id": "HISTLD00:1000-INITIALIZE",
+      "status": "UNRESOLVED",
+      "unresolved_reasons": [
+        "PERFORM/GO TO target CONNECT-TO-DB2 (line 117) is not a paragraph of HISTLD00",
+        "PERFORM/GO TO target DB2-ERROR-ROUTINE (line 172) is not a paragraph of HISTLD00",
+        "PERFORM/GO TO target DISCONNECT-FROM-DB2 (line 216) is not a paragraph of HISTLD00"
+      ],
+      "units": [
+        "HISTLD00",
+        "ERRHAND",
+        "BCHCTL",
+        "BCHCON",
+        "ERRPROC"
+      ],
+      "external": [
+        {
+          "kind": "embedded_sql",
+          "line": 230,
+          "operation": "ROLLBACK",
+          "target": null,
+          "relation": "performed"
+        },
+        {
+          "kind": "file_io",
+          "line": 124,
+          "operation": "READ",
+          "target": "BATCH-CONTROL-FILE",
+          "relation": "direct"
+        },
+        {
+          "kind": "file_io",
+          "line": 131,
+          "operation": "REWRITE",
+          "target": "BATCH-CONTROL-FILE",
+          "relation": "direct"
+        }
+      ],
+      "undeclared": [
+        "CONNECT-TO-DB2"
+      ],
+      "sha256": "040359a2537f047f27e9038e9cc2b122a9d8b15b293cfe72b71d06566b4f814e"
+    },
+    {
+      "behaviour_id": "HISTLD00:2000-PROCESS",
+      "status": "UNRESOLVED",
+      "unresolved_reasons": [
+        "PERFORM/GO TO target CONNECT-TO-DB2 (line 117) is not a paragraph of HISTLD00",
+        "PERFORM/GO TO target DB2-ERROR-ROUTINE (line 172) is not a paragraph of HISTLD00",
+        "PERFORM/GO TO target DISCONNECT-FROM-DB2 (line 216) is not a paragraph of HISTLD00"
+      ],
+      "units": [
+        "HISTLD00",
+        "DBTBLS",
+        "BCHCTL",
+        "ERRHAND",
+        "ERRPROC"
+      ],
+      "external": [
+        {
+          "kind": "embedded_sql",
+          "line": 160,
+          "operation": "INSERT",
+          "target": "POSHIST",
+          "relation": "performed"
+        },
+        {
+          "kind": "embedded_sql",
+          "line": 181,
+          "operation": "COMMIT",
+          "target": null,
+          "relation": "performed"
+        },
+        {
+          "kind": "embedded_sql",
+          "line": 230,
+          "operation": "ROLLBACK",
+          "target": null,
+          "relation": "performed"
+        },
+        {
+          "kind": "file_io",
+          "line": 135,
+          "operation": "READ",
+          "target": "TRANSACTION-HISTORY",
+          "relation": "direct"
+        },
+        {
+          "kind": "file_io",
+          "line": 195,
+          "operation": "REWRITE",
+          "target": "BATCH-CONTROL-FILE",
+          "relation": "direct"
+        }
+      ],
+      "undeclared": [
+        "TH-ACCOUNT-NO",
+        "TH-PORTFOLIO-ID",
+        "TH-TRANS-DATE",
+        "TH-TRANS-TIME",
+        "TH-TRANS-TYPE",
+        "TH-SECURITY-ID",
+        "TH-QUANTITY",
+        "TH-PRICE",
+        "TH-AMOUNT",
+        "TH-FEES",
+        "TH-TOTAL-AMOUNT",
+        "TH-COST-BASIS",
+        "TH-GAIN-LOSS",
+        "SQLCODE",
+        "DB2-ERROR-ROUTINE",
+        "BCT-RECORDS-READ",
+        "BCT-RECORDS-WRITTEN"
+      ],
+      "sha256": "03670076bdc9cd09e23ecdf745a23ef8f4ce581d2acfb2c7d9d73891b20fe45b"
+    },
+    {
+      "behaviour_id": "HISTLD00:3000-TERMINATE",
+      "status": "UNRESOLVED",
+      "unresolved_reasons": [
+        "PERFORM/GO TO target CONNECT-TO-DB2 (line 117) is not a paragraph of HISTLD00",
+        "PERFORM/GO TO target DB2-ERROR-ROUTINE (line 172) is not a paragraph of HISTLD00",
+        "PERFORM/GO TO target DISCONNECT-FROM-DB2 (line 216) is not a paragraph of HISTLD00"
+      ],
+      "units": [
+        "HISTLD00",
+        "BCHCTL",
+        "ERRHAND",
+        "ERRPROC"
+      ],
+      "external": [
+        {
+          "kind": "embedded_sql",
+          "line": 203,
+          "operation": "COMMIT",
+          "target": null,
+          "relation": "performed"
+        },
+        {
+          "kind": "embedded_sql",
+          "line": 230,
+          "operation": "ROLLBACK",
+          "target": null,
+          "relation": "performed"
+        },
+        {
+          "kind": "file_io",
+          "line": 195,
+          "operation": "REWRITE",
+          "target": "BATCH-CONTROL-FILE",
+          "relation": "direct"
+        }
+      ],
+      "undeclared": [
+        "BCT-RECORDS-READ",
+        "BCT-RECORDS-WRITTEN",
+        "DISCONNECT-FROM-DB2",
+        "SQLCODE"
+      ],
+      "sha256": "56ae786ef3852bd53aff65add357dab5764898a9a5887bd776a743ada7f4f3e2"
+    }
+  ],
+  "open_decisions": [
+    {
+      "id": "DR-DB2CONN-002",
+      "blocking": true,
+      "question": "Copybook SQLCA (src/copybook/db2/SQLCA.cpy) includes itself (EXEC SQL INCLUDE SQLCA at line 6) and defines only SQL-STATUS-CODES, with no SQLCODE or SQLERRMC field; SQLCODE/SQLERRMC therefore have no Field ID in 14 DB2 programs, including HISTLD00, RTNANA00, RTNCDE00, DB2CMT and DB2CONN. Which SQLCA does the precompiler actually supply, and may the forward design assume the standard DB2 SQLCODE meaning (0 success, -803 duplicate key, negative values errors) used in these requirements?"
+    },
+    {
+      "id": "DR-DB2ERR-002",
+      "blocking": false,
+      "question": "DB2ERR (line 75) uses the non-standard 'ACCEPT WS-CURRENT-TIMESTAMP FROM TIME STAMP'; the ERRPROC logic file flags the same construct (line 57) and PORTDEL uses it for the deletion audit timestamp (source line 169). Which compiler extension is in use and what timestamp format do ERRLOG rows, error-log records and deletion audit records actually carry?"
+    },
+    {
+      "id": "DR-F2-0005-006",
+      "blocking": true,
+      "question": "HISTLD00 moves 13 TH-* fields (TH-ACCOUNT-NO ... TH-GAIN-LOSS) to POSHIST-RECORD and updates BCT-RECORDS-READ / BCT-RECORDS-WRITTEN, but none of these names is declared in HISTREC or BCHCTL as registered. What is the transaction-history record layout actually read by HISTLD00, and where are the checkpoint counters stored?"
+    },
+    {
+      "id": "DR-F2-0005-012",
+      "blocking": false,
+      "question": "Fifteen elementary level-01 items (e.g. HISTLD00 WS-COMMIT-THRESHOLD, the REPORT-RECORD print lines, DB2CONN WS-CONNECTION-STATE/WS-RETRY-COUNT/WS-MAX-RETRIES, DB2CMT WS-SAVEPOINT-ID) are catalogued as record-level items without Field IDs, so no Java type could be assigned. Should the reverse harness register Field IDs for them, or may later stages map them at record level using the catalogued PIC?"
+    },
+    {
+      "id": "DR-F2-0005-018",
+      "blocking": false,
+      "question": "HISTLD00 performs CONNECT-TO-DB2, DB2-ERROR-ROUTINE and DISCONNECT-FROM-DB2, which are not registered for the program (expected from COPY DBPROC), and has no restart repositioning (a rerun relies on SQLCODE -803). Should the Java job use container-managed connections and a restartable reader keyed on the checkpoint counters, or reproduce the rerun-from-start behaviour?"
+    },
+    {
+      "id": "DR-F2-0005-024",
+      "blocking": false,
+      "question": "DD TRANHIST is declared as TRANSACTION-HISTORY in HISTLD00 (RECORD KEY TH-KEY, copybook HISTREC) and in RPTPOS00 (RECORD KEY TRAN-KEY, copybook TRNREC). Do both programs address the same indexed dataset, and which key/record layout is authoritative?"
+    },
+    {
+      "id": "DR-F2-0005-025",
+      "blocking": false,
+      "question": "The character encoding of DISPLAY data is not stated anywhere (source declares IBM-ZOS only). Is EBCDIC code page 037 correct for all files and the DB2 subsystem, or another code page (e.g. 1140 with the euro sign, which changes the '$' currency byte in WS-POS-VALUE)?"
+    },
+    {
+      "id": "DR-F2-0011-001",
+      "blocking": true,
+      "question": "Copybook SQLCA (SYS-PORTFOLIO-001-FIL-0017) line 6 contains 'EXEC SQL INCLUDE SQLCA END-EXEC', naming itself. The included SQL communication area (SQLCODE, SQLSTATE, SQLERRMC, ...) has no layout in any reverse artifact. How should the forward design obtain the SQLCA layout and the SQLCODE/SQLSTATE semantics used by the 14 DB2 programs?"
+    },
+    {
+      "id": "DR-F2-0011-002",
+      "blocking": false,
+      "question": "DBPROC procedure code (DB2-ERROR-ROUTINE, lines 47-56) moves data to ERR-PROGRAM and ERR-TEXT and calls 'ERRPROC' USING ERR-MESSAGE, but DBPROC declares none of these and ERR-TEXT is declared in no packet copybook. Which record declares ERR-TEXT / ERR-MESSAGE in each including program, and what is the ERRPROC parameter layout?"
+    },
+    {
+      "id": "DR-F2-0011-003",
+      "blocking": false,
+      "question": "Which TRUNC compiler option (STD, OPT or BIN) was used for programs including these copybooks? It decides whether S9(4)/S9(8)/S9(9) COMP fields are truncated to their PIC digits or to the binary halfword/fullword range on store."
+    },
+    {
+      "id": "DR-F2-P0006-009",
+      "blocking": false,
+      "question": "ERRPROC's LINKAGE LS-ERROR-REQUEST is 354 bytes, but DB2ERR (line 199) and DB2STAT (line 227) CALL 'ERRPROC' USING ERR-MESSAGE from copybook ERRHAND (about 370 bytes, different field order). Which layout is the contract of the Java error service?"
+    },
+    {
+      "id": "DR-F2-PKT0010-001",
+      "blocking": false,
+      "question": "BCHCON BCT-EMERGENCY is PIC X(8) with VALUE 'EMERGENCY' (9 characters). What initial 8-byte value must the Java constant hold: the compiler-truncated 'EMERGENC', or is the copybook to be corrected (for example a 9-byte field or a different literal)?"
+    },
+    {
+      "id": "DR-F2-PKT0010-002",
+      "blocking": false,
+      "question": "Which character encoding (code page) do the files and areas described by these copybooks use for DISPLAY data on the legacy platform (EBCDIC 037, 1140, another EBCDIC variant, or ASCII)? The zoned-decimal test vectors and String codecs depend on it."
+    },
+    {
+      "id": "DR-F2-PKT0010-003",
+      "blocking": false,
+      "question": "Which TRUNC compiler option (STD, OPT or BIN) were the programs including these copybooks compiled with? It decides whether COMP fields such as 9(2) COMP, 9(3) COMP, 9(5) COMP and 9(9) COMP may hold values beyond their PIC digits (up to the halfword/fullword limit), which affects Java range validation and whether 9(9) COMP counters need long instead of int."
+    },
+    {
+      "id": "DR-HISTLD00-001",
+      "blocking": true,
+      "question": "HISTLD00 performs CONNECT-TO-DB2, DB2-ERROR-ROUTINE and DISCONNECT-FROM-DB2, which exist only as procedure code in copybook DBPROC (lines 26-63) and were not traced. What do the DB2 connect, the DB2 error routine (called for every non-duplicate POSHIST insert failure) and the disconnect do, and does the error routine change the flow of the load (for example rollback or stop)?"
+    },
+    {
+      "id": "DR-HISTLD00-002",
+      "blocking": true,
+      "question": "HISTLD00 moves 13 history source fields (TH-ACCOUNT-NO, TH-PORTFOLIO-ID, TH-TRANS-DATE, TH-TRANS-TIME, TH-TRANS-TYPE, TH-SECURITY-ID, TH-QUANTITY, TH-PRICE, TH-AMOUNT, TH-FEES, TH-TOTAL-AMOUNT, TH-COST-BASIS, TH-GAIN-LOSS; lines 146-158) into POSHIST and two checkpoint counters (BCT-RECORDS-READ, BCT-RECORDS-WRITTEN; lines 192-193) into the batch-control record, but none of them is declared in the program or its copybooks. What are the real record layouts of the transaction-history input and of the batch-control checkpoint fields?"
+    },
+    {
+      "id": "DR-HISTLD00-003",
+      "blocking": true,
+      "question": "BR-007 states: at every commit the running totals of records read and records written are copied into the batch-control record (BCT-RECORDS-READ, BCT-RECORDS-WRITTEN) and the record is rewritten; the commit counter restarts at zero. The two target fields are not declared in BATCH-CONTROL-RECORD. Confirm, correct or reject: where must the checkpoint totals be stored, and are they used for restart?"
+    },
+    {
+      "id": "DR-HISTLD00-004",
+      "blocking": false,
+      "question": "BR-005 describes the commit threshold (1000) as 'records loaded since the last commit', but HISTLD00 adds 1 to the commit counter for every history record processed, including duplicate-key rows (SQLCODE -803, counted neither as written nor as error) and failed inserts. BR-006 (per-record counters) is medium confidence. Is the commit interval meant to count every processed record (as the source does) or only successfully loaded records, and are the read/written/error counting rules correct?"
+    },
+    {
+      "id": "DR-HISTLD00-005",
+      "blocking": false,
+      "question": "Copybook HISTREC declares history record types HIST-RECORD-TYPE ('PT' portfolio, 'PS' position, 'TR' transaction; BR-146) and actions HIST-ACTION-CODE ('A' add, 'C' change, 'D' delete; BR-147); HISTLD00 does not test them. Must the forward history load validate or route on these values?"
+    },
+    {
+      "id": "RVW-GAP-092",
+      "blocking": false,
+      "question": "GAP-092 (medium, DIAGRAM_RENDER_UNVERIFIED) is not addressed by any decision or requirement: Visual rendering of the 65 Mermaid diagrams is unverified. Acknowledge it as a known limitation (resolved_no_change) or exclude the affected units?"
+    },
+    {
+      "id": "RVW-GAP-104",
+      "blocking": false,
+      "question": "GAP-104 (low, DIAGRAM_INCOMPLETE) is not addressed by any decision or requirement: COMP-UNRESOLVED: all seven edges are unsupported. Acknowledge it as a known limitation (resolved_no_change) or exclude the affected units?"
+    }
+  ],
+  "authorisation": {
+    "generation_authorized": false,
+    "blockers": [
+      "config generation.java_generation_allowed is false (project authority)",
+      "no authorised orchestrator.java_target_dir",
+      "G4 is BLOCKED (needs signed G2, G3 and G4 approvals by trusted signers)",
+      "trust store: TRUST_NOT_CONFIGURED"
+    ],
+    "gates": {
+      "G0": "PASS",
+      "G1": "PASS",
+      "G2": "UNVERIFIED",
+      "G3": "BLOCKED",
+      "G4": "BLOCKED",
+      "G5": "BLOCKED",
+      "G6": "BLOCKED",
+      "G7": "BLOCKED",
+      "G8": "BLOCKED"
+    },
+    "trust": "TRUST_NOT_CONFIGURED",
+    "program_g2_scope": {
+      "readiness": "NOT_READY",
+      "blocking": 20,
+      "scope_sha256": "c69743b08bc32701cb6276f167a09c44f76ed67b82a28270f2c6d84d8481d6ea"
+    },
+    "note": "Engineering gates never authorise generation. Java may be generated only when generation_authorized is true."
+  }
+}

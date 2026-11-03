@@ -1,0 +1,51 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://revforge.local/contracts/verification/openai-pass-b.schema.json",
+  "title": "Independent review Pass B packets: comparison context",
+  "type": "object",
+  "required": [
+    "contract",
+    "contract_version",
+    "generated_at",
+    "baseline_manifest_sha256",
+    "export_authorization",
+    "packets"
+  ],
+  "properties": {
+    "contract": {
+      "const": "openai-pass-b"
+    },
+    "contract_version": {
+      "const": "1.0"
+    },
+    "baseline_manifest_sha256": {
+      "$ref": "../common.schema.json#/definitions/sha256"
+    },
+    "packets": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "packet_id",
+          "pass",
+          "pass_a_sha256",
+          "root_cause_id",
+          "export_authorization",
+          "existing_interpretations",
+          "conflicting_interpretations",
+          "deterministic_results",
+          "question",
+          "output_contract"
+        ],
+        "properties": {
+          "pass": {
+            "const": "B"
+          },
+          "pass_a_sha256": {
+            "$ref": "../common.schema.json#/definitions/sha256"
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,254 @@
+{
+ "program": "DB2CMT",
+ "provenance": "Written 2026-11-02 by a scenario-author agent (F6 independent fixture design) from the COBOL source src/programs/common/DB2CMT.cbl and the copybooks it COPYs (src/copybook/db2/SQLCA.cpy, src/copybook/db2/DBPROC.cpy, src/copybook/common/ERRHAND.cpy), plus the gap origins in the 'gaps' array of forward/generated/java/DB2CMT/pilot-result.json. No generated Java, source map or execution result was read.",
+ "scenarios": [
+  {
+   "id": "C01",
+   "title": "INIT resets the statistics and sets LS-RETURN-CODE to 0",
+   "cobol_lines": [
+    54,
+    55,
+    56,
+    72,
+    76,
+    77
+   ],
+   "kind": "call",
+   "set": {
+    "LS-FUNCTION": "INIT",
+    "LS-SAVEPOINT-NAME": "",
+    "LS-RECORDS-PROC": "0",
+    "LS-COMMIT-FREQ": "0",
+    "LS-FORCE-FLAG": "N",
+    "LS-RETURN-CODE": "7",
+    "LS-SQLCODE": "0",
+    "LS-ERROR-MSG": ""
+   },
+   "expect": {
+    "outcome": "GOBACK",
+    "items": {
+     "LS-RETURN-CODE": "0",
+     "WS-COMMIT-COUNT": "0",
+     "WS-ROLLBACK-COUNT": "0",
+     "WS-SAVEPOINT-COUNT": "0",
+     "LS-FUNCTION": "INIT"
+    }
+   }
+  },
+  {
+   "id": "C02",
+   "title": "STAT displays the three counters (S9(9) COMP, initial VALUE 0) and leaves LS-RETURN-CODE untouched",
+   "cobol_lines": [
+    65,
+    66,
+    72,
+    156,
+    157,
+    158,
+    159
+   ],
+   "kind": "call",
+   "set": {
+    "LS-FUNCTION": "STAT",
+    "LS-SAVEPOINT-NAME": "",
+    "LS-RECORDS-PROC": "0",
+    "LS-COMMIT-FREQ": "0",
+    "LS-FORCE-FLAG": "N",
+    "LS-RETURN-CODE": "5",
+    "LS-SQLCODE": "0",
+    "LS-ERROR-MSG": ""
+   },
+   "expect": {
+    "outcome": "GOBACK",
+    "items": {
+     "LS-RETURN-CODE": "5"
+    },
+    "display": [
+     "DB2 Commit Controller Statistics:",
+     "  Commits:    000000000",
+     "  Rollbacks:  000000000",
+     "  Savepoints: 000000000"
+    ]
+   }
+  },
+  {
+   "id": "C03",
+   "title": "CMIT with records processed below the commit frequency and no force flag does nothing; LS-RETURN-CODE is not set",
+   "cobol_lines": [
+    57,
+    58,
+    72,
+    81,
+    82,
+    84
+   ],
+   "kind": "call",
+   "set": {
+    "LS-FUNCTION": "CMIT",
+    "LS-SAVEPOINT-NAME": "",
+    "LS-RECORDS-PROC": "9",
+    "LS-COMMIT-FREQ": "10",
+    "LS-FORCE-FLAG": "N",
+    "LS-RETURN-CODE": "3",
+    "LS-SQLCODE": "0",
+    "LS-ERROR-MSG": ""
+   },
+   "expect": {
+    "outcome": "GOBACK",
+    "items": {
+     "LS-RETURN-CODE": "3",
+     "LS-ERROR-MSG": "",
+     "LS-SQLCODE": "0"
+    }
+   }
+  },
+  {
+   "id": "C04",
+   "title": "CMIT boundary: records processed equal to the commit frequency (>=) issues the commit, which is the EXEC SQL COMMIT gap",
+   "cobol_lines": [
+    57,
+    58,
+    81,
+    83,
+    88
+   ],
+   "kind": "call",
+   "set": {
+    "LS-FUNCTION": "CMIT",
+    "LS-SAVEPOINT-NAME": "",
+    "LS-RECORDS-PROC": "10",
+    "LS-COMMIT-FREQ": "10",
+    "LS-FORCE-FLAG": "N",
+    "LS-RETURN-CODE": "0",
+    "LS-SQLCODE": "0",
+    "LS-ERROR-MSG": ""
+   },
+   "expect": {
+    "outcome": "BLOCKED AT src/programs/common/DB2CMT.cbl:88"
+   }
+  },
+  {
+   "id": "C05",
+   "title": "CMIT below the frequency but LS-FORCE-FLAG = 'Y' still issues the commit (OR branch) and blocks at EXEC SQL COMMIT",
+   "cobol_lines": [
+    57,
+    58,
+    81,
+    82,
+    83,
+    88
+   ],
+   "kind": "call",
+   "set": {
+    "LS-FUNCTION": "CMIT",
+    "LS-SAVEPOINT-NAME": "",
+    "LS-RECORDS-PROC": "0",
+    "LS-COMMIT-FREQ": "10",
+    "LS-FORCE-FLAG": "Y",
+    "LS-RETURN-CODE": "0",
+    "LS-SQLCODE": "0",
+    "LS-ERROR-MSG": ""
+   },
+   "expect": {
+    "outcome": "BLOCKED AT src/programs/common/DB2CMT.cbl:88"
+   }
+  },
+  {
+   "id": "C06",
+   "title": "RBAK goes straight to EXEC SQL ROLLBACK WORK",
+   "cobol_lines": [
+    59,
+    60,
+    104
+   ],
+   "kind": "call",
+   "set": {
+    "LS-FUNCTION": "RBAK",
+    "LS-SAVEPOINT-NAME": "",
+    "LS-RECORDS-PROC": "0",
+    "LS-COMMIT-FREQ": "0",
+    "LS-FORCE-FLAG": "N",
+    "LS-RETURN-CODE": "0",
+    "LS-SQLCODE": "0",
+    "LS-ERROR-MSG": ""
+   },
+   "expect": {
+    "outcome": "BLOCKED AT src/programs/common/DB2CMT.cbl:104"
+   }
+  },
+  {
+   "id": "C07",
+   "title": "SAVE copies the savepoint name then blocks at EXEC SQL SAVEPOINT",
+   "cobol_lines": [
+    61,
+    62,
+    120,
+    122
+   ],
+   "kind": "call",
+   "set": {
+    "LS-FUNCTION": "SAVE",
+    "LS-SAVEPOINT-NAME": "SP1",
+    "LS-RECORDS-PROC": "0",
+    "LS-COMMIT-FREQ": "0",
+    "LS-FORCE-FLAG": "N",
+    "LS-RETURN-CODE": "0",
+    "LS-SQLCODE": "0",
+    "LS-ERROR-MSG": ""
+   },
+   "expect": {
+    "outcome": "BLOCKED AT src/programs/common/DB2CMT.cbl:122"
+   }
+  },
+  {
+   "id": "C08",
+   "title": "REST copies the savepoint name then blocks at EXEC SQL ROLLBACK TO SAVEPOINT",
+   "cobol_lines": [
+    63,
+    64,
+    138,
+    140
+   ],
+   "kind": "call",
+   "set": {
+    "LS-FUNCTION": "REST",
+    "LS-SAVEPOINT-NAME": "SP1",
+    "LS-RECORDS-PROC": "0",
+    "LS-COMMIT-FREQ": "0",
+    "LS-FORCE-FLAG": "N",
+    "LS-RETURN-CODE": "0",
+    "LS-SQLCODE": "0",
+    "LS-ERROR-MSG": ""
+   },
+   "expect": {
+    "outcome": "BLOCKED AT src/programs/common/DB2CMT.cbl:140"
+   }
+  },
+  {
+   "id": "C09",
+   "title": "an unknown (lower-case) function code takes WHEN OTHER: 9000-ERROR-ROUTINE CALLs ERRPROC, another application program not registered in a per-program test",
+   "cobol_lines": [
+    67,
+    68,
+    69,
+    163,
+    164,
+    165
+   ],
+   "kind": "call",
+   "set": {
+    "LS-FUNCTION": "init",
+    "LS-SAVEPOINT-NAME": "",
+    "LS-RECORDS-PROC": "0",
+    "LS-COMMIT-FREQ": "0",
+    "LS-FORCE-FLAG": "N",
+    "LS-RETURN-CODE": "0",
+    "LS-SQLCODE": "0",
+    "LS-ERROR-MSG": ""
+   },
+   "expect": {
+    "outcome": "BLOCKED RUNTIME-CALL-UNAVAILABLE"
+   }
+  }
+ ]
+}

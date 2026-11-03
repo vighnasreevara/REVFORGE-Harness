@@ -1,0 +1,618 @@
+{
+  "contract": "g2-review-package",
+  "contract_version": "1.0",
+  "generated_at": "2026-11-02T21:31:55.290Z",
+  "status": "NOT_APPROVED",
+  "scope": "behaviour:RTNCDE00:P200-SET-RETURN-CODE:requirement=REQ-RTNCDE00-002,requirement=REQ-RTNCDE00-003,runtime_requirement=RT-RTNCDE00-001",
+  "scope_sha256": "4e205c3d74de80ad3ae110ffd0d352715eb7bce6c662c8be4a7e403097055219",
+  "baseline_manifest_sha256": "352b97f0bbcbdb149c1118791aaabaa2e8e9972716bc77adc3a2f0644d24a068",
+  "readiness": "NOT_READY",
+  "units": [
+    {
+      "name": "RTNCODE",
+      "unit_kind": "copybook",
+      "file_id": "SYS-PORTFOLIO-001-FIL-0013",
+      "relation": "direct_dependency",
+      "needed_by": [
+        "RTNCDE00"
+      ],
+      "via": [
+        "COPY"
+      ],
+      "source_sha256": "27eabb519319258b07b32f09ab60e80a18f6658a118e96c8fa01411fc473cbc9"
+    },
+    {
+      "name": "RTNCDE00",
+      "unit_kind": "program",
+      "file_id": "SYS-PORTFOLIO-001-FIL-0052",
+      "relation": "primary",
+      "needed_by": [],
+      "via": [],
+      "source_sha256": "7cb951ea1f418c19ddd61c0eca00f21108af5f364b5ecf05742cbc428862994e"
+    }
+  ],
+  "requirements": [
+    {
+      "id": "REQ-RTNCDE00-002",
+      "kind": "requirement",
+      "statement": "When a new return code is set ('S'), if it is greater than the highest code recorded so far (RC-HIGHEST-CODE) it becomes the new highest code; otherwise the highest code is kept. In both cases the current code becomes the new code. The highest code is held in the caller's request area, so it persists only as long as the caller keeps that area.",
+      "sha256": "88a2aeb73bc02e2ecc83895f0da65046b7238dd597036a28e222c7ecddf217de",
+      "g2_outcome": "REQUIRES_EVIDENCE",
+      "blocking": true,
+      "g2_reasons": [
+        "REQUIRES_EVIDENCE: declared verified_from_source but not confirmed by the runtime: EAR-0002: the earlier verification relied on value(s) 'S' matched only as a substring inside a data name in the cited text, and no cited statement supports them; other statements in the program do support the value (alternative evidence for a citation update by a reviewer)",
+        "REQUIRES_SME_DECISION: blocked by RVW-REQ-RTNCDE00-002 (open)"
+      ],
+      "layers": {
+        "source_evidence_found": false,
+        "deterministically_verified": false,
+        "accepted_by_authorised_reviewer": false,
+        "human_decision_resolved": false
+      },
+      "earlier_claim_check": "unverified",
+      "context_status": "CONTEXT_UNSUPPORTED",
+      "inspect": [
+        {
+          "file": "src/programs/batch/RTNCDE00.cbl",
+          "lines": [
+            64,
+            66
+          ],
+          "cited_line": 64,
+          "cited_line_inside_statement": true
+        }
+      ],
+      "chains": [],
+      "supplements": [
+        {
+          "id": "ESU-0001",
+          "version": 1,
+          "status": "CONTEXT_UNSUPPORTED",
+          "eligible": false,
+          "current": true,
+          "problems": []
+        }
+      ],
+      "adjudications": [
+        {
+          "id": "EAR-0002",
+          "version": 1,
+          "classification": "SOURCE_CHAIN_PARTIAL",
+          "superseding_status": "EVIDENCE_INVALIDATED",
+          "current": true
+        }
+      ]
+    },
+    {
+      "id": "REQ-RTNCDE00-003",
+      "kind": "requirement",
+      "statement": "When a new return code is set, the system classifies it: 0 is SUCCESS ('S'), 1 to 4 is WARNING ('W'), 5 to 8 is ERROR ('E') and any other value is SEVERE ('F'). The response code is then set to 0.",
+      "sha256": "ec665cc58b23e4e018cd684d7e7eb95f38767f28db156d80ca4cea4c30b1a28c",
+      "g2_outcome": "REQUIRES_EVIDENCE",
+      "blocking": true,
+      "g2_reasons": [
+        "REQUIRES_EVIDENCE: declared verified_from_source but not confirmed by the runtime: stated values found in the program but not in the cited lines: F",
+        "REQUIRES_SME_DECISION: blocked by RVW-REQ-RTNCDE00-003 (open)"
+      ],
+      "layers": {
+        "source_evidence_found": true,
+        "deterministically_verified": true,
+        "accepted_by_authorised_reviewer": false,
+        "human_decision_resolved": false
+      },
+      "earlier_claim_check": "unverified",
+      "context_status": "CONTEXT_SUPPORTED",
+      "inspect": [
+        {
+          "file": "src/programs/batch/RTNCDE00.cbl",
+          "lines": [
+            70,
+            79
+          ],
+          "cited_line": 70,
+          "cited_line_inside_statement": true
+        }
+      ],
+      "chains": [
+        {
+          "condition": "RC-STATUS-SUCCESS",
+          "usage": "sets_true",
+          "declared": "src/copybook/common/RTNCODE.cpy:17",
+          "values": [
+            "S"
+          ],
+          "permanent_id": "SYS-PORTFOLIO-001-FIL-0013-FLD-000013"
+        },
+        {
+          "condition": "RC-STATUS-WARNING",
+          "usage": "sets_true",
+          "declared": "src/copybook/common/RTNCODE.cpy:18",
+          "values": [
+            "W"
+          ],
+          "permanent_id": "SYS-PORTFOLIO-001-FIL-0013-FLD-000014"
+        },
+        {
+          "condition": "RC-STATUS-ERROR",
+          "usage": "sets_true",
+          "declared": "src/copybook/common/RTNCODE.cpy:19",
+          "values": [
+            "E"
+          ],
+          "permanent_id": "SYS-PORTFOLIO-001-FIL-0013-FLD-000015"
+        },
+        {
+          "condition": "RC-STATUS-SEVERE",
+          "usage": "sets_true",
+          "declared": "src/copybook/common/RTNCODE.cpy:20",
+          "values": [
+            "F"
+          ],
+          "permanent_id": "SYS-PORTFOLIO-001-FIL-0013-FLD-000016"
+        }
+      ],
+      "supplements": [
+        {
+          "id": "ESU-0002",
+          "version": 1,
+          "status": "CONTEXT_SUPPORTED",
+          "eligible": true,
+          "current": true,
+          "problems": []
+        }
+      ],
+      "adjudications": [
+        {
+          "id": "EAR-0003",
+          "version": 1,
+          "classification": "SOURCE_CHAIN_VERIFIED",
+          "superseding_status": null,
+          "current": true
+        }
+      ]
+    },
+    {
+      "id": "RT-RTNCDE00-001",
+      "kind": "runtime_requirement",
+      "statement": "SET request classifies the new code: 0 success, 1-4 warning, 5-8 error, anything else severe, and keeps the highest code seen in the caller's area (state lives in the caller-supplied RC-REQUEST-AREA, not in this program).",
+      "sha256": "df9759abc7f29462422df7513c5253527a83e18c5525b4450802ee6db6ef4e60",
+      "g2_outcome": "VERIFIED",
+      "blocking": false,
+      "g2_reasons": [
+        "independently re-verified against the original COBOL source by the runtime (source text present; business interpretation still needs human approval)"
+      ],
+      "layers": {
+        "source_evidence_found": true,
+        "deterministically_verified": true,
+        "accepted_by_authorised_reviewer": false,
+        "human_decision_resolved": false
+      },
+      "earlier_claim_check": "verified",
+      "context_status": "CONTEXT_SUPPORTED",
+      "inspect": [
+        {
+          "file": "src/programs/batch/RTNCDE00.cbl",
+          "lines": [
+            70,
+            79
+          ],
+          "cited_line": 70,
+          "cited_line_inside_statement": true
+        }
+      ],
+      "chains": [
+        {
+          "condition": "RC-STATUS-SUCCESS",
+          "usage": "sets_true",
+          "declared": "src/copybook/common/RTNCODE.cpy:17",
+          "values": [
+            "S"
+          ],
+          "permanent_id": "SYS-PORTFOLIO-001-FIL-0013-FLD-000013"
+        },
+        {
+          "condition": "RC-STATUS-WARNING",
+          "usage": "sets_true",
+          "declared": "src/copybook/common/RTNCODE.cpy:18",
+          "values": [
+            "W"
+          ],
+          "permanent_id": "SYS-PORTFOLIO-001-FIL-0013-FLD-000014"
+        },
+        {
+          "condition": "RC-STATUS-ERROR",
+          "usage": "sets_true",
+          "declared": "src/copybook/common/RTNCODE.cpy:19",
+          "values": [
+            "E"
+          ],
+          "permanent_id": "SYS-PORTFOLIO-001-FIL-0013-FLD-000015"
+        },
+        {
+          "condition": "RC-STATUS-SEVERE",
+          "usage": "sets_true",
+          "declared": "src/copybook/common/RTNCODE.cpy:20",
+          "values": [
+            "F"
+          ],
+          "permanent_id": "SYS-PORTFOLIO-001-FIL-0013-FLD-000016"
+        }
+      ],
+      "supplements": [],
+      "adjudications": []
+    }
+  ],
+  "rules": [
+    {
+      "id": "BR-039",
+      "outcome": "VERIFIED",
+      "requirement_ids": [
+        "REQ-RTNCDE00-002"
+      ],
+      "source_run": "rules@5_rules@1.0#b7ca9ee04731"
+    },
+    {
+      "id": "BR-040",
+      "outcome": "VERIFIED",
+      "requirement_ids": [
+        "REQ-RTNCDE00-003"
+      ],
+      "source_run": "rules@5_rules@1.0#b7ca9ee04731"
+    }
+  ],
+  "data_and_runtime_contracts": [
+    {
+      "id": "SYS-PORTFOLIO-001-FIL-0013-REC-0001",
+      "kind": "data_record",
+      "outcome": "VERIFIED",
+      "blocking": false,
+      "usable": true,
+      "units": [
+        "RTNCODE"
+      ],
+      "inclusion": "shared_dependency",
+      "reason": "belongs to RTNCODE (direct_dependency, needed by RTNCDE00)",
+      "record_sha256": "17e24f4ea0005405164baeb40dec8279cfef387f9e423ecda5bd3f96368e6273"
+    }
+  ],
+  "decisions_blocking": [
+    {
+      "decision_id": "RVW-REQ-RTNCDE00-002",
+      "kind": "review",
+      "class": "direct",
+      "question": "requirement REQ-RTNCDE00-002 (RTNCDE00) is not approvable as drafted: REQUIRES_EVIDENCE: declared verified_from_source but not confirmed by the runtime: EAR-0002: the earlier verification relied on value(s) 'S' matched only as a substring inside a data name in the cited text, and no cited statement supports them; other statements in the program do support the value (alternative evidence for a citation update by a reviewer)",
+      "outcomes": [
+        {
+          "outcome": "excluded_from_scope",
+          "roles": [
+            "business_sme"
+          ]
+        },
+        {
+          "outcome": "resolved_requires_update",
+          "roles": [
+            "business_sme"
+          ]
+        },
+        {
+          "outcome": "approved_exception",
+          "roles": [
+            "exception_approver"
+          ]
+        }
+      ],
+      "decision_sha256": "9bdc2c4a02772adc930d7c78177c54be57561c0ac1b96f2e734f0d49646935b4",
+      "facts": null
+    },
+    {
+      "decision_id": "RVW-REQ-RTNCDE00-003",
+      "kind": "review",
+      "class": "direct",
+      "question": "requirement REQ-RTNCDE00-003 (RTNCDE00) is not approvable as drafted: REQUIRES_EVIDENCE: declared verified_from_source but not confirmed by the runtime: stated values found in the program but not in the cited lines: F",
+      "outcomes": [
+        {
+          "outcome": "resolved_no_change",
+          "roles": [
+            "business_sme"
+          ]
+        },
+        {
+          "outcome": "excluded_from_scope",
+          "roles": [
+            "business_sme"
+          ]
+        },
+        {
+          "outcome": "resolved_requires_update",
+          "roles": [
+            "business_sme"
+          ]
+        },
+        {
+          "outcome": "approved_exception",
+          "roles": [
+            "exception_approver"
+          ]
+        }
+      ],
+      "decision_sha256": "06a21585a3a46da091978d054c9c858732af8cf766dcca07fb92fc2626f4b4ed",
+      "facts": null
+    }
+  ],
+  "decisions_all": [
+    {
+      "id": "DR-F2-0005-010",
+      "class": "direct",
+      "blocking": false,
+      "status": "open"
+    },
+    {
+      "id": "DR-F2-PKT0010-002",
+      "class": "shared_dependency",
+      "blocking": false,
+      "status": "open"
+    },
+    {
+      "id": "RVW-GAP-092",
+      "class": "global",
+      "blocking": false,
+      "status": "open"
+    },
+    {
+      "id": "RVW-GAP-104",
+      "class": "global",
+      "blocking": false,
+      "status": "open"
+    },
+    {
+      "id": "RVW-REQ-RTNCDE00-002",
+      "class": "direct",
+      "blocking": true,
+      "status": "open"
+    },
+    {
+      "id": "RVW-REQ-RTNCDE00-003",
+      "class": "direct",
+      "blocking": true,
+      "status": "open"
+    }
+  ],
+  "remediation_proposals": [],
+  "shared_impacts": [],
+  "roles_required": [
+    "business_sme",
+    "exception_approver"
+  ],
+  "trust": {
+    "status": "TRUST_NOT_CONFIGURED",
+    "uncovered": [
+      "architecture_approver",
+      "business_sme",
+      "data_owner",
+      "exception_approver",
+      "product_owner",
+      "requirements_approver",
+      "story_approver",
+      "technical_authority"
+    ]
+  },
+  "fresh_requests": [
+    {
+      "decision_id": "RVW-REQ-RTNCDE00-002",
+      "request_id": "DRQ-a25fb8eb7a96",
+      "file": "D:\\PROJECTS\\REVFORGE-Harness\\forward\\reports\\step-13\\resolution-requests\\RVW-REQ-RTNCDE00-002.request.json",
+      "expires_at": "2026-11-09T21:31:57.675Z",
+      "decision_sha256": "9bdc2c4a02772adc930d7c78177c54be57561c0ac1b96f2e734f0d49646935b4"
+    },
+    {
+      "decision_id": "RVW-REQ-RTNCDE00-003",
+      "request_id": "DRQ-cab3ba15ddb8",
+      "file": "D:\\PROJECTS\\REVFORGE-Harness\\forward\\reports\\step-13\\resolution-requests\\RVW-REQ-RTNCDE00-003.request.json",
+      "expires_at": "2026-11-09T21:31:59.591Z",
+      "decision_sha256": "06a21585a3a46da091978d054c9c858732af8cf766dcca07fb92fc2626f4b4ed"
+    }
+  ],
+  "stale_requests": [
+    {
+      "file": "D:\\PROJECTS\\REVFORGE-Harness\\forward\\reports\\step-10\\resolution-requests\\DR-DB2CONN-002.request.json",
+      "decision_id": "DR-DB2CONN-002",
+      "request_id": "DRQ-57f29d19d1f3",
+      "stale": false,
+      "reasons": []
+    },
+    {
+      "file": "D:\\PROJECTS\\REVFORGE-Harness\\forward\\reports\\step-10\\resolution-requests\\DR-F2-0011-001.request.json",
+      "decision_id": "DR-F2-0011-001",
+      "request_id": "DRQ-021673fc0ffe",
+      "stale": false,
+      "reasons": []
+    },
+    {
+      "file": "D:\\PROJECTS\\REVFORGE-Harness\\forward\\reports\\step-10\\resolution-requests\\RVW-REQ-RTNCDE00-002.request.json",
+      "decision_id": "RVW-REQ-RTNCDE00-002",
+      "request_id": "DRQ-d97a957c0425",
+      "stale": false,
+      "reasons": []
+    },
+    {
+      "file": "D:\\PROJECTS\\REVFORGE-Harness\\forward\\reports\\step-10\\resolution-requests\\RVW-REQ-RTNCDE00-003.request.json",
+      "decision_id": "RVW-REQ-RTNCDE00-003",
+      "request_id": "DRQ-51fb7a227533",
+      "stale": false,
+      "reasons": []
+    },
+    {
+      "file": "D:\\PROJECTS\\REVFORGE-Harness\\forward\\reports\\step-10\\resolution-requests\\RVW-REQ-RTNCDE00-004.request.json",
+      "decision_id": "RVW-REQ-RTNCDE00-004",
+      "request_id": "DRQ-01b26705489e",
+      "stale": false,
+      "reasons": []
+    },
+    {
+      "file": "D:\\PROJECTS\\REVFORGE-Harness\\forward\\reports\\step-11\\resolution-requests\\DR-DB2CONN-002.request.json",
+      "decision_id": "DR-DB2CONN-002",
+      "request_id": "DRQ-8a46d20a555f",
+      "stale": false,
+      "reasons": []
+    },
+    {
+      "file": "D:\\PROJECTS\\REVFORGE-Harness\\forward\\reports\\step-11\\resolution-requests\\DR-F2-0011-001.request.json",
+      "decision_id": "DR-F2-0011-001",
+      "request_id": "DRQ-5a06c97411d1",
+      "stale": false,
+      "reasons": []
+    },
+    {
+      "file": "D:\\PROJECTS\\REVFORGE-Harness\\forward\\reports\\step-11\\resolution-requests\\RVW-REQ-RTNCDE00-002.request.json",
+      "decision_id": "RVW-REQ-RTNCDE00-002",
+      "request_id": "DRQ-a9e2249a4258",
+      "stale": false,
+      "reasons": []
+    },
+    {
+      "file": "D:\\PROJECTS\\REVFORGE-Harness\\forward\\reports\\step-11\\resolution-requests\\RVW-REQ-RTNCDE00-003.request.json",
+      "decision_id": "RVW-REQ-RTNCDE00-003",
+      "request_id": "DRQ-f226cdb8499a",
+      "stale": false,
+      "reasons": []
+    },
+    {
+      "file": "D:\\PROJECTS\\REVFORGE-Harness\\forward\\reports\\step-11\\resolution-requests\\RVW-REQ-RTNCDE00-004.request.json",
+      "decision_id": "RVW-REQ-RTNCDE00-004",
+      "request_id": "DRQ-91faa5b8863b",
+      "stale": false,
+      "reasons": []
+    },
+    {
+      "file": "D:\\PROJECTS\\REVFORGE-Harness\\forward\\reports\\step-12\\resolution-requests\\DR-DB2CONN-002.request.json",
+      "decision_id": "DR-DB2CONN-002",
+      "request_id": "DRQ-68646916d34f",
+      "stale": false,
+      "reasons": []
+    },
+    {
+      "file": "D:\\PROJECTS\\REVFORGE-Harness\\forward\\reports\\step-12\\resolution-requests\\DR-F2-0011-001.request.json",
+      "decision_id": "DR-F2-0011-001",
+      "request_id": "DRQ-2df78db54de2",
+      "stale": false,
+      "reasons": []
+    },
+    {
+      "file": "D:\\PROJECTS\\REVFORGE-Harness\\forward\\reports\\step-12\\resolution-requests\\RVW-REQ-RTNCDE00-002.request.json",
+      "decision_id": "RVW-REQ-RTNCDE00-002",
+      "request_id": "DRQ-61ecf91d935f",
+      "stale": false,
+      "reasons": []
+    },
+    {
+      "file": "D:\\PROJECTS\\REVFORGE-Harness\\forward\\reports\\step-12\\resolution-requests\\RVW-REQ-RTNCDE00-003.request.json",
+      "decision_id": "RVW-REQ-RTNCDE00-003",
+      "request_id": "DRQ-8a56c9fba2f7",
+      "stale": false,
+      "reasons": []
+    },
+    {
+      "file": "D:\\PROJECTS\\REVFORGE-Harness\\forward\\reports\\step-12\\resolution-requests\\RVW-REQ-RTNCDE00-004.request.json",
+      "decision_id": "RVW-REQ-RTNCDE00-004",
+      "request_id": "DRQ-169036e9539b",
+      "stale": false,
+      "reasons": []
+    },
+    {
+      "file": "D:\\PROJECTS\\REVFORGE-Harness\\forward\\reports\\step-5.5\\resolution-requests\\DR-DB2CONN-002.resolution-request.json",
+      "decision_id": "DR-DB2CONN-002",
+      "request_id": null,
+      "stale": false,
+      "reasons": []
+    },
+    {
+      "file": "D:\\PROJECTS\\REVFORGE-Harness\\forward\\reports\\step-5.5\\resolution-requests\\DR-F2-0011-001.resolution-request.json",
+      "decision_id": "DR-F2-0011-001",
+      "request_id": null,
+      "stale": false,
+      "reasons": []
+    },
+    {
+      "file": "D:\\PROJECTS\\REVFORGE-Harness\\forward\\reports\\step-5.5\\resolution-requests\\RVW-REQ-RTNCDE00-003.resolution-request.json",
+      "decision_id": "RVW-REQ-RTNCDE00-003",
+      "request_id": null,
+      "stale": true,
+      "reasons": [
+        "the decision content changed (new options, evidence or affected items)"
+      ]
+    },
+    {
+      "file": "D:\\PROJECTS\\REVFORGE-Harness\\forward\\reports\\step-5.5\\resolution-requests\\RVW-REQ-RTNCDE00-004.resolution-request.json",
+      "decision_id": "RVW-REQ-RTNCDE00-004",
+      "request_id": null,
+      "stale": false,
+      "reasons": []
+    },
+    {
+      "file": "D:\\PROJECTS\\REVFORGE-Harness\\forward\\reports\\step-8\\resolution-requests\\DR-DB2CONN-002.request.json",
+      "decision_id": "DR-DB2CONN-002",
+      "request_id": "DRQ-434822f113da",
+      "stale": false,
+      "reasons": []
+    },
+    {
+      "file": "D:\\PROJECTS\\REVFORGE-Harness\\forward\\reports\\step-8\\resolution-requests\\DR-F2-0011-001.request.json",
+      "decision_id": "DR-F2-0011-001",
+      "request_id": "DRQ-8cb4a0c0906a",
+      "stale": false,
+      "reasons": []
+    },
+    {
+      "file": "D:\\PROJECTS\\REVFORGE-Harness\\forward\\reports\\step-8\\resolution-requests\\RVW-REQ-RTNCDE00-003.request.json",
+      "decision_id": "RVW-REQ-RTNCDE00-003",
+      "request_id": "DRQ-9c84eab7a611",
+      "stale": true,
+      "reasons": [
+        "the decision content changed (new options, evidence or affected items)"
+      ]
+    },
+    {
+      "file": "D:\\PROJECTS\\REVFORGE-Harness\\forward\\reports\\step-8\\resolution-requests\\RVW-REQ-RTNCDE00-004.request.json",
+      "decision_id": "RVW-REQ-RTNCDE00-004",
+      "request_id": "DRQ-8833eafb100b",
+      "stale": false,
+      "reasons": []
+    },
+    {
+      "file": "D:\\PROJECTS\\REVFORGE-Harness\\forward\\reports\\step-9\\RVW-REQ-RTNCDE00-003.request.json",
+      "decision_id": "RVW-REQ-RTNCDE00-003",
+      "request_id": "DRQ-c442a6d2a5fc",
+      "stale": false,
+      "reasons": []
+    }
+  ],
+  "blocking_findings": [
+    {
+      "kind": "requirement",
+      "id": "REQ-RTNCDE00-002",
+      "outcome": "REQUIRES_EVIDENCE",
+      "reason": "REQUIRES_EVIDENCE: declared verified_from_source but not confirmed by the runtime: EAR-0002: the earlier verification relied on value(s) 'S' matched only as a substring inside a data name in the cited text, and no cited statement supports them; other statements in the program do support the value (alternative evidence for a citation update by a reviewer)"
+    },
+    {
+      "kind": "requirement",
+      "id": "REQ-RTNCDE00-003",
+      "outcome": "REQUIRES_EVIDENCE",
+      "reason": "REQUIRES_EVIDENCE: declared verified_from_source but not confirmed by the runtime: stated values found in the program but not in the cited lines: F"
+    }
+  ],
+  "ready_conditions": [
+    "requirement REQ-RTNCDE00-002 must stop blocking (REQUIRES_EVIDENCE)",
+    "requirement REQ-RTNCDE00-003 must stop blocking (REQUIRES_EVIDENCE)"
+  ],
+  "pass_conditions": [
+    "the scope is READY (no blocking finding)",
+    "a trust store with a usable requirements_approver",
+    "an approval request exported for the current scope digest",
+    "a signed approval by a requirements_approver who is not the requester, imported and re-verified",
+    "G2 re-evaluated to PASS for exactly behaviour:RTNCDE00:P200-SET-RETURN-CODE:requirement=REQ-RTNCDE00-002,requirement=REQ-RTNCDE00-003,runtime_requirement=RT-RTNCDE00-001"
+  ],
+  "g2": {
+    "status": "UNVERIFIED",
+    "reason": "G2 not approved for scope application: NOT_READY (417 blocking finding(s)); failing checks: canonical_rule_coverage, cross_batch_reconciliation, requirement_evidence, runtime_evidence, semantic_contradictions, contradicted_claims, blocking_decisions, data_contracts, scope_classification, readiness, trust_anchor, human_approval"
+  }
+}

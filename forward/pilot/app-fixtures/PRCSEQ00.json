@@ -1,0 +1,1229 @@
+{
+ "program": "PRCSEQ00",
+ "provenance": "Written by a scenario-author agent (F6 independent fixture design) on 2026-11-02 from the COBOL source src/programs/batch/PRCSEQ00.cbl and its copybooks (src/copybook/batch/PRCSEQ.cpy, src/copybook/batch/BCHCTL.cpy, src/copybook/batch/BCHCON.cpy, src/copybook/common/ERRHAND.cpy) under references/udara-legacy-modernization-harness, the fixture README, and only the gaps/inspection arrays of forward/generated/java/PRCSEQ00/pilot-result.json. No generated Java, source map or execution result was read or run. Scenarios R01, R02, R03, R04, R05, R06 were added on 2026-11-03 (business-rule coverage extension) by an F6 scenario-author agent from the same COBOL source, copybooks, README and gaps array only; no generated Java, source map or test result was read or run. Scenarios V01.. were added on 2026-11-03 (partly-covered rule extension) by an F6 scenario-author agent from the same COBOL source, copybooks, README and gaps array only; no generated Java, source map or test result was read or run.",
+ "scenarios": [
+  {
+   "id": "Q01",
+   "title": "INIT, defined path: both files open I-O; LS-PROCESS-DATE '20240101' + 2 spaces becomes PSR-KEY; START KEY >= positions at '3000000101' (process IDs are compared with a date - preserved); the PRC records are numbered 1, 2 and a READY control record is WRITTEN for each after INITIALIZE (alphanumerics spaces, DISPLAY numerics zeros, COMP zeros); LS-RETURN-CODE passes through unchanged",
+   "cobol_lines": [
+    76,
+    77,
+    78,
+    90,
+    91,
+    95,
+    96,
+    97,
+    142,
+    148,
+    156,
+    157,
+    158,
+    160,
+    162,
+    168,
+    169,
+    173,
+    174,
+    181,
+    182,
+    183,
+    184,
+    185,
+    189,
+    190,
+    192,
+    193,
+    194,
+    195,
+    196,
+    198
+   ],
+   "kind": "call",
+   "set": {
+    "LS-FUNCTION": "INIT",
+    "LS-PROCESS-DATE": "20240101",
+    "LS-SEQUENCE-TYPE": "PRC",
+    "LS-NEXT-PROCESS": "",
+    "LS-RETURN-CODE": "0"
+   },
+   "datasets": {
+    "PRCSEQ": {
+     "records": [
+      "1000000101BEFORE START POSITION         PRC",
+      "3000000101FIRST PRC PROCESS             PRC",
+      "3000000201REPORT PROCESS                RPT",
+      "3000000301SECOND PRC PROCESS            PRC"
+     ]
+    },
+    "BCHCTL": {
+     "records": [
+      "EXISTING202401010001D"
+     ]
+    }
+   },
+   "expect": {
+    "outcome": "GOBACK",
+    "items": {
+     "LS-RETURN-CODE": "0",
+     "LS-NEXT-PROCESS": "",
+     "LS-PROCESS-DATE": "20240101"
+    },
+    "datasets": {
+     "BCHCTL": [
+      "EXISTING202401010001D",
+      "30000001202401010001R                                \u0000\u0000        0000\u0000\u0000        0000\u0000\u0000        0000\u0000\u0000        0000\u0000\u0000        0000\u0000\u0000        0000\u0000\u0000        0000\u0000\u0000        0000\u0000\u0000        0000\u0000\u0000        0000\u0000\u0000\u0000\u0000                                                                                \u0000\u0000",
+      "30000003202401010002R                                \u0000\u0000        0000\u0000\u0000        0000\u0000\u0000        0000\u0000\u0000        0000\u0000\u0000        0000\u0000\u0000        0000\u0000\u0000        0000\u0000\u0000        0000\u0000\u0000        0000\u0000\u0000        0000\u0000\u0000\u0000\u0000                                                                                \u0000\u0000"
+     ]
+    }
+   }
+  },
+  {
+   "id": "Q02",
+   "title": "INIT, no record has the requested sequence type: the READ NEXT loop ends at status 10 with WS-PROCESS-COUNT 0, so 1300 writes nothing; the caller's LS-RETURN-CODE (+4) is returned unchanged",
+   "cobol_lines": [
+    162,
+    168,
+    169,
+    170,
+    171,
+    173,
+    189,
+    190,
+    90,
+    91
+   ],
+   "kind": "call",
+   "set": {
+    "LS-FUNCTION": "INIT",
+    "LS-PROCESS-DATE": "20240101",
+    "LS-SEQUENCE-TYPE": "TRM",
+    "LS-NEXT-PROCESS": "",
+    "LS-RETURN-CODE": "4"
+   },
+   "datasets": {
+    "PRCSEQ": {
+     "records": [
+      "1000000101BEFORE START POSITION         PRC",
+      "3000000101FIRST PRC PROCESS             PRC",
+      "3000000201REPORT PROCESS                RPT",
+      "3000000301SECOND PRC PROCESS            PRC"
+     ]
+    },
+    "BCHCTL": {
+     "records": [
+      "EXISTING202401010001D"
+     ]
+    }
+   },
+   "expect": {
+    "outcome": "GOBACK",
+    "items": {
+     "LS-RETURN-CODE": "4"
+    },
+    "datasets": {
+     "BCHCTL": [
+      "EXISTING202401010001D"
+     ]
+    }
+   }
+  },
+  {
+   "id": "Q03",
+   "title": "INIT, START finds no key >= '20240101  ' (alphabetic process IDs sort below digits in EBCDIC): INVALID KEY -> 9000-ERROR-ROUTINE sets LS-RETURN-CODE +8 and CALLs ERRPROC (not registered)",
+   "cobol_lines": [
+    160,
+    162,
+    163,
+    164,
+    165,
+    120,
+    121,
+    122
+   ],
+   "kind": "call",
+   "set": {
+    "LS-FUNCTION": "INIT",
+    "LS-PROCESS-DATE": "20240101",
+    "LS-SEQUENCE-TYPE": "PRC",
+    "LS-NEXT-PROCESS": "",
+    "LS-RETURN-CODE": "0"
+   },
+   "datasets": {
+    "PRCSEQ": {
+     "records": [
+      "INITDAY 01START OF DAY                  INI",
+      "POSUPD0001POSITION UPDATE               PRC"
+     ]
+    },
+    "BCHCTL": {
+     "records": [
+      "EXISTING202401010001D"
+     ]
+    }
+   },
+   "expect": {
+    "outcome": "BLOCKED RUNTIME-CALL-UNAVAILABLE"
+   }
+  },
+  {
+   "id": "Q04",
+   "title": "INIT with PRCSEQ not allocated: OPEN I-O gives status 35 -> 'Error opening sequence file' -> 9000-ERROR-ROUTINE -> CALL ERRPROC (not registered)",
+   "cobol_lines": [
+    142,
+    143,
+    144,
+    145,
+    122
+   ],
+   "kind": "call",
+   "set": {
+    "LS-FUNCTION": "INIT",
+    "LS-PROCESS-DATE": "20240101",
+    "LS-SEQUENCE-TYPE": "PRC",
+    "LS-NEXT-PROCESS": "",
+    "LS-RETURN-CODE": "0"
+   },
+   "datasets": {
+    "BCHCTL": {
+     "records": [
+      "EXISTING202401010001D"
+     ]
+    }
+   },
+   "expect": {
+    "outcome": "BLOCKED RUNTIME-CALL-UNAVAILABLE"
+   }
+  },
+  {
+   "id": "Q05",
+   "title": "unknown function code: WHEN OTHER -> 9000-ERROR-ROUTINE -> CALL ERRPROC (not registered)",
+   "cobol_lines": [
+    85,
+    86,
+    87,
+    120,
+    121,
+    122
+   ],
+   "kind": "call",
+   "set": {
+    "LS-FUNCTION": "BAD!",
+    "LS-PROCESS-DATE": "20240101",
+    "LS-SEQUENCE-TYPE": "PRC",
+    "LS-NEXT-PROCESS": "",
+    "LS-RETURN-CODE": "0"
+   },
+   "expect": {
+    "outcome": "BLOCKED RUNTIME-CALL-UNAVAILABLE"
+   }
+  },
+  {
+   "id": "R01",
+   "title": "BR-011 select the first READY process: CALL INIT builds two PRC entries (both READY 'R'), then NEXT: 2100 finds entry 1 READY at line 209 and moves '30000001' to LS-NEXT-PROCESS (EXIT PERFORM, so line 216 is false); 2200 then READs PROCESS-SEQ-FILE with key '30000001'+PSR-VERSION, and PSR-VERSION is '02' from the last record read by INIT (or undefined after AT END) - no such key exists either way, so INVALID KEY -> 9000-ERROR-ROUTINE -> CALL ERRPROC (not registered). The WS-SUB gap at line 230 is not reached.",
+   "cobol_lines": [
+    76,
+    79,
+    80,
+    95,
+    96,
+    97,
+    101,
+    102,
+    120,
+    121,
+    122,
+    142,
+    148,
+    156,
+    158,
+    160,
+    162,
+    168,
+    169,
+    173,
+    174,
+    181,
+    182,
+    183,
+    184,
+    185,
+    189,
+    190,
+    192,
+    193,
+    194,
+    195,
+    196,
+    198,
+    207,
+    208,
+    209,
+    210,
+    211,
+    212,
+    216,
+    222,
+    224,
+    225,
+    226,
+    227
+   ],
+   "kind": "call",
+   "calls": [
+    {
+     "set": {
+      "LS-FUNCTION": "INIT",
+      "LS-PROCESS-DATE": "20240101",
+      "LS-SEQUENCE-TYPE": "PRC",
+      "LS-NEXT-PROCESS": "",
+      "LS-RETURN-CODE": "0"
+     }
+    }
+   ],
+   "set": {
+    "LS-FUNCTION": "NEXT",
+    "LS-PROCESS-DATE": "20240101",
+    "LS-SEQUENCE-TYPE": "PRC",
+    "LS-NEXT-PROCESS": "",
+    "LS-RETURN-CODE": "0"
+   },
+   "datasets": {
+    "PRCSEQ": {
+     "records": [
+      "3000000101FIRST PRC PROCESS             PRC",
+      "3000000201SECOND PRC PROCESS            PRC",
+      "9000000102END REPORT                      RPT"
+     ]
+    },
+    "BCHCTL": {
+     "records": [
+      "EXISTING202401010001D"
+     ]
+    }
+   },
+   "expect": {
+    "outcome": "BLOCKED RUNTIME-CALL-UNAVAILABLE"
+   }
+  },
+  {
+   "id": "R02",
+   "title": "BR-012 sequence exhausted: CALL INIT with sequence type 'TRM' matches no record (WS-PROCESS-COUNT 0, no control record written), then NEXT: the 2100 loop ends at once with WS-SEQUENCE-IX 1 > 0, line 216 is true and LS-NEXT-PROCESS becomes SPACES; 2200 still READs PROCESS-SEQ-FILE with key SPACES+version -> INVALID KEY -> 'Process definition not found' -> 9000-ERROR-ROUTINE -> CALL ERRPROC (not registered). The WS-SUB gap at line 230 is not reached.",
+   "cobol_lines": [
+    76,
+    79,
+    80,
+    95,
+    96,
+    97,
+    101,
+    102,
+    120,
+    121,
+    122,
+    162,
+    168,
+    169,
+    170,
+    171,
+    173,
+    189,
+    190,
+    207,
+    208,
+    216,
+    217,
+    222,
+    224,
+    225,
+    226,
+    227
+   ],
+   "kind": "call",
+   "calls": [
+    {
+     "set": {
+      "LS-FUNCTION": "INIT",
+      "LS-PROCESS-DATE": "20240101",
+      "LS-SEQUENCE-TYPE": "TRM",
+      "LS-NEXT-PROCESS": "",
+      "LS-RETURN-CODE": "0"
+     }
+    }
+   ],
+   "set": {
+    "LS-FUNCTION": "NEXT",
+    "LS-PROCESS-DATE": "20240101",
+    "LS-SEQUENCE-TYPE": "TRM",
+    "LS-NEXT-PROCESS": "",
+    "LS-RETURN-CODE": "0"
+   },
+   "datasets": {
+    "PRCSEQ": {
+     "records": [
+      "3000000101FIRST PRC PROCESS             PRC",
+      "3000000201SECOND PRC PROCESS            PRC"
+     ]
+    },
+    "BCHCTL": {
+     "records": [
+      "EXISTING202401010001D"
+     ]
+    }
+   },
+   "expect": {
+    "outcome": "BLOCKED RUNTIME-CALL-UNAVAILABLE"
+   }
+  },
+  {
+   "id": "R03",
+   "title": "BR-017, BR-018, BR-019 STAT updates the sequence table and counts: CALL INIT (date 20240101) writes control records 30000001/0001 and 30000002/0002 (the record area keeps BCT-SEQUENCE-NO 0002 from the last WRITE); STAT with date 20240102 and process '30000002' READs key 30000002+20240102+0002 (pre-loaded, status 'A', return code 0); 3200 compares entry 1 (no match) then entry 2 at line 295 (match: status 'A', RC 0); 3300 counts entry 2 as active at line 312 and no entry as failed at line 316; LS-RETURN-CODE is not changed",
+   "cobol_lines": [
+    76,
+    81,
+    82,
+    90,
+    91,
+    95,
+    96,
+    97,
+    109,
+    110,
+    111,
+    142,
+    148,
+    156,
+    158,
+    160,
+    162,
+    168,
+    169,
+    173,
+    174,
+    181,
+    182,
+    183,
+    184,
+    185,
+    189,
+    190,
+    192,
+    193,
+    194,
+    195,
+    196,
+    198,
+    282,
+    283,
+    285,
+    293,
+    294,
+    295,
+    296,
+    297,
+    298,
+    299,
+    300,
+    306,
+    307,
+    309,
+    310,
+    312,
+    313,
+    316
+   ],
+   "kind": "call",
+   "calls": [
+    {
+     "set": {
+      "LS-FUNCTION": "INIT",
+      "LS-PROCESS-DATE": "20240101",
+      "LS-SEQUENCE-TYPE": "PRC",
+      "LS-NEXT-PROCESS": "",
+      "LS-RETURN-CODE": "0"
+     }
+    }
+   ],
+   "set": {
+    "LS-FUNCTION": "STAT",
+    "LS-PROCESS-DATE": "20240102",
+    "LS-SEQUENCE-TYPE": "PRC",
+    "LS-NEXT-PROCESS": "30000002",
+    "LS-RETURN-CODE": "0"
+   },
+   "datasets": {
+    "PRCSEQ": {
+     "records": [
+      "3000000101FIRST PRC PROCESS             PRC",
+      "3000000201SECOND PRC PROCESS            PRC"
+     ]
+    },
+    "BCHCTL": {
+     "records": [
+      "30000002202401020002A                                \u0000\u0000        0000\u0000\u0000        0000\u0000\u0000        0000\u0000\u0000        0000\u0000\u0000        0000\u0000\u0000        0000\u0000\u0000        0000\u0000\u0000        0000\u0000\u0000        0000\u0000\u0000        0000\u0000\u0000\u0000\u0000                                                                                \u0000\u0000                                                                                                      "
+     ]
+    }
+   },
+   "expect": {
+    "outcome": "GOBACK",
+    "return_code": 0,
+    "items": {
+     "LS-RETURN-CODE": "0",
+     "WS-PROCESS-COUNT": "2",
+     "WS-PROC-STATUS(1)": "R",
+     "WS-PROC-STATUS(2)": "A",
+     "WS-PROC-RC(2)": "0",
+     "WS-ACTIVE-COUNT": "1",
+     "WS-ERROR-COUNT": "0"
+    }
+   }
+  },
+  {
+   "id": "R04",
+   "title": "BR-018, BR-021 sequence still active gives return code 4: CALL INIT, CALL STAT (entry 2 becomes 'A' as in R03), then TERM: 4100 performs 3300 (1 active, 0 failed), line 325 is false and line 328 is true -> LS-RETURN-CODE = BCT-RC-WARNING (+4); 4200 closes both files (status 00, no error) and RETURN-CODE is 4",
+   "cobol_lines": [
+    76,
+    83,
+    84,
+    90,
+    91,
+    95,
+    96,
+    97,
+    115,
+    116,
+    142,
+    148,
+    156,
+    158,
+    160,
+    162,
+    168,
+    169,
+    173,
+    174,
+    181,
+    182,
+    183,
+    184,
+    185,
+    189,
+    190,
+    192,
+    193,
+    194,
+    195,
+    196,
+    198,
+    306,
+    309,
+    312,
+    313,
+    316,
+    323,
+    325,
+    328,
+    329,
+    337,
+    338,
+    340,
+    341
+   ],
+   "kind": "call",
+   "calls": [
+    {
+     "set": {
+      "LS-FUNCTION": "INIT",
+      "LS-PROCESS-DATE": "20240101",
+      "LS-SEQUENCE-TYPE": "PRC",
+      "LS-NEXT-PROCESS": "",
+      "LS-RETURN-CODE": "0"
+     }
+    },
+    {
+     "set": {
+      "LS-FUNCTION": "STAT",
+      "LS-PROCESS-DATE": "20240102",
+      "LS-SEQUENCE-TYPE": "PRC",
+      "LS-NEXT-PROCESS": "30000002",
+      "LS-RETURN-CODE": "0"
+     }
+    }
+   ],
+   "set": {
+    "LS-FUNCTION": "TERM",
+    "LS-PROCESS-DATE": "20240101",
+    "LS-SEQUENCE-TYPE": "PRC",
+    "LS-NEXT-PROCESS": "",
+    "LS-RETURN-CODE": "0"
+   },
+   "datasets": {
+    "PRCSEQ": {
+     "records": [
+      "3000000101FIRST PRC PROCESS             PRC",
+      "3000000201SECOND PRC PROCESS            PRC"
+     ]
+    },
+    "BCHCTL": {
+     "records": [
+      "30000002202401020002A                                \u0000\u0000        0000\u0000\u0000        0000\u0000\u0000        0000\u0000\u0000        0000\u0000\u0000        0000\u0000\u0000        0000\u0000\u0000        0000\u0000\u0000        0000\u0000\u0000        0000\u0000\u0000        0000\u0000\u0000\u0000\u0000                                                                                \u0000\u0000                                                                                                      "
+     ]
+    }
+   },
+   "expect": {
+    "outcome": "GOBACK",
+    "return_code": 4,
+    "items": {
+     "LS-RETURN-CODE": "4",
+     "WS-ACTIVE-COUNT": "1",
+     "WS-ERROR-COUNT": "0"
+    }
+   }
+  },
+  {
+   "id": "R05",
+   "title": "BR-019, BR-020 a failed process gives return code 8: CALL INIT, CALL STAT reading a pre-loaded control record with status 'E' (entry 2 becomes 'E'), then TERM: 3300 counts 1 failed at line 316, 0 active; line 325 is true -> LS-RETURN-CODE = BCT-RC-ERROR (+8); files close with status 00 and RETURN-CODE is 8",
+   "cobol_lines": [
+    76,
+    83,
+    84,
+    90,
+    91,
+    95,
+    96,
+    97,
+    115,
+    116,
+    142,
+    148,
+    156,
+    158,
+    160,
+    162,
+    168,
+    169,
+    173,
+    174,
+    181,
+    182,
+    183,
+    184,
+    185,
+    189,
+    190,
+    192,
+    193,
+    194,
+    195,
+    196,
+    198,
+    306,
+    309,
+    312,
+    316,
+    317,
+    323,
+    325,
+    326,
+    337,
+    338,
+    340,
+    341
+   ],
+   "kind": "call",
+   "calls": [
+    {
+     "set": {
+      "LS-FUNCTION": "INIT",
+      "LS-PROCESS-DATE": "20240101",
+      "LS-SEQUENCE-TYPE": "PRC",
+      "LS-NEXT-PROCESS": "",
+      "LS-RETURN-CODE": "0"
+     }
+    },
+    {
+     "set": {
+      "LS-FUNCTION": "STAT",
+      "LS-PROCESS-DATE": "20240102",
+      "LS-SEQUENCE-TYPE": "PRC",
+      "LS-NEXT-PROCESS": "30000002",
+      "LS-RETURN-CODE": "0"
+     }
+    }
+   ],
+   "set": {
+    "LS-FUNCTION": "TERM",
+    "LS-PROCESS-DATE": "20240101",
+    "LS-SEQUENCE-TYPE": "PRC",
+    "LS-NEXT-PROCESS": "",
+    "LS-RETURN-CODE": "0"
+   },
+   "datasets": {
+    "PRCSEQ": {
+     "records": [
+      "3000000101FIRST PRC PROCESS             PRC",
+      "3000000201SECOND PRC PROCESS            PRC"
+     ]
+    },
+    "BCHCTL": {
+     "records": [
+      "30000002202401020002E                                \u0000\u0000        0000\u0000\u0000        0000\u0000\u0000        0000\u0000\u0000        0000\u0000\u0000        0000\u0000\u0000        0000\u0000\u0000        0000\u0000\u0000        0000\u0000\u0000        0000\u0000\u0000        0000\u0000\u0000\u0000\u0000                                                                                \u0000\u0000                                                                                                      "
+     ]
+    }
+   },
+   "expect": {
+    "outcome": "GOBACK",
+    "return_code": 8,
+    "items": {
+     "LS-RETURN-CODE": "8",
+     "WS-ACTIVE-COUNT": "0",
+     "WS-ERROR-COUNT": "1"
+    }
+   }
+  },
+  {
+   "id": "R06",
+   "title": "BR-020, BR-021 both false: CALL INIT (both entries READY 'R'), then TERM directly with caller LS-RETURN-CODE +4: 3300 finds 0 active and 0 failed, lines 325 and 328 are false -> LS-RETURN-CODE = BCT-RC-SUCCESS (0) even though no process ever ran; files close with status 00",
+   "cobol_lines": [
+    76,
+    83,
+    84,
+    90,
+    91,
+    95,
+    96,
+    97,
+    115,
+    116,
+    142,
+    148,
+    156,
+    158,
+    160,
+    162,
+    168,
+    169,
+    173,
+    174,
+    181,
+    182,
+    183,
+    184,
+    185,
+    189,
+    190,
+    192,
+    193,
+    194,
+    195,
+    196,
+    198,
+    306,
+    309,
+    312,
+    316,
+    323,
+    325,
+    328,
+    331,
+    337,
+    338,
+    340,
+    341
+   ],
+   "kind": "call",
+   "calls": [
+    {
+     "set": {
+      "LS-FUNCTION": "INIT",
+      "LS-PROCESS-DATE": "20240101",
+      "LS-SEQUENCE-TYPE": "PRC",
+      "LS-NEXT-PROCESS": "",
+      "LS-RETURN-CODE": "0"
+     }
+    }
+   ],
+   "set": {
+    "LS-FUNCTION": "TERM",
+    "LS-PROCESS-DATE": "20240101",
+    "LS-SEQUENCE-TYPE": "PRC",
+    "LS-NEXT-PROCESS": "",
+    "LS-RETURN-CODE": "4"
+   },
+   "datasets": {
+    "PRCSEQ": {
+     "records": [
+      "3000000101FIRST PRC PROCESS             PRC",
+      "3000000201SECOND PRC PROCESS            PRC"
+     ]
+    },
+    "BCHCTL": {
+     "records": [
+      "EXISTING202401010001D"
+     ]
+    }
+   },
+   "expect": {
+    "outcome": "GOBACK",
+    "return_code": 0,
+    "items": {
+     "LS-RETURN-CODE": "0",
+     "WS-ACTIVE-COUNT": "0",
+     "WS-ERROR-COUNT": "0"
+    }
+   }
+  },
+  {
+   "id": "V01",
+   "title": "BR-011 first READY entry is selected: CALL INIT builds entries 30000001 and 30000002 (both READY 'R'); NEXT with a stale LS-NEXT-PROCESS 'OLDPROC1': line 209 is true for entry 1, LS-NEXT-PROCESS := '30000001' and EXIT PERFORM leaves WS-SEQUENCE-IX at 1, so line 216 is false and the found ID is kept. 2200 then READs PROCESS-SEQ-FILE with key LS-NEXT-PROCESS + PSR-VERSION; the only stored versions of the PRC processes are '05' and the last record read by INIT has version '02', so the key is not found -> INVALID KEY -> 'Process definition not found' -> 9000-ERROR-ROUTINE (LS-RETURN-CODE +8) -> CALL 'ERRPROC' (not registered); the WS-SUB gap at line 230 is not reached",
+   "cobol_lines": [
+    76,
+    77,
+    78,
+    79,
+    80,
+    95,
+    96,
+    97,
+    101,
+    102,
+    120,
+    121,
+    122,
+    142,
+    148,
+    156,
+    157,
+    158,
+    160,
+    162,
+    168,
+    169,
+    173,
+    174,
+    181,
+    182,
+    183,
+    184,
+    185,
+    189,
+    190,
+    192,
+    193,
+    194,
+    195,
+    196,
+    198,
+    207,
+    208,
+    209,
+    210,
+    211,
+    212,
+    216,
+    222,
+    224,
+    225,
+    226,
+    227
+   ],
+   "kind": "call",
+   "calls": [
+    {
+     "set": {
+      "LS-FUNCTION": "INIT",
+      "LS-PROCESS-DATE": "20240101",
+      "LS-SEQUENCE-TYPE": "PRC",
+      "LS-NEXT-PROCESS": "",
+      "LS-RETURN-CODE": "0"
+     }
+    }
+   ],
+   "set": {
+    "LS-FUNCTION": "NEXT",
+    "LS-PROCESS-DATE": "20240101",
+    "LS-SEQUENCE-TYPE": "PRC",
+    "LS-NEXT-PROCESS": "OLDPROC1",
+    "LS-RETURN-CODE": "0"
+   },
+   "datasets": {
+    "PRCSEQ": {
+     "records": [
+      "3000000105FIRST PRC PROCESS             PRC",
+      "3000000205SECOND PRC PROCESS            PRC",
+      "9000000102END REPORT                    RPT"
+     ]
+    },
+    "BCHCTL": {
+     "records": [
+      "30000001202401020002D                                \u0000\u0000        0000\u0000\u0000        0000\u0000\u0000        0000\u0000\u0000        0000\u0000\u0000        0000\u0000\u0000        0000\u0000\u0000        0000\u0000\u0000        0000\u0000\u0000        0000\u0000\u0000        0000\u0000\u0000\u0000\u0000                                                                                \u0000\u0000                                                                                                      "
+     ]
+    }
+   },
+   "expect": {
+    "outcome": "BLOCKED RUNTIME-CALL-UNAVAILABLE",
+    "items": {
+     "LS-NEXT-PROCESS": "30000001",
+     "WS-SEQUENCE-IX": "1",
+     "WS-PROCESS-COUNT": "2",
+     "WS-PROC-STATUS(1)": "R",
+     "ERR-TEXT": "Process definition not found",
+     "ERR-PROGRAM": "PRCSEQ00",
+     "LS-RETURN-CODE": "8"
+    }
+   }
+  },
+  {
+   "id": "V02",
+   "title": "BR-011 a non-READY entry is skipped: CALL INIT (entries 30000001, 30000002 READY; the record area keeps BCT-SEQUENCE-NO 0002 from the last WRITE, as in R03), CALL STAT for date 20240102 / process 30000001 READs the pre-loaded control record 30000001+20240102+0002 with status 'D', so entry 1 becomes 'D'; NEXT: line 209 is false for entry 1 and true for entry 2 -> LS-NEXT-PROCESS '30000002', WS-SEQUENCE-IX 2, line 216 false. 2200 then READs PROCESS-SEQ-FILE with key LS-NEXT-PROCESS + PSR-VERSION; the only stored versions of the PRC processes are '05' and the last record read by INIT has version '02', so the key is not found -> INVALID KEY -> 'Process definition not found' -> 9000-ERROR-ROUTINE (LS-RETURN-CODE +8) -> CALL 'ERRPROC' (not registered); the WS-SUB gap at line 230 is not reached",
+   "cobol_lines": [
+    76,
+    77,
+    78,
+    79,
+    80,
+    81,
+    82,
+    95,
+    96,
+    97,
+    101,
+    102,
+    109,
+    110,
+    111,
+    120,
+    121,
+    122,
+    142,
+    148,
+    156,
+    157,
+    158,
+    160,
+    162,
+    168,
+    169,
+    173,
+    174,
+    181,
+    182,
+    183,
+    184,
+    185,
+    189,
+    190,
+    192,
+    193,
+    194,
+    195,
+    196,
+    198,
+    207,
+    208,
+    209,
+    210,
+    211,
+    212,
+    216,
+    222,
+    224,
+    225,
+    226,
+    227,
+    282,
+    283,
+    285,
+    293,
+    294,
+    295,
+    296,
+    297,
+    298,
+    299,
+    300,
+    306,
+    309,
+    312,
+    316
+   ],
+   "kind": "call",
+   "calls": [
+    {
+     "set": {
+      "LS-FUNCTION": "INIT",
+      "LS-PROCESS-DATE": "20240101",
+      "LS-SEQUENCE-TYPE": "PRC",
+      "LS-NEXT-PROCESS": "",
+      "LS-RETURN-CODE": "0"
+     }
+    },
+    {
+     "set": {
+      "LS-FUNCTION": "STAT",
+      "LS-PROCESS-DATE": "20240102",
+      "LS-SEQUENCE-TYPE": "PRC",
+      "LS-NEXT-PROCESS": "30000001",
+      "LS-RETURN-CODE": "0"
+     }
+    }
+   ],
+   "set": {
+    "LS-FUNCTION": "NEXT",
+    "LS-PROCESS-DATE": "20240101",
+    "LS-SEQUENCE-TYPE": "PRC",
+    "LS-NEXT-PROCESS": "OLDPROC1",
+    "LS-RETURN-CODE": "0"
+   },
+   "datasets": {
+    "PRCSEQ": {
+     "records": [
+      "3000000105FIRST PRC PROCESS             PRC",
+      "3000000205SECOND PRC PROCESS            PRC",
+      "9000000102END REPORT                    RPT"
+     ]
+    },
+    "BCHCTL": {
+     "records": [
+      "30000001202401020002D                                \u0000\u0000        0000\u0000\u0000        0000\u0000\u0000        0000\u0000\u0000        0000\u0000\u0000        0000\u0000\u0000        0000\u0000\u0000        0000\u0000\u0000        0000\u0000\u0000        0000\u0000\u0000        0000\u0000\u0000\u0000\u0000                                                                                \u0000\u0000                                                                                                      "
+     ]
+    }
+   },
+   "expect": {
+    "outcome": "BLOCKED RUNTIME-CALL-UNAVAILABLE",
+    "items": {
+     "LS-NEXT-PROCESS": "30000002",
+     "WS-SEQUENCE-IX": "2",
+     "WS-PROC-STATUS(1)": "D",
+     "WS-PROC-STATUS(2)": "R",
+     "ERR-TEXT": "Process definition not found",
+     "ERR-PROGRAM": "PRCSEQ00",
+     "LS-RETURN-CODE": "8"
+    }
+   }
+  },
+  {
+   "id": "V03",
+   "title": "BR-012 sequence exhausted with a non-empty table: CALL INIT (2 READY entries), CALL STAT 30000001 (control record status 'D') and CALL STAT 30000002 (key 30000002+20240102+0002, BCT-SEQUENCE-NO kept in the record area from the previous READ, status 'E'); NEXT with a stale LS-NEXT-PROCESS 'OLDPROC1': line 209 is false for both entries, the loop ends with WS-SEQUENCE-IX 3 > WS-PROCESS-COUNT 2, line 216 is true and LS-NEXT-PROCESS becomes SPACES. 2200 then READs PROCESS-SEQ-FILE with key LS-NEXT-PROCESS + PSR-VERSION; the only stored versions of the PRC processes are '05' and the last record read by INIT has version '02', so the key is not found -> INVALID KEY -> 'Process definition not found' -> 9000-ERROR-ROUTINE (LS-RETURN-CODE +8) -> CALL 'ERRPROC' (not registered); the WS-SUB gap at line 230 is not reached",
+   "cobol_lines": [
+    76,
+    77,
+    78,
+    79,
+    80,
+    81,
+    82,
+    95,
+    96,
+    97,
+    101,
+    102,
+    109,
+    110,
+    111,
+    120,
+    121,
+    122,
+    142,
+    148,
+    156,
+    157,
+    158,
+    160,
+    162,
+    168,
+    169,
+    173,
+    174,
+    181,
+    182,
+    183,
+    184,
+    185,
+    189,
+    190,
+    192,
+    193,
+    194,
+    195,
+    196,
+    198,
+    207,
+    208,
+    209,
+    216,
+    217,
+    222,
+    224,
+    225,
+    226,
+    227,
+    282,
+    283,
+    285,
+    293,
+    294,
+    295,
+    296,
+    297,
+    298,
+    299,
+    300,
+    306,
+    309,
+    312,
+    316
+   ],
+   "kind": "call",
+   "calls": [
+    {
+     "set": {
+      "LS-FUNCTION": "INIT",
+      "LS-PROCESS-DATE": "20240101",
+      "LS-SEQUENCE-TYPE": "PRC",
+      "LS-NEXT-PROCESS": "",
+      "LS-RETURN-CODE": "0"
+     }
+    },
+    {
+     "set": {
+      "LS-FUNCTION": "STAT",
+      "LS-PROCESS-DATE": "20240102",
+      "LS-SEQUENCE-TYPE": "PRC",
+      "LS-NEXT-PROCESS": "30000001",
+      "LS-RETURN-CODE": "0"
+     }
+    },
+    {
+     "set": {
+      "LS-FUNCTION": "STAT",
+      "LS-PROCESS-DATE": "20240102",
+      "LS-SEQUENCE-TYPE": "PRC",
+      "LS-NEXT-PROCESS": "30000002",
+      "LS-RETURN-CODE": "0"
+     }
+    }
+   ],
+   "set": {
+    "LS-FUNCTION": "NEXT",
+    "LS-PROCESS-DATE": "20240101",
+    "LS-SEQUENCE-TYPE": "PRC",
+    "LS-NEXT-PROCESS": "OLDPROC1",
+    "LS-RETURN-CODE": "0"
+   },
+   "datasets": {
+    "PRCSEQ": {
+     "records": [
+      "3000000105FIRST PRC PROCESS             PRC",
+      "3000000205SECOND PRC PROCESS            PRC",
+      "9000000102END REPORT                    RPT"
+     ]
+    },
+    "BCHCTL": {
+     "records": [
+      "30000001202401020002D                                \u0000\u0000        0000\u0000\u0000        0000\u0000\u0000        0000\u0000\u0000        0000\u0000\u0000        0000\u0000\u0000        0000\u0000\u0000        0000\u0000\u0000        0000\u0000\u0000        0000\u0000\u0000        0000\u0000\u0000\u0000\u0000                                                                                \u0000\u0000                                                                                                      ",
+      "30000002202401020002E                                \u0000\u0000        0000\u0000\u0000        0000\u0000\u0000        0000\u0000\u0000        0000\u0000\u0000        0000\u0000\u0000        0000\u0000\u0000        0000\u0000\u0000        0000\u0000\u0000        0000\u0000\u0000        0000\u0000\u0000\u0000\u0000                                                                                \u0000\u0000                                                                                                      "
+     ]
+    }
+   },
+   "expect": {
+    "outcome": "BLOCKED RUNTIME-CALL-UNAVAILABLE",
+    "items": {
+     "LS-NEXT-PROCESS": "",
+     "WS-SEQUENCE-IX": "3",
+     "WS-PROC-STATUS(1)": "D",
+     "WS-PROC-STATUS(2)": "E",
+     "ERR-TEXT": "Process definition not found",
+     "ERR-PROGRAM": "PRCSEQ00",
+     "LS-RETURN-CODE": "8"
+    }
+   }
+  },
+  {
+   "id": "V04",
+   "title": "BR-012 empty sequence: CALL INIT with type 'TRM' matches no record (WS-PROCESS-COUNT 0); NEXT with a stale LS-NEXT-PROCESS 'OLDPROC1': the loop ends at once with WS-SEQUENCE-IX 1 > 0, line 216 is true and LS-NEXT-PROCESS is cleared to SPACES before 2200 READs key SPACES+version -> INVALID KEY -> 9000-ERROR-ROUTINE -> CALL 'ERRPROC' (not registered)",
+   "cobol_lines": [
+    76,
+    77,
+    78,
+    79,
+    80,
+    95,
+    96,
+    97,
+    101,
+    102,
+    120,
+    121,
+    122,
+    142,
+    148,
+    156,
+    157,
+    158,
+    160,
+    162,
+    168,
+    169,
+    170,
+    171,
+    173,
+    189,
+    190,
+    207,
+    208,
+    216,
+    217,
+    222,
+    224,
+    225,
+    226,
+    227
+   ],
+   "kind": "call",
+   "calls": [
+    {
+     "set": {
+      "LS-FUNCTION": "INIT",
+      "LS-PROCESS-DATE": "20240101",
+      "LS-SEQUENCE-TYPE": "TRM",
+      "LS-NEXT-PROCESS": "",
+      "LS-RETURN-CODE": "0"
+     }
+    }
+   ],
+   "set": {
+    "LS-FUNCTION": "NEXT",
+    "LS-PROCESS-DATE": "20240101",
+    "LS-SEQUENCE-TYPE": "TRM",
+    "LS-NEXT-PROCESS": "OLDPROC1",
+    "LS-RETURN-CODE": "0"
+   },
+   "datasets": {
+    "PRCSEQ": {
+     "records": [
+      "3000000105FIRST PRC PROCESS             PRC",
+      "3000000205SECOND PRC PROCESS            PRC",
+      "9000000102END REPORT                    RPT"
+     ]
+    },
+    "BCHCTL": {
+     "records": [
+      "EXISTING202401010001D"
+     ]
+    }
+   },
+   "expect": {
+    "outcome": "BLOCKED RUNTIME-CALL-UNAVAILABLE",
+    "items": {
+     "LS-NEXT-PROCESS": "",
+     "WS-SEQUENCE-IX": "1",
+     "WS-PROCESS-COUNT": "0",
+     "ERR-TEXT": "Process definition not found",
+     "ERR-PROGRAM": "PRCSEQ00",
+     "LS-RETURN-CODE": "8"
+    }
+   }
+  }
+ ]
+}

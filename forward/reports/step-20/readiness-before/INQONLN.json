@@ -1,0 +1,478 @@
+{
+  "gate": "SOURCE_READINESS",
+  "subject": "INQONLN",
+  "status": "FAIL",
+  "checks": [
+    {
+      "id": "source_available",
+      "ok": true,
+      "detail": "src/programs/online/INQONLN.cbl sha256 a05307ca63e1bc02e3765ac98b3b56c1063ea1751998c70697d933fcf9ce1963; 55 statement(s) in 12 paragraph(s)"
+    },
+    {
+      "id": "complete_program",
+      "ok": true,
+      "detail": "every paragraph contains statements"
+    },
+    {
+      "id": "copybooks_resolved",
+      "ok": true,
+      "detail": "all 3 include(s) resolved: INQCOM, ERRHND, INQCOM"
+    },
+    {
+      "id": "requirements_and_data_mapping_delivered",
+      "ok": true,
+      "detail": "F1/F2 deliveries accepted for POSREC, SQLCA, DB2REQ, ERRHND, INQCOM, CURSMGR, DB2ONLN, DB2RECV, ERRHNDL, INQHIST, INQONLN, INQPORT, SECMGR"
+    },
+    {
+      "id": "behaviour_classified",
+      "ok": true,
+      "detail": "2 behaviour(s): 0 VERIFIED_CANDIDATE, 2 PARTIAL, 0 GAP"
+    },
+    {
+      "id": "dependencies_identified",
+      "ok": false,
+      "detail": "closure UNRESOLVED for INQONLN:P100-PROCESS-REQUEST (line 56: EXEC CICS hands control and data to the transaction monitor)"
+    },
+    {
+      "id": "unsupported_documented",
+      "ok": true,
+      "detail": "2 gap(s) document every PARTIAL/GAP behaviour"
+    },
+    {
+      "id": "unknowns_documented",
+      "ok": true,
+      "detail": "35 open decision(s) record the remaining questions (18 blocking for approval); none is resolved or assumed here"
+    }
+  ],
+  "note": "An engineering gate: it states that the source is understood well enough to convert, with every unknown documented. It is not a G2 approval and does not authorise generation.",
+  "behaviours": [
+    {
+      "behaviour_id": "INQONLN:ENTRY-DISPATCH",
+      "kind": "dispatch",
+      "classification": "PARTIAL",
+      "lines": [
+        40,
+        51
+      ],
+      "inputs": [
+        "WS-END-OF-SESSION"
+      ],
+      "outputs": [],
+      "side_effects": [],
+      "unresolved": [],
+      "covered_by": []
+    },
+    {
+      "behaviour_id": "INQONLN:P100-PROCESS-REQUEST",
+      "kind": "performed_range",
+      "classification": "PARTIAL",
+      "lines": [
+        54,
+        167
+      ],
+      "inputs": [
+        "ERR-ACTION",
+        "ERR-MESSAGE",
+        "SEC-ERROR-INFO",
+        "SEC-RESPONSE-CODE",
+        "SEC-USER-ID",
+        "WS-COMMAREA",
+        "WS-ERROR-AREA",
+        "WS-RESPONSE-CODE",
+        "WS-SECURITY-REQUEST"
+      ],
+      "outputs": [
+        "ERR-CICS-RESP",
+        "ERR-CICS-RESP2",
+        "ERR-PARAGRAPH",
+        "ERR-PROGRAM",
+        "ERR-SEVERITY",
+        "SEC-ACCESS-TYPE",
+        "SEC-REQUEST-TYPE",
+        "SEC-RESOURCE-NAME",
+        "WS-COMMAREA",
+        "WS-END-OF-SESSION",
+        "WS-ERROR-MESSAGE"
+      ],
+      "side_effects": [],
+      "unresolved": [
+        "WS-COMMAREA-FUNCTION",
+        "WS-ERROR-MESSAGE"
+      ],
+      "covered_by": [
+        "REQ-INQONLN-001",
+        "REQ-INQONLN-002"
+      ]
+    }
+  ],
+  "gaps": [
+    {
+      "gap_id": "GAP-INQONLN-P100-PROCESS-REQUEST-WS-COMMAREA-FUNCTION",
+      "kind": "UNDECLARED_NAME_SEMANTICS",
+      "behaviour_id": "INQONLN:P100-PROCESS-REQUEST",
+      "source": {
+        "path": "src/programs/online/INQONLN.cbl",
+        "sha256": "a05307ca63e1bc02e3765ac98b3b56c1063ea1751998c70697d933fcf9ce1963",
+        "lines": [
+          62,
+          63,
+          64,
+          66,
+          67,
+          69,
+          70,
+          72,
+          73,
+          74,
+          75
+        ],
+        "statements": [
+          {
+            "line": 62,
+            "text": "EVALUATE WS-COMMAREA-FUNCTION"
+          },
+          {
+            "line": 63,
+            "text": "WHEN 'MENU'"
+          },
+          {
+            "line": 64,
+            "text": "PERFORM P200-DISPLAY-MENU THRU P200-EXIT"
+          },
+          {
+            "line": 66,
+            "text": "WHEN 'INQP'"
+          },
+          {
+            "line": 67,
+            "text": "PERFORM P300-PORTFOLIO-INQUIRY THRU P300-EXIT"
+          },
+          {
+            "line": 69,
+            "text": "WHEN 'INQH'"
+          },
+          {
+            "line": 70,
+            "text": "PERFORM P400-HISTORY-INQUIRY THRU P400-EXIT"
+          },
+          {
+            "line": 72,
+            "text": "WHEN 'EXIT'"
+          },
+          {
+            "line": 73,
+            "text": "SET SESSION-TERMINATED TO TRUE"
+          },
+          {
+            "line": 74,
+            "text": "WHEN OTHER"
+          },
+          {
+            "line": 75,
+            "text": "PERFORM P900-ERROR-ROUTINE THRU P900-EXIT"
+          }
+        ]
+      },
+      "missing_fact": "WS-COMMAREA-FUNCTION is used but declared nowhere in the repository; its layout and value meanings are the subject of DR-INQONLN-001 (missing: a declaration of WS-COMMAREA-FUNCTION; a declaration of WS-ERROR-MESSAGE)",
+      "why_unsafe": "the outputs of these statements (WS-END-OF-SESSION) depend on a value whose meaning is not established; any Java mapping would invent it",
+      "affected_requirements": [
+        "REQ-INQONLN-001",
+        "REQ-INQONLN-002"
+      ],
+      "affected_java_component": "outcome mapping of behaviour P100-PROCESS-REQUEST (behind a port whose only implementation throws until the gap is resolved)",
+      "required_action": [
+        "DR-INQONLN-001: a signed resolution by business_sme"
+      ],
+      "validation_evidence": "the real definition of WS-COMMAREA-FUNCTION for the target runtime and a captured legacy run showing each outcome branch",
+      "blocks_execution_path": "request its PERFORM -> P100-PROCESS-REQUEST: statements 62, 63, 64, 66, 67, 69, 70, 72, 73, 74, 75",
+      "blocking": true,
+      "status": "OPEN"
+    },
+    {
+      "gap_id": "GAP-INQONLN-P100-PROCESS-REQUEST-WS-ERROR-MESSAGE",
+      "kind": "UNDECLARED_NAME_SEMANTICS",
+      "behaviour_id": "INQONLN:P100-PROCESS-REQUEST",
+      "source": {
+        "path": "src/programs/online/INQONLN.cbl",
+        "sha256": "a05307ca63e1bc02e3765ac98b3b56c1063ea1751998c70697d933fcf9ce1963",
+        "lines": [
+          83,
+          135
+        ],
+        "statements": [
+          {
+            "line": 83,
+            "text": "MOVE SEC-ERROR-INFO TO WS-ERROR-MESSAGE"
+          },
+          {
+            "line": 135,
+            "text": "MOVE ERR-MESSAGE TO WS-ERROR-MESSAGE."
+          }
+        ]
+      },
+      "missing_fact": "WS-ERROR-MESSAGE is used but declared nowhere in the repository; its layout and value meanings are the subject of DR-INQONLN-001 (missing: a declaration of WS-COMMAREA-FUNCTION; a declaration of WS-ERROR-MESSAGE)",
+      "why_unsafe": "the outputs of these statements (WS-ERROR-MESSAGE) depend on a value whose meaning is not established; any Java mapping would invent it",
+      "affected_requirements": [
+        "REQ-INQONLN-001",
+        "REQ-INQONLN-002"
+      ],
+      "affected_java_component": "outcome mapping of behaviour P100-PROCESS-REQUEST (behind a port whose only implementation throws until the gap is resolved)",
+      "required_action": [
+        "DR-INQONLN-001: a signed resolution by business_sme"
+      ],
+      "validation_evidence": "the real definition of WS-ERROR-MESSAGE for the target runtime and a captured legacy run showing each outcome branch",
+      "blocks_execution_path": "request its PERFORM -> P100-PROCESS-REQUEST: statements 83, 135",
+      "blocking": true,
+      "status": "OPEN"
+    }
+  ],
+  "closures": [
+    {
+      "behaviour_id": "INQONLN:P100-PROCESS-REQUEST",
+      "status": "UNRESOLVED",
+      "unresolved_reasons": [
+        "line 56: EXEC CICS hands control and data to the transaction monitor",
+        "line 87: EXEC CICS hands control and data to the transaction monitor",
+        "line 93: EXEC CICS hands control and data to the transaction monitor",
+        "line 102: EXEC CICS hands control and data to the transaction monitor",
+        "line 111: EXEC CICS hands control and data to the transaction monitor",
+        "line 126: EXEC CICS hands control and data to the transaction monitor",
+        "line 132: EXEC CICS hands control and data to the transaction monitor",
+        "line 142: EXEC CICS hands control and data to the transaction monitor",
+        "line 146: EXEC CICS hands control and data to the transaction monitor",
+        "line 156: EXEC CICS hands control and data to the transaction monitor",
+        "line 164: EXEC CICS hands control and data to the transaction monitor",
+        "line 56: MAP is neither declared, a keyword, a paragraph nor the subject of a blocking decision (unknown dependency)",
+        "line 56: RESP is neither declared, a keyword, a paragraph nor the subject of a blocking decision (unknown dependency)",
+        "line 93: MAP is neither declared, a keyword, a paragraph nor the subject of a blocking decision (unknown dependency)",
+        "line 93: RESP is neither declared, a keyword, a paragraph nor the subject of a blocking decision (unknown dependency)",
+        "line 102: LINK is neither declared, a keyword, a paragraph nor the subject of a blocking decision (unknown dependency)",
+        "line 102: RESP is neither declared, a keyword, a paragraph nor the subject of a blocking decision (unknown dependency)",
+        "line 111: LINK is neither declared, a keyword, a paragraph nor the subject of a blocking decision (unknown dependency)",
+        "line 111: RESP is neither declared, a keyword, a paragraph nor the subject of a blocking decision (unknown dependency)",
+        "line 122: EIBRESP is neither declared, a keyword, a paragraph nor the subject of a blocking decision (unknown dependency)",
+        "line 123: EIBRESP2 is neither declared, a keyword, a paragraph nor the subject of a blocking decision (unknown dependency)",
+        "line 126: LINK is neither declared, a keyword, a paragraph nor the subject of a blocking decision (unknown dependency)",
+        "line 142: ASSIGN is neither declared, a keyword, a paragraph nor the subject of a blocking decision (unknown dependency)",
+        "line 142: USERID is neither declared, a keyword, a paragraph nor the subject of a blocking decision (unknown dependency)",
+        "line 146: LINK is neither declared, a keyword, a paragraph nor the subject of a blocking decision (unknown dependency)",
+        "line 156: LINK is neither declared, a keyword, a paragraph nor the subject of a blocking decision (unknown dependency)",
+        "line 164: LINK is neither declared, a keyword, a paragraph nor the subject of a blocking decision (unknown dependency)"
+      ],
+      "units": [
+        "INQONLN",
+        "ERRHND"
+      ],
+      "external": [],
+      "undeclared": [
+        "WS-COMMAREA-FUNCTION",
+        "WS-ERROR-MESSAGE"
+      ],
+      "sha256": "2efc86cc73c598c2fb55429d9ba6ad45ca8ef80e6f239e6137ef5790ac308527"
+    }
+  ],
+  "open_decisions": [
+    {
+      "id": "DR-CURSMGR-001",
+      "blocking": true,
+      "question": "The CURSMGR source is truncated after line 91: 'F' performs P300-FETCH-DATA THRU P300-EXIT (line 52) and 'C' performs P400-CLOSE-CURSOR THRU P400-EXIT (line 55), neither of which exists. Can the complete CURSMGR source be obtained, and what are the fetch and close behaviours (rows returned, end-of-data and response codes)?"
+    },
+    {
+      "id": "DR-DB2ERR-001",
+      "blocking": true,
+      "question": "Copybook SQLCA (FIL-0017) includes itself ('EXEC SQL INCLUDE SQLCA' at line 6) and defines only SQL-STATUS-CODES, with no SQLCODE or SQLERRMC field; SQLCODE/SQLERRMC therefore have no Field ID in the 14 DB2 programs. Which SQLCA layout does the precompiler supply, and may the modern design assume the standard DB2 SQLCODE/SQLERRMC meaning (assumption ASM-004)?"
+    },
+    {
+      "id": "DR-DB2ONLN-001",
+      "blocking": false,
+      "question": "The 100-connection ceiling is checked against WS-ACTIVE-CONNECTIONS in DB2ONLN working storage; whether that count persists across CICS invocations cannot be determined from the code. Should the modern system enforce the limit per process instance, per region, or globally?"
+    },
+    {
+      "id": "DR-DB2ONLN-002",
+      "blocking": false,
+      "question": "In the status request, an unconditional MOVE WS-ACTIVE-CONNECTIONS TO DB2-RESPONSE-CODE (line 117) overwrites the 0 / -1 result of the SQLCODE check, so a failed status query may be reported as a positive connection count. Should the status response report the query outcome, the connection count, or both in separate fields?"
+    },
+    {
+      "id": "DR-DB2ONLN-003",
+      "blocking": false,
+      "question": "The connection-token STRING (line 85) uses DB2-CONNECTION-TOKEN as both sending and receiving item (undefined result), and DB2ONLN's PERFORM ... THRU ranges are nested three levels deep. What is the intended connection-token format, and can the THRU ranges be treated as simple paragraph calls?"
+    },
+    {
+      "id": "DR-DB2RECV-001",
+      "blocking": true,
+      "question": "The cursor branch of the DB2 recovery routing tests the unqualified name RECV-CURSOR (lines 56, 128), which matches both an 88-level under RECV-REQUEST-TYPE and a 10-level field under RECV-ERROR-INFO (candidates FLD-000008, FLD-000013, evidence only); the narrative suggests request type 'R'. Which request value triggers cursor recovery, and what should an unrecognised request type return (the EVALUATE has no WHEN OTHER and returns with status unchanged)?"
+    },
+    {
+      "id": "DR-DB2RECV-002",
+      "blocking": true,
+      "question": "In P110-ATTEMPT-RECONNECT, DB2RECV refers to DB2-REQUEST-TYPE (line 86), DB2-RESPONSE-CODE (line 93) and DB2-SQLCODE (line 98) 'OF WS-DB2-REQUEST', but WS-DB2-REQUEST holds COPY DB2REQ whose items belong to its own 01 record, so the qualifications do not resolve (candidates FIL-0018-FLD-000001/000005/000008, evidence only). Which fields are intended for the reconnect request and response?"
+    },
+    {
+      "id": "DR-DB2RECV-003",
+      "blocking": true,
+      "question": "BR-152 (deferred, low confidence): the shared copybook DB2REQ declares request types connect 'C', disconnect 'D' and status 'S' (same values as DB2ONLN's own declaration, BR-059), but no in-scope program tests it; DB2RECV only moves 'C' into it through an unresolved qualification. Is DB2REQ the intended interface contract between DB2RECV and DB2ONLN, or is it obsolete?"
+    },
+    {
+      "id": "DR-ERRHNDL-001",
+      "blocking": true,
+      "question": "When no trace ID is supplied, ERRHNDL executes 'MOVE FUNCTION RANDOM TO ERR-TRACE-ID' (numeric RANDOM into an alphanumeric field), and the message STRING uses ERR-MESSAGE as both source and receiver. What trace-ID format and what formatted message ('Error in <program> - <message> (<trace id>)') are intended?"
+    },
+    {
+      "id": "DR-ERRHNDL-002",
+      "blocking": true,
+      "question": "ERRHNDL copies ERRHND into both WS-ERROR-AREA (line 16) and DFHCOMMAREA (line 35) and uses 14 ERR-* names unqualified (including ERR-SEVERITY, ERR-TRACE-ID, ERR-ABEND, ERR-CONTINUE, ERR-RETURN). Which copy does each reference address, and therefore which severity is tested and which action is returned to callers such as DB2RECV and INQONLN?"
+    },
+    {
+      "id": "DR-ERRHNDL-003",
+      "blocking": false,
+      "question": "ERRHNDL invokes its four steps with PERFORM ... THRU ranges (lines 38, 41, 44, 47) and its PROGRAM-ID was found only through the file name (free-format source). Can the THRU ranges be treated as single-paragraph calls and is ERRHNDL the correct program identity?"
+    },
+    {
+      "id": "DR-F2-0011-001",
+      "blocking": true,
+      "question": "Copybook SQLCA (SYS-PORTFOLIO-001-FIL-0017) line 6 contains 'EXEC SQL INCLUDE SQLCA END-EXEC', naming itself. The included SQL communication area (SQLCODE, SQLSTATE, SQLERRMC, ...) has no layout in any reverse artifact. How should the forward design obtain the SQLCA layout and the SQLCODE/SQLSTATE semantics used by the 14 DB2 programs?"
+    },
+    {
+      "id": "DR-F2-0011-003",
+      "blocking": false,
+      "question": "Which TRUNC compiler option (STD, OPT or BIN) was used for programs including these copybooks? It decides whether S9(4)/S9(8)/S9(9) COMP fields are truncated to their PIC digits or to the binary halfword/fullword range on store."
+    },
+    {
+      "id": "DR-F2-P0006-001",
+      "blocking": true,
+      "question": "INQPORT line 21 includes SQLPOS (EXEC SQL INCLUDE SQLPOS END-EXEC) inside 01 WS-DB2-POSITION, but SQLPOS is not in the repository or copybook registry. Can the SQLPOS member (likely a DCLGEN of a positions table) be supplied, or should WS-DB2-POSITION be declared unused and dropped?"
+    },
+    {
+      "id": "DR-F2-P0006-002",
+      "blocking": false,
+      "question": "The project SQLCA copybook (SYS-PORTFOLIO-001-FIL-0017) includes itself and declares only SQL-STATUS-CODES, while eight packet programs test SQLCODE (and DB2ONLN SQLERRMC), which only the DB2 precompiler's SQLCA supplies. Should the Java design treat SQL status as coming from the SQL driver (SQLException/SQLState) and ignore the project SQLCA content, or must the 35-byte WS-DB2-AREA content be reproduced?"
+    },
+    {
+      "id": "DR-F2-P0006-006",
+      "blocking": true,
+      "question": "INQPORT reads POSFILE with RIDFLD(POSITION-ACCOUNT OF WS-POSITION-RECORD) after MOVE WS-COMMAREA-ACCOUNT-NO, but neither name is declared (POSREC and INQCOM declare other names, e.g. INQCOM-ACCOUNT-NO). Which POSREC field is the POSFILE key and which INQCOM field supplies it?"
+    },
+    {
+      "id": "DR-F2-P0006-007",
+      "blocking": false,
+      "question": "Copybooks whose own record is level 01 (INQCOM, DB2REQ) are copied under program 01 groups (WS-COMMAREA, WS-DB2-REQUEST), so qualified references such as INQCOM-ERROR-MSG OF WS-COMMAREA and DB2-SQLCODE OF WS-DB2-REQUEST do not resolve. Should the Java model treat the holder 01 and the copybook 01 as the same storage (alias) or keep them separate?"
+    },
+    {
+      "id": "DR-F2-P0006-008",
+      "blocking": false,
+      "question": "Three ambiguous data references need a naming decision: RECV-CURSOR in DB2RECV is both an 88-level and an X(18) field; ERRHND is copied twice into ERRHNDL so ERR-* names exist in WORKING-STORAGE and the COMMAREA; PORT-RECORD is declared under both FDs of PORTADD. Which storage does each unqualified reference address?"
+    },
+    {
+      "id": "DR-F2-P0006-010",
+      "blocking": true,
+      "question": "CURSMGR's fetch ('F') and close ('C') requests PERFORM P300-FETCH-DATA THRU P300-EXIT and P400-CLOSE-CURSOR THRU P400-EXIT, which are missing from the truncated source (ends at line 91). Can the complete CURSMGR source be supplied, or should fetch/close be specified from INQHIST's usage?"
+    },
+    {
+      "id": "DR-F2-P0006-011",
+      "blocking": false,
+      "question": "INQHIST P150-DB2-CONNECT PERFORMs its own range after a successful DB2RECV recovery (recursive PERFORM, undefined in standard COBOL, no retry limit). What retry policy should replace it?"
+    },
+    {
+      "id": "DR-F2-P0006-012",
+      "blocking": false,
+      "question": "INQHIST, INQONLN and INQPORT register EXEC CICS HANDLE CONDITION targets (ERROR, PGMIDERR, NOTFND) that transfer control only at run time (INQHIST's P999 falls off the end without CICS RETURN). How should these implicit transfers map to Java exception handling, and should the missing RETURN be treated as a defect?"
+    },
+    {
+      "id": "DR-F2-PKT0010-002",
+      "blocking": false,
+      "question": "Which character encoding (code page) do the files and areas described by these copybooks use for DISPLAY data on the legacy platform (EBCDIC 037, 1140, another EBCDIC variant, or ASCII)? The zoned-decimal test vectors and String codecs depend on it."
+    },
+    {
+      "id": "DR-INQHIST-001",
+      "blocking": true,
+      "question": "When DB2 recovery succeeds, INQHIST performs P150-DB2-CONNECT THRU P150-EXIT again from inside the same range (line 114): a recursive PERFORM with undefined behaviour and no retry limit. When recovery fails, P999-ERROR-ROUTINE returns and processing continues (line 119), so a history screen may still be sent. What should happen after a successful recovery (retry once, bounded retries, give up), and should the inquiry end after a failed recovery?"
+    },
+    {
+      "id": "DR-INQHIST-002",
+      "blocking": true,
+      "question": "INQHIST refers to INQCOM-ERROR-MSG OF WS-COMMAREA (line 118) and INQCOM-RESPONSE-CODE OF WS-COMMAREA (line 190); WS-COMMAREA holds COPY INQCOM, which starts with its own 01 INQCOM-AREA, so the qualifications do not resolve (candidates FIL-0020-FLD-000008/000007, evidence only). Which commarea fields carry the error message and response code back to the inquiry dialogue?"
+    },
+    {
+      "id": "DR-INQHIST-003",
+      "blocking": true,
+      "question": "INQHIST moves the DB2 connection token to WS-DB2-TOKEN (line 125), which is declared nowhere, and never places the account number in the cursor request. How is the connection token carried to the cursor manager, and which account selects the history rows?"
+    },
+    {
+      "id": "DR-INQHIST-004",
+      "blocking": false,
+      "question": "EXEC CICS HANDLE CONDITION ERROR (line 86) registers a run-time transfer to P999-ERROR-ROUTINE; if taken, execution falls through P999-EXIT to the end of the procedure with no CICS RETURN coded. What termination is intended after a CICS error in the history inquiry?"
+    },
+    {
+      "id": "DR-INQONLN-001",
+      "blocking": true,
+      "question": "INQONLN dispatches on WS-COMMAREA-FUNCTION ('MENU', 'INQP', 'INQH', 'EXIT', other; line 62) and moves error texts to WS-ERROR-MESSAGE (lines 84, 135); neither is declared (INQCOM declares INQCOM-FUNCTION, whose 88-levels match the values only by value). Confirm the function-code field and values and the error-message field, and confirm that a non-zero security response must end the session."
+    },
+    {
+      "id": "DR-INQONLN-002",
+      "blocking": false,
+      "question": "INQONLN registers P900-ERROR-ROUTINE for the CICS ERROR, PGMIDERR and NOTFND conditions (line 40) and all 7 PERFORMs use THRU ranges. Which dialogue step should be abandoned, and what should the user see, when one of these conditions is raised at run time?"
+    },
+    {
+      "id": "DR-INQPORT-001",
+      "blocking": true,
+      "question": "INQPORT includes SQLPOS (EXEC SQL INCLUDE, line 21), but no SQLPOS member exists in the repository (possibly an external DCLGEN member); WS-DB2-POSITION therefore has no registered content. Can the SQLPOS member be located and added so the position host-variable layout is known?"
+    },
+    {
+      "id": "DR-INQPORT-002",
+      "blocking": true,
+      "question": "INQPORT reads POSFILE using WS-COMMAREA-ACCOUNT-NO and POSITION-ACCOUNT OF WS-POSITION-RECORD (STMT-000009, STMT-000010), neither declared (INQCOM declares INQCOM-ACCOUNT-NO; POSREC has no POSITION-ACCOUNT), and returns 'Position not found for account' and error codes through INQCOM-* OF WS-COMMAREA, which do not resolve. Which key identifies the position, and which commarea fields carry the message and response code?"
+    },
+    {
+      "id": "DR-INQPORT-003",
+      "blocking": false,
+      "question": "INQPORT registers ERROR -> P999-ERROR-ROUTINE and NOTFND -> P900-NOT-FOUND (line 61); the 'Error accessing position data' path is reachable only through this run-time handler, and four PERFORM ... THRU statements (lines 41, 44, 48, 51) are unstructured. Should the modern design keep this error path with explicit response checks?"
+    },
+    {
+      "id": "DR-SECMGR-001",
+      "blocking": true,
+      "question": "The authorisation check selects COUNT(*) FROM AUTHFILE INTO :WS-DB2-AREA (line 79), the group that holds the SQLCA copy, and grants access when 'WS-DB2-AREA > 0' (line 90) as a group (alphanumeric) comparison. Confirm the intended rule: grant access (response 0) only when at least one AUTHFILE row exists for user, resource and access type, otherwise deny (response 8)?"
+    },
+    {
+      "id": "DR-SECMGR-002",
+      "blocking": false,
+      "question": "SECMGR invokes its three request handlers with PERFORM ... THRU ranges and its EVALUATE has no WHEN OTHER, so an unrecognised request type leaves the response code unchanged. Should an unrecognised security request type return an explicit error in the modern design?"
+    },
+    {
+      "id": "RVW-GAP-092",
+      "blocking": false,
+      "question": "GAP-092 (medium, DIAGRAM_RENDER_UNVERIFIED) is not addressed by any decision or requirement: Visual rendering of the 65 Mermaid diagrams is unverified. Acknowledge it as a known limitation (resolved_no_change) or exclude the affected units?"
+    },
+    {
+      "id": "RVW-GAP-104",
+      "blocking": false,
+      "question": "GAP-104 (low, DIAGRAM_INCOMPLETE) is not addressed by any decision or requirement: COMP-UNRESOLVED: all seven edges are unsupported. Acknowledge it as a known limitation (resolved_no_change) or exclude the affected units?"
+    }
+  ],
+  "authorisation": {
+    "generation_authorized": false,
+    "blockers": [
+      "config generation.java_generation_allowed is false (project authority)",
+      "no authorised orchestrator.java_target_dir",
+      "G4 is BLOCKED (needs signed G2, G3 and G4 approvals by trusted signers)",
+      "trust store: TRUST_NOT_CONFIGURED"
+    ],
+    "gates": {
+      "G0": "PASS",
+      "G1": "PASS",
+      "G2": "UNVERIFIED",
+      "G3": "BLOCKED",
+      "G4": "BLOCKED",
+      "G5": "BLOCKED",
+      "G6": "BLOCKED",
+      "G7": "BLOCKED",
+      "G8": "BLOCKED"
+    },
+    "trust": "TRUST_NOT_CONFIGURED",
+    "program_g2_scope": {
+      "readiness": "NOT_READY",
+      "blocking": 82,
+      "scope_sha256": "9a0b4de94e36763d554ccfe601b9332ed4d27712a739febd6ac3d4350dec7a6b"
+    },
+    "note": "Engineering gates never authorise generation. Java may be generated only when generation_authorized is true."
+  }
+}

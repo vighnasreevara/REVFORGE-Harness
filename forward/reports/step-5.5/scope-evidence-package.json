@@ -1,0 +1,1017 @@
+{
+  "contract": "scope-evidence-package",
+  "contract_version": "1.0",
+  "generated_at": "2026-11-01T00:14:35.047Z",
+  "status": "PREPARED_FOR_HUMAN_REVIEW (not approved)",
+  "manifest": {
+    "scope": "programs:RTNCDE00",
+    "selector": {
+      "kind": "programs",
+      "programs": [
+        "RTNCDE00"
+      ]
+    },
+    "scope_sha256": "88d8562c1b30170f33446a43303d54d47fd102ec25c3d79249749d6dfd126f13",
+    "readiness": "NOT_READY",
+    "policy_sha256": "7be1985303355ed2160e8d972fa332ac6b9844192b116056e42df604e63a3ecc"
+  },
+  "baseline": {
+    "run_id": "FWD-20261031T172520Z-66b3",
+    "manifest_sha256": "352b97f0bbcbdb149c1118791aaabaa2e8e9972716bc77adc3a2f0644d24a068",
+    "reverse_inputs": {
+      "inventory": "c5564d2d32880b5abc08116d176cf17a404a1753e96ebb15964db0caebeb711f",
+      "parser": "2bfddd0ef6db5dcb3fa415ee9cc657bfae0cbd649aac270ee664cf0fd928852a",
+      "data": "de68802e48d6ab8ad727f83ee65a9a9600c78deace47378a731c603a9e78090a",
+      "logic": "aa40ca2bf42a7d57027633d08d9bd4c533324e7005b0faa52f3ed6831b370419",
+      "rules": "b7ca9ee04731e882e2ed7bfd397ae45e0edafae64b6f646c2ebfac19470e8fb6",
+      "diagrams": "bde93ef6400a731726e1c214a363d708ac7bcaeb26f53be9047f37c77d09660e",
+      "gaps": "243313d9cc30b5aa0572d453a06c339b59142241fdc3d4d235a0842e92f4c64b",
+      "brd": "4ae6432985eb5a308d535a691cb991b44b4acfc7fdea1f181fdb605b5cdfa992",
+      "classified_conditions": "c1c8aa9eaa7c78729919cdf874f449a5cec54901533ca54afbd1d409918d4b5f",
+      "brd_summary": "25aa5a42f83f93eb688e8a22886f9f347404f6e6557274f1f22467dcfbc14204",
+      "gaps_markdown": "a6a0135f0fd095b0b3a6bccaeda88d4e3bf7dd0a09e8f4cfe7bda649930efd3c"
+    },
+    "per_program": {
+      "logic": "ffc2566e078f4b00cc5d240b81b74a639a7ad68061c2d3c4ec57da1baf53da74",
+      "raw_structure": "44002207e9d8af1aa1d08d06eca24a64cd97b9d26235ace2ba3e05073ca583f9"
+    },
+    "rules_source_run": "rules@5_rules@1.0#b7ca9ee04731",
+    "gaps_source_run": "gaps@7_synthesis@1.0#243313d9cc30"
+  },
+  "units": [
+    {
+      "name": "RTNCODE",
+      "file_id": "SYS-PORTFOLIO-001-FIL-0013",
+      "unit_kind": "copybook",
+      "role": "dependency",
+      "source_sha256": "27eabb519319258b07b32f09ab60e80a18f6658a118e96c8fa01411fc473cbc9",
+      "classification": null,
+      "source_path": "src/copybook/common/RTNCODE.cpy"
+    },
+    {
+      "name": "SQLCA",
+      "file_id": "SYS-PORTFOLIO-001-FIL-0017",
+      "unit_kind": "copybook",
+      "role": "dependency",
+      "source_sha256": "03e8f64ae705fe87324100488072c05d179fb75f64db0dc0cf753f23ab10afc7",
+      "classification": null,
+      "source_path": "src/copybook/db2/SQLCA.cpy"
+    },
+    {
+      "name": "RTNCDE00",
+      "file_id": "SYS-PORTFOLIO-001-FIL-0052",
+      "unit_kind": "program",
+      "role": "primary",
+      "source_sha256": "7cb951ea1f418c19ddd61c0eca00f21108af5f364b5ecf05742cbc428862994e",
+      "classification": "application (inferred) candidate",
+      "source_path": "src/programs/batch/RTNCDE00.cbl"
+    }
+  ],
+  "dependency_closure": {
+    "primary": [
+      "RTNCDE00"
+    ],
+    "dependencies": [
+      {
+        "name": "RTNCODE",
+        "unit_kind": "copybook",
+        "file_id": "SYS-PORTFOLIO-001-FIL-0013"
+      },
+      {
+        "name": "SQLCA",
+        "unit_kind": "copybook",
+        "file_id": "SYS-PORTFOLIO-001-FIL-0017"
+      }
+    ],
+    "unresolved": []
+  },
+  "requirements": [
+    {
+      "requirement_id": "REQ-RTNCDE00-004",
+      "sha256": "0ac2f6b674b57cdeceab63b1845884a51dc70e50d0eccdbaf9ab57f1a5292269",
+      "title": "Analyse logged return codes for a program within a time window",
+      "statement": "On an analyse request ('A') the system counts the logged return codes in RTNCODES for the requested program ID whose timestamp is greater than or equal to the caller's start time and less than or equal to the caller's end time, and returns the count, the highest (MAX) and the lowest (MIN) logged return code. The response code is 0 when the query succeeds (SQLCODE 0) and 8 otherwise.",
+      "category": "CALCULATION",
+      "evidence_status": "verified_from_source",
+      "source_check": {
+        "result": "contradicted",
+        "reasons": [
+          "cited line 121 is outside SYS-PORTFOLIO-001-FIL-0052-STMT-000024 (lines 122-133)"
+        ]
+      },
+      "g2_outcome": "CONTRADICTED",
+      "blocking": true,
+      "reasons": [
+        "CONTRADICTED: the source contradicts the cited evidence: cited line 121 is outside SYS-PORTFOLIO-001-FIL-0052-STMT-000024 (lines 122-133)",
+        "REQUIRES_SME_DECISION: blocked by DR-DB2CONN-002 (open)",
+        "REQUIRES_SME_DECISION: blocked by RVW-REQ-RTNCDE00-004 (open)"
+      ],
+      "derived_from_rules": [
+        {
+          "id": "BR-041",
+          "scope": "run-local",
+          "source_run": "rules@5_rules@1.0#b7ca9ee04731"
+        }
+      ],
+      "open_decisions": [
+        "DR-RTNCDE00-001",
+        "DR-DB2CONN-002"
+      ],
+      "citations": [
+        {
+          "file_id": "SYS-PORTFOLIO-001-FIL-0052",
+          "path_id": "SYS-PORTFOLIO-001-PATH-0052",
+          "section_id": null,
+          "paragraph_id": "SYS-PORTFOLIO-001-FIL-0052-PAR-0010",
+          "statement_id": "SYS-PORTFOLIO-001-FIL-0052-STMT-000024",
+          "relative_path": "src/programs/batch/RTNCDE00.cbl",
+          "line": 121,
+          "source_path": "src/programs/batch/RTNCDE00.cbl",
+          "source_sha256": "7cb951ea1f418c19ddd61c0eca00f21108af5f364b5ecf05742cbc428862994e",
+          "excerpt": [
+            {
+              "line": 122,
+              "text": "           EXEC SQL"
+            },
+            {
+              "line": 123,
+              "text": "                SELECT COUNT(*),"
+            },
+            {
+              "line": 124,
+              "text": "                       MAX(RETURN_CODE),"
+            },
+            {
+              "line": 125,
+              "text": "                       MIN(RETURN_CODE)"
+            },
+            {
+              "line": 126,
+              "text": "                INTO :RC-TOTAL-CODES,"
+            },
+            {
+              "line": 127,
+              "text": "                     :RC-MAX-CODE,"
+            },
+            {
+              "line": 128,
+              "text": "                     :RC-MIN-CODE"
+            },
+            {
+              "line": 129,
+              "text": "                FROM RTNCODES"
+            },
+            {
+              "line": 130,
+              "text": "                WHERE PROGRAM_ID = :RC-PROGRAM-ID"
+            },
+            {
+              "line": 131,
+              "text": "                  AND TIMESTAMP >= :RC-START-TIME"
+            },
+            {
+              "line": 132,
+              "text": "                  AND TIMESTAMP <= :RC-END-TIME"
+            },
+            {
+              "line": 133,
+              "text": "           END-EXEC."
+            }
+          ],
+          "statement_lines": [
+            122,
+            133
+          ]
+        }
+      ]
+    },
+    {
+      "requirement_id": "REQ-RTNCDE00-003",
+      "sha256": "ec665cc58b23e4e018cd684d7e7eb95f38767f28db156d80ca4cea4c30b1a28c",
+      "title": "Classify a new return code by severity",
+      "statement": "When a new return code is set, the system classifies it: 0 is SUCCESS ('S'), 1 to 4 is WARNING ('W'), 5 to 8 is ERROR ('E') and any other value is SEVERE ('F'). The response code is then set to 0.",
+      "category": "CALCULATION",
+      "evidence_status": "verified_from_source",
+      "source_check": {
+        "result": "unverified",
+        "reasons": [
+          "stated values found in the program but not in the cited lines: F"
+        ]
+      },
+      "g2_outcome": "REQUIRES_EVIDENCE",
+      "blocking": true,
+      "reasons": [
+        "REQUIRES_EVIDENCE: declared verified_from_source but not confirmed by the runtime: stated values found in the program but not in the cited lines: F",
+        "REQUIRES_SME_DECISION: blocked by RVW-REQ-RTNCDE00-003 (open)"
+      ],
+      "derived_from_rules": [
+        {
+          "id": "BR-040",
+          "scope": "run-local",
+          "source_run": "rules@5_rules@1.0#b7ca9ee04731"
+        }
+      ],
+      "open_decisions": [],
+      "citations": [
+        {
+          "file_id": "SYS-PORTFOLIO-001-FIL-0052",
+          "path_id": "SYS-PORTFOLIO-001-PATH-0052",
+          "section_id": null,
+          "paragraph_id": "SYS-PORTFOLIO-001-FIL-0052-PAR-0004",
+          "statement_id": "SYS-PORTFOLIO-001-FIL-0052-STMT-000012",
+          "relative_path": "src/programs/batch/RTNCDE00.cbl",
+          "line": 70,
+          "source_path": "src/programs/batch/RTNCDE00.cbl",
+          "source_sha256": "7cb951ea1f418c19ddd61c0eca00f21108af5f364b5ecf05742cbc428862994e",
+          "excerpt": [
+            {
+              "line": 70,
+              "text": "           EVALUATE RC-NEW-CODE"
+            },
+            {
+              "line": 71,
+              "text": "               WHEN 0"
+            },
+            {
+              "line": 72,
+              "text": "                    SET RC-STATUS-SUCCESS TO TRUE"
+            },
+            {
+              "line": 73,
+              "text": "               WHEN 1 THRU 4"
+            },
+            {
+              "line": 74,
+              "text": "                    SET RC-STATUS-WARNING TO TRUE"
+            },
+            {
+              "line": 75,
+              "text": "               WHEN 5 THRU 8"
+            },
+            {
+              "line": 76,
+              "text": "                    SET RC-STATUS-ERROR TO TRUE"
+            },
+            {
+              "line": 77,
+              "text": "               WHEN OTHER"
+            },
+            {
+              "line": 78,
+              "text": "                    SET RC-STATUS-SEVERE TO TRUE"
+            },
+            {
+              "line": 79,
+              "text": "           END-EVALUATE."
+            }
+          ],
+          "statement_lines": [
+            70,
+            79
+          ]
+        },
+        {
+          "file_id": "SYS-PORTFOLIO-001-FIL-0013",
+          "field_id": "SYS-PORTFOLIO-001-FIL-0013-FLD-000011",
+          "source_path": "src/copybook/common/RTNCODE.cpy",
+          "source_sha256": "27eabb519319258b07b32f09ab60e80a18f6658a118e96c8fa01411fc473cbc9",
+          "excerpt": [],
+          "statement_lines": null
+        }
+      ]
+    },
+    {
+      "requirement_id": "REQ-RTNCDE00-001",
+      "sha256": "70a3b283f57b4ad031f3f4f6493b33d8cccda01184ab7ba117214bf245cc9c5e",
+      "title": "Route return-code service requests by request type",
+      "statement": "The return-code service selects its action from the request type (RC-REQUEST-TYPE): 'I' initialises the return-code area (program ID spaces, current and highest code 0, status SUCCESS, response code 0); 'S' records a new return code; 'G' returns the current code, the highest code and the status with response code 0; 'L' inserts one row into DB2 table RTNCODES with the current timestamp, program ID, current code, highest code, status and message, setting response code 0 when the insert succeeds (SQLCODE 0) and 8 otherwise; 'A' analyses logged codes over a time window. Any other request type performs nothing and leaves the response code unchanged.",
+      "category": "ROUTING",
+      "evidence_status": "verified_from_source",
+      "source_check": {
+        "result": "verified",
+        "reasons": []
+      },
+      "g2_outcome": "REQUIRES_SME_DECISION",
+      "blocking": true,
+      "reasons": [
+        "REQUIRES_SME_DECISION: blocked by DR-DB2CONN-002 (open)"
+      ],
+      "derived_from_rules": [
+        {
+          "id": "BR-038",
+          "scope": "run-local",
+          "source_run": "rules@5_rules@1.0#b7ca9ee04731"
+        }
+      ],
+      "open_decisions": [
+        "DR-RTNCDE00-001",
+        "DR-DB2CONN-002"
+      ],
+      "citations": [
+        {
+          "file_id": "SYS-PORTFOLIO-001-FIL-0052",
+          "path_id": "SYS-PORTFOLIO-001-PATH-0052",
+          "section_id": null,
+          "paragraph_id": "SYS-PORTFOLIO-001-FIL-0052-PAR-0001",
+          "statement_id": "SYS-PORTFOLIO-001-FIL-0052-STMT-000001",
+          "relative_path": "src/programs/batch/RTNCDE00.cbl",
+          "line": 33,
+          "source_path": "src/programs/batch/RTNCDE00.cbl",
+          "source_sha256": "7cb951ea1f418c19ddd61c0eca00f21108af5f364b5ecf05742cbc428862994e",
+          "excerpt": [
+            {
+              "line": 33,
+              "text": "           EVALUATE TRUE"
+            },
+            {
+              "line": 34,
+              "text": "               WHEN RC-INITIALIZE"
+            },
+            {
+              "line": 35,
+              "text": "                    PERFORM P100-INIT-RETURN-CODES"
+            },
+            {
+              "line": 36,
+              "text": "                       THRU P100-EXIT"
+            },
+            {
+              "line": 37,
+              "text": "               WHEN RC-SET-CODE"
+            },
+            {
+              "line": 38,
+              "text": "                    PERFORM P200-SET-RETURN-CODE"
+            },
+            {
+              "line": 39,
+              "text": "                       THRU P200-EXIT"
+            },
+            {
+              "line": 40,
+              "text": "               WHEN RC-GET-CODE"
+            },
+            {
+              "line": 41,
+              "text": "                    PERFORM P300-GET-RETURN-CODE"
+            },
+            {
+              "line": 42,
+              "text": "                       THRU P300-EXIT"
+            },
+            {
+              "line": 43,
+              "text": "               WHEN RC-LOG-CODE"
+            },
+            {
+              "line": 44,
+              "text": "                    PERFORM P400-LOG-RETURN-CODE"
+            },
+            {
+              "line": 45,
+              "text": "                       THRU P400-EXIT"
+            },
+            {
+              "line": 46,
+              "text": "               WHEN RC-ANALYZE"
+            },
+            {
+              "line": 47,
+              "text": "                    PERFORM P500-ANALYZE-CODES"
+            },
+            {
+              "line": 48,
+              "text": "                       THRU P500-EXIT"
+            },
+            {
+              "line": 49,
+              "text": "           END-EVALUATE."
+            }
+          ],
+          "statement_lines": [
+            33,
+            49
+          ]
+        },
+        {
+          "file_id": "SYS-PORTFOLIO-001-FIL-0013",
+          "field_id": "SYS-PORTFOLIO-001-FIL-0013-FLD-000001",
+          "source_path": "src/copybook/common/RTNCODE.cpy",
+          "source_sha256": "27eabb519319258b07b32f09ab60e80a18f6658a118e96c8fa01411fc473cbc9",
+          "excerpt": [],
+          "statement_lines": null
+        }
+      ]
+    },
+    {
+      "requirement_id": "REQ-RTNCDE00-002",
+      "sha256": "88a2aeb73bc02e2ecc83895f0da65046b7238dd597036a28e222c7ecddf217de",
+      "title": "Keep the highest return code across calls",
+      "statement": "When a new return code is set ('S'), if it is greater than the highest code recorded so far (RC-HIGHEST-CODE) it becomes the new highest code; otherwise the highest code is kept. In both cases the current code becomes the new code. The highest code is held in the caller's request area, so it persists only as long as the caller keeps that area.",
+      "category": "CALCULATION",
+      "evidence_status": "verified_from_source",
+      "source_check": {
+        "result": "verified",
+        "reasons": []
+      },
+      "g2_outcome": "VERIFIED",
+      "blocking": false,
+      "reasons": [
+        "independently re-verified against the original COBOL source by the runtime (source text present; business interpretation still needs human approval)"
+      ],
+      "derived_from_rules": [
+        {
+          "id": "BR-039",
+          "scope": "run-local",
+          "source_run": "rules@5_rules@1.0#b7ca9ee04731"
+        }
+      ],
+      "open_decisions": [],
+      "citations": [
+        {
+          "file_id": "SYS-PORTFOLIO-001-FIL-0052",
+          "path_id": "SYS-PORTFOLIO-001-PATH-0052",
+          "section_id": null,
+          "paragraph_id": "SYS-PORTFOLIO-001-FIL-0052-PAR-0004",
+          "statement_id": "SYS-PORTFOLIO-001-FIL-0052-STMT-000010",
+          "relative_path": "src/programs/batch/RTNCDE00.cbl",
+          "line": 64,
+          "source_path": "src/programs/batch/RTNCDE00.cbl",
+          "source_sha256": "7cb951ea1f418c19ddd61c0eca00f21108af5f364b5ecf05742cbc428862994e",
+          "excerpt": [
+            {
+              "line": 64,
+              "text": "           IF RC-NEW-CODE > RC-HIGHEST-CODE"
+            },
+            {
+              "line": 65,
+              "text": "              MOVE RC-NEW-CODE TO RC-HIGHEST-CODE"
+            },
+            {
+              "line": 66,
+              "text": "           END-IF."
+            }
+          ],
+          "statement_lines": [
+            64,
+            66
+          ]
+        },
+        {
+          "file_id": "SYS-PORTFOLIO-001-FIL-0013",
+          "field_id": "SYS-PORTFOLIO-001-FIL-0013-FLD-000011",
+          "source_path": "src/copybook/common/RTNCODE.cpy",
+          "source_sha256": "27eabb519319258b07b32f09ab60e80a18f6658a118e96c8fa01411fc473cbc9",
+          "excerpt": [],
+          "statement_lines": null
+        }
+      ]
+    }
+  ],
+  "business_rules": [
+    {
+      "rule_id": "BR-038",
+      "scope": "run-local",
+      "source_run": "rules@5_rules@1.0#b7ca9ee04731",
+      "name": "Route return code service requests by request type",
+      "g2_outcome": "VERIFIED",
+      "reasons": [
+        "mapped to REQ-RTNCDE00-001"
+      ],
+      "dispositions": [
+        {
+          "packet": "PKT-0002-F1",
+          "disposition": "mapped",
+          "requirement_ids": [
+            "REQ-RTNCDE00-001"
+          ]
+        }
+      ]
+    },
+    {
+      "rule_id": "BR-039",
+      "scope": "run-local",
+      "source_run": "rules@5_rules@1.0#b7ca9ee04731",
+      "name": "Derive highest return code across calls",
+      "g2_outcome": "VERIFIED",
+      "reasons": [
+        "mapped to REQ-RTNCDE00-002"
+      ],
+      "dispositions": [
+        {
+          "packet": "PKT-0002-F1",
+          "disposition": "mapped",
+          "requirement_ids": [
+            "REQ-RTNCDE00-002"
+          ]
+        }
+      ]
+    },
+    {
+      "rule_id": "BR-040",
+      "scope": "run-local",
+      "source_run": "rules@5_rules@1.0#b7ca9ee04731",
+      "name": "Derive return code severity status from code range",
+      "g2_outcome": "VERIFIED",
+      "reasons": [
+        "mapped to REQ-RTNCDE00-003"
+      ],
+      "dispositions": [
+        {
+          "packet": "PKT-0002-F1",
+          "disposition": "mapped",
+          "requirement_ids": [
+            "REQ-RTNCDE00-003"
+          ]
+        }
+      ]
+    },
+    {
+      "rule_id": "BR-041",
+      "scope": "run-local",
+      "source_run": "rules@5_rules@1.0#b7ca9ee04731",
+      "name": "Calculate return code count, maximum and minimum for a program within a time window",
+      "g2_outcome": "VERIFIED",
+      "reasons": [
+        "mapped to REQ-RTNCDE00-004"
+      ],
+      "dispositions": [
+        {
+          "packet": "PKT-0002-F1",
+          "disposition": "mapped",
+          "requirement_ids": [
+            "REQ-RTNCDE00-004"
+          ]
+        }
+      ]
+    }
+  ],
+  "data_contracts": [
+    {
+      "record_id": "SYS-PORTFOLIO-001-FIL-0013-REC-0001",
+      "sha256": "17e24f4ea0005405164baeb40dec8279cfef387f9e423ecda5bd3f96368e6273",
+      "record_name": "RETURN-CODE-AREA",
+      "fields": 19,
+      "owner": "RTNCODE",
+      "g2_outcome": "VERIFIED",
+      "reasons": [
+        "19 field(s) independently re-verified (name, level, PIC, usage, size, offset)"
+      ]
+    },
+    {
+      "record_id": "SYS-PORTFOLIO-001-FIL-0017-REC-0001",
+      "sha256": "a8680afc719616f94dedae788adf709ab9760c9650868143e250449e5f2f5b46",
+      "record_name": "SQL-STATUS-CODES",
+      "fields": 7,
+      "owner": "SQLCA",
+      "g2_outcome": "VERIFIED",
+      "reasons": [
+        "7 field(s) independently re-verified (name, level, PIC, usage, size, offset)"
+      ]
+    },
+    {
+      "record_id": "SYS-PORTFOLIO-001-FIL-0052-REC-0001",
+      "sha256": "5540ba365afcb16ea7d380778b173e46ddc5c7bcf712ff6e67bd2fbb737ede97",
+      "record_name": "WS-CURRENT-TIME",
+      "fields": 8,
+      "owner": "RTNCDE00",
+      "g2_outcome": "VERIFIED",
+      "reasons": [
+        "8 field(s) independently re-verified (name, level, PIC, usage, size, offset)"
+      ]
+    },
+    {
+      "record_id": "SYS-PORTFOLIO-001-FIL-0052-REC-0002",
+      "sha256": "1f284926f5f3b451949f00d6ac275c09329a22ee5cd8699e8b98cf791fce9915",
+      "record_name": "WS-DB2-AREA",
+      "fields": 0,
+      "owner": "RTNCDE00",
+      "g2_outcome": "VERIFIED",
+      "reasons": [
+        "0 field(s) independently re-verified (name, level, PIC, usage, size, offset)"
+      ]
+    },
+    {
+      "record_id": "SYS-PORTFOLIO-001-FIL-0052-REC-0003",
+      "sha256": "30904a204e2174742656c501123243e3e04abaa4c575e0dc33b27ab466cb71da",
+      "record_name": "RC-REQUEST-AREA",
+      "fields": 0,
+      "owner": "RTNCDE00",
+      "g2_outcome": "VERIFIED",
+      "reasons": [
+        "0 field(s) independently re-verified (name, level, PIC, usage, size, offset)"
+      ]
+    }
+  ],
+  "file_runtime_contracts": [
+    {
+      "id": "RT-RTNCDE00-001",
+      "kind": "runtime_requirement",
+      "sha256": "df9759abc7f29462422df7513c5253527a83e18c5525b4450802ee6db6ef4e60",
+      "statement": "SET request classifies the new code: 0 success, 1-4 warning, 5-8 error, anything else severe, and keeps the highest code seen in the caller's area (state lives in the caller-supplied RC-REQUEST-AREA, not in this program).",
+      "evidence_status": "verified_from_source",
+      "g2_outcome": "VERIFIED",
+      "reasons": [
+        "independently re-verified against the original COBOL source by the runtime (source text present; business interpretation still needs human approval)"
+      ],
+      "citations": [
+        {
+          "file_id": "SYS-PORTFOLIO-001-FIL-0052",
+          "paragraph_id": "SYS-PORTFOLIO-001-FIL-0052-PAR-0004",
+          "statement_id": "SYS-PORTFOLIO-001-FIL-0052-STMT-000012",
+          "relative_path": "src/programs/batch/RTNCDE00.cbl",
+          "line": 70,
+          "source_path": "src/programs/batch/RTNCDE00.cbl",
+          "source_sha256": "7cb951ea1f418c19ddd61c0eca00f21108af5f364b5ecf05742cbc428862994e",
+          "excerpt": [
+            {
+              "line": 70,
+              "text": "           EVALUATE RC-NEW-CODE"
+            },
+            {
+              "line": 71,
+              "text": "               WHEN 0"
+            },
+            {
+              "line": 72,
+              "text": "                    SET RC-STATUS-SUCCESS TO TRUE"
+            },
+            {
+              "line": 73,
+              "text": "               WHEN 1 THRU 4"
+            },
+            {
+              "line": 74,
+              "text": "                    SET RC-STATUS-WARNING TO TRUE"
+            },
+            {
+              "line": 75,
+              "text": "               WHEN 5 THRU 8"
+            },
+            {
+              "line": 76,
+              "text": "                    SET RC-STATUS-ERROR TO TRUE"
+            },
+            {
+              "line": 77,
+              "text": "               WHEN OTHER"
+            },
+            {
+              "line": 78,
+              "text": "                    SET RC-STATUS-SEVERE TO TRUE"
+            },
+            {
+              "line": 79,
+              "text": "           END-EVALUATE."
+            }
+          ],
+          "statement_lines": [
+            70,
+            79
+          ]
+        }
+      ]
+    },
+    {
+      "id": "RT-RTNCDE00-002",
+      "kind": "runtime_requirement",
+      "sha256": "ba25007532f27658e7138af4bd55952c7a3647e4ded4bac7cf62378fb03af17a",
+      "statement": "LOG request inserts one RTNCODES row whose TIMESTAMP is the 16-character CURRENT-DATE prefix (YYYYMMDDHHMMSShh) and reports SQL success/failure only as response code 0/8.",
+      "evidence_status": "verified_from_source",
+      "g2_outcome": "VERIFIED",
+      "reasons": [
+        "independently re-verified against the original COBOL source by the runtime (source text present; business interpretation still needs human approval)"
+      ],
+      "citations": [
+        {
+          "file_id": "SYS-PORTFOLIO-001-FIL-0052",
+          "statement_id": "SYS-PORTFOLIO-001-FIL-0052-STMT-000021",
+          "relative_path": "src/programs/batch/RTNCDE00.cbl",
+          "line": 96,
+          "source_path": "src/programs/batch/RTNCDE00.cbl",
+          "source_sha256": "7cb951ea1f418c19ddd61c0eca00f21108af5f364b5ecf05742cbc428862994e",
+          "excerpt": [
+            {
+              "line": 96,
+              "text": "           EXEC SQL"
+            },
+            {
+              "line": 97,
+              "text": "                INSERT INTO RTNCODES"
+            },
+            {
+              "line": 98,
+              "text": "                (TIMESTAMP,"
+            },
+            {
+              "line": 99,
+              "text": "                 PROGRAM_ID,"
+            },
+            {
+              "line": 100,
+              "text": "                 RETURN_CODE,"
+            },
+            {
+              "line": 101,
+              "text": "                 HIGHEST_CODE,"
+            },
+            {
+              "line": 102,
+              "text": "                 STATUS_CODE,"
+            },
+            {
+              "line": 103,
+              "text": "                 MESSAGE_TEXT)"
+            },
+            {
+              "line": 104,
+              "text": "                VALUES"
+            },
+            {
+              "line": 105,
+              "text": "                (:WS-CURRENT-TIME,"
+            },
+            {
+              "line": 106,
+              "text": "                 :RC-PROGRAM-ID,"
+            },
+            {
+              "line": 107,
+              "text": "                 :RC-CURRENT-CODE,"
+            },
+            {
+              "line": 108,
+              "text": "                 :RC-HIGHEST-CODE,"
+            },
+            {
+              "line": 109,
+              "text": "                 :RC-STATUS,"
+            },
+            {
+              "line": 110,
+              "text": "                 :RC-MESSAGE)"
+            },
+            {
+              "line": 111,
+              "text": "           END-EXEC."
+            }
+          ],
+          "statement_lines": [
+            96,
+            111
+          ]
+        }
+      ]
+    },
+    {
+      "id": "RT-RTNCDE00-003",
+      "kind": "runtime_requirement",
+      "sha256": "9e704b8a16d5f43dfad07e0a07abdee815875185fbd006ac42162b939ad26a31",
+      "statement": "ANALYZE request returns count, max and min RETURN_CODE for a program within [RC-START-TIME, RC-END-TIME] via a singleton SELECT INTO.",
+      "evidence_status": "verified_from_source",
+      "g2_outcome": "VERIFIED",
+      "reasons": [
+        "independently re-verified against the original COBOL source by the runtime (source text present; business interpretation still needs human approval)"
+      ],
+      "citations": [
+        {
+          "file_id": "SYS-PORTFOLIO-001-FIL-0052",
+          "statement_id": "SYS-PORTFOLIO-001-FIL-0052-STMT-000024",
+          "relative_path": "src/programs/batch/RTNCDE00.cbl",
+          "line": 122,
+          "source_path": "src/programs/batch/RTNCDE00.cbl",
+          "source_sha256": "7cb951ea1f418c19ddd61c0eca00f21108af5f364b5ecf05742cbc428862994e",
+          "excerpt": [
+            {
+              "line": 122,
+              "text": "           EXEC SQL"
+            },
+            {
+              "line": 123,
+              "text": "                SELECT COUNT(*),"
+            },
+            {
+              "line": 124,
+              "text": "                       MAX(RETURN_CODE),"
+            },
+            {
+              "line": 125,
+              "text": "                       MIN(RETURN_CODE)"
+            },
+            {
+              "line": 126,
+              "text": "                INTO :RC-TOTAL-CODES,"
+            },
+            {
+              "line": 127,
+              "text": "                     :RC-MAX-CODE,"
+            },
+            {
+              "line": 128,
+              "text": "                     :RC-MIN-CODE"
+            },
+            {
+              "line": 129,
+              "text": "                FROM RTNCODES"
+            },
+            {
+              "line": 130,
+              "text": "                WHERE PROGRAM_ID = :RC-PROGRAM-ID"
+            },
+            {
+              "line": 131,
+              "text": "                  AND TIMESTAMP >= :RC-START-TIME"
+            },
+            {
+              "line": 132,
+              "text": "                  AND TIMESTAMP <= :RC-END-TIME"
+            },
+            {
+              "line": 133,
+              "text": "           END-EXEC."
+            }
+          ],
+          "statement_lines": [
+            122,
+            133
+          ]
+        }
+      ]
+    }
+  ],
+  "evidence_defects": [
+    {
+      "kind": "requirement",
+      "id": "REQ-RTNCDE00-004",
+      "outcome": "CONTRADICTED",
+      "reasons": [
+        "CONTRADICTED: the source contradicts the cited evidence: cited line 121 is outside SYS-PORTFOLIO-001-FIL-0052-STMT-000024 (lines 122-133)",
+        "REQUIRES_SME_DECISION: blocked by DR-DB2CONN-002 (open)",
+        "REQUIRES_SME_DECISION: blocked by RVW-REQ-RTNCDE00-004 (open)"
+      ]
+    },
+    {
+      "kind": "requirement",
+      "id": "REQ-RTNCDE00-003",
+      "outcome": "REQUIRES_EVIDENCE",
+      "reasons": [
+        "REQUIRES_EVIDENCE: declared verified_from_source but not confirmed by the runtime: stated values found in the program but not in the cited lines: F",
+        "REQUIRES_SME_DECISION: blocked by RVW-REQ-RTNCDE00-003 (open)"
+      ]
+    },
+    {
+      "kind": "requirement",
+      "id": "REQ-RTNCDE00-001",
+      "outcome": "REQUIRES_SME_DECISION",
+      "reasons": [
+        "REQUIRES_SME_DECISION: blocked by DR-DB2CONN-002 (open)"
+      ]
+    }
+  ],
+  "root_causes": [
+    {
+      "root_cause_id": "RC-CIT-fd279b78dd",
+      "class": "A",
+      "class_meaning": "technical fact verifiable from source",
+      "title": "Citation of REQ-RTNCDE00-004 contradicted by the source",
+      "category": "incorrect_source_citation",
+      "deterministic": {
+        "status": "SOURCE_CITATION_CORRECTED",
+        "establishes": "whether the cited statement or the cited line is wrong, from the stated values"
+      },
+      "decisions_in_scope": [
+        "RVW-REQ-RTNCDE00-004"
+      ]
+    },
+    {
+      "root_cause_id": "RC-EVD-af66b09e34",
+      "class": "B",
+      "class_meaning": "interpretation needing independent review",
+      "title": "requirement evidence of RTNCDE00 not established (unconfirmed_claim)",
+      "category": "missing_evidence",
+      "deterministic": {
+        "status": "INSUFFICIENT_EVIDENCE",
+        "establishes": "which cited facts the source supports"
+      },
+      "decisions_in_scope": [
+        "RVW-REQ-RTNCDE00-003"
+      ]
+    },
+    {
+      "root_cause_id": "RC-SRC-3b9f4685e9",
+      "class": "D",
+      "class_meaning": "architecture / technical decision for a technical authority",
+      "title": "CIRCULAR_COPY GAP-002: Copybook SQLCA includes itself (circular copy)",
+      "category": "missing_source_or_dependency",
+      "deterministic": {
+        "status": "VERIFIED_DETERMINISTICALLY",
+        "establishes": "the member includes itself, so its layout cannot be expanded from the repository"
+      },
+      "decisions_in_scope": [
+        "DR-DB2CONN-002",
+        "DR-F2-0011-001"
+      ]
+    }
+  ],
+  "blocking_decisions": [
+    {
+      "decision_id": "DR-DB2CONN-002",
+      "kind": "technical",
+      "origin": "agent",
+      "sha256": "7004bffb5b7e045c7e8f669d67550d4534d729a241f7c756c08bb19aa9ac1fea",
+      "question": "Copybook SQLCA (src/copybook/db2/SQLCA.cpy) includes itself (EXEC SQL INCLUDE SQLCA at line 6) and defines only SQL-STATUS-CODES, with no SQLCODE or SQLERRMC field; SQLCODE/SQLERRMC therefore have no Field ID in 14 DB2 programs, including HISTLD00, RTNANA00, RTNCDE00, DB2CMT and DB2CONN. Which SQLCA does the precompiler actually supply, and may the forward design assume the standard DB2 SQLCODE meaning (0 success, -803 duplicate key, negative values errors) used in these requirements?",
+      "allowed_outcomes": [
+        "resolved_no_change",
+        "excluded_from_scope",
+        "resolved_requires_update"
+      ],
+      "primary_root_cause": "RC-SRC-3b9f4685e9"
+    },
+    {
+      "decision_id": "RVW-REQ-RTNCDE00-004",
+      "kind": "review",
+      "origin": "derived",
+      "sha256": "4c90e9fdf811008ae46354b0dcff72e113e65dfdc4f112d19ddf6247d92587ef",
+      "question": "requirement REQ-RTNCDE00-004 (RTNCDE00) is not approvable as drafted: CONTRADICTED: the source contradicts the cited evidence: cited line 121 is outside SYS-PORTFOLIO-001-FIL-0052-STMT-000024 (lines 122-133)",
+      "allowed_outcomes": [
+        "excluded_from_scope",
+        "resolved_requires_update"
+      ],
+      "primary_root_cause": "RC-CIT-fd279b78dd"
+    },
+    {
+      "decision_id": "RVW-REQ-RTNCDE00-003",
+      "kind": "review",
+      "origin": "derived",
+      "sha256": "82b16155d4f2bfa3269dc4c282b381d3fd014f29223ea8f8d6efea5bdf133144",
+      "question": "requirement REQ-RTNCDE00-003 (RTNCDE00) is not approvable as drafted: REQUIRES_EVIDENCE: declared verified_from_source but not confirmed by the runtime: stated values found in the program but not in the cited lines: F",
+      "allowed_outcomes": [
+        "excluded_from_scope",
+        "resolved_requires_update",
+        "approved_exception"
+      ],
+      "primary_root_cause": "RC-EVD-af66b09e34"
+    },
+    {
+      "decision_id": "DR-F2-0011-001",
+      "kind": "data_layout",
+      "origin": "agent",
+      "sha256": "9295eb19e7b7bf928ede74d7df5811cab75951ba41245bb62b97a3764bc5493f",
+      "question": "Copybook SQLCA (SYS-PORTFOLIO-001-FIL-0017) line 6 contains 'EXEC SQL INCLUDE SQLCA END-EXEC', naming itself. The included SQL communication area (SQLCODE, SQLSTATE, SQLERRMC, ...) has no layout in any reverse artifact. How should the forward design obtain the SQLCA layout and the SQLCODE/SQLSTATE semantics used by the 14 DB2 programs?",
+      "allowed_outcomes": [
+        "resolved_no_change",
+        "excluded_from_scope"
+      ],
+      "primary_root_cause": "RC-SRC-3b9f4685e9"
+    }
+  ],
+  "required_authorities": [
+    "business_sme",
+    "exception_approver",
+    "requirements_approver",
+    "technical_authority"
+  ],
+  "g2_readiness": {
+    "readiness": "NOT_READY",
+    "blocking_findings": 5,
+    "by_outcome": {
+      "CONTRADICTED": 1,
+      "REQUIRES_EVIDENCE": 1,
+      "REQUIRES_SME_DECISION": 9,
+      "VERIFIED": 13,
+      "EXCLUDED_WITH_JUSTIFICATION": 3
+    },
+    "integrity": {
+      "ok": true,
+      "problems": []
+    }
+  },
+  "change_impact": {
+    "scopes_sharing_units": [
+      "HISTLD00",
+      "RPTAUD00",
+      "RPTPOS00",
+      "RPTSTA00",
+      "RTNANA00",
+      "DB2CMT",
+      "DB2CONN",
+      "DB2ERR",
+      "DB2STAT",
+      "CURSMGR",
+      "DB2ONLN",
+      "DB2RECV",
+      "ERRHNDL",
+      "INQHIST",
+      "INQONLN",
+      "SECMGR",
+      "TSTGEN00",
+      "TSTVAL00",
+      "UTLMNT00",
+      "UTLMON00",
+      "UTLVAL00",
+      "DB2HNDL"
+    ],
+    "note": "Resolving a decision on a shared dependency, applying a correction or changing a shared data contract changes the digest of every scope containing it and invalidates any approval of those scopes. Approval of this scope is bound to its exact digest.",
+    "traceability": "Requirement -> reverse rule (run-local, bound to the reverse run) -> permanent source IDs -> source lines with SHA-256, as listed per requirement."
+  }
+}

@@ -1,0 +1,206 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://revforge.local/contracts/orchestrator/signed-source-export-authorization.schema.json",
+  "title": "Signed source-export authorization (produced by a data owner outside the harness)",
+  "description": "Authorizes sending specific source excerpts (exact files and hashes, exact packets) to one destination and model for independent semantic verification, until expiry. Distinct from requirements approval. The signed message is the UTF-8 canonical JSON of authorization.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "contract",
+    "authorization",
+    "signature"
+  ],
+  "properties": {
+    "contract": {
+      "const": "signed-source-export-authorization"
+    },
+    "authorization": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "contract",
+        "contract_version",
+        "authorization_id",
+        "workflow_id",
+        "run_id",
+        "baseline_manifest_sha256",
+        "destination",
+        "models",
+        "purpose",
+        "data_classification",
+        "scope",
+        "passes",
+        "disclosure",
+        "limits",
+        "not_before",
+        "expires_at",
+        "signer_id",
+        "role"
+      ],
+      "properties": {
+        "contract": {
+          "const": "source-export-authorization"
+        },
+        "contract_version": {
+          "const": "1.0"
+        },
+        "authorization_id": {
+          "type": "string",
+          "pattern": "^SEA-[A-Za-z0-9-]{3,64}$"
+        },
+        "workflow_id": {
+          "type": "string"
+        },
+        "run_id": {
+          "type": "string"
+        },
+        "baseline_manifest_sha256": {
+          "$ref": "../common.schema.json#/definitions/sha256"
+        },
+        "destination": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "provider",
+            "endpoint"
+          ],
+          "properties": {
+            "provider": {
+              "const": "openai"
+            },
+            "endpoint": {
+              "type": "string",
+              "pattern": "^https://"
+            }
+          }
+        },
+        "models": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "purpose": {
+          "const": "independent_semantic_verification"
+        },
+        "data_classification": {
+          "type": "string",
+          "minLength": 3
+        },
+        "scope": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "packets",
+            "files"
+          ],
+          "properties": {
+            "packets": {
+              "type": "array",
+              "minItems": 1,
+              "items": {
+                "type": "string",
+                "pattern": "^OAV-[A-Z]{3}-[0-9a-f]{10}$"
+              }
+            },
+            "files": {
+              "type": "array",
+              "minItems": 1,
+              "items": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "path",
+                  "sha256"
+                ],
+                "properties": {
+                  "path": {
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  "sha256": {
+                    "$ref": "../common.schema.json#/definitions/sha256"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "passes": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "enum": [
+              "A",
+              "B"
+            ]
+          }
+        },
+        "disclosure": {
+          "enum": [
+            "source_excerpts_only",
+            "source_excerpts_and_derived_analysis"
+          ]
+        },
+        "limits": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "max_requests",
+            "max_chars_per_request",
+            "max_excerpt_lines_per_request"
+          ],
+          "properties": {
+            "max_requests": {
+              "type": "integer",
+              "minimum": 1
+            },
+            "max_chars_per_request": {
+              "type": "integer",
+              "minimum": 100
+            },
+            "max_excerpt_lines_per_request": {
+              "type": "integer",
+              "minimum": 1
+            }
+          }
+        },
+        "not_before": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "expires_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "signer_id": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9._@-]{2,128}$"
+        },
+        "role": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "signature": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "algorithm",
+        "value"
+      ],
+      "properties": {
+        "algorithm": {
+          "const": "ed25519"
+        },
+        "value": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9+/=]{80,100}$"
+        }
+      }
+    }
+  }
+}

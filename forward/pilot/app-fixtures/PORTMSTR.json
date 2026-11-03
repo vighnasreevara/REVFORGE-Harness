@@ -1,0 +1,450 @@
+{
+ "program": "PORTMSTR",
+ "provenance": "Written 2026-11-02 by a scenario-author agent (F6 independent fixture design) from the COBOL source under references/udara-legacy-modernization-harness/src/ and its copybooks, plus only the 'gaps' array of pilot-result.json for gap line numbers. No generated Java, source map or test result was read or run. Scenarios V01.. were added on 2026-11-03 (partly-covered rule extension) by an F6 scenario-author agent from the same COBOL source, copybooks, README and gaps array only; no generated Java, source map or test result was read or run.",
+ "scenarios": [
+  {
+   "id": "M01",
+   "title": "PORTFILE not allocated: OPEN I-O gives 35, 9000-ERROR sets 8, 6000-TERMINATE copies it to LS-RETURN-CODE and GOBACK ends the call before the command is looked at",
+   "cobol_lines": [
+    84,
+    104,
+    106,
+    107,
+    108,
+    109,
+    235,
+    236,
+    229,
+    231,
+    237
+   ],
+   "kind": "call",
+   "clock": "2026-03-04T05:06:07.08Z",
+   "set": {
+    "LS-COMMAND": "R",
+    "LS-PORTFOLIO": "PORT00002",
+    "LS-RETURN-CODE": "0"
+   },
+   "expect": {
+    "outcome": "GOBACK",
+    "items": {
+     "LS-RETURN-CODE": "8",
+     "WS-RETURN-CODE": "8",
+     "WS-ERROR-TEXT": "Error opening Portfolio file"
+    }
+   }
+  },
+  {
+   "id": "M02",
+   "title": "unknown command code (lower-case 'c' is not CREATE-PORT): WHEN OTHER sets 'Invalid command' and return code 8",
+   "cobol_lines": [
+    86,
+    95,
+    96,
+    97,
+    235,
+    236,
+    231,
+    237
+   ],
+   "kind": "call",
+   "clock": "2026-03-04T05:06:07.08Z",
+   "set": {
+    "LS-COMMAND": "c",
+    "LS-PORTFOLIO": "PORT00001 GROWTH FUND                                       2026-01-15A",
+    "LS-RETURN-CODE": "0"
+   },
+   "datasets": {
+    "PORTFILE": {
+     "records": [
+      "PORT00009 LEGACY FUND                                       2020-01-01A"
+     ]
+    }
+   },
+   "expect": {
+    "outcome": "GOBACK",
+    "items": {
+     "LS-RETURN-CODE": "8",
+     "WS-ERROR-TEXT": "Invalid command",
+     "CREATE-PORT": false
+    }
+   }
+  },
+  {
+   "id": "M03",
+   "title": "create with an ID that does not start with 'PORT': validation sets 8 and 'Invalid Portfolio ID format', 9000-ERROR returns before any WRITE",
+   "cobol_lines": [
+    87,
+    88,
+    119,
+    121,
+    142,
+    143,
+    144,
+    145,
+    146,
+    122,
+    123,
+    235,
+    231,
+    237
+   ],
+   "kind": "call",
+   "clock": "2026-03-04T05:06:07.08Z",
+   "set": {
+    "LS-COMMAND": "C",
+    "LS-PORTFOLIO": "ABCD00001 GROWTH FUND                                       2026-01-15A",
+    "LS-RETURN-CODE": "0"
+   },
+   "datasets": {
+    "PORTFILE": {
+     "records": [
+      "PORT00009 LEGACY FUND                                       2020-01-01A"
+     ]
+    }
+   },
+   "expect": {
+    "outcome": "GOBACK",
+    "items": {
+     "LS-RETURN-CODE": "8",
+     "WS-ERROR-TEXT": "Invalid Portfolio ID format"
+    }
+   }
+  },
+  {
+   "id": "M04",
+   "title": "valid create: ID 'PORT' + 5 digits, name present, status 'A'; WRITE succeeds, 6000-TERMINATE returns 0 and the new record is stored in key order",
+   "cobol_lines": [
+    87,
+    88,
+    119,
+    121,
+    142,
+    143,
+    149,
+    155,
+    156,
+    122,
+    126,
+    127,
+    132,
+    100,
+    229,
+    231,
+    101
+   ],
+   "kind": "call",
+   "clock": "2026-03-04T05:06:07.08Z",
+   "set": {
+    "LS-COMMAND": "C",
+    "LS-PORTFOLIO": "PORT00001 GROWTH FUND                                       2026-01-15A",
+    "LS-RETURN-CODE": "0"
+   },
+   "datasets": {
+    "PORTFILE": {
+     "records": [
+      "PORT00009 LEGACY FUND                                       2020-01-01A"
+     ]
+    }
+   },
+   "expect": {
+    "outcome": "GOBACK",
+    "items": {
+     "LS-RETURN-CODE": "0",
+     "WS-ERROR-TEXT": ""
+    },
+    "datasets": {
+     "PORTFILE": [
+      "PORT00001 GROWTH FUND                                       2026-01-15A",
+      "PORT00009 LEGACY FUND                                       2020-01-01A"
+     ]
+    }
+   }
+  },
+  {
+   "id": "M05",
+   "title": "read by key: READ 00 and the record (its first 100 bytes) is moved back to LS-PORTFOLIO; return code 0",
+   "cobol_lines": [
+    89,
+    90,
+    167,
+    169,
+    171,
+    172,
+    173,
+    100,
+    231
+   ],
+   "kind": "call",
+   "clock": "2026-03-04T05:06:07.08Z",
+   "set": {
+    "LS-COMMAND": "R",
+    "LS-PORTFOLIO": "PORT00002",
+    "LS-RETURN-CODE": "0"
+   },
+   "datasets": {
+    "PORTFILE": {
+     "records": [
+      "PORT00002 INCOME FUND                                       2025-12-31C"
+     ]
+    }
+   },
+   "expect": {
+    "outcome": "GOBACK",
+    "items": {
+     "LS-RETURN-CODE": "0",
+     "LS-PORTFOLIO": "PORT00002 INCOME FUND                                       2025-12-31C"
+    }
+   }
+  },
+  {
+   "id": "M06",
+   "title": "valid update of an existing record: validation passes (status 'I'), REWRITE succeeds, then 2100-LOG-PORTFOLIO-UPDATE starts with INITIALIZE of the undeclared LS-AUDIT-REQUEST, a gap",
+   "cobol_lines": [
+    91,
+    92,
+    187,
+    189,
+    190,
+    194,
+    196,
+    201,
+    206,
+    269
+   ],
+   "kind": "call",
+   "clock": "2026-03-04T05:06:07.08Z",
+   "set": {
+    "LS-COMMAND": "U",
+    "LS-PORTFOLIO": "PORT00003 BALANCED FUND II                                  2026-02-01I",
+    "LS-RETURN-CODE": "0"
+   },
+   "datasets": {
+    "PORTFILE": {
+     "records": [
+      "PORT00003 BALANCED FUND                                     2024-06-30A"
+     ]
+    }
+   },
+   "expect": {
+    "outcome": "BLOCKED AT src/programs/portfolio/PORTMSTR.cbl:269"
+   }
+  },
+  {
+   "id": "V01",
+   "title": "BR-097 update of a portfolio that does not exist: validation passes (PORT00004, name, status 'A'), REWRITE gives 23, line 196 is true -> 'Portfolio not found for update', 9000-ERROR sets 8, 6000-TERMINATE closes the file and copies 8 to LS-RETURN-CODE, GOBACK; the master is unchanged [corrected from the source: 9000-ERROR (line 234) performs 6000-TERMINATE, whose CLOSE (line 228) resets FILE STATUS to '00' before GOBACK]",
+   "cobol_lines": [
+    84,
+    86,
+    91,
+    92,
+    104,
+    106,
+    107,
+    112,
+    142,
+    143,
+    149,
+    155,
+    156,
+    187,
+    189,
+    190,
+    194,
+    196,
+    197,
+    198,
+    228,
+    229,
+    231,
+    234,
+    235,
+    236,
+    237
+   ],
+   "kind": "call",
+   "clock": "2026-03-04T05:06:07.08Z",
+   "set": {
+    "LS-COMMAND": "U",
+    "LS-PORTFOLIO": "PORT00004 NEW FUND                                          2026-02-01A",
+    "LS-RETURN-CODE": "0"
+   },
+   "datasets": {
+    "PORTFILE": {
+     "records": [
+      "PORT00003 BALANCED FUND                                     2024-06-30A"
+     ]
+    }
+   },
+   "expect": {
+    "outcome": "GOBACK",
+    "items": {
+     "LS-RETURN-CODE": "8",
+     "WS-RETURN-CODE": "8",
+     "WS-ERROR-TEXT": "Portfolio not found for update",
+     "WS-PORT-STATUS": "00"
+    },
+    "datasets": {
+     "PORTFILE": [
+      "PORT00003 BALANCED FUND                                     2024-06-30A"
+     ]
+    }
+   }
+  },
+  {
+   "id": "V02",
+   "title": "BR-097 update of an existing portfolio: REWRITE gives 00, line 196 is false (no error text, WS-RETURN-CODE 0) and line 201 is false; the rewritten record is already stored when 2100-LOG-PORTFOLIO-UPDATE blocks at the undeclared LS-AUDIT-REQUEST (line 269)",
+   "cobol_lines": [
+    84,
+    86,
+    91,
+    92,
+    104,
+    106,
+    107,
+    112,
+    142,
+    143,
+    149,
+    155,
+    156,
+    187,
+    189,
+    190,
+    194,
+    196,
+    201,
+    206,
+    269
+   ],
+   "kind": "call",
+   "clock": "2026-03-04T05:06:07.08Z",
+   "set": {
+    "LS-COMMAND": "U",
+    "LS-PORTFOLIO": "PORT00003 BALANCED FUND II                                  2026-02-01I",
+    "LS-RETURN-CODE": "0"
+   },
+   "datasets": {
+    "PORTFILE": {
+     "records": [
+      "PORT00003 BALANCED FUND                                     2024-06-30A"
+     ]
+    }
+   },
+   "expect": {
+    "outcome": "BLOCKED AT src/programs/portfolio/PORTMSTR.cbl:269",
+    "items": {
+     "WS-PORT-STATUS": "00",
+     "PORT-NOT-FOUND": false,
+     "WS-RETURN-CODE": "0",
+     "WS-ERROR-TEXT": ""
+    },
+    "datasets": {
+     "PORTFILE": [
+      "PORT00003 BALANCED FUND II                                  2026-02-01I"
+     ]
+    }
+   }
+  },
+  {
+   "id": "V03",
+   "title": "BR-097 deletion of a portfolio that does not exist: DELETE by key PORT00004 gives 23, line 217 is true -> 'Portfolio not found for deletion', return code 8, GOBACK; the master is unchanged [corrected from the source: 9000-ERROR (line 234) performs 6000-TERMINATE, whose CLOSE (line 228) resets FILE STATUS to '00' before GOBACK]",
+   "cobol_lines": [
+    84,
+    86,
+    93,
+    94,
+    104,
+    106,
+    107,
+    112,
+    213,
+    215,
+    217,
+    218,
+    219,
+    228,
+    229,
+    231,
+    234,
+    235,
+    236,
+    237
+   ],
+   "kind": "call",
+   "clock": "2026-03-04T05:06:07.08Z",
+   "set": {
+    "LS-COMMAND": "D",
+    "LS-PORTFOLIO": "PORT00004",
+    "LS-RETURN-CODE": "5"
+   },
+   "datasets": {
+    "PORTFILE": {
+     "records": [
+      "PORT00003 BALANCED FUND                                     2024-06-30A"
+     ]
+    }
+   },
+   "expect": {
+    "outcome": "GOBACK",
+    "items": {
+     "LS-RETURN-CODE": "8",
+     "WS-ERROR-TEXT": "Portfolio not found for deletion",
+     "WS-PORT-STATUS": "00"
+    },
+    "datasets": {
+     "PORTFILE": [
+      "PORT00003 BALANCED FUND                                     2024-06-30A"
+     ]
+    }
+   }
+  },
+  {
+   "id": "V04",
+   "title": "BR-097 deletion of an existing portfolio: DELETE gives 00, lines 217 and 222 are false, 6000-TERMINATE returns 0 and the record is removed",
+   "cobol_lines": [
+    84,
+    86,
+    93,
+    94,
+    100,
+    101,
+    104,
+    106,
+    107,
+    112,
+    213,
+    215,
+    217,
+    222,
+    229,
+    231
+   ],
+   "kind": "call",
+   "clock": "2026-03-04T05:06:07.08Z",
+   "set": {
+    "LS-COMMAND": "D",
+    "LS-PORTFOLIO": "PORT00003",
+    "LS-RETURN-CODE": "5"
+   },
+   "datasets": {
+    "PORTFILE": {
+     "records": [
+      "PORT00003 BALANCED FUND                                     2024-06-30A"
+     ]
+    }
+   },
+   "expect": {
+    "outcome": "GOBACK",
+    "items": {
+     "LS-RETURN-CODE": "0",
+     "WS-ERROR-TEXT": "",
+     "WS-PORT-STATUS": "00"
+    },
+    "datasets": {
+     "PORTFILE": []
+    }
+   }
+  }
+ ]
+}

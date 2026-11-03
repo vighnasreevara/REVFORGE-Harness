@@ -1,0 +1,32 @@
+{
+ "program": "INQONLN",
+ "provenance": "Written 2026-11-02 by a scenario-author agent (F6 independent fixture design) from the COBOL source under references/udara-legacy-modernization-harness/src/ and its copybooks, plus only the 'gaps' array of pilot-result.json for gap line numbers. No generated Java, source map or test result was read or run.",
+ "scenarios": [
+  {
+   "id": "O01",
+   "title": "the first executable statement is EXEC CICS HANDLE CONDITION, so every run blocks before any request is processed",
+   "cobol_lines": [
+    40
+   ],
+   "kind": "main",
+   "expect": {
+    "outcome": "BLOCKED AT src/programs/online/INQONLN.cbl:40"
+   }
+  },
+  {
+   "id": "O02",
+   "title": "input on SYSIN changes nothing: no statement before line 40 reads input",
+   "cobol_lines": [
+    39,
+    40
+   ],
+   "kind": "main",
+   "sysin": [
+    "INQP1234567890"
+   ],
+   "expect": {
+    "outcome": "BLOCKED AT src/programs/online/INQONLN.cbl:40"
+   }
+  }
+ ]
+}

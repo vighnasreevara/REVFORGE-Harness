@@ -1,0 +1,38 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://revforge.local/contracts/output/rule-summary.schema.json",
+  "title": "Business rule summary",
+  "allOf": [{ "$ref": "../common.schema.json#/definitions/outputHeader" }],
+  "type": "object",
+  "required": ["contract", "source_run", "counts", "rule_sets", "rules"],
+  "properties": {
+    "contract": { "const": "rule-summary" },
+    "source_run": { "type": "string" },
+    "counts": {
+      "type": "object",
+      "required": ["total", "by_category", "by_confidence", "by_evidence_class", "requires_sme_review"],
+      "properties": { "total": { "type": "integer", "minimum": 0 } }
+    },
+    "rule_sets": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["ref", "rule_ids"],
+        "properties": { "ref": { "$ref": "../common.schema.json#/definitions/runLocalRef" } }
+      }
+    },
+    "rules": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["ref", "name", "category", "confidence", "requires_sme_review", "evidence_class", "evidence_reasons", "implemented_in", "file_ids"],
+        "properties": {
+          "ref": { "$ref": "../common.schema.json#/definitions/runLocalRef" },
+          "confidence": { "$ref": "../common.schema.json#/definitions/confidence" },
+          "evidence_class": { "$ref": "../common.schema.json#/definitions/evidenceClass" },
+          "file_ids": { "type": "array", "items": { "$ref": "../common.schema.json#/definitions/fileId" } }
+        }
+      }
+    }
+  }
+}

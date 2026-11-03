@@ -1,0 +1,71 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://revforge.local/contracts/openai/review-recommendation.schema.json",
+  "title": "Advisory review record (never resolves a decision)",
+  "type": "object",
+  "required": [
+    "contract",
+    "contract_version",
+    "verification_run_id",
+    "packet_id",
+    "root_cause_id",
+    "related_decisions",
+    "rules",
+    "requirements",
+    "advisory_outcome",
+    "classifications",
+    "deterministic_support",
+    "proposals",
+    "human_review_required",
+    "authority",
+    "binding"
+  ],
+  "properties": {
+    "contract": {
+      "const": "openai-advisory-review"
+    },
+    "contract_version": {
+      "const": "1.0"
+    },
+    "advisory_outcome": {
+      "enum": [
+        "SUPPORTS_EXISTING_FINDING",
+        "CONTRADICTS_EXISTING_FINDING",
+        "EXISTING_EVIDENCE_INSUFFICIENT",
+        "ADDITIONAL_DETERMINISTIC_CHECKS_REQUIRED",
+        "CORRECTION_PROPOSAL_JUSTIFIED",
+        "HUMAN_REVIEW_REQUIRED"
+      ]
+    },
+    "rules": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "id",
+          "scope",
+          "source_run"
+        ]
+      }
+    },
+    "proposals": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "proposal_id",
+          "status",
+          "deterministically_supported"
+        ],
+        "properties": {
+          "status": {
+            "const": "advisory_proposed"
+          }
+        }
+      }
+    },
+    "binding": {
+      "const": "advisory only: does not resolve decisions, change requirements, reduce blockers or alter any gate"
+    }
+  }
+}

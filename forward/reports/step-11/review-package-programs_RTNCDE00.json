@@ -1,0 +1,1533 @@
+{
+  "contract": "g2-review-package",
+  "contract_version": "1.0",
+  "generated_at": "2026-11-02T17:40:43.853Z",
+  "status": "NOT_APPROVED",
+  "scope": "programs:RTNCDE00",
+  "scope_sha256": "bd0fcf24e958fffd47175318ffdc6805b60b97194b304809915eebea4201113a",
+  "baseline_manifest_sha256": "352b97f0bbcbdb149c1118791aaabaa2e8e9972716bc77adc3a2f0644d24a068",
+  "readiness": "NOT_READY",
+  "units": [
+    {
+      "name": "RTNCODE",
+      "unit_kind": "copybook",
+      "file_id": "SYS-PORTFOLIO-001-FIL-0013",
+      "relation": "direct_dependency",
+      "needed_by": [
+        "RTNCDE00"
+      ],
+      "via": [
+        "COPY"
+      ],
+      "source_sha256": "27eabb519319258b07b32f09ab60e80a18f6658a118e96c8fa01411fc473cbc9"
+    },
+    {
+      "name": "SQLCA",
+      "unit_kind": "copybook",
+      "file_id": "SYS-PORTFOLIO-001-FIL-0017",
+      "relation": "direct_dependency",
+      "needed_by": [
+        "RTNCDE00"
+      ],
+      "via": [
+        "SQL_INCLUDE"
+      ],
+      "source_sha256": "03e8f64ae705fe87324100488072c05d179fb75f64db0dc0cf753f23ab10afc7"
+    },
+    {
+      "name": "RTNCDE00",
+      "unit_kind": "program",
+      "file_id": "SYS-PORTFOLIO-001-FIL-0052",
+      "relation": "primary",
+      "needed_by": [],
+      "via": [],
+      "source_sha256": "7cb951ea1f418c19ddd61c0eca00f21108af5f364b5ecf05742cbc428862994e"
+    }
+  ],
+  "requirements": [
+    {
+      "id": "REQ-RTNCDE00-001",
+      "kind": "requirement",
+      "statement": "The return-code service selects its action from the request type (RC-REQUEST-TYPE): 'I' initialises the return-code area (program ID spaces, current and highest code 0, status SUCCESS, response code 0); 'S' records a new return code; 'G' returns the current code, the highest code and the status with response code 0; 'L' inserts one row into DB2 table RTNCODES with the current timestamp, program ID, current code, highest code, status and message, setting response code 0 when the insert succeeds (SQLCODE 0) and 8 otherwise; 'A' analyses logged codes over a time window. Any other request type performs nothing and leaves the response code unchanged.",
+      "sha256": "70a3b283f57b4ad031f3f4f6493b33d8cccda01184ab7ba117214bf245cc9c5e",
+      "g2_outcome": "REQUIRES_SME_DECISION",
+      "blocking": true,
+      "g2_reasons": [
+        "REQUIRES_SME_DECISION: blocked by DR-DB2CONN-002 (open)"
+      ],
+      "layers": {
+        "source_evidence_found": true,
+        "deterministically_verified": true,
+        "accepted_by_authorised_reviewer": false,
+        "human_decision_resolved": false
+      },
+      "earlier_claim_check": "verified",
+      "context_status": "CONTEXT_SUPPORTED",
+      "inspect": [
+        {
+          "file": "src/programs/batch/RTNCDE00.cbl",
+          "lines": [
+            33,
+            49
+          ],
+          "cited_line": 33,
+          "cited_line_inside_statement": true
+        }
+      ],
+      "chains": [
+        {
+          "condition": "RC-INITIALIZE",
+          "usage": "tested",
+          "declared": "src/copybook/common/RTNCODE.cpy:6",
+          "values": [
+            "I"
+          ],
+          "permanent_id": "SYS-PORTFOLIO-001-FIL-0013-FLD-000002"
+        },
+        {
+          "condition": "RC-SET-CODE",
+          "usage": "tested",
+          "declared": "src/copybook/common/RTNCODE.cpy:7",
+          "values": [
+            "S"
+          ],
+          "permanent_id": "SYS-PORTFOLIO-001-FIL-0013-FLD-000003"
+        },
+        {
+          "condition": "RC-GET-CODE",
+          "usage": "tested",
+          "declared": "src/copybook/common/RTNCODE.cpy:8",
+          "values": [
+            "G"
+          ],
+          "permanent_id": "SYS-PORTFOLIO-001-FIL-0013-FLD-000004"
+        },
+        {
+          "condition": "RC-LOG-CODE",
+          "usage": "tested",
+          "declared": "src/copybook/common/RTNCODE.cpy:9",
+          "values": [
+            "L"
+          ],
+          "permanent_id": "SYS-PORTFOLIO-001-FIL-0013-FLD-000005"
+        },
+        {
+          "condition": "RC-ANALYZE",
+          "usage": "tested",
+          "declared": "src/copybook/common/RTNCODE.cpy:10",
+          "values": [
+            "A"
+          ],
+          "permanent_id": "SYS-PORTFOLIO-001-FIL-0013-FLD-000006"
+        }
+      ],
+      "supplements": [],
+      "adjudications": []
+    },
+    {
+      "id": "REQ-RTNCDE00-002",
+      "kind": "requirement",
+      "statement": "When a new return code is set ('S'), if it is greater than the highest code recorded so far (RC-HIGHEST-CODE) it becomes the new highest code; otherwise the highest code is kept. In both cases the current code becomes the new code. The highest code is held in the caller's request area, so it persists only as long as the caller keeps that area.",
+      "sha256": "88a2aeb73bc02e2ecc83895f0da65046b7238dd597036a28e222c7ecddf217de",
+      "g2_outcome": "REQUIRES_EVIDENCE",
+      "blocking": true,
+      "g2_reasons": [
+        "REQUIRES_EVIDENCE: declared verified_from_source but not confirmed by the runtime: EAR-0002: the earlier verification relied on value(s) 'S' matched only as a substring inside a data name in the cited text, and no cited statement supports them; other statements in the program do support the value (alternative evidence for a citation update by a reviewer)",
+        "REQUIRES_SME_DECISION: blocked by RVW-REQ-RTNCDE00-002 (open)"
+      ],
+      "layers": {
+        "source_evidence_found": false,
+        "deterministically_verified": false,
+        "accepted_by_authorised_reviewer": false,
+        "human_decision_resolved": false
+      },
+      "earlier_claim_check": "unverified",
+      "context_status": "CONTEXT_UNSUPPORTED",
+      "inspect": [
+        {
+          "file": "src/programs/batch/RTNCDE00.cbl",
+          "lines": [
+            64,
+            66
+          ],
+          "cited_line": 64,
+          "cited_line_inside_statement": true
+        }
+      ],
+      "chains": [],
+      "supplements": [
+        {
+          "id": "ESU-0001",
+          "version": 1,
+          "status": "CONTEXT_UNSUPPORTED",
+          "eligible": false,
+          "current": true,
+          "problems": []
+        }
+      ],
+      "adjudications": [
+        {
+          "id": "EAR-0002",
+          "version": 1,
+          "classification": "SOURCE_CHAIN_PARTIAL",
+          "superseding_status": "EVIDENCE_INVALIDATED",
+          "current": true
+        }
+      ]
+    },
+    {
+      "id": "REQ-RTNCDE00-003",
+      "kind": "requirement",
+      "statement": "When a new return code is set, the system classifies it: 0 is SUCCESS ('S'), 1 to 4 is WARNING ('W'), 5 to 8 is ERROR ('E') and any other value is SEVERE ('F'). The response code is then set to 0.",
+      "sha256": "ec665cc58b23e4e018cd684d7e7eb95f38767f28db156d80ca4cea4c30b1a28c",
+      "g2_outcome": "REQUIRES_EVIDENCE",
+      "blocking": true,
+      "g2_reasons": [
+        "REQUIRES_EVIDENCE: declared verified_from_source but not confirmed by the runtime: stated values found in the program but not in the cited lines: F",
+        "REQUIRES_SME_DECISION: blocked by RVW-REQ-RTNCDE00-003 (open)"
+      ],
+      "layers": {
+        "source_evidence_found": true,
+        "deterministically_verified": true,
+        "accepted_by_authorised_reviewer": false,
+        "human_decision_resolved": false
+      },
+      "earlier_claim_check": "unverified",
+      "context_status": "CONTEXT_SUPPORTED",
+      "inspect": [
+        {
+          "file": "src/programs/batch/RTNCDE00.cbl",
+          "lines": [
+            70,
+            79
+          ],
+          "cited_line": 70,
+          "cited_line_inside_statement": true
+        }
+      ],
+      "chains": [
+        {
+          "condition": "RC-STATUS-SUCCESS",
+          "usage": "sets_true",
+          "declared": "src/copybook/common/RTNCODE.cpy:17",
+          "values": [
+            "S"
+          ],
+          "permanent_id": "SYS-PORTFOLIO-001-FIL-0013-FLD-000013"
+        },
+        {
+          "condition": "RC-STATUS-WARNING",
+          "usage": "sets_true",
+          "declared": "src/copybook/common/RTNCODE.cpy:18",
+          "values": [
+            "W"
+          ],
+          "permanent_id": "SYS-PORTFOLIO-001-FIL-0013-FLD-000014"
+        },
+        {
+          "condition": "RC-STATUS-ERROR",
+          "usage": "sets_true",
+          "declared": "src/copybook/common/RTNCODE.cpy:19",
+          "values": [
+            "E"
+          ],
+          "permanent_id": "SYS-PORTFOLIO-001-FIL-0013-FLD-000015"
+        },
+        {
+          "condition": "RC-STATUS-SEVERE",
+          "usage": "sets_true",
+          "declared": "src/copybook/common/RTNCODE.cpy:20",
+          "values": [
+            "F"
+          ],
+          "permanent_id": "SYS-PORTFOLIO-001-FIL-0013-FLD-000016"
+        }
+      ],
+      "supplements": [
+        {
+          "id": "ESU-0002",
+          "version": 1,
+          "status": "CONTEXT_SUPPORTED",
+          "eligible": true,
+          "current": true,
+          "problems": []
+        }
+      ],
+      "adjudications": [
+        {
+          "id": "EAR-0003",
+          "version": 1,
+          "classification": "SOURCE_CHAIN_VERIFIED",
+          "superseding_status": null,
+          "current": true
+        }
+      ]
+    },
+    {
+      "id": "REQ-RTNCDE00-004",
+      "kind": "requirement",
+      "statement": "On an analyse request ('A') the system counts the logged return codes in RTNCODES for the requested program ID whose timestamp is greater than or equal to the caller's start time and less than or equal to the caller's end time, and returns the count, the highest (MAX) and the lowest (MIN) logged return code. The response code is 0 when the query succeeds (SQLCODE 0) and 8 otherwise.",
+      "sha256": "0ac2f6b674b57cdeceab63b1845884a51dc70e50d0eccdbaf9ab57f1a5292269",
+      "g2_outcome": "CONTRADICTED",
+      "blocking": true,
+      "g2_reasons": [
+        "CONTRADICTED: the source contradicts the cited evidence: cited line 121 is outside SYS-PORTFOLIO-001-FIL-0052-STMT-000024 (lines 122-133)",
+        "REQUIRES_SME_DECISION: blocked by DR-DB2CONN-002 (open)",
+        "REQUIRES_SME_DECISION: blocked by RVW-REQ-RTNCDE00-004 (open)"
+      ],
+      "layers": {
+        "source_evidence_found": false,
+        "deterministically_verified": false,
+        "accepted_by_authorised_reviewer": false,
+        "human_decision_resolved": false
+      },
+      "earlier_claim_check": "contradicted",
+      "context_status": "CITATION_MISMATCH",
+      "inspect": [
+        {
+          "file": "src/programs/batch/RTNCDE00.cbl",
+          "lines": [
+            122,
+            133
+          ],
+          "cited_line": 121,
+          "cited_line_inside_statement": false
+        }
+      ],
+      "chains": [],
+      "supplements": [
+        {
+          "id": "ESU-0003",
+          "version": 1,
+          "status": "CITATION_MISMATCH",
+          "eligible": false,
+          "current": true,
+          "problems": []
+        }
+      ],
+      "adjudications": []
+    },
+    {
+      "id": "RT-RTNCDE00-001",
+      "kind": "runtime_requirement",
+      "statement": "SET request classifies the new code: 0 success, 1-4 warning, 5-8 error, anything else severe, and keeps the highest code seen in the caller's area (state lives in the caller-supplied RC-REQUEST-AREA, not in this program).",
+      "sha256": "df9759abc7f29462422df7513c5253527a83e18c5525b4450802ee6db6ef4e60",
+      "g2_outcome": "VERIFIED",
+      "blocking": false,
+      "g2_reasons": [
+        "independently re-verified against the original COBOL source by the runtime (source text present; business interpretation still needs human approval)"
+      ],
+      "layers": {
+        "source_evidence_found": true,
+        "deterministically_verified": true,
+        "accepted_by_authorised_reviewer": false,
+        "human_decision_resolved": false
+      },
+      "earlier_claim_check": "verified",
+      "context_status": "CONTEXT_SUPPORTED",
+      "inspect": [
+        {
+          "file": "src/programs/batch/RTNCDE00.cbl",
+          "lines": [
+            70,
+            79
+          ],
+          "cited_line": 70,
+          "cited_line_inside_statement": true
+        }
+      ],
+      "chains": [
+        {
+          "condition": "RC-STATUS-SUCCESS",
+          "usage": "sets_true",
+          "declared": "src/copybook/common/RTNCODE.cpy:17",
+          "values": [
+            "S"
+          ],
+          "permanent_id": "SYS-PORTFOLIO-001-FIL-0013-FLD-000013"
+        },
+        {
+          "condition": "RC-STATUS-WARNING",
+          "usage": "sets_true",
+          "declared": "src/copybook/common/RTNCODE.cpy:18",
+          "values": [
+            "W"
+          ],
+          "permanent_id": "SYS-PORTFOLIO-001-FIL-0013-FLD-000014"
+        },
+        {
+          "condition": "RC-STATUS-ERROR",
+          "usage": "sets_true",
+          "declared": "src/copybook/common/RTNCODE.cpy:19",
+          "values": [
+            "E"
+          ],
+          "permanent_id": "SYS-PORTFOLIO-001-FIL-0013-FLD-000015"
+        },
+        {
+          "condition": "RC-STATUS-SEVERE",
+          "usage": "sets_true",
+          "declared": "src/copybook/common/RTNCODE.cpy:20",
+          "values": [
+            "F"
+          ],
+          "permanent_id": "SYS-PORTFOLIO-001-FIL-0013-FLD-000016"
+        }
+      ],
+      "supplements": [],
+      "adjudications": []
+    },
+    {
+      "id": "RT-RTNCDE00-002",
+      "kind": "runtime_requirement",
+      "statement": "LOG request inserts one RTNCODES row whose TIMESTAMP is the 16-character CURRENT-DATE prefix (YYYYMMDDHHMMSShh) and reports SQL success/failure only as response code 0/8.",
+      "sha256": "ba25007532f27658e7138af4bd55952c7a3647e4ded4bac7cf62378fb03af17a",
+      "g2_outcome": "VERIFIED",
+      "blocking": false,
+      "g2_reasons": [
+        "independently re-verified against the original COBOL source by the runtime (source text present; business interpretation still needs human approval)"
+      ],
+      "layers": {
+        "source_evidence_found": false,
+        "deterministically_verified": true,
+        "accepted_by_authorised_reviewer": false,
+        "human_decision_resolved": false
+      },
+      "earlier_claim_check": "verified",
+      "context_status": "CONTEXT_SUPPORTED",
+      "inspect": [
+        {
+          "file": "src/programs/batch/RTNCDE00.cbl",
+          "lines": [
+            96,
+            111
+          ],
+          "cited_line": 96,
+          "cited_line_inside_statement": true
+        }
+      ],
+      "chains": [],
+      "supplements": [],
+      "adjudications": []
+    },
+    {
+      "id": "RT-RTNCDE00-003",
+      "kind": "runtime_requirement",
+      "statement": "ANALYZE request returns count, max and min RETURN_CODE for a program within [RC-START-TIME, RC-END-TIME] via a singleton SELECT INTO.",
+      "sha256": "9e704b8a16d5f43dfad07e0a07abdee815875185fbd006ac42162b939ad26a31",
+      "g2_outcome": "VERIFIED",
+      "blocking": false,
+      "g2_reasons": [
+        "independently re-verified against the original COBOL source by the runtime (source text present; business interpretation still needs human approval)"
+      ],
+      "layers": {
+        "source_evidence_found": false,
+        "deterministically_verified": true,
+        "accepted_by_authorised_reviewer": false,
+        "human_decision_resolved": false
+      },
+      "earlier_claim_check": "verified",
+      "context_status": "CONTEXT_SUPPORTED",
+      "inspect": [
+        {
+          "file": "src/programs/batch/RTNCDE00.cbl",
+          "lines": [
+            122,
+            133
+          ],
+          "cited_line": 122,
+          "cited_line_inside_statement": true
+        }
+      ],
+      "chains": [],
+      "supplements": [],
+      "adjudications": []
+    }
+  ],
+  "rules": [
+    {
+      "id": "BR-038",
+      "outcome": "VERIFIED",
+      "requirement_ids": [
+        "REQ-RTNCDE00-001"
+      ],
+      "source_run": "rules@5_rules@1.0#b7ca9ee04731"
+    },
+    {
+      "id": "BR-039",
+      "outcome": "VERIFIED",
+      "requirement_ids": [
+        "REQ-RTNCDE00-002"
+      ],
+      "source_run": "rules@5_rules@1.0#b7ca9ee04731"
+    },
+    {
+      "id": "BR-040",
+      "outcome": "VERIFIED",
+      "requirement_ids": [
+        "REQ-RTNCDE00-003"
+      ],
+      "source_run": "rules@5_rules@1.0#b7ca9ee04731"
+    },
+    {
+      "id": "BR-041",
+      "outcome": "VERIFIED",
+      "requirement_ids": [
+        "REQ-RTNCDE00-004"
+      ],
+      "source_run": "rules@5_rules@1.0#b7ca9ee04731"
+    }
+  ],
+  "data_and_runtime_contracts": [
+    {
+      "id": "SYS-PORTFOLIO-001-FIL-0013-REC-0001",
+      "kind": "data_record",
+      "outcome": "VERIFIED",
+      "blocking": false,
+      "usable": true,
+      "units": [
+        "RTNCODE"
+      ],
+      "inclusion": "shared_dependency",
+      "reason": "belongs to RTNCODE (direct_dependency, needed by RTNCDE00)",
+      "record_sha256": "17e24f4ea0005405164baeb40dec8279cfef387f9e423ecda5bd3f96368e6273"
+    },
+    {
+      "id": "SYS-PORTFOLIO-001-FIL-0017-REC-0001",
+      "kind": "data_record",
+      "outcome": "VERIFIED",
+      "blocking": false,
+      "usable": true,
+      "units": [
+        "SQLCA"
+      ],
+      "inclusion": "shared_dependency",
+      "reason": "belongs to SQLCA (direct_dependency, needed by RTNCDE00)",
+      "record_sha256": "a8680afc719616f94dedae788adf709ab9760c9650868143e250449e5f2f5b46"
+    },
+    {
+      "id": "SYS-PORTFOLIO-001-FIL-0052-REC-0001",
+      "kind": "data_record",
+      "outcome": "VERIFIED",
+      "blocking": false,
+      "usable": true,
+      "units": [
+        "RTNCDE00"
+      ],
+      "inclusion": "direct",
+      "reason": "belongs to primary unit RTNCDE00",
+      "record_sha256": "5540ba365afcb16ea7d380778b173e46ddc5c7bcf712ff6e67bd2fbb737ede97"
+    },
+    {
+      "id": "SYS-PORTFOLIO-001-FIL-0052-REC-0002",
+      "kind": "data_record",
+      "outcome": "VERIFIED",
+      "blocking": false,
+      "usable": true,
+      "units": [
+        "RTNCDE00"
+      ],
+      "inclusion": "direct",
+      "reason": "belongs to primary unit RTNCDE00",
+      "record_sha256": "1f284926f5f3b451949f00d6ac275c09329a22ee5cd8699e8b98cf791fce9915"
+    },
+    {
+      "id": "SYS-PORTFOLIO-001-FIL-0052-REC-0003",
+      "kind": "data_record",
+      "outcome": "VERIFIED",
+      "blocking": false,
+      "usable": true,
+      "units": [
+        "RTNCDE00"
+      ],
+      "inclusion": "direct",
+      "reason": "belongs to primary unit RTNCDE00",
+      "record_sha256": "30904a204e2174742656c501123243e3e04abaa4c575e0dc33b27ab466cb71da"
+    }
+  ],
+  "decisions_blocking": [
+    {
+      "decision_id": "DR-DB2CONN-002",
+      "kind": "technical",
+      "class": "cross_scope",
+      "question": "Copybook SQLCA (src/copybook/db2/SQLCA.cpy) includes itself (EXEC SQL INCLUDE SQLCA at line 6) and defines only SQL-STATUS-CODES, with no SQLCODE or SQLERRMC field; SQLCODE/SQLERRMC therefore have no Field ID in 14 DB2 programs, including HISTLD00, RTNANA00, RTNCDE00, DB2CMT and DB2CONN. Which SQLCA does the precompiler actually supply, and may the forward design assume the standard DB2 SQLCODE meaning (0 success, -803 duplicate key, negative values errors) used in these requirements?",
+      "outcomes": [
+        {
+          "outcome": "resolved_no_change",
+          "roles": [
+            "technical_authority"
+          ]
+        },
+        {
+          "outcome": "excluded_from_scope",
+          "roles": [
+            "technical_authority"
+          ]
+        },
+        {
+          "outcome": "resolved_requires_update",
+          "roles": [
+            "technical_authority"
+          ]
+        }
+      ],
+      "decision_sha256": "7004bffb5b7e045c7e8f669d67550d4534d729a241f7c756c08bb19aa9ac1fea",
+      "facts": {
+        "decision_id": "DR-DB2CONN-002",
+        "kind": "technical",
+        "question": "Copybook SQLCA (src/copybook/db2/SQLCA.cpy) includes itself (EXEC SQL INCLUDE SQLCA at line 6) and defines only SQL-STATUS-CODES, with no SQLCODE or SQLERRMC field; SQLCODE/SQLERRMC therefore have no Field ID in 14 DB2 programs, including HISTLD00, RTNANA00, RTNCDE00, DB2CMT and DB2CONN. Which SQLCA does the precompiler actually supply, and may the forward design assume the standard DB2 SQLCODE meaning (0 success, -803 duplicate key, negative values errors) used in these requirements?",
+        "options_recorded": [
+          "Confirm the standard DB2 SQLCA is supplied by the precompiler",
+          "Supply the real SQLCA layout"
+        ],
+        "allowed_outcomes": [
+          {
+            "outcome": "resolved_no_change",
+            "roles": [
+              "technical_authority"
+            ]
+          },
+          {
+            "outcome": "excluded_from_scope",
+            "roles": [
+              "technical_authority"
+            ]
+          },
+          {
+            "outcome": "resolved_requires_update",
+            "roles": [
+              "technical_authority"
+            ]
+          }
+        ],
+        "affected_units": [
+          "HISTLD00",
+          "RTNANA00",
+          "RTNCDE00",
+          "DB2CMT",
+          "DB2CONN"
+        ],
+        "affected_requirements": [
+          "REQ-DB2CMT-002",
+          "REQ-DB2CMT-003",
+          "REQ-DB2CONN-002",
+          "REQ-DB2CONN-003",
+          "REQ-DB2CONN-004",
+          "REQ-HISTLD00-002",
+          "REQ-RTNANA00-001",
+          "REQ-RTNCDE00-001",
+          "REQ-RTNCDE00-004"
+        ],
+        "copybooks": [
+          {
+            "name": "SQLCA",
+            "file_id": "SYS-PORTFOLIO-001-FIL-0017",
+            "path": "src/copybook/db2/SQLCA.cpy",
+            "sha256": "03e8f64ae705fe87324100488072c05d179fb75f64db0dc0cf753f23ab10afc7",
+            "available": true,
+            "self_inclusion": [
+              {
+                "line": 6,
+                "text": "EXEC SQL INCLUDE SQLCA END-EXEC."
+              }
+            ],
+            "declarations": [
+              {
+                "kind": "item",
+                "name": "SQL-STATUS-CODES",
+                "level": 1,
+                "line": 9,
+                "values": [],
+                "parent": null
+              },
+              {
+                "kind": "item",
+                "name": "SQL-SUCCESS",
+                "level": 5,
+                "line": 10,
+                "values": [
+                  "00000"
+                ],
+                "parent": "SQL-STATUS-CODES"
+              },
+              {
+                "kind": "item",
+                "name": "SQL-NOT-FOUND",
+                "level": 5,
+                "line": 11,
+                "values": [
+                  "02000"
+                ],
+                "parent": "SQL-STATUS-CODES"
+              },
+              {
+                "kind": "item",
+                "name": "SQL-DUP-KEY",
+                "level": 5,
+                "line": 12,
+                "values": [
+                  "23505"
+                ],
+                "parent": "SQL-STATUS-CODES"
+              },
+              {
+                "kind": "item",
+                "name": "SQL-DEADLOCK",
+                "level": 5,
+                "line": 13,
+                "values": [
+                  "40001"
+                ],
+                "parent": "SQL-STATUS-CODES"
+              },
+              {
+                "kind": "item",
+                "name": "SQL-TIMEOUT",
+                "level": 5,
+                "line": 14,
+                "values": [
+                  "40003"
+                ],
+                "parent": "SQL-STATUS-CODES"
+              },
+              {
+                "kind": "item",
+                "name": "SQL-CONNECTION-ERROR",
+                "level": 5,
+                "line": 15,
+                "values": [
+                  "08001"
+                ],
+                "parent": "SQL-STATUS-CODES"
+              },
+              {
+                "kind": "item",
+                "name": "SQL-DB-ERROR",
+                "level": 5,
+                "line": 16,
+                "values": [
+                  "58004"
+                ],
+                "parent": "SQL-STATUS-CODES"
+              }
+            ],
+            "included_by_programs": [
+              "CURSMGR",
+              "DB2CMT",
+              "DB2CONN",
+              "DB2ERR",
+              "DB2HNDL",
+              "DB2ONLN",
+              "DB2RECV",
+              "DB2STAT",
+              "ERRHNDL",
+              "HISTLD00",
+              "INQHIST",
+              "RTNANA00",
+              "RTNCDE00",
+              "SECMGR"
+            ]
+          }
+        ],
+        "names_used_by_programs": [
+          {
+            "name": "SQL-STATUS-CODES",
+            "declared_in_repository": true,
+            "used_by_programs": []
+          },
+          {
+            "name": "SQLCODE",
+            "declared_in_repository": false,
+            "used_by_programs": [
+              "CURSMGR",
+              "DB2CMT",
+              "DB2CONN",
+              "DB2ERR",
+              "DB2HNDL",
+              "DB2ONLN",
+              "DB2RECV",
+              "DB2STAT",
+              "ERRHNDL",
+              "HISTLD00",
+              "INQHIST",
+              "RTNANA00",
+              "RTNCDE00",
+              "SECMGR"
+            ]
+          },
+          {
+            "name": "SQLERRMC",
+            "declared_in_repository": false,
+            "used_by_programs": [
+              "DB2HNDL",
+              "DB2ONLN"
+            ]
+          }
+        ],
+        "affected_scopes": [
+          {
+            "scope": "programs:DB2CMT",
+            "readiness": "NOT_READY",
+            "blocking": 30
+          },
+          {
+            "scope": "programs:DB2CONN",
+            "readiness": "NOT_READY",
+            "blocking": 20
+          },
+          {
+            "scope": "programs:HISTLD00",
+            "readiness": "NOT_READY",
+            "blocking": 19
+          },
+          {
+            "scope": "programs:RTNANA00",
+            "readiness": "NOT_READY",
+            "blocking": 10
+          },
+          {
+            "scope": "programs:RTNCDE00",
+            "readiness": "NOT_READY",
+            "blocking": 6
+          }
+        ],
+        "counts": {
+          "affected_units": 5,
+          "affected_requirements": 9,
+          "affected_program_scopes": 5
+        },
+        "separation": {
+          "A_source_demonstrates": [
+            "src/copybook/db2/SQLCA.cpy (sha256 03e8f64ae705…) declares SQL-STATUS-CODES with 7 VALUE clause(s)",
+            "SQLCA line 6 includes itself: \"EXEC SQL INCLUDE SQLCA END-EXEC.\"",
+            "SQLCA is included by 14 program(s)"
+          ],
+          "B_external_environment_may_provide": [
+            "SQLCODE: used by 14 program(s) but declared nowhere in the repository; a DB2 precompiler or runtime normally supplies such names, which the repository cannot confirm",
+            "SQLERRMC: used by 2 program(s) but declared nowhere in the repository; a DB2 precompiler or runtime normally supplies such names, which the repository cannot confirm"
+          ],
+          "C_unsupported_assumptions": [
+            "any layout, field order or value meaning of SQLCODE, SQLERRMC beyond what the repository declares",
+            "the target runtime (e.g. database version) that would supply SQLCA and those names"
+          ],
+          "D_missing_artifacts": [
+            "the real SQLCA member (the repository copy includes itself)",
+            "a declaration of SQLCODE",
+            "a declaration of SQLERRMC"
+          ],
+          "E_must_be_decided": "the technical authority must choose one allowed outcome (resolved_no_change, excluded_from_scope, resolved_requires_update); the runtime does not choose"
+        }
+      }
+    },
+    {
+      "decision_id": "DR-F2-0011-001",
+      "kind": "data_layout",
+      "class": "shared_dependency",
+      "question": "Copybook SQLCA (SYS-PORTFOLIO-001-FIL-0017) line 6 contains 'EXEC SQL INCLUDE SQLCA END-EXEC', naming itself. The included SQL communication area (SQLCODE, SQLSTATE, SQLERRMC, ...) has no layout in any reverse artifact. How should the forward design obtain the SQLCA layout and the SQLCODE/SQLSTATE semantics used by the 14 DB2 programs?",
+      "outcomes": [
+        {
+          "outcome": "resolved_no_change",
+          "roles": [
+            "technical_authority"
+          ]
+        },
+        {
+          "outcome": "excluded_from_scope",
+          "roles": [
+            "technical_authority"
+          ]
+        }
+      ],
+      "decision_sha256": "9295eb19e7b7bf928ede74d7df5811cab75951ba41245bb62b97a3764bc5493f",
+      "facts": {
+        "decision_id": "DR-F2-0011-001",
+        "kind": "data_layout",
+        "question": "Copybook SQLCA (SYS-PORTFOLIO-001-FIL-0017) line 6 contains 'EXEC SQL INCLUDE SQLCA END-EXEC', naming itself. The included SQL communication area (SQLCODE, SQLSTATE, SQLERRMC, ...) has no layout in any reverse artifact. How should the forward design obtain the SQLCA layout and the SQLCODE/SQLSTATE semantics used by the 14 DB2 programs?",
+        "options_recorded": [
+          "Treat the include as the IBM DB2 precompiler-supplied SQLCA and supply its standard layout from authoritative IBM documentation as a documented external dependency (requires SME confirmation of the DB2 version).",
+          "Do not model an SQLCA record; map SQLCODE/SQLSTATE checks to JDBC SQLException error code and SQLState in the Java design, with the SQL-STATUS-CODES constants as the SQLSTATE comparison table.",
+          "Obtain the real SQLCA member from the source library (the repository copy appears to be a placeholder that shadows it) and re-run the reverse harness."
+        ],
+        "allowed_outcomes": [
+          {
+            "outcome": "resolved_no_change",
+            "roles": [
+              "technical_authority"
+            ]
+          },
+          {
+            "outcome": "excluded_from_scope",
+            "roles": [
+              "technical_authority"
+            ]
+          }
+        ],
+        "affected_units": [
+          "SQLCA"
+        ],
+        "affected_requirements": [],
+        "copybooks": [
+          {
+            "name": "SQLCA",
+            "file_id": "SYS-PORTFOLIO-001-FIL-0017",
+            "path": "src/copybook/db2/SQLCA.cpy",
+            "sha256": "03e8f64ae705fe87324100488072c05d179fb75f64db0dc0cf753f23ab10afc7",
+            "available": true,
+            "self_inclusion": [
+              {
+                "line": 6,
+                "text": "EXEC SQL INCLUDE SQLCA END-EXEC."
+              }
+            ],
+            "declarations": [
+              {
+                "kind": "item",
+                "name": "SQL-STATUS-CODES",
+                "level": 1,
+                "line": 9,
+                "values": [],
+                "parent": null
+              },
+              {
+                "kind": "item",
+                "name": "SQL-SUCCESS",
+                "level": 5,
+                "line": 10,
+                "values": [
+                  "00000"
+                ],
+                "parent": "SQL-STATUS-CODES"
+              },
+              {
+                "kind": "item",
+                "name": "SQL-NOT-FOUND",
+                "level": 5,
+                "line": 11,
+                "values": [
+                  "02000"
+                ],
+                "parent": "SQL-STATUS-CODES"
+              },
+              {
+                "kind": "item",
+                "name": "SQL-DUP-KEY",
+                "level": 5,
+                "line": 12,
+                "values": [
+                  "23505"
+                ],
+                "parent": "SQL-STATUS-CODES"
+              },
+              {
+                "kind": "item",
+                "name": "SQL-DEADLOCK",
+                "level": 5,
+                "line": 13,
+                "values": [
+                  "40001"
+                ],
+                "parent": "SQL-STATUS-CODES"
+              },
+              {
+                "kind": "item",
+                "name": "SQL-TIMEOUT",
+                "level": 5,
+                "line": 14,
+                "values": [
+                  "40003"
+                ],
+                "parent": "SQL-STATUS-CODES"
+              },
+              {
+                "kind": "item",
+                "name": "SQL-CONNECTION-ERROR",
+                "level": 5,
+                "line": 15,
+                "values": [
+                  "08001"
+                ],
+                "parent": "SQL-STATUS-CODES"
+              },
+              {
+                "kind": "item",
+                "name": "SQL-DB-ERROR",
+                "level": 5,
+                "line": 16,
+                "values": [
+                  "58004"
+                ],
+                "parent": "SQL-STATUS-CODES"
+              }
+            ],
+            "included_by_programs": [
+              "CURSMGR",
+              "DB2CMT",
+              "DB2CONN",
+              "DB2ERR",
+              "DB2HNDL",
+              "DB2ONLN",
+              "DB2RECV",
+              "DB2STAT",
+              "ERRHNDL",
+              "HISTLD00",
+              "INQHIST",
+              "RTNANA00",
+              "RTNCDE00",
+              "SECMGR"
+            ]
+          }
+        ],
+        "names_used_by_programs": [
+          {
+            "name": "SQLCODE",
+            "declared_in_repository": false,
+            "used_by_programs": [
+              "CURSMGR",
+              "DB2CMT",
+              "DB2CONN",
+              "DB2ERR",
+              "DB2HNDL",
+              "DB2ONLN",
+              "DB2RECV",
+              "DB2STAT",
+              "ERRHNDL",
+              "HISTLD00",
+              "INQHIST",
+              "RTNANA00",
+              "RTNCDE00",
+              "SECMGR"
+            ]
+          },
+          {
+            "name": "SQLERRMC",
+            "declared_in_repository": false,
+            "used_by_programs": [
+              "DB2HNDL",
+              "DB2ONLN"
+            ]
+          }
+        ],
+        "affected_scopes": [
+          {
+            "scope": "programs:CURSMGR",
+            "readiness": "NOT_READY",
+            "blocking": 12
+          },
+          {
+            "scope": "programs:DB2CMT",
+            "readiness": "NOT_READY",
+            "blocking": 30
+          },
+          {
+            "scope": "programs:DB2CONN",
+            "readiness": "NOT_READY",
+            "blocking": 20
+          },
+          {
+            "scope": "programs:DB2ERR",
+            "readiness": "NOT_READY",
+            "blocking": 21
+          },
+          {
+            "scope": "programs:DB2HNDL",
+            "readiness": "NOT_READY",
+            "blocking": 10
+          },
+          {
+            "scope": "programs:DB2ONLN",
+            "readiness": "NOT_READY",
+            "blocking": 9
+          },
+          {
+            "scope": "programs:DB2RECV",
+            "readiness": "NOT_READY",
+            "blocking": 30
+          },
+          {
+            "scope": "programs:DB2STAT",
+            "readiness": "NOT_READY",
+            "blocking": 18
+          },
+          {
+            "scope": "programs:ERRHNDL",
+            "readiness": "NOT_READY",
+            "blocking": 10
+          },
+          {
+            "scope": "programs:HISTLD00",
+            "readiness": "NOT_READY",
+            "blocking": 19
+          },
+          {
+            "scope": "programs:INQHIST",
+            "readiness": "NOT_READY",
+            "blocking": 52
+          },
+          {
+            "scope": "programs:INQONLN",
+            "readiness": "NOT_READY",
+            "blocking": 79
+          },
+          {
+            "scope": "programs:RTNANA00",
+            "readiness": "NOT_READY",
+            "blocking": 10
+          },
+          {
+            "scope": "programs:RTNCDE00",
+            "readiness": "NOT_READY",
+            "blocking": 6
+          },
+          {
+            "scope": "programs:SECMGR",
+            "readiness": "NOT_READY",
+            "blocking": 10
+          }
+        ],
+        "counts": {
+          "affected_units": 1,
+          "affected_requirements": 0,
+          "affected_program_scopes": 15
+        },
+        "separation": {
+          "A_source_demonstrates": [
+            "src/copybook/db2/SQLCA.cpy (sha256 03e8f64ae705…) declares SQL-STATUS-CODES with 7 VALUE clause(s)",
+            "SQLCA line 6 includes itself: \"EXEC SQL INCLUDE SQLCA END-EXEC.\"",
+            "SQLCA is included by 14 program(s)"
+          ],
+          "B_external_environment_may_provide": [
+            "SQLCODE: used by 14 program(s) but declared nowhere in the repository; a DB2 precompiler or runtime normally supplies such names, which the repository cannot confirm",
+            "SQLERRMC: used by 2 program(s) but declared nowhere in the repository; a DB2 precompiler or runtime normally supplies such names, which the repository cannot confirm"
+          ],
+          "C_unsupported_assumptions": [
+            "any layout, field order or value meaning of SQLCODE, SQLERRMC beyond what the repository declares",
+            "the target runtime (e.g. database version) that would supply SQLCA and those names"
+          ],
+          "D_missing_artifacts": [
+            "the real SQLCA member (the repository copy includes itself)",
+            "a declaration of SQLCODE",
+            "a declaration of SQLERRMC"
+          ],
+          "E_must_be_decided": "the technical authority must choose one allowed outcome (resolved_no_change, excluded_from_scope); the runtime does not choose"
+        }
+      }
+    },
+    {
+      "decision_id": "RVW-REQ-RTNCDE00-002",
+      "kind": "review",
+      "class": "direct",
+      "question": "requirement REQ-RTNCDE00-002 (RTNCDE00) is not approvable as drafted: REQUIRES_EVIDENCE: declared verified_from_source but not confirmed by the runtime: EAR-0002: the earlier verification relied on value(s) 'S' matched only as a substring inside a data name in the cited text, and no cited statement supports them; other statements in the program do support the value (alternative evidence for a citation update by a reviewer)",
+      "outcomes": [
+        {
+          "outcome": "excluded_from_scope",
+          "roles": [
+            "business_sme"
+          ]
+        },
+        {
+          "outcome": "resolved_requires_update",
+          "roles": [
+            "business_sme"
+          ]
+        },
+        {
+          "outcome": "approved_exception",
+          "roles": [
+            "exception_approver"
+          ]
+        }
+      ],
+      "decision_sha256": "9bdc2c4a02772adc930d7c78177c54be57561c0ac1b96f2e734f0d49646935b4",
+      "facts": null
+    },
+    {
+      "decision_id": "RVW-REQ-RTNCDE00-003",
+      "kind": "review",
+      "class": "direct",
+      "question": "requirement REQ-RTNCDE00-003 (RTNCDE00) is not approvable as drafted: REQUIRES_EVIDENCE: declared verified_from_source but not confirmed by the runtime: stated values found in the program but not in the cited lines: F",
+      "outcomes": [
+        {
+          "outcome": "resolved_no_change",
+          "roles": [
+            "business_sme"
+          ]
+        },
+        {
+          "outcome": "excluded_from_scope",
+          "roles": [
+            "business_sme"
+          ]
+        },
+        {
+          "outcome": "resolved_requires_update",
+          "roles": [
+            "business_sme"
+          ]
+        },
+        {
+          "outcome": "approved_exception",
+          "roles": [
+            "exception_approver"
+          ]
+        }
+      ],
+      "decision_sha256": "06a21585a3a46da091978d054c9c858732af8cf766dcca07fb92fc2626f4b4ed",
+      "facts": null
+    },
+    {
+      "decision_id": "RVW-REQ-RTNCDE00-004",
+      "kind": "review",
+      "class": "direct",
+      "question": "requirement REQ-RTNCDE00-004 (RTNCDE00) is not approvable as drafted: CONTRADICTED: the source contradicts the cited evidence: cited line 121 is outside SYS-PORTFOLIO-001-FIL-0052-STMT-000024 (lines 122-133)",
+      "outcomes": [
+        {
+          "outcome": "excluded_from_scope",
+          "roles": [
+            "business_sme"
+          ]
+        },
+        {
+          "outcome": "resolved_requires_update",
+          "roles": [
+            "business_sme"
+          ]
+        }
+      ],
+      "decision_sha256": "4c90e9fdf811008ae46354b0dcff72e113e65dfdc4f112d19ddf6247d92587ef",
+      "facts": null
+    }
+  ],
+  "decisions_all": [
+    {
+      "id": "DR-DB2CONN-002",
+      "class": "cross_scope",
+      "blocking": true,
+      "status": "open"
+    },
+    {
+      "id": "DR-F2-0005-009",
+      "class": "cross_scope",
+      "blocking": false,
+      "status": "open"
+    },
+    {
+      "id": "DR-F2-0005-010",
+      "class": "direct",
+      "blocking": false,
+      "status": "open"
+    },
+    {
+      "id": "DR-F2-0011-001",
+      "class": "shared_dependency",
+      "blocking": true,
+      "status": "open"
+    },
+    {
+      "id": "DR-F2-PKT0010-002",
+      "class": "shared_dependency",
+      "blocking": false,
+      "status": "open"
+    },
+    {
+      "id": "DR-RTNCDE00-001",
+      "class": "direct",
+      "blocking": false,
+      "status": "open"
+    },
+    {
+      "id": "RVW-GAP-092",
+      "class": "global",
+      "blocking": false,
+      "status": "open"
+    },
+    {
+      "id": "RVW-GAP-104",
+      "class": "global",
+      "blocking": false,
+      "status": "open"
+    },
+    {
+      "id": "RVW-REQ-RTNCDE00-002",
+      "class": "direct",
+      "blocking": true,
+      "status": "open"
+    },
+    {
+      "id": "RVW-REQ-RTNCDE00-003",
+      "class": "direct",
+      "blocking": true,
+      "status": "open"
+    },
+    {
+      "id": "RVW-REQ-RTNCDE00-004",
+      "class": "direct",
+      "blocking": true,
+      "status": "open"
+    }
+  ],
+  "remediation_proposals": [
+    {
+      "proposal_id": "RP-8d2dd33787",
+      "item": "REQ-RTNCDE00-004",
+      "pointer": "/requirements/26/source_refs/0/line",
+      "from": 121,
+      "to": 122,
+      "original_line_text": "       P500-ANALYZE-CODES.",
+      "proposed_line_text": "           EXEC SQL",
+      "verified_now": true,
+      "decision": "RVW-REQ-RTNCDE00-004",
+      "roles": [
+        "business_sme"
+      ],
+      "claim_supported_after_correction": true
+    }
+  ],
+  "shared_impacts": [
+    {
+      "decision_id": "DR-DB2CONN-002",
+      "scopes": [
+        "programs:DB2CMT",
+        "programs:DB2CONN",
+        "programs:HISTLD00",
+        "programs:RTNANA00",
+        "programs:RTNCDE00"
+      ]
+    },
+    {
+      "decision_id": "DR-F2-0011-001",
+      "scopes": [
+        "programs:CURSMGR",
+        "programs:DB2CMT",
+        "programs:DB2CONN",
+        "programs:DB2ERR",
+        "programs:DB2HNDL",
+        "programs:DB2ONLN",
+        "programs:DB2RECV",
+        "programs:DB2STAT",
+        "programs:ERRHNDL",
+        "programs:HISTLD00",
+        "programs:INQHIST",
+        "programs:INQONLN",
+        "programs:RTNANA00",
+        "programs:RTNCDE00",
+        "programs:SECMGR"
+      ]
+    }
+  ],
+  "roles_required": [
+    "business_sme",
+    "exception_approver",
+    "technical_authority"
+  ],
+  "trust": {
+    "status": "TRUST_NOT_CONFIGURED",
+    "uncovered": [
+      "architecture_approver",
+      "business_sme",
+      "data_owner",
+      "exception_approver",
+      "product_owner",
+      "requirements_approver",
+      "story_approver",
+      "technical_authority"
+    ]
+  },
+  "fresh_requests": [
+    {
+      "decision_id": "DR-DB2CONN-002",
+      "request_id": "DRQ-8a46d20a555f",
+      "file": "D:\\PROJECTS\\REVFORGE-Harness\\forward\\reports\\step-11\\resolution-requests\\DR-DB2CONN-002.request.json",
+      "expires_at": "2026-11-09T17:40:45.759Z",
+      "decision_sha256": "7004bffb5b7e045c7e8f669d67550d4534d729a241f7c756c08bb19aa9ac1fea"
+    },
+    {
+      "decision_id": "DR-F2-0011-001",
+      "request_id": "DRQ-5a06c97411d1",
+      "file": "D:\\PROJECTS\\REVFORGE-Harness\\forward\\reports\\step-11\\resolution-requests\\DR-F2-0011-001.request.json",
+      "expires_at": "2026-11-09T17:40:46.363Z",
+      "decision_sha256": "9295eb19e7b7bf928ede74d7df5811cab75951ba41245bb62b97a3764bc5493f"
+    },
+    {
+      "decision_id": "RVW-REQ-RTNCDE00-002",
+      "request_id": "DRQ-a9e2249a4258",
+      "file": "D:\\PROJECTS\\REVFORGE-Harness\\forward\\reports\\step-11\\resolution-requests\\RVW-REQ-RTNCDE00-002.request.json",
+      "expires_at": "2026-11-09T17:40:47.304Z",
+      "decision_sha256": "9bdc2c4a02772adc930d7c78177c54be57561c0ac1b96f2e734f0d49646935b4"
+    },
+    {
+      "decision_id": "RVW-REQ-RTNCDE00-003",
+      "request_id": "DRQ-f226cdb8499a",
+      "file": "D:\\PROJECTS\\REVFORGE-Harness\\forward\\reports\\step-11\\resolution-requests\\RVW-REQ-RTNCDE00-003.request.json",
+      "expires_at": "2026-11-09T17:40:48.369Z",
+      "decision_sha256": "06a21585a3a46da091978d054c9c858732af8cf766dcca07fb92fc2626f4b4ed"
+    },
+    {
+      "decision_id": "RVW-REQ-RTNCDE00-004",
+      "request_id": "DRQ-91faa5b8863b",
+      "file": "D:\\PROJECTS\\REVFORGE-Harness\\forward\\reports\\step-11\\resolution-requests\\RVW-REQ-RTNCDE00-004.request.json",
+      "expires_at": "2026-11-09T17:40:49.530Z",
+      "decision_sha256": "4c90e9fdf811008ae46354b0dcff72e113e65dfdc4f112d19ddf6247d92587ef"
+    }
+  ],
+  "stale_requests": [
+    {
+      "file": "D:\\PROJECTS\\REVFORGE-Harness\\forward\\reports\\step-10\\resolution-requests\\DR-DB2CONN-002.request.json",
+      "decision_id": "DR-DB2CONN-002",
+      "request_id": "DRQ-57f29d19d1f3",
+      "stale": false,
+      "reasons": []
+    },
+    {
+      "file": "D:\\PROJECTS\\REVFORGE-Harness\\forward\\reports\\step-10\\resolution-requests\\DR-F2-0011-001.request.json",
+      "decision_id": "DR-F2-0011-001",
+      "request_id": "DRQ-021673fc0ffe",
+      "stale": false,
+      "reasons": []
+    },
+    {
+      "file": "D:\\PROJECTS\\REVFORGE-Harness\\forward\\reports\\step-10\\resolution-requests\\RVW-REQ-RTNCDE00-002.request.json",
+      "decision_id": "RVW-REQ-RTNCDE00-002",
+      "request_id": "DRQ-d97a957c0425",
+      "stale": false,
+      "reasons": []
+    },
+    {
+      "file": "D:\\PROJECTS\\REVFORGE-Harness\\forward\\reports\\step-10\\resolution-requests\\RVW-REQ-RTNCDE00-003.request.json",
+      "decision_id": "RVW-REQ-RTNCDE00-003",
+      "request_id": "DRQ-51fb7a227533",
+      "stale": false,
+      "reasons": []
+    },
+    {
+      "file": "D:\\PROJECTS\\REVFORGE-Harness\\forward\\reports\\step-10\\resolution-requests\\RVW-REQ-RTNCDE00-004.request.json",
+      "decision_id": "RVW-REQ-RTNCDE00-004",
+      "request_id": "DRQ-01b26705489e",
+      "stale": false,
+      "reasons": []
+    },
+    {
+      "file": "D:\\PROJECTS\\REVFORGE-Harness\\forward\\reports\\step-5.5\\resolution-requests\\DR-DB2CONN-002.resolution-request.json",
+      "decision_id": "DR-DB2CONN-002",
+      "request_id": null,
+      "stale": false,
+      "reasons": []
+    },
+    {
+      "file": "D:\\PROJECTS\\REVFORGE-Harness\\forward\\reports\\step-5.5\\resolution-requests\\DR-F2-0011-001.resolution-request.json",
+      "decision_id": "DR-F2-0011-001",
+      "request_id": null,
+      "stale": false,
+      "reasons": []
+    },
+    {
+      "file": "D:\\PROJECTS\\REVFORGE-Harness\\forward\\reports\\step-5.5\\resolution-requests\\RVW-REQ-RTNCDE00-003.resolution-request.json",
+      "decision_id": "RVW-REQ-RTNCDE00-003",
+      "request_id": null,
+      "stale": true,
+      "reasons": [
+        "the decision content changed (new options, evidence or affected items)"
+      ]
+    },
+    {
+      "file": "D:\\PROJECTS\\REVFORGE-Harness\\forward\\reports\\step-5.5\\resolution-requests\\RVW-REQ-RTNCDE00-004.resolution-request.json",
+      "decision_id": "RVW-REQ-RTNCDE00-004",
+      "request_id": null,
+      "stale": false,
+      "reasons": []
+    },
+    {
+      "file": "D:\\PROJECTS\\REVFORGE-Harness\\forward\\reports\\step-8\\resolution-requests\\DR-DB2CONN-002.request.json",
+      "decision_id": "DR-DB2CONN-002",
+      "request_id": "DRQ-434822f113da",
+      "stale": false,
+      "reasons": []
+    },
+    {
+      "file": "D:\\PROJECTS\\REVFORGE-Harness\\forward\\reports\\step-8\\resolution-requests\\DR-F2-0011-001.request.json",
+      "decision_id": "DR-F2-0011-001",
+      "request_id": "DRQ-8cb4a0c0906a",
+      "stale": false,
+      "reasons": []
+    },
+    {
+      "file": "D:\\PROJECTS\\REVFORGE-Harness\\forward\\reports\\step-8\\resolution-requests\\RVW-REQ-RTNCDE00-003.request.json",
+      "decision_id": "RVW-REQ-RTNCDE00-003",
+      "request_id": "DRQ-9c84eab7a611",
+      "stale": true,
+      "reasons": [
+        "the decision content changed (new options, evidence or affected items)"
+      ]
+    },
+    {
+      "file": "D:\\PROJECTS\\REVFORGE-Harness\\forward\\reports\\step-8\\resolution-requests\\RVW-REQ-RTNCDE00-004.request.json",
+      "decision_id": "RVW-REQ-RTNCDE00-004",
+      "request_id": "DRQ-8833eafb100b",
+      "stale": false,
+      "reasons": []
+    },
+    {
+      "file": "D:\\PROJECTS\\REVFORGE-Harness\\forward\\reports\\step-9\\RVW-REQ-RTNCDE00-003.request.json",
+      "decision_id": "RVW-REQ-RTNCDE00-003",
+      "request_id": "DRQ-c442a6d2a5fc",
+      "stale": false,
+      "reasons": []
+    }
+  ],
+  "blocking_findings": [
+    {
+      "kind": "requirement",
+      "id": "REQ-RTNCDE00-004",
+      "outcome": "CONTRADICTED",
+      "reason": "CONTRADICTED: the source contradicts the cited evidence: cited line 121 is outside SYS-PORTFOLIO-001-FIL-0052-STMT-000024 (lines 122-133)"
+    },
+    {
+      "kind": "requirement",
+      "id": "REQ-RTNCDE00-002",
+      "outcome": "REQUIRES_EVIDENCE",
+      "reason": "REQUIRES_EVIDENCE: declared verified_from_source but not confirmed by the runtime: EAR-0002: the earlier verification relied on value(s) 'S' matched only as a substring inside a data name in the cited text, and no cited statement supports them; other statements in the program do support the value (alternative evidence for a citation update by a reviewer)"
+    },
+    {
+      "kind": "requirement",
+      "id": "REQ-RTNCDE00-003",
+      "outcome": "REQUIRES_EVIDENCE",
+      "reason": "REQUIRES_EVIDENCE: declared verified_from_source but not confirmed by the runtime: stated values found in the program but not in the cited lines: F"
+    },
+    {
+      "kind": "decision:technical",
+      "id": "DR-DB2CONN-002",
+      "outcome": "REQUIRES_SME_DECISION",
+      "reason": "blocking decision open — Copybook SQLCA (src/copybook/db2/SQLCA.cpy) includes itself (EXEC SQL INCLUDE SQLCA at line 6) and defines only SQL-STATUS-CODES, with no SQLCODE or SQLERRMC field; SQLCODE/SQLERRMC therefore have no Field ID in 14 DB2 programs, including HISTLD00, RTNANA00, RTNCDE00, DB2CMT and DB2CONN. Which SQLCA"
+    },
+    {
+      "kind": "decision:data_layout",
+      "id": "DR-F2-0011-001",
+      "outcome": "REQUIRES_SME_DECISION",
+      "reason": "blocking decision open — Copybook SQLCA (SYS-PORTFOLIO-001-FIL-0017) line 6 contains 'EXEC SQL INCLUDE SQLCA END-EXEC', naming itself. The included SQL communication area (SQLCODE, SQLSTATE, SQLERRMC, ...) has no layout in any reverse artifact. How should the forward design obtain the SQLCA layout and the SQLCODE/SQLSTATE s"
+    },
+    {
+      "kind": "requirement",
+      "id": "REQ-RTNCDE00-001",
+      "outcome": "REQUIRES_SME_DECISION",
+      "reason": "REQUIRES_SME_DECISION: blocked by DR-DB2CONN-002 (open)"
+    }
+  ],
+  "ready_conditions": [
+    "requirement REQ-RTNCDE00-004 must stop blocking (CONTRADICTED)",
+    "requirement REQ-RTNCDE00-002 must stop blocking (REQUIRES_EVIDENCE)",
+    "requirement REQ-RTNCDE00-003 must stop blocking (REQUIRES_EVIDENCE)",
+    "decision:technical DR-DB2CONN-002 must stop blocking (REQUIRES_SME_DECISION)",
+    "decision:data_layout DR-F2-0011-001 must stop blocking (REQUIRES_SME_DECISION)",
+    "requirement REQ-RTNCDE00-001 must stop blocking (REQUIRES_SME_DECISION)"
+  ],
+  "pass_conditions": [
+    "the scope is READY (no blocking finding)",
+    "a trust store with a usable requirements_approver",
+    "an approval request exported for the current scope digest",
+    "a signed approval by a requirements_approver who is not the requester, imported and re-verified",
+    "G2 re-evaluated to PASS for exactly programs:RTNCDE00"
+  ],
+  "g2": {
+    "status": "UNVERIFIED",
+    "reason": "G2 not approved for scope application: NOT_READY (398 blocking finding(s)); failing checks: canonical_rule_coverage, cross_batch_reconciliation, requirement_evidence, runtime_evidence, semantic_contradictions, contradicted_claims, blocking_decisions, data_contracts, scope_classification, readiness, trust_anchor, human_approval"
+  }
+}

@@ -1,0 +1,59 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://revforge.local/contracts/forward/decision-requests.schema.json",
+  "title": "Decision requests and unresolved-decision register (F1 fe-uncertainty-decision-register; F2 unresolved layout/runtime decisions)",
+  "allOf": [{ "$ref": "forward-common.schema.json#/definitions/header" }],
+  "type": "object",
+  "required": ["contract", "decisions", "blocker_report"],
+  "properties": {
+    "contract": { "const": "forward/decision-requests" },
+    "decisions": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["decision_request_id", "kind", "question", "blocking", "blocking_rationale", "status", "affected_requirements", "affected_units", "gap_refs", "rule_refs", "source_refs", "evidence_status", "raised_by_skill"],
+        "properties": {
+          "decision_request_id": { "$ref": "forward-common.schema.json#/definitions/decisionRequestId" },
+          "kind": { "enum": ["business", "technical", "scope", "data_layout", "runtime_semantics"] },
+          "question": { "type": "string", "minLength": 10 },
+          "options": { "type": "array", "items": { "type": "string" } },
+          "blocking": { "type": "boolean" },
+          "blocking_rationale": { "type": "string", "minLength": 3 },
+          "status": { "const": "open" },
+          "affected_requirements": { "type": "array", "items": { "$ref": "forward-common.schema.json#/definitions/requirementId" } },
+          "affected_units": { "type": "array", "items": { "$ref": "forward-common.schema.json#/definitions/unit" } },
+          "gap_refs": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": ["gap", "items", "all_items_included"],
+              "properties": {
+                "gap": { "$ref": "../common.schema.json#/definitions/runLocalRef" },
+                "items": { "type": "array", "minItems": 1, "items": { "$ref": "forward-common.schema.json#/definitions/gapItemId" } },
+                "all_items_included": { "type": "boolean" },
+                "excluded_items_reason": { "type": "string" }
+              }
+            }
+          },
+          "rule_refs": { "type": "array", "items": { "$ref": "../common.schema.json#/definitions/runLocalRef" } },
+          "source_refs": { "type": "array", "items": { "$ref": "forward-common.schema.json#/definitions/sourceRef" } },
+          "evidence_status": { "$ref": "forward-common.schema.json#/definitions/evidenceStatus" },
+          "raised_by_skill": { "$ref": "forward-common.schema.json#/definitions/skillName" }
+        }
+      }
+    },
+    "blocker_report": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["blocking_count", "nonblocking_count", "blocking_decisions", "summary"],
+      "properties": {
+        "blocking_count": { "type": "integer", "minimum": 0 },
+        "nonblocking_count": { "type": "integer", "minimum": 0 },
+        "blocking_decisions": { "type": "array", "items": { "$ref": "forward-common.schema.json#/definitions/decisionRequestId" } },
+        "summary": { "type": "string" }
+      }
+    }
+  }
+}

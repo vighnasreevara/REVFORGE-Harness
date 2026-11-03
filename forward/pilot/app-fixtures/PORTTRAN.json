@@ -1,0 +1,49 @@
+{
+ "program": "PORTTRAN",
+ "provenance": "Written 2026-11-02 by a scenario-author agent (F6 independent fixture design) from the COBOL source src/programs/portfolio/PORTTRAN.cbl and its copybooks under references/udara-legacy-modernization-harness, the fixtures README contract, and the gaps array of pilot-result.json; no generated Java, source map or test results were read.",
+ "scenarios": [
+  {
+   "id": "S01",
+   "title": "TRANFILE not allocated: OPEN INPUT gives status 35 and 9000-ERROR-ROUTINE CALLs ERRPROC (application program, no ON EXCEPTION)",
+   "cobol_lines": [
+    61,
+    75,
+    76,
+    77,
+    79,
+    80,
+    81,
+    82,
+    312,
+    313,
+    314,
+    316
+   ],
+   "kind": "main",
+   "expect": {
+    "outcome": "BLOCKED RUNTIME-CALL-UNAVAILABLE",
+    "display": []
+   }
+  },
+  {
+   "id": "S02",
+   "title": "TRANFILE opens: the next statement opens PORTFOLIO-FILE, whose record layout (COPY PORTREC) is missing",
+   "cobol_lines": [
+    61,
+    79,
+    80,
+    85
+   ],
+   "kind": "main",
+   "datasets": {
+    "TRANFILE": {
+     "records": []
+    }
+   },
+   "expect": {
+    "outcome": "BLOCKED AT src/programs/portfolio/PORTTRAN.cbl:85",
+    "display": []
+   }
+  }
+ ]
+}

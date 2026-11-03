@@ -1,0 +1,199 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://revforge.local/contracts/bmad/receipt.schema.json",
+  "title": "Validated BMad result receipt (runtime-written)",
+  "type": "object",
+  "properties": {
+    "contract": {
+      "const": "bmad/receipt"
+    },
+    "contract_version": {
+      "const": "1.0"
+    },
+    "receipt_id": {
+      "type": "string",
+      "pattern": "^BRC-[0-9]{4}$"
+    },
+    "recorded_at": {
+      "$ref": "../common.schema.json#/definitions/isoTimestamp"
+    },
+    "packet_id": {
+      "type": "string",
+      "pattern": "^BPK-[0-9]{4}$"
+    },
+    "packet_sha256": {
+      "$ref": "../common.schema.json#/definitions/sha256"
+    },
+    "binding_id": {
+      "type": "string",
+      "pattern": "^BMAD-[A-Z]+$"
+    },
+    "workflow_id": {
+      "type": "string",
+      "pattern": "^bmad-[a-z0-9-]+$"
+    },
+    "agent": {
+      "enum": [
+        "F1",
+        "F2",
+        "F3",
+        "F4",
+        "F5",
+        "F6",
+        "F7"
+      ]
+    },
+    "mode": {
+      "enum": [
+        "MOCK",
+        "LIVE"
+      ]
+    },
+    "scope": {
+      "type": "string",
+      "minLength": 1
+    },
+    "scope_sha256": {
+      "$ref": "../common.schema.json#/definitions/sha256"
+    },
+    "baseline": {
+      "type": "object",
+      "properties": {
+        "run_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "manifest_sha256": {
+          "$ref": "../common.schema.json#/definitions/sha256"
+        }
+      },
+      "required": [
+        "run_id",
+        "manifest_sha256"
+      ],
+      "additionalProperties": false
+    },
+    "result_file": {
+      "type": "string",
+      "minLength": 1
+    },
+    "result_sha256": {
+      "$ref": "../common.schema.json#/definitions/sha256"
+    },
+    "documents": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "path": {
+            "type": "string",
+            "minLength": 1
+          },
+          "sha256": {
+            "$ref": "../common.schema.json#/definitions/sha256"
+          }
+        },
+        "required": [
+          "path",
+          "sha256"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "accepted": {
+      "type": "boolean"
+    },
+    "violations": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "checks": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "ok": {
+            "type": "boolean"
+          },
+          "detail": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "required": [
+          "id",
+          "ok",
+          "detail"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "evidence_status": {
+      "enum": [
+        "MOCK_NOT_EVIDENCE",
+        "DRAFT_PENDING_HUMAN_APPROVAL",
+        "REJECTED"
+      ]
+    },
+    "counts_toward_gates": {
+      "const": false
+    },
+    "provenance": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "input": {
+            "type": "string",
+            "minLength": 1
+          },
+          "provenance": {
+            "type": "string",
+            "minLength": 1
+          },
+          "sha256": {
+            "$ref": "../common.schema.json#/definitions/sha256"
+          }
+        },
+        "required": [
+          "input",
+          "provenance",
+          "sha256"
+        ],
+        "additionalProperties": false
+      }
+    }
+  },
+  "required": [
+    "contract",
+    "contract_version",
+    "receipt_id",
+    "recorded_at",
+    "packet_id",
+    "packet_sha256",
+    "binding_id",
+    "workflow_id",
+    "agent",
+    "mode",
+    "scope",
+    "scope_sha256",
+    "baseline",
+    "result_file",
+    "result_sha256",
+    "documents",
+    "accepted",
+    "violations",
+    "checks",
+    "evidence_status",
+    "counts_toward_gates",
+    "provenance"
+  ],
+  "additionalProperties": false
+}

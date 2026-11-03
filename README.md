@@ -20,7 +20,7 @@ REVFORGE turns a legacy COBOL codebase into a traceable Business Requirements Do
 | 6 | `6_diagram_c` | component-mapper, sequence-builder | `output/diagram/`. 65 Mermaid diagrams plus a source-ID index. |
 | 7 | `7_synthesis_c` | gap-detector, section-assembler | `output/final_report/`. Gaps register and BRD. |
 
-The agent definitions are in `.claude/agents/` and the skills in `.claude/skills/`.
+The reverse-engineering agent definitions are in `.claude/agents/` and their skills in `.claude/skills/`. The forward-engineering agents and skills live in `forward/agents/` and `forward/skills/`; `sync-agents` keeps a copy of them in `.claude/` so Claude Code can use them.
 
 ### REVFORGE enhancements
 
@@ -52,8 +52,10 @@ Reverse engineering is complete. The 6 critical gaps in `output/final_report/gap
 ## Repository layout
 
 ```
-.claude/agents/        Agent definitions (1–7)
-.claude/skills/        Skill definitions used by the agents
+.claude/agents/        Reverse-engineering agent definitions (1–7), plus synced copies of the forward agents
+.claude/skills/        Reverse-engineering skills, plus synced copies of the forward skills
+forward/agents/        Forward-engineering agent definitions F1–F7 (edit here)
+forward/skills/        Forward-engineering skills (edit here)
 output/                Generated artifacts (inventory, parser, data, logic, rules, diagram, final_report)
 docs/                  Design notes for the permanent-ID enhancements (Agents 1–3)
 licenses/              Third-party license texts

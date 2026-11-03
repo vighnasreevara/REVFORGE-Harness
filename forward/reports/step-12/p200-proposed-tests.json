@@ -1,0 +1,22 @@
+{
+  "contract": "pilot/proposed-tests",
+  "status": "NON_AUTHORITATIVE",
+  "behaviour_id": "RTNCDE00:P200-SET-RETURN-CODE",
+  "candidate_content_sha256": "50ce87acb17377c8989de885e326578cda0a14c8977931c962d87e480cee8bfa",
+  "oracle": "source-derived from RTNCDE00.cbl lines 64-81 and RTNCODE.cpy lines 17-20; NOT a legacy execution; no equivalence is claimed",
+  "requirements": ["REQ-RTNCDE00-002", "REQ-RTNCDE00-003", "RT-RTNCDE00-001"],
+  "cases": [
+    { "id": "T01", "input": { "newCode": 0, "highestCode": 0, "responseCode": 8 }, "expected": { "highestCode": 0, "currentCode": 0, "status": "S", "responseCode": 0 }, "cobol_lines": [70, 71, 72, 81] },
+    { "id": "T02", "input": { "newCode": 1, "highestCode": 0, "responseCode": 0 }, "expected": { "highestCode": 1, "currentCode": 1, "status": "W", "responseCode": 0 }, "cobol_lines": [64, 65, 68, 73, 74] },
+    { "id": "T03", "input": { "newCode": 4, "highestCode": 9, "responseCode": 0 }, "expected": { "highestCode": 9, "currentCode": 4, "status": "W", "responseCode": 0 }, "cobol_lines": [64, 68, 73, 74] },
+    { "id": "T04", "input": { "newCode": 5, "highestCode": 5, "responseCode": 0 }, "expected": { "highestCode": 5, "currentCode": 5, "status": "E", "responseCode": 0 }, "cobol_lines": [64, 68, 75, 76] },
+    { "id": "T05", "input": { "newCode": 8, "highestCode": 3, "responseCode": 0 }, "expected": { "highestCode": 8, "currentCode": 8, "status": "E", "responseCode": 0 }, "cobol_lines": [64, 65, 68, 75, 76] },
+    { "id": "T06", "input": { "newCode": 9, "highestCode": 8, "responseCode": 0 }, "expected": { "highestCode": 9, "currentCode": 9, "status": "F", "responseCode": 0 }, "cobol_lines": [64, 65, 68, 77, 78] },
+    { "id": "T07", "input": { "newCode": -1, "highestCode": 0, "responseCode": 0 }, "expected": { "highestCode": 0, "currentCode": -1, "status": "F", "responseCode": 0 }, "cobol_lines": [64, 68, 77, 78] },
+    { "id": "T08", "input": { "newCode": 9999, "highestCode": -9999, "responseCode": 0 }, "expected": { "highestCode": 9999, "currentCode": 9999, "status": "F", "responseCode": 0 }, "cobol_lines": [64, 65, 68, 77, 78] },
+    { "id": "T09", "input": { "newCode": -9999, "highestCode": -9999, "responseCode": 0 }, "expected": { "highestCode": -9999, "currentCode": -9999, "status": "F", "responseCode": 0 }, "cobol_lines": [64, 68, 77, 78] },
+    { "id": "T10", "input": { "newCode": 2, "highestCode": -5, "responseCode": 0 }, "expected": { "highestCode": 2, "currentCode": 2, "status": "W", "responseCode": 0 }, "cobol_lines": [64, 65, 68, 73, 74] },
+    { "id": "T11", "input": { "newCode": 10000, "highestCode": 0, "responseCode": 0 }, "expected": { "rejected": "outside -9999..9999 (domain restriction)" }, "gap": ["GAP-RTNCDE00-P200-SET-RETURN-CODE-TRUNC-RC-HIGHEST-CODE", "GAP-RTNCDE00-P200-SET-RETURN-CODE-TRUNC-RC-CURRENT-CODE"] },
+    { "id": "T12", "input": { "any_valid": true }, "expected": { "unchanged": ["programId", "message", "analysis data", "return data", "requestType"] }, "cobol_lines": [64, 81] }
+  ]
+}

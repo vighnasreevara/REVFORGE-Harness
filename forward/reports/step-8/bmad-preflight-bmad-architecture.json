@@ -1,0 +1,121 @@
+{
+  "record_id": null,
+  "contract": "bmad/execution-preflight",
+  "contract_version": "1.0",
+  "evaluated_at": "2026-11-01T17:25:59.107Z",
+  "binding_id": "BMAD-ARCH",
+  "workflow_id": "bmad-architecture",
+  "agent": "F3",
+  "scope": "programs:RTNCDE00",
+  "scope_sha256": "88d8562c1b30170f33446a43303d54d47fd102ec25c3d79249749d6dfd126f13",
+  "baseline_manifest_sha256": "352b97f0bbcbdb149c1118791aaabaa2e8e9972716bc77adc3a2f0644d24a068",
+  "provider": {
+    "name": "anthropic",
+    "service": "claude-code-cli"
+  },
+  "authorization_id": null,
+  "exposure": {
+    "authorized_files": [],
+    "would_expose": [
+      "src/copybook/common/RTNCODE.cpy",
+      "src/copybook/db2/SQLCA.cpy",
+      "src/programs/batch/RTNCDE00.cbl"
+    ],
+    "unauthorized": [
+      "src/copybook/common/RTNCODE.cpy",
+      "src/copybook/db2/SQLCA.cpy",
+      "src/programs/batch/RTNCDE00.cbl"
+    ]
+  },
+  "launch_boundary": {
+    "network_enforcement": false,
+    "filesystem_isolation": false,
+    "enforceable": false,
+    "controls": [
+      "isolated workspace with a hash-verified BMad installation and isolated HOME",
+      "headless run with --restricted (no Bash/PowerShell/code execution), --disallowedTools WebFetch,WebSearch,Bash,PowerShell",
+      "--allowedTools Read,Glob,Grep,Write,Edit with --permission-mode dontAsk (anything else is denied, never prompted)",
+      "--strict-mcp-config (no MCP servers) and --setting-sources project (no user settings)",
+      "--max-budget-usd from the signed authorization",
+      "outputs accepted only through the receipt validator (contract, hashes, output location, scope digest)",
+      "sealed preflight, packet, receipt and audit records"
+    ],
+    "gaps": [
+      "network: model traffic is end-to-end TLS from the Claude Code CLI to the provider; REVFORGE cannot inspect or block request content, so the disclosed content cannot be verified at the network boundary",
+      "filesystem: Claude Code file tools run as the operator OS user; permission rules are enforced by the CLI, not the OS, so files outside the workspace (the original COBOL, reverse outputs, credentials) are not made unreadable by any OS boundary (no container, separate user or mount isolation)"
+    ]
+  },
+  "checks": [
+    {
+      "id": "scope",
+      "ok": true,
+      "detail": "programs:RTNCDE00 (digest 88d8562c1b30170f…, NOT_READY)"
+    },
+    {
+      "id": "g2_exact_scope",
+      "ok": false,
+      "detail": "G2 has not passed on the current baseline | G2 re-evaluated now: UNVERIFIED — G2 not approved for scope application: NOT_READY (395 blocking finding(s)); failing checks: canonical_rule_coverage, cross_batch_reconciliation, requirement_evidence, runtime_evidence, semantic_contradictions, contradicted_claims, blocking_decisions, data_contracts, scope_classification, readiness, trust_anchor, human_approval | requested scope programs:RTNCDE00 (digest 88d8562c1b30170f…) is not the G2-approved scope (none approved)"
+    },
+    {
+      "id": "workflow_state",
+      "ok": false,
+      "detail": "workflow state is REQUIREMENTS_DRAFTED; BMAD-ARCH is allowed only in REQUIREMENTS_APPROVED, ARCHITECTURE_DRAFTED"
+    },
+    {
+      "id": "release_pinned",
+      "ok": true,
+      "detail": "bmad-method@6.12.4 verified (7 checks)"
+    },
+    {
+      "id": "binding_and_agent",
+      "ok": true,
+      "detail": "BMAD-ARCH -> bmad-architecture (F3) valid"
+    },
+    {
+      "id": "provider_authorization",
+      "ok": false,
+      "detail": "no valid signed disclosure authorization for anthropic/claude-code-cli, scope programs:RTNCDE00, workflow bmad-architecture (0 disclosure record(s) considered); 0 OpenAI source-export authorization(s) exist and are not applicable to Claude"
+    },
+    {
+      "id": "source_hashes_current",
+      "ok": false,
+      "detail": "no authorization to compare source hashes against"
+    },
+    {
+      "id": "authorized_content_only",
+      "ok": false,
+      "detail": "3 file(s) would be exposed and none is authorized"
+    },
+    {
+      "id": "tools_and_outputs",
+      "ok": true,
+      "detail": "restricted tool set; outputs only through the receipt validator into the agent's bmad output directory; workspace isolated true"
+    },
+    {
+      "id": "runtime_execution_authorization",
+      "ok": false,
+      "detail": "bindings.json live_execution.requested is false"
+    },
+    {
+      "id": "limits",
+      "ok": false,
+      "detail": "no authorized limits (cost, files, bytes, runs)"
+    },
+    {
+      "id": "enforceable_launch_boundary",
+      "ok": false,
+      "detail": "not technically enforceable: network: model traffic is end-to-end TLS from the Claude Code CLI to the provider; REVFORGE cannot inspect or block request content, so the disclosed content cannot be verified at the network boundary | filesystem: Claude Code file tools run as the operator OS user; permission rules are enforced by the CLI, not the OS, so files outside the workspace (the original COBOL, reverse outputs, credentials) are not made unreadable by any OS boundary (no container, separate user or mount isolation)"
+    }
+  ],
+  "launch_permitted": false,
+  "refusal_reasons": [
+    "g2_exact_scope: G2 has not passed on the current baseline | G2 re-evaluated now: UNVERIFIED — G2 not approved for scope application: NOT_READY (395 blocking finding(s)); failing checks: canonical_rule_coverage, cross_batch_reconciliation, requirement_evidence, runtime_evidence, semantic_contradictions, contradicted_claims, blocking_decisions, data_contracts, scope_classification, readiness, trust_anchor, human_approval | requested scope programs:RTNCDE00 (digest 88d8562c1b30170f…) is not the G2-approved scope (none approved)",
+    "workflow_state: workflow state is REQUIREMENTS_DRAFTED; BMAD-ARCH is allowed only in REQUIREMENTS_APPROVED, ARCHITECTURE_DRAFTED",
+    "provider_authorization: no valid signed disclosure authorization for anthropic/claude-code-cli, scope programs:RTNCDE00, workflow bmad-architecture (0 disclosure record(s) considered); 0 OpenAI source-export authorization(s) exist and are not applicable to Claude",
+    "source_hashes_current: no authorization to compare source hashes against",
+    "authorized_content_only: 3 file(s) would be exposed and none is authorized",
+    "runtime_execution_authorization: bindings.json live_execution.requested is false",
+    "limits: no authorized limits (cost, files, bytes, runs)",
+    "enforceable_launch_boundary: not technically enforceable: network: model traffic is end-to-end TLS from the Claude Code CLI to the provider; REVFORGE cannot inspect or block request content, so the disclosed content cannot be verified at the network boundary | filesystem: Claude Code file tools run as the operator OS user; permission rules are enforced by the CLI, not the OS, so files outside the workspace (the original COBOL, reverse outputs, credentials) are not made unreadable by any OS boundary (no container, separate user or mount isolation)"
+  ]
+}

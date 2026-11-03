@@ -1,0 +1,285 @@
+{
+  "gate": "SOURCE_READINESS",
+  "subject": "CKPRST",
+  "status": "FAIL",
+  "checks": [
+    {
+      "id": "source_available",
+      "ok": true,
+      "detail": "src/programs/batch/CKPRST.cbl sha256 870875c04b844564ada25a3b662deeea9a53cc3eb787f01646d9c0854424d058; 12 statement(s) in 4 paragraph(s)"
+    },
+    {
+      "id": "complete_program",
+      "ok": false,
+      "detail": "paragraph(s) without statements (stub or template): PROC-INIT, PROC-TAKE-CHECKPOINT, PROC-COMMIT-CHECKPOINT, PROC-RESTART"
+    },
+    {
+      "id": "copybooks_resolved",
+      "ok": true,
+      "detail": "all 3 include(s) resolved: CKPRST, CKPRST, RETHND"
+    },
+    {
+      "id": "requirements_and_data_mapping_delivered",
+      "ok": true,
+      "detail": "F1/F2 deliveries accepted for CKPRST, RETHND, CKPRST"
+    },
+    {
+      "id": "behaviour_classified",
+      "ok": true,
+      "detail": "6 behaviour(s): 5 VERIFIED_CANDIDATE, 1 PARTIAL, 0 GAP"
+    },
+    {
+      "id": "dependencies_identified",
+      "ok": false,
+      "detail": "closure UNRESOLVED for CKPRST:PROC-TAKE-CHECKPOINT (line 32: ENTRY-POINT-TAKE is neither declared, a keyword, a paragraph nor the subject of a blocking decision (unknown dependency)); CKPRST:PROC-COMMIT-CHECKPOINT (line 34: ENTRY-POINT-COMMIT is neither declared, a keyword, a paragraph nor the subject of a blocking decision (unknown dependency)); CKPRST:PROC-RESTART (line 36: ENTRY-POINT-RESTART is neither declared, a keyword, a paragraph nor the subject of a blocking decision (unknown dependency))"
+    },
+    {
+      "id": "unsupported_documented",
+      "ok": true,
+      "detail": "0 gap(s) document every PARTIAL/GAP behaviour"
+    },
+    {
+      "id": "unknowns_documented",
+      "ok": true,
+      "detail": "12 open decision(s) record the remaining questions (1 blocking for approval); none is resolved or assumed here"
+    }
+  ],
+  "note": "An engineering gate: it states that the source is understood well enough to convert, with every unknown documented. It is not a G2 approval and does not authorise generation.",
+  "behaviours": [
+    {
+      "behaviour_id": "CKPRST:ENTRY-DISPATCH",
+      "kind": "dispatch",
+      "classification": "PARTIAL",
+      "lines": [
+        27,
+        37
+      ],
+      "inputs": [
+        "RETURN-STATUS"
+      ],
+      "outputs": [],
+      "side_effects": [],
+      "unresolved": [
+        "ENTRY-POINT-INIT"
+      ],
+      "covered_by": [
+        "RT-CKPRST-001",
+        "RT-CKPRST-002"
+      ]
+    },
+    {
+      "behaviour_id": "CKPRST:PROC-INIT",
+      "kind": "performed_range",
+      "classification": "VERIFIED_CANDIDATE",
+      "lines": null,
+      "inputs": [],
+      "outputs": [],
+      "side_effects": [],
+      "unresolved": [],
+      "covered_by": [
+        "RT-CKPRST-001",
+        "RT-CKPRST-002"
+      ]
+    },
+    {
+      "behaviour_id": "CKPRST:PROC-TAKE-CHECKPOINT",
+      "kind": "performed_range",
+      "classification": "VERIFIED_CANDIDATE",
+      "lines": null,
+      "inputs": [],
+      "outputs": [],
+      "side_effects": [],
+      "unresolved": [],
+      "covered_by": [
+        "RT-CKPRST-001",
+        "RT-CKPRST-002"
+      ]
+    },
+    {
+      "behaviour_id": "CKPRST:PROC-COMMIT-CHECKPOINT",
+      "kind": "performed_range",
+      "classification": "VERIFIED_CANDIDATE",
+      "lines": null,
+      "inputs": [],
+      "outputs": [],
+      "side_effects": [],
+      "unresolved": [],
+      "covered_by": [
+        "RT-CKPRST-001",
+        "RT-CKPRST-002"
+      ]
+    },
+    {
+      "behaviour_id": "CKPRST:PROC-RESTART",
+      "kind": "performed_range",
+      "classification": "VERIFIED_CANDIDATE",
+      "lines": null,
+      "inputs": [],
+      "outputs": [],
+      "side_effects": [],
+      "unresolved": [],
+      "covered_by": [
+        "RT-CKPRST-001",
+        "RT-CKPRST-002"
+      ]
+    },
+    {
+      "behaviour_id": "CKPRST:NO-MATCH",
+      "kind": "no_match",
+      "classification": "VERIFIED_CANDIDATE",
+      "lines": null,
+      "inputs": [],
+      "outputs": [],
+      "side_effects": [],
+      "unresolved": [],
+      "covered_by": [
+        "RT-CKPRST-001",
+        "RT-CKPRST-002"
+      ]
+    }
+  ],
+  "gaps": [],
+  "closures": [
+    {
+      "behaviour_id": "CKPRST:PROC-INIT",
+      "status": "RESOLVED",
+      "unresolved_reasons": [],
+      "units": [
+        "CKPRST"
+      ],
+      "external": [],
+      "undeclared": [
+        "ENTRY-POINT-INIT"
+      ],
+      "sha256": "7f8de09b39553b926e0b78bdd7b5c214c16024152842944bfd0711e12e4b1e4b"
+    },
+    {
+      "behaviour_id": "CKPRST:PROC-TAKE-CHECKPOINT",
+      "status": "UNRESOLVED",
+      "unresolved_reasons": [
+        "line 32: ENTRY-POINT-TAKE is neither declared, a keyword, a paragraph nor the subject of a blocking decision (unknown dependency)"
+      ],
+      "units": [
+        "CKPRST"
+      ],
+      "external": [],
+      "undeclared": [],
+      "sha256": "3a5ae017d97a21875b0382c30dbe4d4310f850e77005943cb0e066c867593ff6"
+    },
+    {
+      "behaviour_id": "CKPRST:PROC-COMMIT-CHECKPOINT",
+      "status": "UNRESOLVED",
+      "unresolved_reasons": [
+        "line 34: ENTRY-POINT-COMMIT is neither declared, a keyword, a paragraph nor the subject of a blocking decision (unknown dependency)"
+      ],
+      "units": [
+        "CKPRST"
+      ],
+      "external": [],
+      "undeclared": [],
+      "sha256": "e2ea951e9e81d58013c1e3119c0f3d94e2e1ceb44326ae2e352d236618d16664"
+    },
+    {
+      "behaviour_id": "CKPRST:PROC-RESTART",
+      "status": "UNRESOLVED",
+      "unresolved_reasons": [
+        "line 36: ENTRY-POINT-RESTART is neither declared, a keyword, a paragraph nor the subject of a blocking decision (unknown dependency)"
+      ],
+      "units": [
+        "CKPRST"
+      ],
+      "external": [],
+      "undeclared": [],
+      "sha256": "4f820000e5c6a7c8c8098e48410340aaef13f17222124a90690b225bb0aaff44"
+    }
+  ],
+  "open_decisions": [
+    {
+      "id": "DR-CKPRST-001",
+      "blocking": true,
+      "question": "BR-003: CKPRST tests four entry-point conditions (ENTRY-POINT-INIT, -TAKE, -COMMIT, -RESTART) and performs PROC-INIT, PROC-TAKE-CHECKPOINT, PROC-COMMIT-CHECKPOINT or PROC-RESTART, each an empty stub; with no match nothing is performed. The condition names are declared nowhere, so the selector field and values are unknown. What must the checkpoint/restart service do for each entry point, or is CKPRST an unfinished stub to be retired or replaced by a framework checkpoint/restart service?"
+    },
+    {
+      "id": "DR-CKPRST-002",
+      "blocking": false,
+      "question": "CKPRST's PROCEDURE DIVISION USING parameter is a level-05 group rather than a level-01 item (GAP-083). What is the real call interface of CKPRST (parameter layout passed by callers)?"
+    },
+    {
+      "id": "DR-CKPRST-003",
+      "blocking": false,
+      "question": "Copybook CKPRST declares value domains that no executable statement tests: checkpoint status CK-STATUS ('I','A','C','F','R', BR-135), processing phase CK-PHASE ('00','10','20','30','40', BR-136) and restart mode CK-RESTART-MODE ('N','R','C', BR-137). Must the forward system enforce these domains, or are they documentation of the record layout only?"
+    },
+    {
+      "id": "DR-F2-0005-007",
+      "blocking": false,
+      "question": "CKPRST: program and copybook share the name CKPRST; the data issue log resolves COPY CKPRST (lines 17, 23) to copybook SYS-PORTFOLIO-001-FIL-0003, while file_context records the target as the program itself (FIL-0043). The entry-point conditions ENTRY-POINT-INIT/-TAKE/-COMMIT/-RESTART are declared nowhere and USING RETURN-STATUS names a level-05 group. Which copybook text is authoritative, and which CHECKPOINT-CONTROL field/values select each entry point?"
+    },
+    {
+      "id": "DR-F2-0005-012",
+      "blocking": false,
+      "question": "Fifteen elementary level-01 items (e.g. HISTLD00 WS-COMMIT-THRESHOLD, the REPORT-RECORD print lines, DB2CONN WS-CONNECTION-STATE/WS-RETRY-COUNT/WS-MAX-RETRIES, DB2CMT WS-SAVEPOINT-ID) are catalogued as record-level items without Field IDs, so no Java type could be assigned. Should the reverse harness register Field IDs for them, or may later stages map them at record level using the catalogued PIC?"
+    },
+    {
+      "id": "DR-F2-0005-026",
+      "blocking": false,
+      "question": "CKPRST's checkpoint/restart paragraphs (PROC-INIT, PROC-TAKE-CHECKPOINT, PROC-COMMIT-CHECKPOINT, PROC-RESTART) contain only comments and CHECKPOINT-FILE is never opened. Is a checkpoint/restart service required in Java, and with what semantics?"
+    },
+    {
+      "id": "DR-F2-PKT0010-002",
+      "blocking": false,
+      "question": "Which character encoding (code page) do the files and areas described by these copybooks use for DISPLAY data on the legacy platform (EBCDIC 037, 1140, another EBCDIC variant, or ASCII)? The zoned-decimal test vectors and String codecs depend on it."
+    },
+    {
+      "id": "DR-F2-PKT0010-003",
+      "blocking": false,
+      "question": "Which TRUNC compiler option (STD, OPT or BIN) were the programs including these copybooks compiled with? It decides whether COMP fields such as 9(2) COMP, 9(3) COMP, 9(5) COMP and 9(9) COMP may hold values beyond their PIC digits (up to the halfword/fullword limit), which affects Java range validation and whether 9(9) COMP counters need long instead of int."
+    },
+    {
+      "id": "DR-F2-PKT0010-004",
+      "blocking": false,
+      "question": "RETHND declares a data item named RETURN-CODE (S9(4) COMP, line 8), which is also the IBM COBOL RETURN-CODE special register. In the programs that copy RETHND, does RETURN-CODE refer to this structure field (so its value travels with RETURN-HANDLING) or to the special register (so it sets the program/job return code)? Does RETHND compile at all on the target compiler?"
+    },
+    {
+      "id": "DR-F2-PKT0010-005",
+      "blocking": false,
+      "question": "Several data names are declared more than once: CK-FILE-STATUS (CKPRST group line 35 and child line 38); ERR-VALIDATION/ERR-PROCESSING/ERR-SECURITY (RETHND level-88 and STD-ERROR-CODES fields); RC-SUCCESS..RC-CRITICAL, TRN-TYPE-BUY/SELL/FEE, ERROR-CODE and ERROR-ROUTINE across COMMON, RETHND and TRNREC. What Java naming convention should disambiguate them (for example record-qualified class members keyed by Field ID)?"
+    },
+    {
+      "id": "RVW-GAP-092",
+      "blocking": false,
+      "question": "GAP-092 (medium, DIAGRAM_RENDER_UNVERIFIED) is not addressed by any decision or requirement: Visual rendering of the 65 Mermaid diagrams is unverified. Acknowledge it as a known limitation (resolved_no_change) or exclude the affected units?"
+    },
+    {
+      "id": "RVW-GAP-104",
+      "blocking": false,
+      "question": "GAP-104 (low, DIAGRAM_INCOMPLETE) is not addressed by any decision or requirement: COMP-UNRESOLVED: all seven edges are unsupported. Acknowledge it as a known limitation (resolved_no_change) or exclude the affected units?"
+    }
+  ],
+  "authorisation": {
+    "generation_authorized": false,
+    "blockers": [
+      "config generation.java_generation_allowed is false (project authority)",
+      "no authorised orchestrator.java_target_dir",
+      "G4 is BLOCKED (needs signed G2, G3 and G4 approvals by trusted signers)",
+      "trust store: TRUST_NOT_CONFIGURED"
+    ],
+    "gates": {
+      "G0": "PASS",
+      "G1": "PASS",
+      "G2": "UNVERIFIED",
+      "G3": "BLOCKED",
+      "G4": "BLOCKED",
+      "G5": "BLOCKED",
+      "G6": "BLOCKED",
+      "G7": "BLOCKED",
+      "G8": "BLOCKED"
+    },
+    "trust": "TRUST_NOT_CONFIGURED",
+    "program_g2_scope": {
+      "readiness": "NOT_READY",
+      "blocking": 5,
+      "scope_sha256": "d3f60484c24d007bf30f3b128796795dadd7f5a819cc4186db1234138a55f73e"
+    },
+    "note": "Engineering gates never authorise generation. Java may be generated only when generation_authorized is true."
+  }
+}

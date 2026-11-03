@@ -1,0 +1,329 @@
+{
+ "program": "BCHCTL00",
+ "provenance": "Written by a scenario-author agent (F6 independent fixture design) on 2026-11-02 from the COBOL source src/programs/batch/BCHCTL00.cbl and its copybooks (src/copybook/batch/BCHCTL.cpy, src/copybook/batch/BCHCON.cpy, src/copybook/common/ERRHAND.cpy) under references/udara-legacy-modernization-harness, the fixture README, and only the gaps/inspection arrays of forward/generated/java/BCHCTL00/pilot-result.json. No generated Java, source map or execution result was read or run. Scenarios V01.. were added on 2026-11-03 (partly-covered rule extension) by an F6 scenario-author agent from the same COBOL source, copybooks, README and gaps array only; no generated Java, source map or test result was read or run.",
+ "scenarios": [
+  {
+   "id": "B01",
+   "title": "INIT: SET MODE-INITIALIZE then PERFORM 1000-PROCESS-INITIALIZE, whose first statement PERFORMs the undefined paragraph 1100-OPEN-FILES",
+   "cobol_lines": [
+    61,
+    62,
+    63,
+    64,
+    83,
+    84
+   ],
+   "kind": "call",
+   "set": {
+    "LS-FUNCTION": "INIT",
+    "LS-JOB-NAME": "JOBA0001",
+    "LS-PROCESS-DATE": "20240101",
+    "LS-SEQUENCE-NO": "1",
+    "LS-RETURN-CODE": "0"
+   },
+   "expect": {
+    "outcome": "BLOCKED AT src/programs/batch/BCHCTL00.cbl:84"
+   }
+  },
+  {
+   "id": "B02",
+   "title": "CHEK: PERFORM 2000-CHECK-PREREQUISITES, whose first statement PERFORMs the undefined paragraph 2100-READ-CONTROL-RECORD",
+   "cobol_lines": [
+    65,
+    66,
+    67,
+    90,
+    91
+   ],
+   "kind": "call",
+   "set": {
+    "LS-FUNCTION": "CHEK",
+    "LS-JOB-NAME": "JOBA0001",
+    "LS-PROCESS-DATE": "20240101",
+    "LS-SEQUENCE-NO": "1",
+    "LS-RETURN-CODE": "0"
+   },
+   "expect": {
+    "outcome": "BLOCKED AT src/programs/batch/BCHCTL00.cbl:91"
+   }
+  },
+  {
+   "id": "B03",
+   "title": "UPDT: PERFORM 3000-UPDATE-STATUS, whose first statement PERFORMs the undefined paragraph 3100-READ-CONTROL-RECORD",
+   "cobol_lines": [
+    68,
+    69,
+    70,
+    100,
+    101
+   ],
+   "kind": "call",
+   "set": {
+    "LS-FUNCTION": "UPDT",
+    "LS-JOB-NAME": "JOBA0001",
+    "LS-PROCESS-DATE": "20240101",
+    "LS-SEQUENCE-NO": "1",
+    "LS-RETURN-CODE": "0"
+   },
+   "expect": {
+    "outcome": "BLOCKED AT src/programs/batch/BCHCTL00.cbl:101"
+   }
+  },
+  {
+   "id": "B04",
+   "title": "TERM: PERFORM 4000-PROCESS-TERMINATE, whose first statement PERFORMs the undefined paragraph 4100-UPDATE-COMPLETION",
+   "cobol_lines": [
+    71,
+    72,
+    73,
+    106,
+    107
+   ],
+   "kind": "call",
+   "set": {
+    "LS-FUNCTION": "TERM",
+    "LS-JOB-NAME": "JOBA0001",
+    "LS-PROCESS-DATE": "20240101",
+    "LS-SEQUENCE-NO": "1",
+    "LS-RETURN-CODE": "0"
+   },
+   "expect": {
+    "outcome": "BLOCKED AT src/programs/batch/BCHCTL00.cbl:107"
+   }
+  },
+  {
+   "id": "B05",
+   "title": "unknown function code: WHEN OTHER moves the error text, 9000-ERROR-ROUTINE sets LS-RETURN-CODE to BCT-RC-ERROR (+8) and CALLs ERRPROC, an application program not registered in the per-program test (no ON EXCEPTION)",
+   "cobol_lines": [
+    74,
+    75,
+    76,
+    111,
+    112,
+    113,
+    114
+   ],
+   "kind": "call",
+   "set": {
+    "LS-FUNCTION": "XXXX",
+    "LS-JOB-NAME": "JOBA0001",
+    "LS-PROCESS-DATE": "20240101",
+    "LS-SEQUENCE-NO": "1",
+    "LS-RETURN-CODE": "0"
+   },
+   "expect": {
+    "outcome": "BLOCKED RUNTIME-CALL-UNAVAILABLE"
+   }
+  },
+  {
+   "id": "B06",
+   "title": "function codes are case-sensitive: 'init' matches no 88-level and takes WHEN OTHER -> CALL ERRPROC",
+   "cobol_lines": [
+    50,
+    74,
+    75,
+    76,
+    114
+   ],
+   "kind": "call",
+   "set": {
+    "LS-FUNCTION": "init",
+    "LS-JOB-NAME": "JOBA0001",
+    "LS-PROCESS-DATE": "20240101",
+    "LS-SEQUENCE-NO": "1",
+    "LS-RETURN-CODE": "0"
+   },
+   "expect": {
+    "outcome": "BLOCKED RUNTIME-CALL-UNAVAILABLE"
+   }
+  },
+  {
+   "id": "V01",
+   "title": "BR-001 INIT routes to its handler after SET MODE-INITIALIZE (WS-PROCESS-MODE 'I', the other three mode conditions false); LS-RETURN-CODE (+3 from the caller) is untouched before the undefined paragraph at line 84",
+   "cobol_lines": [
+    39,
+    41,
+    42,
+    43,
+    44,
+    45,
+    61,
+    62,
+    63,
+    64,
+    83,
+    84
+   ],
+   "kind": "call",
+   "set": {
+    "LS-FUNCTION": "INIT",
+    "LS-JOB-NAME": "JOBA0001",
+    "LS-PROCESS-DATE": "20240101",
+    "LS-SEQUENCE-NO": "1",
+    "LS-RETURN-CODE": "3"
+   },
+   "expect": {
+    "outcome": "BLOCKED AT src/programs/batch/BCHCTL00.cbl:84",
+    "items": {
+     "WS-PROCESS-MODE": "I",
+     "LS-RETURN-CODE": "3",
+     "LS-FUNCTION": "INIT",
+     "MODE-INITIALIZE": true,
+     "MODE-CHECK-PREREQ": false,
+     "MODE-UPDATE-STATUS": false,
+     "MODE-FINALIZE": false
+    }
+   }
+  },
+  {
+   "id": "V02",
+   "title": "BR-001 CHEK routes to its handler after SET MODE-CHECK-PREREQ (WS-PROCESS-MODE 'C', the other three mode conditions false); LS-RETURN-CODE (+3 from the caller) is untouched before the undefined paragraph at line 91",
+   "cobol_lines": [
+    39,
+    41,
+    42,
+    43,
+    44,
+    45,
+    61,
+    65,
+    66,
+    67,
+    90,
+    91
+   ],
+   "kind": "call",
+   "set": {
+    "LS-FUNCTION": "CHEK",
+    "LS-JOB-NAME": "JOBA0001",
+    "LS-PROCESS-DATE": "20240101",
+    "LS-SEQUENCE-NO": "1",
+    "LS-RETURN-CODE": "3"
+   },
+   "expect": {
+    "outcome": "BLOCKED AT src/programs/batch/BCHCTL00.cbl:91",
+    "items": {
+     "WS-PROCESS-MODE": "C",
+     "LS-RETURN-CODE": "3",
+     "LS-FUNCTION": "CHEK",
+     "MODE-INITIALIZE": false,
+     "MODE-CHECK-PREREQ": true,
+     "MODE-UPDATE-STATUS": false,
+     "MODE-FINALIZE": false
+    }
+   }
+  },
+  {
+   "id": "V03",
+   "title": "BR-001 UPDT routes to its handler after SET MODE-UPDATE-STATUS (WS-PROCESS-MODE 'U', the other three mode conditions false); LS-RETURN-CODE (+3 from the caller) is untouched before the undefined paragraph at line 101",
+   "cobol_lines": [
+    39,
+    41,
+    42,
+    43,
+    44,
+    45,
+    61,
+    68,
+    69,
+    70,
+    100,
+    101
+   ],
+   "kind": "call",
+   "set": {
+    "LS-FUNCTION": "UPDT",
+    "LS-JOB-NAME": "JOBA0001",
+    "LS-PROCESS-DATE": "20240101",
+    "LS-SEQUENCE-NO": "1",
+    "LS-RETURN-CODE": "3"
+   },
+   "expect": {
+    "outcome": "BLOCKED AT src/programs/batch/BCHCTL00.cbl:101",
+    "items": {
+     "WS-PROCESS-MODE": "U",
+     "LS-RETURN-CODE": "3",
+     "LS-FUNCTION": "UPDT",
+     "MODE-INITIALIZE": false,
+     "MODE-CHECK-PREREQ": false,
+     "MODE-UPDATE-STATUS": true,
+     "MODE-FINALIZE": false
+    }
+   }
+  },
+  {
+   "id": "V04",
+   "title": "BR-001 TERM routes to its handler after SET MODE-FINALIZE (WS-PROCESS-MODE 'F', the other three mode conditions false); LS-RETURN-CODE (+3 from the caller) is untouched before the undefined paragraph at line 107",
+   "cobol_lines": [
+    39,
+    41,
+    42,
+    43,
+    44,
+    45,
+    61,
+    71,
+    72,
+    73,
+    106,
+    107
+   ],
+   "kind": "call",
+   "set": {
+    "LS-FUNCTION": "TERM",
+    "LS-JOB-NAME": "JOBA0001",
+    "LS-PROCESS-DATE": "20240101",
+    "LS-SEQUENCE-NO": "1",
+    "LS-RETURN-CODE": "3"
+   },
+   "expect": {
+    "outcome": "BLOCKED AT src/programs/batch/BCHCTL00.cbl:107",
+    "items": {
+     "WS-PROCESS-MODE": "F",
+     "LS-RETURN-CODE": "3",
+     "LS-FUNCTION": "TERM",
+     "MODE-INITIALIZE": false,
+     "MODE-CHECK-PREREQ": false,
+     "MODE-UPDATE-STATUS": false,
+     "MODE-FINALIZE": true
+    }
+   }
+  },
+  {
+   "id": "V05",
+   "title": "BR-001 WHEN OTHER (function 'term', lower case): no mode is set (WS-PROCESS-MODE keeps LOW-VALUES, all four mode conditions false); ERR-TEXT 'Invalid function code', ERR-PROGRAM 'BCHCTL00' and LS-RETURN-CODE BCT-RC-ERROR (+8) are set before CALL 'ERRPROC' (not registered)",
+   "cobol_lines": [
+    41,
+    53,
+    61,
+    74,
+    75,
+    76,
+    111,
+    112,
+    113,
+    114
+   ],
+   "kind": "call",
+   "set": {
+    "LS-FUNCTION": "term",
+    "LS-JOB-NAME": "JOBA0001",
+    "LS-PROCESS-DATE": "20240101",
+    "LS-SEQUENCE-NO": "1",
+    "LS-RETURN-CODE": "3"
+   },
+   "expect": {
+    "outcome": "BLOCKED RUNTIME-CALL-UNAVAILABLE",
+    "items": {
+     "ERR-TEXT": "Invalid function code",
+     "ERR-PROGRAM": "BCHCTL00",
+     "LS-RETURN-CODE": "8",
+     "MODE-INITIALIZE": false,
+     "MODE-CHECK-PREREQ": false,
+     "MODE-UPDATE-STATUS": false,
+     "MODE-FINALIZE": false
+    }
+   }
+  }
+ ]
+}

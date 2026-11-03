@@ -1,0 +1,201 @@
+{
+ "program": "RTNCDE00",
+ "provenance": "Written 2026-11-02 by a scenario-author agent (F6 independent fixture design) from the COBOL source src/programs/batch/RTNCDE00.cbl with copybooks src/copybook/common/RTNCODE.cpy, src/copybook/db2/SQLCA.cpy and the gaps array of forward/generated/java/RTNCDE00/pilot-result.json only; no generated Java, source map or test result was read. DISPLAY lines are given right-trimmed.",
+ "scenarios": [
+  {
+   "id": "S01",
+   "title": "RC-INITIALIZE ('I'): codes area cleared, program ID blanked, status S, response 0; RC-MESSAGE untouched",
+   "cobol_lines": [
+    33,
+    34,
+    35,
+    51,
+    54,
+    55,
+    56,
+    57,
+    58,
+    59
+   ],
+   "kind": "call",
+   "set": {
+    "RC-REQUEST-TYPE": "I",
+    "RC-PROGRAM-ID": "OLDPGM",
+    "RC-CURRENT-CODE": "7",
+    "RC-HIGHEST-CODE": "9",
+    "RC-NEW-CODE": "3",
+    "RC-STATUS": "E",
+    "RC-MESSAGE": "KEEP ME",
+    "RC-RESPONSE-CODE": "5"
+   },
+   "expect": {
+    "outcome": "GOBACK",
+    "items": {
+     "RC-PROGRAM-ID": "",
+     "RC-CURRENT-CODE": "0",
+     "RC-HIGHEST-CODE": "0",
+     "RC-NEW-CODE": "0",
+     "RC-STATUS": "S",
+     "RC-STATUS-SUCCESS": true,
+     "RC-RESPONSE-CODE": "0",
+     "RC-MESSAGE": "KEEP ME"
+    }
+   }
+  },
+  {
+   "id": "S02",
+   "title": "RC-SET-CODE ('S') with new code 4 above highest 2: highest raised, current 4, warning (upper bound of 1 THRU 4)",
+   "cobol_lines": [
+    37,
+    38,
+    64,
+    65,
+    68,
+    70,
+    73,
+    74,
+    81
+   ],
+   "kind": "call",
+   "set": {
+    "RC-REQUEST-TYPE": "S",
+    "RC-CURRENT-CODE": "0",
+    "RC-HIGHEST-CODE": "2",
+    "RC-NEW-CODE": "4",
+    "RC-STATUS": "S",
+    "RC-RESPONSE-CODE": "7"
+   },
+   "expect": {
+    "outcome": "GOBACK",
+    "items": {
+     "RC-HIGHEST-CODE": "4",
+     "RC-CURRENT-CODE": "4",
+     "RC-NEW-CODE": "4",
+     "RC-STATUS": "W",
+     "RC-STATUS-WARNING": true,
+     "RC-RESPONSE-CODE": "0"
+    }
+   }
+  },
+  {
+   "id": "S03",
+   "title": "RC-SET-CODE with new code 5 below highest 12: highest kept, current 5, error (lower bound of 5 THRU 8)",
+   "cobol_lines": [
+    64,
+    68,
+    70,
+    75,
+    76,
+    81
+   ],
+   "kind": "call",
+   "set": {
+    "RC-REQUEST-TYPE": "S",
+    "RC-CURRENT-CODE": "0",
+    "RC-HIGHEST-CODE": "12",
+    "RC-NEW-CODE": "5",
+    "RC-STATUS": "S",
+    "RC-RESPONSE-CODE": "7"
+   },
+   "expect": {
+    "outcome": "GOBACK",
+    "items": {
+     "RC-HIGHEST-CODE": "12",
+     "RC-CURRENT-CODE": "5",
+     "RC-STATUS": "E",
+     "RC-STATUS-ERROR": true,
+     "RC-RESPONSE-CODE": "0"
+    }
+   }
+  },
+  {
+   "id": "S04",
+   "title": "RC-SET-CODE with negative new code -1: not above highest 0, falls to WHEN OTHER, severe",
+   "cobol_lines": [
+    64,
+    68,
+    70,
+    77,
+    78,
+    81
+   ],
+   "kind": "call",
+   "set": {
+    "RC-REQUEST-TYPE": "S",
+    "RC-CURRENT-CODE": "3",
+    "RC-HIGHEST-CODE": "0",
+    "RC-NEW-CODE": "-1",
+    "RC-STATUS": "S",
+    "RC-RESPONSE-CODE": "7"
+   },
+   "expect": {
+    "outcome": "GOBACK",
+    "items": {
+     "RC-HIGHEST-CODE": "0",
+     "RC-CURRENT-CODE": "-1",
+     "RC-STATUS": "F",
+     "RC-STATUS-SEVERE": true,
+     "RC-RESPONSE-CODE": "0"
+    }
+   }
+  },
+  {
+   "id": "S05",
+   "title": "RC-GET-CODE ('G'): current, highest and status copied to the return data, response 0",
+   "cobol_lines": [
+    40,
+    41,
+    86,
+    87,
+    88,
+    89
+   ],
+   "kind": "call",
+   "set": {
+    "RC-REQUEST-TYPE": "G",
+    "RC-CURRENT-CODE": "6",
+    "RC-HIGHEST-CODE": "9",
+    "RC-STATUS": "E",
+    "RC-RESPONSE-CODE": "99",
+    "RC-RETURN-VALUE": "0",
+    "RC-HIGHEST-RETURN": "0",
+    "RC-RETURN-STATUS": " "
+   },
+   "expect": {
+    "outcome": "GOBACK",
+    "items": {
+     "RC-RETURN-VALUE": "6",
+     "RC-HIGHEST-RETURN": "9",
+     "RC-RETURN-STATUS": "E",
+     "RC-RESPONSE-CODE": "0",
+     "RC-CURRENT-CODE": "6",
+     "RC-HIGHEST-CODE": "9"
+    }
+   }
+  },
+  {
+   "id": "S06",
+   "title": "RC-LOG-CODE ('L'): the CURRENT-DATE move is defined, then EXEC SQL INSERT INTO RTNCODES blocks",
+   "cobol_lines": [
+    43,
+    44,
+    94,
+    96
+   ],
+   "kind": "call",
+   "clock": "2026-03-04T05:06:07.08Z",
+   "set": {
+    "RC-REQUEST-TYPE": "L",
+    "RC-PROGRAM-ID": "PGM00001",
+    "RC-CURRENT-CODE": "4",
+    "RC-HIGHEST-CODE": "4",
+    "RC-STATUS": "W",
+    "RC-MESSAGE": "LOG TEST",
+    "RC-RESPONSE-CODE": "0"
+   },
+   "expect": {
+    "outcome": "BLOCKED AT src/programs/batch/RTNCDE00.cbl:96"
+   }
+  }
+ ]
+}

@@ -1,0 +1,102 @@
+{
+ "program": "PORTREAD",
+ "provenance": "Written 2026-11-02 by a scenario-author agent (F6 independent fixture design) from the COBOL source under references/udara-legacy-modernization-harness/src/ and its copybooks, plus only the 'gaps' array of pilot-result.json for gap line numbers. No generated Java, source map or test result was read or run.",
+ "scenarios": [
+  {
+   "id": "R01",
+   "title": "one record with a zero COMP-3 total: OPEN 00, one READ NEXT, the record block (count, ID, account, client, status, total as 15 digits, blank line), then AT END and the total line; RETURN-CODE 0",
+   "cobol_lines": [
+    65,
+    75,
+    77,
+    78,
+    67,
+    86,
+    89,
+    90,
+    91,
+    96,
+    97,
+    98,
+    99,
+    100,
+    101,
+    102,
+    87,
+    88,
+    70,
+    106,
+    108,
+    110
+   ],
+   "kind": "main",
+   "datasets": {
+    "PORTFILE": {
+     "records": [
+      "P00000055000000005NORTHWIND CAPITAL PARTNERS LLCI2024010120240101C\u0000\u0000\u0000\u0000\u0000\u0000\u0000\f\u0000\u0000\u0000\u0000\u0000\u0000\u0000\fBATCH00100000000"
+     ]
+    }
+   },
+   "expect": {
+    "outcome": "END",
+    "return_code": 0,
+    "display": [
+     "Portfolio Record: 0000001",
+     "  ID: P0000005",
+     "  Account: 5000000005",
+     "  Client: NORTHWIND CAPITAL PARTNERS LLC",
+     "  Status: C",
+     "  Total Value: 000000000000000",
+     " ",
+     "Total Records Read: 0000001"
+    ]
+   }
+  },
+  {
+   "id": "R02",
+   "title": "two records supplied with the digit-led key first: indexed order is EBCDIC, where letters sort before digits, so P0000001 is read before 10000001; a negative COMP-3 total displays with a leading minus and no decimal point",
+   "cobol_lines": [
+    86,
+    90,
+    96,
+    97,
+    98,
+    99,
+    100,
+    101,
+    102,
+    108
+   ],
+   "kind": "main",
+   "datasets": {
+    "PORTFILE": {
+     "records": [
+      "100000012000000001ZETA RETIREMENT TRUST SERVICEST2023061520240101S\u0000\u0000\u0000\u0000\u0000\u0001\u0000\u001d\u0000\u0000\u0000\u0000\u0000\u0000\u0000\fBATCH00100000000",
+      "P00000011000000001ACME HOLDINGS INTERNATIONAL COC2024010120240101A\u0000\u0000\u0000\u0000\u0000\u0010\u0000\f\u0000\u0000\u0000\u0000\u0000\u0000\u0000\fBATCH00100000000"
+     ]
+    }
+   },
+   "expect": {
+    "outcome": "END",
+    "return_code": 0,
+    "display": [
+     "Portfolio Record: 0000001",
+     "  ID: P0000001",
+     "  Account: 1000000001",
+     "  Client: ACME HOLDINGS INTERNATIONAL CO",
+     "  Status: A",
+     "  Total Value: 000000000010000",
+     " ",
+     "Portfolio Record: 0000002",
+     "  ID: 10000001",
+     "  Account: 2000000001",
+     "  Client: ZETA RETIREMENT TRUST SERVICES",
+     "  Status: S",
+     "  Total Value: -000000000001001",
+     " ",
+     "Total Records Read: 0000002"
+    ]
+   }
+  }
+ ]
+}

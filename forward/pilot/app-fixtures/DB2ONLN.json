@@ -1,0 +1,124 @@
+{
+ "program": "DB2ONLN",
+ "provenance": "Written 2026-11-02 by a scenario-author agent (F6 independent fixture design) from the COBOL source src/programs/online/DB2ONLN.cbl and the copybooks it COPYs (src/copybook/db2/SQLCA.cpy, src/copybook/online/ERRHND.cpy), plus the gap origins in the 'gaps' array of forward/generated/java/DB2ONLN/pilot-result.json. No generated Java, source map or execution result was read. Scenarios V01.. were added on 2026-11-03 (partly-covered rule extension) by an F6 scenario-author agent from the same COBOL source, copybooks, README and gaps array only; no generated Java, source map or test result was read or run.",
+ "scenarios": [
+  {
+   "id": "O01",
+   "title": "CONNECT in a fresh run unit: WS-ACTIVE-CONNECTIONS (0) < WS-MAX-CONNECTIONS (100), so P110 runs and blocks at EXEC SQL CONNECT",
+   "cobol_lines": [
+    20,
+    22,
+    41,
+    42,
+    55,
+    56,
+    67
+   ],
+   "kind": "call",
+   "set": {
+    "DB2-REQUEST-TYPE": "C",
+    "DB2-RESPONSE-CODE": "0",
+    "DB2-CONNECTION-TOKEN": "",
+    "DB2-SQLCODE": "0",
+    "DB2-ERROR-MSG": ""
+   },
+   "expect": {
+    "outcome": "BLOCKED AT src/programs/online/DB2ONLN.cbl:67"
+   }
+  },
+  {
+   "id": "O02",
+   "title": "DISCONNECT blocks at EXEC SQL DISCONNECT",
+   "cobol_lines": [
+    44,
+    45,
+    92
+   ],
+   "kind": "call",
+   "set": {
+    "DB2-REQUEST-TYPE": "D",
+    "DB2-RESPONSE-CODE": "0",
+    "DB2-CONNECTION-TOKEN": "",
+    "DB2-SQLCODE": "0",
+    "DB2-ERROR-MSG": ""
+   },
+   "expect": {
+    "outcome": "BLOCKED AT src/programs/online/DB2ONLN.cbl:92"
+   }
+  },
+  {
+   "id": "O03",
+   "title": "STATUS blocks at EXEC SQL SELECT CURRENT SERVER",
+   "cobol_lines": [
+    47,
+    48,
+    106
+   ],
+   "kind": "call",
+   "set": {
+    "DB2-REQUEST-TYPE": "S",
+    "DB2-RESPONSE-CODE": "0",
+    "DB2-CONNECTION-TOKEN": "",
+    "DB2-SQLCODE": "0",
+    "DB2-ERROR-MSG": ""
+   },
+   "expect": {
+    "outcome": "BLOCKED AT src/programs/online/DB2ONLN.cbl:106"
+   }
+  },
+  {
+   "id": "O04",
+   "title": "an unknown request type matches no WHEN (no WHEN OTHER) and reaches EXEC CICS RETURN",
+   "cobol_lines": [
+    40,
+    50,
+    52
+   ],
+   "kind": "call",
+   "set": {
+    "DB2-REQUEST-TYPE": "X",
+    "DB2-RESPONSE-CODE": "0",
+    "DB2-CONNECTION-TOKEN": "",
+    "DB2-SQLCODE": "0",
+    "DB2-ERROR-MSG": ""
+   },
+   "expect": {
+    "outcome": "BLOCKED AT src/programs/online/DB2ONLN.cbl:52"
+   }
+  },
+  {
+   "id": "V01",
+   "title": "BR-060 connection limit not reached: WS-ACTIVE-CONNECTIONS 0 < WS-MAX-CONNECTIONS 100, so the ELSE branch ('Maximum connections reached', response -1) is not taken; DB2-RESPONSE-CODE (+7) and DB2-ERROR-MSG keep the caller's values when P110 blocks at EXEC SQL CONNECT",
+   "cobol_lines": [
+    19,
+    20,
+    21,
+    22,
+    40,
+    41,
+    42,
+    55,
+    56,
+    67
+   ],
+   "kind": "call",
+   "set": {
+    "DB2-REQUEST-TYPE": "C",
+    "DB2-RESPONSE-CODE": "7",
+    "DB2-CONNECTION-TOKEN": "",
+    "DB2-SQLCODE": "0",
+    "DB2-ERROR-MSG": "PRIOR MESSAGE"
+   },
+   "expect": {
+    "outcome": "BLOCKED AT src/programs/online/DB2ONLN.cbl:67",
+    "items": {
+     "WS-ACTIVE-CONNECTIONS": "0",
+     "WS-MAX-CONNECTIONS": "100",
+     "DB2-RESPONSE-CODE": "7",
+     "DB2-ERROR-MSG": "PRIOR MESSAGE",
+     "DB2-SQLCODE": "0"
+    }
+   }
+  }
+ ]
+}

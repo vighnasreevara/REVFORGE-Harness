@@ -1,0 +1,30 @@
+{
+  "contract": "pilot/proposed-tests",
+  "status": "NON_AUTHORITATIVE",
+  "program": "PORTVALD",
+  "source": [
+    { "path": "src/programs/portfolio/PORTVALD.cbl", "sha256": "5957fd22546258ae4d9e28847269168d1824bf8d11a9e661f9f62a5adc47f603" },
+    { "path": "src/copybook/common/PORTVAL.cpy", "sha256": "8d9c7666b01561c4eba4d1e0a95b9da62baaa60c9dcfc2aa5effff06854104bf" }
+  ],
+  "oracle": "source-derived: expected results follow the as-written COBOL semantics (alphanumeric comparisons pad with spaces; the NUMERIC class test is true only when every character is a digit; EXIT PARAGRAPH ends the paragraph). NOT a legacy execution: no COBOL compiler is available, so no equivalence is claimed.",
+  "interface": "LS-VALIDATION-REQUEST: LS-VALIDATE-TYPE X(1), LS-INPUT-VALUE X(50) (space-padded), LS-RETURN-CODE S9(4) COMP, LS-ERROR-MSG X(50) (space-padded)",
+  "cases": [
+    { "id": "V01", "type": "I", "input": "PORT1234", "expected": { "return_code": 1, "message": "Invalid Portfolio ID format" }, "cobol_lines": [56, 62, 63, 64, 65, 66], "note": "as written, no portfolio ID can pass: 4 characters moved into X(10) leave 6 spaces, so NOT NUMERIC is always true (DR-PORTVALD-001, preserved, not corrected)" },
+    { "id": "V02", "type": "I", "input": "ABCD1234", "expected": { "return_code": 1, "message": "Invalid Portfolio ID format" }, "cobol_lines": [56, 57, 58, 59] },
+    { "id": "V03", "type": "A", "input": "1234567890", "expected": { "return_code": 2, "message": "Invalid Account Number format" }, "cobol_lines": [77, 79, 80, 81], "note": "the NUMERIC test covers all 50 characters, so 10 digits followed by spaces are rejected (DR-PORTVALD-002, preserved)" },
+    { "id": "V04", "type": "A", "input": "00000000000000000000000000000000000000000000000001", "expected": { "return_code": 0, "message": "" }, "cobol_lines": [77, 84, 85] },
+    { "id": "V05", "type": "A", "input": "00000000000000000000000000000000000000000000000000", "expected": { "return_code": 2, "message": "Invalid Account Number format" }, "cobol_lines": [78, 79, 80] },
+    { "id": "V06", "type": "A", "input": "ABC", "expected": { "return_code": 2, "message": "Invalid Account Number format" }, "cobol_lines": [77, 79, 80] },
+    { "id": "V07", "type": "T", "input": "STK", "expected": { "return_code": 0, "message": "" }, "cobol_lines": [92, 101, 102] },
+    { "id": "V08", "type": "T", "input": "BND", "expected": { "return_code": 0, "message": "" }, "cobol_lines": [93, 101, 102] },
+    { "id": "V09", "type": "T", "input": "MMF", "expected": { "return_code": 0, "message": "" }, "cobol_lines": [94, 101, 102] },
+    { "id": "V10", "type": "T", "input": "ETF", "expected": { "return_code": 0, "message": "" }, "cobol_lines": [95, 101, 102] },
+    { "id": "V11", "type": "T", "input": "stk", "expected": { "return_code": 3, "message": "Invalid Investment Type" }, "cobol_lines": [92, 96, 97], "note": "comparison is case-sensitive" },
+    { "id": "V12", "type": "T", "input": " STK", "expected": { "return_code": 3, "message": "Invalid Investment Type" }, "cobol_lines": [92, 96, 97], "note": "a leading space is significant" },
+    { "id": "V13", "type": "M", "input": "00000000000000000000000000000000000000000000012345", "expected": { "return_code": 0, "message": "" }, "cobol_lines": [109, 111, 118, 119], "note": "all-digit content is defined; the full S9(13)V99 range means the range check never fails (DR-PORTVALD-003, preserved)" },
+    { "id": "V14", "type": "M", "input": "100.00", "expected": { "unsupported": "GAP-PORTVALD-4000-VALIDATE-AMOUNT-ALNUM-TO-NUMERIC-VAL-TEMP-NUM" }, "cobol_lines": [109], "note": "content that is not all digits: the MOVE result is not defined by the source; must fail explicitly as unsupported, never with an invented return code" },
+    { "id": "V15", "type": "X", "input": "anything", "expected": { "return_code": 1, "message": "Invalid validation type" }, "cobol_lines": [44, 45, 46], "note": "WHEN OTHER reuses code 1 (VAL-INVALID-ID)" },
+    { "id": "V16", "type": "i", "input": "PORT1234", "expected": { "return_code": 1, "message": "Invalid validation type" }, "cobol_lines": [44, 45, 46], "note": "the request type is case-sensitive" },
+    { "id": "V17", "type": "A", "input": "1234567890 (with a previous return code 9 and message 'X' in the area)", "expected": { "return_code": 2, "message": "Invalid Account Number format" }, "cobol_lines": [79, 80], "note": "every defined path writes both outputs; earlier contents never leak" }
+  ]
+}

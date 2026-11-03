@@ -1,0 +1,410 @@
+{
+ "program": "TSTVAL00",
+ "provenance": "Written 2026-11-02 by a scenario-author agent (F6 independent fixture design) from the COBOL source src/programs/test/TSTVAL00.cbl and its copybooks under references/udara-legacy-modernization-harness, the fixtures README contract, and the gaps array of pilot-result.json; no generated Java, source map or test results were read. Scenarios V01.. were added on 2026-11-03 (partly-covered rule extension) by an F6 scenario-author agent from the same COBOL source, copybooks, README and gaps array only; no generated Java, source map or test result was read or run.",
+ "scenarios": [
+  {
+   "id": "S01",
+   "title": "TESTCASE not allocated: the error branch moves to the undeclared WS-ERROR-MESSAGE",
+   "cobol_lines": [
+    129,
+    135,
+    140,
+    141,
+    142
+   ],
+   "kind": "main",
+   "expect": {
+    "outcome": "BLOCKED AT src/programs/test/TSTVAL00.cbl:142",
+    "display": []
+   }
+  },
+  {
+   "id": "S02",
+   "title": "TESTCASE opens but EXPECTED is not allocated",
+   "cobol_lines": [
+    140,
+    141,
+    147,
+    148,
+    149
+   ],
+   "kind": "main",
+   "datasets": {
+    "TESTCASE": {
+     "records": []
+    }
+   },
+   "expect": {
+    "outcome": "BLOCKED AT src/programs/test/TSTVAL00.cbl:149",
+    "display": []
+   }
+  },
+  {
+   "id": "S03",
+   "title": "all inputs open but TESTRPT is not allocated: OPEN OUTPUT fails",
+   "cobol_lines": [
+    154,
+    155,
+    161,
+    162,
+    163
+   ],
+   "kind": "main",
+   "datasets": {
+    "TESTCASE": {
+     "records": []
+    },
+    "EXPECTED": {
+     "records": []
+    },
+    "ACTUAL": {
+     "records": []
+    }
+   },
+   "expect": {
+    "outcome": "BLOCKED AT src/programs/test/TSTVAL00.cbl:163",
+    "display": []
+   }
+  },
+  {
+   "id": "S04",
+   "title": "no test cases: 2900-WRITE-SUMMARY divides WS-TESTS-PASSED by WS-TOTAL-TESTS = 0 without ON SIZE ERROR",
+   "cobol_lines": [
+    136,
+    169,
+    170,
+    173,
+    174,
+    177,
+    178,
+    179,
+    180,
+    185,
+    207,
+    208,
+    209,
+    210,
+    211,
+    212,
+    213
+   ],
+   "kind": "main",
+   "clock": "2026-03-04T05:06:07.08Z",
+   "datasets": {
+    "TESTCASE": {
+     "records": []
+    },
+    "EXPECTED": {
+     "records": []
+    },
+    "ACTUAL": {
+     "records": []
+    }
+   },
+   "outputs": [
+    "TESTRPT"
+   ],
+   "expect": {
+    "outcome": "ABEND S0CB",
+    "display": []
+   }
+  },
+  {
+   "id": "S05",
+   "title": "one FUNCTIONAL test case: the EVALUATE performs the undefined 2200-RUN-FUNCTIONAL-TEST",
+   "cobol_lines": [
+    178,
+    182,
+    188,
+    189,
+    190
+   ],
+   "kind": "main",
+   "clock": "2026-03-04T05:06:07.08Z",
+   "datasets": {
+    "TESTCASE": {
+     "records": [
+      "TC00000001FUNCTIONALFUNCTIONAL CASE                                                                                                                                       "
+     ]
+    },
+    "EXPECTED": {
+     "records": []
+    },
+    "ACTUAL": {
+     "records": []
+    }
+   },
+   "outputs": [
+    "TESTRPT"
+   ],
+   "expect": {
+    "outcome": "BLOCKED AT src/programs/test/TSTVAL00.cbl:190",
+    "display": []
+   }
+  },
+  {
+   "id": "S06",
+   "title": "one test case of unknown type: WHEN OTHER moves to the undeclared WS-ERROR-MESSAGE",
+   "cobol_lines": [
+    178,
+    182,
+    188,
+    197,
+    198
+   ],
+   "kind": "main",
+   "clock": "2026-03-04T05:06:07.08Z",
+   "datasets": {
+    "TESTCASE": {
+     "records": [
+      "TC00000002UNKNOWN   BAD TYPE                                                                                                                                              "
+     ]
+    },
+    "EXPECTED": {
+     "records": []
+    },
+    "ACTUAL": {
+     "records": []
+    }
+   },
+   "outputs": [
+    "TESTRPT"
+   ],
+   "expect": {
+    "outcome": "BLOCKED AT src/programs/test/TSTVAL00.cbl:198",
+    "display": []
+   }
+  },
+  {
+   "id": "V01",
+   "title": "BR-126 TEST-TYPE 'INTEGRATE' matches WS-INTEGRATION and routes to its undefined test paragraph at line 192; the two report headers written by 1200-WRITE-HEADERS are on TESTRPT and WS-TOTAL-TESTS is still 0",
+   "cobol_lines": [
+    129,
+    130,
+    135,
+    136,
+    137,
+    140,
+    147,
+    154,
+    161,
+    169,
+    170,
+    173,
+    174,
+    177,
+    178,
+    182,
+    188,
+    191,
+    192
+   ],
+   "kind": "main",
+   "clock": "2026-03-04T05:06:07.08Z",
+   "datasets": {
+    "TESTCASE": {
+     "records": [
+      "TC00000003INTEGRATE INTEGRATE CASE                                                                                                                                        "
+     ]
+    },
+    "EXPECTED": {
+     "records": []
+    },
+    "ACTUAL": {
+     "records": []
+    }
+   },
+   "outputs": [
+    "TESTRPT"
+   ],
+   "expect": {
+    "outcome": "BLOCKED AT src/programs/test/TSTVAL00.cbl:192",
+    "display": [],
+    "items": {
+     "WS-TOTAL-TESTS": "0",
+     "TEST-TYPE": "INTEGRATE"
+    },
+    "datasets": {
+     "TESTRPT": [
+      "************************************************************************************************************************************",
+      "                              TEST VALIDATION REPORT"
+     ]
+    }
+   }
+  },
+  {
+   "id": "V02",
+   "title": "BR-126 TEST-TYPE 'PERFORM' matches WS-PERFORMANCE and routes to its undefined test paragraph at line 194; the two report headers written by 1200-WRITE-HEADERS are on TESTRPT and WS-TOTAL-TESTS is still 0",
+   "cobol_lines": [
+    129,
+    130,
+    135,
+    136,
+    137,
+    140,
+    147,
+    154,
+    161,
+    169,
+    170,
+    173,
+    174,
+    177,
+    178,
+    182,
+    188,
+    193,
+    194
+   ],
+   "kind": "main",
+   "clock": "2026-03-04T05:06:07.08Z",
+   "datasets": {
+    "TESTCASE": {
+     "records": [
+      "TC00000004PERFORM   PERFORM CASE                                                                                                                                          "
+     ]
+    },
+    "EXPECTED": {
+     "records": []
+    },
+    "ACTUAL": {
+     "records": []
+    }
+   },
+   "outputs": [
+    "TESTRPT"
+   ],
+   "expect": {
+    "outcome": "BLOCKED AT src/programs/test/TSTVAL00.cbl:194",
+    "display": [],
+    "items": {
+     "WS-TOTAL-TESTS": "0",
+     "TEST-TYPE": "PERFORM"
+    },
+    "datasets": {
+     "TESTRPT": [
+      "************************************************************************************************************************************",
+      "                              TEST VALIDATION REPORT"
+     ]
+    }
+   }
+  },
+  {
+   "id": "V03",
+   "title": "BR-126 TEST-TYPE 'ERROR' matches WS-ERROR and routes to its undefined test paragraph at line 196; the two report headers written by 1200-WRITE-HEADERS are on TESTRPT and WS-TOTAL-TESTS is still 0",
+   "cobol_lines": [
+    129,
+    130,
+    135,
+    136,
+    137,
+    140,
+    147,
+    154,
+    161,
+    169,
+    170,
+    173,
+    174,
+    177,
+    178,
+    182,
+    188,
+    195,
+    196
+   ],
+   "kind": "main",
+   "clock": "2026-03-04T05:06:07.08Z",
+   "datasets": {
+    "TESTCASE": {
+     "records": [
+      "TC00000005ERROR     ERROR CASE                                                                                                                                            "
+     ]
+    },
+    "EXPECTED": {
+     "records": []
+    },
+    "ACTUAL": {
+     "records": []
+    }
+   },
+   "outputs": [
+    "TESTRPT"
+   ],
+   "expect": {
+    "outcome": "BLOCKED AT src/programs/test/TSTVAL00.cbl:196",
+    "display": [],
+    "items": {
+     "WS-TOTAL-TESTS": "0",
+     "TEST-TYPE": "ERROR"
+    },
+    "datasets": {
+     "TESTRPT": [
+      "************************************************************************************************************************************",
+      "                              TEST VALIDATION REPORT"
+     ]
+    }
+   }
+  },
+  {
+   "id": "V04",
+   "title": "BR-126 boundary: 'INTEGRATION' does not fit TEST-TYPE X(10); the stored 'INTEGRATIO' is not equal to WS-INTEGRATION ('INTEGRATE '), so WHEN OTHER is taken and the MOVE to the undeclared WS-ERROR-MESSAGE blocks; headers already on TESTRPT",
+   "cobol_lines": [
+    129,
+    130,
+    135,
+    136,
+    137,
+    140,
+    147,
+    154,
+    161,
+    169,
+    170,
+    173,
+    174,
+    177,
+    178,
+    182,
+    188,
+    189,
+    191,
+    193,
+    195,
+    197,
+    198
+   ],
+   "kind": "main",
+   "clock": "2026-03-04T05:06:07.08Z",
+   "datasets": {
+    "TESTCASE": {
+     "records": [
+      "TC00000006INTEGRATIOTRUNCATED TYPE                                                                                                                                        "
+     ]
+    },
+    "EXPECTED": {
+     "records": []
+    },
+    "ACTUAL": {
+     "records": []
+    }
+   },
+   "outputs": [
+    "TESTRPT"
+   ],
+   "expect": {
+    "outcome": "BLOCKED AT src/programs/test/TSTVAL00.cbl:198",
+    "display": [],
+    "items": {
+     "TEST-TYPE": "INTEGRATIO"
+    },
+    "datasets": {
+     "TESTRPT": [
+      "************************************************************************************************************************************",
+      "                              TEST VALIDATION REPORT"
+     ]
+    }
+   }
+  }
+ ]
+}

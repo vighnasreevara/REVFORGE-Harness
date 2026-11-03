@@ -1,0 +1,1122 @@
+{
+  "scope": "behaviour:RTNCDE00:P400-LOG-RETURN-CODE:runtime_requirement=RT-RTNCDE00-002",
+  "scope_sha256": "4fab255e958b3c732636b561ff9ef3286d74eb14ad7437f4c228453bfa8b90b9",
+  "readiness": "NOT_READY",
+  "blocking": 5,
+  "units": [
+    {
+      "name": "RTNCODE",
+      "file_id": "SYS-PORTFOLIO-001-FIL-0013",
+      "unit_kind": "copybook",
+      "role": "dependency",
+      "source_sha256": "27eabb519319258b07b32f09ab60e80a18f6658a118e96c8fa01411fc473cbc9",
+      "classification": null
+    },
+    {
+      "name": "SQLCA",
+      "file_id": "SYS-PORTFOLIO-001-FIL-0017",
+      "unit_kind": "copybook",
+      "role": "dependency",
+      "source_sha256": "03e8f64ae705fe87324100488072c05d179fb75f64db0dc0cf753f23ab10afc7",
+      "classification": null
+    },
+    {
+      "name": "RTNCDE00",
+      "file_id": "SYS-PORTFOLIO-001-FIL-0052",
+      "unit_kind": "program",
+      "role": "primary",
+      "source_sha256": "7cb951ea1f418c19ddd61c0eca00f21108af5f364b5ecf05742cbc428862994e",
+      "classification": "application (inferred) candidate"
+    }
+  ],
+  "blocking_findings": [
+    {
+      "category": "gap",
+      "kind": "closure_gap",
+      "id": "GAP-RTNCDE00-P400-LOG-RETURN-CODE-SQL-INSERT-RTNCODES",
+      "units": [
+        "RTNCDE00"
+      ],
+      "outcome": "REQUIRES_EVIDENCE",
+      "blocking": true,
+      "reasons": [
+        "the database runtime behaviour of INSERT on RTNCODES; line 96 is in the closure"
+      ],
+      "decisions": [],
+      "sha256": null
+    },
+    {
+      "category": "decision",
+      "kind": "decision:technical",
+      "id": "DR-DB2CONN-002",
+      "units": [
+        "HISTLD00",
+        "RTNANA00",
+        "RTNCDE00",
+        "DB2CMT",
+        "DB2CONN"
+      ],
+      "decisions": [
+        "DR-DB2CONN-002"
+      ],
+      "sha256": "7004bffb5b7e045c7e8f669d67550d4534d729a241f7c756c08bb19aa9ac1fea",
+      "outcome": "REQUIRES_SME_DECISION",
+      "blocking": true,
+      "reasons": [
+        "blocking decision open — Copybook SQLCA (src/copybook/db2/SQLCA.cpy) includes itself (EXEC SQL INCLUDE SQLCA at line 6) and defines only SQL-STATUS-CODES, with no SQLCODE or SQLERRMC field; SQLCODE/SQLERRMC therefore have no Field ID in 14 DB2 programs, including HISTLD00, RTNANA00, RTNCDE00, DB2CMT and DB2CONN. Which SQLCA"
+      ]
+    },
+    {
+      "category": "decision",
+      "kind": "decision:data_layout",
+      "id": "DR-F2-0011-001",
+      "units": [
+        "SQLCA"
+      ],
+      "decisions": [
+        "DR-F2-0011-001"
+      ],
+      "sha256": "9295eb19e7b7bf928ede74d7df5811cab75951ba41245bb62b97a3764bc5493f",
+      "outcome": "REQUIRES_SME_DECISION",
+      "blocking": true,
+      "reasons": [
+        "blocking decision open — Copybook SQLCA (SYS-PORTFOLIO-001-FIL-0017) line 6 contains 'EXEC SQL INCLUDE SQLCA END-EXEC', naming itself. The included SQL communication area (SQLCODE, SQLSTATE, SQLERRMC, ...) has no layout in any reverse artifact. How should the forward design obtain the SQLCA layout and the SQLCODE/SQLSTATE s"
+      ]
+    },
+    {
+      "category": "gap",
+      "kind": "closure_gap",
+      "id": "GAP-RTNCDE00-P400-LOG-RETURN-CODE-SQLCODE",
+      "units": [
+        "RTNCDE00"
+      ],
+      "outcome": "REQUIRES_SME_DECISION",
+      "blocking": true,
+      "reasons": [
+        "SQLCODE is declared nowhere; its meaning is the subject of DR-F2-0011-001, DR-DB2CONN-002; closure statement(s) 113, 114, 116 use it or are guarded by it"
+      ],
+      "decisions": [
+        "DR-F2-0011-001",
+        "DR-DB2CONN-002"
+      ],
+      "sha256": null
+    },
+    {
+      "category": "runtime_evidence",
+      "kind": "runtime_requirement",
+      "id": "RT-RTNCDE00-002",
+      "units": [
+        "RTNCDE00"
+      ],
+      "outcome": "REQUIRES_SME_DECISION",
+      "blocking": true,
+      "reasons": [
+        "REQUIRES_SME_DECISION: blocked by DR-DB2CONN-002 (open)",
+        "REQUIRES_SME_DECISION: blocked by DR-F2-0011-001 (open)"
+      ],
+      "decisions": [
+        "DR-DB2CONN-002",
+        "DR-F2-0011-001"
+      ],
+      "sha256": "ba25007532f27658e7138af4bd55952c7a3647e4ded4bac7cf62378fb03af17a"
+    }
+  ],
+  "behaviour": {
+    "closure": {
+      "status": "RESOLVED",
+      "unresolved_reasons": [],
+      "program": "RTNCDE00",
+      "file_id": "SYS-PORTFOLIO-001-FIL-0052",
+      "source": {
+        "path": "src/programs/batch/RTNCDE00.cbl",
+        "sha256": "7cb951ea1f418c19ddd61c0eca00f21108af5f364b5ecf05742cbc428862994e"
+      },
+      "entry": "P400-LOG-RETURN-CODE",
+      "range": [
+        "P400-LOG-RETURN-CODE",
+        "P400-EXIT"
+      ],
+      "statements": [
+        {
+          "line": 43,
+          "end_line": 43,
+          "paragraph": null,
+          "verb": "WHEN",
+          "text": "WHEN RC-LOG-CODE",
+          "relation": "trigger"
+        },
+        {
+          "line": 54,
+          "end_line": 54,
+          "paragraph": "P100-INIT-RETURN-CODES",
+          "verb": "INITIALIZE",
+          "text": "INITIALIZE RC-CODES-AREA.",
+          "relation": "input_writer"
+        },
+        {
+          "line": 55,
+          "end_line": 55,
+          "paragraph": "P100-INIT-RETURN-CODES",
+          "verb": "MOVE",
+          "text": "MOVE SPACES TO RC-PROGRAM-ID.",
+          "relation": "input_writer"
+        },
+        {
+          "line": 56,
+          "end_line": 56,
+          "paragraph": "P100-INIT-RETURN-CODES",
+          "verb": "MOVE",
+          "text": "MOVE 0 TO RC-CURRENT-CODE.",
+          "relation": "input_writer"
+        },
+        {
+          "line": 57,
+          "end_line": 57,
+          "paragraph": "P100-INIT-RETURN-CODES",
+          "verb": "MOVE",
+          "text": "MOVE 0 TO RC-HIGHEST-CODE.",
+          "relation": "input_writer"
+        },
+        {
+          "line": 58,
+          "end_line": 58,
+          "paragraph": "P100-INIT-RETURN-CODES",
+          "verb": "SET",
+          "text": "SET RC-STATUS-SUCCESS TO TRUE.",
+          "relation": "input_writer"
+        },
+        {
+          "line": 65,
+          "end_line": 65,
+          "paragraph": "P200-SET-RETURN-CODE",
+          "verb": "MOVE",
+          "text": "MOVE RC-NEW-CODE TO RC-HIGHEST-CODE",
+          "relation": "input_writer"
+        },
+        {
+          "line": 68,
+          "end_line": 68,
+          "paragraph": "P200-SET-RETURN-CODE",
+          "verb": "MOVE",
+          "text": "MOVE RC-NEW-CODE TO RC-CURRENT-CODE.",
+          "relation": "input_writer"
+        },
+        {
+          "line": 72,
+          "end_line": 72,
+          "paragraph": "P200-SET-RETURN-CODE",
+          "verb": "SET",
+          "text": "SET RC-STATUS-SUCCESS TO TRUE",
+          "relation": "input_writer"
+        },
+        {
+          "line": 74,
+          "end_line": 74,
+          "paragraph": "P200-SET-RETURN-CODE",
+          "verb": "SET",
+          "text": "SET RC-STATUS-WARNING TO TRUE",
+          "relation": "input_writer"
+        },
+        {
+          "line": 76,
+          "end_line": 76,
+          "paragraph": "P200-SET-RETURN-CODE",
+          "verb": "SET",
+          "text": "SET RC-STATUS-ERROR TO TRUE",
+          "relation": "input_writer"
+        },
+        {
+          "line": 78,
+          "end_line": 78,
+          "paragraph": "P200-SET-RETURN-CODE",
+          "verb": "SET",
+          "text": "SET RC-STATUS-SEVERE TO TRUE",
+          "relation": "input_writer"
+        },
+        {
+          "line": 94,
+          "end_line": 94,
+          "paragraph": "P400-LOG-RETURN-CODE",
+          "verb": "MOVE",
+          "text": "MOVE FUNCTION CURRENT-DATE TO WS-CURRENT-TIME.",
+          "relation": "direct"
+        },
+        {
+          "line": 96,
+          "end_line": 111,
+          "paragraph": "P400-LOG-RETURN-CODE",
+          "verb": "EXEC",
+          "text": "EXEC SQL INSERT INTO RTNCODES (TIMESTAMP, PROGRAM_ID, RETURN_CODE, HIGHEST_CODE, STATUS_CODE, MESSAGE_TEXT) VALUES (:WS-CURRENT-TIME, :RC-PROGRAM-ID, :RC-CURRENT-CODE, :RC-HIGHEST-CODE, :RC-STATUS, :RC-MESSAGE) END-EXEC.",
+          "relation": "direct"
+        },
+        {
+          "line": 113,
+          "end_line": 113,
+          "paragraph": "P400-LOG-RETURN-CODE",
+          "verb": "IF",
+          "text": "IF SQLCODE = 0",
+          "relation": "direct"
+        },
+        {
+          "line": 114,
+          "end_line": 114,
+          "paragraph": "P400-LOG-RETURN-CODE",
+          "verb": "MOVE",
+          "text": "MOVE 0 TO RC-RESPONSE-CODE",
+          "relation": "direct"
+        },
+        {
+          "line": 115,
+          "end_line": 115,
+          "paragraph": "P400-LOG-RETURN-CODE",
+          "verb": "ELSE",
+          "text": "ELSE",
+          "relation": "direct"
+        },
+        {
+          "line": 116,
+          "end_line": 116,
+          "paragraph": "P400-LOG-RETURN-CODE",
+          "verb": "MOVE",
+          "text": "MOVE 8 TO RC-RESPONSE-CODE",
+          "relation": "direct"
+        },
+        {
+          "line": 117,
+          "end_line": 117,
+          "paragraph": "P400-LOG-RETURN-CODE",
+          "verb": "END-IF",
+          "text": "END-IF.",
+          "relation": "direct"
+        },
+        {
+          "line": 119,
+          "end_line": 119,
+          "paragraph": "P400-EXIT",
+          "verb": "EXIT",
+          "text": "EXIT.",
+          "relation": "direct"
+        }
+      ],
+      "paragraphs": {
+        "direct": [
+          "P400-LOG-RETURN-CODE",
+          "P400-EXIT"
+        ],
+        "transitive": [
+          "(entry)",
+          "P100-INIT-RETURN-CODES",
+          "P200-SET-RETURN-CODE"
+        ]
+      },
+      "fields": [
+        {
+          "name": "WS-CURRENT-TIME",
+          "kind": "item",
+          "declared_in": "RTNCDE00.cbl",
+          "line": 15,
+          "values": [],
+          "parent": null,
+          "permanent_id": null,
+          "relation": "direct"
+        },
+        {
+          "name": "RC-PROGRAM-ID",
+          "kind": "item",
+          "declared_in": "RTNCODE.cpy",
+          "line": 11,
+          "values": [],
+          "parent": "RETURN-CODE-AREA",
+          "permanent_id": "SYS-PORTFOLIO-001-FIL-0013-FLD-000007",
+          "relation": "direct"
+        },
+        {
+          "name": "RC-CURRENT-CODE",
+          "kind": "item",
+          "declared_in": "RTNCODE.cpy",
+          "line": 13,
+          "values": [],
+          "parent": "RC-CODES-AREA",
+          "permanent_id": "SYS-PORTFOLIO-001-FIL-0013-FLD-000009",
+          "relation": "direct"
+        },
+        {
+          "name": "RC-HIGHEST-CODE",
+          "kind": "item",
+          "declared_in": "RTNCODE.cpy",
+          "line": 14,
+          "values": [],
+          "parent": "RC-CODES-AREA",
+          "permanent_id": "SYS-PORTFOLIO-001-FIL-0013-FLD-000010",
+          "relation": "direct"
+        },
+        {
+          "name": "RC-STATUS",
+          "kind": "item",
+          "declared_in": "RTNCODE.cpy",
+          "line": 16,
+          "values": [],
+          "parent": "RC-CODES-AREA",
+          "permanent_id": "SYS-PORTFOLIO-001-FIL-0013-FLD-000012",
+          "relation": "direct"
+        },
+        {
+          "name": "RC-MESSAGE",
+          "kind": "item",
+          "declared_in": "RTNCODE.cpy",
+          "line": 21,
+          "values": [],
+          "parent": "RETURN-CODE-AREA",
+          "permanent_id": "SYS-PORTFOLIO-001-FIL-0013-FLD-000017",
+          "relation": "direct"
+        },
+        {
+          "name": "RC-RESPONSE-CODE",
+          "kind": "item",
+          "declared_in": "RTNCODE.cpy",
+          "line": 22,
+          "values": [],
+          "parent": "RETURN-CODE-AREA",
+          "permanent_id": "SYS-PORTFOLIO-001-FIL-0013-FLD-000018",
+          "relation": "direct"
+        },
+        {
+          "name": "RC-LOG-CODE",
+          "kind": "condition",
+          "declared_in": "RTNCODE.cpy",
+          "line": 9,
+          "values": [
+            "L"
+          ],
+          "parent": "RC-REQUEST-TYPE",
+          "permanent_id": "SYS-PORTFOLIO-001-FIL-0013-FLD-000005",
+          "relation": "transitive"
+        }
+      ],
+      "inputs": [
+        "RC-CURRENT-CODE",
+        "RC-HIGHEST-CODE",
+        "RC-MESSAGE",
+        "RC-PROGRAM-ID",
+        "RC-STATUS",
+        "WS-CURRENT-TIME"
+      ],
+      "outputs": [
+        "RC-RESPONSE-CODE",
+        "WS-CURRENT-TIME"
+      ],
+      "input_writers": [
+        {
+          "field": "RC-CURRENT-CODE",
+          "line": 54,
+          "paragraph": "P100-INIT-RETURN-CODES",
+          "text": "INITIALIZE RC-CODES-AREA.",
+          "via": "INITIALIZE",
+          "depends_on": [],
+          "sql": false
+        },
+        {
+          "field": "RC-HIGHEST-CODE",
+          "line": 54,
+          "paragraph": "P100-INIT-RETURN-CODES",
+          "text": "INITIALIZE RC-CODES-AREA.",
+          "via": "INITIALIZE",
+          "depends_on": [],
+          "sql": false
+        },
+        {
+          "field": "RC-STATUS",
+          "line": 54,
+          "paragraph": "P100-INIT-RETURN-CODES",
+          "text": "INITIALIZE RC-CODES-AREA.",
+          "via": "INITIALIZE",
+          "depends_on": [],
+          "sql": false
+        },
+        {
+          "field": "RC-PROGRAM-ID",
+          "line": 55,
+          "paragraph": "P100-INIT-RETURN-CODES",
+          "text": "MOVE SPACES TO RC-PROGRAM-ID.",
+          "via": "MOVE",
+          "depends_on": [],
+          "sql": false
+        },
+        {
+          "field": "RC-CURRENT-CODE",
+          "line": 56,
+          "paragraph": "P100-INIT-RETURN-CODES",
+          "text": "MOVE 0 TO RC-CURRENT-CODE.",
+          "via": "MOVE",
+          "depends_on": [],
+          "sql": false
+        },
+        {
+          "field": "RC-HIGHEST-CODE",
+          "line": 57,
+          "paragraph": "P100-INIT-RETURN-CODES",
+          "text": "MOVE 0 TO RC-HIGHEST-CODE.",
+          "via": "MOVE",
+          "depends_on": [],
+          "sql": false
+        },
+        {
+          "field": "RC-STATUS",
+          "line": 58,
+          "paragraph": "P100-INIT-RETURN-CODES",
+          "text": "SET RC-STATUS-SUCCESS TO TRUE.",
+          "via": "SET",
+          "depends_on": [],
+          "sql": false
+        },
+        {
+          "field": "RC-HIGHEST-CODE",
+          "line": 65,
+          "paragraph": "P200-SET-RETURN-CODE",
+          "text": "MOVE RC-NEW-CODE TO RC-HIGHEST-CODE",
+          "via": "MOVE",
+          "depends_on": [],
+          "sql": false
+        },
+        {
+          "field": "RC-CURRENT-CODE",
+          "line": 68,
+          "paragraph": "P200-SET-RETURN-CODE",
+          "text": "MOVE RC-NEW-CODE TO RC-CURRENT-CODE.",
+          "via": "MOVE",
+          "depends_on": [],
+          "sql": false
+        },
+        {
+          "field": "RC-STATUS",
+          "line": 72,
+          "paragraph": "P200-SET-RETURN-CODE",
+          "text": "SET RC-STATUS-SUCCESS TO TRUE",
+          "via": "SET",
+          "depends_on": [],
+          "sql": false
+        },
+        {
+          "field": "RC-STATUS",
+          "line": 74,
+          "paragraph": "P200-SET-RETURN-CODE",
+          "text": "SET RC-STATUS-WARNING TO TRUE",
+          "via": "SET",
+          "depends_on": [],
+          "sql": false
+        },
+        {
+          "field": "RC-STATUS",
+          "line": 76,
+          "paragraph": "P200-SET-RETURN-CODE",
+          "text": "SET RC-STATUS-ERROR TO TRUE",
+          "via": "SET",
+          "depends_on": [],
+          "sql": false
+        },
+        {
+          "field": "RC-STATUS",
+          "line": 78,
+          "paragraph": "P200-SET-RETURN-CODE",
+          "text": "SET RC-STATUS-SEVERE TO TRUE",
+          "via": "SET",
+          "depends_on": [],
+          "sql": false
+        }
+      ],
+      "calls": [],
+      "external": [
+        {
+          "kind": "embedded_sql",
+          "line": 96,
+          "operation": "INSERT",
+          "target": "RTNCODES",
+          "relation": "direct"
+        }
+      ],
+      "undeclared": [
+        {
+          "name": "SQLCODE",
+          "decisions": [
+            "DR-F2-0011-001",
+            "DR-DB2CONN-002"
+          ],
+          "lines": [
+            113
+          ]
+        }
+      ],
+      "units": [
+        {
+          "unit_kind": "program",
+          "name": "RTNCDE00",
+          "file_id": "SYS-PORTFOLIO-001-FIL-0052"
+        },
+        {
+          "unit_kind": "copybook",
+          "name": "RTNCODE",
+          "file_id": "SYS-PORTFOLIO-001-FIL-0013"
+        },
+        {
+          "unit_kind": "copybook",
+          "name": "SQLCA",
+          "file_id": "SYS-PORTFOLIO-001-FIL-0017"
+        }
+      ],
+      "unit_reasons": {
+        "RTNCDE00": "primary: the behaviour belongs to it",
+        "RTNCODE": "declares RC-PROGRAM-ID, RC-CURRENT-CODE, RC-HIGHEST-CODE, RC-STATUS, RC-MESSAGE, RC-RESPONSE-CODE, RC-LOG-CODE",
+        "SQLCA": "SQL communication area: embedded SQL at line(s) 96 updates it implicitly"
+      },
+      "domain_restrictions": [],
+      "program_gaps": [
+        {
+          "gap_id": "GAP-RTNCDE00-P200-SET-RETURN-CODE-TRUNC-RC-HIGHEST-CODE",
+          "kind": "COMPILER_OPTION_DEPENDENT",
+          "paragraph": "P200-SET-RETURN-CODE",
+          "lines": [
+            65
+          ],
+          "subject": "RC-HIGHEST-CODE",
+          "decisions": [],
+          "blocking": false,
+          "missing": "the compiler TRUNC option (binary item RC-HIGHEST-CODE PIC S9(4))",
+          "in_closure": false,
+          "why": "line 65 is outside the closure"
+        },
+        {
+          "gap_id": "GAP-RTNCDE00-P200-SET-RETURN-CODE-TRUNC-RC-CURRENT-CODE",
+          "kind": "COMPILER_OPTION_DEPENDENT",
+          "paragraph": "P200-SET-RETURN-CODE",
+          "lines": [
+            68
+          ],
+          "subject": "RC-CURRENT-CODE",
+          "decisions": [],
+          "blocking": false,
+          "missing": "the compiler TRUNC option (binary item RC-CURRENT-CODE PIC S9(4))",
+          "in_closure": false,
+          "why": "line 68 is outside the closure"
+        },
+        {
+          "gap_id": "GAP-RTNCDE00-P300-GET-RETURN-CODE-TRUNC-RC-RETURN-VALUE",
+          "kind": "COMPILER_OPTION_DEPENDENT",
+          "paragraph": "P300-GET-RETURN-CODE",
+          "lines": [
+            86
+          ],
+          "subject": "RC-RETURN-VALUE",
+          "decisions": [],
+          "blocking": false,
+          "missing": "the compiler TRUNC option (binary item RC-RETURN-VALUE PIC S9(4))",
+          "in_closure": false,
+          "why": "line 86 is outside the closure"
+        },
+        {
+          "gap_id": "GAP-RTNCDE00-P300-GET-RETURN-CODE-TRUNC-RC-HIGHEST-RETURN",
+          "kind": "COMPILER_OPTION_DEPENDENT",
+          "paragraph": "P300-GET-RETURN-CODE",
+          "lines": [
+            87
+          ],
+          "subject": "RC-HIGHEST-RETURN",
+          "decisions": [],
+          "blocking": false,
+          "missing": "the compiler TRUNC option (binary item RC-HIGHEST-RETURN PIC S9(4))",
+          "in_closure": false,
+          "why": "line 87 is outside the closure"
+        },
+        {
+          "gap_id": "GAP-RTNCDE00-P400-LOG-RETURN-CODE-SQLCODE",
+          "kind": "UNDECLARED_NAME_SEMANTICS",
+          "paragraph": "P400-LOG-RETURN-CODE",
+          "lines": [
+            113,
+            114,
+            116
+          ],
+          "subject": "SQLCODE",
+          "decisions": [
+            "DR-F2-0011-001",
+            "DR-DB2CONN-002"
+          ],
+          "blocking": true,
+          "missing": "SQLCODE is declared nowhere; its meaning is the subject of DR-F2-0011-001, DR-DB2CONN-002",
+          "in_closure": true,
+          "why": "closure statement(s) 113, 114, 116 use it or are guarded by it"
+        },
+        {
+          "gap_id": "GAP-RTNCDE00-P400-LOG-RETURN-CODE-SQL-INSERT-RTNCODES",
+          "kind": "EXTERNAL_DATABASE_RUNTIME",
+          "paragraph": "P400-LOG-RETURN-CODE",
+          "lines": [
+            96
+          ],
+          "subject": "INSERT RTNCODES",
+          "decisions": [],
+          "blocking": true,
+          "missing": "the database runtime behaviour of INSERT on RTNCODES",
+          "in_closure": true,
+          "why": "line 96 is in the closure"
+        },
+        {
+          "gap_id": "GAP-RTNCDE00-P500-ANALYZE-CODES-SQLCODE",
+          "kind": "UNDECLARED_NAME_SEMANTICS",
+          "paragraph": "P500-ANALYZE-CODES",
+          "lines": [
+            135,
+            136,
+            138
+          ],
+          "subject": "SQLCODE",
+          "decisions": [
+            "DR-F2-0011-001",
+            "DR-DB2CONN-002"
+          ],
+          "blocking": true,
+          "missing": "SQLCODE is declared nowhere; its meaning is the subject of DR-F2-0011-001, DR-DB2CONN-002",
+          "in_closure": false,
+          "why": "none of lines 135, 136, 138 is a closure statement, an input writer of the closure or its trigger"
+        },
+        {
+          "gap_id": "GAP-RTNCDE00-P500-ANALYZE-CODES-SQL-SELECT-RTNCODES",
+          "kind": "EXTERNAL_DATABASE_RUNTIME",
+          "paragraph": "P500-ANALYZE-CODES",
+          "lines": [
+            122
+          ],
+          "subject": "SELECT RTNCODES",
+          "decisions": [],
+          "blocking": true,
+          "missing": "the database runtime behaviour of SELECT on RTNCODES",
+          "in_closure": false,
+          "why": "line 122 is outside the closure and writes no field the closure consumes"
+        }
+      ],
+      "context": {
+        "paragraphs": [
+          "P100-INIT-RETURN-CODES",
+          "P100-EXIT",
+          "P200-SET-RETURN-CODE",
+          "P200-EXIT",
+          "P300-GET-RETURN-CODE",
+          "P300-EXIT",
+          "P400-LOG-RETURN-CODE",
+          "P400-EXIT",
+          "P500-ANALYZE-CODES",
+          "P500-EXIT"
+        ],
+        "copybooks": [
+          "SQLCA",
+          "RTNCODE"
+        ],
+        "undeclared": [
+          "SQLCODE",
+          "SQLSTATE",
+          "SQLERRMC"
+        ],
+        "data_names": [
+          "RC-ANALYSIS-DATA",
+          "RC-ANALYZE",
+          "RC-CODES-AREA",
+          "RC-CURRENT-CODE",
+          "RC-END-TIME",
+          "RC-GET-CODE",
+          "RC-HIGHEST-CODE",
+          "RC-HIGHEST-RETURN",
+          "RC-INITIALIZE",
+          "RC-LOG-CODE",
+          "RC-MAX-CODE",
+          "RC-MESSAGE",
+          "RC-MIN-CODE",
+          "RC-NEW-CODE",
+          "RC-PROGRAM-ID",
+          "RC-REQUEST-AREA",
+          "RC-REQUEST-TYPE",
+          "RC-RESPONSE-CODE",
+          "RC-RETURN-DATA",
+          "RC-RETURN-STATUS",
+          "RC-RETURN-VALUE",
+          "RC-SET-CODE",
+          "RC-START-TIME",
+          "RC-STATUS",
+          "RC-STATUS-ERROR",
+          "RC-STATUS-SEVERE",
+          "RC-STATUS-SUCCESS",
+          "RC-STATUS-WARNING",
+          "RC-TOTAL-CODES",
+          "RETURN-CODE-AREA",
+          "SQL-CONNECTION-ERROR",
+          "SQL-DB-ERROR",
+          "SQL-DEADLOCK",
+          "SQL-DUP-KEY",
+          "SQL-NOT-FOUND",
+          "SQL-STATUS-CODES",
+          "SQL-SUCCESS",
+          "SQL-TIMEOUT",
+          "WS-CURRENT-DATE",
+          "WS-CURRENT-DAY",
+          "WS-CURRENT-HOURS",
+          "WS-CURRENT-MILLISEC",
+          "WS-CURRENT-MINUTES",
+          "WS-CURRENT-MONTH",
+          "WS-CURRENT-SECONDS",
+          "WS-CURRENT-TIME",
+          "WS-CURRENT-YEAR",
+          "WS-DB2-AREA"
+        ],
+        "tables": [
+          "RTNCODES"
+        ]
+      },
+      "sha256": "95eb9c9329846a63d7b80bf44ab7dde25bfb9b6bb34ea303819de58a6fff57c7"
+    },
+    "items": [
+      {
+        "kind": "runtime_requirement",
+        "id": "RT-RTNCDE00-002",
+        "sha256": "ba25007532f27658e7138af4bd55952c7a3647e4ded4bac7cf62378fb03af17a"
+      }
+    ],
+    "decision_attribution": [
+      {
+        "decision_id": "DR-DB2CONN-002",
+        "kind": "technical",
+        "blocking": true,
+        "applicable": true,
+        "reason": "open decision of selected item(s) RT-RTNCDE00-002",
+        "edges": [
+          "RT-RTNCDE00-002->decision"
+        ],
+        "affected_units": [
+          "HISTLD00",
+          "RTNANA00",
+          "RTNCDE00",
+          "DB2CMT",
+          "DB2CONN"
+        ],
+        "affected_requirements": [
+          "REQ-DB2CMT-002",
+          "REQ-DB2CMT-003",
+          "REQ-DB2CONN-002",
+          "REQ-DB2CONN-003",
+          "REQ-DB2CONN-004",
+          "REQ-HISTLD00-002",
+          "REQ-RTNANA00-001",
+          "REQ-RTNCDE00-001",
+          "REQ-RTNCDE00-004"
+        ],
+        "sha256": "7004bffb5b7e045c7e8f669d67550d4534d729a241f7c756c08bb19aa9ac1fea"
+      },
+      {
+        "decision_id": "DR-F2-0005-009",
+        "kind": "technical",
+        "blocking": false,
+        "applicable": true,
+        "reason": "its subject SQLCA, SQLCODE is in the closure",
+        "edges": [
+          "closure contains SQLCA",
+          "closure contains SQLCODE"
+        ],
+        "affected_units": [
+          "RTNANA00",
+          "RTNCDE00"
+        ],
+        "affected_requirements": [],
+        "sha256": "c75f7ffc256712d8752ff34980727681bbd59af956065c8d737fc4fe3085c5c3"
+      },
+      {
+        "decision_id": "DR-F2-0005-010",
+        "kind": "data_layout",
+        "blocking": false,
+        "applicable": true,
+        "reason": "its subject RTNCODE is in the closure",
+        "edges": [
+          "closure contains RTNCODE"
+        ],
+        "affected_units": [
+          "RTNCDE00"
+        ],
+        "affected_requirements": [],
+        "sha256": "edcbdcf85ce9f4c7712bc8d7162d1e9bf1bfd4501a5d778497f8795578d5b7b7"
+      },
+      {
+        "decision_id": "DR-F2-0011-001",
+        "kind": "data_layout",
+        "blocking": true,
+        "applicable": true,
+        "reason": "open decision of selected item(s) RT-RTNCDE00-002",
+        "edges": [
+          "RT-RTNCDE00-002->decision"
+        ],
+        "affected_units": [
+          "SQLCA"
+        ],
+        "affected_requirements": [],
+        "sha256": "9295eb19e7b7bf928ede74d7df5811cab75951ba41245bb62b97a3764bc5493f"
+      },
+      {
+        "decision_id": "DR-F2-PKT0010-002",
+        "kind": "data_layout",
+        "blocking": false,
+        "applicable": true,
+        "reason": "concerns RTNCODE, which the closure includes",
+        "edges": [
+          "closure includes RTNCODE: declares RC-PROGRAM-ID, RC-CURRENT-CODE, RC-HIGHEST-CODE, RC-STATUS, RC-MESSAGE, RC-RESPONSE-CODE, RC-LOG-CODE"
+        ],
+        "affected_units": [
+          "BCHCON",
+          "BCHCTL",
+          "CKPRST",
+          "PRCSEQ",
+          "AUDITLOG",
+          "COMMON",
+          "ERRHAND",
+          "HISTREC",
+          "PORTFLIO",
+          "PORTVAL",
+          "POSREC",
+          "RETHND",
+          "RTNCODE",
+          "TRNREC"
+        ],
+        "affected_requirements": [],
+        "sha256": "3c523a65afadb58f847938c44d88b45a8dea716ad0b2619f933ed37a05f9fa4c"
+      },
+      {
+        "decision_id": "DR-RTNCDE00-001",
+        "kind": "technical",
+        "blocking": false,
+        "applicable": false,
+        "reason": "affects only requirements outside the selection (REQ-RTNCDE00-001, REQ-RTNCDE00-004), and nothing in the closure uses its subject",
+        "edges": [],
+        "affected_units": [
+          "RTNCDE00"
+        ],
+        "affected_requirements": [
+          "REQ-RTNCDE00-001",
+          "REQ-RTNCDE00-004"
+        ],
+        "sha256": "b9fc74c43c04408eb5c44025f22c06b705ddea46a3a7098b0db1f0d80c62f670"
+      },
+      {
+        "decision_id": "RVW-GAP-092",
+        "kind": "review",
+        "blocking": false,
+        "applicable": true,
+        "reason": "global decision (no unit, no requirement): applies to every scope",
+        "edges": [],
+        "affected_units": [],
+        "affected_requirements": [],
+        "sha256": "d9ea92745750f5d01a1e77278df22185e57b01f7fab4f3146e1206e24d2fe41c"
+      },
+      {
+        "decision_id": "RVW-GAP-104",
+        "kind": "review",
+        "blocking": false,
+        "applicable": true,
+        "reason": "global decision (no unit, no requirement): applies to every scope",
+        "edges": [],
+        "affected_units": [],
+        "affected_requirements": [],
+        "sha256": "cc87e40613ee6daba8ca2b261a8de0dbaad73eab5d06d1e3e60ffee5e5f3ad64"
+      },
+      {
+        "decision_id": "RVW-REQ-RTNCDE00-002",
+        "kind": "review",
+        "blocking": true,
+        "applicable": false,
+        "reason": "affects only requirements outside the selection (REQ-RTNCDE00-002), and nothing in the closure uses its subject",
+        "edges": [],
+        "affected_units": [
+          "RTNCDE00"
+        ],
+        "affected_requirements": [
+          "REQ-RTNCDE00-002"
+        ],
+        "sha256": "9bdc2c4a02772adc930d7c78177c54be57561c0ac1b96f2e734f0d49646935b4"
+      },
+      {
+        "decision_id": "RVW-REQ-RTNCDE00-003",
+        "kind": "review",
+        "blocking": true,
+        "applicable": false,
+        "reason": "affects only requirements outside the selection (REQ-RTNCDE00-003), and nothing in the closure uses its subject",
+        "edges": [],
+        "affected_units": [
+          "RTNCDE00"
+        ],
+        "affected_requirements": [
+          "REQ-RTNCDE00-003"
+        ],
+        "sha256": "06a21585a3a46da091978d054c9c858732af8cf766dcca07fb92fc2626f4b4ed"
+      },
+      {
+        "decision_id": "RVW-REQ-RTNCDE00-004",
+        "kind": "review",
+        "blocking": true,
+        "applicable": false,
+        "reason": "affects only requirements outside the selection (REQ-RTNCDE00-004), and nothing in the closure uses its subject",
+        "edges": [],
+        "affected_units": [
+          "RTNCDE00"
+        ],
+        "affected_requirements": [
+          "REQ-RTNCDE00-004"
+        ],
+        "sha256": "4c90e9fdf811008ae46354b0dcff72e113e65dfdc4f112d19ddf6247d92587ef"
+      }
+    ],
+    "gaps": [
+      {
+        "gap_id": "GAP-RTNCDE00-P200-SET-RETURN-CODE-TRUNC-RC-HIGHEST-CODE",
+        "kind": "COMPILER_OPTION_DEPENDENT",
+        "paragraph": "P200-SET-RETURN-CODE",
+        "lines": [
+          65
+        ],
+        "subject": "RC-HIGHEST-CODE",
+        "decisions": [],
+        "blocking": false,
+        "missing": "the compiler TRUNC option (binary item RC-HIGHEST-CODE PIC S9(4))",
+        "in_closure": false,
+        "why": "line 65 is outside the closure",
+        "handoff": "deferred: outside this scope; still applies to the full program"
+      },
+      {
+        "gap_id": "GAP-RTNCDE00-P200-SET-RETURN-CODE-TRUNC-RC-CURRENT-CODE",
+        "kind": "COMPILER_OPTION_DEPENDENT",
+        "paragraph": "P200-SET-RETURN-CODE",
+        "lines": [
+          68
+        ],
+        "subject": "RC-CURRENT-CODE",
+        "decisions": [],
+        "blocking": false,
+        "missing": "the compiler TRUNC option (binary item RC-CURRENT-CODE PIC S9(4))",
+        "in_closure": false,
+        "why": "line 68 is outside the closure",
+        "handoff": "deferred: outside this scope; still applies to the full program"
+      },
+      {
+        "gap_id": "GAP-RTNCDE00-P300-GET-RETURN-CODE-TRUNC-RC-RETURN-VALUE",
+        "kind": "COMPILER_OPTION_DEPENDENT",
+        "paragraph": "P300-GET-RETURN-CODE",
+        "lines": [
+          86
+        ],
+        "subject": "RC-RETURN-VALUE",
+        "decisions": [],
+        "blocking": false,
+        "missing": "the compiler TRUNC option (binary item RC-RETURN-VALUE PIC S9(4))",
+        "in_closure": false,
+        "why": "line 86 is outside the closure",
+        "handoff": "deferred: outside this scope; still applies to the full program"
+      },
+      {
+        "gap_id": "GAP-RTNCDE00-P300-GET-RETURN-CODE-TRUNC-RC-HIGHEST-RETURN",
+        "kind": "COMPILER_OPTION_DEPENDENT",
+        "paragraph": "P300-GET-RETURN-CODE",
+        "lines": [
+          87
+        ],
+        "subject": "RC-HIGHEST-RETURN",
+        "decisions": [],
+        "blocking": false,
+        "missing": "the compiler TRUNC option (binary item RC-HIGHEST-RETURN PIC S9(4))",
+        "in_closure": false,
+        "why": "line 87 is outside the closure",
+        "handoff": "deferred: outside this scope; still applies to the full program"
+      },
+      {
+        "gap_id": "GAP-RTNCDE00-P400-LOG-RETURN-CODE-SQLCODE",
+        "kind": "UNDECLARED_NAME_SEMANTICS",
+        "paragraph": "P400-LOG-RETURN-CODE",
+        "lines": [
+          113,
+          114,
+          116
+        ],
+        "subject": "SQLCODE",
+        "decisions": [
+          "DR-F2-0011-001",
+          "DR-DB2CONN-002"
+        ],
+        "blocking": true,
+        "missing": "SQLCODE is declared nowhere; its meaning is the subject of DR-F2-0011-001, DR-DB2CONN-002",
+        "in_closure": true,
+        "why": "closure statement(s) 113, 114, 116 use it or are guarded by it",
+        "handoff": "blocks this scope"
+      },
+      {
+        "gap_id": "GAP-RTNCDE00-P400-LOG-RETURN-CODE-SQL-INSERT-RTNCODES",
+        "kind": "EXTERNAL_DATABASE_RUNTIME",
+        "paragraph": "P400-LOG-RETURN-CODE",
+        "lines": [
+          96
+        ],
+        "subject": "INSERT RTNCODES",
+        "decisions": [],
+        "blocking": true,
+        "missing": "the database runtime behaviour of INSERT on RTNCODES",
+        "in_closure": true,
+        "why": "line 96 is in the closure",
+        "handoff": "blocks this scope"
+      },
+      {
+        "gap_id": "GAP-RTNCDE00-P500-ANALYZE-CODES-SQLCODE",
+        "kind": "UNDECLARED_NAME_SEMANTICS",
+        "paragraph": "P500-ANALYZE-CODES",
+        "lines": [
+          135,
+          136,
+          138
+        ],
+        "subject": "SQLCODE",
+        "decisions": [
+          "DR-F2-0011-001",
+          "DR-DB2CONN-002"
+        ],
+        "blocking": true,
+        "missing": "SQLCODE is declared nowhere; its meaning is the subject of DR-F2-0011-001, DR-DB2CONN-002",
+        "in_closure": false,
+        "why": "none of lines 135, 136, 138 is a closure statement, an input writer of the closure or its trigger",
+        "handoff": "deferred: outside this scope; still applies to the full program"
+      },
+      {
+        "gap_id": "GAP-RTNCDE00-P500-ANALYZE-CODES-SQL-SELECT-RTNCODES",
+        "kind": "EXTERNAL_DATABASE_RUNTIME",
+        "paragraph": "P500-ANALYZE-CODES",
+        "lines": [
+          122
+        ],
+        "subject": "SELECT RTNCODES",
+        "decisions": [],
+        "blocking": true,
+        "missing": "the database runtime behaviour of SELECT on RTNCODES",
+        "in_closure": false,
+        "why": "line 122 is outside the closure and writes no field the closure consumes",
+        "handoff": "deferred: outside this scope; still applies to the full program"
+      }
+    ],
+    "note": "Approval of this behaviour scope approves only the selected items of this behaviour; it never implies approval of the program."
+  },
+  "difference": {
+    "compare_scope": "programs:RTNCDE00",
+    "compare_readiness": "NOT_READY",
+    "compare_blocking": 8,
+    "compare_scope_sha256": "3c8aa823d8353b384d12a341c029d729b74c3306c823fc38e05a8a0559a75dc4",
+    "blocking_only_in_compare": [
+      "REQ-RTNCDE00-001",
+      "REQ-RTNCDE00-002",
+      "REQ-RTNCDE00-003",
+      "REQ-RTNCDE00-004",
+      "RT-RTNCDE00-003"
+    ],
+    "blocking_only_in_scope": [
+      "GAP-RTNCDE00-P400-LOG-RETURN-CODE-SQL-INSERT-RTNCODES",
+      "GAP-RTNCDE00-P400-LOG-RETURN-CODE-SQLCODE"
+    ]
+  },
+  "note": "Inspection only: nothing is approved, resolved or excluded."
+}

@@ -1,0 +1,37 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://revforge.local/contracts/input/parser-artifact.schema.json",
+  "title": "Reverse Agent 2 parser_artifact.json (consumed core)",
+  "type": "object",
+  "required": ["meta", "stats", "programs"],
+  "properties": {
+    "meta": {
+      "type": "object",
+      "required": ["agent_version", "system_id"],
+      "properties": {
+        "agent_version": { "type": "string" },
+        "system_id": { "$ref": "../common.schema.json#/definitions/systemId" },
+        "parse_run_ids": { "type": "array", "items": { "type": "string" } }
+      }
+    },
+    "stats": { "type": "object" },
+    "programs": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["program_id", "file_id", "path_id", "parse_status"],
+        "properties": {
+          "program_id": { "type": "string" },
+          "file_id": { "$ref": "../common.schema.json#/definitions/fileId" },
+          "path_id": { "$ref": "../common.schema.json#/definitions/pathId" },
+          "parse_status": { "enum": ["success", "partial", "empty", "failed", "not_parsed"] },
+          "ast_file": { "type": ["string", "null"] },
+          "paragraph_count": { "type": "integer", "minimum": 0 },
+          "statement_count": { "type": "integer", "minimum": 0 },
+          "parse_run_id": { "type": ["string", "null"] }
+        }
+      }
+    },
+    "issues": { "type": "array" }
+  }
+}

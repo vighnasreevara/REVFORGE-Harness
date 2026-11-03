@@ -1,0 +1,174 @@
+{
+ "contract": "step-21/bmad-installation-audit",
+ "release": {
+  "package": "bmad-method",
+  "version": "6.12.4",
+  "bmad_doctor_ok": true,
+  "checks": [
+   {
+    "id": "pin_record",
+    "ok": true,
+    "detail": "bmad/release-pin valid (bmad-method@6.12.4, stable)"
+   },
+   {
+    "id": "release_line",
+    "ok": true,
+    "detail": "6.12.4 on channel stable (stable 6.12 line required; previews and v7 are refused)"
+   },
+   {
+    "id": "no_lifecycle_scripts",
+    "ok": true,
+    "detail": "the pinned package declares no install-time lifecycle scripts"
+   },
+   {
+    "id": "tarball_integrity",
+    "ok": true,
+    "detail": "tarball sha256 4d66c201b6200c56… and npm sha512 integrity match the pin"
+   },
+   {
+    "id": "extracted_files",
+    "ok": true,
+    "detail": "360 extracted file(s) match the pinned manifest (digest c69ee567f3741124…)"
+   },
+   {
+    "id": "workflow_registry",
+    "ok": true,
+    "detail": "50 workflow definition(s) registered for bmad-method@6.12.4"
+   },
+   {
+    "id": "workflow_definitions",
+    "ok": true,
+    "detail": "every registered workflow definition re-derived from the staged files and unchanged"
+   },
+   {
+    "id": "repo_claude_skills_untouched",
+    "ok": true,
+    "detail": "no BMad skill is installed in the repository .claude/skills"
+   },
+   {
+    "id": "repo_bmad_config_absent",
+    "ok": true,
+    "detail": "no _bmad/ directory at the repository root"
+   },
+   {
+    "id": "repo_bmad_output_absent",
+    "ok": true,
+    "detail": "no _bmad-output/ directory at the repository root"
+   },
+   {
+    "id": "bindings",
+    "ok": true,
+    "detail": "6 binding(s) valid"
+   }
+  ]
+ },
+ "locations": {
+  "staged_release": "forward/integrations/bmad/staging/bmad-method-6.12.4/package (git-ignored, pinned by release.pin.json)",
+  "executor_copy": "forward/integrations/bmad/executor/bmad-method-6.12.4 (pinned copy with 13 npm runtime dependencies)",
+  "installed_workspaces": [
+   {
+    "path": "D:\\PROJECTS\\REVFORGE-Harness\\forward\\integrations\\bmad\\executor\\workspaces\\synthetic-001",
+    "bound_skills_verified": true,
+    "skills": [
+     "bmad-advanced-elicitation",
+     "bmad-agent-analyst",
+     "bmad-agent-architect",
+     "bmad-agent-dev",
+     "bmad-agent-pm",
+     "bmad-agent-ux-designer",
+     "bmad-architecture",
+     "bmad-brainstorming",
+     "bmad-build",
+     "bmad-build-auto",
+     "bmad-code-review",
+     "bmad-correct-course",
+     "bmad-create-epics-and-stories",
+     "bmad-customize",
+     "bmad-deep-recon",
+     "bmad-forge-idea",
+     "bmad-help",
+     "bmad-party-mode",
+     "bmad-prd",
+     "bmad-prfaq",
+     "bmad-product-brief",
+     "bmad-project-context",
+     "bmad-qa-generate-e2e-tests",
+     "bmad-retrospective",
+     "bmad-review",
+     "bmad-spec",
+     "bmad-sprint-planning",
+     "bmad-ux",
+     "bmad-walkthrough"
+    ]
+   }
+  ],
+  "repository_root": "not installed (no bmad-* skill in .claude/skills, no _bmad/, no _bmad-output/): by design, so BMad cannot mix with the reverse and forward agents"
+ },
+ "usable_by_repository": "only through the forward runtime adapter and the isolated executor; the repository never loads BMad skills directly",
+ "executor_doctor": {
+  "ok_for_installation": true,
+  "ok_for_live": false,
+  "checks": [
+   {
+    "id": "release_verified",
+    "ok": true,
+    "detail": "bmad-method@6.12.4 staged release matches the pin"
+   },
+   {
+    "id": "executor_copy",
+    "ok": true,
+    "detail": "executor copy identical to the pin (360 files)"
+   },
+   {
+    "id": "npm_dependencies",
+    "ok": true,
+    "detail": "13 runtime dependencies installed (lock f31f85fa2ceeafa2…, --ignore-scripts)"
+   },
+   {
+    "id": "uv",
+    "ok": true,
+    "detail": "uv 0.13.6 (329bf9448 2026-10-26 x86_64-pc-windows-msvc) in the isolated venv"
+   },
+   {
+    "id": "python",
+    "ok": true,
+    "detail": "Python 3.12.10 (>= 3.11 required by BMad scripts)"
+   },
+   {
+    "id": "claude_cli",
+    "ok": true,
+    "detail": "Claude Code CLI 2.1.302 (Claude Code) (headless runner for BMad skills)"
+   },
+   {
+    "id": "isolated_workspace",
+    "ok": true,
+    "detail": "1 installed workspace(s) with the six bound workflows byte-identical to the pin: synthetic-001"
+   },
+   {
+    "id": "isolation",
+    "ok": true,
+    "detail": "executor and workspaces live under forward/integrations/bmad/executor; repository .claude/, _bmad/ and _bmad-output/ untouched"
+   },
+   {
+    "id": "isolated_home",
+    "ok": true,
+    "detail": "isolated HOME for the installer and uv (0 file(s) written there)"
+   },
+   {
+    "id": "provider_disclosure_authorization",
+    "ok": false,
+    "detail": "no signed AI-provider disclosure authorization exists for anthropic (claude-code-cli); signed source-export authorizations are bound to provider 'openai' by contract and do not authorise disclosure to Claude"
+   },
+   {
+    "id": "live_requested",
+    "ok": false,
+    "detail": "bindings.json live_execution.requested is false"
+   }
+  ]
+ },
+ "status": {
+  "installed": "YES (isolated executor workspace)",
+  "configured": "YES (pinned release, 6 valid bindings, mandatory governance policy)",
+  "live_ready": "NO"
+ }
+}

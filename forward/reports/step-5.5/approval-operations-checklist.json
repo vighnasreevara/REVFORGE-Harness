@@ -1,0 +1,274 @@
+{
+  "contract": "approval-operations-checklist",
+  "contract_version": "1.0",
+  "generated_at": "2026-11-01T00:14:35.047Z",
+  "scope": "programs:RTNCDE00",
+  "actions": [
+    {
+      "step": 1,
+      "actor": "claude_code",
+      "action": "Prepare the scope recommendation, evidence package, decision packets, correction review, pilot and this checklist",
+      "ids": [],
+      "evidence": "current canonical records",
+      "role": "runtime (no authority)",
+      "input": "workflow records",
+      "output": "sealed workbench records and reports",
+      "status": "done",
+      "depends_on": [],
+      "verified_by": "workbench report (sealed records in workflow/step55)"
+    },
+    {
+      "step": 2,
+      "actor": "key_custodian",
+      "action": "Provision the external trust store with public keys for every role this scope needs; set REVFORGE_APPROVAL_TRUST_STORE or approval.trust_store",
+      "ids": [
+        "business_sme",
+        "exception_approver",
+        "requirements_approver",
+        "technical_authority"
+      ],
+      "evidence": "organizational identity verification of each signer",
+      "role": "organizational key custodian",
+      "input": "signers' Ed25519 public keys",
+      "output": "trust-store JSON (public keys only)",
+      "status": "pending",
+      "depends_on": [],
+      "verified_by": "workbench trust => TRUST_CONFIGURED"
+    },
+    {
+      "step": 3,
+      "actor": "data_owner",
+      "action": "Optional pilot: review and sign the source-export authorization for the prepared cases, then the operator imports it",
+      "ids": [
+        "OAV-EVD-af66b09e34"
+      ],
+      "evidence": "pilot authorization request (files, hashes, model, limits, expiry)",
+      "role": "data_owner",
+      "input": "openai-pilot-authorization-request.json",
+      "output": "signed-source-export-authorization; verification openai authorize --file",
+      "status": "pending",
+      "depends_on": [
+        2
+      ],
+      "verified_by": "verification openai doctor => authorization VALID"
+    },
+    {
+      "step": 4,
+      "actor": "claude_code",
+      "action": "Optional pilot: run LIVE review and compare on the authorized cases; route advisory records to the review queue",
+      "ids": [
+        "OAV-EVD-af66b09e34"
+      ],
+      "evidence": "signed authorization, API key, network enabled by the operator",
+      "role": "operator",
+      "input": "authorized packets",
+      "output": "advisory Pass A/B records (never decisions)",
+      "status": "blocked",
+      "depends_on": [
+        3
+      ],
+      "verified_by": "verification openai report (LIVE_EXECUTED_WITH_VERIFIED_AUTHORIZATION)"
+    },
+    {
+      "step": 5,
+      "actor": "technical_reviewer",
+      "action": "Review the citation correction proposals; if correct, sign the item review decision (resolved_requires_update, selected_option = proposal) and apply the correction",
+      "ids": [
+        "RP-8d2dd33787 (RVW-REQ-RTNCDE00-004)"
+      ],
+      "evidence": "correction review: original vs proposed line text, hashes, re-derivation",
+      "role": "business_sme",
+      "input": "decision template; correction review",
+      "output": "signed resolution, then workflow correct --kind citation_line",
+      "status": "pending",
+      "depends_on": [
+        2
+      ],
+      "verified_by": "workflow decisions list (resolved) and a new COR record"
+    },
+    {
+      "step": 6,
+      "actor": "technical_reviewer",
+      "action": "Confirm the technical facts established from source (class A) and sign the corresponding review decisions",
+      "ids": [
+        "RVW-REQ-RTNCDE00-004"
+      ],
+      "evidence": "decision packets class A (deterministic checks and excerpts)",
+      "role": "technical_authority / business_sme per decision",
+      "input": "resolution requests",
+      "output": "signed resolutions",
+      "status": "pending",
+      "depends_on": [
+        2,
+        5
+      ],
+      "verified_by": "workflow decisions resolve; workflow g2 evaluate --scope"
+    },
+    {
+      "step": 7,
+      "actor": "technical_authority",
+      "action": "Decide the technical / architecture questions (class D)",
+      "ids": [
+        "DR-DB2CONN-002",
+        "DR-F2-0011-001"
+      ],
+      "evidence": "decision packets class D",
+      "role": "technical_authority",
+      "input": "resolution requests",
+      "output": "signed resolutions",
+      "status": "pending",
+      "depends_on": [
+        2
+      ],
+      "verified_by": "workflow decisions list --scope"
+    },
+    {
+      "step": 8,
+      "actor": "business_sme",
+      "action": "Confirm, correct or exclude the interpretations that need independent review and business judgment (classes B and C), using the pilot results only as advisory input",
+      "ids": [
+        "RVW-REQ-RTNCDE00-003"
+      ],
+      "evidence": "decision packets classes B/C; optional advisory pilot records",
+      "role": "business_sme (exception_approver for approved_exception)",
+      "input": "resolution requests",
+      "output": "signed resolutions",
+      "status": "pending",
+      "depends_on": [
+        2,
+        4
+      ],
+      "verified_by": "workflow decisions list --scope"
+    },
+    {
+      "step": 9,
+      "actor": "technical_reviewer",
+      "action": "Supply or account for missing source / runtime dependencies (class E)",
+      "ids": [],
+      "evidence": "decision packets class E",
+      "role": "technical_authority",
+      "input": "missing members",
+      "output": "source added read-only and the reverse/forward steps re-run, or a signed resolution",
+      "status": "not_applicable",
+      "depends_on": [],
+      "verified_by": "verification source deterministic"
+    },
+    {
+      "step": 10,
+      "actor": "claude_code",
+      "action": "Re-evaluate the scope after the signed actions; if deliverables changed, re-run consolidation and verification first",
+      "ids": [
+        "programs:RTNCDE00"
+      ],
+      "evidence": "imported signed resolutions and corrections",
+      "role": "runtime (no authority)",
+      "input": "current records",
+      "output": "scope READY or the remaining blockers",
+      "status": "pending",
+      "depends_on": [
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "verified_by": "workflow g2 evaluate --scope programs:RTNCDE00"
+    },
+    {
+      "step": 11,
+      "actor": "operator",
+      "action": "Export the approval request for the READY scope",
+      "ids": [
+        "programs:RTNCDE00"
+      ],
+      "evidence": "READY evaluation",
+      "role": "operator (requester, not the approver)",
+      "input": "READY scope",
+      "output": "AREQ-NNNN with the exact scope digest",
+      "status": "blocked",
+      "depends_on": [
+        10
+      ],
+      "verified_by": "workflow approval request --scope programs:RTNCDE00 --requested-by <operator>"
+    },
+    {
+      "step": 12,
+      "actor": "requirements_approver",
+      "action": "Review the request and sign the approval statement; the operator imports it",
+      "ids": [
+        "AREQ (to be created)"
+      ],
+      "evidence": "approval request, evidence package, decision outcomes",
+      "role": "requirements_approver (not the requester)",
+      "input": "canonical statement",
+      "output": "signed-approval; workflow approval import",
+      "status": "blocked",
+      "depends_on": [
+        2,
+        11
+      ],
+      "verified_by": "workflow approval import (all checks ok)"
+    },
+    {
+      "step": 13,
+      "actor": "claude_code",
+      "action": "Evaluate G2 and request the transition",
+      "ids": [
+        "G2"
+      ],
+      "evidence": "imported approval re-verified against current content",
+      "role": "runtime",
+      "input": "workflow",
+      "output": "G2 PASS for the scope; REQUIREMENTS_APPROVED",
+      "status": "blocked",
+      "depends_on": [
+        12
+      ],
+      "verified_by": "workflow gate --gate G2; workflow advance --to REQUIREMENTS_APPROVED"
+    }
+  ],
+  "consolidated_human_workload": [
+    {
+      "root_cause_id": "RC-CIT-fd279b78dd",
+      "class": "A",
+      "title": "Citation of REQ-RTNCDE00-004 contradicted by the source",
+      "decisions": [
+        "RVW-REQ-RTNCDE00-004"
+      ],
+      "authorized_roles": [
+        "business_sme"
+      ]
+    },
+    {
+      "root_cause_id": "RC-EVD-af66b09e34",
+      "class": "B",
+      "title": "requirement evidence of RTNCDE00 not established (unconfirmed_claim)",
+      "decisions": [
+        "RVW-REQ-RTNCDE00-003"
+      ],
+      "authorized_roles": [
+        "business_sme"
+      ]
+    },
+    {
+      "root_cause_id": "RC-SRC-3b9f4685e9",
+      "class": "D",
+      "title": "CIRCULAR_COPY GAP-002: Copybook SQLCA includes itself (circular copy)",
+      "decisions": [
+        "DR-DB2CONN-002",
+        "DR-F2-0011-001"
+      ],
+      "authorized_roles": [
+        "technical_authority"
+      ]
+    }
+  ],
+  "summary": {
+    "actions": 13,
+    "pending": 7,
+    "blocked": 4,
+    "done": 1,
+    "root_causes": 3,
+    "decisions": 4
+  }
+}

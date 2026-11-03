@@ -1,0 +1,165 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://revforge.local/contracts/openai/pass-result.schema.json",
+  "title": "Recorded Pass A or Pass B result (advisory)",
+  "type": "object",
+  "required": [
+    "contract",
+    "contract_version",
+    "verification_run_id",
+    "packet_id",
+    "pass",
+    "version",
+    "status",
+    "mode",
+    "provider",
+    "model",
+    "template_version",
+    "baseline_manifest_sha256",
+    "root_cause_id",
+    "related",
+    "request",
+    "response",
+    "findings",
+    "failures",
+    "provenance"
+  ],
+  "properties": {
+    "contract": {
+      "enum": [
+        "openai-pass-a-result",
+        "openai-pass-b-result"
+      ]
+    },
+    "contract_version": {
+      "const": "1.0"
+    },
+    "pass": {
+      "enum": [
+        "A",
+        "B"
+      ]
+    },
+    "version": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "status": {
+      "enum": [
+        "accepted",
+        "partially_accepted",
+        "rejected",
+        "failed",
+        "blocked"
+      ]
+    },
+    "mode": {
+      "enum": [
+        "MOCK",
+        "LIVE"
+      ]
+    },
+    "findings": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "finding_id",
+          "verification_run_id",
+          "baseline_manifest_sha256",
+          "root_cause_id",
+          "packet_id",
+          "pass",
+          "model",
+          "template_version",
+          "response_id",
+          "executed_at",
+          "source_files",
+          "content",
+          "citations",
+          "evidence_integrity",
+          "semantic_review",
+          "deterministic_support",
+          "human_review_required"
+        ],
+        "properties": {
+          "evidence_integrity": {
+            "enum": [
+              "VERIFIED",
+              "REJECTED"
+            ]
+          },
+          "semantic_review": {
+            "const": "ADVISORY_UNREVIEWED"
+          },
+          "citations": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": [
+                "citation",
+                "status",
+                "reasons"
+              ],
+              "properties": {
+                "status": {
+                  "enum": [
+                    "VERIFIED",
+                    "REJECTED"
+                  ]
+                }
+              }
+            }
+          },
+          "source_files": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": [
+                "path",
+                "sha256"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "failures": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "kind",
+          "retryable",
+          "detail"
+        ],
+        "properties": {
+          "kind": {
+            "enum": [
+              "refusal",
+              "incomplete",
+              "invalid_json",
+              "invalid_schema",
+              "packet_mismatch",
+              "timeout",
+              "rate_limit",
+              "server",
+              "connection",
+              "auth",
+              "bad_request",
+              "egress_blocked",
+              "budget",
+              "other"
+            ]
+          }
+        }
+      }
+    },
+    "provenance": {
+      "type": "object",
+      "required": [
+        "pass_a_inputs_exclude_interpretations"
+      ]
+    }
+  }
+}

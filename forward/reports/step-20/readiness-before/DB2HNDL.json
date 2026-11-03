@@ -1,0 +1,1267 @@
+{
+  "gate": "SOURCE_READINESS",
+  "subject": "DB2HNDL",
+  "status": "FAIL",
+  "checks": [
+    {
+      "id": "source_available",
+      "ok": true,
+      "detail": "src/templates/database/db2-handling.cbl sha256 6f7d5fb2ad1cb0fb9283f74542f2768aa8da1044a4d29e16b0c894482688b678; 46 statement(s) in 11 paragraph(s)"
+    },
+    {
+      "id": "complete_program",
+      "ok": true,
+      "detail": "every paragraph contains statements"
+    },
+    {
+      "id": "copybooks_resolved",
+      "ok": false,
+      "detail": "unresolved or circular includes: SQLCA@6"
+    },
+    {
+      "id": "requirements_and_data_mapping_delivered",
+      "ok": true,
+      "detail": "F1/F2 deliveries accepted for SQLCA, DB2HNDL"
+    },
+    {
+      "id": "behaviour_classified",
+      "ok": true,
+      "detail": "4 behaviour(s): 0 VERIFIED_CANDIDATE, 3 PARTIAL, 1 GAP"
+    },
+    {
+      "id": "dependencies_identified",
+      "ok": false,
+      "detail": "closure UNRESOLVED for DB2HNDL:0000-MAIN (PERFORM/GO TO target 2310-PROCESS-CURSOR-ROW (line 174) is not a paragraph of DB2HNDL); DB2HNDL:1000-INITIALIZE (PERFORM/GO TO target 2310-PROCESS-CURSOR-ROW (line 174) is not a paragraph of DB2HNDL); DB2HNDL:2000-PROCESS (PERFORM/GO TO target 2310-PROCESS-CURSOR-ROW (line 174) is not a paragraph of DB2HNDL); DB2HNDL:3000-TERMINATE (PERFORM/GO TO target 2310-PROCESS-CURSOR-ROW (line 174) is not a paragraph of DB2HNDL)"
+    },
+    {
+      "id": "unsupported_documented",
+      "ok": true,
+      "detail": "20 gap(s) document every PARTIAL/GAP behaviour"
+    },
+    {
+      "id": "unknowns_documented",
+      "ok": true,
+      "detail": "7 open decision(s) record the remaining questions (4 blocking for approval); none is resolved or assumed here"
+    }
+  ],
+  "note": "An engineering gate: it states that the source is understood well enough to convert, with every unknown documented. It is not a G2 approval and does not authorise generation.",
+  "behaviours": [
+    {
+      "behaviour_id": "DB2HNDL:ENTRY-DISPATCH",
+      "kind": "dispatch",
+      "classification": "PARTIAL",
+      "lines": [
+        67,
+        69
+      ],
+      "inputs": [],
+      "outputs": [],
+      "side_effects": [],
+      "unresolved": [],
+      "covered_by": []
+    },
+    {
+      "behaviour_id": "DB2HNDL:1000-INITIALIZE",
+      "kind": "performed_range",
+      "classification": "PARTIAL",
+      "lines": [
+        76,
+        246
+      ],
+      "inputs": [
+        "HV-NULL-INDS",
+        "WS-DB2-ERROR-MSG"
+      ],
+      "outputs": [
+        "HV-PORTFOLIO",
+        "RETURN-CODE",
+        "WS-SQLCODE-DISP",
+        "WS-SQLERRM"
+      ],
+      "side_effects": [
+        {
+          "line": 79,
+          "kind": "embedded_sql",
+          "operation": "CONNECT",
+          "table": null
+        },
+        {
+          "line": 213,
+          "kind": "embedded_sql",
+          "operation": "COMMIT",
+          "table": null
+        },
+        {
+          "line": 217,
+          "kind": "embedded_sql",
+          "operation": "CONNECT",
+          "table": null
+        },
+        {
+          "line": 243,
+          "kind": "embedded_sql",
+          "operation": "ROLLBACK",
+          "table": null
+        }
+      ],
+      "unresolved": [
+        "SQLCODE",
+        "SQLERRMC"
+      ],
+      "covered_by": []
+    },
+    {
+      "behaviour_id": "DB2HNDL:2000-PROCESS",
+      "kind": "performed_range",
+      "classification": "PARTIAL",
+      "lines": [
+        90,
+        246
+      ],
+      "inputs": [
+        "HV-PORTFOLIO-ID",
+        "HV-PORTFOLIO-NAME",
+        "HV-STATUS",
+        "NI-PORTFOLIO-ID",
+        "NI-PORTFOLIO-NAME",
+        "NI-STATUS",
+        "WS-DB2-ERROR-MSG"
+      ],
+      "outputs": [
+        "HV-CREATION-DATE",
+        "HV-LAST-UPDATE-TS",
+        "HV-PORTFOLIO-ID",
+        "HV-PORTFOLIO-NAME",
+        "HV-STATUS",
+        "HV-TOTAL-VALUE",
+        "NI-CREATION-DATE",
+        "NI-LAST-UPDATE-TS",
+        "NI-PORTFOLIO-ID",
+        "NI-PORTFOLIO-NAME",
+        "NI-STATUS",
+        "NI-TOTAL-VALUE",
+        "RETURN-CODE",
+        "WS-SQLCODE-DISP",
+        "WS-SQLERRM"
+      ],
+      "side_effects": [
+        {
+          "line": 106,
+          "kind": "embedded_sql",
+          "operation": "INSERT",
+          "table": "PORTFOLIO"
+        },
+        {
+          "line": 127,
+          "kind": "embedded_sql",
+          "operation": "SELECT",
+          "table": "PORTFOLIO"
+        },
+        {
+          "line": 151,
+          "kind": "embedded_sql",
+          "operation": "DECLARE",
+          "table": "PORTFOLIO"
+        },
+        {
+          "line": 161,
+          "kind": "embedded_sql",
+          "operation": "OPEN",
+          "table": null
+        },
+        {
+          "line": 166,
+          "kind": "embedded_sql",
+          "operation": "FETCH",
+          "table": null
+        },
+        {
+          "line": 178,
+          "kind": "embedded_sql",
+          "operation": "CLOSE",
+          "table": null
+        },
+        {
+          "line": 187,
+          "kind": "embedded_sql",
+          "operation": "UPDATE",
+          "table": "PORTFOLIO"
+        },
+        {
+          "line": 201,
+          "kind": "embedded_sql",
+          "operation": "DELETE",
+          "table": "PORTFOLIO"
+        },
+        {
+          "line": 213,
+          "kind": "embedded_sql",
+          "operation": "COMMIT",
+          "table": null
+        },
+        {
+          "line": 217,
+          "kind": "embedded_sql",
+          "operation": "CONNECT",
+          "table": null
+        },
+        {
+          "line": 243,
+          "kind": "embedded_sql",
+          "operation": "ROLLBACK",
+          "table": null
+        }
+      ],
+      "unresolved": [
+        "SQLCODE",
+        "SQLERRMC"
+      ],
+      "covered_by": []
+    },
+    {
+      "behaviour_id": "DB2HNDL:3000-TERMINATE",
+      "kind": "performed_range",
+      "classification": "GAP",
+      "lines": [
+        213,
+        220
+      ],
+      "inputs": [],
+      "outputs": [],
+      "side_effects": [
+        {
+          "line": 213,
+          "kind": "embedded_sql",
+          "operation": "COMMIT",
+          "table": null
+        },
+        {
+          "line": 217,
+          "kind": "embedded_sql",
+          "operation": "CONNECT",
+          "table": null
+        }
+      ],
+      "unresolved": [],
+      "covered_by": []
+    }
+  ],
+  "gaps": [
+    {
+      "gap_id": "GAP-DB2HNDL-1000-INITIALIZE-SQLCODE",
+      "kind": "UNDECLARED_NAME_SEMANTICS",
+      "behaviour_id": "DB2HNDL:1000-INITIALIZE",
+      "source": {
+        "path": "src/templates/database/db2-handling.cbl",
+        "sha256": "6f7d5fb2ad1cb0fb9283f74542f2768aa8da1044a4d29e16b0c894482688b678",
+        "lines": [
+          226,
+          227,
+          229,
+          230,
+          231,
+          232,
+          233
+        ],
+        "statements": [
+          {
+            "line": 226,
+            "text": "IF SQLCODE NOT = 0"
+          },
+          {
+            "line": 227,
+            "text": "MOVE SQLCODE TO WS-SQLCODE-DISP"
+          },
+          {
+            "line": 229,
+            "text": "DISPLAY WS-DB2-ERROR-MSG"
+          },
+          {
+            "line": 230,
+            "text": "IF SQLCODE < 0"
+          },
+          {
+            "line": 231,
+            "text": "PERFORM 9100-ROLLBACK"
+          },
+          {
+            "line": 232,
+            "text": "MOVE 8 TO RETURN-CODE"
+          },
+          {
+            "line": 233,
+            "text": "PERFORM 3000-TERMINATE"
+          }
+        ]
+      },
+      "missing_fact": "SQLCODE is used but declared nowhere in the repository; its layout and value meanings are the subject of DR-F2-0011-001, DR-DB2HNDL-002 (missing: the real SQLCA member (the repository copy includes itself); a declaration of SQLCODE; a declaration of SQLERRMC)",
+      "why_unsafe": "the outputs of these statements (WS-SQLCODE-DISP, RETURN-CODE) depend on a value whose meaning is not established; any Java mapping would invent it",
+      "affected_requirements": [],
+      "affected_java_component": "outcome mapping of behaviour 1000-INITIALIZE (behind a port whose only implementation throws until the gap is resolved)",
+      "required_action": [
+        "DR-F2-0011-001: a signed resolution by technical_authority",
+        "DR-DB2HNDL-002: a signed resolution by technical_authority"
+      ],
+      "validation_evidence": "the real definition of SQLCODE for the target runtime and a captured legacy run showing each outcome branch",
+      "blocks_execution_path": "request its PERFORM -> 1000-INITIALIZE: statements 226, 227, 229, 230, 231, 232, 233",
+      "blocking": true,
+      "status": "OPEN"
+    },
+    {
+      "gap_id": "GAP-DB2HNDL-1000-INITIALIZE-SQLERRMC",
+      "kind": "UNDECLARED_NAME_SEMANTICS",
+      "behaviour_id": "DB2HNDL:1000-INITIALIZE",
+      "source": {
+        "path": "src/templates/database/db2-handling.cbl",
+        "sha256": "6f7d5fb2ad1cb0fb9283f74542f2768aa8da1044a4d29e16b0c894482688b678",
+        "lines": [
+          228
+        ],
+        "statements": [
+          {
+            "line": 228,
+            "text": "MOVE SQLERRMC TO WS-SQLERRM"
+          }
+        ]
+      },
+      "missing_fact": "SQLERRMC is used but declared nowhere in the repository; its layout and value meanings are the subject of DR-F2-0011-001, DR-DB2HNDL-002 (missing: the real SQLCA member (the repository copy includes itself); a declaration of SQLCODE; a declaration of SQLERRMC)",
+      "why_unsafe": "the outputs of these statements (WS-SQLERRM) depend on a value whose meaning is not established; any Java mapping would invent it",
+      "affected_requirements": [],
+      "affected_java_component": "outcome mapping of behaviour 1000-INITIALIZE (behind a port whose only implementation throws until the gap is resolved)",
+      "required_action": [
+        "DR-F2-0011-001: a signed resolution by technical_authority",
+        "DR-DB2HNDL-002: a signed resolution by technical_authority"
+      ],
+      "validation_evidence": "the real definition of SQLERRMC for the target runtime and a captured legacy run showing each outcome branch",
+      "blocks_execution_path": "request its PERFORM -> 1000-INITIALIZE: statements 228",
+      "blocking": true,
+      "status": "OPEN"
+    },
+    {
+      "gap_id": "GAP-DB2HNDL-1000-INITIALIZE-SQL-CONNECT-UNKNOWN",
+      "kind": "EXTERNAL_DATABASE_RUNTIME",
+      "behaviour_id": "DB2HNDL:1000-INITIALIZE",
+      "source": {
+        "path": "src/templates/database/db2-handling.cbl",
+        "sha256": "6f7d5fb2ad1cb0fb9283f74542f2768aa8da1044a4d29e16b0c894482688b678",
+        "lines": [
+          217,
+          220
+        ],
+        "statements": [
+          {
+            "line": 217,
+            "text": "EXEC SQL CONNECT RESET END-EXEC ."
+          }
+        ]
+      },
+      "missing_fact": "the runtime behaviour of embedded SQL CONNECT on null: database product and version, host-variable conversions, NULL and no-row results, constraint violations and the status they report",
+      "why_unsafe": "the result and every status it produces come from an external database the repository does not describe; a Java implementation would have to assume them",
+      "affected_requirements": [],
+      "affected_java_component": "database port for CONNECT null (interface only; no implementation until specified)",
+      "required_action": [
+        "an approved specification of the database interaction (technical authority), recorded as an ADR at G3"
+      ],
+      "validation_evidence": "a captured run against the real (or an approved equivalent) database for each outcome, including errors",
+      "blocks_execution_path": "request its PERFORM -> 1000-INITIALIZE: statement 217",
+      "blocking": true,
+      "status": "OPEN"
+    },
+    {
+      "gap_id": "GAP-DB2HNDL-1000-INITIALIZE-SQL-COMMIT-UNKNOWN",
+      "kind": "EXTERNAL_DATABASE_RUNTIME",
+      "behaviour_id": "DB2HNDL:1000-INITIALIZE",
+      "source": {
+        "path": "src/templates/database/db2-handling.cbl",
+        "sha256": "6f7d5fb2ad1cb0fb9283f74542f2768aa8da1044a4d29e16b0c894482688b678",
+        "lines": [
+          213,
+          215
+        ],
+        "statements": [
+          {
+            "line": 213,
+            "text": "EXEC SQL COMMIT WORK END-EXEC"
+          }
+        ]
+      },
+      "missing_fact": "the runtime behaviour of embedded SQL COMMIT on null: database product and version, host-variable conversions, NULL and no-row results, constraint violations and the status they report",
+      "why_unsafe": "the result and every status it produces come from an external database the repository does not describe; a Java implementation would have to assume them",
+      "affected_requirements": [],
+      "affected_java_component": "database port for COMMIT null (interface only; no implementation until specified)",
+      "required_action": [
+        "an approved specification of the database interaction (technical authority), recorded as an ADR at G3"
+      ],
+      "validation_evidence": "a captured run against the real (or an approved equivalent) database for each outcome, including errors",
+      "blocks_execution_path": "request its PERFORM -> 1000-INITIALIZE: statement 213",
+      "blocking": true,
+      "status": "OPEN"
+    },
+    {
+      "gap_id": "GAP-DB2HNDL-1000-INITIALIZE-SQL-ROLLBACK-UNKNOWN",
+      "kind": "EXTERNAL_DATABASE_RUNTIME",
+      "behaviour_id": "DB2HNDL:1000-INITIALIZE",
+      "source": {
+        "path": "src/templates/database/db2-handling.cbl",
+        "sha256": "6f7d5fb2ad1cb0fb9283f74542f2768aa8da1044a4d29e16b0c894482688b678",
+        "lines": [
+          243,
+          246
+        ],
+        "statements": [
+          {
+            "line": 243,
+            "text": "EXEC SQL ROLLBACK WORK END-EXEC ."
+          }
+        ]
+      },
+      "missing_fact": "the runtime behaviour of embedded SQL ROLLBACK on null: database product and version, host-variable conversions, NULL and no-row results, constraint violations and the status they report",
+      "why_unsafe": "the result and every status it produces come from an external database the repository does not describe; a Java implementation would have to assume them",
+      "affected_requirements": [],
+      "affected_java_component": "database port for ROLLBACK null (interface only; no implementation until specified)",
+      "required_action": [
+        "an approved specification of the database interaction (technical authority), recorded as an ADR at G3"
+      ],
+      "validation_evidence": "a captured run against the real (or an approved equivalent) database for each outcome, including errors",
+      "blocks_execution_path": "request its PERFORM -> 1000-INITIALIZE: statement 243",
+      "blocking": true,
+      "status": "OPEN"
+    },
+    {
+      "gap_id": "GAP-DB2HNDL-2000-PROCESS-SQLCODE",
+      "kind": "UNDECLARED_NAME_SEMANTICS",
+      "behaviour_id": "DB2HNDL:2000-PROCESS",
+      "source": {
+        "path": "src/templates/database/db2-handling.cbl",
+        "sha256": "6f7d5fb2ad1cb0fb9283f74542f2768aa8da1044a4d29e16b0c894482688b678",
+        "lines": [
+          165,
+          173,
+          174,
+          226,
+          227,
+          229,
+          230,
+          231,
+          232,
+          233
+        ],
+        "statements": [
+          {
+            "line": 165,
+            "text": "PERFORM UNTIL SQLCODE = +100"
+          },
+          {
+            "line": 173,
+            "text": "IF SQLCODE = +0"
+          },
+          {
+            "line": 174,
+            "text": "PERFORM 2310-PROCESS-CURSOR-ROW"
+          },
+          {
+            "line": 226,
+            "text": "IF SQLCODE NOT = 0"
+          },
+          {
+            "line": 227,
+            "text": "MOVE SQLCODE TO WS-SQLCODE-DISP"
+          },
+          {
+            "line": 229,
+            "text": "DISPLAY WS-DB2-ERROR-MSG"
+          },
+          {
+            "line": 230,
+            "text": "IF SQLCODE < 0"
+          },
+          {
+            "line": 231,
+            "text": "PERFORM 9100-ROLLBACK"
+          },
+          {
+            "line": 232,
+            "text": "MOVE 8 TO RETURN-CODE"
+          },
+          {
+            "line": 233,
+            "text": "PERFORM 3000-TERMINATE"
+          }
+        ]
+      },
+      "missing_fact": "SQLCODE is used but declared nowhere in the repository; its layout and value meanings are the subject of DR-F2-0011-001, DR-DB2HNDL-002 (missing: the real SQLCA member (the repository copy includes itself); a declaration of SQLCODE; a declaration of SQLERRMC)",
+      "why_unsafe": "the outputs of these statements (WS-SQLCODE-DISP, RETURN-CODE) depend on a value whose meaning is not established; any Java mapping would invent it",
+      "affected_requirements": [],
+      "affected_java_component": "outcome mapping of behaviour 2000-PROCESS (behind a port whose only implementation throws until the gap is resolved)",
+      "required_action": [
+        "DR-F2-0011-001: a signed resolution by technical_authority",
+        "DR-DB2HNDL-002: a signed resolution by technical_authority"
+      ],
+      "validation_evidence": "the real definition of SQLCODE for the target runtime and a captured legacy run showing each outcome branch",
+      "blocks_execution_path": "request its PERFORM -> 2000-PROCESS: statements 165, 173, 174, 226, 227, 229, 230, 231, 232, 233",
+      "blocking": true,
+      "status": "OPEN"
+    },
+    {
+      "gap_id": "GAP-DB2HNDL-2000-PROCESS-SQLERRMC",
+      "kind": "UNDECLARED_NAME_SEMANTICS",
+      "behaviour_id": "DB2HNDL:2000-PROCESS",
+      "source": {
+        "path": "src/templates/database/db2-handling.cbl",
+        "sha256": "6f7d5fb2ad1cb0fb9283f74542f2768aa8da1044a4d29e16b0c894482688b678",
+        "lines": [
+          228
+        ],
+        "statements": [
+          {
+            "line": 228,
+            "text": "MOVE SQLERRMC TO WS-SQLERRM"
+          }
+        ]
+      },
+      "missing_fact": "SQLERRMC is used but declared nowhere in the repository; its layout and value meanings are the subject of DR-F2-0011-001, DR-DB2HNDL-002 (missing: the real SQLCA member (the repository copy includes itself); a declaration of SQLCODE; a declaration of SQLERRMC)",
+      "why_unsafe": "the outputs of these statements (WS-SQLERRM) depend on a value whose meaning is not established; any Java mapping would invent it",
+      "affected_requirements": [],
+      "affected_java_component": "outcome mapping of behaviour 2000-PROCESS (behind a port whose only implementation throws until the gap is resolved)",
+      "required_action": [
+        "DR-F2-0011-001: a signed resolution by technical_authority",
+        "DR-DB2HNDL-002: a signed resolution by technical_authority"
+      ],
+      "validation_evidence": "the real definition of SQLERRMC for the target runtime and a captured legacy run showing each outcome branch",
+      "blocks_execution_path": "request its PERFORM -> 2000-PROCESS: statements 228",
+      "blocking": true,
+      "status": "OPEN"
+    },
+    {
+      "gap_id": "GAP-DB2HNDL-2000-PROCESS-SQL-INSERT-PORTFOLIO",
+      "kind": "EXTERNAL_DATABASE_RUNTIME",
+      "behaviour_id": "DB2HNDL:2000-PROCESS",
+      "source": {
+        "path": "src/templates/database/db2-handling.cbl",
+        "sha256": "6f7d5fb2ad1cb0fb9283f74542f2768aa8da1044a4d29e16b0c894482688b678",
+        "lines": [
+          106,
+          118
+        ],
+        "statements": [
+          {
+            "line": 106,
+            "text": "EXEC SQL INSERT INTO PORTFOLIO (PORTFOLIO_ID, PORTFOLIO_NAME, CREATION_DATE, LAST_UPDATE_TS, TOTAL_VALUE, STATUS) VALUES (:HV-PORTFOLIO-ID   :NI-PORTFOLIO-ID, :HV-PORTFOLIO-NAME :NI-PORTFOLIO-NAME, CURRENT DATE, CURRENT TIMESTAMP, 0, 'A') END-EXEC"
+          }
+        ]
+      },
+      "missing_fact": "the runtime behaviour of embedded SQL INSERT on PORTFOLIO: database product and version, host-variable conversions, NULL and no-row results, constraint violations and the status they report",
+      "why_unsafe": "the result and every status it produces come from an external database the repository does not describe; a Java implementation would have to assume them",
+      "affected_requirements": [],
+      "affected_java_component": "database port for INSERT PORTFOLIO (interface only; no implementation until specified)",
+      "required_action": [
+        "an approved specification of the database interaction (technical authority), recorded as an ADR at G3"
+      ],
+      "validation_evidence": "a captured run against the real (or an approved equivalent) database for each outcome, including errors",
+      "blocks_execution_path": "request its PERFORM -> 2000-PROCESS: statement 106",
+      "blocking": true,
+      "status": "OPEN"
+    },
+    {
+      "gap_id": "GAP-DB2HNDL-2000-PROCESS-SQL-SELECT-PORTFOLIO",
+      "kind": "EXTERNAL_DATABASE_RUNTIME",
+      "behaviour_id": "DB2HNDL:2000-PROCESS",
+      "source": {
+        "path": "src/templates/database/db2-handling.cbl",
+        "sha256": "6f7d5fb2ad1cb0fb9283f74542f2768aa8da1044a4d29e16b0c894482688b678",
+        "lines": [
+          127,
+          142
+        ],
+        "statements": [
+          {
+            "line": 127,
+            "text": "EXEC SQL SELECT PORTFOLIO_ID, PORTFOLIO_NAME, CREATION_DATE, LAST_UPDATE_TS, TOTAL_VALUE, STATUS INTO  :HV-PORTFOLIO-ID   :NI-PORTFOLIO-ID, :HV-PORTFOLIO-NAME :NI-PORTFOLIO-NAME, :HV-CREATION-DATE  :NI-CREATION-DATE, :HV-LAST-UPDATE-TS :NI-LAST-UPDATE-TS, :HV-TOTAL-VALUE    :NI-TOTAL-VALUE, :HV-STATUS         :NI-STATUS FROM  PORTFOLIO WHERE PORTFOLIO_ID = :HV-PORTFOLIO-ID END-EXEC"
+          }
+        ]
+      },
+      "missing_fact": "the runtime behaviour of embedded SQL SELECT on PORTFOLIO: database product and version, host-variable conversions, NULL and no-row results, constraint violations and the status they report",
+      "why_unsafe": "the result and every status it produces come from an external database the repository does not describe; a Java implementation would have to assume them",
+      "affected_requirements": [],
+      "affected_java_component": "database port for SELECT PORTFOLIO (interface only; no implementation until specified)",
+      "required_action": [
+        "an approved specification of the database interaction (technical authority), recorded as an ADR at G3"
+      ],
+      "validation_evidence": "a captured run against the real (or an approved equivalent) database for each outcome, including errors",
+      "blocks_execution_path": "request its PERFORM -> 2000-PROCESS: statement 127",
+      "blocking": true,
+      "status": "OPEN"
+    },
+    {
+      "gap_id": "GAP-DB2HNDL-2000-PROCESS-SQL-DECLARE-PORTFOLIO",
+      "kind": "EXTERNAL_DATABASE_RUNTIME",
+      "behaviour_id": "DB2HNDL:2000-PROCESS",
+      "source": {
+        "path": "src/templates/database/db2-handling.cbl",
+        "sha256": "6f7d5fb2ad1cb0fb9283f74542f2768aa8da1044a4d29e16b0c894482688b678",
+        "lines": [
+          151,
+          159
+        ],
+        "statements": [
+          {
+            "line": 151,
+            "text": "EXEC SQL DECLARE PORTFOLIO_CURSOR CURSOR FOR SELECT PORTFOLIO_ID, PORTFOLIO_NAME, STATUS FROM   PORTFOLIO WHERE  STATUS = 'A' FOR    FETCH ONLY END-EXEC"
+          }
+        ]
+      },
+      "missing_fact": "the runtime behaviour of embedded SQL DECLARE on PORTFOLIO: database product and version, host-variable conversions, NULL and no-row results, constraint violations and the status they report",
+      "why_unsafe": "the result and every status it produces come from an external database the repository does not describe; a Java implementation would have to assume them",
+      "affected_requirements": [],
+      "affected_java_component": "database port for DECLARE PORTFOLIO (interface only; no implementation until specified)",
+      "required_action": [
+        "an approved specification of the database interaction (technical authority), recorded as an ADR at G3"
+      ],
+      "validation_evidence": "a captured run against the real (or an approved equivalent) database for each outcome, including errors",
+      "blocks_execution_path": "request its PERFORM -> 2000-PROCESS: statement 151",
+      "blocking": true,
+      "status": "OPEN"
+    },
+    {
+      "gap_id": "GAP-DB2HNDL-2000-PROCESS-SQL-OPEN-UNKNOWN",
+      "kind": "EXTERNAL_DATABASE_RUNTIME",
+      "behaviour_id": "DB2HNDL:2000-PROCESS",
+      "source": {
+        "path": "src/templates/database/db2-handling.cbl",
+        "sha256": "6f7d5fb2ad1cb0fb9283f74542f2768aa8da1044a4d29e16b0c894482688b678",
+        "lines": [
+          161,
+          163
+        ],
+        "statements": [
+          {
+            "line": 161,
+            "text": "EXEC SQL OPEN PORTFOLIO_CURSOR END-EXEC"
+          }
+        ]
+      },
+      "missing_fact": "the runtime behaviour of embedded SQL OPEN on null: database product and version, host-variable conversions, NULL and no-row results, constraint violations and the status they report",
+      "why_unsafe": "the result and every status it produces come from an external database the repository does not describe; a Java implementation would have to assume them",
+      "affected_requirements": [],
+      "affected_java_component": "database port for OPEN null (interface only; no implementation until specified)",
+      "required_action": [
+        "an approved specification of the database interaction (technical authority), recorded as an ADR at G3"
+      ],
+      "validation_evidence": "a captured run against the real (or an approved equivalent) database for each outcome, including errors",
+      "blocks_execution_path": "request its PERFORM -> 2000-PROCESS: statement 161",
+      "blocking": true,
+      "status": "OPEN"
+    },
+    {
+      "gap_id": "GAP-DB2HNDL-2000-PROCESS-SQL-FETCH-UNKNOWN",
+      "kind": "EXTERNAL_DATABASE_RUNTIME",
+      "behaviour_id": "DB2HNDL:2000-PROCESS",
+      "source": {
+        "path": "src/templates/database/db2-handling.cbl",
+        "sha256": "6f7d5fb2ad1cb0fb9283f74542f2768aa8da1044a4d29e16b0c894482688b678",
+        "lines": [
+          166,
+          171
+        ],
+        "statements": [
+          {
+            "line": 166,
+            "text": "EXEC SQL FETCH PORTFOLIO_CURSOR INTO :HV-PORTFOLIO-ID   :NI-PORTFOLIO-ID, :HV-PORTFOLIO-NAME :NI-PORTFOLIO-NAME, :HV-STATUS         :NI-STATUS END-EXEC"
+          }
+        ]
+      },
+      "missing_fact": "the runtime behaviour of embedded SQL FETCH on null: database product and version, host-variable conversions, NULL and no-row results, constraint violations and the status they report",
+      "why_unsafe": "the result and every status it produces come from an external database the repository does not describe; a Java implementation would have to assume them",
+      "affected_requirements": [],
+      "affected_java_component": "database port for FETCH null (interface only; no implementation until specified)",
+      "required_action": [
+        "an approved specification of the database interaction (technical authority), recorded as an ADR at G3"
+      ],
+      "validation_evidence": "a captured run against the real (or an approved equivalent) database for each outcome, including errors",
+      "blocks_execution_path": "request its PERFORM -> 2000-PROCESS: statement 166",
+      "blocking": true,
+      "status": "OPEN"
+    },
+    {
+      "gap_id": "GAP-DB2HNDL-2000-PROCESS-SQL-CLOSE-UNKNOWN",
+      "kind": "EXTERNAL_DATABASE_RUNTIME",
+      "behaviour_id": "DB2HNDL:2000-PROCESS",
+      "source": {
+        "path": "src/templates/database/db2-handling.cbl",
+        "sha256": "6f7d5fb2ad1cb0fb9283f74542f2768aa8da1044a4d29e16b0c894482688b678",
+        "lines": [
+          178,
+          181
+        ],
+        "statements": [
+          {
+            "line": 178,
+            "text": "EXEC SQL CLOSE PORTFOLIO_CURSOR END-EXEC ."
+          }
+        ]
+      },
+      "missing_fact": "the runtime behaviour of embedded SQL CLOSE on null: database product and version, host-variable conversions, NULL and no-row results, constraint violations and the status they report",
+      "why_unsafe": "the result and every status it produces come from an external database the repository does not describe; a Java implementation would have to assume them",
+      "affected_requirements": [],
+      "affected_java_component": "database port for CLOSE null (interface only; no implementation until specified)",
+      "required_action": [
+        "an approved specification of the database interaction (technical authority), recorded as an ADR at G3"
+      ],
+      "validation_evidence": "a captured run against the real (or an approved equivalent) database for each outcome, including errors",
+      "blocks_execution_path": "request its PERFORM -> 2000-PROCESS: statement 178",
+      "blocking": true,
+      "status": "OPEN"
+    },
+    {
+      "gap_id": "GAP-DB2HNDL-2000-PROCESS-SQL-UPDATE-PORTFOLIO",
+      "kind": "EXTERNAL_DATABASE_RUNTIME",
+      "behaviour_id": "DB2HNDL:2000-PROCESS",
+      "source": {
+        "path": "src/templates/database/db2-handling.cbl",
+        "sha256": "6f7d5fb2ad1cb0fb9283f74542f2768aa8da1044a4d29e16b0c894482688b678",
+        "lines": [
+          187,
+          192
+        ],
+        "statements": [
+          {
+            "line": 187,
+            "text": "EXEC SQL UPDATE PORTFOLIO SET    STATUS = 'I', LAST_UPDATE_TS = CURRENT TIMESTAMP WHERE  PORTFOLIO_ID = :HV-PORTFOLIO-ID END-EXEC"
+          }
+        ]
+      },
+      "missing_fact": "the runtime behaviour of embedded SQL UPDATE on PORTFOLIO: database product and version, host-variable conversions, NULL and no-row results, constraint violations and the status they report",
+      "why_unsafe": "the result and every status it produces come from an external database the repository does not describe; a Java implementation would have to assume them",
+      "affected_requirements": [],
+      "affected_java_component": "database port for UPDATE PORTFOLIO (interface only; no implementation until specified)",
+      "required_action": [
+        "an approved specification of the database interaction (technical authority), recorded as an ADR at G3"
+      ],
+      "validation_evidence": "a captured run against the real (or an approved equivalent) database for each outcome, including errors",
+      "blocks_execution_path": "request its PERFORM -> 2000-PROCESS: statement 187",
+      "blocking": true,
+      "status": "OPEN"
+    },
+    {
+      "gap_id": "GAP-DB2HNDL-2000-PROCESS-SQL-DELETE-PORTFOLIO",
+      "kind": "EXTERNAL_DATABASE_RUNTIME",
+      "behaviour_id": "DB2HNDL:2000-PROCESS",
+      "source": {
+        "path": "src/templates/database/db2-handling.cbl",
+        "sha256": "6f7d5fb2ad1cb0fb9283f74542f2768aa8da1044a4d29e16b0c894482688b678",
+        "lines": [
+          201,
+          204
+        ],
+        "statements": [
+          {
+            "line": 201,
+            "text": "EXEC SQL DELETE FROM PORTFOLIO WHERE  PORTFOLIO_ID = :HV-PORTFOLIO-ID END-EXEC"
+          }
+        ]
+      },
+      "missing_fact": "the runtime behaviour of embedded SQL DELETE on PORTFOLIO: database product and version, host-variable conversions, NULL and no-row results, constraint violations and the status they report",
+      "why_unsafe": "the result and every status it produces come from an external database the repository does not describe; a Java implementation would have to assume them",
+      "affected_requirements": [],
+      "affected_java_component": "database port for DELETE PORTFOLIO (interface only; no implementation until specified)",
+      "required_action": [
+        "an approved specification of the database interaction (technical authority), recorded as an ADR at G3"
+      ],
+      "validation_evidence": "a captured run against the real (or an approved equivalent) database for each outcome, including errors",
+      "blocks_execution_path": "request its PERFORM -> 2000-PROCESS: statement 201",
+      "blocking": true,
+      "status": "OPEN"
+    },
+    {
+      "gap_id": "GAP-DB2HNDL-2000-PROCESS-SQL-COMMIT-UNKNOWN",
+      "kind": "EXTERNAL_DATABASE_RUNTIME",
+      "behaviour_id": "DB2HNDL:2000-PROCESS",
+      "source": {
+        "path": "src/templates/database/db2-handling.cbl",
+        "sha256": "6f7d5fb2ad1cb0fb9283f74542f2768aa8da1044a4d29e16b0c894482688b678",
+        "lines": [
+          213,
+          215
+        ],
+        "statements": [
+          {
+            "line": 213,
+            "text": "EXEC SQL COMMIT WORK END-EXEC"
+          }
+        ]
+      },
+      "missing_fact": "the runtime behaviour of embedded SQL COMMIT on null: database product and version, host-variable conversions, NULL and no-row results, constraint violations and the status they report",
+      "why_unsafe": "the result and every status it produces come from an external database the repository does not describe; a Java implementation would have to assume them",
+      "affected_requirements": [],
+      "affected_java_component": "database port for COMMIT null (interface only; no implementation until specified)",
+      "required_action": [
+        "an approved specification of the database interaction (technical authority), recorded as an ADR at G3"
+      ],
+      "validation_evidence": "a captured run against the real (or an approved equivalent) database for each outcome, including errors",
+      "blocks_execution_path": "request its PERFORM -> 2000-PROCESS: statement 213",
+      "blocking": true,
+      "status": "OPEN"
+    },
+    {
+      "gap_id": "GAP-DB2HNDL-2000-PROCESS-SQL-CONNECT-UNKNOWN",
+      "kind": "EXTERNAL_DATABASE_RUNTIME",
+      "behaviour_id": "DB2HNDL:2000-PROCESS",
+      "source": {
+        "path": "src/templates/database/db2-handling.cbl",
+        "sha256": "6f7d5fb2ad1cb0fb9283f74542f2768aa8da1044a4d29e16b0c894482688b678",
+        "lines": [
+          217,
+          220
+        ],
+        "statements": [
+          {
+            "line": 217,
+            "text": "EXEC SQL CONNECT RESET END-EXEC ."
+          }
+        ]
+      },
+      "missing_fact": "the runtime behaviour of embedded SQL CONNECT on null: database product and version, host-variable conversions, NULL and no-row results, constraint violations and the status they report",
+      "why_unsafe": "the result and every status it produces come from an external database the repository does not describe; a Java implementation would have to assume them",
+      "affected_requirements": [],
+      "affected_java_component": "database port for CONNECT null (interface only; no implementation until specified)",
+      "required_action": [
+        "an approved specification of the database interaction (technical authority), recorded as an ADR at G3"
+      ],
+      "validation_evidence": "a captured run against the real (or an approved equivalent) database for each outcome, including errors",
+      "blocks_execution_path": "request its PERFORM -> 2000-PROCESS: statement 217",
+      "blocking": true,
+      "status": "OPEN"
+    },
+    {
+      "gap_id": "GAP-DB2HNDL-2000-PROCESS-SQL-ROLLBACK-UNKNOWN",
+      "kind": "EXTERNAL_DATABASE_RUNTIME",
+      "behaviour_id": "DB2HNDL:2000-PROCESS",
+      "source": {
+        "path": "src/templates/database/db2-handling.cbl",
+        "sha256": "6f7d5fb2ad1cb0fb9283f74542f2768aa8da1044a4d29e16b0c894482688b678",
+        "lines": [
+          243,
+          246
+        ],
+        "statements": [
+          {
+            "line": 243,
+            "text": "EXEC SQL ROLLBACK WORK END-EXEC ."
+          }
+        ]
+      },
+      "missing_fact": "the runtime behaviour of embedded SQL ROLLBACK on null: database product and version, host-variable conversions, NULL and no-row results, constraint violations and the status they report",
+      "why_unsafe": "the result and every status it produces come from an external database the repository does not describe; a Java implementation would have to assume them",
+      "affected_requirements": [],
+      "affected_java_component": "database port for ROLLBACK null (interface only; no implementation until specified)",
+      "required_action": [
+        "an approved specification of the database interaction (technical authority), recorded as an ADR at G3"
+      ],
+      "validation_evidence": "a captured run against the real (or an approved equivalent) database for each outcome, including errors",
+      "blocks_execution_path": "request its PERFORM -> 2000-PROCESS: statement 243",
+      "blocking": true,
+      "status": "OPEN"
+    },
+    {
+      "gap_id": "GAP-DB2HNDL-3000-TERMINATE-SQL-COMMIT-UNKNOWN",
+      "kind": "EXTERNAL_DATABASE_RUNTIME",
+      "behaviour_id": "DB2HNDL:3000-TERMINATE",
+      "source": {
+        "path": "src/templates/database/db2-handling.cbl",
+        "sha256": "6f7d5fb2ad1cb0fb9283f74542f2768aa8da1044a4d29e16b0c894482688b678",
+        "lines": [
+          213,
+          215
+        ],
+        "statements": [
+          {
+            "line": 213,
+            "text": "EXEC SQL COMMIT WORK END-EXEC"
+          }
+        ]
+      },
+      "missing_fact": "the runtime behaviour of embedded SQL COMMIT on null: database product and version, host-variable conversions, NULL and no-row results, constraint violations and the status they report",
+      "why_unsafe": "the result and every status it produces come from an external database the repository does not describe; a Java implementation would have to assume them",
+      "affected_requirements": [],
+      "affected_java_component": "database port for COMMIT null (interface only; no implementation until specified)",
+      "required_action": [
+        "an approved specification of the database interaction (technical authority), recorded as an ADR at G3"
+      ],
+      "validation_evidence": "a captured run against the real (or an approved equivalent) database for each outcome, including errors",
+      "blocks_execution_path": "request its PERFORM -> 3000-TERMINATE: statement 213",
+      "blocking": true,
+      "status": "OPEN"
+    },
+    {
+      "gap_id": "GAP-DB2HNDL-3000-TERMINATE-SQL-CONNECT-UNKNOWN",
+      "kind": "EXTERNAL_DATABASE_RUNTIME",
+      "behaviour_id": "DB2HNDL:3000-TERMINATE",
+      "source": {
+        "path": "src/templates/database/db2-handling.cbl",
+        "sha256": "6f7d5fb2ad1cb0fb9283f74542f2768aa8da1044a4d29e16b0c894482688b678",
+        "lines": [
+          217,
+          220
+        ],
+        "statements": [
+          {
+            "line": 217,
+            "text": "EXEC SQL CONNECT RESET END-EXEC ."
+          }
+        ]
+      },
+      "missing_fact": "the runtime behaviour of embedded SQL CONNECT on null: database product and version, host-variable conversions, NULL and no-row results, constraint violations and the status they report",
+      "why_unsafe": "the result and every status it produces come from an external database the repository does not describe; a Java implementation would have to assume them",
+      "affected_requirements": [],
+      "affected_java_component": "database port for CONNECT null (interface only; no implementation until specified)",
+      "required_action": [
+        "an approved specification of the database interaction (technical authority), recorded as an ADR at G3"
+      ],
+      "validation_evidence": "a captured run against the real (or an approved equivalent) database for each outcome, including errors",
+      "blocks_execution_path": "request its PERFORM -> 3000-TERMINATE: statement 217",
+      "blocking": true,
+      "status": "OPEN"
+    }
+  ],
+  "closures": [
+    {
+      "behaviour_id": "DB2HNDL:0000-MAIN",
+      "status": "UNRESOLVED",
+      "unresolved_reasons": [
+        "PERFORM/GO TO target 2310-PROCESS-CURSOR-ROW (line 174) is not a paragraph of DB2HNDL",
+        "line 232: RETURN-CODE is neither declared, a keyword, a paragraph nor the subject of a blocking decision (unknown dependency)"
+      ],
+      "units": [
+        "DB2HNDL",
+        "SQLCA"
+      ],
+      "external": [
+        {
+          "kind": "embedded_sql",
+          "line": 79,
+          "operation": "CONNECT",
+          "target": null,
+          "relation": "performed"
+        },
+        {
+          "kind": "embedded_sql",
+          "line": 243,
+          "operation": "ROLLBACK",
+          "target": null,
+          "relation": "performed"
+        },
+        {
+          "kind": "embedded_sql",
+          "line": 213,
+          "operation": "COMMIT",
+          "target": null,
+          "relation": "performed"
+        },
+        {
+          "kind": "embedded_sql",
+          "line": 217,
+          "operation": "CONNECT",
+          "target": null,
+          "relation": "performed"
+        },
+        {
+          "kind": "embedded_sql",
+          "line": 106,
+          "operation": "INSERT",
+          "target": "PORTFOLIO",
+          "relation": "performed"
+        },
+        {
+          "kind": "embedded_sql",
+          "line": 127,
+          "operation": "SELECT",
+          "target": "PORTFOLIO",
+          "relation": "performed"
+        },
+        {
+          "kind": "embedded_sql",
+          "line": 151,
+          "operation": "DECLARE",
+          "target": "PORTFOLIO",
+          "relation": "performed"
+        },
+        {
+          "kind": "embedded_sql",
+          "line": 161,
+          "operation": "OPEN",
+          "target": null,
+          "relation": "performed"
+        },
+        {
+          "kind": "embedded_sql",
+          "line": 166,
+          "operation": "FETCH",
+          "target": null,
+          "relation": "performed"
+        },
+        {
+          "kind": "embedded_sql",
+          "line": 178,
+          "operation": "CLOSE",
+          "target": null,
+          "relation": "performed"
+        },
+        {
+          "kind": "embedded_sql",
+          "line": 187,
+          "operation": "UPDATE",
+          "target": "PORTFOLIO",
+          "relation": "performed"
+        },
+        {
+          "kind": "embedded_sql",
+          "line": 201,
+          "operation": "DELETE",
+          "target": "PORTFOLIO",
+          "relation": "performed"
+        }
+      ],
+      "undeclared": [
+        "SQLCODE",
+        "SQLERRMC"
+      ],
+      "sha256": "ceba894966c3559221bda36c6a5531daa7f0033a5fff3d81ac4132a3154bc16e"
+    },
+    {
+      "behaviour_id": "DB2HNDL:1000-INITIALIZE",
+      "status": "UNRESOLVED",
+      "unresolved_reasons": [
+        "PERFORM/GO TO target 2310-PROCESS-CURSOR-ROW (line 174) is not a paragraph of DB2HNDL",
+        "line 232: RETURN-CODE is neither declared, a keyword, a paragraph nor the subject of a blocking decision (unknown dependency)"
+      ],
+      "units": [
+        "DB2HNDL",
+        "SQLCA"
+      ],
+      "external": [
+        {
+          "kind": "embedded_sql",
+          "line": 79,
+          "operation": "CONNECT",
+          "target": null,
+          "relation": "direct"
+        },
+        {
+          "kind": "embedded_sql",
+          "line": 243,
+          "operation": "ROLLBACK",
+          "target": null,
+          "relation": "performed"
+        },
+        {
+          "kind": "embedded_sql",
+          "line": 213,
+          "operation": "COMMIT",
+          "target": null,
+          "relation": "performed"
+        },
+        {
+          "kind": "embedded_sql",
+          "line": 217,
+          "operation": "CONNECT",
+          "target": null,
+          "relation": "performed"
+        }
+      ],
+      "undeclared": [
+        "SQLCODE",
+        "SQLERRMC"
+      ],
+      "sha256": "bdd397b03ab81457b9bef794982169edd71265a1e53c74511b0bc3db452fccc9"
+    },
+    {
+      "behaviour_id": "DB2HNDL:2000-PROCESS",
+      "status": "UNRESOLVED",
+      "unresolved_reasons": [
+        "PERFORM/GO TO target 2310-PROCESS-CURSOR-ROW (line 174) is not a paragraph of DB2HNDL",
+        "line 232: RETURN-CODE is neither declared, a keyword, a paragraph nor the subject of a blocking decision (unknown dependency)"
+      ],
+      "units": [
+        "DB2HNDL",
+        "SQLCA"
+      ],
+      "external": [
+        {
+          "kind": "embedded_sql",
+          "line": 106,
+          "operation": "INSERT",
+          "target": "PORTFOLIO",
+          "relation": "performed"
+        },
+        {
+          "kind": "embedded_sql",
+          "line": 243,
+          "operation": "ROLLBACK",
+          "target": null,
+          "relation": "performed"
+        },
+        {
+          "kind": "embedded_sql",
+          "line": 213,
+          "operation": "COMMIT",
+          "target": null,
+          "relation": "performed"
+        },
+        {
+          "kind": "embedded_sql",
+          "line": 217,
+          "operation": "CONNECT",
+          "target": null,
+          "relation": "performed"
+        },
+        {
+          "kind": "embedded_sql",
+          "line": 127,
+          "operation": "SELECT",
+          "target": "PORTFOLIO",
+          "relation": "performed"
+        },
+        {
+          "kind": "embedded_sql",
+          "line": 151,
+          "operation": "DECLARE",
+          "target": "PORTFOLIO",
+          "relation": "performed"
+        },
+        {
+          "kind": "embedded_sql",
+          "line": 161,
+          "operation": "OPEN",
+          "target": null,
+          "relation": "performed"
+        },
+        {
+          "kind": "embedded_sql",
+          "line": 166,
+          "operation": "FETCH",
+          "target": null,
+          "relation": "performed"
+        },
+        {
+          "kind": "embedded_sql",
+          "line": 178,
+          "operation": "CLOSE",
+          "target": null,
+          "relation": "performed"
+        },
+        {
+          "kind": "embedded_sql",
+          "line": 187,
+          "operation": "UPDATE",
+          "target": "PORTFOLIO",
+          "relation": "performed"
+        },
+        {
+          "kind": "embedded_sql",
+          "line": 201,
+          "operation": "DELETE",
+          "target": "PORTFOLIO",
+          "relation": "performed"
+        }
+      ],
+      "undeclared": [
+        "SQLCODE",
+        "SQLERRMC"
+      ],
+      "sha256": "d06a413126bf742a7067bf2e77c9ec4db9511c4b95db3e176825c41631542d1e"
+    },
+    {
+      "behaviour_id": "DB2HNDL:3000-TERMINATE",
+      "status": "UNRESOLVED",
+      "unresolved_reasons": [
+        "PERFORM/GO TO target 2310-PROCESS-CURSOR-ROW (line 174) is not a paragraph of DB2HNDL"
+      ],
+      "units": [
+        "DB2HNDL",
+        "SQLCA"
+      ],
+      "external": [
+        {
+          "kind": "embedded_sql",
+          "line": 213,
+          "operation": "COMMIT",
+          "target": null,
+          "relation": "direct"
+        },
+        {
+          "kind": "embedded_sql",
+          "line": 217,
+          "operation": "CONNECT",
+          "target": null,
+          "relation": "direct"
+        }
+      ],
+      "undeclared": [],
+      "sha256": "aff61cb6da6553095092399c4a54b573b93828afa30f33243c97ad72201b92d2"
+    }
+  ],
+  "open_decisions": [
+    {
+      "id": "DR-DB2HNDL-001",
+      "blocking": true,
+      "question": "DB2HNDL is a confirmed template (src/templates/database/db2-handling.cbl) demonstrating DB2 connect/insert/select/cursor/update/delete/commit against hard-coded example data. It has no business rules in scope. Is it retired, replaced by a framework data-access service, or kept as a developer template?"
+    },
+    {
+      "id": "SCOPE-DB2HNDL",
+      "blocking": true,
+      "question": "DB2HNDL is classified template (confirmed): classified as template (confirmed); a human must decide whether it is in modernisation scope. Keep it in the modernisation scope (resolved_no_change) or exclude it (excluded_from_scope)?"
+    },
+    {
+      "id": "DR-DB2HNDL-002",
+      "blocking": true,
+      "question": "If DB2HNDL is kept: GAP-002 (critical) - copybook SQLCA includes itself (line 6) and defines only SQL-STATUS-CODES, not SQLCODE/SQLERRMC; GAP-098 - SQLCODE/SQLERRMC therefore have no Field ID; GAP-022 - the cursor row handler 2310-PROCESS-CURSOR-ROW (line 174) does not exist; GAP-082 - the fetch loop PERFORM UNTIL SQLCODE = +100 (line 165) does not handle negative SQLCODEs. Which SQLCA does the precompiler supply, and how should the template's cursor error handling be defined?"
+    },
+    {
+      "id": "DR-F2-0011-001",
+      "blocking": true,
+      "question": "Copybook SQLCA (SYS-PORTFOLIO-001-FIL-0017) line 6 contains 'EXEC SQL INCLUDE SQLCA END-EXEC', naming itself. The included SQL communication area (SQLCODE, SQLSTATE, SQLERRMC, ...) has no layout in any reverse artifact. How should the forward design obtain the SQLCA layout and the SQLCODE/SQLSTATE semantics used by the 14 DB2 programs?"
+    },
+    {
+      "id": "DR-F2-P0007-007",
+      "blocking": false,
+      "question": "DB2HNDL FILLER_0058 is PIC X(20) with a 21-character VALUE 'DB2 ERROR - SQLCODE: ' (line 58). Should the Java constant keep the compiler-truncated 20 characters or the full literal?"
+    },
+    {
+      "id": "RVW-GAP-092",
+      "blocking": false,
+      "question": "GAP-092 (medium, DIAGRAM_RENDER_UNVERIFIED) is not addressed by any decision or requirement: Visual rendering of the 65 Mermaid diagrams is unverified. Acknowledge it as a known limitation (resolved_no_change) or exclude the affected units?"
+    },
+    {
+      "id": "RVW-GAP-104",
+      "blocking": false,
+      "question": "GAP-104 (low, DIAGRAM_INCOMPLETE) is not addressed by any decision or requirement: COMP-UNRESOLVED: all seven edges are unsupported. Acknowledge it as a known limitation (resolved_no_change) or exclude the affected units?"
+    }
+  ],
+  "authorisation": {
+    "generation_authorized": false,
+    "blockers": [
+      "config generation.java_generation_allowed is false (project authority)",
+      "no authorised orchestrator.java_target_dir",
+      "G4 is BLOCKED (needs signed G2, G3 and G4 approvals by trusted signers)",
+      "trust store: TRUST_NOT_CONFIGURED"
+    ],
+    "gates": {
+      "G0": "PASS",
+      "G1": "PASS",
+      "G2": "UNVERIFIED",
+      "G3": "BLOCKED",
+      "G4": "BLOCKED",
+      "G5": "BLOCKED",
+      "G6": "BLOCKED",
+      "G7": "BLOCKED",
+      "G8": "BLOCKED"
+    },
+    "trust": "TRUST_NOT_CONFIGURED",
+    "program_g2_scope": {
+      "readiness": "NOT_READY",
+      "blocking": 10,
+      "scope_sha256": "b5e9da4204be282f93d2860b58e260af9a6412888f7511e91e117dd6bcba3aa5"
+    },
+    "note": "Engineering gates never authorise generation. Java may be generated only when generation_authorized is true."
+  }
+}

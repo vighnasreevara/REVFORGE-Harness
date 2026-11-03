@@ -1,0 +1,49 @@
+{
+ "contract": "step-20/converter-defects",
+ "converter_and_runtime": [
+  {
+   "id": "CD-01",
+   "component": "converter front end",
+   "file": "forward/runtime/src/pilot/cobol-app.ts (isHeader)",
+   "defect": "in free-form source a statement `EXIT.` indented less than four columns was taken as a paragraph header named EXIT, so ERRHNDL had four extra paragraphs and its four EXIT statements (lines 61, 90, 102, 118) had no Java mapping",
+   "evidence": "reverse parser: EXIT statements inside P100-EXIT, P200-EXIT, P300-EXIT, P400-EXIT; forward STEP 19 source map: paragraphs named EXIT",
+   "fix": "a procedure name is never a reserved verb or scope terminator",
+   "regression_test": "tests/step20.test.ts: free-form `EXIT.` ... (fails without the fix, passes with it)",
+   "programs_regenerated_with_source_change": [
+    "ERRHNDL"
+   ],
+   "status": "FIXED_AND_TESTED"
+  },
+  {
+   "id": "CD-02",
+   "component": "Java runtime",
+   "file": "forward/runtime/java/revforge/cobol/CobolProgram.java (perform)",
+   "defect": "a PERFORM that executes itself recursively ran as Java recursion; standard COBOL does not define the result, and termination depends on external results (reverse GAP-016 INQHIST, GAP-024 FILEHNDL)",
+   "evidence": "INQHIST.cbl:114 PERFORM P150-DB2-CONNECT THRU P150-EXIT inside the same range; FILEHNDL 3000-TERMINATE -> 9000-CHECK-FILE-STATUS -> 9100-VSAM-ERROR -> 3000-TERMINATE",
+   "fix": "the path is blocked with runtime gap RUNTIME-RECURSIVE-PERFORM when a PERFORM starts while the same range is still active; no recursion limit, no inferred termination; legal nested PERFORMs unchanged",
+   "regression_test": "RuntimeTests: recursive PERFORM blocked; nested PERFORM of a different range runs; a range can be performed again after it returned",
+   "programs_regenerated_with_source_change": [],
+   "status": "FIXED_AND_TESTED"
+  }
+ ],
+ "reconciliation_tools": [
+  {
+   "id": "TD-01",
+   "file": "forward/tools/reverse-forward-reconcile.py",
+   "defect": "copybooks whose fields are all represented with identical attributes, but generated in-program rather than in a shared model class, were reported PARTIAL",
+   "fix": "status COMPLETE_IN_PROGRAM (MODEL keeps the shared-model case)"
+  },
+  {
+   "id": "TD-02",
+   "file": "forward/tools/reverse-forward-report.py",
+   "defect": "the STEP 19 report named only INQHIST for recursive PERFORM; the reverse gaps are GAP-016 (INQHIST) and GAP-024 (FILEHNDL)",
+   "fix": "text corrected and the STEP 20 runtime handling described"
+  },
+  {
+   "id": "TD-03",
+   "file": "forward/tools/reverse-forward-reconcile.py",
+   "defect": "branch, loop and statement rows did not carry the forward gap kind, so their gaps could not be attributed to a root cause",
+   "fix": "forward_gap_kind / gap_kind added"
+  }
+ ]
+}

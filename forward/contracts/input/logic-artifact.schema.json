@@ -1,0 +1,36 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://revforge.local/contracts/input/logic-artifact.schema.json",
+  "title": "Reverse Agent 4 logic_artifact.json (consumed core)",
+  "type": "object",
+  "required": ["meta", "stats", "programs"],
+  "properties": {
+    "meta": {
+      "type": "object",
+      "required": ["agent_version", "system_id"],
+      "properties": {
+        "agent_version": { "type": "string" },
+        "system_id": { "$ref": "../common.schema.json#/definitions/systemId" }
+      }
+    },
+    "stats": { "type": "object" },
+    "programs": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["program_id", "file_id", "logic_status"],
+        "properties": {
+          "program_id": { "type": "string" },
+          "file_id": { "$ref": "../common.schema.json#/definitions/fileId" },
+          "logic_file": { "type": ["string", "null"] },
+          "logic_status": { "enum": ["success", "partial", "empty", "skipped"] },
+          "upstream_verdict": { "type": ["string", "null"] },
+          "unresolvable_paths": { "type": "integer", "minimum": 0 },
+          "unresolved_ids": { "type": "integer", "minimum": 0 },
+          "unresolved_id_breakdown": { "type": ["object", "null"] }
+        }
+      }
+    },
+    "issues": { "type": "array" }
+  }
+}

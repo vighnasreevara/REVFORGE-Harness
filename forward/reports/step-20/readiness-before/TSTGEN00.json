@@ -1,0 +1,480 @@
+{
+  "gate": "SOURCE_READINESS",
+  "subject": "TSTGEN00",
+  "status": "FAIL",
+  "checks": [
+    {
+      "id": "source_available",
+      "ok": true,
+      "detail": "src/programs/test/TSTGEN00.cbl sha256 9c6cd375f322373b22a55e90059256b2a43ae6877930b50c8c47f70796493465; 68 statement(s) in 13 paragraph(s)"
+    },
+    {
+      "id": "complete_program",
+      "ok": true,
+      "detail": "every paragraph contains statements"
+    },
+    {
+      "id": "copybooks_resolved",
+      "ok": true,
+      "detail": "all 4 include(s) resolved: PORTFLIO, TRNREC, RTNCODE, ERRHAND"
+    },
+    {
+      "id": "requirements_and_data_mapping_delivered",
+      "ok": true,
+      "detail": "F1/F2 deliveries accepted for ERRHAND, PORTFLIO, RTNCODE, TRNREC, TSTGEN00"
+    },
+    {
+      "id": "behaviour_classified",
+      "ok": true,
+      "detail": "4 behaviour(s): 0 VERIFIED_CANDIDATE, 3 PARTIAL, 1 GAP"
+    },
+    {
+      "id": "dependencies_identified",
+      "ok": false,
+      "detail": "closure UNRESOLVED for TSTGEN00:0000-MAIN (PERFORM/GO TO target 2210-GEN-PORT-DATA (line 185) is not a paragraph of TSTGEN00); TSTGEN00:1000-INITIALIZE (PERFORM/GO TO target 2210-GEN-PORT-DATA (line 185) is not a paragraph of TSTGEN00); TSTGEN00:2000-PROCESS (PERFORM/GO TO target 2210-GEN-PORT-DATA (line 185) is not a paragraph of TSTGEN00); TSTGEN00:3000-CLEANUP (PERFORM/GO TO target 2210-GEN-PORT-DATA (line 185) is not a paragraph of TSTGEN00)"
+    },
+    {
+      "id": "unsupported_documented",
+      "ok": false,
+      "detail": "non-verified behaviour without a gap: TSTGEN00:3000-CLEANUP"
+    },
+    {
+      "id": "unknowns_documented",
+      "ok": true,
+      "detail": "11 open decision(s) record the remaining questions (3 blocking for approval); none is resolved or assumed here"
+    }
+  ],
+  "note": "An engineering gate: it states that the source is understood well enough to convert, with every unknown documented. It is not a G2 approval and does not authorise generation.",
+  "behaviours": [
+    {
+      "behaviour_id": "TSTGEN00:ENTRY-DISPATCH",
+      "kind": "dispatch",
+      "classification": "PARTIAL",
+      "lines": [
+        110,
+        112
+      ],
+      "inputs": [],
+      "outputs": [],
+      "side_effects": [],
+      "unresolved": [],
+      "covered_by": []
+    },
+    {
+      "behaviour_id": "TSTGEN00:1000-INITIALIZE",
+      "kind": "performed_range",
+      "classification": "PARTIAL",
+      "lines": [
+        116,
+        214
+      ],
+      "inputs": [
+        "SEED-RECORD",
+        "WS-CFG-STATUS",
+        "WS-ERROR-COUNT",
+        "WS-RAND-STATUS"
+      ],
+      "outputs": [
+        "RETURN-CODE",
+        "WS-COUNTERS",
+        "WS-ERROR-MESSAGE",
+        "WS-RANDOM-SEED"
+      ],
+      "side_effects": [
+        {
+          "line": 121,
+          "kind": "file_io",
+          "operation": "OPEN",
+          "table": null
+        },
+        {
+          "line": 128,
+          "kind": "file_io",
+          "operation": "OPEN",
+          "table": null
+        },
+        {
+          "line": 135,
+          "kind": "file_io",
+          "operation": "OPEN",
+          "table": null
+        },
+        {
+          "line": 142,
+          "kind": "file_io",
+          "operation": "OPEN",
+          "table": null
+        },
+        {
+          "line": 150,
+          "kind": "file_io",
+          "operation": "READ",
+          "table": null
+        }
+      ],
+      "unresolved": [
+        "WS-ERROR-MESSAGE"
+      ],
+      "covered_by": []
+    },
+    {
+      "behaviour_id": "TSTGEN00:2000-PROCESS",
+      "kind": "performed_range",
+      "classification": "PARTIAL",
+      "lines": [
+        157,
+        214
+      ],
+      "inputs": [
+        "CFG-TEST-TYPE",
+        "CFG-VOLUME",
+        "WS-END-OF-CONFIG",
+        "WS-ERROR-COUNT",
+        "WS-ERROR-TEST",
+        "WS-PORTFOLIO",
+        "WS-RECORDS-WRITTEN",
+        "WS-TRANSACTION",
+        "WS-VOLUME-TEST"
+      ],
+      "outputs": [
+        "RETURN-CODE",
+        "WS-END-OF-CONFIG",
+        "WS-ERROR-MESSAGE"
+      ],
+      "side_effects": [
+        {
+          "line": 158,
+          "kind": "file_io",
+          "operation": "READ",
+          "table": null
+        }
+      ],
+      "unresolved": [
+        "WS-ERROR-MESSAGE"
+      ],
+      "covered_by": []
+    },
+    {
+      "behaviour_id": "TSTGEN00:3000-CLEANUP",
+      "kind": "performed_range",
+      "classification": "GAP",
+      "lines": [
+        205,
+        208
+      ],
+      "inputs": [],
+      "outputs": [],
+      "side_effects": [
+        {
+          "line": 205,
+          "kind": "file_io",
+          "operation": "CLOSE",
+          "table": null
+        }
+      ],
+      "unresolved": [],
+      "covered_by": []
+    }
+  ],
+  "gaps": [
+    {
+      "gap_id": "GAP-TSTGEN00-1000-INITIALIZE-WS-ERROR-MESSAGE",
+      "kind": "UNDECLARED_NAME_SEMANTICS",
+      "behaviour_id": "TSTGEN00:1000-INITIALIZE",
+      "source": {
+        "path": "src/programs/test/TSTGEN00.cbl",
+        "sha256": "9c6cd375f322373b22a55e90059256b2a43ae6877930b50c8c47f70796493465",
+        "lines": [
+          123,
+          130,
+          137,
+          144,
+          212
+        ],
+        "statements": [
+          {
+            "line": 123,
+            "text": "MOVE 'ERROR OPENING CONFIG FILE' TO WS-ERROR-MESSAGE"
+          },
+          {
+            "line": 130,
+            "text": "MOVE 'ERROR OPENING PORTFOLIO OUTPUT' TO WS-ERROR-MESSAGE"
+          },
+          {
+            "line": 137,
+            "text": "MOVE 'ERROR OPENING TRANSACTION OUTPUT' TO WS-ERROR-MESSAGE"
+          },
+          {
+            "line": 144,
+            "text": "MOVE 'ERROR OPENING RANDOM SEED' TO WS-ERROR-MESSAGE"
+          },
+          {
+            "line": 212,
+            "text": "DISPLAY WS-ERROR-MESSAGE UPON CONS"
+          }
+        ]
+      },
+      "missing_fact": "WS-ERROR-MESSAGE is used but declared nowhere in the repository; its layout and value meanings are the subject of DR-TSTGEN00-002 (missing: a declaration of WS-ERROR-MESSAGE)",
+      "why_unsafe": "the outputs of these statements (WS-ERROR-MESSAGE) depend on a value whose meaning is not established; any Java mapping would invent it",
+      "affected_requirements": [],
+      "affected_java_component": "outcome mapping of behaviour 1000-INITIALIZE (behind a port whose only implementation throws until the gap is resolved)",
+      "required_action": [
+        "DR-TSTGEN00-002: a signed resolution by technical_authority"
+      ],
+      "validation_evidence": "the real definition of WS-ERROR-MESSAGE for the target runtime and a captured legacy run showing each outcome branch",
+      "blocks_execution_path": "request its PERFORM -> 1000-INITIALIZE: statements 123, 130, 137, 144, 212",
+      "blocking": true,
+      "status": "OPEN"
+    },
+    {
+      "gap_id": "GAP-TSTGEN00-2000-PROCESS-WS-ERROR-MESSAGE",
+      "kind": "UNDECLARED_NAME_SEMANTICS",
+      "behaviour_id": "TSTGEN00:2000-PROCESS",
+      "source": {
+        "path": "src/programs/test/TSTGEN00.cbl",
+        "sha256": "9c6cd375f322373b22a55e90059256b2a43ae6877930b50c8c47f70796493465",
+        "lines": [
+          177,
+          212
+        ],
+        "statements": [
+          {
+            "line": 177,
+            "text": "MOVE 'INVALID TEST TYPE' TO WS-ERROR-MESSAGE"
+          },
+          {
+            "line": 212,
+            "text": "DISPLAY WS-ERROR-MESSAGE UPON CONS"
+          }
+        ]
+      },
+      "missing_fact": "WS-ERROR-MESSAGE is used but declared nowhere in the repository; its layout and value meanings are the subject of DR-TSTGEN00-002 (missing: a declaration of WS-ERROR-MESSAGE)",
+      "why_unsafe": "the outputs of these statements (WS-ERROR-MESSAGE) depend on a value whose meaning is not established; any Java mapping would invent it",
+      "affected_requirements": [],
+      "affected_java_component": "outcome mapping of behaviour 2000-PROCESS (behind a port whose only implementation throws until the gap is resolved)",
+      "required_action": [
+        "DR-TSTGEN00-002: a signed resolution by technical_authority"
+      ],
+      "validation_evidence": "the real definition of WS-ERROR-MESSAGE for the target runtime and a captured legacy run showing each outcome branch",
+      "blocks_execution_path": "request its PERFORM -> 2000-PROCESS: statements 177, 212",
+      "blocking": true,
+      "status": "OPEN"
+    }
+  ],
+  "closures": [
+    {
+      "behaviour_id": "TSTGEN00:0000-MAIN",
+      "status": "UNRESOLVED",
+      "unresolved_reasons": [
+        "PERFORM/GO TO target 2210-GEN-PORT-DATA (line 185) is not a paragraph of TSTGEN00",
+        "PERFORM/GO TO target 2220-WRITE-PORT-RECORD (line 186) is not a paragraph of TSTGEN00",
+        "PERFORM/GO TO target 2310-GEN-TRAN-DATA (line 192) is not a paragraph of TSTGEN00",
+        "PERFORM/GO TO target 2320-WRITE-TRAN-RECORD (line 193) is not a paragraph of TSTGEN00",
+        "PERFORM/GO TO target 2410-GEN-DATA-ERRORS (line 197) is not a paragraph of TSTGEN00",
+        "PERFORM/GO TO target 2420-GEN-PROCESS-ERRORS (line 198) is not a paragraph of TSTGEN00",
+        "PERFORM/GO TO target 2510-GEN-LARGE-PORTFOLIO (line 201) is not a paragraph of TSTGEN00",
+        "PERFORM/GO TO target 2520-GEN-LARGE-TRANSACTION (line 202) is not a paragraph of TSTGEN00",
+        "line 129: WS-PORT-STATUS is ambiguous (2 declarations)",
+        "line 136: WS-TRAN-STATUS is ambiguous (2 declarations)",
+        "line 212: UPON is neither declared, a keyword, a paragraph nor the subject of a blocking decision (unknown dependency)",
+        "line 212: CONS is neither declared, a keyword, a paragraph nor the subject of a blocking decision (unknown dependency)",
+        "line 214: RETURN-CODE is neither declared, a keyword, a paragraph nor the subject of a blocking decision (unknown dependency)"
+      ],
+      "units": [
+        "TSTGEN00"
+      ],
+      "external": [
+        {
+          "kind": "file_io",
+          "line": 150,
+          "operation": "READ",
+          "target": "RANDOM-SEED",
+          "relation": "direct"
+        },
+        {
+          "kind": "file_io",
+          "line": 158,
+          "operation": "READ",
+          "target": "TEST-CONFIG",
+          "relation": "direct"
+        }
+      ],
+      "undeclared": [
+        "WS-ERROR-MESSAGE"
+      ],
+      "sha256": "91ad71fc0fc4715410dae09b3296bf24a90269c1e008a165a99c7f299c2a30ec"
+    },
+    {
+      "behaviour_id": "TSTGEN00:1000-INITIALIZE",
+      "status": "UNRESOLVED",
+      "unresolved_reasons": [
+        "PERFORM/GO TO target 2210-GEN-PORT-DATA (line 185) is not a paragraph of TSTGEN00",
+        "PERFORM/GO TO target 2220-WRITE-PORT-RECORD (line 186) is not a paragraph of TSTGEN00",
+        "PERFORM/GO TO target 2310-GEN-TRAN-DATA (line 192) is not a paragraph of TSTGEN00",
+        "PERFORM/GO TO target 2320-WRITE-TRAN-RECORD (line 193) is not a paragraph of TSTGEN00",
+        "PERFORM/GO TO target 2410-GEN-DATA-ERRORS (line 197) is not a paragraph of TSTGEN00",
+        "PERFORM/GO TO target 2420-GEN-PROCESS-ERRORS (line 198) is not a paragraph of TSTGEN00",
+        "PERFORM/GO TO target 2510-GEN-LARGE-PORTFOLIO (line 201) is not a paragraph of TSTGEN00",
+        "PERFORM/GO TO target 2520-GEN-LARGE-TRANSACTION (line 202) is not a paragraph of TSTGEN00",
+        "line 129: WS-PORT-STATUS is ambiguous (2 declarations)",
+        "line 136: WS-TRAN-STATUS is ambiguous (2 declarations)",
+        "line 212: UPON is neither declared, a keyword, a paragraph nor the subject of a blocking decision (unknown dependency)",
+        "line 212: CONS is neither declared, a keyword, a paragraph nor the subject of a blocking decision (unknown dependency)",
+        "line 214: RETURN-CODE is neither declared, a keyword, a paragraph nor the subject of a blocking decision (unknown dependency)"
+      ],
+      "units": [
+        "TSTGEN00"
+      ],
+      "external": [
+        {
+          "kind": "file_io",
+          "line": 150,
+          "operation": "READ",
+          "target": "RANDOM-SEED",
+          "relation": "direct"
+        }
+      ],
+      "undeclared": [
+        "WS-ERROR-MESSAGE"
+      ],
+      "sha256": "5af0c65d9a1244b43ccaaa4b3f49ab7e17e120deea9b4df70de501d1ea23a5aa"
+    },
+    {
+      "behaviour_id": "TSTGEN00:2000-PROCESS",
+      "status": "UNRESOLVED",
+      "unresolved_reasons": [
+        "PERFORM/GO TO target 2210-GEN-PORT-DATA (line 185) is not a paragraph of TSTGEN00",
+        "PERFORM/GO TO target 2220-WRITE-PORT-RECORD (line 186) is not a paragraph of TSTGEN00",
+        "PERFORM/GO TO target 2310-GEN-TRAN-DATA (line 192) is not a paragraph of TSTGEN00",
+        "PERFORM/GO TO target 2320-WRITE-TRAN-RECORD (line 193) is not a paragraph of TSTGEN00",
+        "PERFORM/GO TO target 2410-GEN-DATA-ERRORS (line 197) is not a paragraph of TSTGEN00",
+        "PERFORM/GO TO target 2420-GEN-PROCESS-ERRORS (line 198) is not a paragraph of TSTGEN00",
+        "PERFORM/GO TO target 2510-GEN-LARGE-PORTFOLIO (line 201) is not a paragraph of TSTGEN00",
+        "PERFORM/GO TO target 2520-GEN-LARGE-TRANSACTION (line 202) is not a paragraph of TSTGEN00",
+        "line 212: UPON is neither declared, a keyword, a paragraph nor the subject of a blocking decision (unknown dependency)",
+        "line 212: CONS is neither declared, a keyword, a paragraph nor the subject of a blocking decision (unknown dependency)",
+        "line 214: RETURN-CODE is neither declared, a keyword, a paragraph nor the subject of a blocking decision (unknown dependency)"
+      ],
+      "units": [
+        "TSTGEN00"
+      ],
+      "external": [
+        {
+          "kind": "file_io",
+          "line": 158,
+          "operation": "READ",
+          "target": "TEST-CONFIG",
+          "relation": "direct"
+        }
+      ],
+      "undeclared": [
+        "WS-ERROR-MESSAGE"
+      ],
+      "sha256": "f977079fab6ce30cdd8682bb1e2033fc61e0170ae99bfc63bc1dbab1e8eacf32"
+    },
+    {
+      "behaviour_id": "TSTGEN00:3000-CLEANUP",
+      "status": "UNRESOLVED",
+      "unresolved_reasons": [
+        "PERFORM/GO TO target 2210-GEN-PORT-DATA (line 185) is not a paragraph of TSTGEN00",
+        "PERFORM/GO TO target 2220-WRITE-PORT-RECORD (line 186) is not a paragraph of TSTGEN00",
+        "PERFORM/GO TO target 2310-GEN-TRAN-DATA (line 192) is not a paragraph of TSTGEN00",
+        "PERFORM/GO TO target 2320-WRITE-TRAN-RECORD (line 193) is not a paragraph of TSTGEN00",
+        "PERFORM/GO TO target 2410-GEN-DATA-ERRORS (line 197) is not a paragraph of TSTGEN00",
+        "PERFORM/GO TO target 2420-GEN-PROCESS-ERRORS (line 198) is not a paragraph of TSTGEN00",
+        "PERFORM/GO TO target 2510-GEN-LARGE-PORTFOLIO (line 201) is not a paragraph of TSTGEN00",
+        "PERFORM/GO TO target 2520-GEN-LARGE-TRANSACTION (line 202) is not a paragraph of TSTGEN00"
+      ],
+      "units": [
+        "TSTGEN00"
+      ],
+      "external": [],
+      "undeclared": [],
+      "sha256": "e3a1fcc3d5f250adcb21eab823ae1c95c9d4af5d021621f6486c23a69e013efc"
+    }
+  ],
+  "open_decisions": [
+    {
+      "id": "DR-TSTGEN00-001",
+      "blocking": true,
+      "question": "TSTGEN00 is a confirmed test tool (configuration-driven test-data generator: routes by CFG-TEST-TYPE 'PORTFOLIO' / 'TRANSACTN' / 'ERROR' / 'VOLUME', BR-124; ends with return code 12 after more than 100 errors, BR-125). Is TSTGEN00 modernised, retired, replaced by a framework/test-data service, or kept as test tooling?"
+    },
+    {
+      "id": "SCOPE-TSTGEN00",
+      "blocking": true,
+      "question": "TSTGEN00 is classified test_tool (confirmed): classified as test_tool (confirmed); a human must decide whether it is in modernisation scope. Keep it in the modernisation scope (resolved_no_change) or exclude it (excluded_from_scope)?"
+    },
+    {
+      "id": "DR-F2-P0007-003",
+      "blocking": false,
+      "question": "Ten elementary level-01 FD/WS items have no permanent Field ID (PORTTRAN WS-EOF-FLAG, TSTGEN00 SEED-RECORD, TSTVAL00 EXPECTED-RECORD/ACTUAL-RECORD/REPORT-RECORD, UTLMNT00 ARCHIVE-RECORD/REPORT-RECORD, UTLVAL00 ERROR-RECORD, FILEHNDL INPUT-RECORD/OUTPUT-RECORD). Should the reverse data agent register Field IDs for record-level elementary items so their Java types can be fixed?"
+    },
+    {
+      "id": "DR-F2-P0007-004",
+      "blocking": false,
+      "question": "TSTGEN00 declares WS-PORT-STATUS and WS-TRAN-STATUS twice (file-status X(2) at lines 71/72 and data X(1) at lines 98/106) and nests the copied 01 records PORT-RECORD and TRANSACTION-RECORD inside other 01 records (lines 52, 58). Which declaration does each unqualified reference mean, and how should the nested copy layouts be modelled?"
+    },
+    {
+      "id": "DR-F2-P0007-005",
+      "blocking": false,
+      "question": "WS-ERROR-MESSAGE is referenced but declared nowhere in TSTGEN00, TSTVAL00, UTLMNT00, UTLMON00 and UTLVAL00 (it may have been expected from ERRHAND or RTNCODE). What is its intended layout and owning copybook?"
+    },
+    {
+      "id": "DR-F2-PKT0010-002",
+      "blocking": false,
+      "question": "Which character encoding (code page) do the files and areas described by these copybooks use for DISPLAY data on the legacy platform (EBCDIC 037, 1140, another EBCDIC variant, or ASCII)? The zoned-decimal test vectors and String codecs depend on it."
+    },
+    {
+      "id": "DR-F2-PKT0010-005",
+      "blocking": false,
+      "question": "Several data names are declared more than once: CK-FILE-STATUS (CKPRST group line 35 and child line 38); ERR-VALIDATION/ERR-PROCESSING/ERR-SECURITY (RETHND level-88 and STD-ERROR-CODES fields); RC-SUCCESS..RC-CRITICAL, TRN-TYPE-BUY/SELL/FEE, ERROR-CODE and ERROR-ROUTINE across COMMON, RETHND and TRNREC. What Java naming convention should disambiguate them (for example record-qualified class members keyed by Field ID)?"
+    },
+    {
+      "id": "DR-TSTGEN00-002",
+      "blocking": true,
+      "question": "If TSTGEN00 is kept: GAP-017 - eight generator paragraphs (2210-GEN-PORT-DATA, 2220-WRITE-PORT-RECORD, 2310-GEN-TRAN-DATA, 2320-WRITE-TRAN-RECORD, 2410-GEN-DATA-ERRORS, 2420-GEN-PROCESS-ERRORS, 2510-GEN-LARGE-PORTFOLIO, 2520-GEN-LARGE-TRANSACTION) are not in the source, so no record is written by the code present; GAP-038 - WS-ERROR-MESSAGE is declared nowhere; GAP-057 - WS-PORT-STATUS and WS-TRAN-STATUS are each declared twice. Can the full TSTGEN00 source be located, or is the tool unfinished?"
+    },
+    {
+      "id": "RVW-GAP-092",
+      "blocking": false,
+      "question": "GAP-092 (medium, DIAGRAM_RENDER_UNVERIFIED) is not addressed by any decision or requirement: Visual rendering of the 65 Mermaid diagrams is unverified. Acknowledge it as a known limitation (resolved_no_change) or exclude the affected units?"
+    },
+    {
+      "id": "RVW-GAP-104",
+      "blocking": false,
+      "question": "GAP-104 (low, DIAGRAM_INCOMPLETE) is not addressed by any decision or requirement: COMP-UNRESOLVED: all seven edges are unsupported. Acknowledge it as a known limitation (resolved_no_change) or exclude the affected units?"
+    },
+    {
+      "id": "RVW-GAP-211",
+      "blocking": false,
+      "question": "GAP-211 (low, MEDIUM_CONFIDENCE_RULE) is not addressed by any decision or requirement: BR-148 Validate client type is individual, corporate or trust — medium confidence. Acknowledge it as a known limitation (resolved_no_change) or exclude the affected units?"
+    }
+  ],
+  "authorisation": {
+    "generation_authorized": false,
+    "blockers": [
+      "config generation.java_generation_allowed is false (project authority)",
+      "no authorised orchestrator.java_target_dir",
+      "G4 is BLOCKED (needs signed G2, G3 and G4 approvals by trusted signers)",
+      "trust store: TRUST_NOT_CONFIGURED"
+    ],
+    "gates": {
+      "G0": "PASS",
+      "G1": "PASS",
+      "G2": "UNVERIFIED",
+      "G3": "BLOCKED",
+      "G4": "BLOCKED",
+      "G5": "BLOCKED",
+      "G6": "BLOCKED",
+      "G7": "BLOCKED",
+      "G8": "BLOCKED"
+    },
+    "trust": "TRUST_NOT_CONFIGURED",
+    "program_g2_scope": {
+      "readiness": "NOT_READY",
+      "blocking": 18,
+      "scope_sha256": "c3604f8bfc0bb077822091e655d851376c8d6047def9c90a898b42e6039e6810"
+    },
+    "note": "Engineering gates never authorise generation. Java may be generated only when generation_authorized is true."
+  }
+}

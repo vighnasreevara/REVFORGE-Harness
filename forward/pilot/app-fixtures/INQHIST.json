@@ -1,0 +1,34 @@
+{
+ "program": "INQHIST",
+ "provenance": "Written 2026-11-02 by a scenario-author agent (F6 independent fixture design) from the COBOL source under references/udara-legacy-modernization-harness/src/ and its copybooks, plus only the 'gaps' array of pilot-result.json for gap line numbers. No generated Java, source map or test result was read or run.",
+ "scenarios": [
+  {
+   "id": "H01",
+   "title": "P100-INIT-PROGRAM first moves DFHCOMMAREA to WS-COMMAREA; WS-COMMAREA contains only a nested 01 copybook record and has no layout (gap), reached before HANDLE CONDITION",
+   "cobol_lines": [
+    70,
+    81,
+    82
+   ],
+   "kind": "main",
+   "expect": {
+    "outcome": "BLOCKED AT src/programs/online/INQHIST.cbl:82"
+   }
+  },
+  {
+   "id": "H02",
+   "title": "input on SYSIN changes nothing: no statement before the gap reads input",
+   "cobol_lines": [
+    70,
+    82
+   ],
+   "kind": "main",
+   "sysin": [
+    "INQH1234567890"
+   ],
+   "expect": {
+    "outcome": "BLOCKED AT src/programs/online/INQHIST.cbl:82"
+   }
+  }
+ ]
+}

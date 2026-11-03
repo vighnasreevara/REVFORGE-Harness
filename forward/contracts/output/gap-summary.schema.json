@@ -1,0 +1,54 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://revforge.local/contracts/output/gap-summary.schema.json",
+  "title": "Gap summary with grouped gaps expanded into items",
+  "allOf": [{ "$ref": "../common.schema.json#/definitions/outputHeader" }],
+  "type": "object",
+  "required": ["contract", "source_run", "counts", "gaps", "expanded_items", "assumptions"],
+  "properties": {
+    "contract": { "const": "gap-summary" },
+    "source_run": { "type": "string" },
+    "counts": {
+      "type": "object",
+      "required": ["total", "expanded_items", "by_severity", "requires_sme_review", "grouped_gaps", "items_by_reference_status"]
+    },
+    "gaps": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["ref", "gap_type", "severity", "requires_sme_review", "programs", "file_ids", "missing_source_reference", "item_count"],
+        "properties": {
+          "ref": { "$ref": "../common.schema.json#/definitions/runLocalRef" },
+          "severity": { "$ref": "../common.schema.json#/definitions/severity" },
+          "file_ids": { "type": "array", "items": { "$ref": "../common.schema.json#/definitions/fileId" } },
+          "related_rules": { "type": "array", "items": { "$ref": "../common.schema.json#/definitions/runLocalRef" } }
+        }
+      }
+    },
+    "expanded_items": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["item_id", "gap", "index", "program_id", "file_id", "permanent_ids", "run_local_refs", "reference_status", "detail"],
+        "properties": {
+          "item_id": { "type": "string", "pattern": "^GAP-[0-9]{3,}#[0-9]{2,}$" },
+          "gap": { "$ref": "../common.schema.json#/definitions/runLocalRef" },
+          "file_id": { "$ref": "../common.schema.json#/definitions/nullableFileId" },
+          "permanent_ids": {
+            "type": "object",
+            "properties": {
+              "file_ids": { "type": "array", "items": { "$ref": "../common.schema.json#/definitions/fileId" } },
+              "paragraph_ids": { "type": "array", "items": { "$ref": "../common.schema.json#/definitions/paragraphId" } },
+              "statement_ids": { "type": "array", "items": { "$ref": "../common.schema.json#/definitions/statementId" } },
+              "record_ids": { "type": "array", "items": { "$ref": "../common.schema.json#/definitions/recordId" } },
+              "field_ids": { "type": "array", "items": { "$ref": "../common.schema.json#/definitions/fieldId" } }
+            }
+          },
+          "reference_status": { "enum": ["permanent_id", "name_or_line_only", "catalogue_only", "none"] },
+          "detail": { "type": "object" }
+        }
+      }
+    },
+    "assumptions": { "type": "array" }
+  }
+}

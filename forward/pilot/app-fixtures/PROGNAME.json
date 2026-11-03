@@ -1,0 +1,53 @@
+{
+ "program": "PROGNAME",
+ "provenance": "Written 2026-11-02 by a scenario-author agent (F6 independent fixture design) from the COBOL source src/templates/program/standard-program.cbl and the gaps array of forward/generated/java/PROGNAME/pilot-result.json only; no generated Java, source map or test result was read. DISPLAY lines are given right-trimmed.",
+ "scenarios": [
+  {
+   "id": "S01",
+   "title": "template run: INITIALIZE work areas, 2000-PROCESS runs once and sets END-OF-FILE, 3000-TERMINATE moves 0 to RETURN-CODE",
+   "cobol_lines": [
+    54,
+    56,
+    57,
+    59,
+    61,
+    67,
+    75,
+    82
+   ],
+   "kind": "main",
+   "expect": {
+    "outcome": "END",
+    "return_code": 0,
+    "display": [],
+    "items": {
+     "WS-END-OF-FILE-SW": "Y",
+     "END-OF-FILE": true,
+     "NOT-END-OF-FILE": false,
+     "WS-RETURN-CODE": "0",
+     "WS-ERROR": "8",
+     "WS-SUCCESS": "0"
+    }
+   }
+  },
+  {
+   "id": "S02",
+   "title": "a PARM is ignored (no USING); 9000-HANDLE-ERROR is never performed, so RETURN-CODE stays 0",
+   "cobol_lines": [
+    49,
+    82,
+    87,
+    89
+   ],
+   "kind": "main",
+   "parm": "ANYTHING",
+   "expect": {
+    "outcome": "END",
+    "return_code": 0,
+    "items": {
+     "WS-RETURN-CODE": "0"
+    }
+   }
+  }
+ ]
+}

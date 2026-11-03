@@ -1,0 +1,94 @@
+{
+ "program": "ERRHANDL",
+ "provenance": "Written 2026-11-02 by a scenario-author agent (F6 independent fixture design) from the COBOL source src/templates/error/error-handling.cbl and the gaps array of forward/generated/java/ERRHANDL/pilot-result.json only; no generated Java, source map or test result was read. DISPLAY lines are given right-trimmed.",
+ "scenarios": [
+  {
+   "id": "S01",
+   "title": "template run: warning, error, severe and abend examples each log two DISPLAY lines, then CALL 'CEE3ABD' USING RC-CRITICAL, 3 blocks (3000-TERMINATE and the RETURN-CODE logic are never reached)",
+   "cobol_lines": [
+    67,
+    68,
+    69,
+    74,
+    75,
+    76,
+    77,
+    86,
+    89,
+    92,
+    95,
+    128,
+    129,
+    130,
+    131,
+    132,
+    139,
+    140,
+    141,
+    142,
+    143,
+    144,
+    151,
+    152,
+    153,
+    154,
+    155,
+    156,
+    163,
+    164,
+    165,
+    166,
+    168,
+    169,
+    176,
+    177,
+    178,
+    185,
+    186
+   ],
+   "kind": "main",
+   "expect": {
+    "outcome": "BLOCKED AT src/templates/error/error-handling.cbl:186",
+    "display": [
+     "ERH     -0001: WARNING",
+     "INVALID INPUT PARAMETER RECEIVED",
+     "ERH     -0002: ERROR",
+     "REQUIRED FIELD IS MISSING",
+     "ERH     -0003: SEVERE",
+     "FILE OPERATION FAILED",
+     "ERH     -0999: CRITICAL",
+     "UNRECOVERABLE ERROR - INITIATING ABEND",
+     "ABNORMAL TERMINATION INITIATED"
+    ],
+    "items": {
+     "WS-WARNING-COUNT": "1",
+     "WS-ERROR-COUNT": "1",
+     "WS-SEVERE-COUNT": "1",
+     "ERROR-OCCURRED": true,
+     "NO-ERROR": false,
+     "PERFORM-ABEND": true,
+     "WS-ERROR-NUMBER": "999",
+     "WS-ERROR-SEVERITY": "CRITICAL",
+     "WS-ERROR-TEXT": "UNRECOVERABLE ERROR - INITIATING ABEND"
+    }
+   }
+  },
+  {
+   "id": "S02",
+   "title": "the controlled-abend line is the last output before the block (outcome and one line only)",
+   "cobol_lines": [
+    95,
+    169,
+    185,
+    186
+   ],
+   "kind": "main",
+   "expect": {
+    "outcome": "BLOCKED AT src/templates/error/error-handling.cbl:186",
+    "display_contains": [
+     "ABNORMAL TERMINATION INITIATED"
+    ]
+   }
+  }
+ ]
+}

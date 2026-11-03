@@ -1,0 +1,150 @@
+{
+ "program": "DB2CONN",
+ "provenance": "Written 2026-11-02 by a scenario-author agent (F6 independent fixture design) from the COBOL source src/programs/common/DB2CONN.cbl and the copybooks it COPYs (src/copybook/db2/SQLCA.cpy, src/copybook/db2/DBPROC.cpy, src/copybook/common/ERRHAND.cpy), plus the gap origins in the 'gaps' array of forward/generated/java/DB2CONN/pilot-result.json. No generated Java, source map or execution result was read. Scenarios V01.. were added on 2026-11-03 (partly-covered rule extension) by an F6 scenario-author agent from the same COBOL source, copybooks, README and gaps array only; no generated Java, source map or test result was read or run.",
+ "scenarios": [
+  {
+   "id": "N01",
+   "title": "DISC in a fresh run unit: WS-CONNECTION-STATE has no VALUE (LOW-VALUES), so WS-CONNECTED is false and nothing is done; LS-RETURN-CODE is not set",
+   "cobol_lines": [
+    26,
+    27,
+    51,
+    52,
+    60,
+    110,
+    128
+   ],
+   "kind": "call",
+   "set": {
+    "LS-FUNCTION": "DISC",
+    "LS-DB-NAME": "POSMVP",
+    "LS-PLAN-NAME": "POSPLAN",
+    "LS-RETURN-CODE": "5",
+    "LS-SQLCODE": "0",
+    "LS-ERROR-MSG": ""
+   },
+   "expect": {
+    "outcome": "GOBACK",
+    "items": {
+     "LS-RETURN-CODE": "5",
+     "LS-ERROR-MSG": "",
+     "LS-SQLCODE": "0",
+     "WS-CONNECTED": false,
+     "WS-DISCONNECTED": false
+    }
+   }
+  },
+  {
+   "id": "N02",
+   "title": "CONN sets disconnected, zeroes the retry count, copies the names and enters the retry loop, which blocks at EXEC SQL CONNECT",
+   "cobol_lines": [
+    49,
+    50,
+    64,
+    65,
+    66,
+    67,
+    69,
+    70,
+    72
+   ],
+   "kind": "call",
+   "set": {
+    "LS-FUNCTION": "CONN",
+    "LS-DB-NAME": "POSMVP",
+    "LS-PLAN-NAME": "POSPLAN",
+    "LS-RETURN-CODE": "0",
+    "LS-SQLCODE": "0",
+    "LS-ERROR-MSG": ""
+   },
+   "expect": {
+    "outcome": "BLOCKED AT src/programs/common/DB2CONN.cbl:72"
+   }
+  },
+  {
+   "id": "N03",
+   "title": "STAT blocks at EXEC SQL SELECT CURRENT SERVER",
+   "cobol_lines": [
+    53,
+    54,
+    132
+   ],
+   "kind": "call",
+   "set": {
+    "LS-FUNCTION": "STAT",
+    "LS-DB-NAME": "POSMVP",
+    "LS-PLAN-NAME": "POSPLAN",
+    "LS-RETURN-CODE": "0",
+    "LS-SQLCODE": "0",
+    "LS-ERROR-MSG": ""
+   },
+   "expect": {
+    "outcome": "BLOCKED AT src/programs/common/DB2CONN.cbl:132"
+   }
+  },
+  {
+   "id": "N04",
+   "title": "an unknown function code takes WHEN OTHER: 9000-ERROR-ROUTINE CALLs ERRPROC (application program, not registered)",
+   "cobol_lines": [
+    55,
+    56,
+    57,
+    151,
+    152,
+    153
+   ],
+   "kind": "call",
+   "set": {
+    "LS-FUNCTION": "XXXX",
+    "LS-DB-NAME": "POSMVP",
+    "LS-PLAN-NAME": "POSPLAN",
+    "LS-RETURN-CODE": "0",
+    "LS-SQLCODE": "0",
+    "LS-ERROR-MSG": ""
+   },
+   "expect": {
+    "outcome": "BLOCKED RUNTIME-CALL-UNAVAILABLE"
+   }
+  },
+  {
+   "id": "V01",
+   "title": "BR-046 retry cap: CONN sets WS-DISCONNECTED and WS-RETRY-COUNT 0, so the UNTIL test at lines 69-70 (WS-CONNECTED OR 0 >= WS-MAX-RETRIES 3) is false and the loop body is entered; it blocks at EXEC SQL CONNECT before any SQLCODE test, so LS-RETURN-CODE (+7 from the caller), LS-SQLCODE and LS-ERROR-MSG are unchanged",
+   "cobol_lines": [
+    30,
+    31,
+    49,
+    50,
+    64,
+    65,
+    66,
+    67,
+    69,
+    70,
+    72
+   ],
+   "kind": "call",
+   "set": {
+    "LS-FUNCTION": "CONN",
+    "LS-DB-NAME": "POSMVP",
+    "LS-PLAN-NAME": "POSPLAN",
+    "LS-RETURN-CODE": "7",
+    "LS-SQLCODE": "0",
+    "LS-ERROR-MSG": "PRIOR MESSAGE"
+   },
+   "expect": {
+    "outcome": "BLOCKED AT src/programs/common/DB2CONN.cbl:72",
+    "items": {
+     "WS-DISCONNECTED": true,
+     "WS-CONNECTED": false,
+     "WS-RETRY-COUNT": "0",
+     "WS-MAX-RETRIES": "3",
+     "WS-DB-NAME": "POSMVP",
+     "WS-PLAN-NAME": "POSPLAN",
+     "LS-RETURN-CODE": "7",
+     "LS-SQLCODE": "0",
+     "LS-ERROR-MSG": "PRIOR MESSAGE"
+    }
+   }
+  }
+ ]
+}

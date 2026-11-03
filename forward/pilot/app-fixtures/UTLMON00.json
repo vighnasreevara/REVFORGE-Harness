@@ -1,0 +1,91 @@
+{
+ "program": "UTLMON00",
+ "provenance": "Written 2026-11-02 by a scenario-author agent (F6 independent fixture design) from the COBOL source src/programs/utility/UTLMON00.cbl and its copybooks under references/udara-legacy-modernization-harness, the fixtures README contract, and the gaps array of pilot-result.json; no generated Java, source map or test results were read.",
+ "scenarios": [
+  {
+   "id": "S01",
+   "title": "MONCFG not allocated: the error branch moves to the undeclared WS-ERROR-MESSAGE",
+   "cobol_lines": [
+    129,
+    135,
+    140,
+    141,
+    142
+   ],
+   "kind": "main",
+   "expect": {
+    "outcome": "BLOCKED AT src/programs/utility/UTLMON00.cbl:142",
+    "display": []
+   }
+  },
+  {
+   "id": "S02",
+   "title": "MONCFG opens but MONLOG is not allocated",
+   "cobol_lines": [
+    140,
+    141,
+    147,
+    148,
+    149
+   ],
+   "kind": "main",
+   "datasets": {
+    "MONCFG": {
+     "records": []
+    }
+   },
+   "expect": {
+    "outcome": "BLOCKED AT src/programs/utility/UTLMON00.cbl:149",
+    "display": []
+   }
+  },
+  {
+   "id": "S03",
+   "title": "MONCFG and MONLOG open but ALERTS is not allocated",
+   "cobol_lines": [
+    147,
+    148,
+    154,
+    155,
+    156
+   ],
+   "kind": "main",
+   "datasets": {
+    "MONCFG": {
+     "records": []
+    }
+   },
+   "outputs": [
+    "MONLOG"
+   ],
+   "expect": {
+    "outcome": "BLOCKED AT src/programs/utility/UTLMON00.cbl:156",
+    "display": []
+   }
+  },
+  {
+   "id": "S04",
+   "title": "config, log and alert files open: OPEN INPUT DB2-STATS has no FD (COPY DB2STAT missing)",
+   "cobol_lines": [
+    140,
+    147,
+    154,
+    161
+   ],
+   "kind": "main",
+   "datasets": {
+    "MONCFG": {
+     "records": []
+    }
+   },
+   "outputs": [
+    "MONLOG",
+    "ALERTS"
+   ],
+   "expect": {
+    "outcome": "BLOCKED AT src/programs/utility/UTLMON00.cbl:161",
+    "display": []
+   }
+  }
+ ]
+}

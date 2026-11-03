@@ -1,0 +1,358 @@
+{
+  "gate": "SOURCE_READINESS",
+  "subject": "PORTADD",
+  "status": "FAIL",
+  "checks": [
+    {
+      "id": "source_available",
+      "ok": true,
+      "detail": "src/programs/portfolio/PORTADD.cbl sha256 86cd685a216b37d2003e7dac1ae482d20e92268edc41e48495b49e0c39c21add; 40 statement(s) in 5 paragraph(s)"
+    },
+    {
+      "id": "complete_program",
+      "ok": true,
+      "detail": "every paragraph contains statements"
+    },
+    {
+      "id": "copybooks_resolved",
+      "ok": true,
+      "detail": "all 2 include(s) resolved: PORTFLIO, PORTFLIO"
+    },
+    {
+      "id": "requirements_and_data_mapping_delivered",
+      "ok": true,
+      "detail": "F1/F2 deliveries accepted for PORTFLIO, PORTADD"
+    },
+    {
+      "id": "behaviour_classified",
+      "ok": true,
+      "detail": "4 behaviour(s): 0 VERIFIED_CANDIDATE, 4 PARTIAL, 0 GAP"
+    },
+    {
+      "id": "dependencies_identified",
+      "ok": false,
+      "detail": "closure UNRESOLVED for PORTADD:0000-MAIN (line 89: YYYYMMDD is neither declared, a keyword, a paragraph nor the subject of a blocking decision (unknown dependency)); PORTADD:1000-INITIALIZE (line 89: YYYYMMDD is neither declared, a keyword, a paragraph nor the subject of a blocking decision (unknown dependency)); PORTADD:3000-TERMINATE (line 147: RETURN-CODE is neither declared, a keyword, a paragraph nor the subject of a blocking decision (unknown dependency))"
+    },
+    {
+      "id": "unsupported_documented",
+      "ok": false,
+      "detail": "non-verified behaviour without a gap: PORTADD:1000-INITIALIZE, PORTADD:2000-PROCESS, PORTADD:3000-TERMINATE"
+    },
+    {
+      "id": "unknowns_documented",
+      "ok": true,
+      "detail": "10 open decision(s) record the remaining questions (2 blocking for approval); none is resolved or assumed here"
+    }
+  ],
+  "note": "An engineering gate: it states that the source is understood well enough to convert, with every unknown documented. It is not a G2 approval and does not authorise generation.",
+  "behaviours": [
+    {
+      "behaviour_id": "PORTADD:ENTRY-DISPATCH",
+      "kind": "dispatch",
+      "classification": "PARTIAL",
+      "lines": [
+        77,
+        82
+      ],
+      "inputs": [
+        "WS-END-OF-FILE-SW"
+      ],
+      "outputs": [],
+      "side_effects": [],
+      "unresolved": [],
+      "covered_by": []
+    },
+    {
+      "behaviour_id": "PORTADD:1000-INITIALIZE",
+      "kind": "performed_range",
+      "classification": "PARTIAL",
+      "lines": [
+        87,
+        148
+      ],
+      "inputs": [
+        "WS-ADD-COUNT",
+        "WS-CURRENT-DATE",
+        "WS-DUP-COUNT",
+        "WS-ERROR",
+        "WS-ERROR-COUNT",
+        "WS-FILE-STATUS",
+        "WS-INPUT-STATUS",
+        "WS-RETURN-CODE"
+      ],
+      "outputs": [
+        "RETURN-CODE",
+        "WS-RETURN-CODE",
+        "WS-WORK-AREAS"
+      ],
+      "side_effects": [
+        {
+          "line": 91,
+          "kind": "file_io",
+          "operation": "OPEN",
+          "table": null
+        },
+        {
+          "line": 92,
+          "kind": "file_io",
+          "operation": "OPEN",
+          "table": null
+        },
+        {
+          "line": 140,
+          "kind": "file_io",
+          "operation": "CLOSE",
+          "table": null
+        }
+      ],
+      "unresolved": [],
+      "covered_by": [
+        "REQ-PORTADD-006"
+      ]
+    },
+    {
+      "behaviour_id": "PORTADD:2000-PROCESS",
+      "kind": "performed_range",
+      "classification": "PARTIAL",
+      "lines": [
+        105,
+        135
+      ],
+      "inputs": [
+        "PORT-CLIENT-NAME",
+        "PORT-ID",
+        "PORT-RECORD",
+        "PORT-STATUS",
+        "WS-ADD-COUNT",
+        "WS-CURRENT-DATE",
+        "WS-DUP-COUNT",
+        "WS-ERROR-COUNT",
+        "WS-FILE-STATUS"
+      ],
+      "outputs": [
+        "PORT-CREATE-DATE",
+        "PORT-LAST-MAINT",
+        "WS-END-OF-FILE-SW"
+      ],
+      "side_effects": [
+        {
+          "line": 105,
+          "kind": "file_io",
+          "operation": "READ",
+          "table": null
+        },
+        {
+          "line": 125,
+          "kind": "file_io",
+          "operation": "WRITE",
+          "table": null
+        }
+      ],
+      "unresolved": [],
+      "covered_by": [
+        "RT-PORTADD-001"
+      ]
+    },
+    {
+      "behaviour_id": "PORTADD:3000-TERMINATE",
+      "kind": "performed_range",
+      "classification": "PARTIAL",
+      "lines": [
+        140,
+        148
+      ],
+      "inputs": [
+        "WS-ADD-COUNT",
+        "WS-DUP-COUNT",
+        "WS-ERROR-COUNT",
+        "WS-RETURN-CODE"
+      ],
+      "outputs": [
+        "RETURN-CODE"
+      ],
+      "side_effects": [
+        {
+          "line": 140,
+          "kind": "file_io",
+          "operation": "CLOSE",
+          "table": null
+        }
+      ],
+      "unresolved": [],
+      "covered_by": [
+        "REQ-PORTADD-005",
+        "REQ-PORTADD-006",
+        "RT-PORTADD-003",
+        "RT-PORTADD-004"
+      ]
+    }
+  ],
+  "gaps": [],
+  "closures": [
+    {
+      "behaviour_id": "PORTADD:0000-MAIN",
+      "status": "UNRESOLVED",
+      "unresolved_reasons": [
+        "line 89: YYYYMMDD is neither declared, a keyword, a paragraph nor the subject of a blocking decision (unknown dependency)",
+        "line 91: I-O is neither declared, a keyword, a paragraph nor the subject of a blocking decision (unknown dependency)",
+        "line 147: RETURN-CODE is neither declared, a keyword, a paragraph nor the subject of a blocking decision (unknown dependency)"
+      ],
+      "units": [
+        "PORTADD",
+        "PORTFLIO"
+      ],
+      "external": [
+        {
+          "kind": "file_io",
+          "line": 105,
+          "operation": "READ",
+          "target": "INPUT-FILE",
+          "relation": "direct"
+        },
+        {
+          "kind": "file_io",
+          "line": 125,
+          "operation": "WRITE",
+          "target": "INPUT-FILE",
+          "relation": "direct"
+        }
+      ],
+      "undeclared": [],
+      "sha256": "45e240f3b0fd449cc845f8bd2e43eaee3c6a3133998e82ce4f2955ea81ca3c72"
+    },
+    {
+      "behaviour_id": "PORTADD:1000-INITIALIZE",
+      "status": "UNRESOLVED",
+      "unresolved_reasons": [
+        "line 89: YYYYMMDD is neither declared, a keyword, a paragraph nor the subject of a blocking decision (unknown dependency)",
+        "line 91: I-O is neither declared, a keyword, a paragraph nor the subject of a blocking decision (unknown dependency)",
+        "line 147: RETURN-CODE is neither declared, a keyword, a paragraph nor the subject of a blocking decision (unknown dependency)"
+      ],
+      "units": [
+        "PORTADD"
+      ],
+      "external": [],
+      "undeclared": [],
+      "sha256": "8583f6d1e4de2442dc030f716b376a5bc037628f293b755ad7795a5854bdc372"
+    },
+    {
+      "behaviour_id": "PORTADD:2000-PROCESS",
+      "status": "RESOLVED",
+      "unresolved_reasons": [],
+      "units": [
+        "PORTADD",
+        "PORTFLIO"
+      ],
+      "external": [
+        {
+          "kind": "file_io",
+          "line": 105,
+          "operation": "READ",
+          "target": "INPUT-FILE",
+          "relation": "direct"
+        },
+        {
+          "kind": "file_io",
+          "line": 125,
+          "operation": "WRITE",
+          "target": "INPUT-FILE",
+          "relation": "direct"
+        }
+      ],
+      "undeclared": [],
+      "sha256": "d34e1c4670d9963f8174f46f0348802a5e7c674e3c264337131880452906bc21"
+    },
+    {
+      "behaviour_id": "PORTADD:3000-TERMINATE",
+      "status": "UNRESOLVED",
+      "unresolved_reasons": [
+        "line 147: RETURN-CODE is neither declared, a keyword, a paragraph nor the subject of a blocking decision (unknown dependency)"
+      ],
+      "units": [
+        "PORTADD"
+      ],
+      "external": [],
+      "undeclared": [],
+      "sha256": "2ed17e6b0a46e49e024a3f20159eab41a95c2c309d49f11b5631bf362a03bed7"
+    }
+  ],
+  "open_decisions": [
+    {
+      "id": "DR-F2-P0006-008",
+      "blocking": false,
+      "question": "Three ambiguous data references need a naming decision: RECV-CURSOR in DB2RECV is both an 88-level and an X(18) field; ERRHND is copied twice into ERRHNDL so ERR-* names exist in WORKING-STORAGE and the COMMAREA; PORT-RECORD is declared under both FDs of PORTADD. Which storage does each unqualified reference address?"
+    },
+    {
+      "id": "DR-F2-P0006-013",
+      "blocking": false,
+      "question": "Error paths do not stop as expected: PORTADD and PORTDEL continue the read loop on closed files after an open failure (returning RC 8), and PORTMSTR's 9000-ERROR GOBACKs from inside a PERFORM after closing a possibly unopened file. Should Java reproduce this behaviour or end the step/call immediately with RC 8?"
+    },
+    {
+      "id": "DR-F2-P0006-014",
+      "blocking": false,
+      "question": "PORTADD and PORTDEL (key PORT-KEY, PORTFLIO layout) and PORTMSTR (key PORT-ID, 103-byte PORTFOLIO-RECORD) all ASSIGN TO PORTFILE as an indexed file. Do they address the same VSAM dataset, and if so which record layout and key are authoritative?"
+    },
+    {
+      "id": "DR-F2-PKT0010-002",
+      "blocking": false,
+      "question": "Which character encoding (code page) do the files and areas described by these copybooks use for DISPLAY data on the legacy platform (EBCDIC 037, 1140, another EBCDIC variant, or ASCII)? The zoned-decimal test vectors and String codecs depend on it."
+    },
+    {
+      "id": "DR-PORTADD-001",
+      "blocking": true,
+      "question": "PORT-RECORD is declared under both file descriptions of PORTADD (COPY PORTFLIO at lines 37 and 40) and used unqualified in READ INPUT-FILE INTO and WRITE (STMT-000010, STMT-000014). Confirm that the WRITE targets the portfolio master record so that file status '22' means duplicate portfolio key."
+    },
+    {
+      "id": "DR-PORTADD-002",
+      "blocking": false,
+      "question": "On a file open failure PORTADD sets return code 8 and runs 3000-TERMINATE (line 100), but 0000-MAIN still runs the read loop and 3000-TERMINATE again, so records may be read and counted against files that are not open. Should the batch add stop immediately after an open failure?"
+    },
+    {
+      "id": "DR-PORTMSTR-001",
+      "blocking": true,
+      "question": "Which portfolio status domain is authoritative? PORTMSTR validates 'A', 'I', 'C' (VALID-STATUS, BR-095) while copybook PORTFLIO used by PORTADD and PORTDEL declares 'A' active, 'C' closed, 'S' suspended (BR-149); 'I' and 'S' each exist in only one place, and the PORTFLIO and PORTMSTR records are linked only by naming convention (REL-002, GAP-091). What do 'I' and 'S' mean, and do PORTMSTR and the batch programs maintain the same portfolio master?"
+    },
+    {
+      "id": "RVW-GAP-092",
+      "blocking": false,
+      "question": "GAP-092 (medium, DIAGRAM_RENDER_UNVERIFIED) is not addressed by any decision or requirement: Visual rendering of the 65 Mermaid diagrams is unverified. Acknowledge it as a known limitation (resolved_no_change) or exclude the affected units?"
+    },
+    {
+      "id": "RVW-GAP-104",
+      "blocking": false,
+      "question": "GAP-104 (low, DIAGRAM_INCOMPLETE) is not addressed by any decision or requirement: COMP-UNRESOLVED: all seven edges are unsupported. Acknowledge it as a known limitation (resolved_no_change) or exclude the affected units?"
+    },
+    {
+      "id": "RVW-GAP-211",
+      "blocking": false,
+      "question": "GAP-211 (low, MEDIUM_CONFIDENCE_RULE) is not addressed by any decision or requirement: BR-148 Validate client type is individual, corporate or trust — medium confidence. Acknowledge it as a known limitation (resolved_no_change) or exclude the affected units?"
+    }
+  ],
+  "authorisation": {
+    "generation_authorized": false,
+    "blockers": [
+      "config generation.java_generation_allowed is false (project authority)",
+      "no authorised orchestrator.java_target_dir",
+      "G4 is BLOCKED (needs signed G2, G3 and G4 approvals by trusted signers)",
+      "trust store: TRUST_NOT_CONFIGURED"
+    ],
+    "gates": {
+      "G0": "PASS",
+      "G1": "PASS",
+      "G2": "UNVERIFIED",
+      "G3": "BLOCKED",
+      "G4": "BLOCKED",
+      "G5": "BLOCKED",
+      "G6": "BLOCKED",
+      "G7": "BLOCKED",
+      "G8": "BLOCKED"
+    },
+    "trust": "TRUST_NOT_CONFIGURED",
+    "program_g2_scope": {
+      "readiness": "NOT_READY",
+      "blocking": 11,
+      "scope_sha256": "75b0c7aba3c2e872b873c3b3c4619c04fdf358f4e91a590553e12b44567773f5"
+    },
+    "note": "Engineering gates never authorise generation. Java may be generated only when generation_authorized is true."
+  }
+}

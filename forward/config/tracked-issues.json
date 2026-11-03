@@ -1,0 +1,14 @@
+{
+  "description": "STEP 3.5 retained source/evidence issues tracked through consolidation. Each issue is matched against the consolidated decision register: a decision matches when every pattern (case-insensitive regex) occurs in it. System-specific knowledge lives here, not in runtime source.",
+  "issues": [
+    { "issue": "HISTLD00 commit counting", "patterns": ["HISTLD00", "commit"] },
+    { "issue": "RCVPRC00 restart limit", "patterns": ["RCVPRC00", "restart"] },
+    { "issue": "PORTMSTR record length 100 vs 103", "patterns": ["PORTMSTR", "\\b103\\b"] },
+    { "issue": "PORTMSTR/PORTFLIO status value conflict", "patterns": ["PORTMSTR|PORTFLIO|BR-095|BR-149", "status"] },
+    { "issue": "FILEHNDL write to input-only file", "patterns": ["FILEHNDL", "input|VSAM"] },
+    { "issue": "SQLCA self-inclusion", "patterns": ["SQLCA"] },
+    { "issue": "SQLPOS missing", "patterns": ["SQLPOS"] },
+    { "issue": "DB2STAT copied as copybook", "patterns": ["DB2STAT", "COPY|copybook|program"] },
+    { "issue": "PORTREC missing", "patterns": ["PORTREC"] }
+  ]
+}

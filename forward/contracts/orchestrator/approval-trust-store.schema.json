@@ -1,0 +1,92 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://revforge.local/contracts/orchestrator/approval-trust-store.schema.json",
+  "title": "Approval trust store (provisioned outside the harness; public keys only)",
+  "description": "Trust anchor for human approvals and decision resolutions. It lists signer identities, their Ed25519 PUBLIC keys and their authorised roles. It is created and maintained by the organisation's key custodian, never by the harness or an agent. Private key material is rejected.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "contract",
+    "contract_version",
+    "issued_by",
+    "signers"
+  ],
+  "properties": {
+    "contract": {
+      "const": "approval-trust-store"
+    },
+    "contract_version": {
+      "const": "1.0"
+    },
+    "issued_by": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Custodian that provisioned the store."
+    },
+    "issued_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "signers": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "signer_id",
+          "public_key_pem",
+          "roles"
+        ],
+        "properties": {
+          "signer_id": {
+            "type": "string",
+            "pattern": "^[A-Za-z0-9._@-]{2,128}$"
+          },
+          "display_name": {
+            "type": "string"
+          },
+          "public_key_pem": {
+            "type": "string",
+            "pattern": "^-----BEGIN PUBLIC KEY-----"
+          },
+          "roles": {
+            "type": "array",
+            "minItems": 1,
+            "items": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          "valid_from": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "valid_until": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "revoked": {
+            "type": "boolean"
+          },
+          "revoked_at": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "note": {
+            "type": "string"
+          },
+          "scopes": {
+            "description": "Optional scope restriction: the scope selectors (application | programs:A,B | requirements:R) this signer may sign for. Absent means unrestricted.",
+            "type": "array",
+            "minItems": 1,
+            "items": {
+              "type": "string",
+              "minLength": 1
+            }
+          }
+        }
+      }
+    }
+  }
+}

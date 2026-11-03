@@ -1,0 +1,879 @@
+{
+  "generated_at": "2026-11-01T03:36:14.901Z",
+  "doctor": {
+    "ok_for_installation": true,
+    "ok_for_live": false,
+    "checks": [
+      {
+        "id": "release_verified",
+        "ok": true,
+        "detail": "bmad-method@6.12.4 staged release matches the pin"
+      },
+      {
+        "id": "executor_copy",
+        "ok": true,
+        "detail": "executor copy identical to the pin (360 files)"
+      },
+      {
+        "id": "npm_dependencies",
+        "ok": true,
+        "detail": "13 runtime dependencies installed (lock f31f85fa2ceeafa2…, --ignore-scripts)"
+      },
+      {
+        "id": "uv",
+        "ok": true,
+        "detail": "uv 0.13.6 (329bf9448 2026-10-26 x86_64-pc-windows-msvc) in the isolated venv"
+      },
+      {
+        "id": "python",
+        "ok": true,
+        "detail": "Python 3.12.10 (>= 3.11 required by BMad scripts)"
+      },
+      {
+        "id": "claude_cli",
+        "ok": true,
+        "detail": "Claude Code CLI 2.1.302 (Claude Code) (headless runner for BMad skills)"
+      },
+      {
+        "id": "isolated_workspace",
+        "ok": true,
+        "detail": "1 installed workspace(s) with the six bound workflows byte-identical to the pin: synthetic-001"
+      },
+      {
+        "id": "isolation",
+        "ok": true,
+        "detail": "executor and workspaces live under forward/integrations/bmad/executor; repository .claude/, _bmad/ and _bmad-output/ untouched"
+      },
+      {
+        "id": "isolated_home",
+        "ok": true,
+        "detail": "isolated HOME for the installer and uv (0 file(s) written there)"
+      },
+      {
+        "id": "provider_disclosure_authorization",
+        "ok": false,
+        "detail": "no signed AI-provider disclosure authorization exists for anthropic (claude-code-cli); signed source-export authorizations are bound to provider 'openai' by contract and do not authorise disclosure to Claude"
+      },
+      {
+        "id": "live_requested",
+        "ok": false,
+        "detail": "bindings.json live_execution.requested is false"
+      }
+    ],
+    "workspaces": [
+      {
+        "name": "synthetic-001",
+        "path": "D:\\PROJECTS\\REVFORGE-Harness\\forward\\integrations\\bmad\\executor\\workspaces\\synthetic-001",
+        "skills": [
+          "bmad-advanced-elicitation",
+          "bmad-agent-analyst",
+          "bmad-agent-architect",
+          "bmad-agent-dev",
+          "bmad-agent-pm",
+          "bmad-agent-ux-designer",
+          "bmad-architecture",
+          "bmad-brainstorming",
+          "bmad-build",
+          "bmad-build-auto",
+          "bmad-code-review",
+          "bmad-correct-course",
+          "bmad-create-epics-and-stories",
+          "bmad-customize",
+          "bmad-deep-recon",
+          "bmad-forge-idea",
+          "bmad-help",
+          "bmad-party-mode",
+          "bmad-prd",
+          "bmad-prfaq",
+          "bmad-product-brief",
+          "bmad-project-context",
+          "bmad-qa-generate-e2e-tests",
+          "bmad-retrospective",
+          "bmad-review",
+          "bmad-spec",
+          "bmad-sprint-planning",
+          "bmad-ux",
+          "bmad-walkthrough"
+        ],
+        "bound_skills_verified": true,
+        "problems": []
+      }
+    ],
+    "versions": {
+      "uv": "uv 0.13.6 (329bf9448 2026-10-26 x86_64-pc-windows-msvc)",
+      "python": "Python 3.12.10",
+      "claude": "2.1.302 (Claude Code)",
+      "node": "v22.12.0"
+    }
+  },
+  "eligibility": [
+    {
+      "binding_id": "BMAD-PRD",
+      "workflow_id": "bmad-prd",
+      "agent": "F1",
+      "scope": "programs:RTNCDE00",
+      "scope_sha256": "88d8562c1b30170f33446a43303d54d47fd102ec25c3d79249749d6dfd126f13",
+      "eligible": false,
+      "reasons": [
+        "workflow_state: workflow state is REQUIREMENTS_DRAFTED; BMAD-PRD is allowed only in REQUIREMENTS_APPROVED, ARCHITECTURE_DRAFTED, ARCHITECTURE_APPROVED, STORIES_DRAFTED, STORIES_APPROVED",
+        "gate_G2: G2 has not passed on the current baseline",
+        "g2_reverified: G2 re-evaluated now: UNVERIFIED — G2 not approved for scope application: NOT_READY (395 blocking finding(s)); failing checks: canonical_rule_coverage, cross_batch_reconciliation, requirement_evidence, runtime_evidence, semantic_contradictions, contradicted_claims, blocking_decisions, data_contracts, scope_classification, readiness, trust_anchor, human_approval",
+        "exact_scope: requested scope programs:RTNCDE00 (digest 88d8562c1b30170f…) is not the G2-approved scope (none approved)",
+        "no signed BMad execution authorization exists (none can be imported in STEP 6)",
+        "executor provider_disclosure_authorization: no signed AI-provider disclosure authorization exists for anthropic (claude-code-cli); signed source-export authorizations are bound to provider 'openai' by contract and do not authorise disclosure to Claude",
+        "executor live_requested: bindings.json live_execution.requested is false"
+      ],
+      "workflow_checks": [
+        {
+          "id": "mode",
+          "ok": true,
+          "detail": "mode LIVE"
+        },
+        {
+          "id": "release_verified",
+          "ok": true,
+          "detail": "bmad-method@6.12.4 verified (7 checks)"
+        },
+        {
+          "id": "binding_valid",
+          "ok": true,
+          "detail": "BMAD-PRD -> bmad-prd (F1) valid"
+        },
+        {
+          "id": "workflow_state",
+          "ok": false,
+          "detail": "workflow state is REQUIREMENTS_DRAFTED; BMAD-PRD is allowed only in REQUIREMENTS_APPROVED, ARCHITECTURE_DRAFTED, ARCHITECTURE_APPROVED, STORIES_DRAFTED, STORIES_APPROVED"
+        },
+        {
+          "id": "gate_G2",
+          "ok": false,
+          "detail": "G2 has not passed on the current baseline"
+        },
+        {
+          "id": "g2_reverified",
+          "ok": false,
+          "detail": "G2 re-evaluated now: UNVERIFIED — G2 not approved for scope application: NOT_READY (395 blocking finding(s)); failing checks: canonical_rule_coverage, cross_batch_reconciliation, requirement_evidence, runtime_evidence, semantic_contradictions, contradicted_claims, blocking_decisions, data_contracts, scope_classification, readiness, trust_anchor, human_approval"
+        },
+        {
+          "id": "exact_scope",
+          "ok": false,
+          "detail": "requested scope programs:RTNCDE00 (digest 88d8562c1b30170f…) is not the G2-approved scope (none approved)"
+        }
+      ],
+      "executor_checks": [
+        {
+          "id": "release_verified",
+          "ok": true,
+          "detail": "bmad-method@6.12.4 staged release matches the pin"
+        },
+        {
+          "id": "executor_copy",
+          "ok": true,
+          "detail": "executor copy identical to the pin (360 files)"
+        },
+        {
+          "id": "npm_dependencies",
+          "ok": true,
+          "detail": "13 runtime dependencies installed (lock f31f85fa2ceeafa2…, --ignore-scripts)"
+        },
+        {
+          "id": "uv",
+          "ok": true,
+          "detail": "uv 0.13.6 (329bf9448 2026-10-26 x86_64-pc-windows-msvc) in the isolated venv"
+        },
+        {
+          "id": "python",
+          "ok": true,
+          "detail": "Python 3.12.10 (>= 3.11 required by BMad scripts)"
+        },
+        {
+          "id": "claude_cli",
+          "ok": true,
+          "detail": "Claude Code CLI 2.1.302 (Claude Code) (headless runner for BMad skills)"
+        },
+        {
+          "id": "isolated_workspace",
+          "ok": true,
+          "detail": "1 installed workspace(s) with the six bound workflows byte-identical to the pin: synthetic-001"
+        },
+        {
+          "id": "isolation",
+          "ok": true,
+          "detail": "executor and workspaces live under forward/integrations/bmad/executor; repository .claude/, _bmad/ and _bmad-output/ untouched"
+        },
+        {
+          "id": "isolated_home",
+          "ok": true,
+          "detail": "isolated HOME for the installer and uv (0 file(s) written there)"
+        },
+        {
+          "id": "provider_disclosure_authorization",
+          "ok": false,
+          "detail": "no signed AI-provider disclosure authorization exists for anthropic (claude-code-cli); signed source-export authorizations are bound to provider 'openai' by contract and do not authorise disclosure to Claude"
+        },
+        {
+          "id": "live_requested",
+          "ok": false,
+          "detail": "bindings.json live_execution.requested is false"
+        }
+      ]
+    },
+    {
+      "binding_id": "BMAD-ARCH",
+      "workflow_id": "bmad-architecture",
+      "agent": "F3",
+      "scope": "programs:RTNCDE00",
+      "scope_sha256": "88d8562c1b30170f33446a43303d54d47fd102ec25c3d79249749d6dfd126f13",
+      "eligible": false,
+      "reasons": [
+        "workflow_state: workflow state is REQUIREMENTS_DRAFTED; BMAD-ARCH is allowed only in REQUIREMENTS_APPROVED, ARCHITECTURE_DRAFTED",
+        "gate_G2: G2 has not passed on the current baseline",
+        "g2_reverified: G2 re-evaluated now: UNVERIFIED — G2 not approved for scope application: NOT_READY (395 blocking finding(s)); failing checks: canonical_rule_coverage, cross_batch_reconciliation, requirement_evidence, runtime_evidence, semantic_contradictions, contradicted_claims, blocking_decisions, data_contracts, scope_classification, readiness, trust_anchor, human_approval",
+        "exact_scope: requested scope programs:RTNCDE00 (digest 88d8562c1b30170f…) is not the G2-approved scope (none approved)",
+        "no signed BMad execution authorization exists (none can be imported in STEP 6)",
+        "executor provider_disclosure_authorization: no signed AI-provider disclosure authorization exists for anthropic (claude-code-cli); signed source-export authorizations are bound to provider 'openai' by contract and do not authorise disclosure to Claude",
+        "executor live_requested: bindings.json live_execution.requested is false"
+      ],
+      "workflow_checks": [
+        {
+          "id": "mode",
+          "ok": true,
+          "detail": "mode LIVE"
+        },
+        {
+          "id": "release_verified",
+          "ok": true,
+          "detail": "bmad-method@6.12.4 verified (7 checks)"
+        },
+        {
+          "id": "binding_valid",
+          "ok": true,
+          "detail": "BMAD-ARCH -> bmad-architecture (F3) valid"
+        },
+        {
+          "id": "workflow_state",
+          "ok": false,
+          "detail": "workflow state is REQUIREMENTS_DRAFTED; BMAD-ARCH is allowed only in REQUIREMENTS_APPROVED, ARCHITECTURE_DRAFTED"
+        },
+        {
+          "id": "gate_G2",
+          "ok": false,
+          "detail": "G2 has not passed on the current baseline"
+        },
+        {
+          "id": "g2_reverified",
+          "ok": false,
+          "detail": "G2 re-evaluated now: UNVERIFIED — G2 not approved for scope application: NOT_READY (395 blocking finding(s)); failing checks: canonical_rule_coverage, cross_batch_reconciliation, requirement_evidence, runtime_evidence, semantic_contradictions, contradicted_claims, blocking_decisions, data_contracts, scope_classification, readiness, trust_anchor, human_approval"
+        },
+        {
+          "id": "exact_scope",
+          "ok": false,
+          "detail": "requested scope programs:RTNCDE00 (digest 88d8562c1b30170f…) is not the G2-approved scope (none approved)"
+        }
+      ],
+      "executor_checks": [
+        {
+          "id": "release_verified",
+          "ok": true,
+          "detail": "bmad-method@6.12.4 staged release matches the pin"
+        },
+        {
+          "id": "executor_copy",
+          "ok": true,
+          "detail": "executor copy identical to the pin (360 files)"
+        },
+        {
+          "id": "npm_dependencies",
+          "ok": true,
+          "detail": "13 runtime dependencies installed (lock f31f85fa2ceeafa2…, --ignore-scripts)"
+        },
+        {
+          "id": "uv",
+          "ok": true,
+          "detail": "uv 0.13.6 (329bf9448 2026-10-26 x86_64-pc-windows-msvc) in the isolated venv"
+        },
+        {
+          "id": "python",
+          "ok": true,
+          "detail": "Python 3.12.10 (>= 3.11 required by BMad scripts)"
+        },
+        {
+          "id": "claude_cli",
+          "ok": true,
+          "detail": "Claude Code CLI 2.1.302 (Claude Code) (headless runner for BMad skills)"
+        },
+        {
+          "id": "isolated_workspace",
+          "ok": true,
+          "detail": "1 installed workspace(s) with the six bound workflows byte-identical to the pin: synthetic-001"
+        },
+        {
+          "id": "isolation",
+          "ok": true,
+          "detail": "executor and workspaces live under forward/integrations/bmad/executor; repository .claude/, _bmad/ and _bmad-output/ untouched"
+        },
+        {
+          "id": "isolated_home",
+          "ok": true,
+          "detail": "isolated HOME for the installer and uv (0 file(s) written there)"
+        },
+        {
+          "id": "provider_disclosure_authorization",
+          "ok": false,
+          "detail": "no signed AI-provider disclosure authorization exists for anthropic (claude-code-cli); signed source-export authorizations are bound to provider 'openai' by contract and do not authorise disclosure to Claude"
+        },
+        {
+          "id": "live_requested",
+          "ok": false,
+          "detail": "bindings.json live_execution.requested is false"
+        }
+      ]
+    },
+    {
+      "binding_id": "BMAD-EPICS",
+      "workflow_id": "bmad-create-epics-and-stories",
+      "agent": "F4",
+      "scope": "programs:RTNCDE00",
+      "scope_sha256": "88d8562c1b30170f33446a43303d54d47fd102ec25c3d79249749d6dfd126f13",
+      "eligible": false,
+      "reasons": [
+        "workflow_state: workflow state is REQUIREMENTS_DRAFTED; BMAD-EPICS is allowed only in ARCHITECTURE_APPROVED, STORIES_DRAFTED",
+        "gate_G2: G2 has not passed on the current baseline",
+        "gate_G3: G3 has not passed on the current baseline",
+        "g2_reverified: G2 re-evaluated now: UNVERIFIED — G2 not approved for scope application: NOT_READY (395 blocking finding(s)); failing checks: canonical_rule_coverage, cross_batch_reconciliation, requirement_evidence, runtime_evidence, semantic_contradictions, contradicted_claims, blocking_decisions, data_contracts, scope_classification, readiness, trust_anchor, human_approval",
+        "exact_scope: requested scope programs:RTNCDE00 (digest 88d8562c1b30170f…) is not the G2-approved scope (none approved)",
+        "architecture_artifacts: no accepted F3 receipt or recorded BMad architecture result for this scope (mock results never count)",
+        "no signed BMad execution authorization exists (none can be imported in STEP 6)",
+        "executor provider_disclosure_authorization: no signed AI-provider disclosure authorization exists for anthropic (claude-code-cli); signed source-export authorizations are bound to provider 'openai' by contract and do not authorise disclosure to Claude",
+        "executor live_requested: bindings.json live_execution.requested is false"
+      ],
+      "workflow_checks": [
+        {
+          "id": "mode",
+          "ok": true,
+          "detail": "mode LIVE"
+        },
+        {
+          "id": "release_verified",
+          "ok": true,
+          "detail": "bmad-method@6.12.4 verified (7 checks)"
+        },
+        {
+          "id": "binding_valid",
+          "ok": true,
+          "detail": "BMAD-EPICS -> bmad-create-epics-and-stories (F4) valid"
+        },
+        {
+          "id": "workflow_state",
+          "ok": false,
+          "detail": "workflow state is REQUIREMENTS_DRAFTED; BMAD-EPICS is allowed only in ARCHITECTURE_APPROVED, STORIES_DRAFTED"
+        },
+        {
+          "id": "gate_G2",
+          "ok": false,
+          "detail": "G2 has not passed on the current baseline"
+        },
+        {
+          "id": "gate_G3",
+          "ok": false,
+          "detail": "G3 has not passed on the current baseline"
+        },
+        {
+          "id": "g2_reverified",
+          "ok": false,
+          "detail": "G2 re-evaluated now: UNVERIFIED — G2 not approved for scope application: NOT_READY (395 blocking finding(s)); failing checks: canonical_rule_coverage, cross_batch_reconciliation, requirement_evidence, runtime_evidence, semantic_contradictions, contradicted_claims, blocking_decisions, data_contracts, scope_classification, readiness, trust_anchor, human_approval"
+        },
+        {
+          "id": "exact_scope",
+          "ok": false,
+          "detail": "requested scope programs:RTNCDE00 (digest 88d8562c1b30170f…) is not the G2-approved scope (none approved)"
+        },
+        {
+          "id": "architecture_artifacts",
+          "ok": false,
+          "detail": "no accepted F3 receipt or recorded BMad architecture result for this scope (mock results never count)"
+        }
+      ],
+      "executor_checks": [
+        {
+          "id": "release_verified",
+          "ok": true,
+          "detail": "bmad-method@6.12.4 staged release matches the pin"
+        },
+        {
+          "id": "executor_copy",
+          "ok": true,
+          "detail": "executor copy identical to the pin (360 files)"
+        },
+        {
+          "id": "npm_dependencies",
+          "ok": true,
+          "detail": "13 runtime dependencies installed (lock f31f85fa2ceeafa2…, --ignore-scripts)"
+        },
+        {
+          "id": "uv",
+          "ok": true,
+          "detail": "uv 0.13.6 (329bf9448 2026-10-26 x86_64-pc-windows-msvc) in the isolated venv"
+        },
+        {
+          "id": "python",
+          "ok": true,
+          "detail": "Python 3.12.10 (>= 3.11 required by BMad scripts)"
+        },
+        {
+          "id": "claude_cli",
+          "ok": true,
+          "detail": "Claude Code CLI 2.1.302 (Claude Code) (headless runner for BMad skills)"
+        },
+        {
+          "id": "isolated_workspace",
+          "ok": true,
+          "detail": "1 installed workspace(s) with the six bound workflows byte-identical to the pin: synthetic-001"
+        },
+        {
+          "id": "isolation",
+          "ok": true,
+          "detail": "executor and workspaces live under forward/integrations/bmad/executor; repository .claude/, _bmad/ and _bmad-output/ untouched"
+        },
+        {
+          "id": "isolated_home",
+          "ok": true,
+          "detail": "isolated HOME for the installer and uv (0 file(s) written there)"
+        },
+        {
+          "id": "provider_disclosure_authorization",
+          "ok": false,
+          "detail": "no signed AI-provider disclosure authorization exists for anthropic (claude-code-cli); signed source-export authorizations are bound to provider 'openai' by contract and do not authorise disclosure to Claude"
+        },
+        {
+          "id": "live_requested",
+          "ok": false,
+          "detail": "bindings.json live_execution.requested is false"
+        }
+      ]
+    },
+    {
+      "binding_id": "BMAD-SPRINT",
+      "workflow_id": "bmad-sprint-planning",
+      "agent": "F4",
+      "scope": "programs:RTNCDE00",
+      "scope_sha256": "88d8562c1b30170f33446a43303d54d47fd102ec25c3d79249749d6dfd126f13",
+      "eligible": false,
+      "reasons": [
+        "workflow_state: workflow state is REQUIREMENTS_DRAFTED; BMAD-SPRINT is allowed only in STORIES_APPROVED",
+        "gate_G2: G2 has not passed on the current baseline",
+        "gate_G3: G3 has not passed on the current baseline",
+        "gate_G4: G4 has not passed on the current baseline",
+        "g2_reverified: G2 re-evaluated now: UNVERIFIED — G2 not approved for scope application: NOT_READY (395 blocking finding(s)); failing checks: canonical_rule_coverage, cross_batch_reconciliation, requirement_evidence, runtime_evidence, semantic_contradictions, contradicted_claims, blocking_decisions, data_contracts, scope_classification, readiness, trust_anchor, human_approval",
+        "exact_scope: requested scope programs:RTNCDE00 (digest 88d8562c1b30170f…) is not the G2-approved scope (none approved)",
+        "approved_stories: stories are not approved (0 story result(s); G4 not passed)",
+        "no signed BMad execution authorization exists (none can be imported in STEP 6)",
+        "executor provider_disclosure_authorization: no signed AI-provider disclosure authorization exists for anthropic (claude-code-cli); signed source-export authorizations are bound to provider 'openai' by contract and do not authorise disclosure to Claude",
+        "executor live_requested: bindings.json live_execution.requested is false"
+      ],
+      "workflow_checks": [
+        {
+          "id": "mode",
+          "ok": true,
+          "detail": "mode LIVE"
+        },
+        {
+          "id": "release_verified",
+          "ok": true,
+          "detail": "bmad-method@6.12.4 verified (7 checks)"
+        },
+        {
+          "id": "binding_valid",
+          "ok": true,
+          "detail": "BMAD-SPRINT -> bmad-sprint-planning (F4) valid"
+        },
+        {
+          "id": "workflow_state",
+          "ok": false,
+          "detail": "workflow state is REQUIREMENTS_DRAFTED; BMAD-SPRINT is allowed only in STORIES_APPROVED"
+        },
+        {
+          "id": "gate_G2",
+          "ok": false,
+          "detail": "G2 has not passed on the current baseline"
+        },
+        {
+          "id": "gate_G3",
+          "ok": false,
+          "detail": "G3 has not passed on the current baseline"
+        },
+        {
+          "id": "gate_G4",
+          "ok": false,
+          "detail": "G4 has not passed on the current baseline"
+        },
+        {
+          "id": "g2_reverified",
+          "ok": false,
+          "detail": "G2 re-evaluated now: UNVERIFIED — G2 not approved for scope application: NOT_READY (395 blocking finding(s)); failing checks: canonical_rule_coverage, cross_batch_reconciliation, requirement_evidence, runtime_evidence, semantic_contradictions, contradicted_claims, blocking_decisions, data_contracts, scope_classification, readiness, trust_anchor, human_approval"
+        },
+        {
+          "id": "exact_scope",
+          "ok": false,
+          "detail": "requested scope programs:RTNCDE00 (digest 88d8562c1b30170f…) is not the G2-approved scope (none approved)"
+        },
+        {
+          "id": "approved_stories",
+          "ok": false,
+          "detail": "stories are not approved (0 story result(s); G4 not passed)"
+        }
+      ],
+      "executor_checks": [
+        {
+          "id": "release_verified",
+          "ok": true,
+          "detail": "bmad-method@6.12.4 staged release matches the pin"
+        },
+        {
+          "id": "executor_copy",
+          "ok": true,
+          "detail": "executor copy identical to the pin (360 files)"
+        },
+        {
+          "id": "npm_dependencies",
+          "ok": true,
+          "detail": "13 runtime dependencies installed (lock f31f85fa2ceeafa2…, --ignore-scripts)"
+        },
+        {
+          "id": "uv",
+          "ok": true,
+          "detail": "uv 0.13.6 (329bf9448 2026-10-26 x86_64-pc-windows-msvc) in the isolated venv"
+        },
+        {
+          "id": "python",
+          "ok": true,
+          "detail": "Python 3.12.10 (>= 3.11 required by BMad scripts)"
+        },
+        {
+          "id": "claude_cli",
+          "ok": true,
+          "detail": "Claude Code CLI 2.1.302 (Claude Code) (headless runner for BMad skills)"
+        },
+        {
+          "id": "isolated_workspace",
+          "ok": true,
+          "detail": "1 installed workspace(s) with the six bound workflows byte-identical to the pin: synthetic-001"
+        },
+        {
+          "id": "isolation",
+          "ok": true,
+          "detail": "executor and workspaces live under forward/integrations/bmad/executor; repository .claude/, _bmad/ and _bmad-output/ untouched"
+        },
+        {
+          "id": "isolated_home",
+          "ok": true,
+          "detail": "isolated HOME for the installer and uv (0 file(s) written there)"
+        },
+        {
+          "id": "provider_disclosure_authorization",
+          "ok": false,
+          "detail": "no signed AI-provider disclosure authorization exists for anthropic (claude-code-cli); signed source-export authorizations are bound to provider 'openai' by contract and do not authorise disclosure to Claude"
+        },
+        {
+          "id": "live_requested",
+          "ok": false,
+          "detail": "bindings.json live_execution.requested is false"
+        }
+      ]
+    },
+    {
+      "binding_id": "BMAD-BUILD",
+      "workflow_id": "bmad-build",
+      "agent": "F5",
+      "scope": "programs:RTNCDE00",
+      "scope_sha256": "88d8562c1b30170f33446a43303d54d47fd102ec25c3d79249749d6dfd126f13",
+      "eligible": false,
+      "reasons": [
+        "workflow_state: workflow state is REQUIREMENTS_DRAFTED; BMAD-BUILD is allowed only in STORIES_APPROVED, IMPLEMENTING",
+        "gate_G2: G2 has not passed on the current baseline",
+        "gate_G3: G3 has not passed on the current baseline",
+        "gate_G4: G4 has not passed on the current baseline",
+        "g2_reverified: G2 re-evaluated now: UNVERIFIED — G2 not approved for scope application: NOT_READY (395 blocking finding(s)); failing checks: canonical_rule_coverage, cross_batch_reconciliation, requirement_evidence, runtime_evidence, semantic_contradictions, contradicted_claims, blocking_decisions, data_contracts, scope_classification, readiness, trust_anchor, human_approval",
+        "exact_scope: requested scope programs:RTNCDE00 (digest 88d8562c1b30170f…) is not the G2-approved scope (none approved)",
+        "approved_stories: stories are not approved (0 story result(s); G4 not passed)",
+        "java_target_dir: no Java target directory is authorised (orchestrator.java_target_dir is null)",
+        "generation_authorized: Java generation is not authorised (generation.java_generation_allowed and G4 PASS are both required)",
+        "Build is disabled: production Java generation is not authorised in STEP 7",
+        "no signed BMad execution authorization exists (none can be imported in STEP 6)",
+        "executor provider_disclosure_authorization: no signed AI-provider disclosure authorization exists for anthropic (claude-code-cli); signed source-export authorizations are bound to provider 'openai' by contract and do not authorise disclosure to Claude",
+        "executor live_requested: bindings.json live_execution.requested is false"
+      ],
+      "workflow_checks": [
+        {
+          "id": "mode",
+          "ok": true,
+          "detail": "mode LIVE"
+        },
+        {
+          "id": "release_verified",
+          "ok": true,
+          "detail": "bmad-method@6.12.4 verified (7 checks)"
+        },
+        {
+          "id": "binding_valid",
+          "ok": true,
+          "detail": "BMAD-BUILD -> bmad-build (F5) valid"
+        },
+        {
+          "id": "workflow_state",
+          "ok": false,
+          "detail": "workflow state is REQUIREMENTS_DRAFTED; BMAD-BUILD is allowed only in STORIES_APPROVED, IMPLEMENTING"
+        },
+        {
+          "id": "gate_G2",
+          "ok": false,
+          "detail": "G2 has not passed on the current baseline"
+        },
+        {
+          "id": "gate_G3",
+          "ok": false,
+          "detail": "G3 has not passed on the current baseline"
+        },
+        {
+          "id": "gate_G4",
+          "ok": false,
+          "detail": "G4 has not passed on the current baseline"
+        },
+        {
+          "id": "g2_reverified",
+          "ok": false,
+          "detail": "G2 re-evaluated now: UNVERIFIED — G2 not approved for scope application: NOT_READY (395 blocking finding(s)); failing checks: canonical_rule_coverage, cross_batch_reconciliation, requirement_evidence, runtime_evidence, semantic_contradictions, contradicted_claims, blocking_decisions, data_contracts, scope_classification, readiness, trust_anchor, human_approval"
+        },
+        {
+          "id": "exact_scope",
+          "ok": false,
+          "detail": "requested scope programs:RTNCDE00 (digest 88d8562c1b30170f…) is not the G2-approved scope (none approved)"
+        },
+        {
+          "id": "approved_stories",
+          "ok": false,
+          "detail": "stories are not approved (0 story result(s); G4 not passed)"
+        },
+        {
+          "id": "java_target_dir",
+          "ok": false,
+          "detail": "no Java target directory is authorised (orchestrator.java_target_dir is null)"
+        },
+        {
+          "id": "generation_authorized",
+          "ok": false,
+          "detail": "Java generation is not authorised (generation.java_generation_allowed and G4 PASS are both required)"
+        }
+      ],
+      "executor_checks": [
+        {
+          "id": "release_verified",
+          "ok": true,
+          "detail": "bmad-method@6.12.4 staged release matches the pin"
+        },
+        {
+          "id": "executor_copy",
+          "ok": true,
+          "detail": "executor copy identical to the pin (360 files)"
+        },
+        {
+          "id": "npm_dependencies",
+          "ok": true,
+          "detail": "13 runtime dependencies installed (lock f31f85fa2ceeafa2…, --ignore-scripts)"
+        },
+        {
+          "id": "uv",
+          "ok": true,
+          "detail": "uv 0.13.6 (329bf9448 2026-10-26 x86_64-pc-windows-msvc) in the isolated venv"
+        },
+        {
+          "id": "python",
+          "ok": true,
+          "detail": "Python 3.12.10 (>= 3.11 required by BMad scripts)"
+        },
+        {
+          "id": "claude_cli",
+          "ok": true,
+          "detail": "Claude Code CLI 2.1.302 (Claude Code) (headless runner for BMad skills)"
+        },
+        {
+          "id": "isolated_workspace",
+          "ok": true,
+          "detail": "1 installed workspace(s) with the six bound workflows byte-identical to the pin: synthetic-001"
+        },
+        {
+          "id": "isolation",
+          "ok": true,
+          "detail": "executor and workspaces live under forward/integrations/bmad/executor; repository .claude/, _bmad/ and _bmad-output/ untouched"
+        },
+        {
+          "id": "isolated_home",
+          "ok": true,
+          "detail": "isolated HOME for the installer and uv (0 file(s) written there)"
+        },
+        {
+          "id": "provider_disclosure_authorization",
+          "ok": false,
+          "detail": "no signed AI-provider disclosure authorization exists for anthropic (claude-code-cli); signed source-export authorizations are bound to provider 'openai' by contract and do not authorise disclosure to Claude"
+        },
+        {
+          "id": "live_requested",
+          "ok": false,
+          "detail": "bindings.json live_execution.requested is false"
+        }
+      ]
+    },
+    {
+      "binding_id": "BMAD-REVIEW",
+      "workflow_id": "bmad-code-review",
+      "agent": "F7",
+      "scope": "programs:RTNCDE00",
+      "scope_sha256": "88d8562c1b30170f33446a43303d54d47fd102ec25c3d79249749d6dfd126f13",
+      "eligible": false,
+      "reasons": [
+        "workflow_state: workflow state is REQUIREMENTS_DRAFTED; BMAD-REVIEW is allowed only in REVIEWING",
+        "gate_G2: G2 has not passed on the current baseline",
+        "gate_G3: G3 has not passed on the current baseline",
+        "gate_G4: G4 has not passed on the current baseline",
+        "gate_G5: G5 has not passed on the current baseline",
+        "gate_G6: G6 has not passed on the current baseline",
+        "g2_reverified: G2 re-evaluated now: UNVERIFIED — G2 not approved for scope application: NOT_READY (395 blocking finding(s)); failing checks: canonical_rule_coverage, cross_batch_reconciliation, requirement_evidence, runtime_evidence, semantic_contradictions, contradicted_claims, blocking_decisions, data_contracts, scope_classification, readiness, trust_anchor, human_approval",
+        "exact_scope: requested scope programs:RTNCDE00 (digest 88d8562c1b30170f…) is not the G2-approved scope (none approved)",
+        "implementation_artifacts: no actual implementation artefacts are recorded for this scope",
+        "independent_test_receipt: independent F6 testing has not been recorded and passed (G6); review is not possible without it",
+        "no signed BMad execution authorization exists (none can be imported in STEP 6)",
+        "executor provider_disclosure_authorization: no signed AI-provider disclosure authorization exists for anthropic (claude-code-cli); signed source-export authorizations are bound to provider 'openai' by contract and do not authorise disclosure to Claude",
+        "executor live_requested: bindings.json live_execution.requested is false"
+      ],
+      "workflow_checks": [
+        {
+          "id": "mode",
+          "ok": true,
+          "detail": "mode LIVE"
+        },
+        {
+          "id": "release_verified",
+          "ok": true,
+          "detail": "bmad-method@6.12.4 verified (7 checks)"
+        },
+        {
+          "id": "binding_valid",
+          "ok": true,
+          "detail": "BMAD-REVIEW -> bmad-code-review (F7) valid"
+        },
+        {
+          "id": "workflow_state",
+          "ok": false,
+          "detail": "workflow state is REQUIREMENTS_DRAFTED; BMAD-REVIEW is allowed only in REVIEWING"
+        },
+        {
+          "id": "gate_G2",
+          "ok": false,
+          "detail": "G2 has not passed on the current baseline"
+        },
+        {
+          "id": "gate_G3",
+          "ok": false,
+          "detail": "G3 has not passed on the current baseline"
+        },
+        {
+          "id": "gate_G4",
+          "ok": false,
+          "detail": "G4 has not passed on the current baseline"
+        },
+        {
+          "id": "gate_G5",
+          "ok": false,
+          "detail": "G5 has not passed on the current baseline"
+        },
+        {
+          "id": "gate_G6",
+          "ok": false,
+          "detail": "G6 has not passed on the current baseline"
+        },
+        {
+          "id": "g2_reverified",
+          "ok": false,
+          "detail": "G2 re-evaluated now: UNVERIFIED — G2 not approved for scope application: NOT_READY (395 blocking finding(s)); failing checks: canonical_rule_coverage, cross_batch_reconciliation, requirement_evidence, runtime_evidence, semantic_contradictions, contradicted_claims, blocking_decisions, data_contracts, scope_classification, readiness, trust_anchor, human_approval"
+        },
+        {
+          "id": "exact_scope",
+          "ok": false,
+          "detail": "requested scope programs:RTNCDE00 (digest 88d8562c1b30170f…) is not the G2-approved scope (none approved)"
+        },
+        {
+          "id": "implementation_artifacts",
+          "ok": false,
+          "detail": "no actual implementation artefacts are recorded for this scope"
+        },
+        {
+          "id": "independent_test_receipt",
+          "ok": false,
+          "detail": "independent F6 testing has not been recorded and passed (G6); review is not possible without it"
+        },
+        {
+          "id": "reviewer_not_implementer",
+          "ok": true,
+          "detail": "reviewer F7 did not produce the implementation"
+        }
+      ],
+      "executor_checks": [
+        {
+          "id": "release_verified",
+          "ok": true,
+          "detail": "bmad-method@6.12.4 staged release matches the pin"
+        },
+        {
+          "id": "executor_copy",
+          "ok": true,
+          "detail": "executor copy identical to the pin (360 files)"
+        },
+        {
+          "id": "npm_dependencies",
+          "ok": true,
+          "detail": "13 runtime dependencies installed (lock f31f85fa2ceeafa2…, --ignore-scripts)"
+        },
+        {
+          "id": "uv",
+          "ok": true,
+          "detail": "uv 0.13.6 (329bf9448 2026-10-26 x86_64-pc-windows-msvc) in the isolated venv"
+        },
+        {
+          "id": "python",
+          "ok": true,
+          "detail": "Python 3.12.10 (>= 3.11 required by BMad scripts)"
+        },
+        {
+          "id": "claude_cli",
+          "ok": true,
+          "detail": "Claude Code CLI 2.1.302 (Claude Code) (headless runner for BMad skills)"
+        },
+        {
+          "id": "isolated_workspace",
+          "ok": true,
+          "detail": "1 installed workspace(s) with the six bound workflows byte-identical to the pin: synthetic-001"
+        },
+        {
+          "id": "isolation",
+          "ok": true,
+          "detail": "executor and workspaces live under forward/integrations/bmad/executor; repository .claude/, _bmad/ and _bmad-output/ untouched"
+        },
+        {
+          "id": "isolated_home",
+          "ok": true,
+          "detail": "isolated HOME for the installer and uv (0 file(s) written there)"
+        },
+        {
+          "id": "provider_disclosure_authorization",
+          "ok": false,
+          "detail": "no signed AI-provider disclosure authorization exists for anthropic (claude-code-cli); signed source-export authorizations are bound to provider 'openai' by contract and do not authorise disclosure to Claude"
+        },
+        {
+          "id": "live_requested",
+          "ok": false,
+          "detail": "bindings.json live_execution.requested is false"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,297 @@
+{
+  "gate": "SOURCE_READINESS",
+  "subject": "PORTTEST",
+  "status": "FAIL",
+  "checks": [
+    {
+      "id": "source_available",
+      "ok": true,
+      "detail": "src/programs/portfolio/PORTTEST.cbl sha256 5cee7bdd6395f524b715c88c71f5e3120fb18dfc3fde9cdf7acc106b47f69df2; 35 statement(s) in 8 paragraph(s)"
+    },
+    {
+      "id": "complete_program",
+      "ok": true,
+      "detail": "every paragraph contains statements"
+    },
+    {
+      "id": "copybooks_resolved",
+      "ok": true,
+      "detail": "all 2 include(s) resolved: PORTFLIO, ERRHAND"
+    },
+    {
+      "id": "requirements_and_data_mapping_delivered",
+      "ok": true,
+      "detail": "F1/F2 deliveries accepted for ERRHAND, PORTFLIO, PORTTEST"
+    },
+    {
+      "id": "behaviour_classified",
+      "ok": true,
+      "detail": "4 behaviour(s): 0 VERIFIED_CANDIDATE, 4 PARTIAL, 0 GAP"
+    },
+    {
+      "id": "dependencies_identified",
+      "ok": false,
+      "detail": "closure UNRESOLVED for PORTTEST:0000-MAIN (line 55: YYYYMMDD is neither declared, a keyword, a paragraph nor the subject of a blocking decision (unknown dependency)); PORTTEST:1000-INITIALIZE (line 55: YYYYMMDD is neither declared, a keyword, a paragraph nor the subject of a blocking decision (unknown dependency))"
+    },
+    {
+      "id": "unsupported_documented",
+      "ok": false,
+      "detail": "non-verified behaviour without a gap: PORTTEST:1000-INITIALIZE, PORTTEST:2000-GENERATE-RECORDS, PORTTEST:3000-TERMINATE"
+    },
+    {
+      "id": "unknowns_documented",
+      "ok": true,
+      "detail": "7 open decision(s) record the remaining questions (2 blocking for approval); none is resolved or assumed here"
+    }
+  ],
+  "note": "An engineering gate: it states that the source is understood well enough to convert, with every unknown documented. It is not a G2 approval and does not authorise generation.",
+  "behaviours": [
+    {
+      "behaviour_id": "PORTTEST:ENTRY-DISPATCH",
+      "kind": "dispatch",
+      "classification": "PARTIAL",
+      "lines": [
+        47,
+        50
+      ],
+      "inputs": [
+        "WS-MAX-RECORDS",
+        "WS-RECORD-COUNT"
+      ],
+      "outputs": [],
+      "side_effects": [],
+      "unresolved": [],
+      "covered_by": []
+    },
+    {
+      "behaviour_id": "PORTTEST:1000-INITIALIZE",
+      "kind": "performed_range",
+      "classification": "PARTIAL",
+      "lines": [
+        55,
+        119
+      ],
+      "inputs": [
+        "WS-CURRENT-DATE",
+        "WS-FILE-STATUS",
+        "WS-RECORD-COUNT"
+      ],
+      "outputs": [],
+      "side_effects": [
+        {
+          "line": 57,
+          "kind": "file_io",
+          "operation": "OPEN",
+          "table": null
+        },
+        {
+          "line": 116,
+          "kind": "file_io",
+          "operation": "CLOSE",
+          "table": null
+        }
+      ],
+      "unresolved": [],
+      "covered_by": []
+    },
+    {
+      "behaviour_id": "PORTTEST:2000-GENERATE-RECORDS",
+      "kind": "performed_range",
+      "classification": "PARTIAL",
+      "lines": [
+        66,
+        113
+      ],
+      "inputs": [
+        "PORT-ACCOUNT-NO",
+        "PORT-CASH-BALANCE",
+        "PORT-CLIENT-NAME",
+        "PORT-ID",
+        "PORT-RECORD",
+        "PORT-TOTAL-VALUE",
+        "WS-CLIENT-TYPES",
+        "WS-CURRENT-DATE",
+        "WS-FILE-STATUS",
+        "WS-NAME-PREFIX",
+        "WS-RECORD-COUNT",
+        "WS-STATUS-SUB",
+        "WS-STATUS-TYPES",
+        "WS-TYPE-SUB"
+      ],
+      "outputs": [
+        "PORT-CLIENT-TYPE",
+        "PORT-CREATE-DATE",
+        "PORT-LAST-MAINT",
+        "PORT-RECORD",
+        "PORT-STATUS",
+        "WS-TYPE-SUB"
+      ],
+      "side_effects": [
+        {
+          "line": 73,
+          "kind": "file_io",
+          "operation": "WRITE",
+          "table": null
+        }
+      ],
+      "unresolved": [],
+      "covered_by": []
+    },
+    {
+      "behaviour_id": "PORTTEST:3000-TERMINATE",
+      "kind": "performed_range",
+      "classification": "PARTIAL",
+      "lines": [
+        116,
+        119
+      ],
+      "inputs": [
+        "WS-RECORD-COUNT"
+      ],
+      "outputs": [],
+      "side_effects": [
+        {
+          "line": 116,
+          "kind": "file_io",
+          "operation": "CLOSE",
+          "table": null
+        }
+      ],
+      "unresolved": [],
+      "covered_by": []
+    }
+  ],
+  "gaps": [],
+  "closures": [
+    {
+      "behaviour_id": "PORTTEST:0000-MAIN",
+      "status": "UNRESOLVED",
+      "unresolved_reasons": [
+        "line 55: YYYYMMDD is neither declared, a keyword, a paragraph nor the subject of a blocking decision (unknown dependency)"
+      ],
+      "units": [
+        "PORTTEST",
+        "PORTFLIO"
+      ],
+      "external": [
+        {
+          "kind": "file_io",
+          "line": 73,
+          "operation": "WRITE",
+          "target": "TEST-FILE",
+          "relation": "direct"
+        }
+      ],
+      "undeclared": [],
+      "sha256": "b2ef68a210646e8f4ac4d8505bde4a0c69968251e5b2a8dce61a687eee4b63e3"
+    },
+    {
+      "behaviour_id": "PORTTEST:1000-INITIALIZE",
+      "status": "UNRESOLVED",
+      "unresolved_reasons": [
+        "line 55: YYYYMMDD is neither declared, a keyword, a paragraph nor the subject of a blocking decision (unknown dependency)"
+      ],
+      "units": [
+        "PORTTEST"
+      ],
+      "external": [],
+      "undeclared": [],
+      "sha256": "7ca3e3c31c32d43fb9733ed5c332b7d329387dbb2504e8dbef2373da57dbc200"
+    },
+    {
+      "behaviour_id": "PORTTEST:2000-GENERATE-RECORDS",
+      "status": "RESOLVED",
+      "unresolved_reasons": [],
+      "units": [
+        "PORTTEST",
+        "PORTFLIO"
+      ],
+      "external": [
+        {
+          "kind": "file_io",
+          "line": 73,
+          "operation": "WRITE",
+          "target": "TEST-FILE",
+          "relation": "direct"
+        }
+      ],
+      "undeclared": [],
+      "sha256": "4e95ea1773f0d070d73ef76b91833dbc2ab038d01599c6c932dadce7e170d5b1"
+    },
+    {
+      "behaviour_id": "PORTTEST:3000-TERMINATE",
+      "status": "RESOLVED",
+      "unresolved_reasons": [],
+      "units": [
+        "PORTTEST"
+      ],
+      "external": [],
+      "undeclared": [],
+      "sha256": "8f471b4c34b6338a976a48331c8930cfbd1255144bc7c4df47d94d36b5363366"
+    }
+  ],
+  "open_decisions": [
+    {
+      "id": "DR-PORTTEST-001",
+      "blocking": true,
+      "question": "PORTTEST is classified test_tool with inferred confidence (conflict: its path src/programs/portfolio/PORTTEST.cbl does not indicate a test tool). It writes up to 100 synthetic portfolio records (BR-101), derives keys from the record count (BR-102) and sets a random total value with a 10% cash balance (BR-103). Is PORTTEST modernised, retired, replaced by a framework/test-data service, or kept as test tooling?"
+    },
+    {
+      "id": "SCOPE-PORTTEST",
+      "blocking": true,
+      "question": "PORTTEST is classified test_tool (inferred): classified as test_tool (inferred); a human must decide whether it is in modernisation scope. Keep it in the modernisation scope (resolved_no_change) or exclude it (excluded_from_scope)?"
+    },
+    {
+      "id": "DR-F2-PKT0010-002",
+      "blocking": false,
+      "question": "Which character encoding (code page) do the files and areas described by these copybooks use for DISPLAY data on the legacy platform (EBCDIC 037, 1140, another EBCDIC variant, or ASCII)? The zoned-decimal test vectors and String codecs depend on it."
+    },
+    {
+      "id": "DR-PORTTEST-002",
+      "blocking": false,
+      "question": "If PORTTEST is kept: GAP-075 - the generation loop (line 48) ends only when successful writes reach 100, so a persistent WRITE failure never ends it; GAP-089 - STRING 'PORT' WS-RECORD-COUNT INTO PORT-ID puts 9 characters into 8 without ON OVERFLOW (line 83), MOVE FUNCTION RANDOM to a PIC 9(1) subscript yields 0 and is used as a reference-modification start (line 87), and COMPUTE targets the alphanumeric PORT-ACCOUNT-NO (line 88). How should these be treated?"
+    },
+    {
+      "id": "RVW-GAP-092",
+      "blocking": false,
+      "question": "GAP-092 (medium, DIAGRAM_RENDER_UNVERIFIED) is not addressed by any decision or requirement: Visual rendering of the 65 Mermaid diagrams is unverified. Acknowledge it as a known limitation (resolved_no_change) or exclude the affected units?"
+    },
+    {
+      "id": "RVW-GAP-104",
+      "blocking": false,
+      "question": "GAP-104 (low, DIAGRAM_INCOMPLETE) is not addressed by any decision or requirement: COMP-UNRESOLVED: all seven edges are unsupported. Acknowledge it as a known limitation (resolved_no_change) or exclude the affected units?"
+    },
+    {
+      "id": "RVW-GAP-211",
+      "blocking": false,
+      "question": "GAP-211 (low, MEDIUM_CONFIDENCE_RULE) is not addressed by any decision or requirement: BR-148 Validate client type is individual, corporate or trust — medium confidence. Acknowledge it as a known limitation (resolved_no_change) or exclude the affected units?"
+    }
+  ],
+  "authorisation": {
+    "generation_authorized": false,
+    "blockers": [
+      "config generation.java_generation_allowed is false (project authority)",
+      "no authorised orchestrator.java_target_dir",
+      "G4 is BLOCKED (needs signed G2, G3 and G4 approvals by trusted signers)",
+      "trust store: TRUST_NOT_CONFIGURED"
+    ],
+    "gates": {
+      "G0": "PASS",
+      "G1": "PASS",
+      "G2": "UNVERIFIED",
+      "G3": "BLOCKED",
+      "G4": "BLOCKED",
+      "G5": "BLOCKED",
+      "G6": "BLOCKED",
+      "G7": "BLOCKED",
+      "G8": "BLOCKED"
+    },
+    "trust": "TRUST_NOT_CONFIGURED",
+    "program_g2_scope": {
+      "readiness": "NOT_READY",
+      "blocking": 11,
+      "scope_sha256": "4929702dfe84f79ae74b24826b0d686198112b8ac58099dbb8874983385db5bc"
+    },
+    "note": "Engineering gates never authorise generation. Java may be generated only when generation_authorized is true."
+  }
+}

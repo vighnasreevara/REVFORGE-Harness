@@ -1,0 +1,42 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://revforge.local/contracts/output/program-inventory.schema.json",
+  "title": "Discovered program inventory",
+  "allOf": [{ "$ref": "../common.schema.json#/definitions/outputHeader" }],
+  "type": "object",
+  "required": ["contract", "system", "selection", "counts", "programs", "copybooks", "jcl_jobs", "unresolved_edges"],
+  "properties": {
+    "contract": { "const": "program-inventory" },
+    "counts": {
+      "type": "object",
+      "required": ["programs_discovered", "programs_selected", "copybooks", "jcl_jobs", "dependency_edges", "unresolved_edges"],
+      "additionalProperties": { "type": "integer", "minimum": 0 }
+    },
+    "programs": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["program_id", "source_ids", "parse_status", "logic_status", "readiness", "evidence_packet"],
+        "properties": {
+          "program_id": { "type": "string" },
+          "source_ids": {
+            "type": "object",
+            "required": ["file_id"],
+            "properties": {
+              "system_id": { "anyOf": [{ "$ref": "../common.schema.json#/definitions/systemId" }, { "type": "null" }] },
+              "file_id": { "$ref": "../common.schema.json#/definitions/fileId" },
+              "path_id": { "$ref": "../common.schema.json#/definitions/nullablePathId" }
+            }
+          },
+          "parse_status": { "type": ["string", "null"] },
+          "logic_status": { "type": ["string", "null"] },
+          "readiness": { "enum": ["blocked", "needs_sme_decision", "design_candidate"] },
+          "evidence_packet": { "type": "string" }
+        }
+      }
+    },
+    "copybooks": { "type": "array" },
+    "jcl_jobs": { "type": "array" },
+    "unresolved_edges": { "type": "array" }
+  }
+}

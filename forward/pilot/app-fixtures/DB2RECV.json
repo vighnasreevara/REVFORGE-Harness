@@ -1,0 +1,94 @@
+{
+ "program": "DB2RECV",
+ "provenance": "Written 2026-11-02 by a scenario-author agent (F6 independent fixture design) from the COBOL source src/programs/online/DB2RECV.cbl and the copybooks it COPYs (src/copybook/db2/SQLCA.cpy, src/copybook/online/ERRHND.cpy, src/copybook/online/DB2REQ.cpy), plus the gap origins in the 'gaps' array of forward/generated/java/DB2RECV/pilot-result.json. No generated Java, source map or execution result was read.",
+ "scenarios": [
+  {
+   "id": "R01",
+   "title": "CONNECTION recovery: retry count 0 < 3 enters the loop; P110's first statement MOVE 'C' TO DB2-REQUEST-TYPE OF WS-DB2-REQUEST names an item that is not subordinate to WS-DB2-REQUEST (DB2REQ adds its own 01) and blocks",
+   "cobol_lines": [
+    49,
+    50,
+    63,
+    65,
+    66,
+    86
+   ],
+   "kind": "call",
+   "set": {
+    "RECV-REQUEST-TYPE": "C",
+    "RECV-RESPONSE-CODE": "0",
+    "RECV-SQLCODE": "-911",
+    "RECV-PROGRAM": "TESTPGM",
+    "RECV-MESSAGE": "",
+    "RECV-STATUS": " "
+   },
+   "expect": {
+    "outcome": "BLOCKED AT src/programs/online/DB2RECV.cbl:86"
+   }
+  },
+  {
+   "id": "R02",
+   "title": "TRANSACTION recovery blocks at EXEC SQL ROLLBACK",
+   "cobol_lines": [
+    52,
+    53,
+    112
+   ],
+   "kind": "call",
+   "set": {
+    "RECV-REQUEST-TYPE": "T",
+    "RECV-RESPONSE-CODE": "0",
+    "RECV-SQLCODE": "-911",
+    "RECV-PROGRAM": "TESTPGM",
+    "RECV-MESSAGE": "",
+    "RECV-STATUS": " "
+   },
+   "expect": {
+    "outcome": "BLOCKED AT src/programs/online/DB2RECV.cbl:112"
+   }
+  },
+  {
+   "id": "R03",
+   "title": "CURSOR recovery ('R', the level-88 RECV-CURSOR at line 35; the name is also a data item at line 40) blocks at MOVE SPACES TO WS-ERROR-AREA",
+   "cobol_lines": [
+    35,
+    55,
+    56,
+    126
+   ],
+   "kind": "call",
+   "set": {
+    "RECV-REQUEST-TYPE": "R",
+    "RECV-RESPONSE-CODE": "0",
+    "RECV-SQLCODE": "-911",
+    "RECV-PROGRAM": "TESTPGM",
+    "RECV-MESSAGE": "",
+    "RECV-STATUS": " "
+   },
+   "expect": {
+    "outcome": "BLOCKED AT src/programs/online/DB2RECV.cbl:126"
+   }
+  },
+  {
+   "id": "R04",
+   "title": "an unknown request type matches no WHEN (no WHEN OTHER) and reaches EXEC CICS RETURN",
+   "cobol_lines": [
+    48,
+    58,
+    60
+   ],
+   "kind": "call",
+   "set": {
+    "RECV-REQUEST-TYPE": "X",
+    "RECV-RESPONSE-CODE": "0",
+    "RECV-SQLCODE": "-911",
+    "RECV-PROGRAM": "TESTPGM",
+    "RECV-MESSAGE": "",
+    "RECV-STATUS": " "
+   },
+   "expect": {
+    "outcome": "BLOCKED AT src/programs/online/DB2RECV.cbl:60"
+   }
+  }
+ ]
+}

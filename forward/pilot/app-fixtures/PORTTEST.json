@@ -1,0 +1,95 @@
+{
+ "program": "PORTTEST",
+ "provenance": "Written 2026-11-02 by a scenario-author agent (F6 independent fixture design) from the COBOL source src/programs/portfolio/PORTTEST.cbl and its copybooks under references/udara-legacy-modernization-harness, the fixtures README contract, and the gaps array of pilot-result.json; no generated Java, source map or test results were read. Scenarios V01.. were added on 2026-11-03 (partly-covered rule extension) by an F6 scenario-author agent from the same COBOL source, copybooks, README and gaps array only; no generated Java, source map or test result was read or run.",
+ "scenarios": [
+  {
+   "id": "S01",
+   "title": "TESTFILE not allocated: OPEN OUTPUT gives status 35, the error is displayed, 3000-TERMINATE displays the zero count and GOBACK ends the run",
+   "cobol_lines": [
+    47,
+    55,
+    57,
+    58,
+    59,
+    60,
+    61,
+    116,
+    118
+   ],
+   "kind": "main",
+   "clock": "2026-03-04T05:06:07.08Z",
+   "expect": {
+    "outcome": "END",
+    "return_code": 0,
+    "display": [
+     "Error opening test file: 35",
+     "Records generated: 00000"
+    ]
+   }
+  },
+  {
+   "id": "S02",
+   "title": "TESTFILE allocated: the first generated record reaches FUNCTION RANDOM in 2100-GENERATE-KEY",
+   "cobol_lines": [
+    47,
+    48,
+    49,
+    57,
+    66,
+    68,
+    83,
+    84,
+    85,
+    87
+   ],
+   "kind": "main",
+   "clock": "2026-03-04T05:06:07.08Z",
+   "outputs": [
+    "TESTFILE"
+   ],
+   "expect": {
+    "outcome": "BLOCKED AT src/programs/portfolio/PORTTEST.cbl:87",
+    "display": []
+   }
+  },
+  {
+   "id": "V01",
+   "title": "BR-101 record cap: the PERFORM UNTIL test at lines 48-49 (WS-RECORD-COUNT 0 >= WS-MAX-RECORDS 100) is false, so 2000-GENERATE-RECORDS runs: INITIALIZE PORT-RECORD, STRING 'PORT' + '00000' into the 8-byte PORT-ID (stops when full: 'PORT0000'), then FUNCTION RANDOM blocks; no record is written, the count stays 0, TESTFILE is empty",
+   "cobol_lines": [
+    32,
+    33,
+    47,
+    48,
+    49,
+    55,
+    57,
+    58,
+    66,
+    68,
+    83,
+    84,
+    85,
+    87
+   ],
+   "kind": "main",
+   "clock": "2026-03-04T05:06:07.08Z",
+   "outputs": [
+    "TESTFILE"
+   ],
+   "expect": {
+    "outcome": "BLOCKED AT src/programs/portfolio/PORTTEST.cbl:87",
+    "display": [],
+    "items": {
+     "WS-RECORD-COUNT": "0",
+     "WS-MAX-RECORDS": "100",
+     "PORT-ID": "PORT0000",
+     "PORT-ACCOUNT-NO": "",
+     "WS-FILE-STATUS": "00"
+    },
+    "datasets": {
+     "TESTFILE": []
+    }
+   }
+  }
+ ]
+}

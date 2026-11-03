@@ -1,0 +1,29 @@
+{
+  "contract": "pilot/local-authorization-input",
+  "contract_version": "1.0",
+  "note": "Input for `pilot authorize`. presented_text is the exact authorisation text shown to the project owner in the Claude Code session; acceptance_evidence quotes the recorded answer. No COBOL source is contained here.",
+  "policy_statement": "For deterministic LOCAL conversion only, a project-owner-accepted record bound to exact source hashes replaces the G2-G4 signature requirement. No Ed25519 signature is required. Historical G0-G8 records stay untouched, and any F5/AI-agent generation still requires G2-G4.",
+  "authorization": {
+    "program": "PORTVALD",
+    "source": {
+      "path": "src/programs/portfolio/PORTVALD.cbl",
+      "sha256": "5957fd22546258ae4d9e28847269168d1824bf8d11a9e661f9f62a5adc47f603"
+    },
+    "copybooks": [
+      {
+        "path": "src/copybook/common/PORTVAL.cpy",
+        "sha256": "8d9c7666b01561c4eba4d1e0a95b9da62baaa60c9dcfc2aa5effff06854104bf"
+      }
+    ],
+    "output_dir": "forward/generated/java/PORTVALD/",
+    "purpose": "deterministic local COBOL-to-Java generation, compile and fixture tests",
+    "external_ai_disclosure": "none",
+    "ai_review_in_session_permitted": true,
+    "license_note": "the source is the public Apache-2.0 upstream sample; notices must be kept if the output is redistributed",
+    "accepted_by": "Vighnasree Vara",
+    "accepted_at": "2026-11-02T00:00:00Z",
+    "valid_until": "2026-12-02T00:00:00Z",
+    "presented_text": "Do you, as REVFORGE project owner, accept this exact local-generation authorization for PORTVALD?\n\nPOLICY ADOPTED: 'program_scoped_local_v1'. For deterministic LOCAL conversion only, a project-owner-accepted record bound to exact source hashes replaces the G2–G4 signature requirement. No Ed25519 signature is required. Historical G0–G8 records stay untouched, and any F5/AI-agent generation still requires G2–G4.\n\nRECORD:\n• Program: PORTVALD\n• Source: src/programs/portfolio/PORTVALD.cbl, sha256 5957fd22546258ae4d9e28847269168d1824bf8d11a9e661f9f62a5adc47f603\n• Copybook: src/copybook/common/PORTVAL.cpy, sha256 8d9c7666b01561c4eba4d1e0a95b9da62baaa60c9dcfc2aa5effff06854104bf\n• Output dir: forward/generated/java/PORTVALD/ (to be git-ignored and excluded from code backups)\n• Purpose: deterministic local COBOL-to-Java generation, compile and fixture tests\n• External AI source disclosure: NONE (no OpenAI/BMad/API calls)\n• Date: 2026-11-02, valid 30 days. Any source or copybook hash change voids it.\n• License note: the source is the public Apache-2.0 upstream sample; notices must be kept if the output is redistributed.",
+    "acceptance_evidence": "Interactive Claude Code session (408f4e4f-6b23-4e86-955f-1609a8efd376), AskUserQuestion answer: option 'Accept as stated' (policy and record adopted; Claude Code may read the generated Java and test output for the independent review); owner name 'Vighnasree Vara'."
+  }
+}

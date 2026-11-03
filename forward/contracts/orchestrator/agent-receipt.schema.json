@@ -1,0 +1,126 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://revforge.local/contracts/orchestrator/agent-receipt.schema.json",
+  "title": "Agent output receipt (submitted by a forward agent)",
+  "description": "What an agent returns after working on a dispatch packet. It reports outputs and problems only; it cannot carry approvals or gate results (extra fields are rejected).",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "contract",
+    "packet_id",
+    "agent",
+    "outcome",
+    "outputs",
+    "skills_used",
+    "findings",
+    "blockers"
+  ],
+  "properties": {
+    "contract": {
+      "const": "agent-receipt"
+    },
+    "packet_id": {
+      "type": "string",
+      "pattern": "^PKT-[0-9]{4}-F[1-7]$"
+    },
+    "agent": {
+      "enum": [
+        "F1",
+        "F2",
+        "F3",
+        "F4",
+        "F5",
+        "F6",
+        "F7"
+      ]
+    },
+    "outcome": {
+      "enum": [
+        "completed",
+        "blocked",
+        "failed",
+        "incomplete"
+      ]
+    },
+    "outputs": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "path",
+          "sha256"
+        ],
+        "properties": {
+          "path": {
+            "type": "string",
+            "minLength": 1
+          },
+          "sha256": {
+            "description": "SHA-256 computed by the agent, or null when the agent has no hashing tool; the runtime always computes and records its own hash, and rejects a stated hash that does not match.",
+            "anyOf": [
+              {
+                "$ref": "../common.schema.json#/definitions/sha256"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "contract": {
+            "type": [
+              "string",
+              "null"
+            ]
+          }
+        }
+      }
+    },
+    "skills_used": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "name",
+          "status"
+        ],
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "status": {
+            "enum": [
+              "INSTALLED",
+              "SKILL_NOT_INSTALLED",
+              "SKILL_INVALID"
+            ]
+          }
+        }
+      }
+    },
+    "findings": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "blockers": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "notes": {
+      "type": "string"
+    },
+    "declared_reads": {
+      "description": "Files the agent states it actually opened (agent declaration; recorded as unverified until transcript evidence is attached). Distinct from the packet's supplied inputs.",
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    }
+  }
+}

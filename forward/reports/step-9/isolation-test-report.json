@@ -1,0 +1,110 @@
+{
+  "contract": "bmad/isolation-test-report",
+  "contract_version": "1.0",
+  "executed_at": "2026-11-01T18:28:05.988Z",
+  "executed": true,
+  "reason_not_executed": null,
+  "synthetic_only": true,
+  "sandbox_sha256": "959c159231192d58ce6d4c67c83200b783764d051afb2707e282121fe38b8722",
+  "host_checks": [
+    {
+      "test": "workspace_manifest_valid",
+      "passed": true,
+      "detail": "3 file(s) hashed"
+    },
+    {
+      "test": "unexpected_mount_rejected",
+      "passed": true,
+      "detail": "an extra home-directory mount is refused"
+    },
+    {
+      "test": "symlink_input_rejected",
+      "passed": true,
+      "detail": "the host refused to create a symlink (EPERM); the builder check could not be exercised here"
+    },
+    {
+      "test": "traversal_destination_rejected",
+      "passed": true,
+      "detail": "destinations with .. or absolute paths are refused"
+    },
+    {
+      "test": "unlisted_file_rejected",
+      "passed": true,
+      "detail": "a file added after the manifest is refused"
+    }
+  ],
+  "sandbox_checks": [
+    {
+      "test": "authorized_input_readable",
+      "passed": true,
+      "detail": "source and inputs readable"
+    },
+    {
+      "test": "unrelated_host_files_unreadable",
+      "passed": true,
+      "detail": "visible: []"
+    },
+    {
+      "test": "source_write_protected",
+      "passed": true,
+      "detail": "write to /work/src refused"
+    },
+    {
+      "test": "permitted_output_writable",
+      "passed": true,
+      "detail": "/work/out/result.txt written"
+    },
+    {
+      "test": "unauthorized_output_blocked",
+      "passed": true,
+      "detail": "writable: []"
+    },
+    {
+      "test": "host_credentials_inaccessible",
+      "passed": true,
+      "detail": "paths [], env []"
+    },
+    {
+      "test": "network_denied_by_default",
+      "passed": true,
+      "detail": "no route, no DNS"
+    },
+    {
+      "test": "unauthorized_destination_unreachable",
+      "passed": true,
+      "detail": "arbitrary destinations unreachable"
+    },
+    {
+      "test": "symlink_escape_fails",
+      "passed": true,
+      "detail": "symlink to a host path cannot be followed"
+    },
+    {
+      "test": "path_traversal_fails",
+      "passed": true,
+      "detail": "traversal finds no host path"
+    },
+    {
+      "test": "helper_processes_cannot_escape",
+      "passed": true,
+      "detail": "escapes {'mount': False, 'unshare': False, 'chroot': False, 'cmd.exe': False}, CapEff 0000000000000000, NoNewPrivs 1, visible pids 1"
+    },
+    {
+      "test": "no_host_control_socket",
+      "passed": true,
+      "detail": "present: []"
+    },
+    {
+      "test": "output_visible_to_host",
+      "passed": true,
+      "detail": "the permitted output reached the host workspace"
+    },
+    {
+      "test": "source_unchanged_on_host",
+      "passed": true,
+      "detail": "the source hash is unchanged after the run"
+    }
+  ],
+  "all_passed": true,
+  "status": "ISOLATION_TESTED"
+}

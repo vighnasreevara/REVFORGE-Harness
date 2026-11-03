@@ -1,0 +1,131 @@
+{
+  "contract": "pilot/fixtures",
+  "contract_version": "1.0",
+  "synthetic": true,
+  "program": "SYNRC01",
+  "record_length": 24,
+  "provenance": "Hand-derived by the pilot author from SPEC.md before any Java was generated; not produced by executing Java; not reviewed by an independent human.",
+  "cases": [
+    {
+      "id": "C01",
+      "title": "reset clears codes, severity and result",
+      "input": "R+0007+0005+0009T+000355",
+      "expected": {
+        "image": "R+0007+0000+0000C+000000"
+      }
+    },
+    {
+      "id": "C02",
+      "title": "post 0: severity clear, peak kept, result 00",
+      "input": "P+0000+0003+0003N+000099",
+      "expected": {
+        "image": "P+0000+0000+0003C+000000"
+      }
+    },
+    {
+      "id": "C03",
+      "title": "post 1 (lower notice boundary), new peak",
+      "input": "P+0001+0000+0000C+000000",
+      "expected": {
+        "image": "P+0001+0001+0001N+000000"
+      }
+    },
+    {
+      "id": "C04",
+      "title": "post 3 (upper notice boundary), lower than peak",
+      "input": "P+0003+0001+0005N+000000",
+      "expected": {
+        "image": "P+0003+0003+0005N+000000"
+      }
+    },
+    {
+      "id": "C05",
+      "title": "post 4 (lower fault boundary), new peak",
+      "input": "P+0004+0003+0003N+000000",
+      "expected": {
+        "image": "P+0004+0004+0004T+000000"
+      }
+    },
+    {
+      "id": "C06",
+      "title": "post 11 (upper fault boundary)",
+      "input": "P+0011+0004+0004T+000000",
+      "expected": {
+        "image": "P+0011+0011+0011T+000000"
+      }
+    },
+    {
+      "id": "C07",
+      "title": "post 12 (first abort value)",
+      "input": "P+0012+0000+0011T+000000",
+      "expected": {
+        "image": "P+0012+0012+0012A+000000"
+      }
+    },
+    {
+      "id": "C08",
+      "title": "post 9999 (largest S9(4) value)",
+      "input": "P+9999+0000+0012A+000000",
+      "expected": {
+        "image": "P+9999+9999+9999A+000000"
+      }
+    },
+    {
+      "id": "C09",
+      "title": "post equal to peak keeps peak",
+      "input": "P+0005+0002+0005N+000000",
+      "expected": {
+        "image": "P+0005+0005+0005T+000000"
+      }
+    },
+    {
+      "id": "C10",
+      "title": "post below peak keeps peak",
+      "input": "P+0002+0009+0009T+000000",
+      "expected": {
+        "image": "P+0002+0002+0009N+000000"
+      }
+    },
+    {
+      "id": "C11",
+      "title": "ERROR: negative post is rejected with 20 and changes nothing else",
+      "input": "P-0001+0004+0006T+000000",
+      "expected": {
+        "image": "P-0001+0004+0006T+000020"
+      }
+    },
+    {
+      "id": "C12",
+      "title": "query copies peak to out",
+      "input": "Q+0000+0002+0009N+000177",
+      "expected": {
+        "image": "Q+0000+0002+0009N+000900"
+      }
+    },
+    {
+      "id": "C13",
+      "title": "ERROR: unknown action gives 90 and changes nothing else",
+      "input": "Z+0004+0001+0002N+000300",
+      "expected": {
+        "image": "Z+0004+0001+0002N+000390"
+      }
+    },
+    {
+      "id": "C14",
+      "title": "ERROR: lower-case r is not reset",
+      "input": "r+0000+0008+0008T+000000",
+      "expected": {
+        "image": "r+0000+0008+0008T+000090"
+      }
+    },
+    {
+      "id": "C15",
+      "title": "publish depends on the unprovided external program SYNEXT01: must stay blocked",
+      "input": "U+0000+0001+0007N+000000",
+      "expected": {
+        "blocked": true,
+        "reason": "undefined external call SYNEXT01"
+      }
+    }
+  ]
+}

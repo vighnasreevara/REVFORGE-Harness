@@ -1,0 +1,61 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://revforge.local/contracts/forward/implementation-manifest.schema.json",
+  "title": "Java implementation manifest and build/repair log (F5, fe-java-batch-implementation / fe-compiler-repair)",
+  "allOf": [{ "$ref": "forward-common.schema.json#/definitions/header" }],
+  "type": "object",
+  "required": ["contract", "record_type", "generation_authorization", "target_dir", "elements", "build"],
+  "properties": {
+    "contract": { "const": "forward/implementation-manifest" },
+    "record_type": { "enum": ["implementation", "build_results"] },
+    "generation_authorization": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["g4_gate_result", "packet_generation_authorized"],
+      "properties": { "g4_gate_result": { "type": "string" }, "packet_generation_authorized": { "const": true } }
+    },
+    "target_dir": { "type": "string" },
+    "elements": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["java_path", "symbol", "sha256", "story_ids", "requirement_ids", "source_refs"],
+        "properties": {
+          "java_path": { "type": "string", "pattern": "\\.java$" },
+          "symbol": { "type": "string" },
+          "sha256": { "$ref": "../common.schema.json#/definitions/sha256" },
+          "story_ids": { "type": "array", "minItems": 1, "items": { "type": "string", "pattern": "^STORY-[0-9]{3}$" } },
+          "requirement_ids": { "type": "array", "minItems": 1, "items": { "$ref": "forward-common.schema.json#/definitions/requirementId" } },
+          "source_refs": { "type": "array", "minItems": 1, "items": { "$ref": "forward-common.schema.json#/definitions/sourceRef" } }
+        }
+      }
+    },
+    "build": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["command", "exit_code", "executed_by", "log_excerpt", "repairs"],
+      "properties": {
+        "command": { "type": "string" },
+        "exit_code": { "type": ["integer", "null"] },
+        "executed_by": { "enum": ["agent", "runtime"] },
+        "log_excerpt": { "type": "string" },
+        "repairs": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["diagnostic", "file", "change", "behavior_neutral", "rebuild_exit_code"],
+            "properties": {
+              "diagnostic": { "type": "string" },
+              "file": { "type": "string" },
+              "change": { "type": "string" },
+              "behavior_neutral": { "const": true },
+              "rebuild_exit_code": { "type": ["integer", "null"] }
+            }
+          }
+        }
+      }
+    }
+  }
+}

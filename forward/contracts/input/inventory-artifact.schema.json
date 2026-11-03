@@ -1,0 +1,89 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://revforge.local/contracts/input/inventory-artifact.schema.json",
+  "title": "Reverse Agent 1 inventory_artifact.json (consumed core)",
+  "type": "object",
+  "required": ["meta", "stats", "file_registry", "copybook_registry", "jcl_registry", "call_graph"],
+  "properties": {
+    "meta": {
+      "type": "object",
+      "required": ["agent_version", "system_id", "generated_at"],
+      "properties": {
+        "agent_version": { "type": "string" },
+        "generated_at": { "type": "string" },
+        "system_id": { "$ref": "../common.schema.json#/definitions/systemId" },
+        "repo_root": { "type": "string" }
+      }
+    },
+    "stats": { "type": "object" },
+    "file_registry": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["program_id", "file_id", "path_id", "relative_path", "type"],
+        "properties": {
+          "program_id": { "type": "string", "minLength": 1 },
+          "file_id": { "$ref": "../common.schema.json#/definitions/fileId" },
+          "path_id": { "$ref": "../common.schema.json#/definitions/pathId" },
+          "relative_path": { "type": "string" },
+          "type": { "type": "string" },
+          "subtype": { "type": ["string", "null"] },
+          "size_bytes": { "type": "integer", "minimum": 0 }
+        }
+      }
+    },
+    "copybook_registry": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "file_id", "path_id", "type"],
+        "properties": {
+          "id": { "type": "string" },
+          "file_id": { "$ref": "../common.schema.json#/definitions/fileId" },
+          "path_id": { "$ref": "../common.schema.json#/definitions/pathId" },
+          "type": { "type": "string" },
+          "used_by": { "type": "array", "items": { "type": "string" } }
+        }
+      }
+    },
+    "jcl_registry": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "file_id", "path_id"],
+        "properties": {
+          "file_id": { "$ref": "../common.schema.json#/definitions/fileId" },
+          "path_id": { "$ref": "../common.schema.json#/definitions/pathId" },
+          "job_name": { "type": "string" },
+          "steps": {
+            "type": "array",
+            "items": { "type": "object", "properties": { "program": { "type": ["string", "null"] } } }
+          }
+        }
+      }
+    },
+    "other_file_registry": { "type": "array" },
+    "call_graph": {
+      "type": "object",
+      "required": ["nodes", "edges"],
+      "properties": {
+        "nodes": { "type": "array", "items": { "type": "object", "required": ["id", "type"] } },
+        "edges": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["from", "to", "type", "resolved"],
+            "properties": {
+              "from": { "type": "string" },
+              "to": { "type": "string" },
+              "type": { "type": "string" },
+              "resolved": { "type": "boolean" },
+              "source_line_hint": { "type": ["integer", "null"] }
+            }
+          }
+        }
+      }
+    },
+    "issues": { "type": "array" }
+  }
+}

@@ -1,0 +1,238 @@
+{
+ "program": "CURSMGR",
+ "provenance": "Written 2026-11-02 by a scenario-author agent (F6 independent fixture design) from the COBOL source src/programs/online/CURSMGR.cbl and the copybooks it COPYs (src/copybook/db2/SQLCA.cpy), plus the gap origins in the 'gaps' array of forward/generated/java/CURSMGR/pilot-result.json. No generated Java, source map or execution result was read. Scenarios V01.. were added on 2026-11-03 (partly-covered rule extension) by an F6 scenario-author agent from the same COBOL source, copybooks, README and gaps array only; no generated Java, source map or test result was read or run.",
+ "scenarios": [
+  {
+   "id": "M01",
+   "title": "DECLARE without array fetch: response code zeroed, array size 1, the DECLARE CURSOR is declarative, then IF SQLCODE (undeclared: INCLUDE SQLCA unavailable) blocks",
+   "cobol_lines": [
+    44,
+    45,
+    46,
+    62,
+    64,
+    67,
+    70,
+    74
+   ],
+   "kind": "call",
+   "set": {
+    "CURS-REQUEST-TYPE": "D",
+    "CURS-NAME": "C1",
+    "CURS-STMT": "SELECT * FROM T",
+    "CURS-ARRAY-FETCH": "N",
+    "CURS-RESPONSE-CODE": "0",
+    "CURS-DATA-LENGTH": "0"
+   },
+   "expect": {
+    "outcome": "BLOCKED AT src/programs/online/CURSMGR.cbl:74"
+   }
+  },
+  {
+   "id": "M02",
+   "title": "DECLARE with array fetch 'Y' takes the WS-MAX-ROWS branch and reaches the same SQLCODE gap",
+   "cobol_lines": [
+    44,
+    45,
+    46,
+    62,
+    64,
+    65,
+    74
+   ],
+   "kind": "call",
+   "set": {
+    "CURS-REQUEST-TYPE": "D",
+    "CURS-NAME": "C1",
+    "CURS-STMT": "SELECT * FROM T",
+    "CURS-ARRAY-FETCH": "Y",
+    "CURS-RESPONSE-CODE": "0",
+    "CURS-DATA-LENGTH": "0"
+   },
+   "expect": {
+    "outcome": "BLOCKED AT src/programs/online/CURSMGR.cbl:74"
+   }
+  },
+  {
+   "id": "M03",
+   "title": "OPEN: PERFORM P200-OPEN-CURSOR THRU P200-EXIT, and P200-EXIT is not a defined paragraph (source truncated at line 91)",
+   "cobol_lines": [
+    48,
+    49,
+    50
+   ],
+   "kind": "call",
+   "set": {
+    "CURS-REQUEST-TYPE": "O",
+    "CURS-NAME": "C1",
+    "CURS-STMT": "SELECT * FROM T",
+    "CURS-ARRAY-FETCH": "N",
+    "CURS-RESPONSE-CODE": "0",
+    "CURS-DATA-LENGTH": "0"
+   },
+   "expect": {
+    "outcome": "BLOCKED AT src/programs/online/CURSMGR.cbl:49"
+   }
+  },
+  {
+   "id": "M04",
+   "title": "FETCH: P300-FETCH-DATA is not defined in the source",
+   "cobol_lines": [
+    51,
+    52
+   ],
+   "kind": "call",
+   "set": {
+    "CURS-REQUEST-TYPE": "F",
+    "CURS-NAME": "C1",
+    "CURS-STMT": "SELECT * FROM T",
+    "CURS-ARRAY-FETCH": "N",
+    "CURS-RESPONSE-CODE": "0",
+    "CURS-DATA-LENGTH": "0"
+   },
+   "expect": {
+    "outcome": "BLOCKED AT src/programs/online/CURSMGR.cbl:52"
+   }
+  },
+  {
+   "id": "M05",
+   "title": "CLOSE: P400-CLOSE-CURSOR is not defined in the source",
+   "cobol_lines": [
+    54,
+    55
+   ],
+   "kind": "call",
+   "set": {
+    "CURS-REQUEST-TYPE": "C",
+    "CURS-NAME": "C1",
+    "CURS-STMT": "SELECT * FROM T",
+    "CURS-ARRAY-FETCH": "N",
+    "CURS-RESPONSE-CODE": "0",
+    "CURS-DATA-LENGTH": "0"
+   },
+   "expect": {
+    "outcome": "BLOCKED AT src/programs/online/CURSMGR.cbl:55"
+   }
+  },
+  {
+   "id": "M06",
+   "title": "an unknown request type matches no WHEN (there is no WHEN OTHER) and reaches EXEC CICS RETURN",
+   "cobol_lines": [
+    44,
+    57,
+    59
+   ],
+   "kind": "call",
+   "set": {
+    "CURS-REQUEST-TYPE": "X",
+    "CURS-NAME": "C1",
+    "CURS-STMT": "SELECT * FROM T",
+    "CURS-ARRAY-FETCH": "N",
+    "CURS-RESPONSE-CODE": "0",
+    "CURS-DATA-LENGTH": "0"
+   },
+   "expect": {
+    "outcome": "BLOCKED AT src/programs/online/CURSMGR.cbl:59"
+   }
+  },
+  {
+   "id": "V01",
+   "title": "BR-058 array fetch 'Y': CURS-RESPONSE-CODE (99 from the caller) is zeroed and WS-ARRAY-SIZE := WS-MAX-ROWS (20) before the SQLCODE test gap",
+   "cobol_lines": [
+    24,
+    25,
+    44,
+    45,
+    46,
+    62,
+    64,
+    65,
+    74
+   ],
+   "kind": "call",
+   "set": {
+    "CURS-REQUEST-TYPE": "D",
+    "CURS-NAME": "C1",
+    "CURS-STMT": "SELECT * FROM T",
+    "CURS-ARRAY-FETCH": "Y",
+    "CURS-RESPONSE-CODE": "99",
+    "CURS-DATA-LENGTH": "0"
+   },
+   "expect": {
+    "outcome": "BLOCKED AT src/programs/online/CURSMGR.cbl:74",
+    "items": {
+     "CURS-RESPONSE-CODE": "0",
+     "WS-ARRAY-SIZE": "20",
+     "USE-ARRAY-FETCH": true
+    }
+   }
+  },
+  {
+   "id": "V02",
+   "title": "BR-058 array fetch 'N': CURS-RESPONSE-CODE zeroed, WS-ARRAY-SIZE := 1",
+   "cobol_lines": [
+    24,
+    25,
+    44,
+    45,
+    46,
+    62,
+    64,
+    66,
+    67,
+    74
+   ],
+   "kind": "call",
+   "set": {
+    "CURS-REQUEST-TYPE": "D",
+    "CURS-NAME": "C1",
+    "CURS-STMT": "SELECT * FROM T",
+    "CURS-ARRAY-FETCH": "N",
+    "CURS-RESPONSE-CODE": "99",
+    "CURS-DATA-LENGTH": "0"
+   },
+   "expect": {
+    "outcome": "BLOCKED AT src/programs/online/CURSMGR.cbl:74",
+    "items": {
+     "CURS-RESPONSE-CODE": "0",
+     "WS-ARRAY-SIZE": "1",
+     "NO-ARRAY-FETCH": true
+    }
+   }
+  },
+  {
+   "id": "V03",
+   "title": "BR-058 any value other than 'Y' (here lower-case 'y', neither 88-level) takes the ELSE branch: WS-ARRAY-SIZE := 1",
+   "cobol_lines": [
+    24,
+    25,
+    44,
+    45,
+    46,
+    62,
+    64,
+    66,
+    67,
+    74
+   ],
+   "kind": "call",
+   "set": {
+    "CURS-REQUEST-TYPE": "D",
+    "CURS-NAME": "C1",
+    "CURS-STMT": "SELECT * FROM T",
+    "CURS-ARRAY-FETCH": "y",
+    "CURS-RESPONSE-CODE": "99",
+    "CURS-DATA-LENGTH": "0"
+   },
+   "expect": {
+    "outcome": "BLOCKED AT src/programs/online/CURSMGR.cbl:74",
+    "items": {
+     "CURS-RESPONSE-CODE": "0",
+     "WS-ARRAY-SIZE": "1",
+     "USE-ARRAY-FETCH": false,
+     "NO-ARRAY-FETCH": false
+    }
+   }
+  }
+ ]
+}

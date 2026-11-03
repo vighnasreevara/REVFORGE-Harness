@@ -1,0 +1,1177 @@
+{
+ "provenance": "Derived from the source-derived program scenarios (pilot/app-fixtures/*.json) and the ERRPROC source; written before the integrated run.",
+ "scenarios": [
+  {
+   "id": "CALL-BCHCTL00-B05",
+   "title": "BCHCTL00 B05 reaches CALL 'ERRPROC': the converted ERRPROC runs and blocks at its first statement (ERRPROC.cbl:57 ACCEPT FROM TIME STAMP)",
+   "cobol_lines": [
+    74,
+    75,
+    76,
+    111,
+    112,
+    113,
+    114,
+    "src/programs/common/ERRPROC.cbl:52-57"
+   ],
+   "kind": "call",
+   "set": {
+    "LS-FUNCTION": "XXXX",
+    "LS-JOB-NAME": "JOBA0001",
+    "LS-PROCESS-DATE": "20240101",
+    "LS-SEQUENCE-NO": "1",
+    "LS-RETURN-CODE": "0"
+   },
+   "expect": {
+    "outcome": "BLOCKED GAP-ERRPROC-0001"
+   },
+   "program": "BCHCTL00"
+  },
+  {
+   "id": "CALL-BCHCTL00-B06",
+   "title": "BCHCTL00 B06 reaches CALL 'ERRPROC': the converted ERRPROC runs and blocks at its first statement (ERRPROC.cbl:57 ACCEPT FROM TIME STAMP)",
+   "cobol_lines": [
+    50,
+    74,
+    75,
+    76,
+    114,
+    "src/programs/common/ERRPROC.cbl:52-57"
+   ],
+   "kind": "call",
+   "set": {
+    "LS-FUNCTION": "init",
+    "LS-JOB-NAME": "JOBA0001",
+    "LS-PROCESS-DATE": "20240101",
+    "LS-SEQUENCE-NO": "1",
+    "LS-RETURN-CODE": "0"
+   },
+   "expect": {
+    "outcome": "BLOCKED GAP-ERRPROC-0001"
+   },
+   "program": "BCHCTL00"
+  },
+  {
+   "id": "CALL-BCHCTL00-V05",
+   "title": "BCHCTL00 V05 reaches CALL 'ERRPROC': the converted ERRPROC runs and blocks at its first statement (ERRPROC.cbl:57 ACCEPT FROM TIME STAMP)",
+   "cobol_lines": [
+    41,
+    53,
+    61,
+    74,
+    75,
+    76,
+    111,
+    112,
+    113,
+    114,
+    "src/programs/common/ERRPROC.cbl:52-57"
+   ],
+   "kind": "call",
+   "set": {
+    "LS-FUNCTION": "term",
+    "LS-JOB-NAME": "JOBA0001",
+    "LS-PROCESS-DATE": "20240101",
+    "LS-SEQUENCE-NO": "1",
+    "LS-RETURN-CODE": "3"
+   },
+   "expect": {
+    "outcome": "BLOCKED GAP-ERRPROC-0001",
+    "items": {
+     "ERR-TEXT": "Invalid function code",
+     "ERR-PROGRAM": "BCHCTL00",
+     "LS-RETURN-CODE": "8",
+     "MODE-INITIALIZE": false,
+     "MODE-CHECK-PREREQ": false,
+     "MODE-UPDATE-STATUS": false,
+     "MODE-FINALIZE": false
+    }
+   },
+   "program": "BCHCTL00"
+  },
+  {
+   "id": "CALL-DB2CMT-C09",
+   "title": "DB2CMT C09 reaches CALL 'ERRPROC': the converted ERRPROC runs and blocks at its first statement (ERRPROC.cbl:57 ACCEPT FROM TIME STAMP)",
+   "cobol_lines": [
+    67,
+    68,
+    69,
+    163,
+    164,
+    165,
+    "src/programs/common/ERRPROC.cbl:52-57"
+   ],
+   "kind": "call",
+   "set": {
+    "LS-FUNCTION": "init",
+    "LS-SAVEPOINT-NAME": "",
+    "LS-RECORDS-PROC": "0",
+    "LS-COMMIT-FREQ": "0",
+    "LS-FORCE-FLAG": "N",
+    "LS-RETURN-CODE": "0",
+    "LS-SQLCODE": "0",
+    "LS-ERROR-MSG": ""
+   },
+   "expect": {
+    "outcome": "BLOCKED GAP-ERRPROC-0001"
+   },
+   "program": "DB2CMT"
+  },
+  {
+   "id": "CALL-DB2CONN-N04",
+   "title": "DB2CONN N04 reaches CALL 'ERRPROC': the converted ERRPROC runs and blocks at its first statement (ERRPROC.cbl:57 ACCEPT FROM TIME STAMP)",
+   "cobol_lines": [
+    55,
+    56,
+    57,
+    151,
+    152,
+    153,
+    "src/programs/common/ERRPROC.cbl:52-57"
+   ],
+   "kind": "call",
+   "set": {
+    "LS-FUNCTION": "XXXX",
+    "LS-DB-NAME": "POSMVP",
+    "LS-PLAN-NAME": "POSPLAN",
+    "LS-RETURN-CODE": "0",
+    "LS-SQLCODE": "0",
+    "LS-ERROR-MSG": ""
+   },
+   "expect": {
+    "outcome": "BLOCKED GAP-ERRPROC-0001"
+   },
+   "program": "DB2CONN"
+  },
+  {
+   "id": "CALL-DB2ERR-E11",
+   "title": "DB2ERR E11 reaches CALL 'ERRPROC': the converted ERRPROC runs and blocks at its first statement (ERRPROC.cbl:57 ACCEPT FROM TIME STAMP)",
+   "cobol_lines": [
+    64,
+    65,
+    66,
+    197,
+    198,
+    199,
+    "src/programs/common/ERRPROC.cbl:52-57"
+   ],
+   "kind": "call",
+   "set": {
+    "LS-FUNCTION": "DIAX",
+    "LS-PROGRAM-ID": "TESTPGM",
+    "LS-SQLCODE": "0",
+    "LS-SQLSTATE": "00000",
+    "LS-ERROR-TEXT": "",
+    "LS-ADDITIONAL-INFO": "",
+    "LS-RETURN-CODE": "0",
+    "LS-RETRY-FLAG": "X"
+   },
+   "expect": {
+    "outcome": "BLOCKED GAP-ERRPROC-0001"
+   },
+   "program": "DB2ERR"
+  },
+  {
+   "id": "CALL-DB2STAT-T05",
+   "title": "DB2STAT T05 reaches CALL 'ERRPROC': the converted ERRPROC runs and blocks at its first statement (ERRPROC.cbl:57 ACCEPT FROM TIME STAMP)",
+   "cobol_lines": [
+    68,
+    69,
+    70,
+    225,
+    226,
+    227,
+    "src/programs/common/ERRPROC.cbl:52-57"
+   ],
+   "kind": "call",
+   "set": {
+    "LS-FUNCTION": "init",
+    "LS-PROGRAM-ID": "TESTPGM",
+    "LS-ROWS-READ": "10",
+    "LS-ROWS-INSRT": "2",
+    "LS-ROWS-UPDT": "3",
+    "LS-ROWS-DELT": "1",
+    "LS-COMMITS": "4",
+    "LS-ROLLBACKS": "0",
+    "LS-RETURN-CODE": "0"
+   },
+   "expect": {
+    "outcome": "BLOCKED GAP-ERRPROC-0001"
+   },
+   "program": "DB2STAT"
+  },
+  {
+   "id": "CALL-DB2STAT-V03",
+   "title": "DB2STAT V03 reaches CALL 'ERRPROC': the converted ERRPROC runs and blocks at its first statement (ERRPROC.cbl:57 ACCEPT FROM TIME STAMP)",
+   "cobol_lines": [
+    59,
+    68,
+    69,
+    70,
+    225,
+    226,
+    227,
+    "src/programs/common/ERRPROC.cbl:52-57"
+   ],
+   "kind": "call",
+   "set": {
+    "LS-FUNCTION": "STOP",
+    "LS-PROGRAM-ID": "TESTPGM",
+    "LS-ROWS-READ": "10",
+    "LS-ROWS-INSRT": "2",
+    "LS-ROWS-UPDT": "3",
+    "LS-ROWS-DELT": "1",
+    "LS-COMMITS": "4",
+    "LS-ROLLBACKS": "0",
+    "LS-RETURN-CODE": "5"
+   },
+   "expect": {
+    "outcome": "BLOCKED GAP-ERRPROC-0001",
+    "items": {
+     "ERR-TEXT": "Invalid function code",
+     "ERR-PROGRAM": "DB2STAT",
+     "LS-RETURN-CODE": "12"
+    }
+   },
+   "program": "DB2STAT"
+  },
+  {
+   "id": "CALL-PORTTRAN-S01",
+   "title": "PORTTRAN S01 reaches CALL 'ERRPROC': the converted ERRPROC runs and blocks at its first statement (ERRPROC.cbl:57 ACCEPT FROM TIME STAMP)",
+   "cobol_lines": [
+    61,
+    75,
+    76,
+    77,
+    79,
+    80,
+    81,
+    82,
+    312,
+    313,
+    314,
+    316,
+    "src/programs/common/ERRPROC.cbl:52-57"
+   ],
+   "kind": "main",
+   "expect": {
+    "outcome": "BLOCKED GAP-ERRPROC-0001",
+    "display": []
+   },
+   "program": "PORTTRAN"
+  },
+  {
+   "id": "CALL-PRCSEQ00-Q03",
+   "title": "PRCSEQ00 Q03 reaches CALL 'ERRPROC': the converted ERRPROC runs and blocks at its first statement (ERRPROC.cbl:57 ACCEPT FROM TIME STAMP)",
+   "cobol_lines": [
+    160,
+    162,
+    163,
+    164,
+    165,
+    120,
+    121,
+    122,
+    "src/programs/common/ERRPROC.cbl:52-57"
+   ],
+   "kind": "call",
+   "set": {
+    "LS-FUNCTION": "INIT",
+    "LS-PROCESS-DATE": "20240101",
+    "LS-SEQUENCE-TYPE": "PRC",
+    "LS-NEXT-PROCESS": "",
+    "LS-RETURN-CODE": "0"
+   },
+   "datasets": {
+    "PRCSEQ": {
+     "records": [
+      "INITDAY 01START OF DAY                  INI",
+      "POSUPD0001POSITION UPDATE               PRC"
+     ]
+    },
+    "BCHCTL": {
+     "records": [
+      "EXISTING202401010001D"
+     ]
+    }
+   },
+   "expect": {
+    "outcome": "BLOCKED GAP-ERRPROC-0001"
+   },
+   "program": "PRCSEQ00"
+  },
+  {
+   "id": "CALL-PRCSEQ00-Q04",
+   "title": "PRCSEQ00 Q04 reaches CALL 'ERRPROC': the converted ERRPROC runs and blocks at its first statement (ERRPROC.cbl:57 ACCEPT FROM TIME STAMP)",
+   "cobol_lines": [
+    142,
+    143,
+    144,
+    145,
+    122,
+    "src/programs/common/ERRPROC.cbl:52-57"
+   ],
+   "kind": "call",
+   "set": {
+    "LS-FUNCTION": "INIT",
+    "LS-PROCESS-DATE": "20240101",
+    "LS-SEQUENCE-TYPE": "PRC",
+    "LS-NEXT-PROCESS": "",
+    "LS-RETURN-CODE": "0"
+   },
+   "datasets": {
+    "BCHCTL": {
+     "records": [
+      "EXISTING202401010001D"
+     ]
+    }
+   },
+   "expect": {
+    "outcome": "BLOCKED GAP-ERRPROC-0001"
+   },
+   "program": "PRCSEQ00"
+  },
+  {
+   "id": "CALL-PRCSEQ00-Q05",
+   "title": "PRCSEQ00 Q05 reaches CALL 'ERRPROC': the converted ERRPROC runs and blocks at its first statement (ERRPROC.cbl:57 ACCEPT FROM TIME STAMP)",
+   "cobol_lines": [
+    85,
+    86,
+    87,
+    120,
+    121,
+    122,
+    "src/programs/common/ERRPROC.cbl:52-57"
+   ],
+   "kind": "call",
+   "set": {
+    "LS-FUNCTION": "BAD!",
+    "LS-PROCESS-DATE": "20240101",
+    "LS-SEQUENCE-TYPE": "PRC",
+    "LS-NEXT-PROCESS": "",
+    "LS-RETURN-CODE": "0"
+   },
+   "expect": {
+    "outcome": "BLOCKED GAP-ERRPROC-0001"
+   },
+   "program": "PRCSEQ00"
+  },
+  {
+   "id": "CALL-PRCSEQ00-R01",
+   "title": "PRCSEQ00 R01 reaches CALL 'ERRPROC': the converted ERRPROC runs and blocks at its first statement (ERRPROC.cbl:57 ACCEPT FROM TIME STAMP)",
+   "cobol_lines": [
+    76,
+    79,
+    80,
+    95,
+    96,
+    97,
+    101,
+    102,
+    120,
+    121,
+    122,
+    142,
+    148,
+    156,
+    158,
+    160,
+    162,
+    168,
+    169,
+    173,
+    174,
+    181,
+    182,
+    183,
+    184,
+    185,
+    189,
+    190,
+    192,
+    193,
+    194,
+    195,
+    196,
+    198,
+    207,
+    208,
+    209,
+    210,
+    211,
+    212,
+    216,
+    222,
+    224,
+    225,
+    226,
+    227,
+    "src/programs/common/ERRPROC.cbl:52-57"
+   ],
+   "kind": "call",
+   "calls": [
+    {
+     "set": {
+      "LS-FUNCTION": "INIT",
+      "LS-PROCESS-DATE": "20240101",
+      "LS-SEQUENCE-TYPE": "PRC",
+      "LS-NEXT-PROCESS": "",
+      "LS-RETURN-CODE": "0"
+     }
+    }
+   ],
+   "set": {
+    "LS-FUNCTION": "NEXT",
+    "LS-PROCESS-DATE": "20240101",
+    "LS-SEQUENCE-TYPE": "PRC",
+    "LS-NEXT-PROCESS": "",
+    "LS-RETURN-CODE": "0"
+   },
+   "datasets": {
+    "PRCSEQ": {
+     "records": [
+      "3000000101FIRST PRC PROCESS             PRC",
+      "3000000201SECOND PRC PROCESS            PRC",
+      "9000000102END REPORT                      RPT"
+     ]
+    },
+    "BCHCTL": {
+     "records": [
+      "EXISTING202401010001D"
+     ]
+    }
+   },
+   "expect": {
+    "outcome": "BLOCKED GAP-ERRPROC-0001"
+   },
+   "program": "PRCSEQ00"
+  },
+  {
+   "id": "CALL-PRCSEQ00-R02",
+   "title": "PRCSEQ00 R02 reaches CALL 'ERRPROC': the converted ERRPROC runs and blocks at its first statement (ERRPROC.cbl:57 ACCEPT FROM TIME STAMP)",
+   "cobol_lines": [
+    76,
+    79,
+    80,
+    95,
+    96,
+    97,
+    101,
+    102,
+    120,
+    121,
+    122,
+    162,
+    168,
+    169,
+    170,
+    171,
+    173,
+    189,
+    190,
+    207,
+    208,
+    216,
+    217,
+    222,
+    224,
+    225,
+    226,
+    227,
+    "src/programs/common/ERRPROC.cbl:52-57"
+   ],
+   "kind": "call",
+   "calls": [
+    {
+     "set": {
+      "LS-FUNCTION": "INIT",
+      "LS-PROCESS-DATE": "20240101",
+      "LS-SEQUENCE-TYPE": "TRM",
+      "LS-NEXT-PROCESS": "",
+      "LS-RETURN-CODE": "0"
+     }
+    }
+   ],
+   "set": {
+    "LS-FUNCTION": "NEXT",
+    "LS-PROCESS-DATE": "20240101",
+    "LS-SEQUENCE-TYPE": "TRM",
+    "LS-NEXT-PROCESS": "",
+    "LS-RETURN-CODE": "0"
+   },
+   "datasets": {
+    "PRCSEQ": {
+     "records": [
+      "3000000101FIRST PRC PROCESS             PRC",
+      "3000000201SECOND PRC PROCESS            PRC"
+     ]
+    },
+    "BCHCTL": {
+     "records": [
+      "EXISTING202401010001D"
+     ]
+    }
+   },
+   "expect": {
+    "outcome": "BLOCKED GAP-ERRPROC-0001"
+   },
+   "program": "PRCSEQ00"
+  },
+  {
+   "id": "CALL-PRCSEQ00-V01",
+   "title": "PRCSEQ00 V01 reaches CALL 'ERRPROC': the converted ERRPROC runs and blocks at its first statement (ERRPROC.cbl:57 ACCEPT FROM TIME STAMP)",
+   "cobol_lines": [
+    76,
+    77,
+    78,
+    79,
+    80,
+    95,
+    96,
+    97,
+    101,
+    102,
+    120,
+    121,
+    122,
+    142,
+    148,
+    156,
+    157,
+    158,
+    160,
+    162,
+    168,
+    169,
+    173,
+    174,
+    181,
+    182,
+    183,
+    184,
+    185,
+    189,
+    190,
+    192,
+    193,
+    194,
+    195,
+    196,
+    198,
+    207,
+    208,
+    209,
+    210,
+    211,
+    212,
+    216,
+    222,
+    224,
+    225,
+    226,
+    227,
+    "src/programs/common/ERRPROC.cbl:52-57"
+   ],
+   "kind": "call",
+   "calls": [
+    {
+     "set": {
+      "LS-FUNCTION": "INIT",
+      "LS-PROCESS-DATE": "20240101",
+      "LS-SEQUENCE-TYPE": "PRC",
+      "LS-NEXT-PROCESS": "",
+      "LS-RETURN-CODE": "0"
+     }
+    }
+   ],
+   "set": {
+    "LS-FUNCTION": "NEXT",
+    "LS-PROCESS-DATE": "20240101",
+    "LS-SEQUENCE-TYPE": "PRC",
+    "LS-NEXT-PROCESS": "OLDPROC1",
+    "LS-RETURN-CODE": "0"
+   },
+   "datasets": {
+    "PRCSEQ": {
+     "records": [
+      "3000000105FIRST PRC PROCESS             PRC",
+      "3000000205SECOND PRC PROCESS            PRC",
+      "9000000102END REPORT                    RPT"
+     ]
+    },
+    "BCHCTL": {
+     "records": [
+      "30000001202401020002D                                \u0000\u0000        0000\u0000\u0000        0000\u0000\u0000        0000\u0000\u0000        0000\u0000\u0000        0000\u0000\u0000        0000\u0000\u0000        0000\u0000\u0000        0000\u0000\u0000        0000\u0000\u0000        0000\u0000\u0000\u0000\u0000                                                                                \u0000\u0000                                                                                                      "
+     ]
+    }
+   },
+   "expect": {
+    "outcome": "BLOCKED GAP-ERRPROC-0001",
+    "items": {
+     "LS-NEXT-PROCESS": "30000001",
+     "WS-SEQUENCE-IX": "1",
+     "WS-PROCESS-COUNT": "2",
+     "WS-PROC-STATUS(1)": "R",
+     "ERR-TEXT": "Process definition not found",
+     "ERR-PROGRAM": "PRCSEQ00",
+     "LS-RETURN-CODE": "8"
+    }
+   },
+   "program": "PRCSEQ00"
+  },
+  {
+   "id": "CALL-PRCSEQ00-V02",
+   "title": "PRCSEQ00 V02 reaches CALL 'ERRPROC': the converted ERRPROC runs and blocks at its first statement (ERRPROC.cbl:57 ACCEPT FROM TIME STAMP)",
+   "cobol_lines": [
+    76,
+    77,
+    78,
+    79,
+    80,
+    81,
+    82,
+    95,
+    96,
+    97,
+    101,
+    102,
+    109,
+    110,
+    111,
+    120,
+    121,
+    122,
+    142,
+    148,
+    156,
+    157,
+    158,
+    160,
+    162,
+    168,
+    169,
+    173,
+    174,
+    181,
+    182,
+    183,
+    184,
+    185,
+    189,
+    190,
+    192,
+    193,
+    194,
+    195,
+    196,
+    198,
+    207,
+    208,
+    209,
+    210,
+    211,
+    212,
+    216,
+    222,
+    224,
+    225,
+    226,
+    227,
+    282,
+    283,
+    285,
+    293,
+    294,
+    295,
+    296,
+    297,
+    298,
+    299,
+    300,
+    306,
+    309,
+    312,
+    316,
+    "src/programs/common/ERRPROC.cbl:52-57"
+   ],
+   "kind": "call",
+   "calls": [
+    {
+     "set": {
+      "LS-FUNCTION": "INIT",
+      "LS-PROCESS-DATE": "20240101",
+      "LS-SEQUENCE-TYPE": "PRC",
+      "LS-NEXT-PROCESS": "",
+      "LS-RETURN-CODE": "0"
+     }
+    },
+    {
+     "set": {
+      "LS-FUNCTION": "STAT",
+      "LS-PROCESS-DATE": "20240102",
+      "LS-SEQUENCE-TYPE": "PRC",
+      "LS-NEXT-PROCESS": "30000001",
+      "LS-RETURN-CODE": "0"
+     }
+    }
+   ],
+   "set": {
+    "LS-FUNCTION": "NEXT",
+    "LS-PROCESS-DATE": "20240101",
+    "LS-SEQUENCE-TYPE": "PRC",
+    "LS-NEXT-PROCESS": "OLDPROC1",
+    "LS-RETURN-CODE": "0"
+   },
+   "datasets": {
+    "PRCSEQ": {
+     "records": [
+      "3000000105FIRST PRC PROCESS             PRC",
+      "3000000205SECOND PRC PROCESS            PRC",
+      "9000000102END REPORT                    RPT"
+     ]
+    },
+    "BCHCTL": {
+     "records": [
+      "30000001202401020002D                                \u0000\u0000        0000\u0000\u0000        0000\u0000\u0000        0000\u0000\u0000        0000\u0000\u0000        0000\u0000\u0000        0000\u0000\u0000        0000\u0000\u0000        0000\u0000\u0000        0000\u0000\u0000        0000\u0000\u0000\u0000\u0000                                                                                \u0000\u0000                                                                                                      "
+     ]
+    }
+   },
+   "expect": {
+    "outcome": "BLOCKED GAP-ERRPROC-0001",
+    "items": {
+     "LS-NEXT-PROCESS": "30000002",
+     "WS-SEQUENCE-IX": "2",
+     "WS-PROC-STATUS(1)": "D",
+     "WS-PROC-STATUS(2)": "R",
+     "ERR-TEXT": "Process definition not found",
+     "ERR-PROGRAM": "PRCSEQ00",
+     "LS-RETURN-CODE": "8"
+    }
+   },
+   "program": "PRCSEQ00"
+  },
+  {
+   "id": "CALL-PRCSEQ00-V03",
+   "title": "PRCSEQ00 V03 reaches CALL 'ERRPROC': the converted ERRPROC runs and blocks at its first statement (ERRPROC.cbl:57 ACCEPT FROM TIME STAMP)",
+   "cobol_lines": [
+    76,
+    77,
+    78,
+    79,
+    80,
+    81,
+    82,
+    95,
+    96,
+    97,
+    101,
+    102,
+    109,
+    110,
+    111,
+    120,
+    121,
+    122,
+    142,
+    148,
+    156,
+    157,
+    158,
+    160,
+    162,
+    168,
+    169,
+    173,
+    174,
+    181,
+    182,
+    183,
+    184,
+    185,
+    189,
+    190,
+    192,
+    193,
+    194,
+    195,
+    196,
+    198,
+    207,
+    208,
+    209,
+    216,
+    217,
+    222,
+    224,
+    225,
+    226,
+    227,
+    282,
+    283,
+    285,
+    293,
+    294,
+    295,
+    296,
+    297,
+    298,
+    299,
+    300,
+    306,
+    309,
+    312,
+    316,
+    "src/programs/common/ERRPROC.cbl:52-57"
+   ],
+   "kind": "call",
+   "calls": [
+    {
+     "set": {
+      "LS-FUNCTION": "INIT",
+      "LS-PROCESS-DATE": "20240101",
+      "LS-SEQUENCE-TYPE": "PRC",
+      "LS-NEXT-PROCESS": "",
+      "LS-RETURN-CODE": "0"
+     }
+    },
+    {
+     "set": {
+      "LS-FUNCTION": "STAT",
+      "LS-PROCESS-DATE": "20240102",
+      "LS-SEQUENCE-TYPE": "PRC",
+      "LS-NEXT-PROCESS": "30000001",
+      "LS-RETURN-CODE": "0"
+     }
+    },
+    {
+     "set": {
+      "LS-FUNCTION": "STAT",
+      "LS-PROCESS-DATE": "20240102",
+      "LS-SEQUENCE-TYPE": "PRC",
+      "LS-NEXT-PROCESS": "30000002",
+      "LS-RETURN-CODE": "0"
+     }
+    }
+   ],
+   "set": {
+    "LS-FUNCTION": "NEXT",
+    "LS-PROCESS-DATE": "20240101",
+    "LS-SEQUENCE-TYPE": "PRC",
+    "LS-NEXT-PROCESS": "OLDPROC1",
+    "LS-RETURN-CODE": "0"
+   },
+   "datasets": {
+    "PRCSEQ": {
+     "records": [
+      "3000000105FIRST PRC PROCESS             PRC",
+      "3000000205SECOND PRC PROCESS            PRC",
+      "9000000102END REPORT                    RPT"
+     ]
+    },
+    "BCHCTL": {
+     "records": [
+      "30000001202401020002D                                \u0000\u0000        0000\u0000\u0000        0000\u0000\u0000        0000\u0000\u0000        0000\u0000\u0000        0000\u0000\u0000        0000\u0000\u0000        0000\u0000\u0000        0000\u0000\u0000        0000\u0000\u0000        0000\u0000\u0000\u0000\u0000                                                                                \u0000\u0000                                                                                                      ",
+      "30000002202401020002E                                \u0000\u0000        0000\u0000\u0000        0000\u0000\u0000        0000\u0000\u0000        0000\u0000\u0000        0000\u0000\u0000        0000\u0000\u0000        0000\u0000\u0000        0000\u0000\u0000        0000\u0000\u0000        0000\u0000\u0000\u0000\u0000                                                                                \u0000\u0000                                                                                                      "
+     ]
+    }
+   },
+   "expect": {
+    "outcome": "BLOCKED GAP-ERRPROC-0001",
+    "items": {
+     "LS-NEXT-PROCESS": "",
+     "WS-SEQUENCE-IX": "3",
+     "WS-PROC-STATUS(1)": "D",
+     "WS-PROC-STATUS(2)": "E",
+     "ERR-TEXT": "Process definition not found",
+     "ERR-PROGRAM": "PRCSEQ00",
+     "LS-RETURN-CODE": "8"
+    }
+   },
+   "program": "PRCSEQ00"
+  },
+  {
+   "id": "CALL-PRCSEQ00-V04",
+   "title": "PRCSEQ00 V04 reaches CALL 'ERRPROC': the converted ERRPROC runs and blocks at its first statement (ERRPROC.cbl:57 ACCEPT FROM TIME STAMP)",
+   "cobol_lines": [
+    76,
+    77,
+    78,
+    79,
+    80,
+    95,
+    96,
+    97,
+    101,
+    102,
+    120,
+    121,
+    122,
+    142,
+    148,
+    156,
+    157,
+    158,
+    160,
+    162,
+    168,
+    169,
+    170,
+    171,
+    173,
+    189,
+    190,
+    207,
+    208,
+    216,
+    217,
+    222,
+    224,
+    225,
+    226,
+    227,
+    "src/programs/common/ERRPROC.cbl:52-57"
+   ],
+   "kind": "call",
+   "calls": [
+    {
+     "set": {
+      "LS-FUNCTION": "INIT",
+      "LS-PROCESS-DATE": "20240101",
+      "LS-SEQUENCE-TYPE": "TRM",
+      "LS-NEXT-PROCESS": "",
+      "LS-RETURN-CODE": "0"
+     }
+    }
+   ],
+   "set": {
+    "LS-FUNCTION": "NEXT",
+    "LS-PROCESS-DATE": "20240101",
+    "LS-SEQUENCE-TYPE": "TRM",
+    "LS-NEXT-PROCESS": "OLDPROC1",
+    "LS-RETURN-CODE": "0"
+   },
+   "datasets": {
+    "PRCSEQ": {
+     "records": [
+      "3000000105FIRST PRC PROCESS             PRC",
+      "3000000205SECOND PRC PROCESS            PRC",
+      "9000000102END REPORT                    RPT"
+     ]
+    },
+    "BCHCTL": {
+     "records": [
+      "EXISTING202401010001D"
+     ]
+    }
+   },
+   "expect": {
+    "outcome": "BLOCKED GAP-ERRPROC-0001",
+    "items": {
+     "LS-NEXT-PROCESS": "",
+     "WS-SEQUENCE-IX": "1",
+     "WS-PROCESS-COUNT": "0",
+     "ERR-TEXT": "Process definition not found",
+     "ERR-PROGRAM": "PRCSEQ00",
+     "LS-RETURN-CODE": "8"
+    }
+   },
+   "program": "PRCSEQ00"
+  },
+  {
+   "id": "CALL-RCVPRC00-R03",
+   "title": "RCVPRC00 R03 reaches CALL 'ERRPROC': the converted ERRPROC runs and blocks at its first statement (ERRPROC.cbl:57 ACCEPT FROM TIME STAMP)",
+   "cobol_lines": [
+    133,
+    134,
+    135,
+    111,
+    112,
+    113,
+    "src/programs/common/ERRPROC.cbl:52-57"
+   ],
+   "kind": "call",
+   "set": {
+    "LS-FUNCTION": "INIT",
+    "LS-PROCESS-DATE": "",
+    "LS-PROCESS-ID": "30000001",
+    "LS-RECOVERY-TYPE": "P",
+    "LS-RECOVERY-PARM": "",
+    "LS-RETURN-CODE": "0"
+   },
+   "datasets": {
+    "BCHCTL": {
+     "records": [
+      "30000001202401010001A"
+     ]
+    },
+    "PRCSEQ": {
+     "records": [
+      "3000000101FIRST PRC PROCESS             PRC"
+     ]
+    }
+   },
+   "expect": {
+    "outcome": "BLOCKED GAP-ERRPROC-0001"
+   },
+   "program": "RCVPRC00"
+  },
+  {
+   "id": "CALL-RCVPRC00-R04",
+   "title": "RCVPRC00 R04 reaches CALL 'ERRPROC': the converted ERRPROC runs and blocks at its first statement (ERRPROC.cbl:57 ACCEPT FROM TIME STAMP)",
+   "cobol_lines": [
+    138,
+    143,
+    144,
+    145,
+    113,
+    "src/programs/common/ERRPROC.cbl:52-57"
+   ],
+   "kind": "call",
+   "set": {
+    "LS-FUNCTION": "INIT",
+    "LS-PROCESS-DATE": "20240101",
+    "LS-PROCESS-ID": "30000001",
+    "LS-RECOVERY-TYPE": "X",
+    "LS-RECOVERY-PARM": "",
+    "LS-RETURN-CODE": "0"
+   },
+   "datasets": {
+    "BCHCTL": {
+     "records": [
+      "30000001202401010001A"
+     ]
+    },
+    "PRCSEQ": {
+     "records": [
+      "3000000101FIRST PRC PROCESS             PRC"
+     ]
+    }
+   },
+   "expect": {
+    "outcome": "BLOCKED GAP-ERRPROC-0001"
+   },
+   "program": "RCVPRC00"
+  },
+  {
+   "id": "CALL-RCVPRC00-R06",
+   "title": "RCVPRC00 R06 reaches CALL 'ERRPROC': the converted ERRPROC runs and blocks at its first statement (ERRPROC.cbl:57 ACCEPT FROM TIME STAMP)",
+   "cobol_lines": [
+    77,
+    78,
+    106,
+    284,
+    285,
+    290,
+    "src/programs/common/ERRPROC.cbl:52-57"
+   ],
+   "kind": "call",
+   "set": {
+    "LS-FUNCTION": "TERM",
+    "LS-PROCESS-DATE": "20240101",
+    "LS-PROCESS-ID": "30000001",
+    "LS-RECOVERY-TYPE": "P",
+    "LS-RECOVERY-PARM": "",
+    "LS-RETURN-CODE": "0"
+   },
+   "expect": {
+    "outcome": "BLOCKED GAP-ERRPROC-0001"
+   },
+   "program": "RCVPRC00"
+  },
+  {
+   "id": "CALL-RCVPRC00-V01",
+   "title": "RCVPRC00 V01 reaches CALL 'ERRPROC': the converted ERRPROC runs and blocks at its first statement (ERRPROC.cbl:57 ACCEPT FROM TIME STAMP)",
+   "cobol_lines": [
+    72,
+    77,
+    78,
+    106,
+    284,
+    285,
+    290,
+    "src/programs/common/ERRPROC.cbl:52-57"
+   ],
+   "kind": "call",
+   "set": {
+    "LS-FUNCTION": "TERM",
+    "LS-PROCESS-DATE": "20240101",
+    "LS-PROCESS-ID": "30000001",
+    "LS-RECOVERY-TYPE": "P",
+    "LS-RECOVERY-PARM": "",
+    "LS-RETURN-CODE": "0"
+   },
+   "expect": {
+    "outcome": "BLOCKED GAP-ERRPROC-0001",
+    "items": {
+     "ERR-TEXT": "Recovery completed successfully",
+     "LS-RETURN-CODE": "0"
+    }
+   },
+   "program": "RCVPRC00"
+  },
+  {
+   "id": "CALL-RCVPRC00-V02",
+   "title": "RCVPRC00 V02 reaches CALL 'ERRPROC': the converted ERRPROC runs and blocks at its first statement (ERRPROC.cbl:57 ACCEPT FROM TIME STAMP)",
+   "cobol_lines": [
+    72,
+    77,
+    78,
+    106,
+    284,
+    286,
+    287,
+    290,
+    "src/programs/common/ERRPROC.cbl:52-57"
+   ],
+   "kind": "call",
+   "set": {
+    "LS-FUNCTION": "TERM",
+    "LS-PROCESS-DATE": "20240101",
+    "LS-PROCESS-ID": "30000001",
+    "LS-RECOVERY-TYPE": "P",
+    "LS-RECOVERY-PARM": "",
+    "LS-RETURN-CODE": "4"
+   },
+   "expect": {
+    "outcome": "BLOCKED GAP-ERRPROC-0001",
+    "items": {
+     "ERR-TEXT": "Recovery completed with errors",
+     "LS-RETURN-CODE": "4"
+    }
+   },
+   "program": "RCVPRC00"
+  },
+  {
+   "id": "CALL-RCVPRC00-V03",
+   "title": "RCVPRC00 V03 reaches CALL 'ERRPROC': the converted ERRPROC runs and blocks at its first statement (ERRPROC.cbl:57 ACCEPT FROM TIME STAMP)",
+   "cobol_lines": [
+    72,
+    77,
+    78,
+    106,
+    284,
+    286,
+    287,
+    290,
+    "src/programs/common/ERRPROC.cbl:52-57"
+   ],
+   "kind": "call",
+   "set": {
+    "LS-FUNCTION": "TERM",
+    "LS-PROCESS-DATE": "20240101",
+    "LS-PROCESS-ID": "30000001",
+    "LS-RECOVERY-TYPE": "P",
+    "LS-RECOVERY-PARM": "",
+    "LS-RETURN-CODE": "-1"
+   },
+   "expect": {
+    "outcome": "BLOCKED GAP-ERRPROC-0001",
+    "items": {
+     "ERR-TEXT": "Recovery completed with errors",
+     "LS-RETURN-CODE": "-1"
+    }
+   },
+   "program": "RCVPRC00"
+  }
+ ]
+}

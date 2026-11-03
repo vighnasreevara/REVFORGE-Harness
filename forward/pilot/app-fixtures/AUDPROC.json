@@ -1,0 +1,69 @@
+{
+ "program": "AUDPROC",
+ "provenance": "Written 2026-11-02 by a scenario-author agent (F6 independent fixture design) from the COBOL source src/programs/common/AUDPROC.cbl with copybooks src/copybook/common/AUDITLOG.cpy and the gaps array of forward/generated/java/AUDPROC/pilot-result.json only; no generated Java, source map or test result was read. DISPLAY lines are given right-trimmed.",
+ "scenarios": [
+  {
+   "id": "S01",
+   "title": "normal request with AUDFILE allocated: the first statement of 1000-INITIALIZE is ACCEPT FROM TIME STAMP, so every path blocks before OPEN EXTEND",
+   "cobol_lines": [
+    53,
+    59,
+    60
+   ],
+   "kind": "call",
+   "set": {
+    "LS-SYSTEM-ID": "SYS00001",
+    "LS-USER-ID": "USER0001",
+    "LS-PROGRAM": "PGM00001",
+    "LS-TERMINAL": "TERM0001",
+    "LS-TYPE": "TRAN",
+    "LS-ACTION": "CREATE",
+    "LS-STATUS": "SUCC",
+    "LS-PORT-ID": "PORT0001",
+    "LS-ACCT-NO": "1234567890",
+    "LS-BEFORE-IMAGE": "",
+    "LS-AFTER-IMAGE": "AFTER",
+    "LS-MESSAGE": "AUDIT TEST",
+    "LS-RETURN-CODE": "0"
+   },
+   "datasets": {
+    "AUDFILE": {
+     "records": []
+    }
+   },
+   "expect": {
+    "outcome": "BLOCKED AT src/programs/common/AUDPROC.cbl:60",
+    "display": []
+   }
+  },
+  {
+   "id": "S02",
+   "title": "AUDFILE not allocated: the open-error branch (lines 63-67) is never reached because the TIME STAMP ACCEPT precedes OPEN",
+   "cobol_lines": [
+    53,
+    60,
+    62
+   ],
+   "kind": "call",
+   "set": {
+    "LS-SYSTEM-ID": "SYS00001",
+    "LS-USER-ID": "USER0001",
+    "LS-PROGRAM": "PGM00001",
+    "LS-TERMINAL": "TERM0001",
+    "LS-TYPE": "TRAN",
+    "LS-ACTION": "CREATE",
+    "LS-STATUS": "SUCC",
+    "LS-PORT-ID": "PORT0001",
+    "LS-ACCT-NO": "1234567890",
+    "LS-BEFORE-IMAGE": "",
+    "LS-AFTER-IMAGE": "AFTER",
+    "LS-MESSAGE": "AUDIT TEST",
+    "LS-RETURN-CODE": "0"
+   },
+   "expect": {
+    "outcome": "BLOCKED AT src/programs/common/AUDPROC.cbl:60",
+    "display": []
+   }
+  }
+ ]
+}
