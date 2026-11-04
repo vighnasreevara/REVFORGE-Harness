@@ -1,0 +1,110 @@
+{
+ "contract": "step-23/remediation-roadmap",
+ "fields": {
+  "phases[].exit_criteria": "measurable; no dates, budgets or resources are assumed"
+ },
+ "phases": [
+  {
+   "phase": "A",
+   "title": "Source and business decisions",
+   "groups": [
+    "RCG-19",
+    "RCG-03",
+    "RCG-04",
+    "RCG-05",
+    "RCG-06",
+    "RCG-07",
+    "RCG-10",
+    "RCG-11",
+    "RCG-12",
+    "RCG-13",
+    "RCG-14",
+    "RCG-15",
+    "RCG-16"
+   ],
+   "gaps": 400,
+   "roles": [
+    "Business SME",
+    "COBOL maintainer",
+    "Data architect",
+    "OWNER_REVIEW_REQUIRED"
+   ],
+   "prerequisites": "access to the authorized source owner and business SMEs; the decision register",
+   "required_evidence": "corrected/missing source members and signed decisions",
+   "exit_criteria": "readiness re-run shows the source-category checks passing for the affected programs; the corresponding gaps disappear on reconversion",
+   "remaining_blockers": "everything outside these groups"
+  },
+  {
+   "phase": "B",
+   "title": "External environments",
+   "groups": [
+    "RCG-01",
+    "RCG-02",
+    "RCG-08",
+    "RCG-09",
+    "RCG-20"
+   ],
+   "gaps": 134,
+   "roles": [
+    "CICS administrator",
+    "DB2 administrator",
+    "Platform engineering",
+    "QA / independent verification"
+   ],
+   "prerequisites": "project owner approval for environments; platform engineering",
+   "required_evidence": "DB2, CICS, legacy environment definitions, platform services, COBOL runtime or captured runs",
+   "exit_criteria": "captured runs exist for each external outcome; boundary gaps have specifications",
+   "remaining_blockers": "everything outside these groups"
+  },
+  {
+   "phase": "C",
+   "title": "Governed Java implementation",
+   "groups": [
+    "RCG-21",
+    "RCG-18",
+    "RCG-23"
+   ],
+   "gaps": 7,
+   "roles": [
+    "Java engineering team",
+    "Security / authorization approver"
+   ],
+   "prerequisites": "Phase A/B evidence; trust store, signed disclosure authorization, G2/G3/G4 approvals, runner and egress (BMad)",
+   "required_evidence": "verified LIVE BMad receipts and approved stories",
+   "exit_criteria": "bmad governance verdict BMAD_COMPLIANT for the scope; converter changes with regression tests",
+   "remaining_blockers": "everything outside these groups"
+  },
+  {
+   "phase": "D",
+   "title": "Independent verification",
+   "groups": [
+    "RCG-22",
+    "RCG-20"
+   ],
+   "gaps": 2,
+   "roles": [
+    "QA / independent verification"
+   ],
+   "prerequisites": "Phase C implementation; legacy runtime (Phase B)",
+   "required_evidence": "F6 receipts; differential legacy comparisons",
+   "exit_criteria": "accepted F6 receipts; scenarios agree with legacy outputs",
+   "remaining_blockers": "everything outside these groups"
+  },
+  {
+   "phase": "E",
+   "title": "Readiness reassessment",
+   "groups": [
+    "RCG-17"
+   ],
+   "gaps": 27,
+   "roles": [
+    "OWNER_REVIEW_REQUIRED"
+   ],
+   "prerequisites": "Phases A-D",
+   "required_evidence": "a re-run of the engineering gates, readiness and the STEP 22 reconciliation",
+   "exit_criteria": "readiness, validation and reconciliation re-run; reverse diagrams regenerated; remaining gaps re-registered",
+   "remaining_blockers": "everything outside these groups"
+  }
+ ],
+ "all_groups_covered": true
+}

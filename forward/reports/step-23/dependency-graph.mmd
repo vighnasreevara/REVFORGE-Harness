@@ -1,0 +1,65 @@
+flowchart LR
+  RCG_01["RCG-01: DB2 runtime and precompiler not available (75)"]
+  RCG_02["RCG-02: CICS environment not available (44)"]
+  RCG_03["RCG-03: COPY/INCLUDE members missing from the source library (50)"]
+  RCG_04["RCG-04: Paragraphs PERFORMed but missing from the source (93)"]
+  RCG_05["RCG-05: Names used but declared nowhere (121)"]
+  RCG_06["RCG-06: SELECT without FD / invalid file definitions (13)"]
+  RCG_07["RCG-07: Record layouts not determinable as written (4)"]
+  RCG_08["RCG-08: Legacy environment definitions missing (TIME STAMP, RANDOM, USER-ID) (12)"]
+  RCG_09["RCG-09: Platform services and utilities (CEE3ABD, ILBOABN0, DELAY, IDCAMS) (2)"]
+  RCG_10["RCG-10: Statements invalid as written (7)"]
+  RCG_11["RCG-11: Undefined data conversions need a business rule (2)"]
+  RCG_12["RCG-12: Rule interpretation needs SME confirmation (82)"]
+  RCG_13["RCG-13: Suspected logic defects in the source (19)"]
+  RCG_14["RCG-14: Recursive PERFORM termination (2)"]
+  RCG_15["RCG-15: Dead code (3)"]
+  RCG_16["RCG-16: Unresolvable control flow in the reverse analysis (1)"]
+  RCG_17["RCG-17: Reverse documentation quality (diagrams) (27)"]
+  RCG_18["RCG-18: Constructs the reverse analysis could not support (5)"]
+  RCG_19["RCG-19: Empty source (POSUPDT) (3)"]
+  RCG_20["RCG-20: Legacy runtime equivalence evidence (1)"]
+  RCG_21["RCG-21: BMad governance prerequisites (1)"]
+  RCG_22["RCG-22: Independent F6 test evidence missing (1)"]
+  RCG_23["RCG-23: Converter limitation (CALL argument of kind literal) (1)"]
+  EXT_DB2(["DB2 environment"])
+  EXT_DB2 --> RCG_01
+  EXT_CICS(["CICS environment"])
+  EXT_CICS --> RCG_02
+  EXT_LEGACY_ENV(["legacy environment definitions"])
+  EXT_LEGACY_ENV --> RCG_08
+  EXT_PLATFORM(["platform services"])
+  EXT_PLATFORM --> RCG_09
+  EXT_SOURCE_OWNER(["authorized COBOL source owner"])
+  EXT_SOURCE_OWNER --> RCG_03
+  EXT_SOURCE_OWNER --> RCG_04
+  EXT_SOURCE_OWNER --> RCG_05
+  EXT_SOURCE_OWNER --> RCG_06
+  EXT_SOURCE_OWNER --> RCG_10
+  EXT_SOURCE_OWNER --> RCG_19
+  EXT_SME(["business SME decisions"])
+  EXT_SME --> RCG_11
+  EXT_SME --> RCG_12
+  EXT_SME --> RCG_13
+  EXT_SME --> RCG_14
+  EXT_SME --> RCG_15
+  EXT_LEGACY_RUNTIME(["COBOL compiler / captured legacy runs"])
+  EXT_LEGACY_RUNTIME --> RCG_20
+  GOV_TRUST_STORE(["trust store with signers"])
+  GOV_DISCLOSURE(["signed anthropic/claude-code-cli disclosure authorization"])
+  GOV_G2_PORTREAD(["signed G2 approval programs:PORTREAD"])
+  GOV_RUNNER(["Claude Code and Node inside the isolation boundary"])
+  GOV_EGRESS(["verified provider egress"])
+  GOV_LIVE_REQUEST(["live_execution.requested"])
+  GOV_F6_PORTREAD(["F6 receipt for PORTREAD"])
+  GOV_TRUST_STORE --> GOV_DISCLOSURE
+  GOV_TRUST_STORE --> GOV_G2_PORTREAD
+  GOV_DISCLOSURE --> RCG_21
+  GOV_G2_PORTREAD --> RCG_21
+  GOV_RUNNER --> RCG_21
+  GOV_EGRESS --> RCG_21
+  GOV_LIVE_REQUEST --> RCG_21
+  GOV_F6_PORTREAD --> RCG_22
+  RCG_22 --> RCG_21
+  MEMBERS(["missing members PORTREC, SQLPOS, DB2STAT"]) -. hypothesis .-> RCG_03
+  RCG_20 --> EQ(["COBOL equivalence of 154 rules"])

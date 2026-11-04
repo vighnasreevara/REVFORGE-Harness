@@ -1,0 +1,79 @@
+{
+ "contract": "step-23/bmad-governance-blockers",
+ "fields": {
+  "blockers[]": "failed checks of the latest PORTREAD preflight plus independent evidence"
+ },
+ "status": "BMAD ENFORCEMENT VERIFIED — LIVE EXECUTION BLOCKED",
+ "metrics": {
+  "configured_workflows": 6,
+  "authorized_workflows": 0,
+  "executed_live": 0,
+  "verified_receipts": 0,
+  "blocked_workflows": 6,
+  "mock_receipts_never_evidence": 0,
+  "governed_runs": 4,
+  "preflights": 13
+ },
+ "preflight": "BPF-0013",
+ "blockers": [
+  {
+   "check": "g2_exact_scope",
+   "detail": "G2 has not passed on the current baseline | G2 re-evaluated now: UNVERIFIED — G2 not approved for scope application: NOT_READY (417 blocking finding(s)); failing checks: canonical_rule_coverage, cross_batch_reconciliation, requirement_evidence, runtime_evidence, semantic_contradictions, contradicted_claims, blocking_decisions, data_contracts, scope_classification, readiness, trust_anchor, human_approval | requested scope programs:PORTREAD (digest c6b1864a61d126f8…) is not the G2-approved scope (none approved)"
+  },
+  {
+   "check": "workflow_state",
+   "detail": "workflow state is REQUIREMENTS_DRAFTED; BMAD-PRD is allowed only in REQUIREMENTS_APPROVED, ARCHITECTURE_DRAFTED, ARCHITECTURE_APPROVED, STORIES_DRAFTED, STORIES_APPROVED"
+  },
+  {
+   "check": "provider_authorization",
+   "detail": "no valid signed disclosure authorization for anthropic/claude-code-cli, scope programs:PORTREAD, workflow bmad-prd (0 disclosure record(s) considered); 0 OpenAI source-export authorization(s) exist and are not applicable to Claude"
+  },
+  {
+   "check": "source_hashes_current",
+   "detail": "no authorization to compare source hashes against"
+  },
+  {
+   "check": "authorized_content_only",
+   "detail": "2 file(s) would be exposed and none is authorized"
+  },
+  {
+   "check": "runtime_execution_authorization",
+   "detail": "bindings.json live_execution.requested is false"
+  },
+  {
+   "check": "limits",
+   "detail": "no authorized limits (cost, files, bytes, runs)"
+  },
+  {
+   "check": "workspace_manifest",
+   "detail": "no minimal workspace can be planned without an authorization naming its files"
+  },
+  {
+   "check": "network_isolation",
+   "detail": "default-deny verified (no route, no DNS); no verified provider-egress component exists, so a LIVE run could not reach the provider without weakening the boundary"
+  },
+  {
+   "check": "runner_inside_boundary",
+   "detail": "Claude Code and Node are not installed inside the WSL2 environment: the runner cannot run inside the boundary"
+  },
+  {
+   "check": "enforceable_launch_boundary",
+   "detail": "not enforceable for LIVE: network: the tested boundary has no network at all; a LIVE run needs a verified provider-egress component (allowlist proxy outside the namespace), which does not exist. Even then, TLS to the provider is end-to-end: request content cannot be inspected, so only the minimal workspace limits what can be disclosed | runner: Claude Code and Node are not installed inside the isolated Linux environment, so the runner cannot execute within the boundary"
+  },
+  {
+   "check": "f6_independent_evidence",
+   "detail": "no accepted F6 receipt for PORTREAD (BGR-0004)"
+  }
+ ],
+ "disclosure_request": {
+  "authorization_id": "ADA-8154d6398d4d",
+  "signed": false,
+  "expires_at": "2026-11-06T20:45:24.374Z",
+  "note": "time-dependent: re-check expiry at use; re-prepare after it expires"
+ },
+ "register_records": [
+  "MGR-0567",
+  "MGR-0568"
+ ],
+ "not_evidence": "none of this is BMad execution: 0 workflows executed, 0 verified receipts"
+}
