@@ -1,0 +1,40 @@
+{
+ "contract": "bmad-e2e/bypass-audit",
+ "entry_points": [
+  {
+   "entry": "bmad governed-run",
+   "produces_java": false,
+   "governance": "the dispatcher itself; never invokes the converter"
+  },
+  {
+   "entry": "workflow dispatch F5 (orchestrator prepare / G5)",
+   "produces_java": true,
+   "governance": "generationAuthorized requires flag, G4 and BMad receipts up to sprint"
+  },
+  {
+   "entry": "pilot authorize (new LGA record)",
+   "produces_java": false,
+   "governance": "FIXED: refused BMAD_BLOCKED without BMad lifecycle evidence (tests/bmad-e2e real-run check)"
+  },
+  {
+   "entry": "pilot convert-app / pilot generate",
+   "produces_java": true,
+   "governance": "only under an existing LGA record (historical, non-BMad, labelled); expires 2026-12-03"
+  },
+  {
+   "entry": "pilot run (synthetic pilot)",
+   "produces_java": true,
+   "governance": "synthetic sources only, output under pilot directories; not application Java"
+  },
+  {
+   "entry": "generate (top level)",
+   "produces_java": false,
+   "governance": "always refused"
+  },
+  {
+   "entry": "tools/*.py",
+   "produces_java": false,
+   "governance": "read-only reporting"
+  }
+ ]
+}

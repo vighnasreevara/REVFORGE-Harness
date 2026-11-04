@@ -60,6 +60,20 @@ export function policyRoots(run: RunHandle, state: WorkflowStateRecord | null): 
 }
 
 /** Java generation needs the config flag AND an approved generation gate (G4 PASS on this baseline). */
+/**
+ * Mandatory-BMad lifecycle evidence for a new governed operation on `scope` (end-to-end integration): verified LIVE
+ * receipts for every stage up to `upTo` plus the independent F2 (and, for the full lifecycle, F6) evidence. Loaded
+ * lazily so modules that must not import BMad (the pilot) can still enforce it.
+ */
+export function bmadLifecycleEvidence(wf: Workflow, scope: string, upTo?: string): { required: boolean; ok: boolean; status: string; reasons: string[] } {
+  // eslint-disable-next-line @typescript-eslint/no-var-requires
+  const g = require('../bmad/governance');
+  if (!g.bmadMandatory(wf.run.ctx)) return { required: false, ok: true, status: 'NOT_MANDATORY', reasons: [] };
+  const v = g.governanceVerdict(wf, scope, upTo ? { upTo } : {});
+  const reasons = [...v.stages.filter((s: any) => s.status !== 'RECEIPT_VERIFIED').map((s: any) => `${s.stage} (${s.workflow_id}): ${s.reasons[0]}`), ...(v.independent_evidence.f2.status !== 'ACCEPTED' ? [`F2 data mapping not accepted for ${v.independent_evidence.f2.missing.join(', ')}`] : [])];
+  return { required: true, ok: v.status === 'BMAD_COMPLIANT', status: v.status, reasons };
+}
+
 export function generationAuthorized(run: RunHandle, state: WorkflowStateRecord | null): boolean {
   try {
     assertGenerationAllowed(run.ctx.config.generation, [{ gate_id: 'GENERATION', approved: gatePassed(state, 'G4', run.manifestSha256) }]);
@@ -489,6 +503,11 @@ export function prepare(wf: Workflow, agentKey: string, opts: { programs?: strin
         if (files.length) inputs.push({ kind: `program:${p?.program_id ?? u.name}`, required: true, files });
       }
     }
+
+    // Verified LIVE BMad drafts of the packet's programs, as optional non-authoritative inputs (F3, F4, F5, F7 only;
+    // F2 and F6 stay independent of BMad). Loaded lazily: the governance module depends on this one.
+    // eslint-disable-next-line @typescript-eslint/no-var-requires
+    inputs.push(...require('../bmad/governance').verifiedDrafts(wf, a.id, programUnits.map((u) => u.name)));
 
     const srcAvailable = !!wf.run.ctx.sourceRoot && fs.existsSync(wf.run.ctx.sourceRoot) && fs.statSync(wf.run.ctx.sourceRoot).isDirectory();
     const packet: DispatchPacket = {

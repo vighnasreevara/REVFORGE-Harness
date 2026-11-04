@@ -1,0 +1,121 @@
+{
+ "contract": "bmad-e2e/architecture-audit",
+ "findings": [
+  {
+   "id": "Q1",
+   "question": "Are all six workflow bindings valid?",
+   "answer": "YES",
+   "evidence": "bmad doctor: 6 valid bindings; definitions re-derived from the pinned 6.12.4 release; shims refused",
+   "files": [
+    "forward/integrations/bmad/bindings.json",
+    "forward/runtime/src/bmad/bindings.ts",
+    "forward/runtime/src/bmad/release.ts"
+   ]
+  },
+  {
+   "id": "Q2",
+   "question": "Can each workflow be prepared with correct inputs?",
+   "answer": "NOT FOR PORTREAD NOW",
+   "evidence": "packet preparation requires eligibility (G2 for the exact scope, workflow state, upstream receipts); every workflow is refused for programs:PORTREAD (workflow-binding-validation.json); MOCK preparation is tested on synthetic scopes (tests/step6-9)",
+   "files": [
+    "forward/runtime/src/bmad/adapter.ts#preparePacket",
+    "forward/runtime/src/bmad/eligibility.ts",
+    "forward/runtime/src/bmad/mapping.ts"
+   ]
+  },
+  {
+   "id": "Q3",
+   "question": "Does every workflow run under the required authorization and isolation boundary?",
+   "answer": "YES (enforced); none can run",
+   "evidence": "executeLive requires a recorded preflight that permits the launch; the new sandbox runner re-checks the preflight, the recorded disclosure authorization and every source/input hash and runs only inside sandbox.sh (network none)",
+   "files": [
+    "forward/runtime/src/bmad/executor.ts#executeLive",
+    "forward/runtime/src/bmad/preflight.ts",
+    "forward/runtime/src/bmad/runner.ts",
+    "forward/integrations/bmad/isolation/sandbox.sh"
+   ]
+  },
+  {
+   "id": "Q4",
+   "question": "Are BMad outputs consumed by the next F1-F7 stage?",
+   "answer": "FIXED (wired); not demonstrated",
+   "evidence": "before: only later BMad bindings read earlier receipts; F1-F7 dispatch packets never included BMad output. Now verified LIVE BMad documents are optional, non-authoritative inputs of F3 (PRD), F4 (PRD, architecture), F5 (stories, sprint) and F7 (build); F1, F2 and F6 never receive them. No real receipt exists, so no packet has received one",
+   "files": [
+    "forward/runtime/src/orchestrator/orchestrator.ts#prepare",
+    "forward/runtime/src/bmad/governance.ts#verifiedDrafts"
+   ]
+  },
+  {
+   "id": "Q5",
+   "question": "Does the workflow stop when a required stage fails?",
+   "answer": "YES",
+   "evidence": "governedRun stops at the first BLOCKED / EXECUTION_FAILED / EXECUTED_REJECTED stage; later stages NOT_ATTEMPTED (tests/bmad-e2e, step21)",
+   "files": [
+    "forward/runtime/src/bmad/governance.ts#governedRun"
+   ]
+  },
+  {
+   "id": "Q6",
+   "question": "Are actual LIVE receipts validated?",
+   "answer": "YES (logic); 0 exist",
+   "evidence": "recordResult re-evaluates the LIVE gate from preflight facts; governance.receiptCounts requires accepted, sealed, intact, current-digest LIVE receipts with unchanged documents",
+   "files": [
+    "forward/runtime/src/bmad/adapter.ts#recordResult",
+    "forward/runtime/src/bmad/governance.ts#receiptCounts"
+   ]
+  },
+  {
+   "id": "Q7",
+   "question": "Can local-generation output be marked BMad-compliant?",
+   "answer": "NO",
+   "evidence": "compliance is computed from BMad receipts only; LGA conversions print LOCAL_LGA_NOT_BMAD_GOVERNED; historical records are not relabelled",
+   "files": [
+    "forward/runtime/src/commands/pilot.ts",
+    "forward/runtime/src/bmad/governance.ts#governanceVerdict"
+   ]
+  },
+  {
+   "id": "Q8",
+   "question": "Can any command bypass mandatory governance?",
+   "answer": "CLOSED for new authorisations",
+   "evidence": "before: `pilot authorize` could create a NEW local-generation authorisation without BMad evidence; now refused BMAD_BLOCKED without verified receipts up to sprint and accepted F2. Re-conversion under the existing LGA records (convert-app / generate) stays permitted as historical, non-BMad work until those records expire on 2026-12-03; workflow generation needs BMad evidence (generationAuthorized); top-level `generate` refuses",
+   "files": [
+    "forward/runtime/src/commands/pilot.ts#authorize",
+    "forward/runtime/src/orchestrator/orchestrator.ts#bmadLifecycleEvidence",
+    "forward/runtime/src/orchestrator/orchestrator.ts#generationAuthorized",
+    "forward/runtime/src/cli.ts#generate"
+   ]
+  },
+  {
+   "id": "Q9",
+   "question": "Are all source, authorization and engineering gates preserved?",
+   "answer": "YES",
+   "evidence": "no gate, check or expected test result was changed; regression-results.json",
+   "files": [
+    "forward/runtime/src/orchestrator/gates.ts",
+    "forward/runtime/src/pilot/gates.ts"
+   ]
+  },
+  {
+   "id": "Q10",
+   "question": "What still prevents end-to-end execution?",
+   "answer": "EXTERNAL",
+   "evidence": "trust store, signed disclosure authorization, PORTREAD G2 (12 findings), workflow state, live_execution.requested, runner and egress inside the boundary, F6 receipt for PORTREAD, generation authority for Build (blockers.json)",
+   "files": [
+    "forward/reports/bmad-end-to-end/blockers.json"
+   ]
+  }
+ ],
+ "installation": {
+  "release": "6.12.4",
+  "executor_ok_for_installation": true,
+  "executor_ok_for_live": false,
+  "workspaces": [
+   {
+    "path": "D:\\PROJECTS\\REVFORGE-Harness\\forward\\integrations\\bmad\\executor\\workspaces\\synthetic-001",
+    "verified": true
+   }
+  ],
+  "repository_root": "no BMad in .claude/, _bmad/ or _bmad-output/"
+ }
+}

@@ -8,7 +8,7 @@
 import { createHash } from 'crypto';
 import * as path from 'path';
 import { RuntimeContext } from '../core/config';
-import { loadWorkflow, OrchestratorError } from '../orchestrator/orchestrator';
+import { OrchestratorError, bmadLifecycleEvidence, loadWorkflow } from '../orchestrator/orchestrator';
 import { writeExport } from '../operations/decisions';
 import { modernizationPlan } from '../pilot/plan';
 import { PilotRefused, runPilot } from '../pilot/pilot';
@@ -153,6 +153,11 @@ export function pilotCommand(ctx: RuntimeContext, action: string | undefined, fl
           }
         }
         const wf = loadWorkflow(ctx, str(flags, 'run') ?? 'latest');
+        // With mandatory BMad governance a NEW local-generation authorisation needs the scope's BMad lifecycle evidence
+        // (verified LIVE receipts up to sprint and the accepted F2 data mapping). Existing records stay valid as
+        // historical, non-BMad authorisations; nothing is relabelled.
+        const ungoverned = all.map((a: any) => ({ program: a.program, e: bmadLifecycleEvidence(wf, `programs:${a.program}`, 'sprint') })).filter((x: any) => x.e.required && !x.e.ok);
+        if (ungoverned.length) throw new OrchestratorError(`BMAD_BLOCKED: a new local-generation authorisation needs BMad lifecycle evidence for ${ungoverned.map((x: any) => x.program).join(', ')}`, 'BMAD_BLOCKED', ungoverned.flatMap((x: any) => x.e.reasons.map((r: string) => `${x.program}: ${r}`)));
         const done = all.map((a: any) => ({ program: a.program, ...recordLocalAuthorization(wf, a, inp.policy_statement) }));
         print(done, () => done.forEach((d: any) => out(`recorded ${d.authorization_id} for ${d.program} under ${d.policy_id}`)));
         return 0;

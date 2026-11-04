@@ -1,0 +1,20 @@
+{
+ "contract": "bmad-e2e/converter-governance",
+ "how_f5_invokes": "F5 (orchestrator) may write Java only when generationAuthorized: config flag + G4 + (mandatory) BMad receipts up to sprint; the deterministic converter is runtime/src/pilot/app-convert.ts (convertAppProgram) via `pilot convert-app` / `pilot generate`",
+ "input_selection": "programs with a valid LGA record (or, for governed work, the approved scope); sources hash-verified against the record",
+ "story_influence": "approved BMad/F4 stories define scope only; they never add COBOL behaviour: the converter translates the source as written",
+ "bypass_status": "new LGA authorisations need BMad evidence; historical LGA re-conversion stays non-BMad until 2026-12-03",
+ "traceability": "source-map.json per program (cobol_file, cobol_line, java_line, gap_id); statement coverage c(line)",
+ "unsupported_behaviour": "numbered explicit gaps (UnresolvedGapException), runtime gaps (RUNTIME-*)",
+ "tests_linked": "pilot-result execution cases, scenario fixtures, integration jobs; listed per program in reconcile-run/program-mapping.json",
+ "historical_records": "LGA-0001..0042 unchanged, classified LOCAL_LGA_NOT_BMAD_GOVERNED",
+ "portread": {
+  "status": "COMPLETE",
+  "counts": {
+   "PASS": 19,
+   "BLOCKED_AS_EXPECTED": 0,
+   "FAIL": 0,
+   "total": 19
+  }
+ }
+}

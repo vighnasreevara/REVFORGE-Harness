@@ -1,0 +1,14 @@
+{
+ "contract": "bmad-e2e/live-runner-status",
+ "implemented": "runtime/src/bmad/runner.ts (sandboxRunner, planLaunch, sandboxArgv), wired into `bmad governed-run`",
+ "refuses_unless": [
+  "a LIVE manifest naming a recorded preflight of the same workflow and scope that permitted the launch",
+  "a recorded disclosure authorization for the scope covering the workflow",
+  "every authorized source file and mapped input matching its recorded SHA-256",
+  "the pinned bound workflow definition installed in the verified isolated workspace"
+ ],
+ "executes": "claude -p (restricted tools; WebFetch/WebSearch/Bash/PowerShell disallowed) from /work/inputs inside sandbox.sh: network none, src and inputs read-only, only /work/out writable; outputs copied to the packet output directory and validated by recordResult",
+ "not_part_of_runner": "the provider route and the provider credential (the separately verified egress component the preflight checks)",
+ "tested_with": "sandbox test double (tests/bmad-e2e.test.ts): refusals, stale hash, wrong scope, missing definition, command shape; the real sandbox launch is not reachable here because no preflight is permitted",
+ "live_launches": 0
+}

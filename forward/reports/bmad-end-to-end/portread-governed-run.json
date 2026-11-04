@@ -1,0 +1,126 @@
+{
+  "record_id": "BGR-0004",
+  "contract": "bmad/governed-run",
+  "contract_version": "1.0",
+  "started_at": "2026-11-04T00:07:35.487Z",
+  "ended_at": "2026-11-04T00:07:59.762Z",
+  "scope": "programs:PORTREAD",
+  "scope_sha256": "c6b1864a61d126f8f09c5b2e5aace229df1da15dc8314fa0d07f16a756a6178f",
+  "mandatory": true,
+  "execution_mode": "LIVE",
+  "status": "BMAD_BLOCKED",
+  "stages": [
+    {
+      "stage": "requirements",
+      "binding_id": "BMAD-PRD",
+      "workflow_id": "bmad-prd",
+      "agent": "F1",
+      "status": "BLOCKED",
+      "preflight_id": "BPF-0013",
+      "authorization_id": null,
+      "receipt_id": null,
+      "execution_record": null,
+      "blockers": [
+        "g2_exact_scope: G2 has not passed on the current baseline | G2 re-evaluated now: UNVERIFIED — G2 not approved for scope application: NOT_READY (417 blocking finding(s)); failing checks: canonical_rule_coverage, cross_batch_reconciliation, requirement_evidence, runtime_evidence, semantic_contradictions, contradicted_claims, blocking_decisions, data_contracts, scope_classification, readiness, trust_anchor, human_approval | requested scope programs:PORTREAD (digest c6b1864a61d126f8…) is not the G2-approved scope (none approved)",
+        "workflow_state: workflow state is REQUIREMENTS_DRAFTED; BMAD-PRD is allowed only in REQUIREMENTS_APPROVED, ARCHITECTURE_DRAFTED, ARCHITECTURE_APPROVED, STORIES_DRAFTED, STORIES_APPROVED",
+        "provider_authorization: no valid signed disclosure authorization for anthropic/claude-code-cli, scope programs:PORTREAD, workflow bmad-prd (0 disclosure record(s) considered); 0 OpenAI source-export authorization(s) exist and are not applicable to Claude",
+        "source_hashes_current: no authorization to compare source hashes against",
+        "authorized_content_only: 2 file(s) would be exposed and none is authorized",
+        "runtime_execution_authorization: bindings.json live_execution.requested is false",
+        "limits: no authorized limits (cost, files, bytes, runs)",
+        "workspace_manifest: no minimal workspace can be planned without an authorization naming its files",
+        "network_isolation: default-deny verified (no route, no DNS); no verified provider-egress component exists, so a LIVE run could not reach the provider without weakening the boundary",
+        "runner_inside_boundary: Claude Code and Node are not installed inside the WSL2 environment: the runner cannot run inside the boundary",
+        "enforceable_launch_boundary: not enforceable for LIVE: network: the tested boundary has no network at all; a LIVE run needs a verified provider-egress component (allowlist proxy outside the namespace), which does not exist. Even then, TLS to the provider is end-to-end: request content cannot be inspected, so only the minimal workspace limits what can be disclosed | runner: Claude Code and Node are not installed inside the isolated Linux environment, so the runner cannot execute within the boundary"
+      ]
+    },
+    {
+      "stage": "architecture",
+      "binding_id": "BMAD-ARCH",
+      "workflow_id": "bmad-architecture",
+      "agent": "F3",
+      "status": "NOT_ATTEMPTED",
+      "preflight_id": null,
+      "authorization_id": null,
+      "receipt_id": null,
+      "execution_record": null,
+      "blockers": [
+        "not attempted: an earlier stage is blocked"
+      ]
+    },
+    {
+      "stage": "stories",
+      "binding_id": "BMAD-EPICS",
+      "workflow_id": "bmad-create-epics-and-stories",
+      "agent": "F4",
+      "status": "NOT_ATTEMPTED",
+      "preflight_id": null,
+      "authorization_id": null,
+      "receipt_id": null,
+      "execution_record": null,
+      "blockers": [
+        "not attempted: an earlier stage is blocked"
+      ]
+    },
+    {
+      "stage": "sprint",
+      "binding_id": "BMAD-SPRINT",
+      "workflow_id": "bmad-sprint-planning",
+      "agent": "F4",
+      "status": "NOT_ATTEMPTED",
+      "preflight_id": null,
+      "authorization_id": null,
+      "receipt_id": null,
+      "execution_record": null,
+      "blockers": [
+        "not attempted: an earlier stage is blocked"
+      ]
+    },
+    {
+      "stage": "implementation",
+      "binding_id": "BMAD-BUILD",
+      "workflow_id": "bmad-build",
+      "agent": "F5",
+      "status": "NOT_ATTEMPTED",
+      "preflight_id": null,
+      "authorization_id": null,
+      "receipt_id": null,
+      "execution_record": null,
+      "blockers": [
+        "not attempted: an earlier stage is blocked"
+      ]
+    },
+    {
+      "stage": "review",
+      "binding_id": "BMAD-REVIEW",
+      "workflow_id": "bmad-code-review",
+      "agent": "F7",
+      "status": "NOT_ATTEMPTED",
+      "preflight_id": null,
+      "authorization_id": null,
+      "receipt_id": null,
+      "execution_record": null,
+      "blockers": [
+        "not attempted: an earlier stage is blocked"
+      ]
+    }
+  ],
+  "independent_evidence": {
+    "f2": {
+      "status": "ACCEPTED",
+      "units": [
+        "PORTFLIO",
+        "PORTREAD"
+      ],
+      "missing": []
+    },
+    "f6": {
+      "status": "MISSING",
+      "receipts": []
+    },
+    "note": "F2 and F6 are independent of BMad; their accepted deliveries are required evidence of the governed lifecycle"
+  },
+  "fallback": "none",
+  "local_conversion_invoked": false,
+  "note": "BMAD_BLOCKED: the run stopped at the first stage that could not launch; nothing ran outside BMad in its place"
+}

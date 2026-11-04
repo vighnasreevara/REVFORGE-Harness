@@ -1,0 +1,634 @@
+{
+ "contract": "bmad-e2e/workflow-binding-validation",
+ "bindings_valid": true,
+ "scope": "programs:PORTREAD",
+ "workflows": [
+  {
+   "binding_id": "BMAD-PRD",
+   "workflow_id": "bmad-prd",
+   "agent": "F1",
+   "requires_gates": [
+    "G2"
+   ],
+   "allowed_states": [
+    "REQUIREMENTS_APPROVED",
+    "ARCHITECTURE_DRAFTED",
+    "ARCHITECTURE_APPROVED",
+    "STORIES_DRAFTED",
+    "STORIES_APPROVED"
+   ],
+   "needs": [],
+   "output_contract": "bmad/output-prd",
+   "definition_active_and_pinned": true,
+   "installed_in_isolated_workspace": true,
+   "executor_eligible_now": false,
+   "blockers_now": [
+    "workflow_state: workflow state is REQUIREMENTS_DRAFTED; BMAD-PRD is allowed only in REQUIREMENTS_APPROVED, ARCHITECTURE_DRAFTED, ARCHITECTURE_APPROVED, STORIES_DRAFTED, STORIES_APPROVED",
+    "gate_G2: G2 has not passed on the current baseline",
+    "g2_reverified: G2 re-evaluated now: UNVERIFIED — G2 not approved for scope application: NOT_READY (417 blocking finding(s)); failing checks: canonical_rule_coverage, cross_batch_reconciliation, requirement_evidence, runtime_evidence, semantic_contradictions, contradicted_claims, blocking_decisions, data_contracts, scope_classification, readiness, trust_anchor, human_approval",
+    "exact_scope: requested scope programs:PORTREAD (digest c6b1864a61d126f8…) is not the G2-approved scope (none approved)",
+    "executor provider_disclosure_authorization: no signed AI-provider disclosure authorization exists for anthropic (claude-code-cli); signed source-export authorizations are bound to provider 'openai' by contract and do not authorise disclosure to Claude",
+    "executor live_requested: bindings.json live_execution.requested is false"
+   ],
+   "dry_run_mapping_preview": {
+    "mapping_preview": {
+     "mapping_version": "1.1.0",
+     "scope": "programs:PORTREAD",
+     "scope_sha256": "c6b1864a61d126f8f09c5b2e5aace229df1da15dc8314fa0d07f16a756a6178f",
+     "readiness": "NOT_READY",
+     "inputs": [
+      {
+       "name": "approved-requirements",
+       "sha256": "72961b6aa650d1bd5cc808523ce36dd49de3896e518bac755eede2e875f7debb"
+      },
+      {
+       "name": "business-rules",
+       "sha256": "515b4ccc7dbedf9c7925b14502760212f8b1088cfb60d3ed9b8e15ddc5ee3f98"
+      },
+      {
+       "name": "data-contracts",
+       "sha256": "91c313784463a4c3cb99652305a8df1bb42787356a7f1314f3fa0106a20c3fd4"
+      },
+      {
+       "name": "decisions",
+       "sha256": "9f3e65bcf661701b88b60dc3785ff6dc093c086a5c113679c1785575b42576f8"
+      },
+      {
+       "name": "approval",
+       "sha256": "e317361542d6a11d3412e4fbfa9bcb51fb23303dba03ee17639bc32195e3f348"
+      }
+     ],
+     "requirements": [
+      {
+       "id": "REQ-PORTREAD-001",
+       "outcome": "REQUIRES_SME_DECISION",
+       "usable": false,
+       "source_refs": 6
+      },
+      {
+       "id": "REQ-PORTREAD-002",
+       "outcome": "REQUIRES_SME_DECISION",
+       "usable": false,
+       "source_refs": 4
+      }
+     ],
+     "provenance_counts": {
+      "requirements": 2,
+      "runtime_requirements": 3,
+      "rules": 3,
+      "data_contracts": 5,
+      "decisions": 17,
+      "decisions_blocking_unresolved": 10,
+      "approvals": 0,
+      "upstream_receipts": 0
+     },
+     "rules_source_run": "rules@5_rules@1.0#b7ca9ee04731",
+     "reconciliation": {
+      "units_primary": 1,
+      "units_direct_dependency": 1,
+      "units_transitive_dependency": 0,
+      "requirements": 2,
+      "requirements_direct": 2,
+      "requirements_blocking": 2,
+      "runtime_requirements": 3,
+      "data_contracts": 5,
+      "data_contracts_from_dependencies": 1,
+      "rules": 4,
+      "decisions": 17,
+      "decisions_blocking_unresolved": 10,
+      "decisions_non_blocking": 7,
+      "decisions_direct": 10,
+      "decisions_shared_dependency": 3,
+      "decisions_cross_scope": 2,
+      "decisions_global": 2
+     },
+     "reconciliation_sha256": "6e71a696362df11432621f2a97694f94140e588a81cbe943272d56b1122a3552",
+     "allowed_outputs": {
+      "output_dir": "forward/runs/FWD-20261031T172520Z-66b3/workflow/agents/F1/bmad/<packet>",
+      "java_target_dir": null
+     }
+    }
+   },
+   "output_location": "runs/<run>/workflow/bmad/packets/<BPK>/ (agent bmad output directory; Build: the authorised Java target only)",
+   "receipt": "bmad/receipt via recordResult; counts_toward_gates false; a stage counts only through governance.receiptCounts",
+   "next_stage_consumption": "BMAD-ARCH upstream input; F3 dispatch packet (bmad-draft)"
+  },
+  {
+   "binding_id": "BMAD-ARCH",
+   "workflow_id": "bmad-architecture",
+   "agent": "F3",
+   "requires_gates": [
+    "G2"
+   ],
+   "allowed_states": [
+    "REQUIREMENTS_APPROVED",
+    "ARCHITECTURE_DRAFTED"
+   ],
+   "needs": [],
+   "output_contract": "bmad/output-architecture",
+   "definition_active_and_pinned": true,
+   "installed_in_isolated_workspace": true,
+   "executor_eligible_now": false,
+   "blockers_now": [
+    "workflow_state: workflow state is REQUIREMENTS_DRAFTED; BMAD-ARCH is allowed only in REQUIREMENTS_APPROVED, ARCHITECTURE_DRAFTED",
+    "gate_G2: G2 has not passed on the current baseline",
+    "g2_reverified: G2 re-evaluated now: UNVERIFIED — G2 not approved for scope application: NOT_READY (417 blocking finding(s)); failing checks: canonical_rule_coverage, cross_batch_reconciliation, requirement_evidence, runtime_evidence, semantic_contradictions, contradicted_claims, blocking_decisions, data_contracts, scope_classification, readiness, trust_anchor, human_approval",
+    "exact_scope: requested scope programs:PORTREAD (digest c6b1864a61d126f8…) is not the G2-approved scope (none approved)",
+    "executor provider_disclosure_authorization: no signed AI-provider disclosure authorization exists for anthropic (claude-code-cli); signed source-export authorizations are bound to provider 'openai' by contract and do not authorise disclosure to Claude",
+    "executor live_requested: bindings.json live_execution.requested is false"
+   ],
+   "dry_run_mapping_preview": {
+    "mapping_preview": {
+     "mapping_version": "1.1.0",
+     "scope": "programs:PORTREAD",
+     "scope_sha256": "c6b1864a61d126f8f09c5b2e5aace229df1da15dc8314fa0d07f16a756a6178f",
+     "readiness": "NOT_READY",
+     "inputs": [
+      {
+       "name": "approved-requirements",
+       "sha256": "72961b6aa650d1bd5cc808523ce36dd49de3896e518bac755eede2e875f7debb"
+      },
+      {
+       "name": "data-contracts",
+       "sha256": "91c313784463a4c3cb99652305a8df1bb42787356a7f1314f3fa0106a20c3fd4"
+      },
+      {
+       "name": "runtime-requirements",
+       "sha256": "5b902d56b181c345d243ffee0513d3dc30262e3f912f3e2aad0f16412a5ce768"
+      },
+      {
+       "name": "decisions",
+       "sha256": "9f3e65bcf661701b88b60dc3785ff6dc093c086a5c113679c1785575b42576f8"
+      },
+      {
+       "name": "approval",
+       "sha256": "e317361542d6a11d3412e4fbfa9bcb51fb23303dba03ee17639bc32195e3f348"
+      }
+     ],
+     "requirements": [
+      {
+       "id": "REQ-PORTREAD-001",
+       "outcome": "REQUIRES_SME_DECISION",
+       "usable": false,
+       "source_refs": 6
+      },
+      {
+       "id": "REQ-PORTREAD-002",
+       "outcome": "REQUIRES_SME_DECISION",
+       "usable": false,
+       "source_refs": 4
+      }
+     ],
+     "provenance_counts": {
+      "requirements": 2,
+      "runtime_requirements": 3,
+      "rules": 3,
+      "data_contracts": 5,
+      "decisions": 17,
+      "decisions_blocking_unresolved": 10,
+      "approvals": 0,
+      "upstream_receipts": 0
+     },
+     "rules_source_run": "rules@5_rules@1.0#b7ca9ee04731",
+     "reconciliation": {
+      "units_primary": 1,
+      "units_direct_dependency": 1,
+      "units_transitive_dependency": 0,
+      "requirements": 2,
+      "requirements_direct": 2,
+      "requirements_blocking": 2,
+      "runtime_requirements": 3,
+      "data_contracts": 5,
+      "data_contracts_from_dependencies": 1,
+      "rules": 4,
+      "decisions": 17,
+      "decisions_blocking_unresolved": 10,
+      "decisions_non_blocking": 7,
+      "decisions_direct": 10,
+      "decisions_shared_dependency": 3,
+      "decisions_cross_scope": 2,
+      "decisions_global": 2
+     },
+     "reconciliation_sha256": "6e71a696362df11432621f2a97694f94140e588a81cbe943272d56b1122a3552",
+     "allowed_outputs": {
+      "output_dir": "forward/runs/FWD-20261031T172520Z-66b3/workflow/agents/F3/bmad/<packet>",
+      "java_target_dir": null
+     }
+    }
+   },
+   "output_location": "runs/<run>/workflow/bmad/packets/<BPK>/ (agent bmad output directory; Build: the authorised Java target only)",
+   "receipt": "bmad/receipt via recordResult; counts_toward_gates false; a stage counts only through governance.receiptCounts",
+   "next_stage_consumption": "BMAD-EPICS needs recorded architecture; F4 dispatch packet"
+  },
+  {
+   "binding_id": "BMAD-EPICS",
+   "workflow_id": "bmad-create-epics-and-stories",
+   "agent": "F4",
+   "requires_gates": [
+    "G2",
+    "G3"
+   ],
+   "allowed_states": [
+    "ARCHITECTURE_APPROVED",
+    "STORIES_DRAFTED"
+   ],
+   "needs": [
+    "architecture_artifacts"
+   ],
+   "output_contract": "bmad/output-epics",
+   "definition_active_and_pinned": true,
+   "installed_in_isolated_workspace": true,
+   "executor_eligible_now": false,
+   "blockers_now": [
+    "workflow_state: workflow state is REQUIREMENTS_DRAFTED; BMAD-EPICS is allowed only in ARCHITECTURE_APPROVED, STORIES_DRAFTED",
+    "gate_G2: G2 has not passed on the current baseline",
+    "gate_G3: G3 has not passed on the current baseline",
+    "g2_reverified: G2 re-evaluated now: UNVERIFIED — G2 not approved for scope application: NOT_READY (417 blocking finding(s)); failing checks: canonical_rule_coverage, cross_batch_reconciliation, requirement_evidence, runtime_evidence, semantic_contradictions, contradicted_claims, blocking_decisions, data_contracts, scope_classification, readiness, trust_anchor, human_approval",
+    "exact_scope: requested scope programs:PORTREAD (digest c6b1864a61d126f8…) is not the G2-approved scope (none approved)",
+    "architecture_artifacts: no accepted F3 receipt or recorded BMad architecture result for this scope (mock results never count)",
+    "executor provider_disclosure_authorization: no signed AI-provider disclosure authorization exists for anthropic (claude-code-cli); signed source-export authorizations are bound to provider 'openai' by contract and do not authorise disclosure to Claude",
+    "executor live_requested: bindings.json live_execution.requested is false"
+   ],
+   "dry_run_mapping_preview": {
+    "mapping_preview": {
+     "mapping_version": "1.1.0",
+     "scope": "programs:PORTREAD",
+     "scope_sha256": "c6b1864a61d126f8f09c5b2e5aace229df1da15dc8314fa0d07f16a756a6178f",
+     "readiness": "NOT_READY",
+     "inputs": [
+      {
+       "name": "approved-requirements",
+       "sha256": "72961b6aa650d1bd5cc808523ce36dd49de3896e518bac755eede2e875f7debb"
+      },
+      {
+       "name": "architecture",
+       "sha256": "93d09efa5a7342e882c70c8dac28faf039d0891711b238a5ea8e11760aa4bc1e"
+      },
+      {
+       "name": "approval",
+       "sha256": "e317361542d6a11d3412e4fbfa9bcb51fb23303dba03ee17639bc32195e3f348"
+      }
+     ],
+     "requirements": [
+      {
+       "id": "REQ-PORTREAD-001",
+       "outcome": "REQUIRES_SME_DECISION",
+       "usable": false,
+       "source_refs": 6
+      },
+      {
+       "id": "REQ-PORTREAD-002",
+       "outcome": "REQUIRES_SME_DECISION",
+       "usable": false,
+       "source_refs": 4
+      }
+     ],
+     "provenance_counts": {
+      "requirements": 2,
+      "runtime_requirements": 3,
+      "rules": 3,
+      "data_contracts": 5,
+      "decisions": 17,
+      "decisions_blocking_unresolved": 10,
+      "approvals": 0,
+      "upstream_receipts": 0
+     },
+     "rules_source_run": "rules@5_rules@1.0#b7ca9ee04731",
+     "reconciliation": {
+      "units_primary": 1,
+      "units_direct_dependency": 1,
+      "units_transitive_dependency": 0,
+      "requirements": 2,
+      "requirements_direct": 2,
+      "requirements_blocking": 2,
+      "runtime_requirements": 3,
+      "data_contracts": 5,
+      "data_contracts_from_dependencies": 1,
+      "rules": 4,
+      "decisions": 17,
+      "decisions_blocking_unresolved": 10,
+      "decisions_non_blocking": 7,
+      "decisions_direct": 10,
+      "decisions_shared_dependency": 3,
+      "decisions_cross_scope": 2,
+      "decisions_global": 2
+     },
+     "reconciliation_sha256": "6e71a696362df11432621f2a97694f94140e588a81cbe943272d56b1122a3552",
+     "allowed_outputs": {
+      "output_dir": "forward/runs/FWD-20261031T172520Z-66b3/workflow/agents/F4/bmad/<packet>",
+      "java_target_dir": null
+     }
+    }
+   },
+   "output_location": "runs/<run>/workflow/bmad/packets/<BPK>/ (agent bmad output directory; Build: the authorised Java target only)",
+   "receipt": "bmad/receipt via recordResult; counts_toward_gates false; a stage counts only through governance.receiptCounts",
+   "next_stage_consumption": "BMAD-SPRINT and BMAD-BUILD need approved stories; F5 dispatch packet"
+  },
+  {
+   "binding_id": "BMAD-SPRINT",
+   "workflow_id": "bmad-sprint-planning",
+   "agent": "F4",
+   "requires_gates": [
+    "G2",
+    "G3",
+    "G4"
+   ],
+   "allowed_states": [
+    "STORIES_APPROVED"
+   ],
+   "needs": [
+    "approved_stories"
+   ],
+   "output_contract": "bmad/output-sprint",
+   "definition_active_and_pinned": true,
+   "installed_in_isolated_workspace": true,
+   "executor_eligible_now": false,
+   "blockers_now": [
+    "workflow_state: workflow state is REQUIREMENTS_DRAFTED; BMAD-SPRINT is allowed only in STORIES_APPROVED",
+    "gate_G2: G2 has not passed on the current baseline",
+    "gate_G3: G3 has not passed on the current baseline",
+    "gate_G4: G4 has not passed on the current baseline",
+    "g2_reverified: G2 re-evaluated now: UNVERIFIED — G2 not approved for scope application: NOT_READY (417 blocking finding(s)); failing checks: canonical_rule_coverage, cross_batch_reconciliation, requirement_evidence, runtime_evidence, semantic_contradictions, contradicted_claims, blocking_decisions, data_contracts, scope_classification, readiness, trust_anchor, human_approval",
+    "exact_scope: requested scope programs:PORTREAD (digest c6b1864a61d126f8…) is not the G2-approved scope (none approved)",
+    "approved_stories: stories are not approved (0 story result(s); G4 not passed)",
+    "executor provider_disclosure_authorization: no signed AI-provider disclosure authorization exists for anthropic (claude-code-cli); signed source-export authorizations are bound to provider 'openai' by contract and do not authorise disclosure to Claude",
+    "executor live_requested: bindings.json live_execution.requested is false"
+   ],
+   "dry_run_mapping_preview": {
+    "mapping_preview": {
+     "mapping_version": "1.1.0",
+     "scope": "programs:PORTREAD",
+     "scope_sha256": "c6b1864a61d126f8f09c5b2e5aace229df1da15dc8314fa0d07f16a756a6178f",
+     "readiness": "NOT_READY",
+     "inputs": [
+      {
+       "name": "stories",
+       "sha256": "c82286fbfbf871ca5c2b55a938309df5e7df43c87264261fdc87b606426ec058"
+      },
+      {
+       "name": "approval",
+       "sha256": "e317361542d6a11d3412e4fbfa9bcb51fb23303dba03ee17639bc32195e3f348"
+      }
+     ],
+     "requirements": [],
+     "provenance_counts": {
+      "requirements": 2,
+      "runtime_requirements": 3,
+      "rules": 3,
+      "data_contracts": 5,
+      "decisions": 17,
+      "decisions_blocking_unresolved": 10,
+      "approvals": 0,
+      "upstream_receipts": 0
+     },
+     "rules_source_run": "rules@5_rules@1.0#b7ca9ee04731",
+     "reconciliation": {
+      "units_primary": 1,
+      "units_direct_dependency": 1,
+      "units_transitive_dependency": 0,
+      "requirements": 2,
+      "requirements_direct": 2,
+      "requirements_blocking": 2,
+      "runtime_requirements": 3,
+      "data_contracts": 5,
+      "data_contracts_from_dependencies": 1,
+      "rules": 4,
+      "decisions": 17,
+      "decisions_blocking_unresolved": 10,
+      "decisions_non_blocking": 7,
+      "decisions_direct": 10,
+      "decisions_shared_dependency": 3,
+      "decisions_cross_scope": 2,
+      "decisions_global": 2
+     },
+     "reconciliation_sha256": "6e71a696362df11432621f2a97694f94140e588a81cbe943272d56b1122a3552",
+     "allowed_outputs": {
+      "output_dir": "forward/runs/FWD-20261031T172520Z-66b3/workflow/agents/F4/bmad/<packet>",
+      "java_target_dir": null
+     }
+    }
+   },
+   "output_location": "runs/<run>/workflow/bmad/packets/<BPK>/ (agent bmad output directory; Build: the authorised Java target only)",
+   "receipt": "bmad/receipt via recordResult; counts_toward_gates false; a stage counts only through governance.receiptCounts",
+   "next_stage_consumption": "F5 dispatch packet"
+  },
+  {
+   "binding_id": "BMAD-BUILD",
+   "workflow_id": "bmad-build",
+   "agent": "F5",
+   "requires_gates": [
+    "G2",
+    "G3",
+    "G4"
+   ],
+   "allowed_states": [
+    "STORIES_APPROVED",
+    "IMPLEMENTING"
+   ],
+   "needs": [
+    "approved_stories",
+    "java_target_dir",
+    "generation_authorized"
+   ],
+   "output_contract": "bmad/output-build",
+   "definition_active_and_pinned": true,
+   "installed_in_isolated_workspace": true,
+   "executor_eligible_now": false,
+   "blockers_now": [
+    "workflow_state: workflow state is REQUIREMENTS_DRAFTED; BMAD-BUILD is allowed only in STORIES_APPROVED, IMPLEMENTING",
+    "gate_G2: G2 has not passed on the current baseline",
+    "gate_G3: G3 has not passed on the current baseline",
+    "gate_G4: G4 has not passed on the current baseline",
+    "g2_reverified: G2 re-evaluated now: UNVERIFIED — G2 not approved for scope application: NOT_READY (417 blocking finding(s)); failing checks: canonical_rule_coverage, cross_batch_reconciliation, requirement_evidence, runtime_evidence, semantic_contradictions, contradicted_claims, blocking_decisions, data_contracts, scope_classification, readiness, trust_anchor, human_approval",
+    "exact_scope: requested scope programs:PORTREAD (digest c6b1864a61d126f8…) is not the G2-approved scope (none approved)",
+    "approved_stories: stories are not approved (0 story result(s); G4 not passed)",
+    "java_target_dir: no Java target directory is authorised (orchestrator.java_target_dir is null)",
+    "generation_authorized: Java generation is not authorised (generation.java_generation_allowed and G4 PASS are both required)",
+    "Build is disabled: production Java generation is not authorised (generation.java_generation_allowed is false)",
+    "executor provider_disclosure_authorization: no signed AI-provider disclosure authorization exists for anthropic (claude-code-cli); signed source-export authorizations are bound to provider 'openai' by contract and do not authorise disclosure to Claude",
+    "executor live_requested: bindings.json live_execution.requested is false"
+   ],
+   "dry_run_mapping_preview": {
+    "mapping_preview": {
+     "mapping_version": "1.1.0",
+     "scope": "programs:PORTREAD",
+     "scope_sha256": "c6b1864a61d126f8f09c5b2e5aace229df1da15dc8314fa0d07f16a756a6178f",
+     "readiness": "NOT_READY",
+     "inputs": [
+      {
+       "name": "stories",
+       "sha256": "c82286fbfbf871ca5c2b55a938309df5e7df43c87264261fdc87b606426ec058"
+      },
+      {
+       "name": "architecture",
+       "sha256": "93d09efa5a7342e882c70c8dac28faf039d0891711b238a5ea8e11760aa4bc1e"
+      },
+      {
+       "name": "data-contracts",
+       "sha256": "91c313784463a4c3cb99652305a8df1bb42787356a7f1314f3fa0106a20c3fd4"
+      },
+      {
+       "name": "approval",
+       "sha256": "e317361542d6a11d3412e4fbfa9bcb51fb23303dba03ee17639bc32195e3f348"
+      }
+     ],
+     "requirements": [],
+     "provenance_counts": {
+      "requirements": 2,
+      "runtime_requirements": 3,
+      "rules": 3,
+      "data_contracts": 5,
+      "decisions": 17,
+      "decisions_blocking_unresolved": 10,
+      "approvals": 0,
+      "upstream_receipts": 0
+     },
+     "rules_source_run": "rules@5_rules@1.0#b7ca9ee04731",
+     "reconciliation": {
+      "units_primary": 1,
+      "units_direct_dependency": 1,
+      "units_transitive_dependency": 0,
+      "requirements": 2,
+      "requirements_direct": 2,
+      "requirements_blocking": 2,
+      "runtime_requirements": 3,
+      "data_contracts": 5,
+      "data_contracts_from_dependencies": 1,
+      "rules": 4,
+      "decisions": 17,
+      "decisions_blocking_unresolved": 10,
+      "decisions_non_blocking": 7,
+      "decisions_direct": 10,
+      "decisions_shared_dependency": 3,
+      "decisions_cross_scope": 2,
+      "decisions_global": 2
+     },
+     "reconciliation_sha256": "6e71a696362df11432621f2a97694f94140e588a81cbe943272d56b1122a3552",
+     "allowed_outputs": {
+      "output_dir": "forward/runs/FWD-20261031T172520Z-66b3/workflow/agents/F5/bmad/<packet>",
+      "java_target_dir": null
+     }
+    }
+   },
+   "output_location": "runs/<run>/workflow/bmad/packets/<BPK>/ (agent bmad output directory; Build: the authorised Java target only)",
+   "receipt": "bmad/receipt via recordResult; counts_toward_gates false; a stage counts only through governance.receiptCounts",
+   "next_stage_consumption": "BMAD-REVIEW needs implementation artefacts; F7 dispatch packet"
+  },
+  {
+   "binding_id": "BMAD-REVIEW",
+   "workflow_id": "bmad-code-review",
+   "agent": "F7",
+   "requires_gates": [
+    "G2",
+    "G3",
+    "G4",
+    "G5",
+    "G6"
+   ],
+   "allowed_states": [
+    "REVIEWING"
+   ],
+   "needs": [
+    "implementation_artifacts",
+    "independent_test_receipt",
+    "reviewer_not_implementer"
+   ],
+   "output_contract": "bmad/output-review",
+   "definition_active_and_pinned": true,
+   "installed_in_isolated_workspace": true,
+   "executor_eligible_now": false,
+   "blockers_now": [
+    "workflow_state: workflow state is REQUIREMENTS_DRAFTED; BMAD-REVIEW is allowed only in REVIEWING",
+    "gate_G2: G2 has not passed on the current baseline",
+    "gate_G3: G3 has not passed on the current baseline",
+    "gate_G4: G4 has not passed on the current baseline",
+    "gate_G5: G5 has not passed on the current baseline",
+    "gate_G6: G6 has not passed on the current baseline",
+    "g2_reverified: G2 re-evaluated now: UNVERIFIED — G2 not approved for scope application: NOT_READY (417 blocking finding(s)); failing checks: canonical_rule_coverage, cross_batch_reconciliation, requirement_evidence, runtime_evidence, semantic_contradictions, contradicted_claims, blocking_decisions, data_contracts, scope_classification, readiness, trust_anchor, human_approval",
+    "exact_scope: requested scope programs:PORTREAD (digest c6b1864a61d126f8…) is not the G2-approved scope (none approved)",
+    "implementation_artifacts: no actual implementation artefacts are recorded for this scope",
+    "independent_test_receipt: independent F6 testing has not been recorded and passed (G6); review is not possible without it",
+    "executor provider_disclosure_authorization: no signed AI-provider disclosure authorization exists for anthropic (claude-code-cli); signed source-export authorizations are bound to provider 'openai' by contract and do not authorise disclosure to Claude",
+    "executor live_requested: bindings.json live_execution.requested is false"
+   ],
+   "dry_run_mapping_preview": {
+    "mapping_preview": {
+     "mapping_version": "1.1.0",
+     "scope": "programs:PORTREAD",
+     "scope_sha256": "c6b1864a61d126f8f09c5b2e5aace229df1da15dc8314fa0d07f16a756a6178f",
+     "readiness": "NOT_READY",
+     "inputs": [
+      {
+       "name": "implementation",
+       "sha256": "dad2931860676ac1063406a2561676c6ca0cbebd77beb36726bbe9b0f170ad40"
+      },
+      {
+       "name": "independent-tests",
+       "sha256": "2dbbf8c55b4fd45628b4e7504c0ea1bc35d72862e0edfa502a579223bd04df80"
+      },
+      {
+       "name": "approved-requirements",
+       "sha256": "72961b6aa650d1bd5cc808523ce36dd49de3896e518bac755eede2e875f7debb"
+      },
+      {
+       "name": "approval",
+       "sha256": "e317361542d6a11d3412e4fbfa9bcb51fb23303dba03ee17639bc32195e3f348"
+      }
+     ],
+     "requirements": [
+      {
+       "id": "REQ-PORTREAD-001",
+       "outcome": "REQUIRES_SME_DECISION",
+       "usable": false,
+       "source_refs": 6
+      },
+      {
+       "id": "REQ-PORTREAD-002",
+       "outcome": "REQUIRES_SME_DECISION",
+       "usable": false,
+       "source_refs": 4
+      }
+     ],
+     "provenance_counts": {
+      "requirements": 2,
+      "runtime_requirements": 3,
+      "rules": 3,
+      "data_contracts": 5,
+      "decisions": 17,
+      "decisions_blocking_unresolved": 10,
+      "approvals": 0,
+      "upstream_receipts": 0
+     },
+     "rules_source_run": "rules@5_rules@1.0#b7ca9ee04731",
+     "reconciliation": {
+      "units_primary": 1,
+      "units_direct_dependency": 1,
+      "units_transitive_dependency": 0,
+      "requirements": 2,
+      "requirements_direct": 2,
+      "requirements_blocking": 2,
+      "runtime_requirements": 3,
+      "data_contracts": 5,
+      "data_contracts_from_dependencies": 1,
+      "rules": 4,
+      "decisions": 17,
+      "decisions_blocking_unresolved": 10,
+      "decisions_non_blocking": 7,
+      "decisions_direct": 10,
+      "decisions_shared_dependency": 3,
+      "decisions_cross_scope": 2,
+      "decisions_global": 2
+     },
+     "reconciliation_sha256": "6e71a696362df11432621f2a97694f94140e588a81cbe943272d56b1122a3552",
+     "allowed_outputs": {
+      "output_dir": "forward/runs/FWD-20261031T172520Z-66b3/workflow/agents/F7/bmad/<packet>",
+      "java_target_dir": null
+     }
+    }
+   },
+   "output_location": "runs/<run>/workflow/bmad/packets/<BPK>/ (agent bmad output directory; Build: the authorised Java target only)",
+   "receipt": "bmad/receipt via recordResult; counts_toward_gates false; a stage counts only through governance.receiptCounts",
+   "next_stage_consumption": "F7 review findings; acceptance stays with F6 and G6-G8"
+  }
+ ]
+}

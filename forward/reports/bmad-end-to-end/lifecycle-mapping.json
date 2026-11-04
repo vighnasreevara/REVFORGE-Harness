@@ -1,0 +1,91 @@
+{
+ "contract": "bmad-e2e/lifecycle-mapping",
+ "stages": [
+  {
+   "stage": "Reverse artefacts",
+   "bmad_workflow": "-",
+   "integration": "the 11 reverse artefacts, verified unchanged by SHA-256",
+   "gate": "provenance"
+  },
+  {
+   "stage": "Source and provenance validation",
+   "bmad_workflow": "-",
+   "integration": "baseline manifest, source hashes, readiness gate",
+   "gate": "gate"
+  },
+  {
+   "stage": "F1 Requirements",
+   "bmad_workflow": "bmad-prd (BMAD-PRD)",
+   "integration": "F1 drafts source-grounded requirements; BMAD-PRD renders the G2-approved requirements only",
+   "gate": "G2"
+  },
+  {
+   "stage": "F2 Data mapping",
+   "bmad_workflow": "none (independent)",
+   "integration": "accepted F2 deliveries per unit are required before architecture",
+   "gate": "independent"
+  },
+  {
+   "stage": "F3 Architecture",
+   "bmad_workflow": "bmad-architecture (BMAD-ARCH)",
+   "integration": "F3 receives verified PRD drafts as optional inputs",
+   "gate": "G3"
+  },
+  {
+   "stage": "F4 Epics, stories, sprint",
+   "bmad_workflow": "bmad-create-epics-and-stories, bmad-sprint-planning",
+   "integration": "F4 receives PRD and architecture drafts; stories stay draft until G4",
+   "gate": "G4"
+  },
+  {
+   "stage": "Human approval gates",
+   "bmad_workflow": "-",
+   "integration": "signed G2/G3/G4 approvals by trusted signers",
+   "gate": "gates"
+  },
+  {
+   "stage": "F5 Build + local converter",
+   "bmad_workflow": "bmad-build (BMAD-BUILD)",
+   "integration": "F5 and the deterministic converter stay the implementation mechanism; Build needs authorised generation",
+   "gate": "G5"
+  },
+  {
+   "stage": "F6 Independent testing",
+   "bmad_workflow": "none (independent)",
+   "integration": "an accepted F6 receipt covering the scope is required before review",
+   "gate": "G6"
+  },
+  {
+   "stage": "F7 Code review",
+   "bmad_workflow": "bmad-code-review (BMAD-REVIEW)",
+   "integration": "reviews recorded implementation with the F6 receipt; reviewer is not the implementer",
+   "gate": "G7"
+  },
+  {
+   "stage": "Final gates",
+   "bmad_workflow": "-",
+   "integration": "G7/G8 and acceptance stay outside BMad",
+   "gate": "G8"
+  }
+ ],
+ "draft_inputs_by_agent": {
+  "F3": [
+   "BMAD-PRD"
+  ],
+  "F4": [
+   "BMAD-PRD",
+   "BMAD-ARCH"
+  ],
+  "F5": [
+   "BMAD-EPICS",
+   "BMAD-SPRINT"
+  ],
+  "F7": [
+   "BMAD-BUILD"
+  ],
+  "F1": [],
+  "F2": [],
+  "F6": []
+ },
+ "authority": "source-derived requirements and the local converter stay authoritative; BMad output is a draft pending human approval and never counts toward G3-G8"
+}

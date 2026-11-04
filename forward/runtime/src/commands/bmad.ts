@@ -23,6 +23,7 @@ import { reconcileScope } from '../bmad/reconcile';
 import { buildSnapshot } from '../approval/snapshot';
 import { executionManifest, executorDoctor, executorEligibility } from '../bmad/executor';
 import { governanceVerdict, governedRun } from '../bmad/governance';
+import { sandboxRunner } from '../bmad/runner';
 import { ISOLATION_REPORT, isolationEvidence, preflight } from '../bmad/preflight';
 import { assessHost, runIsolationTests, sandboxScript } from '../isolation/isolation';
 import { scopeSourceFiles } from '../disclosure/disclosure';
@@ -294,10 +295,10 @@ export function bmadCommand(ctx: RuntimeContext, action: string | undefined, fla
         return v.status === 'BMAD_COMPLIANT' ? 0 : 3;
       }
       case 'governed-run': {
-        // STEP 21: the governed dispatcher. No LIVE runner exists on this host, so a stage that the preflight would
-        // permit is still blocked here; nothing falls back to the local converter.
+        // The governed dispatcher. The sandbox runner launches only after a permitted, recorded preflight; nothing falls
+        // back to the local converter.
         const wf = loadWorkflow(ctx, str(flags, 'run') ?? 'latest');
-        const r = governedRun(wf, need('scope'), { runner: null, assessment: assessHost(ctx) });
+        const r = governedRun(wf, need('scope'), { runner: sandboxRunner(wf), assessment: assessHost(ctx) });
         print(r, () => {
           out(`${r.record_id} ${r.scope}: ${r.status} (fallback: ${r.fallback}; local conversion invoked: ${r.local_conversion_invoked})`);
           for (const s of r.stages) out(`  ${s.stage.padEnd(14)} ${s.workflow_id.padEnd(30)} ${s.status}${s.preflight_id ? ` ${s.preflight_id}` : ''}${s.blockers.length ? ` - ${s.blockers.length} blocker(s): ${s.blockers[0]}` : ''}`);

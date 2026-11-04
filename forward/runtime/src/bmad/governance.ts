@@ -25,7 +25,8 @@ import { RuntimeContext } from '../core/config';
 import { sha256File } from '../core/fsutil';
 import { evaluateScope, parseSelector } from '../approval/scope';
 import { buildSnapshot } from '../approval/snapshot';
-import { mutate, Workflow } from '../orchestrator/orchestrator';
+import { acceptedReceipts, mutate, Workflow } from '../orchestrator/orchestrator';
+import { unitKey } from '../orchestrator/extracts';
 import { BMAD_RECORDS, bmadReceipts, preparePacket, upstreamReceipts } from './adapter';
 import { executeLive, Probe, Runner } from './executor';
 import { preflight } from './preflight';
@@ -96,6 +97,63 @@ function scopeOf(wf: Workflow, scope: string): { text: string; sha: string | nul
   }
 }
 
+/**
+ * Independent evidence of the governed lifecycle that BMad does not produce (end-to-end integration):
+ *   F2 - accepted data-mapping deliveries for every unit of the scope (the same ledger the readiness gate reads);
+ *   F6 - accepted independent test receipts whose packet covers every program of the scope.
+ * Neither is a BMad workflow; both are required for BMAD_COMPLIANT.
+ */
+export function independentEvidence(wf: Workflow, scope: string): { f2: { status: 'ACCEPTED' | 'MISSING'; units: string[]; missing: string[] }; f6: { status: 'ACCEPTED' | 'MISSING'; receipts: string[] } } {
+  const snap = buildSnapshot(wf);
+  let units: any[] = [];
+  try {
+    units = evaluateScope(snap, parseSelector(scope)).units;
+  } catch {
+    units = [];
+  }
+  const missing = units.filter((u) => snap.coverage.F2.get(unitKey({ unit_kind: u.unit_kind, name: u.name, file_id: u.file_id })) !== 'completed').map((u) => u.name);
+  const programs = units.filter((u) => u.unit_kind === 'program' && u.role === 'primary').map((u) => u.name as string);
+  const f6 = acceptedReceipts(wf).filter((r) => r.receipt?.agent === 'F6').filter((r) => {
+    let packet: any = null;
+    try {
+      packet = wf.store.readRecord('packets', `${r.packet_id}.json`);
+    } catch {
+      return false;
+    }
+    const covered = new Set<string>((packet?.units ?? []).map((u: any) => u.name));
+    return programs.length > 0 && programs.every((p) => covered.has(p));
+  });
+  return {
+    f2: { status: units.length && !missing.length ? 'ACCEPTED' : 'MISSING', units: units.map((u) => u.name), missing: units.length ? missing : ['(scope has no units)'] },
+    f6: { status: f6.length ? 'ACCEPTED' : 'MISSING', receipts: f6.map((r) => r.receipt_id) },
+  };
+}
+
+/** BMad drafts a forward agent receives as non-authoritative inputs (they never replace source-derived requirements). */
+export const DRAFT_INPUTS: Record<string, string[]> = { F3: ['BMAD-PRD'], F4: ['BMAD-PRD', 'BMAD-ARCH'], F5: ['BMAD-EPICS', 'BMAD-SPRINT'], F7: ['BMAD-BUILD'] };
+
+/**
+ * Verified LIVE BMad drafts for a dispatch packet of `agent` covering `programs`: every document of a receipt that
+ * counts for its own scope, where that scope's programs are all within the packet. Empty when nothing is verified.
+ */
+export function verifiedDrafts(wf: Workflow, agent: string, programs: string[]): Array<{ kind: string; required: false; files: Array<{ path: string; sha256: string | null; present: boolean }> }> {
+  const wanted = DRAFT_INPUTS[agent] ?? [];
+  if (!wanted.length) return [];
+  const inPacket = new Set(programs);
+  const out: Array<{ kind: string; required: false; files: Array<{ path: string; sha256: string | null; present: boolean }> }> = [];
+  const byScope = new Map<string, { sha: string | null }>();
+  for (const r of receiptFacts(wf)) {
+    if (!wanted.includes(r.binding_id) || !/^programs:/.test(r.scope)) continue;
+    const progs = r.scope.replace(/^programs:/, '').split(',').map((x) => x.trim()).filter(Boolean);
+    if (!progs.every((p) => inPacket.has(p))) continue;
+    if (!byScope.has(r.scope)) byScope.set(r.scope, { sha: scopeOf(wf, r.scope).sha });
+    if (!receiptCounts(r, r.binding_id, r.scope, byScope.get(r.scope)!.sha).ok) continue;
+    const rec = bmadReceipts(wf).find((x) => x.receipt_id === r.receipt_id);
+    out.push({ kind: `bmad-draft:${r.binding_id}:${r.receipt_id}`, required: false, files: (rec?.documents ?? []).map((d: any) => ({ path: d.path, sha256: d.sha256, present: sha256File(path.resolve(wf.run.ctx.repoRoot, d.path)) === d.sha256 })) });
+  }
+  return out;
+}
+
 /** The governance verdict of one scope from the recorded receipts (read-only). */
 export function governanceVerdict(wf: Workflow, scope: string, opts: { upTo?: Stage } = {}): any {
   const s = scopeOf(wf, scope);
@@ -112,16 +170,37 @@ export function governanceVerdict(wf: Workflow, scope: string, opts: { upTo?: St
       reasons: ok ? [ok.v.reason] : judged.length ? judged.map((x) => x.v.reason) : ['no BMad receipt recorded for this stage and scope'],
     };
   });
+  const ind = independentEvidence(wf, scope);
+  // Up to sprint only the F2 contracts are needed; the full lifecycle also needs the independent F6 test receipt.
+  const needF6 = !opts.upTo || GOVERNED_STAGES.findIndex((x) => x.stage === opts.upTo) >= GOVERNED_STAGES.findIndex((x) => x.stage === 'review');
+  const indOk = ind.f2.status === 'ACCEPTED' && (!needF6 || ind.f6.status === 'ACCEPTED');
   return {
     scope: s.text,
     scope_sha256: s.sha,
     scope_error: s.error,
     mandatory: bmadMandatory(wf.run.ctx),
-    status: stages.every((x) => x.status === 'RECEIPT_VERIFIED') && !s.error ? 'BMAD_COMPLIANT' : 'BMAD_BLOCKED',
+    status: stages.every((x) => x.status === 'RECEIPT_VERIFIED') && indOk && !s.error ? 'BMAD_COMPLIANT' : 'BMAD_BLOCKED',
     stages,
+    independent_evidence: ind,
     acceptance: ACCEPTANCE_OUTSIDE_BMAD,
   };
 }
+
+/** The operations a governed run performs per stage; replaced by test doubles only in tests (execution_mode SIMULATION). */
+export interface StageDeps {
+  preflight: (wf: Workflow, bindingKey: string, scope: string, o: any) => any;
+  prepare: (wf: Workflow, bindingKey: string, scope: string) => any;
+  execute: (wf: Workflow, packetId: string, runner: Runner, probe?: Probe) => any;
+  verify: (wf: Workflow, scope: string, stage: Stage) => { status: string; reasons: string[] };
+  /** SIMULATION only: replaces the F2/F6 evidence lookup. */
+  independent?: (wf: Workflow, scope: string) => ReturnType<typeof independentEvidence>;
+}
+const LIVE_DEPS: StageDeps = {
+  preflight: (wf, b, sc, o) => preflight(wf, b, sc, o),
+  prepare: (wf, b, sc) => preparePacket(wf, b, sc, 'LIVE'),
+  execute: (wf, p, r, probe) => executeLive(wf, p, r, probe),
+  verify: (wf, sc, st) => governanceVerdict(wf, sc).stages.find((x: any) => x.stage === st) ?? { status: 'NOT_ATTEMPTED', reasons: [] },
+};
 
 export function governedRuns(wf: Workflow): any[] {
   return wf.store.list(BMAD_RECORDS).filter((f) => f.startsWith('BGR-')).map((f) => wf.store.readRecord(BMAD_RECORDS, f));
@@ -134,11 +213,15 @@ export function governedRuns(wf: Workflow): any[] {
 export function governedRun(
   wf: Workflow,
   scope: string,
-  opts: { runner?: Runner | null; probe?: Probe; isolation?: any; assessment?: any } = {},
+  opts: { runner?: Runner | null; probe?: Probe; isolation?: any; assessment?: any; deps?: StageDeps; simulation?: boolean } = {},
 ): any {
   const started = new Date().toISOString();
   const s = scopeOf(wf, scope);
+  // Test doubles may replace the stage operations only as an explicit SIMULATION, which never counts as BMad execution.
+  if (opts.deps && !opts.simulation) throw new Error('stage test doubles require simulation: true');
+  const deps = opts.deps ?? LIVE_DEPS;
   const before = governanceVerdict(wf, scope);
+  const ind = opts.simulation && deps.independent ? deps.independent(wf, scope) : independentEvidence(wf, scope);
   const stages: any[] = [];
   let stopped = false;
   for (const g of GOVERNED_STAGES) {
@@ -149,12 +232,25 @@ export function governedRun(
       continue;
     }
     const prior = before.stages.find((x: any) => x.stage === g.stage);
-    if (prior?.status === 'RECEIPT_VERIFIED') {
+    if (prior?.status === 'RECEIPT_VERIFIED' && !opts.simulation) {
       row.status = 'RECEIPT_VERIFIED';
       row.receipt_id = prior.receipt_id;
       continue;
     }
-    const pf = preflight(wf, g.binding_id, s.text, { probe: opts.probe, record: true, isolation: opts.isolation, assessment: opts.assessment });
+    // Independent evidence the stage depends on: F2 data contracts before architecture, the F6 test receipt before review.
+    if (g.stage === 'architecture' && ind.f2.status !== 'ACCEPTED') {
+      row.status = 'BLOCKED';
+      row.blockers.push(`F2 data-mapping deliveries are not accepted for ${ind.f2.missing.join(', ')}: architecture needs the independent data contracts`);
+      stopped = true;
+      continue;
+    }
+    if (g.stage === 'review' && ind.f6.status !== 'ACCEPTED') {
+      row.status = 'BLOCKED';
+      row.blockers.push('no accepted independent F6 test receipt covers this scope: review needs the independent test evidence');
+      stopped = true;
+      continue;
+    }
+    const pf = deps.preflight(wf, g.binding_id, s.text, { probe: opts.probe, record: !opts.simulation, isolation: opts.isolation, assessment: opts.assessment });
     row.preflight_id = pf.record_id;
     row.authorization_id = pf.authorization_id ?? null;
     if (!pf.launch_permitted) {
@@ -170,8 +266,8 @@ export function governedRun(
       continue;
     }
     try {
-      const packet = preparePacket(wf, g.binding_id, s.text, 'LIVE');
-      const res = executeLive(wf, packet.packet_id, opts.runner, opts.probe);
+      const packet = deps.prepare(wf, g.binding_id, s.text);
+      const res = deps.execute(wf, packet.packet_id, opts.runner, opts.probe);
       row.execution_record = res.execution_record;
       row.receipt_id = res.receipt?.receipt_id ?? null;
       if (res.status === 'failed') {
@@ -183,7 +279,7 @@ export function governedRun(
         row.blockers.push(...(res.receipt?.violations ?? []));
         stopped = true;
       } else {
-        const v = governanceVerdict(wf, scope).stages.find((x: any) => x.stage === g.stage);
+        const v = deps.verify(wf, scope, g.stage);
         row.status = v?.status === 'RECEIPT_VERIFIED' ? 'RECEIPT_VERIFIED' : 'EXECUTED_REJECTED';
         if (row.status !== 'RECEIPT_VERIFIED') {
           row.blockers.push(...(v?.reasons ?? []));
@@ -196,7 +292,13 @@ export function governedRun(
       stopped = true;
     }
   }
-  const status = stages.every((x) => x.status === 'RECEIPT_VERIFIED') && !s.error ? 'BMAD_COMPLIANT' : 'BMAD_BLOCKED';
+  const allVerified = stages.every((x) => x.status === 'RECEIPT_VERIFIED') && ind.f2.status === 'ACCEPTED' && ind.f6.status === 'ACCEPTED' && !s.error;
+  const status = allVerified && !opts.simulation ? 'BMAD_COMPLIANT' : 'BMAD_BLOCKED';
+  const independent = { f2: ind.f2, f6: ind.f6, note: 'F2 and F6 are independent of BMad; their accepted deliveries are required evidence of the governed lifecycle' };
+  if (opts.simulation) {
+    // A simulation is never sealed, never counted and never BMAD_COMPLIANT; it reports what the sequence would do.
+    return { record_id: null, contract: 'bmad/governed-run', contract_version: '1.0', execution_mode: 'SIMULATION', started_at: started, ended_at: new Date().toISOString(), scope: s.text, scope_sha256: s.sha, mandatory: bmadMandatory(wf.run.ctx), status, simulated_outcome: allVerified ? 'ALL_STAGES_PASSED_IN_SIMULATION' : 'BLOCKED_IN_SIMULATION', stages, independent_evidence: independent, fallback: 'none', local_conversion_invoked: false, note: 'SIMULATION with test doubles: not BMad execution, not evidence, never recorded' };
+  }
   return mutate(wf, `bmad governed run ${s.text}`, () => {
     const n = wf.store.list(BMAD_RECORDS).filter((f) => f.startsWith('BGR-')).length + 1;
     const id = `BGR-${String(n).padStart(4, '0')}`;
@@ -209,8 +311,10 @@ export function governedRun(
       scope: s.text,
       scope_sha256: s.sha,
       mandatory: bmadMandatory(wf.run.ctx),
+      execution_mode: 'LIVE',
       status,
       stages,
+      independent_evidence: independent,
       fallback: 'none',
       local_conversion_invoked: false,
       note: status === 'BMAD_COMPLIANT' ? 'every lifecycle stage has a verified LIVE receipt for this scope; acceptance remains the independent F6 receipt and gates G6-G8' : 'BMAD_BLOCKED: the run stopped at the first stage that could not launch; nothing ran outside BMad in its place',
