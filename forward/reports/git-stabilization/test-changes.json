@@ -1,0 +1,50 @@
+{
+ "contract": "git-stabilization/test-changes",
+ "changes": [
+  {
+   "path": "forward/tests/helpers/gitpolicy.ts",
+   "change": "new: path- and package-based Java tracking classifier"
+  },
+  {
+   "path": "forward/tests/git-policy.test.ts",
+   "change": "new: positive and negative classifier cases; the real repository tracks exactly the runtime; generated Java and classes stay ignored"
+  },
+  {
+   "path": "forward/tests/step11..17.test.ts",
+   "change": "`git ls-files *.java` empty  ->  no tracking-policy violation (7 assertions)"
+  },
+  {
+   "path": "forward/tests/step10.test.ts",
+   "change": "implementation must be recoverable (archived or tracked at the commit); no excluded root except the empty runs/.gitkeep; no committed secret; a tampered tracked blob is detected"
+  },
+  {
+   "path": "forward/tests/step11.test.ts",
+   "change": "recovery completeness over archived + tracked files; no committed secret"
+  },
+  {
+   "path": "forward/tools/backup.js",
+   "change": "tracked files listed with git blob ids (tracked_at_commit) and secret-scanned (create refuses on a committed secret); restore verifies them against the commit tree; agents/skills counted over archive + commit; tracked_files_intact allows exactly the recorded modifications; the excluded-path check reads the archive"
+  },
+  {
+   "path": "forward/tests/step3.test.ts",
+   "change": "fresh-clone fix: the placeholder-section edit matches CRLF as well as LF (a Windows checkout holds CRLF; the edit silently did nothing)"
+  },
+  {
+   "path": "forward/runtime/src/commands/bmad.ts",
+   "change": "fresh-clone fix: `bmad dry-run --mode MOCK` is refused as a usage error before the run is loaded, so the result no longer depends on local run records"
+  },
+  {
+   "path": ".gitattributes",
+   "change": "new: `* text=auto eol=lf`. A Windows checkout with core.autocrlf=true wrote every text file with CRLF, changing the SHA-256 of hash-bound evidence (authorization manifest, reverse artifacts, BMad pin and bindings) and voiding the LGA records in a fresh clone; checkouts now reproduce the committed bytes"
+  },
+  {
+   "path": "forward/tests/step10.test.ts (26/27)",
+   "change": "fresh-clone fix: the archived-entry tamper case runs only when the archive has entries (a pristine clone has no uncommitted file); the tracked-file tamper case always runs"
+  },
+  {
+   "path": "forward/tools/git-stabilization-report.py",
+   "change": "new: this report"
+  }
+ ],
+ "weakened_assertions": "none: every replaced assertion still fails on any generated or unexpected tracked Java, every backup check still runs, and new negative checks were added"
+}

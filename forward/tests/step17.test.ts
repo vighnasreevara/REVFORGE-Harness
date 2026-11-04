@@ -27,6 +27,7 @@ import { canWrite } from '../runtime/src/orchestrator/permissions';
 import { cleanup, Fixture, FORWARD_DIR } from './helpers/fixture';
 import { setupG2, wfOf } from './helpers/g2fixture';
 
+import { javaTrackingViolations } from './helpers/gitpolicy';
 const REPO = path.resolve(FORWARD_DIR, '..');
 const temps: string[] = [];
 const fixtures: Fixture[] = [];
@@ -345,7 +346,7 @@ describe('STEP 17 - real campaign (read-only)', () => {
 
   test('generated output stays out of git and backups', () => {
     assert.equal(spawnSync('git', ['-C', REPO, 'check-ignore', 'forward/generated/java/app/src/x.java'], { encoding: 'utf8' }).status, 0);
-    assert.equal(spawnSync('git', ['-C', REPO, 'ls-files', '*.java'], { encoding: 'utf8' }).stdout.trim(), '');
+    assert.deepEqual(javaTrackingViolations(REPO), [], 'only the hand-written Java runtime is tracked; no generated or other Java');
   });
 });
 

@@ -236,12 +236,20 @@ describe('STEP 10 — shared dependencies, packages and gates', () => {
 describe('STEP 10 — recoverable backup', () => {
   test('23/24. the inventory covers the implementation (agents, skills, sources, lockfile) and excludes secrets', () => {
     const d = backup.discover();
-    const paths = new Set(d.included.map((f: any) => f.path));
-    for (const p of ['forward/package.json', 'forward/package-lock.json', 'forward/tsconfig.json', 'forward/runtime/src/cli.ts', 'forward/integrations/bmad/release.pin.json', 'forward/integrations/bmad/isolation/sandbox.sh']) assert.ok(paths.has(p), p);
-    assert.equal(d.included.filter((f: any) => /^\.claude\/agents\/fe-/.test(f.path)).length, 7);
-    assert.equal(new Set(d.included.filter((f: any) => /^\.claude\/skills\/fe-/.test(f.path)).map((f: any) => f.path.split('/')[2])).size, 14);
-    assert.ok(!d.included.some((f: any) => /^forward\/(runs|node_modules|dist)\//.test(f.path)));
-    assert.ok(!d.included.some((f: any) => /^references\//.test(f.path) || /\.mcp\.json$|\.env/.test(f.path)));
+    // The implementation is recoverable: archived (untracked, ignored or modified) or tracked at the recorded commit.
+    const recoverable = [...d.included, ...d.tracked];
+    const paths = new Set(recoverable.map((f: any) => f.path));
+    for (const p of ['forward/package.json', 'forward/package-lock.json', 'forward/tsconfig.json', 'forward/runtime/src/cli.ts', 'forward/runtime/java/revforge/cobol/CobolProgram.java', 'forward/integrations/bmad/release.pin.json', 'forward/integrations/bmad/isolation/sandbox.sh']) assert.ok(paths.has(p), p);
+    assert.equal(recoverable.filter((f: any) => /^\.claude\/agents\/fe-/.test(f.path)).length, 7);
+    assert.equal(new Set(recoverable.filter((f: any) => /^\.claude\/skills\/fe-/.test(f.path)).map((f: any) => f.path.split('/')[2])).size, 14);
+    assert.ok(d.tracked.every((f: any) => /^[0-9a-f]{40}$/.test(f.blob)), 'tracked files carry their git blob ids');
+    assert.ok(!d.included.some((f: any) => d.tracked.some((t: any) => t.path === f.path)), 'a file is either archived or recoverable from the commit, never both');
+    for (const set of [d.included, d.tracked]) {
+      // Only the empty placeholder that keeps forward/runs/ in the tree may sit under an excluded root.
+      assert.deepEqual(set.filter((f: any) => /^forward\/(runs|node_modules|dist|generated)\//.test(f.path) && !(f.path === 'forward/runs/.gitkeep' && f.bytes === 0)).map((f: any) => f.path), []);
+      assert.ok(!set.some((f: any) => /^references\//.test(f.path) || /\.mcp\.json$|\.env/.test(f.path)));
+    }
+    assert.deepEqual(d.tracked_secrets, [], 'no committed file contains a secret pattern');
     // Synthetic secret shapes are assembled at runtime so this file never looks like a secret itself
     // (a file that did would be left out of the backup).
     assert.equal(backup.hasSecret('NEO4J_' + 'PASSWORD=hunter2isnotreal')?.[1], 'database password assignment');
@@ -272,13 +280,24 @@ describe('STEP 10 — recoverable backup', () => {
     const r = backup.restoreTest(b.archive, { build: false, test: false });
     temps.push(r.restore_dir);
     for (const c of r.checks) assert.ok(c.ok, `${c.id}: ${c.detail}`);
-    // A tampered inventory hash is detected.
+    // A tampered inventory hash of an archived file is detected (a pristine clone has no uncommitted file to archive;
+    // the tracked-file tamper check below always runs).
     const inv = JSON.parse(fs.readFileSync(b.inventory, 'utf8'));
-    inv.entries[0].sha256 = '0'.repeat(64);
-    fs.writeFileSync(b.inventory, JSON.stringify(inv));
-    const r2 = backup.restoreTest(b.archive, { build: false, test: false });
-    temps.push(r2.restore_dir);
-    assert.equal(r2.checks.find((c: any) => c.id === 'hashes_match').ok, false);
+    if (inv.entries.length) {
+      inv.entries[0].sha256 = '0'.repeat(64);
+      fs.writeFileSync(b.inventory, JSON.stringify(inv));
+      const r2 = backup.restoreTest(b.archive, { build: false, test: false });
+      temps.push(r2.restore_dir);
+      assert.equal(r2.checks.find((c: any) => c.id === 'hashes_match').ok, false);
+    }
+    // A tracked file recorded with a blob the commit does not hold is detected (incomplete or stale recovery set).
+    const inv2 = JSON.parse(fs.readFileSync(b.inventory, 'utf8'));
+    assert.ok(inv2.tracked_at_commit.entries.length > 0, 'the inventory lists the files recoverable from the commit');
+    inv2.tracked_at_commit.entries[0].blob = '0'.repeat(40);
+    fs.writeFileSync(b.inventory, JSON.stringify(inv2));
+    const r3 = backup.restoreTest(b.archive, { build: false, test: false });
+    temps.push(r3.restore_dir);
+    assert.equal(r3.checks.find((c: any) => c.id === 'tracked_at_commit').ok, false);
     void execFileSync;
   });
 });

@@ -21,6 +21,7 @@ import { detectToolchain, PilotRefused, runPilot, Toolchain } from '../runtime/s
 import { authorisationStatus, conversionValidation } from '../runtime/src/pilot/gates';
 import { FORWARD_DIR } from './helpers/fixture';
 
+import { javaTrackingViolations } from './helpers/gitpolicy';
 const REPO = path.resolve(FORWARD_DIR, '..');
 const temps: string[] = [];
 after(() => {
@@ -134,6 +135,6 @@ describe('STEP 15 - real programs stay unconverted without authorisation (read-o
     fs.mkdirSync(path.join(dir, 'cobol'), { recursive: true });
     fs.copyFileSync(path.join(FORWARD_DIR, 'pilot', 'synthetic-val', 'pilot.json'), path.join(dir, 'pilot.json'));
     assert.throws(() => runPilot({ dir, pilotRoot: root, forbiddenRoots: [dir], toolchain: NO_COBOL }), PilotRefused);
-    assert.equal(spawnSync('git', ['-C', REPO, 'ls-files', '*.java'], { encoding: 'utf8' }).stdout.trim(), '');
+    assert.deepEqual(javaTrackingViolations(REPO), [], 'only the hand-written Java runtime is tracked; no generated or other Java');
   });
 });

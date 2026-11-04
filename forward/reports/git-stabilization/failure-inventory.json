@@ -1,0 +1,67 @@
+{
+ "contract": "git-stabilization/failure-inventory",
+ "introduced_by": "d26f4dd (forward/ committed and pushed, including forward/runtime/java/**)",
+ "baseline": "npm test 398/408 (BMAD end-to-end pass)",
+ "failures": [
+  {
+   "test_file": "step10.test.ts",
+   "test": "23/24. the inventory covers the implementation (agents, skills, sources, lockfile) and excludes secrets",
+   "area": "backup inventory",
+   "root_cause": "the backup discovered only untracked, ignored and modified files; after d26f4dd the forward implementation is tracked, so forward/package.json and the other required files were no longer \"included\""
+  },
+  {
+   "test_file": "step10.test.ts",
+   "test": "26/27. a real backup restores into an isolated directory with every hash, agent and skill intact",
+   "area": "backup restore",
+   "root_cause": "a bare extract held only the archive; the 7 agents and 14 skills are now tracked, so the restore counted 0 of each"
+  },
+  {
+   "test_file": "step11.test.ts",
+   "test": "13. recovery completeness: pilot sources and STEP 11 code are backed up ...",
+   "area": "backup inventory + checkout restore",
+   "root_cause": "same as 23/24; in checkout mode the archived uncommitted modifications of tracked files then tripped tracked_files_intact"
+  },
+  {
+   "test_file": "step11.test.ts",
+   "test": "16. no production Java generation ...",
+   "area": "Java tracking",
+   "root_cause": "asserted `git ls-files *.java` empty; the 20 hand-written runtime files are tracked since d26f4dd"
+  },
+  {
+   "test_file": "step12.test.ts",
+   "test": "10. no production Java generation",
+   "area": "Java tracking",
+   "root_cause": "same assertion"
+  },
+  {
+   "test_file": "step13.test.ts",
+   "test": "20/22/23/24. real G2 stays blocked, no Java, nothing written, reverse outputs protected",
+   "area": "Java tracking",
+   "root_cause": "same assertion"
+  },
+  {
+   "test_file": "step14.test.ts",
+   "test": "PORTVALD: SOURCE_READINESS passes ...; generation stays unauthorised",
+   "area": "Java tracking",
+   "root_cause": "same assertion"
+  },
+  {
+   "test_file": "step15.test.ts",
+   "test": "generation authorisation is still enforced ...",
+   "area": "Java tracking",
+   "root_cause": "same assertion"
+  },
+  {
+   "test_file": "step16.test.ts",
+   "test": "generated output is git-ignored, excluded from backups, and no Java is tracked",
+   "area": "Java tracking",
+   "root_cause": "same assertion"
+  },
+  {
+   "test_file": "step17.test.ts",
+   "test": "generated output stays out of git and backups",
+   "area": "Java tracking",
+   "root_cause": "same assertion"
+  }
+ ]
+}

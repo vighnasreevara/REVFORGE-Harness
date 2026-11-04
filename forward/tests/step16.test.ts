@@ -24,6 +24,7 @@ import { detectToolchain, PilotRefused, Toolchain } from '../runtime/src/pilot/p
 import { cleanup, Fixture, FORWARD_DIR } from './helpers/fixture';
 import { setupG2, wfOf } from './helpers/g2fixture';
 
+import { javaTrackingViolations } from './helpers/gitpolicy';
 const REPO = path.resolve(FORWARD_DIR, '..');
 const fixtures: Fixture[] = [];
 after(() => {
@@ -240,7 +241,7 @@ describe('STEP 16 - real run: PORTVALD only (read-only)', () => {
     const ig = spawnSync('git', ['-C', REPO, 'check-ignore', 'forward/generated/java/PORTVALD/x.java'], { encoding: 'utf8' });
     assert.equal(ig.status, 0, 'forward/generated/ must be ignored');
     assert.match(fs.readFileSync(path.join(FORWARD_DIR, 'tools', 'backup.js'), 'utf8'), /\^forward\\\/generated\\\//);
-    assert.equal(spawnSync('git', ['-C', REPO, 'ls-files', '*.java'], { encoding: 'utf8' }).stdout.trim(), '');
+    assert.deepEqual(javaTrackingViolations(REPO), [], 'only the hand-written Java runtime is tracked; no generated or other Java');
   });
 
   test('the authorisation and generation runtime names no inventory program', () => {

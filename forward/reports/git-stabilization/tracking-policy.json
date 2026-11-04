@@ -1,0 +1,69 @@
+{
+ "contract": "git-stabilization/tracking-policy",
+ "policy": [
+  {
+   "category": "Hand-written Java runtime (forward/runtime/java/revforge/cobol/**, package revforge.cobol*)",
+   "git": "tracked",
+   "enforced_by": "tests/helpers/gitpolicy.ts javaTrackingViolation; git-policy.test.ts checks all of it is tracked"
+  },
+  {
+   "category": "Generated Java programs (forward/generated/**, package revforge.app.*)",
+   "git": "ignored (forward/.gitignore: generated/)",
+   "enforced_by": "git-policy.test.ts check-ignore; any tracked one is a violation"
+  },
+  {
+   "category": "Compiled classes",
+   "git": "ignored",
+   "enforced_by": "git-policy.test.ts: no tracked .class"
+  },
+  {
+   "category": "TypeScript sources, tests, tools, contracts, docs, config",
+   "git": "tracked",
+   "enforced_by": "repository layout"
+  },
+  {
+   "category": "Build output and dependencies (forward/dist, forward/node_modules)",
+   "git": "ignored",
+   "enforced_by": "forward/.gitignore"
+  },
+  {
+   "category": "Run-local records (forward/runs/*)",
+   "git": "ignored except runs/.gitkeep",
+   "enforced_by": "forward/.gitignore"
+  },
+  {
+   "category": "Reports",
+   "git": "tracked (existing policy since d26f4dd); excluded from backup archives",
+   "enforced_by": "tools/backup.js EXCLUDE"
+  },
+  {
+   "category": "COBOL reference checkout, OpenWiki, credentials (.mcp.json, settings.local.json, .env)",
+   "git": "ignored, never tracked",
+   "enforced_by": "root .gitignore; backup secret scan of tracked files"
+  }
+ ],
+ "tracked_java": [
+  "forward/runtime/java/revforge/cobol/Area.java",
+  "forward/runtime/java/revforge/cobol/CobolAbend.java",
+  "forward/runtime/java/revforge/cobol/CobolFile.java",
+  "forward/runtime/java/revforge/cobol/CobolProgram.java",
+  "forward/runtime/java/revforge/cobol/Cond88.java",
+  "forward/runtime/java/revforge/cobol/Edit.java",
+  "forward/runtime/java/revforge/cobol/Field.java",
+  "forward/runtime/java/revforge/cobol/Fig.java",
+  "forward/runtime/java/revforge/cobol/Ops.java",
+  "forward/runtime/java/revforge/cobol/ProgramExit.java",
+  "forward/runtime/java/revforge/cobol/RunUnit.java",
+  "forward/runtime/java/revforge/cobol/Storage.java",
+  "forward/runtime/java/revforge/cobol/UnresolvedGapException.java",
+  "forward/runtime/java/revforge/cobol/batch/JobRunner.java",
+  "forward/runtime/java/revforge/cobol/testing/Integration.java",
+  "forward/runtime/java/revforge/cobol/testing/Json.java",
+  "forward/runtime/java/revforge/cobol/testing/Report.java",
+  "forward/runtime/java/revforge/cobol/testing/RuntimeTests.java",
+  "forward/runtime/java/revforge/cobol/testing/Scenarios.java",
+  "forward/runtime/java/revforge/cobol/testing/TestMain.java"
+ ],
+ "tracked_generated_java": [],
+ "check_ignore_generated": "forward/.gitignore:13:generated/\tforward/generated/java/Example.java"
+}

@@ -1,6 +1,8 @@
 #!/usr/bin/env node
 /**
- * Recoverable local backup of the uncommitted forward implementation (STEP 10).
+ * Recoverable local backup of the forward implementation (STEP 10). Files committed at the recorded
+ * commit are recoverable from git and are listed (with their blob ids) instead of archived again; only
+ * untracked, ignored and modified files are archived.
  *
  *   node forward/tools/backup.js create [--dest DIR]            archive + inventory + restore guide (outside the repo)
  *   node forward/tools/backup.js verify ARCHIVE                  safe entry list: no absolute paths, traversal or links
@@ -90,6 +92,22 @@ function discover() {
     }
     included.push({ path: rel, bytes: buf.length, sha256: sha(buf), source: untracked.includes(rel) ? 'untracked' : ignored.includes(rel) ? 'ignored' : 'modified' });
   }
+  // Tracked files of the same roots are recoverable from the recorded commit (they are not archived again). They are
+  // listed with their git blob ids so a restore can prove the commit still holds them, and they are scanned for
+  // secrets too: a committed secret is a violation, never silently accepted.
+  const tracked = [];
+  const trackedSecrets = [];
+  for (const line of git(['ls-files', '-s', '-z']).split('\0').filter(Boolean)) {
+    const tab = line.indexOf('\t');
+    const rel = line.slice(tab + 1);
+    if (!(rel.startsWith('forward/') || /^\.claude\/(agents|skills)\/fe-/.test(rel)) || modified.includes(rel)) continue;
+    const abs = path.join(repo, rel);
+    if (!fs.existsSync(abs) || !fs.lstatSync(abs).isFile()) continue;
+    const buf = fs.readFileSync(abs);
+    const secret = hasSecret(buf.toString('latin1'));
+    if (secret) trackedSecrets.push({ path: rel, reason: secret[1] });
+    tracked.push({ path: rel, blob: line.slice(0, tab).split(' ')[1], bytes: buf.length, sha256: sha(buf) });
+  }
   // Collapse excluded paths to their directories so the inventory stays readable.
   const byDir = new Map();
   for (const e of excluded) {
@@ -97,8 +115,14 @@ function discover() {
     if (!byDir.has(key)) byDir.set(key, { path: key, reason: e.reason, files: 0 });
     byDir.get(key).files++;
   }
-  return { included, excluded: [...byDir.values()] };
+  return { included, excluded: [...byDir.values()], tracked, tracked_secrets: trackedSecrets };
 }
+
+/** Agent and skill counts over a list of repository-relative paths. */
+const feCounts = (paths) => ({
+  agents: paths.filter((p) => /^\.claude\/agents\/fe-.*\.agent\.md$/.test(p)).length,
+  skills: new Set(paths.filter((p) => /^\.claude\/skills\/fe-[^/]+\/SKILL\.md$/.test(p)).map((p) => p.split('/')[2])).size,
+});
 
 function versions() {
   const pkg = JSON.parse(fs.readFileSync(path.join(forward, 'package.json'), 'utf8'));
@@ -120,7 +144,8 @@ function create(dest) {
   const stamp = new Date().toISOString().replace(/[-:]/g, '').replace(/\.\d+Z$/, 'Z');
   const dir = path.join(root, `revforge-forward-${stamp}`);
   fs.mkdirSync(dir, { recursive: true });
-  const { included, excluded } = discover();
+  const { included, excluded, tracked, tracked_secrets } = discover();
+  if (tracked_secrets.length) throw new Error(`committed files contain secret patterns: ${tracked_secrets.map((t) => `${t.path} (${t.reason})`).join(', ')}`);
   const list = path.join(dir, 'filelist.txt');
   fs.writeFileSync(list, included.map((f) => f.path).join('\n') + '\n', 'utf8');
   const archive = path.join(dir, `revforge-forward-${stamp}.tgz`);
@@ -137,10 +162,12 @@ function create(dest) {
     files: included.length,
     total_bytes: included.reduce((n, f) => n + f.bytes, 0),
     tree_sha256: sha(included.map((f) => `${f.path}\t${f.sha256}\n`).join('')),
-    required: { agents: included.filter((f) => /^\.claude\/agents\/fe-/.test(f.path)).length, skills: new Set(included.filter((f) => /^\.claude\/skills\/fe-/.test(f.path)).map((f) => f.path.split('/')[2])).size },
+    required: feCounts([...included, ...tracked].map((f) => f.path)),
     versions: versions(),
     exclusions: excluded,
     entries: included,
+    // Recoverable from the recorded commit (a checkout of it), not from the archive.
+    tracked_at_commit: { files: tracked.length, tree_sha256: sha(tracked.map((f) => `${f.path}\t${f.blob}\n`).join('')), entries: tracked.map((f) => ({ path: f.path, blob: f.blob, sha256: f.sha256 })) },
   };
   fs.writeFileSync(path.join(dir, 'inventory.json'), JSON.stringify(inv, null, 2) + '\n', 'utf8');
   fs.writeFileSync(path.join(dir, 'SHA256SUMS'), `${inv.archive_sha256}  ${inv.archive}\n${sha(fs.readFileSync(path.join(dir, 'inventory.json')))}  inventory.json\n`, 'utf8');
@@ -234,20 +261,38 @@ function restoreTest(archive, opts) {
   const present = opts.checkout ? [...walk(path.join(root, 'forward')), ...feEntries('agents'), ...feEntries('skills')] : walk(root);
   const missing = inv.entries.filter((e) => !fs.existsSync(path.join(root, e.path)));
   const changed = inv.entries.filter((e) => fs.existsSync(path.join(root, e.path)) && sha(fs.readFileSync(path.join(root, e.path))) !== e.sha256);
-  const extra = present.filter((p) => !inv.entries.some((e) => e.path === p.rel));
+  // Files recoverable from the recorded commit: every one must still be in that commit with the recorded blob.
+  const trackedEntries = inv.tracked_at_commit?.entries ?? [];
+  const trackedPaths = new Set(trackedEntries.map((e) => e.path));
+  if (trackedEntries.length) {
+    const commit = inv.versions?.git?.commit;
+    const lt = spawnSync('git', ['-C', repo, 'ls-tree', '-r', '-z', commit], { encoding: 'utf8', maxBuffer: 64 * 1024 * 1024 });
+    const tree = new Map(lt.status === 0 ? lt.stdout.split('\0').filter(Boolean).map((l) => [l.slice(l.indexOf('\t') + 1), l.slice(0, l.indexOf('\t')).split(' ')[2]]) : []);
+    const bad = trackedEntries.filter((e) => tree.get(e.path) !== e.blob);
+    add('tracked_at_commit', lt.status === 0 && !bad.length, lt.status !== 0 ? `commit ${commit} is not available: ${(lt.stderr || '').trim()}` : bad.length ? `${bad.length} tracked file(s) differ from commit ${commit}: ${bad.slice(0, 5).map((b) => b.path).join(', ')}` : `${trackedEntries.length} tracked files recoverable from commit ${commit} with their recorded blobs`);
+  }
+  const extra = present.filter((p) => !inv.entries.some((e) => e.path === p.rel) && !trackedPaths.has(p.rel));
   add('files_present', !missing.length, missing.length ? `${missing.length} missing: ${missing.slice(0, 5).map((m) => m.path).join(', ')}` : `${inv.entries.length} files present at their original relative paths`);
   add('hashes_match', !changed.length, changed.length ? `${changed.length} changed: ${changed.slice(0, 5).map((m) => m.path).join(', ')}` : 'every sha256 matches the inventory');
   add('nothing_extra', !extra.length, extra.length ? `unexpected: ${extra.slice(0, 5).map((m) => m.rel).join(', ')}` : 'no unexpected files or links');
   if (opts.checkout) {
-    const d = spawnSync('git', ['-C', root, 'status', '--porcelain', '--untracked-files=no'], { encoding: 'utf8' });
-    add('tracked_files_intact', d.status === 0 && !d.stdout.trim(), d.stdout.trim() ? `tracked files changed by the restore: ${d.stdout.trim().split(/\r?\n/).slice(0, 5).join('; ')}` : 'the archive changed no tracked file of the baseline commit');
+    // The restore may change exactly the tracked files the backup recorded as modified (uncommitted work, already
+    // hash-checked above) and nothing else of the baseline commit.
+    const d = spawnSync('git', ['-C', root, 'status', '--porcelain', '--untracked-files=no', '-z'], { encoding: 'utf8' });
+    const changedTracked = d.status === 0 ? d.stdout.split('\0').filter(Boolean).map((l) => l.slice(3)) : [];
+    const recordedModified = new Set(inv.entries.filter((e) => e.source === 'modified').map((e) => e.path));
+    const unexpected = changedTracked.filter((p) => !recordedModified.has(p));
+    add('tracked_files_intact', d.status === 0 && !unexpected.length, d.status !== 0 ? 'git status failed in the checkout' : unexpected.length ? `tracked files changed by the restore that the backup did not record as modified: ${unexpected.slice(0, 5).join('; ')}` : `the archive changed no tracked file of the baseline commit except the ${changedTracked.length} recorded uncommitted modification(s)`);
   }
-  const agents = present.filter((p) => /^\.claude\/agents\/fe-.*\.agent\.md$/.test(p.rel)).length;
-  const skills = new Set(present.filter((p) => /^\.claude\/skills\/fe-[^/]+\/SKILL\.md$/.test(p.rel)).map((p) => p.rel.split('/')[2])).size;
-  add('agents_and_skills', agents === REQUIRED.agents && skills === REQUIRED.skills, `${agents} forward agent definitions, ${skills} forward skills (expected ${REQUIRED.agents} and ${REQUIRED.skills})`);
+  // Restored agents and skills: what the restore holds plus (bare extract) the tracked ones recoverable from the commit.
+  const { agents, skills } = feCounts([...new Set([...present.map((p) => p.rel), ...(opts.checkout ? [] : trackedPaths)])]);
+  add('agents_and_skills', agents === REQUIRED.agents && skills === REQUIRED.skills, `${agents} forward agent definitions, ${skills} forward skills (expected ${REQUIRED.agents} and ${REQUIRED.skills})${!opts.checkout && trackedPaths.size ? '; tracked ones counted from the recorded commit' : ''}`);
   const leaks = present.filter((p) => !p.link && hasSecret(fs.readFileSync(path.join(root, p.rel)).toString('latin1'))).map((p) => p.rel);
   add('no_secrets', !leaks.length, leaks.length ? `secret patterns found in ${leaks.join(', ')}` : 'no private keys, API keys or passwords in the restored files');
-  add('no_excluded_paths', !present.some((p) => EXCLUDE.some(([re]) => re.test(p.rel))), 'no excluded path was restored');
+  // The archive must not carry an excluded path (a checkout also holds tracked reports, which git restores, not the archive).
+  const fromArchive = listEntries(archive).map((e) => e.name.replace(/\\/g, '/').replace(/\/$/, ''));
+  const excludedRestored = fromArchive.filter((n) => EXCLUDE.some(([re]) => re.test(n)));
+  add('no_excluded_paths', !excludedRestored.length, excludedRestored.length ? `excluded paths in the archive: ${excludedRestored.slice(0, 5).join(', ')}` : 'no excluded path was restored from the archive');
   // Separately held local assets (never part of the archive), attached only on request and removed afterwards.
   let cobolRoot = '';
   if (opts.localAssets) {

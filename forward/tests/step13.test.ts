@@ -25,6 +25,7 @@ import { KP, SIGNERS, signText, wfOf } from './helpers/g2fixture';
 import { designFixture } from './helpers/designfixture';
 import { contextFixture } from './helpers/contextfixture';
 
+import { javaTrackingViolations } from './helpers/gitpolicy';
 const REPO = path.resolve(FORWARD_DIR, '..');
 const fixtures: Fixture[] = [];
 after(() => {
@@ -255,7 +256,7 @@ describe('STEP 13 - RTNCDE00 regression on the real run (read-only)', () => {
     assert.equal(trustDoctor(ctx).status, 'TRUST_NOT_CONFIGURED');
     assert.notEqual(evaluateG2Gate(wf).result.status, 'PASS');
     assert.equal(generationAuthorized(wf.run, wf.state), false);
-    assert.equal(spawnSync('git', ['-C', REPO, 'ls-files', '*.java'], { encoding: 'utf8' }).stdout.trim(), '');
+    assert.deepEqual(javaTrackingViolations(REPO), [], 'only the hand-written Java runtime is tracked; no generated or other Java');
     assert.equal(sha256File(wf.store.p('audit.jsonl')), audit, 'scope evaluation wrote nothing');
     assert.equal(spawnSync('git', ['-C', REPO, 'status', '--porcelain', '--', 'output', '.claude/agents', '.claude/skills'], { encoding: 'utf8' }).stdout.split('\n').filter((l) => l && !/^\?\? \.claude\/(agents|skills)\/fe-/.test(l)).join('\n'), '', 'reverse outputs and agents unchanged');
   });

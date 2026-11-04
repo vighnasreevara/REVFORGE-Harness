@@ -91,9 +91,10 @@ export function bmadCommand(ctx: RuntimeContext, action: string | undefined, fla
         return r.eligible ? 0 : 1;
       }
       case 'dry-run': {
-        const wf = loadWorkflow(ctx, str(flags, 'run') ?? 'latest');
+        // A usage error is reported before the run is loaded, so it does not depend on the local run records.
         const m = mode('DRY_RUN');
         if (m !== 'DRY_RUN') throw new OrchestratorError(`dry-run only runs in DRY_RUN mode; use 'bmad prepare --mode MOCK' for a mock packet`, 'USAGE');
+        const wf = loadWorkflow(ctx, str(flags, 'run') ?? 'latest');
         const r = dryRun(wf, need('workflow'), need('scope'), { record: flags.record === true || str(flags, 'record') === 'true' });
         print(r, () => {
           out(`${r.workflow_id} (${r.binding_id} -> ${r.agent}) for ${r.eligibility.scope}: ${r.would_prepare ? 'would prepare' : 'would be REFUSED'}${r.record_id ? ` — ${r.record_id}` : ' (nothing written)'}`);

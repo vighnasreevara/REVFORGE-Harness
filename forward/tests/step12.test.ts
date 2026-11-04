@@ -25,6 +25,7 @@ import { signResolution, wfOf } from './helpers/g2fixture';
 import { BRAVO, DESIGN_SIGNERS } from './helpers/designfixture';
 import { contextFixture } from './helpers/contextfixture';
 
+import { javaTrackingViolations } from './helpers/gitpolicy';
 const REPO = path.resolve(FORWARD_DIR, '..');
 const fixtures: Fixture[] = [];
 after(() => {
@@ -187,6 +188,6 @@ describe('STEP 12 - the real run (read-only)', () => {
     const { wf, ctx } = real();
     assert.equal(generationAuthorized(wf.run, wf.state), false);
     assert.equal(ctx.config.generation.java_generation_allowed, false);
-    assert.equal(spawnSync('git', ['-C', REPO, 'ls-files', '*.java'], { encoding: 'utf8' }).stdout.trim(), '');
+    assert.deepEqual(javaTrackingViolations(REPO), [], 'only the hand-written Java runtime is tracked; no generated or other Java');
   });
 });

@@ -85,7 +85,8 @@ describe('S3-3. invalid skill metadata is rejected', () => {
     ['unauthorised execution', (t) => t.replace('"executes": []', '"executes": ["bash"]'), /unauthorised execution/],
     ['tool escalation', (t) => t.replace('allowed-tools: Read, Grep, Glob, Write', 'allowed-tools: Read, Grep, Glob, Write, Bash'), /exceed the owning agent/],
     ['missing section', (t) => t.replace('## Quality checks', '## Checks'), /missing section '## Quality checks'/],
-    ['placeholder section', (t) => t.replace(/## Forbidden operations\n\n[\s\S]*?\n\n## Error/, '## Forbidden operations\n\nTBD\n\n## Error'), /too thin/],
+    // Line-ending independent: a Windows checkout (core.autocrlf) holds the skill with CRLF.
+    ['placeholder section', (t) => t.replace(/## Forbidden operations\r?\n\r?\n[\s\S]*?\r?\n\r?\n## Error/, '## Forbidden operations\n\nTBD\n\n## Error'), /too thin/],
     ['wrong contracts', (t) => t.replace('"output_contracts": ["forward/requirements", "forward/traceability-edges"]', '"output_contracts": ["forward/requirements"]'), /output_contracts/],
     ['broken metadata', (t) => t.replace('```json revforge-skill', '```json other'), /metadata block/],
   ];

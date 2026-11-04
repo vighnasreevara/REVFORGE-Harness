@@ -1,0 +1,107 @@
+{
+ "contract": "git-stabilization/fresh-clone-test-failures",
+ "scope": "npm test in a clean clone of commit 44e99ef (C:/rfc), no COBOL source, no BMad staging release, no run records",
+ "totals": {
+  "tests": 400,
+  "pass": 341,
+  "fail": 18,
+  "skipped": 41
+ },
+ "by_category": {
+  "test assumed the backup archive is non-empty; a pristine clone has no uncommitted file (FIXED in this pass: tests/step10.test.ts)": 1,
+  "BMad staging release absent (git-ignored; re-staged per BMAD-INTEGRATION-OPERATIONS.md)": 17
+ },
+ "failures": [
+  {
+   "test": "26/27. a real backup restores into an isolated directory with every hash, agent and skill intact",
+   "category": "test assumed the backup archive is non-empty; a pristine clone has no uncommitted file (FIXED in this pass: tests/step10.test.ts)",
+   "evidence": "dist\\tests\\step10.test.js:292:26 ✖ 26/27. a real backup restores into an isolated directory with every hash, agent and skill intact (1642.3742ms) TypeError [Error]: Cannot set properties of undefined (setting 'sha256') at TestContext.<anonymous> (C:\\rfc\\forward\\dist\\tests\\step10.test.js:303:31) at T"
+  },
+  {
+   "test": "a failed execution is a BEX record and the stage stays unverified",
+   "category": "BMad staging release absent (git-ignored; re-staged per BMAD-INTEGRATION-OPERATIONS.md)",
+   "evidence": "dist\\tests\\step21.test.js:145:26 ✖ a failed execution is a BEX record and the stage stays unverified (7390.6271ms) Error [OrchestratorError]: BMad bmad-prd refused for programs:BRAVO02 (MOCK); recorded BEL-0001 at C:\\rfc\\forward\\dist\\runtime\\src\\bmad\\adapter.js:242:19 at mutate (C:\\rfc\\forward\\dist\\"
+  },
+  {
+   "test": "a rejected (forged) receipt and an accepted MOCK receipt are both not BMad execution evidence",
+   "category": "BMad staging release absent (git-ignored; re-staged per BMAD-INTEGRATION-OPERATIONS.md)",
+   "evidence": "dist\\tests\\step21.test.js:154:26 ✖ a rejected (forged) receipt and an accepted MOCK receipt are both not BMad execution evidence (5923.1208ms) Error [OrchestratorError]: BMad bmad-prd refused for programs:BRAVO02 (MOCK); recorded BEL-0001 at C:\\rfc\\forward\\dist\\runtime\\src\\bmad\\adapter.js:242:19 at "
+  },
+  {
+   "test": "1. the pinned 6.12 release verifies: tarball, every extracted file and the workflow catalogue",
+   "category": "BMad staging release absent (git-ignored; re-staged per BMAD-INTEGRATION-OPERATIONS.md)",
+   "evidence": "dist\\tests\\step6.test.js:145:26 ✖ 1. the pinned 6.12 release verifies: tarball, every extracted file and the workflow catalogue (233.2007ms) AssertionError [ERR_ASSERTION]: [{\"id\":\"tarball_integrity\",\"ok\":false,\"detail\":\"staged tarball staging/bmad-method-6.12.4.tgz is missing\"},{\"id\":\"extracted_fil"
+  },
+  {
+   "test": "3. a modified workflow definition in staging is detected and its binding becomes unusable",
+   "category": "BMad staging release absent (git-ignored; re-staged per BMAD-INTEGRATION-OPERATIONS.md)",
+   "evidence": "dist\\tests\\step6.test.js:162:26 ✖ 3. a modified workflow definition in staging is detected and its binding becomes unusable (37.1173ms) Error: ENOENT: no such file or directory, open 'C:\\Users\\vighn\\AppData\\Local\\Temp\\bmad-int-6aQP9D\\staging\\bmad-method-6.12.4\\package\\src\\bmm-skills\\plan\\bmad-prd\\SK"
+  },
+  {
+   "test": "4. an added file or a tampered tarball fails release verification",
+   "category": "BMad staging release absent (git-ignored; re-staged per BMAD-INTEGRATION-OPERATIONS.md)",
+   "evidence": "dist\\tests\\step6.test.js:174:26 ✖ 4. an added file or a tampered tarball fails release verification (32.6695ms) Error: ENOENT: no such file or directory, open 'C:\\Users\\vighn\\AppData\\Local\\Temp\\bmad-int-qiadqP\\staging\\bmad-method-6.12.4\\package\\src\\bmm-skills\\plan\\bmad-prd\\extra.md' at Object.writeF"
+  },
+  {
+   "test": "7. the shipped bindings are valid, F6 is unbound and every binding requires G2 for the exact scope",
+   "category": "BMad staging release absent (git-ignored; re-staged per BMAD-INTEGRATION-OPERATIONS.md)",
+   "evidence": "dist\\tests\\step6.test.js:211:26 ✖ 7. the shipped bindings are valid, F6 is unbound and every binding requires G2 for the exact scope (107.8206ms) AssertionError [ERR_ASSERTION]: [[\"BMAD-PRD\",[\"workflow_unmodified\"]],[\"BMAD-ARCH\",[\"workflow_unmodified\"]],[\"BMAD-EPICS\",[\"workflow_unmodified\"]],[\"BMAD-"
+  },
+  {
+   "test": "17. G2-approved exact scope: MOCK packet with provenance sidecars, mock result accepted as non-evidence",
+   "category": "BMad staging release absent (git-ignored; re-staged per BMAD-INTEGRATION-OPERATIONS.md)",
+   "evidence": "dist\\tests\\step6.test.js:300:26 ✖ 17. G2-approved exact scope: MOCK packet with provenance sidecars, mock result accepted as non-evidence (12518.3876ms) AssertionError [ERR_ASSERTION]: release_verified: tarball_integrity: staged tarball staging/bmad-method-6.12.4.tgz is missing | extracted_files: st"
+  },
+  {
+   "test": "18. a result that adds a requirement, asserts approval or writes outside its location is rejected",
+   "category": "BMad staging release absent (git-ignored; re-staged per BMAD-INTEGRATION-OPERATIONS.md)",
+   "evidence": "dist\\tests\\step6.test.js:323:26 ✖ 18. a result that adds a requirement, asserts approval or writes outside its location is rejected (12075.4054ms) Error [OrchestratorError]: BMad bmad-prd refused for programs:BRAVO02 (MOCK); recorded BEL-0001 at C:\\rfc\\forward\\dist\\runtime\\src\\bmad\\adapter.js:242:19"
+  },
+  {
+   "test": "19. a stale result (source changed after preparation) is rejected",
+   "category": "BMad staging release absent (git-ignored; re-staged per BMAD-INTEGRATION-OPERATIONS.md)",
+   "evidence": "dist\\tests\\step6.test.js:344:26 ✖ 19. a stale result (source changed after preparation) is rejected (14691.6914ms) Error [OrchestratorError]: BMad bmad-prd refused for programs:BRAVO02 (MOCK); recorded BEL-0001 at C:\\rfc\\forward\\dist\\runtime\\src\\bmad\\adapter.js:242:19 at mutate (C:\\rfc\\forward\\dist\\"
+  },
+  {
+   "test": "20. a modified packet and a replayed result are rejected",
+   "category": "BMad staging release absent (git-ignored; re-staged per BMAD-INTEGRATION-OPERATIONS.md)",
+   "evidence": "dist\\tests\\step6.test.js:353:26 ✖ 20. a modified packet and a replayed result are rejected (13566.8463ms) Error [OrchestratorError]: BMad bmad-prd refused for programs:BRAVO02 (MOCK); recorded BEL-0001 at C:\\rfc\\forward\\dist\\runtime\\src\\bmad\\adapter.js:242:19 at mutate (C:\\rfc\\forward\\dist\\runtime\\s"
+  },
+  {
+   "test": "22. stories stay refused after a mock architecture result: G3 is not passed and mocks are not evidence",
+   "category": "BMad staging release absent (git-ignored; re-staged per BMAD-INTEGRATION-OPERATIONS.md)",
+   "evidence": "dist\\tests\\step6.test.js:371:26 ✖ 22. stories stay refused after a mock architecture result: G3 is not passed and mocks are not evidence (9458.6586ms) Error [OrchestratorError]: BMad bmad-architecture refused for programs:BRAVO02 (MOCK); recorded BEL-0001 at C:\\rfc\\forward\\dist\\runtime\\src\\bmad\\adap"
+  },
+  {
+   "test": "25. the CLI has no bmad run; doctor/workflows/bindings succeed; dry-run is read-only",
+   "category": "BMad staging release absent (git-ignored; re-staged per BMAD-INTEGRATION-OPERATIONS.md)",
+   "evidence": "dist\\tests\\step6.test.js:402:26 ✖ 25. the CLI has no bmad run; doctor/workflows/bindings succeed; dry-run is read-only (451.2998ms) AssertionError [ERR_ASSERTION]: Expected values to be strictly equal: 1 !== 0 at TestContext.<anonymous> (C:\\rfc\\forward\\dist\\tests\\step6.test.js:406:26) at Test.runInA"
+  },
+  {
+   "test": "17. a modified executor copy of the release is detected",
+   "category": "BMad staging release absent (git-ignored; re-staged per BMAD-INTEGRATION-OPERATIONS.md)",
+   "evidence": "dist\\tests\\step7.test.js:373:26 ✖ 17. a modified executor copy of the release is detected (17.4331ms) Error: ENOENT: no such file or directory, lstat 'C:\\rfc\\forward\\integrations\\bmad\\staging\\bmad-method-6.12.4\\package' at cpSyncFn (node:internal/fs/cp/cp-sync:56:13) at Object.cpSync (node:fs:3046:3"
+  },
+  {
+   "test": "18. missing runtime dependencies (npm modules, uv, workspace) are reported",
+   "category": "BMad staging release absent (git-ignored; re-staged per BMAD-INTEGRATION-OPERATIONS.md)",
+   "evidence": "dist\\tests\\step7.test.js:380:26 ✖ 18. missing runtime dependencies (npm modules, uv, workspace) are reported (15.0484ms) Error: ENOENT: no such file or directory, lstat 'C:\\rfc\\forward\\integrations\\bmad\\staging\\bmad-method-6.12.4\\package' at cpSyncFn (node:internal/fs/cp/cp-sync:56:13) at Object.cpS"
+  },
+  {
+   "test": "21/22. a failed execution is recorded and a fake completion receipt is rejected",
+   "category": "BMad staging release absent (git-ignored; re-staged per BMAD-INTEGRATION-OPERATIONS.md)",
+   "evidence": "dist\\tests\\step7.test.js:406:26 ✖ 21/22. a failed execution is recorded and a fake completion receipt is rejected (3716.9917ms) Error [OrchestratorError]: BMad bmad-prd refused for programs:BRAVO02 (MOCK); recorded BEL-0001 at C:\\rfc\\forward\\dist\\runtime\\src\\bmad\\adapter.js:242:19 at mutate (C:\\rfc\\"
+  },
+  {
+   "test": "28. LIVE execution is refused with every blocker; the manifest is contract-valid and nothing is executed",
+   "category": "BMad staging release absent (git-ignored; re-staged per BMAD-INTEGRATION-OPERATIONS.md)",
+   "evidence": "dist\\tests\\step7.test.js:446:26 ✖ 28. LIVE execution is refused with every blocker; the manifest is contract-valid and nothing is executed (3011.2145ms) Error [OrchestratorError]: BMad bmad-prd refused for programs:BRAVO02 (MOCK); recorded BEL-0002 at C:\\rfc\\forward\\dist\\runtime\\src\\bmad\\adapter.js:"
+  },
+  {
+   "test": "21/23. without authorization the preflight refuses, is sealed, and nothing can be launched",
+   "category": "BMad staging release absent (git-ignored; re-staged per BMAD-INTEGRATION-OPERATIONS.md)",
+   "evidence": "dist\\tests\\step8.test.js:356:26 ✖ 21/23. without authorization the preflight refuses, is sealed, and nothing can be launched (5293.9327ms) Error [OrchestratorError]: BMad bmad-prd refused for programs:BRAVO02 (MOCK); recorded BEL-0001 at C:\\rfc\\forward\\dist\\runtime\\src\\bmad\\adapter.js:242:19 at muta"
+  }
+ ],
+ "superseded": "an earlier fresh-clone run into a long scratch path was invalid: its checkout failed with \"Filename too long\" (exit 128) and left an empty index"
+}

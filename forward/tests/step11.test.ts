@@ -28,6 +28,7 @@ import { cleanup, Fixture, FORWARD_DIR } from './helpers/fixture';
 import { wfOf } from './helpers/g2fixture';
 import { approveStories, designFixture } from './helpers/designfixture';
 
+import { javaTrackingViolations } from './helpers/gitpolicy';
 const backup = require(path.join(FORWARD_DIR, 'tools', 'backup.js'));
 const REPO = path.resolve(FORWARD_DIR, '..');
 const PILOT = path.join(FORWARD_DIR, 'pilot', 'synthetic-rc');
@@ -314,12 +315,14 @@ describe('STEP 11 - workflow and protection', () => {
       return !m || !checkLocalAuthorization(wf, ctx, m[1], path.join(REPO, 'forward', 'generated', 'java', m[1])).ok;
     });
     assert.deepEqual(unauthorised, [], 'Java exists only in synthetic pilot output or an authorised local generation directory');
-    assert.equal(spawnSync('git', ['-C', REPO, 'ls-files', '*.java'], { encoding: 'utf8' }).stdout.trim(), '');
+    assert.deepEqual(javaTrackingViolations(REPO), [], 'only the hand-written Java runtime is tracked; no generated or other Java');
   });
 
   test('13. recovery completeness: pilot sources and STEP 11 code are backed up, pilot output is not, and a disposable checkout restores cleanly', () => {
     const d = backup.discover();
-    const paths = new Set(d.included.map((f: any) => f.path));
+    // Recoverable = archived (untracked, ignored, modified) or tracked at the recorded commit.
+    const paths = new Set([...d.included, ...d.tracked].map((f: any) => f.path));
+    assert.deepEqual(d.tracked_secrets, [], 'no committed file contains a secret pattern');
     for (const p of ['forward/runtime/src/pilot/plan.ts', 'forward/runtime/src/pilot/pilot.ts', 'forward/pilot/synthetic-rc/cobol/SYNRC01.cbl', 'forward/pilot/synthetic-rc/fixtures/cases.json', 'forward/contracts/pilot/pilot-result.schema.json', 'forward/tests/step11.test.ts']) assert.ok(paths.has(p), p);
     assert.ok(![...paths].some((p) => /^forward\/pilot\/[^/]+\/out\//.test(p as string)));
     // Transient test workspaces written by concurrently running test files are never backed up.

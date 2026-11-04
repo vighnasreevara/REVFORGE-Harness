@@ -23,6 +23,7 @@ import { cleanup, Fixture, FORWARD_DIR } from './helpers/fixture';
 import { wfOf } from './helpers/g2fixture';
 import { contextFixture } from './helpers/contextfixture';
 
+import { javaTrackingViolations } from './helpers/gitpolicy';
 const REPO = path.resolve(FORWARD_DIR, '..');
 const fixtures: Fixture[] = [];
 const temps: string[] = [];
@@ -143,7 +144,7 @@ describe('STEP 14 - real repository (read-only)', () => {
     assert.ok(auth.blockers.some((b: string) => /java_generation_allowed is false/.test(b)));
     assert.equal(ctx.config.generation.java_generation_allowed, false);
     assert.equal(sha256File(wf.store.p('audit.jsonl')), audit, 'read-only');
-    assert.equal(spawnSync('git', ['-C', REPO, 'ls-files', '*.java'], { encoding: 'utf8' }).stdout.trim(), '');
+    assert.deepEqual(javaTrackingViolations(REPO), [], 'only the hand-written Java runtime is tracked; no generated or other Java');
   });
 
   test('earlier RTNCDE00 findings are preserved (8 gaps, same IDs)', { skip }, () => {
