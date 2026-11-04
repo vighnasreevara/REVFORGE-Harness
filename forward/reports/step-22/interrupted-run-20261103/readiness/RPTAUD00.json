@@ -1,0 +1,593 @@
+{
+  "gate": "SOURCE_READINESS",
+  "subject": "RPTAUD00",
+  "status": "FAIL",
+  "checks": [
+    {
+      "id": "source_available",
+      "ok": true,
+      "detail": "src/programs/batch/RPTAUD00.cbl sha256 1407e0aa1ad4413341662a1dcf997c97dff47b3e0a93780a8a8ca90ac912f13e; 39 statement(s) in 10 paragraph(s)"
+    },
+    {
+      "id": "complete_program",
+      "ok": true,
+      "detail": "every paragraph contains statements"
+    },
+    {
+      "id": "copybooks_resolved",
+      "ok": true,
+      "detail": "all 3 include(s) resolved: AUDITLOG, ERRHAND, RTNCODE"
+    },
+    {
+      "id": "requirements_and_data_mapping_delivered",
+      "ok": true,
+      "detail": "F1/F2 deliveries accepted for AUDITLOG, ERRHAND, RTNCODE, RPTAUD00"
+    },
+    {
+      "id": "behaviour_classified",
+      "ok": true,
+      "detail": "4 behaviour(s): 1 VERIFIED_CANDIDATE, 2 PARTIAL, 1 GAP"
+    },
+    {
+      "id": "dependencies_identified",
+      "ok": false,
+      "detail": "closure UNRESOLVED for RPTAUD00:0000-MAIN (PERFORM/GO TO target 2110-READ-AUDIT-RECORDS (line 127) is not a paragraph of RPTAUD00); RPTAUD00:1000-INITIALIZE (PERFORM/GO TO target 2110-READ-AUDIT-RECORDS (line 127) is not a paragraph of RPTAUD00); RPTAUD00:2000-PROCESS-REPORT (PERFORM/GO TO target 2110-READ-AUDIT-RECORDS (line 127) is not a paragraph of RPTAUD00); RPTAUD00:3000-CLEANUP (PERFORM/GO TO target 2110-READ-AUDIT-RECORDS (line 127) is not a paragraph of RPTAUD00)"
+    },
+    {
+      "id": "unsupported_documented",
+      "ok": true,
+      "detail": "6 gap(s) document every PARTIAL/GAP behaviour"
+    },
+    {
+      "id": "unknowns_documented",
+      "ok": true,
+      "detail": "13 open decision(s) record the remaining questions (5 blocking for approval); none is resolved or assumed here"
+    }
+  ],
+  "note": "An engineering gate: it states that the source is understood well enough to convert, with every unknown documented. It is not a G2 approval and does not authorise generation.",
+  "behaviours": [
+    {
+      "behaviour_id": "RPTAUD00:ENTRY-DISPATCH",
+      "kind": "dispatch",
+      "classification": "PARTIAL",
+      "lines": [
+        84,
+        86
+      ],
+      "inputs": [],
+      "outputs": [],
+      "side_effects": [],
+      "unresolved": [],
+      "covered_by": []
+    },
+    {
+      "behaviour_id": "RPTAUD00:1000-INITIALIZE",
+      "kind": "performed_range",
+      "classification": "PARTIAL",
+      "lines": [
+        90,
+        146
+      ],
+      "inputs": [
+        "REPORT-RECORD",
+        "WS-AUDIT-STATUS",
+        "WS-ERROR-STATUS",
+        "WS-HEADER1",
+        "WS-HEADER2",
+        "WS-HEADER3",
+        "WS-REPORT-DATE",
+        "WS-REPORT-STATUS"
+      ],
+      "outputs": [
+        "RETURN-CODE",
+        "WS-ERROR-MESSAGE"
+      ],
+      "side_effects": [
+        {
+          "line": 94,
+          "kind": "file_io",
+          "operation": "OPEN",
+          "table": null
+        },
+        {
+          "line": 101,
+          "kind": "file_io",
+          "operation": "OPEN",
+          "table": null
+        },
+        {
+          "line": 108,
+          "kind": "file_io",
+          "operation": "OPEN",
+          "table": null
+        },
+        {
+          "line": 117,
+          "kind": "file_io",
+          "operation": "WRITE",
+          "table": null
+        },
+        {
+          "line": 118,
+          "kind": "file_io",
+          "operation": "WRITE",
+          "table": null
+        },
+        {
+          "line": 119,
+          "kind": "file_io",
+          "operation": "WRITE",
+          "table": null
+        }
+      ],
+      "unresolved": [
+        "WS-ERROR-MESSAGE"
+      ],
+      "covered_by": []
+    },
+    {
+      "behaviour_id": "RPTAUD00:2000-PROCESS-REPORT",
+      "kind": "performed_range",
+      "classification": "VERIFIED_CANDIDATE",
+      "lines": [
+        122,
+        137
+      ],
+      "inputs": [],
+      "outputs": [],
+      "side_effects": [],
+      "unresolved": [],
+      "covered_by": []
+    },
+    {
+      "behaviour_id": "RPTAUD00:3000-CLEANUP",
+      "kind": "performed_range",
+      "classification": "GAP",
+      "lines": [
+        140,
+        142
+      ],
+      "inputs": [],
+      "outputs": [],
+      "side_effects": [
+        {
+          "line": 140,
+          "kind": "file_io",
+          "operation": "CLOSE",
+          "table": null
+        }
+      ],
+      "unresolved": [],
+      "covered_by": []
+    }
+  ],
+  "gaps": [
+    {
+      "gap_id": "GAP-RPTAUD00-1000-INITIALIZE-WS-ERROR-MESSAGE",
+      "kind": "UNDECLARED_NAME_SEMANTICS",
+      "behaviour_id": "RPTAUD00:1000-INITIALIZE",
+      "source": {
+        "path": "src/programs/batch/RPTAUD00.cbl",
+        "sha256": "1407e0aa1ad4413341662a1dcf997c97dff47b3e0a93780a8a8ca90ac912f13e",
+        "lines": [
+          96,
+          103,
+          110,
+          145
+        ],
+        "statements": [
+          {
+            "line": 96,
+            "text": "MOVE 'ERROR OPENING AUDIT FILE' TO WS-ERROR-MESSAGE"
+          },
+          {
+            "line": 103,
+            "text": "MOVE 'ERROR OPENING ERROR FILE' TO WS-ERROR-MESSAGE"
+          },
+          {
+            "line": 110,
+            "text": "MOVE 'ERROR OPENING REPORT FILE' TO WS-ERROR-MESSAGE"
+          },
+          {
+            "line": 145,
+            "text": "DISPLAY WS-ERROR-MESSAGE"
+          }
+        ]
+      },
+      "missing_fact": "WS-ERROR-MESSAGE is used but declared nowhere in the repository; its layout and value meanings are the subject of DR-RPTAUD00-001 (missing: a declaration of WS-ERROR-MESSAGE; a declaration of GOBACK)",
+      "why_unsafe": "the outputs of these statements (WS-ERROR-MESSAGE) depend on a value whose meaning is not established; any Java mapping would invent it",
+      "affected_requirements": [],
+      "affected_java_component": "outcome mapping of behaviour 1000-INITIALIZE (behind a port whose only implementation throws until the gap is resolved)",
+      "required_action": [
+        "DR-RPTAUD00-001: a signed resolution by technical_authority"
+      ],
+      "validation_evidence": "the real definition of WS-ERROR-MESSAGE for the target runtime and a captured legacy run showing each outcome branch",
+      "blocks_execution_path": "request its PERFORM -> 1000-INITIALIZE: statements 96, 103, 110, 145",
+      "blocking": true,
+      "status": "OPEN"
+    },
+    {
+      "gap_id": "GAP-RPTAUD00-1000-INITIALIZE-FILE-OPEN-AUDIT-FILE",
+      "kind": "EXTERNAL_FILE_RUNTIME",
+      "behaviour_id": "RPTAUD00:1000-INITIALIZE",
+      "source": {
+        "path": "src/programs/batch/RPTAUD00.cbl",
+        "sha256": "1407e0aa1ad4413341662a1dcf997c97dff47b3e0a93780a8a8ca90ac912f13e",
+        "lines": [
+          94
+        ],
+        "statements": [
+          {
+            "line": 94,
+            "text": "OPEN INPUT AUDIT-FILE"
+          }
+        ]
+      },
+      "missing_fact": "the run-time behaviour of OPEN on AUDIT-FILE: the dataset bound to it (JCL DD), its content and record encoding, and the file-system status outcomes the COBOL source does not define",
+      "why_unsafe": "the records read and the statuses reported come from a dataset outside the program; a Java implementation verified only against source-derived fixtures does not establish them",
+      "affected_requirements": [],
+      "affected_java_component": "file port for OPEN AUDIT-FILE (runtime file semantics; dataset contents unverified)",
+      "required_action": [
+        "the dataset definitions (JCL DD, organisation, record format) and a captured legacy run for each status outcome (technical authority)"
+      ],
+      "validation_evidence": "a captured legacy run against the real (or an approved equivalent) dataset, including end-of-file and error statuses",
+      "blocks_execution_path": "request its PERFORM -> 1000-INITIALIZE: statement(s) 94",
+      "blocking": true,
+      "status": "OPEN"
+    },
+    {
+      "gap_id": "GAP-RPTAUD00-1000-INITIALIZE-FILE-OPEN-ERROR-FILE",
+      "kind": "EXTERNAL_FILE_RUNTIME",
+      "behaviour_id": "RPTAUD00:1000-INITIALIZE",
+      "source": {
+        "path": "src/programs/batch/RPTAUD00.cbl",
+        "sha256": "1407e0aa1ad4413341662a1dcf997c97dff47b3e0a93780a8a8ca90ac912f13e",
+        "lines": [
+          101
+        ],
+        "statements": [
+          {
+            "line": 101,
+            "text": "OPEN INPUT ERROR-FILE"
+          }
+        ]
+      },
+      "missing_fact": "the run-time behaviour of OPEN on ERROR-FILE: the dataset bound to it (JCL DD), its content and record encoding, and the file-system status outcomes the COBOL source does not define",
+      "why_unsafe": "the records read and the statuses reported come from a dataset outside the program; a Java implementation verified only against source-derived fixtures does not establish them",
+      "affected_requirements": [],
+      "affected_java_component": "file port for OPEN ERROR-FILE (runtime file semantics; dataset contents unverified)",
+      "required_action": [
+        "the dataset definitions (JCL DD, organisation, record format) and a captured legacy run for each status outcome (technical authority)"
+      ],
+      "validation_evidence": "a captured legacy run against the real (or an approved equivalent) dataset, including end-of-file and error statuses",
+      "blocks_execution_path": "request its PERFORM -> 1000-INITIALIZE: statement(s) 101",
+      "blocking": true,
+      "status": "OPEN"
+    },
+    {
+      "gap_id": "GAP-RPTAUD00-1000-INITIALIZE-FILE-OPEN-REPORT-FILE",
+      "kind": "EXTERNAL_FILE_RUNTIME",
+      "behaviour_id": "RPTAUD00:1000-INITIALIZE",
+      "source": {
+        "path": "src/programs/batch/RPTAUD00.cbl",
+        "sha256": "1407e0aa1ad4413341662a1dcf997c97dff47b3e0a93780a8a8ca90ac912f13e",
+        "lines": [
+          108
+        ],
+        "statements": [
+          {
+            "line": 108,
+            "text": "OPEN OUTPUT REPORT-FILE"
+          }
+        ]
+      },
+      "missing_fact": "the run-time behaviour of OPEN on REPORT-FILE: the dataset bound to it (JCL DD), its content and record encoding, and the file-system status outcomes the COBOL source does not define",
+      "why_unsafe": "the records read and the statuses reported come from a dataset outside the program; a Java implementation verified only against source-derived fixtures does not establish them",
+      "affected_requirements": [],
+      "affected_java_component": "file port for OPEN REPORT-FILE (runtime file semantics; dataset contents unverified)",
+      "required_action": [
+        "the dataset definitions (JCL DD, organisation, record format) and a captured legacy run for each status outcome (technical authority)"
+      ],
+      "validation_evidence": "a captured legacy run against the real (or an approved equivalent) dataset, including end-of-file and error statuses",
+      "blocks_execution_path": "request its PERFORM -> 1000-INITIALIZE: statement(s) 108",
+      "blocking": true,
+      "status": "OPEN"
+    },
+    {
+      "gap_id": "GAP-RPTAUD00-1000-INITIALIZE-FILE-WRITE-REPORT-RECORD",
+      "kind": "EXTERNAL_FILE_RUNTIME",
+      "behaviour_id": "RPTAUD00:1000-INITIALIZE",
+      "source": {
+        "path": "src/programs/batch/RPTAUD00.cbl",
+        "sha256": "1407e0aa1ad4413341662a1dcf997c97dff47b3e0a93780a8a8ca90ac912f13e",
+        "lines": [
+          117,
+          118,
+          119
+        ],
+        "statements": [
+          {
+            "line": 117,
+            "text": "WRITE REPORT-RECORD FROM WS-HEADER1"
+          },
+          {
+            "line": 118,
+            "text": "WRITE REPORT-RECORD FROM WS-HEADER2"
+          },
+          {
+            "line": 119,
+            "text": "WRITE REPORT-RECORD FROM WS-HEADER3."
+          }
+        ]
+      },
+      "missing_fact": "the run-time behaviour of WRITE on REPORT-RECORD: the dataset bound to it (JCL DD), its content and record encoding, and the file-system status outcomes the COBOL source does not define",
+      "why_unsafe": "the records read and the statuses reported come from a dataset outside the program; a Java implementation verified only against source-derived fixtures does not establish them",
+      "affected_requirements": [],
+      "affected_java_component": "file port for WRITE REPORT-RECORD (runtime file semantics; dataset contents unverified)",
+      "required_action": [
+        "the dataset definitions (JCL DD, organisation, record format) and a captured legacy run for each status outcome (technical authority)"
+      ],
+      "validation_evidence": "a captured legacy run against the real (or an approved equivalent) dataset, including end-of-file and error statuses",
+      "blocks_execution_path": "request its PERFORM -> 1000-INITIALIZE: statement(s) 117, 118, 119",
+      "blocking": true,
+      "status": "OPEN"
+    },
+    {
+      "gap_id": "GAP-RPTAUD00-3000-CLEANUP-FILE-CLOSE-AUDIT-FILE",
+      "kind": "EXTERNAL_FILE_RUNTIME",
+      "behaviour_id": "RPTAUD00:3000-CLEANUP",
+      "source": {
+        "path": "src/programs/batch/RPTAUD00.cbl",
+        "sha256": "1407e0aa1ad4413341662a1dcf997c97dff47b3e0a93780a8a8ca90ac912f13e",
+        "lines": [
+          140
+        ],
+        "statements": [
+          {
+            "line": 140,
+            "text": "CLOSE AUDIT-FILE ERROR-FILE REPORT-FILE."
+          }
+        ]
+      },
+      "missing_fact": "the run-time behaviour of CLOSE on AUDIT-FILE: the dataset bound to it (JCL DD), its content and record encoding, and the file-system status outcomes the COBOL source does not define",
+      "why_unsafe": "the records read and the statuses reported come from a dataset outside the program; a Java implementation verified only against source-derived fixtures does not establish them",
+      "affected_requirements": [],
+      "affected_java_component": "file port for CLOSE AUDIT-FILE (runtime file semantics; dataset contents unverified)",
+      "required_action": [
+        "the dataset definitions (JCL DD, organisation, record format) and a captured legacy run for each status outcome (technical authority)"
+      ],
+      "validation_evidence": "a captured legacy run against the real (or an approved equivalent) dataset, including end-of-file and error statuses",
+      "blocks_execution_path": "request its PERFORM -> 3000-CLEANUP: statement(s) 140",
+      "blocking": true,
+      "status": "OPEN"
+    }
+  ],
+  "closures": [
+    {
+      "behaviour_id": "RPTAUD00:0000-MAIN",
+      "status": "UNRESOLVED",
+      "unresolved_reasons": [
+        "PERFORM/GO TO target 2110-READ-AUDIT-RECORDS (line 127) is not a paragraph of RPTAUD00",
+        "PERFORM/GO TO target 2120-SUMMARIZE-AUDIT (line 128) is not a paragraph of RPTAUD00",
+        "PERFORM/GO TO target 2210-READ-ERROR-RECORDS (line 131) is not a paragraph of RPTAUD00",
+        "PERFORM/GO TO target 2220-SUMMARIZE-ERRORS (line 132) is not a paragraph of RPTAUD00",
+        "PERFORM/GO TO target 2310-WRITE-AUDIT-SUMMARY (line 135) is not a paragraph of RPTAUD00",
+        "PERFORM/GO TO target 2320-WRITE-ERROR-SUMMARY (line 136) is not a paragraph of RPTAUD00",
+        "PERFORM/GO TO target 2330-WRITE-CONTROL-SUMMARY (line 137) is not a paragraph of RPTAUD00",
+        "line 94: AUDIT-FILE is neither declared, a keyword, a paragraph nor the subject of a blocking decision (unknown dependency)",
+        "line 101: ERROR-FILE is neither declared, a keyword, a paragraph nor the subject of a blocking decision (unknown dependency)",
+        "line 140: AUDIT-FILE is neither declared, a keyword, a paragraph nor the subject of a blocking decision (unknown dependency)",
+        "line 140: ERROR-FILE is neither declared, a keyword, a paragraph nor the subject of a blocking decision (unknown dependency)"
+      ],
+      "units": [
+        "RPTAUD00"
+      ],
+      "external": [
+        {
+          "kind": "file_io",
+          "line": 117,
+          "operation": "WRITE",
+          "target": "REPORT-FILE",
+          "relation": "direct"
+        },
+        {
+          "kind": "file_io",
+          "line": 118,
+          "operation": "WRITE",
+          "target": "REPORT-FILE",
+          "relation": "direct"
+        },
+        {
+          "kind": "file_io",
+          "line": 119,
+          "operation": "WRITE",
+          "target": "REPORT-FILE",
+          "relation": "direct"
+        }
+      ],
+      "undeclared": [
+        "WS-ERROR-MESSAGE"
+      ],
+      "sha256": "79d7bb523885e5a1ddb5f9eae3dcb4339f4d297c9227774ea7e99865ec186ea1"
+    },
+    {
+      "behaviour_id": "RPTAUD00:1000-INITIALIZE",
+      "status": "UNRESOLVED",
+      "unresolved_reasons": [
+        "PERFORM/GO TO target 2110-READ-AUDIT-RECORDS (line 127) is not a paragraph of RPTAUD00",
+        "PERFORM/GO TO target 2120-SUMMARIZE-AUDIT (line 128) is not a paragraph of RPTAUD00",
+        "PERFORM/GO TO target 2210-READ-ERROR-RECORDS (line 131) is not a paragraph of RPTAUD00",
+        "PERFORM/GO TO target 2220-SUMMARIZE-ERRORS (line 132) is not a paragraph of RPTAUD00",
+        "PERFORM/GO TO target 2310-WRITE-AUDIT-SUMMARY (line 135) is not a paragraph of RPTAUD00",
+        "PERFORM/GO TO target 2320-WRITE-ERROR-SUMMARY (line 136) is not a paragraph of RPTAUD00",
+        "PERFORM/GO TO target 2330-WRITE-CONTROL-SUMMARY (line 137) is not a paragraph of RPTAUD00",
+        "line 94: AUDIT-FILE is neither declared, a keyword, a paragraph nor the subject of a blocking decision (unknown dependency)",
+        "line 101: ERROR-FILE is neither declared, a keyword, a paragraph nor the subject of a blocking decision (unknown dependency)"
+      ],
+      "units": [
+        "RPTAUD00"
+      ],
+      "external": [
+        {
+          "kind": "file_io",
+          "line": 117,
+          "operation": "WRITE",
+          "target": "REPORT-FILE",
+          "relation": "direct"
+        },
+        {
+          "kind": "file_io",
+          "line": 118,
+          "operation": "WRITE",
+          "target": "REPORT-FILE",
+          "relation": "direct"
+        },
+        {
+          "kind": "file_io",
+          "line": 119,
+          "operation": "WRITE",
+          "target": "REPORT-FILE",
+          "relation": "direct"
+        }
+      ],
+      "undeclared": [
+        "WS-ERROR-MESSAGE"
+      ],
+      "sha256": "999e071f8f90e3d41c0cd4216a0b2bd2a19706e3b161127255761bdaa0e7b5a0"
+    },
+    {
+      "behaviour_id": "RPTAUD00:2000-PROCESS-REPORT",
+      "status": "UNRESOLVED",
+      "unresolved_reasons": [
+        "PERFORM/GO TO target 2110-READ-AUDIT-RECORDS (line 127) is not a paragraph of RPTAUD00",
+        "PERFORM/GO TO target 2120-SUMMARIZE-AUDIT (line 128) is not a paragraph of RPTAUD00",
+        "PERFORM/GO TO target 2210-READ-ERROR-RECORDS (line 131) is not a paragraph of RPTAUD00",
+        "PERFORM/GO TO target 2220-SUMMARIZE-ERRORS (line 132) is not a paragraph of RPTAUD00",
+        "PERFORM/GO TO target 2310-WRITE-AUDIT-SUMMARY (line 135) is not a paragraph of RPTAUD00",
+        "PERFORM/GO TO target 2320-WRITE-ERROR-SUMMARY (line 136) is not a paragraph of RPTAUD00",
+        "PERFORM/GO TO target 2330-WRITE-CONTROL-SUMMARY (line 137) is not a paragraph of RPTAUD00"
+      ],
+      "units": [
+        "RPTAUD00"
+      ],
+      "external": [],
+      "undeclared": [],
+      "sha256": "fff6ca29f626557e731f360f42c02ab991a29c2c75984d56ebbab3c5422686a9"
+    },
+    {
+      "behaviour_id": "RPTAUD00:3000-CLEANUP",
+      "status": "UNRESOLVED",
+      "unresolved_reasons": [
+        "PERFORM/GO TO target 2110-READ-AUDIT-RECORDS (line 127) is not a paragraph of RPTAUD00",
+        "PERFORM/GO TO target 2120-SUMMARIZE-AUDIT (line 128) is not a paragraph of RPTAUD00",
+        "PERFORM/GO TO target 2210-READ-ERROR-RECORDS (line 131) is not a paragraph of RPTAUD00",
+        "PERFORM/GO TO target 2220-SUMMARIZE-ERRORS (line 132) is not a paragraph of RPTAUD00",
+        "PERFORM/GO TO target 2310-WRITE-AUDIT-SUMMARY (line 135) is not a paragraph of RPTAUD00",
+        "PERFORM/GO TO target 2320-WRITE-ERROR-SUMMARY (line 136) is not a paragraph of RPTAUD00",
+        "PERFORM/GO TO target 2330-WRITE-CONTROL-SUMMARY (line 137) is not a paragraph of RPTAUD00",
+        "line 140: AUDIT-FILE is neither declared, a keyword, a paragraph nor the subject of a blocking decision (unknown dependency)",
+        "line 140: ERROR-FILE is neither declared, a keyword, a paragraph nor the subject of a blocking decision (unknown dependency)"
+      ],
+      "units": [
+        "RPTAUD00"
+      ],
+      "external": [],
+      "undeclared": [],
+      "sha256": "4f8af2dc918fa87c0f93d25dbd538d326625c7282cada73f7843e99417b2260a"
+    }
+  ],
+  "open_decisions": [
+    {
+      "id": "DR-AUDPROC-002",
+      "blocking": false,
+      "question": "Copybook AUDITLOG declares audit types ('TRAN','USER','SYST'; BR-143), actions (CREATE, UPDATE, DELETE, INQUIRE, LOGIN, LOGOUT, STARTUP, SHUTDOWN; BR-144) and outcome statuses ('SUCC','FAIL','WARN'; BR-145). Callers assign them and AUDPROC writes them unchecked. Must the forward audit service reject values outside these domains, or record whatever the caller supplies (as implemented)?"
+    },
+    {
+      "id": "DR-F2-0005-003",
+      "blocking": false,
+      "question": "RPTAUD00 declares AUDIT-FILE (DD AUDITLOG, key AUD-KEY) and ERROR-FILE (DD ERRLOG, key ERR-KEY) without FDs; COPY AUDITLOG and COPY ERRHAND appear directly in the FILE SECTION (lines 35-36). Which copybook record is the record of each file, and where are AUD-KEY and ERR-KEY defined?"
+    },
+    {
+      "id": "DR-F2-0005-004",
+      "blocking": false,
+      "question": "WS-ERROR-MESSAGE is used by the error handlers of RPTAUD00 and RPTSTA00 (and RPTPOS00) but is declared nowhere (ERRHAND defines ERR-MESSAGE). What is its declaration (length and type) for the DISPLAY in 9999-ERROR-HANDLER?"
+    },
+    {
+      "id": "DR-F2-0005-012",
+      "blocking": false,
+      "question": "Fifteen elementary level-01 items (e.g. HISTLD00 WS-COMMIT-THRESHOLD, the REPORT-RECORD print lines, DB2CONN WS-CONNECTION-STATE/WS-RETRY-COUNT/WS-MAX-RETRIES, DB2CMT WS-SAVEPOINT-ID) are catalogued as record-level items without Field IDs, so no Java type could be assigned. Should the reverse harness register Field IDs for them, or may later stages map them at record level using the catalogued PIC?"
+    },
+    {
+      "id": "DR-F2-0005-015",
+      "blocking": true,
+      "question": "RPTAUD00 opens AUDIT-FILE and ERROR-FILE but the paragraphs that read and summarise them and write the report body (2110, 2120, 2210, 2220, 2310, 2320, 2330) are missing; its error handler GOBACKs with RC 12 without closing files. What report content must be produced, and should Java close open files on the error path?"
+    },
+    {
+      "id": "DR-F2-0005-023",
+      "blocking": false,
+      "question": "AUDPROC appends audit records to a sequential dataset (DD AUDFILE, OPEN EXTEND per call), its group MOVE LS-SYSTEM-INFO TO AUD-HEADER may overwrite the timestamp just set, and it CLOSEs the file after a failed OPEN; RPTAUD00 meanwhile reads an indexed audit file keyed AUD-KEY (DD AUDITLOG) built on the same copybook. Is there one audit trail (and which organisation), and must the timestamp overwrite be reproduced?"
+    },
+    {
+      "id": "DR-F2-PKT0010-002",
+      "blocking": false,
+      "question": "Which character encoding (code page) do the files and areas described by these copybooks use for DISPLAY data on the legacy platform (EBCDIC 037, 1140, another EBCDIC variant, or ASCII)? The zoned-decimal test vectors and String codecs depend on it."
+    },
+    {
+      "id": "DR-RPTAUD00-001",
+      "blocking": true,
+      "question": "RPTAUD00 performs 7 paragraphs that are not in the source (2110-READ-AUDIT-RECORDS, 2120-SUMMARIZE-AUDIT, 2210-READ-ERROR-RECORDS, 2220-SUMMARIZE-ERRORS, 2310-WRITE-AUDIT-SUMMARY, 2320-WRITE-ERROR-SUMMARY, 2330-WRITE-CONTROL-SUMMARY); no audit or error record is read anywhere; WS-ERROR-MESSAGE is declared nowhere; the error handler ends the run with GOBACK inside a PERFORM without closing files. Can the complete source be supplied, or must the business specify the content of the system audit report?"
+    },
+    {
+      "id": "RVW-GAP-092",
+      "blocking": false,
+      "question": "GAP-092 (medium, DIAGRAM_RENDER_UNVERIFIED) is not addressed by any decision or requirement: Visual rendering of the 65 Mermaid diagrams is unverified. Acknowledge it as a known limitation (resolved_no_change) or exclude the affected units?"
+    },
+    {
+      "id": "RVW-GAP-104",
+      "blocking": false,
+      "question": "GAP-104 (low, DIAGRAM_INCOMPLETE) is not addressed by any decision or requirement: COMP-UNRESOLVED: all seven edges are unsupported. Acknowledge it as a known limitation (resolved_no_change) or exclude the affected units?"
+    },
+    {
+      "id": "DR-CONSOLIDATION-001",
+      "blocking": true,
+      "question": "Batches disagree on BR-143 (Report audit record type as transaction, user action or system event): PKT-0002-F1=mapped, PKT-0004-F1=not_a_requirement. Should this declared value domain be a forward requirement?"
+    },
+    {
+      "id": "DR-CONSOLIDATION-002",
+      "blocking": true,
+      "question": "Batches disagree on BR-144 (Report audit action as a declared audit action): PKT-0002-F1=mapped, PKT-0004-F1=not_a_requirement. Should this declared value domain be a forward requirement?"
+    },
+    {
+      "id": "DR-CONSOLIDATION-003",
+      "blocking": true,
+      "question": "Batches disagree on BR-145 (Report audit outcome status as success, failure or warning): PKT-0002-F1=mapped, PKT-0004-F1=not_a_requirement. Should this declared value domain be a forward requirement?"
+    }
+  ],
+  "authorisation": {
+    "generation_authorized": false,
+    "blockers": [
+      "config generation.java_generation_allowed is false (project authority)",
+      "no authorised orchestrator.java_target_dir",
+      "G4 is BLOCKED (needs signed G2, G3 and G4 approvals by trusted signers)",
+      "trust store: TRUST_NOT_CONFIGURED"
+    ],
+    "gates": {
+      "G0": "PASS",
+      "G1": "PASS",
+      "G2": "UNVERIFIED",
+      "G3": "BLOCKED",
+      "G4": "BLOCKED",
+      "G5": "BLOCKED",
+      "G6": "BLOCKED",
+      "G7": "BLOCKED",
+      "G8": "BLOCKED"
+    },
+    "trust": "TRUST_NOT_CONFIGURED",
+    "program_g2_scope": {
+      "readiness": "NOT_READY",
+      "blocking": 12,
+      "scope_sha256": "a44af56a865bccfcb0737a984692bda2913199d95b15f8f53fe8fb44071c867f"
+    },
+    "note": "Engineering gates never authorise generation. Java may be generated only when generation_authorized is true."
+  }
+}

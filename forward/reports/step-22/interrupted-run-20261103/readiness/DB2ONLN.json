@@ -1,0 +1,696 @@
+{
+  "gate": "SOURCE_READINESS",
+  "subject": "DB2ONLN",
+  "status": "FAIL",
+  "checks": [
+    {
+      "id": "source_available",
+      "ok": true,
+      "detail": "src/programs/online/DB2ONLN.cbl sha256 651889f0e13a3465466a3f671b97b122c12563a3ee251abbacddadbca0e134b4; 50 statement(s) in 10 paragraph(s)"
+    },
+    {
+      "id": "complete_program",
+      "ok": true,
+      "detail": "every paragraph contains statements"
+    },
+    {
+      "id": "copybooks_resolved",
+      "ok": false,
+      "detail": "unresolved or circular includes: SQLCA@6"
+    },
+    {
+      "id": "requirements_and_data_mapping_delivered",
+      "ok": true,
+      "detail": "F1/F2 deliveries accepted for SQLCA, ERRHND, DB2ONLN"
+    },
+    {
+      "id": "behaviour_classified",
+      "ok": true,
+      "detail": "5 behaviour(s): 1 VERIFIED_CANDIDATE, 3 PARTIAL, 1 GAP"
+    },
+    {
+      "id": "dependencies_identified",
+      "ok": true,
+      "detail": "3 behaviour closure(s) resolved; units DB2ONLN, SQLCA; external operations 3"
+    },
+    {
+      "id": "unsupported_documented",
+      "ok": true,
+      "detail": "9 gap(s) document every PARTIAL/GAP behaviour"
+    },
+    {
+      "id": "unknowns_documented",
+      "ok": true,
+      "detail": "10 open decision(s) record the remaining questions (3 blocking for approval); none is resolved or assumed here"
+    }
+  ],
+  "note": "An engineering gate: it states that the source is understood well enough to convert, with every unknown documented. It is not a G2 approval and does not authorise generation.",
+  "behaviours": [
+    {
+      "behaviour_id": "DB2ONLN:ENTRY-DISPATCH",
+      "kind": "dispatch",
+      "classification": "PARTIAL",
+      "lines": [
+        40,
+        52
+      ],
+      "inputs": [
+        "DB2-REQUEST-TYPE"
+      ],
+      "outputs": [],
+      "side_effects": [],
+      "unresolved": [],
+      "covered_by": [
+        "REQ-DB2ONLN-001"
+      ]
+    },
+    {
+      "behaviour_id": "DB2ONLN:P100-PROCESS-CONNECT",
+      "kind": "performed_range",
+      "classification": "PARTIAL",
+      "lines": [
+        55,
+        87
+      ],
+      "inputs": [
+        "DB2-CONNECTION-TOKEN",
+        "FUNCTION CURRENT-DATE (system date and time)",
+        "WS-ACTIVE-CONNECTIONS",
+        "WS-MAX-CONNECTIONS"
+      ],
+      "outputs": [
+        "DB2-CONNECTION-TOKEN",
+        "DB2-ERROR-MSG",
+        "DB2-RESPONSE-CODE",
+        "DB2-SQLCODE"
+      ],
+      "side_effects": [
+        {
+          "line": 67,
+          "kind": "embedded_sql",
+          "operation": "CONNECT",
+          "table": null
+        }
+      ],
+      "unresolved": [
+        "SQLCODE",
+        "SQLERRMC"
+      ],
+      "covered_by": [
+        "REQ-DB2ONLN-001",
+        "REQ-DB2ONLN-002",
+        "RT-DB2ONLN-001"
+      ]
+    },
+    {
+      "behaviour_id": "DB2ONLN:P200-PROCESS-DISCONNECT",
+      "kind": "performed_range",
+      "classification": "GAP",
+      "lines": [
+        92,
+        100
+      ],
+      "inputs": [
+        "WS-ACTIVE-CONNECTIONS"
+      ],
+      "outputs": [
+        "DB2-ERROR-MSG",
+        "DB2-RESPONSE-CODE",
+        "DB2-SQLCODE"
+      ],
+      "side_effects": [
+        {
+          "line": 92,
+          "kind": "embedded_sql",
+          "operation": "DISCONNECT",
+          "table": null
+        }
+      ],
+      "unresolved": [
+        "SQLCODE",
+        "SQLERRMC"
+      ],
+      "covered_by": [
+        "REQ-DB2ONLN-001"
+      ]
+    },
+    {
+      "behaviour_id": "DB2ONLN:P300-CHECK-STATUS",
+      "kind": "performed_range",
+      "classification": "PARTIAL",
+      "lines": [
+        106,
+        118
+      ],
+      "inputs": [
+        "DB2-ERROR-MSG",
+        "WS-ACTIVE-CONNECTIONS"
+      ],
+      "outputs": [
+        "DB2-RESPONSE-CODE",
+        "DB2-SQLCODE"
+      ],
+      "side_effects": [
+        {
+          "line": 106,
+          "kind": "embedded_sql",
+          "operation": "SELECT",
+          "table": null
+        }
+      ],
+      "unresolved": [
+        "SQLCODE"
+      ],
+      "covered_by": [
+        "REQ-DB2ONLN-001",
+        "RT-DB2ONLN-002"
+      ]
+    },
+    {
+      "behaviour_id": "DB2ONLN:NO-MATCH",
+      "kind": "no_match",
+      "classification": "VERIFIED_CANDIDATE",
+      "lines": null,
+      "inputs": [],
+      "outputs": [],
+      "side_effects": [],
+      "unresolved": [],
+      "covered_by": [
+        "REQ-DB2ONLN-001"
+      ]
+    }
+  ],
+  "gaps": [
+    {
+      "gap_id": "GAP-DB2ONLN-P100-PROCESS-CONNECT-SQLCODE",
+      "kind": "UNDECLARED_NAME_SEMANTICS",
+      "behaviour_id": "DB2ONLN:P100-PROCESS-CONNECT",
+      "source": {
+        "path": "src/programs/online/DB2ONLN.cbl",
+        "sha256": "651889f0e13a3465466a3f671b97b122c12563a3ee251abbacddadbca0e134b4",
+        "lines": [
+          69,
+          70,
+          71,
+          72,
+          73,
+          76,
+          78
+        ],
+        "statements": [
+          {
+            "line": 69,
+            "text": "IF SQLCODE = 0"
+          },
+          {
+            "line": 70,
+            "text": "ADD 1 TO WS-ACTIVE-CONNECTIONS"
+          },
+          {
+            "line": 71,
+            "text": "MOVE SQLCODE TO DB2-SQLCODE"
+          },
+          {
+            "line": 72,
+            "text": "MOVE 0 TO DB2-RESPONSE-CODE"
+          },
+          {
+            "line": 73,
+            "text": "PERFORM P120-GENERATE-TOKEN THRU P120-EXIT"
+          },
+          {
+            "line": 76,
+            "text": "MOVE SQLCODE TO DB2-SQLCODE"
+          },
+          {
+            "line": 78,
+            "text": "MOVE -1 TO DB2-RESPONSE-CODE"
+          }
+        ]
+      },
+      "missing_fact": "SQLCODE is used but declared nowhere in the repository; its layout and value meanings are the subject of DR-F2-0011-001, DR-DB2ERR-001 (missing: the real SQLCA member (the repository copy includes itself); a declaration of SQLCODE; a declaration of SQLERRMC)",
+      "why_unsafe": "the outputs of these statements (DB2-SQLCODE, DB2-RESPONSE-CODE) depend on a value whose meaning is not established; any Java mapping would invent it",
+      "affected_requirements": [
+        "REQ-DB2ONLN-001",
+        "REQ-DB2ONLN-002",
+        "RT-DB2ONLN-001"
+      ],
+      "affected_java_component": "outcome mapping of behaviour P100-PROCESS-CONNECT (behind a port whose only implementation throws until the gap is resolved)",
+      "required_action": [
+        "DR-F2-0011-001: a signed resolution by technical_authority",
+        "DR-DB2ERR-001: a signed resolution by technical_authority"
+      ],
+      "validation_evidence": "the real definition of SQLCODE for the target runtime and a captured legacy run showing each outcome branch",
+      "blocks_execution_path": "request DB2-CONNECT ('C') -> P100-PROCESS-CONNECT: statements 69, 70, 71, 72, 73, 76, 78",
+      "blocking": true,
+      "status": "OPEN"
+    },
+    {
+      "gap_id": "GAP-DB2ONLN-P100-PROCESS-CONNECT-SQLERRMC",
+      "kind": "UNDECLARED_NAME_SEMANTICS",
+      "behaviour_id": "DB2ONLN:P100-PROCESS-CONNECT",
+      "source": {
+        "path": "src/programs/online/DB2ONLN.cbl",
+        "sha256": "651889f0e13a3465466a3f671b97b122c12563a3ee251abbacddadbca0e134b4",
+        "lines": [
+          77
+        ],
+        "statements": [
+          {
+            "line": 77,
+            "text": "MOVE SQLERRMC TO DB2-ERROR-MSG"
+          }
+        ]
+      },
+      "missing_fact": "SQLERRMC is used but declared nowhere in the repository; its layout and value meanings are the subject of DR-F2-0011-001, DR-DB2ERR-001 (missing: the real SQLCA member (the repository copy includes itself); a declaration of SQLCODE; a declaration of SQLERRMC)",
+      "why_unsafe": "the outputs of these statements (DB2-ERROR-MSG) depend on a value whose meaning is not established; any Java mapping would invent it",
+      "affected_requirements": [
+        "REQ-DB2ONLN-001",
+        "REQ-DB2ONLN-002",
+        "RT-DB2ONLN-001"
+      ],
+      "affected_java_component": "outcome mapping of behaviour P100-PROCESS-CONNECT (behind a port whose only implementation throws until the gap is resolved)",
+      "required_action": [
+        "DR-F2-0011-001: a signed resolution by technical_authority",
+        "DR-DB2ERR-001: a signed resolution by technical_authority"
+      ],
+      "validation_evidence": "the real definition of SQLERRMC for the target runtime and a captured legacy run showing each outcome branch",
+      "blocks_execution_path": "request DB2-CONNECT ('C') -> P100-PROCESS-CONNECT: statements 77",
+      "blocking": true,
+      "status": "OPEN"
+    },
+    {
+      "gap_id": "GAP-DB2ONLN-P100-PROCESS-CONNECT-SQL-CONNECT-UNKNOWN",
+      "kind": "EXTERNAL_DATABASE_RUNTIME",
+      "behaviour_id": "DB2ONLN:P100-PROCESS-CONNECT",
+      "source": {
+        "path": "src/programs/online/DB2ONLN.cbl",
+        "sha256": "651889f0e13a3465466a3f671b97b122c12563a3ee251abbacddadbca0e134b4",
+        "lines": [
+          67,
+          67
+        ],
+        "statements": [
+          {
+            "line": 67,
+            "text": "EXEC SQL CONNECT TO POSMVP END-EXEC."
+          }
+        ]
+      },
+      "missing_fact": "the runtime behaviour of embedded SQL CONNECT on null: database product and version, host-variable conversions, NULL and no-row results, constraint violations and the status they report",
+      "why_unsafe": "the result and every status it produces come from an external database the repository does not describe; a Java implementation would have to assume them",
+      "affected_requirements": [
+        "REQ-DB2ONLN-001",
+        "REQ-DB2ONLN-002",
+        "RT-DB2ONLN-001"
+      ],
+      "affected_java_component": "database port for CONNECT null (interface only; no implementation until specified)",
+      "required_action": [
+        "an approved specification of the database interaction (technical authority), recorded as an ADR at G3"
+      ],
+      "validation_evidence": "a captured run against the real (or an approved equivalent) database for each outcome, including errors",
+      "blocks_execution_path": "request DB2-CONNECT ('C') -> P100-PROCESS-CONNECT: statement 67",
+      "blocking": true,
+      "status": "OPEN"
+    },
+    {
+      "gap_id": "GAP-DB2ONLN-P200-PROCESS-DISCONNECT-SQLCODE",
+      "kind": "UNDECLARED_NAME_SEMANTICS",
+      "behaviour_id": "DB2ONLN:P200-PROCESS-DISCONNECT",
+      "source": {
+        "path": "src/programs/online/DB2ONLN.cbl",
+        "sha256": "651889f0e13a3465466a3f671b97b122c12563a3ee251abbacddadbca0e134b4",
+        "lines": [
+          94,
+          95,
+          96,
+          98,
+          100
+        ],
+        "statements": [
+          {
+            "line": 94,
+            "text": "IF SQLCODE = 0"
+          },
+          {
+            "line": 95,
+            "text": "SUBTRACT 1 FROM WS-ACTIVE-CONNECTIONS"
+          },
+          {
+            "line": 96,
+            "text": "MOVE 0 TO DB2-RESPONSE-CODE"
+          },
+          {
+            "line": 98,
+            "text": "MOVE SQLCODE TO DB2-SQLCODE"
+          },
+          {
+            "line": 100,
+            "text": "MOVE -1 TO DB2-RESPONSE-CODE"
+          }
+        ]
+      },
+      "missing_fact": "SQLCODE is used but declared nowhere in the repository; its layout and value meanings are the subject of DR-F2-0011-001, DR-DB2ERR-001 (missing: the real SQLCA member (the repository copy includes itself); a declaration of SQLCODE; a declaration of SQLERRMC)",
+      "why_unsafe": "the outputs of these statements (DB2-RESPONSE-CODE, DB2-SQLCODE) depend on a value whose meaning is not established; any Java mapping would invent it",
+      "affected_requirements": [
+        "REQ-DB2ONLN-001"
+      ],
+      "affected_java_component": "outcome mapping of behaviour P200-PROCESS-DISCONNECT (behind a port whose only implementation throws until the gap is resolved)",
+      "required_action": [
+        "DR-F2-0011-001: a signed resolution by technical_authority",
+        "DR-DB2ERR-001: a signed resolution by technical_authority"
+      ],
+      "validation_evidence": "the real definition of SQLCODE for the target runtime and a captured legacy run showing each outcome branch",
+      "blocks_execution_path": "request DB2-DISCONNECT ('D') -> P200-PROCESS-DISCONNECT: statements 94, 95, 96, 98, 100",
+      "blocking": true,
+      "status": "OPEN"
+    },
+    {
+      "gap_id": "GAP-DB2ONLN-P200-PROCESS-DISCONNECT-SQLERRMC",
+      "kind": "UNDECLARED_NAME_SEMANTICS",
+      "behaviour_id": "DB2ONLN:P200-PROCESS-DISCONNECT",
+      "source": {
+        "path": "src/programs/online/DB2ONLN.cbl",
+        "sha256": "651889f0e13a3465466a3f671b97b122c12563a3ee251abbacddadbca0e134b4",
+        "lines": [
+          99
+        ],
+        "statements": [
+          {
+            "line": 99,
+            "text": "MOVE SQLERRMC TO DB2-ERROR-MSG"
+          }
+        ]
+      },
+      "missing_fact": "SQLERRMC is used but declared nowhere in the repository; its layout and value meanings are the subject of DR-F2-0011-001, DR-DB2ERR-001 (missing: the real SQLCA member (the repository copy includes itself); a declaration of SQLCODE; a declaration of SQLERRMC)",
+      "why_unsafe": "the outputs of these statements (DB2-ERROR-MSG) depend on a value whose meaning is not established; any Java mapping would invent it",
+      "affected_requirements": [
+        "REQ-DB2ONLN-001"
+      ],
+      "affected_java_component": "outcome mapping of behaviour P200-PROCESS-DISCONNECT (behind a port whose only implementation throws until the gap is resolved)",
+      "required_action": [
+        "DR-F2-0011-001: a signed resolution by technical_authority",
+        "DR-DB2ERR-001: a signed resolution by technical_authority"
+      ],
+      "validation_evidence": "the real definition of SQLERRMC for the target runtime and a captured legacy run showing each outcome branch",
+      "blocks_execution_path": "request DB2-DISCONNECT ('D') -> P200-PROCESS-DISCONNECT: statements 99",
+      "blocking": true,
+      "status": "OPEN"
+    },
+    {
+      "gap_id": "GAP-DB2ONLN-P200-PROCESS-DISCONNECT-SQL-DISCONNECT-UNKNOWN",
+      "kind": "EXTERNAL_DATABASE_RUNTIME",
+      "behaviour_id": "DB2ONLN:P200-PROCESS-DISCONNECT",
+      "source": {
+        "path": "src/programs/online/DB2ONLN.cbl",
+        "sha256": "651889f0e13a3465466a3f671b97b122c12563a3ee251abbacddadbca0e134b4",
+        "lines": [
+          92,
+          92
+        ],
+        "statements": [
+          {
+            "line": 92,
+            "text": "EXEC SQL DISCONNECT END-EXEC."
+          }
+        ]
+      },
+      "missing_fact": "the runtime behaviour of embedded SQL DISCONNECT on null: database product and version, host-variable conversions, NULL and no-row results, constraint violations and the status they report",
+      "why_unsafe": "the result and every status it produces come from an external database the repository does not describe; a Java implementation would have to assume them",
+      "affected_requirements": [
+        "REQ-DB2ONLN-001"
+      ],
+      "affected_java_component": "database port for DISCONNECT null (interface only; no implementation until specified)",
+      "required_action": [
+        "an approved specification of the database interaction (technical authority), recorded as an ADR at G3"
+      ],
+      "validation_evidence": "a captured run against the real (or an approved equivalent) database for each outcome, including errors",
+      "blocks_execution_path": "request DB2-DISCONNECT ('D') -> P200-PROCESS-DISCONNECT: statement 92",
+      "blocking": true,
+      "status": "OPEN"
+    },
+    {
+      "gap_id": "GAP-DB2ONLN-P300-CHECK-STATUS-SQLCODE",
+      "kind": "UNDECLARED_NAME_SEMANTICS",
+      "behaviour_id": "DB2ONLN:P300-CHECK-STATUS",
+      "source": {
+        "path": "src/programs/online/DB2ONLN.cbl",
+        "sha256": "651889f0e13a3465466a3f671b97b122c12563a3ee251abbacddadbca0e134b4",
+        "lines": [
+          110,
+          111,
+          113,
+          114
+        ],
+        "statements": [
+          {
+            "line": 110,
+            "text": "IF SQLCODE = 0"
+          },
+          {
+            "line": 111,
+            "text": "MOVE 0 TO DB2-RESPONSE-CODE"
+          },
+          {
+            "line": 113,
+            "text": "MOVE SQLCODE TO DB2-SQLCODE"
+          },
+          {
+            "line": 114,
+            "text": "MOVE -1 TO DB2-RESPONSE-CODE"
+          }
+        ]
+      },
+      "missing_fact": "SQLCODE is used but declared nowhere in the repository; its layout and value meanings are the subject of DR-F2-0011-001, DR-DB2ERR-001 (missing: the real SQLCA member (the repository copy includes itself); a declaration of SQLCODE; a declaration of SQLERRMC)",
+      "why_unsafe": "the outputs of these statements (DB2-RESPONSE-CODE, DB2-SQLCODE) depend on a value whose meaning is not established; any Java mapping would invent it",
+      "affected_requirements": [
+        "REQ-DB2ONLN-001",
+        "RT-DB2ONLN-002"
+      ],
+      "affected_java_component": "outcome mapping of behaviour P300-CHECK-STATUS (behind a port whose only implementation throws until the gap is resolved)",
+      "required_action": [
+        "DR-F2-0011-001: a signed resolution by technical_authority",
+        "DR-DB2ERR-001: a signed resolution by technical_authority"
+      ],
+      "validation_evidence": "the real definition of SQLCODE for the target runtime and a captured legacy run showing each outcome branch",
+      "blocks_execution_path": "request DB2-STATUS ('S') -> P300-CHECK-STATUS: statements 110, 111, 113, 114",
+      "blocking": true,
+      "status": "OPEN"
+    },
+    {
+      "gap_id": "GAP-DB2ONLN-P300-CHECK-STATUS-SQL-SELECT-UNKNOWN",
+      "kind": "EXTERNAL_DATABASE_RUNTIME",
+      "behaviour_id": "DB2ONLN:P300-CHECK-STATUS",
+      "source": {
+        "path": "src/programs/online/DB2ONLN.cbl",
+        "sha256": "651889f0e13a3465466a3f671b97b122c12563a3ee251abbacddadbca0e134b4",
+        "lines": [
+          106,
+          108
+        ],
+        "statements": [
+          {
+            "line": 106,
+            "text": "EXEC SQL SELECT CURRENT SERVER INTO :DB2-ERROR-MSG END-EXEC."
+          }
+        ]
+      },
+      "missing_fact": "the runtime behaviour of embedded SQL SELECT on null: database product and version, host-variable conversions, NULL and no-row results, constraint violations and the status they report",
+      "why_unsafe": "the result and every status it produces come from an external database the repository does not describe; a Java implementation would have to assume them",
+      "affected_requirements": [
+        "REQ-DB2ONLN-001",
+        "RT-DB2ONLN-002"
+      ],
+      "affected_java_component": "database port for SELECT null (interface only; no implementation until specified)",
+      "required_action": [
+        "an approved specification of the database interaction (technical authority), recorded as an ADR at G3"
+      ],
+      "validation_evidence": "a captured run against the real (or an approved equivalent) database for each outcome, including errors",
+      "blocks_execution_path": "request DB2-STATUS ('S') -> P300-CHECK-STATUS: statement 106",
+      "blocking": true,
+      "status": "OPEN"
+    },
+    {
+      "gap_id": "GAP-DB2ONLN-P300-CHECK-STATUS-TRUNC-DB2-RESPONSE-CODE",
+      "kind": "COMPILER_OPTION_DEPENDENT",
+      "behaviour_id": "DB2ONLN:P300-CHECK-STATUS",
+      "source": {
+        "path": "src/programs/online/DB2ONLN.cbl",
+        "sha256": "651889f0e13a3465466a3f671b97b122c12563a3ee251abbacddadbca0e134b4",
+        "lines": [
+          117
+        ],
+        "statements": [
+          {
+            "line": 117,
+            "text": "MOVE WS-ACTIVE-CONNECTIONS TO DB2-RESPONSE-CODE."
+          }
+        ]
+      },
+      "missing_fact": "the compiler TRUNC option used for DB2ONLN (binary item DB2-RESPONSE-CODE S9(8))",
+      "why_unsafe": "values beyond the 8 digits of PIC S9(8) behave according to the compiler TRUNC option, which the repository does not record",
+      "affected_requirements": [
+        "REQ-DB2ONLN-001",
+        "RT-DB2ONLN-002"
+      ],
+      "affected_java_component": "input validation of behaviour P300-CHECK-STATUS: values outside the PIC range are rejected, not truncated, until the option is known",
+      "required_action": [
+        "the build/compile options of the legacy program (technical authority)"
+      ],
+      "validation_evidence": "the compile listing or JCL showing TRUNC(STD|OPT|BIN), or a captured run with an out-of-range value",
+      "blocks_execution_path": "only inputs outside the PIC range of DB2-RESPONSE-CODE",
+      "blocking": false,
+      "status": "OPEN"
+    }
+  ],
+  "closures": [
+    {
+      "behaviour_id": "DB2ONLN:P100-PROCESS-CONNECT",
+      "status": "RESOLVED",
+      "unresolved_reasons": [],
+      "units": [
+        "DB2ONLN",
+        "SQLCA"
+      ],
+      "external": [
+        {
+          "kind": "embedded_sql",
+          "line": 67,
+          "operation": "CONNECT",
+          "target": null,
+          "relation": "performed"
+        }
+      ],
+      "undeclared": [
+        "SQLCODE",
+        "SQLERRMC"
+      ],
+      "sha256": "c2be75b89233736928c9e0d596b3d100c2afbdc24dddc9a85a5396833e5cd36c"
+    },
+    {
+      "behaviour_id": "DB2ONLN:P200-PROCESS-DISCONNECT",
+      "status": "RESOLVED",
+      "unresolved_reasons": [],
+      "units": [
+        "DB2ONLN",
+        "SQLCA"
+      ],
+      "external": [
+        {
+          "kind": "embedded_sql",
+          "line": 92,
+          "operation": "DISCONNECT",
+          "target": null,
+          "relation": "direct"
+        }
+      ],
+      "undeclared": [
+        "SQLCODE",
+        "SQLERRMC"
+      ],
+      "sha256": "7e1838c65f38132b9e4359dbb0bad86e30a1cadeb63cf800c85aeeea7d117283"
+    },
+    {
+      "behaviour_id": "DB2ONLN:P300-CHECK-STATUS",
+      "status": "RESOLVED",
+      "unresolved_reasons": [],
+      "units": [
+        "DB2ONLN",
+        "SQLCA"
+      ],
+      "external": [
+        {
+          "kind": "embedded_sql",
+          "line": 106,
+          "operation": "SELECT",
+          "target": null,
+          "relation": "direct"
+        }
+      ],
+      "undeclared": [
+        "SQLCODE",
+        "SQLERRMC"
+      ],
+      "sha256": "37a17e8e9e131eeff8bae2de33b079daf0ef037a4323990c19a5c47d8311ff24"
+    }
+  ],
+  "open_decisions": [
+    {
+      "id": "DR-DB2ERR-001",
+      "blocking": true,
+      "question": "Copybook SQLCA (FIL-0017) includes itself ('EXEC SQL INCLUDE SQLCA' at line 6) and defines only SQL-STATUS-CODES, with no SQLCODE or SQLERRMC field; SQLCODE/SQLERRMC therefore have no Field ID in the 14 DB2 programs. Which SQLCA layout does the precompiler supply, and may the modern design assume the standard DB2 SQLCODE/SQLERRMC meaning (assumption ASM-004)?"
+    },
+    {
+      "id": "DR-DB2ONLN-001",
+      "blocking": false,
+      "question": "The 100-connection ceiling is checked against WS-ACTIVE-CONNECTIONS in DB2ONLN working storage; whether that count persists across CICS invocations cannot be determined from the code. Should the modern system enforce the limit per process instance, per region, or globally?"
+    },
+    {
+      "id": "DR-DB2ONLN-002",
+      "blocking": false,
+      "question": "In the status request, an unconditional MOVE WS-ACTIVE-CONNECTIONS TO DB2-RESPONSE-CODE (line 117) overwrites the 0 / -1 result of the SQLCODE check, so a failed status query may be reported as a positive connection count. Should the status response report the query outcome, the connection count, or both in separate fields?"
+    },
+    {
+      "id": "DR-DB2ONLN-003",
+      "blocking": false,
+      "question": "The connection-token STRING (line 85) uses DB2-CONNECTION-TOKEN as both sending and receiving item (undefined result), and DB2ONLN's PERFORM ... THRU ranges are nested three levels deep. What is the intended connection-token format, and can the THRU ranges be treated as simple paragraph calls?"
+    },
+    {
+      "id": "DR-DB2RECV-003",
+      "blocking": true,
+      "question": "BR-152 (deferred, low confidence): the shared copybook DB2REQ declares request types connect 'C', disconnect 'D' and status 'S' (same values as DB2ONLN's own declaration, BR-059), but no in-scope program tests it; DB2RECV only moves 'C' into it through an unresolved qualification. Is DB2REQ the intended interface contract between DB2RECV and DB2ONLN, or is it obsolete?"
+    },
+    {
+      "id": "DR-F2-0011-001",
+      "blocking": true,
+      "question": "Copybook SQLCA (SYS-PORTFOLIO-001-FIL-0017) line 6 contains 'EXEC SQL INCLUDE SQLCA END-EXEC', naming itself. The included SQL communication area (SQLCODE, SQLSTATE, SQLERRMC, ...) has no layout in any reverse artifact. How should the forward design obtain the SQLCA layout and the SQLCODE/SQLSTATE semantics used by the 14 DB2 programs?"
+    },
+    {
+      "id": "DR-F2-0011-003",
+      "blocking": false,
+      "question": "Which TRUNC compiler option (STD, OPT or BIN) was used for programs including these copybooks? It decides whether S9(4)/S9(8)/S9(9) COMP fields are truncated to their PIC digits or to the binary halfword/fullword range on store."
+    },
+    {
+      "id": "DR-F2-P0006-002",
+      "blocking": false,
+      "question": "The project SQLCA copybook (SYS-PORTFOLIO-001-FIL-0017) includes itself and declares only SQL-STATUS-CODES, while eight packet programs test SQLCODE (and DB2ONLN SQLERRMC), which only the DB2 precompiler's SQLCA supplies. Should the Java design treat SQL status as coming from the SQL driver (SQLException/SQLState) and ignore the project SQLCA content, or must the 35-byte WS-DB2-AREA content be reproduced?"
+    },
+    {
+      "id": "RVW-GAP-092",
+      "blocking": false,
+      "question": "GAP-092 (medium, DIAGRAM_RENDER_UNVERIFIED) is not addressed by any decision or requirement: Visual rendering of the 65 Mermaid diagrams is unverified. Acknowledge it as a known limitation (resolved_no_change) or exclude the affected units?"
+    },
+    {
+      "id": "RVW-GAP-104",
+      "blocking": false,
+      "question": "GAP-104 (low, DIAGRAM_INCOMPLETE) is not addressed by any decision or requirement: COMP-UNRESOLVED: all seven edges are unsupported. Acknowledge it as a known limitation (resolved_no_change) or exclude the affected units?"
+    }
+  ],
+  "authorisation": {
+    "generation_authorized": false,
+    "blockers": [
+      "config generation.java_generation_allowed is false (project authority)",
+      "no authorised orchestrator.java_target_dir",
+      "G4 is BLOCKED (needs signed G2, G3 and G4 approvals by trusted signers)",
+      "trust store: TRUST_NOT_CONFIGURED"
+    ],
+    "gates": {
+      "G0": "PASS",
+      "G1": "PASS",
+      "G2": "UNVERIFIED",
+      "G3": "BLOCKED",
+      "G4": "BLOCKED",
+      "G5": "BLOCKED",
+      "G6": "BLOCKED",
+      "G7": "BLOCKED",
+      "G8": "BLOCKED"
+    },
+    "trust": "TRUST_NOT_CONFIGURED",
+    "program_g2_scope": {
+      "readiness": "NOT_READY",
+      "blocking": 11,
+      "scope_sha256": "41d500eb3d58d42262f7b51118efc1b569866a14fbfa11d79cc8b0925db0cf3e"
+    },
+    "note": "Engineering gates never authorise generation. Java may be generated only when generation_authorized is true."
+  }
+}

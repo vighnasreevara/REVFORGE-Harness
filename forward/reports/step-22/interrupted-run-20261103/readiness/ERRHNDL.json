@@ -1,0 +1,408 @@
+{
+  "gate": "SOURCE_READINESS",
+  "subject": "ERRHNDL",
+  "status": "FAIL",
+  "checks": [
+    {
+      "id": "source_available",
+      "ok": true,
+      "detail": "src/programs/online/ERRHNDL.cbl sha256 11304d2864669b12837bc4b68fdf7638f12212a65f59d9f57831288a927d5c0a; 39 statement(s) in 8 paragraph(s)"
+    },
+    {
+      "id": "complete_program",
+      "ok": true,
+      "detail": "every paragraph contains statements"
+    },
+    {
+      "id": "copybooks_resolved",
+      "ok": false,
+      "detail": "unresolved or circular includes: SQLCA@6"
+    },
+    {
+      "id": "requirements_and_data_mapping_delivered",
+      "ok": true,
+      "detail": "F1/F2 deliveries accepted for SQLCA, ERRHND, ERRHNDL"
+    },
+    {
+      "id": "behaviour_classified",
+      "ok": true,
+      "detail": "5 behaviour(s): 3 VERIFIED_CANDIDATE, 2 PARTIAL, 0 GAP"
+    },
+    {
+      "id": "dependencies_identified",
+      "ok": false,
+      "detail": "closure UNRESOLVED for ERRHNDL:P200-LOG-ERROR (line 64: LOG-TIMESTAMP is neither declared, a keyword, a paragraph nor the subject of a blocking decision (unknown dependency))"
+    },
+    {
+      "id": "unsupported_documented",
+      "ok": true,
+      "detail": "2 gap(s) document every PARTIAL/GAP behaviour"
+    },
+    {
+      "id": "unknowns_documented",
+      "ok": true,
+      "detail": "10 open decision(s) record the remaining questions (4 blocking for approval); none is resolved or assumed here"
+    }
+  ],
+  "note": "An engineering gate: it states that the source is understood well enough to convert, with every unknown documented. It is not a G2 approval and does not authorise generation.",
+  "behaviours": [
+    {
+      "behaviour_id": "ERRHNDL:ENTRY-DISPATCH",
+      "kind": "dispatch",
+      "classification": "PARTIAL",
+      "lines": [
+        38,
+        50
+      ],
+      "inputs": [],
+      "outputs": [],
+      "side_effects": [],
+      "unresolved": [],
+      "covered_by": []
+    },
+    {
+      "behaviour_id": "ERRHNDL:P100-INIT-ERROR-HANDLER",
+      "kind": "performed_range",
+      "classification": "VERIFIED_CANDIDATE",
+      "lines": [
+        53,
+        58
+      ],
+      "inputs": [
+        "DFHCOMMAREA",
+        "ERR-TRACE-ID",
+        "FUNCTION CURRENT-DATE (system date and time)"
+      ],
+      "outputs": [
+        "ERR-TIMESTAMP",
+        "ERR-TRACE-ID",
+        "WS-ERROR-AREA"
+      ],
+      "side_effects": [],
+      "unresolved": [],
+      "covered_by": [
+        "REQ-ERRHNDL-001"
+      ]
+    },
+    {
+      "behaviour_id": "ERRHNDL:P200-LOG-ERROR",
+      "kind": "performed_range",
+      "classification": "PARTIAL",
+      "lines": [
+        64,
+        87
+      ],
+      "inputs": [
+        "ERR-CICS-RESP",
+        "ERR-MESSAGE",
+        "ERR-PARAGRAPH",
+        "ERR-PROGRAM",
+        "ERR-SEVERITY",
+        "ERR-SQLCODE",
+        "ERR-TIMESTAMP",
+        "ERR-TRACE-ID"
+      ],
+      "outputs": [
+        "ERR-MESSAGE",
+        "ERR-SEVERITY",
+        "LOG-CICS-RESP",
+        "LOG-MESSAGE",
+        "LOG-PARAGRAPH",
+        "LOG-PROGRAM",
+        "LOG-SEVERITY",
+        "LOG-SQLCODE",
+        "LOG-TIMESTAMP",
+        "LOG-TRACE-ID"
+      ],
+      "side_effects": [
+        {
+          "line": 73,
+          "kind": "embedded_sql",
+          "operation": "INSERT",
+          "table": "ERRLOG"
+        }
+      ],
+      "unresolved": [
+        "SQLCODE"
+      ],
+      "covered_by": [
+        "REQ-ERRHNDL-003"
+      ]
+    },
+    {
+      "behaviour_id": "ERRHNDL:P300-FORMAT-MESSAGE",
+      "kind": "performed_range",
+      "classification": "VERIFIED_CANDIDATE",
+      "lines": [
+        93,
+        100
+      ],
+      "inputs": [
+        "ERR-MESSAGE",
+        "ERR-PROGRAM",
+        "ERR-TRACE-ID"
+      ],
+      "outputs": [],
+      "side_effects": [],
+      "unresolved": [],
+      "covered_by": []
+    },
+    {
+      "behaviour_id": "ERRHNDL:P400-DETERMINE-ACTION",
+      "kind": "performed_range",
+      "classification": "VERIFIED_CANDIDATE",
+      "lines": [
+        105,
+        116
+      ],
+      "inputs": [
+        "ERR-SEVERITY",
+        "WS-ERROR-AREA"
+      ],
+      "outputs": [
+        "DFHCOMMAREA",
+        "ERR-ACTION"
+      ],
+      "side_effects": [],
+      "unresolved": [],
+      "covered_by": [
+        "REQ-ERRHNDL-002"
+      ]
+    }
+  ],
+  "gaps": [
+    {
+      "gap_id": "GAP-ERRHNDL-P200-LOG-ERROR-SQLCODE",
+      "kind": "UNDECLARED_NAME_SEMANTICS",
+      "behaviour_id": "ERRHNDL:P200-LOG-ERROR",
+      "source": {
+        "path": "src/programs/online/ERRHNDL.cbl",
+        "sha256": "11304d2864669b12837bc4b68fdf7638f12212a65f59d9f57831288a927d5c0a",
+        "lines": [
+          85,
+          86,
+          87
+        ],
+        "statements": [
+          {
+            "line": 85,
+            "text": "IF SQLCODE NOT = 0"
+          },
+          {
+            "line": 86,
+            "text": "MOVE 'ERROR LOGGING FAILED' TO ERR-MESSAGE"
+          },
+          {
+            "line": 87,
+            "text": "SET ERR-FATAL TO TRUE"
+          }
+        ]
+      },
+      "missing_fact": "SQLCODE is used but declared nowhere in the repository; its layout and value meanings are the subject of DR-F2-0011-001, DR-DB2ERR-001 (missing: the real SQLCA member (the repository copy includes itself); a declaration of SQLCODE; a declaration of SQLERRMC)",
+      "why_unsafe": "the outputs of these statements (ERR-MESSAGE, ERR-SEVERITY) depend on a value whose meaning is not established; any Java mapping would invent it",
+      "affected_requirements": [
+        "REQ-ERRHNDL-003"
+      ],
+      "affected_java_component": "outcome mapping of behaviour P200-LOG-ERROR (behind a port whose only implementation throws until the gap is resolved)",
+      "required_action": [
+        "DR-F2-0011-001: a signed resolution by technical_authority",
+        "DR-DB2ERR-001: a signed resolution by technical_authority"
+      ],
+      "validation_evidence": "the real definition of SQLCODE for the target runtime and a captured legacy run showing each outcome branch",
+      "blocks_execution_path": "request its PERFORM -> P200-LOG-ERROR: statements 85, 86, 87",
+      "blocking": true,
+      "status": "OPEN"
+    },
+    {
+      "gap_id": "GAP-ERRHNDL-P200-LOG-ERROR-SQL-INSERT-ERRLOG",
+      "kind": "EXTERNAL_DATABASE_RUNTIME",
+      "behaviour_id": "ERRHNDL:P200-LOG-ERROR",
+      "source": {
+        "path": "src/programs/online/ERRHNDL.cbl",
+        "sha256": "11304d2864669b12837bc4b68fdf7638f12212a65f59d9f57831288a927d5c0a",
+        "lines": [
+          73,
+          83
+        ],
+        "statements": [
+          {
+            "line": 73,
+            "text": "EXEC SQL INSERT INTO ERRLOG VALUES (:LOG-TIMESTAMP, :LOG-PROGRAM, :LOG-PARAGRAPH, :LOG-SQLCODE, :LOG-CICS-RESP, :LOG-SEVERITY, :LOG-MESSAGE, :LOG-TRACE-ID) END-EXEC."
+          }
+        ]
+      },
+      "missing_fact": "the runtime behaviour of embedded SQL INSERT on ERRLOG: database product and version, host-variable conversions, NULL and no-row results, constraint violations and the status they report",
+      "why_unsafe": "the result and every status it produces come from an external database the repository does not describe; a Java implementation would have to assume them",
+      "affected_requirements": [
+        "REQ-ERRHNDL-003"
+      ],
+      "affected_java_component": "database port for INSERT ERRLOG (interface only; no implementation until specified)",
+      "required_action": [
+        "an approved specification of the database interaction (technical authority), recorded as an ADR at G3"
+      ],
+      "validation_evidence": "a captured run against the real (or an approved equivalent) database for each outcome, including errors",
+      "blocks_execution_path": "request its PERFORM -> P200-LOG-ERROR: statement 73",
+      "blocking": true,
+      "status": "OPEN"
+    }
+  ],
+  "closures": [
+    {
+      "behaviour_id": "ERRHNDL:P100-INIT-ERROR-HANDLER",
+      "status": "RESOLVED",
+      "unresolved_reasons": [],
+      "units": [
+        "ERRHNDL",
+        "ERRHND"
+      ],
+      "external": [],
+      "undeclared": [],
+      "sha256": "d7ddbd69fc5f30a9da3a9cfc4a0a6615fd5e179bab82e9669c2e93a144a5ce2b"
+    },
+    {
+      "behaviour_id": "ERRHNDL:P200-LOG-ERROR",
+      "status": "UNRESOLVED",
+      "unresolved_reasons": [
+        "line 64: LOG-TIMESTAMP is neither declared, a keyword, a paragraph nor the subject of a blocking decision (unknown dependency)",
+        "line 65: LOG-PROGRAM is neither declared, a keyword, a paragraph nor the subject of a blocking decision (unknown dependency)",
+        "line 66: LOG-PARAGRAPH is neither declared, a keyword, a paragraph nor the subject of a blocking decision (unknown dependency)",
+        "line 67: LOG-SQLCODE is neither declared, a keyword, a paragraph nor the subject of a blocking decision (unknown dependency)",
+        "line 68: LOG-CICS-RESP is neither declared, a keyword, a paragraph nor the subject of a blocking decision (unknown dependency)",
+        "line 69: LOG-SEVERITY is neither declared, a keyword, a paragraph nor the subject of a blocking decision (unknown dependency)",
+        "line 70: LOG-MESSAGE is neither declared, a keyword, a paragraph nor the subject of a blocking decision (unknown dependency)",
+        "line 71: LOG-TRACE-ID is neither declared, a keyword, a paragraph nor the subject of a blocking decision (unknown dependency)",
+        "line 73: LOG-TIMESTAMP is neither declared, a keyword, a paragraph nor the subject of a blocking decision (unknown dependency)",
+        "line 73: LOG-PROGRAM is neither declared, a keyword, a paragraph nor the subject of a blocking decision (unknown dependency)",
+        "line 73: LOG-PARAGRAPH is neither declared, a keyword, a paragraph nor the subject of a blocking decision (unknown dependency)",
+        "line 73: LOG-SQLCODE is neither declared, a keyword, a paragraph nor the subject of a blocking decision (unknown dependency)",
+        "line 73: LOG-CICS-RESP is neither declared, a keyword, a paragraph nor the subject of a blocking decision (unknown dependency)",
+        "line 73: LOG-SEVERITY is neither declared, a keyword, a paragraph nor the subject of a blocking decision (unknown dependency)",
+        "line 73: LOG-MESSAGE is neither declared, a keyword, a paragraph nor the subject of a blocking decision (unknown dependency)",
+        "line 73: LOG-TRACE-ID is neither declared, a keyword, a paragraph nor the subject of a blocking decision (unknown dependency)"
+      ],
+      "units": [
+        "ERRHNDL",
+        "ERRHND",
+        "SQLCA"
+      ],
+      "external": [
+        {
+          "kind": "embedded_sql",
+          "line": 73,
+          "operation": "INSERT",
+          "target": "ERRLOG",
+          "relation": "direct"
+        }
+      ],
+      "undeclared": [
+        "SQLCODE"
+      ],
+      "sha256": "17305937547fafe2df2d3293f9a3c7dc7268204c1fa9e20e4e8bb22af641ce84"
+    },
+    {
+      "behaviour_id": "ERRHNDL:P300-FORMAT-MESSAGE",
+      "status": "RESOLVED",
+      "unresolved_reasons": [],
+      "units": [
+        "ERRHNDL",
+        "ERRHND"
+      ],
+      "external": [],
+      "undeclared": [],
+      "sha256": "0da55b977ac6e16b5af51644407e907c14ced15a971e26e625ad11bd972942a9"
+    },
+    {
+      "behaviour_id": "ERRHNDL:P400-DETERMINE-ACTION",
+      "status": "RESOLVED",
+      "unresolved_reasons": [],
+      "units": [
+        "ERRHNDL",
+        "ERRHND"
+      ],
+      "external": [],
+      "undeclared": [
+        "SQLCODE"
+      ],
+      "sha256": "91d8969061ea861a1024e333d01f202b7eb2e75b25616f9bec5e5e73aef1e5c1"
+    }
+  ],
+  "open_decisions": [
+    {
+      "id": "DR-DB2ERR-001",
+      "blocking": true,
+      "question": "Copybook SQLCA (FIL-0017) includes itself ('EXEC SQL INCLUDE SQLCA' at line 6) and defines only SQL-STATUS-CODES, with no SQLCODE or SQLERRMC field; SQLCODE/SQLERRMC therefore have no Field ID in the 14 DB2 programs. Which SQLCA layout does the precompiler supply, and may the modern design assume the standard DB2 SQLCODE/SQLERRMC meaning (assumption ASM-004)?"
+    },
+    {
+      "id": "DR-ERRHNDL-001",
+      "blocking": true,
+      "question": "When no trace ID is supplied, ERRHNDL executes 'MOVE FUNCTION RANDOM TO ERR-TRACE-ID' (numeric RANDOM into an alphanumeric field), and the message STRING uses ERR-MESSAGE as both source and receiver. What trace-ID format and what formatted message ('Error in <program> - <message> (<trace id>)') are intended?"
+    },
+    {
+      "id": "DR-ERRHNDL-002",
+      "blocking": true,
+      "question": "ERRHNDL copies ERRHND into both WS-ERROR-AREA (line 16) and DFHCOMMAREA (line 35) and uses 14 ERR-* names unqualified (including ERR-SEVERITY, ERR-TRACE-ID, ERR-ABEND, ERR-CONTINUE, ERR-RETURN). Which copy does each reference address, and therefore which severity is tested and which action is returned to callers such as DB2RECV and INQONLN?"
+    },
+    {
+      "id": "DR-ERRHNDL-003",
+      "blocking": false,
+      "question": "ERRHNDL invokes its four steps with PERFORM ... THRU ranges (lines 38, 41, 44, 47) and its PROGRAM-ID was found only through the file name (free-format source). Can the THRU ranges be treated as single-paragraph calls and is ERRHNDL the correct program identity?"
+    },
+    {
+      "id": "DR-F2-0011-001",
+      "blocking": true,
+      "question": "Copybook SQLCA (SYS-PORTFOLIO-001-FIL-0017) line 6 contains 'EXEC SQL INCLUDE SQLCA END-EXEC', naming itself. The included SQL communication area (SQLCODE, SQLSTATE, SQLERRMC, ...) has no layout in any reverse artifact. How should the forward design obtain the SQLCA layout and the SQLCODE/SQLSTATE semantics used by the 14 DB2 programs?"
+    },
+    {
+      "id": "DR-F2-0011-003",
+      "blocking": false,
+      "question": "Which TRUNC compiler option (STD, OPT or BIN) was used for programs including these copybooks? It decides whether S9(4)/S9(8)/S9(9) COMP fields are truncated to their PIC digits or to the binary halfword/fullword range on store."
+    },
+    {
+      "id": "DR-F2-P0006-002",
+      "blocking": false,
+      "question": "The project SQLCA copybook (SYS-PORTFOLIO-001-FIL-0017) includes itself and declares only SQL-STATUS-CODES, while eight packet programs test SQLCODE (and DB2ONLN SQLERRMC), which only the DB2 precompiler's SQLCA supplies. Should the Java design treat SQL status as coming from the SQL driver (SQLException/SQLState) and ignore the project SQLCA content, or must the 35-byte WS-DB2-AREA content be reproduced?"
+    },
+    {
+      "id": "DR-F2-P0006-008",
+      "blocking": false,
+      "question": "Three ambiguous data references need a naming decision: RECV-CURSOR in DB2RECV is both an 88-level and an X(18) field; ERRHND is copied twice into ERRHNDL so ERR-* names exist in WORKING-STORAGE and the COMMAREA; PORT-RECORD is declared under both FDs of PORTADD. Which storage does each unqualified reference address?"
+    },
+    {
+      "id": "RVW-GAP-092",
+      "blocking": false,
+      "question": "GAP-092 (medium, DIAGRAM_RENDER_UNVERIFIED) is not addressed by any decision or requirement: Visual rendering of the 65 Mermaid diagrams is unverified. Acknowledge it as a known limitation (resolved_no_change) or exclude the affected units?"
+    },
+    {
+      "id": "RVW-GAP-104",
+      "blocking": false,
+      "question": "GAP-104 (low, DIAGRAM_INCOMPLETE) is not addressed by any decision or requirement: COMP-UNRESOLVED: all seven edges are unsupported. Acknowledge it as a known limitation (resolved_no_change) or exclude the affected units?"
+    }
+  ],
+  "authorisation": {
+    "generation_authorized": false,
+    "blockers": [
+      "config generation.java_generation_allowed is false (project authority)",
+      "no authorised orchestrator.java_target_dir",
+      "G4 is BLOCKED (needs signed G2, G3 and G4 approvals by trusted signers)",
+      "trust store: TRUST_NOT_CONFIGURED"
+    ],
+    "gates": {
+      "G0": "PASS",
+      "G1": "PASS",
+      "G2": "UNVERIFIED",
+      "G3": "BLOCKED",
+      "G4": "BLOCKED",
+      "G5": "BLOCKED",
+      "G6": "BLOCKED",
+      "G7": "BLOCKED",
+      "G8": "BLOCKED"
+    },
+    "trust": "TRUST_NOT_CONFIGURED",
+    "program_g2_scope": {
+      "readiness": "NOT_READY",
+      "blocking": 10,
+      "scope_sha256": "2a0c03c7b9cb7df9a90dd4b770f93d456acc9907b497130b16e005816e865430"
+    },
+    "note": "Engineering gates never authorise generation. Java may be generated only when generation_authorized is true."
+  }
+}

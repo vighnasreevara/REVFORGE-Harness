@@ -1,0 +1,4381 @@
+{
+ "contract": "step-22/program-reconciliation",
+ "fields": {
+  "classification": "COMPLETE: Java compiled, every check passes, conversion validation passes and no open gap; PARTIAL: Java exists with open gaps; MISSING: no Java",
+  "cobol_equivalence": "always NOT_ESTABLISHED: no legacy execution evidence exists"
+ },
+ "summary": {
+  "PARTIAL": 39,
+  "MISSING": 1,
+  "COMPLETE": 2
+ },
+ "programs": [
+  {
+   "program": "BCHCTL00",
+   "file_id": "SYS-PORTFOLIO-001-FIL-0042",
+   "source": "src/programs/batch/BCHCTL00.cbl",
+   "source_sha256": "876e218a3c1a532dd16ff415cd936b53ac8073b6a457d0a0f05806eb58282880",
+   "java_class": "revforge.app.bchctl00.Bchctl00",
+   "java_files": [
+    "java/src/revforge/app/bchctl00/Bchctl00.java",
+    "java/src/revforge/app/bchctl00/Bchctl00Tests.java",
+    "java/src/revforge/app/copybooks/Bchcon.java",
+    "java/src/revforge/app/copybooks/Bchctl.java"
+   ],
+   "local_authorization": "LGA-0002",
+   "classification": "PARTIAL",
+   "classification_step19": "PARTIAL",
+   "paragraphs": {
+    "reverse": 6,
+    "mapped": 6,
+    "test_executed": 0
+   },
+   "statements": {
+    "MAPPED": 19,
+    "GAP": 11
+   },
+   "business_rules": {
+    "IMPLEMENTED_VERIFIED_TO_GAP": 1,
+    "IMPLEMENTED_NOT_EXERCISED": 1,
+    "IMPLEMENTED_VERIFIED": 1
+   },
+   "rule_ids": [
+    "BR-001",
+    "BR-002",
+    "BR-153"
+   ],
+   "data_contracts": {
+    "ok": true,
+    "detail": "F1/F2 deliveries accepted for BCHCON, BCHCTL, ERRHAND, BCHCTL00, ERRPROC"
+   },
+   "dependencies": [
+    {
+     "type": "COPY",
+     "to": "BCHCTL",
+     "forward": "RESOLVED_IN_JAVA_BUILD"
+    },
+    {
+     "type": "COPY",
+     "to": "BCHCON",
+     "forward": "RESOLVED_IN_JAVA_BUILD"
+    },
+    {
+     "type": "COPY",
+     "to": "ERRHAND",
+     "forward": "RESOLVED_IN_JAVA_BUILD"
+    },
+    {
+     "type": "STATIC_CALL",
+     "to": "ERRPROC",
+     "forward": "IMPLEMENTED_CALL (converted callee)"
+    }
+   ],
+   "unsupported_statements": {
+    "UNDEFINED_PROCEDURE": 11
+   },
+   "tests": {
+    "checks": {
+     "PASS": 63,
+     "BLOCKED_AS_EXPECTED": 22,
+     "FAIL": 0,
+     "total": 85
+    },
+    "scenarios": {
+     "scenarios": 11,
+     "passed": 0,
+     "blocked_as_expected": 11,
+     "failed": 0,
+     "fixtures": "forward/pilot/app-fixtures/BCHCTL00.json"
+    },
+    "statement_coverage": {
+     "statements": 30,
+     "executed_in_passing_scenarios": 0,
+     "executed_only_on_blocked_paths": 18
+    }
+   },
+   "validation": {
+    "exit_code": 0,
+    "result": "CONVERSION_VALIDATION BCHCTL00 (D:\\PROJECTS\\REVFORGE-Harness\\forward\\generated\\java\\BCHCTL00): PASS (label PARTIAL)"
+   },
+   "readiness": {
+    "status": "FAIL",
+    "failing_checks": [
+     "dependencies_identified"
+    ]
+   },
+   "remaining_gaps": {
+    "count": 11,
+    "register_ids": [
+     "MGR-0002",
+     "MGR-0003",
+     "MGR-0004",
+     "MGR-0005",
+     "MGR-0006",
+     "MGR-0007",
+     "MGR-0008",
+     "MGR-0009",
+     "MGR-0010",
+     "MGR-0011",
+     "MGR-0012"
+    ]
+   },
+   "bmad_governance": "LOCAL_LGA_NOT_BMAD_GOVERNED",
+   "cobol_equivalence": "NOT_ESTABLISHED"
+  },
+  {
+   "program": "CKPRST",
+   "file_id": "SYS-PORTFOLIO-001-FIL-0043",
+   "source": "src/programs/batch/CKPRST.cbl",
+   "source_sha256": "870875c04b844564ada25a3b662deeea9a53cc3eb787f01646d9c0854424d058",
+   "java_class": "revforge.app.ckprst.Ckprst",
+   "java_files": [
+    "java/src/revforge/app/ckprst/Ckprst.java",
+    "java/src/revforge/app/ckprst/CkprstTests.java"
+   ],
+   "local_authorization": "LGA-0003",
+   "classification": "PARTIAL",
+   "classification_step19": "PARTIAL",
+   "paragraphs": {
+    "reverse": 5,
+    "mapped": 4,
+    "test_executed": 0
+   },
+   "statements": {
+    "GAP": 5,
+    "MAPPED": 1
+   },
+   "business_rules": {
+    "BLOCKED": 1
+   },
+   "rule_ids": [
+    "BR-003"
+   ],
+   "data_contracts": {
+    "ok": true,
+    "detail": "F1/F2 deliveries accepted for CKPRST, RETHND, CKPRST"
+   },
+   "dependencies": [
+    {
+     "type": "COPY",
+     "to": "CKPRST",
+     "forward": "RESOLVED_IN_JAVA_BUILD"
+    },
+    {
+     "type": "COPY",
+     "to": "CKPRST",
+     "forward": "RESOLVED_IN_JAVA_BUILD"
+    },
+    {
+     "type": "COPY",
+     "to": "RETHND",
+     "forward": "RESOLVED_IN_JAVA_BUILD"
+    }
+   ],
+   "unsupported_statements": {
+    "UNDECLARED_NAME": 2,
+    "UNTRANSLATED_STATEMENT": 4
+   },
+   "tests": {
+    "checks": {
+     "PASS": 39,
+     "BLOCKED_AS_EXPECTED": 8,
+     "FAIL": 0,
+     "total": 47
+    },
+    "scenarios": {
+     "scenarios": 2,
+     "passed": 0,
+     "blocked_as_expected": 2,
+     "failed": 0,
+     "fixtures": "forward/pilot/app-fixtures/CKPRST.json"
+    },
+    "statement_coverage": {
+     "statements": 10,
+     "executed_in_passing_scenarios": 0,
+     "executed_only_on_blocked_paths": 1
+    }
+   },
+   "validation": {
+    "exit_code": 0,
+    "result": "CONVERSION_VALIDATION CKPRST (D:\\PROJECTS\\REVFORGE-Harness\\forward\\generated\\java\\CKPRST): PASS (label PARTIAL)"
+   },
+   "readiness": {
+    "status": "FAIL",
+    "failing_checks": [
+     "complete_program",
+     "dependencies_identified"
+    ]
+   },
+   "remaining_gaps": {
+    "count": 6,
+    "register_ids": [
+     "MGR-0013",
+     "MGR-0014",
+     "MGR-0015",
+     "MGR-0016",
+     "MGR-0017",
+     "MGR-0018"
+    ]
+   },
+   "bmad_governance": "LOCAL_LGA_NOT_BMAD_GOVERNED",
+   "cobol_equivalence": "NOT_ESTABLISHED"
+  },
+  {
+   "program": "HISTLD00",
+   "file_id": "SYS-PORTFOLIO-001-FIL-0044",
+   "source": "src/programs/batch/HISTLD00.cbl",
+   "source_sha256": "148f75d448f2679783e222d4aca4f208ba336736dcd39bfebc8bcba8d85f69d6",
+   "java_class": "revforge.app.histld00.Histld00",
+   "java_files": [
+    "java/src/revforge/app/copybooks/Bchcon.java",
+    "java/src/revforge/app/copybooks/Bchctl.java",
+    "java/src/revforge/app/copybooks/Dbproc.java",
+    "java/src/revforge/app/copybooks/Histrec.java",
+    "java/src/revforge/app/copybooks/Sqlca.java",
+    "java/src/revforge/app/histld00/Histld00.java",
+    "java/src/revforge/app/histld00/Histld00Tests.java"
+   ],
+   "local_authorization": "LGA-0004",
+   "classification": "PARTIAL",
+   "classification_step19": "PARTIAL",
+   "paragraphs": {
+    "reverse": 16,
+    "mapped": 16,
+    "test_executed": 0
+   },
+   "statements": {
+    "MAPPED": 45,
+    "GAP": 32
+   },
+   "business_rules": {
+    "IMPLEMENTED_NOT_EXERCISED": 2,
+    "BLOCKED": 2
+   },
+   "rule_ids": [
+    "BR-004",
+    "BR-005",
+    "BR-006",
+    "BR-007"
+   ],
+   "data_contracts": {
+    "ok": true,
+    "detail": "F1/F2 deliveries accepted for BCHCON, BCHCTL, ERRHAND, HISTREC, DBPROC, DBTBLS, SQLCA, HISTLD00, ERRPROC"
+   },
+   "dependencies": [
+    {
+     "type": "COPY",
+     "to": "HISTREC",
+     "forward": "RESOLVED_IN_JAVA_BUILD"
+    },
+    {
+     "type": "COPY",
+     "to": "BCHCTL",
+     "forward": "RESOLVED_IN_JAVA_BUILD"
+    },
+    {
+     "type": "COPY",
+     "to": "DBTBLS",
+     "forward": "RESOLVED_IN_JAVA_BUILD"
+    },
+    {
+     "type": "COPY",
+     "to": "SQLCA",
+     "forward": "RESOLVED_IN_JAVA_BUILD"
+    },
+    {
+     "type": "COPY",
+     "to": "DBPROC",
+     "forward": "RESOLVED_IN_JAVA_BUILD"
+    },
+    {
+     "type": "COPY",
+     "to": "ERRHAND",
+     "forward": "RESOLVED_IN_JAVA_BUILD"
+    },
+    {
+     "type": "COPY",
+     "to": "BCHCON",
+     "forward": "RESOLVED_IN_JAVA_BUILD"
+    },
+    {
+     "type": "STATIC_CALL",
+     "to": "ERRPROC",
+     "forward": "IMPLEMENTED_CALL (converted callee)"
+    }
+   ],
+   "unsupported_statements": {
+    "UNSUPPORTED_DATA": 3,
+    "UNDEFINED_PROCEDURE": 2,
+    "UNDECLARED_NAME": 16,
+    "EXTERNAL_SYSTEM_BOUNDARY": 4
+   },
+   "tests": {
+    "checks": {
+     "PASS": 87,
+     "BLOCKED_AS_EXPECTED": 27,
+     "FAIL": 0,
+     "total": 114
+    },
+    "scenarios": {
+     "scenarios": 2,
+     "passed": 0,
+     "blocked_as_expected": 2,
+     "failed": 0,
+     "fixtures": "forward/pilot/app-fixtures/HISTLD00.json"
+    },
+    "statement_coverage": {
+     "statements": 77,
+     "executed_in_passing_scenarios": 0,
+     "executed_only_on_blocked_paths": 3
+    }
+   },
+   "validation": {
+    "exit_code": 0,
+    "result": "CONVERSION_VALIDATION HISTLD00 (D:\\PROJECTS\\REVFORGE-Harness\\forward\\generated\\java\\HISTLD00): PASS (label PARTIAL)"
+   },
+   "readiness": {
+    "status": "FAIL",
+    "failing_checks": [
+     "copybooks_resolved",
+     "dependencies_identified"
+    ]
+   },
+   "remaining_gaps": {
+    "count": 25,
+    "register_ids": [
+     "MGR-0115",
+     "MGR-0116",
+     "MGR-0117",
+     "MGR-0118",
+     "MGR-0119",
+     "MGR-0120",
+     "MGR-0121",
+     "MGR-0122",
+     "MGR-0123",
+     "MGR-0124",
+     "MGR-0125",
+     "MGR-0126",
+     "MGR-0127",
+     "MGR-0128",
+     "MGR-0129",
+     "MGR-0130",
+     "MGR-0131",
+     "MGR-0132",
+     "MGR-0133",
+     "MGR-0134",
+     "MGR-0135",
+     "MGR-0136",
+     "MGR-0137",
+     "MGR-0138",
+     "MGR-0139"
+    ]
+   },
+   "bmad_governance": "LOCAL_LGA_NOT_BMAD_GOVERNED",
+   "cobol_equivalence": "NOT_ESTABLISHED"
+  },
+  {
+   "program": "POSUPDT",
+   "file_id": "SYS-PORTFOLIO-001-FIL-0045",
+   "source": "src/programs/batch/POSUPDT.cbl",
+   "source_sha256": "36a9e7f1c95b82ffb99743e0c5c4ce95d83c9a430aac59f84ef3cbfab6145068",
+   "java_class": null,
+   "java_files": [],
+   "local_authorization": "LGA-0005",
+   "classification": "MISSING",
+   "classification_step19": "MISSING",
+   "paragraphs": {
+    "reverse": 0,
+    "mapped": 0,
+    "test_executed": 0
+   },
+   "statements": {},
+   "business_rules": {},
+   "rule_ids": [],
+   "data_contracts": {
+    "ok": true,
+    "detail": "F1/F2 deliveries accepted for POSUPDT"
+   },
+   "dependencies": [],
+   "unsupported_statements": {},
+   "tests": {
+    "checks": null,
+    "scenarios": null,
+    "statement_coverage": null
+   },
+   "validation": {
+    "exit_code": 1,
+    "result": "CONVERSION_VALIDATION ? (D:\\PROJECTS\\REVFORGE-Harness\\forward\\generated\\java\\POSUPDT): FAIL (label FAILED)"
+   },
+   "readiness": {
+    "status": "FAIL",
+    "failing_checks": [
+     "source_available"
+    ]
+   },
+   "remaining_gaps": {
+    "count": 0,
+    "register_ids": []
+   },
+   "bmad_governance": null,
+   "cobol_equivalence": "NOT_ESTABLISHED"
+  },
+  {
+   "program": "PRCSEQ00",
+   "file_id": "SYS-PORTFOLIO-001-FIL-0046",
+   "source": "src/programs/batch/PRCSEQ00.cbl",
+   "source_sha256": "bf37a5d7a464a4e51ef9379a99761a44ec683d4521ef966fedf58e19f3deb5b3",
+   "java_class": "revforge.app.prcseq00.Prcseq00",
+   "java_files": [
+    "java/src/revforge/app/copybooks/Bchcon.java",
+    "java/src/revforge/app/copybooks/Bchctl.java",
+    "java/src/revforge/app/prcseq00/Prcseq00.java",
+    "java/src/revforge/app/prcseq00/Prcseq00Tests.java"
+   ],
+   "local_authorization": "LGA-0006",
+   "classification": "PARTIAL",
+   "classification_step19": "PARTIAL",
+   "paragraphs": {
+    "reverse": 19,
+    "mapped": 19,
+    "test_executed": 13
+   },
+   "statements": {
+    "MAPPED": 108,
+    "GAP": 10
+   },
+   "business_rules": {
+    "IMPLEMENTED_VERIFIED": 8,
+    "IMPLEMENTED_NOT_EXERCISED": 2,
+    "IMPLEMENTED_VERIFIED_TO_GAP": 2,
+    "BLOCKED": 3
+   },
+   "rule_ids": [
+    "BR-008",
+    "BR-009",
+    "BR-010",
+    "BR-011",
+    "BR-012",
+    "BR-013",
+    "BR-014",
+    "BR-015",
+    "BR-016",
+    "BR-017",
+    "BR-018",
+    "BR-019",
+    "BR-020",
+    "BR-021",
+    "BR-022"
+   ],
+   "data_contracts": {
+    "ok": true,
+    "detail": "F1/F2 deliveries accepted for BCHCON, BCHCTL, PRCSEQ, ERRHAND, PRCSEQ00, ERRPROC"
+   },
+   "dependencies": [
+    {
+     "type": "COPY",
+     "to": "PRCSEQ",
+     "forward": "RESOLVED_IN_JAVA_BUILD"
+    },
+    {
+     "type": "COPY",
+     "to": "BCHCTL",
+     "forward": "RESOLVED_IN_JAVA_BUILD"
+    },
+    {
+     "type": "COPY",
+     "to": "BCHCON",
+     "forward": "RESOLVED_IN_JAVA_BUILD"
+    },
+    {
+     "type": "COPY",
+     "to": "ERRHAND",
+     "forward": "RESOLVED_IN_JAVA_BUILD"
+    },
+    {
+     "type": "STATIC_CALL",
+     "to": "ERRPROC",
+     "forward": "IMPLEMENTED_CALL (converted callee)"
+    }
+   ],
+   "unsupported_statements": {
+    "UNDECLARED_NAME": 4,
+    "COMPILER_OPTION_DEPENDENT": 1
+   },
+   "tests": {
+    "checks": {
+     "PASS": 78,
+     "BLOCKED_AS_EXPECTED": 14,
+     "FAIL": 0,
+     "total": 92
+    },
+    "scenarios": {
+     "scenarios": 15,
+     "passed": 6,
+     "blocked_as_expected": 9,
+     "failed": 0,
+     "fixtures": "forward/pilot/app-fixtures/PRCSEQ00.json"
+    },
+    "statement_coverage": {
+     "statements": 118,
+     "executed_in_passing_scenarios": 61,
+     "executed_only_on_blocked_paths": 22
+    }
+   },
+   "validation": {
+    "exit_code": 0,
+    "result": "CONVERSION_VALIDATION PRCSEQ00 (D:\\PROJECTS\\REVFORGE-Harness\\forward\\generated\\java\\PRCSEQ00): PASS (label PARTIAL)"
+   },
+   "readiness": {
+    "status": "FAIL",
+    "failing_checks": [
+     "dependencies_identified"
+    ]
+   },
+   "remaining_gaps": {
+    "count": 5,
+    "register_ids": [
+     "MGR-0241",
+     "MGR-0242",
+     "MGR-0243",
+     "MGR-0244",
+     "MGR-0245"
+    ]
+   },
+   "bmad_governance": "LOCAL_LGA_NOT_BMAD_GOVERNED",
+   "cobol_equivalence": "NOT_ESTABLISHED"
+  },
+  {
+   "program": "RCVPRC00",
+   "file_id": "SYS-PORTFOLIO-001-FIL-0047",
+   "source": "src/programs/batch/RCVPRC00.cbl",
+   "source_sha256": "7dd7e5cfb2b6c6a4089b389496689dd09ad7d32d7820a403050a68bdda85ce13",
+   "java_class": "revforge.app.rcvprc00.Rcvprc00",
+   "java_files": [
+    "java/src/revforge/app/copybooks/Bchcon.java",
+    "java/src/revforge/app/copybooks/Bchctl.java",
+    "java/src/revforge/app/rcvprc00/Rcvprc00.java",
+    "java/src/revforge/app/rcvprc00/Rcvprc00Tests.java"
+   ],
+   "local_authorization": "LGA-0007",
+   "classification": "PARTIAL",
+   "classification_step19": "PARTIAL",
+   "paragraphs": {
+    "reverse": 18,
+    "mapped": 18,
+    "test_executed": 13
+   },
+   "statements": {
+    "MAPPED": 104,
+    "GAP": 1
+   },
+   "business_rules": {
+    "IMPLEMENTED_VERIFIED": 9,
+    "IMPLEMENTED_VERIFIED_TO_GAP": 1,
+    "BLOCKED": 1
+   },
+   "rule_ids": [
+    "BR-023",
+    "BR-024",
+    "BR-025",
+    "BR-026",
+    "BR-027",
+    "BR-028",
+    "BR-029",
+    "BR-030",
+    "BR-031",
+    "BR-032",
+    "BR-033"
+   ],
+   "data_contracts": {
+    "ok": true,
+    "detail": "F1/F2 deliveries accepted for BCHCON, BCHCTL, PRCSEQ, ERRHAND, RCVPRC00, ERRPROC"
+   },
+   "dependencies": [
+    {
+     "type": "COPY",
+     "to": "BCHCTL",
+     "forward": "RESOLVED_IN_JAVA_BUILD"
+    },
+    {
+     "type": "COPY",
+     "to": "PRCSEQ",
+     "forward": "RESOLVED_IN_JAVA_BUILD"
+    },
+    {
+     "type": "COPY",
+     "to": "BCHCON",
+     "forward": "RESOLVED_IN_JAVA_BUILD"
+    },
+    {
+     "type": "COPY",
+     "to": "ERRHAND",
+     "forward": "RESOLVED_IN_JAVA_BUILD"
+    },
+    {
+     "type": "STATIC_CALL",
+     "to": "ERRPROC",
+     "forward": "IMPLEMENTED_CALL (converted callee)"
+    },
+    {
+     "type": "STATIC_CALL",
+     "to": "ERRPROC",
+     "forward": "IMPLEMENTED_CALL (converted callee)"
+    }
+   ],
+   "unsupported_statements": {
+    "COMPILER_OPTION_DEPENDENT": 1
+   },
+   "tests": {
+    "checks": {
+     "PASS": 83,
+     "BLOCKED_AS_EXPECTED": 8,
+     "FAIL": 0,
+     "total": 91
+    },
+    "scenarios": {
+     "scenarios": 13,
+     "passed": 6,
+     "blocked_as_expected": 7,
+     "failed": 0,
+     "fixtures": "forward/pilot/app-fixtures/RCVPRC00.json"
+    },
+    "statement_coverage": {
+     "statements": 105,
+     "executed_in_passing_scenarios": 57,
+     "executed_only_on_blocked_paths": 18
+    }
+   },
+   "validation": {
+    "exit_code": 0,
+    "result": "CONVERSION_VALIDATION RCVPRC00 (D:\\PROJECTS\\REVFORGE-Harness\\forward\\generated\\java\\RCVPRC00): PASS (label PARTIAL)"
+   },
+   "readiness": {
+    "status": "FAIL",
+    "failing_checks": [
+     "dependencies_identified"
+    ]
+   },
+   "remaining_gaps": {
+    "count": 1,
+    "register_ids": [
+     "MGR-0246"
+    ]
+   },
+   "bmad_governance": "LOCAL_LGA_NOT_BMAD_GOVERNED",
+   "cobol_equivalence": "NOT_ESTABLISHED"
+  },
+  {
+   "program": "RPTAUD00",
+   "file_id": "SYS-PORTFOLIO-001-FIL-0048",
+   "source": "src/programs/batch/RPTAUD00.cbl",
+   "source_sha256": "1407e0aa1ad4413341662a1dcf997c97dff47b3e0a93780a8a8ca90ac912f13e",
+   "java_class": "revforge.app.rptaud00.Rptaud00",
+   "java_files": [
+    "java/src/revforge/app/copybooks/Auditlog.java",
+    "java/src/revforge/app/copybooks/Rtncode.java",
+    "java/src/revforge/app/rptaud00/Rptaud00.java",
+    "java/src/revforge/app/rptaud00/Rptaud00Tests.java"
+   ],
+   "local_authorization": "LGA-0008",
+   "classification": "PARTIAL",
+   "classification_step19": "PARTIAL",
+   "paragraphs": {
+    "reverse": 10,
+    "mapped": 10,
+    "test_executed": 0
+   },
+   "statements": {
+    "MAPPED": 22,
+    "GAP": 14
+   },
+   "business_rules": {},
+   "rule_ids": [],
+   "data_contracts": {
+    "ok": true,
+    "detail": "F1/F2 deliveries accepted for AUDITLOG, ERRHAND, RTNCODE, RPTAUD00"
+   },
+   "dependencies": [
+    {
+     "type": "COPY",
+     "to": "AUDITLOG",
+     "forward": "RESOLVED_IN_JAVA_BUILD"
+    },
+    {
+     "type": "COPY",
+     "to": "ERRHAND",
+     "forward": "RESOLVED_IN_JAVA_BUILD"
+    },
+    {
+     "type": "COPY",
+     "to": "RTNCODE",
+     "forward": "RESOLVED_IN_JAVA_BUILD"
+    }
+   ],
+   "unsupported_statements": {
+    "UNSUPPORTED_DATA": 3,
+    "UNDECLARED_NAME": 4,
+    "UNDEFINED_PROCEDURE": 7
+   },
+   "tests": {
+    "checks": {
+     "PASS": 35,
+     "BLOCKED_AS_EXPECTED": 16,
+     "FAIL": 0,
+     "total": 51
+    },
+    "scenarios": {
+     "scenarios": 2,
+     "passed": 0,
+     "blocked_as_expected": 2,
+     "failed": 0,
+     "fixtures": "forward/pilot/app-fixtures/RPTAUD00.json"
+    },
+    "statement_coverage": {
+     "statements": 36,
+     "executed_in_passing_scenarios": 0,
+     "executed_only_on_blocked_paths": 3
+    }
+   },
+   "validation": {
+    "exit_code": 0,
+    "result": "CONVERSION_VALIDATION RPTAUD00 (D:\\PROJECTS\\REVFORGE-Harness\\forward\\generated\\java\\RPTAUD00): PASS (label PARTIAL)"
+   },
+   "readiness": {
+    "status": "FAIL",
+    "failing_checks": [
+     "dependencies_identified"
+    ]
+   },
+   "remaining_gaps": {
+    "count": 14,
+    "register_ids": [
+     "MGR-0247",
+     "MGR-0248",
+     "MGR-0249",
+     "MGR-0250",
+     "MGR-0251",
+     "MGR-0252",
+     "MGR-0253",
+     "MGR-0254",
+     "MGR-0255",
+     "MGR-0256",
+     "MGR-0257",
+     "MGR-0258",
+     "MGR-0259",
+     "MGR-0260"
+    ]
+   },
+   "bmad_governance": "LOCAL_LGA_NOT_BMAD_GOVERNED",
+   "cobol_equivalence": "NOT_ESTABLISHED"
+  },
+  {
+   "program": "RPTPOS00",
+   "file_id": "SYS-PORTFOLIO-001-FIL-0049",
+   "source": "src/programs/batch/RPTPOS00.cbl",
+   "source_sha256": "032436b2a4bded557262bdacb4c4ed3100ef3fef4df960c9c06fb40ff0d92b53",
+   "java_class": "revforge.app.rptpos00.Rptpos00",
+   "java_files": [
+    "java/src/revforge/app/copybooks/Posrec.java",
+    "java/src/revforge/app/copybooks/Rtncode.java",
+    "java/src/revforge/app/copybooks/Trnrec.java",
+    "java/src/revforge/app/rptpos00/Rptpos00.java",
+    "java/src/revforge/app/rptpos00/Rptpos00Tests.java"
+   ],
+   "local_authorization": "LGA-0009",
+   "classification": "PARTIAL",
+   "classification_step19": "PARTIAL",
+   "paragraphs": {
+    "reverse": 11,
+    "mapped": 11,
+    "test_executed": 0
+   },
+   "statements": {
+    "MAPPED": 25,
+    "GAP": 21
+   },
+   "business_rules": {
+    "BLOCKED": 1
+   },
+   "rule_ids": [
+    "BR-034"
+   ],
+   "data_contracts": {
+    "ok": true,
+    "detail": "F1/F2 deliveries accepted for ERRHAND, POSREC, RTNCODE, TRNREC, RPTPOS00"
+   },
+   "dependencies": [
+    {
+     "type": "COPY",
+     "to": "POSREC",
+     "forward": "RESOLVED_IN_JAVA_BUILD"
+    },
+    {
+     "type": "COPY",
+     "to": "TRNREC",
+     "forward": "RESOLVED_IN_JAVA_BUILD"
+    },
+    {
+     "type": "COPY",
+     "to": "RTNCODE",
+     "forward": "RESOLVED_IN_JAVA_BUILD"
+    },
+    {
+     "type": "COPY",
+     "to": "ERRHAND",
+     "forward": "RESOLVED_IN_JAVA_BUILD"
+    }
+   ],
+   "unsupported_statements": {
+    "UNSUPPORTED_DATA": 4,
+    "UNDECLARED_NAME": 8,
+    "UNDEFINED_PROCEDURE": 5
+   },
+   "tests": {
+    "checks": {
+     "PASS": 47,
+     "BLOCKED_AS_EXPECTED": 19,
+     "FAIL": 0,
+     "total": 66
+    },
+    "scenarios": {
+     "scenarios": 2,
+     "passed": 0,
+     "blocked_as_expected": 2,
+     "failed": 0,
+     "fixtures": "forward/pilot/app-fixtures/RPTPOS00.json"
+    },
+    "statement_coverage": {
+     "statements": 46,
+     "executed_in_passing_scenarios": 0,
+     "executed_only_on_blocked_paths": 3
+    }
+   },
+   "validation": {
+    "exit_code": 0,
+    "result": "CONVERSION_VALIDATION RPTPOS00 (D:\\PROJECTS\\REVFORGE-Harness\\forward\\generated\\java\\RPTPOS00): PASS (label PARTIAL)"
+   },
+   "readiness": {
+    "status": "FAIL",
+    "failing_checks": [
+     "dependencies_identified"
+    ]
+   },
+   "remaining_gaps": {
+    "count": 17,
+    "register_ids": [
+     "MGR-0261",
+     "MGR-0262",
+     "MGR-0263",
+     "MGR-0264",
+     "MGR-0265",
+     "MGR-0266",
+     "MGR-0267",
+     "MGR-0268",
+     "MGR-0269",
+     "MGR-0270",
+     "MGR-0271",
+     "MGR-0272",
+     "MGR-0273",
+     "MGR-0274",
+     "MGR-0275",
+     "MGR-0276",
+     "MGR-0277"
+    ]
+   },
+   "bmad_governance": "LOCAL_LGA_NOT_BMAD_GOVERNED",
+   "cobol_equivalence": "NOT_ESTABLISHED"
+  },
+  {
+   "program": "RPTSTA00",
+   "file_id": "SYS-PORTFOLIO-001-FIL-0050",
+   "source": "src/programs/batch/RPTSTA00.cbl",
+   "source_sha256": "8b18c42b786afa5fb4a45fd65168d91fe4763f4154f0aeac609c8d3e1dbf7a6c",
+   "java_class": "revforge.app.rptsta00.Rptsta00",
+   "java_files": [
+    "java/src/revforge/app/copybooks/Bchctl.java",
+    "java/src/revforge/app/copybooks/Rtncode.java",
+    "java/src/revforge/app/rptsta00/Rptsta00.java",
+    "java/src/revforge/app/rptsta00/Rptsta00Tests.java"
+   ],
+   "local_authorization": "LGA-0010",
+   "classification": "PARTIAL",
+   "classification_step19": "PARTIAL",
+   "paragraphs": {
+    "reverse": 12,
+    "mapped": 12,
+    "test_executed": 0
+   },
+   "statements": {
+    "MAPPED": 25,
+    "GAP": 24
+   },
+   "business_rules": {},
+   "rule_ids": [],
+   "data_contracts": {
+    "ok": true,
+    "detail": "F1/F2 deliveries accepted for BCHCTL, ERRHAND, RTNCODE, RPTSTA00"
+   },
+   "dependencies": [
+    {
+     "type": "COPY",
+     "to": "DB2STAT",
+     "forward": "UNRESOLVED"
+    },
+    {
+     "type": "COPY",
+     "to": "BCHCTL",
+     "forward": "RESOLVED_IN_JAVA_BUILD"
+    },
+    {
+     "type": "COPY",
+     "to": "RTNCODE",
+     "forward": "RESOLVED_IN_JAVA_BUILD"
+    },
+    {
+     "type": "COPY",
+     "to": "ERRHAND",
+     "forward": "RESOLVED_IN_JAVA_BUILD"
+    }
+   ],
+   "unsupported_statements": {
+    "UNSUPPORTED_DATA": 5,
+    "UNDECLARED_NAME": 6,
+    "UNDEFINED_PROCEDURE": 5
+   },
+   "tests": {
+    "checks": {
+     "PASS": 45,
+     "BLOCKED_AS_EXPECTED": 18,
+     "FAIL": 0,
+     "total": 63
+    },
+    "scenarios": {
+     "scenarios": 2,
+     "passed": 0,
+     "blocked_as_expected": 2,
+     "failed": 0,
+     "fixtures": "forward/pilot/app-fixtures/RPTSTA00.json"
+    },
+    "statement_coverage": {
+     "statements": 49,
+     "executed_in_passing_scenarios": 0,
+     "executed_only_on_blocked_paths": 3
+    }
+   },
+   "validation": {
+    "exit_code": 0,
+    "result": "CONVERSION_VALIDATION RPTSTA00 (D:\\PROJECTS\\REVFORGE-Harness\\forward\\generated\\java\\RPTSTA00): PASS (label PARTIAL)"
+   },
+   "readiness": {
+    "status": "FAIL",
+    "failing_checks": [
+     "copybooks_resolved",
+     "dependencies_identified"
+    ]
+   },
+   "remaining_gaps": {
+    "count": 16,
+    "register_ids": [
+     "MGR-0278",
+     "MGR-0279",
+     "MGR-0280",
+     "MGR-0281",
+     "MGR-0282",
+     "MGR-0283",
+     "MGR-0284",
+     "MGR-0285",
+     "MGR-0286",
+     "MGR-0287",
+     "MGR-0288",
+     "MGR-0289",
+     "MGR-0290",
+     "MGR-0291",
+     "MGR-0292",
+     "MGR-0293"
+    ]
+   },
+   "bmad_governance": "LOCAL_LGA_NOT_BMAD_GOVERNED",
+   "cobol_equivalence": "NOT_ESTABLISHED"
+  },
+  {
+   "program": "RTNANA00",
+   "file_id": "SYS-PORTFOLIO-001-FIL-0051",
+   "source": "src/programs/batch/RTNANA00.cbl",
+   "source_sha256": "c9c49d1bea7acf4d6002374812fe61100167f4ff0117f1866f573cdcef1c8b48",
+   "java_class": "revforge.app.rtnana00.Rtnana00",
+   "java_files": [
+    "java/src/revforge/app/copybooks/Sqlca.java",
+    "java/src/revforge/app/rtnana00/Rtnana00.java",
+    "java/src/revforge/app/rtnana00/Rtnana00Tests.java"
+   ],
+   "local_authorization": "LGA-0011",
+   "classification": "PARTIAL",
+   "classification_step19": "PARTIAL",
+   "paragraphs": {
+    "reverse": 13,
+    "mapped": 12,
+    "test_executed": 1
+   },
+   "statements": {
+    "MAPPED": 38,
+    "GAP": 11
+   },
+   "business_rules": {
+    "BLOCKED": 2,
+    "IMPLEMENTED_NOT_EXERCISED": 1
+   },
+   "rule_ids": [
+    "BR-035",
+    "BR-036",
+    "BR-037"
+   ],
+   "data_contracts": {
+    "ok": true,
+    "detail": "F1/F2 deliveries accepted for SQLCA, RTNANA00"
+   },
+   "dependencies": [
+    {
+     "type": "SQL_INCLUDE",
+     "to": "SQLCA",
+     "forward": "RESOLVED_IN_JAVA_BUILD"
+    }
+   ],
+   "unsupported_statements": {
+    "EXTERNAL_SYSTEM_BOUNDARY": 3,
+    "UNDECLARED_NAME": 2
+   },
+   "tests": {
+    "checks": {
+     "PASS": 34,
+     "BLOCKED_AS_EXPECTED": 6,
+     "FAIL": 0,
+     "total": 40
+    },
+    "scenarios": {
+     "scenarios": 2,
+     "passed": 1,
+     "blocked_as_expected": 1,
+     "failed": 0,
+     "fixtures": "forward/pilot/app-fixtures/RTNANA00.json"
+    },
+    "statement_coverage": {
+     "statements": 49,
+     "executed_in_passing_scenarios": 7,
+     "executed_only_on_blocked_paths": 5
+    }
+   },
+   "validation": {
+    "exit_code": 0,
+    "result": "CONVERSION_VALIDATION RTNANA00 (D:\\PROJECTS\\REVFORGE-Harness\\forward\\generated\\java\\RTNANA00): PASS (label PARTIAL)"
+   },
+   "readiness": {
+    "status": "FAIL",
+    "failing_checks": [
+     "copybooks_resolved"
+    ]
+   },
+   "remaining_gaps": {
+    "count": 5,
+    "register_ids": [
+     "MGR-0294",
+     "MGR-0295",
+     "MGR-0296",
+     "MGR-0297",
+     "MGR-0298"
+    ]
+   },
+   "bmad_governance": "LOCAL_LGA_NOT_BMAD_GOVERNED",
+   "cobol_equivalence": "NOT_ESTABLISHED"
+  },
+  {
+   "program": "RTNCDE00",
+   "file_id": "SYS-PORTFOLIO-001-FIL-0052",
+   "source": "src/programs/batch/RTNCDE00.cbl",
+   "source_sha256": "7cb951ea1f418c19ddd61c0eca00f21108af5f364b5ecf05742cbc428862994e",
+   "java_class": "revforge.app.rtncde00.Rtncde00",
+   "java_files": [
+    "java/src/revforge/app/copybooks/Rtncode.java",
+    "java/src/revforge/app/copybooks/Sqlca.java",
+    "java/src/revforge/app/rtncde00/Rtncde00.java",
+    "java/src/revforge/app/rtncde00/Rtncde00Tests.java"
+   ],
+   "local_authorization": "LGA-0012",
+   "classification": "PARTIAL",
+   "classification_step19": "PARTIAL",
+   "paragraphs": {
+    "reverse": 11,
+    "mapped": 10,
+    "test_executed": 6
+   },
+   "statements": {
+    "MAPPED": 32,
+    "GAP": 8
+   },
+   "business_rules": {
+    "IMPLEMENTED_VERIFIED": 3,
+    "BLOCKED": 1
+   },
+   "rule_ids": [
+    "BR-038",
+    "BR-039",
+    "BR-040",
+    "BR-041"
+   ],
+   "data_contracts": {
+    "ok": true,
+    "detail": "F1/F2 deliveries accepted for RTNCODE, SQLCA, RTNCDE00"
+   },
+   "dependencies": [
+    {
+     "type": "SQL_INCLUDE",
+     "to": "SQLCA",
+     "forward": "RESOLVED_IN_JAVA_BUILD"
+    },
+    {
+     "type": "COPY",
+     "to": "RTNCODE",
+     "forward": "RESOLVED_IN_JAVA_BUILD"
+    }
+   ],
+   "unsupported_statements": {
+    "EXTERNAL_SYSTEM_BOUNDARY": 2,
+    "UNDECLARED_NAME": 2
+   },
+   "tests": {
+    "checks": {
+     "PASS": 21,
+     "BLOCKED_AS_EXPECTED": 5,
+     "FAIL": 0,
+     "total": 26
+    },
+    "scenarios": {
+     "scenarios": 6,
+     "passed": 5,
+     "blocked_as_expected": 1,
+     "failed": 0,
+     "fixtures": "forward/pilot/app-fixtures/RTNCDE00.json"
+    },
+    "statement_coverage": {
+     "statements": 40,
+     "executed_in_passing_scenarios": 26,
+     "executed_only_on_blocked_paths": 3
+    }
+   },
+   "validation": {
+    "exit_code": 0,
+    "result": "CONVERSION_VALIDATION RTNCDE00 (D:\\PROJECTS\\REVFORGE-Harness\\forward\\generated\\java\\RTNCDE00): PASS (label PARTIAL)"
+   },
+   "readiness": {
+    "status": "FAIL",
+    "failing_checks": [
+     "copybooks_resolved"
+    ]
+   },
+   "remaining_gaps": {
+    "count": 4,
+    "register_ids": [
+     "MGR-0299",
+     "MGR-0300",
+     "MGR-0301",
+     "MGR-0302"
+    ]
+   },
+   "bmad_governance": "LOCAL_LGA_NOT_BMAD_GOVERNED",
+   "cobol_equivalence": "NOT_ESTABLISHED"
+  },
+  {
+   "program": "AUDPROC",
+   "file_id": "SYS-PORTFOLIO-001-FIL-0053",
+   "source": "src/programs/common/AUDPROC.cbl",
+   "source_sha256": "c688d44dee1a7042adeec1984b4502a246b079116bae900e2c138eaa056bcfbf",
+   "java_class": "revforge.app.audproc.Audproc",
+   "java_files": [
+    "java/src/revforge/app/audproc/Audproc.java",
+    "java/src/revforge/app/audproc/AudprocTests.java",
+    "java/src/revforge/app/copybooks/Auditlog.java"
+   ],
+   "local_authorization": "LGA-0013",
+   "classification": "PARTIAL",
+   "classification_step19": "PARTIAL",
+   "paragraphs": {
+    "reverse": 4,
+    "mapped": 4,
+    "test_executed": 0
+   },
+   "statements": {
+    "MAPPED": 26,
+    "GAP": 1
+   },
+   "business_rules": {},
+   "rule_ids": [],
+   "data_contracts": {
+    "ok": true,
+    "detail": "F1/F2 deliveries accepted for AUDITLOG, AUDPROC"
+   },
+   "dependencies": [
+    {
+     "type": "COPY",
+     "to": "AUDITLOG",
+     "forward": "RESOLVED_IN_JAVA_BUILD"
+    }
+   ],
+   "unsupported_statements": {
+    "COMPILER_OPTION_DEPENDENT": 1
+   },
+   "tests": {
+    "checks": {
+     "PASS": 14,
+     "BLOCKED_AS_EXPECTED": 3,
+     "FAIL": 0,
+     "total": 17
+    },
+    "scenarios": {
+     "scenarios": 2,
+     "passed": 0,
+     "blocked_as_expected": 2,
+     "failed": 0,
+     "fixtures": "forward/pilot/app-fixtures/AUDPROC.json"
+    },
+    "statement_coverage": {
+     "statements": 27,
+     "executed_in_passing_scenarios": 0,
+     "executed_only_on_blocked_paths": 2
+    }
+   },
+   "validation": {
+    "exit_code": 0,
+    "result": "CONVERSION_VALIDATION AUDPROC (D:\\PROJECTS\\REVFORGE-Harness\\forward\\generated\\java\\AUDPROC): PASS (label PARTIAL)"
+   },
+   "readiness": {
+    "status": "FAIL",
+    "failing_checks": [
+     "dependencies_identified"
+    ]
+   },
+   "remaining_gaps": {
+    "count": 1,
+    "register_ids": [
+     "MGR-0001"
+    ]
+   },
+   "bmad_governance": "LOCAL_LGA_NOT_BMAD_GOVERNED",
+   "cobol_equivalence": "NOT_ESTABLISHED"
+  },
+  {
+   "program": "DB2CMT",
+   "file_id": "SYS-PORTFOLIO-001-FIL-0054",
+   "source": "src/programs/common/DB2CMT.cbl",
+   "source_sha256": "d753db038a2a033997d333a5ce09336b37458ba413c39f8ddc5326a6d30e3b52",
+   "java_class": "revforge.app.db2cmt.Db2cmt",
+   "java_files": [
+    "java/src/revforge/app/copybooks/Dbproc.java",
+    "java/src/revforge/app/copybooks/Sqlca.java",
+    "java/src/revforge/app/db2cmt/Db2cmt.java",
+    "java/src/revforge/app/db2cmt/Db2cmtTests.java"
+   ],
+   "local_authorization": "LGA-0014",
+   "classification": "PARTIAL",
+   "classification_step19": "PARTIAL",
+   "paragraphs": {
+    "reverse": 10,
+    "mapped": 10,
+    "test_executed": 4
+   },
+   "statements": {
+    "MAPPED": 24,
+    "GAP": 32
+   },
+   "business_rules": {
+    "IMPLEMENTED_VERIFIED": 2,
+    "BLOCKED": 1
+   },
+   "rule_ids": [
+    "BR-042",
+    "BR-043",
+    "BR-044"
+   ],
+   "data_contracts": {
+    "ok": true,
+    "detail": "F1/F2 deliveries accepted for ERRHAND, DBPROC, DBTBLS, SQLCA, DB2CMT, DB2ERR, ERRPROC"
+   },
+   "dependencies": [
+    {
+     "type": "COPY",
+     "to": "SQLCA",
+     "forward": "RESOLVED_IN_JAVA_BUILD"
+    },
+    {
+     "type": "COPY",
+     "to": "DBPROC",
+     "forward": "RESOLVED_IN_JAVA_BUILD"
+    },
+    {
+     "type": "COPY",
+     "to": "ERRHAND",
+     "forward": "RESOLVED_IN_JAVA_BUILD"
+    },
+    {
+     "type": "STATIC_CALL",
+     "to": "ERRPROC",
+     "forward": "IMPLEMENTED_CALL (converted callee)"
+    },
+    {
+     "type": "STATIC_CALL",
+     "to": "DB2ERR",
+     "forward": "IMPLEMENTED_CALL (converted callee)"
+    }
+   ],
+   "unsupported_statements": {
+    "EXTERNAL_SYSTEM_BOUNDARY": 4,
+    "UNDECLARED_NAME": 4
+   },
+   "tests": {
+    "checks": {
+     "PASS": 42,
+     "BLOCKED_AS_EXPECTED": 14,
+     "FAIL": 0,
+     "total": 56
+    },
+    "scenarios": {
+     "scenarios": 9,
+     "passed": 3,
+     "blocked_as_expected": 6,
+     "failed": 0,
+     "fixtures": "forward/pilot/app-fixtures/DB2CMT.json"
+    },
+    "statement_coverage": {
+     "statements": 56,
+     "executed_in_passing_scenarios": 12,
+     "executed_only_on_blocked_paths": 15
+    }
+   },
+   "validation": {
+    "exit_code": 0,
+    "result": "CONVERSION_VALIDATION DB2CMT (D:\\PROJECTS\\REVFORGE-Harness\\forward\\generated\\java\\DB2CMT): PASS (label PARTIAL)"
+   },
+   "readiness": {
+    "status": "FAIL",
+    "failing_checks": [
+     "copybooks_resolved"
+    ]
+   },
+   "remaining_gaps": {
+    "count": 8,
+    "register_ids": [
+     "MGR-0027",
+     "MGR-0028",
+     "MGR-0029",
+     "MGR-0030",
+     "MGR-0031",
+     "MGR-0032",
+     "MGR-0033",
+     "MGR-0034"
+    ]
+   },
+   "bmad_governance": "LOCAL_LGA_NOT_BMAD_GOVERNED",
+   "cobol_equivalence": "NOT_ESTABLISHED"
+  },
+  {
+   "program": "DB2CONN",
+   "file_id": "SYS-PORTFOLIO-001-FIL-0055",
+   "source": "src/programs/common/DB2CONN.cbl",
+   "source_sha256": "488a9dcd9fa71ab4a4476694f2e117fc103a7e0a85f2cde249953fd590bd371c",
+   "java_class": "revforge.app.db2conn.Db2conn",
+   "java_files": [
+    "java/src/revforge/app/copybooks/Dbproc.java",
+    "java/src/revforge/app/copybooks/Sqlca.java",
+    "java/src/revforge/app/db2conn/Db2conn.java",
+    "java/src/revforge/app/db2conn/Db2connTests.java"
+   ],
+   "local_authorization": "LGA-0015",
+   "classification": "PARTIAL",
+   "classification_step19": "PARTIAL",
+   "paragraphs": {
+    "reverse": 6,
+    "mapped": 6,
+    "test_executed": 2
+   },
+   "statements": {
+    "MAPPED": 18,
+    "GAP": 28
+   },
+   "business_rules": {
+    "IMPLEMENTED_VERIFIED": 2,
+    "IMPLEMENTED_VERIFIED_TO_GAP": 1,
+    "IMPLEMENTED_NOT_EXERCISED": 1,
+    "BLOCKED": 1
+   },
+   "rule_ids": [
+    "BR-045",
+    "BR-046",
+    "BR-047",
+    "BR-048",
+    "BR-049"
+   ],
+   "data_contracts": {
+    "ok": true,
+    "detail": "F1/F2 deliveries accepted for ERRHAND, DBPROC, SQLCA, DB2CONN, ERRPROC"
+   },
+   "dependencies": [
+    {
+     "type": "COPY",
+     "to": "SQLCA",
+     "forward": "RESOLVED_IN_JAVA_BUILD"
+    },
+    {
+     "type": "COPY",
+     "to": "DBPROC",
+     "forward": "RESOLVED_IN_JAVA_BUILD"
+    },
+    {
+     "type": "COPY",
+     "to": "ERRHAND",
+     "forward": "RESOLVED_IN_JAVA_BUILD"
+    },
+    {
+     "type": "STATIC_CALL",
+     "to": "DELAY",
+     "forward": "GAP (UNDEFINED_EXTERNAL_CALL / untranslated)"
+    },
+    {
+     "type": "STATIC_CALL",
+     "to": "ERRPROC",
+     "forward": "IMPLEMENTED_CALL (converted callee)"
+    }
+   ],
+   "unsupported_statements": {
+    "EXTERNAL_SYSTEM_BOUNDARY": 4,
+    "UNDECLARED_NAME": 5,
+    "UNDEFINED_EXTERNAL_CALL": 1
+   },
+   "tests": {
+    "checks": {
+     "PASS": 37,
+     "BLOCKED_AS_EXPECTED": 14,
+     "FAIL": 0,
+     "total": 51
+    },
+    "scenarios": {
+     "scenarios": 5,
+     "passed": 1,
+     "blocked_as_expected": 4,
+     "failed": 0,
+     "fixtures": "forward/pilot/app-fixtures/DB2CONN.json"
+    },
+    "statement_coverage": {
+     "statements": 46,
+     "executed_in_passing_scenarios": 4,
+     "executed_only_on_blocked_paths": 14
+    }
+   },
+   "validation": {
+    "exit_code": 0,
+    "result": "CONVERSION_VALIDATION DB2CONN (D:\\PROJECTS\\REVFORGE-Harness\\forward\\generated\\java\\DB2CONN): PASS (label PARTIAL)"
+   },
+   "readiness": {
+    "status": "FAIL",
+    "failing_checks": [
+     "copybooks_resolved",
+     "dependencies_identified"
+    ]
+   },
+   "remaining_gaps": {
+    "count": 10,
+    "register_ids": [
+     "MGR-0035",
+     "MGR-0036",
+     "MGR-0037",
+     "MGR-0038",
+     "MGR-0039",
+     "MGR-0040",
+     "MGR-0041",
+     "MGR-0042",
+     "MGR-0043",
+     "MGR-0044"
+    ]
+   },
+   "bmad_governance": "LOCAL_LGA_NOT_BMAD_GOVERNED",
+   "cobol_equivalence": "NOT_ESTABLISHED"
+  },
+  {
+   "program": "DB2ERR",
+   "file_id": "SYS-PORTFOLIO-001-FIL-0056",
+   "source": "src/programs/common/DB2ERR.cbl",
+   "source_sha256": "cb599435c5aee112ac61004b36a3d3a459effdb9d796d312e2688b605fd80a63",
+   "java_class": "revforge.app.db2err.Db2err",
+   "java_files": [
+    "java/src/revforge/app/copybooks/Dbproc.java",
+    "java/src/revforge/app/copybooks/Sqlca.java",
+    "java/src/revforge/app/db2err/Db2err.java",
+    "java/src/revforge/app/db2err/Db2errTests.java"
+   ],
+   "local_authorization": "LGA-0016",
+   "classification": "PARTIAL",
+   "classification_step19": "PARTIAL",
+   "paragraphs": {
+    "reverse": 7,
+    "mapped": 7,
+    "test_executed": 2
+   },
+   "statements": {
+    "MAPPED": 50,
+    "GAP": 13
+   },
+   "business_rules": {
+    "IMPLEMENTED_VERIFIED": 3,
+    "IMPLEMENTED_NOT_EXERCISED": 2
+   },
+   "rule_ids": [
+    "BR-050",
+    "BR-051",
+    "BR-052",
+    "BR-053",
+    "BR-054"
+   ],
+   "data_contracts": {
+    "ok": true,
+    "detail": "F1/F2 deliveries accepted for ERRHAND, DBPROC, DBTBLS, SQLCA, DB2ERR, ERRPROC"
+   },
+   "dependencies": [
+    {
+     "type": "COPY",
+     "to": "DBTBLS",
+     "forward": "RESOLVED_IN_JAVA_BUILD"
+    },
+    {
+     "type": "COPY",
+     "to": "SQLCA",
+     "forward": "RESOLVED_IN_JAVA_BUILD"
+    },
+    {
+     "type": "COPY",
+     "to": "DBPROC",
+     "forward": "RESOLVED_IN_JAVA_BUILD"
+    },
+    {
+     "type": "COPY",
+     "to": "ERRHAND",
+     "forward": "RESOLVED_IN_JAVA_BUILD"
+    },
+    {
+     "type": "STATIC_CALL",
+     "to": "ERRPROC",
+     "forward": "IMPLEMENTED_CALL (converted callee)"
+    }
+   ],
+   "unsupported_statements": {
+    "UNDECLARED_NAME": 3,
+    "COMPILER_OPTION_DEPENDENT": 1,
+    "EXTERNAL_SYSTEM_BOUNDARY": 2
+   },
+   "tests": {
+    "checks": {
+     "PASS": 53,
+     "BLOCKED_AS_EXPECTED": 10,
+     "FAIL": 0,
+     "total": 63
+    },
+    "scenarios": {
+     "scenarios": 11,
+     "passed": 7,
+     "blocked_as_expected": 4,
+     "failed": 0,
+     "fixtures": "forward/pilot/app-fixtures/DB2ERR.json"
+    },
+    "statement_coverage": {
+     "statements": 63,
+     "executed_in_passing_scenarios": 17,
+     "executed_only_on_blocked_paths": 9
+    }
+   },
+   "validation": {
+    "exit_code": 0,
+    "result": "CONVERSION_VALIDATION DB2ERR (D:\\PROJECTS\\REVFORGE-Harness\\forward\\generated\\java\\DB2ERR): PASS (label PARTIAL)"
+   },
+   "readiness": {
+    "status": "FAIL",
+    "failing_checks": [
+     "copybooks_resolved",
+     "dependencies_identified"
+    ]
+   },
+   "remaining_gaps": {
+    "count": 6,
+    "register_ids": [
+     "MGR-0045",
+     "MGR-0046",
+     "MGR-0047",
+     "MGR-0048",
+     "MGR-0049",
+     "MGR-0050"
+    ]
+   },
+   "bmad_governance": "LOCAL_LGA_NOT_BMAD_GOVERNED",
+   "cobol_equivalence": "NOT_ESTABLISHED"
+  },
+  {
+   "program": "DB2STAT",
+   "file_id": "SYS-PORTFOLIO-001-FIL-0057",
+   "source": "src/programs/common/DB2STAT.cbl",
+   "source_sha256": "082eb02647d2ccaeb6c085425e03f647bfd54a15018b05a0c25de4bb42efd00f",
+   "java_class": "revforge.app.db2stat.Db2stat",
+   "java_files": [
+    "java/src/revforge/app/copybooks/Dbproc.java",
+    "java/src/revforge/app/copybooks/Sqlca.java",
+    "java/src/revforge/app/db2stat/Db2stat.java",
+    "java/src/revforge/app/db2stat/Db2statTests.java"
+   ],
+   "local_authorization": "LGA-0017",
+   "classification": "PARTIAL",
+   "classification_step19": "PARTIAL",
+   "paragraphs": {
+    "reverse": 9,
+    "mapped": 9,
+    "test_executed": 0
+   },
+   "statements": {
+    "MAPPED": 27,
+    "GAP": 39
+   },
+   "business_rules": {
+    "IMPLEMENTED_VERIFIED_TO_GAP": 1,
+    "BLOCKED": 1
+   },
+   "rule_ids": [
+    "BR-055",
+    "BR-056"
+   ],
+   "data_contracts": {
+    "ok": true,
+    "detail": "F1/F2 deliveries accepted for ERRHAND, DBPROC, SQLCA, DB2STAT, ERRPROC"
+   },
+   "dependencies": [
+    {
+     "type": "COPY",
+     "to": "SQLCA",
+     "forward": "RESOLVED_IN_JAVA_BUILD"
+    },
+    {
+     "type": "COPY",
+     "to": "DBPROC",
+     "forward": "RESOLVED_IN_JAVA_BUILD"
+    },
+    {
+     "type": "COPY",
+     "to": "ERRHAND",
+     "forward": "RESOLVED_IN_JAVA_BUILD"
+    },
+    {
+     "type": "STATIC_CALL",
+     "to": "ERRPROC",
+     "forward": "IMPLEMENTED_CALL (converted callee)"
+    }
+   ],
+   "unsupported_statements": {
+    "COMPILER_OPTION_DEPENDENT": 2,
+    "EXTERNAL_SYSTEM_BOUNDARY": 5,
+    "UNDECLARED_NAME": 6
+   },
+   "tests": {
+    "checks": {
+     "PASS": 33,
+     "BLOCKED_AS_EXPECTED": 21,
+     "FAIL": 0,
+     "total": 54
+    },
+    "scenarios": {
+     "scenarios": 8,
+     "passed": 0,
+     "blocked_as_expected": 8,
+     "failed": 0,
+     "fixtures": "forward/pilot/app-fixtures/DB2STAT.json"
+    },
+    "statement_coverage": {
+     "statements": 66,
+     "executed_in_passing_scenarios": 0,
+     "executed_only_on_blocked_paths": 22
+    }
+   },
+   "validation": {
+    "exit_code": 0,
+    "result": "CONVERSION_VALIDATION DB2STAT (D:\\PROJECTS\\REVFORGE-Harness\\forward\\generated\\java\\DB2STAT): PASS (label PARTIAL)"
+   },
+   "readiness": {
+    "status": "FAIL",
+    "failing_checks": [
+     "copybooks_resolved",
+     "dependencies_identified"
+    ]
+   },
+   "remaining_gaps": {
+    "count": 13,
+    "register_ids": [
+     "MGR-0079",
+     "MGR-0080",
+     "MGR-0081",
+     "MGR-0082",
+     "MGR-0083",
+     "MGR-0084",
+     "MGR-0085",
+     "MGR-0086",
+     "MGR-0087",
+     "MGR-0088",
+     "MGR-0089",
+     "MGR-0090",
+     "MGR-0091"
+    ]
+   },
+   "bmad_governance": "LOCAL_LGA_NOT_BMAD_GOVERNED",
+   "cobol_equivalence": "NOT_ESTABLISHED"
+  },
+  {
+   "program": "ERRPROC",
+   "file_id": "SYS-PORTFOLIO-001-FIL-0058",
+   "source": "src/programs/common/ERRPROC.cbl",
+   "source_sha256": "b9bbfaaaaec49ff558c167be17e2561b80b671c6d2c86271a6780a3f973697b2",
+   "java_class": "revforge.app.errproc.Errproc",
+   "java_files": [
+    "java/src/revforge/app/errproc/Errproc.java",
+    "java/src/revforge/app/errproc/ErrprocTests.java"
+   ],
+   "local_authorization": "LGA-0018",
+   "classification": "PARTIAL",
+   "classification_step19": "PARTIAL",
+   "paragraphs": {
+    "reverse": 6,
+    "mapped": 6,
+    "test_executed": 0
+   },
+   "statements": {
+    "MAPPED": 30,
+    "GAP": 3
+   },
+   "business_rules": {},
+   "rule_ids": [],
+   "data_contracts": {
+    "ok": true,
+    "detail": "F1/F2 deliveries accepted for ERRHAND, ERRPROC"
+   },
+   "dependencies": [
+    {
+     "type": "COPY",
+     "to": "ERRHAND",
+     "forward": "RESOLVED_IN_JAVA_BUILD"
+    }
+   ],
+   "unsupported_statements": {
+    "COMPILER_OPTION_DEPENDENT": 1,
+    "UNTRANSLATED_STATEMENT": 2
+   },
+   "tests": {
+    "checks": {
+     "PASS": 16,
+     "BLOCKED_AS_EXPECTED": 5,
+     "FAIL": 0,
+     "total": 21
+    },
+    "scenarios": {
+     "scenarios": 2,
+     "passed": 0,
+     "blocked_as_expected": 2,
+     "failed": 0,
+     "fixtures": "forward/pilot/app-fixtures/ERRPROC.json"
+    },
+    "statement_coverage": {
+     "statements": 33,
+     "executed_in_passing_scenarios": 0,
+     "executed_only_on_blocked_paths": 3
+    }
+   },
+   "validation": {
+    "exit_code": 0,
+    "result": "CONVERSION_VALIDATION ERRPROC (D:\\PROJECTS\\REVFORGE-Harness\\forward\\generated\\java\\ERRPROC): PASS (label PARTIAL)"
+   },
+   "readiness": {
+    "status": "FAIL",
+    "failing_checks": [
+     "dependencies_identified"
+    ]
+   },
+   "remaining_gaps": {
+    "count": 3,
+    "register_ids": [
+     "MGR-0110",
+     "MGR-0111",
+     "MGR-0112"
+    ]
+   },
+   "bmad_governance": "LOCAL_LGA_NOT_BMAD_GOVERNED",
+   "cobol_equivalence": "NOT_ESTABLISHED"
+  },
+  {
+   "program": "CURSMGR",
+   "file_id": "SYS-PORTFOLIO-001-FIL-0059",
+   "source": "src/programs/online/CURSMGR.cbl",
+   "source_sha256": "5e367102d18d1775c3504afff9b4d3e28cfc655ae2daad836376f63f05b125db",
+   "java_class": "revforge.app.cursmgr.Cursmgr",
+   "java_files": [
+    "java/src/revforge/app/copybooks/Sqlca.java",
+    "java/src/revforge/app/cursmgr/Cursmgr.java",
+    "java/src/revforge/app/cursmgr/CursmgrTests.java"
+   ],
+   "local_authorization": "LGA-0019",
+   "classification": "PARTIAL",
+   "classification_step19": "PARTIAL",
+   "paragraphs": {
+    "reverse": 5,
+    "mapped": 3,
+    "test_executed": 0
+   },
+   "statements": {
+    "MAPPED": 10,
+    "GAP": 10
+   },
+   "business_rules": {
+    "BLOCKED": 1,
+    "IMPLEMENTED_VERIFIED_TO_GAP": 1
+   },
+   "rule_ids": [
+    "BR-057",
+    "BR-058"
+   ],
+   "data_contracts": {
+    "ok": true,
+    "detail": "F1/F2 deliveries accepted for SQLCA, CURSMGR"
+   },
+   "dependencies": [
+    {
+     "type": "SQL_INCLUDE",
+     "to": "SQLCA",
+     "forward": "RESOLVED_IN_JAVA_BUILD"
+    }
+   ],
+   "unsupported_statements": {
+    "UNDEFINED_PROCEDURE": 3,
+    "EXTERNAL_SYSTEM_BOUNDARY": 2,
+    "UNDECLARED_NAME": 2,
+    "UNTRANSLATED_STATEMENT": 1
+   },
+   "tests": {
+    "checks": {
+     "PASS": 18,
+     "BLOCKED_AS_EXPECTED": 17,
+     "FAIL": 0,
+     "total": 35
+    },
+    "scenarios": {
+     "scenarios": 9,
+     "passed": 0,
+     "blocked_as_expected": 9,
+     "failed": 0,
+     "fixtures": "forward/pilot/app-fixtures/CURSMGR.json"
+    },
+    "statement_coverage": {
+     "statements": 21,
+     "executed_in_passing_scenarios": 0,
+     "executed_only_on_blocked_paths": 12
+    }
+   },
+   "validation": {
+    "exit_code": 0,
+    "result": "CONVERSION_VALIDATION CURSMGR (D:\\PROJECTS\\REVFORGE-Harness\\forward\\generated\\java\\CURSMGR): PASS (label PARTIAL)"
+   },
+   "readiness": {
+    "status": "FAIL",
+    "failing_checks": [
+     "copybooks_resolved",
+     "dependencies_identified"
+    ]
+   },
+   "remaining_gaps": {
+    "count": 8,
+    "register_ids": [
+     "MGR-0019",
+     "MGR-0020",
+     "MGR-0021",
+     "MGR-0022",
+     "MGR-0023",
+     "MGR-0024",
+     "MGR-0025",
+     "MGR-0026"
+    ]
+   },
+   "bmad_governance": "LOCAL_LGA_NOT_BMAD_GOVERNED",
+   "cobol_equivalence": "NOT_ESTABLISHED"
+  },
+  {
+   "program": "DB2ONLN",
+   "file_id": "SYS-PORTFOLIO-001-FIL-0060",
+   "source": "src/programs/online/DB2ONLN.cbl",
+   "source_sha256": "651889f0e13a3465466a3f671b97b122c12563a3ee251abbacddadbca0e134b4",
+   "java_class": "revforge.app.db2onln.Db2onln",
+   "java_files": [
+    "java/src/revforge/app/copybooks/Errhnd.java",
+    "java/src/revforge/app/copybooks/Sqlca.java",
+    "java/src/revforge/app/db2onln/Db2onln.java",
+    "java/src/revforge/app/db2onln/Db2onlnTests.java"
+   ],
+   "local_authorization": "LGA-0020",
+   "classification": "PARTIAL",
+   "classification_step19": "PARTIAL",
+   "paragraphs": {
+    "reverse": 11,
+    "mapped": 10,
+    "test_executed": 0
+   },
+   "statements": {
+    "MAPPED": 16,
+    "GAP": 22
+   },
+   "business_rules": {
+    "BLOCKED": 2,
+    "IMPLEMENTED_VERIFIED_TO_GAP": 1
+   },
+   "rule_ids": [
+    "BR-059",
+    "BR-060",
+    "BR-061"
+   ],
+   "data_contracts": {
+    "ok": true,
+    "detail": "F1/F2 deliveries accepted for SQLCA, ERRHND, DB2ONLN"
+   },
+   "dependencies": [
+    {
+     "type": "SQL_INCLUDE",
+     "to": "SQLCA",
+     "forward": "RESOLVED_IN_JAVA_BUILD"
+    },
+    {
+     "type": "COPY",
+     "to": "ERRHND",
+     "forward": "RESOLVED_IN_JAVA_BUILD"
+    }
+   ],
+   "unsupported_statements": {
+    "EXTERNAL_SYSTEM_BOUNDARY": 4,
+    "UNDECLARED_NAME": 3
+   },
+   "tests": {
+    "checks": {
+     "PASS": 20,
+     "BLOCKED_AS_EXPECTED": 12,
+     "FAIL": 0,
+     "total": 32
+    },
+    "scenarios": {
+     "scenarios": 5,
+     "passed": 0,
+     "blocked_as_expected": 5,
+     "failed": 0,
+     "fixtures": "forward/pilot/app-fixtures/DB2ONLN.json"
+    },
+    "statement_coverage": {
+     "statements": 38,
+     "executed_in_passing_scenarios": 0,
+     "executed_only_on_blocked_paths": 10
+    }
+   },
+   "validation": {
+    "exit_code": 0,
+    "result": "CONVERSION_VALIDATION DB2ONLN (D:\\PROJECTS\\REVFORGE-Harness\\forward\\generated\\java\\DB2ONLN): PASS (label PARTIAL)"
+   },
+   "readiness": {
+    "status": "FAIL",
+    "failing_checks": [
+     "copybooks_resolved"
+    ]
+   },
+   "remaining_gaps": {
+    "count": 7,
+    "register_ids": [
+     "MGR-0063",
+     "MGR-0064",
+     "MGR-0065",
+     "MGR-0066",
+     "MGR-0067",
+     "MGR-0068",
+     "MGR-0069"
+    ]
+   },
+   "bmad_governance": "LOCAL_LGA_NOT_BMAD_GOVERNED",
+   "cobol_equivalence": "NOT_ESTABLISHED"
+  },
+  {
+   "program": "DB2RECV",
+   "file_id": "SYS-PORTFOLIO-001-FIL-0061",
+   "source": "src/programs/online/DB2RECV.cbl",
+   "source_sha256": "ca0e1dc9a3e8a59c093677e1e650913ffb0807f8133df723bba5547c4fa21c52",
+   "java_class": "revforge.app.db2recv.Db2recv",
+   "java_files": [
+    "java/src/revforge/app/copybooks/Db2req.java",
+    "java/src/revforge/app/copybooks/Errhnd.java",
+    "java/src/revforge/app/copybooks/Sqlca.java",
+    "java/src/revforge/app/db2recv/Db2recv.java",
+    "java/src/revforge/app/db2recv/Db2recvTests.java"
+   ],
+   "local_authorization": "LGA-0021",
+   "classification": "PARTIAL",
+   "classification_step19": "PARTIAL",
+   "paragraphs": {
+    "reverse": 11,
+    "mapped": 10,
+    "test_executed": 0
+   },
+   "statements": {
+    "MAPPED": 27,
+    "GAP": 18
+   },
+   "business_rules": {
+    "BLOCKED": 2,
+    "IMPLEMENTED_NOT_EXERCISED": 4
+   },
+   "rule_ids": [
+    "BR-062",
+    "BR-063",
+    "BR-064",
+    "BR-065",
+    "BR-066",
+    "BR-067"
+   ],
+   "data_contracts": {
+    "ok": true,
+    "detail": "F1/F2 deliveries accepted for SQLCA, DB2REQ, ERRHND, DB2ONLN, DB2RECV, ERRHNDL"
+   },
+   "dependencies": [
+    {
+     "type": "SQL_INCLUDE",
+     "to": "SQLCA",
+     "forward": "RESOLVED_IN_JAVA_BUILD"
+    },
+    {
+     "type": "COPY",
+     "to": "ERRHND",
+     "forward": "RESOLVED_IN_JAVA_BUILD"
+    },
+    {
+     "type": "COPY",
+     "to": "DB2REQ",
+     "forward": "RESOLVED_IN_JAVA_BUILD"
+    },
+    {
+     "type": "CICS_LINK",
+     "to": "DB2ONLN",
+     "forward": "BOUNDARY_GAP (EXEC CICS LINK)"
+    },
+    {
+     "type": "CICS_LINK",
+     "to": "ERRHNDL",
+     "forward": "BOUNDARY_GAP (EXEC CICS LINK)"
+    }
+   ],
+   "unsupported_statements": {
+    "EXTERNAL_SYSTEM_BOUNDARY": 5,
+    "UNDECLARED_NAME": 3,
+    "UNSUPPORTED_DATA": 1
+   },
+   "tests": {
+    "checks": {
+     "PASS": 26,
+     "BLOCKED_AS_EXPECTED": 13,
+     "FAIL": 0,
+     "total": 39
+    },
+    "scenarios": {
+     "scenarios": 4,
+     "passed": 0,
+     "blocked_as_expected": 4,
+     "failed": 0,
+     "fixtures": "forward/pilot/app-fixtures/DB2RECV.json"
+    },
+    "statement_coverage": {
+     "statements": 45,
+     "executed_in_passing_scenarios": 0,
+     "executed_only_on_blocked_paths": 11
+    }
+   },
+   "validation": {
+    "exit_code": 0,
+    "result": "CONVERSION_VALIDATION DB2RECV (D:\\PROJECTS\\REVFORGE-Harness\\forward\\generated\\java\\DB2RECV): PASS (label PARTIAL)"
+   },
+   "readiness": {
+    "status": "FAIL",
+    "failing_checks": [
+     "copybooks_resolved",
+     "dependencies_identified"
+    ]
+   },
+   "remaining_gaps": {
+    "count": 9,
+    "register_ids": [
+     "MGR-0070",
+     "MGR-0071",
+     "MGR-0072",
+     "MGR-0073",
+     "MGR-0074",
+     "MGR-0075",
+     "MGR-0076",
+     "MGR-0077",
+     "MGR-0078"
+    ]
+   },
+   "bmad_governance": "LOCAL_LGA_NOT_BMAD_GOVERNED",
+   "cobol_equivalence": "NOT_ESTABLISHED"
+  },
+  {
+   "program": "ERRHNDL",
+   "file_id": "SYS-PORTFOLIO-001-FIL-0062",
+   "source": "src/programs/online/ERRHNDL.cbl",
+   "source_sha256": "11304d2864669b12837bc4b68fdf7638f12212a65f59d9f57831288a927d5c0a",
+   "java_class": "revforge.app.errhndl.Errhndl",
+   "java_files": [
+    "java/src/revforge/app/copybooks/Errhnd.java",
+    "java/src/revforge/app/copybooks/Sqlca.java",
+    "java/src/revforge/app/errhndl/Errhndl.java",
+    "java/src/revforge/app/errhndl/ErrhndlTests.java"
+   ],
+   "local_authorization": "LGA-0022",
+   "classification": "PARTIAL",
+   "classification_step19": "PARTIAL",
+   "paragraphs": {
+    "reverse": 9,
+    "mapped": 8,
+    "test_executed": 0
+   },
+   "statements": {
+    "MAPPED": 8,
+    "GAP": 24
+   },
+   "business_rules": {
+    "BLOCKED": 2
+   },
+   "rule_ids": [
+    "BR-068",
+    "BR-069"
+   ],
+   "data_contracts": {
+    "ok": true,
+    "detail": "F1/F2 deliveries accepted for SQLCA, ERRHND, ERRHNDL"
+   },
+   "dependencies": [
+    {
+     "type": "COPY",
+     "to": "ERRHND",
+     "forward": "RESOLVED_IN_JAVA_BUILD"
+    },
+    {
+     "type": "SQL_INCLUDE",
+     "to": "SQLCA",
+     "forward": "RESOLVED_IN_JAVA_BUILD"
+    },
+    {
+     "type": "COPY",
+     "to": "ERRHND",
+     "forward": "RESOLVED_IN_JAVA_BUILD"
+    }
+   ],
+   "unsupported_statements": {
+    "EXTERNAL_SYSTEM_BOUNDARY": 2,
+    "UNSUPPORTED_DATA": 2,
+    "UNDECLARED_NAME": 13
+   },
+   "tests": {
+    "checks": {
+     "PASS": 19,
+     "BLOCKED_AS_EXPECTED": 18,
+     "FAIL": 0,
+     "total": 37
+    },
+    "scenarios": {
+     "scenarios": 1,
+     "passed": 0,
+     "blocked_as_expected": 1,
+     "failed": 0,
+     "fixtures": "forward/pilot/app-fixtures/ERRHNDL.json"
+    },
+    "statement_coverage": {
+     "statements": 32,
+     "executed_in_passing_scenarios": 0,
+     "executed_only_on_blocked_paths": 2
+    }
+   },
+   "validation": {
+    "exit_code": 0,
+    "result": "CONVERSION_VALIDATION ERRHNDL (D:\\PROJECTS\\REVFORGE-Harness\\forward\\generated\\java\\ERRHNDL): PASS (label PARTIAL)"
+   },
+   "readiness": {
+    "status": "FAIL",
+    "failing_checks": [
+     "copybooks_resolved",
+     "dependencies_identified"
+    ]
+   },
+   "remaining_gaps": {
+    "count": 17,
+    "register_ids": [
+     "MGR-0093",
+     "MGR-0094",
+     "MGR-0095",
+     "MGR-0096",
+     "MGR-0097",
+     "MGR-0098",
+     "MGR-0099",
+     "MGR-0100",
+     "MGR-0101",
+     "MGR-0102",
+     "MGR-0103",
+     "MGR-0104",
+     "MGR-0105",
+     "MGR-0106",
+     "MGR-0107",
+     "MGR-0108",
+     "MGR-0109"
+    ]
+   },
+   "bmad_governance": "LOCAL_LGA_NOT_BMAD_GOVERNED",
+   "cobol_equivalence": "NOT_ESTABLISHED"
+  },
+  {
+   "program": "INQHIST",
+   "file_id": "SYS-PORTFOLIO-001-FIL-0063",
+   "source": "src/programs/online/INQHIST.cbl",
+   "source_sha256": "ab4b4e2072fb05e3b3e4244f3498bdab9f036a314df93c904c18ec8d29edc48b",
+   "java_class": "revforge.app.inqhist.Inqhist",
+   "java_files": [
+    "java/src/revforge/app/copybooks/Inqcom.java",
+    "java/src/revforge/app/copybooks/Sqlca.java",
+    "java/src/revforge/app/inqhist/Inqhist.java",
+    "java/src/revforge/app/inqhist/InqhistTests.java"
+   ],
+   "local_authorization": "LGA-0023",
+   "classification": "PARTIAL",
+   "classification_step19": "PARTIAL",
+   "paragraphs": {
+    "reverse": 13,
+    "mapped": 12,
+    "test_executed": 0
+   },
+   "statements": {
+    "MAPPED": 30,
+    "GAP": 14
+   },
+   "business_rules": {
+    "IMPLEMENTED_NOT_EXERCISED": 2
+   },
+   "rule_ids": [
+    "BR-070",
+    "BR-071"
+   ],
+   "data_contracts": {
+    "ok": true,
+    "detail": "F1/F2 deliveries accepted for SQLCA, DB2REQ, ERRHND, INQCOM, CURSMGR, DB2ONLN, DB2RECV, ERRHNDL, INQHIST"
+   },
+   "dependencies": [
+    {
+     "type": "COPY",
+     "to": "INQCOM",
+     "forward": "RESOLVED_IN_JAVA_BUILD"
+    },
+    {
+     "type": "SQL_INCLUDE",
+     "to": "SQLCA",
+     "forward": "RESOLVED_IN_JAVA_BUILD"
+    },
+    {
+     "type": "COPY",
+     "to": "INQCOM",
+     "forward": "RESOLVED_IN_JAVA_BUILD"
+    },
+    {
+     "type": "CICS_LINK",
+     "to": "DB2ONLN",
+     "forward": "BOUNDARY_GAP (EXEC CICS LINK)"
+    },
+    {
+     "type": "CICS_LINK",
+     "to": "DB2RECV",
+     "forward": "BOUNDARY_GAP (EXEC CICS LINK)"
+    },
+    {
+     "type": "CICS_LINK",
+     "to": "CURSMGR",
+     "forward": "BOUNDARY_GAP (EXEC CICS LINK)"
+    },
+    {
+     "type": "CICS_LINK",
+     "to": "CURSMGR",
+     "forward": "BOUNDARY_GAP (EXEC CICS LINK)"
+    },
+    {
+     "type": "CICS_LINK",
+     "to": "CURSMGR",
+     "forward": "BOUNDARY_GAP (EXEC CICS LINK)"
+    },
+    {
+     "type": "CICS_LINK",
+     "to": "CURSMGR",
+     "forward": "BOUNDARY_GAP (EXEC CICS LINK)"
+    }
+   ],
+   "unsupported_statements": {
+    "EXTERNAL_SYSTEM_BOUNDARY": 9,
+    "UNSUPPORTED_DATA": 2,
+    "UNDECLARED_NAME": 3
+   },
+   "tests": {
+    "checks": {
+     "PASS": 23,
+     "BLOCKED_AS_EXPECTED": 16,
+     "FAIL": 0,
+     "total": 39
+    },
+    "scenarios": {
+     "scenarios": 2,
+     "passed": 0,
+     "blocked_as_expected": 2,
+     "failed": 0,
+     "fixtures": "forward/pilot/app-fixtures/INQHIST.json"
+    },
+    "statement_coverage": {
+     "statements": 44,
+     "executed_in_passing_scenarios": 0,
+     "executed_only_on_blocked_paths": 2
+    }
+   },
+   "validation": {
+    "exit_code": 0,
+    "result": "CONVERSION_VALIDATION INQHIST (D:\\PROJECTS\\REVFORGE-Harness\\forward\\generated\\java\\INQHIST): PASS (label PARTIAL)"
+   },
+   "readiness": {
+    "status": "FAIL",
+    "failing_checks": [
+     "copybooks_resolved",
+     "dependencies_identified"
+    ]
+   },
+   "remaining_gaps": {
+    "count": 14,
+    "register_ids": [
+     "MGR-0140",
+     "MGR-0141",
+     "MGR-0142",
+     "MGR-0143",
+     "MGR-0144",
+     "MGR-0145",
+     "MGR-0146",
+     "MGR-0147",
+     "MGR-0148",
+     "MGR-0149",
+     "MGR-0150",
+     "MGR-0151",
+     "MGR-0152",
+     "MGR-0153"
+    ]
+   },
+   "bmad_governance": "LOCAL_LGA_NOT_BMAD_GOVERNED",
+   "cobol_equivalence": "NOT_ESTABLISHED"
+  },
+  {
+   "program": "INQONLN",
+   "file_id": "SYS-PORTFOLIO-001-FIL-0064",
+   "source": "src/programs/online/INQONLN.cbl",
+   "source_sha256": "a05307ca63e1bc02e3765ac98b3b56c1063ea1751998c70697d933fcf9ce1963",
+   "java_class": "revforge.app.inqonln.Inqonln",
+   "java_files": [
+    "java/src/revforge/app/copybooks/Errhnd.java",
+    "java/src/revforge/app/copybooks/Inqcom.java",
+    "java/src/revforge/app/inqonln/Inqonln.java",
+    "java/src/revforge/app/inqonln/InqonlnTests.java"
+   ],
+   "local_authorization": "LGA-0024",
+   "classification": "PARTIAL",
+   "classification_step19": "PARTIAL",
+   "paragraphs": {
+    "reverse": 13,
+    "mapped": 12,
+    "test_executed": 0
+   },
+   "statements": {
+    "GAP": 24,
+    "MAPPED": 21
+   },
+   "business_rules": {
+    "BLOCKED": 1,
+    "IMPLEMENTED_NOT_EXERCISED": 4
+   },
+   "rule_ids": [
+    "BR-072",
+    "BR-073",
+    "BR-074",
+    "BR-075",
+    "BR-076"
+   ],
+   "data_contracts": {
+    "ok": true,
+    "detail": "F1/F2 deliveries accepted for POSREC, SQLCA, DB2REQ, ERRHND, INQCOM, CURSMGR, DB2ONLN, DB2RECV, ERRHNDL, INQHIST, INQONLN, INQPORT, SECMGR"
+   },
+   "dependencies": [
+    {
+     "type": "COPY",
+     "to": "INQCOM",
+     "forward": "RESOLVED_IN_JAVA_BUILD"
+    },
+    {
+     "type": "COPY",
+     "to": "ERRHND",
+     "forward": "RESOLVED_IN_JAVA_BUILD"
+    },
+    {
+     "type": "COPY",
+     "to": "INQCOM",
+     "forward": "RESOLVED_IN_JAVA_BUILD"
+    },
+    {
+     "type": "CICS_LINK",
+     "to": "INQPORT",
+     "forward": "BOUNDARY_GAP (EXEC CICS LINK)"
+    },
+    {
+     "type": "CICS_LINK",
+     "to": "INQHIST",
+     "forward": "BOUNDARY_GAP (EXEC CICS LINK)"
+    },
+    {
+     "type": "CICS_LINK",
+     "to": "ERRHNDL",
+     "forward": "BOUNDARY_GAP (EXEC CICS LINK)"
+    },
+    {
+     "type": "CICS_LINK",
+     "to": "SECMGR",
+     "forward": "BOUNDARY_GAP (EXEC CICS LINK)"
+    },
+    {
+     "type": "CICS_LINK",
+     "to": "SECMGR",
+     "forward": "BOUNDARY_GAP (EXEC CICS LINK)"
+    },
+    {
+     "type": "CICS_LINK",
+     "to": "SECMGR",
+     "forward": "BOUNDARY_GAP (EXEC CICS LINK)"
+    }
+   ],
+   "unsupported_statements": {
+    "EXTERNAL_SYSTEM_BOUNDARY": 13,
+    "UNSUPPORTED_DATA": 1,
+    "UNDECLARED_NAME": 5
+   },
+   "tests": {
+    "checks": {
+     "PASS": 17,
+     "BLOCKED_AS_EXPECTED": 21,
+     "FAIL": 0,
+     "total": 38
+    },
+    "scenarios": {
+     "scenarios": 2,
+     "passed": 0,
+     "blocked_as_expected": 2,
+     "failed": 0,
+     "fixtures": "forward/pilot/app-fixtures/INQONLN.json"
+    },
+    "statement_coverage": {
+     "statements": 45,
+     "executed_in_passing_scenarios": 0,
+     "executed_only_on_blocked_paths": 1
+    }
+   },
+   "validation": {
+    "exit_code": 0,
+    "result": "CONVERSION_VALIDATION INQONLN (D:\\PROJECTS\\REVFORGE-Harness\\forward\\generated\\java\\INQONLN): PASS (label PARTIAL)"
+   },
+   "readiness": {
+    "status": "FAIL",
+    "failing_checks": [
+     "dependencies_identified"
+    ]
+   },
+   "remaining_gaps": {
+    "count": 19,
+    "register_ids": [
+     "MGR-0154",
+     "MGR-0155",
+     "MGR-0156",
+     "MGR-0157",
+     "MGR-0158",
+     "MGR-0159",
+     "MGR-0160",
+     "MGR-0161",
+     "MGR-0162",
+     "MGR-0163",
+     "MGR-0164",
+     "MGR-0165",
+     "MGR-0166",
+     "MGR-0167",
+     "MGR-0168",
+     "MGR-0169",
+     "MGR-0170",
+     "MGR-0171",
+     "MGR-0172"
+    ]
+   },
+   "bmad_governance": "LOCAL_LGA_NOT_BMAD_GOVERNED",
+   "cobol_equivalence": "NOT_ESTABLISHED"
+  },
+  {
+   "program": "INQPORT",
+   "file_id": "SYS-PORTFOLIO-001-FIL-0065",
+   "source": "src/programs/online/INQPORT.cbl",
+   "source_sha256": "5c752c9243105066d0e0f055501217a99b198d94b577b41c8de2d52a305b4bdc",
+   "java_class": "revforge.app.inqport.Inqport",
+   "java_files": [
+    "java/src/revforge/app/copybooks/Inqcom.java",
+    "java/src/revforge/app/copybooks/Posrec.java",
+    "java/src/revforge/app/inqport/Inqport.java",
+    "java/src/revforge/app/inqport/InqportTests.java"
+   ],
+   "local_authorization": "LGA-0025",
+   "classification": "PARTIAL",
+   "classification_step19": "PARTIAL",
+   "paragraphs": {
+    "reverse": 11,
+    "mapped": 10,
+    "test_executed": 0
+   },
+   "statements": {
+    "MAPPED": 10,
+    "GAP": 15
+   },
+   "business_rules": {
+    "IMPLEMENTED_NOT_EXERCISED": 1
+   },
+   "rule_ids": [
+    "BR-077"
+   ],
+   "data_contracts": {
+    "ok": true,
+    "detail": "F1/F2 deliveries accepted for POSREC, INQCOM, INQPORT"
+   },
+   "dependencies": [
+    {
+     "type": "COPY",
+     "to": "INQCOM",
+     "forward": "RESOLVED_IN_JAVA_BUILD"
+    },
+    {
+     "type": "COPY",
+     "to": "POSREC",
+     "forward": "RESOLVED_IN_JAVA_BUILD"
+    },
+    {
+     "type": "SQL_INCLUDE",
+     "to": "SQLPOS",
+     "forward": "UNRESOLVED"
+    },
+    {
+     "type": "COPY",
+     "to": "INQCOM",
+     "forward": "RESOLVED_IN_JAVA_BUILD"
+    }
+   ],
+   "unsupported_statements": {
+    "EXTERNAL_SYSTEM_BOUNDARY": 4,
+    "UNSUPPORTED_DATA": 4,
+    "UNDECLARED_NAME": 5
+   },
+   "tests": {
+    "checks": {
+     "PASS": 19,
+     "BLOCKED_AS_EXPECTED": 15,
+     "FAIL": 0,
+     "total": 34
+    },
+    "scenarios": {
+     "scenarios": 2,
+     "passed": 0,
+     "blocked_as_expected": 2,
+     "failed": 0,
+     "fixtures": "forward/pilot/app-fixtures/INQPORT.json"
+    },
+    "statement_coverage": {
+     "statements": 25,
+     "executed_in_passing_scenarios": 0,
+     "executed_only_on_blocked_paths": 2
+    }
+   },
+   "validation": {
+    "exit_code": 0,
+    "result": "CONVERSION_VALIDATION INQPORT (D:\\PROJECTS\\REVFORGE-Harness\\forward\\generated\\java\\INQPORT): PASS (label PARTIAL)"
+   },
+   "readiness": {
+    "status": "FAIL",
+    "failing_checks": [
+     "copybooks_resolved",
+     "dependencies_identified"
+    ]
+   },
+   "remaining_gaps": {
+    "count": 13,
+    "register_ids": [
+     "MGR-0173",
+     "MGR-0174",
+     "MGR-0175",
+     "MGR-0176",
+     "MGR-0177",
+     "MGR-0178",
+     "MGR-0179",
+     "MGR-0180",
+     "MGR-0181",
+     "MGR-0182",
+     "MGR-0183",
+     "MGR-0184",
+     "MGR-0185"
+    ]
+   },
+   "bmad_governance": "LOCAL_LGA_NOT_BMAD_GOVERNED",
+   "cobol_equivalence": "NOT_ESTABLISHED"
+  },
+  {
+   "program": "SECMGR",
+   "file_id": "SYS-PORTFOLIO-001-FIL-0066",
+   "source": "src/programs/online/SECMGR.cbl",
+   "source_sha256": "74281106e716079b408a5a597746a5a2c201b469820396b651fc1adc6ae37370",
+   "java_class": "revforge.app.secmgr.Secmgr",
+   "java_files": [
+    "java/src/revforge/app/copybooks/Errhnd.java",
+    "java/src/revforge/app/copybooks/Sqlca.java",
+    "java/src/revforge/app/secmgr/Secmgr.java",
+    "java/src/revforge/app/secmgr/SecmgrTests.java"
+   ],
+   "local_authorization": "LGA-0026",
+   "classification": "PARTIAL",
+   "classification_step19": "PARTIAL",
+   "paragraphs": {
+    "reverse": 7,
+    "mapped": 6,
+    "test_executed": 0
+   },
+   "statements": {
+    "MAPPED": 10,
+    "GAP": 23
+   },
+   "business_rules": {
+    "BLOCKED": 3
+   },
+   "rule_ids": [
+    "BR-078",
+    "BR-079",
+    "BR-080"
+   ],
+   "data_contracts": {
+    "ok": true,
+    "detail": "F1/F2 deliveries accepted for SQLCA, ERRHND, SECMGR"
+   },
+   "dependencies": [
+    {
+     "type": "SQL_INCLUDE",
+     "to": "SQLCA",
+     "forward": "RESOLVED_IN_JAVA_BUILD"
+    },
+    {
+     "type": "COPY",
+     "to": "ERRHND",
+     "forward": "RESOLVED_IN_JAVA_BUILD"
+    }
+   ],
+   "unsupported_statements": {
+    "EXTERNAL_SYSTEM_BOUNDARY": 5,
+    "UNDECLARED_NAME": 3
+   },
+   "tests": {
+    "checks": {
+     "PASS": 16,
+     "BLOCKED_AS_EXPECTED": 13,
+     "FAIL": 0,
+     "total": 29
+    },
+    "scenarios": {
+     "scenarios": 5,
+     "passed": 0,
+     "blocked_as_expected": 5,
+     "failed": 0,
+     "fixtures": "forward/pilot/app-fixtures/SECMGR.json"
+    },
+    "statement_coverage": {
+     "statements": 33,
+     "executed_in_passing_scenarios": 0,
+     "executed_only_on_blocked_paths": 9
+    }
+   },
+   "validation": {
+    "exit_code": 0,
+    "result": "CONVERSION_VALIDATION SECMGR (D:\\PROJECTS\\REVFORGE-Harness\\forward\\generated\\java\\SECMGR): PASS (label PARTIAL)"
+   },
+   "readiness": {
+    "status": "FAIL",
+    "failing_checks": [
+     "copybooks_resolved",
+     "dependencies_identified"
+    ]
+   },
+   "remaining_gaps": {
+    "count": 8,
+    "register_ids": [
+     "MGR-0303",
+     "MGR-0304",
+     "MGR-0305",
+     "MGR-0306",
+     "MGR-0307",
+     "MGR-0308",
+     "MGR-0309",
+     "MGR-0310"
+    ]
+   },
+   "bmad_governance": "LOCAL_LGA_NOT_BMAD_GOVERNED",
+   "cobol_equivalence": "NOT_ESTABLISHED"
+  },
+  {
+   "program": "PORTADD",
+   "file_id": "SYS-PORTFOLIO-001-FIL-0067",
+   "source": "src/programs/portfolio/PORTADD.cbl",
+   "source_sha256": "86cd685a216b37d2003e7dac1ae482d20e92268edc41e48495b49e0c39c21add",
+   "java_class": "revforge.app.portadd.Portadd",
+   "java_files": [
+    "java/src/revforge/app/copybooks/Portflio.java",
+    "java/src/revforge/app/portadd/Portadd.java",
+    "java/src/revforge/app/portadd/PortaddTests.java"
+   ],
+   "local_authorization": "LGA-0027",
+   "classification": "PARTIAL",
+   "classification_step19": "PARTIAL",
+   "paragraphs": {
+    "reverse": 5,
+    "mapped": 5,
+    "test_executed": 0
+   },
+   "statements": {
+    "MAPPED": 21,
+    "GAP": 12
+   },
+   "business_rules": {
+    "BLOCKED": 2,
+    "IMPLEMENTED_NOT_EXERCISED": 2,
+    "IMPLEMENTED_VERIFIED_TO_GAP": 1
+   },
+   "rule_ids": [
+    "BR-081",
+    "BR-082",
+    "BR-083",
+    "BR-084",
+    "BR-085"
+   ],
+   "data_contracts": {
+    "ok": true,
+    "detail": "F1/F2 deliveries accepted for PORTFLIO, PORTADD"
+   },
+   "dependencies": [
+    {
+     "type": "COPY",
+     "to": "PORTFLIO",
+     "forward": "RESOLVED_IN_JAVA_BUILD"
+    },
+    {
+     "type": "COPY",
+     "to": "PORTFLIO",
+     "forward": "RESOLVED_IN_JAVA_BUILD"
+    }
+   ],
+   "unsupported_statements": {
+    "UNDECLARED_NAME": 7
+   },
+   "tests": {
+    "checks": {
+     "PASS": 27,
+     "BLOCKED_AS_EXPECTED": 12,
+     "FAIL": 0,
+     "total": 39
+    },
+    "scenarios": {
+     "scenarios": 5,
+     "passed": 0,
+     "blocked_as_expected": 5,
+     "failed": 0,
+     "fixtures": "forward/pilot/app-fixtures/PORTADD.json"
+    },
+    "statement_coverage": {
+     "statements": 33,
+     "executed_in_passing_scenarios": 0,
+     "executed_only_on_blocked_paths": 16
+    }
+   },
+   "validation": {
+    "exit_code": 0,
+    "result": "CONVERSION_VALIDATION PORTADD (D:\\PROJECTS\\REVFORGE-Harness\\forward\\generated\\java\\PORTADD): PASS (label PARTIAL)"
+   },
+   "readiness": {
+    "status": "PASS",
+    "failing_checks": []
+   },
+   "remaining_gaps": {
+    "count": 7,
+    "register_ids": [
+     "MGR-0186",
+     "MGR-0187",
+     "MGR-0188",
+     "MGR-0189",
+     "MGR-0190",
+     "MGR-0191",
+     "MGR-0192"
+    ]
+   },
+   "bmad_governance": "LOCAL_LGA_NOT_BMAD_GOVERNED",
+   "cobol_equivalence": "NOT_ESTABLISHED"
+  },
+  {
+   "program": "PORTDEL",
+   "file_id": "SYS-PORTFOLIO-001-FIL-0068",
+   "source": "src/programs/portfolio/PORTDEL.cbl",
+   "source_sha256": "baaab39ebebed361185d44f7551a6e566d46abd6ec5ecad896a56e2cc2bcdc84",
+   "java_class": "revforge.app.portdel.Portdel",
+   "java_files": [
+    "java/src/revforge/app/copybooks/Portflio.java",
+    "java/src/revforge/app/portdel/Portdel.java",
+    "java/src/revforge/app/portdel/PortdelTests.java"
+   ],
+   "local_authorization": "LGA-0028",
+   "classification": "PARTIAL",
+   "classification_step19": "PARTIAL",
+   "paragraphs": {
+    "reverse": 7,
+    "mapped": 7,
+    "test_executed": 5
+   },
+   "statements": {
+    "MAPPED": 42,
+    "GAP": 1
+   },
+   "business_rules": {
+    "IMPLEMENTED_VERIFIED": 2,
+    "IMPLEMENTED_VERIFIED_TO_GAP": 3
+   },
+   "rule_ids": [
+    "BR-086",
+    "BR-087",
+    "BR-088",
+    "BR-089",
+    "BR-154"
+   ],
+   "data_contracts": {
+    "ok": true,
+    "detail": "F1/F2 deliveries accepted for PORTFLIO, PORTDEL"
+   },
+   "dependencies": [
+    {
+     "type": "COPY",
+     "to": "PORTFLIO",
+     "forward": "RESOLVED_IN_JAVA_BUILD"
+    }
+   ],
+   "unsupported_statements": {
+    "COMPILER_OPTION_DEPENDENT": 1
+   },
+   "tests": {
+    "checks": {
+     "PASS": 27,
+     "BLOCKED_AS_EXPECTED": 4,
+     "FAIL": 0,
+     "total": 31
+    },
+    "scenarios": {
+     "scenarios": 5,
+     "passed": 2,
+     "blocked_as_expected": 3,
+     "failed": 0,
+     "fixtures": "forward/pilot/app-fixtures/PORTDEL.json"
+    },
+    "statement_coverage": {
+     "statements": 43,
+     "executed_in_passing_scenarios": 22,
+     "executed_only_on_blocked_paths": 6
+    }
+   },
+   "validation": {
+    "exit_code": 0,
+    "result": "CONVERSION_VALIDATION PORTDEL (D:\\PROJECTS\\REVFORGE-Harness\\forward\\generated\\java\\PORTDEL): PASS (label PARTIAL)"
+   },
+   "readiness": {
+    "status": "FAIL",
+    "failing_checks": [
+     "dependencies_identified"
+    ]
+   },
+   "remaining_gaps": {
+    "count": 1,
+    "register_ids": [
+     "MGR-0193"
+    ]
+   },
+   "bmad_governance": "LOCAL_LGA_NOT_BMAD_GOVERNED",
+   "cobol_equivalence": "NOT_ESTABLISHED"
+  },
+  {
+   "program": "PORTMSTR",
+   "file_id": "SYS-PORTFOLIO-001-FIL-0069",
+   "source": "src/programs/portfolio/PORTMSTR.cbl",
+   "source_sha256": "9d1c7f7740ef43c045a43fa61136e51c552b9222b261ff5b81a433a818fb3cb3",
+   "java_class": "revforge.app.portmstr.Portmstr",
+   "java_files": [
+    "java/src/revforge/app/portmstr/Portmstr.java",
+    "java/src/revforge/app/portmstr/PortmstrTests.java"
+   ],
+   "local_authorization": "LGA-0029",
+   "classification": "PARTIAL",
+   "classification_step19": "PARTIAL",
+   "paragraphs": {
+    "reverse": 11,
+    "mapped": 11,
+    "test_executed": 9
+   },
+   "statements": {
+    "MAPPED": 73,
+    "GAP": 26
+   },
+   "business_rules": {
+    "IMPLEMENTED_VERIFIED": 8,
+    "BLOCKED": 1
+   },
+   "rule_ids": [
+    "BR-090",
+    "BR-091",
+    "BR-092",
+    "BR-093",
+    "BR-094",
+    "BR-095",
+    "BR-096",
+    "BR-097",
+    "BR-098"
+   ],
+   "data_contracts": {
+    "ok": true,
+    "detail": "F1/F2 deliveries accepted for AUDITLOG, ERRHAND, AUDPROC, ERRPROC, PORTMSTR"
+   },
+   "dependencies": [
+    {
+     "type": "STATIC_CALL",
+     "to": "ERRPROC",
+     "forward": "GAP (CALL site is a forward gap; callee converted)"
+    },
+    {
+     "type": "STATIC_CALL",
+     "to": "AUDPROC",
+     "forward": "GAP (CALL site is a forward gap; callee converted)"
+    }
+   ],
+   "unsupported_statements": {
+    "UNDECLARED_NAME": 20
+   },
+   "tests": {
+    "checks": {
+     "PASS": 25,
+     "BLOCKED_AS_EXPECTED": 22,
+     "FAIL": 0,
+     "total": 47
+    },
+    "scenarios": {
+     "scenarios": 10,
+     "passed": 8,
+     "blocked_as_expected": 2,
+     "failed": 0,
+     "fixtures": "forward/pilot/app-fixtures/PORTMSTR.json"
+    },
+    "statement_coverage": {
+     "statements": 99,
+     "executed_in_passing_scenarios": 52,
+     "executed_only_on_blocked_paths": 3
+    }
+   },
+   "validation": {
+    "exit_code": 0,
+    "result": "CONVERSION_VALIDATION PORTMSTR (D:\\PROJECTS\\REVFORGE-Harness\\forward\\generated\\java\\PORTMSTR): PASS (label PARTIAL)"
+   },
+   "readiness": {
+    "status": "FAIL",
+    "failing_checks": [
+     "dependencies_identified"
+    ]
+   },
+   "remaining_gaps": {
+    "count": 20,
+    "register_ids": [
+     "MGR-0194",
+     "MGR-0195",
+     "MGR-0196",
+     "MGR-0197",
+     "MGR-0198",
+     "MGR-0199",
+     "MGR-0200",
+     "MGR-0201",
+     "MGR-0202",
+     "MGR-0203",
+     "MGR-0204",
+     "MGR-0205",
+     "MGR-0206",
+     "MGR-0207",
+     "MGR-0208",
+     "MGR-0209",
+     "MGR-0210",
+     "MGR-0211",
+     "MGR-0212",
+     "MGR-0213"
+    ]
+   },
+   "bmad_governance": "LOCAL_LGA_NOT_BMAD_GOVERNED",
+   "cobol_equivalence": "NOT_ESTABLISHED"
+  },
+  {
+   "program": "PORTREAD",
+   "file_id": "SYS-PORTFOLIO-001-FIL-0070",
+   "source": "src/programs/portfolio/PORTREAD.cbl",
+   "source_sha256": "1e90eef73115c6065dfeee8ca7a0ad8cff96a22cfa50789c62baec4ec22b5aa1",
+   "java_class": "revforge.app.portread.Portread",
+   "java_files": [
+    "java/src/revforge/app/copybooks/Portflio.java",
+    "java/src/revforge/app/portread/Portread.java",
+    "java/src/revforge/app/portread/PortreadTests.java"
+   ],
+   "local_authorization": "LGA-0030",
+   "classification": "COMPLETE",
+   "classification_step19": "FULLY_IMPLEMENTED",
+   "paragraphs": {
+    "reverse": 5,
+    "mapped": 5,
+    "test_executed": 5
+   },
+   "statements": {
+    "MAPPED": 24
+   },
+   "business_rules": {
+    "IMPLEMENTED_VERIFIED": 2
+   },
+   "rule_ids": [
+    "BR-099",
+    "BR-100"
+   ],
+   "data_contracts": {
+    "ok": true,
+    "detail": "F1/F2 deliveries accepted for PORTFLIO, PORTREAD"
+   },
+   "dependencies": [
+    {
+     "type": "COPY",
+     "to": "PORTFLIO",
+     "forward": "RESOLVED_IN_JAVA_BUILD"
+    }
+   ],
+   "unsupported_statements": {},
+   "tests": {
+    "checks": {
+     "PASS": 19,
+     "BLOCKED_AS_EXPECTED": 0,
+     "FAIL": 0,
+     "total": 19
+    },
+    "scenarios": {
+     "scenarios": 2,
+     "passed": 2,
+     "blocked_as_expected": 0,
+     "failed": 0,
+     "fixtures": "forward/pilot/app-fixtures/PORTREAD.json"
+    },
+    "statement_coverage": {
+     "statements": 24,
+     "executed_in_passing_scenarios": 21,
+     "executed_only_on_blocked_paths": 0
+    }
+   },
+   "validation": {
+    "exit_code": 0,
+    "result": "CONVERSION_VALIDATION PORTREAD (D:\\PROJECTS\\REVFORGE-Harness\\forward\\generated\\java\\PORTREAD): PASS (label COMPLETE)"
+   },
+   "readiness": {
+    "status": "PASS",
+    "failing_checks": []
+   },
+   "remaining_gaps": {
+    "count": 0,
+    "register_ids": []
+   },
+   "bmad_governance": "LOCAL_LGA_NOT_BMAD_GOVERNED",
+   "cobol_equivalence": "NOT_ESTABLISHED"
+  },
+  {
+   "program": "PORTTEST",
+   "file_id": "SYS-PORTFOLIO-001-FIL-0071",
+   "source": "src/programs/portfolio/PORTTEST.cbl",
+   "source_sha256": "5cee7bdd6395f524b715c88c71f5e3120fb18dfc3fde9cdf7acc106b47f69df2",
+   "java_class": "revforge.app.porttest.Porttest",
+   "java_files": [
+    "java/src/revforge/app/copybooks/Portflio.java",
+    "java/src/revforge/app/porttest/Porttest.java",
+    "java/src/revforge/app/porttest/PorttestTests.java"
+   ],
+   "local_authorization": "LGA-0031",
+   "classification": "PARTIAL",
+   "classification_step19": "PARTIAL",
+   "paragraphs": {
+    "reverse": 8,
+    "mapped": 8,
+    "test_executed": 3
+   },
+   "statements": {
+    "MAPPED": 29,
+    "GAP": 3
+   },
+   "business_rules": {
+    "IMPLEMENTED_VERIFIED_TO_GAP": 1,
+    "IMPLEMENTED_NOT_EXERCISED": 1,
+    "BLOCKED": 1
+   },
+   "rule_ids": [
+    "BR-101",
+    "BR-102",
+    "BR-103"
+   ],
+   "data_contracts": {
+    "ok": true,
+    "detail": "F1/F2 deliveries accepted for ERRHAND, PORTFLIO, PORTTEST"
+   },
+   "dependencies": [
+    {
+     "type": "COPY",
+     "to": "PORTFLIO",
+     "forward": "RESOLVED_IN_JAVA_BUILD"
+    },
+    {
+     "type": "COPY",
+     "to": "ERRHAND",
+     "forward": "RESOLVED_IN_JAVA_BUILD"
+    }
+   ],
+   "unsupported_statements": {
+    "COMPILER_OPTION_DEPENDENT": 3
+   },
+   "tests": {
+    "checks": {
+     "PASS": 28,
+     "BLOCKED_AS_EXPECTED": 5,
+     "FAIL": 0,
+     "total": 33
+    },
+    "scenarios": {
+     "scenarios": 3,
+     "passed": 1,
+     "blocked_as_expected": 2,
+     "failed": 0,
+     "fixtures": "forward/pilot/app-fixtures/PORTTEST.json"
+    },
+    "statement_coverage": {
+     "statements": 32,
+     "executed_in_passing_scenarios": 9,
+     "executed_only_on_blocked_paths": 5
+    }
+   },
+   "validation": {
+    "exit_code": 0,
+    "result": "CONVERSION_VALIDATION PORTTEST (D:\\PROJECTS\\REVFORGE-Harness\\forward\\generated\\java\\PORTTEST): PASS (label PARTIAL)"
+   },
+   "readiness": {
+    "status": "PASS",
+    "failing_checks": []
+   },
+   "remaining_gaps": {
+    "count": 3,
+    "register_ids": [
+     "MGR-0214",
+     "MGR-0215",
+     "MGR-0216"
+    ]
+   },
+   "bmad_governance": "LOCAL_LGA_NOT_BMAD_GOVERNED",
+   "cobol_equivalence": "NOT_ESTABLISHED"
+  },
+  {
+   "program": "PORTTRAN",
+   "file_id": "SYS-PORTFOLIO-001-FIL-0072",
+   "source": "src/programs/portfolio/PORTTRAN.cbl",
+   "source_sha256": "6e8485dfeb001ea0378dc932c59ea3a7dab4ad1949f08af5c0fe94e461e06a58",
+   "java_class": "revforge.app.porttran.Porttran",
+   "java_files": [
+    "java/src/revforge/app/copybooks/Auditlog.java",
+    "java/src/revforge/app/copybooks/Trnrec.java",
+    "java/src/revforge/app/porttran/Porttran.java",
+    "java/src/revforge/app/porttran/PorttranTests.java"
+   ],
+   "local_authorization": "LGA-0032",
+   "classification": "PARTIAL",
+   "classification_step19": "PARTIAL",
+   "paragraphs": {
+    "reverse": 16,
+    "mapped": 16,
+    "test_executed": 0
+   },
+   "statements": {
+    "MAPPED": 75,
+    "GAP": 41
+   },
+   "business_rules": {
+    "IMPLEMENTED_NOT_EXERCISED": 9,
+    "BLOCKED": 3
+   },
+   "rule_ids": [
+    "BR-104",
+    "BR-105",
+    "BR-106",
+    "BR-107",
+    "BR-108",
+    "BR-109",
+    "BR-110",
+    "BR-111",
+    "BR-112",
+    "BR-113",
+    "BR-114",
+    "BR-115"
+   ],
+   "data_contracts": {
+    "ok": true,
+    "detail": "F1/F2 deliveries accepted for AUDITLOG, ERRHAND, TRNREC, AUDPROC, ERRPROC, PORTTRAN"
+   },
+   "dependencies": [
+    {
+     "type": "COPY",
+     "to": "TRNREC",
+     "forward": "RESOLVED_IN_JAVA_BUILD"
+    },
+    {
+     "type": "COPY",
+     "to": "PORTREC",
+     "forward": "UNRESOLVED"
+    },
+    {
+     "type": "COPY",
+     "to": "ERRHAND",
+     "forward": "RESOLVED_IN_JAVA_BUILD"
+    },
+    {
+     "type": "COPY",
+     "to": "AUDITLOG",
+     "forward": "RESOLVED_IN_JAVA_BUILD"
+    },
+    {
+     "type": "STATIC_CALL",
+     "to": "AUDPROC",
+     "forward": "IMPLEMENTED_CALL (converted callee)"
+    },
+    {
+     "type": "STATIC_CALL",
+     "to": "ERRPROC",
+     "forward": "IMPLEMENTED_CALL (converted callee)"
+    }
+   ],
+   "unsupported_statements": {
+    "UNSUPPORTED_DATA": 6,
+    "UNDECLARED_NAME": 15,
+    "UNTRANSLATED_STATEMENT": 1
+   },
+   "tests": {
+    "checks": {
+     "PASS": 40,
+     "BLOCKED_AS_EXPECTED": 24,
+     "FAIL": 0,
+     "total": 64
+    },
+    "scenarios": {
+     "scenarios": 2,
+     "passed": 0,
+     "blocked_as_expected": 2,
+     "failed": 0,
+     "fixtures": "forward/pilot/app-fixtures/PORTTRAN.json"
+    },
+    "statement_coverage": {
+     "statements": 116,
+     "executed_in_passing_scenarios": 0,
+     "executed_only_on_blocked_paths": 12
+    }
+   },
+   "validation": {
+    "exit_code": 0,
+    "result": "CONVERSION_VALIDATION PORTTRAN (D:\\PROJECTS\\REVFORGE-Harness\\forward\\generated\\java\\PORTTRAN): PASS (label PARTIAL)"
+   },
+   "readiness": {
+    "status": "FAIL",
+    "failing_checks": [
+     "copybooks_resolved"
+    ]
+   },
+   "remaining_gaps": {
+    "count": 22,
+    "register_ids": [
+     "MGR-0217",
+     "MGR-0218",
+     "MGR-0219",
+     "MGR-0220",
+     "MGR-0221",
+     "MGR-0222",
+     "MGR-0223",
+     "MGR-0224",
+     "MGR-0225",
+     "MGR-0226",
+     "MGR-0227",
+     "MGR-0228",
+     "MGR-0229",
+     "MGR-0230",
+     "MGR-0231",
+     "MGR-0232",
+     "MGR-0233",
+     "MGR-0234",
+     "MGR-0235",
+     "MGR-0236",
+     "MGR-0237",
+     "MGR-0238"
+    ]
+   },
+   "bmad_governance": "LOCAL_LGA_NOT_BMAD_GOVERNED",
+   "cobol_equivalence": "NOT_ESTABLISHED"
+  },
+  {
+   "program": "PORTUPDT",
+   "file_id": "SYS-PORTFOLIO-001-FIL-0073",
+   "source": "src/programs/portfolio/PORTUPDT.cbl",
+   "source_sha256": "e386049e473b4c2411540ad240a0d2f8fbdff0c88464cce80ba724fb9e375eff",
+   "java_class": "revforge.app.portupdt.Portupdt",
+   "java_files": [
+    "java/src/revforge/app/copybooks/Portflio.java",
+    "java/src/revforge/app/portupdt/Portupdt.java",
+    "java/src/revforge/app/portupdt/PortupdtTests.java"
+   ],
+   "local_authorization": "LGA-0033",
+   "classification": "PARTIAL",
+   "classification_step19": "PARTIAL",
+   "paragraphs": {
+    "reverse": 6,
+    "mapped": 6,
+    "test_executed": 6
+   },
+   "statements": {
+    "MAPPED": 33,
+    "GAP": 1
+   },
+   "business_rules": {
+    "IMPLEMENTED_VERIFIED": 2
+   },
+   "rule_ids": [
+    "BR-116",
+    "BR-117"
+   ],
+   "data_contracts": {
+    "ok": true,
+    "detail": "F1/F2 deliveries accepted for PORTFLIO, PORTUPDT"
+   },
+   "dependencies": [
+    {
+     "type": "COPY",
+     "to": "PORTFLIO",
+     "forward": "RESOLVED_IN_JAVA_BUILD"
+    }
+   ],
+   "unsupported_statements": {
+    "DATA_CONVERSION_UNDEFINED": 1
+   },
+   "tests": {
+    "checks": {
+     "PASS": 28,
+     "BLOCKED_AS_EXPECTED": 2,
+     "FAIL": 0,
+     "total": 30
+    },
+    "scenarios": {
+     "scenarios": 6,
+     "passed": 5,
+     "blocked_as_expected": 1,
+     "failed": 0,
+     "fixtures": "forward/pilot/app-fixtures/PORTUPDT.json"
+    },
+    "statement_coverage": {
+     "statements": 34,
+     "executed_in_passing_scenarios": 29,
+     "executed_only_on_blocked_paths": 0
+    }
+   },
+   "validation": {
+    "exit_code": 0,
+    "result": "CONVERSION_VALIDATION PORTUPDT (D:\\PROJECTS\\REVFORGE-Harness\\forward\\generated\\java\\PORTUPDT): PASS (label PARTIAL)"
+   },
+   "readiness": {
+    "status": "PASS",
+    "failing_checks": []
+   },
+   "remaining_gaps": {
+    "count": 1,
+    "register_ids": [
+     "MGR-0239"
+    ]
+   },
+   "bmad_governance": "LOCAL_LGA_NOT_BMAD_GOVERNED",
+   "cobol_equivalence": "NOT_ESTABLISHED"
+  },
+  {
+   "program": "PORTVALD",
+   "file_id": "SYS-PORTFOLIO-001-FIL-0074",
+   "source": "src/programs/portfolio/PORTVALD.cbl",
+   "source_sha256": "5957fd22546258ae4d9e28847269168d1824bf8d11a9e661f9f62a5adc47f603",
+   "java_class": "revforge.app.portvald.Portvald",
+   "java_files": [
+    "java/src/revforge/app/portvald/Portvald.java",
+    "java/src/revforge/app/portvald/PortvaldTests.java"
+   ],
+   "local_authorization": "LGA-0001",
+   "classification": "PARTIAL",
+   "classification_step19": "PARTIAL",
+   "paragraphs": {
+    "reverse": 5,
+    "mapped": 5,
+    "test_executed": 5
+   },
+   "statements": {
+    "MAPPED": 38,
+    "GAP": 1
+   },
+   "business_rules": {
+    "IMPLEMENTED_VERIFIED": 6
+   },
+   "rule_ids": [
+    "BR-118",
+    "BR-119",
+    "BR-120",
+    "BR-121",
+    "BR-122",
+    "BR-123"
+   ],
+   "data_contracts": {
+    "ok": true,
+    "detail": "F1/F2 deliveries accepted for PORTVAL, PORTVALD"
+   },
+   "dependencies": [
+    {
+     "type": "COPY",
+     "to": "PORTVAL",
+     "forward": "RESOLVED_IN_JAVA_BUILD"
+    }
+   ],
+   "unsupported_statements": {
+    "DATA_CONVERSION_UNDEFINED": 1
+   },
+   "tests": {
+    "checks": {
+     "PASS": 32,
+     "BLOCKED_AS_EXPECTED": 2,
+     "FAIL": 0,
+     "total": 34
+    },
+    "scenarios": {
+     "scenarios": 17,
+     "passed": 16,
+     "blocked_as_expected": 1,
+     "failed": 0,
+     "fixtures": "forward/pilot/app-fixtures/PORTVALD.json"
+    },
+    "statement_coverage": {
+     "statements": 39,
+     "executed_in_passing_scenarios": 34,
+     "executed_only_on_blocked_paths": 0
+    }
+   },
+   "validation": {
+    "exit_code": 0,
+    "result": "CONVERSION_VALIDATION PORTVALD (D:\\PROJECTS\\REVFORGE-Harness\\forward\\generated\\java\\PORTVALD): PASS (label PARTIAL)"
+   },
+   "readiness": {
+    "status": "PASS",
+    "failing_checks": []
+   },
+   "remaining_gaps": {
+    "count": 1,
+    "register_ids": [
+     "MGR-0240"
+    ]
+   },
+   "bmad_governance": "LOCAL_LGA_NOT_BMAD_GOVERNED",
+   "cobol_equivalence": "NOT_ESTABLISHED"
+  },
+  {
+   "program": "TSTGEN00",
+   "file_id": "SYS-PORTFOLIO-001-FIL-0075",
+   "source": "src/programs/test/TSTGEN00.cbl",
+   "source_sha256": "9c6cd375f322373b22a55e90059256b2a43ae6877930b50c8c47f70796493465",
+   "java_class": "revforge.app.tstgen00.Tstgen00",
+   "java_files": [
+    "java/src/revforge/app/copybooks/Portflio_Port.java",
+    "java/src/revforge/app/copybooks/Rtncode.java",
+    "java/src/revforge/app/copybooks/Trnrec_Tran.java",
+    "java/src/revforge/app/tstgen00/Tstgen00.java",
+    "java/src/revforge/app/tstgen00/Tstgen00Tests.java"
+   ],
+   "local_authorization": "LGA-0034",
+   "classification": "PARTIAL",
+   "classification_step19": "PARTIAL",
+   "paragraphs": {
+    "reverse": 13,
+    "mapped": 13,
+    "test_executed": 0
+   },
+   "statements": {
+    "MAPPED": 35,
+    "GAP": 18
+   },
+   "business_rules": {
+    "IMPLEMENTED_NOT_EXERCISED": 2
+   },
+   "rule_ids": [
+    "BR-124",
+    "BR-125"
+   ],
+   "data_contracts": {
+    "ok": true,
+    "detail": "F1/F2 deliveries accepted for ERRHAND, PORTFLIO, RTNCODE, TRNREC, TSTGEN00"
+   },
+   "dependencies": [
+    {
+     "type": "COPY",
+     "to": "PORTFLIO",
+     "forward": "RESOLVED_IN_JAVA_BUILD"
+    },
+    {
+     "type": "COPY",
+     "to": "TRNREC",
+     "forward": "RESOLVED_IN_JAVA_BUILD"
+    },
+    {
+     "type": "COPY",
+     "to": "RTNCODE",
+     "forward": "RESOLVED_IN_JAVA_BUILD"
+    },
+    {
+     "type": "COPY",
+     "to": "ERRHAND",
+     "forward": "RESOLVED_IN_JAVA_BUILD"
+    }
+   ],
+   "unsupported_statements": {
+    "UNDECLARED_NAME": 6,
+    "UNDEFINED_PROCEDURE": 8
+   },
+   "tests": {
+    "checks": {
+     "PASS": 47,
+     "BLOCKED_AS_EXPECTED": 16,
+     "FAIL": 0,
+     "total": 63
+    },
+    "scenarios": {
+     "scenarios": 2,
+     "passed": 0,
+     "blocked_as_expected": 2,
+     "failed": 0,
+     "fixtures": "forward/pilot/app-fixtures/TSTGEN00.json"
+    },
+    "statement_coverage": {
+     "statements": 53,
+     "executed_in_passing_scenarios": 0,
+     "executed_only_on_blocked_paths": 7
+    }
+   },
+   "validation": {
+    "exit_code": 0,
+    "result": "CONVERSION_VALIDATION TSTGEN00 (D:\\PROJECTS\\REVFORGE-Harness\\forward\\generated\\java\\TSTGEN00): PASS (label PARTIAL)"
+   },
+   "readiness": {
+    "status": "FAIL",
+    "failing_checks": [
+     "dependencies_identified"
+    ]
+   },
+   "remaining_gaps": {
+    "count": 14,
+    "register_ids": [
+     "MGR-0311",
+     "MGR-0312",
+     "MGR-0313",
+     "MGR-0314",
+     "MGR-0315",
+     "MGR-0316",
+     "MGR-0317",
+     "MGR-0318",
+     "MGR-0319",
+     "MGR-0320",
+     "MGR-0321",
+     "MGR-0322",
+     "MGR-0323",
+     "MGR-0324"
+    ]
+   },
+   "bmad_governance": "LOCAL_LGA_NOT_BMAD_GOVERNED",
+   "cobol_equivalence": "NOT_ESTABLISHED"
+  },
+  {
+   "program": "TSTVAL00",
+   "file_id": "SYS-PORTFOLIO-001-FIL-0076",
+   "source": "src/programs/test/TSTVAL00.cbl",
+   "source_sha256": "acdb86f9d38dbc337b16d0f5e54f8260777483f25398364f7fdfae3038a1cfe9",
+   "java_class": "revforge.app.tstval00.Tstval00",
+   "java_files": [
+    "java/src/revforge/app/copybooks/Rtncode.java",
+    "java/src/revforge/app/tstval00/Tstval00.java",
+    "java/src/revforge/app/tstval00/Tstval00Tests.java"
+   ],
+   "local_authorization": "LGA-0035",
+   "classification": "PARTIAL",
+   "classification_step19": "PARTIAL",
+   "paragraphs": {
+    "reverse": 10,
+    "mapped": 10,
+    "test_executed": 7
+   },
+   "statements": {
+    "MAPPED": 40,
+    "GAP": 13
+   },
+   "business_rules": {
+    "IMPLEMENTED_VERIFIED_TO_GAP": 1,
+    "IMPLEMENTED_VERIFIED": 1
+   },
+   "rule_ids": [
+    "BR-126",
+    "BR-127"
+   ],
+   "data_contracts": {
+    "ok": true,
+    "detail": "F1/F2 deliveries accepted for ERRHAND, RTNCODE, TSTVAL00"
+   },
+   "dependencies": [
+    {
+     "type": "COPY",
+     "to": "RTNCODE",
+     "forward": "RESOLVED_IN_JAVA_BUILD"
+    },
+    {
+     "type": "COPY",
+     "to": "ERRHAND",
+     "forward": "RESOLVED_IN_JAVA_BUILD"
+    }
+   ],
+   "unsupported_statements": {
+    "UNDECLARED_NAME": 6,
+    "UNDEFINED_PROCEDURE": 7
+   },
+   "tests": {
+    "checks": {
+     "PASS": 54,
+     "BLOCKED_AS_EXPECTED": 22,
+     "FAIL": 0,
+     "total": 76
+    },
+    "scenarios": {
+     "scenarios": 10,
+     "passed": 1,
+     "blocked_as_expected": 9,
+     "failed": 0,
+     "fixtures": "forward/pilot/app-fixtures/TSTVAL00.json"
+    },
+    "statement_coverage": {
+     "statements": 53,
+     "executed_in_passing_scenarios": 27,
+     "executed_only_on_blocked_paths": 10
+    }
+   },
+   "validation": {
+    "exit_code": 0,
+    "result": "CONVERSION_VALIDATION TSTVAL00 (D:\\PROJECTS\\REVFORGE-Harness\\forward\\generated\\java\\TSTVAL00): PASS (label PARTIAL)"
+   },
+   "readiness": {
+    "status": "FAIL",
+    "failing_checks": [
+     "dependencies_identified"
+    ]
+   },
+   "remaining_gaps": {
+    "count": 13,
+    "register_ids": [
+     "MGR-0325",
+     "MGR-0326",
+     "MGR-0327",
+     "MGR-0328",
+     "MGR-0329",
+     "MGR-0330",
+     "MGR-0331",
+     "MGR-0332",
+     "MGR-0333",
+     "MGR-0334",
+     "MGR-0335",
+     "MGR-0336",
+     "MGR-0337"
+    ]
+   },
+   "bmad_governance": "LOCAL_LGA_NOT_BMAD_GOVERNED",
+   "cobol_equivalence": "NOT_ESTABLISHED"
+  },
+  {
+   "program": "UTLMNT00",
+   "file_id": "SYS-PORTFOLIO-001-FIL-0077",
+   "source": "src/programs/utility/UTLMNT00.cbl",
+   "source_sha256": "ea0333db7c050636d4fb20965af4132775e86b2e16a5fbccadd15ec10e0fe94a",
+   "java_class": "revforge.app.utlmnt00.Utlmnt00",
+   "java_files": [
+    "java/src/revforge/app/copybooks/Rtncode.java",
+    "java/src/revforge/app/utlmnt00/Utlmnt00.java",
+    "java/src/revforge/app/utlmnt00/Utlmnt00Tests.java"
+   ],
+   "local_authorization": "LGA-0036",
+   "classification": "PARTIAL",
+   "classification_step19": "PARTIAL",
+   "paragraphs": {
+    "reverse": 12,
+    "mapped": 12,
+    "test_executed": 6
+   },
+   "statements": {
+    "MAPPED": 35,
+    "GAP": 16
+   },
+   "business_rules": {
+    "IMPLEMENTED_VERIFIED_TO_GAP": 1
+   },
+   "rule_ids": [
+    "BR-128"
+   ],
+   "data_contracts": {
+    "ok": true,
+    "detail": "F1/F2 deliveries accepted for ERRHAND, RTNCODE, UTLMNT00"
+   },
+   "dependencies": [
+    {
+     "type": "COPY",
+     "to": "RTNCODE",
+     "forward": "RESOLVED_IN_JAVA_BUILD"
+    },
+    {
+     "type": "COPY",
+     "to": "ERRHAND",
+     "forward": "RESOLVED_IN_JAVA_BUILD"
+    }
+   ],
+   "unsupported_statements": {
+    "UNDECLARED_NAME": 5,
+    "UNDEFINED_PROCEDURE": 11
+   },
+   "tests": {
+    "checks": {
+     "PASS": 37,
+     "BLOCKED_AS_EXPECTED": 25,
+     "FAIL": 0,
+     "total": 62
+    },
+    "scenarios": {
+     "scenarios": 10,
+     "passed": 1,
+     "blocked_as_expected": 9,
+     "failed": 0,
+     "fixtures": "forward/pilot/app-fixtures/UTLMNT00.json"
+    },
+    "statement_coverage": {
+     "statements": 51,
+     "executed_in_passing_scenarios": 17,
+     "executed_only_on_blocked_paths": 17
+    }
+   },
+   "validation": {
+    "exit_code": 0,
+    "result": "CONVERSION_VALIDATION UTLMNT00 (D:\\PROJECTS\\REVFORGE-Harness\\forward\\generated\\java\\UTLMNT00): PASS (label PARTIAL)"
+   },
+   "readiness": {
+    "status": "FAIL",
+    "failing_checks": [
+     "dependencies_identified"
+    ]
+   },
+   "remaining_gaps": {
+    "count": 16,
+    "register_ids": [
+     "MGR-0338",
+     "MGR-0339",
+     "MGR-0340",
+     "MGR-0341",
+     "MGR-0342",
+     "MGR-0343",
+     "MGR-0344",
+     "MGR-0345",
+     "MGR-0346",
+     "MGR-0347",
+     "MGR-0348",
+     "MGR-0349",
+     "MGR-0350",
+     "MGR-0351",
+     "MGR-0352",
+     "MGR-0353"
+    ]
+   },
+   "bmad_governance": "LOCAL_LGA_NOT_BMAD_GOVERNED",
+   "cobol_equivalence": "NOT_ESTABLISHED"
+  },
+  {
+   "program": "UTLMON00",
+   "file_id": "SYS-PORTFOLIO-001-FIL-0078",
+   "source": "src/programs/utility/UTLMON00.cbl",
+   "source_sha256": "3e74b5376896c7c35bb9799099a14818eb81f4a07269b9588dcf61ca240fcb77",
+   "java_class": "revforge.app.utlmon00.Utlmon00",
+   "java_files": [
+    "java/src/revforge/app/copybooks/Rtncode.java",
+    "java/src/revforge/app/utlmon00/Utlmon00.java",
+    "java/src/revforge/app/utlmon00/Utlmon00Tests.java"
+   ],
+   "local_authorization": "LGA-0037",
+   "classification": "PARTIAL",
+   "classification_step19": "PARTIAL",
+   "paragraphs": {
+    "reverse": 12,
+    "mapped": 12,
+    "test_executed": 0
+   },
+   "statements": {
+    "MAPPED": 31,
+    "GAP": 21
+   },
+   "business_rules": {
+    "IMPLEMENTED_NOT_EXERCISED": 2
+   },
+   "rule_ids": [
+    "BR-129",
+    "BR-130"
+   ],
+   "data_contracts": {
+    "ok": true,
+    "detail": "F1/F2 deliveries accepted for ERRHAND, RTNCODE, UTLMON00"
+   },
+   "dependencies": [
+    {
+     "type": "COPY",
+     "to": "DB2STAT",
+     "forward": "UNRESOLVED"
+    },
+    {
+     "type": "COPY",
+     "to": "RTNCODE",
+     "forward": "RESOLVED_IN_JAVA_BUILD"
+    },
+    {
+     "type": "COPY",
+     "to": "ERRHAND",
+     "forward": "RESOLVED_IN_JAVA_BUILD"
+    },
+    {
+     "type": "STATIC_CALL",
+     "to": "ILBOABN0",
+     "forward": "GAP (UNDEFINED_EXTERNAL_CALL / untranslated)"
+    }
+   ],
+   "unsupported_statements": {
+    "UNDECLARED_NAME": 5,
+    "UNSUPPORTED_DATA": 2,
+    "UNDEFINED_PROCEDURE": 13,
+    "UNDEFINED_EXTERNAL_CALL": 1
+   },
+   "tests": {
+    "checks": {
+     "PASS": 40,
+     "BLOCKED_AS_EXPECTED": 25,
+     "FAIL": 0,
+     "total": 65
+    },
+    "scenarios": {
+     "scenarios": 4,
+     "passed": 0,
+     "blocked_as_expected": 4,
+     "failed": 0,
+     "fixtures": "forward/pilot/app-fixtures/UTLMON00.json"
+    },
+    "statement_coverage": {
+     "statements": 52,
+     "executed_in_passing_scenarios": 0,
+     "executed_only_on_blocked_paths": 12
+    }
+   },
+   "validation": {
+    "exit_code": 0,
+    "result": "CONVERSION_VALIDATION UTLMON00 (D:\\PROJECTS\\REVFORGE-Harness\\forward\\generated\\java\\UTLMON00): PASS (label PARTIAL)"
+   },
+   "readiness": {
+    "status": "FAIL",
+    "failing_checks": [
+     "copybooks_resolved",
+     "dependencies_identified"
+    ]
+   },
+   "remaining_gaps": {
+    "count": 21,
+    "register_ids": [
+     "MGR-0354",
+     "MGR-0355",
+     "MGR-0356",
+     "MGR-0357",
+     "MGR-0358",
+     "MGR-0359",
+     "MGR-0360",
+     "MGR-0361",
+     "MGR-0362",
+     "MGR-0363",
+     "MGR-0364",
+     "MGR-0365",
+     "MGR-0366",
+     "MGR-0367",
+     "MGR-0368",
+     "MGR-0369",
+     "MGR-0370",
+     "MGR-0371",
+     "MGR-0372",
+     "MGR-0373",
+     "MGR-0374"
+    ]
+   },
+   "bmad_governance": "LOCAL_LGA_NOT_BMAD_GOVERNED",
+   "cobol_equivalence": "NOT_ESTABLISHED"
+  },
+  {
+   "program": "UTLVAL00",
+   "file_id": "SYS-PORTFOLIO-001-FIL-0079",
+   "source": "src/programs/utility/UTLVAL00.cbl",
+   "source_sha256": "9531008642833182a28188d5198bc9ddf69231944b1b858e1944b987658888cd",
+   "java_class": "revforge.app.utlval00.Utlval00",
+   "java_files": [
+    "java/src/revforge/app/copybooks/Posrec.java",
+    "java/src/revforge/app/copybooks/Rtncode.java",
+    "java/src/revforge/app/copybooks/Trnrec.java",
+    "java/src/revforge/app/utlval00/Utlval00.java",
+    "java/src/revforge/app/utlval00/Utlval00Tests.java"
+   ],
+   "local_authorization": "LGA-0038",
+   "classification": "PARTIAL",
+   "classification_step19": "PARTIAL",
+   "paragraphs": {
+    "reverse": 12,
+    "mapped": 12,
+    "test_executed": 0
+   },
+   "statements": {
+    "MAPPED": 30,
+    "GAP": 17
+   },
+   "business_rules": {
+    "IMPLEMENTED_NOT_EXERCISED": 1
+   },
+   "rule_ids": [
+    "BR-131"
+   ],
+   "data_contracts": {
+    "ok": true,
+    "detail": "F1/F2 deliveries accepted for ERRHAND, POSREC, RTNCODE, TRNREC, UTLVAL00"
+   },
+   "dependencies": [
+    {
+     "type": "COPY",
+     "to": "POSREC",
+     "forward": "RESOLVED_IN_JAVA_BUILD"
+    },
+    {
+     "type": "COPY",
+     "to": "TRNREC",
+     "forward": "RESOLVED_IN_JAVA_BUILD"
+    },
+    {
+     "type": "COPY",
+     "to": "RTNCODE",
+     "forward": "RESOLVED_IN_JAVA_BUILD"
+    },
+    {
+     "type": "COPY",
+     "to": "ERRHAND",
+     "forward": "RESOLVED_IN_JAVA_BUILD"
+    }
+   ],
+   "unsupported_statements": {
+    "UNDECLARED_NAME": 6,
+    "UNSUPPORTED_DATA": 3,
+    "UNDEFINED_PROCEDURE": 8
+   },
+   "tests": {
+    "checks": {
+     "PASS": 51,
+     "BLOCKED_AS_EXPECTED": 19,
+     "FAIL": 0,
+     "total": 70
+    },
+    "scenarios": {
+     "scenarios": 2,
+     "passed": 0,
+     "blocked_as_expected": 2,
+     "failed": 0,
+     "fixtures": "forward/pilot/app-fixtures/UTLVAL00.json"
+    },
+    "statement_coverage": {
+     "statements": 47,
+     "executed_in_passing_scenarios": 0,
+     "executed_only_on_blocked_paths": 6
+    }
+   },
+   "validation": {
+    "exit_code": 0,
+    "result": "CONVERSION_VALIDATION UTLVAL00 (D:\\PROJECTS\\REVFORGE-Harness\\forward\\generated\\java\\UTLVAL00): PASS (label PARTIAL)"
+   },
+   "readiness": {
+    "status": "FAIL",
+    "failing_checks": [
+     "dependencies_identified"
+    ]
+   },
+   "remaining_gaps": {
+    "count": 17,
+    "register_ids": [
+     "MGR-0375",
+     "MGR-0376",
+     "MGR-0377",
+     "MGR-0378",
+     "MGR-0379",
+     "MGR-0380",
+     "MGR-0381",
+     "MGR-0382",
+     "MGR-0383",
+     "MGR-0384",
+     "MGR-0385",
+     "MGR-0386",
+     "MGR-0387",
+     "MGR-0388",
+     "MGR-0389",
+     "MGR-0390",
+     "MGR-0391"
+    ]
+   },
+   "bmad_governance": "LOCAL_LGA_NOT_BMAD_GOVERNED",
+   "cobol_equivalence": "NOT_ESTABLISHED"
+  },
+  {
+   "program": "DB2HNDL",
+   "file_id": "SYS-PORTFOLIO-001-FIL-0080",
+   "source": "src/templates/database/db2-handling.cbl",
+   "source_sha256": "6f7d5fb2ad1cb0fb9283f74542f2768aa8da1044a4d29e16b0c894482688b678",
+   "java_class": "revforge.app.db2hndl.Db2hndl",
+   "java_files": [
+    "java/src/revforge/app/copybooks/Sqlca.java",
+    "java/src/revforge/app/db2hndl/Db2hndl.java",
+    "java/src/revforge/app/db2hndl/Db2hndlTests.java"
+   ],
+   "local_authorization": "LGA-0039",
+   "classification": "PARTIAL",
+   "classification_step19": "PARTIAL",
+   "paragraphs": {
+    "reverse": 11,
+    "mapped": 11,
+    "test_executed": 0
+   },
+   "statements": {
+    "MAPPED": 19,
+    "GAP": 23
+   },
+   "business_rules": {},
+   "rule_ids": [],
+   "data_contracts": {
+    "ok": true,
+    "detail": "F1/F2 deliveries accepted for SQLCA, DB2HNDL"
+   },
+   "dependencies": [
+    {
+     "type": "SQL_INCLUDE",
+     "to": "SQLCA",
+     "forward": "RESOLVED_IN_JAVA_BUILD"
+    }
+   ],
+   "unsupported_statements": {
+    "EXTERNAL_SYSTEM_BOUNDARY": 10,
+    "UNDECLARED_NAME": 2
+   },
+   "tests": {
+    "checks": {
+     "PASS": 9,
+     "BLOCKED_AS_EXPECTED": 14,
+     "FAIL": 0,
+     "total": 23
+    },
+    "scenarios": {
+     "scenarios": 2,
+     "passed": 0,
+     "blocked_as_expected": 2,
+     "failed": 0,
+     "fixtures": "forward/pilot/app-fixtures/DB2HNDL.json"
+    },
+    "statement_coverage": {
+     "statements": 42,
+     "executed_in_passing_scenarios": 0,
+     "executed_only_on_blocked_paths": 3
+    }
+   },
+   "validation": {
+    "exit_code": 0,
+    "result": "CONVERSION_VALIDATION DB2HNDL (D:\\PROJECTS\\REVFORGE-Harness\\forward\\generated\\java\\DB2HNDL): PASS (label PARTIAL)"
+   },
+   "readiness": {
+    "status": "FAIL",
+    "failing_checks": [
+     "copybooks_resolved",
+     "dependencies_identified"
+    ]
+   },
+   "remaining_gaps": {
+    "count": 12,
+    "register_ids": [
+     "MGR-0051",
+     "MGR-0052",
+     "MGR-0053",
+     "MGR-0054",
+     "MGR-0055",
+     "MGR-0056",
+     "MGR-0057",
+     "MGR-0058",
+     "MGR-0059",
+     "MGR-0060",
+     "MGR-0061",
+     "MGR-0062"
+    ]
+   },
+   "bmad_governance": "LOCAL_LGA_NOT_BMAD_GOVERNED",
+   "cobol_equivalence": "NOT_ESTABLISHED"
+  },
+  {
+   "program": "ERRHANDL",
+   "file_id": "SYS-PORTFOLIO-001-FIL-0081",
+   "source": "src/templates/error/error-handling.cbl",
+   "source_sha256": "22548dd957eaa37c181b34e3d3ac0c78ce080a7d8a1be73ac507264e79f415e6",
+   "java_class": "revforge.app.errhandl.Errhandl",
+   "java_files": [
+    "java/src/revforge/app/errhandl/Errhandl.java",
+    "java/src/revforge/app/errhandl/ErrhandlTests.java"
+   ],
+   "local_authorization": "LGA-0040",
+   "classification": "PARTIAL",
+   "classification_step19": "PARTIAL",
+   "paragraphs": {
+    "reverse": 11,
+    "mapped": 11,
+    "test_executed": 0
+   },
+   "statements": {
+    "MAPPED": 45,
+    "GAP": 1
+   },
+   "business_rules": {
+    "IMPLEMENTED_NOT_EXERCISED": 3
+   },
+   "rule_ids": [
+    "BR-132",
+    "BR-133",
+    "BR-134"
+   ],
+   "data_contracts": {
+    "ok": true,
+    "detail": "F1/F2 deliveries accepted for ERRHANDL"
+   },
+   "dependencies": [
+    {
+     "type": "STATIC_CALL",
+     "to": "CEE3ABD",
+     "forward": "GAP (UNDEFINED_EXTERNAL_CALL / untranslated)"
+    }
+   ],
+   "unsupported_statements": {
+    "UNTRANSLATED_STATEMENT": 1
+   },
+   "tests": {
+    "checks": {
+     "PASS": 21,
+     "BLOCKED_AS_EXPECTED": 3,
+     "FAIL": 0,
+     "total": 24
+    },
+    "scenarios": {
+     "scenarios": 2,
+     "passed": 0,
+     "blocked_as_expected": 2,
+     "failed": 0,
+     "fixtures": "forward/pilot/app-fixtures/ERRHANDL.json"
+    },
+    "statement_coverage": {
+     "statements": 46,
+     "executed_in_passing_scenarios": 0,
+     "executed_only_on_blocked_paths": 36
+    }
+   },
+   "validation": {
+    "exit_code": 0,
+    "result": "CONVERSION_VALIDATION ERRHANDL (D:\\PROJECTS\\REVFORGE-Harness\\forward\\generated\\java\\ERRHANDL): PASS (label PARTIAL)"
+   },
+   "readiness": {
+    "status": "FAIL",
+    "failing_checks": [
+     "dependencies_identified"
+    ]
+   },
+   "remaining_gaps": {
+    "count": 1,
+    "register_ids": [
+     "MGR-0092"
+    ]
+   },
+   "bmad_governance": "LOCAL_LGA_NOT_BMAD_GOVERNED",
+   "cobol_equivalence": "NOT_ESTABLISHED"
+  },
+  {
+   "program": "FILEHNDL",
+   "file_id": "SYS-PORTFOLIO-001-FIL-0082",
+   "source": "src/templates/program/file-handling.cbl",
+   "source_sha256": "d9ca04c39498600c132b1e5aba353daba245f28d1411b19e497aab2d56f006db",
+   "java_class": "revforge.app.filehndl.Filehndl",
+   "java_files": [
+    "java/src/revforge/app/filehndl/Filehndl.java",
+    "java/src/revforge/app/filehndl/FilehndlTests.java"
+   ],
+   "local_authorization": "LGA-0041",
+   "classification": "PARTIAL",
+   "classification_step19": "PARTIAL",
+   "paragraphs": {
+    "reverse": 10,
+    "mapped": 10,
+    "test_executed": 4
+   },
+   "statements": {
+    "MAPPED": 33,
+    "GAP": 2
+   },
+   "business_rules": {},
+   "rule_ids": [],
+   "data_contracts": {
+    "ok": true,
+    "detail": "F1/F2 deliveries accepted for FILEHNDL"
+   },
+   "dependencies": [],
+   "unsupported_statements": {
+    "UNDEFINED_PROCEDURE": 2
+   },
+   "tests": {
+    "checks": {
+     "PASS": 9,
+     "BLOCKED_AS_EXPECTED": 2,
+     "FAIL": 0,
+     "total": 11
+    },
+    "scenarios": {
+     "scenarios": 2,
+     "passed": 2,
+     "blocked_as_expected": 0,
+     "failed": 0,
+     "fixtures": "forward/pilot/app-fixtures/FILEHNDL.json"
+    },
+    "statement_coverage": {
+     "statements": 35,
+     "executed_in_passing_scenarios": 14,
+     "executed_only_on_blocked_paths": 0
+    }
+   },
+   "validation": {
+    "exit_code": 0,
+    "result": "CONVERSION_VALIDATION FILEHNDL (D:\\PROJECTS\\REVFORGE-Harness\\forward\\generated\\java\\FILEHNDL): PASS (label PARTIAL)"
+   },
+   "readiness": {
+    "status": "FAIL",
+    "failing_checks": [
+     "complete_program",
+     "dependencies_identified"
+    ]
+   },
+   "remaining_gaps": {
+    "count": 2,
+    "register_ids": [
+     "MGR-0113",
+     "MGR-0114"
+    ]
+   },
+   "bmad_governance": "LOCAL_LGA_NOT_BMAD_GOVERNED",
+   "cobol_equivalence": "NOT_ESTABLISHED"
+  },
+  {
+   "program": "PROGNAME",
+   "file_id": "SYS-PORTFOLIO-001-FIL-0083",
+   "source": "src/templates/program/standard-program.cbl",
+   "source_sha256": "6199f4b373e583d16df67a914ff33bb7109f577c511b4697f511a44e50d43191",
+   "java_class": "revforge.app.progname.Progname",
+   "java_files": [
+    "java/src/revforge/app/progname/Progname.java",
+    "java/src/revforge/app/progname/PrognameTests.java"
+   ],
+   "local_authorization": "LGA-0042",
+   "classification": "COMPLETE",
+   "classification_step19": "FULLY_IMPLEMENTED",
+   "paragraphs": {
+    "reverse": 5,
+    "mapped": 5,
+    "test_executed": 4
+   },
+   "statements": {
+    "MAPPED": 8
+   },
+   "business_rules": {},
+   "rule_ids": [],
+   "data_contracts": {
+    "ok": true,
+    "detail": "F1/F2 deliveries accepted for PROGNAME"
+   },
+   "dependencies": [],
+   "unsupported_statements": {},
+   "tests": {
+    "checks": {
+     "PASS": 9,
+     "BLOCKED_AS_EXPECTED": 0,
+     "FAIL": 0,
+     "total": 9
+    },
+    "scenarios": {
+     "scenarios": 2,
+     "passed": 2,
+     "blocked_as_expected": 0,
+     "failed": 0,
+     "fixtures": "forward/pilot/app-fixtures/PROGNAME.json"
+    },
+    "statement_coverage": {
+     "statements": 8,
+     "executed_in_passing_scenarios": 7,
+     "executed_only_on_blocked_paths": 0
+    }
+   },
+   "validation": {
+    "exit_code": 0,
+    "result": "CONVERSION_VALIDATION PROGNAME (D:\\PROJECTS\\REVFORGE-Harness\\forward\\generated\\java\\PROGNAME): PASS (label COMPLETE)"
+   },
+   "readiness": {
+    "status": "PASS",
+    "failing_checks": []
+   },
+   "remaining_gaps": {
+    "count": 0,
+    "register_ids": []
+   },
+   "bmad_governance": "LOCAL_LGA_NOT_BMAD_GOVERNED",
+   "cobol_equivalence": "NOT_ESTABLISHED"
+  }
+ ]
+}

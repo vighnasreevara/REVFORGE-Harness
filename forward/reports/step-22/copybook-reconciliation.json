@@ -1,0 +1,579 @@
+{
+ "contract": "step-22/copybook-reconciliation",
+ "fields": {
+  "status": "MODEL: every field represented in a shared Java model; COMPLETE_IN_PROGRAM: every field represented with identical attributes inside each program; PARTIAL; NOT_USED: COPYed by no program (not missing implementation)"
+ },
+ "summary": {
+  "total": 25,
+  "by_status": {
+   "MODEL": 13,
+   "COMPLETE_IN_PROGRAM": 6,
+   "NOT_USED": 6
+  }
+ },
+ "copybooks": [
+  {
+   "copybook": "BCHCON",
+   "file_id": "SYS-PORTFOLIO-001-FIL-0001",
+   "path": "src/copybook/batch/BCHCON.cpy",
+   "type": "copybook",
+   "used_by": [
+    "BCHCTL00",
+    "HISTLD00",
+    "PRCSEQ00",
+    "RCVPRC00"
+   ],
+   "reverse_fields": 32,
+   "forward_fields_represented": 32,
+   "fields_with_discrepancies": [],
+   "fields_not_represented": [],
+   "java_models": [
+    "Bchcon"
+   ],
+   "converter_notes": [],
+   "status": "MODEL"
+  },
+  {
+   "copybook": "BCHCTL",
+   "file_id": "SYS-PORTFOLIO-001-FIL-0002",
+   "path": "src/copybook/batch/BCHCTL.cpy",
+   "type": "copybook",
+   "used_by": [
+    "BCHCTL00",
+    "HISTLD00",
+    "PRCSEQ00",
+    "RCVPRC00",
+    "RPTSTA00"
+   ],
+   "reverse_fields": 18,
+   "forward_fields_represented": 18,
+   "fields_with_discrepancies": [],
+   "fields_not_represented": [],
+   "java_models": [
+    "Bchctl"
+   ],
+   "converter_notes": [
+    "COPY ERRHAND at src/programs/batch/BCHCTL00.cbl:31 is placed inside an outer table or spans records; its items are generated in the program"
+   ],
+   "status": "MODEL"
+  },
+  {
+   "copybook": "CKPRST",
+   "file_id": "SYS-PORTFOLIO-001-FIL-0003",
+   "path": "src/copybook/batch/CKPRST.cpy",
+   "type": "copybook",
+   "used_by": [
+    "CKPRST"
+   ],
+   "reverse_fields": 21,
+   "forward_fields_represented": 21,
+   "fields_with_discrepancies": [],
+   "fields_not_represented": [],
+   "java_models": [],
+   "converter_notes": [
+    "COPY CKPRST at src/programs/batch/CKPRST.cbl:17 is placed inside an outer table or spans records; its items are generated in the program",
+    "COPY CKPRST at src/programs/batch/CKPRST.cbl:23 is placed inside an outer table or spans records; its items are generated in the program",
+    "COPY RETHND at src/programs/batch/CKPRST.cbl:24 is placed inside an outer table or spans records; its items are generated in the program"
+   ],
+   "status": "COMPLETE_IN_PROGRAM"
+  },
+  {
+   "copybook": "PRCSEQ",
+   "file_id": "SYS-PORTFOLIO-001-FIL-0004",
+   "path": "src/copybook/batch/PRCSEQ.cpy",
+   "type": "copybook",
+   "used_by": [
+    "PRCSEQ00",
+    "RCVPRC00"
+   ],
+   "reverse_fields": 35,
+   "forward_fields_represented": 35,
+   "fields_with_discrepancies": [],
+   "fields_not_represented": [],
+   "java_models": [],
+   "converter_notes": [
+    "COPY ERRHAND at src/programs/batch/PRCSEQ00.cbl:41 is placed inside an outer table or spans records; its items are generated in the program",
+    "COPY PRCSEQ at src/programs/batch/PRCSEQ00.cbl:34 is placed inside an outer table or spans records; its items are generated in the program",
+    "COPY PRCSEQ at src/programs/batch/RCVPRC00.cbl:37 is placed inside an outer table or spans records; its items are generated in the program"
+   ],
+   "status": "COMPLETE_IN_PROGRAM"
+  },
+  {
+   "copybook": "AUDITLOG",
+   "file_id": "SYS-PORTFOLIO-001-FIL-0005",
+   "path": "src/copybook/common/AUDITLOG.cpy",
+   "type": "copybook",
+   "used_by": [
+    "AUDPROC",
+    "PORTTRAN",
+    "RPTAUD00"
+   ],
+   "reverse_fields": 13,
+   "forward_fields_represented": 13,
+   "fields_with_discrepancies": [],
+   "fields_not_represented": [],
+   "java_models": [
+    "Auditlog"
+   ],
+   "converter_notes": [],
+   "status": "MODEL"
+  },
+  {
+   "copybook": "COMMON",
+   "file_id": "SYS-PORTFOLIO-001-FIL-0006",
+   "path": "src/copybook/common/COMMON.cpy",
+   "type": "copybook",
+   "used_by": [],
+   "reverse_fields": 35,
+   "forward_fields_represented": 0,
+   "fields_with_discrepancies": [],
+   "fields_not_represented": [
+    "RC-SUCCESS",
+    "RC-WARNING",
+    "RC-ERROR",
+    "RC-SEVERE",
+    "RC-CRITICAL",
+    "STATUS-ACTIVE",
+    "STATUS-CLOSED",
+    "STATUS-PENDING",
+    "STATUS-SUSPENDED",
+    "STATUS-FAILED",
+    "STATUS-REVERSED",
+    "TRN-TYPE-BUY",
+    "TRN-TYPE-SELL",
+    "TRN-TYPE-TRANSFER",
+    "TRN-TYPE-FEE",
+    "CURR-YEAR",
+    "CURR-MONTH",
+    "CURR-DAY",
+    "CURR-HOUR",
+    "CURR-MINUTE",
+    "CURR-SECOND",
+    "CURR-MSEC",
+    "ERROR-CODE",
+    "ERROR-MODULE",
+    "ERROR-ROUTINE",
+    "ERROR-MESSAGE",
+    "AUDIT-TIMESTAMP",
+    "AUDIT-USER",
+    "AUDIT-TERMINAL",
+    "AUDIT-PROGRAM",
+    "CURR-USD",
+    "CURR-EUR",
+    "CURR-GBP",
+    "CURR-JPY",
+    "CURR-CAD"
+   ],
+   "java_models": [],
+   "converter_notes": [],
+   "status": "NOT_USED"
+  },
+  {
+   "copybook": "ERRHAND",
+   "file_id": "SYS-PORTFOLIO-001-FIL-0007",
+   "path": "src/copybook/common/ERRHAND.cpy",
+   "type": "copybook",
+   "used_by": [
+    "BCHCTL00",
+    "DB2CMT",
+    "DB2CONN",
+    "DB2ERR",
+    "DB2STAT",
+    "ERRPROC",
+    "HISTLD00",
+    "PORTTEST",
+    "PORTTRAN",
+    "PRCSEQ00",
+    "RCVPRC00",
+    "RPTAUD00",
+    "RPTPOS00",
+    "RPTSTA00",
+    "TSTGEN00",
+    "TSTVAL00",
+    "UTLMNT00",
+    "UTLMON00",
+    "UTLVAL00"
+   ],
+   "reverse_fields": 24,
+   "forward_fields_represented": 24,
+   "fields_with_discrepancies": [],
+   "fields_not_represented": [],
+   "java_models": [],
+   "converter_notes": [
+    "COPY ERRHAND at src/programs/batch/BCHCTL00.cbl:31 is placed inside an outer table or spans records; its items are generated in the program",
+    "COPY ERRHAND at src/programs/batch/HISTLD00.cbl:46 is placed inside an outer table or spans records; its items are generated in the program",
+    "COPY ERRHAND at src/programs/batch/PRCSEQ00.cbl:41 is placed inside an outer table or spans records; its items are generated in the program",
+    "COPY ERRHAND at src/programs/batch/RCVPRC00.cbl:41 is placed inside an outer table or spans records; its items are generated in the program",
+    "COPY ERRHAND at src/programs/batch/RPTAUD00.cbl:36 is placed inside an outer table or spans records; its items are generated in the program",
+    "COPY ERRHAND at src/programs/batch/RPTPOS00.cbl:45 is placed inside an outer table or spans records; its items are generated in the program",
+    "COPY ERRHAND at src/programs/batch/RPTSTA00.cbl:45 is placed inside an outer table or spans records; its items are generated in the program",
+    "COPY ERRHAND at src/programs/common/DB2CMT.cbl:23 is placed inside an outer table or spans records; its items are generated in the program",
+    "COPY ERRHAND at src/programs/common/DB2CONN.cbl:24 is placed inside an outer table or spans records; its items are generated in the program",
+    "COPY ERRHAND at src/programs/common/DB2ERR.cbl:26 is placed inside an outer table or spans records; its items are generated in the program",
+    "COPY ERRHAND at src/programs/common/DB2STAT.cbl:34 is placed inside an outer table or spans records; its items are generated in the program",
+    "COPY ERRHAND at src/programs/common/ERRPROC.cbl:31 is placed inside an outer table or spans records; its items are generated in the program",
+    "COPY ERRHAND at src/programs/portfolio/PORTTEST.cbl:28 is placed inside an outer table or spans records; its items are generated in the program",
+    "COPY ERRHAND at src/programs/portfolio/PORTTRAN.cbl:43 is placed inside an outer table or spans records; its items are generated in the program",
+    "COPY ERRHAND at src/programs/test/TSTGEN00.cbl:67 is placed inside an outer table or spans records; its items are generated in the program",
+    "COPY ERRHAND at src/programs/test/TSTVAL00.cbl:68 is placed inside an outer table or spans records; its items are generated in the program",
+    "COPY ERRHAND at src/programs/utility/UTLMNT00.cbl:57 is placed inside an outer table or spans records; its items are generated in the program",
+    "COPY ERRHAND at src/programs/utility/UTLMON00.cbl:76 is placed inside an outer table or spans records; its items are generated in the program",
+    "COPY ERRHAND at src/programs/utility/UTLVAL00.cbl:61 is placed inside an outer table or spans records; its items are generated in the program"
+   ],
+   "status": "COMPLETE_IN_PROGRAM"
+  },
+  {
+   "copybook": "HISTREC",
+   "file_id": "SYS-PORTFOLIO-001-FIL-0008",
+   "path": "src/copybook/common/HISTREC.cpy",
+   "type": "copybook",
+   "used_by": [
+    "HISTLD00"
+   ],
+   "reverse_fields": 12,
+   "forward_fields_represented": 12,
+   "fields_with_discrepancies": [],
+   "fields_not_represented": [],
+   "java_models": [
+    "Histrec"
+   ],
+   "converter_notes": [],
+   "status": "MODEL"
+  },
+  {
+   "copybook": "PORTFLIO",
+   "file_id": "SYS-PORTFOLIO-001-FIL-0009",
+   "path": "src/copybook/common/PORTFLIO.cpy",
+   "type": "copybook",
+   "used_by": [
+    "PORTADD",
+    "PORTDEL",
+    "PORTREAD",
+    "PORTTEST",
+    "PORTUPDT",
+    "TSTGEN00"
+   ],
+   "reverse_fields": 12,
+   "forward_fields_represented": 12,
+   "fields_with_discrepancies": [],
+   "fields_not_represented": [],
+   "java_models": [
+    "Portflio"
+   ],
+   "converter_notes": [],
+   "status": "MODEL"
+  },
+  {
+   "copybook": "PORTVAL",
+   "file_id": "SYS-PORTFOLIO-001-FIL-0010",
+   "path": "src/copybook/common/PORTVAL.cpy",
+   "type": "copybook",
+   "used_by": [
+    "PORTVALD"
+   ],
+   "reverse_fields": 16,
+   "forward_fields_represented": 16,
+   "fields_with_discrepancies": [],
+   "fields_not_represented": [],
+   "java_models": [],
+   "converter_notes": [
+    "COPY PORTVAL at src/programs/portfolio/PORTVALD.cbl:18 is placed inside an outer table or spans records; its items are generated in the program"
+   ],
+   "status": "COMPLETE_IN_PROGRAM"
+  },
+  {
+   "copybook": "POSREC",
+   "file_id": "SYS-PORTFOLIO-001-FIL-0011",
+   "path": "src/copybook/common/POSREC.cpy",
+   "type": "copybook",
+   "used_by": [
+    "INQPORT",
+    "RPTPOS00",
+    "UTLVAL00"
+   ],
+   "reverse_fields": 11,
+   "forward_fields_represented": 11,
+   "fields_with_discrepancies": [],
+   "fields_not_represented": [],
+   "java_models": [
+    "Posrec"
+   ],
+   "converter_notes": [],
+   "status": "MODEL"
+  },
+  {
+   "copybook": "RETHND",
+   "file_id": "SYS-PORTFOLIO-001-FIL-0012",
+   "path": "src/copybook/common/RETHND.cpy",
+   "type": "copybook",
+   "used_by": [
+    "CKPRST"
+   ],
+   "reverse_fields": 25,
+   "forward_fields_represented": 25,
+   "fields_with_discrepancies": [],
+   "fields_not_represented": [],
+   "java_models": [],
+   "converter_notes": [
+    "COPY RETHND at src/programs/batch/CKPRST.cbl:24 is placed inside an outer table or spans records; its items are generated in the program"
+   ],
+   "status": "COMPLETE_IN_PROGRAM"
+  },
+  {
+   "copybook": "RTNCODE",
+   "file_id": "SYS-PORTFOLIO-001-FIL-0013",
+   "path": "src/copybook/common/RTNCODE.cpy",
+   "type": "copybook",
+   "used_by": [
+    "RPTAUD00",
+    "RPTPOS00",
+    "RPTSTA00",
+    "RTNCDE00",
+    "TSTGEN00",
+    "TSTVAL00",
+    "UTLMNT00",
+    "UTLMON00",
+    "UTLVAL00"
+   ],
+   "reverse_fields": 16,
+   "forward_fields_represented": 16,
+   "fields_with_discrepancies": [],
+   "fields_not_represented": [],
+   "java_models": [
+    "Rtncode"
+   ],
+   "converter_notes": [],
+   "status": "MODEL"
+  },
+  {
+   "copybook": "TRNREC",
+   "file_id": "SYS-PORTFOLIO-001-FIL-0014",
+   "path": "src/copybook/common/TRNREC.cpy",
+   "type": "copybook",
+   "used_by": [
+    "PORTTRAN",
+    "RPTPOS00",
+    "TSTGEN00",
+    "UTLVAL00"
+   ],
+   "reverse_fields": 14,
+   "forward_fields_represented": 14,
+   "fields_with_discrepancies": [],
+   "fields_not_represented": [],
+   "java_models": [
+    "Trnrec",
+    "Trnrec_Tran"
+   ],
+   "converter_notes": [],
+   "status": "MODEL"
+  },
+  {
+   "copybook": "DBPROC",
+   "file_id": "SYS-PORTFOLIO-001-FIL-0015",
+   "path": "src/copybook/db2/DBPROC.cpy",
+   "type": "copybook",
+   "used_by": [
+    "DB2CMT",
+    "DB2CONN",
+    "DB2ERR",
+    "DB2STAT",
+    "HISTLD00"
+   ],
+   "reverse_fields": 10,
+   "forward_fields_represented": 10,
+   "fields_with_discrepancies": [],
+   "fields_not_represented": [],
+   "java_models": [
+    "Dbproc"
+   ],
+   "converter_notes": [],
+   "status": "MODEL"
+  },
+  {
+   "copybook": "DBTBLS",
+   "file_id": "SYS-PORTFOLIO-001-FIL-0016",
+   "path": "src/copybook/db2/DBTBLS.cpy",
+   "type": "copybook",
+   "used_by": [
+    "DB2ERR",
+    "HISTLD00"
+   ],
+   "reverse_fields": 28,
+   "forward_fields_represented": 28,
+   "fields_with_discrepancies": [],
+   "fields_not_represented": [],
+   "java_models": [],
+   "converter_notes": [
+    "COPY DBTBLS at src/programs/batch/HISTLD00.cbl:41 is placed inside an outer table or spans records; its items are generated in the program",
+    "COPY DBTBLS at src/programs/common/DB2ERR.cbl:19 is placed inside an outer table or spans records; its items are generated in the program"
+   ],
+   "status": "COMPLETE_IN_PROGRAM"
+  },
+  {
+   "copybook": "SQLCA",
+   "file_id": "SYS-PORTFOLIO-001-FIL-0017",
+   "path": "src/copybook/db2/SQLCA.cpy",
+   "type": "copybook",
+   "used_by": [
+    "CURSMGR",
+    "DB2CMT",
+    "DB2CONN",
+    "DB2ERR",
+    "DB2HNDL",
+    "DB2ONLN",
+    "DB2RECV",
+    "DB2STAT",
+    "ERRHNDL",
+    "HISTLD00",
+    "INQHIST",
+    "RTNANA00",
+    "RTNCDE00",
+    "SECMGR"
+   ],
+   "reverse_fields": 7,
+   "forward_fields_represented": 7,
+   "fields_with_discrepancies": [],
+   "fields_not_represented": [],
+   "java_models": [
+    "Sqlca"
+   ],
+   "converter_notes": [],
+   "status": "MODEL"
+  },
+  {
+   "copybook": "DB2REQ",
+   "file_id": "SYS-PORTFOLIO-001-FIL-0018",
+   "path": "src/copybook/online/DB2REQ.cpy",
+   "type": "copybook",
+   "used_by": [
+    "DB2RECV"
+   ],
+   "reverse_fields": 5,
+   "forward_fields_represented": 5,
+   "fields_with_discrepancies": [],
+   "fields_not_represented": [],
+   "java_models": [
+    "Db2req"
+   ],
+   "converter_notes": [],
+   "status": "MODEL"
+  },
+  {
+   "copybook": "ERRHND",
+   "file_id": "SYS-PORTFOLIO-001-FIL-0019",
+   "path": "src/copybook/online/ERRHND.cpy",
+   "type": "copybook",
+   "used_by": [
+    "DB2ONLN",
+    "DB2RECV",
+    "ERRHNDL",
+    "INQONLN",
+    "SECMGR"
+   ],
+   "reverse_fields": 10,
+   "forward_fields_represented": 10,
+   "fields_with_discrepancies": [],
+   "fields_not_represented": [],
+   "java_models": [
+    "Errhnd"
+   ],
+   "converter_notes": [
+    "record DFHCOMMAREA (src/programs/online/ERRHNDL.cbl:34) has no determinable layout (item without PIC or subordinate items); references to it are gaps",
+    "record WS-DB2-AREA (src/programs/online/ERRHNDL.cbl:18) has no determinable layout (item without PIC or subordinate items); references to it are gaps",
+    "record WS-ERRLOG-RECORD (src/programs/online/ERRHNDL.cbl:21) has no determinable layout (item without PIC or subordinate items); references to it are gaps",
+    "record WS-ERROR-AREA (src/programs/online/ERRHNDL.cbl:15) has no determinable layout (item without PIC or subordinate items); references to it are gaps"
+   ],
+   "status": "MODEL"
+  },
+  {
+   "copybook": "INQCOM",
+   "file_id": "SYS-PORTFOLIO-001-FIL-0020",
+   "path": "src/copybook/online/INQCOM.cpy",
+   "type": "copybook",
+   "used_by": [
+    "INQHIST",
+    "INQONLN",
+    "INQPORT"
+   ],
+   "reverse_fields": 4,
+   "forward_fields_represented": 4,
+   "fields_with_discrepancies": [],
+   "fields_not_represented": [],
+   "java_models": [
+    "Inqcom"
+   ],
+   "converter_notes": [],
+   "status": "MODEL"
+  },
+  {
+   "copybook": "ERRLOG",
+   "file_id": "SYS-PORTFOLIO-001-FIL-0021",
+   "path": "src/database/db2/ERRLOG.sql",
+   "type": "db2",
+   "used_by": [],
+   "reverse_fields": 0,
+   "forward_fields_represented": 0,
+   "fields_with_discrepancies": [],
+   "fields_not_represented": [],
+   "java_models": [],
+   "converter_notes": [],
+   "status": "NOT_USED"
+  },
+  {
+   "copybook": "PORTPLAN",
+   "file_id": "SYS-PORTFOLIO-001-FIL-0022",
+   "path": "src/database/db2/PORTPLAN.sql",
+   "type": "db2",
+   "used_by": [],
+   "reverse_fields": 0,
+   "forward_fields_represented": 0,
+   "fields_with_discrepancies": [],
+   "fields_not_represented": [],
+   "java_models": [],
+   "converter_notes": [],
+   "status": "NOT_USED"
+  },
+  {
+   "copybook": "POSHIST",
+   "file_id": "SYS-PORTFOLIO-001-FIL-0023",
+   "path": "src/database/db2/POSHIST.sql",
+   "type": "db2",
+   "used_by": [],
+   "reverse_fields": 0,
+   "forward_fields_represented": 0,
+   "fields_with_discrepancies": [],
+   "fields_not_represented": [],
+   "java_models": [],
+   "converter_notes": [],
+   "status": "NOT_USED"
+  },
+  {
+   "copybook": "RTNCODES",
+   "file_id": "SYS-PORTFOLIO-001-FIL-0024",
+   "path": "src/database/db2/RTNCODES.sql",
+   "type": "db2",
+   "used_by": [],
+   "reverse_fields": 0,
+   "forward_fields_represented": 0,
+   "fields_with_discrepancies": [],
+   "fields_not_represented": [],
+   "java_models": [],
+   "converter_notes": [],
+   "status": "NOT_USED"
+  },
+  {
+   "copybook": "DB2-DEFINITIONS",
+   "file_id": "SYS-PORTFOLIO-001-FIL-0025",
+   "path": "src/database/db2/db2-definitions.sql",
+   "type": "db2",
+   "used_by": [],
+   "reverse_fields": 0,
+   "forward_fields_represented": 0,
+   "fields_with_discrepancies": [],
+   "fields_not_represented": [],
+   "java_models": [],
+   "converter_notes": [],
+   "status": "NOT_USED"
+  }
+ ]
+}

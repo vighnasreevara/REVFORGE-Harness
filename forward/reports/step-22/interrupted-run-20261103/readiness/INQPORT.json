@@ -1,0 +1,379 @@
+{
+  "gate": "SOURCE_READINESS",
+  "subject": "INQPORT",
+  "status": "FAIL",
+  "checks": [
+    {
+      "id": "source_available",
+      "ok": true,
+      "detail": "src/programs/online/INQPORT.cbl sha256 5c752c9243105066d0e0f055501217a99b198d94b577b41c8de2d52a305b4bdc; 29 statement(s) in 10 paragraph(s)"
+    },
+    {
+      "id": "complete_program",
+      "ok": true,
+      "detail": "every paragraph contains statements"
+    },
+    {
+      "id": "copybooks_resolved",
+      "ok": false,
+      "detail": "unresolved or circular includes: SQLPOS@21"
+    },
+    {
+      "id": "requirements_and_data_mapping_delivered",
+      "ok": true,
+      "detail": "F1/F2 deliveries accepted for POSREC, INQCOM, INQPORT"
+    },
+    {
+      "id": "behaviour_classified",
+      "ok": true,
+      "detail": "5 behaviour(s): 3 VERIFIED_CANDIDATE, 2 PARTIAL, 0 GAP"
+    },
+    {
+      "id": "dependencies_identified",
+      "ok": false,
+      "detail": "closure UNRESOLVED for INQPORT:P100-INIT-PROGRAM (line 61: EXEC CICS hands control and data to the transaction monitor); INQPORT:P200-GET-POSITION (line 72: EXEC CICS hands control and data to the transaction monitor); INQPORT:P300-FORMAT-DISPLAY (line 87: EXEC CICS hands control and data to the transaction monitor)"
+    },
+    {
+      "id": "unsupported_documented",
+      "ok": true,
+      "detail": "2 gap(s) document every PARTIAL/GAP behaviour"
+    },
+    {
+      "id": "unknowns_documented",
+      "ok": true,
+      "detail": "11 open decision(s) record the remaining questions (4 blocking for approval); none is resolved or assumed here"
+    }
+  ],
+  "note": "An engineering gate: it states that the source is understood well enough to convert, with every unknown documented. It is not a G2 approval and does not authorise generation.",
+  "behaviours": [
+    {
+      "behaviour_id": "INQPORT:ENTRY-DISPATCH",
+      "kind": "dispatch",
+      "classification": "PARTIAL",
+      "lines": [
+        41,
+        55
+      ],
+      "inputs": [
+        "WS-POSITION-FOUND"
+      ],
+      "outputs": [],
+      "side_effects": [],
+      "unresolved": [],
+      "covered_by": [
+        "REQ-INQPORT-001"
+      ]
+    },
+    {
+      "behaviour_id": "INQPORT:P100-INIT-PROGRAM",
+      "kind": "performed_range",
+      "classification": "VERIFIED_CANDIDATE",
+      "lines": [
+        58,
+        64
+      ],
+      "inputs": [
+        "DFHCOMMAREA"
+      ],
+      "outputs": [
+        "WS-COMMAREA",
+        "WS-POSITION-RECORD"
+      ],
+      "side_effects": [],
+      "unresolved": [],
+      "covered_by": [
+        "REQ-INQPORT-001",
+        "REQ-INQPORT-002"
+      ]
+    },
+    {
+      "behaviour_id": "INQPORT:P200-GET-POSITION",
+      "kind": "performed_range",
+      "classification": "PARTIAL",
+      "lines": [
+        69,
+        81
+      ],
+      "inputs": [
+        "WS-POSITION-RECORD",
+        "WS-RESPONSE-CODE"
+      ],
+      "outputs": [
+        "OF",
+        "POSITION-ACCOUNT",
+        "WS-POSITION-FOUND",
+        "WS-POSITION-RECORD"
+      ],
+      "side_effects": [],
+      "unresolved": [
+        "WS-COMMAREA-ACCOUNT-NO",
+        "POSITION-ACCOUNT"
+      ],
+      "covered_by": [
+        "REQ-INQPORT-001"
+      ]
+    },
+    {
+      "behaviour_id": "INQPORT:P300-FORMAT-DISPLAY",
+      "kind": "performed_range",
+      "classification": "VERIFIED_CANDIDATE",
+      "lines": [
+        87,
+        92
+      ],
+      "inputs": [
+        "WS-POSITION-RECORD",
+        "WS-RESPONSE-CODE"
+      ],
+      "outputs": [],
+      "side_effects": [],
+      "unresolved": [],
+      "covered_by": [
+        "REQ-INQPORT-001"
+      ]
+    },
+    {
+      "behaviour_id": "INQPORT:P900-NOT-FOUND",
+      "kind": "performed_range",
+      "classification": "VERIFIED_CANDIDATE",
+      "lines": [
+        97,
+        99
+      ],
+      "inputs": [
+        "WS-COMMAREA"
+      ],
+      "outputs": [
+        "DFHCOMMAREA",
+        "INQCOM-ERROR-MSG",
+        "OF",
+        "WS-COMMAREA"
+      ],
+      "side_effects": [],
+      "unresolved": [],
+      "covered_by": [
+        "REQ-INQPORT-001"
+      ]
+    }
+  ],
+  "gaps": [
+    {
+      "gap_id": "GAP-INQPORT-P200-GET-POSITION-WS-COMMAREA-ACCOUNT-NO",
+      "kind": "UNDECLARED_NAME_SEMANTICS",
+      "behaviour_id": "INQPORT:P200-GET-POSITION",
+      "source": {
+        "path": "src/programs/online/INQPORT.cbl",
+        "sha256": "5c752c9243105066d0e0f055501217a99b198d94b577b41c8de2d52a305b4bdc",
+        "lines": [
+          69
+        ],
+        "statements": [
+          {
+            "line": 69,
+            "text": "MOVE WS-COMMAREA-ACCOUNT-NO TO POSITION-ACCOUNT OF WS-POSITION-RECORD."
+          }
+        ]
+      },
+      "missing_fact": "WS-COMMAREA-ACCOUNT-NO is used but declared nowhere in the repository; its layout and value meanings are the subject of DR-INQPORT-002, DR-F2-P0006-006 (missing: a declaration of WS-COMMAREA-ACCOUNT-NO; a declaration of POSITION-ACCOUNT)",
+      "why_unsafe": "the outputs of these statements (POSITION-ACCOUNT, OF, WS-POSITION-RECORD) depend on a value whose meaning is not established; any Java mapping would invent it",
+      "affected_requirements": [
+        "REQ-INQPORT-001"
+      ],
+      "affected_java_component": "outcome mapping of behaviour P200-GET-POSITION (behind a port whose only implementation throws until the gap is resolved)",
+      "required_action": [
+        "DR-INQPORT-002: a signed resolution by business_sme",
+        "DR-F2-P0006-006: a signed resolution by technical_authority"
+      ],
+      "validation_evidence": "the real definition of WS-COMMAREA-ACCOUNT-NO for the target runtime and a captured legacy run showing each outcome branch",
+      "blocks_execution_path": "request its PERFORM -> P200-GET-POSITION: statements 69",
+      "blocking": true,
+      "status": "OPEN"
+    },
+    {
+      "gap_id": "GAP-INQPORT-P200-GET-POSITION-POSITION-ACCOUNT",
+      "kind": "UNDECLARED_NAME_SEMANTICS",
+      "behaviour_id": "INQPORT:P200-GET-POSITION",
+      "source": {
+        "path": "src/programs/online/INQPORT.cbl",
+        "sha256": "5c752c9243105066d0e0f055501217a99b198d94b577b41c8de2d52a305b4bdc",
+        "lines": [
+          69,
+          72
+        ],
+        "statements": [
+          {
+            "line": 69,
+            "text": "MOVE WS-COMMAREA-ACCOUNT-NO TO POSITION-ACCOUNT OF WS-POSITION-RECORD."
+          },
+          {
+            "line": 72,
+            "text": "EXEC CICS READ FILE('POSFILE') INTO(WS-POSITION-RECORD) RIDFLD(POSITION-ACCOUNT OF WS-POSITION-RECORD) RESP(WS-RESPONSE-CODE) END-EXEC."
+          }
+        ]
+      },
+      "missing_fact": "POSITION-ACCOUNT is used but declared nowhere in the repository; its layout and value meanings are the subject of DR-INQPORT-002, DR-F2-P0006-006 (missing: a declaration of WS-COMMAREA-ACCOUNT-NO; a declaration of POSITION-ACCOUNT)",
+      "why_unsafe": "the outputs of these statements (POSITION-ACCOUNT, OF, WS-POSITION-RECORD) depend on a value whose meaning is not established; any Java mapping would invent it",
+      "affected_requirements": [
+        "REQ-INQPORT-001"
+      ],
+      "affected_java_component": "outcome mapping of behaviour P200-GET-POSITION (behind a port whose only implementation throws until the gap is resolved)",
+      "required_action": [
+        "DR-INQPORT-002: a signed resolution by business_sme",
+        "DR-F2-P0006-006: a signed resolution by technical_authority"
+      ],
+      "validation_evidence": "the real definition of POSITION-ACCOUNT for the target runtime and a captured legacy run showing each outcome branch",
+      "blocks_execution_path": "request its PERFORM -> P200-GET-POSITION: statements 69, 72",
+      "blocking": true,
+      "status": "OPEN"
+    }
+  ],
+  "closures": [
+    {
+      "behaviour_id": "INQPORT:P100-INIT-PROGRAM",
+      "status": "UNRESOLVED",
+      "unresolved_reasons": [
+        "line 61: EXEC CICS hands control and data to the transaction monitor",
+        "line 61: NOTFND is neither declared, a keyword, a paragraph nor the subject of a blocking decision (unknown dependency)"
+      ],
+      "units": [
+        "INQPORT"
+      ],
+      "external": [],
+      "undeclared": [],
+      "sha256": "3db19cf7737e728321e93ea5105fa74bc4a750c6c913ed6aab565361775c8353"
+    },
+    {
+      "behaviour_id": "INQPORT:P200-GET-POSITION",
+      "status": "UNRESOLVED",
+      "unresolved_reasons": [
+        "line 72: EXEC CICS hands control and data to the transaction monitor",
+        "line 72: FILE is neither declared, a keyword, a paragraph nor the subject of a blocking decision (unknown dependency)",
+        "line 72: RESP is neither declared, a keyword, a paragraph nor the subject of a blocking decision (unknown dependency)",
+        "line 78: DFHRESP is neither declared, a keyword, a paragraph nor the subject of a blocking decision (unknown dependency)",
+        "line 78: NORMAL is neither declared, a keyword, a paragraph nor the subject of a blocking decision (unknown dependency)"
+      ],
+      "units": [
+        "INQPORT"
+      ],
+      "external": [],
+      "undeclared": [
+        "WS-COMMAREA-ACCOUNT-NO",
+        "POSITION-ACCOUNT"
+      ],
+      "sha256": "10ee91cae40b65b795d584324e4752ef0ba1ec618cac7f1c451dbb40d4379c08"
+    },
+    {
+      "behaviour_id": "INQPORT:P300-FORMAT-DISPLAY",
+      "status": "UNRESOLVED",
+      "unresolved_reasons": [
+        "line 87: EXEC CICS hands control and data to the transaction monitor",
+        "line 87: MAP is neither declared, a keyword, a paragraph nor the subject of a blocking decision (unknown dependency)",
+        "line 87: RESP is neither declared, a keyword, a paragraph nor the subject of a blocking decision (unknown dependency)"
+      ],
+      "units": [
+        "INQPORT"
+      ],
+      "external": [],
+      "undeclared": [
+        "WS-COMMAREA-ACCOUNT-NO",
+        "POSITION-ACCOUNT"
+      ],
+      "sha256": "75ddcb6440397216ca084ae27900909d9df2980dde3cbf05c7de4ec54c479862"
+    },
+    {
+      "behaviour_id": "INQPORT:P900-NOT-FOUND",
+      "status": "RESOLVED",
+      "unresolved_reasons": [],
+      "units": [
+        "INQPORT"
+      ],
+      "external": [],
+      "undeclared": [],
+      "sha256": "c3747a26524ad9159a76b3352ce063f53f45545c8ac3ef78efb99a06977cf700"
+    }
+  ],
+  "open_decisions": [
+    {
+      "id": "DR-F2-0011-003",
+      "blocking": false,
+      "question": "Which TRUNC compiler option (STD, OPT or BIN) was used for programs including these copybooks? It decides whether S9(4)/S9(8)/S9(9) COMP fields are truncated to their PIC digits or to the binary halfword/fullword range on store."
+    },
+    {
+      "id": "DR-F2-P0006-001",
+      "blocking": true,
+      "question": "INQPORT line 21 includes SQLPOS (EXEC SQL INCLUDE SQLPOS END-EXEC) inside 01 WS-DB2-POSITION, but SQLPOS is not in the repository or copybook registry. Can the SQLPOS member (likely a DCLGEN of a positions table) be supplied, or should WS-DB2-POSITION be declared unused and dropped?"
+    },
+    {
+      "id": "DR-F2-P0006-006",
+      "blocking": true,
+      "question": "INQPORT reads POSFILE with RIDFLD(POSITION-ACCOUNT OF WS-POSITION-RECORD) after MOVE WS-COMMAREA-ACCOUNT-NO, but neither name is declared (POSREC and INQCOM declare other names, e.g. INQCOM-ACCOUNT-NO). Which POSREC field is the POSFILE key and which INQCOM field supplies it?"
+    },
+    {
+      "id": "DR-F2-P0006-007",
+      "blocking": false,
+      "question": "Copybooks whose own record is level 01 (INQCOM, DB2REQ) are copied under program 01 groups (WS-COMMAREA, WS-DB2-REQUEST), so qualified references such as INQCOM-ERROR-MSG OF WS-COMMAREA and DB2-SQLCODE OF WS-DB2-REQUEST do not resolve. Should the Java model treat the holder 01 and the copybook 01 as the same storage (alias) or keep them separate?"
+    },
+    {
+      "id": "DR-F2-P0006-012",
+      "blocking": false,
+      "question": "INQHIST, INQONLN and INQPORT register EXEC CICS HANDLE CONDITION targets (ERROR, PGMIDERR, NOTFND) that transfer control only at run time (INQHIST's P999 falls off the end without CICS RETURN). How should these implicit transfers map to Java exception handling, and should the missing RETURN be treated as a defect?"
+    },
+    {
+      "id": "DR-F2-PKT0010-002",
+      "blocking": false,
+      "question": "Which character encoding (code page) do the files and areas described by these copybooks use for DISPLAY data on the legacy platform (EBCDIC 037, 1140, another EBCDIC variant, or ASCII)? The zoned-decimal test vectors and String codecs depend on it."
+    },
+    {
+      "id": "DR-INQPORT-001",
+      "blocking": true,
+      "question": "INQPORT includes SQLPOS (EXEC SQL INCLUDE, line 21), but no SQLPOS member exists in the repository (possibly an external DCLGEN member); WS-DB2-POSITION therefore has no registered content. Can the SQLPOS member be located and added so the position host-variable layout is known?"
+    },
+    {
+      "id": "DR-INQPORT-002",
+      "blocking": true,
+      "question": "INQPORT reads POSFILE using WS-COMMAREA-ACCOUNT-NO and POSITION-ACCOUNT OF WS-POSITION-RECORD (STMT-000009, STMT-000010), neither declared (INQCOM declares INQCOM-ACCOUNT-NO; POSREC has no POSITION-ACCOUNT), and returns 'Position not found for account' and error codes through INQCOM-* OF WS-COMMAREA, which do not resolve. Which key identifies the position, and which commarea fields carry the message and response code?"
+    },
+    {
+      "id": "DR-INQPORT-003",
+      "blocking": false,
+      "question": "INQPORT registers ERROR -> P999-ERROR-ROUTINE and NOTFND -> P900-NOT-FOUND (line 61); the 'Error accessing position data' path is reachable only through this run-time handler, and four PERFORM ... THRU statements (lines 41, 44, 48, 51) are unstructured. Should the modern design keep this error path with explicit response checks?"
+    },
+    {
+      "id": "RVW-GAP-092",
+      "blocking": false,
+      "question": "GAP-092 (medium, DIAGRAM_RENDER_UNVERIFIED) is not addressed by any decision or requirement: Visual rendering of the 65 Mermaid diagrams is unverified. Acknowledge it as a known limitation (resolved_no_change) or exclude the affected units?"
+    },
+    {
+      "id": "RVW-GAP-104",
+      "blocking": false,
+      "question": "GAP-104 (low, DIAGRAM_INCOMPLETE) is not addressed by any decision or requirement: COMP-UNRESOLVED: all seven edges are unsupported. Acknowledge it as a known limitation (resolved_no_change) or exclude the affected units?"
+    }
+  ],
+  "authorisation": {
+    "generation_authorized": false,
+    "blockers": [
+      "config generation.java_generation_allowed is false (project authority)",
+      "no authorised orchestrator.java_target_dir",
+      "G4 is BLOCKED (needs signed G2, G3 and G4 approvals by trusted signers)",
+      "trust store: TRUST_NOT_CONFIGURED"
+    ],
+    "gates": {
+      "G0": "PASS",
+      "G1": "PASS",
+      "G2": "UNVERIFIED",
+      "G3": "BLOCKED",
+      "G4": "BLOCKED",
+      "G5": "BLOCKED",
+      "G6": "BLOCKED",
+      "G7": "BLOCKED",
+      "G8": "BLOCKED"
+    },
+    "trust": "TRUST_NOT_CONFIGURED",
+    "program_g2_scope": {
+      "readiness": "NOT_READY",
+      "blocking": 9,
+      "scope_sha256": "4ca5f493e081fef44edaeda241c220553e4cb366a51721504d8331264b75f64c"
+    },
+    "note": "Engineering gates never authorise generation. Java may be generated only when generation_authorized is true."
+  }
+}

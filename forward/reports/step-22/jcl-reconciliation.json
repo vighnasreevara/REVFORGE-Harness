@@ -1,0 +1,533 @@
+{
+ "contract": "step-22/jcl-reconciliation",
+ "fields": {
+  "status": "IMPLEMENTED_TEST_VERIFIED: the Java job runs end to end in a passing integration test; IMPLEMENTED_BLOCKED_AT_STEP: it runs until a program gap; STEP_NOT_CONVERTED: a utility step (IDCAMS)"
+ },
+ "summary": {
+  "total": 15,
+  "by_status": {
+   "IMPLEMENTED_BLOCKED_AT_STEP": 11,
+   "STEP_NOT_CONVERTED (utility)": 1,
+   "IMPLEMENTED_TEST_VERIFIED": 3
+  }
+ },
+ "cobol_equivalence": "NOT CLAIMED for any job",
+ "jobs": [
+  {
+   "job": "RTNANA00",
+   "source": "src/jcl/RTNANA.jcl",
+   "file_id": "SYS-PORTFOLIO-001-FIL-0026",
+   "reverse_steps": [
+    {
+     "step": "RTNANA",
+     "program": "RTNANA00",
+     "type": "cobol"
+    }
+   ],
+   "forward_steps": [
+    {
+     "step": "RTNANA",
+     "pgm": "RTNANA00",
+     "converted": true,
+     "dds": [
+      "STEPLIB",
+      "RPTFILE",
+      "SYSOUT",
+      "SYSUDUMP",
+      "SYSPRINT"
+     ]
+    }
+   ],
+   "datasets": 1,
+   "parameters": [],
+   "cond_codes": [],
+   "restart": "RESTART/checkpoint parameters: none in the JCL",
+   "forward_job": "revforge.app.batch.Jobs#RTNANA00",
+   "integration_test": "BLOCKED_AS_EXPECTED",
+   "status": "IMPLEMENTED_BLOCKED_AT_STEP"
+  },
+  {
+   "job": "RPTAUD00",
+   "source": "src/jcl/batch/RPTAUD.jcl",
+   "file_id": "SYS-PORTFOLIO-001-FIL-0027",
+   "reverse_steps": [
+    {
+     "step": "STEP01",
+     "program": "RPTAUD00",
+     "type": "cobol"
+    }
+   ],
+   "forward_steps": [
+    {
+     "step": "STEP01",
+     "pgm": "RPTAUD00",
+     "converted": true,
+     "dds": [
+      "STEPLIB",
+      "AUDITLOG",
+      "ERRLOG",
+      "RPTFILE",
+      "SYSOUT",
+      "SYSUDUMP",
+      "SYSPRINT"
+     ]
+    }
+   ],
+   "datasets": 4,
+   "parameters": [],
+   "cond_codes": [],
+   "restart": "RESTART/checkpoint parameters: none in the JCL",
+   "forward_job": "revforge.app.batch.Jobs#RPTAUD00",
+   "integration_test": "BLOCKED_AS_EXPECTED",
+   "status": "IMPLEMENTED_BLOCKED_AT_STEP"
+  },
+  {
+   "job": "RPTPOS00",
+   "source": "src/jcl/batch/RPTPOS.jcl",
+   "file_id": "SYS-PORTFOLIO-001-FIL-0028",
+   "reverse_steps": [
+    {
+     "step": "STEP01",
+     "program": "RPTPOS00",
+     "type": "cobol"
+    }
+   ],
+   "forward_steps": [
+    {
+     "step": "STEP01",
+     "pgm": "RPTPOS00",
+     "converted": true,
+     "dds": [
+      "STEPLIB",
+      "POSMSTRE",
+      "TRANHIST",
+      "RPTFILE",
+      "SYSOUT",
+      "SYSUDUMP",
+      "SYSPRINT"
+     ]
+    }
+   ],
+   "datasets": 4,
+   "parameters": [],
+   "cond_codes": [],
+   "restart": "RESTART/checkpoint parameters: none in the JCL",
+   "forward_job": "revforge.app.batch.Jobs#RPTPOS00",
+   "integration_test": "BLOCKED_AS_EXPECTED",
+   "status": "IMPLEMENTED_BLOCKED_AT_STEP"
+  },
+  {
+   "job": "RPTSTA00",
+   "source": "src/jcl/batch/RPTSTA.jcl",
+   "file_id": "SYS-PORTFOLIO-001-FIL-0029",
+   "reverse_steps": [
+    {
+     "step": "STEP01",
+     "program": "RPTSTA00",
+     "type": "cobol"
+    }
+   ],
+   "forward_steps": [
+    {
+     "step": "STEP01",
+     "pgm": "RPTSTA00",
+     "converted": true,
+     "dds": [
+      "STEPLIB",
+      "DB2STATS",
+      "BCHSTATS",
+      "RPTFILE",
+      "SYSOUT",
+      "SYSUDUMP",
+      "SYSPRINT"
+     ]
+    }
+   ],
+   "datasets": 4,
+   "parameters": [],
+   "cond_codes": [],
+   "restart": "RESTART/checkpoint parameters: none in the JCL",
+   "forward_job": "revforge.app.batch.Jobs#RPTSTA00",
+   "integration_test": "BLOCKED_AS_EXPECTED",
+   "status": "IMPLEMENTED_BLOCKED_AT_STEP"
+  },
+  {
+   "job": "PORTADD",
+   "source": "src/jcl/portfolio/PORTADD.jcl",
+   "file_id": "SYS-PORTFOLIO-001-FIL-0030",
+   "reverse_steps": [
+    {
+     "step": "STEP1",
+     "program": "PORTADD",
+     "type": "cobol"
+    }
+   ],
+   "forward_steps": [
+    {
+     "step": "STEP1",
+     "pgm": "PORTADD",
+     "converted": true,
+     "dds": [
+      "STEPLIB",
+      "PORTFILE",
+      "INPTFILE",
+      "SYSOUT",
+      "SYSPRINT",
+      "SYSUDUMP"
+     ]
+    }
+   ],
+   "datasets": 3,
+   "parameters": [],
+   "cond_codes": [],
+   "restart": "RESTART/checkpoint parameters: none in the JCL",
+   "forward_job": "revforge.app.batch.Jobs#PORTADD",
+   "integration_test": "BLOCKED_AS_EXPECTED",
+   "status": "IMPLEMENTED_BLOCKED_AT_STEP"
+  },
+  {
+   "job": "PORTDEF",
+   "source": "src/jcl/portfolio/PORTDEF.jcl",
+   "file_id": "SYS-PORTFOLIO-001-FIL-0031",
+   "reverse_steps": [
+    {
+     "step": "DEFVSAM",
+     "program": "IDCAMS",
+     "type": "utility"
+    }
+   ],
+   "forward_steps": [
+    {
+     "step": "DEFVSAM",
+     "pgm": "IDCAMS",
+     "converted": false,
+     "dds": [
+      "SYSPRINT",
+      "SYSIN"
+     ]
+    }
+   ],
+   "datasets": 0,
+   "parameters": [],
+   "cond_codes": [],
+   "restart": "RESTART/checkpoint parameters: none in the JCL",
+   "forward_job": "revforge.app.batch.Jobs#PORTDEF",
+   "integration_test": "BLOCKED_AS_EXPECTED",
+   "status": "STEP_NOT_CONVERTED (utility)"
+  },
+  {
+   "job": "PORTDEL",
+   "source": "src/jcl/portfolio/PORTDEL.jcl",
+   "file_id": "SYS-PORTFOLIO-001-FIL-0032",
+   "reverse_steps": [
+    {
+     "step": "STEP1",
+     "program": "PORTDEL",
+     "type": "cobol"
+    }
+   ],
+   "forward_steps": [
+    {
+     "step": "STEP1",
+     "pgm": "PORTDEL",
+     "converted": true,
+     "dds": [
+      "STEPLIB",
+      "PORTFILE",
+      "DELEFILE",
+      "AUDFILE",
+      "SYSOUT",
+      "SYSPRINT",
+      "SYSUDUMP"
+     ]
+    }
+   ],
+   "datasets": 4,
+   "parameters": [],
+   "cond_codes": [],
+   "restart": "RESTART/checkpoint parameters: none in the JCL",
+   "forward_job": "revforge.app.batch.Jobs#PORTDEL",
+   "integration_test": "PASS",
+   "status": "IMPLEMENTED_TEST_VERIFIED"
+  },
+  {
+   "job": "PORTREAD",
+   "source": "src/jcl/portfolio/PORTREAD.jcl",
+   "file_id": "SYS-PORTFOLIO-001-FIL-0033",
+   "reverse_steps": [
+    {
+     "step": "STEP1",
+     "program": "PORTREAD",
+     "type": "cobol"
+    }
+   ],
+   "forward_steps": [
+    {
+     "step": "STEP1",
+     "pgm": "PORTREAD",
+     "converted": true,
+     "dds": [
+      "STEPLIB",
+      "PORTFILE",
+      "SYSOUT",
+      "SYSPRINT",
+      "SYSUDUMP"
+     ]
+    }
+   ],
+   "datasets": 2,
+   "parameters": [],
+   "cond_codes": [],
+   "restart": "RESTART/checkpoint parameters: none in the JCL",
+   "forward_job": "revforge.app.batch.Jobs#PORTREAD",
+   "integration_test": "PASS",
+   "status": "IMPLEMENTED_TEST_VERIFIED"
+  },
+  {
+   "job": "PORTTEST",
+   "source": "src/jcl/portfolio/PORTTEST.jcl",
+   "file_id": "SYS-PORTFOLIO-001-FIL-0034",
+   "reverse_steps": [
+    {
+     "step": "STEP1",
+     "program": "PORTTEST",
+     "type": "cobol"
+    }
+   ],
+   "forward_steps": [
+    {
+     "step": "STEP1",
+     "pgm": "PORTTEST",
+     "converted": true,
+     "dds": [
+      "STEPLIB",
+      "TESTFILE",
+      "SYSOUT",
+      "SYSPRINT",
+      "SYSUDUMP"
+     ]
+    }
+   ],
+   "datasets": 2,
+   "parameters": [],
+   "cond_codes": [],
+   "restart": "RESTART/checkpoint parameters: none in the JCL",
+   "forward_job": "revforge.app.batch.Jobs#PORTTEST",
+   "integration_test": "BLOCKED_AS_EXPECTED",
+   "status": "IMPLEMENTED_BLOCKED_AT_STEP"
+  },
+  {
+   "job": "PORTUPDT",
+   "source": "src/jcl/portfolio/PORTUPDT.jcl",
+   "file_id": "SYS-PORTFOLIO-001-FIL-0035",
+   "reverse_steps": [
+    {
+     "step": "STEP1",
+     "program": "PORTUPDT",
+     "type": "cobol"
+    }
+   ],
+   "forward_steps": [
+    {
+     "step": "STEP1",
+     "pgm": "PORTUPDT",
+     "converted": true,
+     "dds": [
+      "STEPLIB",
+      "PORTFILE",
+      "UPDTFILE",
+      "SYSOUT",
+      "SYSPRINT",
+      "SYSUDUMP"
+     ]
+    }
+   ],
+   "datasets": 3,
+   "parameters": [],
+   "cond_codes": [],
+   "restart": "RESTART/checkpoint parameters: none in the JCL",
+   "forward_job": "revforge.app.batch.Jobs#PORTUPDT",
+   "integration_test": "PASS",
+   "status": "IMPLEMENTED_TEST_VERIFIED"
+  },
+  {
+   "job": "TSTGEN00",
+   "source": "src/jcl/test/TSTGEN.jcl",
+   "file_id": "SYS-PORTFOLIO-001-FIL-0036",
+   "reverse_steps": [
+    {
+     "step": "STEP01",
+     "program": "TSTGEN00",
+     "type": "cobol"
+    }
+   ],
+   "forward_steps": [
+    {
+     "step": "STEP01",
+     "pgm": "TSTGEN00",
+     "converted": true,
+     "dds": [
+      "STEPLIB",
+      "TSTCFG",
+      "PORTOUT",
+      "TRANOUT",
+      "RANDSEED",
+      "SYSOUT",
+      "SYSUDUMP",
+      "SYSPRINT"
+     ]
+    }
+   ],
+   "datasets": 5,
+   "parameters": [],
+   "cond_codes": [],
+   "restart": "RESTART/checkpoint parameters: none in the JCL",
+   "forward_job": "revforge.app.batch.Jobs#TSTGEN00",
+   "integration_test": "BLOCKED_AS_EXPECTED",
+   "status": "IMPLEMENTED_BLOCKED_AT_STEP"
+  },
+  {
+   "job": "TSTVAL00",
+   "source": "src/jcl/test/TSTVAL.jcl",
+   "file_id": "SYS-PORTFOLIO-001-FIL-0037",
+   "reverse_steps": [
+    {
+     "step": "STEP01",
+     "program": "TSTVAL00",
+     "type": "cobol"
+    }
+   ],
+   "forward_steps": [
+    {
+     "step": "STEP01",
+     "pgm": "TSTVAL00",
+     "converted": true,
+     "dds": [
+      "STEPLIB",
+      "TESTCASE",
+      "EXPECTED",
+      "ACTUAL",
+      "TESTRPT",
+      "SYSOUT",
+      "SYSUDUMP",
+      "SYSPRINT"
+     ]
+    }
+   ],
+   "datasets": 5,
+   "parameters": [],
+   "cond_codes": [],
+   "restart": "RESTART/checkpoint parameters: none in the JCL",
+   "forward_job": "revforge.app.batch.Jobs#TSTVAL00",
+   "integration_test": "BLOCKED_AS_EXPECTED",
+   "status": "IMPLEMENTED_BLOCKED_AT_STEP"
+  },
+  {
+   "job": "UTLMNT00",
+   "source": "src/jcl/utility/UTLMNT.jcl",
+   "file_id": "SYS-PORTFOLIO-001-FIL-0038",
+   "reverse_steps": [
+    {
+     "step": "STEP01",
+     "program": "UTLMNT00",
+     "type": "cobol"
+    }
+   ],
+   "forward_steps": [
+    {
+     "step": "STEP01",
+     "pgm": "UTLMNT00",
+     "converted": true,
+     "dds": [
+      "STEPLIB",
+      "CTLFILE",
+      "ARCHFILE",
+      "RPTFILE",
+      "SYSOUT",
+      "SYSUDUMP",
+      "SYSPRINT"
+     ]
+    }
+   ],
+   "datasets": 4,
+   "parameters": [],
+   "cond_codes": [],
+   "restart": "RESTART/checkpoint parameters: none in the JCL",
+   "forward_job": "revforge.app.batch.Jobs#UTLMNT00",
+   "integration_test": "BLOCKED_AS_EXPECTED",
+   "status": "IMPLEMENTED_BLOCKED_AT_STEP"
+  },
+  {
+   "job": "UTLMON00",
+   "source": "src/jcl/utility/UTLMON.jcl",
+   "file_id": "SYS-PORTFOLIO-001-FIL-0039",
+   "reverse_steps": [
+    {
+     "step": "STEP01",
+     "program": "UTLMON00",
+     "type": "cobol"
+    }
+   ],
+   "forward_steps": [
+    {
+     "step": "STEP01",
+     "pgm": "UTLMON00",
+     "converted": true,
+     "dds": [
+      "STEPLIB",
+      "MONCFG",
+      "MONLOG",
+      "ALERTS",
+      "DB2STATS",
+      "SYSOUT",
+      "SYSUDUMP",
+      "SYSPRINT"
+     ]
+    }
+   ],
+   "datasets": 5,
+   "parameters": [],
+   "cond_codes": [],
+   "restart": "RESTART/checkpoint parameters: none in the JCL",
+   "forward_job": "revforge.app.batch.Jobs#UTLMON00",
+   "integration_test": "BLOCKED_AS_EXPECTED",
+   "status": "IMPLEMENTED_BLOCKED_AT_STEP"
+  },
+  {
+   "job": "UTLVAL00",
+   "source": "src/jcl/utility/UTLVAL.jcl",
+   "file_id": "SYS-PORTFOLIO-001-FIL-0040",
+   "reverse_steps": [
+    {
+     "step": "STEP01",
+     "program": "UTLVAL00",
+     "type": "cobol"
+    }
+   ],
+   "forward_steps": [
+    {
+     "step": "STEP01",
+     "pgm": "UTLVAL00",
+     "converted": true,
+     "dds": [
+      "STEPLIB",
+      "VALCTL",
+      "POSMSTRE",
+      "TRANHIST",
+      "ERRRPT",
+      "SYSOUT",
+      "SYSUDUMP",
+      "SYSPRINT"
+     ]
+    }
+   ],
+   "datasets": 5,
+   "parameters": [],
+   "cond_codes": [],
+   "restart": "RESTART/checkpoint parameters: none in the JCL",
+   "forward_job": "revforge.app.batch.Jobs#UTLVAL00",
+   "integration_test": "BLOCKED_AS_EXPECTED",
+   "status": "IMPLEMENTED_BLOCKED_AT_STEP"
+  }
+ ]
+}

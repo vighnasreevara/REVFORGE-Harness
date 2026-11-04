@@ -1,0 +1,2060 @@
+{
+ "contract": "step-22/dependency-reconciliation",
+ "fields": {
+  "call_graph_edges[].forward": "RESOLVED_IN_JAVA_BUILD / IMPLEMENTED_CALL / BOUNDARY_GAP / GAP / UNRESOLVED",
+  "external_operations[].forward": "IMPLEMENTED / DECLARATIVE / GAP <kind>"
+ },
+ "summary": {
+  "call_graph": {
+   "COPY: RESOLVED_IN_JAVA_BUILD": 86,
+   "STATIC_CALL: IMPLEMENTED_CALL (converted callee)": 12,
+   "COPY: UNRESOLVED": 3,
+   "SQL_INCLUDE: RESOLVED_IN_JAVA_BUILD": 9,
+   "STATIC_CALL: GAP (UNDEFINED_EXTERNAL_CALL / untranslated)": 3,
+   "CICS_LINK: BOUNDARY_GAP (EXEC CICS LINK)": 14,
+   "SQL_INCLUDE: UNRESOLVED": 1,
+   "STATIC_CALL: GAP (CALL site is a forward gap; callee converted)": 2
+  },
+  "external_operations": {
+   "IMPLEMENTED": 12,
+   "GAP EXTERNAL_SYSTEM_BOUNDARY": 78,
+   "DECLARATIVE (no run-time effect)": 3,
+   "GAP UNDEFINED_EXTERNAL_CALL": 2,
+   "GAP UNDECLARED_NAME": 3,
+   "GAP UNTRANSLATED_STATEMENT": 1
+  },
+  "file_io_statements": {
+   "total": 159,
+   "forward": {
+    "MAPPED": 124,
+    "GAP": 35
+   },
+   "execution": {
+    "NOT_EXECUTED": 55,
+    "TEST_EXECUTED": 57,
+    "GAP_SITE": 35,
+    "BLOCKED_PATH": 12
+   }
+  },
+  "platform": [
+   {
+    "item": "ACCEPT FROM TIME STAMP",
+    "occurrences": 10,
+    "programs": [
+     "AUDPROC",
+     "DB2ERR",
+     "DB2STAT",
+     "ERRHNDL",
+     "ERRPROC",
+     "PORTDEL",
+     "PRCSEQ00",
+     "RCVPRC00"
+    ],
+    "disposition": "AWAITING_EXTERNAL_DEFINITION (legacy environment / platform service); explicit gap, nothing invented"
+   },
+   {
+    "item": "FUNCTION RANDOM",
+    "occurrences": 3,
+    "programs": [
+     "PORTTEST"
+    ],
+    "disposition": "AWAITING_EXTERNAL_DEFINITION (legacy environment / platform service); explicit gap, nothing invented"
+   },
+   {
+    "item": "FUNCTION USER-ID",
+    "occurrences": 2,
+    "programs": [
+     "PORTMSTR",
+     "PORTTRAN"
+    ],
+    "disposition": "AWAITING_EXTERNAL_DEFINITION (legacy environment / platform service); explicit gap, nothing invented"
+   },
+   {
+    "item": "CEE3ABD",
+    "occurrences": 0,
+    "programs": [],
+    "disposition": "no occurrence"
+   },
+   {
+    "item": "ILBOABN0",
+    "occurrences": 1,
+    "programs": [
+     "UTLMON00"
+    ],
+    "disposition": "AWAITING_EXTERNAL_DEFINITION (legacy environment / platform service); explicit gap, nothing invented"
+   },
+   {
+    "item": "DELAY",
+    "occurrences": 2,
+    "programs": [
+     "DB2CONN",
+     "DB2RECV"
+    ],
+    "disposition": "AWAITING_EXTERNAL_DEFINITION (legacy environment / platform service); explicit gap, nothing invented"
+   },
+   {
+    "item": "IDCAMS",
+    "occurrences": 0,
+    "programs": [],
+    "disposition": "job step not converted (PORTDEF JCL); awaiting a platform utility"
+   }
+  ]
+ },
+ "call_graph_edges": [
+  {
+   "from": "BCHCTL00",
+   "to": "BCHCTL",
+   "type": "COPY",
+   "resolved_in_reverse": true,
+   "line": null,
+   "forward": "RESOLVED_IN_JAVA_BUILD"
+  },
+  {
+   "from": "BCHCTL00",
+   "to": "BCHCON",
+   "type": "COPY",
+   "resolved_in_reverse": true,
+   "line": null,
+   "forward": "RESOLVED_IN_JAVA_BUILD"
+  },
+  {
+   "from": "BCHCTL00",
+   "to": "ERRHAND",
+   "type": "COPY",
+   "resolved_in_reverse": true,
+   "line": null,
+   "forward": "RESOLVED_IN_JAVA_BUILD"
+  },
+  {
+   "from": "BCHCTL00",
+   "to": "ERRPROC",
+   "type": "STATIC_CALL",
+   "resolved_in_reverse": true,
+   "line": null,
+   "forward": "IMPLEMENTED_CALL (converted callee)"
+  },
+  {
+   "from": "CKPRST",
+   "to": "CKPRST",
+   "type": "COPY",
+   "resolved_in_reverse": true,
+   "line": null,
+   "forward": "RESOLVED_IN_JAVA_BUILD"
+  },
+  {
+   "from": "CKPRST",
+   "to": "CKPRST",
+   "type": "COPY",
+   "resolved_in_reverse": true,
+   "line": null,
+   "forward": "RESOLVED_IN_JAVA_BUILD"
+  },
+  {
+   "from": "CKPRST",
+   "to": "RETHND",
+   "type": "COPY",
+   "resolved_in_reverse": true,
+   "line": null,
+   "forward": "RESOLVED_IN_JAVA_BUILD"
+  },
+  {
+   "from": "HISTLD00",
+   "to": "HISTREC",
+   "type": "COPY",
+   "resolved_in_reverse": true,
+   "line": null,
+   "forward": "RESOLVED_IN_JAVA_BUILD"
+  },
+  {
+   "from": "HISTLD00",
+   "to": "BCHCTL",
+   "type": "COPY",
+   "resolved_in_reverse": true,
+   "line": null,
+   "forward": "RESOLVED_IN_JAVA_BUILD"
+  },
+  {
+   "from": "HISTLD00",
+   "to": "DBTBLS",
+   "type": "COPY",
+   "resolved_in_reverse": true,
+   "line": null,
+   "forward": "RESOLVED_IN_JAVA_BUILD"
+  },
+  {
+   "from": "HISTLD00",
+   "to": "SQLCA",
+   "type": "COPY",
+   "resolved_in_reverse": true,
+   "line": null,
+   "forward": "RESOLVED_IN_JAVA_BUILD"
+  },
+  {
+   "from": "HISTLD00",
+   "to": "DBPROC",
+   "type": "COPY",
+   "resolved_in_reverse": true,
+   "line": null,
+   "forward": "RESOLVED_IN_JAVA_BUILD"
+  },
+  {
+   "from": "HISTLD00",
+   "to": "ERRHAND",
+   "type": "COPY",
+   "resolved_in_reverse": true,
+   "line": null,
+   "forward": "RESOLVED_IN_JAVA_BUILD"
+  },
+  {
+   "from": "HISTLD00",
+   "to": "BCHCON",
+   "type": "COPY",
+   "resolved_in_reverse": true,
+   "line": null,
+   "forward": "RESOLVED_IN_JAVA_BUILD"
+  },
+  {
+   "from": "HISTLD00",
+   "to": "ERRPROC",
+   "type": "STATIC_CALL",
+   "resolved_in_reverse": true,
+   "line": null,
+   "forward": "IMPLEMENTED_CALL (converted callee)"
+  },
+  {
+   "from": "PRCSEQ00",
+   "to": "PRCSEQ",
+   "type": "COPY",
+   "resolved_in_reverse": true,
+   "line": null,
+   "forward": "RESOLVED_IN_JAVA_BUILD"
+  },
+  {
+   "from": "PRCSEQ00",
+   "to": "BCHCTL",
+   "type": "COPY",
+   "resolved_in_reverse": true,
+   "line": null,
+   "forward": "RESOLVED_IN_JAVA_BUILD"
+  },
+  {
+   "from": "PRCSEQ00",
+   "to": "BCHCON",
+   "type": "COPY",
+   "resolved_in_reverse": true,
+   "line": null,
+   "forward": "RESOLVED_IN_JAVA_BUILD"
+  },
+  {
+   "from": "PRCSEQ00",
+   "to": "ERRHAND",
+   "type": "COPY",
+   "resolved_in_reverse": true,
+   "line": null,
+   "forward": "RESOLVED_IN_JAVA_BUILD"
+  },
+  {
+   "from": "PRCSEQ00",
+   "to": "ERRPROC",
+   "type": "STATIC_CALL",
+   "resolved_in_reverse": true,
+   "line": null,
+   "forward": "IMPLEMENTED_CALL (converted callee)"
+  },
+  {
+   "from": "RCVPRC00",
+   "to": "BCHCTL",
+   "type": "COPY",
+   "resolved_in_reverse": true,
+   "line": null,
+   "forward": "RESOLVED_IN_JAVA_BUILD"
+  },
+  {
+   "from": "RCVPRC00",
+   "to": "PRCSEQ",
+   "type": "COPY",
+   "resolved_in_reverse": true,
+   "line": null,
+   "forward": "RESOLVED_IN_JAVA_BUILD"
+  },
+  {
+   "from": "RCVPRC00",
+   "to": "BCHCON",
+   "type": "COPY",
+   "resolved_in_reverse": true,
+   "line": null,
+   "forward": "RESOLVED_IN_JAVA_BUILD"
+  },
+  {
+   "from": "RCVPRC00",
+   "to": "ERRHAND",
+   "type": "COPY",
+   "resolved_in_reverse": true,
+   "line": null,
+   "forward": "RESOLVED_IN_JAVA_BUILD"
+  },
+  {
+   "from": "RCVPRC00",
+   "to": "ERRPROC",
+   "type": "STATIC_CALL",
+   "resolved_in_reverse": true,
+   "line": null,
+   "forward": "IMPLEMENTED_CALL (converted callee)"
+  },
+  {
+   "from": "RCVPRC00",
+   "to": "ERRPROC",
+   "type": "STATIC_CALL",
+   "resolved_in_reverse": true,
+   "line": null,
+   "forward": "IMPLEMENTED_CALL (converted callee)"
+  },
+  {
+   "from": "RPTAUD00",
+   "to": "AUDITLOG",
+   "type": "COPY",
+   "resolved_in_reverse": true,
+   "line": null,
+   "forward": "RESOLVED_IN_JAVA_BUILD"
+  },
+  {
+   "from": "RPTAUD00",
+   "to": "ERRHAND",
+   "type": "COPY",
+   "resolved_in_reverse": true,
+   "line": null,
+   "forward": "RESOLVED_IN_JAVA_BUILD"
+  },
+  {
+   "from": "RPTAUD00",
+   "to": "RTNCODE",
+   "type": "COPY",
+   "resolved_in_reverse": true,
+   "line": null,
+   "forward": "RESOLVED_IN_JAVA_BUILD"
+  },
+  {
+   "from": "RPTPOS00",
+   "to": "POSREC",
+   "type": "COPY",
+   "resolved_in_reverse": true,
+   "line": null,
+   "forward": "RESOLVED_IN_JAVA_BUILD"
+  },
+  {
+   "from": "RPTPOS00",
+   "to": "TRNREC",
+   "type": "COPY",
+   "resolved_in_reverse": true,
+   "line": null,
+   "forward": "RESOLVED_IN_JAVA_BUILD"
+  },
+  {
+   "from": "RPTPOS00",
+   "to": "RTNCODE",
+   "type": "COPY",
+   "resolved_in_reverse": true,
+   "line": null,
+   "forward": "RESOLVED_IN_JAVA_BUILD"
+  },
+  {
+   "from": "RPTPOS00",
+   "to": "ERRHAND",
+   "type": "COPY",
+   "resolved_in_reverse": true,
+   "line": null,
+   "forward": "RESOLVED_IN_JAVA_BUILD"
+  },
+  {
+   "from": "RPTSTA00",
+   "to": "DB2STAT",
+   "type": "COPY",
+   "resolved_in_reverse": false,
+   "line": null,
+   "forward": "UNRESOLVED"
+  },
+  {
+   "from": "RPTSTA00",
+   "to": "BCHCTL",
+   "type": "COPY",
+   "resolved_in_reverse": true,
+   "line": null,
+   "forward": "RESOLVED_IN_JAVA_BUILD"
+  },
+  {
+   "from": "RPTSTA00",
+   "to": "RTNCODE",
+   "type": "COPY",
+   "resolved_in_reverse": true,
+   "line": null,
+   "forward": "RESOLVED_IN_JAVA_BUILD"
+  },
+  {
+   "from": "RPTSTA00",
+   "to": "ERRHAND",
+   "type": "COPY",
+   "resolved_in_reverse": true,
+   "line": null,
+   "forward": "RESOLVED_IN_JAVA_BUILD"
+  },
+  {
+   "from": "RTNANA00",
+   "to": "SQLCA",
+   "type": "SQL_INCLUDE",
+   "resolved_in_reverse": true,
+   "line": null,
+   "forward": "RESOLVED_IN_JAVA_BUILD"
+  },
+  {
+   "from": "RTNCDE00",
+   "to": "SQLCA",
+   "type": "SQL_INCLUDE",
+   "resolved_in_reverse": true,
+   "line": null,
+   "forward": "RESOLVED_IN_JAVA_BUILD"
+  },
+  {
+   "from": "RTNCDE00",
+   "to": "RTNCODE",
+   "type": "COPY",
+   "resolved_in_reverse": true,
+   "line": null,
+   "forward": "RESOLVED_IN_JAVA_BUILD"
+  },
+  {
+   "from": "AUDPROC",
+   "to": "AUDITLOG",
+   "type": "COPY",
+   "resolved_in_reverse": true,
+   "line": null,
+   "forward": "RESOLVED_IN_JAVA_BUILD"
+  },
+  {
+   "from": "DB2CMT",
+   "to": "SQLCA",
+   "type": "COPY",
+   "resolved_in_reverse": true,
+   "line": null,
+   "forward": "RESOLVED_IN_JAVA_BUILD"
+  },
+  {
+   "from": "DB2CMT",
+   "to": "DBPROC",
+   "type": "COPY",
+   "resolved_in_reverse": true,
+   "line": null,
+   "forward": "RESOLVED_IN_JAVA_BUILD"
+  },
+  {
+   "from": "DB2CMT",
+   "to": "ERRHAND",
+   "type": "COPY",
+   "resolved_in_reverse": true,
+   "line": null,
+   "forward": "RESOLVED_IN_JAVA_BUILD"
+  },
+  {
+   "from": "DB2CMT",
+   "to": "ERRPROC",
+   "type": "STATIC_CALL",
+   "resolved_in_reverse": true,
+   "line": null,
+   "forward": "IMPLEMENTED_CALL (converted callee)"
+  },
+  {
+   "from": "DB2CMT",
+   "to": "DB2ERR",
+   "type": "STATIC_CALL",
+   "resolved_in_reverse": true,
+   "line": null,
+   "forward": "IMPLEMENTED_CALL (converted callee)"
+  },
+  {
+   "from": "DB2CONN",
+   "to": "SQLCA",
+   "type": "COPY",
+   "resolved_in_reverse": true,
+   "line": null,
+   "forward": "RESOLVED_IN_JAVA_BUILD"
+  },
+  {
+   "from": "DB2CONN",
+   "to": "DBPROC",
+   "type": "COPY",
+   "resolved_in_reverse": true,
+   "line": null,
+   "forward": "RESOLVED_IN_JAVA_BUILD"
+  },
+  {
+   "from": "DB2CONN",
+   "to": "ERRHAND",
+   "type": "COPY",
+   "resolved_in_reverse": true,
+   "line": null,
+   "forward": "RESOLVED_IN_JAVA_BUILD"
+  },
+  {
+   "from": "DB2CONN",
+   "to": "DELAY",
+   "type": "STATIC_CALL",
+   "resolved_in_reverse": false,
+   "line": null,
+   "forward": "GAP (UNDEFINED_EXTERNAL_CALL / untranslated)"
+  },
+  {
+   "from": "DB2CONN",
+   "to": "ERRPROC",
+   "type": "STATIC_CALL",
+   "resolved_in_reverse": true,
+   "line": null,
+   "forward": "IMPLEMENTED_CALL (converted callee)"
+  },
+  {
+   "from": "DB2ERR",
+   "to": "DBTBLS",
+   "type": "COPY",
+   "resolved_in_reverse": true,
+   "line": null,
+   "forward": "RESOLVED_IN_JAVA_BUILD"
+  },
+  {
+   "from": "DB2ERR",
+   "to": "SQLCA",
+   "type": "COPY",
+   "resolved_in_reverse": true,
+   "line": null,
+   "forward": "RESOLVED_IN_JAVA_BUILD"
+  },
+  {
+   "from": "DB2ERR",
+   "to": "DBPROC",
+   "type": "COPY",
+   "resolved_in_reverse": true,
+   "line": null,
+   "forward": "RESOLVED_IN_JAVA_BUILD"
+  },
+  {
+   "from": "DB2ERR",
+   "to": "ERRHAND",
+   "type": "COPY",
+   "resolved_in_reverse": true,
+   "line": null,
+   "forward": "RESOLVED_IN_JAVA_BUILD"
+  },
+  {
+   "from": "DB2ERR",
+   "to": "ERRPROC",
+   "type": "STATIC_CALL",
+   "resolved_in_reverse": true,
+   "line": null,
+   "forward": "IMPLEMENTED_CALL (converted callee)"
+  },
+  {
+   "from": "DB2STAT",
+   "to": "SQLCA",
+   "type": "COPY",
+   "resolved_in_reverse": true,
+   "line": null,
+   "forward": "RESOLVED_IN_JAVA_BUILD"
+  },
+  {
+   "from": "DB2STAT",
+   "to": "DBPROC",
+   "type": "COPY",
+   "resolved_in_reverse": true,
+   "line": null,
+   "forward": "RESOLVED_IN_JAVA_BUILD"
+  },
+  {
+   "from": "DB2STAT",
+   "to": "ERRHAND",
+   "type": "COPY",
+   "resolved_in_reverse": true,
+   "line": null,
+   "forward": "RESOLVED_IN_JAVA_BUILD"
+  },
+  {
+   "from": "DB2STAT",
+   "to": "ERRPROC",
+   "type": "STATIC_CALL",
+   "resolved_in_reverse": true,
+   "line": null,
+   "forward": "IMPLEMENTED_CALL (converted callee)"
+  },
+  {
+   "from": "ERRPROC",
+   "to": "ERRHAND",
+   "type": "COPY",
+   "resolved_in_reverse": true,
+   "line": null,
+   "forward": "RESOLVED_IN_JAVA_BUILD"
+  },
+  {
+   "from": "CURSMGR",
+   "to": "SQLCA",
+   "type": "SQL_INCLUDE",
+   "resolved_in_reverse": true,
+   "line": null,
+   "forward": "RESOLVED_IN_JAVA_BUILD"
+  },
+  {
+   "from": "DB2ONLN",
+   "to": "SQLCA",
+   "type": "SQL_INCLUDE",
+   "resolved_in_reverse": true,
+   "line": null,
+   "forward": "RESOLVED_IN_JAVA_BUILD"
+  },
+  {
+   "from": "DB2ONLN",
+   "to": "ERRHND",
+   "type": "COPY",
+   "resolved_in_reverse": true,
+   "line": null,
+   "forward": "RESOLVED_IN_JAVA_BUILD"
+  },
+  {
+   "from": "DB2RECV",
+   "to": "SQLCA",
+   "type": "SQL_INCLUDE",
+   "resolved_in_reverse": true,
+   "line": null,
+   "forward": "RESOLVED_IN_JAVA_BUILD"
+  },
+  {
+   "from": "DB2RECV",
+   "to": "ERRHND",
+   "type": "COPY",
+   "resolved_in_reverse": true,
+   "line": null,
+   "forward": "RESOLVED_IN_JAVA_BUILD"
+  },
+  {
+   "from": "DB2RECV",
+   "to": "DB2REQ",
+   "type": "COPY",
+   "resolved_in_reverse": true,
+   "line": null,
+   "forward": "RESOLVED_IN_JAVA_BUILD"
+  },
+  {
+   "from": "DB2RECV",
+   "to": "DB2ONLN",
+   "type": "CICS_LINK",
+   "resolved_in_reverse": true,
+   "line": null,
+   "forward": "BOUNDARY_GAP (EXEC CICS LINK)"
+  },
+  {
+   "from": "DB2RECV",
+   "to": "ERRHNDL",
+   "type": "CICS_LINK",
+   "resolved_in_reverse": true,
+   "line": null,
+   "forward": "BOUNDARY_GAP (EXEC CICS LINK)"
+  },
+  {
+   "from": "ERRHNDL",
+   "to": "ERRHND",
+   "type": "COPY",
+   "resolved_in_reverse": true,
+   "line": null,
+   "forward": "RESOLVED_IN_JAVA_BUILD"
+  },
+  {
+   "from": "ERRHNDL",
+   "to": "SQLCA",
+   "type": "SQL_INCLUDE",
+   "resolved_in_reverse": true,
+   "line": null,
+   "forward": "RESOLVED_IN_JAVA_BUILD"
+  },
+  {
+   "from": "ERRHNDL",
+   "to": "ERRHND",
+   "type": "COPY",
+   "resolved_in_reverse": true,
+   "line": null,
+   "forward": "RESOLVED_IN_JAVA_BUILD"
+  },
+  {
+   "from": "INQHIST",
+   "to": "INQCOM",
+   "type": "COPY",
+   "resolved_in_reverse": true,
+   "line": null,
+   "forward": "RESOLVED_IN_JAVA_BUILD"
+  },
+  {
+   "from": "INQHIST",
+   "to": "SQLCA",
+   "type": "SQL_INCLUDE",
+   "resolved_in_reverse": true,
+   "line": null,
+   "forward": "RESOLVED_IN_JAVA_BUILD"
+  },
+  {
+   "from": "INQHIST",
+   "to": "INQCOM",
+   "type": "COPY",
+   "resolved_in_reverse": true,
+   "line": null,
+   "forward": "RESOLVED_IN_JAVA_BUILD"
+  },
+  {
+   "from": "INQHIST",
+   "to": "DB2ONLN",
+   "type": "CICS_LINK",
+   "resolved_in_reverse": true,
+   "line": null,
+   "forward": "BOUNDARY_GAP (EXEC CICS LINK)"
+  },
+  {
+   "from": "INQHIST",
+   "to": "DB2RECV",
+   "type": "CICS_LINK",
+   "resolved_in_reverse": true,
+   "line": null,
+   "forward": "BOUNDARY_GAP (EXEC CICS LINK)"
+  },
+  {
+   "from": "INQHIST",
+   "to": "CURSMGR",
+   "type": "CICS_LINK",
+   "resolved_in_reverse": true,
+   "line": null,
+   "forward": "BOUNDARY_GAP (EXEC CICS LINK)"
+  },
+  {
+   "from": "INQHIST",
+   "to": "CURSMGR",
+   "type": "CICS_LINK",
+   "resolved_in_reverse": true,
+   "line": null,
+   "forward": "BOUNDARY_GAP (EXEC CICS LINK)"
+  },
+  {
+   "from": "INQHIST",
+   "to": "CURSMGR",
+   "type": "CICS_LINK",
+   "resolved_in_reverse": true,
+   "line": null,
+   "forward": "BOUNDARY_GAP (EXEC CICS LINK)"
+  },
+  {
+   "from": "INQHIST",
+   "to": "CURSMGR",
+   "type": "CICS_LINK",
+   "resolved_in_reverse": true,
+   "line": null,
+   "forward": "BOUNDARY_GAP (EXEC CICS LINK)"
+  },
+  {
+   "from": "INQONLN",
+   "to": "INQCOM",
+   "type": "COPY",
+   "resolved_in_reverse": true,
+   "line": null,
+   "forward": "RESOLVED_IN_JAVA_BUILD"
+  },
+  {
+   "from": "INQONLN",
+   "to": "ERRHND",
+   "type": "COPY",
+   "resolved_in_reverse": true,
+   "line": null,
+   "forward": "RESOLVED_IN_JAVA_BUILD"
+  },
+  {
+   "from": "INQONLN",
+   "to": "INQCOM",
+   "type": "COPY",
+   "resolved_in_reverse": true,
+   "line": null,
+   "forward": "RESOLVED_IN_JAVA_BUILD"
+  },
+  {
+   "from": "INQONLN",
+   "to": "INQPORT",
+   "type": "CICS_LINK",
+   "resolved_in_reverse": true,
+   "line": null,
+   "forward": "BOUNDARY_GAP (EXEC CICS LINK)"
+  },
+  {
+   "from": "INQONLN",
+   "to": "INQHIST",
+   "type": "CICS_LINK",
+   "resolved_in_reverse": true,
+   "line": null,
+   "forward": "BOUNDARY_GAP (EXEC CICS LINK)"
+  },
+  {
+   "from": "INQONLN",
+   "to": "ERRHNDL",
+   "type": "CICS_LINK",
+   "resolved_in_reverse": true,
+   "line": null,
+   "forward": "BOUNDARY_GAP (EXEC CICS LINK)"
+  },
+  {
+   "from": "INQONLN",
+   "to": "SECMGR",
+   "type": "CICS_LINK",
+   "resolved_in_reverse": true,
+   "line": null,
+   "forward": "BOUNDARY_GAP (EXEC CICS LINK)"
+  },
+  {
+   "from": "INQONLN",
+   "to": "SECMGR",
+   "type": "CICS_LINK",
+   "resolved_in_reverse": true,
+   "line": null,
+   "forward": "BOUNDARY_GAP (EXEC CICS LINK)"
+  },
+  {
+   "from": "INQONLN",
+   "to": "SECMGR",
+   "type": "CICS_LINK",
+   "resolved_in_reverse": true,
+   "line": null,
+   "forward": "BOUNDARY_GAP (EXEC CICS LINK)"
+  },
+  {
+   "from": "INQPORT",
+   "to": "INQCOM",
+   "type": "COPY",
+   "resolved_in_reverse": true,
+   "line": null,
+   "forward": "RESOLVED_IN_JAVA_BUILD"
+  },
+  {
+   "from": "INQPORT",
+   "to": "POSREC",
+   "type": "COPY",
+   "resolved_in_reverse": true,
+   "line": null,
+   "forward": "RESOLVED_IN_JAVA_BUILD"
+  },
+  {
+   "from": "INQPORT",
+   "to": "SQLPOS",
+   "type": "SQL_INCLUDE",
+   "resolved_in_reverse": false,
+   "line": null,
+   "forward": "UNRESOLVED"
+  },
+  {
+   "from": "INQPORT",
+   "to": "INQCOM",
+   "type": "COPY",
+   "resolved_in_reverse": true,
+   "line": null,
+   "forward": "RESOLVED_IN_JAVA_BUILD"
+  },
+  {
+   "from": "SECMGR",
+   "to": "SQLCA",
+   "type": "SQL_INCLUDE",
+   "resolved_in_reverse": true,
+   "line": null,
+   "forward": "RESOLVED_IN_JAVA_BUILD"
+  },
+  {
+   "from": "SECMGR",
+   "to": "ERRHND",
+   "type": "COPY",
+   "resolved_in_reverse": true,
+   "line": null,
+   "forward": "RESOLVED_IN_JAVA_BUILD"
+  },
+  {
+   "from": "PORTADD",
+   "to": "PORTFLIO",
+   "type": "COPY",
+   "resolved_in_reverse": true,
+   "line": null,
+   "forward": "RESOLVED_IN_JAVA_BUILD"
+  },
+  {
+   "from": "PORTADD",
+   "to": "PORTFLIO",
+   "type": "COPY",
+   "resolved_in_reverse": true,
+   "line": null,
+   "forward": "RESOLVED_IN_JAVA_BUILD"
+  },
+  {
+   "from": "PORTDEL",
+   "to": "PORTFLIO",
+   "type": "COPY",
+   "resolved_in_reverse": true,
+   "line": null,
+   "forward": "RESOLVED_IN_JAVA_BUILD"
+  },
+  {
+   "from": "PORTMSTR",
+   "to": "ERRPROC",
+   "type": "STATIC_CALL",
+   "resolved_in_reverse": true,
+   "line": null,
+   "forward": "GAP (CALL site is a forward gap; callee converted)"
+  },
+  {
+   "from": "PORTMSTR",
+   "to": "AUDPROC",
+   "type": "STATIC_CALL",
+   "resolved_in_reverse": true,
+   "line": null,
+   "forward": "GAP (CALL site is a forward gap; callee converted)"
+  },
+  {
+   "from": "PORTREAD",
+   "to": "PORTFLIO",
+   "type": "COPY",
+   "resolved_in_reverse": true,
+   "line": null,
+   "forward": "RESOLVED_IN_JAVA_BUILD"
+  },
+  {
+   "from": "PORTTEST",
+   "to": "PORTFLIO",
+   "type": "COPY",
+   "resolved_in_reverse": true,
+   "line": null,
+   "forward": "RESOLVED_IN_JAVA_BUILD"
+  },
+  {
+   "from": "PORTTEST",
+   "to": "ERRHAND",
+   "type": "COPY",
+   "resolved_in_reverse": true,
+   "line": null,
+   "forward": "RESOLVED_IN_JAVA_BUILD"
+  },
+  {
+   "from": "PORTTRAN",
+   "to": "TRNREC",
+   "type": "COPY",
+   "resolved_in_reverse": true,
+   "line": null,
+   "forward": "RESOLVED_IN_JAVA_BUILD"
+  },
+  {
+   "from": "PORTTRAN",
+   "to": "PORTREC",
+   "type": "COPY",
+   "resolved_in_reverse": false,
+   "line": null,
+   "forward": "UNRESOLVED"
+  },
+  {
+   "from": "PORTTRAN",
+   "to": "ERRHAND",
+   "type": "COPY",
+   "resolved_in_reverse": true,
+   "line": null,
+   "forward": "RESOLVED_IN_JAVA_BUILD"
+  },
+  {
+   "from": "PORTTRAN",
+   "to": "AUDITLOG",
+   "type": "COPY",
+   "resolved_in_reverse": true,
+   "line": null,
+   "forward": "RESOLVED_IN_JAVA_BUILD"
+  },
+  {
+   "from": "PORTTRAN",
+   "to": "AUDPROC",
+   "type": "STATIC_CALL",
+   "resolved_in_reverse": true,
+   "line": null,
+   "forward": "IMPLEMENTED_CALL (converted callee)"
+  },
+  {
+   "from": "PORTTRAN",
+   "to": "ERRPROC",
+   "type": "STATIC_CALL",
+   "resolved_in_reverse": true,
+   "line": null,
+   "forward": "IMPLEMENTED_CALL (converted callee)"
+  },
+  {
+   "from": "PORTUPDT",
+   "to": "PORTFLIO",
+   "type": "COPY",
+   "resolved_in_reverse": true,
+   "line": null,
+   "forward": "RESOLVED_IN_JAVA_BUILD"
+  },
+  {
+   "from": "PORTVALD",
+   "to": "PORTVAL",
+   "type": "COPY",
+   "resolved_in_reverse": true,
+   "line": null,
+   "forward": "RESOLVED_IN_JAVA_BUILD"
+  },
+  {
+   "from": "TSTGEN00",
+   "to": "PORTFLIO",
+   "type": "COPY",
+   "resolved_in_reverse": true,
+   "line": null,
+   "forward": "RESOLVED_IN_JAVA_BUILD"
+  },
+  {
+   "from": "TSTGEN00",
+   "to": "TRNREC",
+   "type": "COPY",
+   "resolved_in_reverse": true,
+   "line": null,
+   "forward": "RESOLVED_IN_JAVA_BUILD"
+  },
+  {
+   "from": "TSTGEN00",
+   "to": "RTNCODE",
+   "type": "COPY",
+   "resolved_in_reverse": true,
+   "line": null,
+   "forward": "RESOLVED_IN_JAVA_BUILD"
+  },
+  {
+   "from": "TSTGEN00",
+   "to": "ERRHAND",
+   "type": "COPY",
+   "resolved_in_reverse": true,
+   "line": null,
+   "forward": "RESOLVED_IN_JAVA_BUILD"
+  },
+  {
+   "from": "TSTVAL00",
+   "to": "RTNCODE",
+   "type": "COPY",
+   "resolved_in_reverse": true,
+   "line": null,
+   "forward": "RESOLVED_IN_JAVA_BUILD"
+  },
+  {
+   "from": "TSTVAL00",
+   "to": "ERRHAND",
+   "type": "COPY",
+   "resolved_in_reverse": true,
+   "line": null,
+   "forward": "RESOLVED_IN_JAVA_BUILD"
+  },
+  {
+   "from": "UTLMNT00",
+   "to": "RTNCODE",
+   "type": "COPY",
+   "resolved_in_reverse": true,
+   "line": null,
+   "forward": "RESOLVED_IN_JAVA_BUILD"
+  },
+  {
+   "from": "UTLMNT00",
+   "to": "ERRHAND",
+   "type": "COPY",
+   "resolved_in_reverse": true,
+   "line": null,
+   "forward": "RESOLVED_IN_JAVA_BUILD"
+  },
+  {
+   "from": "UTLMON00",
+   "to": "DB2STAT",
+   "type": "COPY",
+   "resolved_in_reverse": false,
+   "line": null,
+   "forward": "UNRESOLVED"
+  },
+  {
+   "from": "UTLMON00",
+   "to": "RTNCODE",
+   "type": "COPY",
+   "resolved_in_reverse": true,
+   "line": null,
+   "forward": "RESOLVED_IN_JAVA_BUILD"
+  },
+  {
+   "from": "UTLMON00",
+   "to": "ERRHAND",
+   "type": "COPY",
+   "resolved_in_reverse": true,
+   "line": null,
+   "forward": "RESOLVED_IN_JAVA_BUILD"
+  },
+  {
+   "from": "UTLMON00",
+   "to": "ILBOABN0",
+   "type": "STATIC_CALL",
+   "resolved_in_reverse": false,
+   "line": null,
+   "forward": "GAP (UNDEFINED_EXTERNAL_CALL / untranslated)"
+  },
+  {
+   "from": "UTLVAL00",
+   "to": "POSREC",
+   "type": "COPY",
+   "resolved_in_reverse": true,
+   "line": null,
+   "forward": "RESOLVED_IN_JAVA_BUILD"
+  },
+  {
+   "from": "UTLVAL00",
+   "to": "TRNREC",
+   "type": "COPY",
+   "resolved_in_reverse": true,
+   "line": null,
+   "forward": "RESOLVED_IN_JAVA_BUILD"
+  },
+  {
+   "from": "UTLVAL00",
+   "to": "RTNCODE",
+   "type": "COPY",
+   "resolved_in_reverse": true,
+   "line": null,
+   "forward": "RESOLVED_IN_JAVA_BUILD"
+  },
+  {
+   "from": "UTLVAL00",
+   "to": "ERRHAND",
+   "type": "COPY",
+   "resolved_in_reverse": true,
+   "line": null,
+   "forward": "RESOLVED_IN_JAVA_BUILD"
+  },
+  {
+   "from": "DB2HNDL",
+   "to": "SQLCA",
+   "type": "SQL_INCLUDE",
+   "resolved_in_reverse": true,
+   "line": null,
+   "forward": "RESOLVED_IN_JAVA_BUILD"
+  },
+  {
+   "from": "ERRHANDL",
+   "to": "CEE3ABD",
+   "type": "STATIC_CALL",
+   "resolved_in_reverse": false,
+   "line": null,
+   "forward": "GAP (UNDEFINED_EXTERNAL_CALL / untranslated)"
+  }
+ ],
+ "external_operations": [
+  {
+   "program": "BCHCTL00",
+   "statement_id": "SYS-PORTFOLIO-001-FIL-0042-STMT-000018",
+   "type": "CALL",
+   "line": 114,
+   "text": "CALL 'ERRPROC' USING ERR-MESSAGE",
+   "forward": "IMPLEMENTED",
+   "gap_id": null
+  },
+  {
+   "program": "CURSMGR",
+   "statement_id": "SYS-PORTFOLIO-001-FIL-0059-STMT-000002",
+   "type": "EXEC CICS",
+   "line": 59,
+   "text": "EXEC CICS RETURN END-EXEC",
+   "forward": "GAP EXTERNAL_SYSTEM_BOUNDARY",
+   "gap_id": "GAP-CURSMGR-0004"
+  },
+  {
+   "program": "CURSMGR",
+   "statement_id": "SYS-PORTFOLIO-001-FIL-0059-STMT-000005",
+   "type": "EXEC SQL",
+   "line": 70,
+   "text": "EXEC SQL DECLARE :CURS-NAME CURSOR FOR :CURS-STMT END-EXEC",
+   "forward": "DECLARATIVE (no run-time effect)",
+   "gap_id": null
+  },
+  {
+   "program": "CURSMGR",
+   "statement_id": "SYS-PORTFOLIO-001-FIL-0059-STMT-000010",
+   "type": "EXEC SQL",
+   "line": 84,
+   "text": "EXEC SQL OPEN :CURS-NAME END-EXEC",
+   "forward": "GAP EXTERNAL_SYSTEM_BOUNDARY",
+   "gap_id": "GAP-CURSMGR-0006"
+  },
+  {
+   "program": "DB2CMT",
+   "statement_id": "SYS-PORTFOLIO-001-FIL-0054-STMT-000006",
+   "type": "EXEC SQL",
+   "line": 88,
+   "text": "EXEC SQL COMMIT WORK END-EXEC",
+   "forward": "GAP EXTERNAL_SYSTEM_BOUNDARY",
+   "gap_id": "GAP-DB2CMT-0001"
+  },
+  {
+   "program": "DB2CMT",
+   "statement_id": "SYS-PORTFOLIO-001-FIL-0054-STMT-000008",
+   "type": "EXEC SQL",
+   "line": 104,
+   "text": "EXEC SQL ROLLBACK WORK END-EXEC",
+   "forward": "GAP EXTERNAL_SYSTEM_BOUNDARY",
+   "gap_id": "GAP-DB2CMT-0003"
+  },
+  {
+   "program": "DB2CMT",
+   "statement_id": "SYS-PORTFOLIO-001-FIL-0054-STMT-000011",
+   "type": "EXEC SQL",
+   "line": 122,
+   "text": "EXEC SQL SAVEPOINT :WS-SAVEPOINT-ID ON ROLLBACK RETAIN CURSORS END-EXEC",
+   "forward": "GAP EXTERNAL_SYSTEM_BOUNDARY",
+   "gap_id": "GAP-DB2CMT-0005"
+  },
+  {
+   "program": "DB2CMT",
+   "statement_id": "SYS-PORTFOLIO-001-FIL-0054-STMT-000014",
+   "type": "EXEC SQL",
+   "line": 140,
+   "text": "EXEC SQL ROLLBACK TO SAVEPOINT :WS-SAVEPOINT-ID END-EXEC",
+   "forward": "GAP EXTERNAL_SYSTEM_BOUNDARY",
+   "gap_id": "GAP-DB2CMT-0007"
+  },
+  {
+   "program": "DB2CMT",
+   "statement_id": "SYS-PORTFOLIO-001-FIL-0054-STMT-000022",
+   "type": "CALL",
+   "line": 165,
+   "text": "CALL 'ERRPROC' USING ERR-MESSAGE",
+   "forward": "IMPLEMENTED",
+   "gap_id": null
+  },
+  {
+   "program": "DB2CMT",
+   "statement_id": "SYS-PORTFOLIO-001-FIL-0054-STMT-000023",
+   "type": "CALL",
+   "line": 169,
+   "text": "CALL 'DB2ERR' USING LS-ERROR-INFO",
+   "forward": "IMPLEMENTED",
+   "gap_id": null
+  },
+  {
+   "program": "DB2CONN",
+   "statement_id": "SYS-PORTFOLIO-001-FIL-0055-STMT-000022",
+   "type": "EXEC SQL",
+   "line": 72,
+   "text": "EXEC SQL CONNECT TO :WS-DB-NAME END-EXEC",
+   "forward": "GAP EXTERNAL_SYSTEM_BOUNDARY",
+   "gap_id": "GAP-DB2CONN-0001"
+  },
+  {
+   "program": "DB2CONN",
+   "statement_id": "SYS-PORTFOLIO-001-FIL-0055-STMT-000041",
+   "type": "CALL",
+   "line": 86,
+   "text": "CALL 'DELAY' USING DB2-RETRY-WAIT",
+   "forward": "GAP UNDEFINED_EXTERNAL_CALL",
+   "gap_id": "GAP-DB2CONN-0003"
+  },
+  {
+   "program": "DB2CONN",
+   "statement_id": "SYS-PORTFOLIO-001-FIL-0055-STMT-000028",
+   "type": "EXEC SQL",
+   "line": 111,
+   "text": "EXEC SQL COMMIT WORK END-EXEC",
+   "forward": "GAP EXTERNAL_SYSTEM_BOUNDARY",
+   "gap_id": "GAP-DB2CONN-0006"
+  },
+  {
+   "program": "DB2CONN",
+   "statement_id": "SYS-PORTFOLIO-001-FIL-0055-STMT-000029",
+   "type": "EXEC SQL",
+   "line": 115,
+   "text": "EXEC SQL CONNECT RESET END-EXEC",
+   "forward": "GAP EXTERNAL_SYSTEM_BOUNDARY",
+   "gap_id": "GAP-DB2CONN-0007"
+  },
+  {
+   "program": "DB2CONN",
+   "statement_id": "SYS-PORTFOLIO-001-FIL-0055-STMT-000012",
+   "type": "EXEC SQL",
+   "line": 132,
+   "text": "EXEC SQL SELECT CURRENT SERVER INTO :WS-DB-NAME FROM SYSIBM.SYSDUMMY1 END-EXEC",
+   "forward": "GAP EXTERNAL_SYSTEM_BOUNDARY",
+   "gap_id": "GAP-DB2CONN-0009"
+  },
+  {
+   "program": "DB2CONN",
+   "statement_id": "SYS-PORTFOLIO-001-FIL-0055-STMT-000016",
+   "type": "CALL",
+   "line": 153,
+   "text": "CALL 'ERRPROC' USING ERR-MESSAGE",
+   "forward": "IMPLEMENTED",
+   "gap_id": null
+  },
+  {
+   "program": "DB2ERR",
+   "statement_id": "SYS-PORTFOLIO-001-FIL-0056-STMT-000018",
+   "type": "EXEC SQL",
+   "line": 127,
+   "text": "EXEC SQL INSERT INTO ERRLOG VALUES (:WS-ERRLOG-REC) END-EXEC",
+   "forward": "GAP EXTERNAL_SYSTEM_BOUNDARY",
+   "gap_id": "GAP-DB2ERR-0003"
+  },
+  {
+   "program": "DB2ERR",
+   "statement_id": "SYS-PORTFOLIO-001-FIL-0056-STMT-000021",
+   "type": "EXEC SQL",
+   "line": 172,
+   "text": "EXEC SQL SELECT ERROR_MESSAGE, ERROR_SEVERITY, ADDITIONAL_INFO INTO :EL-ERROR-ME",
+   "forward": "GAP EXTERNAL_SYSTEM_BOUNDARY",
+   "gap_id": "GAP-DB2ERR-0005"
+  },
+  {
+   "program": "DB2ERR",
+   "statement_id": "SYS-PORTFOLIO-001-FIL-0056-STMT-000025",
+   "type": "CALL",
+   "line": 199,
+   "text": "CALL 'ERRPROC' USING ERR-MESSAGE",
+   "forward": "IMPLEMENTED",
+   "gap_id": null
+  },
+  {
+   "program": "DB2HNDL",
+   "statement_id": "SYS-PORTFOLIO-001-FIL-0080-STMT-000006",
+   "type": "EXEC SQL",
+   "line": 79,
+   "text": "EXEC SQL CONNECT TO sample END-EXEC",
+   "forward": "GAP EXTERNAL_SYSTEM_BOUNDARY",
+   "gap_id": "GAP-DB2HNDL-0001"
+  },
+  {
+   "program": "DB2HNDL",
+   "statement_id": "SYS-PORTFOLIO-001-FIL-0080-STMT-000016",
+   "type": "EXEC SQL",
+   "line": 106,
+   "text": "EXEC SQL INSERT INTO PORTFOLIO (PORTFOLIO_ID, PORTFOLIO_NAME, CREATION_DATE, LAS",
+   "forward": "GAP EXTERNAL_SYSTEM_BOUNDARY",
+   "gap_id": "GAP-DB2HNDL-0002"
+  },
+  {
+   "program": "DB2HNDL",
+   "statement_id": "SYS-PORTFOLIO-001-FIL-0080-STMT-000018",
+   "type": "EXEC SQL",
+   "line": 127,
+   "text": "EXEC SQL SELECT PORTFOLIO_ID, PORTFOLIO_NAME, CREATION_DATE, LAST_UPDATE_TS, TOT",
+   "forward": "GAP EXTERNAL_SYSTEM_BOUNDARY",
+   "gap_id": "GAP-DB2HNDL-0003"
+  },
+  {
+   "program": "DB2HNDL",
+   "statement_id": "SYS-PORTFOLIO-001-FIL-0080-STMT-000020",
+   "type": "EXEC SQL",
+   "line": 151,
+   "text": "EXEC SQL DECLARE PORTFOLIO_CURSOR CURSOR FOR SELECT PORTFOLIO_ID, PORTFOLIO_NAME",
+   "forward": "DECLARATIVE (no run-time effect)",
+   "gap_id": null
+  },
+  {
+   "program": "DB2HNDL",
+   "statement_id": "SYS-PORTFOLIO-001-FIL-0080-STMT-000021",
+   "type": "EXEC SQL",
+   "line": 161,
+   "text": "EXEC SQL OPEN PORTFOLIO_CURSOR END-EXEC",
+   "forward": "GAP EXTERNAL_SYSTEM_BOUNDARY",
+   "gap_id": "GAP-DB2HNDL-0004"
+  },
+  {
+   "program": "DB2HNDL",
+   "statement_id": "SYS-PORTFOLIO-001-FIL-0080-STMT-000032",
+   "type": "EXEC SQL",
+   "line": 166,
+   "text": "EXEC SQL FETCH PORTFOLIO_CURSOR INTO :HV-PORTFOLIO-ID   :NI-PORTFOLIO-ID, :HV-PO",
+   "forward": "GAP UNDECLARED_NAME",
+   "gap_id": "GAP-DB2HNDL-0005"
+  },
+  {
+   "program": "DB2HNDL",
+   "statement_id": "SYS-PORTFOLIO-001-FIL-0080-STMT-000023",
+   "type": "EXEC SQL",
+   "line": 178,
+   "text": "EXEC SQL CLOSE PORTFOLIO_CURSOR END-EXEC",
+   "forward": "GAP EXTERNAL_SYSTEM_BOUNDARY",
+   "gap_id": "GAP-DB2HNDL-0006"
+  },
+  {
+   "program": "DB2HNDL",
+   "statement_id": "SYS-PORTFOLIO-001-FIL-0080-STMT-000024",
+   "type": "EXEC SQL",
+   "line": 187,
+   "text": "EXEC SQL UPDATE PORTFOLIO SET    STATUS = 'I', LAST_UPDATE_TS = CURRENT TIMESTAM",
+   "forward": "GAP EXTERNAL_SYSTEM_BOUNDARY",
+   "gap_id": "GAP-DB2HNDL-0007"
+  },
+  {
+   "program": "DB2HNDL",
+   "statement_id": "SYS-PORTFOLIO-001-FIL-0080-STMT-000026",
+   "type": "EXEC SQL",
+   "line": 201,
+   "text": "EXEC SQL DELETE FROM PORTFOLIO WHERE  PORTFOLIO_ID = :HV-PORTFOLIO-ID END-EXEC",
+   "forward": "GAP EXTERNAL_SYSTEM_BOUNDARY",
+   "gap_id": "GAP-DB2HNDL-0008"
+  },
+  {
+   "program": "DB2HNDL",
+   "statement_id": "SYS-PORTFOLIO-001-FIL-0080-STMT-000028",
+   "type": "EXEC SQL",
+   "line": 213,
+   "text": "EXEC SQL COMMIT WORK END-EXEC",
+   "forward": "GAP EXTERNAL_SYSTEM_BOUNDARY",
+   "gap_id": "GAP-DB2HNDL-0009"
+  },
+  {
+   "program": "DB2HNDL",
+   "statement_id": "SYS-PORTFOLIO-001-FIL-0080-STMT-000029",
+   "type": "EXEC SQL",
+   "line": 217,
+   "text": "EXEC SQL CONNECT RESET END-EXEC",
+   "forward": "GAP EXTERNAL_SYSTEM_BOUNDARY",
+   "gap_id": "GAP-DB2HNDL-0010"
+  },
+  {
+   "program": "DB2HNDL",
+   "statement_id": "SYS-PORTFOLIO-001-FIL-0080-STMT-000031",
+   "type": "EXEC SQL",
+   "line": 243,
+   "text": "EXEC SQL ROLLBACK WORK END-EXEC",
+   "forward": "GAP EXTERNAL_SYSTEM_BOUNDARY",
+   "gap_id": "GAP-DB2HNDL-0012"
+  },
+  {
+   "program": "DB2ONLN",
+   "statement_id": "SYS-PORTFOLIO-001-FIL-0060-STMT-000002",
+   "type": "EXEC CICS",
+   "line": 52,
+   "text": "EXEC CICS RETURN END-EXEC",
+   "forward": "GAP EXTERNAL_SYSTEM_BOUNDARY",
+   "gap_id": "GAP-DB2ONLN-0001"
+  },
+  {
+   "program": "DB2ONLN",
+   "statement_id": "SYS-PORTFOLIO-001-FIL-0060-STMT-000005",
+   "type": "EXEC SQL",
+   "line": 67,
+   "text": "EXEC SQL CONNECT TO POSMVP END-EXEC",
+   "forward": "GAP EXTERNAL_SYSTEM_BOUNDARY",
+   "gap_id": "GAP-DB2ONLN-0002"
+  },
+  {
+   "program": "DB2ONLN",
+   "statement_id": "SYS-PORTFOLIO-001-FIL-0060-STMT-000011",
+   "type": "EXEC SQL",
+   "line": 92,
+   "text": "EXEC SQL DISCONNECT END-EXEC",
+   "forward": "GAP EXTERNAL_SYSTEM_BOUNDARY",
+   "gap_id": "GAP-DB2ONLN-0004"
+  },
+  {
+   "program": "DB2ONLN",
+   "statement_id": "SYS-PORTFOLIO-001-FIL-0060-STMT-000014",
+   "type": "EXEC SQL",
+   "line": 106,
+   "text": "EXEC SQL SELECT CURRENT SERVER INTO :DB2-ERROR-MSG END-EXEC",
+   "forward": "GAP EXTERNAL_SYSTEM_BOUNDARY",
+   "gap_id": "GAP-DB2ONLN-0006"
+  },
+  {
+   "program": "DB2RECV",
+   "statement_id": "SYS-PORTFOLIO-001-FIL-0061-STMT-000002",
+   "type": "EXEC CICS",
+   "line": 60,
+   "text": "EXEC CICS RETURN END-EXEC",
+   "forward": "GAP EXTERNAL_SYSTEM_BOUNDARY",
+   "gap_id": "GAP-DB2RECV-0001"
+  },
+  {
+   "program": "DB2RECV",
+   "statement_id": "SYS-PORTFOLIO-001-FIL-0061-STMT-000008",
+   "type": "EXEC CICS",
+   "line": 88,
+   "text": "EXEC CICS LINK PROGRAM('DB2ONLN') COMMAREA(WS-DB2-REQUEST) LENGTH(LENGTH OF WS-D",
+   "forward": "GAP EXTERNAL_SYSTEM_BOUNDARY",
+   "gap_id": "GAP-DB2RECV-0003"
+  },
+  {
+   "program": "DB2RECV",
+   "statement_id": "SYS-PORTFOLIO-001-FIL-0061-STMT-000011",
+   "type": "EXEC CICS",
+   "line": 105,
+   "text": "EXEC CICS DELAY INTERVAL(WS-RETRY-INTERVAL) END-EXEC",
+   "forward": "GAP EXTERNAL_SYSTEM_BOUNDARY",
+   "gap_id": "GAP-DB2RECV-0005"
+  },
+  {
+   "program": "DB2RECV",
+   "statement_id": "SYS-PORTFOLIO-001-FIL-0061-STMT-000013",
+   "type": "EXEC SQL",
+   "line": 112,
+   "text": "EXEC SQL ROLLBACK END-EXEC",
+   "forward": "GAP EXTERNAL_SYSTEM_BOUNDARY",
+   "gap_id": "GAP-DB2RECV-0006"
+  },
+  {
+   "program": "DB2RECV",
+   "statement_id": "SYS-PORTFOLIO-001-FIL-0061-STMT-000021",
+   "type": "EXEC CICS",
+   "line": 132,
+   "text": "EXEC CICS LINK PROGRAM('ERRHNDL') COMMAREA(WS-ERROR-AREA) LENGTH(LENGTH OF WS-ER",
+   "forward": "GAP EXTERNAL_SYSTEM_BOUNDARY",
+   "gap_id": "GAP-DB2RECV-0009"
+  },
+  {
+   "program": "DB2STAT",
+   "statement_id": "SYS-PORTFOLIO-001-FIL-0057-STMT-000010",
+   "type": "EXEC SQL",
+   "line": 89,
+   "text": "EXEC SQL DECLARE GLOBAL TEMPORARY TABLE SESSION.DBSTATS (PROGRAM_ID      CHAR(8)",
+   "forward": "GAP EXTERNAL_SYSTEM_BOUNDARY",
+   "gap_id": "GAP-DB2STAT-0002"
+  },
+  {
+   "program": "DB2STAT",
+   "statement_id": "SYS-PORTFOLIO-001-FIL-0057-STMT-000012",
+   "type": "EXEC SQL",
+   "line": 112,
+   "text": "EXEC SQL INSERT INTO SESSION.DBSTATS (PROGRAM_ID, START_TIME, ROWS_READ, ROWS_IN",
+   "forward": "GAP EXTERNAL_SYSTEM_BOUNDARY",
+   "gap_id": "GAP-DB2STAT-0004"
+  },
+  {
+   "program": "DB2STAT",
+   "statement_id": "SYS-PORTFOLIO-001-FIL-0057-STMT-000020",
+   "type": "EXEC SQL",
+   "line": 138,
+   "text": "EXEC SQL UPDATE SESSION.DBSTATS SET ROWS_READ = :WS-ROWS-READ, ROWS_INSERTED = :",
+   "forward": "GAP EXTERNAL_SYSTEM_BOUNDARY",
+   "gap_id": "GAP-DB2STAT-0006"
+  },
+  {
+   "program": "DB2STAT",
+   "statement_id": "SYS-PORTFOLIO-001-FIL-0057-STMT-000025",
+   "type": "EXEC SQL",
+   "line": 163,
+   "text": "EXEC SQL UPDATE SESSION.DBSTATS SET END_TIME = :WS-END-TIME, CPU_TIME = :WS-CPU-",
+   "forward": "GAP EXTERNAL_SYSTEM_BOUNDARY",
+   "gap_id": "GAP-DB2STAT-0009"
+  },
+  {
+   "program": "DB2STAT",
+   "statement_id": "SYS-PORTFOLIO-001-FIL-0057-STMT-000030",
+   "type": "EXEC SQL",
+   "line": 190,
+   "text": "EXEC SQL SELECT ROWS_READ, ROWS_INSERTED, ROWS_UPDATED, ROWS_DELETED, COMMITS, R",
+   "forward": "GAP EXTERNAL_SYSTEM_BOUNDARY",
+   "gap_id": "GAP-DB2STAT-0012"
+  },
+  {
+   "program": "DB2STAT",
+   "statement_id": "SYS-PORTFOLIO-001-FIL-0057-STMT-000034",
+   "type": "CALL",
+   "line": 227,
+   "text": "CALL 'ERRPROC' USING ERR-MESSAGE",
+   "forward": "IMPLEMENTED",
+   "gap_id": null
+  },
+  {
+   "program": "ERRHANDL",
+   "statement_id": "SYS-PORTFOLIO-001-FIL-0081-STMT-000040",
+   "type": "CALL",
+   "line": 186,
+   "text": "CALL 'CEE3ABD' USING RC-CRITICAL, 3",
+   "forward": "GAP UNTRANSLATED_STATEMENT",
+   "gap_id": "GAP-ERRHANDL-0001"
+  },
+  {
+   "program": "ERRHNDL",
+   "statement_id": "SYS-PORTFOLIO-001-FIL-0062-STMT-000005",
+   "type": "EXEC CICS",
+   "line": 50,
+   "text": "EXEC CICS RETURN END-EXEC",
+   "forward": "GAP EXTERNAL_SYSTEM_BOUNDARY",
+   "gap_id": "GAP-ERRHNDL-0001"
+  },
+  {
+   "program": "ERRHNDL",
+   "statement_id": "SYS-PORTFOLIO-001-FIL-0062-STMT-000018",
+   "type": "EXEC SQL",
+   "line": 73,
+   "text": "EXEC SQL INSERT INTO ERRLOG VALUES (:LOG-TIMESTAMP, :LOG-PROGRAM, :LOG-PARAGRAPH",
+   "forward": "GAP EXTERNAL_SYSTEM_BOUNDARY",
+   "gap_id": "GAP-ERRHNDL-0013"
+  },
+  {
+   "program": "HISTLD00",
+   "statement_id": "SYS-PORTFOLIO-001-FIL-0044-STMT-000040",
+   "type": "EXEC SQL",
+   "line": 160,
+   "text": "EXEC SQL INSERT INTO POSHIST VALUES (:POSHIST-RECORD) END-EXEC",
+   "forward": "GAP EXTERNAL_SYSTEM_BOUNDARY",
+   "gap_id": "GAP-HISTLD00-0017"
+  },
+  {
+   "program": "HISTLD00",
+   "statement_id": "SYS-PORTFOLIO-001-FIL-0044-STMT-000070",
+   "type": "EXEC SQL",
+   "line": 181,
+   "text": "EXEC SQL COMMIT WORK END-EXEC",
+   "forward": "GAP EXTERNAL_SYSTEM_BOUNDARY",
+   "gap_id": "GAP-HISTLD00-0019"
+  },
+  {
+   "program": "HISTLD00",
+   "statement_id": "SYS-PORTFOLIO-001-FIL-0044-STMT-000047",
+   "type": "EXEC SQL",
+   "line": 203,
+   "text": "EXEC SQL COMMIT WORK END-EXEC",
+   "forward": "GAP EXTERNAL_SYSTEM_BOUNDARY",
+   "gap_id": "GAP-HISTLD00-0022"
+  },
+  {
+   "program": "HISTLD00",
+   "statement_id": "SYS-PORTFOLIO-001-FIL-0044-STMT-000056",
+   "type": "CALL",
+   "line": 228,
+   "text": "CALL 'ERRPROC' USING ERR-MESSAGE",
+   "forward": "IMPLEMENTED",
+   "gap_id": null
+  },
+  {
+   "program": "HISTLD00",
+   "statement_id": "SYS-PORTFOLIO-001-FIL-0044-STMT-000057",
+   "type": "EXEC SQL",
+   "line": 230,
+   "text": "EXEC SQL ROLLBACK WORK END-EXEC",
+   "forward": "GAP EXTERNAL_SYSTEM_BOUNDARY",
+   "gap_id": "GAP-HISTLD00-0025"
+  },
+  {
+   "program": "INQHIST",
+   "statement_id": "SYS-PORTFOLIO-001-FIL-0063-STMT-000004",
+   "type": "EXEC CICS",
+   "line": 79,
+   "text": "EXEC CICS RETURN END-EXEC",
+   "forward": "GAP EXTERNAL_SYSTEM_BOUNDARY",
+   "gap_id": "GAP-INQHIST-0001"
+  },
+  {
+   "program": "INQHIST",
+   "statement_id": "SYS-PORTFOLIO-001-FIL-0063-STMT-000008",
+   "type": "EXEC CICS",
+   "line": 86,
+   "text": "EXEC CICS HANDLE CONDITION ERROR(P999-ERROR-ROUTINE) END-EXEC",
+   "forward": "GAP EXTERNAL_SYSTEM_BOUNDARY",
+   "gap_id": "GAP-INQHIST-0003"
+  },
+  {
+   "program": "INQHIST",
+   "statement_id": "SYS-PORTFOLIO-001-FIL-0063-STMT-000012",
+   "type": "EXEC CICS",
+   "line": 98,
+   "text": "EXEC CICS LINK PROGRAM('DB2ONLN') COMMAREA(WS-DB2-REQUEST) LENGTH(LENGTH OF WS-D",
+   "forward": "GAP EXTERNAL_SYSTEM_BOUNDARY",
+   "gap_id": "GAP-INQHIST-0004"
+  },
+  {
+   "program": "INQHIST",
+   "statement_id": "SYS-PORTFOLIO-001-FIL-0063-STMT-000035",
+   "type": "EXEC CICS",
+   "line": 108,
+   "text": "EXEC CICS LINK PROGRAM('DB2RECV') COMMAREA(WS-RECOVERY-REQUEST) LENGTH(LENGTH OF",
+   "forward": "GAP EXTERNAL_SYSTEM_BOUNDARY",
+   "gap_id": "GAP-INQHIST-0005"
+  },
+  {
+   "program": "INQHIST",
+   "statement_id": "SYS-PORTFOLIO-001-FIL-0063-STMT-000018",
+   "type": "EXEC CICS",
+   "line": 138,
+   "text": "EXEC CICS LINK PROGRAM('CURSMGR') COMMAREA(WS-CURSOR-REQUEST) LENGTH(LENGTH OF W",
+   "forward": "GAP EXTERNAL_SYSTEM_BOUNDARY",
+   "gap_id": "GAP-INQHIST-0008"
+  },
+  {
+   "program": "INQHIST",
+   "statement_id": "SYS-PORTFOLIO-001-FIL-0063-STMT-000038",
+   "type": "EXEC CICS",
+   "line": 145,
+   "text": "EXEC CICS LINK PROGRAM('CURSMGR') COMMAREA(WS-CURSOR-REQUEST) LENGTH(LENGTH OF W",
+   "forward": "GAP EXTERNAL_SYSTEM_BOUNDARY",
+   "gap_id": "GAP-INQHIST-0009"
+  },
+  {
+   "program": "INQHIST",
+   "statement_id": "SYS-PORTFOLIO-001-FIL-0063-STMT-000021",
+   "type": "EXEC CICS",
+   "line": 157,
+   "text": "EXEC CICS LINK PROGRAM('CURSMGR') COMMAREA(WS-CURSOR-REQUEST) LENGTH(LENGTH OF W",
+   "forward": "GAP EXTERNAL_SYSTEM_BOUNDARY",
+   "gap_id": "GAP-INQHIST-0010"
+  },
+  {
+   "program": "INQHIST",
+   "statement_id": "SYS-PORTFOLIO-001-FIL-0063-STMT-000024",
+   "type": "EXEC CICS",
+   "line": 166,
+   "text": "EXEC CICS LINK PROGRAM('CURSMGR') COMMAREA(WS-CURSOR-REQUEST) LENGTH(LENGTH OF W",
+   "forward": "GAP EXTERNAL_SYSTEM_BOUNDARY",
+   "gap_id": "GAP-INQHIST-0011"
+  },
+  {
+   "program": "INQHIST",
+   "statement_id": "SYS-PORTFOLIO-001-FIL-0063-STMT-000027",
+   "type": "EXEC CICS",
+   "line": 178,
+   "text": "EXEC CICS SEND MAP('HISMAP') MAPSET('INQSET') FROM(WS-HISTORY-TABLE) LENGTH(LENG",
+   "forward": "GAP EXTERNAL_SYSTEM_BOUNDARY",
+   "gap_id": "GAP-INQHIST-0012"
+  },
+  {
+   "program": "INQONLN",
+   "statement_id": "SYS-PORTFOLIO-001-FIL-0064-STMT-000001",
+   "type": "EXEC CICS",
+   "line": 40,
+   "text": "EXEC CICS HANDLE CONDITION ERROR(P900-ERROR-ROUTINE) PGMIDERR(P900-ERROR-ROUTINE",
+   "forward": "GAP EXTERNAL_SYSTEM_BOUNDARY",
+   "gap_id": "GAP-INQONLN-0001"
+  },
+  {
+   "program": "INQONLN",
+   "statement_id": "SYS-PORTFOLIO-001-FIL-0064-STMT-000003",
+   "type": "EXEC CICS",
+   "line": 50,
+   "text": "EXEC CICS RETURN END-EXEC",
+   "forward": "GAP EXTERNAL_SYSTEM_BOUNDARY",
+   "gap_id": "GAP-INQONLN-0002"
+  },
+  {
+   "program": "INQONLN",
+   "statement_id": "SYS-PORTFOLIO-001-FIL-0064-STMT-000005",
+   "type": "EXEC CICS",
+   "line": 56,
+   "text": "EXEC CICS RECEIVE MAP('INQMAP') MAPSET('INQSET') INTO(WS-COMMAREA) RESP(WS-RESPO",
+   "forward": "GAP EXTERNAL_SYSTEM_BOUNDARY",
+   "gap_id": "GAP-INQONLN-0004"
+  },
+  {
+   "program": "INQONLN",
+   "statement_id": "SYS-PORTFOLIO-001-FIL-0064-STMT-000037",
+   "type": "EXEC CICS",
+   "line": 87,
+   "text": "EXEC CICS RETURN END-EXEC",
+   "forward": "GAP EXTERNAL_SYSTEM_BOUNDARY",
+   "gap_id": "GAP-INQONLN-0007"
+  },
+  {
+   "program": "INQONLN",
+   "statement_id": "SYS-PORTFOLIO-001-FIL-0064-STMT-000010",
+   "type": "EXEC CICS",
+   "line": 93,
+   "text": "EXEC CICS SEND MAP('INQMNU') MAPSET('INQSET') ERASE RESP(WS-RESPONSE-CODE) END-E",
+   "forward": "GAP EXTERNAL_SYSTEM_BOUNDARY",
+   "gap_id": "GAP-INQONLN-0008"
+  },
+  {
+   "program": "INQONLN",
+   "statement_id": "SYS-PORTFOLIO-001-FIL-0064-STMT-000012",
+   "type": "EXEC CICS",
+   "line": 102,
+   "text": "EXEC CICS LINK PROGRAM('INQPORT') COMMAREA(WS-COMMAREA) LENGTH(LENGTH OF WS-COMM",
+   "forward": "GAP EXTERNAL_SYSTEM_BOUNDARY",
+   "gap_id": "GAP-INQONLN-0009"
+  },
+  {
+   "program": "INQONLN",
+   "statement_id": "SYS-PORTFOLIO-001-FIL-0064-STMT-000014",
+   "type": "EXEC CICS",
+   "line": 111,
+   "text": "EXEC CICS LINK PROGRAM('INQHIST') COMMAREA(WS-COMMAREA) LENGTH(LENGTH OF WS-COMM",
+   "forward": "GAP EXTERNAL_SYSTEM_BOUNDARY",
+   "gap_id": "GAP-INQONLN-0010"
+  },
+  {
+   "program": "INQONLN",
+   "statement_id": "SYS-PORTFOLIO-001-FIL-0064-STMT-000021",
+   "type": "EXEC CICS",
+   "line": 126,
+   "text": "EXEC CICS LINK PROGRAM('ERRHNDL') COMMAREA(WS-ERROR-AREA) LENGTH(LENGTH OF WS-ER",
+   "forward": "GAP EXTERNAL_SYSTEM_BOUNDARY",
+   "gap_id": "GAP-INQONLN-0013"
+  },
+  {
+   "program": "INQONLN",
+   "statement_id": "SYS-PORTFOLIO-001-FIL-0064-STMT-000038",
+   "type": "EXEC CICS",
+   "line": 132,
+   "text": "EXEC CICS ABEND ABCODE('IERR') END-EXEC",
+   "forward": "GAP EXTERNAL_SYSTEM_BOUNDARY",
+   "gap_id": "GAP-INQONLN-0014"
+  },
+  {
+   "program": "INQONLN",
+   "statement_id": "SYS-PORTFOLIO-001-FIL-0064-STMT-000026",
+   "type": "EXEC CICS",
+   "line": 142,
+   "text": "EXEC CICS ASSIGN USERID(SEC-USER-ID) END-EXEC",
+   "forward": "GAP EXTERNAL_SYSTEM_BOUNDARY",
+   "gap_id": "GAP-INQONLN-0016"
+  },
+  {
+   "program": "INQONLN",
+   "statement_id": "SYS-PORTFOLIO-001-FIL-0064-STMT-000027",
+   "type": "EXEC CICS",
+   "line": 146,
+   "text": "EXEC CICS LINK PROGRAM('SECMGR') COMMAREA(WS-SECURITY-REQUEST) LENGTH(LENGTH OF ",
+   "forward": "GAP EXTERNAL_SYSTEM_BOUNDARY",
+   "gap_id": "GAP-INQONLN-0017"
+  },
+  {
+   "program": "INQONLN",
+   "statement_id": "SYS-PORTFOLIO-001-FIL-0064-STMT-000042",
+   "type": "EXEC CICS",
+   "line": 156,
+   "text": "EXEC CICS LINK PROGRAM('SECMGR') COMMAREA(WS-SECURITY-REQUEST) LENGTH(LENGTH OF ",
+   "forward": "GAP EXTERNAL_SYSTEM_BOUNDARY",
+   "gap_id": "GAP-INQONLN-0018"
+  },
+  {
+   "program": "INQONLN",
+   "statement_id": "SYS-PORTFOLIO-001-FIL-0064-STMT-000045",
+   "type": "EXEC CICS",
+   "line": 164,
+   "text": "EXEC CICS LINK PROGRAM('SECMGR') COMMAREA(WS-SECURITY-REQUEST) LENGTH(LENGTH OF ",
+   "forward": "GAP EXTERNAL_SYSTEM_BOUNDARY",
+   "gap_id": "GAP-INQONLN-0019"
+  },
+  {
+   "program": "INQPORT",
+   "statement_id": "SYS-PORTFOLIO-001-FIL-0065-STMT-000004",
+   "type": "EXEC CICS",
+   "line": 55,
+   "text": "EXEC CICS RETURN END-EXEC",
+   "forward": "GAP EXTERNAL_SYSTEM_BOUNDARY",
+   "gap_id": "GAP-INQPORT-0001"
+  },
+  {
+   "program": "INQPORT",
+   "statement_id": "SYS-PORTFOLIO-001-FIL-0065-STMT-000007",
+   "type": "EXEC CICS",
+   "line": 61,
+   "text": "EXEC CICS HANDLE CONDITION ERROR(P999-ERROR-ROUTINE) NOTFND(P900-NOT-FOUND) END-",
+   "forward": "GAP EXTERNAL_SYSTEM_BOUNDARY",
+   "gap_id": "GAP-INQPORT-0004"
+  },
+  {
+   "program": "INQPORT",
+   "statement_id": "SYS-PORTFOLIO-001-FIL-0065-STMT-000010",
+   "type": "EXEC CICS",
+   "line": 72,
+   "text": "EXEC CICS READ FILE('POSFILE') INTO(WS-POSITION-RECORD) RIDFLD(POSITION-ACCOUNT ",
+   "forward": "GAP EXTERNAL_SYSTEM_BOUNDARY",
+   "gap_id": "GAP-INQPORT-0006"
+  },
+  {
+   "program": "INQPORT",
+   "statement_id": "SYS-PORTFOLIO-001-FIL-0065-STMT-000013",
+   "type": "EXEC CICS",
+   "line": 87,
+   "text": "EXEC CICS SEND MAP('POSMAP') MAPSET('INQSET') FROM(WS-POSITION-RECORD) ERASE RES",
+   "forward": "GAP EXTERNAL_SYSTEM_BOUNDARY",
+   "gap_id": "GAP-INQPORT-0008"
+  },
+  {
+   "program": "PORTMSTR",
+   "statement_id": "SYS-PORTFOLIO-001-FIL-0069-STMT-000043",
+   "type": "CALL",
+   "line": 262,
+   "text": "CALL 'ERRPROC' USING LS-ERROR-REQUEST",
+   "forward": "GAP UNDECLARED_NAME",
+   "gap_id": "GAP-PORTMSTR-0006"
+  },
+  {
+   "program": "PORTMSTR",
+   "statement_id": "SYS-PORTFOLIO-001-FIL-0069-STMT-000057",
+   "type": "CALL",
+   "line": 287,
+   "text": "CALL 'AUDPROC' USING LS-AUDIT-REQUEST",
+   "forward": "GAP UNDECLARED_NAME",
+   "gap_id": "GAP-PORTMSTR-0020"
+  },
+  {
+   "program": "PORTTRAN",
+   "statement_id": "SYS-PORTFOLIO-001-FIL-0072-STMT-000055",
+   "type": "CALL",
+   "line": 294,
+   "text": "CALL 'AUDPROC' USING AUDIT-RECORD",
+   "forward": "IMPLEMENTED",
+   "gap_id": null
+  },
+  {
+   "program": "PORTTRAN",
+   "statement_id": "SYS-PORTFOLIO-001-FIL-0072-STMT-000064",
+   "type": "CALL",
+   "line": 316,
+   "text": "CALL 'ERRPROC' USING ERR-MESSAGE",
+   "forward": "IMPLEMENTED",
+   "gap_id": null
+  },
+  {
+   "program": "PRCSEQ00",
+   "statement_id": "SYS-PORTFOLIO-001-FIL-0046-STMT-000017",
+   "type": "CALL",
+   "line": 122,
+   "text": "CALL 'ERRPROC' USING ERR-MESSAGE",
+   "forward": "IMPLEMENTED",
+   "gap_id": null
+  },
+  {
+   "program": "RCVPRC00",
+   "statement_id": "SYS-PORTFOLIO-001-FIL-0047-STMT-000012",
+   "type": "CALL",
+   "line": 113,
+   "text": "CALL 'ERRPROC' USING ERR-MESSAGE",
+   "forward": "IMPLEMENTED",
+   "gap_id": null
+  },
+  {
+   "program": "RCVPRC00",
+   "statement_id": "SYS-PORTFOLIO-001-FIL-0047-STMT-000051",
+   "type": "CALL",
+   "line": 290,
+   "text": "CALL 'ERRPROC' USING ERR-MESSAGE",
+   "forward": "IMPLEMENTED",
+   "gap_id": null
+  },
+  {
+   "program": "RTNANA00",
+   "statement_id": "SYS-PORTFOLIO-001-FIL-0051-STMT-000011",
+   "type": "EXEC SQL",
+   "line": 126,
+   "text": "EXEC SQL DECLARE PRGCUR CURSOR FOR SELECT PROGRAM_ID, COUNT(*) AS TOTAL, COUNT(C",
+   "forward": "DECLARATIVE (no run-time effect)",
+   "gap_id": null
+  },
+  {
+   "program": "RTNANA00",
+   "statement_id": "SYS-PORTFOLIO-001-FIL-0051-STMT-000012",
+   "type": "EXEC SQL",
+   "line": 139,
+   "text": "EXEC SQL OPEN PRGCUR END-EXEC",
+   "forward": "GAP EXTERNAL_SYSTEM_BOUNDARY",
+   "gap_id": "GAP-RTNANA00-0001"
+  },
+  {
+   "program": "RTNANA00",
+   "statement_id": "SYS-PORTFOLIO-001-FIL-0051-STMT-000015",
+   "type": "EXEC SQL",
+   "line": 148,
+   "text": "EXEC SQL CLOSE PRGCUR END-EXEC",
+   "forward": "GAP EXTERNAL_SYSTEM_BOUNDARY",
+   "gap_id": "GAP-RTNANA00-0003"
+  },
+  {
+   "program": "RTNANA00",
+   "statement_id": "SYS-PORTFOLIO-001-FIL-0051-STMT-000026",
+   "type": "EXEC SQL",
+   "line": 170,
+   "text": "EXEC SQL FETCH PRGCUR INTO :WS-DTL-PROGRAM, :WS-DTL-TOTAL, :WS-DTL-SUCCESS, :WS-",
+   "forward": "GAP EXTERNAL_SYSTEM_BOUNDARY",
+   "gap_id": "GAP-RTNANA00-0004"
+  },
+  {
+   "program": "RTNCDE00",
+   "statement_id": "SYS-PORTFOLIO-001-FIL-0052-STMT-000021",
+   "type": "EXEC SQL",
+   "line": 96,
+   "text": "EXEC SQL INSERT INTO RTNCODES (TIMESTAMP, PROGRAM_ID, RETURN_CODE, HIGHEST_CODE,",
+   "forward": "GAP EXTERNAL_SYSTEM_BOUNDARY",
+   "gap_id": "GAP-RTNCDE00-0001"
+  },
+  {
+   "program": "RTNCDE00",
+   "statement_id": "SYS-PORTFOLIO-001-FIL-0052-STMT-000024",
+   "type": "EXEC SQL",
+   "line": 122,
+   "text": "EXEC SQL SELECT COUNT(*), MAX(RETURN_CODE), MIN(RETURN_CODE) INTO :RC-TOTAL-CODE",
+   "forward": "GAP EXTERNAL_SYSTEM_BOUNDARY",
+   "gap_id": "GAP-RTNCDE00-0003"
+  },
+  {
+   "program": "SECMGR",
+   "statement_id": "SYS-PORTFOLIO-001-FIL-0066-STMT-000002",
+   "type": "EXEC CICS",
+   "line": 54,
+   "text": "EXEC CICS RETURN END-EXEC",
+   "forward": "GAP EXTERNAL_SYSTEM_BOUNDARY",
+   "gap_id": "GAP-SECMGR-0001"
+  },
+  {
+   "program": "SECMGR",
+   "statement_id": "SYS-PORTFOLIO-001-FIL-0066-STMT-000003",
+   "type": "EXEC CICS",
+   "line": 57,
+   "text": "EXEC CICS ASSIGN USERID(WS-USER-ID) RESP(SEC-RESPONSE-CODE) END-EXEC",
+   "forward": "GAP EXTERNAL_SYSTEM_BOUNDARY",
+   "gap_id": "GAP-SECMGR-0002"
+  },
+  {
+   "program": "SECMGR",
+   "statement_id": "SYS-PORTFOLIO-001-FIL-0066-STMT-000006",
+   "type": "EXEC SQL",
+   "line": 79,
+   "text": "EXEC SQL SELECT COUNT(*) INTO :WS-DB2-AREA FROM AUTHFILE WHERE USER_ID = :SEC-US",
+   "forward": "GAP EXTERNAL_SYSTEM_BOUNDARY",
+   "gap_id": "GAP-SECMGR-0004"
+  },
+  {
+   "program": "SECMGR",
+   "statement_id": "SYS-PORTFOLIO-001-FIL-0066-STMT-000010",
+   "type": "EXEC CICS",
+   "line": 108,
+   "text": "EXEC CICS ASSIGN USERID(WS-USER-ID) TERMID(WS-TERMINAL-ID) TRANSID(WS-TRANSACTIO",
+   "forward": "GAP EXTERNAL_SYSTEM_BOUNDARY",
+   "gap_id": "GAP-SECMGR-0006"
+  },
+  {
+   "program": "SECMGR",
+   "statement_id": "SYS-PORTFOLIO-001-FIL-0066-STMT-000013",
+   "type": "EXEC SQL",
+   "line": 117,
+   "text": "EXEC SQL INSERT INTO AUDITLOG (TIMESTAMP, USER_ID, TERMINAL_ID, TRANS_ID, PROGRA",
+   "forward": "GAP EXTERNAL_SYSTEM_BOUNDARY",
+   "gap_id": "GAP-SECMGR-0007"
+  },
+  {
+   "program": "UTLMON00",
+   "statement_id": "SYS-PORTFOLIO-001-FIL-0078-STMT-000022",
+   "type": "CALL",
+   "line": 186,
+   "text": "CALL 'ILBOABN0' USING WS-MINUTE",
+   "forward": "GAP UNDEFINED_EXTERNAL_CALL",
+   "gap_id": "GAP-UTLMON00-0007"
+  }
+ ],
+ "db2_definitions": [
+  {
+   "path": "src/database/db2/db2-definitions.sql",
+   "sha256": "67f12b314e2194637805be662b2c9480fc73172a56f5a6a595aaec0d457ffef2"
+  },
+  {
+   "path": "src/database/db2/ERRLOG.sql",
+   "sha256": "af8d3529311409319161675b3d0af4c68315cb3d498c7914e5151bdec58ff7aa"
+  },
+  {
+   "path": "src/database/db2/PORTPLAN.sql",
+   "sha256": "3812b80c4bee76a595cffc0c72eca66bbfb0dab3f059dcb54983639b612156a3"
+  },
+  {
+   "path": "src/database/db2/POSHIST.sql",
+   "sha256": "278111c9911af37f7180d43383917619ba07da396f792b0dd1dacf4274640469"
+  },
+  {
+   "path": "src/database/db2/RTNCODES.sql",
+   "sha256": "3a2ca982d9386f58dbc1419880db285a2775866c0f341e86300da8894140400e"
+  }
+ ]
+}

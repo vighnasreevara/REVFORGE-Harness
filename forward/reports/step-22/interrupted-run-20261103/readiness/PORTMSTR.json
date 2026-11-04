@@ -1,0 +1,1538 @@
+{
+  "gate": "SOURCE_READINESS",
+  "subject": "PORTMSTR",
+  "status": "FAIL",
+  "checks": [
+    {
+      "id": "source_available",
+      "ok": true,
+      "detail": "src/programs/portfolio/PORTMSTR.cbl sha256 9d1c7f7740ef43c045a43fa61136e51c552b9222b261ff5b81a433a818fb3cb3; 125 statement(s) in 11 paragraph(s)"
+    },
+    {
+      "id": "complete_program",
+      "ok": true,
+      "detail": "every paragraph contains statements"
+    },
+    {
+      "id": "copybooks_resolved",
+      "ok": true,
+      "detail": "all 0 include(s) resolved: none"
+    },
+    {
+      "id": "requirements_and_data_mapping_delivered",
+      "ok": true,
+      "detail": "F1/F2 deliveries accepted for AUDITLOG, ERRHAND, AUDPROC, ERRPROC, PORTMSTR"
+    },
+    {
+      "id": "behaviour_classified",
+      "ok": true,
+      "detail": "8 behaviour(s): 0 VERIFIED_CANDIDATE, 8 PARTIAL, 0 GAP"
+    },
+    {
+      "id": "dependencies_identified",
+      "ok": false,
+      "detail": "closure UNRESOLVED for PORTMSTR:0000-MAIN (line 271: LS-SYSTEM-ID is neither declared, a keyword, a paragraph nor the subject of a blocking decision (unknown dependency)); PORTMSTR:4000-UPDATE-PORTFOLIO (line 271: LS-SYSTEM-ID is neither declared, a keyword, a paragraph nor the subject of a blocking decision (unknown dependency))"
+    },
+    {
+      "id": "unsupported_documented",
+      "ok": true,
+      "detail": "25 gap(s) document every PARTIAL/GAP behaviour"
+    },
+    {
+      "id": "unknowns_documented",
+      "ok": true,
+      "detail": "20 open decision(s) record the remaining questions (7 blocking for approval); none is resolved or assumed here"
+    }
+  ],
+  "note": "An engineering gate: it states that the source is understood well enough to convert, with every unknown documented. It is not a G2 approval and does not authorise generation.",
+  "behaviours": [
+    {
+      "behaviour_id": "PORTMSTR:ENTRY-DISPATCH",
+      "kind": "dispatch",
+      "classification": "PARTIAL",
+      "lines": [
+        84,
+        100
+      ],
+      "inputs": [
+        "LS-COMMAND"
+      ],
+      "outputs": [
+        "WS-ERROR-TEXT"
+      ],
+      "side_effects": [],
+      "unresolved": [],
+      "covered_by": [
+        "REQ-PORTMSTR-001"
+      ]
+    },
+    {
+      "behaviour_id": "PORTMSTR:1000-INITIALIZE",
+      "kind": "performed_range",
+      "classification": "PARTIAL",
+      "lines": [
+        104,
+        236
+      ],
+      "inputs": [
+        "WS-CURRENT-DATE",
+        "WS-ERROR",
+        "WS-PORT-STATUS",
+        "WS-RETURN-CODE"
+      ],
+      "outputs": [
+        "LS-RETURN-CODE",
+        "WS-ERROR-TEXT",
+        "WS-RETURN-CODE",
+        "WS-WORK-AREAS"
+      ],
+      "side_effects": [
+        {
+          "line": 106,
+          "kind": "file_io",
+          "operation": "OPEN",
+          "table": null
+        },
+        {
+          "line": 229,
+          "kind": "file_io",
+          "operation": "CLOSE",
+          "table": null
+        }
+      ],
+      "unresolved": [],
+      "covered_by": [
+        "REQ-PORTMSTR-001",
+        "RT-PORTMSTR-001"
+      ]
+    },
+    {
+      "behaviour_id": "PORTMSTR:2000-CREATE-PORTFOLIO",
+      "kind": "performed_range",
+      "classification": "PARTIAL",
+      "lines": [
+        119,
+        236
+      ],
+      "inputs": [
+        "LS-PORTFOLIO",
+        "PORT-ID",
+        "PORT-NAME",
+        "PORT-STATUS",
+        "PORTFOLIO-RECORD",
+        "WS-ERROR",
+        "WS-PORT-STATUS",
+        "WS-RETURN-CODE",
+        "WS-SUCCESS",
+        "WS-VALID-STATUS"
+      ],
+      "outputs": [
+        "LS-RETURN-CODE",
+        "PORTFOLIO-RECORD",
+        "WS-ERROR-TEXT",
+        "WS-RETURN-CODE",
+        "WS-VALID-STATUS"
+      ],
+      "side_effects": [
+        {
+          "line": 126,
+          "kind": "file_io",
+          "operation": "WRITE",
+          "table": null
+        },
+        {
+          "line": 229,
+          "kind": "file_io",
+          "operation": "CLOSE",
+          "table": null
+        }
+      ],
+      "unresolved": [],
+      "covered_by": [
+        "REQ-PORTMSTR-001",
+        "REQ-PORTMSTR-002",
+        "REQ-PORTMSTR-003",
+        "RT-PORTMSTR-002"
+      ]
+    },
+    {
+      "behaviour_id": "PORTMSTR:3000-READ-PORTFOLIO",
+      "kind": "performed_range",
+      "classification": "PARTIAL",
+      "lines": [
+        167,
+        236
+      ],
+      "inputs": [
+        "LS-PORTFOLIO",
+        "PORTFOLIO-RECORD",
+        "WS-ERROR",
+        "WS-PORT-STATUS",
+        "WS-RETURN-CODE"
+      ],
+      "outputs": [
+        "LS-PORTFOLIO",
+        "LS-RETURN-CODE",
+        "PORTFOLIO-RECORD",
+        "WS-ERROR-TEXT",
+        "WS-RETURN-CODE"
+      ],
+      "side_effects": [
+        {
+          "line": 169,
+          "kind": "file_io",
+          "operation": "READ",
+          "table": null
+        },
+        {
+          "line": 229,
+          "kind": "file_io",
+          "operation": "CLOSE",
+          "table": null
+        }
+      ],
+      "unresolved": [],
+      "covered_by": [
+        "REQ-PORTMSTR-001",
+        "REQ-PORTMSTR-006"
+      ]
+    },
+    {
+      "behaviour_id": "PORTMSTR:4000-UPDATE-PORTFOLIO",
+      "kind": "performed_range",
+      "classification": "PARTIAL",
+      "lines": [
+        142,
+        288
+      ],
+      "inputs": [
+        "LS-PORTFOLIO",
+        "PORT-ID",
+        "PORT-NAME",
+        "PORT-STATUS",
+        "PORTFOLIO-RECORD",
+        "WS-ERROR",
+        "WS-PORT-STATUS",
+        "WS-RETURN-CODE",
+        "WS-SUCCESS",
+        "WS-VALID-STATUS"
+      ],
+      "outputs": [
+        "LS-ACCT-NO",
+        "LS-ACTION",
+        "LS-AFTER-IMAGE",
+        "LS-AUDIT-REQUEST",
+        "LS-BEFORE-IMAGE",
+        "LS-MESSAGE",
+        "LS-PORT-ID",
+        "LS-PROGRAM",
+        "LS-RETURN-CODE",
+        "LS-STATUS",
+        "LS-SYSTEM-ID",
+        "LS-TERMINAL",
+        "LS-TYPE",
+        "LS-USER-ID",
+        "PORTFOLIO-RECORD",
+        "WS-ERROR-TEXT",
+        "WS-RETURN-CODE",
+        "WS-VALID-STATUS"
+      ],
+      "side_effects": [
+        {
+          "line": 194,
+          "kind": "file_io",
+          "operation": "REWRITE",
+          "table": null
+        },
+        {
+          "line": 229,
+          "kind": "file_io",
+          "operation": "CLOSE",
+          "table": null
+        },
+        {
+          "line": 287,
+          "kind": "call",
+          "operation": "CALL",
+          "table": null
+        }
+      ],
+      "unresolved": [
+        "LS-AUDIT-REQUEST",
+        "USERID",
+        "TERMINAL-ID",
+        "WS-BEFORE-IMAGE",
+        "PORT-RECORD"
+      ],
+      "covered_by": [
+        "REQ-PORTMSTR-001",
+        "REQ-PORTMSTR-007"
+      ]
+    },
+    {
+      "behaviour_id": "PORTMSTR:5000-DELETE-PORTFOLIO",
+      "kind": "performed_range",
+      "classification": "PARTIAL",
+      "lines": [
+        213,
+        236
+      ],
+      "inputs": [
+        "LS-PORTFOLIO",
+        "WS-ERROR",
+        "WS-PORT-STATUS",
+        "WS-RETURN-CODE"
+      ],
+      "outputs": [
+        "LS-RETURN-CODE",
+        "PORTFOLIO-RECORD",
+        "WS-ERROR-TEXT",
+        "WS-RETURN-CODE"
+      ],
+      "side_effects": [
+        {
+          "line": 215,
+          "kind": "file_io",
+          "operation": "DELETE",
+          "table": null
+        },
+        {
+          "line": 229,
+          "kind": "file_io",
+          "operation": "CLOSE",
+          "table": null
+        }
+      ],
+      "unresolved": [],
+      "covered_by": [
+        "REQ-PORTMSTR-001"
+      ]
+    },
+    {
+      "behaviour_id": "PORTMSTR:9000-ERROR",
+      "kind": "performed_range",
+      "classification": "PARTIAL",
+      "lines": [
+        229,
+        236
+      ],
+      "inputs": [
+        "WS-ERROR",
+        "WS-RETURN-CODE"
+      ],
+      "outputs": [
+        "LS-RETURN-CODE",
+        "WS-RETURN-CODE"
+      ],
+      "side_effects": [
+        {
+          "line": 229,
+          "kind": "file_io",
+          "operation": "CLOSE",
+          "table": null
+        }
+      ],
+      "unresolved": [],
+      "covered_by": [
+        "REQ-PORTMSTR-001",
+        "REQ-PORTMSTR-002",
+        "REQ-PORTMSTR-003",
+        "REQ-PORTMSTR-006",
+        "REQ-PORTMSTR-007",
+        "REQ-PORTMSTR-009",
+        "RT-PORTMSTR-001",
+        "RT-PORTMSTR-002"
+      ]
+    },
+    {
+      "behaviour_id": "PORTMSTR:6000-TERMINATE",
+      "kind": "performed_range",
+      "classification": "PARTIAL",
+      "lines": [
+        229,
+        232
+      ],
+      "inputs": [
+        "WS-RETURN-CODE"
+      ],
+      "outputs": [
+        "LS-RETURN-CODE"
+      ],
+      "side_effects": [
+        {
+          "line": 229,
+          "kind": "file_io",
+          "operation": "CLOSE",
+          "table": null
+        }
+      ],
+      "unresolved": [],
+      "covered_by": [
+        "REQ-PORTMSTR-001",
+        "REQ-PORTMSTR-002",
+        "REQ-PORTMSTR-003",
+        "REQ-PORTMSTR-006",
+        "REQ-PORTMSTR-007",
+        "REQ-PORTMSTR-009",
+        "RT-PORTMSTR-001",
+        "RT-PORTMSTR-002"
+      ]
+    }
+  ],
+  "gaps": [
+    {
+      "gap_id": "GAP-PORTMSTR-1000-INITIALIZE-FILE-OPEN-PORTFOLIO-FILE",
+      "kind": "EXTERNAL_FILE_RUNTIME",
+      "behaviour_id": "PORTMSTR:1000-INITIALIZE",
+      "source": {
+        "path": "src/programs/portfolio/PORTMSTR.cbl",
+        "sha256": "9d1c7f7740ef43c045a43fa61136e51c552b9222b261ff5b81a433a818fb3cb3",
+        "lines": [
+          106
+        ],
+        "statements": [
+          {
+            "line": 106,
+            "text": "OPEN I-O PORTFOLIO-FILE"
+          }
+        ]
+      },
+      "missing_fact": "the run-time behaviour of OPEN on PORTFOLIO-FILE: the dataset bound to it (JCL DD), its content and record encoding, and the file-system status outcomes the COBOL source does not define",
+      "why_unsafe": "the records read and the statuses reported come from a dataset outside the program; a Java implementation verified only against source-derived fixtures does not establish them",
+      "affected_requirements": [
+        "REQ-PORTMSTR-001",
+        "RT-PORTMSTR-001"
+      ],
+      "affected_java_component": "file port for OPEN PORTFOLIO-FILE (runtime file semantics; dataset contents unverified)",
+      "required_action": [
+        "the dataset definitions (JCL DD, organisation, record format) and a captured legacy run for each status outcome (technical authority)"
+      ],
+      "validation_evidence": "a captured legacy run against the real (or an approved equivalent) dataset, including end-of-file and error statuses",
+      "blocks_execution_path": "request its PERFORM -> 1000-INITIALIZE: statement(s) 106",
+      "blocking": true,
+      "status": "OPEN"
+    },
+    {
+      "gap_id": "GAP-PORTMSTR-1000-INITIALIZE-FILE-CLOSE-PORTFOLIO-FILE",
+      "kind": "EXTERNAL_FILE_RUNTIME",
+      "behaviour_id": "PORTMSTR:1000-INITIALIZE",
+      "source": {
+        "path": "src/programs/portfolio/PORTMSTR.cbl",
+        "sha256": "9d1c7f7740ef43c045a43fa61136e51c552b9222b261ff5b81a433a818fb3cb3",
+        "lines": [
+          229
+        ],
+        "statements": [
+          {
+            "line": 229,
+            "text": "CLOSE PORTFOLIO-FILE"
+          }
+        ]
+      },
+      "missing_fact": "the run-time behaviour of CLOSE on PORTFOLIO-FILE: the dataset bound to it (JCL DD), its content and record encoding, and the file-system status outcomes the COBOL source does not define",
+      "why_unsafe": "the records read and the statuses reported come from a dataset outside the program; a Java implementation verified only against source-derived fixtures does not establish them",
+      "affected_requirements": [
+        "REQ-PORTMSTR-001",
+        "RT-PORTMSTR-001"
+      ],
+      "affected_java_component": "file port for CLOSE PORTFOLIO-FILE (runtime file semantics; dataset contents unverified)",
+      "required_action": [
+        "the dataset definitions (JCL DD, organisation, record format) and a captured legacy run for each status outcome (technical authority)"
+      ],
+      "validation_evidence": "a captured legacy run against the real (or an approved equivalent) dataset, including end-of-file and error statuses",
+      "blocks_execution_path": "request its PERFORM -> 1000-INITIALIZE: statement(s) 229",
+      "blocking": true,
+      "status": "OPEN"
+    },
+    {
+      "gap_id": "GAP-PORTMSTR-1000-INITIALIZE-TRUNC-LS-RETURN-CODE",
+      "kind": "COMPILER_OPTION_DEPENDENT",
+      "behaviour_id": "PORTMSTR:1000-INITIALIZE",
+      "source": {
+        "path": "src/programs/portfolio/PORTMSTR.cbl",
+        "sha256": "9d1c7f7740ef43c045a43fa61136e51c552b9222b261ff5b81a433a818fb3cb3",
+        "lines": [
+          231
+        ],
+        "statements": [
+          {
+            "line": 231,
+            "text": "MOVE WS-RETURN-CODE TO LS-RETURN-CODE ."
+          }
+        ]
+      },
+      "missing_fact": "the compiler TRUNC option used for PORTMSTR (binary item LS-RETURN-CODE S9(4))",
+      "why_unsafe": "values beyond the 4 digits of PIC S9(4) behave according to the compiler TRUNC option, which the repository does not record",
+      "affected_requirements": [
+        "REQ-PORTMSTR-001",
+        "RT-PORTMSTR-001"
+      ],
+      "affected_java_component": "input validation of behaviour 1000-INITIALIZE: values outside the PIC range are rejected, not truncated, until the option is known",
+      "required_action": [
+        "the build/compile options of the legacy program (technical authority)"
+      ],
+      "validation_evidence": "the compile listing or JCL showing TRUNC(STD|OPT|BIN), or a captured run with an out-of-range value",
+      "blocks_execution_path": "only inputs outside the PIC range of LS-RETURN-CODE",
+      "blocking": false,
+      "status": "OPEN"
+    },
+    {
+      "gap_id": "GAP-PORTMSTR-2000-CREATE-PORTFOLIO-FILE-WRITE-PORTFOLIO-RECORD",
+      "kind": "EXTERNAL_FILE_RUNTIME",
+      "behaviour_id": "PORTMSTR:2000-CREATE-PORTFOLIO",
+      "source": {
+        "path": "src/programs/portfolio/PORTMSTR.cbl",
+        "sha256": "9d1c7f7740ef43c045a43fa61136e51c552b9222b261ff5b81a433a818fb3cb3",
+        "lines": [
+          126
+        ],
+        "statements": [
+          {
+            "line": 126,
+            "text": "WRITE PORTFOLIO-RECORD"
+          }
+        ]
+      },
+      "missing_fact": "the run-time behaviour of WRITE on PORTFOLIO-RECORD: the dataset bound to it (JCL DD), its content and record encoding, and the file-system status outcomes the COBOL source does not define",
+      "why_unsafe": "the records read and the statuses reported come from a dataset outside the program; a Java implementation verified only against source-derived fixtures does not establish them",
+      "affected_requirements": [
+        "REQ-PORTMSTR-001",
+        "REQ-PORTMSTR-002",
+        "REQ-PORTMSTR-003",
+        "RT-PORTMSTR-002"
+      ],
+      "affected_java_component": "file port for WRITE PORTFOLIO-RECORD (runtime file semantics; dataset contents unverified)",
+      "required_action": [
+        "the dataset definitions (JCL DD, organisation, record format) and a captured legacy run for each status outcome (technical authority)"
+      ],
+      "validation_evidence": "a captured legacy run against the real (or an approved equivalent) dataset, including end-of-file and error statuses",
+      "blocks_execution_path": "request CREATE-PORT ('C') -> 2000-CREATE-PORTFOLIO: statement(s) 126",
+      "blocking": true,
+      "status": "OPEN"
+    },
+    {
+      "gap_id": "GAP-PORTMSTR-2000-CREATE-PORTFOLIO-FILE-CLOSE-PORTFOLIO-FILE",
+      "kind": "EXTERNAL_FILE_RUNTIME",
+      "behaviour_id": "PORTMSTR:2000-CREATE-PORTFOLIO",
+      "source": {
+        "path": "src/programs/portfolio/PORTMSTR.cbl",
+        "sha256": "9d1c7f7740ef43c045a43fa61136e51c552b9222b261ff5b81a433a818fb3cb3",
+        "lines": [
+          229
+        ],
+        "statements": [
+          {
+            "line": 229,
+            "text": "CLOSE PORTFOLIO-FILE"
+          }
+        ]
+      },
+      "missing_fact": "the run-time behaviour of CLOSE on PORTFOLIO-FILE: the dataset bound to it (JCL DD), its content and record encoding, and the file-system status outcomes the COBOL source does not define",
+      "why_unsafe": "the records read and the statuses reported come from a dataset outside the program; a Java implementation verified only against source-derived fixtures does not establish them",
+      "affected_requirements": [
+        "REQ-PORTMSTR-001",
+        "REQ-PORTMSTR-002",
+        "REQ-PORTMSTR-003",
+        "RT-PORTMSTR-002"
+      ],
+      "affected_java_component": "file port for CLOSE PORTFOLIO-FILE (runtime file semantics; dataset contents unverified)",
+      "required_action": [
+        "the dataset definitions (JCL DD, organisation, record format) and a captured legacy run for each status outcome (technical authority)"
+      ],
+      "validation_evidence": "a captured legacy run against the real (or an approved equivalent) dataset, including end-of-file and error statuses",
+      "blocks_execution_path": "request CREATE-PORT ('C') -> 2000-CREATE-PORTFOLIO: statement(s) 229",
+      "blocking": true,
+      "status": "OPEN"
+    },
+    {
+      "gap_id": "GAP-PORTMSTR-2000-CREATE-PORTFOLIO-TRUNC-LS-RETURN-CODE",
+      "kind": "COMPILER_OPTION_DEPENDENT",
+      "behaviour_id": "PORTMSTR:2000-CREATE-PORTFOLIO",
+      "source": {
+        "path": "src/programs/portfolio/PORTMSTR.cbl",
+        "sha256": "9d1c7f7740ef43c045a43fa61136e51c552b9222b261ff5b81a433a818fb3cb3",
+        "lines": [
+          231
+        ],
+        "statements": [
+          {
+            "line": 231,
+            "text": "MOVE WS-RETURN-CODE TO LS-RETURN-CODE ."
+          }
+        ]
+      },
+      "missing_fact": "the compiler TRUNC option used for PORTMSTR (binary item LS-RETURN-CODE S9(4))",
+      "why_unsafe": "values beyond the 4 digits of PIC S9(4) behave according to the compiler TRUNC option, which the repository does not record",
+      "affected_requirements": [
+        "REQ-PORTMSTR-001",
+        "REQ-PORTMSTR-002",
+        "REQ-PORTMSTR-003",
+        "RT-PORTMSTR-002"
+      ],
+      "affected_java_component": "input validation of behaviour 2000-CREATE-PORTFOLIO: values outside the PIC range are rejected, not truncated, until the option is known",
+      "required_action": [
+        "the build/compile options of the legacy program (technical authority)"
+      ],
+      "validation_evidence": "the compile listing or JCL showing TRUNC(STD|OPT|BIN), or a captured run with an out-of-range value",
+      "blocks_execution_path": "only inputs outside the PIC range of LS-RETURN-CODE",
+      "blocking": false,
+      "status": "OPEN"
+    },
+    {
+      "gap_id": "GAP-PORTMSTR-3000-READ-PORTFOLIO-FILE-READ-PORTFOLIO-FILE",
+      "kind": "EXTERNAL_FILE_RUNTIME",
+      "behaviour_id": "PORTMSTR:3000-READ-PORTFOLIO",
+      "source": {
+        "path": "src/programs/portfolio/PORTMSTR.cbl",
+        "sha256": "9d1c7f7740ef43c045a43fa61136e51c552b9222b261ff5b81a433a818fb3cb3",
+        "lines": [
+          169
+        ],
+        "statements": [
+          {
+            "line": 169,
+            "text": "READ PORTFOLIO-FILE"
+          }
+        ]
+      },
+      "missing_fact": "the run-time behaviour of READ on PORTFOLIO-FILE: the dataset bound to it (JCL DD), its content and record encoding, and the file-system status outcomes the COBOL source does not define",
+      "why_unsafe": "the records read and the statuses reported come from a dataset outside the program; a Java implementation verified only against source-derived fixtures does not establish them",
+      "affected_requirements": [
+        "REQ-PORTMSTR-001",
+        "REQ-PORTMSTR-006"
+      ],
+      "affected_java_component": "file port for READ PORTFOLIO-FILE (runtime file semantics; dataset contents unverified)",
+      "required_action": [
+        "the dataset definitions (JCL DD, organisation, record format) and a captured legacy run for each status outcome (technical authority)"
+      ],
+      "validation_evidence": "a captured legacy run against the real (or an approved equivalent) dataset, including end-of-file and error statuses",
+      "blocks_execution_path": "request READ-PORT ('R') -> 3000-READ-PORTFOLIO: statement(s) 169",
+      "blocking": true,
+      "status": "OPEN"
+    },
+    {
+      "gap_id": "GAP-PORTMSTR-3000-READ-PORTFOLIO-FILE-CLOSE-PORTFOLIO-FILE",
+      "kind": "EXTERNAL_FILE_RUNTIME",
+      "behaviour_id": "PORTMSTR:3000-READ-PORTFOLIO",
+      "source": {
+        "path": "src/programs/portfolio/PORTMSTR.cbl",
+        "sha256": "9d1c7f7740ef43c045a43fa61136e51c552b9222b261ff5b81a433a818fb3cb3",
+        "lines": [
+          229
+        ],
+        "statements": [
+          {
+            "line": 229,
+            "text": "CLOSE PORTFOLIO-FILE"
+          }
+        ]
+      },
+      "missing_fact": "the run-time behaviour of CLOSE on PORTFOLIO-FILE: the dataset bound to it (JCL DD), its content and record encoding, and the file-system status outcomes the COBOL source does not define",
+      "why_unsafe": "the records read and the statuses reported come from a dataset outside the program; a Java implementation verified only against source-derived fixtures does not establish them",
+      "affected_requirements": [
+        "REQ-PORTMSTR-001",
+        "REQ-PORTMSTR-006"
+      ],
+      "affected_java_component": "file port for CLOSE PORTFOLIO-FILE (runtime file semantics; dataset contents unverified)",
+      "required_action": [
+        "the dataset definitions (JCL DD, organisation, record format) and a captured legacy run for each status outcome (technical authority)"
+      ],
+      "validation_evidence": "a captured legacy run against the real (or an approved equivalent) dataset, including end-of-file and error statuses",
+      "blocks_execution_path": "request READ-PORT ('R') -> 3000-READ-PORTFOLIO: statement(s) 229",
+      "blocking": true,
+      "status": "OPEN"
+    },
+    {
+      "gap_id": "GAP-PORTMSTR-3000-READ-PORTFOLIO-TRUNC-LS-RETURN-CODE",
+      "kind": "COMPILER_OPTION_DEPENDENT",
+      "behaviour_id": "PORTMSTR:3000-READ-PORTFOLIO",
+      "source": {
+        "path": "src/programs/portfolio/PORTMSTR.cbl",
+        "sha256": "9d1c7f7740ef43c045a43fa61136e51c552b9222b261ff5b81a433a818fb3cb3",
+        "lines": [
+          231
+        ],
+        "statements": [
+          {
+            "line": 231,
+            "text": "MOVE WS-RETURN-CODE TO LS-RETURN-CODE ."
+          }
+        ]
+      },
+      "missing_fact": "the compiler TRUNC option used for PORTMSTR (binary item LS-RETURN-CODE S9(4))",
+      "why_unsafe": "values beyond the 4 digits of PIC S9(4) behave according to the compiler TRUNC option, which the repository does not record",
+      "affected_requirements": [
+        "REQ-PORTMSTR-001",
+        "REQ-PORTMSTR-006"
+      ],
+      "affected_java_component": "input validation of behaviour 3000-READ-PORTFOLIO: values outside the PIC range are rejected, not truncated, until the option is known",
+      "required_action": [
+        "the build/compile options of the legacy program (technical authority)"
+      ],
+      "validation_evidence": "the compile listing or JCL showing TRUNC(STD|OPT|BIN), or a captured run with an out-of-range value",
+      "blocks_execution_path": "only inputs outside the PIC range of LS-RETURN-CODE",
+      "blocking": false,
+      "status": "OPEN"
+    },
+    {
+      "gap_id": "GAP-PORTMSTR-4000-UPDATE-PORTFOLIO-LS-AUDIT-REQUEST",
+      "kind": "UNDECLARED_NAME_SEMANTICS",
+      "behaviour_id": "PORTMSTR:4000-UPDATE-PORTFOLIO",
+      "source": {
+        "path": "src/programs/portfolio/PORTMSTR.cbl",
+        "sha256": "9d1c7f7740ef43c045a43fa61136e51c552b9222b261ff5b81a433a818fb3cb3",
+        "lines": [
+          269,
+          287
+        ],
+        "statements": [
+          {
+            "line": 269,
+            "text": "INITIALIZE LS-AUDIT-REQUEST"
+          },
+          {
+            "line": 287,
+            "text": "CALL 'AUDPROC' USING LS-AUDIT-REQUEST ."
+          }
+        ]
+      },
+      "missing_fact": "LS-AUDIT-REQUEST is used but declared nowhere in the repository; its layout and value meanings are the subject of DR-F2-P0006-005 (missing: a declaration of AUDPROC; a declaration of ERRPROC; a declaration of WS-BEFORE-IMAGE; a declaration of USERID; a declaration of TERMINAL-ID)",
+      "why_unsafe": "the outputs of these statements (LS-AUDIT-REQUEST) depend on a value whose meaning is not established; any Java mapping would invent it",
+      "affected_requirements": [
+        "REQ-PORTMSTR-001",
+        "REQ-PORTMSTR-007"
+      ],
+      "affected_java_component": "outcome mapping of behaviour 4000-UPDATE-PORTFOLIO (behind a port whose only implementation throws until the gap is resolved)",
+      "required_action": [
+        "DR-F2-P0006-005: a signed resolution by technical_authority"
+      ],
+      "validation_evidence": "the real definition of LS-AUDIT-REQUEST for the target runtime and a captured legacy run showing each outcome branch",
+      "blocks_execution_path": "request UPDATE-PORT ('U') -> 4000-UPDATE-PORTFOLIO: statements 269, 287",
+      "blocking": true,
+      "status": "OPEN"
+    },
+    {
+      "gap_id": "GAP-PORTMSTR-4000-UPDATE-PORTFOLIO-USERID",
+      "kind": "UNDECLARED_NAME_SEMANTICS",
+      "behaviour_id": "PORTMSTR:4000-UPDATE-PORTFOLIO",
+      "source": {
+        "path": "src/programs/portfolio/PORTMSTR.cbl",
+        "sha256": "9d1c7f7740ef43c045a43fa61136e51c552b9222b261ff5b81a433a818fb3cb3",
+        "lines": [
+          272
+        ],
+        "statements": [
+          {
+            "line": 272,
+            "text": "MOVE USERID      TO LS-USER-ID"
+          }
+        ]
+      },
+      "missing_fact": "USERID is used but declared nowhere in the repository; its layout and value meanings are the subject of DR-F2-P0006-005 (missing: a declaration of AUDPROC; a declaration of ERRPROC; a declaration of WS-BEFORE-IMAGE; a declaration of USERID; a declaration of TERMINAL-ID)",
+      "why_unsafe": "the outputs of these statements (LS-USER-ID) depend on a value whose meaning is not established; any Java mapping would invent it",
+      "affected_requirements": [
+        "REQ-PORTMSTR-001",
+        "REQ-PORTMSTR-007"
+      ],
+      "affected_java_component": "outcome mapping of behaviour 4000-UPDATE-PORTFOLIO (behind a port whose only implementation throws until the gap is resolved)",
+      "required_action": [
+        "DR-F2-P0006-005: a signed resolution by technical_authority"
+      ],
+      "validation_evidence": "the real definition of USERID for the target runtime and a captured legacy run showing each outcome branch",
+      "blocks_execution_path": "request UPDATE-PORT ('U') -> 4000-UPDATE-PORTFOLIO: statements 272",
+      "blocking": true,
+      "status": "OPEN"
+    },
+    {
+      "gap_id": "GAP-PORTMSTR-4000-UPDATE-PORTFOLIO-TERMINAL-ID",
+      "kind": "UNDECLARED_NAME_SEMANTICS",
+      "behaviour_id": "PORTMSTR:4000-UPDATE-PORTFOLIO",
+      "source": {
+        "path": "src/programs/portfolio/PORTMSTR.cbl",
+        "sha256": "9d1c7f7740ef43c045a43fa61136e51c552b9222b261ff5b81a433a818fb3cb3",
+        "lines": [
+          274
+        ],
+        "statements": [
+          {
+            "line": 274,
+            "text": "MOVE TERMINAL-ID TO LS-TERMINAL"
+          }
+        ]
+      },
+      "missing_fact": "TERMINAL-ID is used but declared nowhere in the repository; its layout and value meanings are the subject of DR-F2-P0006-005 (missing: a declaration of AUDPROC; a declaration of ERRPROC; a declaration of WS-BEFORE-IMAGE; a declaration of USERID; a declaration of TERMINAL-ID)",
+      "why_unsafe": "the outputs of these statements (LS-TERMINAL) depend on a value whose meaning is not established; any Java mapping would invent it",
+      "affected_requirements": [
+        "REQ-PORTMSTR-001",
+        "REQ-PORTMSTR-007"
+      ],
+      "affected_java_component": "outcome mapping of behaviour 4000-UPDATE-PORTFOLIO (behind a port whose only implementation throws until the gap is resolved)",
+      "required_action": [
+        "DR-F2-P0006-005: a signed resolution by technical_authority"
+      ],
+      "validation_evidence": "the real definition of TERMINAL-ID for the target runtime and a captured legacy run showing each outcome branch",
+      "blocks_execution_path": "request UPDATE-PORT ('U') -> 4000-UPDATE-PORTFOLIO: statements 274",
+      "blocking": true,
+      "status": "OPEN"
+    },
+    {
+      "gap_id": "GAP-PORTMSTR-4000-UPDATE-PORTFOLIO-WS-BEFORE-IMAGE",
+      "kind": "UNDECLARED_NAME_SEMANTICS",
+      "behaviour_id": "PORTMSTR:4000-UPDATE-PORTFOLIO",
+      "source": {
+        "path": "src/programs/portfolio/PORTMSTR.cbl",
+        "sha256": "9d1c7f7740ef43c045a43fa61136e51c552b9222b261ff5b81a433a818fb3cb3",
+        "lines": [
+          283
+        ],
+        "statements": [
+          {
+            "line": 283,
+            "text": "MOVE WS-BEFORE-IMAGE TO LS-BEFORE-IMAGE"
+          }
+        ]
+      },
+      "missing_fact": "WS-BEFORE-IMAGE is used but declared nowhere in the repository; its layout and value meanings are the subject of DR-F2-P0006-005 (missing: a declaration of AUDPROC; a declaration of ERRPROC; a declaration of WS-BEFORE-IMAGE; a declaration of USERID; a declaration of TERMINAL-ID)",
+      "why_unsafe": "the outputs of these statements (LS-BEFORE-IMAGE) depend on a value whose meaning is not established; any Java mapping would invent it",
+      "affected_requirements": [
+        "REQ-PORTMSTR-001",
+        "REQ-PORTMSTR-007"
+      ],
+      "affected_java_component": "outcome mapping of behaviour 4000-UPDATE-PORTFOLIO (behind a port whose only implementation throws until the gap is resolved)",
+      "required_action": [
+        "DR-F2-P0006-005: a signed resolution by technical_authority"
+      ],
+      "validation_evidence": "the real definition of WS-BEFORE-IMAGE for the target runtime and a captured legacy run showing each outcome branch",
+      "blocks_execution_path": "request UPDATE-PORT ('U') -> 4000-UPDATE-PORTFOLIO: statements 283",
+      "blocking": true,
+      "status": "OPEN"
+    },
+    {
+      "gap_id": "GAP-PORTMSTR-4000-UPDATE-PORTFOLIO-PORT-RECORD",
+      "kind": "UNDECLARED_NAME_SEMANTICS",
+      "behaviour_id": "PORTMSTR:4000-UPDATE-PORTFOLIO",
+      "source": {
+        "path": "src/programs/portfolio/PORTMSTR.cbl",
+        "sha256": "9d1c7f7740ef43c045a43fa61136e51c552b9222b261ff5b81a433a818fb3cb3",
+        "lines": [
+          284
+        ],
+        "statements": [
+          {
+            "line": 284,
+            "text": "MOVE PORT-RECORD     TO LS-AFTER-IMAGE"
+          }
+        ]
+      },
+      "missing_fact": "PORT-RECORD is used but declared nowhere in the repository; its layout and value meanings are the subject of DR-F2-P0006-005 (missing: a declaration of AUDPROC; a declaration of ERRPROC; a declaration of WS-BEFORE-IMAGE; a declaration of USERID; a declaration of TERMINAL-ID)",
+      "why_unsafe": "the outputs of these statements (LS-AFTER-IMAGE) depend on a value whose meaning is not established; any Java mapping would invent it",
+      "affected_requirements": [
+        "REQ-PORTMSTR-001",
+        "REQ-PORTMSTR-007"
+      ],
+      "affected_java_component": "outcome mapping of behaviour 4000-UPDATE-PORTFOLIO (behind a port whose only implementation throws until the gap is resolved)",
+      "required_action": [
+        "DR-F2-P0006-005: a signed resolution by technical_authority"
+      ],
+      "validation_evidence": "the real definition of PORT-RECORD for the target runtime and a captured legacy run showing each outcome branch",
+      "blocks_execution_path": "request UPDATE-PORT ('U') -> 4000-UPDATE-PORTFOLIO: statements 284",
+      "blocking": true,
+      "status": "OPEN"
+    },
+    {
+      "gap_id": "GAP-PORTMSTR-4000-UPDATE-PORTFOLIO-FILE-REWRITE-PORTFOLIO-RECORD",
+      "kind": "EXTERNAL_FILE_RUNTIME",
+      "behaviour_id": "PORTMSTR:4000-UPDATE-PORTFOLIO",
+      "source": {
+        "path": "src/programs/portfolio/PORTMSTR.cbl",
+        "sha256": "9d1c7f7740ef43c045a43fa61136e51c552b9222b261ff5b81a433a818fb3cb3",
+        "lines": [
+          194
+        ],
+        "statements": [
+          {
+            "line": 194,
+            "text": "REWRITE PORTFOLIO-RECORD"
+          }
+        ]
+      },
+      "missing_fact": "the run-time behaviour of REWRITE on PORTFOLIO-RECORD: the dataset bound to it (JCL DD), its content and record encoding, and the file-system status outcomes the COBOL source does not define",
+      "why_unsafe": "the records read and the statuses reported come from a dataset outside the program; a Java implementation verified only against source-derived fixtures does not establish them",
+      "affected_requirements": [
+        "REQ-PORTMSTR-001",
+        "REQ-PORTMSTR-007"
+      ],
+      "affected_java_component": "file port for REWRITE PORTFOLIO-RECORD (runtime file semantics; dataset contents unverified)",
+      "required_action": [
+        "the dataset definitions (JCL DD, organisation, record format) and a captured legacy run for each status outcome (technical authority)"
+      ],
+      "validation_evidence": "a captured legacy run against the real (or an approved equivalent) dataset, including end-of-file and error statuses",
+      "blocks_execution_path": "request UPDATE-PORT ('U') -> 4000-UPDATE-PORTFOLIO: statement(s) 194",
+      "blocking": true,
+      "status": "OPEN"
+    },
+    {
+      "gap_id": "GAP-PORTMSTR-4000-UPDATE-PORTFOLIO-FILE-CLOSE-PORTFOLIO-FILE",
+      "kind": "EXTERNAL_FILE_RUNTIME",
+      "behaviour_id": "PORTMSTR:4000-UPDATE-PORTFOLIO",
+      "source": {
+        "path": "src/programs/portfolio/PORTMSTR.cbl",
+        "sha256": "9d1c7f7740ef43c045a43fa61136e51c552b9222b261ff5b81a433a818fb3cb3",
+        "lines": [
+          229
+        ],
+        "statements": [
+          {
+            "line": 229,
+            "text": "CLOSE PORTFOLIO-FILE"
+          }
+        ]
+      },
+      "missing_fact": "the run-time behaviour of CLOSE on PORTFOLIO-FILE: the dataset bound to it (JCL DD), its content and record encoding, and the file-system status outcomes the COBOL source does not define",
+      "why_unsafe": "the records read and the statuses reported come from a dataset outside the program; a Java implementation verified only against source-derived fixtures does not establish them",
+      "affected_requirements": [
+        "REQ-PORTMSTR-001",
+        "REQ-PORTMSTR-007"
+      ],
+      "affected_java_component": "file port for CLOSE PORTFOLIO-FILE (runtime file semantics; dataset contents unverified)",
+      "required_action": [
+        "the dataset definitions (JCL DD, organisation, record format) and a captured legacy run for each status outcome (technical authority)"
+      ],
+      "validation_evidence": "a captured legacy run against the real (or an approved equivalent) dataset, including end-of-file and error statuses",
+      "blocks_execution_path": "request UPDATE-PORT ('U') -> 4000-UPDATE-PORTFOLIO: statement(s) 229",
+      "blocking": true,
+      "status": "OPEN"
+    },
+    {
+      "gap_id": "GAP-PORTMSTR-4000-UPDATE-PORTFOLIO-CALL-CALL-AUDPROC",
+      "kind": "EXTERNAL_PROGRAM_CALL",
+      "behaviour_id": "PORTMSTR:4000-UPDATE-PORTFOLIO",
+      "source": {
+        "path": "src/programs/portfolio/PORTMSTR.cbl",
+        "sha256": "9d1c7f7740ef43c045a43fa61136e51c552b9222b261ff5b81a433a818fb3cb3",
+        "lines": [
+          287
+        ],
+        "statements": [
+          {
+            "line": 287,
+            "text": "CALL 'AUDPROC' USING LS-AUDIT-REQUEST ."
+          }
+        ]
+      },
+      "missing_fact": "the behaviour of the called program AUDPROC for this USING interface; it is established only by AUDPROC's own closure and evidence, never by this behaviour",
+      "why_unsafe": "the outputs this behaviour receives back from AUDPROC are not part of this closure; treating them as known would assume the callee's behaviour",
+      "affected_requirements": [
+        "REQ-PORTMSTR-001",
+        "REQ-PORTMSTR-007"
+      ],
+      "affected_java_component": "call to AUDPROC through the program registry",
+      "required_action": [
+        "AUDPROC: its own source readiness and a recorded interface contract for the USING parameters"
+      ],
+      "validation_evidence": "a captured legacy run of the call to AUDPROC for each outcome it returns",
+      "blocks_execution_path": "request UPDATE-PORT ('U') -> 4000-UPDATE-PORTFOLIO: statement(s) 287",
+      "blocking": true,
+      "status": "OPEN"
+    },
+    {
+      "gap_id": "GAP-PORTMSTR-4000-UPDATE-PORTFOLIO-TRUNC-LS-RETURN-CODE",
+      "kind": "COMPILER_OPTION_DEPENDENT",
+      "behaviour_id": "PORTMSTR:4000-UPDATE-PORTFOLIO",
+      "source": {
+        "path": "src/programs/portfolio/PORTMSTR.cbl",
+        "sha256": "9d1c7f7740ef43c045a43fa61136e51c552b9222b261ff5b81a433a818fb3cb3",
+        "lines": [
+          231
+        ],
+        "statements": [
+          {
+            "line": 231,
+            "text": "MOVE WS-RETURN-CODE TO LS-RETURN-CODE ."
+          }
+        ]
+      },
+      "missing_fact": "the compiler TRUNC option used for PORTMSTR (binary item LS-RETURN-CODE S9(4))",
+      "why_unsafe": "values beyond the 4 digits of PIC S9(4) behave according to the compiler TRUNC option, which the repository does not record",
+      "affected_requirements": [
+        "REQ-PORTMSTR-001",
+        "REQ-PORTMSTR-007"
+      ],
+      "affected_java_component": "input validation of behaviour 4000-UPDATE-PORTFOLIO: values outside the PIC range are rejected, not truncated, until the option is known",
+      "required_action": [
+        "the build/compile options of the legacy program (technical authority)"
+      ],
+      "validation_evidence": "the compile listing or JCL showing TRUNC(STD|OPT|BIN), or a captured run with an out-of-range value",
+      "blocks_execution_path": "only inputs outside the PIC range of LS-RETURN-CODE",
+      "blocking": false,
+      "status": "OPEN"
+    },
+    {
+      "gap_id": "GAP-PORTMSTR-5000-DELETE-PORTFOLIO-FILE-DELETE-PORTFOLIO-FILE",
+      "kind": "EXTERNAL_FILE_RUNTIME",
+      "behaviour_id": "PORTMSTR:5000-DELETE-PORTFOLIO",
+      "source": {
+        "path": "src/programs/portfolio/PORTMSTR.cbl",
+        "sha256": "9d1c7f7740ef43c045a43fa61136e51c552b9222b261ff5b81a433a818fb3cb3",
+        "lines": [
+          215
+        ],
+        "statements": [
+          {
+            "line": 215,
+            "text": "DELETE PORTFOLIO-FILE"
+          }
+        ]
+      },
+      "missing_fact": "the run-time behaviour of DELETE on PORTFOLIO-FILE: the dataset bound to it (JCL DD), its content and record encoding, and the file-system status outcomes the COBOL source does not define",
+      "why_unsafe": "the records read and the statuses reported come from a dataset outside the program; a Java implementation verified only against source-derived fixtures does not establish them",
+      "affected_requirements": [
+        "REQ-PORTMSTR-001"
+      ],
+      "affected_java_component": "file port for DELETE PORTFOLIO-FILE (runtime file semantics; dataset contents unverified)",
+      "required_action": [
+        "the dataset definitions (JCL DD, organisation, record format) and a captured legacy run for each status outcome (technical authority)"
+      ],
+      "validation_evidence": "a captured legacy run against the real (or an approved equivalent) dataset, including end-of-file and error statuses",
+      "blocks_execution_path": "request DELETE-PORT ('D') -> 5000-DELETE-PORTFOLIO: statement(s) 215",
+      "blocking": true,
+      "status": "OPEN"
+    },
+    {
+      "gap_id": "GAP-PORTMSTR-5000-DELETE-PORTFOLIO-FILE-CLOSE-PORTFOLIO-FILE",
+      "kind": "EXTERNAL_FILE_RUNTIME",
+      "behaviour_id": "PORTMSTR:5000-DELETE-PORTFOLIO",
+      "source": {
+        "path": "src/programs/portfolio/PORTMSTR.cbl",
+        "sha256": "9d1c7f7740ef43c045a43fa61136e51c552b9222b261ff5b81a433a818fb3cb3",
+        "lines": [
+          229
+        ],
+        "statements": [
+          {
+            "line": 229,
+            "text": "CLOSE PORTFOLIO-FILE"
+          }
+        ]
+      },
+      "missing_fact": "the run-time behaviour of CLOSE on PORTFOLIO-FILE: the dataset bound to it (JCL DD), its content and record encoding, and the file-system status outcomes the COBOL source does not define",
+      "why_unsafe": "the records read and the statuses reported come from a dataset outside the program; a Java implementation verified only against source-derived fixtures does not establish them",
+      "affected_requirements": [
+        "REQ-PORTMSTR-001"
+      ],
+      "affected_java_component": "file port for CLOSE PORTFOLIO-FILE (runtime file semantics; dataset contents unverified)",
+      "required_action": [
+        "the dataset definitions (JCL DD, organisation, record format) and a captured legacy run for each status outcome (technical authority)"
+      ],
+      "validation_evidence": "a captured legacy run against the real (or an approved equivalent) dataset, including end-of-file and error statuses",
+      "blocks_execution_path": "request DELETE-PORT ('D') -> 5000-DELETE-PORTFOLIO: statement(s) 229",
+      "blocking": true,
+      "status": "OPEN"
+    },
+    {
+      "gap_id": "GAP-PORTMSTR-5000-DELETE-PORTFOLIO-TRUNC-LS-RETURN-CODE",
+      "kind": "COMPILER_OPTION_DEPENDENT",
+      "behaviour_id": "PORTMSTR:5000-DELETE-PORTFOLIO",
+      "source": {
+        "path": "src/programs/portfolio/PORTMSTR.cbl",
+        "sha256": "9d1c7f7740ef43c045a43fa61136e51c552b9222b261ff5b81a433a818fb3cb3",
+        "lines": [
+          231
+        ],
+        "statements": [
+          {
+            "line": 231,
+            "text": "MOVE WS-RETURN-CODE TO LS-RETURN-CODE ."
+          }
+        ]
+      },
+      "missing_fact": "the compiler TRUNC option used for PORTMSTR (binary item LS-RETURN-CODE S9(4))",
+      "why_unsafe": "values beyond the 4 digits of PIC S9(4) behave according to the compiler TRUNC option, which the repository does not record",
+      "affected_requirements": [
+        "REQ-PORTMSTR-001"
+      ],
+      "affected_java_component": "input validation of behaviour 5000-DELETE-PORTFOLIO: values outside the PIC range are rejected, not truncated, until the option is known",
+      "required_action": [
+        "the build/compile options of the legacy program (technical authority)"
+      ],
+      "validation_evidence": "the compile listing or JCL showing TRUNC(STD|OPT|BIN), or a captured run with an out-of-range value",
+      "blocks_execution_path": "only inputs outside the PIC range of LS-RETURN-CODE",
+      "blocking": false,
+      "status": "OPEN"
+    },
+    {
+      "gap_id": "GAP-PORTMSTR-9000-ERROR-FILE-CLOSE-PORTFOLIO-FILE",
+      "kind": "EXTERNAL_FILE_RUNTIME",
+      "behaviour_id": "PORTMSTR:9000-ERROR",
+      "source": {
+        "path": "src/programs/portfolio/PORTMSTR.cbl",
+        "sha256": "9d1c7f7740ef43c045a43fa61136e51c552b9222b261ff5b81a433a818fb3cb3",
+        "lines": [
+          229
+        ],
+        "statements": [
+          {
+            "line": 229,
+            "text": "CLOSE PORTFOLIO-FILE"
+          }
+        ]
+      },
+      "missing_fact": "the run-time behaviour of CLOSE on PORTFOLIO-FILE: the dataset bound to it (JCL DD), its content and record encoding, and the file-system status outcomes the COBOL source does not define",
+      "why_unsafe": "the records read and the statuses reported come from a dataset outside the program; a Java implementation verified only against source-derived fixtures does not establish them",
+      "affected_requirements": [
+        "REQ-PORTMSTR-001",
+        "REQ-PORTMSTR-002",
+        "REQ-PORTMSTR-003",
+        "REQ-PORTMSTR-006",
+        "REQ-PORTMSTR-007",
+        "REQ-PORTMSTR-009",
+        "RT-PORTMSTR-001",
+        "RT-PORTMSTR-002"
+      ],
+      "affected_java_component": "file port for CLOSE PORTFOLIO-FILE (runtime file semantics; dataset contents unverified)",
+      "required_action": [
+        "the dataset definitions (JCL DD, organisation, record format) and a captured legacy run for each status outcome (technical authority)"
+      ],
+      "validation_evidence": "a captured legacy run against the real (or an approved equivalent) dataset, including end-of-file and error statuses",
+      "blocks_execution_path": "request OTHER -> 9000-ERROR: statement(s) 229",
+      "blocking": true,
+      "status": "OPEN"
+    },
+    {
+      "gap_id": "GAP-PORTMSTR-9000-ERROR-TRUNC-LS-RETURN-CODE",
+      "kind": "COMPILER_OPTION_DEPENDENT",
+      "behaviour_id": "PORTMSTR:9000-ERROR",
+      "source": {
+        "path": "src/programs/portfolio/PORTMSTR.cbl",
+        "sha256": "9d1c7f7740ef43c045a43fa61136e51c552b9222b261ff5b81a433a818fb3cb3",
+        "lines": [
+          231
+        ],
+        "statements": [
+          {
+            "line": 231,
+            "text": "MOVE WS-RETURN-CODE TO LS-RETURN-CODE ."
+          }
+        ]
+      },
+      "missing_fact": "the compiler TRUNC option used for PORTMSTR (binary item LS-RETURN-CODE S9(4))",
+      "why_unsafe": "values beyond the 4 digits of PIC S9(4) behave according to the compiler TRUNC option, which the repository does not record",
+      "affected_requirements": [
+        "REQ-PORTMSTR-001",
+        "REQ-PORTMSTR-002",
+        "REQ-PORTMSTR-003",
+        "REQ-PORTMSTR-006",
+        "REQ-PORTMSTR-007",
+        "REQ-PORTMSTR-009",
+        "RT-PORTMSTR-001",
+        "RT-PORTMSTR-002"
+      ],
+      "affected_java_component": "input validation of behaviour 9000-ERROR: values outside the PIC range are rejected, not truncated, until the option is known",
+      "required_action": [
+        "the build/compile options of the legacy program (technical authority)"
+      ],
+      "validation_evidence": "the compile listing or JCL showing TRUNC(STD|OPT|BIN), or a captured run with an out-of-range value",
+      "blocks_execution_path": "only inputs outside the PIC range of LS-RETURN-CODE",
+      "blocking": false,
+      "status": "OPEN"
+    },
+    {
+      "gap_id": "GAP-PORTMSTR-6000-TERMINATE-FILE-CLOSE-PORTFOLIO-FILE",
+      "kind": "EXTERNAL_FILE_RUNTIME",
+      "behaviour_id": "PORTMSTR:6000-TERMINATE",
+      "source": {
+        "path": "src/programs/portfolio/PORTMSTR.cbl",
+        "sha256": "9d1c7f7740ef43c045a43fa61136e51c552b9222b261ff5b81a433a818fb3cb3",
+        "lines": [
+          229
+        ],
+        "statements": [
+          {
+            "line": 229,
+            "text": "CLOSE PORTFOLIO-FILE"
+          }
+        ]
+      },
+      "missing_fact": "the run-time behaviour of CLOSE on PORTFOLIO-FILE: the dataset bound to it (JCL DD), its content and record encoding, and the file-system status outcomes the COBOL source does not define",
+      "why_unsafe": "the records read and the statuses reported come from a dataset outside the program; a Java implementation verified only against source-derived fixtures does not establish them",
+      "affected_requirements": [
+        "REQ-PORTMSTR-001",
+        "REQ-PORTMSTR-002",
+        "REQ-PORTMSTR-003",
+        "REQ-PORTMSTR-006",
+        "REQ-PORTMSTR-007",
+        "REQ-PORTMSTR-009",
+        "RT-PORTMSTR-001",
+        "RT-PORTMSTR-002"
+      ],
+      "affected_java_component": "file port for CLOSE PORTFOLIO-FILE (runtime file semantics; dataset contents unverified)",
+      "required_action": [
+        "the dataset definitions (JCL DD, organisation, record format) and a captured legacy run for each status outcome (technical authority)"
+      ],
+      "validation_evidence": "a captured legacy run against the real (or an approved equivalent) dataset, including end-of-file and error statuses",
+      "blocks_execution_path": "request its PERFORM -> 6000-TERMINATE: statement(s) 229",
+      "blocking": true,
+      "status": "OPEN"
+    },
+    {
+      "gap_id": "GAP-PORTMSTR-6000-TERMINATE-TRUNC-LS-RETURN-CODE",
+      "kind": "COMPILER_OPTION_DEPENDENT",
+      "behaviour_id": "PORTMSTR:6000-TERMINATE",
+      "source": {
+        "path": "src/programs/portfolio/PORTMSTR.cbl",
+        "sha256": "9d1c7f7740ef43c045a43fa61136e51c552b9222b261ff5b81a433a818fb3cb3",
+        "lines": [
+          231
+        ],
+        "statements": [
+          {
+            "line": 231,
+            "text": "MOVE WS-RETURN-CODE TO LS-RETURN-CODE ."
+          }
+        ]
+      },
+      "missing_fact": "the compiler TRUNC option used for PORTMSTR (binary item LS-RETURN-CODE S9(4))",
+      "why_unsafe": "values beyond the 4 digits of PIC S9(4) behave according to the compiler TRUNC option, which the repository does not record",
+      "affected_requirements": [
+        "REQ-PORTMSTR-001",
+        "REQ-PORTMSTR-002",
+        "REQ-PORTMSTR-003",
+        "REQ-PORTMSTR-006",
+        "REQ-PORTMSTR-007",
+        "REQ-PORTMSTR-009",
+        "RT-PORTMSTR-001",
+        "RT-PORTMSTR-002"
+      ],
+      "affected_java_component": "input validation of behaviour 6000-TERMINATE: values outside the PIC range are rejected, not truncated, until the option is known",
+      "required_action": [
+        "the build/compile options of the legacy program (technical authority)"
+      ],
+      "validation_evidence": "the compile listing or JCL showing TRUNC(STD|OPT|BIN), or a captured run with an out-of-range value",
+      "blocks_execution_path": "only inputs outside the PIC range of LS-RETURN-CODE",
+      "blocking": false,
+      "status": "OPEN"
+    }
+  ],
+  "closures": [
+    {
+      "behaviour_id": "PORTMSTR:0000-MAIN",
+      "status": "UNRESOLVED",
+      "unresolved_reasons": [
+        "line 271: LS-SYSTEM-ID is neither declared, a keyword, a paragraph nor the subject of a blocking decision (unknown dependency)",
+        "line 272: LS-USER-ID is neither declared, a keyword, a paragraph nor the subject of a blocking decision (unknown dependency)",
+        "line 273: LS-PROGRAM is neither declared, a keyword, a paragraph nor the subject of a blocking decision (unknown dependency)",
+        "line 274: LS-TERMINAL is neither declared, a keyword, a paragraph nor the subject of a blocking decision (unknown dependency)",
+        "line 276: LS-TYPE is neither declared, a keyword, a paragraph nor the subject of a blocking decision (unknown dependency)",
+        "line 277: LS-ACTION is neither declared, a keyword, a paragraph nor the subject of a blocking decision (unknown dependency)",
+        "line 278: LS-STATUS is neither declared, a keyword, a paragraph nor the subject of a blocking decision (unknown dependency)",
+        "line 280: LS-PORT-ID is neither declared, a keyword, a paragraph nor the subject of a blocking decision (unknown dependency)",
+        "line 281: PORT-ACCOUNT-NO is neither declared, a keyword, a paragraph nor the subject of a blocking decision (unknown dependency)",
+        "line 281: LS-ACCT-NO is neither declared, a keyword, a paragraph nor the subject of a blocking decision (unknown dependency)",
+        "line 283: LS-BEFORE-IMAGE is neither declared, a keyword, a paragraph nor the subject of a blocking decision (unknown dependency)",
+        "line 284: LS-AFTER-IMAGE is neither declared, a keyword, a paragraph nor the subject of a blocking decision (unknown dependency)",
+        "line 285: LS-MESSAGE is neither declared, a keyword, a paragraph nor the subject of a blocking decision (unknown dependency)"
+      ],
+      "units": [
+        "PORTMSTR",
+        "AUDPROC"
+      ],
+      "external": [
+        {
+          "kind": "file_io",
+          "line": 126,
+          "operation": "WRITE",
+          "target": "PORTFOLIO-FILE",
+          "relation": "direct"
+        },
+        {
+          "kind": "file_io",
+          "line": 169,
+          "operation": "READ",
+          "target": "PORTFOLIO-FILE",
+          "relation": "direct"
+        },
+        {
+          "kind": "file_io",
+          "line": 194,
+          "operation": "REWRITE",
+          "target": "PORTFOLIO-FILE",
+          "relation": "direct"
+        },
+        {
+          "kind": "file_io",
+          "line": 215,
+          "operation": "DELETE",
+          "target": "PORTFOLIO-FILE",
+          "relation": "direct"
+        }
+      ],
+      "undeclared": [
+        "LS-AUDIT-REQUEST",
+        "USERID",
+        "TERMINAL-ID",
+        "WS-BEFORE-IMAGE",
+        "PORT-RECORD"
+      ],
+      "sha256": "87e257419b1fda69bcc653c879370af0ebd57f7a24ce0fcdcad123274428fa29"
+    },
+    {
+      "behaviour_id": "PORTMSTR:1000-INITIALIZE",
+      "status": "RESOLVED",
+      "unresolved_reasons": [],
+      "units": [
+        "PORTMSTR"
+      ],
+      "external": [],
+      "undeclared": [],
+      "sha256": "1ecfa0f91f9378f25487eeb45005f36453586f7f19a063e75bc7fa319beededd"
+    },
+    {
+      "behaviour_id": "PORTMSTR:2000-CREATE-PORTFOLIO",
+      "status": "RESOLVED",
+      "unresolved_reasons": [],
+      "units": [
+        "PORTMSTR"
+      ],
+      "external": [
+        {
+          "kind": "file_io",
+          "line": 126,
+          "operation": "WRITE",
+          "target": "PORTFOLIO-FILE",
+          "relation": "direct"
+        }
+      ],
+      "undeclared": [],
+      "sha256": "2a5c33c28ed194d661086b19fcae62d3d54c66c6694ddb3da9246ecc9befdc9f"
+    },
+    {
+      "behaviour_id": "PORTMSTR:3000-READ-PORTFOLIO",
+      "status": "RESOLVED",
+      "unresolved_reasons": [],
+      "units": [
+        "PORTMSTR"
+      ],
+      "external": [
+        {
+          "kind": "file_io",
+          "line": 169,
+          "operation": "READ",
+          "target": "PORTFOLIO-FILE",
+          "relation": "direct"
+        }
+      ],
+      "undeclared": [],
+      "sha256": "a4ed06205439ba0a00bf60e16190be77ac6d1e93e6ed3ba0c50eb064f647569e"
+    },
+    {
+      "behaviour_id": "PORTMSTR:4000-UPDATE-PORTFOLIO",
+      "status": "UNRESOLVED",
+      "unresolved_reasons": [
+        "line 271: LS-SYSTEM-ID is neither declared, a keyword, a paragraph nor the subject of a blocking decision (unknown dependency)",
+        "line 272: LS-USER-ID is neither declared, a keyword, a paragraph nor the subject of a blocking decision (unknown dependency)",
+        "line 273: LS-PROGRAM is neither declared, a keyword, a paragraph nor the subject of a blocking decision (unknown dependency)",
+        "line 274: LS-TERMINAL is neither declared, a keyword, a paragraph nor the subject of a blocking decision (unknown dependency)",
+        "line 276: LS-TYPE is neither declared, a keyword, a paragraph nor the subject of a blocking decision (unknown dependency)",
+        "line 277: LS-ACTION is neither declared, a keyword, a paragraph nor the subject of a blocking decision (unknown dependency)",
+        "line 278: LS-STATUS is neither declared, a keyword, a paragraph nor the subject of a blocking decision (unknown dependency)",
+        "line 280: LS-PORT-ID is neither declared, a keyword, a paragraph nor the subject of a blocking decision (unknown dependency)",
+        "line 281: PORT-ACCOUNT-NO is neither declared, a keyword, a paragraph nor the subject of a blocking decision (unknown dependency)",
+        "line 281: LS-ACCT-NO is neither declared, a keyword, a paragraph nor the subject of a blocking decision (unknown dependency)",
+        "line 283: LS-BEFORE-IMAGE is neither declared, a keyword, a paragraph nor the subject of a blocking decision (unknown dependency)",
+        "line 284: LS-AFTER-IMAGE is neither declared, a keyword, a paragraph nor the subject of a blocking decision (unknown dependency)",
+        "line 285: LS-MESSAGE is neither declared, a keyword, a paragraph nor the subject of a blocking decision (unknown dependency)"
+      ],
+      "units": [
+        "PORTMSTR",
+        "AUDPROC"
+      ],
+      "external": [
+        {
+          "kind": "file_io",
+          "line": 194,
+          "operation": "REWRITE",
+          "target": "PORTFOLIO-FILE",
+          "relation": "direct"
+        }
+      ],
+      "undeclared": [
+        "LS-AUDIT-REQUEST",
+        "USERID",
+        "TERMINAL-ID",
+        "WS-BEFORE-IMAGE",
+        "PORT-RECORD"
+      ],
+      "sha256": "2d31028e563f6c11011b88a672068b34026a83124addbf551f3daf482bbc9e3d"
+    },
+    {
+      "behaviour_id": "PORTMSTR:5000-DELETE-PORTFOLIO",
+      "status": "RESOLVED",
+      "unresolved_reasons": [],
+      "units": [
+        "PORTMSTR"
+      ],
+      "external": [
+        {
+          "kind": "file_io",
+          "line": 215,
+          "operation": "DELETE",
+          "target": "PORTFOLIO-FILE",
+          "relation": "direct"
+        }
+      ],
+      "undeclared": [],
+      "sha256": "bf84bb7d8d1c168c5147cc39210142420ccaef2ab3c70e958a538d638d423235"
+    },
+    {
+      "behaviour_id": "PORTMSTR:9000-ERROR",
+      "status": "RESOLVED",
+      "unresolved_reasons": [],
+      "units": [
+        "PORTMSTR"
+      ],
+      "external": [],
+      "undeclared": [],
+      "sha256": "d7e09dc7dec6da9f3e015f1ade3f95d749f6bb9d627158fe624e92d4f50cd6ff"
+    },
+    {
+      "behaviour_id": "PORTMSTR:6000-TERMINATE",
+      "status": "RESOLVED",
+      "unresolved_reasons": [],
+      "units": [
+        "PORTMSTR"
+      ],
+      "external": [],
+      "undeclared": [],
+      "sha256": "6ab3e6ab1116233643c9b03fc44dfc05e6a07e096630e6a62837d0dad629d3a1"
+    }
+  ],
+  "open_decisions": [
+    {
+      "id": "DR-AUDPROC-001",
+      "blocking": true,
+      "question": "In AUDPROC the audit timestamp is moved into AUD-TIMESTAMP (line 74) and then overwritten by the group move of the 32-byte system information into the 58-byte AUD-HEADER (line 75), so the written audit record carries neither the timestamp nor correctly aligned system/user/program/terminal values. On open failure the program also closes the unopened audit file. Must the forward audit service reproduce the record exactly as written today, or write the timestamp and the system, user, program and terminal identifiers in their own fields?"
+    },
+    {
+      "id": "DR-AUDPROC-002",
+      "blocking": false,
+      "question": "Copybook AUDITLOG declares audit types ('TRAN','USER','SYST'; BR-143), actions (CREATE, UPDATE, DELETE, INQUIRE, LOGIN, LOGOUT, STARTUP, SHUTDOWN; BR-144) and outcome statuses ('SUCC','FAIL','WARN'; BR-145). Callers assign them and AUDPROC writes them unchecked. Must the forward audit service reject values outside these domains, or record whatever the caller supplies (as implemented)?"
+    },
+    {
+      "id": "DR-DB2ERR-002",
+      "blocking": false,
+      "question": "DB2ERR (line 75) uses the non-standard 'ACCEPT WS-CURRENT-TIMESTAMP FROM TIME STAMP'; the ERRPROC logic file flags the same construct (line 57) and PORTDEL uses it for the deletion audit timestamp (source line 169). Which compiler extension is in use and what timestamp format do ERRLOG rows, error-log records and deletion audit records actually carry?"
+    },
+    {
+      "id": "DR-F2-0005-012",
+      "blocking": false,
+      "question": "Fifteen elementary level-01 items (e.g. HISTLD00 WS-COMMIT-THRESHOLD, the REPORT-RECORD print lines, DB2CONN WS-CONNECTION-STATE/WS-RETRY-COUNT/WS-MAX-RETRIES, DB2CMT WS-SAVEPOINT-ID) are catalogued as record-level items without Field IDs, so no Java type could be assigned. Should the reverse harness register Field IDs for them, or may later stages map them at record level using the catalogued PIC?"
+    },
+    {
+      "id": "DR-F2-0005-023",
+      "blocking": false,
+      "question": "AUDPROC appends audit records to a sequential dataset (DD AUDFILE, OPEN EXTEND per call), its group MOVE LS-SYSTEM-INFO TO AUD-HEADER may overwrite the timestamp just set, and it CLOSEs the file after a failed OPEN; RPTAUD00 meanwhile reads an indexed audit file keyed AUD-KEY (DD AUDITLOG) built on the same copybook. Is there one audit trail (and which organisation), and must the timestamp overwrite be reproduced?"
+    },
+    {
+      "id": "DR-F2-P0006-003",
+      "blocking": false,
+      "question": "PORTMSTR FD PORTFOLIO-FILE says RECORD CONTAINS 100 CHARACTERS (line 32) but PORTFOLIO-RECORD fields total 103 bytes, and the caller exchanges a 100-byte LS-PORTFOLIO. Which physical record length is authoritative for PORTFILE (100 or 103), and should the trailing FILLER be shortened?"
+    },
+    {
+      "id": "DR-F2-P0006-005",
+      "blocking": true,
+      "question": "PORTMSTR 2100-LOG-PORTFOLIO-UPDATE (live after every successful update) builds LS-AUDIT-REQUEST and CALLs AUDPROC, and the dead 2100-HANDLE-VSAM-ERROR builds LS-ERROR-REQUEST for ERRPROC, but 35 data names (LS-AUDIT-REQUEST, LS-*, PORT-KEY, PORT-RECORD, WS-BEFORE-IMAGE, USERID, TERMINAL-ID, ERR-*) are declared nowhere. Which copybooks were intended (for example the AUDPROC request copybook and ERRHAND), or should the audit call be redesigned?"
+    },
+    {
+      "id": "DR-F2-P0006-009",
+      "blocking": false,
+      "question": "ERRPROC's LINKAGE LS-ERROR-REQUEST is 354 bytes, but DB2ERR (line 199) and DB2STAT (line 227) CALL 'ERRPROC' USING ERR-MESSAGE from copybook ERRHAND (about 370 bytes, different field order). Which layout is the contract of the Java error service?"
+    },
+    {
+      "id": "DR-F2-P0006-013",
+      "blocking": false,
+      "question": "Error paths do not stop as expected: PORTADD and PORTDEL continue the read loop on closed files after an open failure (returning RC 8), and PORTMSTR's 9000-ERROR GOBACKs from inside a PERFORM after closing a possibly unopened file. Should Java reproduce this behaviour or end the step/call immediately with RC 8?"
+    },
+    {
+      "id": "DR-F2-P0006-014",
+      "blocking": false,
+      "question": "PORTADD and PORTDEL (key PORT-KEY, PORTFLIO layout) and PORTMSTR (key PORT-ID, 103-byte PORTFOLIO-RECORD) all ASSIGN TO PORTFILE as an indexed file. Do they address the same VSAM dataset, and if so which record layout and key are authoritative?"
+    },
+    {
+      "id": "DR-F2-PKT0010-002",
+      "blocking": false,
+      "question": "Which character encoding (code page) do the files and areas described by these copybooks use for DISPLAY data on the legacy platform (EBCDIC 037, 1140, another EBCDIC variant, or ASCII)? The zoned-decimal test vectors and String codecs depend on it."
+    },
+    {
+      "id": "DR-PORTMSTR-001",
+      "blocking": true,
+      "question": "Which portfolio status domain is authoritative? PORTMSTR validates 'A', 'I', 'C' (VALID-STATUS, BR-095) while copybook PORTFLIO used by PORTADD and PORTDEL declares 'A' active, 'C' closed, 'S' suspended (BR-149); 'I' and 'S' each exist in only one place, and the PORTFLIO and PORTMSTR records are linked only by naming convention (REL-002, GAP-091). What do 'I' and 'S' mean, and do PORTMSTR and the batch programs maintain the same portfolio master?"
+    },
+    {
+      "id": "DR-PORTMSTR-002",
+      "blocking": true,
+      "question": "2100-LOG-PORTFOLIO-UPDATE (18 names) and the unreachable 2100-HANDLE-VSAM-ERROR (17 names) use 35 data names that are not declared in PORTMSTR, which has no COPY statements, so the program would not compile as written. Which copybooks (ERRHAND, AUDITLOG?) are meant to be included, what audit request content does AUDPROC receive for a successful update, and is 2100-HANDLE-VSAM-ERROR retired?"
+    },
+    {
+      "id": "DR-PORTMSTR-003",
+      "blocking": false,
+      "question": "9000-ERROR ends the call with GOBACK inside a PERFORM (line 237); WS-ERROR-TEXT is set on every error path ('Invalid command', 'Invalid Portfolio ID format', 'Portfolio Name is required', 'Portfolio not found', ...) but is never passed to the caller or logged, so callers receive return code 8 without a message. Should the modern interface return the error text to the caller (or log it)?"
+    },
+    {
+      "id": "DR-PORTMSTR-004",
+      "blocking": false,
+      "question": "FD PORTFOLIO-FILE in PORTMSTR declares RECORD CONTAINS 100 CHARACTERS (line 31), but the PORTFOLIO-RECORD fields total 103 bytes. What is the physical VSAM record length of the portfolio master used by PORTMSTR?"
+    },
+    {
+      "id": "RVW-GAP-092",
+      "blocking": false,
+      "question": "GAP-092 (medium, DIAGRAM_RENDER_UNVERIFIED) is not addressed by any decision or requirement: Visual rendering of the 65 Mermaid diagrams is unverified. Acknowledge it as a known limitation (resolved_no_change) or exclude the affected units?"
+    },
+    {
+      "id": "RVW-GAP-104",
+      "blocking": false,
+      "question": "GAP-104 (low, DIAGRAM_INCOMPLETE) is not addressed by any decision or requirement: COMP-UNRESOLVED: all seven edges are unsupported. Acknowledge it as a known limitation (resolved_no_change) or exclude the affected units?"
+    },
+    {
+      "id": "DR-CONSOLIDATION-001",
+      "blocking": true,
+      "question": "Batches disagree on BR-143 (Report audit record type as transaction, user action or system event): PKT-0002-F1=mapped, PKT-0004-F1=not_a_requirement. Should this declared value domain be a forward requirement?"
+    },
+    {
+      "id": "DR-CONSOLIDATION-002",
+      "blocking": true,
+      "question": "Batches disagree on BR-144 (Report audit action as a declared audit action): PKT-0002-F1=mapped, PKT-0004-F1=not_a_requirement. Should this declared value domain be a forward requirement?"
+    },
+    {
+      "id": "DR-CONSOLIDATION-003",
+      "blocking": true,
+      "question": "Batches disagree on BR-145 (Report audit outcome status as success, failure or warning): PKT-0002-F1=mapped, PKT-0004-F1=not_a_requirement. Should this declared value domain be a forward requirement?"
+    }
+  ],
+  "authorisation": {
+    "generation_authorized": false,
+    "blockers": [
+      "config generation.java_generation_allowed is false (project authority)",
+      "no authorised orchestrator.java_target_dir",
+      "G4 is BLOCKED (needs signed G2, G3 and G4 approvals by trusted signers)",
+      "trust store: TRUST_NOT_CONFIGURED"
+    ],
+    "gates": {
+      "G0": "PASS",
+      "G1": "PASS",
+      "G2": "UNVERIFIED",
+      "G3": "BLOCKED",
+      "G4": "BLOCKED",
+      "G5": "BLOCKED",
+      "G6": "BLOCKED",
+      "G7": "BLOCKED",
+      "G8": "BLOCKED"
+    },
+    "trust": "TRUST_NOT_CONFIGURED",
+    "program_g2_scope": {
+      "readiness": "NOT_READY",
+      "blocking": 33,
+      "scope_sha256": "058c205a96a2424e4e2c6ecaa9fb657056c601866f2e8a294af4113204a1f321"
+    },
+    "note": "Engineering gates never authorise generation. Java may be generated only when generation_authorized is true."
+  }
+}

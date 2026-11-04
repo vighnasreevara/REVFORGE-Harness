@@ -1,0 +1,515 @@
+{
+  "gate": "SOURCE_READINESS",
+  "subject": "SECMGR",
+  "status": "FAIL",
+  "checks": [
+    {
+      "id": "source_available",
+      "ok": true,
+      "detail": "src/programs/online/SECMGR.cbl sha256 74281106e716079b408a5a597746a5a2c201b469820396b651fc1adc6ae37370; 48 statement(s) in 6 paragraph(s)"
+    },
+    {
+      "id": "complete_program",
+      "ok": true,
+      "detail": "every paragraph contains statements"
+    },
+    {
+      "id": "copybooks_resolved",
+      "ok": false,
+      "detail": "unresolved or circular includes: SQLCA@6"
+    },
+    {
+      "id": "requirements_and_data_mapping_delivered",
+      "ok": true,
+      "detail": "F1/F2 deliveries accepted for SQLCA, ERRHND, SECMGR"
+    },
+    {
+      "id": "behaviour_classified",
+      "ok": true,
+      "detail": "5 behaviour(s): 2 VERIFIED_CANDIDATE, 2 PARTIAL, 1 GAP"
+    },
+    {
+      "id": "dependencies_identified",
+      "ok": false,
+      "detail": "closure UNRESOLVED for SECMGR:P100-VALIDATE-USER (line 57: EXEC CICS hands control and data to the transaction monitor); SECMGR:P300-LOG-ACCESS (line 108: EXEC CICS hands control and data to the transaction monitor)"
+    },
+    {
+      "id": "unsupported_documented",
+      "ok": true,
+      "detail": "4 gap(s) document every PARTIAL/GAP behaviour"
+    },
+    {
+      "id": "unknowns_documented",
+      "ok": true,
+      "detail": "8 open decision(s) record the remaining questions (3 blocking for approval); none is resolved or assumed here"
+    }
+  ],
+  "note": "An engineering gate: it states that the source is understood well enough to convert, with every unknown documented. It is not a G2 approval and does not authorise generation.",
+  "behaviours": [
+    {
+      "behaviour_id": "SECMGR:ENTRY-DISPATCH",
+      "kind": "dispatch",
+      "classification": "PARTIAL",
+      "lines": [
+        42,
+        54
+      ],
+      "inputs": [
+        "SEC-REQUEST-TYPE"
+      ],
+      "outputs": [],
+      "side_effects": [],
+      "unresolved": [],
+      "covered_by": [
+        "REQ-SECMGR-001"
+      ]
+    },
+    {
+      "behaviour_id": "SECMGR:P100-VALIDATE-USER",
+      "kind": "performed_range",
+      "classification": "VERIFIED_CANDIDATE",
+      "lines": [
+        57,
+        73
+      ],
+      "inputs": [
+        "SEC-ERROR-INFO",
+        "SEC-RESPONSE-CODE",
+        "SEC-USER-ID",
+        "WS-USER-ID"
+      ],
+      "outputs": [
+        "CREDENTIALS'",
+        "OBTAIN",
+        "SEC-ERROR-INFO",
+        "SEC-RESPONSE-CODE",
+        "USER"
+      ],
+      "side_effects": [],
+      "unresolved": [],
+      "covered_by": [
+        "REQ-SECMGR-001",
+        "REQ-SECMGR-002"
+      ]
+    },
+    {
+      "behaviour_id": "SECMGR:P200-CHECK-AUTH",
+      "kind": "performed_range",
+      "classification": "GAP",
+      "lines": [
+        79,
+        100
+      ],
+      "inputs": [
+        "SEC-ACCESS-TYPE",
+        "SEC-RESOURCE-NAME",
+        "SEC-USER-ID",
+        "WS-DB2-AREA"
+      ],
+      "outputs": [
+        "SEC-ERROR-INFO",
+        "SEC-RESPONSE-CODE",
+        "WS-DB2-AREA"
+      ],
+      "side_effects": [
+        {
+          "line": 79,
+          "kind": "embedded_sql",
+          "operation": "SELECT",
+          "table": "AUTHFILE"
+        }
+      ],
+      "unresolved": [
+        "SQLCODE"
+      ],
+      "covered_by": [
+        "REQ-SECMGR-001",
+        "REQ-SECMGR-003"
+      ]
+    },
+    {
+      "behaviour_id": "SECMGR:P300-LOG-ACCESS",
+      "kind": "performed_range",
+      "classification": "PARTIAL",
+      "lines": [
+        106,
+        132
+      ],
+      "inputs": [
+        "FUNCTION CURRENT-DATE (system date and time)",
+        "SEC-ACCESS-TYPE",
+        "SEC-RESOURCE-NAME",
+        "WS-ACCESS-TYPE",
+        "WS-PROGRAM-NAME",
+        "WS-TERMINAL-ID",
+        "WS-TIMESTAMP",
+        "WS-TRANSACTION-ID",
+        "WS-USER-ID"
+      ],
+      "outputs": [
+        "SEC-ERROR-INFO",
+        "SEC-RESPONSE-CODE",
+        "WS-ACCESS-TYPE",
+        "WS-PROGRAM-NAME",
+        "WS-TIMESTAMP"
+      ],
+      "side_effects": [
+        {
+          "line": 117,
+          "kind": "embedded_sql",
+          "operation": "INSERT",
+          "table": "AUDITLOG"
+        }
+      ],
+      "unresolved": [
+        "SQLCODE"
+      ],
+      "covered_by": [
+        "REQ-SECMGR-001",
+        "REQ-SECMGR-004"
+      ]
+    },
+    {
+      "behaviour_id": "SECMGR:NO-MATCH",
+      "kind": "no_match",
+      "classification": "VERIFIED_CANDIDATE",
+      "lines": null,
+      "inputs": [],
+      "outputs": [],
+      "side_effects": [],
+      "unresolved": [],
+      "covered_by": [
+        "REQ-SECMGR-001"
+      ]
+    }
+  ],
+  "gaps": [
+    {
+      "gap_id": "GAP-SECMGR-P200-CHECK-AUTH-SQLCODE",
+      "kind": "UNDECLARED_NAME_SEMANTICS",
+      "behaviour_id": "SECMGR:P200-CHECK-AUTH",
+      "source": {
+        "path": "src/programs/online/SECMGR.cbl",
+        "sha256": "74281106e716079b408a5a597746a5a2c201b469820396b651fc1adc6ae37370",
+        "lines": [
+          88,
+          89,
+          90,
+          91,
+          93,
+          95,
+          97,
+          98,
+          100
+        ],
+        "statements": [
+          {
+            "line": 88,
+            "text": "EVALUATE SQLCODE"
+          },
+          {
+            "line": 89,
+            "text": "WHEN 0"
+          },
+          {
+            "line": 90,
+            "text": "IF WS-DB2-AREA > 0"
+          },
+          {
+            "line": 91,
+            "text": "MOVE 0 TO SEC-RESPONSE-CODE"
+          },
+          {
+            "line": 93,
+            "text": "MOVE 'ACCESS DENIED' TO SEC-ERROR-INFO"
+          },
+          {
+            "line": 95,
+            "text": "MOVE 8 TO SEC-RESPONSE-CODE"
+          },
+          {
+            "line": 97,
+            "text": "WHEN OTHER"
+          },
+          {
+            "line": 98,
+            "text": "MOVE 'AUTHORIZATION CHECK FAILED' TO SEC-ERROR-INFO"
+          },
+          {
+            "line": 100,
+            "text": "MOVE 12 TO SEC-RESPONSE-CODE"
+          }
+        ]
+      },
+      "missing_fact": "SQLCODE is used but declared nowhere in the repository; its layout and value meanings are the subject of DR-F2-0011-001, DR-DB2ERR-001 (missing: the real SQLCA member (the repository copy includes itself); a declaration of SQLCODE; a declaration of SQLERRMC)",
+      "why_unsafe": "the outputs of these statements (SEC-RESPONSE-CODE, SEC-ERROR-INFO) depend on a value whose meaning is not established; any Java mapping would invent it",
+      "affected_requirements": [
+        "REQ-SECMGR-001",
+        "REQ-SECMGR-003"
+      ],
+      "affected_java_component": "outcome mapping of behaviour P200-CHECK-AUTH (behind a port whose only implementation throws until the gap is resolved)",
+      "required_action": [
+        "DR-F2-0011-001: a signed resolution by technical_authority",
+        "DR-DB2ERR-001: a signed resolution by technical_authority"
+      ],
+      "validation_evidence": "the real definition of SQLCODE for the target runtime and a captured legacy run showing each outcome branch",
+      "blocks_execution_path": "request SEC-AUTHORIZE ('A') -> P200-CHECK-AUTH: statements 88, 89, 90, 91, 93, 95, 97, 98, 100",
+      "blocking": true,
+      "status": "OPEN"
+    },
+    {
+      "gap_id": "GAP-SECMGR-P200-CHECK-AUTH-SQL-SELECT-AUTHFILE",
+      "kind": "EXTERNAL_DATABASE_RUNTIME",
+      "behaviour_id": "SECMGR:P200-CHECK-AUTH",
+      "source": {
+        "path": "src/programs/online/SECMGR.cbl",
+        "sha256": "74281106e716079b408a5a597746a5a2c201b469820396b651fc1adc6ae37370",
+        "lines": [
+          79,
+          86
+        ],
+        "statements": [
+          {
+            "line": 79,
+            "text": "EXEC SQL SELECT COUNT(*) INTO :WS-DB2-AREA FROM AUTHFILE WHERE USER_ID = :SEC-USER-ID AND RESOURCE = :SEC-RESOURCE-NAME AND ACCESS_TYPE = :SEC-ACCESS-TYPE END-EXEC."
+          }
+        ]
+      },
+      "missing_fact": "the runtime behaviour of embedded SQL SELECT on AUTHFILE: database product and version, host-variable conversions, NULL and no-row results, constraint violations and the status they report",
+      "why_unsafe": "the result and every status it produces come from an external database the repository does not describe; a Java implementation would have to assume them",
+      "affected_requirements": [
+        "REQ-SECMGR-001",
+        "REQ-SECMGR-003"
+      ],
+      "affected_java_component": "database port for SELECT AUTHFILE (interface only; no implementation until specified)",
+      "required_action": [
+        "an approved specification of the database interaction (technical authority), recorded as an ADR at G3"
+      ],
+      "validation_evidence": "a captured run against the real (or an approved equivalent) database for each outcome, including errors",
+      "blocks_execution_path": "request SEC-AUTHORIZE ('A') -> P200-CHECK-AUTH: statement 79",
+      "blocking": true,
+      "status": "OPEN"
+    },
+    {
+      "gap_id": "GAP-SECMGR-P300-LOG-ACCESS-SQLCODE",
+      "kind": "UNDECLARED_NAME_SEMANTICS",
+      "behaviour_id": "SECMGR:P300-LOG-ACCESS",
+      "source": {
+        "path": "src/programs/online/SECMGR.cbl",
+        "sha256": "74281106e716079b408a5a597746a5a2c201b469820396b651fc1adc6ae37370",
+        "lines": [
+          127,
+          128,
+          130,
+          132
+        ],
+        "statements": [
+          {
+            "line": 127,
+            "text": "IF SQLCODE = 0"
+          },
+          {
+            "line": 128,
+            "text": "MOVE 0 TO SEC-RESPONSE-CODE"
+          },
+          {
+            "line": 130,
+            "text": "MOVE 'AUDIT LOGGING FAILED' TO SEC-ERROR-INFO"
+          },
+          {
+            "line": 132,
+            "text": "MOVE 12 TO SEC-RESPONSE-CODE"
+          }
+        ]
+      },
+      "missing_fact": "SQLCODE is used but declared nowhere in the repository; its layout and value meanings are the subject of DR-F2-0011-001, DR-DB2ERR-001 (missing: the real SQLCA member (the repository copy includes itself); a declaration of SQLCODE; a declaration of SQLERRMC)",
+      "why_unsafe": "the outputs of these statements (SEC-RESPONSE-CODE, SEC-ERROR-INFO) depend on a value whose meaning is not established; any Java mapping would invent it",
+      "affected_requirements": [
+        "REQ-SECMGR-001",
+        "REQ-SECMGR-004"
+      ],
+      "affected_java_component": "outcome mapping of behaviour P300-LOG-ACCESS (behind a port whose only implementation throws until the gap is resolved)",
+      "required_action": [
+        "DR-F2-0011-001: a signed resolution by technical_authority",
+        "DR-DB2ERR-001: a signed resolution by technical_authority"
+      ],
+      "validation_evidence": "the real definition of SQLCODE for the target runtime and a captured legacy run showing each outcome branch",
+      "blocks_execution_path": "request SEC-AUDIT ('L') -> P300-LOG-ACCESS: statements 127, 128, 130, 132",
+      "blocking": true,
+      "status": "OPEN"
+    },
+    {
+      "gap_id": "GAP-SECMGR-P300-LOG-ACCESS-SQL-INSERT-AUDITLOG",
+      "kind": "EXTERNAL_DATABASE_RUNTIME",
+      "behaviour_id": "SECMGR:P300-LOG-ACCESS",
+      "source": {
+        "path": "src/programs/online/SECMGR.cbl",
+        "sha256": "74281106e716079b408a5a597746a5a2c201b469820396b651fc1adc6ae37370",
+        "lines": [
+          117,
+          125
+        ],
+        "statements": [
+          {
+            "line": 117,
+            "text": "EXEC SQL INSERT INTO AUDITLOG (TIMESTAMP, USER_ID, TERMINAL_ID, TRANS_ID, PROGRAM, ACCESS_TYPE) VALUES (:WS-TIMESTAMP, :WS-USER-ID, :WS-TERMINAL-ID, :WS-TRANSACTION-ID, :WS-PROGRAM-NAME, :WS-ACCESS-TYPE) END-EXEC."
+          }
+        ]
+      },
+      "missing_fact": "the runtime behaviour of embedded SQL INSERT on AUDITLOG: database product and version, host-variable conversions, NULL and no-row results, constraint violations and the status they report",
+      "why_unsafe": "the result and every status it produces come from an external database the repository does not describe; a Java implementation would have to assume them",
+      "affected_requirements": [
+        "REQ-SECMGR-001",
+        "REQ-SECMGR-004"
+      ],
+      "affected_java_component": "database port for INSERT AUDITLOG (interface only; no implementation until specified)",
+      "required_action": [
+        "an approved specification of the database interaction (technical authority), recorded as an ADR at G3"
+      ],
+      "validation_evidence": "a captured run against the real (or an approved equivalent) database for each outcome, including errors",
+      "blocks_execution_path": "request SEC-AUDIT ('L') -> P300-LOG-ACCESS: statement 117",
+      "blocking": true,
+      "status": "OPEN"
+    }
+  ],
+  "closures": [
+    {
+      "behaviour_id": "SECMGR:P100-VALIDATE-USER",
+      "status": "UNRESOLVED",
+      "unresolved_reasons": [
+        "line 57: EXEC CICS hands control and data to the transaction monitor",
+        "line 57: ASSIGN is neither declared, a keyword, a paragraph nor the subject of a blocking decision (unknown dependency)",
+        "line 57: USERID is neither declared, a keyword, a paragraph nor the subject of a blocking decision (unknown dependency)",
+        "line 57: RESP is neither declared, a keyword, a paragraph nor the subject of a blocking decision (unknown dependency)",
+        "line 62: DFHRESP is neither declared, a keyword, a paragraph nor the subject of a blocking decision (unknown dependency)",
+        "line 62: NORMAL is neither declared, a keyword, a paragraph nor the subject of a blocking decision (unknown dependency)"
+      ],
+      "units": [
+        "SECMGR"
+      ],
+      "external": [],
+      "undeclared": [
+        "SQLCODE"
+      ],
+      "sha256": "dbe4fc8c7585f03e02186d555f74487b6edb39e23ebae58c68d48c4e4012b26f"
+    },
+    {
+      "behaviour_id": "SECMGR:P200-CHECK-AUTH",
+      "status": "RESOLVED",
+      "unresolved_reasons": [],
+      "units": [
+        "SECMGR",
+        "SQLCA"
+      ],
+      "external": [
+        {
+          "kind": "embedded_sql",
+          "line": 79,
+          "operation": "SELECT",
+          "target": "AUTHFILE",
+          "relation": "direct"
+        }
+      ],
+      "undeclared": [
+        "SQLCODE"
+      ],
+      "sha256": "13c201bdd1774052013a2061e109b60946da7954ae7ec56bd639515070d06a06"
+    },
+    {
+      "behaviour_id": "SECMGR:P300-LOG-ACCESS",
+      "status": "UNRESOLVED",
+      "unresolved_reasons": [
+        "line 108: EXEC CICS hands control and data to the transaction monitor",
+        "line 108: ASSIGN is neither declared, a keyword, a paragraph nor the subject of a blocking decision (unknown dependency)",
+        "line 108: USERID is neither declared, a keyword, a paragraph nor the subject of a blocking decision (unknown dependency)",
+        "line 108: TERMID is neither declared, a keyword, a paragraph nor the subject of a blocking decision (unknown dependency)"
+      ],
+      "units": [
+        "SECMGR",
+        "SQLCA"
+      ],
+      "external": [
+        {
+          "kind": "embedded_sql",
+          "line": 117,
+          "operation": "INSERT",
+          "target": "AUDITLOG",
+          "relation": "direct"
+        }
+      ],
+      "undeclared": [
+        "SQLCODE"
+      ],
+      "sha256": "c8e0b8a9d1b8c67483160cae036f55c1538ab0b0a9a4e9fa1adf0803d61d3736"
+    }
+  ],
+  "open_decisions": [
+    {
+      "id": "DR-DB2ERR-001",
+      "blocking": true,
+      "question": "Copybook SQLCA (FIL-0017) includes itself ('EXEC SQL INCLUDE SQLCA' at line 6) and defines only SQL-STATUS-CODES, with no SQLCODE or SQLERRMC field; SQLCODE/SQLERRMC therefore have no Field ID in the 14 DB2 programs. Which SQLCA layout does the precompiler supply, and may the modern design assume the standard DB2 SQLCODE/SQLERRMC meaning (assumption ASM-004)?"
+    },
+    {
+      "id": "DR-F2-0011-001",
+      "blocking": true,
+      "question": "Copybook SQLCA (SYS-PORTFOLIO-001-FIL-0017) line 6 contains 'EXEC SQL INCLUDE SQLCA END-EXEC', naming itself. The included SQL communication area (SQLCODE, SQLSTATE, SQLERRMC, ...) has no layout in any reverse artifact. How should the forward design obtain the SQLCA layout and the SQLCODE/SQLSTATE semantics used by the 14 DB2 programs?"
+    },
+    {
+      "id": "DR-F2-0011-003",
+      "blocking": false,
+      "question": "Which TRUNC compiler option (STD, OPT or BIN) was used for programs including these copybooks? It decides whether S9(4)/S9(8)/S9(9) COMP fields are truncated to their PIC digits or to the binary halfword/fullword range on store."
+    },
+    {
+      "id": "DR-F2-P0006-002",
+      "blocking": false,
+      "question": "The project SQLCA copybook (SYS-PORTFOLIO-001-FIL-0017) includes itself and declares only SQL-STATUS-CODES, while eight packet programs test SQLCODE (and DB2ONLN SQLERRMC), which only the DB2 precompiler's SQLCA supplies. Should the Java design treat SQL status as coming from the SQL driver (SQLException/SQLState) and ignore the project SQLCA content, or must the 35-byte WS-DB2-AREA content be reproduced?"
+    },
+    {
+      "id": "DR-SECMGR-001",
+      "blocking": true,
+      "question": "The authorisation check selects COUNT(*) FROM AUTHFILE INTO :WS-DB2-AREA (line 79), the group that holds the SQLCA copy, and grants access when 'WS-DB2-AREA > 0' (line 90) as a group (alphanumeric) comparison. Confirm the intended rule: grant access (response 0) only when at least one AUTHFILE row exists for user, resource and access type, otherwise deny (response 8)?"
+    },
+    {
+      "id": "DR-SECMGR-002",
+      "blocking": false,
+      "question": "SECMGR invokes its three request handlers with PERFORM ... THRU ranges and its EVALUATE has no WHEN OTHER, so an unrecognised request type leaves the response code unchanged. Should an unrecognised security request type return an explicit error in the modern design?"
+    },
+    {
+      "id": "RVW-GAP-092",
+      "blocking": false,
+      "question": "GAP-092 (medium, DIAGRAM_RENDER_UNVERIFIED) is not addressed by any decision or requirement: Visual rendering of the 65 Mermaid diagrams is unverified. Acknowledge it as a known limitation (resolved_no_change) or exclude the affected units?"
+    },
+    {
+      "id": "RVW-GAP-104",
+      "blocking": false,
+      "question": "GAP-104 (low, DIAGRAM_INCOMPLETE) is not addressed by any decision or requirement: COMP-UNRESOLVED: all seven edges are unsupported. Acknowledge it as a known limitation (resolved_no_change) or exclude the affected units?"
+    }
+  ],
+  "authorisation": {
+    "generation_authorized": false,
+    "blockers": [
+      "config generation.java_generation_allowed is false (project authority)",
+      "no authorised orchestrator.java_target_dir",
+      "G4 is BLOCKED (needs signed G2, G3 and G4 approvals by trusted signers)",
+      "trust store: TRUST_NOT_CONFIGURED"
+    ],
+    "gates": {
+      "G0": "PASS",
+      "G1": "PASS",
+      "G2": "UNVERIFIED",
+      "G3": "BLOCKED",
+      "G4": "BLOCKED",
+      "G5": "BLOCKED",
+      "G6": "BLOCKED",
+      "G7": "BLOCKED",
+      "G8": "BLOCKED"
+    },
+    "trust": "TRUST_NOT_CONFIGURED",
+    "program_g2_scope": {
+      "readiness": "NOT_READY",
+      "blocking": 11,
+      "scope_sha256": "f64b19a08fa646f5c342941a3d0568c0618d56f30ad1a54a9d5adc8926667b65"
+    },
+    "note": "Engineering gates never authorise generation. Java may be generated only when generation_authorized is true."
+  }
+}

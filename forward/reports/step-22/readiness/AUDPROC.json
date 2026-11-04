@@ -1,0 +1,451 @@
+{
+  "gate": "SOURCE_READINESS",
+  "subject": "AUDPROC",
+  "status": "FAIL",
+  "checks": [
+    {
+      "id": "source_available",
+      "ok": true,
+      "detail": "src/programs/common/AUDPROC.cbl sha256 c688d44dee1a7042adeec1984b4502a246b079116bae900e2c138eaa056bcfbf; 30 statement(s) in 4 paragraph(s)"
+    },
+    {
+      "id": "complete_program",
+      "ok": true,
+      "detail": "every paragraph contains statements"
+    },
+    {
+      "id": "copybooks_resolved",
+      "ok": true,
+      "detail": "all 1 include(s) resolved: AUDITLOG"
+    },
+    {
+      "id": "requirements_and_data_mapping_delivered",
+      "ok": true,
+      "detail": "F1/F2 deliveries accepted for AUDITLOG, AUDPROC"
+    },
+    {
+      "id": "behaviour_classified",
+      "ok": true,
+      "detail": "4 behaviour(s): 0 VERIFIED_CANDIDATE, 3 PARTIAL, 1 GAP"
+    },
+    {
+      "id": "dependencies_identified",
+      "ok": false,
+      "detail": "closure UNRESOLVED for AUDPROC:0000-MAIN (line 60: STAMP is neither declared, a keyword, a paragraph nor the subject of a blocking decision (unknown dependency)); AUDPROC:1000-INITIALIZE (line 60: STAMP is neither declared, a keyword, a paragraph nor the subject of a blocking decision (unknown dependency))"
+    },
+    {
+      "id": "unsupported_documented",
+      "ok": true,
+      "detail": "4 gap(s) document every PARTIAL/GAP behaviour"
+    },
+    {
+      "id": "unknowns_documented",
+      "ok": true,
+      "detail": "10 open decision(s) record the remaining questions (4 blocking for approval); none is resolved or assumed here"
+    }
+  ],
+  "note": "An engineering gate: it states that the source is understood well enough to convert, with every unknown documented. It is not a G2 approval and does not authorise generation.",
+  "behaviours": [
+    {
+      "behaviour_id": "AUDPROC:ENTRY-DISPATCH",
+      "kind": "dispatch",
+      "classification": "PARTIAL",
+      "lines": [
+        53,
+        55
+      ],
+      "inputs": [],
+      "outputs": [],
+      "side_effects": [],
+      "unresolved": [],
+      "covered_by": []
+    },
+    {
+      "behaviour_id": "AUDPROC:1000-INITIALIZE",
+      "kind": "performed_range",
+      "classification": "PARTIAL",
+      "lines": [
+        60,
+        96
+      ],
+      "inputs": [
+        "WS-FILE-STATUS",
+        "WS-FORMATTED-TIME"
+      ],
+      "outputs": [
+        "LS-RETURN-CODE"
+      ],
+      "side_effects": [
+        {
+          "line": 62,
+          "kind": "file_io",
+          "operation": "OPEN",
+          "table": null
+        },
+        {
+          "line": 95,
+          "kind": "file_io",
+          "operation": "CLOSE",
+          "table": null
+        }
+      ],
+      "unresolved": [],
+      "covered_by": [
+        "REQ-AUDPROC-001",
+        "RT-AUDPROC-001",
+        "RT-AUDPROC-002"
+      ]
+    },
+    {
+      "behaviour_id": "AUDPROC:2000-PROCESS-AUDIT",
+      "kind": "performed_range",
+      "classification": "PARTIAL",
+      "lines": [
+        72,
+        90
+      ],
+      "inputs": [
+        "AUDIT-RECORD",
+        "LS-ACTION",
+        "LS-AFTER-IMAGE",
+        "LS-BEFORE-IMAGE",
+        "LS-KEY-INFO",
+        "LS-MESSAGE",
+        "LS-STATUS",
+        "LS-SYSTEM-INFO",
+        "LS-TYPE",
+        "WS-FILE-STATUS",
+        "WS-FORMATTED-TIME"
+      ],
+      "outputs": [
+        "AUD-ACTION",
+        "AUD-AFTER-IMAGE",
+        "AUD-BEFORE-IMAGE",
+        "AUD-HEADER",
+        "AUD-KEY-INFO",
+        "AUD-MESSAGE",
+        "AUD-STATUS",
+        "AUD-TIMESTAMP",
+        "AUD-TYPE",
+        "AUDIT-RECORD",
+        "LS-RETURN-CODE"
+      ],
+      "side_effects": [
+        {
+          "line": 84,
+          "kind": "file_io",
+          "operation": "WRITE",
+          "table": null
+        }
+      ],
+      "unresolved": [],
+      "covered_by": [
+        "RT-AUDPROC-003"
+      ]
+    },
+    {
+      "behaviour_id": "AUDPROC:3000-TERMINATE",
+      "kind": "performed_range",
+      "classification": "GAP",
+      "lines": [
+        95,
+        96
+      ],
+      "inputs": [],
+      "outputs": [],
+      "side_effects": [
+        {
+          "line": 95,
+          "kind": "file_io",
+          "operation": "CLOSE",
+          "table": null
+        }
+      ],
+      "unresolved": [],
+      "covered_by": [
+        "REQ-AUDPROC-001",
+        "RT-AUDPROC-001",
+        "RT-AUDPROC-002"
+      ]
+    }
+  ],
+  "gaps": [
+    {
+      "gap_id": "GAP-AUDPROC-1000-INITIALIZE-FILE-OPEN-AUDIT-FILE",
+      "kind": "EXTERNAL_FILE_RUNTIME",
+      "behaviour_id": "AUDPROC:1000-INITIALIZE",
+      "source": {
+        "path": "src/programs/common/AUDPROC.cbl",
+        "sha256": "c688d44dee1a7042adeec1984b4502a246b079116bae900e2c138eaa056bcfbf",
+        "lines": [
+          62
+        ],
+        "statements": [
+          {
+            "line": 62,
+            "text": "OPEN EXTEND AUDIT-FILE"
+          }
+        ]
+      },
+      "missing_fact": "the run-time behaviour of OPEN on AUDIT-FILE: the dataset bound to it (JCL DD), its content and record encoding, and the file-system status outcomes the COBOL source does not define",
+      "why_unsafe": "the records read and the statuses reported come from a dataset outside the program; a Java implementation verified only against source-derived fixtures does not establish them",
+      "affected_requirements": [
+        "REQ-AUDPROC-001",
+        "RT-AUDPROC-001",
+        "RT-AUDPROC-002"
+      ],
+      "affected_java_component": "file port for OPEN AUDIT-FILE (runtime file semantics; dataset contents unverified)",
+      "required_action": [
+        "the dataset definitions (JCL DD, organisation, record format) and a captured legacy run for each status outcome (technical authority)"
+      ],
+      "validation_evidence": "a captured legacy run against the real (or an approved equivalent) dataset, including end-of-file and error statuses",
+      "blocks_execution_path": "request its PERFORM -> 1000-INITIALIZE: statement(s) 62",
+      "blocking": true,
+      "status": "OPEN"
+    },
+    {
+      "gap_id": "GAP-AUDPROC-1000-INITIALIZE-FILE-CLOSE-AUDIT-FILE",
+      "kind": "EXTERNAL_FILE_RUNTIME",
+      "behaviour_id": "AUDPROC:1000-INITIALIZE",
+      "source": {
+        "path": "src/programs/common/AUDPROC.cbl",
+        "sha256": "c688d44dee1a7042adeec1984b4502a246b079116bae900e2c138eaa056bcfbf",
+        "lines": [
+          95
+        ],
+        "statements": [
+          {
+            "line": 95,
+            "text": "CLOSE AUDIT-FILE ."
+          }
+        ]
+      },
+      "missing_fact": "the run-time behaviour of CLOSE on AUDIT-FILE: the dataset bound to it (JCL DD), its content and record encoding, and the file-system status outcomes the COBOL source does not define",
+      "why_unsafe": "the records read and the statuses reported come from a dataset outside the program; a Java implementation verified only against source-derived fixtures does not establish them",
+      "affected_requirements": [
+        "REQ-AUDPROC-001",
+        "RT-AUDPROC-001",
+        "RT-AUDPROC-002"
+      ],
+      "affected_java_component": "file port for CLOSE AUDIT-FILE (runtime file semantics; dataset contents unverified)",
+      "required_action": [
+        "the dataset definitions (JCL DD, organisation, record format) and a captured legacy run for each status outcome (technical authority)"
+      ],
+      "validation_evidence": "a captured legacy run against the real (or an approved equivalent) dataset, including end-of-file and error statuses",
+      "blocks_execution_path": "request its PERFORM -> 1000-INITIALIZE: statement(s) 95",
+      "blocking": true,
+      "status": "OPEN"
+    },
+    {
+      "gap_id": "GAP-AUDPROC-2000-PROCESS-AUDIT-FILE-WRITE-AUDIT-RECORD",
+      "kind": "EXTERNAL_FILE_RUNTIME",
+      "behaviour_id": "AUDPROC:2000-PROCESS-AUDIT",
+      "source": {
+        "path": "src/programs/common/AUDPROC.cbl",
+        "sha256": "c688d44dee1a7042adeec1984b4502a246b079116bae900e2c138eaa056bcfbf",
+        "lines": [
+          84
+        ],
+        "statements": [
+          {
+            "line": 84,
+            "text": "WRITE AUDIT-RECORD"
+          }
+        ]
+      },
+      "missing_fact": "the run-time behaviour of WRITE on AUDIT-RECORD: the dataset bound to it (JCL DD), its content and record encoding, and the file-system status outcomes the COBOL source does not define",
+      "why_unsafe": "the records read and the statuses reported come from a dataset outside the program; a Java implementation verified only against source-derived fixtures does not establish them",
+      "affected_requirements": [
+        "RT-AUDPROC-003"
+      ],
+      "affected_java_component": "file port for WRITE AUDIT-RECORD (runtime file semantics; dataset contents unverified)",
+      "required_action": [
+        "the dataset definitions (JCL DD, organisation, record format) and a captured legacy run for each status outcome (technical authority)"
+      ],
+      "validation_evidence": "a captured legacy run against the real (or an approved equivalent) dataset, including end-of-file and error statuses",
+      "blocks_execution_path": "request its PERFORM -> 2000-PROCESS-AUDIT: statement(s) 84",
+      "blocking": true,
+      "status": "OPEN"
+    },
+    {
+      "gap_id": "GAP-AUDPROC-3000-TERMINATE-FILE-CLOSE-AUDIT-FILE",
+      "kind": "EXTERNAL_FILE_RUNTIME",
+      "behaviour_id": "AUDPROC:3000-TERMINATE",
+      "source": {
+        "path": "src/programs/common/AUDPROC.cbl",
+        "sha256": "c688d44dee1a7042adeec1984b4502a246b079116bae900e2c138eaa056bcfbf",
+        "lines": [
+          95
+        ],
+        "statements": [
+          {
+            "line": 95,
+            "text": "CLOSE AUDIT-FILE ."
+          }
+        ]
+      },
+      "missing_fact": "the run-time behaviour of CLOSE on AUDIT-FILE: the dataset bound to it (JCL DD), its content and record encoding, and the file-system status outcomes the COBOL source does not define",
+      "why_unsafe": "the records read and the statuses reported come from a dataset outside the program; a Java implementation verified only against source-derived fixtures does not establish them",
+      "affected_requirements": [
+        "REQ-AUDPROC-001",
+        "RT-AUDPROC-001",
+        "RT-AUDPROC-002"
+      ],
+      "affected_java_component": "file port for CLOSE AUDIT-FILE (runtime file semantics; dataset contents unverified)",
+      "required_action": [
+        "the dataset definitions (JCL DD, organisation, record format) and a captured legacy run for each status outcome (technical authority)"
+      ],
+      "validation_evidence": "a captured legacy run against the real (or an approved equivalent) dataset, including end-of-file and error statuses",
+      "blocks_execution_path": "request its PERFORM -> 3000-TERMINATE: statement(s) 95",
+      "blocking": true,
+      "status": "OPEN"
+    }
+  ],
+  "closures": [
+    {
+      "behaviour_id": "AUDPROC:0000-MAIN",
+      "status": "UNRESOLVED",
+      "unresolved_reasons": [
+        "line 60: STAMP is neither declared, a keyword, a paragraph nor the subject of a blocking decision (unknown dependency)"
+      ],
+      "units": [
+        "AUDPROC",
+        "AUDITLOG"
+      ],
+      "external": [
+        {
+          "kind": "file_io",
+          "line": 84,
+          "operation": "WRITE",
+          "target": "AUDIT-FILE",
+          "relation": "direct"
+        }
+      ],
+      "undeclared": [],
+      "sha256": "77b7b98c2650d72f6adfca2a7728228b56ed2595f1b45e074706d35fde20938b"
+    },
+    {
+      "behaviour_id": "AUDPROC:1000-INITIALIZE",
+      "status": "UNRESOLVED",
+      "unresolved_reasons": [
+        "line 60: STAMP is neither declared, a keyword, a paragraph nor the subject of a blocking decision (unknown dependency)"
+      ],
+      "units": [
+        "AUDPROC"
+      ],
+      "external": [],
+      "undeclared": [],
+      "sha256": "d330436d8af453e10eef19f40d071925ba23e83e7f1cea4a66b5ef24deafb69b"
+    },
+    {
+      "behaviour_id": "AUDPROC:2000-PROCESS-AUDIT",
+      "status": "RESOLVED",
+      "unresolved_reasons": [],
+      "units": [
+        "AUDPROC",
+        "AUDITLOG"
+      ],
+      "external": [
+        {
+          "kind": "file_io",
+          "line": 84,
+          "operation": "WRITE",
+          "target": "AUDIT-FILE",
+          "relation": "direct"
+        }
+      ],
+      "undeclared": [],
+      "sha256": "e410d43ebf5818c50b15ef450bf0530793c5c5d5be19ce2ecaecce6b4783f442"
+    },
+    {
+      "behaviour_id": "AUDPROC:3000-TERMINATE",
+      "status": "RESOLVED",
+      "unresolved_reasons": [],
+      "units": [
+        "AUDPROC"
+      ],
+      "external": [],
+      "undeclared": [],
+      "sha256": "06ce3b1ceb52bbaf281849a6b20a4a356465a5f4d4c92da7fcf17e5813fb3143"
+    }
+  ],
+  "open_decisions": [
+    {
+      "id": "DR-AUDPROC-001",
+      "blocking": true,
+      "question": "In AUDPROC the audit timestamp is moved into AUD-TIMESTAMP (line 74) and then overwritten by the group move of the 32-byte system information into the 58-byte AUD-HEADER (line 75), so the written audit record carries neither the timestamp nor correctly aligned system/user/program/terminal values. On open failure the program also closes the unopened audit file. Must the forward audit service reproduce the record exactly as written today, or write the timestamp and the system, user, program and terminal identifiers in their own fields?"
+    },
+    {
+      "id": "DR-AUDPROC-002",
+      "blocking": false,
+      "question": "Copybook AUDITLOG declares audit types ('TRAN','USER','SYST'; BR-143), actions (CREATE, UPDATE, DELETE, INQUIRE, LOGIN, LOGOUT, STARTUP, SHUTDOWN; BR-144) and outcome statuses ('SUCC','FAIL','WARN'; BR-145). Callers assign them and AUDPROC writes them unchecked. Must the forward audit service reject values outside these domains, or record whatever the caller supplies (as implemented)?"
+    },
+    {
+      "id": "DR-F2-0005-012",
+      "blocking": false,
+      "question": "Fifteen elementary level-01 items (e.g. HISTLD00 WS-COMMIT-THRESHOLD, the REPORT-RECORD print lines, DB2CONN WS-CONNECTION-STATE/WS-RETRY-COUNT/WS-MAX-RETRIES, DB2CMT WS-SAVEPOINT-ID) are catalogued as record-level items without Field IDs, so no Java type could be assigned. Should the reverse harness register Field IDs for them, or may later stages map them at record level using the catalogued PIC?"
+    },
+    {
+      "id": "DR-F2-0005-023",
+      "blocking": false,
+      "question": "AUDPROC appends audit records to a sequential dataset (DD AUDFILE, OPEN EXTEND per call), its group MOVE LS-SYSTEM-INFO TO AUD-HEADER may overwrite the timestamp just set, and it CLOSEs the file after a failed OPEN; RPTAUD00 meanwhile reads an indexed audit file keyed AUD-KEY (DD AUDITLOG) built on the same copybook. Is there one audit trail (and which organisation), and must the timestamp overwrite be reproduced?"
+    },
+    {
+      "id": "DR-F2-PKT0010-002",
+      "blocking": false,
+      "question": "Which character encoding (code page) do the files and areas described by these copybooks use for DISPLAY data on the legacy platform (EBCDIC 037, 1140, another EBCDIC variant, or ASCII)? The zoned-decimal test vectors and String codecs depend on it."
+    },
+    {
+      "id": "RVW-GAP-092",
+      "blocking": false,
+      "question": "GAP-092 (medium, DIAGRAM_RENDER_UNVERIFIED) is not addressed by any decision or requirement: Visual rendering of the 65 Mermaid diagrams is unverified. Acknowledge it as a known limitation (resolved_no_change) or exclude the affected units?"
+    },
+    {
+      "id": "RVW-GAP-104",
+      "blocking": false,
+      "question": "GAP-104 (low, DIAGRAM_INCOMPLETE) is not addressed by any decision or requirement: COMP-UNRESOLVED: all seven edges are unsupported. Acknowledge it as a known limitation (resolved_no_change) or exclude the affected units?"
+    },
+    {
+      "id": "DR-CONSOLIDATION-001",
+      "blocking": true,
+      "question": "Batches disagree on BR-143 (Report audit record type as transaction, user action or system event): PKT-0002-F1=mapped, PKT-0004-F1=not_a_requirement. Should this declared value domain be a forward requirement?"
+    },
+    {
+      "id": "DR-CONSOLIDATION-002",
+      "blocking": true,
+      "question": "Batches disagree on BR-144 (Report audit action as a declared audit action): PKT-0002-F1=mapped, PKT-0004-F1=not_a_requirement. Should this declared value domain be a forward requirement?"
+    },
+    {
+      "id": "DR-CONSOLIDATION-003",
+      "blocking": true,
+      "question": "Batches disagree on BR-145 (Report audit outcome status as success, failure or warning): PKT-0002-F1=mapped, PKT-0004-F1=not_a_requirement. Should this declared value domain be a forward requirement?"
+    }
+  ],
+  "authorisation": {
+    "generation_authorized": false,
+    "blockers": [
+      "config generation.java_generation_allowed is false (project authority)",
+      "no authorised orchestrator.java_target_dir",
+      "G4 is BLOCKED (needs signed G2, G3 and G4 approvals by trusted signers)",
+      "trust store: TRUST_NOT_CONFIGURED"
+    ],
+    "gates": {
+      "G0": "PASS",
+      "G1": "PASS",
+      "G2": "UNVERIFIED",
+      "G3": "BLOCKED",
+      "G4": "BLOCKED",
+      "G5": "BLOCKED",
+      "G6": "BLOCKED",
+      "G7": "BLOCKED",
+      "G8": "BLOCKED"
+    },
+    "trust": "TRUST_NOT_CONFIGURED",
+    "program_g2_scope": {
+      "readiness": "NOT_READY",
+      "blocking": 12,
+      "scope_sha256": "24758b90d862221923ff13ccd689c9fcf573da2d9df619ed87c7250130357505"
+    },
+    "note": "Engineering gates never authorise generation. Java may be generated only when generation_authorized is true."
+  }
+}

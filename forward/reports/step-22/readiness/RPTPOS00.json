@@ -1,0 +1,864 @@
+{
+  "gate": "SOURCE_READINESS",
+  "subject": "RPTPOS00",
+  "status": "FAIL",
+  "checks": [
+    {
+      "id": "source_available",
+      "ok": true,
+      "detail": "src/programs/batch/RPTPOS00.cbl sha256 032436b2a4bded557262bdacb4c4ed3100ef3fef4df960c9c06fb40ff0d92b53; 50 statement(s) in 11 paragraph(s)"
+    },
+    {
+      "id": "complete_program",
+      "ok": true,
+      "detail": "every paragraph contains statements"
+    },
+    {
+      "id": "copybooks_resolved",
+      "ok": true,
+      "detail": "all 4 include(s) resolved: POSREC, TRNREC, RTNCODE, ERRHAND"
+    },
+    {
+      "id": "requirements_and_data_mapping_delivered",
+      "ok": true,
+      "detail": "F1/F2 deliveries accepted for ERRHAND, POSREC, RTNCODE, TRNREC, RPTPOS00"
+    },
+    {
+      "id": "behaviour_classified",
+      "ok": true,
+      "detail": "4 behaviour(s): 0 VERIFIED_CANDIDATE, 3 PARTIAL, 1 GAP"
+    },
+    {
+      "id": "dependencies_identified",
+      "ok": false,
+      "detail": "closure UNRESOLVED for RPTPOS00:0000-MAIN (PERFORM/GO TO target 2210-READ-TRANSACTIONS (line 144) is not a paragraph of RPTPOS00); RPTPOS00:1000-INITIALIZE (PERFORM/GO TO target 2210-READ-TRANSACTIONS (line 144) is not a paragraph of RPTPOS00); RPTPOS00:2000-PROCESS-REPORT (PERFORM/GO TO target 2210-READ-TRANSACTIONS (line 144) is not a paragraph of RPTPOS00); RPTPOS00:3000-CLEANUP (PERFORM/GO TO target 2210-READ-TRANSACTIONS (line 144) is not a paragraph of RPTPOS00)"
+    },
+    {
+      "id": "unsupported_documented",
+      "ok": true,
+      "detail": "12 gap(s) document every PARTIAL/GAP behaviour"
+    },
+    {
+      "id": "unknowns_documented",
+      "ok": true,
+      "detail": "12 open decision(s) record the remaining questions (4 blocking for approval); none is resolved or assumed here"
+    }
+  ],
+  "note": "An engineering gate: it states that the source is understood well enough to convert, with every unknown documented. It is not a G2 approval and does not authorise generation.",
+  "behaviours": [
+    {
+      "behaviour_id": "RPTPOS00:ENTRY-DISPATCH",
+      "kind": "dispatch",
+      "classification": "PARTIAL",
+      "lines": [
+        79,
+        81
+      ],
+      "inputs": [],
+      "outputs": [],
+      "side_effects": [],
+      "unresolved": [],
+      "covered_by": []
+    },
+    {
+      "behaviour_id": "RPTPOS00:1000-INITIALIZE",
+      "kind": "performed_range",
+      "classification": "PARTIAL",
+      "lines": [
+        85,
+        159
+      ],
+      "inputs": [
+        "REPORT-RECORD",
+        "WS-HEADER1",
+        "WS-HEADER2",
+        "WS-HEADER3",
+        "WS-POSITION-STATUS",
+        "WS-REPORT-DATE",
+        "WS-REPORT-STATUS",
+        "WS-TRAN-STATUS"
+      ],
+      "outputs": [
+        "RETURN-CODE",
+        "WS-ERROR-MESSAGE"
+      ],
+      "side_effects": [
+        {
+          "line": 89,
+          "kind": "file_io",
+          "operation": "OPEN",
+          "table": null
+        },
+        {
+          "line": 96,
+          "kind": "file_io",
+          "operation": "OPEN",
+          "table": null
+        },
+        {
+          "line": 103,
+          "kind": "file_io",
+          "operation": "OPEN",
+          "table": null
+        },
+        {
+          "line": 112,
+          "kind": "file_io",
+          "operation": "WRITE",
+          "table": null
+        },
+        {
+          "line": 113,
+          "kind": "file_io",
+          "operation": "WRITE",
+          "table": null
+        },
+        {
+          "line": 114,
+          "kind": "file_io",
+          "operation": "WRITE",
+          "table": null
+        }
+      ],
+      "unresolved": [
+        "WS-ERROR-MESSAGE"
+      ],
+      "covered_by": []
+    },
+    {
+      "behaviour_id": "RPTPOS00:2000-PROCESS-REPORT",
+      "kind": "performed_range",
+      "classification": "PARTIAL",
+      "lines": [
+        117,
+        150
+      ],
+      "inputs": [
+        "POS-PORTFOLIO-ID",
+        "POS-QUANTITY",
+        "REPORT-RECORD",
+        "WS-POS-CHANGE-PCT",
+        "WS-POSITION-DETAIL"
+      ],
+      "outputs": [
+        "WS-POS-DESCRIPTION",
+        "WS-POS-PORTFOLIO",
+        "WS-POS-QUANTITY",
+        "WS-POS-VALUE"
+      ],
+      "side_effects": [
+        {
+          "line": 122,
+          "kind": "file_io",
+          "operation": "READ",
+          "table": null
+        },
+        {
+          "line": 128,
+          "kind": "file_io",
+          "operation": "READ",
+          "table": null
+        },
+        {
+          "line": 141,
+          "kind": "file_io",
+          "operation": "WRITE",
+          "table": null
+        }
+      ],
+      "unresolved": [
+        "END-OF-POSITIONS",
+        "POS-DESCRIPTION",
+        "POS-CURRENT-VALUE",
+        "POS-PREVIOUS-VALUE"
+      ],
+      "covered_by": []
+    },
+    {
+      "behaviour_id": "RPTPOS00:3000-CLEANUP",
+      "kind": "performed_range",
+      "classification": "GAP",
+      "lines": [
+        153,
+        155
+      ],
+      "inputs": [],
+      "outputs": [],
+      "side_effects": [
+        {
+          "line": 153,
+          "kind": "file_io",
+          "operation": "CLOSE",
+          "table": null
+        }
+      ],
+      "unresolved": [],
+      "covered_by": []
+    }
+  ],
+  "gaps": [
+    {
+      "gap_id": "GAP-RPTPOS00-1000-INITIALIZE-WS-ERROR-MESSAGE",
+      "kind": "UNDECLARED_NAME_SEMANTICS",
+      "behaviour_id": "RPTPOS00:1000-INITIALIZE",
+      "source": {
+        "path": "src/programs/batch/RPTPOS00.cbl",
+        "sha256": "032436b2a4bded557262bdacb4c4ed3100ef3fef4df960c9c06fb40ff0d92b53",
+        "lines": [
+          91,
+          98,
+          105,
+          158
+        ],
+        "statements": [
+          {
+            "line": 91,
+            "text": "MOVE 'ERROR OPENING POSITION MASTER' TO WS-ERROR-MESSAGE"
+          },
+          {
+            "line": 98,
+            "text": "MOVE 'ERROR OPENING TRANSACTION HISTORY' TO WS-ERROR-MESSAGE"
+          },
+          {
+            "line": 105,
+            "text": "MOVE 'ERROR OPENING REPORT FILE' TO WS-ERROR-MESSAGE"
+          },
+          {
+            "line": 158,
+            "text": "DISPLAY WS-ERROR-MESSAGE"
+          }
+        ]
+      },
+      "missing_fact": "WS-ERROR-MESSAGE is used but declared nowhere in the repository; its layout and value meanings are the subject of DR-RPTPOS00-002, DR-F2-0005-005 (missing: a declaration of POS-CURRENT-VALUE; a declaration of POS-PREVIOUS-VALUE; a declaration of POS-DESCRIPTION; a declaration of END-OF-POSITIONS; a declaration of WS-ERROR-MESSAGE)",
+      "why_unsafe": "the outputs of these statements (WS-ERROR-MESSAGE) depend on a value whose meaning is not established; any Java mapping would invent it",
+      "affected_requirements": [],
+      "affected_java_component": "outcome mapping of behaviour 1000-INITIALIZE (behind a port whose only implementation throws until the gap is resolved)",
+      "required_action": [
+        "DR-RPTPOS00-002: a signed resolution by business_sme",
+        "DR-F2-0005-005: a signed resolution by technical_authority"
+      ],
+      "validation_evidence": "the real definition of WS-ERROR-MESSAGE for the target runtime and a captured legacy run showing each outcome branch",
+      "blocks_execution_path": "request its PERFORM -> 1000-INITIALIZE: statements 91, 98, 105, 158",
+      "blocking": true,
+      "status": "OPEN"
+    },
+    {
+      "gap_id": "GAP-RPTPOS00-1000-INITIALIZE-FILE-OPEN-POSITION-MASTER",
+      "kind": "EXTERNAL_FILE_RUNTIME",
+      "behaviour_id": "RPTPOS00:1000-INITIALIZE",
+      "source": {
+        "path": "src/programs/batch/RPTPOS00.cbl",
+        "sha256": "032436b2a4bded557262bdacb4c4ed3100ef3fef4df960c9c06fb40ff0d92b53",
+        "lines": [
+          89
+        ],
+        "statements": [
+          {
+            "line": 89,
+            "text": "OPEN INPUT POSITION-MASTER"
+          }
+        ]
+      },
+      "missing_fact": "the run-time behaviour of OPEN on POSITION-MASTER: the dataset bound to it (JCL DD), its content and record encoding, and the file-system status outcomes the COBOL source does not define",
+      "why_unsafe": "the records read and the statuses reported come from a dataset outside the program; a Java implementation verified only against source-derived fixtures does not establish them",
+      "affected_requirements": [],
+      "affected_java_component": "file port for OPEN POSITION-MASTER (runtime file semantics; dataset contents unverified)",
+      "required_action": [
+        "the dataset definitions (JCL DD, organisation, record format) and a captured legacy run for each status outcome (technical authority)"
+      ],
+      "validation_evidence": "a captured legacy run against the real (or an approved equivalent) dataset, including end-of-file and error statuses",
+      "blocks_execution_path": "request its PERFORM -> 1000-INITIALIZE: statement(s) 89",
+      "blocking": true,
+      "status": "OPEN"
+    },
+    {
+      "gap_id": "GAP-RPTPOS00-1000-INITIALIZE-FILE-OPEN-TRANSACTION-HISTORY",
+      "kind": "EXTERNAL_FILE_RUNTIME",
+      "behaviour_id": "RPTPOS00:1000-INITIALIZE",
+      "source": {
+        "path": "src/programs/batch/RPTPOS00.cbl",
+        "sha256": "032436b2a4bded557262bdacb4c4ed3100ef3fef4df960c9c06fb40ff0d92b53",
+        "lines": [
+          96
+        ],
+        "statements": [
+          {
+            "line": 96,
+            "text": "OPEN INPUT TRANSACTION-HISTORY"
+          }
+        ]
+      },
+      "missing_fact": "the run-time behaviour of OPEN on TRANSACTION-HISTORY: the dataset bound to it (JCL DD), its content and record encoding, and the file-system status outcomes the COBOL source does not define",
+      "why_unsafe": "the records read and the statuses reported come from a dataset outside the program; a Java implementation verified only against source-derived fixtures does not establish them",
+      "affected_requirements": [],
+      "affected_java_component": "file port for OPEN TRANSACTION-HISTORY (runtime file semantics; dataset contents unverified)",
+      "required_action": [
+        "the dataset definitions (JCL DD, organisation, record format) and a captured legacy run for each status outcome (technical authority)"
+      ],
+      "validation_evidence": "a captured legacy run against the real (or an approved equivalent) dataset, including end-of-file and error statuses",
+      "blocks_execution_path": "request its PERFORM -> 1000-INITIALIZE: statement(s) 96",
+      "blocking": true,
+      "status": "OPEN"
+    },
+    {
+      "gap_id": "GAP-RPTPOS00-1000-INITIALIZE-FILE-OPEN-REPORT-FILE",
+      "kind": "EXTERNAL_FILE_RUNTIME",
+      "behaviour_id": "RPTPOS00:1000-INITIALIZE",
+      "source": {
+        "path": "src/programs/batch/RPTPOS00.cbl",
+        "sha256": "032436b2a4bded557262bdacb4c4ed3100ef3fef4df960c9c06fb40ff0d92b53",
+        "lines": [
+          103
+        ],
+        "statements": [
+          {
+            "line": 103,
+            "text": "OPEN OUTPUT REPORT-FILE"
+          }
+        ]
+      },
+      "missing_fact": "the run-time behaviour of OPEN on REPORT-FILE: the dataset bound to it (JCL DD), its content and record encoding, and the file-system status outcomes the COBOL source does not define",
+      "why_unsafe": "the records read and the statuses reported come from a dataset outside the program; a Java implementation verified only against source-derived fixtures does not establish them",
+      "affected_requirements": [],
+      "affected_java_component": "file port for OPEN REPORT-FILE (runtime file semantics; dataset contents unverified)",
+      "required_action": [
+        "the dataset definitions (JCL DD, organisation, record format) and a captured legacy run for each status outcome (technical authority)"
+      ],
+      "validation_evidence": "a captured legacy run against the real (or an approved equivalent) dataset, including end-of-file and error statuses",
+      "blocks_execution_path": "request its PERFORM -> 1000-INITIALIZE: statement(s) 103",
+      "blocking": true,
+      "status": "OPEN"
+    },
+    {
+      "gap_id": "GAP-RPTPOS00-1000-INITIALIZE-FILE-WRITE-REPORT-RECORD",
+      "kind": "EXTERNAL_FILE_RUNTIME",
+      "behaviour_id": "RPTPOS00:1000-INITIALIZE",
+      "source": {
+        "path": "src/programs/batch/RPTPOS00.cbl",
+        "sha256": "032436b2a4bded557262bdacb4c4ed3100ef3fef4df960c9c06fb40ff0d92b53",
+        "lines": [
+          112,
+          113,
+          114
+        ],
+        "statements": [
+          {
+            "line": 112,
+            "text": "WRITE REPORT-RECORD FROM WS-HEADER1"
+          },
+          {
+            "line": 113,
+            "text": "WRITE REPORT-RECORD FROM WS-HEADER2"
+          },
+          {
+            "line": 114,
+            "text": "WRITE REPORT-RECORD FROM WS-HEADER3."
+          }
+        ]
+      },
+      "missing_fact": "the run-time behaviour of WRITE on REPORT-RECORD: the dataset bound to it (JCL DD), its content and record encoding, and the file-system status outcomes the COBOL source does not define",
+      "why_unsafe": "the records read and the statuses reported come from a dataset outside the program; a Java implementation verified only against source-derived fixtures does not establish them",
+      "affected_requirements": [],
+      "affected_java_component": "file port for WRITE REPORT-RECORD (runtime file semantics; dataset contents unverified)",
+      "required_action": [
+        "the dataset definitions (JCL DD, organisation, record format) and a captured legacy run for each status outcome (technical authority)"
+      ],
+      "validation_evidence": "a captured legacy run against the real (or an approved equivalent) dataset, including end-of-file and error statuses",
+      "blocks_execution_path": "request its PERFORM -> 1000-INITIALIZE: statement(s) 112, 113, 114",
+      "blocking": true,
+      "status": "OPEN"
+    },
+    {
+      "gap_id": "GAP-RPTPOS00-2000-PROCESS-REPORT-END-OF-POSITIONS",
+      "kind": "UNDECLARED_NAME_SEMANTICS",
+      "behaviour_id": "RPTPOS00:2000-PROCESS-REPORT",
+      "source": {
+        "path": "src/programs/batch/RPTPOS00.cbl",
+        "sha256": "032436b2a4bded557262bdacb4c4ed3100ef3fef4df960c9c06fb40ff0d92b53",
+        "lines": [
+          122,
+          126,
+          128
+        ],
+        "statements": [
+          {
+            "line": 122,
+            "text": "READ POSITION-MASTER AT END SET END-OF-POSITIONS TO TRUE"
+          },
+          {
+            "line": 126,
+            "text": "PERFORM UNTIL END-OF-POSITIONS"
+          },
+          {
+            "line": 128,
+            "text": "READ POSITION-MASTER AT END SET END-OF-POSITIONS TO TRUE"
+          }
+        ]
+      },
+      "missing_fact": "END-OF-POSITIONS is used but declared nowhere in the repository; its layout and value meanings are the subject of DR-RPTPOS00-002, DR-F2-0005-005 (missing: a declaration of POS-CURRENT-VALUE; a declaration of POS-PREVIOUS-VALUE; a declaration of POS-DESCRIPTION; a declaration of END-OF-POSITIONS; a declaration of WS-ERROR-MESSAGE)",
+      "why_unsafe": "the outputs of these statements (control flow) depend on a value whose meaning is not established; any Java mapping would invent it",
+      "affected_requirements": [],
+      "affected_java_component": "outcome mapping of behaviour 2000-PROCESS-REPORT (behind a port whose only implementation throws until the gap is resolved)",
+      "required_action": [
+        "DR-RPTPOS00-002: a signed resolution by business_sme",
+        "DR-F2-0005-005: a signed resolution by technical_authority"
+      ],
+      "validation_evidence": "the real definition of END-OF-POSITIONS for the target runtime and a captured legacy run showing each outcome branch",
+      "blocks_execution_path": "request its PERFORM -> 2000-PROCESS-REPORT: statements 122, 126, 128",
+      "blocking": true,
+      "status": "OPEN"
+    },
+    {
+      "gap_id": "GAP-RPTPOS00-2000-PROCESS-REPORT-POS-DESCRIPTION",
+      "kind": "UNDECLARED_NAME_SEMANTICS",
+      "behaviour_id": "RPTPOS00:2000-PROCESS-REPORT",
+      "source": {
+        "path": "src/programs/batch/RPTPOS00.cbl",
+        "sha256": "032436b2a4bded557262bdacb4c4ed3100ef3fef4df960c9c06fb40ff0d92b53",
+        "lines": [
+          135
+        ],
+        "statements": [
+          {
+            "line": 135,
+            "text": "MOVE POS-DESCRIPTION    TO WS-POS-DESCRIPTION"
+          }
+        ]
+      },
+      "missing_fact": "POS-DESCRIPTION is used but declared nowhere in the repository; its layout and value meanings are the subject of DR-RPTPOS00-002, DR-F2-0005-005 (missing: a declaration of POS-CURRENT-VALUE; a declaration of POS-PREVIOUS-VALUE; a declaration of POS-DESCRIPTION; a declaration of END-OF-POSITIONS; a declaration of WS-ERROR-MESSAGE)",
+      "why_unsafe": "the outputs of these statements (WS-POS-DESCRIPTION) depend on a value whose meaning is not established; any Java mapping would invent it",
+      "affected_requirements": [],
+      "affected_java_component": "outcome mapping of behaviour 2000-PROCESS-REPORT (behind a port whose only implementation throws until the gap is resolved)",
+      "required_action": [
+        "DR-RPTPOS00-002: a signed resolution by business_sme",
+        "DR-F2-0005-005: a signed resolution by technical_authority"
+      ],
+      "validation_evidence": "the real definition of POS-DESCRIPTION for the target runtime and a captured legacy run showing each outcome branch",
+      "blocks_execution_path": "request its PERFORM -> 2000-PROCESS-REPORT: statements 135",
+      "blocking": true,
+      "status": "OPEN"
+    },
+    {
+      "gap_id": "GAP-RPTPOS00-2000-PROCESS-REPORT-POS-CURRENT-VALUE",
+      "kind": "UNDECLARED_NAME_SEMANTICS",
+      "behaviour_id": "RPTPOS00:2000-PROCESS-REPORT",
+      "source": {
+        "path": "src/programs/batch/RPTPOS00.cbl",
+        "sha256": "032436b2a4bded557262bdacb4c4ed3100ef3fef4df960c9c06fb40ff0d92b53",
+        "lines": [
+          137,
+          138
+        ],
+        "statements": [
+          {
+            "line": 137,
+            "text": "MOVE POS-CURRENT-VALUE  TO WS-POS-VALUE"
+          },
+          {
+            "line": 138,
+            "text": "COMPUTE WS-POS-CHANGE-PCT = (POS-CURRENT-VALUE - POS-PREVIOUS-VALUE) / POS-PREVIOUS-VALUE * 100"
+          }
+        ]
+      },
+      "missing_fact": "POS-CURRENT-VALUE is used but declared nowhere in the repository; its layout and value meanings are the subject of DR-RPTPOS00-002, DR-F2-0005-005 (missing: a declaration of POS-CURRENT-VALUE; a declaration of POS-PREVIOUS-VALUE; a declaration of POS-DESCRIPTION; a declaration of END-OF-POSITIONS; a declaration of WS-ERROR-MESSAGE)",
+      "why_unsafe": "the outputs of these statements (WS-POS-VALUE) depend on a value whose meaning is not established; any Java mapping would invent it",
+      "affected_requirements": [],
+      "affected_java_component": "outcome mapping of behaviour 2000-PROCESS-REPORT (behind a port whose only implementation throws until the gap is resolved)",
+      "required_action": [
+        "DR-RPTPOS00-002: a signed resolution by business_sme",
+        "DR-F2-0005-005: a signed resolution by technical_authority"
+      ],
+      "validation_evidence": "the real definition of POS-CURRENT-VALUE for the target runtime and a captured legacy run showing each outcome branch",
+      "blocks_execution_path": "request its PERFORM -> 2000-PROCESS-REPORT: statements 137, 138",
+      "blocking": true,
+      "status": "OPEN"
+    },
+    {
+      "gap_id": "GAP-RPTPOS00-2000-PROCESS-REPORT-POS-PREVIOUS-VALUE",
+      "kind": "UNDECLARED_NAME_SEMANTICS",
+      "behaviour_id": "RPTPOS00:2000-PROCESS-REPORT",
+      "source": {
+        "path": "src/programs/batch/RPTPOS00.cbl",
+        "sha256": "032436b2a4bded557262bdacb4c4ed3100ef3fef4df960c9c06fb40ff0d92b53",
+        "lines": [
+          138
+        ],
+        "statements": [
+          {
+            "line": 138,
+            "text": "COMPUTE WS-POS-CHANGE-PCT = (POS-CURRENT-VALUE - POS-PREVIOUS-VALUE) / POS-PREVIOUS-VALUE * 100"
+          }
+        ]
+      },
+      "missing_fact": "POS-PREVIOUS-VALUE is used but declared nowhere in the repository; its layout and value meanings are the subject of DR-RPTPOS00-002, DR-F2-0005-005 (missing: a declaration of POS-CURRENT-VALUE; a declaration of POS-PREVIOUS-VALUE; a declaration of POS-DESCRIPTION; a declaration of END-OF-POSITIONS; a declaration of WS-ERROR-MESSAGE)",
+      "why_unsafe": "the outputs of these statements (control flow) depend on a value whose meaning is not established; any Java mapping would invent it",
+      "affected_requirements": [],
+      "affected_java_component": "outcome mapping of behaviour 2000-PROCESS-REPORT (behind a port whose only implementation throws until the gap is resolved)",
+      "required_action": [
+        "DR-RPTPOS00-002: a signed resolution by business_sme",
+        "DR-F2-0005-005: a signed resolution by technical_authority"
+      ],
+      "validation_evidence": "the real definition of POS-PREVIOUS-VALUE for the target runtime and a captured legacy run showing each outcome branch",
+      "blocks_execution_path": "request its PERFORM -> 2000-PROCESS-REPORT: statements 138",
+      "blocking": true,
+      "status": "OPEN"
+    },
+    {
+      "gap_id": "GAP-RPTPOS00-2000-PROCESS-REPORT-FILE-READ-POSITION-MASTER",
+      "kind": "EXTERNAL_FILE_RUNTIME",
+      "behaviour_id": "RPTPOS00:2000-PROCESS-REPORT",
+      "source": {
+        "path": "src/programs/batch/RPTPOS00.cbl",
+        "sha256": "032436b2a4bded557262bdacb4c4ed3100ef3fef4df960c9c06fb40ff0d92b53",
+        "lines": [
+          122,
+          128
+        ],
+        "statements": [
+          {
+            "line": 122,
+            "text": "READ POSITION-MASTER AT END SET END-OF-POSITIONS TO TRUE"
+          },
+          {
+            "line": 128,
+            "text": "READ POSITION-MASTER AT END SET END-OF-POSITIONS TO TRUE"
+          }
+        ]
+      },
+      "missing_fact": "the run-time behaviour of READ on POSITION-MASTER: the dataset bound to it (JCL DD), its content and record encoding, and the file-system status outcomes the COBOL source does not define",
+      "why_unsafe": "the records read and the statuses reported come from a dataset outside the program; a Java implementation verified only against source-derived fixtures does not establish them",
+      "affected_requirements": [],
+      "affected_java_component": "file port for READ POSITION-MASTER (runtime file semantics; dataset contents unverified)",
+      "required_action": [
+        "the dataset definitions (JCL DD, organisation, record format) and a captured legacy run for each status outcome (technical authority)"
+      ],
+      "validation_evidence": "a captured legacy run against the real (or an approved equivalent) dataset, including end-of-file and error statuses",
+      "blocks_execution_path": "request its PERFORM -> 2000-PROCESS-REPORT: statement(s) 122, 128",
+      "blocking": true,
+      "status": "OPEN"
+    },
+    {
+      "gap_id": "GAP-RPTPOS00-2000-PROCESS-REPORT-FILE-WRITE-REPORT-RECORD",
+      "kind": "EXTERNAL_FILE_RUNTIME",
+      "behaviour_id": "RPTPOS00:2000-PROCESS-REPORT",
+      "source": {
+        "path": "src/programs/batch/RPTPOS00.cbl",
+        "sha256": "032436b2a4bded557262bdacb4c4ed3100ef3fef4df960c9c06fb40ff0d92b53",
+        "lines": [
+          141
+        ],
+        "statements": [
+          {
+            "line": 141,
+            "text": "WRITE REPORT-RECORD FROM WS-POSITION-DETAIL."
+          }
+        ]
+      },
+      "missing_fact": "the run-time behaviour of WRITE on REPORT-RECORD: the dataset bound to it (JCL DD), its content and record encoding, and the file-system status outcomes the COBOL source does not define",
+      "why_unsafe": "the records read and the statuses reported come from a dataset outside the program; a Java implementation verified only against source-derived fixtures does not establish them",
+      "affected_requirements": [],
+      "affected_java_component": "file port for WRITE REPORT-RECORD (runtime file semantics; dataset contents unverified)",
+      "required_action": [
+        "the dataset definitions (JCL DD, organisation, record format) and a captured legacy run for each status outcome (technical authority)"
+      ],
+      "validation_evidence": "a captured legacy run against the real (or an approved equivalent) dataset, including end-of-file and error statuses",
+      "blocks_execution_path": "request its PERFORM -> 2000-PROCESS-REPORT: statement(s) 141",
+      "blocking": true,
+      "status": "OPEN"
+    },
+    {
+      "gap_id": "GAP-RPTPOS00-3000-CLEANUP-FILE-CLOSE-POSITION-MASTER",
+      "kind": "EXTERNAL_FILE_RUNTIME",
+      "behaviour_id": "RPTPOS00:3000-CLEANUP",
+      "source": {
+        "path": "src/programs/batch/RPTPOS00.cbl",
+        "sha256": "032436b2a4bded557262bdacb4c4ed3100ef3fef4df960c9c06fb40ff0d92b53",
+        "lines": [
+          153
+        ],
+        "statements": [
+          {
+            "line": 153,
+            "text": "CLOSE POSITION-MASTER TRANSACTION-HISTORY REPORT-FILE."
+          }
+        ]
+      },
+      "missing_fact": "the run-time behaviour of CLOSE on POSITION-MASTER: the dataset bound to it (JCL DD), its content and record encoding, and the file-system status outcomes the COBOL source does not define",
+      "why_unsafe": "the records read and the statuses reported come from a dataset outside the program; a Java implementation verified only against source-derived fixtures does not establish them",
+      "affected_requirements": [],
+      "affected_java_component": "file port for CLOSE POSITION-MASTER (runtime file semantics; dataset contents unverified)",
+      "required_action": [
+        "the dataset definitions (JCL DD, organisation, record format) and a captured legacy run for each status outcome (technical authority)"
+      ],
+      "validation_evidence": "a captured legacy run against the real (or an approved equivalent) dataset, including end-of-file and error statuses",
+      "blocks_execution_path": "request its PERFORM -> 3000-CLEANUP: statement(s) 153",
+      "blocking": true,
+      "status": "OPEN"
+    }
+  ],
+  "closures": [
+    {
+      "behaviour_id": "RPTPOS00:0000-MAIN",
+      "status": "UNRESOLVED",
+      "unresolved_reasons": [
+        "PERFORM/GO TO target 2210-READ-TRANSACTIONS (line 144) is not a paragraph of RPTPOS00",
+        "PERFORM/GO TO target 2220-SUMMARIZE-ACTIVITY (line 145) is not a paragraph of RPTPOS00",
+        "PERFORM/GO TO target 2310-WRITE-TOTALS (line 148) is not a paragraph of RPTPOS00",
+        "PERFORM/GO TO target 2320-WRITE-EXCEPTIONS (line 149) is not a paragraph of RPTPOS00",
+        "PERFORM/GO TO target 2330-WRITE-METRICS (line 150) is not a paragraph of RPTPOS00",
+        "line 96: TRANSACTION-HISTORY is neither declared, a keyword, a paragraph nor the subject of a blocking decision (unknown dependency)",
+        "line 153: TRANSACTION-HISTORY is neither declared, a keyword, a paragraph nor the subject of a blocking decision (unknown dependency)"
+      ],
+      "units": [
+        "RPTPOS00",
+        "POSREC"
+      ],
+      "external": [
+        {
+          "kind": "file_io",
+          "line": 112,
+          "operation": "WRITE",
+          "target": "REPORT-FILE",
+          "relation": "direct"
+        },
+        {
+          "kind": "file_io",
+          "line": 113,
+          "operation": "WRITE",
+          "target": "REPORT-FILE",
+          "relation": "direct"
+        },
+        {
+          "kind": "file_io",
+          "line": 114,
+          "operation": "WRITE",
+          "target": "REPORT-FILE",
+          "relation": "direct"
+        },
+        {
+          "kind": "file_io",
+          "line": 122,
+          "operation": "READ",
+          "target": "POSITION-MASTER",
+          "relation": "direct"
+        },
+        {
+          "kind": "file_io",
+          "line": 128,
+          "operation": "READ",
+          "target": "POSITION-MASTER",
+          "relation": "direct"
+        },
+        {
+          "kind": "file_io",
+          "line": 141,
+          "operation": "WRITE",
+          "target": "REPORT-FILE",
+          "relation": "direct"
+        }
+      ],
+      "undeclared": [
+        "WS-ERROR-MESSAGE",
+        "END-OF-POSITIONS",
+        "POS-DESCRIPTION",
+        "POS-CURRENT-VALUE",
+        "POS-PREVIOUS-VALUE"
+      ],
+      "sha256": "d812c336b69379290a1e8d4c5481251a314a7623c2f7faf40e26eed2aa396303"
+    },
+    {
+      "behaviour_id": "RPTPOS00:1000-INITIALIZE",
+      "status": "UNRESOLVED",
+      "unresolved_reasons": [
+        "PERFORM/GO TO target 2210-READ-TRANSACTIONS (line 144) is not a paragraph of RPTPOS00",
+        "PERFORM/GO TO target 2220-SUMMARIZE-ACTIVITY (line 145) is not a paragraph of RPTPOS00",
+        "PERFORM/GO TO target 2310-WRITE-TOTALS (line 148) is not a paragraph of RPTPOS00",
+        "PERFORM/GO TO target 2320-WRITE-EXCEPTIONS (line 149) is not a paragraph of RPTPOS00",
+        "PERFORM/GO TO target 2330-WRITE-METRICS (line 150) is not a paragraph of RPTPOS00",
+        "line 96: TRANSACTION-HISTORY is neither declared, a keyword, a paragraph nor the subject of a blocking decision (unknown dependency)"
+      ],
+      "units": [
+        "RPTPOS00"
+      ],
+      "external": [
+        {
+          "kind": "file_io",
+          "line": 112,
+          "operation": "WRITE",
+          "target": "REPORT-FILE",
+          "relation": "direct"
+        },
+        {
+          "kind": "file_io",
+          "line": 113,
+          "operation": "WRITE",
+          "target": "REPORT-FILE",
+          "relation": "direct"
+        },
+        {
+          "kind": "file_io",
+          "line": 114,
+          "operation": "WRITE",
+          "target": "REPORT-FILE",
+          "relation": "direct"
+        }
+      ],
+      "undeclared": [
+        "WS-ERROR-MESSAGE"
+      ],
+      "sha256": "46bcc38d9270a1b589ca3e21b7a215f61d95d0fb25a085257f856169e786098d"
+    },
+    {
+      "behaviour_id": "RPTPOS00:2000-PROCESS-REPORT",
+      "status": "UNRESOLVED",
+      "unresolved_reasons": [
+        "PERFORM/GO TO target 2210-READ-TRANSACTIONS (line 144) is not a paragraph of RPTPOS00",
+        "PERFORM/GO TO target 2220-SUMMARIZE-ACTIVITY (line 145) is not a paragraph of RPTPOS00",
+        "PERFORM/GO TO target 2310-WRITE-TOTALS (line 148) is not a paragraph of RPTPOS00",
+        "PERFORM/GO TO target 2320-WRITE-EXCEPTIONS (line 149) is not a paragraph of RPTPOS00",
+        "PERFORM/GO TO target 2330-WRITE-METRICS (line 150) is not a paragraph of RPTPOS00"
+      ],
+      "units": [
+        "RPTPOS00",
+        "POSREC"
+      ],
+      "external": [
+        {
+          "kind": "file_io",
+          "line": 122,
+          "operation": "READ",
+          "target": "POSITION-MASTER",
+          "relation": "direct"
+        },
+        {
+          "kind": "file_io",
+          "line": 128,
+          "operation": "READ",
+          "target": "POSITION-MASTER",
+          "relation": "direct"
+        },
+        {
+          "kind": "file_io",
+          "line": 141,
+          "operation": "WRITE",
+          "target": "REPORT-FILE",
+          "relation": "direct"
+        }
+      ],
+      "undeclared": [
+        "END-OF-POSITIONS",
+        "POS-DESCRIPTION",
+        "POS-CURRENT-VALUE",
+        "POS-PREVIOUS-VALUE"
+      ],
+      "sha256": "3b3ddcd58b26a62a79fbd6ae799de3890645571b8e63395b73bfaa9608b88640"
+    },
+    {
+      "behaviour_id": "RPTPOS00:3000-CLEANUP",
+      "status": "UNRESOLVED",
+      "unresolved_reasons": [
+        "PERFORM/GO TO target 2210-READ-TRANSACTIONS (line 144) is not a paragraph of RPTPOS00",
+        "PERFORM/GO TO target 2220-SUMMARIZE-ACTIVITY (line 145) is not a paragraph of RPTPOS00",
+        "PERFORM/GO TO target 2310-WRITE-TOTALS (line 148) is not a paragraph of RPTPOS00",
+        "PERFORM/GO TO target 2320-WRITE-EXCEPTIONS (line 149) is not a paragraph of RPTPOS00",
+        "PERFORM/GO TO target 2330-WRITE-METRICS (line 150) is not a paragraph of RPTPOS00",
+        "line 153: TRANSACTION-HISTORY is neither declared, a keyword, a paragraph nor the subject of a blocking decision (unknown dependency)"
+      ],
+      "units": [
+        "RPTPOS00"
+      ],
+      "external": [],
+      "undeclared": [],
+      "sha256": "79e4e58a164cc250af99eae55295efd50b2d555ba2e864284d5c6218371ea7c1"
+    }
+  ],
+  "open_decisions": [
+    {
+      "id": "DR-F2-0005-005",
+      "blocking": true,
+      "question": "RPTPOS00 reads POSITION-MASTER (no FD; COPY POSREC in the FILE SECTION) and moves POS-DESCRIPTION, POS-CURRENT-VALUE and POS-PREVIOUS-VALUE into the report, but these names, END-OF-POSITIONS and WS-ERROR-MESSAGE are declared nowhere. What are the position fields (names, PIC, sign, decimals) that feed WS-POS-DESCRIPTION, WS-POS-VALUE and WS-POS-CHANGE-PCT?"
+    },
+    {
+      "id": "DR-F2-0005-012",
+      "blocking": false,
+      "question": "Fifteen elementary level-01 items (e.g. HISTLD00 WS-COMMIT-THRESHOLD, the REPORT-RECORD print lines, DB2CONN WS-CONNECTION-STATE/WS-RETRY-COUNT/WS-MAX-RETRIES, DB2CMT WS-SAVEPOINT-ID) are catalogued as record-level items without Field IDs, so no Java type could be assigned. Should the reverse harness register Field IDs for them, or may later stages map them at record level using the catalogued PIC?"
+    },
+    {
+      "id": "DR-F2-0005-016",
+      "blocking": true,
+      "question": "RPTPOS00 opens TRANSACTION-HISTORY but never reads it; the transaction, totals, exception and metrics paragraphs (2210, 2220, 2310, 2320, 2330) are missing. What transaction activity, totals and exception lines must the daily position report contain?"
+    },
+    {
+      "id": "DR-F2-0005-024",
+      "blocking": false,
+      "question": "DD TRANHIST is declared as TRANSACTION-HISTORY in HISTLD00 (RECORD KEY TH-KEY, copybook HISTREC) and in RPTPOS00 (RECORD KEY TRAN-KEY, copybook TRNREC). Do both programs address the same indexed dataset, and which key/record layout is authoritative?"
+    },
+    {
+      "id": "DR-F2-0005-025",
+      "blocking": false,
+      "question": "The character encoding of DISPLAY data is not stated anywhere (source declares IBM-ZOS only). Is EBCDIC code page 037 correct for all files and the DB2 subsystem, or another code page (e.g. 1140 with the euro sign, which changes the '$' currency byte in WS-POS-VALUE)?"
+    },
+    {
+      "id": "DR-F2-PKT0010-002",
+      "blocking": false,
+      "question": "Which character encoding (code page) do the files and areas described by these copybooks use for DISPLAY data on the legacy platform (EBCDIC 037, 1140, another EBCDIC variant, or ASCII)? The zoned-decimal test vectors and String codecs depend on it."
+    },
+    {
+      "id": "DR-F2-PKT0010-005",
+      "blocking": false,
+      "question": "Several data names are declared more than once: CK-FILE-STATUS (CKPRST group line 35 and child line 38); ERR-VALIDATION/ERR-PROCESSING/ERR-SECURITY (RETHND level-88 and STD-ERROR-CODES fields); RC-SUCCESS..RC-CRITICAL, TRN-TYPE-BUY/SELL/FEE, ERROR-CODE and ERROR-ROUTINE across COMMON, RETHND and TRNREC. What Java naming convention should disambiguate them (for example record-qualified class members keyed by Field ID)?"
+    },
+    {
+      "id": "DR-RPTPOS00-001",
+      "blocking": true,
+      "question": "RPTPOS00 performs 5 paragraphs that are not in the source (2210-READ-TRANSACTIONS, 2220-SUMMARIZE-ACTIVITY, 2310-WRITE-TOTALS, 2320-WRITE-EXCEPTIONS, 2330-WRITE-METRICS). Can the complete source be supplied, or must the business specify the transaction-activity, totals, exceptions and metrics sections of the daily position report?"
+    },
+    {
+      "id": "DR-RPTPOS00-002",
+      "blocking": true,
+      "question": "BR-034 states: for each position the report computes change % = (POS-CURRENT-VALUE - POS-PREVIOUS-VALUE) / POS-PREVIOUS-VALUE x 100 and writes it on the detail line; a previous value of zero is not guarded. POS-CURRENT-VALUE, POS-PREVIOUS-VALUE, POS-DESCRIPTION, END-OF-POSITIONS and WS-ERROR-MESSAGE are declared nowhere. Confirm, correct or reject the formula; specify the source and type of the current and previous values and the required result when the previous value is zero."
+    },
+    {
+      "id": "DR-RPTPOS00-003",
+      "blocking": false,
+      "question": "Copybooks POSREC and TRNREC declare position status POS-STATUS ('A' active, 'C' closed, 'P' pending; BR-150) and transaction status TRN-STATUS ('P' pending, 'D' done, 'F' failed, 'R' reversed; BR-151); RPTPOS00 neither sets nor tests them. Should the daily position report filter or flag positions or transactions by these statuses?"
+    },
+    {
+      "id": "RVW-GAP-092",
+      "blocking": false,
+      "question": "GAP-092 (medium, DIAGRAM_RENDER_UNVERIFIED) is not addressed by any decision or requirement: Visual rendering of the 65 Mermaid diagrams is unverified. Acknowledge it as a known limitation (resolved_no_change) or exclude the affected units?"
+    },
+    {
+      "id": "RVW-GAP-104",
+      "blocking": false,
+      "question": "GAP-104 (low, DIAGRAM_INCOMPLETE) is not addressed by any decision or requirement: COMP-UNRESOLVED: all seven edges are unsupported. Acknowledge it as a known limitation (resolved_no_change) or exclude the affected units?"
+    }
+  ],
+  "authorisation": {
+    "generation_authorized": false,
+    "blockers": [
+      "config generation.java_generation_allowed is false (project authority)",
+      "no authorised orchestrator.java_target_dir",
+      "G4 is BLOCKED (needs signed G2, G3 and G4 approvals by trusted signers)",
+      "trust store: TRUST_NOT_CONFIGURED"
+    ],
+    "gates": {
+      "G0": "PASS",
+      "G1": "PASS",
+      "G2": "UNVERIFIED",
+      "G3": "BLOCKED",
+      "G4": "BLOCKED",
+      "G5": "BLOCKED",
+      "G6": "BLOCKED",
+      "G7": "BLOCKED",
+      "G8": "BLOCKED"
+    },
+    "trust": "TRUST_NOT_CONFIGURED",
+    "program_g2_scope": {
+      "readiness": "NOT_READY",
+      "blocking": 10,
+      "scope_sha256": "adbb7ef6f757a2724e5e20f743af9e354d8e65d837f7778a3a1c4eb4d4fe4f96"
+    },
+    "note": "Engineering gates never authorise generation. Java may be generated only when generation_authorized is true."
+  }
+}
