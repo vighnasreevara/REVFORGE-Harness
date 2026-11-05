@@ -323,7 +323,7 @@ describe('STEP 11 - workflow and protection', () => {
     // Recoverable = archived (untracked, ignored, modified) or tracked at the recorded commit.
     const paths = new Set([...d.included, ...d.tracked].map((f: any) => f.path));
     assert.deepEqual(d.tracked_secrets, [], 'no committed file contains a secret pattern');
-    for (const p of ['forward/runtime/src/pilot/plan.ts', 'forward/runtime/src/pilot/pilot.ts', 'forward/pilot/synthetic-rc/cobol/SYNRC01.cbl', 'forward/pilot/synthetic-rc/fixtures/cases.json', 'forward/contracts/pilot/pilot-result.schema.json', 'forward/tests/step11.test.ts']) assert.ok(paths.has(p), p);
+    for (const p of ['forward/runtime/src/pilot/plan.ts', 'forward/runtime/src/pilot/pilot.ts', 'forward/pilot/synthetic-rc/cobol/SYNRC01.cbl', 'forward/pilot/synthetic-rc/fixtures/cases.json', 'forward/contracts/pilot/pilot-result.schema.json', 'forward/tests/synthetic-conversion-pilot.test.ts']) assert.ok(paths.has(p), p);
     assert.ok(![...paths].some((p) => /^forward\/pilot\/[^/]+\/out\//.test(p as string)));
     // Transient test workspaces written by concurrently running test files are never backed up.
     assert.ok(backup.EXCLUDE.some(([re]: [RegExp]) => re.test('forward/tests/.tmp/runs-s3/X/workflow/state.json')));

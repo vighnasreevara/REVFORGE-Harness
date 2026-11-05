@@ -47,3 +47,7 @@ The overall status is **`ready`** only when all of the following hold:
 - no check failed or warned;
 - no blocking decision is open;
 - the original COBOL source is available.
+
+## Test file names in historical reports
+
+The STEP reports and their machine evidence refer to the forward test files by their historical names (`step1.test.ts` to `step25.test.ts`), because they record what ran at the time. They are left unchanged. The files now have descriptive names; see [`docs/TEST-FILE-RENAME-MAP.md`](../docs/TEST-FILE-RENAME-MAP.md) for the mapping and [`tests/README.md`](../tests/README.md) for what each file covers.

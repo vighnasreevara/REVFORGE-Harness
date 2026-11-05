@@ -22,7 +22,7 @@ Status values:
 | 10 | Dashboard validated (40/40, 20/20, 18/25/114 metrics) | Done | TESTING-AND-VERIFICATION.md |
 | 11 | Forward regression (418/418, runtime 34/34, validate 41/42, readiness 6/42) | Done | `reports/step-25/regression-runs.jsonl` |
 | 12 | Pure-checkout reproducibility (environment A) and repaired fresh clone | Done | `reports/step-25/clean-clone-runs.jsonl` |
-| 13 | Backup excludes reproducible dashboard output; restore still verified | Done | `tools/backup.js` (policy 2), `tests/step25.test.ts` |
+| 13 | Backup excludes reproducible dashboard output; restore still verified | Done | `tools/backup.js` (policy 2), `tests/dashboard-backup-exclusion-policy.test.ts` (formerly `step25.test.ts`; see `docs/TEST-FILE-RENAME-MAP.md`) |
 | 14 | Handover manifest with SHA-256 of every referenced file | Done | HANDOVER-MANIFEST.json |
 | 15 | STEP-25 assessment | Done | `reports/STEP-25-FINAL-HANDOVER-ASSESSMENT.md` |
 | 16 | Commit and push of STEP-25 | **Done** (post-release): committed and pushed as `e87b1a6`, a fast-forward. *At assessment time: staged for review.* | Post-Release Verification Addendum below |

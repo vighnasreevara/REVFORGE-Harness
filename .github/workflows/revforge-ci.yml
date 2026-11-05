@@ -50,20 +50,34 @@ jobs:
         run: node dist/runtime/src/cli.js sync-agents --check
       - name: Tests that run on a pure checkout
         # Selected from a per-file run in a clean checkout without local assets. Left out by design,
-        # because they need the git-ignored BMad staging/executor installation:
-        # bmad-e2e, step6, step7, step8, step21.
+        # because they need the git-ignored BMad staging/executor installation (see forward/tests/README.md):
+        # bmad-e2e, bmad-release-and-adapter, g3-g4-design-approvals-and-bmad-executor,
+        # trusted-decisions-disclosure-and-preflight, mandatory-bmad-governance.
         # Tests inside the selected files that need the COBOL source or generated Java skip themselves.
         env:
           REVFORGE_JAVA_HOME: ${{ env.JAVA_HOME }}
         run: >-
           node --test --test-reporter=spec
-          dist/tests/git-policy.test.js dist/tests/step1.test.js dist/tests/step2.test.js
-          dist/tests/step3.test.js dist/tests/step35.test.js dist/tests/step4.test.js
-          dist/tests/step45.test.js dist/tests/step5.test.js dist/tests/step55.test.js
-          dist/tests/step9.test.js dist/tests/step10.test.js dist/tests/step11.test.js
-          dist/tests/step12.test.js dist/tests/step13.test.js dist/tests/step14.test.js
-          dist/tests/step15.test.js dist/tests/step16.test.js dist/tests/step17.test.js
-          dist/tests/step20.test.js dist/tests/step25.test.js
+          dist/tests/git-policy.test.js
+          dist/tests/reverse-artifact-intake-and-planning.test.js
+          dist/tests/workflow-orchestrator-and-gates.test.js
+          dist/tests/agent-skills-deliverables-and-batches.test.js
+          dist/tests/deliverable-reconciliation-and-source-verification.test.js
+          dist/tests/g2-requirements-approval.test.js
+          dist/tests/g2-blocker-analysis-and-review-packets.test.js
+          dist/tests/openai-independent-verification.test.js
+          dist/tests/decision-workbench-and-scope-evidence.test.js
+          dist/tests/cobol-context-verification-and-isolation.test.js
+          dist/tests/evidence-adjudication-and-backup-recovery.test.js
+          dist/tests/synthetic-conversion-pilot.test.js
+          dist/tests/g2-semantic-dependencies-and-closure.test.js
+          dist/tests/behaviour-scopes-and-scoped-approval.test.js
+          dist/tests/source-readiness-and-conversion-validation.test.js
+          dist/tests/local-converter-language-support.test.js
+          dist/tests/program-scoped-generation-authorization.test.js
+          dist/tests/full-application-conversion.test.js
+          dist/tests/readiness-closure-corrections.test.js
+          dist/tests/dashboard-backup-exclusion-policy.test.js
       - name: Hand-written Java runtime library (javac -Werror) and RuntimeTests
         run: |
           mkdir -p "$RUNNER_TEMP/rt"
