@@ -1,0 +1,75 @@
+{
+ "contract": "step-24/limitations-and-step25",
+ "known_limitations": [
+  {
+   "id": "L1",
+   "limitation": "Recorded results, not live status",
+   "detail": "The dashboard shows the committed STEP-22, STEP-23 and BMad reports as of the evidence baseline commit. It does not run the harness or CI. New results appear only after they are committed and `npm run evidence` is re-run."
+  },
+  {
+   "id": "L2",
+   "limitation": "No COBOL or generated Java content",
+   "detail": "The restricted COBOL checkout (references/) and the generated Java (forward/generated/) are not committed, so the dashboard shows their paths, hashes and IDs but not their text."
+  },
+  {
+   "id": "L3",
+   "limitation": "Repository links resolve only for pushed commits",
+   "detail": "Source links open the file on GitHub at the evidence baseline commit recorded in the manifest (the checkout's HEAD when `npm run evidence` ran). They resolve once that commit is pushed."
+  },
+  {
+   "id": "L4",
+   "limitation": "Dependency graph is explored by neighbourhood",
+   "detail": "The 705-node graph is never drawn whole. Views are capped at 120 nodes by default (250 selectable), and shared prerequisites are not expanded unless focused or the expansion toggle is on. Truncation is always stated."
+  },
+  {
+   "id": "L5",
+   "limitation": "Mermaid rendering verified in a real browser for sample diagrams",
+   "detail": "Rendering under the production CSP was verified in headless Edge for FLOW-PORTREAD (smoke test) and FLOW-BCHCTL00 (screenshot). All 65 committed sources take the same code path and are hash-verified; not every diagram was rendered in a browser. A source that Mermaid cannot render is shown as text with the error."
+  },
+  {
+   "id": "L6",
+   "limitation": "Accessibility verified structurally, not by an automated audit tool",
+   "detail": "Landmarks, labels, keyboard operation, table captions, chart table views and non-colour status encoding are covered by tests and design. No axe or WCAG audit tool was run, and no screen-reader session was recorded."
+  },
+  {
+   "id": "L7",
+   "limitation": "Status colours rely on labels",
+   "detail": "The fixed status palette does not pass categorical colour-vision gates on its own (warning vs serious). Every status therefore also carries an icon and text, and every chart has value labels and a table view."
+  },
+  {
+   "id": "L8",
+   "limitation": "Must be served over HTTP",
+   "detail": "The built dashboard fetches its evidence files, so it must be served (npm run preview or any static server), not opened as a file:// page."
+  },
+  {
+   "id": "L9",
+   "limitation": "Time-dependent values are as recorded",
+   "detail": "The BMad disclosure request expiry is the recorded value; the page also compares it with the viewer's clock and labels that comparison as such."
+  },
+  {
+   "id": "L10",
+   "limitation": "Backup tool does not exclude the dashboard's ignored folders",
+   "detail": "forward/tools/backup.js excludes forward/node_modules, forward/dist and forward/runs, but not forward/dashboard/node_modules, forward/dashboard/dist or forward/dashboard/public/evidence. A backup taken with those present would archive them (dependencies, build output and evidence copies, all reproducible). Tests are unaffected (412/412 with them present). backup.js was not changed in STEP-24."
+  }
+ ],
+ "engineering_limitations_shown_by_the_dashboard": [
+  "legacy runtime equivalence unavailable (no COBOL compiler or captured legacy runs)",
+  "missing source members, paragraphs and copybooks; POSUPDT empty source",
+  "DB2 and CICS runtime dependencies",
+  "external platform services and legacy environment definitions",
+  "business SME decisions",
+  "BMad authorization and live execution prerequisites",
+  "unverified data layouts and runtime semantics"
+ ],
+ "step25_handover_tasks": [
+  "Done in the STEP-24 finalization commit: forward/dashboard/ (with package-lock.json), forward/reports/step-24/ and forward/reports/STEP-24-DASHBOARD-ASSESSMENT.md.",
+  "Decide where the dashboard is served for the handover audience (local `npm run preview`, or `dist/` on any static host). Confirm whether evidence may leave the local environment.",
+  "Add the dashboard checks (npm ci, npm test, npm run build, npm run smoke) to whichever CI the project adopts.",
+  "Re-run `npm run evidence` and `npm run report` whenever new reports are committed, so the dashboard and the STEP-24 evidence stay aligned.",
+  "Assign named owners to the role-based owners in the ownership matrix, including the 28 OWNER_REVIEW_REQUIRED records. This is a project-owner decision; the evidence names roles only.",
+  "Plan remediation phases A-E from the roadmap page; record dates, budgets and resources outside the evidence. None are assumed.",
+  "Resolve the BMad prerequisites (G2 approval, signed disclosure authorization, provider egress component, runner inside the isolation boundary, F6 receipt) before any governed BMad run.",
+  "Optional hardening: an automated accessibility audit, a browser render check of all 65 Mermaid sources, and a screen-reader pass.",
+  "Decide whether forward/tools/backup.js should also exclude forward/dashboard/(node_modules|dist|public/evidence)/ (limitation L10)."
+ ]
+}

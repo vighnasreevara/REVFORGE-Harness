@@ -1,0 +1,1334 @@
+{
+ "contract": "step-24/metric-validation",
+ "fields": {
+  "primary_metrics[].dashboard": "value computed by the dashboard adapter from detailed records",
+  "primary_metrics[].recorded": "value read directly from the committed report (independent of the adapter)",
+  "cross_checks": "every recount the adapter performs, with the recorded summary it is compared to"
+ },
+ "baseline_commit": "5d33425c19561db0db97dea1096c4029a51fffaf",
+ "primary_metrics": [
+  {
+   "metric": "programs_total",
+   "label": "Total COBOL programs",
+   "dashboard": 42,
+   "recorded": 42,
+   "agrees": true,
+   "source": "forward/reports/step-22/program-reconciliation.json"
+  },
+  {
+   "metric": "programs_java_present",
+   "label": "Java-present programs",
+   "dashboard": 41,
+   "recorded": 41,
+   "agrees": true,
+   "source": "forward/reports/step-22/final-summary.json"
+  },
+  {
+   "metric": "programs_complete",
+   "label": "Complete programs",
+   "dashboard": 2,
+   "recorded": 2,
+   "agrees": true,
+   "source": "forward/reports/step-22/program-reconciliation.json"
+  },
+  {
+   "metric": "programs_partial",
+   "label": "Partial programs",
+   "dashboard": 39,
+   "recorded": 39,
+   "agrees": true,
+   "source": "forward/reports/step-22/program-reconciliation.json"
+  },
+  {
+   "metric": "programs_missing",
+   "label": "Missing programs",
+   "dashboard": 1,
+   "recorded": 1,
+   "agrees": true,
+   "source": "forward/reports/step-22/program-reconciliation.json"
+  },
+  {
+   "metric": "rules_total",
+   "label": "Total business rules",
+   "dashboard": 154,
+   "recorded": 154,
+   "agrees": true,
+   "source": "forward/reports/step-22/business-rule-reconciliation.json"
+  },
+  {
+   "metric": "rules_java_verified",
+   "label": "Source-derived Java-verified rules",
+   "dashboard": 67,
+   "recorded": 67,
+   "agrees": true,
+   "source": "forward/reports/step-22/business-rule-reconciliation.json"
+  },
+  {
+   "metric": "rules_verified_to_gap",
+   "label": "Rules verified up to a downstream gap",
+   "dashboard": 15,
+   "recorded": 15,
+   "agrees": true,
+   "source": "forward/reports/step-22/business-rule-reconciliation.json"
+  },
+  {
+   "metric": "rules_unreachable",
+   "label": "Unreachable rules",
+   "dashboard": 40,
+   "recorded": 40,
+   "agrees": true,
+   "source": "forward/reports/step-22/business-rule-reconciliation.json"
+  },
+  {
+   "metric": "rules_blocked",
+   "label": "Blocked rules",
+   "dashboard": 32,
+   "recorded": 32,
+   "agrees": true,
+   "source": "forward/reports/step-22/business-rule-reconciliation.json"
+  },
+  {
+   "metric": "gaps_open",
+   "label": "Open gap records",
+   "dashboard": 569,
+   "recorded": 569,
+   "agrees": true,
+   "source": "forward/reports/step-23/gap-summary.json"
+  },
+  {
+   "metric": "programs_readiness_pass",
+   "label": "Programs passing readiness",
+   "dashboard": 6,
+   "recorded": 6,
+   "agrees": true,
+   "source": "forward/reports/step-22/final-summary.json"
+  },
+  {
+   "metric": "programs_cobol_equivalent",
+   "label": "Independently established COBOL-equivalent programs",
+   "dashboard": 0,
+   "recorded": 0,
+   "agrees": true,
+   "source": "forward/reports/step-22/program-reconciliation.json"
+  },
+  {
+   "metric": "graph_nodes",
+   "label": "Dependency graph nodes",
+   "dashboard": 705,
+   "recorded": 705,
+   "agrees": true,
+   "source": "forward/reports/step-23/dependency-graph.json"
+  },
+  {
+   "metric": "graph_edges",
+   "label": "Dependency graph edges",
+   "dashboard": 877,
+   "recorded": 877,
+   "agrees": true,
+   "source": "forward/reports/step-23/dependency-graph.json"
+  },
+  {
+   "metric": "graph_hypotheses",
+   "label": "Hypothetical edges",
+   "dashboard": 45,
+   "recorded": 45,
+   "agrees": true,
+   "source": "forward/reports/step-23/dependency-graph.json"
+  },
+  {
+   "metric": "bmad_executed_live",
+   "label": "BMad workflows executed live",
+   "dashboard": 0,
+   "recorded": 0,
+   "agrees": true,
+   "source": "forward/reports/step-22/bmad-governance-status.json"
+  },
+  {
+   "metric": "bmad_blocked",
+   "label": "BMad workflows blocked",
+   "dashboard": 6,
+   "recorded": 6,
+   "agrees": true,
+   "source": "forward/reports/step-22/bmad-governance-status.json"
+  }
+ ],
+ "coverage_metrics": [
+  {
+   "metric": "programs_with_java",
+   "area": "Programs",
+   "measure": "Java present",
+   "evidence_kind": "implemented",
+   "dashboard": "41/42",
+   "recorded": "41/42",
+   "agrees": true,
+   "source": "forward/reports/step-22/program-reconciliation.json"
+  },
+  {
+   "metric": "programs_complete",
+   "area": "Programs",
+   "measure": "Complete under current criteria",
+   "evidence_kind": "verification",
+   "dashboard": "2/42",
+   "recorded": "2/42",
+   "agrees": true,
+   "source": "forward/reports/step-22/program-reconciliation.json"
+  },
+  {
+   "metric": "validation_pass",
+   "area": "Programs",
+   "measure": "Conversion validation passed",
+   "evidence_kind": "test",
+   "dashboard": "41/42",
+   "recorded": "41/42",
+   "agrees": true,
+   "source": "forward/reports/step-22/verification-results.json"
+  },
+  {
+   "metric": "readiness_pass",
+   "area": "Programs",
+   "measure": "Source readiness passed",
+   "evidence_kind": "verification",
+   "dashboard": "6/42",
+   "recorded": "6/42",
+   "agrees": true,
+   "source": "forward/reports/step-22/verification-results.json"
+  },
+  {
+   "metric": "paragraphs_mapped",
+   "area": "Paragraphs",
+   "measure": "Mapped to a Java method",
+   "evidence_kind": "structural",
+   "dashboard": "390/402",
+   "recorded": "390/402",
+   "agrees": true,
+   "source": "forward/reports/step-22/paragraph-reconciliation.json"
+  },
+  {
+   "metric": "paragraphs_test_executed",
+   "area": "Paragraphs",
+   "measure": "Executed by passing tests",
+   "evidence_kind": "test",
+   "dashboard": "95/402",
+   "recorded": "95/402",
+   "agrees": true,
+   "source": "forward/reports/step-22/paragraph-reconciliation.json"
+  },
+  {
+   "metric": "statements_mapped",
+   "area": "Statements",
+   "measure": "Mapped to a Java statement",
+   "evidence_kind": "structural",
+   "dashboard": "1337/1936",
+   "recorded": "1337/1936",
+   "agrees": true,
+   "source": "forward/reports/step-22/statement-reconciliation.json"
+  },
+  {
+   "metric": "statements_at_gaps",
+   "area": "Statements",
+   "measure": "At explicit gap sites",
+   "evidence_kind": "structural",
+   "dashboard": "599/1936",
+   "recorded": "599/1936",
+   "agrees": true,
+   "source": "forward/reports/step-22/statement-reconciliation.json"
+  },
+  {
+   "metric": "statements_test_executed",
+   "area": "Statements",
+   "measure": "Executed by passing tests",
+   "evidence_kind": "test",
+   "dashboard": "414/1936",
+   "recorded": "414/1936",
+   "agrees": true,
+   "source": "forward/reports/step-22/statement-reconciliation.json"
+  },
+  {
+   "metric": "perform_edges_structural",
+   "area": "PERFORM relationships",
+   "measure": "Java target matches",
+   "evidence_kind": "structural",
+   "dashboard": "397/524",
+   "recorded": "397/524",
+   "agrees": true,
+   "source": "forward/reports/step-22/control-flow-reconciliation.json"
+  },
+  {
+   "metric": "branches_structural",
+   "area": "Branches",
+   "measure": "Java condition present",
+   "evidence_kind": "structural",
+   "dashboard": "190/254",
+   "recorded": "190/254",
+   "agrees": true,
+   "source": "forward/reports/step-22/control-flow-reconciliation.json"
+  },
+  {
+   "metric": "loops_structural",
+   "area": "Loops",
+   "measure": "Java loop present",
+   "evidence_kind": "structural",
+   "dashboard": "26/32",
+   "recorded": "26/32",
+   "agrees": true,
+   "source": "forward/reports/step-22/control-flow-reconciliation.json"
+  },
+  {
+   "metric": "fields_consistent",
+   "area": "Fields",
+   "measure": "Identical attributes",
+   "evidence_kind": "structural",
+   "dashboard": "966/1009",
+   "recorded": "966/1009",
+   "agrees": true,
+   "source": "forward/reports/step-22/field-reconciliation.json"
+  },
+  {
+   "metric": "conditions_value_checked",
+   "area": "Fields",
+   "measure": "Level-88 conditions value-checked",
+   "evidence_kind": "test",
+   "dashboard": "257/259",
+   "recorded": "257/259",
+   "agrees": true,
+   "source": "forward/reports/step-22/field-reconciliation.json"
+  },
+  {
+   "metric": "records_represented",
+   "area": "Records",
+   "measure": "Represented in Java",
+   "evidence_kind": "structural",
+   "dashboard": "196/231",
+   "recorded": "196/231",
+   "agrees": true,
+   "source": "forward/reports/step-22/record-reconciliation.json"
+  },
+  {
+   "metric": "copybooks_complete",
+   "area": "Copybooks",
+   "measure": "Complete (of copybooks used by a program)",
+   "evidence_kind": "structural",
+   "dashboard": "19/19",
+   "recorded": "19/19",
+   "agrees": true,
+   "source": "forward/reports/step-22/copybook-reconciliation.json"
+  },
+  {
+   "metric": "diagrams_mappable",
+   "area": "Diagrams",
+   "measure": "Java counterpart to compare",
+   "evidence_kind": "structural",
+   "dashboard": "60/65",
+   "recorded": "60/65",
+   "agrees": true,
+   "source": "forward/reports/step-22/diagram-reconciliation.json"
+  },
+  {
+   "metric": "diagram_process_edges_supported",
+   "area": "Diagrams",
+   "measure": "Process-flow edges supported by Java structure",
+   "evidence_kind": "structural",
+   "dashboard": "639/912",
+   "recorded": "639/912",
+   "agrees": true,
+   "source": "forward/reports/step-22/diagram-reconciliation.json"
+  },
+  {
+   "metric": "jcl_end_to_end_tested",
+   "area": "JCL jobs",
+   "measure": "Passing an end-to-end Java test",
+   "evidence_kind": "test",
+   "dashboard": "3/15",
+   "recorded": "3/15",
+   "agrees": true,
+   "source": "forward/reports/step-22/jcl-reconciliation.json"
+  },
+  {
+   "metric": "rules_source_derived_tested",
+   "area": "Business rules",
+   "measure": "Verified by source-derived tests",
+   "evidence_kind": "verification",
+   "dashboard": "67/154",
+   "recorded": "67/154",
+   "agrees": true,
+   "source": "forward/reports/step-22/business-rule-reconciliation.json"
+  },
+  {
+   "metric": "rules_tested_up_to_gap",
+   "area": "Business rules",
+   "measure": "Verified up to a downstream gap",
+   "evidence_kind": "verification",
+   "dashboard": "15/154",
+   "recorded": "15/154",
+   "agrees": true,
+   "source": "forward/reports/step-22/business-rule-reconciliation.json"
+  },
+  {
+   "metric": "rules_blocked",
+   "area": "Business rules",
+   "measure": "Blocked at a gap site",
+   "evidence_kind": "implemented",
+   "dashboard": "32/154",
+   "recorded": "32/154",
+   "agrees": true,
+   "source": "forward/reports/step-22/business-rule-reconciliation.json"
+  },
+  {
+   "metric": "rules_cobol_equivalent",
+   "area": "Business rules",
+   "measure": "Legacy-execution equivalence evidence",
+   "evidence_kind": "equivalence",
+   "dashboard": "0/154",
+   "recorded": "0/154",
+   "agrees": true,
+   "source": "forward/reports/step-22/business-rule-reconciliation.json"
+  },
+  {
+   "metric": "bmad_workflows_executed",
+   "area": "BMad",
+   "measure": "Bound workflows executed LIVE",
+   "evidence_kind": "verification",
+   "dashboard": "0/6",
+   "recorded": "0/6",
+   "agrees": true,
+   "source": "forward/reports/step-22/bmad-governance-status.json"
+  },
+  {
+   "metric": "programs_cobol_equivalent",
+   "area": "Programs",
+   "measure": "Independently established COBOL-equivalent",
+   "evidence_kind": "equivalence",
+   "dashboard": "0/42",
+   "recorded": "derived",
+   "agrees": true,
+   "source": "forward/reports/step-22/program-reconciliation.json"
+  }
+ ],
+ "cross_checks": {
+  "total": 114,
+  "agree": 114,
+  "disagree": [],
+  "checks": [
+   {
+    "name": "register.total",
+    "dataset": "gapSummary",
+    "expected": 569,
+    "actual": 569,
+    "ok": true,
+    "detail": "gap-summary total and register records"
+   },
+   {
+    "name": "register.by_inventory_category",
+    "dataset": "gapSummary",
+    "expected": 3,
+    "actual": 3,
+    "ok": true,
+    "detail": "gap-summary by_inventory_category equals the recount of register records"
+   },
+   {
+    "name": "register.by_category",
+    "dataset": "gapSummary",
+    "expected": 10,
+    "actual": 10,
+    "ok": true,
+    "detail": "gap-summary by_category equals the recount of register records"
+   },
+   {
+    "name": "register.by_severity",
+    "dataset": "gapSummary",
+    "expected": 4,
+    "actual": 4,
+    "ok": true,
+    "detail": "gap-summary by_severity equals the recount of register records"
+   },
+   {
+    "name": "register.by_priority",
+    "dataset": "gapSummary",
+    "expected": 4,
+    "actual": 4,
+    "ok": true,
+    "detail": "gap-summary by_priority equals the recount of register records"
+   },
+   {
+    "name": "register.by_status",
+    "dataset": "gapSummary",
+    "expected": 1,
+    "actual": 1,
+    "ok": true,
+    "detail": "gap-summary by_status equals the recount of register records"
+   },
+   {
+    "name": "register.by_owner",
+    "dataset": "gapSummary",
+    "expected": 10,
+    "actual": 10,
+    "ok": true,
+    "detail": "gap-summary by_owner equals the recount of register records"
+   },
+   {
+    "name": "register.severity_vs_step22",
+    "dataset": "finalSummary",
+    "expected": 569,
+    "actual": 569,
+    "ok": true,
+    "detail": "STEP-22 final-summary severity counts equal the STEP-23 register"
+   },
+   {
+    "name": "graph.nodes",
+    "dataset": "dependencyGraph",
+    "expected": 705,
+    "actual": 705,
+    "ok": true,
+    "detail": "recorded and counted nodes"
+   },
+   {
+    "name": "graph.edges",
+    "dataset": "dependencyGraph",
+    "expected": 877,
+    "actual": 877,
+    "ok": true,
+    "detail": "recorded and counted edges"
+   },
+   {
+    "name": "graph.EVIDENCED",
+    "dataset": "dependencyGraph",
+    "expected": 794,
+    "actual": 794,
+    "ok": true,
+    "detail": "recorded and counted EVIDENCED edges"
+   },
+   {
+    "name": "graph.EVIDENCED_BY_TEXT",
+    "dataset": "dependencyGraph",
+    "expected": 38,
+    "actual": 38,
+    "ok": true,
+    "detail": "recorded and counted EVIDENCED_BY_TEXT edges"
+   },
+   {
+    "name": "graph.HYPOTHESIS",
+    "dataset": "dependencyGraph",
+    "expected": 45,
+    "actual": 45,
+    "ok": true,
+    "detail": "recorded and counted HYPOTHESIS edges"
+   },
+   {
+    "name": "graph.root_blockers",
+    "dataset": "dependencyGraph",
+    "expected": 215,
+    "actual": 215,
+    "ok": true,
+    "detail": "recorded and listed root blockers"
+   },
+   {
+    "name": "graph.cycles",
+    "dataset": "dependencyGraph",
+    "expected": 0,
+    "actual": 0,
+    "ok": true,
+    "detail": "expected and detected cycles"
+   },
+   {
+    "name": "group.RCG-01.members",
+    "dataset": "rootCauseGroups",
+    "expected": 75,
+    "actual": 75,
+    "ok": true,
+    "detail": "recorded member_count and listed members"
+   },
+   {
+    "name": "group.RCG-02.members",
+    "dataset": "rootCauseGroups",
+    "expected": 44,
+    "actual": 44,
+    "ok": true,
+    "detail": "recorded member_count and listed members"
+   },
+   {
+    "name": "group.RCG-03.members",
+    "dataset": "rootCauseGroups",
+    "expected": 50,
+    "actual": 50,
+    "ok": true,
+    "detail": "recorded member_count and listed members"
+   },
+   {
+    "name": "group.RCG-04.members",
+    "dataset": "rootCauseGroups",
+    "expected": 93,
+    "actual": 93,
+    "ok": true,
+    "detail": "recorded member_count and listed members"
+   },
+   {
+    "name": "group.RCG-05.members",
+    "dataset": "rootCauseGroups",
+    "expected": 121,
+    "actual": 121,
+    "ok": true,
+    "detail": "recorded member_count and listed members"
+   },
+   {
+    "name": "group.RCG-06.members",
+    "dataset": "rootCauseGroups",
+    "expected": 13,
+    "actual": 13,
+    "ok": true,
+    "detail": "recorded member_count and listed members"
+   },
+   {
+    "name": "group.RCG-07.members",
+    "dataset": "rootCauseGroups",
+    "expected": 4,
+    "actual": 4,
+    "ok": true,
+    "detail": "recorded member_count and listed members"
+   },
+   {
+    "name": "group.RCG-08.members",
+    "dataset": "rootCauseGroups",
+    "expected": 12,
+    "actual": 12,
+    "ok": true,
+    "detail": "recorded member_count and listed members"
+   },
+   {
+    "name": "group.RCG-09.members",
+    "dataset": "rootCauseGroups",
+    "expected": 2,
+    "actual": 2,
+    "ok": true,
+    "detail": "recorded member_count and listed members"
+   },
+   {
+    "name": "group.RCG-10.members",
+    "dataset": "rootCauseGroups",
+    "expected": 7,
+    "actual": 7,
+    "ok": true,
+    "detail": "recorded member_count and listed members"
+   },
+   {
+    "name": "group.RCG-11.members",
+    "dataset": "rootCauseGroups",
+    "expected": 2,
+    "actual": 2,
+    "ok": true,
+    "detail": "recorded member_count and listed members"
+   },
+   {
+    "name": "group.RCG-12.members",
+    "dataset": "rootCauseGroups",
+    "expected": 82,
+    "actual": 82,
+    "ok": true,
+    "detail": "recorded member_count and listed members"
+   },
+   {
+    "name": "group.RCG-13.members",
+    "dataset": "rootCauseGroups",
+    "expected": 19,
+    "actual": 19,
+    "ok": true,
+    "detail": "recorded member_count and listed members"
+   },
+   {
+    "name": "group.RCG-14.members",
+    "dataset": "rootCauseGroups",
+    "expected": 2,
+    "actual": 2,
+    "ok": true,
+    "detail": "recorded member_count and listed members"
+   },
+   {
+    "name": "group.RCG-15.members",
+    "dataset": "rootCauseGroups",
+    "expected": 3,
+    "actual": 3,
+    "ok": true,
+    "detail": "recorded member_count and listed members"
+   },
+   {
+    "name": "group.RCG-16.members",
+    "dataset": "rootCauseGroups",
+    "expected": 1,
+    "actual": 1,
+    "ok": true,
+    "detail": "recorded member_count and listed members"
+   },
+   {
+    "name": "group.RCG-17.members",
+    "dataset": "rootCauseGroups",
+    "expected": 27,
+    "actual": 27,
+    "ok": true,
+    "detail": "recorded member_count and listed members"
+   },
+   {
+    "name": "group.RCG-18.members",
+    "dataset": "rootCauseGroups",
+    "expected": 5,
+    "actual": 5,
+    "ok": true,
+    "detail": "recorded member_count and listed members"
+   },
+   {
+    "name": "group.RCG-19.members",
+    "dataset": "rootCauseGroups",
+    "expected": 3,
+    "actual": 3,
+    "ok": true,
+    "detail": "recorded member_count and listed members"
+   },
+   {
+    "name": "group.RCG-20.members",
+    "dataset": "rootCauseGroups",
+    "expected": 1,
+    "actual": 1,
+    "ok": true,
+    "detail": "recorded member_count and listed members"
+   },
+   {
+    "name": "group.RCG-21.members",
+    "dataset": "rootCauseGroups",
+    "expected": 1,
+    "actual": 1,
+    "ok": true,
+    "detail": "recorded member_count and listed members"
+   },
+   {
+    "name": "group.RCG-22.members",
+    "dataset": "rootCauseGroups",
+    "expected": 1,
+    "actual": 1,
+    "ok": true,
+    "detail": "recorded member_count and listed members"
+   },
+   {
+    "name": "group.RCG-23.members",
+    "dataset": "rootCauseGroups",
+    "expected": 1,
+    "actual": 1,
+    "ok": true,
+    "detail": "recorded member_count and listed members"
+   },
+   {
+    "name": "groups.cover_register_once",
+    "dataset": "rootCauseGroups",
+    "expected": 569,
+    "actual": 569,
+    "ok": true,
+    "detail": "register records and group members (each exactly once)"
+   },
+   {
+    "name": "roadmap.A.gaps",
+    "dataset": "roadmap",
+    "expected": 400,
+    "actual": 400,
+    "ok": true,
+    "detail": "phase A recorded gaps and its groups' members"
+   },
+   {
+    "name": "roadmap.B.gaps",
+    "dataset": "roadmap",
+    "expected": 134,
+    "actual": 134,
+    "ok": true,
+    "detail": "phase B recorded gaps and its groups' members"
+   },
+   {
+    "name": "roadmap.C.gaps",
+    "dataset": "roadmap",
+    "expected": 7,
+    "actual": 7,
+    "ok": true,
+    "detail": "phase C recorded gaps and its groups' members"
+   },
+   {
+    "name": "roadmap.D.gaps",
+    "dataset": "roadmap",
+    "expected": 2,
+    "actual": 2,
+    "ok": true,
+    "detail": "phase D recorded gaps and its groups' members"
+   },
+   {
+    "name": "roadmap.E.gaps",
+    "dataset": "roadmap",
+    "expected": 27,
+    "actual": 27,
+    "ok": true,
+    "detail": "phase E recorded gaps and its groups' members"
+   },
+   {
+    "name": "roadmap.unique_members",
+    "dataset": "roadmap",
+    "expected": 569,
+    "actual": 569,
+    "ok": true,
+    "detail": "register records and unique phase members"
+   },
+   {
+    "name": "owner.Business SME",
+    "dataset": "ownershipMatrix",
+    "expected": 108,
+    "actual": 108,
+    "ok": true,
+    "detail": "ownership matrix and register records for Business SME"
+   },
+   {
+    "name": "owner.CICS administrator",
+    "dataset": "ownershipMatrix",
+    "expected": 44,
+    "actual": 44,
+    "ok": true,
+    "detail": "ownership matrix and register records for CICS administrator"
+   },
+   {
+    "name": "owner.COBOL maintainer",
+    "dataset": "ownershipMatrix",
+    "expected": 287,
+    "actual": 287,
+    "ok": true,
+    "detail": "ownership matrix and register records for COBOL maintainer"
+   },
+   {
+    "name": "owner.DB2 administrator",
+    "dataset": "ownershipMatrix",
+    "expected": 75,
+    "actual": 75,
+    "ok": true,
+    "detail": "ownership matrix and register records for DB2 administrator"
+   },
+   {
+    "name": "owner.Data architect",
+    "dataset": "ownershipMatrix",
+    "expected": 4,
+    "actual": 4,
+    "ok": true,
+    "detail": "ownership matrix and register records for Data architect"
+   },
+   {
+    "name": "owner.Java engineering team",
+    "dataset": "ownershipMatrix",
+    "expected": 6,
+    "actual": 6,
+    "ok": true,
+    "detail": "ownership matrix and register records for Java engineering team"
+   },
+   {
+    "name": "owner.OWNER_REVIEW_REQUIRED",
+    "dataset": "ownershipMatrix",
+    "expected": 28,
+    "actual": 28,
+    "ok": true,
+    "detail": "ownership matrix and register records for OWNER_REVIEW_REQUIRED"
+   },
+   {
+    "name": "owner.Platform engineering",
+    "dataset": "ownershipMatrix",
+    "expected": 14,
+    "actual": 14,
+    "ok": true,
+    "detail": "ownership matrix and register records for Platform engineering"
+   },
+   {
+    "name": "owner.QA / independent verification",
+    "dataset": "ownershipMatrix",
+    "expected": 2,
+    "actual": 2,
+    "ok": true,
+    "detail": "ownership matrix and register records for QA / independent verification"
+   },
+   {
+    "name": "owner.Security / authorization approver",
+    "dataset": "ownershipMatrix",
+    "expected": 1,
+    "actual": 1,
+    "ok": true,
+    "detail": "ownership matrix and register records for Security / authorization approver"
+   },
+   {
+    "name": "programs.COMPLETE",
+    "dataset": "programRecon",
+    "expected": 2,
+    "actual": 2,
+    "ok": true,
+    "detail": "recorded and counted COMPLETE programs"
+   },
+   {
+    "name": "programs.PARTIAL",
+    "dataset": "programRecon",
+    "expected": 39,
+    "actual": 39,
+    "ok": true,
+    "detail": "recorded and counted PARTIAL programs"
+   },
+   {
+    "name": "programs.MISSING",
+    "dataset": "programRecon",
+    "expected": 1,
+    "actual": 1,
+    "ok": true,
+    "detail": "recorded and counted MISSING programs"
+   },
+   {
+    "name": "programs.complete_vs_step22",
+    "dataset": "programRecon",
+    "expected": 2,
+    "actual": 2,
+    "ok": true,
+    "detail": "final-summary programs_complete and program records"
+   },
+   {
+    "name": "programs.with_java",
+    "dataset": "programRecon",
+    "expected": 41,
+    "actual": 41,
+    "ok": true,
+    "detail": "final-summary programs_with_java and program records"
+   },
+   {
+    "name": "programs.total",
+    "dataset": "programRecon",
+    "expected": 42,
+    "actual": 42,
+    "ok": true,
+    "detail": "final-summary program total and program records"
+   },
+   {
+    "name": "programs.validation_pass",
+    "dataset": "programRecon",
+    "expected": 41,
+    "actual": 41,
+    "ok": true,
+    "detail": "final-summary validation_pass and program validation exit codes"
+   },
+   {
+    "name": "programs.readiness_pass",
+    "dataset": "programRecon",
+    "expected": 6,
+    "actual": 6,
+    "ok": true,
+    "detail": "final-summary readiness_pass and program readiness"
+   },
+   {
+    "name": "readiness.files",
+    "dataset": "programRecon",
+    "expected": 42,
+    "actual": 42,
+    "ok": true,
+    "detail": "programs and committed readiness results"
+   },
+   {
+    "name": "readiness.files_pass",
+    "dataset": "programRecon",
+    "expected": 6,
+    "actual": 6,
+    "ok": true,
+    "detail": "final-summary readiness_pass and readiness result files"
+   },
+   {
+    "name": "readiness.step23",
+    "dataset": "programRecon",
+    "expected": 6,
+    "actual": 6,
+    "ok": true,
+    "detail": "STEP-23 program-gap-impact readiness_pass and STEP-22 program records"
+   },
+   {
+    "name": "rules.IMPLEMENTED_VERIFIED_TO_GAP",
+    "dataset": "ruleRecon",
+    "expected": 15,
+    "actual": 15,
+    "ok": true,
+    "detail": "recorded and counted IMPLEMENTED_VERIFIED_TO_GAP rules"
+   },
+   {
+    "name": "rules.IMPLEMENTED_NOT_EXERCISED",
+    "dataset": "ruleRecon",
+    "expected": 40,
+    "actual": 40,
+    "ok": true,
+    "detail": "recorded and counted IMPLEMENTED_NOT_EXERCISED rules"
+   },
+   {
+    "name": "rules.BLOCKED",
+    "dataset": "ruleRecon",
+    "expected": 32,
+    "actual": 32,
+    "ok": true,
+    "detail": "recorded and counted BLOCKED rules"
+   },
+   {
+    "name": "rules.IMPLEMENTED_VERIFIED",
+    "dataset": "ruleRecon",
+    "expected": 67,
+    "actual": 67,
+    "ok": true,
+    "detail": "recorded and counted IMPLEMENTED_VERIFIED rules"
+   },
+   {
+    "name": "rules.total",
+    "dataset": "ruleRecon",
+    "expected": 154,
+    "actual": 154,
+    "ok": true,
+    "detail": "final-summary rule total and rule records"
+   },
+   {
+    "name": "rules.verified_vs_step22",
+    "dataset": "ruleRecon",
+    "expected": 67,
+    "actual": 67,
+    "ok": true,
+    "detail": "final-summary verified rules and rule records"
+   },
+   {
+    "name": "rules.to_gap_vs_step22",
+    "dataset": "ruleRecon",
+    "expected": 15,
+    "actual": 15,
+    "ok": true,
+    "detail": "final-summary rules verified to a gap and rule records"
+   },
+   {
+    "name": "rules.blocked_vs_step22",
+    "dataset": "ruleRecon",
+    "expected": 32,
+    "actual": 32,
+    "ok": true,
+    "detail": "final-summary blocked rules and rule records"
+   },
+   {
+    "name": "rules.cobol_equivalent",
+    "dataset": "ruleRecon",
+    "expected": 0,
+    "actual": 0,
+    "ok": true,
+    "detail": "final-summary COBOL-equivalent rules and rule records"
+   },
+   {
+    "name": "rules.with_linked_gaps",
+    "dataset": "ruleRecon",
+    "expected": 130,
+    "actual": 130,
+    "ok": true,
+    "detail": "STEP-23 rules with linked gaps and rule records"
+   },
+   {
+    "name": "paragraphs_mapped.numerator",
+    "dataset": "paragraphRecon",
+    "expected": 390,
+    "actual": 390,
+    "ok": true,
+    "detail": "final-summary paragraphs_mapped numerator and paragraphRecon records"
+   },
+   {
+    "name": "paragraphs_mapped.denominator",
+    "dataset": "paragraphRecon",
+    "expected": 402,
+    "actual": 402,
+    "ok": true,
+    "detail": "final-summary paragraphs_mapped denominator and paragraphRecon records"
+   },
+   {
+    "name": "paragraphs_test_executed.numerator",
+    "dataset": "paragraphRecon",
+    "expected": 95,
+    "actual": 95,
+    "ok": true,
+    "detail": "final-summary paragraphs_test_executed numerator and paragraphRecon records"
+   },
+   {
+    "name": "paragraphs_test_executed.denominator",
+    "dataset": "paragraphRecon",
+    "expected": 402,
+    "actual": 402,
+    "ok": true,
+    "detail": "final-summary paragraphs_test_executed denominator and paragraphRecon records"
+   },
+   {
+    "name": "statements_mapped.numerator",
+    "dataset": "statementRecon",
+    "expected": 1337,
+    "actual": 1337,
+    "ok": true,
+    "detail": "final-summary statements_mapped numerator and statementRecon records"
+   },
+   {
+    "name": "statements_mapped.denominator",
+    "dataset": "statementRecon",
+    "expected": 1936,
+    "actual": 1936,
+    "ok": true,
+    "detail": "final-summary statements_mapped denominator and statementRecon records"
+   },
+   {
+    "name": "statements_test_executed.numerator",
+    "dataset": "statementRecon",
+    "expected": 414,
+    "actual": 414,
+    "ok": true,
+    "detail": "final-summary statements_test_executed numerator and statementRecon records"
+   },
+   {
+    "name": "statements_test_executed.denominator",
+    "dataset": "statementRecon",
+    "expected": 1936,
+    "actual": 1936,
+    "ok": true,
+    "detail": "final-summary statements_test_executed denominator and statementRecon records"
+   },
+   {
+    "name": "statements_at_gaps.numerator",
+    "dataset": "statementRecon",
+    "expected": 599,
+    "actual": 599,
+    "ok": true,
+    "detail": "final-summary statements_at_gaps numerator and statementRecon records"
+   },
+   {
+    "name": "statements_at_gaps.denominator",
+    "dataset": "statementRecon",
+    "expected": 1936,
+    "actual": 1936,
+    "ok": true,
+    "detail": "final-summary statements_at_gaps denominator and statementRecon records"
+   },
+   {
+    "name": "perform_edges_structural.numerator",
+    "dataset": "controlFlowRecon",
+    "expected": 397,
+    "actual": 397,
+    "ok": true,
+    "detail": "final-summary perform_edges_structural numerator and controlFlowRecon records"
+   },
+   {
+    "name": "perform_edges_structural.denominator",
+    "dataset": "controlFlowRecon",
+    "expected": 524,
+    "actual": 524,
+    "ok": true,
+    "detail": "final-summary perform_edges_structural denominator and controlFlowRecon records"
+   },
+   {
+    "name": "branches_structural.numerator",
+    "dataset": "controlFlowRecon",
+    "expected": 190,
+    "actual": 190,
+    "ok": true,
+    "detail": "final-summary branches_structural numerator and controlFlowRecon records"
+   },
+   {
+    "name": "branches_structural.denominator",
+    "dataset": "controlFlowRecon",
+    "expected": 254,
+    "actual": 254,
+    "ok": true,
+    "detail": "final-summary branches_structural denominator and controlFlowRecon records"
+   },
+   {
+    "name": "loops_structural.numerator",
+    "dataset": "controlFlowRecon",
+    "expected": 26,
+    "actual": 26,
+    "ok": true,
+    "detail": "final-summary loops_structural numerator and controlFlowRecon records"
+   },
+   {
+    "name": "loops_structural.denominator",
+    "dataset": "controlFlowRecon",
+    "expected": 32,
+    "actual": 32,
+    "ok": true,
+    "detail": "final-summary loops_structural denominator and controlFlowRecon records"
+   },
+   {
+    "name": "fields_consistent.numerator",
+    "dataset": "fieldRecon",
+    "expected": 966,
+    "actual": 966,
+    "ok": true,
+    "detail": "final-summary fields_consistent numerator and fieldRecon records"
+   },
+   {
+    "name": "fields_consistent.denominator",
+    "dataset": "fieldRecon",
+    "expected": 1009,
+    "actual": 1009,
+    "ok": true,
+    "detail": "final-summary fields_consistent denominator and fieldRecon records"
+   },
+   {
+    "name": "conditions_value_checked.numerator",
+    "dataset": "fieldRecon",
+    "expected": 257,
+    "actual": 257,
+    "ok": true,
+    "detail": "final-summary conditions_value_checked numerator and fieldRecon records"
+   },
+   {
+    "name": "conditions_value_checked.denominator",
+    "dataset": "fieldRecon",
+    "expected": 259,
+    "actual": 259,
+    "ok": true,
+    "detail": "final-summary conditions_value_checked denominator and fieldRecon records"
+   },
+   {
+    "name": "records_represented.numerator",
+    "dataset": "recordRecon",
+    "expected": 196,
+    "actual": 196,
+    "ok": true,
+    "detail": "final-summary records_represented numerator and recordRecon records"
+   },
+   {
+    "name": "records_represented.denominator",
+    "dataset": "recordRecon",
+    "expected": 231,
+    "actual": 231,
+    "ok": true,
+    "detail": "final-summary records_represented denominator and recordRecon records"
+   },
+   {
+    "name": "copybooks_complete.numerator",
+    "dataset": "copybookRecon",
+    "expected": 19,
+    "actual": 19,
+    "ok": true,
+    "detail": "final-summary copybooks_complete numerator and copybookRecon records"
+   },
+   {
+    "name": "copybooks_complete.denominator",
+    "dataset": "copybookRecon",
+    "expected": 19,
+    "actual": 19,
+    "ok": true,
+    "detail": "final-summary copybooks_complete denominator and copybookRecon records"
+   },
+   {
+    "name": "jcl_end_to_end_tested.numerator",
+    "dataset": "jclRecon",
+    "expected": 3,
+    "actual": 3,
+    "ok": true,
+    "detail": "final-summary jcl_end_to_end_tested numerator and jclRecon records"
+   },
+   {
+    "name": "jcl_end_to_end_tested.denominator",
+    "dataset": "jclRecon",
+    "expected": 15,
+    "actual": 15,
+    "ok": true,
+    "detail": "final-summary jcl_end_to_end_tested denominator and jclRecon records"
+   },
+   {
+    "name": "diagrams.total",
+    "dataset": "diagramRecon",
+    "expected": 65,
+    "actual": 65,
+    "ok": true,
+    "detail": "recorded and listed diagrams"
+   },
+   {
+    "name": "diagrams_mappable.numerator",
+    "dataset": "diagramRecon",
+    "expected": 60,
+    "actual": 60,
+    "ok": true,
+    "detail": "final-summary mappable diagrams and diagram records"
+   },
+   {
+    "name": "diagrams.gap_limited",
+    "dataset": "diagramRecon",
+    "expected": 162,
+    "actual": 162,
+    "ok": true,
+    "detail": "recorded and counted gap-limited process-flow edges"
+   },
+   {
+    "name": "diagrams.not_found_in_java",
+    "dataset": "diagramRecon",
+    "expected": 31,
+    "actual": 31,
+    "ok": true,
+    "detail": "recorded and counted process-flow edges without a Java counterpart"
+   },
+   {
+    "name": "diagram_process_edges_supported.numerator",
+    "dataset": "diagramRecon",
+    "expected": 639,
+    "actual": 639,
+    "ok": true,
+    "detail": "final-summary and diagram-reconciliation supported edges"
+   },
+   {
+    "name": "diagrams.mermaid_sources",
+    "dataset": "diagramRecon",
+    "expected": 65,
+    "actual": 65,
+    "ok": true,
+    "detail": "diagram records and committed Mermaid sources"
+   },
+   {
+    "name": "bmad.configured",
+    "dataset": "bmad",
+    "expected": 6,
+    "actual": 6,
+    "ok": true,
+    "detail": "recorded configured workflows and bindings"
+   },
+   {
+    "name": "bmad.executed",
+    "dataset": "bmad",
+    "expected": 0,
+    "actual": 0,
+    "ok": true,
+    "detail": "recorded live executions and governed-run stages with verified receipts"
+   },
+   {
+    "name": "bmad.blocked",
+    "dataset": "bmad",
+    "expected": 6,
+    "actual": 6,
+    "ok": true,
+    "detail": "recorded blocked workflows and governed-run stages"
+   },
+   {
+    "name": "bmad.executed_vs_step22",
+    "dataset": "bmad",
+    "expected": 0,
+    "actual": 0,
+    "ok": true,
+    "detail": "final-summary and bmad-governance-status live executions"
+   },
+   {
+    "name": "testing.validate_runs",
+    "dataset": "verificationResults",
+    "expected": 41,
+    "actual": 41,
+    "ok": true,
+    "detail": "final-summary validation_pass and recorded validate runs"
+   },
+   {
+    "name": "testing.readiness_runs",
+    "dataset": "verificationResults",
+    "expected": 6,
+    "actual": 6,
+    "ok": true,
+    "detail": "final-summary readiness_pass and recorded readiness runs"
+   }
+  ]
+ },
+ "issues": [],
+ "datasets": {
+  "total": 72,
+  "loaded": 72,
+  "sha256_verified": 72,
+  "lazily_loaded_mermaid_sources": 65
+ },
+ "status": "ALL_METRICS_AGREE"
+}

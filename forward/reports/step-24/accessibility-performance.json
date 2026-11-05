@@ -1,0 +1,77 @@
+{
+ "contract": "step-24/accessibility-performance",
+ "accessibility": [
+  {
+   "check": "Landmarks and skip control",
+   "how": "aside navigation, main region, skip-to-content button; focus moves to main on route change",
+   "verified_by": "tests/pages.test.tsx (navigation via role=navigation)"
+  },
+  {
+   "check": "Every control is labelled",
+   "how": "label elements for search, selects and inputs; aria-label on icon buttons",
+   "verified_by": "tests query controls by accessible name (getByLabelText / getByRole name)"
+  },
+  {
+   "check": "Keyboard operation",
+   "how": "all actions are buttons or links; sortable headers are buttons with aria-sort; drawer closes on Escape and restores focus",
+   "verified_by": "tests/pages.test.tsx (keyboard Escape closes the gap drawer)"
+  },
+  {
+   "check": "Status is never colour alone",
+   "how": "every status badge has an icon and a text label; chart bars have axis labels and value labels",
+   "verified_by": "component design; dataviz palette validator (see palette_validation)"
+  },
+  {
+   "check": "Charts have a table view",
+   "how": "every bar chart toggles to a captioned table",
+   "verified_by": "charts.tsx BarList"
+  },
+  {
+   "check": "Graph has a non-visual equivalent",
+   "how": "the edge table lists every edge in the current view with confidence and evidence; selection works from the table",
+   "verified_by": "tests/pages.test.tsx (hypothesis toggle asserted on the edge table)"
+  },
+  {
+   "check": "Tables have captions and scoped headers",
+   "how": "sr-only captions, th scope=col",
+   "verified_by": "tests query tables by caption"
+  },
+  {
+   "check": "Light and dark themes",
+   "how": "system/light/dark switch; Tailwind dark variants; chart fills switch to dark steps",
+   "verified_by": "headless Edge screenshots during STEP-24 (light, dark, 820px tablet)"
+  },
+  {
+   "check": "Reduced motion",
+   "how": "prefers-reduced-motion disables transitions and smooth scrolling",
+   "verified_by": "index.css"
+  }
+ ],
+ "palette_validation": {
+  "tool": "dataviz validate_palette.js",
+  "result": "The fixed status colours (critical #d03b3b, serious #ec835a, warning #fab219, neutral #898781, good #0ca30c) fail the categorical gates (lightness band, chroma, warning-vs-serious separation); this is expected for a status palette.",
+  "mitigation": "Status colours are never the only encoding: each bar is named on its axis, carries its value label and has a table view; each badge carries an icon and text."
+ },
+ "performance": {
+  "evidence_files_eager": 72,
+  "evidence_bytes_total": 6600995,
+  "mermaid_sources_lazy": 65,
+  "lazy_chunks": [
+   "cytoscape (dependency page only)",
+   "mermaid (diagram detail only)"
+  ],
+  "gap_table_page_sizes": [
+   25,
+   50,
+   100,
+   "all (569)"
+  ],
+  "graph": {
+   "nodes": 705,
+   "rendering": "one focused neighbourhood at a time (default depth 2, node cap 120, shared prerequisites not expanded); never the full graph",
+   "default_view_max_nodes_over_all_focus_nodes": 120,
+   "default_view_truncated_focus_nodes": 1
+  },
+  "network": "only same-origin requests for the evidence copies; no telemetry, fonts or CDNs"
+ }
+}

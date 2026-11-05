@@ -1,0 +1,40 @@
+{
+  "contract": "dashboard/evidence-sources",
+  "note": "The only files the dashboard reads. Paths are repository-relative committed artifacts; scripts/sync-evidence.mjs copies them byte-for-byte into public/evidence/ and records their hashes. Nothing here is written back.",
+  "sources": [
+    { "key": "finalSummary", "path": "forward/reports/step-22/final-summary.json", "required": true, "step": "STEP-22" },
+    { "key": "bmadStatus", "path": "forward/reports/step-22/bmad-governance-status.json", "required": true, "step": "STEP-22" },
+    { "key": "programRecon", "path": "forward/reports/step-22/program-reconciliation.json", "required": true, "step": "STEP-22" },
+    { "key": "ruleRecon", "path": "forward/reports/step-22/business-rule-reconciliation.json", "required": true, "step": "STEP-22" },
+    { "key": "diagramRecon", "path": "forward/reports/step-22/diagram-reconciliation.json", "required": true, "step": "STEP-22" },
+    { "key": "paragraphRecon", "path": "forward/reports/step-22/paragraph-reconciliation.json", "required": true, "step": "STEP-22" },
+    { "key": "statementRecon", "path": "forward/reports/step-22/statement-reconciliation.json", "required": true, "step": "STEP-22" },
+    { "key": "controlFlowRecon", "path": "forward/reports/step-22/control-flow-reconciliation.json", "required": true, "step": "STEP-22" },
+    { "key": "fieldRecon", "path": "forward/reports/step-22/field-reconciliation.json", "required": true, "step": "STEP-22" },
+    { "key": "recordRecon", "path": "forward/reports/step-22/record-reconciliation.json", "required": true, "step": "STEP-22" },
+    { "key": "copybookRecon", "path": "forward/reports/step-22/copybook-reconciliation.json", "required": true, "step": "STEP-22" },
+    { "key": "jclRecon", "path": "forward/reports/step-22/jcl-reconciliation.json", "required": true, "step": "STEP-22" },
+    { "key": "dependencyRecon", "path": "forward/reports/step-22/dependency-reconciliation.json", "required": false, "step": "STEP-22" },
+    { "key": "verificationResults", "path": "forward/reports/step-22/verification-results.json", "required": true, "step": "STEP-22" },
+    { "key": "register", "path": "forward/reports/step-23/master-gap-register.json", "required": true, "step": "STEP-23" },
+    { "key": "gapSummary", "path": "forward/reports/step-23/gap-summary.json", "required": true, "step": "STEP-23" },
+    { "key": "dashboardGapSummary", "path": "forward/reports/step-23/dashboard-gap-summary.json", "required": true, "step": "STEP-23" },
+    { "key": "rootCauseGroups", "path": "forward/reports/step-23/root-cause-groups.json", "required": true, "step": "STEP-23" },
+    { "key": "dependencyGraph", "path": "forward/reports/step-23/dependency-graph.json", "required": true, "step": "STEP-23" },
+    { "key": "programGapImpact", "path": "forward/reports/step-23/program-gap-impact.json", "required": true, "step": "STEP-23" },
+    { "key": "ruleGapImpact", "path": "forward/reports/step-23/business-rule-gap-impact.json", "required": true, "step": "STEP-23" },
+    { "key": "diagramGapImpact", "path": "forward/reports/step-23/diagram-gap-impact.json", "required": true, "step": "STEP-23" },
+    { "key": "ownershipMatrix", "path": "forward/reports/step-23/ownership-matrix.json", "required": true, "step": "STEP-23" },
+    { "key": "roadmap", "path": "forward/reports/step-23/remediation-roadmap.json", "required": true, "step": "STEP-23" },
+    { "key": "bmadBlockers", "path": "forward/reports/step-23/bmad-governance-blockers.json", "required": true, "step": "STEP-23" },
+    { "key": "step23Validation", "path": "forward/reports/step-23/validation-results.json", "required": false, "step": "STEP-23" },
+    { "key": "step23Regression", "path": "forward/reports/step-23/regression-runs.jsonl", "required": false, "step": "STEP-23", "format": "jsonl" },
+    { "key": "governedRun", "path": "forward/reports/bmad-end-to-end/portread-governed-run.json", "required": true, "step": "BMAD-E2E" },
+    { "key": "bmadBindings", "path": "forward/integrations/bmad/bindings.json", "required": true, "step": "BMAD" },
+    { "key": "rulesArtifact", "path": "output/rules/rules_artifact.json", "required": false, "step": "REVERSE" }
+  ],
+  "collections": [
+    { "key": "readiness", "dir": "forward/reports/step-22/readiness", "ext": ".json", "required": true, "step": "STEP-22", "load": "eager" },
+    { "key": "diagrams", "dir": "output/diagram/diagrams", "ext": ".mmd", "required": false, "step": "REVERSE", "load": "lazy" }
+  ]
+}

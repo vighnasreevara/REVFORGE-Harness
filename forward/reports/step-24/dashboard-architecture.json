@@ -1,0 +1,97 @@
+{
+ "contract": "step-24/dashboard-architecture",
+ "location": "forward/dashboard/",
+ "stack": {
+  "framework": "React 19 + TypeScript 5.6 (strict)",
+  "build": "Vite 6",
+  "styling": "Tailwind CSS 3 (class-based dark mode)",
+  "charts": "Recharts 3",
+  "icons": "lucide-react",
+  "routing": "React Router 7 (HashRouter: works from any static folder)",
+  "graph": "Cytoscape.js (lazy-loaded)",
+  "diagrams": "Mermaid 11 (lazy-loaded, securityLevel strict)",
+  "tests": "Vitest + Testing Library (jsdom); headless Edge/Chrome smoke test"
+ },
+ "dependencies": {
+  "cytoscape": "3.32.0",
+  "lucide-react": "0.511.0",
+  "mermaid": "11.6.0",
+  "react": "19.1.0",
+  "react-dom": "19.1.0",
+  "react-is": "19.1.0",
+  "react-router-dom": "7.6.2",
+  "recharts": "3.1.0"
+ },
+ "dev_dependencies": {
+  "@testing-library/dom": "10.4.0",
+  "@testing-library/jest-dom": "6.6.3",
+  "@testing-library/react": "16.3.0",
+  "@testing-library/user-event": "14.6.1",
+  "@types/node": "22.10.2",
+  "@types/react": "19.1.6",
+  "@types/react-dom": "19.1.6",
+  "@vitejs/plugin-react": "4.5.2",
+  "autoprefixer": "10.4.21",
+  "jsdom": "26.1.0",
+  "postcss": "8.5.4",
+  "tailwindcss": "3.4.17",
+  "typescript": "5.6.3",
+  "vite": "6.3.5",
+  "vite-node": "3.2.4",
+  "vitest": "3.2.4"
+ },
+ "data_pipeline": [
+  "evidence-sources.json names every committed file the dashboard may read (30 files + readiness/*.json + 65 Mermaid sources)",
+  "scripts/sync-evidence.mjs copies them byte-for-byte into public/evidence/ and writes manifest.json (SHA-256, git blob at HEAD, last commit); only files committed at HEAD are copied",
+  "src/evidence/loader.ts fetches each file, verifies its SHA-256 against the manifest, parses it, and records missing/invalid/mismatched datasets",
+  "src/evidence/model.ts builds typed datasets, recounts every total from detailed records and cross-checks it against recorded summaries; a missing dataset yields null (an \"evidence unavailable\" state), never zero",
+  "pages read only the model; nothing writes back to the repository"
+ ],
+ "layers": {
+  "src/evidence": "contracts (types.ts), guards (check.ts), loader, model builder, React context",
+  "src/lib": "status vocabulary, formatting, table filter/sort/paginate/CSV, graph neighbourhoods, URL-state hooks",
+  "src/components": "layout, UI primitives, charts, controls (table, drawer, filters), graph canvas, Mermaid view",
+  "src/pages": "eleven pages plus evidence validation",
+  "tests": "evidence, missing-data, table, graph and page tests",
+  "scripts": "sync-evidence, evidence-report, smoke"
+ },
+ "security": [
+  "production Content-Security-Policy: default-src self, no inline scripts, no external origins",
+  "no network calls beyond the dashboard origin; no telemetry; no fonts or CDNs",
+  "Mermaid in strict mode without HTML labels",
+  "COBOL source paths shown as text, never fetched (restricted source is not committed)",
+  "CSV export neutralises spreadsheet formulas"
+ ],
+ "build_assets": {
+  "files": 45,
+  "total_bytes": 3317353,
+  "entry_bytes": 379019,
+  "largest": [
+   {
+    "file": "mermaid.core-NPLO37tL.js",
+    "bytes": 451232
+   },
+   {
+    "file": "cytoscape.esm-BQO0qnoA.js",
+    "bytes": 438714
+   },
+   {
+    "file": "index-CE9GAKBV.js",
+    "bytes": 379019
+   },
+   {
+    "file": "radar-MK3ICKWK-CPy2dUWt.js",
+    "bytes": 360927
+   },
+   {
+    "file": "charts-TCQWkYK0.js",
+    "bytes": 338234
+   },
+   {
+    "file": "katex-C5jXJg4s.js",
+    "bytes": 261329
+   }
+  ]
+ },
+ "evidence_bytes": 6600995
+}

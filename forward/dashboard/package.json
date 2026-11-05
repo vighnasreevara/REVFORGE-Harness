@@ -1,0 +1,53 @@
+{
+  "name": "revforge-dashboard",
+  "version": "0.1.0",
+  "private": true,
+  "description": "REVFORGE Modernization Command Center: a read-only dashboard over the committed reverse- and forward-engineering evidence.",
+  "license": "MIT",
+  "author": "Vighnasree Vara",
+  "type": "module",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "evidence": "node scripts/sync-evidence.mjs",
+    "predev": "npm run evidence",
+    "dev": "vite --host 127.0.0.1",
+    "typecheck": "tsc --noEmit -p tsconfig.json",
+    "pretest": "npm run evidence",
+    "test": "vitest run",
+    "prebuild": "npm run evidence",
+    "build": "tsc --noEmit -p tsconfig.json && vite build",
+    "preview": "vite preview --host 127.0.0.1",
+    "smoke": "node scripts/smoke.mjs",
+    "report": "vite-node scripts/evidence-report.ts"
+  },
+  "dependencies": {
+    "cytoscape": "3.32.0",
+    "lucide-react": "0.511.0",
+    "mermaid": "11.6.0",
+    "react": "19.1.0",
+    "react-dom": "19.1.0",
+    "react-is": "19.1.0",
+    "react-router-dom": "7.6.2",
+    "recharts": "3.1.0"
+  },
+  "devDependencies": {
+    "@testing-library/dom": "10.4.0",
+    "@testing-library/jest-dom": "6.6.3",
+    "@testing-library/react": "16.3.0",
+    "@testing-library/user-event": "14.6.1",
+    "@types/node": "22.10.2",
+    "@types/react": "19.1.6",
+    "@types/react-dom": "19.1.6",
+    "@vitejs/plugin-react": "4.5.2",
+    "autoprefixer": "10.4.21",
+    "jsdom": "26.1.0",
+    "postcss": "8.5.4",
+    "tailwindcss": "3.4.17",
+    "typescript": "5.6.3",
+    "vite": "6.3.5",
+    "vite-node": "3.2.4",
+    "vitest": "3.2.4"
+  }
+}

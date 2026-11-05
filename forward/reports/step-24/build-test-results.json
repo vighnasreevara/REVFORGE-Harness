@@ -1,0 +1,182 @@
+{
+ "contract": "step-24/build-test-results",
+ "source": "forward/reports/step-24/regression-runs.jsonl (commands in execution order)",
+ "runs": [
+  {
+   "command": "dashboard: npm run evidence",
+   "exit_code": 0,
+   "result": "evidence: 137 file(s), 6.3 MiB, baseline 5d33425c1956; missing 0, uncommitted 0, modified 0 "
+  },
+  {
+   "command": "dashboard: npm run evidence (second run, determinism)",
+   "exit_code": 0,
+   "result": "evidence: 137 file(s), 6.3 MiB, baseline 5d33425c1956; missing 0, uncommitted 0, modified 0 "
+  },
+  {
+   "command": "dashboard: manifest identical across runs",
+   "exit_code": 0,
+   "result": "byte-identical"
+  },
+  {
+   "command": "dashboard: npm run typecheck",
+   "exit_code": 0,
+   "result": "tsc --noEmit: no errors"
+  },
+  {
+   "command": "dashboard: npm test (vitest)",
+   "exit_code": 0,
+   "result": " Test Files  5 passed (5)       Tests  40 passed (40) "
+  },
+  {
+   "command": "dashboard: npm run build",
+   "exit_code": 0,
+   "result": "✓ built in 15.44s "
+  },
+  {
+   "command": "dashboard: npm run smoke",
+   "exit_code": 0,
+   "result": "smoke: 20/20 passed "
+  },
+  {
+   "command": "dashboard: npm run report",
+   "exit_code": 0,
+   "result": "metric validation: ALL_METRICS_AGREE; 18/18 primary, 114/114 cross-checks "
+  },
+  {
+   "command": "dashboard: npm run report (second run, determinism)",
+   "exit_code": 0,
+   "result": "metric validation: ALL_METRICS_AGREE; 18/18 primary, 114/114 cross-checks "
+  },
+  {
+   "command": "dashboard: STEP-24 reports identical across runs (excluding build-test-results)",
+   "exit_code": 0,
+   "result": "byte-identical"
+  },
+  {
+   "command": "forward: npm run build",
+   "exit_code": 0,
+   "result": "TypeScript build (no errors)"
+  },
+  {
+   "command": "forward: doctor",
+   "exit_code": 0,
+   "result": "doctor: OK; FAIL checks: 0; OK checks: 24 (counted from the command output)"
+  },
+  {
+   "command": "forward: sync-agents --check",
+   "exit_code": 0,
+   "result": "entries not in sync: 0; IN_SYNC entries: 21 (counted from the command output)"
+  },
+  {
+   "command": "forward: bmad doctor",
+   "exit_code": 0,
+   "result": "bmad doctor: OK — bmad-method@6.12.4 staged; not installed in the repository (isolated executor installation: bmad executor doctor) "
+  },
+  {
+   "command": "forward: bmad governance --scope programs:PORTREAD (exit 3 = BMAD_BLOCKED, expected)",
+   "exit_code": 3,
+   "result": "programs:PORTREAD: BMAD_BLOCKED (BMad is mandatory for governed runs) "
+  },
+  {
+   "command": "forward: java RuntimeTests",
+   "exit_code": 0,
+   "result": "SUMMARY|34|0|0 "
+  },
+  {
+   "command": "forward: npm test",
+   "exit_code": 1,
+   "result": "ℹ tests 412 ℹ pass 411 ℹ fail 1 ℹ skipped 0 "
+  },
+  {
+   "command": "git status: entries outside the STEP-24 files",
+   "exit_code": 0,
+   "result": "0 other modified/untracked entries"
+  },
+  {
+   "command": "forward: node --test dist/tests/step15.test.js (isolated rerun of the failing suite)",
+   "exit_code": 0,
+   "result": "tests 6 pass 6 fail 0; SYNVAL01 passed in 1884 ms (real javac -Werror compile and execution). The full-run failure was COMPILATION_FAILED with empty diagnostics after 428002 ms, consistent with the 300 s javac timeout under machine load"
+  },
+  {
+   "command": "forward: npm test (full run 2, sequential)",
+   "exit_code": 0,
+   "result": "ℹ tests 412 ℹ pass 412 ℹ fail 0 ℹ skipped 0 (4075 s)"
+  },
+  {
+   "command": "finalization: dashboard: npm ci",
+   "exit_code": 0,
+   "result": "added 400 packages in 1m  (80 s)"
+  },
+  {
+   "command": "finalization: dashboard: npm run build (evidence + strict typecheck + vite)",
+   "exit_code": 0,
+   "result": "evidence: 137 file(s), 6.3 MiB, baseline 5d33425c1956; missing 0, uncommitted 0, modified 0 ✓ built in 30.69s  (50 s)"
+  },
+  {
+   "command": "finalization: dashboard: npm test",
+   "exit_code": 0,
+   "result": "evidence: 137 file(s), 6.3 MiB, baseline 5d33425c1956; missing 0, uncommitted 0, modified 0  Test Files  5 passed (5)       Tests  40 passed (40)  (19 s)"
+  },
+  {
+   "command": "finalization: dashboard: npm run smoke",
+   "exit_code": 0,
+   "result": "smoke: 20/20 passed  (25 s)"
+  },
+  {
+   "command": "finalization: smoke results identical to the committed smoke-results.json",
+   "exit_code": 0,
+   "result": "byte-identical"
+  },
+  {
+   "command": "finalization: STEP-24 evidence unchanged by revalidation (6 deterministic files)",
+   "exit_code": 0,
+   "result": "byte-identical"
+  },
+  {
+   "command": "finalization: forward: npm run build",
+   "exit_code": 0,
+   "result": "no summary line (22 s)"
+  },
+  {
+   "command": "finalization: forward: doctor",
+   "exit_code": 0,
+   "result": "doctor: OK  (16 s)"
+  },
+  {
+   "command": "finalization: forward: doctor check counts",
+   "exit_code": 0,
+   "result": "FAIL checks: 0; OK checks: 24"
+  },
+  {
+   "command": "finalization: forward: sync-agents --check",
+   "exit_code": 0,
+   "result": "no summary line (1 s)"
+  },
+  {
+   "command": "finalization: forward: sync-agents entry counts",
+   "exit_code": 0,
+   "result": "IN_SYNC: 21; other entries: 0"
+  },
+  {
+   "command": "finalization: forward: bmad doctor",
+   "exit_code": 0,
+   "result": "bmad doctor: OK — bmad-method@6.12.4 staged; not installed in the repository (isolated executor installation: bmad executor doctor)  (8 s)"
+  },
+  {
+   "command": "finalization: forward: bmad governance --scope programs:PORTREAD (exit 3 = BMAD_BLOCKED, expected)",
+   "exit_code": 3,
+   "result": "programs:PORTREAD: BMAD_BLOCKED (BMad is mandatory for governed runs)  (7 s)"
+  },
+  {
+   "command": "finalization: forward: java RuntimeTests",
+   "exit_code": 0,
+   "result": "SUMMARY|34|0|0  (0 s)"
+  },
+  {
+   "command": "finalization: forward: npm test",
+   "exit_code": 0,
+   "result": "ℹ tests 412 ℹ pass 412 ℹ fail 0 ℹ skipped 0  (2546 s)"
+  }
+ ],
+ "smoke": "smoke-results.json"
+}
