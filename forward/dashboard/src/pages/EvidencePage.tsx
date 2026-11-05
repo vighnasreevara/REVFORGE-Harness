@@ -4,6 +4,13 @@ import { SelectFilter } from '../components/controls';
 import { useQuery } from '../lib/hooks';
 import { int, shortSha } from '../lib/format';
 
+const INTEGRITY: Record<string, { tone: 'verified' | 'blocked' | 'neutral'; label: string; hint?: string }> = {
+  verified: { tone: 'verified', label: 'SHA-256 matches' },
+  mismatch: { tone: 'blocked', label: 'SHA-256 mismatch', hint: 'The copy differs from the hash recorded from the committed file; it is not loaded.' },
+  'no-expected-hash': { tone: 'blocked', label: 'no recorded hash', hint: 'The manifest records no SHA-256 for this file; it cannot be verified and is not loaded.' },
+  'not-checked': { tone: 'blocked', label: 'unverifiable', hint: 'Web Crypto was unavailable or the file was absent; nothing unverified is loaded.' },
+};
+
 export default function EvidencePage() {
   const m = useModel();
   const v = m.validation;
@@ -88,8 +95,11 @@ export default function EvidencePage() {
                   <tr key={d.path} className="border-t border-slate-100 dark:border-slate-800">
                     <td className="py-1"><Source path={d.path} /></td>
                     <td className="py-1 text-xs">{d.required ? 'yes' : 'no'}</td>
-                    <td className="py-1"><StatusBadge info={d.status === 'loaded' ? { tone: 'structural', label: 'loaded' } : { tone: 'blocked', label: d.status }} /></td>
-                    <td className="py-1"><StatusBadge info={d.integrity === 'verified' ? { tone: 'verified', label: 'SHA-256 matches' } : d.integrity === 'mismatch' ? { tone: 'blocked', label: 'mismatch' } : { tone: 'neutral', label: 'not checked' }} /></td>
+                    <td className="py-1">
+                      <StatusBadge info={d.status === 'loaded' ? { tone: 'structural', label: 'loaded' } : { tone: 'blocked', label: d.status === 'rejected' ? 'rejected (not loaded)' : d.status }} />
+                      {d.message && d.status !== 'loaded' && <div className="mt-0.5 max-w-xs text-[11px] text-rose-700 dark:text-rose-300">{d.message}</div>}
+                    </td>
+                    <td className="py-1"><StatusBadge info={INTEGRITY[d.integrity]} /></td>
                     <td className="py-1 text-xs">{lc ? <><Code>{shortSha(lc.sha)}</Code> {lc.date.slice(0, 10)}</> : '—'}</td>
                   </tr>
                 );

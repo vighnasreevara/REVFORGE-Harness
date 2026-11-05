@@ -1,0 +1,182 @@
+# REVFORGE CI: the checks that run on a pure Git checkout.
+#
+# What this does NOT do, by design: it has no restricted COBOL source, local run records,
+# generated Java or BMad staging/executor, so source-dependent checks are not run here (they
+# are reported as "not run", never as passed). It makes no external AI or BMad call, mutates
+# no approval or gate, generates no Java and commits nothing. Passing CI does not establish
+# COBOL equivalence, live BMad execution or production readiness.
+name: REVFORGE CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: revforge-ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  forward:
+    name: Forward engineering (pure checkout)
+    runs-on: ubuntu-24.04
+    timeout-minutes: 60
+    defaults:
+      run:
+        working-directory: forward
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: forward/package-lock.json
+      - uses: actions/setup-java@c5195efecf7bdfc987ee8bae7a71cb8b11521c00 # v4.7.1
+        with:
+          distribution: temurin
+          java-version: '21'
+      - run: npm ci
+      - run: npm run build
+      - name: Doctor (warns that no COBOL source is configured, expected here)
+        run: node dist/runtime/src/cli.js doctor
+      - name: Agent and skill synchronisation
+        run: node dist/runtime/src/cli.js sync-agents --check
+      - name: Tests that run on a pure checkout
+        # Selected from a per-file run in a clean checkout without local assets. Left out by design,
+        # because they need the git-ignored BMad staging/executor installation:
+        # bmad-e2e, step6, step7, step8, step21.
+        # Tests inside the selected files that need the COBOL source or generated Java skip themselves.
+        env:
+          REVFORGE_JAVA_HOME: ${{ env.JAVA_HOME }}
+        run: >-
+          node --test --test-reporter=spec
+          dist/tests/git-policy.test.js dist/tests/step1.test.js dist/tests/step2.test.js
+          dist/tests/step3.test.js dist/tests/step35.test.js dist/tests/step4.test.js
+          dist/tests/step45.test.js dist/tests/step5.test.js dist/tests/step55.test.js
+          dist/tests/step9.test.js dist/tests/step10.test.js dist/tests/step11.test.js
+          dist/tests/step12.test.js dist/tests/step13.test.js dist/tests/step14.test.js
+          dist/tests/step15.test.js dist/tests/step16.test.js dist/tests/step17.test.js
+          dist/tests/step20.test.js dist/tests/step25.test.js
+      - name: Hand-written Java runtime library (javac -Werror) and RuntimeTests
+        run: |
+          mkdir -p "$RUNNER_TEMP/rt"
+          git ls-files 'runtime/java/*.java' > "$RUNNER_TEMP/rt-sources.txt"
+          test "$(wc -l < "$RUNNER_TEMP/rt-sources.txt")" -eq 20
+          javac -encoding UTF-8 -Xlint:all -Werror -d "$RUNNER_TEMP/rt" @"$RUNNER_TEMP/rt-sources.txt"
+          java -cp "$RUNNER_TEMP/rt" revforge.cobol.testing.RuntimeTests | tee "$RUNNER_TEMP/rt.txt"
+          grep -q '^SUMMARY|34|0|0$' "$RUNNER_TEMP/rt.txt"
+      - name: Not run in CI (need the developer environment)
+        if: always()
+        run: |
+          {
+            echo "### Forward checks not run in CI, by design"
+            echo "- Full \`npm test\` (BMad suites need the git-ignored staging and executor)"
+            echo "- \`pilot integrate\`, \`pilot validate\`, \`pilot readiness\` (need the COBOL source and generated Java)"
+            echo "- Source-integrity checks against the restricted COBOL source and local run records"
+            echo "These are recorded in forward/reports/step-25/regression-runs.jsonl from the developer environment."
+          } >> "$GITHUB_STEP_SUMMARY"
+
+  dashboard:
+    name: Dashboard
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    defaults:
+      run:
+        working-directory: forward/dashboard
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        with:
+          persist-credentials: false
+          fetch-depth: 0 # the evidence manifest records each file's last commit
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: forward/dashboard/package-lock.json
+      - run: npm ci
+      - name: Copy committed evidence (fails on missing, uncommitted or modified files)
+        run: |
+          npm run evidence | tee "$RUNNER_TEMP/evidence.txt"
+          grep -q 'missing 0, uncommitted 0, modified 0' "$RUNNER_TEMP/evidence.txt"
+      - run: npm run typecheck
+      - name: Frontend tests (integrity, metrics, fail-closed evidence, pages)
+        run: npm test
+      - name: Metric validation (report into a temporary folder; committed STEP-24 evidence untouched)
+        env:
+          REVFORGE_REPORT_OUT: ${{ runner.temp }}/step24-report
+        run: |
+          npx vite-node scripts/evidence-report.ts | tee "$RUNNER_TEMP/report.txt"
+          grep -q 'ALL_METRICS_AGREE' "$RUNNER_TEMP/report.txt"
+      - run: npm run build
+      - name: Browser smoke test (preinstalled Chrome on the runner)
+        env:
+          REVFORGE_SMOKE_BROWSER: /usr/bin/google-chrome
+          REVFORGE_SMOKE_NO_SANDBOX: '1'
+        run: node scripts/smoke.mjs
+
+  integrity:
+    name: Repository and report integrity
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        with:
+          persist-credentials: false
+          fetch-depth: 0
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065 # v5.6.0
+        with:
+          python-version: '3.12'
+      - name: CRLF-bound diagram artifact keeps its recorded bytes
+        run: |
+          f=output/diagram/diagrams_artifact.json
+          test "$(git check-attr text -- "$f" | awk '{print $3}')" = unset
+          test "$(sha256sum "$f" | cut -c1-64)" = bde93ef6400a731726e1c214a363d708ac7bcaeb26f53be9047f37c77d09660e
+          test "$(stat -c %s "$f")" = 790963
+      - name: Restricted source, generated Java and run records are not tracked
+        run: |
+          bad=$(git ls-files | grep -E '^(references/|OpenWiki/|forward/generated/)|(^|/)\.mcp\.json$|settings\.local\.json$|\.class$|^forward/runs/.+' | grep -v '^forward/runs/\.gitkeep$' || true)
+          if [ -n "$bad" ]; then echo "$bad"; exit 1; fi
+      - name: Required handover files exist
+        run: |
+          for f in PROJECT-OVERVIEW ARCHITECTURE REVERSE-ENGINEERING FORWARD-ENGINEERING BMAD-GOVERNANCE SOURCE-TRACEABILITY \
+                   TESTING-AND-VERIFICATION GAP-AND-REMEDIATION-SUMMARY DASHBOARD-OPERATIONS INSTALLATION-AND-RUNBOOK \
+                   SECURITY-AND-AUTHORIZATION KNOWN-LIMITATIONS FINAL-HANDOVER-CHECKLIST; do
+            test -s "forward/handover/$f.md"
+          done
+          test -s forward/handover/HANDOVER-MANIFEST.json
+          test -s forward/reports/STEP-25-FINAL-HANDOVER-ASSESSMENT.md
+      - name: Every tracked JSON and JSONL file parses
+        # Two historical files are known not to be standalone JSON and are accepted only with their exact
+        # committed bytes: an empty STEP-20 capture and a reverse Agent-3 catalogue head fragment.
+        run: |
+          git ls-files -z '*.json' '*.jsonl' | python -c "
+          import hashlib, json, sys
+          KNOWN = {
+              'forward/reports/step-20/readiness-before/CURSMGR.json': 'e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855',
+              'output/data/data_layouts/_catalogue/_head.json': '3f5ce6fda712150b7d09c5245b71f9dc5db03c8b79d2103879a100759b6c471a',
+          }
+          bad = []
+          for p in sys.stdin.read().split('\0'):
+              if not p:
+                  continue
+              if p in KNOWN:
+                  if hashlib.sha256(open(p, 'rb').read()).hexdigest() != KNOWN[p]:
+                      bad.append(f'{p}: known non-JSON file changed')
+                  continue
+              try:
+                  t = open(p, encoding='utf-8-sig').read()
+                  [json.loads(l) for l in t.splitlines() if l.strip()] if p.endswith('.jsonl') else json.loads(t)
+              except Exception as e:
+                  bad.append(f'{p}: {e}')
+          print('\n'.join(bad) or 'all tracked JSON parses')
+          sys.exit(1 if bad else 0)"
+      - name: Gap register, graph, coverage, BMad state and provenance (read-only STEP-25 audit)
+        # Source-, run- and generated-Java-dependent checks report NOT_VERIFIABLE_HERE (not run), never PASS.
+        run: python forward/tools/step25-final.py check --summary "$GITHUB_STEP_SUMMARY"

@@ -375,8 +375,9 @@ export interface DatasetState {
   key: string;
   path: string;
   required: boolean;
-  status: 'loaded' | 'missing' | 'invalid';
-  integrity: 'verified' | 'mismatch' | 'not-checked';
+  /** rejected: present but not verified (hash mismatch, no recorded hash or no Web Crypto); never parsed. */
+  status: 'loaded' | 'missing' | 'invalid' | 'rejected';
+  integrity: 'verified' | 'mismatch' | 'not-checked' | 'no-expected-hash';
   message?: string;
 }
 

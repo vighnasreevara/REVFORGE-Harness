@@ -65,7 +65,9 @@ function browser() {
 function dumpDom(exe, url) {
   const profile = fs.mkdtempSync(path.join(os.tmpdir(), 'revforge-smoke-'));
   try {
-    return execFileSync(exe, ['--headless=new', '--disable-gpu', '--no-first-run', '--no-default-browser-check', '--disable-extensions', `--user-data-dir=${profile}`, '--virtual-time-budget=20000', '--run-all-compositor-stages-before-draw', '--dump-dom', url], { encoding: 'utf8', timeout: 180000, maxBuffer: 64 << 20, stdio: ['ignore', 'pipe', 'ignore'] });
+    // REVFORGE_SMOKE_NO_SANDBOX=1 is for ephemeral CI runners (Ubuntu user-namespace limits); it only ever loads this local build.
+    const sandbox = process.env.REVFORGE_SMOKE_NO_SANDBOX === '1' ? ['--no-sandbox'] : [];
+    return execFileSync(exe, [...sandbox, '--headless=new', '--disable-gpu', '--no-first-run', '--no-default-browser-check', '--disable-extensions', `--user-data-dir=${profile}`, '--virtual-time-budget=20000', '--run-all-compositor-stages-before-draw', '--dump-dom', url], { encoding: 'utf8', timeout: 180000, maxBuffer: 64 << 20, stdio: ['ignore', 'pipe', 'ignore'] });
   } finally {
     fs.rmSync(profile, { recursive: true, force: true });
   }

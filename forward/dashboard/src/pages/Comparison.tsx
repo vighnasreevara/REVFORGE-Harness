@@ -10,7 +10,8 @@ const KINDS = ['structural', 'implemented', 'test', 'verification', 'equivalence
 export default function Comparison() {
   const m = useModel();
   const [q, set] = useQuery({ kind: '' });
-  if (!m.coverage.length) return <Unavailable what="reverse-vs-forward metrics" paths={['forward/reports/step-22/final-summary.json']} />;
+  // The measures come from the STEP-22 final summary: without it (missing or rejected) the page is unavailable.
+  if (!Object.keys(m.summary.ratios).length) return <Unavailable what="reverse-vs-forward metrics" paths={['forward/reports/step-22/final-summary.json']} />;
   const rows = m.coverage.filter((c) => !q.kind || c.kind === q.kind);
   const areas = [...new Set(rows.map((r) => r.area))];
 

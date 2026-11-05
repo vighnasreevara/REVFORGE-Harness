@@ -1,9 +1,10 @@
 // Renders a committed reverse-engineering Mermaid source. Mermaid runs with
 // securityLevel 'strict' (labels sanitised, no click handlers or scripts) and
-// without HTML labels; the raw source is always available beside it.
+// without HTML labels. Only manifest-listed, hash-verified sources are rendered
+// or shown; anything else is refused with its reason.
 import { useEffect, useRef, useState } from 'react';
 import { useEvidence } from '../evidence/EvidenceContext';
-import { loadText } from '../evidence/loader';
+import { loadText, type TextResult } from '../evidence/loader';
 import { isJsdom } from './GraphCanvas';
 import { useDark } from './charts';
 import { Badge } from './ui';
@@ -17,18 +18,26 @@ export function MermaidView({ path }: { path: string }) {
   const ref = useRef<HTMLDivElement>(null);
   const [text, setText] = useState<string | null>(null);
   const [integrity, setIntegrity] = useState<string>('');
-  const [state, setState] = useState<'loading' | 'rendered' | 'source-only' | 'error' | 'missing'>('loading');
+  const [state, setState] = useState<'loading' | 'rendered' | 'source-only' | 'error' | 'refused'>('loading');
   const [error, setError] = useState('');
   const [showSource, setShowSource] = useState(false);
 
   useEffect(() => {
     let alive = true;
     setState('loading');
+    setText(null);
+    setIntegrity('');
+    if (ref.current) ref.current.innerHTML = '';
     if (!manifest) return;
-    loadText(fetcher, manifest, path).catch(() => null).then(async (res) => {
+    loadText(fetcher, manifest, path)
+      .catch((e: unknown): TextResult => ({ ok: false, reason: 'missing', message: e instanceof Error ? e.message : String(e) }))
+      .then(async (res) => {
       if (!alive) return;
-      if (!res) {
-        setState('missing');
+      // Fail closed: unlisted, missing, altered or unverifiable sources are neither rendered nor shown.
+      if (!res.ok) {
+        setError(res.message);
+        setIntegrity(res.integrity ?? '');
+        setState('refused');
         return;
       }
       setText(res.text);
@@ -58,10 +67,14 @@ export function MermaidView({ path }: { path: string }) {
   return (
     <div>
       <div className="mb-2 flex flex-wrap items-center gap-2 text-xs">
-        {integrity && <Badge tone={integrity === 'verified' ? 'verified' : 'partial'}>source {integrity === 'verified' ? 'hash-verified' : integrity}</Badge>}
+        {integrity && <Badge tone={integrity === 'verified' ? 'verified' : 'blocked'}>source {integrity === 'verified' ? 'hash-verified' : integrity}</Badge>}
         {state === 'loading' && <span className="text-slate-500">Rendering…</span>}
         {state === 'error' && <span className="text-rose-700 dark:text-rose-300">Mermaid could not render this source: {error}</span>}
-        {state === 'missing' && <span className="text-rose-700 dark:text-rose-300">The committed Mermaid source is not available.</span>}
+        {state === 'refused' && (
+          <span role="alert" className="text-rose-700 dark:text-rose-300">
+            Diagram unavailable: {error}. Nothing is rendered from unverified evidence.
+          </span>
+        )}
         {text && (
           <button type="button" onClick={() => setShowSource((v) => !v)} aria-pressed={showSource} className="ml-auto rounded-full px-2 py-0.5 font-semibold ring-1 ring-slate-200 hover:bg-slate-50 dark:ring-slate-700 dark:hover:bg-slate-800">
             {showSource ? 'Hide source' : 'Show Mermaid source'}

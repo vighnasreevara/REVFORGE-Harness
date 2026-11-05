@@ -1,5 +1,7 @@
 # STEP-25: Final handover assessment
 
+> **Post-release note (added after release).** STEP-25 was committed and pushed as `e87b1a610a5e10e25bf8836044643e3c4ee27cd3`. Statements below that call the changes *staged* or *not yet committed* describe the state when this assessment was written. Release-time verification is in [§16 Post-Release Verification Addendum](#16-post-release-verification-addendum).
+
 | | |
 |---|---|
 | Baseline | `d2c34094eaa702110fd34205ae58ac716421ffab` (STEP-24), plus the uncommitted STEP-25 changes |
@@ -242,3 +244,41 @@ Every file in §14 is staged by explicit path, and nothing else is staged. Two t
 - **Excluded from the commit:** `forward/dashboard/node_modules`, `dist` and `public/evidence`; run records, generated Java, `references/`, `OpenWiki/` and local settings.
 
 The full record is in `step-25/regression-runs.jsonl` (`repair:` entries) and `step-25/clean-clone-runs.jsonl`.
+
+---
+
+## 16. Post-Release Verification Addendum
+
+*Added after the release. It records verification made against the committed state and does not change any statement above, which reflects the state at assessment time.*
+
+| | |
+|---|---|
+| Commit | `e87b1a610a5e10e25bf8836044643e3c4ee27cd3`, "docs: finalize STEP-25 engineering handover and integrity repair", by Vighnasree Vara |
+| Contents | the 34 files of §14; every committed blob identical to the pre-commit staged record |
+| Push | normal fast-forward `d2c3409..e87b1a6` to `origin/main` (1 ahead, 0 behind; no force) |
+| Remote | `origin/main` = `e87b1a6`; the handover package (14 files), this assessment and the 12 STEP-25 evidence files are present on GitHub |
+
+**Source-integrity repair, as present in the remote:**
+- **The committed artifact:** `output/diagram/diagrams_artifact.json` is 790,963 bytes with CRLF line endings, and its SHA-256 is `bde93ef6400a731726e1c214a363d708ac7bcaeb26f53be9047f37c77d09660e`, matching the recorded hash.
+- **The `.gitattributes` exception:** present (`output/diagram/diagrams_artifact.json -text`).
+- **A fresh clone from GitHub** checks out those exact bytes (`i/crlf w/crlf attr/-text`). In that checkout, 11/11 reverse artifacts match their recorded hashes and all 54 handover-manifest hashes match.
+
+**Regression against the committed state** (developer environment, sequential):
+
+| Check | Result |
+|---|---|
+| G0 baseline integrity (fresh clone of `e87b1a6`, copy of the run attached) | **PASS**: "11 inputs and per-program file sets match the recorded SHA-256 values" |
+| STEP-25 audit | 80/80 in the developer tree; fresh clone 79 pass, 0 fail, 1 not verifiable (generated Java not attached) |
+| Forward `npm test` (clean tree) | **418/418** |
+| Java `RuntimeTests` | 34/34 |
+| Backup and restore tests | 22/22 |
+| `doctor` / `sync-agents --check` / `bmad doctor` | 24 OK, 0 WARN, 0 FAIL / 21 in sync / OK |
+| `bmad governance --scope programs:PORTREAD` | `BMAD_BLOCKED`, exit 3 (expected) |
+| Dashboard | typecheck clean; **40/40** tests; build OK; **20/20** browser smoke checks; 18/18, 25/25 and 114/114 metrics |
+| Working tree at the end of release verification | clean; local `HEAD` = `origin/main` |
+
+**Two interruptions during release verification, both resolved before the push:**
+- **Backup tests, before the commit: 20/22.** The STEP-10 backup tool treats staged changes as committed, so its recovery check failed while files were staged. Once committed, they pass 22/22.
+- **Forward tests, after the commit: one run of 417/418.** A validation step regenerated eight STEP-25 evidence files in place, changing only commit- and time-dependent fields. Those files were restored to their committed versions, and the clean re-run passed 418/418.
+
+**Classifications unchanged:** ENGINEERING_HANDOVER_COMPLETE · CONDITIONAL_ENGINEERING_CLOSURE · NOT_PRODUCTION_READY · LEGACY_EQUIVALENCE_NOT_ESTABLISHED. BMad: BMAD ENFORCEMENT VERIFIED — LIVE EXECUTION BLOCKED. All 569 gap records remain OPEN.

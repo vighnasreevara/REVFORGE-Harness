@@ -60,9 +60,13 @@ async function loadOne(
     check.report(level, `${file.path} could not be loaded (run npm run evidence)`);
     return { state: { ...base, status: 'missing', integrity: 'not-checked', message: 'evidence copy not found' } };
   }
-  const digest = await sha256Hex(bytes);
-  const integrity = digest === null ? 'not-checked' : digest === file.sha256 ? 'verified' : 'mismatch';
-  if (integrity === 'mismatch') check.report('error', `${file.path}: SHA-256 differs from the manifest (copy is stale or altered)`);
+  // Fail closed: bytes are parsed only after their SHA-256 matches the recorded value.
+  const integrity = await verifyBytes(bytes, file.sha256);
+  if (integrity !== 'verified') {
+    const why = REJECTED[integrity];
+    check.report('error', `${file.path}: ${why}; not loaded`);
+    return { state: { ...base, status: 'rejected', integrity, message: why } };
+  }
   try {
     const value = parse(decode(bytes), format);
     return { state: { ...base, status: 'loaded', integrity }, value };
@@ -70,6 +74,27 @@ async function loadOne(
     check.report('error', `${file.path}: not valid ${format.toUpperCase()} (${(e as Error).message})`);
     return { state: { ...base, status: 'invalid', integrity, message: 'unparseable' } };
   }
+}
+
+type Integrity = DatasetState['integrity'];
+
+const REJECTED: Record<Exclude<Integrity, 'verified'>, string> = {
+  mismatch: 'SHA-256 differs from the manifest (copy is stale or altered)',
+  'not-checked': 'SHA-256 could not be computed (Web Crypto unavailable), so the file is unverified',
+  'no-expected-hash': 'the manifest records no SHA-256 for this file, so it cannot be verified',
+};
+
+/** 'verified' only when a recorded hash exists, Web Crypto is available and the digests are equal. */
+export async function verifyBytes(bytes: Uint8Array, expected: string | undefined): Promise<Integrity> {
+  if (!expected || !/^[0-9a-f]{64}$/.test(expected)) return 'no-expected-hash';
+  let digest: string | null = null;
+  try {
+    digest = await sha256Hex(bytes);
+  } catch {
+    digest = null;
+  }
+  if (digest === null) return 'not-checked';
+  return digest === expected ? 'verified' : 'mismatch';
 }
 
 export async function loadBundle(fetcher: Fetcher): Promise<Bundle> {
@@ -122,12 +147,21 @@ export async function loadBundle(fetcher: Fetcher): Promise<Bundle> {
   return bundle;
 }
 
-/** Fetch one committed Mermaid source on demand, with the same integrity check. */
-export async function loadText(fetcher: Fetcher, manifest: Manifest, path: string): Promise<{ text: string; integrity: DatasetState['integrity'] } | null> {
+export type TextResult =
+  | { ok: true; text: string; integrity: 'verified' }
+  | { ok: false; reason: 'unauthorized' | 'missing' | 'rejected'; integrity?: Integrity; message: string };
+
+/**
+ * Fetch one committed Mermaid source on demand. The text is returned only for a path the manifest lists
+ * and only after its SHA-256 is verified; anything else is refused with a reason and no text.
+ */
+export async function loadText(fetcher: Fetcher, manifest: Manifest, path: string): Promise<TextResult> {
   const file = manifest.collections.flatMap((c) => c.files).find((f) => f.path === path);
-  if (!file || file.missing) return null;
+  if (!file) return { ok: false, reason: 'unauthorized', message: `${path} is not listed in the evidence manifest` };
+  if (file.missing) return { ok: false, reason: 'missing', message: `${path} is not present in the repository` };
   const bytes = await fetcher(path);
-  if (!bytes) return null;
-  const digest = await sha256Hex(bytes);
-  return { text: decode(bytes), integrity: digest === null ? 'not-checked' : digest === file.sha256 ? 'verified' : 'mismatch' };
+  if (!bytes) return { ok: false, reason: 'missing', message: `${path} could not be loaded (run npm run evidence)` };
+  const integrity = await verifyBytes(bytes, file.sha256);
+  if (integrity !== 'verified') return { ok: false, reason: 'rejected', integrity, message: `${path}: ${REJECTED[integrity]}` };
+  return { ok: true, text: decode(bytes), integrity };
 }

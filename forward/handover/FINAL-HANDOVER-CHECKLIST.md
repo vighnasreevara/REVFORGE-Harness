@@ -15,7 +15,7 @@ Status values:
 | 3 | Forward engineering and coverage documented | Done | FORWARD-ENGINEERING.md, `reports/step-25/coverage.json` |
 | 4 | BMad governance and blockers documented | Done | BMAD-GOVERNANCE.md, `reports/step-25/bmad-governance.json` |
 | 5 | COBOL sources present and authorization hashes match (83/83, 82/82; INQSET.bms has no recorded hash, disclosed) | Done (environment B) | `reports/step-25/source-integrity.json` |
-| 6 | Reverse artifacts unchanged, also in a fresh checkout | Done: the CRLF-bound hash of `diagrams_artifact.json` was found and corrected (byte-exact, staged); fresh checkout 11/11; G0 PASS | SOURCE-TRACEABILITY.md, TESTING-AND-VERIFICATION.md |
+| 6 | Reverse artifacts unchanged, also in a fresh checkout | Done: the CRLF-bound hash of `diagrams_artifact.json` was found and corrected (byte-exact; staged at assessment time, committed in `e87b1a6`); fresh checkout 11/11; G0 PASS | SOURCE-TRACEABILITY.md, TESTING-AND-VERIFICATION.md |
 | 7 | Rule (154) and statement (1,936) identities unchanged | Done | `source-integrity.json` |
 | 8 | Generated Java unchanged (145 sources); hand-written runtime tracked (20); generated Java ignored | Done | `source-integrity.json`, `repository-integrity.json` |
 | 9 | Master gap register intact (569 OPEN; 15/15 checks) | Done | `reports/step-25/gap-register-validation.json` |
@@ -25,13 +25,13 @@ Status values:
 | 13 | Backup excludes reproducible dashboard output; restore still verified | Done | `tools/backup.js` (policy 2), `tests/step25.test.ts` |
 | 14 | Handover manifest with SHA-256 of every referenced file | Done | HANDOVER-MANIFEST.json |
 | 15 | STEP-25 assessment | Done | `reports/STEP-25-FINAL-HANDOVER-ASSESSMENT.md` |
-| 16 | Commit and push of STEP-25 | **Not done**: files are staged for review. Until committed, the staged correction under `output/` makes doctor warn and 4 protection tests fail in the developer tree, by design | — |
+| 16 | Commit and push of STEP-25 | **Done** (post-release): committed and pushed as `e87b1a6`, a fast-forward. *At assessment time: staged for review.* | Post-Release Verification Addendum below |
 
 ## Owner decisions and external requirements
 
 | # | Item | Status | Who |
 |---|---|---|---|
-| 17 | Review and commit the staged byte-preservation correction (`.gitattributes` `-text` exception + CRLF blob) | Owner | Project owner |
+| 17 | Review and commit the byte-preservation correction (`.gitattributes` `-text` exception + CRLF blob) | **Done** (post-release): in `e87b1a6`; a fresh GitHub checkout reproduces the recorded hash. *At assessment time: staged.* | Project owner |
 | 18 | Name people for the role-based owners; resolve the 28 OWNER_REVIEW_REQUIRED records | Owner | Project owner |
 | 19 | Provide the missing source members, paragraphs and copybooks; correct invalid source (phase A) | Owner | COBOL maintainer / source owner |
 | 20 | Signed business decisions (108 records) | Owner | Business SME |
@@ -45,7 +45,24 @@ Status values:
 
 | Classification | Assigned |
 |---|---|
-| ENGINEERING_HANDOVER_COMPLETE | yes (the integrity finding of item 6 is corrected and verified; the correction awaits commit) |
+| ENGINEERING_HANDOVER_COMPLETE | yes (the integrity finding of item 6 is corrected and verified, and is committed in `e87b1a6`) |
 | CONDITIONAL_ENGINEERING_CLOSURE | yes |
 | NOT_PRODUCTION_READY | yes |
 | LEGACY_EQUIVALENCE_NOT_ESTABLISHED | yes |
+
+## Post-Release Verification Addendum
+
+The status cells above show the **current** state; the original assessment-time state is noted in italics where it differed. Release-time verification against commit `e87b1a6`:
+
+| Check | Result |
+|---|---|
+| Commit and push | `e87b1a6`, 34 files, fast-forward `d2c3409..e87b1a6`, no force |
+| Remote contents | handover package, STEP-25 assessment and evidence present on GitHub |
+| CRLF artifact in a fresh GitHub checkout | SHA-256 `bde93ef6…`, 790,963 bytes, `-text` |
+| G0 in a fresh clone of the commit | PASS |
+| Forward tests (clean tree) / Java runtime / backup and restore | 418/418 / 34/34 / 22/22 |
+| Doctor | 24 OK, 0 WARN, 0 FAIL |
+| Dashboard tests / browser smoke | 40/40 / 20/20 |
+| Working tree after verification | clean |
+
+Details: `forward/reports/STEP-25-FINAL-HANDOVER-ASSESSMENT.md` §16.

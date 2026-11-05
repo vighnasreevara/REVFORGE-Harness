@@ -59,7 +59,15 @@ evidence-sources.json ──► scripts/sync-evidence.mjs ──► public/evide
 ```
 
 - **Only committed evidence.** `evidence-sources.json` lists every file the dashboard may read. The sync script copies a file only if it is committed at `HEAD`. It records the file's SHA-256, its git blob and the commit that last changed it. It flags any working-copy file that differs from `HEAD`.
-- **Integrity at load.** Each file is hashed in the browser and compared with the manifest.
+- **Integrity at load, fail-closed.** Each file is hashed in the browser (Web Crypto) and compared with the manifest *before* it is parsed. A file is loaded only if:
+  - the manifest records a SHA-256 for it;
+  - Web Crypto is available;
+  - the digests match;
+  - and it parses.
+
+  Otherwise it is **rejected**: it never reaches the model, and the Evidence validation page shows the reason (mismatch, no recorded hash, or unverifiable).
+- **Mermaid sources** are fetched only for paths the manifest lists and are rendered only after the same verification. An altered, unlisted or unverifiable diagram is refused, not shown.
+- **What the check proves, and what it does not.** `npm run evidence` produces the manifest locally from the Git checkout. The browser check therefore proves that the served copies are consistent with that manifest. It does not authenticate the manifest, the repository or a deployment. That would need a separate trust mechanism, such as a signed release or a signed manifest, which this project does not have.
 - **Recount and cross-check.** Totals are recomputed from the detailed records (programs, rules, gap records, paragraphs, statements, control flow, fields, records, copybooks, JCL jobs, diagrams, graph edges, roadmap memberships, BMad stages) and compared with the recorded summaries. The **Evidence validation** page lists every check.
 - **No substitution.** If a required file is missing, unparseable or altered, its section shows an *evidence unavailable* state. A value is never replaced with zero or a sample.
 - **No restricted source.** COBOL source paths are shown as text and never fetched, because the restricted checkout in `references/` is not committed. Generated Java (`forward/generated/`) is git-ignored and is referred to by path only.

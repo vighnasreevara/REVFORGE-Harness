@@ -7,6 +7,10 @@ and forward/handover/HANDOVER-MANIFEST.json.
   python forward/tools/step25-final.py snapshot OUT.json   hashes of generated Java, the integration
                                                            copy and the local run records (before/after)
   python forward/tools/step25-final.py audit               writes the STEP-25 evidence and the manifest
+  python forward/tools/step25-final.py manifest            rewrites only forward/handover/HANDOVER-MANIFEST.json
+                                                           (after a handover document changes; STEP-25 evidence untouched)
+  python forward/tools/step25-final.py check [--summary F] writes nothing; exit 1 if any check FAILs (CI);
+                                                           optional Markdown summary (e.g. $GITHUB_STEP_SUMMARY)
 
 Every check states the environment it needs:
   A  pure Git checkout (committed files only)
@@ -102,7 +106,7 @@ def snapshot(dest):
 
 
 # ---------------------------------------------------------------- audit
-def audit():
+def audit(mode='audit', summary=None):
     head = git('rev-parse', 'HEAD')
     results = {}
 
@@ -348,8 +352,9 @@ def audit():
             'run_records_removed': sorted(set(rb) - set(ra)),
         }
     results['regression'] = {'runs': runs, 'local_state_change': change}
-    for name, key in (('repository-integrity.json', 'repository'), ('source-integrity.json', 'source_integrity'), ('coverage.json', 'coverage'), ('gap-register-validation.json', 'gap_register'), ('bmad-governance.json', 'bmad'), ('dashboard-validation.json', 'dashboard'), ('regression-summary.json', 'regression')):
-        write(name, {'contract': f'step-25/{name[:-5]}', 'baseline_commit': head, **results[key]})
+    if mode == 'audit':
+        for name, key in (('repository-integrity.json', 'repository'), ('source-integrity.json', 'source_integrity'), ('coverage.json', 'coverage'), ('gap-register-validation.json', 'gap_register'), ('bmad-governance.json', 'bmad'), ('dashboard-validation.json', 'dashboard'), ('regression-summary.json', 'regression')):
+            write(name, {'contract': f'step-25/{name[:-5]}', 'baseline_commit': head, **results[key]})
 
     # ---- 8. handover manifest ---------------------------------------------------------------------
     refs = ['forward/reports/STEP-20-REMEDIATION-ASSESSMENT.md', 'forward/reports/STEP-21-BMAD-INTEGRATION-ASSESSMENT.md', 'forward/reports/BMAD-END-TO-END-INTEGRATION-ASSESSMENT.md', 'forward/reports/GIT-REGRESSION-STABILIZATION.md', 'forward/reports/STEP-22-FINAL-RECONCILIATION.md', 'forward/reports/STEP-23-MASTER-GAP-REGISTER.md', 'forward/reports/STEP-24-DASHBOARD-ASSESSMENT.md', 'forward/reports/STEP-25-FINAL-HANDOVER-ASSESSMENT.md']
@@ -376,18 +381,31 @@ def audit():
         'validation_results': {'checks': len(all_checks), 'pass': sum(c['status'] == 'PASS' for c in all_checks), 'fail': sum(c['status'] == 'FAIL' for c in all_checks), 'not_verifiable_here': sum(c['status'] == 'NOT_VERIFIABLE_HERE' for c in all_checks), 'regression_runs': len(runs)},
         'outstanding_dependencies': results['bmad']['prerequisites_unresolved'] + ['DB2 runtime and precompiler', 'CICS environment', 'missing COPY/INCLUDE members and paragraphs from the source owner', 'business SME decisions (108 records)', 'legacy COBOL runtime or captured executions for equivalence', 'named owners for role-based ownership (28 OWNER_REVIEW_REQUIRED)'],
     }
-    write('HANDOVER-MANIFEST.json', manifest, HANDOVER)
+    if mode in ('audit', 'manifest'):
+        write('HANDOVER-MANIFEST.json', manifest, HANDOVER)
     fails = [c for c in all_checks if c['status'] == 'FAIL']
-    print(f"audit: {manifest['validation_results']['pass']} pass, {len(fails)} fail, {manifest['validation_results']['not_verifiable_here']} not verifiable here; regression runs {len(runs)}")
+    print(f"{mode}: {manifest['validation_results']['pass']} pass, {len(fails)} fail, {manifest['validation_results']['not_verifiable_here']} not verifiable here; regression runs {len(runs)}")
     for c in fails:
         print('  FAIL', c['id'], c['detail'])
+    if summary:
+        nv = [c for c in all_checks if c['status'] == 'NOT_VERIFIABLE_HERE']
+        lines = ['### REVFORGE integrity checks', '', f"{manifest['validation_results']['pass']} pass, {len(fails)} fail, {len(nv)} not run here by design.", '',
+                 '| Check | Status | Detail |', '|---|---|---|']
+        lines += [f"| {c['id']} | {'NOT RUN (needs the developer environment)' if c['status'] == 'NOT_VERIFIABLE_HERE' else c['status']} | {c['detail'][:160].replace('|', '/')} |" for c in all_checks if c['status'] != 'PASS'] or ['| all | PASS | |']
+        lines += ['', 'These checks do not establish COBOL equivalence, live BMad execution or production readiness.']
+        with open(summary, 'a', encoding='utf8') as f:
+            f.write(chr(10).join(lines) + chr(10))
+    if mode == 'check' and fails:
+        sys.exit(1)
 
 
 if __name__ == '__main__':
     if len(sys.argv) >= 3 and sys.argv[1] == 'snapshot':
         snapshot(sys.argv[2])
-    elif len(sys.argv) == 2 and sys.argv[1] == 'audit':
-        audit()
+    elif len(sys.argv) == 2 and sys.argv[1] in ('audit', 'manifest'):
+        audit(sys.argv[1])
+    elif len(sys.argv) in (2, 4) and sys.argv[1] == 'check' and (len(sys.argv) == 2 or sys.argv[2] == '--summary'):
+        audit('check', sys.argv[3] if len(sys.argv) == 4 else None)
     else:
         print(__doc__)
         sys.exit(2)
