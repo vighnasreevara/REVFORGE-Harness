@@ -1,0 +1,27 @@
+{
+  // Optional VS Code workspace for browsing REVFORGE reports by topic.
+  // Open it with File > Open Workspace from File... It is never loaded automatically.
+  // It hides nothing, changes no runtime behaviour, and affects only the VS Code window that opens it.
+  // Closing the workspace (or opening the repository folder directly) restores the normal view.
+  "folders": [
+    { "name": "REVFORGE-Harness", "path": "../.." },
+    { "name": "Reports by topic", "path": "../reports/by-topic" }
+  ],
+  "settings": {
+    // Historical evidence opens read-only in the editor, to prevent accidental edits.
+    // Files stay visible and searchable. Use "File: Set Active Editor Writeable in Session" for a deliberate edit.
+    // Living reports (APPLICATION-MODERNIZATION-STATUS.md, G2-READINESS-REPORT.md, bmad-*/openai-* reports)
+    // and README.md are not listed, so they stay editable.
+    "files.readonlyInclude": {
+      "forward/reports/step-*/**": true,
+      "forward/reports/bmad-end-to-end/**": true,
+      "forward/reports/git-stabilization/**": true,
+      "forward/reports/reverse-forward/**": true,
+      "forward/reports/STEP-*.md": true,
+      "forward/reports/BMAD-END-TO-END-INTEGRATION-ASSESSMENT.md": true,
+      "forward/reports/GIT-REGRESSION-STABILIZATION.md": true,
+      "forward/reports/REVERSE-FORWARD-RECONCILIATION.md": true,
+      "forward/reports/POST-HANDOVER-QUALITY-REVIEW.md": true
+    }
+  }
+}
