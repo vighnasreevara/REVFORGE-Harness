@@ -32,6 +32,7 @@ The default destination is `~/revforge-backups`; a destination inside the reposi
 
 **Excluded:**
 - `forward/dist`, `forward/node_modules`;
+- the dashboard's reproducible output: `forward/dashboard/node_modules/` (`npm ci`), `forward/dashboard/dist/` (`npm run build`), `forward/dashboard/coverage/` and `forward/dashboard/public/evidence/` (`npm run evidence`). The dashboard source, configuration, `package-lock.json`, tests and scripts are not excluded. This is exclusion policy 2: `inventory.json` records the policy it was created under, and `restore-test` checks an archive only against the rules of that policy, so archives created before policy 2 still verify;
 - `forward/runs` (workflow records, which are sensitive: back these up separately, with permission);
 - report exports under `forward/reports/step-*` and `forward/reports/*.json` (they may quote original COBOL);
 - the provisioned BMad executor (reproducible);

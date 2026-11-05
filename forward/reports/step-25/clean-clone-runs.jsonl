@@ -1,0 +1,29 @@
+{"environment":"A","command":"git clone (short path C:/rfv25)","exit_code":0,"result":"HEAD d2c34094eaa702110fd34205ae58ac716421ffab"}
+{"environment":"A","command":"overlay STEP-25 candidate files","exit_code":0,"result":"28 files"}
+{"environment":"A","command":"local-only assets absent","exit_code":0,"result":"runs=0 generated=absent references=absent node_modules=absent"}
+{"environment":"A","command":"forward: npm ci","exit_code":0,"result":"added 10 packages in 8s  (9 s)"}
+{"environment":"A","command":"forward: npm run build","exit_code":0,"result":"no summary line (17 s)"}
+{"environment":"A","command":"forward: doctor","exit_code":0,"result":"doctor: OK  (5 s)"}
+{"environment":"A","command":"forward: doctor check counts","exit_code":0,"result":"FAIL: 0; WARN: 1; OK: 23"}
+{"environment":"A","command":"forward: sync-agents --check","exit_code":0,"result":"no summary line (1 s)"}
+{"environment":"A","command":"forward: sync-agents counts","exit_code":0,"result":"IN_SYNC: 21; other: 0"}
+{"environment":"A","command":"java: javac -Werror the 20 hand-written runtime files","exit_code":0,"result":"no summary line (2 s)"}
+{"environment":"A","command":"java: RuntimeTests from the hand-written runtime only","exit_code":0,"result":"SUMMARY|34|0|0  (1 s)"}
+{"environment":"A","command":"dashboard: npm ci","exit_code":0,"result":"added 400 packages in 37s  (38 s)"}
+{"environment":"A","command":"dashboard: npm run build","exit_code":0,"result":"evidence: 137 file(s), 6.3 MiB, baseline d2c34094eaa7; missing 0, uncommitted 0, modified 0 ✓ built in 21.73s  (39 s)"}
+{"environment":"A","command":"dashboard: npm test","exit_code":0,"result":" Test Files  5 passed (5)       Tests  40 passed (40)  (14 s)"}
+{"environment":"A","command":"dashboard: npm run smoke","exit_code":0,"result":"smoke: 20/20 passed  (27 s)"}
+{"environment":"A","command":"forward: backup, git-policy tests (step25, git-policy)","exit_code":0,"result":"no summary line (14 s)"}
+{"environment":"A","command":"STEP-25 audit (no COBOL source, no runs, no generated Java)","exit_code":0,"result":"audit: 71 pass, 1 fail, 7 not verifiable here; regression runs 24   FAIL reverse_artifacts_unchanged 10/11 reverse artifacts match the hashes STEP-22 recorded  (3 s)"}
+{"environment":"A","command":"forward: backup and git-policy tests (step25, git-policy) counts","exit_code":0,"result":"# tests 10 # pass 10 # fail 0"}
+{"environment":"A","command":"forward: doctor warning","exit_code":0,"result":"[WARN] cobol_source: original COBOL source not configured (expected in a pure checkout)"}
+{"environment":"A","command":"STEP-25 audit with the committed-blob check added","exit_code":1,"result":"audit: 71 pass, 2 fail, 7 not verifiable here; regression runs 24; the 2 FAIL are one finding: output/diagram/diagrams_artifact.json committed as LF, STEP-22 hash recorded from a CRLF working copy (content identical after CRLF->LF)"}
+{"environment":"A","command":"repair: fresh clone of HEAD d2c3409 (control)","exit_code":1,"result":"diagrams_artifact.json checkout sha256 7154d49b225fadef… (LF) != recorded bde93ef6400a7317…"}
+{"environment":"B","command":"repair: G0 in the control clone with the run attached","exit_code":1,"result":"G0 Baseline integrity: FAIL — stale baseline: output/diagram/diagrams_artifact.json (baseline bde93ef6400a…, now 7154d49b225f…)"}
+{"environment":"A","command":"repair: throwaway repair commit (.gitattributes -text exception + CRLF bytes); staged blobs in the real repository have the same object ids","exit_code":0,"result":"artifact blob d2f6c03f…, .gitattributes blob a9ff4f64…; staged blob sha256 bde93ef6400a7317… = recorded"}
+{"environment":"A","command":"repair: fresh clone of the repaired commit","exit_code":0,"result":"checkout sha256 bde93ef6400a7317… = recorded; git ls-files --eol: i/crlf w/crlf attr/-text; git status clean; only .gitattributes and the artifact differ from d2c3409"}
+{"environment":"B","command":"repair: G0 in the repaired fresh clone with the run attached","exit_code":0,"result":"G0 Baseline integrity: PASS — 11 inputs and per-program file sets match the recorded SHA-256 values"}
+{"environment":"B","command":"repair: STEP-25 audit in the repaired fresh clone (source root configured, run attached, no generated Java)","exit_code":0,"result":"79 pass, 0 fail, 1 not verifiable here (generated Java is local-only); 11/11 reverse artifacts, 83/83 sources, 82/82 authorization hashes, 154 rule IDs, 1936 statement IDs"}
+{"environment":"B","command":"repair: repaired fresh clone (correction committed) + STEP-25 files overlaid + run and generated Java attached, BMad staging/executor NOT attached: npm test","exit_code":1,"result":"418 tests: 399 pass, 18 fail, 1 skipped; every failure in the BMad suites (STEP 6/7/8/21, BMad end-to-end) which need the git-ignored staged release and executor installation"}
+{"environment":"B","command":"repair: same clone with the BMad staging and executor attached (all local-only assets of the developer environment): doctor","exit_code":0,"result":"doctor: OK; FAIL 0, WARN 0, OK 24 (reverse_harness_untouched passes: the correction is committed)"}
+{"environment":"B","command":"repair: same clone: npm test","exit_code":0,"result":"ℹ tests 418 ℹ pass 418 ℹ fail 0 ℹ skipped 0 (237 s)"}

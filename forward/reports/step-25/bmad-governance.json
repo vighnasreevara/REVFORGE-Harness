@@ -1,0 +1,85 @@
+{
+ "contract": "step-25/bmad-governance",
+ "baseline_commit": "d2c34094eaa702110fd34205ae58ac716421ffab",
+ "status": "BMAD ENFORCEMENT VERIFIED — LIVE EXECUTION BLOCKED",
+ "checks": [
+  {
+   "id": "release_pinned_6_12_4",
+   "status": "PASS",
+   "environment": "A",
+   "detail": "bmad-method@6.12.4"
+  },
+  {
+   "id": "six_bindings",
+   "status": "PASS",
+   "environment": "A",
+   "detail": "6 bindings; recorded valid: True"
+  },
+  {
+   "id": "mandatory",
+   "status": "PASS",
+   "environment": "A",
+   "detail": "config bmad_governance.mandatory is true"
+  },
+  {
+   "id": "live_execution_not_requested",
+   "status": "PASS",
+   "environment": "A",
+   "detail": "bindings.json live_execution.requested is false"
+  },
+  {
+   "id": "java_generation_not_authorized",
+   "status": "PASS",
+   "environment": "A",
+   "detail": "config generation.java_generation_allowed is false"
+  },
+  {
+   "id": "no_live_execution",
+   "status": "PASS",
+   "environment": "A",
+   "detail": "0 authorized, 0 executed live, 0 verified receipts"
+  },
+  {
+   "id": "no_receipt_records",
+   "status": "PASS",
+   "environment": "B",
+   "detail": "local BMad records: {'BEL': 3, 'BGR': 4, 'BPF': 13} (no BRC receipt of any mode)"
+  },
+  {
+   "id": "portread_blocked",
+   "status": "PASS",
+   "environment": "A",
+   "detail": "BGR-0004: BMAD-PRD BLOCKED, BMAD-ARCH NOT_ATTEMPTED, BMAD-EPICS NOT_ATTEMPTED, BMAD-SPRINT NOT_ATTEMPTED, BMAD-BUILD NOT_ATTEMPTED, BMAD-REVIEW NOT_ATTEMPTED"
+  },
+  {
+   "id": "f2_accepted_f6_missing",
+   "status": "PASS",
+   "environment": "A",
+   "detail": "F2 ACCEPTED, F6 MISSING"
+  },
+  {
+   "id": "disclosure_request_unsigned",
+   "status": "PASS",
+   "environment": "A",
+   "detail": "ADA-8154d6398d4d: unsigned"
+  }
+ ],
+ "disclosure_request": {
+  "authorization_id": "ADA-8154d6398d4d",
+  "signed": false,
+  "expires_at": "2026-11-06T20:45:24.374Z",
+  "evaluated_at": "2026-11-05T06:32:09+00:00",
+  "expired_at_evaluation": false,
+  "action": "none: not renewed, signed, extended or used"
+ },
+ "prerequisites_unresolved": [
+  "signer trust store (TRUST_NOT_CONFIGURED)",
+  "signed source-disclosure authorization",
+  "G2 approval for the exact scope (417 blocking findings recorded)",
+  "independent F6 receipt",
+  "verified isolated runtime with the runner inside the boundary",
+  "authorized provider network route (egress component)",
+  "live execution enablement (bindings.json live_execution.requested)",
+  "Java generation authorization (generation.java_generation_allowed)"
+ ]
+}

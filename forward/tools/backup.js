@@ -19,7 +19,8 @@
  * reports, BMad pins/metadata, the pinned BMad staging release, isolation launcher, package files) and
  * the forward agent and skill definitions under .claude/. Excluded (code-only backup): build output,
  * node_modules, workflow runs (sensitive records), report exports with source excerpts, the provisioned
- * BMad executor (reproducible), original COBOL, and anything that looks like a secret.
+ * BMad executor (reproducible), the dashboard's reproducible output (node_modules, dist, coverage,
+ * public/evidence; exclusion policy 2), original COBOL, and anything that looks like a secret.
  * Nothing is uploaded anywhere.
  */
 const crypto = require('crypto');
@@ -35,8 +36,15 @@ const sha = (b) => crypto.createHash('sha256').update(b).digest('hex');
 const TAR = process.platform === 'win32' && fs.existsSync(path.join(process.env.SystemRoot || 'C:/Windows', 'System32', 'tar.exe')) ? path.join(process.env.SystemRoot || 'C:/Windows', 'System32', 'tar.exe') : 'tar';
 const git = (args) => execFileSync('git', ['-C', repo, ...args], { encoding: 'utf8', maxBuffer: 64 * 1024 * 1024 });
 
+// [pattern, reason, policy]: the policy version that introduced the rule (absent = 1). Inventories record the
+// policy they were created under, so an archive made before a rule existed still verifies against its own rules.
+const EXCLUDE_POLICY = 2;
 const EXCLUDE = [
   [/^forward\/(dist|node_modules|runs)\//, 'build output, dependencies or workflow records (sensitive; separate backup needed)'],
+  // Dashboard (STEP-24): only its git-ignored, reproducible output. Its source, configuration, lockfile, tests and
+  // scripts are tracked and stay recoverable from the commit (or archived when uncommitted).
+  [/^forward\/dashboard\/(node_modules|dist|coverage)\//, 'dashboard dependencies, build or coverage output (reproducible: npm ci, npm run build, npm test)', 2],
+  [/^forward\/dashboard\/public\/evidence\//, 'dashboard evidence copies of committed reports (reproducible: npm run evidence)', 2],
   [/^forward\/integrations\/bmad\/executor\/(?!\.gitignore$)/, 'provisioned BMad executor (reproducible: see BMAD-INTEGRATION-OPERATIONS.md)'],
   [/^forward\/reports\/step-[^/]+\//, 'machine report exports (may quote original COBOL)'],
   [/^forward\/pilot\/[^/]+\/out\//, 'synthetic pilot build output (reproducible with: pilot run)'],
@@ -46,6 +54,8 @@ const EXCLUDE = [
   [/^references\//, 'original COBOL source (not authorised for this backup)'],
   [/(^|\/)\.env(\.|$)|(^|\/)\.mcp\.json$|settings\.local\.json$/, 'credential or local settings file'],
 ];
+/** Exclusion rules in force under a policy version (inventories without one predate versioning: policy 1). */
+const excludeRules = (policy) => EXCLUDE.filter(([, , since]) => (since ?? 1) <= (policy ?? 1));
 const SECRET = [
   [/-----BEGIN [A-Z ]*PRIVATE KEY-----\s*[A-Za-z0-9+/=\r\n]{40,}/, 'private key block'],
   [/\bsk-(?:ant-|proj-)?[A-Za-z0-9_-]{24,}/, 'API key'],
@@ -155,6 +165,7 @@ function create(dest) {
   const inv = {
     contract: 'forward-backup-inventory',
     contract_version: '1.0',
+    exclusion_policy: EXCLUDE_POLICY,
     created_at: new Date().toISOString(),
     archive: path.basename(archive),
     archive_sha256: sha(fs.readFileSync(archive)),
@@ -291,7 +302,8 @@ function restoreTest(archive, opts) {
   add('no_secrets', !leaks.length, leaks.length ? `secret patterns found in ${leaks.join(', ')}` : 'no private keys, API keys or passwords in the restored files');
   // The archive must not carry an excluded path (a checkout also holds tracked reports, which git restores, not the archive).
   const fromArchive = listEntries(archive).map((e) => e.name.replace(/\\/g, '/').replace(/\/$/, ''));
-  const excludedRestored = fromArchive.filter((n) => EXCLUDE.some(([re]) => re.test(n)));
+  const rules = excludeRules(inv.exclusion_policy);
+  const excludedRestored = fromArchive.filter((n) => rules.some(([re]) => re.test(n)));
   add('no_excluded_paths', !excludedRestored.length, excludedRestored.length ? `excluded paths in the archive: ${excludedRestored.slice(0, 5).join(', ')}` : 'no excluded path was restored from the archive');
   // Separately held local assets (never part of the archive), attached only on request and removed afterwards.
   let cobolRoot = '';
@@ -369,4 +381,4 @@ try {
 }
 
 if (require.main === module) main();
-module.exports = { discover, verify, create, restoreTest, hasSecret, EXCLUDE, SECRET, TAR };
+module.exports = { discover, verify, create, restoreTest, hasSecret, EXCLUDE, EXCLUDE_POLICY, excludeRules, SECRET, TAR };

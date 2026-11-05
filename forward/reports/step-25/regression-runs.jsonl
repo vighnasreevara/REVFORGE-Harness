@@ -1,0 +1,41 @@
+{"command":"snapshot before (generated Java, integration copy, run records)","exit_code":0,"result":"snapshot: generated {'files': 145, 'tree_sha256': 'd31fac9596a2ac75c007195d95ecbf94e82bb4a3863dfee296e2b825f918f0ba'}, run files 469  (11 s)"}
+{"command":"forward: npm run build","exit_code":0,"result":"no summary line (11 s)"}
+{"command":"forward: doctor","exit_code":0,"result":"doctor: OK  (1 s)"}
+{"command":"forward: doctor check counts","exit_code":0,"result":"FAIL checks: 0; OK checks: 24"}
+{"command":"forward: sync-agents --check","exit_code":0,"result":"no summary line (1 s)"}
+{"command":"forward: sync-agents entry counts","exit_code":0,"result":"IN_SYNC: 21; other entries: 0"}
+{"command":"forward: bmad doctor","exit_code":0,"result":"bmad doctor: OK — bmad-method@6.12.4 staged; not installed in the repository (isolated executor installation: bmad executor doctor)  (1 s)"}
+{"command":"forward: bmad governance --scope programs:PORTREAD (exit 3 = BMAD_BLOCKED, expected)","exit_code":3,"result":"programs:PORTREAD: BMAD_BLOCKED (BMad is mandatory for governed runs)  (3 s)"}
+{"command":"forward: pilot integrate","exit_code":0,"result":"integrated 41 program(s), 15 job(s); excluded: POSUPDT (conversion FAILED: the source cannot be converted: missing PROGRAM-ID)   compilation: COMPILED (120 Java files)   runtime unit tests: {\"PASS\":34,\"BLOCKED_AS_EXPECTED\":0,\"FAIL\":0,\"total\":34}   program tests (isolated): {\"PASS\":1388,\"BLOCKED_AS_EXPECTED\":532,\"FAIL\":0,\"total\":1920}; scenarios {\"PASS\":69,\"B (8 s)"}
+{"command":"forward: java RuntimeTests","exit_code":0,"result":"SUMMARY|34|0|0  (0 s)"}
+{"command":"forward: pilot validate --out generated/java/<P> (42 programs)","exit_code":0,"result":"PASS 41/42; FAIL: POSUPDT"}
+{"command":"forward: pilot readiness --program <P> (42 programs)","exit_code":0,"result":"PASS 6/42: PORTADD PORTREAD PORTTEST PORTUPDT PORTVALD PROGNAME"}
+{"command":"forward: npm test","exit_code":1,"result":"ℹ tests 418 ℹ pass 417 ℹ fail 1 ℹ skipped 0  (268 s)"}
+{"command":"snapshot after","exit_code":0,"result":"snapshot: generated {'files': 145, 'tree_sha256': 'd31fac9596a2ac75c007195d95ecbf94e82bb4a3863dfee296e2b825f918f0ba'}, run files 469  (1 s)"}
+{"command":"dashboard: npm run typecheck","exit_code":0,"result":"no summary line (5 s)"}
+{"command":"dashboard: npm test (evidence copy + vitest)","exit_code":0,"result":"evidence: 137 file(s), 6.3 MiB, baseline d2c34094eaa7; missing 0, uncommitted 0, modified 0  Test Files  5 passed (5)       Tests  40 passed (40)  (20 s)"}
+{"command":"dashboard: npm run build","exit_code":0,"result":"evidence: 137 file(s), 6.3 MiB, baseline d2c34094eaa7; missing 0, uncommitted 0, modified 0 ✓ built in 15.35s  (29 s)"}
+{"command":"dashboard: npm run smoke","exit_code":0,"result":"smoke: 20/20 passed  (29 s)"}
+{"command":"dashboard: evidence report into a scratch folder (committed STEP-24 files untouched)","exit_code":0,"result":"metric validation: ALL_METRICS_AGREE; 18/18 primary, 114/114 cross-checks  (3 s)"}
+{"command":"dashboard: regenerated STEP-24 evidence equals the committed files (baseline_commit line excluded)","exit_code":0,"result":"identical: metric-validation, evidence-source-mapping, page-inventory, dashboard-architecture, accessibility-performance"}
+{"command":"git status (after regression)","exit_code":0,"result":"27 entries:  M forward/dashboard/scripts/evidence-report.ts; M forward/docs/PROJECT-RECOVERY-OPERATIONS.md; M forward/tools/backup.js;?? forward/handover/;?? forward/reports/step-25/;?? forward/tests/step25.test.ts;?? forward/tools/step25-final.py;"}
+{"command":"diagnosis: npm test failure above","exit_code":0,"result":"STEP-25 test '1. every tracked dashboard source file is recoverable' assumed every tracked file is listed by blob; forward/dashboard/scripts/evidence-report.ts is tracked AND modified in STEP-25, so backup.js correctly archives it as 'modified'. Test defect, not a tool defect: the assertion now uses tracked-or-archived (the STEP 10 definition of recoverable) and additionally requires archived dashboard files to be modified or new only."}
+{"command":"forward: node --test dist/tests/step25.test.js (after correction)","exit_code":0,"result":"# tests 6 # pass 6 # fail 0 (17 s)"}
+{"command":"forward: npm test (full rerun after the test correction)","exit_code":0,"result":"ℹ tests 418 ℹ pass 418 ℹ fail 0 ℹ skipped 0 (277 s)"}
+{"command":"repair: STEP-25 audit (source integrity, coverage, register, BMad)","exit_code":0,"result":"audit: 80 pass, 0 fail, 0 not verifiable here; regression runs 24  (4 s)"}
+{"command":"repair: snapshot (generated Java unchanged)","exit_code":0,"result":"snapshot: generated {'files': 145, 'tree_sha256': 'd31fac9596a2ac75c007195d95ecbf94e82bb4a3863dfee296e2b825f918f0ba'}, run files 469  (1 s)"}
+{"command":"repair: forward: npm run build","exit_code":0,"result":"no summary line (12 s)"}
+{"command":"repair: forward: doctor","exit_code":0,"result":"doctor: OK  (2 s)"}
+{"command":"repair: forward: doctor check counts","exit_code":0,"result":"FAIL checks: 0; OK checks: 23"}
+{"command":"repair: forward: bmad doctor","exit_code":0,"result":"bmad doctor: OK — bmad-method@6.12.4 staged; not installed in the repository (isolated executor installation: bmad executor doctor)  (2 s)"}
+{"command":"repair: forward: java RuntimeTests","exit_code":0,"result":"SUMMARY|34|0|0  (0 s)"}
+{"command":"repair: forward: backup and restore tests (step25, step10)","exit_code":0,"result":"# tests 22 # pass 22 # fail 0  (58 s)"}
+{"command":"repair: forward: npm test","exit_code":1,"result":"ℹ tests 418 ℹ pass 414 ℹ fail 4 ℹ skipped 0  (262 s)"}
+{"command":"repair: dashboard: npm run typecheck","exit_code":0,"result":"no summary line (6 s)"}
+{"command":"repair: dashboard: npm test (evidence copy + vitest)","exit_code":0,"result":"evidence: 137 file(s), 6.3 MiB, baseline d2c34094eaa7; missing 0, uncommitted 0, modified 0  Test Files  5 passed (5)       Tests  40 passed (40)  (21 s)"}
+{"command":"repair: dashboard: npm run build","exit_code":0,"result":"evidence: 137 file(s), 6.3 MiB, baseline d2c34094eaa7; missing 0, uncommitted 0, modified 0 ✓ built in 19.44s  (34 s)"}
+{"command":"repair: dashboard: npm run smoke","exit_code":0,"result":"smoke: 20/20 passed  (26 s)"}
+{"command":"repair: dashboard: evidence report into a scratch folder","exit_code":0,"result":"metric validation: ALL_METRICS_AGREE; 18/18 primary, 114/114 cross-checks  (3 s)"}
+{"command":"repair: dashboard: regenerated STEP-24 evidence equals the committed files (baseline_commit line excluded)","exit_code":0,"result":"identical"}
+{"command":"repair: STEP-25 audit (final, regenerates the handover manifest)","exit_code":0,"result":"audit: 80 pass, 0 fail, 0 not verifiable here; regression runs 39  (5 s)"}
+{"command":"repair: diagnosis: npm test 414/418 and doctor WARN above","exit_code":0,"result":"All 5 are the reverse-harness protection reacting to the STAGED, uncommitted correction under output/: doctor [WARN] reverse_harness_untouched (output/diagram/diagrams_artifact.json has local changes); step13 '20/22/23/24' and step3 'only the declared ... additions' assert a clean git status for output/; step3 F1/F2 are BLOCKED because G0 reverse_harness_unchanged fails on the uncommitted change. Expected behaviour of the protections; not weakened. They pass once the correction is committed (next entries)."}

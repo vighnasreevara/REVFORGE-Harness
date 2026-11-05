@@ -2,6 +2,7 @@
 // same adapter the dashboard uses. Deterministic: no timestamps or timings; the
 // commands that were run and their results live in regression-runs.jsonl.
 // Usage: npm run report   (after npm run evidence and npm run build)
+// REVFORGE_REPORT_OUT=<dir> writes elsewhere (used to re-check the committed STEP-24 evidence without overwriting it).
 import fs from 'node:fs';
 import path from 'node:path';
 import { createHash } from 'node:crypto';
@@ -13,7 +14,7 @@ import { index, neighbourhood, DEFAULT_VIEW } from '../src/lib/graph';
 const DASH = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const REPO = path.resolve(DASH, '..', '..');
 const EVIDENCE = path.join(DASH, 'public', 'evidence');
-const OUT = path.join(REPO, 'forward', 'reports', 'step-24');
+const OUT = process.env.REVFORGE_REPORT_OUT ? path.resolve(process.env.REVFORGE_REPORT_OUT) : path.join(REPO, 'forward', 'reports', 'step-24');
 const fetcher: Fetcher = async (p) => {
   const f = path.join(EVIDENCE, p);
   return fs.existsSync(f) ? new Uint8Array(fs.readFileSync(f)) : null;

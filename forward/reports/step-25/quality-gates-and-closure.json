@@ -1,0 +1,128 @@
+{
+ "contract": "step-25/quality-gates-and-closure",
+ "baseline_commit": "d2c34094eaa702110fd34205ae58ac716421ffab",
+ "note": "Each gate cites the evidence it rests on. A gate with a recorded finding says so; nothing failing is reported as passed.",
+ "quality_gates": [
+  {
+   "gate": 1,
+   "name": "All relevant source and report references exist",
+   "status": "PASS",
+   "evidence": "forward/handover/HANDOVER-MANIFEST.json: every referenced report, evidence file and handover document has a SHA-256 (none null)"
+  },
+  {
+   "gate": 2,
+   "name": "All permanent IDs remain unchanged",
+   "status": "PASS",
+   "evidence": "step-25/source-integrity.json: statement_identities 1936/1936 unique and traced; business_rule_identities identical across reverse, STEP-17, STEP-22, STEP-23",
+   "finding": "Found and corrected: output/diagram/diagrams_artifact.json was committed as LF while bde93ef6400a7317... (STEP-22, run baseline manifest) is of its CRLF bytes. LF->CRLF of the committed blob reproduces the recorded hash exactly; the staged correction (.gitattributes -text for this one file, CRLF blob) makes a fresh checkout match and G0 pass. No ID affected; no recorded hash changed."
+  },
+  {
+   "gate": 3,
+   "name": "All 154 business rules remain traceable",
+   "status": "PASS",
+   "evidence": "step-25/coverage.json business_rules.total 154; step-22/business-rule-reconciliation.json carries COBOL file:line, Java file:line and scenarios for each"
+  },
+  {
+   "gate": 4,
+   "name": "The 569 OPEN gap records remain intact",
+   "status": "PASS",
+   "evidence": "step-25/gap-register-validation.json: 15/15 checks pass"
+  },
+  {
+   "gate": 5,
+   "name": "All ownership assignments remain evidence-backed",
+   "status": "PASS",
+   "evidence": "every record has a role from step-23/ownership-matrix.json; 28 OWNER_REVIEW_REQUIRED; no person named"
+  },
+  {
+   "gate": 6,
+   "name": "BMad remains mandatory",
+   "status": "PASS",
+   "evidence": "step-25/bmad-governance.json check mandatory"
+  },
+  {
+   "gate": 7,
+   "name": "No fake live BMad receipts exist",
+   "status": "PASS",
+   "evidence": "local BMad records BEL 3, BGR 4, BPF 13, no BRC; metrics executed_live 0, verified_receipts 0"
+  },
+  {
+   "gate": 8,
+   "name": "Java generation remains authorization-controlled",
+   "status": "PASS",
+   "evidence": "generation.java_generation_allowed false; new local authorizations refused BMAD_BLOCKED without BMad evidence; 145 generated sources unchanged (no regeneration)"
+  },
+  {
+   "gate": 9,
+   "name": "The dashboard has no fabricated metrics",
+   "status": "PASS",
+   "evidence": "regression: 18/18 primary, 25/25 coverage, 114/114 cross-checks; 137 evidence files hash-verified"
+  },
+  {
+   "gate": 10,
+   "name": "All required documentation is present",
+   "status": "PASS",
+   "evidence": "forward/handover: 13 documents + HANDOVER-MANIFEST.json; forward/reports/STEP-25-FINAL-HANDOVER-ASSESSMENT.md"
+  },
+  {
+   "gate": 11,
+   "name": "Build and regression outcomes are recorded",
+   "status": "PASS",
+   "evidence": "step-25/regression-runs.jsonl (including the first-run failure and its diagnosis) and step-25/clean-clone-runs.jsonl"
+  },
+  {
+   "gate": 12,
+   "name": "Backup and restore remain safe",
+   "status": "PASS",
+   "evidence": "tests/step25.test.ts 6/6 and step10 backup tests pass; exclusion policy 2 keeps policy-1 archives verifiable; secret scan and committed-blob checks unchanged"
+  },
+  {
+   "gate": 13,
+   "name": "No secrets or restricted source are exposed",
+   "status": "PASS",
+   "evidence": "step-25/repository-integrity.json no_forbidden_tracked; backup tracked_secrets []; STEP-25 files scanned before handover"
+  },
+  {
+   "gate": 14,
+   "name": "Handover files accurately identify unresolved dependencies",
+   "status": "PASS",
+   "evidence": "HANDOVER-MANIFEST.json outstanding_dependencies; KNOWN-LIMITATIONS.md; BMAD-GOVERNANCE.md prerequisites"
+  },
+  {
+   "gate": 15,
+   "name": "No production-readiness or equivalence claim is unsupported",
+   "status": "PASS",
+   "evidence": "cobol_equivalent 0/42 programs and 0/154 rules; documents state NOT_PRODUCTION_READY and LEGACY_EQUIVALENCE_NOT_ESTABLISHED"
+  }
+ ],
+ "closure": {
+  "classifications": [
+   {
+    "classification": "ENGINEERING_HANDOVER_COMPLETE",
+    "assigned": true,
+    "basis": "documentation, reports, dashboard, source provenance and the supported reproducibility checks (environments A and B) are complete and recorded; the one integrity finding (CRLF-bound artifact hash) is corrected byte-exactly and verified in a fresh checkout; the correction is staged for commit"
+   },
+   {
+    "classification": "CONDITIONAL_ENGINEERING_CLOSURE",
+    "assigned": true,
+    "basis": "569 OPEN gap records; BMad live execution blocked by 8 prerequisites; external DB2/CICS/platform dependencies; 108 business decisions"
+   },
+   {
+    "classification": "NOT_PRODUCTION_READY",
+    "assigned": true,
+    "basis": "no production replacement criteria exist; 39 PARTIAL and 1 MISSING program; G2-G8 not passed"
+   },
+   {
+    "classification": "LEGACY_EQUIVALENCE_NOT_ESTABLISHED",
+    "assigned": true,
+    "basis": "no COBOL compiler or captured legacy executions; cobol_equivalence NOT_ESTABLISHED for all 42 programs and 154 rules"
+   }
+  ],
+  "not_assigned": [
+   "PRODUCTION_READY",
+   "MIGRATION_COMPLETE",
+   "BMAD_COMPLIANT",
+   "LEGACY_EQUIVALENT"
+  ]
+ }
+}

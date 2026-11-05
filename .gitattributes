@@ -3,3 +3,7 @@
 # evidence files are bound by SHA-256; a CRLF conversion on checkout (Windows
 # core.autocrlf=true) would change their bytes and void those bindings.
 * text=auto eol=lf
+
+# Exception for one SHA-256-bound reverse artifact. Its hash, recorded by the forward baseline manifest
+# and STEP-22 (bde93ef6...), is of its CRLF bytes; keep those exact bytes (no end-of-line conversion).
+output/diagram/diagrams_artifact.json -text
