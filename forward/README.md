@@ -21,7 +21,7 @@ reverse evidence ─▶ G0 baseline ─▶ G1 evidence ─▶ F1/F2 requirements
 | F6 Independent Tester | independent fixtures and legacy-equivalence testing | `fe-independent-fixture-design`, `fe-legacy-java-equivalence` | G6 |
 | F7 Independent Reviewer | adversarial review and end-to-end trace audit | `fe-adversarial-code-review`, `fe-end-to-end-trace-audit` | G7 |
 
-The canonical definitions are in [`agents/`](agents/) and [`skills/`](skills/). Claude Code discovers them through byte-identical copies in `.claude/`. `sync-agents` installs both the forward and the [reverse](../reverse/README.md) definitions there, and `sync-agents --check` (run in CI) fails on drift. `orchestrator/skills.ts` validates every skill's metadata, sections, owner, contracts and write scope.
+The canonical definitions are in [`agents/`](agents/) and [`skills/`](skills/). Claude Code discovers them through byte-identical copies in `.claude/`. Those copies are generated and git-ignored. `npm run setup` (build plus `sync-agents`) installs both the forward and the [reverse](../reverse/README.md) definitions there. `sync-agents --check`, run in CI, fails on a missing, edited or unregistered copy. `orchestrator/skills.ts` validates every skill's metadata, sections, owner, contracts and write scope.
 
 ## 2. TypeScript orchestrator
 
@@ -84,7 +84,7 @@ Status: **enforcement verified; LIVE execution blocked.** No workflow is authori
 - **Dashboard.** [`dashboard/`](dashboard/) is the read-only Modernization Command Center (React, TypeScript, Vite). It loads only committed evidence whose SHA-256 matches its manifest, and recounts and cross-checks every total. It has its own unit tests, a build and a headless browser smoke test.
 - **Tests.** [`tests/`](tests/README.md) holds the `node:test` suites, organized by functionality. In the developer environment every suite runs. CI runs the suites that work on a pure checkout; tests that need the restricted COBOL source or generated Java skip themselves there.
 - **CI.** [`.github/workflows/revforge-ci.yml`](../.github/workflows/revforge-ci.yml) has four jobs:
-  - forward build, doctor, `sync-agents --check`, tests and the Java runtime tests;
+  - forward: `npm run setup` on a fresh checkout, doctor, `sync-agents --check`, tests and the Java runtime tests;
   - dashboard;
   - the synthetic demonstration;
   - repository and report integrity.
@@ -146,7 +146,7 @@ forward/
 
 ```bash
 cd forward
-npm ci && npm run build
+npm ci && npm run setup                              # build + install the .claude/ discovery copies
 node dist/runtime/src/cli.js doctor                  # environment, inputs, .claude/ drift
 node dist/runtime/src/cli.js sync-agents --check     # forward and reverse definitions vs .claude/
 node dist/runtime/src/cli.js validate                # reverse artifacts and cross-references

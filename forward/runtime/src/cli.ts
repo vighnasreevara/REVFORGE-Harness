@@ -6,7 +6,7 @@
  *   plan      discover the system and produce draft planning/readiness outputs
  *   generate  refused in STEP 1 (no Java generation)
  */
-import { MirrorScope, mirrorStatus, syncMirror } from './orchestrator/mirror';
+import { MirrorScope, mirrorStatus, syncMirror, unexpectedDiscoveryEntries } from './orchestrator/mirror';
 import { assertGenerationAllowed, GenerationNotAuthorizedError } from './core/guard';
 import { ConfigError, ContextOptions, loadContext } from './core/config';
 import { runDoctor } from './commands/doctor';
@@ -32,7 +32,7 @@ Commands:
   generate               Refused (Java generation is not authorised)
   agents                 List forward agents, check definitions and skills
   skills                 Validate the fourteen forward skills and their ownership
-  sync-agents [--check] [--scope forward|reverse|all]  Install forward/ and reverse/ agents and skills into .claude/ (--check: report drift)
+  sync-agents [--check] [--scope forward|reverse|all]  Install forward/ and reverse/ agents and skills into the generated .claude/ discovery directories (--check: report drift)
   workflow init          Create the orchestrated workflow for a plan run (evaluates G0)
   workflow status        Show state, gates, packets, receipts and checkpoint
   workflow gate --gate G1|all     Evaluate gates (G2-G4 need verified signed approvals; G5-G8 fail closed)
@@ -216,13 +216,17 @@ export function main(argv: string[], out: (s: string) => void = console.log, err
         const scope = scopeFlag as MirrorScope;
         if (flags['check'] === true) {
           const st = mirrorStatus(ctx, scope);
-          if (json) out(JSON.stringify(st, null, 2));
+          // .claude/agents and .claude/skills are generated: anything there that no registry declares is reported.
+          const unexpected = unexpectedDiscoveryEntries(ctx);
+          if (json) out(JSON.stringify({ ...st, unexpected }, null, 2));
           else {
             for (const e of st.entries) out(`${e.status.padEnd(9)} ${e.side.padEnd(7)} ${e.kind} ${e.name}`);
+            for (const u of unexpected) out(`UNEXPECTED ${u} (not a registered forward or reverse definition)`);
             const n = (side: string, kind: string) => st.entries.filter((e) => e.side === side && e.kind === kind).length;
-            out(`${st.entries.filter((e) => e.status === 'IN_SYNC').length}/${st.entries.length} in sync (forward: ${n('forward', 'agent')} agents, ${n('forward', 'skill')} skills; reverse: ${n('reverse', 'agent')} agents, ${n('reverse', 'skill')} skills)`);
+            out(`${st.entries.filter((e) => e.status === 'IN_SYNC').length}/${st.entries.length} in sync (forward: ${n('forward', 'agent')} agents, ${n('forward', 'skill')} skills; reverse: ${n('reverse', 'agent')} agents, ${n('reverse', 'skill')} skills)${unexpected.length ? `; ${unexpected.length} unexpected` : ''}`);
+            if (st.entries.some((e) => e.status === 'MISSING')) out('the .claude/ discovery copies are generated, not committed: run `npm run setup` (or `sync-agents`) to install them');
           }
-          return st.in_sync ? EXIT.OK : EXIT.CHECK_FAILED;
+          return st.in_sync && !unexpected.length ? EXIT.OK : EXIT.CHECK_FAILED;
         }
         const r = syncMirror(ctx, scope);
         if (json) out(JSON.stringify(r, null, 2));

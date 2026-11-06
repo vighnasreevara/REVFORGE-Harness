@@ -2,7 +2,7 @@
 
 This folder holds the canonical definitions of the seven reverse-engineering agents, `1_inventory_c` to `7_synthesis_c`. Edit them here. The pipeline and its outputs are described in [`../README.md`](../README.md).
 
-Claude Code discovers agents only under `.claude/agents/`, so a byte-identical copy is kept there. After editing a file here, run from `forward/`:
+Claude Code discovers agents only under `.claude/agents/`. That folder is generated and git-ignored: `npm run setup` in `forward/` installs a byte-identical copy there. After editing a file here, run from `forward/`:
 
 ```
 node dist/runtime/src/cli.js sync-agents          # install reverse/ and forward/ definitions into .claude/

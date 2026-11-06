@@ -46,6 +46,18 @@ See [Project status](#project-status).
 - **Engineering quality gates** decide whether a single program can be converted and whether a conversion is what its label says. They never authorize generation.
 - **Governance checkpoints G0–G8** decide what the governed workflow may do, up to human acceptance.
 
+## Setup
+
+After cloning, install the Claude Code discovery copies of the agents and skills. They are generated, not committed:
+
+```bash
+cd forward
+npm ci
+npm run setup     # build, install all 42 definitions into .claude/, verify (works on Windows and Linux)
+```
+
+Claude Code then finds all 14 agents and 28 skills in `.claude/agents/` and `.claude/skills/`. Start or restart Claude Code in the repository root after setup. Requirements: Node.js 20+, plus JDK 21 for the Java and demo steps.
+
 ## Quick demo
 
 ```bash
@@ -85,19 +97,21 @@ forward/                 Forward engineering
   tests/                 test suites
   reports/  handover/    engineering reports and evidence, final handover package
   docs/                  operations guides
-.claude/agents/          Claude Code discovery copies of all 14 agents (installed by sync-agents)
-.claude/skills/          Claude Code discovery copies of all 28 skills (installed by sync-agents)
+.claude/agents/          generated, git-ignored: discovery copies of all 14 agents (npm run setup)
+.claude/skills/          generated, git-ignored: discovery copies of all 28 skills (npm run setup)
 .github/workflows/       CI
 licenses/  LICENSE  THIRD_PARTY_NOTICES.md
 ```
 
-**Where to edit agents and skills.** Edit them only in `reverse/` and `forward/`. Claude Code discovers them only under `.claude/`, so `sync-agents` keeps byte-identical copies there:
+**One source of truth for agents and skills.** The only tracked definitions are in `reverse/agents`, `reverse/skills`, `forward/agents` and `forward/skills`; edit them there. Claude Code discovers agents and skills only under `.claude/`, so `npm run setup` (which runs `sync-agents`) generates byte-identical, git-ignored copies there. They are plain file copies: no symlinks or junctions. After editing a definition, reinstall:
 
 ```bash
-cd forward && npm ci && npm run build
-node dist/runtime/src/cli.js sync-agents           # install all 42 definitions into .claude/
-node dist/runtime/src/cli.js sync-agents --check   # fail on drift (CI runs this)
+cd forward
+node dist/runtime/src/cli.js sync-agents           # reinstall all 42 copies into .claude/
+node dist/runtime/src/cli.js sync-agents --check   # exit 1 on a missing, edited or unregistered copy (CI runs this)
 ```
+
+Only `.claude/agents/` and `.claude/skills/` are ignored; other Claude Code configuration such as `.claude/settings.json` is unaffected. Git cannot see changes in ignored files, so `doctor` and the reverse-harness checks compare the installed copies with their sources instead. An edited, source-less or unregistered copy is still reported as a local change.
 
 **Why `output/` is at the root.** The reverse artifacts keep their original location, because historical evidence pins them by path: the workflow baseline, the source-integrity records, the CI integrity checks and the dashboard evidence. See [reverse/README.md](reverse/README.md#why-the-artifacts-stay-in-output).
 
@@ -186,4 +200,4 @@ All of them work on a pure checkout. Source-dependent checks are reported as not
 ## License
 
 - **This project:** MIT License, © 2026 Vighnasree Vara (see `LICENSE`).
-- **Third-party portions:** the reverse agent and skill definitions (`reverse/agents/`, `reverse/skills/` and their `.claude/` copies) are derived from an Apache-2.0-licensed project and keep that license. See `THIRD_PARTY_NOTICES.md` and `licenses/APACHE-2.0-upstream-harness.txt`.
+- **Third-party portions:** the reverse agent and skill definitions (`reverse/agents/`, `reverse/skills/` and the copies generated from them in `.claude/`) are derived from an Apache-2.0-licensed project and keep that license. See `THIRD_PARTY_NOTICES.md` and `licenses/APACHE-2.0-upstream-harness.txt`.

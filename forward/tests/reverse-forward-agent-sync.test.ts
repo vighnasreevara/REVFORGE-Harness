@@ -4,18 +4,23 @@
  * reverse/agents and reverse/skills hold the seven reverse agents and their
  * fourteen skills; forward/agents and forward/skills hold the seven forward
  * agents and their fourteen skills. Claude Code discovers them only under
- * .claude/, which `sync-agents` keeps byte-identical. These tests check the
- * registries against the files, the repository's own sync state, drift
- * detection and repair in an isolated copy, and that no forward agent may
- * write a reverse definition.
+ * .claude/, where `npm run setup` (sync-agents) installs byte-identical,
+ * git-ignored copies. These tests check the registries against the files,
+ * that the copies are generated rather than committed, the repository's own
+ * installed state, drift detection and repair in an isolated copy, that the
+ * reverse-harness checks still see local changes in the ignored copies, and
+ * that no forward agent may write a reverse definition.
  */
 import assert from 'node:assert/strict';
+import { spawnSync } from 'child_process';
 import * as fs from 'fs';
 import * as os from 'os';
 import * as path from 'path';
 import { after, describe, test } from 'node:test';
 import { AGENTS } from '../runtime/src/orchestrator/agents';
-import { mirrorStatus, syncMirror } from '../runtime/src/orchestrator/mirror';
+import { PROTECTED_PREFIXES } from '../runtime/src/commands/plan';
+import { gitInfo } from '../runtime/src/core/git';
+import { discoveryChanges, mirrorStatus, syncMirror, unexpectedDiscoveryEntries } from '../runtime/src/orchestrator/mirror';
 import { canWrite } from '../runtime/src/orchestrator/permissions';
 import { REVERSE_AGENTS, REVERSE_SKILLS } from '../runtime/src/orchestrator/reverse';
 import { SKILLS } from '../runtime/src/orchestrator/skills';
@@ -82,11 +87,26 @@ describe('reverse and forward agent registries', () => {
 });
 
 describe('sync-agents: .claude/ discovery copies', () => {
-  test('in this repository all 42 forward and reverse definitions match their .claude/ copies', () => {
-    const st = mirrorStatus({ repoRoot: REPO, forwardDir: FORWARD_DIR } as any, 'all');
+  test('the .claude/ copies are generated: git-ignored and untracked, while all 42 canonical definitions are tracked', (t) => {
+    const ls = (...p: string[]) => spawnSync('git', ['-C', REPO, 'ls-files', '--', ...p], { encoding: 'utf8' });
+    const probe = ls('.claude');
+    if (probe.status !== 0) return t.skip('not a git checkout');
+    assert.deepEqual(probe.stdout.split('\n').filter((l) => /^\.claude\/(agents|skills)\//.test(l)), [], 'no discovery copy is committed');
+    const tracked = ls('reverse/agents', 'reverse/skills', 'forward/agents', 'forward/skills').stdout.split('\n');
+    assert.equal(tracked.filter((l) => /^(reverse|forward)\/agents\/[^/]+\.agent\.md$/.test(l)).length, 14);
+    assert.equal(tracked.filter((l) => /^(reverse|forward)\/skills\/[^/]+\/SKILL\.md$/.test(l)).length, 28);
+    const ignored = (p: string) => spawnSync('git', ['-C', REPO, 'check-ignore', '-q', '--no-index', p]).status === 0;
+    assert.ok(ignored('.claude/agents/1_inventory_c.agent.md') && ignored('.claude/skills/fe-sprint-readiness/SKILL.md'));
+    for (const other of ['.claude/settings.json', '.claude/commands/example.md']) assert.equal(ignored(other), false, `${other} must stay trackable`);
+  });
+
+  test('after setup, all 42 forward and reverse definitions are installed in .claude/ and match', () => {
+    const ctx = { repoRoot: REPO, forwardDir: FORWARD_DIR } as any;
+    const st = mirrorStatus(ctx, 'all');
     assert.equal(st.entries.length, 42);
     assert.equal(st.entries.filter((e) => e.side === 'reverse').length, 21);
-    assert.equal(st.in_sync, true, JSON.stringify(st.entries.filter((e) => e.status !== 'IN_SYNC').map((e) => [e.side, e.name, e.status])));
+    assert.equal(st.in_sync, true, `run "npm run setup" to install the .claude/ discovery copies: ${JSON.stringify(st.entries.filter((e) => e.status !== 'IN_SYNC').map((e) => [e.side, e.name, e.status]))}`);
+    assert.deepEqual(unexpectedDiscoveryEntries(ctx), []);
   });
 
   test('drift on either side is detected and repaired only by a sync of that side', () => {
@@ -122,6 +142,38 @@ describe('sync-agents: .claude/ discovery copies', () => {
     assert.deepEqual(st.entries.filter((e) => e.status === 'NO_SOURCE').map((e) => e.name), ['gap-detector']);
     assert.throws(() => syncMirror(ctx, 'all'), /reverse[\\/]skills[\\/]gap-detector is missing/);
     assert.equal(fs.existsSync(path.join(root, '.claude')), false, 'nothing was written');
+  });
+});
+
+describe('local changes in the ignored discovery copies stay visible', () => {
+  test('gitInfo reports edited, source-less and unregistered copies under the protected prefixes; a copy not yet installed is not a change', (t) => {
+    const { root, ctx } = isolatedRoot();
+    fs.copyFileSync(path.join(REPO, '.gitignore'), path.join(root, '.gitignore'));
+    const git = (...a: string[]) => spawnSync('git', ['-C', root, '-c', 'user.name=revforge-test', '-c', 'user.email=revforge-test@example.invalid', ...a], { encoding: 'utf8' });
+    if (git('init', '-q').status !== 0) return t.skip('git unavailable');
+    git('add', '.gitignore', 'forward', 'reverse');
+    if (git('commit', '-q', '-m', 'fixture').status !== 0) return t.skip('cannot commit in a temporary repository');
+    syncMirror(ctx, 'all');
+    assert.equal(git('status', '--porcelain').stdout, '', 'installed copies are ignored by Git');
+    assert.deepEqual(gitInfo(root, PROTECTED_PREFIXES).reverse_paths_changed, []);
+
+    fs.appendFileSync(path.join(root, '.claude', 'agents', '2_parser_c.agent.md'), 'edited');
+    fs.appendFileSync(path.join(root, '.claude', 'skills', 'fe-sprint-readiness', 'SKILL.md'), 'edited');
+    fs.mkdirSync(path.join(root, '.claude', 'skills', 'impostor'));
+    fs.writeFileSync(path.join(root, '.claude', 'skills', 'impostor', 'SKILL.md'), '---\nname: impostor\n---\n');
+    fs.writeFileSync(path.join(root, '.claude', 'agents', 'rogue.agent.md'), 'rogue');
+    fs.rmSync(path.join(root, '.claude', 'agents', '7_synthesis_c.agent.md'));
+    const expected = ['.claude/agents/2_parser_c.agent.md', '.claude/agents/rogue.agent.md', '.claude/skills/fe-sprint-readiness/', '.claude/skills/impostor/'];
+    assert.equal(git('status', '--porcelain').stdout, '', 'Git itself cannot see these changes');
+    assert.deepEqual(discoveryChanges(root), expected);
+    assert.deepEqual(gitInfo(root, PROTECTED_PREFIXES).reverse_paths_changed!.slice().sort(), expected);
+    assert.deepEqual(gitInfo(root, ['output/']).reverse_paths_changed, [], 'only callers protecting .claude/ see them');
+    assert.deepEqual(unexpectedDiscoveryEntries(ctx), ['.claude/agents/rogue.agent.md', '.claude/skills/impostor/']);
+    assert.ok(mirrorStatus(ctx, 'reverse').entries.some((e) => e.name === '7_synthesis_c' && e.status === 'MISSING'), 'a removed copy is reported by sync-agents --check as MISSING');
+
+    // An edit to a canonical definition is a tracked change, as before.
+    fs.appendFileSync(path.join(root, 'reverse', 'agents', '1_inventory_c.agent.md'), 'edited');
+    assert.ok(gitInfo(root, PROTECTED_PREFIXES).reverse_paths_changed!.includes('reverse/agents/1_inventory_c.agent.md'));
   });
 });
 

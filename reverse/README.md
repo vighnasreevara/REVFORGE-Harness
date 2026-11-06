@@ -59,16 +59,21 @@ Key deliverables:
 
 ## Where Claude Code finds the agents: `.claude/`
 
-Claude Code discovers agents and skills only under `.claude/agents/` and `.claude/skills/`. The repository therefore keeps a byte-identical copy of every reverse and forward definition there. **Edit only the canonical copies** (`reverse/agents`, `reverse/skills`, `forward/agents`, `forward/skills`), then reinstall and check:
+Claude Code discovers agents and skills only under `.claude/agents/` and `.claude/skills/`. Those folders are **generated and git-ignored**. The tracked definitions are in `reverse/agents`, `reverse/skills`, `forward/agents` and `forward/skills`, and you edit only those. After cloning, install the copies:
 
 ```bash
-cd forward && npm ci && npm run build
+cd forward && npm ci && npm run setup     # build + sync-agents + sync-agents --check
+```
+
+After editing a definition, reinstall and check:
+
+```bash
 node dist/runtime/src/cli.js sync-agents                    # install forward/ and reverse/ definitions into .claude/
 node dist/runtime/src/cli.js sync-agents --check            # report drift (exit 1 if any); CI runs this
 node dist/runtime/src/cli.js sync-agents --scope reverse    # only the reverse side
 ```
 
-`doctor` reports reverse and forward drift separately (`reverse_agents_mirror`, `forward_agents_mirror`). The agent definitions refer to their skills by their Claude Code path, `.claude/skills/<name>/SKILL.md`. That is where Claude Code loads them, so those references are unchanged. No forward agent may write anything under `reverse/`.
+`doctor` reports reverse and forward drift separately (`reverse_agents_mirror`, `forward_agents_mirror`). `sync-agents --check` also fails on any unregistered entry in those folders. Because Git cannot see changes in ignored files, the reverse-harness checks used by `doctor` and G0 compare the installed copies with their sources: an edited, source-less or unregistered copy is still reported as a local change. The agent definitions refer to their skills by their Claude Code path, `.claude/skills/<name>/SKILL.md`. That is where Claude Code loads them, so those references are unchanged. No forward agent may write anything under `reverse/`.
 
 ## Running the pipeline
 
