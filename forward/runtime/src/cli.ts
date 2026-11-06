@@ -18,6 +18,7 @@ import { workbenchCommand } from './commands/workbench';
 import { bmadCommand } from './commands/bmad';
 import { operationsCommand } from './commands/operations';
 import { pilotCommand } from './commands/pilot';
+import { demoCommand } from './commands/demo';
 
 export const EXIT = { OK: 0, CHECK_FAILED: 1, USAGE: 2, NOT_AUTHORIZED: 3, CONFIG: 4 } as const;
 
@@ -96,6 +97,7 @@ Commands:
   pilot candidates                Rank complete real programs for the first conversion
   pilot readiness --program P     Engineering gate SOURCE_READINESS (+ unchanged generation authorisation status)
   pilot validate --out O [--dir D]  Engineering gate CONVERSION_VALIDATION on a conversion output
+  demo gates [--out DIR]          Synthetic G0-G8 gate demonstration (SYNTHETIC_INTERVIEW_DEMO; no production authorisation)
   workflow blocked                Report blocked transitions, dispatches and receipts
   workflow resume                 Verify checkpoint and baseline, then resume
 
@@ -233,6 +235,8 @@ export function main(argv: string[], out: (s: string) => void = console.log, err
         return bmadCommand(ctx, positionals[1], flags, json, out, err, positionals[2]);
       case 'pilot':
         return pilotCommand(ctx, positionals[1], flags, json, out, err);
+      case 'demo':
+        return demoCommand(ctx, positionals[1], flags, json, out, err);
       case 'verification':
         return verificationCommand(ctx, positionals[1], positionals[2], flags, json, out, err);
       default:
