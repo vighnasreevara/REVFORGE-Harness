@@ -26,7 +26,8 @@ npm run demo:test      # happy path and negative paths (19 tests)
 | `gates/G7.review.json` | the structured independent review (findings and decision) |
 | `approvals/` | the signed demo approvals (contract `demo/approval`) |
 | `trust/demo-trust-store.json` | the run's public key only; the private key exists only in memory during the run |
-| `g5/` | generation provenance, source map, statement traceability, build record, functional results, Java sources and classes |
+| `g5/` | generation provenance, source map, statement traceability, build record, functional results |
+| `forward/pilot/demo-gates/out/java/<ID>/` | the generated Java sources and classes. Inside the repository, synthetic Java lives only in the git-ignored pilot sandbox, like every synthetic conversion. With `--out` outside the repository, they are in `<out>/g5/java/`. |
 | `g6/` | oracle cases with expectations, the TestMain fixture, the comparison results |
 | `bmad/` | six SIMULATED BMad lifecycle records |
 | `state.json` | the demo's own state (never the real workflow state) |

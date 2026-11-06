@@ -451,6 +451,16 @@ function g4(run: DemoRun): Outcome {
   return { checks, evidence: [{ path: P.plan, sha256: shaFile(inp(run, 'plan')) ?? '0'.repeat(64), role: 'development plan (input)' }, ...a.evidence], details: plan ? { stories: plan.stories.length, java_generation_authorization: plan.java_generation_authorization } : {} };
 }
 
+/**
+ * Where G5 writes the generated Java and classes. Inside the repository, synthetic Java follows the
+ * existing rule for synthetic conversions: it lives only under the git-ignored pilot sandbox
+ * forward/pilot/<name>/out/java/ (excluded from backups as reproducible), never beside real evidence.
+ * A run directory outside the repository (tests, CI) keeps it inside the run directory.
+ */
+export function javaWorkspace(run: DemoRun): string {
+  return inside(run.outDir, run.ctx.repoRoot) ? path.join(run.ctx.forwardDir, 'pilot', 'demo-gates', 'out', 'java', run.id) : path.join(run.outDir, 'g5', 'java');
+}
+
 function runTestMain(run: DemoRun, classes: string, cls: string, fixtures: string): { exit: number | null; cases: Array<{ id: string; status: string; detail: string }>; summary: string | null; stderr: string[] } {
   const x = spawnSync(run.tc.java.java!, ['-cp', classes, 'revforge.cobol.testing.TestMain', cls, fixtures], { encoding: 'latin1', timeout: 600000 });
   const out = (x.stdout ?? '').split(/\r?\n/);
@@ -480,12 +490,13 @@ function g5(run: DemoRun): Outcome {
   const lines = fs.readFileSync(file, 'utf8').replace(/\r\n?/g, '\n').split('\n');
   const em = emitApp(prog, { available: new Set([prog.program_id]), lineText: (_f, l) => (lines[l - 1] ?? '').replace(/\s+$/, '') });
   const g5dir = path.join(run.outDir, 'g5');
-  const srcDir = path.join(g5dir, 'java', 'src');
+  const javaDir = javaWorkspace(run);
+  const srcDir = path.join(javaDir, 'src');
   for (const [r, text] of Object.entries(em.files)) {
     fs.mkdirSync(path.dirname(path.join(srcDir, r)), { recursive: true });
     fs.writeFileSync(path.join(srcDir, r), text);
   }
-  const emitted = Object.keys(em.files).sort().map((r) => ({ path: `g5/java/src/${r}`, sha256: sha(em.files[r]) }));
+  const emitted = Object.keys(em.files).sort().map((r) => ({ path: rel(run, path.join(srcDir, r)), sha256: sha(em.files[r]) }));
   const converterModules = ['cobol-app', 'java-app'].map((m) => {
     const ts = path.join(run.ctx.forwardDir, 'runtime', 'src', 'pilot', `${m}.ts`);
     const js = require.resolve(`../pilot/${m}`);
@@ -509,13 +520,13 @@ function g5(run: DemoRun): Outcome {
   const runtimeFiles = listJava(RUNTIME_DIR(run.ctx.forwardDir)).sort();
   const genFiles = listJava(srcDir).sort();
   const compiled = genFiles.map((f) => ({ path: rel(run, f), sha256: shaFile(f)! }));
-  const classes = path.join(g5dir, 'java', 'classes');
+  const classes = path.join(javaDir, 'classes');
   fs.mkdirSync(classes, { recursive: true });
-  const argFile = path.join(g5dir, 'java', 'javac-args.txt');
+  const argFile = path.join(javaDir, 'javac-args.txt');
   fs.writeFileSync(argFile, [...runtimeFiles, ...genFiles].map((f) => `"${f.replace(/\\/g, '/')}"`).join('\n'));
   const args = ['-encoding', 'UTF-8', '-Xlint:all', '-Werror', '-d', classes, `@${argFile}`];
   const cc = spawnSync(tc.java.javac!, args, { encoding: 'utf8', timeout: 600000 });
-  const build = { command: `javac -encoding UTF-8 -Xlint:all -Werror -d g5/java/classes @javac-args.txt (${runtimeFiles.length} runtime + ${genFiles.length} generated files)`, javac: jv, exit_code: cc.status, diagnostics: `${cc.stdout ?? ''}${cc.stderr ?? ''}`.trim().split(/\r?\n/).filter(Boolean).slice(0, 40), compiled_sources: compiled, emitted_sources: emitted, sources_modified_after_generation: canonicalize(compiled.map((c) => c.sha256)) !== canonicalize(emitted.map((e) => e.sha256)) };
+  const build = { command: `javac -encoding UTF-8 -Xlint:all -Werror -d ${rel(run, classes)} @javac-args.txt (${runtimeFiles.length} runtime + ${genFiles.length} generated files)`, javac: jv, exit_code: cc.status, diagnostics: `${cc.stdout ?? ''}${cc.stderr ?? ''}`.trim().split(/\r?\n/).filter(Boolean).slice(0, 40), compiled_sources: compiled, emitted_sources: emitted, sources_modified_after_generation: canonicalize(compiled.map((c) => c.sha256)) !== canonicalize(emitted.map((e) => e.sha256)) };
   const classFiles = listFiles(classes).filter((f) => f.endsWith('.class'));
   const classesSha = sha(classFiles.sort().map((f) => `${rel(run, f)}|${shaFile(f)}`).join('\n'));
   evidence.push({ path: 'g5/build.json', sha256: writeJson(path.join(g5dir, 'build.json'), { ...build, class_files: classFiles.length, classes_sha256: classesSha }), role: 'build record' });
@@ -524,7 +535,7 @@ function g5(run: DemoRun): Outcome {
   // Functional and boundary scenarios (hand-written from the requirements).
   const fx = readJson(inp(run, 'functional'));
   const t = runTestMain(run, classes, `${em.pkg}.${em.cls}`, inp(run, 'functional'));
-  evidence.push({ path: 'g5/functional-results.json', sha256: writeJson(path.join(g5dir, 'functional-results.json'), { environment: DEMO_ENV, command: `java -cp g5/java/classes revforge.cobol.testing.TestMain ${em.pkg}.${em.cls} ${P.functional}`, exit_code: t.exit, summary: t.summary, cases: t.cases, stderr: t.stderr }), role: 'functional test results' });
+  evidence.push({ path: 'g5/functional-results.json', sha256: writeJson(path.join(g5dir, 'functional-results.json'), { environment: DEMO_ENV, command: `java -cp ${rel(run, classes)} revforge.cobol.testing.TestMain ${em.pkg}.${em.cls} ${P.functional}`, exit_code: t.exit, summary: t.summary, cases: t.cases, stderr: t.stderr }), role: 'functional test results' });
   checks.push(check('test_harness_completed', t.exit === 0 && !!t.summary, `TestMain exit ${t.exit}; ${t.summary ?? 'no SUMMARY line'}`));
   const generated = t.cases.filter((c) => /^(INIT|C88) /.test(c.id));
   checks.push(check('generated_checks', generated.length > 0 && generated.every((c) => c.status === 'PASS'), `${generated.filter((c) => c.status === 'PASS').length}/${generated.length} VALUE-clause and level-88 checks passed`));
