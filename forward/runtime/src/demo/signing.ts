@@ -14,12 +14,12 @@
  * production_authorization: NOT_GRANTED. The real configuration names no
  * trust store, so a demo approval can never verify in the real workflow.
  */
-import { generateKeyPairSync, KeyObject, sign } from 'crypto';
+import { createPublicKey, generateKeyPairSync, KeyObject, sign } from 'crypto';
 import * as fs from 'fs';
 import * as path from 'path';
 import { canonicalize } from '../approval/canonical';
 import { DEFAULT_POLICY } from '../approval/policy';
-import { loadTrustStore, verifySignature } from '../approval/trust';
+import { keyFingerprint, loadTrustStore, verifySignature } from '../approval/trust';
 import { RuntimeContext } from '../core/config';
 
 export const DEMO_ENV = 'SYNTHETIC_INTERVIEW_DEMO';
@@ -83,10 +83,15 @@ export interface ApprovalCheck {
 /**
  * Verifies a signed demo approval with the production signature verifier, against the demo trust store only.
  * `policy.trust_store_env` is emptied so a real trust store named in the environment is never consulted.
+ * The store on disk is trusted only if its signer key is the run's own key (`pinnedPublicKeyPem`, held in
+ * memory since the run started): a store replaced during the run cannot introduce another key.
  */
-export function verifyDemoSignature(ctx: RuntimeContext, trustStoreFile: string, record: any, role: string, at = new Date()): ApprovalCheck {
+export function verifyDemoSignature(ctx: RuntimeContext, trustStoreFile: string, record: any, role: string, pinnedPublicKeyPem: string, at = new Date()): ApprovalCheck {
   const ts = loadTrustStore(ctx, { ...DEFAULT_POLICY, trust_store: trustStoreFile, trust_store_env: '' });
   if (!ts.usable) return { id: 'signature', ok: false, detail: `demo trust store unusable: ${ts.problems.join('; ')}` };
+  const pinned = keyFingerprint(createPublicKey(pinnedPublicKeyPem));
+  const stored = ts.signers.get(DEMO_SIGNER);
+  if (!stored || stored.fingerprint !== pinned || ts.signers.size !== 1) return { id: 'signature', ok: false, detail: `the demo trust store no longer holds only this run's key (pinned ${pinned.slice(0, 16)}…, store ${stored ? stored.fingerprint.slice(0, 16) + '…' : 'no demo signer'}): it was replaced after the run started` };
   const v = verifySignature(ts, String(record?.signer?.signer_id ?? ''), statementText(record ?? {}), String(record?.signature?.value ?? ''), [role], at);
   return { id: 'signature', ok: v.ok, detail: v.ok ? `Ed25519 signature by ${record.signer.signer_id} (role ${role}, key ${v.signer!.fingerprint.slice(0, 16)}…) verifies against the demo trust store` : v.problems.join('; ') };
 }

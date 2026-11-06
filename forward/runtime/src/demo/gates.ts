@@ -293,14 +293,15 @@ function verifyApproval(run: DemoRun, g: ApprovalGate): { checks: Check[]; evide
   const subject = approvalSubject(run, g);
   checks.push(check('approval_subject_bound', rec.subject?.sha256 === subject.sha256 && rec.subject?.kind === subject.kind, rec.subject?.sha256 === subject.sha256 ? `binds ${subject.kind} ${subject.sha256.slice(0, 16)}… (the current content)` : `approval binds ${String(rec.subject?.sha256).slice(0, 16)}…, current ${subject.kind} is ${subject.sha256.slice(0, 16)}…`));
   const baseline = shaFile(baselineFile(run));
-  checks.push(check('approval_run_and_baseline_bound', rec.binding?.demo_run_id === run.id && rec.binding?.baseline_sha256 === baseline, `run ${rec.binding?.demo_run_id}, baseline ${String(rec.binding?.baseline_sha256).slice(0, 12)}…`));
+  const source = shaFile(path.join(run.inputDir, 'source', 'DEMOORD1.cbl'));
+  checks.push(check('approval_run_and_baseline_bound', rec.binding?.demo_run_id === run.id && rec.binding?.baseline_sha256 === baseline && rec.binding?.source_sha256 === source, `run ${rec.binding?.demo_run_id}, baseline ${String(rec.binding?.baseline_sha256).slice(0, 12)}…, source ${String(rec.binding?.source_sha256).slice(0, 12)}…${rec.binding?.demo_run_id === run.id && rec.binding?.baseline_sha256 === baseline && rec.binding?.source_sha256 === source ? '' : ' (does not match this run, baseline and source)'}`));
   const prior = priorGates(run, g);
   const priorOk = prior.every((p) => p.status === 'PASS') && canonicalize(prior) === canonicalize(rec.binding?.prior_gates ?? []);
   checks.push(check('approval_prior_gates_bound', priorOk, priorOk ? `binds the PASS results of ${prior.map((p) => p.gate).join(', ')}` : 'the prior gate results bound by the approval are not the current PASS results'));
   checks.push(check('approval_synthetic_signer', /^synthetic-demo-/.test(rec.signer?.signer_id ?? '') && rec.signer?.kind === 'SYNTHETIC_DEMO_AUTHORITY', `${rec.signer?.signer_id} (${rec.signer?.kind}): a synthetic demo authority, not a real stakeholder`));
   checks.push(check('approval_role', rec.signer?.role === DEMO_ROLES[g], rec.signer?.role === DEMO_ROLES[g] ? `signed in the role ${DEMO_ROLES[g]}` : `signed in the role ${rec.signer?.role}; ${g} needs ${DEMO_ROLES[g]}`));
   checks.push(check('approval_not_production', rec.production_authorization === 'NOT_GRANTED', `production_authorization: ${rec.production_authorization}`));
-  checks.push({ ...verifyDemoSignature(run.ctx, run.trustStore, rec, DEMO_ROLES[g], run.now()), id: 'approval_signature' });
+  checks.push({ ...verifyDemoSignature(run.ctx, run.trustStore, rec, DEMO_ROLES[g], run.authority.publicKeyPem, run.now()), id: 'approval_signature' });
   // The same record must never verify against the real trust anchor.
   const real = loadTrustStore(run.ctx, loadPolicy(run.ctx));
   const known = real.usable && real.signers.has(rec.signer?.signer_id);
@@ -686,8 +687,20 @@ function g8(run: DemoRun): Outcome {
   const prior = DEMO_GATES.slice(0, 8).map((g) => ({ g, ...gatePassed(run, g) }));
   checks.push(check('g0_to_g7_passed', prior.every((p) => p.ok), prior.every((p) => p.ok) ? 'G0-G7 all PASS for this demo baseline' : prior.filter((p) => !p.ok).map((p) => p.detail).join('; ')));
   const ev = DEMO_GATES.slice(0, 8).flatMap((g) => (fs.existsSync(resultFile(run, g)) ? readJson(resultFile(run, g)).evidence ?? [] : []));
-  const bad = ev.filter((e: any) => shaFile(path.join(/\(input\)$/.test(e.role) ? run.inputDir : run.outDir, e.path)) !== e.sha256);
-  checks.push(check('evidence_complete', ev.length > 0 && !bad.length, bad.length ? `missing or changed evidence: ${bad.map((e: any) => e.path).join(', ')}` : `${ev.length} evidence files present and unchanged`));
+  const bad: string[] = ev.filter((e: any) => shaFile(path.join(/\(input\)$/.test(e.role) ? run.inputDir : run.outDir, e.path)) !== e.sha256).map((e: any) => e.path);
+  // Also the artifacts the evidence describes: every baselined input, the Java that was built and its classes.
+  const baseline = readJson(baselineFile(run));
+  for (const i of [baseline.source, ...baseline.inputs]) if (shaFile(path.join(run.inputDir, i.path)) !== i.sha256) bad.push(i.path);
+  const buildFile = path.join(run.outDir, 'g5', 'build.json');
+  const build = fs.existsSync(buildFile) ? readJson(buildFile) : null;
+  for (const c of build?.compiled_sources ?? []) if (shaFile(path.join(run.outDir, c.path)) !== c.sha256) bad.push(c.path);
+  const g5d = fs.existsSync(resultFile(run, 'G5')) ? readJson(resultFile(run, 'G5')).details : null;
+  if (g5d?.java) {
+    const cdir = path.join(run.outDir, g5d.java.classes_dir);
+    if (sha(listFiles(cdir).filter((f) => f.endsWith('.class')).sort().map((f) => `${rel(run, f)}|${shaFile(f)}`).join('\n')) !== g5d.build.classes_sha256) bad.push(`${g5d.java.classes_dir} (class files)`);
+  }
+  const artifacts = 1 + baseline.inputs.length + (build?.compiled_sources?.length ?? 0) + (g5d?.java ? 1 : 0);
+  checks.push(check('evidence_complete', ev.length > 0 && !!build && !bad.length, bad.length ? `missing or changed evidence: ${bad.join(', ')}` : `${ev.length} evidence files and ${artifacts} inputs, Java sources and class sets present and unchanged`));
   const reviewFile = path.join(run.outDir, 'gates', 'G7.review.json');
   const review = fs.existsSync(reviewFile) ? readJson(reviewFile) : null;
   const critical = (review?.findings ?? []).filter((f: any) => f.blocking || f.severity === 'critical');

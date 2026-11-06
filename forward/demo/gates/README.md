@@ -13,7 +13,7 @@ From `forward/`, with Node.js 20+ and JDK 21 (`REVFORGE_JAVA_HOME`, `JAVA_HOME` 
 ```bash
 npm ci
 npm run demo:gates     # build, then run G0–G8; exit code 0 only if all nine pass
-npm run demo:test      # happy path and negative paths (19 tests)
+npm run demo:test      # happy path and negative paths (23 tests)
 ```
 
 `demo gates [--out DIR] [--json]` is the CLI form. Each run gets an ID such as `DEMO-20261106T011442Z-ab48`. It writes to `forward/demo/gates/runs/<ID>/` (git-ignored), and `runs/LATEST` names the most recent run:
@@ -89,10 +89,10 @@ Its interface is the 77-byte `LS-ORDER` record.
 
 **Every demo approval is checked for:**
 - contract and gate;
-- binding to the exact subject content, the run, the baseline and the prior PASS results;
+- binding to the exact subject content, the run, the baseline, the source and the prior PASS results;
 - a synthetic signer and the required role;
 - `production_authorization: NOT_GRANTED`;
-- the Ed25519 signature, verified with the production verifier against the run's demo trust store;
+- the Ed25519 signature, verified with the production verifier against the run's demo trust store, which must hold only the run's own in-memory key;
 - not being accepted by the real trust anchor.
 
 **A prerequisite counts only when** its persisted result is PASS, its file is unchanged since it was recorded, and it was evaluated on the same baseline.
@@ -123,6 +123,9 @@ Each step is recorded as `SIMULATED` with `counts_as_bmad_execution: false`. The
 | reverse evidence missing (with a consistent baseline) | G1 (`reverse_present`) |
 | evidence that does not match the source | G1 (`statements_match_source`) |
 | corrupted G2 signature | G2 (`approval_signature`) |
+| demo trust store replaced mid-run with another key, approvals signed with that key | G2 (`approval_signature`: the store must hold the run's in-memory key) |
+| approval edited after signing | G2 (`approval_signature`) |
+| validly signed approval bound to another demo run | G2 (`approval_run_and_baseline_bound`) |
 | G2 approval of different requirements content | G2 (`approval_subject_bound`) |
 | no G3 approval | G3 (`approval_present`) |
 | G4 approval signed with another key | G4 (`approval_signature`) |
@@ -131,6 +134,7 @@ Each step is recorded as `SIMULATED` with `counts_as_bmad_execution: false`. The
 | a behaviour change the functional tests catch | G5 (`functional_tests`) |
 | a boundary defect the functional tests miss (platinum at exactly 50000) | G6 (`java_matches_oracle`) |
 | test evidence changed after it was recorded | G7 (`test_evidence_integrity`, blocking review finding) |
+| generated Java changed after the review | G8 (`evidence_complete`) |
 | unsigned final acceptance | G8 (`approval_signature`) |
 | a gate evaluated before its prerequisite, or after its prerequisite's result changed | BLOCKED |
 | a SIMULATED BMad receipt or demo approval offered as production evidence | refused by the real receipt counter, the real trust anchor and the generation guard; demo output into the real runs or `output/` is refused |

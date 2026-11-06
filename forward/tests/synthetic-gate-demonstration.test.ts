@@ -189,6 +189,32 @@ describe('synthetic gate demonstration: negative paths', () => {
     assert.deepEqual(failedChecks(res.run, 'G2'), ['approval_subject_bound']);
   });
 
+  test('G2: a demo trust store replaced during the run cannot introduce another key', () => {
+    const intruder = new EphemeralAuthority();
+    const hooks: DemoHooks = {
+      afterGate: (g, run) => {
+        if (g === 'G1') intruder.writeTrustStore(path.join(run.outDir, 'trust'), new Date(Date.now() + 3600e3).toISOString());
+      },
+      approve: (_g, u) => intruder.sign(u),
+    };
+    const res = runDemo({ ctx, outDir: outDir(), hooks });
+    assertStoppedAt(res, 'G2');
+    assert.deepEqual(failedChecks(res.run, 'G2'), ['approval_signature']);
+    assert.match(res.summary.gates[2].reason, /replaced after the run started/);
+  });
+
+  test('G2: an approval edited after signing stops the run', () => {
+    const res = runDemo({ ctx, outDir: outDir(), hooks: { approve: (g, u, sign) => (g === 'G2' ? { ...sign(u), signed_at: '2020-01-01T00:00:00.000Z' } : sign(u)) } });
+    assertStoppedAt(res, 'G2');
+    assert.deepEqual(failedChecks(res.run, 'G2'), ['approval_signature']);
+  });
+
+  test('G2: a validly signed approval bound to another demo run stops the run', () => {
+    const res = runDemo({ ctx, outDir: outDir(), hooks: { approve: (g, u, sign) => sign(g === 'G2' ? { ...u, binding: { ...u.binding, demo_run_id: 'DEMO-OTHER-RUN' } } : u) } });
+    assertStoppedAt(res, 'G2');
+    assert.deepEqual(failedChecks(res.run, 'G2'), ['approval_run_and_baseline_bound']);
+  });
+
   test('G3: a missing architecture approval stops the run', () => {
     const res = runDemo({ ctx, outDir: outDir(), hooks: { approve: (g, u, sign) => (g === 'G3' ? null : sign(u)) } });
     assertStoppedAt(res, 'G3');
@@ -247,6 +273,19 @@ describe('synthetic gate demonstration: negative paths', () => {
     assert.equal(gateResult(res.run, 'G8').details.acceptance, 'NOT_ACCEPTED');
   });
 
+  test('G8: Java changed after the review stops the acceptance', { skip: NO_JDK }, () => {
+    const hooks: DemoHooks = {
+      afterGate: (g, run) => {
+        if (g !== 'G7') return;
+        const build = JSON.parse(fs.readFileSync(path.join(run.outDir, 'g5', 'build.json'), 'utf8'));
+        fs.appendFileSync(path.join(run.outDir, build.compiled_sources[0].path), '\n// edited after review\n');
+      },
+    };
+    const res = runDemo({ ctx, outDir: outDir(), hooks });
+    assertStoppedAt(res, 'G8');
+    assert.deepEqual(failedChecks(res.run, 'G8'), ['evidence_complete']);
+  });
+
   test('a later gate attempted before its prerequisite passes is BLOCKED', () => {
     const run = initRun({ ctx, outDir: outDir() });
     const r = evaluateDemoGate(run, 'G3');
@@ -275,6 +314,16 @@ describe('synthetic gate demonstration: negative paths', () => {
     const rec = JSON.parse(fs.readFileSync(f, 'utf8'));
     const real = loadTrustStore(ctx, loadPolicy(ctx));
     assert.equal(verifySignature(real, rec.signer.signer_id, statementText(rec), rec.signature.value, ['requirements_approver']).ok, false);
+    // Independently of the configuration: a configured trust store holding other keys does not accept it either.
+    const other = new EphemeralAuthority();
+    const storeFile = other.writeTrustStore(path.join(tmp, `other-store-${++n}`), new Date(Date.now() + 3600e3).toISOString());
+    const doc = JSON.parse(fs.readFileSync(storeFile, 'utf8'));
+    doc.signers[0].signer_id = 'requirements-owner';
+    doc.signers[0].roles = ['requirements_approver'];
+    fs.writeFileSync(storeFile, JSON.stringify(doc));
+    const configured = loadTrustStore(ctx, { ...loadPolicy(ctx), trust_store: storeFile, trust_store_env: '' });
+    assert.equal(configured.usable, true);
+    assert.equal(verifySignature(configured, rec.signer.signer_id, statementText(rec), rec.signature.value, ['requirements_approver']).ok, false);
     assert.equal(rec.production_authorization, 'NOT_GRANTED');
     // The real generation guard still refuses, even when handed demo results as if they were a generation gate.
     assert.throws(() => assertGenerationAllowed(ctx.config.generation, [{ gate_id: 'GENERATION', approved: true }]), GenerationNotAuthorizedError);
