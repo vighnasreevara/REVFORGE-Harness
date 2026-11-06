@@ -12,6 +12,25 @@ COBOL source → Reverse Engineering → Business Requirements Document → perm
 
 **Current status.** The engineering handover is complete; the modernization is not. The Java replacement is incomplete: 41 of 42 programs have Java, 2 are complete under the harness criteria, and 569 gap records are open. **Legacy COBOL-to-Java behavioural equivalence has not been established.** See [Project status](#project-status).
 
+### Three layers
+
+| Layer | What it is | Status |
+|---|---|---|
+| **A. [Reverse engineering](#reverse-engineering)** | Seven Claude Code agents exchange JSON artifacts and produce a BRD, 154 business rules, 65 diagrams and permanent source IDs (Neo4j registry via MCP) | complete for the sample system |
+| **B. [Forward engineering](#forward-engineering)** | Seven agent definitions and 14 skills; a TypeScript orchestrator; a COBOL-to-Java converter with a Java 21 runtime; two engineering quality gates (`SOURCE_READINESS`, `CONVERSION_VALIDATION`); G0–G8 governance with mandatory BMad | Java for 41 of 42 programs; real G0–G1 PASS, G2 UNVERIFIED, G3–G8 BLOCKED; BMad LIVE execution blocked |
+| **C. [Governance demonstration](#synthetic-end-to-end-gate-demonstration)** | An isolated synthetic G0–G8 run: approvals, compilation, tests, independent verification, review and acceptance, all executed on a synthetic program. The BMad lifecycle is only simulated. | 9/9 demo gates pass in CI; changes nothing in the real project |
+
+### Quick demo
+
+```bash
+cd forward
+npm ci
+npm run demo:gates    # runs the synthetic G0–G8 demonstration (Node.js 20+, JDK 21)
+npm run demo:test     # happy path and negative paths
+```
+
+See the [demo README](forward/demo/gates/README.md), a [sample report](forward/demo/gates/sample-run/DEMO-REPORT.md), the [architecture](forward/handover/ARCHITECTURE.md), the [CI results](https://github.com/vighnasreevara/REVFORGE-Harness/actions/workflows/revforge-ci.yml), the [report catalog](forward/reports/README.md) and the [dashboard](#dashboard).
+
 ---
 
 ## Reverse engineering
