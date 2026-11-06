@@ -366,10 +366,10 @@ describe('forward agents and skills live in forward/ (Claude Code copy in .claud
     assert.ok(fs.readdirSync(path.join(FORWARD_DIR, 'skills')).every((f) => /^fe-/.test(f) || f === 'README.md'));
   });
 
-  test('the .claude/ copies match forward/ in this repository', () => {
+  test('the .claude/ copies installed by setup match forward/ in this repository', () => {
     const ctx = { repoRoot: REPO, forwardDir: FORWARD_DIR } as any;
     const st = mirrorStatus(ctx);
-    assert.equal(st.in_sync, true, JSON.stringify(st.entries.filter((e) => e.status !== 'IN_SYNC').map((e) => [e.name, e.status])));
+    assert.equal(st.in_sync, true, 'run "npm run setup" to install the generated .claude/ copies: ' + JSON.stringify(st.entries.filter((e) => e.status !== 'IN_SYNC').map((e) => [e.name, e.status])));
   });
 
   test('sync-agents repairs drift from forward/, removes stale skill files and never touches reverse-harness files', () => {

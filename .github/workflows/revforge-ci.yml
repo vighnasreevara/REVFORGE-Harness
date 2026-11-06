@@ -43,7 +43,15 @@ jobs:
           distribution: temurin
           java-version: '21'
       - run: npm ci
-      - run: npm run build
+      - name: Fresh checkout carries no Claude Code discovery copies (they are generated)
+        run: test ! -e ../.claude/agents && test ! -e ../.claude/skills
+      - name: Install the discovery copies (npm run setup = build + sync-agents + sync-agents --check)
+        run: npm run setup
+      - name: All 14 agents and 28 skills are installed where Claude Code discovers them
+        run: |
+          test "$(ls ../.claude/agents/*.agent.md | wc -l)" = 14
+          test "$(ls ../.claude/skills/*/SKILL.md | wc -l)" = 28
+          test -z "$(git status --porcelain -- ../.claude)"
       - name: Doctor (warns that no COBOL source is configured, expected here)
         run: node dist/runtime/src/cli.js doctor
       - name: Agent and skill synchronisation
@@ -160,7 +168,8 @@ jobs:
           distribution: temurin
           java-version: '21'
       - run: npm ci
-      - run: npm run build
+      - name: Build and install the Claude Code discovery copies
+        run: npm run setup
       - name: Run the demonstration (all nine demo gates must pass)
         env:
           REVFORGE_JAVA_HOME: ${{ env.JAVA_HOME }}
@@ -206,9 +215,9 @@ jobs:
           test "$(git check-attr text -- "$f" | awk '{print $3}')" = unset
           test "$(sha256sum "$f" | cut -c1-64)" = bde93ef6400a731726e1c214a363d708ac7bcaeb26f53be9047f37c77d09660e
           test "$(stat -c %s "$f")" = 790963
-      - name: Restricted source, generated Java and run records are not tracked
+      - name: Restricted source, generated Java, run records and generated .claude/ copies are not tracked
         run: |
-          bad=$(git ls-files | grep -E '^(references/|OpenWiki/|forward/generated/)|(^|/)\.mcp\.json$|settings\.local\.json$|\.class$|^forward/runs/.+' | grep -v '^forward/runs/\.gitkeep$' || true)
+          bad=$(git ls-files | grep -E '^(references/|OpenWiki/|forward/generated/|\.claude/agents/|\.claude/skills/)|(^|/)\.mcp\.json$|settings\.local\.json$|\.class$|^forward/runs/.+' | grep -v '^forward/runs/\.gitkeep$' || true)
           if [ -n "$bad" ]; then echo "$bad"; exit 1; fi
       - name: Required handover files exist
         run: |

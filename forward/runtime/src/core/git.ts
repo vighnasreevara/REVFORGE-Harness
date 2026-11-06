@@ -1,4 +1,5 @@
 import { execFileSync } from 'child_process';
+import { discoveryChanges } from '../orchestrator/mirror';
 import { allowedForwardAdditions } from '../orchestrator/skills';
 
 export interface GitInfo {
@@ -34,6 +35,9 @@ export function gitInfo(repoRoot: string, protectedPrefixes: string[], allowedNe
       .filter((e) => protectedPrefixes.some((pre) => e.path.startsWith(pre)))
       .filter((e) => !(e.code === '??' && allowedNewPrefixes.some((pre) => e.path.startsWith(pre))))
       .map((e) => e.path);
+    // .claude/agents and .claude/skills are generated and git-ignored, so Git cannot see edits there.
+    // Compare them with their canonical sources instead (edited, source-less or unregistered entries).
+    for (const p of discoveryChanges(repoRoot)) if (protectedPrefixes.some((pre) => p.startsWith(pre)) && !reverse.includes(p)) reverse.push(p);
     return { available: true, branch, commit, dirty: lines.length > 0, changed_paths: lines.length, reverse_paths_changed: reverse };
   } catch (e) {
     return {

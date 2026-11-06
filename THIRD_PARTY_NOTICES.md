@@ -11,7 +11,7 @@ The files listed below are derived from that repository and were modified for RE
 
 The sample COBOL codebase analysed by the pipeline (its `src/` folder) comes from the same repository. It is not redistributed here, but the generated analysis outputs under `output/` quote names, line numbers and fragments from it.
 
-These REVFORGE files are derived from that repository and modified by REVFORGE. Their canonical location is `reverse/agents/` and `reverse/skills/`. Byte-identical copies are installed under `.claude/agents/` and `.claude/skills/` by `sync-agents` so that Claude Code can discover them, and those copies are covered by this notice too. The "Derived from" column gives the path in the upstream repository.
+These REVFORGE files are derived from that repository and modified by REVFORGE. Their canonical location is `reverse/agents/` and `reverse/skills/`. These are the only committed copies. Running `npm run setup` (which runs `sync-agents`) generates byte-identical copies under `.claude/agents/` and `.claude/skills/` so that Claude Code can discover them. Those copies are git-ignored and not distributed in the repository, but wherever they exist they are covered by this notice and the same license. The "Derived from" column gives the path in the upstream repository.
 
 | REVFORGE file | Derived from | Modification |
 |---|---|---|

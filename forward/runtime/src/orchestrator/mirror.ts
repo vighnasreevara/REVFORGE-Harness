@@ -10,6 +10,11 @@
  * and REVERSE_SKILLS for reverse) are ever written or removed. The scope
  * argument selects which side is compared or synchronized; 'forward' is the
  * default, so a forward-only sync never touches a reverse definition.
+ *
+ * .claude/agents and .claude/skills are generated and git-ignored: `npm run
+ * setup` (build + sync-agents) installs them. Because Git no longer sees them,
+ * discoveryChanges() reports edited, source-less and unregistered entries
+ * there, so the reverse-harness checks keep seeing local changes (core/git.ts).
  */
 import { createHash } from 'crypto';
 import * as fs from 'fs';
@@ -97,4 +102,34 @@ export function syncMirror(ctx: RuntimeContext, scope: MirrorScope = 'forward'):
     written.push(path.relative(ctx.repoRoot, p.mirror).split(path.sep).join('/') + '/');
   }
   return { written, entries: mirrorStatus(ctx, scope).entries };
+}
+
+/** Entries under .claude/agents and .claude/skills that no registry (forward or reverse) declares. */
+export function unexpectedDiscoveryEntries(ctx: Pick<RuntimeContext, 'repoRoot' | 'forwardDir'>): string[] {
+  const known = new Set(mirrorPairs(ctx as RuntimeContext, 'all').map((p) => path.relative(ctx.repoRoot, p.mirror).split(path.sep).join('/')));
+  const out: string[] = [];
+  for (const kind of ['agents', 'skills']) {
+    const d = path.join(ctx.repoRoot, '.claude', kind);
+    if (!fs.existsSync(d)) continue;
+    for (const n of fs.readdirSync(d).sort()) {
+      const rel = `.claude/${kind}/${n}`;
+      if (!known.has(rel)) out.push(fs.statSync(path.join(d, n)).isDirectory() ? `${rel}/` : rel);
+    }
+  }
+  return out;
+}
+
+/**
+ * Local changes in the generated discovery directories, as repository-relative
+ * paths: installed copies that differ from their canonical source, copies whose
+ * canonical source is missing, and unregistered entries. A copy that is simply
+ * not installed yet is not a change (sync-agents --check reports it as MISSING).
+ */
+export function discoveryChanges(repoRoot: string): string[] {
+  const ctx = { repoRoot, forwardDir: path.join(repoRoot, 'forward') } as RuntimeContext;
+  const rel = (f: string) => path.relative(repoRoot, f).split(path.sep).join('/');
+  const changed = mirrorStatus(ctx, 'all').entries
+    .filter((e) => e.status === 'DIFFERENT' || (e.status === 'NO_SOURCE' && fs.existsSync(e.mirror)))
+    .map((e) => rel(e.mirror) + (e.kind === 'skill' ? '/' : ''));
+  return [...changed, ...unexpectedDiscoveryEntries(ctx)].sort();
 }
