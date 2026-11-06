@@ -1,0 +1,228 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://revforge.local/contracts/demo/requirements.schema.json",
+  "title": "Synthetic demo requirements",
+  "description": "Requirements, worked examples and uncertainties for the synthetic demo program (demo gate G2).",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "contract",
+    "contract_version",
+    "environment",
+    "scope",
+    "program_id",
+    "source_file_id",
+    "requirements",
+    "examples",
+    "uncertainties"
+  ],
+  "properties": {
+    "contract": {
+      "const": "demo/requirements"
+    },
+    "contract_version": {
+      "const": "1.0"
+    },
+    "environment": {
+      "const": "SYNTHETIC_INTERVIEW_DEMO"
+    },
+    "scope": {
+      "type": "string",
+      "minLength": 1
+    },
+    "program_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "source_file_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "authored_by": {
+      "type": "string",
+      "minLength": 1
+    },
+    "note": {
+      "type": "string"
+    },
+    "requirements": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "requirement_id",
+          "title",
+          "statement",
+          "rule_ids",
+          "kind"
+        ],
+        "properties": {
+          "requirement_id": {
+            "type": "string",
+            "pattern": "^REQ-DEMO-[0-9]{3}$"
+          },
+          "title": {
+            "type": "string",
+            "minLength": 1
+          },
+          "statement": {
+            "type": "string",
+            "minLength": 1
+          },
+          "rule_ids": {
+            "type": "array",
+            "minItems": 0,
+            "items": {
+              "type": "string",
+              "pattern": "^DBR-[0-9]{3}$"
+            }
+          },
+          "kind": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      }
+    },
+    "examples": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "id",
+          "requirement_ids",
+          "title",
+          "order",
+          "expected"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "requirement_ids": {
+            "type": "array",
+            "minItems": 1,
+            "items": {
+              "type": "string",
+              "pattern": "^REQ-DEMO-[0-9]{3}$"
+            }
+          },
+          "title": {
+            "type": "string",
+            "minLength": 1
+          },
+          "order": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "tier",
+              "line_count",
+              "lines"
+            ],
+            "properties": {
+              "tier": {
+                "type": "string",
+                "maxLength": 1
+              },
+              "line_count": {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 99
+              },
+              "lines": {
+                "type": "array",
+                "minItems": 1,
+                "items": {
+                  "type": "array",
+                  "minItems": 2,
+                  "maxItems": 2,
+                  "items": {
+                    "type": "integer",
+                    "minimum": 0
+                  }
+                }
+              }
+            }
+          },
+          "expected": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "subtotal",
+              "discount",
+              "shipping",
+              "total",
+              "return_code"
+            ],
+            "properties": {
+              "subtotal": {
+                "type": "integer",
+                "minimum": 0
+              },
+              "discount": {
+                "type": "integer",
+                "minimum": 0
+              },
+              "shipping": {
+                "type": "integer",
+                "minimum": 0
+              },
+              "total": {
+                "type": "integer",
+                "minimum": 0
+              },
+              "return_code": {
+                "type": "integer",
+                "minimum": 0
+              }
+            }
+          }
+        }
+      }
+    },
+    "uncertainties": {
+      "type": "array",
+      "minItems": 0,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "id",
+          "topic",
+          "resolution",
+          "status",
+          "blocking"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "topic": {
+            "type": "string",
+            "minLength": 1
+          },
+          "resolution": {
+            "type": "string",
+            "minLength": 1
+          },
+          "status": {
+            "enum": [
+              "OPEN",
+              "RESOLVED",
+              "ACCEPTED_LIMITATION"
+            ]
+          },
+          "blocking": {
+            "type": "boolean"
+          }
+        }
+      }
+    }
+  }
+}

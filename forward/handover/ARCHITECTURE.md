@@ -12,6 +12,7 @@ Contents:
 7. [Dashboard evidence pipeline](#7-dashboard-evidence-pipeline)
 8. [Final handover flow](#8-final-handover-flow)
 9. [Technology stack](#9-technology-stack)
+10. [Synthetic end-to-end gate demonstration](#10-synthetic-end-to-end-gate-demonstration)
 
 ---
 
@@ -26,10 +27,12 @@ flowchart LR
   end
   OUT["output/: 11 artifacts<br/>inventory, parser, data, logic,<br/>rules, diagrams, BRD, gaps"]
   subgraph FWD["Forward engineering: forward/"]
-    RT["TypeScript runtime and CLI<br/>orchestrator, gates G0–G8, contracts"]
+    RT["TypeScript runtime and CLI<br/>orchestrator, governance checkpoints G0–G8, contracts"]
     FA["Agents F1–F7 (Claude Code subagents,<br/>dispatch-and-receipt)"]
     PIL["Local converter (pilot)<br/>under local generation authorizations"]
+    EQG{{"Engineering quality gates<br/>SOURCE_READINESS · CONVERSION_VALIDATION"}}
     JRT["Java 21 runtime library<br/>forward/runtime/java (20 files)"]
+    DEMO["Synthetic G0–G8 demonstration<br/>forward/demo/gates<br/>SYNTHETIC_INTERVIEW_DEMO"]
   end
   GEN["forward/generated/java<br/>(git-ignored, local only)"]
   BMAD["BMad Method 6.12.4<br/>mandatory governance:<br/>LIVE EXECUTION BLOCKED"]
@@ -43,8 +46,10 @@ flowchart LR
   OUT --> RT
   RT --> FA
   RT --> PIL
-  PIL --> GEN
+  PIL --> EQG
+  EQG --> GEN
   JRT --> GEN
+  RT -. "synthetic inputs only" .-> DEMO
   RT -. "governed runs, preflights" .-> BMAD
   GEN --> REP
   OUT --> REP
@@ -54,6 +59,12 @@ flowchart LR
 ```
 
 The arrow from the runtime to BMad is dotted because no BMad workflow has executed. The runtime records governed runs and preflights, all of which stopped as `BMAD_BLOCKED` before launch.
+
+Two separate families of gates appear here (see [section 6](#6-verification-and-approval-gates)):
+- **Engineering quality gates.** `SOURCE_READINESS` and `CONVERSION_VALIDATION` judge each local conversion.
+- **Governance checkpoints.** G0–G8 govern the workflow.
+
+The synthetic demonstration (dotted, [section 10](#10-synthetic-end-to-end-gate-demonstration)) exercises G0–G8 on synthetic inputs only, and writes nothing into the real workflow.
 
 ---
 
@@ -198,6 +209,22 @@ Permanent IDs are created once by reverse Agents 1–3 and never repaired or re-
 
 ## 6. Verification and approval gates
 
+REVFORGE has two distinct kinds of gates:
+
+| Kind | Gates | Question | Authorizes generation? |
+|---|---|---|---|
+| **Engineering quality gates** | `SOURCE_READINESS`, `CONVERSION_VALIDATION` (`runtime/src/pilot/gates.ts`) | Is this program's source understood well enough to convert? Is this conversion output verified as labelled? | No |
+| **Governance checkpoints** | G0–G8 (`runtime/src/orchestrator/gates.ts`, approval and design modules) | Has the governed workflow reached each stage with verified evidence and signed human approvals? | Only G4 PASS, together with the configuration flag and BMad stages up to sprint |
+
+### 6.1 Engineering quality gates
+
+- **SOURCE_READINESS** (`pilot readiness`): 6 of 42 programs pass.
+- **CONVERSION_VALIDATION** (`pilot validate`): 41 of 42 programs pass.
+
+Neither authorizes generation, and neither is equivalence.
+
+### 6.2 Governance checkpoints G0–G8 (real workflow status)
+
 ```mermaid
 flowchart TD
   G0["G0 Baseline integrity · implemented · PASS"]
@@ -214,11 +241,7 @@ flowchart TD
   G4 --> GEN
 ```
 
-Separate engineering gates apply to the local pilot conversions:
-- **SOURCE_READINESS** (`pilot readiness`): 6 of 42 programs pass.
-- **CONVERSION_VALIDATION** (`pilot validate`): 41 of 42 programs pass.
-
-Neither authorizes generation, and neither is equivalence. Signed approvals use Ed25519 and are verified against a configured trust store (`REVFORGE_APPROVAL_TRUST_STORE`), which is not configured in this environment.
+Signed approvals use Ed25519 and are verified against a configured trust store (`REVFORGE_APPROVAL_TRUST_STORE`), which is not configured in this environment. A synthetic run of all nine checkpoints is described in [section 10](#10-synthetic-end-to-end-gate-demonstration); it does not change any status above.
 
 ---
 
@@ -290,3 +313,43 @@ The table lists only technologies that are in use, and only the roles the reposi
 | Recharts 3 | Dashboard distribution charts (with table views) | `forward/dashboard/src/components/charts.tsx` |
 | Cytoscape.js 3 | Dependency-graph neighbourhoods | `forward/dashboard/src/components/GraphCanvas.tsx` |
 | Mermaid 11 | Reverse diagrams (`output/diagram/diagrams/*.mmd`), rendered in the dashboard in strict mode; also these architecture diagrams | as named |
+
+---
+
+## 10. Synthetic end-to-end gate demonstration
+
+`npm run demo:gates` (in `forward/`) runs all nine governance checkpoints on one small synthetic COBOL program, `forward/demo/gates/synthetic/source/DEMOORD1.cbl`. The run is in the separate environment `SYNTHETIC_INTERVIEW_DEMO`. Every demo gate executes its checks; a gate never passes without evaluating them, and the run stops at the first gate that does not pass.
+
+```mermaid
+flowchart LR
+  IN["Synthetic inputs<br/>forward/demo/gates/synthetic<br/>(baseline-hashed)"]
+  subgraph DG["Demo gates (runtime/src/demo/gates.ts)"]
+    D0["G0 baseline hashes"] --> D1["G1 evidence vs re-parsed COBOL"] --> D2["G2 requirements + signed demo approval"] --> D3["G3 architecture + signed demo approval"] --> D4["G4 plan + signed demo approval"] --> D5["G5 converter, javac -Werror, scenarios"] --> D6["G6 independent oracle vs Java"] --> D7["G7 independent review"] --> D8["G8 signed synthetic acceptance"]
+  end
+  KEY["Ephemeral Ed25519 key<br/>(memory only) and demo trust store"]
+  BM["BMad bindings PRD to REVIEW<br/>SIMULATED, never counted"]
+  OUT["forward/demo/gates/runs/ID<br/>results, evidence, DEMO-REPORT.md<br/>(git-ignored)"]
+  IN --> D0
+  KEY -.-> D2
+  KEY -.-> D3
+  KEY -.-> D4
+  KEY -.-> D8
+  DG --> BM
+  DG --> OUT
+```
+
+**Reused production components:**
+- the STEP-17 converter (`parseApp`, `emitApp`);
+- the Java runtime library and `TestMain`;
+- the canonical JSON digest;
+- the Ed25519 verifier (`loadTrustStore`, `verifySignature`), pointed at a per-run demo trust store;
+- the BMad receipt counter (`receiptCounts`), which refuses the SIMULATED records;
+- the contract registry, with new `demo/*` contracts.
+
+**Separate from the real workflow:**
+- The demo has its own state file, run directory and trust store. It never calls the real orchestrator, and never writes a real gate result, approval, receipt or authorization.
+- Its G4 is demo planning approval, never Java generation authorization: `generation.java_generation_allowed` stays `false`.
+- Its G6 compares the Java with an independent oracle written from the requirements. No COBOL runtime is executed, so legacy equivalence stays `NOT_ESTABLISHED`.
+- The engineering quality gates `SOURCE_READINESS` and `CONVERSION_VALIDATION` are not used or changed by the demonstration.
+
+Negative paths are covered by `forward/tests/synthetic-gate-demonstration.test.ts`, which the CI job *Synthetic G0–G8 gate demonstration* runs. The operating notes are in `forward/demo/gates/README.md`.

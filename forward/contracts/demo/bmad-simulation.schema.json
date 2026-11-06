@@ -1,0 +1,129 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://revforge.local/contracts/demo/bmad-simulation.schema.json",
+  "title": "Simulated BMad lifecycle record",
+  "description": "One SIMULATED BMad lifecycle step of the synthetic demo. Never a LIVE receipt and never BMad execution evidence.",
+  "type": "object",
+  "additionalProperties": true,
+  "required": [
+    "contract",
+    "contract_version",
+    "environment",
+    "record_id",
+    "binding_id",
+    "workflow_id",
+    "agent",
+    "stage",
+    "mode",
+    "counts_as_bmad_execution",
+    "preflight",
+    "demo_gate"
+  ],
+  "properties": {
+    "contract": {
+      "const": "demo/bmad-simulation"
+    },
+    "contract_version": {
+      "const": "1.0"
+    },
+    "environment": {
+      "const": "SYNTHETIC_INTERVIEW_DEMO"
+    },
+    "record_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "binding_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "workflow_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "agent": {
+      "type": "string",
+      "minLength": 1
+    },
+    "stage": {
+      "type": "string",
+      "minLength": 1
+    },
+    "mode": {
+      "const": "SIMULATED"
+    },
+    "counts_as_bmad_execution": {
+      "const": false
+    },
+    "preflight": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "decision",
+        "checks"
+      ],
+      "properties": {
+        "decision": {
+          "enum": [
+            "WOULD_BE_ELIGIBLE_IN_DEMO",
+            "BLOCKED"
+          ]
+        },
+        "checks": {
+          "type": "array",
+          "minItems": 0,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "id",
+              "ok",
+              "detail"
+            ],
+            "properties": {
+              "id": {
+                "type": "string",
+                "minLength": 1
+              },
+              "ok": {
+                "type": "boolean"
+              },
+              "detail": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      }
+    },
+    "demo_gate": {
+      "type": "string",
+      "minLength": 1
+    },
+    "inputs": {
+      "type": "array",
+      "minItems": 0,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "path",
+          "sha256"
+        ],
+        "properties": {
+          "path": {
+            "type": "string",
+            "minLength": 1
+          },
+          "sha256": {
+            "type": "string",
+            "pattern": "^[0-9a-f]{64}$"
+          }
+        }
+      }
+    },
+    "real_receipt_check": {
+      "type": "object"
+    }
+  }
+}

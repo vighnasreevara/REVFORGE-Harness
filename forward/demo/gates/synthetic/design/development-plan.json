@@ -1,0 +1,118 @@
+{
+  "contract": "demo/development-plan",
+  "contract_version": "1.0",
+  "environment": "SYNTHETIC_INTERVIEW_DEMO",
+  "program_id": "DEMOORD1",
+  "authored_by": "synthetic F4 development planner (hand-written for the demonstration)",
+  "requirements_ref": {
+    "path": "requirements/requirements.json",
+    "sha256": "947822e721167f4efa658ce8cd4977b113453743dd2f87fc12b0b5594fa64be8"
+  },
+  "architecture_ref": {
+    "path": "design/architecture.json",
+    "sha256": "67e443d90ba6041f42f3b650151bcb015a4bd8ac6bf6123cc6e8f5a95281f01b"
+  },
+  "java_generation_authorization": "NOT_GRANTED",
+  "note": "Approving this plan (demo G4) authorises the synthetic demonstration build only. It is not authorisation to generate Java in the real modernization environment.",
+  "epics": [
+    {
+      "epic_id": "EPIC-DEMO-01",
+      "title": "Convert and verify the synthetic order-pricing program",
+      "story_ids": [
+        "ST-DEMO-01",
+        "ST-DEMO-02",
+        "ST-DEMO-03",
+        "ST-DEMO-04"
+      ]
+    }
+  ],
+  "stories": [
+    {
+      "story_id": "ST-DEMO-01",
+      "title": "Validate the order (line count, tier, zero quantity)",
+      "requirement_ids": [
+        "REQ-DEMO-001",
+        "REQ-DEMO-002",
+        "REQ-DEMO-004"
+      ],
+      "component_ids": [
+        "CMP-DEMO-01"
+      ],
+      "tasks": [
+        "Generate DEMOORD1 with the local converter",
+        "Run scenarios F07, F08, F09, F10, F11 and F12"
+      ],
+      "acceptance_criteria": [
+        "Return codes 8, 4 and 12 are set exactly as specified, with all amounts 0",
+        "The line-count check precedes the tier check"
+      ]
+    },
+    {
+      "story_id": "ST-DEMO-02",
+      "title": "Price the lines and apply the tier discount",
+      "requirement_ids": [
+        "REQ-DEMO-003",
+        "REQ-DEMO-005"
+      ],
+      "component_ids": [
+        "CMP-DEMO-01",
+        "CMP-DEMO-02"
+      ],
+      "tasks": [
+        "Run scenarios F02, F03, F04, F13, F14 and F16",
+        "Confirm truncation of fractional cents"
+      ],
+      "acceptance_criteria": [
+        "Subtotal is the sum over the first LINE-COUNT lines",
+        "Discounts match the thresholds, with fractions truncated",
+        "The maximum order is calculated without truncation"
+      ]
+    },
+    {
+      "story_id": "ST-DEMO-03",
+      "title": "Shipping, total and per-call reset",
+      "requirement_ids": [
+        "REQ-DEMO-006",
+        "REQ-DEMO-007",
+        "REQ-DEMO-008"
+      ],
+      "component_ids": [
+        "CMP-DEMO-01"
+      ],
+      "tasks": [
+        "Run scenarios F01, F05, F06 and F15"
+      ],
+      "acceptance_criteria": [
+        "Shipping is 695 below a net of 7500 and 0 from 7500",
+        "Total equals subtotal - discount + shipping",
+        "Values preset by the caller never appear in the result"
+      ]
+    },
+    {
+      "story_id": "ST-DEMO-04",
+      "title": "Independent verification and review",
+      "requirement_ids": [
+        "REQ-DEMO-001",
+        "REQ-DEMO-002",
+        "REQ-DEMO-003",
+        "REQ-DEMO-004",
+        "REQ-DEMO-005",
+        "REQ-DEMO-006",
+        "REQ-DEMO-007",
+        "REQ-DEMO-008"
+      ],
+      "component_ids": [
+        "CMP-DEMO-03",
+        "CMP-DEMO-04"
+      ],
+      "tasks": [
+        "Compare the Java with the independent oracle on boundary, negative and seeded cases (G6)",
+        "Run the independent review checks (G7)"
+      ],
+      "acceptance_criteria": [
+        "Every oracle case matches",
+        "The review has no blocking finding"
+      ]
+    }
+  ]
+}

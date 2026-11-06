@@ -1,0 +1,142 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://revforge.local/contracts/demo/gate-result.schema.json",
+  "title": "Synthetic demo gate result",
+  "description": "Result of one demo gate. demo_gate_status is evaluated from the listed checks; it is never a production gate status.",
+  "type": "object",
+  "additionalProperties": true,
+  "required": [
+    "contract",
+    "contract_version",
+    "environment",
+    "demo_run_id",
+    "gate",
+    "name",
+    "demo_gate_status",
+    "reason",
+    "prerequisite",
+    "responsibility",
+    "approval_evidence",
+    "checks",
+    "evidence",
+    "evaluated_at",
+    "production_authorization"
+  ],
+  "properties": {
+    "contract": {
+      "const": "demo/gate-result"
+    },
+    "contract_version": {
+      "const": "1.0"
+    },
+    "environment": {
+      "const": "SYNTHETIC_INTERVIEW_DEMO"
+    },
+    "demo_run_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "gate": {
+      "enum": [
+        "G0",
+        "G1",
+        "G2",
+        "G3",
+        "G4",
+        "G5",
+        "G6",
+        "G7",
+        "G8"
+      ]
+    },
+    "name": {
+      "type": "string",
+      "minLength": 1
+    },
+    "demo_gate_status": {
+      "enum": [
+        "PASS",
+        "FAIL",
+        "BLOCKED",
+        "NOT_RUN"
+      ]
+    },
+    "reason": {
+      "type": "string"
+    },
+    "prerequisite": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "responsibility": {
+      "type": "string",
+      "minLength": 1
+    },
+    "approval_evidence": {
+      "type": "string",
+      "minLength": 1
+    },
+    "checks": {
+      "type": "array",
+      "minItems": 0,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "id",
+          "ok",
+          "detail"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "ok": {
+            "type": "boolean"
+          },
+          "detail": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "evidence": {
+      "type": "array",
+      "minItems": 0,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "path",
+          "sha256"
+        ],
+        "properties": {
+          "path": {
+            "type": "string",
+            "minLength": 1
+          },
+          "sha256": {
+            "type": "string",
+            "pattern": "^[0-9a-f]{64}$"
+          },
+          "role": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "evaluated_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "production_authorization": {
+      "const": "NOT_GRANTED"
+    },
+    "details": {
+      "type": "object"
+    }
+  }
+}

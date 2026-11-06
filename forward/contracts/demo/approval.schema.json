@@ -1,0 +1,175 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://revforge.local/contracts/demo/approval.schema.json",
+  "title": "Synthetic demo approval",
+  "description": "A demo-only approval signed with an ephemeral Ed25519 key that exists for one demo run. The signer is a synthetic demo authority, never a real stakeholder, and the record never grants production authorisation.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "contract",
+    "contract_version",
+    "environment",
+    "approval_id",
+    "gate",
+    "decision",
+    "subject",
+    "binding",
+    "signer",
+    "production_authorization",
+    "signed_at",
+    "signature"
+  ],
+  "properties": {
+    "contract": {
+      "const": "demo/approval"
+    },
+    "contract_version": {
+      "const": "1.0"
+    },
+    "environment": {
+      "const": "SYNTHETIC_INTERVIEW_DEMO"
+    },
+    "approval_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "gate": {
+      "enum": [
+        "G2",
+        "G3",
+        "G4",
+        "G8"
+      ]
+    },
+    "decision": {
+      "enum": [
+        "approved",
+        "rejected"
+      ]
+    },
+    "subject": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "kind",
+        "path",
+        "sha256"
+      ],
+      "properties": {
+        "kind": {
+          "type": "string",
+          "minLength": 1
+        },
+        "path": {
+          "type": "string",
+          "minLength": 1
+        },
+        "sha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        }
+      }
+    },
+    "binding": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "demo_run_id",
+        "baseline_sha256",
+        "source_sha256",
+        "prior_gates"
+      ],
+      "properties": {
+        "demo_run_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "baseline_sha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "source_sha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "prior_gates": {
+          "type": "array",
+          "minItems": 0,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "gate",
+              "status",
+              "result_sha256"
+            ],
+            "properties": {
+              "gate": {
+                "type": "string",
+                "minLength": 1
+              },
+              "status": {
+                "type": "string",
+                "minLength": 1
+              },
+              "result_sha256": {
+                "type": "string",
+                "pattern": "^[0-9a-f]{64}$"
+              }
+            }
+          }
+        }
+      }
+    },
+    "signer": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "signer_id",
+        "role",
+        "kind",
+        "statement"
+      ],
+      "properties": {
+        "signer_id": {
+          "type": "string",
+          "pattern": "^synthetic-demo-[a-z0-9-]+$"
+        },
+        "role": {
+          "type": "string",
+          "minLength": 1
+        },
+        "kind": {
+          "const": "SYNTHETIC_DEMO_AUTHORITY"
+        },
+        "statement": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "production_authorization": {
+      "const": "NOT_GRANTED"
+    },
+    "signed_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "signature": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "algorithm",
+        "value"
+      ],
+      "properties": {
+        "algorithm": {
+          "const": "Ed25519"
+        },
+        "value": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}
