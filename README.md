@@ -60,11 +60,20 @@ Key deliverables:
 The forward harness (`forward/`) turns the reverse artifacts into a governed modernization. A TypeScript runtime is the single deterministic controller. It manages:
 - JSON Schema contracts (Ajv);
 - workflow state transitions;
-- engineering gates G0–G8;
+- the governance checkpoints G0–G8;
 - signed approvals;
 - agent dispatch packets and receipts.
 
 Agents produce deliverables, but no agent output can pass a gate or approve anything.
+
+### Two kinds of gates
+
+| Kind | Gates | What they decide | Where |
+|---|---|---|---|
+| **Engineering quality gates** | **`SOURCE_READINESS`** and **`CONVERSION_VALIDATION`** | whether one program's source is understood well enough to convert, and whether a conversion output is verified as labelled (compiled, tested, traced, no fabricated behaviour). They never authorize generation and never mean equivalence. | `forward/runtime/src/pilot/gates.ts` (`pilot readiness`, `pilot validate`) |
+| **Governance checkpoints** | **G0–G8** | the governed workflow: baseline and evidence (G0–G1), signed human approvals of requirements, architecture and stories (G2–G4), build, independent verification, review and human acceptance (G5–G8) | `forward/runtime/src/orchestrator/gates.ts` and the approval modules |
+
+In the real workflow G0 and G1 pass, G2 is UNVERIFIED (no trust store is configured) and G3–G8 are BLOCKED; G5–G8 are fail-closed. The [synthetic demonstration](#synthetic-end-to-end-gate-demonstration) shows all nine checkpoints executing on a separate synthetic example.
 
 | Agent | Role | Gate |
 |---|---|---|
@@ -104,6 +113,43 @@ See [BMAD-GOVERNANCE.md](forward/handover/BMAD-GOVERNANCE.md).
 | COBOL-equivalent programs or rules | **0** |
 
 *COMPLETE*, *compiles* and *passes source-derived tests* do not mean equivalent to the legacy COBOL program. That needs a run of the legacy system on the same inputs, and none is available.
+
+## Synthetic End-to-End Gate Demonstration
+
+A self-contained, executable demonstration of all nine governance checkpoints, G0–G8, on one small synthetic COBOL program. It runs from a clean checkout with Node.js and JDK 21:
+
+```bash
+cd forward && npm ci
+npm run demo:gates    # build, run G0–G8, print the results; exit code 0 only if all nine pass
+npm run demo:test     # the happy path and the negative-path tests
+```
+
+**What it demonstrates.** Every demo gate executes real checks; no status is set by hand.
+
+| Gate | What actually runs |
+|---|---|
+| G0 Baseline Integrity | SHA-256 of the synthetic source and every required input against the recorded baseline; no unexpected files |
+| G1 Evidence Verification | re-parses the COBOL and checks the synthetic reverse evidence: paragraphs, 31 statements, fields, ID references, rule-to-statement traceability |
+| G2 Requirements Approval | every business rule covered by a requirement; worked examples; no blocking uncertainty; data contract equal to the parsed record layout; an Ed25519 demo approval bound to the exact requirements, baseline and prior results |
+| G3 Architecture Approval | the architecture references the approved requirements by hash; requirements allocated to components; dependencies and decisions documented; a signed demo approval |
+| G4 Development Plan Approval | stories trace every requirement, with tasks and acceptance criteria; a signed demo approval. This is demo planning approval, **not** Java generation authorization |
+| G5 Java Build and Tests | the existing local converter generates the Java (no gaps, every statement traced); `javac -Werror` on Java 21; 16 hand-written functional and boundary scenarios executed |
+| G6 Independent Verification | an independent oracle written from the requirements (it loads no other module) computes about 300 boundary, negative, seeded and example cases, and the Java must match every one |
+| G7 Independent Review | re-hashes all evidence, checks requirement coverage, traceability, build evidence and unexplained changes, confirms the real configuration and records were not touched, and checks separation of duties |
+| G8 Synthetic Acceptance | a signed demo acceptance bound to G0–G7 and the review result, with complete evidence and no critical findings: `SYNTHETIC_DEMO_ACCEPTED` |
+
+Expected result: nine `DEMO PASS` rows. The negative-path tests show that each gate also *blocks*: an altered source hash, missing evidence, an invalid, missing, foreign-key or wrong-role approval, a compilation failure, a failing test, Java that differs from the oracle, tampered test evidence, an unsigned acceptance, and a gate run before its prerequisite each stop the run with a diagnostic and exit code 1.
+
+**Why it is separate from the real modernization:**
+- **Environment.** Every record says `environment: SYNTHETIC_INTERVIEW_DEMO`, `production_authorization: NOT_GRANTED`, `real_bmad_execution: NOT_EXECUTED` and `legacy_equivalence: NOT_ESTABLISHED`.
+- **Isolation.** Inputs come only from `forward/demo/gates/synthetic/`, and output goes to `forward/demo/gates/runs/` (git-ignored). The real workflow runs, reverse artifacts, configuration, trust anchor and generated Java are never written.
+- **Approvals.** They are signed with an ephemeral Ed25519 key created for one run. The private key never touches the disk. The signer is a synthetic demo authority, not a stakeholder, and the real trust anchor does not accept it.
+- **BMad.** The six bindings (PRD, ARCH, EPICS, SPRINT, BUILD, REVIEW) are mapped and preflighted, but every step is `SIMULATED`. The real receipt counter refuses these records, so real mandatory BMad execution stays blocked.
+- **Equivalence.** G6 compares the Java with an independent specification oracle. No COBOL runtime is executed, so it is not legacy equivalence.
+
+**What it does not change.** The real project status stays as shown below: G2 UNVERIFIED, G3–G8 BLOCKED, 569 OPEN gaps, no established equivalence, not production ready. The demonstration shows how the checkpoints work. It does not approve real Java generation or complete any migration work.
+
+Details: [forward/demo/gates/README.md](forward/demo/gates/README.md).
 
 ## Dashboard
 
@@ -172,7 +218,7 @@ cd forward && npm ci && npm run build && npm test
 
 The full test suite needs the developer environment; see the runbook.
 
-**CI.** `.github/workflows/revforge-ci.yml` runs the checks that work on a pure checkout. Source-dependent checks are not run in CI, by design.
+**CI.** `.github/workflows/revforge-ci.yml` runs the checks that work on a pure checkout, including a job that runs the synthetic G0–G8 demonstration and its negative-path tests. Source-dependent checks are not run in CI, by design.
 
 ## Project status
 
@@ -190,6 +236,7 @@ The full test suite needs the developer environment; see the runbook.
 .claude/skills/        Reverse-engineering skills, plus synced copies of the forward skills
 output/                Reverse artifacts (inventory, parser, data, logic, rules, diagram, final_report)
 forward/               Forward harness: runtime, contracts, agents F1–F7, skills, tools, tests, reports
+forward/demo/gates/    Synthetic G0–G8 gate demonstration (synthetic inputs; runs are git-ignored)
 forward/dashboard/     Read-only modernization dashboard
 forward/handover/      Final handover package
 docs/                  Design notes for the permanent-ID enhancements (Agents 1–3)

@@ -6,7 +6,7 @@
 - **CI:** runs on a pure Git checkout and is included in `.github/workflows/revforge-ci.yml`. Individual tests that need the COBOL source or generated Java skip themselves there; the *CI skips* column counts them.
 - **Developer:** needs the git-ignored BMad staging release and executor installation (`forward/integrations/bmad/staging`, `executor`). It is not run in CI, by design.
 
-Counts are from the full developer-environment run: 418 tests in 25 files, all passing.
+Counts are from the full developer-environment run: 437 tests in 26 files, all passing.
 
 | Test file | Responsibility | Main components | Tests | Environment (CI skips) |
 |---|---|---|---|---|
@@ -35,10 +35,11 @@ Counts are from the full developer-environment run: 418 tests in 25 files, all p
 | `dashboard-backup-exclusion-policy.test.ts` | backup exclusion policy 2: the dashboard's reproducible output is excluded, its source stays recoverable, policy-1 archives still verify | `tools/backup.js` | 6 | CI |
 | `bmad-e2e.test.ts` | BMad end to end: receipts, drafts and forward consumption | `bmad/` (adapter, executor, governance, preflight, runner), `disclosure/` | 12 | Developer |
 | `git-policy.test.ts` | the Git tracking policy: the hand-written Java runtime tracked, generated Java and class files ignored | `helpers/gitpolicy.ts` | 4 | CI |
+| `synthetic-gate-demonstration.test.ts` | the synthetic G0–G8 gate demonstration (`SYNTHETIC_INTERVIEW_DEMO`): all nine demo gates pass with executed checks; injected defects stop the run at the right gate with exit code 1; demo approvals and SIMULATED BMad receipts are refused as production authorization | `demo/` (gates, oracle, signing), `pilot/` (cobol-app, java-app), `approval/trust`, `bmad/governance` | 19 | CI (demo job) |
 
 **Totals:**
-- 25 files and 418 tests.
-- **CI:** 20 files, 322 tests (30 skip themselves on a pure checkout).
+- 26 files and 437 tests.
+- **CI:** 20 files, 322 tests in the forward job (30 skip themselves on a pure checkout), plus `synthetic-gate-demonstration.test.ts` (19 tests) in the demo job.
 - **Developer only:** 5 files, 96 tests.
 
 ## Running
@@ -47,7 +48,8 @@ From `forward/`:
 
 ```bash
 npm run build                                   # compiles runtime and tests into dist/
-npm test                                        # build + every file (developer environment for all 418)
+npm test                                        # build + every file (developer environment for all 437)
+npm run demo:test                               # build + the synthetic gate demonstration tests only
 node --test dist/tests/synthetic-conversion-pilot.test.js          # one file
 node --test --test-name-pattern "recovery completeness" dist/tests/synthetic-conversion-pilot.test.js   # one test
 ```

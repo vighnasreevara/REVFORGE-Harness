@@ -1,0 +1,265 @@
+{
+  "contract": "demo/run-summary",
+  "contract_version": "1.0",
+  "environment": "SYNTHETIC_INTERVIEW_DEMO",
+  "demo_run_id": "DEMO-20261106T012136Z-6a3d",
+  "started_at": "2026-11-06T01:21:36.194Z",
+  "finished_at": "2026-11-06T01:21:40.926Z",
+  "verdict": "SYNTHETIC_DEMO_ACCEPTED",
+  "stopped_at": null,
+  "production_authorization": "NOT_GRANTED",
+  "real_bmad_execution": "NOT_EXECUTED",
+  "legacy_equivalence": "NOT_ESTABLISHED",
+  "gates": [
+    {
+      "gate": "G0",
+      "name": "Baseline Integrity",
+      "demo_gate_status": "PASS",
+      "reason": "6 checks passed",
+      "result": "gates/G0.result.json",
+      "checks_passed": 6,
+      "checks_total": 6
+    },
+    {
+      "gate": "G1",
+      "name": "Evidence Verification",
+      "demo_gate_status": "PASS",
+      "reason": "10 checks passed",
+      "result": "gates/G1.result.json",
+      "checks_passed": 10,
+      "checks_total": 10
+    },
+    {
+      "gate": "G2",
+      "name": "Requirements Approval",
+      "demo_gate_status": "PASS",
+      "reason": "18 checks passed",
+      "result": "gates/G2.result.json",
+      "checks_passed": 18,
+      "checks_total": 18
+    },
+    {
+      "gate": "G3",
+      "name": "Architecture Approval",
+      "demo_gate_status": "PASS",
+      "reason": "17 checks passed",
+      "result": "gates/G3.result.json",
+      "checks_passed": 17,
+      "checks_total": 17
+    },
+    {
+      "gate": "G4",
+      "name": "Development Plan Approval",
+      "demo_gate_status": "PASS",
+      "reason": "18 checks passed",
+      "result": "gates/G4.result.json",
+      "checks_passed": 18,
+      "checks_total": 18
+    },
+    {
+      "gate": "G5",
+      "name": "Java Build and Tests",
+      "demo_gate_status": "PASS",
+      "reason": "11 checks passed",
+      "result": "gates/G5.result.json",
+      "checks_passed": 11,
+      "checks_total": 11
+    },
+    {
+      "gate": "G6",
+      "name": "Independent Verification",
+      "demo_gate_status": "PASS",
+      "reason": "9 checks passed",
+      "result": "gates/G6.result.json",
+      "checks_passed": 9,
+      "checks_total": 9
+    },
+    {
+      "gate": "G7",
+      "name": "Independent Review",
+      "demo_gate_status": "PASS",
+      "reason": "12 checks passed",
+      "result": "gates/G7.result.json",
+      "checks_passed": 12,
+      "checks_total": 12
+    },
+    {
+      "gate": "G8",
+      "name": "Synthetic Acceptance",
+      "demo_gate_status": "PASS",
+      "reason": "15 checks passed",
+      "result": "gates/G8.result.json",
+      "checks_passed": 15,
+      "checks_total": 15
+    }
+  ],
+  "baseline": {
+    "file": "baseline.json",
+    "sha256": "c72c400a47739cef1cc89a05ab275bc6c2fbab443efb5aa7892e010ef0f5be75",
+    "source": {
+      "path": "source/DEMOORD1.cbl",
+      "sha256": "f8e365894768f8ecb1054a78f7ac8c9b92143461edb718e4a1a95e74c1582d82",
+      "bytes": 3990
+    },
+    "inputs": [
+      {
+        "path": "reverse/reverse-evidence.json",
+        "sha256": "44554ec8643a2bf4554d42617d1edb7a0e308620be95aaea2602f6770feba8d0",
+        "role": "synthetic reverse-engineering evidence"
+      },
+      {
+        "path": "requirements/requirements.json",
+        "sha256": "947822e721167f4efa658ce8cd4977b113453743dd2f87fc12b0b5594fa64be8",
+        "role": "requirements"
+      },
+      {
+        "path": "requirements/data-contract.json",
+        "sha256": "8ca544aa13201df7e753fa00d661925f256b4495c6dff7ecb809674414e11856",
+        "role": "data contract"
+      },
+      {
+        "path": "design/architecture.json",
+        "sha256": "67e443d90ba6041f42f3b650151bcb015a4bd8ac6bf6123cc6e8f5a95281f01b",
+        "role": "architecture specification"
+      },
+      {
+        "path": "design/development-plan.json",
+        "sha256": "66be58bb390b27e49de2e8ff3389f26517e21ebaaa6dd93f82424d62889610c4",
+        "role": "development plan"
+      },
+      {
+        "path": "tests/functional-tests.json",
+        "sha256": "8d8f8b4190cef5984efacb1a388c9870bf51deeedd1b07fea55ad4c6da4c7772",
+        "role": "functional and boundary test fixtures"
+      }
+    ]
+  },
+  "bmad": {
+    "release": "bmad-method@6.12.4",
+    "mandatory_in_real_configuration": true,
+    "live_execution": "NOT_EXECUTED",
+    "simulated_stages": 6,
+    "would_be_eligible_in_demo": 6,
+    "counted_as_bmad_execution": 0,
+    "acceptance_outside_bmad": "G6-G8 stay outside BMad, as in the real design",
+    "real_governed_workflow": "BMAD_BLOCKED (unchanged: no LIVE receipt exists)",
+    "stages": [
+      {
+        "binding_id": "BMAD-PRD",
+        "workflow_id": "bmad-prd",
+        "agent": "F1",
+        "stage": "requirements",
+        "activity": "requirements (F1) -> PRD rendering of the approved requirements",
+        "demo_gate": "G2",
+        "mode": "SIMULATED",
+        "preflight": "WOULD_BE_ELIGIBLE_IN_DEMO",
+        "counts_as_bmad_execution": false,
+        "real_receipt_check": "SIM-DEMO-20261106T012136Z-6a3d-BMAD-PRD is a SIMULATED receipt (MOCK_NOT_EVIDENCE): never BMad execution evidence"
+      },
+      {
+        "binding_id": "BMAD-ARCH",
+        "workflow_id": "bmad-architecture",
+        "agent": "F3",
+        "stage": "architecture",
+        "activity": "architecture (F3)",
+        "demo_gate": "G3",
+        "mode": "SIMULATED",
+        "preflight": "WOULD_BE_ELIGIBLE_IN_DEMO",
+        "counts_as_bmad_execution": false,
+        "real_receipt_check": "SIM-DEMO-20261106T012136Z-6a3d-BMAD-ARCH is a SIMULATED receipt (MOCK_NOT_EVIDENCE): never BMad execution evidence"
+      },
+      {
+        "binding_id": "BMAD-EPICS",
+        "workflow_id": "bmad-create-epics-and-stories",
+        "agent": "F4",
+        "stage": "stories",
+        "activity": "epics and stories (F4)",
+        "demo_gate": "G4",
+        "mode": "SIMULATED",
+        "preflight": "WOULD_BE_ELIGIBLE_IN_DEMO",
+        "counts_as_bmad_execution": false,
+        "real_receipt_check": "SIM-DEMO-20261106T012136Z-6a3d-BMAD-EPICS is a SIMULATED receipt (MOCK_NOT_EVIDENCE): never BMad execution evidence"
+      },
+      {
+        "binding_id": "BMAD-SPRINT",
+        "workflow_id": "bmad-sprint-planning",
+        "agent": "F4",
+        "stage": "sprint",
+        "activity": "sprint planning (F4)",
+        "demo_gate": "G4",
+        "mode": "SIMULATED",
+        "preflight": "WOULD_BE_ELIGIBLE_IN_DEMO",
+        "counts_as_bmad_execution": false,
+        "real_receipt_check": "SIM-DEMO-20261106T012136Z-6a3d-BMAD-SPRINT is a SIMULATED receipt (MOCK_NOT_EVIDENCE): never BMad execution evidence"
+      },
+      {
+        "binding_id": "BMAD-BUILD",
+        "workflow_id": "bmad-build",
+        "agent": "F5",
+        "stage": "implementation",
+        "activity": "implementation (F5; here the deterministic converter)",
+        "demo_gate": "G5",
+        "mode": "SIMULATED",
+        "preflight": "WOULD_BE_ELIGIBLE_IN_DEMO",
+        "counts_as_bmad_execution": false,
+        "real_receipt_check": "SIM-DEMO-20261106T012136Z-6a3d-BMAD-BUILD is a SIMULATED receipt (MOCK_NOT_EVIDENCE): never BMad execution evidence"
+      },
+      {
+        "binding_id": "BMAD-REVIEW",
+        "workflow_id": "bmad-code-review",
+        "agent": "F7",
+        "stage": "review",
+        "activity": "code review (F7)",
+        "demo_gate": "G7",
+        "mode": "SIMULATED",
+        "preflight": "WOULD_BE_ELIGIBLE_IN_DEMO",
+        "counts_as_bmad_execution": false,
+        "real_receipt_check": "SIM-DEMO-20261106T012136Z-6a3d-BMAD-REVIEW is a SIMULATED receipt (MOCK_NOT_EVIDENCE): never BMad execution evidence"
+      }
+    ]
+  },
+  "real_project_status": {
+    "generation_java_generation_allowed": false,
+    "bmad_governance_mandatory": true,
+    "approval_trust_store": null,
+    "real_workflow_gates": {
+      "G0": "PASS",
+      "G1": "PASS",
+      "G2": "UNVERIFIED",
+      "G3": "BLOCKED",
+      "G4": "BLOCKED",
+      "G5": "BLOCKED",
+      "G6": "BLOCKED",
+      "G7": "BLOCKED",
+      "G8": "BLOCKED"
+    },
+    "gap_register": {
+      "records": 569,
+      "open": 569
+    },
+    "business_rule_identities": 154,
+    "real_bmad_execution": "NOT_EXECUTED (no LIVE receipt)",
+    "legacy_equivalence": "NOT_ESTABLISHED",
+    "production_readiness": "NOT_PRODUCTION_READY",
+    "engineering_quality_gates": "SOURCE_READINESS and CONVERSION_VALIDATION (pilot/gates.ts) are unchanged and separate from the demo gates"
+  },
+  "environment_info": {
+    "node": "v22.12.0",
+    "platform": "win32 x64",
+    "java": "javac 21.0.13.0.2",
+    "java_source": "REVFORGE_JAVA_HOME",
+    "cobol_compiler": "not available (not used)",
+    "input_dir": "forward/demo/gates/synthetic",
+    "output_dir": "forward/demo/gates/runs/DEMO-20261106T012136Z-6a3d",
+    "trust_store": "trust/demo-trust-store.json",
+    "private_key": "in memory only; never written"
+  },
+  "limitations": [
+    "Synthetic interview demonstration only: one small synthetic program, synthetic evidence and a synthetic demo authority.",
+    "Demo approvals are signed with an ephemeral key created for this run; they are not real human, business-owner or production approvals.",
+    "production_authorization is NOT_GRANTED: no real gate, approval, receipt or Java generation authorisation was created or changed.",
+    "BMad lifecycle steps are SIMULATED; no BMad workflow was executed and real mandatory BMad execution remains blocked.",
+    "G6 compares the Java with an independent specification oracle; no COBOL runtime was executed, so legacy equivalence is NOT_ESTABLISHED.",
+    "The real modernization is unchanged: real G2 is UNVERIFIED and G3-G8 BLOCKED, the gap register stays OPEN, and the project is not production ready."
+  ]
+}
