@@ -1,0 +1,87 @@
+{
+  "contract": "demo/requirements",
+  "contract_version": "1.0",
+  "environment": "SYNTHETIC_INTERVIEW_DEMO",
+  "scope": "programs:DEMOORD1 (synthetic)",
+  "program_id": "DEMOORD1",
+  "source_file_id": "SYN-DEMO-FIL-0001",
+  "authored_by": "synthetic F1 requirements analyst (hand-written for the demonstration)",
+  "note": "Requirements for the synthetic order-pricing program only. Every requirement traces to synthetic business rules (DBR-) mined from the synthetic source. Amounts are integer cents.",
+  "requirements": [
+    {
+      "requirement_id": "REQ-DEMO-001",
+      "title": "Reject a line count outside 1 to 5",
+      "statement": "The program shall set return code 8 and leave subtotal, discount, shipping and total at 0 when the line count is below 1 or above 5.",
+      "rule_ids": ["DBR-001"],
+      "kind": "validation"
+    },
+    {
+      "requirement_id": "REQ-DEMO-002",
+      "title": "Reject an unknown customer tier",
+      "statement": "The program shall set return code 4 and leave all amounts at 0 when the tier is not S, G or P. The line-count check is applied first.",
+      "rule_ids": ["DBR-002"],
+      "kind": "validation"
+    },
+    {
+      "requirement_id": "REQ-DEMO-003",
+      "title": "Subtotal of the priced lines",
+      "statement": "The program shall set the subtotal to the sum of quantity x unit price over the first LINE-COUNT lines. Lines after LINE-COUNT are ignored.",
+      "rule_ids": ["DBR-003"],
+      "kind": "calculation"
+    },
+    {
+      "requirement_id": "REQ-DEMO-004",
+      "title": "Reject a zero-quantity line",
+      "statement": "When any priced line has quantity 0, the program shall set return code 12 and leave subtotal, discount, shipping and total at 0.",
+      "rule_ids": ["DBR-004"],
+      "kind": "validation"
+    },
+    {
+      "requirement_id": "REQ-DEMO-005",
+      "title": "Tier discount, truncated to whole cents",
+      "statement": "The discount shall be subtotal x 15 / 100 for platinum orders with a subtotal of at least 50000; otherwise subtotal x 5 / 100 for gold or platinum orders with a subtotal of at least 10000; otherwise 0. Fractions of a cent are truncated.",
+      "rule_ids": ["DBR-005", "DBR-006", "DBR-007"],
+      "kind": "calculation"
+    },
+    {
+      "requirement_id": "REQ-DEMO-006",
+      "title": "Shipping charge",
+      "statement": "Shipping shall be 695 when subtotal minus discount is below 7500, otherwise 0.",
+      "rule_ids": ["DBR-008"],
+      "kind": "calculation"
+    },
+    {
+      "requirement_id": "REQ-DEMO-007",
+      "title": "Order total",
+      "statement": "For an accepted order the total shall be subtotal minus discount plus shipping, with return code 0.",
+      "rule_ids": ["DBR-009"],
+      "kind": "calculation"
+    },
+    {
+      "requirement_id": "REQ-DEMO-008",
+      "title": "No values carried over between calls",
+      "statement": "Subtotal, discount, shipping, total and return code shall be reset at the start of every call, so that values left by a caller or an earlier call never appear in the result.",
+      "rule_ids": ["DBR-010"],
+      "kind": "initialization"
+    }
+  ],
+  "examples": [
+    { "id": "EX-01", "requirement_ids": ["REQ-DEMO-003", "REQ-DEMO-006", "REQ-DEMO-007"], "title": "standard order below the free-shipping threshold", "order": { "tier": "S", "line_count": 1, "lines": [[2, 1500]] }, "expected": { "subtotal": 3000, "discount": 0, "shipping": 695, "total": 3695, "return_code": 0 } },
+    { "id": "EX-02", "requirement_ids": ["REQ-DEMO-005"], "title": "gold exactly at the 10000 threshold", "order": { "tier": "G", "line_count": 1, "lines": [[1, 10000]] }, "expected": { "subtotal": 10000, "discount": 500, "shipping": 0, "total": 9500, "return_code": 0 } },
+    { "id": "EX-03", "requirement_ids": ["REQ-DEMO-005"], "title": "gold one cent below the threshold", "order": { "tier": "G", "line_count": 1, "lines": [[1, 9999]] }, "expected": { "subtotal": 9999, "discount": 0, "shipping": 0, "total": 9999, "return_code": 0 } },
+    { "id": "EX-04", "requirement_ids": ["REQ-DEMO-005"], "title": "platinum exactly at the 50000 threshold", "order": { "tier": "P", "line_count": 2, "lines": [[2, 20000], [1, 10000]] }, "expected": { "subtotal": 50000, "discount": 7500, "shipping": 0, "total": 42500, "return_code": 0 } },
+    { "id": "EX-05", "requirement_ids": ["REQ-DEMO-005"], "title": "platinum below 50000 gets the 5% rate, truncated", "order": { "tier": "P", "line_count": 1, "lines": [[1, 49999]] }, "expected": { "subtotal": 49999, "discount": 2499, "shipping": 0, "total": 47500, "return_code": 0 } },
+    { "id": "EX-06", "requirement_ids": ["REQ-DEMO-006"], "title": "net exactly 7500 ships free", "order": { "tier": "S", "line_count": 1, "lines": [[1, 7500]] }, "expected": { "subtotal": 7500, "discount": 0, "shipping": 0, "total": 7500, "return_code": 0 } },
+    { "id": "EX-07", "requirement_ids": ["REQ-DEMO-001"], "title": "line count 6 is rejected", "order": { "tier": "S", "line_count": 6, "lines": [[1, 100]] }, "expected": { "subtotal": 0, "discount": 0, "shipping": 0, "total": 0, "return_code": 8 } },
+    { "id": "EX-08", "requirement_ids": ["REQ-DEMO-002"], "title": "unknown tier X is rejected", "order": { "tier": "X", "line_count": 1, "lines": [[1, 100]] }, "expected": { "subtotal": 0, "discount": 0, "shipping": 0, "total": 0, "return_code": 4 } },
+    { "id": "EX-09", "requirement_ids": ["REQ-DEMO-004"], "title": "zero quantity on the second of three lines", "order": { "tier": "G", "line_count": 3, "lines": [[1, 20000], [0, 500], [3, 100]] }, "expected": { "subtotal": 0, "discount": 0, "shipping": 0, "total": 0, "return_code": 12 } },
+    { "id": "EX-10", "requirement_ids": ["REQ-DEMO-003"], "title": "maximum order: 5 lines of 999 x 99999 fits PIC 9(9)", "order": { "tier": "S", "line_count": 5, "lines": [[999, 99999], [999, 99999], [999, 99999], [999, 99999], [999, 99999]] }, "expected": { "subtotal": 499495005, "discount": 0, "shipping": 0, "total": 499495005, "return_code": 0 } }
+  ],
+  "uncertainties": [
+    { "id": "UNC-001", "topic": "Rounding of the discount", "resolution": "Truncation: COMPUTE without ROUNDED drops fractions of a cent (source lines 76 and 80).", "status": "RESOLVED", "blocking": false },
+    { "id": "UNC-002", "topic": "Order of the validations", "resolution": "The line count is checked before the tier (line 44 precedes line 48), so an order failing both gets return code 8.", "status": "RESOLVED", "blocking": false },
+    { "id": "UNC-003", "topic": "Lines after a zero-quantity line", "resolution": "The loop continues, but the subtotal is reset to 0 afterwards (lines 56 to 58), so it has no visible effect.", "status": "RESOLVED", "blocking": false },
+    { "id": "UNC-004", "topic": "Platinum orders between 10000 and 49999", "resolution": "EVALUATE takes the first true WHEN, so they get the 5% rate (lines 74 to 81).", "status": "RESOLVED", "blocking": false },
+    { "id": "UNC-005", "topic": "Non-numeric content in numeric input fields", "resolution": "Outside the synthetic interface contract: callers must pass numeric DISPLAY data. Documented, not tested.", "status": "ACCEPTED_LIMITATION", "blocking": false }
+  ]
+}

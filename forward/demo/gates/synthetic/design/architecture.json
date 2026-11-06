@@ -1,0 +1,120 @@
+{
+  "contract": "demo/architecture",
+  "contract_version": "1.0",
+  "environment": "SYNTHETIC_INTERVIEW_DEMO",
+  "program_id": "DEMOORD1",
+  "authored_by": "synthetic F3 Java architect (hand-written for the demonstration)",
+  "requirements_ref": {
+    "path": "requirements/requirements.json",
+    "sha256": "947822e721167f4efa658ce8cd4977b113453743dd2f87fc12b0b5594fa64be8"
+  },
+  "data_contract_ref": {
+    "path": "requirements/data-contract.json",
+    "sha256": "8ca544aa13201df7e753fa00d661925f256b4495c6dff7ecb809674414e11856"
+  },
+  "target": {
+    "language": "Java 21",
+    "build": "javac -Werror (no framework)",
+    "generation": "deterministic local converter (STEP-17 front and back end), not an AI agent"
+  },
+  "components": [
+    {
+      "component_id": "CMP-DEMO-01",
+      "name": "revforge.app.demoord1.Demoord1",
+      "kind": "generated",
+      "responsibility": "The converted program: one Java class per COBOL program, LINKAGE record as a byte area, each statement mapped to its COBOL line.",
+      "requirement_ids": [
+        "REQ-DEMO-001",
+        "REQ-DEMO-002",
+        "REQ-DEMO-003",
+        "REQ-DEMO-004",
+        "REQ-DEMO-005",
+        "REQ-DEMO-006",
+        "REQ-DEMO-007",
+        "REQ-DEMO-008"
+      ]
+    },
+    {
+      "component_id": "CMP-DEMO-02",
+      "name": "revforge.cobol runtime library",
+      "kind": "hand-written, tracked (forward/runtime/java)",
+      "responsibility": "COBOL data semantics: zoned-decimal fields, exact decimal arithmetic, truncation on store, 88-level conditions, CALL and GOBACK.",
+      "requirement_ids": [
+        "REQ-DEMO-003",
+        "REQ-DEMO-005",
+        "REQ-DEMO-007"
+      ]
+    },
+    {
+      "component_id": "CMP-DEMO-03",
+      "name": "revforge.cobol.testing.TestMain and Scenarios",
+      "kind": "hand-written, tracked (forward/runtime/java)",
+      "responsibility": "Executes scenario fixtures against the converted class: sets LINKAGE items, CALLs the program, compares outcome and items.",
+      "requirement_ids": []
+    },
+    {
+      "component_id": "CMP-DEMO-04",
+      "name": "Independent oracle (runtime/src/demo/oracle.ts)",
+      "kind": "hand-written TypeScript",
+      "responsibility": "Computes expected results from requirements.json alone (BigInt cents); never calls or reads the Java.",
+      "requirement_ids": [
+        "REQ-DEMO-001",
+        "REQ-DEMO-002",
+        "REQ-DEMO-003",
+        "REQ-DEMO-004",
+        "REQ-DEMO-005",
+        "REQ-DEMO-006",
+        "REQ-DEMO-007"
+      ]
+    }
+  ],
+  "dependencies": [
+    {
+      "from": "CMP-DEMO-01",
+      "to": "CMP-DEMO-02",
+      "kind": "compile and runtime"
+    },
+    {
+      "from": "CMP-DEMO-03",
+      "to": "CMP-DEMO-01",
+      "kind": "test execution"
+    },
+    {
+      "from": "CMP-DEMO-03",
+      "to": "CMP-DEMO-02",
+      "kind": "compile and runtime"
+    }
+  ],
+  "decisions": [
+    {
+      "adr_id": "ADR-DEMO-01",
+      "title": "Generate the Java with the existing deterministic converter",
+      "decision": "Use parseApp/emitApp (STEP-17) so that every Java statement maps to a COBOL line; no hand-written business logic.",
+      "consequence": "Generation provenance is recorded at G5; the converter refuses constructs it cannot translate exactly.",
+      "requirement_ids": [
+        "REQ-DEMO-003",
+        "REQ-DEMO-005"
+      ]
+    },
+    {
+      "adr_id": "ADR-DEMO-02",
+      "title": "Exact decimal arithmetic with COBOL truncation",
+      "decision": "Amounts stay integer cents in zoned-decimal fields; arithmetic is exact BigDecimal and truncates only on the final store.",
+      "consequence": "The 5% and 15% discounts truncate fractions of a cent exactly as COMPUTE without ROUNDED.",
+      "requirement_ids": [
+        "REQ-DEMO-005"
+      ]
+    },
+    {
+      "adr_id": "ADR-DEMO-03",
+      "title": "Preserve the CALL interface",
+      "decision": "Keep the 77-byte LS-ORDER record layout of the data contract as the Java interface.",
+      "consequence": "Callers and test fixtures address the same named items as the COBOL.",
+      "requirement_ids": [
+        "REQ-DEMO-001",
+        "REQ-DEMO-002",
+        "REQ-DEMO-008"
+      ]
+    }
+  ]
+}

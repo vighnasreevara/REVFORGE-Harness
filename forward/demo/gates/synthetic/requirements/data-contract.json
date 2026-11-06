@@ -1,0 +1,24 @@
+{
+  "contract": "demo/data-contract",
+  "contract_version": "1.0",
+  "environment": "SYNTHETIC_INTERVIEW_DEMO",
+  "program_id": "DEMOORD1",
+  "interface": "CALL 'DEMOORD1' USING LS-ORDER",
+  "record": { "name": "LS-ORDER", "record_id": "SYN-DEMO-REC-0002", "length": 77 },
+  "authored_by": "synthetic F2 data mapping specialist (hand-written for the demonstration)",
+  "fields": [
+    { "name": "LS-TIER", "offset": 0, "length": 1, "picture": "X(1)", "direction": "in", "java": "alphanumeric, 1 character", "domain": "S, G or P (anything else: return code 4)" },
+    { "name": "LS-LINE-COUNT", "offset": 1, "length": 2, "picture": "9(2)", "direction": "in", "java": "unsigned integer, 2 digits", "domain": "1 to 5 (otherwise return code 8)" },
+    { "name": "LS-QTY", "offset": 3, "length": 3, "picture": "9(3)", "occurs": 5, "stride": 8, "direction": "in", "java": "unsigned integer, 3 digits, per line", "domain": "1 to 999 (0: return code 12)" },
+    { "name": "LS-UNIT-CENTS", "offset": 6, "length": 5, "picture": "9(5)", "occurs": 5, "stride": 8, "direction": "in", "java": "unsigned integer cents, 5 digits, per line", "domain": "0 to 99999" },
+    { "name": "LS-SUBTOTAL-CENTS", "offset": 43, "length": 9, "picture": "9(9)", "direction": "out", "java": "unsigned integer cents, 9 digits", "domain": "0 to 499495005 (5 x 999 x 99999 fits; no truncation)" },
+    { "name": "LS-DISCOUNT-CENTS", "offset": 52, "length": 9, "picture": "9(9)", "direction": "out", "java": "unsigned integer cents, 9 digits", "domain": "0 to 74924250" },
+    { "name": "LS-SHIPPING-CENTS", "offset": 61, "length": 5, "picture": "9(5)", "direction": "out", "java": "unsigned integer cents, 5 digits", "domain": "0 or 695" },
+    { "name": "LS-TOTAL-CENTS", "offset": 66, "length": 9, "picture": "9(9)", "direction": "out", "java": "unsigned integer cents, 9 digits", "domain": "0 to 499495005" },
+    { "name": "LS-RETURN-CODE", "offset": 75, "length": 2, "picture": "9(2)", "direction": "out", "java": "unsigned integer, 2 digits", "domain": "0, 4, 8 or 12" }
+  ],
+  "numeric_rules": [
+    "All amounts are integer cents held in unsigned zoned-decimal DISPLAY fields; Java uses exact decimal arithmetic (no binary floating point).",
+    "Intermediate results are exact; only the final store into the receiving field truncates (COMPUTE without ROUNDED)."
+  ]
+}

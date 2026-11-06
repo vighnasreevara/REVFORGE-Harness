@@ -1,0 +1,126 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://revforge.local/contracts/demo/run-summary.schema.json",
+  "title": "Synthetic demo run summary",
+  "description": "Machine-readable summary of one synthetic G0-G8 demonstration run.",
+  "type": "object",
+  "additionalProperties": true,
+  "required": [
+    "contract",
+    "contract_version",
+    "environment",
+    "demo_run_id",
+    "started_at",
+    "finished_at",
+    "verdict",
+    "production_authorization",
+    "real_bmad_execution",
+    "legacy_equivalence",
+    "real_project_status",
+    "gates",
+    "baseline",
+    "bmad",
+    "limitations"
+  ],
+  "properties": {
+    "contract": {
+      "const": "demo/run-summary"
+    },
+    "contract_version": {
+      "const": "1.0"
+    },
+    "environment": {
+      "const": "SYNTHETIC_INTERVIEW_DEMO"
+    },
+    "demo_run_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "started_at": {
+      "type": "string"
+    },
+    "finished_at": {
+      "type": "string"
+    },
+    "verdict": {
+      "enum": [
+        "SYNTHETIC_DEMO_ACCEPTED",
+        "SYNTHETIC_DEMO_FAILED"
+      ]
+    },
+    "production_authorization": {
+      "const": "NOT_GRANTED"
+    },
+    "real_bmad_execution": {
+      "const": "NOT_EXECUTED"
+    },
+    "legacy_equivalence": {
+      "const": "NOT_ESTABLISHED"
+    },
+    "real_project_status": {
+      "type": "object"
+    },
+    "gates": {
+      "type": "array",
+      "minItems": 9,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "gate",
+          "name",
+          "demo_gate_status",
+          "reason",
+          "result"
+        ],
+        "properties": {
+          "gate": {
+            "type": "string",
+            "minLength": 1
+          },
+          "name": {
+            "type": "string",
+            "minLength": 1
+          },
+          "demo_gate_status": {
+            "enum": [
+              "PASS",
+              "FAIL",
+              "BLOCKED",
+              "NOT_RUN"
+            ]
+          },
+          "reason": {
+            "type": "string"
+          },
+          "result": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "checks_passed": {
+            "type": "integer"
+          },
+          "checks_total": {
+            "type": "integer"
+          }
+        }
+      }
+    },
+    "baseline": {
+      "type": "object"
+    },
+    "bmad": {
+      "type": "object"
+    },
+    "limitations": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    }
+  }
+}

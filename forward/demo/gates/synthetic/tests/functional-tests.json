@@ -1,0 +1,441 @@
+{
+  "program": "DEMOORD1",
+  "environment": "SYNTHETIC_INTERVIEW_DEMO",
+  "provenance": "Hand-written functional and boundary scenarios (synthetic F5/F6 test author), written from requirements.json before any Java was generated. Executed by the tracked TestMain harness against the generated Java at G5.",
+  "scenarios": [
+    {
+      "id": "F01",
+      "title": "standard order below the free-shipping threshold",
+      "requirement_ids": [
+        "REQ-DEMO-003",
+        "REQ-DEMO-006",
+        "REQ-DEMO-007"
+      ],
+      "boundary": false,
+      "kind": "call",
+      "set": {
+        "LS-TIER": "S",
+        "LS-LINE-COUNT": "1",
+        "LS-QTY(1)": "2",
+        "LS-UNIT-CENTS(1)": "1500"
+      },
+      "expect": {
+        "outcome": "GOBACK",
+        "items": {
+          "LS-SUBTOTAL-CENTS": "3000",
+          "LS-DISCOUNT-CENTS": "0",
+          "LS-SHIPPING-CENTS": "695",
+          "LS-TOTAL-CENTS": "3695",
+          "LS-RETURN-CODE": "0"
+        }
+      }
+    },
+    {
+      "id": "F02",
+      "title": "gold exactly at the 10000 discount threshold",
+      "requirement_ids": [
+        "REQ-DEMO-005",
+        "REQ-DEMO-007"
+      ],
+      "boundary": true,
+      "kind": "call",
+      "set": {
+        "LS-TIER": "G",
+        "LS-LINE-COUNT": "1",
+        "LS-QTY(1)": "1",
+        "LS-UNIT-CENTS(1)": "10000"
+      },
+      "expect": {
+        "outcome": "GOBACK",
+        "items": {
+          "LS-SUBTOTAL-CENTS": "10000",
+          "LS-DISCOUNT-CENTS": "500",
+          "LS-SHIPPING-CENTS": "0",
+          "LS-TOTAL-CENTS": "9500",
+          "LS-RETURN-CODE": "0"
+        }
+      }
+    },
+    {
+      "id": "F03",
+      "title": "gold one cent below the discount threshold",
+      "requirement_ids": [
+        "REQ-DEMO-005"
+      ],
+      "boundary": true,
+      "kind": "call",
+      "set": {
+        "LS-TIER": "G",
+        "LS-LINE-COUNT": "1",
+        "LS-QTY(1)": "1",
+        "LS-UNIT-CENTS(1)": "9999"
+      },
+      "expect": {
+        "outcome": "GOBACK",
+        "items": {
+          "LS-SUBTOTAL-CENTS": "9999",
+          "LS-DISCOUNT-CENTS": "0",
+          "LS-SHIPPING-CENTS": "0",
+          "LS-TOTAL-CENTS": "9999",
+          "LS-RETURN-CODE": "0"
+        }
+      }
+    },
+    {
+      "id": "F04",
+      "title": "platinum 15% discount on 60000",
+      "requirement_ids": [
+        "REQ-DEMO-005",
+        "REQ-DEMO-007"
+      ],
+      "boundary": false,
+      "kind": "call",
+      "set": {
+        "LS-TIER": "P",
+        "LS-LINE-COUNT": "1",
+        "LS-QTY(1)": "3",
+        "LS-UNIT-CENTS(1)": "20000"
+      },
+      "expect": {
+        "outcome": "GOBACK",
+        "items": {
+          "LS-SUBTOTAL-CENTS": "60000",
+          "LS-DISCOUNT-CENTS": "9000",
+          "LS-SHIPPING-CENTS": "0",
+          "LS-TOTAL-CENTS": "51000",
+          "LS-RETURN-CODE": "0"
+        }
+      }
+    },
+    {
+      "id": "F05",
+      "title": "net exactly 7500 ships free",
+      "requirement_ids": [
+        "REQ-DEMO-006"
+      ],
+      "boundary": true,
+      "kind": "call",
+      "set": {
+        "LS-TIER": "S",
+        "LS-LINE-COUNT": "1",
+        "LS-QTY(1)": "1",
+        "LS-UNIT-CENTS(1)": "7500"
+      },
+      "expect": {
+        "outcome": "GOBACK",
+        "items": {
+          "LS-SUBTOTAL-CENTS": "7500",
+          "LS-DISCOUNT-CENTS": "0",
+          "LS-SHIPPING-CENTS": "0",
+          "LS-TOTAL-CENTS": "7500",
+          "LS-RETURN-CODE": "0"
+        }
+      }
+    },
+    {
+      "id": "F06",
+      "title": "net 7499 pays shipping",
+      "requirement_ids": [
+        "REQ-DEMO-006",
+        "REQ-DEMO-007"
+      ],
+      "boundary": true,
+      "kind": "call",
+      "set": {
+        "LS-TIER": "S",
+        "LS-LINE-COUNT": "1",
+        "LS-QTY(1)": "1",
+        "LS-UNIT-CENTS(1)": "7499"
+      },
+      "expect": {
+        "outcome": "GOBACK",
+        "items": {
+          "LS-SUBTOTAL-CENTS": "7499",
+          "LS-DISCOUNT-CENTS": "0",
+          "LS-SHIPPING-CENTS": "695",
+          "LS-TOTAL-CENTS": "8194",
+          "LS-RETURN-CODE": "0"
+        }
+      }
+    },
+    {
+      "id": "F07",
+      "title": "line count 0 is rejected",
+      "requirement_ids": [
+        "REQ-DEMO-001"
+      ],
+      "boundary": true,
+      "kind": "call",
+      "set": {
+        "LS-TIER": "S",
+        "LS-LINE-COUNT": "0",
+        "LS-QTY(1)": "1",
+        "LS-UNIT-CENTS(1)": "100"
+      },
+      "expect": {
+        "outcome": "GOBACK",
+        "items": {
+          "LS-SUBTOTAL-CENTS": "0",
+          "LS-DISCOUNT-CENTS": "0",
+          "LS-SHIPPING-CENTS": "0",
+          "LS-TOTAL-CENTS": "0",
+          "LS-RETURN-CODE": "8"
+        }
+      }
+    },
+    {
+      "id": "F08",
+      "title": "line count 6 is rejected",
+      "requirement_ids": [
+        "REQ-DEMO-001"
+      ],
+      "boundary": true,
+      "kind": "call",
+      "set": {
+        "LS-TIER": "S",
+        "LS-LINE-COUNT": "6",
+        "LS-QTY(1)": "1",
+        "LS-UNIT-CENTS(1)": "100"
+      },
+      "expect": {
+        "outcome": "GOBACK",
+        "items": {
+          "LS-SUBTOTAL-CENTS": "0",
+          "LS-DISCOUNT-CENTS": "0",
+          "LS-SHIPPING-CENTS": "0",
+          "LS-TOTAL-CENTS": "0",
+          "LS-RETURN-CODE": "8"
+        }
+      }
+    },
+    {
+      "id": "F09",
+      "title": "line count 5 is accepted",
+      "requirement_ids": [
+        "REQ-DEMO-001",
+        "REQ-DEMO-003"
+      ],
+      "boundary": true,
+      "kind": "call",
+      "set": {
+        "LS-TIER": "S",
+        "LS-LINE-COUNT": "5",
+        "LS-QTY(1)": "1",
+        "LS-UNIT-CENTS(1)": "100",
+        "LS-QTY(2)": "1",
+        "LS-UNIT-CENTS(2)": "100",
+        "LS-QTY(3)": "1",
+        "LS-UNIT-CENTS(3)": "100",
+        "LS-QTY(4)": "1",
+        "LS-UNIT-CENTS(4)": "100",
+        "LS-QTY(5)": "1",
+        "LS-UNIT-CENTS(5)": "100"
+      },
+      "expect": {
+        "outcome": "GOBACK",
+        "items": {
+          "LS-SUBTOTAL-CENTS": "500",
+          "LS-DISCOUNT-CENTS": "0",
+          "LS-SHIPPING-CENTS": "695",
+          "LS-TOTAL-CENTS": "1195",
+          "LS-RETURN-CODE": "0"
+        }
+      }
+    },
+    {
+      "id": "F10",
+      "title": "unknown tier X is rejected",
+      "requirement_ids": [
+        "REQ-DEMO-002"
+      ],
+      "boundary": false,
+      "kind": "call",
+      "set": {
+        "LS-TIER": "X",
+        "LS-LINE-COUNT": "1",
+        "LS-QTY(1)": "1",
+        "LS-UNIT-CENTS(1)": "100"
+      },
+      "expect": {
+        "outcome": "GOBACK",
+        "items": {
+          "LS-SUBTOTAL-CENTS": "0",
+          "LS-DISCOUNT-CENTS": "0",
+          "LS-SHIPPING-CENTS": "0",
+          "LS-TOTAL-CENTS": "0",
+          "LS-RETURN-CODE": "4"
+        }
+      }
+    },
+    {
+      "id": "F11",
+      "title": "line count checked before tier",
+      "requirement_ids": [
+        "REQ-DEMO-001",
+        "REQ-DEMO-002"
+      ],
+      "boundary": false,
+      "kind": "call",
+      "set": {
+        "LS-TIER": "X",
+        "LS-LINE-COUNT": "0",
+        "LS-QTY(1)": "1",
+        "LS-UNIT-CENTS(1)": "100"
+      },
+      "expect": {
+        "outcome": "GOBACK",
+        "items": {
+          "LS-SUBTOTAL-CENTS": "0",
+          "LS-DISCOUNT-CENTS": "0",
+          "LS-SHIPPING-CENTS": "0",
+          "LS-TOTAL-CENTS": "0",
+          "LS-RETURN-CODE": "8"
+        }
+      }
+    },
+    {
+      "id": "F12",
+      "title": "zero quantity on the second of three lines",
+      "requirement_ids": [
+        "REQ-DEMO-004"
+      ],
+      "boundary": false,
+      "kind": "call",
+      "set": {
+        "LS-TIER": "G",
+        "LS-LINE-COUNT": "3",
+        "LS-QTY(1)": "1",
+        "LS-UNIT-CENTS(1)": "20000",
+        "LS-QTY(2)": "0",
+        "LS-UNIT-CENTS(2)": "500",
+        "LS-QTY(3)": "3",
+        "LS-UNIT-CENTS(3)": "100"
+      },
+      "expect": {
+        "outcome": "GOBACK",
+        "items": {
+          "LS-SUBTOTAL-CENTS": "0",
+          "LS-DISCOUNT-CENTS": "0",
+          "LS-SHIPPING-CENTS": "0",
+          "LS-TOTAL-CENTS": "0",
+          "LS-RETURN-CODE": "12"
+        }
+      }
+    },
+    {
+      "id": "F13",
+      "title": "lines after LINE-COUNT are ignored",
+      "requirement_ids": [
+        "REQ-DEMO-003"
+      ],
+      "boundary": false,
+      "kind": "call",
+      "set": {
+        "LS-TIER": "S",
+        "LS-LINE-COUNT": "1",
+        "LS-QTY(1)": "1",
+        "LS-UNIT-CENTS(1)": "8000",
+        "LS-QTY(2)": "9",
+        "LS-UNIT-CENTS(2)": "9999"
+      },
+      "expect": {
+        "outcome": "GOBACK",
+        "items": {
+          "LS-SUBTOTAL-CENTS": "8000",
+          "LS-DISCOUNT-CENTS": "0",
+          "LS-SHIPPING-CENTS": "0",
+          "LS-TOTAL-CENTS": "8000",
+          "LS-RETURN-CODE": "0"
+        }
+      }
+    },
+    {
+      "id": "F14",
+      "title": "maximum order fits PIC 9(9)",
+      "requirement_ids": [
+        "REQ-DEMO-003"
+      ],
+      "boundary": true,
+      "kind": "call",
+      "set": {
+        "LS-TIER": "S",
+        "LS-LINE-COUNT": "5",
+        "LS-QTY(1)": "999",
+        "LS-UNIT-CENTS(1)": "99999",
+        "LS-QTY(2)": "999",
+        "LS-UNIT-CENTS(2)": "99999",
+        "LS-QTY(3)": "999",
+        "LS-UNIT-CENTS(3)": "99999",
+        "LS-QTY(4)": "999",
+        "LS-UNIT-CENTS(4)": "99999",
+        "LS-QTY(5)": "999",
+        "LS-UNIT-CENTS(5)": "99999"
+      },
+      "expect": {
+        "outcome": "GOBACK",
+        "items": {
+          "LS-SUBTOTAL-CENTS": "499495005",
+          "LS-DISCOUNT-CENTS": "0",
+          "LS-SHIPPING-CENTS": "0",
+          "LS-TOTAL-CENTS": "499495005",
+          "LS-RETURN-CODE": "0"
+        }
+      }
+    },
+    {
+      "id": "F15",
+      "title": "values preset by the caller are reset",
+      "requirement_ids": [
+        "REQ-DEMO-008"
+      ],
+      "boundary": false,
+      "kind": "call",
+      "set": {
+        "LS-TIER": "S",
+        "LS-LINE-COUNT": "1",
+        "LS-QTY(1)": "1",
+        "LS-UNIT-CENTS(1)": "100",
+        "LS-SUBTOTAL-CENTS": "123456789",
+        "LS-DISCOUNT-CENTS": "55",
+        "LS-SHIPPING-CENTS": "99999",
+        "LS-TOTAL-CENTS": "987654321",
+        "LS-RETURN-CODE": "99"
+      },
+      "expect": {
+        "outcome": "GOBACK",
+        "items": {
+          "LS-SUBTOTAL-CENTS": "100",
+          "LS-DISCOUNT-CENTS": "0",
+          "LS-SHIPPING-CENTS": "695",
+          "LS-TOTAL-CENTS": "795",
+          "LS-RETURN-CODE": "0"
+        }
+      }
+    },
+    {
+      "id": "F16",
+      "title": "discount fraction is truncated (10001 x 5%)",
+      "requirement_ids": [
+        "REQ-DEMO-005"
+      ],
+      "boundary": true,
+      "kind": "call",
+      "set": {
+        "LS-TIER": "G",
+        "LS-LINE-COUNT": "1",
+        "LS-QTY(1)": "1",
+        "LS-UNIT-CENTS(1)": "10001"
+      },
+      "expect": {
+        "outcome": "GOBACK",
+        "items": {
+          "LS-SUBTOTAL-CENTS": "10001",
+          "LS-DISCOUNT-CENTS": "500",
+          "LS-SHIPPING-CENTS": "0",
+          "LS-TOTAL-CENTS": "9501",
+          "LS-RETURN-CODE": "0"
+        }
+      }
+    }
+  ]
+}
