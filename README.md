@@ -2,25 +2,51 @@
 
 Author: **Vighnasree Vara**
 
-REVFORGE modernizes a legacy COBOL application under strict evidence rules: every claim is traceable to a source line, every unknown becomes a recorded gap, and nothing is presented as verified unless a recorded result supports it.
-
 ```
-COBOL source → Reverse Engineering → Business Requirements Document → permanent source identities
-  → Forward Engineering → Java 21 implementation → independent verification
-  → gap reconciliation → dashboard and handover
+COBOL  →  Reverse Engineering  →  BRD  →  Forward Engineering  →  Java 21  →  Verification
 ```
 
-**Current status.** The engineering handover is complete; the modernization is not. The Java replacement is incomplete: 41 of 42 programs have Java, 2 are complete under the harness criteria, and 569 gap records are open. **Legacy COBOL-to-Java behavioural equivalence has not been established.** See [Project status](#project-status).
+REVFORGE modernizes a legacy COBOL application under strict evidence rules:
+- every claim traces back to a source line;
+- every unknown becomes a recorded gap;
+- nothing is called verified unless a recorded result supports it.
 
-### Three layers
+| Start here | |
+|---|---|
+| **[Reverse Engineering](reverse/README.md)** | seven agents: COBOL → BRD, 154 business rules, 65 diagrams, permanent source IDs |
+| **[Forward Engineering](forward/README.md)** | seven agents, the orchestrator, the converter and Java 21 runtime, quality gates, G0–G8, mandatory BMad |
+| **[End-to-end architecture](forward/handover/ARCHITECTURE.md)** | diagrams of the whole system |
+| **[Dashboard](forward/dashboard/)** | read-only Modernization Command Center ([operations](forward/handover/DASHBOARD-OPERATIONS.md)) |
+| **[Executable demonstration](forward/demo/gates/README.md)** | all nine governance checkpoints end to end on a synthetic program ([sample report](forward/demo/gates/sample-run/DEMO-REPORT.md)) |
+| **[Evidence and reconciliation reports](forward/reports/README.md)** | the report catalog: [reverse-forward reconciliation](forward/reports/REVERSE-FORWARD-RECONCILIATION.md), [final reconciliation](forward/reports/STEP-22-FINAL-RECONCILIATION.md), [master gap register](forward/reports/STEP-23-MASTER-GAP-REGISTER.md) |
+| **[CI results](https://github.com/vighnasreevara/REVFORGE-Harness/actions/workflows/revforge-ci.yml)** | four jobs on every push and pull request |
+
+**Current status.** The engineering handover is complete; the modernization is not.
+- 41 of 42 programs have Java, and 2 of them are complete under the harness criteria.
+- 569 gap records are open.
+- The governed workflow has passed G0–G1. G2 is UNVERIFIED and G3–G8 are BLOCKED.
+- **Legacy COBOL-to-Java behavioural equivalence has not been established.**
+
+See [Project status](#project-status).
+
+## Architecture in brief
 
 | Layer | What it is | Status |
 |---|---|---|
-| **A. [Reverse engineering](#reverse-engineering)** | Seven Claude Code agents exchange JSON artifacts and produce a BRD, 154 business rules, 65 diagrams and permanent source IDs (Neo4j registry via MCP) | complete for the sample system |
-| **B. [Forward engineering](#forward-engineering)** | Seven agent definitions and 14 skills; a TypeScript orchestrator; a COBOL-to-Java converter with a Java 21 runtime; two engineering quality gates (`SOURCE_READINESS`, `CONVERSION_VALIDATION`); G0–G8 governance with mandatory BMad | Java for 41 of 42 programs; real G0–G1 PASS, G2 UNVERIFIED, G3–G8 BLOCKED; BMad LIVE execution blocked |
-| **C. [Governance demonstration](#synthetic-end-to-end-gate-demonstration)** | An isolated synthetic G0–G8 run: approvals, compilation, tests, independent verification, review and acceptance, all executed on a synthetic program. The BMad lifecycle is only simulated. | 9/9 demo gates pass in CI; changes nothing in the real project |
+| **A. [Reverse engineering](reverse/README.md)** (`reverse/`, `output/`) | Seven Claude Code agents and their 14 skills exchange JSON artifacts. They produce a BRD, 154 business rules, 65 Mermaid diagrams and a gaps register. Every element carries a permanent source ID from a Neo4j registry, accessed over MCP. | complete for the sample system |
+| **B. [Forward engineering](forward/README.md)** (`forward/`) | Seven agents and their 14 skills under a deterministic TypeScript orchestrator; a COBOL-to-Java converter with a hand-written Java 21 runtime; two engineering quality gates (`SOURCE_READINESS`, `CONVERSION_VALIDATION`); G0–G8 governance checkpoints with signed approvals; mandatory BMad | Java for 41 of 42 programs, from historical local conversions only; real G0–G1 PASS, G2 UNVERIFIED, G3–G8 BLOCKED; BMad LIVE execution blocked |
+| **C. [Governance demonstration](forward/demo/gates/README.md)** (`forward/demo/gates/`) | An isolated synthetic G0–G8 run that executes approvals, compilation, tests, independent verification, review and acceptance. The BMad lifecycle is only simulated. | 9/9 demo gates pass in CI; changes nothing in the real project |
 
-### Quick demo
+**How the layers connect:**
+- Reverse writes artifacts to `output/`; forward reads them from there and never writes back.
+- The G0 baseline binds every reverse artifact by SHA-256.
+- Permanent source IDs are carried through requirements, architecture, stories, Java and tests.
+
+**Two kinds of gates:**
+- **Engineering quality gates** decide whether a single program can be converted and whether a conversion is what its label says. They never authorize generation.
+- **Governance checkpoints G0–G8** decide what the governed workflow may do, up to human acceptance.
+
+## Quick demo
 
 ```bash
 cd forward
@@ -29,146 +55,51 @@ npm run demo:gates    # runs the synthetic G0–G8 demonstration (Node.js 20+, J
 npm run demo:test     # happy path and negative paths
 ```
 
-See the [demo README](forward/demo/gates/README.md), a [sample report](forward/demo/gates/sample-run/DEMO-REPORT.md), the [architecture](forward/handover/ARCHITECTURE.md), the [CI results](https://github.com/vighnasreevara/REVFORGE-Harness/actions/workflows/revforge-ci.yml), the [report catalog](forward/reports/README.md) and the [dashboard](#dashboard).
+Expected result: nine `DEMO PASS` rows and the verdict `SYNTHETIC_DEMO_ACCEPTED`. Each negative-path test injects one defect and must be stopped at the right gate with exit code 1. The defects include:
+- an altered source hash;
+- a forged, missing or wrong-role approval;
+- a compilation failure;
+- Java that differs from the independent oracle;
+- tampered evidence.
 
----
+**Isolation.**
+- Every record says `environment: SYNTHETIC_INTERVIEW_DEMO`, `production_authorization: NOT_GRANTED`, `real_bmad_execution: NOT_EXECUTED` and `legacy_equivalence: NOT_ESTABLISHED`.
+- Approvals are signed with an ephemeral key that the real trust store does not accept.
+- The demonstration writes nothing to the real workflow, configuration or evidence.
 
-## Reverse engineering
+## Repository layout
 
-A pipeline of seven Claude Code agents reads the COBOL codebase and produces a traceable Business Requirements Document (BRD).
-- **JSON artifacts.** The agents pass JSON artifacts from one to the next.
-- **Permanent IDs.** A Neo4j registry gives every source element a permanent ID: system, file, path, section, paragraph, statement, record and field. Every rule, gap, diagram and BRD statement can therefore be traced back to the exact COBOL line it came from.
-
-| # | Agent | Skills | Produces |
-|---|---|---|---|
-| 1 | `1_inventory_c` | file-walker, dependency-graph | `output/inventory/inventory_artifact.json`. Registers System, File and Path IDs in Neo4j. |
-| 2 | `2_parser_c` | cobol-ast-parser, section-mapper | `output/parser/`. Registers Section, Paragraph and Statement IDs and the control-flow edges. |
-| 3 | `3_data_c` | record-layout-parser, data-dictionary-builder | `output/data/`. Registers Record and Field IDs, copybook expansion and REDEFINES. |
-| 4 | `4_logic_c` | control-flow-tracer, pseudocode-generator | `output/logic/`. Execution traces, branches, loops and pseudocode. Reuses IDs (read-only). |
-| 5 | `5_rules_c` | condition-classifier, rule-tagger | `output/rules/`. 154 classified business rules with confidence and SME flags. |
-| 6 | `6_diagram_c` | component-mapper, sequence-builder | `output/diagram/`. 65 Mermaid diagrams plus a source-ID index. |
-| 7 | `7_synthesis_c` | gap-detector, section-assembler | `output/final_report/`. Gaps register and BRD. |
-
-The reverse-engineering agent definitions are in `.claude/agents/` and their skills in `.claude/skills/`.
-
-**Principles:**
-- **Permanent source IDs.** Agents 1–3 register stable IDs in Neo4j, for example `SYS-PORTFOLIO-001-FIL-0072-STMT-000025`. Agents 4–7 only *reuse* them, and verify them with read-only queries before writing their outputs.
-- **Evidence classes.** Every rule and diagram edge is labelled *confirmed*, *inferred* or *uncertain*. Unresolvable paths, runtime-only CICS `HANDLE CONDITION` transfers and recursion are never presented as confirmed flow.
-- **No invented behaviour.** Missing paragraphs, copybooks and external programs become documented gaps, never guessed logic.
-- **JSON communication.** Agents exchange JSON artifacts. Neo4j is used only for identity.
-
-**Results on the sample portfolio system:**
-
-| Measure | Value |
-|---|---|
-| Programs / copybooks / JCL jobs | 42 / 25 / 15 |
-| Records / fields / 88-level conditions | 231 / 1,009 / 259 |
-| Paragraphs / statements | 402 / 1,936 |
-| Business rules | 154: 36 confirmed, 25 high, 79 medium, 14 low confidence; 50 flagged for SME review |
-| Historical reverse gaps | 217: 6 critical, 86 high, 50 medium, 75 low |
-| Mermaid diagrams | 65: 15 component, 3 ERD, 2 sequence, 45 process flow |
-| Permanent IDs verified against Neo4j | 873 cited in the BRD; 1,568 in the diagram index; none invalid |
-
-Key deliverables:
-- `output/final_report/brd.md` and `brd_summary.md`: the BRD and its executive summary.
-- `output/final_report/gaps_register.md` / `.json`: the reverse gaps register.
-- `output/diagram/diagrams/*.mmd`: the diagrams.
-
-## Forward engineering
-
-The forward harness (`forward/`) turns the reverse artifacts into a governed modernization. A TypeScript runtime is the single deterministic controller. It manages:
-- JSON Schema contracts (Ajv);
-- workflow state transitions;
-- the governance checkpoints G0–G8;
-- signed approvals;
-- agent dispatch packets and receipts.
-
-Agents produce deliverables, but no agent output can pass a gate or approve anything.
-
-### Two kinds of gates
-
-| Kind | Gates | What they decide | Where |
-|---|---|---|---|
-| **Engineering quality gates** | **`SOURCE_READINESS`** and **`CONVERSION_VALIDATION`** | whether one program's source is understood well enough to convert, and whether a conversion output is verified as labelled (compiled, tested, traced, no fabricated behaviour). They never authorize generation and never mean equivalence. | `forward/runtime/src/pilot/gates.ts` (`pilot readiness`, `pilot validate`) |
-| **Governance checkpoints** | **G0–G8** | the governed workflow: baseline and evidence (G0–G1), signed human approvals of requirements, architecture and stories (G2–G4), build, independent verification, review and human acceptance (G5–G8) | `forward/runtime/src/orchestrator/gates.ts` and the approval modules |
-
-In the real workflow G0 and G1 pass, G2 is UNVERIFIED (no trust store is configured) and G3–G8 are BLOCKED; G5–G8 are fail-closed. The [synthetic demonstration](#synthetic-end-to-end-gate-demonstration) shows all nine checkpoints executing on a separate synthetic example.
-
-| Agent | Role | Gate |
-|---|---|---|
-| F1 Requirements Analyst | source-grounded requirements and the decision register | G2 |
-| F2 Data Mapping Specialist | copybook layout contracts and COBOL file semantics | G2 |
-| F3 Java Architect | Java architecture spine and legacy-compatibility ADRs | G3 |
-| F4 Development Planner | evidence-backed stories and sprint readiness | G4 |
-| F5 Java Developer | implementation inside the authorised Java target only | G5 |
-| F6 Independent Tester | independent fixtures and legacy-equivalence testing | G6 |
-| F7 Independent Reviewer | adversarial review and end-to-end trace audit | G7 |
-
-The agent definitions are in `forward/agents/` and the 14 skills in `forward/skills/` (`sync-agents` copies both into `.claude/`).
-
-Alongside the workflow, a local converter (`forward/runtime/src/pilot/`) and a hand-written Java 21 runtime library (`forward/runtime/java/`) produced Java for 41 programs. This was done under historical, program-scoped local authorizations. Generated Java is git-ignored and stays local.
-
-### BMad governance
-
-The BMad Method 6.12.4 is **mandatory** for new governed forward development:
-- Six workflows are bound to the forward agents: PRD, Architecture, Epics and Stories, Sprint Planning, Build, Code Review.
-- F2 and F6 stay independent of BMad, but their evidence is required.
-
-Current status: **BMAD ENFORCEMENT VERIFIED — LIVE EXECUTION BLOCKED.**
-- **What is configured:** all six workflows; enforcement is tested.
-- **What has executed:** nothing. No workflow is authorized, none has executed live, and no receipt exists.
-- **What blocks it:** missing approvals, a signed disclosure authorization, isolation and network infrastructure, and live-execution and generation authorization.
-- **Historical local Java:** it is *not* retroactively BMad-compliant. It stays classified `LOCAL_LGA_NOT_BMAD_GOVERNED`.
-
-See [BMAD-GOVERNANCE.md](forward/handover/BMAD-GOVERNANCE.md).
-
-### Java modernization coverage
-
-| Measure | Value |
-|---|---|
-| COBOL programs | 42: **41 with Java**; 2 COMPLETE under harness criteria (PORTREAD, PROGNAME); 39 PARTIAL; 1 MISSING (POSUPDT, empty source) |
-| Business rules | 154: **67 Java-verified** by source-derived tests; 15 verified up to a downstream gap; 40 unreachable; 32 blocked |
-| Open gap records | **569**, all OPEN, in 23 root-cause groups and 5 remediation phases |
-| COBOL-equivalent programs or rules | **0** |
-
-*COMPLETE*, *compiles* and *passes source-derived tests* do not mean equivalent to the legacy COBOL program. That needs a run of the legacy system on the same inputs, and none is available.
-
-## Synthetic End-to-End Gate Demonstration
-
-A self-contained, executable demonstration of all nine governance checkpoints, G0–G8, on one small synthetic COBOL program. It runs from a clean checkout with Node.js and JDK 21:
-
-```bash
-cd forward && npm ci
-npm run demo:gates    # build, run G0–G8, print the results; exit code 0 only if all nine pass
-npm run demo:test     # the happy path and the negative-path tests
+```
+reverse/                 Reverse engineering
+  agents/  skills/       canonical definitions: 7 agents (1_inventory_c … 7_synthesis_c), 14 skills
+  docs/                  design notes for the permanent-ID enhancements (Agents 1–3)
+output/                  Reverse artifacts: inventory, parser, data, logic, rules, diagram, final_report (BRD)
+forward/                 Forward engineering
+  agents/  skills/       canonical definitions: 7 agents (F1–F7), 14 skills
+  runtime/               TypeScript orchestrator and CLI, converter, Java 21 runtime library
+  config/ contracts/     configuration and JSON Schema contracts
+  integrations/bmad/     pinned BMad release and isolated executor
+  verification/          evidence and semantic checks
+  dashboard/             read-only Modernization Command Center
+  demo/gates/            synthetic G0–G8 demonstration
+  tests/                 test suites
+  reports/  handover/    engineering reports and evidence, final handover package
+  docs/                  operations guides
+.claude/agents/          Claude Code discovery copies of all 14 agents (installed by sync-agents)
+.claude/skills/          Claude Code discovery copies of all 28 skills (installed by sync-agents)
+.github/workflows/       CI
+licenses/  LICENSE  THIRD_PARTY_NOTICES.md
 ```
 
-**What it demonstrates.** Every demo gate executes real checks; no status is set by hand.
+**Where to edit agents and skills.** Edit them only in `reverse/` and `forward/`. Claude Code discovers them only under `.claude/`, so `sync-agents` keeps byte-identical copies there:
 
-| Gate | What actually runs |
-|---|---|
-| G0 Baseline Integrity | SHA-256 of the synthetic source and every required input against the recorded baseline; no unexpected files |
-| G1 Evidence Verification | re-parses the COBOL and checks the synthetic reverse evidence: paragraphs, 31 statements, fields, ID references, rule-to-statement traceability |
-| G2 Requirements Approval | every business rule covered by a requirement; worked examples; no blocking uncertainty; data contract equal to the parsed record layout; an Ed25519 demo approval bound to the exact requirements, baseline and prior results |
-| G3 Architecture Approval | the architecture references the approved requirements by hash; requirements allocated to components; dependencies and decisions documented; a signed demo approval |
-| G4 Development Plan Approval | stories trace every requirement, with tasks and acceptance criteria; a signed demo approval. This is demo planning approval, **not** Java generation authorization |
-| G5 Java Build and Tests | the existing local converter generates the Java (no gaps, every statement traced); `javac -Werror` on Java 21; 16 hand-written functional and boundary scenarios executed |
-| G6 Independent Verification | an independent oracle written from the requirements (it loads no other module) computes about 300 boundary, negative, seeded and example cases, and the Java must match every one |
-| G7 Independent Review | re-hashes all evidence, checks requirement coverage, traceability, build evidence and unexplained changes, confirms the real configuration and records were not touched, and checks separation of duties |
-| G8 Synthetic Acceptance | a signed demo acceptance bound to G0–G7 and the review result, with complete evidence and no critical findings: `SYNTHETIC_DEMO_ACCEPTED` |
+```bash
+cd forward && npm ci && npm run build
+node dist/runtime/src/cli.js sync-agents           # install all 42 definitions into .claude/
+node dist/runtime/src/cli.js sync-agents --check   # fail on drift (CI runs this)
+```
 
-Expected result: nine `DEMO PASS` rows. The negative-path tests show that each gate also *blocks*: an altered source hash, missing evidence, an invalid, missing, foreign-key or wrong-role approval, a compilation failure, a failing test, Java that differs from the oracle, tampered test evidence, an unsigned acceptance, and a gate run before its prerequisite each stop the run with a diagnostic and exit code 1.
-
-**Why it is separate from the real modernization:**
-- **Environment.** Every record says `environment: SYNTHETIC_INTERVIEW_DEMO`, `production_authorization: NOT_GRANTED`, `real_bmad_execution: NOT_EXECUTED` and `legacy_equivalence: NOT_ESTABLISHED`.
-- **Isolation.** Inputs come only from `forward/demo/gates/synthetic/`, and output goes to `forward/demo/gates/runs/` (git-ignored). The real workflow runs, reverse artifacts, configuration, trust anchor and generated Java are never written.
-- **Approvals.** They are signed with an ephemeral Ed25519 key created for one run. The private key never touches the disk. The signer is a synthetic demo authority, not a stakeholder, and the real trust anchor does not accept it.
-- **BMad.** The six bindings (PRD, ARCH, EPICS, SPRINT, BUILD, REVIEW) are mapped and preflighted, but every step is `SIMULATED`. The real receipt counter refuses these records, so real mandatory BMad execution stays blocked.
-- **Equivalence.** G6 compares the Java with an independent specification oracle. No COBOL runtime is executed, so it is not legacy equivalence.
-
-**What it does not change.** The real project status stays as shown below: G2 UNVERIFIED, G3–G8 BLOCKED, 569 OPEN gaps, no established equivalence, not production ready. The demonstration shows how the checkpoints work. It does not approve real Java generation or complete any migration work.
-
-Details: [forward/demo/gates/README.md](forward/demo/gates/README.md).
+**Why `output/` is at the root.** The reverse artifacts keep their original location, because historical evidence pins them by path: the workflow baseline, the source-integrity records, the CI integrity checks and the dashboard evidence. See [reverse/README.md](reverse/README.md#why-the-artifacts-stay-in-output).
 
 ## Dashboard
 
@@ -188,23 +119,23 @@ npm run smoke      # after build: CSP, evidence hashes, routes in headless Edge/
 
 **Evidence pipeline:**
 - Only files committed at `HEAD` are copied, with their SHA-256.
-- The dashboard loads a file only when its SHA-256 matches the manifest, and every total is recounted and cross-checked.
-- Missing, altered or unverifiable evidence is shown as *unavailable*; it is never loaded or replaced.
+- A file is loaded only when its SHA-256 matches the manifest.
+- Every total is recounted and cross-checked.
+- Missing or altered evidence is shown as *unavailable*; it is never loaded or replaced.
 
-**What the hash check proves.** The manifest is produced locally from the Git checkout. The browser check therefore proves the served copies are consistent with that manifest. It does not authenticate the repository or a deployment, which would need a separate trust mechanism such as signed releases.
+The hash check proves the served copies are consistent with the locally produced manifest. It does not authenticate the repository or a deployment.
 
 ## Documentation
 
 | Topic | Document |
 |---|---|
-| Architecture (8 diagrams) | [forward/handover/ARCHITECTURE.md](forward/handover/ARCHITECTURE.md) |
-| Forward engineering | [forward/handover/FORWARD-ENGINEERING.md](forward/handover/FORWARD-ENGINEERING.md) |
+| Reverse engineering | [reverse/README.md](reverse/README.md) |
+| Forward engineering | [forward/README.md](forward/README.md), [in depth](forward/handover/FORWARD-ENGINEERING.md) |
+| Architecture (diagrams) | [forward/handover/ARCHITECTURE.md](forward/handover/ARCHITECTURE.md) |
 | BMad governance | [forward/handover/BMAD-GOVERNANCE.md](forward/handover/BMAD-GOVERNANCE.md) |
-| Testing and verification | [forward/handover/TESTING-AND-VERIFICATION.md](forward/handover/TESTING-AND-VERIFICATION.md) |
+| Testing and verification | [forward/handover/TESTING-AND-VERIFICATION.md](forward/handover/TESTING-AND-VERIFICATION.md), [test catalog](forward/tests/README.md) |
 | Known limitations | [forward/handover/KNOWN-LIMITATIONS.md](forward/handover/KNOWN-LIMITATIONS.md) |
-| Final reconciliation | [forward/reports/STEP-22-FINAL-RECONCILIATION.md](forward/reports/STEP-22-FINAL-RECONCILIATION.md) |
-| Master gap register | [forward/reports/STEP-23-MASTER-GAP-REGISTER.md](forward/reports/STEP-23-MASTER-GAP-REGISTER.md) |
-| Dashboard assessment | [forward/reports/STEP-24-DASHBOARD-ASSESSMENT.md](forward/reports/STEP-24-DASHBOARD-ASSESSMENT.md) |
+| Reports and development history | [forward/reports/README.md](forward/reports/README.md) (by topic and by STEP) |
 | Final handover assessment | [forward/reports/STEP-25-FINAL-HANDOVER-ASSESSMENT.md](forward/reports/STEP-25-FINAL-HANDOVER-ASSESSMENT.md) |
 | Installation and runbook | [forward/handover/INSTALLATION-AND-RUNBOOK.md](forward/handover/INSTALLATION-AND-RUNBOOK.md) |
 
@@ -212,8 +143,8 @@ npm run smoke      # after build: CSP, evidence hashes, routes in headless Edge/
 
 | Environment | Contains | Can run |
 |---|---|---|
-| **Pure Git checkout** | committed code, reports, reverse artifacts, dashboard | forward build, doctor, policy and backup tests, Java runtime library tests, dashboard (install, build, tests, smoke), CI |
-| **Developer environment** | the checkout plus the authorized COBOL source root, local run records (`forward/runs/`), generated Java (`forward/generated/`), BMad staging and executor | the full forward test suite, `pilot integrate` / `validate` / `readiness`, source-integrity audit |
+| **Pure Git checkout** | committed code, reports, reverse artifacts, dashboard | forward build, doctor, agent sync check, policy tests, Java runtime tests, dashboard, the synthetic demonstration, CI |
+| **Developer environment** | the checkout plus the authorized COBOL source root, local run records (`forward/runs/`), generated Java (`forward/generated/`), BMad staging and executor | the full forward test suite, `pilot integrate` / `validate` / `readiness`, the source-integrity audit |
 | **Fully authorized modernization environment** | the above plus DB2, CICS, platform services, a legacy COBOL runtime, signed authorizations and isolated BMad infrastructure | governed BMad runs, gates G2–G8, equivalence testing. **This environment does not exist yet.** |
 
 **Not in Git:**
@@ -222,22 +153,17 @@ npm run smoke      # after build: CSP, evidence hashes, routes in headless Edge/
 - workflow run records;
 - credentials (`.mcp.json`; a template is in `.mcp.json.example`).
 
-**Reverse-engineering requirements:**
-- [Claude Code](https://claude.com/claude-code);
-- a Neo4j instance (Aura or self-hosted);
-- the Neo4j Cypher MCP server (`mcp-neo4j-cypher`).
+**Requirements:**
+- *Reverse engineering:* [Claude Code](https://claude.com/claude-code), a Neo4j instance and the Neo4j Cypher MCP server (`mcp-neo4j-cypher`). See [reverse/README.md](reverse/README.md#running-the-pipeline).
+- *Forward engineering:* Node.js 20 or later, JDK 21 (`REVFORGE_JAVA_HOME`) and Python 3. Build and test with `cd forward && npm ci && npm run build && npm test`. The full suite needs the developer environment.
 
-To run it, copy `.mcp.json.example` to `.mcp.json` with your connection details, point the inventory agent at the COBOL root, and run `1_inventory_c` to `7_synthesis_c` in order.
+**CI.** [`.github/workflows/revforge-ci.yml`](.github/workflows/revforge-ci.yml) runs four jobs:
+- forward;
+- dashboard;
+- the synthetic demonstration;
+- repository and report integrity.
 
-**Forward requirements:** Node.js 20 or later, JDK 21 (`REVFORGE_JAVA_HOME`) and Python 3. To build and test:
-
-```bash
-cd forward && npm ci && npm run build && npm test
-```
-
-The full test suite needs the developer environment; see the runbook.
-
-**CI.** `.github/workflows/revforge-ci.yml` runs the checks that work on a pure checkout, including a job that runs the synthetic G0–G8 demonstration and its negative-path tests. Source-dependent checks are not run in CI, by design.
+All of them work on a pure checkout. Source-dependent checks are reported as not run, never as passed.
 
 ## Project status
 
@@ -248,24 +174,16 @@ The full test suite needs the developer environment; see the runbook.
 | **Not production-ready** | no production replacement criteria exist; 39 programs are partial and 1 is missing |
 | **Legacy COBOL equivalence not established** | no legacy COBOL execution has been compared with the Java |
 
-## Repository layout
+| Measure | Value |
+|---|---|
+| COBOL programs | 42: **41 with Java** (historical local conversions, not BMad-governed); 2 COMPLETE under harness criteria; 39 PARTIAL; 1 MISSING |
+| Business rules | 154: **67 Java-verified** by source-derived tests; 15 verified up to a downstream gap; 40 unreachable; 32 blocked |
+| Open gap records | **569**, all OPEN, in 23 root-cause groups and 5 remediation phases |
+| COBOL-equivalent programs or rules | **0** |
 
-```
-.claude/agents/        Reverse-engineering agents (1–7), plus synced copies of the forward agents
-.claude/skills/        Reverse-engineering skills, plus synced copies of the forward skills
-output/                Reverse artifacts (inventory, parser, data, logic, rules, diagram, final_report)
-forward/               Forward harness: runtime, contracts, agents F1–F7, skills, tools, tests, reports
-forward/demo/gates/    Synthetic G0–G8 gate demonstration (synthetic inputs; runs are git-ignored)
-forward/dashboard/     Read-only modernization dashboard
-forward/handover/      Final handover package
-docs/                  Design notes for the permanent-ID enhancements (Agents 1–3)
-licenses/              Third-party license texts
-LICENSE                MIT License (this project)
-THIRD_PARTY_NOTICES.md Attribution for derived files
-.mcp.json.example      Template for the Neo4j MCP server configuration
-```
+*COMPLETE*, *compiles* and *passes source-derived tests* do not mean equivalent to the legacy COBOL program.
 
 ## License
 
 - **This project:** MIT License, © 2026 Vighnasree Vara (see `LICENSE`).
-- **Third-party portions:** some agent and skill definitions are derived from an Apache-2.0-licensed project and keep that license. See `THIRD_PARTY_NOTICES.md` and `licenses/APACHE-2.0-upstream-harness.txt`.
+- **Third-party portions:** the reverse agent and skill definitions (`reverse/agents/`, `reverse/skills/` and their `.claude/` copies) are derived from an Apache-2.0-licensed project and keep that license. See `THIRD_PARTY_NOTICES.md` and `licenses/APACHE-2.0-upstream-harness.txt`.
