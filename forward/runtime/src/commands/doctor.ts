@@ -38,13 +38,18 @@ export function runDoctor(ctx: RuntimeContext): { ok: boolean; checks: DoctorChe
   if (git.reverse_paths_changed && git.reverse_paths_changed.length) {
     checks.push({ id: 'reverse_harness_untouched', status: 'warn', detail: `reverse-harness paths have local changes: ${git.reverse_paths_changed.slice(0, 10).join(', ')}` });
   } else if (git.available) {
-    checks.push({ id: 'reverse_harness_untouched', status: 'ok', detail: 'no local changes under .claude/agents, .claude/skills or output/' });
+    checks.push({ id: 'reverse_harness_untouched', status: 'ok', detail: 'no local changes under reverse/, .claude/agents, .claude/skills or output/' });
   }
 
   // Forward agents and skills: forward/ is authoritative; .claude/ holds the copy Claude Code discovers.
   const mirror = mirrorStatus(ctx);
   const drift = mirror.entries.filter((e) => e.status !== 'IN_SYNC');
   checks.push({ id: 'forward_agents_mirror', status: drift.length ? 'fail' : 'ok', detail: drift.length ? `forward agents/skills differ from their .claude/ copies (run sync-agents): ${drift.map((e) => `${e.name} ${e.status}`).join(', ')}` : `${mirror.entries.length} forward agents and skills in forward/ match their .claude/ copies` });
+
+  // Reverse agents and skills: reverse/ is authoritative; .claude/ holds the copy Claude Code discovers.
+  const rmirror = mirrorStatus(ctx, 'reverse');
+  const rdrift = rmirror.entries.filter((e) => e.status !== 'IN_SYNC');
+  checks.push({ id: 'reverse_agents_mirror', status: rdrift.length ? 'fail' : 'ok', detail: rdrift.length ? `reverse agents/skills differ from their .claude/ copies (run sync-agents): ${rdrift.map((e) => `${e.name} ${e.status}`).join(', ')}` : `${rmirror.entries.length} reverse agents and skills in reverse/ match their .claude/ copies` });
 
   const set = loadArtifacts(ctx);
   for (const a of Object.values(set.artifacts)) {

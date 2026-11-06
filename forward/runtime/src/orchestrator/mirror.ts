@@ -1,12 +1,15 @@
 /**
- * Forward agents and skills live in forward/agents and forward/skills (the
- * single place to edit them; the reverse harness stays in .claude/). Claude
- * Code discovers agents and skills only under .claude/, so this module keeps a
- * byte-identical copy of exactly the forward ones there:
- *   .claude/agents/<fe-agent>.agent.md   from forward/agents/
- *   .claude/skills/<fe-skill>/            from forward/skills/
- * Only names in the forward registries (AGENTS, SKILLS) are ever written or
- * removed; reverse-harness files are never touched.
+ * Canonical agent and skill definitions live outside .claude/:
+ *   forward/agents, forward/skills   the seven forward agents and their 14 skills
+ *   reverse/agents, reverse/skills   the seven reverse agents and their 14 skills
+ * Claude Code discovers agents and skills only under .claude/, so this module
+ * keeps a byte-identical copy of exactly the registered ones there:
+ *   .claude/agents/<agent>.agent.md   from forward/agents/ or reverse/agents/
+ *   .claude/skills/<skill>/           from forward/skills/ or reverse/skills/
+ * Only names in the registries (AGENTS and SKILLS for forward, REVERSE_AGENTS
+ * and REVERSE_SKILLS for reverse) are ever written or removed. The scope
+ * argument selects which side is compared or synchronized; 'forward' is the
+ * default, so a forward-only sync never touches a reverse definition.
  */
 import { createHash } from 'crypto';
 import * as fs from 'fs';
@@ -14,6 +17,7 @@ import * as path from 'path';
 import { RuntimeContext } from '../core/config';
 import { AGENTS } from './agents';
 import { SKILLS } from './skills';
+import { REVERSE_AGENTS, REVERSE_SKILLS } from './reverse';
 
 const sha = (f: string) => createHash('sha256').update(fs.readFileSync(f)).digest('hex');
 
@@ -22,7 +26,10 @@ function filesUnder(d: string, base = d): string[] {
   return fs.readdirSync(d, { withFileTypes: true }).flatMap((e) => (e.isDirectory() ? filesUnder(path.join(d, e.name), base) : [path.relative(base, path.join(d, e.name)).split(path.sep).join('/')]));
 }
 
+export type MirrorScope = 'forward' | 'reverse' | 'all';
+
 export interface MirrorEntry {
+  side: 'forward' | 'reverse';
   kind: 'agent' | 'skill';
   name: string;
   source: string;
@@ -31,18 +38,23 @@ export interface MirrorEntry {
   files: string[];
 }
 
-/** The forward (canonical) and Claude Code (mirror) locations of every forward agent and skill. */
-export function mirrorPairs(ctx: RuntimeContext): Array<{ kind: 'agent' | 'skill'; name: string; source: string; mirror: string }> {
-  const fwdAgents = path.join(ctx.forwardDir, 'agents');
-  const fwdSkills = path.join(ctx.forwardDir, 'skills');
+type Pair = { side: 'forward' | 'reverse'; kind: 'agent' | 'skill'; name: string; source: string; mirror: string };
+
+/** The canonical and Claude Code (mirror) locations of every registered agent and skill in scope. */
+export function mirrorPairs(ctx: RuntimeContext, scope: MirrorScope = 'forward'): Pair[] {
+  const claude = path.join(ctx.repoRoot, '.claude');
+  const side = (s: 'forward' | 'reverse', root: string, agents: Array<{ name: string }>, skills: Array<{ name: string }>): Pair[] => [
+    ...agents.map((a) => ({ side: s, kind: 'agent' as const, name: a.name, source: path.join(root, 'agents', `${a.name}.agent.md`), mirror: path.join(claude, 'agents', `${a.name}.agent.md`) })),
+    ...skills.map((k) => ({ side: s, kind: 'skill' as const, name: k.name, source: path.join(root, 'skills', k.name), mirror: path.join(claude, 'skills', k.name) })),
+  ];
   return [
-    ...AGENTS.map((a) => ({ kind: 'agent' as const, name: a.name, source: path.join(fwdAgents, `${a.name}.agent.md`), mirror: path.join(ctx.repoRoot, '.claude', 'agents', `${a.name}.agent.md`) })),
-    ...SKILLS.map((s) => ({ kind: 'skill' as const, name: s.name, source: path.join(fwdSkills, s.name), mirror: path.join(ctx.repoRoot, '.claude', 'skills', s.name) })),
+    ...(scope === 'reverse' ? [] : side('forward', ctx.forwardDir, AGENTS, SKILLS)),
+    ...(scope === 'forward' ? [] : side('reverse', path.join(ctx.repoRoot, 'reverse'), REVERSE_AGENTS, REVERSE_SKILLS)),
   ];
 }
 
-export function mirrorStatus(ctx: RuntimeContext): { in_sync: boolean; entries: MirrorEntry[] } {
-  const entries: MirrorEntry[] = mirrorPairs(ctx).map((p) => {
+export function mirrorStatus(ctx: RuntimeContext, scope: MirrorScope = 'forward'): { in_sync: boolean; entries: MirrorEntry[] } {
+  const entries: MirrorEntry[] = mirrorPairs(ctx, scope).map((p) => {
     if (!fs.existsSync(p.source)) return { ...p, status: 'NO_SOURCE', files: [] };
     if (p.kind === 'agent') {
       if (!fs.existsSync(p.mirror)) return { ...p, status: 'MISSING', files: [] };
@@ -57,11 +69,13 @@ export function mirrorStatus(ctx: RuntimeContext): { in_sync: boolean; entries: 
   return { in_sync: entries.every((e) => e.status === 'IN_SYNC'), entries };
 }
 
-/** Copies forward/agents and forward/skills over their .claude/ mirrors (forward is authoritative). */
-export function syncMirror(ctx: RuntimeContext): { written: string[]; entries: MirrorEntry[] } {
+/** Copies the canonical definitions in scope over their .claude/ mirrors (the canonical directories are authoritative). */
+export function syncMirror(ctx: RuntimeContext, scope: MirrorScope = 'forward'): { written: string[]; entries: MirrorEntry[] } {
   const written: string[] = [];
-  for (const p of mirrorPairs(ctx)) {
-    if (!fs.existsSync(p.source)) throw new Error(`${path.relative(ctx.repoRoot, p.source)} is missing: forward/${p.kind}s is the source of the ${p.kind} ${p.name}`);
+  const pairs = mirrorPairs(ctx, scope);
+  // Check every source first, so a missing definition never leaves a half-synchronized .claude/.
+  for (const p of pairs) if (!fs.existsSync(p.source)) throw new Error(`${path.relative(ctx.repoRoot, p.source)} is missing: ${p.side}/${p.kind}s is the source of the ${p.kind} ${p.name}`);
+  for (const p of pairs) {
     if (p.kind === 'agent') {
       if (!fs.existsSync(p.mirror) || sha(p.source) !== sha(p.mirror)) {
         fs.mkdirSync(path.dirname(p.mirror), { recursive: true });
@@ -82,5 +96,5 @@ export function syncMirror(ctx: RuntimeContext): { written: string[]; entries: M
     }
     written.push(path.relative(ctx.repoRoot, p.mirror).split(path.sep).join('/') + '/');
   }
-  return { written, entries: mirrorStatus(ctx).entries };
+  return { written, entries: mirrorStatus(ctx, scope).entries };
 }

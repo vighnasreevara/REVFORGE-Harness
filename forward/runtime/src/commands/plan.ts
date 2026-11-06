@@ -45,7 +45,7 @@ export interface PlanResult {
 }
 
 /** Reverse-harness paths whose local modification is reported in the manifest. */
-export const PROTECTED_PREFIXES = ['.claude/agents/', '.claude/skills/', 'output/'];
+export const PROTECTED_PREFIXES = ['reverse/', '.claude/agents/', '.claude/skills/', 'output/'];
 
 export function newRunId(now: Date = new Date()): string {
   const ts = now.toISOString().replace(/[-:]/g, '').replace(/\.\d{3}Z$/, 'Z');
