@@ -35,6 +35,8 @@ const within = (p: string, dir: string) => {
 export function protectedRoots(r: PolicyRoots): string[] {
   const out = [
     path.join(r.repoRoot, 'output'),
+    // The reverse harness: canonical reverse agent and skill definitions and reverse design notes.
+    path.join(r.repoRoot, 'reverse'),
     path.join(r.repoRoot, '.claude'),
     path.join(r.repoRoot, 'references'),
     path.join(r.repoRoot, 'forward', 'runtime'),

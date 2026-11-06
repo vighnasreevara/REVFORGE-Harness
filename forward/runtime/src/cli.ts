@@ -6,7 +6,7 @@
  *   plan      discover the system and produce draft planning/readiness outputs
  *   generate  refused in STEP 1 (no Java generation)
  */
-import { mirrorStatus, syncMirror } from './orchestrator/mirror';
+import { MirrorScope, mirrorStatus, syncMirror } from './orchestrator/mirror';
 import { assertGenerationAllowed, GenerationNotAuthorizedError } from './core/guard';
 import { ConfigError, ContextOptions, loadContext } from './core/config';
 import { runDoctor } from './commands/doctor';
@@ -32,6 +32,7 @@ Commands:
   generate               Refused (Java generation is not authorised)
   agents                 List forward agents, check definitions and skills
   skills                 Validate the fourteen forward skills and their ownership
+  sync-agents [--check] [--scope forward|reverse|all]  Install forward/ and reverse/ agents and skills into .claude/ (--check: report drift)
   workflow init          Create the orchestrated workflow for a plan run (evaluates G0)
   workflow status        Show state, gates, packets, receipts and checkpoint
   workflow gate --gate G1|all     Evaluate gates (G2-G4 need verified signed approvals; G5-G8 fail closed)
@@ -205,16 +206,27 @@ export function main(argv: string[], out: (s: string) => void = console.log, err
         return EXIT.NOT_AUTHORIZED;
       }
       case 'sync-agents': {
-        // forward/agents and forward/skills are authoritative; .claude/ keeps the copy Claude Code discovers.
+        // forward/agents, forward/skills, reverse/agents and reverse/skills are authoritative;
+        // .claude/ keeps the copy Claude Code discovers. --scope forward|reverse|all (default all).
+        const scopeFlag = typeof flags['scope'] === 'string' ? (flags['scope'] as string) : 'all';
+        if (!['forward', 'reverse', 'all'].includes(scopeFlag)) {
+          err('sync-agents: --scope must be forward, reverse or all');
+          return EXIT.USAGE;
+        }
+        const scope = scopeFlag as MirrorScope;
         if (flags['check'] === true) {
-          const st = mirrorStatus(ctx);
+          const st = mirrorStatus(ctx, scope);
           if (json) out(JSON.stringify(st, null, 2));
-          else for (const e of st.entries) out(`${e.status.padEnd(9)} ${e.kind} ${e.name}`);
+          else {
+            for (const e of st.entries) out(`${e.status.padEnd(9)} ${e.side.padEnd(7)} ${e.kind} ${e.name}`);
+            const n = (side: string, kind: string) => st.entries.filter((e) => e.side === side && e.kind === kind).length;
+            out(`${st.entries.filter((e) => e.status === 'IN_SYNC').length}/${st.entries.length} in sync (forward: ${n('forward', 'agent')} agents, ${n('forward', 'skill')} skills; reverse: ${n('reverse', 'agent')} agents, ${n('reverse', 'skill')} skills)`);
+          }
           return st.in_sync ? EXIT.OK : EXIT.CHECK_FAILED;
         }
-        const r = syncMirror(ctx);
+        const r = syncMirror(ctx, scope);
         if (json) out(JSON.stringify(r, null, 2));
-        else out(r.written.length ? `updated ${r.written.length} mirror(s) under .claude/: ${r.written.join(', ')}` : 'all forward agents and skills already in sync with .claude/');
+        else out(r.written.length ? `updated ${r.written.length} mirror(s) under .claude/: ${r.written.join(', ')}` : `all ${scope === 'all' ? 'forward and reverse' : scope} agents and skills already in sync with .claude/`);
         return EXIT.OK;
       }
       case 'agents':

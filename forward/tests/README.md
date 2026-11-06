@@ -6,7 +6,7 @@
 - **CI:** runs on a pure Git checkout and is included in `.github/workflows/revforge-ci.yml`. Individual tests that need the COBOL source or generated Java skip themselves there; the *CI skips* column counts them.
 - **Developer:** needs the git-ignored BMad staging release and executor installation (`forward/integrations/bmad/staging`, `executor`). It is not run in CI, by design.
 
-Counts are from the full developer-environment run: 441 tests in 26 files, all passing.
+Counts are from the full developer-environment run: 448 tests in 27 files, all passing.
 
 | Test file | Responsibility | Main components | Tests | Environment (CI skips) |
 |---|---|---|---|---|
@@ -36,10 +36,11 @@ Counts are from the full developer-environment run: 441 tests in 26 files, all p
 | `bmad-e2e.test.ts` | BMad end to end: receipts, drafts and forward consumption | `bmad/` (adapter, executor, governance, preflight, runner), `disclosure/` | 12 | Developer |
 | `git-policy.test.ts` | the Git tracking policy: the hand-written Java runtime tracked, generated Java and class files ignored | `helpers/gitpolicy.ts` | 4 | CI |
 | `synthetic-gate-demonstration.test.ts` | the synthetic G0–G8 gate demonstration (`SYNTHETIC_INTERVIEW_DEMO`): all nine demo gates pass with executed checks; injected defects stop the run at the right gate with exit code 1; demo approvals and SIMULATED BMad receipts are refused as production authorization | `demo/` (gates, oracle, signing), `pilot/` (cobol-app, java-app), `approval/trust`, `bmad/governance` | 23 | CI (demo job) |
+| `reverse-forward-agent-sync.test.ts` | canonical reverse and forward agent/skill locations: the reverse registry (7 agents, 14 skills) against `reverse/`, agent-to-skill references, all 42 `.claude/` copies in sync, drift detection and repair per side, refusal on a missing source, `reverse/` not writable by forward agents | `orchestrator/` (reverse, mirror, permissions) | 7 | CI |
 
 **Totals:**
 - 26 files and 441 tests.
-- **CI:** 20 files, 322 tests in the forward job (30 skip themselves on a pure checkout), plus `synthetic-gate-demonstration.test.ts` (23 tests) in the demo job.
+- **CI:** 21 files, 329 tests in the forward job (30 skip themselves on a pure checkout), plus `synthetic-gate-demonstration.test.ts` (23 tests) in the demo job.
 - **Developer only:** 5 files, 96 tests.
 
 ## Running

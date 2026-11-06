@@ -361,7 +361,7 @@ describe('forward agents and skills live in forward/ (Claude Code copy in .claud
       assert.ok(d.present && d.problems.length === 0, `${a.name}: ${d.problems.join('; ')}`);
     }
     for (const s of SKILLS) assert.ok(fs.existsSync(path.join(FORWARD_DIR, 'skills', s.name, 'SKILL.md')), s.name);
-    // Only forward definitions are here; the reverse harness stays in .claude/.
+    // Only forward definitions are here; the reverse definitions are in reverse/.
     assert.ok(fs.readdirSync(path.join(FORWARD_DIR, 'agents')).every((f) => /^fe-/.test(f) || f === 'README.md'));
     assert.ok(fs.readdirSync(path.join(FORWARD_DIR, 'skills')).every((f) => /^fe-/.test(f) || f === 'README.md'));
   });

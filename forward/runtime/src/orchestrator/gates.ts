@@ -153,7 +153,7 @@ export function evaluateG0(run: RunHandle, state: WorkflowStateRecord | null, at
   const git = gitInfo(run.ctx.repoRoot, PROTECTED_PREFIXES);
   if (git.available) {
     const rev = git.reverse_paths_changed ?? [];
-    checks.push({ id: 'reverse_harness_unchanged', status: rev.length ? 'fail' : 'pass', detail: rev.length ? `local changes under reverse-harness paths: ${rev.slice(0, 10).join(', ')}` : 'no local changes under .claude/agents, .claude/skills or output/' });
+    checks.push({ id: 'reverse_harness_unchanged', status: rev.length ? 'fail' : 'pass', detail: rev.length ? `local changes under reverse-harness paths: ${rev.slice(0, 10).join(', ')}` : 'no local changes under reverse/, .claude/agents, .claude/skills or output/' });
     const recorded = run.manifest.repository?.git?.commit ?? null;
     checks.push({ id: 'git_commit', status: recorded && recorded !== git.commit ? 'warn' : 'pass', detail: recorded === git.commit ? `HEAD ${git.commit} matches the baseline` : `HEAD is ${git.commit}; baseline recorded ${recorded} (artifact hashes are authoritative)` });
   } else {

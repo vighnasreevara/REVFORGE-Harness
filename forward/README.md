@@ -1,128 +1,165 @@
-# REVFORGE Forward Engineering Harness
+# REVFORGE Forward Engineering
 
-This is the forward-engineering side of REVFORGE. It takes the reverse-engineering artifacts in `../output/` and builds a modernisation plan from them.
+The forward harness turns the reverse-engineering evidence (the BRD, 154 business rules, the data dictionary, logic, diagrams and gaps in [`../output/`](../output/)) into a **governed Java 21 modernization**. A deterministic TypeScript runtime controls the work. Agents produce deliverables, but no agent output can pass a gate, approve anything or authorize Java generation.
 
-This is **STEP 1: repository audit and executable foundation.** It adds a TypeScript runtime and CLI, JSON Schema contracts (Ajv v8), evidence-validation utilities and planning reports. It generates no Java code, and it never modifies the reverse harness, its outputs or Neo4j.
+```
+reverse evidence ─▶ G0 baseline ─▶ G1 evidence ─▶ F1/F2 requirements ─▶ G2 ─▶ F3 architecture ─▶ G3
+   ─▶ F4 stories ─▶ G4 ─▶ F5 Java ─▶ G5 build ─▶ F6 independent tests ─▶ G6 ─▶ F7 review ─▶ G7 ─▶ G8 acceptance
+```
 
-## Layout
+**Status in one line.** In the real workflow G0 and G1 pass, G2 is UNVERIFIED and G3–G8 are BLOCKED. Java exists for 41 of 42 programs, but only from historical local conversions outside that workflow. 569 gap records are open, and **legacy COBOL equivalence is not established**. See [Modernization status](#9-modernization-status).
+
+## 1. Seven forward agents and their 14 skills
+
+| Agent | Role | Skills | Feeds gate |
+|---|---|---|---|
+| F1 Requirements Analyst | source-grounded requirements and the decision register | `fe-source-grounded-requirements`, `fe-uncertainty-decision-register` | G2 |
+| F2 Data Mapping Specialist | copybook layout contracts and COBOL runtime/file semantics | `fe-copybook-layout-contract`, `fe-cobol-runtime-file-semantics` | G2 |
+| F3 Java Architect | Java architecture spine and legacy-compatibility ADRs | `fe-java-architecture-spine`, `fe-legacy-compatibility-adr` | G3 |
+| F4 Development Planner | evidence-backed stories and sprint readiness | `fe-evidence-backed-stories`, `fe-sprint-readiness` | G4 |
+| F5 Java Developer | implementation inside the authorized Java target only | `fe-java-batch-implementation`, `fe-compiler-repair` | G5 |
+| F6 Independent Tester | independent fixtures and legacy-equivalence testing | `fe-independent-fixture-design`, `fe-legacy-java-equivalence` | G6 |
+| F7 Independent Reviewer | adversarial review and end-to-end trace audit | `fe-adversarial-code-review`, `fe-end-to-end-trace-audit` | G7 |
+
+The canonical definitions are in [`agents/`](agents/) and [`skills/`](skills/). Claude Code discovers them through byte-identical copies in `.claude/`. `sync-agents` installs both the forward and the [reverse](../reverse/README.md) definitions there, and `sync-agents --check` (run in CI) fails on drift. `orchestrator/skills.ts` validates every skill's metadata, sections, owner, contracts and write scope.
+
+## 2. TypeScript orchestrator
+
+[`runtime/src/orchestrator/`](runtime/src/orchestrator/) is the single deterministic controller.
+
+| Module | Responsibility |
+|---|---|
+| `states.ts` | the workflow states and their guarded transitions (gate PASS, accepted receipt or dispatch) |
+| `gates.ts` | G0–G8 evaluation; every result records its inputs with SHA-256 and the baseline it was evaluated on |
+| `orchestrator.ts` | `init`, gates, `advance`, dispatch packets, receipt recording, `status`, `resume` |
+| `permissions.ts` | least-privilege write scopes; reverse outputs and definitions, `.claude/`, sources, runtime, contracts and config are never writable by an agent |
+| `store.ts` | atomic `state.json` with checkpoint digest, a hash-chained `audit.jsonl`, an operation lock |
+| `ledger.ts`, `skills.ts`, `agents.ts`, `mirror.ts`, `reverse.ts` | the unit coverage ledger, the skill and agent registries, and the `.claude/` synchronization |
+
+Every agent works from a **dispatch packet** and returns a **receipt**. The runtime hashes each output, validates it against its JSON Schema contract ([`contracts/`](contracts/), Ajv) and runs the semantic checks in [`verification/src/`](verification/src/). Only then does it accept the receipt. Signed approvals (Ed25519) are handled by [`runtime/src/approval/`](runtime/src/approval/) and [`runtime/src/design/`](runtime/src/design/).
+
+## 3. COBOL-to-Java converter and Java 21 runtime
+
+| Part | Where | What it is |
+|---|---|---|
+| Converter | [`runtime/src/pilot/`](runtime/src/pilot/) | a COBOL front end (`cobol-app.ts`), a Java back end (`java-app.ts`), application conversion and JCL integration (`app-convert.ts`, `app-integrate.ts`) |
+| Java runtime | [`runtime/java/`](runtime/java/) | a hand-written Java 21 library for COBOL semantics: fields and storage, numeric operations, editing, 88-level conditions, files, run units and `CALL`. Its own tests run in CI (`RuntimeTests`, `SUMMARY\|34\|0\|0`). |
+| Pilot sandboxes | [`pilot/`](pilot/) | synthetic conversion fixtures, local generation authorizations, the demo's Java sandbox |
+
+The converter never runs on its own authority. Each conversion needs a program-scoped local authorization bound to the source SHA-256 and the output directory. **Generated Java is git-ignored** (`generated/`).
+
+## 4. Two engineering quality gates
+
+| Gate | Decides |
+|---|---|
+| `SOURCE_READINESS` | whether one program's source is understood well enough to convert: closure of paragraphs, copybooks and calls, and known hazards |
+| `CONVERSION_VALIDATION` | whether a conversion output is what its label says: compiled, tested, traced statement by statement, with no fabricated behaviour |
+
+Both are in [`runtime/src/pilot/gates.ts`](runtime/src/pilot/gates.ts) (`pilot readiness`, `pilot validate`). They **never authorize generation and never mean equivalence**.
+
+## 5. G0–G8 governance checkpoints
+
+| Gate | Checkpoint | Passes only when |
+|---|---|---|
+| G0 | Baseline integrity | every reverse input matches its SHA-256 in the baseline manifest |
+| G1 | Evidence verification | permanent IDs, plan outputs and evidence packets are consistent with the reverse inputs |
+| G2 | Requirements approval | requirements are complete and a **signed human approval** verifies against the configured trust store |
+| G3 | Architecture approval | a signed approval of the validated F3 architecture |
+| G4 | Development plan approval | a signed approval of the validated F4 story set |
+| G5 | Java build and tests | an authorized Java build compiles and its tests pass |
+| G6 | Independent verification | F6 results produced independently of the implementation |
+| G7 | Independent review | F7 review and trace audit without critical findings |
+| G8 | Acceptance | a signed human acceptance |
+
+A gate passes only on the current baseline, and only after its prerequisite has passed. G5–G8 fail closed. `generation.java_generation_allowed` is `false` in [`config/forward.config.json`](config/forward.config.json); generation also needs G4 PASS.
+
+## 6. Mandatory BMad enforcement
+
+The BMad Method 6.12.4 is **mandatory** for new governed forward development (`bmad_governance.mandatory = true`). Six workflows are bound to the forward agents: PRD, Architecture, Epics and Stories, Sprint Planning, Build and Code Review. A governed run without a valid LIVE BMad receipt stays `BMAD_BLOCKED`, with no fallback. Failed, invalid, MOCK and SIMULATED receipts never count. The pinned release, adapter, isolated executor and preflight are in [`integrations/bmad/`](integrations/bmad/) and [`runtime/src/bmad/`](runtime/src/bmad/).
+
+Status: **enforcement verified; LIVE execution blocked.** No workflow is authorized and none has executed live, so no receipt exists. See [`handover/BMAD-GOVERNANCE.md`](handover/BMAD-GOVERNANCE.md).
+
+## 7. Dashboard and testing
+
+- **Dashboard.** [`dashboard/`](dashboard/) is the read-only Modernization Command Center (React, TypeScript, Vite). It loads only committed evidence whose SHA-256 matches its manifest, and recounts and cross-checks every total. It has its own unit tests, a build and a headless browser smoke test.
+- **Tests.** [`tests/`](tests/README.md) holds the `node:test` suites, organized by functionality. In the developer environment every suite runs. CI runs the suites that work on a pure checkout; tests that need the restricted COBOL source or generated Java skip themselves there.
+- **CI.** [`.github/workflows/revforge-ci.yml`](../.github/workflows/revforge-ci.yml) has four jobs:
+  - forward build, doctor, `sync-agents --check`, tests and the Java runtime tests;
+  - dashboard;
+  - the synthetic demonstration;
+  - repository and report integrity.
+
+## 8. Executable demonstration
+
+[`demo/gates/`](demo/gates/README.md) runs all nine checkpoints, G0–G8, end to end on a small **synthetic** COBOL program:
+
+```bash
+cd forward && npm ci
+npm run demo:gates    # nine DEMO PASS rows; exit 0 only if all pass
+npm run demo:test     # happy path and negative paths
+```
+
+It reuses the real converter, Java runtime and gate machinery. Approvals are signed with an ephemeral key for that run, which the real trust store does not accept. BMad stages are SIMULATED and never counted. Every record says `environment: SYNTHETIC_INTERVIEW_DEMO`. The demonstration writes nothing to the real workflow, configuration or evidence. A [sample report](demo/gates/sample-run/DEMO-REPORT.md) is committed.
+
+## 9. Modernization status
+
+Three kinds of Java appear in this project. Keep them apart:
+
+| | What it is | Governed by G0–G8 and BMad? | Status |
+|---|---|---|---|
+| **Historical local conversions** | Java for 41 of 42 programs, produced by the converter under program-scoped local authorizations; git-ignored | **No**: classified `LOCAL_LGA_NOT_BMAD_GOVERNED`, not retroactively compliant | 2 COMPLETE under harness criteria (PORTREAD, PROGNAME), 39 PARTIAL, 1 MISSING (POSUPDT, empty source) |
+| **Governed workflow** | the real G0–G8 workflow over the whole application | Yes | no Java generated: G0–G1 PASS, G2 UNVERIFIED (no trust store configured), G3–G8 BLOCKED |
+| **Synthetic demonstration** | one synthetic program, end to end | demo gates only; BMad SIMULATED | 9/9 demo gates PASS; changes nothing in the real project |
+
+| Measure | Value |
+|---|---|
+| Business rules | 154: 67 Java-verified by source-derived tests, 15 verified up to a downstream gap, 40 unreachable, 32 blocked |
+| Open gap records | 569, all OPEN, in 23 root-cause groups |
+| COBOL-equivalent programs or rules | **0**: no legacy COBOL run is available to compare against |
+| Production readiness | **not production-ready** |
+
+*COMPLETE*, *compiles* and *passes source-derived tests* do not mean equivalent to the legacy COBOL program.
+
+## Folder map
 
 ```
 forward/
-  runtime/src/        CLI (cli.ts), commands (doctor, validate, plan), core modules
-  verification/src/   ID classification, evidence classes, reference-integrity checks
-  contracts/          JSON Schema contracts: common, forward-config, input/*, output/*
-  config/             forward.config.json (artifact paths, selection, generation policy)
-  reports/            Documentation of the generated reports
-  tests/              node:test suites and a synthetic-fixture builder
-  runs/               Generated run results (Git-ignored)
+  agents/  skills/        canonical F1–F7 definitions and their 14 skills
+  runtime/src/            TypeScript runtime and CLI (orchestrator, approval, design, bmad, pilot, demo, ...)
+  runtime/java/           hand-written Java 21 runtime library (tracked)
+  config/                 forward.config.json (reverse artifact paths, generation policy, BMad governance)
+  contracts/              JSON Schema contracts (input, output, forward deliverables, bmad, demo, ...)
+  verification/src/       ID, evidence-class, semantic and numeric checks
+  integrations/bmad/      pinned BMad release, bindings, isolated executor
+  dashboard/              read-only Modernization Command Center
+  demo/gates/             synthetic G0–G8 demonstration
+  pilot/                  conversion sandboxes and local authorizations
+  tests/                  node:test suites (see tests/README.md)
+  reports/                engineering reports and machine evidence (see reports/README.md)
+  handover/               final handover package
+  docs/                   operations guides (approvals, trust, BMad, OpenAI verification, recovery)
+  tools/                  report generators and the backup tool
+  generated/  runs/       generated Java and workflow run records (git-ignored, local only)
 ```
 
-## Requirements
-
-- Node.js 20 or later.
-- The reverse artifacts in `../output/`.
-- Optional: the original COBOL source library. Set `cobol_source.root` in the config, the environment variable `REVFORGE_COBOL_SOURCE_ROOT`, or `--source-root`. Without the source, planning relies on the artifacts alone and readiness is never reported as `ready`.
-
-## Usage
+## Commands
 
 ```bash
 cd forward
-npm install
-npm run build
-node dist/runtime/src/cli.js doctor          # environment and inputs
-node dist/runtime/src/cli.js validate        # contracts and cross-references
-node dist/runtime/src/cli.js plan --all      # full discovered system
-node dist/runtime/src/cli.js plan --programs PROG1,PROG2   # subset (Program or File IDs)
-npm test                                     # build and run all tests
+npm ci && npm run build
+node dist/runtime/src/cli.js doctor                  # environment, inputs, .claude/ drift
+node dist/runtime/src/cli.js sync-agents --check     # forward and reverse definitions vs .claude/
+node dist/runtime/src/cli.js validate                # reverse artifacts and cross-references
+node dist/runtime/src/cli.js workflow status         # the real workflow (needs local run records)
+npm test                                             # full suite (developer environment)
 ```
 
-The exit codes are:
+Requirements: Node.js 20 or later, JDK 21 (`REVFORGE_JAVA_HOME`) and Python 3. The COBOL source is optional, but without it readiness is never reported as ready. Set it with `REVFORGE_COBOL_SOURCE_ROOT`, `cobol_source.root` in the config, or `--source-root`. Exit codes: 0 success, 1 check failed, 2 usage, 3 generation refused, 4 configuration.
 
-| Code | Meaning |
-|---|---|
-| 0 | Success |
-| 1 | A check or validation failed |
-| 2 | Usage error |
-| 3 | Generation refused |
-| 4 | Configuration error |
+## Further reading
 
-## Principles
-
-- **Dynamic discovery.** Programs, copybooks, JCL and dependencies come from the inventory artifact. No program name, count or business rule is hard-coded, and a test checks this.
-- **Permanent IDs are preserved.** Source IDs are copied unchanged and never created or repaired.
-- **Run-local catalogue IDs.** `BR-`, `GAP-` and similar IDs are bound to the exact reverse run (artifact SHA-256) recorded in the baseline manifest.
-- **Gaps are expanded.** Grouped gaps are expanded into addressable items.
-- **Confidence is kept.** Confidence, SME flags and confirmed/inferred/uncertain evidence are preserved.
-- **Diagrams are supporting evidence only.**
-- **No live Neo4j verification.** None is claimed, and verification results recorded upstream are reported with attribution.
-- **Generation is guarded.** Java generation requires both the config flag and an approved gate. Gates arrive in a later step, so it is always refused in STEP 1.
-
-See `reports/README.md` for the report descriptions.
-
-## STEP 2: the Forward Orchestrator
-
-The orchestrator (`runtime/src/orchestrator/`) is the single deterministic controller of the forward workflow. Claude Code subagents do the analysis. The runtime decides:
-- what may run, and which inputs it gets;
-- whether an agent's outputs are accepted;
-- gate results and state transitions;
-- the audit trail.
-
-No agent output can pass a gate or move the workflow into an approval state.
-
-| Module | Role |
-|---|---|
-| `agents.ts` | Registry of the seven agents F1–F7: inputs, outputs, dispatch states, required gate, skills, allowed tools, forbidden actions. Also checks the definition files `.claude/agents/fe-*.agent.md` against it. |
-| `states.ts` | The 16 workflow states plus `INITIALIZED`, and the allowed transitions. Each transition is guarded by a gate PASS, an accepted receipt or a dispatch. `BLOCKED` may only return to the state it blocked; `ACCEPTED` and `FAILED` are terminal. |
-| `gates.ts` | G0 (baseline integrity) and G1 (evidence verification) are fully evaluated. G2–G8 fail closed: they return `BLOCKED`, `NOT_RUN` or `UNVERIFIED`, never `PASS`. Every result records its status, reason, inputs with SHA-256 and timestamp. |
-| `permissions.ts` | Least-privilege write scopes: each agent writes only to `workflow/agents/<F#>/`. Reverse outputs, `.claude`, COBOL sources, the forward runtime/contracts/config and the runtime's records are never writable. Java goes only to an authorised target directory, and only when generation is authorised. |
-| `classification.ts` | Evidence-based classification as application, template, test tool or utility, from the source path, the logic narrative and notes. Anything that is not an application candidate needs a scope decision. |
-| `store.ts` | Atomic `state.json` with a checkpoint digest, a hash-chained `audit.jsonl`, an operation lock, and gate, packet, receipt and approval records. |
-| `orchestrator.ts` | `init`, `runGate`, `advance`, `prepare` (dispatch packets), `recordReceipt`, `status`, `blockedReport`, `resume`. |
-
-Workflow commands operate on a plan run. `--run` defaults to `latest`.
-
-```bash
-node dist/runtime/src/cli.js agents                     # registry + definition checks + skill status
-node dist/runtime/src/cli.js workflow init              # G0, classification, BASELINE_LOADED
-node dist/runtime/src/cli.js workflow gate --gate G1    # or --gate all
-node dist/runtime/src/cli.js workflow advance --to EVIDENCE_VALIDATED
-node dist/runtime/src/cli.js workflow transitions       # allowed moves and their guards
-node dist/runtime/src/cli.js workflow prepare --agent F1 [--programs A,B]
-node dist/runtime/src/cli.js workflow record --receipt receipt.json
-node dist/runtime/src/cli.js workflow status | blocked | resume
-```
-
-Run records live in `runs/<run>/workflow/`:
-
-```
-state.json  audit.jsonl  program_classification.json
-gates/  packets/  receipts/  approvals/  agents/F1..F7/
-```
-
-## STEP 3: skills, deliverable contracts and real F1/F2 execution
-
-| Area | Implementation |
-|---|---|
-| Agents | The seven forward agent definitions are in `forward/agents/fe-*.agent.md` (the orchestrator reads them there; `config/forward.config.json` → `orchestrator.agents_dir`). `sync-agents` copies them to `.claude/agents/` so Claude Code can use them; `sync-agents --check` and `doctor` report drift. Edit only the `forward/` copies. |
-| Skills | 14 skills in `forward/skills/fe-*/SKILL.md` (copied to `.claude/skills/` by `sync-agents`), two per agent. Each has 12 required sections and a `revforge-skill` metadata block. `orchestrator/skills.ts` validates them: front matter, sections, owner, contracts, write scope, tools, requested operations, duplicates and unexpected `fe-*` directories. A skill counts as `INSTALLED` only when it passes. |
-| Contracts | 11 canonical deliverable contracts plus a shared header in `contracts/forward/` (see `contracts/README.md`), and `verification/src/semantic.ts` for the deterministic semantic checks. |
-| Dispatch | Batched packets (`workflow batches`) with dynamically discovered units and runtime extracts in `workflow/extracts/<packet>/`. Each packet records rule and gap scope, source availability and skill hashes, and has its own output directory and `receipt_path`. |
-| Receipts | Output paths must lie inside the packet's own directory. The runtime hashes every output (agents may give `sha256: null`), validates it against its contract and runs the semantic checks. Skill files must be unchanged since dispatch. Provenance is recorded in the receipt verdict. |
-| Coverage | `orchestrator/ledger.ts` tracks every unit. A stage transition such as `REQUIREMENTS_DRAFTED` requires the ledger to be complete; one finished batch never completes a stage. |
-| Git protection | Only the 7 `fe-*` agent files and the 14 `fe-*` skill directories may be added under `.claude/`. Everything else there is still checked. |
-
-Execution is a manual dispatch-and-receipt handoff:
-1. The runtime prepares the packets.
-2. Claude Code invokes the `fe-*` subagent with its packet.
-3. The agent writes its deliverables and `receipt.json`.
-4. The operator runs `workflow record --receipt <path>`.
-
-**Limits:**
-- `verified_from_source` is accepted only when the packet had the source available. The runtime cannot prove that an agent actually read the lines it cites.
-- Cross-batch consistency of copybook-level rule dispositions is not yet checked.
-
-**Limits in STEP 2:**
-- The 14 skills are not installed, so every packet is `NOT DISPATCHABLE` and lists `SKILL_NOT_INSTALLED`.
-- No command records human approvals, so G2, G3, G4 and G8 cannot pass and the approval states are unreachable.
-- Java generation stays disabled.
-- New project agents are visible to Claude Code only after the session is restarted.
+- [Report catalog](reports/README.md): the development history (STEP reports) and the reports by topic.
+- [Architecture](handover/ARCHITECTURE.md).
+- [Forward engineering in depth](handover/FORWARD-ENGINEERING.md).
+- [Testing and verification](handover/TESTING-AND-VERIFICATION.md).
+- [Known limitations](handover/KNOWN-LIMITATIONS.md).
