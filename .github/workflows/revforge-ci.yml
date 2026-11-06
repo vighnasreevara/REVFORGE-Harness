@@ -135,6 +135,58 @@ jobs:
           REVFORGE_SMOKE_NO_SANDBOX: '1'
         run: node scripts/smoke.mjs
 
+  demo:
+    name: Synthetic G0-G8 gate demonstration
+    # Runs the synthetic interview demonstration (environment SYNTHETIC_INTERVIEW_DEMO) on the committed synthetic
+    # inputs only: no restricted COBOL, no Neo4j, no external AI or BMad call, no production signing key (each run
+    # creates an ephemeral demo key in memory), no generated production Java. Demo output stays in RUNNER_TEMP.
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    defaults:
+      run:
+        working-directory: forward
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: forward/package-lock.json
+      - uses: actions/setup-java@c5195efecf7bdfc987ee8bae7a71cb8b11521c00 # v4.7.1
+        with:
+          distribution: temurin
+          java-version: '21'
+      - run: npm ci
+      - run: npm run build
+      - name: Run the demonstration (all nine demo gates must pass)
+        env:
+          REVFORGE_JAVA_HOME: ${{ env.JAVA_HOME }}
+        run: |
+          node dist/runtime/src/cli.js demo gates --out "$RUNNER_TEMP/demo"
+          node -e '
+            const s = require(process.argv[1]);
+            const ok = s.verdict === "SYNTHETIC_DEMO_ACCEPTED" && s.gates.length === 9 && s.gates.every((g) => g.demo_gate_status === "PASS")
+              && s.production_authorization === "NOT_GRANTED" && s.real_bmad_execution === "NOT_EXECUTED" && s.legacy_equivalence === "NOT_ESTABLISHED"
+              && s.bmad.simulated_stages === 6 && s.bmad.counted_as_bmad_execution === 0
+              && s.real_project_status.generation_java_generation_allowed === false && s.real_project_status.bmad_governance_mandatory === true;
+            console.log(ok ? "all nine demo gates PASS; production authorization NOT_GRANTED" : "demo summary check FAILED");
+            process.exit(ok ? 0 : 1);' "$RUNNER_TEMP/demo/demo-summary.json"
+      - name: Happy-path and negative-path tests
+        env:
+          REVFORGE_JAVA_HOME: ${{ env.JAVA_HOME }}
+        run: node --test --test-reporter=spec dist/tests/synthetic-gate-demonstration.test.js
+      - name: Publish the demonstration summary
+        if: always()
+        run: |
+          if [ -f "$RUNNER_TEMP/demo/DEMO-REPORT.md" ]; then
+            awk '/^### G0 /{exit} {print}' "$RUNNER_TEMP/demo/DEMO-REPORT.md" >> "$GITHUB_STEP_SUMMARY"
+            awk '/^## BMad lifecycle/{p=1} p' "$RUNNER_TEMP/demo/DEMO-REPORT.md" >> "$GITHUB_STEP_SUMMARY"
+          else
+            echo "### Synthetic gate demonstration did not produce a report" >> "$GITHUB_STEP_SUMMARY"
+          fi
+
   integrity:
     name: Repository and report integrity
     runs-on: ubuntu-24.04
