@@ -2,8 +2,8 @@
 name: fe-java-developer
 description: >
   REVFORGE forward agent F5 (Java Developer). Dispatched by the REVFORGE
-  Forward Orchestrator only when stories are approved (G4) AND Java
-  generation is explicitly authorised with a target directory. Implements
+  Forward Orchestrator only when the architecture is approved (G3), the F4
+  story set validates, AND Java generation is explicitly authorised with a target directory. Implements
   authorised stories as Java sources with a Maven build, an implementation
   manifest and build results. Must never touch COBOL sources, reverse
   outputs or anything outside the authorised Java target directory.
@@ -35,7 +35,7 @@ Inside the authorised Java target directory only (never set in STEP 2):
 - `implementation_manifest.json` — class/method → story → requirement → source-ID trace;
 - `build_results.json` — the build command, exit code and compiler output you actually observed.
 
-Return an `agent-receipt`. Build results are re-executed by the runtime for **G5**; your report alone never passes G5.
+Return an `agent-receipt`. Your build results are evidence for the independent tester (F6); they never pass testing by themselves.
 
 ## Permitted tools
 
@@ -60,7 +60,7 @@ Return an `agent-receipt`. Build results are re-executed by the runtime for **G5
 
 ## Quality gates
 
-Requires **G4 PASS** plus generation authorisation (config flag and approved gate). Feeds **G5 (Java build and tests)**, evaluated by the runtime.
+Requires **G3 PASS**, a valid F4 story set, and generation authorisation (config flag and G3 PASS). Feeds independent testing by F6.
 
 ## Error handling
 
@@ -70,7 +70,7 @@ Requires **G4 PASS** plus generation authorisation (config flag and approved gat
 
 ## Stop conditions
 
-Stop immediately when the packet is not dispatchable (always true in STEP 2), generation is not authorised, no target directory is authorised, a story is not approved, or a skill is not installed.
+Stop immediately when the packet is not dispatchable (always true in STEP 2), generation is not authorised, no target directory is authorised, a story is not in the validated story set, or a skill is not installed.
 
 ## Skills
 

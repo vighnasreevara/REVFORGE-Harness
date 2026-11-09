@@ -26,7 +26,7 @@ The command is read-only on the workflow. For each requirement and runtime requi
 | INSUFFICIENT_EVIDENCE | GAP | the cited evidence does not establish the claim |
 | CONTRADICTED | GAP | the source contradicts the cited evidence |
 
-**A category is not an approval.** Every category, VERIFIED included, may be implemented only after the scope passes G2, then G3 and G4, with genuine signed approvals and an explicit generation authorisation. The plan reports the G2 outcome next to each class and never changes it.
+**A category is not an approval.** Every category, VERIFIED included, may be implemented only after the scope passes G2, then G3, with genuine signed approvals, a valid F4 story set (automated validation) and an explicit generation authorisation. The plan reports the G2 outcome next to each class and never changes it.
 
 ## 1b. Behaviour scopes for granular G2 approval (Step 13)
 
@@ -71,7 +71,7 @@ approval export-request --scope <same> --requested-by <operator>   # only for a 
 
 Any change makes an earlier request stale.
 
-**What an approval covers.** A behaviour approval covers that subset only, and never the program. G3/G4 consume exactly its requirements.
+**What an approval covers.** A behaviour approval covers that subset only, and never the program. G3 and the F4 story validation consume exactly its requirements.
 
 ## 2. The synthetic pilot
 
@@ -118,17 +118,17 @@ The contract `pilot/pilot-result` rejects `COMPLETE` with open gaps, and rejects
 - **Refusals:** the pilot refuses a definition without `synthetic: true`, and any program under the configured COBOL source root, `output/` or `references/`.
 - **Output location:** generated output never leaves `forward/pilot/`.
 - **Nothing else is used:** the pilot uses no workflow, gate, approval, agent, BMad or AI provider.
-- **Not evidence for any gate:** pilot results must never be used as G5/G6 evidence.
+- **Not evidence for any gate or check:** pilot results must never be used as workflow build or independent-test evidence (the former G5/G6).
 - **Not backed up:** pilot output is reproducible and excluded from backups.
 
 ## 3. Authorised local generation of a real program (Step 16)
 
-Policy `program_scoped_local_v1` applies to deterministic **local** conversion only. Under it, a project-owner-accepted record bound to exact source and copybook hashes and to one output directory replaces the G2-G4 signature requirement. No Ed25519 signature is needed.
+Policy `program_scoped_local_v1` applies to deterministic **local** conversion only. Under it, a project-owner-accepted record bound to exact source and copybook hashes and to one output directory replaces the workflow's signature requirements (G2 and G3; G2-G4 under the nine-gate design in force at Step 16). No Ed25519 signature is needed.
 
 What the policy does not change:
-- the G0-G8 records;
+- the workflow's pre-check and gate records;
 - the global `generation.java_generation_allowed` flag (still `false`);
-- the orchestrator guard. F5 and any AI-agent generation still require G2-G4.
+- the orchestrator guard. F5 and any AI-agent generation still require G2 and G3 PASS, a valid story set and the generation flag.
 
 ```
 pilot authorize --input pilot/authorizations/<PROGRAM>.authorization-input.json

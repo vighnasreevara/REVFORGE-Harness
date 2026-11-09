@@ -1,10 +1,11 @@
 /**
- * G3 (architecture) and G4 (story set) human approval and gate evaluation
- * (STEP 7). Same trust model as G2: the external trust store, Ed25519
- * signatures over canonical JSON, separation of duties and runtime-sealed
- * records. Additional bindings: the approved-requirements content hash, the
- * exact artefact hash, the dependency manifest and the upstream approvals
- * (G2 for G3; G2 and G3 for G4).
+ * G3 (architecture) human approval and gate evaluation (STEP 7). Same trust
+ * model as G2: the external trust store, Ed25519 signatures over canonical
+ * JSON, separation of duties and runtime-sealed records. Additional bindings:
+ * the approved-requirements content hash, the exact architecture hash, the
+ * dependency manifest and the upstream G2 approval. (The former G4 story-set
+ * approval was removed in the two-gate workflow; F4 stories are still
+ * validated, and Java generation now needs G3 PASS.)
  *
  *  1. `design request` is issued only for an artefact that passes validation
  *     against the currently approved scope.
@@ -27,14 +28,13 @@ import { gatePassed, GateCheck, GateResult, gateSpec } from '../orchestrator/gat
 import { mutate, OrchestratorError, Workflow } from '../orchestrator/orchestrator';
 import { approvedScope, ApprovedScope, artifactSet, ArtifactSet, Check, validateArchitecture, validateStories } from './design';
 
-export type DesignGate = 'G3' | 'G4';
+export type DesignGate = 'G3';
 export const DESIGN_DIR = 'design';
 
 /** Roles that may sign each gate. G3 also needs a technical authority when an ADR changes legacy behaviour. Bound into every request (policy digest). */
 export const DESIGN_POLICY = {
   version: '1.0',
   G3: { approver_roles: ['architecture_approver'], co_approval_roles_when_behavior_change: ['technical_authority'] },
-  G4: { approver_roles: ['story_approver'] },
   revocation_invalidates_existing: true,
 };
 export const designPolicyDigest = () => digest(DESIGN_POLICY);
@@ -61,7 +61,7 @@ export interface DesignContext {
   story_order: string[];
 }
 
-/** What a G3 / G4 approval must match right now. */
+/** What a G3 approval must match right now. */
 export function designContext(wf: Workflow, gate: DesignGate, snap: Snapshot = buildSnapshot(wf)): DesignContext {
   const scope = approvedScope(wf, snap);
   if (gate === 'G3') {
@@ -71,14 +71,37 @@ export function designContext(wf: Workflow, gate: DesignGate, snap: Snapshot = b
     const dependency = scope.dependency ? { ...scope.dependency, architecture_sha256: null } : null;
     return { gate, ok: scope.ok && !!artifact && v.ok, blocked: scope.ok ? null : scope.reason, scope, artifact, validation: v, upstream, architecture_sha256: null, co_roles: v.needs_co_approval ? DESIGN_POLICY.G3.co_approval_roles_when_behavior_change : [], dependency, dependency_sha256: dependency ? digest(dependency) : null, g3: { approval_id: null, components: v.components, artifact_sha256: artifact?.sha256 ?? null }, story_order: [] };
   }
+  throw new OrchestratorError(`unknown design gate ${gate}`, 'USAGE');
+}
+
+/**
+ * Automated validation of the F4 story set (formerly part of gate G4). It is
+ * not a human approval: it re-evaluates G3 now and checks the accepted F4
+ * stories against the approved requirements and the approved architecture
+ * (coverage, no unsupported behaviour, component references, dependency
+ * order, concrete acceptance criteria, testing expectations, data contracts,
+ * open blockers and the end-to-end trace). F5 may only be dispatched while it
+ * passes.
+ */
+export interface StorySetValidation {
+  ok: boolean;
+  reason: string;
+  checks: Check[];
+  story_order: string[];
+  story_ids: string[];
+  architecture_approval: string | null;
+}
+
+export function validateStorySet(wf: Workflow, snap: Snapshot = buildSnapshot(wf)): StorySetValidation {
+  const scope = approvedScope(wf, snap);
   const g3 = evaluateDesignGate(wf, 'G3', snap);
   const g3ok = g3.result.status === 'PASS' && !!g3.evaluation?.valid_approval;
-  const g3ctx = g3.context;
-  const artifact = artifactSet(wf, 'F4');
-  const v = validateStories(wf, snap, scope, { approval_id: g3ok ? g3.evaluation.valid_approval : null, components: g3ctx.g3?.components ?? new Map() }, artifact);
-  const upstream = scope.ok && g3ok ? [{ gate: 'G2' as const, approval_id: scope.approval_id!, sha256: scope.approval_sha256! }, { gate: 'G3' as const, approval_id: g3.evaluation.valid_approval, sha256: sha256File(wf.store.p(DESIGN_DIR, 'approvals', `${g3.evaluation.valid_approval}.json`))! }] : [];
-  const dependency = scope.dependency ? { ...scope.dependency, architecture_sha256: g3ctx.artifact?.sha256 ?? null } : null;
-  return { gate, ok: scope.ok && g3ok && !!artifact && v.ok, blocked: !scope.ok ? scope.reason : !g3ok ? `G3 re-evaluated now: ${g3.result.status} — ${g3.result.reason}` : null, scope, artifact, validation: v, upstream, architecture_sha256: g3ctx.artifact?.sha256 ?? null, co_roles: [], dependency, dependency_sha256: dependency ? digest(dependency) : null, g3: { approval_id: g3ok ? g3.evaluation.valid_approval : null, components: g3ctx.g3?.components ?? new Map(), artifact_sha256: g3ctx.artifact?.sha256 ?? null }, story_order: (v as any).order ?? [] };
+  const approval = g3ok ? g3.evaluation.valid_approval : null;
+  const v = validateStories(wf, snap, scope, { approval_id: approval, components: g3.context.g3?.components ?? new Map() }, artifactSet(wf, 'F4'));
+  const ok = scope.ok && g3ok && v.ok;
+  const failing = v.checks.filter((c) => !c.ok).map((c) => `${c.id}: ${c.detail}`);
+  const reason = !scope.ok ? scope.reason : !g3ok ? `G3 re-evaluated now: ${g3.result.status} — ${g3.result.reason}` : ok ? `${v.story_ids.length} story(ies) valid against ${approval}` : failing.join('; ');
+  return { ok, reason, checks: v.checks, story_order: v.order, story_ids: v.story_ids, architecture_approval: approval };
 }
 
 /* ------------------------------------------------------------------ */
@@ -130,7 +153,7 @@ export function createDesignRequest(wf: Workflow, gate: DesignGate, requestedBy:
       dependency_manifest: { sha256: c.dependency_sha256!, ...c.dependency },
       validation: { ok: true, checks: c.validation.checks },
       policy_sha256: designPolicyDigest(),
-      required_roles: gate === 'G3' ? DESIGN_POLICY.G3.approver_roles : DESIGN_POLICY.G4.approver_roles,
+      required_roles: DESIGN_POLICY.G3.approver_roles,
       co_approval_roles: c.co_roles,
       approval_covers:
         gate === 'G3'
@@ -222,7 +245,7 @@ export function checkDesignApproval(wf: Workflow, snap: Snapshot, signed: any, c
   }
   // Currency: the approval counts only while the content it approved is exactly the current content.
   const baseOk = p.baseline.manifest_sha256 === wf.run.manifestSha256 && snap.g0.status === 'PASS';
-  add('baseline_current', baseOk, baseOk ? 'source and reverse baseline unchanged (G0 PASS)' : `baseline changed or not intact (G0 ${snap.g0.status})`);
+  add('baseline_current', baseOk, baseOk ? 'source and reverse baseline unchanged (baseline pre-check PASS)' : `baseline changed or not intact (baseline pre-check ${snap.g0.status})`);
   const ups = current.upstream.map((u) => u.approval_id);
   const upOk = !current.blocked && canonicalize(ups) === canonicalize(p.upstream_approvals.map((u: any) => u.approval_id)) && current.upstream.every((u) => p.upstream_approvals.some((x: any) => x.approval_id === u.approval_id && x.sha256 === u.sha256));
   add('upstream_current', upOk, upOk ? `upstream approval(s) ${ups.join(', ')} still valid` : current.blocked ? `upstream no longer valid: ${current.blocked}` : `upstream approvals are now ${ups.join(', ') || 'none'}, approval bound ${p.upstream_approvals.map((u: any) => u.approval_id).join(', ')}`);
@@ -244,7 +267,7 @@ function readSigned(file: string): any {
 
 export function verifyDesignApprovalFile(wf: Workflow, file: string): any {
   const signed = readSigned(file);
-  const gate = signed?.statement?.gate === 'G4' ? 'G4' : 'G3';
+  const gate: DesignGate = 'G3';
   const snap = buildSnapshot(wf);
   const r = checkDesignApproval(wf, snap, signed, designContext(wf, gate, snap));
   return { ok: r.ok, gate, checks: r.checks, request_id: r.request?.request_id ?? null, decision: signed?.statement?.decision ?? null };
@@ -253,7 +276,7 @@ export function verifyDesignApprovalFile(wf: Workflow, file: string): any {
 export function importDesignApproval(wf: Workflow, file: string): any {
   return mutate(wf, 'design approval import', () => {
     const signed = readSigned(file);
-    const gate: DesignGate = signed?.statement?.gate === 'G4' ? 'G4' : 'G3';
+    const gate: DesignGate = 'G3';
     const snap = buildSnapshot(wf);
     const r = checkDesignApproval(wf, snap, signed, designContext(wf, gate, snap));
     if (!r.ok) {
@@ -339,7 +362,7 @@ export function evaluateDesignGate(wf: Workflow, gate: DesignGate, snap: Snapsho
     .map((x) => {
       const failed = x.r.checks.filter((c) => !c.ok);
       const causes = [...new Set(failed.map((c) => CAUSE[c.id]).filter(Boolean))].sort();
-      const downstream = gate === 'G3' ? designApprovals(wf, 'G4').filter((d) => d.upstream_approval_ids.includes(x.a.approval_id)).map((d) => ({ gate: 'G4', approval_id: d.approval_id })) : [];
+      const downstream: Array<{ gate: string; approval_id: string }> = [];
       return { gate, approval_id: x.a.approval_id, causes: causes.length ? causes : ['artifact_changed'], failed_checks: failed, downstream_impact: downstream, causes_sha256: digest({ approval_id: x.a.approval_id, causes }) };
     });
   for (const x of verified) inputs.push({ kind: 'design_approval', ref: x.a.approval_id, sha256: sha256File(wf.store.p(DESIGN_DIR, 'approvals', `${x.a.approval_id}.json`)) });
@@ -353,7 +376,7 @@ export function evaluateDesignGate(wf: Workflow, gate: DesignGate, snap: Snapsho
   for (const c of context.validation.checks) checks.push({ id: c.id, status: c.ok ? 'pass' : 'fail', detail: c.detail });
   if (!context.artifact) return { result: result('NOT_RUN', `nothing to evaluate: no accepted ${gate === 'G3' ? 'F3 architecture' : 'F4 story'} output`), evaluation, context, invalidations: invalid };
 
-  const roles = gate === 'G3' ? DESIGN_POLICY.G3.approver_roles : DESIGN_POLICY.G4.approver_roles;
+  const roles = DESIGN_POLICY.G3.approver_roles;
   const valid = verified.filter((x) => x.r.ok);
   const primary = valid.filter((x) => x.a.decision === 'approved' && roles.includes(x.a.signer.role)).pop();
   const co = context.co_roles.length ? valid.filter((x) => x.a.decision === 'approved' && context.co_roles.includes(x.a.signer.role) && x.a.signer.signer_id !== primary?.a.signer.signer_id).pop() : null;

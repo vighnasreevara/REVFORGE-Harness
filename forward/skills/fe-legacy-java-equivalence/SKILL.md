@@ -6,7 +6,7 @@ allowed-tools: Read, Grep, Glob, Write, Bash
 
 # fe-legacy-java-equivalence
 
-Owned by agent **fe-independent-tester** (F6). Run after `fe-independent-fixture-design`, after gate G5.
+Owned by agent **fe-independent-tester** (F6). Run after `fe-independent-fixture-design`, once the F5 implementation has been built.
 
 ```json revforge-skill
 {
@@ -42,7 +42,7 @@ The skill never repairs the implementation.
 
 ## Input validation
 
-1. Stop with `blocked` if G5 is not `PASS`, the packet is not dispatchable, or the fixture manifest is missing or invalid.
+1. Stop with `blocked` if the implementation has not been built, the packet is not dispatchable, or the fixture manifest is missing or invalid.
 2. Verify that every reference artifact's SHA-256 matches the packet. A reference that does not match is untrusted and gives `EQUIVALENCE_UNVERIFIED`.
 3. Copy `inputs_used` paths and hashes from the packet.
 
@@ -94,7 +94,7 @@ The Java target directory is read-only for this agent.
 
 - The build does not run: record `test_runs` with the observed exit code, then stop with `failed`.
 - Reference evidence is missing or untrusted: `EQUIVALENCE_UNVERIFIED`. That is not an error.
-- G5 is not `PASS`: return `blocked`.
+- The implementation has not been built: return `blocked`.
 
 ## Quality checks
 
@@ -109,4 +109,4 @@ Each equivalence entry names its requirement ID. Through the fixture manifest it
 
 ## Orchestrator integration
 
-Gate G6 evaluates the executed evidence in the runtime. An `EQUIVALENCE_UNVERIFIED` result keeps G6 from passing for that requirement. F6's receipt never moves the workflow by itself.
+The runtime reads the executed evidence: a `DIFFERENT` result stops the work from moving to review. An `EQUIVALENCE_UNVERIFIED` result is reported to the F7 reviewer and must be addressed in the review. F6's receipt never moves the workflow by itself.

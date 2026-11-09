@@ -26,7 +26,7 @@ import { procedureFacts } from '../verification/src/facts';
 import { sourceFile } from '../verification/src/cobol-source';
 import { cleanup, Fixture, FORWARD_DIR } from './helpers/fixture';
 import { wfOf } from './helpers/g2fixture';
-import { approveStories, designFixture } from './helpers/designfixture';
+import { designFixture, readyForImplementation } from './helpers/designfixture';
 
 import { javaTrackingViolations } from './helpers/gitpolicy';
 const backup = require(path.join(FORWARD_DIR, 'tools', 'backup.js'));
@@ -257,21 +257,21 @@ describe('STEP 11 - synthetic pilot', () => {
 
 /* ------------------------------------------------------------------ */
 describe('STEP 11 - workflow and protection', () => {
-  test('8. synthetic F1-F4 workflow reaches G4 in an isolated fixture; F5 still cannot write Java and G5 stays fail-closed', () => {
+  test('8. synthetic F1-F4 workflow reaches G3 and validated stories in an isolated fixture; F5 still cannot write Java', () => {
     const { f, ctx, dk } = designFixture(fixtures);
-    approveStories(f, ctx, dk);
+    readyForImplementation(f, ctx, dk);
     const wf = wfOf(ctx);
-    assert.equal(wf.state.state, 'STORIES_APPROVED');
+    assert.equal(wf.state.state, 'STORIES_DRAFTED');
     assert.ok(!path.resolve(wf.store.p('')).startsWith(path.resolve(realRunsDir)), 'the synthetic workflow lives outside the real runs');
-    assert.equal(generationAuthorized(wf.run, wf.state), false, 'config flag is off: G4 PASS alone never authorises generation');
+    assert.equal(generationAuthorized(wf.run, wf.state), false, 'config flag is off: G3 PASS alone never authorises generation');
     const pk = prepare(wf, 'F5');
     assert.equal(pk.permissions.may_write_code, false);
     assert.equal(pk.permissions.generation_authorized, false);
     assert.match(JSON.stringify(pk), /Java generation is not authorised/);
-    assert.notEqual(runGate(wf, 'G5').status, 'PASS');
+    assert.equal(runGate(wf, 'G3').status, 'PASS', 'G3 still passes; only the config flag is missing');
   });
 
-  test('10/12. the real workflow holds no approvals or resolutions, trust is not configured, and G3-G8 are not PASS', { skip: !realRun }, () => {
+  test('10/12. the real workflow holds no approvals or resolutions, trust is not configured, and G2/G3 are not PASS', { skip: !realRun }, () => {
     const ctx = realCtx();
     const wf = loadWorkflow(ctx, realRun!);
     const recs = (dir: string) => (fs.existsSync(wf.store.p(dir)) ? fs.readdirSync(wf.store.p(dir)) : []);
@@ -281,7 +281,7 @@ describe('STEP 11 - workflow and protection', () => {
     walk(wf.store.p(''));
     assert.equal(all.filter((n) => /^(APR|RES|DAP)-\d+/.test(n)).length, 0, 'no signed approval or resolution record of any kind');
     assert.equal(trustDoctor(ctx).status, 'TRUST_NOT_CONFIGURED');
-    for (const g of ['G3', 'G4', 'G5', 'G6', 'G7', 'G8']) assert.notEqual(wf.state.gates[g]?.status, 'PASS', g);
+    assert.notEqual(wf.state.gates.G3?.status, 'PASS');
     assert.notEqual(wf.state.gates.G2?.status, 'PASS');
   });
 

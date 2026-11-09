@@ -50,7 +50,7 @@ export function renderReport(wf: Workflow, gate: { status: string; reason: strin
   const L: string[] = [];
   L.push(`# G2 readiness and blocker report`, '');
   L.push(`Run \`${wf.run.runId}\` — workflow state \`${wf.state.state}\` — generated ${snap.at.toISOString()} by \`workflow g2 report\`.`, '');
-  L.push(`Baseline manifest \`${wf.run.manifestSha256}\` (G0 ${snap.g0.status}). Source root ${snap.ctx.srcRoot ? 'configured' : '**not configured**'}. Trust anchor: ${snap.trust.usable ? `usable (${snap.trust.signers.size} signer(s))` : `**none** — ${snap.trust.problems.join('; ')}`}.`, '');
+  L.push(`Baseline manifest \`${wf.run.manifestSha256}\` (baseline pre-check ${snap.g0.status}). Source root ${snap.ctx.srcRoot ? 'configured' : '**not configured**'}. Trust anchor: ${snap.trust.usable ? `usable (${snap.trust.signers.size} signer(s))` : `**none** — ${snap.trust.problems.join('; ')}`}.`, '');
   if (gate) {
     L.push(`## Gate G2: ${gate.status}`, '', gate.reason, '', '| Check | Status | Detail |', '|---|---|---|');
     for (const c of gate.checks) L.push(`| ${c.id} | ${c.status} | ${c.detail.replace(/\|/g, '/').slice(0, 300)} |`);

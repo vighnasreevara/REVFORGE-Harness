@@ -120,7 +120,7 @@ export function verifyDisclosure(wf: Workflow, snap: Snapshot, signed: any, opts
   const prov = PROVIDERS[a.provider.name];
   add('provider', !!prov && prov.services.includes(a.provider.service) && prov.endpoint_hosts.includes(a.provider.endpoint_host), prov ? `${a.provider.name} / ${a.provider.service} at ${a.provider.endpoint_host}` : `unknown provider ${a.provider.name}`);
   add('content_id', a.authorization_id === authorizationIdOf(a), a.authorization_id === authorizationIdOf(a) ? `${a.authorization_id} matches the authorized content` : 'authorization_id does not match its content (altered after preparation)');
-  add('workflow_binding', a.workflow_id === wf.state.workflow_id && a.run_id === wf.run.runId && a.baseline_manifest_sha256 === wf.run.manifestSha256 && snap.g0.status === 'PASS', a.baseline_manifest_sha256 === wf.run.manifestSha256 ? `bound to ${a.run_id} on the current baseline (G0 ${snap.g0.status})` : 'bound to another workflow, run or baseline');
+  add('workflow_binding', a.workflow_id === wf.state.workflow_id && a.run_id === wf.run.runId && a.baseline_manifest_sha256 === wf.run.manifestSha256 && snap.g0.status === 'PASS', a.baseline_manifest_sha256 === wf.run.manifestSha256 ? `bound to ${a.run_id} on the current baseline (baseline pre-check ${snap.g0.status})` : 'bound to another workflow, run or baseline');
   const sig = verifySignature(snap.trust, a.signer_id, canonicalize(a), signed.signature.value, DISCLOSURE_ROLES, snap.at);
   add('trust_anchor', snap.trust.usable, snap.trust.usable ? 'trust store usable' : snap.trust.problems.join('; ') || 'TRUST_NOT_CONFIGURED');
   add('signature', sig.ok, sig.ok ? `Ed25519 signature by ${a.signer_id} (${a.role}) verified` : sig.problems.join('; '));

@@ -15,7 +15,7 @@ import { findAgent } from '../orchestrator/agents';
 import { STATES } from '../orchestrator/states';
 import { bmadPaths, Check, ReleaseVerification, WorkflowEntry } from './release';
 
-export type Requirement = 'architecture_artifacts' | 'approved_stories' | 'java_target_dir' | 'generation_authorized' | 'implementation_artifacts' | 'independent_test_receipt' | 'reviewer_not_implementer';
+export type Requirement = 'architecture_artifacts' | 'validated_stories' | 'java_target_dir' | 'generation_authorized' | 'implementation_artifacts' | 'independent_test_receipt' | 'reviewer_not_implementer';
 
 export interface Binding {
   binding_id: string;
@@ -109,16 +109,16 @@ export function validateBindings(ctx: RuntimeContext, rel: ReleaseVerification, 
     if (a) {
       add('agent_code_permission', b.may_write_code === a.may_write_code, b.may_write_code === a.may_write_code ? `may_write_code=${b.may_write_code} agrees with ${a.id}` : `binding may_write_code=${b.may_write_code} disagrees with ${a.id} (${a.may_write_code})`);
       const gate = a.requires_gate;
-      add('agent_gate_included', !gate || gate === 'G1' || b.requires_gates.includes(gate), `agent dispatch gate ${gate ?? 'none'} is ${!gate || gate === 'G1' || b.requires_gates.includes(gate) ? '' : 'NOT '}covered by the binding's gates (${b.requires_gates.join(', ')})`);
+      add('agent_gate_included', !gate || b.requires_gates.includes(gate), `agent dispatch gate ${gate ?? 'none'} is ${!gate || b.requires_gates.includes(gate) ? '' : 'NOT '}covered by the binding's gates (${b.requires_gates.join(', ')})`);
     }
     add('not_independent_tester', b.agent !== 'F6', b.agent === 'F6' ? 'F6 independent testing may not be bound to a BMad workflow' : 'F6 stays independent of BMad');
     const badStates = b.allowed_states.filter((s) => !(STATES as readonly string[]).includes(s));
     add('states_known', !badStates.length, badStates.length ? `unknown workflow state(s): ${badStates.join(', ')}` : `allowed in ${b.allowed_states.join(', ')}`);
     add('g2_required', b.requires_gates.includes('G2') && b.requires_exact_scope === true, 'every binding requires G2 PASS for the exact approved scope');
     add('never_approves', b.may_approve === false, 'BMad results are drafts or recommendations; approval stays with signed humans');
-    if (b.workflow_id === 'bmad-build') add('build_constraints', ['G3', 'G4'].every((g) => b.requires_gates.includes(g)) && b.requires.includes('java_target_dir') && b.requires.includes('generation_authorized'), 'build requires G3, G4, an authorised Java target directory and generation authorisation');
+    if (b.workflow_id === 'bmad-build') add('build_constraints', b.requires_gates.includes('G3') && b.requires.includes('java_target_dir') && b.requires.includes('generation_authorized'), 'build requires G3, an authorised Java target directory and generation authorisation');
     if (b.workflow_id === 'bmad-code-review') add('review_constraints', b.requires.includes('implementation_artifacts') && b.requires.includes('independent_test_receipt') && b.requires.includes('reviewer_not_implementer') && b.agent !== 'F5', 'review requires real implementation artefacts, an independent F6 receipt and a reviewer other than the implementer');
-    if (b.workflow_id === 'bmad-sprint-planning') add('sprint_constraints', ['G3', 'G4'].every((g) => b.requires_gates.includes(g)), 'sprint planning requires G3 and G4');
+    if (b.workflow_id === 'bmad-sprint-planning') add('sprint_constraints', b.requires_gates.includes('G3') && b.requires.includes('validated_stories'), 'sprint planning requires G3 and validated stories');
     if (b.workflow_id === 'bmad-create-epics-and-stories') add('stories_constraints', b.requires.includes('architecture_artifacts'), 'stories require recorded architecture artefacts');
     add('output_contract', ctx.contracts.names.includes(b.output_contract), ctx.contracts.names.includes(b.output_contract) ? `${b.output_contract} is a registered contract` : `${b.output_contract} is not a registered contract`);
     add('mapping_defined', !!lb.mapping?.inputs?.[b.binding_id], lb.mapping?.inputs?.[b.binding_id] ? `mapping ${lb.mapping.mapping_version} defines ${lb.mapping.inputs[b.binding_id].length} input(s)` : `mapping.json defines no inputs for ${b.binding_id}`);

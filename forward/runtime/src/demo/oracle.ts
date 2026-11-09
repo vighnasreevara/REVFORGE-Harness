@@ -1,11 +1,11 @@
 /**
- * Independent behavioural oracle for the synthetic demo program DEMOORD1 (demo gate G6).
+ * Independent behavioural oracle for the synthetic demo program DEMOORD1 (demo step VERIFY).
  *
  * Written from forward/demo/gates/synthetic/requirements/requirements.json only:
  * it implements REQ-DEMO-001..008 directly in integer arithmetic (BigInt cents).
  * It deliberately imports nothing: it never parses the COBOL, never reads or
  * calls the generated Java and never uses the converter or the Java runtime.
- * Demo gate G6 checks this independence by inspecting the compiled module.
+ * The VERIFY step checks this independence by inspecting the compiled module.
  */
 
 export interface DemoOrder {

@@ -8,8 +8,8 @@ import { runPlan } from '../runtime/src/commands/plan';
 import { EXIT, main } from '../runtime/src/cli';
 import { AGENTS, checkDefinition, findAgent, REQUIRED_SECTIONS } from '../runtime/src/orchestrator/agents';
 import { classifyProgram } from '../runtime/src/orchestrator/classification';
-import { evaluateFailClosed, GATES, openRun, validateApproval } from '../runtime/src/orchestrator/gates';
-import { advance, initWorkflow, loadWorkflow, OrchestratorError, policyRoots, prepare, recordReceipt, resume, runGate, status } from '../runtime/src/orchestrator/orchestrator';
+import { evaluateEvidenceCheck, GATES, openRun, PRECHECKS, validateApproval } from '../runtime/src/orchestrator/gates';
+import { advance, initWorkflow, loadWorkflow, OrchestratorError, policyRoots, prepare, receiptOutcome, recordReceipt, resume, runGate, runPrecheck, status } from '../runtime/src/orchestrator/orchestrator';
 import { canRead, canWrite } from '../runtime/src/orchestrator/permissions';
 import { APPROVAL_STATES, findTransition, TRANSITIONS } from '../runtime/src/orchestrator/states';
 import { WorkflowStore } from '../runtime/src/orchestrator/store';
@@ -38,11 +38,11 @@ function setup(opts: { skillsFor?: string[]; javaAllowed?: boolean; targetDir?: 
   return { f, ctx };
 }
 
-/** Init + G1 + EVIDENCE_VALIDATED. */
+/** Init + evidence pre-check + EVIDENCE_VALIDATED. */
 function validated(opts: Parameters<typeof setup>[0] = {}) {
   const s = setup(opts);
   initWorkflow(s.ctx, 'FWD-T2');
-  assert.equal(runGate(loadWorkflow(s.ctx, 'FWD-T2'), 'G1').status, 'PASS');
+  assert.equal(runPrecheck(loadWorkflow(s.ctx, 'FWD-T2'), 'EVIDENCE').status, 'PASS');
   assert.equal(advance(loadWorkflow(s.ctx, 'FWD-T2'), 'EVIDENCE_VALIDATED').accepted, true);
   return s;
 }
@@ -120,14 +120,18 @@ describe('S2-1. seven-agent registration', () => {
 });
 
 describe('S2-2. agent input/output declarations', () => {
-  test('every agent declares inputs, outputs, a dispatch state, a gate and forbidden actions', () => {
+  test('every agent declares inputs, outputs, a dispatch state, its gate or pre-checks and forbidden actions', () => {
     for (const a of AGENTS) {
       assert.ok(a.inputs.length > 0 && a.inputs.some((i) => i.required), a.id);
       assert.ok(a.outputs.length >= 3, a.id);
       assert.ok(a.dispatch_states.length > 0, a.id);
-      assert.ok(a.requires_gate, a.id);
       assert.ok(a.forbidden.some((x) => /approved/.test(x)), a.id);
     }
+    // F1/F2 need the automated pre-checks, F3 needs G2, F4/F5 need G3; F6/F7 follow the F5/F6 receipts through their dispatch states.
+    assert.deepEqual(Object.fromEntries(AGENTS.map((a) => [a.id, a.requires_gate])), { F1: null, F2: null, F3: 'G2', F4: 'G3', F5: 'G3', F6: null, F7: null });
+    for (const id of ['F1', 'F2']) assert.deepEqual(findAgent(id)!.requires_prechecks, ['BASELINE', 'EVIDENCE'], id);
+    assert.deepEqual(findAgent('F6')!.dispatch_states, ['IMPLEMENTATION_BUILT', 'TESTING']);
+    assert.deepEqual(findAgent('F7')!.dispatch_states, ['REVIEWING']);
     assert.equal(AGENTS.filter((a) => a.may_write_code).map((a) => a.id).join(), 'F5');
     assert.ok(REQUIRED_SECTIONS.includes('Stop conditions'));
   });
@@ -148,9 +152,10 @@ describe('S2-2. agent input/output declarations', () => {
 describe('S2-3. state transitions', () => {
   test('forbidden transitions do not exist in the table', () => {
     assert.equal(findTransition('REQUIREMENTS_DRAFTED', 'IMPLEMENTING', null), null);
-    assert.equal(findTransition('BLOCKED', 'ACCEPTED', 'REVIEWING'), null);
+    assert.equal(findTransition('BLOCKED', 'COMPLETED', 'REVIEWING'), null);
     assert.equal(findTransition('EVIDENCE_VALIDATED', 'REQUIREMENTS_APPROVED', null), null);
-    assert.equal(findTransition('ACCEPTED', 'BLOCKED', null), null);
+    assert.equal(findTransition('COMPLETED', 'BLOCKED', null), null);
+    assert.equal(findTransition('ARCHITECTURE_APPROVED', 'IMPLEMENTING', null), null, 'implementation needs drafted stories');
     assert.equal(findTransition('FAILED', 'BASELINE_LOADED', null), null);
     assert.equal(findTransition('BLOCKED', 'TESTING', 'REVIEWING'), null, 'BLOCKED may only return to the state it blocked');
   });
@@ -168,9 +173,8 @@ describe('S2-3. state transitions', () => {
     initWorkflow(ctx, 'FWD-T2');
     const r1 = advance(loadWorkflow(ctx, 'FWD-T2'), 'IMPLEMENTING');
     assert.equal(r1.accepted, false);
-    const r2 = advance(loadWorkflow(ctx, 'FWD-T2'), 'EVIDENCE_VALIDATED');
+    const r2 = advance(loadWorkflow(ctx, 'FWD-T2'), 'REQUIREMENTS_APPROVED');
     assert.equal(r2.accepted, false);
-    assert.match(r2.reason, /G1 has not passed/);
     const r3 = advance(loadWorkflow(ctx, 'FWD-T2'), 'NONSENSE');
     assert.equal(r3.accepted, false);
     const wf = loadWorkflow(ctx, 'FWD-T2');
@@ -186,7 +190,7 @@ describe('S2-3. state transitions', () => {
     initWorkflow(ctx, 'FWD-T2');
     assert.equal(advance(loadWorkflow(ctx, 'FWD-T2'), 'BLOCKED').accepted, false);
     assert.equal(advance(loadWorkflow(ctx, 'FWD-T2'), 'BLOCKED', { reason: 'SME unavailable' }).accepted, true);
-    assert.equal(advance(loadWorkflow(ctx, 'FWD-T2'), 'ACCEPTED').accepted, false);
+    assert.equal(advance(loadWorkflow(ctx, 'FWD-T2'), 'COMPLETED').accepted, false);
     assert.equal(advance(loadWorkflow(ctx, 'FWD-T2'), 'EVIDENCE_VALIDATED').accepted, false);
     assert.equal(advance(loadWorkflow(ctx, 'FWD-T2'), 'BASELINE_LOADED', { reason: 'SME available again' }).accepted, true);
   });
@@ -223,49 +227,51 @@ describe('S2-4. resume and checkpoint integrity', () => {
     initWorkflow(ctx, 'FWD-T2');
     const store = new WorkflowStore(path.join(ctx.runsDir, 'FWD-T2'));
     store.append('half_written_operation', { note: 'simulated crash' });
-    fs.writeFileSync(store.p('operation.lock'), JSON.stringify({ op: 'gate G1', pid: 1, at: new Date().toISOString() }));
-    assert.throws(() => runGate(loadWorkflow(ctx, 'FWD-T2'), 'G1'), OrchestratorError);
+    fs.writeFileSync(store.p('operation.lock'), JSON.stringify({ op: 'precheck EVIDENCE', pid: 1, at: new Date().toISOString() }));
+    assert.throws(() => runPrecheck(loadWorkflow(ctx, 'FWD-T2'), 'EVIDENCE'), OrchestratorError);
     fs.rmSync(store.p('operation.lock'));
-    assert.throws(() => runGate(loadWorkflow(ctx, 'FWD-T2'), 'G1'), /checkpoint/);
-    fs.writeFileSync(store.p('operation.lock'), JSON.stringify({ op: 'gate G1', pid: 1, at: new Date().toISOString() }));
+    assert.throws(() => runPrecheck(loadWorkflow(ctx, 'FWD-T2'), 'EVIDENCE'), /checkpoint/);
+    fs.writeFileSync(store.p('operation.lock'), JSON.stringify({ op: 'precheck EVIDENCE', pid: 1, at: new Date().toISOString() }));
     const r = resume(ctx, 'FWD-T2');
     assert.equal(r.resumed, true);
     assert.equal(r.interrupted_events_sealed, true);
-    assert.equal(r.recovered_lock.op, 'gate G1');
-    assert.equal(runGate(loadWorkflow(ctx, 'FWD-T2'), 'G1').status, 'PASS');
+    assert.equal(r.recovered_lock.op, 'precheck EVIDENCE');
+    assert.equal(runPrecheck(loadWorkflow(ctx, 'FWD-T2'), 'EVIDENCE').status, 'PASS');
     assert.equal(status(loadWorkflow(ctx, 'FWD-T2')).checkpoint.verified, true);
   });
 });
 
-describe('S2-5. G0 and G1', () => {
-  test('G0 passes on an intact baseline and init lands in BASELINE_LOADED', () => {
+describe('S2-5. automated pre-checks (formerly G0 and G1)', () => {
+  test('the baseline pre-check passes on an intact baseline and init lands in BASELINE_LOADED', () => {
     const { ctx } = setup();
     const wf = initWorkflow(ctx, 'FWD-T2');
-    assert.equal(wf.state.gates.G0.status, 'PASS');
+    assert.equal(wf.state.prechecks!.BASELINE.status, 'PASS');
+    assert.equal(wf.state.gates.G0, undefined, 'G0 is no longer a gate');
     assert.equal(wf.state.state, 'BASELINE_LOADED');
-    const g = JSON.parse(fs.readFileSync(wf.store.p('gates', wf.state.gates.G0.result_file), 'utf8'));
+    const g = JSON.parse(fs.readFileSync(wf.store.p('prechecks', wf.state.prechecks!.BASELINE.result_file), 'utf8'));
     assert.ok(g.inputs.length > 1 && g.evaluated_at && g.reason);
+    assert.equal(ctx.contracts.validate('orchestrator/precheck-result', g).valid, true);
+    assert.deepEqual(PRECHECKS.map((c) => c.id), ['BASELINE', 'EVIDENCE']);
   });
 
-  test('G1 is BLOCKED before G0 and FAILs on tampered evidence', () => {
+  test('the evidence pre-check is BLOCKED before the baseline pre-check and FAILs on tampered evidence', () => {
     const { f, ctx } = setup();
     const run = openRun(ctx, 'FWD-T2');
-    const { evaluateG1 } = require('../runtime/src/orchestrator/gates');
-    assert.equal(evaluateG1(run, null).status, 'BLOCKED');
+    assert.equal(evaluateEvidenceCheck(run, null).status, 'BLOCKED');
     initWorkflow(ctx, 'FWD-T2');
     const pkt = path.join(f.runsDir, 'FWD-T2', 'evidence_packets', `${f.programs[0].fileId}__${f.programs[0].name}.json`);
     const j = JSON.parse(fs.readFileSync(pkt, 'utf8'));
     j.data_records.push({ record_id: `${f.systemId}-FIL-0999-REC-0001`, file_id: `${f.systemId}-FIL-0999`, owner: 'program' });
     fs.writeFileSync(pkt, JSON.stringify(j));
-    const r = runGate(loadWorkflow(ctx, 'FWD-T2'), 'G1');
+    const r = runPrecheck(loadWorkflow(ctx, 'FWD-T2'), 'EVIDENCE');
     assert.equal(r.status, 'FAIL');
     assert.match(r.reason, /not present in the reverse inputs/);
     assert.equal(loadWorkflow(ctx, 'FWD-T2').state.state, 'BLOCKED');
   });
 });
 
-describe('S2-6. fail-closed G2-G8', () => {
-  test('G2-G8 never PASS, even with receipts and a forged approval', () => {
+describe('S2-6. the two human gates G2 and G3', () => {
+  test('G2 and G3 never PASS without a signed human approval, even with receipts and a forged approval', () => {
     const { f, ctx } = validated({ skillsFor: ['F1', 'F2'] });
     for (const id of ['F1', 'F2']) {
       const p = prepare(loadWorkflow(ctx, 'FWD-T2'), id);
@@ -277,23 +283,22 @@ describe('S2-6. fail-closed G2-G8', () => {
     const g2 = runGate(loadWorkflow(ctx, 'FWD-T2'), 'G2');
     assert.equal(g2.status, 'UNVERIFIED');
     assert.ok(g2.checks.some((c) => c.id === 'human_approval' && /must come from a human/.test(c.detail)));
-    for (const g of ['G3', 'G4', 'G5', 'G6', 'G7', 'G8'] as const) assert.equal(runGate(loadWorkflow(ctx, 'FWD-T2'), g).status, 'BLOCKED', g);
+    assert.equal(runGate(loadWorkflow(ctx, 'FWD-T2'), 'G3').status, 'BLOCKED');
     const human = { contract: 'approval-record', gate: 'G2', decision: 'approved', actor: { kind: 'human', id: 'sme' }, recorded_by: 'runtime', recorded_at: new Date().toISOString(), bound_receipts: [{ receipt_id: rc, sha256: sha256File(wf.store.p('receipts', `${rc}.json`)) }] };
     assert.deepEqual(validateApproval(human, 'G2', wf.store), []);
     fs.writeFileSync(wf.store.p('approvals', 'human.json'), JSON.stringify(human));
     assert.equal(runGate(loadWorkflow(ctx, 'FWD-T2'), 'G2').status, 'UNVERIFIED', 'even a valid approval cannot pass a gate without its evaluator');
   });
 
-  test('statuses are NOT_RUN without submissions and BLOCKED without prerequisites; the contract forbids a fail-closed PASS', () => {
+  test('only G2 and G3 exist, both human; G3 is BLOCKED without G2 and a result for a removed gate is contract-invalid', () => {
     const { ctx } = validated();
-    const wf = loadWorkflow(ctx, 'FWD-T2');
-    assert.equal(evaluateFailClosed('G2', wf.run, wf.state, wf.store).status, 'NOT_RUN');
-    assert.equal(evaluateFailClosed('G8', wf.run, wf.state, wf.store).status, 'BLOCKED');
-    const forged = { ...evaluateFailClosed('G5', wf.run, wf.state, wf.store), status: 'PASS' };
-    assert.equal(ctx.contracts.validate('orchestrator/gate-result', forged).valid, false);
-    // STEP 4 implements G2 and STEP 7 G3/G4 (each needs a signed human approval); G5-G8 stay fail-closed.
-    assert.equal(GATES.filter((g) => g.evaluator === 'implemented').map((g) => g.id).join(), 'G0,G1,G2,G3,G4');
-    assert.deepEqual(GATES.filter((g) => g.evaluator === 'fail_closed').map((g) => g.id), ['G5', 'G6', 'G7', 'G8']);
+    assert.deepEqual(GATES.map((g) => g.id), ['G2', 'G3']);
+    assert.ok(GATES.every((g) => g.human_approval && g.evaluator === 'implemented'));
+    assert.notEqual(runGate(loadWorkflow(ctx, 'FWD-T2'), 'G2').status, 'PASS');
+    const g3 = runGate(loadWorkflow(ctx, 'FWD-T2'), 'G3');
+    assert.equal(g3.status, 'BLOCKED');
+    assert.equal(ctx.contracts.validate('orchestrator/gate-result', g3).valid, true);
+    for (const removed of ['G0', 'G1', 'G4', 'G5', 'G6', 'G7', 'G8']) assert.equal(ctx.contracts.validate('orchestrator/gate-result', { ...g3, gate: removed }).valid, false, removed);
   });
 
   test('approval states are unreachable in STEP 2', () => {
@@ -310,10 +315,10 @@ describe('S2-6. fail-closed G2-G8', () => {
 describe('S2-7. unauthorized Java generation', () => {
   test('F5 cannot be dispatched and generation is not authorised even with the config flag on', () => {
     const { ctx } = validated({ javaAllowed: true, targetDir: 'java-target', skillsFor: ['F5'] });
-    assert.throws(() => prepare(loadWorkflow(ctx, 'FWD-T2'), 'F5'), /may only be dispatched in STORIES_APPROVED/);
+    assert.throws(() => prepare(loadWorkflow(ctx, 'FWD-T2'), 'F5'), /may only be dispatched in STORIES_DRAFTED/);
     const wf = loadWorkflow(ctx, 'FWD-T2');
     const roots = policyRoots(wf.run, wf.state);
-    assert.equal(roots.generationAuthorized, false, 'G4 has not passed');
+    assert.equal(roots.generationAuthorized, false, 'G3 has not passed');
     const d = canWrite(findAgent('F5')!, path.join(ctx.repoRoot, 'java-target', 'src', 'main', 'java', 'App.java'), roots);
     assert.equal(d.allowed, false);
     assert.match(d.reason, /not authorised/);
@@ -363,14 +368,14 @@ describe('S2-8. tool and path permissions', () => {
 });
 
 describe('S2-9. run-local IDs', () => {
-  test('G1 fails when a rule reference is bound to a different reverse run', () => {
+  test('the evidence pre-check fails when a rule reference is bound to a different reverse run', () => {
     const { f, ctx } = setup();
     initWorkflow(ctx, 'FWD-T2');
     const p = path.join(f.runsDir, 'FWD-T2', 'rule_summary.json');
     const j = JSON.parse(fs.readFileSync(p, 'utf8'));
     j.rules[0].ref.source_run = 'rules@5_rules@1.0#000000000000';
     fs.writeFileSync(p, JSON.stringify(j));
-    const r = runGate(loadWorkflow(ctx, 'FWD-T2'), 'G1');
+    const r = runPrecheck(loadWorkflow(ctx, 'FWD-T2'), 'EVIDENCE');
     assert.equal(r.status, 'FAIL');
     assert.ok(r.checks.some((c) => c.id === 'run_local_ids' && c.status === 'fail'));
   });
@@ -385,26 +390,26 @@ describe('S2-9. run-local IDs', () => {
 });
 
 describe('S2-10. grouped-gap preservation', () => {
-  test('G1 fails when an expanded gap item is dropped', () => {
+  test('the evidence pre-check fails when an expanded gap item is dropped', () => {
     const { f, ctx } = setup();
     initWorkflow(ctx, 'FWD-T2');
     const p = path.join(f.runsDir, 'FWD-T2', 'gap_summary.json');
     const j = JSON.parse(fs.readFileSync(p, 'utf8'));
     j.expanded_items.pop();
     fs.writeFileSync(p, JSON.stringify(j));
-    const r = runGate(loadWorkflow(ctx, 'FWD-T2'), 'G1');
+    const r = runPrecheck(loadWorkflow(ctx, 'FWD-T2'), 'EVIDENCE');
     assert.ok(r.checks.some((c) => c.id === 'grouped_gaps_preserved' && c.status === 'fail'));
   });
 });
 
 describe('S2-11. missing source evidence', () => {
-  test('a missing evidence packet blocks dispatch and fails G1', () => {
+  test('a missing evidence packet blocks dispatch and fails the evidence pre-check', () => {
     const { f, ctx } = validated({ skillsFor: ['F1'] });
     fs.rmSync(path.join(f.runsDir, 'FWD-T2', 'evidence_packets', `${f.programs[0].fileId}__${f.programs[0].name}.json`));
     const p = prepare(loadWorkflow(ctx, 'FWD-T2'), 'F1');
     assert.equal(p.dispatchable, false);
     assert.ok(p.blockers.some((b) => /plan:evidence_packets/.test(b)));
-    assert.equal(runGate(loadWorkflow(ctx, 'FWD-T2'), 'G1').status, 'FAIL');
+    assert.equal(runPrecheck(loadWorkflow(ctx, 'FWD-T2'), 'EVIDENCE').status, 'FAIL');
   });
 
   test('skills not installed make a packet undispatchable and are reported as SKILL_NOT_INSTALLED', () => {
@@ -475,7 +480,7 @@ describe('S2-13. malformed agent outputs', () => {
 });
 
 describe('S2-14. stale baseline', () => {
-  test('a changed reverse artifact fails G0, blocks the workflow and refuses resume', () => {
+  test('a changed reverse artifact fails the baseline pre-check, blocks the workflow and refuses resume', () => {
     const { f, ctx } = validated();
     const rules = f.read('output/rules/rules_artifact.json');
     rules.business_rules[0].confidence = 'high';
@@ -483,7 +488,7 @@ describe('S2-14. stale baseline', () => {
     const r = advance(loadWorkflow(ctx, 'FWD-T2'), 'REQUIREMENTS_DRAFTED');
     assert.equal(r.accepted, false);
     assert.match(r.reason, /baseline no longer intact/);
-    const g0 = runGate(loadWorkflow(ctx, 'FWD-T2'), 'G0');
+    const g0 = runPrecheck(loadWorkflow(ctx, 'FWD-T2'), 'BASELINE');
     assert.equal(g0.status, 'FAIL');
     assert.match(g0.reason, /stale baseline/);
     assert.equal(loadWorkflow(ctx, 'FWD-T2').state.state, 'BLOCKED');
@@ -499,7 +504,7 @@ describe('S2-14. stale baseline', () => {
     const j = JSON.parse(fs.readFileSync(m, 'utf8'));
     j.status_note = 'edited';
     fs.writeFileSync(m, JSON.stringify(j, null, 2));
-    const g0 = runGate(loadWorkflow(ctx, 'FWD-T2'), 'G0');
+    const g0 = runPrecheck(loadWorkflow(ctx, 'FWD-T2'), 'BASELINE');
     assert.equal(g0.status, 'FAIL');
     assert.ok(g0.checks.some((c) => c.id === 'workflow_binding' && c.status === 'fail'));
   });
@@ -514,13 +519,59 @@ describe('S2-15. Step 1 CLI preserved', () => {
     assert.equal(main(['plan', '--all', '--config', ctx.configPath, '--run-id', 'FWD-T2B'], o, o), EXIT.OK);
     assert.equal(main(['plan', '--config', ctx.configPath], o, o), EXIT.USAGE);
     assert.equal(main(['workflow', 'init', '--run', 'FWD-T2B', '--config', ctx.configPath], o, o), EXIT.OK);
-    assert.equal(main(['workflow', 'gate', '--gate', 'G1', '--run', 'FWD-T2B', '--config', ctx.configPath], o, o), EXIT.OK);
+    assert.equal(main(['workflow', 'precheck', '--check', 'EVIDENCE', '--run', 'FWD-T2B', '--config', ctx.configPath], o, o), EXIT.OK);
     assert.equal(main(['workflow', 'advance', '--to', 'IMPLEMENTING', '--run', 'FWD-T2B', '--config', ctx.configPath], o, o), 1);
     assert.equal(main(['workflow', 'status', '--run', 'FWD-T2B', '--config', ctx.configPath, '--json'], o, o), EXIT.OK);
     const st = JSON.parse(out[out.length - 1]);
     assert.equal(st.state, 'BASELINE_LOADED');
-    assert.equal(st.gates.G1, 'PASS');
+    assert.equal(st.prechecks.EVIDENCE, 'PASS');
+    assert.deepEqual(Object.keys(st.gates), ['G2', 'G3']);
     assert.equal(main(['workflow', 'resume', '--run', 'FWD-T2B', '--config', ctx.configPath], o, o), EXIT.OK);
     assert.equal(main(['workflow', 'bogus', '--config', ctx.configPath], o, o), 2);
+  });
+});
+
+describe('S2-16. testing and completion need passing results (no human gate after G3)', () => {
+  const ok = { contract: 'forward/verification-report', record_type: 'junit_results', test_runs: [{ command: 'mvn test', exit_code: 0, tests: 12, failures: 0, errors: 0, skipped: 0, executed_at: '2026-11-08T10:00:00Z' }], equivalence: [] };
+  const eqOk = { contract: 'forward/verification-report', record_type: 'equivalence_assessment', test_runs: [], equivalence: [{ requirement_id: 'REQ-0001', status: 'EQUIVALENCE_UNVERIFIED', compared_aspects: [], reference_evidence: [], differences: [] }] };
+  const recommend = (yes: boolean, blocking = false) => ({ contract: 'forward/review-report', record_type: 'acceptance_recommendation', findings: blocking ? [{ review_finding_id: 'RF-0001', blocking: true }] : [], recommendation: { recommend_acceptance: yes, reasons: [yes ? 'all requirements traced' : 'numeric rounding differs'], decided_by: 'workflow_completion_after_review' } });
+  const noBlocking = { contract: 'forward/review-report', record_type: 'blocking_findings', findings: [], recommendation: { recommend_acceptance: true, reasons: ['none'], decided_by: 'workflow_completion_after_review' } };
+  function rec(f: Fixture, agent: string, docs: Record<string, any>) {
+    const outputs = Object.entries(docs).map(([n, d]) => {
+      const file = path.join(f.repoRoot, 'out', agent, n);
+      fs.mkdirSync(path.dirname(file), { recursive: true });
+      fs.writeFileSync(file, JSON.stringify(d));
+      return { path: `out/${agent}/${n}`, sha256: sha256File(file)! };
+    });
+    return { receipt_id: `RCP-${agent}`, packet_id: `PKT-${agent}`, recorded_at: new Date().toISOString(), receipt: { agent, outcome: 'completed', outputs }, verdict: { accepted: true, violations: [] } } as any;
+  }
+  const wfFor = (f: Fixture) => ({ run: { ctx: { repoRoot: f.repoRoot } } }) as any;
+
+  test('TESTING -> REVIEWING needs executed, passing F6 tests and no behaviour reported DIFFERENT', () => {
+    const f = makeFixture();
+    fixtures.push(f);
+    const wf = wfFor(f);
+    assert.equal(receiptOutcome(wf, 'TESTING', 'REVIEWING', rec(f, 'F6', { 'junit_results.json': ok, 'equivalence_assessment.json': eqOk })), null);
+    const failing = { ...ok, test_runs: [{ ...ok.test_runs[0], exit_code: 1, failures: 2 }] };
+    assert.match(receiptOutcome(wf, 'TESTING', 'REVIEWING', rec(f, 'F6', { 'junit_results.json': failing, 'equivalence_assessment.json': eqOk }))!, /did not pass/);
+    assert.match(receiptOutcome(wf, 'TESTING', 'REVIEWING', rec(f, 'F6', { 'junit_results.json': { ...ok, test_runs: [] }, 'equivalence_assessment.json': eqOk }))!, /no executed test/);
+    const diff = { ...eqOk, equivalence: [{ ...eqOk.equivalence[0], status: 'DIFFERENT' }] };
+    assert.match(receiptOutcome(wf, 'TESTING', 'REVIEWING', rec(f, 'F6', { 'junit_results.json': ok, 'equivalence_assessment.json': diff }))!, /differs from the COBOL reference for REQ-0001/);
+    assert.match(receiptOutcome(wf, 'TESTING', 'REVIEWING', rec(f, 'F6', { 'equivalence_assessment.json': eqOk }))!, /has no junit_results.json/);
+    assert.equal(receiptOutcome(wf, 'TESTING', 'IMPLEMENTING', rec(f, 'F6', { 'junit_results.json': failing })), null, 'rework needs no passing result');
+  });
+
+  test('REVIEWING -> COMPLETED needs an F7 acceptance recommendation without blocking findings, unchanged since acceptance', () => {
+    const f = makeFixture();
+    fixtures.push(f);
+    const wf = wfFor(f);
+    assert.equal(receiptOutcome(wf, 'REVIEWING', 'COMPLETED', rec(f, 'F7', { 'acceptance_recommendation.json': recommend(true), 'blocking_findings.json': noBlocking })), null);
+    assert.match(receiptOutcome(wf, 'REVIEWING', 'COMPLETED', rec(f, 'F7', { 'acceptance_recommendation.json': recommend(false), 'blocking_findings.json': noBlocking }))!, /does not recommend acceptance: numeric rounding differs/);
+    assert.match(receiptOutcome(wf, 'REVIEWING', 'COMPLETED', rec(f, 'F7', { 'acceptance_recommendation.json': recommend(true, true), 'blocking_findings.json': noBlocking }))!, /blocking finding\(s\): RF-0001/);
+    const r = rec(f, 'F7', { 'acceptance_recommendation.json': recommend(true), 'blocking_findings.json': noBlocking });
+    fs.writeFileSync(path.join(f.repoRoot, 'out', 'F7', 'acceptance_recommendation.json'), JSON.stringify(recommend(true)) + ' ');
+    assert.match(receiptOutcome(wf, 'REVIEWING', 'COMPLETED', r)!, /changed since RCP-F7 was accepted/);
+    assert.equal(receiptOutcome(wf, 'REVIEWING', 'IMPLEMENTING', rec(f, 'F7', { 'acceptance_recommendation.json': recommend(false) })), null, 'rework needs no passing result');
+    assert.equal(findTransition('REVIEWING', 'COMPLETED', null)!.guard.kind, 'receipt');
   });
 });

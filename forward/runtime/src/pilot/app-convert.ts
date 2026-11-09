@@ -68,7 +68,7 @@ export function convertAppProgram(wf: Workflow, ctx: RuntimeContext, o: AppConve
     contract: 'pilot/pilot-result',
     contract_version: '1.0',
     synthetic: false,
-    statement: `Authorised local deterministic generation under ${a.record_id} (${a.policy}); full-application converter (STEP 17); not an F5 agent generation and not a G2-G4 approval.`,
+    statement: `Authorised local deterministic generation under ${a.record_id} (${a.policy}); full-application converter (STEP 17); not an F5 agent generation and not a G2/G3 approval.`,
     generated_at: new Date().toISOString(),
     inputs,
     stages: ['inspection', 'generation', 'compilation', 'execution', 'cobol_reference', 'trace_audit', 'evidence'],

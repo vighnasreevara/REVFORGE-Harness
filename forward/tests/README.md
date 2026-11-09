@@ -1,17 +1,17 @@
 # Forward engineering tests
 
-`node:test` suites for the forward harness: the TypeScript runtime and CLI, the orchestrator and gates, approvals, the local converter, BMad governance, verification, and the backup tool. Every file is named after what it tests. The historical STEP names (`step1.test.ts` …) are mapped in [`../docs/TEST-FILE-RENAME-MAP.md`](../docs/TEST-FILE-RENAME-MAP.md).
+`node:test` suites for the forward harness: the TypeScript runtime and CLI, the orchestrator, pre-checks and gates, approvals, the local converter, BMad governance, verification, and the backup tool. Every file is named after what it tests. The historical STEP names (`step1.test.ts` …) are mapped in [`../docs/TEST-FILE-RENAME-MAP.md`](../docs/TEST-FILE-RENAME-MAP.md).
 
 **Environments:**
 - **CI:** runs on a pure Git checkout and is included in `.github/workflows/revforge-ci.yml`. Individual tests that need the COBOL source or generated Java skip themselves there; the *CI skips* column counts them.
 - **Developer:** needs the git-ignored BMad staging release and executor installation (`forward/integrations/bmad/staging`, `executor`). It is not run in CI, by design.
 
-Counts are from the full developer-environment run: 450 tests in 27 files, all passing.
+Counts are from the full developer-environment run: 451 tests in 27 files, all passing.
 
 | Test file | Responsibility | Main components | Tests | Environment (CI skips) |
 |---|---|---|---|---|
 | `reverse-artifact-intake-and-planning.test.ts` | dynamic program discovery, reverse-artifact JSON validation, missing artifacts, permanent-ID preservation, run-local IDs, grouped-gap expansion, the generation guard, readiness without source, cross-platform paths, no hard-coded system knowledge | `core/` (artifacts, model, config, guard, paths), `commands/plan`, `validate`, `doctor`, `verification/src/ids` | 36 | CI |
-| `workflow-orchestrator-and-gates.test.ts` | the seven-agent registry, input/output declarations, state transitions, resume and checkpoint integrity, G0/G1, fail-closed G2–G8, tool and path permissions, template/application classification | `orchestrator/` (agents, states, gates, permissions, classification, store) | 43 | CI |
+| `workflow-orchestrator-and-gates.test.ts` | the seven-agent registry, input/output declarations, state transitions, resume and checkpoint integrity, the BASELINE and EVIDENCE pre-checks, only G2 and G3 as gates (both human, fail-closed), the F6 and F7 receipt conditions for REVIEWING and COMPLETED, tool and path permissions, template/application classification | `orchestrator/` (agents, states, gates, permissions, classification, store) | 45 | CI |
 | `agent-skills-deliverables-and-batches.test.ts` | the 14 skills (registration, metadata, duplicates), deliverable contracts and run bindings, copybook layouts and numeric mappings (F2), write/hash/self-approval protection, batches and the coverage ledger, `.claude/` protection | `orchestrator/` (skills, ledger, permissions), `verification/src/numeric` | 41 | CI |
 | `deliverable-reconciliation-and-source-verification.test.ts` | per-ID reconciliation of agent deliverables, transcript access evidence, independent field and text-claim verification against the source, versioned corrections | `remediation/` (remediation, transcripts), `orchestrator/skills` | 14 | CI |
 | `g2-requirements-approval.test.ts` | G2 readiness and evidence outcomes, decision resolution, Ed25519-signed human approval, packets and receipts | `approval/` (approvals, decisions, packets, scope, snapshot) | 22 | CI |
@@ -19,7 +19,7 @@ Counts are from the full developer-environment run: 450 tests in 27 files, all p
 | `openai-independent-verification.test.ts` | OpenAI verification disabled by default, signed source-export authorization at the network boundary, two-pass verification (offline: mock provider and fake transport), secrecy and protected gates | `openai/` (config, authorization, engine, provider, prompts) | 12 | CI |
 | `decision-workbench-and-scope-evidence.test.ts` | scope selection and evidence packages, decision packets and traceability, signed citation corrections and trust readiness, OpenAI pilot preparation without a network call | `workbench/`, `commands/workbench`, `remediation/` | 7 | CI |
 | `bmad-release-and-adapter.test.ts` | the pinned BMad release (tarball, extracted files, workflow catalogue), bindings, eligibility rules, the adapter on a synthetic workflow, protection | `bmad/` (release, bindings, eligibility, adapter, validators) | 27 | Developer |
-| `g3-g4-design-approvals-and-bmad-executor.test.ts` | scope reconciliation, G3 architecture and G4 story-set approvals, dependency-aware invalidation and trust, the isolated BMad executor | `design/approvals`, `bmad/` (executor, mapping, reconcile, release) | 28 | Developer |
+| `g3-g4-design-approvals-and-bmad-executor.test.ts` | scope reconciliation, G3 architecture approval, automated F4 story-set validation before F5 (there is no G4), dependency-aware invalidation and trust, the isolated BMad executor. The file name keeps its former G4 reference. | `design/approvals`, `bmad/` (executor, mapping, reconcile, release) | 27 | Developer |
 | `trusted-decisions-disclosure-and-preflight.test.ts` | trust provisioning, signed decision resolution, citation correction propagation, G2 operations, provider-specific AI disclosure authorization, the BMad execution preflight | `operations/`, `disclosure/disclosure`, `bmad/preflight` | 16 | Developer |
 | `cobol-context-verification-and-isolation.test.ts` | the dependency-aware COBOL resolver, source-context verification in the workflow, whole-process isolation, the isolation-aware preflight | `context/context`, `isolation/isolation`, `bmad/preflight` | 17 | CI |
 | `evidence-adjudication-and-backup-recovery.test.ts` | adjudication of earlier and new evidence, shared dependencies and review packages, the recoverable backup (inventory, unsafe archives, restore) | `context/adjudication`, `operations/package`, `tools/backup.js` | 16 | CI |
@@ -35,13 +35,13 @@ Counts are from the full developer-environment run: 450 tests in 27 files, all p
 | `dashboard-backup-exclusion-policy.test.ts` | backup exclusion policy 2: the dashboard's reproducible output is excluded, its source stays recoverable, policy-1 archives still verify | `tools/backup.js` | 6 | CI |
 | `bmad-e2e.test.ts` | BMad end to end: receipts, drafts and forward consumption | `bmad/` (adapter, executor, governance, preflight, runner), `disclosure/` | 12 | Developer |
 | `git-policy.test.ts` | the Git tracking policy: the hand-written Java runtime tracked, generated Java and class files ignored | `helpers/gitpolicy.ts` | 4 | CI |
-| `synthetic-gate-demonstration.test.ts` | the synthetic G0–G8 gate demonstration (`SYNTHETIC_INTERVIEW_DEMO`): all nine demo gates pass with executed checks; injected defects stop the run at the right gate with exit code 1; demo approvals and SIMULATED BMad receipts are refused as production authorization | `demo/` (gates, oracle, signing), `pilot/` (cobol-app, java-app), `approval/trust`, `bmad/governance` | 23 | CI (demo job) |
+| `synthetic-gate-demonstration.test.ts` | the synthetic two-gate demonstration (`SYNTHETIC_INTERVIEW_DEMO`): all nine demo steps (two pre-checks, G2, G3, five automated steps) pass with executed checks; injected defects stop the run at the right step with exit code 1; demo approvals and SIMULATED BMad receipts are refused as production authorization | `demo/` (gates, oracle, signing), `pilot/` (cobol-app, java-app), `approval/trust`, `bmad/governance` | 23 | CI (demo job) |
 | `reverse-forward-agent-sync.test.ts` | canonical reverse and forward agent/skill locations: the reverse registry (7 agents, 14 skills) against `reverse/`, agent-to-skill references, the `.claude/` copies generated (git-ignored, untracked) and all 42 installed in sync, drift detection and repair per side, refusal on a missing source, edited/unregistered copies still reported as reverse-harness changes, `reverse/` not writable by forward agents | `orchestrator/` (reverse, mirror, permissions), `core/git` | 9 | CI |
 
 **Totals:**
-- 26 files and 441 tests.
-- **CI:** 21 files, 331 tests in the forward job (30 skip themselves on a pure checkout), plus `synthetic-gate-demonstration.test.ts` (23 tests) in the demo job.
-- **Developer only:** 5 files, 96 tests.
+- 27 files and 451 tests.
+- **CI:** 21 files, 333 tests in the forward job (30 skip themselves on a pure checkout), plus `synthetic-gate-demonstration.test.ts` (23 tests) in the demo job.
+- **Developer only:** 5 files, 95 tests.
 
 ## Running
 
@@ -67,7 +67,7 @@ The CI selection is the exact list in `.github/workflows/revforge-ci.yml` (job *
 |---|---|
 | `helpers/fixture.ts` | `makeFixture()`: a small synthetic reverse-engineering dataset in a temporary directory; `FORWARD_DIR`, `cleanup` |
 | `helpers/g2fixture.ts` | `setupG2()`: a delivered synthetic G2 workflow with checkable COBOL source, in-memory test signers, signing helpers |
-| `helpers/designfixture.ts` | `designFixture()`: the G2 → G3 → G4 workflow with design-role signers, architecture and story deliverables |
+| `helpers/designfixture.ts` | `designFixture()`: the G2 → G3 workflow with design-role signers, architecture and story deliverables, and the automated story-set validation |
 | `helpers/contextfixture.ts` | `contextFixture()`: a synthetic source-context case (a copybook declaring level-88 conditions) for evidence adjudication |
 | `helpers/outputs.ts` | a test-only reference producer of minimal F1/F2 deliverables that satisfy the contracts |
 | `helpers/gitpolicy.ts` | the Java tracking policy (hand-written runtime tracked, all other Java not) |

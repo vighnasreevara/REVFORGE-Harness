@@ -33,9 +33,10 @@ Commands:
   agents                 List forward agents, check definitions and skills
   skills                 Validate the fourteen forward skills and their ownership
   sync-agents [--check] [--scope forward|reverse|all]  Install forward/ and reverse/ agents and skills into the generated .claude/ discovery directories (--check: report drift)
-  workflow init          Create the orchestrated workflow for a plan run (evaluates G0)
+  workflow init          Create the orchestrated workflow for a plan run (runs the baseline pre-check)
   workflow status        Show state, gates, packets, receipts and checkpoint
-  workflow gate --gate G1|all     Evaluate gates (G2-G4 need verified signed approvals; G5-G8 fail closed)
+  workflow precheck --check BASELINE|EVIDENCE|all  Run the automated pre-checks (baseline unchanged, evidence consistent)
+  workflow gate --gate G2|G3|all  Evaluate the gates (each needs a verified signed human approval)
   workflow advance --to STATE     Request a state transition (runtime-guarded)
   workflow transitions            List allowed transitions and their guards
   workflow prepare --agent F1     Prepare a validated agent input packet
@@ -46,11 +47,11 @@ Commands:
   workflow g2 report [--out FILE]                Readiness and blocker report (application and per-program scopes)
   workflow approval request --scope S --requested-by ID   Export an immutable approval request for a READY scope
   workflow approval statement --request AREQ-N --signer ID --role R --decision approved|rejected [--out FILE]
-  workflow approval verify|import --file SIGNED.json      Verify / import a signed (Ed25519) G2, G3 or G4 approval
-  workflow g3|g4 evaluate|blockers         G3 architecture / G4 story-set gate evaluation (read-only)
+  workflow approval verify|import --file SIGNED.json      Verify / import a signed (Ed25519) G2 or G3 approval
+  workflow g3 evaluate|blockers            G3 architecture gate evaluation (read-only)
+  workflow stories validate                Automated check of the F4 story set (read-only; required before F5)
   workflow architecture approval-request --requested-by ID   Approval request for the validated F3 architecture (G3)
-  workflow stories approval-request --requested-by ID        Approval request for the validated F4 story set (G4)
-  workflow architecture|stories approval-statement --request DREQ-N --signer ID --role R --decision approved|rejected [--out FILE]
+  workflow architecture approval-statement --request DREQ-N --signer ID --role R --decision approved|rejected [--out FILE]
   workflow decisions list [--scope S] [--status X] [--origin X] [--blocking]
   workflow decisions template --decision ID [--out FILE]  Unsigned resolution template bound to the decision
   workflow decisions resolve --file SIGNED.json [--dry-run]  Verify and record a signed decision resolution
@@ -98,7 +99,7 @@ Commands:
   pilot candidates                Rank complete real programs for the first conversion
   pilot readiness --program P     Engineering gate SOURCE_READINESS (+ unchanged generation authorisation status)
   pilot validate --out O [--dir D]  Engineering gate CONVERSION_VALIDATION on a conversion output
-  demo gates [--out DIR]          Synthetic G0-G8 gate demonstration (SYNTHETIC_INTERVIEW_DEMO; no production authorisation)
+  demo gates [--out DIR]          Synthetic two-gate (G2, G3) workflow demonstration (SYNTHETIC_INTERVIEW_DEMO; no production authorisation)
   workflow blocked                Report blocked transitions, dispatches and receipts
   workflow resume                 Verify checkpoint and baseline, then resume
 

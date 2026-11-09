@@ -14,17 +14,17 @@ REVFORGE modernizes a legacy COBOL application under strict evidence rules:
 | Start here | |
 |---|---|
 | **[Reverse Engineering](reverse/README.md)** | seven agents: COBOL → BRD, 154 business rules, 65 diagrams, permanent source IDs |
-| **[Forward Engineering](forward/README.md)** | seven agents, the orchestrator, the converter and Java 21 runtime, quality gates, G0–G8, mandatory BMad |
+| **[Forward Engineering](forward/README.md)** | seven agents, the orchestrator, the converter and Java 21 runtime, quality gates, two human gates (G2, G3) with automated pre-checks, mandatory BMad |
 | **[End-to-end architecture](forward/handover/ARCHITECTURE.md)** | diagrams of the whole system |
 | **[Dashboard](forward/dashboard/)** | read-only Modernization Command Center ([operations](forward/handover/DASHBOARD-OPERATIONS.md)) |
-| **[Executable demonstration](forward/demo/gates/README.md)** | all nine governance checkpoints end to end on a synthetic program ([sample report](forward/demo/gates/sample-run/DEMO-REPORT.md)) |
+| **[Executable demonstration](forward/demo/gates/README.md)** | the two-gate workflow (two pre-checks, G2, G3, five automated steps) end to end on a synthetic program ([sample report](forward/demo/gates/sample-run/DEMO-REPORT.md)) |
 | **[Evidence and reconciliation reports](forward/reports/README.md)** | the report catalog: [reverse-forward reconciliation](forward/reports/REVERSE-FORWARD-RECONCILIATION.md), [final reconciliation](forward/reports/STEP-22-FINAL-RECONCILIATION.md), [master gap register](forward/reports/STEP-23-MASTER-GAP-REGISTER.md) |
 | **[CI results](https://github.com/vighnasreevara/REVFORGE-Harness/actions/workflows/revforge-ci.yml)** | four jobs on every push and pull request |
 
 **Current status.** The engineering handover is complete; the modernization is not.
 - 41 of 42 programs have Java, and 2 of them are complete under the harness criteria.
 - 569 gap records are open.
-- The governed workflow has passed G0–G1. G2 is UNVERIFIED and G3–G8 are BLOCKED.
+- The governed workflow has passed its BASELINE and EVIDENCE pre-checks. Real G2 is UNVERIFIED and G3 BLOCKED.
 - **Legacy COBOL-to-Java behavioural equivalence has not been established.**
 
 See [Project status](#project-status).
@@ -34,17 +34,17 @@ See [Project status](#project-status).
 | Layer | What it is | Status |
 |---|---|---|
 | **A. [Reverse engineering](reverse/README.md)** (`reverse/`, `output/`) | Seven Claude Code agents and their 14 skills exchange JSON artifacts. They produce a BRD, 154 business rules, 65 Mermaid diagrams and a gaps register. Every element carries a permanent source ID from a Neo4j registry, accessed over MCP. | complete for the sample system |
-| **B. [Forward engineering](forward/README.md)** (`forward/`) | Seven agents and their 14 skills under a deterministic TypeScript orchestrator; a COBOL-to-Java converter with a hand-written Java 21 runtime; two engineering quality gates (`SOURCE_READINESS`, `CONVERSION_VALIDATION`); G0–G8 governance checkpoints with signed approvals; mandatory BMad | Java for 41 of 42 programs, from historical local conversions only; real G0–G1 PASS, G2 UNVERIFIED, G3–G8 BLOCKED; BMad LIVE execution blocked |
-| **C. [Governance demonstration](forward/demo/gates/README.md)** (`forward/demo/gates/`) | An isolated synthetic G0–G8 run that executes approvals, compilation, tests, independent verification, review and acceptance. The BMad lifecycle is only simulated. | 9/9 demo gates pass in CI; changes nothing in the real project |
+| **B. [Forward engineering](forward/README.md)** (`forward/`) | Seven agents and their 14 skills under a deterministic TypeScript orchestrator; a COBOL-to-Java converter with a hand-written Java 21 runtime; two engineering quality gates (`SOURCE_READINESS`, `CONVERSION_VALIDATION`); two automated pre-checks (`BASELINE`, `EVIDENCE`) and two human gates, G2 and G3, with signed approvals; mandatory BMad | Java for 41 of 42 programs, from historical local conversions only; real pre-checks PASS, G2 UNVERIFIED, G3 BLOCKED; BMad LIVE execution blocked |
+| **C. [Governance demonstration](forward/demo/gates/README.md)** (`forward/demo/gates/`) | An isolated synthetic two-gate run that executes the pre-checks, the G2 and G3 approvals, story validation, compilation, tests, independent verification, review and completion. The BMad lifecycle is only simulated. | 9/9 demo steps pass in CI; changes nothing in the real project |
 
 **How the layers connect:**
 - Reverse writes artifacts to `output/`; forward reads them from there and never writes back.
-- The G0 baseline binds every reverse artifact by SHA-256.
+- The baseline manifest binds every reverse artifact by SHA-256; the BASELINE pre-check re-hashes them.
 - Permanent source IDs are carried through requirements, architecture, stories, Java and tests.
 
 **Two kinds of gates:**
 - **Engineering quality gates** decide whether a single program can be converted and whether a conversion is what its label says. They never authorize generation.
-- **Governance checkpoints G0–G8** decide what the governed workflow may do, up to human acceptance.
+- **The governed workflow** has two human gates, G2 (approved requirements) and G3 (approved architecture). Everything else is automated: the BASELINE and EVIDENCE pre-checks before G2, and story validation, build, independent testing and review after G3. The run completes after the F7 review; there is no human acceptance gate.
 
 ## Setup
 
@@ -63,11 +63,11 @@ Claude Code then finds all 14 agents and 28 skills in `.claude/agents/` and `.cl
 ```bash
 cd forward
 npm ci
-npm run demo:gates    # runs the synthetic G0–G8 demonstration (Node.js 20+, JDK 21)
+npm run demo:gates    # runs the synthetic two-gate demonstration (Node.js 20+, JDK 21)
 npm run demo:test     # happy path and negative paths
 ```
 
-Expected result: nine `DEMO PASS` rows and the verdict `SYNTHETIC_DEMO_ACCEPTED`. Each negative-path test injects one defect and must be stopped at the right gate with exit code 1. The defects include:
+Expected result: nine `DEMO PASS` rows and the verdict `SYNTHETIC_DEMO_COMPLETED`. Each negative-path test injects one defect and must be stopped at the right step with exit code 1. The defects include:
 - an altered source hash;
 - a forged, missing or wrong-role approval;
 - a compilation failure;
@@ -93,7 +93,7 @@ forward/                 Forward engineering
   integrations/bmad/     pinned BMad release and isolated executor
   verification/          evidence and semantic checks
   dashboard/             read-only Modernization Command Center
-  demo/gates/            synthetic G0–G8 demonstration
+  demo/gates/            synthetic two-gate demonstration
   tests/                 test suites
   reports/  handover/    engineering reports and evidence, final handover package
   docs/                  operations guides
@@ -159,7 +159,7 @@ The hash check proves the served copies are consistent with the locally produced
 |---|---|---|
 | **Pure Git checkout** | committed code, reports, reverse artifacts, dashboard | forward build, doctor, agent sync check, policy tests, Java runtime tests, dashboard, the synthetic demonstration, CI |
 | **Developer environment** | the checkout plus the authorized COBOL source root, local run records (`forward/runs/`), generated Java (`forward/generated/`), BMad staging and executor | the full forward test suite, `pilot integrate` / `validate` / `readiness`, the source-integrity audit |
-| **Fully authorized modernization environment** | the above plus DB2, CICS, platform services, a legacy COBOL runtime, signed authorizations and isolated BMad infrastructure | governed BMad runs, gates G2–G8, equivalence testing. **This environment does not exist yet.** |
+| **Fully authorized modernization environment** | the above plus DB2, CICS, platform services, a legacy COBOL runtime, signed authorizations and isolated BMad infrastructure | governed BMad runs, gates G2 and G3 with real signers, the automated build, test and review steps, equivalence testing. **This environment does not exist yet.** |
 
 **Not in Git:**
 - the restricted COBOL source (`references/`, see `THIRD_PARTY_NOTICES.md`);

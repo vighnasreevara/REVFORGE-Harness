@@ -3,23 +3,23 @@
 The forward harness turns the reverse-engineering evidence (the BRD, 154 business rules, the data dictionary, logic, diagrams and gaps in [`../output/`](../output/)) into a **governed Java 21 modernization**. A deterministic TypeScript runtime controls the work. Agents produce deliverables, but no agent output can pass a gate, approve anything or authorize Java generation.
 
 ```
-reverse evidence ─▶ G0 baseline ─▶ G1 evidence ─▶ F1/F2 requirements ─▶ G2 ─▶ F3 architecture ─▶ G3
-   ─▶ F4 stories ─▶ G4 ─▶ F5 Java ─▶ G5 build ─▶ F6 independent tests ─▶ G6 ─▶ F7 review ─▶ G7 ─▶ G8 acceptance
+reverse evidence ─▶ BASELINE pre-check ─▶ EVIDENCE pre-check ─▶ F1/F2 requirements ─▶ G2 ─▶ F3 architecture ─▶ G3
+   ─▶ F4 stories (validated automatically) ─▶ F5 Java ─▶ F6 independent tests ─▶ F7 review ─▶ COMPLETED
 ```
 
-**Status in one line.** In the real workflow G0 and G1 pass, G2 is UNVERIFIED and G3–G8 are BLOCKED. Java exists for 41 of 42 programs, but only from historical local conversions outside that workflow. 569 gap records are open, and **legacy COBOL equivalence is not established**. See [Modernization status](#9-modernization-status).
+**Status in one line.** In the real workflow the BASELINE and EVIDENCE pre-checks pass, real G2 is UNVERIFIED and G3 BLOCKED. Java exists for 41 of 42 programs, but only from historical local conversions outside that workflow. 569 gap records are open, and **legacy COBOL equivalence is not established**. See [Modernization status](#9-modernization-status).
 
 ## 1. Seven forward agents and their 14 skills
 
-| Agent | Role | Skills | Feeds gate |
+| Agent | Role | Skills | Feeds |
 |---|---|---|---|
 | F1 Requirements Analyst | source-grounded requirements and the decision register | `fe-source-grounded-requirements`, `fe-uncertainty-decision-register` | G2 |
 | F2 Data Mapping Specialist | copybook layout contracts and COBOL runtime/file semantics | `fe-copybook-layout-contract`, `fe-cobol-runtime-file-semantics` | G2 |
 | F3 Java Architect | Java architecture spine and legacy-compatibility ADRs | `fe-java-architecture-spine`, `fe-legacy-compatibility-adr` | G3 |
-| F4 Development Planner | evidence-backed stories and sprint readiness | `fe-evidence-backed-stories`, `fe-sprint-readiness` | G4 |
-| F5 Java Developer | implementation inside the authorized Java target only | `fe-java-batch-implementation`, `fe-compiler-repair` | G5 |
-| F6 Independent Tester | independent fixtures and legacy-equivalence testing | `fe-independent-fixture-design`, `fe-legacy-java-equivalence` | G6 |
-| F7 Independent Reviewer | adversarial review and end-to-end trace audit | `fe-adversarial-code-review`, `fe-end-to-end-trace-audit` | G7 |
+| F4 Development Planner | evidence-backed stories and sprint readiness | `fe-evidence-backed-stories`, `fe-sprint-readiness` | automated story validation (required before F5) |
+| F5 Java Developer | implementation inside the authorized Java target only | `fe-java-batch-implementation`, `fe-compiler-repair` | F6 dispatch (IMPLEMENTATION_BUILT) |
+| F6 Independent Tester | independent fixtures and legacy-equivalence testing | `fe-independent-fixture-design`, `fe-legacy-java-equivalence` | F7 review (REVIEWING) |
+| F7 Independent Reviewer | adversarial review and end-to-end trace audit | `fe-adversarial-code-review`, `fe-end-to-end-trace-audit` | completion (COMPLETED) |
 
 The canonical definitions are in [`agents/`](agents/) and [`skills/`](skills/). Claude Code discovers them through byte-identical copies in `.claude/`. Those copies are generated and git-ignored. `npm run setup` (build plus `sync-agents`) installs both the forward and the [reverse](../reverse/README.md) definitions there. `sync-agents --check`, run in CI, fails on a missing, edited or unregistered copy. `orchestrator/skills.ts` validates every skill's metadata, sections, owner, contracts and write scope.
 
@@ -29,9 +29,9 @@ The canonical definitions are in [`agents/`](agents/) and [`skills/`](skills/). 
 
 | Module | Responsibility |
 |---|---|
-| `states.ts` | the workflow states and their guarded transitions (gate PASS, accepted receipt or dispatch) |
-| `gates.ts` | G0–G8 evaluation; every result records its inputs with SHA-256 and the baseline it was evaluated on |
-| `orchestrator.ts` | `init`, gates, `advance`, dispatch packets, receipt recording, `status`, `resume` |
+| `states.ts` | the workflow states and their guarded transitions (pre-check or gate PASS, accepted receipt or dispatch) |
+| `gates.ts` | the BASELINE and EVIDENCE pre-checks and the G2/G3 gate evaluation; every result records its inputs with SHA-256 and the baseline it was evaluated on |
+| `orchestrator.ts` | `init`, pre-checks, gates, story validation, `advance`, dispatch packets, receipt recording, `status`, `resume` |
 | `permissions.ts` | least-privilege write scopes; reverse outputs and definitions, `.claude/`, sources, runtime, contracts and config are never writable by an agent |
 | `store.ts` | atomic `state.json` with checkpoint digest, a hash-chained `audit.jsonl`, an operation lock |
 | `ledger.ts`, `skills.ts`, `agents.ts`, `mirror.ts`, `reverse.ts` | the unit coverage ledger, the skill and agent registries, and the `.claude/` synchronization |
@@ -57,21 +57,23 @@ The converter never runs on its own authority. Each conversion needs a program-s
 
 Both are in [`runtime/src/pilot/gates.ts`](runtime/src/pilot/gates.ts) (`pilot readiness`, `pilot validate`). They **never authorize generation and never mean equivalence**.
 
-## 5. G0–G8 governance checkpoints
+## 5. Two human gates and the automated checks
 
-| Gate | Checkpoint | Passes only when |
+The governed workflow has **two gates**, each a signed human decision. Everything else is checked automatically by the runtime.
+
+| Step | Kind | Passes only when |
 |---|---|---|
-| G0 | Baseline integrity | every reverse input matches its SHA-256 in the baseline manifest |
-| G1 | Evidence verification | permanent IDs, plan outputs and evidence packets are consistent with the reverse inputs |
-| G2 | Requirements approval | requirements are complete and a **signed human approval** verifies against the configured trust store |
-| G3 | Architecture approval | a signed approval of the validated F3 architecture |
-| G4 | Development plan approval | a signed approval of the validated F4 story set |
-| G5 | Java build and tests | an authorized Java build compiles and its tests pass |
-| G6 | Independent verification | F6 results produced independently of the implementation |
-| G7 | Independent review | F7 review and trace audit without critical findings |
-| G8 | Acceptance | a signed human acceptance |
+| `BASELINE` | automated pre-check | every reverse input matches its SHA-256 in the baseline manifest |
+| `EVIDENCE` | automated pre-check | permanent IDs, run-local IDs, plan outputs and evidence packets are consistent with the reverse inputs; grouped gaps are preserved |
+| G2 | **gate**: approved requirements | requirements are complete and a **signed human approval** verifies against the configured trust store |
+| G3 | **gate**: approved architecture | a signed approval of the validated F3 architecture |
+| Story validation | automated | the F4 story set covers the requirements, adds no unsupported behaviour, uses approved components in dependency order, has concrete acceptance criteria, testing expectations and data contracts, no open blocker, and a complete end-to-end trace (`workflow stories validate`) |
+| F6 receipt | automated | `junit_results.json` shows executed, passing tests and `equivalence_assessment.json` reports no requirement `DIFFERENT` |
+| F7 receipt | automated | `acceptance_recommendation.json` recommends acceptance and no finding is blocking; the run moves to `COMPLETED` |
 
-A gate passes only on the current baseline, and only after its prerequisite has passed. G5–G8 fail closed. `generation.java_generation_allowed` is `false` in [`config/forward.config.json`](config/forward.config.json); generation also needs G4 PASS.
+Pre-check records are in `workflow/prechecks/` (contract `orchestrator/precheck-result`); run them with `workflow precheck --check BASELINE|EVIDENCE|all`. The pre-checks were gates G0 and G1 in the former nine-gate design. A G0 or G1 PASS recorded by an older run on the same baseline still counts as the passed pre-check; those records are never rewritten.
+
+A gate passes only on the current baseline, and only after its prerequisite has passed. F5 can be dispatched only while story validation passes. There is no human acceptance gate: the F7 review report records `decided_by: workflow_completion_after_review`. `generation.java_generation_allowed` is `false` in [`config/forward.config.json`](config/forward.config.json); generation also needs G3 PASS.
 
 ## 6. Mandatory BMad enforcement
 
@@ -91,11 +93,11 @@ Status: **enforcement verified; LIVE execution blocked.** No workflow is authori
 
 ## 8. Executable demonstration
 
-[`demo/gates/`](demo/gates/README.md) runs all nine checkpoints, G0–G8, end to end on a small **synthetic** COBOL program:
+[`demo/gates/`](demo/gates/README.md) runs the two-gate workflow end to end on a small **synthetic** COBOL program, in nine steps: the BASELINE and EVIDENCE pre-checks, the G2 and G3 gates, and the automated STORIES, BUILD, VERIFY, REVIEW and COMPLETE steps:
 
 ```bash
 cd forward && npm ci
-npm run demo:gates    # nine DEMO PASS rows; exit 0 only if all pass
+npm run demo:gates    # nine DEMO PASS rows and SYNTHETIC_DEMO_COMPLETED; exit 0 only if all pass
 npm run demo:test     # happy path and negative paths
 ```
 
@@ -105,11 +107,11 @@ It reuses the real converter, Java runtime and gate machinery. Approvals are sig
 
 Three kinds of Java appear in this project. Keep them apart:
 
-| | What it is | Governed by G0–G8 and BMad? | Status |
+| | What it is | Governed by the G2/G3 workflow and BMad? | Status |
 |---|---|---|---|
 | **Historical local conversions** | Java for 41 of 42 programs, produced by the converter under program-scoped local authorizations; git-ignored | **No**: classified `LOCAL_LGA_NOT_BMAD_GOVERNED`, not retroactively compliant | 2 COMPLETE under harness criteria (PORTREAD, PROGNAME), 39 PARTIAL, 1 MISSING (POSUPDT, empty source) |
-| **Governed workflow** | the real G0–G8 workflow over the whole application | Yes | no Java generated: G0–G1 PASS, G2 UNVERIFIED (no trust store configured), G3–G8 BLOCKED |
-| **Synthetic demonstration** | one synthetic program, end to end | demo gates only; BMad SIMULATED | 9/9 demo gates PASS; changes nothing in the real project |
+| **Governed workflow** | the real two-gate workflow over the whole application | Yes | no Java generated: BASELINE and EVIDENCE pre-checks PASS, G2 UNVERIFIED (no trust store configured), G3 BLOCKED |
+| **Synthetic demonstration** | one synthetic program, end to end | demo steps only; BMad SIMULATED | 9/9 demo steps PASS; changes nothing in the real project |
 
 | Measure | Value |
 |---|---|
@@ -132,7 +134,7 @@ forward/
   verification/src/       ID, evidence-class, semantic and numeric checks
   integrations/bmad/      pinned BMad release, bindings, isolated executor
   dashboard/              read-only Modernization Command Center
-  demo/gates/             synthetic G0–G8 demonstration
+  demo/gates/             synthetic two-gate demonstration
   pilot/                  conversion sandboxes and local authorizations
   tests/                  node:test suites (see tests/README.md)
   reports/                engineering reports and machine evidence (see reports/README.md)

@@ -1,6 +1,6 @@
 /**
  * Design artefacts under human approval (STEP 7): the F3 architecture set
- * (G3) and the F4 story set (G4). This module derives, from the runtime's own
+ * (G3) and the F4 story set (validated automatically before F5). This module derives, from the runtime's own
  * records only:
  *   - the G2-approved scope context (re-verified G2 approval, approved
  *     requirements and their content hash, the dependency manifest);

@@ -29,7 +29,7 @@ The receipt provenance records each output's content hash, computed by the runti
 | `forward/implementation-manifest` | F5 | fe-java-batch-implementation, fe-compiler-repair | Generation must be authorised. Every Java element is traced to its story, requirement and source. Repairs must be behaviour-neutral. |
 | `forward/test-fixture-manifest` | F6 | fe-independent-fixture-design | `derived_from_java: false`. Every expected result has a basis. |
 | `forward/verification-report` | F6 | fe-legacy-java-equivalence | `EQUIVALENT` requires hashed reference evidence; otherwise the result is `EQUIVALENCE_UNVERIFIED`. |
-| `forward/review-report` | F7 | fe-adversarial-code-review | `decided_by: human_gate_G8`. The reviewer recommends; it never accepts. |
+| `forward/review-report` | F7 | fe-adversarial-code-review | `decided_by: workflow_completion_after_review`. The reviewer recommends; it never accepts. |
 | `forward/traceability-edges` | F1, F7 | fe-source-grounded-requirements, fe-end-to-end-trace-audit | Source-ID nodes must be known permanent IDs. Reverse nodes must be bound to a current reverse run. |
 
 On every deliverable, the runtime also checks:

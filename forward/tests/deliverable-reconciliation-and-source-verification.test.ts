@@ -7,7 +7,7 @@ import { loadContext, RuntimeContext } from '../runtime/src/core/config';
 import { sha256File } from '../runtime/src/core/fsutil';
 import { runPlan } from '../runtime/src/commands/plan';
 import { AGENTS } from '../runtime/src/orchestrator/agents';
-import { advance, initWorkflow, loadWorkflow, prepare, prepareBatches, recordReceipt, runGate } from '../runtime/src/orchestrator/orchestrator';
+import { advance, initWorkflow, loadWorkflow, prepare, prepareBatches, recordReceipt, runGate, runPrecheck } from '../runtime/src/orchestrator/orchestrator';
 import { SKILLS } from '../runtime/src/orchestrator/skills';
 import { claimLiterals, consolidate, correct, Ctx, loadTrackedIssues, reconcile, recordAccess, statementForLine, verifyField, verifySources, verifyTextClaim } from '../runtime/src/remediation/remediation';
 import { accessFor, parseTranscript } from '../runtime/src/remediation/transcripts';
@@ -30,7 +30,7 @@ function setup(opts: { mutate?: (f: Fixture) => void; withSource?: boolean } = {
   const ctx = loadContext({ forwardDir: FORWARD_DIR, configPath: f.configPath });
   runPlan(ctx, { runId: RUN });
   initWorkflow(ctx, RUN);
-  assert.equal(runGate(loadWorkflow(ctx, RUN), 'G1').status, 'PASS');
+  assert.equal(runPrecheck(loadWorkflow(ctx, RUN), 'EVIDENCE').status, 'PASS');
   assert.equal(advance(loadWorkflow(ctx, RUN), 'EVIDENCE_VALIDATED').accepted, true);
   return { f, ctx };
 }

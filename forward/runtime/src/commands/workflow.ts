@@ -1,7 +1,7 @@
 import { RuntimeContext } from '../core/config';
 import { AGENTS, checkDefinition } from '../orchestrator/agents';
 import { validateSkill, validateSkillInventory } from '../orchestrator/skills';
-import { GATES, GateId, GateResult, gateSpec } from '../orchestrator/gates';
+import { GATES, GateId, GateResult, gateSpec, PRECHECKS, PrecheckId, PrecheckResult, precheckSpec } from '../orchestrator/gates';
 import {
   advance,
   agentsDir,
@@ -14,6 +14,7 @@ import {
   recordReceipt,
   resume,
   runGate,
+  runPrecheck,
   status,
 } from '../orchestrator/orchestrator';
 import { allowedTargets } from '../orchestrator/states';
@@ -30,7 +31,7 @@ import { perProgram, renderReport } from '../approval/report';
 import { evaluateScope, parseSelector } from '../approval/scope';
 import { buildSnapshot } from '../approval/snapshot';
 import { canonicalize } from '../approval/canonical';
-import { createDesignRequest, DESIGN_DIR, designStatement, evaluateDesignGate, importDesignApproval, verifyDesignApprovalFile } from '../design/approvals';
+import { createDesignRequest, DESIGN_DIR, designStatement, evaluateDesignGate, importDesignApproval, verifyDesignApprovalFile, validateStorySet } from '../design/approvals';
 
 type Out = (s: string) => void;
 type Flags = Record<string, string | true>;
@@ -98,9 +99,9 @@ export function workflowCommand(ctx: RuntimeContext, sub: string | undefined, fl
     switch (sub) {
       case 'init': {
         const wf = initWorkflow(ctx, runId);
-        print({ workflow_id: wf.state.workflow_id, state: wf.state.state, gates: wf.state.gates }, () => {
+        print({ workflow_id: wf.state.workflow_id, state: wf.state.state, prechecks: wf.state.prechecks, gates: wf.state.gates }, () => {
           out(`workflow ${wf.state.workflow_id} created for run ${wf.state.run_id}`);
-          out(`  G0: ${wf.state.gates.G0?.status}; state: ${wf.state.state}`);
+          out(`  baseline pre-check: ${wf.state.prechecks?.BASELINE?.status}; state: ${wf.state.state}`);
           out(`  classification: ${wf.store.p('program_classification.json')}`);
         });
         return wf.state.state === 'BLOCKED' ? 1 : 0;
@@ -109,6 +110,7 @@ export function workflowCommand(ctx: RuntimeContext, sub: string | undefined, fl
         const s = status(loadWorkflow(ctx, runId));
         print(s, () => {
           out(`workflow ${s.workflow_id} — state ${s.state}${s.blocked_from ? ` (blocked from ${s.blocked_from})` : ''}`);
+          out(`  pre-checks: ${Object.entries(s.prechecks).map(([c, v]) => `${c}=${v}`).join(' ')}`);
           out(`  gates: ${Object.entries(s.gates).map(([g, v]) => `${g}=${v}`).join(' ')}`);
           out(`  packets: ${s.packets.total} (awaiting receipt: ${s.packets.awaiting_receipt.join(', ') || 'none'}${s.packets.superseded.length ? `; superseded: ${s.packets.superseded.join(', ')} per ${s.packets.packet_status_record}` : ''}); receipts accepted ${s.receipts.accepted}, rejected ${s.receipts.rejected}`);
           out(`  checkpoint #${s.checkpoint.seq}: ${s.checkpoint.verified ? 'verified' : 'NOT VERIFIED — ' + s.checkpoint.problems.join('; ')}`);
@@ -118,10 +120,35 @@ export function workflowCommand(ctx: RuntimeContext, sub: string | undefined, fl
         });
         return 0;
       }
+      case 'precheck': {
+        // Automated pre-checks (formerly gates G0 and G1): BASELINE and EVIDENCE.
+        const c = (str(flags, 'check') ?? (typeof flags.all === 'boolean' ? 'all' : undefined))?.toUpperCase();
+        if (!c) {
+          err('workflow precheck: specify --check BASELINE, --check EVIDENCE or --check all');
+          return 2;
+        }
+        const ids = c === 'ALL' ? PRECHECKS.map((x) => x.id) : [c];
+        const wf = loadWorkflow(ctx, runId);
+        const results: PrecheckResult[] = [];
+        for (const id of ids) {
+          if (!precheckSpec(id)) {
+            err(`unknown pre-check ${id}`);
+            return 2;
+          }
+          results.push(runPrecheck(wf, id as PrecheckId));
+        }
+        print(results, () => {
+          for (const r of results) {
+            out(`${r.check} ${r.name}: ${r.status} — ${r.reason}`);
+            for (const x of r.checks) out(`   [${x.status}] ${x.id}: ${x.detail}`);
+          }
+        });
+        return results.every((r) => r.status === 'PASS') ? 0 : 1;
+      }
       case 'gate': {
         const g = (str(flags, 'gate') ?? (typeof flags.all === 'boolean' ? 'all' : undefined))?.toUpperCase();
         if (!g) {
-          err('workflow gate: specify --gate G0..G8 or --gate all');
+          err('workflow gate: specify --gate G2, --gate G3 or --gate all');
           return 2;
         }
         const ids = g === 'ALL' ? GATES.map((x) => x.id) : [g];
@@ -305,9 +332,8 @@ export function workflowCommand(ctx: RuntimeContext, sub: string | undefined, fl
         err('workflow g2: use evaluate | blockers [--per-program] | report [--out FILE] (with --scope application|programs:A,B|requirements:R1,R2)');
         return 2;
       }
-      case 'g3':
-      case 'g4': {
-        const gate = sub.toUpperCase() as 'G3' | 'G4';
+      case 'g3': {
+        const gate = 'G3' as const;
         if (action !== 'evaluate' && action !== 'blockers') {
           err(`workflow ${sub}: use evaluate | blockers (read-only; 'workflow gate --gate ${gate}' records the result)`);
           return 2;
@@ -324,9 +350,21 @@ export function workflowCommand(ctx: RuntimeContext, sub: string | undefined, fl
         });
         return o.result.status === 'PASS' ? 0 : 1;
       }
-      case 'architecture':
       case 'stories': {
-        const gate = sub === 'architecture' ? 'G3' : 'G4';
+        if (action !== 'validate') {
+          err('workflow stories: use validate (read-only automated check of the F4 story set; F5 needs it to pass)');
+          return 2;
+        }
+        const v = validateStorySet(loadWorkflow(ctx, runId));
+        print(v, () => {
+          out(`F4 story set: ${v.ok ? 'VALID' : 'NOT VALID'} — ${v.reason}`);
+          for (const c of v.checks) out(`  [${c.ok ? 'pass' : 'fail'}] ${c.id}: ${c.detail}`);
+          if (v.story_order.length) out(`  implementation order: ${v.story_order.join(' -> ')}`);
+        });
+        return v.ok ? 0 : 1;
+      }
+      case 'architecture': {
+        const gate = 'G3' as const;
         const wf = loadWorkflow(ctx, runId);
         if (action === 'approval-request') {
           const by = str(flags, 'requested-by');
@@ -418,13 +456,13 @@ export function workflowCommand(ctx: RuntimeContext, sub: string | undefined, fl
           } catch {
             design = false;
           }
-          // A signed architecture (G3) or story-set (G4) approval goes through the same trust model and verifier family.
+          // A signed architecture (G3) approval goes through the same trust model and verifier family.
           const r = design ? (action === 'verify' ? verifyDesignApprovalFile(wf, path.resolve(file)) : importDesignApproval(wf, path.resolve(file))) : action === 'verify' ? verifyApprovalFile(wf, path.resolve(file)) : importApproval(wf, path.resolve(file));
           const ok = action === 'verify' ? r.ok : r.imported;
           print(r, () => {
             out(action === 'verify' ? `signed approval ${ok ? 'VALID' : 'INVALID'}` : ok ? `IMPORTED ${r.approval_id} (${r.decision})` : 'REJECTED (recorded in the audit log)');
             for (const c of r.checks) out(`  [${c.ok ? 'ok' : 'FAIL'}] ${c.id}: ${c.detail}`);
-            if (action === 'import' && ok) out(design ? `  next: workflow gate --gate ${r.gate}, then workflow advance --to ${r.gate === 'G3' ? 'ARCHITECTURE_APPROVED' : 'STORIES_APPROVED'}` : `  next: workflow gate --gate G2, then workflow advance --to REQUIREMENTS_APPROVED`);
+            if (action === 'import' && ok) out(design ? `  next: workflow gate --gate ${r.gate}, then workflow advance --to ARCHITECTURE_APPROVED` : `  next: workflow gate --gate G2, then workflow advance --to REQUIREMENTS_APPROVED`);
           });
           return ok ? 0 : 1;
         }

@@ -17,7 +17,7 @@
 import { randomBytes } from 'crypto';
 import * as fs from 'fs';
 import { sha256File } from '../core/fsutil';
-import { gatePassed, GateCheck, GateResult, gateSpec, validateApproval } from '../orchestrator/gates';
+import { GateCheck, gatePassed, GateResult, gateSpec, precheckPassed, validateApproval } from '../orchestrator/gates';
 import { mutate, OrchestratorError, Workflow } from '../orchestrator/orchestrator';
 import { canonicalize, digest } from './canonical';
 import { evaluateScope, Finding, parseSelector, ScopeEvaluation, Selector, selectorText } from './scope';
@@ -181,7 +181,7 @@ export function checkApproval(snap: Snapshot, signed: any, opts: { existing?: an
     add('record_intact', ok, ok ? `${opts.existing.approval_id} matches the hash sealed in the audit log` : `${opts.existing.approval_id} was altered after import`);
   }
   const baseOk = request.payload.baseline.manifest_sha256 === wf.run.manifestSha256 && snap.g0.status === 'PASS';
-  add('baseline_current', baseOk, baseOk ? 'baseline unchanged and intact (G0 PASS)' : `baseline changed or not intact (G0 ${snap.g0.status})`);
+  add('baseline_current', baseOk, baseOk ? 'baseline unchanged and intact (baseline pre-check PASS)' : `baseline changed or not intact (baseline pre-check ${snap.g0.status})`);
   let ev: ScopeEvaluation | null = null;
   try {
     const key = canonicalize(request.payload.scope.selector);
@@ -256,7 +256,7 @@ export function importApproval(wf: Workflow, file: string): any {
 /* G2 gate                                                             */
 /* ------------------------------------------------------------------ */
 
-const DRAFTED_OR_LATER = ['REQUIREMENTS_DRAFTED', 'REQUIREMENTS_APPROVED', 'ARCHITECTURE_DRAFTED', 'ARCHITECTURE_APPROVED', 'STORIES_DRAFTED', 'STORIES_APPROVED', 'IMPLEMENTING', 'IMPLEMENTATION_BUILT', 'TESTING', 'REVIEWING', 'AWAITING_ACCEPTANCE', 'ACCEPTED'];
+const DRAFTED_OR_LATER = ['REQUIREMENTS_DRAFTED', 'REQUIREMENTS_APPROVED', 'ARCHITECTURE_DRAFTED', 'ARCHITECTURE_APPROVED', 'STORIES_DRAFTED', 'IMPLEMENTING', 'IMPLEMENTATION_BUILT', 'TESTING', 'REVIEWING', 'COMPLETED'];
 
 /**
  * The finding sets behind each G2 evidence check. Shared with the STEP 4.5
@@ -308,11 +308,11 @@ export function evaluateG2Gate(wf: Workflow, at = new Date()): { result: GateRes
     limitations: [],
     ...extra,
   });
-  if (!gatePassed(wf.state, 'G1', wf.run.manifestSha256)) return { result: baseResult('BLOCKED', 'prerequisite G1 has not passed on the current baseline'), evaluation: null };
+  if (!precheckPassed(wf.state, 'EVIDENCE', wf.run.manifestSha256)) return { result: baseResult('BLOCKED', 'the evidence pre-check has not passed on the current baseline'), evaluation: null };
   const snap = buildSnapshot(wf, at);
   const checks: GateCheck[] = [];
   const inputs: GateResult['inputs'] = [];
-  checks.push({ id: 'baseline_integrity', status: snap.g0.status === 'PASS' ? 'pass' : 'fail', detail: snap.g0.status === 'PASS' ? 'baseline manifest and reverse inputs unchanged (G0 re-evaluated)' : `G0 ${snap.g0.status}: ${snap.g0.reason}` });
+  checks.push({ id: 'baseline_integrity', status: snap.g0.status === 'PASS' ? 'pass' : 'fail', detail: snap.g0.status === 'PASS' ? 'baseline manifest and reverse inputs unchanged (baseline pre-check re-evaluated)' : `baseline pre-check ${snap.g0.status}: ${snap.g0.reason}` });
   const drafted = DRAFTED_OR_LATER.includes(String(wf.state.state)) || (wf.state.state === 'BLOCKED' && DRAFTED_OR_LATER.includes(String(wf.state.blocked_from)));
   checks.push({ id: 'requirements_drafted', status: drafted ? 'pass' : 'fail', detail: drafted ? `workflow state ${wf.state.state}` : `workflow state is ${wf.state.state}; G2 approval needs REQUIREMENTS_DRAFTED (readiness is reported for information only)` });
   for (const r of snap.receipts) inputs.push({ kind: `receipt:${r.receipt.agent}`, ref: r.receipt_id, sha256: snap.integrity.receipt_hashes.find((x) => x.receipt_id === r.receipt_id)?.sha256 ?? null });

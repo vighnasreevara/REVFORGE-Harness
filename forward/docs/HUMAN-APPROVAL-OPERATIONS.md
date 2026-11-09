@@ -14,7 +14,7 @@ Every run of `workflow gate --gate G2` rebuilds the evidence from the runtime's 
 
 | Check | Meaning |
 |---|---|
-| baseline_integrity | The baseline manifest and reverse artifacts are unchanged (G0 is re-evaluated). |
+| baseline_integrity | The baseline manifest and reverse artifacts are unchanged (the BASELINE pre-check is re-evaluated). |
 | deliverable_integrity | Every accepted deliverable and receipt is byte-identical to what was accepted. |
 | canonical_rule_coverage | Every canonical reverse rule in scope has a disposition. Deferred or contradictory rules block until their decisions are resolved. |
 | cross_batch_reconciliation | The consolidation record is current, and batch disagreements are resolved. |
@@ -41,7 +41,7 @@ Each item in scope is classified as one of six outcomes:
 
 ### Status meanings
 
-- **BLOCKED**: G1 has not passed.
+- **BLOCKED**: the EVIDENCE pre-check (formerly gate G1) has not passed on the current baseline.
 - **FAIL**: the evidence base is not intact. Either the baseline changed or an accepted deliverable or receipt was altered.
 - **UNVERIFIED**: the scope is not ready, there is no trust anchor, or no valid approval exists.
 - **PASS**: all of the following are true:

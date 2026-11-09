@@ -248,7 +248,7 @@ describe('S55-D. pilot preparation and protections', () => {
     assert.equal(wfOf(ctx).store.list('approvals').filter((x) => x.startsWith('APR-')).length, 0, 'no approval created');
     assert.equal(runGate(wfOf(ctx), 'G2').status, 'UNVERIFIED');
     assert.equal(advance(wfOf(ctx), 'REQUIREMENTS_APPROVED').accepted, false);
-    for (const g of ['G3', 'G4', 'G5', 'G6', 'G7', 'G8'] as const) assert.equal(runGate(wfOf(ctx), g).status, 'BLOCKED', g);
+    assert.equal(runGate(wfOf(ctx), 'G3').status, 'BLOCKED');
     assert.equal(generationAuthorized(wfOf(ctx).run, wfOf(ctx).state), false);
     assert.throws(() => prepare(wfOf(ctx), 'F5'), /may only be dispatched/);
     assert.equal(wfOf(ctx).store.verifyCheckpoint().ok, true);

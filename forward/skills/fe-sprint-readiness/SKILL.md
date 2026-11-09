@@ -29,7 +29,7 @@ Owned by agent **fe-development-planner** (F4). Run after `fe-evidence-backed-st
 
 ## Purpose and responsibility
 
-Give every story a readiness status (`ready`, `blocked` or `unverified`), with the exact list of unmet conditions, and publish a sprint readiness report. A story is `ready` only when every condition below is satisfied by recorded evidence. "Ready" is a planning statement for the G4 reviewer, not an authorisation: only G4 authorises implementation.
+Give every story a readiness status (`ready`, `blocked` or `unverified`), with the exact list of unmet conditions, and publish a sprint readiness report. A story is `ready` only when every condition below is satisfied by recorded evidence. "Ready" is a planning statement, not an authorisation: implementation needs G3 PASS, a story set that passes the runtime's validation, and generation authorisation.
 
 ## Required input artifacts
 
@@ -104,4 +104,4 @@ Readiness keeps the story's requirement, component, record and source IDs unchan
 
 ## Orchestrator integration
 
-Listed in the F4 receipt. The G4 reviewer uses `sprint_readiness.md` and `stories.json`. The runtime records the human G4 decision. F5 can be dispatched only after G4 PASS, and only for authorised stories.
+Listed in the F4 receipt. The runtime validates `stories.json` against the approved requirements and the G3 architecture. F5 can be dispatched only while that validation passes, and only for authorised stories.

@@ -36,9 +36,7 @@
     "gate": {
       "enum": [
         "G2",
-        "G3",
-        "G4",
-        "G8"
+        "G3"
       ]
     },
     "decision": {
@@ -77,7 +75,7 @@
         "demo_run_id",
         "baseline_sha256",
         "source_sha256",
-        "prior_gates"
+        "prior_steps"
       ],
       "properties": {
         "demo_run_id": {
@@ -92,19 +90,19 @@
           "type": "string",
           "pattern": "^[0-9a-f]{64}$"
         },
-        "prior_gates": {
+        "prior_steps": {
           "type": "array",
           "minItems": 0,
           "items": {
             "type": "object",
             "additionalProperties": false,
             "required": [
-              "gate",
+              "step",
               "status",
               "result_sha256"
             ],
             "properties": {
-              "gate": {
+              "step": {
                 "type": "string",
                 "minLength": 1
               },

@@ -73,7 +73,7 @@ node dist/runtime/src/cli.js sync-agents --check            # report drift (exit
 node dist/runtime/src/cli.js sync-agents --scope reverse    # only the reverse side
 ```
 
-`doctor` reports reverse and forward drift separately (`reverse_agents_mirror`, `forward_agents_mirror`). `sync-agents --check` also fails on any unregistered entry in those folders. Because Git cannot see changes in ignored files, the reverse-harness checks used by `doctor` and G0 compare the installed copies with their sources: an edited, source-less or unregistered copy is still reported as a local change. The agent definitions refer to their skills by their Claude Code path, `.claude/skills/<name>/SKILL.md`. That is where Claude Code loads them, so those references are unchanged. No forward agent may write anything under `reverse/`.
+`doctor` reports reverse and forward drift separately (`reverse_agents_mirror`, `forward_agents_mirror`). `sync-agents --check` also fails on any unregistered entry in those folders. Because Git cannot see changes in ignored files, the reverse-harness checks used by `doctor` and the forward BASELINE pre-check (formerly gate G0) compare the installed copies with their sources: an edited, source-less or unregistered copy is still reported as a local change. The agent definitions refer to their skills by their Claude Code path, `.claude/skills/<name>/SKILL.md`. That is where Claude Code loads them, so those references are unchanged. No forward agent may write anything under `reverse/`.
 
 ## Running the pipeline
 
@@ -87,7 +87,7 @@ Copy `.mcp.json.example` to `.mcp.json` with your connection details. That file 
 ## Why the artifacts stay in `output/`
 
 The reverse artifacts were **not** moved to `reverse/output/`. Their path is part of recorded, hash-bound evidence:
-- The real forward workflow's baseline manifest records every reverse input as `output/...` with its SHA-256. G0 re-hashes those paths, and the G0/G1 results are bound to that manifest.
+- The real forward workflow's baseline manifest records every reverse input as `output/...` with its SHA-256. The BASELINE pre-check (formerly gate G0) re-hashes those paths, and the pre-check results, including the G0/G1 results the run recorded under the former nine-gate design, are bound to that manifest.
 - The STEP-22 source-integrity record and the STEP-25 integrity check pin the reverse artifacts by their `output/` paths.
 - The CI integrity job pins artifact hashes by path.
 - The dashboard evidence manifest keys rule and diagram evidence by path.

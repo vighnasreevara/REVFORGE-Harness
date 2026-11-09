@@ -95,4 +95,4 @@ Repairs keep the manifest's story, requirement and source-ID links of each symbo
 
 ## Orchestrator integration
 
-Repairs are reported in the F5 receipt. Gate G5 re-executes the build in the runtime. Repairs never move the workflow state themselves.
+Repairs are reported in the F5 receipt. Independent testing (F6) re-executes the build and tests. Repairs never move the workflow state themselves.

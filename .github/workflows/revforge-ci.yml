@@ -145,7 +145,7 @@ jobs:
         run: node scripts/smoke.mjs
 
   demo:
-    name: Synthetic G0-G8 gate demonstration
+    name: Synthetic two-gate (G2, G3) workflow demonstration
     # Runs the synthetic interview demonstration (environment SYNTHETIC_INTERVIEW_DEMO) on the committed synthetic
     # inputs only: no restricted COBOL, no Neo4j, no external AI or BMad call, no production signing key (each run
     # creates an ephemeral demo key in memory), no generated production Java. Demo output stays in RUNNER_TEMP.
@@ -170,18 +170,19 @@ jobs:
       - run: npm ci
       - name: Build and install the Claude Code discovery copies
         run: npm run setup
-      - name: Run the demonstration (all nine demo gates must pass)
+      - name: Run the demonstration (both gates and all automated steps must pass)
         env:
           REVFORGE_JAVA_HOME: ${{ env.JAVA_HOME }}
         run: |
           node dist/runtime/src/cli.js demo gates --out "$RUNNER_TEMP/demo"
           node -e '
             const s = require(process.argv[1]);
-            const ok = s.verdict === "SYNTHETIC_DEMO_ACCEPTED" && s.gates.length === 9 && s.gates.every((g) => g.demo_gate_status === "PASS")
+            const ok = s.verdict === "SYNTHETIC_DEMO_COMPLETED" && s.steps.length === 9 && s.steps.every((g) => g.demo_status === "PASS")
+              && s.steps.filter((g) => g.kind === "gate").map((g) => g.step).join() === "G2,G3"
               && s.production_authorization === "NOT_GRANTED" && s.real_bmad_execution === "NOT_EXECUTED" && s.legacy_equivalence === "NOT_ESTABLISHED"
               && s.bmad.simulated_stages === 6 && s.bmad.counted_as_bmad_execution === 0
               && s.real_project_status.generation_java_generation_allowed === false && s.real_project_status.bmad_governance_mandatory === true;
-            console.log(ok ? "all nine demo gates PASS; production authorization NOT_GRANTED" : "demo summary check FAILED");
+            console.log(ok ? "G2, G3 and all automated steps PASS; production authorization NOT_GRANTED" : "demo summary check FAILED");
             process.exit(ok ? 0 : 1);' "$RUNNER_TEMP/demo/demo-summary.json"
       - name: Happy-path and negative-path tests
         env:
@@ -191,10 +192,10 @@ jobs:
         if: always()
         run: |
           if [ -f "$RUNNER_TEMP/demo/DEMO-REPORT.md" ]; then
-            awk '/^### G0 /{exit} {print}' "$RUNNER_TEMP/demo/DEMO-REPORT.md" >> "$GITHUB_STEP_SUMMARY"
+            awk '/^### BASELINE /{exit} {print}' "$RUNNER_TEMP/demo/DEMO-REPORT.md" >> "$GITHUB_STEP_SUMMARY"
             awk '/^## BMad lifecycle/{p=1} p' "$RUNNER_TEMP/demo/DEMO-REPORT.md" >> "$GITHUB_STEP_SUMMARY"
           else
-            echo "### Synthetic gate demonstration did not produce a report" >> "$GITHUB_STEP_SUMMARY"
+            echo "### Synthetic two-gate demonstration did not produce a report" >> "$GITHUB_STEP_SUMMARY"
           fi
 
   integrity:

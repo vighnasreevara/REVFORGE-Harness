@@ -6,7 +6,7 @@ allowed-tools: Read, Grep, Glob, Write
 
 # fe-end-to-end-trace-audit
 
-Owned by agent **fe-independent-reviewer** (F7). Run with `fe-adversarial-code-review` after gate G6.
+Owned by agent **fe-independent-reviewer** (F7). Run with `fe-adversarial-code-review` in `REVIEWING`, after a passing F6 result.
 
 ```json revforge-skill
 {
@@ -43,7 +43,7 @@ Build and check the complete trace graph for the reviewed scope. Every in-scope 
 
 ## Input validation
 
-1. G6 must be `PASS` and the packet dispatchable; otherwise stop with `blocked`.
+1. The workflow must be in `REVIEWING` and the packet dispatchable; otherwise stop with `blocked`.
 2. Every input must come from an accepted receipt on the packet baseline. Inputs from a different baseline are stale and are recorded as breaks.
 3. Copy `inputs_used` paths and hashes from the packet.
 
@@ -85,7 +85,7 @@ Read, Grep and Glob on every trace input listed in the packet (manifest, F1 edge
 ## Error handling and stop conditions
 
 - Missing artifacts: record a break for each and continue.
-- G6 is not `PASS`: return `blocked`.
+- The workflow is not in `REVIEWING`: return `blocked`.
 - The trace walk is incomplete: return `incomplete`.
 
 ## Quality checks
@@ -97,8 +97,8 @@ Read, Grep and Glob on every trace input listed in the packet (manifest, F1 edge
 
 ## Source-ID traceability
 
-This skill is the final traceability check. Its edge list is the authoritative record of the chain, from COBOL source ID to verification result, for gate G7.
+This skill is the final traceability check. Its edge list is the authoritative record of the chain, from COBOL source ID to verification result, for the F7 review.
 
 ## Orchestrator integration
 
-Listed in the F7 receipt with the review report. The runtime validates the edges (known permanent IDs, current run bindings). Gate G7 uses the breaks, and G8 is a human decision.
+Listed in the F7 receipt with the review report. The runtime validates the edges (known permanent IDs, current run bindings). Breaks are blocking findings, and a blocking finding stops the workflow from completing.

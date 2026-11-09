@@ -1,16 +1,26 @@
 /**
- * Gate framework G0-G8. Every result carries a status, a reason, the input
- * evidence it looked at and a timestamp.
+ * Gates G2 and G3, and the two pre-checks that guard them.
+ *
+ * Gates (human decisions, each a re-verified Ed25519-signed approval):
+ *   G2  approved requirements  (approval module, runtime/src/approval)
+ *   G3  approved architecture  (design module, runtime/src/design)
+ *
+ * Pre-checks (automated, not gates): the runtime refuses to start the
+ * workflow, and G2 stays BLOCKED, unless both pass on the current baseline.
+ *   BASELINE  the baseline manifest and every reverse input are unchanged
+ *   EVIDENCE  plan outputs, evidence packets and permanent IDs match the reverse artifacts
+ *
+ * Runs created before the two-gate change recorded these pre-checks as gates
+ * G0 and G1. Those records are read, never rewritten: a PASS recorded as G0 or
+ * G1 on the current baseline counts as the BASELINE or EVIDENCE pre-check.
+ *
+ * Every result carries a status, a reason, the input evidence it looked at and
+ * a timestamp:
  *   PASS        evaluated and satisfied
  *   FAIL        evaluated and not satisfied
- *   BLOCKED     a prerequisite gate has not passed on the current baseline
- *   NOT_RUN     nothing has been submitted for this gate yet
- *   UNVERIFIED  evidence exists but cannot be verified (evaluator or approval missing)
- * G0 and G1 are fully evaluated from STEP 1 evidence. G2 is evaluated by the
- * approval module (runtime/src/approval): it PASSes only for a READY scope with
- * a re-verified, signed human approval. G3 and G4 likewise need a re-verified,
- * signed approval of the exact architecture / story set (design module, STEP 7).
- * G5-G8 are fail-closed and never PASS.
+ *   BLOCKED     a prerequisite has not passed on the current baseline
+ *   NOT_RUN     nothing has been submitted yet
+ *   UNVERIFIED  evidence exists but cannot be verified (approval missing)
  */
 import * as fs from 'fs';
 import * as path from 'path';
@@ -26,7 +36,11 @@ import { AgentId } from './agents';
 import { WorkflowStateRecord, WorkflowStore } from './store';
 
 export type GateStatus = 'PASS' | 'FAIL' | 'BLOCKED' | 'NOT_RUN' | 'UNVERIFIED';
-export type GateId = 'G0' | 'G1' | 'G2' | 'G3' | 'G4' | 'G5' | 'G6' | 'G7' | 'G8';
+export type GateId = 'G2' | 'G3';
+/** Automated pre-checks (formerly gates G0 and G1). */
+export type PrecheckId = 'BASELINE' | 'EVIDENCE';
+/** The gate IDs a pre-check was recorded under before the two-gate change (read-only compatibility). */
+export const LEGACY_GATE_OF: Record<PrecheckId, string> = { BASELINE: 'G0', EVIDENCE: 'G1' };
 
 export interface GateCheck {
   id: string;
@@ -60,16 +74,24 @@ export interface GateSpec {
 }
 
 export const GATES: GateSpec[] = [
-  { id: 'G0', name: 'Baseline integrity', prerequisite: null, evaluator: 'implemented', required_receipts: [], human_approval: false, pending_until: 'available' },
-  { id: 'G1', name: 'Evidence verification', prerequisite: 'G0', evaluator: 'implemented', required_receipts: [], human_approval: false, pending_until: 'available' },
-  { id: 'G2', name: 'Approved requirements', prerequisite: 'G1', evaluator: 'implemented', required_receipts: ['F1', 'F2'], human_approval: true, pending_until: 'available (signed human approval required)' },
+  { id: 'G2', name: 'Approved requirements', prerequisite: null, evaluator: 'implemented', required_receipts: ['F1', 'F2'], human_approval: true, pending_until: 'available (signed human approval required)' },
   { id: 'G3', name: 'Approved architecture', prerequisite: 'G2', evaluator: 'implemented', required_receipts: ['F3'], human_approval: true, pending_until: 'available (signed architecture approval required)' },
-  { id: 'G4', name: 'Approved development stories', prerequisite: 'G3', evaluator: 'implemented', required_receipts: ['F4'], human_approval: true, pending_until: 'available (signed story-set approval required)' },
-  { id: 'G5', name: 'Java build and tests', prerequisite: 'G4', evaluator: 'fail_closed', required_receipts: ['F5'], human_approval: false, pending_until: 'runtime-executed Maven build (later step)' },
-  { id: 'G6', name: 'Independent behavioural/equivalence verification', prerequisite: 'G5', evaluator: 'fail_closed', required_receipts: ['F6'], human_approval: false, pending_until: 'executed equivalence evidence (later step)' },
-  { id: 'G7', name: 'Independent review', prerequisite: 'G6', evaluator: 'fail_closed', required_receipts: ['F7'], human_approval: false, pending_until: 'review contracts (later step)' },
-  { id: 'G8', name: 'Human acceptance', prerequisite: 'G7', evaluator: 'fail_closed', required_receipts: [], human_approval: true, pending_until: 'human acceptance recording (later step)' },
 ];
+
+export interface PrecheckSpec {
+  id: PrecheckId;
+  name: string;
+  prerequisite: PrecheckId | null;
+}
+
+export const PRECHECKS: PrecheckSpec[] = [
+  { id: 'BASELINE', name: 'Baseline integrity', prerequisite: null },
+  { id: 'EVIDENCE', name: 'Evidence verification', prerequisite: 'BASELINE' },
+];
+
+export function precheckSpec(id: string): PrecheckSpec | undefined {
+  return PRECHECKS.find((p) => p.id === id.toUpperCase());
+}
 
 export function gateSpec(id: string): GateSpec | undefined {
   return GATES.find((g) => g.id === id.toUpperCase());
@@ -121,12 +143,52 @@ export function gatePassed(state: WorkflowStateRecord | null, gate: string, mani
   return !!g && g.status === 'PASS' && g.baseline_sha256 === manifestSha;
 }
 
+/**
+ * True when the pre-check passed on this baseline. A PASS recorded under its
+ * former gate ID (G0 / G1) by a run created before the two-gate change counts too.
+ */
+export function precheckPassed(state: WorkflowStateRecord | null, check: PrecheckId, manifestSha: string): boolean {
+  const p = state?.prechecks?.[check];
+  if (p && p.status === 'PASS' && p.baseline_sha256 === manifestSha) return true;
+  return gatePassed(state, LEGACY_GATE_OF[check], manifestSha);
+}
+
+export interface PrecheckResult {
+  contract: 'precheck-result';
+  contract_version: string;
+  check: PrecheckId;
+  name: string;
+  status: GateStatus;
+  reason: string;
+  evaluated_at: string;
+  baseline: { run_id: string; manifest_sha256: string };
+  inputs: Array<{ kind: string; ref: string; sha256: string | null }>;
+  checks: GateCheck[];
+  limitations: string[];
+}
+
+const precheck = (spec: PrecheckSpec, run: RunHandle, at: string, status: GateStatus, reason: string, extra: Partial<PrecheckResult> = {}): PrecheckResult => ({
+  contract: 'precheck-result',
+  contract_version: '1.0',
+  check: spec.id,
+  name: spec.name,
+  status,
+  reason,
+  evaluated_at: at,
+  baseline: { run_id: run.runId, manifest_sha256: run.manifestSha256 },
+  inputs: [{ kind: 'baseline_manifest', ref: path.relative(run.ctx.repoRoot, run.manifestPath).split(path.sep).join('/'), sha256: run.manifestSha256 }],
+  checks: [],
+  limitations: [],
+  ...extra,
+});
+
 /* ------------------------------------------------------------------ */
-/* G0 baseline integrity                                               */
+/* BASELINE pre-check (formerly G0)                                    */
 /* ------------------------------------------------------------------ */
 
-export function evaluateG0(run: RunHandle, state: WorkflowStateRecord | null, at = new Date().toISOString()): GateResult {
-  const spec = gateSpec('G0')!;
+export function evaluateBaselineCheck(run: RunHandle, state: WorkflowStateRecord | null, at = new Date().toISOString()): PrecheckResult {
+  const spec = precheckSpec('BASELINE')!;
+  const result = precheck;
   const checks: GateCheck[] = [];
   const inputs: GateResult['inputs'] = [];
   const v = run.ctx.contracts.validate('output/baseline-manifest', run.manifest);
@@ -168,12 +230,13 @@ export function evaluateG0(run: RunHandle, state: WorkflowStateRecord | null, at
 }
 
 /* ------------------------------------------------------------------ */
-/* G1 evidence verification                                            */
+/* EVIDENCE pre-check (formerly G1)                                    */
 /* ------------------------------------------------------------------ */
 
-export function evaluateG1(run: RunHandle, state: WorkflowStateRecord | null, at = new Date().toISOString()): GateResult {
-  const spec = gateSpec('G1')!;
-  if (!gatePassed(state, 'G0', run.manifestSha256)) return result(spec, run, at, 'BLOCKED', 'G0 has not passed on the current baseline');
+export function evaluateEvidenceCheck(run: RunHandle, state: WorkflowStateRecord | null, at = new Date().toISOString()): PrecheckResult {
+  const spec = precheckSpec('EVIDENCE')!;
+  const result = precheck;
+  if (!precheckPassed(state, 'BASELINE', run.manifestSha256)) return result(spec, run, at, 'BLOCKED', 'the baseline pre-check has not passed on the current baseline');
   const checks: GateCheck[] = [];
   const inputs: GateResult['inputs'] = [];
   const ctx = run.ctx;
@@ -269,7 +332,7 @@ export function evaluateG1(run: RunHandle, state: WorkflowStateRecord | null, at
   }
 
   const limitations = [
-    'Verification is artifact-level: statements are not re-verified against original COBOL source by this gate.',
+    'Verification is artifact-level: statements are not re-verified against original COBOL source by this pre-check.',
     'Neo4j was not queried; upstream verification results are recorded, not re-executed.',
   ];
   if (!run.manifest.cobol_source?.available) limitations.push('Original COBOL source is not available for this baseline.');
@@ -282,7 +345,7 @@ export function evaluateG1(run: RunHandle, state: WorkflowStateRecord | null, at
 }
 
 /* ------------------------------------------------------------------ */
-/* Approvals and fail-closed gates G2-G8                               */
+/* Unsigned approval records (legacy; never sufficient for a gate)     */
 /* ------------------------------------------------------------------ */
 
 export interface ApprovalRecord {
@@ -311,32 +374,6 @@ export function validateApproval(rec: any, gate: GateId, store: WorkflowStore): 
   return problems;
 }
 
-export function evaluateFailClosed(gate: GateId, run: RunHandle, state: WorkflowStateRecord | null, store: WorkflowStore | null, at = new Date().toISOString()): GateResult {
-  const spec = gateSpec(gate)!;
-  if (spec.prerequisite && !gatePassed(state, spec.prerequisite, run.manifestSha256)) {
-    return result(spec, run, at, 'BLOCKED', `prerequisite ${spec.prerequisite} has not passed on the current baseline`);
-  }
-  const checks: GateCheck[] = [];
-  const inputs = result(spec, run, at, 'NOT_RUN', '').inputs;
-  const accepted = store ? store.list('receipts').map((f) => store.readRecord('receipts', f)).filter((r: any) => r.verdict?.accepted && r.receipt?.outcome === 'completed') : [];
-  for (const a of spec.required_receipts) {
-    const r = accepted.filter((x: any) => x.receipt.agent === a);
-    checks.push({ id: `receipt_${a}`, status: r.length ? 'info' : 'fail', detail: r.length ? `${r.length} accepted completed receipt(s) from ${a}` : `no accepted completed receipt from ${a}` });
-    for (const x of r) inputs.push({ kind: `receipt:${a}`, ref: x.receipt_id, sha256: store ? sha256File(store.p('receipts', `${x.receipt_id}.json`)) : null });
-  }
-  const missing = checks.filter((c) => c.status === 'fail');
-  if (missing.length) return result(spec, run, at, 'NOT_RUN', `nothing to evaluate: ${missing.map((c) => c.detail).join('; ')}`, { checks, inputs });
-  if (spec.human_approval) {
-    const approvals = store ? store.list('approvals').map((f) => store.readRecord('approvals', f)).filter((r: any) => r?.gate === gate) : [];
-    const valid = approvals.filter((r) => store && validateApproval(r, gate, store).length === 0);
-    checks.push({ id: 'human_approval', status: valid.length ? 'info' : 'fail', detail: valid.length ? `${valid.length} runtime-recorded human approval(s)` : approvals.length ? `approval record(s) rejected: ${approvals.map((r) => validateApproval(r, gate, store!).join(', ')).join(' | ')}` : 'no human approval recorded' });
-  }
-  checks.push({ id: 'content_evaluator', status: 'fail', detail: `content verification for ${gate} is not implemented yet (${spec.pending_until})` });
-  return result(spec, run, at, 'UNVERIFIED', `${gate} cannot be verified yet: ${spec.pending_until}; fail-closed`, { checks, inputs, limitations: ['A gate that has not been fully evaluated never reports PASS.'] });
-}
-
-export function evaluateGate(gate: GateId, run: RunHandle, state: WorkflowStateRecord | null, store: WorkflowStore | null, at?: string): GateResult {
-  if (gate === 'G0') return evaluateG0(run, state, at);
-  if (gate === 'G1') return evaluateG1(run, state, at);
-  return evaluateFailClosed(gate, run, state, store, at);
+export function evaluatePrecheck(check: PrecheckId, run: RunHandle, state: WorkflowStateRecord | null, at?: string): PrecheckResult {
+  return check === 'BASELINE' ? evaluateBaselineCheck(run, state, at) : evaluateEvidenceCheck(run, state, at);
 }

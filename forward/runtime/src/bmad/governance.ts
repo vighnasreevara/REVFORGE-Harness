@@ -41,8 +41,8 @@ export const GOVERNED_STAGES = [
 ] as const;
 export type Stage = (typeof GOVERNED_STAGES)[number]['stage'];
 export type StageStatus = 'RECEIPT_VERIFIED' | 'EXECUTED_REJECTED' | 'EXECUTION_FAILED' | 'BLOCKED' | 'NOT_ATTEMPTED';
-/** Acceptance stays outside BMad: the independent F6 receipt and gates G6-G8. */
-export const ACCEPTANCE_OUTSIDE_BMAD = 'acceptance is the independent F6 test receipt and gates G6-G8, deliberately outside BMad';
+/** Completion stays outside BMad: the independent F6 test receipt and the F7 review receipt. */
+export const ACCEPTANCE_OUTSIDE_BMAD = 'completion rests on the independent F6 test receipt and the F7 review receipt, deliberately outside BMad';
 
 export const bmadMandatory = (ctx: RuntimeContext): boolean => !!(ctx.config as any).bmad_governance?.mandatory;
 
@@ -317,7 +317,7 @@ export function governedRun(
       independent_evidence: independent,
       fallback: 'none',
       local_conversion_invoked: false,
-      note: status === 'BMAD_COMPLIANT' ? 'every lifecycle stage has a verified LIVE receipt for this scope; acceptance remains the independent F6 receipt and gates G6-G8' : 'BMAD_BLOCKED: the run stopped at the first stage that could not launch; nothing ran outside BMad in its place',
+      note: status === 'BMAD_COMPLIANT' ? 'every lifecycle stage has a verified LIVE receipt for this scope; completion still needs the independent F6 receipt and the F7 review receipt' : 'BMAD_BLOCKED: the run stopped at the first stage that could not launch; nothing ran outside BMad in its place',
     };
     const v = wf.run.ctx.contracts.validate('bmad/governed-run', rec);
     if (!v.valid) throw new Error(`governed run violates bmad/governed-run: ${v.errors.join('; ')}`);

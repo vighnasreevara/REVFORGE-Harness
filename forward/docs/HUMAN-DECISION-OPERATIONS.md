@@ -52,7 +52,6 @@ Nothing in REVFORGE signs, resolves or approves by default. Every command suppor
 | `exception_approver` | `approved_exception` outcomes |
 | `requirements_approver` | G2 |
 | `architecture_approver` | G3 |
-| `story_approver` | G4 |
 | `data_owner` | OpenAI source-export authorizations and AI disclosure authorizations |
 
 ## 1. Review the pending decisions
@@ -178,4 +177,4 @@ workflow advance --to REQUIREMENTS_APPROVED
 
 **Separation of duties:** the requester can never approve.
 
-**Re-approval:** any later resolution, correction, source or baseline change makes the approval stale. G2 then stops passing, and G3/G4 approvals built on it are invalidated.
+**Re-approval:** any later resolution, correction, source or baseline change makes the approval stale. G2 then stops passing, the G3 approval built on it is invalidated, and the F4 story set stops validating, so F5 cannot be dispatched.

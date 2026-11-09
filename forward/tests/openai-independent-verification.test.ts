@@ -373,7 +373,6 @@ describe('S5-D. secrecy, immutability and protected gates', () => {
     assert.equal(evaluateScope(snap1, parseSelector('application')).summary.blocking, blocking0, 'no blocker removed');
     assert.equal(runGate(wfOf(ctx), 'G2').status, 'UNVERIFIED');
     assert.equal(runGate(wfOf(ctx), 'G3').status, 'BLOCKED');
-    for (const g of ['G4', 'G5', 'G6', 'G7', 'G8'] as const) assert.equal(runGate(wfOf(ctx), g).status, 'BLOCKED', g);
     assert.equal(generationAuthorized(wfOf(ctx).run, wfOf(ctx).state), false);
     assert.throws(() => prepare(wfOf(ctx), 'F5'), /may only be dispatched/);
     assert.deepEqual(hashTree(path.join(f.repoRoot, 'output')), outBefore);

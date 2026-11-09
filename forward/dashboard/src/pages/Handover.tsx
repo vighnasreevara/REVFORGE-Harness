@@ -50,7 +50,7 @@ export default function Handover() {
         <ol className="grid gap-3 text-sm md:grid-cols-4">
           {[
             ['Reverse engineering', 'Seven agents (inventory, parser, data, logic, rules, diagram, synthesis) read the restricted COBOL source and write the committed artifacts in output/, with permanent IDs from the Neo4j registry.'],
-            ['Forward engineering harness', 'TypeScript runtime in forward/runtime with contracts, gates G0-G8 and agents F1-F7. Local Java generation is under historical local authorizations (LGA) and git-ignored.'],
+            ['Forward engineering harness', 'TypeScript runtime in forward/runtime with contracts, the two human gates G2 and G3 (with automated BASELINE and EVIDENCE pre-checks) and agents F1-F7. Local Java generation is under historical local authorizations (LGA) and git-ignored.'],
             ['Reconciliation and register', 'STEP-22 reconciles every reverse element with the Java; STEP-23 consolidates every open gap into one register with root causes, owners and a roadmap.'],
             ['Governance', 'BMad lifecycle governance is mandatory; F2 mapping and F6 testing stay independent of BMad. No BMad workflow has executed.'],
           ].map(([t, d], i) => (

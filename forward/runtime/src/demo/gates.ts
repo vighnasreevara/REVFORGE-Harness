@@ -1,10 +1,14 @@
 /**
- * Synthetic end-to-end G0-G8 gate demonstration (environment SYNTHETIC_INTERVIEW_DEMO).
+ * Synthetic end-to-end demonstration of the two-gate forward workflow
+ * (environment SYNTHETIC_INTERVIEW_DEMO).
  *
- * A self-contained run of the nine forward governance checkpoints on one small,
- * committed, synthetic COBOL program (forward/demo/gates/synthetic). Every
- * demo gate result is computed from checks executed in this run; a gate never
- * PASSes without evaluating its checks.
+ * A self-contained run of the nine forward steps on one small, committed,
+ * synthetic COBOL program (forward/demo/gates/synthetic): two automated
+ * pre-checks (BASELINE, EVIDENCE), the two human gates G2 (requirements) and
+ * G3 (architecture), each with a signed demo approval, and five automated
+ * steps (STORIES, BUILD, VERIFY, REVIEW, COMPLETE). Every step result is
+ * computed from checks executed in this run; a step never PASSes without
+ * evaluating its checks.
  *
  * Isolation from the real modernization:
  *   - inputs come only from forward/demo/gates/synthetic; the real reverse
@@ -19,7 +23,7 @@
  *   - BMad lifecycle steps are SIMULATED records that the real receipt
  *     counter (bmad/governance.receiptCounts) refuses as execution evidence.
  *
- * These nine demo gates are governance checkpoints. They are distinct from the
+ * These demo steps are governance checkpoints. They are distinct from the
  * two engineering quality gates SOURCE_READINESS and CONVERSION_VALIDATION
  * (pilot/gates.ts), which this module does not change or replace.
  */
@@ -40,25 +44,29 @@ import { DemoOrder, expectedResult, generateCases, OracleCase } from './oracle';
 import { DEMO_ENV, DEMO_ROLES, DEMO_SIGNER, EphemeralAuthority, SIGNER_STATEMENT, statementText, verifyDemoSignature } from './signing';
 
 export { DEMO_ENV };
-export type DemoGateId = 'G0' | 'G1' | 'G2' | 'G3' | 'G4' | 'G5' | 'G6' | 'G7' | 'G8';
+export type DemoStepId = 'BASELINE' | 'EVIDENCE' | 'G2' | 'G3' | 'STORIES' | 'BUILD' | 'VERIFY' | 'REVIEW' | 'COMPLETE';
+export type DemoStepKind = 'precheck' | 'gate' | 'automated';
 export type DemoStatus = 'PASS' | 'FAIL' | 'BLOCKED' | 'NOT_RUN';
-export const DEMO_GATES: DemoGateId[] = ['G0', 'G1', 'G2', 'G3', 'G4', 'G5', 'G6', 'G7', 'G8'];
+export const DEMO_STEPS: DemoStepId[] = ['BASELINE', 'EVIDENCE', 'G2', 'G3', 'STORIES', 'BUILD', 'VERIFY', 'REVIEW', 'COMPLETE'];
+/** The only human gates, each needing a signed (demo) approval. */
+export const DEMO_GATES = ['G2', 'G3'] as const;
+export type ApprovalGate = (typeof DEMO_GATES)[number];
 
 export const IMPLEMENTER: string = 'deterministic-local-converter';
 export const REVIEWER: string = 'synthetic-demo-reviewer';
 const ORACLE_SEED = 20261105;
 const ORACLE_SEEDED_CASES = 240;
 
-export const GATE_SPECS: Record<DemoGateId, { name: string; prerequisite: DemoGateId | null; responsibility: string; approval_evidence: string }> = {
-  G0: { name: 'Baseline Integrity', prerequisite: null, responsibility: 'runtime: deterministic integrity checks of the synthetic baseline', approval_evidence: 'none (automatic check)' },
-  G1: { name: 'Evidence Verification', prerequisite: 'G0', responsibility: 'runtime: re-parses the synthetic COBOL and verifies the synthetic reverse evidence (reverse agents 1-5 analogue)', approval_evidence: 'none (automatic check)' },
-  G2: { name: 'Requirements Approval', prerequisite: 'G1', responsibility: 'synthetic F1 requirements and F2 data contract; approved by the synthetic demo authority', approval_evidence: `Ed25519 demo approval, role ${DEMO_ROLES.G2}` },
-  G3: { name: 'Architecture Approval', prerequisite: 'G2', responsibility: 'synthetic F3 architecture; approved by the synthetic demo authority', approval_evidence: `Ed25519 demo approval, role ${DEMO_ROLES.G3}` },
-  G4: { name: 'Development Plan Approval', prerequisite: 'G3', responsibility: 'synthetic F4 stories and acceptance criteria; approved by the synthetic demo authority', approval_evidence: `Ed25519 demo approval, role ${DEMO_ROLES.G4} (demo planning only, never Java generation authorisation)` },
-  G5: { name: 'Java Build and Tests', prerequisite: 'G4', responsibility: 'deterministic local converter (F5 analogue, no AI agent); javac -Werror; TestMain functional and boundary scenarios', approval_evidence: 'none (executed build and test evidence)' },
-  G6: { name: 'Independent Verification', prerequisite: 'G5', responsibility: 'independent specification oracle (F6 analogue) written from the requirements only', approval_evidence: 'none (executed comparison evidence)' },
-  G7: { name: 'Independent Review', prerequisite: 'G6', responsibility: `independent review checks (F7 analogue) by ${REVIEWER}`, approval_evidence: 'none (structured review result)' },
-  G8: { name: 'Synthetic Acceptance', prerequisite: 'G7', responsibility: 'synthetic demo authority (not a business owner or production approver)', approval_evidence: `Ed25519 demo acceptance, role ${DEMO_ROLES.G8}` },
+export const STEP_SPECS: Record<DemoStepId, { name: string; kind: DemoStepKind; prerequisite: DemoStepId | null; responsibility: string; approval_evidence: string }> = {
+  BASELINE: { name: 'Baseline pre-check', kind: 'precheck', prerequisite: null, responsibility: 'runtime: deterministic integrity checks of the synthetic baseline', approval_evidence: 'none (automatic check)' },
+  EVIDENCE: { name: 'Evidence pre-check', kind: 'precheck', prerequisite: 'BASELINE', responsibility: 'runtime: re-parses the synthetic COBOL and verifies the synthetic reverse evidence (reverse agents 1-5 analogue)', approval_evidence: 'none (automatic check)' },
+  G2: { name: 'Requirements Approval', kind: 'gate', prerequisite: 'EVIDENCE', responsibility: 'synthetic F1 requirements and F2 data contract; approved by the synthetic demo authority', approval_evidence: `Ed25519 demo approval, role ${DEMO_ROLES.G2}` },
+  G3: { name: 'Architecture Approval', kind: 'gate', prerequisite: 'G2', responsibility: 'synthetic F3 architecture; approved by the synthetic demo authority', approval_evidence: `Ed25519 demo approval, role ${DEMO_ROLES.G3}` },
+  STORIES: { name: 'Story validation', kind: 'automated', prerequisite: 'G3', responsibility: 'runtime: synthetic F4 stories and acceptance criteria checked against the approved requirements and architecture', approval_evidence: 'none (automatic check; there is no story approval gate)' },
+  BUILD: { name: 'Java build and tests', kind: 'automated', prerequisite: 'STORIES', responsibility: 'deterministic local converter (F5 analogue, no AI agent); javac -Werror; TestMain functional and boundary scenarios', approval_evidence: 'none (executed build and test evidence)' },
+  VERIFY: { name: 'Independent verification', kind: 'automated', prerequisite: 'BUILD', responsibility: 'independent specification oracle (F6 analogue) written from the requirements only', approval_evidence: 'none (executed comparison evidence)' },
+  REVIEW: { name: 'Independent review', kind: 'automated', prerequisite: 'VERIFY', responsibility: `independent review checks (F7 analogue) by ${REVIEWER}`, approval_evidence: 'none (structured review result)' },
+  COMPLETE: { name: 'Completion', kind: 'automated', prerequisite: 'REVIEW', responsibility: 'runtime: completes the synthetic run when every earlier step passed, all evidence is intact and the review has no blocking finding', approval_evidence: 'none (completion after the F7 review; no human acceptance gate)' },
 };
 
 export class DemoRefused extends Error {}
@@ -69,14 +77,14 @@ export interface Check {
   detail: string;
 }
 
-/** Test and demonstration hooks. Each one simulates a defect so that the gates can be shown to block it. */
+/** Test and demonstration hooks. Each one simulates a defect so that the steps can be shown to block it. */
 export interface DemoHooks {
   /** Called with each unsigned approval and the signer; returns the record to submit (or null to submit none). */
-  approve?: (gate: 'G2' | 'G3' | 'G4' | 'G8', unsigned: any, sign: (r: any) => any) => any | null;
+  approve?: (gate: ApprovalGate, unsigned: any, sign: (r: any) => any) => any | null;
   /** Called after the converter has written the Java sources (before compilation). */
   afterGeneration?: (javaSrcDir: string) => void;
-  /** Called after a gate result has been written. */
-  afterGate?: (gate: DemoGateId, run: DemoRun) => void;
+  /** Called after a step result has been written. */
+  afterStep?: (step: DemoStepId, run: DemoRun) => void;
 }
 
 export interface DemoOptions {
@@ -162,30 +170,30 @@ export function initRun(o: DemoOptions): DemoRun {
     tc: o.toolchain ?? detectToolchain(), hooks: o.hooks ?? {}, now,
     snapshots: { inputs: treeFingerprint(inputDir), runs: treeFingerprint(ctx.runsDir), reverse: treeFingerprint(path.join(ctx.repoRoot, 'output')), config: shaFile(ctx.configPath) },
   };
-  writeJson(path.join(outDir, 'state.json'), { contract: 'demo/state', environment: DEMO_ENV, demo_run_id: id, started_at: run.startedAt, gates: {} });
+  writeJson(path.join(outDir, 'state.json'), { contract: 'demo/state', environment: DEMO_ENV, demo_run_id: id, started_at: run.startedAt, steps: {} });
   return run;
 }
 
 const stateFile = (run: DemoRun) => path.join(run.outDir, 'state.json');
 export const readState = (run: DemoRun): any => readJson(stateFile(run));
-const resultFile = (run: DemoRun, g: DemoGateId) => path.join(run.outDir, 'gates', `${g}.result.json`);
+const resultFile = (run: DemoRun, g: DemoStepId) => path.join(run.outDir, 'steps', `${g}.result.json`);
 const rel = (run: DemoRun, p: string) => posix(path.relative(run.outDir, p));
 const inRel = (run: DemoRun, p: string) => posix(path.relative(run.inputDir, p));
 const baselineFile = (run: DemoRun) => path.join(run.inputDir, 'baseline.json');
 
 /** A prerequisite counts only when its persisted result is PASS, unchanged since it was written, and on this baseline. */
-export function gatePassed(run: DemoRun, g: DemoGateId): { ok: boolean; detail: string } {
-  const e = readState(run).gates[g];
+export function stepPassed(run: DemoRun, g: DemoStepId): { ok: boolean; detail: string } {
+  const e = readState(run).steps[g];
   if (!e) return { ok: false, detail: `${g} has not been evaluated in demo run ${run.id}` };
-  if (e.demo_gate_status !== 'PASS') return { ok: false, detail: `${g} is ${e.demo_gate_status}` };
+  if (e.demo_status !== 'PASS') return { ok: false, detail: `${g} is ${e.demo_status}` };
   if (shaFile(resultFile(run, g)) !== e.result_sha256) return { ok: false, detail: `${g} result file is missing or changed since it was recorded` };
   if (e.baseline_sha256 !== shaFile(baselineFile(run))) return { ok: false, detail: `${g} passed on a different baseline` };
   return { ok: true, detail: `${g} PASS on this baseline (result ${String(e.result_sha256).slice(0, 12)}…)` };
 }
 
-function priorGates(run: DemoRun, upTo: DemoGateId): Array<{ gate: string; status: string; result_sha256: string }> {
-  const st = readState(run).gates;
-  return DEMO_GATES.slice(0, DEMO_GATES.indexOf(upTo)).map((g) => ({ gate: g, status: st[g]?.demo_gate_status ?? 'NOT_RUN', result_sha256: st[g]?.result_sha256 ?? '0'.repeat(64) }));
+function priorSteps(run: DemoRun, upTo: DemoStepId): Array<{ step: string; status: string; result_sha256: string }> {
+  const st = readState(run).steps;
+  return DEMO_STEPS.slice(0, DEMO_STEPS.indexOf(upTo)).map((g) => ({ step: g, status: st[g]?.demo_status ?? 'NOT_RUN', result_sha256: st[g]?.result_sha256 ?? '0'.repeat(64) }));
 }
 
 /* ------------------------------------------------------------------ */
@@ -242,7 +250,6 @@ function programStatements(prog: AppProgram): Array<{ line: number; paragraph: s
 /* approvals                                                           */
 /* ------------------------------------------------------------------ */
 
-type ApprovalGate = 'G2' | 'G3' | 'G4' | 'G8';
 const approvalFile = (run: DemoRun, g: ApprovalGate) => path.join(run.outDir, 'approvals', `${g}.approval.json`);
 
 function approvalSubject(run: DemoRun, g: ApprovalGate): { kind: string; path: string; sha256: string } {
@@ -251,10 +258,7 @@ function approvalSubject(run: DemoRun, g: ApprovalGate): { kind: string; path: s
     const d = shaFile(inp(run, 'dataContract')) ?? '';
     return { kind: 'requirements_package', path: `${P.requirements} + ${P.dataContract}`, sha256: digest({ requirements: r, data_contract: d }) };
   }
-  if (g === 'G3') return { kind: 'architecture', path: P.architecture, sha256: shaFile(inp(run, 'architecture')) ?? '0'.repeat(64) };
-  if (g === 'G4') return { kind: 'development_plan', path: P.plan, sha256: shaFile(inp(run, 'plan')) ?? '0'.repeat(64) };
-  const review = path.join(run.outDir, 'gates', 'G7.review.json');
-  return { kind: 'review_result', path: rel(run, review), sha256: shaFile(review) ?? '0'.repeat(64) };
+  return { kind: 'architecture', path: P.architecture, sha256: shaFile(inp(run, 'architecture')) ?? '0'.repeat(64) };
 }
 
 /** Presents the statement to the synthetic demo authority and records what comes back (the hook may simulate a defect). */
@@ -267,7 +271,7 @@ export function requestApproval(run: DemoRun, g: ApprovalGate): string | null {
     gate: g,
     decision: 'approved',
     subject: approvalSubject(run, g),
-    binding: { demo_run_id: run.id, baseline_sha256: shaFile(baselineFile(run)) ?? '0'.repeat(64), source_sha256: shaFile(path.join(run.inputDir, 'source', 'DEMOORD1.cbl')) ?? '0'.repeat(64), prior_gates: priorGates(run, g) },
+    binding: { demo_run_id: run.id, baseline_sha256: shaFile(baselineFile(run)) ?? '0'.repeat(64), source_sha256: shaFile(path.join(run.inputDir, 'source', 'DEMOORD1.cbl')) ?? '0'.repeat(64), prior_steps: priorSteps(run, g) },
     signer: { signer_id: DEMO_SIGNER, role: DEMO_ROLES[g], kind: 'SYNTHETIC_DEMO_AUTHORITY', statement: SIGNER_STATEMENT },
     production_authorization: 'NOT_GRANTED',
     signed_at: run.now().toISOString(),
@@ -295,9 +299,9 @@ function verifyApproval(run: DemoRun, g: ApprovalGate): { checks: Check[]; evide
   const baseline = shaFile(baselineFile(run));
   const source = shaFile(path.join(run.inputDir, 'source', 'DEMOORD1.cbl'));
   checks.push(check('approval_run_and_baseline_bound', rec.binding?.demo_run_id === run.id && rec.binding?.baseline_sha256 === baseline && rec.binding?.source_sha256 === source, `run ${rec.binding?.demo_run_id}, baseline ${String(rec.binding?.baseline_sha256).slice(0, 12)}…, source ${String(rec.binding?.source_sha256).slice(0, 12)}…${rec.binding?.demo_run_id === run.id && rec.binding?.baseline_sha256 === baseline && rec.binding?.source_sha256 === source ? '' : ' (does not match this run, baseline and source)'}`));
-  const prior = priorGates(run, g);
-  const priorOk = prior.every((p) => p.status === 'PASS') && canonicalize(prior) === canonicalize(rec.binding?.prior_gates ?? []);
-  checks.push(check('approval_prior_gates_bound', priorOk, priorOk ? `binds the PASS results of ${prior.map((p) => p.gate).join(', ')}` : 'the prior gate results bound by the approval are not the current PASS results'));
+  const prior = priorSteps(run, g);
+  const priorOk = prior.every((p) => p.status === 'PASS') && canonicalize(prior) === canonicalize(rec.binding?.prior_steps ?? []);
+  checks.push(check('approval_prior_steps_bound', priorOk, priorOk ? `binds the PASS results of ${prior.map((p) => p.step).join(', ')}` : 'the prior step results bound by the approval are not the current PASS results'));
   checks.push(check('approval_synthetic_signer', /^synthetic-demo-/.test(rec.signer?.signer_id ?? '') && rec.signer?.kind === 'SYNTHETIC_DEMO_AUTHORITY', `${rec.signer?.signer_id} (${rec.signer?.kind}): a synthetic demo authority, not a real stakeholder`));
   checks.push(check('approval_role', rec.signer?.role === DEMO_ROLES[g], rec.signer?.role === DEMO_ROLES[g] ? `signed in the role ${DEMO_ROLES[g]}` : `signed in the role ${rec.signer?.role}; ${g} needs ${DEMO_ROLES[g]}`));
   checks.push(check('approval_not_production', rec.production_authorization === 'NOT_GRANTED', `production_authorization: ${rec.production_authorization}`));
@@ -319,7 +323,7 @@ interface Outcome {
   details?: Record<string, unknown>;
 }
 
-function g0(run: DemoRun): Outcome {
+function baselineCheck(run: DemoRun): Outcome {
   const checks: Check[] = [];
   const baseline = loadInput(run, 'baseline', 'demo/baseline', checks);
   if (!baseline) return { checks, evidence: [] };
@@ -336,7 +340,7 @@ function g0(run: DemoRun): Outcome {
   return { checks, evidence: [{ path: P.baseline, sha256: shaFile(baselineFile(run))!, role: 'baseline (input)' }, ...(srcSha ? [{ path: baseline.source.path, sha256: srcSha, role: 'synthetic COBOL source (input)' }] : [])], details: { source: { path: baseline.source.path, sha256: srcSha }, inputs: baseline.inputs } };
 }
 
-function g1(run: DemoRun): Outcome {
+function evidenceCheck(run: DemoRun): Outcome {
   const checks: Check[] = [];
   const baseline = readJson(baselineFile(run));
   const rev = loadInput(run, 'reverse', 'demo/reverse-evidence', checks);
@@ -381,7 +385,7 @@ function g1(run: DemoRun): Outcome {
   return { checks, evidence: [{ path: P.reverse, sha256: shaFile(inp(run, 'reverse'))!, role: 'synthetic reverse evidence (input)' }], details: { paragraphs: rev.paragraphs.length, statements: rev.statements.length, fields: rev.fields.length, business_rules: rev.business_rules.length } };
 }
 
-function g2(run: DemoRun): Outcome {
+function gateG2(run: DemoRun): Outcome {
   const checks: Check[] = [];
   const rev = readJson(inp(run, 'reverse'));
   const req = loadInput(run, 'requirements', 'demo/requirements', checks);
@@ -409,7 +413,7 @@ function g2(run: DemoRun): Outcome {
   return { checks, evidence: [{ path: P.requirements, sha256: shaFile(inp(run, 'requirements')) ?? '0'.repeat(64), role: 'requirements (input)' }, { path: P.dataContract, sha256: shaFile(inp(run, 'dataContract')) ?? '0'.repeat(64), role: 'data contract (input)' }, ...a.evidence], details: req ? { requirements: req.requirements.length, examples: req.examples.length, uncertainties: req.uncertainties.length } : {} };
 }
 
-function g3(run: DemoRun): Outcome {
+function gateG3(run: DemoRun): Outcome {
   const checks: Check[] = [];
   const arch = loadInput(run, 'architecture', 'demo/architecture', checks);
   const req = readJson(inp(run, 'requirements'));
@@ -429,7 +433,7 @@ function g3(run: DemoRun): Outcome {
   return { checks, evidence: [{ path: P.architecture, sha256: shaFile(inp(run, 'architecture')) ?? '0'.repeat(64), role: 'architecture (input)' }, ...a.evidence], details: arch ? { components: arch.components.length, decisions: arch.decisions.length } : {} };
 }
 
-function g4(run: DemoRun): Outcome {
+function storyValidation(run: DemoRun): Outcome {
   const checks: Check[] = [];
   const plan = loadInput(run, 'plan', 'demo/development-plan', checks);
   const req = readJson(inp(run, 'requirements'));
@@ -447,19 +451,17 @@ function g4(run: DemoRun): Outcome {
     checks.push(check('epics_consistent', [...storyIds].every((s) => inEpic.has(s)) && [...inEpic].every((s) => storyIds.has(s)), `${plan.epics.length} epic(s) hold exactly the ${storyIds.size} stories`));
     checks.push(check('not_generation_authorisation', plan.java_generation_authorization === 'NOT_GRANTED' && run.ctx.config.generation.java_generation_allowed === false, `plan: java_generation_authorization ${plan.java_generation_authorization}; real configuration generation.java_generation_allowed is ${run.ctx.config.generation.java_generation_allowed} (unchanged)`));
   }
-  const a = verifyApproval(run, 'G4');
-  checks.push(...a.checks);
-  return { checks, evidence: [{ path: P.plan, sha256: shaFile(inp(run, 'plan')) ?? '0'.repeat(64), role: 'development plan (input)' }, ...a.evidence], details: plan ? { stories: plan.stories.length, java_generation_authorization: plan.java_generation_authorization } : {} };
+  return { checks, evidence: [{ path: P.plan, sha256: shaFile(inp(run, 'plan')) ?? '0'.repeat(64), role: 'development plan (input)' }], details: plan ? { stories: plan.stories.length, java_generation_authorization: plan.java_generation_authorization } : {} };
 }
 
 /**
- * Where G5 writes the generated Java and classes. Inside the repository, synthetic Java follows the
+ * Where the BUILD step writes the generated Java and classes. Inside the repository, synthetic Java follows the
  * existing rule for synthetic conversions: it lives only under the git-ignored pilot sandbox
  * forward/pilot/<name>/out/java/ (excluded from backups as reproducible), never beside real evidence.
  * A run directory outside the repository (tests, CI) keeps it inside the run directory.
  */
 export function javaWorkspace(run: DemoRun): string {
-  return inside(run.outDir, run.ctx.repoRoot) ? path.join(run.ctx.forwardDir, 'pilot', 'demo-gates', 'out', 'java', run.id) : path.join(run.outDir, 'g5', 'java');
+  return inside(run.outDir, run.ctx.repoRoot) ? path.join(run.ctx.forwardDir, 'pilot', 'demo-gates', 'out', 'java', run.id) : path.join(run.outDir, 'build', 'java');
 }
 
 function runTestMain(run: DemoRun, classes: string, cls: string, fixtures: string): { exit: number | null; cases: Array<{ id: string; status: string; detail: string }>; summary: string | null; stderr: string[] } {
@@ -476,7 +478,7 @@ function runTestMain(run: DemoRun, classes: string, cls: string, fixtures: strin
   };
 }
 
-function g5(run: DemoRun): Outcome {
+function buildAndTest(run: DemoRun): Outcome {
   const checks: Check[] = [];
   const evidence: Outcome['evidence'] = [];
   const baseline = readJson(baselineFile(run));
@@ -490,7 +492,7 @@ function g5(run: DemoRun): Outcome {
   if (!prog || !tc.java.available) return { checks, evidence };
   const lines = fs.readFileSync(file, 'utf8').replace(/\r\n?/g, '\n').split('\n');
   const em = emitApp(prog, { available: new Set([prog.program_id]), lineText: (_f, l) => (lines[l - 1] ?? '').replace(/\s+$/, '') });
-  const g5dir = path.join(run.outDir, 'g5');
+  const g5dir = path.join(run.outDir, 'build');
   const javaDir = javaWorkspace(run);
   const srcDir = path.join(javaDir, 'src');
   for (const [r, text] of Object.entries(em.files)) {
@@ -505,8 +507,8 @@ function g5(run: DemoRun): Outcome {
     return { path: posix(path.relative(run.ctx.repoRoot, f)), sha256: shaFile(f)! };
   });
   const generation = { implementer: IMPLEMENTER, converter: 'REVFORGE local deterministic converter (STEP-17 parseApp/emitApp); no AI agent', converter_modules: converterModules, input: { path: baseline.source.path, sha256: shaFile(file) }, files: emitted, gaps: em.gaps.length, provenance_note: 'Generated by the existing converter; no Java was written by hand.' };
-  evidence.push({ path: 'g5/generation.json', sha256: writeJson(path.join(g5dir, 'generation.json'), generation), role: 'generation provenance' });
-  evidence.push({ path: 'g5/source-map.json', sha256: writeJson(path.join(g5dir, 'source-map.json'), em.source_map), role: 'COBOL-to-Java source map' });
+  evidence.push({ path: 'build/generation.json', sha256: writeJson(path.join(g5dir, 'generation.json'), generation), role: 'generation provenance' });
+  evidence.push({ path: 'build/source-map.json', sha256: writeJson(path.join(g5dir, 'source-map.json'), em.source_map), role: 'COBOL-to-Java source map' });
   run.hooks.afterGeneration?.(srcDir);
   checks.push(check('no_open_gaps', em.gaps.length === 0, em.gaps.length ? `${em.gaps.length} gap(s): ${em.gaps.map((g) => `${g.gap_id} ${g.kind}`).join(', ')}` : 'the converter translated every statement without a gap placeholder'));
   // Statement-level traceability: every synthetic statement ID maps to a Java line.
@@ -515,7 +517,7 @@ function g5(run: DemoRun): Outcome {
     return { statement_id: s.statement_id, cobol_line: s.line, verb: s.verb, java: m.map((x) => ({ file: x.java_file, line: x.java_line, kind: x.kind })) };
   });
   const untraced = trace.filter((t: any) => !t.java.length);
-  evidence.push({ path: 'g5/traceability.json', sha256: writeJson(path.join(g5dir, 'traceability.json'), { environment: DEMO_ENV, statements: trace }), role: 'statement traceability' });
+  evidence.push({ path: 'build/traceability.json', sha256: writeJson(path.join(g5dir, 'traceability.json'), { environment: DEMO_ENV, statements: trace }), role: 'statement traceability' });
   checks.push(check('source_to_java_traceability', !untraced.length, untraced.length ? `statements without Java: ${untraced.map((t: any) => t.statement_id).join(', ')}` : `all ${trace.length} synthetic statement IDs map to Java lines`));
   // Compilation with the tracked hand-written runtime library.
   const runtimeFiles = listJava(RUNTIME_DIR(run.ctx.forwardDir)).sort();
@@ -530,13 +532,13 @@ function g5(run: DemoRun): Outcome {
   const build = { command: `javac -encoding UTF-8 -Xlint:all -Werror -d ${rel(run, classes)} @javac-args.txt (${runtimeFiles.length} runtime + ${genFiles.length} generated files)`, javac: jv, exit_code: cc.status, diagnostics: `${cc.stdout ?? ''}${cc.stderr ?? ''}`.trim().split(/\r?\n/).filter(Boolean).slice(0, 40), compiled_sources: compiled, emitted_sources: emitted, sources_modified_after_generation: canonicalize(compiled.map((c) => c.sha256)) !== canonicalize(emitted.map((e) => e.sha256)) };
   const classFiles = listFiles(classes).filter((f) => f.endsWith('.class'));
   const classesSha = sha(classFiles.sort().map((f) => `${rel(run, f)}|${shaFile(f)}`).join('\n'));
-  evidence.push({ path: 'g5/build.json', sha256: writeJson(path.join(g5dir, 'build.json'), { ...build, class_files: classFiles.length, classes_sha256: classesSha }), role: 'build record' });
+  evidence.push({ path: 'build/build.json', sha256: writeJson(path.join(g5dir, 'build.json'), { ...build, class_files: classFiles.length, classes_sha256: classesSha }), role: 'build record' });
   checks.push(check('compiled', cc.status === 0 && classFiles.length > 0, cc.status === 0 ? `javac exit 0 (-Werror), ${classFiles.length} class files` : `javac exit ${cc.status}: ${build.diagnostics.slice(0, 3).join(' | ')}`));
   if (cc.status !== 0) return { checks, evidence, details: { build } };
   // Functional and boundary scenarios (hand-written from the requirements).
   const fx = readJson(inp(run, 'functional'));
   const t = runTestMain(run, classes, `${em.pkg}.${em.cls}`, inp(run, 'functional'));
-  evidence.push({ path: 'g5/functional-results.json', sha256: writeJson(path.join(g5dir, 'functional-results.json'), { environment: DEMO_ENV, command: `java -cp ${rel(run, classes)} revforge.cobol.testing.TestMain ${em.pkg}.${em.cls} ${P.functional}`, exit_code: t.exit, summary: t.summary, cases: t.cases, stderr: t.stderr }), role: 'functional test results' });
+  evidence.push({ path: 'build/functional-results.json', sha256: writeJson(path.join(g5dir, 'functional-results.json'), { environment: DEMO_ENV, command: `java -cp ${rel(run, classes)} revforge.cobol.testing.TestMain ${em.pkg}.${em.cls} ${P.functional}`, exit_code: t.exit, summary: t.summary, cases: t.cases, stderr: t.stderr }), role: 'functional test results' });
   checks.push(check('test_harness_completed', t.exit === 0 && !!t.summary, `TestMain exit ${t.exit}; ${t.summary ?? 'no SUMMARY line'}`));
   const generated = t.cases.filter((c) => /^(INIT|C88) /.test(c.id));
   checks.push(check('generated_checks', generated.length > 0 && generated.every((c) => c.status === 'PASS'), `${generated.filter((c) => c.status === 'PASS').length}/${generated.length} VALUE-clause and level-88 checks passed`));
@@ -563,12 +565,12 @@ function fixtureFor(c: OracleCase): any {
   return { id: c.id, title: c.title, kind: 'call', set, expect: { outcome: 'GOBACK', items: { 'LS-SUBTOTAL-CENTS': String(e.subtotal), 'LS-DISCOUNT-CENTS': String(e.discount), 'LS-SHIPPING-CENTS': String(e.shipping), 'LS-TOTAL-CENTS': String(e.total), 'LS-RETURN-CODE': String(e.return_code) } } };
 }
 
-function g6(run: DemoRun): Outcome {
+function independentVerification(run: DemoRun): Outcome {
   const checks: Check[] = [];
   const evidence: Outcome['evidence'] = [];
   const req = readJson(inp(run, 'requirements'));
-  const g5r = readJson(resultFile(run, 'G5'));
-  const g6dir = path.join(run.outDir, 'g6');
+  const g5r = readJson(resultFile(run, 'BUILD'));
+  const g6dir = path.join(run.outDir, 'verify');
   // Independence: the compiled oracle module loads nothing (no converter, Java runtime or process launcher).
   const oracleJs = require.resolve('./oracle');
   const code = fs.readFileSync(oracleJs, 'utf8');
@@ -576,19 +578,19 @@ function g6(run: DemoRun): Outcome {
   checks.push(check('oracle_independent', !imports.length, imports.length ? `the oracle module loads ${imports.join(', ')}` : `the oracle module (${path.basename(oracleJs)}, sha256 ${sha(code).slice(0, 12)}…) loads no other module: it cannot call the converter, the Java or the runtime`));
   const exProblems = req.examples.filter((e: any) => canonicalize(expectedResult(e.order as DemoOrder)) !== canonicalize(e.expected)).map((e: any) => `${e.id}: oracle ${canonicalize(expectedResult(e.order))} vs requirement ${canonicalize(e.expected)}`);
   checks.push(check('oracle_matches_requirement_examples', !exProblems.length, exProblems.length ? exProblems.slice(0, 3).join(' | ') : `the oracle reproduces all ${req.examples.length} worked examples of the requirements`));
-  // The Java under test is exactly the build G5 verified.
+  // The Java under test is exactly the build the BUILD step verified.
   const classesDir = path.join(run.outDir, g5r.details.java.classes_dir);
   const classFiles = listFiles(classesDir).filter((f) => f.endsWith('.class'));
   const classesSha = sha(classFiles.sort().map((f) => `${rel(run, f)}|${shaFile(f)}`).join('\n'));
-  checks.push(check('java_is_g5_build', classesSha === g5r.details.build.classes_sha256, classesSha === g5r.details.build.classes_sha256 ? `${classFiles.length} class files unchanged since G5` : 'the compiled classes changed after G5'));
+  checks.push(check('java_is_verified_build', classesSha === g5r.details.build.classes_sha256, classesSha === g5r.details.build.classes_sha256 ? `${classFiles.length} class files unchanged since BUILD` : 'the compiled classes changed after BUILD'));
   const cases = generateCases(ORACLE_SEED, ORACLE_SEEDED_CASES, req.examples);
-  evidence.push({ path: 'g6/oracle-cases.json', sha256: writeJson(path.join(g6dir, 'oracle-cases.json'), { environment: DEMO_ENV, seed: ORACLE_SEED, note: 'Inputs and expected results computed by the independent oracle before the Java was run.', cases }), role: 'oracle cases and expectations' });
+  evidence.push({ path: 'verify/oracle-cases.json', sha256: writeJson(path.join(g6dir, 'oracle-cases.json'), { environment: DEMO_ENV, seed: ORACLE_SEED, note: 'Inputs and expected results computed by the independent oracle before the Java was run.', cases }), role: 'oracle cases and expectations' });
   const fxFile = path.join(g6dir, 'oracle-fixture.json');
-  evidence.push({ path: 'g6/oracle-fixture.json', sha256: writeJson(fxFile, { program: 'DEMOORD1', provenance: 'generated from g6/oracle-cases.json', scenarios: cases.map(fixtureFor) }), role: 'oracle fixture for TestMain' });
+  evidence.push({ path: 'verify/oracle-fixture.json', sha256: writeJson(fxFile, { program: 'DEMOORD1', provenance: 'generated from verify/oracle-cases.json', scenarios: cases.map(fixtureFor) }), role: 'oracle fixture for TestMain' });
   const t = runTestMain(run, classesDir, `${g5r.details.java.package}.${g5r.details.java.class}`, fxFile);
   const byId = new Map(t.cases.map((c) => [c.id, c]));
   const results = cases.map((c) => ({ id: c.id, category: c.category, status: byId.get(c.id)?.status ?? 'NOT_RUN', detail: byId.get(c.id)?.detail ?? '' }));
-  evidence.push({ path: 'g6/comparison-results.json', sha256: writeJson(path.join(g6dir, 'comparison-results.json'), { environment: DEMO_ENV, exit_code: t.exit, summary: t.summary, results }), role: 'Java vs oracle comparison' });
+  evidence.push({ path: 'verify/comparison-results.json', sha256: writeJson(path.join(g6dir, 'comparison-results.json'), { environment: DEMO_ENV, exit_code: t.exit, summary: t.summary, results }), role: 'Java vs oracle comparison' });
   checks.push(check('comparison_executed', t.exit === 0 && !!t.summary && results.every((r) => r.status !== 'NOT_RUN'), `TestMain exit ${t.exit}; ${t.summary ?? 'no SUMMARY'}; ${results.length} cases run`));
   const mism = results.filter((r) => r.status !== 'PASS');
   checks.push(check('java_matches_oracle', !mism.length, mism.length ? `${mism.length} of ${results.length} cases differ: ${mism.slice(0, 3).map((m) => `${m.id} (${cases.find((c) => c.id === m.id)?.title}): ${m.detail}`).join(' | ')}` : `all ${results.length} cases match the oracle`));
@@ -611,20 +613,21 @@ function g6(run: DemoRun): Outcome {
   };
 }
 
-function g7(run: DemoRun): Outcome {
+function independentReview(run: DemoRun): Outcome {
   const checks: Check[] = [];
   const findings: Array<{ id: string; severity: 'critical' | 'major' | 'minor' | 'info'; blocking: boolean; detail: string }> = [];
   const finding = (c: Check, severity: 'critical' | 'major' = 'critical') => {
     checks.push(c);
     if (!c.ok) findings.push({ id: `RF-${String(findings.length + 1).padStart(2, '0')}`, severity, blocking: true, detail: `${c.id}: ${c.detail}` });
   };
-  const state = readState(run).gates;
+  const state = readState(run).steps;
   const results: Record<string, any> = {};
-  for (const g of DEMO_GATES.slice(0, 7)) results[g] = fs.existsSync(resultFile(run, g)) ? readJson(resultFile(run, g)) : null;
-  // 1. Gate results and evidence integrity.
-  const changedResults = DEMO_GATES.slice(0, 7).filter((g) => shaFile(resultFile(run, g)) !== state[g]?.result_sha256);
-  finding(check('gate_results_intact', !changedResults.length, changedResults.length ? `changed or missing results: ${changedResults.join(', ')}` : 'G0-G6 result files match their recorded SHA-256'));
-  const evid = DEMO_GATES.slice(0, 7).flatMap((g) => (results[g]?.evidence ?? []).map((e: any) => ({ g, ...e })));
+  const earlier = DEMO_STEPS.slice(0, DEMO_STEPS.indexOf('REVIEW'));
+  for (const g of earlier) results[g] = fs.existsSync(resultFile(run, g)) ? readJson(resultFile(run, g)) : null;
+  // 1. Step results and evidence integrity.
+  const changedResults = earlier.filter((g) => shaFile(resultFile(run, g)) !== state[g]?.result_sha256);
+  finding(check('step_results_intact', !changedResults.length, changedResults.length ? `changed or missing results: ${changedResults.join(', ')}` : `${earlier.join(', ')} result files match their recorded SHA-256`));
+  const evid = earlier.flatMap((g) => (results[g]?.evidence ?? []).map((e: any) => ({ g, ...e })));
   const changedEvidence = evid.filter((e: any) => {
     const base = /\(input\)$/.test(e.role) ? run.inputDir : run.outDir;
     return shaFile(path.join(base, e.path)) !== e.sha256;
@@ -635,9 +638,9 @@ function g7(run: DemoRun): Outcome {
   const plan = readJson(inp(run, 'plan'));
   const rev = readJson(inp(run, 'reverse'));
   const fx = readJson(inp(run, 'functional'));
-  const fr = fs.existsSync(path.join(run.outDir, 'g5', 'functional-results.json')) ? readJson(path.join(run.outDir, 'g5', 'functional-results.json')) : { cases: [] };
-  const cr = fs.existsSync(path.join(run.outDir, 'g6', 'comparison-results.json')) ? readJson(path.join(run.outDir, 'g6', 'comparison-results.json')) : { results: [] };
-  const oc = fs.existsSync(path.join(run.outDir, 'g6', 'oracle-cases.json')) ? readJson(path.join(run.outDir, 'g6', 'oracle-cases.json')) : { cases: [] };
+  const fr = fs.existsSync(path.join(run.outDir, 'build', 'functional-results.json')) ? readJson(path.join(run.outDir, 'build', 'functional-results.json')) : { cases: [] };
+  const cr = fs.existsSync(path.join(run.outDir, 'verify', 'comparison-results.json')) ? readJson(path.join(run.outDir, 'verify', 'comparison-results.json')) : { results: [] };
+  const oc = fs.existsSync(path.join(run.outDir, 'verify', 'oracle-cases.json')) ? readJson(path.join(run.outDir, 'verify', 'oracle-cases.json')) : { cases: [] };
   const passF = new Set<string>(fr.cases.filter((c: any) => c.status === 'PASS').map((c: any) => c.id));
   const passO = new Set<string>(cr.results.filter((c: any) => c.status === 'PASS').map((c: any) => c.id));
   const coverage = req.requirements.map((q: any) => ({
@@ -649,17 +652,17 @@ function g7(run: DemoRun): Outcome {
   }));
   const gaps = coverage.filter((c: any) => !c.stories.length || !c.functional_tests.length || !c.oracle_cases);
   finding(check('requirements_coverage', !gaps.length, gaps.length ? `incompletely verified: ${gaps.map((c: any) => c.requirement_id).join(', ')}` : `each of ${coverage.length} requirements has a story, passing functional tests and matching oracle cases`));
-  const trace = fs.existsSync(path.join(run.outDir, 'g5', 'traceability.json')) ? readJson(path.join(run.outDir, 'g5', 'traceability.json')).statements : [];
+  const trace = fs.existsSync(path.join(run.outDir, 'build', 'traceability.json')) ? readJson(path.join(run.outDir, 'build', 'traceability.json')).statements : [];
   const javaFor = new Set<string>(trace.filter((t: any) => t.java.length).map((t: any) => t.statement_id));
   const brokenChains = rev.business_rules.filter((r: any) => !r.statement_ids.every((s: string) => javaFor.has(s)) || !req.requirements.some((q: any) => q.rule_ids.includes(r.rule_id))).map((r: any) => r.rule_id);
   finding(check('traceability_complete', !brokenChains.length && trace.length === rev.statements.length, brokenChains.length ? `broken rule chains: ${brokenChains.join(', ')}` : `every rule traces rule -> requirement -> story -> Java statements -> passing tests`));
   // 3. Build evidence and unexplained behaviour.
-  const build = fs.existsSync(path.join(run.outDir, 'g5', 'build.json')) ? readJson(path.join(run.outDir, 'g5', 'build.json')) : null;
+  const build = fs.existsSync(path.join(run.outDir, 'build', 'build.json')) ? readJson(path.join(run.outDir, 'build', 'build.json')) : null;
   finding(check('build_evidence', !!build && build.exit_code === 0 && build.class_files > 0, build ? `javac exit ${build.exit_code}, ${build.class_files} class files, ${build.javac}` : 'no build record'));
   const now = (build?.compiled_sources ?? []).map((c: any) => ({ ...c, now: shaFile(path.join(run.outDir, c.path)) }));
   const edited = build ? build.sources_modified_after_generation || now.some((c: any) => c.now !== c.sha256) : true;
-  finding(check('no_unexplained_behaviour', !edited && results.G5?.details?.sources_modified_after_generation === false, edited ? 'the compiled Java differs from what the converter emitted (an unexplained manual change)' : 'the Java that was built and tested is exactly the converter output; every Java statement maps to a COBOL line'));
-  const sm = fs.existsSync(path.join(run.outDir, 'g5', 'source-map.json')) ? readJson(path.join(run.outDir, 'g5', 'source-map.json')) : { statements: [], gaps: [] };
+  finding(check('no_unexplained_behaviour', !edited && results.BUILD?.details?.sources_modified_after_generation === false, edited ? 'the compiled Java differs from what the converter emitted (an unexplained manual change)' : 'the Java that was built and tested is exactly the converter output; every Java statement maps to a COBOL line'));
+  const sm = fs.existsSync(path.join(run.outDir, 'build', 'source-map.json')) ? readJson(path.join(run.outDir, 'build', 'source-map.json')) : { statements: [], gaps: [] };
   const knownLines = new Set<number>(rev.statements.map((s: any) => s.line));
   const strays = sm.statements.filter((m: any) => !knownLines.has(m.cobol_line));
   finding(check('no_fabricated_behaviour', !strays.length && !(sm.gaps ?? []).length, strays.length ? `Java statements mapped to no synthetic COBOL statement: ${strays.length}` : `${sm.statements.length} Java statement mappings all point to recorded COBOL statements; no gap placeholders`));
@@ -671,61 +674,64 @@ function g7(run: DemoRun): Outcome {
   finding(check('real_configuration_unchanged', shaFile(run.ctx.configPath) === run.snapshots.config && cfg.generation?.java_generation_allowed === false && cfg.bmad_governance?.mandatory === true, `forward.config.json ${shaFile(run.ctx.configPath) === run.snapshots.config ? 'unchanged' : 'CHANGED'}; generation.java_generation_allowed ${cfg.generation?.java_generation_allowed}; bmad_governance.mandatory ${cfg.bmad_governance?.mandatory}`));
   finding(check('real_records_untouched', treeFingerprint(run.ctx.runsDir) === run.snapshots.runs && treeFingerprint(path.join(run.ctx.repoRoot, 'output')) === run.snapshots.reverse, 'the real workflow runs and the reverse-engineering artifacts were not modified by this run'));
   // 5. Separation of responsibilities.
-  const approvers = (['G2', 'G3', 'G4'] as const).map((g) => (fs.existsSync(approvalFile(run, g)) ? readJson(approvalFile(run, g)).signer?.signer_id : null));
+  const approvers = DEMO_GATES.map((g) => (fs.existsSync(approvalFile(run, g)) ? readJson(approvalFile(run, g)).signer?.signer_id : null));
   const separated = REVIEWER !== IMPLEMENTER && approvers.every((a) => a && a !== IMPLEMENTER && a !== REVIEWER) && !/oracle/i.test(IMPLEMENTER);
-  finding(check('separation_of_duties', separated, `implementer ${IMPLEMENTER}; test authors: hand-written fixtures (G5) and the independent oracle (G6); reviewer ${REVIEWER}; approver ${approvers[0] ?? 'none'}`), 'major');
-  const reviewFile = path.join(run.outDir, 'gates', 'G7.review.json');
+  finding(check('separation_of_duties', separated, `implementer ${IMPLEMENTER}; test authors: hand-written fixtures (BUILD) and the independent oracle (VERIFY); reviewer ${REVIEWER}; approver ${approvers[0] ?? 'none'}`), 'major');
+  const reviewFile = path.join(run.outDir, 'steps', 'REVIEW.review.json');
   const review = { contract: 'demo/review', environment: DEMO_ENV, demo_run_id: run.id, reviewer: REVIEWER, implementer: IMPLEMENTER, reviewed_at: run.now().toISOString(), coverage, findings, decision: findings.some((f) => f.blocking) ? 'FAIL' : 'PASS', production_authorization: 'NOT_GRANTED' };
   const reviewSha = writeJson(reviewFile, review);
   return { checks, evidence: [{ path: rel(run, reviewFile), sha256: reviewSha, role: 'structured review result' }], details: { findings: findings.length, blocking_findings: findings.filter((f) => f.blocking).length, decision: review.decision } };
 }
 
-function g8(run: DemoRun): Outcome {
+function completion(run: DemoRun): Outcome {
   const checks: Check[] = [];
-  const a = verifyApproval(run, 'G8');
-  checks.push(...a.checks);
-  const prior = DEMO_GATES.slice(0, 8).map((g) => ({ g, ...gatePassed(run, g) }));
-  checks.push(check('g0_to_g7_passed', prior.every((p) => p.ok), prior.every((p) => p.ok) ? 'G0-G7 all PASS for this demo baseline' : prior.filter((p) => !p.ok).map((p) => p.detail).join('; ')));
-  const ev = DEMO_GATES.slice(0, 8).flatMap((g) => (fs.existsSync(resultFile(run, g)) ? readJson(resultFile(run, g)).evidence ?? [] : []));
+  const earlier = DEMO_STEPS.slice(0, DEMO_STEPS.indexOf('COMPLETE'));
+  const prior = earlier.map((g) => ({ g, ...stepPassed(run, g) }));
+  checks.push(check('earlier_steps_passed', prior.every((p) => p.ok), prior.every((p) => p.ok) ? `${earlier.join(', ')} all PASS for this demo baseline` : prior.filter((p) => !p.ok).map((p) => p.detail).join('; ')));
+  const ev = earlier.flatMap((g) => (fs.existsSync(resultFile(run, g)) ? readJson(resultFile(run, g)).evidence ?? [] : []));
   const bad: string[] = ev.filter((e: any) => shaFile(path.join(/\(input\)$/.test(e.role) ? run.inputDir : run.outDir, e.path)) !== e.sha256).map((e: any) => e.path);
   // Also the artifacts the evidence describes: every baselined input, the Java that was built and its classes.
   const baseline = readJson(baselineFile(run));
   for (const i of [baseline.source, ...baseline.inputs]) if (shaFile(path.join(run.inputDir, i.path)) !== i.sha256) bad.push(i.path);
-  const buildFile = path.join(run.outDir, 'g5', 'build.json');
+  const buildFile = path.join(run.outDir, 'build', 'build.json');
   const build = fs.existsSync(buildFile) ? readJson(buildFile) : null;
   for (const c of build?.compiled_sources ?? []) if (shaFile(path.join(run.outDir, c.path)) !== c.sha256) bad.push(c.path);
-  const g5d = fs.existsSync(resultFile(run, 'G5')) ? readJson(resultFile(run, 'G5')).details : null;
+  const g5d = fs.existsSync(resultFile(run, 'BUILD')) ? readJson(resultFile(run, 'BUILD')).details : null;
   if (g5d?.java) {
     const cdir = path.join(run.outDir, g5d.java.classes_dir);
     if (sha(listFiles(cdir).filter((f) => f.endsWith('.class')).sort().map((f) => `${rel(run, f)}|${shaFile(f)}`).join('\n')) !== g5d.build.classes_sha256) bad.push(`${g5d.java.classes_dir} (class files)`);
   }
   const artifacts = 1 + baseline.inputs.length + (build?.compiled_sources?.length ?? 0) + (g5d?.java ? 1 : 0);
   checks.push(check('evidence_complete', ev.length > 0 && !!build && !bad.length, bad.length ? `missing or changed evidence: ${bad.join(', ')}` : `${ev.length} evidence files and ${artifacts} inputs, Java sources and class sets present and unchanged`));
-  const reviewFile = path.join(run.outDir, 'gates', 'G7.review.json');
+  const reviewFile = path.join(run.outDir, 'steps', 'REVIEW.review.json');
   const review = fs.existsSync(reviewFile) ? readJson(reviewFile) : null;
   const critical = (review?.findings ?? []).filter((f: any) => f.blocking || f.severity === 'critical');
+  const approvals = fs.existsSync(path.join(run.outDir, 'approvals')) ? fs.readdirSync(path.join(run.outDir, 'approvals')).sort() : [];
+  checks.push(check('approvals_g2_g3_only', approvals.join() === 'G2.approval.json,G3.approval.json', `signed demo approvals: ${approvals.join(', ') || 'none'} (the only human gates are G2 and G3; completion needs no human acceptance)`));
+  const granted = ev.length === 0 || [...earlier.map((g) => (fs.existsSync(resultFile(run, g)) ? readJson(resultFile(run, g)).production_authorization : null)), review?.production_authorization].some((x) => x !== 'NOT_GRANTED');
+  checks.push(check('production_not_granted', !granted, granted ? 'a step result or the review grants or omits production_authorization' : 'every step result and the review say production_authorization NOT_GRANTED'));
   checks.push(check('no_unresolved_critical_findings', !!review && review.decision === 'PASS' && !critical.length, review ? `review decision ${review.decision}; ${critical.length} unresolved critical finding(s)` : 'no review result'));
   const ok = checks.every((c) => c.ok);
-  return { checks, evidence: a.evidence, details: { acceptance: ok ? 'SYNTHETIC_DEMO_ACCEPTED' : 'NOT_ACCEPTED', meaning: 'Accepted by a synthetic demo authority for the synthetic example only. Not business-owner, production or real-project acceptance.' } };
+  return { checks, evidence: review ? [{ path: rel(run, reviewFile), sha256: shaFile(reviewFile)!, role: 'structured review result' }] : [], details: { completion: ok ? 'SYNTHETIC_DEMO_COMPLETED' : 'NOT_COMPLETED', meaning: 'Completed automatically after the independent review of the synthetic example. Not business-owner, production or real-project acceptance.' } };
 }
 
-const EVALUATORS: Record<DemoGateId, (run: DemoRun) => Outcome> = { G0: g0, G1: g1, G2: g2, G3: g3, G4: g4, G5: g5, G6: g6, G7: g7, G8: g8 };
+const EVALUATORS: Record<DemoStepId, (run: DemoRun) => Outcome> = { BASELINE: baselineCheck, EVIDENCE: evidenceCheck, G2: gateG2, G3: gateG3, STORIES: storyValidation, BUILD: buildAndTest, VERIFY: independentVerification, REVIEW: independentReview, COMPLETE: completion };
 
-/** Evaluates one demo gate (BLOCKED unless its prerequisite has a verified PASS) and persists the result. */
-export function evaluateDemoGate(run: DemoRun, gate: DemoGateId): any {
-  const spec = GATE_SPECS[gate];
+/** Evaluates one demo step (BLOCKED unless its prerequisite has a verified PASS) and persists the result. */
+export function evaluateDemoStep(run: DemoRun, step: DemoStepId): any {
+  const spec = STEP_SPECS[step];
   const at = run.now().toISOString();
   let status: DemoStatus;
   let outcome: Outcome;
   let reason: string;
-  const pre = spec.prerequisite ? gatePassed(run, spec.prerequisite) : { ok: true, detail: 'no prerequisite' };
+  const pre = spec.prerequisite ? stepPassed(run, spec.prerequisite) : { ok: true, detail: 'no prerequisite' };
   if (!pre.ok) {
     status = 'BLOCKED';
     outcome = { checks: [check('prerequisite', false, pre.detail)], evidence: [] };
     reason = `prerequisite ${spec.prerequisite} has not passed: ${pre.detail}`;
   } else {
     try {
-      outcome = EVALUATORS[gate](run);
+      outcome = EVALUATORS[step](run);
     } catch (e) {
       outcome = { checks: [check('evaluator_error', false, `the evaluator failed: ${(e as Error).message}`)], evidence: [] };
     }
@@ -735,13 +741,14 @@ export function evaluateDemoGate(run: DemoRun, gate: DemoGateId): any {
     reason = failed.length ? failed.map((c) => `${c.id}: ${c.detail}`).join(' | ') : !outcome.checks.length ? 'no check was evaluated' : `${outcome.checks.length} checks passed`;
   }
   const result = {
-    contract: 'demo/gate-result',
+    contract: 'demo/step-result',
     contract_version: '1.0',
     environment: DEMO_ENV,
     demo_run_id: run.id,
-    gate,
+    step,
+    kind: spec.kind,
     name: spec.name,
-    demo_gate_status: status,
+    demo_status: status,
     reason,
     prerequisite: spec.prerequisite,
     responsibility: spec.responsibility,
@@ -752,14 +759,14 @@ export function evaluateDemoGate(run: DemoRun, gate: DemoGateId): any {
     production_authorization: 'NOT_GRANTED',
     details: { ...(outcome.details ?? {}), baseline_sha256: shaFile(baselineFile(run)) },
   };
-  const v = run.ctx.contracts.validate('demo/gate-result', result);
-  if (!v.valid) throw new Error(`demo gate result violates its contract: ${v.errors.join('; ')}`);
-  const file = resultFile(run, gate);
+  const v = run.ctx.contracts.validate('demo/step-result', result);
+  if (!v.valid) throw new Error(`demo step result violates its contract: ${v.errors.join('; ')}`);
+  const file = resultFile(run, step);
   const resultSha = writeJson(file, result);
   const st = readState(run);
-  st.gates[gate] = { demo_gate_status: status, result_file: rel(run, file), result_sha256: resultSha, baseline_sha256: result.details.baseline_sha256, evaluated_at: at };
+  st.steps[step] = { demo_status: status, result_file: rel(run, file), result_sha256: resultSha, baseline_sha256: result.details.baseline_sha256, evaluated_at: at };
   writeJson(stateFile(run), st);
-  run.hooks.afterGate?.(gate, run);
+  run.hooks.afterStep?.(step, run);
   return result;
 }
 
@@ -767,13 +774,13 @@ export function evaluateDemoGate(run: DemoRun, gate: DemoGateId): any {
 /* BMad simulation and real-project status (read-only)                 */
 /* ------------------------------------------------------------------ */
 
-const STAGE_INPUT: Record<string, { gate: DemoGateId; activity: string; input: keyof typeof P | null }> = {
-  'BMAD-PRD': { gate: 'G2', activity: 'requirements (F1) -> PRD rendering of the approved requirements', input: 'requirements' },
-  'BMAD-ARCH': { gate: 'G3', activity: 'architecture (F3)', input: 'architecture' },
-  'BMAD-EPICS': { gate: 'G4', activity: 'epics and stories (F4)', input: 'plan' },
-  'BMAD-SPRINT': { gate: 'G4', activity: 'sprint planning (F4)', input: 'plan' },
-  'BMAD-BUILD': { gate: 'G5', activity: 'implementation (F5; here the deterministic converter)', input: null },
-  'BMAD-REVIEW': { gate: 'G7', activity: 'code review (F7)', input: null },
+const STAGE_INPUT: Record<string, { step: DemoStepId; activity: string; input: keyof typeof P | null }> = {
+  'BMAD-PRD': { step: 'G2', activity: 'requirements (F1) -> PRD rendering of the approved requirements', input: 'requirements' },
+  'BMAD-ARCH': { step: 'G3', activity: 'architecture (F3)', input: 'architecture' },
+  'BMAD-EPICS': { step: 'STORIES', activity: 'epics and stories (F4)', input: 'plan' },
+  'BMAD-SPRINT': { step: 'STORIES', activity: 'sprint planning (F4)', input: 'plan' },
+  'BMAD-BUILD': { step: 'BUILD', activity: 'implementation (F5; here the deterministic converter)', input: null },
+  'BMAD-REVIEW': { step: 'REVIEW', activity: 'code review (F7)', input: null },
 };
 
 export function simulateBmad(run: DemoRun): any {
@@ -786,12 +793,12 @@ export function simulateBmad(run: DemoRun): any {
     pre.push(check('binding_present', !!b && b.workflow_id === s.workflow_id && b.agent === s.agent, b ? `${s.binding_id} -> ${b.workflow_id} (agent ${b.agent})` : `${s.binding_id} is not in bindings.json`));
     pre.push(check('release_pinned', doc.release?.package === 'bmad-method' && doc.release?.version === '6.12.4', `release ${doc.release?.package}@${doc.release?.version}`));
     for (const g of (b?.requires_gates ?? []) as string[]) {
-      const demoGate = (DEMO_GATES as string[]).includes(g) ? (g as DemoGateId) : null;
-      const p = demoGate ? gatePassed(run, demoGate) : { ok: false, detail: `unknown gate ${g}` };
+      const demoGate = (DEMO_GATES as readonly string[]).includes(g) ? (g as DemoStepId) : null;
+      const p = demoGate ? stepPassed(run, demoGate) : { ok: false, detail: `unknown gate ${g}` };
       pre.push(check(`requires_${g}`, p.ok, `binding requires ${g}: demo ${p.detail}`));
     }
-    const gp = gatePassed(run, map.gate);
-    pre.push(check('demo_stage_gate', gp.ok, `${map.gate}: ${gp.detail}`));
+    const gp = stepPassed(run, map.step);
+    pre.push(check('demo_stage_step', gp.ok, `${map.step}: ${gp.detail}`));
     const inputs = map.input ? [{ path: P[map.input], sha256: shaFile(inp(run, map.input)) ?? '0'.repeat(64) }] : [];
     const facts = { receipt_id: `SIM-${run.id}-${s.binding_id}`, binding_id: s.binding_id, mode: 'SIMULATED', accepted: true, intact: true, evidence_status: 'SIMULATED', scope: 'programs:DEMOORD1', scope_sha256: 'synthetic', documents_intact: true };
     const counted = receiptCounts(facts, s.binding_id, 'programs:DEMOORD1', 'synthetic');
@@ -808,7 +815,7 @@ export function simulateBmad(run: DemoRun): any {
       mode: 'SIMULATED',
       counts_as_bmad_execution: false,
       preflight: { decision: pre.every((c) => c.ok) ? 'WOULD_BE_ELIGIBLE_IN_DEMO' : 'BLOCKED', checks: pre },
-      demo_gate: map.gate,
+      demo_step: map.step,
       inputs,
       real_receipt_check: { function: 'bmad/governance.receiptCounts', counts: counted.ok, reason: counted.reason },
       note: 'Simulation only: no BMad workflow, installer or provider was invoked. The real receipt counter refuses this record as execution evidence.',
@@ -825,9 +832,9 @@ export function simulateBmad(run: DemoRun): any {
     simulated_stages: records.length,
     would_be_eligible_in_demo: records.filter((r) => r.preflight.decision === 'WOULD_BE_ELIGIBLE_IN_DEMO').length,
     counted_as_bmad_execution: records.filter((r) => r.real_receipt_check.counts).length,
-    acceptance_outside_bmad: 'G6-G8 stay outside BMad, as in the real design',
+    acceptance_outside_bmad: 'independent verification (F6) and completion after the F7 review stay outside BMad, as in the real design',
     real_governed_workflow: 'BMAD_BLOCKED (unchanged: no LIVE receipt exists)',
-    stages: records.map((r) => ({ binding_id: r.binding_id, workflow_id: r.workflow_id, agent: r.agent, stage: r.stage, activity: r.activity, demo_gate: r.demo_gate, mode: r.mode, preflight: r.preflight.decision, counts_as_bmad_execution: r.counts_as_bmad_execution, real_receipt_check: r.real_receipt_check.reason })),
+    stages: records.map((r) => ({ binding_id: r.binding_id, workflow_id: r.workflow_id, agent: r.agent, stage: r.stage, activity: r.activity, demo_step: r.demo_step, mode: r.mode, preflight: r.preflight.decision, counts_as_bmad_execution: r.counts_as_bmad_execution, real_receipt_check: r.real_receipt_check.reason })),
   };
 }
 
@@ -864,7 +871,7 @@ export function realProjectStatus(ctx: RuntimeContext): any {
     real_bmad_execution: 'NOT_EXECUTED (no LIVE receipt)',
     legacy_equivalence: 'NOT_ESTABLISHED',
     production_readiness: 'NOT_PRODUCTION_READY',
-    engineering_quality_gates: 'SOURCE_READINESS and CONVERSION_VALIDATION (pilot/gates.ts) are unchanged and separate from the demo gates',
+    engineering_quality_gates: 'SOURCE_READINESS and CONVERSION_VALIDATION (pilot/gates.ts) are unchanged and separate from the demo steps',
   };
 }
 
@@ -877,26 +884,26 @@ export const LIMITATIONS = [
   'Demo approvals are signed with an ephemeral key created for this run; they are not real human, business-owner or production approvals.',
   'production_authorization is NOT_GRANTED: no real gate, approval, receipt or Java generation authorisation was created or changed.',
   'BMad lifecycle steps are SIMULATED; no BMad workflow was executed and real mandatory BMad execution remains blocked.',
-  'G6 compares the Java with an independent specification oracle; no COBOL runtime was executed, so legacy equivalence is NOT_ESTABLISHED.',
-  'The real modernization is unchanged: real G2 is UNVERIFIED and G3-G8 BLOCKED, the gap register stays OPEN, and the project is not production ready.',
+  'VERIFY compares the Java with an independent specification oracle; no COBOL runtime was executed, so legacy equivalence is NOT_ESTABLISHED.',
+  'The real modernization is unchanged: real G2 is UNVERIFIED and G3 BLOCKED, the gap register stays OPEN, and the project is not production ready.',
 ];
 
 export function runDemo(o: DemoOptions): { summary: any; run: DemoRun; exitCode: number } {
   const run = initRun(o);
   const statuses: Record<string, any> = {};
-  let stopped: DemoGateId | null = null;
-  for (const g of DEMO_GATES) {
+  let stopped: DemoStepId | null = null;
+  for (const g of DEMO_STEPS) {
     if (stopped) {
-      statuses[g] = { gate: g, name: GATE_SPECS[g].name, demo_gate_status: 'NOT_RUN', reason: `not run: ${stopped} did not pass`, result: null };
+      statuses[g] = { step: g, kind: STEP_SPECS[g].kind, name: STEP_SPECS[g].name, demo_status: 'NOT_RUN', reason: `not run: ${stopped} did not pass`, result: null };
       continue;
     }
-    if (g === 'G2' || g === 'G3' || g === 'G4' || g === 'G8') requestApproval(run, g);
-    const r = evaluateDemoGate(run, g);
-    statuses[g] = { gate: g, name: r.name, demo_gate_status: r.demo_gate_status, reason: r.reason, result: rel(run, resultFile(run, g)), checks_passed: r.checks.filter((c: Check) => c.ok).length, checks_total: r.checks.length };
-    if (r.demo_gate_status !== 'PASS') stopped = g;
+    if (g === 'G2' || g === 'G3') requestApproval(run, g);
+    const r = evaluateDemoStep(run, g);
+    statuses[g] = { step: g, kind: r.kind, name: r.name, demo_status: r.demo_status, reason: r.reason, result: rel(run, resultFile(run, g)), checks_passed: r.checks.filter((c: Check) => c.ok).length, checks_total: r.checks.length };
+    if (r.demo_status !== 'PASS') stopped = g;
   }
   const bmad = simulateBmad(run);
-  const accepted = !stopped && readJson(resultFile(run, 'G8')).details?.acceptance === 'SYNTHETIC_DEMO_ACCEPTED';
+  const accepted = !stopped && readJson(resultFile(run, 'COMPLETE')).details?.completion === 'SYNTHETIC_DEMO_COMPLETED';
   const baseline = readJson(baselineFile(run));
   const summary = {
     contract: 'demo/run-summary',
@@ -905,12 +912,12 @@ export function runDemo(o: DemoOptions): { summary: any; run: DemoRun; exitCode:
     demo_run_id: run.id,
     started_at: run.startedAt,
     finished_at: run.now().toISOString(),
-    verdict: accepted ? 'SYNTHETIC_DEMO_ACCEPTED' : 'SYNTHETIC_DEMO_FAILED',
+    verdict: accepted ? 'SYNTHETIC_DEMO_COMPLETED' : 'SYNTHETIC_DEMO_FAILED',
     stopped_at: stopped,
     production_authorization: 'NOT_GRANTED',
     real_bmad_execution: 'NOT_EXECUTED',
     legacy_equivalence: 'NOT_ESTABLISHED',
-    gates: DEMO_GATES.map((g) => statuses[g]),
+    steps: DEMO_STEPS.map((g) => statuses[g]),
     baseline: { file: P.baseline, sha256: shaFile(baselineFile(run)), source: baseline.source, inputs: baseline.inputs },
     bmad,
     real_project_status: realProjectStatus(run.ctx),
@@ -933,8 +940,8 @@ const cell = (s: unknown) => String(s ?? '').replace(/\|/g, '\\|').replace(/\r?\
 
 export function renderReport(run: DemoRun, s: any): string {
   const L: string[] = [];
-  const result = (g: DemoGateId) => (fs.existsSync(resultFile(run, g)) ? readJson(resultFile(run, g)) : null);
-  L.push('# Synthetic G0–G8 gate demonstration report', '');
+  const result = (g: DemoStepId) => (fs.existsSync(resultFile(run, g)) ? readJson(resultFile(run, g)) : null);
+  L.push('# Synthetic two-gate (G2, G3) workflow demonstration report', '');
   L.push(`> **Environment: ${DEMO_ENV}.** This report is about one synthetic example program. It grants no production authorisation, records no real approval and executes no BMad workflow. The real modernization status is listed at the end and is unchanged.`, '');
   L.push(`**Verdict: ${s.verdict}**${s.stopped_at ? ` (stopped at ${s.stopped_at})` : ''}`, '');
   L.push('| Field | Value |', '|---|---|');
@@ -943,44 +950,45 @@ export function renderReport(run: DemoRun, s: any): string {
   L.push('## Baseline', '', '| File | SHA-256 |', '|---|---|', `| \`${s.baseline.source.path}\` (synthetic COBOL) | \`${s.baseline.source.sha256}\` |`);
   for (const i of s.baseline.inputs) L.push(`| \`${i.path}\` (${i.role}) | \`${i.sha256}\` |`);
   L.push(`| \`${s.baseline.file}\` | \`${s.baseline.sha256}\` |`, '');
-  L.push('## Gate results', '', '| Gate | Result | Checks | Responsibility | Approval evidence |', '|---|---|---|---|---|');
-  for (const g of s.gates) {
-    const spec = GATE_SPECS[g.gate as DemoGateId];
-    L.push(`| ${g.gate} ${g.name} | **${LABEL[g.demo_gate_status as DemoStatus]}** | ${g.checks_total ? `${g.checks_passed}/${g.checks_total}` : '–'} | ${cell(spec.responsibility)} | ${cell(spec.approval_evidence)} |`);
+  L.push('## Step results', '', 'Only **G2** and **G3** are gates (human decisions with a signed demo approval). BASELINE and EVIDENCE are automated pre-checks; STORIES, BUILD, VERIFY, REVIEW and COMPLETE are automated steps.', '');
+  L.push('| Step | Kind | Result | Checks | Responsibility | Approval evidence |', '|---|---|---|---|---|---|');
+  for (const g of s.steps) {
+    const spec = STEP_SPECS[g.step as DemoStepId];
+    L.push(`| ${g.step} ${g.name} | ${spec.kind} | **${LABEL[g.demo_status as DemoStatus]}** | ${g.checks_total ? `${g.checks_passed}/${g.checks_total}` : '–'} | ${cell(spec.responsibility)} | ${cell(spec.approval_evidence)} |`);
   }
   L.push('');
-  for (const g of DEMO_GATES) {
+  for (const g of DEMO_STEPS) {
     const r = result(g);
-    L.push(`### ${g} ${GATE_SPECS[g].name}: ${r ? LABEL[r.demo_gate_status as DemoStatus] : 'NOT RUN'}`, '');
+    L.push(`### ${g} ${STEP_SPECS[g].name}: ${r ? LABEL[r.demo_status as DemoStatus] : 'NOT RUN'}`, '');
     if (!r) {
-      L.push('Not evaluated: an earlier gate did not pass.', '');
+      L.push('Not evaluated: an earlier step did not pass.', '');
       continue;
     }
-    if (r.demo_gate_status !== 'PASS') L.push(`**Reason:** ${cell(r.reason)}`, '');
+    if (r.demo_status !== 'PASS') L.push(`**Reason:** ${cell(r.reason)}`, '');
     L.push('| Check | Result | Detail |', '|---|---|---|');
     for (const c of r.checks) L.push(`| ${c.id} | ${c.ok ? 'pass' : '**FAIL**'} | ${cell(c.detail)} |`);
     if (r.evidence.length) L.push('', `Evidence: ${r.evidence.map((e: any) => `\`${e.path}\``).join(', ')}`);
-    if (g === 'G6' && r.details?.establishes) L.push('', `**Establishes:** ${r.details.establishes}`, '', `**Does not establish:** ${r.details.does_not_establish}`);
-    if (g === 'G8' && r.details?.acceptance) L.push('', `**Acceptance:** ${r.details.acceptance}. ${r.details.meaning}`);
+    if (g === 'VERIFY' && r.details?.establishes) L.push('', `**Establishes:** ${r.details.establishes}`, '', `**Does not establish:** ${r.details.does_not_establish}`);
+    if (g === 'COMPLETE' && r.details?.completion) L.push('', `**Completion:** ${r.details.completion}. ${r.details.meaning}`);
     L.push('');
   }
-  const g5 = result('G5');
+  const g5 = result('BUILD');
   if (g5?.details?.build) {
     L.push('## Build and tests', '', `- Compiler: ${cell(g5.details.build.javac)}; exit code ${g5.details.build.exit_code}; ${g5.details.build.class_files} class files (javac -Werror).`);
     if (g5.details.tests) L.push(`- Functional scenarios: ${g5.details.tests.passed}/${g5.details.tests.scenarios} passed (${g5.details.tests.boundary} boundary); ${g5.details.tests.generated_checks} generated VALUE/level-88 checks.`);
-    const g6 = result('G6');
+    const g6 = result('VERIFY');
     if (g6?.details?.cases) L.push(`- Independent oracle: ${g6.details.cases.matched}/${g6.details.cases.total} cases matched (${g6.details.cases.boundary} boundary, ${g6.details.cases.negative} negative, ${g6.details.cases.seeded} seeded, ${g6.details.cases.example} worked examples; seed ${g6.details.cases.seed}).`);
     L.push('');
   }
   L.push('## BMad lifecycle (SIMULATED)', '', `Release ${s.bmad.release}; mandatory in the real configuration: ${s.bmad.mandatory_in_real_configuration}. Live execution: **${s.bmad.live_execution}**. Counted as BMad execution: ${s.bmad.counted_as_bmad_execution} of ${s.bmad.simulated_stages}.`, '');
-  L.push('| Binding | Workflow | Agent | Forward activity | Demo gate | Mode | Demo preflight | Real receipt counter |', '|---|---|---|---|---|---|---|---|');
-  for (const b of s.bmad.stages) L.push(`| ${b.binding_id} | ${b.workflow_id} | ${b.agent} | ${cell(b.activity)} | ${b.demo_gate} | ${b.mode} | ${b.preflight} | ${cell(b.real_receipt_check)} |`);
+  L.push('| Binding | Workflow | Agent | Forward activity | Demo step | Mode | Demo preflight | Real receipt counter |', '|---|---|---|---|---|---|---|---|');
+  for (const b of s.bmad.stages) L.push(`| ${b.binding_id} | ${b.workflow_id} | ${b.agent} | ${cell(b.activity)} | ${b.demo_step} | ${b.mode} | ${b.preflight} | ${cell(b.real_receipt_check)} |`);
   L.push('', `${s.bmad.acceptance_outside_bmad}. Real governed workflow: ${s.bmad.real_governed_workflow}.`, '');
-  L.push('## Negative paths', '', 'The demo test suite (`forward/tests/synthetic-gate-demonstration.test.ts`) runs the demonstration with injected defects and checks that each one is blocked at the right gate with a diagnostic and a nonzero exit code. Run it with `npm run demo:test`.', '');
+  L.push('## Negative paths', '', 'The demo test suite (`forward/tests/synthetic-gate-demonstration.test.ts`) runs the demonstration with injected defects and checks that each one is blocked at the right step with a diagnostic and a nonzero exit code. Run it with `npm run demo:test`.', '');
   L.push('## Real project status (read-only, unchanged)', '', '| Item | Value |', '|---|---|');
   const rp = s.real_project_status;
   L.push(`| generation.java_generation_allowed | ${rp.generation_java_generation_allowed} |`, `| bmad_governance.mandatory | ${rp.bmad_governance_mandatory} |`, `| approval.trust_store | ${rp.approval_trust_store ?? 'null (not configured)'} |`);
-  L.push(`| Real workflow gates | ${cell(typeof rp.real_workflow_gates === 'string' ? rp.real_workflow_gates : Object.entries(rp.real_workflow_gates).map(([k, v]) => `${k} ${v}`).join(', '))} |`);
+  L.push(`| Real workflow gates (G2, G3) | ${cell(typeof rp.real_workflow_gates === 'string' ? rp.real_workflow_gates : Object.entries(rp.real_workflow_gates).map(([k, v]) => `${k} ${v}`).join(', '))} |`);
   L.push(`| Master gap register | ${cell(typeof rp.gap_register === 'object' ? `${rp.gap_register.records} records, ${rp.gap_register.open} OPEN` : rp.gap_register)} |`, `| Business-rule identities | ${rp.business_rule_identities} |`);
   L.push(`| Real BMad execution | ${rp.real_bmad_execution} |`, `| Legacy equivalence | ${rp.legacy_equivalence} |`, `| Production readiness | ${rp.production_readiness} |`, `| Engineering quality gates | ${cell(rp.engineering_quality_gates)} |`, '');
   L.push('## Limitations', '', ...s.limitations.map((x: string) => `- ${x}`), '');

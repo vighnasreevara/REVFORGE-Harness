@@ -141,13 +141,13 @@ export function validateResult(v: ValidationContext, result: any): { ok: boolean
     case 'bmad/output-sprint': {
       const known = new Set<string>((v.inputs.stories?.story_ids ?? []) as string[]);
       const bad = result.stories.map((s: any) => s.story_id).filter((id: string) => !known.has(id));
-      add('sprint_stories_approved', !bad.length, bad.length ? `stories that are not approved inputs: ${bad.join(', ')}` : 'sprint covers approved stories only');
+      add('sprint_stories_known', !bad.length, bad.length ? `stories that are not in the validated story inputs: ${bad.join(', ')}` : 'sprint covers validated input stories only');
       break;
     }
     case 'bmad/output-build': {
       const known = new Set<string>((v.inputs.stories?.story_ids ?? []) as string[]);
       const bad = [...result.story_ids, ...result.files.flatMap((f: any) => f.story_ids)].filter((id: string) => !known.has(id));
-      add('build_stories_approved', !bad.length, bad.length ? `implements stories that are not approved inputs: ${[...new Set(bad)].join(', ')}` : 'implements approved stories only');
+      add('build_stories_known', !bad.length, bad.length ? `implements stories that are not in the validated story inputs: ${[...new Set(bad)].join(', ')}` : 'implements validated input stories only');
       const outside = result.files.filter((f: any) => !P.allowed_outputs.java_target_dir || !within(path.resolve(v.ctx.repoRoot, f.path), path.resolve(v.ctx.repoRoot, P.allowed_outputs.java_target_dir)));
       add('build_in_java_target', !outside.length, outside.length ? `files outside the authorised Java target: ${outside.map((f: any) => f.path).join(', ')}` : 'every file is inside the authorised Java target directory');
       const hashBad = result.files.filter((f: any) => sha256File(path.resolve(v.ctx.repoRoot, f.path)) !== f.sha256);

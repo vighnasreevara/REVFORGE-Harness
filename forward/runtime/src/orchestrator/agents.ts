@@ -38,8 +38,10 @@ export interface AgentSpec {
   drafts_state: string | null;
   /** Coverage units the agent works through in dispatch batches ([] = whole-system work). */
   unit_kinds: Array<'program' | 'copybook'>;
-  /** Gate that must have PASSed (on the current baseline) before dispatch. */
+  /** Gate (G2 or G3) that must have PASSed on the current baseline before dispatch. */
   requires_gate: string | null;
+  /** Pre-checks that must have PASSed on the current baseline before dispatch. */
+  requires_prechecks?: Array<'BASELINE' | 'EVIDENCE'>;
   inputs: Array<{ kind: InputKind; required: boolean }>;
   outputs: Array<{ name: string; kind: 'json' | 'markdown' | 'java' | 'build'; contract: string | null }>;
   skills: [string, string];
@@ -70,7 +72,8 @@ export const AGENTS: AgentSpec[] = [
     responsibility: 'Analyse reverse evidence and prepare source-grounded candidate requirements, uncertainty records and decision records.',
     dispatch_states: ['EVIDENCE_VALIDATED', 'REQUIREMENTS_DRAFTED'],
     drafts_state: 'REQUIREMENTS_DRAFTED',
-    requires_gate: 'G1',
+    requires_gate: null,
+    requires_prechecks: ['BASELINE', 'EVIDENCE'],
     inputs: [
       { kind: 'reverse:brd', required: true },
       { kind: 'reverse:rules', required: true },
@@ -100,7 +103,8 @@ export const AGENTS: AgentSpec[] = [
     responsibility: 'Analyse COBOL records, fields, copybook layouts and file semantics and produce data mappings, file-operation requirements and unresolved layout findings.',
     dispatch_states: ['EVIDENCE_VALIDATED', 'REQUIREMENTS_DRAFTED'],
     drafts_state: null,
-    requires_gate: 'G1',
+    requires_gate: null,
+    requires_prechecks: ['BASELINE', 'EVIDENCE'],
     inputs: [
       { kind: 'reverse:data', required: true },
       { kind: 'reverse:parser', required: true },
@@ -181,9 +185,9 @@ export const AGENTS: AgentSpec[] = [
     name: 'fe-java-developer',
     title: 'Java Developer',
     responsibility: 'Implement authorised development stories as Java sources with a Maven build, an implementation manifest and build results, inside the explicitly authorised target directory only.',
-    dispatch_states: ['STORIES_APPROVED', 'IMPLEMENTING'],
+    dispatch_states: ['STORIES_DRAFTED', 'IMPLEMENTING'],
     drafts_state: null,
-    requires_gate: 'G4',
+    requires_gate: 'G3',
     inputs: [
       { kind: 'receipt:F4', required: true },
       { kind: 'receipt:F3', required: true },
@@ -210,7 +214,7 @@ export const AGENTS: AgentSpec[] = [
     responsibility: 'Independently test the generated Java against approved requirements and independent fixtures, and assess equivalence with available COBOL reference behaviour, without repairing implementation code.',
     dispatch_states: ['IMPLEMENTATION_BUILT', 'TESTING'],
     drafts_state: null,
-    requires_gate: 'G5',
+    requires_gate: null,
     inputs: [
       { kind: 'receipt:F5', required: true },
       { kind: 'receipt:F1', required: true },
@@ -238,7 +242,7 @@ export const AGENTS: AgentSpec[] = [
     responsibility: 'Review the implementation and audit end-to-end traceability from COBOL source IDs through requirements, architecture, stories, Java and tests, and recommend acceptance or rejection.',
     dispatch_states: ['REVIEWING'],
     drafts_state: null,
-    requires_gate: 'G6',
+    requires_gate: null,
     inputs: [
       { kind: 'receipt:F1', required: true },
       { kind: 'receipt:F3', required: true },

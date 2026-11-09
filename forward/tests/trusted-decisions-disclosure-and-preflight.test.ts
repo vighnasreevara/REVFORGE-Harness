@@ -33,7 +33,7 @@ import { executeLive } from '../runtime/src/bmad/executor';
 import { preparePacket } from '../runtime/src/bmad/adapter';
 import { cleanup, Fixture } from './helpers/fixture';
 import { KP, SIGNERS, signText, wfOf } from './helpers/g2fixture';
-import { approveStories, BRAVO, DESIGN_SIGNERS, designFixture, editTrust, trustStorePath } from './helpers/designfixture';
+import { BRAVO, readyForImplementation, DESIGN_SIGNERS, designFixture, editTrust, trustStorePath } from './helpers/designfixture';
 
 const fixtures: Fixture[] = [];
 beforeEach(() => {
@@ -84,7 +84,8 @@ describe('STEP 8 — trust provisioning', () => {
     const { f, ctx } = designFixture(fixtures, { approveG2: false, resolve: false });
     const d = trustDoctor(ctx);
     assert.equal(d.status, 'TRUST_CONFIGURED', JSON.stringify(d.checks.filter((c) => c.status === 'fail')));
-    for (const r of ['requirements_approver', 'business_sme', 'technical_authority', 'exception_approver', 'architecture_approver', 'story_approver', 'data_owner']) assert.ok(d.roles.find((x) => x.role === r)?.covered, r);
+    for (const r of ['requirements_approver', 'business_sme', 'technical_authority', 'exception_approver', 'architecture_approver', 'data_owner']) assert.ok(d.roles.find((x) => x.role === r)?.covered, r);
+    assert.equal(d.roles.find((x) => x.role === 'story_approver'), undefined, 'there is no story approval role (G4 removed)');
     assert.equal(d.checks.find((c) => c.id === 'location')!.status, 'warn', 'inside the repository is flagged');
     assert.ok(d.checks.find((c) => c.id === `signer:${SIGNERS.agent}`)!.status === 'fail', 'agent identities are never usable');
     editTrust(f, (j) => j.signers.push({ signer_id: 'zoe.both', public_key_pem: pem(mk()), roles: ['requirements_approver', 'business_sme'], valid_until: '2099-01-01T00:00:00Z' }));
@@ -380,8 +381,8 @@ describe('STEP 8 — protection', () => {
     decisionDossiers(wfOf(ctx), BRAVO);
     approvalReadiness(wfOf(ctx), BRAVO);
     preflight(wfOf(ctx), 'bmad-prd', BRAVO, { probe: () => 'probe 1.0', record: true });
-    approveStories(f, ctx, dk);
-    assert.equal(wfOf(ctx).state.state, 'STORIES_APPROVED', 'G3/G4 approval paths remain intact');
+    readyForImplementation(f, ctx, dk);
+    assert.equal(wfOf(ctx).state.state, 'STORIES_DRAFTED', 'G3 approval and story validation paths remain intact');
     assert.deepEqual(wfOf(ctx).store.list('receipts').filter((x) => receipts.some((r) => r[0] === x)).map((x) => [x, sha256File(wfOf(ctx).store.p('receipts', x))]), receipts);
     assert.deepEqual(approvals.map((a) => [a[0], sha256File(wfOf(ctx).store.p('approvals', a[0] as string))]), approvals);
     assert.equal(sha256File(path.join(f.repoRoot, 'output', 'rules', 'rules_artifact.json')), out);

@@ -110,7 +110,7 @@ export function preflight(wf: Workflow, bindingKey: string, scope: string, opts:
     const scopeFiles = ev ? scopeSourceFiles(snap, ev.selector_text) : [];
     const authorized = new Map<string, string>((auth?.authorization.source_files ?? []).map((f: any) => [f.path, f.sha256]));
     const changed = scopeFiles.filter((f) => authorized.has(f.path) && authorized.get(f.path) !== f.sha256);
-    add('source_hashes_current', snap.g0.status === 'PASS' && !changed.length && !!auth, snap.g0.status !== 'PASS' ? `baseline not intact (G0 ${snap.g0.status})` : !auth ? 'no authorization to compare source hashes against' : changed.length ? `source changed since authorization: ${changed.map((f) => f.path).join(', ')}` : `${authorized.size} authorized file(s) match the current source`);
+    add('source_hashes_current', snap.g0.status === 'PASS' && !changed.length && !!auth, snap.g0.status !== 'PASS' ? `baseline not intact (baseline pre-check ${snap.g0.status})` : !auth ? 'no authorization to compare source hashes against' : changed.length ? `source changed since authorization: ${changed.map((f) => f.path).join(', ')}` : `${authorized.size} authorized file(s) match the current source`);
 
     // What would be exposed: the scope's source files the mapped inputs derive from, plus every non-vendor workspace file.
     const exposed = new Set<string>();
