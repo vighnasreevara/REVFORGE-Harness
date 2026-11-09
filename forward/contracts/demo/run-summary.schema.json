@@ -2,7 +2,7 @@
   "$schema": "http://json-schema.org/draft-07/schema#",
   "$id": "https://revforge.local/contracts/demo/run-summary.schema.json",
   "title": "Synthetic demo run summary",
-  "description": "Machine-readable summary of one synthetic G0-G8 demonstration run.",
+  "description": "Machine-readable summary of one synthetic two-gate (G2, G3) workflow demonstration run.",
   "type": "object",
   "additionalProperties": true,
   "required": [
@@ -17,7 +17,7 @@
     "real_bmad_execution",
     "legacy_equivalence",
     "real_project_status",
-    "gates",
+    "steps",
     "baseline",
     "bmad",
     "limitations"
@@ -44,7 +44,7 @@
     },
     "verdict": {
       "enum": [
-        "SYNTHETIC_DEMO_ACCEPTED",
+        "SYNTHETIC_DEMO_COMPLETED",
         "SYNTHETIC_DEMO_FAILED"
       ]
     },
@@ -60,29 +60,37 @@
     "real_project_status": {
       "type": "object"
     },
-    "gates": {
+    "steps": {
       "type": "array",
       "minItems": 9,
       "items": {
         "type": "object",
         "additionalProperties": false,
         "required": [
-          "gate",
+          "step",
+          "kind",
           "name",
-          "demo_gate_status",
+          "demo_status",
           "reason",
           "result"
         ],
         "properties": {
-          "gate": {
+          "step": {
             "type": "string",
             "minLength": 1
+          },
+          "kind": {
+            "enum": [
+              "precheck",
+              "gate",
+              "automated"
+            ]
           },
           "name": {
             "type": "string",
             "minLength": 1
           },
-          "demo_gate_status": {
+          "demo_status": {
             "enum": [
               "PASS",
               "FAIL",

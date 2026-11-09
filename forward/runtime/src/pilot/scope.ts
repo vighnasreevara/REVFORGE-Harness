@@ -81,7 +81,7 @@ export function behaviourScope(wf: Workflow, scope: string): any {
     contract: 'pilot/verified-scope',
     contract_version: '1.0',
     status: 'NON_AUTHORITATIVE',
-    note: 'Behaviour classification and candidate selection only. A VERIFIED_CANDIDATE is not approved, and nothing is generated before genuine signed G2/G3/G4 approvals and an explicit generation authorisation.',
+    note: 'Behaviour classification and candidate selection only. A VERIFIED_CANDIDATE is not approved, and nothing is generated before genuine signed G2 and G3 approvals and an explicit generation authorisation.',
     generated_at: snap.at.toISOString(),
     baseline: { run_id: wf.run.runId, manifest_sha256: wf.run.manifestSha256 },
     scope: sel,

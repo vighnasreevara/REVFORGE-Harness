@@ -56,7 +56,7 @@ Return an `agent-receipt`.
 
 ## Quality gates
 
-Requires **G3 PASS**. Feeds **G4 (approved development stories)**, a human-approval gate that is also the precondition for any Java generation.
+Requires **G3 PASS**. The runtime validates the story set automatically (requirement coverage, no unsupported behaviour, approved components, dependency order, concrete acceptance criteria, testing expectations and the end-to-end trace); F5 can be dispatched only while that validation passes. There is no separate story approval gate.
 
 ## Error handling
 

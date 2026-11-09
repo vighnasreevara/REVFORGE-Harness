@@ -66,7 +66,7 @@ function facts(o: Partial<Facts> = {}): Facts {
   return {
     state: 'REQUIREMENTS_APPROVED',
     baseline: { run_id: 'R', manifest_sha256: SHA },
-    gates: { G2: true, G3: false, G4: false, G5: false, G6: false },
+    gates: { G2: true, G3: false },
     g2: { status: 'PASS', reason: 'ok', scope: BRAVO, scope_sha256: SHA, approval_id: 'APR-0001' },
     scope: { text: BRAVO, sha256: SHA, readiness: 'READY', error: null },
     release: { ok: true, detail: 'ok' },
@@ -222,26 +222,30 @@ describe('STEP 6 — eligibility rules', () => {
     assert.equal(ok.eligible, true, ok.reasons.join(' | '));
   });
 
-  test('11. sprint planning needs G3 and G4', () => {
+  test('11. sprint planning needs G3 and validated F4 stories (there is no G4)', () => {
     const b = bindingOf('BMAD-SPRINT');
-    const d = decide(b, 'MOCK', facts({ state: 'STORIES_APPROVED', gates: { G2: true, G3: true, G4: false }, receipts: { F4: 1 } }));
-    assert.ok(failed(d).includes('gate_G4'));
-    assert.ok(failed(d).includes('approved_stories'));
-    assert.equal(decide(b, 'MOCK', facts({ state: 'STORIES_APPROVED', gates: { G2: true, G3: true, G4: true }, receipts: { F4: 1 } })).eligible, true);
+    assert.deepEqual(b.requires_gates, ['G2', 'G3']);
+    const noG3 = decide(b, 'MOCK', facts({ state: 'STORIES_DRAFTED', gates: { G2: true, G3: false }, receipts: { F4: 1 } }));
+    assert.ok(failed(noG3).includes('gate_G3'));
+    const noStories = decide(b, 'MOCK', facts({ state: 'STORIES_DRAFTED', gates: { G2: true, G3: true }, receipts: {} }));
+    assert.ok(failed(noStories).includes('validated_stories'));
+    const invalid = decide(b, 'MOCK', facts({ state: 'STORIES_DRAFTED', gates: { G2: true, G3: true }, receipts: { F4: 1 }, stories_valid: { ok: false, reason: 'requirements_coverage: REQ-1 has no story' } }));
+    assert.ok(failed(invalid).includes('validated_stories'), 'an F4 receipt alone is not enough: the story set must validate');
+    assert.equal(decide(b, 'MOCK', facts({ state: 'STORIES_DRAFTED', gates: { G2: true, G3: true }, receipts: { F4: 1 }, stories_valid: { ok: true, reason: 'ok' } })).eligible, true);
   });
 
-  test('12. build needs G2/G3/G4, approved stories, an authorised Java directory and generation authorisation', () => {
+  test('12. build needs G2/G3, validated stories, an authorised Java directory and generation authorisation', () => {
     const b = bindingOf('BMAD-BUILD');
-    const base = { state: 'STORIES_APPROVED', gates: { G2: true, G3: true, G4: true }, receipts: { F4: 1 } };
+    const base = { state: 'STORIES_DRAFTED', gates: { G2: true, G3: true }, receipts: { F4: 1 }, stories_valid: { ok: true, reason: 'ok' } };
     const d = decide(b, 'MOCK', facts(base));
     assert.deepEqual(failed(d).sort(), ['generation_authorized', 'java_target_dir']);
     assert.equal(decide(b, 'MOCK', facts({ ...base, java_target_dir: '/x/java', generation_authorized: true })).eligible, true);
   });
 
-  test('13. review needs real implementation artefacts, G6 with an F6 receipt and a reviewer other than the implementer', () => {
+  test('13. review needs real implementation artefacts, an F6 receipt and a reviewer other than the implementer', () => {
     const b = bindingOf('BMAD-REVIEW');
-    const all = { G2: true, G3: true, G4: true, G5: true, G6: true };
-    const none = decide(b, 'MOCK', facts({ state: 'REVIEWING', gates: { ...all, G6: false } }));
+    const all = { G2: true, G3: true };
+    const none = decide(b, 'MOCK', facts({ state: 'REVIEWING', gates: all }));
     assert.ok(failed(none).includes('implementation_artifacts'));
     assert.ok(failed(none).includes('independent_test_receipt'));
     const self = decide({ ...b, agent: 'F5' }, 'MOCK', facts({ state: 'REVIEWING', gates: all, receipts: { F5: 1, F6: 1 } }));

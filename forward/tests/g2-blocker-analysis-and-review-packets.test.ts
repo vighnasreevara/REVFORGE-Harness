@@ -389,7 +389,6 @@ describe('S45-E. gates stay protected', () => {
     assert.equal(signResolution(ctx, f, `SCOPE-${f.programs[1].name}`, 'resolved_no_change', k.agent, SIGNERS.agent, 'business_sme').recorded, false, 'agents cannot resolve decisions');
     void approvalStatement;
     assert.equal(runGate(wfOf(ctx), 'G2').status, 'UNVERIFIED');
-    for (const g of ['G4', 'G5', 'G6', 'G7', 'G8'] as const) assert.equal(runGate(wfOf(ctx), g).status, 'BLOCKED', g);
     assert.equal(runGate(wfOf(ctx), 'G3').status, 'BLOCKED');
     assert.equal(generationAuthorized(wfOf(ctx).run, wfOf(ctx).state), false);
     assert.throws(() => prepare(wfOf(ctx), 'F5'), /may only be dispatched/);

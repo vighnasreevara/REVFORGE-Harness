@@ -11,13 +11,19 @@ import { evaluateG2Gate, evaluateScopeText } from '../approval/approvals';
 import { gatePassed } from '../orchestrator/gates';
 import { acceptedReceipts, generationAuthorized, policyRoots, Workflow } from '../orchestrator/orchestrator';
 import { sha256File } from '../core/fsutil';
+
+function storyValidity(wf: Workflow): { ok: boolean; reason: string } {
+  const d = require('../design/approvals') as typeof import('../design/approvals');
+  const v = d.validateStorySet(wf);
+  return { ok: v.ok, reason: v.reason };
+}
 import * as path from 'path';
 import { Binding, BindingValidation } from './bindings';
 import { Check, ReleaseVerification } from './release';
 
 export type Mode = 'DISCOVERY' | 'DRY_RUN' | 'MOCK' | 'LIVE';
 export const MODES: Mode[] = ['DISCOVERY', 'DRY_RUN', 'MOCK', 'LIVE'];
-export const GATE_IDS = ['G2', 'G3', 'G4', 'G5', 'G6'] as const;
+export const GATE_IDS = ['G2', 'G3'] as const;
 
 export interface UpstreamReceipt {
   receipt_id: string;
@@ -44,6 +50,8 @@ export interface Facts {
   generation_authorized: boolean;
   receipts: Record<string, number>;
   upstream: UpstreamReceipt[];
+  /** The runtime's automated validation of the accepted F4 story set (null when there is none). */
+  stories_valid?: { ok: boolean; reason: string } | null;
 }
 
 /** Accepted, non-mock BMad receipts usable as upstream evidence for `binding` on this scope digest. */
@@ -71,16 +79,17 @@ export function decide(b: Binding, mode: Mode, f: Facts): { eligible: boolean; c
         add(r, n > 0, n ? `${n} recorded architecture result(s) for this scope` : 'no accepted F3 receipt or recorded BMad architecture result for this scope (mock results never count)');
         break;
       }
-      case 'approved_stories': {
+      case 'validated_stories': {
         const n = (f.receipts.F4 ?? 0) + liveUpstream(f, 'BMAD-EPICS', f.scope.sha256).length;
-        add(r, n > 0 && !!f.gates.G4, n && f.gates.G4 ? `${n} story result(s), approved at G4` : `stories are not approved (${n} story result(s); G4 ${f.gates.G4 ? 'PASS' : 'not passed'})`);
+        const v = f.stories_valid ?? null;
+        add(r, n > 0 && !!v?.ok, !n ? 'no accepted F4 story result for this scope (mock results never count)' : v?.ok ? `${n} story result(s); the F4 story set validates (${v.reason})` : `the F4 story set does not validate: ${v?.reason ?? 'no accepted F4 story set to validate'}`);
         break;
       }
       case 'java_target_dir':
         add(r, !!f.java_target_dir, f.java_target_dir ? `authorised Java target ${f.java_target_dir}` : 'no Java target directory is authorised (orchestrator.java_target_dir is null)');
         break;
       case 'generation_authorized':
-        add(r, f.generation_authorized, f.generation_authorized ? 'Java generation authorised (config flag and G4 PASS)' : 'Java generation is not authorised (generation.java_generation_allowed and G4 PASS are both required)');
+        add(r, f.generation_authorized, f.generation_authorized ? 'Java generation authorised (config flag and G3 PASS)' : 'Java generation is not authorised (generation.java_generation_allowed and G3 PASS are both required)');
         break;
       case 'implementation_artifacts': {
         const n = (f.receipts.F5 ?? 0) + liveUpstream(f, 'BMAD-BUILD', f.scope.sha256).length;
@@ -88,7 +97,7 @@ export function decide(b: Binding, mode: Mode, f: Facts): { eligible: boolean; c
         break;
       }
       case 'independent_test_receipt':
-        add(r, (f.receipts.F6 ?? 0) > 0 && !!f.gates.G6, (f.receipts.F6 ?? 0) > 0 && f.gates.G6 ? `${f.receipts.F6} accepted F6 receipt(s); G6 PASS` : 'independent F6 testing has not been recorded and passed (G6); review is not possible without it');
+        add(r, (f.receipts.F6 ?? 0) > 0, (f.receipts.F6 ?? 0) > 0 ? `${f.receipts.F6} accepted F6 receipt(s)` : 'independent F6 testing has not been recorded; review is not possible without it');
         break;
       case 'reviewer_not_implementer': {
         const impl = new Set(f.upstream.filter((u) => u.binding_id === 'BMAD-BUILD').map((u) => u.agent));
@@ -139,6 +148,7 @@ export function gatherFacts(wf: Workflow, scope: string, rel: ReleaseVerificatio
     generation_authorized: generationAuthorized(wf.run, wf.state),
     receipts,
     upstream: current,
+    stories_valid: receipts.F4 ? storyValidity(wf) : null,
   };
 }
 

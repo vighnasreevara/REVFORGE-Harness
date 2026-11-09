@@ -16,9 +16,9 @@
  *     COMPLETE/PARTIAL/FAILED label (contract pilot/pilot-result).
  *
  * Engineering gates are NOT authorisation. Generation authorisation (the
- * config flag and G4, i.e. the signed G2-G4 approvals) is reported next to
+ * config flag and G3, i.e. the signed G2 and G3 approvals) is reported next to
  * each gate exactly as the orchestrator computes it, and is never changed,
- * bypassed or implied here. The historical G0-G8 records are untouched.
+ * bypassed or implied here. Historical gate records are untouched.
  */
 import * as fs from 'fs';
 import * as path from 'path';
@@ -52,13 +52,13 @@ export function authorisationStatus(wf: Workflow, ctx: RuntimeContext, program?:
   const blockers: string[] = [];
   if (!ctx.config.generation.java_generation_allowed) blockers.push('config generation.java_generation_allowed is false (project authority)');
   if (!(ctx.config as any).orchestrator?.java_target_dir) blockers.push('no authorised orchestrator.java_target_dir');
-  if (s.gates.G4?.status !== 'PASS') blockers.push(`G4 is ${s.gates.G4?.status ?? 'NOT_RUN'} (needs signed G2, G3 and G4 approvals by trusted signers)`);
+  if (s.gates.G3?.status !== 'PASS') blockers.push(`G3 is ${s.gates.G3?.status ?? 'NOT_RUN'} (needs signed G2 and G3 approvals by trusted signers)`);
   const trust = trustDoctor(ctx).status;
   if (trust !== 'TRUST_CONFIGURED') blockers.push(`trust store: ${trust}`);
   return {
     generation_authorized: generationAuthorized(wf.run, s),
     blockers,
-    gates: Object.fromEntries(['G0', 'G1', 'G2', 'G3', 'G4', 'G5', 'G6', 'G7', 'G8'].map((g) => [g, s.gates[g]?.status ?? 'NOT_RUN'])),
+    gates: Object.fromEntries(['G2', 'G3'].map((g) => [g, s.gates[g]?.status ?? 'NOT_RUN'])),
     trust,
     program_g2_scope: program ? (() => {
       const ev = evaluateScope(buildSnapshot(wf), parseSelector(`programs:${program}`));

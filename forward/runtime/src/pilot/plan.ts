@@ -146,7 +146,7 @@ export function modernizationPlan(wf: Workflow, scope: string): any {
     contract: 'pilot/modernization-plan',
     contract_version: '1.0',
     status: 'NON_AUTHORITATIVE',
-    note: 'Planning classification only. It approves, resolves and excludes nothing; implementation of any category still requires the scope to pass G2 (and G3/G4) with genuine signed approvals.',
+    note: 'Planning classification only. It approves, resolves and excludes nothing; implementation of any category still requires the scope to pass G2 and G3 with genuine signed approvals.',
     scope: sel,
     generated_at: snap.at.toISOString(),
     baseline: { run_id: wf.run.runId, manifest_sha256: wf.run.manifestSha256 },

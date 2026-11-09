@@ -8,7 +8,7 @@
  * treated as unavailable (a gap), and the source and copybook hashes are
  * re-checked after generation before the operation is sealed in the audit
  * log (`local_generation_performed`). The global java_generation_allowed
- * flag, the orchestrator guard and G0-G8 are not consulted or changed.
+ * flag, the orchestrator guard and the G2/G3 gates are not consulted or changed.
  * No source leaves the machine.
  */
 import { createHash } from 'crypto';
@@ -87,7 +87,7 @@ export function generateAuthorized(wf: Workflow, ctx: RuntimeContext, o: Generat
     out,
     fixtures: fieldListFixtures(o.cases),
     inputs,
-    statement: `Authorised local deterministic generation under ${a.record_id} (${a.policy}); not an F5 agent generation and not a G2-G4 approval.`,
+    statement: `Authorised local deterministic generation under ${a.record_id} (${a.policy}); not an F5 agent generation and not a G2/G3 approval.`,
     synthetic: false,
     isolation: { output_dir: out, workflow_used: true, approvals_used: false, production_generation: false, external_ai_calls: false, authorization_record: a.record_id },
     tc: o.toolchain ?? detectToolchain(),

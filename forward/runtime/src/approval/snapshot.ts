@@ -13,7 +13,7 @@ import { DiscoveredSystem, discoverSystem } from '../core/model';
 import { findAgent } from '../orchestrator/agents';
 import { Classification } from '../orchestrator/classification';
 import { Unit, unitKey } from '../orchestrator/extracts';
-import { evaluateG0, GateResult, gateSpec } from '../orchestrator/gates';
+import { evaluateBaselineCheck, GateResult, gateSpec, PrecheckResult } from '../orchestrator/gates';
 import { computeLedger } from '../orchestrator/ledger';
 import { RecordedReceipt, Workflow } from '../orchestrator/orchestrator';
 import { buildCtx, Ctx, deliveries, verifyField, verifyTextClaim } from '../remediation/remediation';
@@ -69,7 +69,7 @@ export interface Snapshot {
   set: ArtifactSet;
   sys: DiscoveredSystem;
   ctx: Ctx;
-  g0: GateResult;
+  g0: PrecheckResult;
   classification: Classification[];
   receipts: RecordedReceipt[];
   items: Item[];
@@ -334,7 +334,7 @@ export function buildSnapshot(wf: Workflow, at = new Date()): Snapshot {
     set,
     sys,
     ctx: c,
-    g0: evaluateG0(wf.run, wf.state),
+    g0: evaluateBaselineCheck(wf.run, wf.state),
     classification,
     receipts,
     items,

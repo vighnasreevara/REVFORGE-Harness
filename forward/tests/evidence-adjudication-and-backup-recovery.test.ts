@@ -215,7 +215,7 @@ describe('STEP 10 — shared dependencies, packages and gates', () => {
     }
     assert.ok(finding(ctx, req).blocking);
     assert.notEqual(runGate(wfOf(ctx), 'G2').status, 'PASS');
-    for (const g of ['G3', 'G4'] as const) assert.equal(runGate(wfOf(ctx), g).status, 'BLOCKED');
+    assert.equal(runGate(wfOf(ctx), 'G3').status, 'BLOCKED');
   });
 
   test('28/29/30. historical receipts and reverse outputs unchanged; no Java', () => {

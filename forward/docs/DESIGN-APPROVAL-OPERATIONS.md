@@ -1,8 +1,10 @@
-# Design approval operations (G3 architecture, G4 story set)
+# Design approval operations (G3 architecture, automated story validation)
 
-This guide is for the operator and the signers who approve an architecture (G3) or a development story set (G4) for one G2-approved scope.
+This guide is for the operator and the signers who approve an architecture (G3) for one G2-approved scope. It also describes the automated validation of the F4 story set that follows G3.
 
-G3 and G4 use the same trust model as G2:
+The forward workflow has two human gates: G2 (approved requirements) and G3 (approved architecture). The former G4 story-set approval no longer exists; the story set is validated automatically, and nobody signs it.
+
+G3 uses the same trust model as G2:
 - the external trust store ([TRUST-CONFIGURATION-GUIDE.md](TRUST-CONFIGURATION-GUIDE.md));
 - Ed25519 signatures over canonical JSON;
 - separation of duties;
@@ -25,12 +27,8 @@ A schema-valid document is never enough. A gate passes only while a signed appro
    Wrap the result as `{"contract":"signed-design-approval","statement":<stmt>,"signature":{"algorithm":"ed25519","value":"…"}}`.
 6. **Verify and import.** `workflow approval verify --file signed.json` (read-only), then `workflow approval import --file signed.json`. This writes `DAP-NNNN`.
 7. **Pass and advance.** Run `workflow gate --gate G3` and `workflow advance --to ARCHITECTURE_APPROVED`.
-8. **Repeat for G4.** F4 delivers the stories (they must name the G2 `APR-…` and G3 `DAP-…` approvals in `approval_baseline`). Then:
-   - `workflow stories approval-request`;
-   - a `story_approver` signs;
-   - import;
-   - `workflow gate --gate G4`;
-   - `workflow advance --to STORIES_APPROVED`.
+8. **F4 delivers the stories.** They must name the G2 `APR-…` and G3 `DAP-…` approvals in `approval_baseline`. Record the receipt and `workflow advance --to STORIES_DRAFTED`.
+9. **Validate the story set.** Run `workflow stories validate` (read-only). F5 can be dispatched only while it reports the set as valid; the runtime re-runs the validation at every F5 dispatch and refuses the dispatch when it fails. There is no approval request, signature or gate for stories.
 
 ## 2. What G3 checks
 
@@ -72,7 +70,14 @@ A schema-valid document is never enough. A gate passes only while a signed appro
 - If any ADR has `behavior_change: true`, also a separate approval by `technical_authority` from a different signer.
 - A valid rejection of the same artefact blocks G3.
 
-## 3. What G4 checks
+**Self-approval of the architecture is rejected:**
+- the requester;
+- the authoring agent (F3 or its `fe-*` name);
+- any automated identity.
+
+## 3. What the automated story validation checks
+
+This is an automated check, not a gate (it was part of gate G4 in the former design).
 
 **Prerequisites:** G3 PASS on the current baseline and a fresh G3 re-evaluation PASS (which re-evaluates G2).
 
@@ -93,12 +98,7 @@ A schema-valid document is never enough. A gate passes only while a signed appro
 | Blockers | No unresolved blocking decision; every story is `ready`. |
 | Trace | End to end: COBOL source → reverse rule → approved requirement → component → story. |
 
-**Approval:** by `story_approver`.
-
-**Self-approval is rejected:**
-- the requester;
-- the authoring agent (F3 / F4 or its `fe-*` name);
-- any automated identity.
+**Approval:** none. A valid story set does not authorize Java generation by itself; generation also needs `generation.java_generation_allowed` and G3 PASS.
 
 ## 4. What an approval is bound to
 
@@ -107,8 +107,8 @@ Every request and signed statement binds:
 - the scope digest;
 - the approved-requirements content hash;
 - the artefact (receipt, files and sha256 values);
-- the dependency manifest (units with source hashes, data contracts, runtime requirements, decisions; for G4 also the architecture hash);
-- the upstream approvals (G2 for G3; G2 and G3 for G4);
+- the dependency manifest (units with source hashes, data contracts, runtime requirements, decisions);
+- the upstream approval (G2);
 - the signer and role;
 - the signing time.
 
@@ -130,9 +130,9 @@ An `INV-NNNN` record (`orchestrator/approval-invalidation`) names:
   - `record_tampered`;
   - `trust_unavailable`;
 - the failed checks;
-- the downstream approvals affected (a G3 approval lists the G4 approvals built on it).
+- the downstream approvals affected.
 
-**Cascade.** A failing G2 re-evaluates G3 and G4; a failing G3 re-evaluates G4.
+**Cascade.** A failing G2 re-evaluates G3. The story validation re-evaluates G3 each time it runs, so a stale G2 or G3 approval also makes the story set invalid and stops F5.
 
 **Nothing is deleted or rewritten.** A new approval needs a new request on the current content.
 
@@ -140,10 +140,10 @@ An `INV-NNNN` record (`orchestrator/approval-invalidation`) names:
 
 | Command | Writes |
 |---|---|
-| `workflow g3 evaluate\|blockers`, `workflow g4 evaluate\|blockers` | nothing (read-only) |
-| `workflow gate --gate G3\|G4` | a gate result, a `design/evaluations/G3E\|G4E` record and any new `INV` record |
-| `workflow architecture\|stories approval-request --requested-by ID` | `design/requests/DREQ-NNNN` (refused, and audited, when the artefact does not validate) |
-| `workflow architecture\|stories approval-statement --request DREQ-N --signer ID --role R --decision approved\|rejected [--out FILE]` | nothing (prints the canonical text to sign) |
+| `workflow g3 evaluate\|blockers`, `workflow stories validate` | nothing (read-only) |
+| `workflow gate --gate G3` | a gate result, a `design/evaluations/G3E` record and any new `INV` record |
+| `workflow architecture approval-request --requested-by ID` | `design/requests/DREQ-NNNN` (refused, and audited, when the artefact does not validate) |
+| `workflow architecture approval-statement --request DREQ-N --signer ID --role R --decision approved\|rejected [--out FILE]` | nothing (prints the canonical text to sign) |
 | `workflow approval verify\|import --file SIGNED.json` | `design/approvals/DAP-NNNN` on import (also handles G2) |
 
 No command marks a gate PASS from a flag.

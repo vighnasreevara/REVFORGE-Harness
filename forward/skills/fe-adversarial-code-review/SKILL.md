@@ -6,7 +6,7 @@ allowed-tools: Read, Grep, Glob, Write
 
 # fe-adversarial-code-review
 
-Owned by agent **fe-independent-reviewer** (F7). Dispatchable only after gate G6 (independent verification) has passed.
+Owned by agent **fe-independent-reviewer** (F7). Dispatchable only in `REVIEWING`, after a passing F6 test result.
 
 ```json revforge-skill
 {
@@ -40,7 +40,7 @@ Try to prove the implementation wrong. Compare the Java against the approved req
 - incorrect error handling;
 - compatibility risks.
 
-Report findings with severity and whether they block. Produce a recommendation for the human acceptance gate G8. Never modify reviewed material.
+Report findings with severity and whether they block. Produce the acceptance recommendation the runtime uses to complete the workflow. Never modify reviewed material.
 
 ## Required input artifacts
 
@@ -52,7 +52,7 @@ Report findings with severity and whether they block. Produce a recommendation f
 ## Input validation
 
 1. Stop with `blocked` if any of these fails:
-   - G6 is `PASS`;
+   - the workflow is in `REVIEWING` (a passing F6 result was accepted);
    - the packet is dispatchable;
    - both F7 skills are installed.
 2. Every reviewed artifact must be listed in the packet with its SHA-256. A reviewed file that changed since the packet was prepared is reported as a blocking finding.
@@ -67,7 +67,7 @@ Report findings with severity and whether they block. Produce a recommendation f
 5. Check the tests: is every acceptance criterion covered, are boundaries and invalid data tested, and is any `EQUIVALENCE_UNVERIFIED` result hidden?
 6. Check the assumptions: any behaviour without requirement or ADR support.
 7. Record each finding (`RV-NNN`): category, severity, `blocking`, description, the artifact path and source refs.
-8. Write `blocking_findings.json` (`record_type: "blocking_findings"`) and `acceptance_recommendation.json` (`record_type: "acceptance_recommendation"`), both with contract `forward/review-report`. Set `recommend_acceptance: false` whenever a blocking finding exists, and `decided_by: "human_gate_G8"`. Write `review_report.md`.
+8. Write `blocking_findings.json` (`record_type: "blocking_findings"`) and `acceptance_recommendation.json` (`record_type: "acceptance_recommendation"`), both with contract `forward/review-report`. Set `recommend_acceptance: false` whenever a blocking finding exists, and `decided_by: "workflow_completion_after_review"`. Write `review_report.md`.
 
 ## Source grounding
 
@@ -89,7 +89,7 @@ Read, Grep and Glob on every reviewed artifact listed in the packet (requirement
 
 ## Error handling and stop conditions
 
-- G6 is not `PASS`: return `blocked`.
+- The workflow is not in `REVIEWING`: return `blocked`.
 - A reviewed artifact is missing or changed: blocking finding, and continue.
 - The review is incomplete: return `incomplete`. Never recommend acceptance from a partial review.
 
@@ -106,4 +106,4 @@ Findings cite permanent source IDs and requirement IDs. Together with `fe-end-to
 
 ## Orchestrator integration
 
-Listed in the F7 receipt and validated by the runtime. Gate G7 evaluates the review in the runtime. Acceptance is gate G8, by a human.
+Listed in the F7 receipt and validated by the runtime. The runtime completes the workflow only when the recommendation is to accept and no finding is blocking; otherwise the work returns to implementation.

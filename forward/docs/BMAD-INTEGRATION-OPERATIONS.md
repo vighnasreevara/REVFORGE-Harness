@@ -74,9 +74,9 @@ All commands accept `--json`. None of them executes BMad.
 | BMAD-PRD | `bmad-prd` | F1 | G2 PASS for the exact scope; state REQUIREMENTS_APPROVED or later. Renders approved requirements only. |
 | BMAD-ARCH | `bmad-architecture` | F3 | G2 PASS for the exact scope; state REQUIREMENTS_APPROVED or ARCHITECTURE_DRAFTED |
 | BMAD-EPICS | `bmad-create-epics-and-stories` | F4 | G2 and G3; recorded (non-mock) architecture results. Stories stay `draft`. |
-| BMAD-SPRINT | `bmad-sprint-planning` | F4 | G2, G3, G4; approved stories |
-| BMAD-BUILD | `bmad-build` | F5 | G2, G3, G4; approved stories; an authorised `orchestrator.java_target_dir`; Java generation authorised (config flag plus G4) |
-| BMAD-REVIEW | `bmad-code-review` | F7 | G2–G6; recorded implementation artefacts with current hashes; an accepted F6 receipt; reviewer ≠ implementer |
+| BMAD-SPRINT | `bmad-sprint-planning` | F4 | G2 and G3; validated stories (requirement `validated_stories`: an accepted F4 story result for the scope); state STORIES_DRAFTED |
+| BMAD-BUILD | `bmad-build` | F5 | G2 and G3; validated stories; an authorised `orchestrator.java_target_dir`; Java generation authorised (config flag plus G3 PASS) |
+| BMAD-REVIEW | `bmad-code-review` | F7 | G2 and G3; recorded implementation artefacts with current hashes; an accepted F6 receipt; reviewer ≠ implementer; state REVIEWING |
 
 **Agents that stay outside BMad:**
 - **F6** (independent testing) is never bound.
@@ -113,10 +113,10 @@ All commands accept `--json`. None of them executes BMad.
 | PRD | no new or missing requirements; source references belong to the requirement; rules and decisions are in scope |
 | Architecture | requirements and COBOL units are in scope; every requirement is addressed |
 | Stories | traceability, coverage, unique IDs |
-| Sprint / Build | approved stories only; Java only inside the target; file hashes; status consistent with the exit code |
+| Sprint / Build | only stories from the mapped story inputs; Java only inside the target; file hashes; status consistent with the exit code |
 | Review | reviews the recorded implementation; not a self-review; F6 receipt; reviewed file hashes |
 
-**Receipts** always have `counts_toward_gates: false`. Gates G3–G8 read only the forward workflow's own receipts and signed approvals.
+**Receipts** always have `counts_toward_gates: false`. Gate G3, the story validation and the workflow transitions after it read only the forward workflow's own receipts and signed approvals.
 
 **Provenance.** Each mapped input has a sidecar (`bmad/provenance`) recording:
 - requirement IDs, record hashes, receipts, outcomes and permanent source references;

@@ -39,7 +39,6 @@ export function requiredRoles(ctx: RuntimeContext): RoleNeed[] {
   for (const [kind, roles] of Object.entries(p.roles.decision)) for (const r of roles) add(r, `${kind} decision resolutions`);
   for (const r of DESIGN_POLICY.G3.approver_roles) add(r, 'G3 architecture approval');
   for (const r of DESIGN_POLICY.G3.co_approval_roles_when_behavior_change) add(r, 'G3 co-approval when legacy behaviour changes');
-  for (const r of DESIGN_POLICY.G4.approver_roles) add(r, 'G4 story-set approval');
   for (const r of loadOpenAIConfig(ctx).config.source_export.required_roles) add(r, 'OpenAI source-export authorization');
   for (const r of DISCLOSURE_ROLES) add(r, 'provider-specific AI disclosure authorization (Claude / BMad and others)');
   return [...m.entries()].map(([role, u]) => ({ role, used_for: [...u].sort() })).sort((a, b) => (a.role < b.role ? -1 : 1));
@@ -49,7 +48,6 @@ export const DISCLOSURE_ROLES = ['data_owner'];
 /** Roles that must not be held by the same signer, because one would review what the other approves. */
 const CONFLICTS: Array<[string, string, string]> = [
   ['requirements_approver', 'business_sme', 'a requirements approver should not also resolve the business decisions inside the scope they approve'],
-  ['architecture_approver', 'story_approver', 'the architecture approver should not also approve the stories planned against it'],
   ['requirements_approver', 'architecture_approver', 'requirements and architecture approval should be held by different people'],
 ];
 

@@ -1,8 +1,8 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "$id": "https://revforge.local/contracts/demo/gate-result.schema.json",
-  "title": "Synthetic demo gate result",
-  "description": "Result of one demo gate. demo_gate_status is evaluated from the listed checks; it is never a production gate status.",
+  "$id": "https://revforge.local/contracts/demo/step-result.schema.json",
+  "title": "Synthetic demo step result",
+  "description": "Result of one demo step (a pre-check, one of the human gates G2/G3, or an automated step). demo_status is evaluated from the listed checks; it is never a production gate status.",
   "type": "object",
   "additionalProperties": true,
   "required": [
@@ -10,9 +10,10 @@
     "contract_version",
     "environment",
     "demo_run_id",
-    "gate",
+    "step",
+    "kind",
     "name",
-    "demo_gate_status",
+    "demo_status",
     "reason",
     "prerequisite",
     "responsibility",
@@ -24,7 +25,7 @@
   ],
   "properties": {
     "contract": {
-      "const": "demo/gate-result"
+      "const": "demo/step-result"
     },
     "contract_version": {
       "const": "1.0"
@@ -36,24 +37,31 @@
       "type": "string",
       "minLength": 1
     },
-    "gate": {
+    "step": {
       "enum": [
-        "G0",
-        "G1",
+        "BASELINE",
+        "EVIDENCE",
         "G2",
         "G3",
-        "G4",
-        "G5",
-        "G6",
-        "G7",
-        "G8"
+        "STORIES",
+        "BUILD",
+        "VERIFY",
+        "REVIEW",
+        "COMPLETE"
+      ]
+    },
+    "kind": {
+      "enum": [
+        "precheck",
+        "gate",
+        "automated"
       ]
     },
     "name": {
       "type": "string",
       "minLength": 1
     },
-    "demo_gate_status": {
+    "demo_status": {
       "enum": [
         "PASS",
         "FAIL",

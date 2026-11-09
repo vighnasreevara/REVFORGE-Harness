@@ -12,7 +12,7 @@ import { loadContext, RuntimeContext } from '../runtime/src/core/config';
 import { sha256File } from '../runtime/src/core/fsutil';
 import { runPlan } from '../runtime/src/commands/plan';
 import { AGENTS } from '../runtime/src/orchestrator/agents';
-import { advance, generationAuthorized, initWorkflow, loadWorkflow, prepare, prepareBatches, recordReceipt, runGate, status } from '../runtime/src/orchestrator/orchestrator';
+import { advance, generationAuthorized, initWorkflow, loadWorkflow, prepare, prepareBatches, recordReceipt, runGate, status, runPrecheck } from '../runtime/src/orchestrator/orchestrator';
 import { SKILLS } from '../runtime/src/orchestrator/skills';
 import { consolidate, correct } from '../runtime/src/remediation/remediation';
 import { approvalStatement, createApprovalRequest, importApproval, statementText, verifyApprovalFile } from '../runtime/src/approval/approvals';
@@ -103,7 +103,7 @@ function setup(opts: Opts = {}) {
   const ctx = loadContext({ forwardDir: FORWARD_DIR, configPath: f.configPath });
   runPlan(ctx, { runId: RUN });
   initWorkflow(ctx, RUN);
-  assert.equal(runGate(wf(ctx), 'G1').status, 'PASS');
+  assert.equal(runPrecheck(wf(ctx), 'EVIDENCE').status, 'PASS');
   assert.equal(advance(wf(ctx), 'EVIDENCE_VALIDATED').accepted, true);
   return { f, ctx, k };
 }
@@ -563,7 +563,6 @@ describe('S4-D. packets, receipts and workflow protection', () => {
     approve(ctx, f, k, BRAVO);
     assert.equal(runGate(wf(ctx), 'G2').status, 'PASS');
     assert.notEqual(runGate(wf(ctx), 'G3').status, 'PASS');
-    for (const g of ['G4', 'G5', 'G6', 'G7', 'G8'] as const) assert.equal(runGate(wf(ctx), g).status, 'BLOCKED', g);
     assert.equal(generationAuthorized(wf(ctx).run, wf(ctx).state), false);
     assert.throws(() => prepare(wf(ctx), 'F5'), /may only be dispatched/);
     assert.deepEqual(hashTree(path.join(f.repoRoot, 'output')), outBefore);

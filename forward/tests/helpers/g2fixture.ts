@@ -11,7 +11,7 @@ import * as path from 'path';
 import { loadContext, RuntimeContext } from '../../runtime/src/core/config';
 import { runPlan } from '../../runtime/src/commands/plan';
 import { AGENTS } from '../../runtime/src/orchestrator/agents';
-import { advance, initWorkflow, loadWorkflow, prepareBatches, recordReceipt, runGate } from '../../runtime/src/orchestrator/orchestrator';
+import { advance, initWorkflow, loadWorkflow, prepareBatches, recordReceipt, runGate, runPrecheck } from '../../runtime/src/orchestrator/orchestrator';
 import { SKILLS } from '../../runtime/src/orchestrator/skills';
 import { consolidate } from '../../runtime/src/remediation/remediation';
 import { canonicalize } from '../../runtime/src/approval/canonical';
@@ -86,7 +86,7 @@ export function setupG2(fixtures: Fixture[], opts: { mutate?: (f: Fixture) => vo
   const ctx = loadContext({ forwardDir: FORWARD_DIR, configPath: f.configPath });
   runPlan(ctx, { runId: RUN });
   initWorkflow(ctx, RUN);
-  assert.equal(runGate(wfOf(ctx), 'G1').status, 'PASS');
+  assert.equal(runPrecheck(wfOf(ctx), 'EVIDENCE').status, 'PASS');
   assert.equal(advance(wfOf(ctx), 'EVIDENCE_VALIDATED').accepted, true);
   return { f, ctx, k };
 }

@@ -50,6 +50,8 @@ export interface WorkflowStateRecord {
   blockers: string[];
   history: HistoryEntry[];
   gates: Record<string, { status: string; result_file: string; evaluated_at: string; baseline_sha256: string }>;
+  /** BASELINE and EVIDENCE pre-check results (absent in runs created before the two-gate change). */
+  prechecks?: Record<string, { status: string; result_file: string; evaluated_at: string; baseline_sha256: string }>;
   packets: string[];
   receipts: string[];
   checkpoint: { seq: number; at: string; state_sha256: string; audit_head: string; audit_entries: number };
@@ -84,7 +86,7 @@ export class WorkflowStore {
   }
 
   ensureLayout(): void {
-    for (const d of ['gates', 'packets', 'receipts', 'approvals', 'agents']) fs.mkdirSync(this.p(d), { recursive: true });
+    for (const d of ['gates', 'prechecks', 'packets', 'receipts', 'approvals', 'agents']) fs.mkdirSync(this.p(d), { recursive: true });
   }
 
   /* ---------------- audit chain ---------------- */

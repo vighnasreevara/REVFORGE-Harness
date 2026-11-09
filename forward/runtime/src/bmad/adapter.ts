@@ -13,7 +13,7 @@
  * stand-in result exercises packet -> validation -> receipt; it is never
  * evidence) and LIVE (refused unless the execution preflight permits the launch; see liveGate). Records live in
  * workflow/bmad and only the runtime writes there. BMad receipts never feed
- * a gate: G3-G8 read only the forward workflow's own receipts and approvals.
+ * a gate: G2 and G3 read only the forward workflow's own receipts and signed approvals.
  */
 import * as fs from 'fs';
 import * as path from 'path';

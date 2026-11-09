@@ -1,5 +1,5 @@
 /**
- * Demo-only approvals for the synthetic gate demonstration (demo gates G2, G3, G4, G8).
+ * Demo-only approvals for the synthetic workflow demonstration (the human gates G2 and G3).
  *
  * Each demo run creates a fresh Ed25519 key pair in memory. The private key
  * never touches the disk and is gone when the process ends; only the public
@@ -24,11 +24,9 @@ import { RuntimeContext } from '../core/config';
 
 export const DEMO_ENV = 'SYNTHETIC_INTERVIEW_DEMO';
 export const DEMO_SIGNER = 'synthetic-demo-authority';
-export const DEMO_ROLES: Record<'G2' | 'G3' | 'G4' | 'G8', string> = {
+export const DEMO_ROLES: Record<'G2' | 'G3', string> = {
   G2: 'demo_requirements_approver',
   G3: 'demo_architecture_approver',
-  G4: 'demo_planning_approver',
-  G8: 'demo_acceptance_authority',
 };
 export const SIGNER_STATEMENT = 'Synthetic demonstration authority created for one demo run. Not a real stakeholder, business owner or production approver.';
 

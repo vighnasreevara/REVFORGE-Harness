@@ -408,7 +408,7 @@ export function evaluateScope(snap: Snapshot, sel: Selector): ScopeEvaluation {
 
   // Integrity of the evidence base.
   const integrity: string[] = [];
-  if (snap.g0.status !== 'PASS') integrity.push(`baseline integrity (G0) ${snap.g0.status}: ${snap.g0.reason}`);
+  if (snap.g0.status !== 'PASS') integrity.push(`baseline integrity pre-check ${snap.g0.status}: ${snap.g0.reason}`);
   // Tampering anywhere in the accepted evidence base fails every scope (consolidation and shared decisions read it all).
   for (const m of snap.integrity.modified_outputs) integrity.push(`accepted deliverable modified after acceptance: ${m}`);
   integrity.push(...snap.integrity.receipt_hash_changes);

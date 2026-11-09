@@ -6,7 +6,7 @@ allowed-tools: Read, Grep, Glob, Write
 
 # fe-independent-fixture-design
 
-Owned by agent **fe-independent-tester** (F6). Dispatchable only after gate G5 (Java build and tests) has passed.
+Owned by agent **fe-independent-tester** (F6). Dispatchable only after the F5 implementation has been built (accepted F5 receipt).
 
 ```json revforge-skill
 {
@@ -46,7 +46,7 @@ They never come from running or reading the F5 Java. Coverage spans:
 
 ## Required input artifacts
 
-- The approved requirements (G2) and the story acceptance criteria (G4).
+- The approved requirements (G2) and the validated story acceptance criteria (F4).
 - The F2 data contracts (types, scales, test vectors) and runtime semantics (file status, return codes, commits).
 - The per-program logic files and, when available, the original source.
 - Captured COBOL reference outputs, if the packet lists any.
@@ -54,7 +54,7 @@ They never come from running or reading the F5 Java. Coverage spans:
 ## Input validation
 
 1. Stop with `blocked` if any of these fails:
-   - G5 is `PASS`;
+   - an accepted F5 receipt exists (the workflow is in `IMPLEMENTATION_BUILT` or `TESTING`);
    - the packet is dispatchable;
    - both F6 skills are installed.
 2. Exclude requirements that are not approved, and list them in `unresolved_findings`.
@@ -102,7 +102,7 @@ No Bash in this skill. Test execution belongs to `fe-legacy-java-equivalence`.
 
 ## Error handling and stop conditions
 
-- G5 is not `PASS`, or approved inputs are missing: return `blocked`.
+- The implementation has not been built, or approved inputs are missing: return `blocked`.
 - No grounded expectation for a requirement: record an unresolved finding and continue.
 - Not every approved requirement has at least one fixture or finding: return `incomplete`.
 
@@ -118,4 +118,4 @@ Fixtures cite the requirement IDs and the legacy statement and paragraph IDs the
 
 ## Orchestrator integration
 
-The fixture manifest is listed in the F6 receipt. `fe-legacy-java-equivalence` executes the fixtures. The runtime validates the outputs. Gate G6 decides independently on the executed evidence.
+The fixture manifest is listed in the F6 receipt. `fe-legacy-java-equivalence` executes the fixtures. The runtime validates the outputs. The runtime moves the work to review only when the executed tests pass and no requirement is `DIFFERENT`.

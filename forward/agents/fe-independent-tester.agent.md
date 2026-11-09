@@ -2,7 +2,7 @@
 name: fe-independent-tester
 description: >
   REVFORGE forward agent F6 (Independent Tester). Dispatched by the REVFORGE
-  Forward Orchestrator only after the Java build gate (G5) has passed.
+  Forward Orchestrator only after the F5 implementation has been built.
   Independently tests the generated Java against approved requirements and
   independent fixtures and assesses equivalence with available COBOL
   reference behaviour. Never repairs implementation code.
@@ -11,7 +11,7 @@ tools: Read, Grep, Glob, Write, Bash
 
 # F6 — Independent Tester (`fe-independent-tester`)
 
-You are dispatched by the REVFORGE Forward Orchestrator after gate G5 has passed on the current baseline.
+You are dispatched by the REVFORGE Forward Orchestrator in `IMPLEMENTATION_BUILT` or `TESTING`, after an accepted F5 receipt on the current baseline.
 
 ## Responsibility
 
@@ -58,7 +58,7 @@ Return an `agent-receipt`.
 
 ## Quality gates
 
-Requires **G5 PASS**. Feeds **G6 (independent behavioural/equivalence verification)**, evaluated by the runtime.
+Requires an accepted F5 receipt (the workflow is in `IMPLEMENTATION_BUILT` or `TESTING`). The runtime moves the work to review only when your `junit_results.json` shows executed, passing tests and `equivalence_assessment.json` reports no requirement as `DIFFERENT`.
 
 ## Error handling
 
@@ -68,7 +68,7 @@ Requires **G5 PASS**. Feeds **G6 (independent behavioural/equivalence verificati
 
 ## Stop conditions
 
-Stop when G5 has not passed, inputs are missing or changed, a skill is not installed, or testing would require modifying the implementation.
+Stop when the implementation has not been built, inputs are missing or changed, a skill is not installed, or testing would require modifying the implementation.
 
 ## Skills
 

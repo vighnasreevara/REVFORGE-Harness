@@ -73,7 +73,7 @@ export function approvalReadiness(wf: Workflow, scope: string, a: Analysis = ana
       'Any signed resolution, applied correction, source edit, baseline change or policy change alters the scope digest; a pending approval request then becomes stale and a new one must be exported.',
       'A correction gives the requirement a new content hash: its review decision becomes stale and must be decided again on the corrected content.',
       'A resolution is bound to the decision content and the affected item hashes; if either changes before import, it is rejected.',
-      'An imported approval is re-verified at every G2 evaluation; when its content changes, G2 stops passing and G3/G4 approvals built on it are invalidated.',
+      'An imported approval is re-verified at every G2 evaluation; when its content changes, G2 stops passing and a G3 approval built on it is invalidated.',
     ],
     allowed_next_transitions: transitions,
     steps,

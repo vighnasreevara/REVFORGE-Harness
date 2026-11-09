@@ -7,7 +7,7 @@
   "properties": {
     "contract": { "const": "workflow-state" },
     "state": {
-      "enum": ["INITIALIZED", "BASELINE_LOADED", "EVIDENCE_VALIDATED", "REQUIREMENTS_DRAFTED", "REQUIREMENTS_APPROVED", "ARCHITECTURE_DRAFTED", "ARCHITECTURE_APPROVED", "STORIES_DRAFTED", "STORIES_APPROVED", "IMPLEMENTING", "IMPLEMENTATION_BUILT", "TESTING", "REVIEWING", "AWAITING_ACCEPTANCE", "ACCEPTED", "BLOCKED", "FAILED"]
+      "enum": ["INITIALIZED", "BASELINE_LOADED", "EVIDENCE_VALIDATED", "REQUIREMENTS_DRAFTED", "REQUIREMENTS_APPROVED", "ARCHITECTURE_DRAFTED", "ARCHITECTURE_APPROVED", "STORIES_DRAFTED", "IMPLEMENTING", "IMPLEMENTATION_BUILT", "TESTING", "REVIEWING", "COMPLETED", "BLOCKED", "FAILED"]
     },
     "baseline": {
       "type": "object",
@@ -17,6 +17,15 @@
     "history": {
       "type": "array",
       "items": { "type": "object", "required": ["seq", "at", "from", "to", "guard"] }
+    },
+    "prechecks": {
+      "description": "BASELINE and EVIDENCE pre-check results; absent in runs created before the two-gate change, which recorded them as gates G0 and G1.",
+      "type": "object",
+      "additionalProperties": {
+        "type": "object",
+        "required": ["status", "result_file", "evaluated_at", "baseline_sha256"],
+        "properties": { "status": { "enum": ["PASS", "FAIL", "BLOCKED", "NOT_RUN", "UNVERIFIED"] } }
+      }
     },
     "gates": {
       "type": "object",

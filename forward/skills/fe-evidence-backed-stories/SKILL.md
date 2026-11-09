@@ -117,4 +117,4 @@ Stories cite requirement IDs, component IDs, Record IDs and the statement and pa
 
 ## Orchestrator integration
 
-The F4 receipt lists `epics.json`, `stories.json` and `sprint_readiness.md`. The runtime validates them. An accepted completed receipt allows `ARCHITECTURE_APPROVED → STORIES_DRAFTED`. Story approval is gate G4, decided by a human. G4 is also the precondition for any Java generation.
+The F4 receipt lists `epics.json`, `stories.json` and `sprint_readiness.md`. The runtime validates them. An accepted completed receipt allows `ARCHITECTURE_APPROVED → STORIES_DRAFTED`. There is no story approval gate: the runtime validates the story set against the approved requirements and the G3 architecture, and F5 can be dispatched only while that validation passes. Java generation needs G3 PASS and the config flag.

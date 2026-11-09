@@ -24,9 +24,8 @@ This guide is for the organization's **key custodian** and the operator who runs
 | `data_owner` | Signs source-export authorizations and revocations for independent OpenAI verification. | `verification openai authorize` / `revoke` |
 | `architecture_approver` | Signs the G3 approval of one exact F3 architecture for a G2-approved scope. | `workflow approval import` (signed-design-approval, gate G3) |
 | `technical_authority` (G3 co-approval) | Must also sign G3 when an ADR changes legacy behaviour (`behavior_change: true`). The signer must differ from the architecture approver. | `workflow approval import` (gate G3) |
-| `story_approver` | Signs the G4 approval of one exact F4 story set. | `workflow approval import` (signed-design-approval, gate G4) |
 
-**Configuration.** Role names and which decision kinds need which roles are set in `forward/config/forward.config.json` (`approval.roles`, `openai_verification.source_export.required_roles`). Changing them changes the policy digest and invalidates existing approvals. The G3/G4 roles are fixed in the runtime's design-approval policy (`DESIGN_POLICY`, digest bound into every G3/G4 request); see [DESIGN-APPROVAL-OPERATIONS.md](DESIGN-APPROVAL-OPERATIONS.md).
+**Configuration.** Role names and which decision kinds need which roles are set in `forward/config/forward.config.json` (`approval.roles`, `openai_verification.source_export.required_roles`). Changing them changes the policy digest and invalidates existing approvals. The G3 roles are fixed in the runtime's design-approval policy (`DESIGN_POLICY`, digest bound into every G3 request); see [DESIGN-APPROVAL-OPERATIONS.md](DESIGN-APPROVAL-OPERATIONS.md). There is no story-approval role: the former G4 story-set approval was replaced by an automated story validation, so a `story_approver` entry in a trust store grants nothing.
 
 ## 2. Provision signers
 

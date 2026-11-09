@@ -17,7 +17,7 @@ import { approvalStatement, createApprovalRequest, importApproval, statementText
 import { evaluateScope, parseSelector } from '../../runtime/src/approval/scope';
 import { buildSnapshot } from '../../runtime/src/approval/snapshot';
 import { applicableConcerns, approvedScope } from '../../runtime/src/design/design';
-import { createDesignRequest, designStatement, importDesignApproval } from '../../runtime/src/design/approvals';
+import { createDesignRequest, designStatement, importDesignApproval, StorySetValidation, validateStorySet } from '../../runtime/src/design/approvals';
 import { Fixture } from './fixture';
 import { citedClaim, deliverAll, Edit, KP, setupG2, SIGNERS, signResolution, signText, wfOf } from './g2fixture';
 import { readPacket, writeDeliverables } from './outputs';
@@ -171,14 +171,12 @@ export function deliverStories(f: Fixture, ctx: RuntimeContext, g3ApprovalId: st
   return rec.receipt_id;
 }
 
-/** Full G3 + G4 approval: STORIES_APPROVED. */
-export function approveStories(f: Fixture, ctx: RuntimeContext, dk: DesignKeys): { g3: any; request: any; approval: any } {
+/** G3 approval plus an F4 story set that passes the automated validation: STORIES_DRAFTED, ready for F5. */
+export function readyForImplementation(f: Fixture, ctx: RuntimeContext, dk: DesignKeys): { g3: any; validation: StorySetValidation } {
   const g3 = approveArchitecture(f, ctx, dk);
   deliverStories(f, ctx, g3.approval.approval_id);
-  const request = createDesignRequest(wfOf(ctx), 'G4', 'dave.requester');
-  const approval = signDesign(f, ctx, request, DESIGN_SIGNERS.planner, dk.planner, 'story_approver');
-  assert.equal(approval.imported, true, JSON.stringify(approval.checks.filter((c: any) => !c.ok)));
-  assert.equal(runGate(wfOf(ctx), 'G4').status, 'PASS');
-  assert.equal(advance(wfOf(ctx), 'STORIES_APPROVED').accepted, true);
-  return { g3, request, approval };
+  const validation = validateStorySet(wfOf(ctx));
+  assert.equal(validation.ok, true, validation.reason);
+  assert.equal(wfOf(ctx).state.state, 'STORIES_DRAFTED');
+  return { g3, validation };
 }

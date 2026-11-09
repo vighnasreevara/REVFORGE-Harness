@@ -14,7 +14,7 @@ import { afterEach, beforeEach, describe, test } from 'node:test';
 import { loadContext } from '../runtime/src/core/config';
 import { sha256File } from '../runtime/src/core/fsutil';
 import { main } from '../runtime/src/cli';
-import { advance, generationAuthorized, policyRoots, runGate } from '../runtime/src/orchestrator/orchestrator';
+import { advance, generationAuthorized, policyRoots, prepare, runGate } from '../runtime/src/orchestrator/orchestrator';
 import { AGENTS, findAgent } from '../runtime/src/orchestrator/agents';
 import { GATES } from '../runtime/src/orchestrator/gates';
 import { canWrite } from '../runtime/src/orchestrator/permissions';
@@ -26,10 +26,11 @@ import { loadBindings } from '../runtime/src/bmad/bindings';
 import { BMAD_DIR_ENV } from '../runtime/src/bmad/release';
 import { preparePacket, mockResult } from '../runtime/src/bmad/adapter';
 import { executeLive, executionManifest, executorDoctor, executorEligibility, handleExecutionOutcome } from '../runtime/src/bmad/executor';
-import { createDesignRequest, designApprovals, evaluateDesignGate, invalidations } from '../runtime/src/design/approvals';
+import { artifactSet } from '../runtime/src/design/design';
+import { createDesignRequest, designApprovals, evaluateDesignGate, invalidations, validateStorySet } from '../runtime/src/design/approvals';
 import { cleanup, Fixture, FORWARD_DIR } from './helpers/fixture';
 import { signResolution, SIGNERS, wfOf } from './helpers/g2fixture';
-import { approveArchitecture, approveStories, BRAVO, deliverArchitecture, deliverStories, DESIGN_SIGNERS, designFixture, editTrust, signDesign } from './helpers/designfixture';
+import { approveArchitecture, BRAVO, deliverArchitecture, deliverStories, DESIGN_SIGNERS, designFixture, editTrust, readyForImplementation, signDesign } from './helpers/designfixture';
 
 const fixtures: Fixture[] = [];
 const temps: string[] = [];
@@ -202,75 +203,69 @@ describe('STEP 7 — G3 architecture approval', () => {
 });
 
 /* ------------------------------------------------------------------ */
-describe('STEP 7 — G4 story-set approval', () => {
-  test('9. G4 is BLOCKED without G3', () => {
-    const { f, ctx } = designFixture(fixtures);
-    deliverArchitecture(f, ctx);
-    assert.equal(runGate(wfOf(ctx), 'G4').status, 'BLOCKED');
-    assert.throws(() => createDesignRequest(wfOf(ctx), 'G4', 'dave.requester'), /cannot be requested/);
+describe('STEP 7 — F4 story-set validation (no G4: automated, required before F5)', () => {
+  test('9. there is no G4 gate: the gates are G2 and G3, and a story-set approval cannot be requested', () => {
+    const { f, ctx, dk } = designFixture(fixtures);
+    assert.deepEqual(GATES.map((g) => g.id), ['G2', 'G3']);
+    approveArchitecture(f, ctx, dk);
+    assert.throws(() => createDesignRequest(wfOf(ctx), 'G4' as any, 'dave.requester'));
   });
 
-  test('10. G4 does not pass without development stories', () => {
+  test('10. without development stories the story set is not valid and F5 cannot be dispatched', () => {
     const { f, ctx, dk } = designFixture(fixtures);
     approveArchitecture(f, ctx, dk);
-    const g = runGate(wfOf(ctx), 'G4');
-    assert.equal(g.status, 'NOT_RUN');
-    assert.throws(() => createDesignRequest(wfOf(ctx), 'G4', 'dave.requester'), (e: any) => e.details.some((d: string) => /story_output/.test(d)));
+    const v = validateStorySet(wfOf(ctx));
+    assert.equal(v.ok, false);
+    assert.ok(v.checks.some((c) => c.id === 'story_output' && !c.ok));
+    assert.throws(() => prepare(wfOf(ctx), 'F5'), /may only be dispatched/);
   });
 
-  test('11. missing requirement coverage and unsupported behaviour block G4', () => {
+  test('11. missing requirement coverage and unsupported behaviour stop F5', () => {
     const { f, ctx, dk } = designFixture(fixtures);
     const { approval } = approveArchitecture(f, ctx, dk);
     deliverStories(f, ctx, approval.approval_id, (docs) => {
       const st = docs['stories.json'].stories;
       st[0].requirement_ids = ['REQ-INVENTED-001'];
     });
-    const g = evaluateDesignGate(wfOf(ctx), 'G4');
-    assert.ok(gateFails(g).includes('requirements_coverage'));
-    assert.ok(gateFails(g).includes('no_unsupported_behaviour'));
-    assert.throws(() => createDesignRequest(wfOf(ctx), 'G4', 'dave.requester'), /cannot be requested/);
+    assert.equal(wfOf(ctx).state.state, 'STORIES_DRAFTED');
+    const v = validateStorySet(wfOf(ctx));
+    const fails = v.checks.filter((c) => !c.ok).map((c) => c.id);
+    assert.ok(fails.includes('requirements_coverage'));
+    assert.ok(fails.includes('no_unsupported_behaviour'));
+    assert.throws(() => prepare(wfOf(ctx), 'F5'), /story set is not valid/);
+    assert.ok(wfOf(ctx).store.readAudit().some((e) => e.event === 'story_validation' && (e.data as any).ok === false));
   });
 
-  test('12. a signed story-set approval passes G4 and authorises STORIES_APPROVED (synthetic signer)', () => {
+  test('12. a valid story set planned against the G3 approval lets F5 be dispatched (synthetic signer)', () => {
     const { f, ctx, dk } = designFixture(fixtures);
-    const { request, approval } = approveStories(f, ctx, dk);
-    assert.equal(wfOf(ctx).state.state, 'STORIES_APPROVED');
-    assert.equal(request.payload.upstream_approvals.map((u: any) => u.gate).join(), 'G2,G3');
-    assert.ok(request.payload.dependency_manifest.architecture_sha256);
-    const ev = evaluateDesignGate(wfOf(ctx), 'G4');
-    assert.equal(ev.evaluation.valid_approval, approval.approval_id);
-    assert.ok(ev.result.checks.find((c) => c.id === 'end_to_end_trace')!.status === 'pass');
-    assert.ok(ev.evaluation.story_order.length >= 1);
+    const { g3, validation } = readyForImplementation(f, ctx, dk);
+    assert.equal(validation.architecture_approval, g3.approval.approval_id);
+    assert.ok(validation.checks.find((c) => c.id === 'end_to_end_trace')!.ok);
+    assert.ok(validation.story_order.length >= 1);
+    const pk = prepare(wfOf(ctx), 'F5');
+    assert.equal(pk.permissions.generation_authorized, false, 'the config flag is still off');
   });
 
-  test('13. an invalid story approver is rejected; F4 cannot approve its own stories', () => {
+  test('14. changed story contents make the story set invalid and stop F5', () => {
     const { f, ctx, dk } = designFixture(fixtures);
-    const { approval } = approveArchitecture(f, ctx, dk);
-    deliverStories(f, ctx, approval.approval_id);
-    const req = createDesignRequest(wfOf(ctx), 'G4', 'dave.requester');
-    assert.ok(failed(signDesign(f, ctx, req, DESIGN_SIGNERS.architect, dk.architect, 'architecture_approver')).includes('role'));
-    for (const id of ['F4', findAgent('F4')!.name]) assert.ok(failed(signDesign(f, ctx, req, id, dk.planner, 'story_approver')).includes('not_self_approval'), id);
-    assert.notEqual(runGate(wfOf(ctx), 'G4').status, 'PASS');
-  });
-
-  test('14. changed story contents invalidate the story-set approval', () => {
-    const { f, ctx, dk } = designFixture(fixtures);
-    const { request } = approveStories(f, ctx, dk);
-    const file = request.payload.artifact.files.find((x: any) => x.name === 'stories.json').path;
+    readyForImplementation(f, ctx, dk);
+    const set = artifactSet(wfOf(ctx), 'F4')!;
+    const file = set.files.find((x) => x.name === 'stories.json')!.path;
     const doc = JSON.parse(fs.readFileSync(path.join(f.repoRoot, file), 'utf8'));
     doc.stories[0].acceptance_criteria[0].criterion = 'Given any input, the step returns zero';
     fs.writeFileSync(path.join(f.repoRoot, file), JSON.stringify(doc, null, 2));
-    assert.equal(runGate(wfOf(ctx), 'G4').status, 'UNVERIFIED');
-    assert.equal(wfOf(ctx).state.state, 'BLOCKED');
-    assert.ok(invalidations(wfOf(ctx)).some((i) => i.gate === 'G4' && i.causes.includes('artifact_changed')));
+    const v = validateStorySet(wfOf(ctx));
+    assert.equal(v.ok, false);
+    assert.ok(v.checks.some((c) => c.id === 'story_output' && !c.ok));
+    assert.throws(() => prepare(wfOf(ctx), 'F5'), /story set is not valid/);
   });
 });
 
 /* ------------------------------------------------------------------ */
 describe('STEP 7 — dependency-aware invalidation and trust', () => {
-  test('15. a changed approved requirement invalidates G2 and, through it, the G3 and G4 approvals', () => {
+  test('15. a changed approved requirement invalidates G2 and, through it, the G3 approval and the story set', () => {
     const { f, ctx, dk, k } = designFixture(fixtures);
-    approveStories(f, ctx, dk);
+    readyForImplementation(f, ctx, dk);
     const snap = buildSnapshot(wfOf(ctx));
     const scopeDec = [...snap.register.values()].find((d) => d.kind === 'scope' && snap.resolutions.get(d.decision_id)?.status === 'resolved')!;
     signResolution(ctx, f, scopeDec.decision_id, 'resolved_no_change', k.sme, SIGNERS.sme, 'business_sme');
@@ -278,12 +273,10 @@ describe('STEP 7 — dependency-aware invalidation and trust', () => {
     assert.equal(wfOf(ctx).state.state, 'BLOCKED');
     const inv = invalidations(wfOf(ctx));
     const g3 = inv.find((i) => i.gate === 'G3')!;
-    const g4 = inv.find((i) => i.gate === 'G4')!;
     assert.ok(g3.causes.includes('upstream_invalidated'));
-    assert.ok(g3.downstream_impact.some((d: any) => d.gate === 'G4'));
-    assert.ok(g4.causes.includes('upstream_invalidated'));
+    assert.ok(!inv.some((i) => i.gate === ('G4' as any)), 'there is no G4 approval to invalidate');
     assert.notEqual(wfOf(ctx).state.gates.G3.status, 'PASS');
-    assert.notEqual(wfOf(ctx).state.gates.G4.status, 'PASS');
+    assert.equal(validateStorySet(wfOf(ctx)).ok, false, 'the story set is no longer valid without a current G3');
   });
 
   test('16. revoking the architect invalidates the current architecture approval', () => {
@@ -294,9 +287,9 @@ describe('STEP 7 — dependency-aware invalidation and trust', () => {
     assert.ok(invalidations(wfOf(ctx)).some((i) => i.gate === 'G3' && i.causes.includes('signer_revoked_or_invalid')));
   });
 
-  test('23. checkpoint and audit integrity hold through G3/G4; a tampered approval record stops counting', () => {
+  test('23. checkpoint and audit integrity hold through G3 and story validation; a tampered approval record stops counting', () => {
     const { f, ctx, dk } = designFixture(fixtures);
-    approveStories(f, ctx, dk);
+    readyForImplementation(f, ctx, dk);
     assert.equal(wfOf(ctx).store.verifyCheckpoint().ok, true);
     const rec = designApprovals(wfOf(ctx), 'G3')[0];
     const p = wfOf(ctx).store.p('design', 'approvals', `${rec.approval_id}.json`);
@@ -306,19 +299,18 @@ describe('STEP 7 — dependency-aware invalidation and trust', () => {
     assert.ok(g.invalidations.some((i) => i.causes.includes('record_tampered')));
   });
 
-  test('24. G2 stays fail-closed: no G2 approval means G3/G4 never pass even with valid-looking artefacts', () => {
+  test('24. G2 stays fail-closed: no G2 approval means G3 never passes even with valid-looking artefacts', () => {
     const { ctx } = designFixture(fixtures, { approveG2: false });
     assert.equal(runGate(wfOf(ctx), 'G2').status, 'UNVERIFIED');
-    for (const g of ['G3', 'G4'] as const) assert.equal(runGate(wfOf(ctx), g).status, 'BLOCKED');
+    assert.equal(runGate(wfOf(ctx), 'G3').status, 'BLOCKED');
     assert.equal(advance(wfOf(ctx), 'REQUIREMENTS_APPROVED').accepted, false);
   });
 
-  test('25/26. G5-G8 stay protected and no Java generation is authorised after G4 PASS', () => {
+  test('25/26. G3 PASS with valid stories alone never authorises Java generation (config flag off)', () => {
     const { f, ctx, dk } = designFixture(fixtures);
-    approveStories(f, ctx, dk);
-    assert.notEqual(runGate(wfOf(ctx), 'G5').status, 'PASS');
-    for (const g of ['G6', 'G7', 'G8'] as const) assert.equal(runGate(wfOf(ctx), g).status, 'BLOCKED', g);
-    assert.deepEqual(GATES.filter((g) => g.evaluator === 'fail_closed').map((g) => g.id), ['G5', 'G6', 'G7', 'G8']);
+    readyForImplementation(f, ctx, dk);
+    assert.equal(runGate(wfOf(ctx), 'G3').status, 'PASS');
+    assert.deepEqual(GATES.map((g) => g.id), ['G2', 'G3']);
     assert.equal(generationAuthorized(wfOf(ctx).run, wfOf(ctx).state), false);
     const roots = policyRoots(wfOf(ctx).run, wfOf(ctx).state);
     assert.equal(canWrite(findAgent('F5')!, path.join(f.repoRoot, 'java', 'src', 'main', 'java', 'A.java'), roots).allowed, false);
@@ -327,7 +319,7 @@ describe('STEP 7 — dependency-aware invalidation and trust', () => {
     assert.ok(e.reasons.some((r) => /Build is disabled/.test(r)));
   });
 
-  test('27. reverse artefacts and COBOL sources are unchanged by the whole G2-G4 flow', () => {
+  test('27. reverse artefacts and COBOL sources are unchanged by the whole G2-G3 flow', () => {
     const { f, ctx, dk } = designFixture(fixtures, { approveG2: false });
     const out = hashTree(path.join(f.repoRoot, 'output'));
     const src = hashTree(f.sourceRoot);
@@ -337,7 +329,7 @@ describe('STEP 7 — dependency-aware invalidation and trust', () => {
     const g = designFixture(fixtures);
     const out2 = hashTree(path.join(g.f.repoRoot, 'output'));
     const src2 = hashTree(g.f.sourceRoot);
-    approveStories(g.f, g.ctx, g.dk);
+    readyForImplementation(g.f, g.ctx, g.dk);
     assert.deepEqual(hashTree(path.join(g.f.repoRoot, 'output')), out2);
     assert.deepEqual(hashTree(g.f.sourceRoot), src2);
     assert.ok(Object.keys(out).length > 0 && Object.keys(src).length > 0);
@@ -418,7 +410,7 @@ describe('STEP 7 — isolated BMad executor', () => {
   test('29. regression: dispatching and delivering F3/F4 never changes the G2 scope or its readiness', () => {
     const { f, ctx, dk } = designFixture(fixtures);
     const before = evaluateScope(buildSnapshot(wfOf(ctx)), parseSelector(BRAVO));
-    approveStories(f, ctx, dk);
+    readyForImplementation(f, ctx, dk);
     const after = evaluateScope(buildSnapshot(wfOf(ctx)), parseSelector(BRAVO));
     assert.equal(after.scope_sha256, before.scope_sha256);
     assert.equal(after.readiness, 'READY');

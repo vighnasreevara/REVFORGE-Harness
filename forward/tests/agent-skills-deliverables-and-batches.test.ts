@@ -8,7 +8,7 @@ import { gitInfo } from '../runtime/src/core/git';
 import { runPlan } from '../runtime/src/commands/plan';
 import { AGENTS, findAgent } from '../runtime/src/orchestrator/agents';
 import { computeLedger } from '../runtime/src/orchestrator/ledger';
-import { advance, initWorkflow, loadWorkflow, policyRoots, prepare, prepareBatches, recordReceipt, runGate } from '../runtime/src/orchestrator/orchestrator';
+import { advance, initWorkflow, loadWorkflow, policyRoots, prepare, prepareBatches, recordReceipt, runGate, runPrecheck } from '../runtime/src/orchestrator/orchestrator';
 import { canWrite } from '../runtime/src/orchestrator/permissions';
 import { allowedForwardAdditions, SKILLS, validateSkill, validateSkillInventory } from '../runtime/src/orchestrator/skills';
 import { allowedJavaTypes } from '../verification/src/numeric';
@@ -30,7 +30,7 @@ function setup(opts: { skills?: boolean; mutate?: (f: Fixture) => void } = {}) {
   const ctx = loadContext({ forwardDir: FORWARD_DIR, configPath: f.configPath });
   runPlan(ctx, { runId: 'FWD-T3' });
   initWorkflow(ctx, 'FWD-T3');
-  assert.equal(runGate(loadWorkflow(ctx, 'FWD-T3'), 'G1').status, 'PASS');
+  assert.equal(runPrecheck(loadWorkflow(ctx, 'FWD-T3'), 'EVIDENCE').status, 'PASS');
   assert.equal(advance(loadWorkflow(ctx, 'FWD-T3'), 'EVIDENCE_VALIDATED').accepted, true);
   return { f, ctx };
 }
@@ -361,7 +361,7 @@ describe('S3-16/17. real reverse artifacts: F1 and F2 batches through the runtim
     const ctx = realCtx();
     runPlan(ctx, { runId: 'FWD-T3-REAL' });
     initWorkflow(ctx, 'FWD-T3-REAL');
-    assert.equal(runGate(loadWorkflow(ctx, 'FWD-T3-REAL'), 'G1').status, 'PASS');
+    assert.equal(runPrecheck(loadWorkflow(ctx, 'FWD-T3-REAL'), 'EVIDENCE').status, 'PASS');
     assert.equal(advance(loadWorkflow(ctx, 'FWD-T3-REAL'), 'EVIDENCE_VALIDATED').accepted, true);
     const ps = prepareBatches(loadWorkflow(ctx, 'FWD-T3-REAL'), 'F1', 14);
     assert.ok(ps.length > 1 && ps.every((p) => p.dispatchable));
@@ -381,7 +381,7 @@ describe('S3-16/17. real reverse artifacts: F1 and F2 batches through the runtim
     const ctx = realCtx();
     runPlan(ctx, { runId: 'FWD-T3-REAL2' });
     initWorkflow(ctx, 'FWD-T3-REAL2');
-    runGate(loadWorkflow(ctx, 'FWD-T3-REAL2'), 'G1');
+    runPrecheck(loadWorkflow(ctx, 'FWD-T3-REAL2'), 'EVIDENCE');
     advance(loadWorkflow(ctx, 'FWD-T3-REAL2'), 'EVIDENCE_VALIDATED');
     const ps = prepareBatches(loadWorkflow(ctx, 'FWD-T3-REAL2'), 'F2', 100);
     assert.equal(ps.length, 1);

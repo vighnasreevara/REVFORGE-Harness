@@ -1,16 +1,17 @@
 /**
  * demo gates [--out DIR] [--input DIR]
  *
- * Runs the synthetic G0-G8 gate demonstration (environment
- * SYNTHETIC_INTERVIEW_DEMO) and prints the nine demo results. Exit 0 only
- * when every demo gate passed and the synthetic acceptance was recorded;
- * otherwise exit 1 with the first failing gate's diagnostic. Nothing in the
+ * Runs the synthetic two-gate workflow demonstration (environment
+ * SYNTHETIC_INTERVIEW_DEMO): two pre-checks, the human gates G2 and G3, and
+ * five automated steps. Exit 0 only when every step passed and the run
+ * completed after the review; otherwise exit 1 with the first failing step's
+ * diagnostic. Nothing in the
  * real workflow, configuration or evidence is changed.
  */
 import * as fs from 'fs';
 import * as path from 'path';
 import { RuntimeContext } from '../core/config';
-import { defaultRunsDir, DemoRefused, GATE_SPECS, runDemo } from '../demo/gates';
+import { defaultRunsDir, DemoRefused, runDemo } from '../demo/gates';
 
 type Out = (s: string) => void;
 type Flags = Record<string, string | true>;
@@ -41,14 +42,14 @@ export function demoCommand(ctx: RuntimeContext, action: string | undefined, fla
     return res.exitCode;
   }
   const label: Record<string, string> = { PASS: 'DEMO PASS', FAIL: 'DEMO FAIL', BLOCKED: 'DEMO BLOCKED', NOT_RUN: 'NOT RUN' };
-  out(`REVFORGE synthetic G0-G8 gate demonstration  [environment ${s.environment}]`);
+  out(`REVFORGE synthetic two-gate (G2, G3) workflow demonstration  [environment ${s.environment}]`);
   out(`demo run ${s.demo_run_id}`);
   out(`synthetic source ${s.baseline.source.path} sha256 ${s.baseline.source.sha256}`);
   out('');
-  for (const g of s.gates) {
+  for (const g of s.steps) {
     const checks = g.checks_total ? `${g.checks_passed}/${g.checks_total} checks` : '';
-    out(`  ${`${g.gate} ${GATE_SPECS[g.gate as keyof typeof GATE_SPECS].name}`.padEnd(32)} ${label[g.demo_gate_status].padEnd(13)} ${checks}`);
-    if (g.demo_gate_status !== 'PASS') out(`      ${g.reason}`);
+    out(`  ${`${g.step} ${g.name}`.padEnd(34)} ${`(${g.kind})`.padEnd(12)} ${label[g.demo_status].padEnd(13)} ${checks}`);
+    if (g.demo_status !== 'PASS') out(`      ${g.reason}`);
   }
   out('');
   out(`verdict                   ${s.verdict}`);

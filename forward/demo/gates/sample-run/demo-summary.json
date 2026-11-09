@@ -2,95 +2,104 @@
   "contract": "demo/run-summary",
   "contract_version": "1.0",
   "environment": "SYNTHETIC_INTERVIEW_DEMO",
-  "demo_run_id": "DEMO-20261106T020939Z-1ba6",
-  "started_at": "2026-11-06T02:09:39.945Z",
-  "finished_at": "2026-11-06T02:09:42.392Z",
-  "verdict": "SYNTHETIC_DEMO_ACCEPTED",
+  "demo_run_id": "DEMO-20261108T192652Z-4a4f",
+  "started_at": "2026-11-08T19:26:52.883Z",
+  "finished_at": "2026-11-08T19:26:55.329Z",
+  "verdict": "SYNTHETIC_DEMO_COMPLETED",
   "stopped_at": null,
   "production_authorization": "NOT_GRANTED",
   "real_bmad_execution": "NOT_EXECUTED",
   "legacy_equivalence": "NOT_ESTABLISHED",
-  "gates": [
+  "steps": [
     {
-      "gate": "G0",
-      "name": "Baseline Integrity",
-      "demo_gate_status": "PASS",
+      "step": "BASELINE",
+      "kind": "precheck",
+      "name": "Baseline pre-check",
+      "demo_status": "PASS",
       "reason": "6 checks passed",
-      "result": "gates/G0.result.json",
+      "result": "steps/BASELINE.result.json",
       "checks_passed": 6,
       "checks_total": 6
     },
     {
-      "gate": "G1",
-      "name": "Evidence Verification",
-      "demo_gate_status": "PASS",
+      "step": "EVIDENCE",
+      "kind": "precheck",
+      "name": "Evidence pre-check",
+      "demo_status": "PASS",
       "reason": "10 checks passed",
-      "result": "gates/G1.result.json",
+      "result": "steps/EVIDENCE.result.json",
       "checks_passed": 10,
       "checks_total": 10
     },
     {
-      "gate": "G2",
+      "step": "G2",
+      "kind": "gate",
       "name": "Requirements Approval",
-      "demo_gate_status": "PASS",
+      "demo_status": "PASS",
       "reason": "18 checks passed",
-      "result": "gates/G2.result.json",
+      "result": "steps/G2.result.json",
       "checks_passed": 18,
       "checks_total": 18
     },
     {
-      "gate": "G3",
+      "step": "G3",
+      "kind": "gate",
       "name": "Architecture Approval",
-      "demo_gate_status": "PASS",
+      "demo_status": "PASS",
       "reason": "17 checks passed",
-      "result": "gates/G3.result.json",
+      "result": "steps/G3.result.json",
       "checks_passed": 17,
       "checks_total": 17
     },
     {
-      "gate": "G4",
-      "name": "Development Plan Approval",
-      "demo_gate_status": "PASS",
-      "reason": "18 checks passed",
-      "result": "gates/G4.result.json",
-      "checks_passed": 18,
-      "checks_total": 18
+      "step": "STORIES",
+      "kind": "automated",
+      "name": "Story validation",
+      "demo_status": "PASS",
+      "reason": "7 checks passed",
+      "result": "steps/STORIES.result.json",
+      "checks_passed": 7,
+      "checks_total": 7
     },
     {
-      "gate": "G5",
-      "name": "Java Build and Tests",
-      "demo_gate_status": "PASS",
+      "step": "BUILD",
+      "kind": "automated",
+      "name": "Java build and tests",
+      "demo_status": "PASS",
       "reason": "11 checks passed",
-      "result": "gates/G5.result.json",
+      "result": "steps/BUILD.result.json",
       "checks_passed": 11,
       "checks_total": 11
     },
     {
-      "gate": "G6",
-      "name": "Independent Verification",
-      "demo_gate_status": "PASS",
+      "step": "VERIFY",
+      "kind": "automated",
+      "name": "Independent verification",
+      "demo_status": "PASS",
       "reason": "9 checks passed",
-      "result": "gates/G6.result.json",
+      "result": "steps/VERIFY.result.json",
       "checks_passed": 9,
       "checks_total": 9
     },
     {
-      "gate": "G7",
-      "name": "Independent Review",
-      "demo_gate_status": "PASS",
+      "step": "REVIEW",
+      "kind": "automated",
+      "name": "Independent review",
+      "demo_status": "PASS",
       "reason": "12 checks passed",
-      "result": "gates/G7.result.json",
+      "result": "steps/REVIEW.result.json",
       "checks_passed": 12,
       "checks_total": 12
     },
     {
-      "gate": "G8",
-      "name": "Synthetic Acceptance",
-      "demo_gate_status": "PASS",
-      "reason": "15 checks passed",
-      "result": "gates/G8.result.json",
-      "checks_passed": 15,
-      "checks_total": 15
+      "step": "COMPLETE",
+      "kind": "automated",
+      "name": "Completion",
+      "demo_status": "PASS",
+      "reason": "6 checks passed",
+      "result": "steps/COMPLETE.result.json",
+      "checks_passed": 6,
+      "checks_total": 6
     }
   ],
   "baseline": {
@@ -141,7 +150,7 @@
     "simulated_stages": 6,
     "would_be_eligible_in_demo": 6,
     "counted_as_bmad_execution": 0,
-    "acceptance_outside_bmad": "G6-G8 stay outside BMad, as in the real design",
+    "acceptance_outside_bmad": "independent verification (F6) and completion after the F7 review stay outside BMad, as in the real design",
     "real_governed_workflow": "BMAD_BLOCKED (unchanged: no LIVE receipt exists)",
     "stages": [
       {
@@ -150,11 +159,11 @@
         "agent": "F1",
         "stage": "requirements",
         "activity": "requirements (F1) -> PRD rendering of the approved requirements",
-        "demo_gate": "G2",
+        "demo_step": "G2",
         "mode": "SIMULATED",
         "preflight": "WOULD_BE_ELIGIBLE_IN_DEMO",
         "counts_as_bmad_execution": false,
-        "real_receipt_check": "SIM-DEMO-20261106T020939Z-1ba6-BMAD-PRD is a SIMULATED receipt (MOCK_NOT_EVIDENCE): never BMad execution evidence"
+        "real_receipt_check": "SIM-DEMO-20261108T192652Z-4a4f-BMAD-PRD is a SIMULATED receipt (MOCK_NOT_EVIDENCE): never BMad execution evidence"
       },
       {
         "binding_id": "BMAD-ARCH",
@@ -162,11 +171,11 @@
         "agent": "F3",
         "stage": "architecture",
         "activity": "architecture (F3)",
-        "demo_gate": "G3",
+        "demo_step": "G3",
         "mode": "SIMULATED",
         "preflight": "WOULD_BE_ELIGIBLE_IN_DEMO",
         "counts_as_bmad_execution": false,
-        "real_receipt_check": "SIM-DEMO-20261106T020939Z-1ba6-BMAD-ARCH is a SIMULATED receipt (MOCK_NOT_EVIDENCE): never BMad execution evidence"
+        "real_receipt_check": "SIM-DEMO-20261108T192652Z-4a4f-BMAD-ARCH is a SIMULATED receipt (MOCK_NOT_EVIDENCE): never BMad execution evidence"
       },
       {
         "binding_id": "BMAD-EPICS",
@@ -174,11 +183,11 @@
         "agent": "F4",
         "stage": "stories",
         "activity": "epics and stories (F4)",
-        "demo_gate": "G4",
+        "demo_step": "STORIES",
         "mode": "SIMULATED",
         "preflight": "WOULD_BE_ELIGIBLE_IN_DEMO",
         "counts_as_bmad_execution": false,
-        "real_receipt_check": "SIM-DEMO-20261106T020939Z-1ba6-BMAD-EPICS is a SIMULATED receipt (MOCK_NOT_EVIDENCE): never BMad execution evidence"
+        "real_receipt_check": "SIM-DEMO-20261108T192652Z-4a4f-BMAD-EPICS is a SIMULATED receipt (MOCK_NOT_EVIDENCE): never BMad execution evidence"
       },
       {
         "binding_id": "BMAD-SPRINT",
@@ -186,11 +195,11 @@
         "agent": "F4",
         "stage": "sprint",
         "activity": "sprint planning (F4)",
-        "demo_gate": "G4",
+        "demo_step": "STORIES",
         "mode": "SIMULATED",
         "preflight": "WOULD_BE_ELIGIBLE_IN_DEMO",
         "counts_as_bmad_execution": false,
-        "real_receipt_check": "SIM-DEMO-20261106T020939Z-1ba6-BMAD-SPRINT is a SIMULATED receipt (MOCK_NOT_EVIDENCE): never BMad execution evidence"
+        "real_receipt_check": "SIM-DEMO-20261108T192652Z-4a4f-BMAD-SPRINT is a SIMULATED receipt (MOCK_NOT_EVIDENCE): never BMad execution evidence"
       },
       {
         "binding_id": "BMAD-BUILD",
@@ -198,11 +207,11 @@
         "agent": "F5",
         "stage": "implementation",
         "activity": "implementation (F5; here the deterministic converter)",
-        "demo_gate": "G5",
+        "demo_step": "BUILD",
         "mode": "SIMULATED",
         "preflight": "WOULD_BE_ELIGIBLE_IN_DEMO",
         "counts_as_bmad_execution": false,
-        "real_receipt_check": "SIM-DEMO-20261106T020939Z-1ba6-BMAD-BUILD is a SIMULATED receipt (MOCK_NOT_EVIDENCE): never BMad execution evidence"
+        "real_receipt_check": "SIM-DEMO-20261108T192652Z-4a4f-BMAD-BUILD is a SIMULATED receipt (MOCK_NOT_EVIDENCE): never BMad execution evidence"
       },
       {
         "binding_id": "BMAD-REVIEW",
@@ -210,11 +219,11 @@
         "agent": "F7",
         "stage": "review",
         "activity": "code review (F7)",
-        "demo_gate": "G7",
+        "demo_step": "REVIEW",
         "mode": "SIMULATED",
         "preflight": "WOULD_BE_ELIGIBLE_IN_DEMO",
         "counts_as_bmad_execution": false,
-        "real_receipt_check": "SIM-DEMO-20261106T020939Z-1ba6-BMAD-REVIEW is a SIMULATED receipt (MOCK_NOT_EVIDENCE): never BMad execution evidence"
+        "real_receipt_check": "SIM-DEMO-20261108T192652Z-4a4f-BMAD-REVIEW is a SIMULATED receipt (MOCK_NOT_EVIDENCE): never BMad execution evidence"
       }
     ]
   },
@@ -223,15 +232,8 @@
     "bmad_governance_mandatory": true,
     "approval_trust_store": null,
     "real_workflow_gates": {
-      "G0": "PASS",
-      "G1": "PASS",
       "G2": "UNVERIFIED",
-      "G3": "BLOCKED",
-      "G4": "BLOCKED",
-      "G5": "BLOCKED",
-      "G6": "BLOCKED",
-      "G7": "BLOCKED",
-      "G8": "BLOCKED"
+      "G3": "BLOCKED"
     },
     "gap_register": {
       "records": 569,
@@ -241,7 +243,7 @@
     "real_bmad_execution": "NOT_EXECUTED (no LIVE receipt)",
     "legacy_equivalence": "NOT_ESTABLISHED",
     "production_readiness": "NOT_PRODUCTION_READY",
-    "engineering_quality_gates": "SOURCE_READINESS and CONVERSION_VALIDATION (pilot/gates.ts) are unchanged and separate from the demo gates"
+    "engineering_quality_gates": "SOURCE_READINESS and CONVERSION_VALIDATION (pilot/gates.ts) are unchanged and separate from the demo steps"
   },
   "environment_info": {
     "node": "v22.12.0",
@@ -250,7 +252,7 @@
     "java_source": "REVFORGE_JAVA_HOME",
     "cobol_compiler": "not available (not used)",
     "input_dir": "forward/demo/gates/synthetic",
-    "output_dir": "forward/demo/gates/runs/DEMO-20261106T020939Z-1ba6",
+    "output_dir": "forward/demo/gates/runs/DEMO-20261108T192652Z-4a4f",
     "trust_store": "trust/demo-trust-store.json",
     "private_key": "in memory only; never written"
   },
@@ -259,7 +261,7 @@
     "Demo approvals are signed with an ephemeral key created for this run; they are not real human, business-owner or production approvals.",
     "production_authorization is NOT_GRANTED: no real gate, approval, receipt or Java generation authorisation was created or changed.",
     "BMad lifecycle steps are SIMULATED; no BMad workflow was executed and real mandatory BMad execution remains blocked.",
-    "G6 compares the Java with an independent specification oracle; no COBOL runtime was executed, so legacy equivalence is NOT_ESTABLISHED.",
-    "The real modernization is unchanged: real G2 is UNVERIFIED and G3-G8 BLOCKED, the gap register stays OPEN, and the project is not production ready."
+    "VERIFY compares the Java with an independent specification oracle; no COBOL runtime was executed, so legacy equivalence is NOT_ESTABLISHED.",
+    "The real modernization is unchanged: real G2 is UNVERIFIED and G3 BLOCKED, the gap register stays OPEN, and the project is not production ready."
   ]
 }
