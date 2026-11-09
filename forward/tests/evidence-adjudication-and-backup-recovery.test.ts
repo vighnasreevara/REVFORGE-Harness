@@ -1,5 +1,5 @@
 /**
- * STEP 10: evidence adjudication, fail-closed G2 evidence selection, review
+ * STEP 10: evidence adjudication, fail-closed G1 evidence selection, review
  * packages, stale requests and the recoverable backup. Synthetic COBOL,
  * synthetic signers and temporary directories only.
  */
@@ -75,7 +75,7 @@ describe('STEP 10 — adjudication of earlier and new evidence', () => {
     const rec = recordAdjudications(wfOf(ctx), adjudicationReport(wfOf(ctx), BRAVO));
     assert.ok(rec.some((x) => x.item_id === req && x.new && x.superseding_status === 'EVIDENCE_INVALIDATED'));
     const it = item(ctx, req);
-    assert.equal(it.claim!.result, 'unverified', 'G2 no longer uses the false verification');
+    assert.equal(it.claim!.result, 'unverified', 'G1 no longer uses the false verification');
     assert.equal(finding(ctx, req).outcome, 'REQUIRES_EVIDENCE');
     assert.notEqual(evaluateScope(buildSnapshot(wfOf(ctx)), parseSelector(BRAVO)).scope_sha256, before, '18. the scope digest changes');
     assert.equal(buildSnapshot(wfOf(ctx)).resolutions.get(`RVW-${req}`)?.status ?? 'open', 'open', 'no decision is resolved by an evidence change');
@@ -204,7 +204,7 @@ describe('STEP 10 — shared dependencies, packages and gates', () => {
     assert.ok(p2.fresh_requests.length >= 1);
   });
 
-  test('20/21/22. G2 cannot accept invalid evidence or pass without signatures; G3/G4 stay protected', () => {
+  test('20/21/22. G1 cannot accept invalid evidence or pass without signatures; G2/G4 stay protected', () => {
     const { f, ctx, k, req } = contextFixture(fixtures, FALSE_POSITIVE);
     recordAdjudications(wfOf(ctx), adjudicationReport(wfOf(ctx), BRAVO));
     const sups = recordSupplements(wfOf(ctx), contextReport(wfOf(ctx), BRAVO));
@@ -214,8 +214,8 @@ describe('STEP 10 — shared dependencies, packages and gates', () => {
       assert.equal(r.recorded, false, 'invalid or advisory evidence cannot be accepted');
     }
     assert.ok(finding(ctx, req).blocking);
-    assert.notEqual(runGate(wfOf(ctx), 'G2').status, 'PASS');
-    assert.equal(runGate(wfOf(ctx), 'G3').status, 'BLOCKED');
+    assert.notEqual(runGate(wfOf(ctx), 'G1').status, 'PASS');
+    assert.equal(runGate(wfOf(ctx), 'G2').status, 'BLOCKED');
   });
 
   test('28/29/30. historical receipts and reverse outputs unchanged; no Java', () => {

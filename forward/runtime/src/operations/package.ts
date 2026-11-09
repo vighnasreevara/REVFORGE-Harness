@@ -17,7 +17,7 @@
  */
 import * as fs from 'fs';
 import * as path from 'path';
-import { evaluateG2Gate } from '../approval/approvals';
+import { evaluateG1Gate } from '../approval/approvals';
 import { evaluateScope, parseSelector, selectorText } from '../approval/scope';
 import { Snapshot } from '../approval/snapshot';
 import { requiredRoles } from '../approval/decisions';
@@ -135,7 +135,7 @@ export function reviewPackage(wf: Workflow, scope: string, opts: { exportDir: st
   const rec = reconcileScope(snap, sel, ev);
   const reader = new SourceReader(snap);
   const trust = trustDoctor(wf.run.ctx);
-  const g2 = evaluateG2Gate(wf, snap.at);
+  const g2 = evaluateG1Gate(wf, snap.at);
   const finding = (id: string) => ev.findings.find((f) => f.id === id);
   const reqs = [...rec.requirements, ...rec.runtime_requirements].map((r) => {
     const it = snap.itemById.get(r.id)!;
@@ -203,7 +203,7 @@ export function reviewPackage(wf: Workflow, scope: string, opts: { exportDir: st
     stale_requests: stale,
     blocking_findings: blocking,
     ready_conditions: blocking.map((b) => `${b.kind} ${b.id} must stop blocking (${b.outcome})`),
-    pass_conditions: ['the scope is READY (no blocking finding)', 'a trust store with a usable requirements_approver', 'an approval request exported for the current scope digest', 'a signed approval by a requirements_approver who is not the requester, imported and re-verified', `G2 re-evaluated to PASS for exactly ${sel}`],
+    pass_conditions: ['the scope is READY (no blocking finding)', 'a trust store with a usable requirements_approver', 'an approval request exported for the current scope digest', 'a signed approval by a requirements_approver who is not the requester, imported and re-verified', `G1 re-evaluated to PASS for exactly ${sel}`],
     g2: { status: g2.result.status, reason: g2.result.reason },
   };
 }

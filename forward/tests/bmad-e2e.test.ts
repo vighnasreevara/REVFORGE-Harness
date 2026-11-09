@@ -93,7 +93,7 @@ describe('BMad end-to-end - governed lifecycle (controlled SIMULATION, never evi
   });
 
   test('the governed run never falls back to the local converter', () => {
-    const { ctx } = designFixture(fixtures, { approveG2: false });
+    const { ctx } = designFixture(fixtures, { approveG1: false });
     const r = governedRun(wfOf(ctx), BRAVO, { runner: null, probe: () => 'probe 1.0' });
     assert.equal(r.fallback, 'none');
     assert.equal(r.local_conversion_invoked, false);

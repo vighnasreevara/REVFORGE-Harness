@@ -6,7 +6,7 @@ allowed-tools: Read, Grep, Glob, Write
 
 # fe-evidence-backed-stories
 
-Owned by agent **fe-development-planner** (F4). Dispatchable only after gate G3 (approved architecture) has passed.
+Owned by agent **fe-development-planner** (F4). Dispatchable only after gate G2 (approved architecture) has passed.
 
 ```json revforge-skill
 {
@@ -17,8 +17,8 @@ Owned by agent **fe-development-planner** (F4). Dispatchable only after gate G3 
   "write_scope": "agent_output_dir",
   "reads": [
     "workflow/packets/<packet>.json",
+    "workflow/gates/G1-*.json",
     "workflow/gates/G2-*.json",
-    "workflow/gates/G3-*.json",
     "workflow/agents/F3/<packet>/component_design.json",
     "workflow/agents/F3/<packet>/architecture_decisions.json",
     "workflow/agents/F1/<packet>/draft_requirements.json",
@@ -42,7 +42,7 @@ The skill names no program and assumes no pilot scope. Scope comes only from the
 
 ## Required input artifacts
 
-- The G2 and G3 gate results, both `PASS` on the packet baseline.
+- The G1 and G2 gate results, both `PASS` on the packet baseline.
 - From accepted F3 receipts: `component_design.json` and `architecture_decisions.json`.
 - From accepted F1 receipts: the approved requirements and the decision register.
 - From accepted F2 receipts: the data contracts.
@@ -50,7 +50,7 @@ The skill names no program and assumes no pilot scope. Scope comes only from the
 
 ## Input validation
 
-1. Stop with `blocked` if G2 or G3 is not `PASS` on the packet baseline, the packet is not dispatchable, or a skill is not installed.
+1. Stop with `blocked` if G1 or G2 is not `PASS` on the packet baseline, the packet is not dispatchable, or a skill is not installed.
 2. Every component referenced must exist in the approved component design. Every requirement must be approved.
 3. Copy `inputs_used` paths and hashes from the packet.
 
@@ -74,7 +74,7 @@ The skill names no program and assumes no pilot scope. Scope comes only from the
 4. Write acceptance criteria as observable checks. Each one cites the legacy statement or paragraph it verifies in `verifies_source`. Examples:
    - "Given a PORT-STATUS value outside the 88-level set, the record is rejected with return code 8": use values from the evidence, never invented ones.
 5. Set `readiness` provisionally to `unverified`; `fe-sprint-readiness` decides the final status.
-6. Set `approval_baseline` to the G2 and G3 result files.
+6. Set `approval_baseline` to the G1 and G2 result files.
 7. Write `stories.json` and `epics.json` (contract `forward/development-stories`).
 
 ## Source grounding
@@ -117,4 +117,4 @@ Stories cite requirement IDs, component IDs, Record IDs and the statement and pa
 
 ## Orchestrator integration
 
-The F4 receipt lists `epics.json`, `stories.json` and `sprint_readiness.md`. The runtime validates them. An accepted completed receipt allows `ARCHITECTURE_APPROVED → STORIES_DRAFTED`. There is no story approval gate: the runtime validates the story set against the approved requirements and the G3 architecture, and F5 can be dispatched only while that validation passes. Java generation needs G3 PASS and the config flag.
+The F4 receipt lists `epics.json`, `stories.json` and `sprint_readiness.md`. The runtime validates them. An accepted completed receipt allows `ARCHITECTURE_APPROVED → STORIES_DRAFTED`. There is no story approval gate: the runtime validates the story set against the approved requirements and the G2 architecture, and F5 can be dispatched only while that validation passes. Java generation needs G2 PASS and the config flag.

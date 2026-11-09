@@ -118,4 +118,4 @@ The runtime enforces checks 1, 2 and 4, and rejects the receipt on any failure.
 
 ## Orchestrator integration
 
-This output is listed in the same F2 receipt as the data contracts and the layout findings. The runtime validates it against the contract, checks ID ownership, records provenance and updates the F2 coverage ledger. Its compatibility requirements become inputs to F3 only after the requirements gate (G2), which is decided by a human.
+This output is listed in the same F2 receipt as the data contracts and the layout findings. The runtime validates it against the contract, checks ID ownership, records provenance and updates the F2 coverage ledger. Its compatibility requirements become inputs to F3 only after the requirements gate (G1), which is decided by a human.

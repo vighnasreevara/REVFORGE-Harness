@@ -1,16 +1,18 @@
-# Human approval operations (G2: approved requirements)
+# Human approval operations (G1: approved requirements)
 
 This guide is for the people who operate the REVFORGE forward workflow and for the humans who approve its requirements. It explains:
-- how the G2 gate decides;
+- how the G1 gate decides;
 - how trust anchors are provisioned;
 - how decisions and approvals are signed;
 - what invalidates an approval.
 
-The harness can tell whether requirements are **ready** to be decided. Only a signed, verified human approval can make **G2 PASS**. No CLI flag, configuration value or agent statement can approve anything.
+The harness can tell whether requirements are **ready** to be decided. Only a signed, verified human approval can make **G1 PASS**. No CLI flag, configuration value or agent statement can approve anything.
 
-## 1. What G2 checks
+> **Gate numbering.** This gate was named G2 until 2026-11-09, and its CLI command was `workflow g2` (now `workflow g1`). Workflows created before that date keep G2 in their records, and their signed approvals name G2; the runtime still accepts those for such workflows. The readiness report keeps its historical file name, `G2-READINESS-REPORT.md`.
 
-Every run of `workflow gate --gate G2` rebuilds the evidence from the runtime's own records. It does this again before each transition to `REQUIREMENTS_APPROVED` and each F3 dispatch. The rebuild covers:
+## 1. What G1 checks
+
+Every run of `workflow gate --gate G1` rebuilds the evidence from the runtime's own records. It does this again before each transition to `REQUIREMENTS_APPROVED` and each F3 dispatch. The rebuild covers:
 
 | Check | Meaning |
 |---|---|
@@ -30,7 +32,7 @@ Every run of `workflow gate --gate G2` rebuilds the evidence from the runtime's 
 
 Each item in scope is classified as one of six outcomes:
 
-| Outcome | Blocks G2? | Meaning |
+| Outcome | Blocks G1? | Meaning |
 |---|---|---|
 | VERIFIED | No | Independently re-verified, or resolved. A verified citation proves the source text exists. It does not prove the business interpretation; the human approval covers that. |
 | REQUIRES_EVIDENCE | Yes | Not independently verified. |
@@ -41,7 +43,7 @@ Each item in scope is classified as one of six outcomes:
 
 ### Status meanings
 
-- **BLOCKED**: the EVIDENCE pre-check (formerly gate G1) has not passed on the current baseline.
+- **BLOCKED**: the EVIDENCE pre-check (gate G1 in the former nine-gate design, not today's G1) has not passed on the current baseline.
 - **FAIL**: the evidence base is not intact. Either the baseline changed or an accepted deliverable or receipt was altered.
 - **UNVERIFIED**: the scope is not ready, there is no trust anchor, or no valid approval exists.
 - **PASS**: all of the following are true:
@@ -68,7 +70,7 @@ Roles and evidence policy live in the `approval` section of `forward/config/forw
 
 | Purpose | Default role(s) |
 |---|---|
-| Approve requirements (G2) | `requirements_approver` |
+| Approve requirements (G1) | `requirements_approver` |
 | Sign an `approved_exception` | `exception_approver` |
 | Resolve business decisions and review decisions | `business_sme` |
 | Resolve technical, data_layout and runtime_semantics decisions | `technical_authority` |
@@ -87,7 +89,7 @@ Step 3.5 showed that agent read telemetry was missing for F2. Under the current 
 - Read telemetry is recorded but not required.
 - No claim is ever accepted on the agent's own declaration.
 
-Every G2 evaluation records this policy.
+Every G1 evaluation records this policy.
 
 ## 4. Provisioning the trust anchor (key custodian)
 
@@ -130,7 +132,7 @@ It ignores signers whose ID is an agent or automation identity (`F1`–`F7`, `fe
 
 **Rotation and revocation:**
 - To revoke a signer, set `"revoked": true` or a past `valid_until`.
-- Every approval and resolution is re-verified against the current store at each G2 evaluation, so revocation takes effect immediately and G2 drops to UNVERIFIED.
+- Every approval and resolution is re-verified against the current store at each G1 evaluation, so revocation takes effect immediately and G1 drops to UNVERIFIED.
 - Rotating a key works the same way: add the new key under a new `signer_id`, and revoke the old one.
 
 **Never put private keys in this repository**, the runs directory, the configuration or a ticket. The repository holds public keys only, and only if the custodian chooses to keep the store there (for example, under `forward/config/`).
@@ -142,10 +144,10 @@ All commands are `node forward/dist/runtime/src/cli.js workflow … --run <RUN>`
 ### 5.1 Inspect readiness
 
 ```sh
-workflow g2 evaluate --scope programs:PROGA            # outcome summary; exit 0 only when READY
-workflow g2 blockers --scope programs:PROGA            # every blocking finding with its reason
-workflow g2 blockers --per-program                     # one line per single-program scope
-workflow g2 report --out forward/reports/G2-READINESS-REPORT.md
+workflow g1 evaluate --scope programs:PROGA            # outcome summary; exit 0 only when READY
+workflow g1 blockers --scope programs:PROGA            # every blocking finding with its reason
+workflow g1 blockers --per-program                     # one line per single-program scope
+workflow g1 report --out forward/reports/G2-READINESS-REPORT.md
 workflow packets review                                # record superseded receipt-less packets (no receipts are created)
 ```
 
@@ -203,8 +205,8 @@ openssl pkeyutl -sign -inkey ~/.keys/revforge-approver.pem -rawin -in stmt.canon
 ```sh
 workflow approval verify --file signed-approval.json      # read-only
 workflow approval import --file signed-approval.json      # records APR-NNNN, or audits the rejection
-workflow gate --gate G2
-workflow advance --to REQUIREMENTS_APPROVED               # re-evaluates G2 first
+workflow gate --gate G1
+workflow advance --to REQUIREMENTS_APPROVED               # re-evaluates G1 first
 ```
 
 Before signing, the approver must read the request in `workflow/approvals/requests/AREQ-NNNN.json`. It lists:
@@ -216,8 +218,8 @@ The approval covers the requirements and their business interpretation. It does 
 
 ## 6. What makes an approval invalid
 
-An imported approval is re-verified at every G2 evaluation. It stops counting in any of these cases:
-- **The baseline changed:** a reverse artifact changed (G2 FAIL) or a COBOL source file in scope changed.
+An imported approval is re-verified at every G1 evaluation. It stops counting in any of these cases:
+- **The baseline changed:** a reverse artifact changed (G1 FAIL) or a COBOL source file in scope changed.
 - **The content changed:**
   - a requirement or data contract changed, including through a validated correction;
   - a decision resolution was added or superseded;
@@ -227,7 +229,7 @@ An imported approval is re-verified at every G2 evaluation. It stops counting in
 - **The trust changed:** the signer was revoked, expired or lost the role, or the trust store was removed.
 - **The record was tampered with:** the approval record or its request no longer matches the hash sealed in the audit log.
 
-When the workflow is already in `REQUIREMENTS_APPROVED` or a later state and G2 stops passing, the workflow moves to `BLOCKED`. F3 cannot be dispatched until a new approval of the new content is imported.
+When the workflow is already in `REQUIREMENTS_APPROVED` or a later state and G1 stops passing, the workflow moves to `BLOCKED`. F3 cannot be dispatched until a new approval of the new content is imported.
 
 ## 7. Rejected approvals and resolutions
 

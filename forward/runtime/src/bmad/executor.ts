@@ -31,7 +31,7 @@ export const BOUND_SKILLS = ['bmad-prd', 'bmad-architecture', 'bmad-create-epics
 /**
  * A binding that stays disabled regardless of eligibility. Build is disabled while the project configuration does not
  * authorise Java generation (generation.java_generation_allowed and an authorised orchestrator.java_target_dir); the
- * G3 approval it also needs is checked by its eligibility.
+ * G2 approval it also needs is checked by its eligibility.
  */
 export function disabledReason(ctx: RuntimeContext, bindingId: string): string | null {
   if (bindingId !== 'BMAD-BUILD') return null;

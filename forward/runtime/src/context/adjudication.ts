@@ -16,7 +16,7 @@
  *    substring inside a data name. If the earlier result rests only on such
  *    false matches and no cited statement supports the value, the record
  *    carries EVIDENCE_INVALIDATED; while current it supersedes the earlier
- *    verification in the G2 snapshot (fail-closed). Statements elsewhere
+ *    verification in the G1 snapshot (fail-closed). Statements elsewhere
  *    that do support the value are recorded as alternative evidence for a
  *    human citation update; they never count automatically.
  *
@@ -234,7 +234,7 @@ export function recordAdjudications(wf: Workflow, report: any): Array<{ adjudica
         linked: { evidence_supplements: esu, original_finding: `${r.item_kind}:${r.item_id}` },
         content_sha256: content,
         result: r,
-        effect: r.superseding_status === 'EVIDENCE_INVALIDATED' ? 'while current, the G2 snapshot treats the earlier verification of this item as unverified (fail-closed); no decision is resolved' : 'informational: classifies the evidence; acceptance still needs a signed resolution',
+        effect: r.superseding_status === 'EVIDENCE_INVALIDATED' ? 'while current, the G1 snapshot treats the earlier verification of this item as unverified (fail-closed); no decision is resolved' : 'informational: classifies the evidence; acceptance still needs a signed resolution',
       };
       const v = wf.run.ctx.contracts.validate('verification/evidence-adjudication', rec);
       if (!v.valid) throw new Error(`evidence adjudication violates its contract: ${v.errors.join('; ')}`);

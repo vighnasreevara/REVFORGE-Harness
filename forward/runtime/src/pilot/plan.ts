@@ -17,7 +17,7 @@
  * repository; statements nested under such an IF/EVALUATE depend on it too.
  * Embedded SQL is an external interface, reported with the table definition
  * found in the source tree (if any). Nothing is resolved, excluded or
- * approved here; the G2 outcome and the open decisions are reported as is.
+ * approved here; the G1 outcome and the open decisions are reported as is.
  */
 import { createHash } from 'crypto';
 import * as fs from 'fs';
@@ -146,7 +146,7 @@ export function modernizationPlan(wf: Workflow, scope: string): any {
     contract: 'pilot/modernization-plan',
     contract_version: '1.0',
     status: 'NON_AUTHORITATIVE',
-    note: 'Planning classification only. It approves, resolves and excludes nothing; implementation of any category still requires the scope to pass G2 and G3 with genuine signed approvals.',
+    note: 'Planning classification only. It approves, resolves and excludes nothing; implementation of any category still requires the scope to pass G1 and G2 with genuine signed approvals.',
     scope: sel,
     generated_at: snap.at.toISOString(),
     baseline: { run_id: wf.run.runId, manifest_sha256: wf.run.manifestSha256 },

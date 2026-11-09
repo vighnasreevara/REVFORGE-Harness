@@ -4,10 +4,10 @@
  *
  * For deterministic LOCAL conversion only, a project-owner-accepted record
  * bound to exact source and copybook hashes and one output directory
- * replaces the G2/G3 signature requirement. No Ed25519 signature is
+ * replaces the G1/G2 signature requirement. No Ed25519 signature is
  * required by this policy. It never changes historical gate records.
  * It never enables the orchestrator's F5/agent generation, which still
- * requires G2 and G3. It never discloses source to any external service.
+ * requires G1 and G2. It never discloses source to any external service.
  *
  * Records live in workflow/generation and are sealed in the audit log:
  *   LGP-NNNN  policy adoption

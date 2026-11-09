@@ -5,7 +5,7 @@
  * provisioned trust store, and bound to the baseline, the exact files and
  * hashes, the packets, the destination, the model(s), the purpose, the data
  * classification, the passes, the disclosure level, size limits and an
- * expiry. Requirements approval (G2) is a different authority and never
+ * expiry. Requirements approval (G1) is a different authority and never
  * implies export.
  *
  * evaluateEgress() is called on the final bytes of every outgoing request

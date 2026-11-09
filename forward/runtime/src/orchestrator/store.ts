@@ -7,7 +7,10 @@
  *   receipts/       recorded agent receipts with the runtime verdict
  *   approvals/      signed human approval records (APR-*) and approval requests (requests/AREQ-*)
  *   decisions/      signed decision resolutions (RES-*), never edited
- *   g2/             sealed G2 scope evaluations (G2E-*)
+ *   g2/             sealed requirements-gate (G1) scope evaluations (G2E-*; directory and
+ *                   prefix keep the gate's former number so older runs read unchanged)
+ *   design/         architecture-gate (G2) requests, approvals (DAP-*), evaluations
+ *                   (DGE-*; G3E-* in runs evaluated before 2026-11-09) and invalidations
  *   packet-status/  packet supersession reviews (PST-*)
  *   step45/         STEP 4.5 blocker analyses (audit, root causes, deterministic checks,
  *                   proposals, review queue, readiness, review packets), never edited
@@ -55,6 +58,12 @@ export interface WorkflowStateRecord {
   packets: string[];
   receipts: string[];
   checkpoint: { seq: number; at: string; state_sha256: string; audit_head: string; audit_entries: number };
+  /**
+   * Gate numbering of this state's records. 2 (set by `workflow init` since 2026-11-09): `gates` keys and gate guard
+   * names are G1 (requirements) and G2 (architecture). Absent (legacy): G2 (requirements) and G3 (architecture), and
+   * G0/G1 hold the former BASELINE/EVIDENCE gate results. Read gate records through gateKey()/gateRecord() in gates.ts.
+   */
+  gate_scheme?: number;
 }
 
 export interface AuditEntry {

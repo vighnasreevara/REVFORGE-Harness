@@ -20,8 +20,8 @@ Owned by agent **fe-development-planner** (F4). Run after `fe-evidence-backed-st
     "workflow/agents/F4/<packet>/stories.json",
     "workflow/agents/F1/<packet>/uncertainty_decision_register.json",
     "workflow/agents/F2/<packet>/data_mappings.json",
-    "workflow/gates/G2-*.json",
-    "workflow/gates/G3-*.json"
+    "workflow/gates/G1-*.json",
+    "workflow/gates/G2-*.json"
   ],
   "executes": []
 }
@@ -29,28 +29,28 @@ Owned by agent **fe-development-planner** (F4). Run after `fe-evidence-backed-st
 
 ## Purpose and responsibility
 
-Give every story a readiness status (`ready`, `blocked` or `unverified`), with the exact list of unmet conditions, and publish a sprint readiness report. A story is `ready` only when every condition below is satisfied by recorded evidence. "Ready" is a planning statement, not an authorisation: implementation needs G3 PASS, a story set that passes the runtime's validation, and generation authorisation.
+Give every story a readiness status (`ready`, `blocked` or `unverified`), with the exact list of unmet conditions, and publish a sprint readiness report. A story is `ready` only when every condition below is satisfied by recorded evidence. "Ready" is a planning statement, not an authorisation: implementation needs G2 PASS, a story set that passes the runtime's validation, and generation authorisation.
 
 ## Required input artifacts
 
 - `stories.json` from the same packet.
 - The decision register: the open and blocking DRs.
-- The approved requirement list and the G2/G3 gate results.
+- The approved requirement list and the G1/G2 gate results.
 - The F2 data contracts: Record IDs and field evidence status.
 - Any recorded human decisions that resolve DRs. These appear only through runtime approval records, never through agent text.
 
 ## Input validation
 
 1. `stories.json` must exist and match `forward/development-stories`. Otherwise run `fe-evidence-backed-stories` first, or return `incomplete`.
-2. G2 and G3 must be `PASS` on the packet baseline. If not, every story is `blocked`.
+2. G1 and G2 must be `PASS` on the packet baseline. If not, every story is `blocked`.
 3. Copy `inputs_used` paths and hashes from the packet.
 
 ## Execution procedure
 
 For each story, check in order and record every failure in `readiness.unmet`:
 
-1. All `requirement_ids` are approved (G2).
-2. All `component_ids` exist in the approved architecture (G3).
+1. All `requirement_ids` are approved (G1).
+2. All `component_ids` exist in the approved architecture (G2).
 3. No `blocking_decisions` entry is still open in the decision register.
 4. Every `data_contracts` Record ID has a data contract whose fields are not `unresolved`.
 5. Every acceptance criterion has a `verifies_source` with a File ID.
@@ -104,4 +104,4 @@ Readiness keeps the story's requirement, component, record and source IDs unchan
 
 ## Orchestrator integration
 
-Listed in the F4 receipt. The runtime validates `stories.json` against the approved requirements and the G3 architecture. F5 can be dispatched only while that validation passes, and only for authorised stories.
+Listed in the F4 receipt. The runtime validates `stories.json` against the approved requirements and the G2 architecture. F5 can be dispatched only while that validation passes, and only for authorised stories.

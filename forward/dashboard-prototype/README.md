@@ -23,7 +23,10 @@ Notes:
   executed and no real approval is recorded. "Show the real project status" switches to the data
   captured from this repository.
 - **Gate numbering.** The dashboard shows the two human approval gates as **G1** (requirements) and
-  **G2** (architecture). In the runtime, its records, contracts and file names they are G2 and G3.
+  **G2** (architecture). Since 2026-11-09 the runtime, its contracts and new workflow records use the
+  same numbering. Workflow records written before that date keep the former IDs G2 and G3, and the
+  runtime reads them through a mapping. The data snapshot embedded in `index.html` was taken under the
+  former IDs, and the page relabels them as G1 and G2.
 - **Data.** The figures are a snapshot taken from this repository (`output/`, the forward workflow
   records and the reports) when the prototype was built. They do not update by themselves.
 - **Framework.** This is a single HTML file (Tailwind CSS and Lucide icons loaded from public

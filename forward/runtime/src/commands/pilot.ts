@@ -46,7 +46,7 @@ export function pilotCommand(ctx: RuntimeContext, action: string | undefined, fl
         writeExport(dir, name, plan);
         print({ written: path.join(dir, name), ...plan }, () => {
           out(`${plan.scope}: ${plan.readiness}; digest ${plan.scope_sha256.slice(0, 16)}… (${plan.status})`);
-          for (const r of plan.requirements) out(`  ${r.id.padEnd(20)} ${r.category.padEnd(8)} ${r.support_class.padEnd(32)} G2 ${r.g2.outcome}`);
+          for (const r of plan.requirements) out(`  ${r.id.padEnd(20)} ${r.category.padEnd(8)} ${r.support_class.padEnd(32)} G1 ${r.g2.outcome}`);
           out(`  written: ${path.join(dir, name)}`);
         });
         return 0;
@@ -65,7 +65,7 @@ export function pilotCommand(ctx: RuntimeContext, action: string | undefined, fl
           for (const p of m.programs) {
             for (const b of p.behaviours ?? []) out(`  ${b.behaviour_id.padEnd(34)} ${b.classification.padEnd(19)} covered by ${b.covered_by.join(', ') || '-'}`);
             out(`  selected candidate: ${p.selected_candidate ? `${p.selected_candidate.behaviour_id} (${p.selected_candidate.requirements.map((r: any) => r.id).join(', ')})` : `none: ${p.no_candidate_reason}`}`);
-            if (p.g2_subset_eligibility) out(`  G2 subset ${p.g2_subset_eligibility.selector}: ${p.g2_subset_eligibility.readiness}; ${JSON.stringify(p.g2_subset_eligibility.counts)}; limitations ${p.g2_subset_eligibility.limitations.map((l: any) => l.id).join(', ') || 'none'}`);
+            if (p.g2_subset_eligibility) out(`  G1 subset ${p.g2_subset_eligibility.selector}: ${p.g2_subset_eligibility.readiness}; ${JSON.stringify(p.g2_subset_eligibility.counts)}; limitations ${p.g2_subset_eligibility.limitations.map((l: any) => l.id).join(', ') || 'none'}`);
             out(`  gaps: ${(p.gaps ?? []).length} (${(p.gaps ?? []).filter((g: any) => g.blocking).length} blocking)`);
           }
           out(`  written: ${path.join(dir, name)}`);

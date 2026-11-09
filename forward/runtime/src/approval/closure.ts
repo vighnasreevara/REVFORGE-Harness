@@ -1,6 +1,6 @@
 /**
  * Deterministic dependency closure of one behaviour of one program (STEP 13).
- * It is the evidence base of a `behaviour:` G2 scope.
+ * It is the evidence base of a `behaviour:` G1 scope.
  *
  * Direct: the statements of the behaviour's PERFORM range (entry paragraph
  * THRU the paragraph every PERFORM of it names).

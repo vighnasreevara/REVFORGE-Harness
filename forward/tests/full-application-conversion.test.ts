@@ -25,7 +25,7 @@ import { SKILLS } from '../runtime/src/orchestrator/skills';
 import { mirrorStatus, syncMirror } from '../runtime/src/orchestrator/mirror';
 import { canWrite } from '../runtime/src/orchestrator/permissions';
 import { cleanup, Fixture, FORWARD_DIR } from './helpers/fixture';
-import { setupG2, wfOf } from './helpers/g2fixture';
+import { setupG1, wfOf } from './helpers/g2fixture';
 
 import { javaTrackingViolations } from './helpers/gitpolicy';
 const REPO = path.resolve(FORWARD_DIR, '..');
@@ -217,7 +217,7 @@ describe('STEP 17 - generated Java compiles and behaves as the source defines (s
 /* ------------------------------------------------------------------ */
 describe('STEP 17 - consolidated authorisation and guards (synthetic)', () => {
   function setup() {
-    const { f, ctx } = setupG2(fixtures);
+    const { f, ctx } = setupG1(fixtures);
     const src = path.join(f.sourceRoot, 'src/app/SYNAPP1.cbl');
     fs.mkdirSync(path.dirname(src), { recursive: true });
     fs.writeFileSync(src, SYN);

@@ -108,6 +108,6 @@ A passing isolation test is **not** permission to send COBOL to a model.
    - request content cannot be inspected;
    - only the minimal workspace limits what can be disclosed;
    - a hostname allowlist does not prove the exact payload is authorized.
-3. **Authorizations.** A `data_owner`-signed Anthropic / `claude-code-cli` disclosure authorization, G2 PASS for the exact scope, REQUIREMENTS_APPROVED, and `live_execution.requested: true`.
+3. **Authorizations.** A `data_owner`-signed Anthropic / `claude-code-cli` disclosure authorization, G1 PASS for the exact scope, REQUIREMENTS_APPROVED, and `live_execution.requested: true`.
 
 **Shared kernel.** The namespaces share the WSL2 kernel with the distribution. It is a strong process boundary, not a VM boundary; for kernel-level separation, use a VM.

@@ -27,7 +27,12 @@
         "properties": { "status": { "enum": ["PASS", "FAIL", "BLOCKED", "NOT_RUN", "UNVERIFIED"] } }
       }
     },
+    "gate_scheme": {
+      "description": "Gate numbering of this state's records. 2 (every workflow created since 2026-11-09): gates are keyed G1 (approved requirements) and G2 (approved architecture). Absent: a legacy state keyed by the former IDs G2 (requirements) and G3 (architecture), possibly with G0/G1 results of the former BASELINE/EVIDENCE gates; such records are read through the runtime's gate-key mapping and never rewritten.",
+      "const": 2
+    },
     "gates": {
+      "description": "Latest result per gate, keyed by gate ID in the state's gate_scheme (see gate_scheme).",
       "type": "object",
       "additionalProperties": {
         "type": "object",

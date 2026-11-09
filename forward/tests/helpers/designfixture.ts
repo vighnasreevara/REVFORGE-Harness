@@ -1,8 +1,8 @@
 /**
- * Synthetic G2 -> G3 -> G4 workflow fixture (STEP 7). Builds on the G2
+ * Synthetic G1 -> G2 -> G4 workflow fixture (STEP 7). Builds on the G1
  * fixture: adds synthetic signers for the design roles (public keys only in
  * the trust store; private keys stay in memory), approves the BRAVO02 scope
- * at G2, and produces real F3 / F4 deliverables through the orchestrator's
+ * at G1, and produces real F3 / F4 deliverables through the orchestrator's
  * dispatcher and receipt validator. Nothing here touches the real run.
  */
 import assert from 'node:assert/strict';
@@ -19,7 +19,7 @@ import { buildSnapshot } from '../../runtime/src/approval/snapshot';
 import { applicableConcerns, approvedScope } from '../../runtime/src/design/design';
 import { createDesignRequest, designStatement, importDesignApproval, StorySetValidation, validateStorySet } from '../../runtime/src/design/approvals';
 import { Fixture } from './fixture';
-import { citedClaim, deliverAll, Edit, KP, setupG2, SIGNERS, signResolution, signText, wfOf } from './g2fixture';
+import { citedClaim, deliverAll, Edit, KP, setupG1, SIGNERS, signResolution, signText, wfOf } from './g2fixture';
 import { readPacket, writeDeliverables } from './outputs';
 
 export const BRAVO = 'programs:BRAVO02';
@@ -36,9 +36,9 @@ export function editTrust(f: Fixture, fn: (j: any) => void): void {
   fs.writeFileSync(trustStorePath(f), JSON.stringify(j, null, 2));
 }
 
-/** A G2-approved BRAVO02 scope in state REQUIREMENTS_APPROVED, with design-role signers in the trust store. */
-export function designFixture(fixtures: Fixture[], opts: { approveG2?: boolean; citeLine?: number; resolve?: boolean; mutate?: (f: Fixture) => void; edit?: Edit } = {}) {
-  const { f, ctx, k } = setupG2(fixtures, { mutate: opts.mutate });
+/** A G1-approved BRAVO02 scope in state REQUIREMENTS_APPROVED, with design-role signers in the trust store. */
+export function designFixture(fixtures: Fixture[], opts: { approveG1?: boolean; citeLine?: number; resolve?: boolean; mutate?: (f: Fixture) => void; edit?: Edit } = {}) {
+  const { f, ctx, k } = setupG1(fixtures, { mutate: opts.mutate });
   const mk = (): KP => generateKeyPairSync('ed25519');
   const dk: DesignKeys = { architect: mk(), techauth: mk(), planner: mk(), exceptions: mk(), dataowner: mk() };
   editTrust(f, (j) => {
@@ -61,13 +61,13 @@ export function designFixture(fixtures: Fixture[], opts: { approveG2?: boolean; 
       else signResolution(ctx, f, id, 'excluded_from_scope', k.sme, SIGNERS.sme, 'business_sme');
     }
   }
-  if (opts.approveG2 !== false && opts.resolve !== false) {
+  if (opts.approveG1 !== false && opts.resolve !== false) {
     const req = createApprovalRequest(wfOf(ctx), BRAVO, 'dave.requester');
     const st = approvalStatement(req, SIGNERS.approver, 'requirements_approver', 'approved');
     const file = path.join(f.repoRoot, 'g2-approval.json');
     fs.writeFileSync(file, JSON.stringify({ contract: 'signed-approval', statement: st, signature: { algorithm: 'ed25519', value: signText(statementText(st), k.approver) } }));
     assert.equal(importApproval(wfOf(ctx), file).imported, true);
-    assert.equal(runGate(wfOf(ctx), 'G2').status, 'PASS');
+    assert.equal(runGate(wfOf(ctx), 'G1').status, 'PASS');
     assert.equal(advance(wfOf(ctx), 'REQUIREMENTS_APPROVED').accepted, true);
   }
   return { f, ctx, k, dk };
@@ -133,13 +133,13 @@ export function signDesign(f: Fixture, ctx: RuntimeContext, request: any, signer
   return importDesignApproval(wfOf(ctx), file);
 }
 
-/** F3 delivered, G3 requested, signed by the architect, G3 PASS and ARCHITECTURE_APPROVED. */
+/** F3 delivered, G2 requested, signed by the architect, G2 PASS and ARCHITECTURE_APPROVED. */
 export function approveArchitecture(f: Fixture, ctx: RuntimeContext, dk: DesignKeys): { request: any; approval: any } {
   deliverArchitecture(f, ctx);
-  const request = createDesignRequest(wfOf(ctx), 'G3', 'dave.requester');
+  const request = createDesignRequest(wfOf(ctx), 'G2', 'dave.requester');
   const approval = signDesign(f, ctx, request, DESIGN_SIGNERS.architect, dk.architect, 'architecture_approver');
   assert.equal(approval.imported, true, JSON.stringify(approval.checks.filter((c: any) => !c.ok)));
-  assert.equal(runGate(wfOf(ctx), 'G3').status, 'PASS');
+  assert.equal(runGate(wfOf(ctx), 'G2').status, 'PASS');
   assert.equal(advance(wfOf(ctx), 'ARCHITECTURE_APPROVED').accepted, true);
   return { request, approval };
 }
@@ -171,7 +171,7 @@ export function deliverStories(f: Fixture, ctx: RuntimeContext, g3ApprovalId: st
   return rec.receipt_id;
 }
 
-/** G3 approval plus an F4 story set that passes the automated validation: STORIES_DRAFTED, ready for F5. */
+/** G2 approval plus an F4 story set that passes the automated validation: STORIES_DRAFTED, ready for F5. */
 export function readyForImplementation(f: Fixture, ctx: RuntimeContext, dk: DesignKeys): { g3: any; validation: StorySetValidation } {
   const g3 = approveArchitecture(f, ctx, dk);
   deliverStories(f, ctx, g3.approval.approval_id);

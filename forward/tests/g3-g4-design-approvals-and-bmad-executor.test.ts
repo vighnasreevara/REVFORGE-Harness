@@ -1,5 +1,5 @@
 /**
- * STEP 7: scope reconciliation, G3 / G4 approval gates, dependency-aware
+ * STEP 7: scope reconciliation, G2 / G4 approval gates, dependency-aware
  * approval invalidation and the isolated BMad executor. Synthetic workflows,
  * synthetic signers (public keys only on disk) and temporary copies of the
  * BMad integration directory; nothing touches the real run, the repository
@@ -76,7 +76,7 @@ function tempIntegration(opts: { executor?: 'copy' | 'none' } = {}): string {
 /* ------------------------------------------------------------------ */
 describe('STEP 7 — scope reconciliation', () => {
   test('1. scope expansion is explained: every item has an inclusion class and reason; runtime requirements are separate', () => {
-    const { ctx } = designFixture(fixtures, { approveG2: false });
+    const { ctx } = designFixture(fixtures, { approveG1: false });
     const snap = buildSnapshot(wfOf(ctx));
     const r = reconcileScope(snap, BRAVO);
     assert.equal(ctx.contracts.validate('bmad/scope-reconciliation', r).valid, true);
@@ -100,7 +100,7 @@ describe('STEP 7 — scope reconciliation', () => {
   });
 
   test('2. decisions are classified from their units: unrelated decisions stay excluded; global and dependency-only decisions are labelled', () => {
-    const { ctx } = designFixture(fixtures, { approveG2: false });
+    const { ctx } = designFixture(fixtures, { approveG1: false });
     const snap = buildSnapshot(wfOf(ctx));
     const r = reconcileScope(snap, BRAVO);
     const inScope = new Set(r.units.map((u) => u.name));
@@ -119,43 +119,43 @@ describe('STEP 7 — scope reconciliation', () => {
     }
   });
 
-  test('3. a missing shared dependency contract is a G3 blocker (architecture without the F2 data contracts)', () => {
+  test('3. a missing shared dependency contract is a G2 blocker (architecture without the F2 data contracts)', () => {
     const { f, ctx } = designFixture(fixtures);
     const snap = buildSnapshot(wfOf(ctx));
     if (!reconcileScope(snap, BRAVO).data_contracts.some((d) => d.kind === 'data_record')) return assert.fail('fixture scope has no data records');
     deliverArchitecture(f, ctx, (docs) => {
       for (const n of ['component_design.json', 'architecture_decisions.json']) docs[n].approved_inputs.data_contract_receipts = [];
     });
-    const g = evaluateDesignGate(wfOf(ctx), 'G3');
+    const g = evaluateDesignGate(wfOf(ctx), 'G2');
     assert.ok(gateFails(g).includes('data_contracts'));
-    assert.throws(() => createDesignRequest(wfOf(ctx), 'G3', 'dave.requester'), (e: any) => e.code === 'NOT_READY' && e.details.some((d: string) => /data_contracts/.test(d)));
+    assert.throws(() => createDesignRequest(wfOf(ctx), 'G2', 'dave.requester'), (e: any) => e.code === 'NOT_READY' && e.details.some((d: string) => /data_contracts/.test(d)));
   });
 });
 
 /* ------------------------------------------------------------------ */
-describe('STEP 7 — G3 architecture approval', () => {
-  test('4. G3 is BLOCKED while G2 has not passed; no architecture request can be made', () => {
-    const { ctx } = designFixture(fixtures, { approveG2: false });
-    assert.equal(runGate(wfOf(ctx), 'G3').status, 'BLOCKED');
-    assert.throws(() => createDesignRequest(wfOf(ctx), 'G3', 'dave.requester'), /cannot be requested/);
+describe('STEP 7 — G2 architecture approval', () => {
+  test('4. G2 is BLOCKED while G1 has not passed; no architecture request can be made', () => {
+    const { ctx } = designFixture(fixtures, { approveG1: false });
+    assert.equal(runGate(wfOf(ctx), 'G2').status, 'BLOCKED');
+    assert.throws(() => createDesignRequest(wfOf(ctx), 'G2', 'dave.requester'), /cannot be requested/);
   });
 
-  test('5. G3 does not pass without a real F3 architecture output', () => {
+  test('5. G2 does not pass without a real F3 architecture output', () => {
     const { ctx } = designFixture(fixtures);
-    const g = runGate(wfOf(ctx), 'G3');
+    const g = runGate(wfOf(ctx), 'G2');
     assert.equal(g.status, 'NOT_RUN');
     assert.match(g.reason, /no accepted F3/);
-    assert.throws(() => createDesignRequest(wfOf(ctx), 'G3', 'dave.requester'), (e: any) => e.details.some((d: string) => /architecture_output/.test(d)));
+    assert.throws(() => createDesignRequest(wfOf(ctx), 'G2', 'dave.requester'), (e: any) => e.details.some((d: string) => /architecture_output/.test(d)));
   });
 
-  test('6. a signed architecture approval by an authorised architect passes G3 (synthetic signer)', () => {
+  test('6. a signed architecture approval by an authorised architect passes G2 (synthetic signer)', () => {
     const { f, ctx, dk } = designFixture(fixtures);
     const { request, approval } = approveArchitecture(f, ctx, dk);
     assert.equal(wfOf(ctx).state.state, 'ARCHITECTURE_APPROVED');
-    const rec = designApprovals(wfOf(ctx), 'G3')[0];
+    const rec = designApprovals(wfOf(ctx), 'G2')[0];
     assert.equal(rec.approval_id, approval.approval_id);
     assert.equal(ctx.contracts.validate('orchestrator/design-approval-record', rec).valid, true);
-    // Bound to baseline, scope, requirements, artefact, dependency manifest and the upstream G2 approval.
+    // Bound to baseline, scope, requirements, artefact, dependency manifest and the upstream G1 approval.
     assert.equal(rec.baseline_manifest_sha256, wfOf(ctx).run.manifestSha256);
     assert.equal(rec.artifact_sha256, request.payload.artifact.sha256);
     assert.equal(rec.requirements_sha256, request.payload.requirements.sha256);
@@ -167,7 +167,7 @@ describe('STEP 7 — G3 architecture approval', () => {
   test('7. unauthorised architecture signers are rejected (wrong role, agent identity, requester, unknown key)', () => {
     const { f, ctx, dk, k } = designFixture(fixtures);
     deliverArchitecture(f, ctx);
-    const req = createDesignRequest(wfOf(ctx), 'G3', 'dave.requester');
+    const req = createDesignRequest(wfOf(ctx), 'G2', 'dave.requester');
     const wrongRole = signDesign(f, ctx, req, DESIGN_SIGNERS.planner, dk.planner, 'story_approver');
     assert.equal(wrongRole.imported, false);
     assert.ok(failed(wrongRole).includes('role'));
@@ -176,27 +176,27 @@ describe('STEP 7 — G3 architecture approval', () => {
     assert.ok(failed(agent).includes('not_self_approval'));
     const forged = signDesign(f, ctx, req, DESIGN_SIGNERS.architect, k.sme, 'architecture_approver');
     assert.ok(failed(forged).includes('signature'));
-    const requester = createDesignRequest(wfOf(ctx), 'G3', DESIGN_SIGNERS.architect);
+    const requester = createDesignRequest(wfOf(ctx), 'G2', DESIGN_SIGNERS.architect);
     assert.ok(failed(signDesign(f, ctx, requester, DESIGN_SIGNERS.architect, dk.architect, 'architecture_approver')).includes('not_self_approval'));
-    assert.notEqual(runGate(wfOf(ctx), 'G3').status, 'PASS');
+    assert.notEqual(runGate(wfOf(ctx), 'G2').status, 'PASS');
     assert.equal(wfOf(ctx).store.readAudit().filter((e) => e.event === 'design_approval_rejected').length, 4);
   });
 
-  test('8. a changed architecture makes the approval stale: G3 fails, the workflow blocks and an invalidation is recorded', () => {
+  test('8. a changed architecture makes the approval stale: G2 fails, the workflow blocks and an invalidation is recorded', () => {
     const { f, ctx, dk } = designFixture(fixtures);
     approveArchitecture(f, ctx, dk);
-    const art = designApprovals(wfOf(ctx), 'G3')[0];
+    const art = designApprovals(wfOf(ctx), 'G2')[0];
     const file = JSON.parse(fs.readFileSync(wfOf(ctx).store.p('design', 'requests', `${art.request_id}.json`), 'utf8')).payload.artifact.files.find((x: any) => x.name === 'architecture_decisions.json').path;
     const doc = JSON.parse(fs.readFileSync(path.join(f.repoRoot, file), 'utf8'));
     doc.adrs[0].proposed_java_behavior = 'double-precision floating point';
     fs.writeFileSync(path.join(f.repoRoot, file), JSON.stringify(doc, null, 2));
-    assert.equal(runGate(wfOf(ctx), 'G3').status, 'UNVERIFIED');
+    assert.equal(runGate(wfOf(ctx), 'G2').status, 'UNVERIFIED');
     assert.equal(wfOf(ctx).state.state, 'BLOCKED');
     const inv = invalidations(wfOf(ctx));
     assert.equal(inv.length, 1);
     assert.ok(inv[0].causes.includes('artifact_changed'));
     assert.equal(ctx.contracts.validate('orchestrator/approval-invalidation', inv[0]).valid, true);
-    runGate(wfOf(ctx), 'G3');
+    runGate(wfOf(ctx), 'G2');
     assert.equal(invalidations(wfOf(ctx)).length, 1, 'the same invalidation is not recorded twice');
     assert.ok(fs.existsSync(wfOf(ctx).store.p('design', 'approvals', `${art.approval_id}.json`)), 'the approval record is preserved');
   });
@@ -204,9 +204,9 @@ describe('STEP 7 — G3 architecture approval', () => {
 
 /* ------------------------------------------------------------------ */
 describe('STEP 7 — F4 story-set validation (no G4: automated, required before F5)', () => {
-  test('9. there is no G4 gate: the gates are G2 and G3, and a story-set approval cannot be requested', () => {
+  test('9. there is no G4 gate: the gates are G1 and G2, and a story-set approval cannot be requested', () => {
     const { f, ctx, dk } = designFixture(fixtures);
-    assert.deepEqual(GATES.map((g) => g.id), ['G2', 'G3']);
+    assert.deepEqual(GATES.map((g) => g.id), ['G1', 'G2']);
     approveArchitecture(f, ctx, dk);
     assert.throws(() => createDesignRequest(wfOf(ctx), 'G4' as any, 'dave.requester'));
   });
@@ -236,7 +236,7 @@ describe('STEP 7 — F4 story-set validation (no G4: automated, required before 
     assert.ok(wfOf(ctx).store.readAudit().some((e) => e.event === 'story_validation' && (e.data as any).ok === false));
   });
 
-  test('12. a valid story set planned against the G3 approval lets F5 be dispatched (synthetic signer)', () => {
+  test('12. a valid story set planned against the G2 approval lets F5 be dispatched (synthetic signer)', () => {
     const { f, ctx, dk } = designFixture(fixtures);
     const { g3, validation } = readyForImplementation(f, ctx, dk);
     assert.equal(validation.architecture_approval, g3.approval.approval_id);
@@ -263,54 +263,54 @@ describe('STEP 7 — F4 story-set validation (no G4: automated, required before 
 
 /* ------------------------------------------------------------------ */
 describe('STEP 7 — dependency-aware invalidation and trust', () => {
-  test('15. a changed approved requirement invalidates G2 and, through it, the G3 approval and the story set', () => {
+  test('15. a changed approved requirement invalidates G1 and, through it, the G2 approval and the story set', () => {
     const { f, ctx, dk, k } = designFixture(fixtures);
     readyForImplementation(f, ctx, dk);
     const snap = buildSnapshot(wfOf(ctx));
     const scopeDec = [...snap.register.values()].find((d) => d.kind === 'scope' && snap.resolutions.get(d.decision_id)?.status === 'resolved')!;
     signResolution(ctx, f, scopeDec.decision_id, 'resolved_no_change', k.sme, SIGNERS.sme, 'business_sme');
-    assert.notEqual(runGate(wfOf(ctx), 'G2').status, 'PASS');
+    assert.notEqual(runGate(wfOf(ctx), 'G1').status, 'PASS');
     assert.equal(wfOf(ctx).state.state, 'BLOCKED');
     const inv = invalidations(wfOf(ctx));
-    const g3 = inv.find((i) => i.gate === 'G3')!;
+    const g3 = inv.find((i) => i.gate === 'G2')!;
     assert.ok(g3.causes.includes('upstream_invalidated'));
     assert.ok(!inv.some((i) => i.gate === ('G4' as any)), 'there is no G4 approval to invalidate');
-    assert.notEqual(wfOf(ctx).state.gates.G3.status, 'PASS');
-    assert.equal(validateStorySet(wfOf(ctx)).ok, false, 'the story set is no longer valid without a current G3');
+    assert.notEqual(wfOf(ctx).state.gates.G2.status, 'PASS');
+    assert.equal(validateStorySet(wfOf(ctx)).ok, false, 'the story set is no longer valid without a current G2');
   });
 
   test('16. revoking the architect invalidates the current architecture approval', () => {
     const { f, ctx, dk } = designFixture(fixtures);
     approveArchitecture(f, ctx, dk);
     editTrust(f, (j) => (j.signers.find((s: any) => s.signer_id === DESIGN_SIGNERS.architect).revoked = true));
-    assert.notEqual(runGate(wfOf(ctx), 'G3').status, 'PASS');
-    assert.ok(invalidations(wfOf(ctx)).some((i) => i.gate === 'G3' && i.causes.includes('signer_revoked_or_invalid')));
+    assert.notEqual(runGate(wfOf(ctx), 'G2').status, 'PASS');
+    assert.ok(invalidations(wfOf(ctx)).some((i) => i.gate === 'G2' && i.causes.includes('signer_revoked_or_invalid')));
   });
 
-  test('23. checkpoint and audit integrity hold through G3 and story validation; a tampered approval record stops counting', () => {
+  test('23. checkpoint and audit integrity hold through G2 and story validation; a tampered approval record stops counting', () => {
     const { f, ctx, dk } = designFixture(fixtures);
     readyForImplementation(f, ctx, dk);
     assert.equal(wfOf(ctx).store.verifyCheckpoint().ok, true);
-    const rec = designApprovals(wfOf(ctx), 'G3')[0];
+    const rec = designApprovals(wfOf(ctx), 'G2')[0];
     const p = wfOf(ctx).store.p('design', 'approvals', `${rec.approval_id}.json`);
     fs.writeFileSync(p, JSON.stringify({ ...rec, recorded_at: '2020-01-01T00:00:00.000Z' }, null, 2) + '\n');
-    const g = evaluateDesignGate(wfOf(ctx), 'G3');
+    const g = evaluateDesignGate(wfOf(ctx), 'G2');
     assert.notEqual(g.result.status, 'PASS');
     assert.ok(g.invalidations.some((i) => i.causes.includes('record_tampered')));
   });
 
-  test('24. G2 stays fail-closed: no G2 approval means G3 never passes even with valid-looking artefacts', () => {
-    const { ctx } = designFixture(fixtures, { approveG2: false });
-    assert.equal(runGate(wfOf(ctx), 'G2').status, 'UNVERIFIED');
-    assert.equal(runGate(wfOf(ctx), 'G3').status, 'BLOCKED');
+  test('24. G1 stays fail-closed: no G1 approval means G2 never passes even with valid-looking artefacts', () => {
+    const { ctx } = designFixture(fixtures, { approveG1: false });
+    assert.equal(runGate(wfOf(ctx), 'G1').status, 'UNVERIFIED');
+    assert.equal(runGate(wfOf(ctx), 'G2').status, 'BLOCKED');
     assert.equal(advance(wfOf(ctx), 'REQUIREMENTS_APPROVED').accepted, false);
   });
 
-  test('25/26. G3 PASS with valid stories alone never authorises Java generation (config flag off)', () => {
+  test('25/26. G2 PASS with valid stories alone never authorises Java generation (config flag off)', () => {
     const { f, ctx, dk } = designFixture(fixtures);
     readyForImplementation(f, ctx, dk);
-    assert.equal(runGate(wfOf(ctx), 'G3').status, 'PASS');
-    assert.deepEqual(GATES.map((g) => g.id), ['G2', 'G3']);
+    assert.equal(runGate(wfOf(ctx), 'G2').status, 'PASS');
+    assert.deepEqual(GATES.map((g) => g.id), ['G1', 'G2']);
     assert.equal(generationAuthorized(wfOf(ctx).run, wfOf(ctx).state), false);
     const roots = policyRoots(wfOf(ctx).run, wfOf(ctx).state);
     assert.equal(canWrite(findAgent('F5')!, path.join(f.repoRoot, 'java', 'src', 'main', 'java', 'A.java'), roots).allowed, false);
@@ -319,8 +319,8 @@ describe('STEP 7 — dependency-aware invalidation and trust', () => {
     assert.ok(e.reasons.some((r) => /Build is disabled/.test(r)));
   });
 
-  test('27. reverse artefacts and COBOL sources are unchanged by the whole G2-G3 flow', () => {
-    const { f, ctx, dk } = designFixture(fixtures, { approveG2: false });
+  test('27. reverse artefacts and COBOL sources are unchanged by the whole G1-G2 flow', () => {
+    const { f, ctx, dk } = designFixture(fixtures, { approveG1: false });
     const out = hashTree(path.join(f.repoRoot, 'output'));
     const src = hashTree(f.sourceRoot);
     void ctx;
@@ -355,7 +355,7 @@ describe('STEP 7 — isolated BMad executor', () => {
   });
 
   test('19. protected writes are refused: design records, the repository .claude/ and installed workspaces', () => {
-    const { ctx } = designFixture(fixtures, { approveG2: false });
+    const { ctx } = designFixture(fixtures, { approveG1: false });
     const roots = policyRoots(wfOf(ctx).run, wfOf(ctx).state);
     for (const a of AGENTS) {
       assert.equal(canWrite(a, path.join(roots.workflowDir, 'design', 'approvals', 'DAP-0001.json'), roots).allowed, false, a.id);
@@ -407,14 +407,14 @@ describe('STEP 7 — isolated BMad executor', () => {
     assert.deepEqual(hashTree(path.join(path.resolve(FORWARD_DIR, '..'), '.claude')), before, 'repository .claude/ untouched');
   });
 
-  test('29. regression: dispatching and delivering F3/F4 never changes the G2 scope or its readiness', () => {
+  test('29. regression: dispatching and delivering F3/F4 never changes the G1 scope or its readiness', () => {
     const { f, ctx, dk } = designFixture(fixtures);
     const before = evaluateScope(buildSnapshot(wfOf(ctx)), parseSelector(BRAVO));
     readyForImplementation(f, ctx, dk);
     const after = evaluateScope(buildSnapshot(wfOf(ctx)), parseSelector(BRAVO));
     assert.equal(after.scope_sha256, before.scope_sha256);
     assert.equal(after.readiness, 'READY');
-    assert.equal(runGate(wfOf(ctx), 'G2').status, 'PASS');
+    assert.equal(runGate(wfOf(ctx), 'G1').status, 'PASS');
   });
 
   test('28. LIVE execution is refused with every blocker; the manifest is contract-valid and nothing is executed', () => {

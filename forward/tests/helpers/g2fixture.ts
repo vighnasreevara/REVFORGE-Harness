@@ -1,5 +1,5 @@
 /**
- * Synthetic G2 workflow fixture shared by STEP 4.5 tests: a planned and
+ * Synthetic G1 workflow fixture shared by STEP 4.5 tests: a planned and
  * delivered workflow with checkable COBOL source for one program, a trust
  * store of in-memory test keys (public keys only on disk) and helpers to
  * sign resolutions and approvals. Nothing here touches the real run.
@@ -43,7 +43,7 @@ export const BRAVO_SOURCE = [
   '           GOBACK.',
 ];
 
-export function setupG2(fixtures: Fixture[], opts: { mutate?: (f: Fixture) => void } = {}) {
+export function setupG1(fixtures: Fixture[], opts: { mutate?: (f: Fixture) => void } = {}) {
   const f = makeFixture({ withSource: true });
   fixtures.push(f);
   fs.mkdirSync(path.join(f.repoRoot, '.claude', 'agents'), { recursive: true });

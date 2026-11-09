@@ -1,5 +1,5 @@
 /**
- * STEP 4: G2 requirements verification and the human approval boundary.
+ * STEP 4: G1 requirements verification and the human approval boundary.
  * Signing keys are generated in memory for these synthetic fixtures only;
  * nothing here touches the real workflow run.
  */
@@ -215,8 +215,8 @@ describe('S4-A. readiness, scopes and evidence outcomes', () => {
     assert.equal(req.outcome, 'VERIFIED', req.reasons.join(' | '));
     const ready = resolveScope(ctx, f, k, BRAVO);
     assert.equal(ready.readiness, 'READY', JSON.stringify(ready.findings.filter((x) => x.blocking)));
-    const g2 = runGate(wf(ctx), 'G2');
-    assert.equal(g2.status, 'UNVERIFIED', 'READY alone never passes G2');
+    const g2 = runGate(wf(ctx), 'G1');
+    assert.equal(g2.status, 'UNVERIFIED', 'READY alone never passes G1');
     assert.ok(g2.checks.some((c) => c.id === 'human_approval' && c.status === 'fail'));
   });
 
@@ -372,18 +372,60 @@ describe('S4-B. decision resolution', () => {
 });
 
 describe('S4-C. signed approval', () => {
-  test('11. a verified signed approval of a READY scope passes G2 and authorises REQUIREMENTS_APPROVED', () => {
+  test('11. a verified signed approval of a READY scope passes G1 and authorises REQUIREMENTS_APPROVED', () => {
     const { f, ctx, k } = setup();
     deliver(f, ctx, verifiedClaim(f));
     assert.equal(resolveScope(ctx, f, k, BRAVO).readiness, 'READY');
     assert.equal(advance(wf(ctx), 'REQUIREMENTS_APPROVED').accepted, false, 'no approval yet');
     const a = approve(ctx, f, k, BRAVO);
     assert.equal(a.r.imported, true, JSON.stringify(failed(a.r)));
-    const g2 = runGate(wf(ctx), 'G2');
+    const g2 = runGate(wf(ctx), 'G1');
     assert.equal(g2.status, 'PASS', g2.reason + ' ' + JSON.stringify(g2.checks.filter((c) => c.status === 'fail')));
     assert.ok(g2.inputs.some((i) => i.kind === 'g2_evaluation') && g2.inputs.some((i) => i.kind === 'approval'));
     const t = advance(wf(ctx), 'REQUIREMENTS_APPROVED');
     assert.equal(t.accepted, true, t.reason);
+    assert.match(wf(ctx).state.history.at(-1)!.evidence!, /^gates\/G1-/);
+  });
+
+  test('11b. gate renumbering: a legacy workflow (no gate_scheme) still accepts an approval its old request bound to gate G2, under its old keys', () => {
+    const { f, ctx, k } = setup();
+    deliver(f, ctx, verifiedClaim(f));
+    assert.equal(resolveScope(ctx, f, k, BRAVO).readiness, 'READY');
+    // A request as issued before 2026-11-09, when the requirements gate was G2 (re-sealed in the audit log like the old code did).
+    const legacyRequest = () => {
+      const w = wf(ctx);
+      const req = createApprovalRequest(w, BRAVO, 'dave.requester');
+      const file = w.store.p('approvals', 'requests', `${req.request_id}.json`);
+      const doc = JSON.parse(fs.readFileSync(file, 'utf8'));
+      doc.payload.gate = 'G2';
+      doc.request_sha256 = digest(doc.payload);
+      fs.writeFileSync(file, JSON.stringify(doc, null, 2) + '\n');
+      w.store.append('approval_requested', { request_id: doc.request_id, request_sha256: doc.request_sha256, sha256: sha256File(file) });
+      w.store.writeState(w.state);
+      return doc;
+    };
+    // In a gate_scheme 2 workflow G2 is the architecture gate: a statement for G2 cannot approve requirements.
+    const fresh = approve(ctx, f, k, BRAVO, { request: legacyRequest() });
+    assert.equal(fresh.signed.statement.gate, 'G2');
+    assert.ok(failed(fresh.r).includes('statement_binding'), JSON.stringify(failed(fresh.r)));
+    // The same workflow as a legacy state: the marker is absent and nothing else is migrated.
+    const w = wf(ctx);
+    assert.equal(w.state.gate_scheme, 2);
+    delete w.state.gate_scheme;
+    w.store.writeState(w.state);
+    const a = approve(ctx, f, k, BRAVO, { request: legacyRequest() });
+    assert.equal(a.r.imported, true, JSON.stringify(failed(a.r)));
+    const g1 = runGate(wf(ctx), 'G1');
+    assert.equal(g1.gate, 'G1');
+    assert.equal(g1.status, 'PASS', g1.reason);
+    const st = wf(ctx).state;
+    assert.equal(st.gate_scheme, undefined, 'a legacy state is never migrated');
+    assert.equal(st.gates.G2.status, 'PASS', 'the legacy state keeps the requirements gate under its old key G2');
+    assert.equal(st.gates.G1, undefined, 'no requirements record under the key the legacy state used for the evidence gate');
+    assert.equal(status(wf(ctx)).gates.G1, 'PASS');
+    const t = advance(wf(ctx), 'REQUIREMENTS_APPROVED');
+    assert.equal(t.accepted, true, t.reason);
+    assert.equal(wf(ctx).state.history.at(-1)!.guard, 'gate:G2');
     assert.match(wf(ctx).state.history.at(-1)!.evidence!, /^gates\/G2-/);
   });
 
@@ -395,7 +437,7 @@ describe('S4-C. signed approval', () => {
     assert.ok(failed(approve(ctx, f, k, BRAVO, { request: req, signer: [SIGNERS.eve, k.eve, 'requirements_approver'] }).r).includes('signature'));
     assert.ok(failed(approve(ctx, f, k, BRAVO, { request: req, signer: [SIGNERS.bob, k.bob, 'requirements_approver'] }).r).includes('role'));
     assert.ok(failed(approve(ctx, f, k, BRAVO, { request: req, signer: [SIGNERS.alice, k.bob, 'requirements_approver'] }).r).includes('signature'), "someone else's key");
-    assert.equal(runGate(wf(ctx), 'G2').status, 'UNVERIFIED');
+    assert.equal(runGate(wf(ctx), 'G1').status, 'UNVERIFIED');
   });
 
   test('13. a tampered statement or request is rejected', () => {
@@ -433,15 +475,15 @@ describe('S4-C. signed approval', () => {
     deliver(f, ctx, verifiedClaim(f));
     resolveScope(ctx, f, k, BRAVO);
     assert.equal(approve(ctx, f, k, BRAVO).r.imported, true);
-    assert.equal(runGate(wf(ctx), 'G2').status, 'PASS');
+    assert.equal(runGate(wf(ctx), 'G1').status, 'PASS');
     fs.appendFileSync(path.join(f.sourceRoot, f.programs[1].rel), '      * edited after approval\n');
-    const g = runGate(wf(ctx), 'G2');
+    const g = runGate(wf(ctx), 'G1');
     assert.equal(g.status, 'UNVERIFIED');
     assert.match(g.checks.find((c) => c.id === 'human_approval')!.detail, /stale/);
     const inv = f.read('output/inventory/inventory_artifact.json');
     inv.stats.programs = 99;
     f.write('output/inventory/inventory_artifact.json', inv);
-    assert.equal(runGate(wf(ctx), 'G2').status, 'FAIL', 'reverse baseline changed');
+    assert.equal(runGate(wf(ctx), 'G1').status, 'FAIL', 'reverse baseline changed');
   });
 
   test('16. replayed approvals and statements bound to another scope are rejected', () => {
@@ -461,13 +503,13 @@ describe('S4-C. signed approval', () => {
     assert.ok(failed(mixed.r).includes('statement_binding'));
   });
 
-  test('17. without a trust anchor nothing can be approved or resolved, and G2 stays UNVERIFIED', () => {
+  test('17. without a trust anchor nothing can be approved or resolved, and G1 stays UNVERIFIED', () => {
     const { f, ctx, k } = setup({ trust: false });
     deliver(f, ctx, verifiedClaim(f));
     const r = resolve(ctx, f, 'SCOPE-BRAVO02', 'resolved_no_change', k.bob, SIGNERS.bob, 'business_sme');
     assert.equal(r.r.recorded, false);
     assert.match(r.r.checks.find((c: any) => c.id === 'signature').detail, /no trust store/);
-    const g2 = runGate(wf(ctx), 'G2');
+    const g2 = runGate(wf(ctx), 'G1');
     assert.equal(g2.status, 'UNVERIFIED');
     assert.match(g2.checks.find((c) => c.id === 'trust_anchor')!.detail, /no trust store is configured/);
     // A store inside the workflow run directory is not a trust anchor.
@@ -489,7 +531,7 @@ describe('S4-C. signed approval', () => {
     assert.ok(failed(self.r).includes('not_self_approval'));
     const agent = approve(ctx, f, k, BRAVO, { signer: [SIGNERS.agent, k.agent, 'requirements_approver'] });
     assert.ok(failed(agent.r).includes('not_self_approval') && failed(agent.r).includes('signature'));
-    assert.equal(runGate(wf(ctx), 'G2').status, 'UNVERIFIED');
+    assert.equal(runGate(wf(ctx), 'G1').status, 'UNVERIFIED');
   });
 });
 
@@ -515,7 +557,7 @@ describe('S4-D. packets, receipts and workflow protection', () => {
     assert.ok(ev(ctx, BRAVO).findings.find((x) => x.id === open.packet_id)!.blocking);
   });
 
-  test('20. receipts and deliverables stay byte-identical; a modified deliverable fails G2', () => {
+  test('20. receipts and deliverables stay byte-identical; a modified deliverable fails G1', () => {
     const { f, ctx, k } = setup();
     deliver(f, ctx, verifiedClaim(f));
     const dir = wf(ctx).store.p('receipts');
@@ -523,12 +565,12 @@ describe('S4-D. packets, receipts and workflow protection', () => {
     const before = { ...hashTree(dir), ...hashTree(agents) };
     resolveScope(ctx, f, k, BRAVO);
     approve(ctx, f, k, BRAVO);
-    runGate(wf(ctx), 'G2');
+    runGate(wf(ctx), 'G1');
     recordPacketReview(wf(ctx));
     assert.deepEqual({ ...hashTree(dir), ...hashTree(agents) }, before);
     const doc = Object.keys(before).find((x) => x.endsWith('data_mappings.json'))!;
     fs.appendFileSync(path.join(agents, doc), ' ');
-    const g = runGate(wf(ctx), 'G2');
+    const g = runGate(wf(ctx), 'G1');
     assert.equal(g.status, 'FAIL');
     assert.match(g.reason, /modified after acceptance/);
   });
@@ -538,31 +580,31 @@ describe('S4-D. packets, receipts and workflow protection', () => {
     deliver(f, ctx, verifiedClaim(f));
     const r0 = advance(wf(ctx), 'REQUIREMENTS_APPROVED');
     assert.equal(r0.accepted, false);
-    assert.match(r0.reason, /G2 has not passed/);
+    assert.match(r0.reason, /G1 has not passed/);
     resolveScope(ctx, f, k, BRAVO);
     approve(ctx, f, k, BRAVO);
     assert.equal(advance(wf(ctx), 'REQUIREMENTS_APPROVED').accepted, true);
     assert.equal(advance(wf(ctx), 'ARCHITECTURE_DRAFTED').accepted, false, 'needs an F3 receipt');
     // A new signed resolution changes the approved content: the approval no longer verifies.
     resolve(ctx, f, 'SCOPE-BRAVO02', 'resolved_no_change', k.bob, SIGNERS.bob, 'business_sme', (r) => (r.resolution_text = 'Re-confirmed with a different rationale'));
-    assert.equal(runGate(wf(ctx), 'G2').status, 'UNVERIFIED');
+    assert.equal(runGate(wf(ctx), 'G1').status, 'UNVERIFIED');
     assert.equal(wf(ctx).state.state, 'BLOCKED');
-    assert.match(wf(ctx).state.blockers[0], /G2 approval no longer valid/);
-    assert.throws(() => prepare(wf(ctx), 'F3'), /may only be dispatched|G2 has not passed/);
+    assert.match(wf(ctx).state.blockers[0], /G1 approval no longer valid/);
+    assert.throws(() => prepare(wf(ctx), 'F3'), /may only be dispatched|G1 has not passed/);
     const back = advance(wf(ctx), 'REQUIREMENTS_APPROVED');
-    assert.equal(back.accepted, false, 'unblocking re-evaluates G2');
-    assert.match(back.reason, /G2 still UNVERIFIED/);
+    assert.equal(back.accepted, false, 'unblocking re-evaluates G1');
+    assert.match(back.reason, /G1 still UNVERIFIED/);
   });
 
-  test('23/24/25. G3-G8 stay protected, Java stays blocked, reverse files are untouched', () => {
+  test('23/24/25. G2 and the later steps stay protected, Java stays blocked, reverse files are untouched', () => {
     const { f, ctx, k } = setup();
     const outBefore = hashTree(path.join(f.repoRoot, 'output'));
     const srcBefore = hashTree(f.sourceRoot);
     deliver(f, ctx, verifiedClaim(f));
     resolveScope(ctx, f, k, BRAVO);
     approve(ctx, f, k, BRAVO);
-    assert.equal(runGate(wf(ctx), 'G2').status, 'PASS');
-    assert.notEqual(runGate(wf(ctx), 'G3').status, 'PASS');
+    assert.equal(runGate(wf(ctx), 'G1').status, 'PASS');
+    assert.notEqual(runGate(wf(ctx), 'G2').status, 'PASS');
     assert.equal(generationAuthorized(wf(ctx).run, wf(ctx).state), false);
     assert.throws(() => prepare(wf(ctx), 'F5'), /may only be dispatched/);
     assert.deepEqual(hashTree(path.join(f.repoRoot, 'output')), outBefore);
@@ -581,6 +623,6 @@ describe('S4-D. packets, receipts and workflow protection', () => {
     assert.equal(verifyApprovalFile(wf(ctx), file).ok, true);
     assert.equal(wf(ctx).store.readAudit().length, audit, 'verify does not write');
     assert.equal(importApproval(wf(ctx), file).imported, true);
-    assert.equal(runGate(wf(ctx), 'G2').status, 'UNVERIFIED', 'a signed rejection never passes G2');
+    assert.equal(runGate(wf(ctx), 'G1').status, 'UNVERIFIED', 'a signed rejection never passes G1');
   });
 });

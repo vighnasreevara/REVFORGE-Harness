@@ -60,7 +60,7 @@ Each packet has its own output directory (`workflow/agents/F2/<packet_id>/`). Wr
 
 ## Quality gates
 
-Your outputs are required evidence for **G2** and inputs to **G3**; both are evaluated by the runtime, never by you.
+Your outputs are required evidence for **G1** and inputs to **G2**; both are evaluated by the runtime, never by you.
 
 ## Error handling
 

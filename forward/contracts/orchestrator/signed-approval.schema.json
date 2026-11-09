@@ -1,7 +1,7 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
   "$id": "https://revforge.local/contracts/orchestrator/signed-approval.schema.json",
-  "title": "Signed G2 approval (produced by a human outside the harness)",
+  "title": "Signed G1 approval (produced by a human outside the harness)",
   "description": "statement is signed with the signer's Ed25519 private key; the signed message is the UTF-8 canonical JSON of statement (keys sorted, no whitespace). Print it with 'workflow approval statement'.",
   "type": "object",
   "additionalProperties": false,
@@ -37,7 +37,8 @@
           "const": "1.0"
         },
         "gate": {
-          "const": "G2"
+          "description": "G1 (approved requirements). G2 is accepted only when re-verifying statements signed before the 2026-11-09 gate renumbering, when the requirements gate was G2; the runtime accepts it for legacy workflow states only and requires it to match the request's gate.",
+          "enum": ["G1", "G2"]
         },
         "request_id": {
           "type": "string",

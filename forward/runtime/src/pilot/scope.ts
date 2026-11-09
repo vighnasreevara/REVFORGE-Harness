@@ -21,7 +21,7 @@
  * A behaviour is a SCOPE CANDIDATE only by requirement closure. Every
  * requirement that covers it must cover nothing but VERIFIED_CANDIDATE
  * behaviour, and none of its inputs may be written by a blocked behaviour.
- * The exact requirement subset is then evaluated with the existing G2 engine,
+ * The exact requirement subset is then evaluated with the existing G1 engine,
  * read-only. Limitations of the engine are reported, never worked around.
  *
  * Nothing is approved, resolved, excluded or generated here.
@@ -81,7 +81,7 @@ export function behaviourScope(wf: Workflow, scope: string): any {
     contract: 'pilot/verified-scope',
     contract_version: '1.0',
     status: 'NON_AUTHORITATIVE',
-    note: 'Behaviour classification and candidate selection only. A VERIFIED_CANDIDATE is not approved, and nothing is generated before genuine signed G2 and G3 approvals and an explicit generation authorisation.',
+    note: 'Behaviour classification and candidate selection only. A VERIFIED_CANDIDATE is not approved, and nothing is generated before genuine signed G1 and G2 approvals and an explicit generation authorisation.',
     generated_at: snap.at.toISOString(),
     baseline: { run_id: wf.run.runId, manifest_sha256: wf.run.manifestSha256 },
     scope: sel,
@@ -298,7 +298,7 @@ function gapHandoff(snap: Snapshot, program: string, prog: any, behaviours: any[
         why_unsafe: 'the result and every status it produces come from an external database the repository does not describe; a Java implementation would have to assume them',
         affected_requirements: reqsFor(b),
         affected_java_component: `database port for ${se.operation} ${se.table} (interface only; no implementation until specified)`,
-        required_action: ['an approved specification of the database interaction (technical authority), recorded as an ADR at G3'],
+        required_action: ['an approved specification of the database interaction (technical authority), recorded as an ADR at G2'],
         validation_evidence: 'a captured run against the real (or an approved equivalent) database for each outcome, including errors',
         blocks_execution_path: `request ${trigger} -> ${para}: statement ${row.line}`,
         blocking: true,
@@ -377,7 +377,7 @@ function gapHandoff(snap: Snapshot, program: string, prog: any, behaviours: any[
   return [...new Map(gaps.map((g) => [g.gap_id, g])).values()];
 }
 
-/** The exact requirement subset, evaluated read-only with the existing G2 engine, plus the limitations found. */
+/** The exact requirement subset, evaluated read-only with the existing G1 engine, plus the limitations found. */
 function subsetEligibility(snap: Snapshot, selected: any, behaviours: any[], coverage: Map<string, string[]>, program: string): any {
   // The engine accepts only requirement IDs in a requirements selector; runtime requirements are included unit-wide.
   const named = selected.requirements.filter((id: string) => snap.itemById.get(id)?.kind === 'requirement');
@@ -415,7 +415,7 @@ function subsetEligibility(snap: Snapshot, selected: any, behaviours: any[], cov
       id: 'L2',
       limitation: 'a unit-level decision with no affected requirements applies to every scope on the unit, even when the selected behaviour never reaches what it concerns',
       effect: `decisions not reached by the candidate still block it: ${shared.map((x) => x.id).join(', ')}`,
-      minimal_policy_change: 'apply such a decision to a requirements subset only when a selected item reaches its subject (the same semantic edge G2 now computes), and list it as a reviewable, traceable deferral otherwise. It is never excluded or resolved implicitly, and it still applies to the program scope.',
+      minimal_policy_change: 'apply such a decision to a requirements subset only when a selected item reaches its subject (the same semantic edge G1 now computes), and list it as a reviewable, traceable deferral otherwise. It is never excluded or resolved implicitly, and it still applies to the program scope.',
     });
   return {
     selector,
@@ -427,7 +427,7 @@ function subsetEligibility(snap: Snapshot, selected: any, behaviours: any[], cov
     counts: Object.fromEntries([...new Set(blocking.map((x) => x.category))].map((c) => [c, blocking.filter((x) => x.category === c).length])),
     representable_without_policy_change: !limitations.length,
     limitations,
-    note: 'Read-only evaluation. Nothing was approved; G2 for this subset would still need the listed decisions signed, a trust store, an exported request and a signed approval bound to this exact scope digest.',
+    note: 'Read-only evaluation. Nothing was approved; G1 for this subset would still need the listed decisions signed, a trust store, an exported request and a signed approval bound to this exact scope digest.',
   };
 }
 

@@ -2,7 +2,7 @@
 name: fe-java-developer
 description: >
   REVFORGE forward agent F5 (Java Developer). Dispatched by the REVFORGE
-  Forward Orchestrator only when the architecture is approved (G3), the F4
+  Forward Orchestrator only when the architecture is approved (G2), the F4
   story set validates, AND Java generation is explicitly authorised with a target directory. Implements
   authorised stories as Java sources with a Maven build, an implementation
   manifest and build results. Must never touch COBOL sources, reverse
@@ -60,7 +60,7 @@ Return an `agent-receipt`. Your build results are evidence for the independent t
 
 ## Quality gates
 
-Requires **G3 PASS**, a valid F4 story set, and generation authorisation (config flag and G3 PASS). Feeds independent testing by F6.
+Requires **G2 PASS**, a valid F4 story set, and generation authorisation (config flag and G2 PASS). Feeds independent testing by F6.
 
 ## Error handling
 

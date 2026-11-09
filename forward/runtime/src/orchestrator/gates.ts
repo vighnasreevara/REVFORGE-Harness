@@ -1,18 +1,27 @@
 /**
- * Gates G2 and G3, and the two pre-checks that guard them.
+ * Gates G1 and G2, and the two pre-checks that guard them.
  *
  * Gates (human decisions, each a re-verified Ed25519-signed approval):
- *   G2  approved requirements  (approval module, runtime/src/approval)
- *   G3  approved architecture  (design module, runtime/src/design)
+ *   G1  approved requirements  (approval module, runtime/src/approval)
+ *   G2  approved architecture  (design module, runtime/src/design)
  *
  * Pre-checks (automated, not gates): the runtime refuses to start the
- * workflow, and G2 stays BLOCKED, unless both pass on the current baseline.
+ * workflow, and G1 stays BLOCKED, unless both pass on the current baseline.
  *   BASELINE  the baseline manifest and every reverse input are unchanged
  *   EVIDENCE  plan outputs, evidence packets and permanent IDs match the reverse artifacts
  *
- * Runs created before the two-gate change recorded these pre-checks as gates
- * G0 and G1. Those records are read, never rewritten: a PASS recorded as G0 or
- * G1 on the current baseline counts as the BASELINE or EVIDENCE pre-check.
+ * Gate numbering (2026-11-09): the gates were renumbered G2 -> G1 and G3 -> G2.
+ * A workflow created since then carries `gate_scheme: 2` and stores its gate
+ * records under the current IDs. A workflow without the marker is legacy: its
+ * state keeps the IDs it was created with (G0 = BASELINE and G1 = EVIDENCE as
+ * former gates, G2 = requirements, G3 = architecture). Legacy records are read,
+ * never rewritten; every read or write of a gate record by gate ID goes through
+ * gateKey(), which maps the current ID to the key the state actually uses.
+ *
+ * Runs created before the two-gate change recorded the pre-checks as gates
+ * G0 and G1. For legacy states only, a PASS recorded under those raw keys on
+ * the current baseline counts as the BASELINE or EVIDENCE pre-check. In a
+ * gate_scheme 2 state, G1 is the requirements gate and never a pre-check.
  *
  * Every result carries a status, a reason, the input evidence it looked at and
  * a timestamp:
@@ -36,11 +45,54 @@ import { AgentId } from './agents';
 import { WorkflowStateRecord, WorkflowStore } from './store';
 
 export type GateStatus = 'PASS' | 'FAIL' | 'BLOCKED' | 'NOT_RUN' | 'UNVERIFIED';
-export type GateId = 'G2' | 'G3';
+export type GateId = 'G1' | 'G2';
 /** Automated pre-checks (formerly gates G0 and G1). */
 export type PrecheckId = 'BASELINE' | 'EVIDENCE';
-/** The gate IDs a pre-check was recorded under before the two-gate change (read-only compatibility). */
+/** The gate IDs a pre-check was recorded under before the two-gate change (read-only compatibility, legacy states only). */
 export const LEGACY_GATE_OF: Record<PrecheckId, string> = { BASELINE: 'G0', EVIDENCE: 'G1' };
+
+/** Current gate numbering, recorded as `gate_scheme` in every workflow state created since 2026-11-09. */
+export const GATE_SCHEME = 2;
+/** The ID each current gate had before the 2026-11-09 renumbering (legacy states store their records under it). */
+export const LEGACY_GATE_ID: Record<GateId, string> = { G1: 'G2', G2: 'G3' };
+
+/** True for a workflow state created before the 2026-11-09 renumbering (no `gate_scheme` marker). */
+export function isLegacyGateScheme(state: Pick<WorkflowStateRecord, 'gate_scheme'> | null | undefined): boolean {
+  return !!state && state.gate_scheme !== GATE_SCHEME;
+}
+
+/** The key under which `state` stores the records of gate `id` (G1 | G2): the ID itself, or its former ID in a legacy state. */
+export function gateKey(state: Pick<WorkflowStateRecord, 'gate_scheme'> | null | undefined, id: string): string {
+  const g = id.toUpperCase();
+  return isLegacyGateScheme(state) && g in LEGACY_GATE_ID ? LEGACY_GATE_ID[g as GateId] : g;
+}
+
+/** The current gate ID stored under `key` in `state` (inverse of gateKey), or null for a key that is not a current gate (e.g. a legacy G0/G1 pre-check). */
+export function gateIdOfKey(state: Pick<WorkflowStateRecord, 'gate_scheme'> | null | undefined, key: string): GateId | null {
+  return (Object.keys(LEGACY_GATE_ID) as GateId[]).find((g) => gateKey(state, g) === key) ?? null;
+}
+
+/** A display label for a key of `state.gates`: the current gate ID, or the pre-check a legacy G0/G1 record stands for. */
+export function gateLabelOfKey(state: Pick<WorkflowStateRecord, 'gate_scheme'> | null | undefined, key: string): string {
+  const id = gateIdOfKey(state, key);
+  if (id) return id;
+  const pre = isLegacyGateScheme(state) ? (Object.keys(LEGACY_GATE_OF) as PrecheckId[]).find((c) => LEGACY_GATE_OF[c] === key) : undefined;
+  return pre ? `${pre} (legacy gate ${key})` : key;
+}
+
+/**
+ * The gate IDs a stored approval record or signed statement for gate `id` may carry in `state`: the current ID, plus,
+ * in a legacy state, the former ID written by the code of that time (G2 for requirements, G3 for architecture). The
+ * signature covers the statement including its gate field, so stored records are matched, never rewritten.
+ */
+export function acceptedGateIds(state: Pick<WorkflowStateRecord, 'gate_scheme'> | null | undefined, id: GateId): string[] {
+  return isLegacyGateScheme(state) ? [id, LEGACY_GATE_ID[id]] : [id];
+}
+
+/** The latest recorded result of gate `id` (G1 | G2) in `state`, whatever numbering the state uses. */
+export function gateRecord(state: WorkflowStateRecord | null | undefined, id: string): WorkflowStateRecord['gates'][string] | undefined {
+  return state?.gates[gateKey(state, id)];
+}
 
 export interface GateCheck {
   id: string;
@@ -74,8 +126,8 @@ export interface GateSpec {
 }
 
 export const GATES: GateSpec[] = [
-  { id: 'G2', name: 'Approved requirements', prerequisite: null, evaluator: 'implemented', required_receipts: ['F1', 'F2'], human_approval: true, pending_until: 'available (signed human approval required)' },
-  { id: 'G3', name: 'Approved architecture', prerequisite: 'G2', evaluator: 'implemented', required_receipts: ['F3'], human_approval: true, pending_until: 'available (signed architecture approval required)' },
+  { id: 'G1', name: 'Approved requirements', prerequisite: null, evaluator: 'implemented', required_receipts: ['F1', 'F2'], human_approval: true, pending_until: 'available (signed human approval required)' },
+  { id: 'G2', name: 'Approved architecture', prerequisite: 'G1', evaluator: 'implemented', required_receipts: ['F3'], human_approval: true, pending_until: 'available (signed architecture approval required)' },
 ];
 
 export interface PrecheckSpec {
@@ -137,20 +189,23 @@ const result = (spec: GateSpec, run: RunHandle, at: string, status: GateStatus, 
   ...extra,
 });
 
-/** True when the state's latest result for `gate` is PASS and was evaluated on this baseline. */
+const passedOn = (g: { status: string; baseline_sha256: string } | undefined, manifestSha: string): boolean => !!g && g.status === 'PASS' && g.baseline_sha256 === manifestSha;
+
+/** True when the state's latest result for `gate` (G1 | G2) is PASS and was evaluated on this baseline. */
 export function gatePassed(state: WorkflowStateRecord | null, gate: string, manifestSha: string): boolean {
-  const g = state?.gates[gate];
-  return !!g && g.status === 'PASS' && g.baseline_sha256 === manifestSha;
+  return passedOn(gateRecord(state, gate), manifestSha);
 }
 
 /**
- * True when the pre-check passed on this baseline. A PASS recorded under its
- * former gate ID (G0 / G1) by a run created before the two-gate change counts too.
+ * True when the pre-check passed on this baseline. In a legacy state (no
+ * gate_scheme marker) a PASS recorded under its former gate ID (raw key G0 / G1)
+ * by a run created before the two-gate change counts too. A gate_scheme 2
+ * state's G1 is the requirements gate and never counts as a pre-check.
  */
 export function precheckPassed(state: WorkflowStateRecord | null, check: PrecheckId, manifestSha: string): boolean {
   const p = state?.prechecks?.[check];
-  if (p && p.status === 'PASS' && p.baseline_sha256 === manifestSha) return true;
-  return gatePassed(state, LEGACY_GATE_OF[check], manifestSha);
+  if (passedOn(p, manifestSha)) return true;
+  return isLegacyGateScheme(state) && passedOn(state!.gates[LEGACY_GATE_OF[check]], manifestSha);
 }
 
 export interface PrecheckResult {
@@ -358,11 +413,14 @@ export interface ApprovalRecord {
   bound_receipts: Array<{ receipt_id: string; sha256: string }>;
 }
 
-/** Validates an approval record. Approvals asserted by an agent are always rejected. */
-export function validateApproval(rec: any, gate: GateId, store: WorkflowStore): string[] {
+/**
+ * Validates an approval record. Approvals asserted by an agent are always rejected. `accepted` lists the gate IDs the
+ * record may carry (default: `gate` only; see acceptedGateIds for legacy states).
+ */
+export function validateApproval(rec: any, gate: GateId, store: WorkflowStore, accepted: string[] = [gate]): string[] {
   const problems: string[] = [];
   if (!rec || rec.contract !== 'approval-record') return ['not an approval record'];
-  if (rec.gate !== gate) problems.push(`approval is for ${rec.gate}, not ${gate}`);
+  if (!accepted.includes(rec.gate)) problems.push(`approval is for ${rec.gate}, not ${gate}`);
   if (rec.actor?.kind !== 'human') problems.push(`approvals must come from a human, not '${rec.actor?.kind}'`);
   if (rec.recorded_by !== 'runtime') problems.push('approval was not recorded by the runtime');
   if (rec.decision !== 'approved') problems.push(`decision is '${rec.decision}'`);

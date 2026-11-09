@@ -6,7 +6,7 @@
  */
 import * as fs from 'fs';
 import * as path from 'path';
-import { G2_CHECK_SETS } from '../approval/approvals';
+import { G1_CHECK_SETS } from '../approval/approvals';
 import { requiredRoles, resolutionTemplate } from '../approval/decisions';
 import { evaluateScope, parseSelector, ScopeEvaluation } from '../approval/scope';
 import { sha256File } from '../core/fsutil';
@@ -311,7 +311,7 @@ export function openaiPilot(a: Analysis, scope: string, max = 3): any {
 export function scopeReadinessReport(a: Analysis, scope: string, trust: any): any {
   const ev = evaluateScope(a.snap, parseSelector(scope));
   const F = ev.findings;
-  const checks = G2_CHECK_SETS.map((c) => {
+  const checks = G1_CHECK_SETS.map((c) => {
     const s = c.select(F).filter((f) => f.blocking);
     return { check: c.id, blocking: s.length, items: s.map((f) => `${f.kind}:${f.id} (${f.outcome})`) };
   }).filter((c) => c.blocking > 0);
@@ -339,7 +339,7 @@ export function scopeReadinessReport(a: Analysis, scope: string, trust: any): an
     trust: trust.status,
     g2_can_pass: false,
     why_g2_cannot_pass: reasons,
-    note: 'Evaluated with the existing G2 scope evaluator. A signed approval is valid only for this exact scope digest and baseline.',
+    note: 'Evaluated with the existing G1 scope evaluator. A signed approval is valid only for this exact scope digest and baseline.',
   };
 }
 
@@ -356,14 +356,14 @@ export function checklist(a: Analysis, pkg: any, packets: any, corrections: any,
   add({ actor: 'data_owner', action: 'Optional pilot: review and sign the source-export authorization for the prepared cases, then the operator imports it', ids: pilot.cases.map((c: any) => c.packet_id), evidence: 'pilot authorization request (files, hashes, model, limits, expiry)', role: 'data_owner', input: 'openai-pilot-authorization-request.json', output: 'signed-source-export-authorization; verification openai authorize --file', status: pilot.cases.length ? 'pending' : 'not_applicable', depends_on: [2], verified_by: 'verification openai doctor => authorization VALID' });
   add({ actor: 'claude_code', action: 'Optional pilot: run LIVE review and compare on the authorized cases; route advisory records to the review queue', ids: pilot.cases.map((c: any) => c.packet_id), evidence: 'signed authorization, API key, network enabled by the operator', role: 'operator', input: 'authorized packets', output: 'advisory Pass A/B records (never decisions)', status: pilot.cases.length ? 'blocked' : 'not_applicable', depends_on: [3], verified_by: 'verification openai report (LIVE_EXECUTED_WITH_VERIFIED_AUTHORIZATION)' });
   add({ actor: 'technical_reviewer', action: 'Review the citation correction proposals; if correct, sign the item review decision (resolved_requires_update, selected_option = proposal) and apply the correction', ids: corrections.proposals.map((p: any) => `${p.proposal_id} (${p.authorization.decision})`), evidence: 'correction review: original vs proposed line text, hashes, re-derivation', role: corrections.proposals[0]?.authorization.required_roles?.join(' or ') ?? 'review role', input: 'decision template; correction review', output: 'signed resolution, then workflow correct --kind citation_line', status: corrections.proposals.length ? 'pending' : 'not_applicable', depends_on: [2], verified_by: 'workflow decisions list (resolved) and a new COR record' });
-  add({ actor: 'technical_reviewer', action: 'Confirm the technical facts established from source (class A) and sign the corresponding review decisions', ids: decs('A'), evidence: 'decision packets class A (deterministic checks and excerpts)', role: 'technical_authority / business_sme per decision', input: 'resolution requests', output: 'signed resolutions', status: statusOf(decs('A')), depends_on: [2, 5], verified_by: 'workflow decisions resolve; workflow g2 evaluate --scope' });
+  add({ actor: 'technical_reviewer', action: 'Confirm the technical facts established from source (class A) and sign the corresponding review decisions', ids: decs('A'), evidence: 'decision packets class A (deterministic checks and excerpts)', role: 'technical_authority / business_sme per decision', input: 'resolution requests', output: 'signed resolutions', status: statusOf(decs('A')), depends_on: [2, 5], verified_by: 'workflow decisions resolve; workflow g1 evaluate --scope' });
   add({ actor: 'technical_authority', action: 'Decide the technical / architecture questions (class D)', ids: decs('D'), evidence: 'decision packets class D', role: 'technical_authority', input: 'resolution requests', output: 'signed resolutions', status: statusOf(decs('D')), depends_on: [2], verified_by: 'workflow decisions list --scope' });
   add({ actor: 'business_sme', action: 'Confirm, correct or exclude the interpretations that need independent review and business judgment (classes B and C), using the pilot results only as advisory input', ids: [...decs('B'), ...decs('C')], evidence: 'decision packets classes B/C; optional advisory pilot records', role: 'business_sme (exception_approver for approved_exception)', input: 'resolution requests', output: 'signed resolutions', status: statusOf([...decs('B'), ...decs('C')]), depends_on: [2, 4], verified_by: 'workflow decisions list --scope' });
   add({ actor: 'technical_reviewer', action: 'Supply or account for missing source / runtime dependencies (class E)', ids: decs('E'), evidence: 'decision packets class E', role: 'technical_authority', input: 'missing members', output: 'source added read-only and the reverse/forward steps re-run, or a signed resolution', status: byClass('E').length ? 'pending' : 'not_applicable', depends_on: [], verified_by: 'verification source deterministic' });
-  add({ actor: 'claude_code', action: 'Re-evaluate the scope after the signed actions; if deliverables changed, re-run consolidation and verification first', ids: [scope], evidence: 'imported signed resolutions and corrections', role: 'runtime (no authority)', input: 'current records', output: 'scope READY or the remaining blockers', status: 'pending', depends_on: [5, 6, 7, 8, 9], verified_by: `workflow g2 evaluate --scope ${scope}` });
+  add({ actor: 'claude_code', action: 'Re-evaluate the scope after the signed actions; if deliverables changed, re-run consolidation and verification first', ids: [scope], evidence: 'imported signed resolutions and corrections', role: 'runtime (no authority)', input: 'current records', output: 'scope READY or the remaining blockers', status: 'pending', depends_on: [5, 6, 7, 8, 9], verified_by: `workflow g1 evaluate --scope ${scope}` });
   add({ actor: 'operator', action: 'Export the approval request for the READY scope', ids: [scope], evidence: 'READY evaluation', role: 'operator (requester, not the approver)', input: 'READY scope', output: 'AREQ-NNNN with the exact scope digest', status: 'blocked', depends_on: [10], verified_by: `workflow approval request --scope ${scope} --requested-by <operator>` });
   add({ actor: 'requirements_approver', action: 'Review the request and sign the approval statement; the operator imports it', ids: ['AREQ (to be created)'], evidence: 'approval request, evidence package, decision outcomes', role: 'requirements_approver (not the requester)', input: 'canonical statement', output: 'signed-approval; workflow approval import', status: 'blocked', depends_on: [2, 11], verified_by: 'workflow approval import (all checks ok)' });
-  add({ actor: 'claude_code', action: 'Evaluate G2 and request the transition', ids: ['G2'], evidence: 'imported approval re-verified against current content', role: 'runtime', input: 'workflow', output: 'G2 PASS for the scope; REQUIREMENTS_APPROVED', status: 'blocked', depends_on: [12], verified_by: 'workflow gate --gate G2; workflow advance --to REQUIREMENTS_APPROVED' });
+  add({ actor: 'claude_code', action: 'Evaluate G1 and request the transition', ids: ['G1'], evidence: 'imported approval re-verified against current content', role: 'runtime', input: 'workflow', output: 'G1 PASS for the scope; REQUIREMENTS_APPROVED', status: 'blocked', depends_on: [12], verified_by: 'workflow gate --gate G1; workflow advance --to REQUIREMENTS_APPROVED' });
   const workload = packets.packets.map((p: any) => ({ root_cause_id: p.root_cause_id, class: p.class, title: p.title, decisions: p.decisions.map((d: any) => d.decision_id), authorized_roles: p.authorized_roles }));
   return { contract: 'approval-operations-checklist', contract_version: '1.0', generated_at: a.snap.at.toISOString(), scope, actions, consolidated_human_workload: workload, summary: { actions: actions.length, pending: actions.filter((x) => x.status === 'pending').length, blocked: actions.filter((x) => x.status === 'blocked').length, done: actions.filter((x) => x.status === 'done').length, root_causes: workload.length, decisions: new Set(workload.flatMap((w: any) => w.decisions)).size } };
 }

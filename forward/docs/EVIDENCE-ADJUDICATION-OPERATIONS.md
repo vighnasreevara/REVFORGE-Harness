@@ -10,8 +10,8 @@ This guide is for the operator, the business SME and the requirements approver.
 | Deterministically verified | the adjudicator, re-following every chain from the original COBOL | `EAR-NNNN` (SOURCE_CHAIN_*) |
 | Accepted by an authorized reviewer | a signed `resolved_no_change` that selects the exact `ESU-NNNN` | `RES-NNNN` |
 | Human decision resolved | any signed resolution of the decision | `RES-NNNN` |
-| Scope READY | no blocking finding remains | G2 scope evaluation |
-| G2 PASS | a signed approval by a requirements approver, re-verified | `APR-NNNN` + gate result |
+| Scope READY | no blocking finding remains | G1 scope evaluation |
+| G1 PASS | a signed approval by a requirements approver, re-verified | `APR-NNNN` + gate result |
 
 ## What the adjudicator checks
 
@@ -42,9 +42,9 @@ It writes `forward/reports/step-10/evidence-adjudication*.json`, and with `--rec
    - `EARLIER_VERIFICATION_DEFENSIBLE`.
 3. **Outcome.** If the earlier result rests only on substring matches (or the claim is contradicted), the record carries **`EVIDENCE_INVALIDATED`**. Otherwise it carries `EARLIER_VERIFICATION_CONFIRMED`.
 
-## How G2 selects evidence (fail-closed)
+## How G1 selects evidence (fail-closed)
 
-- **An invalidated verification.** The latest `EAR` for an item that says `EVIDENCE_INVALIDATED` makes the G2 snapshot treat the earlier verification as **unverified**. If that record later goes stale (source or item changed), the item stays unverified until a fresh adjudication supersedes it. A stale record never re-enables a false verification.
+- **An invalidated verification.** The latest `EAR` for an item that says `EVIDENCE_INVALIDATED` makes the G1 snapshot treat the earlier verification as **unverified**. If that record later goes stale (source or item changed), the item stays unverified until a fresh adjudication supersedes it. A stale record never re-enables a false verification.
 - **Alternative evidence** is shown to reviewers but never counts automatically. A reviewer updates the citation through the normal correction or resolution path.
 - **Evidence supplements** (`ESU-NNNN`) count only when all of these hold:
   - a signed `resolved_no_change` of the item's review decision names the **exact** supplement;

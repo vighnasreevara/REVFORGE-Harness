@@ -2,8 +2,8 @@
  * Scope reconciliation (STEP 7). Explains every item a scope contributes to a
  * BMad mapping: which units are primary, which are direct or transitive
  * dependencies, and why each requirement, runtime requirement, data contract,
- * rule and decision is included. The scope membership itself is the G2 scope
- * evaluator's (it decides what G2 approves); this module never changes it,
+ * rule and decision is included. The scope membership itself is the G1 scope
+ * evaluator's (it decides what G1 approves); this module never changes it,
  * it only classifies and explains it, so the mapping can tell direct items
  * from shared-dependency, cross-scope and system-wide (global) ones and
  * blocking from non-blocking decisions.
@@ -140,7 +140,7 @@ export function reconcileScope(snap: Snapshot, scope: string, ev: ScopeEvaluatio
       let reason: string;
       if (!names.length) {
         cls = 'global';
-        reason = `names no unit (system-wide${d?.gap_ids.length ? `, from ${d.gap_ids.join(', ')}` : ''}); the G2 scope evaluator applies unit-less gaps and decisions to every scope`;
+        reason = `names no unit (system-wide${d?.gap_ids.length ? `, from ${d.gap_ids.join(', ')}` : ''}); the G1 scope evaluator applies unit-less gaps and decisions to every scope`;
       } else if (inside.some((n) => primary.has(n)) || reqs.length) {
         cls = outside.length ? 'cross_scope' : 'direct';
         reason = cls === 'direct' ? `affects primary unit(s) ${inside.filter((n) => primary.has(n)).join(', ') || '-'}${reqs.length ? ` and requirement(s) ${reqs.join(', ')}` : ''}` : `affects ${inside.join(', ')} in scope and ${outside.length} unit(s) outside it (${outside.slice(0, 6).join(', ')}${outside.length > 6 ? ', …' : ''}); one decision shared across scopes`;

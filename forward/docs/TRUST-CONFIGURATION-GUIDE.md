@@ -10,22 +10,22 @@ This guide is for the organization's **key custodian** and the operator who runs
 **Without a trust store:**
 - `workbench trust` reports `TRUST_NOT_CONFIGURED`;
 - no decision resolution, requirements approval or source-export authorization can be imported;
-- G2 stays `UNVERIFIED`.
+- G1 stays `UNVERIFIED`.
 
 ## 1. Roles the runtime checks
 
 | Role | Authority | Where it is checked |
 |---|---|---|
-| `requirements_approver` | Signs the G2 approval statement for a READY scope. Cannot be the requester. | `workflow approval import` |
+| `requirements_approver` | Signs the G1 approval statement for a READY scope. Cannot be the requester. | `workflow approval import` |
 | `business_sme` | Signs business, review and scope decision resolutions (and scope decisions together with `product_owner`). | `workflow decisions resolve` |
 | `product_owner` | Signs scope decisions. | `workflow decisions resolve` |
 | `technical_authority` | Signs technical, data-layout and runtime-semantics decisions. | `workflow decisions resolve` |
 | `exception_approver` | Signs `approved_exception` outcomes. Only for items that lack evidence; never for contradicted items. | `workflow decisions resolve` |
 | `data_owner` | Signs source-export authorizations and revocations for independent OpenAI verification. | `verification openai authorize` / `revoke` |
-| `architecture_approver` | Signs the G3 approval of one exact F3 architecture for a G2-approved scope. | `workflow approval import` (signed-design-approval, gate G3) |
-| `technical_authority` (G3 co-approval) | Must also sign G3 when an ADR changes legacy behaviour (`behavior_change: true`). The signer must differ from the architecture approver. | `workflow approval import` (gate G3) |
+| `architecture_approver` | Signs the G2 approval of one exact F3 architecture for a G1-approved scope. | `workflow approval import` (signed-design-approval, gate G2) |
+| `technical_authority` (G2 co-approval) | Must also sign G2 when an ADR changes legacy behaviour (`behavior_change: true`). The signer must differ from the architecture approver. | `workflow approval import` (gate G2) |
 
-**Configuration.** Role names and which decision kinds need which roles are set in `forward/config/forward.config.json` (`approval.roles`, `openai_verification.source_export.required_roles`). Changing them changes the policy digest and invalidates existing approvals. The G3 roles are fixed in the runtime's design-approval policy (`DESIGN_POLICY`, digest bound into every G3 request); see [DESIGN-APPROVAL-OPERATIONS.md](DESIGN-APPROVAL-OPERATIONS.md). There is no story-approval role: the former G4 story-set approval was replaced by an automated story validation, so a `story_approver` entry in a trust store grants nothing.
+**Configuration.** Role names and which decision kinds need which roles are set in `forward/config/forward.config.json` (`approval.roles`, `openai_verification.source_export.required_roles`). Changing them changes the policy digest and invalidates existing approvals. The G2 roles are fixed in the runtime's design-approval policy (`DESIGN_POLICY`, digest bound into every G2 request); see [DESIGN-APPROVAL-OPERATIONS.md](DESIGN-APPROVAL-OPERATIONS.md). There is no story-approval role: the former G4 story-set approval was replaced by an automated story validation, so a `story_approver` entry in a trust store grants nothing.
 
 ## 2. Provision signers
 
@@ -165,15 +165,15 @@ This guide is for the organization's **key custodian** and the operator who runs
 ## 6. Requirements approval for a scope
 
 ```sh
-workflow g2 evaluate --scope <scope>                                              # must be READY
+workflow g1 evaluate --scope <scope>                                              # must be READY
 workflow approval request --scope <scope> --requested-by <operator id>          # AREQ-NNNN (immutable, digest-bound)
 workflow approval statement --request AREQ-NNNN --signer <approver id> --role requirements_approver --decision approved --out stmt.canonical
 openssl pkeyutl -sign -inkey ~/.keys/revforge-<approver>.pem -rawin -in stmt.canonical | base64 -w0 > stmt.sig
 # signed-approval.json = {"contract":"signed-approval","statement":<stmt.canonical>,"signature":{"algorithm":"ed25519","value":"<stmt.sig>"}}
 workflow approval verify --file signed-approval.json                            # read-only validation
 workflow approval import --file signed-approval.json
-workflow gate --gate G2
+workflow gate --gate G1
 workflow advance --to REQUIREMENTS_APPROVED
 ```
 
-**What the approval is bound to:** the exact scope digest and baseline. Any later change to the scope's content, decisions, sources or policy invalidates it, and G2 drops out of PASS.
+**What the approval is bound to:** the exact scope digest and baseline. Any later change to the scope's content, decisions, sources or policy invalidates it, and G1 drops out of PASS.

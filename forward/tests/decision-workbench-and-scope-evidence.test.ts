@@ -1,7 +1,7 @@
 /**
  * STEP 5.5: scope selection, evidence package, decision packets, correction
  * review and signed citation-line correction, trust readiness, OpenAI pilot
- * preparation, checklist and G2 readiness. Synthetic fixtures and synthetic
+ * preparation, checklist and G1 readiness. Synthetic fixtures and synthetic
  * signers only; nothing here touches the real workflow or the network.
  */
 import assert from 'node:assert/strict';
@@ -22,7 +22,7 @@ import { correct } from '../runtime/src/remediation/remediation';
 import { candidatesRecord } from '../runtime/src/commands/workbench';
 import { checklist, correctionReview, decisionPackets, evidencePackage, openaiPilot, scopeReadinessReport, trustReadiness } from '../runtime/src/workbench/workbench';
 import { cleanup, Fixture, FORWARD_DIR } from './helpers/fixture';
-import { citedClaim, deliverAll, KP, RUN, setupG2, SIGNERS, signText, wfOf } from './helpers/g2fixture';
+import { citedClaim, deliverAll, KP, RUN, setupG1, SIGNERS, signText, wfOf } from './helpers/g2fixture';
 
 const fixtures: Fixture[] = [];
 beforeEach(() => {
@@ -39,7 +39,7 @@ const BATCH_REL = 'src/programs/batch/BRAVO02.cbl';
 
 /** BRAVO02 becomes an application program (path evidence) with checkable source; the others stay unclassified. */
 function setup(line = 8) {
-  const { f, ctx, k } = setupG2(fixtures, {
+  const { f, ctx, k } = setupG1(fixtures, {
     mutate: (fx) => {
       const b = fx.programs[1];
       const inv = fx.read('output/inventory/inventory_artifact.json');
@@ -204,7 +204,7 @@ describe('S55-C. corrections, trust and signatures', () => {
 });
 
 describe('S55-D. pilot preparation and protections', () => {
-  test('the OpenAI pilot is prepared with an unsigned authorization request and no network call; G2, gates, Java and reverse files stay protected', () => {
+  test('the OpenAI pilot is prepared with an unsigned authorization request and no network call; G1, gates, Java and reverse files stay protected', () => {
     const { f, ctx } = setup();
     const wd = wfOf(ctx).store.dir;
     const guarded = ['receipts', 'agents', 'decisions', 'approvals', 'step45', 'authorizations'];
@@ -246,9 +246,9 @@ describe('S55-D. pilot preparation and protections', () => {
     for (const fname of ['first-scope-recommendation.md', 'scope-evidence-package.json', 'decision-packets.md', 'approval-operations-checklist.md', 'scope-g2-readiness.md', 'correction-review.json', 'trust-readiness.json']) assert.ok(fs.existsSync(path.join(f.repoRoot, 'wb', fname)), fname);
     for (const d of guarded) assert.deepEqual(hashTree(path.join(wd, d)), before[d], `${d} unchanged`);
     assert.equal(wfOf(ctx).store.list('approvals').filter((x) => x.startsWith('APR-')).length, 0, 'no approval created');
-    assert.equal(runGate(wfOf(ctx), 'G2').status, 'UNVERIFIED');
+    assert.equal(runGate(wfOf(ctx), 'G1').status, 'UNVERIFIED');
     assert.equal(advance(wfOf(ctx), 'REQUIREMENTS_APPROVED').accepted, false);
-    assert.equal(runGate(wfOf(ctx), 'G3').status, 'BLOCKED');
+    assert.equal(runGate(wfOf(ctx), 'G2').status, 'BLOCKED');
     assert.equal(generationAuthorized(wfOf(ctx).run, wfOf(ctx).state), false);
     assert.throws(() => prepare(wfOf(ctx), 'F5'), /may only be dispatched/);
     assert.equal(wfOf(ctx).store.verifyCheckpoint().ok, true);

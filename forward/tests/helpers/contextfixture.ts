@@ -16,7 +16,7 @@ export interface ContextOpts {
   copyExtra?: string[];
   progExtra?: string[];
   catalogueParent?: string;
-  approveG2?: boolean;
+  approveG1?: boolean;
   /** STEP 12: further edits of the synthetic deliverables (e.g. an extra decision in the F1 register). */
   extraEdit?: Edit;
 }
@@ -68,6 +68,6 @@ export function contextFixture(fixtures: Fixture[], o: ContextOpts = {}) {
     r.statement = o.claim ?? `When the processing limit exceeds 500 the program marks the status HIGH ('${value}').`;
     r.source_refs = [{ ...r.source_refs[0], statement_id: `${fx.programs[1].fileId}-STMT-000002`, line: o.citeLine ?? 10 }];
   };
-  const out = designFixture(fixtures, { approveG2: false, resolve: false, mutate, edit });
+  const out = designFixture(fixtures, { approveG1: false, resolve: false, mutate, edit });
   return { ...out, req: `REQ-${out.f.programs[1].name}-001` };
 }

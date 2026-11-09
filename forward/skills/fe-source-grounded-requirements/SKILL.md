@@ -33,7 +33,7 @@ Owned by agent **fe-requirements-analyst** (F1). Executed only on a dispatchable
 
 ## Purpose and responsibility
 
-Produce **draft** forward requirements for exactly the units (programs) listed in the packet, grounded in the reverse rules, the per-program logic and the evidence packets. Every in-scope reverse rule receives exactly one disposition in `rule_coverage`, so that no recovered behaviour is silently discarded, and every requirement traces back to its rules and to permanent COBOL source IDs. Calculations, validations, routing decisions, limit checks, error handling and compliance behaviour are preserved as the reverse evidence states them. Nothing here is approved: approval happens only at gate G2 by a human.
+Produce **draft** forward requirements for exactly the units (programs) listed in the packet, grounded in the reverse rules, the per-program logic and the evidence packets. Every in-scope reverse rule receives exactly one disposition in `rule_coverage`, so that no recovered behaviour is silently discarded, and every requirement traces back to its rules and to permanent COBOL source IDs. Calculations, validations, routing decisions, limit checks, error handling and compliance behaviour are preserved as the reverse evidence states them. Nothing here is approved: approval happens only at gate G1 by a human.
 
 ## Required input artifacts
 

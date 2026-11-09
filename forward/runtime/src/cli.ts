@@ -36,27 +36,28 @@ Commands:
   workflow init          Create the orchestrated workflow for a plan run (runs the baseline pre-check)
   workflow status        Show state, gates, packets, receipts and checkpoint
   workflow precheck --check BASELINE|EVIDENCE|all  Run the automated pre-checks (baseline unchanged, evidence consistent)
-  workflow gate --gate G2|G3|all  Evaluate the gates (each needs a verified signed human approval)
+  workflow gate --gate G1|G2|all  Evaluate the gates (each needs a verified signed human approval)
   workflow advance --to STATE     Request a state transition (runtime-guarded)
   workflow transitions            List allowed transitions and their guards
   workflow prepare --agent F1     Prepare a validated agent input packet
   workflow batches --agent F1 [--size N]  Prepare packets for all pending unit batches
   workflow coverage --agent F1    Show the unit coverage ledger
   workflow record --receipt FILE  Validate and record an agent output receipt
-  workflow g2 evaluate|blockers [--scope S] [--per-program]  G2 readiness of a scope (application | programs:A,B | requirements:R1,R2)
-  workflow g2 report [--out FILE]                Readiness and blocker report (application and per-program scopes)
+  workflow g1 evaluate|blockers [--scope S] [--per-program]  G1 readiness of a scope (application | programs:A,B | requirements:R1,R2)
+  workflow g1 report [--out FILE]                Readiness and blocker report (application and per-program scopes)
+                         (gates renumbered 2026-11-09: G1 was G2 and G2 was G3; 'workflow g1' was 'workflow g2')
   workflow approval request --scope S --requested-by ID   Export an immutable approval request for a READY scope
   workflow approval statement --request AREQ-N --signer ID --role R --decision approved|rejected [--out FILE]
-  workflow approval verify|import --file SIGNED.json      Verify / import a signed (Ed25519) G2 or G3 approval
-  workflow g3 evaluate|blockers            G3 architecture gate evaluation (read-only)
+  workflow approval verify|import --file SIGNED.json      Verify / import a signed (Ed25519) G1 or G2 approval
+  workflow g2 evaluate|blockers            G2 architecture gate evaluation (read-only; 'workflow g3' is a deprecated alias)
   workflow stories validate                Automated check of the F4 story set (read-only; required before F5)
-  workflow architecture approval-request --requested-by ID   Approval request for the validated F3 architecture (G3)
+  workflow architecture approval-request --requested-by ID   Approval request for the validated F3 architecture (G2)
   workflow architecture approval-statement --request DREQ-N --signer ID --role R --decision approved|rejected [--out FILE]
   workflow decisions list [--scope S] [--status X] [--origin X] [--blocking]
   workflow decisions template --decision ID [--out FILE]  Unsigned resolution template bound to the decision
   workflow decisions resolve --file SIGNED.json [--dry-run]  Verify and record a signed decision resolution
   workflow packets review          Record which receipt-less packets are superseded or still required
-  verification blockers audit      Reconcile every G2 blocker count (sealed record)
+  verification blockers audit      Reconcile every G1 blocker count (sealed record)
   verification blockers root-causes  Canonical root-cause registry linking all decisions and findings
   verification blockers classify   Root-cause review queue (A technical, B semantic, C business, D technical decision, E missing source, Z approval)
   verification source deterministic  Read-only deterministic checks against the original COBOL source
@@ -88,7 +89,7 @@ Commands:
   decisions export-request --decision ID --scope S [--out FILE] | verify-resolution|import-resolution --file SIGNED.json
   decisions clarify --decision ID --requested-by ID --question TEXT [--to WHO] | impact --decision ID
   remediation review|impact [--scope S] [--proposal RP-...]   Citation corrections re-derived from the source now
-  approval readiness --scope S              G2 approval checklist (readiness is not approval)
+  approval readiness --scope S              G1 approval checklist (readiness is not approval)
   approval scope --scope S [--compare S2] [--export-dir D]   Dependency closure, decision attribution, deferred gaps, subset vs program
                                             (S may be behaviour:PROGRAM:PARAGRAPH:requirement=ID,runtime_requirement=ID)
   approval export-request --scope S --requested-by ID | verify|import --file SIGNED.json
@@ -99,7 +100,7 @@ Commands:
   pilot candidates                Rank complete real programs for the first conversion
   pilot readiness --program P     Engineering gate SOURCE_READINESS (+ unchanged generation authorisation status)
   pilot validate --out O [--dir D]  Engineering gate CONVERSION_VALIDATION on a conversion output
-  demo gates [--out DIR]          Synthetic two-gate (G2, G3) workflow demonstration (SYNTHETIC_INTERVIEW_DEMO; no production authorisation)
+  demo gates [--out DIR]          Synthetic two-gate (G1, G2) workflow demonstration (SYNTHETIC_INTERVIEW_DEMO; no production authorisation)
   workflow blocked                Report blocked transitions, dispatches and receipts
   workflow resume                 Verify checkpoint and baseline, then resume
 

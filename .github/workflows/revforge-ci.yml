@@ -145,7 +145,7 @@ jobs:
         run: node scripts/smoke.mjs
 
   demo:
-    name: Synthetic two-gate (G2, G3) workflow demonstration
+    name: Synthetic two-gate (G1, G2) workflow demonstration
     # Runs the synthetic interview demonstration (environment SYNTHETIC_INTERVIEW_DEMO) on the committed synthetic
     # inputs only: no restricted COBOL, no Neo4j, no external AI or BMad call, no production signing key (each run
     # creates an ephemeral demo key in memory), no generated production Java. Demo output stays in RUNNER_TEMP.
@@ -178,11 +178,11 @@ jobs:
           node -e '
             const s = require(process.argv[1]);
             const ok = s.verdict === "SYNTHETIC_DEMO_COMPLETED" && s.steps.length === 9 && s.steps.every((g) => g.demo_status === "PASS")
-              && s.steps.filter((g) => g.kind === "gate").map((g) => g.step).join() === "G2,G3"
+              && s.steps.filter((g) => g.kind === "gate").map((g) => g.step).join() === "G1,G2"
               && s.production_authorization === "NOT_GRANTED" && s.real_bmad_execution === "NOT_EXECUTED" && s.legacy_equivalence === "NOT_ESTABLISHED"
               && s.bmad.simulated_stages === 6 && s.bmad.counted_as_bmad_execution === 0
               && s.real_project_status.generation_java_generation_allowed === false && s.real_project_status.bmad_governance_mandatory === true;
-            console.log(ok ? "G2, G3 and all automated steps PASS; production authorization NOT_GRANTED" : "demo summary check FAILED");
+            console.log(ok ? "G1, G2 and all automated steps PASS; production authorization NOT_GRANTED" : "demo summary check FAILED");
             process.exit(ok ? 0 : 1);' "$RUNNER_TEMP/demo/demo-summary.json"
       - name: Happy-path and negative-path tests
         env:

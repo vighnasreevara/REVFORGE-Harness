@@ -3,13 +3,13 @@
  * bound BMad workflow may read for one exact scope, directly from the
  * runtime's records: accepted requirement and data items of the scope, the
  * canonical rules with the reverse run that issued their IDs, signed decision
- * resolutions, the signed G2 approval and recorded upstream results. Nothing
+ * resolutions, the signed G1 approval and recorded upstream results. Nothing
  * is summarised or rewritten; every element keeps its IDs, source references
  * and record hash, and the provenance sidecar repeats them for re-checking.
  */
 import { buildSnapshot, Snapshot } from '../approval/snapshot';
 import { evaluateScope, parseSelector, ScopeEvaluation } from '../approval/scope';
-import { approvalRecords, evaluateG2Gate } from '../approval/approvals';
+import { approvalRecords, evaluateG1Gate } from '../approval/approvals';
 import { canonicalize } from '../approval/canonical';
 import { sha256Buffer } from '../core/fsutil';
 import { Workflow } from '../orchestrator/orchestrator';
@@ -68,7 +68,7 @@ export function buildMapping(wf: Workflow, binding: Binding, scope: string, mapp
     const d = snap.register.get(x.id);
     return { id: x.id, kind: x.kind, question: d?.question ?? null, status: x.status, blocking: x.blocking, effective_blocking: x.effective_blocking, class: x.class, inclusion_reason: x.reason, via: x.via, resolution_id: r?.effective?.resolution_id ?? null, outcome: r?.outcome ?? null, resolution_text: r?.effective?.resolution?.resolution_text ?? null };
   });
-  const g2 = evaluateG2Gate(wf, snap.at);
+  const g2 = evaluateG1Gate(wf, snap.at);
   const validIds = new Set((g2.evaluation?.approvals ?? []).filter((a: any) => a.valid && a.decision === 'approved').map((a: any) => a.approval_id));
   const approvals = approvalRecords(wf)
     .filter((a) => validIds.has(a.approval_id) && a.scope.selector_text === ev.selector_text)

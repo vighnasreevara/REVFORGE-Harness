@@ -38,7 +38,7 @@ export interface AgentSpec {
   drafts_state: string | null;
   /** Coverage units the agent works through in dispatch batches ([] = whole-system work). */
   unit_kinds: Array<'program' | 'copybook'>;
-  /** Gate (G2 or G3) that must have PASSed on the current baseline before dispatch. */
+  /** Gate (G1 or G2) that must have PASSed on the current baseline before dispatch. */
   requires_gate: string | null;
   /** Pre-checks that must have PASSed on the current baseline before dispatch. */
   requires_prechecks?: Array<'BASELINE' | 'EVIDENCE'>;
@@ -132,7 +132,7 @@ export const AGENTS: AgentSpec[] = [
     responsibility: 'Design the target Java architecture from approved requirements, verified data mappings and resolved technical decisions, with architecture decision records.',
     dispatch_states: ['REQUIREMENTS_APPROVED', 'ARCHITECTURE_DRAFTED'],
     drafts_state: 'ARCHITECTURE_DRAFTED',
-    requires_gate: 'G2',
+    requires_gate: 'G1',
     inputs: [
       { kind: 'receipt:F1', required: true },
       { kind: 'receipt:F2', required: true },
@@ -159,7 +159,7 @@ export const AGENTS: AgentSpec[] = [
     responsibility: 'Turn the approved architecture, requirements and data contracts into evidence-backed epics, stories, acceptance criteria and a sprint readiness report.',
     dispatch_states: ['ARCHITECTURE_APPROVED', 'STORIES_DRAFTED'],
     drafts_state: 'STORIES_DRAFTED',
-    requires_gate: 'G3',
+    requires_gate: 'G2',
     inputs: [
       { kind: 'receipt:F3', required: true },
       { kind: 'receipt:F1', required: true },
@@ -187,7 +187,7 @@ export const AGENTS: AgentSpec[] = [
     responsibility: 'Implement authorised development stories as Java sources with a Maven build, an implementation manifest and build results, inside the explicitly authorised target directory only.',
     dispatch_states: ['STORIES_DRAFTED', 'IMPLEMENTING'],
     drafts_state: null,
-    requires_gate: 'G3',
+    requires_gate: 'G2',
     inputs: [
       { kind: 'receipt:F4', required: true },
       { kind: 'receipt:F3', required: true },

@@ -6,7 +6,7 @@ allowed-tools: Read, Grep, Glob, Write, Edit, Bash
 
 # fe-java-batch-implementation
 
-Owned by agent **fe-java-developer** (F5). **STEP 3 restriction: no production Java is generated.** Every F5 packet is undispatchable until G3 has passed, the F4 story set validates, generation has been authorised in config, and a Java target directory has been named.
+Owned by agent **fe-java-developer** (F5). **STEP 3 restriction: no production Java is generated.** Every F5 packet is undispatchable until G2 has passed, the F4 story set validates, generation has been authorised in config, and a Java target directory has been named.
 
 ```json revforge-skill
 {
@@ -17,7 +17,7 @@ Owned by agent **fe-java-developer** (F5). **STEP 3 restriction: no production J
   "write_scope": "java_target_dir",
   "reads": [
     "workflow/packets/<packet>.json",
-    "workflow/gates/G3-*.json",
+    "workflow/gates/G2-*.json",
     "workflow/agents/F4/<packet>/stories.json",
     "workflow/agents/F3/<packet>/component_design.json",
     "workflow/agents/F3/<packet>/architecture_decisions.json",
@@ -39,8 +39,8 @@ The skill's name does not authorise turning online CICS programs or callable ser
 
 ## Required input artifacts
 
-- The G3 gate result (`PASS`), and a packet whose `permissions.generation_authorized` is true and `may_write_code` is true.
-- The authorised stories (`stories.json`, readiness `ready`, validated by the runtime against G3).
+- The G2 gate result (`PASS`), and a packet whose `permissions.generation_authorized` is true and `may_write_code` is true.
+- The authorised stories (`stories.json`, readiness `ready`, validated by the runtime against G2).
 - The approved component design and ADRs (F3), and the data contracts and runtime semantics (F2).
 - The Java target directory given in the packet permissions.
 
@@ -50,7 +50,7 @@ The skill's name does not authorise turning online CICS programs or callable ser
    - the packet is dispatchable;
    - generation is authorised;
    - a target directory exists;
-   - G3 is `PASS` on the packet baseline and the story set validates.
+   - G2 is `PASS` on the packet baseline and the story set validates.
    This is always the case in STEP 3.
 2. Implement only stories that are approved and `ready`. Any other story becomes a blocker.
 3. Copy `inputs_used` paths and hashes from the packet.

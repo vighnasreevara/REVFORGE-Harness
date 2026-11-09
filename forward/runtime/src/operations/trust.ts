@@ -34,11 +34,11 @@ export function requiredRoles(ctx: RuntimeContext): RoleNeed[] {
   const p = loadPolicy(ctx);
   const m = new Map<string, Set<string>>();
   const add = (role: string, use: string) => (m.get(role) ?? m.set(role, new Set()).get(role)!).add(use);
-  for (const r of p.roles.requirements_approval) add(r, 'G2 requirements approval');
+  for (const r of p.roles.requirements_approval) add(r, 'G1 requirements approval');
   for (const r of p.roles.exception) add(r, 'approved_exception decision outcomes');
   for (const [kind, roles] of Object.entries(p.roles.decision)) for (const r of roles) add(r, `${kind} decision resolutions`);
-  for (const r of DESIGN_POLICY.G3.approver_roles) add(r, 'G3 architecture approval');
-  for (const r of DESIGN_POLICY.G3.co_approval_roles_when_behavior_change) add(r, 'G3 co-approval when legacy behaviour changes');
+  for (const r of DESIGN_POLICY.G2.approver_roles) add(r, 'G2 architecture approval');
+  for (const r of DESIGN_POLICY.G2.co_approval_roles_when_behavior_change) add(r, 'G2 co-approval when legacy behaviour changes');
   for (const r of loadOpenAIConfig(ctx).config.source_export.required_roles) add(r, 'OpenAI source-export authorization');
   for (const r of DISCLOSURE_ROLES) add(r, 'provider-specific AI disclosure authorization (Claude / BMad and others)');
   return [...m.entries()].map(([role, u]) => ({ role, used_for: [...u].sort() })).sort((a, b) => (a.role < b.role ? -1 : 1));

@@ -1,4 +1,4 @@
-# Synthetic two-gate (G2, G3) workflow demonstration report
+# Synthetic two-gate (G1, G2) workflow demonstration report
 
 > **Environment: SYNTHETIC_INTERVIEW_DEMO.** This report is about one synthetic example program. It grants no production authorisation, records no real approval and executes no BMad workflow. The real modernization status is listed at the end and is unchanged.
 
@@ -6,13 +6,13 @@
 
 | Field | Value |
 |---|---|
-| Demo run | `DEMO-20261108T192652Z-4a4f` |
-| Started / finished | 2026-11-08T19:26:52.883Z / 2026-11-08T19:26:55.329Z |
+| Demo run | `DEMO-20261109T231039Z-093c` |
+| Started / finished | 2026-11-09T23:10:39.412Z / 2026-11-09T23:10:41.902Z |
 | production_authorization | NOT_GRANTED |
 | real_bmad_execution | NOT_EXECUTED |
 | legacy_equivalence | NOT_ESTABLISHED |
 | Environment | Node v22.12.0, win32 x64; javac 21.0.13.0.2 |
-| Output directory | `forward/demo/gates/runs/DEMO-20261108T192652Z-4a4f` |
+| Output directory | `forward/demo/gates/runs/DEMO-20261109T231039Z-093c` |
 
 ## Baseline
 
@@ -29,14 +29,14 @@
 
 ## Step results
 
-Only **G2** and **G3** are gates (human decisions with a signed demo approval). BASELINE and EVIDENCE are automated pre-checks; STORIES, BUILD, VERIFY, REVIEW and COMPLETE are automated steps.
+Only **G1** and **G2** are gates (human decisions with a signed demo approval). BASELINE and EVIDENCE are automated pre-checks; STORIES, BUILD, VERIFY, REVIEW and COMPLETE are automated steps.
 
 | Step | Kind | Result | Checks | Responsibility | Approval evidence |
 |---|---|---|---|---|---|
 | BASELINE Baseline pre-check | precheck | **DEMO PASS** | 6/6 | runtime: deterministic integrity checks of the synthetic baseline | none (automatic check) |
 | EVIDENCE Evidence pre-check | precheck | **DEMO PASS** | 10/10 | runtime: re-parses the synthetic COBOL and verifies the synthetic reverse evidence (reverse agents 1-5 analogue) | none (automatic check) |
-| G2 Requirements Approval | gate | **DEMO PASS** | 18/18 | synthetic F1 requirements and F2 data contract; approved by the synthetic demo authority | Ed25519 demo approval, role demo_requirements_approver |
-| G3 Architecture Approval | gate | **DEMO PASS** | 17/17 | synthetic F3 architecture; approved by the synthetic demo authority | Ed25519 demo approval, role demo_architecture_approver |
+| G1 Requirements Approval | gate | **DEMO PASS** | 18/18 | synthetic F1 requirements and F2 data contract; approved by the synthetic demo authority | Ed25519 demo approval, role demo_requirements_approver |
+| G2 Architecture Approval | gate | **DEMO PASS** | 17/17 | synthetic F3 architecture; approved by the synthetic demo authority | Ed25519 demo approval, role demo_architecture_approver |
 | STORIES Story validation | automated | **DEMO PASS** | 7/7 | runtime: synthetic F4 stories and acceptance criteria checked against the approved requirements and architecture | none (automatic check; there is no story approval gate) |
 | BUILD Java build and tests | automated | **DEMO PASS** | 11/11 | deterministic local converter (F5 analogue, no AI agent); javac -Werror; TestMain functional and boundary scenarios | none (executed build and test evidence) |
 | VERIFY Independent verification | automated | **DEMO PASS** | 9/9 | independent specification oracle (F6 analogue) written from the requirements only | none (executed comparison evidence) |
@@ -52,7 +52,7 @@ Only **G2** and **G3** are gates (human decisions with a signed demo approval). 
 | source_hash | pass | SHA-256 f8e365894768f8ecb1054a78f7ac8c9b92143461edb718e4a1a95e74c1582d82 matches the recorded baseline |
 | required_inputs | pass | 6 required inputs present with their recorded SHA-256 |
 | no_unexpected_files | pass | the synthetic input tree holds exactly the baselined files |
-| isolated_output | pass | demo run directory forward/demo/gates/runs/DEMO-20261108T192652Z-4a4f is outside the real workflow runs and the inputs |
+| isolated_output | pass | demo run directory forward/demo/gates/runs/DEMO-20261109T231039Z-093c is outside the real workflow runs and the inputs |
 
 Evidence: `baseline.json`, `source/DEMOORD1.cbl`
 
@@ -60,7 +60,7 @@ Evidence: `baseline.json`, `source/DEMOORD1.cbl`
 
 | Check | Result | Detail |
 |---|---|---|
-| prerequisite | pass | BASELINE PASS on this baseline (result 4abc8847b2e8…) |
+| prerequisite | pass | BASELINE PASS on this baseline (result 50a049aa3cb5…) |
 | reverse_contract | pass | reverse/reverse-evidence.json satisfies demo/reverse-evidence |
 | source_parses | pass | the COBOL parses deterministically (DEMOORD1, 4 paragraphs) |
 | file_identity | pass | SYN-DEMO-FIL-0001 source/DEMOORD1.cbl DEMOORD1: hash matches the source |
@@ -73,60 +73,60 @@ Evidence: `baseline.json`, `source/DEMOORD1.cbl`
 
 Evidence: `reverse/reverse-evidence.json`
 
-### G2 Requirements Approval: DEMO PASS
+### G1 Requirements Approval: DEMO PASS
 
 | Check | Result | Detail |
 |---|---|---|
-| prerequisite | pass | EVIDENCE PASS on this baseline (result e6c1e43307ff…) |
+| prerequisite | pass | EVIDENCE PASS on this baseline (result 897607277ac5…) |
 | requirements_contract | pass | requirements/requirements.json satisfies demo/requirements |
 | dataContract_contract | pass | requirements/data-contract.json satisfies demo/data-contract |
 | rules_covered_by_requirements | pass | all 10 business rules are covered by 8 requirements |
 | worked_examples | pass | 10 worked examples cover every calculation and validation requirement |
 | uncertainties_documented | pass | 5 uncertainties documented (4 resolved, 1 accepted limitation), none blocking |
 | data_contract_matches_source | pass | LS-ORDER 77 bytes vs parsed LS-ORDER 77 bytes; 9 interface fields match name, offset and length |
-| approval_present | pass | approvals/G2.approval.json |
+| approval_present | pass | approvals/G1.approval.json |
 | approval_contract | pass | satisfies demo/approval |
-| approval_gate_and_decision | pass | gate G2, decision approved |
+| approval_gate_and_decision | pass | gate G1, decision approved |
 | approval_subject_bound | pass | binds requirements_package e152b6260ccc369b… (the current content) |
-| approval_run_and_baseline_bound | pass | run DEMO-20261108T192652Z-4a4f, baseline c72c400a4773…, source f8e365894768… |
+| approval_run_and_baseline_bound | pass | run DEMO-20261109T231039Z-093c, baseline c72c400a4773…, source f8e365894768… |
 | approval_prior_steps_bound | pass | binds the PASS results of BASELINE, EVIDENCE |
 | approval_synthetic_signer | pass | synthetic-demo-authority (SYNTHETIC_DEMO_AUTHORITY): a synthetic demo authority, not a real stakeholder |
 | approval_role | pass | signed in the role demo_requirements_approver |
 | approval_not_production | pass | production_authorization: NOT_GRANTED |
-| approval_signature | pass | Ed25519 signature by synthetic-demo-authority (role demo_requirements_approver, key f3edff33b3284668…) verifies against the demo trust store |
+| approval_signature | pass | Ed25519 signature by synthetic-demo-authority (role demo_requirements_approver, key cd8e14556733fb90…) verifies against the demo trust store |
 | approval_not_in_real_trust_store | pass | the real trust store does not accept it (real trust store not configured) |
 
-Evidence: `requirements/requirements.json`, `requirements/data-contract.json`, `approvals/G2.approval.json`
+Evidence: `requirements/requirements.json`, `requirements/data-contract.json`, `approvals/G1.approval.json`
 
-### G3 Architecture Approval: DEMO PASS
+### G2 Architecture Approval: DEMO PASS
 
 | Check | Result | Detail |
 |---|---|---|
-| prerequisite | pass | G2 PASS on this baseline (result 271be680a527…) |
+| prerequisite | pass | G1 PASS on this baseline (result e6523254db71…) |
 | architecture_contract | pass | design/architecture.json satisfies demo/architecture |
-| references_accepted_requirements | pass | requirements 947822e72116…, data contract 8ca544aa1320… (must equal the G2-approved content) |
+| references_accepted_requirements | pass | requirements 947822e72116…, data contract 8ca544aa1320… (must equal the G1-approved content) |
 | requirements_allocated | pass | every requirement is allocated to a component |
 | dependencies_documented | pass | 3 component dependencies, all resolvable |
 | decisions_documented | pass | 3 architecture decisions, each tied to requirements |
-| approval_present | pass | approvals/G3.approval.json |
+| approval_present | pass | approvals/G2.approval.json |
 | approval_contract | pass | satisfies demo/approval |
-| approval_gate_and_decision | pass | gate G3, decision approved |
+| approval_gate_and_decision | pass | gate G2, decision approved |
 | approval_subject_bound | pass | binds architecture 67e443d90ba6041f… (the current content) |
-| approval_run_and_baseline_bound | pass | run DEMO-20261108T192652Z-4a4f, baseline c72c400a4773…, source f8e365894768… |
-| approval_prior_steps_bound | pass | binds the PASS results of BASELINE, EVIDENCE, G2 |
+| approval_run_and_baseline_bound | pass | run DEMO-20261109T231039Z-093c, baseline c72c400a4773…, source f8e365894768… |
+| approval_prior_steps_bound | pass | binds the PASS results of BASELINE, EVIDENCE, G1 |
 | approval_synthetic_signer | pass | synthetic-demo-authority (SYNTHETIC_DEMO_AUTHORITY): a synthetic demo authority, not a real stakeholder |
 | approval_role | pass | signed in the role demo_architecture_approver |
 | approval_not_production | pass | production_authorization: NOT_GRANTED |
-| approval_signature | pass | Ed25519 signature by synthetic-demo-authority (role demo_architecture_approver, key f3edff33b3284668…) verifies against the demo trust store |
+| approval_signature | pass | Ed25519 signature by synthetic-demo-authority (role demo_architecture_approver, key cd8e14556733fb90…) verifies against the demo trust store |
 | approval_not_in_real_trust_store | pass | the real trust store does not accept it (real trust store not configured) |
 
-Evidence: `design/architecture.json`, `approvals/G3.approval.json`
+Evidence: `design/architecture.json`, `approvals/G2.approval.json`
 
 ### STORIES Story validation: DEMO PASS
 
 | Check | Result | Detail |
 |---|---|---|
-| prerequisite | pass | G3 PASS on this baseline (result 796165259103…) |
+| prerequisite | pass | G2 PASS on this baseline (result f73e7379ca6d…) |
 | plan_contract | pass | design/development-plan.json satisfies demo/development-plan |
 | references_approved_design | pass | requirements 947822e72116…, architecture 67e443d90ba6… |
 | stories_trace_requirements | pass | 4 stories cover all 8 requirements |
@@ -140,7 +140,7 @@ Evidence: `design/development-plan.json`
 
 | Check | Result | Detail |
 |---|---|---|
-| prerequisite | pass | STORIES PASS on this baseline (result d3d2cc1d343a…) |
+| prerequisite | pass | STORIES PASS on this baseline (result f9d006389029…) |
 | java_21_toolchain | pass | javac 21.0.13.0.2 (REVFORGE_JAVA_HOME) |
 | converter_inspection | pass | the local converter parsed DEMOORD1 |
 | no_open_gaps | pass | the converter translated every statement without a gap placeholder |
@@ -158,7 +158,7 @@ Evidence: `build/generation.json`, `build/source-map.json`, `build/traceability.
 
 | Check | Result | Detail |
 |---|---|---|
-| prerequisite | pass | BUILD PASS on this baseline (result 01fbe84393e5…) |
+| prerequisite | pass | BUILD PASS on this baseline (result c228ba83a7a3…) |
 | oracle_independent | pass | the oracle module (oracle.js, sha256 d83146cbf9e7…) loads no other module: it cannot call the converter, the Java or the runtime |
 | oracle_matches_requirement_examples | pass | the oracle reproduces all 10 worked examples of the requirements |
 | java_is_verified_build | pass | 34 class files unchanged since BUILD |
@@ -178,8 +178,8 @@ Evidence: `verify/oracle-cases.json`, `verify/oracle-fixture.json`, `verify/comp
 
 | Check | Result | Detail |
 |---|---|---|
-| prerequisite | pass | VERIFY PASS on this baseline (result 2d812cefa3d6…) |
-| step_results_intact | pass | BASELINE, EVIDENCE, G2, G3, STORIES, BUILD, VERIFY result files match their recorded SHA-256 |
+| prerequisite | pass | VERIFY PASS on this baseline (result d47aeb78dffb…) |
+| step_results_intact | pass | BASELINE, EVIDENCE, G1, G2, STORIES, BUILD, VERIFY result files match their recorded SHA-256 |
 | test_evidence_integrity | pass | 17 evidence files re-hashed, all unchanged |
 | requirements_coverage | pass | each of 8 requirements has a story, passing functional tests and matching oracle cases |
 | traceability_complete | pass | every rule traces rule -> requirement -> story -> Java statements -> passing tests |
@@ -197,10 +197,10 @@ Evidence: `steps/REVIEW.review.json`
 
 | Check | Result | Detail |
 |---|---|---|
-| prerequisite | pass | REVIEW PASS on this baseline (result ae17ea5cff0c…) |
-| earlier_steps_passed | pass | BASELINE, EVIDENCE, G2, G3, STORIES, BUILD, VERIFY, REVIEW all PASS for this demo baseline |
+| prerequisite | pass | REVIEW PASS on this baseline (result 1383e45a48f6…) |
+| earlier_steps_passed | pass | BASELINE, EVIDENCE, G1, G2, STORIES, BUILD, VERIFY, REVIEW all PASS for this demo baseline |
 | evidence_complete | pass | 18 evidence files and 10 inputs, Java sources and class sets present and unchanged |
-| approvals_g2_g3_only | pass | signed demo approvals: G2.approval.json, G3.approval.json (the only human gates are G2 and G3; completion needs no human acceptance) |
+| approvals_g1_g2_only | pass | signed demo approvals: G1.approval.json, G2.approval.json (the only human gates are G1 and G2; completion needs no human acceptance) |
 | production_not_granted | pass | every step result and the review say production_authorization NOT_GRANTED |
 | no_unresolved_critical_findings | pass | review decision PASS; 0 unresolved critical finding(s) |
 
@@ -220,12 +220,12 @@ Release bmad-method@6.12.4; mandatory in the real configuration: true. Live exec
 
 | Binding | Workflow | Agent | Forward activity | Demo step | Mode | Demo preflight | Real receipt counter |
 |---|---|---|---|---|---|---|---|
-| BMAD-PRD | bmad-prd | F1 | requirements (F1) -> PRD rendering of the approved requirements | G2 | SIMULATED | WOULD_BE_ELIGIBLE_IN_DEMO | SIM-DEMO-20261108T192652Z-4a4f-BMAD-PRD is a SIMULATED receipt (MOCK_NOT_EVIDENCE): never BMad execution evidence |
-| BMAD-ARCH | bmad-architecture | F3 | architecture (F3) | G3 | SIMULATED | WOULD_BE_ELIGIBLE_IN_DEMO | SIM-DEMO-20261108T192652Z-4a4f-BMAD-ARCH is a SIMULATED receipt (MOCK_NOT_EVIDENCE): never BMad execution evidence |
-| BMAD-EPICS | bmad-create-epics-and-stories | F4 | epics and stories (F4) | STORIES | SIMULATED | WOULD_BE_ELIGIBLE_IN_DEMO | SIM-DEMO-20261108T192652Z-4a4f-BMAD-EPICS is a SIMULATED receipt (MOCK_NOT_EVIDENCE): never BMad execution evidence |
-| BMAD-SPRINT | bmad-sprint-planning | F4 | sprint planning (F4) | STORIES | SIMULATED | WOULD_BE_ELIGIBLE_IN_DEMO | SIM-DEMO-20261108T192652Z-4a4f-BMAD-SPRINT is a SIMULATED receipt (MOCK_NOT_EVIDENCE): never BMad execution evidence |
-| BMAD-BUILD | bmad-build | F5 | implementation (F5; here the deterministic converter) | BUILD | SIMULATED | WOULD_BE_ELIGIBLE_IN_DEMO | SIM-DEMO-20261108T192652Z-4a4f-BMAD-BUILD is a SIMULATED receipt (MOCK_NOT_EVIDENCE): never BMad execution evidence |
-| BMAD-REVIEW | bmad-code-review | F7 | code review (F7) | REVIEW | SIMULATED | WOULD_BE_ELIGIBLE_IN_DEMO | SIM-DEMO-20261108T192652Z-4a4f-BMAD-REVIEW is a SIMULATED receipt (MOCK_NOT_EVIDENCE): never BMad execution evidence |
+| BMAD-PRD | bmad-prd | F1 | requirements (F1) -> PRD rendering of the approved requirements | G1 | SIMULATED | WOULD_BE_ELIGIBLE_IN_DEMO | SIM-DEMO-20261109T231039Z-093c-BMAD-PRD is a SIMULATED receipt (MOCK_NOT_EVIDENCE): never BMad execution evidence |
+| BMAD-ARCH | bmad-architecture | F3 | architecture (F3) | G2 | SIMULATED | WOULD_BE_ELIGIBLE_IN_DEMO | SIM-DEMO-20261109T231039Z-093c-BMAD-ARCH is a SIMULATED receipt (MOCK_NOT_EVIDENCE): never BMad execution evidence |
+| BMAD-EPICS | bmad-create-epics-and-stories | F4 | epics and stories (F4) | STORIES | SIMULATED | WOULD_BE_ELIGIBLE_IN_DEMO | SIM-DEMO-20261109T231039Z-093c-BMAD-EPICS is a SIMULATED receipt (MOCK_NOT_EVIDENCE): never BMad execution evidence |
+| BMAD-SPRINT | bmad-sprint-planning | F4 | sprint planning (F4) | STORIES | SIMULATED | WOULD_BE_ELIGIBLE_IN_DEMO | SIM-DEMO-20261109T231039Z-093c-BMAD-SPRINT is a SIMULATED receipt (MOCK_NOT_EVIDENCE): never BMad execution evidence |
+| BMAD-BUILD | bmad-build | F5 | implementation (F5; here the deterministic converter) | BUILD | SIMULATED | WOULD_BE_ELIGIBLE_IN_DEMO | SIM-DEMO-20261109T231039Z-093c-BMAD-BUILD is a SIMULATED receipt (MOCK_NOT_EVIDENCE): never BMad execution evidence |
+| BMAD-REVIEW | bmad-code-review | F7 | code review (F7) | REVIEW | SIMULATED | WOULD_BE_ELIGIBLE_IN_DEMO | SIM-DEMO-20261109T231039Z-093c-BMAD-REVIEW is a SIMULATED receipt (MOCK_NOT_EVIDENCE): never BMad execution evidence |
 
 independent verification (F6) and completion after the F7 review stay outside BMad, as in the real design. Real governed workflow: BMAD_BLOCKED (unchanged: no LIVE receipt exists).
 
@@ -240,7 +240,7 @@ The demo test suite (`forward/tests/synthetic-gate-demonstration.test.ts`) runs 
 | generation.java_generation_allowed | false |
 | bmad_governance.mandatory | true |
 | approval.trust_store | null (not configured) |
-| Real workflow gates (G2, G3) | G2 UNVERIFIED, G3 BLOCKED |
+| Real workflow gates (G1, G2) | G1 PASS, G2 UNVERIFIED |
 | Master gap register | 569 records, 569 OPEN |
 | Business-rule identities | 154 |
 | Real BMad execution | NOT_EXECUTED (no LIVE receipt) |
@@ -255,4 +255,4 @@ The demo test suite (`forward/tests/synthetic-gate-demonstration.test.ts`) runs 
 - production_authorization is NOT_GRANTED: no real gate, approval, receipt or Java generation authorisation was created or changed.
 - BMad lifecycle steps are SIMULATED; no BMad workflow was executed and real mandatory BMad execution remains blocked.
 - VERIFY compares the Java with an independent specification oracle; no COBOL runtime was executed, so legacy equivalence is NOT_ESTABLISHED.
-- The real modernization is unchanged: real G2 is UNVERIFIED and G3 BLOCKED, the gap register stays OPEN, and the project is not production ready.
+- The real modernization is unchanged: real G1 is UNVERIFIED and G2 BLOCKED, the gap register stays OPEN, and the project is not production ready.

@@ -1,13 +1,13 @@
 /**
  * BMad workflow eligibility (STEP 6). Facts are gathered from the runtime's
  * own records (workflow state, gate results on the current baseline, a fresh
- * G2 evaluation with every imported approval re-verified, receipts, the
+ * G1 evaluation with every imported approval re-verified, receipts, the
  * verified release and the binding validation); `decide` is a pure function
  * of a binding, a mode and those facts, so every rule can be tested on its
  * own. Nothing here dispatches, approves or changes the workflow.
  */
 import { parseSelector, selectorText } from '../approval/scope';
-import { evaluateG2Gate, evaluateScopeText } from '../approval/approvals';
+import { evaluateG1Gate, evaluateScopeText } from '../approval/approvals';
 import { gatePassed } from '../orchestrator/gates';
 import { acceptedReceipts, generationAuthorized, policyRoots, Workflow } from '../orchestrator/orchestrator';
 import { sha256File } from '../core/fsutil';
@@ -23,7 +23,7 @@ import { Check, ReleaseVerification } from './release';
 
 export type Mode = 'DISCOVERY' | 'DRY_RUN' | 'MOCK' | 'LIVE';
 export const MODES: Mode[] = ['DISCOVERY', 'DRY_RUN', 'MOCK', 'LIVE'];
-export const GATE_IDS = ['G2', 'G3'] as const;
+export const GATE_IDS = ['G1', 'G2'] as const;
 
 export interface UpstreamReceipt {
   receipt_id: string;
@@ -67,10 +67,10 @@ export function decide(b: Binding, mode: Mode, f: Facts): { eligible: boolean; c
   add('binding_valid', f.binding.ok, f.binding.detail);
   add('workflow_state', b.allowed_states.includes(f.state), b.allowed_states.includes(f.state) ? `workflow state ${f.state}` : `workflow state is ${f.state}; ${b.binding_id} is allowed only in ${b.allowed_states.join(', ')}`);
   for (const g of b.requires_gates) add(`gate_${g}`, !!f.gates[g], f.gates[g] ? `${g} PASS recorded on baseline ${f.baseline.manifest_sha256.slice(0, 12)}…` : `${g} has not passed on the current baseline`);
-  if (b.requires_gates.includes('G2')) {
-    add('g2_reverified', f.g2.status === 'PASS', f.g2.status === 'PASS' ? `G2 re-evaluated now: PASS (${f.g2.approval_id})` : `G2 re-evaluated now: ${f.g2.status} — ${f.g2.reason}`);
+  if (b.requires_gates.includes('G1')) {
+    add('g2_reverified', f.g2.status === 'PASS', f.g2.status === 'PASS' ? `G1 re-evaluated now: PASS (${f.g2.approval_id})` : `G1 re-evaluated now: ${f.g2.status} — ${f.g2.reason}`);
     const exact = f.g2.status === 'PASS' && !!f.scope.sha256 && f.g2.scope === f.scope.text && f.g2.scope_sha256 === f.scope.sha256;
-    add('exact_scope', exact, f.scope.error ? `scope ${f.scope.text} cannot be evaluated: ${f.scope.error}` : exact ? `approved scope ${f.g2.scope} (digest ${String(f.g2.scope_sha256).slice(0, 16)}…) is exactly the requested scope` : `requested scope ${f.scope.text}${f.scope.sha256 ? ` (digest ${f.scope.sha256.slice(0, 16)}…)` : ''} is not the G2-approved scope (${f.g2.scope ?? 'none approved'}${f.g2.scope_sha256 ? `, digest ${f.g2.scope_sha256.slice(0, 16)}…` : ''})`);
+    add('exact_scope', exact, f.scope.error ? `scope ${f.scope.text} cannot be evaluated: ${f.scope.error}` : exact ? `approved scope ${f.g2.scope} (digest ${String(f.g2.scope_sha256).slice(0, 16)}…) is exactly the requested scope` : `requested scope ${f.scope.text}${f.scope.sha256 ? ` (digest ${f.scope.sha256.slice(0, 16)}…)` : ''} is not the G1-approved scope (${f.g2.scope ?? 'none approved'}${f.g2.scope_sha256 ? `, digest ${f.g2.scope_sha256.slice(0, 16)}…` : ''})`);
   }
   for (const r of b.requires) {
     switch (r) {
@@ -89,7 +89,7 @@ export function decide(b: Binding, mode: Mode, f: Facts): { eligible: boolean; c
         add(r, !!f.java_target_dir, f.java_target_dir ? `authorised Java target ${f.java_target_dir}` : 'no Java target directory is authorised (orchestrator.java_target_dir is null)');
         break;
       case 'generation_authorized':
-        add(r, f.generation_authorized, f.generation_authorized ? 'Java generation authorised (config flag and G3 PASS)' : 'Java generation is not authorised (generation.java_generation_allowed and G3 PASS are both required)');
+        add(r, f.generation_authorized, f.generation_authorized ? 'Java generation authorised (config flag and G2 PASS)' : 'Java generation is not authorised (generation.java_generation_allowed and G2 PASS are both required)');
         break;
       case 'implementation_artifacts': {
         const n = (f.receipts.F5 ?? 0) + liveUpstream(f, 'BMAD-BUILD', f.scope.sha256).length;
@@ -129,7 +129,7 @@ export function gatherFacts(wf: Workflow, scope: string, rel: ReleaseVerificatio
   } catch (e) {
     error = (e as Error).message;
   }
-  const g2 = evaluateG2Gate(wf);
+  const g2 = evaluateG1Gate(wf);
   const chosen = g2.evaluation?.approvals?.filter((a: any) => a.valid && a.decision === 'approved').pop() ?? null;
   const receipts: Record<string, number> = {};
   for (const r of acceptedReceipts(wf)) if (r.receipt?.outcome === 'completed') receipts[r.receipt.agent] = (receipts[r.receipt.agent] ?? 0) + 1;
@@ -157,7 +157,7 @@ export interface LiveFacts {
   installation_verified: boolean;
   /** The valid signed anthropic / claude-code-cli disclosure authorization for this scope and workflow, if any. */
   authorization_id: string | null;
-  /** The sealed preflight permitted the launch (scope, G2, release, binding, authorization, isolation, limits, boundary). */
+  /** The sealed preflight permitted the launch (scope, G1, release, binding, authorization, isolation, limits, boundary). */
   launch_permitted: boolean;
 }
 

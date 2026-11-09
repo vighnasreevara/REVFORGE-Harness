@@ -1,6 +1,6 @@
-# Human decision operations (toward a legitimate G2 approval)
+# Human decision operations (toward a legitimate G1 approval)
 
-This guide is for the operator who drives a scope to G2, and for the signers who decide.
+This guide is for the operator who drives a scope to G1, and for the signers who decide.
 
 Every human decision is a deliberate, externally authenticated act:
 - an Ed25519 signature by a key whose public half is in the organization's trust store;
@@ -48,10 +48,10 @@ Nothing in REVFORGE signs, resolves or approves by default. Every command suppor
 |---|---|
 | `business_sme` | business, review and scope decisions |
 | `product_owner` | scope decisions |
-| `technical_authority` | technical, data-layout and runtime-semantics decisions, and the G3 co-approval |
+| `technical_authority` | technical, data-layout and runtime-semantics decisions, and the G2 co-approval |
 | `exception_approver` | `approved_exception` outcomes |
-| `requirements_approver` | G2 |
-| `architecture_approver` | G3 |
+| `requirements_approver` | G1 |
+| `architecture_approver` | G2 |
 | `data_owner` | OpenAI source-export authorizations and AI disclosure authorizations |
 
 ## 1. Review the pending decisions
@@ -146,7 +146,7 @@ When the value occurs through a condition name the cited code sets, the dossier 
 
 **Independent verification.** Prepared OpenAI packets are listed but never sent. Sending one needs a signed OpenAI source-export authorization and an explicit LIVE run (see `OPENAI-VERIFICATION-OPERATIONS.md`).
 
-## 5. G2 readiness and approval
+## 5. G1 readiness and approval
 
 ```sh
 approval readiness --scope programs:<PROGRAM>
@@ -171,10 +171,10 @@ workflow approval statement --request AREQ-NNNN --signer <approver> --role requi
 # the approver signs stmt.canonical outside REVFORGE
 approval verify --file signed-approval.json
 approval import --file signed-approval.json
-workflow gate --gate G2
+workflow gate --gate G1
 workflow advance --to REQUIREMENTS_APPROVED
 ```
 
 **Separation of duties:** the requester can never approve.
 
-**Re-approval:** any later resolution, correction, source or baseline change makes the approval stale. G2 then stops passing, the G3 approval built on it is invalidated, and the F4 story set stops validating, so F5 cannot be dispatched.
+**Re-approval:** any later resolution, correction, source or baseline change makes the approval stale. G1 then stops passing, the G2 approval built on it is invalidated, and the F4 story set stops validating, so F5 cannot be dispatched.

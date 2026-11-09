@@ -1,7 +1,7 @@
 /**
  * Candidate approval scopes (STEP 5.5). Every discovered program scope (the
  * program plus its shared dependencies) and every requirement scope is
- * evaluated with the existing G2 scope evaluator, and its remaining work is
+ * evaluated with the existing G1 scope evaluator, and its remaining work is
  * expressed in root causes classified by who must act (Step 4.5 classes):
  *   A technical fact the source can verify    B independent semantic review
  *   C business SME decision                    D technical / architecture decision

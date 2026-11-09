@@ -71,12 +71,12 @@ All commands accept `--json`. None of them executes BMad.
 
 | Binding | BMad workflow | Agent | Requires |
 |---|---|---|---|
-| BMAD-PRD | `bmad-prd` | F1 | G2 PASS for the exact scope; state REQUIREMENTS_APPROVED or later. Renders approved requirements only. |
-| BMAD-ARCH | `bmad-architecture` | F3 | G2 PASS for the exact scope; state REQUIREMENTS_APPROVED or ARCHITECTURE_DRAFTED |
-| BMAD-EPICS | `bmad-create-epics-and-stories` | F4 | G2 and G3; recorded (non-mock) architecture results. Stories stay `draft`. |
-| BMAD-SPRINT | `bmad-sprint-planning` | F4 | G2 and G3; validated stories (requirement `validated_stories`: an accepted F4 story result for the scope); state STORIES_DRAFTED |
-| BMAD-BUILD | `bmad-build` | F5 | G2 and G3; validated stories; an authorised `orchestrator.java_target_dir`; Java generation authorised (config flag plus G3 PASS) |
-| BMAD-REVIEW | `bmad-code-review` | F7 | G2 and G3; recorded implementation artefacts with current hashes; an accepted F6 receipt; reviewer ≠ implementer; state REVIEWING |
+| BMAD-PRD | `bmad-prd` | F1 | G1 PASS for the exact scope; state REQUIREMENTS_APPROVED or later. Renders approved requirements only. |
+| BMAD-ARCH | `bmad-architecture` | F3 | G1 PASS for the exact scope; state REQUIREMENTS_APPROVED or ARCHITECTURE_DRAFTED |
+| BMAD-EPICS | `bmad-create-epics-and-stories` | F4 | G1 and G2; recorded (non-mock) architecture results. Stories stay `draft`. |
+| BMAD-SPRINT | `bmad-sprint-planning` | F4 | G1 and G2; validated stories (requirement `validated_stories`: an accepted F4 story result for the scope); state STORIES_DRAFTED |
+| BMAD-BUILD | `bmad-build` | F5 | G1 and G2; validated stories; an authorised `orchestrator.java_target_dir`; Java generation authorised (config flag plus G2 PASS) |
+| BMAD-REVIEW | `bmad-code-review` | F7 | G1 and G2; recorded implementation artefacts with current hashes; an accepted F6 receipt; reviewer ≠ implementer; state REVIEWING |
 
 **Agents that stay outside BMad:**
 - **F6** (independent testing) is never bound.
@@ -89,9 +89,9 @@ All commands accept `--json`. None of them executes BMad.
 - `bmad-dev-story` and `bmad-create-story` are absorbed into Build.
 
 **Exact scope.** At the moment of checking:
-- G2 is re-evaluated, with every signed approval re-verified;
+- G1 is re-evaluated, with every signed approval re-verified;
 - the scope text and digest must equal the approved ones;
-- the state must also record G2 PASS on the current baseline.
+- the state must also record G1 PASS on the current baseline.
 
 ## 5. Results, validation and receipts
 
@@ -116,7 +116,7 @@ All commands accept `--json`. None of them executes BMad.
 | Sprint / Build | only stories from the mapped story inputs; Java only inside the target; file hashes; status consistent with the exit code |
 | Review | reviews the recorded implementation; not a self-review; F6 receipt; reviewed file hashes |
 
-**Receipts** always have `counts_toward_gates: false`. Gate G3, the story validation and the workflow transitions after it read only the forward workflow's own receipts and signed approvals.
+**Receipts** always have `counts_toward_gates: false`. Gate G2, the story validation and the workflow transitions after it read only the forward workflow's own receipts and signed approvals.
 
 **Provenance.** Each mapped input has a sidecar (`bmad/provenance`) recording:
 - requirement IDs, record hashes, receipts, outcomes and permanent source references;
@@ -155,11 +155,11 @@ All commands accept `--json`. None of them executes BMad.
 | direct | affects a primary unit or a scope requirement only |
 | cross_scope | affects the scope and units outside it (one decision shared by several scopes) |
 | shared_dependency | affects only dependency units of the scope |
-| global | names no unit (system-wide gaps; G2 applies them to every scope) |
+| global | names no unit (system-wide gaps; G1 applies them to every scope) |
 
 **Blocking.** Every decision is also flagged as blocking (unresolved and blocking) or non-blocking.
 
-**Membership is unchanged.** Scope membership stays exactly what G2 evaluates; reconciliation only explains it. Since mapping 1.1.0, the BMad mapping and its provenance:
+**Membership is unchanged.** Scope membership stays exactly what G1 evaluates; reconciliation only explains it. Since mapping 1.1.0, the BMad mapping and its provenance:
 - count runtime requirements separately from business requirements;
 - carry each item's inclusion class and reason.
 

@@ -15,7 +15,7 @@ export function renderStep45Report(a: Analysis, r: { audit: any; registry: any; 
   const L: string[] = [];
   const c = (name: string) => r.audit.counts.find((x: any) => x.name === name);
   const rec = r.audit.reconciliation;
-  L.push('# STEP 4.5 — G2 blocker consolidation, root causes and deterministic source verification', '');
+  L.push('# STEP 4.5 — G1 blocker consolidation, root causes and deterministic source verification', '');
   L.push(`Run \`${a.snap.wf.run.runId}\`, baseline \`${a.snap.wf.run.manifestSha256}\`, generated ${a.snap.at.toISOString()} by \`verification report\`. Every figure below is computed from the sealed records listed at the end; nothing was resolved, approved or excluded by this analysis.`, '');
   L.push('## 1. Count reconciliation', '');
   L.push('| Count | Value | What it counts |', '|---|---|---|');
@@ -27,7 +27,7 @@ export function renderStep45Report(a: Analysis, r: { audit: any; registry: any; 
   L.push(`- Blocking findings: ${rec.scope_findings_equation.blocking_findings} = ${t(rec.scope_findings_equation.by_kind)} (balanced: ${rec.scope_findings_equation.balanced}). ${rec.decisions_vs_findings.blocking_findings_without_a_decision} blocking findings have no decision behind them (rules, contradictions, coverage, packets, dependencies); ${rec.decisions_vs_findings.item_findings_blocked_only_by_other_decisions} items are blocked only through another subject's decision.`);
   L.push(`- REQUIRES_EVIDENCE findings: ${c('requires_evidence_findings').value} = ${c('requires_evidence_findings').breakdown.blocking} blocking + ${c('requires_evidence_findings').breakdown.non_blocking} non-blocking (${t(c('requires_evidence_findings').breakdown.by_category)}).`);
   L.push(`- CONTRADICTED findings: ${c('contradicted_findings').value} (${t(c('contradicted_findings').breakdown)}).`);
-  L.push(`- G2 check table: the rows sum to ${rec.g2_check_table.sum_of_rows} but cover ${rec.g2_check_table.distinct_blocking_findings_in_rows} distinct blocking findings (rows overlap: ${rec.g2_check_table.pairwise_overlaps.map((o: any) => `${o.a}∩${o.b}=${o.shared}`).join(', ') || 'none'}); ${rec.g2_check_table.blocking_findings_in_no_row.length} blocking findings are in no row.`, '');
+  L.push(`- G1 check table: the rows sum to ${rec.g2_check_table.sum_of_rows} but cover ${rec.g2_check_table.distinct_blocking_findings_in_rows} distinct blocking findings (rows overlap: ${rec.g2_check_table.pairwise_overlaps.map((o: any) => `${o.a}∩${o.b}=${o.shared}`).join(', ') || 'none'}); ${rec.g2_check_table.blocking_findings_in_no_row.length} blocking findings are in no row.`, '');
 
   const s = r.registry.summary;
   L.push('## 2. Root causes', '');
@@ -88,7 +88,7 @@ export function renderStep45Report(a: Analysis, r: { audit: any; registry: any; 
   for (const [k, v] of Object.entries(r.queue.classes)) L.push(`| ${k} | ${v} | ${r.queue.summary.by_class[k] ?? 0} | ${r.queue.summary.decisions_linked_by_class[k] ?? 0} |`);
   L.push('', `Readiness for review: ${t(r.queue.summary.by_readiness)}. By functional area: ${t(r.queue.summary.by_area)}.`, '');
 
-  L.push('## 6. Scope readiness (existing G2 evaluator)', '');
+  L.push('## 6. Scope readiness (existing G1 evaluator)', '');
   L.push(`Application: ${t(r.readiness.summary.application)}; programs: ${t(r.readiness.summary.programs)}; shared-dependency scopes: ${t(r.readiness.summary.shared_dependency_scopes)}; requirements: ${t(r.readiness.summary.requirements)}. Trust anchor usable: ${r.readiness.trust_anchor_usable}.`, '');
   L.push('| Scope | Readiness | Blocking | Specific | Shared | Source-evidence | SME | Technical | Root causes |', '|---|---|---|---|---|---|---|---|---|');
   for (const x of r.readiness.scopes.filter((y: any) => y.kind !== 'requirement')) L.push(`| ${esc(x.label)} | ${x.readiness} | ${x.blocking_findings} | ${x.blockers_specific_to_scope} | ${x.blockers_shared_with_other_scopes} | ${x.source_evidence_defects} | ${x.sme_decisions} | ${x.technical_decisions} | ${x.distinct_root_causes} |`);
