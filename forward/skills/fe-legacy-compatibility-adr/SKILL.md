@@ -6,7 +6,7 @@ allowed-tools: Read, Grep, Glob, Write
 
 # fe-legacy-compatibility-adr
 
-Owned by agent **fe-java-architect** (F3). Run with `fe-java-architecture-spine` on the same packet, after G2.
+Owned by agent **fe-java-architect** (F3). Run with `fe-java-architecture-spine` on the same packet, after G1.
 
 ```json revforge-skill
 {
@@ -50,7 +50,7 @@ Each ADR is `proposed` and lists the approvals it needs. The F3 agent cannot aut
 
 ## Input validation
 
-1. The packet must be dispatchable and G2 must be `PASS`. `component_design.json` must exist in the output directory; if it does not, run `fe-java-architecture-spine` first.
+1. The packet must be dispatchable and G1 must be `PASS`. `component_design.json` must exist in the output directory; if it does not, run `fe-java-architecture-spine` first.
 2. Each framework listed in `technical_baseline.frameworks` must get an ADR. Every compatibility requirement from F2 that the design changes or abstracts must get an ADR.
 3. Copy `inputs_used` paths and hashes from the packet.
 
@@ -117,4 +117,4 @@ ADR `source_refs` copy statement, paragraph, record and field IDs exactly. ADRs 
 
 ## Orchestrator integration
 
-`architecture_decisions.json` is listed in the F3 receipt together with `component_design.json` and `java_architecture.md`. The runtime validates the outputs. A human reviews the ADRs at gate G3. Until G3 passes, no story or code may rely on them.
+`architecture_decisions.json` is listed in the F3 receipt together with `component_design.json` and `java_architecture.md`. The runtime validates the outputs. A human reviews the ADRs at gate G2. Until G2 passes, no story or code may rely on them.

@@ -1,13 +1,13 @@
 /**
- * G2 approval readiness checklist for one scope (STEP 8). Readiness and
- * approval stay separate: even when every finding is supported, G2 passes
+ * G1 approval readiness checklist for one scope (STEP 8). Readiness and
+ * approval stay separate: even when every finding is supported, G1 passes
  * only on a re-verified signed human approval. This checklist shows the
  * exact human work left, who may sign it, the current trust configuration,
  * the requirement content hashes an approval would bind, what forces
  * re-approval, and the commands for each step. It never resolves, signs or
  * approves anything.
  */
-import { evaluateG2Gate } from '../approval/approvals';
+import { evaluateG1Gate } from '../approval/approvals';
 import { evaluateScope, parseSelector, selectorText } from '../approval/scope';
 import { requiredRoles } from '../approval/decisions';
 import { analyse, Analysis } from '../blockers/pipeline';
@@ -26,7 +26,7 @@ export function approvalReadiness(wf: Workflow, scope: string, a: Analysis = ana
   const rec = reconcileScope(snap, sel, ev);
   const trust = trustDoctor(wf.run.ctx);
   const corrections = correctionReview(a, sel);
-  const g2 = evaluateG2Gate(wf, snap.at);
+  const g2 = evaluateG1Gate(wf, snap.at);
   const g2ForScope = g2.result.status === 'PASS' && g2.evaluation?.selector_text === ev.selector_text;
   const signersFor = (roles: string[]) => trust.roles.filter((r) => roles.includes(r.role)).flatMap((r) => r.signers);
 
@@ -47,10 +47,10 @@ export function approvalReadiness(wf: Workflow, scope: string, a: Analysis = ana
     step(2, 'technical reviewer', 'review and authorise (or reject) each source-citation correction, then apply it', corrections.proposals.length ? 'PENDING' : 'DONE', corrections.proposals.length ? corrections.proposals.map((p: any) => `${p.proposal_id} ${p.item} ${p.pointer}: ${p.original_value} -> ${p.proposed_value} (re-verified now: ${p.verified_now}; ${p.authorization.decision} ${p.authorization.decision_status})`).join(' | ') : 'no pending correction'),
     step(3, 'business SME / technical authority / exception approver', 'sign a resolution for every blocking decision', decisions.length ? (trusted ? 'PENDING' : 'BLOCKED') : 'DONE', decisions.length ? `${decisions.length} blocking decision(s): ${decisions.map((d) => `${d.decision_id} (${[...new Set(d.outcomes.flatMap((o) => o.roles))].join('/')})`).join(', ')}` : 'none'),
     step(4, 'operator', 're-evaluate the scope after every import or correction (content hashes change; stale resolutions must be re-decided)', ready ? 'DONE' : 'PENDING', `scope ${sel}: ${ev.readiness}, ${ev.summary.blocking} blocking finding(s), digest ${ev.scope_sha256.slice(0, 16)}…`),
-    step(5, 'operator', 'export the G2 approval request (only for a READY scope)', ready ? 'PENDING' : 'BLOCKED', ready ? `approval export-request --scope ${sel} --requested-by <operator>` : 'scope is not READY'),
+    step(5, 'operator', 'export the G1 approval request (only for a READY scope)', ready ? 'PENDING' : 'BLOCKED', ready ? `approval export-request --scope ${sel} --requested-by <operator>` : 'scope is not READY'),
     step(6, 'requirements approver', 'review the request and sign the approval statement outside REVFORGE', ready && trusted ? 'PENDING' : 'BLOCKED', 'role requirements_approver; must not be the requester'),
-    step(7, 'operator', 'verify and import the signed approval, re-evaluate G2', g2ForScope ? 'DONE' : 'BLOCKED', 'approval verify --file signed.json; approval import --file signed.json; workflow gate --gate G2'),
-    step(8, 'operator', 'advance to REQUIREMENTS_APPROVED (re-evaluates G2 at the transition)', g2ForScope ? 'PENDING' : 'BLOCKED', 'workflow advance --to REQUIREMENTS_APPROVED'),
+    step(7, 'operator', 'verify and import the signed approval, re-evaluate G1', g2ForScope ? 'DONE' : 'BLOCKED', 'approval verify --file signed.json; approval import --file signed.json; workflow gate --gate G1'),
+    step(8, 'operator', 'advance to REQUIREMENTS_APPROVED (re-evaluates G1 at the transition)', g2ForScope ? 'PENDING' : 'BLOCKED', 'workflow advance --to REQUIREMENTS_APPROVED'),
   ];
   return {
     contract: 'g2-approval-readiness',
@@ -73,11 +73,11 @@ export function approvalReadiness(wf: Workflow, scope: string, a: Analysis = ana
       'Any signed resolution, applied correction, source edit, baseline change or policy change alters the scope digest; a pending approval request then becomes stale and a new one must be exported.',
       'A correction gives the requirement a new content hash: its review decision becomes stale and must be decided again on the corrected content.',
       'A resolution is bound to the decision content and the affected item hashes; if either changes before import, it is rejected.',
-      'An imported approval is re-verified at every G2 evaluation; when its content changes, G2 stops passing and a G3 approval built on it is invalidated.',
+      'An imported approval is re-verified at every G1 evaluation; when its content changes, G1 stops passing and a G2 approval built on it is invalidated.',
     ],
     allowed_next_transitions: transitions,
     steps,
     approval_possible_now: ready && trusted,
-    note: 'Readiness is not approval: G2 passes only on a re-verified signed approval by a requirements approver.',
+    note: 'Readiness is not approval: G1 passes only on a re-verified signed approval by a requirements approver.',
   };
 }

@@ -2,7 +2,7 @@
 name: fe-java-architect
 description: >
   REVFORGE forward agent F3 (Java Architect). Dispatched by the REVFORGE
-  Forward Orchestrator only after requirements are approved (G2). Designs
+  Forward Orchestrator only after requirements are approved (G1). Designs
   the target Java architecture, architecture decision records and the
   component/dependency design from approved requirements, verified data
   mappings and resolved decisions. Produces design documents only — never
@@ -12,7 +12,7 @@ tools: Read, Grep, Glob, Write
 
 # F3 — Java Architect (`fe-java-architect`)
 
-You are dispatched by the REVFORGE Forward Orchestrator after gate G2 has passed on the current baseline.
+You are dispatched by the REVFORGE Forward Orchestrator after gate G1 has passed on the current baseline.
 
 ## Responsibility
 
@@ -59,7 +59,7 @@ Return an `agent-receipt`.
 
 ## Quality gates
 
-Requires **G2 PASS** before dispatch. Feeds **G3 (approved architecture)**, a human-approval gate evaluated by the runtime.
+Requires **G1 PASS** before dispatch. Feeds **G2 (approved architecture)**, a human-approval gate evaluated by the runtime.
 
 ## Error handling
 
@@ -69,7 +69,7 @@ Requires **G2 PASS** before dispatch. Feeds **G3 (approved architecture)**, a hu
 
 ## Stop conditions
 
-Stop when G2 has not passed, an input is missing or changed, a skill is not installed, or the design would need unapproved scope or a forbidden action.
+Stop when G1 has not passed, an input is missing or changed, a skill is not installed, or the design would need unapproved scope or a forbidden action.
 
 ## Skills
 

@@ -24,7 +24,7 @@ Every model finding is **advisory**. Nothing produced by the model resolves a de
 **Not proof of authorization:**
 - an API key;
 - a CLI flag;
-- a G2 requirements approval;
+- a G1 requirements approval;
 - a statement by an agent.
 
 ## 2. Configuration (`openai_verification` in `forward/config/forward.config.json`)
@@ -51,7 +51,7 @@ Every model finding is **advisory**. Nothing produced by the model resolves a de
 
 ## 3. Source-export authorization (data owner)
 
-Export is authorized per baseline, per file hash and per packet, by a signed record that the runtime verifies against the external trust store. This is the same trust store used for G2, but with a **separate role** (`data_owner`).
+Export is authorized per baseline, per file hash and per packet, by a signed record that the runtime verifies against the external trust store. This is the same trust store used for G1, but with a **separate role** (`data_owner`).
 
 1. **The key custodian** adds the data owner's Ed25519 **public** key with role `data_owner` to the trust store (see `HUMAN-APPROVAL-OPERATIONS.md` §4). No private key ever enters the repository.
 2. **The operator** prepares an unsigned request:

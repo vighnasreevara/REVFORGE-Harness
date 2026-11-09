@@ -1,6 +1,6 @@
 /**
  * STEP 21 tests: mandatory BMad governance. Every negative condition (missing
- * installation, disclosure authorization, trusted signer, G2, enabled
+ * installation, disclosure authorization, trusted signer, G1, enabled
  * workflow, runner, provider connectivity; failed execution; missing or
  * invalid receipt) keeps the governed run BMAD_BLOCKED without any fallback.
  * The positive case uses an explicit test double: it proves the counting rule
@@ -60,8 +60,8 @@ describe('STEP 21 - mandatory BMad governance: blocked conditions', () => {
     assert.match(localConversionGovernance(ctx), /^LOCAL_LGA_NOT_BMAD_GOVERNED/, 'local conversions are never labelled BMad-governed');
   });
 
-  test('missing G2 approval: the governed run stops at requirements, records BMAD_BLOCKED and runs nothing in its place', () => {
-    const { ctx } = designFixture(fixtures, { approveG2: false });
+  test('missing G1 approval: the governed run stops at requirements, records BMAD_BLOCKED and runs nothing in its place', () => {
+    const { ctx } = designFixture(fixtures, { approveG1: false });
     const r = governedRun(wfOf(ctx), BRAVO, { runner: neverRun as any, probe: () => 'probe 1.0', isolation: testedIso, assessment: hostWithoutRunner });
     assert.equal(r.status, 'BMAD_BLOCKED');
     assert.equal(ctx.contracts.validate('bmad/governed-run', r).valid, true);
@@ -74,7 +74,7 @@ describe('STEP 21 - mandatory BMad governance: blocked conditions', () => {
     assert.ok(wfOf(ctx).store.readAudit().some((e) => e.event === 'bmad_governed_run'));
   });
 
-  test('missing source-sharing authorization blocks the launch even with G2 PASS', () => {
+  test('missing source-sharing authorization blocks the launch even with G1 PASS', () => {
     const { ctx } = designFixture(fixtures);
     const r = governedRun(wfOf(ctx), BRAVO, { runner: neverRun as any, probe: () => 'probe 1.0', isolation: testedIso, assessment: hostWithoutRunner });
     assert.equal(r.status, 'BMAD_BLOCKED');

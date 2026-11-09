@@ -12,7 +12,7 @@
  * Verification levels are kept apart: symbol exists, resolves
  * unambiguously, value declared, statement references it, runtime effect
  * supported. Business interpretation is never established here: it stays
- * with an authorised human. Results feed G2 only through a versioned,
+ * with an authorised human. Results feed G1 only through a versioned,
  * immutable evidence supplement (ESU) that a signed review resolution must
  * explicitly select.
  */
@@ -276,7 +276,7 @@ export function recordSupplements(wf: Workflow, report: any): Array<{ supplement
         method: 'dependency-aware COBOL source-context verification (verification/src/context.ts): statement range from parser IDs, symbol resolution through the COPY-expanded DATA DIVISION, level-88 VALUE support only through SET/tested references',
         result: r,
         acceptance: { decision_id: decision, required: true, how: advisory ? `advisory: the existing claim check accepted this item, the dependency-aware check does not (${r.status}); a reviewer should confirm or correct the citation` : `a signed resolution of ${decision} with outcome resolved_no_change and selected_option ${id}`, eligible: !advisory && r.status === 'CONTEXT_SUPPORTED' },
-        effect: 'none until accepted: an unsigned supplement never changes a G2 outcome, resolves a decision or alters a requirement or receipt',
+        effect: 'none until accepted: an unsigned supplement never changes a G1 outcome, resolves a decision or alters a requirement or receipt',
       };
       const v = wf.run.ctx.contracts.validate('verification/evidence-supplement', rec);
       if (!v.valid) throw new Error(`evidence supplement violates its contract: ${v.errors.join('; ')}`);

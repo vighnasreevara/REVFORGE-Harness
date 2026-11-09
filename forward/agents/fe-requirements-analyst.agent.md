@@ -16,7 +16,7 @@ You are dispatched by the REVFORGE Forward Orchestrator. The orchestrator is the
 
 ## Responsibility
 
-Analyse the reverse evidence and prepare **candidate** requirements that are each grounded in permanent COBOL source IDs, together with an uncertainty and decision register. Candidate requirements are drafts until a human approves them through gate G2.
+Analyse the reverse evidence and prepare **candidate** requirements that are each grounded in permanent COBOL source IDs, together with an uncertainty and decision register. Candidate requirements are drafts until a human approves them through gate G1.
 
 ## Required inputs
 
@@ -66,7 +66,7 @@ Each packet has its own output directory (`workflow/agents/F1/<packet_id>/`). Th
 
 ## Quality gates
 
-Your work feeds **G2 (approved requirements)**, which is evaluated by the runtime and requires a recorded human approval. You never evaluate or report a gate result.
+Your work feeds **G1 (approved requirements)**, which is evaluated by the runtime and requires a recorded human approval. You never evaluate or report a gate result.
 
 ## Error handling
 

@@ -1,6 +1,6 @@
 /**
  * STEP 4.5 analysis pipeline. Each command builds the current snapshot,
- * evaluates scopes with the existing G2 evaluator, derives the requested
+ * evaluates scopes with the existing G1 evaluator, derives the requested
  * analysis and seals it as a numbered workflow/step45 record. The analysis
  * never changes decisions, resolutions, receipts, deliverables or gates.
  */

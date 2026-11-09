@@ -1,5 +1,5 @@
 /**
- * STEP 12 tests: semantic dependency edges in G2 (a behaviour that uses a name
+ * STEP 12 tests: semantic dependency edges in G1 (a behaviour that uses a name
  * declared nowhere waits for the blocking decision about it), behaviour
  * classification, verified-subset requirement closure, the gap handoff, exact
  * scope hashes and the real workflow staying unapproved. Synthetic fixtures
@@ -15,7 +15,7 @@ import { sha256File } from '../runtime/src/core/fsutil';
 import { generationAuthorized, loadWorkflow } from '../runtime/src/orchestrator/orchestrator';
 import { buildSnapshot } from '../runtime/src/approval/snapshot';
 import { evaluateScope, parseSelector } from '../runtime/src/approval/scope';
-import { evaluateG2Gate } from '../runtime/src/approval/approvals';
+import { evaluateG1Gate } from '../runtime/src/approval/approvals';
 import { COBOL_WORDS, decisionNames, usesWord } from '../runtime/src/approval/semantic';
 import { recordSemanticFindings, semanticFindings, semanticReport } from '../runtime/src/context/semantic-findings';
 import { adjudications } from '../runtime/src/context/adjudication';
@@ -50,7 +50,7 @@ function undeclaredFixture(o: { name?: string } = {}) {
 }
 
 /* ------------------------------------------------------------------ */
-describe('STEP 12 - G2 semantic dependency edges', () => {
+describe('STEP 12 - G1 semantic dependency edges', () => {
   test('1. a requirement whose behaviour uses an undeclared name waits for the blocking decision about it (fail-closed)', () => {
     const { ctx, req } = undeclaredFixture();
     const snap = buildSnapshot(wfOf(ctx));
@@ -178,7 +178,7 @@ describe('STEP 12 - the real run (read-only)', () => {
     assert.equal(m2.programs[0].selected_candidate.content_sha256, c.content_sha256);
     assert.deepEqual(m2.programs[0].gaps.map((x: any) => x.gap_id), p.gaps.map((x: any) => x.gap_id));
     // Nothing approved, nothing written, history untouched.
-    assert.notEqual(evaluateG2Gate(wf).result.status, 'PASS');
+    assert.notEqual(evaluateG1Gate(wf).result.status, 'PASS');
     assert.equal(fs.readdirSync(wf.store.p('approvals')).filter((x) => /^(APR|RES)-/.test(x)).length, 0);
     assert.equal(sha256File(wf.store.p('audit.jsonl')), audit);
     assert.deepEqual(adjudications(wf).map((a) => [a.adjudication_id, sha256File(wf.store.p('context', `${a.adjudication_id}.json`))]), ears);

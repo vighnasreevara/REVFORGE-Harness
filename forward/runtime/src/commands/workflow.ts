@@ -1,7 +1,7 @@
 import { RuntimeContext } from '../core/config';
 import { AGENTS, checkDefinition } from '../orchestrator/agents';
 import { validateSkill, validateSkillInventory } from '../orchestrator/skills';
-import { GATES, GateId, GateResult, gateSpec, PRECHECKS, PrecheckId, PrecheckResult, precheckSpec } from '../orchestrator/gates';
+import { acceptedGateIds, GATES, GateId, gateRecord, GateResult, gateSpec, PRECHECKS, PrecheckId, PrecheckResult, precheckSpec } from '../orchestrator/gates';
 import {
   advance,
   agentsDir,
@@ -148,7 +148,7 @@ export function workflowCommand(ctx: RuntimeContext, sub: string | undefined, fl
       case 'gate': {
         const g = (str(flags, 'gate') ?? (typeof flags.all === 'boolean' ? 'all' : undefined))?.toUpperCase();
         if (!g) {
-          err('workflow gate: specify --gate G2, --gate G3 or --gate all');
+          err('workflow gate: specify --gate G1, --gate G2 or --gate all');
           return 2;
         }
         const ids = g === 'ALL' ? GATES.map((x) => x.id) : [g];
@@ -295,7 +295,8 @@ export function workflowCommand(ctx: RuntimeContext, sub: string | undefined, fl
         });
         return 0;
       }
-      case 'g2': {
+      case 'g1': {
+        // Requirements gate G1 (named 'workflow g2' before the 2026-11-09 renumbering; 'g2' is now the architecture gate).
         const wf = loadWorkflow(ctx, runId);
         const scope = str(flags, 'scope') ?? loadPolicy(ctx).g2.default_scope;
         if (action === 'evaluate' || action === 'blockers') {
@@ -317,23 +318,27 @@ export function workflowCommand(ctx: RuntimeContext, sub: string | undefined, fl
             if (!ev.integrity.ok) for (const p of ev.integrity.problems) out(`  integrity: ${p}`);
             out(`  provenance: ${ev.provenance.policy}`);
             if (action === 'blockers') for (const f of blockers) out(`  ${f.outcome.padEnd(21)} ${f.kind.padEnd(22)} ${f.id}: ${f.reasons[0].slice(0, 200)}`);
-            else out('  (readiness only; G2 also requires a verified signed approval — see workflow gate --gate G2)');
+            else out('  (readiness only; G1 also requires a verified signed approval — see workflow gate --gate G1)');
           });
           return ev.readiness === 'READY' ? 0 : 1;
         }
         if (action === 'report') {
-          const g = wf.state.gates.G2 ? wf.store.readRecord('gates', wf.state.gates.G2.result_file) : null;
+          const rec = gateRecord(wf.state, 'G1');
+          const g = rec ? wf.store.readRecord('gates', rec.result_file) : null;
           const r = renderReport(wf, g);
           const file = str(flags, 'out');
           if (file) fs.writeFileSync(path.resolve(file), r.markdown, 'utf8');
           print({ application: { readiness: r.application.readiness, blocking: r.application.summary.blocking, scope_sha256: r.application.scope_sha256 }, programs: r.programs, written: file ?? null }, () => (file ? out(`report written to ${path.resolve(file)}`) : out(r.markdown)));
           return 0;
         }
-        err('workflow g2: use evaluate | blockers [--per-program] | report [--out FILE] (with --scope application|programs:A,B|requirements:R1,R2)');
+        err('workflow g1: use evaluate | blockers [--per-program] | report [--out FILE] (with --scope application|programs:A,B|requirements:R1,R2)');
         return 2;
       }
+      case 'g2':
       case 'g3': {
-        const gate = 'G3' as const;
+        // Architecture gate G2. 'workflow g3' is its deprecated pre-2026-11-09 name, kept as an alias.
+        const gate = 'G2' as const;
+        if (sub === 'g3') err("note: 'workflow g3' is deprecated; the architecture gate is now G2 ('workflow g2')");
         if (action !== 'evaluate' && action !== 'blockers') {
           err(`workflow ${sub}: use evaluate | blockers (read-only; 'workflow gate --gate ${gate}' records the result)`);
           return 2;
@@ -364,7 +369,7 @@ export function workflowCommand(ctx: RuntimeContext, sub: string | undefined, fl
         return v.ok ? 0 : 1;
       }
       case 'architecture': {
-        const gate = 'G3' as const;
+        const gate = 'G2' as const;
         const wf = loadWorkflow(ctx, runId);
         if (action === 'approval-request') {
           const by = str(flags, 'requested-by');
@@ -394,7 +399,7 @@ export function workflowCommand(ctx: RuntimeContext, sub: string | undefined, fl
             return 2;
           }
           const req = wf.store.readRecord(`${DESIGN_DIR}/requests`, `${id}.json`);
-          if (req.payload.gate !== gate) {
+          if (!acceptedGateIds(wf.state, gate).includes(req.payload.gate)) {
             err(`${id} is a ${req.payload.gate} request, not ${gate}`);
             return 2;
           }
@@ -456,13 +461,13 @@ export function workflowCommand(ctx: RuntimeContext, sub: string | undefined, fl
           } catch {
             design = false;
           }
-          // A signed architecture (G3) approval goes through the same trust model and verifier family.
+          // A signed architecture (G2) approval goes through the same trust model and verifier family.
           const r = design ? (action === 'verify' ? verifyDesignApprovalFile(wf, path.resolve(file)) : importDesignApproval(wf, path.resolve(file))) : action === 'verify' ? verifyApprovalFile(wf, path.resolve(file)) : importApproval(wf, path.resolve(file));
           const ok = action === 'verify' ? r.ok : r.imported;
           print(r, () => {
             out(action === 'verify' ? `signed approval ${ok ? 'VALID' : 'INVALID'}` : ok ? `IMPORTED ${r.approval_id} (${r.decision})` : 'REJECTED (recorded in the audit log)');
             for (const c of r.checks) out(`  [${c.ok ? 'ok' : 'FAIL'}] ${c.id}: ${c.detail}`);
-            if (action === 'import' && ok) out(design ? `  next: workflow gate --gate ${r.gate}, then workflow advance --to ARCHITECTURE_APPROVED` : `  next: workflow gate --gate G2, then workflow advance --to REQUIREMENTS_APPROVED`);
+            if (action === 'import' && ok) out(design ? `  next: workflow gate --gate ${r.gate}, then workflow advance --to ARCHITECTURE_APPROVED` : `  next: workflow gate --gate G1, then workflow advance --to REQUIREMENTS_APPROVED`);
           });
           return ok ? 0 : 1;
         }

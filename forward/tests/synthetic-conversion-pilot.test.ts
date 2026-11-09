@@ -5,6 +5,7 @@
  * recovery completeness, and the real workflow staying fail-closed. The real
  * run is only read.
  */
+import { gateRecord } from '../runtime/src/orchestrator/gates';
 import assert from 'node:assert/strict';
 import { spawnSync } from 'child_process';
 import * as fs from 'fs';
@@ -14,7 +15,7 @@ import { after, describe, test } from 'node:test';
 import { loadContext } from '../runtime/src/core/config';
 import { sha256File } from '../runtime/src/core/fsutil';
 import { generationAuthorized, loadWorkflow, prepare, runGate } from '../runtime/src/orchestrator/orchestrator';
-import { evaluateG2Gate } from '../runtime/src/approval/approvals';
+import { evaluateG1Gate } from '../runtime/src/approval/approvals';
 import { trustDoctor } from '../runtime/src/operations/trust';
 import { CATEGORY, classify, impliedTests, markDependencies, modernizationPlan } from '../runtime/src/pilot/plan';
 import { findGaps, parseProgram, UnsupportedConstruct } from '../runtime/src/pilot/cobol-subset';
@@ -101,7 +102,7 @@ describe('STEP 11 - verified / partial / gap classification', () => {
     assert.ok(tests.some((t) => /IF SQLCODE = 0/.test(t)));
   });
 
-  test('2/11. RTNCDE00 on the real run: source-backed classes, G2 untouched and fail-closed, nothing written', { skip: !realRun || !fs.existsSync(realSrc) }, () => {
+  test('2/11. RTNCDE00 on the real run: source-backed classes, G1 untouched and fail-closed, nothing written', { skip: !realRun || !fs.existsSync(realSrc) }, () => {
     const ctx = realCtx();
     const wf = loadWorkflow(ctx, realRun!);
     const audit = sha256File(wf.store.p('audit.jsonl'));
@@ -115,7 +116,7 @@ describe('STEP 11 - verified / partial / gap classification', () => {
     assert.deepEqual(cls['REQ-003'], ['VERIFIED', 'FULLY_SOURCE_SUPPORTED']);
     assert.deepEqual(cls['REQ-004'], ['GAP', 'CONTRADICTED']);
     assert.deepEqual(cls['RT-001'], ['VERIFIED', 'FULLY_SOURCE_SUPPORTED']);
-    // A planning class never changes G2: the scope stays NOT_READY and every G2 outcome is reported as is.
+    // A planning class never changes G1: the scope stays NOT_READY and every G1 outcome is reported as is.
     assert.equal(plan.readiness, 'NOT_READY');
     assert.equal(plan.status, 'NON_AUTHORITATIVE');
     const req3 = plan.requirements.find((r: any) => r.id.endsWith('-003') && r.kind === 'requirement');
@@ -123,7 +124,7 @@ describe('STEP 11 - verified / partial / gap classification', () => {
     assert.ok(req3.required_human_decisions.length >= 1);
     // No fabricated behaviour: dependent statements carry the decisions they wait for.
     for (const r of plan.requirements) for (const d of r.dependent_portion) assert.ok(d.depends_on.every((x: any) => x.decisions.length > 0));
-    assert.notEqual(evaluateG2Gate(wf).result.status, 'PASS');
+    assert.notEqual(evaluateG1Gate(wf).result.status, 'PASS');
     assert.equal(sha256File(wf.store.p('audit.jsonl')), audit, 'read-only');
     assert.equal(sha256File(wf.store.p('state.json')), state, 'read-only');
   });
@@ -257,21 +258,21 @@ describe('STEP 11 - synthetic pilot', () => {
 
 /* ------------------------------------------------------------------ */
 describe('STEP 11 - workflow and protection', () => {
-  test('8. synthetic F1-F4 workflow reaches G3 and validated stories in an isolated fixture; F5 still cannot write Java', () => {
+  test('8. synthetic F1-F4 workflow reaches G2 and validated stories in an isolated fixture; F5 still cannot write Java', () => {
     const { f, ctx, dk } = designFixture(fixtures);
     readyForImplementation(f, ctx, dk);
     const wf = wfOf(ctx);
     assert.equal(wf.state.state, 'STORIES_DRAFTED');
     assert.ok(!path.resolve(wf.store.p('')).startsWith(path.resolve(realRunsDir)), 'the synthetic workflow lives outside the real runs');
-    assert.equal(generationAuthorized(wf.run, wf.state), false, 'config flag is off: G3 PASS alone never authorises generation');
+    assert.equal(generationAuthorized(wf.run, wf.state), false, 'config flag is off: G2 PASS alone never authorises generation');
     const pk = prepare(wf, 'F5');
     assert.equal(pk.permissions.may_write_code, false);
     assert.equal(pk.permissions.generation_authorized, false);
     assert.match(JSON.stringify(pk), /Java generation is not authorised/);
-    assert.equal(runGate(wf, 'G3').status, 'PASS', 'G3 still passes; only the config flag is missing');
+    assert.equal(runGate(wf, 'G2').status, 'PASS', 'G2 still passes; only the config flag is missing');
   });
 
-  test('10/12. the real workflow holds no approvals or resolutions, trust is not configured, and G2/G3 are not PASS', { skip: !realRun }, () => {
+  test('10/12. the real workflow holds no approvals or resolutions, trust is not configured, and G1/G2 are not PASS', { skip: !realRun }, () => {
     const ctx = realCtx();
     const wf = loadWorkflow(ctx, realRun!);
     const recs = (dir: string) => (fs.existsSync(wf.store.p(dir)) ? fs.readdirSync(wf.store.p(dir)) : []);
@@ -281,8 +282,9 @@ describe('STEP 11 - workflow and protection', () => {
     walk(wf.store.p(''));
     assert.equal(all.filter((n) => /^(APR|RES|DAP)-\d+/.test(n)).length, 0, 'no signed approval or resolution record of any kind');
     assert.equal(trustDoctor(ctx).status, 'TRUST_NOT_CONFIGURED');
-    assert.notEqual(wf.state.gates.G3?.status, 'PASS');
-    assert.notEqual(wf.state.gates.G2?.status, 'PASS');
+    // Read through the gate-key mapping: the real run may be a legacy state whose raw G1 key is the former evidence gate.
+    assert.notEqual(gateRecord(wf.state, 'G2')?.status, 'PASS');
+    assert.notEqual(gateRecord(wf.state, 'G1')?.status, 'PASS');
   });
 
   test('16. no production Java generation: generation unauthorised, the generate command refused, Java only inside pilot output or an authorised local generation directory', { skip: !realRun }, () => {

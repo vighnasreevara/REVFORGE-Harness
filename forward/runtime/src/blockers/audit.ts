@@ -1,18 +1,18 @@
 /**
- * Deterministic reconciliation of the G2 blocker counts.
+ * Deterministic reconciliation of the G1 blocker counts.
  *
- * Several numbers describe G2 and they count different things:
+ * Several numbers describe G1 and they count different things:
  *   - register decisions (agent, consolidation and runtime-derived),
  *   - blocking unresolved decisions (a property of the whole register),
  *   - blocking findings of a scope (items, rules, decisions, contradictions,
  *     coverage, packets, dependencies — one per evaluated subject),
  *   - findings by outcome (REQUIRES_EVIDENCE, CONTRADICTED, ...), and
- *   - the G2 check table, whose rows are overlapping finding sets.
+ *   - the G1 check table, whose rows are overlapping finding sets.
  * This module recomputes each count from the runtime's records, lists the
  * exact identifiers, and proves how the universes map onto each other. It
  * never changes a finding to make totals agree.
  */
-import { G2_CHECK_SETS } from '../approval/approvals';
+import { G1_CHECK_SETS } from '../approval/approvals';
 import { RegDecision } from '../approval/decisions';
 import { Finding, ScopeEvaluation } from '../approval/scope';
 import { Snapshot } from '../approval/snapshot';
@@ -84,8 +84,8 @@ export function auditCounts(snap: Snapshot, app: ScopeEvaluation): any {
   };
   const blockingByKind = tally(blockingFindings, kindOf);
 
-  // Each blocking finding is counted once; the G2 check rows overlap.
-  const checkSets = G2_CHECK_SETS.map((c) => {
+  // Each blocking finding is counted once; the G1 check rows overlap.
+  const checkSets = G1_CHECK_SETS.map((c) => {
     const s = c.select(F).filter((f) => f.blocking);
     return { check: c.id, label: c.label, blocking: s.length, ids: s.map((f) => `${f.kind}|${f.id}`).sort() };
   });

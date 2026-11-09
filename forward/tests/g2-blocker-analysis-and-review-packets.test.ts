@@ -28,7 +28,7 @@ import { sourceFile } from '../verification/src/cobol-source';
 import { fdLengthFindings, findItem, parseDataDivision } from '../verification/src/layout';
 import { procedureFacts } from '../verification/src/facts';
 import { cleanup, Fixture, FORWARD_DIR } from './helpers/fixture';
-import { citedClaim, deliverAll, RUN, setupG2, signResolution, SIGNERS, signText, wfOf } from './helpers/g2fixture';
+import { citedClaim, deliverAll, RUN, setupG1, signResolution, SIGNERS, signText, wfOf } from './helpers/g2fixture';
 
 const fixtures: Fixture[] = [];
 beforeEach(() => {
@@ -68,7 +68,7 @@ const twoDecisionsOneGap = (f: Fixture) => (a: 'F1' | 'F2', unit: string, docs: 
 
 describe('S45-A. counts and root causes', () => {
   test('1. every blocker count is reconciled exactly across universes', () => {
-    const { f, ctx } = setupG2(fixtures);
+    const { f, ctx } = setupG1(fixtures);
     deliverAll(f, ctx);
     const snap = buildSnapshot(wfOf(ctx));
     const app = evaluateScope(snap, parseSelector('application'));
@@ -87,7 +87,7 @@ describe('S45-A. counts and root causes', () => {
   });
 
   test('2/3/4. decisions sharing an origin share one root cause; every original decision is preserved and mapped', () => {
-    const { f, ctx } = setupG2(fixtures);
+    const { f, ctx } = setupG1(fixtures);
     deliverAll(f, ctx, twoDecisionsOneGap(f));
     const before = hashTree(wfOf(ctx).store.p('agents'));
     const a = analyse(wfOf(ctx));
@@ -111,7 +111,7 @@ describe('S45-A. counts and root causes', () => {
 
 describe('S45-B. deterministic source verification', () => {
   test('5. a wrong citation is re-derived from the stated values and proposed (not applied); an ambiguous one is not', () => {
-    const { f, ctx } = setupG2(fixtures);
+    const { f, ctx } = setupG1(fixtures);
     deliverAll(f, ctx, citedClaim(f, 12));
     const snap = buildSnapshot(wfOf(ctx));
     const it = snap.items.find((x) => x.kind === 'requirement' && x.units[0].name === f.programs[1].name)!;
@@ -129,7 +129,7 @@ describe('S45-B. deterministic source verification', () => {
     assert.equal(prop.authorization.status, 'not_authorized');
     assert.equal(sha256File(docFile), before, 'the deliverable is not modified');
     // Without stated values the source cannot tell which part of the citation is wrong.
-    const { f: f2, ctx: c2 } = setupG2(fixtures);
+    const { f: f2, ctx: c2 } = setupG1(fixtures);
     deliverAll(f2, c2, citedClaim(f2, 12, 'The program initialises the processing limit before evaluating it.'));
     const s2 = buildSnapshot(wfOf(c2));
     const it2 = s2.items.find((x) => x.kind === 'requirement' && x.units[0].name === f2.programs[1].name)!;
@@ -139,7 +139,7 @@ describe('S45-B. deterministic source verification', () => {
   });
 
   test('6/7. changed source hashes are detected; without source nothing is claimed as verified', () => {
-    const { f, ctx } = setupG2(fixtures);
+    const { f, ctx } = setupG1(fixtures);
     deliverAll(f, ctx, citedClaim(f, 8));
     const d1 = cmdDeterministic(wfOf(ctx)).record;
     assert.equal(d1.source_root.configured, true);
@@ -218,7 +218,7 @@ describe('S45-B. deterministic source verification', () => {
   });
 
   test('12b. a missing copybook in the inventory is a missing-dependency root: verified absent, queued for source', () => {
-    const { f, ctx } = setupG2(fixtures);
+    const { f, ctx } = setupG1(fixtures);
     deliverAll(f, ctx);
     const a = analyse(wfOf(ctx));
     const root = a.reg.byKey.get('DEP:MISSINGX')!;
@@ -253,7 +253,7 @@ describe('S45-C. conflicts, scopes and proposals', () => {
       for (const p of f.programs) rules.rules_by_program[p.name] = [...(rules.rules_by_program[p.name] ?? []), 'BR-004'];
       f.write('output/rules/rules_artifact.json', rules);
     };
-    const { f, ctx } = setupG2(fixtures, { mutate: shared });
+    const { f, ctx } = setupG1(fixtures, { mutate: shared });
     deliverAll(f, ctx, (a, unit, docs) => {
       if (a !== 'F1' || unit !== f.programs[0].name) return;
       const r = docs['draft_requirements.json'];
@@ -275,7 +275,7 @@ describe('S45-C. conflicts, scopes and proposals', () => {
   });
 
   test('13. shared-dependency blockers are visible in every scope that depends on them', () => {
-    const { f, ctx } = setupG2(fixtures);
+    const { f, ctx } = setupG1(fixtures);
     deliverAll(f, ctx);
     const a = analyse(wfOf(ctx));
     const rd = scopeReadiness(a.snap, a.reg, { requirements: false });
@@ -287,7 +287,7 @@ describe('S45-C. conflicts, scopes and proposals', () => {
   });
 
   test('14/15. proposals are versioned; earlier records and evidence are never rewritten', () => {
-    const { f, ctx } = setupG2(fixtures);
+    const { f, ctx } = setupG1(fixtures);
     deliverAll(f, ctx, citedClaim(f, 12));
     const wd = wfOf(ctx).store.dir;
     const guarded = ['receipts', 'agents', 'packets', 'consolidation', 'verification', 'corrections', 'decisions', 'approvals'];
@@ -310,7 +310,7 @@ describe('S45-C. conflicts, scopes and proposals', () => {
 
 describe('S45-D. independent review packets', () => {
   test('16/17. Pass A carries source evidence only; Pass B holds the interpretations, bound to Pass A by hash', () => {
-    const { f, ctx } = setupG2(fixtures);
+    const { f, ctx } = setupG1(fixtures);
     deliverAll(f, ctx, citedClaim(f, 8, 'The program sets the processing limit to 1000 and then flags high limits for review by the operator.'));
     const a = analyse(wfOf(ctx));
     const p = preparePackets(a.snap, a.reg, a.det);
@@ -337,7 +337,7 @@ describe('S45-D. independent review packets', () => {
   });
 
   test('18/19. source export is NOT_AUTHORIZED, sending is refused, and preparation makes no network call', async () => {
-    const { f, ctx } = setupG2(fixtures);
+    const { f, ctx } = setupG1(fixtures);
     deliverAll(f, ctx);
     const snap = buildSnapshot(wfOf(ctx));
     const auth = exportAuthorization(snap);
@@ -373,8 +373,8 @@ describe('S45-D. independent review packets', () => {
 });
 
 describe('S45-E. gates stay protected', () => {
-  test('20/21/22/23. analysis changes no gate: approvals are still refused, G2 fail-closed, G3-G8 blocked, F5 disabled', () => {
-    const { f, ctx, k } = setupG2(fixtures);
+  test('20/21/22/23. analysis changes no gate: approvals are still refused, G1 fail-closed, G2 and the later steps blocked, F5 disabled', () => {
+    const { f, ctx, k } = setupG1(fixtures);
     deliverAll(f, ctx, citedClaim(f, 12));
     const digestBefore = evaluateScope(buildSnapshot(wfOf(ctx)), parseSelector('application')).scope_sha256;
     const r = main(['verification', 'report', '--config', f.configPath, '--run', RUN, '--export-dir', path.join(f.repoRoot, 'exp'), '--out', path.join(f.repoRoot, 'STEP45.md')], () => {}, () => {});
@@ -383,13 +383,13 @@ describe('S45-E. gates stay protected', () => {
     assert.equal(evaluateScope(buildSnapshot(wfOf(ctx)), parseSelector('application')).scope_sha256, digestBefore, 'analysis records do not change the approval scope');
     assert.throws(() => createApprovalRequest(wfOf(ctx), 'application', 'dave.requester'), /not ready/);
     const forged = path.join(f.repoRoot, 'forged.json');
-    const st = { contract: 'approval-statement', statement_version: '1.0', gate: 'G2', request_id: 'AREQ-0001', request_sha256: 'a'.repeat(64), scope_sha256: digestBefore, baseline_manifest_sha256: wfOf(ctx).run.manifestSha256, decision: 'approved', signer_id: SIGNERS.agent, role: 'requirements_approver' };
+    const st = { contract: 'approval-statement', statement_version: '1.0', gate: 'G1', request_id: 'AREQ-0001', request_sha256: 'a'.repeat(64), scope_sha256: digestBefore, baseline_manifest_sha256: wfOf(ctx).run.manifestSha256, decision: 'approved', signer_id: SIGNERS.agent, role: 'requirements_approver' };
     fs.writeFileSync(forged, JSON.stringify({ contract: 'signed-approval', statement: st, signature: { algorithm: 'ed25519', value: signText(statementText(st), k.agent) } }));
     assert.equal(importApproval(wfOf(ctx), forged).imported, false);
     assert.equal(signResolution(ctx, f, `SCOPE-${f.programs[1].name}`, 'resolved_no_change', k.agent, SIGNERS.agent, 'business_sme').recorded, false, 'agents cannot resolve decisions');
     void approvalStatement;
-    assert.equal(runGate(wfOf(ctx), 'G2').status, 'UNVERIFIED');
-    assert.equal(runGate(wfOf(ctx), 'G3').status, 'BLOCKED');
+    assert.equal(runGate(wfOf(ctx), 'G1').status, 'UNVERIFIED');
+    assert.equal(runGate(wfOf(ctx), 'G2').status, 'BLOCKED');
     assert.equal(generationAuthorized(wfOf(ctx).run, wfOf(ctx).state), false);
     assert.throws(() => prepare(wfOf(ctx), 'F5'), /may only be dispatched/);
     assert.equal(fs.readdirSync(f.repoRoot).some((x) => x.endsWith('.java')), false);

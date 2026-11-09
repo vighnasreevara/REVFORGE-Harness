@@ -6,7 +6,7 @@ allowed-tools: Read, Grep, Glob, Write
 
 # fe-java-architecture-spine
 
-Owned by agent **fe-java-architect** (F3). Dispatchable only after gate G2 (approved requirements) has passed on the current baseline.
+Owned by agent **fe-java-architect** (F3). Dispatchable only after gate G1 (approved requirements) has passed on the current baseline.
 
 ```json revforge-skill
 {
@@ -17,7 +17,7 @@ Owned by agent **fe-java-architect** (F3). Dispatchable only after gate G2 (appr
   "write_scope": "agent_output_dir",
   "reads": [
     "workflow/packets/<packet>.json",
-    "workflow/gates/G2-*.json",
+    "workflow/gates/G1-*.json",
     "workflow/agents/F1/<packet>/draft_requirements.json",
     "workflow/agents/F1/<packet>/uncertainty_decision_register.json",
     "workflow/agents/F2/<packet>/data_mappings.json",
@@ -30,19 +30,19 @@ Owned by agent **fe-java-architect** (F3). Dispatchable only after gate G2 (appr
 
 ## Purpose and responsibility
 
-Define the Java 21 and Maven architecture that implements the **approved** requirements while preserving the legacy data, error and execution contracts. That means modules, components and their responsibilities, the interfaces between them, the dependency graph, and the boundaries between batch processing, online transactions, shared services and integrations. Unresolved decisions and assumptions stay visible. No framework (Spring Boot, Spring Batch, REST, JPA or similar) enters the design without a proposed ADR that a human approves at G3.
+Define the Java 21 and Maven architecture that implements the **approved** requirements while preserving the legacy data, error and execution contracts. That means modules, components and their responsibilities, the interfaces between them, the dependency graph, and the boundaries between batch processing, online transactions, shared services and integrations. Unresolved decisions and assumptions stay visible. No framework (Spring Boot, Spring Batch, REST, JPA or similar) enters the design without a proposed ADR that a human approves at G2.
 
 ## Required input artifacts
 
-- The G2 gate result (status `PASS` on the packet baseline) and the approval record it cites.
-- The accepted F1 receipts and their `draft_requirements.json` and `uncertainty_decision_register.json`. Only requirements covered by the G2 approval are in scope.
+- The G1 gate result (status `PASS` on the packet baseline) and the approval record it cites.
+- The accepted F1 receipts and their `draft_requirements.json` and `uncertainty_decision_register.json`. Only requirements covered by the G1 approval are in scope.
 - The accepted F2 receipts with their `data_mappings.json` and `file_operation_requirements.json`, which describe each program's execution model, files, DB2, CICS and return codes.
 - The evidence packets (call graph, JCL jobs, entry types).
 
 ## Input validation
 
-1. Stop with `blocked` if the packet is not dispatchable, G2 is not `PASS` on the packet baseline, or either F3 skill is not installed.
-2. Load every requirement and check `approval_status` against the G2 approval record. Requirements that are not approved are excluded and listed in `unresolved_findings`.
+1. Stop with `blocked` if the packet is not dispatchable, G1 is not `PASS` on the packet baseline, or either F3 skill is not installed.
+2. Load every requirement and check `approval_status` against the G1 approval record. Requirements that are not approved are excluded and listed in `unresolved_findings`.
 3. Check that every unit you design for has a data-contract and runtime-semantics entry from an accepted F2 receipt.
 4. Copy `inputs_used` paths and hashes from the packet.
 
@@ -53,7 +53,7 @@ Define the Java 21 and Maven architecture that implements the **approved** requi
 3. Add a `file_codec` component for every record contract that crosses a file or COMMAREA boundary. Its interface names the Record ID and states the encoding assumption from F2.
 4. Add an `error_handling` component that reproduces the legacy return-code and file-status contracts recorded by F2.
 5. Fix `technical_baseline` to Java version `21` and build tool `maven`. Each entry in `frameworks` must reference an ADR from `fe-legacy-compatibility-adr`.
-6. Write `component_design.json` (contract `forward/architecture-record`, `record_type: "component_design"`). Set `approved_inputs.requirements_approval` to the G2 result file and list the F2 receipt IDs.
+6. Write `component_design.json` (contract `forward/architecture-record`, `record_type: "component_design"`). Set `approved_inputs.requirements_approval` to the G1 result file and list the F2 receipt IDs.
 7. Write `java_architecture.md`. It covers the module layout, component responsibilities, a Mermaid dependency diagram, the data, error and execution contracts, assumptions and open decisions.
 
 ## Source grounding
@@ -84,7 +84,7 @@ No Bash, no Java source, no build files, no network.
 
 ## Error handling and stop conditions
 
-- G2 has not passed or approved inputs are missing: stop with `blocked`.
+- G1 has not passed or approved inputs are missing: stop with `blocked`.
 - Conflicting requirements: design neither variant; record a finding and an ADR candidate.
 - A unit without F2 contracts: exclude it and record why.
 - Incomplete coverage of approved requirements: return `incomplete`.
@@ -104,4 +104,4 @@ Components carry `replaces_units` with File IDs, `requirement_ids`, and interfac
 
 ## Orchestrator integration
 
-The receipt at `packet.receipt_path` lists both outputs with their contracts. The runtime validates schema and provenance. Only an accepted completed F3 receipt lets the runtime move `REQUIREMENTS_APPROVED → ARCHITECTURE_DRAFTED`. Approval of the architecture is gate G3, decided by a human.
+The receipt at `packet.receipt_path` lists both outputs with their contracts. The runtime validates schema and provenance. Only an accepted completed F3 receipt lets the runtime move `REQUIREMENTS_APPROVED → ARCHITECTURE_DRAFTED`. Approval of the architecture is gate G2, decided by a human.

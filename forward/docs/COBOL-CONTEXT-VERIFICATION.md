@@ -57,7 +57,7 @@ verification context report --scope programs:<P> [--record] [--export-dir DIR]
 
 **Advisory supplements** document items the existing check accepted but the dependency-aware check does not support. They cannot be accepted as evidence.
 
-## How G2 uses it
+## How G1 uses it
 
 A supplement has **no effect** on its own: it never resolves a decision, changes an outcome or alters a requirement or receipt.
 
@@ -68,4 +68,4 @@ When a current supplement with status `CONTEXT_SUPPORTED` exists for an item, th
 - it is partial, contradicted or a citation mismatch;
 - it concerns another item.
 
-**Re-verified at every evaluation.** A source change after acceptance makes the item block again. G2 still requires a signed approval.
+**Re-verified at every evaluation.** A source change after acceptance makes the item block again. G1 still requires a signed approval.

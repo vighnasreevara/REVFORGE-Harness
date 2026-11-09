@@ -1,5 +1,5 @@
 /**
- * Scope readiness from the existing G2 evaluator (no separate policy): the
+ * Scope readiness from the existing G1 evaluator (no separate policy): the
  * application, every discovered program, every shared-dependency scope (the
  * programs that share a copybook) and every requirement. Each scope's
  * blockers are split into scope-specific and shared ones and into source
@@ -72,7 +72,7 @@ export function scopeReadiness(snap: Snapshot, reg: Registry, opts: { requiremen
     contract_version: '1.0',
     generated_at: snap.at.toISOString(),
     baseline_manifest_sha256: snap.wf.run.manifestSha256,
-    evaluator: 'the STEP 4 G2 scope evaluator (unchanged policy); READY is never approval',
+    evaluator: 'the STEP 4 G1 scope evaluator (unchanged policy); READY is never approval',
     trust_anchor_usable: snap.trust.usable,
     summary: { application: tally('application'), programs: tally('program'), shared_dependency_scopes: tally('shared_dependency'), requirements: tally('requirement') },
     scopes: rows,

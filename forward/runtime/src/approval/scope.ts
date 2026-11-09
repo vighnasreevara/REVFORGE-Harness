@@ -1,5 +1,5 @@
 /**
- * Approval scopes and the deterministic G2 readiness evaluation.
+ * Approval scopes and the deterministic G1 readiness evaluation.
  *
  * A scope is the entire application, an explicit program set, or an explicit
  * requirement set. Program scopes pull in their shared dependencies (included
@@ -8,7 +8,7 @@
  * scope is classified VERIFIED, REQUIRES_EVIDENCE, REQUIRES_SME_DECISION,
  * CONTRADICTED, EXCLUDED_WITH_JUSTIFICATION or APPROVED_EXCEPTION; the scope
  * is READY only when nothing blocks and the evidence base is intact. READY is
- * never approval: G2 additionally needs a verified, signed human approval of
+ * never approval: G1 additionally needs a verified, signed human approval of
  * this exact scope digest.
  */
 import { gateSpec } from '../orchestrator/gates';
@@ -387,9 +387,9 @@ export function evaluateScope(snap: Snapshot, sel: Selector): ScopeEvaluation {
       if (s !== undefined && s !== 'completed') findings.push({ category: 'coverage', kind: `coverage:${a}`, id: `${a}:${u.name}`, units: [u.name], outcome: 'REQUIRES_EVIDENCE', blocking: true, reasons: [`${u.name} has no accepted ${a} delivery (${s ?? 'not in ledger'})`], decisions: [], sha256: null });
     }
   }
-  // Packets without receipts that touch the scope. Only the agents whose deliveries G2 approves (its required
-  // receipts, F1/F2) can leave the requirements incomplete; a later F3+ dispatch never changes the G2 scope.
-  const g2Agents = new Set<string>(gateSpec('G2')!.required_receipts);
+  // Packets without receipts that touch the scope. Only the agents whose deliveries G1 approves (its required
+  // receipts, F1/F2) can leave the requirements incomplete; a later F3+ dispatch never changes the G1 scope.
+  const g2Agents = new Set<string>(gateSpec('G1')!.required_receipts);
   for (const p of snap.packets) {
     if (!g2Agents.has(p.agent)) continue;
     if (!p.covered_file_ids.some((f) => fileIds.has(f))) continue;

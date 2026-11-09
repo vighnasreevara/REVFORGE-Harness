@@ -93,4 +93,4 @@ Read, Grep and Glob on packet inputs; Write inside the output directory only (in
 
 ## Orchestrator integration
 
-This skill's output is listed in the same F1 receipt as the requirements. The runtime validates both together (cross-references between DR IDs and requirement IDs), records provenance, and later feeds the open decisions into gate G2, where a human decides. The agent never evaluates a gate.
+This skill's output is listed in the same F1 receipt as the requirements. The runtime validates both together (cross-references between DR IDs and requirement IDs), records provenance, and later feeds the open decisions into gate G1, where a human decides. The agent never evaluates a gate.

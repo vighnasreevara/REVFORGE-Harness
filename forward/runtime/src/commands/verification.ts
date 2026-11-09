@@ -33,7 +33,7 @@ export function verificationCommand(ctx: RuntimeContext, group: string | undefin
           const e = r.record.reconciliation.scope_findings_equation;
           out(`  blocking findings ${e.blocking_findings} = ${tally(e.by_kind)} (balanced: ${e.balanced})`);
           const g = r.record.reconciliation.g2_check_table;
-          out(`  G2 check rows sum ${g.sum_of_rows} over ${g.distinct_blocking_findings_in_rows} distinct blocking findings (${g.blocking_findings_in_no_row.length} in no row)`);
+          out(`  G1 check rows sum ${g.sum_of_rows} over ${g.distinct_blocking_findings_in_rows} distinct blocking findings (${g.blocking_findings_in_no_row.length} in no row)`);
         });
         return 0;
       }

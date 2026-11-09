@@ -1,5 +1,5 @@
 /**
- * The G2 human approval boundary and the G2 gate evaluator.
+ * The G1 human approval boundary and the G1 gate evaluator.
  *
  *  1. `approval request` exports an immutable approval request for a READY
  *     scope: the exact baseline, the scope digest and the per-requirement
@@ -10,14 +10,14 @@
  *     signer is neither an agent nor the requester, that the request is
  *     intact, unexpired and unused, and that the scope is still READY with
  *     the same digest. Only then is a signed-approval record written.
- *  4. G2 PASSes only while such an approval re-verifies against the current
- *     content. Readiness alone never passes G2; nothing is approved from a
+ *  4. G1 PASSes only while such an approval re-verifies against the current
+ *     content. Readiness alone never passes G1; nothing is approved from a
  *     CLI flag or an agent statement.
  */
 import { randomBytes } from 'crypto';
 import * as fs from 'fs';
 import { sha256File } from '../core/fsutil';
-import { GateCheck, gatePassed, GateResult, gateSpec, precheckPassed, validateApproval } from '../orchestrator/gates';
+import { acceptedGateIds, GateCheck, gatePassed, GateResult, gateSpec, precheckPassed, validateApproval } from '../orchestrator/gates';
 import { mutate, OrchestratorError, Workflow } from '../orchestrator/orchestrator';
 import { canonicalize, digest } from './canonical';
 import { evaluateScope, Finding, parseSelector, ScopeEvaluation, Selector, selectorText } from './scope';
@@ -60,7 +60,7 @@ export function createApprovalRequest(wf: Workflow, scope: string, requestedBy: 
       contract: 'approval-request-payload',
       contract_version: '1.0',
       request_id,
-      gate: 'G2',
+      gate: 'G1',
       workflow_id: wf.state.workflow_id,
       run_id: wf.run.runId,
       baseline: { manifest_sha256: wf.run.manifestSha256, inputs: wf.state.baseline.inputs, per_program: wf.state.baseline.per_program },
@@ -115,7 +115,8 @@ export function approvalStatement(request: any, signerId: string, role: string, 
   return {
     contract: 'approval-statement',
     statement_version: '1.0',
-    gate: 'G2',
+    // The request's gate: G1, or G2 for a request issued before the 2026-11-09 renumbering (legacy workflow states).
+    gate: request.payload.gate ?? 'G1',
     request_id: request.request_id,
     request_sha256: request.request_sha256,
     scope_sha256: request.payload.scope.scope_sha256,
@@ -159,7 +160,7 @@ export function checkApproval(snap: Snapshot, signed: any, opts: { existing?: an
   const sealed = sealedHashes(wf, 'approval_requested', 'request_id').get(st.request_id);
   const intact = sealed === sha256File(reqFile) && digest(request.payload) === request.request_sha256;
   add('request_intact', intact, intact ? `${st.request_id} matches the hash sealed in the audit log` : `${st.request_id} was altered after it was issued (tampered)`);
-  const bound = st.request_sha256 === request.request_sha256 && st.scope_sha256 === request.payload.scope.scope_sha256 && st.baseline_manifest_sha256 === request.payload.baseline.manifest_sha256 && st.gate === 'G2';
+  const bound = st.request_sha256 === request.request_sha256 && st.scope_sha256 === request.payload.scope.scope_sha256 && st.baseline_manifest_sha256 === request.payload.baseline.manifest_sha256 && st.gate === request.payload.gate && acceptedGateIds(wf.state, 'G1').includes(st.gate);
   add('statement_binding', bound, bound ? 'statement binds the exact request, scope digest and baseline' : 'statement does not bind this request\'s digest, scope or baseline (scope mismatch)');
   const roles = snap.policy.roles.requirements_approval;
   const sig = verifySignature(snap.trust, st.signer_id, statementText(st), signed.signature.value, roles, snap.at);
@@ -229,7 +230,7 @@ export function importApproval(wf: Workflow, file: string): any {
       contract: 'signed-approval-record',
       contract_version: '1.0',
       approval_id,
-      gate: 'G2',
+      gate: 'G1',
       decision: signed.statement.decision,
       recorded_at: now(),
       recorded_by: 'runtime',
@@ -253,18 +254,18 @@ export function importApproval(wf: Workflow, file: string): any {
 }
 
 /* ------------------------------------------------------------------ */
-/* G2 gate                                                             */
+/* G1 gate                                                             */
 /* ------------------------------------------------------------------ */
 
 const DRAFTED_OR_LATER = ['REQUIREMENTS_DRAFTED', 'REQUIREMENTS_APPROVED', 'ARCHITECTURE_DRAFTED', 'ARCHITECTURE_APPROVED', 'STORIES_DRAFTED', 'IMPLEMENTING', 'IMPLEMENTATION_BUILT', 'TESTING', 'REVIEWING', 'COMPLETED'];
 
 /**
- * The finding sets behind each G2 evidence check. Shared with the STEP 4.5
+ * The finding sets behind each G1 evidence check. Shared with the STEP 4.5
  * count audit so the gate table and the reconciliation use one definition.
  * Sets overlap on purpose (e.g. a contradicted requirement is in both
  * requirement_evidence and contradicted_claims).
  */
-export const G2_CHECK_SETS: Array<{ id: string; label: string; select: (F: Finding[]) => Finding[]; blockingOnly?: boolean }> = [
+export const G1_CHECK_SETS: Array<{ id: string; label: string; select: (F: Finding[]) => Finding[]; blockingOnly?: boolean }> = [
   { id: 'canonical_rule_coverage', label: 'canonical rules in scope (including cross-batch conflicts)', select: (F) => F.filter((f) => ['rule_coverage', 'reconciliation'].includes(f.category) && f.kind === 'rule') },
   { id: 'cross_batch_reconciliation', label: 'cross-batch consolidation and conflicts', select: (F) => F.filter((f) => f.category === 'reconciliation') },
   { id: 'requirement_evidence', label: 'requirements', select: (F) => F.filter((f) => f.category === 'requirement_evidence') },
@@ -281,7 +282,7 @@ export const G2_CHECK_SETS: Array<{ id: string; label: string; select: (F: Findi
 ];
 
 function setCheck(id: string, F: Finding[]): GateCheck {
-  const def = G2_CHECK_SETS.find((x) => x.id === id)!;
+  const def = G1_CHECK_SETS.find((x) => x.id === id)!;
   const fs_ = def.select(F);
   const block = fs_.filter((f) => f.blocking);
   if (def.blockingOnly) return { id, status: block.length ? 'fail' : 'pass', detail: `${block.length} ${def.label}${block.length ? `: ${block.slice(0, 3).map((f) => f.id).join(', ')}` : ''}` };
@@ -290,13 +291,13 @@ function setCheck(id: string, F: Finding[]): GateCheck {
   return { id, status: block.length ? 'fail' : 'pass', detail: `${def.label}: ${fs_.length} item(s) ${JSON.stringify(by)}${block.length ? `; blocking e.g. ${block.slice(0, 3).map((f) => `${f.id} (${f.outcome})`).join(', ')}` : ''}` };
 }
 
-/** Evaluates G2 for the workflow. Pure: the caller records the gate result and the evaluation. */
-export function evaluateG2Gate(wf: Workflow, at = new Date()): { result: GateResult; evaluation: any | null } {
-  const spec = gateSpec('G2')!;
+/** Evaluates G1 for the workflow. Pure: the caller records the gate result and the evaluation. */
+export function evaluateG1Gate(wf: Workflow, at = new Date()): { result: GateResult; evaluation: any | null } {
+  const spec = gateSpec('G1')!;
   const baseResult = (status: GateResult['status'], reason: string, extra: Partial<GateResult> = {}): GateResult => ({
     contract: 'gate-result',
     contract_version: '1.0',
-    gate: 'G2',
+    gate: 'G1',
     name: spec.name,
     status,
     reason,
@@ -314,7 +315,7 @@ export function evaluateG2Gate(wf: Workflow, at = new Date()): { result: GateRes
   const inputs: GateResult['inputs'] = [];
   checks.push({ id: 'baseline_integrity', status: snap.g0.status === 'PASS' ? 'pass' : 'fail', detail: snap.g0.status === 'PASS' ? 'baseline manifest and reverse inputs unchanged (baseline pre-check re-evaluated)' : `baseline pre-check ${snap.g0.status}: ${snap.g0.reason}` });
   const drafted = DRAFTED_OR_LATER.includes(String(wf.state.state)) || (wf.state.state === 'BLOCKED' && DRAFTED_OR_LATER.includes(String(wf.state.blocked_from)));
-  checks.push({ id: 'requirements_drafted', status: drafted ? 'pass' : 'fail', detail: drafted ? `workflow state ${wf.state.state}` : `workflow state is ${wf.state.state}; G2 approval needs REQUIREMENTS_DRAFTED (readiness is reported for information only)` });
+  checks.push({ id: 'requirements_drafted', status: drafted ? 'pass' : 'fail', detail: drafted ? `workflow state ${wf.state.state}` : `workflow state is ${wf.state.state}; G1 approval needs REQUIREMENTS_DRAFTED (readiness is reported for information only)` });
   for (const r of snap.receipts) inputs.push({ kind: `receipt:${r.receipt.agent}`, ref: r.receipt_id, sha256: snap.integrity.receipt_hashes.find((x) => x.receipt_id === r.receipt_id)?.sha256 ?? null });
 
   // Approvals: every imported approval is re-verified against the current content.
@@ -334,8 +335,8 @@ export function evaluateG2Gate(wf: Workflow, at = new Date()): { result: GateRes
   checks.push({ id: 'provenance_policy', status: F.some((f) => f.category === 'provenance' && f.blocking) ? 'fail' : 'info', detail: ev.provenance.policy });
   checks.push({ id: 'readiness', status: ev.readiness === 'READY' ? 'pass' : 'fail', detail: `scope ${ev.selector_text}: ${ev.readiness} — ${ev.summary.blocking} blocking finding(s); outcomes ${JSON.stringify(ev.summary.by_outcome)}; scope digest ${ev.scope_sha256}` });
   checks.push({ id: 'trust_anchor', status: snap.trust.usable ? 'pass' : 'fail', detail: snap.trust.usable ? `trust store (${snap.trust.origin}) ${String(snap.trust.sha256).slice(0, 16)}… with ${snap.trust.signers.size} signer(s)` : `no usable trust anchor: ${snap.trust.problems.join('; ')}` });
-  const legacy = wf.store.list('approvals').filter((f) => !f.startsWith('APR-')).map((f) => ({ f, r: wf.store.readRecord('approvals', f) })).filter((x) => x.r?.gate === 'G2');
-  const legacyNote = legacy.length ? `; ignored ${legacy.length} unsigned approval-record file(s): ${legacy.map((x) => `${x.f}: ${[...validateApproval(x.r, 'G2', wf.store), 'not a signed approval'].join(', ')}`).join(' | ')}` : '';
+  const legacy = wf.store.list('approvals').filter((f) => !f.startsWith('APR-')).map((f) => ({ f, r: wf.store.readRecord('approvals', f) })).filter((x) => acceptedGateIds(wf.state, 'G1').includes(x.r?.gate));
+  const legacyNote = legacy.length ? `; ignored ${legacy.length} unsigned approval-record file(s): ${legacy.map((x) => `${x.f}: ${[...validateApproval(x.r, 'G1', wf.store, acceptedGateIds(wf.state, 'G1')), 'not a signed approval'].join(', ')}`).join(' | ')}` : '';
   checks.push({
     id: 'human_approval',
     status: chosen ? 'pass' : 'fail',
@@ -356,10 +357,10 @@ export function evaluateG2Gate(wf: Workflow, at = new Date()): { result: GateRes
   } else {
     status = 'UNVERIFIED';
     const why = checks.filter((c) => c.status === 'fail').map((c) => c.id);
-    reason = `G2 not approved for scope ${ev.selector_text}: ${ev.readiness}${ev.readiness === 'NOT_READY' ? ` (${ev.summary.blocking} blocking finding(s))` : ''}; failing checks: ${why.join(', ')}`;
+    reason = `G1 not approved for scope ${ev.selector_text}: ${ev.readiness}${ev.readiness === 'NOT_READY' ? ` (${ev.summary.blocking} blocking finding(s))` : ''}; failing checks: ${why.join(', ')}`;
   }
   const limitations = [
-    'READY means the scope may be presented for a decision; only a re-verified signed human approval passes G2.',
+    'READY means the scope may be presented for a decision; only a re-verified signed human approval passes G1.',
     'A verified source citation shows the cited source text exists; the business interpretation is what the human approves.',
   ];
   if (!snap.ctx.srcRoot) limitations.push('Original COBOL source is not configured: no claim can be independently verified.');

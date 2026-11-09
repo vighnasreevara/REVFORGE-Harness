@@ -46,7 +46,7 @@ They never come from running or reading the F5 Java. Coverage spans:
 
 ## Required input artifacts
 
-- The approved requirements (G2) and the validated story acceptance criteria (F4).
+- The approved requirements (G1) and the validated story acceptance criteria (F4).
 - The F2 data contracts (types, scales, test vectors) and runtime semantics (file status, return codes, commits).
 - The per-program logic files and, when available, the original source.
 - Captured COBOL reference outputs, if the packet lists any.

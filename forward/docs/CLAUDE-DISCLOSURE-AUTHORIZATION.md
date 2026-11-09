@@ -78,7 +78,7 @@ bmad executor preflight --workflow <bmad-workflow> --scope programs:<P>
 
 This seals `workflow/bmad/BPF-NNNN` (contract `bmad/execution-preflight`); pass `--no-record` for a dry check. It never launches anything. Checks:
 1. the scope;
-2. G2 PASS for exactly this scope, re-verified now;
+2. G1 PASS for exactly this scope, re-verified now;
 3. workflow state;
 4. the pinned BMad release;
 5. binding and agent (Build disabled);

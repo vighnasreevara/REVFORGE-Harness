@@ -36,7 +36,7 @@ export default function Handover() {
     ['DB2 and CICS dependencies', `${n(group('RCG-01'))} records need a DB2 runtime and precompiler; ${n(group('RCG-02'))} need a CICS environment.`, '/gaps?category=EXTERNAL_DEPENDENCY'],
     ['External platform services', `${n(group('RCG-08'))} records for legacy environment definitions and ${n(group('RCG-09'))} for platform services and utilities.`, '/gaps?owner=Platform%20engineering'],
     ['Business SME decisions', `${n(m.gaps?.filter((g) => g.category === 'BUSINESS_DECISION_REQUIRED').length)} records need a signed business decision.`, '/gaps?category=BUSINESS_DECISION_REQUIRED'],
-    ['BMad authorization and live execution', `${m.bmad?.status ?? 'not recorded'}: G2 approval, a signed disclosure authorization, an egress component and a runner inside the isolation boundary are all missing.`, '/bmad'],
+    ['BMad authorization and live execution', `${m.bmad?.status ?? 'not recorded'}: G1 approval, a signed disclosure authorization, an egress component and a runner inside the isolation boundary are all missing.`, '/bmad'],
     ['Unverified data and runtime semantics', `${n(group('RCG-07'))} record layouts not determinable, ${n(group('RCG-18'))} unsupported constructs; byte-level data and file runtime behaviour are unverified without legacy runs.`, '/gaps?category=DATA_LAYOUT_GAP'],
   ];
   return (
@@ -50,7 +50,7 @@ export default function Handover() {
         <ol className="grid gap-3 text-sm md:grid-cols-4">
           {[
             ['Reverse engineering', 'Seven agents (inventory, parser, data, logic, rules, diagram, synthesis) read the restricted COBOL source and write the committed artifacts in output/, with permanent IDs from the Neo4j registry.'],
-            ['Forward engineering harness', 'TypeScript runtime in forward/runtime with contracts, the two human gates G2 and G3 (with automated BASELINE and EVIDENCE pre-checks) and agents F1-F7. Local Java generation is under historical local authorizations (LGA) and git-ignored.'],
+            ['Forward engineering harness', 'TypeScript runtime in forward/runtime with contracts, the two human gates G1 and G2 (with automated BASELINE and EVIDENCE pre-checks) and agents F1-F7. Local Java generation is under historical local authorizations (LGA) and git-ignored.'],
             ['Reconciliation and register', 'STEP-22 reconciles every reverse element with the Java; STEP-23 consolidates every open gap into one register with root causes, owners and a roadmap.'],
             ['Governance', 'BMad lifecycle governance is mandatory; F2 mapping and F6 testing stay independent of BMad. No BMad workflow has executed.'],
           ].map(([t, d], i) => (

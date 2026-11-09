@@ -1,6 +1,6 @@
 /**
  * STEP 9: dependency-aware COBOL source-context verification, evidence
- * supplements and their G2 integration, whole-process isolation and the
+ * supplements and their G1 integration, whole-process isolation and the
  * isolation-aware preflight. Synthetic COBOL and synthetic signers only; the
  * isolation suite runs real namespaces when the host supports them and is
  * reported as not executed (never as passed) when it does not.
@@ -255,7 +255,7 @@ function contextFixture(opts: { catalogueLine?: number; citeLine?: number; claim
     fx = f;
     mutate(f);
   };
-  const out = designFixture(fixtures, { approveG2: false, resolve: false, mutate: wrapped, edit });
+  const out = designFixture(fixtures, { approveG1: false, resolve: false, mutate: wrapped, edit });
   return { ...out, cbRel: () => cbRel, req: `REQ-${out.f.programs[1].name}-001` };
 }
 const itemOf = (ctx: any, id: string) => buildSnapshot(wfOf(ctx)).itemById.get(id)!;
@@ -318,7 +318,7 @@ describe('STEP 9 — source-context verification in the workflow', () => {
     assert.equal(recordSupplements(wfOf(ctx), contextReport(wfOf(ctx), BRAVO)).find((x) => x.item_id === req)!.new, false, 'identical content is not recorded twice');
     const snap = buildSnapshot(wfOf(ctx));
     assert.notEqual(snap.resolutions.get(`RVW-${req}`)?.status, 'resolved', 'no SME decision is resolved by a supplement');
-    assert.equal(evaluateScope(snap, parseSelector(BRAVO)).findings.find((x) => x.id === req)!.outcome, 'REQUIRES_EVIDENCE', 'the G2 outcome is unchanged without a signed acceptance');
+    assert.equal(evaluateScope(snap, parseSelector(BRAVO)).findings.find((x) => x.id === req)!.outcome, 'REQUIRES_EVIDENCE', 'the G1 outcome is unchanged without a signed acceptance');
     // A changed source produces a new version that supersedes the first; the first stays byte-identical.
     fs.appendFileSync(path.join(f.sourceRoot, f.copybooks[0].rel), '      * annotated after the first supplement\n');
     const second = recordSupplements(wfOf(ctx), contextReport(wfOf(ctx), BRAVO)).find((x) => x.item_id === req)!;
@@ -327,7 +327,7 @@ describe('STEP 9 — source-context verification in the workflow', () => {
     assert.equal(sha256File(file1), h1);
   });
 
-  test('15/16. G2 counts the evidence only through a signed acceptance, stays fail-closed, and drops it when the source changes', () => {
+  test('15/16. G1 counts the evidence only through a signed acceptance, stays fail-closed, and drops it when the source changes', () => {
     const { f, ctx, k, dk, req } = contextFixture();
     const s = recordSupplements(wfOf(ctx), contextReport(wfOf(ctx), BRAVO)).find((x) => x.item_id === req)!;
     const decision = `RVW-${req}`;
@@ -340,7 +340,7 @@ describe('STEP 9 — source-context verification in the workflow', () => {
     assert.equal(ok.recorded, true, JSON.stringify(ok.checks.filter((c: any) => !c.ok)));
     const after = evaluateScope(buildSnapshot(wfOf(ctx)), parseSelector(BRAVO)).findings.find((x) => x.id === req)!;
     assert.notEqual(after.outcome, 'REQUIRES_EVIDENCE', `accepted evidence counts: ${after.reasons.join(' | ')}`);
-    assert.notEqual(runGate(wfOf(ctx), 'G2').status, 'PASS', 'readiness is not approval: G2 still needs a signed approval');
+    assert.notEqual(runGate(wfOf(ctx), 'G1').status, 'PASS', 'readiness is not approval: G1 still needs a signed approval');
     fs.appendFileSync(path.join(f.sourceRoot, f.copybooks[0].rel), '      * changed after acceptance\n');
     const stale = evaluateScope(buildSnapshot(wfOf(ctx)), parseSelector(BRAVO)).findings.find((x) => x.id === req)!;
     assert.ok(stale.blocking, 'a stale supplement no longer counts');

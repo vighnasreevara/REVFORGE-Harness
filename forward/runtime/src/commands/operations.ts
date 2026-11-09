@@ -1,7 +1,7 @@
 /**
  * Human decision operations commands (STEP 8). Thin operator-facing commands
  * over the existing runtime: trust validation, decision review and signed
- * resolution import, citation remediation review, G2 approval readiness,
+ * resolution import, citation remediation review, G1 approval readiness,
  * provider-specific disclosure authorization. Every command supports --json;
  * none signs, resolves, approves or marks a gate PASS.
  */
@@ -178,7 +178,7 @@ export function operationsCommand(ctx: RuntimeContext, command: string, action: 
           writeExport(exportDir, 'approval-readiness.json', r);
         }
         print({ record: sealed?.id ?? null, ...r }, () => {
-          out(`${r.scope}: ${r.readiness} (${r.blocking_findings} blocking); G2 ${r.g2.status}${r.g2.for_this_scope ? ' for this scope' : ''}; trust ${r.trust.status}`);
+          out(`${r.scope}: ${r.readiness} (${r.blocking_findings} blocking); G1 ${r.g2.status}${r.g2.for_this_scope ? ' for this scope' : ''}; trust ${r.trust.status}`);
           for (const s of r.steps) out(`  ${s.step}. [${s.status}] ${s.actor}: ${s.action}\n       ${s.detail}`);
           out(`  next transitions: ${r.allowed_next_transitions.map((t: any) => `${t.to} (${t.guard}${t.satisfied === false ? ', not satisfied' : ''})`).join(', ')}`);
           out(`  ${r.note}`);

@@ -1,7 +1,7 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
   "$id": "https://revforge.local/contracts/orchestrator/signed-approval-record.schema.json",
-  "title": "Imported, verified G2 approval (runtime record)",
+  "title": "Imported, verified G1 approval (runtime record)",
   "type": "object",
   "additionalProperties": false,
   "required": [
@@ -34,7 +34,7 @@
       "pattern": "^APR-[0-9]{4}$"
     },
     "gate": {
-      "const": "G2"
+      "const": "G1"
     },
     "decision": {
       "enum": [
@@ -114,7 +114,8 @@
           "const": "1.0"
         },
         "gate": {
-          "const": "G2"
+          "description": "The signed statement's gate: G1, or G2 for a statement signed for a request issued before the 2026-11-09 gate renumbering (legacy workflow states only). The record's own gate is always G1.",
+          "enum": ["G1", "G2"]
         },
         "request_id": {
           "type": "string",

@@ -16,7 +16,7 @@
  *     COMPLETE/PARTIAL/FAILED label (contract pilot/pilot-result).
  *
  * Engineering gates are NOT authorisation. Generation authorisation (the
- * config flag and G3, i.e. the signed G2 and G3 approvals) is reported next to
+ * config flag and G2, i.e. the signed G1 and G2 approvals) is reported next to
  * each gate exactly as the orchestrator computes it, and is never changed,
  * bypassed or implied here. Historical gate records are untouched.
  */
@@ -27,6 +27,7 @@ import { evaluateScope, parseSelector } from '../approval/scope';
 import { behaviourClosure } from '../approval/closure';
 import { SourceReader } from '../blockers/deterministic';
 import { unitKey } from '../orchestrator/extracts';
+import { gateRecord } from '../orchestrator/gates';
 import { generationAuthorized, Workflow } from '../orchestrator/orchestrator';
 import { trustDoctor } from '../operations/trust';
 import { behaviourScope } from './scope';
@@ -52,13 +53,13 @@ export function authorisationStatus(wf: Workflow, ctx: RuntimeContext, program?:
   const blockers: string[] = [];
   if (!ctx.config.generation.java_generation_allowed) blockers.push('config generation.java_generation_allowed is false (project authority)');
   if (!(ctx.config as any).orchestrator?.java_target_dir) blockers.push('no authorised orchestrator.java_target_dir');
-  if (s.gates.G3?.status !== 'PASS') blockers.push(`G3 is ${s.gates.G3?.status ?? 'NOT_RUN'} (needs signed G2 and G3 approvals by trusted signers)`);
+  if (gateRecord(s, 'G2')?.status !== 'PASS') blockers.push(`G2 is ${gateRecord(s, 'G2')?.status ?? 'NOT_RUN'} (needs signed G1 and G2 approvals by trusted signers)`);
   const trust = trustDoctor(ctx).status;
   if (trust !== 'TRUST_CONFIGURED') blockers.push(`trust store: ${trust}`);
   return {
     generation_authorized: generationAuthorized(wf.run, s),
     blockers,
-    gates: Object.fromEntries(['G2', 'G3'].map((g) => [g, s.gates[g]?.status ?? 'NOT_RUN'])),
+    gates: Object.fromEntries(['G1', 'G2'].map((g) => [g, gateRecord(s, g)?.status ?? 'NOT_RUN'])),
     trust,
     program_g2_scope: program ? (() => {
       const ev = evaluateScope(buildSnapshot(wf), parseSelector(`programs:${program}`));
@@ -110,7 +111,7 @@ export function sourceReadiness(wf: Workflow, program: string): EngineeringGate 
     subject: program,
     status: checks.every((c) => c.ok) ? 'PASS' : 'FAIL',
     checks,
-    note: 'An engineering gate: it states that the source is understood well enough to convert, with every unknown documented. It is not a G2 approval and does not authorise generation.',
+    note: 'An engineering gate: it states that the source is understood well enough to convert, with every unknown documented. It is not a G1 approval and does not authorise generation.',
     behaviours,
     gaps,
     closures,

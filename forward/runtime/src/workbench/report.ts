@@ -6,7 +6,7 @@ const t = (o: Record<string, number> | undefined) => Object.entries(o ?? {}).map
 
 export function renderCandidates(c: any): string {
   const L: string[] = ['# First approval scope: recommendation and comparison', ''];
-  L.push(`Generated ${c.generated_at}. ${c.programs.length} program scopes and ${c.requirements.length} requirement scopes evaluated with the existing G2 evaluator. **This is a proposal, not an approval.**`, '');
+  L.push(`Generated ${c.generated_at}. ${c.programs.length} program scopes and ${c.requirements.length} requirement scopes evaluated with the existing G1 evaluator. **This is a proposal, not an approval.**`, '');
   L.push(`Ranking: meaningful scopes first (application program with source text and a source-verified requirement), then the lowest workload score (root causes weighted ${t(c.weights.class)}, plus ${c.weights.dependency} per shared dependency), then fewer units, then more requirements.`, '');
   L.push('## Top three program scopes', '');
   for (const x of c.top_three) L.push(`### ${x.rank}. ${x.scope}`, '', x.explanation, '');
@@ -53,9 +53,9 @@ export function renderChecklist(c: any): string {
 }
 
 export function renderReadiness(r: any, trust: any): string {
-  const L: string[] = [`# G2 readiness — ${r.scope}`, '', `Readiness **${r.readiness}**; G2 can pass: **${r.g2_can_pass}**. Scope digest \`${r.scope_sha256}\`.`, ''];
+  const L: string[] = [`# G1 readiness — ${r.scope}`, '', `Readiness **${r.readiness}**; G1 can pass: **${r.g2_can_pass}**. Scope digest \`${r.scope_sha256}\`.`, ''];
   L.push(`- Unique root causes: ${r.unique_root_causes}`, `- Blocking findings: ${r.blocking_findings}`, `- Blocking decisions: ${r.blocking_decisions.join(', ') || 'none'}`, `- Trust: ${trust.status}`, '');
-  L.push('## Why G2 cannot pass', '', ...r.why_g2_cannot_pass.map((x: string) => `- ${x}`), '');
+  L.push('## Why G1 cannot pass', '', ...r.why_g2_cannot_pass.map((x: string) => `- ${x}`), '');
   L.push('## Failing checks', '', '| Check | Blocking | Items |', '|---|---|---|');
   for (const c of r.failing_checks) L.push(`| ${c.check} | ${c.blocking} | ${esc(c.items.join(', ')).slice(0, 400)} |`);
   L.push('', '## Source evidence issues', '', '| Item | Outcome | Reason |', '|---|---|---|');
@@ -67,7 +67,7 @@ export function renderReadiness(r: any, trust: any): string {
 
 export function renderStep55(all: any): string {
   const { candidates: c, pkg, packets, corrections, trust, pilot, readiness, checklist, sealed } = all;
-  const L: string[] = ['# STEP 5.5 — G2 approval readiness, human decision workbench and first modernization scope', ''];
+  const L: string[] = ['# STEP 5.5 — G1 approval readiness, human decision workbench and first modernization scope', ''];
   L.push(`Run \`${pkg.baseline.run_id}\`, baseline \`${pkg.baseline.manifest_sha256}\`, generated ${pkg.generated_at} by \`workbench report\`. Everything below is **preparation**: no decision was resolved, no correction applied, no authorization signed, no approval created, no source sent.`, '');
   L.push('## 1. Candidate scopes', '');
   for (const x of c.top_three) L.push(`${x.rank}. ${x.explanation}`);
@@ -91,7 +91,7 @@ export function renderStep55(all: any): string {
   L.push('## 7. OpenAI live pilot (prepared, not sent)', '', `Status **${pilot.status}** — blocked by: ${pilot.blocked_by.join('; ')}. ${pilot.cases.length} case(s) prepared from ${pilot.unsettled_eligible} unsettled eligible packet(s) in scope (of ${pilot.candidates_in_scope}).`, '');
   for (const x of pilot.cases) L.push(`- ${x.packet_id} (${x.category}, deterministic ${x.deterministic_status}): ${x.source_evidence.map((s: any) => `${s.path} ${s.lines.join('-')}`).join('; ')}; estimated ≤ ${x.estimated_tokens.pass_a_input + x.estimated_tokens.pass_b_input_max} input / ≤ ${x.estimated_tokens.pass_a_output_max + x.estimated_tokens.pass_b_output_max} output tokens, ≤ $${x.estimated_cost_usd_upper_bound}.`);
   L.push('', `Total upper bound: $${pilot.total_estimate.cost_usd_upper_bound} at the configured rates. Source-export authorization request: unsigned, \`step-5.5/openai-pilot-authorization-request.json\`.`, '');
-  L.push('## 8. G2 for this scope', '', `Readiness **${readiness.readiness}**, ${readiness.unique_root_causes} unique root cause(s), ${readiness.blocking_findings} blocking finding(s), ${readiness.blocking_decisions.length} blocking decision(s). G2 can pass: **no**.`, '', ...readiness.why_g2_cannot_pass.map((x: string) => `- ${x}`), '');
+  L.push('## 8. G1 for this scope', '', `Readiness **${readiness.readiness}**, ${readiness.unique_root_causes} unique root cause(s), ${readiness.blocking_findings} blocking finding(s), ${readiness.blocking_decisions.length} blocking decision(s). G1 can pass: **no**.`, '', ...readiness.why_g2_cannot_pass.map((x: string) => `- ${x}`), '');
   L.push('## Sealed records', '', '| Record | SHA-256 |', '|---|---|');
   for (const [k, v] of Object.entries(sealed as Record<string, any>)) L.push(`| workflow/step55/${v.id}.json (${k}) | \`${v.sha256}\` |`);
   return L.join('\n') + '\n';

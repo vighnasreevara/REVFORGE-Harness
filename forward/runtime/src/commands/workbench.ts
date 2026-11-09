@@ -117,7 +117,7 @@ export function workbenchCommand(ctx: RuntimeContext, action: string | undefined
           const r = scopeReadinessReport(a, scope!, trustReadiness(a, rolesFor(pkg)));
           const s = seal(wf, 'scope-g2-readiness', r);
           print({ record: s.id, ...r }, () => {
-            out(`${s.id}: ${r.scope} ${r.readiness}; G2 can pass: ${r.g2_can_pass}`);
+            out(`${s.id}: ${r.scope} ${r.readiness}; G1 can pass: ${r.g2_can_pass}`);
             for (const w of r.why_g2_cannot_pass) out(`  - ${w}`);
           });
           break;

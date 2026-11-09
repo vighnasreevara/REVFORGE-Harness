@@ -8,8 +8,8 @@ import { runPlan } from '../runtime/src/commands/plan';
 import { EXIT, main } from '../runtime/src/cli';
 import { AGENTS, checkDefinition, findAgent, REQUIRED_SECTIONS } from '../runtime/src/orchestrator/agents';
 import { classifyProgram } from '../runtime/src/orchestrator/classification';
-import { evaluateEvidenceCheck, GATES, openRun, PRECHECKS, validateApproval } from '../runtime/src/orchestrator/gates';
-import { advance, initWorkflow, loadWorkflow, OrchestratorError, policyRoots, prepare, receiptOutcome, recordReceipt, resume, runGate, runPrecheck, status } from '../runtime/src/orchestrator/orchestrator';
+import { acceptedGateIds, evaluateEvidenceCheck, GATE_SCHEME, gateIdOfKey, gateKey, gatePassed, GATES, isLegacyGateScheme, openRun, precheckPassed, PRECHECKS, validateApproval } from '../runtime/src/orchestrator/gates';
+import { advance, blockedReport, initWorkflow, loadWorkflow, OrchestratorError, policyRoots, prepare, receiptOutcome, recordReceipt, resume, runGate, runPrecheck, status } from '../runtime/src/orchestrator/orchestrator';
 import { canRead, canWrite } from '../runtime/src/orchestrator/permissions';
 import { APPROVAL_STATES, findTransition, TRANSITIONS } from '../runtime/src/orchestrator/states';
 import { WorkflowStore } from '../runtime/src/orchestrator/store';
@@ -127,8 +127,8 @@ describe('S2-2. agent input/output declarations', () => {
       assert.ok(a.dispatch_states.length > 0, a.id);
       assert.ok(a.forbidden.some((x) => /approved/.test(x)), a.id);
     }
-    // F1/F2 need the automated pre-checks, F3 needs G2, F4/F5 need G3; F6/F7 follow the F5/F6 receipts through their dispatch states.
-    assert.deepEqual(Object.fromEntries(AGENTS.map((a) => [a.id, a.requires_gate])), { F1: null, F2: null, F3: 'G2', F4: 'G3', F5: 'G3', F6: null, F7: null });
+    // F1/F2 need the automated pre-checks, F3 needs G1, F4/F5 need G2; F6/F7 follow the F5/F6 receipts through their dispatch states.
+    assert.deepEqual(Object.fromEntries(AGENTS.map((a) => [a.id, a.requires_gate])), { F1: null, F2: null, F3: 'G1', F4: 'G2', F5: 'G2', F6: null, F7: null });
     for (const id of ['F1', 'F2']) assert.deepEqual(findAgent(id)!.requires_prechecks, ['BASELINE', 'EVIDENCE'], id);
     assert.deepEqual(findAgent('F6')!.dispatch_states, ['IMPLEMENTATION_BUILT', 'TESTING']);
     assert.deepEqual(findAgent('F7')!.dispatch_states, ['REVIEWING']);
@@ -270,8 +270,8 @@ describe('S2-5. automated pre-checks (formerly G0 and G1)', () => {
   });
 });
 
-describe('S2-6. the two human gates G2 and G3', () => {
-  test('G2 and G3 never PASS without a signed human approval, even with receipts and a forged approval', () => {
+describe('S2-6. the two human gates G1 and G2', () => {
+  test('G1 and G2 never PASS without a signed human approval, even with receipts and a forged approval', () => {
     const { f, ctx } = validated({ skillsFor: ['F1', 'F2'] });
     for (const id of ['F1', 'F2']) {
       const p = prepare(loadWorkflow(ctx, 'FWD-T2'), id);
@@ -279,26 +279,26 @@ describe('S2-6. the two human gates G2 and G3', () => {
     }
     const wf = loadWorkflow(ctx, 'FWD-T2');
     const rc = wf.store.list('receipts')[0].replace('.json', '');
-    fs.writeFileSync(wf.store.p('approvals', 'forged.json'), JSON.stringify({ contract: 'approval-record', gate: 'G2', decision: 'approved', actor: { kind: 'agent', id: 'fe-requirements-analyst' }, recorded_by: 'runtime', recorded_at: new Date().toISOString(), bound_receipts: [{ receipt_id: rc, sha256: sha256File(wf.store.p('receipts', `${rc}.json`)) }] }));
-    const g2 = runGate(loadWorkflow(ctx, 'FWD-T2'), 'G2');
+    fs.writeFileSync(wf.store.p('approvals', 'forged.json'), JSON.stringify({ contract: 'approval-record', gate: 'G1', decision: 'approved', actor: { kind: 'agent', id: 'fe-requirements-analyst' }, recorded_by: 'runtime', recorded_at: new Date().toISOString(), bound_receipts: [{ receipt_id: rc, sha256: sha256File(wf.store.p('receipts', `${rc}.json`)) }] }));
+    const g2 = runGate(loadWorkflow(ctx, 'FWD-T2'), 'G1');
     assert.equal(g2.status, 'UNVERIFIED');
     assert.ok(g2.checks.some((c) => c.id === 'human_approval' && /must come from a human/.test(c.detail)));
-    assert.equal(runGate(loadWorkflow(ctx, 'FWD-T2'), 'G3').status, 'BLOCKED');
-    const human = { contract: 'approval-record', gate: 'G2', decision: 'approved', actor: { kind: 'human', id: 'sme' }, recorded_by: 'runtime', recorded_at: new Date().toISOString(), bound_receipts: [{ receipt_id: rc, sha256: sha256File(wf.store.p('receipts', `${rc}.json`)) }] };
-    assert.deepEqual(validateApproval(human, 'G2', wf.store), []);
+    assert.equal(runGate(loadWorkflow(ctx, 'FWD-T2'), 'G2').status, 'BLOCKED');
+    const human = { contract: 'approval-record', gate: 'G1', decision: 'approved', actor: { kind: 'human', id: 'sme' }, recorded_by: 'runtime', recorded_at: new Date().toISOString(), bound_receipts: [{ receipt_id: rc, sha256: sha256File(wf.store.p('receipts', `${rc}.json`)) }] };
+    assert.deepEqual(validateApproval(human, 'G1', wf.store), []);
     fs.writeFileSync(wf.store.p('approvals', 'human.json'), JSON.stringify(human));
-    assert.equal(runGate(loadWorkflow(ctx, 'FWD-T2'), 'G2').status, 'UNVERIFIED', 'even a valid approval cannot pass a gate without its evaluator');
+    assert.equal(runGate(loadWorkflow(ctx, 'FWD-T2'), 'G1').status, 'UNVERIFIED', 'even a valid approval cannot pass a gate without its evaluator');
   });
 
-  test('only G2 and G3 exist, both human; G3 is BLOCKED without G2 and a result for a removed gate is contract-invalid', () => {
+  test('only G1 and G2 exist, both human; G2 is BLOCKED without G1 and a result for a removed gate is contract-invalid', () => {
     const { ctx } = validated();
-    assert.deepEqual(GATES.map((g) => g.id), ['G2', 'G3']);
+    assert.deepEqual(GATES.map((g) => g.id), ['G1', 'G2']);
     assert.ok(GATES.every((g) => g.human_approval && g.evaluator === 'implemented'));
-    assert.notEqual(runGate(loadWorkflow(ctx, 'FWD-T2'), 'G2').status, 'PASS');
-    const g3 = runGate(loadWorkflow(ctx, 'FWD-T2'), 'G3');
+    assert.notEqual(runGate(loadWorkflow(ctx, 'FWD-T2'), 'G1').status, 'PASS');
+    const g3 = runGate(loadWorkflow(ctx, 'FWD-T2'), 'G2');
     assert.equal(g3.status, 'BLOCKED');
     assert.equal(ctx.contracts.validate('orchestrator/gate-result', g3).valid, true);
-    for (const removed of ['G0', 'G1', 'G4', 'G5', 'G6', 'G7', 'G8']) assert.equal(ctx.contracts.validate('orchestrator/gate-result', { ...g3, gate: removed }).valid, false, removed);
+    for (const removed of ['G0', 'G3', 'G4', 'G5', 'G6', 'G7', 'G8']) assert.equal(ctx.contracts.validate('orchestrator/gate-result', { ...g3, gate: removed }).valid, false, removed);
   });
 
   test('approval states are unreachable in STEP 2', () => {
@@ -308,7 +308,84 @@ describe('S2-6. the two human gates G2 and G3', () => {
     assert.equal(advance(loadWorkflow(ctx, 'FWD-T2'), 'REQUIREMENTS_DRAFTED').accepted, true);
     const r = advance(loadWorkflow(ctx, 'FWD-T2'), 'REQUIREMENTS_APPROVED');
     assert.equal(r.accepted, false);
-    assert.match(r.reason, /G2 has not passed/);
+    assert.match(r.reason, /G1 has not passed/);
+  });
+});
+
+describe('S2-6b. gate renumbering (2026-11-09): G1/G2 now, legacy states keep G2/G3', () => {
+  test('a new workflow records gate_scheme 2; its G1 (requirements) never counts as the EVIDENCE pre-check, while a legacy G1 PASS does', () => {
+    const { ctx } = setup();
+    const wf = initWorkflow(ctx, 'FWD-T2');
+    assert.equal(wf.state.gate_scheme, GATE_SCHEME);
+    assert.equal(GATE_SCHEME, 2);
+    assert.equal(ctx.contracts.validate('orchestrator/workflow-state', wf.state).valid, true);
+    assert.equal(ctx.contracts.validate('orchestrator/workflow-state', { ...wf.state, gate_scheme: 3 }).valid, false);
+    const sha = wf.run.manifestSha256;
+    const pass = { status: 'PASS', result_file: 'x.json', evaluated_at: new Date().toISOString(), baseline_sha256: sha };
+    const base = { ...wf.state, prechecks: { BASELINE: wf.state.prechecks!.BASELINE } };
+    const fresh = { ...base, gates: { G1: pass } };
+    assert.equal(isLegacyGateScheme(fresh), false);
+    assert.equal(gatePassed(fresh, 'G1', sha), true);
+    assert.equal(precheckPassed(fresh, 'EVIDENCE', sha), false, 'a gate_scheme 2 G1 is the requirements gate, never the evidence pre-check');
+    assert.equal(precheckPassed({ ...base, prechecks: {}, gates: { G0: pass } }, 'BASELINE', sha), false, 'a gate_scheme 2 state has no legacy G0 gate');
+    const legacy = { ...fresh, gate_scheme: undefined };
+    assert.equal(isLegacyGateScheme(legacy), true);
+    assert.equal(precheckPassed(legacy, 'EVIDENCE', sha), true, 'a legacy G1 PASS is the former evidence gate');
+    assert.equal(precheckPassed({ ...legacy, prechecks: {}, gates: { G0: pass } }, 'BASELINE', sha), true, 'a legacy G0 PASS is the former baseline gate');
+    assert.equal(gatePassed(legacy, 'G1', sha), false, 'a legacy state stores the requirements gate under G2');
+    const legacyAll = { ...legacy, gates: { G0: pass, G1: pass, G2: pass } };
+    assert.equal(gatePassed(legacyAll, 'G1', sha), true, 'legacy G2 = requirements');
+    assert.equal(gatePassed(legacyAll, 'G2', sha), false, 'legacy G3 (architecture) has not run');
+    assert.equal(gatePassed({ ...legacyAll, gates: { G3: pass } }, 'G2', sha), true, 'legacy G3 = architecture');
+    assert.deepEqual(['G1', 'G2'].map((g) => gateKey(legacy, g)), ['G2', 'G3']);
+    assert.deepEqual(['G1', 'G2'].map((g) => gateKey(fresh, g)), ['G1', 'G2']);
+    assert.deepEqual(['G0', 'G1', 'G2', 'G3'].map((k) => gateIdOfKey(legacy, k)), [null, null, 'G1', 'G2']);
+    assert.deepEqual(['G1', 'G2', 'G3'].map((k) => gateIdOfKey(fresh, k)), ['G1', 'G2', null]);
+    assert.deepEqual([acceptedGateIds(legacy, 'G1'), acceptedGateIds(legacy, 'G2')], [['G1', 'G2'], ['G2', 'G3']]);
+    assert.deepEqual([acceptedGateIds(fresh, 'G1'), acceptedGateIds(fresh, 'G2')], [['G1'], ['G2']]);
+    const human = { contract: 'approval-record', gate: 'G2', decision: 'approved', actor: { kind: 'human', id: 'sme' }, recorded_by: 'runtime', recorded_at: new Date().toISOString(), bound_receipts: [] };
+    assert.ok(validateApproval(human, 'G1', wf.store).includes('approval is for G2, not G1'));
+    assert.ok(!validateApproval(human, 'G1', wf.store, acceptedGateIds(legacy, 'G1')).includes('approval is for G2, not G1'), 'a legacy G2 record is a requirements approval');
+    // Statements signed before the renumbering still satisfy the contract they are re-verified against.
+    const st = { contract: 'approval-statement', statement_version: '1.0', request_id: 'AREQ-0001', request_sha256: 'a'.repeat(64), scope_sha256: 'b'.repeat(64), baseline_manifest_sha256: 'c'.repeat(64), decision: 'approved', signer_id: 'alice', role: 'requirements_approver' };
+    const sig = { algorithm: 'ed25519', value: 'A'.repeat(86) + '==' };
+    for (const gate of ['G1', 'G2']) assert.equal(ctx.contracts.validate('orchestrator/signed-approval', { contract: 'signed-approval', statement: { ...st, gate }, signature: sig }).valid, true, gate);
+    assert.equal(ctx.contracts.validate('orchestrator/signed-approval', { contract: 'signed-approval', statement: { ...st, gate: 'G3' }, signature: sig }).valid, false);
+  });
+
+  test('a legacy workflow state (no gate_scheme) is read through the mapping, keeps its old keys and is never migrated', () => {
+    const { ctx } = validated();
+    // Rewrite the workflow as written before the renumbering and the two-gate change: no marker, the evidence check recorded as gate G1.
+    const w = loadWorkflow(ctx, 'FWD-T2');
+    const evidence = { ...w.state.prechecks!.EVIDENCE };
+    delete w.state.gate_scheme;
+    delete w.state.prechecks!.EVIDENCE;
+    w.state.gates = { G1: evidence };
+    w.store.writeState(w.state);
+    const wf = loadWorkflow(ctx, 'FWD-T2');
+    assert.equal(precheckPassed(wf.state, 'EVIDENCE', wf.run.manifestSha256), true, 'the legacy G1 PASS counts as the evidence pre-check');
+    const st = status(wf);
+    assert.equal(st.gate_scheme, 'legacy');
+    assert.deepEqual(st.gates, { G1: 'NOT_RUN', G2: 'NOT_RUN' }, 'the legacy evidence gate G1 is not reported as the requirements gate');
+    assert.equal(st.prechecks.EVIDENCE, 'PASS');
+    const g1 = runGate(loadWorkflow(ctx, 'FWD-T2'), 'G1');
+    assert.equal(g1.gate, 'G1');
+    assert.notEqual(g1.status, 'BLOCKED', 'the legacy evidence result satisfies the prerequisite');
+    assert.notEqual(g1.status, 'PASS');
+    const g2 = runGate(loadWorkflow(ctx, 'FWD-T2'), 'G2');
+    assert.equal(g2.status, 'BLOCKED');
+    const after = loadWorkflow(ctx, 'FWD-T2').state;
+    assert.equal(after.gate_scheme, undefined, 'a legacy state is never migrated');
+    assert.deepEqual(after.gates.G1, evidence, 'the legacy evidence record is untouched');
+    assert.equal(after.gates.G2.status, g1.status);
+    assert.match(after.gates.G2.result_file, /^G2-/);
+    assert.equal(after.gates.G3.status, 'BLOCKED');
+    assert.match(after.gates.G3.result_file, /^G3-/);
+    const stored = JSON.parse(fs.readFileSync(loadWorkflow(ctx, 'FWD-T2').store.p('gates', after.gates.G3.result_file), 'utf8'));
+    assert.equal(stored.gate, 'G2', 'the result itself carries the current gate ID');
+    assert.equal(ctx.contracts.validate('orchestrator/gate-result', stored).valid, true);
+    assert.deepEqual(status(loadWorkflow(ctx, 'FWD-T2')).gates, { G1: g1.status, G2: 'BLOCKED' });
+    assert.deepEqual(blockedReport(loadWorkflow(ctx, 'FWD-T2')).non_passing_gates.map((g: any) => g.gate).sort(), ['G1', 'G2']);
   });
 });
 
@@ -318,7 +395,7 @@ describe('S2-7. unauthorized Java generation', () => {
     assert.throws(() => prepare(loadWorkflow(ctx, 'FWD-T2'), 'F5'), /may only be dispatched in STORIES_DRAFTED/);
     const wf = loadWorkflow(ctx, 'FWD-T2');
     const roots = policyRoots(wf.run, wf.state);
-    assert.equal(roots.generationAuthorized, false, 'G3 has not passed');
+    assert.equal(roots.generationAuthorized, false, 'G2 has not passed');
     const d = canWrite(findAgent('F5')!, path.join(ctx.repoRoot, 'java-target', 'src', 'main', 'java', 'App.java'), roots);
     assert.equal(d.allowed, false);
     assert.match(d.reason, /not authorised/);
@@ -525,13 +602,13 @@ describe('S2-15. Step 1 CLI preserved', () => {
     const st = JSON.parse(out[out.length - 1]);
     assert.equal(st.state, 'BASELINE_LOADED');
     assert.equal(st.prechecks.EVIDENCE, 'PASS');
-    assert.deepEqual(Object.keys(st.gates), ['G2', 'G3']);
+    assert.deepEqual(Object.keys(st.gates), ['G1', 'G2']);
     assert.equal(main(['workflow', 'resume', '--run', 'FWD-T2B', '--config', ctx.configPath], o, o), EXIT.OK);
     assert.equal(main(['workflow', 'bogus', '--config', ctx.configPath], o, o), 2);
   });
 });
 
-describe('S2-16. testing and completion need passing results (no human gate after G3)', () => {
+describe('S2-16. testing and completion need passing results (no human gate after G2)', () => {
   const ok = { contract: 'forward/verification-report', record_type: 'junit_results', test_runs: [{ command: 'mvn test', exit_code: 0, tests: 12, failures: 0, errors: 0, skipped: 0, executed_at: '2026-11-08T10:00:00Z' }], equivalence: [] };
   const eqOk = { contract: 'forward/verification-report', record_type: 'equivalence_assessment', test_runs: [], equivalence: [{ requirement_id: 'REQ-0001', status: 'EQUIVALENCE_UNVERIFIED', compared_aspects: [], reference_evidence: [], differences: [] }] };
   const recommend = (yes: boolean, blocking = false) => ({ contract: 'forward/review-report', record_type: 'acceptance_recommendation', findings: blocking ? [{ review_finding_id: 'RF-0001', blocking: true }] : [], recommendation: { recommend_acceptance: yes, reasons: [yes ? 'all requirements traced' : 'numeric rounding differs'], decided_by: 'workflow_completion_after_review' } });

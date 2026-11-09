@@ -2,7 +2,7 @@
  * Workflow state machine. Every allowed transition names the evidence the
  * runtime requires (a pre-check or gate PASS on the current baseline, an
  * accepted agent receipt, or nothing for moves into BLOCKED/FAILED). The only
- * gates are the human approvals G2 (requirements) and G3 (architecture); the
+ * gates are the human approvals G1 (requirements) and G2 (architecture); the
  * baseline and evidence pre-checks guard the start of the workflow, and the
  * run completes when F7's review receipt is accepted. No transition can be
  * triggered by an agent's own assertion: guards are evaluated by the runtime
@@ -58,9 +58,9 @@ export const TRANSITIONS: Transition[] = [
   T(INITIAL, 'BASELINE_LOADED', precheck('BASELINE')),
   T('BASELINE_LOADED', 'EVIDENCE_VALIDATED', precheck('EVIDENCE')),
   T('EVIDENCE_VALIDATED', 'REQUIREMENTS_DRAFTED', receipt('F1')),
-  T('REQUIREMENTS_DRAFTED', 'REQUIREMENTS_APPROVED', gate('G2')),
+  T('REQUIREMENTS_DRAFTED', 'REQUIREMENTS_APPROVED', gate('G1')),
   T('REQUIREMENTS_APPROVED', 'ARCHITECTURE_DRAFTED', receipt('F3')),
-  T('ARCHITECTURE_DRAFTED', 'ARCHITECTURE_APPROVED', gate('G3')),
+  T('ARCHITECTURE_DRAFTED', 'ARCHITECTURE_APPROVED', gate('G2')),
   T('ARCHITECTURE_DRAFTED', 'REQUIREMENTS_DRAFTED', receipt('F1')),
   T('ARCHITECTURE_APPROVED', 'STORIES_DRAFTED', receipt('F4')),
   T('STORIES_DRAFTED', 'ARCHITECTURE_DRAFTED', receipt('F3')),

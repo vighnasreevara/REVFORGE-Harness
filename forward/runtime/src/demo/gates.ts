@@ -4,8 +4,8 @@
  *
  * A self-contained run of the nine forward steps on one small, committed,
  * synthetic COBOL program (forward/demo/gates/synthetic): two automated
- * pre-checks (BASELINE, EVIDENCE), the two human gates G2 (requirements) and
- * G3 (architecture), each with a signed demo approval, and five automated
+ * pre-checks (BASELINE, EVIDENCE), the two human gates G1 (requirements) and
+ * G2 (architecture), each with a signed demo approval, and five automated
  * steps (STORIES, BUILD, VERIFY, REVIEW, COMPLETE). Every step result is
  * computed from checks executed in this run; a step never PASSes without
  * evaluating its checks.
@@ -44,12 +44,12 @@ import { DemoOrder, expectedResult, generateCases, OracleCase } from './oracle';
 import { DEMO_ENV, DEMO_ROLES, DEMO_SIGNER, EphemeralAuthority, SIGNER_STATEMENT, statementText, verifyDemoSignature } from './signing';
 
 export { DEMO_ENV };
-export type DemoStepId = 'BASELINE' | 'EVIDENCE' | 'G2' | 'G3' | 'STORIES' | 'BUILD' | 'VERIFY' | 'REVIEW' | 'COMPLETE';
+export type DemoStepId = 'BASELINE' | 'EVIDENCE' | 'G1' | 'G2' | 'STORIES' | 'BUILD' | 'VERIFY' | 'REVIEW' | 'COMPLETE';
 export type DemoStepKind = 'precheck' | 'gate' | 'automated';
 export type DemoStatus = 'PASS' | 'FAIL' | 'BLOCKED' | 'NOT_RUN';
-export const DEMO_STEPS: DemoStepId[] = ['BASELINE', 'EVIDENCE', 'G2', 'G3', 'STORIES', 'BUILD', 'VERIFY', 'REVIEW', 'COMPLETE'];
+export const DEMO_STEPS: DemoStepId[] = ['BASELINE', 'EVIDENCE', 'G1', 'G2', 'STORIES', 'BUILD', 'VERIFY', 'REVIEW', 'COMPLETE'];
 /** The only human gates, each needing a signed (demo) approval. */
-export const DEMO_GATES = ['G2', 'G3'] as const;
+export const DEMO_GATES = ['G1', 'G2'] as const;
 export type ApprovalGate = (typeof DEMO_GATES)[number];
 
 export const IMPLEMENTER: string = 'deterministic-local-converter';
@@ -60,9 +60,9 @@ const ORACLE_SEEDED_CASES = 240;
 export const STEP_SPECS: Record<DemoStepId, { name: string; kind: DemoStepKind; prerequisite: DemoStepId | null; responsibility: string; approval_evidence: string }> = {
   BASELINE: { name: 'Baseline pre-check', kind: 'precheck', prerequisite: null, responsibility: 'runtime: deterministic integrity checks of the synthetic baseline', approval_evidence: 'none (automatic check)' },
   EVIDENCE: { name: 'Evidence pre-check', kind: 'precheck', prerequisite: 'BASELINE', responsibility: 'runtime: re-parses the synthetic COBOL and verifies the synthetic reverse evidence (reverse agents 1-5 analogue)', approval_evidence: 'none (automatic check)' },
-  G2: { name: 'Requirements Approval', kind: 'gate', prerequisite: 'EVIDENCE', responsibility: 'synthetic F1 requirements and F2 data contract; approved by the synthetic demo authority', approval_evidence: `Ed25519 demo approval, role ${DEMO_ROLES.G2}` },
-  G3: { name: 'Architecture Approval', kind: 'gate', prerequisite: 'G2', responsibility: 'synthetic F3 architecture; approved by the synthetic demo authority', approval_evidence: `Ed25519 demo approval, role ${DEMO_ROLES.G3}` },
-  STORIES: { name: 'Story validation', kind: 'automated', prerequisite: 'G3', responsibility: 'runtime: synthetic F4 stories and acceptance criteria checked against the approved requirements and architecture', approval_evidence: 'none (automatic check; there is no story approval gate)' },
+  G1: { name: 'Requirements Approval', kind: 'gate', prerequisite: 'EVIDENCE', responsibility: 'synthetic F1 requirements and F2 data contract; approved by the synthetic demo authority', approval_evidence: `Ed25519 demo approval, role ${DEMO_ROLES.G1}` },
+  G2: { name: 'Architecture Approval', kind: 'gate', prerequisite: 'G1', responsibility: 'synthetic F3 architecture; approved by the synthetic demo authority', approval_evidence: `Ed25519 demo approval, role ${DEMO_ROLES.G2}` },
+  STORIES: { name: 'Story validation', kind: 'automated', prerequisite: 'G2', responsibility: 'runtime: synthetic F4 stories and acceptance criteria checked against the approved requirements and architecture', approval_evidence: 'none (automatic check; there is no story approval gate)' },
   BUILD: { name: 'Java build and tests', kind: 'automated', prerequisite: 'STORIES', responsibility: 'deterministic local converter (F5 analogue, no AI agent); javac -Werror; TestMain functional and boundary scenarios', approval_evidence: 'none (executed build and test evidence)' },
   VERIFY: { name: 'Independent verification', kind: 'automated', prerequisite: 'BUILD', responsibility: 'independent specification oracle (F6 analogue) written from the requirements only', approval_evidence: 'none (executed comparison evidence)' },
   REVIEW: { name: 'Independent review', kind: 'automated', prerequisite: 'VERIFY', responsibility: `independent review checks (F7 analogue) by ${REVIEWER}`, approval_evidence: 'none (structured review result)' },
@@ -253,7 +253,7 @@ function programStatements(prog: AppProgram): Array<{ line: number; paragraph: s
 const approvalFile = (run: DemoRun, g: ApprovalGate) => path.join(run.outDir, 'approvals', `${g}.approval.json`);
 
 function approvalSubject(run: DemoRun, g: ApprovalGate): { kind: string; path: string; sha256: string } {
-  if (g === 'G2') {
+  if (g === 'G1') {
     const r = shaFile(inp(run, 'requirements')) ?? '';
     const d = shaFile(inp(run, 'dataContract')) ?? '';
     return { kind: 'requirements_package', path: `${P.requirements} + ${P.dataContract}`, sha256: digest({ requirements: r, data_contract: d }) };
@@ -385,7 +385,7 @@ function evidenceCheck(run: DemoRun): Outcome {
   return { checks, evidence: [{ path: P.reverse, sha256: shaFile(inp(run, 'reverse'))!, role: 'synthetic reverse evidence (input)' }], details: { paragraphs: rev.paragraphs.length, statements: rev.statements.length, fields: rev.fields.length, business_rules: rev.business_rules.length } };
 }
 
-function gateG2(run: DemoRun): Outcome {
+function gateG1(run: DemoRun): Outcome {
   const checks: Check[] = [];
   const rev = readJson(inp(run, 'reverse'));
   const req = loadInput(run, 'requirements', 'demo/requirements', checks);
@@ -408,17 +408,17 @@ function gateG2(run: DemoRun): Outcome {
     const extra = dc.fields.filter((f: any) => !lfields.some((it) => it.name === f.name)).map((f: any) => f.name);
     checks.push(check('data_contract_matches_source', !!linkage && dc.record.length === linkage.size && dc.record.name === linkage.name && !mism.length && !extra.length, linkage ? `${dc.record.name} ${dc.record.length} bytes vs parsed ${linkage.name} ${linkage.size} bytes; ${lfields.length} interface fields${mism.length || extra.length ? `; differ: ${[...mism, ...extra].join(', ')}` : ' match name, offset and length'}` : 'no LINKAGE record in the source'));
   }
-  const a = verifyApproval(run, 'G2');
+  const a = verifyApproval(run, 'G1');
   checks.push(...a.checks);
   return { checks, evidence: [{ path: P.requirements, sha256: shaFile(inp(run, 'requirements')) ?? '0'.repeat(64), role: 'requirements (input)' }, { path: P.dataContract, sha256: shaFile(inp(run, 'dataContract')) ?? '0'.repeat(64), role: 'data contract (input)' }, ...a.evidence], details: req ? { requirements: req.requirements.length, examples: req.examples.length, uncertainties: req.uncertainties.length } : {} };
 }
 
-function gateG3(run: DemoRun): Outcome {
+function gateG2(run: DemoRun): Outcome {
   const checks: Check[] = [];
   const arch = loadInput(run, 'architecture', 'demo/architecture', checks);
   const req = readJson(inp(run, 'requirements'));
   if (arch) {
-    checks.push(check('references_accepted_requirements', arch.requirements_ref.sha256 === shaFile(inp(run, 'requirements')) && arch.data_contract_ref.sha256 === shaFile(inp(run, 'dataContract')), `requirements ${arch.requirements_ref.sha256.slice(0, 12)}…, data contract ${arch.data_contract_ref.sha256.slice(0, 12)}… (must equal the G2-approved content)`));
+    checks.push(check('references_accepted_requirements', arch.requirements_ref.sha256 === shaFile(inp(run, 'requirements')) && arch.data_contract_ref.sha256 === shaFile(inp(run, 'dataContract')), `requirements ${arch.requirements_ref.sha256.slice(0, 12)}…, data contract ${arch.data_contract_ref.sha256.slice(0, 12)}… (must equal the G1-approved content)`));
     const reqIds = new Set<string>(req.requirements.map((q: any) => q.requirement_id));
     const unmapped = [...reqIds].filter((r) => !arch.components.some((c: any) => c.requirement_ids.includes(r)));
     const unknown = arch.components.flatMap((c: any) => c.requirement_ids).concat(arch.decisions.flatMap((d: any) => d.requirement_ids)).filter((r: string) => !reqIds.has(r));
@@ -428,7 +428,7 @@ function gateG3(run: DemoRun): Outcome {
     checks.push(check('dependencies_documented', arch.dependencies.length > 0 && !badDeps.length, badDeps.length ? `dependencies naming unknown components: ${badDeps.map((d: any) => `${d.from}->${d.to}`).join(', ')}` : `${arch.dependencies.length} component dependencies, all resolvable`));
     checks.push(check('decisions_documented', arch.decisions.length > 0 && arch.decisions.every((d: any) => d.requirement_ids.length > 0), `${arch.decisions.length} architecture decisions, each tied to requirements`));
   }
-  const a = verifyApproval(run, 'G3');
+  const a = verifyApproval(run, 'G2');
   checks.push(...a.checks);
   return { checks, evidence: [{ path: P.architecture, sha256: shaFile(inp(run, 'architecture')) ?? '0'.repeat(64), role: 'architecture (input)' }, ...a.evidence], details: arch ? { components: arch.components.length, decisions: arch.decisions.length } : {} };
 }
@@ -707,7 +707,7 @@ function completion(run: DemoRun): Outcome {
   const review = fs.existsSync(reviewFile) ? readJson(reviewFile) : null;
   const critical = (review?.findings ?? []).filter((f: any) => f.blocking || f.severity === 'critical');
   const approvals = fs.existsSync(path.join(run.outDir, 'approvals')) ? fs.readdirSync(path.join(run.outDir, 'approvals')).sort() : [];
-  checks.push(check('approvals_g2_g3_only', approvals.join() === 'G2.approval.json,G3.approval.json', `signed demo approvals: ${approvals.join(', ') || 'none'} (the only human gates are G2 and G3; completion needs no human acceptance)`));
+  checks.push(check('approvals_g1_g2_only', approvals.join() === 'G1.approval.json,G2.approval.json', `signed demo approvals: ${approvals.join(', ') || 'none'} (the only human gates are G1 and G2; completion needs no human acceptance)`));
   const granted = ev.length === 0 || [...earlier.map((g) => (fs.existsSync(resultFile(run, g)) ? readJson(resultFile(run, g)).production_authorization : null)), review?.production_authorization].some((x) => x !== 'NOT_GRANTED');
   checks.push(check('production_not_granted', !granted, granted ? 'a step result or the review grants or omits production_authorization' : 'every step result and the review say production_authorization NOT_GRANTED'));
   checks.push(check('no_unresolved_critical_findings', !!review && review.decision === 'PASS' && !critical.length, review ? `review decision ${review.decision}; ${critical.length} unresolved critical finding(s)` : 'no review result'));
@@ -715,7 +715,7 @@ function completion(run: DemoRun): Outcome {
   return { checks, evidence: review ? [{ path: rel(run, reviewFile), sha256: shaFile(reviewFile)!, role: 'structured review result' }] : [], details: { completion: ok ? 'SYNTHETIC_DEMO_COMPLETED' : 'NOT_COMPLETED', meaning: 'Completed automatically after the independent review of the synthetic example. Not business-owner, production or real-project acceptance.' } };
 }
 
-const EVALUATORS: Record<DemoStepId, (run: DemoRun) => Outcome> = { BASELINE: baselineCheck, EVIDENCE: evidenceCheck, G2: gateG2, G3: gateG3, STORIES: storyValidation, BUILD: buildAndTest, VERIFY: independentVerification, REVIEW: independentReview, COMPLETE: completion };
+const EVALUATORS: Record<DemoStepId, (run: DemoRun) => Outcome> = { BASELINE: baselineCheck, EVIDENCE: evidenceCheck, G1: gateG1, G2: gateG2, STORIES: storyValidation, BUILD: buildAndTest, VERIFY: independentVerification, REVIEW: independentReview, COMPLETE: completion };
 
 /** Evaluates one demo step (BLOCKED unless its prerequisite has a verified PASS) and persists the result. */
 export function evaluateDemoStep(run: DemoRun, step: DemoStepId): any {
@@ -775,8 +775,8 @@ export function evaluateDemoStep(run: DemoRun, step: DemoStepId): any {
 /* ------------------------------------------------------------------ */
 
 const STAGE_INPUT: Record<string, { step: DemoStepId; activity: string; input: keyof typeof P | null }> = {
-  'BMAD-PRD': { step: 'G2', activity: 'requirements (F1) -> PRD rendering of the approved requirements', input: 'requirements' },
-  'BMAD-ARCH': { step: 'G3', activity: 'architecture (F3)', input: 'architecture' },
+  'BMAD-PRD': { step: 'G1', activity: 'requirements (F1) -> PRD rendering of the approved requirements', input: 'requirements' },
+  'BMAD-ARCH': { step: 'G2', activity: 'architecture (F3)', input: 'architecture' },
   'BMAD-EPICS': { step: 'STORIES', activity: 'epics and stories (F4)', input: 'plan' },
   'BMAD-SPRINT': { step: 'STORIES', activity: 'sprint planning (F4)', input: 'plan' },
   'BMAD-BUILD': { step: 'BUILD', activity: 'implementation (F5; here the deterministic converter)', input: null },
@@ -885,7 +885,7 @@ export const LIMITATIONS = [
   'production_authorization is NOT_GRANTED: no real gate, approval, receipt or Java generation authorisation was created or changed.',
   'BMad lifecycle steps are SIMULATED; no BMad workflow was executed and real mandatory BMad execution remains blocked.',
   'VERIFY compares the Java with an independent specification oracle; no COBOL runtime was executed, so legacy equivalence is NOT_ESTABLISHED.',
-  'The real modernization is unchanged: real G2 is UNVERIFIED and G3 BLOCKED, the gap register stays OPEN, and the project is not production ready.',
+  'The real modernization is unchanged: real G1 is UNVERIFIED and G2 BLOCKED, the gap register stays OPEN, and the project is not production ready.',
 ];
 
 export function runDemo(o: DemoOptions): { summary: any; run: DemoRun; exitCode: number } {
@@ -897,7 +897,7 @@ export function runDemo(o: DemoOptions): { summary: any; run: DemoRun; exitCode:
       statuses[g] = { step: g, kind: STEP_SPECS[g].kind, name: STEP_SPECS[g].name, demo_status: 'NOT_RUN', reason: `not run: ${stopped} did not pass`, result: null };
       continue;
     }
-    if (g === 'G2' || g === 'G3') requestApproval(run, g);
+    if (g === 'G1' || g === 'G2') requestApproval(run, g);
     const r = evaluateDemoStep(run, g);
     statuses[g] = { step: g, kind: r.kind, name: r.name, demo_status: r.demo_status, reason: r.reason, result: rel(run, resultFile(run, g)), checks_passed: r.checks.filter((c: Check) => c.ok).length, checks_total: r.checks.length };
     if (r.demo_status !== 'PASS') stopped = g;
@@ -941,7 +941,7 @@ const cell = (s: unknown) => String(s ?? '').replace(/\|/g, '\\|').replace(/\r?\
 export function renderReport(run: DemoRun, s: any): string {
   const L: string[] = [];
   const result = (g: DemoStepId) => (fs.existsSync(resultFile(run, g)) ? readJson(resultFile(run, g)) : null);
-  L.push('# Synthetic two-gate (G2, G3) workflow demonstration report', '');
+  L.push('# Synthetic two-gate (G1, G2) workflow demonstration report', '');
   L.push(`> **Environment: ${DEMO_ENV}.** This report is about one synthetic example program. It grants no production authorisation, records no real approval and executes no BMad workflow. The real modernization status is listed at the end and is unchanged.`, '');
   L.push(`**Verdict: ${s.verdict}**${s.stopped_at ? ` (stopped at ${s.stopped_at})` : ''}`, '');
   L.push('| Field | Value |', '|---|---|');
@@ -950,7 +950,7 @@ export function renderReport(run: DemoRun, s: any): string {
   L.push('## Baseline', '', '| File | SHA-256 |', '|---|---|', `| \`${s.baseline.source.path}\` (synthetic COBOL) | \`${s.baseline.source.sha256}\` |`);
   for (const i of s.baseline.inputs) L.push(`| \`${i.path}\` (${i.role}) | \`${i.sha256}\` |`);
   L.push(`| \`${s.baseline.file}\` | \`${s.baseline.sha256}\` |`, '');
-  L.push('## Step results', '', 'Only **G2** and **G3** are gates (human decisions with a signed demo approval). BASELINE and EVIDENCE are automated pre-checks; STORIES, BUILD, VERIFY, REVIEW and COMPLETE are automated steps.', '');
+  L.push('## Step results', '', 'Only **G1** and **G2** are gates (human decisions with a signed demo approval). BASELINE and EVIDENCE are automated pre-checks; STORIES, BUILD, VERIFY, REVIEW and COMPLETE are automated steps.', '');
   L.push('| Step | Kind | Result | Checks | Responsibility | Approval evidence |', '|---|---|---|---|---|---|');
   for (const g of s.steps) {
     const spec = STEP_SPECS[g.step as DemoStepId];
@@ -988,7 +988,7 @@ export function renderReport(run: DemoRun, s: any): string {
   L.push('## Real project status (read-only, unchanged)', '', '| Item | Value |', '|---|---|');
   const rp = s.real_project_status;
   L.push(`| generation.java_generation_allowed | ${rp.generation_java_generation_allowed} |`, `| bmad_governance.mandatory | ${rp.bmad_governance_mandatory} |`, `| approval.trust_store | ${rp.approval_trust_store ?? 'null (not configured)'} |`);
-  L.push(`| Real workflow gates (G2, G3) | ${cell(typeof rp.real_workflow_gates === 'string' ? rp.real_workflow_gates : Object.entries(rp.real_workflow_gates).map(([k, v]) => `${k} ${v}`).join(', '))} |`);
+  L.push(`| Real workflow gates (G1, G2) | ${cell(typeof rp.real_workflow_gates === 'string' ? rp.real_workflow_gates : Object.entries(rp.real_workflow_gates).map(([k, v]) => `${k} ${v}`).join(', '))} |`);
   L.push(`| Master gap register | ${cell(typeof rp.gap_register === 'object' ? `${rp.gap_register.records} records, ${rp.gap_register.open} OPEN` : rp.gap_register)} |`, `| Business-rule identities | ${rp.business_rule_identities} |`);
   L.push(`| Real BMad execution | ${rp.real_bmad_execution} |`, `| Legacy equivalence | ${rp.legacy_equivalence} |`, `| Production readiness | ${rp.production_readiness} |`, `| Engineering quality gates | ${cell(rp.engineering_quality_gates)} |`, '');
   L.push('## Limitations', '', ...s.limitations.map((x: string) => `- ${x}`), '');

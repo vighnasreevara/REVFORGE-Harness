@@ -1,5 +1,5 @@
 /**
- * Recorded semantic-dependency findings (STEP 12). The G2 snapshot computes
+ * Recorded semantic-dependency findings (STEP 12). The G1 snapshot computes
  * semantic dependency edges live, and fails closed whether or not anything is
  * recorded. These records make each newly found edge reviewable and auditable.
  *
@@ -74,7 +74,7 @@ export function recordSemanticFindings(wf: Workflow, report: any): Array<{ findi
         item_sha256: r.item_sha256,
         content_sha256: content,
         result: r,
-        effect: 'the G2 snapshot links the item to the listed blocking decisions (computed live, fail-closed); no decision is resolved and no earlier record is changed',
+        effect: 'the G1 snapshot links the item to the listed blocking decisions (computed live, fail-closed); no decision is resolved and no earlier record is changed',
       };
       const v = wf.run.ctx.contracts.validate('verification/semantic-dependency', rec);
       if (!v.valid) throw new Error(`semantic dependency finding violates its contract: ${v.errors.join('; ')}`);

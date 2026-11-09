@@ -1,14 +1,14 @@
-/** Plain-English rendering of a G2 review package (STEP 10). */
+/** Plain-English rendering of a G1 review package (STEP 10). */
 export function renderPackage(p: any): string {
   const L: string[] = [];
   L.push(`# Review package: ${p.scope}`, '');
   L.push(`**Status: ${p.status}.** This package is complete for review; it is not an approval.`, '');
-  L.push(`- Scope digest: \`${p.scope_sha256}\``, `- Source baseline: \`${p.baseline_manifest_sha256}\``, `- Readiness: **${p.readiness}** (${p.blocking_findings.length} blocking finding(s))`, `- G2: **${p.g2.status}**`, `- Trust: **${p.trust.status}**${p.trust.uncovered.length ? ` (no signer for ${p.trust.uncovered.join(', ')})` : ''}`, '');
+  L.push(`- Scope digest: \`${p.scope_sha256}\``, `- Source baseline: \`${p.baseline_manifest_sha256}\``, `- Readiness: **${p.readiness}** (${p.blocking_findings.length} blocking finding(s))`, `- G1: **${p.g2.status}**`, `- Trust: **${p.trust.status}**${p.trust.uncovered.length ? ` (no signer for ${p.trust.uncovered.join(', ')})` : ''}`, '');
   L.push('## Units in scope', '', '| Unit | Kind | Relation | Source sha256 |', '|---|---|---|---|');
   for (const u of p.units) L.push(`| ${u.name} | ${u.unit_kind} | ${u.relation} | \`${String(u.source_sha256).slice(0, 16)}…\` |`);
   L.push('', '## Requirements and their evidence', '');
   L.push('Each layer is separate: finding source evidence is not verification, verification is not acceptance, and acceptance is not approval.', '');
-  L.push('| Requirement | G2 outcome | Earlier check | Dependency-aware check | Evidence found | Verified | Accepted by reviewer | Decision resolved |', '|---|---|---|---|---|---|---|---|');
+  L.push('| Requirement | G1 outcome | Earlier check | Dependency-aware check | Evidence found | Verified | Accepted by reviewer | Decision resolved |', '|---|---|---|---|---|---|---|---|');
   for (const r of p.requirements) L.push(`| ${r.id} | ${r.g2_outcome}${r.blocking ? ' (blocking)' : ''} | ${r.earlier_claim_check ?? '-'} | ${r.context_status} | ${r.layers.source_evidence_found ? 'yes' : 'no'} | ${r.layers.deterministically_verified ? 'yes' : 'no'} | ${r.layers.accepted_by_authorised_reviewer ? 'yes' : 'no'} | ${r.layers.human_decision_resolved ? 'yes' : 'no'} |`);
   L.push('');
   for (const r of p.requirements) {
@@ -44,9 +44,9 @@ export function renderPackage(p: any): string {
     L.push('', '**Stale earlier requests (must not be signed or reused):**', '');
     for (const s of stale) L.push(`- ${s.decision_id} \`${s.request_id ?? '(no request id)'}\` in \`${s.file.replace(/\\/g, '/').split('/forward/')[1] ?? s.file}\`: ${s.reasons.join('; ')}`);
   }
-  L.push('', '## What G2 READY needs', '');
+  L.push('', '## What G1 READY needs', '');
   for (const c of p.ready_conditions) L.push(`- ${c}`);
-  L.push('', '## What G2 PASS needs', '');
+  L.push('', '## What G1 PASS needs', '');
   for (const c of p.pass_conditions) L.push(`- ${c}`);
   L.push('');
   return L.join('\n');

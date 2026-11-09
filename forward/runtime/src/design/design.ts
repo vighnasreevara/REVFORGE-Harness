@@ -1,8 +1,8 @@
 /**
  * Design artefacts under human approval (STEP 7): the F3 architecture set
- * (G3) and the F4 story set (validated automatically before F5). This module derives, from the runtime's own
+ * (G2) and the F4 story set (validated automatically before F5). This module derives, from the runtime's own
  * records only:
- *   - the G2-approved scope context (re-verified G2 approval, approved
+ *   - the G1-approved scope context (re-verified G1 approval, approved
  *     requirements and their content hash, the dependency manifest);
  *   - the artefact set an agent actually delivered (latest accepted,
  *     completed receipt; files re-hashed);
@@ -15,7 +15,7 @@
 import * as fs from 'fs';
 import * as path from 'path';
 import { digest } from '../approval/canonical';
-import { evaluateG2Gate } from '../approval/approvals';
+import { evaluateG1Gate } from '../approval/approvals';
 import { ScopeEvaluation } from '../approval/scope';
 import { Snapshot } from '../approval/snapshot';
 import { readJson, sha256File } from '../core/fsutil';
@@ -34,7 +34,7 @@ export type Concern = (typeof CONCERNS)[number];
 const USABLE = new Set(['VERIFIED', 'APPROVED_EXCEPTION']);
 
 /* ------------------------------------------------------------------ */
-/* approved scope (G2)                                                 */
+/* approved scope (G1)                                                 */
 /* ------------------------------------------------------------------ */
 
 export interface ApprovedRequirement {
@@ -64,13 +64,13 @@ export interface ApprovedScope {
   dependency: { units: any[]; data_contracts: any[]; runtime_requirements: any[]; decisions: any[] } | null;
 }
 
-/** The scope G2 approves right now (approval re-verified against current content), or why there is none. */
+/** The scope G1 approves right now (approval re-verified against current content), or why there is none. */
 export function approvedScope(wf: Workflow, snap: Snapshot): ApprovedScope {
-  const g2 = evaluateG2Gate(wf, snap.at);
+  const g2 = evaluateG1Gate(wf, snap.at);
   const none = (reason: string): ApprovedScope => ({ ok: false, reason, g2_status: g2.result.status, approval_id: null, approval_sha256: null, scope: null, scope_sha256: null, ev: null, rec: null, requirements: [], requirements_sha256: null, runtime_ids: [], data_record_ids: [], scope_file_ids: [], dependency: null });
-  if (g2.result.status !== 'PASS' || !g2.evaluation) return none(`G2 re-evaluated now: ${g2.result.status} — ${g2.result.reason}`);
+  if (g2.result.status !== 'PASS' || !g2.evaluation) return none(`G1 re-evaluated now: ${g2.result.status} — ${g2.result.reason}`);
   const chosen = (g2.evaluation.approvals as any[]).filter((a) => a.valid && a.decision === 'approved').pop();
-  if (!chosen) return none('G2 has no valid signed approval');
+  if (!chosen) return none('G1 has no valid signed approval');
   const ev = g2.evaluation as ScopeEvaluation;
   const rec = reconcileScope(snap, ev.selector_text, ev);
   const reqs: ApprovedRequirement[] = ev.findings
@@ -89,7 +89,7 @@ export function approvedScope(wf: Workflow, snap: Snapshot): ApprovedScope {
   };
   return {
     ok: true,
-    reason: `G2 PASS for ${ev.selector_text} (${chosen.approval_id})`,
+    reason: `G1 PASS for ${ev.selector_text} (${chosen.approval_id})`,
     g2_status: 'PASS',
     approval_id: chosen.approval_id,
     approval_sha256: sha256File(wf.store.p('approvals', `${chosen.approval_id}.json`)),
@@ -234,7 +234,7 @@ export function validateArchitecture(wf: Workflow, snap: Snapshot, s: ApprovedSc
     return res;
   }
   const bound = docs.length > 0 && docs.every((d: any) => d.approved_inputs?.requirements_approval === s.approval_id);
-  add('requirements_approval_bound', bound, bound ? `designed for the current G2 approval ${s.approval_id} (${s.scope})` : `architecture names requirements approval ${[...new Set(docs.map((d: any) => d.approved_inputs?.requirements_approval))].join(', ') || 'none'}, current is ${s.approval_id}`);
+  add('requirements_approval_bound', bound, bound ? `designed for the current G1 approval ${s.approval_id} (${s.scope})` : `architecture names requirements approval ${[...new Set(docs.map((d: any) => d.approved_inputs?.requirements_approval))].join(', ') || 'none'}, current is ${s.approval_id}`);
 
   for (const d of docs) for (const c of d.components ?? []) res.components.set(c.component_id, c);
   for (const d of docs) for (const x of d.adrs ?? []) res.adrs.set(x.adr_id, x);
@@ -320,7 +320,7 @@ export function validateStories(wf: Workflow, snap: Snapshot, s: ApprovedScope, 
     return res;
   }
   const bound = docs.length > 0 && docs.every((d: any) => d.approval_baseline?.requirements_gate_result === s.approval_id && d.approval_baseline?.architecture_gate_result === arch.approval_id);
-  add('approvals_bound', bound && !!arch.approval_id, bound && arch.approval_id ? `planned against ${s.approval_id} and ${arch.approval_id}` : `stories name ${[...new Set(docs.map((d: any) => `${d.approval_baseline?.requirements_gate_result}/${d.approval_baseline?.architecture_gate_result}`))].join(', ')}, current approvals are ${s.approval_id}/${arch.approval_id ?? 'none (G3 not passed)'}`);
+  add('approvals_bound', bound && !!arch.approval_id, bound && arch.approval_id ? `planned against ${s.approval_id} and ${arch.approval_id}` : `stories name ${[...new Set(docs.map((d: any) => `${d.approval_baseline?.requirements_gate_result}/${d.approval_baseline?.architecture_gate_result}`))].join(', ')}, current approvals are ${s.approval_id}/${arch.approval_id ?? 'none (G2 not passed)'}`);
   // Each story ID is one story; duplicates across documents are rejected.
   const stories = new Map<string, any>();
   const dup: string[] = [];

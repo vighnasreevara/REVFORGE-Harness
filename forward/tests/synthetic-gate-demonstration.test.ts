@@ -1,10 +1,10 @@
 /**
  * Synthetic two-gate workflow demonstration (environment SYNTHETIC_INTERVIEW_DEMO).
  *
- * Happy path: all nine demo steps (two pre-checks, the human gates G2 and G3,
+ * Happy path: all nine demo steps (two pre-checks, the human gates G1 and G2,
  * five automated steps) pass on the committed synthetic inputs, with
  * real Java 21 compilation and test execution, an independent oracle, demo
- * approvals for G2 and G3 only, signed with an ephemeral key, and the real
+ * approvals for G1 and G2 only, signed with an ephemeral key, and the real
  * project left unchanged.
  *
  * Negative paths: each test injects one defect (into a temporary copy of the
@@ -77,18 +77,18 @@ const mutateJava = (from: RegExp, to: string): DemoHooks => ({
 });
 
 describe('synthetic two-gate demonstration: happy path', () => {
-  test('the two gates G2 and G3 and every automated step pass with executed checks, and nothing real changes', { skip: NO_JDK }, () => {
+  test('the two gates G1 and G2 and every automated step pass with executed checks, and nothing real changes', { skip: NO_JDK }, () => {
     const configBefore = sha(ctx.configPath);
     const res = runDemo({ ctx, outDir: outDir() });
     const s = res.summary;
     assert.equal(res.exitCode, 0, JSON.stringify(s.steps.filter((g: any) => g.demo_status !== 'PASS')));
-    assert.deepEqual(Object.keys(statuses(s)), ['BASELINE', 'EVIDENCE', 'G2', 'G3', 'STORIES', 'BUILD', 'VERIFY', 'REVIEW', 'COMPLETE']);
+    assert.deepEqual(Object.keys(statuses(s)), ['BASELINE', 'EVIDENCE', 'G1', 'G2', 'STORIES', 'BUILD', 'VERIFY', 'REVIEW', 'COMPLETE']);
     assert.deepEqual(Object.values(statuses(s)), Array(9).fill('PASS'));
     assert.equal(s.verdict, 'SYNTHETIC_DEMO_COMPLETED');
-    // Only G2 and G3 are gates, and they are the only signed approvals.
-    assert.deepEqual([...DEMO_GATES], ['G2', 'G3']);
-    assert.deepEqual(DEMO_STEPS.filter((g) => STEP_SPECS[g].kind === 'gate'), ['G2', 'G3']);
-    assert.deepEqual(fs.readdirSync(path.join(res.run.outDir, 'approvals')).sort(), ['G2.approval.json', 'G3.approval.json']);
+    // Only G1 and G2 are gates, and they are the only signed approvals.
+    assert.deepEqual([...DEMO_GATES], ['G1', 'G2']);
+    assert.deepEqual(DEMO_STEPS.filter((g) => STEP_SPECS[g].kind === 'gate'), ['G1', 'G2']);
+    assert.deepEqual(fs.readdirSync(path.join(res.run.outDir, 'approvals')).sort(), ['G1.approval.json', 'G2.approval.json']);
     assert.equal(s.environment, 'SYNTHETIC_INTERVIEW_DEMO');
     assert.equal(s.production_authorization, 'NOT_GRANTED');
     assert.equal(s.real_bmad_execution, 'NOT_EXECUTED');
@@ -175,30 +175,30 @@ describe('synthetic two-gate demonstration: negative paths', () => {
     assert.ok(failedChecks(res.run, 'EVIDENCE').includes('statements_match_source'));
   });
 
-  test('G2: an invalid approval signature stops the run', () => {
+  test('G1: an invalid approval signature stops the run', () => {
     const hooks: DemoHooks = {
       approve: (g, u, sign) => {
         const r = sign(u);
-        if (g !== 'G2') return r;
+        if (g !== 'G1') return r;
         const b = Buffer.from(r.signature.value, 'base64');
         b[0] ^= 0xff;
         return { ...r, signature: { ...r.signature, value: b.toString('base64') } };
       },
     };
     const res = runDemo({ ctx, outDir: outDir(), hooks });
-    assertStoppedAt(res, 'G2');
-    assert.deepEqual(failedChecks(res.run, 'G2'), ['approval_signature']);
+    assertStoppedAt(res, 'G1');
+    assert.deepEqual(failedChecks(res.run, 'G1'), ['approval_signature']);
     assert.match(res.summary.steps[2].reason, /signature does not verify/);
   });
 
-  test('G2: an approval of different requirements content stops the run', () => {
-    const hooks: DemoHooks = { approve: (g, u, sign) => sign(g === 'G2' ? { ...u, subject: { ...u.subject, sha256: 'a'.repeat(64) } } : u) };
+  test('G1: an approval of different requirements content stops the run', () => {
+    const hooks: DemoHooks = { approve: (g, u, sign) => sign(g === 'G1' ? { ...u, subject: { ...u.subject, sha256: 'a'.repeat(64) } } : u) };
     const res = runDemo({ ctx, outDir: outDir(), hooks });
-    assertStoppedAt(res, 'G2');
-    assert.deepEqual(failedChecks(res.run, 'G2'), ['approval_subject_bound']);
+    assertStoppedAt(res, 'G1');
+    assert.deepEqual(failedChecks(res.run, 'G1'), ['approval_subject_bound']);
   });
 
-  test('G2: a demo trust store replaced during the run cannot introduce another key', () => {
+  test('G1: a demo trust store replaced during the run cannot introduce another key', () => {
     const intruder = new EphemeralAuthority();
     const hooks: DemoHooks = {
       afterStep: (g, run) => {
@@ -207,27 +207,27 @@ describe('synthetic two-gate demonstration: negative paths', () => {
       approve: (_g, u) => intruder.sign(u),
     };
     const res = runDemo({ ctx, outDir: outDir(), hooks });
-    assertStoppedAt(res, 'G2');
-    assert.deepEqual(failedChecks(res.run, 'G2'), ['approval_signature']);
+    assertStoppedAt(res, 'G1');
+    assert.deepEqual(failedChecks(res.run, 'G1'), ['approval_signature']);
     assert.match(res.summary.steps[2].reason, /replaced after the run started/);
   });
 
-  test('G2: an approval edited after signing stops the run', () => {
-    const res = runDemo({ ctx, outDir: outDir(), hooks: { approve: (g, u, sign) => (g === 'G2' ? { ...sign(u), signed_at: '2020-01-01T00:00:00.000Z' } : sign(u)) } });
-    assertStoppedAt(res, 'G2');
-    assert.deepEqual(failedChecks(res.run, 'G2'), ['approval_signature']);
+  test('G1: an approval edited after signing stops the run', () => {
+    const res = runDemo({ ctx, outDir: outDir(), hooks: { approve: (g, u, sign) => (g === 'G1' ? { ...sign(u), signed_at: '2020-01-01T00:00:00.000Z' } : sign(u)) } });
+    assertStoppedAt(res, 'G1');
+    assert.deepEqual(failedChecks(res.run, 'G1'), ['approval_signature']);
   });
 
-  test('G2: a validly signed approval bound to another demo run stops the run', () => {
-    const res = runDemo({ ctx, outDir: outDir(), hooks: { approve: (g, u, sign) => sign(g === 'G2' ? { ...u, binding: { ...u.binding, demo_run_id: 'DEMO-OTHER-RUN' } } : u) } });
-    assertStoppedAt(res, 'G2');
-    assert.deepEqual(failedChecks(res.run, 'G2'), ['approval_run_and_baseline_bound']);
+  test('G1: a validly signed approval bound to another demo run stops the run', () => {
+    const res = runDemo({ ctx, outDir: outDir(), hooks: { approve: (g, u, sign) => sign(g === 'G1' ? { ...u, binding: { ...u.binding, demo_run_id: 'DEMO-OTHER-RUN' } } : u) } });
+    assertStoppedAt(res, 'G1');
+    assert.deepEqual(failedChecks(res.run, 'G1'), ['approval_run_and_baseline_bound']);
   });
 
-  test('G3: a missing architecture approval stops the run', () => {
-    const res = runDemo({ ctx, outDir: outDir(), hooks: { approve: (g, u, sign) => (g === 'G3' ? null : sign(u)) } });
-    assertStoppedAt(res, 'G3');
-    assert.deepEqual(failedChecks(res.run, 'G3'), ['approval_present']);
+  test('G2: a missing architecture approval stops the run', () => {
+    const res = runDemo({ ctx, outDir: outDir(), hooks: { approve: (g, u, sign) => (g === 'G2' ? null : sign(u)) } });
+    assertStoppedAt(res, 'G2');
+    assert.deepEqual(failedChecks(res.run, 'G2'), ['approval_present']);
   });
 
   test('STORIES: a story citing an unknown requirement stops the run (an automated check, not an approval)', () => {
@@ -244,13 +244,13 @@ describe('synthetic two-gate demonstration: negative paths', () => {
     assert.ok(!fs.existsSync(path.join(res.run.outDir, 'approvals', 'G4.approval.json')), 'there is no story approval');
   });
 
-  test('there is no G4 or G8: a demo approval for any gate other than G2 and G3 is contract-invalid', () => {
+  test('there is no G4 or G8: a demo approval for any gate other than G1 and G2 is contract-invalid', () => {
     const run = initRun({ ctx, outDir: outDir() });
     evaluateDemoStep(run, 'BASELINE');
     evaluateDemoStep(run, 'EVIDENCE');
-    const rec = JSON.parse(fs.readFileSync(requestApproval(run, 'G2')!, 'utf8'));
+    const rec = JSON.parse(fs.readFileSync(requestApproval(run, 'G1')!, 'utf8'));
     assert.equal(ctx.contracts.validate('demo/approval', rec).valid, true);
-    for (const g of ['G0', 'G1', 'G4', 'G5', 'G6', 'G7', 'G8']) assert.equal(ctx.contracts.validate('demo/approval', { ...rec, gate: g }).valid, false, g);
+    for (const g of ['G0', 'G3', 'G4', 'G5', 'G6', 'G7', 'G8']) assert.equal(ctx.contracts.validate('demo/approval', { ...rec, gate: g }).valid, false, g);
   });
 
   test('BUILD: a Java compilation failure stops the run', { skip: NO_JDK }, () => {
@@ -307,16 +307,16 @@ describe('synthetic two-gate demonstration: negative paths', () => {
 
   test('a later step attempted before its prerequisite passes is BLOCKED', () => {
     const run = initRun({ ctx, outDir: outDir() });
-    const r = evaluateDemoStep(run, 'G3');
+    const r = evaluateDemoStep(run, 'G2');
     assert.equal(r.demo_status, 'BLOCKED');
-    assert.match(r.reason, /prerequisite G2 has not passed/);
-    assert.equal(evaluateDemoStep(run, 'STORIES').demo_status, 'BLOCKED', 'story validation needs G3');
+    assert.match(r.reason, /prerequisite G1 has not passed/);
+    assert.equal(evaluateDemoStep(run, 'STORIES').demo_status, 'BLOCKED', 'story validation needs G2');
     // A recorded PASS whose result file was changed afterwards no longer counts.
     assert.equal(evaluateDemoStep(run, 'BASELINE').demo_status, 'PASS');
     assert.equal(evaluateDemoStep(run, 'EVIDENCE').demo_status, 'PASS');
     fs.appendFileSync(path.join(run.outDir, 'steps', 'EVIDENCE.result.json'), ' ');
-    requestApproval(run, 'G2');
-    const g2 = evaluateDemoStep(run, 'G2');
+    requestApproval(run, 'G1');
+    const g2 = evaluateDemoStep(run, 'G1');
     assert.equal(g2.demo_status, 'BLOCKED');
     assert.match(g2.reason, /result file is missing or changed/);
   });
@@ -330,7 +330,7 @@ describe('synthetic two-gate demonstration: negative paths', () => {
     const run = initRun({ ctx, outDir: outDir() });
     evaluateDemoStep(run, 'BASELINE');
     evaluateDemoStep(run, 'EVIDENCE');
-    const f = requestApproval(run, 'G2')!;
+    const f = requestApproval(run, 'G1')!;
     const rec = JSON.parse(fs.readFileSync(f, 'utf8'));
     const real = loadTrustStore(ctx, loadPolicy(ctx));
     assert.equal(verifySignature(real, rec.signer.signer_id, statementText(rec), rec.signature.value, ['requirements_approver']).ok, false);

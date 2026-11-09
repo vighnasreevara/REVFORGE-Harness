@@ -26,7 +26,7 @@ import { decide, Facts, liveGate } from '../runtime/src/bmad/eligibility';
 import { bmadSummary, discovery, dryRun, evaluateEligibility, mockResult, preparePacket, recordResult } from '../runtime/src/bmad/adapter';
 import { approvalAssertions } from '../runtime/src/bmad/validators';
 import { cleanup, Fixture, FORWARD_DIR } from './helpers/fixture';
-import { citedClaim, deliverAll, KP, RUN, setupG2, SIGNERS, signResolution, signText, wfOf } from './helpers/g2fixture';
+import { citedClaim, deliverAll, KP, RUN, setupG1, SIGNERS, signResolution, signText, wfOf } from './helpers/g2fixture';
 
 const fixtures: Fixture[] = [];
 const temps: string[] = [];
@@ -66,7 +66,7 @@ function facts(o: Partial<Facts> = {}): Facts {
   return {
     state: 'REQUIREMENTS_APPROVED',
     baseline: { run_id: 'R', manifest_sha256: SHA },
-    gates: { G2: true, G3: false },
+    gates: { G1: true, G2: false },
     g2: { status: 'PASS', reason: 'ok', scope: BRAVO, scope_sha256: SHA, approval_id: 'APR-0001' },
     scope: { text: BRAVO, sha256: SHA, readiness: 'READY', error: null },
     release: { ok: true, detail: 'ok' },
@@ -81,9 +81,9 @@ function facts(o: Partial<Facts> = {}): Facts {
 const bindingOf = (id: string): Binding => loadBindings(realCtx()).config!.bindings.find((b) => b.binding_id === id)!;
 const failed = (r: { checks: Array<{ id: string; ok: boolean }> }) => r.checks.filter((c) => !c.ok).map((c) => c.id);
 
-/* ---------------- fixture with a G2-approved scope ---------------- */
+/* ---------------- fixture with a G1-approved scope ---------------- */
 function approvedFixture(opts: { approve?: boolean } = {}) {
-  const { f, ctx, k } = setupG2(fixtures);
+  const { f, ctx, k } = setupG1(fixtures);
   const carol: KP = generateKeyPairSync('ed25519');
   const ts = path.join(f.repoRoot, 'trust', 'trust-store.json');
   editJson(ts, (j) => j.signers.push({ signer_id: 'carol.exceptions', public_key_pem: carol.publicKey.export({ type: 'spki', format: 'pem' }).toString(), roles: ['exception_approver'] }));
@@ -106,7 +106,7 @@ function approvedFixture(opts: { approve?: boolean } = {}) {
     const file = path.join(f.repoRoot, 'approval-6.json');
     fs.writeFileSync(file, JSON.stringify({ contract: 'signed-approval', statement: st, signature: { algorithm: 'ed25519', value: signText(statementText(st), k.approver) } }));
     assert.equal(importApproval(wfOf(ctx), file).imported, true);
-    assert.equal(runGate(wfOf(ctx), 'G2').status, 'PASS');
+    assert.equal(runGate(wfOf(ctx), 'G1').status, 'PASS');
     assert.equal(advance(wfOf(ctx), 'REQUIREMENTS_APPROVED').accepted, true);
   }
   return { f, ctx, k };
@@ -184,59 +184,59 @@ describe('STEP 6 — release, catalogue and bindings', () => {
     assert.ok(r.problems.includes('F6 must stay independent'));
   });
 
-  test('7. the shipped bindings are valid, F6 is unbound and every binding requires G2 for the exact scope', () => {
+  test('7. the shipped bindings are valid, F6 is unbound and every binding requires G1 for the exact scope', () => {
     const ctx = realCtx();
     const r = validateBindings(ctx, verifyRelease(ctx));
     assert.equal(r.ok, true, JSON.stringify(r.bindings.filter((b) => !b.ok).map((b) => [b.binding_id, failed(b)])));
     const cfg = loadBindings(ctx).config!;
     assert.deepEqual(cfg.bindings.map((b) => `${b.workflow_id}:${b.agent}`), ['bmad-prd:F1', 'bmad-architecture:F3', 'bmad-create-epics-and-stories:F4', 'bmad-sprint-planning:F4', 'bmad-build:F5', 'bmad-code-review:F7']);
-    assert.ok(cfg.bindings.every((b) => b.requires_gates.includes('G2') && b.requires_exact_scope && !b.may_approve));
+    assert.ok(cfg.bindings.every((b) => b.requires_gates.includes('G1') && b.requires_exact_scope && !b.may_approve));
     assert.ok(!cfg.bindings.some((b) => b.agent === 'F6'));
   });
 });
 
 describe('STEP 6 — eligibility rules', () => {
-  test('8. PRD and architecture are refused without G2 PASS', () => {
+  test('8. PRD and architecture are refused without G1 PASS', () => {
     for (const id of ['BMAD-PRD', 'BMAD-ARCH']) {
-      const d = decide(bindingOf(id), 'MOCK', facts({ state: 'REQUIREMENTS_DRAFTED', gates: { G2: false }, g2: { status: 'UNVERIFIED', reason: 'no approval', scope: null, scope_sha256: null, approval_id: null } }));
+      const d = decide(bindingOf(id), 'MOCK', facts({ state: 'REQUIREMENTS_DRAFTED', gates: { G1: false }, g2: { status: 'UNVERIFIED', reason: 'no approval', scope: null, scope_sha256: null, approval_id: null } }));
       assert.equal(d.eligible, false);
-      for (const c of ['gate_G2', 'g2_reverified', 'exact_scope', 'workflow_state']) assert.ok(failed(d).includes(c), `${id} ${c}`);
+      for (const c of ['gate_G1', 'g2_reverified', 'exact_scope', 'workflow_state']) assert.ok(failed(d).includes(c), `${id} ${c}`);
     }
     assert.equal(decide(bindingOf('BMAD-PRD'), 'MOCK', facts()).eligible, true);
   });
 
-  test('9. G2 PASS for a different scope or a changed digest is not the exact approved scope', () => {
+  test('9. G1 PASS for a different scope or a changed digest is not the exact approved scope', () => {
     const other = decide(bindingOf('BMAD-PRD'), 'MOCK', facts({ scope: { text: 'programs:ALPHA01', sha256: 'b'.repeat(64), readiness: 'READY', error: null } }));
     assert.deepEqual(failed(other), ['exact_scope']);
     const drift = decide(bindingOf('BMAD-ARCH'), 'MOCK', facts({ scope: { text: BRAVO, sha256: 'c'.repeat(64), readiness: 'READY', error: null } }));
     assert.deepEqual(failed(drift), ['exact_scope']);
   });
 
-  test('10. stories need G3 and recorded architecture; mock architecture results never count', () => {
+  test('10. stories need G2 and recorded architecture; mock architecture results never count', () => {
     const b = bindingOf('BMAD-EPICS');
     const mockArch = { receipt_id: 'BRC-0001', binding_id: 'BMAD-ARCH', scope_sha256: SHA, mode: 'MOCK' as const, accepted: true, agent: 'F3', sha256: SHA, documents: [] };
     const d = decide(b, 'MOCK', facts({ state: 'ARCHITECTURE_APPROVED', upstream: [mockArch] }));
-    assert.ok(failed(d).includes('gate_G3'));
+    assert.ok(failed(d).includes('gate_G2'));
     assert.ok(failed(d).includes('architecture_artifacts'));
-    const ok = decide(b, 'MOCK', facts({ state: 'ARCHITECTURE_APPROVED', gates: { G2: true, G3: true }, upstream: [{ ...mockArch, mode: 'LIVE' }] }));
+    const ok = decide(b, 'MOCK', facts({ state: 'ARCHITECTURE_APPROVED', gates: { G1: true, G2: true }, upstream: [{ ...mockArch, mode: 'LIVE' }] }));
     assert.equal(ok.eligible, true, ok.reasons.join(' | '));
   });
 
-  test('11. sprint planning needs G3 and validated F4 stories (there is no G4)', () => {
+  test('11. sprint planning needs G2 and validated F4 stories (there is no G4)', () => {
     const b = bindingOf('BMAD-SPRINT');
-    assert.deepEqual(b.requires_gates, ['G2', 'G3']);
-    const noG3 = decide(b, 'MOCK', facts({ state: 'STORIES_DRAFTED', gates: { G2: true, G3: false }, receipts: { F4: 1 } }));
-    assert.ok(failed(noG3).includes('gate_G3'));
-    const noStories = decide(b, 'MOCK', facts({ state: 'STORIES_DRAFTED', gates: { G2: true, G3: true }, receipts: {} }));
+    assert.deepEqual(b.requires_gates, ['G1', 'G2']);
+    const noG2 = decide(b, 'MOCK', facts({ state: 'STORIES_DRAFTED', gates: { G1: true, G2: false }, receipts: { F4: 1 } }));
+    assert.ok(failed(noG2).includes('gate_G2'));
+    const noStories = decide(b, 'MOCK', facts({ state: 'STORIES_DRAFTED', gates: { G1: true, G2: true }, receipts: {} }));
     assert.ok(failed(noStories).includes('validated_stories'));
-    const invalid = decide(b, 'MOCK', facts({ state: 'STORIES_DRAFTED', gates: { G2: true, G3: true }, receipts: { F4: 1 }, stories_valid: { ok: false, reason: 'requirements_coverage: REQ-1 has no story' } }));
+    const invalid = decide(b, 'MOCK', facts({ state: 'STORIES_DRAFTED', gates: { G1: true, G2: true }, receipts: { F4: 1 }, stories_valid: { ok: false, reason: 'requirements_coverage: REQ-1 has no story' } }));
     assert.ok(failed(invalid).includes('validated_stories'), 'an F4 receipt alone is not enough: the story set must validate');
-    assert.equal(decide(b, 'MOCK', facts({ state: 'STORIES_DRAFTED', gates: { G2: true, G3: true }, receipts: { F4: 1 }, stories_valid: { ok: true, reason: 'ok' } })).eligible, true);
+    assert.equal(decide(b, 'MOCK', facts({ state: 'STORIES_DRAFTED', gates: { G1: true, G2: true }, receipts: { F4: 1 }, stories_valid: { ok: true, reason: 'ok' } })).eligible, true);
   });
 
-  test('12. build needs G2/G3, validated stories, an authorised Java directory and generation authorisation', () => {
+  test('12. build needs G1/G2, validated stories, an authorised Java directory and generation authorisation', () => {
     const b = bindingOf('BMAD-BUILD');
-    const base = { state: 'STORIES_DRAFTED', gates: { G2: true, G3: true }, receipts: { F4: 1 }, stories_valid: { ok: true, reason: 'ok' } };
+    const base = { state: 'STORIES_DRAFTED', gates: { G1: true, G2: true }, receipts: { F4: 1 }, stories_valid: { ok: true, reason: 'ok' } };
     const d = decide(b, 'MOCK', facts(base));
     assert.deepEqual(failed(d).sort(), ['generation_authorized', 'java_target_dir']);
     assert.equal(decide(b, 'MOCK', facts({ ...base, java_target_dir: '/x/java', generation_authorized: true })).eligible, true);
@@ -244,7 +244,7 @@ describe('STEP 6 — eligibility rules', () => {
 
   test('13. review needs real implementation artefacts, an F6 receipt and a reviewer other than the implementer', () => {
     const b = bindingOf('BMAD-REVIEW');
-    const all = { G2: true, G3: true };
+    const all = { G1: true, G2: true };
     const none = decide(b, 'MOCK', facts({ state: 'REVIEWING', gates: all }));
     assert.ok(failed(none).includes('implementation_artifacts'));
     assert.ok(failed(none).includes('independent_test_receipt'));
@@ -263,9 +263,9 @@ describe('STEP 6 — eligibility rules', () => {
 });
 
 describe('STEP 6 — adapter on a synthetic workflow', () => {
-  test('15. without G2 PASS a MOCK packet is refused, the refusal is sealed and audited, nothing is prepared', () => {
+  test('15. without G1 PASS a MOCK packet is refused, the refusal is sealed and audited, nothing is prepared', () => {
     const { ctx } = approvedFixture({ approve: false });
-    assert.throws(() => preparePacket(wfOf(ctx), 'bmad-prd', BRAVO, 'MOCK'), (e: any) => e.code === 'BMAD_NOT_ELIGIBLE' && e.details.some((d: string) => /G2/.test(d)));
+    assert.throws(() => preparePacket(wfOf(ctx), 'bmad-prd', BRAVO, 'MOCK'), (e: any) => e.code === 'BMAD_NOT_ELIGIBLE' && e.details.some((d: string) => /G1/.test(d)));
     assert.equal(auditEvents(ctx, 'bmad_rejected').length, 1);
     const s = bmadSummary(wfOf(ctx));
     assert.equal(s.packets.length, 0);
@@ -286,7 +286,7 @@ describe('STEP 6 — adapter on a synthetic workflow', () => {
     assert.equal(wfOf(ctx).store.readAudit().length, before);
   });
 
-  test('17. G2-approved exact scope: MOCK packet with provenance sidecars, mock result accepted as non-evidence', () => {
+  test('17. G1-approved exact scope: MOCK packet with provenance sidecars, mock result accepted as non-evidence', () => {
     const { ctx } = approvedFixture();
     const el = evaluateEligibility(wfOf(ctx), 'bmad-prd', BRAVO, 'MOCK');
     assert.equal(el.record.eligible, true, el.record.reasons.join(' | '));
@@ -306,7 +306,7 @@ describe('STEP 6 — adapter on a synthetic workflow', () => {
     assert.equal(rec.accepted, true, rec.violations.join(' | '));
     assert.equal(rec.evidence_status, 'MOCK_NOT_EVIDENCE');
     assert.equal(rec.counts_toward_gates, false);
-    assert.notEqual(runGate(wfOf(ctx), 'G3').status, 'PASS', 'a BMad receipt never feeds G3');
+    assert.notEqual(runGate(wfOf(ctx), 'G2').status, 'PASS', 'a BMad receipt never feeds G2');
     assert.equal(wfOf(ctx).state.state, 'REQUIREMENTS_APPROVED');
   });
 
@@ -362,13 +362,13 @@ describe('STEP 6 — adapter on a synthetic workflow', () => {
     assert.equal(bmadSummary(wfOf(ctx)).packets.length, 0);
   });
 
-  test('22. stories stay refused after a mock architecture result: G3 is not passed and mocks are not evidence', () => {
+  test('22. stories stay refused after a mock architecture result: G2 is not passed and mocks are not evidence', () => {
     const { ctx } = approvedFixture();
     const p = preparePacket(wfOf(ctx), 'bmad-architecture', BRAVO, 'MOCK');
     assert.equal(recordResult(wfOf(ctx), p.packet_id, mockResult(wfOf(ctx), p.packet_id).result_file).accepted, true);
     const e = evaluateEligibility(wfOf(ctx), 'bmad-create-epics-and-stories', BRAVO, 'MOCK');
     assert.equal(e.record.eligible, false);
-    assert.ok(e.record.reasons.some((r: string) => r.startsWith('gate_G3')));
+    assert.ok(e.record.reasons.some((r: string) => r.startsWith('gate_G2')));
     assert.ok(e.record.reasons.some((r: string) => r.startsWith('architecture_artifacts')));
     for (const w of ['bmad-sprint-planning', 'bmad-build', 'bmad-code-review']) assert.equal(evaluateEligibility(wfOf(ctx), w, BRAVO, 'MOCK').record.eligible, false, w);
   });

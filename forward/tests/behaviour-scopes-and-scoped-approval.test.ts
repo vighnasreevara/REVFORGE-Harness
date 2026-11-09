@@ -15,7 +15,7 @@ import { sha256File } from '../runtime/src/core/fsutil';
 import { generationAuthorized, loadWorkflow, runGate } from '../runtime/src/orchestrator/orchestrator';
 import { buildSnapshot } from '../runtime/src/approval/snapshot';
 import { evaluateScope, parseSelector, selectorText } from '../runtime/src/approval/scope';
-import { approvalStatement, createApprovalRequest, evaluateG2Gate, importApproval, statementText } from '../runtime/src/approval/approvals';
+import { approvalStatement, createApprovalRequest, evaluateG1Gate, importApproval, statementText } from '../runtime/src/approval/approvals';
 import { behaviourClosure } from '../runtime/src/approval/closure';
 import { approvedScope, validateArchitecture } from '../runtime/src/design/design';
 import { trustDoctor } from '../runtime/src/operations/trust';
@@ -35,7 +35,7 @@ const BEH = 'behaviour:BRAVO02:P1:requirement=REQ-BRAVO02-001';
 
 /** A READY behaviour scope in the synthetic workflow, with a signed-approval helper (synthetic keys, in memory). */
 function scopedFixture() {
-  const out = designFixture(fixtures, { approveG2: false });
+  const out = designFixture(fixtures, { approveG1: false });
   const sign = (req: any, signer: string = SIGNERS.approver, kp: KP = out.k.approver) => {
     const st = approvalStatement(req, signer, 'requirements_approver', 'approved');
     const file = path.join(out.f.repoRoot, `g2-scoped-${Date.now()}-${Math.random()}.json`);
@@ -72,7 +72,7 @@ describe('STEP 13 - behaviour scopes on synthetic fixtures', () => {
     assert.ok(cc.unresolved_reasons.some((r) => /NOPROG01.*not in the inventory/.test(r)));
   });
 
-  test('18/19/21. a valid synthetic scoped approval passes G2 for that subset only; G3 sees only its requirements', () => {
+  test('18/19/21. a valid synthetic scoped approval passes G1 for that subset only; G2 sees only its requirements', () => {
     const { f, ctx, sign } = scopedFixture();
     const wf = wfOf(ctx);
     const ev = evaluateScope(buildSnapshot(wf), parseSelector(BEH));
@@ -83,7 +83,7 @@ describe('STEP 13 - behaviour scopes on synthetic fixtures', () => {
     assert.match(req.payload.scope.behaviour.covers_only, /approves nothing else in BRAVO02/);
     const r = importApproval(wf, sign(req));
     assert.equal(r.imported, true, JSON.stringify(r.checks?.filter((c: any) => !c.ok)));
-    assert.equal(runGate(wf, 'G2').status, 'PASS');
+    assert.equal(runGate(wf, 'G1').status, 'PASS');
     const s = approvedScope(wf, buildSnapshot(wf));
     assert.equal(s.ok, true);
     assert.equal(s.scope, selectorText(parseSelector(BEH)));
@@ -92,11 +92,11 @@ describe('STEP 13 - behaviour scopes on synthetic fixtures', () => {
     const prog = evaluateScope(buildSnapshot(wf), parseSelector('programs:BRAVO02'));
     assert.notEqual(prog.scope_sha256, s.scope_sha256);
     assert.notEqual(s.ev!.selector.kind, 'programs');
-    // 21: an architecture citing a requirement outside the approved subset is refused by the existing G3 check.
+    // 21: an architecture citing a requirement outside the approved subset is refused by the existing G2 check.
     const arch = { agent: 'F3' as const, receipt_id: 'RCT-X', files: [], sha256: 'x', problems: [], docs: { 'c.json': { contract: 'forward/architecture-record', record_type: 'component_design', baseline: { manifest_sha256: wf.run.manifestSha256 }, approved_inputs: { requirements_approval: s.approval_id }, components: [{ component_id: 'C1', requirement_ids: ['REQ-BRAVO02-001', 'REQ-ALPHA01-001'], replaces_units: [], depends_on: [] }] } } };
     const v = validateArchitecture(wf, buildSnapshot(wf), s, arch);
     assert.equal(v.checks.find((c) => c.id === 'requirements_in_scope')!.ok, false);
-    // 22: G2 PASS for a subset never authorises Java generation.
+    // 22: G1 PASS for a subset never authorises Java generation.
     assert.equal(generationAuthorized(wf.run, wf.state), false);
     void f;
   });
@@ -251,10 +251,10 @@ describe('STEP 13 - RTNCDE00 regression on the real run (read-only)', () => {
     }
   });
 
-  test('20/22/23/24. real G2 stays blocked, no Java, nothing written, reverse outputs protected', { skip }, () => {
+  test('20/22/23/24. real G1 stays blocked, no Java, nothing written, reverse outputs protected', { skip }, () => {
     const { wf, ctx, audit } = real();
     assert.equal(trustDoctor(ctx).status, 'TRUST_NOT_CONFIGURED');
-    assert.notEqual(evaluateG2Gate(wf).result.status, 'PASS');
+    assert.notEqual(evaluateG1Gate(wf).result.status, 'PASS');
     assert.equal(generationAuthorized(wf.run, wf.state), false);
     assert.deepEqual(javaTrackingViolations(REPO), [], 'only the hand-written Java runtime is tracked; no generated or other Java');
     assert.equal(sha256File(wf.store.p('audit.jsonl')), audit, 'scope evaluation wrote nothing');

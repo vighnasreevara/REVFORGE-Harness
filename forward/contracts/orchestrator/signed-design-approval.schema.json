@@ -1,7 +1,7 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
   "$id": "https://revforge.local/contracts/orchestrator/signed-design-approval.schema.json",
-  "title": "Signed G3 architecture approval statement (Ed25519 over its canonical JSON)",
+  "title": "Signed G2 architecture approval statement (Ed25519 over its canonical JSON)",
   "type": "object",
   "properties": {
     "contract": {
@@ -17,7 +17,9 @@
           "const": "1.0"
         },
         "gate": {
+          "description": "G2 (approved architecture). G3 is accepted only when re-verifying statements signed before the 2026-11-09 gate renumbering, when the architecture gate was G3; the runtime accepts it for legacy workflow states only and requires it to match the request's gate.",
           "enum": [
+            "G2",
             "G3"
           ]
         },

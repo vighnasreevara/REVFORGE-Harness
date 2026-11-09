@@ -1,6 +1,6 @@
 /**
  * Approval policy: who may approve what, and how each kind of evidence is
- * treated by G2. Read from the `approval` section of the forward
+ * treated by G1. Read from the `approval` section of the forward
  * configuration (validated by its contract); omitted values take the strict
  * defaults below. The policy digest is bound into every approval scope, so a
  * policy change invalidates existing approvals.
@@ -66,7 +66,7 @@ export function loadPolicy(ctx: RuntimeContext): ApprovalPolicy {
   };
 }
 
-/** Digest of the parts of the policy that decide G2 outcomes and authority (not the trust store location). */
+/** Digest of the parts of the policy that decide G1 outcomes and authority (not the trust store location). */
 export function policyDigest(p: ApprovalPolicy): string {
   return digest({ roles: p.roles, g2: p.g2, require_distinct_requester: p.require_distinct_requester });
 }

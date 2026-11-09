@@ -1,5 +1,5 @@
 /**
- * G2 snapshot: everything the requirements gate needs, computed once from the
+ * G1 snapshot: everything the requirements gate needs, computed once from the
  * runtime's own records and the current reverse baseline. Every claim is
  * re-verified against the original COBOL source here (never taken from an
  * agent's declaration or from an older verification record), and every item
@@ -168,9 +168,9 @@ export function buildSnapshot(wf: Workflow, at = new Date()): Snapshot {
   })();
   const knownFiles = new Set<string>(c.relByFile.keys());
   const rawFiles = new Set(set.rawStructureFiles.filter((f) => f.data?.procedure_division).map((f) => f.file_id as string));
-  // G2 approves the F1/F2 deliveries only (its required receipts); later agents' receipts are G3+ material
+  // G1 approves the F1/F2 deliveries only (its required receipts); later agents' receipts are G2+ material
   // and must not change the requirements snapshot, its consolidation or its integrity.
-  const g2Agents = new Set<string>(gateSpec('G2')!.required_receipts);
+  const g2Agents = new Set<string>(gateSpec('G1')!.required_receipts);
   const dl = deliveries(wf, { corrected: true }).filter((d) => g2Agents.has(d.packet.agent.id));
   const receipts = dl.map((d) => d.receipt);
   const items: Item[] = [];

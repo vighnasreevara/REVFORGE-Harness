@@ -44,7 +44,7 @@ that dashboard at any cost, and do not bring in any other layout or framework.
 - **Left menu additions:** an "Outputs" group with Reverse output and Forward output; while a run is active, a flow of the running phase (reverse flow, then hidden and replaced by the forward flow).
 - **Middle summaries:** after reverse engineering, a results page (outputs, comparison with the Udara reference harness outputs) before forward starts; after F7, a forward results page (outputs, gaps, actions, achieved, pending).
 
-**Client gate numbering (user decision, 2026-11-09):** the dashboard displays the runtime's approval gates G2 (requirements) and G3 (architecture) as **G1** and **G2**. Only the displayed text changes; the runtime, its records, contracts and file names keep G2/G3.
+**Client gate numbering (user decision, 2026-11-09):** the two human approval gates are **G1** (requirements) and **G2** (architecture) in both the dashboard and the runtime, its CLI, contracts and new workflow records. Workflow records written before the renumbering (workflow states without `gate_scheme: 2`, their approvals and gate results) keep the former IDs G2 and G3 and are never rewritten; the runtime reads them through a mapping. Dated reports and handover records keep the numbering of their time.
 
 **Fifth approved change (user decision, 2026-11-09):** a Home section comes first in the menu and is the landing page. The Run bar, KPI tiles and Status card appear only on Home; other sections show only their content (a thin run strip with Pause/Stop appears there only while a run is in progress). The tab bar is hidden for sections with a single view.
 

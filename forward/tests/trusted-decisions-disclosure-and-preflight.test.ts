@@ -81,7 +81,7 @@ const claudeAuth = (ctx: any, extra: any = {}) => prepareDisclosure(wfOf(ctx), {
 /* ------------------------------------------------------------------ */
 describe('STEP 8 — trust provisioning', () => {
   test('1. trusted role provisioning is validated: roles, coverage, location, keys, separation of duties', () => {
-    const { f, ctx } = designFixture(fixtures, { approveG2: false, resolve: false });
+    const { f, ctx } = designFixture(fixtures, { approveG1: false, resolve: false });
     const d = trustDoctor(ctx);
     assert.equal(d.status, 'TRUST_CONFIGURED', JSON.stringify(d.checks.filter((c) => c.status === 'fail')));
     for (const r of ['requirements_approver', 'business_sme', 'technical_authority', 'exception_approver', 'architecture_approver', 'data_owner']) assert.ok(d.roles.find((x) => x.role === r)?.covered, r);
@@ -97,7 +97,7 @@ describe('STEP 8 — trust provisioning', () => {
   });
 
   test('TRUST_NOT_CONFIGURED is reported when no trust store exists; a custodian test signature verifies against the trusted key', () => {
-    const { f, ctx, dk } = designFixture(fixtures, { approveG2: false, resolve: false });
+    const { f, ctx, dk } = designFixture(fixtures, { approveG1: false, resolve: false });
     const msg = path.join(f.repoRoot, 'challenge.txt');
     fs.writeFileSync(msg, 'revforge trust challenge 2026-11-01');
     const good = verifyTestSignature(ctx, DESIGN_SIGNERS.architect, msg, signText(fs.readFileSync(msg, 'utf8'), dk.architect));
@@ -113,7 +113,7 @@ describe('STEP 8 — trust provisioning', () => {
   });
 
   test('2/3/4/5/6. unknown signer, wrong role, invalid key, expired and revoked authority are all rejected', () => {
-    const { f, ctx, k, dk } = designFixture(fixtures, { approveG2: false, resolve: false });
+    const { f, ctx, k, dk } = designFixture(fixtures, { approveG1: false, resolve: false });
     const id = decisionFor(ctx, 'technical_authority');
     const req = () => exportResolutionRequest(wfOf(ctx), id, BRAVO);
     assert.ok(failed(signRequest(f, ctx, req(), 'resolved_no_change', mk(), 'nobody.known', 'technical_authority', { dryRun: true })).includes('signature'), 'unknown signer');
@@ -137,7 +137,7 @@ describe('STEP 8 — trust provisioning', () => {
 /* ------------------------------------------------------------------ */
 describe('STEP 8 — signed decision resolution', () => {
   test('7. a scope- and expiry-bound request, signed by an authorised human, is verified and recorded', () => {
-    const { f, ctx, k } = designFixture(fixtures, { approveG2: false, resolve: false });
+    const { f, ctx, k } = designFixture(fixtures, { approveG1: false, resolve: false });
     const id = decisionFor(ctx, 'technical_authority');
     const req = exportResolutionRequest(wfOf(ctx), id, BRAVO);
     assert.match(req.request_id, /^DRQ-/);
@@ -154,7 +154,7 @@ describe('STEP 8 — signed decision resolution', () => {
   });
 
   test('8/9. wrong decision binding, wrong requirement hash, wrong scope, expired request and an unsigned decision are rejected', () => {
-    const { f, ctx, k } = designFixture(fixtures, { approveG2: false, resolve: false });
+    const { f, ctx, k } = designFixture(fixtures, { approveG1: false, resolve: false });
     const id = decisionFor(ctx, 'technical_authority');
     const req = exportResolutionRequest(wfOf(ctx), id, BRAVO);
     const sign = (tweak: (r: any) => void) => failed(signRequest(f, ctx, req, 'resolved_no_change', k.sme, SIGNERS.sme, 'technical_authority', { tweak, dryRun: true }));
@@ -173,7 +173,7 @@ describe('STEP 8 — signed decision resolution', () => {
   });
 
   test('scope-restricted signers can only sign for their scope', () => {
-    const { f, ctx, k } = designFixture(fixtures, { approveG2: false, resolve: false });
+    const { f, ctx, k } = designFixture(fixtures, { approveG1: false, resolve: false });
     editTrust(f, (j) => (j.signers.find((s: any) => s.signer_id === SIGNERS.sme).scopes = [`programs:${f.programs[0].name}`]));
     const id = decisionFor(ctx, 'technical_authority');
     const r = signRequest(f, ctx, exportResolutionRequest(wfOf(ctx), id, BRAVO), 'resolved_no_change', k.sme, SIGNERS.sme, 'technical_authority', { dryRun: true });
@@ -184,7 +184,7 @@ describe('STEP 8 — signed decision resolution', () => {
 /* ------------------------------------------------------------------ */
 describe('STEP 8 — citation correction and change propagation', () => {
   test('10/11/12. a citation correction is applied only under its signed resolution; the change invalidates stale requests', () => {
-    const { f, ctx, k, dk } = designFixture(fixtures, { approveG2: false, resolve: false, citeLine: 12 });
+    const { f, ctx, k, dk } = designFixture(fixtures, { approveG1: false, resolve: false, citeLine: 12 });
     cmdRemediation(wfOf(ctx));
     const a = analyse(wfOf(ctx));
     const p = correctionReview(a, BRAVO).proposals[0];
@@ -218,7 +218,7 @@ describe('STEP 8 — citation correction and change propagation', () => {
   });
 
   test('13. shared dependencies: a copybook decision is re-evaluated in every scope that contains the copybook', () => {
-    const { f, ctx, k, dk } = designFixture(fixtures, { approveG2: false, resolve: false });
+    const { f, ctx, k, dk } = designFixture(fixtures, { approveG1: false, resolve: false });
     const snap = buildSnapshot(wfOf(ctx));
     const cb = f.copybooks[0].name;
     const scopes = sharedImpact(snap, [cb]);
@@ -243,9 +243,9 @@ describe('STEP 8 — citation correction and change propagation', () => {
 });
 
 /* ------------------------------------------------------------------ */
-describe('STEP 8 — G2 operations', () => {
-  test('14/15. readiness checklist, signed G2 request/response and self-approval rejection', () => {
-    const { f, ctx, k } = designFixture(fixtures, { approveG2: false });
+describe('STEP 8 — G1 operations', () => {
+  test('14/15. readiness checklist, signed G1 request/response and self-approval rejection', () => {
+    const { f, ctx, k } = designFixture(fixtures, { approveG1: false });
     const r = approvalReadiness(wfOf(ctx), BRAVO);
     assert.equal(r.readiness, 'READY');
     assert.equal(r.g2.status === 'PASS', false, 'readiness is not approval');
@@ -265,14 +265,14 @@ describe('STEP 8 — G2 operations', () => {
     const out: string[] = [];
     assert.equal(main(['approval', 'verify', '--config', f.configPath, '--run', wfOf(ctx).run.runId, '--file', file, '--json'], (s) => out.push(s), () => {}), 0);
     assert.equal(main(['approval', 'import', '--config', f.configPath, '--run', wfOf(ctx).run.runId, '--file', file, '--json'], (s) => out.push(s), () => {}), 0);
-    assert.equal(runGate(wfOf(ctx), 'G2').status, 'PASS');
+    assert.equal(runGate(wfOf(ctx), 'G1').status, 'PASS');
     const after = approvalReadiness(wfOf(ctx), BRAVO);
     assert.equal(after.g2.for_this_scope, true);
     assert.ok(after.allowed_next_transitions.some((t: any) => t.to === 'REQUIREMENTS_APPROVED' && t.satisfied));
   });
 
   test('clarification requests are recorded without changing the decision; dossiers export unsigned requests only', () => {
-    const { ctx } = designFixture(fixtures, { approveG2: false, resolve: false });
+    const { ctx } = designFixture(fixtures, { approveG1: false, resolve: false });
     const id = decisionFor(ctx, 'technical_authority');
     const c = requestClarification(wfOf(ctx), id, 'dave.requester', 'erin.sme', 'Which SQLCODE values does the platform return here?');
     assert.match(c.record_id, /^CLR-/);
@@ -353,7 +353,7 @@ describe('STEP 8 — execution preflight', () => {
     assert.equal(ran, false);
   });
 
-  test('22. even with G2 PASS and a valid Claude authorization, the missing enforceable launch boundary refuses LIVE', () => {
+  test('22. even with G1 PASS and a valid Claude authorization, the missing enforceable launch boundary refuses LIVE', () => {
     const { f, ctx, dk } = designFixture(fixtures);
     assert.equal(importDisclosure(wfOf(ctx), signDisclosure(f, claudeAuth(ctx), dk.dataowner, DESIGN_SIGNERS.dataowner)).imported, true);
     const r = preflight(wfOf(ctx), 'bmad-architecture', BRAVO, { probe: () => 'probe 1.0' });
@@ -373,7 +373,7 @@ describe('STEP 8 — execution preflight', () => {
 
 /* ------------------------------------------------------------------ */
 describe('STEP 8 — protection', () => {
-  test('24/25/26/27. no Java; historical records and reverse artefacts unchanged; G3/G4 paths intact; protected writes refused', () => {
+  test('24/25/26/27. no Java; historical records and reverse artefacts unchanged; G2/G4 paths intact; protected writes refused', () => {
     const { f, ctx, dk } = designFixture(fixtures);
     const out = sha256File(path.join(f.repoRoot, 'output', 'rules', 'rules_artifact.json'));
     const receipts = wfOf(ctx).store.list('receipts').map((x) => [x, sha256File(wfOf(ctx).store.p('receipts', x))]);
@@ -382,7 +382,7 @@ describe('STEP 8 — protection', () => {
     approvalReadiness(wfOf(ctx), BRAVO);
     preflight(wfOf(ctx), 'bmad-prd', BRAVO, { probe: () => 'probe 1.0', record: true });
     readyForImplementation(f, ctx, dk);
-    assert.equal(wfOf(ctx).state.state, 'STORIES_DRAFTED', 'G3 approval and story validation paths remain intact');
+    assert.equal(wfOf(ctx).state.state, 'STORIES_DRAFTED', 'G2 approval and story validation paths remain intact');
     assert.deepEqual(wfOf(ctx).store.list('receipts').filter((x) => receipts.some((r) => r[0] === x)).map((x) => [x, sha256File(wfOf(ctx).store.p('receipts', x))]), receipts);
     assert.deepEqual(approvals.map((a) => [a[0], sha256File(wfOf(ctx).store.p('approvals', a[0] as string))]), approvals);
     assert.equal(sha256File(path.join(f.repoRoot, 'output', 'rules', 'rules_artifact.json')), out);

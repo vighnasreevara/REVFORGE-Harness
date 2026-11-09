@@ -88,8 +88,8 @@ export function preflight(wf: Workflow, bindingKey: string, scope: string, opts:
     }
     const e = evaluateEligibility(wf, bindingKey, scope, 'LIVE');
     const ck = (id: string) => e.record.checks.find((c: any) => c.id === id);
-    const g2 = ['gate_G2', 'g2_reverified', 'exact_scope'].map(ck).filter(Boolean);
-    add('g2_exact_scope', g2.length === 3 && g2.every((c: any) => c.ok), g2.filter((c: any) => !c.ok).map((c: any) => c.detail).join(' | ') || 'G2 PASS for exactly this scope, re-verified now');
+    const g2 = ['gate_G1', 'g2_reverified', 'exact_scope'].map(ck).filter(Boolean);
+    add('g2_exact_scope', g2.length === 3 && g2.every((c: any) => c.ok), g2.filter((c: any) => !c.ok).map((c: any) => c.detail).join(' | ') || 'G1 PASS for exactly this scope, re-verified now');
     add('workflow_state', !!ck('workflow_state')?.ok, ck('workflow_state')?.detail ?? 'unknown');
     add('release_pinned', !!ck('release_verified')?.ok, ck('release_verified')?.detail ?? 'unknown');
     const disabled = disabledReason(wf.run.ctx, e.binding.binding_id);

@@ -19,7 +19,7 @@ import { computeLedger, planBatches, writeLedger } from './ledger';
 import { buildSemanticContext } from './evidence-index';
 import { checkDocument } from '../../../verification/src/semantic';
 import { Classification, classifyProgram } from './classification';
-import { evaluateBaselineCheck, evaluatePrecheck, gatePassed, GateId, GateResult, gateSpec, openRun, precheckPassed, PrecheckId, PrecheckResult, RunHandle } from './gates';
+import { evaluateBaselineCheck, evaluatePrecheck, GATE_SCHEME, gateIdOfKey, gateKey, gateLabelOfKey, gatePassed, GateId, gateRecord, GateResult, gateSpec, openRun, precheckPassed, PrecheckId, PrecheckResult, RunHandle } from './gates';
 import { agentOutputDir, canWrite, PolicyRoots } from './permissions';
 import { AnyState, findTransition, INITIAL, isState, WorkflowState } from './states';
 import { WorkflowStateRecord, WorkflowStore } from './store';
@@ -59,7 +59,7 @@ export function policyRoots(run: RunHandle, state: WorkflowStateRecord | null): 
   };
 }
 
-/** Java generation needs the config flag AND the signed architecture approval (G3 PASS on this baseline). */
+/** Java generation needs the config flag AND the signed architecture approval (G2 PASS on this baseline). */
 /**
  * Mandatory-BMad lifecycle evidence for a new governed operation on `scope` (end-to-end integration): verified LIVE
  * receipts for every stage up to `upTo` plus the independent F2 (and, for the full lifecycle, F6) evidence. Loaded
@@ -76,7 +76,7 @@ export function bmadLifecycleEvidence(wf: Workflow, scope: string, upTo?: string
 
 export function generationAuthorized(run: RunHandle, state: WorkflowStateRecord | null): boolean {
   try {
-    assertGenerationAllowed(run.ctx.config.generation, [{ gate_id: 'GENERATION', approved: gatePassed(state, 'G3', run.manifestSha256) }]);
+    assertGenerationAllowed(run.ctx.config.generation, [{ gate_id: 'GENERATION', approved: gatePassed(state, 'G2', run.manifestSha256) }]);
     // STEP 21: with mandatory BMad governance, generation also needs verified LIVE BMad receipts up to sprint
     // (loaded lazily: the governance module depends on this one).
     if ((run.ctx.config as any).bmad_governance?.mandatory) {
@@ -174,6 +174,7 @@ export function initWorkflow(ctx: RuntimeContext, runId = 'latest'): Workflow {
       packets: [],
       receipts: [],
       checkpoint: { seq: 0, at, state_sha256: '', audit_head: '', audit_entries: 0 },
+      gate_scheme: GATE_SCHEME,
     };
     const wf: Workflow = { run, store, state };
     store.append('workflow_created', { workflow_id: state.workflow_id, baseline: state.baseline });
@@ -208,27 +209,30 @@ export function initWorkflow(ctx: RuntimeContext, runId = 'latest'): Workflow {
 }
 
 /**
- * Evaluates a gate from the current records. G2 is evaluated by the approval
+ * Evaluates a gate from the current records. G1 is evaluated by the approval
  * module (scope readiness + re-verified signed approval); its full evaluation
- * is sealed as a g2/G2E-NNNN record referenced by the gate result.
+ * is sealed as a g2/G2E-NNNN record referenced by the gate result (the
+ * directory and prefix keep the requirements gate's former number, so the
+ * evaluations of older runs stay in one sequence). G2's evaluations are sealed
+ * as design/evaluations/DGE-NNNN (G3E-NNNN in runs evaluated before 2026-11-09).
  */
 function freshGate(wf: Workflow, gate: GateId): GateResult {
-  if (gate === 'G3') {
-    // G3: signed architecture approval re-verified against current content (design module).
+  if (gate === 'G2') {
+    // G2: signed architecture approval re-verified against current content (design module).
     const d = require('../design/approvals') as typeof import('../design/approvals');
     const o = d.evaluateDesignGate(wf, gate);
     const sub = `${d.DESIGN_DIR}/evaluations`;
-    const id = `${gate}E-${String(wf.store.list(sub).filter((f) => f.startsWith(gate)).length + 1).padStart(4, '0')}`;
+    const id = `DGE-${String(wf.store.list(sub).filter((f) => f.startsWith('DGE-')).length + 1).padStart(4, '0')}`;
     const file = wf.store.writeRecord(sub, `${id}.json`, { evaluation_id: id, evaluated_at: o.result.evaluated_at, gate_status: o.result.status, ...o.evaluation });
     const sha = sha256File(file);
-    o.result.inputs.push({ kind: `${gate.toLowerCase()}_evaluation`, ref: `${sub}/${id}.json`, sha256: sha });
+    o.result.inputs.push({ kind: 'design_evaluation', ref: `${sub}/${id}.json`, sha256: sha });
     wf.store.append('design_evaluation_recorded', { evaluation_id: id, gate, status: o.result.status, sha256: sha });
     d.sealInvalidations(wf, o.invalidations);
     return o.result;
   }
   // Loaded lazily: the approval module builds on this orchestrator.
   const g2 = require('../approval/approvals') as typeof import('../approval/approvals');
-  const { result, evaluation } = g2.evaluateG2Gate(wf);
+  const { result, evaluation } = g2.evaluateG1Gate(wf);
   if (evaluation) {
     const id = `G2E-${String(wf.store.list('g2').length + 1).padStart(4, '0')}`;
     const file = wf.store.writeRecord('g2', `${id}.json`, { ...evaluation, evaluation_id: id, evaluated_at: result.evaluated_at, gate_status: result.status });
@@ -242,13 +246,18 @@ function freshGate(wf: Workflow, gate: GateId): GateResult {
 const ARCH_APPROVED_OR_LATER: string[] = ['ARCHITECTURE_APPROVED', 'STORIES_DRAFTED', 'IMPLEMENTING', 'IMPLEMENTATION_BUILT', 'TESTING', 'REVIEWING'];
 const APPROVED_OR_LATER: string[] = ['REQUIREMENTS_APPROVED', 'ARCHITECTURE_DRAFTED', 'ARCHITECTURE_APPROVED', 'STORIES_DRAFTED', 'IMPLEMENTING', 'IMPLEMENTATION_BUILT', 'TESTING', 'REVIEWING'];
 
+/**
+ * Records a gate result. The result carries the current gate ID; the state entry and the file name use the state's
+ * own key for that gate (gateKey: the former ID in a legacy state), so a legacy state's records stay in one numbering.
+ */
 function recordGate(wf: Workflow, r: GateResult): void {
   const v = wf.run.ctx.contracts.validate('orchestrator/gate-result', r);
   if (!v.valid) throw new OrchestratorError('gate result violates its contract', 'CONTRACT', v.errors);
+  const key = gateKey(wf.state, r.gate);
   const n = wf.store.list('gates').length + 1;
-  const file = `${r.gate}-${String(n).padStart(4, '0')}.json`;
+  const file = `${key}-${String(n).padStart(4, '0')}.json`;
   wf.store.writeRecord('gates', file, r);
-  wf.state.gates[r.gate] = { status: r.status, result_file: file, evaluated_at: r.evaluated_at, baseline_sha256: r.baseline.manifest_sha256 };
+  wf.state.gates[key] = { status: r.status, result_file: file, evaluated_at: r.evaluated_at, baseline_sha256: r.baseline.manifest_sha256 };
   wf.store.append('gate_evaluated', { gate: r.gate, status: r.status, reason: r.reason, file });
 }
 
@@ -290,16 +299,17 @@ export function runGate(wf: Workflow, gate: GateId): GateResult {
     const r = freshGate(wf, gate);
     recordGate(wf, r);
     // Approved requirements whose approval no longer verifies invalidate everything built on them.
-    if (gate === 'G2' && r.status !== 'PASS' && APPROVED_OR_LATER.includes(String(wf.state.state))) {
-      setState(wf, 'BLOCKED', 'gate:G2 approval invalidated', `gates/${wf.state.gates.G2.result_file}`, { blockers: [`G2 approval no longer valid: ${r.reason}`] });
+    // Guard names in the history use the state's own gate key (the former ID in a legacy state).
+    if (gate === 'G1' && r.status !== 'PASS' && APPROVED_OR_LATER.includes(String(wf.state.state))) {
+      setState(wf, 'BLOCKED', `gate:${gateKey(wf.state, 'G1')} approval invalidated`, `gates/${gateRecord(wf.state, 'G1')!.result_file}`, { blockers: [`G1 approval no longer valid: ${r.reason}`] });
     }
-    if (gate === 'G3' && r.status !== 'PASS' && ARCH_APPROVED_OR_LATER.includes(String(wf.state.state))) {
-      setState(wf, 'BLOCKED', 'gate:G3 approval invalidated', `gates/${wf.state.gates.G3.result_file}`, { blockers: [`G3 approval no longer valid: ${r.reason}`] });
+    if (gate === 'G2' && r.status !== 'PASS' && ARCH_APPROVED_OR_LATER.includes(String(wf.state.state))) {
+      setState(wf, 'BLOCKED', `gate:${gateKey(wf.state, 'G2')} approval invalidated`, `gates/${gateRecord(wf.state, 'G2')!.result_file}`, { blockers: [`G2 approval no longer valid: ${r.reason}`] });
     }
-    // Dependency-aware invalidation: a failing G2 re-evaluates G3 when it holds an approval.
-    if (r.status !== 'PASS' && gate === 'G2') {
+    // Dependency-aware invalidation: a failing G1 re-evaluates G2 when it holds an approval.
+    if (r.status !== 'PASS' && gate === 'G1') {
       const d = require('../design/approvals') as typeof import('../design/approvals');
-      if (d.designApprovals(wf, 'G3').length) recordGate(wf, freshGate(wf, 'G3'));
+      if (d.designApprovals(wf, 'G2').length) recordGate(wf, freshGate(wf, 'G2'));
     }
     wf.store.writeState(wf.state);
     return r;
@@ -344,9 +354,9 @@ export function advance(wf: Workflow, to: string, opts: { reason?: string; reque
       evidence = `prechecks/${s.prechecks![g.check].result_file}`;
     } else if (g.kind === 'gate') {
       // Approval gates are re-evaluated at transition time: a stale PASS never authorises a transition.
-      if (g.gate === 'G2' || g.gate === 'G3') recordGate(wf, freshGate(wf, g.gate as GateId));
-      if (!gatePassed(s, g.gate, wf.run.manifestSha256)) return reject(wf, to, `${g.gate} has not passed on the current baseline (latest: ${s.gates[g.gate]?.status ?? 'NOT_RUN'})`, by);
-      evidence = `gates/${s.gates[g.gate].result_file}`;
+      if (g.gate === 'G1' || g.gate === 'G2') recordGate(wf, freshGate(wf, g.gate as GateId));
+      if (!gatePassed(s, g.gate, wf.run.manifestSha256)) return reject(wf, to, `${g.gate} has not passed on the current baseline (latest: ${gateRecord(s, g.gate)?.status ?? 'NOT_RUN'})`, by);
+      evidence = `gates/${gateRecord(s, g.gate)!.result_file}`;
     } else if (g.kind === 'receipt') {
       const enteredAt = [...s.history].reverse().find((h) => h.to === s.state)?.at ?? s.created_at;
       const r = acceptedReceipts(wf).filter((x) => x.receipt.agent === g.agent && x.receipt.outcome === 'completed' && x.recorded_at >= enteredAt);
@@ -375,7 +385,9 @@ export function advance(wf: Workflow, to: string, opts: { reason?: string; reque
           recordPrecheck(wf, pr);
           if (pr.status !== 'PASS') return reject(wf, to, `blocking pre-check ${blockingCheck} still ${pr.status}: ${pr.reason}`, by);
         }
-        const blockingGate = blockedBy.match(/gate:(G[23])/)?.[1] as GateId | undefined;
+        // The history names the gate by the state's own key (G1/G2, or G2/G3 in a legacy state).
+        const blockingKey = blockedBy.match(/gate:(G[0-9])/)?.[1];
+        const blockingGate = blockingKey ? (gateIdOfKey(s, blockingKey) ?? undefined) : undefined;
         if (blockingGate) {
           const r = freshGate(wf, blockingGate);
           recordGate(wf, r);
@@ -383,7 +395,7 @@ export function advance(wf: Workflow, to: string, opts: { reason?: string; reque
         } else if (!blockingCheck && !opts.reason) return reject(wf, to, 'a reason confirming the blocker is cleared is required', by);
       }
     }
-    setState(wf, to, g.kind === 'gate' ? `gate:${g.gate}` : g.kind === 'precheck' ? `precheck:${g.check}` : g.kind === 'none' ? `manual:${opts.reason ?? g.note}` : `${g.kind}:${g.agent}`, evidence, to === 'BLOCKED' ? { blockers: [opts.reason as string] } : {});
+    setState(wf, to, g.kind === 'gate' ? `gate:${gateKey(s, g.gate)}` : g.kind === 'precheck' ? `precheck:${g.check}` : g.kind === 'none' ? `manual:${opts.reason ?? g.note}` : `${g.kind}:${g.agent}`, evidence, to === 'BLOCKED' ? { blockers: [opts.reason as string] } : {});
     wf.store.writeState(s);
     return { accepted: true, from: wf.state.history[wf.state.history.length - 1].from, to, reason: 'guard satisfied' };
   });
@@ -465,7 +477,7 @@ export function prepare(wf: Workflow, agentKey: string, opts: { programs?: strin
       return new OrchestratorError(`cannot dispatch ${a.name}: ${reason}`, 'DISPATCH_REJECTED');
     };
     if (!a.dispatch_states.includes(s.state)) throw refuse(`workflow state is ${s.state}; ${a.id} may only be dispatched in ${a.dispatch_states.join(', ')}`);
-    if (a.requires_gate === 'G2' || a.requires_gate === 'G3') recordGate(wf, freshGate(wf, a.requires_gate as GateId));
+    if (a.requires_gate === 'G1' || a.requires_gate === 'G2') recordGate(wf, freshGate(wf, a.requires_gate as GateId));
     if (a.requires_gate && !gatePassed(s, a.requires_gate, wf.run.manifestSha256)) throw refuse(`${a.requires_gate} has not passed on the current baseline`);
     for (const c of a.requires_prechecks ?? []) if (!precheckPassed(s, c, wf.run.manifestSha256)) throw refuse(`the ${c} pre-check has not passed on the current baseline`);
     if (a.id === 'F5') {
@@ -517,7 +529,7 @@ export function prepare(wf: Workflow, agentKey: string, opts: { programs?: strin
     const skills = a.skills.map((n) => validateSkill(skillsDir(wf.run.ctx), n));
     for (const sk of skills) if (sk.status !== 'INSTALLED') blockers.push(`${sk.status}: ${sk.name}${sk.problems.length ? ` (${sk.problems.slice(0, 3).join('; ')})` : ''}`);
     const roots = policyRoots(wf.run, s);
-    if (a.may_write_code && !roots.generationAuthorized) blockers.push('Java generation is not authorised (config flag and G3 PASS required)');
+    if (a.may_write_code && !roots.generationAuthorized) blockers.push('Java generation is not authorised (config flag and G2 PASS required)');
     const outOfScope = classification.filter((c) => fileIds.has(c.file_id) && c.modernization_scope !== 'candidate');
     if (a.may_write_code && outOfScope.length) blockers.push(`${outOfScope.length} selected program(s) need a modernisation scope decision`);
 
@@ -902,7 +914,8 @@ export function status(wf: Workflow): any {
     blocked_from: s.blocked_from,
     blockers: s.blockers,
     baseline: { manifest_sha256: s.baseline.manifest_sha256, git_commit: s.baseline.git_commit },
-    gates: Object.fromEntries(['G2', 'G3'].map((g) => [g, s.gates[g]?.status ?? 'NOT_RUN'])),
+    gate_scheme: s.gate_scheme ?? 'legacy',
+    gates: Object.fromEntries(['G1', 'G2'].map((g) => [g, gateRecord(s, g)?.status ?? 'NOT_RUN'])),
     prechecks: Object.fromEntries((['BASELINE', 'EVIDENCE'] as PrecheckId[]).map((c) => [c, precheckPassed(s, c, wf.run.manifestSha256) ? 'PASS' : (s.prechecks?.[c]?.status ?? 'NOT_RUN')])),
     history: s.history.map((h) => `${h.seq}. ${h.from} -> ${h.to} [${h.guard}]`),
     packets: { total: s.packets.length, awaiting_receipt: pending, superseded: [...superseded].sort(), packet_status_record: pst.length ? pst[pst.length - 1] : null },
@@ -921,7 +934,7 @@ export function blockedReport(wf: Workflow): any {
     rejected_transitions: audit.filter((e) => e.event === 'transition_rejected').map((e) => ({ at: e.at, ...(e.data as object) })),
     rejected_dispatches: audit.filter((e) => e.event === 'dispatch_rejected').map((e) => ({ at: e.at, ...(e.data as object) })),
     rejected_receipts: audit.filter((e) => e.event === 'receipt_rejected').map((e) => ({ at: e.at, ...(e.data as object) })),
-    non_passing_gates: Object.entries(wf.state.gates).filter(([, g]) => g.status !== 'PASS').map(([id, g]) => ({ gate: id, status: g.status, result: g.result_file })),
+    non_passing_gates: Object.entries(wf.state.gates).filter(([, g]) => g.status !== 'PASS').map(([key, g]) => ({ gate: gateLabelOfKey(wf.state, key), status: g.status, result: g.result_file })),
     undispatchable_packets: wf.store.list('packets').map((f) => wf.store.readRecord<DispatchPacket>('packets', f)).filter((p) => !p.dispatchable).map((p) => ({ packet_id: p.packet_id, blockers: p.blockers })),
   };
 }

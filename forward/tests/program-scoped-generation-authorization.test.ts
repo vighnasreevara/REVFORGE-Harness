@@ -22,7 +22,7 @@ import { fieldListFixtures, generateAuthorized } from '../runtime/src/pilot/gene
 import { authorisationStatus, conversionValidation } from '../runtime/src/pilot/gates';
 import { detectToolchain, PilotRefused, Toolchain } from '../runtime/src/pilot/pilot';
 import { cleanup, Fixture, FORWARD_DIR } from './helpers/fixture';
-import { setupG2, wfOf } from './helpers/g2fixture';
+import { setupG1, wfOf } from './helpers/g2fixture';
 
 import { javaTrackingViolations } from './helpers/gitpolicy';
 const REPO = path.resolve(FORWARD_DIR, '..');
@@ -55,7 +55,7 @@ function synvalCases(): any {
 
 /** A fixture workflow whose source tree holds the synthetic SYNVAL01 program and copybook. */
 function setup(authorize = true) {
-  const { f, ctx } = setupG2(fixtures);
+  const { f, ctx } = setupG1(fixtures);
   for (const [from, to] of [['SYNVAL01.cbl', 'src/gen/SYNVAL01.cbl'], ['SYNVALC.cpy', 'src/gen/copy/SYNVALC.cpy']]) {
     fs.mkdirSync(path.dirname(path.join(f.sourceRoot, to)), { recursive: true });
     fs.copyFileSync(path.join(VAL, 'cobol', from), path.join(f.sourceRoot, to));
