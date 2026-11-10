@@ -17,6 +17,7 @@ REVFORGE modernizes a legacy COBOL application under strict evidence rules:
 | **[Forward Engineering](forward/README.md)** | seven agents, the orchestrator, the converter and Java 21 runtime, quality gates, two human gates (G1, G2) with automated pre-checks, mandatory BMad |
 | **[End-to-end architecture](forward/handover/ARCHITECTURE.md)** | diagrams of the whole system |
 | **[Dashboard](forward/dashboard/)** | read-only Modernization Command Center ([operations](forward/handover/DASHBOARD-OPERATIONS.md)) |
+| **[Client dashboard prototype](forward/dashboard-prototype/README.md)** | plain-language dashboard for non-technical clients: the problem, the architecture, the agents running live, the outputs, the Udara comparison and the BMad stages (one HTML file, no build) |
 | **[Executable demonstration](forward/demo/gates/README.md)** | the two-gate workflow (two pre-checks, G1, G2, five automated steps) end to end on a synthetic program ([sample report](forward/demo/gates/sample-run/DEMO-REPORT.md)) |
 | **[Evidence and reconciliation reports](forward/reports/README.md)** | the report catalog: [reverse-forward reconciliation](forward/reports/REVERSE-FORWARD-RECONCILIATION.md), [final reconciliation](forward/reports/STEP-22-FINAL-RECONCILIATION.md), [master gap register](forward/reports/STEP-23-MASTER-GAP-REGISTER.md) |
 | **[CI results](https://github.com/vighnasreevara/REVFORGE-Harness/actions/workflows/revforge-ci.yml)** | four jobs on every push and pull request |
@@ -93,6 +94,7 @@ forward/                 Forward engineering
   integrations/bmad/     pinned BMad release and isolated executor
   verification/          evidence and semantic checks
   dashboard/             read-only Modernization Command Center
+  dashboard-prototype/   client dashboard prototype (one HTML file)
   demo/gates/            synthetic two-gate demonstration
   tests/                 test suites
   reports/  handover/    engineering reports and evidence, final handover package
@@ -115,9 +117,11 @@ Only `.claude/agents/` and `.claude/skills/` are ignored; other Claude Code conf
 
 **Why `output/` is at the root.** The reverse artifacts keep their original location, because historical evidence pins them by path: the workflow baseline, the source-integrity records, the CI integrity checks and the dashboard evidence. See [reverse/README.md](reverse/README.md#why-the-artifacts-stay-in-output).
 
-## Dashboard
+## Dashboards
 
-`forward/dashboard/` is the read-only **REVFORGE Modernization Command Center** (React, TypeScript, Vite). Its 12 sections:
+**Client dashboard prototype.** [`forward/dashboard-prototype/`](forward/dashboard-prototype/README.md) is the approved, plain-language dashboard for non-technical clients. Open `index.html` in a browser; it needs no build. It explains the problem and the architecture, replays a labelled demo run with the agents working live, and shows the outputs, the Udara comparison and the BMad stages. Its figures are a snapshot of this repository. The layout rules it follows are in [`CLAUDE.md`](CLAUDE.md).
+
+**Modernization Command Center.** `forward/dashboard/` is the read-only **REVFORGE Modernization Command Center** (React, TypeScript, Vite). Its 12 sections:
 - Executive overview, Reverse vs forward, Programs, Business rules;
 - Master gap register, Dependency analysis, Root cause and roadmap, Diagrams;
 - BMad governance, Testing and readiness, Handover and evidence, Evidence validation.
