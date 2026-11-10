@@ -10,6 +10,8 @@
  * PID + IPC + UTS namespaces, pivot_root into a minimal root, read-only
  * source and inputs, one writable output directory, no network, all
  * capabilities dropped and no_new_privs. It confines a whole process tree.
+ * Provider egress for LIVE runs is a separate, separately verified component
+ * (`isolation/egress.ts`, `egress-proxy.mjs`, `sandbox.sh --net egress`).
  *
  * Workspace: a minimal, scope-specific directory built from an explicit file
  * list (no symlinks, no traversal, hashes recorded) and validated before any
@@ -120,8 +122,8 @@ export function assessHost(ctx: RuntimeContext, probe: Probe = hostProbe): HostA
     { boundary: 'whole_process_filesystem', enforceable: !!userns, how: 'sandbox.sh: mount namespace + pivot_root into a minimal root; old root (Windows drives, home, /run) detached', limits: 'shares the WSL2 kernel with the host distribution; not a VM boundary' },
     { boundary: 'source_read_only', enforceable: !!userns, how: 'bind mount remounted read-only', limits: 'none known' },
     { boundary: 'single_writable_output', enforceable: !!userns, how: 'only /work/out is a writable host bind; root and /usr read-only; /tmp private tmpfs', limits: '/tmp is writable but private and discarded' },
-    { boundary: 'network_default_deny', enforceable: !!userns, how: 'new network namespace with no interfaces configured', limits: 'all-or-nothing: there is no egress path at all' },
-    { boundary: 'provider_egress_allowlist', enforceable: false, how: 'would need an egress proxy outside the namespace (e.g. sandbox-runtime with socat, or a firewall in a container/VM)', limits: 'not installed; a hostname allowlist would still not inspect TLS payloads' },
+    { boundary: 'network_default_deny', enforceable: !!userns, how: 'new network namespace with no interfaces configured (--net none, the default)', limits: 'egress mode adds exactly one path: the verified provider-egress proxy' },
+    { boundary: 'provider_egress_allowlist', enforceable: false, how: 'egress-proxy.mjs: CONNECT-only allowlist (api.anthropic.com:443) on a Unix socket outside the namespaces, bridged by socat to 127.0.0.1:3128 inside the sandbox (--net egress)', limits: `counts only after bmad executor egress-test passes on this host (needs node ${prim.linux_node?.available ? 'present' : 'missing'}, socat ${prim.linux_socat?.available ? 'present' : 'missing'} in WSL); it enforces the destination only and does not inspect TLS payloads` },
     { boundary: 'payload_content_enforcement', enforceable: false, how: 'none: TLS to the provider is end-to-end', limits: 'only the minimal workspace limits what can be disclosed' },
     { boundary: 'privilege_drop', enforceable: !!userns, how: 'setpriv: no capabilities (bounding/inheritable/ambient), no_new_privs', limits: 'none known' },
     { boundary: 'host_control_sockets', enforceable: !!userns, how: 'no /run, no docker socket, no WSL interop socket inside the new root', limits: 'none known' },
@@ -130,7 +132,7 @@ export function assessHost(ctx: RuntimeContext, probe: Probe = hostProbe): HostA
   const admin: string[] = [];
   if (!prim.linux_claude?.available || !prim.linux_node?.available) admin.push('install Node.js and Claude Code inside the WSL2 distribution (under /usr or another path the sandbox exposes read-only), pinned to an approved version');
   if (!prim.linux_bwrap?.available || !prim.linux_socat?.available) admin.push('optional: install bubblewrap and socat (sudo) to use the official Claude Code sandbox runtime as an additional layer and its hostname-allowlist proxy');
-  admin.push('provide a verified provider-egress component (allowlist proxy outside the namespace) before any LIVE run; without it the boundary has no network at all');
+  admin.push('verify the provider-egress component before any LIVE run: install node, socat and iproute2 in the WSL2 distribution and run bmad executor egress-test until every check passes; until then the boundary has no network at all');
   if (!prim.passwordless_sudo?.available) admin.push('administrator: optionally create a dedicated non-login user for AI execution (needs sudo)');
   const status: IsolationStatus = userns ? (prim.revforge_sandbox_launcher.available ? 'ISOLATION_CONFIGURED' : 'ISOLATION_AVAILABLE') : 'ISOLATION_UNAVAILABLE';
   return { assessed_at: new Date().toISOString(), host: { platform: `${process.platform} ${os.arch()}`, release: os.release(), os: osName, hypervisor_present: hyper }, wsl, primitives: prim, boundaries, admin_actions_required: admin, status };
@@ -241,12 +243,33 @@ export interface SandboxRun {
   stderr: string;
 }
 
-/** Runs argv inside the sandbox for a validated workspace. Network is always none. */
-export function runSandboxed(ctx: RuntimeContext, m: WorkspaceManifest, argv: string[], distro: string | null, timeoutMs = 120000): SandboxRun {
+/** Launch options. Without `egressSocket` the network is none (the default). */
+export interface SandboxNetOptions {
+  /** WSL path of the allowlist proxy's Unix socket (see isolation/egress.ts): switches to `--net egress`. */
+  egressSocket?: string | null;
+  /** WSL path of a KEY=VALUE credential file (mode 600); only allowlisted names reach the command. Egress mode only. */
+  envFile?: string | null;
+}
+
+/** The sandbox.sh arguments after the three directories. Pure. */
+export function sandboxNetArgs(net: SandboxNetOptions = {}): string[] {
+  const posix = (p: string, what: string) => {
+    if (!/^\/[^\0\n]*$/.test(p)) throw new Error(`${what} must be an absolute WSL path`);
+    return p;
+  };
+  if (!net.egressSocket) {
+    if (net.envFile) throw new Error('a credential file is only accepted with provider egress');
+    return ['--net', 'none'];
+  }
+  return ['--net', 'egress', posix(net.egressSocket, 'the egress socket'), ...(net.envFile ? ['--env-file', posix(net.envFile, 'the credential file')] : [])];
+}
+
+/** Runs argv inside the sandbox for a validated workspace. Network is none unless an egress socket is given. */
+export function runSandboxed(ctx: RuntimeContext, m: WorkspaceManifest, argv: string[], distro: string | null, timeoutMs = 120000, net: SandboxNetOptions = {}): SandboxRun {
   const problems = validateWorkspace(m);
   if (problems.length) throw new Error(`workspace refused: ${problems.join('; ')}`);
   const script = wslPath(sandboxScript(ctx));
-  const args = [script, wslPath(path.join(m.workspace, 'src')), wslPath(path.join(m.workspace, 'inputs')), wslPath(path.join(m.workspace, 'out')), '--net', 'none', '--', ...argv];
+  const args = [script, wslPath(path.join(m.workspace, 'src')), wslPath(path.join(m.workspace, 'inputs')), wslPath(path.join(m.workspace, 'out')), ...sandboxNetArgs(net), '--', ...argv];
   const r = process.platform === 'win32' ? spawnSync('wsl.exe', ['-d', distro ?? 'Ubuntu', '--exec', 'bash', ...args], { encoding: 'utf8', timeout: timeoutMs, windowsHide: true }) : spawnSync('bash', args, { encoding: 'utf8', timeout: timeoutMs });
   return { exit_code: r.status, stdout: String(r.stdout ?? '').replace(/\0/g, ''), stderr: String(r.stderr ?? '').replace(/\0/g, '') };
 }

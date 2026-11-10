@@ -14,6 +14,12 @@
  *     system; there is no container, separate user or mount boundary that
  *     makes files outside the workspace unreadable.
  * The controls that do exist are listed; the gaps make LIVE blocked.
+ * Network: the boundary is default-deny. `network_isolation` and
+ * `enforceable_launch_boundary` can pass for LIVE only with a current,
+ * executed, fully passed provider-egress self-test (`bmad executor
+ * egress-test`) whose recorded hashes match the current egress-proxy.mjs and
+ * sandbox.sh. Every other check (signatures, disclosure authorization,
+ * live_execution.requested, limits) still applies.
  */
 import * as path from 'path';
 import { buildSnapshot } from '../approval/snapshot';
@@ -28,6 +34,7 @@ import { disabledReason, executionManifest, executorDoctor, inspectWorkspaces, P
 import { buildMapping } from './mapping';
 import { filesUnder } from './release';
 import { HostAssessment, IsolationTestReport, sandboxScript } from '../isolation/isolation';
+import { egressEvidence, EgressTestReport, PROVIDER_ALLOWLIST } from '../isolation/egress';
 import * as fs from 'fs';
 
 export const RUNNER = { provider: 'anthropic', service: 'claude-code-cli' };
@@ -48,18 +55,24 @@ export function isolationEvidence(ctx: any, at = new Date()): { tested: boolean;
   return { tested: !problems.length, report: r, problems };
 }
 
-export function launchBoundary(ws: string | null, iso?: { tested: boolean; problems: string[]; runnerInside?: boolean }): { network_enforcement: boolean; network_default_deny: boolean; filesystem_isolation: boolean; enforceable: boolean; controls: string[]; gaps: string[] } {
+export type EgressEvidence = { verified: boolean; report: EgressTestReport | null; problems: string[] };
+
+export function launchBoundary(ws: string | null, iso?: { tested: boolean; problems: string[]; runnerInside?: boolean; egress?: { verified: boolean; problems: string[] } }): { network_enforcement: boolean; network_default_deny: boolean; filesystem_isolation: boolean; enforceable: boolean; controls: string[]; gaps: string[] } {
   const tested = !!iso?.tested;
+  // Provider egress counts only on top of a tested boundary: the proxy narrows a default-deny network, it never replaces it.
+  const egress = tested && !!iso?.egress?.verified;
   const gaps: string[] = [];
   if (!tested) gaps.push(`filesystem: no tested whole-process boundary${iso?.problems.length ? ` (${iso.problems.join('; ')})` : ''}; Claude Code file tools would run as the operator OS user and permission rules are enforced by the CLI, not the OS`);
-  gaps.push('network: the tested boundary has no network at all; a LIVE run needs a verified provider-egress component (allowlist proxy outside the namespace), which does not exist. Even then, TLS to the provider is end-to-end: request content cannot be inspected, so only the minimal workspace limits what can be disclosed');
+  if (!egress && !!iso?.egress?.verified) gaps.push('network: provider egress is verified, but it counts only on top of a tested whole-process boundary, which is missing');
+  else if (!egress) gaps.push(`network: the tested boundary has no network at all; a LIVE run needs the provider-egress component (egress-proxy.mjs + sandbox.sh --net egress, allowlist ${PROVIDER_ALLOWLIST.join(', ')}), which exists but is not verified on this host${iso?.egress?.problems.length ? ` (${iso.egress.problems.join('; ')})` : ''}: run bmad executor egress-test. Even then, TLS to the provider is end-to-end: request content cannot be inspected, so only the minimal workspace limits what can be disclosed`);
   if (!iso?.runnerInside) gaps.push('runner: Claude Code and Node are not installed inside the isolated Linux environment, so the runner cannot execute within the boundary');
   return {
-    network_enforcement: false,
+    network_enforcement: egress,
     network_default_deny: tested,
     filesystem_isolation: tested,
-    enforceable: false,
+    enforceable: tested && egress && !!iso?.runnerInside,
     controls: [
+      ...(egress ? [`provider egress verified on this host: CONNECT-only allowlist proxy outside the namespaces (${PROVIDER_ALLOWLIST.join(', ')}), loopback-only network namespace, no DNS, no other route; destination enforcement only (TLS payloads are end-to-end and not inspected)`] : []),
       tested ? 'whole-process boundary (WSL2 namespaces + pivot_root, read-only source/inputs, single writable output, no network, no capabilities, no_new_privs) tested offline on this host' : `isolated workspace ${ws ? 'with a hash-verified BMad installation' : '(none installed)'} and isolated HOME`,
       'headless run with --restricted (no Bash/PowerShell/code execution), --disallowedTools WebFetch,WebSearch,Bash,PowerShell',
       '--allowedTools Read,Glob,Grep,Write,Edit with --permission-mode dontAsk (anything else is denied, never prompted)',
@@ -72,7 +85,7 @@ export function launchBoundary(ws: string | null, iso?: { tested: boolean; probl
   };
 }
 
-export function preflight(wf: Workflow, bindingKey: string, scope: string, opts: { probe?: Probe; record?: boolean; isolation?: { tested: boolean; report: IsolationTestReport | null; problems: string[] }; assessment?: HostAssessment | null } = {}): any {
+export function preflight(wf: Workflow, bindingKey: string, scope: string, opts: { probe?: Probe; record?: boolean; isolation?: { tested: boolean; report: IsolationTestReport | null; problems: string[] }; egress?: EgressEvidence; assessment?: HostAssessment | null } = {}): any {
   const run = () => {
     const ctx = wf.run.ctx;
     const probe = opts.probe ?? defaultProbe;
@@ -140,15 +153,17 @@ export function preflight(wf: Workflow, bindingKey: string, scope: string, opts:
     add('limits', !!lim && a.includes('--max-budget-usd') && priorRuns < lim.max_runs, !lim ? 'no authorized limits (cost, files, bytes, runs)' : `cost <= $${lim.max_cost_usd} (--max-budget-usd), files <= ${lim.max_files}, bytes <= ${lim.max_bytes}, runs ${priorRuns}/${lim.max_runs}; per-request token limits are not exposed by the Claude Code CLI`);
     // Whole-process isolation (STEP 9): the offline-tested boundary, a minimal workspace plan, and the runner inside it.
     const iso = opts.isolation ?? isolationEvidence(ctx, snap.at);
+    const eg = opts.egress ?? egressEvidence(ctx, snap.at);
     const host = opts.assessment ?? null;
     const runnerInside = !!host && !!host.primitives.linux_claude?.available && !!host.primitives.linux_node?.available;
     add('workspace_manifest', !!auth && !unauthorized.length, !auth ? 'no minimal workspace can be planned without an authorization naming its files' : unauthorized.length ? `the planned workspace would contain unauthorized files: ${unauthorized.join(', ')}` : `planned workspace: ${authorized.size} authorized source file(s) read-only, mapped inputs read-only, one output directory`);
     add('filesystem_isolation', iso.tested, iso.tested ? `whole-process boundary tested offline (${iso.report!.executed_at}, launcher ${String(iso.report!.sandbox_sha256).slice(0, 12)}...)` : iso.problems.join('; '));
-    add('network_isolation', false, iso.tested ? 'default-deny verified (no route, no DNS); no verified provider-egress component exists, so a LIVE run could not reach the provider without weakening the boundary' : 'network isolation not tested');
+    const egressOk = iso.tested && eg.verified;
+    add('network_isolation', egressOk, !iso.tested ? `network isolation not tested${eg.verified ? ' (provider egress is verified, but it counts only on top of a tested whole-process boundary)' : ''}` : egressOk ? `default-deny verified (no route, no DNS); provider egress verified (${eg.report!.executed_at}, proxy ${String(eg.report!.proxy_sha256).slice(0, 12)}..., sandbox ${String(eg.report!.sandbox_sha256).slice(0, 12)}...): only CONNECT to ${PROVIDER_ALLOWLIST.join(', ')} leaves the boundary` : `default-deny verified (no route, no DNS); the provider-egress component exists but is not verified (${eg.problems.join('; ')}), so a LIVE run could not reach the provider without weakening the boundary`);
     add('host_secrets_excluded', iso.tested, iso.tested ? 'only src (ro), inputs (ro) and out (rw) are mounted; no home, credentials, signing keys, Windows drives or host sockets inside the boundary (tested)' : 'not tested');
     add('runner_inside_boundary', runnerInside, runnerInside ? 'Claude Code and Node are available inside the isolated environment' : host ? 'Claude Code and Node are not installed inside the WSL2 environment: the runner cannot run inside the boundary' : 'host not assessed (run bmad isolation doctor)');
-    const boundary = launchBoundary(ws?.path ?? null, { tested: iso.tested, problems: iso.problems, runnerInside });
-    add('enforceable_launch_boundary', boundary.enforceable, `not enforceable for LIVE: ${boundary.gaps.join(' | ')}`);
+    const boundary = launchBoundary(ws?.path ?? null, { tested: iso.tested, problems: iso.problems, runnerInside, egress: { verified: eg.verified, problems: eg.problems } });
+    add('enforceable_launch_boundary', boundary.enforceable, boundary.enforceable ? 'enforceable for LIVE: tested whole-process boundary, verified provider egress, runner inside the boundary' : `not enforceable for LIVE: ${boundary.gaps.join(' | ')}`);
 
     const reasons = checks.filter((c) => !c.ok).map((c) => `${c.id}: ${c.detail}`);
     const rec = {
@@ -166,6 +181,7 @@ export function preflight(wf: Workflow, bindingKey: string, scope: string, opts:
       exposure: { authorized_files: [...authorized.keys()].sort(), would_expose: would, unauthorized },
       launch_boundary: boundary,
       isolation: { tested: iso.tested, report_executed_at: iso.report?.executed_at ?? null, sandbox_sha256: iso.report?.sandbox_sha256 ?? null, problems: iso.problems },
+      egress: { verified: egressOk, report_executed_at: eg.report?.executed_at ?? null, proxy_sha256: eg.report?.proxy_sha256 ?? null, sandbox_sha256: eg.report?.sandbox_sha256 ?? null, allowlist: [...PROVIDER_ALLOWLIST], problems: eg.problems },
       execution_status: checks.every((c) => c.ok) ? 'EXECUTION_AUTHORIZED' : !runnerInside || !boundary.network_enforcement ? 'EXECUTION_UNSUPPORTED' : 'EXECUTION_BLOCKED',
       checks,
       launch_permitted: reasons.length === 0,

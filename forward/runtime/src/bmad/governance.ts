@@ -213,7 +213,7 @@ export function governedRuns(wf: Workflow): any[] {
 export function governedRun(
   wf: Workflow,
   scope: string,
-  opts: { runner?: Runner | null; probe?: Probe; isolation?: any; assessment?: any; deps?: StageDeps; simulation?: boolean } = {},
+  opts: { runner?: Runner | null; probe?: Probe; isolation?: any; egress?: any; assessment?: any; deps?: StageDeps; simulation?: boolean } = {},
 ): any {
   const started = new Date().toISOString();
   const s = scopeOf(wf, scope);
@@ -250,7 +250,7 @@ export function governedRun(
       stopped = true;
       continue;
     }
-    const pf = deps.preflight(wf, g.binding_id, s.text, { probe: opts.probe, record: !opts.simulation, isolation: opts.isolation, assessment: opts.assessment });
+    const pf = deps.preflight(wf, g.binding_id, s.text, { probe: opts.probe, record: !opts.simulation, isolation: opts.isolation, egress: opts.egress, assessment: opts.assessment });
     row.preflight_id = pf.record_id;
     row.authorization_id = pf.authorization_id ?? null;
     if (!pf.launch_permitted) {

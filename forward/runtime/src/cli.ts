@@ -95,6 +95,7 @@ Commands:
   approval export-request --scope S --requested-by ID | verify|import --file SIGNED.json
   provider authorization doctor|prepare|verify|import|revoke   Provider-specific AI disclosure authorization
   bmad executor preflight --workflow W --scope S   Sealed LIVE preflight (never launches)
+  bmad executor egress-test [--no-record]          Executed provider-egress self-test (synthetic; no credential sent)
   pilot plan --scope S            Source-backed VERIFIED / PARTIAL / GAP plan (non-authoritative, read-only)
   pilot run [--dir D] [--out O]   Isolated synthetic COBOL-to-Java pilot (no workflow, gates or approvals)
   pilot candidates                Rank complete real programs for the first conversion

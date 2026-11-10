@@ -1,0 +1,177 @@
+{
+  "contract": "bmad/egress-test-report",
+  "contract_version": "1.0",
+  "executed_at": "2026-11-10T00:18:56.991Z",
+  "executed": true,
+  "reason_not_executed": null,
+  "synthetic_only": true,
+  "credential_sent": false,
+  "proxy_sha256": "fdadc92c5af1e0af68f49772da7c6dab5d8eb88caf27ee95ade87071534b1b59",
+  "sandbox_sha256": "81ab7daf59aea9bb382946dfb0e5aa206e700dd19a6f1514f80606416bf45240",
+  "allowlist": [
+    "api.anthropic.com:443"
+  ],
+  "host": {
+    "platform": "win32 x64",
+    "distro": "Ubuntu"
+  },
+  "prerequisites": [
+    {
+      "name": "wsl2_distribution",
+      "available": true,
+      "detail": "Ubuntu (WSL 2)"
+    },
+    {
+      "name": "node",
+      "available": true,
+      "detail": "/usr/bin/node"
+    },
+    {
+      "name": "socat",
+      "available": true,
+      "detail": "/usr/bin/socat"
+    },
+    {
+      "name": "iproute2",
+      "available": true,
+      "detail": "/usr/sbin/ip"
+    },
+    {
+      "name": "python3",
+      "available": true,
+      "detail": "/usr/bin/python3"
+    },
+    {
+      "name": "unshare",
+      "available": true,
+      "detail": "/usr/bin/unshare"
+    },
+    {
+      "name": "setpriv",
+      "available": true,
+      "detail": "/usr/bin/setpriv"
+    },
+    {
+      "name": "unprivileged_user_namespaces",
+      "available": true,
+      "detail": "available"
+    }
+  ],
+  "host_checks": [
+    {
+      "test": "proxy_script_present",
+      "passed": true,
+      "detail": "egress-proxy.mjs sha256 fdadc92c5af1e0af68f49772da7c6dab5d8eb88caf27ee95ade87071534b1b59"
+    },
+    {
+      "test": "sandbox_egress_mode_present",
+      "passed": true,
+      "detail": "sandbox.sh sha256 81ab7daf59aea9bb382946dfb0e5aa206e700dd19a6f1514f80606416bf45240"
+    },
+    {
+      "test": "default_allowlist_is_provider_only",
+      "passed": true,
+      "detail": "the proxy default allowlist is exactly api.anthropic.com:443"
+    }
+  ],
+  "sandbox_checks": [
+    {
+      "test": "proxy_environment_set",
+      "passed": true,
+      "detail": "HTTPS_PROXY/HTTP_PROXY point to the loopback bridge"
+    },
+    {
+      "test": "environment_allowlisted",
+      "passed": true,
+      "detail": "unexpected variables: []"
+    },
+    {
+      "test": "credential_delivered_by_environment_only",
+      "passed": true,
+      "detail": "synthetic credential present in the environment; the env file path is not visible (value never printed or sent)"
+    },
+    {
+      "test": "allowlisted_provider_reachable",
+      "passed": true,
+      "detail": "proxy 'HTTP/1.1 200 Connection Established'; TLS TLSv1.3; certificate verified True; provider answered 'HTTP/1.1 404 Not Found'; no credential sent"
+    },
+    {
+      "test": "non_allowlisted_host_refused",
+      "passed": true,
+      "detail": "CONNECT example.com:443 -> 'HTTP/1.1 403 Forbidden'"
+    },
+    {
+      "test": "non_allowlisted_port_refused",
+      "passed": true,
+      "detail": "CONNECT api.anthropic.com:80 -> 'HTTP/1.1 403 Forbidden'"
+    },
+    {
+      "test": "ip_literal_refused",
+      "passed": true,
+      "detail": "CONNECT 1.1.1.1:443 -> 'HTTP/1.1 403 Forbidden'"
+    },
+    {
+      "test": "plain_http_refused",
+      "passed": true,
+      "detail": "GET http://example.com/ -> 'HTTP/1.1 405 Method Not Allowed'"
+    },
+    {
+      "test": "malformed_request_refused",
+      "passed": true,
+      "detail": "malformed head -> 'HTTP/1.1 400 Bad Request'"
+    },
+    {
+      "test": "direct_connection_blocked",
+      "passed": true,
+      "detail": "direct connections succeeded: []"
+    },
+    {
+      "test": "dns_unavailable",
+      "passed": true,
+      "detail": "names resolved: []"
+    },
+    {
+      "test": "loopback_only",
+      "passed": true,
+      "detail": "interfaces ['lo'], routes 0"
+    },
+    {
+      "test": "host_paths_hidden",
+      "passed": true,
+      "detail": "visible: []"
+    },
+    {
+      "test": "privileges_dropped",
+      "passed": true,
+      "detail": "CapEff 0000000000000000, NoNewPrivs 1"
+    },
+    {
+      "test": "proxy_logged_decisions",
+      "passed": true,
+      "detail": "allowed api.anthropic.com:443; denied (GET), (malformed), 1.1.1.1:443, api.anthropic.com:80, example.com:443; 0 malformed line(s)"
+    },
+    {
+      "test": "credential_never_in_proxy_log",
+      "passed": true,
+      "detail": "the synthetic credential marker appears in no log or output"
+    }
+  ],
+  "proxy_log": {
+    "sha256": "57a7e6f95e66d06c41099b949a9ba409406f1c2a41517554d09ed868bd924d2e",
+    "lines": 6,
+    "allowed": 1,
+    "denied": 5,
+    "allowed_destinations": [
+      "api.anthropic.com:443"
+    ],
+    "denied_destinations": [
+      "(GET)",
+      "(malformed)",
+      "1.1.1.1:443",
+      "api.anthropic.com:80",
+      "example.com:443"
+    ]
+  },
+  "all_passed": true,
+  "status": "EGRESS_VERIFIED"
+}

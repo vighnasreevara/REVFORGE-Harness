@@ -206,3 +206,60 @@ node forward/dist/runtime/src/cli.js bmad executor doctor     # installation mus
 **The workflows themselves also need caution:**
 - The BMad architecture workflow asks for web research, which is a further disclosure path; it is disallowed in the manifest.
 - Build stays disabled.
+
+## 9. Provider-egress component
+
+**Why it exists.** The whole-process sandbox (`integrations/bmad/isolation/sandbox.sh`) has no network by default. A LIVE run must reach the AI provider and nothing else. This component adds exactly one verified path, default-deny:
+
+```
+claude (inside the sandbox) --HTTPS_PROXY--> 127.0.0.1:3128 (socat, inside the sandbox's own network namespace)
+  --> /work/egress.sock (the one bind-mounted socket node)
+  --> egress-proxy.mjs (in WSL, outside the namespaces) --> api.anthropic.com:443 only
+```
+
+| Part | What it does |
+|---|---|
+| `integrations/bmad/isolation/egress-proxy.mjs` | Plain Node, no dependencies. Listens only on a Unix socket (mode 600). Accepts only `CONNECT host:port` for an exact allowlist entry: by default exactly `api.anthropic.com:443`, extra entries only with an explicit `--allow`. Other hosts, ports, IP literals: 403. Other methods (plain HTTP is never forwarded): 405. Malformed or oversized heads: 400 / 431. Nothing is resolved or connected before the decision. Limits: concurrent tunnels, idle timeout, optional total bytes. Appends one JSON line per decision (time, host, port, decision, status, reason, bytes up/down, duration), never headers or payload. |
+| `sandbox.sh --net egress SOCKET` | `--net none` stays the default and is unchanged. In egress mode the socket must be an existing Unix socket owned by the caller. Only that socket node is bind-mounted at `/work/egress.sock`. Inside the new network namespace only loopback is brought up (fails closed without `/usr/sbin/ip`), and socat bridges `127.0.0.1:3128` to the socket (fails closed without `/usr/bin/socat`). `HTTPS_PROXY` and `HTTP_PROXY` point there. There is no DNS, no other interface and no route. The environment is rebuilt from an allowlist. Capabilities are dropped, `no_new_privs` is set and `pivot_root` is used, as in none mode. |
+| `sandbox.sh --env-file FILE` | Egress mode only. Read in stage 1, outside the namespaces. Only `ANTHROPIC_API_KEY` is passed to the command, through its environment and never on a command line. The file must be a regular file owned by the caller with no group/world access. Its value is never echoed or logged, and the file is not visible inside the sandbox. |
+| `runtime/src/isolation/egress.ts` | Starts and stops the proxy in a run-specific `/tmp/revforge-egress-<id>/` (mode 700) in WSL. Runs the executed self-test (`verifyEgress`) and reads its evidence for the preflight. |
+
+**WSL prerequisites** (administrator, once; REVFORGE never installs anything):
+
+```sh
+sudo apt-get install -y nodejs npm socat iproute2
+sudo npm install -g @anthropic-ai/claude-code
+```
+
+**The provider credential.**
+- Create `~/.revforge/anthropic.key` inside WSL, on the Linux filesystem and not under `/mnt`, because Windows drives cannot hold mode 600. It contains one line, `ANTHROPIC_API_KEY=...`. Then run `chmod 600 ~/.revforge/anthropic.key`.
+- The file is never committed and never copied into the repository.
+- Point `bmad.provider_credential_file` in `config/forward.config.json` at its absolute WSL path, for example `/home/<user>/.revforge/anthropic.key`. The shipped value is `null`: no credential is configured, so the LIVE runner refuses before it starts the proxy.
+- REVFORGE never reads the file. It passes the path to `sandbox.sh --env-file`.
+
+**Verifying the component.** Run `node dist/runtime/src/cli.js bmad executor egress-test [--no-record] [--json]`. It writes `integrations/bmad/isolation/egress-test-report.json` (contract `bmad/egress-test-report`). The test runs the proxy and the sandbox in egress mode on synthetic data. It uses a synthetic marker in place of a key, and **no credential is ever sent**. Inside the boundary it checks that:
+- `CONNECT api.anthropic.com:443` succeeds, with a TLS handshake against the system CA bundle and a credential-free `HEAD /`;
+- `example.com:443`, `api.anthropic.com:80`, an IP literal, plain HTTP and a malformed request are refused by the proxy;
+- direct connections (`1.1.1.1:443`, `8.8.8.8:53`) and DNS fail;
+- only loopback exists;
+- the environment is allowlisted;
+- the env file, `/mnt`, `/home`, `/root` and `/run` are invisible;
+- capabilities are dropped.
+
+The test also checks the proxy log: the expected decisions are present, and the marker appears in no log or output. When a prerequisite is missing (no WSL, node, socat, ip, python3, unshare or setpriv), the report says `executed: false` with the precise reason. It never reports a pass.
+
+**What the preflight requires.** `network_isolation` and `enforceable_launch_boundary` can pass for LIVE only when all of these hold:
+- the filesystem boundary is tested;
+- a current egress report (at most 7 days old) exists, was executed and passed every check;
+- its recorded SHA-256 of `egress-proxy.mjs` and `sandbox.sh` matches the current files;
+- its allowlist is exactly `api.anthropic.com:443`.
+
+Changing either script invalidates the report, and the self-test must be rerun. Every other condition still applies: the signed disclosure authorization, G1 for the exact scope, `bindings.json live_execution.requested`, the verified executor installation, the limits, and the runner inside the boundary. A verified egress component never authorizes a launch by itself.
+
+**What a LIVE launch records.** The runner starts the proxy, runs the sandbox in egress mode with the configured credential path, and stops the proxy. The proxy log's SHA-256 and a summary go into a sealed `BEG-NNNN` record, linked from the `BEX` record when the execution fails. The summary holds the allowed and denied counts and destinations, and the bytes up and down.
+
+**Limits, stated plainly.**
+- The proxy enforces the destination only. TLS is end to end between Claude Code and the provider, so request content is not inspected. Only the minimal workspace limits what can be disclosed.
+- The allowlisted name is resolved by the WSL host's DNS.
+- The boundary shares the WSL2 kernel. It is not a VM.
+- The command can open as many tunnels to the provider as the limits allow.

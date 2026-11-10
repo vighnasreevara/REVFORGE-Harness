@@ -96,6 +96,10 @@
     "mandatory": true,
     "note": "STEP 21: every governed forward run needs a verified LIVE BMad receipt for each lifecycle stage (requirements, architecture, stories, sprint, implementation, review) for its exact scope; until then it is BMAD_BLOCKED, and Java generation through the workflow also needs the stages up to sprint. Local LGA conversions stay valid historical records and are never BMad-governed."
   },
+  "bmad": {
+    "provider_credential_file": null,
+    "note": "WSL path (e.g. /home/<user>/.revforge/anthropic.key) of a KEY=VALUE file with ANTHROPIC_API_KEY, mode 600, never committed. It is handed to sandbox.sh --env-file for LIVE runs only and never read, logged or copied by REVFORGE. null: no credential, so no LIVE run can reach the provider. Setting it never enables LIVE: every signature, authorization and preflight check still applies."
+  },
   "openai_verification": {
     "mode": "OFFLINE",
     "network_enabled": false,

@@ -16,6 +16,8 @@ export interface ForwardConfig {
   neo4j: { live_verification: boolean; note?: string };
   /** STEP 21: BMad is mandatory for the governed forward workflow (see runtime/src/bmad/governance.ts). */
   bmad_governance?: { mandatory: boolean; note?: string };
+  /** BMad LIVE runner: WSL path of the provider credential file (KEY=VALUE, mode 600; never read by REVFORGE). */
+  bmad?: { provider_credential_file?: string | null; note?: string };
 }
 
 export interface RuntimeContext {
