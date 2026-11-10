@@ -83,8 +83,13 @@ The BMad Method 6.12.4 is **mandatory** for new governed forward development (`b
 
 Status: **enforcement verified; LIVE execution blocked.** No workflow is authorized and none has executed live, so no receipt exists. See [`handover/BMAD-GOVERNANCE.md`](handover/BMAD-GOVERNANCE.md).
 
+**Provider egress.** LIVE runs execute Claude Code inside the whole-process sandbox (`integrations/bmad/isolation/sandbox.sh`). The sandbox reaches the AI provider only through a verified egress component: an allowlist proxy (`integrations/bmad/isolation/egress-proxy.mjs`) that permits exactly `api.anthropic.com:443` and refuses everything else. `node dist/runtime/src/cli.js bmad executor egress-test` proves this and records `egress-test-report.json`; the preflight accepts the route only while that report is current and matches the scripts. LIVE also still needs every signature, the signed disclosure authorization and `live_execution.requested`, which stays `false`. See [`docs/BMAD-INTEGRATION-OPERATIONS.md`](docs/BMAD-INTEGRATION-OPERATIONS.md).
+
+**Synthetic MOCK run.** BMad has been run through this runtime on the synthetic project in MOCK mode (no AI provider called). The PRD, architecture and epics-and-stories stages ran. Sprint planning stopped, because a mock cannot supply real upstream results. Build and review were refused: there is no generation authorization, no build and no independent F6 test. The verdict stayed `BMAD_BLOCKED`, as intended.
+
 ## 7. Dashboard and testing
 
+- **Client dashboard prototype.** [`dashboard-prototype/`](dashboard-prototype/README.md) is the approved plain-language dashboard for non-technical clients (one HTML file, no build). It shows the gates as G1 and G2, and its BMad tab includes the synthetic MOCK run.
 - **Dashboard.** [`dashboard/`](dashboard/) is the read-only Modernization Command Center (React, TypeScript, Vite). It loads only committed evidence whose SHA-256 matches its manifest, and recounts and cross-checks every total. It has its own unit tests, a build and a headless browser smoke test.
 - **Tests.** [`tests/`](tests/README.md) holds the `node:test` suites, organized by functionality. In the developer environment every suite runs. CI runs the suites that work on a pure checkout; tests that need the restricted COBOL source or generated Java skip themselves there.
 - **CI.** [`.github/workflows/revforge-ci.yml`](../.github/workflows/revforge-ci.yml) has four jobs:
@@ -136,6 +141,7 @@ forward/
   verification/src/       ID, evidence-class, semantic and numeric checks
   integrations/bmad/      pinned BMad release, bindings, isolated executor
   dashboard/              read-only Modernization Command Center
+  dashboard-prototype/    client dashboard prototype (one HTML file)
   demo/gates/             synthetic two-gate demonstration
   pilot/                  conversion sandboxes and local authorizations
   tests/                  node:test suites (see tests/README.md)
@@ -155,6 +161,7 @@ node dist/runtime/src/cli.js doctor                  # environment, inputs, .cla
 node dist/runtime/src/cli.js sync-agents --check     # forward and reverse definitions vs .claude/
 node dist/runtime/src/cli.js validate                # reverse artifacts and cross-references
 node dist/runtime/src/cli.js workflow status         # the real workflow (needs local run records)
+node dist/runtime/src/cli.js bmad executor egress-test   # prove the sandbox reaches only the AI provider (WSL2)
 npm test                                             # full suite (developer environment)
 ```
 
