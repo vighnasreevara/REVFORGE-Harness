@@ -108,6 +108,26 @@
   function readyState() { var x = simState(); x.ready = true; return x; }
 
   // ------------------------------------------------------------ simulated live run (demo, labelled as such)
+
+  // BMad stages bound to forward agents (forward/integrations/bmad/bindings.json, BMad Method 6.12.4).
+  // In this prototype every BMad stage runs SIMULATED with synthetic signers; nothing is sent to an AI provider.
+  var BMAD = {
+    F1: [['BMAD-PRD', 'bmad-prd', 'Writes the product requirements document (PRD) from the approved requirements']],
+    F3: [['BMAD-ARCH', 'bmad-architecture', 'Drafts the architecture document']],
+    F4: [['BMAD-EPICS', 'bmad-create-epics-and-stories', 'Drafts the epics and user stories'], ['BMAD-SPRINT', 'bmad-sprint-planning', 'Plans the sprint from the validated stories']],
+    F5: [['BMAD-BUILD', 'bmad-build', 'Implements the stories (here the deterministic converter stands in)']],
+    F7: [['BMAD-REVIEW', 'bmad-code-review', 'Reviews the code; the reviewer is never the implementer']]
+  };
+  var BMAD_OUTSIDE = { F2: 'Data mapping is reverse-evidence work with no BMad counterpart.', F6: 'Independent testing stays outside BMad, so the implementation cannot test or approve itself.' };
+  function bmadEvents(agent) {
+    return (BMAD[agent] || []).reduce(function (acc, b) {
+      return acc.concat([
+        { kind: 'bmad', side: 'fwd', id: agent, text: 'BMad ' + b[1] + ' (simulated): preflight passed · synthetic signers verified · disclosure authorised' },
+        { kind: 'bmad', side: 'fwd', id: agent, text: 'BMad ' + b[1] + ' (simulated): ' + b[2].charAt(0).toLowerCase() + b[2].slice(1) },
+        { kind: 'bmad', side: 'fwd', id: agent, text: 'BMad ' + b[1] + ' (simulated): receipt recorded and validated · marked SIMULATED, not counted as a live run' }
+      ]);
+    }, []);
+  }
   var SIM = [];
   (function buildScript() {
     var t = 0;
@@ -130,6 +150,7 @@
     [['F1', 'fe-requirements-analyst', ['draft_requirements.json', 'evidence_references.json', 'uncertainty_decision_register.json']], ['F2', 'fe-data-mapping-specialist', ['data_mappings.json', 'file_operation_requirements.json', 'unresolved_layout_findings.json']]].forEach(function (a, i) {
       SIM.push({ kind: 'start', side: 'fwd', id: a[0], text: a[0] + ' ' + a[1] + ' dispatched (PKT-001' + (2 + i) + ')' });
       a[2].forEach(function (f) { SIM.push({ kind: 'file', side: 'fwd', id: a[0], text: a[0] + ' wrote workflow/agents/' + a[0] + '/PKT-001' + (2 + i) + '/' + f }); });
+      bmadEvents(a[0]).forEach(function (e) { SIM.push(e); });
       SIM.push({ kind: 'stop', side: 'fwd', id: a[0], text: a[0] + ' receipt accepted · deliverables validated' });
     });
     SIM.push({ kind: 'gate', side: 'fwd', id: 'G2', status: 'AWAITING', text: 'G2 Requirements approval: scope READY, waiting for human review (the demo assumes the blocking findings are resolved)' });
@@ -696,6 +717,7 @@
       else {
         SIM.push({ kind: 'start', side: 'fwd', id: x[0], text: x[0] + ' ' + x[1] + ' dispatched' });
         x[2].forEach(function (f) { SIM.push({ kind: 'file', side: 'fwd', id: x[0], text: x[0] + ' wrote workflow/agents/' + x[0] + '/' + f }); });
+        bmadEvents(x[0]).forEach(function (e) { SIM.push(e); });
         SIM.push({ kind: 'stop', side: 'fwd', id: x[0], text: x[0] + ' receipt accepted · deliverables validated' });
       }
     });
@@ -1074,8 +1096,11 @@
         n++;
         var num = f.k, b = FBRIEF[num];
         var produced = S.mode === 'demo' ? filesOf(num) : (s.st === 'completed' ? b.outs : []);
+        var bm = BMAD[num], bmLive = S.events.filter(function (e) { return e.id === num && e.kind === 'bmad'; });
+        var bmLine = bm ? '<div class="mt-1.5 flex flex-wrap items-center gap-1.5"><span class="rounded bg-violet-100 px-1.5 py-0.5 text-[10px] font-bold text-violet-700">BMad</span>' + bm.map(function (x) { return code(x[1]); }).join(' ') + '<span class="text-[10.5px] text-slate-500">' + (bmLive.length ? (s.st === 'completed' ? 'simulated · receipt recorded' : 'simulated · running') : 'simulated') + '</span></div>' + (s.st === 'in_progress' && bmLive.length ? '<div class="mt-1 flex items-center gap-1.5 text-[11px] text-violet-800"><i data-lucide="loader" class="h-3 w-3 animate-spin"></i>' + esc(bmLive[0].text.replace(/^BMad [^ ]+ \(simulated\): /, '')) + '</div>' : '')
+          : BMAD_OUTSIDE[num] ? '<div class="mt-1.5 text-[10.5px] text-slate-500"><span class="rounded bg-slate-100 px-1.5 py-0.5 text-[10px] font-bold text-slate-600">No BMad</span> ' + BMAD_OUTSIDE[num] + '</div>' : '';
         var out = b.outs.map(function (o) { var made = produced.some(function (p) { return p.indexOf(o.replace(/\/$/, '')) >= 0; }) || (S.mode !== 'demo' && s.st === 'completed'); return '<span class="' + (made ? 'text-slate-800' : 'text-slate-400') + '">' + esc(o) + '</span>'; }).join(', ');
-        html += agentCard(num, n, b.name, s.st, b.what, out, filesOf(num));
+        html += agentCard(num, n, b.name, s.st, b.what, out + bmLine, filesOf(num));
         if (next) html += connector('passes ' + esc(b.pass), s.st);
       } else {
         html += stepChip(f, s.st, f.gate && s.note ? s.note.toLowerCase() : f.check ? (s.st === 'completed' ? 'pass' : s.st === 'blocked' ? 'failed' : s.st === 'in_progress' ? 'checking…' : 'waiting') : null);
@@ -1507,6 +1532,62 @@
       '<div class="mt-4 space-y-2">' + rows.join('') + '</div>' +
       (S.mode === 'demo' && !S.ready ? '<p class="mt-3 text-[11px] text-slate-500">These are the files of the last real reverse run. The live demo only simulates file writing.</p>' : '');
   }
+
+
+  // The real MOCK run of BMad on the synthetic project (REVFORGE runtime, 2026-11-09; no AI provider called, no cost).
+  var BMAD_MOCK_RUN = {
+    at: '2026-11-09T23:37:14Z', scope: 'programs:BRAVO02 (synthetic)', verdict: 'BMAD_BLOCKED',
+    stages: [
+      ['F1', 'bmad-prd', 'ran', 'BPK-0001', 'Sealed packet prepared after the synthetic G1 approval was verified; MOCK result recorded.'],
+      ['F3', 'bmad-architecture', 'ran', 'BPK-0002', 'Sealed packet prepared; MOCK result recorded.'],
+      ['F4', 'bmad-create-epics-and-stories', 'ran', 'BPK-0003', 'Ran after the synthetic design approval (G3) and the automatic story check; MOCK result recorded.'],
+      ['F4', 'bmad-sprint-planning', 'stopped', 'BPK-0004', 'Packet prepared, but mock mode cannot plan a sprint: it needs real results from the earlier BMad stages. Only a live run can supply them.'],
+      ['F5', 'bmad-build', 'refused', 'BEL-0005', 'Refused: Java generation is not switched on for the synthetic project and no target folder is authorised.'],
+      ['F7', 'bmad-code-review', 'refused', 'BEL-0006', 'Refused: review is only allowed after the build and an independent F6 test, and neither exists yet.']
+    ]
+  };
+  function bmadRunCard() {
+    var R = BMAD_MOCK_RUN;
+    var tag = function (st) { return st === 'ran' ? '<span class="inline-flex items-center gap-1 whitespace-nowrap rounded-full bg-emerald-50 px-2 py-0.5 text-[11px] font-semibold text-emerald-700 ring-1 ring-emerald-200"><i data-lucide="check" class="h-3 w-3"></i>ran (MOCK)</span>' : st === 'stopped' ? '<span class="inline-flex items-center gap-1 rounded-full bg-amber-50 px-2 py-0.5 text-[11px] font-semibold text-amber-800 ring-1 ring-amber-200"><i data-lucide="pause" class="h-3 w-3"></i>stopped</span>' : '<span class="inline-flex items-center gap-1 rounded-full bg-rose-50 px-2 py-0.5 text-[11px] font-semibold text-rose-700 ring-1 ring-rose-200"><i data-lucide="shield-x" class="h-3 w-3"></i>refused</span>'; };
+    var rows = R.stages.map(function (x, i) { return [String(i + 1), '<b class="text-slate-800">' + x[0] + ' ' + FBRIEF[x[0]].name + '</b><div class="mt-0.5">' + code(x[1]) + '</div>', tag(x[2]), code(x[3]), '<span class="text-[12.5px] leading-relaxed text-slate-700">' + x[4] + '</span>']; });
+    var ran = R.stages.filter(function (x) { return x[2] === 'ran'; }).length;
+    return sub(stitle('What happened when BMad really ran', badge('MOCK · synthetic · no cost', 'violet')) +
+      '<p class="mb-3 text-[13px] leading-relaxed text-slate-700">BMad was run through the real REVFORGE runtime on the synthetic project <b>' + R.scope + '</b>, in <b>MOCK</b> mode: every check, sealed packet and record is real, but no AI provider was called and nothing was sent anywhere. <b>' + ran + ' of 6 stages ran; 3 were stopped by REVFORGE\'s own rules</b>, each for a stated reason.</p>' +
+      table(['#', 'Stage', 'Result', 'Record', 'What happened'], rows) +
+      '<div class="mt-3 flex items-start gap-3 rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-[12.5px] leading-relaxed text-slate-700"><i data-lucide="scale" class="mt-0.5 h-5 w-5 shrink-0 text-slate-600"></i><span><b>Verdict: ' + R.verdict + '.</b> This is the correct result: MOCK results never count as real BMad work, so the project cannot be marked BMad-compliant until the stages run live with real sign-offs. The stopped and refused stages show the safety rules working: BMad cannot skip ahead without real earlier results, an authorised build and independent testing.</span></div>' +
+      '<p class="mt-2 text-[11px] text-slate-500">Run on ' + dt(R.at) + '. Records: sealed packets BPK-0001 to BPK-0004 and refusal records BEL-0005 and BEL-0006 in the synthetic workflow.</p>');
+  }
+  function tBmad() {
+    var signers = [
+      ['Requirements approver', 'Jane Smith', 'j.smith', 'Signs G2: the requirements are right'],
+      ['Architecture approver', 'Arun Rao', 'a.rao', 'Signs G3: the design is right'],
+      ['Business SME', 'Priya Nair', 'p.nair', 'Resolves open business questions before G2'],
+      ['Technical authority', 'Tom Becker', 't.becker', 'Confirms technical evidence; co-signs design changes to legacy behaviour'],
+      ['Data owner', 'Lena Ortiz', 'l.ortiz', 'Signs the permission to send the selected files to the AI provider'],
+      ['Project owner', 'Sam Patel', 's.patel', 'Switches BMad live execution on once everything is signed']
+    ];
+    var stageRows = ['F1', 'F3', 'F4', 'F5', 'F7'].reduce(function (acc, k) {
+      return acc.concat(BMAD[k].map(function (b) {
+        var st = S.mode === 'demo' && !S.ready ? S.fwd[k].st : 'pending';
+        var done = S.mode === 'demo' && S.events.some(function (e) { return e.id === k && e.kind === 'bmad' && /receipt recorded/.test(e.text); }) && st === 'completed';
+        var state = S.mode !== 'demo' ? '<span class="text-xs text-rose-700">blocked: no live run yet</span>' : S.ready ? '<span class="text-xs text-slate-500">waiting for the run</span>' : done ? pill('completed', 'soft', 'simulated · receipt recorded') : st === 'in_progress' ? pill('in_progress', 'soft', 'simulated · running') : pill('pending', 'soft', 'waiting');
+        return ['<b class="text-slate-800">' + k + ' ' + FBRIEF[k].name + '</b>', code(b[1]), '<span class="text-[12.5px] text-slate-700">' + b[2] + '</span>', state];
+      }));
+    }, []);
+    var stepsReal = [['key', 'Real people create their own signing keys', 'Each signer above is replaced by a named person who generates an Ed25519 key; an administrator adds the public keys to the trust store.'],
+      ['pen-line', 'They sign for real', 'The SME decisions, G2, the data owner\'s disclosure permission and G3 are signed by those people. Nobody signs on someone else\'s behalf.'],
+      ['globe-lock', 'The sandbox gets a locked route to the AI provider', 'Claude Code runs inside the sandbox, which can reach only the AI provider and nothing else.'],
+      ['toggle-right', 'BMad is switched from SIMULATED to LIVE', 'The project owner turns live execution on. From then on each BMad stage writes real documents, and each receipt is checked before it counts.']];
+    return '<p class="text-[15px] leading-relaxed text-slate-700"><b>BMad</b> is the AI method REVFORGE uses to draft the requirements document, the design, the stories and the code review. REVFORGE never lets it act on its own authority: every BMad stage runs only after the right people have signed, inside a locked sandbox, and every result is checked before it counts.</p>' +
+      '<div class="mt-4 flex items-start gap-3 rounded-xl border border-violet-200 bg-violet-50 px-4 py-3 text-[13px] leading-relaxed text-violet-950"><i data-lucide="flask-conical" class="mt-0.5 h-5 w-5 shrink-0 text-violet-700"></i><span><b>In this prototype everything is synthetic.</b> The signers below are example people with test keys, and BMad runs in <b>MOCK</b> mode: the real checks, packets and records, but no code is sent to an AI provider and it costs nothing. For the real project only two things change: real people sign, and BMad is switched to live.</span></div>' +
+      '<div class="mt-4">' + bmadRunCard() + '</div>' +
+      '<div class="mt-4">' + sub(stitle('The six BMad stages', badge('BMad Method 6.12.4', 'violet')) + table(['Agent', 'BMad workflow', 'What it does', 'In the live demo'], stageRows) +
+        '<p class="mt-3 text-[12px] leading-relaxed text-slate-600"><b>Outside BMad on purpose:</b> F2 Data mapping: ' + BMAD_OUTSIDE.F2 + ' F6 Independent testing: ' + BMAD_OUTSIDE.F6 + '</p>') + '</div>' +
+      '<div class="mt-4 grid gap-4 xl:grid-cols-2">' +
+        sub(stitle('Who signs', badge('synthetic in this prototype', 'violet')) + table(['Role', 'Signer (synthetic)', 'Signs', 'Real project'], signers.map(function (x) { return ['<b class="text-slate-800">' + x[0] + '</b>', x[1] + '<div class="font-mono text-[11px] text-slate-500">' + x[2] + '</div>', '<span class="text-[12.5px] text-slate-700">' + x[3] + '</span>', '<span class="text-[11.5px] font-semibold text-amber-700">replace with a real person</span>']; })) +
+          '<p class="mt-2 text-[11.5px] text-slate-500">Some roles must be different people: the requirements approver cannot also be the business SME, and nobody approves work they produced.</p>') +
+        sub(stitle('What changes for the real project') + '<ol class="space-y-3">' + stepsReal.map(function (x, i) { return '<li class="flex gap-3"><span class="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-violet-600 text-[12px] font-bold text-white">' + (i + 1) + '</span><div><div class="flex items-center gap-1.5 text-[13.5px] font-bold text-slate-900"><i data-lucide="' + x[0] + '" class="h-4 w-4 text-violet-600"></i>' + x[1] + '</div><p class="text-[12.5px] leading-relaxed text-slate-600">' + x[2] + '</p></div></li>'; }).join('') + '</ol>') + '</div>';
+  }
   var V = function (key, label, icon, title, subtitle, render) { return { key: key, label: label, icon: icon, title: title, subtitle: subtitle, render: render }; };
   var SECTIONS = [
     { key: 'overview', label: 'Overview', icon: 'layout-dashboard', views: [V('overview', 'Summary', 'layout-dashboard', 'Overview — where the modernization stands', 'For managers: status in one sentence, decisions needed, the last run and BRD completeness.', tOverview)] },
@@ -1528,6 +1609,7 @@
       views: [V('forward', 'Live progress', 'radio', 'Forward Engineering — live progress', 'Which forward agent or gate is active, what it produced, and where the workflow stands.', tFwdLive),
               V('gate-reviews', 'Gate reviews', 'clipboard-check', 'Gate reviews — review and approve', 'The two human gates G2 and G3: what you approve, the checks, and your signed decision.', tReviews),
               V('forward-gates', 'Gates', 'check-check', 'Forward Engineering — gates G2, G3 and the automated checks', 'Recorded status and reason of the two human gates and the automated checks.', tGates),
+              V('forward-bmad', 'BMad', 'sparkles', 'BMad — the AI drafting stages, governed', 'How BMad fits into forward engineering, who signs before it runs, and what changes for the real project.', tBmad),
               V('forward-agents', 'Agents', 'bot', 'Forward agents F1 to F7', 'Each agent works from a dispatch packet and returns a receipt; none can pass a gate.', tFwdAgents),
               V('forward-programs', 'Programs', 'boxes', 'Programs — the 42 COBOL programs', 'Readiness, Java status, tests and open gaps per program.', tPrograms)] },
     { key: 'results', label: 'Results', icon: 'folder-open',
