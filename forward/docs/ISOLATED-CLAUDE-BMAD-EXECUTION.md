@@ -102,7 +102,7 @@ A passing isolation test is **not** permission to send COBOL to a model.
 ## What still blocks a LIVE run
 
 1. **Claude Code is not inside the boundary.** Node.js and Claude Code are not installed in WSL2. An administrator must install a pinned version under a path the sandbox exposes read-only.
-2. **There is no provider egress path.** The boundary has no network at all. A LIVE run needs a separately verified egress component outside the namespace, such as the official sandbox runtime's proxy (bubblewrap and socat) or a container/VM firewall, that allows only the authorized provider host.
+2. **Provider egress must be verified on the host.** By default the boundary has no network at all. The provider-egress component exists (`egress-proxy.mjs`, a CONNECT-only allowlist proxy for `api.anthropic.com:443` outside the namespaces, and `sandbox.sh --net egress`), but it counts only after `bmad executor egress-test` has executed and passed on this host for the current proxy and sandbox scripts. See [BMAD-INTEGRATION-OPERATIONS.md §9](BMAD-INTEGRATION-OPERATIONS.md#9-provider-egress-component).
 
    Even then, **TLS to the provider is end-to-end**:
    - request content cannot be inspected;

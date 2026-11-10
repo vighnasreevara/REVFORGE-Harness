@@ -35,6 +35,8 @@ afterEach(() => {
 });
 
 const testedIso = { tested: true, report: { executed_at: new Date().toISOString(), sandbox_sha256: 'a'.repeat(64) } as any, problems: [] };
+// The provider-egress component exists; these scenarios model a host where its self-test has not passed (independent of any report on disk).
+const unverifiedEgress = { verified: false, report: null, problems: ['the provider-egress self-test has not passed on this host'] };
 const hostWithoutRunner: any = { primitives: { linux_claude: { available: false }, linux_node: { available: false } } };
 const neverRun = () => {
   throw new Error('the runner must not be called');
@@ -94,12 +96,13 @@ describe('STEP 21 - mandatory BMad governance: blocked conditions', () => {
   test('missing Claude Code runtime and provider connectivity keep the launch refused with a valid authorization', () => {
     const { f, ctx, dk } = designFixture(fixtures);
     assert.equal(importDisclosure(wfOf(ctx), signedDisclosure(f, claudeRequest(ctx), dk.dataowner, DESIGN_SIGNERS.dataowner)).imported, true);
-    const r = governedRun(wfOf(ctx), BRAVO, { runner: neverRun as any, probe: () => 'probe 1.0', isolation: testedIso, assessment: hostWithoutRunner });
+    const r = governedRun(wfOf(ctx), BRAVO, { runner: neverRun as any, probe: () => 'probe 1.0', isolation: testedIso, egress: unverifiedEgress, assessment: hostWithoutRunner });
     assert.equal(r.status, 'BMAD_BLOCKED');
     const pf = wfOf(ctx).store.readRecord('bmad', `${r.stages[0].preflight_id}.json`);
     assert.equal(pf.checks.find((c: any) => c.id === 'provider_authorization').ok, true);
     assert.equal(pf.checks.find((c: any) => c.id === 'runner_inside_boundary').ok, false, 'missing Claude Code runtime');
     assert.equal(pf.checks.find((c: any) => c.id === 'network_isolation').ok, false, 'no verified provider route');
+    assert.match(pf.checks.find((c: any) => c.id === 'network_isolation').detail, /exists but is not verified/);
   });
 
   test('missing BMad installation (no executor tools) is a blocker', () => {

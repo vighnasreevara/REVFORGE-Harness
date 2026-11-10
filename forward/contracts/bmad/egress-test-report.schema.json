@@ -1,0 +1,87 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://revforge.local/contracts/bmad/egress-test-report.schema.json",
+  "title": "Executed self-test of the BMad provider-egress component (allowlist proxy + sandbox egress mode; synthetic data, no credential sent)",
+  "type": "object",
+  "properties": {
+    "contract": { "const": "bmad/egress-test-report" },
+    "contract_version": { "const": "1.0" },
+    "executed_at": { "type": "string", "format": "date-time" },
+    "executed": { "type": "boolean" },
+    "reason_not_executed": { "type": ["string", "null"] },
+    "synthetic_only": { "const": true },
+    "credential_sent": { "const": false },
+    "proxy_sha256": { "anyOf": [{ "$ref": "../common.schema.json#/definitions/sha256" }, { "type": "null" }] },
+    "sandbox_sha256": { "anyOf": [{ "$ref": "../common.schema.json#/definitions/sha256" }, { "type": "null" }] },
+    "allowlist": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "type": "string", "pattern": "^[a-z0-9.-]+:[0-9]{1,5}$" }
+    },
+    "host": {
+      "type": "object",
+      "properties": {
+        "platform": { "type": "string", "minLength": 1 },
+        "distro": { "type": ["string", "null"] }
+      },
+      "required": ["platform", "distro"],
+      "additionalProperties": false
+    },
+    "prerequisites": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "name": { "type": "string", "minLength": 1 },
+          "available": { "type": "boolean" },
+          "detail": { "type": "string" }
+        },
+        "required": ["name", "available", "detail"],
+        "additionalProperties": false
+      }
+    },
+    "host_checks": { "$ref": "#/definitions/checks" },
+    "sandbox_checks": { "$ref": "#/definitions/checks" },
+    "proxy_log": {
+      "anyOf": [
+        { "type": "null" },
+        {
+          "type": "object",
+          "properties": {
+            "sha256": { "$ref": "../common.schema.json#/definitions/sha256" },
+            "lines": { "type": "integer", "minimum": 0 },
+            "allowed": { "type": "integer", "minimum": 0 },
+            "denied": { "type": "integer", "minimum": 0 },
+            "allowed_destinations": { "type": "array", "items": { "type": "string" } },
+            "denied_destinations": { "type": "array", "items": { "type": "string" } }
+          },
+          "required": ["sha256", "lines", "allowed", "denied", "allowed_destinations", "denied_destinations"],
+          "additionalProperties": false
+        }
+      ]
+    },
+    "all_passed": { "type": "boolean" },
+    "status": { "enum": ["EGRESS_VERIFIED", "EGRESS_NOT_VERIFIED", "EGRESS_NOT_EXECUTED"] }
+  },
+  "required": ["contract", "contract_version", "executed_at", "executed", "reason_not_executed", "synthetic_only", "credential_sent", "proxy_sha256", "sandbox_sha256", "allowlist", "host", "prerequisites", "host_checks", "sandbox_checks", "proxy_log", "all_passed", "status"],
+  "additionalProperties": false,
+  "allOf": [
+    { "if": { "properties": { "executed": { "const": false } } }, "then": { "properties": { "reason_not_executed": { "type": "string", "minLength": 1 }, "all_passed": { "const": false }, "status": { "const": "EGRESS_NOT_EXECUTED" } } } },
+    { "if": { "properties": { "status": { "const": "EGRESS_VERIFIED" } } }, "then": { "properties": { "executed": { "const": true }, "all_passed": { "const": true }, "sandbox_checks": { "minItems": 1 } } } }
+  ],
+  "definitions": {
+    "checks": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "test": { "type": "string", "minLength": 1 },
+          "passed": { "type": "boolean" },
+          "detail": { "type": "string" }
+        },
+        "required": ["test", "passed", "detail"],
+        "additionalProperties": false
+      }
+    }
+  }
+}

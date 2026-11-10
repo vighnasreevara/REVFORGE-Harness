@@ -567,6 +567,27 @@
           "type": "string"
         }
       }
+    },
+    "bmad": {
+      "type": "object",
+      "additionalProperties": false,
+      "description": "BMad LIVE runner settings. provider_credential_file is the WSL path (e.g. /home/<user>/.revforge/anthropic.key) of a KEY=VALUE file, mode 600, holding ANTHROPIC_API_KEY. It is passed to sandbox.sh --env-file and never read, logged or committed by REVFORGE. null (the default) means no credential is configured, so no LIVE launch can reach the provider.",
+      "properties": {
+        "provider_credential_file": {
+          "anyOf": [
+            {
+              "type": "string",
+              "pattern": "^/[^\u0000\n]+$"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "note": {
+          "type": "string"
+        }
+      }
     }
   }
 }

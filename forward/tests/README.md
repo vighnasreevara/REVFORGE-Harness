@@ -34,14 +34,15 @@ Counts are from the full developer-environment run: 454 tests in 27 files, all p
 | `mandatory-bmad-governance.test.ts` | mandatory BMad governance: every blocked condition keeps a governed run BMAD_BLOCKED with no fallback; failed, invalid and MOCK receipts never count | `bmad/` (governance, preflight, executor, adapter, eligibility) | 13 | Developer |
 | `dashboard-backup-exclusion-policy.test.ts` | backup exclusion policy 2: the dashboard's reproducible output is excluded, its source stays recoverable, policy-1 archives still verify | `tools/backup.js` | 6 | CI |
 | `bmad-e2e.test.ts` | BMad end to end: receipts, drafts and forward consumption | `bmad/` (adapter, executor, governance, preflight, runner), `disclosure/` | 12 | Developer |
+| `bmad-provider-egress.test.ts` | the provider-egress component: the allowlist proxy decision function and socket behaviour (loopback, injected upstream), sandbox egress arguments and env-file refusals, the egress self-test report and evidence (passing, failing, stale-hash, old), the preflight network checks, LIVE runner wiring, the credential never recorded; WSL tests skip with the reason when node/socat/ip are missing | `isolation/` (egress, isolation), `bmad/` (preflight, runner, executor), `integrations/bmad/isolation/egress-proxy.mjs` | 30 | Developer |
 | `git-policy.test.ts` | the Git tracking policy: the hand-written Java runtime tracked, generated Java and class files ignored | `helpers/gitpolicy.ts` | 4 | CI |
 | `synthetic-gate-demonstration.test.ts` | the synthetic two-gate demonstration (`SYNTHETIC_INTERVIEW_DEMO`): all nine demo steps (two pre-checks, G1, G2, five automated steps) pass with executed checks; injected defects stop the run at the right step with exit code 1; demo approvals and SIMULATED BMad receipts are refused as production authorization | `demo/` (gates, oracle, signing), `pilot/` (cobol-app, java-app), `approval/trust`, `bmad/governance` | 23 | CI (demo job) |
 | `reverse-forward-agent-sync.test.ts` | canonical reverse and forward agent/skill locations: the reverse registry (7 agents, 14 skills) against `reverse/`, agent-to-skill references, the `.claude/` copies generated (git-ignored, untracked) and all 42 installed in sync, drift detection and repair per side, refusal on a missing source, edited/unregistered copies still reported as reverse-harness changes, `reverse/` not writable by forward agents | `orchestrator/` (reverse, mirror, permissions), `core/git` | 9 | CI |
 
 **Totals:**
-- 27 files and 454 tests.
+- 28 files and 484 tests.
 - **CI:** 21 files, 336 tests in the forward job (30 skip themselves on a pure checkout), plus `synthetic-gate-demonstration.test.ts` (23 tests) in the demo job.
-- **Developer only:** 5 files, 95 tests.
+- **Developer only:** 6 files, 125 tests.
 
 ## Running
 

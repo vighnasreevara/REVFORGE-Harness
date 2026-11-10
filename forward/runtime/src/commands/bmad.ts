@@ -26,6 +26,7 @@ import { governanceVerdict, governedRun } from '../bmad/governance';
 import { sandboxRunner } from '../bmad/runner';
 import { ISOLATION_REPORT, isolationEvidence, preflight } from '../bmad/preflight';
 import { assessHost, runIsolationTests, sandboxScript } from '../isolation/isolation';
+import { EGRESS_REPORT, verifyEgress } from '../isolation/egress';
 import { scopeSourceFiles } from '../disclosure/disclosure';
 import { mutate } from '../orchestrator/orchestrator';
 import { sha256File } from '../core/fsutil';
@@ -195,10 +196,8 @@ export function bmadCommand(ctx: RuntimeContext, action: string | undefined, fla
         if (sub === 'test') {
           const r = runIsolationTests(ctx);
           if (flags.record === true) {
+            // Only the current report next to sandbox.sh is refreshed; the dated STEP-9 copy under reports/ is historical evidence.
             fs.writeFileSync(ISOLATION_REPORT(ctx), JSON.stringify(r, null, 2) + '\n', 'utf8');
-            const dir = path.join(ctx.forwardDir, 'reports', 'step-9');
-            fs.mkdirSync(dir, { recursive: true });
-            fs.writeFileSync(path.join(dir, 'isolation-test-report.json'), JSON.stringify(r, null, 2) + '\n', 'utf8');
           }
           print(r, () => {
             for (const c of [...r.host_checks, ...r.sandbox_checks]) out(`  [${c.passed ? 'PASS' : 'FAIL'}] ${c.test}: ${c.detail}`);
@@ -259,6 +258,17 @@ export function bmadCommand(ctx: RuntimeContext, action: string | undefined, fla
           });
           return r.launch_permitted ? 0 : 1;
         }
+        if (sub === 'egress-test') {
+          // Executed self-test of the provider-egress component (synthetic data; no credential is ever sent).
+          const r = verifyEgress(ctx, undefined, { write: flags['no-record'] !== true });
+          print(r, () => {
+            for (const p of r.prerequisites) out(`  ${p.available ? 'yes' : 'no '} ${p.name}: ${p.detail}`);
+            for (const c of [...r.host_checks, ...r.sandbox_checks]) out(`  [${c.passed ? 'PASS' : 'FAIL'}] ${c.test}: ${c.detail}`);
+            if (r.proxy_log) out(`  proxy log sha256 ${r.proxy_log.sha256}: ${r.proxy_log.allowed} allowed, ${r.proxy_log.denied} denied`);
+            out(`provider egress (${r.allowlist.join(', ')}): ${r.executed ? (r.all_passed ? 'ALL PASSED' : 'FAILURES') : `NOT EXECUTED (${r.reason_not_executed})`} — ${r.status}; synthetic data only, no credential sent${flags['no-record'] === true ? '' : `; recorded ${path.relative(ctx.repoRoot, EGRESS_REPORT(ctx)).split(path.sep).join('/')}`}`);
+          });
+          return r.all_passed ? 0 : 1;
+        }
         if (sub === 'report') {
           const d = executorDoctor(ctx);
           let real: any[] = [];
@@ -280,7 +290,7 @@ export function bmadCommand(ctx: RuntimeContext, action: string | undefined, fla
           });
           return 0;
         }
-        err('bmad executor: use doctor | preflight --workflow W --scope S | eligibility --workflow W --scope S | dry-run --workflow W --scope S [--record] | report [--scope S] [--out FILE] (there is no execute command)');
+        err('bmad executor: use doctor | preflight --workflow W --scope S | eligibility --workflow W --scope S | dry-run --workflow W --scope S [--record] | egress-test [--no-record] | report [--scope S] [--out FILE] (there is no execute command)');
         return 2;
       }
       case 'governance': {

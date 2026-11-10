@@ -203,24 +203,43 @@ export interface ExecutionOutcome {
   stdout_sha256: string | null;
   result_file: string | null;
   error?: string;
+  /** Provider-egress proxy summary of a LIVE launch (log SHA-256, allowed / denied counts; never headers or payload). */
+  egress?: import('../isolation/egress').EgressSummary;
+}
+
+/** Seals the provider-egress summary of one execution as a BEG record (one per launch that started the proxy). */
+function recordEgress(wf: Workflow, packetId: string, egress: NonNullable<ExecutionOutcome['egress']>): string {
+  const n = wf.store.list(BMAD_RECORDS).filter((f) => f.startsWith('BEG-')).length + 1;
+  const rid = `BEG-${String(n).padStart(4, '0')}`;
+  const file = wf.store.writeRecord(BMAD_RECORDS, `${rid}.json`, { record_id: rid, packet_id: packetId, recorded_at: new Date().toISOString(), kind: 'provider_egress', egress });
+  wf.store.append('bmad_egress_recorded', { record: `${BMAD_RECORDS}/${rid}.json`, packet_id: packetId, allowed: egress.connections_allowed, denied: egress.connections_denied, log_sha256: egress.log_sha256, sha256: sha256File(file) });
+  return rid;
 }
 export type Runner = (manifest: any) => ExecutionOutcome;
 
 /** Records what an execution returned. A failure is recorded and never becomes a receipt; a completion claim must pass the receipt validator. */
-export function handleExecutionOutcome(wf: Workflow, packetId: string, outcome: ExecutionOutcome): { execution_record: string; status: 'failed' | 'completed_validated' | 'completed_rejected'; receipt: any | null } {
+export function handleExecutionOutcome(wf: Workflow, packetId: string, outcome: ExecutionOutcome): { execution_record: string; status: 'failed' | 'completed_validated' | 'completed_rejected'; receipt: any | null; egress_record?: string } {
   if (outcome.exit_code !== 0 || !outcome.result_file) {
     const id = mutate(wf, `bmad execution failed ${packetId}`, () => {
+      const egressRecord = outcome.egress ? recordEgress(wf, packetId, outcome.egress) : null;
       const n = wf.store.list(BMAD_RECORDS).filter((f) => f.startsWith('BEX-')).length + 1;
       const rid = `BEX-${String(n).padStart(4, '0')}`;
-      const file = wf.store.writeRecord(BMAD_RECORDS, `${rid}.json`, { record_id: rid, packet_id: packetId, recorded_at: new Date().toISOString(), status: 'failed', exit_code: outcome.exit_code, stdout_sha256: outcome.stdout_sha256, error: outcome.error ?? (outcome.result_file ? null : 'no result file was produced') });
+      const file = wf.store.writeRecord(BMAD_RECORDS, `${rid}.json`, { record_id: rid, packet_id: packetId, recorded_at: new Date().toISOString(), status: 'failed', exit_code: outcome.exit_code, stdout_sha256: outcome.stdout_sha256, error: outcome.error ?? (outcome.result_file ? null : 'no result file was produced'), ...(outcome.egress ? { egress_record: egressRecord, egress: outcome.egress } : {}) });
       wf.store.append('bmad_execution_failed', { record: `${BMAD_RECORDS}/${rid}.json`, packet_id: packetId, exit_code: outcome.exit_code, sha256: sha256File(file) });
       wf.store.writeState(wf.state);
       return rid;
     });
     return { execution_record: id, status: 'failed', receipt: null };
   }
+  const egressRecord = outcome.egress
+    ? mutate(wf, `bmad egress ${packetId}`, () => {
+        const rid = recordEgress(wf, packetId, outcome.egress!);
+        wf.store.writeState(wf.state);
+        return rid;
+      })
+    : null;
   const receipt = recordResult(wf, packetId, outcome.result_file);
-  return { execution_record: receipt.receipt_id, status: receipt.accepted ? 'completed_validated' : 'completed_rejected', receipt };
+  return { execution_record: receipt.receipt_id, status: receipt.accepted ? 'completed_validated' : 'completed_rejected', receipt, ...(egressRecord ? { egress_record: egressRecord } : {}) };
 }
 
 /** Guarded LIVE execution. Refuses unless every precondition holds; reached only through the governed dispatcher (`bmad governed-run`, STEP 21). */

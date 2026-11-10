@@ -409,6 +409,8 @@ describe('STEP 9 — whole-process isolation', () => {
 /* preflight and protection                                             */
 /* ------------------------------------------------------------------ */
 const testedIso = { tested: true, report: { executed_at: new Date().toISOString(), sandbox_sha256: 'a'.repeat(64) } as any, problems: [] };
+// The provider-egress component exists; here its self-test has not passed (independent of any report on disk).
+const unverifiedEgress = { verified: false, report: null, problems: ['the provider-egress self-test has not passed on this host'] };
 const hostWithoutRunner: any = { primitives: { linux_claude: { available: false }, linux_node: { available: false } } };
 
 describe('STEP 9 — isolation-aware preflight and protection', () => {
@@ -428,7 +430,7 @@ describe('STEP 9 — isolation-aware preflight and protection', () => {
     assert.equal(r.checks.find((c: any) => c.id === 'provider_authorization').ok, false, 'an OpenAI authorization never authorizes Claude');
     assert.equal(r.checks.find((c: any) => c.id === 'filesystem_isolation').ok, true);
     assert.equal(importDisclosure(wfOf(ctx), sign(claude, dk.dataowner, DESIGN_SIGNERS.dataowner)).imported, true);
-    r = preflight(wfOf(ctx), 'bmad-architecture', BRAVO, { probe: () => 'probe 1.0', isolation: testedIso, assessment: hostWithoutRunner, record: true });
+    r = preflight(wfOf(ctx), 'bmad-architecture', BRAVO, { probe: () => 'probe 1.0', isolation: testedIso, egress: unverifiedEgress, assessment: hostWithoutRunner, record: true });
     assert.equal(r.checks.find((c: any) => c.id === 'provider_authorization').ok, true);
     assert.equal(r.checks.find((c: any) => c.id === 'network_isolation').ok, false);
     assert.equal(r.checks.find((c: any) => c.id === 'runner_inside_boundary').ok, false);
