@@ -13,7 +13,7 @@ diagrams. Open it in a browser; it needs no build step.
 | Agent pipeline | The run as it happens: live flow, timeline, events, run history |
 | Reverse engineering | The seven reverse agents, each with its brief, output and hand-off |
 | Reverse outputs | What the reverse agents produced, and the files per agent |
-| Forward engineering | The pre-checks, F1–F7 and the two human approvals, live |
+| Forward engineering | The pre-checks, F1–F7 and the two human approvals, live; the **BMad** tab shows the BMad stages, who signs (synthetic people in this prototype) and the result of a real MOCK run on the synthetic project (3 stages ran, 3 stopped by REVFORGE's rules; verdict `BMAD_BLOCKED`; no AI provider called) |
 | Forward outputs | What was delivered, achieved and still pending, with the gaps and actions |
 | Udara vs REVFORGE | The same measures taken on both reverse-engineering outputs |
 
