@@ -47,6 +47,8 @@ See [Project status](#project-status).
 - **Engineering quality gates** decide whether a single program can be converted and whether a conversion is what its label says. They never authorize generation.
 - **The governed workflow** has two human gates, G1 (approved requirements) and G2 (approved architecture). Everything else is automated: the BASELINE and EVIDENCE pre-checks before G1, and story validation, build, independent testing and review after G2. The run completes after the F7 review; there is no human acceptance gate.
 
+**Gate numbering.** G1 is the requirements approval and G2 the architecture approval. They were called G2 and G3 before 2026-11-09, and the workflow had nine gates (G0–G8) before 2026-11-08. Workflow records written earlier keep their original names; the runtime reads them through a mapping and never rewrites them. Dated reports and the handover package keep the numbering of their date.
+
 ## Setup
 
 After cloning, install the Claude Code discovery copies of the agents and skills. They are generated, not committed:
@@ -143,6 +145,39 @@ npm run smoke      # after build: CSP, evidence hashes, routes in headless Edge/
 
 The hash check proves the served copies are consistent with the locally produced manifest. It does not authenticate the repository or a deployment.
 
+## BMad (AI drafting stages)
+
+BMad Method 6.12.4 is the AI method the forward agents work through to draft standard project documents. REVFORGE governs it strictly: BMad never approves anything, its output is an optional draft for the next agent, and every result is checked before it counts.
+
+| Forward step | BMad workflow | Produces |
+|---|---|---|
+| F1 Requirements | `bmad-prd` | product requirements document (PRD) |
+| F3 Architecture | `bmad-architecture` | architecture document |
+| F4 Planning | `bmad-create-epics-and-stories`, `bmad-sprint-planning` | epics and stories, sprint plan |
+| F5 Build | `bmad-build` | implementation |
+| F7 Review | `bmad-code-review` | code review |
+
+F2 (data mapping) and F6 (independent testing) stay outside BMad on purpose: F2 has no BMad counterpart, and F6 must be independent of the implementation.
+
+**Status.**
+- **Mandatory, enforced, not yet run live.** A governed run needs a verified LIVE BMad result for every stage. There are none yet, so the real run is `BMAD_BLOCKED`. The 41 Java programs come from the local deterministic converter and are recorded as not BMad-governed.
+- **Locked route to the AI provider: built and verified.** LIVE runs execute Claude Code in the whole-process sandbox, which reaches only `api.anthropic.com:443` through an allowlist proxy. `bmad executor egress-test` proves this (provider reachable, everything else refused, the key file invisible) and records `forward/integrations/bmad/isolation/egress-test-report.json`. LIVE stays off: `live_execution.requested` is `false`.
+- **Synthetic MOCK run: done, at no cost.** BMad was run through the runtime on the synthetic project in MOCK mode (no AI provider called). PRD, architecture and epics-and-stories ran with sealed packets. Sprint planning stopped, because a mock cannot supply real upstream results. Build and review were refused: there is no generation authorization, no build and no independent F6 test yet. The verdict stayed `BMAD_BLOCKED`, as intended.
+
+Details: [forward/README.md](forward/README.md#6-mandatory-bmad-enforcement) and [forward/docs/BMAD-INTEGRATION-OPERATIONS.md](forward/docs/BMAD-INTEGRATION-OPERATIONS.md).
+
+## From prototype to the real project
+
+Everything technical is in place. What remains needs people, and a budget for the AI calls:
+
+1. **Name the real signers** (requirements approver, architecture approver, business SME, technical authority, data owner, project owner). Each creates their own Ed25519 key, and an administrator adds the public keys to the trust store. Some roles must be different people.
+2. **Resolve the business decisions** and the blocking findings, then the requirements approver **signs G1**.
+3. **The data owner signs the disclosure authorization** that allows the selected files to be sent to the AI provider, with limits on cost, files, bytes and runs.
+4. **The project owner switches BMad to LIVE** (`live_execution.requested`) and sets `bmad.provider_credential_file`. The first stages then run for real.
+5. **Forward engineering continues:** architecture and **G2**, stories, build (with generation authorized), independent testing and review.
+
+The client dashboard shows the same steps, with synthetic signers each marked "replace with a real person".
+
 ## Documentation
 
 | Topic | Document |
@@ -150,7 +185,9 @@ The hash check proves the served copies are consistent with the locally produced
 | Reverse engineering | [reverse/README.md](reverse/README.md) |
 | Forward engineering | [forward/README.md](forward/README.md), [in depth](forward/handover/FORWARD-ENGINEERING.md) |
 | Architecture (diagrams) | [forward/handover/ARCHITECTURE.md](forward/handover/ARCHITECTURE.md) |
-| BMad governance | [forward/handover/BMAD-GOVERNANCE.md](forward/handover/BMAD-GOVERNANCE.md) |
+| BMad governance | [forward/handover/BMAD-GOVERNANCE.md](forward/handover/BMAD-GOVERNANCE.md), [integration and provider egress](forward/docs/BMAD-INTEGRATION-OPERATIONS.md) |
+| Client dashboard prototype | [forward/dashboard-prototype/README.md](forward/dashboard-prototype/README.md) |
+| Dashboard layout rules | [CLAUDE.md](CLAUDE.md) |
 | Testing and verification | [forward/handover/TESTING-AND-VERIFICATION.md](forward/handover/TESTING-AND-VERIFICATION.md), [test catalog](forward/tests/README.md) |
 | Known limitations | [forward/handover/KNOWN-LIMITATIONS.md](forward/handover/KNOWN-LIMITATIONS.md) |
 | Reports and development history | [forward/reports/README.md](forward/reports/README.md) (by topic and by STEP) |
@@ -200,6 +237,16 @@ All of them work on a pure checkout. Source-dependent checks are reported as not
 | COBOL-equivalent programs or rules | **0** |
 
 *COMPLETE*, *compiles* and *passes source-derived tests* do not mean equivalent to the legacy COBOL program.
+
+## Recent changes
+
+| Pull request | Change |
+|---|---|
+| [#4](https://github.com/vighnasreevara/REVFORGE-Harness/pull/4) | Only two human gates remain. The former G0/G1 became automated pre-checks, G4 became automated story validation, and the former G5–G8 became result checks: tests must pass and the F7 review must recommend acceptance. Also added: the client dashboard prototype and the dashboard layout rules. |
+| [#5](https://github.com/vighnasreevara/REVFORGE-Harness/pull/5) | The two gates are numbered G1 and G2 everywhere; older records keep working. |
+| [#6](https://github.com/vighnasreevara/REVFORGE-Harness/pull/6) | The verified provider-egress component for LIVE BMad runs, with its self-test. |
+| [#7](https://github.com/vighnasreevara/REVFORGE-Harness/pull/7) | Client dashboard: the BMad tab and the synthetic MOCK run. |
+| [#8](https://github.com/vighnasreevara/REVFORGE-Harness/pull/8) | README updates: dashboards, BMad, the path to the real project, and this history. |
 
 ## License
 
