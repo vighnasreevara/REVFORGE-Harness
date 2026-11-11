@@ -1,6 +1,6 @@
 <div align="center">
 
-# REVFORGE — Evidence-Governed COBOL-to-Java Modernization Harness
+# REVFORGE - Evidence-Governed COBOL-to-Java Modernization Harness
 
 **REVFORGE reverse-engineers a legacy COBOL application into a traceable Business Requirements Document, then forward-engineers it to Java 21 under signed human gates. Each claim traces back to a COBOL source line:**
 
